@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "status": "ordered-character-color-blend-contract-and-actual-captures-verified",
+  "nativeAppearanceStatus": "pending-screen-depth-modes-dynamic-views-and-complete-appearance",
+  "run": "build\\runs\\20261023-082551-ordered-character-color-blend-1a34c0",
+  "contracts": {
+    "responseVersions": [
+      1,
+      2,
+      3
+    ],
+    "sceneVersion": 12,
+    "rasterLightBytes": 144,
+    "materialBytes": 192,
+    "textureSlots": 9
+  },
+  "tests": {
+    "cpuPerConfiguration": 10,
+    "surfaceProbesPerConfiguration": 192,
+    "blendCapturesPerConfiguration": 20,
+    "existingLocalAndHairCaptures": 40,
+    "actualCaptures": 6
+  },
+  "batches": [
+    {
+      "name": "gpu-release-final",
+      "count": 20,
+      "playerSha256": "db423b23c6cd566a228533c88c8c78651478a488fffb1faf96dc190a3f1909de",
+      "maximumLinearError": 0.002798211636236614,
+      "summarySha256": "94d26451df0f51e16454165bcb0623d6987120151ab9a2587dd3f71386e83f63"
+    },
+    {
+      "name": "gpu-debug-final",
+      "count": 20,
+      "playerSha256": "9254a4af2efb6c1a6eaddd9cd730c48b471b71cfff164468e1af586f0c513b9e",
+      "maximumLinearError": 0.002798211636236614,
+      "summarySha256": "2d1f9dca29317e1d40542b87d5b6823467b1ef8f2dd70eef5dc7e65c8ac881e4"
+    },
+    {
+      "name": "local-regression",
+      "count": 22,
+      "playerSha256": "9254a4af2efb6c1a6eaddd9cd730c48b471b71cfff164468e1af586f0c513b9e",
+      "maximumLinearError": 0.0009804369489416487,
+      "summarySha256": "f63a14039514e9f6262af82cfaac6bfcb76934dd6d6d59ab42348a11df7e5341"
+    },
+    {
+      "name": "hair-regression",
+      "count": 18,
+      "playerSha256": "9254a4af2efb6c1a6eaddd9cd730c48b471b71cfff164468e1af586f0c513b9e",
+      "maximumLinearError": 0.0017020742576044634,
+      "summarySha256": "531d589452e64f5af6b0c9c1f0eee3118881de043b446bd0ef1c438743706324"
+    }
+  ],
+  "native": {
+    "record": {
+      "sourceIndex": 8,
+      "mode": 4,
+      "composition": "replace",
+      "characters": true,
+      "color": [
+        0.08664814382791519,
+        0.08664814382791519,
+        0.10413092374801636
+      ],
+      "intensity": 1,
+      "position": [
+        -0.050537109375,
+        1.0093994140625,
+        -1.1949462890625
+      ],
+      "radius": 1.4999999552965178,
+      "shape": {
+        "type": "spot",
+        "direction": [
+          -0.0,
+          0.0,
+          1.0
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "outerCone": 0.7562822165836128,
+        "innerCone": 0.7081301828995471,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        }
+      },
+      "linearLength": 0,
+      "response": {
+        "parameters": [
+          0.699999988079071,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "cookieIndex": -1,
+      "flags": 0,
+      "rawShadowWords": [
+        1106807800,
+        3212836864
+      ],
+      "requiredCapabilities": [
+        "ordered-light-replace"
+      ],
+      "rawRecordHex": "9574b13d9574b13d9842d53d0000000088f995c334819643f49896c3abaa2a3f0000003f0000000061363a3ff88bf841000080bf0000803f0000803f040000003333333f0000803f0000803f0000000000000000000000000000000000000000000000000000000000000000000080bfcdcc4c3f000000000000803f000080bf"
+    },
+    "shape": {
+      "type": "spot",
+      "direction": [
+        -0.0,
+        0.0,
+        1.0
+      ],
+      "falloff": "range-power",
+      "falloffExponent": 2.0,
+      "outerCone": 0.7562822165836128,
+      "innerCone": 0.7081301828995471,
+      "specularScale": 1.0,
+      "influenceBox": {
+        "enabled": false
+      },
+      "characterResponse": {
+        "schemaVersion": 3,
+        "composition": "color-blend",
+        "strength": 0.699999988079071,
+        "facingWeight": 0.0,
+        "projectedDistance": true,
+        "order": 8
+      }
+    },
+    "worldPosition": [
+      0.000335693359375,
+      1.652191162109375,
+      0.12322998046875
+    ],
+    "reference": {
+      "direction": [
+        0.0,
+        -0.0,
+        -1.0
+      ],
+      "weight": 0.036305318899989954
+    },
+    "nativeWeight": 0.03630534186959267,
+    "mixed": [
+      1.1794254361715264,
+      0.20474467949974995,
+      0.2160428286770507
+    ],
+    "expected": [
+      1.1794253587722778,
+      0.20474468171596527,
+      0.21604283154010773
+    ],
+    "maximumError": 7.73992485658681e-08
+  },
+  "actual": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "captures": [
+      {
+        "name": "control-beauty",
+        "imageSha256": "14acb58fa1a81aa882c4d3312593a6a7bdbaca6c75ab4c49014d5bf320acf37f",
+        "playerSha256": "db423b23c6cd566a228533c88c8c78651478a488fffb1faf96dc190a3f1909de",
+        "validationEnabled": false
+      },
+      {
+        "name": "blend-beauty",
+        "imageSha256": "4fa83556ca533d50fe8e3ddcde810617dad09448d520963b1ef2dc449b798f60",
+        "playerSha256": "db423b23c6cd566a228533c88c8c78651478a488fffb1faf96dc190a3f1909de",
+        "validationEnabled": false
+      },
+      {
+        "name": "blend-kk",
+        "imageSha256": "cb7a6cd45a55103dd561cade1b8001482f37ce350422ca2dc1daaa44d6e7085f",
+        "playerSha256": "db423b23c6cd566a228533c88c8c78651478a488fffb1faf96dc190a3f1909de",
+        "validationEnabled": false
+      },
+      {
+        "name": "blend-kk-fixed",
+        "imageSha256": "cb7a6cd45a55103dd561cade1b8001482f37ce350422ca2dc1daaa44d6e7085f",
+        "playerSha256": "9254a4af2efb6c1a6eaddd9cd730c48b471b71cfff164468e1af586f0c513b9e",
+        "validationEnabled": true
+      },
+      {
+        "name": "blend-documents",
+        "imageSha256": "4fa83556ca533d50fe8e3ddcde810617dad09448d520963b1ef2dc449b798f60",
+        "playerSha256": "9254a4af2efb6c1a6eaddd9cd730c48b471b71cfff164468e1af586f0c513b9e",
+        "validationEnabled": true
+      },
+      {
+        "name": "blend-beauty-fixed",
+        "imageSha256": "4fa83556ca533d50fe8e3ddcde810617dad09448d520963b1ef2dc449b798f60",
+        "playerSha256": "9254a4af2efb6c1a6eaddd9cd730c48b471b71cfff164468e1af586f0c513b9e",
+        "validationEnabled": true
+      }
+    ]
+  },
+  "comparisons": [
+    {
+      "a": "blend-beauty",
+      "b": "blend-beauty-fixed",
+      "maximumByteError": 0
+    },
+    {
+      "a": "blend-beauty",
+      "b": "blend-documents",
+      "maximumByteError": 0
+    },
+    {
+      "a": "blend-kk",
+      "b": "blend-kk-fixed",
+      "maximumByteError": 0
+    },
+    {
+      "defaultActualByteError": 0,
+      "defaultLocalFixtureImagesIdentical": 22
+    }
+  ],
+  "mainReuseScope": {
+    "schemaVersion": 1,
+    "project": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\project.azureproject",
+    "level": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\scene.azurelevel",
+    "levelSha256": "680623ed1b7652c09de2db30743cfec11f1290aa93052fa67d70ff797c30f25d",
+    "lightCount": 46,
+    "lineResponseInputs": 0,
+    "reusedRun": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-073632-clustered-signed-projection-3dd20e",
+    "colorBlendInputs": 0
+  },
+  "diagnostic": {
+    "schemaVersion": 1,
+    "status": "diagnostic-only-complete-appearance-pending",
+    "region": [
+      1215,
+      160,
+      1340,
+      242
+    ],
+    "maskRule": "sourceR>80 && sourceR>1.4*sourceG && sourceR>1.4*sourceB",
+    "selectedPixels": 8681,
+    "meanEncodedRgbError": {
+      "control-beauty": 0.05053949237799025,
+      "blend-beauty": 0.04680946217906584
+    },
+    "sourcePixel": [
+      231.0,
+      105.0,
+      104.0
+    ],
+    "candidatePixel": [
+      231.0,
+      105.0,
+      103.0
+    ]
+  },
+  "failureEvidence": {
+    "contract-red.log": "b9192d326203e120e0f603b8e4bc714e130314982f40e648b289bb26c19d46ad",
+    "gpu-red.log": "7d7b9d59692eb389af2512fcb09cede156ce887cb5872aab11b4b3ee5ed2a3f8",
+    "tracing-red.log": "704dee484890a3ead8ac222f18c6701ab1c5e4de8bbe36c9af6855f0795bd123",
+    "coverage-red.log": "e58b4571003eee096792e11fa4ea71879218ef4c5c6651c4506cde311450c164"
+  },
+  "sourceFingerprints": {
+    "src/ecs/LightShape.hpp": "1e33397b2a015fb3e263e2e894852ad4143fc4b77e3499216d5767c30a051ba8",
+    "src/render/LightShapeJson.hpp": "db442fff8b13db7f77793a42a32a3d15d9c3cc5b2587058bb78af6c55c8731a7",
+    "src/render/LightBuffer.hpp": "2a689dec983cb697ddcc878ada79d542294d6af0761688324a9bc2f0da0797a7",
+    "src/render/ClusteredLightGrid.hpp": "86720aa75cba658eb1d12847106aba070138e3a6923788ff40d8787c4d604d34",
+    "src/render/pathtracing/TraceScene.cpp": "57b5b45c5b5c0b095f560b1210b88a38172a2a4703b25c8e3c0dcd63b678b1b8",
+    "shaders/light_attenuation.glsl": "26924e2cfb495413abaffb2146afb4518e4fb2e36abffdd348d219db3c7f28a8",
+    "shaders/mesh.frag": "5900e2b57e9afbd956e8d5391454c8f5cec759479e9633a61e9d33106f688722",
+    "tools/endfield_native/captured_lights.py": "b029e222ef56d81ffd5bf974e6982f0cefa3e088800156266062ef10489093f6",
+    "tools/test_character_color_blend_gpu.py": "2a78b6b8c94331ea92b2a1e8865b78acedecd3d051fb01b46a6a43ace847f4cf"
+  }
+}

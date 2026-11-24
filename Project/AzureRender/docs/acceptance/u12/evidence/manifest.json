@@ -1,0 +1,199 @@
+{
+  "stage": "U12",
+  "files": [
+    {
+      "file": "axis-positiveX.png",
+      "sha256": "fd8158d91fa00a7dc41d3b326848bf87c7e3a56a4fbf28ab1d6d1b1b534fa093"
+    },
+    {
+      "file": "axis-positiveY-runtime.json",
+      "sha256": "30447f1c17b58dd8eff8179c2bd12fec1556804166879a3e457886d887f82a09"
+    },
+    {
+      "file": "axis-positiveY-ui-input.json",
+      "sha256": "9bb61edabe4de3114e2d2bfe39109846e03b4c817b2bd8acb1b656d2a3a74ab0"
+    },
+    {
+      "file": "axis-positiveY.png",
+      "sha256": "cd97dd1325b480b0b7d84f9108f244c5d042288142ba870c5e15056529cfd799"
+    },
+    {
+      "file": "boost-runtime.json",
+      "sha256": "55ce188833067d13a6b5a8b62e559dcd251f47eb658e6980e348ff2f611742aa"
+    },
+    {
+      "file": "boost-ui-input.json",
+      "sha256": "37d0c2691f9fe24984ac0be832d64a2d1201f6bb712a4e9ac810509710b0278e"
+    },
+    {
+      "file": "direction-control-runtime.json",
+      "sha256": "fa417876f054bfca5b7c1d81e171af35de75d55bef8bcb415ca935f0be661a0a"
+    },
+    {
+      "file": "direction-control-ui-input.json",
+      "sha256": "7fcd6fc687970dc9c46e86f50b988b64423acef04171ab2d305fd8b15b8902cd"
+    },
+    {
+      "file": "exit-dpi-runtime.json",
+      "sha256": "a6ebd20e59ddf83fff098859f766a08c68631aa2f9ed97bcc56d0e88d5bd0c01"
+    },
+    {
+      "file": "exit-dpi-ui-input.json",
+      "sha256": "caec6ad0bae62099ff026ea2c2ed894f06269115fd2ab99076922db00acfa76b"
+    },
+    {
+      "file": "exit-focus-runtime.json",
+      "sha256": "3e92a24e1f97e131768413b50b33b93ad21559789b7aa0c79e47825679c96cb4"
+    },
+    {
+      "file": "exit-focus-ui-input.json",
+      "sha256": "f805f1090c1898a94d666cbcd09c904c0228002e0039e17f29ce141684524ea4"
+    },
+    {
+      "file": "exit-outside-runtime.json",
+      "sha256": "c2b7fcce9ce0b4d78436c6b2766c379b4810f5734162325c0321352ec97db1c4"
+    },
+    {
+      "file": "exit-outside-ui-input.json",
+      "sha256": "bbfade758a619a448b5ae746d6089687f4606f777feb1ef51deae9c31ce68255"
+    },
+    {
+      "file": "exit-popup-runtime.json",
+      "sha256": "0cf6dbd5607ce8ac12048a7066c8d358a403a9b672d59166a495f91e4842c00d"
+    },
+    {
+      "file": "exit-popup-ui-input.json",
+      "sha256": "6357f05b4850a9754d5af445eebe7fc968917894f382588ed34a98f66051a43a"
+    },
+    {
+      "file": "exploration-native-events.json",
+      "sha256": "9320227cacffdd1de32326f9c09f5e96c68c08eb25c300e47708dbe95d542516"
+    },
+    {
+      "file": "exploration-native-summary.json",
+      "sha256": "0f35fb7e19c3ef3ce97eeab885ad9da6aef9d2e2ccba71872f7fcefbef53fa9e"
+    },
+    {
+      "file": "flight-wheel-runtime.json",
+      "sha256": "ee29ce6bc5c6f476d6fb2acaac5e58f1f37583663de9995d79e463489d16aa03"
+    },
+    {
+      "file": "flight-wheel-ui-input.json",
+      "sha256": "278eb60cbabb62b399c65c9f50df98558913e105e70746d4fd31ef6f5e0104d6"
+    },
+    {
+      "file": "inspector-native-events.json",
+      "sha256": "624e28497ad4c48e50afe65b63f2bc838b6ffd5570014749aeec18a174d35efc"
+    },
+    {
+      "file": "inspector-native-summary.json",
+      "sha256": "c2f6d1f4e27e0c9a8d0ee0a35efb938221ddfe04a603f78692e193892a8d8d94"
+    },
+    {
+      "file": "native-summary.json",
+      "sha256": "481b5f03022b3b3ccf8581418116b45f571caa1c39b4c13ec42f2498521f3f91"
+    },
+    {
+      "file": "navigation-summary.json",
+      "sha256": "9258de57870df50815b47f957adf28fd4b22ded167350b45dadb6c5b7682caf7"
+    },
+    {
+      "file": "tool-E-runtime.json",
+      "sha256": "2c81873add86cd203ce8ec31a5a3d0510472aa8ce7f0ce910a55251c500e8e4a"
+    },
+    {
+      "file": "tool-E-ui-input.json",
+      "sha256": "cf6413ff5f1bb00d8e9ab49cfa0f1e7983cb3258d089ab362cb5d385ab9a00e2"
+    },
+    {
+      "file": "tool-R-runtime.json",
+      "sha256": "86ee5ea99f55a25f1bb7a3585aee059476f9ec662c3f04f8190ee1144b9074ce"
+    },
+    {
+      "file": "tool-R-ui-input.json",
+      "sha256": "ccf95854c3852c5a18011a6fb1af0d045cc927b3684b946fb127a083ce20613b"
+    },
+    {
+      "file": "u12-cpu-final.log",
+      "sha256": "b54d4dd14d6fa80be4b94d7dd79db27a4d3c55707d2d7362454e57406af5c8b7"
+    },
+    {
+      "file": "u12-cpu-full.log",
+      "sha256": "ccb932d2b98009129e3177efec31c9062fc1c8f2e1ff911c7b843bbe35a3bd18"
+    },
+    {
+      "file": "u12-cpu-targeted.log",
+      "sha256": "b3adbe874a7596d3819ff4670767a3ca1bc9cb884e6506aa2db3022813fb5dba"
+    },
+    {
+      "file": "u12-debug-final-build.log",
+      "sha256": "adffcab4437fc329e7a278ff4e151876a9a5e5a968ddf0d71267caccee682ebe"
+    },
+    {
+      "file": "u12-docs-final.log",
+      "sha256": "98a806562ef2927f9371252439c9e470d221f19831f6e92011d0a9d0ec611425"
+    },
+    {
+      "file": "u12-gizmo-jitter-red-test.log",
+      "sha256": "190fbb36b9f6b8ca15f960ea91ddda05df54d0af577657bd6c6bb056e3a00163"
+    },
+    {
+      "file": "u12-gpu-final.log",
+      "sha256": "380f118ec4c0079463c001f51e8d19bf812dba442e892d6e857807095b938d13"
+    },
+    {
+      "file": "u12-gpu-regressions.log",
+      "sha256": "f087a8e5800cc02456022d462b316f922fa128946ec7eceff26f3ecc065274d3"
+    },
+    {
+      "file": "u12-license-install.json",
+      "sha256": "7b21b3a2cd42cbc788883332efc11d41f40fca97bae3cf04ecc68da149bfdf29"
+    },
+    {
+      "file": "u12-native-captured.log",
+      "sha256": "c67942cb36d67c381f071ffa14c9f5624fbd33cb2e13a9aab6e20a6d67091996"
+    },
+    {
+      "file": "u12-native-jitter-fixed.log",
+      "sha256": "6b172bc4469de9bfa589ac1928c0cafdfa5bb640fe57b444e80cf87df116b143"
+    },
+    {
+      "file": "u12-native-relative.log",
+      "sha256": "9358f29bc4a68c317823daed546e07313f8cbfd18cbec644c4998738dd80da85"
+    },
+    {
+      "file": "u12-navigation-final.log",
+      "sha256": "c000b7397994061380a9123c70ee627d8037e9c5641517275b9f4171e606fa94"
+    },
+    {
+      "file": "u12-navigation-focus-fixed.log",
+      "sha256": "e7338cc0922bfc0cc59906709583107eec09f1bc0ca45602d48ddbed12b473ed"
+    },
+    {
+      "file": "u12-navigation-red.log",
+      "sha256": "111ad46f674897a68321e8335b1e803296594449ff58899c32c2ec84e2821ed3"
+    },
+    {
+      "file": "u12-navigation-verified.log",
+      "sha256": "41f280e8aed6be16c6c647ecd35411b057d3277bf2f09788b78f33cc3d4c2c52"
+    },
+    {
+      "file": "u12-navigation.log",
+      "sha256": "1abfcd43d53385e2ad71bda53dc2c6140daae4dfa9283b31081dd90914eddb81"
+    },
+    {
+      "file": "u12-overlay-red.log",
+      "sha256": "a566086cb34b407fa891e5d536d63b0155eaac427576e853b37eb54f2eee1fd3"
+    },
+    {
+      "file": "u12-projection-red.log",
+      "sha256": "568e9c401d2a0848ae1205d96739c6926d747cee896152f14ef1c405bad835ac"
+    },
+    {
+      "file": "u12-release-final-build.log",
+      "sha256": "ec23c68bdc41c56655d594a1666a00ead735c84f51e93f746bec9a7a66591db4"
+    }
+  ],
+  "physicalKeyboardMouse": "not performed",
+  "logNormalization": "UTF-8; trailing whitespace and terminal blank lines normalized; diagnostic content preserved"
+}

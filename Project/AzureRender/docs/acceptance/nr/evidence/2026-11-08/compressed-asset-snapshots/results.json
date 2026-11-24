@@ -1,0 +1,413 @@
+{
+  "schemaVersion": 1,
+  "status": "compressed-asset-snapshots-deployed",
+  "sourceBase": "ae7bc80",
+  "checksPassed": 8,
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "provenanceSha256": "725d97c8ffe7f1a25c6cc4d9beb40edad75140179a2205b91669528807403b58"
+    },
+    {
+      "configuration": "debug",
+      "provenanceSha256": "1d2664c6e81661764e201d7ee194d20662c558ac2dac45bb00254198d6e6a41a"
+    }
+  ],
+  "corpus": {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureAssetSourceCacheTests.exe",
+      "--corpus",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\hero-strand-line-013925.glb",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\native-cloth-04\\t17.dds",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\assets\\complete-material-001558\\image-13.png"
+    ],
+    "exitCode": 0,
+    "seconds": 1.062999999994645,
+    "sourceInputsUnchanged": true,
+    "corpusInputsUnchanged": true,
+    "corpusHashes": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\hero-strand-line-013925.glb": "f91eb2c9cce2009d5c8753170e465b2c6151ddb5368859fa784fb0a8b7ee11f8",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\native-cloth-04\\t17.dds": "38a520d6eca0f00bb8cb852679ddcd2fe1bf9c6cac7fa725c5918a5d8139dedd",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\assets\\complete-material-001558\\image-13.png": "af6d4a18489b452387e3696920a41fb3994bd912933233c21e5b73c8304feca2"
+    },
+    "sourceBytes": 149985288,
+    "legacyBytes": 149985360,
+    "encodedBytes": 109365102,
+    "diskReductionPercent": 27.082815282771598
+  },
+  "corpusResults": [
+    {
+      "decodeMs": 219.1571,
+      "encodeMs": 129.846,
+      "encodedBytes": 91301830,
+      "format": "AZCACHE2",
+      "legacyBytes": 119293032,
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\hero-strand-line-013925.glb",
+      "roundTripExact": true,
+      "sourceBytes": 119293008,
+      "warmMatchMs": 132.8658
+    },
+    {
+      "decodeMs": 52.4152,
+      "encodeMs": 72.4558,
+      "encodedBytes": 9740700,
+      "format": "AZCACHE2",
+      "legacyBytes": 22369772,
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\native-cloth-04\\t17.dds",
+      "roundTripExact": true,
+      "sourceBytes": 22369748,
+      "warmMatchMs": 34.0689
+    },
+    {
+      "decodeMs": 8.129,
+      "encodeMs": 4.4037,
+      "encodedBytes": 8322572,
+      "format": "AZCACHE2",
+      "legacyBytes": 8322556,
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\assets\\complete-material-001558\\image-13.png",
+      "roundTripExact": true,
+      "sourceBytes": 8322532,
+      "warmMatchMs": 0.4078
+    }
+  ],
+  "currentProjectCompaction": {
+    "status": "compacted-and-verified",
+    "execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 39.796999999991385,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-073210-compressed-asset-snapshots-d0bf8d\\CompactAssetSnapshots.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-073210-compressed-asset-snapshots-d0bf8d\\compaction-records.json"
+      ]
+    },
+    "seconds": 44.76600000000326,
+    "cacheBeforeBytes": 3486818480,
+    "cacheAfterBytes": 2807710154,
+    "actualVolumeFreedBytes": 677437440,
+    "freeBytesBefore": 141433606144,
+    "freeBytesAfter": 142111043584,
+    "formats": {
+      "AZCACHE2": 592,
+      "AZCACHE1": 272
+    },
+    "recordsVerified": 864,
+    "projectInputsVerified": 1729,
+    "productionAndProjectInputsUnchanged": true,
+    "privateExecutableSha256": "b6f7da1de305a3b94baf853b8435d69e8d14cc94b41cb305e8048e7060abd9db",
+    "projectDataVolume": "D:",
+    "externalProjectStorageUsed": false
+  },
+  "compactionEncodingStableInFinalSource": true,
+  "assetDatabasePreexistingSemanticDiffBytes": 0,
+  "otherUserDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "cProjectArchiveFiles": 0,
+  "cProjectArchiveBytes": 0,
+  "projectDataVolume": "D:",
+  "candidateAdopted": true,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 458202,
+  "evidenceSha256": "d0c0858a4692a03fc6f2af95131561116c0dcf6fb3b67dca7a93b94cf7bda18d",
+  "members": [
+    {
+      "path": "AssetDatabase-original.cpp",
+      "bytes": 24881,
+      "sha256": "c47b624d3279157154dec147d3b130700089439b0a6f0371801e101e78cf1da8"
+    },
+    {
+      "path": "baseline-provenance.json",
+      "bytes": 380812,
+      "sha256": "f9780ebc4225e4f3f7962d5e3c5c2d0eee501ab74b2876fabcad5074f183ce2c"
+    },
+    {
+      "path": "baseline.json",
+      "bytes": 209,
+      "sha256": "b9681895a74d9b324b6d2c253860d6d47be0c6d0639f1e7a84b4e8ab904037db"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 435,
+      "sha256": "860622c08e4857683ac0fcbbf5ec5c33c8624702225eecc75c4d5c727b573096"
+    },
+    {
+      "path": "build.py",
+      "bytes": 2078,
+      "sha256": "58f79ec60451a8cc42de44ebde608e8521401a910cc0ed9d4bb403727315a26d"
+    },
+    {
+      "path": "build_compactor.py",
+      "bytes": 2971,
+      "sha256": "5b560705f2c6ef7fc227a8b55fdc63cdb56a853e8d837164b14e535360fd599f"
+    },
+    {
+      "path": "compact.cpp",
+      "bytes": 1973,
+      "sha256": "89637e24c090c64f30b4763d9020b8cbe5e44c60ef6a8af133ff574b023041c4"
+    },
+    {
+      "path": "compact_current_cache.py",
+      "bytes": 3544,
+      "sha256": "4035cd2f56dafb0e955bcecabe5acccb9ee4e6f515ab6831b6a939bf3082eb91"
+    },
+    {
+      "path": "compaction-baseline.json",
+      "bytes": 561962,
+      "sha256": "e5de690256acb70cb2ec5c72d399e8aae5a0162e1ff6b2fca077b7bed5533282"
+    },
+    {
+      "path": "compaction-records.json",
+      "bytes": 618547,
+      "sha256": "7e03b8c680c64ab2457f23c58c70d00faba2e6bd977c186a9c4287a14f5796bc"
+    },
+    {
+      "path": "compaction-results.json",
+      "bytes": 1259,
+      "sha256": "9846b2bda32414de1acf2f26437c3bf33de36ee5abf6d482cadbeaf001dc6373"
+    },
+    {
+      "path": "compaction-source/src/runtime/AssetDatabase.cpp",
+      "bytes": 24799,
+      "sha256": "d82681068fb07809eaae4fada0318e56be6fe5b80b5f0a029d9bf6887d4ad490"
+    },
+    {
+      "path": "compaction-source/src/runtime/AssetSourceCache.cpp",
+      "bytes": 4831,
+      "sha256": "838da00eafc23f0a24a9af77887230b86fc7c07bead03724494e26775d2f99cb"
+    },
+    {
+      "path": "compaction-source/src/runtime/AssetSourceCache.hpp",
+      "bytes": 721,
+      "sha256": "765615177ed002ef765e1fa62acff78f25574d1f4ee008ef3c8991fd1d5e1204"
+    },
+    {
+      "path": "compactor-build.json",
+      "bytes": 6014,
+      "sha256": "63193288b0331786b78795b2168dd57841fb9e4a5b518d3206b0a0cd29aa749f"
+    },
+    {
+      "path": "compactor-compile.log",
+      "bytes": 13,
+      "sha256": "f780b6e92459318cecc0de0bafe43b18fbcc6ebb0be21dd65978b5454dab5799"
+    },
+    {
+      "path": "compactor-link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "corpus-errors.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "corpus-execution.json",
+      "bytes": 1784,
+      "sha256": "18561ae3ee7b73d998701030d72313029ef169914b3ee8d34437aa1e9f20c774"
+    },
+    {
+      "path": "corpus-results.json",
+      "bytes": 1315,
+      "sha256": "6f8839c5a3b28bb9f79669715fab6993f22be1a6aa67c96f137109ae7645bd8a"
+    },
+    {
+      "path": "current-cache-inventory.json",
+      "bytes": 175356,
+      "sha256": "f03cb2cc1236561e405401c6f619ee89efac5fd78506a21ef5cfe8756ed9103a"
+    },
+    {
+      "path": "debug-build.json",
+      "bytes": 706,
+      "sha256": "3997c35ba78e81129501f32a47ec753e325b0c27665086953de53f03b5002c1a"
+    },
+    {
+      "path": "debug-build.log",
+      "bytes": 1792,
+      "sha256": "159feb8508d87e065ef07e0ed3c52f945ccdf1a93c7bfbadf270991c2ba42b53"
+    },
+    {
+      "path": "debug-generation-tests.log",
+      "bytes": 369,
+      "sha256": "c13b8468b806fca042f482b98b689e5b046108c7751c3a48507c8b79438f4f1f"
+    },
+    {
+      "path": "debug-generation-tests.xml",
+      "bytes": 461,
+      "sha256": "6ea592e93b33703758720f7a9e618bde51eed14eab154d06efccc98f31fdfcd8"
+    },
+    {
+      "path": "debug-tests.log",
+      "bytes": 706,
+      "sha256": "868d9deee31ff843cf40aff4f8b915d7755d8c1a78c71843a494434e39119a4e"
+    },
+    {
+      "path": "debug-tests.xml",
+      "bytes": 1340,
+      "sha256": "6c2b6ab37ad101c572fd95fbf846d03c790df29deb5f4cb1cbbc3e008b7546b8"
+    },
+    {
+      "path": "final-source/CMakeLists.txt",
+      "bytes": 269449,
+      "sha256": "24d3dd4dc00c14fa4cb9624b28a2aeeb593dbcdb6f21086adc0e475787443db8"
+    },
+    {
+      "path": "final-source/src/runtime/AssetDatabase.cpp",
+      "bytes": 24726,
+      "sha256": "746ce43fe3c7efdc9d307cfca6ac7090bfb6fd20e853843c658ff94cdd5e1557"
+    },
+    {
+      "path": "final-source/src/runtime/AssetSourceCache.cpp",
+      "bytes": 5373,
+      "sha256": "35f90a253aa763503e97e75afc40ed0f691453094ff06c6b2a3caace8a818a66"
+    },
+    {
+      "path": "final-source/src/runtime/AssetSourceCache.hpp",
+      "bytes": 983,
+      "sha256": "5e20798faec863c8e20374f3b97d7da9da873a249635c43d18ec063afdcca419"
+    },
+    {
+      "path": "final-source/tests/AssetSourceCacheTests.cpp",
+      "bytes": 10777,
+      "sha256": "b949d64f5fa01a1b22bd5fa63301b3d983025dfaf46b350fdf074f071bd1331f"
+    },
+    {
+      "path": "final-source/vcpkg.json",
+      "bytes": 2313,
+      "sha256": "a3764d42871ce09ae91d59bbd851bbfe69c585595be5d22cb61004d5fffb1799"
+    },
+    {
+      "path": "generation-tests.json",
+      "bytes": 1149,
+      "sha256": "21b854d957ca506785dc70521a58fb2945296866030504b1a65848a278d8b3f5"
+    },
+    {
+      "path": "generation_checks.py",
+      "bytes": 1072,
+      "sha256": "502dce5c55cfe483af55d0de7a78bd62f96f8feb81a1916b019b65adfee3afc8"
+    },
+    {
+      "path": "inventory_current_cache.py",
+      "bytes": 1327,
+      "sha256": "82d7d81ba5f7a7171e3087cfc777533ab53e56727061f1ea47a658eca050ba97"
+    },
+    {
+      "path": "package.py",
+      "bytes": 5918,
+      "sha256": "64fefaf7846b3e80c592bd68afbbf3b2d34360e3e76004ee036252112e07297f"
+    },
+    {
+      "path": "pre-warm-optimization/corpus-execution.json",
+      "bytes": 1785,
+      "sha256": "232a6e2505a2f7e477ee3b4a156a3f59f15e521a8a83834b137b715c57692251"
+    },
+    {
+      "path": "pre-warm-optimization/corpus-results.json",
+      "bytes": 1231,
+      "sha256": "c5a9767f95c46c9d54e110aaf8f17930c7e0fe04d94c4ff812aa802001a63675"
+    },
+    {
+      "path": "pre-warm-optimization/debug-tests.log",
+      "bytes": 589,
+      "sha256": "9ff573d5eda645aa3ea2a94be78d4d547c0f39fff0733d04f7c5f7ee880b3f8f"
+    },
+    {
+      "path": "pre-warm-optimization/debug-tests.xml",
+      "bytes": 1091,
+      "sha256": "ff3cbb1b3ff65753af6cfcda4b0ae7361a9cb234327e25a822e5f7876ed029d4"
+    },
+    {
+      "path": "pre-warm-optimization/release-tests.log",
+      "bytes": 593,
+      "sha256": "db7ee6f0f170ae05f59565665cd7ccaa75eebdd109b503c1f5d5e5ff75a43ba2"
+    },
+    {
+      "path": "pre-warm-optimization/release-tests.xml",
+      "bytes": 1090,
+      "sha256": "ecb391239e50522bf3f98c713934954c82afbe21753025adfb5cb22a4b9bc5ff"
+    },
+    {
+      "path": "pre-warm-optimization/tests.json",
+      "bytes": 1278,
+      "sha256": "12218a0754570c7fd2a8adff8e87096077fe38afdd5533aeaf33a6f4208dc2dd"
+    },
+    {
+      "path": "process.log",
+      "bytes": 44,
+      "sha256": "49acd4c0af67f4d6c5802def2962e07df7fe22a45b2fc96729d37f20fcd34173"
+    },
+    {
+      "path": "record_compaction_source.py",
+      "bytes": 2672,
+      "sha256": "5d10a7f44ce4bf6d97964f509a2816a9304f896fe02ddfd17311cf9dd661f2e7"
+    },
+    {
+      "path": "red-build.json",
+      "bytes": 249,
+      "sha256": "f5d62505c93ed054cce2316fb5516c7c11fe3b78c8e3e888a62219e17c9c3584"
+    },
+    {
+      "path": "red-build.log",
+      "bytes": 8856,
+      "sha256": "52000b78b170732139b4551d9621bd0d7138b6bcb865aad54ced0b860febba32"
+    },
+    {
+      "path": "red-test.json",
+      "bytes": 149,
+      "sha256": "4d03835662286ceb11f497667871b403bd2341d243f865922a952b8e95d2d66c"
+    },
+    {
+      "path": "red-test.log",
+      "bytes": 34,
+      "sha256": "159653f083f11db830be1179b60e5e8fdac63cffdac91c4016eeb0b24d4fb0f3"
+    },
+    {
+      "path": "release-build.json",
+      "bytes": 709,
+      "sha256": "73fcc69f0590ab8b983e48b5aa489b524c7a45a4ee3af29338f8955cd9112e35"
+    },
+    {
+      "path": "release-build.log",
+      "bytes": 1798,
+      "sha256": "8a33a51d4e573c8c48f99d3d55b6151b10a0d41ac1fca37dcbefa130e2ee4a6a"
+    },
+    {
+      "path": "release-generation-tests.log",
+      "bytes": 373,
+      "sha256": "cf4dbb063d8461ed2130c112d7f5f984df76e2fc86f0c3fa7c59eef8314ff6ef"
+    },
+    {
+      "path": "release-generation-tests.xml",
+      "bytes": 461,
+      "sha256": "d9400f2235031c147caaef4d170de753113dc0f756f043b2f74f7b36432bf6ce"
+    },
+    {
+      "path": "release-tests.log",
+      "bytes": 710,
+      "sha256": "8fd8b2ac0a65f194f75105bb9058db5896133ff82eb2c9fbc9ba3d7a0161a918"
+    },
+    {
+      "path": "release-tests.xml",
+      "bytes": 1337,
+      "sha256": "64a58ccc3be8b1248292f34df6df36c60cb488affc0601424db5aa82bd26d861"
+    },
+    {
+      "path": "start.py",
+      "bytes": 1001,
+      "sha256": "f9d0d5973f8b97c9e00057791f785f76903fff32b113a7b948f04bdb2e3f3ebc"
+    },
+    {
+      "path": "tests.json",
+      "bytes": 1322,
+      "sha256": "7db4fd6e63f9086b590ae97bb103917dd3e2a5ddd2371592ba685706c6b1131d"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 2969,
+      "sha256": "9f1a5b6accca982c22f6fc1c369c88e536ba2ebb6129cac787a7f0e5a024402d"
+    }
+  ]
+}

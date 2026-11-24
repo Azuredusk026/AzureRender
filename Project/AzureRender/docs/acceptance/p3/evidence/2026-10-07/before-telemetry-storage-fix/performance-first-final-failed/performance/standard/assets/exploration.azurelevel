@@ -1,0 +1,2390 @@
+{
+  "schemaVersion": 1,
+  "id": "exploration",
+  "sceneType": "character",
+  "renderSettings": {
+    "platform": false,
+    "cameraNear": 0.1,
+    "cameraFar": 500,
+    "shadowDistance": 100
+  },
+  "resources": [
+    {
+      "id": "guide",
+      "asset": "assets:/guide.gltf"
+    },
+    {
+      "id": "cube",
+      "asset": "assets:/cube.gltf"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ground",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -0.25,
+              -170
+            ],
+            "scale": [
+              23,
+              0.25,
+              180
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "passage-left",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -3.2,
+              1.5,
+              -96
+            ],
+            "scale": [
+              0.2,
+              1.5,
+              12
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "passage-right",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              3.2,
+              1.5,
+              -96
+            ],
+            "scale": [
+              0.2,
+              1.5,
+              12
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "ramp",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.17,
+              -170
+            ],
+            "scale": [
+              2,
+              0.15,
+              2
+            ],
+            "rotation": [
+              6,
+              0,
+              0
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "interior-left",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -3.2,
+              2,
+              -305
+            ],
+            "scale": [
+              0.2,
+              2,
+              18
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "interior-right",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              3.2,
+              2,
+              -305
+            ],
+            "scale": [
+              0.2,
+              2,
+              18
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "interior-roof",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              2.35,
+              -305
+            ],
+            "scale": [
+              3.4,
+              0.15,
+              18
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gate-left",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -13,
+              1.5,
+              -290
+            ],
+            "scale": [
+              10.5,
+              1.5,
+              0.2
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gate-right",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              13,
+              1.5,
+              -290
+            ],
+            "scale": [
+              10.5,
+              1.5,
+              0.2
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "camera",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.third-person-camera": {
+          "type": "azure.third-person-camera",
+          "version": 1,
+          "data": {
+            "target": "hero:body",
+            "distance": 5.5,
+            "targetHeight": 1,
+            "shoulder": 0.2
+          }
+        }
+      }
+    },
+    {
+      "id": "hud",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.game-ui": {
+          "type": "azure.game-ui",
+          "version": 1,
+          "data": {
+            "asset": "assets:/hud.rml"
+          }
+        }
+      }
+    },
+    {
+      "id": "goal",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              1,
+              -330
+            ],
+            "scale": [
+              3,
+              2,
+              3
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/goal.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "companion-0",
+      "resourceId": "guide",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -2,
+              0,
+              -3
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.animator": {
+          "type": "azure.animator",
+          "version": 2,
+          "data": {
+            "asset": "assets:/locomotion.json",
+            "startTime": 0.7
+          }
+        }
+      }
+    },
+    {
+      "id": "companion-1",
+      "resourceId": "guide",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              2,
+              0,
+              -3
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.animator": {
+          "type": "azure.animator",
+          "version": 2,
+          "data": {
+            "asset": "assets:/locomotion.json",
+            "startTime": 1.7
+          }
+        }
+      }
+    },
+    {
+      "id": "load-0",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -6.6499999999999995,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-1",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -5.949999999999999,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-2",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -5.25,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-3",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -4.55,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-4",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -3.8499999999999996,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-5",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -3.15,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-6",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -2.4499999999999997,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-7",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -1.75,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-8",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -1.0499999999999998,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-9",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -0.35,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-10",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0.35,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-11",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              1.0499999999999998,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-12",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              1.75,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-13",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              2.4499999999999997,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-14",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              3.15,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-15",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              3.8499999999999996,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-16",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              4.55,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-17",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              5.25,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-18",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              5.949999999999999,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-19",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              6.6499999999999995,
+              0.3,
+              -3.0
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-20",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -6.6499999999999995,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-21",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -5.949999999999999,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-22",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -5.25,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-23",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -4.55,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-24",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -3.8499999999999996,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-25",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -3.15,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-26",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -2.4499999999999997,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-27",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -1.75,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-28",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -1.0499999999999998,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-29",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -0.35,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-30",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0.35,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-31",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              1.0499999999999998,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-32",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              1.75,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-33",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              2.4499999999999997,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-34",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              3.15,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-35",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              3.8499999999999996,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-36",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              4.55,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-37",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              5.25,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-38",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              5.949999999999999,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-39",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              6.6499999999999995,
+              0.3,
+              -3.7
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-40",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -6.6499999999999995,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-41",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -5.949999999999999,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-42",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -5.25,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-43",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -4.55,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-44",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -3.8499999999999996,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-45",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -3.15,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-46",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -2.4499999999999997,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-47",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -1.75,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-48",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -1.0499999999999998,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-49",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -0.35,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-50",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0.35,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-51",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              1.0499999999999998,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-52",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              1.75,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-53",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              2.4499999999999997,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-54",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              3.15,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-55",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              3.8499999999999996,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-56",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              4.55,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-57",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              5.25,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-58",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              5.949999999999999,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-59",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              6.6499999999999995,
+              0.3,
+              -4.4
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-60",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -6.6499999999999995,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-61",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -5.949999999999999,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-62",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -5.25,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-63",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -4.55,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-64",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -3.8499999999999996,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-65",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -3.15,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-66",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -2.4499999999999997,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-67",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -1.75,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-68",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -1.0499999999999998,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-69",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -0.35,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-70",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0.35,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-71",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              1.0499999999999998,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-72",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              1.75,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-73",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              2.4499999999999997,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-74",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              3.15,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-75",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              3.8499999999999996,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-76",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              4.55,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-77",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              5.25,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "load-78",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              5.949999999999999,
+              0.3,
+              -5.1
+            ],
+            "scale": [
+              0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "prefabs": [
+    {
+      "instance": "hero",
+      "asset": "assets:/prefabs/hero.azureprefab"
+    },
+    {
+      "instance": "guide",
+      "asset": "assets:/prefabs/guide.azureprefab"
+    },
+    {
+      "instance": "door",
+      "asset": "assets:/prefabs/door.azureprefab"
+    },
+    {
+      "instance": "checkpoint",
+      "asset": "assets:/prefabs/checkpoint.azureprefab"
+    },
+    {
+      "instance": "artifact-0",
+      "asset": "assets:/prefabs/collectible.azureprefab",
+      "overrides": {
+        "body": {
+          "components": {
+            "azure.transform": {
+              "data": {
+                "translation": [
+                  -14,
+                  0.45,
+                  -50
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "instance": "artifact-1",
+      "asset": "assets:/prefabs/collectible.azureprefab",
+      "overrides": {
+        "body": {
+          "components": {
+            "azure.transform": {
+              "data": {
+                "translation": [
+                  14,
+                  0.45,
+                  -130
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "instance": "artifact-2",
+      "asset": "assets:/prefabs/collectible.azureprefab",
+      "overrides": {
+        "body": {
+          "components": {
+            "azure.transform": {
+              "data": {
+                "translation": [
+                  -14,
+                  0.45,
+                  -210
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "lights": [
+    {
+      "id": "point-0",
+      "nodeId": "load-0",
+      "color": [
+        1,
+        0.8,
+        0.65
+      ],
+      "intensity": 1.5,
+      "radius": 8
+    },
+    {
+      "id": "point-1",
+      "nodeId": "load-3",
+      "color": [
+        1,
+        0.8,
+        0.65
+      ],
+      "intensity": 1.5,
+      "radius": 8
+    },
+    {
+      "id": "point-2",
+      "nodeId": "load-6",
+      "color": [
+        1,
+        0.8,
+        0.65
+      ],
+      "intensity": 1.5,
+      "radius": 8
+    },
+    {
+      "id": "point-3",
+      "nodeId": "load-9",
+      "color": [
+        1,
+        0.8,
+        0.65
+      ],
+      "intensity": 1.5,
+      "radius": 8
+    },
+    {
+      "id": "point-4",
+      "nodeId": "load-12",
+      "color": [
+        1,
+        0.8,
+        0.65
+      ],
+      "intensity": 1.5,
+      "radius": 8
+    },
+    {
+      "id": "point-5",
+      "nodeId": "load-15",
+      "color": [
+        1,
+        0.8,
+        0.65
+      ],
+      "intensity": 1.5,
+      "radius": 8
+    },
+    {
+      "id": "point-6",
+      "nodeId": "load-18",
+      "color": [
+        1,
+        0.8,
+        0.65
+      ],
+      "intensity": 1.5,
+      "radius": 8
+    },
+    {
+      "id": "point-7",
+      "nodeId": "load-21",
+      "color": [
+        1,
+        0.8,
+        0.65
+      ],
+      "intensity": 1.5,
+      "radius": 8
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "diagnosticOnly": true,
+  "successfulAllocations": 327,
+  "successfulReleases": 27,
+  "failedCalls": 8,
+  "partialOrAmbiguousCalls": 291,
+  "trackedLiveBytes": 20971520,
+  "liveRegions": [
+    {
+      "base": 1448585265152,
+      "size": 1048576
+    },
+    {
+      "base": 1448586313728,
+      "size": 1048576
+    },
+    {
+      "base": 1448587362304,
+      "size": 1048576
+    },
+    {
+      "base": 1448588410880,
+      "size": 1048576
+    },
+    {
+      "base": 1448589459456,
+      "size": 1048576
+    },
+    {
+      "base": 1448590508032,
+      "size": 1048576
+    },
+    {
+      "base": 1448591556608,
+      "size": 1048576
+    },
+    {
+      "base": 1448593063936,
+      "size": 1048576
+    },
+    {
+      "base": 1448594112512,
+      "size": 2097152
+    },
+    {
+      "base": 1448596209664,
+      "size": 4194304
+    },
+    {
+      "base": 1448600403968,
+      "size": 1048576
+    },
+    {
+      "base": 1448601452544,
+      "size": 1048576
+    },
+    {
+      "base": 1448657354752,
+      "size": 4194304
+    }
+  ],
+  "completeAllocationCoverage": false,
+  "commandExitCode": 0,
+  "returnedEvents": 362,
+  "entryCalls": 362,
+  "pendingReturns": [],
+  "sharedReturnSites": 9,
+  "unmatchedReturns": 13,
+  "traceStartMonotonic": 16150.031,
+  "errors": [],
+  "droppedEntries": 0,
+  "excludedNonPseudoHandles": 0,
+  "resolvedApis": {
+    "NtAllocateVirtualMemory": 1,
+    "NtAllocateVirtualMemoryEx": 1,
+    "NtFreeVirtualMemory": 1
+  },
+  "coverage": "current-process pseudo handle; reserve/commit/decommit/release APIs",
+  "limits": [
+    "Kernel heaps, mappings, explicit process handles and calls before debugger attachment are outside coverage.",
+    "Debugger timing and returned size do not establish resident ownership or a leak."
+  ]
+}

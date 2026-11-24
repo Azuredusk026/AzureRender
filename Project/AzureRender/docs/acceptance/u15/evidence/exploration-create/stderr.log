@@ -1,0 +1,21 @@
+[1791647072661][info][editor][code=0] Opened scene: inspection
+[1791647073102][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791647073483][info][render][code=0] Character texture access: indexed, requested slots=27, stage sampler limit=1048576
+[1791647073505][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791647073507][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791647073531][info][editor][code=0] Asset reload requested; changed files: 0
+[1791647073537][info][render][code=0] Character texture access: indexed, requested slots=27, stage sampler limit=1048576
+[1791647073556][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791647073558][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791647073562][info][editor][code=0] Renderer resources reloaded
+[1791647073895][info][editor][code=0] Opened scene: courtyard
+[1791647073924][info][editor][code=0] Opened scene: courtyard
+[1791647073952][info][editor][code=0] Opened scene: courtyard
+[1791647073960][info][editor][code=0] Asset reload requested; changed files: 0
+[1791647073966][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791647073993][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791647074003][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791647074019][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791647074042][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791647074053][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791647074060][info][editor][code=0] Renderer resources reloaded

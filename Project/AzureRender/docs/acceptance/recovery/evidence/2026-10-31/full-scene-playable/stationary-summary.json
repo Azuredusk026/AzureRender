@@ -1,0 +1,56 @@
+{
+  "status": "captured-contact-review-pending",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\project\\playable.azureproject",
+    "--width",
+    "960",
+    "--height",
+    "540",
+    "--capture-frames",
+    "90",
+    "--capture-fps",
+    "60",
+    "--fixed-frame-step",
+    "--capture-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\stationary\\frames",
+    "--qa-camera",
+    "scene",
+    "--qa-light",
+    "scene",
+    "--qa-isolation",
+    "beauty",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\stationary\\runtime.json",
+    "--game-actions",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\stationary\\actions.json"
+  ],
+  "programSha256": "784a0574cd358a5c79cc2c0d0a8bf2b3a01946b17eb99230b5d89748db9cd29d",
+  "projectSha256": "40674c80b7f3acb531bbf550d3bd9e0c0ec7ab194cc3221a65895765471e57e3",
+  "exitCode": 0,
+  "elapsedSeconds": 182.7871940000041,
+  "routeFrames": 90,
+  "positions": [
+    [
+      0.0,
+      1.034999966621399,
+      9.0
+    ],
+    [
+      0.0,
+      1.0324134826660156,
+      9.0
+    ]
+  ],
+  "groundedFrames": 89,
+  "lastSixtyGrounded": true,
+  "heightMinimum": 1.0324113368988037,
+  "heightMaximum": 1.034999966621399,
+  "levelRevisions": [
+    2
+  ],
+  "animationStates": [
+    "idle"
+  ]
+}

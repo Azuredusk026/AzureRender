@@ -1,0 +1,37 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+      Start 153: AzureEngine.ModuleBoundaryFixtures
+ 1/14 Test #153: AzureEngine.ModuleBoundaryFixtures .......   Passed    1.40 sec
+      Start 154: AzureEngine.ModuleBoundaries
+ 2/14 Test #154: AzureEngine.ModuleBoundaries .............   Passed   11.36 sec
+      Start 204: AzureTools.ShaderArithmeticOrder
+ 3/14 Test #204: AzureTools.ShaderArithmeticOrder .........   Passed    0.25 sec
+      Start 343: AzureRender.ReflectionSpatialFilter
+ 4/14 Test #343: AzureRender.ReflectionSpatialFilter ......   Passed    0.73 sec
+      Start 344: AzureRender.ReflectionRay
+ 5/14 Test #344: AzureRender.ReflectionRay ................   Passed    0.87 sec
+      Start 347: AzureRender.ReflectionTemporal
+ 6/14 Test #347: AzureRender.ReflectionTemporal ...........   Passed    0.83 sec
+      Start 348: AzureRender.ReflectionTemporalGpu
+ 7/14 Test #348: AzureRender.ReflectionTemporalGpu ........   Passed    2.77 sec
+      Start 349: AzureRender.ScreenReflection
+ 8/14 Test #349: AzureRender.ScreenReflection .............   Passed    0.72 sec
+      Start 350: AzureTools.NativeRayFixture
+ 9/14 Test #350: AzureTools.NativeRayFixture ..............   Passed    0.13 sec
+      Start 351: AzureRender.NativeRayReferenceGpu
+10/14 Test #351: AzureRender.NativeRayReferenceGpu ........   Passed    3.02 sec
+      Start 352: AzureRender.ReflectionRayGpu
+11/14 Test #352: AzureRender.ReflectionRayGpu .............   Passed    1.96 sec
+      Start 353: AzureRender.DepthPyramid
+12/14 Test #353: AzureRender.DepthPyramid .................   Passed    0.77 sec
+      Start 354: AzureRender.DepthPyramidGpu
+13/14 Test #354: AzureRender.DepthPyramidGpu ..............   Passed    1.58 sec
+      Start 358: AzureRender.ReflectionSpatialFilterGpu
+14/14 Test #358: AzureRender.ReflectionSpatialFilterGpu ...   Passed    1.68 sec
+
+100% tests passed, 0 tests failed out of 14
+
+Label Time Summary:
+gpu    =  11.01 sec*proc (5 tests)
+
+Total Test time (real) =  28.17 sec

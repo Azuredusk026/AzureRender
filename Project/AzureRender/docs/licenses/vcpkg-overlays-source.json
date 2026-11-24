@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/microsoft/vcpkg",
+  "commit": "11ace808cc8a3a941f386e33726b992b22ba9e5a",
+  "license": "MIT",
+  "notice": "docs/licenses/vcpkg-MIT.txt",
+  "sourceFiles": {
+    "portfile.cmake": "3de85c5b56b947499f7f9dd1c9c73dfa14722fbeb66bd708edca67dd2fed8903",
+    "vcpkg.json": "eda1b42d54ee3f250ccf8e13afe32a2c9931b35330d383b8163f8f005110026a",
+    "build_fixes.patch": "f3d456976c456b04846d48a3dc4c0fb3417ba8f5fd9ac5de572213447c1381a7"
+  },
+  "adaptations": [
+    "固定 Assimp 6.0.4 与来源校验值。",
+    "关闭范围外的 IFC 导入器。",
+    "所需依赖和包补丁按支持范围配置。"
+  ]
+}

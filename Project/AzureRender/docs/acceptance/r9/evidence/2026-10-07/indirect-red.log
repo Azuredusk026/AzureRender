@@ -1,0 +1,226 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 116: AzureRender.NullRhiPass
+1/1 Test #116: AzureRender.NullRhiPass ..........***Failed    0.45 sec
+[1791321946554][info][render][code=0] Blackhole bloom: fragment fallback path
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946559][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791321946575][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946579][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946588][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791321946605][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946609][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946617][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791321946634][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946637][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946645][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791321946660][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946665][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946672][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=35
+[1791321946688][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946692][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946699][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=34
+[1791321946717][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946721][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946729][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=35
+[1791321946746][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946750][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946759][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=35
+[1791321946775][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946779][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946787][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=35
+[1791321946804][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946807][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946815][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=35
+[1791321946831][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946835][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946843][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=0
+[1791321946858][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946862][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946870][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791321946886][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946889][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946896][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791321946911][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946915][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=2
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791321946922][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791321946938][info][render][code=0] Character IBL: hardware mip fallback path
+[1791321946942][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+CPU-known invisible runs must not issue empty indirect main draws
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.46 sec
+
+The following tests FAILED:
+	116 - AzureRender.NullRhiPass (Failed)
+Errors while running CTest

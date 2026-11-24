@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "phase": "NR4-G7",
+  "status": "query_frame_contract_passed_full_lighting_pending",
+  "source": {
+    "src/render/IrradianceQuery.hpp": "2839ed3cff8a05d58be62ea59b060e0155143059159963591576294b4aa80870",
+    "src/render/IrradianceVolumeJson.hpp": "723974a676c2e42b5813be5c4e32695fc4baec583b3bd75597c47f626b0ad5f0",
+    "src/scenes/CharacterSceneRenderer.cpp": "16b2d27b92e803b0228eb8bd74fa7544be7e3fffb07db3f99e06aadf3cc0ef5c",
+    "shaders/irradiance_query.glsl": "0ba6338b8ce8311d5b7159cac4d63ff5f18784ce0aa3319a27cbe8653be0c3db",
+    "shaders/mesh.frag": "1de7598ac7559eb2b3e4087cf87b978511cb9ab9400d9dc0eca4c8d17caa8394",
+    "shaders/irradiance_query_test.comp": "8d7bea9d1166394612a14e35ee482dba9cc91b43ed136c932f3e0b95d13646f0",
+    "tests/IrradianceQueryTests.cpp": "acbfae6e8b880b746c6d32d5c5c635fe08220e810c847c5db707c9ea34033d1c",
+    "tests/IrradianceQueryGpuTests.cpp": "b61101851d701b1b41ea79b3b3568be1af88c0202c91e8985b088bb90d61b9b6",
+    "tests/AssetLevelTests.cpp": "4b85951770993a497cff65d938b2162a4655b0829859c52b863ef8f81a4c7ada",
+    "tests/SceneModelTests.cpp": "30fbcb56dab09ceb92c33a398a876c8a660486d2aba0b5a6126415979387fd88",
+    "tools/native_render/irradiance_clipmap_lab.py": "bd458cd838405db91e6106d8e8e06ff02fccdf1636ce417da1ecdc95ca49ef33"
+  },
+  "tests": {
+    "gpuCaptures": 60,
+    "gpuCapturesPerConfiguration": 30,
+    "nativeComputeCasesPerConfiguration": 19,
+    "nativeNoiseExact": true,
+    "maximumQueryPositionError": 0,
+    "configurationImagesExact": true,
+    "descriptorImagesExact": true,
+    "shaderPrograms": 193,
+    "shaderConfigurationBytesExact": true,
+    "linearPixelBudget": 0.012,
+    "maximumLinearPixelError": 0.004083756202506339
+  },
+  "native": {
+    "frame": 3534,
+    "event": 8912,
+    "reference": "tests/support/IrradianceQueryFixture.hpp",
+    "referenceSha256": "f08c3d1c66048c62b287fca14f9db4ad1b213f0adca8f4ac55845630aad0d613",
+    "nativeSamples": 7,
+    "mirroredSamples": 7,
+    "positionErrorBudget": 2e-06,
+    "viewportHeight": 1440,
+    "worldToField": [
+      -1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    "sampling": {
+      "normalOffset": 0.25,
+      "jitterAmplitude": 0.20000000298023224,
+      "phase": 49.0,
+      "pixelOrigin": "bottom-left",
+      "jitterSpace": "field"
+    }
+  },
+  "camera": {
+    "legacyPixelsExact": true,
+    "changedPixels": 3341856,
+    "maximumDelta": 139,
+    "meanDelta": 4.136588179976852,
+    "nativeMeanAbsoluteErrorLegacy": 28.802782570167825,
+    "nativeMeanAbsoluteErrorCandidate": 30.28216896339699
+  },
+  "candidate": "build/runs/20261027-201756-native-irradiance-pixel-origin-986da8/camera-candidate/project.azureproject",
+  "run": "build/runs/20261027-201756-native-irradiance-pixel-origin-986da8",
+  "artifacts": {
+    "query-frame-red.log": "52fc549ffa7ac19eeab3061a24f29a9a302130c2a31239e1121beebb51ddcb20",
+    "query-policy-red.log": "1548e029c4654bb35c80a8943fd48a2a8707d8c7606dacd50996f47ffe93c315",
+    "query-debug-final-cpu.log": "2b60324ca443b6978b0a2b1f871de6d1caec4d027e8b9185ce66e3402244584a",
+    "query-release-cpu.log": "e13521747441e60eb8e528b1e6785b0f7bb29ba9a3dcffeacf924641f39b4b4b",
+    "query-debug-gpu.log": "c6cb9db1e1f9b38a30a0690af38b6ffa784001180a05cb9f8ca2848ef617b13f",
+    "query-release-gpu.log": "c6cb9db1e1f9b38a30a0690af38b6ffa784001180a05cb9f8ca2848ef617b13f",
+    "candidate-inputs.json": "4dafa21f5265f1febb32f4b12a7d0c5b63dfc8809c648612f46b0438e9a87ad8",
+    "regression.json": "578e389f04cf8fe51c51c1ee3539fb15231abfb1672a4d1cba1a4793609842e8",
+    "camera-comparison.json": "d1d9e56b50aaf088a857d50d5b70d4f3414cbdb224d6ea1646ec4157162f00f5",
+    "camera-legacy-release.log": "b0b8c8fd710427f19e2eb30e1015287e7554931a6b2347c2d32baeef4ed2c52d",
+    "camera-legacy-release/frames/frame_000000.png": "17747e2e9ab8ad37e4e2913d7472b3af872efc696da498120f910465db246a04",
+    "camera-legacy-release/frames/capture_manifest.json": "7529b644a2871965103c6e55b9ee4b88edcf3d831d6dc628bbfa59b23c0c5bc2",
+    "camera-legacy-release/gpu.json": "494cb4ea8467d79e32941746fb517d166030c4ed26457fd5ad33477580db0ff9",
+    "camera-native-release.log": "f7bf715b7383b875be46c2d4ba43a0dd376497cd35ccf221aaa19d48eb1ce889",
+    "camera-native-release/frames/frame_000000.png": "04d4cc3fd153484349f6456783241d7de8cd2e55b965b01865a0ea416489f95b",
+    "camera-native-release/frames/capture_manifest.json": "f91395c1ec0f5c0bffaf17f402ba9f2ed83bef5870019b59c19de97e92091db7",
+    "camera-native-release/gpu.json": "330b487bb555c07fe783842c8bed1a9ec5f3da46637ac88a0cabcab314cf101a"
+  },
+  "architecture": {
+    "bindingVersion": 3,
+    "legacyDefaultBindingVersion": 2,
+    "additionalGpuBytes": 0,
+    "additionalShaderVariants": 0
+  },
+  "remaining": [
+    "continuous phase production",
+    "native character environment globals",
+    "full lighting and normal composition",
+    "central logistics and dynamic effects",
+    "formal NR0–NR12 visual and performance gates"
+  ],
+  "visualPromotion": {
+    "promoted": false,
+    "reason": "Full-frame reference error is higher; candidate retained for component diagnosis",
+    "acceptedReference": "build/runs/20261027-185328-native-surface-uv-stream-bindings-b5d7ce/compact-candidate/project.azureproject"
+  }
+}

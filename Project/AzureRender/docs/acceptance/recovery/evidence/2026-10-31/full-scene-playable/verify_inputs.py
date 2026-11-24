@@ -1,0 +1,9 @@
+from pathlib import Path
+import json,copy,hashlib
+root=Path.cwd();r=Path(__file__).resolve().parent;source=root/'build/runs/20261031-172112-hair-source-inputs-14d199/project';project=r/'project/playable.azureproject';current=json.loads((r/'project/scene/playable.azurelevel').read_text());original=json.loads((source/'scene/full-restored.azurelevel').read_text());restored=copy.deepcopy(current);restored['nodes']=[n for n in restored['nodes'] if n['id']!='native-railing-collision']
+for name in ['hero','camera']:
+ target=next(n for n in restored['nodes'] if n['id']==name);old=next(n for n in original['nodes'] if n['id']==name);target['components']=copy.deepcopy(old['components'])
+assert restored==original,'Unrelated full scene data changed';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();materials=[]
+for p in sorted((source/'assets/restored-character-materials').glob('*')):
+ if p.is_file():q=r/'project'/p.relative_to(source);assert sha(p)==sha(q);materials.append(dict(path=p.relative_to(source).as_posix(),sha256=sha(p)))
+assert sha(source/'content-character/hero-restored-inputs-v8.glb')==sha(r/'project/content-character/hero-restored-inputs-v8.glb');spec=json.loads((r/'candidate.json').read_text());assert sha(project)==spec['projectSha256'];assert sha(r/'project/scene/playable.azurelevel')==spec['levelSha256'];report=dict(status='scene-and-character-integrity-passed',unchangedMaterialFiles=len(materials),materials=materials,unchangedCharacterModelSha256=spec['characterModelSha256'],unrelatedSceneFieldsPreserved=True,scope='Only declared control, animation, restart and camera components plus the existing railing-collision node are assembled. Source model and material inputs remain unchanged.');(r/'input-verification.json').write_text(json.dumps(report,indent=2)+'\n');print(report['status'],len(materials))

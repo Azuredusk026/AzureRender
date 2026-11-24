@@ -1,0 +1,3 @@
+[FAIL] character_beauty_fullbody: mean=0.042464 changed=0.184995
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+cases=2 failures=1

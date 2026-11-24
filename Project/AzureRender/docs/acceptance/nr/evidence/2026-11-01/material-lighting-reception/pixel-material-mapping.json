@@ -1,0 +1,140 @@
+{
+  "status": "mapped-raw-resource-order",
+  "materialCount": 743,
+  "matches": [
+    {
+      "globalIndex": 703,
+      "localIndex": 0,
+      "resourceId": "captured-glyph-10251",
+      "asset": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\candidate-project\\captured-glyph\\event-10251.gltf",
+      "material": {
+        "name": "Captured-glyph-10251",
+        "alphaMode": "BLEND",
+        "doubleSided": true,
+        "extras": {
+          "azureRenderMaterial": {
+            "schemaVersion": 2,
+            "class": "emissive",
+            "features": [
+              "unlit-surface",
+              "unlit-texture-layers"
+            ],
+            "surface": {
+              "schemaVersion": 2,
+              "lighting": "unlit",
+              "layers": [
+                {
+                  "texture": 0,
+                  "sampleMode": "red-as-alpha",
+                  "uv": {
+                    "set": 0,
+                    "scaleOffset": [
+                      0.699999988079071,
+                      5.0,
+                      0.27000001072883606,
+                      0.0
+                    ],
+                    "rotation": [
+                      -4.371138828673793e-08,
+                      -1.0,
+                      1.0,
+                      -4.371138828673793e-08
+                    ],
+                    "speed": [
+                      0.003000000026077032,
+                      0.0
+                    ]
+                  },
+                  "role": "base"
+                },
+                {
+                  "texture": 1,
+                  "sampleMode": "red-as-alpha",
+                  "uv": {
+                    "set": 0,
+                    "scaleOffset": [
+                      0.009999999776482582,
+                      5.0,
+                      0.0,
+                      0.0
+                    ],
+                    "rotation": [
+                      -4.371138828673793e-08,
+                      -1.0,
+                      1.0,
+                      -4.371138828673793e-08
+                    ],
+                    "speed": [
+                      0.00800000037997961,
+                      0.10000000149011612
+                    ]
+                  },
+                  "role": "mask"
+                }
+              ],
+              "coverageLayer": {
+                "texture": 2,
+                "sampleMode": "red-as-alpha",
+                "uv": {
+                  "set": 0,
+                  "scaleOffset": [
+                    0.10000000149011612,
+                    30.0,
+                    0.0,
+                    0.0
+                  ],
+                  "rotation": [
+                    -4.371138828673793e-08,
+                    -1.0,
+                    1.0,
+                    -4.371138828673793e-08
+                  ],
+                  "speed": [
+                    -0.0020000000949949026,
+                    -0.5
+                  ]
+                },
+                "threshold": -0.26865994930267334,
+                "gain": 0.20000000298023224
+              },
+              "vertexColor": true,
+              "tint": [
+                4.800000190734863,
+                4.5274553298950195,
+                2.822211265563965,
+                0.10000000149011612
+              ],
+              "blendTint": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "clock": {
+                "rate": 1.0,
+                "offsetSeconds": 73.48992156982422
+              },
+              "softIntersection": {
+                "distance": 0.6000000238418579,
+                "bias": 0.0
+              },
+              "highlightExpansion": {
+                "threshold": 1.0,
+                "gain": 1.2999999523162842
+              },
+              "postExposureWeight": 1.0,
+              "globalColorWeight": 1.0
+            }
+          }
+        }
+      },
+      "primitives": [
+        {
+          "mesh": null,
+          "indices": 2160,
+          "vertices": 427
+        }
+      ]
+    }
+  ]
+}

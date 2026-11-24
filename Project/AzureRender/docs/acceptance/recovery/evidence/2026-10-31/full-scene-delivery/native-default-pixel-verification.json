@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "frames": [
+    {
+      "frame": 0,
+      "changedPixels": 0,
+      "referenceSha256": "dc3aef07871cb66c02ca398aa8316572b7341a87e8dcb0a2f264f7c8eecef1fd",
+      "actualSha256": "dc3aef07871cb66c02ca398aa8316572b7341a87e8dcb0a2f264f7c8eecef1fd"
+    },
+    {
+      "frame": 1,
+      "changedPixels": 0,
+      "referenceSha256": "f32b5bbf07723ae2960ed97ed046b3e9b04def02f3b64598626005f320cf8ffa",
+      "actualSha256": "f32b5bbf07723ae2960ed97ed046b3e9b04def02f3b64598626005f320cf8ffa"
+    },
+    {
+      "frame": 2,
+      "changedPixels": 0,
+      "referenceSha256": "bc744a67a54b53db2826bfe688c3fcf212d00381d555253802480d21d1b17411",
+      "actualSha256": "bc744a67a54b53db2826bfe688c3fcf212d00381d555253802480d21d1b17411"
+    }
+  ],
+  "qaFlagsProvided": false,
+  "scope": "Native packaged entry defaults match the saved source project at the same 960x540 reference resolution"
+}

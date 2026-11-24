@@ -1,0 +1,192 @@
+{
+  "status": "public-uv-gradient-main-integration-qualified",
+  "sourceHead": "84766bd",
+  "sourceCommits": [
+    "7fd29cc",
+    "b92c191"
+  ],
+  "integrationCommits": [
+    "d26c236",
+    "84766bd"
+  ],
+  "build": {
+    "checks": [
+      {
+        "config": "Release",
+        "tests": 6,
+        "skips": 0,
+        "seconds": 88.59399999998277
+      },
+      {
+        "config": "Debug",
+        "tests": 6,
+        "skips": 0,
+        "seconds": 111.88999999995576
+      }
+    ],
+    "sourceUnchanged": true,
+    "gradientPixelsPerBatch": 8716
+  },
+  "identity": {
+    "checks": [
+      {
+        "config": "release",
+        "changed": [],
+        "existingShaders": 772,
+        "newShaders": [
+          "material_uv_gradients_test.frag.spv",
+          "material_uv_gradients_test.vert.spv"
+        ]
+      },
+      {
+        "config": "debug",
+        "changed": [],
+        "existingShaders": 680,
+        "newShaders": [
+          "material_uv_gradients_test.frag.spv",
+          "material_uv_gradients_test.vert.spv"
+        ]
+      }
+    ],
+    "defaultRuntimeIdentical": true,
+    "strictFourFramesReusedFrom": "20261110-131820-output-pixel-loading-integration-683849"
+  },
+  "gradientBatches": 4,
+  "pixelsPerBatch": 8716,
+  "componentComparisonsPerBatch": 34864,
+  "totalComponentComparisons": 139456,
+  "retainedEdgeHelperPixelsPerBatch": 81,
+  "protectedFilesUnchanged": 13,
+  "validationClean": true,
+  "newNativeFrameCaptures": 0,
+  "strictFourFramesReusedFrom": "20261110-131820-output-pixel-loading-integration-683849",
+  "materialSamplingBindingQualified": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "archive": {
+    "file": "validation.zip",
+    "bytes": 454527,
+    "sha256": "c145fad64bdc340c7879f3b02996201d2924dbe99723bbf59ececf0525b98a53"
+  },
+  "members": [
+    {
+      "path": "baseline-products.json",
+      "bytes": 289241,
+      "sha256": "52b958942fffb6cf20c2b0cd7fc713063fb3c3e0b6e1665747da4f8c1bf4c3db"
+    },
+    {
+      "path": "baseline-source.json",
+      "bytes": 190457,
+      "sha256": "4cb38647fa28355e45eaa736697e458341ebb4624a1236ee0f7b2a723f3e2a1b"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 437,
+      "sha256": "0825dc6c95b5a80ed97ccb64c47a6a3d5f3f4dd36e8e3a36a2b278087a5dcaac"
+    },
+    {
+      "path": "build-results.json",
+      "bytes": 319,
+      "sha256": "26bfe29d16541dcf6d1e3fc7c16b4dff4d531a88914a68bc381ab47b642ea9cc"
+    },
+    {
+      "path": "build.py",
+      "bytes": 3262,
+      "sha256": "c1c60fee298a4e7f4996674dedc396a4bd7325975e6059ff18845cd1b70246ef"
+    },
+    {
+      "path": "debug-build-provenance.json",
+      "bytes": 391847,
+      "sha256": "9a425e5f19ee56f5351bbf3ea4babbdb8ab8cbd3c56b63dea75b506aef589af5"
+    },
+    {
+      "path": "debug-build.log",
+      "bytes": 10022,
+      "sha256": "c205796981acad75a902b01af592b73ab2480cd9beb941c4efd2abdd8ec42328"
+    },
+    {
+      "path": "debug-intel-gradient.log",
+      "bytes": 197,
+      "sha256": "a2724052b0dda75210f6ec94e4b7494f2b89dd5550e4a9ac1f17f02e3d8f0a63"
+    },
+    {
+      "path": "debug-tests.log",
+      "bytes": 1052,
+      "sha256": "45fbb8822006644f97ffb1c4894edbcc148af660d1d4bfa4ee217f7e3f8ad0d7"
+    },
+    {
+      "path": "debug-tests.xml",
+      "bytes": 2794,
+      "sha256": "ce1d7edcddac402c96840018edacb2976013325eab3245ed63636eae1836c3d9"
+    },
+    {
+      "path": "identity-results.json",
+      "bytes": 595,
+      "sha256": "ac7ef6bd0596593b8e3e9bebb74b0bd8956457d2b654a0c3bb8bb5dbeee69213"
+    },
+    {
+      "path": "process.log",
+      "bytes": 207,
+      "sha256": "6eef317038afa77e6d67163f0da2ef1f5b661466ebd5ceabbb6bd4f9fd92a370"
+    },
+    {
+      "path": "release-build-provenance.json",
+      "bytes": 415953,
+      "sha256": "5932925ffced3fce1b57c6a4d232bb11967b5a9f0e0d569a52c1da23f7faf732"
+    },
+    {
+      "path": "release-build.log",
+      "bytes": 10031,
+      "sha256": "635c71112f0b8ccc7034d1b80ab3e6a0b088281e2aafdea9de947848daae4aca"
+    },
+    {
+      "path": "release-intel-gradient.log",
+      "bytes": 197,
+      "sha256": "a2724052b0dda75210f6ec94e4b7494f2b89dd5550e4a9ac1f17f02e3d8f0a63"
+    },
+    {
+      "path": "release-tests.log",
+      "bytes": 1056,
+      "sha256": "d5d54f0f9af78f39fe10cf6463208bfddb1eb45b83446d52064c1fb666d708a5"
+    },
+    {
+      "path": "release-tests.xml",
+      "bytes": 2801,
+      "sha256": "1183e93788d02648a85fad7b31a9e065527043650fca40ddf71be5a1b4a973e8"
+    },
+    {
+      "path": "protected-files.json",
+      "bytes": 1518,
+      "sha256": "b2754b86d468b2594c906810b5681f8abbe6132d4f36f3872c3523443159f876"
+    },
+    {
+      "path": "sources/CMakeLists.txt",
+      "bytes": 298516,
+      "sha256": "1b3c4e1620422f70678d25ddb7bbfa803f34021bfa852dd2b8f45b01a19bad5a"
+    },
+    {
+      "path": "sources/src/render/MaterialUvGradients.hpp",
+      "bytes": 1445,
+      "sha256": "3d36d9ae2aa59631f9671e1bca3f42bc2ea1486d10ee94d43ce6349efc5b0577"
+    },
+    {
+      "path": "sources/shaders/material_uv_gradients.glsl",
+      "bytes": 456,
+      "sha256": "4fedaff4522fa5ba7dff837cefb57fc37dc3e1263e96a5801d4486532a5043ba"
+    },
+    {
+      "path": "sources/shaders/material_uv_gradients_test.vert",
+      "bytes": 340,
+      "sha256": "3ada24db0bac0561b94414b1b31df5b77c67db99bc334a824212065e976ce983"
+    },
+    {
+      "path": "sources/shaders/material_uv_gradients_test.frag",
+      "bytes": 555,
+      "sha256": "ed06f07d5c46fc43165081f4560669b7cec5e72c0db9800e672f8b472d06cddf"
+    },
+    {
+      "path": "sources/tests/MaterialUvGradientsGpuTests.cpp",
+      "bytes": 7418,
+      "sha256": "67ce6bc068b8b4178973133b62d78079e16dfc6e2c9d60ff3ac09a31b8020abe"
+    }
+  ]
+}

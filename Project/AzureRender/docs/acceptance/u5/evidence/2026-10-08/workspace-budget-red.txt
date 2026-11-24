@@ -1,0 +1,33 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 128: AzureEditor.DocumentGuardGpu
+1/1 Test #128: AzureEditor.DocumentGuardGpu .....***Failed    2.76 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_document_guard.py", line 122, in <module>
+    results = [run(args.executable.resolve(), args.output.resolve(), workflow, decision)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_document_guard.py", line 122, in <listcomp>
+    results = [run(args.executable.resolve(), args.output.resolve(), workflow, decision)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_document_guard.py", line 69, in run
+    live=workspace()
+         ^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_document_guard.py", line 48, in workspace
+    return json.loads(call('query', name='editor.workspace'))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_document_guard.py", line 45, in call
+    assert response['passed'], response
+           ~~~~~~~~^^^^^^^^^^
+AssertionError: {'code': 'InvalidRequest', 'elapsedMs': 0.3863, 'message': 'Observation text exceeds budget', 'passed': False, 'schemaVersion': 1}
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+gpu    =   2.76 sec*proc (1 test)
+
+Total Test time (real) =   2.77 sec
+
+The following tests FAILED:
+	128 - AzureEditor.DocumentGuardGpu (Failed)
+Errors while running CTest

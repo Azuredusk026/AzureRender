@@ -1,0 +1,98 @@
+{
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "status": "passed",
+  "scope": "Playable delivery from the frozen joint candidate",
+  "source": "qualified-cloth-field-playable/playable.azureproject",
+  "package": "cloth-field-delivery/独立游戏 中文 空格/完整联合场景显示验证.exe",
+  "files": 2686,
+  "manifestSha256": "d33fbc89e98c6f224d35943af07ccce38c6118e4d3b24511d54c406598821a67",
+  "playerSha256": "81db1677343c408958a5cc6bd01186fec707192635487e18ef475a2caf19bc0e",
+  "fixedLegacyLoop": {
+    "oldSha256": "b29d35496d742574d7998255e8d5388cd6a08d33dc3aa64ae6ed89253eac469f",
+    "repairedSha256": "b1f9d78053c0e36c966502847c0a90688307a3d98808db93ff8465a620e6e883",
+    "oldInvalidTracks": 149,
+    "newInvalidTracks": 0,
+    "originalNineAnimationsUnchanged": true,
+    "slotMetadataSha256": "20b0fe71c2f5c5cbcd52997c32ff8145663902267dfe0e0ac404e72c3ed0a367"
+  },
+  "models": 572,
+  "referencesResolvedInsidePackage": 1063,
+  "embeddedReferences": 2889,
+  "saved": {
+    "status": "passed",
+    "nodes": 1680,
+    "resources": 374,
+    "preservedOriginalFields": true,
+    "addedCanonicalDefaults": 136,
+    "float32EquivalentFields": 90,
+    "supportedSchemaMigrations": [
+      {
+        "path": "/renderSettings/screenSpaceReflection/schemaVersion",
+        "kind": "supported-linear-schema-migration",
+        "before": 1,
+        "after": 2
+      }
+    ],
+    "unchangedMaterialFiles": 26,
+    "pixelExactReopenedFrames": 3,
+    "serializationContract": "src/runtime/LevelRenderSettings.hpp",
+    "serializationContractSha256": "0c1edfd0fdba178a14fc3bcb6f3c731e9bcb7af7fe90fc125ceea3ffbf256261",
+    "activeHeroMaterialSlots": 14,
+    "roomReflectionAtlas": "be02661d0e6030f7c572a78805e096c27342bc12bb00aaeda26c92582ff1e0c7"
+  },
+  "sourceAndEngineUnavailable": true,
+  "manifestTamperRejected": true,
+  "packagedDefaultFrames": [
+    {
+      "frame": 0,
+      "changedPixels": 0,
+      "referenceSha256": "5997991d73724691ff801e06268c42a8badaf3e112297710405813b2a09ffe8f",
+      "actualSha256": "5997991d73724691ff801e06268c42a8badaf3e112297710405813b2a09ffe8f"
+    },
+    {
+      "frame": 1,
+      "changedPixels": 0,
+      "referenceSha256": "83685604878d76d05a5e723b2fb364351f783776e61ffedeca7b2e32e17ac5b5",
+      "actualSha256": "83685604878d76d05a5e723b2fb364351f783776e61ffedeca7b2e32e17ac5b5"
+    },
+    {
+      "frame": 2,
+      "changedPixels": 0,
+      "referenceSha256": "cd03e2b61d54284c307e231fa0d0041a4c54673662db35060362eceb2b1108f7",
+      "actualSha256": "cd03e2b61d54284c307e231fa0d0041a4c54673662db35060362eceb2b1108f7"
+    }
+  ],
+  "route": {
+    "status": "passed",
+    "frames": 540,
+    "actions": 13,
+    "walkSpeed": 1.1999988555908203,
+    "sprintSpeed": 3.000011444091797,
+    "walkClip": 7,
+    "sprintClip": 8,
+    "focusReleased": true,
+    "revisionTransitions": [
+      [
+        451,
+        2,
+        3
+      ]
+    ],
+    "finalIdleGrounded": true,
+    "obstructedFrames": 136,
+    "cameraDistanceRange": [
+      1.0000006646093962,
+      1.0000006646093962
+    ],
+    "cameraRelativeForwardCosine": 0.9999999998540834,
+    "rawLensForwardCosine": -0.3872228649121946,
+    "cameraYawDegrees": -67.5,
+    "cameraSensitivitySource": "src/ecs/GameComponents.hpp: default .15 degrees per input unit",
+    "minimumCharacterHeight": 1.0317745208740234,
+    "scope": "Production fixed-step input, actual displacement, animation samples, focus, camera collision and script restart. Planter traversal is not a wall-blocking or native-collision-equivalence result."
+  },
+  "defaultResolution": [
+    1920,
+    1080
+  ]
+}

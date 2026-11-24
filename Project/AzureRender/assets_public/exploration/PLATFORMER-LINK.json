@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "sourceProject": "Azure Sky Steps",
+  "entry": "assets:/platformer/platformer.azurelevel",
+  "outputs": {
+    "assets/platformer/audio/coin.wav": "8d8e51709a430aaa5da65c6f29cb8e4321282139533e3f3e4968c1755ff4f039",
+    "assets/platformer/audio/finish.wav": "66152f6d4f12740447251f4de9adce9284de6a32b7e25710f481c4f129292014",
+    "assets/platformer/audio/jump.wav": "8baa929fe677c5d8024db4bdf322c80d067008a18dbcbd8782b86c86c6cb7d20",
+    "assets/platformer/audio/land.wav": "ee2c850f7c5b114e113b8ebbed1f76bc80390913633937ebefb4bb4911db7e1b",
+    "assets/platformer/audio/respawn.wav": "158b7ffbe6ad00b997210b7fc48efd001baace9daa6bfacdbc16dacaa07e9e26",
+    "assets/platformer/CHARACTER-LICENSE.txt": "be53cb6c25774e09d7f8eff01d850a71de5ede9a916a7e9407ed9439e79327eb",
+    "assets/platformer/checkpoint.lua": "4250ee84da0b8572d6817ce73ab1043184a13c245cc7d2af359146b759b96499",
+    "assets/platformer/coin.lua": "2783f25aed07b80406baa01c69ae2456cd67c027d5cb61adc0cdd3eac03e928f",
+    "assets/platformer/environment/arch.glb": "7633ede1c17880a63b59306cec9778adecc0abf897236ef8594c7f437e6dd025",
+    "assets/platformer/environment/blender-version.txt": "f99607f24ed356f458cdad9f1b5ecb0771fc1570dc4ccdb400e09734a410cea5",
+    "assets/platformer/environment/challenge.glb": "539b8bcdab055300cd8e6787fe9cb371dce5f860fe4231a10e55dc3356ab4667",
+    "assets/platformer/environment/coin.glb": "ed2ab982ba2fbd5d2b8df289c9def0de094be9c6fd7c310d78ef9204f621c698",
+    "assets/platformer/environment/moving.glb": "408ea2b89e5f2a207935edad6dfbc2e21a15b70232607bcb1d7fd90e0eb80160",
+    "assets/platformer/environment/platform.glb": "ff7a9a3f517a63ffe366e77c6a87680aea57f79476557da932eea1e6cedd45ba",
+    "assets/platformer/environment/practice.glb": "089482821cfa275d3b527ab3520a577dae77715b1a1de15ffcf9316014ddbf94",
+    "assets/platformer/environment/rock.glb": "242973dfef235a51873fa3dd58159c8b6c3974aed4dcda8595d932abe6d96f6f",
+    "assets/platformer/environment/stone-albedo.png": "01f581c65304fe10e5bd52282f40c4ac4bb7783236cbdd38b5ddde4a23e3b308",
+    "assets/platformer/environment/stone-normal.png": "f3afd237f207d4f2f5e12af44ea0887aefd7a6f7075d64ffb070c83bbdf00803",
+    "assets/platformer/environment/stone-orm.png": "a97e73beb30c683ffc3270ac9306cbba77e12da69d4b17b5f343058856ae4f7a",
+    "assets/platformer/goal.lua": "66cf0dc54455d29ad387ede76043895036c75b1189e67658ae971ab6ff5f2adb",
+    "assets/platformer/hero.gltf": "4c35b283bb2e7565e37c73c0764c73fbf323337b0c94b209178489b745544e1f",
+    "assets/platformer/hero.lua": "00631e7f12c63b57b7b2d481787e63a3e5edba20e8711ba14bba6f0007c9ec1f",
+    "assets/platformer/hud.rml": "b47770d7fc42946473a59f5eb7f3b273cf3f3e71b408a0c5102a24d6eacb5ff3",
+    "assets/platformer/locomotion.json": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088",
+    "assets/platformer/motion.lua": "700e30c91efa141da52c9c14b7537f3fc9582718585d49c38e786566877621a7",
+    "assets/platformer/platformer.azurelevel": "3315570885f001a7b2f353d5abe90909a306a306bb7ebffef8999c3665bb6617"
+  }
+}

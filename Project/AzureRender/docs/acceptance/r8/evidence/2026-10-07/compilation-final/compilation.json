@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "rounds": [
+    {
+      "language": "glsl",
+      "round": 1,
+      "kind": "full",
+      "milliseconds": 97.51739999774145,
+      "bytes": 3112,
+      "sha256": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26"
+    },
+    {
+      "language": "slang",
+      "strategy": "direct",
+      "round": 1,
+      "kind": "full",
+      "milliseconds": 676.7355999982101,
+      "bytes": 3280,
+      "sha256": "afcc627569044edf16dc0d263cac02405963cc8c8d30fe7e4196acc9cd08ed43",
+      "inputHash": "3eb784d96a9863eac568b41c96d8d7a888c66429a1ae19fd24598351b79b144e",
+      "cacheHit": false
+    },
+    {
+      "language": "slang",
+      "strategy": "direct",
+      "round": 1,
+      "kind": "unchanged",
+      "milliseconds": 241.19359999895096,
+      "bytes": 3280,
+      "sha256": "afcc627569044edf16dc0d263cac02405963cc8c8d30fe7e4196acc9cd08ed43",
+      "inputHash": "3eb784d96a9863eac568b41c96d8d7a888c66429a1ae19fd24598351b79b144e",
+      "cacheHit": true
+    },
+    {
+      "language": "slang",
+      "strategy": "direct",
+      "round": 1,
+      "kind": "dependency-edit",
+      "milliseconds": 650.3263999984483,
+      "bytes": 3280,
+      "sha256": "afcc627569044edf16dc0d263cac02405963cc8c8d30fe7e4196acc9cd08ed43",
+      "inputHash": "760fc5d05ee5efc36c73076265d0901386810d8ed7ca93dc83594c482a2b08f6",
+      "cacheHit": false
+    },
+    {
+      "language": "slang",
+      "strategy": "cached",
+      "round": 1,
+      "kind": "full",
+      "milliseconds": 630.5371000016748,
+      "bytes": 3828,
+      "sha256": "23301eac711d0c2857d010ec727de046930a46f2c47a2422c3cd42e0ddd09bf4",
+      "inputHash": "e6c626ce965ed7161572ba5d79e61f7b3c1230c26edf59570077fc43571b95b6",
+      "cacheHit": false
+    },
+    {
+      "language": "slang",
+      "strategy": "cached",
+      "round": 1,
+      "kind": "unchanged",
+      "milliseconds": 251.27599999905215,
+      "bytes": 3828,
+      "sha256": "23301eac711d0c2857d010ec727de046930a46f2c47a2422c3cd42e0ddd09bf4",
+      "inputHash": "e6c626ce965ed7161572ba5d79e61f7b3c1230c26edf59570077fc43571b95b6",
+      "cacheHit": true
+    },
+    {
+      "language": "slang",
+      "strategy": "cached",
+      "round": 1,
+      "kind": "dependency-edit",
+      "milliseconds": 661.2709000000905,
+      "bytes": 3828,
+      "sha256": "23301eac711d0c2857d010ec727de046930a46f2c47a2422c3cd42e0ddd09bf4",
+      "inputHash": "fd9d473d426241e532f348a7a8b1c66ae3eb4041e5feda47747ef97a30a342fc",
+      "cacheHit": false
+    },
+    {
+      "language": "glsl",
+      "round": 2,
+      "kind": "full",
+      "milliseconds": 92.87949999998091,
+      "bytes": 3112,
+      "sha256": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26"
+    },
+    {
+      "language": "slang",
+      "strategy": "direct",
+      "round": 2,
+      "kind": "full",
+      "milliseconds": 610.8227000004263,
+      "bytes": 3280,
+      "sha256": "afcc627569044edf16dc0d263cac02405963cc8c8d30fe7e4196acc9cd08ed43",
+      "inputHash": "65d3ddcd44dbea7de109f4a0ade39cba48cc6eb49410ef269cf64a90091d71fe",
+      "cacheHit": false
+    },
+    {
+      "language": "slang",
+      "strategy": "direct",
+      "round": 2,
+      "kind": "unchanged",
+      "milliseconds": 240.1549000023806,
+      "bytes": 3280,
+      "sha256": "afcc627569044edf16dc0d263cac02405963cc8c8d30fe7e4196acc9cd08ed43",
+      "inputHash": "65d3ddcd44dbea7de109f4a0ade39cba48cc6eb49410ef269cf64a90091d71fe",
+      "cacheHit": true
+    },
+    {
+      "language": "slang",
+      "strategy": "direct",
+      "round": 2,
+      "kind": "dependency-edit",
+      "milliseconds": 643.6900000007881,
+      "bytes": 3280,
+      "sha256": "afcc627569044edf16dc0d263cac02405963cc8c8d30fe7e4196acc9cd08ed43",
+      "inputHash": "dea31f413497dff5d6a816aa96ab902fa4d5dc5c48ffe81a5d887a3f55233832",
+      "cacheHit": false
+    },
+    {
+      "language": "slang",
+      "strategy": "cached",
+      "round": 2,
+      "kind": "full",
+      "milliseconds": 626.6422999979113,
+      "bytes": 3828,
+      "sha256": "23301eac711d0c2857d010ec727de046930a46f2c47a2422c3cd42e0ddd09bf4",
+      "inputHash": "5c323cff5a14969dd790ba69257c26c81b94948ac4dfd76622630cdda8002730",
+      "cacheHit": false
+    },
+    {
+      "language": "slang",
+      "strategy": "cached",
+      "round": 2,
+      "kind": "unchanged",
+      "milliseconds": 247.71409999812022,
+      "bytes": 3828,
+      "sha256": "23301eac711d0c2857d010ec727de046930a46f2c47a2422c3cd42e0ddd09bf4",
+      "inputHash": "5c323cff5a14969dd790ba69257c26c81b94948ac4dfd76622630cdda8002730",
+      "cacheHit": true
+    },
+    {
+      "language": "slang",
+      "strategy": "cached",
+      "round": 2,
+      "kind": "dependency-edit",
+      "milliseconds": 713.0417999978818,
+      "bytes": 3828,
+      "sha256": "23301eac711d0c2857d010ec727de046930a46f2c47a2422c3cd42e0ddd09bf4",
+      "inputHash": "ae0434ff8e12ffe892dd787ec51a3f587813568c9980dbf3a2ec40a7e66ef1dc",
+      "cacheHit": false
+    },
+    {
+      "language": "glsl",
+      "round": 3,
+      "kind": "full",
+      "milliseconds": 94.19279999929131,
+      "bytes": 3112,
+      "sha256": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26"
+    },
+    {
+      "language": "slang",
+      "strategy": "direct",
+      "round": 3,
+      "kind": "full",
+      "milliseconds": 620.7844999989902,
+      "bytes": 3280,
+      "sha256": "afcc627569044edf16dc0d263cac02405963cc8c8d30fe7e4196acc9cd08ed43",
+      "inputHash": "be1088820fbad52075ded06d0f57a7f8621b3e40b8174aab8f3c38a09a984e6a",
+      "cacheHit": false
+    },
+    {
+      "language": "slang",
+      "strategy": "direct",
+      "round": 3,
+      "kind": "unchanged",
+      "milliseconds": 230.9177000024647,
+      "bytes": 3280,
+      "sha256": "afcc627569044edf16dc0d263cac02405963cc8c8d30fe7e4196acc9cd08ed43",
+      "inputHash": "be1088820fbad52075ded06d0f57a7f8621b3e40b8174aab8f3c38a09a984e6a",
+      "cacheHit": true
+    },
+    {
+      "language": "slang",
+      "strategy": "direct",
+      "round": 3,
+      "kind": "dependency-edit",
+      "milliseconds": 657.2824999966542,
+      "bytes": 3280,
+      "sha256": "afcc627569044edf16dc0d263cac02405963cc8c8d30fe7e4196acc9cd08ed43",
+      "inputHash": "e0767d40cc73e958ade62722ef699a5be20c1f251d7bf9eacfd53e2e20f923ee",
+      "cacheHit": false
+    },
+    {
+      "language": "slang",
+      "strategy": "cached",
+      "round": 3,
+      "kind": "full",
+      "milliseconds": 621.2016000026779,
+      "bytes": 3828,
+      "sha256": "23301eac711d0c2857d010ec727de046930a46f2c47a2422c3cd42e0ddd09bf4",
+      "inputHash": "7dbfd9d584b0c72b248d61f90b1430ca2d6f7282041192bf7f8fdae3702fd5dc",
+      "cacheHit": false
+    },
+    {
+      "language": "slang",
+      "strategy": "cached",
+      "round": 3,
+      "kind": "unchanged",
+      "milliseconds": 231.40409999905387,
+      "bytes": 3828,
+      "sha256": "23301eac711d0c2857d010ec727de046930a46f2c47a2422c3cd42e0ddd09bf4",
+      "inputHash": "7dbfd9d584b0c72b248d61f90b1430ca2d6f7282041192bf7f8fdae3702fd5dc",
+      "cacheHit": true
+    },
+    {
+      "language": "slang",
+      "strategy": "cached",
+      "round": 3,
+      "kind": "dependency-edit",
+      "milliseconds": 678.1792000001587,
+      "bytes": 3828,
+      "sha256": "23301eac711d0c2857d010ec727de046930a46f2c47a2422c3cd42e0ddd09bf4",
+      "inputHash": "97eab5c94b21dad13ebe10aebcd921af5b1cb5cea10f6d03e5b47d565cea42bb",
+      "cacheHit": false
+    }
+  ],
+  "variants": 2,
+  "entryPoints": 1,
+  "sharedAlgorithms": 1,
+  "samplingImplementations": 2,
+  "compilerSha256": "6ef3ff11fef3cc9df7c5b2daed6a64511648b2351b4a1efdcbd21fc17642141b",
+  "glslCompilerSha256": "93898530ea4f2e809733ea8a839d09d4b947bd6e853c84670923ac4414f41eb3",
+  "comparison": "Same input algorithm; GLSL direct compiler and checked Slang adapter; unchanged build invokes no GLSL compiler"
+}

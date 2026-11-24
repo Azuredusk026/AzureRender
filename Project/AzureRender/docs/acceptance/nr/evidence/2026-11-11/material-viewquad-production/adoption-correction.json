@@ -1,0 +1,15 @@
+{
+  "previousArchive": {
+    "bytes": 3380234,
+    "members": 139,
+    "sha256": "f267389a63369170551cbad082040c35d203c795948743b1a4ad7ca38da555db",
+    "memberHashesVerified": true
+  },
+  "previousAdoptionField": true,
+  "currentAdoptionField": false,
+  "measuredCandidateBytes": 2990366720,
+  "measuredReferenceBytes": 2045272064,
+  "previousArchiveRetainedInRun": "pre-decision-validation.zip",
+  "matchedControl": "run/memory-reference/capture-results.json",
+  "rationale": "Candidate exceeds the host working-set budget in the matched four-frame load and the GPU P95 target in the latest short test."
+}

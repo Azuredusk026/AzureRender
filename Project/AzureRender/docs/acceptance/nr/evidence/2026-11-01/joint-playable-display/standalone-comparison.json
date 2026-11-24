@@ -1,0 +1,172 @@
+{
+  "status": "measured",
+  "scope": "Five frozen character interior rectangles. Geometry-only preserves world lights and display; source-standalone uses the original independent scene settings, ten actor lights, one character resource and no environment geometry.",
+  "worldImageSha256": "368360534cdf731101794b4af511e91773b6d62ade57cf9203af1ec37767c0cb",
+  "cases": [
+    {
+      "name": "geometry-only",
+      "imageSha256": "5da27297aa674b8e9b62d8714250843fae597ce46293d8cf1126374b135744be",
+      "regions": [
+        {
+          "region": "hair-crown",
+          "bounds": [
+            710,
+            400,
+            820,
+            550
+          ],
+          "referenceMedianLinearLuminance": 0.08709970069185466,
+          "worldMedianLinearLuminance": 0.08709970069185466,
+          "medianLuminanceRelativeError": 0.0,
+          "staticLuminanceSsim": 1.0,
+          "maximumLinearError": 0.0,
+          "passed": true
+        },
+        {
+          "region": "hair-fringe",
+          "bounds": [
+            700,
+            570,
+            800,
+            650
+          ],
+          "referenceMedianLinearLuminance": 0.10634105044238344,
+          "worldMedianLinearLuminance": 0.10634105044238344,
+          "medianLuminanceRelativeError": 0.0,
+          "staticLuminanceSsim": 1.0,
+          "maximumLinearError": 0.0,
+          "passed": true
+        },
+        {
+          "region": "face-cheek",
+          "bounds": [
+            705,
+            852,
+            795,
+            885
+          ],
+          "referenceMedianLinearLuminance": 0.24342624543598126,
+          "worldMedianLinearLuminance": 0.24342624543598126,
+          "medianLuminanceRelativeError": 0.0,
+          "staticLuminanceSsim": 1.0,
+          "maximumLinearError": 0.0,
+          "passed": true
+        },
+        {
+          "region": "face-chin",
+          "bounds": [
+            770,
+            960,
+            810,
+            985
+          ],
+          "referenceMedianLinearLuminance": 0.23468898465164917,
+          "worldMedianLinearLuminance": 0.23468898465164917,
+          "medianLuminanceRelativeError": 0.0,
+          "staticLuminanceSsim": 1.0,
+          "maximumLinearError": 0.0,
+          "passed": true
+        },
+        {
+          "region": "eye-left",
+          "bounds": [
+            625,
+            784,
+            683,
+            814
+          ],
+          "referenceMedianLinearLuminance": 0.10328892483378924,
+          "worldMedianLinearLuminance": 0.10328892483378924,
+          "medianLuminanceRelativeError": 0.0,
+          "staticLuminanceSsim": 1.0,
+          "maximumLinearError": 0.0,
+          "passed": true
+        }
+      ],
+      "interiorCriteriaPassed": true
+    },
+    {
+      "name": "source-standalone",
+      "imageSha256": "afa9c853774b446a87dd48f186bca9d73bd192f977b7d89ec74b8c16a808d068",
+      "regions": [
+        {
+          "region": "hair-crown",
+          "bounds": [
+            710,
+            400,
+            820,
+            550
+          ],
+          "referenceMedianLinearLuminance": 0.08709970069185466,
+          "worldMedianLinearLuminance": 0.08709970069185466,
+          "medianLuminanceRelativeError": 0.0,
+          "staticLuminanceSsim": 0.9998374037865481,
+          "maximumLinearError": 0.00494581581532999,
+          "passed": true
+        },
+        {
+          "region": "hair-fringe",
+          "bounds": [
+            700,
+            570,
+            800,
+            650
+          ],
+          "referenceMedianLinearLuminance": 0.10638851735723548,
+          "worldMedianLinearLuminance": 0.10634105044238344,
+          "medianLuminanceRelativeError": 0.00044616577081012525,
+          "staticLuminanceSsim": 0.9998433148393197,
+          "maximumLinearError": 0.005342457364233721,
+          "passed": true
+        },
+        {
+          "region": "face-cheek",
+          "bounds": [
+            705,
+            852,
+            795,
+            885
+          ],
+          "referenceMedianLinearLuminance": 0.24342624543598126,
+          "worldMedianLinearLuminance": 0.24342624543598126,
+          "medianLuminanceRelativeError": 0.0,
+          "staticLuminanceSsim": 0.9997987349616373,
+          "maximumLinearError": 0.004634888943591431,
+          "passed": true
+        },
+        {
+          "region": "face-chin",
+          "bounds": [
+            770,
+            960,
+            810,
+            985
+          ],
+          "referenceMedianLinearLuminance": 0.23468898465164917,
+          "worldMedianLinearLuminance": 0.23468898465164917,
+          "medianLuminanceRelativeError": 0.0,
+          "staticLuminanceSsim": 0.99977692752159,
+          "maximumLinearError": 0.0045197905582090026,
+          "passed": true
+        },
+        {
+          "region": "eye-left",
+          "bounds": [
+            625,
+            784,
+            683,
+            814
+          ],
+          "referenceMedianLinearLuminance": 0.1015269684618973,
+          "worldMedianLinearLuminance": 0.10328892483378924,
+          "medianLuminanceRelativeError": 0.01735456498490053,
+          "staticLuminanceSsim": 0.9986741916982084,
+          "maximumLinearError": 0.1788863356492898,
+          "passed": true
+        }
+      ],
+      "interiorCriteriaPassed": true
+    }
+  ],
+  "visualAcceptance": "failed-user-review"
+}

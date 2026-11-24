@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "preexistingEditsExcludedFromStaging": true,
+  "files": [
+    {
+      "path": "CMakeLists.txt",
+      "baselineHeadSha256": "708206ef333810cbc396e536d6a11660f4292bc1e59971ee449395c5c15006f9",
+      "baselineWorkSha256": "958bd02ad4fa36f116c1a486b0a74c7834ca6cfdf534c78fec799df9289543ae",
+      "currentWorkSha256": "62fec7614e88721f51d7bae53f0854faa595ceacf317b728034499a38473814c",
+      "authorizedIncrement": true,
+      "preexistingEdits": true
+    },
+    {
+      "path": "README.md",
+      "baselineHeadSha256": "926f2a60f15de8cef036bba85b4643f5b45b35e4fbaeb950eaea1a6eae08a9b4",
+      "baselineWorkSha256": "5d4b307903e445c76e9a94cd1e1f6e57156a6bb93fca22fb28af4cc560c0fbdc",
+      "currentWorkSha256": "82459a18b4cc503e3833ef9c9f35032ab3a9ccd842e402891f47402bba105b15",
+      "authorizedIncrement": true,
+      "preexistingEdits": true
+    },
+    {
+      "path": "CHANGELOG.md",
+      "baselineHeadSha256": "0ac9841e3160b9e32bf81962b11e9cf953e73d4743907ac3ab7076f259322b20",
+      "baselineWorkSha256": "8d92fbd5e8fb28efd2f6155927b044c81ec1f1b29c9071f5733b12206a757068",
+      "currentWorkSha256": "84f9f2862540bbde7e1dd4d18fde300e3b65bff83ad641f56bbe6a723d22df90",
+      "authorizedIncrement": true,
+      "preexistingEdits": true
+    },
+    {
+      "path": "docs/plans/azure-engine-plan.md",
+      "baselineHeadSha256": "8ae0aa20155105d72ac67e65ea097a36c3f7b246fd765dfa7322b1c3e5afa0c1",
+      "baselineWorkSha256": "4cc8b7fb7bad59f0b3f25916eab9372efa76dc9411717f5d12b089b8ebdef97f",
+      "currentWorkSha256": "7b2901d95fdb879fabdc4d306dc035fd2b8ebf72850075aa376c6458aa15a1dc",
+      "authorizedIncrement": true,
+      "preexistingEdits": true
+    },
+    {
+      "path": "src/editor/EditorSession.hpp",
+      "baselineHeadSha256": "4d75f38558eaa7b3e3642a0d6d7100cc8b03fabeeff9cd9191bc6c421c946b65",
+      "baselineWorkSha256": "4d75f38558eaa7b3e3642a0d6d7100cc8b03fabeeff9cd9191bc6c421c946b65",
+      "currentWorkSha256": "e3d89a1fa48b77469c034d113cc404e1caa61e1265c90e15e773082ad60f7848",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/editor/EditorSession.cpp",
+      "baselineHeadSha256": "82c75b10bfe9cc8225faa3a10f5a33de7d5689585fbb230fe2114ad82d89cd82",
+      "baselineWorkSha256": "82c75b10bfe9cc8225faa3a10f5a33de7d5689585fbb230fe2114ad82d89cd82",
+      "currentWorkSha256": "5b3feacf35a1247183998e39f5184df8d494e7981141317c06dce6bc894a6fab",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/editor/commands/EditorOperations.cpp",
+      "baselineHeadSha256": "aba27762b1279ed4d9934b452dd6b32021d23d78d2e82d018f20a0f12c85aef2",
+      "baselineWorkSha256": "aba27762b1279ed4d9934b452dd6b32021d23d78d2e82d018f20a0f12c85aef2",
+      "currentWorkSha256": "8018792fdd113a01e9681cb7ee62cbb86ca83c8406706764111c31f03e0d4e87",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/editor/ImGuiEditorLayer.hpp",
+      "baselineHeadSha256": "b734290080e23dc4bd2c7039178402dbcf5909eac657779a603f9e82120f76a7",
+      "baselineWorkSha256": "b734290080e23dc4bd2c7039178402dbcf5909eac657779a603f9e82120f76a7",
+      "currentWorkSha256": "acaa0537848594e369bdbd6c49e2722b1a739c5c3758a985733668f6b46663f5",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/editor/panels/AssetBrowserPanel.cpp",
+      "baselineHeadSha256": "1b8a6b2dc10b3eba1617e3a14f83123bb5c7922cc104064124617aa5eb6e2f55",
+      "baselineWorkSha256": "1b8a6b2dc10b3eba1617e3a14f83123bb5c7922cc104064124617aa5eb6e2f55",
+      "currentWorkSha256": "5519835eb1f91512cd6c76acc917df2a53cb5a2411b0e16d805a5fc99e92f29b",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/editor/panels/TextureAssetPanel.cpp",
+      "baselineHeadSha256": "58f8c9e24535292cb78b5d1ec50610f076ff244dbb853d87ce8d893923f04669",
+      "baselineWorkSha256": "58f8c9e24535292cb78b5d1ec50610f076ff244dbb853d87ce8d893923f04669",
+      "currentWorkSha256": "58f8c9e24535292cb78b5d1ec50610f076ff244dbb853d87ce8d893923f04669",
+      "authorizedIncrement": false,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/app/AzureRenderCapture.cpp",
+      "baselineHeadSha256": "60d9a0958339795f6edf8f0c2791ec5c49d1291d993b41a7fb2199dc1fbeccef",
+      "baselineWorkSha256": "3107738ca2862c3b022de39f456437f0ae3e63ed7a2d25c21d4b94dda85aa321",
+      "currentWorkSha256": "73a57e1fa3a27c3b628024f3807998a03e08af33583fda908507c51b8f368ebc",
+      "authorizedIncrement": true,
+      "preexistingEdits": true
+    },
+    {
+      "path": "src/app/AzureRenderApp.cpp",
+      "baselineHeadSha256": "342541ff33e78c026a85eb86faeb9ad115293afb7f7f00f45a53e45fc2f570c0",
+      "baselineWorkSha256": "774157a4b6a32f0856990d4a420cfffc4af0e074f39bb9fe8d3a2cffb429798b",
+      "currentWorkSha256": "42b1863b44a3e52a2b33a8f2041e7e5510cb49092927c29dfab408335f47f678",
+      "authorizedIncrement": true,
+      "preexistingEdits": true
+    },
+    {
+      "path": "src/editor/ImGuiEditorLayer.cpp",
+      "baselineHeadSha256": "f31e1d2aac0a14594143464ef926eb7d213d11789103c6e4bf2bfb9c210357e0",
+      "baselineWorkSha256": "f31e1d2aac0a14594143464ef926eb7d213d11789103c6e4bf2bfb9c210357e0",
+      "currentWorkSha256": "486c31c51bf678ace9e1585b200dbd9463181115e76b1f26b6b3bd4c1b7289ae",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/editor/panels/OutlinerPanel.cpp",
+      "baselineHeadSha256": "bead3d20226508bffe43e1d6afce07d771ab460e96e73ce6ffba85fd4fb07e4b",
+      "baselineWorkSha256": "bead3d20226508bffe43e1d6afce07d771ab460e96e73ce6ffba85fd4fb07e4b",
+      "currentWorkSha256": "023c8b1e81e65c7c52307cae59a34b0cbe8722157e61449b8ba5c4fe1002709a",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/app/AzureRenderDevtools.cpp",
+      "baselineHeadSha256": "ab26eb66cd89d507f9164211ff312fd078cd207b2c7a65c5c54a5ebe11773691",
+      "baselineWorkSha256": "ab26eb66cd89d507f9164211ff312fd078cd207b2c7a65c5c54a5ebe11773691",
+      "currentWorkSha256": "ee08abf6ce0d7ffc4b3be8b88b0e7c26f66ebb206ba2a0ddfd648893315bcf76",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/assets/image/ImageEncoder.hpp",
+      "baselineHeadSha256": "54da5bc610e7c4e9d43e6f3b82087c4a56a13219f6564d62409f7bcd7a22d0a4",
+      "baselineWorkSha256": "54da5bc610e7c4e9d43e6f3b82087c4a56a13219f6564d62409f7bcd7a22d0a4",
+      "currentWorkSha256": "36228ff9379c8bc715a63e6feac26312ba3cb156d4bf02e72190a9b479f14ee2",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/assets/image/ImageEncoder.cpp",
+      "baselineHeadSha256": "9f192e9b9b1239b3deb1f5ad31604e69f0e05ebf598a8c6931ca252d699202a1",
+      "baselineWorkSha256": "9f192e9b9b1239b3deb1f5ad31604e69f0e05ebf598a8c6931ca252d699202a1",
+      "currentWorkSha256": "331ac871aaae526d24758729eff791da3b1db8a1933538cf4886484a79f3bf29",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/app/AzureRenderFrame.cpp",
+      "baselineHeadSha256": "b8a24c39fdbb4ca7566f933e18d1783a5c10730f2f8125bacf0a28b08f5b97f0",
+      "baselineWorkSha256": "b8a24c39fdbb4ca7566f933e18d1783a5c10730f2f8125bacf0a28b08f5b97f0",
+      "currentWorkSha256": "1addb7b2861987a45d32081c781177e328002eaf69b94f431f43395c72b66574",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/diagnostics/GpuCapabilityReport.cpp",
+      "baselineHeadSha256": "3071c1bbbbc45343c9cc980aac69086cd6df6c6bab8e935f47aea0d5c98dc988",
+      "baselineWorkSha256": "3071c1bbbbc45343c9cc980aac69086cd6df6c6bab8e935f47aea0d5c98dc988",
+      "currentWorkSha256": "669ee348923228712aea5c22f752e5d369df3de5705fa653659f4bf00c3dc5cf",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/app/AzureRenderGameplay.cpp",
+      "baselineHeadSha256": "6b4ca45b0c27114ed278e585c6f9edb28d176f2fb5a93ad627f674dc9fda8fc5",
+      "baselineWorkSha256": "6b4ca45b0c27114ed278e585c6f9edb28d176f2fb5a93ad627f674dc9fda8fc5",
+      "currentWorkSha256": "917c1317082dcfdb494ba0079eefac7f380309566222ecaae007268b49c82386",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/editor/EditorContext.cpp",
+      "baselineHeadSha256": "23d2145273626d4f6190f3ed422077a01f4bc8129e3a178fa82d64b4c350d181",
+      "baselineWorkSha256": "23d2145273626d4f6190f3ed422077a01f4bc8129e3a178fa82d64b4c350d181",
+      "currentWorkSha256": "1122368065c106a79c7fe6df6e3448c90b071e880f268ebad8d1fe6f2056cd65",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/runtime/SceneDocument.cpp",
+      "baselineHeadSha256": "cce604de3a3219c58b60314e533c4463f9dec1b723fe517cafb11dd35337478c",
+      "baselineWorkSha256": "cce604de3a3219c58b60314e533c4463f9dec1b723fe517cafb11dd35337478c",
+      "currentWorkSha256": "886ff8486b8cc105c1170b9eb48547ae6cbda144a96e861435f1488052d3c702",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/runtime/Level.cpp",
+      "baselineHeadSha256": "0b28ff7aa99edf7b643e1ce9e0e88e8253f2e975161469d3913086d47432b7bc",
+      "baselineWorkSha256": "0b28ff7aa99edf7b643e1ce9e0e88e8253f2e975161469d3913086d47432b7bc",
+      "currentWorkSha256": "673fdf275d361f63352a97ecb7ccccf2a78764e93b8894370311bb67af160e7b",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/main.cpp",
+      "baselineHeadSha256": "bfbe1781de53d899fbf3a58ba319951b2ccb555978d7d7cf2b5030d39306c22c",
+      "baselineWorkSha256": "bfbe1781de53d899fbf3a58ba319951b2ccb555978d7d7cf2b5030d39306c22c",
+      "currentWorkSha256": "15a660bacb8dc1dbc3c54e256aca719509998ce000a09ecb5a0266bb2eb84d00",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    },
+    {
+      "path": "src/editor/commands/EditRegistry.cpp",
+      "baselineHeadSha256": "a6d6e3dc6cb67993f9bb44f43227af22cbeaa38ef61aec2c283313ea3666f7ae",
+      "baselineWorkSha256": "a6d6e3dc6cb67993f9bb44f43227af22cbeaa38ef61aec2c283313ea3666f7ae",
+      "currentWorkSha256": "66df1a3ad8e89dec7e5d6311a961883e795ba57bb7e8c28a376af12d46b5b1dc",
+      "authorizedIncrement": true,
+      "preexistingEdits": false
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+settings set auto-confirm true
+target create "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe"
+process launch -s -w "D:/Assigment/2609/FYP/Project/AzureRender" -o "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug-native-entry/player.stdout.log" -e "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug-native-entry/player.stderr.log" -- --editor-close-policy save --editor-project "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-performance/editor/project.azureproject" --width 1920 --height 1080 --fixed-frame-step --smoke-frames 2100 --game-actions "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug-native-entry/input.json" --editor-actions "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug-native-entry/editor.json" --gpu-timing --gpu-timing-output "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug-native-entry/timing.json"
+breakpoint set -n NtAllocateVirtualMemory -s ntdll.dll
+breakpoint command add 1
+register read rcx rdx r8 r9 rsp
+memory read -s 8 -f x -c 1 $r9
+memory read -s 8 -f x -c 1 $rdx
+thread backtrace -c 18
+continue
+DONE
+continue
+breakpoint list
+process status
+quit

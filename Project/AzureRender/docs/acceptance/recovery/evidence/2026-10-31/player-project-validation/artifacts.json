@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "path": "morph-closure-diagnosis.json",
+      "bytes": 464,
+      "sha256": "d720cd3059d378848269a47b8835fecd285f3a0cd72db6c931926770ffefcd39"
+    },
+    {
+      "path": "player-cli-build-debug.log",
+      "bytes": 471,
+      "sha256": "84d2ff94df45daf208b470d9f36b39915e0e25fccf1b250cb482b0ce194d0688"
+    },
+    {
+      "path": "player-cli-build-release.log",
+      "bytes": 473,
+      "sha256": "12fbfa4381c7e86e6ec9108ed1a5414145522a97b450ebeb6e700e41ce8f1bce"
+    },
+    {
+      "path": "player-cli-green-debug.log",
+      "bytes": 360,
+      "sha256": "ef7a11b9ee0a517e7e569bb0d6347e84335a6958d342944534e070b65d6713a2"
+    },
+    {
+      "path": "player-cli-green-release.log",
+      "bytes": 364,
+      "sha256": "9c55a291454c9d5956a8efba88ed7c9a648375cddbbc204142091691aa11dd4d"
+    },
+    {
+      "path": "player-cli-red.log",
+      "bytes": 468,
+      "sha256": "f812fc7a26b1c9d2f536913e749ca526f2ff39278ac1bd7f2c7ea28e8ed48dce"
+    },
+    {
+      "path": "project-check-red.log",
+      "bytes": 140,
+      "sha256": "82416358c195c0f4daf2525739f17e42a1a3d0c41cf245420f48cc0a9f4f4bdc"
+    },
+    {
+      "path": "project-check.log",
+      "bytes": 117,
+      "sha256": "0cc62ca30daa64b27cb784b13a690f6f560ebdfe848ce1689eba434cd8381c0a"
+    },
+    {
+      "path": "project-closure-repair.json",
+      "bytes": 1118,
+      "sha256": "fde3de139a4797159ee535b6a6e5b5a8b20d582c841299e08567058e03d3626b"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 919,
+      "sha256": "4cb061ca7ec6e471c1302fe23356fd4e50a6a389922e8dccb27e45262278314f"
+    }
+  ]
+}

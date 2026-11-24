@@ -1,0 +1,13 @@
+{
+  "programSourceCommit": "39811d70cf282de2e8ad0e6ccf4d95bdd4201374",
+  "files": {
+    "tools/endfield_native/npr_lighting.py": {
+      "workingSha256": "2c21b83560a94528ab92b08f58293203e0a19ff404dd2f9064f5e851319faeda",
+      "lfSha256": "2c21b83560a94528ab92b08f58293203e0a19ff404dd2f9064f5e851319faeda"
+    },
+    "tools/test_native_npr_lighting.py": {
+      "workingSha256": "67423cf6c5d9bc779da8f600c126d70c484f31774c9f2300ac14454209935dcd",
+      "lfSha256": "67423cf6c5d9bc779da8f600c126d70c484f31774c9f2300ac14454209935dcd"
+    }
+  }
+}

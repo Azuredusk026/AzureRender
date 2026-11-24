@@ -1,0 +1,25 @@
+{
+  "status": "fog-interface-regression-passed-visual-quality-pending",
+  "baseCommit": "ca9a217",
+  "module": "AzureRenderCore",
+  "scope": "Existing ViewFogState pipeline pairing and module lifetime. Scene-only NPR candidate and fixed-eye/temporal diagnostics remain separate from visual acceptance.",
+  "redValidationWarnings": 4,
+  "gpuCasesPerConfiguration": 34,
+  "maximumLinearError": 0.0022506575296962206,
+  "linearBudget": 0.008,
+  "cpuChecksPerConfiguration": 7,
+  "hiddenEnvironmentFramesStrictlyEqual": 12,
+  "completeSceneFramesPerConfigurationStrictlyEqual": 3,
+  "portraitTemporalFramesStrictlyEqual": 32,
+  "portraitHighFramesStrictlyEqual": 1,
+  "referenceEntries": 4,
+  "lockedInputsPerEntry": [
+    1786,
+    1787,
+    298,
+    302
+  ],
+  "visualAcceptance": "pending",
+  "originalHistoricalPixelCompatibility": "pending",
+  "performanceAcceptance": "pending"
+}

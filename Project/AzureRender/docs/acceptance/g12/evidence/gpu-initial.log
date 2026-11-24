@@ -1,0 +1,23 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 185: AzureEditor.ContentTransactionsGpu
+1/1 Test #185: AzureEditor.ContentTransactionsGpu ...***Failed   34.60 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content_transactions.py", line 83, in <module>
+    run(args.executable.resolve(), args.output.resolve())
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content_transactions.py", line 47, in run
+    assert result['widgets']['texture.dialog'][2] >= 558, result['widgets']['texture.dialog']
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'texture.dialog'
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+gpu    =  34.60 sec*proc (1 test)
+
+Total Test time (real) =  34.61 sec
+
+The following tests FAILED:
+	185 - AzureEditor.ContentTransactionsGpu (Failed)
+Errors while running CTest

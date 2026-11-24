@@ -1,7 +1,8 @@
 #pragma once
 
 #include "render/RenderSettings.hpp"
-#include "editor/SceneModel.hpp"
+#include "runtime/SceneDocument.hpp"
+#include <nlohmann/json.hpp>
 
 #include <cstdint>
 #include <memory>
@@ -10,9 +11,23 @@
 
 namespace azurerender {
 class EditorSession;
+class ProjectStartup;
 }
 
 struct AzureRenderOptions {
+    std::string projectFile;
+    std::shared_ptr<const azurerender::ProjectStartup> projectStartup;
+    std::string editorActionsPath;
+    std::string editorClosePolicy="ask";
+    std::string runtimeReportPath;
+    std::string gameActionsPath;
+    std::string settingsFile,defaultSettingsFile,projectSettingsFile;
+    std::string aiPython="python",aiConfig,aiFixture;
+    std::string shaderReloadConfig,previewViews;
+    nlohmann::json settingOverrides=nlohmann::json::object();
+    std::string validationScript,validationReport,validationTokenEnvironment,validationEndpoint;
+    std::string validationAddress="127.0.0.1";
+    std::uint16_t validationPort=0;
     std::string assetPath;
     std::string resourceRoot;
     std::string environmentPath;
@@ -24,6 +39,7 @@ struct AzureRenderOptions {
     std::uint32_t height = 720;
     bool portfolioMode = false;
     bool gpuTimingEnabled = false;
+    bool gpuPassTimingEnabled = false;
     std::string gpuTimingOutput;
     // Force the fixed per-material descriptor path even when the device
     // supports descriptor indexing. Exists so the fallback path stays
@@ -32,9 +48,15 @@ struct AzureRenderOptions {
     // Disable frustum culling so every instance is submitted. The QA
     // toggle that proves both sides render identical frames.
     bool cullingDisabled = false;
+    bool qaDisableFaceCulling = false;
+    bool qaDisableDepthTest = false;
+    bool qaDisableSurfaceRadianceReuse = false;
     bool computeSkinningDisabled = false;
     bool parallelRecordingDisabled = false;
+    bool pipelineInspectionDisabled = false;
+    bool pipelineStatistics = false;
     bool gpuCullingDisabled = false;
+    bool visibilityPrototype = false;
     bool multiDrawIndirectDisabled = false;
     bool fixedFrameStep = false;
     // QA stress knob: clone the default asset entity N times onto a grid to
@@ -45,9 +67,13 @@ struct AzureRenderOptions {
     bool technicalSequence = false;
     std::string qaCamera;
     std::string qaLight;
+    bool qaLightScan = false;
+    bool qaAnimation = false;
     std::string qaEffect;
     std::string qaEffectState;
     std::string qaIsolation;
+    std::optional<float> qaExposureEv;
+    bool qaShowcasePresentation = false;
     std::string renderPathName;
     bool editorMode = false;
     std::string editorScenePath;

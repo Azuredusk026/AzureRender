@@ -1,0 +1,1 @@
+{"schemaVersion": 1, "actions": [{"frame": 31, "action": "key", "key": 87, "down": true}, {"frame": 61, "action": "key", "key": 87, "down": false}, {"frame": 61, "action": "key", "key": 65, "down": true}, {"frame": 61, "action": "camera", "x": 600, "y": 0, "scroll": 0}]}

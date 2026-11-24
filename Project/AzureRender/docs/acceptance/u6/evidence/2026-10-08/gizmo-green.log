@@ -1,0 +1,1 @@
+[{"workflow": "exploration", "passed": true, "commit": true, "singleUndo": true, "escape": true, "focusLoss": true, "undo": true, "snap": true, "uniformScale": true}, {"workflow": "inspector", "passed": true, "commit": true, "singleUndo": true, "escape": true, "focusLoss": true, "undo": true, "snap": true, "uniformScale": true}]

@@ -1,0 +1,48 @@
+{
+  "phase": "NR5-R8-N",
+  "status": "public-reprojection-verified-main-integration-pending",
+  "sourceBaseCommit": "6e161ce",
+  "run": "build\\runs\\20261029-023153-reflection-reprojection-32dd36",
+  "bytesPerPixelPerSlot": 20,
+  "maximumImageBytes": 268435456,
+  "privateFrameBytes": 48,
+  "debugTestsPassed": 10,
+  "releaseTestsPassed": 10,
+  "gpuOutputsPerConfiguration": 208,
+  "independentlyCheckedScalarsPerConfiguration": 51220,
+  "gpuAbsoluteErrorBudget": 2e-06,
+  "liveCrossSlotHistoryVerified": true,
+  "vulkanValidationErrors": 0,
+  "allocatorAfterUnload": {
+    "buffers": 0,
+    "images": 0
+  },
+  "previousShaderFilesUnchanged": 208,
+  "newShaderSha256": {
+    "debug": "b54cc4ccbcf1dc7fdf7ede3815ce51afccfdac2e853daa0e024f02f24d472158",
+    "release": "b54cc4ccbcf1dc7fdf7ede3815ce51afccfdac2e853daa0e024f02f24d472158"
+  },
+  "mainSceneTemporalIntegrated": false,
+  "nativeAcceptanceWeightsEquivalent": false,
+  "nativeContinuousSequenceVerified": false,
+  "source": {
+    "src/render/ReflectionReprojection.cpp": "b2680f1722e4066c78883222626c5b688dff5a7f67b69dc7011f70629e58dc3c",
+    "src/render/ReflectionReprojection.hpp": "92715b86aae9d7b4a3484ef999f0e0f3e877d21cb8aa02fd1c35954e74940da8",
+    "shaders/reflection_reprojection.comp": "855b4cc1bcb9c7fa1b4787c97d2f6371554e87679c7a8605b3b81cae9b31ca11",
+    "tests/ReflectionReprojectionTests.cpp": "9b367b3fb522881fb43dee7b5761b9a85dd50e5ef605f1f27ae6edf072ae4ed3",
+    "tests/ReflectionReprojectionGpuTests.cpp": "496420aecb690d3f6e325c8848d4bd793ad1d5e0d6387b5dc06fdb3074366df8"
+  },
+  "logs": {
+    "red-build.log": "9692aef0a1536f80376434764aeedf96faed59cd27e72c1af5f577988ef6083b",
+    "red-test.log": "f0aa35c482fdee9a7c6794312aa919e57d2918035d9ca7ca9ab175f11973deaf",
+    "gpu-red-build.log": "a8f1c6c4387bdad176f7acfc3606d18c72958f0319416714c0b642483d69d7cd",
+    "gpu-red-test.log": "12261b3909f85ee59f75e0d02380d6a975cad6d87290be7ccf11313480a615bd",
+    "gpu-green-test.log": "631d6e364bddd724d79e119922a9c10116c36060198c8aff6c59fe194ad6aa4b",
+    "all-debug-build.log": "72cb5f39647d431b7553d290799f98038a2dabcb45c0655506475d25764487cb",
+    "all-release-build.log": "18e650851cd64ccfe4c7cf5e0236f85cb01535e5eccfc72040483d799a115f1f",
+    "regression-debug.log": "b6e3f626be02c109dfcd5296490924405a37cfcd7a34ef256bd10487f862cdc0",
+    "regression-release.log": "ea8961898db8678e61817e52749e994726b7441f92bd775e83cef33c8a48c6e2",
+    "live-debug-test.log": "28d41abb4a1571e995ad32ce14765a270e1d6366571ee745f051904bbd3ab39e",
+    "live-release-test.log": "73190685d250287e0c476d0a26172d5861f58cc5b38af187c0a0ef4c32cb73f1"
+  }
+}

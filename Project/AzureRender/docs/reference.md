@@ -122,12 +122,15 @@ overlay            bloom
 
 编辑器另使用 `Ctrl+Z`/`Ctrl+Y` 执行 Undo/Redo。
 
-## RenderSettings v7
+## RenderSettings v8
 
 | 字段 | 默认值 | 有效范围/语义 |
 | --- | --- | --- |
 | `sceneType` | Character | Character/Blackhole/Sample |
 | `renderPath` | Traditional | Traditional/Subpasses/Dynamic |
+| `cameraNear` | 0.1 | 0.01 至 10 米 |
+| `cameraFar` | 100 | 大于近裁剪距离，至多 5000 米 |
+| `shadowDistance` | 100 | 大于近裁剪距离，至多为远裁剪距离 |
 | `stylizedLightingEnabled` | true | Character 风格化总开关 |
 | `styleMaskStrength` | 1.0 | 0-2 |
 | `diffuseBandThreshold` | 0.40 | 0.05-0.95 |
@@ -289,13 +292,14 @@ capabilities -> onLoad -> (updateFrame -> recordScene)*
 
 `RenderContext` 提供 Device、Physical Device、Graphics Queue/Family 和 Command Pool。它也提供当前 Command Buffer、格式、Extent、公共 Render Pass 和 Framebuffer。其他字段包括 Shadow Map、环境、Shader 目录、Ramp 和 Timing Query。Renderer 只借用这些对象，不能销毁它们。
 
-内置 Renderer：
+场景渲染器按 API 17 注册。该版本的图形管线描述支持固定模板状态，渲染通道附件描述支持显式清除模板。
 
-| ID | API | Capabilities |
-| --- | ---: | --- |
-| `character` | 1 | geometry、editor、capture |
-| `blackhole` | 1 | fullscreen、temporal、capture |
-| `sample` | 1 | sdk-example、capture |
+| 内置渲染器 | 能力 |
+| --- | --- |
+| `character` | geometry、editor、capture |
+| `blackhole` | fullscreen、temporal、capture |
+| `pathtracing` | geometry、progressive、capture |
+| `sample` | sdk-example、capture |
 
 ## `.azscene` v2
 
@@ -314,13 +318,16 @@ prefabSource, instanceOf
 | 契约 | 版本 |
 | --- | ---: |
 | 应用 | 0.1.0-rc1 |
-| Renderer SDK / Registry API | 1 |
-| RenderSettings | 7 |
+| 场景渲染器注册 API | 17 |
+| `azure.camera` / `CameraViewDescriptor` | 2 |
+| RenderSettings | 8 |
 | `.azscene` | 2 |
-| Material Profile | 1 |
+| 材质画像 | 1、2 |
 | Face SDF Profile | 1 |
 | Showcase Look Catalog | 1 |
 | Toon Ramp Profiles | 1 |
+| `.azureproject` / `.azurelevel` / `.azureprefab` | 1 |
+| `game_manifest.json`（AzureGame） | 1 |
 
 ## 权威代码位置
 
@@ -334,6 +341,9 @@ prefabSource, instanceOf
 | Registry | `src/extensions/ExtensionRegistry.hpp`、`src/scenes/BuiltinRendererCatalog.cpp` |
 | Settings | `src/render/RenderSettings.*` |
 | glTF | `src/assets/GltfLoader.*` |
+| 程序化内容 | `src/assets/generators/ProceduralContracts.hpp` |
+| 刚体动作 | `src/assets/generators/RigTextContracts.hpp` |
+| 受控几何编译 | `src/devtools/GeometryProcessCompiler.*` |
 | Character | `src/scenes/CharacterSceneRenderer.*`、`shaders/mesh.*` |
 | Blackhole | `src/scenes/BlackholeSceneRenderer.*`、`shaders/blackhole*.frag` |
 | Composite | `shaders/inner_outline.frag` |

@@ -1,0 +1,30 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 18: AzureEditor.ProposalAdapter
+1/1 Test #18: AzureEditor.ProposalAdapter ......***Failed    0.40 sec
+[1791306993225][info][editor][code=0] Opened scene: test
+[1791306993229][info][editor][code=0] Opened scene: test
+[1791306993233][info][editor][code=0] Opened scene: test
+[1791306993234][info][editor][code=0] Selected node: candidate
+[1791306993243][info][editor][code=0] Opened scene: test
+[1791306993247][info][editor][code=0] Opened scene: test
+[1791306993250][info][editor][code=0] Opened scene: test
+[1791306993253][info][editor][code=0] Opened scene: test
+[1791306993256][info][editor][code=0] Opened scene: test
+[1791306993260][info][editor][code=0] Opened scene: test
+[1791306993261][info][editor][code=0] Selected node: duplicate
+[1791306993269][info][editor][code=0] Opened scene: test
+[1791306993273][info][editor][code=0] Opened scene: test
+[1791306993274][info][editor][code=0] Selected node: test
+[1791306993479][info][editor][code=0] Opened scene: courtyard
+[1791306993548][info][editor][code=0] Generated asset: assets:/generated-ai.json
+Adapter requires a registered text asset format
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.41 sec
+
+The following tests FAILED:
+	 18 - AzureEditor.ProposalAdapter (Failed)
+Errors while running CTest

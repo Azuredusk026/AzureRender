@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 1,
+  "sourceHash": "30c5d4e34742a99345e7cdab5eb862a22de862605821f58b8be7e8e42c6bbbd4",
+  "sourceFiles": 928,
+  "cpuTests": 326,
+  "environmentTests": 20,
+  "nativeProductsByteEquivalent": true,
+  "gpuTestsExecuted": 0,
+  "probes": [
+    {
+      "round": 1,
+      "diagnosticOnly": true,
+      "sourceStable": true,
+      "formalAcceptance": false
+    },
+    {
+      "round": 2,
+      "diagnosticOnly": true,
+      "sourceStable": true,
+      "formalAcceptance": false
+    },
+    {
+      "round": 3,
+      "diagnosticOnly": true,
+      "sourceStable": true,
+      "formalAcceptance": false
+    },
+    {
+      "round": 4,
+      "diagnosticOnly": true,
+      "sourceStable": false,
+      "formalAcceptance": false
+    }
+  ],
+  "rootCauseResolved": false,
+  "fullPerformancePassed": false,
+  "files": {
+    "environment-contracts.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-contracts.log",
+      "bytes": 761,
+      "sourceSha256": "af0f44e8c634867d053e6c1a9976c845228396a5b977b78e410ec48357b491ae",
+      "sha256": "cb0e69f605b0621c03cfa83c318ca4c53456beadb98491b90ca85122f97e5fcf"
+    },
+    "environment-green.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-green.log",
+      "bytes": 122,
+      "sourceSha256": "f7a22b1f55af5d9a2908e3222a7cc2ec7d9040a3753ef7b0e10ef67e1d818fee",
+      "sha256": "23bb80a648dc989016c25791f41f3ea231a4d5f8ec095fef523333fc5edc9d82"
+    },
+    "environment-persistence-green.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-persistence-green.log",
+      "bytes": 123,
+      "sourceSha256": "99b3bc0e6a8cb1a6e157c9eccb02f15b26e3a1ca234c9079b10faee512dfbb03",
+      "sha256": "adbdbb3ffaad26f2c314f2dd32adc34b7a7898f1bdd3b8f5d3560bb3b97ea61c"
+    },
+    "environment-persistence-red.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-persistence-red.log",
+      "bytes": 910,
+      "sourceSha256": "7c929a3d8da5356c4fa6a33ae0b0504346d667674e01d1bdc41a65f9511e9763",
+      "sha256": "9517806775533112cd4d9a1e4e559d7d32075900436855bede0fe349b3d290e3"
+    },
+    "environment-power-green.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-power-green.log",
+      "bytes": 124,
+      "sourceSha256": "49d2d24ba64194a64a37c21a48b027a71e29f99f72bece41d7691e9806dc4d1a",
+      "sha256": "f13dd36427a6608a5b3ecb6ec6a4ebdaabe2d7e7d3db0b7cf0613a91864c8dd0"
+    },
+    "environment-power-red.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-power-red.log",
+      "bytes": 753,
+      "sourceSha256": "78c9203285b7468df8930814e4b105f883c885e1eb0d727f01760caa966e98ed",
+      "sha256": "4a28e6bb63d01e129bc1ff1b61a20243df1f3bfe9570f7071d9aa020fd27b144"
+    },
+    "environment-probe-1.csv.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-1.csv",
+      "bytes": 110250,
+      "sourceSha256": "e35054d4ed232a47334a9614a5b9eb6303b227f3fc487e78ffcffc137bf46b6b",
+      "sha256": "6a8449f3a6117ddf58b39af8094c155ea1f08182d8ecab563e66a1b369718634"
+    },
+    "environment-probe-1.environment.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-1.environment.json",
+      "bytes": 905138,
+      "sourceSha256": "27bd46041ae79e1efcfbdeb1bae5eb84beef797a813a86dd984d66bdbb6f1f94",
+      "sha256": "7099f0140b241f681c73db6b2cc5559078f55b96dfb951f97ee9ed45d4865439"
+    },
+    "environment-probe-1.input.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-1.input.json",
+      "bytes": 1687,
+      "sourceSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    "environment-probe-1.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-1.json",
+      "bytes": 118484,
+      "sourceSha256": "94b9be0eb3a96d3bea162f9cdb79eb7545259e4259aae8ddc1a7646dab5610ff",
+      "sha256": "c624d54bf2a674b9f465dff8b0a6fb305361b975dcec533623a31e64e82852a7"
+    },
+    "environment-probe-1.memory.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-1.memory.json",
+      "bytes": 42021,
+      "sourceSha256": "a95dc58865b7a249b49bc6ae0ccc733bfab6e8ab86f199ae5ea7f8e8d33e035c",
+      "sha256": "cc3db80bbc855eab7b39c960a5215a74354d2715cd90628bd9763891e8161602"
+    },
+    "environment-probe-1.result.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-1.result.json",
+      "bytes": 988711,
+      "sourceSha256": "a65b4b518473319fe8816bc379c033184dd98bb1cbfde70cc4f07f6671771750",
+      "sha256": "a37766a3cd0a500ef7de29a646ba8b1aa56af60314ae633055602c200b0c0d47"
+    },
+    "environment-probe-1.stderr.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-1.stderr.log",
+      "bytes": 393,
+      "sourceSha256": "ad0320256ed651208b6a3eb8d1a334d375dc1e6f3809200a290d5fd8dd9472a8",
+      "sha256": "ef962cf2f36152e3c0de7d97b42d599db35b508644ce84a3b73d4ac36e89be9c"
+    },
+    "environment-probe-1.stdout.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-1.stdout.log",
+      "bytes": 2054,
+      "sourceSha256": "e3dd252172322f46f59da8e9f188dd50f46368bce9b0b41d5c19e58395f7294f",
+      "sha256": "eb2b6675d19e886b03c0a06ba7acbd45f07c7eba03cd3cc2f1c85495edd71cd0"
+    },
+    "environment-probe-2.csv.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-2.csv",
+      "bytes": 112317,
+      "sourceSha256": "722ed6cfbca30ccb6153ed7aa16309a01a5e89a3e26d330112ef6e934fd87148",
+      "sha256": "a239ed3ecdf0bd7b53885a39a322bc8cb01a60d19aa752e4ea6e51e22cd43201"
+    },
+    "environment-probe-2.environment.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-2.environment.json",
+      "bytes": 1056143,
+      "sourceSha256": "61566d23b4cfd42f74c115d478b5459c58494bc1efe6499cb062463618159215",
+      "sha256": "23f7eba62b1ed227b949c1f384ac6c1ca5e28312f731b4e794c44347803581f4"
+    },
+    "environment-probe-2.input.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-2.input.json",
+      "bytes": 1687,
+      "sourceSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    "environment-probe-2.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-2.json",
+      "bytes": 119874,
+      "sourceSha256": "f2323174c1d4bb042eae93401b00209ea82a6d1aa05cf2ee8c68ab97a5fe11d8",
+      "sha256": "a5cc35976fc50b0571def13849543d47aa0a1f42cd0e6e9c7b228393e170d3c3"
+    },
+    "environment-probe-2.memory.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-2.memory.json",
+      "bytes": 60400,
+      "sourceSha256": "44bd7642a7bf2b569249878d0b4f7656c4708523155a7863ecd0bea14b26a730",
+      "sha256": "c7207c24fb7e913ee11f2b495918dfdd6f76e90a23ee106243d85d726907985f"
+    },
+    "environment-probe-2.result.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-2.result.json",
+      "bytes": 1142291,
+      "sourceSha256": "e45a89c93f92fd4c7e54904c33112ed7a8c50ce7b6b3820f46916928429ef472",
+      "sha256": "d5871a6f0ed467a4beecad36f27e4412e616d07aa3cb8b53b7d7df1a54704eee"
+    },
+    "environment-probe-2.stderr.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-2.stderr.log",
+      "bytes": 394,
+      "sourceSha256": "3cfd40f06a98e2be4a554c4ed6f5819f57954ad9e85d63eaf798c9a186cc502b",
+      "sha256": "e9231bce4fbbc898c6a02f2ef9cc24471e5002bda9775eb52275ef9da33402cd"
+    },
+    "environment-probe-2.stdout.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-2.stdout.log",
+      "bytes": 2059,
+      "sourceSha256": "98942d95909c1df9f78af3c047577ddd266f278f4e19ee9dd8a79e034be2316e",
+      "sha256": "970719ade6757f5bf4bdc400f13234eea71a63dc8aa770241dbd14310844a476"
+    },
+    "environment-probe-3.csv.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-3.csv",
+      "bytes": 110258,
+      "sourceSha256": "f5b8d9b87b0fa660d32b2dcc279df948e8c27b140cb9ec9ec86a12ff77cc4d97",
+      "sha256": "d4e437b203a44341854ff0897b49c1f27594c81359f965465581ce396b937393"
+    },
+    "environment-probe-3.environment.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-3.environment.json",
+      "bytes": 980440,
+      "sourceSha256": "e55f462ddf10ec77874a0e8aa40a3dc786356980c992677fdd5dfc4e20b06dd5",
+      "sha256": "4aaacfe1cdd2b5830fa44fdbd0c00a16152689b0fd56b564c157bf6fb7cda437"
+    },
+    "environment-probe-3.input.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-3.input.json",
+      "bytes": 1687,
+      "sourceSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    "environment-probe-3.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-3.json",
+      "bytes": 118373,
+      "sourceSha256": "d6b960ee924b742589cb30416ef95f3554769236651e9b9d72b18055f935731a",
+      "sha256": "886cd8241f2c95bbaeb2a96c0bbbd85c0d6872411da721d3932e4ebd606da66c"
+    },
+    "environment-probe-3.memory.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-3.memory.json",
+      "bytes": 44329,
+      "sourceSha256": "94224259594effdeb1db1730f704338579d1cb2ececb573fcc8ace04674054bd",
+      "sha256": "df322638511cb9013a8f20d19655a59dbf2534f2677a42eb99f41b10dff85dc6"
+    },
+    "environment-probe-3.result.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-3.result.json",
+      "bytes": 1064672,
+      "sourceSha256": "821e62dac90522fa54c4febec268628ffa454cfb1493a5f473fa2e9d43c07332",
+      "sha256": "ab035d7fbbfe741fe7c4083a14cfab976d3e7ba4c3d78e3aa7179c9573b1251e"
+    },
+    "environment-probe-3.stderr.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-3.stderr.log",
+      "bytes": 393,
+      "sourceSha256": "9d64e296712dd142e794b17a56e58bd7137bd57c31e270bb586be088dd08c016",
+      "sha256": "3c24eaf8346236f8cad456014742fe804d1641a492839904190e1c4c50648ad5"
+    },
+    "environment-probe-3.stdout.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-3.stdout.log",
+      "bytes": 2054,
+      "sourceSha256": "e4f654076307990ff8f52903dc87a99713a5b3acd9ebc51e54591d6e4cee4f4c",
+      "sha256": "cc7821d23aaacb07936a9b5d7a749edabc55d11fe251101fa89cc2facaa05026"
+    },
+    "environment-probe-4.csv.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-4.csv",
+      "bytes": 112373,
+      "sourceSha256": "af9ac871fdf6a3113e1fcf07197b8d3118d868593471d421a6d8607fc991230c",
+      "sha256": "9e22a657fac904f0b3bf5ee8760b7a33377fa34b884fb6c85506a543a943df19"
+    },
+    "environment-probe-4.environment.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-4.environment.json",
+      "bytes": 1056157,
+      "sourceSha256": "ffdae6ee32ff3b2ed12f3ded4d0b1d5123841bfe16b860beb16cf7dec5afd5c5",
+      "sha256": "ff078a900b7ef1b2bf4910e2675ae8f1e2fa88ce3f0169092fc701df728f92b1"
+    },
+    "environment-probe-4.input.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-4.input.json",
+      "bytes": 1687,
+      "sourceSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    "environment-probe-4.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-4.json",
+      "bytes": 119913,
+      "sourceSha256": "22f80633e8bd4358e3a84f3db394f4b89ab08576ff5beb901bf22c65fff9472a",
+      "sha256": "952fe07f6d16cfbf28884b692052a61f2261506afc95045220a6194dec9e8647"
+    },
+    "environment-probe-4.memory.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-4.memory.json",
+      "bytes": 61658,
+      "sourceSha256": "4dfe259399d6c157defee3013b4e65f927f15a9bb37dea89671fb035e21dd635",
+      "sha256": "7577550dad547e3f8d96f9eb4cd3649a683f547b3dda3d99d70c75dec2056811"
+    },
+    "environment-probe-4.result.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-4.result.json",
+      "bytes": 1142404,
+      "sourceSha256": "1c21455cd9f29109febde45928394bc4b5b739f3aec3b83f87a1f42f53f283c8",
+      "sha256": "fe7cd8b14b36a79b2cc4d1c716a1d8c3f38f861986dd4baeb822c80db87832a9"
+    },
+    "environment-probe-4.stderr.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-4.stderr.log",
+      "bytes": 394,
+      "sourceSha256": "98fcd8a9f11761dc41ef6e17f552c50c9467d472999b354cd326960eba8d874f",
+      "sha256": "e44cc4873d4fc23e6aadebca798b96998a48cfef0e52a2fcface398ff6f992e3"
+    },
+    "environment-probe-4.stdout.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-4.stdout.log",
+      "bytes": 2059,
+      "sourceSha256": "31a0721f6d31c9811ee49185d690265ee56c337b69694e6df3dcd345fba29145",
+      "sha256": "0bfa1c7ddf8af29366f65f819118480361a0f86b3fa8ec0d86cb077d4119eb73"
+    },
+    "environment-probe-summary.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probe-summary.json",
+      "bytes": 2357,
+      "sourceSha256": "306a58d753de40ab52b49907e703a24403f8df22871a8547cdb22ebf5a101742",
+      "sha256": "ad460dddd3c3ae6fc1ecf8e8059e86cde7e106b6c5f18a4cd4aec651b7b69dfc"
+    },
+    "environment-probes.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-probes.log",
+      "bytes": 3161,
+      "sourceSha256": "63145ffe56a666b1d8438a77b7574dd0f50080d6140c9e26665455411f8cb665",
+      "sha256": "346ba8cb9cc18511ecd79300fc9e1ad23472635fd0160a3981d07477a43b718d"
+    },
+    "environment-red.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/environment-red.log",
+      "bytes": 2995,
+      "sourceSha256": "c31eb98c0320a5f9fcc4f3c5b5c2531e1b7025bc4a9e2f20d47219d2edbfbad8",
+      "sha256": "91730a21a4cc383c46a69889e598622a577f4fffe8af7f3ceb0901c2ab5a8ad5"
+    },
+    "tools-regression.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/tools-regression.log",
+      "bytes": 15657,
+      "sourceSha256": "d95661a81aecd46097febf5c399e48dd507b32ba61704482126f2cb4ea73afad",
+      "sha256": "03f5e16fe9e994de64dbf489b20e5cc9b630c378e816221d1b20eb1975e26448"
+    },
+    "monitor-build.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/monitor-build.log",
+      "bytes": 2052,
+      "sourceSha256": "35c4e6e4df199ffc42eb72dd91d176af473b5dd84c9c0f2f23cde7a36784aff4",
+      "sha256": "413c199ef88cbb8196bf715f142dd61051f856fbdc25294eb0ae00f761a1ab5e"
+    },
+    "monitor-debug-cpu.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/monitor-debug-cpu.log",
+      "bytes": 21629,
+      "sourceSha256": "45e8a525f079c78fb8b3e435b7a5feb0945beb5cfd97ce9357a2484280a991b6",
+      "sha256": "6647d4435f1a26b253dd75f593eba2778a0551bf670a72480fcb6f6bc903a210"
+    },
+    "monitor-release-cpu.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/monitor-release-cpu.log",
+      "bytes": 21633,
+      "sourceSha256": "42750ed1560f6d491eac9da52d3c31b03e7333a7294dde2c3d3170c22d4b83a3",
+      "sha256": "d2d6a0720bb10fd0b98ab3509d1c6eb0d7fc3e73d3caa46343e8e80faf89b690"
+    },
+    "monitor-verification.json.gz": {
+      "source": "build/p8-automatic-2026-10-11/monitor-verification.json",
+      "bytes": 21708,
+      "sourceSha256": "46fa0f3889ccc44907bcbdb749d259db60b70dfa4236e78a11464b4dddf9eef1",
+      "sha256": "cd4a85323b09e195bd380a8b736c43fb9920276ecb335fee9ac15aee45389d2e"
+    },
+    "monitor-verification.log.gz": {
+      "source": "build/p8-automatic-2026-10-11/monitor-verification.log",
+      "bytes": 58,
+      "sourceSha256": "7c0c43eb41bfb3daa42a273c6fed31657ec92823ea462fecf597493947d44692",
+      "sha256": "83d5d4ff4792f8d9e070c103aa77af3487550dec4a9740e5b5299795e5859f9e"
+    },
+    "verify-monitor.py.gz": {
+      "source": "build/p8-automatic-2026-10-11/verify-monitor.py",
+      "bytes": 1353,
+      "sourceSha256": "f69498244672a7952151e8ee5ba4ba230fecb36dddca9b0e524a54ad6a7120f2",
+      "sha256": "14fbf661379821fa0a6e40b625086a06e2b347ee20445e5ce6c0565b4e8b15a6"
+    },
+    "probe-environment.py.gz": {
+      "source": "build/p8-automatic-2026-10-11/probe-environment.py",
+      "bytes": 1376,
+      "sourceSha256": "154e68b42c0d572ae993bb43f480b4d1dd480cb1af54dfd44666c6d3335e09a3",
+      "sha256": "58e7c9db78d675faa12b70b4ff5021aace2257f794b2e7835aa6d115799ab053"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-memory-trace\inject_owned.py", line 145, in <module>
+    raise SystemExit(run(command,args.output,args.dll,args.timeout,args.residency,args.ready_file))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-memory-trace\inject_owned.py", line 87, in run
+    assert result==0,('Diagnostic initialization rejected',result)
+           ^^^^^^^^^
+AssertionError: ('Diagnostic initialization rejected', 13)

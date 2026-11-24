@@ -1,0 +1,4 @@
+[1793857008282][info][test][code=0] hello
+[1793857008282][warning][test][code=0] soft warning
+[1793857008283][error][test][code=3] missing asset
+user-facing line

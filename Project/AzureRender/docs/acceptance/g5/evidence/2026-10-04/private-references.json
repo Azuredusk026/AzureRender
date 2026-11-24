@@ -1,0 +1,18 @@
+{
+  "build/g5/private-route-final/capture": {
+    "files": 542,
+    "treeSha256": "e887a4550a408066eb770155754d66d7832539eea19d0a0e7f6d97ec071e3e44"
+  },
+  "build/g5/private-multi-final": {
+    "files": 89,
+    "treeSha256": "4d26a64ddaadd9c9b225d2e9df54e44284ac057b29effa55ece522446e16d2f3"
+  },
+  "build/g5/private-source-idle-valid": {
+    "files": 122,
+    "treeSha256": "e2c0bfbfe1c1e51bad829ffd6ef109a5b4af801c1e29f996bd741aff52456ca1"
+  },
+  "build/g5/private-multi-accepted": {
+    "files": 89,
+    "treeSha256": "848adc193864d430b80c7869ff63d8e7616ca0fadcfa309927535fdd8fadd60a"
+  }
+}

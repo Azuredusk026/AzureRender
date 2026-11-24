@@ -1,0 +1,60 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 1: AzureEditor.EditService
+1/2 Test #1: AzureEditor.EditService ..........***Failed    0.17 sec
+[1791232756541][info][editor][code=0] Opened scene: test
+[1791232756541][info][editor][code=0] Opened scene: test
+[1791232756547][info][editor][code=0] Opened scene: test
+[1791232756557][info][editor][code=0] Opened scene: test
+[1791232756565][info][editor][code=0] Undo
+[1791232756570][info][editor][code=0] Undo
+[1791232756586][info][editor][code=0] Opened scene: test
+[1791232756595][info][editor][code=0] Play started
+[1791232756603][info][editor][code=0] Play stopped; edit state restored
+[1791232756608][info][editor][code=0] Opened scene: test
+[1791232756619][info][editor][code=0] Opened scene: test
+[1791232756629][info][editor][code=0] ERROR: Failure after mutation
+[1791232756636][info][editor][code=0] Opened scene: test
+[1791232756638][info][editor][code=0] ERROR: Duplicate or empty runtime node id
+[1791232756642][info][editor][code=0] Opened scene: test
+Read-only operation descriptors must prohibit document mutation
+
+    Start 2: AzureEditor.EditTransaction
+2/2 Test #2: AzureEditor.EditTransaction ......***Failed    0.70 sec
+[1791232756692][info][editor][code=0] Opened scene: test
+[1791232756698][info][editor][code=0] Opened scene: test
+[1791232756698][info][editor][code=0] Selected node: candidate
+[1791232756703][info][editor][code=0] Opened scene: test
+[1791232756704][info][editor][code=0] Selected node: first
+[1791232756714][info][editor][code=0] Undo
+[1791232756719][info][editor][code=0] Redo
+[1791232756726][info][editor][code=0] Undo
+[1791232756730][info][editor][code=0] Redo
+[1791232756741][info][editor][code=0] Opened scene: test
+[1791232756750][info][editor][code=0] Opened scene: test
+[1791232756758][info][editor][code=0] Opened scene: test
+[1791232756766][info][editor][code=0] Undo
+[1791232756773][info][editor][code=0] Redo
+[1791232756780][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-edit-transaction.azscene
+[1791232756788][info][editor][code=0] Reloaded scene: test
+[1791232756791][info][editor][code=0] Opened scene: test
+[1791232756795][info][editor][code=0] Selected node: Batch object
+[1791232756886][info][editor][code=0] Opened scene: courtyard
+[1791232756892][info][editor][code=0] Opened scene: courtyard
+[1791232756892][info][editor][code=0] Selected node: hero
+[1791232756916][info][editor][code=0] Opened scene: courtyard
+[1791232756917][info][editor][code=0] Selected node: floor
+[1791232756951][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-edit-preview-project\assets\courtyard.azurelevel
+[1791232756952][info][editor][code=0] Game build started
+[1791232756960][info][editor][code=0] ERROR: Operation requires an idle edit session
+Document edits must be rejected during a build
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   0.88 sec
+
+The following tests FAILED:
+	  1 - AzureEditor.EditService (Failed)
+	  2 - AzureEditor.EditTransaction (Failed)
+Errors while running CTest

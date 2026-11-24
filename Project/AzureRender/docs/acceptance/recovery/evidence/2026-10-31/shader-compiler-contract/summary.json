@@ -1,0 +1,564 @@
+{
+  "schemaVersion": 1,
+  "status": "compiler-verified-debug-preview-pending",
+  "sourceBaseCommit": "f6f2f3c0dd38c9115f92261d0d4ebc62152740c9",
+  "ownedRun": "build/runs/20261031-085328-shader-compiler-contract-88c8aa",
+  "programCapacity": 512,
+  "sourceMaximumBytes": 16777216,
+  "metadataMaximumBytes": 1048576,
+  "configurations": {
+    "release": {
+      "compiler": {
+        "status": "passed",
+        "executableSha256": "167f2b449f708eecce999194b0ebc2fadfe6c626a191e3a897b77f16943aa555",
+        "configSha256": "7251604ffd861f0ab28bab4815e7c6c5c789eb2832fb34dea9e036212ae2281d",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureShaderCompilerContractTests.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shader-reload.json",
+          "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\dxc.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-091026-shader-compiler-tests-d1b7f3\\work"
+        ],
+        "exitCode": 0,
+        "result": {
+          "cancellation": true,
+          "generatedPrograms": 211,
+          "hlslFailurePreservesActive": true,
+          "missingCompilerRejected": true,
+          "mixedPrograms": 2,
+          "mixedRecovery": true,
+          "programCapacity": 512,
+          "projectedBuildExact": true,
+          "projectedBytes": 91480,
+          "status": "passed"
+        },
+        "outputs": [
+          {
+            "file": "work\\verified\\probe.comp.spv",
+            "bytes": 604,
+            "sha256": "64bc884bf681e45f808ff5ed6af2341e3887a41b7b905f6090b2c0f2940866f7",
+            "spirvValExitCode": 0
+          },
+          {
+            "file": "work\\verified\\probe.hlsl.spv",
+            "bytes": 584,
+            "sha256": "396d47e19b71dc161f96fdf8803a1d694c7044933d17cf3a788f691716189ced",
+            "spirvValExitCode": 0
+          },
+          {
+            "file": "work\\verified\\projected.spv",
+            "bytes": 91480,
+            "sha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+            "spirvValExitCode": 0
+          }
+        ]
+      },
+      "junit": {
+        "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/ctest-final-release.xml.gz",
+        "bytes": 609,
+        "sha256": "7ee557de0f434cdf4cdb3d97df8d1c3ddcab9ab51f79323b5a8b23461fbf297c",
+        "rawSha256": "21315fa6fbb8d475ef8a6cdeff5a66be6b667273d00d093408d588911c15861c",
+        "encoding": "gzip"
+      },
+      "ctestLog": {
+        "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/ctest-final-release.log.gz",
+        "bytes": 353,
+        "sha256": "ccb1d2680fe1b12e3271b136e46c4a7485052e18db152b387beef09ddbd4ef3e",
+        "rawSha256": "fe0e2d38915ef82b1cb78a21373ec78f85d9b19b3f1972a5240fc4e3d24601dc",
+        "encoding": "gzip"
+      },
+      "build": {
+        "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/full-build-release.log.gz",
+        "bytes": 501,
+        "sha256": "d64c39fcbf936e370386e99ca7d9a9009026a6b094faf315eca24ad4b9ea5788",
+        "rawSha256": "8da9c20a1ebe21f3f9092f9d3fc81ac4c1ca25ec0fcf30397dc1ddff69fd8f3d",
+        "encoding": "gzip"
+      },
+      "executables": [
+        {
+          "file": "build/ninja-msvc-release/AzureRender.exe",
+          "bytes": 9518592,
+          "sha256": "41f1b0addfbff73d84a403e20208d8d76d4d0e3ce1386ce23026a5dbb2b24fcd"
+        },
+        {
+          "file": "build/ninja-msvc-release/AzurePlayer.exe",
+          "bytes": 6028800,
+          "sha256": "1b133a21858d834a173732965b7c81a0297d89f189d06386152f0251cd91ee40"
+        },
+        {
+          "file": "build/ninja-msvc-release/AzureShaderCompilerContractTests.exe",
+          "bytes": 322048,
+          "sha256": "167f2b449f708eecce999194b0ebc2fadfe6c626a191e3a897b77f16943aa555"
+        },
+        {
+          "file": "build/ninja-msvc-release/AzureHotReloadTests.exe",
+          "bytes": 190976,
+          "sha256": "24acee512db08f74897cb9283930d2b4912ecd42ddc4a2933f74f4fb7d77e2d0"
+        }
+      ],
+      "snapshotTiming": {
+        "blockReadMilliseconds": 10.022,
+        "bytes": 403325,
+        "files": 122,
+        "fingerprint": "389a03c1c5b531af",
+        "hashesExact": true,
+        "pointerHashMilliseconds": 0.4969,
+        "programs": 211,
+        "rangeHashMilliseconds": 0.4419,
+        "snapshotMilliseconds": [
+          14.9574,
+          12.7434,
+          12.7442
+        ],
+        "sourceBytesExact": true,
+        "streamReadMilliseconds": 11.965
+      }
+    },
+    "debug": {
+      "compiler": {
+        "status": "passed",
+        "executableSha256": "f5d2d1de2ae82d3535a7a568d34a868edbd64157bfd395e4a778e9afbb8e7ed4",
+        "configSha256": "92cb73622ffff625649a10a709e1777610c5e36ae77482e6d10c70eed0daaeab",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureShaderCompilerContractTests.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shader-reload.json",
+          "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\dxc.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-091040-shader-compiler-tests-e0e827\\work"
+        ],
+        "exitCode": 0,
+        "result": {
+          "cancellation": true,
+          "generatedPrograms": 211,
+          "hlslFailurePreservesActive": true,
+          "missingCompilerRejected": true,
+          "mixedPrograms": 2,
+          "mixedRecovery": true,
+          "programCapacity": 512,
+          "projectedBuildExact": true,
+          "projectedBytes": 91480,
+          "status": "passed"
+        },
+        "outputs": [
+          {
+            "file": "work\\verified\\probe.comp.spv",
+            "bytes": 604,
+            "sha256": "64bc884bf681e45f808ff5ed6af2341e3887a41b7b905f6090b2c0f2940866f7",
+            "spirvValExitCode": 0
+          },
+          {
+            "file": "work\\verified\\probe.hlsl.spv",
+            "bytes": 584,
+            "sha256": "396d47e19b71dc161f96fdf8803a1d694c7044933d17cf3a788f691716189ced",
+            "spirvValExitCode": 0
+          },
+          {
+            "file": "work\\verified\\projected.spv",
+            "bytes": 91480,
+            "sha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+            "spirvValExitCode": 0
+          }
+        ]
+      },
+      "junit": {
+        "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/ctest-final-debug.xml.gz",
+        "bytes": 610,
+        "sha256": "d749f1e4489c232bfdcf38b3375ffc30e86dfd9c839c213bcc966a1267c9d496",
+        "rawSha256": "66608fb44b860360c8ddb4372245508984ae5bf0c52dc4c359c1835845c7000c",
+        "encoding": "gzip"
+      },
+      "ctestLog": {
+        "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/ctest-final-debug.log.gz",
+        "bytes": 354,
+        "sha256": "a7549fe85683040d77401082b2b3fd37a0d716ae521b637ccb1cccb959240149",
+        "rawSha256": "34f73f491755c8483408d635713a86658bac7222833cf1bf3150462fc755f8f6",
+        "encoding": "gzip"
+      },
+      "build": {
+        "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/full-build-debug.log.gz",
+        "bytes": 3023,
+        "sha256": "87f82c932896343eddc3752c87ada9fd1b3eb597dc6d2f031060072622c07395",
+        "rawSha256": "5c1d48e624672d36fb23c768d149c4c2bf066f30d95c9d6a69c1042925145148",
+        "encoding": "gzip"
+      },
+      "executables": [
+        {
+          "file": "build/ninja-msvc-debug/AzureRender.exe",
+          "bytes": 30213632,
+          "sha256": "0107422f198fa97ed61aee0f1b98b71256253d11e53a468d93f556b10e7fb5db"
+        },
+        {
+          "file": "build/ninja-msvc-debug/AzurePlayer.exe",
+          "bytes": 21454336,
+          "sha256": "2aa7960e166d3f95b2ecef4597a9f2e355964627d8b3766d578dbca8faba6bb2"
+        },
+        {
+          "file": "build/ninja-msvc-debug/AzureShaderCompilerContractTests.exe",
+          "bytes": 1669120,
+          "sha256": "f5d2d1de2ae82d3535a7a568d34a868edbd64157bfd395e4a778e9afbb8e7ed4"
+        },
+        {
+          "file": "build/ninja-msvc-debug/AzureHotReloadTests.exe",
+          "bytes": 1453056,
+          "sha256": "de4f728ef80f391555ba713d254422f92bc42b2ca5d4d003e2e6cea2fb2c0c2d"
+        }
+      ],
+      "snapshotTiming": {
+        "blockReadMilliseconds": 9.5651,
+        "bytes": 403325,
+        "files": 122,
+        "fingerprint": "389a03c1c5b531af",
+        "hashesExact": true,
+        "pointerHashMilliseconds": 0.441,
+        "programs": 211,
+        "rangeHashMilliseconds": 0.4118,
+        "snapshotMilliseconds": [
+          39.0834,
+          36.2019,
+          34.7958
+        ],
+        "sourceBytesExact": true,
+        "streamReadMilliseconds": 28.7278
+      }
+    }
+  },
+  "hosts": {
+    "exploration": {
+      "status": "passed",
+      "configuration": "Release",
+      "operations": 141,
+      "shaderGeneration": 2,
+      "validationLayerEnabled": false,
+      "syncValidationRequested": true,
+      "physicalKeyboardMouse": "not performed",
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "shaderWaits": [
+        {
+          "state": "Error",
+          "elapsedMs": 6745.8679,
+          "passed": true
+        },
+        {
+          "state": "Idle",
+          "elapsedMs": 30691.0629,
+          "passed": true
+        },
+        {
+          "state": "Cancelled",
+          "elapsedMs": 433.7457,
+          "passed": true
+        }
+      ],
+      "logs": [
+        {
+          "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/exploration-stdout.log.gz",
+          "bytes": 1211,
+          "sha256": "348d40c8ea561a321b49d4c0a19a3e33c35f4c809a82abead68f646a00808b9e",
+          "rawSha256": "a990daeea15da1ebece66ef10d09a2db0dcd51abe76781097c695edb906d5c5f",
+          "encoding": "gzip"
+        },
+        {
+          "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/exploration-stderr.log.gz",
+          "bytes": 2511,
+          "sha256": "c3b11a171d2e7db9abff1555897f3cd691798c93ad1843866c2c4c69a49abc78",
+          "rawSha256": "7a700eeb81aac8aa94c4d942488d404ca70edec4b413a476021846d9dc37381b",
+          "encoding": "gzip"
+        },
+        {
+          "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/exploration-control-results.json.gz",
+          "bytes": 5174,
+          "sha256": "e2b083abab8565cab336e24e142ea2a1415b4e28d12ec60dc3ed46280b49e975",
+          "rawSha256": "b7ec83eacb12a8b945370c38bb406c7934ab53bcd390c021667c9d9561c455cd",
+          "encoding": "gzip"
+        },
+        {
+          "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/exploration-runtime.json.gz",
+          "bytes": 29193,
+          "sha256": "b0fe34d0a938b520a16ed56b853c8e2fd015bf279e94489b64ce09c330ff92cf",
+          "rawSha256": "71d5db6ef7c4e3e622c0b51aa2649b63c8d357bf70587ef949f660a138ae2834",
+          "encoding": "gzip"
+        }
+      ]
+    },
+    "inspector": {
+      "status": "passed",
+      "configuration": "Release",
+      "operations": 141,
+      "shaderGeneration": 2,
+      "validationLayerEnabled": false,
+      "syncValidationRequested": true,
+      "physicalKeyboardMouse": "not performed",
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "shaderWaits": [
+        {
+          "state": "Error",
+          "elapsedMs": 6538.2452,
+          "passed": true
+        },
+        {
+          "state": "Idle",
+          "elapsedMs": 30377.5143,
+          "passed": true
+        },
+        {
+          "state": "Cancelled",
+          "elapsedMs": 436.0121,
+          "passed": true
+        }
+      ],
+      "logs": [
+        {
+          "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/inspector-stdout.log.gz",
+          "bytes": 1071,
+          "sha256": "b9b6b5c39ca70fc4e477574170923881f2e0e7276401292a08828fc701f2f0ea",
+          "rawSha256": "429a1b128ec979c15f7ceba5bced3fd248919572168120535479153323e4b2bc",
+          "encoding": "gzip"
+        },
+        {
+          "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/inspector-stderr.log.gz",
+          "bytes": 1857,
+          "sha256": "5655340f3362299e9e7e389e584621035ab91a0432769c9663ff9f8b2da1a3e1",
+          "rawSha256": "13d8a8a8d21b38db6cb0974fb85424f1289d7a9784df83e59ed272ba4795b6fb",
+          "encoding": "gzip"
+        },
+        {
+          "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/inspector-control-results.json.gz",
+          "bytes": 4936,
+          "sha256": "cb5fef4885bf26f9c54fb0e57895648148c9e4924ccc90c488841e91f0d64bae",
+          "rawSha256": "bd38eb21ef22287641e9971a58b6e96fc698e2601d03a7eb29b93dacf65b5150",
+          "encoding": "gzip"
+        },
+        {
+          "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/inspector-runtime.json.gz",
+          "bytes": 27208,
+          "sha256": "a295d88bef63270744c8e12df213ae07f3a76b91b4d57499b2b7be2e60653533",
+          "rawSha256": "8b2a4193910b7b555c4f9a7959b707e4d2cf4fbb362b21f15a990cb90a6a92d3",
+          "encoding": "gzip"
+        }
+      ]
+    }
+  },
+  "sourceFiles": [
+    {
+      "file": "CMakeLists.txt",
+      "bytes": 239276,
+      "sha256": "f5c7b6443bb7c637375db589326cfa1e6f3faa08e10546320e200ec4fe931999",
+      "gitBlob": "9f2e9882944bb2322b925e2610dfca1ec6f357f4"
+    },
+    {
+      "file": "src/render/IShaderHotReloader.hpp",
+      "bytes": 1462,
+      "sha256": "571fbb4fd957d5fedce363175e626a6646f83e55400e671e8c0ef28643379785",
+      "gitBlob": "8169efeff5faa539dad63f41f60b3d0b770728f7"
+    },
+    {
+      "file": "src/devtools/ShaderHotReloader.cpp",
+      "bytes": 7456,
+      "sha256": "984e5d36928b2871cc463712420b95dc58c81e0f2f46e9a8b7ccef944c83a528",
+      "gitBlob": "d9767dec7db3f03b9a2db9b1763241f75ed92f40"
+    },
+    {
+      "file": "src/devtools/ShaderCompileJob.cpp",
+      "bytes": 6883,
+      "sha256": "3cc4f8477d51881cdf3dbeeb90cda5ad1b30038c1a78a3896d05b92a8bad4f05",
+      "gitBlob": "b76ae868eb86c025d34ddbce5d5c4b1e70c88858"
+    },
+    {
+      "file": "tests/ShaderCompilerContractTests.cpp",
+      "bytes": 9852,
+      "sha256": "662ee176d43c5e02230281203cca0a7b5d6001fcc6ce180e172f751f6f3386c3",
+      "gitBlob": "0d3f218aefbe73071fd289044fbeea70f5cc269c"
+    },
+    {
+      "file": "tools/test_shader_compiler_contract.py",
+      "bytes": 2038,
+      "sha256": "e33ef1a223b147abd55e8ce696db776396dd432a6d4d9bffc2c3383265ea9e97",
+      "gitBlob": "ca729c8e9024f5411adabbb03fc4169e66e09cc3"
+    }
+  ],
+  "debugPreviewPending": {
+    "status": "pending",
+    "configuration": "Debug",
+    "controlsReached": 56,
+    "shaderControlsReached": false,
+    "validationLayerEnabled": true,
+    "normalUnloadVerified": false,
+    "deadlineMs": 10000,
+    "elapsedMs": 11938.9605,
+    "diagnosis": {
+      "asset": "build\\runs\\20261031-085328-shader-compiler-contract-88c8aa\\devtools-host\\exploration\\Project with spaces\\assets\\guide.gltf",
+      "assetModifiedEpochMs": 1793408471338.9392,
+      "pipelineEvents": [
+        {
+          "endEpochMs": 1793408473951,
+          "durationMs": 2407.0083
+        },
+        {
+          "endEpochMs": 1793408476547,
+          "durationMs": 2452.2133
+        },
+        {
+          "endEpochMs": 1793408478580,
+          "durationMs": 1900.4721
+        },
+        {
+          "endEpochMs": 1793408481145,
+          "durationMs": 2369.3003
+        },
+        {
+          "endEpochMs": 1793408483274,
+          "durationMs": 1909.9372
+        }
+      ],
+      "pipelineTotalMs": 11038.931199999999,
+      "requestElapsedMs": 11938.9605,
+      "snapshotTiming": {
+        "blockReadMilliseconds": 9.5651,
+        "bytes": 403325,
+        "files": 122,
+        "fingerprint": "389a03c1c5b531af",
+        "hashesExact": true,
+        "pointerHashMilliseconds": 0.441,
+        "programs": 211,
+        "rangeHashMilliseconds": 0.4118,
+        "snapshotMilliseconds": [
+          39.0834,
+          36.2019,
+          34.7958
+        ],
+        "sourceBytesExact": true,
+        "streamReadMilliseconds": 28.7278
+      },
+      "interpretation": "Five preview pipeline creations dominate the observed interval; snapshot cost is a small part. Reuse scope remains to investigate."
+    },
+    "owner": "编辑预览性能及运行时恢复任务",
+    "retryCondition": "相关预览重建成本优化或实际环境改善",
+    "logs": [
+      {
+        "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/debug-exploration-stdout.log.gz",
+        "bytes": 1059,
+        "sha256": "d37220f070b3c0b746889411adfc5e0f5e656e6bee87e15d3971a5291e7ea4a3",
+        "rawSha256": "f8cc6f81d44ed1d31ab251bf7df20b4aac8b2e4419c24a042bec126974b44206",
+        "encoding": "gzip"
+      },
+      {
+        "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/debug-exploration-stderr.log.gz",
+        "bytes": 1833,
+        "sha256": "985445bbd4fef114d3b877001a303483e3801d7a9e2a8ce17d5b69424d8cf52d",
+        "rawSha256": "addfa957ce4accab55caaf8c95e1f942e9d6b8accd973eb024acc0159a9d8124",
+        "encoding": "gzip"
+      },
+      {
+        "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/debug-exploration-control-results.json.gz",
+        "bytes": 3145,
+        "sha256": "8bc6df2870427f651422f63db1ac7e77c06a613f383496957860ee33aa11a6d3",
+        "rawSha256": "8212f6522616b99c6ae3e7903c6b4475eb94ef7d3ee0b3565bea8c8c792b1e1f",
+        "encoding": "gzip"
+      },
+      {
+        "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/devtools-host.log.gz",
+        "bytes": 456,
+        "sha256": "29de40398c22f20d3734c29b48cdb320e4ce4cabe83410f2cc39d675cfac4bac",
+        "rawSha256": "e42e583199748b50f368c1465fb91a6eec3ca245cf49adf254ebc019437a5c83",
+        "encoding": "gzip"
+      }
+    ]
+  },
+  "redControls": [
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/snapshot-red-build.log.gz",
+      "bytes": 2634,
+      "sha256": "7e3d7abb998987b5cc6e3d8b64f76f0ea6ef38d93f30ef5f3751cd809709901e",
+      "rawSha256": "c2d73fa30ff1faf033e46ae7afc0595d7590e416213ffccc057fed43fc044f01",
+      "encoding": "gzip"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/snapshot-red.log.gz",
+      "bytes": 57,
+      "sha256": "73885aee7961b8ef5bc7a74cd67342644aa3d65b3568b5e9745ff7cb620bf534",
+      "rawSha256": "76408ff54acc1eaa02d7a9d6f1e6e3c6b130c8a468ce3f07a83de57348f1e3a1",
+      "encoding": "gzip"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/shader-compiler-contract/api-red.log.gz",
+      "bytes": 736,
+      "sha256": "826766b68a7f6b729ea2138c3881325b6e8695f630b9f502f6db421b88fdc0b4",
+      "rawSha256": "abe9dabcdb48e3384ac99f7f7f02f53eb167a60c3ac6e951eb4a046eeed645d5",
+      "encoding": "gzip"
+    }
+  ],
+  "borrowedTools": [
+    {
+      "file": "tools/test_devtools_host.py",
+      "bytes": 12859,
+      "sha256": "2d37a146050fba4b3366f4dde5dfe0ed868935c2198e4e03323ef91b0e1ff220"
+    }
+  ],
+  "preservedUserFiles": {
+    "docs\\acceptance\\p5\\closure\\source-evidence\\interruption.json": "4bd07a5e3af10be9aceac2b0ddaa0e5e80c850bc704cc3eae4dfed332e04e979",
+    "docs\\acceptance\\p5\\closure\\source-evidence\\manifest.json": "11f99d3171d7609a1200aa86920c7fb1251fae4e96e6ecebb76a391359488c43",
+    "docs\\acceptance\\p5\\closure\\source-evidence\\performance-provenance-green.log": "b0d7a3991dec0248b49e57e2d9cbdede8e7f286838add2f0723593d8598ee0e7",
+    "docs\\acceptance\\p5\\closure\\source-evidence\\performance-provenance-red.log": "f7c1533fc970cbb4665bfbf9267a17ee044e5e01bb22d3d0b74aafc2217c98c4"
+  },
+  "documentation": {
+    "styleFiles": 10,
+    "linksChecked": 611,
+    "stages": 103,
+    "acceptanceItems": 34,
+    "stageUnitTests": 16,
+    "paragraphAudit": "passed",
+    "siteBuild": "passed",
+    "newWarnings": 0,
+    "strictSiteAcceptance": "pending",
+    "files": [
+      {
+        "file": "README.md",
+        "sha256": "53bf1e65b6d40a7324c962b472ecb00ee347ba00a585943ccf4a95028f53aaa7"
+      },
+      {
+        "file": "CHANGELOG.md",
+        "sha256": "479191153f195918c5a221a7ad913614fb75c8faf2cd7779c8a1d99d37285cbc"
+      },
+      {
+        "file": "docs/plans/azure-engine-plan.md",
+        "sha256": "a127da6e641740f137ec9e66bc6872be4ef77cba4037d82954b2af60da9074a1"
+      },
+      {
+        "file": "docs/plans/2026-10-30-development-recovery.md",
+        "sha256": "701f77c0971e5f176e4a8398df0cddfff555eaa22b61a92a71f10952024d7679"
+      },
+      {
+        "file": "docs/plans/2026-10-31-shader-compiler-contract.md",
+        "sha256": "656c91916695100653d99a5bd62bb48bf3eb7565a303a8d0d5193bf84159a323"
+      },
+      {
+        "file": "docs/acceptance/recovery/2026-10-30.md",
+        "sha256": "05c86ada518d1ce5be9b4dfcbe42f210bbe10f100057b47c4e92309ea6a7c615"
+      },
+      {
+        "file": "docs/acceptance/recovery/shader-compiler-contract.md",
+        "sha256": "749ef978a0863a168e5f704135e759695f98f3629a7d5d03460c0f31e8d692e9"
+      },
+      {
+        "file": "docs/development/shader-hot-reload.md",
+        "sha256": "dfd28c53218222fe2f17431bf7ae272408bc8f9259e9cbe46e3adb3e232e2541"
+      },
+      {
+        "file": "docs/runtime/build-reproducibility.md",
+        "sha256": "63f1ffab66ff8cb5f5f27f2ff72a6fbf729f89dc30e0b08859fab5c6a0955e93"
+      },
+      {
+        "file": "docs/acceptance/p8/2026-10-31-environment.md",
+        "sha256": "c0a22cd3eba4aef10652037b72da41990161be92ff0ac67ae63fbdc497f7f6e1"
+      }
+    ]
+  },
+  "environmentEvidence": {
+    "file": "docs/acceptance/p8/evidence/2026-10-31/environment-review.json",
+    "sha256": "5aface7ff2504a8190a33f3868c68973c5ae7ae1869e57a5ce0a94bbde9fe40b"
+  }
+}

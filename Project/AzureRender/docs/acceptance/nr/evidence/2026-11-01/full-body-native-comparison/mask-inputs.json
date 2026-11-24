@@ -1,0 +1,145 @@
+{
+  "status": "prepared",
+  "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\project\\content-character\\hero-restored-inputs-v8.glb",
+  "sourceSha256": "f188722c428358787a12be615d944f4a07185e9a8eaab72b9aa21105f3b7f997",
+  "binarySha256": "3151dedd153d470ffaf19b947240677c2fcdc1a1d81214c0df70d92d7161fd23",
+  "palette": {
+    "0": {
+      "name": "M_actor_laevat_body_01",
+      "linearColor": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "excluded": false,
+      "reason": "opaque material"
+    },
+    "1": {
+      "name": "M_actor_laevat_cloth_01",
+      "linearColor": [
+        0.5,
+        0.2,
+        0.2
+      ],
+      "excluded": false,
+      "reason": "opaque material"
+    },
+    "2": {
+      "name": "M_actor_laevat_cloth_02",
+      "linearColor": [
+        0.8,
+        0.2,
+        0.2
+      ],
+      "excluded": false,
+      "reason": "opaque material"
+    },
+    "3": {
+      "name": "M_actor_laevat_cloth_03",
+      "linearColor": [
+        0,
+        0,
+        0
+      ],
+      "excluded": true,
+      "reason": "transparent, overlay, hair card or effect"
+    },
+    "4": {
+      "name": "M_actor_laevat_cloth_04",
+      "linearColor": [
+        0.5,
+        0.5,
+        0.2
+      ],
+      "excluded": false,
+      "reason": "opaque material"
+    },
+    "5": {
+      "name": "M_actor_laevat_cloth_05",
+      "linearColor": [
+        0.8,
+        0.5,
+        0.2
+      ],
+      "excluded": false,
+      "reason": "opaque material"
+    },
+    "6": {
+      "name": "M_actor_laevat_brow_01",
+      "linearColor": [
+        0.2,
+        0.8,
+        0.2
+      ],
+      "excluded": false,
+      "reason": "opaque material"
+    },
+    "7": {
+      "name": "M_eyewhiteshadow_common_01",
+      "linearColor": [
+        0,
+        0,
+        0
+      ],
+      "excluded": true,
+      "reason": "transparent, overlay, hair card or effect"
+    },
+    "8": {
+      "name": "M_actor_laevat_face_01",
+      "linearColor": [
+        0.8,
+        0.8,
+        0.2
+      ],
+      "excluded": false,
+      "reason": "opaque material"
+    },
+    "9": {
+      "name": "M_actor_laevat_hair_01",
+      "linearColor": [
+        0,
+        0,
+        0
+      ],
+      "excluded": true,
+      "reason": "transparent, overlay, hair card or effect"
+    },
+    "10": {
+      "name": "M_hairshadow_common_04",
+      "linearColor": [
+        0,
+        0,
+        0
+      ],
+      "excluded": true,
+      "reason": "transparent, overlay, hair card or effect"
+    },
+    "11": {
+      "name": "M_actor_laevat_iris_01",
+      "linearColor": [
+        0.8,
+        0.2,
+        0.5
+      ],
+      "excluded": false,
+      "reason": "opaque material"
+    },
+    "12": {
+      "name": "M_fx_laevat_toppotential_01",
+      "linearColor": [
+        0,
+        0,
+        0
+      ],
+      "excluded": true,
+      "reason": "transparent, overlay, hair card or effect"
+    }
+  },
+  "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\mask-project\\mask.azureproject",
+  "inputs": {
+    "mask.azureproject": "9c7168e31d1fccfc6f4784a8e9d4b9d526e8b465b41a698ef95ce0004cc00282",
+    "assets/locomotion.json": "95ec0cbbfb79b488c73deb3cfd20e95319db9bf1069838c0fd50f20a41a2fbf1",
+    "assets/material-id.glb": "850086393158238a199cf9783a91466fe56ae0d34af4c367e154879cb3b70446",
+    "assets/scene.azurelevel": "8dca597068323ebdcee93f0d547563d9191290e2228d58f38ce8e7705592842d"
+  }
+}

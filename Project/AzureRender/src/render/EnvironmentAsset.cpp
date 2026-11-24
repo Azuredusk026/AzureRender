@@ -1,14 +1,16 @@
 #include "render/EnvironmentAsset.hpp"
 
-#include <stb_image.h>
+#include "assets/image/ImageCodec.hpp"
 #include <OpenEXR/ImfInputFile.h>
 #include <OpenEXR/ImfFrameBuffer.h>
+#include <Imath/half.h>
 
 #include <algorithm>
 #include <array>
 #include <cmath>
 #include <cstring>
 #include <filesystem>
+#include <fstream>
 #include <stdexcept>
 #include <string_view>
 
@@ -18,39 +20,14 @@ namespace {
 
 constexpr float kPi = 3.14159265358979323846F;
 
-std::string lowerExtension(const std::filesystem::path& path) {
-    std::string extension = path.extension().string();
-    std::transform(
-        extension.begin(), extension.end(), extension.begin(),
-        [](const unsigned char value) {
-            return static_cast<char>(std::tolower(value));
-        });
-    return extension;
-}
-
 struct ByteImage {
-    std::vector<std::uint8_t> pixels;
+    std::vector<float> pixels;
     int width = 0;
     int height = 0;
 };
-
 ByteImage loadByteImage(const std::filesystem::path& path) {
-    int width = 0;
-    int height = 0;
-    int channels = 0;
-    unsigned char* data = stbi_load(
-        path.string().c_str(), &width, &height, &channels, 4);
-    if (data == nullptr) {
-        throw std::runtime_error(
-            "Failed to decode environment image: " + path.string());
-    }
-    ByteImage image;
-    image.width = width;
-    image.height = height;
-    image.pixels.assign(
-        data, data + static_cast<std::size_t>(width) * height * 4);
-    stbi_image_free(data);
-    return image;
+    const auto decoded=decodeImageFile(path);
+    return {imageLinearRgba(decoded),static_cast<int>(decoded.width),static_cast<int>(decoded.height)};
 }
 
 std::filesystem::path findCubeFace(
@@ -75,12 +52,6 @@ std::filesystem::path findCubeFace(
     throw std::runtime_error(
         "Cube environment is missing the _" + std::string(suffix)
         + " face in " + directory.string());
-}
-
-float srgbToLinear(const float value) {
-    return value <= 0.04045F
-        ? value / 12.92F
-        : std::pow((value + 0.055F) / 1.055F, 2.4F);
 }
 
 EnvironmentImage loadCubeDirectory(const std::filesystem::path& directory) {
@@ -153,9 +124,9 @@ EnvironmentImage loadCubeDirectory(const std::filesystem::path& directory) {
             const std::size_t targetPixel =
                 (static_cast<std::size_t>(y) * output.width + x) * 4;
             for (std::size_t channel = 0; channel < 3; ++channel) {
-                const float encoded = image.pixels[sourcePixel + channel] / 255.0F;
+                const float encoded = image.pixels[sourcePixel + channel];
                 output.rgba16f[targetPixel + channel] =
-                    environmentFloatToHalf(srgbToLinear(encoded));
+                    environmentFloatToHalf(encoded);
             }
             output.rgba16f[targetPixel + 3] = environmentFloatToHalf(1.0F);
         }
@@ -188,88 +159,111 @@ std::uint16_t environmentFloatToHalf(const float value) {
             | (mantissa >> 13));
 }
 
+EnvironmentImage environmentAsCubeFaces(EnvironmentImage image) {
+    const unsigned levels=std::max(image.authoredMipLevels,1U);
+    unsigned maxLevels=0;for(unsigned size=image.width;size;size/=2)++maxLevels;
+    const bool cube=image.projection==EnvironmentProjection::CubeFaces;
+    if(!image.width || !image.height || image.width>16384 || levels>maxLevels
+        || (cube?image.width!=image.height:std::uint64_t(image.height)*2!=image.width))
+        throw std::invalid_argument("Invalid environment projection or dimensions");
+    std::size_t count=0;unsigned w=image.width,h=image.height;
+    for(unsigned mip=0;mip<levels;++mip) {
+        count+=std::size_t(w)*h*4*(cube?6:1);w=std::max(1U,w/2);h=std::max(1U,h/2);
+    }
+    if(image.rgba16f.size()!=count || std::any_of(image.rgba16f.begin(),image.rgba16f.end(),
+        [](std::uint16_t value){return (value&0x7c00)==0x7c00;}))
+        throw std::invalid_argument("Invalid finite environment pixel storage");
+    if(cube)return image;
+    EnvironmentImage result;
+    result.width=std::max({1U,image.width/4,1U<<(levels-1)});
+    result.height=result.width;result.authoredMipLevels=levels;
+    result.projection=EnvironmentProjection::CubeFaces;
+    result.description=image.description+" (equirectangular -> cube faces)";
+    std::size_t sourceOffset=0;
+    w=image.width;h=image.height;
+    unsigned side=result.width;
+    const auto decoded=[](std::uint16_t value){Imath::half half;half.setBits(value);return float(half);};
+    for(unsigned mip=0;mip<levels;++mip) {
+        for(unsigned face=0;face<6;++face)for(unsigned y=0;y<side;++y)for(unsigned x=0;x<side;++x) {
+            const float u=2*(x+.5F)/side-1,v=2*(y+.5F)/side-1;
+            const std::array<std::array<float,3>,6> directions{{
+                {{1,-v,-u}},{{-1,-v,u}},{{u,1,v}},{{u,-1,-v}},{{u,-v,1}},{{-u,-v,-1}}}};
+            const auto& d=directions[face];
+            const float length=std::sqrt(d[0]*d[0]+d[1]*d[1]+d[2]*d[2]);
+            const float sx=(std::atan2(d[2],d[0])/(2*kPi)+.5F)*w-.5F;
+            const float sy=std::clamp(std::acos(std::clamp(d[1]/length,-1.F,1.F))/kPi*h-.5F,0.F,float(h-1));
+            const int ix=int(std::floor(sx));const unsigned iy=unsigned(sy),jy=std::min(iy+1,h-1);
+            const unsigned ax=unsigned((ix%int(w)+int(w))%int(w)),bx=(ax+1)%w;
+            const float fx=sx-ix,fy=sy-iy;
+            for(unsigned channel=0;channel<4;++channel) {
+                const auto at=[&](unsigned px,unsigned py){return decoded(image.rgba16f[sourceOffset+(std::size_t(py)*w+px)*4+channel]);};
+                const float top=at(ax,iy)*(1-fx)+at(bx,iy)*fx;
+                const float bottom=at(ax,jy)*(1-fx)+at(bx,jy)*fx;
+                result.rgba16f.push_back(environmentFloatToHalf(top*(1-fy)+bottom*fy));
+            }
+        }
+        sourceOffset+=std::size_t(w)*h*4;w=std::max(1U,w/2);h=std::max(1U,h/2);side=std::max(1U,side/2);
+    }
+    return result;
+}
+
 EnvironmentImage loadEnvironmentImage(const SceneEnvironmentSource& source) {
     if (source.path.empty()) {
         throw std::invalid_argument("Environment source path is empty");
     }
-    const std::filesystem::path path(source.path);
+    const auto path=std::filesystem::u8path(source.path);
     EnvironmentImage output;
+    if (path.extension() == ".azenv") {
+        std::ifstream input(path, std::ios::binary);
+        const auto fail = [&]() { throw std::runtime_error("Invalid authored environment: " + path.u8string()); };
+        char magic[8]{}; input.read(magic,8);
+        const bool cube=std::memcmp(magic,"AZENV002",8)==0;
+        if (!input || (!cube && std::memcmp(magic,"AZENV001",8))) fail();
+        const auto uint32 = [&]() {
+            std::uint32_t value=0;
+            for(unsigned shift=0;shift<32;shift+=8) {
+                const int byte=input.get(); if(byte==EOF) fail();
+                value |= std::uint32_t(byte)<<shift;
+            }
+            return value;
+        };
+        output.width=uint32();output.height=uint32();output.authoredMipLevels=uint32();
+        if (!output.width || output.width>16384 || !output.authoredMipLevels) fail();
+        if(cube) {
+            if(output.width!=output.height || source.projection==EnvironmentProjection::Equirectangular)fail();
+            output.projection=EnvironmentProjection::CubeFaces;
+        } else if(output.height*2ULL!=output.width || source.projection==EnvironmentProjection::CubeFaces)fail();
+        unsigned maxLevels=1;for(unsigned size=output.width;size>1;size/=2)++maxLevels;
+        if(output.authoredMipLevels>maxLevels)fail();
+        std::size_t count=0;unsigned w=output.width,h=output.height;
+        for(unsigned level=0;level<output.authoredMipLevels;++level) {
+            count+=std::size_t(w)*h*4*(cube?6:1);w=std::max(w/2,1U);h=std::max(h/2,1U);
+        }
+        if(std::filesystem::file_size(path)!=20+count*2)fail();
+        output.rgba16f.resize(count);
+        for(auto& value:output.rgba16f) {
+            const int lo=input.get(),hi=input.get();if(lo==EOF||hi==EOF)fail();
+            value=static_cast<std::uint16_t>(lo|(hi<<8));
+            if((value&0x7c00)==0x7c00)fail();
+        }
+        output.description=path.u8string()+(cube?" (authored six-face linear HDR mip chain)":" (authored linear HDR mip chain)");
+        return output;
+    }
     const bool cube = source.projection == EnvironmentProjection::CubeFaces
         || (source.projection == EnvironmentProjection::Auto
             && std::filesystem::is_directory(path));
     if (cube) {
         return loadCubeDirectory(path);
     }
-    if (lowerExtension(path) == ".exr") {
-        try {
-            Imf::InputFile file(path.string().c_str());
-            const Imath::Box2i window = file.header().dataWindow();
-            const int width = window.max.x - window.min.x + 1;
-            const int height = window.max.y - window.min.y + 1;
-            if (width <= 0 || height <= 0) {
-                throw std::runtime_error("OpenEXR has an empty data window");
-            }
-            std::vector<float> red(static_cast<std::size_t>(width) * height);
-            std::vector<float> green(red.size());
-            std::vector<float> blue(red.size());
-            Imf::FrameBuffer frame;
-            const auto makeSlice = [window, width](std::vector<float>& values) {
-                return Imf::Slice::Make(
-                    Imf::FLOAT,
-                    values.data(), window, sizeof(float), sizeof(float) * width);
-            };
-            frame.insert("R", makeSlice(red));
-            frame.insert("G", makeSlice(green));
-            frame.insert("B", makeSlice(blue));
-            file.setFrameBuffer(frame);
-            file.readPixels(window.min.y, window.max.y);
-            output.width = static_cast<std::uint32_t>(width);
-            output.height = static_cast<std::uint32_t>(height);
-            output.rgba16f.resize(red.size() * 4);
-            for (std::size_t index = 0; index < red.size(); ++index) {
-                output.rgba16f[index * 4] = environmentFloatToHalf(red[index]);
-                output.rgba16f[index * 4 + 1] = environmentFloatToHalf(green[index]);
-                output.rgba16f[index * 4 + 2] = environmentFloatToHalf(blue[index]);
-                output.rgba16f[index * 4 + 3] = environmentFloatToHalf(1.0F);
-            }
-            output.description = path.string() + " (OpenEXR linear HDR)";
-            return output;
-        } catch (const std::exception& error) {
-            throw std::runtime_error(
-                "Failed to decode OpenEXR environment " + path.string() + ": " + error.what());
-        }
+    const auto decoded=decodeImageFile(path);
+    const auto linear=imageLinearRgba(decoded);
+    output.width=decoded.width;output.height=decoded.height;
+    output.rgba16f.resize(linear.size());
+    for(std::size_t i=0;i<linear.size();++i) {
+        if(std::abs(linear[i])>65504.F)throw std::runtime_error("Environment pixels exceed finite RGBA16F range: "+path.u8string());
+        output.rgba16f[i]=environmentFloatToHalf(linear[i]);
     }
-
-    int width = 0;
-    int height = 0;
-    int channels = 0;
-    if (lowerExtension(path) == ".hdr") {
-        float* data = stbi_loadf(path.string().c_str(), &width, &height, &channels, 4);
-        if (data == nullptr) {
-            throw std::runtime_error("Failed to decode HDR environment: " + path.string());
-        }
-        const std::size_t count = static_cast<std::size_t>(width) * height * 4;
-        output.rgba16f.resize(count);
-        for (std::size_t index = 0; index < count; ++index) {
-            output.rgba16f[index] = environmentFloatToHalf(
-                std::clamp(data[index], 0.0F, 64.0F));
-        }
-        stbi_image_free(data);
-    } else {
-        const ByteImage image = loadByteImage(path);
-        width = image.width;
-        height = image.height;
-        output.rgba16f.resize(image.pixels.size());
-        for (std::size_t index = 0; index < image.pixels.size(); ++index) {
-            const float encoded = image.pixels[index] / 255.0F;
-            output.rgba16f[index] = environmentFloatToHalf(
-                index % 4 == 3 ? encoded : srgbToLinear(encoded));
-        }
-    }
-    output.width = static_cast<std::uint32_t>(width);
-    output.height = static_cast<std::uint32_t>(height);
-    output.description = path.string();
-    return output;
+    output.description=path.u8string();return output;
 }
 
-}  // namespace azurerender
+} // namespace azurerender

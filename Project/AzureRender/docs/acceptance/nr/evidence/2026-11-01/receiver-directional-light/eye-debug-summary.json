@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "playerSha256": "dd9df30d37afe3dfada19404415adb7f8c54efaaf0fcf66445cb5a2f4065083a",
+  "linearErrorBudget": 0.008,
+  "captures": [
+    {
+      "name": "main",
+      "maximumLinearError": 0.0011431040724743102,
+      "expected": [
+        0.0643132234504056,
+        0.015275162110952593,
+        0.2220848532443342
+      ],
+      "imageSha256": "189017eb117ab9352451722d467971175812f2823aa62371dde21b6af8a5967e"
+    },
+    {
+      "name": "combined",
+      "maximumLinearError": 0.0008970790834280651,
+      "expected": [
+        0.1045089881069091,
+        0.03436911474964333,
+        0.6384939530774607
+      ],
+      "imageSha256": "c27e591f260e7eed4f50f809de12ccf51d4e83507531d71bf36eed57f1731493"
+    },
+    {
+      "name": "shadow-zero",
+      "maximumLinearError": 0.0010999402238810463,
+      "expected": [
+        0.026004841425486216,
+        0.012352923617651827,
+        0.26939785078918477
+      ],
+      "imageSha256": "8c582ba92c1e2621671fd0881cb99526e346d5a77779dd185348bb087e0ad28a"
+    },
+    {
+      "name": "shadow-one",
+      "maximumLinearError": 0.002788458143028194,
+      "expected": [
+        0.05180652002733582,
+        0.02460934001954075,
+        0.536691030869079
+      ],
+      "imageSha256": "1d89b05271f47cfccb6fe3c32c903e74c800e7c266b9350fe96893a428b043f6"
+    },
+    {
+      "name": "fixed",
+      "maximumLinearError": 0.0008970790834280651,
+      "expected": [
+        0.1045089881069091,
+        0.03436911474964333,
+        0.6384939530774607
+      ],
+      "imageSha256": "c27e591f260e7eed4f50f809de12ccf51d4e83507531d71bf36eed57f1731493"
+    },
+    {
+      "name": "document",
+      "maximumLinearError": 0.0008970790834280651,
+      "expected": [
+        0.1045089881069091,
+        0.03436911474964333,
+        0.6384939530774607
+      ],
+      "imageSha256": "c27e591f260e7eed4f50f809de12ccf51d4e83507531d71bf36eed57f1731493"
+    }
+  ],
+  "maximumLinearError": 0.002788458143028194
+}

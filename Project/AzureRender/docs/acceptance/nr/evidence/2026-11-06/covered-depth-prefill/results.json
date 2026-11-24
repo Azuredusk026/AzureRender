@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 1,
+  "status": "implemented-compatible-covered-depth-prefill-full-budgets-failed",
+  "sourceBase": "e8f95f3",
+  "productionAdoption": true,
+  "buildAndCpu": {
+    "release": {
+      "cpuChecks": 32,
+      "buildSeconds": 12.014999999955762,
+      "checksSeconds": 16.625,
+      "productCount": 635,
+      "productionShaders535ByteIdentical": true
+    },
+    "debug": {
+      "cpuChecks": 32,
+      "buildSeconds": 53.70400000002701,
+      "checksSeconds": 97.42099999997299,
+      "productCount": 635,
+      "productionShaders535ByteIdentical": true
+    }
+  },
+  "testSourceHashes": {
+    "tests/MaterialPipelinePolicyTests.cpp": "ea68e58495fc68b93e4fd5c965e30b8699027e9886f750e7b3c1fb9794bde51e",
+    "tests/DepthOnlyShadowRecordingTests.cpp": "d12a1673b91bec78d57806dc8469f684a56246fb77fe8e22580ecdf6c5b441f6",
+    "tests/DepthOnlyGpuTests.cpp": "0e69db3a2c84c6973b70051c7c22b26c73a08b3352af95f160f3edab7526b3ee",
+    "tests/OutlineCoverageRecordingTests.cpp": "bd75764154008683f73308ee5366e6e41c41584baf04b4066acda9dad0808c30",
+    "tests/DepthPrefillRecordingTests.cpp": "69101966fc672e9044b9ce9c991b02d25a7e80bd2267c9229e2b03e6cd22f7d0"
+  },
+  "gpu": {
+    "status": "passed",
+    "scope": "D16/D32 vertex-only depth and masked 0/2/3 color attachment readback and fragment equivalence x2configurations x2devices; three biases, overlapping draws, scissor/clear, synchronization validation and zero-resource assertions",
+    "rows": [
+      {
+        "configuration": "release",
+        "device": "nvidia",
+        "enumeratedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "deviceUUIDs": [
+          "961ce778-109e-0976-8431-c5edc76ff622"
+        ],
+        "enumerationEntries": 1,
+        "filter": "*nv-vk64*",
+        "exitCode": 0,
+        "seconds": 1.9059999999590218,
+        "actualChecks": [
+          "AzureRender.DepthOnlyGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^AzureRender.DepthOnlyGpu$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\covered-depth-prefill\\gpu\\release-nvidia-tests.xml"
+        ]
+      },
+      {
+        "configuration": "release",
+        "device": "intel",
+        "enumeratedDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "deviceUUIDs": [
+          "868088a7-0400-0000-0002-000000000000"
+        ],
+        "enumerationEntries": 2,
+        "filter": "*igvk64*",
+        "exitCode": 0,
+        "seconds": 1.5630000000237487,
+        "actualChecks": [
+          "AzureRender.DepthOnlyGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^AzureRender.DepthOnlyGpu$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\covered-depth-prefill\\gpu\\release-intel-tests.xml"
+        ]
+      },
+      {
+        "configuration": "debug",
+        "device": "nvidia",
+        "enumeratedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "deviceUUIDs": [
+          "961ce778-109e-0976-8431-c5edc76ff622"
+        ],
+        "enumerationEntries": 1,
+        "filter": "*nv-vk64*",
+        "exitCode": 0,
+        "seconds": 3.0630000000237487,
+        "actualChecks": [
+          "AzureRender.DepthOnlyGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^AzureRender.DepthOnlyGpu$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\covered-depth-prefill\\gpu\\debug-nvidia-tests.xml"
+        ]
+      },
+      {
+        "configuration": "debug",
+        "device": "intel",
+        "enumeratedDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "deviceUUIDs": [
+          "868088a7-0400-0000-0002-000000000000"
+        ],
+        "enumerationEntries": 2,
+        "filter": "*igvk64*",
+        "exitCode": 0,
+        "seconds": 1.875,
+        "actualChecks": [
+          "AzureRender.DepthOnlyGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^AzureRender.DepthOnlyGpu$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\covered-depth-prefill\\gpu\\debug-intel-tests.xml"
+        ]
+      }
+    ],
+    "sourceInputsUnchanged": true,
+    "allRecordedProductsVerified": true
+  },
+  "nativeImage": {
+    "status": "passed",
+    "sourceBase": "e8f95f3",
+    "executableSha256": "1c61ee95913bd863df773e5089696fdaefd469de093bba0d4dc1033aa683e5d3",
+    "exitCode": 0,
+    "seconds": 106.78200000000652,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Covered opaque depth-prefill candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "nativeTiming": {
+    "status": "measured",
+    "sourceBase": "e8f95f3",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 110.98500000004424,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.5358194666666667,
+        "p95": 2.6159056,
+        "p99": 2.67396448
+      },
+      "sceneMs": {
+        "mean": 30.072098133333334,
+        "p95": 31.611392,
+        "p99": 32.8498176
+      },
+      "postProcessMs": {
+        "mean": 0.2854485333333333,
+        "p95": 0.30120959999999997,
+        "p99": 0.31007744
+      },
+      "frameMs": {
+        "mean": 32.89336613333333,
+        "p95": 34.4500832,
+        "p99": 35.88011328
+      }
+    },
+    "cpu": {
+      "mean": 18.668878333333314,
+      "p95": 20.471835000000297,
+      "p99": 23.206538999999555
+    },
+    "wait": {
+      "mean": 14.04165000000002,
+      "p95": 16.017275000000016,
+      "p99": 17.725765999999577
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7403700224,
+    "environmentFailures": [
+      "run observation 19: driver relative thermal headroom is insufficient",
+      "run observation 19: software thermal slowdown is active",
+      "run observation 20: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "originalLimitsNumericallyMet": false,
+    "powerProfileStable": true,
+    "environmentPassed": false,
+    "diagnosticOnly": true,
+    "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+    "productionShaderFilesUnchanged": true,
+    "timingBenefitQualified": false,
+    "timingScope": "Current candidate only; no paired timing benefit or original1800sample acceptance claim"
+  },
+  "timingBenefitQualified": false,
+  "fullVisualAcceptance": "failed-user-review",
+  "fullPerformance": "failed",
+  "canonicalPngArchive": "docs/acceptance/nr/evidence/2026-11-05/runtime-node-identity/measurements.zip",
+  "archiveMembers": {
+    "archive_covered_depth_prefill.py": "c2ddcb59560001be8ff8d8dd6771a16221d57c8a7926f1e3380099933f797555",
+    "capture_covered_depth_prefill.py": "8dd8e2c7a0aa5c02bc2f5fd95301228cc9df9f248c2db175bdfdfd1276366a42",
+    "covered-depth-prefill/engine-debug-build.json": "b8fdec5be5539a58330d323d3070a780098e83102cfe03f1b7a6421c9d4e1e9a",
+    "covered-depth-prefill/engine-debug-build.log": "2e1d0bc1b783c37ae9ea1660a83bde62a7066476a6beb88016c4f85d8ec68a52",
+    "covered-depth-prefill/engine-debug-checks-full.log": "76a5de70dfd9cd0b11af921ae3e4607c230d33145894eaa3827b4ee063bca757",
+    "covered-depth-prefill/engine-debug-checks.json": "1ba973d28cbfd9db9f52eec4011bca4958b72acfdaab7ea64b9bda4d14b1be5b",
+    "covered-depth-prefill/engine-debug-checks.log": "a3b25dc25fe811c93d65b50a7f9de7f863a3c103c5a6982fa7ade1a71c0a41d0",
+    "covered-depth-prefill/engine-debug-checks.xml": "b0ab0046dff0424ce1aa5076bfd649b54139dc83764cddfccc3b52b263852206",
+    "covered-depth-prefill/engine-debug-provenance.json": "b6833b641022e161cc32522fa74bf6c08ab1ec434cb7a9aa088d2c80cb64a44c",
+    "covered-depth-prefill/engine-release-build.json": "efcbf1e392d8bacf4481897b34fe8bbc7d3df4416bfd7a3ce1d1fb0731aa6667",
+    "covered-depth-prefill/engine-release-build.log": "332ac5698c7675a044bb369c11ce2b4e414463d22b06576e42bd799db0a4251b",
+    "covered-depth-prefill/engine-release-checks-full.log": "71de4624c72a10cd3b3b5ac5cafbc0387a31bb0c3ec4ca300dffe00f36a7a5d5",
+    "covered-depth-prefill/engine-release-checks.json": "0f2179d7c360abe7358ccf56e6e2cb0945ca534677c9040c923a2bbe964e4d50",
+    "covered-depth-prefill/engine-release-checks.log": "7c1e5c851922bcad5522522f2f44d3a787ec5b6dac5446085a7cfba59c0a7f28",
+    "covered-depth-prefill/engine-release-checks.xml": "f73cac879dea9baa0cf7a0df25938a3498ad03bd90a7ff30ce03842efa1edb2d",
+    "covered-depth-prefill/engine-release-provenance.json": "b91b9298f6d68dd3a7a53a69b71be167695966ecdc058a3e454b9385371bff33",
+    "covered-depth-prefill/fixture-build-error.log": "99d074d98fcee27abb57e54d5ef576d6a10e332686b5b1df3b3e4737671075a2",
+    "covered-depth-prefill/gpu/debug-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "covered-depth-prefill/gpu/debug-intel-tests-full.log": "3586d53a048379bc2243141baa28e0a155ffbf700b2366e995cb21e1a5a04124",
+    "covered-depth-prefill/gpu/debug-intel-tests.log": "34d6bfb92ed6fef500f61c03671a5e3982778305e9516e2cb14d102a05f9744b",
+    "covered-depth-prefill/gpu/debug-intel-tests.xml": "0e9d3bbb78c3832e6acb6363ecc152b7ff23c7341d9eec0d3f980f17c590a2d8",
+    "covered-depth-prefill/gpu/debug-nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+    "covered-depth-prefill/gpu/debug-nvidia-tests-full.log": "92ac2524e08c93df89c71c83ff1e543106fa7042c31a0c6a4287bb9e0984299e",
+    "covered-depth-prefill/gpu/debug-nvidia-tests.log": "a7e8a1c162cddd205f2f2e01e273140adc3474db7e829cee3be5d9965426f300",
+    "covered-depth-prefill/gpu/debug-nvidia-tests.xml": "14f4bcab39414ac7545ce7d2c44e115c49a6f17204efb717fd863ca8d3a294e1",
+    "covered-depth-prefill/gpu/gpu-checks.json": "a72dd0a5fb869572fd99c2b92157bbbb085ceb5e48a7327c98a6e9ab4c6c0bae",
+    "covered-depth-prefill/gpu/release-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "covered-depth-prefill/gpu/release-intel-tests-full.log": "d3b23b6185ead9ae6da7ca8239a09e04cfdcba7a0fccf1a79729c47241056d9f",
+    "covered-depth-prefill/gpu/release-intel-tests.log": "6c1792e7ea07da7049bff6ea8baa66babd90ad55adebe4c18fdd9bd6b1123e16",
+    "covered-depth-prefill/gpu/release-intel-tests.xml": "d6a53c0f5415b0d2e3d82d779db7fc574644b90e1e50454d6206eafd4260ba5c",
+    "covered-depth-prefill/gpu/release-nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+    "covered-depth-prefill/gpu/release-nvidia-tests-full.log": "9d4eb1b69f848d995ddc046ba0b63e0d06100ee78598830913dafbdb3b84be23",
+    "covered-depth-prefill/gpu/release-nvidia-tests.log": "c9c23cc6c8015de36dd486b0178f0701e40d2a7bb80dad4352c8368062555d70",
+    "covered-depth-prefill/gpu/release-nvidia-tests.xml": "ab663bd36dca5db8d9116a9acb63115ad90c2599ed29909cfc462c361aafc91f",
+    "covered-depth-prefill/gpu/startup-environment.json": "95f899bef1f8025d0995bee58e10f665362ab323c39a9acf11538091f0fc2b1f",
+    "covered-depth-prefill/image/bind-pose-workload.json": "4e8211c617939f54bac403c4d5f7daddb94feaf002400bd2fd29b7647ed871c3",
+    "covered-depth-prefill/image/command.json": "2137efae9991a115f00dac589629b9338b1e919241d23f25b941d159c87ce6e8",
+    "covered-depth-prefill/image/frames/capture_manifest.json": "7dae8c13293798f7bddd1b3d3e36c2e5549be459a3d1a93eb960cd06845c44b0",
+    "covered-depth-prefill/image/frames/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "covered-depth-prefill/image/frozen-inputs.json": "eda3dbdd4f840b4364f208279c6715b7c6a77ef65a1539b8ff4ca99532de5623",
+    "covered-depth-prefill/image/identity-workload.json": "99835e64bab80baa2120034780f5bbd0e926efc0e5083f09b938e8cf348d2713",
+    "covered-depth-prefill/image/results.json": "8eee6313fc1473ccad8f7837946e77577672e99af0be597125af98bc17f9a7e9",
+    "covered-depth-prefill/image/runtime.json": "e77957cfea11543df92ffb9512b8ece48d69d002ebb6be95fce08d5fab5c17ae",
+    "covered-depth-prefill/image/stderr.log": "63685c5d57d1d59f3776b45f63364cddfcbad8c11fcb4f345d2de9ae25621175",
+    "covered-depth-prefill/image/stdout.log": "2db2ee1ac12a327ba51d0a144efd0fc8fdbc4d9e5079b534271c8ad5b59d2044",
+    "covered-depth-prefill/image/workload.json": "914510df2c090eb8efc35d59fa5bddb29a5956b573040a1d3e0a90b9b2cbe634",
+    "covered-depth-prefill/performance/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "covered-depth-prefill/performance/environment.json": "0e2ced45dca1fbc73b7738f40f1771028ce50129b03ef2080630d4ffea47b444",
+    "covered-depth-prefill/performance/frozen-inputs.json": "35792aa134673b2669ece5da9e2ce56c2536338499d3433808236b90ad846840",
+    "covered-depth-prefill/performance/memory.json": "e8972b56bee44cd110b3c3cca0bf0fcf8027ee6a4f45e5e563b5079b624219d1",
+    "covered-depth-prefill/performance/results.json": "3728f6862107e493a10038d4eb5de57a147b77f6a249d06552a0ba39722fc4d5",
+    "covered-depth-prefill/performance/runtime.json": "4a61017101551127457fbc79723b49e24ec369d0d74ec3d751464423b9c3c5d6",
+    "covered-depth-prefill/performance/stderr.log": "e0de66bb26b462176e28ee4761ccf12ea4d19a9c309f8ec07f14d7ef27159b6e",
+    "covered-depth-prefill/performance/stdout.log": "aa24d4b708197c3ac027c02bfb33c420238a41bdf4ed1a243c034b27351600d3",
+    "covered-depth-prefill/performance/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "covered-depth-prefill/performance/task.json": "95e3e9c649d7e5da1caa3ea298dcbc59eea6fc6f0271972cf62b779811d955f7",
+    "covered-depth-prefill/performance/timing.csv": "1b57411c5741a00a05bafaa85af7ecba1081eafbe161ae7c32ca275bdea18176",
+    "covered-depth-prefill/performance/timing.json": "e1da202df1b49bbffc4b803d9b067d47d43cf916c16f3d0054f7b803eca97fe2",
+    "covered-depth-prefill/performance/workload.json": "1a55b90c0790a84b0651d310dcc7f67e04c679ffcffba6ba6b823055348ca733",
+    "covered-depth-prefill/policy-red-build.log": "5b866b0a8137897fbddf10b41a2fb3a906d194351c88f4f0518d062192727a4e",
+    "covered-depth-prefill/recording-first-failure-full.log": "599c1992387107659e861239f64761f06baf0b299e5cbe2bb86a79b38eeca935",
+    "covered-depth-prefill/recording-first-failure.log": "48f6dd9220f67ca057a5706b174c3bb5d211d1364f30a3cdb2bad99ef73025fe",
+    "covered-depth-prefill/selected.json": "74425f70e49354dd1ddd432e0c8f022813738e16f8c58c94ac07c84d50536e51",
+    "covered-depth-prefill/source/CMakeLists.txt": "e267c222379a4b6ecdf91ca2fa0872873ea2906fa14defca86cbdb7cea8a8d8e",
+    "covered-depth-prefill/source/production.diff": "16468d0340fbe1b3f01086682d0e8e94c522b164c0081a7fe670c50b23f855fb",
+    "covered-depth-prefill/source/src/render/MaterialPipelinePolicy.hpp": "49ce07852f0a6e392021a044e6f20ce0ea396fb86ba4d4066a7498b593e63f2a",
+    "covered-depth-prefill/source/src/scenes/CharacterSceneRenderer.cpp": "02b865bc9edd1504888f4e2afcf37956ca430eb1494dd862678098a5dfb645ab",
+    "covered-depth-prefill/source/src/scenes/CharacterSceneRenderer.hpp": "8b770b8f7fccff05e823e39d0bc88a0de12c79b1f08ff3287df1d6550ba89bfa",
+    "covered-depth-prefill/source/tests/DepthOnlyGpuTests.cpp": "0e69db3a2c84c6973b70051c7c22b26c73a08b3352af95f160f3edab7526b3ee",
+    "covered-depth-prefill/source/tests/DepthOnlyShadowRecordingTests.cpp": "d12a1673b91bec78d57806dc8469f684a56246fb77fe8e22580ecdf6c5b441f6",
+    "covered-depth-prefill/source/tests/DepthPrefillRecordingTests.cpp": "69101966fc672e9044b9ce9c991b02d25a7e80bd2267c9229e2b03e6cd22f7d0",
+    "covered-depth-prefill/source/tests/MaterialPipelinePolicyTests.cpp": "ea68e58495fc68b93e4fd5c965e30b8699027e9886f750e7b3c1fb9794bde51e",
+    "covered-depth-prefill/source/tests/OutlineCoverageRecordingTests.cpp": "bd75764154008683f73308ee5366e6e41c41584baf04b4066acda9dad0808c30",
+    "measure_covered_depth_prefill.py": "891de13a40c893e153719486525488507baa11330b84b5f6e7a2c0c1322842d4",
+    "run_covered_depth_prefill_gpu_checks.py": "08837c20c6cf7b05dcc55c55295963b078c6334f995c56526c31db04f03cc08d",
+    "validate_covered_depth_prefill.py": "76e0f9267346ec911d56aa830badc5b7fa30d9f27653bd542ddfd88f701137f7"
+  },
+  "archiveSha256": "f663de967b37f137c257513e2c99bb7a5d84cb33786591e5e21135ee49f4308b",
+  "coverage": "Opaque node opacity exactly one, single sample; main and snapshot, three facing variants; fixed/bindless descriptors, alpha/fade/MSAA fallback, recreate/unload; actual D16/D32 depth and 0/2/3 masked colors on both devices"
+}

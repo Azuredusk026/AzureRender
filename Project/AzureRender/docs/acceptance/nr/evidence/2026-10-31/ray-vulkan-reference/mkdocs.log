@@ -1,0 +1,576 @@
+
+ │  Material for MkDocs reaches end of life on May 5, 2027.
+ │  Critical fixes and security updates continue until that date.
+ │
+ │  Zensical is its maintained successor, built by the same team.
+ │  Try it alongside MkDocs with your existing mkdocs.yml:
+ │  https://zensical.org/docs/compatibility/mkdocs/migration/
+
+  To disable this warning, set NO_MKDOCS_2_WARNING=1.
+
+INFO    -  Cleaning site directory
+INFO    -  Building documentation to directory: D:\Projects\FYP\Project\AzureRender\build\runs\20261031-060648-ray-vulkan-a27711\docs-site
+INFO    -  The following pages exist in the docs directory, but are not included in the "nav" configuration:
+  - decisions-editor-usability.md
+  - editor-usability-audit.md
+  - editor-usability-questions-round-2.md
+  - editor-usability-questions.md
+  - acceptance\phase-closure.md
+  - acceptance\b1\2026-10-12.md
+  - acceptance\character\2026-10-09-refinement.md
+  - acceptance\character\2026-10-09.md
+  - acceptance\ed0\2026-10-14.md
+  - acceptance\ed1\2026-10-14.md
+  - acceptance\ed2\2026-10-14.md
+  - acceptance\ed3\2026-10-14.md
+  - acceptance\ed4\2026-10-14.md
+  - acceptance\ed5\2026-10-14.md
+  - acceptance\ed6\2026-10-14.md
+  - acceptance\ed7\2026-10-14.md
+  - acceptance\ev\2026-10-16.md
+  - acceptance\ev\dijiang-lighting-video.md
+  - acceptance\ev\ev0.md
+  - acceptance\ev\ev1.md
+  - acceptance\ev\ev2.md
+  - acceptance\ev\ev3.md
+  - acceptance\ev\ev4.md
+  - acceptance\ev\ev5.md
+  - acceptance\ev\ev6.md
+  - acceptance\ev\ev7.md
+  - acceptance\ev\native-assets.md
+  - acceptance\fixes\2026-10-16-grid-depth.md
+  - acceptance\g11\2026-10-07.md
+  - acceptance\g14\2026-10-12.md
+  - acceptance\g17\2026-10-12.md
+  - acceptance\g18\2026-10-12.md
+  - acceptance\g19\2026-10-12.md
+  - acceptance\g20\2026-10-12.md
+  - acceptance\g21\2026-10-12.md
+  - acceptance\g22\2026-10-12.md
+  - acceptance\g23\2026-10-12.md
+  - acceptance\g24\2026-10-12.md
+  - acceptance\nr\actual-motion-velocity.md
+  - acceptance\nr\alpha-mip-footprint.md
+  - acceptance\nr\ambient-weight-and-main-line.md
+  - acceptance\nr\analytic-fog.md
+  - acceptance\nr\atrium-completeness.md
+  - acceptance\nr\base-color-quantization.md
+  - acceptance\nr\base-uv-distortion.md
+  - acceptance\nr\blend-fade-motion.md
+  - acceptance\nr\blend-temporal-coverage.md
+  - acceptance\nr\body-rim-origin.md
+  - acceptance\nr\camera-motion-quality.md
+  - acceptance\nr\camera-projection-offset.md
+  - acceptance\nr\capture-camera.md
+  - acceptance\nr\captured-active-lights.md
+  - acceptance\nr\captured-character-local-lights.md
+  - acceptance\nr\captured-character-pose.md
+  - acceptance\nr\captured-color-grading-lut.md
+  - acceptance\nr\captured-hair-illumination.md
+  - acceptance\nr\captured-irradiance-inputs.md
+  - acceptance\nr\captured-logistics-boxes.md
+  - acceptance\nr\captured-vertex-and-grading.md
+  - acceptance\nr\captured-vfx-layers.md
+  - acceptance\nr\cascade-caster-depth.md
+  - acceptance\nr\central-glyph-composition.md
+  - acceptance\nr\central-late-glyph.md
+  - acceptance\nr\character-color-blend.md
+  - acceptance\nr\character-color-receivers.md
+  - acceptance\nr\character-composite-diagnosis.md
+  - acceptance\nr\character-face-sdf.md
+  - acceptance\nr\character-indirect-normal.md
+  - acceptance\nr\character-layers.md
+  - acceptance\nr\character-line-light.md
+  - acceptance\nr\character-local-light-response.md
+  - acceptance\nr\character-logistics-joint.md
+  - acceptance\nr\character-logistics-restored.md
+  - acceptance\nr\character-main-shadow.md
+  - acceptance\nr\character-probe-controls.md
+  - acceptance\nr\character-scene-lighting.md
+  - acceptance\nr\character-screen-light-modes.md
+  - acceptance\nr\character-shadow-lut.md
+  - acceptance\nr\character-surfaces.md
+  - acceptance\nr\character-visibility-inputs.md
+  - acceptance\nr\cloth-native-integration.md
+  - acceptance\nr\cloth-specular-input.md
+  - acceptance\nr\cloth-specular-ramp.md
+  - acceptance\nr\clustered-light-projection.md
+  - acceptance\nr\color-grading-lut.md
+  - acceptance\nr\complete-asset-cache-reuse.md
+  - acceptance\nr\complete-material-document.md
+  - acceptance\nr\component-radiometry.md
+  - acceptance\nr\cutout-motion-coverage.md
+  - acceptance\nr\directional-lighting.md
+  - acceptance\nr\editor-resource-load-baseline.md
+  - acceptance\nr\enclosure-authored-normals.md
+  - acceptance\nr\environment-evidence.md
+  - acceptance\nr\environment-specular.md
+  - acceptance\nr\explicit-material-frame.md
+  - acceptance\nr\eye-npr-inputs.md
+  - acceptance\nr\eye-radial-surface.md
+  - acceptance\nr\face-radial-indirect.md
+  - acceptance\nr\face-sdf-normal.md
+  - acceptance\nr\face-specular-control.md
+  - acceptance\nr\floor-runtime-binding.md
+  - acceptance\nr\floor-surface-conversion.md
+  - acceptance\nr\fog-transport-data.md
+  - acceptance\nr\fog-volume-gpu.md
+  - acceptance\nr\generic-material-feature-folding.md
+  - acceptance\nr\gltf-sampler-contract.md
+  - acceptance\nr\hair-depth-coverage.md
+  - acceptance\nr\hair-object-visibility.md
+  - acceptance\nr\hair-sampling-boundary.md
+  - acceptance\nr\highest-detail-integration.md
+  - acceptance\nr\instance-gpu-contract.md
+  - acceptance\nr\irradiance-clipmap-resource.md
+  - acceptance\nr\irradiance-clipmap-scene.md
+  - acceptance\nr\irradiance-composition.md
+  - acceptance\nr\irradiance-coverage.md
+  - acceptance\nr\irradiance-evidence.md
+  - acceptance\nr\irradiance-query-frame.md
+  - acceptance\nr\irradiance-query.md
+  - acceptance\nr\joint-buffer-capacity.md
+  - acceptance\nr\joint-colour-lighting.md
+  - acceptance\nr\layered-content.md
+  - acceptance\nr\light-attenuation.md
+  - acceptance\nr\light-influence-boxes.md
+  - acceptance\nr\light-specular-response.md
+  - acceptance\nr\lit-normal-decoding.md
+  - acceptance\nr\local-light-color-space.md
+  - acceptance\nr\local-light-profile-binding.md
+  - acceptance\nr\local-lighting.md
+  - acceptance\nr\locomotion-blending.md
+  - acceptance\nr\logistics-evidence.md
+  - acceptance\nr\logistics-multiclip.md
+  - acceptance\nr\main-aa-cost-attribution.md
+  - acceptance\nr\main-character-integration.md
+  - acceptance\nr\main-light-runtime-binding.md
+  - acceptance\nr\main-reflection-history.md
+  - acceptance\nr\material-class-feature-specialization.md
+  - acceptance\nr\material-document-emission.md
+  - acceptance\nr\material-frame-instance-producer.md
+  - acceptance\nr\material-local-wrap.md
+  - acceptance\nr\material-motion-response.md
+  - acceptance\nr\material-parameter-overrides.md
+  - acceptance\nr\material-pixel-lifetime.md
+  - acceptance\nr\material-profile-input-validation.md
+  - acceptance\nr\material-rim-and-view-tint.md
+  - acceptance\nr\material-shadow-coverage.md
+  - acceptance\nr\material-slot-inspection.md
+  - acceptance\nr\mesh-corner-normals.md
+  - acceptance\nr\motion-visible-surfaces.md
+  - acceptance\nr\multiply-composite.md
+  - acceptance\nr\multisample-character-material.md
+  - acceptance\nr\multisample-rhi.md
+  - acceptance\nr\multisample-scene-target.md
+  - acceptance\nr\multisample-snapshot-outline.md
+  - acceptance\nr\multisample-view-quality.md
+  - acceptance\nr\native-atrium-antialiasing-post-corridor.md
+  - acceptance\nr\native-atrium-antialiasing.md
+  - acceptance\nr\native-binding-index.md
+  - acceptance\nr\native-detail-sampling.md
+  - acceptance\nr\native-game-captures.md
+  - acceptance\nr\native-glass.md
+  - acceptance\nr\native-locomotion.md
+  - acceptance\nr\native-motion-history.md
+  - acceptance\nr\native-ray-arithmetic-order.md
+  - acceptance\nr\native-ray-source.md
+  - acceptance\nr\native-ray-vulkan-reference.md
+  - acceptance\nr\native-reflection-bindings.md
+  - acceptance\nr\native-temporal-inputs.md
+  - acceptance\nr\node-opacity.md
+  - acceptance\nr\npr-illumination.md
+  - acceptance\nr\npr-material-lighting.md
+  - acceptance\nr\object-shadow-configuration.md
+  - acceptance\nr\object-shadow-exact-bias.md
+  - acceptance\nr\object-shadow-gpu.md
+  - acceptance\nr\object-shadow-receiver.md
+  - acceptance\nr\octahedral-environment.md
+  - acceptance\nr\opaque-logistics-rings.md
+  - acceptance\nr\opaque-main-depth-prefill.md
+  - acceptance\nr\opaque-snapshot-depth-prefill.md
+  - acceptance\nr\ordinary-light-zero-energy.md
+  - acceptance\nr\ordinary-material-specialization.md
+  - acceptance\nr\outline-coverage.md
+  - acceptance\nr\outline-depth-source.md
+  - acceptance\nr\outline-material-integration.md
+  - acceptance\nr\outline-temporal-footprint.md
+  - acceptance\nr\playable-integration.md
+  - acceptance\nr\projected-hair-coordinates.md
+  - acceptance\nr\projected-hair-lighting.md
+  - acceptance\nr\projected-hair-line.md
+  - acceptance\nr\projected-hair-pixel-integral.md
+  - acceptance\nr\projected-hair-positive-layers.md
+  - acceptance\nr\projected-hair.md
+  - acceptance\nr\reference-baseline.md
+  - acceptance\nr\reflection-confidence-consumer.md
+  - acceptance\nr\reflection-cube.md
+  - acceptance\nr\reflection-evidence.md
+  - acceptance\nr\reflection-filter-source.md
+  - acceptance\nr\reflection-lod.md
+  - acceptance\nr\reflection-pass-profile.md
+  - acceptance\nr\reflection-probe-fields.md
+  - acceptance\nr\reflection-ray-math.md
+  - acceptance\nr\reflection-reprojection.md
+  - acceptance\nr\reflection-resolution.md
+  - acceptance\nr\reflection-roughness.md
+  - acceptance\nr\reflection-spatial-filter.md
+  - acceptance\nr\reflection-temporal-composition.md
+  - acceptance\nr\reflection-temporal.md
+  - acceptance\nr\remaining-vfx-combinations.md
+  - acceptance\nr\renderdoc-capture.md
+  - acceptance\nr\renderdoc-layout-audit.md
+  - acceptance\nr\sampled-texture-cache.md
+  - acceptance\nr\sampler-filter-and-bias.md
+  - acceptance\nr\scene-fog.md
+  - acceptance\nr\scene-source-selection.md
+  - acceptance\nr\screen-reflection.md
+  - acceptance\nr\screen-space-reflections.md
+  - acceptance\nr\shared-depth-sampling.md
+  - acceptance\nr\shared-motion.md
+  - acceptance\nr\signed-main-ramp.md
+  - acceptance\nr\skinning-position-consistency.md
+  - acceptance\nr\snapshot-depth-demand.md
+  - acceptance\nr\snapshot-shading-budget.md
+  - acceptance\nr\source-geometry-detail.md
+  - acceptance\nr\spatial-antialiasing.md
+  - acceptance\nr\static-authored-normals.md
+  - acceptance\nr\surface-facing.md
+  - acceptance\nr\surface-idle-services.md
+  - acceptance\nr\surface-uv-domain.md
+  - acceptance\nr\temporal-coverage-quality.md
+  - acceptance\nr\temporal-display-edges.md
+  - acceptance\nr\temporal-motion-contract.md
+  - acceptance\nr\temporal-motion-edges.md
+  - acceptance\nr\temporal-reconstruction-integration.md
+  - acceptance\nr\trs-pole-decomposition.md
+  - acceptance\nr\typed-image-inputs.md
+  - acceptance\nr\unlit-coverage-texture.md
+  - acceptance\nr\unlit-opaque-budget.md
+  - acceptance\nr\unlit-surface.md
+  - acceptance\nr\unlit-texture-layer-contract.md
+  - acceptance\nr\unlit-texture-material.md
+  - acceptance\nr\upper-geometry.md
+  - acceptance\nr\vertex-color-streams.md
+  - acceptance\nr\vfx-mip-and-coverage.md
+  - acceptance\nr\vfx-view-depth-fade.md
+  - acceptance\nr\view-dependent-vfx-coverage.md
+  - acceptance\nr\view-fog-multisample.md
+  - acceptance\nr\view-fog-projection.md
+  - acceptance\nr\view-fog-scene-binding.md
+  - acceptance\nr\view-fog-surfaces.md
+  - acceptance\nr\visual-history.md
+  - acceptance\nr\volume-image-upload.md
+  - acceptance\p3\evidence\2026-10-07\before-lua-proxy-fix\performance\editor\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-lua-proxy-fix\performance\standard\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-lua-proxy-fix\performance\stress\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-replay-generator-fix\performance\editor\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-replay-generator-fix\performance\standard\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-replay-generator-fix\performance\stress\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-telemetry-storage-fix\performance\editor\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-telemetry-storage-fix\performance\standard\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-telemetry-storage-fix\performance\stress\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-telemetry-storage-fix\performance-first-final-failed\performance\editor\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-telemetry-storage-fix\performance-first-final-failed\performance\standard\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-telemetry-storage-fix\performance-first-final-failed\performance\stress\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\performance\editor\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\performance\standard\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\performance\stress\GAME-GUIDE.md
+  - acceptance\p5\closure\automatic-resume.md
+  - acceptance\p5\closure\frame-pacing.md
+  - acceptance\p5\closure\memory-investigation.md
+  - acceptance\p5\closure\pipeline-timing.md
+  - acceptance\p5\closure\platformer-long-run.md
+  - acceptance\p5\closure\renderer-reuse.md
+  - acceptance\p5\closure\run-environment-monitor.md
+  - acceptance\p5\closure\sequence-input.md
+  - acceptance\p5\closure\system-memory-trace.md
+  - acceptance\p5\closure\system-trace-results.md
+  - acceptance\p5\closure\investigation-evidence\formal-source-verified\editor\GAME-GUIDE.md
+  - acceptance\p5\closure\investigation-evidence\formal-source-verified\exploration\GAME-GUIDE.md
+  - acceptance\p5\closure\investigation-evidence\formal-source-verified\platformer\GAME-GUIDE.md
+  - acceptance\p5\closure\investigation-evidence\formal-source-verified\standard\GAME-GUIDE.md
+  - acceptance\p5\closure\investigation-evidence\formal-source-verified\stress\GAME-GUIDE.md
+  - acceptance\p5\evidence\p5-capture-layer-control\editor\GAME-GUIDE.md
+  - acceptance\p5\evidence\p5-capture-layer-control\exploration\GAME-GUIDE.md
+  - acceptance\p5\evidence\p5-capture-layer-control\platformer\GAME-GUIDE.md
+  - acceptance\p5\evidence\p5-workflows-retry2\seed\README.md
+  - acceptance\p6\2026-10-12.md
+  - acceptance\p7\2026-10-12.md
+  - acceptance\p8\2026-10-12-bounded-cleanup.md
+  - acceptance\p8\2026-10-13-physical-review.md
+  - acceptance\p8\2026-10-13.md
+  - acceptance\p8\2026-10-14-physical-review.md
+  - acceptance\p8\2026-10-14.md
+  - acceptance\p8\2026-10-31-environment.md
+  - acceptance\pt\2026-10-15.md
+  - acceptance\r7\2026-10-06.md
+  - acceptance\r8\2026-10-07.md
+  - acceptance\r9\2026-10-07.md
+  - acceptance\recovery\2026-10-30.md
+  - acceptance\recovery\asset-dependency-index.md
+  - acceptance\recovery\managed-workflow-cleanup.md
+  - acceptance\recovery\project-startup-context.md
+  - acceptance\retrieval\2026-10-27.md
+  - acceptance\u14\2026-10-12.md
+  - acceptance\u15\2026-10-12.md
+  - acceptance\u16\2026-10-12.md
+  - acceptance\u16\deferred-close.md
+  - acceptance\u16\directory-reclamation.md
+  - acceptance\u16\native-input.md
+  - acceptance\u16\scene-geometry.md
+  - acceptance\u17\2026-10-12.md
+  - acceptance\u8\2026-10-10.md
+  - acceptance\ux\2026-10-14.md
+  - acceptance\vd\2026-10-14.md
+  - acceptance\wc\2026-10-15.md
+  - acceptance\wf1\2026-10-12.md
+  - acceptance\wf2\2026-10-13.md
+  - architecture\editor-object-model.md
+  - assets\native-spline-compiler.md
+  - assets\native-spline-conversion.md
+  - assets\node-opacity.md
+  - audits\2026-10-03-blackhole-performance.md
+  - development\artifact-retention.md
+  - development\evidence-operations.md
+  - development\gpu-event-profile.md
+  - development\native-light-profiles.md
+  - development\native-source-selection.md
+  - development\native-surface-uvs.md
+  - development\pipeline-inspection.md
+  - development\startup-diagnostics.md
+  - history\2026-10-12-planning\index.md
+  - history\2026-10-12-planning\2026-10-11-next-development.md
+  - history\2026-10-12-planning\azure-engine-plan.md
+  - history\2026-10-12-planning\readme-snapshot.md
+  - plans\2026-10-03-r3-completion.md
+  - plans\2026-10-03-r4-execution.md
+  - plans\2026-10-04-playable-execution.md
+  - plans\2026-10-09-character-presentation-refinement.md
+  - plans\2026-10-09-character-rendering-repair.md
+  - plans\2026-10-11-automatic-through-p8.md
+  - plans\2026-10-11-frame-pacing.md
+  - plans\2026-10-12-asset-export-implementation.md
+  - plans\2026-10-12-asset-transfer-experience.md
+  - plans\2026-10-12-bounded-cleanup.md
+  - plans\2026-10-12-compressed-audio.md
+  - plans\2026-10-12-content-expansion.md
+  - plans\2026-10-12-first-batch-delivery.md
+  - plans\2026-10-12-format-closure.md
+  - plans\2026-10-12-p5-deferred-to-p8.md
+  - plans\2026-10-12-texture-containers.md
+  - plans\2026-10-12-workflow-repair.md
+  - plans\2026-10-14-ui-modernization.md
+  - plans\2026-10-15-pathtracing-completion.md
+  - plans\2026-10-15-world-camera-rendering.md
+  - plans\2026-10-16-endfield-resource-validation.md
+  - plans\2026-10-17-dijiang-lighting-video.md
+  - plans\2026-10-17-endfield-native-assets.md
+  - plans\2026-10-17-native-playable-restoration.md
+  - plans\2026-10-17-native-render-restoration.md
+  - plans\2026-10-18-local-reflection-probe.md
+  - plans\2026-10-21-atrium-completeness-antialiasing.md
+  - plans\2026-10-21-native-render-evidence-execution.md
+  - plans\2026-10-22-character-logistics-restoration.md
+  - plans\2026-10-22-character-technique-closure.md
+  - plans\2026-10-22-endfield-capture-handoff.md
+  - plans\2026-10-22-multiply-composite.md
+  - plans\2026-10-22-native-render-restoration-handoff.md
+  - plans\2026-10-22-render-capability-integration-audit.md
+  - plans\2026-10-22-sampled-texture-cache.md
+  - plans\2026-10-22-spatial-antialiasing.md
+  - plans\2026-10-23-outline-projection-integration.md
+  - plans\2026-10-24-material-motion-coverage.md
+  - plans\2026-10-24-multisample-shading.md
+  - plans\2026-10-24-temporal-reconstruction-integration.md
+  - plans\2026-10-25-main-scene-shading-budget.md
+  - plans\2026-10-25-material-slot-inspection.md
+  - plans\2026-10-28-device-handoff.md
+  - plans\2026-10-28-gltf-sampler-contract.md
+  - plans\2026-10-28-reflection-filter-integration.md
+  - plans\2026-10-28-view-fog-composition.md
+  - plans\2026-10-29-reinstall-handoff.md
+  - plans\2026-10-30-development-recovery.md
+  - plans\2026-10-31-asset-dependency-index.md
+  - plans\2026-10-31-managed-workflow-cleanup.md
+  - plans\2026-10-31-project-startup-context.md
+  - plans\2026-10-31-ray-arithmetic-order.md
+  - plans\2026-10-31-ray-vulkan-reference.md
+  - plans\current-stage-status.md
+  - plans\g1-implementation.md
+  - plans\g2-implementation.md
+  - plans\g3-implementation.md
+  - plans\g4-implementation.md
+  - research\2026-10-09-character-presentation-refinement.md
+  - research\2026-10-09-character-rendering-diagnosis.md
+  - research\2026-10-14-gknext-ui.md
+  - research\2026-10-16-endfield-resource-validation.md
+  - research\2026-10-17-native-reflection-cpu.md
+  - research\2026-10-18-floor-decal-color.md
+  - research\2026-10-18-native-ecs-lights.md
+  - research\2026-10-18-native-glass-consumer.md
+  - research\2026-10-18-native-irradiance-query.md
+  - research\2026-10-18-native-scene-state.md
+  - research\2026-10-18-native-source-synchronization.md
+  - research\2026-10-21-endfield-public-rendering.md
+  - research\2026-10-21-native-scene-geometry.md
+  - runtime\aerial-fog.md
+  - runtime\asset-exchange.md
+  - runtime\asset-formats.md
+  - runtime\audio-format-import.md
+  - runtime\camera-projection-offset.md
+  - runtime\capture-camera.md
+  - runtime\character-local-light-response.md
+  - runtime\character-material-profile.md
+  - runtime\color-grading-lut.md
+  - runtime\component-radiometry.md
+  - runtime\compressed-audio.md
+  - runtime\depth-pyramid.md
+  - runtime\directional-lights.md
+  - runtime\dual-face-sdf.md
+  - runtime\environment-specular.md
+  - runtime\eye-radial-surface.md
+  - runtime\fog-transport.md
+  - runtime\frame-pacing.md
+  - runtime\image-format-import.md
+  - runtime\irradiance-clipmaps.md
+  - runtime\irradiance-query.md
+  - runtime\irradiance-volumes.md
+  - runtime\light-influence-boxes.md
+  - runtime\light-receivers.md
+  - runtime\light-specular-response.md
+  - runtime\local-light-attenuation.md
+  - runtime\material-input-layout.md
+  - runtime\model-format-import.md
+  - runtime\multisample-shading.md
+  - runtime\native-irradiance-composition.md
+  - runtime\native-surface-conversion.md
+  - runtime\npr-diffuse.md
+  - runtime\npr-illumination.md
+  - runtime\object-shadow.md
+  - runtime\octahedral-environment.md
+  - runtime\outline-projection.md
+  - runtime\projected-hair-lighting.md
+  - runtime\reflection-cube-assets.md
+  - runtime\reflection-lod.md
+  - runtime\reflection-probe-fields.md
+  - runtime\reflection-ray.md
+  - runtime\reflection-reprojection.md
+  - runtime\reflection-signal-pyramid.md
+  - runtime\reflection-spatial-filter.md
+  - runtime\reflection-surface-snapshot.md
+  - runtime\reflection-temporal.md
+  - runtime\render-residency.md
+  - runtime\rigid-node-animation.md
+  - runtime\sampled-texture-cache.md
+  - runtime\scene-color-refraction.md
+  - runtime\scene-fog.md
+  - runtime\screen-reflection.md
+  - runtime\screen-space-reflections.md
+  - runtime\shadow-color-lut.md
+  - runtime\skinning-position.md
+  - runtime\spatial-antialiasing.md
+  - runtime\specular-input.md
+  - runtime\specular-ramp.md
+  - runtime\surface-facing.md
+  - runtime\surface-lifecycle.md
+  - runtime\surface-uv-domain.md
+  - runtime\temporal-antialiasing.md
+  - runtime\temporal-frame-state.md
+  - runtime\texture-containers.md
+  - runtime\unlit-texture-layers.md
+  - runtime\vertex-color-inputs.md
+  - runtime\volume-image-upload.md
+  - tutorials\editor-interface.md
+  - tutorials\public-pathtracing-demos.md
+  - tutorials\world-camera-rendering.md
+WARNING -  Doc file 'editor-usability-audit.md' contains a link '../src/editor/panels/OutlinerPanel.cpp', but the target is not found among documentation files.
+WARNING -  Doc file 'editor-usability-audit.md' contains a link '../src/editor/panels/AssetBrowserPanel.cpp', but the target is not found among documentation files.
+WARNING -  Doc file 'editor-usability-audit.md' contains a link '../src/editor/EditorToolbar.cpp', but the target is not found among documentation files.
+WARNING -  Doc file 'editor-usability-audit.md' contains a link '../src/editor/EditorWorkspaceUI.cpp', but the target is not found among documentation files.
+WARNING -  Doc file 'editor-usability-audit.md' contains a link '../src/editor/panels/EnvironmentPanel.cpp', but the target is not found among documentation files.
+WARNING -  Doc file 'editor-usability-audit.md' contains a link '../src/editor/panels/SettingsPanel.cpp', but the target is not found among documentation files.
+WARNING -  Doc file 'editor-usability-audit.md' contains a link '../src/editor/EditorProjectEditing.cpp', but the target is not found among documentation files.
+WARNING -  Doc file 'acceptance/ev/ev0.md' contains a link '../../../build/runs/20261016-140642-ev0-baseline-891c98/manifest.json', but the target '../build/runs/20261016-140642-ev0-baseline-891c98/manifest.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/ev/ev0.md' contains a link '../../../build/runs/20261016-140642-ev0-baseline-891c98/intake.json', but the target '../build/runs/20261016-140642-ev0-baseline-891c98/intake.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/ev/ev0.md' contains a link '../../../build/runs/20261016-140642-ev0-baseline-891c98/repaired/baseline.json', but the target '../build/runs/20261016-140642-ev0-baseline-891c98/repaired/baseline.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/ev/ev0.md' contains a link '../../../build/runs/20261016-140642-ev0-baseline-891c98/idle/baseline.json', but the target '../build/runs/20261016-140642-ev0-baseline-891c98/idle/baseline.json' is not found among documentation files.
+INFO    -  Doc file 'acceptance/ev/ev6.md' contains an unrecognized relative link '../../../build/runs/20261016-142829-ev6-scene-exchange-41ac3c/', it was left as is.
+WARNING -  Doc file 'acceptance/nr/atrium-completeness.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/background-refresh-semantics.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/background-refresh-semantics.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/atrium-completeness.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/joint-acceptance/front-source-occupancy-v1/report.md', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/joint-acceptance/front-source-occupancy-v1/report.md' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/atrium-completeness.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/joint-acceptance/side-source-occupancy-v1/receipt.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/joint-acceptance/side-source-occupancy-v1/receipt.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/atrium-completeness.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/visual-geometry-review.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/visual-geometry-review.json' is not found among documentation files.
+INFO    -  Doc file 'acceptance/nr/atrium-completeness.md' contains an unrecognized relative link '../../../build/runs/20261021-172156-native-render-evidence-623c52/joint-acceptance/post-corridor-v10/media', it was left as is.
+WARNING -  Doc file 'acceptance/nr/atrium-completeness.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/final-source-snapshot/receipt.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/final-source-snapshot/receipt.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/captured-irradiance-inputs.md' contains a link 'evidence/2026-10-22/captured-irradiance-inputs.json', but the target 'acceptance/nr/evidence/2026-10-22/captured-irradiance-inputs.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-import/editor/stdout.log', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-import/editor/stdout.log' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-import/editor/stderr.log', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-import/editor/stderr.log' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-import/editor/launch.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-import/editor/launch.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../src/editor/EditorRenderResourceState.hpp', but the target '../src/editor/EditorRenderResourceState.hpp' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../src/app/AzureRenderApp.cpp', but the target '../src/app/AzureRenderApp.cpp' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../src/app/AzureRenderGameplay.cpp', but the target '../src/app/AzureRenderGameplay.cpp' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../src/editor/EditorSession.cpp', but the target '../src/editor/EditorSession.cpp' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/editor-resource-state-cpu-checks.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/editor-resource-state-cpu-checks.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../tests/EditorRenderResourceStateChecks.hpp', but the target '../tests/EditorRenderResourceStateChecks.hpp' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../tests/EditorSessionTests.cpp', but the target '../tests/EditorSessionTests.cpp' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/verify_editor_resource_state.py', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/verify_editor_resource_state.py' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/editor_resource_state_probe.cpp', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/editor_resource_state_probe.cpp' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/editor-resource-missing-baseline.exe', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/editor-resource-missing-baseline.exe' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/editor-resource-production.exe', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/editor-resource-production.exe' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-build.cmd', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-build.cmd' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-debug-build.log', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-debug-build.log' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-debug-test.log', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-debug-test.log' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-release-build.log', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-release-build.log' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-release-test.log', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-release-test.log' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-import-v2/editor/launch.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-import-v2/editor/launch.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-debug-gpu-tests.log', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-debug-gpu-tests.log' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-release-gpu-tests.log', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/resource-sync-release-gpu-tests.log' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-import-v2/reload-timeline-verification.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-import-v2/reload-timeline-verification.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-import-v2/collision-canonicalization-verification.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-import-v2/collision-canonicalization-verification.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/verify_collision_canonicalization.cpp', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/verify_collision_canonicalization.cpp' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/editor-resource-load-baseline.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-world-verification.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/playable-world-verification.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/eye-radial-surface.md' contains a link '../../../schemas/eye_radial_material.schema.json', but the target '../schemas/eye_radial_material.schema.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/joint-buffer-capacity.md' contains a link '../../../src/scenes/CharacterSceneRenderer.cpp', but the target '../src/scenes/CharacterSceneRenderer.cpp' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/joint-buffer-capacity.md' contains a link '../../../tests/NullRhiPassTests.cpp', but the target '../tests/NullRhiPassTests.cpp' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/native-atrium-antialiasing-post-corridor.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/final-source-snapshot/receipt.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/final-source-snapshot/receipt.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/native-atrium-antialiasing-post-corridor.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/scene-aa1.mp4', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/scene-aa1.mp4' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/native-atrium-antialiasing-post-corridor.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/aa-comparison.mp4', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/aa-comparison.mp4' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/native-atrium-antialiasing-post-corridor.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/comparison.png', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/comparison.png' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/native-atrium-antialiasing-post-corridor.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/summary.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/summary.json' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/native-atrium-antialiasing.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/source-snapshot/playable-safe.azureproject.txt', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/source-snapshot/playable-safe.azureproject.txt' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/native-atrium-antialiasing.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/source-snapshot/playable-safe.azurelevel.txt', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/source-snapshot/playable-safe.azurelevel.txt' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/native-atrium-antialiasing.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/binary-snapshot/AzurePlayer-53f469001bfa.exe', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/binary-snapshot/AzurePlayer-53f469001bfa.exe' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/native-atrium-antialiasing.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/media/scene-aa1.mp4', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/media/scene-aa1.mp4' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/native-atrium-antialiasing.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/media/aa-comparison.mp4', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/media/aa-comparison.mp4' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/native-atrium-antialiasing.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/media/comparison.png', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/media/comparison.png' is not found among documentation files.
+WARNING -  Doc file 'acceptance/nr/native-atrium-antialiasing.md' contains a link '../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/summary.json', but the target '../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/summary.json' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-22-render-capability-integration-audit.md' contains a link '../../CMakeLists.txt', but the target '../CMakeLists.txt' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-22-render-capability-integration-audit.md' contains a link '../../src/scenes/BuiltinRendererCatalog.cpp', but the target '../src/scenes/BuiltinRendererCatalog.cpp' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-22-render-capability-integration-audit.md' contains a link '../../src/app/AzureRenderApp.cpp', but the target '../src/app/AzureRenderApp.cpp' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-22-render-capability-integration-audit.md' contains a link '../../src/editor/EditorSession.cpp', but the target '../src/editor/EditorSession.cpp' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-22-render-capability-integration-audit.md' contains a link '../../src/scenes/CharacterSceneRenderer.cpp', but the target '../src/scenes/CharacterSceneRenderer.cpp' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-22-render-capability-integration-audit.md' contains a link '../../shaders/mesh.frag', but the target '../shaders/mesh.frag' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-22-render-capability-integration-audit.md' contains a link '../../shaders/character_surface.glsl', but the target '../shaders/character_surface.glsl' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-22-render-capability-integration-audit.md' contains a link '../../src/assets/MaterialData.cpp', but the target '../src/assets/MaterialData.cpp' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-22-render-capability-integration-audit.md' contains a link '../../schemas/azure_render_material.schema.json', but the target '../schemas/azure_render_material.schema.json' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-22-render-capability-integration-audit.md' contains a link '../../tools/validate_material_profiles.py', but the target '../tools/validate_material_profiles.py' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-22-render-capability-integration-audit.md' contains a link '../../src/assets/GltfLoader.cpp', but the target '../src/assets/GltfLoader.cpp' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-22-render-capability-integration-audit.md' contains a link '../../src/assets/MaterialSurfaceProfile.hpp', but the target '../src/assets/MaterialSurfaceProfile.hpp' is not found among documentation files.
+WARNING -  Doc file 'plans/2026-10-30-development-recovery.md' contains a link '../../../../AGENT.md', but the target '../../../AGENT.md' is not found among documentation files.
+WARNING -  Doc file 'research/2026-10-17-native-reflection-cpu.md' contains a link '../../tools/endfield_native/reflection_semantics.py', but the target '../tools/endfield_native/reflection_semantics.py' is not found among documentation files.
+WARNING -  Doc file 'research/2026-10-17-native-reflection-cpu.md' contains a link '../../tools/endfield_native/reflection_bridge.py', but the target '../tools/endfield_native/reflection_bridge.py' is not found among documentation files.
+WARNING -  Doc file 'research/2026-10-18-native-ecs-lights.md' contains a link '../../tools/endfield_native/lighting_ecs.py', but the target '../tools/endfield_native/lighting_ecs.py' is not found among documentation files.
+WARNING -  Doc file 'research/2026-10-18-native-irradiance-query.md' contains a link '../../tools/endfield_native/irradiance.py', but the target '../tools/endfield_native/irradiance.py' is not found among documentation files.
+WARNING -  Doc file 'research/2026-10-18-native-irradiance-query.md' contains a link '../../tools/endfield_native/irradiance_grid.py', but the target '../tools/endfield_native/irradiance_grid.py' is not found among documentation files.
+WARNING -  Doc file 'research/2026-10-18-native-scene-state.md' contains a link '../../tools/endfield_native/irradiance.py', but the target '../tools/endfield_native/irradiance.py' is not found among documentation files.
+WARNING -  Doc file 'research/2026-10-18-native-scene-state.md' contains a link '../../tools/test_endfield_native_irradiance.py', but the target '../tools/test_endfield_native_irradiance.py' is not found among documentation files.
+WARNING -  Doc file 'research/2026-10-21-endfield-public-rendering.md' contains a link '../../shaders/inner_outline.frag', but the target '../shaders/inner_outline.frag' is not found among documentation files.
+WARNING -  Doc file 'research/2026-10-21-endfield-public-rendering.md' contains a link '../../shaders/view_resolve.frag', but the target '../shaders/view_resolve.frag' is not found among documentation files.
+WARNING -  Doc file 'runtime/eye-radial-surface.md' contains a link '../../schemas/eye_radial_material.schema.json', but the target '../schemas/eye_radial_material.schema.json' is not found among documentation files.
+WARNING -  Doc file 'runtime/irradiance-clipmaps.md' contains a link '../../src/render/IrradianceClipmap.hpp', but the target '../src/render/IrradianceClipmap.hpp' is not found among documentation files.
+WARNING -  Doc file 'runtime/irradiance-volumes.md' contains a link '../../src/render/IrradianceVolume.hpp', but the target '../src/render/IrradianceVolume.hpp' is not found among documentation files.
+WARNING -  Doc file 'runtime/sampled-texture-cache.md' contains a link '../../assets_public/texture_sharing/README.md', but the target '../assets_public/texture_sharing/README.md' is not found among documentation files.
+WARNING -  Doc file 'runtime/unlit-texture-layers.md' contains a link '../../schemas/unlit_texture_layers.schema.json', but the target '../schemas/unlit_texture_layers.schema.json' is not found among documentation files.
+INFO    -  Doc file 'acceptance/nr/actual-motion-velocity.md' contains a link '../../runtime/physics-input.md#角色速度观测', but the doc 'runtime/physics-input.md' does not contain an anchor '#角色速度观测'.
+INFO    -  Doc file 'research/2026-10-09-character-presentation-refinement.md' contains a link '2026-10-09-character-rendering-diagnosis.md#本地实现与联网参考', but the doc 'research/2026-10-09-character-rendering-diagnosis.md' does not contain an anchor '#本地实现与联网参考'.
+INFO    -  Documentation built in 206.42 seconds

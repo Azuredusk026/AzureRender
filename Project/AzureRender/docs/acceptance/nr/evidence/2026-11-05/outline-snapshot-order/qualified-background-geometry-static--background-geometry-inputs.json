@@ -1,0 +1,12 @@
+{
+  "sourceEvent": 460,
+  "sourceIndices": 2304,
+  "sourceVertices": 509,
+  "clippedTriangles": 72,
+  "renderedTriangles": 4608,
+  "renderedVertices": 13824,
+  "subdivisionLevels": 3,
+  "sourceNormalTexture": "ResourceId::336",
+  "sourceGeometryRetained": true,
+  "fixedViewColourOnly": true
+}

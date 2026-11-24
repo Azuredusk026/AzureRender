@@ -1,0 +1,35 @@
+{
+  "status": "saved-semantic-review-pending",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\engine\\bin\\AzureRender.exe",
+    "--editor-project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\source-project\\playable.azureproject",
+    "--editor-actions",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\editor-actions.json",
+    "--editor-close-policy",
+    "save",
+    "--width",
+    "960",
+    "--height",
+    "540",
+    "--fixed-frame-step",
+    "--smoke-frames",
+    "8",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\editor-save\\runtime.json"
+  ],
+  "programSha256": "dad759e9ad4e1ccd8764e27d2d827139ffef72b841ddcd1bede0be60e090088e",
+  "projectSha256": "f8409a3c705bb0e0896a7cf92b4a735bbb836fb90a8c3d71bddb78680363d77a",
+  "levelBeforeSha256": "216df28046d2954e285000cfa1b4f1d7d74638a8463e31c416f2374a65e64895",
+  "exitCode": 0,
+  "elapsedSeconds": 458.73026779998327,
+  "editorActions": [
+    {
+      "command": "save",
+      "error": "",
+      "milliseconds": 5966.8597,
+      "passed": true
+    }
+  ],
+  "levelAfterSha256": "1efbfee357aa0a4d49a1c4f73479cdbeeb96ac28765ca9e9a0d774a7a184c149"
+}

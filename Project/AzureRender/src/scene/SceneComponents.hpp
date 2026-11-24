@@ -1,6 +1,6 @@
 #pragma once
 
-#include "app/AzureRenderInternal.hpp"
+#include "render/RenderMath.hpp"
 #include "ecs/Entity.hpp"
 #include "scene/TransformMath.hpp"
 

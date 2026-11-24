@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "stage": "UI5",
+  "date": "2026-10-12",
+  "headAtCollection": "ad30187f80c7841b898176fcbb6d0c5003e15365",
+  "source": {
+    "origin": "working tree with pre-existing user changes",
+    "inventory": "source-inventory.json",
+    "sha256": "397bcd4b06d59110a6bd965ce59a8e732ed9f4c0bc5ad82a953d30d607930ee9",
+    "files": 817
+  },
+  "builds": {
+    "Debug": "passed affected targets",
+    "Release": "passed affected targets"
+  },
+  "cpu": {
+    "Debug": "10/10 passed",
+    "Release": "10/10 passed"
+  },
+  "gpu": {
+    "finalBuild": [
+      "compact diagnostics: both workflows",
+      "normal long error dismissal: scene inspector"
+    ],
+    "earlierStageBuild": [
+      "normal, medium and high DPI: both workflows",
+      "compact filters: both workflows",
+      "content workflows: both workflows",
+      "content navigation"
+    ],
+    "earlierBinarySha256": "not retained; only final build artifacts are fingerprinted"
+  },
+  "input": "production ImGui replay",
+  "physicalInput": "not performed",
+  "installVerification": {
+    "passed": true,
+    "scope": "all installed regular files: inventory, size and SHA-256",
+    "files": 9345,
+    "licenses": [
+      "NotoSansCJK-LICENSE.txt",
+      "imgui-LICENSE.txt",
+      "glfw3-LICENSE.txt",
+      "tinygltf-LICENSE.txt",
+      "openexr-LICENSE.txt",
+      "imath-LICENSE.txt",
+      "libdeflate-LICENSE.txt",
+      "openjph-LICENSE.txt",
+      "stb-LICENSE.txt",
+      "nlohmann-json-LICENSE.txt",
+      "joltphysics-LICENSE.txt",
+      "lua-LICENSE.txt",
+      "sol2-LICENSE.txt",
+      "rmlui-LICENSE.txt",
+      "miniaudio-LICENSE.txt",
+      "freetype-LICENSE.txt",
+      "libpng-LICENSE.txt",
+      "zlib-LICENSE.txt",
+      "bzip2-LICENSE.txt",
+      "brotli-LICENSE.txt",
+      "LatoLatin-LICENSE.txt"
+    ],
+    "updated": [
+      "bin/AzureRender.exe"
+    ],
+    "executableSha256": "67c7bf2c1aed2d396dfa4bcc2eee1ec2ea75033af65a865091be5e8e289b3a9c",
+    "seconds": 128.86
+  },
+  "remaining": [
+    "Debug 万文件目录 180 秒超时",
+    "实体键鼠与中文输入法组合",
+    "P8 正式性能与长跑"
+  ],
+  "artifacts": [
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+      "sha256": "67c7bf2c1aed2d396dfa4bcc2eee1ec2ea75033af65a865091be5e8e289b3a9c",
+      "bytes": 8168448
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRender.exe",
+      "sha256": "7d5e4a73204d1604d808a22fa7ed0d6424122c10096ed064559b78e6df44ccea",
+      "bytes": 14472704
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\bin\\AzureRender.exe",
+      "sha256": "67c7bf2c1aed2d396dfa4bcc2eee1ec2ea75033af65a865091be5e8e289b3a9c",
+      "bytes": 8168448
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\install_manifest.json",
+      "sha256": "d2109713003e3532f6827ce6bc25c31f704f23d4282513bbc335489304df5509",
+      "bytes": 2292843
+    }
+  ],
+  "evidence": [
+    {
+      "path": "compact-diagnostics.png",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui5\\diagnostics-green\\run-de0c8993\\scene_inspector\\compact-dismiss\\capture\\frame_000068.png",
+      "sha256": "dac9fce3918b3f2e96336ec8a4aad22a5c3ea4b66893d88d7c1cfdf7a00946aa"
+    },
+    {
+      "path": "compact-red.log",
+      "source": "panels-compact-hover.log",
+      "sha256": "dfaebf54a094412f953ae78378cc6c7be0824774a0b3e205467af5a4a7da2232"
+    },
+    {
+      "path": "console-workspace.png",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui5\\panels-first\\run-633e17bf\\scene_inspector\\console-normal\\capture\\frame_000045.png",
+      "sha256": "a92428f9bf958b2f40fb0117d8568bdedc4faf135bda1e48be0faf535016df7a"
+    },
+    {
+      "path": "content-gpu.log",
+      "source": "content-gpu-final.log",
+      "sha256": "66d3548975151270de38ab1226edfefa6bb0cc53dce8da4283f98cfc76bdb8b4"
+    },
+    {
+      "path": "debug-build.log",
+      "source": "debug-build-final.log",
+      "sha256": "a3f1bbca526c4523ec30125c99af479f044be2db7fde1a765b2eda95e93b5f14",
+      "normalization": "trailing whitespace removed in evidence copy; raw build log retained",
+      "sourceSha256": "817999aab8e23c1b27620dfab258c2d541f4322d5882d9c59622506d1fb3bd07"
+    },
+    {
+      "path": "debug-tests.log",
+      "source": "debug-tests-final.log",
+      "sha256": "fa73c021152db4a2475b1691088bac5925d08b4028d4efb2db4e801c4cb01671"
+    },
+    {
+      "path": "diagnostics-final.json",
+      "source": "diagnostics-green/latest.json",
+      "sha256": "b445335a2a4cb8c52156ff5b386e0503f5ccb079cb16906e532226cc2b275d02"
+    },
+    {
+      "path": "diagnostics-red.json",
+      "source": "",
+      "sha256": "ff12d4f5116b36673c88d09ab0fa8bf4f911075cdd369391258168edd937af4a"
+    },
+    {
+      "path": "docs-style.log",
+      "source": "docs-style.log",
+      "sha256": "14200a262c07586fb106ae098ee6f5971eb460c5f776fcd8731d1fecdc835925"
+    },
+    {
+      "path": "document-review.json",
+      "source": "",
+      "sha256": "74f28e8dcf1d73e223412d0610148b4a82885b07c9d00383e216b6217def809f"
+    },
+    {
+      "path": "install-verify.json",
+      "source": "install-verify.json",
+      "sha256": "03c486dd12898ea1abb95fd498c0eb201cd2ea9eeb4c8322e0648a88c1a2ddeb"
+    },
+    {
+      "path": "links.json",
+      "source": "links.json",
+      "sha256": "7f075209db82bd76bead82c94fdcd78cbdae43216685fb92ffc48809b41d199d"
+    },
+    {
+      "path": "long-error-red.log",
+      "source": "content-gpu.log",
+      "sha256": "fdf328967df567604a1b1fdc39e1590a9bc217da3caafa84d0704be336a6d526"
+    },
+    {
+      "path": "model-red.log",
+      "source": "model-red.log",
+      "sha256": "df803353a5d3a0184432d05fc22124a930b00af63ff597fa4b5c62099d4bd743"
+    },
+    {
+      "path": "navigation-gpu.log",
+      "source": "navigation-gpu.log",
+      "sha256": "3422916cbd59d70534da349ad245b758d8964ab1030da9bcf8995c34d8ac0048"
+    },
+    {
+      "path": "normal-diagnostics-final.json",
+      "source": "normal-diagnostics-final/summary.json",
+      "sha256": "b216f6d0b2f7cd9f5354af32792a1ea6da3d150e51fcdc986c0a3b63df4ab9bb"
+    },
+    {
+      "path": "panels-compact.json",
+      "source": "panels-compact-green/latest.json",
+      "sha256": "fa81195abefaffcbddb4fd57240e68654c2af6d2b5ac30c7bf0c471ee048fa02"
+    },
+    {
+      "path": "panels-normal.json",
+      "source": "panels-first/latest.json",
+      "sha256": "a02081b83bb8e5904204881834590273883b6e4965a0a9130efd3a8804f4a725"
+    },
+    {
+      "path": "panels-red.log",
+      "source": "panels-red.log",
+      "sha256": "4b135355f9c68249dd43f05b779ad6c2d6f98ecd6ff938df1bf33efc8bff687d"
+    },
+    {
+      "path": "release-build.log",
+      "source": "release-build-final.log",
+      "sha256": "702b769a0b7ad18020dc7811930ceab69b1f745dec5132cb79595f262e3ad73b"
+    },
+    {
+      "path": "release-tests.log",
+      "source": "release-tests-final.log",
+      "sha256": "9a42d71e3261c06e01bb41cc8939ef6bca0ee01fa189e1cd979b04e1ca29b682"
+    },
+    {
+      "path": "site-build.log",
+      "source": "site-build.log",
+      "sha256": "914b2ab6e1977bfb8b2e9a31a16b0e2950160c04981c03959b55d955e710b9de"
+    },
+    {
+      "path": "source-inventory.json",
+      "source": "",
+      "sha256": "397bcd4b06d59110a6bd965ce59a8e732ed9f4c0bc5ad82a953d30d607930ee9"
+    }
+  ]
+}

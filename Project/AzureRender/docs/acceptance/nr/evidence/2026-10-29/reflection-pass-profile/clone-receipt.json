@@ -1,0 +1,12 @@
+{
+  "counts": {
+    "linked": 715,
+    "copied": 804,
+    "copiedBytes": 5861402,
+    "skippedFiles": 406,
+    "skippedBytes": 558443308
+  },
+  "levels": [
+    "scene\\enclosure-sampler.azurelevel"
+  ]
+}

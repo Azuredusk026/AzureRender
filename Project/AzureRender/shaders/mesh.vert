@@ -1,4 +1,7 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#include "morph_data.glsl"
+#include "skin_position.glsl"
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
@@ -13,7 +16,15 @@ layout(binding = 0) uniform CameraData {
     vec4 faceLightDirection;
     vec4 faceSdfParameters;
     vec4 faceSdfShadowColor;
+    vec4 mainLightDirection;
+    vec4 cascadeDepthRanges;
+#if defined(AZURE_REFERENCE_CAMERA)
+#include "reference_camera_fields.glsl"
+#endif
 } camera;
+#if defined(AZURE_REFERENCE_CAMERA)
+#include "reference_camera_vertex.glsl"
+#endif
 
 layout(std430, binding = 10) readonly buffer JointData {
     mat4 matrices[];
@@ -21,12 +32,7 @@ layout(std430, binding = 10) readonly buffer JointData {
 
 // Per-instance transforms, written by the host in the same order as the
 // visible instance list; gl_InstanceIndex selects the slot.
-struct InstanceTransforms {
-    mat4 model;
-    mat4 modelViewProjection;
-    mat4 cascadeLightModelViewProjection[4];
-    uvec4 meta;
-};
+#include "instance_data.glsl"
 layout(std430, binding = 13) readonly buffer InstanceData {
     InstanceTransforms instances[];
 } instanceData;
@@ -39,11 +45,47 @@ layout(location = 4) in uvec4 jointIndices;
 layout(location = 5) in vec4 jointWeights;
 layout(location = 6) in vec3 morph0;
 layout(location = 7) in vec3 morph1;
-layout(location = 0) out vec3 worldNormal;
-layout(location = 1) out vec4 worldTangent;
+layout(location = 8) in float browMask;
+#if !defined(AZURE_OUTLINE_MASK) && !defined(AZURE_SNAPSHOT_DEPTH)
+layout(location=9) in vec4 vertexColor;
+layout(location=8,component=1) out vec3 vertexColorRgb;
+layout(location=0,component=3) out float vertexColorAlpha;
+#endif
+#if defined(AZURE_OUTLINE_MASK) || defined(AZURE_SNAPSHOT_DEPTH)
+#define AZURE_VERTEX_OUTPUT(locationIndex)
+#else
+#define AZURE_VERTEX_OUTPUT(locationIndex) layout(location = locationIndex) out
+#endif
+#if defined(AZURE_REFERENCE_SCENE_VISIBILITY)
+layout(location=0) out vec3 worldNormal;
+layout(location=1) out vec4 worldTangent;
+#else
+AZURE_VERTEX_OUTPUT(0) vec3 worldNormal;
+AZURE_VERTEX_OUTPUT(1) vec4 worldTangent;
+#endif
 layout(location = 2) out vec2 textureCoordinate;
-layout(location = 3) out vec3 worldPosition;
-layout(location = 4) out vec4 shadowPositions[4];
+#if defined(AZURE_SNAPSHOT_DEPTH)
+layout(location=3) out vec3 worldPosition;
+#else
+AZURE_VERTEX_OUTPUT(3) vec3 worldPosition;
+#endif
+AZURE_VERTEX_OUTPUT(4) vec4 shadowPositions[4];
+AZURE_VERTEX_OUTPUT(8) float eyebrowRegion;
+#if defined(AZURE_OUTLINE_MASK) || defined(AZURE_SNAPSHOT_DEPTH)
+vec4 instanceFaceDirection;
+mat4 instanceFaceFrame;
+#else
+layout(location = 9) flat out vec4 instanceFaceDirection;
+layout(location = 10) flat out mat4 instanceFaceFrame;
+#endif
+#if defined(AZURE_SNAPSHOT_DEPTH)
+layout(location=14) out vec3 opacityCoordinate;
+#else
+AZURE_VERTEX_OUTPUT(14) vec3 opacityCoordinate;
+#endif
+#if defined(AZURE_OBJECT_SHADOW)
+layout(location=15) flat out uint instanceObjectShadow;
+#endif
 
 // Morph blend weights + per-primitive gizmo transform (driven by push
 // constants from RenderSettings). The vertex push range starts at byte 128
@@ -53,34 +95,73 @@ layout(push_constant) uniform MorphWeights {
     layout(offset = 80) vec4 styleParameters;
     layout(offset = 96) vec4 featureParameters;
     layout(offset = 116) uint materialFeatures;
+#if defined(AZURE_PROJECTED_SURFACE)
+    layout(offset = 124) uint packedMaterial;
+#endif
+#if defined(AZURE_SURFACE_RADIANCE_REUSE) || defined(AZURE_SHADOW_HISTORY)
+    layout(offset = 128) uint surfaceFirstIndex;
+#if defined(AZURE_PROJECTED_SURFACE)
+    layout(offset = 132) float samplingScale;
+#endif
+    layout(offset = 136) uint surfaceDrawSlot;
+#elif defined(AZURE_PROJECTED_SURFACE)
+    layout(offset = 132) float samplingScale;
+#else
     layout(offset = 128) vec2 weights;
+#endif
     layout(offset = 144) mat4 gizmoTransform;
 } morphWeights;
+#if defined(AZURE_SHADOW_HISTORY)
+layout(location=15,component=1) flat out uvec2 shadowHistorySource;
+#endif
+#if defined(AZURE_SURFACE_RADIANCE_REUSE)
+layout(location=15,component=1) flat out uvec2 surfaceRadianceSource;
+layout(location=15,component=3) flat out uint surfaceRadianceDrawSlot;
+#endif
 
+#if defined(AZURE_COMPUTE_SKINNING)
+#include "skinned_vertex_layout.glsl"
+layout(std430, binding = 17) readonly buffer InstanceSkinnedVertices { uint words[]; } computed;
+float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceData.instances[gl_InstanceIndex].meta.y + uint(gl_VertexIndex))*azureSkinnedVertexWordCount+offset]); }
+vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset+1u),posedFloat(offset+2u)); }
+#endif
+#if defined(AZURE_PROJECTED_SURFACE)
+#include "outline_projected_surface.glsl"
+#endif
 void main() {
+#if defined(AZURE_SHADOW_HISTORY)
+    shadowHistorySource=uvec2(uint(gl_InstanceIndex),morphWeights.surfaceFirstIndex);
+#endif
+#if defined(AZURE_SURFACE_RADIANCE_REUSE)
+    surfaceRadianceSource=uvec2(uint(gl_InstanceIndex),morphWeights.surfaceFirstIndex);
+    surfaceRadianceDrawSlot=morphWeights.surfaceDrawSlot;
+#endif
+#if !defined(AZURE_OUTLINE_MASK) && !defined(AZURE_SNAPSHOT_DEPTH)
+    vertexColorRgb=vertexColor.rgb;vertexColorAlpha=vertexColor.a;
+#endif
+#if defined(AZURE_OBJECT_SHADOW)
+    instanceObjectShadow=instanceData.instances[gl_InstanceIndex].objectShadowIndex;
+#endif
+    opacityCoordinate=position;
+    eyebrowRegion = browMask;
+    instanceFaceDirection = instanceData.instances[gl_InstanceIndex].faceLight;
+    instanceFaceFrame=instanceData.instances[gl_InstanceIndex].faceFrame;
+    if((morphWeights.materialFeatures & 65536U)!=0U && (morphWeights.materialFeatures & 1048576U)==0U) {
+        // The projected hair frame follows the source object and gizmo.
+        instanceFaceFrame=instanceData.instances[gl_InstanceIndex].model*morphWeights.gizmoTransform;
+    } else if((morphWeights.materialFeatures & (2048U|1048576U))!=0U
+        ||(instanceData.instances[gl_InstanceIndex].instanceFlags&AZURE_INSTANCE_MATERIAL_RIM_ORIGIN)!=0U) {
+        mat4 model=instanceData.instances[gl_InstanceIndex].model;
+        instanceFaceFrame=model*morphWeights.gizmoTransform*inverse(model)*instanceFaceFrame;
+        for(int axis=0;axis<3;++axis)instanceFaceFrame[axis].xyz=normalize(instanceFaceFrame[axis].xyz);
+    }
     bool browOverlay =
         (morphWeights.materialFeatures & 64U) != 0U;
-    bool eyebrowVertex = browOverlay && (
-        (jointWeights.x > 0.001
-            && jointIndices.x >= 112U && jointIndices.x <= 154U)
-        || (jointWeights.y > 0.001
-            && jointIndices.y >= 112U && jointIndices.y <= 154U)
-        || (jointWeights.z > 0.001
-            && jointIndices.z >= 112U && jointIndices.z <= 154U)
-        || (jointWeights.w > 0.001
-            && jointIndices.w >= 112U && jointIndices.w <= 154U));
 #if defined(AZURE_COMPUTE_SKINNING)
-    vec4 skinnedPosition = vec4(position, 1.0);
-    vec3 skinnedNormal = normalize(normal);
-    vec3 skinnedTangent = normalize(tangent.xyz);
-    if (eyebrowVertex) {
-        float browThickness = min(morphWeights.styleParameters.x, 0.0012);
-        float islandCenterY = morph0.y > 1.2617 ? 1.26704 : 1.25846;
-        float islandCenterX = sign(morph0.x) * 0.0365;
-        skinnedPosition.y += sign(morph0.y - islandCenterY) * browThickness;
-        skinnedPosition.x += sign(morph0.x - islandCenterX)
-            * browThickness * 0.45;
-    }
+    vec4 skinnedPosition = vec4(posedVector(0u), 1.0);
+    vec3 skinnedNormal = normalize(posedVector(3u));
+    vec3 skinnedTangent = normalize(posedVector(6u));
+
 #else
     const uint jointBase = instanceData.instances[gl_InstanceIndex].meta.x;
     mat4 skinMatrix =
@@ -88,25 +169,17 @@ void main() {
         + jointWeights.y * jointData.matrices[jointBase + jointIndices.y]
         + jointWeights.z * jointData.matrices[jointBase + jointIndices.z]
         + jointWeights.w * jointData.matrices[jointBase + jointIndices.w];
-    vec3 morphedPosition = position + morph0 * morphWeights.weights.x
-        + morph1 * morphWeights.weights.y;
-    if (eyebrowVertex) {
-        // This exported primitive combines four brow islands with thirty eye
-        // and eyelash islands. Brow joints occupy 112..154, so compensate for
-        // the sub-pixel card height without altering the eyelashes.
-        float browThickness = min(morphWeights.styleParameters.x, 0.0012);
-        float islandCenterY = position.y > 1.2617 ? 1.26704 : 1.25846;
-        float islandCenterX = sign(position.x) * 0.0365;
-        morphedPosition.y += sign(position.y - islandCenterY) * browThickness;
-        morphedPosition.x += sign(position.x - islandCenterX)
-            * browThickness * 0.45;
-    }
-    vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
-    vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
-    vec3 skinnedTangent = normalize(mat3(skinMatrix) * tangent.xyz);
+    vec3 morphedPosition=position,morphedNormal=normal,morphedTangent=tangent.xyz;
+    if(!applyAssetMorph(instanceData.instances[gl_InstanceIndex].meta.z,uint(gl_VertexIndex),
+        instanceData.instances[gl_InstanceIndex].meta.w,morphedPosition,morphedNormal,morphedTangent))
+        morphedPosition+=morph0*instanceData.instances[gl_InstanceIndex].morph.x+morph1*instanceData.instances[gl_InstanceIndex].morph.y;
+
+    vec4 skinnedPosition = azureSkinPosition(skinMatrix,morphedPosition);
+    vec3 skinnedNormal = normalize(mat3(skinMatrix) * morphedNormal);
+    vec3 skinnedTangent = normalize(mat3(skinMatrix) * morphedTangent);
 #endif
     vec4 gizmoPosition = morphWeights.gizmoTransform * skinnedPosition;
-    if (browOverlay) {
+    if (browOverlay && browMask > 0.5) {
         vec3 initialWorldPosition = (instanceData.instances[gl_InstanceIndex].model * gizmoPosition).xyz;
         vec3 worldViewDirection = normalize(
             camera.cameraPosition.xyz - initialWorldPosition);
@@ -117,16 +190,25 @@ void main() {
         gizmoPosition.xyz += localViewDirection
             * morphWeights.featureParameters.x;
     }
-    vec3 gizmoNormal = normalize(mat3(morphWeights.gizmoTransform) * skinnedNormal);
+    vec3 gizmoNormal = normalize(transpose(inverse(mat3(morphWeights.gizmoTransform))) * skinnedNormal);
     vec3 gizmoTangent = normalize(mat3(morphWeights.gizmoTransform) * skinnedTangent);
     gl_Position = instanceData.instances[gl_InstanceIndex].modelViewProjection * gizmoPosition;
-    gl_Position.xy *= 1.6;
-    worldNormal = normalize(mat3(instanceData.instances[gl_InstanceIndex].model) * gizmoNormal);
+#if defined(AZURE_REFERENCE_CAMERA)
+    vec4 referenceDeviceBase=gl_Position;
+#endif
+    mat3 modelLinear = mat3(instanceData.instances[gl_InstanceIndex].model);
+    worldNormal = normalize(transpose(inverse(modelLinear)) * gizmoNormal);
     worldTangent = vec4(
         normalize(mat3(instanceData.instances[gl_InstanceIndex].model) * gizmoTangent),
-        tangent.w);
+        tangent.w * sign(determinant(modelLinear) * determinant(mat3(morphWeights.gizmoTransform))));
+#if defined(AZURE_PROJECTED_SURFACE)
+    gl_Position=projectMaterialSurface(gl_Position,worldNormal,worldTangent);
+#endif
     textureCoordinate = texcoord;
     worldPosition = (instanceData.instances[gl_InstanceIndex].model * gizmoPosition).xyz;
+#if defined(AZURE_REFERENCE_CAMERA)
+    gl_Position=azureCameraRasterPosition(worldPosition,referenceDeviceBase,gl_Position);
+#endif
     for (int cascadeIndex = 0; cascadeIndex < 4; ++cascadeIndex) {
         shadowPositions[cascadeIndex] =
             instanceData.instances[gl_InstanceIndex]

@@ -1,0 +1,10 @@
+{
+  "targetSha256": "28a122d3a762aa6a48d6a5f963e126c29ced1d05d1f5f7910cebb8ddf20357c8",
+  "sourceSha256": "28612862d4874a117e889a06ccbd33dd359f4f31a745a2ad1ca9466e98cad743",
+  "verticesRestored": 81198,
+  "maximumDiscardedWeight": 0,
+  "positionToleranceMeters": 5e-07,
+  "uvTolerance": 0.0007,
+  "flipV": true,
+  "outputSha256": "fa3597852d03e82f9b91fe0ea29c08cf6e8b194978c11efcbf157e4273ec444e"
+}

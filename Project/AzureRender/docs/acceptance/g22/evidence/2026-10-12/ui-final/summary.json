@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "productionUiWorkflows": 2,
+  "unicodeDestinations": true,
+  "results": [
+    {
+      "format": "dds",
+      "compression": "bc7",
+      "result": {
+        "colorSpace": "srgb",
+        "compression": "bc7",
+        "domain": "image",
+        "generation": {
+          "dependencyHashes": {},
+          "generatorId": "azure.dds-export",
+          "generatorVersion": 1,
+          "inputHashes": {
+            "swatch.png": "fnv1a64:0f9fe9f37d307294"
+          },
+          "licenseSource": "LicenseRef-External-Asset",
+          "outputHashes": {
+            "swatch.dds": "fnv1a64:75f682cf76aebc4b"
+          },
+          "parametersHash": "fnv1a64:21c24dfb49c6e180",
+          "schemaVersion": 1
+        },
+        "height": 2,
+        "losses": [
+          "Block compression changes pixel samples"
+        ],
+        "mipLevels": 1,
+        "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\g22-texture-containers-2026-10-12\\ui-final\\压缩纹理 🎨 dds\\swatch.dds",
+        "precision": "uint8",
+        "quality": 100,
+        "width": 2
+      }
+    },
+    {
+      "format": "ktx2",
+      "compression": "basis",
+      "result": {
+        "colorSpace": "srgb",
+        "compression": "basis",
+        "domain": "image",
+        "generation": {
+          "dependencyHashes": {},
+          "generatorId": "azure.ktx2-export",
+          "generatorVersion": 1,
+          "inputHashes": {
+            "swatch.png": "fnv1a64:0f9fe9f37d307294"
+          },
+          "licenseSource": "LicenseRef-External-Asset",
+          "outputHashes": {
+            "swatch.ktx2": "fnv1a64:85e88325ab96cd06"
+          },
+          "parametersHash": "fnv1a64:2aef52c3f0e6b576",
+          "schemaVersion": 1
+        },
+        "height": 2,
+        "losses": [
+          "Block compression changes pixel samples"
+        ],
+        "mipLevels": 1,
+        "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\g22-texture-containers-2026-10-12\\ui-final\\压缩纹理 🎨 ktx2\\swatch.ktx2",
+        "precision": "uint8",
+        "quality": 100,
+        "width": 2
+      }
+    }
+  ],
+  "manualReview": "P8"
+}

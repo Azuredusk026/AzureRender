@@ -1,0 +1,103 @@
+{
+  "jobs": {
+    "660": {
+      "task": "nr-shader-host-candidate-debug-exact-confirmation",
+      "state": "failed",
+      "exitCode": 1,
+      "seconds": 51.28100000000268
+    },
+    "661": {
+      "task": "nr-shader-debug-spirv-read-attribution",
+      "state": "succeeded",
+      "exitCode": 0,
+      "seconds": 51.70299999999406
+    },
+    "668": {
+      "task": "nr-view-fog-cache-debug-gpu",
+      "state": "failed",
+      "exitCode": 124,
+      "seconds": 610.0310000000027
+    },
+    "669": {
+      "task": "nr-debug-vulkan-pipeline-timing-observe-root-fix",
+      "state": "succeeded",
+      "exitCode": 0,
+      "seconds": 39.01600000000326
+    },
+    "670": {
+      "task": "nr-shader-block-read-debug-build",
+      "state": "succeeded",
+      "exitCode": 0,
+      "seconds": 20.062000000005355
+    }
+  },
+  "debugFog": {
+    "seconds": 600.0470000000059,
+    "completed": 38,
+    "expected": 50,
+    "cache": {
+      "indexed": {
+        "save": {
+          "stored": 2,
+          "size-limit": 23
+        },
+        "hit": 1986,
+        "requested": 2009,
+        "pipelineMs": 340475.62599999993,
+        "profiles": [
+          "3734923352506864252"
+        ]
+      },
+      "fixed": {
+        "save": {
+          "stored": 13
+        },
+        "hit": 1010,
+        "requested": 1012,
+        "pipelineMs": 148476.2753,
+        "profiles": [
+          "17569981407789027964"
+        ]
+      }
+    }
+  },
+  "debugShaderRead": {
+    "programs": 897,
+    "bytes": 274002740,
+    "byteExact": true,
+    "iteratorMs": 32002.4,
+    "blockMs": 1115.84
+  },
+  "debugHostGraphicsCalls": {
+    "completedCalls": 97,
+    "driverCacheHits": 97,
+    "wallSeconds": 23.372271599999994,
+    "driverSeconds": 1.241503,
+    "fixtureStillFailed": true
+  },
+  "open": {
+    "fullDebugFog": true,
+    "editorHostWorkflows": true,
+    "registeredCatalogRetest": true
+  },
+  "hashes": {
+    "fog/debug.json": "fe9cf820006b44074713d04021bdb8bf11014830fdb32af28aca6ad0687911e5",
+    "fog/debug.log": "81cba1186b5dce1ad321595def1b956bd600a9f40079e5838af5396009fd3fcc",
+    "fog/release.json": "5677892bb2269cca450dd3c174b2b97ffe7fc2102aa7f827039b3df6f9dc5db5",
+    "host/timeout.log": "0f94a34dc3a1cd27017daa330a60702a9154b2aca15606aa0e04c6b226b24b42",
+    "host/operations.json": "6465fd9cf9dd5e9569bcde7be305777c36ca305884ccda06152daadefb139a39",
+    "spirv/io.log": "71e2c2068031d462cd51e42c8a56d185d2678d620f30c0330f2a8897c14e587b",
+    "spirv/io.cpp": "2baf82760c500fb423afe73f799ec78c1c97c65c3ef57518e64a9640114ee921",
+    "spirv/folded-programs.json": "62910cc9a1c33ef550c9fe620d9a365b038046e74886dc751b65f6507bc7ac34",
+    "vulkan/fixture.log": "32e23dc6a47d33de007d7b660dec2d7f9f8e180051349e900da637a0f0622162",
+    "vulkan/rhi.log": "14ca1ae56257c7438da0f2e68f753a9251952ce8dd82006a81339f40bfc23f0a",
+    "vulkan/fixture.json": "1fa0c8e96184e00317190e3069ad9422832540caa2bf82c4b418070aa19e29d3",
+    "vulkan/source.cpp": "32f1a90ec9d01891ca042ba280c803abff0b2ca0fa9fee31a1f29ff49c8880af",
+    "vulkan/build.json": "a26f687ec0dd707380d3deb58e3cabd5c4ba22475ee6f0057827db08f8109d45"
+  },
+  "archive": {
+    "sha256": "c1ceec4dcac9178e24515885af0d4e966be9d1215e1670fc6a3a0a64835e2989",
+    "members": 13,
+    "bytes": 64523
+  }
+}

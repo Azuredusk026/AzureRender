@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "characterSha256": "95ef2d22c9ef061817073e7076c2924fdd3d6e06ccaf87405fd251bed0fbe892",
+  "route": {
+    "summary": "58b76e6ee996eb49d75ede41c825f5a17ad0da411e76a1ba0e8f3544b4cece3a",
+    "input": "1a370f6114ff35be8488119b78f3edac1cb242e3c2e5380f77721d203677b609",
+    "runtime": "f9576c2c32a9ce3718a348f35ec6bb418a382dd4ffffed3fc6f5738467fa5804",
+    "questScript": "623e272bd7b790563f2e037018a9340565dd72695d92e337c325275d86af6b6b",
+    "captureDirectory": "build/g6/private-route-final/capture",
+    "media": {
+      "frame_000000.png": "2a83047ec77ac91ad7a64a58f5b6e78c2a17241529b1a579010a58c06197d7ee",
+      "frame_000144.png": "2cc68f5d95526953e7d50747f6ee9bd54fac34a7a5d93458dab2612bb5264bbc",
+      "frame_000376.png": "7b3cb86b69116524890c46627d7f074788414a6dcb083455fb1fa083971b75cf",
+      "frame_000608.png": "f92bcd08a1641292dd69a845eeb80310c1848ca62b166821e4154bccdf6a8481",
+      "frame_000810.png": "7d45e005794c24b5a57634eb23ea98e2c71adf8bd3653b76bde138805b824fbf",
+      "frame_000890.png": "da49bbc3bb68c24eaa2b78ba00b19f5caaa76077677e3b7ea8a3d35a5d341cf0",
+      "frame_000939.png": "b9816653ec264fb4ce05222d869ad9782bad146a9ac9b2cd14429f06ca624d74"
+    }
+  },
+  "uiRegression": {
+    "scope": {
+      "kind": "ui-regression-snapshot",
+      "worldZ": -300,
+      "collected": 3,
+      "doorOpened": true,
+      "fullRouteEvidence": "private-route-final",
+      "luaVectorZIndex": 3
+    },
+    "questScript": "eb374d5523253aef7c7d09655d02d09af8756b29dca5f16b07bbf082f0b44bf1",
+    "runtime": "6acd2188b7ddd3171a28b1fc393d65b55eea7a9c61d058e69ae6c80a0dbad42e",
+    "captureDirectory": "build/g6/private-ui-final/capture",
+    "media": {
+      "frame_000001.png": "ab31337e6c9c8be67951f7f139027ccc6311f18f68ddaac2bcab4514cf16343c"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "status": "playable-candidate-prepared",
+  "baseCommit": "e9d8a53",
+  "project": "build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\project\\playable.azureproject",
+  "copiedOrLinkedFiles": 1544,
+  "nodes": 1661,
+  "resources": 365,
+  "sourceInputs": [
+    {
+      "file": "structural-collision.glb",
+      "bytes": 1063320,
+      "sha256": "e9b6a67ee3ba96ff608ef11ce584240def29014bba9a44082ff366adf6380df4"
+    },
+    {
+      "file": "native-railing-collision.glb",
+      "bytes": 133536,
+      "sha256": "db2b66649f9d08e58840861f9e26de5a6de2a3ded05f67d05f047dc42976a766"
+    },
+    {
+      "file": "native-closed-speed-blend.json",
+      "bytes": 626,
+      "sha256": "30ab5df776ea36da040cc21a8716e003a9e19f3b829a2b4cca448d482cf0d8e3"
+    }
+  ],
+  "characterModelSha256": "f188722c428358787a12be615d944f4a07185e9a8eaab72b9aa21105f3b7f997",
+  "projectSha256": "40674c80b7f3acb531bbf550d3bd9e0c0ec7ab194cc3221a65895765471e57e3",
+  "levelSha256": "d9fedfffa93fc4b4092a9cdaf2ac75a67043bed76d222327d37fed003e965b0a",
+  "scriptSha256": "9298a63e63b32533ed65f5d08966d20d8e72b1066a24e1ed2398c35504efa7a3",
+  "scope": "Scene/component assembly only. Existing runtime, character material documents, full environment lighting and reflection settings are retained."
+}

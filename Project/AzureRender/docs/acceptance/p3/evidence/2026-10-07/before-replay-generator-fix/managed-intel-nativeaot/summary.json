@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "backend": "nativeaot",
+  "configuration": "Release",
+  "workflows": [
+    {
+      "workflow": "annotation",
+      "translation": [
+        4.0,
+        5.0,
+        6.0
+      ],
+      "activeScripts": 1
+    },
+    {
+      "workflow": "controller",
+      "translation": [
+        4.3394113302674953e-10,
+        1.1920928955078125e-07,
+        -2.5858068466186523
+      ],
+      "activeScripts": 1
+    }
+  ],
+  "previewRestored": true,
+  "package": {
+    "files": 209,
+    "moved": true,
+    "isolatedPath": "C:\\WINDOWS\\System32",
+    "sourceUnavailable": true,
+    "engineUnavailable": true,
+    "dotnetRuntimeExternal": false,
+    "tamperRejected": true
+  },
+  "inputs": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\p3\\managed-intel-nativeaot\\managed-inputs-p4dpluvk"
+}

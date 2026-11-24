@@ -1,0 +1,1264 @@
+{
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "status": "passed",
+  "scope": "公共材质表面投影的输入、位置、蒙皮、变形及生命周期。完整发片颜色继续验收。",
+  "configurations": {
+    "release": {
+      "existing": {
+        "cases": {
+          "zero": {
+            "name": "zero",
+            "pixels": 7900,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.8087891617527,
+              178.1912108382473
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "fedce749057db6c595296f1345ff48b7d30d38f034936ffde0b41c6705885c97"
+          },
+          "wide": {
+            "name": "wide",
+            "pixels": 8054,
+            "bounds": [
+              77,
+              179
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "b38ab7b846fba76556f0d83ece4df989ec4dbac26bb1f5e7368efc101b2f0ed9"
+          },
+          "fixed": {
+            "name": "fixed",
+            "pixels": 8054,
+            "bounds": [
+              77,
+              179
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "fixed",
+            "skinning": "vertex-shader fallback path",
+            "validation": false,
+            "manifestSha256": "3ca277cc438797b491a57c16ae2e035539428d0d5616598ac1490403cd8a0e6e"
+          },
+          "document": {
+            "name": "document",
+            "pixels": 8054,
+            "bounds": [
+              77,
+              179
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "5222720e736efb403cf18a7b6df33e4072b50e2eae0e4b5cac86fd8ed69b4ed8"
+          },
+          "blend": {
+            "name": "blend",
+            "pixels": 8054,
+            "bounds": [
+              77,
+              179
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "773204dc332df959fb81ccd6b594803434f0f0d0c24bb9213df56eb8c77c86f0"
+          },
+          "near": {
+            "name": "near",
+            "pixels": 24138,
+            "bounds": [
+              40,
+              216
+            ],
+            "expected": [
+              40.392088018865124,
+              215.60791198113486
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "7a82184c5c7d14a24479a835151bb455180ae72ec9cd484a6eef06edf2f0c3a4"
+          },
+          "resize": {
+            "name": "resize",
+            "pixels": 32152,
+            "bounds": [
+              155,
+              357
+            ],
+            "expected": [
+              154.7470529122853,
+              357.2529470877147
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "b5a7e5184bb594fb5a99e2a7adbe2b4a343a0359a9e766a607b05e14da7caad7"
+          },
+          "morph": {
+            "name": "morph",
+            "pixels": 8066,
+            "bounds": [
+              88,
+              189
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "e57d4d60743dd3a6c07369113bc77513da79c074c35cd3bef8b7e54359a98ad1"
+          },
+          "morph-fixed": {
+            "name": "morph-fixed",
+            "pixels": 8066,
+            "bounds": [
+              88,
+              189
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "fixed",
+            "skinning": "vertex-shader fallback path",
+            "validation": false,
+            "manifestSha256": "b6616e4a128ea4a76007b3b5ff195de9ea9435ef9b9bcf3a8627f80764a06344"
+          },
+          "translated": {
+            "name": "translated",
+            "pixels": 8066,
+            "bounds": [
+              88,
+              189
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "683e0fad26dd47d2c1c84380939b1c4b5fc367310ec20ae02a926ff93408cd00"
+          },
+          "fixed-compute": {
+            "name": "fixed-compute",
+            "pixels": 8054,
+            "bounds": [
+              77,
+              179
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "fixed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "b16de144ab9602232aaea77e429a6f0c5297be0a4564b93ec5dc18482fc039ad"
+          },
+          "indexed-vertex": {
+            "name": "indexed-vertex",
+            "pixels": 8054,
+            "bounds": [
+              77,
+              179
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "vertex-shader fallback path",
+            "validation": false,
+            "manifestSha256": "b62426137b032be473988c975da0ba8f56913776d7001799fe668ee9b3e0fe21"
+          }
+        },
+        "passed": true
+      },
+      "multisample": {
+        "cases": {
+          "zero": {
+            "name": "zero",
+            "pixels": 7798,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.8087891617527,
+              178.1912108382473
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "c6c19d144508ce0165095d981929d3fc768711a715eddbee643fe53fb53c3a36"
+          },
+          "wide": {
+            "name": "wide",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "90ea8e68ea2cdde8b43587f84a8d434114854f4204f8c7ce34012b8d154a379b"
+          },
+          "fixed": {
+            "name": "fixed",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "fixed",
+            "skinning": "vertex-shader fallback path",
+            "validation": false,
+            "manifestSha256": "2053d0c3eb0ffaea05763730f616015caba1bdaa073d8488aea0842c35340776"
+          },
+          "document": {
+            "name": "document",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "6d65fdb131c791bd8d997dabd0322d74ed6737c4c1c18fe6c2a05ee13e9c79c0"
+          },
+          "blend": {
+            "name": "blend",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "865a2cccb10262f39eadc122e5ce18bde70dc52afdc38f938d7b4d43a10d10cc"
+          },
+          "near": {
+            "name": "near",
+            "pixels": 23948,
+            "bounds": [
+              41,
+              215
+            ],
+            "expected": [
+              40.392088018865124,
+              215.60791198113486
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "fd7f08f8f656151ab7e1d866547f5b19b6d355f726f8a6d54a50855851c8db66"
+          },
+          "resize": {
+            "name": "resize",
+            "pixels": 31935,
+            "bounds": [
+              155,
+              357
+            ],
+            "expected": [
+              154.7470529122853,
+              357.2529470877147
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "0d0ff5df8b36296fb6ccbdb77077a18b5e7bf9e79c21fbc7d4297cd28077d080"
+          },
+          "morph": {
+            "name": "morph",
+            "pixels": 7939,
+            "bounds": [
+              88,
+              188
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "975d8e695f5458d6c7f0e160f7e6913390cf0f0e7d5a303794ac09c5b1f275fb"
+          },
+          "morph-fixed": {
+            "name": "morph-fixed",
+            "pixels": 7939,
+            "bounds": [
+              88,
+              188
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "fixed",
+            "skinning": "vertex-shader fallback path",
+            "validation": false,
+            "manifestSha256": "07e15b9ac8074d63a73411d6858b4bda2e77a9cb1005737efee1c254a455dc84"
+          },
+          "translated": {
+            "name": "translated",
+            "pixels": 7939,
+            "bounds": [
+              88,
+              188
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "ffb3d3241eda2977a54711ce07fa9896ad9abfdd99f55df453982cbe97388b98"
+          },
+          "fixed-compute": {
+            "name": "fixed-compute",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "fixed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "dd66ffc766bc4fe7bcdc80203443828a260aa62681ca6bdb0bdbc15161973de9"
+          },
+          "indexed-vertex": {
+            "name": "indexed-vertex",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "vertex-shader fallback path",
+            "validation": false,
+            "manifestSha256": "fe31478a285a36f4974b7e9701421fab3c415ed7057cbac1484740d2a0e183e5"
+          }
+        },
+        "passed": true
+      },
+      "supersample": {
+        "cases": {
+          "zero": {
+            "name": "zero",
+            "pixels": 7800,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.8087891617527,
+              178.1912108382473
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "ebda797fd24813857760a3e8b01f0893ac9d2d438e7013ba5eaa9f73a418e5cf"
+          },
+          "wide": {
+            "name": "wide",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "88be7d3e5f64408265751a60734a8d9a47cca60f3a44c05218be058450568e67"
+          },
+          "fixed": {
+            "name": "fixed",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "fixed",
+            "skinning": "vertex-shader fallback path",
+            "validation": false,
+            "manifestSha256": "a880c125fbb89b8162465ea993c4d32a49513f9e7e0dce2464eccc691e147c62"
+          },
+          "document": {
+            "name": "document",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "2b16142e4171884ebcb81a77376eaba66370fa6bd43d8d1da40765a5fa94e71c"
+          },
+          "blend": {
+            "name": "blend",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "4d0d83a992f7afdafb89d6fae99b397ea48b071868a22d6c15623079e05fb765"
+          },
+          "near": {
+            "name": "near",
+            "pixels": 23960,
+            "bounds": [
+              41,
+              215
+            ],
+            "expected": [
+              40.392088018865124,
+              215.60791198113486
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "e70df01384d95d79705a5e34ce77b6bc77ed9f7d843e4700fc44f04bb198b611"
+          },
+          "resize": {
+            "name": "resize",
+            "pixels": 31964,
+            "bounds": [
+              155,
+              357
+            ],
+            "expected": [
+              154.7470529122853,
+              357.2529470877147
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "e9961beb421ace4c4776f9cb261471be469aaf3936583f0bf0546a83a78fff81"
+          },
+          "morph": {
+            "name": "morph",
+            "pixels": 7950,
+            "bounds": [
+              88,
+              189
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "8f1efa7d83539debb446387a3d9ac32f7e12a3d527b2a14e2a3ffd1ea1776582"
+          },
+          "morph-fixed": {
+            "name": "morph-fixed",
+            "pixels": 7950,
+            "bounds": [
+              88,
+              189
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "fixed",
+            "skinning": "vertex-shader fallback path",
+            "validation": false,
+            "manifestSha256": "ba5d8b00ade67f01c5bf600f0371158eb45a8278bb3af2c41ca63b7db4e92646"
+          },
+          "translated": {
+            "name": "translated",
+            "pixels": 7950,
+            "bounds": [
+              88,
+              189
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "dbdc2eaf1e3001e0ef1be3cdbddf9b262635ce5c8f48f47cb60a7d07e7f2fb01"
+          },
+          "fixed-compute": {
+            "name": "fixed-compute",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "fixed",
+            "skinning": "Vulkan compute path",
+            "validation": false,
+            "manifestSha256": "514e26e50e46dd9db299192bd92e8c94a35865b9df805bfae6561f48d8a4748f"
+          },
+          "indexed-vertex": {
+            "name": "indexed-vertex",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "vertex-shader fallback path",
+            "validation": false,
+            "manifestSha256": "ea8c54f16d3643424c9b33fa7460e3cf26d8b993efd276edfc823ea4bc94898d"
+          }
+        },
+        "passed": true
+      },
+      "ctest": {
+        "tests": 6,
+        "logSha256": "ecb018229cef2588a4d1080f08ffb13e3365d9d6e8c2a993455b8d2ae2f00bfa"
+      }
+    },
+    "debug": {
+      "existing": {
+        "cases": {
+          "zero": {
+            "name": "zero",
+            "pixels": 7900,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.8087891617527,
+              178.1912108382473
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "416c8cf54cdbe7a30d42ec13e8858ceab426324c95b7bcf9d14997b7ce514cf2"
+          },
+          "wide": {
+            "name": "wide",
+            "pixels": 8054,
+            "bounds": [
+              77,
+              179
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "11f2f842d91572cb24e1b2e4dd3acb7682f4344c65334b46394a5337b63b5f5f"
+          },
+          "fixed": {
+            "name": "fixed",
+            "pixels": 8054,
+            "bounds": [
+              77,
+              179
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "fixed",
+            "skinning": "vertex-shader fallback path",
+            "validation": true,
+            "manifestSha256": "4df6a34e12d6ec9956bdda530e4816db4dad946b5d54d5483f89b4d39b814f21"
+          },
+          "document": {
+            "name": "document",
+            "pixels": 8054,
+            "bounds": [
+              77,
+              179
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "6849678e34f81f7454232b945d8803132126ed1d05a4de8979ac9f042dd53585"
+          },
+          "blend": {
+            "name": "blend",
+            "pixels": 8054,
+            "bounds": [
+              77,
+              179
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "39e2393d6a302e580ac4944b0df27985f6cdd793cd6c5e9b5f5c1227b34f734f"
+          },
+          "near": {
+            "name": "near",
+            "pixels": 24138,
+            "bounds": [
+              40,
+              216
+            ],
+            "expected": [
+              40.392088018865124,
+              215.60791198113486
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "143560ed3a94909813cd6e53d1c34306553b8500657220d459e37ac98d50ce75"
+          },
+          "resize": {
+            "name": "resize",
+            "pixels": 32152,
+            "bounds": [
+              155,
+              357
+            ],
+            "expected": [
+              154.7470529122853,
+              357.2529470877147
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "1f7c941f241ca1af1258572e21edc7a368375832923d40146daf023ffa7bdd12"
+          },
+          "morph": {
+            "name": "morph",
+            "pixels": 8066,
+            "bounds": [
+              88,
+              189
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "e9e4bd4d1cb759180b0ba0cc4621b878c2468c75a9288834ac72b99bc23b063a"
+          },
+          "morph-fixed": {
+            "name": "morph-fixed",
+            "pixels": 8066,
+            "bounds": [
+              88,
+              189
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "fixed",
+            "skinning": "vertex-shader fallback path",
+            "validation": true,
+            "manifestSha256": "436ca18df1350e6fb08130fe5cda06f1d7412b13d92aef3ab12cd97eb56c3ebe"
+          },
+          "translated": {
+            "name": "translated",
+            "pixels": 8066,
+            "bounds": [
+              88,
+              189
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "208193f9b2d1929c8732e2535326f0d53f0fd58c7f6fc152a9d82f000d358704"
+          },
+          "fixed-compute": {
+            "name": "fixed-compute",
+            "pixels": 8054,
+            "bounds": [
+              77,
+              179
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "fixed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "b1fd0b1de132712afc70dc9c0e81782d10aa7cc266858457e85bdbc842b0c351"
+          },
+          "indexed-vertex": {
+            "name": "indexed-vertex",
+            "pixels": 8054,
+            "bounds": [
+              77,
+              179
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "vertex-shader fallback path",
+            "validation": true,
+            "manifestSha256": "91b139b119b673d6e210137cb362707eb691d4d647edbb18938e3f1fe1e2d965"
+          }
+        },
+        "passed": true
+      },
+      "multisample": {
+        "cases": {
+          "zero": {
+            "name": "zero",
+            "pixels": 7798,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.8087891617527,
+              178.1912108382473
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "64a83397855cea9137ea5e5572a395f88c7382a1a0d3c187ad178267b9250afd"
+          },
+          "wide": {
+            "name": "wide",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "3d35c99d6ba84e7651cef460ac4fca0d792f1569bac2634f9b132e350a5f310b"
+          },
+          "fixed": {
+            "name": "fixed",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "fixed",
+            "skinning": "vertex-shader fallback path",
+            "validation": true,
+            "manifestSha256": "1ba213165d54efffc029a317f1b67e5836efab85cb3ba740919d55ee59b2c41f"
+          },
+          "document": {
+            "name": "document",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "572b62ab8807ae59f923bafca91d40e2dd7abe7387d24d137ba9d1e64f019f92"
+          },
+          "blend": {
+            "name": "blend",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "3ba36d1aba811a4799f4fa330515630c1bd5783331529afc582e11995c11989b"
+          },
+          "near": {
+            "name": "near",
+            "pixels": 23948,
+            "bounds": [
+              41,
+              215
+            ],
+            "expected": [
+              40.392088018865124,
+              215.60791198113486
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "0eab324087ea4151129e7029c4f88f544094b58949f6767082eb4cad65a0e1bb"
+          },
+          "resize": {
+            "name": "resize",
+            "pixels": 31935,
+            "bounds": [
+              155,
+              357
+            ],
+            "expected": [
+              154.7470529122853,
+              357.2529470877147
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "34c773160cbae77b55223ee5a42fce36ad29e512fc7ea8a40f247267e677866f"
+          },
+          "morph": {
+            "name": "morph",
+            "pixels": 7939,
+            "bounds": [
+              88,
+              188
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "5271286cc07c16afe63b81934a140f039914ee5304fedcee528d6284ed9e45a5"
+          },
+          "morph-fixed": {
+            "name": "morph-fixed",
+            "pixels": 7939,
+            "bounds": [
+              88,
+              188
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "fixed",
+            "skinning": "vertex-shader fallback path",
+            "validation": true,
+            "manifestSha256": "bf186f5de59de801f0a6d88c7a15e541897b9664d158c21292961210380057c8"
+          },
+          "translated": {
+            "name": "translated",
+            "pixels": 7939,
+            "bounds": [
+              88,
+              188
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "3a5eed418482f7ad9ef26d319a7256362bd68ad7912b76d87ae5064aaa11a462"
+          },
+          "fixed-compute": {
+            "name": "fixed-compute",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "fixed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "da4a33878cd36d82f022b968b626ba1c684009891255e75fe64e5d56fbfecb6f"
+          },
+          "indexed-vertex": {
+            "name": "indexed-vertex",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "vertex-shader fallback path",
+            "validation": true,
+            "manifestSha256": "0a38294b0eee1e4c581c9e3516f288e2e762855dd48f82d71f96486d941a7931"
+          }
+        },
+        "passed": true
+      },
+      "supersample": {
+        "cases": {
+          "zero": {
+            "name": "zero",
+            "pixels": 7800,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.8087891617527,
+              178.1912108382473
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "309ca069facca484e1a65f7137e6e139933d9a453763d360b18a0184131545c8"
+          },
+          "wide": {
+            "name": "wide",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "8a04b20dd582c44af0916146d148104a40853b32ea7e6116be8592b9471de08c"
+          },
+          "fixed": {
+            "name": "fixed",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "fixed",
+            "skinning": "vertex-shader fallback path",
+            "validation": true,
+            "manifestSha256": "3d967e410f0ed719c165a162296daeb7dba9970d436d2e272e7f6034623a5084"
+          },
+          "document": {
+            "name": "document",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "ca1a4436f08d8bf4fcc2903bb287f5a05a3c4302f9b144a8820a497cf9b28769"
+          },
+          "blend": {
+            "name": "blend",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "c80e633cebc6f3a7367476cb5051fdd9e829514279617ba50a5856a570c23042"
+          },
+          "near": {
+            "name": "near",
+            "pixels": 23960,
+            "bounds": [
+              41,
+              215
+            ],
+            "expected": [
+              40.392088018865124,
+              215.60791198113486
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "270c460f2eae0d76917baf3fcc04a7716de711101f8495c655aeac013ba0f4c9"
+          },
+          "resize": {
+            "name": "resize",
+            "pixels": 31964,
+            "bounds": [
+              155,
+              357
+            ],
+            "expected": [
+              154.7470529122853,
+              357.2529470877147
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "1c2df2848fc99613dfcfe44b01b3e08da0b469fe5238ee8ff8568e26ca0ea883"
+          },
+          "morph": {
+            "name": "morph",
+            "pixels": 7950,
+            "bounds": [
+              88,
+              189
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "67f3a67a88fb3dcce95b6dd06d9684add8521e7d2e01c7d99554411b6fb172bf"
+          },
+          "morph-fixed": {
+            "name": "morph-fixed",
+            "pixels": 7950,
+            "bounds": [
+              88,
+              189
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "fixed",
+            "skinning": "vertex-shader fallback path",
+            "validation": true,
+            "manifestSha256": "301e4c1ad6e4dfd13adac6b0f14c0d6c41d3c650004edf674bb8e12c1e3e5303"
+          },
+          "translated": {
+            "name": "translated",
+            "pixels": 7950,
+            "bounds": [
+              88,
+              189
+            ],
+            "expected": [
+              87.6082958370931,
+              188.8612429248078
+            ],
+            "binding": "indexed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "84d2442650806d4f220f3134d63e375b594f417a534bde7c6fb24c9d6ecebda8"
+          },
+          "fixed-compute": {
+            "name": "fixed-compute",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "fixed",
+            "skinning": "Vulkan compute path",
+            "validation": true,
+            "manifestSha256": "d370a8b0d8be5914388d57391562475b949ab58ab587acd266fc8b96ff6b6e46"
+          },
+          "indexed-vertex": {
+            "name": "indexed-vertex",
+            "pixels": 7932,
+            "bounds": [
+              78,
+              178
+            ],
+            "expected": [
+              77.37352645614266,
+              178.62647354385734
+            ],
+            "binding": "indexed",
+            "skinning": "vertex-shader fallback path",
+            "validation": true,
+            "manifestSha256": "ebd493529f947836b791801eb02a4daf357eae033202e512c2abbcc2f5a2f50d"
+          }
+        },
+        "passed": true
+      },
+      "ctest": {
+        "tests": 6,
+        "logSha256": "6b6eb2051dc8624ad108e0e28b8b0ead065500c95e66df58878e2dd8aede2a54"
+      }
+    }
+  },
+  "legacy": {
+    "release": {
+      "cases": 9,
+      "sha256": "7b44ff51593de2482340f551f45a22be75728851868fc40d3bb03bddb28ce0b6"
+    },
+    "debug": {
+      "cases": 9,
+      "sha256": "4a46a107c7f3b733b021261ab44bd4a300e2b23ca75bc0bf83db916a5a55e8da"
+    }
+  },
+  "sourceComparison": {
+    "dynamic-shell-source-mask-capture": {
+      "0": {
+        "count": 16459,
+        "mean": 0.29031735423375254,
+        "within1": 16387
+      },
+      "1138": {
+        "count": 2832,
+        "mean": 21.133474576271187,
+        "within1": 16
+      },
+      "1291": {
+        "count": 725,
+        "mean": 2.774712643678161,
+        "within1": 535
+      },
+      "1314": {
+        "count": 236,
+        "mean": 5.135593220338983,
+        "within1": 5
+      }
+    },
+    "public-projected-shell-capture": {
+      "0": {
+        "count": 16459,
+        "mean": 0.29031735423375254,
+        "within1": 16387
+      },
+      "1138": {
+        "count": 2832,
+        "mean": 21.133003766478343,
+        "within1": 16
+      },
+      "1291": {
+        "count": 725,
+        "mean": 2.774712643678161,
+        "within1": 535
+      },
+      "1314": {
+        "count": 236,
+        "mean": 4.435028248587571,
+        "within1": 4
+      }
+    }
+  },
+  "implementation": {
+    "shaders/mesh.vert": "a37e996102702119fd29dcf886398fc8be09baf647659a44afa585cce6954f21",
+    "shaders/outline_projected_surface.glsl": "4295a063ff2417f2f4a458d71cda56ae94a641a3c2d8f3fc0bd85edab33b30c4",
+    "src/assets/OutlineProjectionData.hpp": "64ec06e4bf0fff1f3a5d9aadcaae990fb5bfbf6c2e3e51a2504bc02bc5da0e34",
+    "src/assets/OutlineSurfaceLoader.inc": "f34f793f094fa6a55cbc20932151c6e5836634a8ffac26a01963433e8c73432f",
+    "tools/test_projected_surface_gpu.py": "075b2830f69ce510b4216982ed31d67a61f6a86a1e88d639be6a37c23df70196"
+  }
+}

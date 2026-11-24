@@ -1,0 +1,54 @@
+{
+  "status": "measured-input-differences",
+  "nativeGlobalGain110Z": 0.550000011920929,
+  "currentSceneSpecularFloor": 0,
+  "sourceFormula": "e868 instructions 1141 and 1100-1101 consume global gain 110.Z as shadow scaling and specular visibility floor.",
+  "materials": [
+    {
+      "index": 1,
+      "materialFileSha256": "3231ed4cb8b1630e872d097e86b7d055af2d50ac90d009d700fcf7f04620fbb9",
+      "nprDiffusePresent": true,
+      "currentShadowScale": 1,
+      "currentStyleParameters": null,
+      "specularRampPresent": false
+    },
+    {
+      "index": 2,
+      "materialFileSha256": "084240409fd278244d14d5a594f6638d4471268ade588fa908f8a47816e1c1de",
+      "nprDiffusePresent": false,
+      "currentShadowScale": null,
+      "currentStyleParameters": null,
+      "specularRampPresent": false
+    },
+    {
+      "index": 3,
+      "materialFileSha256": "2f40acc04e7430aac178fe910f6efde52adeb34d94578f0cee6a11cbe37693c2",
+      "nprDiffusePresent": false,
+      "currentShadowScale": null,
+      "currentStyleParameters": null,
+      "specularRampPresent": false
+    },
+    {
+      "index": 4,
+      "materialFileSha256": "6751c584e7c39343d18224abf11d626f9d8798cf392b85c8f1d4675f764be5da",
+      "nprDiffusePresent": true,
+      "currentShadowScale": 0.5,
+      "currentStyleParameters": [
+        1,
+        1,
+        1,
+        0.5
+      ],
+      "specularRampPresent": true
+    },
+    {
+      "index": 5,
+      "materialFileSha256": "dafea1495656b5baad40cd5857363d1b5f87234b6751397b98c855e439db6132",
+      "nprDiffusePresent": false,
+      "currentShadowScale": null,
+      "currentStyleParameters": null,
+      "specularRampPresent": false
+    }
+  ],
+  "visualAcceptance": "failed-user-review"
+}

@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "status": "sampler-filter-bias-and-native-state-validation-passed",
+  "nativeState": {
+    "frame": 10401,
+    "event": 950,
+    "pipelineSha256": "dee332beb81f2cc717be3fc2a7e96273bf6202d6de06db75a4dcddac25b07dee",
+    "filterEnums": {
+      "Point": 1,
+      "Linear": 2,
+      "Anisotropic": 4
+    },
+    "enumSource": "https://github.com/baldurk/renderdoc/blob/v1.46/renderdoc/api/replay/replay_enums.h#L3196-L3225",
+    "s2": {
+      "addressU": 0,
+      "addressV": 0,
+      "addressW": 0,
+      "borderColorType": 1,
+      "borderColorValue": {
+        "floatValue": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "intValue": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "uintValue": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "chromaFilter": 0,
+      "compareFunction": 0,
+      "creationTimeConstant": false,
+      "filter": {
+        "filter": 0,
+        "magnify": 2,
+        "minify": 2,
+        "mip": 1
+      },
+      "forceExplicitReconstruction": false,
+      "maxAnisotropy": 0.0,
+      "maxLOD": 1000.0,
+      "minLOD": 0.0,
+      "mipBias": 0.0,
+      "object": "ResourceId::338",
+      "seamlessCubemaps": true,
+      "srgbBorder": false,
+      "swizzle": {
+        "alpha": 3,
+        "blue": 2,
+        "green": 1,
+        "red": 0
+      },
+      "type": 2,
+      "unnormalized": false,
+      "xChromaOffset": 0,
+      "yChromaOffset": 0,
+      "ycbcrModel": 0,
+      "ycbcrRange": 0,
+      "ycbcrSampler": "ResourceId::0"
+    },
+    "instructionBias": {
+      "12": 0,
+      "16": -1,
+      "17": -1,
+      "18": -1
+    },
+    "effectivePolicy": {
+      "filter": "linear",
+      "mipFilter": "nearest",
+      "anisotropy": 1
+    }
+  },
+  "contracts": {
+    "schemaVersion": 1,
+    "defaultMipBias": 0,
+    "mipBiasRange": [
+      -16,
+      16
+    ],
+    "defaultMipFilter": "match min/mag filter",
+    "textureSlots": 9,
+    "materialBytes": 192
+  },
+  "tests": {
+    "release": 11,
+    "debug": 11,
+    "localizationRelease": 1,
+    "localizationDebug": 1
+  },
+  "gpuBatches": [
+    {
+      "name": "gpu-release-filter",
+      "captures": 6,
+      "maximumByteError": 0.0
+    },
+    {
+      "name": "gpu-debug-filter",
+      "captures": 6,
+      "maximumByteError": 0.0
+    }
+  ],
+  "ui": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "mipBias": -1,
+    "mipFilter": "nearest",
+    "imageIdentity": "44d7f187-aa6c-451e-9d4e-3a8a8c381eb3",
+    "sourceImageSha256": "4d7322a8a43c66750843d37b7eee6fa4365fdc78d1bfe50d783e088936fa7950",
+    "scope": "Production ImGui scalar entry, texture transaction and reopened metadata"
+  },
+  "actualCaptures": [
+    {
+      "name": "control-beauty",
+      "imageSha256": "542b743e6060ceca2cdb73ae4e1a5bbc9f60858dd855365d69ebd92ee122d434",
+      "playerSha256": "c606e8e3ccb12a36140b816a885519aba911b9d741b1adba24b1f4274e374890",
+      "validationEnabled": false
+    },
+    {
+      "name": "native-beauty",
+      "imageSha256": "9ee5cfebdf7f1b3bb29d9b3c75acde6e424bc9b9f410fd1d1b00a77d3f206e8f",
+      "playerSha256": "c606e8e3ccb12a36140b816a885519aba911b9d741b1adba24b1f4274e374890",
+      "validationEnabled": false
+    },
+    {
+      "name": "native-kk",
+      "imageSha256": "851896f789422b65ee9d46f8d3e95f0d5a15dccd90ac3e01dde9d21f2e63e5fc",
+      "playerSha256": "c606e8e3ccb12a36140b816a885519aba911b9d741b1adba24b1f4274e374890",
+      "validationEnabled": false
+    },
+    {
+      "name": "native-kk-fixed",
+      "imageSha256": "851896f789422b65ee9d46f8d3e95f0d5a15dccd90ac3e01dde9d21f2e63e5fc",
+      "playerSha256": "14ce7a51345169762d3a9f7a308bb9d413bc49c28f75e9153b61341fff4b9af1",
+      "validationEnabled": true
+    },
+    {
+      "name": "native-documents",
+      "imageSha256": "9ee5cfebdf7f1b3bb29d9b3c75acde6e424bc9b9f410fd1d1b00a77d3f206e8f",
+      "playerSha256": "14ce7a51345169762d3a9f7a308bb9d413bc49c28f75e9153b61341fff4b9af1",
+      "validationEnabled": true
+    }
+  ],
+  "actualComparisons": [
+    {
+      "name": "compatible-default",
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "fixed-indexed-kk",
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "full-documents-beauty",
+      "maximumByteError": 0,
+      "changedPixels": 0
+    }
+  ],
+  "actualSamplerChange": {
+    "changedPixels": 17046,
+    "maximumByteChange": 105
+  },
+  "mainProject": {
+    "schemaVersion": 1,
+    "status": "main-project-startup-and-clean-unload-passed",
+    "imageSha256": "b4112fc3f1d22c582f5a6e2ab07b87282ef717f51ca3a0706b46d3c3ca542763",
+    "previousImageSha256": "b4112fc3f1d22c582f5a6e2ab07b87282ef717f51ca3a0706b46d3c3ca542763",
+    "maximumByteDifference": 0,
+    "changedPixels": 0
+  },
+  "failureEvidence": {
+    "cacheAndAuthoringRedLogSha256": "27bdd65e667a0ef869ff86f8d8fe9e583635651bb7f74505f4cfa3a295bd6720",
+    "missingBackendGpu": {
+      "maximumLinearError": 1,
+      "logSha256": "572449afa005e4c75b13a0ebdff63c6c16b8a07dbaca49b2c319f1af80128138"
+    },
+    "missingMipFilterLogSha256": "27bc2d39d9304b3b66cf2223c3c148a0418e4036ea772af8ee777e569d57bfdb"
+  },
+  "sourceFingerprints": {
+    "src/assets/TextureImportSettings.hpp": "c0b88c3e01cd1b197be260070529585fcfd47a61d9265f43a206c96991142f9b",
+    "src/assets/TextureImportSettings.cpp": "73b0169d3658022172f162da024ba0ba166dadfcdfdb1a05a3c07d43305a91dd",
+    "src/assets/GltfLoader.cpp": "fb6c6c6083c02ce64c695a67ceb1d6998f676159d752dece7bc3d94ff5d9f360",
+    "src/render/SampledTextureCache.cpp": "f7290c772e0ca2fdbf7726f24445b240843d018075c2dc441617dc29dc11a8ed",
+    "src/rhi/Rhi.hpp": "c7c7dc75b76724ffb0b175fd52eae18bc9b3d76f61f0ceb7d699350b23158e81",
+    "src/rhi/VulkanRhi.cpp": "92b9a4e963b423caf371913ff68bc90981af587c44f05315d99a6816618407aa",
+    "src/diagnostics/GpuCapabilityReport.cpp": "d1480855f78c049184f31be5ef745659d8ad771b7714b9b9e366c1c353647784",
+    "src/editor/commands/EditorOperations.cpp": "81bdf078b449a1946d1d732c539cf847e67a9d04f63c732cd7e8fbcd9faca865",
+    "src/editor/panels/TextureAssetPanel.cpp": "e2dc5efed24e50d0b560c3f88b1ad1441960e76fcdfeb35a82f0d2b644c652fb",
+    "src/ui/localization/Catalog.inc": "43b1c80853ff61d697a4f2e6ad213ddf5334bbceb622d7bbb0b093e03bced886",
+    "tools/test_texture_mip_bias_gpu.py": "af1a87b1893110ef7ee45b3699b5d86b72e4a10830434e9fbc187ba0ba6c978d",
+    "tools/test_texture_mip_bias_ui.py": "c31ee8da04555ba61c4859e8cd84af94fbf30ac80266942c86eaf480804891ab"
+  },
+  "run": "build/runs/20261023-055814-sampler-mip-bias-f383f3",
+  "remaining": [
+    "Material-specific hair color inputs and complete illumination",
+    "Skin, clothing and distance outline",
+    "Dynamic views, multi-view resource peaks and main-project promotion"
+  ]
+}

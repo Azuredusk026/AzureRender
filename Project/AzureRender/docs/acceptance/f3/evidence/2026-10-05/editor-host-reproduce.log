@@ -1,0 +1,60 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+UpdateCTestConfiguration  from :D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/DartConfiguration.tcl
+Parse Config file:D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/DartConfiguration.tcl
+UpdateCTestConfiguration  from :D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/DartConfiguration.tcl
+Parse Config file:D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/DartConfiguration.tcl
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 31
+    Start 31: AzureEngine.EditorHost
+
+31: Test command: C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_editor_workflow.py" "--executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe" "--project" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay/project.azureproject"
+31: Test timeout computed to be: 120
+31: Traceback (most recent call last):
+31:   File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workflow.py", line 73, in <module>
+31:     main()
+31:   File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workflow.py", line 50, in main
+31:     process = subprocess.run([str(args.executable.resolve()), "--editor-project", str(root / "game/project.azureproject"),
+31:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+31:   File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 550, in run
+31:     stdout, stderr = process.communicate(input, timeout=timeout)
+31:                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+31:   File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 1209, in communicate
+31:     stdout, stderr = self._communicate(input, endtime, timeout)
+31:                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+31:   File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 1630, in _communicate
+31:     raise TimeoutExpired(self.args, orig_timeout)
+31: subprocess.TimeoutExpired: Command '['D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRender.exe', '--editor-project', 'C:\\Users\\23587\\AppData\\Local\\Temp\\azure_editor_jp9wedqg\\game\\project.azureproject', '--editor-actions', 'C:\\Users\\23587\\AppData\\Local\\Temp\\azure_editor_jp9wedqg\\actions.json', '--runtime-report', 'C:\\Users\\23587\\AppData\\Local\\Temp\\azure_editor_jp9wedqg\\report.json', '--fixed-frame-step', '--smoke-frames', '32']' timed out after 90 seconds
+1/1 Test #31: AzureEngine.EditorHost ...........***Failed   90.58 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workflow.py", line 73, in <module>
+    main()
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workflow.py", line 50, in main
+    process = subprocess.run([str(args.executable.resolve()), "--editor-project", str(root / "game/project.azureproject"),
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 1630, in _communicate
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRender.exe', '--editor-project', 'C:\\Users\\23587\\AppData\\Local\\Temp\\azure_editor_jp9wedqg\\game\\project.azureproject', '--editor-actions', 'C:\\Users\\23587\\AppData\\Local\\Temp\\azure_editor_jp9wedqg\\actions.json', '--runtime-report', 'C:\\Users\\23587\\AppData\\Local\\Temp\\azure_editor_jp9wedqg\\report.json', '--fixed-frame-step', '--smoke-frames', '32']' timed out after 90 seconds
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+gpu    =  90.58 sec*proc (1 test)
+
+Total Test time (real) =  90.59 sec
+
+The following tests FAILED:
+	 31 - AzureEngine.EditorHost (Failed)
+Errors while running CTest

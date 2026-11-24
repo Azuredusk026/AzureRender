@@ -1,0 +1,606 @@
+{
+  "status": "strict-four-frames-passed-integer-blend-validation-failed",
+  "baselineCommit": "604de4a",
+  "activeCapture": {
+    "exitCode": 0,
+    "seconds": 222.01600000000326,
+    "checks": [
+      {
+        "name": "AzureDepthPrefillRecordingTests",
+        "exitCode": 0,
+        "seconds": 0.28200000000651926
+      },
+      {
+        "name": "AzureMaterialClassEarlyDepthTests",
+        "exitCode": 0,
+        "seconds": 0.25
+      },
+      {
+        "name": "AzureRenderNullRhiPassTests",
+        "exitCode": 0,
+        "seconds": 1.1089999999967404
+      },
+      {
+        "name": "AzureRenderRenderGraphTests",
+        "exitCode": 0,
+        "seconds": 0.01600000000325963
+      }
+    ],
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      }
+    ],
+    "metadata": {
+      "snapshotHistoryPrepared": true,
+      "shadowHistoryPrepared": false,
+      "shadowHistoryBytes": 0,
+      "shadowHistorySampledRequests": 6968,
+      "shadowHistorySampledEligible": 6715,
+      "shadowHistorySampledHits": 1342,
+      "screenReflectionComputePrepared": true,
+      "screenReflectionAlgorithmRequested": "linear",
+      "screenReflectionAlgorithm": "linear",
+      "screenReflectionProducer": "linear-temporal",
+      "screenReflectionFallback": "",
+      "screenReflectionComputeActive": true,
+      "screenReflectionTemporalPrepared": true,
+      "screenReflectionTemporalActive": true,
+      "screenReflectionTemporalPreparation": "temporal",
+      "screenReflectionHistoryValid": true,
+      "screenReflectionHistorySubmission": 4,
+      "screenReflectionHistoryInputSubmission": 3,
+      "screenReflectionMotionUvOffset": [
+        0.0,
+        0.0
+      ],
+      "screenReflectionOwnsMotion": true,
+      "screenReflectionMotionBytes": 73728000,
+      "screenReflectionReprojectionBytes": 36864000,
+      "screenReflectionPreparation": "compute",
+      "screenReflectionLevels": 7,
+      "screenReflectionWidth": 1280,
+      "screenReflectionHeight": 720,
+      "screenReflectionImageBudgetBytes": 125332800
+    },
+    "validationClean": false,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "privateProgramsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "initialInactiveCapture": {
+    "exitCode": 0,
+    "seconds": 220.53099999995902,
+    "checks": [
+      {
+        "name": "AzureDepthPrefillRecordingTests",
+        "exitCode": 0,
+        "seconds": 1.4060000000172295
+      },
+      {
+        "name": "AzureMaterialClassEarlyDepthTests",
+        "exitCode": 0,
+        "seconds": 1.1880000000237487
+      },
+      {
+        "name": "AzureRenderNullRhiPassTests",
+        "exitCode": 0,
+        "seconds": 1.9839999999967404
+      },
+      {
+        "name": "AzureRenderRenderGraphTests",
+        "exitCode": 0,
+        "seconds": 0.6879999999655411
+      }
+    ],
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      }
+    ],
+    "metadata": {
+      "snapshotHistoryPrepared": false,
+      "shadowHistoryPrepared": false,
+      "shadowHistoryBytes": 0,
+      "shadowHistorySampledRequests": 0,
+      "shadowHistorySampledEligible": 0,
+      "shadowHistorySampledHits": 0,
+      "screenReflectionComputePrepared": true,
+      "screenReflectionAlgorithmRequested": "linear",
+      "screenReflectionAlgorithm": "linear",
+      "screenReflectionProducer": "linear-temporal",
+      "screenReflectionFallback": "",
+      "screenReflectionComputeActive": true,
+      "screenReflectionTemporalPrepared": true,
+      "screenReflectionTemporalActive": true,
+      "screenReflectionTemporalPreparation": "temporal",
+      "screenReflectionHistoryValid": true,
+      "screenReflectionHistorySubmission": 4,
+      "screenReflectionHistoryInputSubmission": 3,
+      "screenReflectionMotionUvOffset": [
+        0.0,
+        0.0
+      ],
+      "screenReflectionOwnsMotion": true,
+      "screenReflectionMotionBytes": 73728000,
+      "screenReflectionReprojectionBytes": 36864000,
+      "screenReflectionPreparation": "compute",
+      "screenReflectionLevels": 7,
+      "screenReflectionWidth": 1280,
+      "screenReflectionHeight": 720,
+      "screenReflectionImageBudgetBytes": 125332800
+    },
+    "validationClean": false,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "privateProgramsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "restore": {
+    "bothConfigurationsVerified": true,
+    "sourceFilesRestored": 6,
+    "programsUnchanged": true,
+    "checks": [
+      {
+        "name": "AzureDepthPrefillRecordingTests",
+        "exitCode": 0
+      },
+      {
+        "name": "AzureMaterialClassEarlyDepthTests",
+        "exitCode": 0
+      },
+      {
+        "name": "AzureRenderNullRhiPassTests",
+        "exitCode": 0
+      },
+      {
+        "name": "AzureRenderRenderGraphTests",
+        "exitCode": 0
+      }
+    ],
+    "baselineTextSha256": "382525740e5d267b5bfb6ab85d15ba0b40350d3b0c32078620909bf20d6caffa",
+    "restoredTextSha256": "382525740e5d267b5bfb6ab85d15ba0b40350d3b0c32078620909bf20d6caffa",
+    "playerTextIdentical": true
+  },
+  "validationErrors": 14,
+  "validationVuids": {
+    "VUID-VkGraphicsPipelineCreateInfo-renderPass-06041": 4,
+    "VUID-vkCmdDrawIndexed-blendEnable-04727": 10
+  },
+  "identityImageBytes1440p": 29491200,
+  "wholeFrameTimingRuns": 0,
+  "formalRuns": 0,
+  "protectedFilesUnchanged": 13,
+  "adopted": false,
+  "nativeFourFrameCaptures": 2,
+  "nativeOutputDirectoryRejections": 1,
+  "recordingAliasRejections": 1,
+  "archive": {
+    "name": "validation.zip",
+    "bytes": 1325510,
+    "sha256": "31736d8a8f2154b3266d08191c3656d1f1f0eec1bb5b50fe3a3347de75182d17"
+  },
+  "members": [
+    {
+      "name": "active-source/AzureRenderApp.cpp",
+      "bytes": 102302,
+      "sha256": "8d7010573d3b91b05fe9b02732ce5df2901d6b5bc854a37165cf046aff0849c6"
+    },
+    {
+      "name": "active-source/CharacterMaterialSampling.inc",
+      "bytes": 30410,
+      "sha256": "01d4a1ca15fbb44c988313915dac89da67796cd4e4ea57eba744e9b96d77fc6e"
+    },
+    {
+      "name": "active-source/CharacterSceneRenderer.cpp",
+      "bytes": 347824,
+      "sha256": "7847b082bc9a9a8b91f05960e4cd1a9d95c9627ab1d71b610a679937aaa4b6ff"
+    },
+    {
+      "name": "active-source/CharacterSceneRenderer.hpp",
+      "bytes": 41805,
+      "sha256": "6d951e7fa30ad16014113f5886d5350825b97c8d31c373ed3700a55dd70032de"
+    },
+    {
+      "name": "active-source/CharacterShadowHistory.inc",
+      "bytes": 9754,
+      "sha256": "4874d81a085cda6acff67da705e8b2c9b16c78141637095303dc42abad853451"
+    },
+    {
+      "name": "active-source/CharacterSurfaceOverlays.inc",
+      "bytes": 3037,
+      "sha256": "e2a8ac2960785993d81aad31c728159305f02227ebf5371a35b36d2be000729b"
+    },
+    {
+      "name": "archive.py",
+      "bytes": 3657,
+      "sha256": "2f88bc418ff4c40be15a88a3d5c784897e2843068e9aaaa74a1c71806240d1d1"
+    },
+    {
+      "name": "AzureDepthPrefillRecordingTests.log",
+      "bytes": 29643,
+      "sha256": "8b73135f6383fe98b17aa826977596fd6933e77d9a7a704d708dec9a6184326c"
+    },
+    {
+      "name": "AzureMaterialClassEarlyDepthTests.log",
+      "bytes": 26307,
+      "sha256": "bf5ce80bba98dd7340d0cebecbaf9590ea4e6ae2161f3eaa3001ea27dcad76f0"
+    },
+    {
+      "name": "AzureRenderApp.cpp.baseline",
+      "bytes": 102213,
+      "sha256": "a341fd8b2d495037a191493d4a80e67cc74d957f31b6cb3c61380b96c7b6a2d5"
+    },
+    {
+      "name": "AzureRenderNullRhiPassTests.log",
+      "bytes": 96594,
+      "sha256": "d1ba0f18ac082adb4ef3436583577f449c24891fb80644c20c9ba1fb6547e9a9"
+    },
+    {
+      "name": "AzureRenderRenderGraphTests.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "baseline-build-provenance.json",
+      "bytes": 412489,
+      "sha256": "d735fa9e533188d80d48e74ff8db684cc505a6378dfaa3ddf6cb1995e01929ab"
+    },
+    {
+      "name": "baseline-programs.json",
+      "bytes": 152349,
+      "sha256": "de10086a60c4fcc2ae96cba67ba3c68f39b83e0be44192b00f35bab42c9bd429"
+    },
+    {
+      "name": "build.py",
+      "bytes": 2118,
+      "sha256": "361ecae76a77302116af9e7d39b0723b7a1ac08e92c6aee148b6a346537b31f9"
+    },
+    {
+      "name": "candidate-build-provenance.json",
+      "bytes": 413586,
+      "sha256": "00a786c1a6aa45aa3b92a248b4c8ca4ade888ab4baaf7c37a3be546f4f00daea"
+    },
+    {
+      "name": "candidate-build.log",
+      "bytes": 2033,
+      "sha256": "30b65460550cded0d8de4f40dc16645d2d2e8cdc2d5b0eeab8f2270d8147c51c"
+    },
+    {
+      "name": "capability-fix.json",
+      "bytes": 270,
+      "sha256": "d755d316167310e4042757fb451e6d73a9a30de07c277db1d8f47944570500c2"
+    },
+    {
+      "name": "capture-command.json",
+      "bytes": 197462,
+      "sha256": "a9c0645dedfc96f7450c8a1b47f4c2bf4f282348bb7d05a6dc25b3d03ca8f0e6"
+    },
+    {
+      "name": "capture-results.json",
+      "bytes": 2850,
+      "sha256": "e00f4e89927726c19ce58cd613f373841b67cc955d52e4d12f3488ad27f3fd02"
+    },
+    {
+      "name": "capture.log",
+      "bytes": 50166,
+      "sha256": "29a21618858bf342025aa301d7940aeeaaaa7fc9d5816fdd675ed3d2e4ba5a39"
+    },
+    {
+      "name": "capture.py",
+      "bytes": 4139,
+      "sha256": "94954f12cf27baaa54401f9ba56af876634dc9aa28824923448f60bacad64627"
+    },
+    {
+      "name": "character_depth.frag",
+      "bytes": 2425,
+      "sha256": "89e24644449ea071bd2efbc56ac673b411a79d562277541c3300a582aef5bb2e"
+    },
+    {
+      "name": "CharacterMaterialSampling.inc.baseline",
+      "bytes": 29208,
+      "sha256": "04fbf8d95af2a6d0c426742f2b6852e90b1b19019fb6fd184a1115d0d87d1a1d"
+    },
+    {
+      "name": "CharacterMaterialSampling.inc.diagnostic",
+      "bytes": 30266,
+      "sha256": "cd65fe87c4f782d47b95a2e0816024dcb51b4a86a633c3bbb02da37c812fdc12"
+    },
+    {
+      "name": "CharacterSceneRenderer.cpp.baseline",
+      "bytes": 344272,
+      "sha256": "d2160f0954915cea1305573013a5593a68f514ee2988bd496acf2dac7208663b"
+    },
+    {
+      "name": "CharacterSceneRenderer.cpp.diagnostic",
+      "bytes": 347487,
+      "sha256": "cecf15c50999baaca31b0f938fe4ca654b59701c7c7f50fccfc181ab38e602d2"
+    },
+    {
+      "name": "CharacterSceneRenderer.hpp.baseline",
+      "bytes": 41626,
+      "sha256": "c9f9057a061a5d374dccc9929455ac056a9be302c30eb5c829e8a30525b4a60a"
+    },
+    {
+      "name": "CharacterSceneRenderer.hpp.diagnostic",
+      "bytes": 41805,
+      "sha256": "6d951e7fa30ad16014113f5886d5350825b97c8d31c373ed3700a55dd70032de"
+    },
+    {
+      "name": "CharacterShadowHistory.inc.baseline",
+      "bytes": 7607,
+      "sha256": "aaf54b8e3b6a16cee15151c7886c660644e441fd24d6e835626c33ba183bf249"
+    },
+    {
+      "name": "CharacterShadowHistory.inc.diagnostic",
+      "bytes": 9724,
+      "sha256": "687218f78383a87e2fb0d1eebbcb007a545fd04f6722bdd6120c7aab2f958488"
+    },
+    {
+      "name": "CharacterSurfaceOverlays.inc.baseline",
+      "bytes": 2904,
+      "sha256": "65c06fe3e87230b8247637d49d23c70cb36b7f8f080235c7f9b57559ef159877"
+    },
+    {
+      "name": "CharacterSurfaceOverlays.inc.diagnostic",
+      "bytes": 3037,
+      "sha256": "e2a8ac2960785993d81aad31c728159305f02227ebf5371a35b36d2be000729b"
+    },
+    {
+      "name": "fix.py",
+      "bytes": 2612,
+      "sha256": "6da1d98cdd73ffa5de5f6a6aa0f794728b4d752a9ebe2b41adcfc70a38156cb3"
+    },
+    {
+      "name": "frozen-project-inputs.json",
+      "bytes": 454954,
+      "sha256": "bf0d040c42daa7d9b12e751d7b0338a9535a8bbfa51b4fa3c264d8d66fe5e13f"
+    },
+    {
+      "name": "initial-validation/candidate-build-provenance.json",
+      "bytes": 413586,
+      "sha256": "95d60966e9229e4dd057ba3fbf1f479a2f42d7727d29d7faf47a2b71d223f5f2"
+    },
+    {
+      "name": "initial-validation/candidate-build.log",
+      "bytes": 1739,
+      "sha256": "754ca2b16b027b524e0a160784d857618797e9108b612586ea73e48bf824267c"
+    },
+    {
+      "name": "initial-validation/capture-command.json",
+      "bytes": 194400,
+      "sha256": "1390da190880196c42ae126378da245157ad9905f6d9183a298b4a9ce77ba837"
+    },
+    {
+      "name": "initial-validation/capture-results.json",
+      "bytes": 2854,
+      "sha256": "866e4b9af8e544c1adf1a465d8ee8291b684ad43cc28afb475c541bdd9f25d77"
+    },
+    {
+      "name": "initial-validation/capture.log",
+      "bytes": 40838,
+      "sha256": "48d77df90257fd902cb87f29f7c32299ea989c401d055725cdeab3e03a7842d7"
+    },
+    {
+      "name": "initial-validation/character_depth.frag",
+      "bytes": 2425,
+      "sha256": "89e24644449ea071bd2efbc56ac673b411a79d562277541c3300a582aef5bb2e"
+    },
+    {
+      "name": "initial-validation/CharacterMaterialSampling.inc.diagnostic",
+      "bytes": 30410,
+      "sha256": "01d4a1ca15fbb44c988313915dac89da67796cd4e4ea57eba744e9b96d77fc6e"
+    },
+    {
+      "name": "initial-validation/CharacterSceneRenderer.cpp.diagnostic",
+      "bytes": 347487,
+      "sha256": "cecf15c50999baaca31b0f938fe4ca654b59701c7c7f50fccfc181ab38e602d2"
+    },
+    {
+      "name": "initial-validation/CharacterSceneRenderer.hpp.diagnostic",
+      "bytes": 41805,
+      "sha256": "6d951e7fa30ad16014113f5886d5350825b97c8d31c373ed3700a55dd70032de"
+    },
+    {
+      "name": "initial-validation/CharacterShadowHistory.inc.diagnostic",
+      "bytes": 9754,
+      "sha256": "4874d81a085cda6acff67da705e8b2c9b16c78141637095303dc42abad853451"
+    },
+    {
+      "name": "initial-validation/CharacterSurfaceOverlays.inc.diagnostic",
+      "bytes": 3037,
+      "sha256": "e2a8ac2960785993d81aad31c728159305f02227ebf5371a35b36d2be000729b"
+    },
+    {
+      "name": "initial-validation/mesh.frag",
+      "bytes": 124292,
+      "sha256": "210e1df3276fe427a7e8d0172b11d6cdf870c7f99b1cd21ed55b04c2b5ec3324"
+    },
+    {
+      "name": "initial-validation/outline_depth.frag",
+      "bytes": 553,
+      "sha256": "90a95601f9cf53ce562373200fdfd302619a1472542b199734b1d1fc8cd9dab6"
+    },
+    {
+      "name": "initial-validation/private-programs.json",
+      "bytes": 143818,
+      "sha256": "6daa087f0259d53ce66925f1108e725467e0afd2249414f632e701fd9be917a7"
+    },
+    {
+      "name": "initial-validation/runtime.json",
+      "bytes": 317972,
+      "sha256": "32ef1528b38429f0706aac3ce071391ee5e3c42466cd0e239c080715368840d3"
+    },
+    {
+      "name": "mesh.frag",
+      "bytes": 124292,
+      "sha256": "210e1df3276fe427a7e8d0172b11d6cdf870c7f99b1cd21ed55b04c2b5ec3324"
+    },
+    {
+      "name": "outline_depth.frag",
+      "bytes": 553,
+      "sha256": "90a95601f9cf53ce562373200fdfd302619a1472542b199734b1d1fc8cd9dab6"
+    },
+    {
+      "name": "output-directory-preflight/capture-command.json",
+      "bytes": 197452,
+      "sha256": "d85cb2c72246a790680048ac6e4c2e9d1c1f555dc6dfa24e5a0d90c92e4fe4f5"
+    },
+    {
+      "name": "output-directory-preflight/capture-results.json",
+      "bytes": 2840,
+      "sha256": "53749dde26b8ec6a3aa1af5b18775539cec3b7b9077c3fa4b19da0632ec0befc"
+    },
+    {
+      "name": "output-directory-preflight/capture.log",
+      "bytes": 223,
+      "sha256": "d42885325f1c63fb511965277aefec6cf9c8bd0fd9daec0187dafd28efbf7d5d"
+    },
+    {
+      "name": "output-directory-preflight/process.log",
+      "bytes": 2686,
+      "sha256": "f4111a2369a4dfb6e2dbb1c1e8a76a79c2d02797fb64de135e9cecca6cbd5ad9"
+    },
+    {
+      "name": "patch.py",
+      "bytes": 13162,
+      "sha256": "53f7926b0c50b2f4f1fd66e1fa798c7d089416a2c818e8345601082c124fae8f"
+    },
+    {
+      "name": "prefill-aliases.json",
+      "bytes": 515,
+      "sha256": "0cd81775a3efa51c4ca638ec6aa5b365821222fab4bba6c465b895980ae98acc"
+    },
+    {
+      "name": "private-program-build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "private-programs.json",
+      "bytes": 143818,
+      "sha256": "4c5b2fd38f4f5c9a2f1740ca97bc757bcf904a43570b0bc163d4259e0b1fa83d"
+    },
+    {
+      "name": "restore-build-provenance.json",
+      "bytes": 413586,
+      "sha256": "9d1966900d428407262214e3c92a3822534c35ddbd8eec5479d12efbff4cdb99"
+    },
+    {
+      "name": "restore-build.log",
+      "bytes": 2549,
+      "sha256": "3a1bde85cc201b277e2a31b73379a26bac909d0d1e3bbf762d665905d748b3be"
+    },
+    {
+      "name": "restore-results.json",
+      "bytes": 677,
+      "sha256": "7a46d123702c5b7797dc33a012ef594248e7477528d2306391f75dfd48e738de"
+    },
+    {
+      "name": "restored-AzureDepthPrefillRecordingTests.log",
+      "bytes": 29643,
+      "sha256": "398295de576741c56dff4d7848c5f1ee1bcc6e92507a58fc142d43b3ac2ac656"
+    },
+    {
+      "name": "restored-AzureMaterialClassEarlyDepthTests.log",
+      "bytes": 26307,
+      "sha256": "0c4117cb8f70fd62363f3f92cc4a4539338b2a2b7a095f7441ae38f841392fdc"
+    },
+    {
+      "name": "restored-AzureRenderNullRhiPassTests.log",
+      "bytes": 96595,
+      "sha256": "fd1d219268a7f4b660c277b077ad5a4e7df531b4bbc964ee1ac9003abdf80c5c"
+    },
+    {
+      "name": "restored-AzureRenderRenderGraphTests.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime.json",
+      "bytes": 317962,
+      "sha256": "4d33edac15e7193857f8af298d34030372041c23afef4f365e5ebb2a0a994d2f"
+    },
+    {
+      "name": "shader-reload.json",
+      "bytes": 139332,
+      "sha256": "7e41ed5d2ce0c1d97d688f5949627e6616202dcd8820ffdeaba25c9bd5614c66"
+    },
+    {
+      "name": "shaders.py",
+      "bytes": 6198,
+      "sha256": "6408d669e4788f0759d29c3eb41c48466436df165f213bfc2879b80f322ff9ce"
+    },
+    {
+      "name": "short-check-alias-failure/AzureDepthPrefillRecordingTests.log",
+      "bytes": 11443,
+      "sha256": "dfa391faa9708903883a18f51c03ee20c7884bf4435f09c8410db89ba022a662"
+    },
+    {
+      "name": "short-check-alias-failure/process.log",
+      "bytes": 514,
+      "sha256": "9d6d9b7a8504b245bba3e1424faf4acfac81ae690b37d49df10eeba373d8130e"
+    },
+    {
+      "name": "source-change.json",
+      "bytes": 568,
+      "sha256": "53310fd3eb2a1b5c3712cd951b021b40965352991996f25736fbd543547e6cf2"
+    },
+    {
+      "name": "verify-restore.py",
+      "bytes": 1881,
+      "sha256": "3f675f1aec7a0a2e6db17b272b20364d250ae4f0ecc287b67a59030dd11efdbe"
+    }
+  ]
+}

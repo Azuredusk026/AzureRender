@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "missingProjectRecovery": true,
+  "incompatibleApiRecovery": true,
+  "movedProjectOpened": true,
+  "relocatedHistoryDeduplicated": true,
+  "invalidRecentVisible": true,
+  "chineseUserConfiguration": true,
+  "input": "production Dear ImGui replay",
+  "physicalInput": "not performed"
+}

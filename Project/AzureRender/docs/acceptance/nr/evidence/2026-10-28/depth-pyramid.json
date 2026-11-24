@@ -1,0 +1,34 @@
+{
+  "phase": "NR5-R8-G",
+  "status": "component-verified",
+  "mainSceneIntegrated": false,
+  "nativeGeneratedLevels": 6,
+  "nativeBaseCopied": true,
+  "nativeDifferentBytes": 0,
+  "configurations": [
+    "Debug",
+    "Release"
+  ],
+  "synthetic": [
+    "minimum",
+    "maximum",
+    "odd-overlapping-coverage",
+    "single-pixel-axis",
+    "two-controls-one-submission",
+    "fenced-slot-reuse"
+  ],
+  "validationErrors": 0,
+  "liveImages": 0,
+  "liveBuffers": 0,
+  "sources": {
+    "src/render/DepthPyramid.hpp": "255fd8abe50b0a1c309178fd86bf671f986c08075010989ca5731de09fef3d00",
+    "src/render/DepthPyramid.cpp": "8497d8d52e51daf4a43ff3d0496cddf10494921a350d10ff07127f037c185846",
+    "shaders/depth_pyramid.comp": "be76304c3f0ecf2cba5927f8ba68d5df7b207d040b3a6fc816d937d07188fd20",
+    "tests/DepthPyramidTests.cpp": "f2ef13671e073e29fb9423e97556aa6e9a55e8b3d70ba4c85d864365c4470dc5",
+    "tests/DepthPyramidGpuTests.cpp": "4a1db6470d9322da554b7cef4b88c660365c3ef587336a15e75b308a70221557"
+  },
+  "debug-ctest": "Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug\r\nTest project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug\r\n    Start 340: AzureRender.DepthPyramid\r\n1/2 Test #340: AzureRender.DepthPyramid .........   Passed    1.32 sec\r\n    Start 341: AzureRender.DepthPyramidGpu\r\n2/2 Test #341: AzureRender.DepthPyramidGpu ......   Passed    1.75 sec\r\n\r\n100% tests passed, 0 tests failed out of 2\r\n\r\nLabel Time Summary:\r\ngpu    =   1.75 sec*proc (1 test)\r\n\r\nTotal Test time (real) =   3.11 sec\r\n",
+  "debug-native": "Native: base and six generated depth levels byte-exact\r\nPASS: validation=0 resources=0\r\n",
+  "release-ctest": "Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release\r\nTest project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release\r\n    Start 340: AzureRender.DepthPyramid\r\n1/2 Test #340: AzureRender.DepthPyramid .........   Passed    1.25 sec\r\n    Start 341: AzureRender.DepthPyramidGpu\r\n2/2 Test #341: AzureRender.DepthPyramidGpu ......   Passed    1.79 sec\r\n\r\n100% tests passed, 0 tests failed out of 2\r\n\r\nLabel Time Summary:\r\ngpu    =   1.79 sec*proc (1 test)\r\n\r\nTotal Test time (real) =   3.11 sec\r\n",
+  "release-native": "Native: base and six generated depth levels byte-exact\r\nPASS: validation=0 resources=0\r\n"
+}

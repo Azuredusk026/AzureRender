@@ -1,0 +1,32 @@
+{
+  "status": "tool-unit-complete-global-acceptance-open",
+  "sourceBase": "23015e7",
+  "toolTests": {
+    "command": "python -m unittest discover -s tools -p test_artifact*.py",
+    "passed": 13,
+    "failed": 0
+  },
+  "existingBinaryCpuTests": {
+    "configurations": [
+      "Debug",
+      "Release"
+    ],
+    "passedPerConfiguration": 3,
+    "names": [
+      "AzureRender.StableDepthOrder",
+      "AzureRender.AnimationCurve",
+      "AzureRender.ResourceLocator"
+    ]
+  },
+  "runtimeRebuilt": false,
+  "formalGpuCollected": false,
+  "visualAcceptance": "failed-user-review",
+  "deletionApplied": false,
+  "remaining": [
+    "GPU idle and thermal startup gate",
+    "normal volume reserve",
+    "13 unregistered pins",
+    "per-directory archive coverage and NR12 closure",
+    "explicit deletion batches and user dirty worktree"
+  ]
+}

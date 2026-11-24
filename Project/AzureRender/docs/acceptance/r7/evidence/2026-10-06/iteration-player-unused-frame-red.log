@@ -1,0 +1,27 @@
+[1/16] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSettings.cpp.obj
+[2/16] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderResources.cpp.obj
+[3/16] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDevtools.cpp.obj
+[4/16] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[5/16] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[6/16] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[7/16] Building CXX object CMakeFiles\AzurePlayer.dir\src\player\main.cpp.obj
+[8/16] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSupport.cpp.obj
+[9/16] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderCapture.cpp.obj
+[10/16] Building CXX object CMakeFiles\AzureRegisteredComponentHost.dir\src\main.cpp.obj
+[11/16] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderFrame.cpp.obj
+FAILED: [code=2] CMakeFiles/AzurePlayerHost.dir/src/app/AzureRenderFrame.cpp.obj 
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_ENABLE_VALIDATION=1 -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DAZURE_WITH_EDITOR=0 -DGLFW_DLL -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DJPH_FLOATING_POINT_EXCEPTIONS_ENABLED -DJPH_OBJECT_STREAM -DJPH_USE_CPU_COMPUTE -DOPENEXR_DLL -I..\..\src -Igenerated -Ivcpkg_installed\x64-windows\include -IC:\VulkanSDK\1.4.350.0\include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath -MDd /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderFrame.cpp.obj /FdCMakeFiles\AzurePlayerHost.dir\AzurePlayerHost.pdb /FS -c ..\..\src\app\AzureRenderFrame.cpp
+..\..\src\app\AzureRenderFrame.cpp(882): error C2220: 以下警告被视为错误
+..\..\src\app\AzureRenderFrame.cpp(882): warning C4100: 'frame': 未引用的参数
+[12/16] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderValidation.cpp.obj
+[13/16] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderApp.cpp.obj
+[14/16] Linking CXX executable AzureRegisteredComponentHost.exe
+ninja: build stopped: subcommand failed.
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\build_provenance.py", line 65, in <module>
+    main()
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\build_provenance.py", line 51, in main
+    subprocess.run(["cmake", "--build", str(args.build_dir), "--config", args.config], check=True)
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['cmake', '--build', 'build\\ninja-msvc-debug', '--config', 'Debug']' returned non-zero exit status 2.

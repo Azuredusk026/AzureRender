@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "size": [640, 360],
+  "items": [
+    {"id": "ground", "kind": "rectangle", "rect": [0, 280, 640, 80], "color": "#253850", "layer": 0},
+    {"id": "player", "kind": "sprite", "rect": [80, 230, 40, 50], "color": "#58b8e8", "layer": 1},
+    {"id": "label", "kind": "text", "rect": [30, 30, 500, 100], "color": "#ffffff", "fontSize": 26, "text": "二维关卡：精灵、图元与中文标签", "layer": 2}
+  ]
+}

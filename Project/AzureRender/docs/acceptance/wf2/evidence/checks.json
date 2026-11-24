@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "stage": "WF2",
+  "date": "2026-10-13",
+  "stageStatusTests": {
+    "passed": 16,
+    "failed": 0
+  },
+  "sources": [
+    {
+      "path": "tools/check_stage_status.py",
+      "sha256": "7fc7dd7ba556e46de4b35e3eb2441f094ef0a813effaa6f5872355d3e2ada0a9"
+    },
+    {
+      "path": "tools/test_stage_status.py",
+      "sha256": "94c3a0663a8f5e615d713c08e15079f0e35a836a8439c07879320327fa191431"
+    }
+  ],
+  "runtimeAcceptanceExecuted": false,
+  "readinessReportSha256": "d36ae44a9ae22221b2278ac99619ba99240822d7934117af64c172a6ca25a06a"
+}

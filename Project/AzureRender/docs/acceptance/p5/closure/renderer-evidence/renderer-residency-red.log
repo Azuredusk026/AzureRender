@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_renderer_residency.py", line 60, in <module>
+    a=p.parse_args();run(a.player.resolve(),a.output.resolve())
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_renderer_residency.py", line 45, in run
+    residency=json.loads(call('query',name='render.residency'));rows.append(residency)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_renderer_residency.py", line 32, in call
+    result=exchange(address,token,dict(op=op,**fields));assert result['passed'],result
+                                                               ~~~~~~^^^^^^^^^^
+AssertionError: {'code': 'InvalidRequest', 'elapsedMs': 1.3471, 'message': 'Unknown observation: render.residency', 'passed': False, 'schemaVersion': 1}

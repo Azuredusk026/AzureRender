@@ -1,0 +1,42 @@
+{
+  "removed": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-175519-material-facing-demand-90459f\\tmp",
+      "removed": [
+        260,
+        1794218676.9856846
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-175519-material-facing-demand-90459f\\image-material-facing-demand\\frames-180230\\frame_000000.png",
+      "removed": [
+        5714675,
+        1794218673.6274579
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-175519-material-facing-demand-90459f\\image-material-facing-demand\\frames-180230\\frame_000001.png",
+      "removed": [
+        5713820,
+        1794218674.4793627
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-175519-material-facing-demand-90459f\\image-material-facing-demand\\frames-180230\\frame_000002.png",
+      "removed": [
+        5713834,
+        1794218675.3249168
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-175519-material-facing-demand-90459f\\image-material-facing-demand\\frames-180230\\frame_000003.png",
+      "removed": [
+        5714218,
+        1794218676.2780128
+      ]
+    }
+  ],
+  "freeBefore": 157852213248,
+  "freeAfter": 157875081216,
+  "observedFreedBytes": 22867968
+}

@@ -1,0 +1,23 @@
+{
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "status": "passed",
+  "defaultVersionOnePrograms": 512,
+  "versionTwoMaximum": 1024,
+  "scope": "完整目录、版本容量、实际 GLSL/HLSL 编译与失败恢复。",
+  "configurations": {
+    "release": {
+      "programs": 535,
+      "maximumPrograms": 535,
+      "configSha256": "5732cdbe9db93575699010451e33cc46c629c31aee4fdb78fb9c7219a1cb6bc1",
+      "log": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\projected-reload-capacity-tests-release.log",
+      "logSha256": "f9526c68fab2663c04f99ac1aab773c640d24f4e7db626032cb8751e517ac256"
+    },
+    "debug": {
+      "programs": 535,
+      "maximumPrograms": 535,
+      "configSha256": "2c3e5a26f6bbf6dd486eb15719335206b953ec7396ca0b7945a3a9b0ae2dc7de",
+      "log": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\projected-reload-capacity-tests-debug.log",
+      "logSha256": "3053cb8ebe7d57b1aada2ef3eff08bbd40d4f56199a1583feaddcd75b7f04f81"
+    }
+  }
+}

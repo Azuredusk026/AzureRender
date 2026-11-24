@@ -1,0 +1,156 @@
+{
+  "diagnosticOnly": true,
+  "successfulAllocations": 2058,
+  "successfulReleases": 70,
+  "failedCalls": 0,
+  "partialOrAmbiguousCalls": 2088,
+  "trackedLiveBytes": 2313646080,
+  "liveRegions": [
+    {
+      "base": 2331472560128,
+      "size": 1048576
+    },
+    {
+      "base": 2331473608704,
+      "size": 2097152
+    },
+    {
+      "base": 2331475705856,
+      "size": 4194304
+    },
+    {
+      "base": 2331472232448,
+      "size": 8192
+    },
+    {
+      "base": 2331472297984,
+      "size": 40960
+    },
+    {
+      "base": 2331472429056,
+      "size": 12288
+    },
+    {
+      "base": 2331501461504,
+      "size": 4096
+    },
+    {
+      "base": 2331501527040,
+      "size": 4096
+    },
+    {
+      "base": 2331501592576,
+      "size": 4096
+    },
+    {
+      "base": 2331503099904,
+      "size": 8388608
+    },
+    {
+      "base": 2331512930304,
+      "size": 1048576
+    },
+    {
+      "base": 2331514044416,
+      "size": 1048576
+    },
+    {
+      "base": 140688106651648,
+      "size": 655360
+    },
+    {
+      "base": 2331519418368,
+      "size": 2359296
+    },
+    {
+      "base": 2330019758080,
+      "size": 1073741824
+    },
+    {
+      "base": 2331521777664,
+      "size": 65536
+    },
+    {
+      "base": 2331524661248,
+      "size": 8388608
+    },
+    {
+      "base": 2331568046080,
+      "size": 16580608
+    },
+    {
+      "base": 2331524333568,
+      "size": 16384
+    },
+    {
+      "base": 2331718844416,
+      "size": 2359296
+    },
+    {
+      "base": 2331721203712,
+      "size": 1073741824
+    },
+    {
+      "base": 2331566931968,
+      "size": 4096
+    },
+    {
+      "base": 2332804972544,
+      "size": 33619968
+    },
+    {
+      "base": 2332838592512,
+      "size": 33619968
+    },
+    {
+      "base": 2332872212480,
+      "size": 33619968
+    },
+    {
+      "base": 2332915466240,
+      "size": 16580608
+    },
+    {
+      "base": 2333097000960,
+      "size": 65536
+    },
+    {
+      "base": 2333165289472,
+      "size": 65536
+    },
+    {
+      "base": 2333164175360,
+      "size": 65536
+    },
+    {
+      "base": 2333164240896,
+      "size": 65536
+    },
+    {
+      "base": 2333164306432,
+      "size": 65536
+    },
+    {
+      "base": 2333164371968,
+      "size": 65536
+    }
+  ],
+  "completeAllocationCoverage": false,
+  "commandExitCode": -1,
+  "returnedEvents": 2128,
+  "entryCalls": 2128,
+  "pendingReturns": [],
+  "errors": [],
+  "droppedEntries": 0,
+  "excludedNonPseudoHandles": 0,
+  "resolvedApis": {
+    "NtAllocateVirtualMemory": 1,
+    "NtAllocateVirtualMemoryEx": 1,
+    "NtFreeVirtualMemory": 1
+  },
+  "coverage": "current-process pseudo handle; reserve/commit/decommit/release APIs",
+  "limits": [
+    "Kernel heaps, mappings, explicit process handles and calls before debugger attachment are outside coverage.",
+    "Debugger timing and returned size do not establish resident ownership or a leak."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "commit": "1d6eb84",
+  "binaryHash": "3206a7b1e5f74d3aead89050c6f5966fea8ee3f6022294a122228079de35bc1a",
+  "cases": [
+    {
+      "case": "empty",
+      "passed": true
+    },
+    {
+      "case": "100-entities",
+      "passed": true
+    }
+  ]
+}

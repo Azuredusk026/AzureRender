@@ -1,0 +1,136 @@
+{
+  "config": "Debug",
+  "executableSha256": "f2aca5980989a3b1c7071638d3e2e2a8bfe1b0db47ea00dcd7526266b6ab7f52",
+  "exitCode": 8,
+  "commandLinePassed": true,
+  "results": {
+    "AzureRender.VisualRegression": {
+      "passed": false,
+      "failures": 2,
+      "driverVersion": 2484371456
+    },
+    "AzureRender.VisualRegressionLegacyDescriptors": {
+      "passed": false,
+      "failures": 2,
+      "driverVersion": 2484371456
+    },
+    "AzureRender.VisualRegressionLegacySkinning": {
+      "passed": false,
+      "failures": 2,
+      "driverVersion": 2484371456
+    }
+  },
+  "pixels": {
+    "AzureRender.VisualRegression": {
+      "character_beauty_fullbody": {
+        "pixels": 3,
+        "maxChannelStep": 1,
+        "imageSha256": "9451d197afdfd61e2b6fe6b5777819db50d1001849ab7acbcb9c98d14eab6985"
+      },
+      "character_albedo_fullbody": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373"
+      },
+      "character_world_normal_fullbody": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+      },
+      "character_material_id_fullbody": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95"
+      },
+      "character_outline_fullbody": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56"
+      },
+      "character_direct_diffuse_fullbody": {
+        "pixels": 6,
+        "maxChannelStep": 1,
+        "imageSha256": "09b1be4a8a7e6eca8134c6223a06417b062f9e3a694237f95d055dcda7c0e2c3"
+      },
+      "character_face_sdf_closeup": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c"
+      }
+    },
+    "AzureRender.VisualRegressionLegacyDescriptors": {
+      "character_beauty_fullbody": {
+        "pixels": 3,
+        "maxChannelStep": 1,
+        "imageSha256": "9451d197afdfd61e2b6fe6b5777819db50d1001849ab7acbcb9c98d14eab6985"
+      },
+      "character_albedo_fullbody": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373"
+      },
+      "character_world_normal_fullbody": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+      },
+      "character_material_id_fullbody": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95"
+      },
+      "character_outline_fullbody": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56"
+      },
+      "character_direct_diffuse_fullbody": {
+        "pixels": 6,
+        "maxChannelStep": 1,
+        "imageSha256": "09b1be4a8a7e6eca8134c6223a06417b062f9e3a694237f95d055dcda7c0e2c3"
+      },
+      "character_face_sdf_closeup": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c"
+      }
+    },
+    "AzureRender.VisualRegressionLegacySkinning": {
+      "character_beauty_fullbody": {
+        "pixels": 3,
+        "maxChannelStep": 1,
+        "imageSha256": "9451d197afdfd61e2b6fe6b5777819db50d1001849ab7acbcb9c98d14eab6985"
+      },
+      "character_albedo_fullbody": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373"
+      },
+      "character_world_normal_fullbody": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+      },
+      "character_material_id_fullbody": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95"
+      },
+      "character_outline_fullbody": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56"
+      },
+      "character_direct_diffuse_fullbody": {
+        "pixels": 6,
+        "maxChannelStep": 1,
+        "imageSha256": "09b1be4a8a7e6eca8134c6223a06417b062f9e3a694237f95d055dcda7c0e2c3"
+      },
+      "character_face_sdf_closeup": {
+        "pixels": 0,
+        "maxChannelStep": 0,
+        "imageSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c"
+      }
+    }
+  }
+}

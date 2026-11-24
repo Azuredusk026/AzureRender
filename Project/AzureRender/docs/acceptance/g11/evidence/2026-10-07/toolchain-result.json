@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "toolchain": "dotnet 9.0.308",
+  "runtime": "9.0.11",
+  "nativeExportResult": 42,
+  "nativeLibrary": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g11\\toolchain-probe\\bin\\Release\\net9.0\\win-x64\\publish\\Probe.dll"
+}

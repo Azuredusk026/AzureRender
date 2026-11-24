@@ -1,0 +1,4013 @@
+{
+  "activeScripts": 1,
+  "animationFrames": 200,
+  "animations": [
+    {
+      "blend": 1.0,
+      "clip": 0,
+      "morph": [
+        0.0,
+        0.0
+      ],
+      "node": "hero",
+      "previousClip": 1,
+      "time": 0.35
+    },
+    {
+      "blend": 1.0,
+      "clip": 0,
+      "morph": [
+        0.0,
+        0.0
+      ],
+      "node": "guide",
+      "previousClip": 0,
+      "time": 2.050000005960462
+    }
+  ],
+  "audioStarts": 0,
+  "fixedSteps": 99,
+  "levelRevision": 1,
+  "nodes": [
+    {
+      "id": "hero",
+      "translation": [
+        4.3394113302674953e-10,
+        1.1920928955078125e-07,
+        -2.5858068466186523
+      ],
+      "visible": true
+    },
+    {
+      "id": "guide",
+      "translation": [
+        -3.0,
+        0.0,
+        -4.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "camera",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "ground",
+      "translation": [
+        0.0,
+        -0.25,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "step",
+      "translation": [
+        0.0,
+        0.10000000149011612,
+        -2.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "wall",
+      "translation": [
+        0.0,
+        1.0,
+        -5.199999809265137
+      ],
+      "visible": true
+    },
+    {
+      "id": "side-wall",
+      "translation": [
+        3.5,
+        1.0,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "ramp",
+      "translation": [
+        -4.0,
+        0.3499999940395355,
+        -2.0
+      ],
+      "visible": true
+    }
+  ],
+  "presentationErrors": [],
+  "replayedActions": 4,
+  "routeFrames": [
+    {
+      "camera": [
+        0.20000000298023224,
+        2.4235048294067383,
+        5.312592029571533
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": false,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 1,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.20000000298023224,
+        2.4235048294067383,
+        5.312592029571533
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.03333333507180214
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 2,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -3.1513103238012263e-10
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        5.277571678161621
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.06666667014360428
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 3,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.00604231096804142
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        5.266582489013672
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.10000000894069672
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 4,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.01703164540231228
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        5.251543045043945
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.13333334028720856
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 5,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.03207126632332802
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        5.233187198638916
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.1666666716337204
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 6,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.050426971167325974
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        5.212116718292236
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            -5.960464477539063e-08,
+            -0.20000000298023224
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 7,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.07149766385555267
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        5.1888227462768555
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.23333333432674408
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 8,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.09479118883609772
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        5.16370964050293
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.2666666805744171
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 9,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.11990462243556976
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        5.137105941772461
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.30000001192092896
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 10,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.1465080827474594
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        5.109282493591309
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.3333333432674408
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 11,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.17433145642280579
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        5.080460548400879
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.36666667461395264
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 12,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.20315362513065338
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        5.050820827484131
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.4000000059604645
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 13,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.23279352486133575
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        5.020511150360107
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.4333333373069763
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 14,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.2631029486656189
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.989653587341309
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.46666666865348816
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 15,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.29396048188209534
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.958347320556641
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 16,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.3252668082714081
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.926673412322998
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.5333333611488342
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 17,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.3569405674934387
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.8946990966796875
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.5666667222976685
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 18,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.38891518115997314
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.862478256225586
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.6000000834465027
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 19,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.4211360812187195
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.8300557136535645
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.6333334445953369
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 20,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.45355865359306335
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.7974677085876465
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.6666668057441711
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 21,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.48614630103111267
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.764745235443115
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.7000001668930054
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 22,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.518869161605835
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.731911659240723
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.7333335280418396
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 23,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.5517026782035828
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.6989874839782715
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -0.7666668891906738
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 24,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.5846267938613892
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.665988922119141
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.8000002503395081
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 25,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.6176250576972961
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.632930278778076
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.8333336114883423
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 26,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.6506840586662292
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.5998215675354
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.8666669726371765
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 27,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.6837928295135498
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.566671848297119
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.9000003337860107
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 28,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.716942310333252
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.533489227294922
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.933333694934845
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 29,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.7501251101493835
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.500278949737549
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -0.9666670560836792
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 30,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.7833352088928223
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.467046737670898
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -1.0000003576278687
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 31,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.8165676593780518
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.433795928955078
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -1.033333659172058
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 32,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.8498184084892273
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.400529861450195
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -1.0666669607162476
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 33,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.8830841183662415
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.367252349853516
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -1.100000262260437
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 34,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.9163620471954346
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.3339643478393555
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -1.1333335638046265
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 35,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.9496500492095947
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.300667762756348
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            1.1920928955078125e-07,
+            -1.166666865348816
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 36,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -0.9829462170600891
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.267364978790283
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            1.7881393432617188e-07,
+            -1.2000001668930054
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 37,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.016249179840088
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.23405647277832
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            1.1920928955078125e-07,
+            -1.2333334684371948
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 38,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0495575666427612
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.200743675231934
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -1.2666667699813843
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 39,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0828704833984375
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.167427062988281
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -1.3000000715255737
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 40,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.1161870956420898
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.13410758972168
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            0.0,
+            -1.3333333730697632
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 41,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.1495068073272705
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.100785255432129
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -1.3666666746139526
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 42,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.1828289031982422
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.067461013793945
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            0.0,
+            5.960464477539063e-08,
+            -1.399999976158142
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 43,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.2161530256271362
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4157400131225586,
+        4.034135341644287
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            7.282030534128126e-10,
+            0.03407728672027588,
+            -1.44136643409729
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 44,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        2.9602838006560295e-16,
+        1.0,
+        -1.249478816986084
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.421917200088501,
+        3.999351978302002
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            3.946619475669877e-09,
+            0.07720434665679932,
+            -1.4746997356414795
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 45,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.3200243675903778e-10,
+        1.0061771869659424,
+        -1.2842621803283691
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4347922801971436,
+        3.964831590652466
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            7.555057024433154e-09,
+            0.10991442203521729,
+            -1.508033037185669
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 46,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        8.234770088044741e-10,
+        1.019052267074585,
+        -1.3187826871871948
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.451262950897217,
+        3.9305262565612793
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            5.6331850295521235e-09,
+            0.12524032592773438,
+            -1.5257625579833984
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 47,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        2.043704983023531e-09,
+        1.0355228185653687,
+        -1.3530880212783813
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4675259590148926,
+        3.8992257118225098
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            3.897672851138623e-09,
+            0.13970839977264404,
+            -1.5460376739501953
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 48,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        2.6943667297274487e-09,
+        1.0517858266830444,
+        -1.3843886852264404
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4834635257720947,
+        3.8699235916137695
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            2.308637947479042e-09,
+            0.15349674224853516,
+            -1.5684958696365356
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 49,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        2.9124886946618744e-09,
+        1.0677235126495361,
+        -1.4136906862258911
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.499011516571045,
+        3.841862201690674
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            8.825015163083094e-10,
+            0.16625213623046875,
+            -1.5931437015533447
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 50,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        2.8030284759950064e-09,
+        1.0832716226577759,
+        -1.4417520761489868
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5140533447265625,
+        3.8144195079803467
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -3.6433478456388e-10,
+            0.17759490013122559,
+            -1.6199146509170532
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 51,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        2.454895398074086e-09,
+        1.0983134508132935,
+        -1.469194769859314
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5284247398376465,
+        3.7870986461639404
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            6.872993285611528e-10,
+            0.1871354579925537,
+            -1.6486576795578003
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 52,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.943855965080843e-09,
+        1.112684726715088,
+        -1.4965156316757202
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5419204235076904,
+        3.7595200538635254
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -1.5445061896102175e-10,
+            0.19449758529663086,
+            -1.679128646850586
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 53,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.716080499924999e-09,
+        1.1261804103851318,
+        -1.5240943431854248
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5543041229248047,
+        3.731416940689087
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.6462594882612507e-10,
+            0.19934415817260742,
+            -1.7109898328781128
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 54,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.3770109497102112e-09,
+        1.1385642290115356,
+        -1.5521973371505737
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.565321922302246,
+        3.7026326656341553
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            7.843514726602052e-11,
+            0.20140528678894043,
+            -1.743817687034607
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 55,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.2116233572001534e-09,
+        1.149581789970398,
+        -1.5809816122055054
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5747158527374268,
+        3.6731154918670654
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20050287246704102,
+            -1.7771207094192505
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 56,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.0062110034070315e-09,
+        1.1589758396148682,
+        -1.6104987859725952
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5822434425354004,
+        3.642911911010742
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000016689300537,
+            -1.81045401096344
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 57,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        8.115230709648813e-10,
+        1.1665034294128418,
+        -1.640702247619629
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.588315486907959,
+        3.6121411323547363
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000016689300537,
+            -1.8437873125076294
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 58,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        6.521260753622471e-10,
+        1.1725753545761108,
+        -1.6714730262756348
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5932865142822266,
+        3.5809059143066406
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000016689300537,
+            -1.8771206140518188
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 59,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        5.216228560200875e-10,
+        1.1775466203689575,
+        -1.70270836353302
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5973567962646484,
+        3.549290180206299
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000016689300537,
+            -1.9104539155960083
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 60,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        4.1477588030858215e-10,
+        1.1816167831420898,
+        -1.7343239784240723
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.600689172744751,
+        3.5173633098602295
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000004768371582,
+            -1.9437872171401978
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 61,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        3.2729696730626756e-10,
+        1.1849491596221924,
+        -1.7662509679794312
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.60341739654541,
+        3.4851813316345215
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000016689300537,
+            -1.9771205186843872
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 62,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        2.5567528649794724e-10,
+        1.1876773834228516,
+        -1.7984328269958496
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.6056511402130127,
+        3.4527907371520996
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000016689300537,
+            -2.010453939437866
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 63,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.9703644271729104e-10,
+        1.189911127090454,
+        -1.8308234214782715
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.607480049133301,
+        3.420229434967041
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000004768371582,
+            -2.0437872409820557
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 64,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.4902701295227416e-10,
+        1.1917399168014526,
+        -1.8633849620819092
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.6089773178100586,
+        3.3875279426574707
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000004768371582,
+            -2.077120542526245
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 65,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.0972021902144746e-10,
+        1.1932371854782104,
+        -1.89608633518219
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.610203266143799,
+        3.3547120094299316
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000016689300537,
+            -2.1104538440704346
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 66,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        7.753853809022715e-11,
+        1.1944631338119507,
+        -1.928902268409729
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.6112070083618164,
+        3.3218021392822266
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000016689300537,
+            -2.143787145614624
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 67,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        5.1190409550150306e-11,
+        1.1954668760299683,
+        -1.9618120193481445
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.6120285987854004,
+        3.28881573677063
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000016689300537,
+            -2.1771204471588135
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 68,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        2.9618384134177944e-11,
+        1.1962885856628418,
+        -1.9947985410690308
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.612701416015625,
+        3.2557663917541504
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000016689300537,
+            -2.210453748703003
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 69,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.1956709060345627e-11,
+        1.1969614028930664,
+        -2.0278477668762207
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.6132521629333496,
+        3.222665309906006
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000016689300537,
+            -2.2437870502471924
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 70,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -2.5034479697594314e-12,
+        1.1975122690200806,
+        -2.0609488487243652
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.6137032508850098,
+        3.1895222663879395
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.20000016689300537,
+            -2.277120351791382
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 71,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -1.434242221515225e-11,
+        1.1979632377624512,
+        -2.0940918922424316
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.614072322845459,
+        3.1563448905944824
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.19727516174316406,
+            -2.3104536533355713
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 72,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -2.4035355303264616e-11,
+        1.19833242893219,
+        -2.1272692680358887
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.6138806343078613,
+        3.1231391429901123
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.1879202127456665,
+            -2.3437869548797607
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 73,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -3.1971255504137375e-11,
+        1.1981407403945923,
+        -2.160475015640259
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.612028121948242,
+        3.0899102687835693
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.1851952075958252,
+            -2.37712025642395
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 74,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -3.846862065004508e-11,
+        1.1962881088256836,
+        -2.1937038898468018
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.6100172996520996,
+        3.0566625595092773
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.1634916067123413,
+            -2.4104535579681396
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 75,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -4.3788212639173096e-11,
+        1.194277286529541,
+        -2.2269515991210938
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.6044368743896484,
+        3.0233993530273438
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.1607666015625,
+            -2.443786859512329
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 76,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -4.8143527359156835e-11,
+        1.1886967420578003,
+        -2.2602148056030273
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5993738174438477,
+        2.9901232719421387
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.12209022045135498,
+            -2.4771201610565186
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 77,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -5.170935554743572e-11,
+        1.1836339235305786,
+        -2.2934908866882324
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5882179737091064,
+        2.9568369388580322
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.11936521530151367,
+            -2.510453462600708
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 78,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -5.462881189077784e-11,
+        1.1724779605865479,
+        -2.326777219772339
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5785903930664063,
+        2.923542022705078
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": false,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -6.78149758570612e-11,
+            0.05494052171707153,
+            -2.5437867641448975
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "walk"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 79,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -5.7019056143303715e-11,
+        1.1628501415252686,
+        -2.360072135925293
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5590295791625977,
+        2.890240430831909
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": false,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            1.9807680495809166e-10,
+            0.05149739980697632,
+            -2.54640793800354
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 80,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -5.897582422420555e-11,
+        1.1432894468307495,
+        -2.393373727798462
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5423903465270996,
+        2.862499952316284
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": false,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -1.9401383277717343e-10,
+            0.046236515045166016,
+            -2.550307512283325
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 81,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -1.2380372768627801e-11,
+        1.126650333404541,
+        -2.421114206314087
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5278139114379883,
+        2.839081287384033
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": false,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            3.14273579382629e-10,
+            0.0390244722366333,
+            -2.555429458618164
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 82,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -4.5304555246206135e-11,
+        1.1120738983154297,
+        -2.444532871246338
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.5145721435546875,
+        2.818979024887085
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": false,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -2.9682853397439146e-10,
+            0.029685556888580322,
+            -2.561692237854004
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 83,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.9875451978679237e-11,
+        1.0988322496414185,
+        -2.464635133743286
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.50203800201416,
+        2.8013856410980225
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": false,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            3.995161146352899e-10,
+            0.018001317977905273,
+            -2.5689749717712402
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 84,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -3.753270610973303e-11,
+        1.0862981081008911,
+        -2.4822285175323486
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4896578788757324,
+        2.785661220550537
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": false,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            -3.5948197196766785e-10,
+            0.003714263439178467,
+            -2.5770986080169678
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 85,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        4.169022418953894e-11,
+        1.0739179849624634,
+        -2.497952938079834
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4769322872161865,
+        2.7713146209716797
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 86,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        -3.102933535115149e-11,
+        1.061192274093628,
+        -2.5122995376586914
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4658398628234863,
+        2.7579901218414307
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 87,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        5.325553192880861e-11,
+        1.0500999689102173,
+        -2.5256240367889404
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.456758499145508,
+        2.7470808029174805
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 88,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.222621309748817e-10,
+        1.0410183668136597,
+        -2.5365333557128906
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4493231773376465,
+        2.7381489276885986
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 89,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        1.7875996516369952e-10,
+        1.0335830450057983,
+        -2.5454652309417725
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.443235397338867,
+        2.7308361530303955
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 90,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        2.2501649155071135e-10,
+        1.0274955034255981,
+        -2.5527780055999756
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.438251495361328,
+        2.724848985671997
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 91,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        2.628881001776051e-10,
+        1.0225114822387695,
+        -2.558765172958374
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.434170722961426,
+        2.719947099685669
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 92,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        2.938947696318195e-10,
+        1.0184308290481567,
+        -2.563667058944702
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4308300018310547,
+        2.7159337997436523
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 93,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        3.192809072682934e-10,
+        1.0150898694992065,
+        -2.5676803588867188
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4280946254730225,
+        2.7126479148864746
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 94,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        3.400652814899985e-10,
+        1.0123546123504639,
+        -2.5709662437438965
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4258551597595215,
+        2.7099578380584717
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 95,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        3.570820861220625e-10,
+        1.010115146636963,
+        -2.5736563205718994
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4240217208862305,
+        2.7077553272247314
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 96,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        3.710142748580836e-10,
+        1.0082815885543823,
+        -2.5758588314056396
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.422520399093628,
+        2.7059521675109863
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 97,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        3.824209837688386e-10,
+        1.0067803859710693,
+        -2.5776619911193848
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.4212913513183594,
+        2.7044756412506104
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 98,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        3.917599855629561e-10,
+        1.0055513381958008,
+        -2.5791385173797607
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.420285224914551,
+        2.7032668590545654
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 99,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        3.994061470447008e-10,
+        1.0045450925827026,
+        -2.5803472995758057
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.19890908896923065,
+        2.419461250305176,
+        2.702277183532715
+      ],
+      "cameraObstructed": false,
+      "characters": [
+        {
+          "grounded": true,
+          "node": "hero",
+          "playbackRate": 1.0,
+          "position": [
+            4.3394113302674953e-10,
+            1.1920928955078125e-07,
+            -2.5858068466186523
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": "idle"
+        }
+      ],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 100,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        4.056662783469278e-10,
+        1.0037212371826172,
+        -2.5813369750976563
+      ],
+      "tasks": []
+    }
+  ],
+  "scene": "third-person-courtyard",
+  "scriptErrors": [],
+  "simulationMilliseconds": 23.488599999999998,
+  "uiDrawCalls": 0
+}

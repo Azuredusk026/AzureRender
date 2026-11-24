@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 130: AzureRender.ShaderCompilerContract
+1/4 Test #130: AzureRender.ShaderCompilerContract .....   Passed    2.48 sec
+    Start 131: AzureRender.ShaderCatalogCompilation
+2/4 Test #131: AzureRender.ShaderCatalogCompilation ...   Passed   32.26 sec
+    Start 132: AzureRender.HotReload
+3/4 Test #132: AzureRender.HotReload ..................   Passed    1.73 sec
+    Start 133: AzurePlatform.ProcessRunner
+4/4 Test #133: AzurePlatform.ProcessRunner ............   Passed    0.32 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =  36.83 sec

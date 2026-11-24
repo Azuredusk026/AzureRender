@@ -1,0 +1,253 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azurerender.local/schema/material-profile.json",
+  "title": "AzureRender glTF Material Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "class"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "class": {
+      "enum": [
+        "generic",
+        "skin",
+        "face",
+        "hair",
+        "fabric",
+        "metal",
+        "eye",
+        "overlay",
+        "emissive",
+        "showcase"
+      ]
+    },
+    "displayTransform": {
+      "type": "string",
+      "enum": ["scene", "linear"],
+      "default": "scene"
+    },
+    "radianceScale": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 16,
+      "default": 1,
+      "description": "Linear outgoing-radiance multiplier after material response and before view transport. Multiplicative surfaces require one."
+    },
+    "features": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "stylized-shadow",
+          "hair-anisotropy",
+          "face-sdf-eligible",
+          "emissive-mask",
+          "overlay",
+          "neutral-fallback",
+          "brow-overlay",
+          "surface-ao",
+          "scene-tint",
+          "hair-ramp",
+          "scene-refraction",
+          "diffuse-ramp",
+          "silhouette-outline",
+          "multiply-composite",
+          "hair-projected-ramp",
+          "eye-radial-surface",
+          "unlit-surface",
+          "geometry-shadow",
+          "sqrt-alpha-shadow",
+          "hair-pixel-integral",
+          "unlit-texture-layers"
+        ]
+      }
+    },
+    "styleParameters": {
+      "description": "Class-dependent style vector. Lit materials use toon/shadow/specular/rim. Brow-overlay uses bind-space island expansion in metres (clamped to 0.0012), Face-D ink expansion radius in texels and two reserved values. Named brow joints select islands; eyelash geometry is preserved. Card culling uses the standard glTF material.doubleSided property.",
+      "$ref": "#/$defs/parameterVector"
+    },
+    "featureParameters": {
+      "description": "Class-dependent feature vector. Brow-overlay uses view offset, opacity, fade distance and base power.",
+      "$ref": "#/$defs/parameterVector"
+    },
+    "faceSdf": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "texture",
+        "texCoord",
+        "headNode"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "texture": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "texCoord": {
+          "const": 0
+        },
+        "headNode": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "hair": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "diffuseRamp": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "shadowColorLut": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "eyeSurface": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "outlineSurface": {
+      "$ref": "outline_surface.schema.json"
+    },
+    "specularInput": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "nprDiffuse": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "surface": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schemaVersion",
+            "lighting"
+          ],
+          "properties": {
+            "schemaVersion": {
+              "type": "integer",
+              "const": 1
+            },
+            "lighting": {
+              "const": "unlit"
+            }
+          }
+        },
+        {
+          "$ref": "unlit_texture_layers.schema.json"
+        }
+      ]
+    },
+    "composite": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "sceneRefraction": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    }
+  },
+  "allOf": [
+    {
+      "if": {"required": ["displayTransform"]},
+      "then": {"properties": {"schemaVersion": {"const": 2}}}
+    },
+    {
+      "if": {"required": ["radianceScale"]},
+      "then": {"properties": {"schemaVersion": {"const": 2}}}
+    },
+    {
+      "if": {"required": ["features"], "properties": {"features": {"contains": {"const": "multiply-composite"}}}},
+      "then": {"properties": {"radianceScale": {"const": 1}, "displayTransform": {"const": "scene"}}}
+    }
+  ],
+  "$defs": {
+    "parameterVector": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "number"
+      }
+    },
+    "faceSdfProfile": {
+      "description": "Face SDF texture and head-local orientation contract.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "texture",
+        "texCoord",
+        "channel",
+        "maskChannel",
+        "shadowOnLowValues",
+        "horizontalAxis",
+        "headNode"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "texture": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "texCoord": {
+          "const": 0
+        },
+        "channel": {
+          "enum": [
+            "r",
+            "g",
+            "b",
+            "a"
+          ]
+        },
+        "maskChannel": {
+          "enum": [
+            "r",
+            "g",
+            "b",
+            "a"
+          ]
+        },
+        "shadowOnLowValues": {
+          "type": "boolean"
+        },
+        "horizontalAxis": {
+          "description": "Which face side is stored at increasing U.",
+          "enum": [
+            "left-to-right",
+            "right-to-left"
+          ]
+        },
+        "headNode": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "description": "Structural profile schema. Texture ownership, node bindings and valid feature combinations use AzureMaterialValidator and the production interpreter."
+}

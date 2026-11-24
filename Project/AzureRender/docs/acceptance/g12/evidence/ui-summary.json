@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "stage": "G12",
+  "textureInput": true,
+  "impactPreview": true,
+  "saveReopen": true,
+  "selectedBatchFields": true,
+  "renameInput": true,
+  "durableUndoInput": true,
+  "readOnlyDiagnostics": true,
+  "physicalKeyboardMouse": "not performed"
+}

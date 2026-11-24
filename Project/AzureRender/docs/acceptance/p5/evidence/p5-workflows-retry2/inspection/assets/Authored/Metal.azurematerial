@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "baseColor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+    ],
+    "doubleSided": false,
+    "emissiveStrength": 0.0,
+    "metallic": 0.0,
+    "roughness": 0.4
+  },
+  "schemaVersion": 1,
+  "textures": {},
+  "typeId": "azure.pbr"
+}

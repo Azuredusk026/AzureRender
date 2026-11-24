@@ -1,0 +1,1234 @@
+{
+  "status": "nvidia-region-input-precision-diagnosed-intel-not-passed",
+  "run": "20261109-181501-native-producer-gpu-intermediates-de1e3d",
+  "samples": 49384,
+  "sourceInputs": {
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\producer-cb0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\producer-cb1.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\producer-cb3.bin": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t0.bin": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t2.bin": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t5.bin": "e931fd14a21ccf9da1c1200a368fc6212211d10f4c87f36d649a6c52ad416270",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t6.bin": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\native-screen-visibility.bin": "ed6b1149357db8d07e9fd5fd247d372890e31f50303879f4e1f8607ac8e8b76e"
+  },
+  "originalShaderSha256": "1f30e122a6d9c3257fdc2cc3bdc2b72ef60f7d1926138f89dbd6962c7fa24c52",
+  "qualification": [
+    {
+      "file": "control-results.json",
+      "versions": 1,
+      "unchangedPixelsPerVersion": 49384
+    },
+    {
+      "file": "receiver-probe-results.json",
+      "versions": 12,
+      "unchangedPixelsPerVersion": 49384
+    },
+    {
+      "file": "stages-probe-results.json",
+      "versions": 36,
+      "unchangedPixelsPerVersion": 49384
+    },
+    {
+      "file": "probe-results.json",
+      "versions": 20,
+      "unchangedPixelsPerVersion": 49384
+    }
+  ],
+  "region": {
+    "status": "diagnosed",
+    "samples": 49384,
+    "measuredReceiverFilter": {
+      "exactPixels": 49126,
+      "pixelsOverOneByte": 0,
+      "maximumByteError": 1
+    },
+    "reconstructedReceiverFilter": {
+      "exactPixels": 49082,
+      "pixelsOverOneByte": 40,
+      "maximumByteError": 21
+    },
+    "coordinateDifferences": {
+      "exactPixels": 47668,
+      "maximumAbsolutePerComponent": [
+        1.1444091796875e-05,
+        2.288818359375e-05,
+        2.6702880859375e-05
+      ]
+    },
+    "errorPoints": [
+      {
+        "pixel": [
+          1304,
+          155
+        ],
+        "expected": 208,
+        "reconstructedInputResult": 219,
+        "measuredInputResult": 208,
+        "nativeReceiver": [
+          0.6105003356933594,
+          0.8743820190429688,
+          0.7308311462402344
+        ],
+        "vulkanReceiver": [
+          0.6104965209960938,
+          0.8743896484375,
+          0.7308387756347656
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          7.62939453125e-06,
+          7.62939453125e-06
+        ]
+      },
+      {
+        "pixel": [
+          1233,
+          168
+        ],
+        "expected": 42,
+        "reconstructedInputResult": 31,
+        "measuredInputResult": 42,
+        "nativeReceiver": [
+          0.6285133361816406,
+          0.8774948120117188,
+          0.7209625244140625
+        ],
+        "vulkanReceiver": [
+          0.6285133361816406,
+          0.87750244140625,
+          0.7209587097167969
+        ],
+        "receiverDelta": [
+          0.0,
+          7.62939453125e-06,
+          -3.814697265625e-06
+        ]
+      },
+      {
+        "pixel": [
+          1301,
+          174
+        ],
+        "expected": 77,
+        "reconstructedInputResult": 69,
+        "measuredInputResult": 77,
+        "nativeReceiver": [
+          0.6109542846679688,
+          0.871002197265625,
+          0.7249526977539062
+        ],
+        "vulkanReceiver": [
+          0.6109542846679688,
+          0.8710174560546875,
+          0.7249336242675781
+        ],
+        "receiverDelta": [
+          0.0,
+          1.52587890625e-05,
+          -1.9073486328125e-05
+        ]
+      },
+      {
+        "pixel": [
+          1296,
+          175
+        ],
+        "expected": 16,
+        "reconstructedInputResult": 20,
+        "measuredInputResult": 16,
+        "nativeReceiver": [
+          0.6119499206542969,
+          0.870758056640625,
+          0.7250022888183594
+        ],
+        "vulkanReceiver": [
+          0.6119422912597656,
+          0.870758056640625,
+          0.7250022888183594
+        ],
+        "receiverDelta": [
+          -7.62939453125e-06,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "pixel": [
+          1294,
+          176
+        ],
+        "expected": 16,
+        "reconstructedInputResult": 13,
+        "measuredInputResult": 16,
+        "nativeReceiver": [
+          0.6124114990234375,
+          0.8720626831054688,
+          0.7283821105957031
+        ],
+        "vulkanReceiver": [
+          0.6124076843261719,
+          0.8720626831054688,
+          0.7283897399902344
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          0.0,
+          7.62939453125e-06
+        ]
+      },
+      {
+        "pixel": [
+          1297,
+          176
+        ],
+        "expected": 169,
+        "reconstructedInputResult": 178,
+        "measuredInputResult": 169,
+        "nativeReceiver": [
+          0.6116180419921875,
+          0.869873046875,
+          0.7258491516113281
+        ],
+        "vulkanReceiver": [
+          0.6116142272949219,
+          0.8698806762695312,
+          0.7258491516113281
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          7.62939453125e-06,
+          0.0
+        ]
+      },
+      {
+        "pixel": [
+          1239,
+          178
+        ],
+        "expected": 207,
+        "reconstructedInputResult": 201,
+        "measuredInputResult": 208,
+        "nativeReceiver": [
+          0.6272506713867188,
+          0.8767623901367188,
+          0.7170867919921875
+        ],
+        "vulkanReceiver": [
+          0.6272468566894531,
+          0.87677001953125,
+          0.7170753479003906
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          7.62939453125e-06,
+          -1.1444091796875e-05
+        ]
+      },
+      {
+        "pixel": [
+          1239,
+          179
+        ],
+        "expected": 69,
+        "reconstructedInputResult": 54,
+        "measuredInputResult": 69,
+        "nativeReceiver": [
+          0.6268768310546875,
+          0.8758010864257812,
+          0.7122993469238281
+        ],
+        "vulkanReceiver": [
+          0.6268692016601562,
+          0.8758087158203125,
+          0.7122917175292969
+        ],
+        "receiverDelta": [
+          -7.62939453125e-06,
+          7.62939453125e-06,
+          -7.62939453125e-06
+        ]
+      },
+      {
+        "pixel": [
+          1234,
+          183
+        ],
+        "expected": 244,
+        "reconstructedInputResult": 239,
+        "measuredInputResult": 244,
+        "nativeReceiver": [
+          0.6252670288085938,
+          0.8707962036132812,
+          0.7217369079589844
+        ],
+        "vulkanReceiver": [
+          0.6252670288085938,
+          0.8708038330078125,
+          0.7217254638671875
+        ],
+        "receiverDelta": [
+          0.0,
+          7.62939453125e-06,
+          -1.1444091796875e-05
+        ]
+      },
+      {
+        "pixel": [
+          1237,
+          255
+        ],
+        "expected": 228,
+        "reconstructedInputResult": 219,
+        "measuredInputResult": 228,
+        "nativeReceiver": [
+          0.62591552734375,
+          0.8500289916992188,
+          0.7069892883300781
+        ],
+        "vulkanReceiver": [
+          0.6259078979492188,
+          0.8500289916992188,
+          0.7069740295410156
+        ],
+        "receiverDelta": [
+          -7.62939453125e-06,
+          0.0,
+          -1.52587890625e-05
+        ]
+      },
+      {
+        "pixel": [
+          1245,
+          257
+        ],
+        "expected": 207,
+        "reconstructedInputResult": 186,
+        "measuredInputResult": 207,
+        "nativeReceiver": [
+          0.6234130859375,
+          0.8498153686523438,
+          0.7043991088867188
+        ],
+        "vulkanReceiver": [
+          0.6234092712402344,
+          0.8498306274414062,
+          0.7043800354003906
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          1.52587890625e-05,
+          -1.9073486328125e-05
+        ]
+      },
+      {
+        "pixel": [
+          1318,
+          257
+        ],
+        "expected": 224,
+        "reconstructedInputResult": 219,
+        "measuredInputResult": 224,
+        "nativeReceiver": [
+          0.6062583923339844,
+          0.8497848510742188,
+          0.7027549743652344
+        ],
+        "vulkanReceiver": [
+          0.6062545776367188,
+          0.8498001098632812,
+          0.7027359008789062
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          1.52587890625e-05,
+          -1.9073486328125e-05
+        ]
+      },
+      {
+        "pixel": [
+          1247,
+          260
+        ],
+        "expected": 248,
+        "reconstructedInputResult": 244,
+        "measuredInputResult": 248,
+        "nativeReceiver": [
+          0.6230316162109375,
+          0.8495407104492188,
+          0.7039413452148438
+        ],
+        "vulkanReceiver": [
+          0.6230239868164062,
+          0.8495559692382812,
+          0.7039337158203125
+        ],
+        "receiverDelta": [
+          -7.62939453125e-06,
+          1.52587890625e-05,
+          -7.62939453125e-06
+        ]
+      },
+      {
+        "pixel": [
+          1213,
+          262
+        ],
+        "expected": 242,
+        "reconstructedInputResult": 236,
+        "measuredInputResult": 242,
+        "nativeReceiver": [
+          0.6327552795410156,
+          0.8539581298828125,
+          0.6953468322753906
+        ],
+        "vulkanReceiver": [
+          0.63275146484375,
+          0.8539657592773438,
+          0.6953239440917969
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          7.62939453125e-06,
+          -2.288818359375e-05
+        ]
+      },
+      {
+        "pixel": [
+          1322,
+          268
+        ],
+        "expected": 186,
+        "reconstructedInputResult": 169,
+        "measuredInputResult": 186,
+        "nativeReceiver": [
+          0.60540771484375,
+          0.8484649658203125,
+          0.6959228515625
+        ],
+        "vulkanReceiver": [
+          0.6054039001464844,
+          0.8484725952148438,
+          0.6959304809570312
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          7.62939453125e-06,
+          7.62939453125e-06
+        ]
+      },
+      {
+        "pixel": [
+          1240,
+          269
+        ],
+        "expected": 242,
+        "reconstructedInputResult": 244,
+        "measuredInputResult": 242,
+        "nativeReceiver": [
+          0.6256637573242188,
+          0.8465957641601562,
+          0.7022018432617188
+        ],
+        "vulkanReceiver": [
+          0.6256599426269531,
+          0.8466110229492188,
+          0.7021865844726562
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          1.52587890625e-05,
+          -1.52587890625e-05
+        ]
+      },
+      {
+        "pixel": [
+          1221,
+          272
+        ],
+        "expected": 16,
+        "reconstructedInputResult": 14,
+        "measuredInputResult": 16,
+        "nativeReceiver": [
+          0.6303825378417969,
+          0.8529434204101562,
+          0.6868515014648438
+        ],
+        "vulkanReceiver": [
+          0.6303825378417969,
+          0.8529510498046875,
+          0.6868400573730469
+        ],
+        "receiverDelta": [
+          0.0,
+          7.62939453125e-06,
+          -1.1444091796875e-05
+        ]
+      },
+      {
+        "pixel": [
+          1288,
+          273
+        ],
+        "expected": 228,
+        "reconstructedInputResult": 232,
+        "measuredInputResult": 228,
+        "nativeReceiver": [
+          0.6126480102539062,
+          0.8448104858398438,
+          0.7042007446289062
+        ],
+        "vulkanReceiver": [
+          0.6126518249511719,
+          0.8448104858398438,
+          0.7042045593261719
+        ],
+        "receiverDelta": [
+          3.814697265625e-06,
+          0.0,
+          3.814697265625e-06
+        ]
+      },
+      {
+        "pixel": [
+          1316,
+          273
+        ],
+        "expected": 228,
+        "reconstructedInputResult": 224,
+        "measuredInputResult": 228,
+        "nativeReceiver": [
+          0.606689453125,
+          0.8470077514648438,
+          0.6971168518066406
+        ],
+        "vulkanReceiver": [
+          0.6066856384277344,
+          0.847015380859375,
+          0.697113037109375
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          7.62939453125e-06,
+          -3.814697265625e-06
+        ]
+      },
+      {
+        "pixel": [
+          1236,
+          283
+        ],
+        "expected": 228,
+        "reconstructedInputResult": 223,
+        "measuredInputResult": 228,
+        "nativeReceiver": [
+          0.6261329650878906,
+          0.8453216552734375,
+          0.6941566467285156
+        ],
+        "vulkanReceiver": [
+          0.6261253356933594,
+          0.8453369140625,
+          0.6941566467285156
+        ],
+        "receiverDelta": [
+          -7.62939453125e-06,
+          1.52587890625e-05,
+          0.0
+        ]
+      },
+      {
+        "pixel": [
+          1246,
+          286
+        ],
+        "expected": 248,
+        "reconstructedInputResult": 246,
+        "measuredInputResult": 248,
+        "nativeReceiver": [
+          0.6242408752441406,
+          0.8428878784179688,
+          0.6958580017089844
+        ],
+        "vulkanReceiver": [
+          0.6242332458496094,
+          0.8428955078125,
+          0.6958427429199219
+        ],
+        "receiverDelta": [
+          -7.62939453125e-06,
+          7.62939453125e-06,
+          -1.52587890625e-05
+        ]
+      },
+      {
+        "pixel": [
+          1323,
+          295
+        ],
+        "expected": 228,
+        "reconstructedInputResult": 223,
+        "measuredInputResult": 228,
+        "nativeReceiver": [
+          0.6056976318359375,
+          0.8445053100585938,
+          0.6840591430664062
+        ],
+        "vulkanReceiver": [
+          0.6056976318359375,
+          0.8445205688476562,
+          0.6840591430664062
+        ],
+        "receiverDelta": [
+          0.0,
+          1.52587890625e-05,
+          0.0
+        ]
+      },
+      {
+        "pixel": [
+          1230,
+          302
+        ],
+        "expected": 178,
+        "reconstructedInputResult": 169,
+        "measuredInputResult": 178,
+        "nativeReceiver": [
+          0.6298980712890625,
+          0.84796142578125,
+          0.6710433959960938
+        ],
+        "vulkanReceiver": [
+          0.6298866271972656,
+          0.8479843139648438,
+          0.6710281372070312
+        ],
+        "receiverDelta": [
+          -1.1444091796875e-05,
+          2.288818359375e-05,
+          -1.52587890625e-05
+        ]
+      },
+      {
+        "pixel": [
+          1347,
+          303
+        ],
+        "expected": 55,
+        "reconstructedInputResult": 62,
+        "measuredInputResult": 55,
+        "nativeReceiver": [
+          0.6032028198242188,
+          0.8488922119140625,
+          0.6677207946777344
+        ],
+        "vulkanReceiver": [
+          0.6031951904296875,
+          0.8489151000976562,
+          0.6677055358886719
+        ],
+        "receiverDelta": [
+          -7.62939453125e-06,
+          2.288818359375e-05,
+          -1.52587890625e-05
+        ]
+      },
+      {
+        "pixel": [
+          1265,
+          322
+        ],
+        "expected": 241,
+        "reconstructedInputResult": 238,
+        "measuredInputResult": 241,
+        "nativeReceiver": [
+          0.6207237243652344,
+          0.8401641845703125,
+          0.6754951477050781
+        ],
+        "vulkanReceiver": [
+          0.6207122802734375,
+          0.8401718139648438,
+          0.6754798889160156
+        ],
+        "receiverDelta": [
+          -1.1444091796875e-05,
+          7.62939453125e-06,
+          -1.52587890625e-05
+        ]
+      },
+      {
+        "pixel": [
+          1235,
+          325
+        ],
+        "expected": 193,
+        "reconstructedInputResult": 200,
+        "measuredInputResult": 193,
+        "nativeReceiver": [
+          0.6271896362304688,
+          0.842864990234375,
+          0.6641426086425781
+        ],
+        "vulkanReceiver": [
+          0.6271858215332031,
+          0.842864990234375,
+          0.6641311645507812
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          0.0,
+          -1.1444091796875e-05
+        ]
+      },
+      {
+        "pixel": [
+          1304,
+          346
+        ],
+        "expected": 194,
+        "reconstructedInputResult": 207,
+        "measuredInputResult": 194,
+        "nativeReceiver": [
+          0.6098670959472656,
+          0.8304595947265625,
+          0.6770172119140625
+        ],
+        "vulkanReceiver": [
+          0.60986328125,
+          0.8304595947265625,
+          0.6770057678222656
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          0.0,
+          -1.1444091796875e-05
+        ]
+      },
+      {
+        "pixel": [
+          1302,
+          349
+        ],
+        "expected": 248,
+        "reconstructedInputResult": 244,
+        "measuredInputResult": 248,
+        "nativeReceiver": [
+          0.6113090515136719,
+          0.8354415893554688,
+          0.6646652221679688
+        ],
+        "vulkanReceiver": [
+          0.6113014221191406,
+          0.8354568481445312,
+          0.6646652221679688
+        ],
+        "receiverDelta": [
+          -7.62939453125e-06,
+          1.52587890625e-05,
+          0.0
+        ]
+      },
+      {
+        "pixel": [
+          1310,
+          353
+        ],
+        "expected": 9,
+        "reconstructedInputResult": 11,
+        "measuredInputResult": 9,
+        "nativeReceiver": [
+          0.60894775390625,
+          0.8289947509765625,
+          0.674468994140625
+        ],
+        "vulkanReceiver": [
+          0.6089401245117188,
+          0.829010009765625,
+          0.6744613647460938
+        ],
+        "receiverDelta": [
+          -7.62939453125e-06,
+          1.52587890625e-05,
+          -7.62939453125e-06
+        ]
+      },
+      {
+        "pixel": [
+          1311,
+          353
+        ],
+        "expected": 7,
+        "reconstructedInputResult": 9,
+        "measuredInputResult": 7,
+        "nativeReceiver": [
+          0.6087455749511719,
+          0.8289871215820312,
+          0.6745262145996094
+        ],
+        "vulkanReceiver": [
+          0.6087455749511719,
+          0.8290023803710938,
+          0.6745223999023438
+        ],
+        "receiverDelta": [
+          0.0,
+          1.52587890625e-05,
+          -3.814697265625e-06
+        ]
+      },
+      {
+        "pixel": [
+          1248,
+          355
+        ],
+        "expected": 4,
+        "reconstructedInputResult": 9,
+        "measuredInputResult": 4,
+        "nativeReceiver": [
+          0.6234817504882812,
+          0.8300323486328125,
+          0.6719627380371094
+        ],
+        "vulkanReceiver": [
+          0.6234703063964844,
+          0.830047607421875,
+          0.6719589233398438
+        ],
+        "receiverDelta": [
+          -1.1444091796875e-05,
+          1.52587890625e-05,
+          -3.814697265625e-06
+        ]
+      },
+      {
+        "pixel": [
+          1300,
+          356
+        ],
+        "expected": 246,
+        "reconstructedInputResult": 249,
+        "measuredInputResult": 246,
+        "nativeReceiver": [
+          0.6109275817871094,
+          0.8277816772460938,
+          0.6744155883789062
+        ],
+        "vulkanReceiver": [
+          0.6109161376953125,
+          0.827789306640625,
+          0.674407958984375
+        ],
+        "receiverDelta": [
+          -1.1444091796875e-05,
+          7.62939453125e-06,
+          -7.62939453125e-06
+        ]
+      },
+      {
+        "pixel": [
+          1242,
+          360
+        ],
+        "expected": 54,
+        "reconstructedInputResult": 48,
+        "measuredInputResult": 54,
+        "nativeReceiver": [
+          0.6234626770019531,
+          0.8267364501953125,
+          0.6699638366699219
+        ],
+        "vulkanReceiver": [
+          0.6234588623046875,
+          0.8267440795898438,
+          0.669952392578125
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          7.62939453125e-06,
+          -1.1444091796875e-05
+        ]
+      },
+      {
+        "pixel": [
+          1308,
+          361
+        ],
+        "expected": 246,
+        "reconstructedInputResult": 244,
+        "measuredInputResult": 246,
+        "nativeReceiver": [
+          0.6092147827148438,
+          0.825439453125,
+          0.6759757995605469
+        ],
+        "vulkanReceiver": [
+          0.6092109680175781,
+          0.825439453125,
+          0.67596435546875
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          0.0,
+          -1.1444091796875e-05
+        ]
+      },
+      {
+        "pixel": [
+          1245,
+          364
+        ],
+        "expected": 194,
+        "reconstructedInputResult": 186,
+        "measuredInputResult": 194,
+        "nativeReceiver": [
+          0.6246147155761719,
+          0.8253402709960938,
+          0.6676750183105469
+        ],
+        "vulkanReceiver": [
+          0.6246109008789062,
+          0.825347900390625,
+          0.66766357421875
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          7.62939453125e-06,
+          -1.1444091796875e-05
+        ]
+      },
+      {
+        "pixel": [
+          1234,
+          369
+        ],
+        "expected": 116,
+        "reconstructedInputResult": 105,
+        "measuredInputResult": 116,
+        "nativeReceiver": [
+          0.6264228820800781,
+          0.8259124755859375,
+          0.6700897216796875
+        ],
+        "vulkanReceiver": [
+          0.6264228820800781,
+          0.8259124755859375,
+          0.670074462890625
+        ],
+        "receiverDelta": [
+          0.0,
+          0.0,
+          -1.52587890625e-05
+        ]
+      },
+      {
+        "pixel": [
+          1244,
+          388
+        ],
+        "expected": 252,
+        "reconstructedInputResult": 254,
+        "measuredInputResult": 252,
+        "nativeReceiver": [
+          0.6232185363769531,
+          0.8170089721679688,
+          0.6739730834960938
+        ],
+        "vulkanReceiver": [
+          0.6232147216796875,
+          0.8170242309570312,
+          0.6739616394042969
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          1.52587890625e-05,
+          -1.1444091796875e-05
+        ]
+      },
+      {
+        "pixel": [
+          1418,
+          392
+        ],
+        "expected": 139,
+        "reconstructedInputResult": 160,
+        "measuredInputResult": 139,
+        "nativeReceiver": [
+          0.5849723815917969,
+          0.8140716552734375,
+          0.6724700927734375
+        ],
+        "vulkanReceiver": [
+          0.5849723815917969,
+          0.8140792846679688,
+          0.6724777221679688
+        ],
+        "receiverDelta": [
+          0.0,
+          7.62939453125e-06,
+          7.62939453125e-06
+        ]
+      },
+      {
+        "pixel": [
+          1424,
+          395
+        ],
+        "expected": 16,
+        "reconstructedInputResult": 13,
+        "measuredInputResult": 16,
+        "nativeReceiver": [
+          0.5825004577636719,
+          0.8101654052734375,
+          0.6745872497558594
+        ],
+        "vulkanReceiver": [
+          0.5824928283691406,
+          0.8101806640625,
+          0.6745872497558594
+        ],
+        "receiverDelta": [
+          -7.62939453125e-06,
+          1.52587890625e-05,
+          0.0
+        ]
+      },
+      {
+        "pixel": [
+          1418,
+          398
+        ],
+        "expected": 253,
+        "reconstructedInputResult": 250,
+        "measuredInputResult": 253,
+        "nativeReceiver": [
+          0.583587646484375,
+          0.8093719482421875,
+          0.6741981506347656
+        ],
+        "vulkanReceiver": [
+          0.5835838317871094,
+          0.80938720703125,
+          0.6741790771484375
+        ],
+        "receiverDelta": [
+          -3.814697265625e-06,
+          1.52587890625e-05,
+          -1.9073486328125e-05
+        ]
+      }
+    ]
+  },
+  "stages": [
+    {
+      "stage": "world",
+      "exactPixels": 47668,
+      "totalPixels": 49384,
+      "maxAbsolutePerComponent": [
+        6.103515625e-05,
+        6.103515625e-05,
+        6.103515625e-05
+      ],
+      "exactAmong40ErrorPixels": 0,
+      "errorPixelMaximumAbsolute": [
+        6.103515625e-05,
+        6.103515625e-05,
+        6.103515625e-05
+      ]
+    },
+    {
+      "stage": "normal",
+      "exactPixels": 8172,
+      "totalPixels": 49384,
+      "maxAbsolutePerComponent": [
+        2.384185791015625e-07,
+        2.980232238769531e-07,
+        2.384185791015625e-07
+      ],
+      "exactAmong40ErrorPixels": 7,
+      "errorPixelMaximumAbsolute": [
+        1.1920928955078125e-07,
+        2.2351741790771484e-07,
+        1.1920928955078125e-07
+      ]
+    },
+    {
+      "stage": "biased",
+      "exactPixels": 47661,
+      "totalPixels": 49384,
+      "maxAbsolutePerComponent": [
+        6.103515625e-05,
+        6.103515625e-05,
+        6.103515625e-05
+      ],
+      "exactAmong40ErrorPixels": 0,
+      "errorPixelMaximumAbsolute": [
+        6.103515625e-05,
+        6.103515625e-05,
+        6.103515625e-05
+      ]
+    }
+  ],
+  "homogeneous": {
+    "sampledDepth": {
+      "exactPixels": 49384,
+      "maximumAbsoluteDifference": 0.0,
+      "exactAmong40ErrorPixels": 40
+    },
+    "homogeneous": {
+      "exactPixels": 47629,
+      "maximumAbsolutePerComponent": [
+        7.62939453125e-06,
+        7.62939453125e-06,
+        0.0,
+        2.9802322387695312e-08
+      ],
+      "exactAmong40ErrorPixels": 0
+    }
+  },
+  "precision": [
+    {
+      "mode": "precise",
+      "exactPixels": 49126,
+      "pixelsOverOneByte": 0,
+      "maximumByteError": 1,
+      "homogeneousExactPixels": 49384,
+      "homogeneousMaximumAbsolute": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mode": "split",
+      "exactPixels": 48837,
+      "pixelsOverOneByte": 246,
+      "maximumByteError": 28,
+      "homogeneousExactPixels": 20820,
+      "homogeneousMaximumAbsolute": [
+        7.62939453125e-06,
+        7.62939453125e-06,
+        7.62939453125e-06,
+        0.0
+      ]
+    }
+  ],
+  "intelPrecision": {
+    "exactPixels": 48893,
+    "pixelsOverOneByte": 195,
+    "maximumByteError": 43,
+    "homogeneousExactPixels": 49287,
+    "homogeneousMaximumAbsolute": [
+      7.62939453125e-06,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "intelMeasuredReceiver": {
+    "exactPixels": 49016,
+    "pixelsOverOneByte": 90,
+    "maximumByteError": 22
+  },
+  "checks": [
+    {
+      "file": "biased-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "coordinates-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "filter-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "homogeneous-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "intel-filter-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "intel-precise-filter-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "intel-precise-homogeneous-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "normal-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "precise-filter-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "precise-homogeneous-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "reciprocal-filter-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "reciprocal-world-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "split-filter-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "split-homogeneous-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    },
+    {
+      "file": "world-collection.log",
+      "validationLayerObserved": true,
+      "validationClean": true
+    }
+  ],
+  "builds": {
+    "release": {
+      "verified": true,
+      "sourceCount": 1675
+    },
+    "debug": {
+      "verified": true,
+      "sourceCount": 1675
+    }
+  },
+  "protectedDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "newPlayerProcesses": 0,
+  "newGameCaptureProcesses": 0,
+  "newPerformanceProcesses": 0,
+  "newFullAssetCopies": 0,
+  "formalPerformancePassed": false,
+  "fullHairColorPassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "package": {
+    "bytes": 343957,
+    "files": 94,
+    "sha256": "ff3a9e334e93a860e5ba026d0eca2caa76f852803c8d809337c9712268f5024e"
+  }
+}

@@ -2,8 +2,9 @@
 #include "AzureRenderInternal.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "extensions/ISceneRenderer.hpp"
+#include "runtime/LevelRenderSettings.hpp"
 
-#include <stb_image_write.h>
+#include "assets/image/ImageEncoder.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -21,6 +22,13 @@ using namespace azurerender::internal;
 
 namespace {
 
+template<class T> void writeReferencePlane(const std::filesystem::path& path,const std::vector<T>& data){
+    std::ofstream output(path,std::ios::binary);
+    output.write(reinterpret_cast<const char*>(data.data()),static_cast<std::streamsize>(data.size()*sizeof(data.front())));
+    output.close();
+    if(!output)throw std::runtime_error("Failed to write scene reference attachment: "+path.u8string());
+}
+
 std::string fnv1a64Hex(const std::string& value) {
     std::uint64_t hash = 14695981039346656037ULL;
     for (const unsigned char byte : value) {
@@ -35,7 +43,7 @@ std::string fnv1a64Hex(const std::string& value) {
 std::string fnv1a64FileHex(const std::filesystem::path& path) {
     std::ifstream input(path, std::ios::binary);
     if (!input) {
-        throw std::runtime_error("Failed to hash file: " + path.string());
+        throw std::runtime_error("Failed to hash file: " + path.u8string());
     }
     std::uint64_t hash = 14695981039346656037ULL;
     std::array<char, 4096> buffer{};
@@ -56,35 +64,35 @@ std::string fnv1a64FileHex(const std::filesystem::path& path) {
 }  // namespace
 
 void AzureRenderApp::prepareCaptureDirectory() {
-    const std::filesystem::path directory = runOptions_.captureDirectory;
+    const std::filesystem::path directory = std::filesystem::u8path(runOptions_.captureDirectory);
     if (std::filesystem::exists(directory)) {
         if (!std::filesystem::is_directory(directory)) {
             throw std::runtime_error(
                 "Capture path is not a directory: "
-                + directory.string());
+                + directory.u8string());
         }
         if (!std::filesystem::is_empty(directory)) {
             throw std::runtime_error(
                 "Capture directory must be empty: "
-                + directory.string());
+                + directory.u8string());
         }
     } else if (!std::filesystem::create_directories(directory)) {
         throw std::runtime_error(
             "Failed to create capture directory: "
-            + directory.string());
+            + directory.u8string());
     }
 }
 
 void AzureRenderApp::writeCaptureManifest(
     const std::uint64_t renderedFrames) const {
     const std::filesystem::path outputPath =
-        std::filesystem::path(runOptions_.captureDirectory)
+        std::filesystem::u8path(runOptions_.captureDirectory)
         / "capture_manifest.json";
     std::ofstream output(outputPath, std::ios::binary);
     if (!output) {
         throw std::runtime_error(
             "Failed to create capture manifest: "
-            + outputPath.string());
+            + outputPath.u8string());
     }
     constexpr std::array<const char*, 5> kDiagnosticNames = {
         "beauty",
@@ -97,15 +105,40 @@ void AzureRenderApp::writeCaptureManifest(
     const std::filesystem::path rampAtlasPath = resourceLocator_.rampAtlas();
     const std::string rampProfileHash = fnv1a64FileHex(rampProfilePath);
     const std::string rampAtlasHash = fnv1a64FileHex(rampAtlasPath);
+    const auto& gradeLut=effectiveRenderSettings_.grade.lut;
+    const auto gradeLutPath=gradeLut.resolvedAsset.empty()?std::filesystem::u8path(gradeLut.asset):gradeLut.resolvedAsset;
+    const std::string gradeLutHash=gradeLut.asset.empty()?std::string{}:fnv1a64FileHex(gradeLutPath);
+    const auto& captureCamera=effectiveRenderSettings_.cameraView;
+    const float captureNear=captureCamera?captureCamera->nearPlane:effectiveRenderSettings_.cameraNear;
+    const float captureFar=captureCamera?captureCamera->farPlane:effectiveRenderSettings_.cameraFar;
+    nlohmann::json cameraLens=nullptr;
+    const nlohmann::json cameraUp=captureCamera?nlohmann::json(captureCamera->up):nlohmann::json(nullptr);
+    nlohmann::json cameraPose=nullptr;
+    if(captureCamera){
+        const bool orthographic=captureCamera->projection==azurerender::CameraProjectionKind::Orthographic;
+        cameraLens={{"schemaVersion",1},{"projection",orthographic?"orthographic":"perspective"},
+            {"nearPlane",captureNear},{"farPlane",captureFar},
+            {"offsetNdc",{captureCamera->projectionOffsetX,captureCamera->projectionOffsetY}}};
+        cameraPose={{"position",captureCamera->position},{"target",captureCamera->target},{"up",captureCamera->up}};
+        if(orthographic)cameraLens["orthographicHeight"]=captureCamera->orthoHeight;
+        else cameraLens["verticalFovRadians"]=captureCamera->fov;
+    }
     std::ostringstream qaState;
     qaState
         << resolvedAssetPath_ << '|'
         << qaCameraName_ << '|'
         << qaLightName_ << '|'
+        << runOptions_.qaLightScan << '|'
+        << runOptions_.qaAnimation << '|'
         << qaEffectName_ << '|'
         << qaEffectStateName_ << '|'
         << qaIsolationName_ << '|'
         << renderSettings_.diagnosticView << '|'
+        << runOptions_.qaDisableFaceCulling << '|'
+        << runOptions_.qaDisableDepthTest << '|'
+        << captureNear << '|'
+        << captureFar << '|'
+        << effectiveRenderSettings_.shadowDistance << '|'
         << qaIsolationMode_ << '|'
         << qaEffectMode_ << '|'
         << qaEffectEnabled_ << '|'
@@ -132,9 +165,9 @@ void AzureRenderApp::writeCaptureManifest(
     }
     qaState
         << '|' << azurerender::BloomSettings::kSchemaVersion
-        << '|' << renderSettings_.bloom.enabled
-        << '|' << renderSettings_.bloom.threshold
-        << '|' << renderSettings_.bloom.strength;
+        << '|' << effectiveRenderSettings_.bloom.enabled
+        << '|' << effectiveRenderSettings_.bloom.threshold
+        << '|' << effectiveRenderSettings_.bloom.strength;
     qaState
         << '|' << azurerender::OutlineSettings::kSchemaVersion
         << '|' << renderSettings_.outline.strength
@@ -145,13 +178,20 @@ void AzureRenderApp::writeCaptureManifest(
     }
     qaState
         << '|' << azurerender::GradeSettings::kSchemaVersion
-        << '|' << renderSettings_.grade.exposureEv
-        << '|' << renderSettings_.grade.saturation
-        << '|' << renderSettings_.grade.contrast
-        << '|' << renderSettings_.grade.toneMappingEnabled;
-    for (const float channel : renderSettings_.grade.tint) {
+        << '|' << effectiveRenderSettings_.grade.exposureEv
+        << '|' << effectiveRenderSettings_.grade.saturation
+        << '|' << effectiveRenderSettings_.grade.contrast
+        << '|' << effectiveRenderSettings_.grade.toneMappingEnabled
+        << '|' << gradeLut.asset << '|' << gradeLut.exposureMultiplier << '|' << gradeLutHash;
+    for (const float channel : effectiveRenderSettings_.grade.tint) {
         qaState << '|' << channel;
     }
+    qaState << '|' << azurerender::encodeNprLighting(renderSettings_.nprLighting).dump();
+    if(effectiveRenderSettings_.cameraView){const auto& camera=*effectiveRenderSettings_.cameraView;
+        if(camera.projectionOffsetX!=0||camera.projectionOffsetY!=0)
+            qaState<<"|camera-projection-v2|"<<camera.projectionOffsetX<<'|'<<camera.projectionOffsetY;}
+    qaState<<"|camera-lens-v1|"<<cameraLens.dump();
+    qaState<<"|camera-pose-v1|"<<cameraPose.dump();
     qaState
         << '|'
         << rampProfileHash << '|'
@@ -168,7 +208,10 @@ void AzureRenderApp::writeCaptureManifest(
                 << ':' << material.materialFeatures
                 << ':' << material.materialProfileVersion
                 << ':' << material.materialProfileExplicit
-                << ':' << material.emissiveStrength;
+                << ':' << material.doubleSided
+                << ':' << material.emissiveStrength
+                << ':' << material.radianceScale
+                << ':' << static_cast<unsigned>(material.displayTransform);
             for (const float parameter : material.styleParameters) {
             qaState << ':' << parameter;
         }
@@ -177,6 +220,7 @@ void AzureRenderApp::writeCaptureManifest(
         }
         }
     }
+    if (runOptions_.qaShowcasePresentation) qaState << "|showcase";
     const std::string qaStateHash = fnv1a64Hex(qaState.str());
     output
         << "{\n"
@@ -234,9 +278,9 @@ void AzureRenderApp::writeCaptureManifest(
         << "    \"schemaVersion\": "
         << azurerender::BloomSettings::kSchemaVersion << ",\n"
         << "    \"enabled\": "
-        << (renderSettings_.bloom.enabled ? "true" : "false") << ",\n"
-        << "    \"threshold\": " << renderSettings_.bloom.threshold << ",\n"
-        << "    \"strength\": " << renderSettings_.bloom.strength << "\n"
+        << (effectiveRenderSettings_.bloom.enabled ? "true" : "false") << ",\n"
+        << "    \"threshold\": " << effectiveRenderSettings_.bloom.threshold << ",\n"
+        << "    \"strength\": " << effectiveRenderSettings_.bloom.strength << "\n"
         << "  },\n"
         << "  \"outlineSettings\": {\n"
         << "    \"schemaVersion\": "
@@ -254,40 +298,91 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"gradeSettings\": {\n"
         << "    \"schemaVersion\": "
         << azurerender::GradeSettings::kSchemaVersion << ",\n"
-        << "    \"exposureEv\": " << renderSettings_.grade.exposureEv << ",\n"
-        << "    \"saturation\": " << renderSettings_.grade.saturation << ",\n"
-        << "    \"contrast\": " << renderSettings_.grade.contrast << ",\n"
+        << "    \"exposureEv\": " << effectiveRenderSettings_.grade.exposureEv << ",\n"
+        << "    \"saturation\": " << effectiveRenderSettings_.grade.saturation << ",\n"
+        << "    \"contrast\": " << effectiveRenderSettings_.grade.contrast << ",\n"
         << "    \"tint\": ["
-        << renderSettings_.grade.tint[0] << ", "
-        << renderSettings_.grade.tint[1] << ", "
-        << renderSettings_.grade.tint[2] << "],\n"
+        << effectiveRenderSettings_.grade.tint[0] << ", "
+        << effectiveRenderSettings_.grade.tint[1] << ", "
+        << effectiveRenderSettings_.grade.tint[2] << "],\n"
         << "    \"toneMappingEnabled\": "
-        << (renderSettings_.grade.toneMappingEnabled ? "true" : "false") << "\n"
+        << (effectiveRenderSettings_.grade.toneMappingEnabled ? "true" : "false") << ",\n"
+        << "    \"lut\": {\n"
+        << "      \"schemaVersion\": " << azurerender::ColorGradingLutSettings::kSchemaVersion << ",\n"
+        << "      \"asset\": " << std::quoted(gradeLut.asset) << ",\n"
+        << "      \"exposureMultiplier\": " << gradeLut.exposureMultiplier << ",\n"
+        << "      \"dimension\": " << (gradeLut.asset.empty()?0:colorGradingLut_->dimension()) << ",\n"
+        << "      \"inputDomain\": " << std::quoted(gradeLut.asset.empty()?"linear":
+            (colorGradingLut_->inputDomain()==azurerender::ColorGradingInputDomain::Linear?"linear":"logc3-full-log")) << ",\n"
+        << "      \"outputDomain\": \"linear\",\n"
+        << "      \"fingerprintAlgorithm\": \"FNV-1a-64\",\n"
+        << "      \"fingerprint\": " << std::quoted(gradeLutHash) << "\n"
+        << "    }\n"
         << "  },\n"
         << "  \"hudEnabled\": "
         << (hudEnabled_ ? "true" : "false") << ",\n"
+        << "  \"cameraProjection\": {\"schemaVersion\": " << azurerender::CameraViewDescriptor::kLayoutVersion
+        << ", \"offsetNdc\": [" << (effectiveRenderSettings_.cameraView?effectiveRenderSettings_.cameraView->projectionOffsetX:0)
+        << ", " << (effectiveRenderSettings_.cameraView?effectiveRenderSettings_.cameraView->projectionOffsetY:0) << "]},\n"
+        << "  \"cameraLens\": " << cameraLens.dump() << ",\n"
+        << "  \"cameraUp\": " << cameraUp.dump() << ",\n"
         << "  \"qaHarnessVersion\": \"CQ-0-v1\",\n"
         << "  \"qaHarnessEnabled\": "
         << (qaHarnessEnabled_ ? "true" : "false") << ",\n"
         << "  \"qaCamera\": " << std::quoted(qaCameraName_) << ",\n"
         << "  \"qaLight\": " << std::quoted(qaLightName_) << ",\n"
+        << "  \"qaLightScan\": " << (runOptions_.qaLightScan ? "true" : "false") << ",\n"
+        << "  \"qaAnimation\": " << (runOptions_.qaAnimation ? "true" : "false") << ",\n"
+        << "  \"sceneWorldCoordinates\": " << (runOptions_.sceneDocument.has_value() || runOptions_.editorSession != nullptr ? "true" : "false") << ",\n"
         << "  \"qaEffect\": " << std::quoted(qaEffectName_) << ",\n"
         << "  \"qaEffectState\": "
         << std::quoted(qaEffectStateName_) << ",\n"
         << "  \"qaIsolation\": "
         << std::quoted(qaIsolationName_) << ",\n"
+        << "  \"qaExposureEv\": " << runOptions_.qaExposureEv.value_or(0.F) << ",\n"
+        << "  \"qaPresentation\": \"" << (runOptions_.qaShowcasePresentation ? "showcase" : "component") << "\",\n"
+        << "  \"qaDisableFaceCulling\": " << (runOptions_.qaDisableFaceCulling ? "true" : "false") << ",\n"
+        << "  \"qaDisableDepthTest\": " << (runOptions_.qaDisableDepthTest ? "true" : "false") << ",\n"
+        << "  \"cameraNear\": " << captureNear << ",\n"
+        << "  \"cameraFar\": " << captureFar << ",\n"
+        << "  \"antiAliasing\": " << effectiveRenderSettings_.antiAliasing << ",\n"
+        << "  \"nprLighting\": " << azurerender::encodeNprLighting(renderSettings_.nprLighting).dump() << ",\n"
+        << "  \"antiAliasingPipeline\": " << std::quoted(runOptions_.qaShowcasePresentation?"showcase-spatial-v1":sceneMultisampling_?"native-hdr-multisample-v1":temporalReconstruction_&&sceneRenderer_&&sceneRenderer_->capabilities().supportsMotionVectors?"native-hdr-temporal-v4":"linear-display-spatial-v1") << ",\n"
+        << "  \"rasterizationSamples\": " << (sceneMultisampling_?4:1) << ",\n"
+        << "  \"multisampleRequested\": " << (multisampleRequested_?"true":"false") << ",\n"
+        << "  \"multisampleSourceSlots\": " << (sceneMultisampling_?kMaxFramesInFlight:0) << ",\n"
+        << "  \"sceneAttachmentFormats\": [" << kHdrSceneColorFormat << "," << depthFormat_ << "," << normalFormat_ << "],\n"
+        << "  \"multisampleBytes\": " << (sceneMultisampling_?sceneMultisampling_->byteSize():0) << ",\n"
+        << "  \"multisampleAllocatedBytes\": " << (sceneMultisampling_?sceneMultisampling_->allocatedByteSize():0) << ",\n"
+        << "  \"multisampleFallback\": " << std::quoted(multisampleFallback_) << ",\n"
+        << "  \"temporalRequested\": " << (temporalRequested_?"true":"false") << ",\n"
+        << "  \"temporalHistorySubmission\": " << (temporalReconstruction_?temporalReconstruction_->historySubmission():0) << ",\n"
+        << "  \"temporalBytes\": " << (temporalReconstruction_?temporalReconstruction_->byteSize()+(sharedMotion_?sharedMotion_->byteSize():0):0) << ",\n"
+        << "  \"temporalHistoryBytes\": " << (temporalReconstruction_?temporalReconstruction_->byteSize():0) << ",\n"
+        << "  \"temporalDisplayMaskFormat\": \"R16G16_SFLOAT\",\n"
+        << "  \"temporalDisplayMaskBytes\": " << (temporalReconstruction_?temporalReconstruction_->displayMaskByteSize():0) << ",\n"
+        << "  \"motionBytes\": " << (sharedMotion_?sharedMotion_->byteSize():0) << ",\n"
+        << "  \"temporalMotionShared\": " << (temporalReconstruction_&&sharedMotion_&& &temporalReconstruction_->motion()==sharedMotion_.get()?"true":"false") << ",\n"
+        << "  \"temporalFallback\": " << std::quoted(temporalFallback_) << ",\n"
+        << "  \"sceneRenderWidth\": " << sceneRenderExtent_.width << ",\n"
+        << "  \"sceneRenderHeight\": " << sceneRenderExtent_.height << ",\n"
+        << "  \"sceneDisplayMaskFormat\": \"R8_UNORM\",\n"
+        << "  \"sceneDisplayMaskImages\": " << displayMaskImages_.size() << ",\n"
+        << "  \"sceneDisplayMaskBytes\": " << std::uint64_t(sceneRenderExtent_.width)*sceneRenderExtent_.height*displayMaskImages_.size() << ",\n"
+        << "  \"shadowDistance\": " << effectiveRenderSettings_.shadowDistance << ",\n"
         << "  \"qaStateHashAlgorithm\": \"FNV-1a-64\",\n"
+        << "  \"qaStateFingerprintVersion\": 4,\n"
         << "  \"qaStateHash\": " << std::quoted(qaStateHash) << ",\n"
         << "  \"toonRampFormat\": \"AzureRender Toon Ramp Profiles v1\",\n"
         << "  \"toonRampVersion\": 1,\n"
         << "  \"toonRampClassCount\": 10,\n"
         << "  \"toonRampProfile\": "
-        << std::quoted(rampProfilePath.string()) << ",\n"
+        << std::quoted(rampProfilePath.u8string()) << ",\n"
         << "  \"toonRampProfileHashAlgorithm\": \"FNV-1a-64\",\n"
         << "  \"toonRampProfileHash\": "
         << std::quoted(rampProfileHash) << ",\n"
         << "  \"toonRampAtlas\": "
-        << std::quoted(rampAtlasPath.string()) << ",\n"
+        << std::quoted(rampAtlasPath.u8string()) << ",\n"
         << "  \"toonRampAtlasHashAlgorithm\": \"FNV-1a-64\",\n"
         << "  \"toonRampAtlasHash\": "
         << std::quoted(rampAtlasHash) << ",\n"
@@ -326,6 +421,8 @@ void AzureRenderApp::writeCaptureManifest(
                 << material.materialProfileVersion
                 << ", \"emissiveStrength\": "
                 << material.emissiveStrength
+                << ", \"radianceScale\": " << material.radianceScale
+                << ", \"displayTransform\": " << std::quoted(azurerender::materialDisplayTransformName(material.displayTransform))
                 << ", \"styleParameters\": ["
                 << material.styleParameters[0] << ", "
                 << material.styleParameters[1] << ", "
@@ -397,6 +494,37 @@ void AzureRenderApp::writeCaptureManifest(
         output << ",\n";
     }
     if (sceneRenderer_ != nullptr) {
+        if(const auto depth=sceneRenderer_->readReferenceSceneDepth()){
+            const auto pixels=std::size_t(depth->extent.width)*depth->extent.height;
+            if(!pixels||depth->rasterDepth.size()!=pixels||depth->hardwareDepth.size()!=pixels)
+                throw std::runtime_error("Invalid scene reference depth capture dimensions");
+            constexpr auto rasterName="reference-depth-r32.bin";
+            constexpr auto hardwareName="reference-depth-d32.bin";
+            writeReferencePlane(outputPath.parent_path()/rasterName,depth->rasterDepth);
+            writeReferencePlane(outputPath.parent_path()/hardwareName,depth->hardwareDepth);
+            output << "  \"referenceSceneDepth\": {\"width\": " << depth->extent.width
+                   << ", \"height\": " << depth->extent.height << ", \"submission\": " << depth->submission
+                   << ", \"rowOrigin\": \"bottom-left\""
+                   << ", \"raster\": " << std::quoted(rasterName) << ", \"hardware\": " << std::quoted(hardwareName);
+            if(!depth->packedNormals.empty()||!depth->objectIds.empty()){
+                if(depth->packedNormals.size()!=pixels||depth->objectIds.size()!=pixels)
+                    throw std::runtime_error("Invalid scene reference visibility input dimensions");
+                constexpr auto normalName="reference-normals-a2b10g10r10.bin";
+                constexpr auto objectIdName="reference-object-ids-r8.bin";
+                writeReferencePlane(outputPath.parent_path()/normalName,depth->packedNormals);
+                writeReferencePlane(outputPath.parent_path()/objectIdName,depth->objectIds);
+                output << ", \"normalFrame\": \"reference\", \"packedNormals\": " << std::quoted(normalName)
+                       << ", \"objectIds\": " << std::quoted(objectIdName);
+            }
+            if(!depth->objectVisibility.empty()){
+                if(depth->objectVisibility.size()!=pixels||depth->objectIds.size()!=pixels)
+                    throw std::runtime_error("Invalid scene reference object visibility dimensions");
+                constexpr auto visibilityName="reference-object-visibility-rg8.bin";
+                writeReferencePlane(outputPath.parent_path()/visibilityName,depth->objectVisibility);
+                output << ", \"objectVisibility\": " << std::quoted(visibilityName);
+            }
+            output << "},\n";
+        }
         sceneRenderer_->appendCaptureManifestFields(output);
     } else {
         output
@@ -409,10 +537,10 @@ void AzureRenderApp::writeCaptureManifest(
     if (!output) {
         throw std::runtime_error(
             "Failed to write capture manifest: "
-            + outputPath.string());
+            + outputPath.u8string());
     }
     azurerender::RuntimeDiagnostics::instance().print(
-        "capture", "Capture manifest: " + outputPath.string());
+        "capture", "Capture manifest: " + outputPath.u8string());
 }
 
 
@@ -469,6 +597,7 @@ void AzureRenderApp::collectGpuTiming(const std::size_t frameIndex) {
     gpuTiming_.sceneTotalMs += sceneMs;
     gpuTiming_.postProcessTotalMs += postProcessMs;
     gpuTiming_.frameTotalMs += frameMs;
+    if(gpuTiming_.frameSamplesMs.size()>=8192)gpuTiming_.frameSamplesMs.pop_front();
     gpuTiming_.frameSamplesMs.push_back(frameMs);
     if (gpuTiming_.samples == 1) {
         gpuTiming_.frameMinMs = frameMs;
@@ -479,7 +608,35 @@ void AzureRenderApp::collectGpuTiming(const std::size_t frameIndex) {
         gpuTiming_.frameMaxMs =
             std::max(gpuTiming_.frameMaxMs, frameMs);
     }
+    collectGpuPassTiming(frameIndex);
     appendFrameTimingCsv(shadowMs, sceneMs, postProcessMs, frameMs);
+}
+
+void AzureRenderApp::collectGpuPassTiming(const std::size_t frameIndex) {
+    if(!runOptions_.gpuPassTimingEnabled)return;
+    const auto& names=timestampPassNames_[frameIndex];if(names.empty())return;
+    std::array<std::uint64_t,kMaximumTimedPasses*4> values{};
+    const auto count=static_cast<std::uint32_t>(names.size()*2);
+    const auto result=vkGetQueryPoolResults(device_,timestampQueryPools_[frameIndex],kTimestampQueryCount,count,
+        count*2*sizeof(std::uint64_t),values.data(),2*sizeof(std::uint64_t),VK_QUERY_RESULT_64_BIT|VK_QUERY_RESULT_WITH_AVAILABILITY_BIT);
+    if(result!=VK_SUCCESS&&result!=VK_NOT_READY)vkCheck(result,"vkGetQueryPoolResults(pass timestamps)");
+    const auto mask=timestampValidBits_>=64?std::numeric_limits<std::uint64_t>::max():(std::uint64_t{1}<<timestampValidBits_)-1;
+    nlohmann::json entries=nlohmann::json::array();
+    for(std::size_t i=0;i<names.size();++i){
+        if(!values[4*i+1]||!values[4*i+3]){entries.push_back({{"name",names[i]},{"available",false}});continue;}
+        const auto ticks=(values[4*i+2]-values[4*i])&mask;
+        const double ms=static_cast<double>(ticks)*timestampPeriodNanoseconds_*1.e-6;
+        entries.push_back({{"name",names[i]},{"available",true},{"milliseconds",ms}});
+        auto found=std::find_if(gpuPassTiming_.begin(),gpuPassTiming_.end(),[&](const auto& item){return item.name==names[i];});
+        if(found==gpuPassTiming_.end()){
+            if(gpuPassTiming_.size()==128)continue;
+            gpuPassTiming_.push_back({names[i],1,ms,ms,ms});
+        }else{++found->samples;found->totalMs+=ms;found->minMs=std::min(found->minMs,ms);found->maxMs=std::max(found->maxMs,ms);}
+    }
+    if(runOptions_.gpuTimingOutput.empty())return;
+    auto path=std::filesystem::u8path(runOptions_.gpuTimingOutput);path.replace_extension(".passes.jsonl");
+    std::ofstream output(path,std::ios::binary|(gpuTiming_.samples==1?std::ios::trunc:std::ios::app));
+    if(output)output<<nlohmann::json{{"frame",gpuTiming_.samples},{"passes",std::move(entries)}}.dump()<<'\n';
 }
 
 void AzureRenderApp::appendFrameTimingCsv(
@@ -490,7 +647,7 @@ void AzureRenderApp::appendFrameTimingCsv(
     if (runOptions_.gpuTimingOutput.empty()) {
         return;
     }
-    std::filesystem::path outputPath = runOptions_.gpuTimingOutput;
+    std::filesystem::path outputPath = std::filesystem::u8path(runOptions_.gpuTimingOutput);
     outputPath.replace_extension(".csv");
     const bool firstFrame = gpuTiming_.samples == 1;
     std::ofstream output(
@@ -524,7 +681,7 @@ void AzureRenderApp::printGpuTimingSummary() const {
     const double frameAverage = gpuTiming_.frameTotalMs / count;
     // Percentiles describe the frames a user actually notices; a single stall
     // moves max without moving the mean, so both are reported.
-    std::vector<double> sortedFrames = gpuTiming_.frameSamplesMs;
+    std::vector<double> sortedFrames(gpuTiming_.frameSamplesMs.begin(),gpuTiming_.frameSamplesMs.end());
     std::sort(sortedFrames.begin(), sortedFrames.end());
     const auto framePercentile = [&sortedFrames](const double percent) {
         if (sortedFrames.empty()) {
@@ -580,7 +737,7 @@ void AzureRenderApp::printGpuTimingSummary() const {
         return;
     }
     const std::filesystem::path outputPath =
-        runOptions_.gpuTimingOutput;
+        std::filesystem::u8path(runOptions_.gpuTimingOutput);
     const std::filesystem::path parent = outputPath.parent_path();
     if (!parent.empty()) {
         std::filesystem::create_directories(parent);
@@ -589,8 +746,10 @@ void AzureRenderApp::printGpuTimingSummary() const {
     if (!output) {
         throw std::runtime_error(
             "Failed to create GPU timing report: "
-            + outputPath.string());
+            + outputPath.u8string());
     }
+    nlohmann::json passTimings=nlohmann::json::array();
+    for(const auto& pass:gpuPassTiming_)passTimings.push_back({{"name",pass.name},{"samples",pass.samples},{"averageMs",pass.totalMs/static_cast<double>(pass.samples)},{"minMs",pass.minMs},{"maxMs",pass.maxMs}});
     output
         << std::fixed << std::setprecision(6)
         << "{\n"
@@ -600,6 +759,13 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << "  \"width\": " << swapchainExtent_.width << ",\n"
         << "  \"height\": " << swapchainExtent_.height << ",\n"
         << "  \"samples\": " << gpuTiming_.samples << ",\n"
+        << "  \"framePacing\": " << nlohmann::json{{"maximumRate", engineSettings_->get("runtime.maxFrameRate")},
+            {"vsync", engineSettings_->get("runtime.vsync")},
+            {"presentMode", selectedPresentMode_ == VK_PRESENT_MODE_MAILBOX_KHR ? "MAILBOX" : "FIFO"},
+            {"waitFrames", framePacingWaitFrames_}, {"waitMilliseconds", framePacingWaitMilliseconds_}}.dump() << ",\n"
+        << "  \"pipelineInspection\": " << (pipelineInspection_ ? pipelineInspection_->jsonReport() : "null") << ",\n"
+        << "  \"runtimeTraceFrames\": " << gameRouteFrames_.size() << ",\n"
+        << "  \"gpuPassTimings\": " << passTimings.dump() << ",\n"
         << "  \"timestampPeriodNanoseconds\": "
         << timestampPeriodNanoseconds_ << ",\n"
         << "  \"shadowAverageMs\": " << shadowAverage << ",\n"
@@ -611,6 +777,21 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << "  \"totalP50Ms\": " << framePercentile(50.0) << ",\n"
         << "  \"totalP95Ms\": " << framePercentile(95.0) << ",\n"
         << "  \"totalP99Ms\": " << framePercentile(99.0) << ",\n"
+        << "  \"cpuFrame\": {\n"
+        << "    \"attempts\": " << submissionCounters_.frameAttempts << ",\n"
+        << "    \"completedFrames\": " << submissionCounters_.completedCpuFrames << ",\n"
+        << "    \"sampleOffsetFrame\": " << submissionCounters_.completedCpuFrames-submissionCounters_.workSamplesMs.size() << ",\n"
+        << "    \"frameSlotWaitMilliseconds\": " << submissionCounters_.frameSlotWaitMilliseconds << ",\n"
+        << "    \"acquireMilliseconds\": " << submissionCounters_.acquireMilliseconds << ",\n"
+        << "    \"submitMilliseconds\": " << submissionCounters_.submitMilliseconds << ",\n"
+        << "    \"presentMilliseconds\": " << submissionCounters_.presentMilliseconds << ",\n"
+        << "    \"cpuFrameMilliseconds\": " << submissionCounters_.cpuFrameMilliseconds << ",\n"
+        << "    \"workSamplesMs\": " << nlohmann::json(submissionCounters_.workSamplesMs).dump() << ",\n"
+        << "    \"totalSamplesMs\": " << nlohmann::json(submissionCounters_.totalSamplesMs).dump() << ",\n"
+        << "    \"waitSamplesMs\": " << nlohmann::json(submissionCounters_.waitSamplesMs).dump() << ",\n"
+        << "    \"physicsSamplesMs\": " << nlohmann::json(submissionCounters_.physicsSamplesMs).dump() << ",\n"
+        << "    \"physicsStepCounts\": " << nlohmann::json(submissionCounters_.physicsStepCounts).dump() << "\n"
+        << "  },\n"
         << "  \"submission\": {\n"
         << "    \"frames\": " << submissionCounters_.frames << ",\n"
         << "    \"instances\": " << submissionCounters_.instances << ",\n"
@@ -654,18 +835,35 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << "    \"bufferBytes\": "
         << gpuAllocator_.statistics().bufferBytes << ",\n"
         << "    \"imageBytes\": "
-        << gpuAllocator_.statistics().imageBytes << "\n"
+        << gpuAllocator_.statistics().imageBytes << ",\n"
+        << "    \"liveBufferBytes\": " << gpuAllocator_.statistics().liveBufferBytes << ",\n"
+        << "    \"liveImageBytes\": " << gpuAllocator_.statistics().liveImageBytes << ",\n"
+        << "    \"deviceLocalPeakBytes\": " << gpuAllocator_.statistics().deviceLocalPeakBytes << ",\n"
+        << "    \"bufferMemoryProperties\": {\n"
+        << "      \"samples\": " << gpuAllocator_.statistics().bufferMemoryPropertySamples << ",\n"
+        << "      \"liveDeviceLocalBytes\": " << gpuAllocator_.statistics().liveDeviceLocalBufferBytes << ",\n"
+        << "      \"liveNonDeviceLocalBytes\": " << gpuAllocator_.statistics().liveNonDeviceLocalBufferBytes << ",\n"
+        << "      \"liveMappedDeviceBytes\": " << gpuAllocator_.statistics().liveMappedDeviceBufferBytes << ",\n"
+        << "      \"liveMappedNonLocalDeviceBytes\": " << gpuAllocator_.statistics().liveMappedNonLocalDeviceBufferBytes << "\n"
+        << "    }\n"
         << "  },\n"
+        << "  \"resourceFrames\": ";
+    resourceFrameSamples_.write(output);
+    output<<",\n";
+    output << "  \"sceneWidth\": " << renderExtent_.width << ",\n"
+           << "  \"sceneHeight\": " << renderExtent_.height << ",\n";
+    if(sceneRenderer_)sceneRenderer_->appendCaptureManifestFields(output);
+    output
         << "  \"renderPath\": " << std::quoted(
                renderPathName()) << "\n"
         << "}\n";
     if (!output) {
         throw std::runtime_error(
             "Failed to write GPU timing report: "
-            + outputPath.string());
+            + outputPath.u8string());
     }
     azurerender::RuntimeDiagnostics::instance().print(
-        "gpu", "GPU timing report: " + outputPath.string());
+        "gpu", "GPU timing report: " + outputPath.u8string());
 }
 
 std::string AzureRenderApp::renderPathName() const {
@@ -717,20 +915,11 @@ void AzureRenderApp::saveScreenshot(
             captureDirectory
             / ("capture_" + std::to_string(timestamp) + ".png");
     } else {
-        outputPath = requestedOutputPath;
+        outputPath = std::filesystem::u8path(requestedOutputPath);
     }
-    if (stbi_write_png(
-            outputPath.string().c_str(),
-            static_cast<int>(width),
-            static_cast<int>(height),
-            4,
-            rgba.data(),
-            static_cast<int>(width * 4)) == 0) {
-        throw std::runtime_error(
-            "Failed to write screenshot: " + outputPath.string());
-    }
+    azurerender::writeRgba8Png(outputPath,width,height,rgba.data());
     if (requestedOutputPath.empty()) {
         azurerender::RuntimeDiagnostics::instance().print(
-            "capture", "Screenshot saved: " + outputPath.string());
+            "capture", "Screenshot saved: " + outputPath.u8string());
     }
 }

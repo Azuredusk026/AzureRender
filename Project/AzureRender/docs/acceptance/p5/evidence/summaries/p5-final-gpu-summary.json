@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "config": "debug",
+      "group": "gpu",
+      "passed": true,
+      "tests": 60,
+      "coverage": "59 passed in full suite plus repaired EditorPlayable passed on retest",
+      "initialExitCode": 8,
+      "initialLog": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-gpu-debug-first.log",
+      "repairExitCode": 0,
+      "repairLog": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-editor-playable-green.log"
+    },
+    {
+      "config": "release",
+      "group": "gpu",
+      "passed": true,
+      "exitCode": 0,
+      "tests": 62,
+      "interruptedExitCode": 1073807364,
+      "completedBeforeInterruption": 58,
+      "remainingTests": 4,
+      "coverage": "58 full-suite passes plus four remaining cases after interruption",
+      "initialLog": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-gpu-release-interrupted.log",
+      "remainingLog": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-gpu-release-remaining.log",
+      "remainingSeconds": 116.18799999999999
+    }
+  ]
+}

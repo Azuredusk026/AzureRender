@@ -1,0 +1,14 @@
+Documentation prose style passed for 74 files.
+warning: in the working copy of 'Project/AzureRender/CMakeLists.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/docs/runtime/playable-performance.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/docs/runtime/script-services.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/app/AzureRenderApp.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/app/AzureRenderCapture.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/app/AzureRenderFrame.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/scripting/lua/ScriptRuntime.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tests/ScriptRuntimeTests.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/build_provenance.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/run_playable_long_run.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/test_build_provenance.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/test_playable_delivery_rules.py', LF will be replaced by CRLF the next time Git touches it
+{"schemaVersion": 1, "status": "passed", "trackedToolState": [], "danglingLinks": [], "ignoreProbes": [{"path": "Project/AzureRender/build/hygiene-probe.txt", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": ".codemaker/codemap/hygiene-probe.log", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": ".env", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": "Project/AzureRender/src/main.cpp", "expectedIgnored": false, "ignored": false, "passed": true}, {"path": "Project/AzureRender/assets_public/hygiene-probe.gltf", "expectedIgnored": false, "ignored": false, "passed": true}]}

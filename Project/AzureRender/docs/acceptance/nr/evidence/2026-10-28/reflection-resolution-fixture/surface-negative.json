@@ -1,0 +1,9 @@
+{
+  "status": "captured",
+  "bytes": 3686400,
+  "differentBytes": 3663278,
+  "sha256": "0c660f2bd3eff3150dd0040789abe2291613b9af319df870203d4f77a4913a5f",
+  "referenceSha256": "34b0f713815e3e3b25115d6f1dfef91fdcdfa76297762da8565c8fadc5cb1aae",
+  "differentPixels": 921600,
+  "control": "zero-output-shader-replacement"
+}

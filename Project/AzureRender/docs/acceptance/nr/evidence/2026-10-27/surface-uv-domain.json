@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "phase": "NR1-S2",
+  "status": "surface_uv_contract_passed_full_restoration_pending",
+  "source": {
+    "CMakeLists.txt": "5c24959dc561b9f62b69007594396920b93e3f520794fb3d0f07021991a128fb",
+    "src/assets/GltfLoader.cpp": "844a6577d73aee843afe9c09b47d0b771e22f5c188f8588d132151959372c2bf",
+    "tests/MaterialUvImportTests.cpp": "700423ec7c8d64f29b10a0d50bc9ed07b77ff960dd64ff8d003fe88f0e12af90",
+    "tools/endfield_native/mesh_uvs.py": "b39bc49bd00264c3984df3c844d9f2a0d60f04704490f40fbe1496e36639778b",
+    "tools/test_native_mesh_uvs.py": "951da3a85d8eb4d4bda04e68ca9383ecc13d602e018887a2147a90bb1ddd4019",
+    "tools/blender/native_mesh_uvs.py": "01c04974afc76a6224dd351817a49f7f25ae59ee701c6fb7b13fa1a960b76a27",
+    "tools/blender/native_surface_materials.py": "600b69f867fa3b86d2501546b2b36b7f539bfb3327d57db29157c5ce43aafee9",
+    "tools/blender/bake_material_channels.py": "f4ae06d13795ee0bf54720176b07d96525dc6342915deba223f078b19a963e63",
+    "tools/blender/export_scene_exchange.py": "9dad82b2904bbc320e4ee784f70f7db27a9f75ee524c90a41ef0e8d9861f8ed9",
+    "tools/blender/test_mesh_material_bake.py": "f7b4304ee310c19d8714b4ac4f29bbb90ba040033bd382fe780f2f74e565d840",
+    "tools/endfield_native/build_scene_preview.py": "f5f52265a28099576840aa1364ee922bbe7e6c7b46e58368c340701dfb991d58",
+    "tools/native_render/surface_uv_lab.py": "ded5d309a939dc317e835830f244a748f8fadcd9ebcbdc305987baa9314f25a3"
+  },
+  "tests": {
+    "cpuPerConfiguration": 5,
+    "pythonUv": 7,
+    "pythonSourceRegression": 30,
+    "gpuCapturesPerConfiguration": 16,
+    "descriptorImagesExact": true,
+    "configurationImagesExact": true,
+    "bakeMaximumLinearError": 0.0027980907877875882,
+    "bakeLinearBudget": 0.004,
+    "periodicControl": true,
+    "atlasPaddingPixels": 8,
+    "authoringTangentBasisVerified": true,
+    "pythonSceneExchangeRegression": 2
+  },
+  "native": {
+    "frame": 3534,
+    "event": 5467,
+    "indices": 9090,
+    "uv0Offset": 0,
+    "uv1Offset": 8,
+    "stride": 16,
+    "vertices": 3153,
+    "sourceUvStreams": {
+      "vertices": 3153,
+      "uv0MaximumDelta": 0.0,
+      "uv1MaximumDelta": 0.0
+    },
+    "materialUvSelection": {
+      "_BaseColorMap": 0,
+      "_NormalMap": 0,
+      "_MaskMap": 1
+    },
+    "uv0MaximumCoordinateError": 2.60770320892334e-08
+  },
+  "productionBuilder": {
+    "sourceEntities": 1,
+    "maximumMatrixError": 0.0,
+    "maximumBoundsOverflow": 0.0,
+    "uvStreams": [
+      {
+        "contract": "NativeMeshUvStreams/1",
+        "meshes": [
+          {
+            "mesh": "S_mod_map01_zmdbuilding+1_002_l02_lod0_0",
+            "sourceVertices": 3153,
+            "corners": 9090,
+            "maximumPositionError": 1.2847595214360297e-06,
+            "maximumUv0Error": 0.0
+          },
+          {
+            "mesh": "S_mod_map01_zmdbuilding+1_002_l02_lod0_1",
+            "sourceVertices": 3153,
+            "corners": 510,
+            "maximumPositionError": 1.1512145992043088e-06,
+            "maximumUv0Error": 0.0
+          }
+        ],
+        "inputs": {
+          "File": {
+            "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261021-125515-native-scene-lighting-5e36f1\\high-detail-upper-probe-v2\\meshes\\6a5e021b97367aed8c34af4d_6098104186081694591_S_mod_map01_zmdbuilding+1_002_l02_lod0.obj",
+            "sha256": "63ccd5baf9249ca3fbc084e5199ed3f2b10f4418427e54c301adf04945cf1758"
+          },
+          "Uv0File": {
+            "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261021-125515-native-scene-lighting-5e36f1\\high-detail-upper-probe-v2\\meshes\\6a5e021b97367aed8c34af4d_6098104186081694591_S_mod_map01_zmdbuilding+1_002_l02_lod0.uv0f32",
+            "sha256": "c5918d7ba6348c61674f1bdd927ec9430a826fa72b6553641f4f3c069137ba88"
+          },
+          "Uv1File": {
+            "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261021-125515-native-scene-lighting-5e36f1\\high-detail-upper-probe-v2\\meshes\\6a5e021b97367aed8c34af4d_6098104186081694591_S_mod_map01_zmdbuilding+1_002_l02_lod0.uv1f32",
+            "sha256": "1c96a82944a1c179a35a291e7029b132aa78acb5a3fb3689e14e1e8189cdbfd4"
+          }
+        }
+      }
+    ]
+  },
+  "compatibility": {
+    "legacyFullFramePixelsExact": true,
+    "captureCompactionPixelsExact": true,
+    "legacyTextureBindingsUv0": 2157,
+    "shaderPrograms": 193,
+    "shaderProgramsUnchanged": true,
+    "gpuLayoutVersion": 10,
+    "gpuLayoutBytes": 192
+  },
+  "candidate": "build/runs/20261027-185328-native-surface-uv-stream-bindings-b5d7ce/compact-candidate/project.azureproject",
+  "images": {
+    "changedPixels": 376918,
+    "maximumByteDelta": 156,
+    "meanByteDelta": 0.9431931785300925,
+    "sourceMeanAbsoluteByteError": 28.802782570167825,
+    "previousSourceMeanAbsoluteByteError": 28.865297761140045
+  },
+  "memoryFailure": {
+    "diagnostic": "bad allocation",
+    "decodedMaterialPixelBytes": 7113537416,
+    "freeCommitAfterFailureApproxGiB": 9.15,
+    "commitPressureInferred": true,
+    "failedCaptureAccepted": false,
+    "compactResourceCounts": [
+      393,
+      327
+    ],
+    "runtimePeakBudgetAccepted": false
+  },
+  "run": "build/runs/20261027-185328-native-surface-uv-stream-bindings-b5d7ce",
+  "artifacts": {
+    "source-a3-material.json": "57a894e6d0e4bc6c70616c615be5e3ee3baa4bb642b4135fc340f81da9633943",
+    "native-uv-binding.json": "594f92baf224c1c2a0bc2943cd0e071a8f6cf9513326222ccc274fbf6ea5d7ed",
+    "a3-native-uv.bin": "61fd5ae6d8370353bfbcc89aebeb1f6ec94ca437864b48724d7247e7ca16cf45",
+    "source-input-comparison.json": "7529a0f1c4d7f727f252aceba79956fbd85c5264a252ad73c4d8b2ea4bad118d",
+    "uv-comparison.json": "db610cdd7cf26706324fce2e57caac91f6436d60dce130848ae4179bb6cbedb1",
+    "blender-uv-corners.json": "f287a5148b07c3ace94c5d9c4c25a490987e16bc81e7d6e0d26eca5ad0676aa6",
+    "uv-corner-only-failure.json": "d0b6591c9601e735b0b45feeae037236b71ca23635deb76bc4ae7e275547fb21",
+    "uv-triangles-red.log": "1eec18794e45b9001b1e8bb95b1b4010d32e1e915cd14081d38e6603efc96982",
+    "uv-triangles-green.log": "a4917e58939cd3cc09f0a82b7d49e32d5a432939b5bfa70b9595e33e6e2843ed",
+    "uv-import-red.log": "5ae4b7712ce456052d4eee472a4e2c58d4e1a93ab8cb9ed416daa34fb2fe470e",
+    "uv-debug-final-ctest.log": "6bab8416bdf5bd841d0b2716c3e87e3a4fb4b72c115804ff0d734181e5086939",
+    "uv-release-final-ctest.log": "3321c7277a4b938fbcb500987fed40025ccbc45fd8cc3031308ae7aded8a4d9d",
+    "mesh-bake-red.log": "34f59af4739aee48de0996b9458f30df86ae30a2fcd842c5d51272be56ca19c0",
+    "mesh-bake-authored.log": "5e2c648d6558e4db033a3686c18e3b941a2226e1db28944e1df0fb5c1c784d55",
+    "mesh-padding-red-valid.log": "a883ca89593944671a30242c10ee7c7c81eee910b98fe7082da98a6ac2823d3c",
+    "mesh-bake-final/summary.json": "f4a421cd42bd1449b2ed0ffdf5223c8302246a8d6410580cc7253dc3c1a98b1a",
+    "a3-builder-verified/audit.json": "32339df7dc3996b03f9734ef800d005135d0460f8084cbb3e83ff9608b6e142d",
+    "a3-surface-build.json": "6f2e718ce48e1294626ad7428d6d3542c38b73afb9c895818fe6166276804458",
+    "a3-uv1-surface.glb": "2342cb4e69a77f90e40d74649c8989820d4097c0a9f90a943b37b8bc2e5d971a",
+    "legacy-regression.json": "a81c3e3c979c80afd7e56135c3652b8c54ffdaac6fabde644a93e257f2f9abd3",
+    "compact-reference-comparison.json": "767e1cc1a16bf00af8f3ca75fbc7d164378a711bf39e3e4b5afc03fbc4ab973f",
+    "final-image-comparison.json": "3db0e7a2d5294b3b792880d6a71c3f8186b8ca6da756723a4756fc0c1d21fefb",
+    "uv-authored-release.log": "aaf96b65c92e25caa2a476ea5d3065c108ebde295e085511412e3dee7b90ac88",
+    "compact-candidate.json": "87c65b5ccad22b68dbbe9ca1f19d9021056e2df73122205aa6ca6add35dc362a",
+    "compact-uv-release.log": "bc0b8955a70abb72b9b1ac24091a71759fa02d50692fdbc655ba32c5b7c7316e",
+    "compact-uv-release/frames/frame_000000.png": "17747e2e9ab8ad37e4e2913d7472b3af872efc696da498120f910465db246a04",
+    "compact-uv-release/frames/capture_manifest.json": "d6d1bd85733418327ae3f45a046d363e9bdbcab0720369860a5b64b8165fe4ef",
+    "compact-uv-release/gpu.json": "a853e2ea9e1cac1afb7eeaf311b9bdac16a12cf476b0ce3bdf8dcaf2f2eef26f",
+    "gpu-debug/summary.json": "3521fc4d2599b7ee58177bcd67de8559b658ef4a430cc45e089278e1484699d5",
+    "gpu-release/summary.json": "3521fc4d2599b7ee58177bcd67de8559b658ef4a430cc45e089278e1484699d5",
+    "uv-python-final.log": "74e5556c82c06aea42fa93601d0d9b654a1c13163e0d7567370370e68777b8d3",
+    "source-selection-regression.log": "d0e6477cb524a696483e72f1c509989dbef53c7b09fba496ce449273f4b810ed",
+    "scene-exchange-regression.log": "d276ce24f7df0df832d00f4a1a5c0f13780199247c21005b2c7d8868238f187a"
+  },
+  "remaining": [
+    "native GI pixel origin and sample jitter",
+    "full lighting and normal reconstruction",
+    "direct mixed runtime UV domains",
+    "hidden resource dependencies and decoded pixel residency",
+    "central logistics and dynamic effects",
+    "anti-aliasing, formal visual gates and 60 FPS"
+  ]
+}

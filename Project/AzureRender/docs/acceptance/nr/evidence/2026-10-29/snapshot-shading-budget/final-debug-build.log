@@ -1,0 +1,19 @@
+[0/2] Re-checking globbed directories...
+[1/18] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/18] Building CXX object CMakeFiles\AzureMaterialPipelinePolicyTests.dir\tests\MaterialPipelinePolicyTests.cpp.obj
+[3/18] Building CXX object CMakeFiles\AzureRenderRenderGraphTests.dir\tests\RenderGraphTests.cpp.obj
+[4/18] Building CXX object CMakeFiles\AzureRenderRenderGraphTests.dir\src\render\RenderGraph.cpp.obj
+[5/18] Building CXX object CMakeFiles\AzureTemporalViewGpuTests.dir\tests\TemporalViewGpuTests.cpp.obj
+[6/18] Building CXX object CMakeFiles\AzureRenderRenderGraphTests.dir\src\rhi\NullRhi.cpp.obj
+[7/18] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\tests\NullRhiPassTests.cpp.obj
+[8/18] Linking CXX executable AzureMaterialPipelinePolicyTests.exe
+[9/18] Linking CXX executable AzureMotionVectorGpuTests.exe
+[10/18] Linking CXX executable AzureSceneMultisamplingGpuTests.exe
+[11/18] Linking CXX executable AzureSceneMultisamplingTests.exe
+[12/18] Linking CXX executable AzureReflectionRayGpuTests.exe
+[13/18] Linking CXX executable AzureSharedMotionGpuTests.exe
+[14/18] Linking CXX executable AzureRenderRenderGraphTests.exe
+[15/18] Linking CXX executable AzureTemporalViewGpuTests.exe
+[16/18] Linking CXX executable AzureScreenReflectionTests.exe
+[17/18] Linking CXX executable AzureRenderNullRhiPassTests.exe

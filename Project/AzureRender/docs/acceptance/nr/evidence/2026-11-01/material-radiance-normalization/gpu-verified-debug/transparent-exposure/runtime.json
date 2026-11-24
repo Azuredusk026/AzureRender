@@ -1,0 +1,59 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 0,
+  "fixedSteps": 0,
+  "levelRevision": 1,
+  "nodes": [
+    {
+      "id": "plane",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "camera",
+      "translation": [
+        0.0,
+        0.0,
+        5.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "light",
+      "translation": [
+        0.0,
+        0.0,
+        2.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "black",
+      "translation": [
+        0.0,
+        0.0,
+        -0.20000000298023224
+      ],
+      "visible": true
+    }
+  ],
+  "presentationErrors": [],
+  "renderProgress": {
+    "samples": 0,
+    "target": 0
+  },
+  "renderer": "character",
+  "replayDelayedFrames": 0,
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "light-lab",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.0,
+  "uiDrawCalls": 0
+}

@@ -1,0 +1,1005 @@
+{
+  "status": "qualified-reference-hair-mip-boundary",
+  "overallStatus": "failed-user-review",
+  "devices": {
+    "release-nvidia": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "playerSha256": "169f56e366863849289fdff6c6c5526d44c812386c921438aadeb65e78965844",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 237,
+        "overOne": 237,
+        "introduced": 0,
+        "closed": 0,
+        "normalsChanged": 0
+      },
+      "receiverByOwner": {
+        "296": {
+          "samples": 496,
+          "baselineOverOne": 2,
+          "overOne": 2,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "310": {
+          "samples": 255,
+          "baselineOverOne": 0,
+          "overOne": 0,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "328": {
+          "samples": 9116,
+          "baselineOverOne": 46,
+          "overOne": 46,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "345": {
+          "samples": 3825,
+          "baselineOverOne": 30,
+          "overOne": 30,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "377": {
+          "samples": 16629,
+          "baselineOverOne": 158,
+          "overOne": 158,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "422": {
+          "samples": 19063,
+          "baselineOverOne": 1,
+          "overOne": 1,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        }
+      },
+      "introduced": [],
+      "normal": {
+        "baselineExact": 16967,
+        "exact": 16967,
+        "baselineOverOne": 0,
+        "overOne": 0,
+        "maximum": 1,
+        "changed": 0
+      },
+      "hairVisibility": {
+        "overOne": 0,
+        "baselineOverOne": 0,
+        "closed": 0,
+        "introduced": 0
+      },
+      "hairColor": {
+        "overOne": 0,
+        "baselineOverOne": 0,
+        "closed": 0,
+        "introduced": 0
+      },
+      "validationClean": true,
+      "allocatorZero": true,
+      "referenceDepthSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "normalsSha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+      "visibilitySha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+      "colorSha256": [
+        "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+        "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+        "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+      ]
+    },
+    "release-intel": {
+      "configuration": "Release",
+      "device": "intel",
+      "playerSha256": "169f56e366863849289fdff6c6c5526d44c812386c921438aadeb65e78965844",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 608,
+        "overOne": 494,
+        "introduced": 1,
+        "closed": 115,
+        "normalsChanged": 1034
+      },
+      "receiverByOwner": {
+        "296": {
+          "samples": 496,
+          "baselineOverOne": 9,
+          "overOne": 9,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "310": {
+          "samples": 255,
+          "baselineOverOne": 2,
+          "overOne": 2,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "328": {
+          "samples": 9116,
+          "baselineOverOne": 77,
+          "overOne": 77,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "345": {
+          "samples": 3825,
+          "baselineOverOne": 46,
+          "overOne": 46,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "377": {
+          "samples": 16629,
+          "baselineOverOne": 223,
+          "overOne": 223,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "422": {
+          "samples": 19063,
+          "baselineOverOne": 251,
+          "overOne": 137,
+          "introduced": 1,
+          "closed": 115,
+          "normalsChanged": 1034
+        }
+      },
+      "introduced": [
+        {
+          "pixel": [
+            1232,
+            1160
+          ],
+          "owner": 422,
+          "expected": 235,
+          "baseline": 235,
+          "current": 232
+        }
+      ],
+      "normal": {
+        "baselineExact": 15274,
+        "exact": 16135,
+        "baselineOverOne": 886,
+        "overOne": 25,
+        "maximum": 93,
+        "changed": 904
+      },
+      "hairVisibility": {
+        "overOne": 111,
+        "baselineOverOne": 208,
+        "closed": 98,
+        "introduced": 1
+      },
+      "hairColor": {
+        "overOne": 568,
+        "baselineOverOne": 575,
+        "closed": 11,
+        "introduced": 4
+      },
+      "validationClean": true,
+      "allocatorZero": true,
+      "referenceDepthSha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "normalsSha256": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132",
+      "visibilitySha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+      "colorSha256": [
+        "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+        "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+        "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6"
+      ]
+    },
+    "debug-nvidia": {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "playerSha256": "e00f09ca792dc5773e2f931383a7cd87bdf9c090bfaf4edaf37c8a9f954aa2cc",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 237,
+        "overOne": 237,
+        "introduced": 0,
+        "closed": 0,
+        "normalsChanged": 0
+      },
+      "receiverByOwner": {
+        "296": {
+          "samples": 496,
+          "baselineOverOne": 2,
+          "overOne": 2,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "310": {
+          "samples": 255,
+          "baselineOverOne": 0,
+          "overOne": 0,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "328": {
+          "samples": 9116,
+          "baselineOverOne": 46,
+          "overOne": 46,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "345": {
+          "samples": 3825,
+          "baselineOverOne": 30,
+          "overOne": 30,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "377": {
+          "samples": 16629,
+          "baselineOverOne": 158,
+          "overOne": 158,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "422": {
+          "samples": 19063,
+          "baselineOverOne": 1,
+          "overOne": 1,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        }
+      },
+      "introduced": [],
+      "normal": {
+        "baselineExact": 16967,
+        "exact": 16967,
+        "baselineOverOne": 0,
+        "overOne": 0,
+        "maximum": 1,
+        "changed": 0
+      },
+      "hairVisibility": {
+        "overOne": 0,
+        "baselineOverOne": 0,
+        "closed": 0,
+        "introduced": 0
+      },
+      "hairColor": {
+        "overOne": 0,
+        "baselineOverOne": 0,
+        "closed": 0,
+        "introduced": 0
+      },
+      "validationClean": true,
+      "allocatorZero": true,
+      "referenceDepthSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "normalsSha256": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+      "visibilitySha256": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+      "colorSha256": [
+        "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+        "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+        "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+      ]
+    },
+    "debug-intel": {
+      "configuration": "Debug",
+      "device": "intel",
+      "playerSha256": "e00f09ca792dc5773e2f931383a7cd87bdf9c090bfaf4edaf37c8a9f954aa2cc",
+      "receiver": {
+        "samples": 49384,
+        "baselineOverOne": 608,
+        "overOne": 494,
+        "introduced": 1,
+        "closed": 115,
+        "normalsChanged": 1034
+      },
+      "receiverByOwner": {
+        "296": {
+          "samples": 496,
+          "baselineOverOne": 9,
+          "overOne": 9,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "310": {
+          "samples": 255,
+          "baselineOverOne": 2,
+          "overOne": 2,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "328": {
+          "samples": 9116,
+          "baselineOverOne": 77,
+          "overOne": 77,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "345": {
+          "samples": 3825,
+          "baselineOverOne": 46,
+          "overOne": 46,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "377": {
+          "samples": 16629,
+          "baselineOverOne": 223,
+          "overOne": 223,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "422": {
+          "samples": 19063,
+          "baselineOverOne": 251,
+          "overOne": 137,
+          "introduced": 1,
+          "closed": 115,
+          "normalsChanged": 1034
+        }
+      },
+      "introduced": [
+        {
+          "pixel": [
+            1232,
+            1160
+          ],
+          "owner": 422,
+          "expected": 235,
+          "baseline": 235,
+          "current": 232
+        }
+      ],
+      "normal": {
+        "baselineExact": 15274,
+        "exact": 16135,
+        "baselineOverOne": 886,
+        "overOne": 25,
+        "maximum": 93,
+        "changed": 904
+      },
+      "hairVisibility": {
+        "overOne": 111,
+        "baselineOverOne": 208,
+        "closed": 98,
+        "introduced": 1
+      },
+      "hairColor": {
+        "overOne": 568,
+        "baselineOverOne": 575,
+        "closed": 11,
+        "introduced": 4
+      },
+      "validationClean": true,
+      "allocatorZero": true,
+      "referenceDepthSha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "normalsSha256": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132",
+      "visibilitySha256": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+      "colorSha256": [
+        "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+        "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+        "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6"
+      ]
+    }
+  },
+  "gates": {
+    "release": {
+      "status": "qualified",
+      "checks": {
+        "nvidiaFrozenAttachmentsAndColor": true,
+        "nvidiaFrozenHairVisibility": true,
+        "nvidiaFrozenHairColor": true,
+        "nvidiaReceiverCount": true,
+        "intelReceiverCount": true,
+        "intelReferenceNormalImproved": true,
+        "intelFrozenHairVisibilityImproved": true,
+        "intelFrozenHairColor": true
+      },
+      "overallStatus": "failed-user-review",
+      "receiver": {
+        "nvidia": {
+          "samples": 49384,
+          "baselineOverOne": 237,
+          "overOne": 237,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "intel": {
+          "samples": 49384,
+          "baselineOverOne": 608,
+          "overOne": 494,
+          "introduced": 1,
+          "closed": 115,
+          "normalsChanged": 1034
+        }
+      },
+      "hair": {
+        "nvidia": {
+          "normal": {
+            "baselineExact": 16967,
+            "exact": 16967,
+            "baselineOverOne": 0,
+            "overOne": 0,
+            "maximum": 1,
+            "changed": 0
+          },
+          "hairVisibility": {
+            "overOne": 0,
+            "baselineOverOne": 0,
+            "closed": 0,
+            "introduced": 0
+          },
+          "hairColor": {
+            "overOne": 0,
+            "baselineOverOne": 0,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "intel": {
+          "normal": {
+            "baselineExact": 15274,
+            "exact": 16135,
+            "baselineOverOne": 886,
+            "overOne": 25,
+            "maximum": 93,
+            "changed": 904
+          },
+          "hairVisibility": {
+            "overOne": 111,
+            "baselineOverOne": 208,
+            "closed": 98,
+            "introduced": 1
+          },
+          "hairColor": {
+            "overOne": 568,
+            "baselineOverOne": 575,
+            "closed": 11,
+            "introduced": 4
+          }
+        }
+      }
+    },
+    "debug": {
+      "status": "qualified",
+      "checks": {
+        "nvidiaFrozenAttachmentsAndColor": true,
+        "nvidiaFrozenHairVisibility": true,
+        "nvidiaFrozenHairColor": true,
+        "nvidiaReceiverCount": true,
+        "intelReceiverCount": true,
+        "intelReferenceNormalImproved": true,
+        "intelFrozenHairVisibilityImproved": true,
+        "intelFrozenHairColor": true
+      },
+      "overallStatus": "failed-user-review",
+      "receiver": {
+        "nvidia": {
+          "samples": 49384,
+          "baselineOverOne": 237,
+          "overOne": 237,
+          "introduced": 0,
+          "closed": 0,
+          "normalsChanged": 0
+        },
+        "intel": {
+          "samples": 49384,
+          "baselineOverOne": 608,
+          "overOne": 494,
+          "introduced": 1,
+          "closed": 115,
+          "normalsChanged": 1034
+        }
+      },
+      "hair": {
+        "nvidia": {
+          "normal": {
+            "baselineExact": 16967,
+            "exact": 16967,
+            "baselineOverOne": 0,
+            "overOne": 0,
+            "maximum": 1,
+            "changed": 0
+          },
+          "hairVisibility": {
+            "overOne": 0,
+            "baselineOverOne": 0,
+            "closed": 0,
+            "introduced": 0
+          },
+          "hairColor": {
+            "overOne": 0,
+            "baselineOverOne": 0,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "intel": {
+          "normal": {
+            "baselineExact": 15274,
+            "exact": 16135,
+            "baselineOverOne": 886,
+            "overOne": 25,
+            "maximum": 93,
+            "changed": 904
+          },
+          "hairVisibility": {
+            "overOne": 111,
+            "baselineOverOne": 208,
+            "closed": 98,
+            "introduced": 1
+          },
+          "hairColor": {
+            "overOne": 568,
+            "baselineOverOne": 575,
+            "closed": 11,
+            "introduced": 4
+          }
+        }
+      }
+    }
+  },
+  "verify": {
+    "release": {
+      "configuration": "Release",
+      "shaderCount": 895,
+      "changedShaders": {
+        "reference_scene_visibility.frag.spv": {
+          "before": "bccd46480c788d7a3033eaa007c5b885a5101d20e0d12adc86207e06c45ef082",
+          "after": "a5b7d8550d5a36538027613d1d2dc39710284c99cca9c14492b0c3972aab1fb9"
+        },
+        "reference_scene_visibility_bindless.frag.spv": {
+          "before": "987f290ad0b612a031d363141045b44977a97113a9ad10e501f743d90501111c",
+          "after": "b8e44e8f9df39f3067ecbb44abc03dc933a6e3b2fab7b63e58523ad2f8af97cc"
+        }
+      },
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility|MaterialCoverage)|AzureEngine[.]ProjectReferenceViews|AzureAssets[.]MaterialDocument|AzureEditor[.]ProjectFlow)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\release-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 8,
+      "playerSha256": "169f56e366863849289fdff6c6c5526d44c812386c921438aadeb65e78965844"
+    },
+    "debug": {
+      "configuration": "Debug",
+      "shaderCount": 895,
+      "changedShaders": {
+        "reference_scene_visibility.frag.spv": {
+          "before": "bccd46480c788d7a3033eaa007c5b885a5101d20e0d12adc86207e06c45ef082",
+          "after": "a5b7d8550d5a36538027613d1d2dc39710284c99cca9c14492b0c3972aab1fb9"
+        },
+        "reference_scene_visibility_bindless.frag.spv": {
+          "before": "987f290ad0b612a031d363141045b44977a97113a9ad10e501f743d90501111c",
+          "after": "b8e44e8f9df39f3067ecbb44abc03dc933a6e3b2fab7b63e58523ad2f8af97cc"
+        }
+      },
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility|MaterialCoverage)|AzureEngine[.]ProjectReferenceViews|AzureAssets[.]MaterialDocument)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\debug-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 7,
+      "playerSha256": "e00f09ca792dc5773e2f931383a7cd87bdf9c090bfaf4edaf37c8a9f954aa2cc"
+    }
+  },
+  "scope": {
+    "local": "external-input-10198ed13dca490e90f061afd1cb4406",
+    "main": "external-input-0ab0711da5064b6899737a4ae248bbf9",
+    "sourceBase": "e6fcdbbad12971dc8d307a842676471f8159311f",
+    "plannedBytes": 469762048,
+    "localInputs": [
+      "20261112-010418-scene-reference-object-visibility-709f68",
+      "20261112-013522-scene-visibility-atlas-source-33c6c3",
+      "20261111-232828-scene-reference-normal-60ddfa",
+      "20261110-030251-hair-main-chroma-public-9e799c",
+      "20261110-031856-hair-main-chroma-debug-668bf2",
+      "20261110-003435-visibility-numeric-contract-4f95e7",
+      "20261110-003031-reciprocal-compact-profile-4e7929",
+      "20261110-112309-hair-relative-projection-control-b9da17",
+      "20261111-213928-scene-reference-depth-728062",
+      "20261112-020715-scene-visibility-reference-calibration-f77af1",
+      "20261112-024632-native-atlas-and-receiver-producers-d5e705",
+      "20261112-025941-visibility-projection-depth-c1c792",
+      "20261112-032619-native-object-record-calibration-19d2f9",
+      "20261112-033450-native-object-record-source-capture-071c26",
+      "20261112-040725-reference-object-shadow-raster-2c9e58",
+      "20261112-041837-reference-object-shadow-raster-capture-60f161",
+      "20261112-044926-material-reference-object-visibility-344def",
+      "20261112-053111-intel-reference-visibility-sources-5238e2",
+      "20261112-061922-project-reference-visibility-profile-47902e",
+      "20261112-072016-native-receiver-producer-replay-523058",
+      "20261112-073905-reference-scene-outline-depth-d97cff",
+      "20261112-083618-native-cloth-receiver-normal-input-a94a9c",
+      "20261112-084230-cloth-receiver-authored-mips-a73d87",
+      "20261112-090101-cloth-receiver-native-sampler-e301d1",
+      "20261112-091515-cloth-receiver-normal-y-29da47",
+      "20261112-093321-reference-normal-sampled-rg-ceb2c6",
+      "20261112-103417-eyebrow-receiver-producer-1f8f43",
+      "20261112-104825-native-hair-normal-mip-bias-883aba",
+      "20261112-105542-native-eyebrow-hair-stencil-8ad501",
+      "20261112-110307-reference-depth-stencil-coverage-198047",
+      "20261112-114419-reference-geometric-normal-3e57b5",
+      "20261112-133809-reference-receiver-source-isolation-6cdff0",
+      "20261112-135432-reference-outline-projection-d784cf",
+      "20261112-143340-native-texture-sampling-footprint-750e56",
+      "20261112-153052-reference-hair-mip-footprint-510ded",
+      "20261112-155601-reference-hair-live-lod-2d2bfd"
+    ],
+    "mainInputs": [
+      "20261103-234012-character-reference-stages-5abe6c",
+      "20261022-201845-endfield-capture-954719",
+      "20261027-022702-object-visibility-depth-reconstruction-c7312f"
+    ],
+    "change": "One 8-bit LOD precision unit around each half-level uses the existing implicit sample",
+    "gate": "NVIDIA whole attachments and PNGs exact; Intel reference normals and hair RG8 improve; frozen one-byte gate unchanged"
+  },
+  "layout": {
+    "release": {
+      "size": 3720,
+      "fieldOffset": 3718
+    },
+    "debug": {
+      "size": 4296,
+      "fieldOffset": 4294
+    }
+  },
+  "defaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "depthCaptureAbsent": true,
+    "allExact": true,
+    "playerSha256": "169f56e366863849289fdff6c6c5526d44c812386c921438aadeb65e78965844",
+    "projectSha256": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "taskBytes": 103142345,
+    "taskBudgetBytes": 469762048
+  },
+  "fixture": [
+    {
+      "relative": "character/hair-coverage.glb",
+      "originalSha256": "2c2e47d1be8c511a3fa1b0d2a6b01f61169a3540fb375ae07417c28fece2f2cb",
+      "candidateSha256": "b87e639e9c9ae0d92cdf637c03f5f125e6d80b297a5043b245ac85daff12c073",
+      "unchangedPayloadSha256": "187c43e2756ed8a9c3fcc05246c4e7df9ee41ee499a8e850edf3833e5d2026ca"
+    }
+  ],
+  "execution": {
+    "debug-build": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 92.46799999999348,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\build.py",
+        "Debug"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+    },
+    "debug-candidate-gate": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 1.2350000000442378,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\candidate-gate.py",
+        "debug"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    },
+    "debug-cpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 29.06199999997625,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\verify-build.py",
+        "Debug"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    },
+    "debug-intel-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 76.64100000000326,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\capture.py",
+        "Debug",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    },
+    "debug-intel-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 2.297000000020489,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\verify-build.py",
+        "Debug",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    },
+    "debug-nvidia-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 73.70300000003772,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\capture.py",
+        "Debug",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    },
+    "debug-nvidia-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 7.375,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\verify-build.py",
+        "Debug",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    },
+    "debug-prepare": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 4.75,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\prepare-debug-budget.py"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+    },
+    "original-four": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 264.8429999999935,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\default-four.py"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    },
+    "release-build": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 194.28200000000652,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+    },
+    "release-candidate-gate": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 1.1570000000065193,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\candidate-gate.py",
+        "release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    },
+    "release-cpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 11.60899999999674,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\verify-build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    },
+    "release-intel-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 29.34399999998277,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\capture.py",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    },
+    "release-intel-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 2.1880000000237487,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\verify-build.py",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    },
+    "release-nvidia-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 59.67200000002049,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\capture.py",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    },
+    "release-nvidia-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 5.295999999972992,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\verify-build.py",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000\\tmp"
+    }
+  },
+  "leases": {
+    "debug-final": {
+      "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+      "task": "quality-reference-hair-mip-boundary-debug-final",
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000",
+      "pid": 40716,
+      "token": "28811c53b9344c64ac18c8eab3fd5cc1",
+      "started": 1794475388.12538,
+      "state": "released",
+      "ended": 1794475942.1234274
+    },
+    "release-final": {
+      "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+      "task": "quality-reference-hair-mip-boundary-release-final",
+      "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-164303-reference-hair-mip-boundary-342000",
+      "pid": 45924,
+      "token": "9b68952ba70e4c83b975845b50dab798",
+      "started": 1794473325.173708,
+      "state": "released",
+      "ended": 1794473630.0699587
+    }
+  },
+  "archive": {
+    "sha256": "5573c02dcfb8b176531e1ef0590f60e47dbf797b18d8c6582550238a1750abcf",
+    "bytes": 819269,
+    "members": 118
+  }
+}

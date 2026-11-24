@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "case": {
+    "name": "direct-circle-border",
+    "uv": [
+      1,
+      0.5
+    ],
+    "parallax": 0.15,
+    "normalScale": 1,
+    "mirror": false,
+    "turn": 0,
+    "light": false,
+    "directWeights": [
+      1,
+      0,
+      0
+    ],
+    "matcapColor": [
+      0.2,
+      0.4,
+      0.8,
+      0.5
+    ],
+    "rampAlpha": 128,
+    "matcapMode": "rgba",
+    "baseMode": "pattern"
+  },
+  "samples": [
+    {
+      "pixel": [
+        44,
+        63
+      ],
+      "linearRgb": [
+        1.0,
+        0.21533816060413824,
+        0.1586716580271295
+      ],
+      "baseUv": [
+        1.0,
+        0.5
+      ],
+      "matcapUv": [
+        1.0,
+        0.5
+      ],
+      "lightingNormal": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "pixel": [
+        63,
+        63
+      ],
+      "linearRgb": [
+        1.0,
+        0.21533816060413824,
+        0.1586716580271295
+      ],
+      "baseUv": [
+        1.0,
+        0.5
+      ],
+      "matcapUv": [
+        1.0,
+        0.5
+      ],
+      "lightingNormal": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "pixel": [
+        83,
+        63
+      ],
+      "linearRgb": [
+        1.0,
+        0.21533816060413824,
+        0.1586716580271295
+      ],
+      "baseUv": [
+        1.0,
+        0.5
+      ],
+      "matcapUv": [
+        1.0,
+        0.5
+      ],
+      "lightingNormal": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "outputEncoding": "sRGB",
+  "maximumLinearError": 0.008,
+  "nativeEquivalenceClaimed": false,
+  "hostIlluminationModel": "host-lambert",
+  "acceptance": [
+    "No Vulkan validation errors or warnings.",
+    "Unload buffers=0 images=0.",
+    "CPU pixel rays and color conversion independent from production shader."
+  ]
+}

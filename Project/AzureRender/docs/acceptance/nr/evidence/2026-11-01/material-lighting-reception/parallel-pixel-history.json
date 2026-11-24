@@ -1,0 +1,925 @@
+{
+  "status": "inspected-pixel-history",
+  "pixel": [
+    927,
+    3
+  ],
+  "rows": [
+    {
+      "event": 21515,
+      "primitive": 0,
+      "pre": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "post": [
+        0.03497314453125,
+        0.05499267578125,
+        0.074951171875,
+        1.0
+      ],
+      "shader": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "shaderDiscarded": false,
+      "depthTestFailed": false,
+      "stencilTestFailed": false,
+      "backfaceCulled": false,
+      "unboundPS": false,
+      "directShaderWrite": false,
+      "pixelShaderSha256": "41734e1b4299cc052b723d29b0994fe5af468baa04fb0348538cf5fedc2feab8",
+      "inputs": [
+        {
+          "slot": 5,
+          "name": "baseColor",
+          "resource": "ResourceId::381"
+        },
+        {
+          "slot": 8,
+          "name": "coverageMask",
+          "resource": "ResourceId::316"
+        }
+      ]
+    },
+    {
+      "event": 21762,
+      "primitive": 4294967295,
+      "pre": [
+        0.03497314453125,
+        0.05499267578125,
+        0.074951171875,
+        1.0
+      ],
+      "post": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shader": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shaderDiscarded": false,
+      "depthTestFailed": false,
+      "stencilTestFailed": false,
+      "backfaceCulled": false,
+      "unboundPS": false,
+      "directShaderWrite": false,
+      "pixelShaderSha256": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+      "inputs": []
+    },
+    {
+      "event": 21772,
+      "primitive": 4294967295,
+      "pre": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "post": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shader": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shaderDiscarded": false,
+      "depthTestFailed": false,
+      "stencilTestFailed": false,
+      "backfaceCulled": false,
+      "unboundPS": false,
+      "directShaderWrite": false,
+      "pixelShaderSha256": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+      "inputs": []
+    },
+    {
+      "event": 23307,
+      "primitive": 4294967295,
+      "pre": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "post": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shader": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shaderDiscarded": false,
+      "depthTestFailed": true,
+      "stencilTestFailed": false,
+      "backfaceCulled": false,
+      "unboundPS": false,
+      "directShaderWrite": false,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::1303"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::1316"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::1329"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::2318"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::368"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588"
+        }
+      ]
+    },
+    {
+      "event": 23321,
+      "primitive": 4294967295,
+      "pre": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "post": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shader": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shaderDiscarded": false,
+      "depthTestFailed": false,
+      "stencilTestFailed": false,
+      "backfaceCulled": false,
+      "unboundPS": false,
+      "directShaderWrite": false,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::2351"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::2364"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::2377"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::355"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::368"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588"
+        }
+      ]
+    },
+    {
+      "event": 25212,
+      "primitive": 4294967295,
+      "pre": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "post": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shader": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shaderDiscarded": false,
+      "depthTestFailed": false,
+      "stencilTestFailed": false,
+      "backfaceCulled": false,
+      "unboundPS": false,
+      "directShaderWrite": false,
+      "pixelShaderSha256": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0",
+      "inputs": [
+        {
+          "slot": 18,
+          "name": "sceneLinearDepth",
+          "resource": "ResourceId::9837"
+        },
+        {
+          "slot": 35,
+          "name": "viewFogVolume",
+          "resource": "ResourceId::9076"
+        }
+      ]
+    },
+    {
+      "event": 25214,
+      "primitive": 4294967295,
+      "pre": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "post": [
+        0.14599609375,
+        0.1446533203125,
+        0.149658203125,
+        1.0
+      ],
+      "shader": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shaderDiscarded": false,
+      "depthTestFailed": false,
+      "stencilTestFailed": false,
+      "backfaceCulled": false,
+      "unboundPS": false,
+      "directShaderWrite": false,
+      "pixelShaderSha256": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0",
+      "inputs": [
+        {
+          "slot": 18,
+          "name": "sceneLinearDepth",
+          "resource": "ResourceId::9837"
+        },
+        {
+          "slot": 35,
+          "name": "viewFogVolume",
+          "resource": "ResourceId::9076"
+        }
+      ]
+    },
+    {
+      "event": 26380,
+      "primitive": 4294967295,
+      "pre": [
+        0.14599609375,
+        0.1446533203125,
+        0.149658203125,
+        1.0
+      ],
+      "post": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shader": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shaderDiscarded": false,
+      "depthTestFailed": false,
+      "stencilTestFailed": false,
+      "backfaceCulled": false,
+      "unboundPS": false,
+      "directShaderWrite": false,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7909"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::368"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588"
+        }
+      ]
+    },
+    {
+      "event": 26458,
+      "primitive": 4294967295,
+      "pre": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "post": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shader": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shaderDiscarded": false,
+      "depthTestFailed": false,
+      "stencilTestFailed": false,
+      "backfaceCulled": false,
+      "unboundPS": false,
+      "directShaderWrite": false,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8048"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::368"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562"
+        }
+      ]
+    },
+    {
+      "event": 26466,
+      "primitive": 4294967295,
+      "pre": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "post": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shader": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shaderDiscarded": false,
+      "depthTestFailed": false,
+      "stencilTestFailed": false,
+      "backfaceCulled": true,
+      "unboundPS": false,
+      "directShaderWrite": false,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147"
+        }
+      ]
+    },
+    {
+      "event": 26473,
+      "primitive": 4294967295,
+      "pre": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "post": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shader": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shaderDiscarded": false,
+      "depthTestFailed": false,
+      "stencilTestFailed": false,
+      "backfaceCulled": false,
+      "unboundPS": false,
+      "directShaderWrite": false,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8106"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::368"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588"
+        }
+      ]
+    },
+    {
+      "event": 26483,
+      "primitive": 4294967295,
+      "pre": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "post": [
+        0.1917724609375,
+        0.52197265625,
+        0.9736328125,
+        1.0
+      ],
+      "shader": [
+        -6.259853398707798e+18,
+        -6.266766028311626e+18,
+        0.0,
+        0.0
+      ],
+      "shaderDiscarded": false,
+      "depthTestFailed": false,
+      "stencilTestFailed": false,
+      "backfaceCulled": false,
+      "unboundPS": false,
+      "directShaderWrite": false,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8159"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8172"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8185"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588"
+        }
+      ]
+    }
+  ],
+  "target": {
+    "resource": "ResourceId::176",
+    "width": 2560,
+    "height": 1440,
+    "format": "R16G16B16A16_FLOAT"
+  }
+}

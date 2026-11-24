@@ -2,14 +2,16 @@
 
 > 文档类型：运行时说明
 > 状态：生效
-> 更新日期：2026-10-01
+> 更新日期：2026-11-07
 > 适用范围：公共帧与场景 Renderer 的资源使用声明和顺序编译
 > 源码入口：`src/render/RenderGraph.hpp`、`src/render/RenderGraph.cpp`
 > 关联测试：`tests/RenderGraphTests.cpp`
 
 ## 职责与使用场景
 
-`RenderGraph` 保存帧内资源和 Pass 的读写声明，并生成满足依赖的执行顺序与 RHI 屏障。Character 注册蒙皮、阴影和主场景 Pass；Blackhole 注册阴影清理、光线追踪、Bloom、历史累积和场景合成 Pass。宿主再加入后处理、HUD、编辑器界面、捕获和 Present Pass。Pass 回调仍负责调用 RHI 记录具体绘制、计算和复制命令。
+`RenderGraph` 保存帧内资源和 Pass 的读写声明，并生成满足依赖的执行顺序与 RHI 屏障。Character 注册蒙皮、阴影和主场景 Pass。Blackhole 注册阴影清理、光线追踪、Bloom、历史累积和场景合成 Pass。
+
+宿主再加入后处理、HUD、编辑器界面、捕获和 Present Pass。Pass 回调仍负责调用 RHI 记录具体绘制、计算和复制命令。
 
 ## 数据与所有权
 
@@ -17,15 +19,31 @@
 
 ## 生命周期与时序
 
-每帧导入公共附件和场景缓冲区，注册 Pass，声明读写关系，调用 `compile`，再由 `execute` 按依赖顺序记录屏障并运行 Pass 回调。宿主的瞬态资源池管理捕获回读缓冲区，并在帧提交完成后复用；Blackhole 历史图像由场景 Renderer 管理其跨帧生命周期。
+每帧导入公共附件和场景缓冲区，注册 Pass，声明读写关系，调用 `compile`，再由 `execute` 按依赖顺序记录屏障并运行 Pass 回调。宿主的瞬态资源池管理捕获回读缓冲区，并在帧提交完成后复用。Blackhole 历史图像由场景 Renderer 管理其跨帧生命周期。
 
 ## 接口契约
 
-`addResource` 与 `addPass` 返回稳定的图内 ID。`read` 与 `write` 校验 ID，非法 ID 抛出 `std::out_of_range`。`compile` 成功时返回 `true` 并清空错误字符串；失败时返回 `false` 并保留诊断文本。
+`addResource` 与 `addPass` 返回稳定的图内 ID。`read` 与 `write` 校验 ID，非法 ID 抛出 `std::out_of_range`。`compile` 成功时返回 `true` 并清空错误字符串。失败时返回 `false` 并保留诊断文本。
 
 ## 线程与同步
 
-图对象只在帧编译线程修改。编译完成后，录制线程按执行顺序应用 RHI 图像与缓冲区屏障，再运行对应 Pass 回调。图像屏障包含旧布局、新布局、阶段和访问掩码；缓冲区屏障包含阶段和访问掩码。
+图对象只在帧编译线程修改。编译完成后，录制线程按执行顺序应用 RHI 图像与缓冲区屏障，再运行对应 Pass 回调。图像屏障包含旧布局、新布局、阶段和访问掩码。缓冲区屏障包含阶段和访问掩码。
+
+## 缓冲依赖提交
+
+编译结果按过程保存连续的缓冲依赖描述。
+同一资源的连续读取共享一次完整的生产者可见性范围。
+首个读取前的屏障覆盖该段全部读取阶段和访问位。
+后续写入等待该段全部先行读取。
+每个写入之后独立建立下一段读取范围。
+`execute` 在过程入口调用批量记录接口。
+图像依赖和过程回调保持各自的顺序。
+预录命令的执行同样先提交本过程的缓冲依赖。
+
+图对象持有描述至录制完成。
+资源句柄按所属提交的生命周期保持有效。
+具体分组规则见[RHI 同步契约](rhi-synchronization.md)。
+当前原生兼容及成本见[命令准备验证](../acceptance/nr/read-scope-barriers.md)。
 
 ## 序列化与兼容
 
@@ -56,4 +74,4 @@ if (!graph.compile(error)) throw std::runtime_error(error);
 
 ## 参考来源
 
-Piccolo RenderScene 的 pass 与资源组织方式用于概念校对；本实现保留 Azure Engine 自有 ID、测试和错误接口。
+Piccolo RenderScene 的 pass 与资源组织方式用于概念校对。本实现保留 Azure Engine 自有 ID、测试和错误接口。

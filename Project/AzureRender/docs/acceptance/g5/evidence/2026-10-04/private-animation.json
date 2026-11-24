@@ -1,0 +1,14 @@
+{
+  "instances": 3,
+  "resources": 2,
+  "cpuComputeMeanDifference": [
+    2.3148148148148147e-05,
+    2.1219135802469135e-05,
+    1.993312757201646e-05,
+    1.800411522633745e-05
+  ],
+  "independentClockChangedPixels": 26332,
+  "animatedPixels": 81769,
+  "detachedOutlinePixels": 6,
+  "validationErrors": 0
+}

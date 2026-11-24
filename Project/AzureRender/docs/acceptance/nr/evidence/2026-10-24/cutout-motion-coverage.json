@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "baseCommit": "295bcad",
+  "run": "build/runs/20261024-153235-cutout-temporal-footprint-9c5e55",
+  "scopeStatus": "contract-passed-quality-pending",
+  "rendererApiVersion": 4,
+  "materialBytes": 192,
+  "motionPushBytes": 128,
+  "temporalBytesPerPixel": 52,
+  "motionResponseEncoding": "coverage-reactivity-v3",
+  "configurations": {
+    "debug": {
+      "registeredChecks": 8,
+      "outlineInputs": 33,
+      "motionAndDepthChecks": 63750,
+      "hdrHistoryChecks": 71536,
+      "checksLogSha256": "7b872fac3320c241aa3783a7b6fdfebc61365c78e8f074f17e617c6e17dc4326",
+      "numericLogSha256": "7d3f999277f527be7e21415ba0938ef13571f34fb74c03601ce2d95cd7f0afea",
+      "buildLogSha256": "7b0f0f37464b8312d2c14d65e178c0cb04b8465d52b9bd8036257270d07da68f",
+      "playerSha256": "402dbbc382da3f185031d49694d2afa48a9e2c89b0ffbdfc3ea74c83491028fd",
+      "editorSha256": "caa8bac79220f1b73f0bdc5bdf6cef8b707252cbe025a309bb6d00a0679e5992"
+    },
+    "release": {
+      "registeredChecks": 8,
+      "outlineInputs": 33,
+      "motionAndDepthChecks": 63750,
+      "hdrHistoryChecks": 71536,
+      "checksLogSha256": "20472fa036f8d9ed9e8cbacdba0631afda6e7cfee71abe231dddcf645eddff6f",
+      "numericLogSha256": "7d3f999277f527be7e21415ba0938ef13571f34fb74c03601ce2d95cd7f0afea",
+      "buildLogSha256": "f2f8f3ca422d1e820519d99b3c034c1b4ca866ddb88a1d5afc3f95bd96ce21fb",
+      "playerSha256": "1a2d0de668ec095a8b8f503ad2ffe5b5632230cba7dc3dea9a317e85d5d4a32d",
+      "editorSha256": "7583a00dae9820185cb601e309723b90de7a98805878c11a1d6d4881e8e9fb3e"
+    }
+  },
+  "shaders": {
+    "count": 85,
+    "crossConfigurationIdentical": true,
+    "changed": [
+      "character_snapshot.frag.spv",
+      "character_snapshot_bindless.frag.spv",
+      "character_snapshot_integral.frag.spv",
+      "character_snapshot_integral_bindless.frag.spv",
+      "character_snapshot_integral_object.frag.spv",
+      "character_snapshot_integral_object_bindless.frag.spv",
+      "character_snapshot_object.frag.spv",
+      "character_snapshot_object_bindless.frag.spv",
+      "mesh.frag.spv",
+      "mesh_bindless.frag.spv",
+      "mesh_integral.frag.spv",
+      "mesh_integral_bindless.frag.spv",
+      "mesh_integral_object.frag.spv",
+      "mesh_integral_object_bindless.frag.spv",
+      "mesh_object.frag.spv",
+      "mesh_object_bindless.frag.spv",
+      "motion_vector.frag.spv",
+      "outline_depth.frag.spv",
+      "outline_depth_bindless.frag.spv",
+      "outline_mask.frag.spv",
+      "outline_mask_bindless.frag.spv",
+      "outline_view_scaled.frag.spv",
+      "outline_view_scaled_bindless.frag.spv",
+      "temporal_resolve.frag.spv"
+    ]
+  },
+  "native": {
+    "configuration": "release",
+    "frames": 32,
+    "maximumByteDifferenceFromFrozen": 0,
+    "receiptSha256": "9067411f9b3f806b7737aab4b1d171ab13c1a5c97a04c3a147be1d93d1b0b6ef",
+    "frozenReceiptSha256": "97242a1a1ab08488e00b1a85dd9d8c260cebfb9eab25cb08749877749ef44884"
+  },
+  "sourceBeauty": {
+    "sha256": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e",
+    "rimMaximumByteErrors": [
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0
+    ]
+  },
+  "qualityFailures": {
+    "mask-red": {
+      "status": "failed",
+      "receiptSha256": "4c814d6c5bb83ca664c5079811b4e6e40235b0a03695494b4436272649af6c02",
+      "movingEnergyRange": [
+        0.37624155987843755,
+        0.4924155175370677
+      ],
+      "lastEightEnergyRange": [
+        0.369831062264221,
+        0.3893754021739523
+      ],
+      "errorRatio": 1.0080102722718152,
+      "residualChangeRatio": 0.41832137721776963,
+      "edgeErrorRatio": 1.0856328467449117,
+      "coherentDetailRange": [
+        -0.24165682441652186,
+        0.15760199112217602
+      ]
+    },
+    "mask-quarter": {
+      "status": "failed",
+      "receiptSha256": "1fd19a3e1975f877f46efd7bb03e4d2992a452ad0b557103ae32ee5c7a8696d9",
+      "movingEnergyRange": [
+        0.5190671267733851,
+        0.7011718434546508
+      ],
+      "lastEightEnergyRange": [
+        0.5056401073966701,
+        0.5223540053479165
+      ],
+      "errorRatio": 0.808260760809754,
+      "residualChangeRatio": 0.41056989048969783,
+      "edgeErrorRatio": 1.0137822796064477,
+      "coherentDetailRange": [
+        -0.43316994946675447,
+        0.31089363256835234
+      ]
+    },
+    "mask-dilated": {
+      "status": "failed",
+      "receiptSha256": "438bb546c5f43fdc9ae03192e2b44e45238458173ed154d47b883d5be8e3ac25",
+      "movingEnergyRange": [
+        0.5190671267733851,
+        0.7011718434546508
+      ],
+      "lastEightEnergyRange": [
+        0.5056401073966701,
+        0.5223540053479165
+      ],
+      "errorRatio": 0.808260760809754,
+      "residualChangeRatio": 0.41056989048969783,
+      "edgeErrorRatio": 1.0137822796064477,
+      "coherentDetailRange": [
+        -0.43316994946675447,
+        0.31089363256835234
+      ]
+    },
+    "mask-holes": {
+      "status": "failed",
+      "receiptSha256": "1bba756f743a4017a507783317a10d12224cc98c3b414101a7d5e94c25a4b66b",
+      "movingEnergyRange": [
+        0.9952594369988175,
+        0.9972982141138805
+      ],
+      "lastEightEnergyRange": [
+        0.9960905066122793,
+        0.997245798440731
+      ],
+      "errorRatio": 0.5639716652056038,
+      "residualChangeRatio": 0.3825670214989,
+      "edgeErrorRatio": 0.9607525068639422,
+      "coherentDetailRange": [
+        -0.22035010047468168,
+        1.0317685199711664
+      ]
+    },
+    "mask-final": {
+      "status": "failed",
+      "receiptSha256": "74ba3699603f36418392bdf8b847c25959bc6a24ec1d1bd41ad80dc38414820a",
+      "movingEnergyRange": [
+        0.9952594369988175,
+        0.9972982141138805
+      ],
+      "lastEightEnergyRange": [
+        0.9960905066122793,
+        0.997245798440731
+      ],
+      "errorRatio": 0.5639716652056038,
+      "residualChangeRatio": 0.3825670214989,
+      "edgeErrorRatio": 0.960290653278207,
+      "coherentDetailRange": [
+        -0.22035010047468168,
+        1.0317685199711664
+      ]
+    },
+    "cloth-final": {
+      "status": "failed",
+      "receiptSha256": "7e9c3ba6074f5df6e1971379c76055538b2ee508bf808ba83130671d41f59dfc",
+      "movingEnergyRange": [
+        1.0,
+        1.0
+      ],
+      "lastEightEnergyRange": [
+        1.0,
+        1.0
+      ],
+      "errorRatio": 5.4932910072598894e-05,
+      "residualChangeRatio": 1.193788198521674e-06,
+      "edgeErrorRatio": 1.6177763141005814,
+      "coherentDetailRange": null
+    }
+  },
+  "rejectedSamplingProbes": {
+    "supersample": {
+      "status": "failed",
+      "qualitySha256": "7f70df452377ec6fe109f4c84ec5a9ca694fcdb7895f6d360218538607836823"
+    },
+    "temporal-2x": {
+      "status": "failed",
+      "qualitySha256": "d04f31504451988683c02ef80684983120243a49de0d7feb8486849bbafe27a8"
+    },
+    "temporal-2x-half-history": {
+      "status": "failed",
+      "qualitySha256": "3b53899ef54b7b3cd71e844061359170264a86e5f0f7e2accf3847b448da6840"
+    }
+  },
+  "currentSampleProbe": {
+    "movingEnergyRange": [
+      0.9949295394434013,
+      1.0040404480564573
+    ],
+    "movingEnergyMean": 0.999766406508511,
+    "manifestSha256": "790586abf57a06777d45323a9c58c359039da701b01a6c9bae178384f5982b99"
+  },
+  "redLogs": {
+    "shell-red.log": "90281ed410c3d6a8c6816b565205295d4408a3ad47345175dd46b8a36d9af76d",
+    "combined-red.log": "e41f44c0a2c434e4a0744a0fa858c0acee425993190a538b9561f3c39c757231",
+    "response-red.log": "40982deb7de9931ed9d553928dd2fdc4d25ccd6dd2f2899d473f3307005dee8f"
+  },
+  "sourceHashes": {
+    "shaders/material_sampling.glsl": "fafad8f3f26ef545c8e9e7f376064d52a86199f5a58b2c05461c6c78e0bcb633",
+    "shaders/mesh.frag": "5e27264cc240cf2bf05c1035e4b8157656432e6eccfc3980a250deb711fcaec6",
+    "shaders/motion_vector.frag": "f8be4b870284c13d013a7e77f1da1357de156b537187ad39ce85bbf70a3b4ef6",
+    "shaders/outline_mask.frag": "cfe2f51a7d1e72a46657812fd94c628a7cadd860248aad47fd4820d143defa4a",
+    "shaders/outline_surface_fragment.glsl": "65d1ca8332c4fee3da005d02c9458b11ef1de0c6e524569350e7bc81c1ee52ef",
+    "shaders/temporal_resolve.frag": "dbb1d37b274f82dfbf7a2b564d33ef80202a61329c3d70e4be5b7cec62b7529f",
+    "src/render/MotionVectorTarget.hpp": "06f23d6180871584437c203cf0262c58f3432c6af80d5bbfa5d07c21117f8331",
+    "src/scenes/CharacterMotionPass.inc": "1bd339b84a0f3bb4e2efb56001223d80d1d9e52164366119d266eb0b883689fd",
+    "src/scenes/CharacterOutlinePass.inc": "d68f5309a1b7cfc711f4cec45b003ac002849bd5449a1e5677bc0f3fc22d3051",
+    "src/scenes/CharacterSceneRenderer.cpp": "bc2871c1d6166ad27fc9223baf5e38bc36e784552081d1b7841cbaf8a733736e",
+    "tests/MotionVectorGpuTests.cpp": "deea1ad690f59bb12590220b562974ceedbe38f78aed4a4561ddca10936a72aa"
+  },
+  "remaining": [
+    "Native hair motion high-frequency detail",
+    "Complete cutout and clothing quality gates",
+    "NR7-AA5/AA6, NR8-V2 and NR0-NR12 joint acceptance"
+  ]
+}

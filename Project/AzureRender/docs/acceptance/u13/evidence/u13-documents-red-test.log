@@ -1,0 +1,17 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.DocumentManager
+1/1 Test #193: AzureEditor.DocumentManager ......***Failed    0.10 sec
+[1791582454846][info][editor][code=0] Opened scene: first
+[1791582454863][info][editor][code=0] Opened scene: first
+[1791582454876][info][editor][code=0] ERROR [document.open]: Unknown operation: document.open
+Open another scene as a retained document
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.13 sec
+
+The following tests FAILED:
+	193 - AzureEditor.DocumentManager (Failed)
+Errors while running CTest

@@ -1,0 +1,316 @@
+{
+  "phase": "NR5-R8-R1",
+  "sourceBaseCommit": "c51c6bf",
+  "run": "build/runs/20261029-052336-native-hierarchical-reflection-52b603",
+  "status": "source-bindings-verified-mirror-byte-equivalence-failed",
+  "sourceEvent": 8702,
+  "instructions": 331,
+  "frame": 3534,
+  "sourceResolution": [
+    2560,
+    1440
+  ],
+  "outputResolution": [
+    1280,
+    720
+  ],
+  "depthSearchLod": 0,
+  "depthSamplesPerBatch": 4,
+  "filterCoefficientSource": "ray-footprint-normalized-lod",
+  "confidenceByteExact": true,
+  "colorByteExact": false,
+  "footprintByteExact": false,
+  "mainRendererAdopted": false,
+  "payloads": [
+    {
+      "resource": 15861,
+      "bytes": 3686400,
+      "referenceSha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853",
+      "candidateSha256": "b97d92e5dbdc341aae33c8a4fe67c96e6bd91959ec15e5bf8189607e4f97a57e",
+      "differentBytes": 1,
+      "compressedReferenceBytes": 2195050
+    },
+    {
+      "resource": 16501,
+      "bytes": 3686400,
+      "referenceSha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0",
+      "candidateSha256": "9b2d3b12e529ffb07c7953e52a9c88a1651c8966c8af58b8b650a6477cab78e2",
+      "differentBytes": 9312,
+      "compressedReferenceBytes": 1815022
+    },
+    {
+      "resource": 15781,
+      "bytes": 921600,
+      "referenceSha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609",
+      "candidateSha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609",
+      "differentBytes": 0,
+      "compressedReferenceBytes": 411154
+    }
+  ],
+  "mirrorAnalysis": {
+    "15861": {
+      "changedPixels": 1,
+      "changedChannels": [
+        1
+      ],
+      "maximumAbsoluteIntegerDelta": 4194304,
+      "deltaCounts": [
+        [
+          4194304,
+          1
+        ]
+      ],
+      "examples": [
+        {
+          "x": 257,
+          "y": 116,
+          "reference": [
+            1771725652
+          ],
+          "candidate": [
+            1775919956
+          ]
+        }
+      ]
+    },
+    "16501": {
+      "changedPixels": 9273,
+      "changedChannels": [
+        0,
+        9273
+      ],
+      "maximumAbsoluteIntegerDelta": 16,
+      "deltaCounts": [
+        [
+          1,
+          4625
+        ],
+        [
+          -1,
+          4605
+        ],
+        [
+          2,
+          27
+        ],
+        [
+          -2,
+          14
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          16,
+          1
+        ]
+      ],
+      "examples": [
+        {
+          "x": 9,
+          "y": 0,
+          "reference": [
+            65535,
+            664
+          ],
+          "candidate": [
+            65535,
+            663
+          ]
+        },
+        {
+          "x": 244,
+          "y": 0,
+          "reference": [
+            65535,
+            30656
+          ],
+          "candidate": [
+            65535,
+            30657
+          ]
+        },
+        {
+          "x": 278,
+          "y": 0,
+          "reference": [
+            65535,
+            29525
+          ],
+          "candidate": [
+            65535,
+            29524
+          ]
+        },
+        {
+          "x": 300,
+          "y": 0,
+          "reference": [
+            65535,
+            28586
+          ],
+          "candidate": [
+            65535,
+            28587
+          ]
+        },
+        {
+          "x": 379,
+          "y": 0,
+          "reference": [
+            65535,
+            33797
+          ],
+          "candidate": [
+            65535,
+            33798
+          ]
+        }
+      ]
+    },
+    "15781": {
+      "changedPixels": 0,
+      "changedChannels": [
+        0
+      ],
+      "maximumAbsoluteIntegerDelta": 0,
+      "deltaCounts": [],
+      "examples": []
+    },
+    "instructionCounts": [
+      331,
+      338
+    ],
+    "opcodeDifferences": [
+      {
+        "tag": "replace",
+        "originalRange": [
+          46,
+          47
+        ],
+        "candidateRange": [
+          46,
+          47
+        ],
+        "original": [
+          "mov r4.w, -r4.y"
+        ],
+        "candidate": [
+          "xor r4.w, r4.y, l(0x80000000)"
+        ]
+      },
+      {
+        "tag": "insert",
+        "originalRange": [
+          77,
+          77
+        ],
+        "candidateRange": [
+          77,
+          78
+        ],
+        "original": [],
+        "candidate": [
+          "mov r6.yz, l(0.000000, 1.000000, 0.500000, 0.000000)"
+        ]
+      },
+      {
+        "tag": "insert",
+        "originalRange": [
+          95,
+          95
+        ],
+        "candidateRange": [
+          96,
+          98
+        ],
+        "original": [],
+        "candidate": [
+          "mov r4.w, r6.z",
+          "mov r8.xyz, l(0, 0, 0, 0)"
+        ]
+      },
+      {
+        "tag": "insert",
+        "originalRange": [
+          130,
+          130
+        ],
+        "candidateRange": [
+          133,
+          134
+        ],
+        "original": [],
+        "candidate": [
+          "mov r5.z, r10.z"
+        ]
+      },
+      {
+        "tag": "insert",
+        "originalRange": [
+          139,
+          139
+        ],
+        "candidateRange": [
+          143,
+          144
+        ],
+        "original": [],
+        "candidate": [
+          "mov r2.zw, r8.xxxy"
+        ]
+      },
+      {
+        "tag": "insert",
+        "originalRange": [
+          160,
+          160
+        ],
+        "candidateRange": [
+          165,
+          166
+        ],
+        "original": [],
+        "candidate": [
+          "and r4.zw, r4.zzzw, l(0, 0, 1, 1)"
+        ]
+      },
+      {
+        "tag": "insert",
+        "originalRange": [
+          286,
+          286
+        ],
+        "candidateRange": [
+          292,
+          293
+        ],
+        "original": [],
+        "candidate": [
+          "and r4.zw, r4.zzzw, l(0, 0, 1, 1)"
+        ]
+      }
+    ]
+  },
+  "debuggerScope": "Compacted tile list can reorder between replay and DebugThread; group index alone does not select a stable pixel",
+  "files": {
+    "receipt.json": "1de839eac4581d38e10a90bb9fe04bd977a40506123c052d6efb0c772a2a32ef",
+    "bindings-summary.json": "765451fa1637493a23da7b9a1c7b6c4311eb41a7baf2866d6dd2563300c47f27",
+    "event-8644.asm": "975b4a8ac8f1e55da65a6116e171a01c1dad1c573cc73dfe58f13dfa95c21976",
+    "event-8691.asm": "dc51d86216af55d4cbc5a999d9187a0f47592f2eaee5685f381e85bd4ceea9a3",
+    "event-8691.json": "e55066c192f110410b35271271e5cc53b7da3576e61cd74230b739bc454c0786",
+    "event-8702.asm": "3a08c046d54b3b75dd8c0989b42b36cf39bc41a4e399ad1d34016e42266ed274",
+    "event-8702.json": "85f50cec46fa7bff88eb02f0ad63b8bbcefb3ececb09349a0f8ff70d36a79639",
+    "event-8702.dxbc": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+    "mirror-literals.json": "d0e128101461be984fd03920d938493bb800f4eaca2719284ee97ef47937c6a9",
+    "ray-mirror-raw.hlsl": "b72d73f2aadc5955290dc92652f8534eb464fe2a2485c9670318128d9a14a8f1",
+    "make_ray_mirror.py": "aeee1e1e2aad7efe139d91b3f1ac1dc8dd0be44609dd198e7c82c59a1510eb5a",
+    "check_mirror.py": "35d2647202eef35218ca55b04fa8861da4d12dea3071fcdf911262b32dbb388c",
+    "export_source.py": "bbf582297b3260295ed66ccf98dfb424459e3bcd68733e1ec51885c64b43c06b",
+    "red-mirror.json": "41438ef683dcfed5b019cb2bd0206fc0a01d6463d315983464f60d5c495d2f5d",
+    "raw-registers-mirror.json": "8c9c1a593432a4cc4f579307cdb88e17098fea3bcece9b3a1c986e242a00b370",
+    "mirror-analysis.json": "a260b86c60a0e68e054953bbb7fbebb1f225b6ed23099ef096186809cdfaa39a",
+    "ray-debug.json": "8fe663e5c964ac43fbe05c5f63c8bf99e56c35fc3bd2eb62ee7ea1f649f3fcd4"
+  }
+}

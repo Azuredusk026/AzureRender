@@ -1,0 +1,54 @@
+standard-1 {"gpu": {"mean": 7.5452255288888885, "p95": 8.481505599999998, "p99": 10.020429440000001}, "cpu": {"mean": 2.4595689999999983, "p95": 3.533394999999836, "p99": 4.493164000000839}, "physics": {"mean": 0.31219955555555556, "p95": 0.502995, "p99": 1.1496019999999998}, "passed": true}
+standard 1 strict budget True
+Cooling GPU: 68 C
+standard-2 {"gpu": {"mean": 7.703337013333333, "p95": 9.269427199999997, "p99": 9.79835168}, "cpu": {"mean": 2.09335983333335, "p95": 2.694539999999809, "p99": 3.284186999999803}, "physics": {"mean": 0.26163855555555554, "p95": 0.40164, "p99": 1.090151}, "passed": true}
+standard 2 strict budget True
+Cooling GPU: 86 C
+standard-3 {"gpu": {"mean": 7.638881351111111, "p95": 9.3419792, "p99": 9.808368}, "cpu": {"mean": 2.0283690555555594, "p95": 2.6896899999999206, "p99": 3.1803149999997005}, "physics": {"mean": 0.25568066666666667, "p95": 0.3869, "p99": 1.076036}, "passed": true}
+standard 3 strict budget True
+Cooling GPU: 69 C
+editor-1 {"gpu": {"mean": 2.774371591111111, "p95": 3.1148448, "p99": 3.2794464}, "cpu": {"mean": 3.030149777777778, "p95": 3.7248799999999496, "p99": 4.317476000000007}, "physics": {"mean": 0.19986116666666667, "p95": 0.295255, "p99": 0.4350819999999999}, "passed": true}
+editor 1 strict budget True
+Cooling GPU: 86 C
+editor-2 {"gpu": {"mean": 2.7869966755555557, "p95": 3.1132416, "p99": 3.2858067199999996}, "cpu": {"mean": 2.971175277777778, "p95": 3.6203950000000074, "p99": 4.433317999999992}, "physics": {"mean": 0.19536866666666666, "p95": 0.28914, "p99": 0.38373899999999994}, "passed": true}
+editor 2 strict budget False
+Cooling GPU: 86 C
+editor-3 {"gpu": {"mean": 2.7676664888888887, "p95": 3.110184, "p99": 3.28315488}, "cpu": {"mean": 3.023002888888889, "p95": 3.682560000000035, "p99": 4.379171999999995}, "physics": {"mean": 0.20374366666666666, "p95": 0.297725, "p99": 0.41582399999999997}, "passed": true}
+editor 3 strict budget True
+Cooling GPU: 75 C
+stress-1 {"gpu": {"mean": 9.581449031111111, "p95": 11.1844752, "p99": 11.747305279999999}, "cpu": {"mean": 3.5025227777777705, "p95": 4.463440000001225, "p99": 5.526309000000501}, "physics": {"mean": 0.7544228888888889, "p95": 1.046225, "p99": 1.595936}, "passed": true}
+stress 1 strict budget True
+Cooling GPU: 73 C
+stress-2 {"gpu": {"mean": 9.973101013333334, "p95": 11.631704, "p99": 12.32702592}, "cpu": {"mean": 3.430601555555551, "p95": 4.2497849999997594, "p99": 5.187732999999594}, "physics": {"mean": 0.7285276666666667, "p95": 0.9416, "p99": 1.5056070000000001}, "passed": true}
+stress 2 strict budget True
+Cooling GPU: 72 C
+Cooling GPU: 56 C
+stress-3 {"gpu": {"mean": 9.853040444444444, "p95": 11.4894656, "p99": 12.28394272}, "cpu": {"mean": 3.556459833333349, "p95": 4.397599999999904, "p99": 5.407142999999907}, "physics": {"mean": 0.764625, "p95": 1.046765, "p99": 1.566257}, "passed": true}
+stress 3 strict budget True
+Cooling GPU: 67 C
+exploration-1 {"gpu": {"mean": 11.336459644444444, "p95": 12.611806399999999, "p99": 13.705183360000001}, "cpu": {"mean": 1.9232052777777682, "p95": 2.611944999998573, "p99": 3.292110999999887}, "physics": {"mean": 0.2797418888888889, "p95": 0.44453499999999974, "p99": 1.245036}, "passed": true}
+exploration 1 strict budget True
+Cooling GPU: 87 C
+Cooling GPU: 56 C
+exploration-2 {"gpu": {"mean": 11.37845312, "p95": 12.7473376, "p99": 13.632885439999999}, "cpu": {"mean": 1.8146852777777756, "p95": 2.4759850000007404, "p99": 2.9397029999997075}, "physics": {"mean": 0.2633243333333333, "p95": 0.4229649999999999, "p99": 1.1476829999999998}, "passed": true}
+exploration 2 strict budget True
+Cooling GPU: 87 C
+Cooling GPU: 56 C
+exploration-3 {"gpu": {"mean": 11.400123928888888, "p95": 12.781742399999999, "p99": 13.568720319999999}, "cpu": {"mean": 1.8885419999999993, "p95": 2.591795000002075, "p99": 3.266275000000491}, "physics": {"mean": 0.27381633333333333, "p95": 0.40923, "p99": 1.1977759999999995}, "passed": true}
+exploration 3 strict budget False
+Cooling GPU: 70 C
+Cooling GPU: 56 C
+platformer-1 {"gpu": {"mean": 4.780361902222222, "p95": 6.2344224, "p99": 7.02444864}, "cpu": {"mean": 1.6213713888888879, "p95": 2.1356800000005163, "p99": 2.9326570000000602}, "physics": {"mean": 0.3480541111111111, "p95": 0.4489949999999999, "p99": 0.9156229999999991}, "passed": true}
+platformer 1 strict budget True
+Cooling GPU: 76 C
+platformer-2 {"gpu": {"mean": 4.78073088, "p95": 6.022304, "p99": 7.01953248}, "cpu": {"mean": 1.5550696111111144, "p95": 1.98166499999992, "p99": 2.983545999999378}, "physics": {"mean": 0.33883744444444447, "p95": 0.41784999999999994, "p99": 0.7724739999999999}, "passed": true}
+platformer 2 strict budget True
+Cooling GPU: 87 C
+platformer-3 {"gpu": {"mean": 4.7722970488888885, "p95": 5.6630384, "p99": 7.030040959999999}, "cpu": {"mean": 1.6037103333333262, "p95": 2.1235299999995574, "p99": 2.9891049999998325}, "physics": {"mean": 0.3502797222222222, "p95": 0.4477049999999999, "p99": 0.9646049999999945}, "passed": true}
+platformer 3 strict budget False
+{"passed": false, "median": {"standard": {"gpu": 9.269427199999997, "cpu": 2.694539999999809, "physics": 0.40164}, "editor": {"gpu": 3.1132416, "cpu": 3.682560000000035, "physics": 0.295255}, "stress": {"gpu": 11.4894656, "cpu": 4.397599999999904, "physics": 1.046225}, "exploration": {"gpu": 12.7473376, "cpu": 2.591795000002075, "physics": 0.4229649999999999}, "platformer": {"gpu": 6.022304, "cpu": 2.1235299999995574, "physics": 0.4477049999999999}}}
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\implementation-2026-10-10\p5-performance.py", line 96, in <module>
+    assert summary['passed'], 'P5 formal budgets exceeded'
+           ~~~~~~~^^^^^^^^^^
+AssertionError: P5 formal budgets exceeded

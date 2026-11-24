@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_managed_workflows.py", line 80, in <module>
+    args=parser.parse_args();verify(args.build_dir,args.backend,args.evidence,args.configuration)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_managed_workflows.py", line 28, in verify
+    run(workflow+'-create',[sys.executable,Path(__file__).with_name('create_managed_project.py'),
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_managed_workflows.py", line 22, in run
+    assert result.returncode==0,log[-8000:]
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\create_managed_project.py': [Errno 2] No such file or directory
+

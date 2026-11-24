@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "phase": "NR5-R10",
+  "status": "narrow-checks-passed",
+  "privateRun": "build/runs/20261027-164030-mirrored-two-sided-surface-facing-d6bce5",
+  "source": {
+    "CMakeLists.txt": "8abb2b99eea17ec372cb17874f087482b935e710003c01a6d34716790e86427f",
+    "src/render/MaterialPipelinePolicy.hpp": "4a32aa75cd98be4e53fb69ea218d7f07334a075a50ab14fdddfce2f93ca66d0c",
+    "src/scenes/CharacterMaterialSampling.inc": "6328fd44cb7654c7124bcd10f9ed017e0f8c8cc311f6c2ab9c2841bb168ad7bb",
+    "src/scenes/CharacterSceneRenderer.cpp": "f0273f6b23c83383a7431fee10bd6eadcc48219937745527135935b9b5583fad",
+    "src/scenes/CharacterSceneRenderer.hpp": "531f654934e5678f918abf84c387fbae28254bfea15ad27cbc2dd6674c2e61a1",
+    "tests/MaterialPipelinePolicyTests.cpp": "3e61416501c7bb0f3115f4915b3261ba8ad3c2f9b11dcac8fca62323ee1332b3",
+    "tools/native_render/surface_facing_lab.py": "35a4358b5e07ae22e50c302aba2f0550f898828b446750ec0a0f25b741b22050",
+    "tools/native_render/probe_field_hair_lab.py": "a7cddbe1445c364b07b31c263a122b40b47454281d3f8c08a0673d61cd170ea7",
+    "tools/test_projected_hair_integral_gpu.py": "ad6f1b2b634c95b14d5112bceae888620d5a6316ea7a07d2848d2f3bcda77f46"
+  },
+  "tests": {
+    "debug": {
+      "facingCaptures": 24,
+      "hairProbeCaptures": 20,
+      "hairQualityCaptures": 15,
+      "qualityPassed": true,
+      "normalIntervalBudget": 0.004,
+      "maximumNormalIntervalError": 0,
+      "energyDeviationBudget": 0.02,
+      "maximumEnergyDeviation": 0.010709123072736082,
+      "errorRatioBudget": 0.8,
+      "maximumErrorRatio": 0.7004580137248336,
+      "resourcesReleased": true
+    },
+    "release": {
+      "facingCaptures": 24,
+      "hairProbeCaptures": 20,
+      "hairQualityCaptures": 15,
+      "qualityPassed": true,
+      "normalIntervalBudget": 0.004,
+      "maximumNormalIntervalError": 0,
+      "energyDeviationBudget": 0.02,
+      "maximumEnergyDeviation": 0.010709123072736082,
+      "errorRatioBudget": 0.8,
+      "maximumErrorRatio": 0.7004580137248336,
+      "resourcesReleased": true
+    }
+  },
+  "configurations": {
+    "capturesVerified": 44,
+    "imagesExact": true,
+    "qualityExact": true
+  },
+  "shaders": {
+    "shaderCount": 193,
+    "shadersExact": true,
+    "hairDescriptorImagesExact": true,
+    "hairCubeArrayImagesExact": true
+  },
+  "mainHero": {
+    "changedPixels": 0,
+    "maximumByteDelta": 0,
+    "meanByteDelta": 0.0
+  },
+  "camera": {
+    "changedPixels": 3665988,
+    "maximumByteDelta": 255,
+    "meanByteDelta": 97.23363670066551
+  },
+  "architecture": {
+    "module": "RenderCore",
+    "policy": "Four facing indices; winding independent from culling",
+    "uniformBytesAdded": 0,
+    "shaderProgramsAdded": 0,
+    "rgbaVertexLayoutChanged": false,
+    "secondWorkflow": "Independent two-sided sheets and captured-camera scene",
+    "pureDepthFacingCount": 3,
+    "colorFacingCount": 4,
+    "opaqueIntegralMainAndSnapshotPipelines": 8,
+    "mixedIntegralMainAndSnapshotPipelines": 12
+  },
+  "negatives": [
+    "镜像前后表面法线反向已复现并修复",
+    "四朝向计数与初始六份积分管线断言不符；现有视觉质量预算保持原值"
+  ],
+  "remaining": [
+    "资源激活及实际层级组合",
+    "中央物流及完整材质还原",
+    "原生 GI 抖动屏幕坐标核对",
+    "连续时序及稳定六十帧性能",
+    "正式 NR0–NR12 验收"
+  ],
+  "playerSha256": {
+    "debug": "fdee9cc1dd2768a8853e6a40f160f2ff9d08a3fd3f23df4e98c3285fd29185b2",
+    "release": "d3e0ed97d920dedfa88b9a4aa443e08460307d6bf7597a7e89d8dbd435f9ad23"
+  }
+}

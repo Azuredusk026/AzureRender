@@ -1,0 +1,128 @@
+FEC:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\tempfile.py:934: ResourceWarning: Implicitly cleaning up <TemporaryDirectory 'C:\\Users\\23587\\AppData\\Local\\Temp\\azure model bridge clqauiq0'>
+C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py:1127: ResourceWarning: subprocess 35244 is still running
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\unittest\case.py:627: ResourceWarning: unclosed file <_io.TextIOWrapper name=3 encoding='utf-8'>
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\unittest\case.py:627: ResourceWarning: unclosed file <_io.TextIOWrapper name=4 encoding='utf-8'>
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\unittest\case.py:627: ResourceWarning: unclosed file <_io.TextIOWrapper name=5 encoding='utf-8'>
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+FEC:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\tempfile.py:934: ResourceWarning: Implicitly cleaning up <TemporaryDirectory 'C:\\Users\\23587\\AppData\\Local\\Temp\\azure model bridge k06uupmv'>
+C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py:1127: ResourceWarning: subprocess 36828 is still running
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+FFEC:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\tempfile.py:934: ResourceWarning: Implicitly cleaning up <TemporaryDirectory 'C:\\Users\\23587\\AppData\\Local\\Temp\\azure model bridge 15s030pw'>
+C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py:1127: ResourceWarning: subprocess 25340 is still running
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+======================================================================
+ERROR: test_budget_invalid_fields_and_stateless_history (__main__.BridgeTests.test_budget_invalid_fields_and_stateless_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 51, in close
+    self.call('shutdown')
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 45, in call
+    return self.response(self.send(method,params))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 33, in send
+    self.process.stdin.flush()
+OSError: [Errno 22] Invalid argument
+
+======================================================================
+ERROR: test_handshake_catalog_session_and_stream (__main__.BridgeTests.test_handshake_catalog_session_and_stream)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 51, in close
+    self.call('shutdown')
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 45, in call
+    return self.response(self.send(method,params))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 33, in send
+    self.process.stdin.flush()
+OSError: [Errno 22] Invalid argument
+
+======================================================================
+ERROR: test_version_and_uninitialized_rejection (__main__.BridgeTests.test_version_and_uninitialized_rejection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 51, in close
+    self.call('shutdown')
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 45, in call
+    return self.response(self.send(method,params))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 33, in send
+    self.process.stdin.flush()
+OSError: [Errno 22] Invalid argument
+
+======================================================================
+FAIL: test_budget_invalid_fields_and_stateless_history (__main__.BridgeTests.test_budget_invalid_fields_and_stateless_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 100, in test_budget_invalid_fields_and_stateless_history
+    p=self.peer();p.initialize()
+                  ^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 47, in initialize
+    result,_=self.call('initialize',dict(protocolVersion=1))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 45, in call
+    return self.response(self.send(method,params))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 40, in response
+    raise AssertionError('Bridge exited: '+self.process.stderr.read())
+AssertionError: Bridge exited: C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\ai_bridge.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_handshake_catalog_session_and_stream (__main__.BridgeTests.test_handshake_catalog_session_and_stream)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 66, in test_handshake_catalog_session_and_stream
+    p=self.peer();p.initialize()
+                  ^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 47, in initialize
+    result,_=self.call('initialize',dict(protocolVersion=1))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 45, in call
+    return self.response(self.send(method,params))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 40, in response
+    raise AssertionError('Bridge exited: '+self.process.stderr.read())
+AssertionError: Bridge exited: C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\ai_bridge.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_timeout_and_cancel_keep_service_available (__main__.BridgeTests.test_timeout_and_cancel_keep_service_available)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 85, in test_timeout_and_cancel_keep_service_available
+    p=self.peer(dict(responses=[{'ok':True}],delayMs=2000));p.initialize()
+                                                            ^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 47, in initialize
+    result,_=self.call('initialize',dict(protocolVersion=1))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 45, in call
+    return self.response(self.send(method,params))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 40, in response
+    raise AssertionError('Bridge exited: '+self.process.stderr.read())
+AssertionError: Bridge exited: C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\ai_bridge.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_version_and_uninitialized_rejection (__main__.BridgeTests.test_version_and_uninitialized_rejection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 79, in test_version_and_uninitialized_rejection
+    self.assertIn('error',p.call('llm.chat',request())[0])
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 45, in call
+    return self.response(self.send(method,params))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g9\test_ai_bridge.py", line 40, in response
+    raise AssertionError('Bridge exited: '+self.process.stderr.read())
+AssertionError: Bridge exited: C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\ai_bridge.py': [Errno 2] No such file or directory
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.416s
+
+FAILED (failures=4, errors=3)

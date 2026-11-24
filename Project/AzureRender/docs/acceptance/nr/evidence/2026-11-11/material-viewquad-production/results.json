@@ -1,0 +1,1072 @@
+{
+  "status": "opt-in-candidate-with-depth-policy",
+  "sourceBase": "58294c7",
+  "localQualification": "d41f927",
+  "nativeQualification": "e329f55",
+  "build": [
+    {
+      "config": "Release",
+      "tests": 12,
+      "skips": 0,
+      "activePrograms": 988,
+      "referenceProgramsExact": 988,
+      "measuredProgramsExact": 10,
+      "aliases": 128,
+      "seconds": 81.38999999995576
+    },
+    {
+      "config": "Debug",
+      "tests": 12,
+      "skips": 0,
+      "activePrograms": 988,
+      "referenceProgramsExact": 988,
+      "measuredProgramsExact": 10,
+      "aliases": 128,
+      "seconds": 134.48500000004424
+    }
+  ],
+  "standardDepthTimeoutHistory": {
+    "reason": "27 views with resize require 54 pipeline preparations; continuous compiler progress at initial 210-second process bound",
+    "testCasesUnchanged": true,
+    "originalCTestTimeoutSeconds": 180,
+    "originalProcessTimeoutSeconds": 210,
+    "currentTimeoutSeconds": 480,
+    "configs": [
+      {
+        "config": "release",
+        "seconds": 28.09399999998277,
+        "allRuntimeAndTestProductsExact": true,
+        "priorTwelveChecksReused": true
+      },
+      {
+        "config": "debug",
+        "seconds": 26.57799999997951,
+        "allRuntimeAndTestProductsExact": true,
+        "priorTwelveChecksReused": true
+      }
+    ]
+  },
+  "standardDepthArchive": {
+    "bytes": 4265370,
+    "members": 174,
+    "sha256": "4d2b0af566563ee292d3cd53e1cafbac03dd9730e74b322fbd999723b35c44fc",
+    "memberHashesVerified": true
+  },
+  "standardDepthGpuProcesses": [
+    {
+      "config": "release",
+      "device": "nvidia",
+      "mode": "computed",
+      "seconds": 255.57800000003772,
+      "result": {
+        "computedCapable": true,
+        "computedViewMode": true,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "eligibleChecks": 28,
+        "fallbackChecks": 242,
+        "pixelsCompared": 299520,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      }
+    },
+    {
+      "config": "release",
+      "device": "nvidia",
+      "mode": "reference",
+      "seconds": 100.90599999995902,
+      "result": {
+        "computedCapable": false,
+        "computedViewMode": false,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "eligibleChecks": 0,
+        "fallbackChecks": 0,
+        "pixelsCompared": 199680,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      }
+    },
+    {
+      "config": "release",
+      "device": "nvidia",
+      "mode": "uv-gradient",
+      "seconds": 1.6089999999967404,
+      "result": {
+        "output": "NVIDIA GeForce RTX 4060 Laptop GPU: 8716 pixels / 34864 exact components; 81 retained triangle-edge helper pixels; even/odd extents, post-gradient discard, capability rejects passed\n"
+      }
+    },
+    {
+      "config": "release",
+      "device": "intel",
+      "mode": "computed",
+      "seconds": 199.96900000004098,
+      "result": {
+        "computedCapable": false,
+        "computedViewMode": true,
+        "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "eligibleChecks": 0,
+        "fallbackChecks": 270,
+        "pixelsCompared": 299520,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      }
+    },
+    {
+      "config": "release",
+      "device": "intel",
+      "mode": "reference",
+      "seconds": 97.78099999995902,
+      "result": {
+        "computedCapable": false,
+        "computedViewMode": false,
+        "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "eligibleChecks": 0,
+        "fallbackChecks": 0,
+        "pixelsCompared": 199680,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      }
+    },
+    {
+      "config": "release",
+      "device": "intel",
+      "mode": "uv-gradient",
+      "seconds": 0.3130000000237487,
+      "result": {
+        "output": "Intel(R) RaptorLake-S Mobile Graphics Controller: 8716 pixels / 34864 exact components; 81 retained triangle-edge helper pixels; even/odd extents, post-gradient discard, capability rejects passed\n"
+      }
+    },
+    {
+      "config": "debug",
+      "device": "nvidia",
+      "mode": "computed",
+      "seconds": 255.18699999997625,
+      "result": {
+        "computedCapable": true,
+        "computedViewMode": true,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "eligibleChecks": 28,
+        "fallbackChecks": 242,
+        "pixelsCompared": 299520,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      }
+    },
+    {
+      "config": "debug",
+      "device": "nvidia",
+      "mode": "reference",
+      "seconds": 99.70400000002701,
+      "result": {
+        "computedCapable": false,
+        "computedViewMode": false,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "eligibleChecks": 0,
+        "fallbackChecks": 0,
+        "pixelsCompared": 199680,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      }
+    },
+    {
+      "config": "debug",
+      "device": "nvidia",
+      "mode": "uv-gradient",
+      "seconds": 1.7959999999729916,
+      "result": {
+        "output": "NVIDIA GeForce RTX 4060 Laptop GPU: 8716 pixels / 34864 exact components; 81 retained triangle-edge helper pixels; even/odd extents, post-gradient discard, capability rejects passed\n"
+      }
+    },
+    {
+      "config": "debug",
+      "device": "intel",
+      "mode": "computed",
+      "seconds": 174.48500000004424,
+      "result": {
+        "computedCapable": false,
+        "computedViewMode": true,
+        "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "eligibleChecks": 0,
+        "fallbackChecks": 270,
+        "pixelsCompared": 299520,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      }
+    },
+    {
+      "config": "debug",
+      "device": "intel",
+      "mode": "reference",
+      "seconds": 102.92199999996228,
+      "result": {
+        "computedCapable": false,
+        "computedViewMode": false,
+        "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "eligibleChecks": 0,
+        "fallbackChecks": 0,
+        "pixelsCompared": 199680,
+        "status": "passed",
+        "validationErrors": 0,
+        "zeroAllocator": true
+      }
+    },
+    {
+      "config": "debug",
+      "device": "intel",
+      "mode": "uv-gradient",
+      "seconds": 0.39000000001396984,
+      "result": {
+        "output": "Intel(R) RaptorLake-S Mobile Graphics Controller: 8716 pixels / 34864 exact components; 81 retained triangle-edge helper pixels; even/odd extents, post-gradient discard, capability rejects passed\n"
+      }
+    }
+  ],
+  "standardDepthProgramsExact": 988,
+  "depthPolicyRecording": [
+    {
+      "config": "release",
+      "device": "nvidia",
+      "result": {
+        "cases": [
+          {
+            "depthTest": true,
+            "fallback": "ready",
+            "frameEligible": true,
+            "preparedPipelines": 26,
+            "reflectionPrepared": true,
+            "selections": 4,
+            "zeroAllocator": true
+          },
+          {
+            "depthTest": false,
+            "fallback": "depth-test-disabled",
+            "frameEligible": false,
+            "preparedPipelines": 0,
+            "reflectionPrepared": true,
+            "selections": 0,
+            "zeroAllocator": true
+          }
+        ],
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "quadEnabled": true,
+        "status": "passed",
+        "validationErrors": 0
+      }
+    },
+    {
+      "config": "release",
+      "device": "intel",
+      "result": {
+        "cases": [
+          {
+            "depthTest": true,
+            "fallback": "unsupported-capability-or-policy",
+            "frameEligible": false,
+            "preparedPipelines": 0,
+            "reflectionPrepared": true,
+            "selections": 0,
+            "zeroAllocator": true
+          },
+          {
+            "depthTest": false,
+            "fallback": "depth-test-disabled",
+            "frameEligible": false,
+            "preparedPipelines": 0,
+            "reflectionPrepared": true,
+            "selections": 0,
+            "zeroAllocator": true
+          }
+        ],
+        "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "quadEnabled": false,
+        "status": "passed",
+        "validationErrors": 0
+      }
+    },
+    {
+      "config": "debug",
+      "device": "nvidia",
+      "result": {
+        "cases": [
+          {
+            "depthTest": true,
+            "fallback": "ready",
+            "frameEligible": true,
+            "preparedPipelines": 26,
+            "reflectionPrepared": true,
+            "selections": 4,
+            "zeroAllocator": true
+          },
+          {
+            "depthTest": false,
+            "fallback": "depth-test-disabled",
+            "frameEligible": false,
+            "preparedPipelines": 0,
+            "reflectionPrepared": true,
+            "selections": 0,
+            "zeroAllocator": true
+          }
+        ],
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "quadEnabled": true,
+        "status": "passed",
+        "validationErrors": 0
+      }
+    },
+    {
+      "config": "debug",
+      "device": "intel",
+      "result": {
+        "cases": [
+          {
+            "depthTest": true,
+            "fallback": "unsupported-capability-or-policy",
+            "frameEligible": false,
+            "preparedPipelines": 0,
+            "reflectionPrepared": true,
+            "selections": 0,
+            "zeroAllocator": true
+          },
+          {
+            "depthTest": false,
+            "fallback": "depth-test-disabled",
+            "frameEligible": false,
+            "preparedPipelines": 0,
+            "reflectionPrepared": true,
+            "selections": 0,
+            "zeroAllocator": true
+          }
+        ],
+        "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "quadEnabled": false,
+        "status": "passed",
+        "validationErrors": 0
+      }
+    }
+  ],
+  "actualDepthCli": {
+    "status": "passed",
+    "asset": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261111-034916-material-viewquad-production-24693d\\release-nvidia-computed\\scene.gltf",
+    "assetSha256": "435cf4743452d6c4770a49486705dda7f6bd54277a04a842a486756f89d076b8",
+    "rows": [
+      {
+        "mode": "reference",
+        "seconds": 21.39100000000326,
+        "sha256": "9900f5e21b7e798c9be80c1e59afc92ed172b6db5f06ebfa2d98da031eb47531",
+        "metadata": {
+          "computedMaterialViewPipelines": 0,
+          "computedMaterialViewFrameEligible": false,
+          "computedMaterialViewRequestsTotal": 0,
+          "computedMaterialViewSelectionsTotal": 0,
+          "computedMaterialViewFallback": "disabled"
+        }
+      },
+      {
+        "mode": "automatic",
+        "seconds": 17.23399999999674,
+        "sha256": "9900f5e21b7e798c9be80c1e59afc92ed172b6db5f06ebfa2d98da031eb47531",
+        "metadata": {
+          "computedMaterialViewPipelines": 0,
+          "computedMaterialViewFrameEligible": false,
+          "computedMaterialViewRequestsTotal": 0,
+          "computedMaterialViewSelectionsTotal": 0,
+          "computedMaterialViewFallback": "depth-test-disabled"
+        }
+      }
+    ],
+    "exactRgbaPixels": 12288,
+    "pngShaExact": true,
+    "validationClean": true,
+    "allocatorZero": true
+  },
+  "testReservationCorrection": {
+    "failedChecks": [
+      "ShaderCompilerContract",
+      "ShaderCatalogCompilation"
+    ],
+    "reason": "Default 2 GiB reservation exceeds current 16 GiB managed pool by 61781903 bytes before either test starts",
+    "managedPoolLimitBytes": 17179869184,
+    "previousReservedBytes": 15094167439,
+    "observedPriorCatalogRunBytes": [
+      461612291,
+      320792255
+    ],
+    "compilerContractPlannedBytes": 67108864,
+    "catalogPlannedBytes": 805306368,
+    "acceptanceAndPoolLimitsUnchanged": true
+  },
+  "missingProgram": {
+    "status": "passed",
+    "seconds": 132.32800000003772,
+    "baselineProgramsExact": 859,
+    "optionalProgramsAbsent": true,
+    "referenceSelected": true,
+    "validationClean": true,
+    "allocatorZero": true,
+    "metadata": {
+      "computedMaterialViewPipelines": 0,
+      "computedMaterialViewFrameEligible": false,
+      "computedMaterialViewRequestsTotal": 0,
+      "computedMaterialViewSelectionsTotal": 0,
+      "computedMaterialViewFallback": "Unable to open file: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261111-022601-quad-depth-combination-native-qualification-05d8c0\\reference\\shaders/mesh_object_bindless_clipmap_field_viewquad.frag.spv"
+    }
+  },
+  "originalFour": {
+    "exitCode": 0,
+    "seconds": 283.59399999998277,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "programsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "shortEfficiency": {
+    "rows": [
+      {
+        "label": "before",
+        "seconds": 94.125,
+        "summary": {
+          "gpu": {
+            "mean": 19.162641066666662,
+            "p95": 19.6120368
+          },
+          "main": {
+            "mean": 16.803225599999998,
+            "p95": 17.271500800000002
+          },
+          "shadow": {
+            "mean": 2.0783616,
+            "p95": 2.1765056
+          },
+          "post": {
+            "mean": 0.28105386666666665,
+            "p95": 0.287744
+          },
+          "cpu": {
+            "mean": 5.087928333333329,
+            "p95": 5.7257850000000605
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            76.17,
+            76.26,
+            76.27,
+            76.3,
+            76.93,
+            76.94,
+            76.97,
+            77.26,
+            77.54,
+            77.67,
+            77.86,
+            77.96,
+            78.04,
+            78.07,
+            78.08,
+            78.25,
+            78.28,
+            78.37,
+            78.79,
+            78.99,
+            79.04,
+            79.26,
+            79.5,
+            79.57,
+            79.68,
+            80.07,
+            80.19,
+            80.28,
+            80.38,
+            80.62,
+            80.66,
+            80.7,
+            80.71,
+            80.83,
+            80.89,
+            81.12,
+            81.64,
+            82.18
+          ],
+          "thermalSlowdownObserved": false,
+          "temperatureRange": [
+            48.0,
+            76.0
+          ]
+        },
+        "modeEnvironment": {
+          "AZURE_DISABLE_COMPUTED_MATERIAL_VIEW": "1"
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "shadowHistoryPrepared": false,
+          "shadowHistoryBytes": 0,
+          "shadowHistorySampledRequests": 0,
+          "shadowHistorySampledEligible": 0,
+          "shadowHistorySampledHits": 0,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "computedMaterialViewPipelines": 0,
+          "computedMaterialViewFrameEligible": false,
+          "computedMaterialViewRequestsTotal": 0,
+          "computedMaterialViewSelectionsTotal": 0,
+          "computedMaterialViewFallback": "disabled"
+        }
+      },
+      {
+        "label": "candidate",
+        "seconds": 94.89100000000326,
+        "summary": {
+          "gpu": {
+            "mean": 16.224519466666667,
+            "p95": 17.02988
+          },
+          "main": {
+            "mean": 14.146116266666667,
+            "p95": 14.6899968
+          },
+          "shadow": {
+            "mean": 1.797502933333333,
+            "p95": 2.1571295999999998
+          },
+          "post": {
+            "mean": 0.2809002666666666,
+            "p95": 0.2888192
+          },
+          "cpu": {
+            "mean": 4.873634999999999,
+            "p95": 5.477675000000036
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            75.53,
+            76.95,
+            77.43,
+            77.5,
+            77.52,
+            77.53,
+            77.67,
+            77.91,
+            77.99,
+            78.1,
+            78.17,
+            78.28,
+            78.41,
+            78.56,
+            78.62,
+            78.77,
+            78.95,
+            79.07,
+            79.12,
+            79.35,
+            79.36,
+            79.41,
+            79.44,
+            79.66,
+            79.69,
+            79.75,
+            80.41,
+            80.71,
+            80.84,
+            80.98,
+            81.03,
+            81.18,
+            81.32,
+            81.39,
+            81.43,
+            81.87,
+            82.37,
+            82.57,
+            83.07,
+            83.19
+          ],
+          "thermalSlowdownObserved": false,
+          "temperatureRange": [
+            48.0,
+            79.0
+          ]
+        },
+        "modeEnvironment": {
+          "AZURE_DISABLE_COMPUTED_MATERIAL_VIEW": null
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "shadowHistoryPrepared": false,
+          "shadowHistoryBytes": 0,
+          "shadowHistorySampledRequests": 0,
+          "shadowHistorySampledEligible": 0,
+          "shadowHistorySampledHits": 0,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "computedMaterialViewPipelines": 464,
+          "computedMaterialViewFrameEligible": true,
+          "computedMaterialViewRequestsTotal": 89784,
+          "computedMaterialViewSelectionsTotal": 89424,
+          "computedMaterialViewFallback": "ready"
+        }
+      },
+      {
+        "label": "after",
+        "seconds": 95.95400000002701,
+        "summary": {
+          "gpu": {
+            "mean": 18.886794133333336,
+            "p95": 19.0100576
+          },
+          "main": {
+            "mean": 16.519338666666666,
+            "p95": 16.766464
+          },
+          "shadow": {
+            "mean": 2.090856,
+            "p95": 2.1624575999999998
+          },
+          "post": {
+            "mean": 0.2765994666666666,
+            "p95": 0.279552
+          },
+          "cpu": {
+            "mean": 5.636143333333334,
+            "p95": 6.2783049999998655
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            76.16,
+            76.25,
+            76.43,
+            76.92,
+            77.35,
+            77.39,
+            77.61,
+            77.62,
+            77.64,
+            77.86,
+            77.92,
+            78.11,
+            78.2,
+            78.36,
+            78.37,
+            78.42,
+            78.54,
+            78.55,
+            78.86,
+            78.94,
+            78.96,
+            78.97,
+            78.99,
+            79.0,
+            79.03,
+            79.24,
+            79.42,
+            79.45,
+            79.51,
+            79.68,
+            80.18,
+            80.33,
+            80.46,
+            81.04,
+            81.05,
+            81.11,
+            81.21,
+            81.38,
+            81.49
+          ],
+          "thermalSlowdownObserved": false,
+          "temperatureRange": [
+            48.0,
+            78.0
+          ]
+        },
+        "modeEnvironment": {
+          "AZURE_DISABLE_COMPUTED_MATERIAL_VIEW": "1"
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "shadowHistoryPrepared": false,
+          "shadowHistoryBytes": 0,
+          "shadowHistorySampledRequests": 0,
+          "shadowHistorySampledEligible": 0,
+          "shadowHistorySampledHits": 0,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "computedMaterialViewPipelines": 0,
+          "computedMaterialViewFrameEligible": false,
+          "computedMaterialViewRequestsTotal": 0,
+          "computedMaterialViewSelectionsTotal": 0,
+          "computedMaterialViewFallback": "disabled"
+        }
+      }
+    ],
+    "referenceMeanMs": 19.0247176,
+    "candidateMeanMs": 16.224519466666667,
+    "reductionFraction": 0.14718736920086173,
+    "referenceDriftFraction": 0.014499397001999476,
+    "affectedRangeReductionFraction": 0.15095872253640708,
+    "efficiencyCriteria": {
+      "minimumWholeFrameGain": true,
+      "twiceReferenceDrift": true,
+      "maximumReferenceDrift": true,
+      "minimumAffectedRangeGain": true
+    },
+    "shortEnvironmentQualified": true,
+    "productionEfficiencyPassed": true,
+    "formalPerformancePassed": false,
+    "sourceAndProgramsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "shortGpuBudgetPassed": false,
+  "shortCpuBudgetPassed": true,
+  "formalPerformancePassed": false,
+  "fixed80WattsAccepted": false,
+  "productionAdopted": false,
+  "projectInputsExact": 1729,
+  "protectedFilesExact": 13,
+  "overall": "failed-user-review",
+  "candidateSourceSha256": {
+    "CMakeLists.txt": "2b8b2a0e854cb5234df53d3b1e60bb10bf8b1c60d4dcc4bdd6eebd8f9cbfb029",
+    "shaders/mesh.frag": "3ce0ff28bacc38f1b50f7dba2ce0e53be02f3988a9b313a0e3491ac13a96f4b2",
+    "shaders/selected_receiver.glsl": "6f39b7609228d6d54af5578448d221c34f5c068234dfbced092003622a518d46",
+    "src/render/ComputedMaterialView.hpp": "30cd873e4cb4007f838cd3040521da5625fa59102d318e8b95e6363bc0f04633",
+    "src/scenes/CharacterComputedMaterialView.inc": "a17dd40083c8cca1c343ae2de8ea826224d08ce4510ca0c4d80d0b50e24f3684",
+    "src/scenes/CharacterMaterialUv.inc": "23fb5a8bcd01f548583e07b4330b6806a2c2a681f661745e1589100db9a533bf",
+    "src/scenes/CharacterMaterialSampling.inc": "bbb0db05ed82c990c4534aaa82e6a617dc79dfc0312470318d484236a29a3902",
+    "src/scenes/CharacterSceneRenderer.cpp": "210fbdb5bff8c406d635dbe6e661dfef4a4c0f3414e2a9126a1b6a18a1ed8015",
+    "src/scenes/CharacterSceneRenderer.hpp": "50a4ab3f0c35dd5818854ad17e13a3e0bc0b6a7f15bc0b00670b27ef1b962e9f",
+    "src/app/AzureRenderApp.cpp": "a2a8fce6b79b3f2b7d0d3ef9faed0ebe37ebb3fe65795d1f81451cb9f02a8589",
+    "tests/ComputedMaterialViewTests.cpp": "4219afc191c174aa8b8720d131278b24d6f277896ce8eaea2c8095b819c43d7d",
+    "tests/MaterialViewDeterminismGpuTests.cpp": "ba814979e4d73de02a7edf68763d0ba6cc92e233ee093f90b1b526fc26c5c706",
+    "tests/support/VulkanComputeFixture.hpp": "ab4f342cb330fff5b74369366cbf805ae154e0132fbdcec4a7e70d34f0b89d70",
+    "tests/ComputedMaterialDepthPolicyRecordingTests.cpp": "3375533c5d452e623e7d00841441fbff3a0bd0c40d7e61dc9ecd4a8945f9f2f9",
+    "tools/test_shader_compiler_contract.py": "e1de25cde0d599fdae3c6fab095e80fe281a572eb83abb08a82d8217e24f0bde",
+    "tools/test_shader_catalog.py": "62e17691274b18ed09e63fa7c23b71cb82d9258a016feb7d65db3e868ec20d48"
+  },
+  "candidateSelection": {
+    "computedMaterialViewPipelines": 464,
+    "computedMaterialViewFrameEligible": true,
+    "computedMaterialViewRequestsTotal": 3004,
+    "computedMaterialViewSelectionsTotal": 2992,
+    "computedMaterialViewFallback": "ready"
+  },
+  "memoryComparison": {
+    "status": "opt-in-candidate",
+    "sameExecutableAndPrograms": true,
+    "sameCommandExceptOutputPaths": true,
+    "referenceEnvironment": "AZURE_DISABLE_COMPUTED_MATERIAL_VIEW=1",
+    "candidate": {
+      "peakWorkingSetBytes": 2990366720,
+      "firstPeak": {
+        "seconds": 278.3279999999795,
+        "peak": 2990366720,
+        "working": 2990366720,
+        "privateBytes": 6105526272
+      },
+      "pipelinePreparationMilliseconds": 181802.8158,
+      "pipelineRequests": 1021,
+      "capture": {
+        "exitCode": 0,
+        "seconds": 283.59399999998277,
+        "frames": [
+          {
+            "name": "frame_000000.png",
+            "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+            "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+            "changedPixels": 0,
+            "maximumByteError": 0
+          },
+          {
+            "name": "frame_000001.png",
+            "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+            "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+            "changedPixels": 0,
+            "maximumByteError": 0
+          },
+          {
+            "name": "frame_000002.png",
+            "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+            "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+            "changedPixels": 0,
+            "maximumByteError": 0
+          },
+          {
+            "name": "frame_000003.png",
+            "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+            "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+            "changedPixels": 0,
+            "maximumByteError": 0
+          }
+        ],
+        "validationClean": true,
+        "allocatorZero": true,
+        "sourceUnchanged": true,
+        "programsUnchanged": true,
+        "projectInputsUnchanged": true
+      },
+      "allocator": {
+        "bufferAllocations": 2042,
+        "imageAllocations": 442,
+        "liveBuffers": 881,
+        "liveImages": 442,
+        "bufferBytes": 2291424896,
+        "imageBytes": 2819632640,
+        "liveBufferBytes": 234193600,
+        "liveImageBytes": 2819632640,
+        "deviceLocalPeakBytes": 3316325184,
+        "bufferMemoryProperties": {
+          "samples": 2042,
+          "liveDeviceLocalBytes": 219448000,
+          "liveNonDeviceLocalBytes": 14745600,
+          "liveMappedDeviceBytes": 44368320,
+          "liveMappedNonLocalDeviceBytes": 0
+        }
+      },
+      "selection": {
+        "computedMaterialViewPipelines": 464,
+        "computedMaterialViewFrameEligible": true,
+        "computedMaterialViewRequestsTotal": 3004,
+        "computedMaterialViewSelectionsTotal": 2992,
+        "computedMaterialViewFallback": "ready"
+      }
+    },
+    "reference": {
+      "peakWorkingSetBytes": 2045272064,
+      "firstPeak": {
+        "seconds": 65.04699999996228,
+        "peak": 2045272064,
+        "working": 1343520768,
+        "privateBytes": 1915465728
+      },
+      "pipelinePreparationMilliseconds": 40569.6086,
+      "pipelineRequests": 557,
+      "capture": {
+        "exitCode": 0,
+        "seconds": 137.54699999996228,
+        "frames": [
+          {
+            "name": "frame_000000.png",
+            "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+            "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+            "changedPixels": 0,
+            "maximumByteError": 0
+          },
+          {
+            "name": "frame_000001.png",
+            "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+            "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+            "changedPixels": 0,
+            "maximumByteError": 0
+          },
+          {
+            "name": "frame_000002.png",
+            "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+            "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+            "changedPixels": 0,
+            "maximumByteError": 0
+          },
+          {
+            "name": "frame_000003.png",
+            "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+            "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+            "changedPixels": 0,
+            "maximumByteError": 0
+          }
+        ],
+        "validationClean": true,
+        "allocatorZero": true,
+        "sourceUnchanged": true,
+        "programsUnchanged": true,
+        "projectInputsUnchanged": true
+      },
+      "allocator": {
+        "bufferAllocations": 2042,
+        "imageAllocations": 442,
+        "liveBuffers": 881,
+        "liveImages": 442,
+        "bufferBytes": 2291424896,
+        "imageBytes": 2819632640,
+        "liveBufferBytes": 234193600,
+        "liveImageBytes": 2819632640,
+        "deviceLocalPeakBytes": 3316325184,
+        "bufferMemoryProperties": {
+          "samples": 2042,
+          "liveDeviceLocalBytes": 219448000,
+          "liveNonDeviceLocalBytes": 14745600,
+          "liveMappedDeviceBytes": 44368320,
+          "liveMappedNonLocalDeviceBytes": 0
+        }
+      },
+      "selection": {
+        "computedMaterialViewPipelines": 0,
+        "computedMaterialViewFrameEligible": false,
+        "computedMaterialViewRequestsTotal": 0,
+        "computedMaterialViewSelectionsTotal": 0,
+        "computedMaterialViewFallback": "disabled"
+      }
+    },
+    "workingSetIncreaseBytes": 945094656,
+    "workingSetBudgetBytes": 2147483648,
+    "candidateWithinWorkingSetBudget": false,
+    "referenceWithinWorkingSetBudget": true,
+    "allocatorCountersIdentical": true,
+    "formalP5Workload": false,
+    "defaultBuildOption": "OFF",
+    "reason": "Candidate exceeds the host working-set budget in the matched four-frame load and the GPU P95 target in the latest short test."
+  },
+  "defaultBuildOption": "OFF"
+}

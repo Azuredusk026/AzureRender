@@ -1,0 +1,22 @@
+{"timestamp_ms":1791593974666,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593974790,"level":"print","subsystem":"input","code":0,"message":"Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot"}
+{"timestamp_ms":1791593974790,"level":"print","subsystem":"gpu","code":0,"message":"Validation layer: disabled"}
+{"timestamp_ms":1791593975078,"level":"print","subsystem":"gpu","code":0,"message":"Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU"}
+{"timestamp_ms":1791593975079,"level":"print","subsystem":"gpu","code":0,"message":"HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)"}
+{"timestamp_ms":1791593975125,"level":"info","subsystem":"gpu","code":0,"message":"GPU capability report: captures\\gpu_capabilities.json"}
+{"timestamp_ms":1791593975495,"level":"print","subsystem":"editor","code":0,"message":"Editor viewport render extent: 1920x1080"}
+{"timestamp_ms":1791593975502,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593975521,"level":"print","subsystem":"render","code":0,"message":"Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off"}
+{"timestamp_ms":1791593975527,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593975529,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593975529,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593975549,"level":"print","subsystem":"ecs","code":0,"message":"ECS visible renderables: 6"}
+{"timestamp_ms":1791593975591,"level":"print","subsystem":"editor","code":0,"message":"Editor viewport resources rebuilt: 1362x680"}
+{"timestamp_ms":1791593975615,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593975618,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593975678,"level":"info","subsystem":"editor","code":0,"message":"Simulation started"}
+{"timestamp_ms":1791593975680,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593975740,"level":"info","subsystem":"editor","code":0,"message":"Play stopped; edit state restored"}
+{"timestamp_ms":1791593975741,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593975768,"level":"print","subsystem":"render","code":0,"message":"Rendered frames: 83"}
+{"timestamp_ms":1791593975823,"level":"print","subsystem":"render","code":0,"message":"Allocator after unload: buffers=0 images=0"}

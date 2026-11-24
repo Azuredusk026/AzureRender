@@ -1,0 +1,442 @@
+{
+  "status": "measured",
+  "scope": "Four effects at the five frozen character interior regions. The two environment rectangles are diagnostic controls with intentionally different display presentation and do not enter the character response criterion.",
+  "scopeSource": "docs/acceptance/nr/material-display-transform.md and the frozen compare_native_final.py character-only criterion",
+  "sourceReportSha256": "a649bc15488f78ac3f4d26e3ed93a469b4256c0460b925d5a7f2867a64828518",
+  "linearResponseErrorBudget": 0.008,
+  "characterResponseBudgetPassed": true,
+  "effects": [
+    {
+      "effect": "hair-kk",
+      "referenceMaximumResponse": 0.1741986763729938,
+      "candidateMaximumResponse": 0.1741986763729938,
+      "maximumResponseError": 0.005342457364233721,
+      "nonzeroReferenceRegions": [
+        "hair-crown",
+        "hair-fringe"
+      ],
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "referenceMaximumResponse": 0.02677612830755599,
+      "candidateMaximumResponse": 0.02677612830755599,
+      "maximumResponseError": 0.004634888943591431,
+      "nonzeroReferenceRegions": [
+        "face-cheek",
+        "face-chin",
+        "eye-left"
+      ],
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "maximumResponseError": 0.0,
+      "nonzeroReferenceRegions": [],
+      "passed": true
+    },
+    {
+      "effect": "toon",
+      "referenceMaximumResponse": 0.18318273617759667,
+      "candidateMaximumResponse": 0.18318273617759667,
+      "maximumResponseError": 0.005463139560842323,
+      "nonzeroReferenceRegions": [
+        "face-cheek",
+        "face-chin",
+        "eye-left"
+      ],
+      "passed": true
+    }
+  ],
+  "characterComparisons": [
+    {
+      "effect": "hair-kk",
+      "region": "hair-crown",
+      "bounds": [
+        710,
+        400,
+        820,
+        550
+      ],
+      "maximumResponseError": 0.00494581581532999,
+      "referenceMaximumResponse": 0.10715468545268275,
+      "candidateMaximumResponse": 0.10715468545268275,
+      "passed": true
+    },
+    {
+      "effect": "hair-kk",
+      "region": "hair-fringe",
+      "bounds": [
+        700,
+        570,
+        800,
+        650
+      ],
+      "maximumResponseError": 0.005342457364233721,
+      "referenceMaximumResponse": 0.1741986763729938,
+      "candidateMaximumResponse": 0.1741986763729938,
+      "passed": true
+    },
+    {
+      "effect": "hair-kk",
+      "region": "face-cheek",
+      "bounds": [
+        705,
+        852,
+        795,
+        885
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "hair-kk",
+      "region": "face-chin",
+      "bounds": [
+        770,
+        960,
+        810,
+        985
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "hair-kk",
+      "region": "eye-left",
+      "bounds": [
+        625,
+        784,
+        683,
+        814
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "region": "hair-crown",
+      "bounds": [
+        710,
+        400,
+        820,
+        550
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "region": "hair-fringe",
+      "bounds": [
+        700,
+        570,
+        800,
+        650
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "region": "face-cheek",
+      "bounds": [
+        705,
+        852,
+        795,
+        885
+      ],
+      "maximumResponseError": 0.004634888943591431,
+      "referenceMaximumResponse": 0.02677612830755599,
+      "candidateMaximumResponse": 0.02677612830755599,
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "region": "face-chin",
+      "bounds": [
+        770,
+        960,
+        810,
+        985
+      ],
+      "maximumResponseError": 0.0045197905582090026,
+      "referenceMaximumResponse": 0.013216664252350407,
+      "candidateMaximumResponse": 0.013216664252350407,
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "region": "eye-left",
+      "bounds": [
+        625,
+        784,
+        683,
+        814
+      ],
+      "maximumResponseError": 0.0042169514164257516,
+      "referenceMaximumResponse": 0.017093337757151217,
+      "candidateMaximumResponse": 0.017093337757151217,
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "region": "hair-crown",
+      "bounds": [
+        710,
+        400,
+        820,
+        550
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "region": "hair-fringe",
+      "bounds": [
+        700,
+        570,
+        800,
+        650
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "region": "face-cheek",
+      "bounds": [
+        705,
+        852,
+        795,
+        885
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "region": "face-chin",
+      "bounds": [
+        770,
+        960,
+        810,
+        985
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "region": "eye-left",
+      "bounds": [
+        625,
+        784,
+        683,
+        814
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "toon",
+      "region": "hair-crown",
+      "bounds": [
+        710,
+        400,
+        820,
+        550
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "toon",
+      "region": "hair-fringe",
+      "bounds": [
+        700,
+        570,
+        800,
+        650
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "toon",
+      "region": "face-cheek",
+      "bounds": [
+        705,
+        852,
+        795,
+        885
+      ],
+      "maximumResponseError": 0.005463139560842323,
+      "referenceMaximumResponse": 0.18318273617759667,
+      "candidateMaximumResponse": 0.18318273617759667,
+      "passed": true
+    },
+    {
+      "effect": "toon",
+      "region": "face-chin",
+      "bounds": [
+        770,
+        960,
+        810,
+        985
+      ],
+      "maximumResponseError": 0.004634888943591431,
+      "referenceMaximumResponse": 0.0256404797852553,
+      "candidateMaximumResponse": 0.0256404797852553,
+      "passed": true
+    },
+    {
+      "effect": "toon",
+      "region": "eye-left",
+      "bounds": [
+        625,
+        784,
+        683,
+        814
+      ],
+      "maximumResponseError": 0.0047508098603305515,
+      "referenceMaximumResponse": 0.09157528353845484,
+      "candidateMaximumResponse": 0.09157528353845484,
+      "passed": true
+    }
+  ],
+  "environmentControlDiagnostics": [
+    {
+      "effect": "hair-kk",
+      "region": "environment-right-wall",
+      "bounds": [
+        1250,
+        300,
+        1450,
+        450
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0
+    },
+    {
+      "effect": "hair-kk",
+      "region": "environment-left-wall",
+      "bounds": [
+        30,
+        400,
+        230,
+        650
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0
+    },
+    {
+      "effect": "face-sdf",
+      "region": "environment-right-wall",
+      "bounds": [
+        1250,
+        300,
+        1450,
+        450
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0
+    },
+    {
+      "effect": "face-sdf",
+      "region": "environment-left-wall",
+      "bounds": [
+        30,
+        400,
+        230,
+        650
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0
+    },
+    {
+      "effect": "shadow",
+      "region": "environment-right-wall",
+      "bounds": [
+        1250,
+        300,
+        1450,
+        450
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0
+    },
+    {
+      "effect": "shadow",
+      "region": "environment-left-wall",
+      "bounds": [
+        30,
+        400,
+        230,
+        650
+      ],
+      "maximumResponseError": 0.1437125729738677,
+      "referenceMaximumResponse": 0.6337474044011605,
+      "candidateMaximumResponse": 0.4996425452833328
+    },
+    {
+      "effect": "toon",
+      "region": "environment-right-wall",
+      "bounds": [
+        1250,
+        300,
+        1450,
+        450
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0
+    },
+    {
+      "effect": "toon",
+      "region": "environment-left-wall",
+      "bounds": [
+        30,
+        400,
+        230,
+        650
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0
+    }
+  ],
+  "visualAcceptance": "failed-user-review"
+}

@@ -1,0 +1,1847 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 0,
+  "developer": {
+    "camera": null,
+    "completedSubmission": 1543,
+    "diagnostic": "",
+    "schemaVersion": 1,
+    "shaderAvailable": false,
+    "shaderDiagnostic": "",
+    "shaderGeneration": 0,
+    "shaderReplacements": 0,
+    "shaderState": "Idle",
+    "thumbnails": [],
+    "views": []
+  },
+  "editorDebugLines": 0,
+  "editorPlaying": false,
+  "editorPreviewFrames": 0,
+  "editorWorkspace": {
+    "activeSelection": "ground",
+    "animationTimelines": {},
+    "camera": {
+      "position": [
+        152.43482971191406,
+        98.45158386230469,
+        92.06558990478516
+      ],
+      "target": [
+        -0.04889378696680069,
+        -0.281658798456192,
+        -170.08404541015625
+      ]
+    },
+    "capture": {
+      "gizmo": false,
+      "navigationButton": -1
+    },
+    "contentNavigation": {
+      "historyIndex": 0,
+      "historySize": 1,
+      "mount": "",
+      "path": "",
+      "previewHandle": 0,
+      "selected": [],
+      "statistics": {
+        "catalogBuilds": 1,
+        "directoryEnumerations": 1,
+        "refreshing": false,
+        "snapshots": 1
+      }
+    },
+    "diagnostic": "",
+    "dirty": false,
+    "document": {
+      "contentHash": "fnv1a64:9a0b0b76537ffa7c",
+      "documentId": "17916518808280369-1",
+      "revision": 3
+    },
+    "documentGuard": 2,
+    "documents": [
+      {
+        "active": true,
+        "dirty": false,
+        "id": "17916518808280369-1",
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\native-real-clock-focus-proof\\run-1791651880676450100\\exploration\\project\\assets\\exploration.azurelevel",
+        "redoCount": 0,
+        "undoCount": 0,
+        "version": {
+          "contentHash": "fnv1a64:9a0b0b76537ffa7c",
+          "documentId": "17916518808280369-1",
+          "revision": 3
+        }
+      }
+    ],
+    "dpi": 1.5,
+    "feedback": [],
+    "gizmoMode": 3,
+    "gizmoPivot": "active",
+    "gizmoRotation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gizmoScale": [
+      23.0,
+      0.25,
+      180.0
+    ],
+    "gizmoSpace": "world",
+    "gizmoTranslation": [
+      0.0,
+      -0.25,
+      -170.0
+    ],
+    "history": [],
+    "historyCount": 0,
+    "image": {
+      "height": 396.0,
+      "width": 920.0,
+      "x": 12.0,
+      "y": 165.0
+    },
+    "materialEditor": {
+      "asset": "",
+      "snapshot": null
+    },
+    "navigation": {
+      "cursorCaptured": false,
+      "mode": "idle",
+      "nativeCursorMode": "normal",
+      "rawMouse": false,
+      "speed": 5.0
+    },
+    "nodeCount": 21,
+    "panels": {
+      "animation": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          564.0,
+          944.0,
+          120.0
+        ]
+      },
+      "assets": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          564.0,
+          944.0,
+          120.0
+        ]
+      },
+      "assistance": {
+        "docked": false,
+        "open": false,
+        "rect": []
+      },
+      "build": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          564.0,
+          944.0,
+          120.0
+        ]
+      },
+      "capture": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          564.0,
+          944.0,
+          120.0
+        ]
+      },
+      "console": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          564.0,
+          944.0,
+          120.0
+        ]
+      },
+      "environment": {
+        "docked": false,
+        "open": false,
+        "rect": []
+      },
+      "gameplay-debug": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          564.0,
+          944.0,
+          120.0
+        ]
+      },
+      "inspector": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          947.0,
+          344.0,
+          333.0,
+          340.0
+        ]
+      },
+      "outliner": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          947.0,
+          96.0,
+          333.0,
+          245.0
+        ]
+      },
+      "prefabs": {
+        "docked": false,
+        "open": false,
+        "rect": []
+      },
+      "problems": {
+        "docked": false,
+        "open": false,
+        "rect": []
+      },
+      "projects": {
+        "docked": false,
+        "open": false,
+        "rect": []
+      },
+      "scripts": {
+        "docked": false,
+        "open": false,
+        "rect": []
+      },
+      "settings": {
+        "docked": false,
+        "open": false,
+        "rect": []
+      },
+      "viewport": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          96.0,
+          944.0,
+          465.0
+        ]
+      }
+    },
+    "physicsBodies": [],
+    "physicsConstraints": 0,
+    "preset": "custom",
+    "previewMode": "edit",
+    "previewSteps": 0,
+    "project": {
+      "id": "7f971748-131f-4764-9aac-221848014a37",
+      "name": "Azure Exploration",
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\native-real-clock-focus-proof\\run-1791651880676450100\\exploration\\project\\project.azureproject"
+    },
+    "referencePicker": false,
+    "selectedName": "ground",
+    "selection": [
+      "ground"
+    ],
+    "settings": {
+      "ai.enabled": {
+        "default": false,
+        "description": "Enable optional content assistance",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": false,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": true,
+        "type": "boolean",
+        "value": false
+      },
+      "ai.maxHistoryBytes": {
+        "default": 131072,
+        "description": "Maximum proposal history bytes",
+        "layers": {
+          "default": 131072
+        },
+        "maximum": 131072.0,
+        "minimum": 2.0,
+        "pending": 131072,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 131072
+      },
+      "ai.maxHistoryMessages": {
+        "default": 24,
+        "description": "Maximum proposal history messages",
+        "layers": {
+          "default": 24
+        },
+        "maximum": 24.0,
+        "minimum": 1.0,
+        "pending": 24,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 24
+      },
+      "ai.maxOperations": {
+        "default": 128,
+        "description": "Maximum proposal operations",
+        "layers": {
+          "default": 128
+        },
+        "maximum": 128.0,
+        "minimum": 1.0,
+        "pending": 128,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 128
+      },
+      "ai.maxRepairs": {
+        "default": 1,
+        "description": "Maximum proposal repairs",
+        "layers": {
+          "default": 1
+        },
+        "maximum": 1.0,
+        "minimum": 0.0,
+        "pending": 1,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 1
+      },
+      "ai.maxSourceBytes": {
+        "default": 2097152,
+        "description": "Maximum proposal source bytes",
+        "layers": {
+          "default": 2097152
+        },
+        "maximum": 2097152.0,
+        "minimum": 1.0,
+        "pending": 2097152,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 2097152
+      },
+      "ai.profile": {
+        "default": "content",
+        "description": "Model tool profile",
+        "layers": {
+          "default": "content"
+        },
+        "pending": "content",
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "string",
+        "value": "content"
+      },
+      "ai.timeoutMs": {
+        "default": 300000,
+        "description": "Total proposal deadline",
+        "layers": {
+          "default": 300000
+        },
+        "maximum": 300000.0,
+        "minimum": 1.0,
+        "pending": 300000,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 300000
+      },
+      "developer.maxViews": {
+        "default": 3,
+        "description": "Maximum owned auxiliary render views",
+        "layers": {
+          "default": 3
+        },
+        "maximum": 3.0,
+        "minimum": 1.0,
+        "pending": 3,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": true,
+        "type": "integer",
+        "value": 3
+      },
+      "diagnostics.verbose": {
+        "default": false,
+        "description": "Verbose development diagnostics",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.camera.boost": {
+        "default": 4.0,
+        "description": "Editor flight acceleration",
+        "layers": {
+          "default": 4.0
+        },
+        "maximum": 100.0,
+        "minimum": 1.0,
+        "pending": 4.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 4.0
+      },
+      "editor.camera.flySpeed": {
+        "default": 5.0,
+        "description": "Editor flight speed",
+        "layers": {
+          "default": 5.0
+        },
+        "maximum": 10000.0,
+        "minimum": 0.01,
+        "pending": 5.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 5.0
+      },
+      "editor.camera.invertX": {
+        "default": false,
+        "description": "Invert horizontal editor camera input",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.camera.invertY": {
+        "default": false,
+        "description": "Invert vertical editor camera input",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.camera.orbitSensitivity": {
+        "default": 1.0,
+        "description": "Editor orbit sensitivity",
+        "layers": {
+          "default": 1.0
+        },
+        "maximum": 10.0,
+        "minimum": 0.01,
+        "pending": 1.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 1.0
+      },
+      "editor.camera.rawMouse": {
+        "default": true,
+        "description": "Use raw mouse motion during captured flight",
+        "layers": {
+          "console": true,
+          "default": true
+        },
+        "pending": true,
+        "pendingSource": "console",
+        "persistent": true,
+        "readOnly": false,
+        "source": "console",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": true
+      },
+      "editor.compact": {
+        "default": false,
+        "description": "Compact workspace",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.gizmo.moveStep": {
+        "default": 0.5,
+        "description": "Gizmo translation snap step",
+        "layers": {
+          "default": 0.5
+        },
+        "maximum": 10000.0,
+        "minimum": 0.001,
+        "pending": 0.5,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 0.5
+      },
+      "editor.gizmo.rotateStep": {
+        "default": 15.0,
+        "description": "Gizmo rotation snap degrees",
+        "layers": {
+          "default": 15.0
+        },
+        "maximum": 90.0,
+        "minimum": 0.1,
+        "pending": 15.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 15.0
+      },
+      "editor.gizmo.scaleStep": {
+        "default": 0.1,
+        "description": "Gizmo scale snap step",
+        "layers": {
+          "default": 0.1
+        },
+        "maximum": 10.0,
+        "minimum": 0.001,
+        "pending": 0.1,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 0.1
+      },
+      "editor.gizmo.snap": {
+        "default": false,
+        "description": "Snap gizmo transforms",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.scale": {
+        "default": 1.0,
+        "description": "Interface scale multiplier",
+        "layers": {
+          "default": 1.0
+        },
+        "maximum": 3.0,
+        "minimum": 0.75,
+        "pending": 1.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 1.0
+      },
+      "editor.shortcuts.frame": {
+        "default": "F",
+        "description": "Scene shortcut (one uppercase letter)",
+        "layers": {
+          "default": "F"
+        },
+        "pending": "F",
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "string",
+        "value": "F"
+      },
+      "editor.shortcuts.move": {
+        "default": "W",
+        "description": "Scene shortcut (one uppercase letter)",
+        "layers": {
+          "default": "W"
+        },
+        "pending": "W",
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "string",
+        "value": "W"
+      },
+      "editor.shortcuts.rotate": {
+        "default": "E",
+        "description": "Scene shortcut (one uppercase letter)",
+        "layers": {
+          "default": "E"
+        },
+        "pending": "E",
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "string",
+        "value": "E"
+      },
+      "editor.shortcuts.scale": {
+        "default": "R",
+        "description": "Scene shortcut (one uppercase letter)",
+        "layers": {
+          "default": "R"
+        },
+        "pending": "R",
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "string",
+        "value": "R"
+      },
+      "editor.shortcuts.select": {
+        "default": "Q",
+        "description": "Scene shortcut (one uppercase letter)",
+        "layers": {
+          "default": "Q"
+        },
+        "pending": "Q",
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "string",
+        "value": "Q"
+      },
+      "editor.thumbnailSize": {
+        "default": 96,
+        "description": "Content thumbnail size",
+        "layers": {
+          "default": 96
+        },
+        "maximum": 192.0,
+        "minimum": 64.0,
+        "pending": 96,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 96
+      },
+      "input.cameraSensitivity": {
+        "default": 1.0,
+        "description": "Mouse camera sensitivity multiplier",
+        "layers": {
+          "default": 1.0
+        },
+        "maximum": 4.0,
+        "minimum": 0.1,
+        "pending": 1.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 1.0
+      },
+      "render.antiAliasing": {
+        "default": 1,
+        "description": "Anti-aliasing: off, edge adaptive, supersampling",
+        "layers": {
+          "default": 1
+        },
+        "maximum": 2.0,
+        "minimum": 0.0,
+        "pending": 1,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 1
+      },
+      "render.blackholeQuality": {
+        "default": 2,
+        "description": "Blackhole quality: performance, balanced, cinematic",
+        "layers": {
+          "default": 2
+        },
+        "maximum": 2.0,
+        "minimum": 0.0,
+        "pending": 2,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 2
+      },
+      "render.diagnosticView": {
+        "default": 0,
+        "description": "Diagnostic view: beauty, normal, outline, shadow, depth",
+        "layers": {
+          "default": 0
+        },
+        "maximum": 4.0,
+        "minimum": 0.0,
+        "pending": 0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 0
+      },
+      "render.exposure": {
+        "default": 0.0,
+        "description": "Temporary exposure in EV",
+        "layers": {
+          "default": 0.0
+        },
+        "maximum": 8.0,
+        "minimum": -8.0,
+        "pending": 0.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 0.0
+      },
+      "render.shadowDistance": {
+        "default": 100.0,
+        "description": "Shadow coverage distance in metres",
+        "layers": {
+          "default": 100.0
+        },
+        "maximum": 5000.0,
+        "minimum": 0.01,
+        "pending": 100.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 100.0
+      }
+    },
+    "tasks": [],
+    "uiErrors": [],
+    "undoCount": 0,
+    "version": 2,
+    "view": {
+      "far": 18146.3671875,
+      "fov": 0.6926040053367615,
+      "near": 0.0008660254534333944,
+      "orthoHeight": 5.0,
+      "position": [
+        152.43482971191406,
+        98.45158386230469,
+        92.06558990478516
+      ],
+      "projection": "perspective",
+      "target": [
+        -0.04889378696680069,
+        -0.281658798456192,
+        -170.08404541015625
+      ],
+      "up": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    "viewportOverlayPolicies": {
+      "camera": "selected",
+      "collision": "selected",
+      "grid": "all",
+      "hinge": "selected",
+      "light": "selected"
+    },
+    "visibleAssets": [
+      {
+        "id": "1938d519-727f-4923-8fa2-9417960d0bdd",
+        "path": "assets:/guide.gltf",
+        "ready": true,
+        "resources": [
+          "guide",
+          "guide:mesh"
+        ],
+        "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\native-real-clock-focus-proof\\run-1791651880676450100\\exploration\\project\\assets\\guide.gltf",
+        "type": "model",
+        "users": 3
+      }
+    ],
+    "widgets": {
+      "asset.1938d519-727f-4923-8fa2-9417960d0bdd": [
+        6.0,
+        648.0,
+        227.0,
+        27.0
+      ],
+      "asset.import": [
+        328.0,
+        265.0,
+        71.0,
+        33.0
+      ],
+      "assets.all": [
+        491.0,
+        36.0,
+        42.0,
+        33.0
+      ],
+      "assets.back": [
+        328.0,
+        36.0,
+        58.0,
+        33.0
+      ],
+      "assets.create-material": [
+        322.0,
+        340.0,
+        948.0,
+        27.0
+      ],
+      "assets.create-object": [
+        322.0,
+        367.0,
+        948.0,
+        27.0
+      ],
+      "assets.directory": [
+        328.0,
+        75.0,
+        1004.0,
+        33.0
+      ],
+      "assets.forward": [
+        398.0,
+        36.0,
+        81.0,
+        33.0
+      ],
+      "assets.generate-primitive": [
+        322.0,
+        394.0,
+        948.0,
+        27.0
+      ],
+      "assets.grid": [
+        746.0,
+        609.0,
+        68.0,
+        33.0
+      ],
+      "assets.import-create": [
+        826.0,
+        609.0,
+        33.0,
+        33.0
+      ],
+      "assets.search": [
+        12.0,
+        609.0,
+        500.0,
+        33.0
+      ],
+      "assets.type": [
+        524.0,
+        609.0,
+        210.0,
+        33.0
+      ],
+      "axis.reset.azure.transform.rotation.0": [
+        959.0,
+        1175.0,
+        33.0,
+        33.0
+      ],
+      "axis.reset.azure.transform.rotation.1": [
+        1059.0,
+        1175.0,
+        33.0,
+        33.0
+      ],
+      "axis.reset.azure.transform.rotation.2": [
+        1159.0,
+        1175.0,
+        33.0,
+        33.0
+      ],
+      "axis.reset.azure.transform.scale.0": [
+        959.0,
+        1241.0,
+        33.0,
+        33.0
+      ],
+      "axis.reset.azure.transform.scale.1": [
+        1059.0,
+        1241.0,
+        33.0,
+        33.0
+      ],
+      "axis.reset.azure.transform.scale.2": [
+        1159.0,
+        1241.0,
+        33.0,
+        33.0
+      ],
+      "axis.reset.azure.transform.translation.0": [
+        959.0,
+        1109.0,
+        33.0,
+        33.0
+      ],
+      "axis.reset.azure.transform.translation.1": [
+        1059.0,
+        1109.0,
+        33.0,
+        33.0
+      ],
+      "axis.reset.azure.transform.translation.2": [
+        1159.0,
+        1109.0,
+        33.0,
+        33.0
+      ],
+      "axis.value.azure.transform.rotation.0": [
+        995.0,
+        1175.0,
+        52.0,
+        33.0
+      ],
+      "axis.value.azure.transform.rotation.1": [
+        1095.0,
+        1175.0,
+        52.0,
+        33.0
+      ],
+      "axis.value.azure.transform.rotation.2": [
+        1195.0,
+        1175.0,
+        52.0,
+        33.0
+      ],
+      "axis.value.azure.transform.scale.0": [
+        995.0,
+        1241.0,
+        52.0,
+        33.0
+      ],
+      "axis.value.azure.transform.scale.1": [
+        1095.0,
+        1241.0,
+        52.0,
+        33.0
+      ],
+      "axis.value.azure.transform.scale.2": [
+        1195.0,
+        1241.0,
+        52.0,
+        33.0
+      ],
+      "axis.value.azure.transform.translation.0": [
+        995.0,
+        1109.0,
+        52.0,
+        33.0
+      ],
+      "axis.value.azure.transform.translation.1": [
+        1095.0,
+        1109.0,
+        52.0,
+        33.0
+      ],
+      "axis.value.azure.transform.translation.2": [
+        1195.0,
+        1109.0,
+        52.0,
+        33.0
+      ],
+      "build": [
+        740.5,
+        48.0,
+        60.0,
+        33.0
+      ],
+      "component.azure.rigid-body": [
+        953.0,
+        1280.0,
+        300.0,
+        33.0
+      ],
+      "component.azure.transform": [
+        953.0,
+        1043.0,
+        300.0,
+        33.0
+      ],
+      "content.create-directory": [
+        328.0,
+        304.0,
+        134.0,
+        33.0
+      ],
+      "content.redo": [
+        328.0,
+        463.0,
+        196.0,
+        33.0
+      ],
+      "content.undo": [
+        328.0,
+        424.0,
+        198.0,
+        33.0
+      ],
+      "document.tab.exploration.azurelevel": [
+        12.0,
+        117.0,
+        177.0,
+        21.0
+      ],
+      "field.azure.transform.rotation": [
+        959.0,
+        1175.0,
+        288.0,
+        33.0
+      ],
+      "field.azure.transform.scale": [
+        959.0,
+        1241.0,
+        288.0,
+        33.0
+      ],
+      "field.azure.transform.translation": [
+        959.0,
+        1109.0,
+        288.0,
+        33.0
+      ],
+      "focus": [
+        12.0,
+        141.0,
+        126.0,
+        21.0
+      ],
+      "gizmo.options": [
+        218.0,
+        141.0,
+        95.0,
+        21.0
+      ],
+      "hierarchy.root": [
+        1103.0,
+        183.0,
+        72.0,
+        39.0
+      ],
+      "import.browse": [
+        328.0,
+        226.0,
+        87.0,
+        33.0
+      ],
+      "import.path": [
+        328.0,
+        187.0,
+        935.0,
+        33.0
+      ],
+      "material.slots-header": [
+        953.0,
+        389.0,
+        300.0,
+        33.0
+      ],
+      "menu.Edit": [
+        55.0,
+        3.0,
+        51.0,
+        27.0
+      ],
+      "menu.File": [
+        6.0,
+        3.0,
+        49.0,
+        27.0
+      ],
+      "menu.Help": [
+        224.0,
+        3.0,
+        56.0,
+        27.0
+      ],
+      "menu.Tools": [
+        162.0,
+        3.0,
+        62.0,
+        27.0
+      ],
+      "menu.View": [
+        106.0,
+        3.0,
+        56.0,
+        27.0
+      ],
+      "mode.Move": [
+        75.0,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "mode.Rotate": [
+        169.5,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "mode.Scale": [
+        264.0,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "name": [
+        959.0,
+        833.0,
+        287.0,
+        33.0
+      ],
+      "node.artifact-0:body": [
+        953.0,
+        715.0,
+        300.0,
+        27.0
+      ],
+      "node.artifact-1:body": [
+        953.0,
+        742.0,
+        300.0,
+        27.0
+      ],
+      "node.artifact-2:body": [
+        953.0,
+        769.0,
+        300.0,
+        27.0
+      ],
+      "node.camera": [
+        953.0,
+        472.0,
+        300.0,
+        27.0
+      ],
+      "node.checkpoint:body": [
+        953.0,
+        688.0,
+        300.0,
+        27.0
+      ],
+      "node.companion-0": [
+        953.0,
+        553.0,
+        300.0,
+        27.0
+      ],
+      "node.companion-1": [
+        953.0,
+        580.0,
+        300.0,
+        27.0
+      ],
+      "node.door:body": [
+        953.0,
+        661.0,
+        300.0,
+        27.0
+      ],
+      "node.gate-left": [
+        953.0,
+        418.0,
+        300.0,
+        27.0
+      ],
+      "node.gate-right": [
+        953.0,
+        445.0,
+        300.0,
+        27.0
+      ],
+      "node.goal": [
+        953.0,
+        526.0,
+        300.0,
+        27.0
+      ],
+      "node.ground": [
+        953.0,
+        229.0,
+        300.0,
+        27.0
+      ],
+      "node.guide:body": [
+        953.0,
+        634.0,
+        300.0,
+        27.0
+      ],
+      "node.hero:body": [
+        953.0,
+        607.0,
+        300.0,
+        27.0
+      ],
+      "node.hud": [
+        953.0,
+        499.0,
+        300.0,
+        27.0
+      ],
+      "node.interior-left": [
+        953.0,
+        337.0,
+        300.0,
+        27.0
+      ],
+      "node.interior-right": [
+        953.0,
+        364.0,
+        300.0,
+        27.0
+      ],
+      "node.interior-roof": [
+        953.0,
+        391.0,
+        300.0,
+        27.0
+      ],
+      "node.passage-left": [
+        953.0,
+        256.0,
+        300.0,
+        27.0
+      ],
+      "node.passage-right": [
+        953.0,
+        283.0,
+        300.0,
+        27.0
+      ],
+      "node.ramp": [
+        953.0,
+        310.0,
+        300.0,
+        27.0
+      ],
+      "outliner.actions": [
+        1022.0,
+        180.0,
+        75.0,
+        33.0
+      ],
+      "outliner.add": [
+        959.0,
+        180.0,
+        51.0,
+        33.0
+      ],
+      "outliner.search": [
+        959.0,
+        141.0,
+        308.0,
+        33.0
+      ],
+      "panelrect.animation": [
+        0.0,
+        564.0,
+        944.0,
+        120.0
+      ],
+      "panelrect.assets": [
+        0.0,
+        564.0,
+        944.0,
+        120.0
+      ],
+      "panelrect.build": [
+        0.0,
+        564.0,
+        944.0,
+        120.0
+      ],
+      "panelrect.capture": [
+        0.0,
+        564.0,
+        944.0,
+        120.0
+      ],
+      "panelrect.console": [
+        0.0,
+        564.0,
+        944.0,
+        120.0
+      ],
+      "panelrect.gameplay-debug": [
+        0.0,
+        564.0,
+        944.0,
+        120.0
+      ],
+      "panelrect.inspector": [
+        947.0,
+        344.0,
+        333.0,
+        340.0
+      ],
+      "panelrect.outliner": [
+        947.0,
+        96.0,
+        333.0,
+        245.0
+      ],
+      "panelrect.viewport": [
+        0.0,
+        96.0,
+        944.0,
+        465.0
+      ],
+      "pause": [
+        527.5,
+        48.0,
+        65.0,
+        33.0
+      ],
+      "physics.shape": [
+        959.0,
+        494.0,
+        287.0,
+        33.0
+      ],
+      "pick.artifact-0:body": [
+        295.65447998046875,
+        432.8437805175781,
+        2,
+        2
+      ],
+      "pick.artifact-1:body": [
+        455.2490234375,
+        386.02349853515625,
+        2,
+        2
+      ],
+      "pick.artifact-2:body": [
+        483.27081298828125,
+        341.2451477050781,
+        2,
+        2
+      ],
+      "pick.companion-0": [
+        277.97991943359375,
+        455.1231384277344,
+        2,
+        2
+      ],
+      "pick.companion-1": [
+        489.3998107910156,
+        354.380615234375,
+        2,
+        2
+      ],
+      "pick.door:body": [
+        550.4068603515625,
+        317.5489501953125,
+        2,
+        2
+      ],
+      "pick.gate-left": [
+        534.6685180664063,
+        315.57794189453125,
+        2,
+        2
+      ],
+      "pick.gate-right": [
+        566.62158203125,
+        319.57958984375,
+        2,
+        2
+      ],
+      "pick.ground": [
+        471.0,
+        362.0,
+        2,
+        2
+      ],
+      "pick.guide:body": [
+        209.53872680664063,
+        495.740966796875,
+        2,
+        2
+      ],
+      "pick.hero:body": [
+        208.78135681152344,
+        498.2137451171875,
+        2,
+        2
+      ],
+      "pick.interior-left": [
+        553.9652709960938,
+        312.60858154296875,
+        2,
+        2
+      ],
+      "pick.interior-right": [
+        561.6586303710938,
+        313.53350830078125,
+        2,
+        2
+      ],
+      "pick.interior-roof": [
+        557.8201293945313,
+        312.63134765625,
+        2,
+        2
+      ],
+      "pick.passage-left": [
+        386.3139953613281,
+        399.37115478515625,
+        2,
+        2
+      ],
+      "pick.passage-right": [
+        397.1620788574219,
+        401.9535827636719,
+        2,
+        2
+      ],
+      "pick.ramp": [
+        471.0,
+        361.3123779296875,
+        2,
+        2
+      ],
+      "play": [
+        364.5,
+        48.0,
+        54.0,
+        33.0
+      ],
+      "save": [
+        12.0,
+        48.0,
+        57.0,
+        33.0
+      ],
+      "simulate": [
+        430.5,
+        48.0,
+        85.0,
+        33.0
+      ],
+      "step": [
+        604.5,
+        48.0,
+        56.0,
+        33.0
+      ],
+      "stop": [
+        672.5,
+        48.0,
+        56.0,
+        33.0
+      ],
+      "tab.animation": [
+        570.0,
+        564.0,
+        165.0,
+        33.0
+      ],
+      "tab.assets": [
+        39.0,
+        564.0,
+        165.0,
+        33.0
+      ],
+      "tab.build": [
+        434.0,
+        564.0,
+        130.0,
+        33.0
+      ],
+      "tab.capture": [
+        210.0,
+        564.0,
+        106.0,
+        33.0
+      ],
+      "tab.console": [
+        322.0,
+        564.0,
+        106.0,
+        33.0
+      ],
+      "tab.gameplay-debug": [
+        741.0,
+        564.0,
+        165.0,
+        33.0
+      ],
+      "tab.inspector": [
+        986.0,
+        344.0,
+        98.0,
+        33.0
+      ],
+      "tab.outliner": [
+        986.0,
+        96.0,
+        151.0,
+        33.0
+      ],
+      "tab.viewport": [
+        39.0,
+        96.0,
+        112.0,
+        33.0
+      ],
+      "viewport.axis.+X": [
+        874.0846557617188,
+        244.9381103515625,
+        30.0,
+        30.0
+      ],
+      "viewport.axis.+Y": [
+        830.0,
+        188.5052490234375,
+        30.0,
+        30.0
+      ],
+      "viewport.axis.+Z": [
+        804.357421875,
+        250.647216796875,
+        30.0,
+        30.0
+      ],
+      "viewport.axis.-X": [
+        790.4153442382813,
+        233.56187438964844,
+        21.0,
+        21.0
+      ],
+      "viewport.axis.-Y": [
+        834.5,
+        289.9947509765625,
+        21.0,
+        21.0
+      ],
+      "viewport.axis.-Z": [
+        860.142578125,
+        227.85279846191406,
+        21.0,
+        21.0
+      ],
+      "viewport.image": [
+        12.0,
+        165.0,
+        920.0,
+        396.0
+      ],
+      "viewport.view-options": [
+        150.0,
+        141.0,
+        56.0,
+        21.0
+      ]
+    }
+  },
+  "fixedSteps": 0,
+  "gameBuildMilliseconds": 0.0,
+  "gameBuildPassed": false,
+  "levelRevision": 0,
+  "nodes": [
+    {
+      "id": "ground",
+      "translation": [
+        0.0,
+        -0.25,
+        -170.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "passage-left",
+      "translation": [
+        -3.200000047683716,
+        1.5,
+        -96.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "passage-right",
+      "translation": [
+        3.200000047683716,
+        1.5,
+        -96.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "ramp",
+      "translation": [
+        0.0,
+        0.17000000178813934,
+        -170.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "interior-left",
+      "translation": [
+        -3.200000047683716,
+        2.0,
+        -305.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "interior-right",
+      "translation": [
+        3.200000047683716,
+        2.0,
+        -305.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "interior-roof",
+      "translation": [
+        0.0,
+        2.3499999046325684,
+        -305.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "gate-left",
+      "translation": [
+        -13.0,
+        1.5,
+        -290.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "gate-right",
+      "translation": [
+        13.0,
+        1.5,
+        -290.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "camera",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "hud",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "goal",
+      "translation": [
+        0.0,
+        1.0,
+        -330.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "companion-0",
+      "translation": [
+        -4.0,
+        0.0,
+        -32.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "companion-1",
+      "translation": [
+        4.0,
+        0.0,
+        -185.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "hero:body",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "guide:body",
+      "translation": [
+        -1.0,
+        0.0,
+        -1.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "door:body",
+      "translation": [
+        0.0,
+        1.5,
+        -290.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "checkpoint:body",
+      "translation": [
+        0.0,
+        1.0,
+        -165.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "artifact-0:body",
+      "translation": [
+        -14.0,
+        0.44999998807907104,
+        -50.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "artifact-1:body",
+      "translation": [
+        14.0,
+        0.44999998807907104,
+        -130.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "artifact-2:body",
+      "translation": [
+        -14.0,
+        0.44999998807907104,
+        -210.0
+      ],
+      "visible": true
+    }
+  ],
+  "presentationErrors": [],
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "exploration",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.0,
+  "uiDrawCalls": 0
+}

@@ -1,0 +1,149 @@
+# 资产、关卡与 Prefab
+
+> 文档类型：运行时说明
+> 状态：生效
+> 更新日期：2026-10-31
+> 适用范围：Windows 项目资源与独立 Player
+> 源码入口：`src/runtime/AssetDatabase.*`、`Level.*`、`Prefab.*`、`LevelSession.*`
+> 关联测试：`AssetLevelTests.cpp`、`test_level_player.py`
+
+## 职责与使用场景
+
+AssetDatabase 为挂载目录中的文件建立 UUID 索引、依赖和导入缓存。
+Level 保存 JSON 场景与反射组件。
+Prefab 提供节点复用和实例覆盖。
+LevelSession 管理启动、切换与热重载。
+
+## 启动准备
+
+`ProjectStartup` 构造时持有项目并刷新资产索引。
+启动关卡通过该索引解析，成功后开放只读访问。
+项目、索引和关卡分别通过对应访问器获取。
+解析失败通过异常报告。
+
+Player 配置持有 `shared_ptr<const ProjectStartup>`。
+运行会话复制已准备内容，初始提交安装关卡组件。
+不同会话分别持有活动索引、关卡和 World。
+后续切关、取消和热刷新按会话事务执行。
+
+启动快照固定项目定义、索引及已解析关卡。
+模型与纹理资源按渲染加载契约读取。
+源文件变化由会话后续扫描观察。
+
+直接传入项目的会话构造入口执行同一准备过程。
+编辑运行预览和独立 Player 共用该机制。
+
+以下示例在两个独立运行世界中使用同一启动快照。
+
+```cpp
+const azurerender::ProjectStartup startup(
+    azurerender::Project::load("project.azureproject"));
+azurerender::RuntimeLifecycle first, second;
+first.start();
+second.start();
+azurerender::LevelSession firstSession(startup, first);
+azurerender::LevelSession secondSession(startup, second);
+```
+
+`Project::loadScene(path, assets)` 借用已刷新索引。
+项目文件、项目身份和挂载目录须与索引归属一致。
+未刷新及归属不符的索引产生参数错误。
+单参数入口按需要建立自己的索引。
+
+## 数据与所有权
+
+源文件的 `.azmeta` 侧车持有版本、UUID、导入设置与显式依赖。移动资源时同时移动侧车文件，引用使用 UUID 或项目虚拟路径。文件指纹由内容、导入设置、导入器版本和依赖指纹共同计算。
+
+LevelSession 持有资源数据库与当前关卡，RuntimeLifecycle 持有 World。关卡替换先建立候选 World 和渲染资源，通过验证后提交。加载错误保留当前 World 与渲染器，并保存诊断。
+
+资产源快照保存元数据、文件指纹及待解析的引用。
+结构文档在扫描当前文件时完成解析和引用提取。
+完整路径清单就绪后，引用解析为资产身份。
+完整关卡内容由所属加载器持有。
+
+热刷新按时间及大小复用有效源快照。
+强制核对重新检查源文件及元数据。
+新索引在依赖、生成来源及循环检查通过后发布。
+失败及取消保留当前记录、版本和共享快照。
+
+## 生命周期与时序
+
+Lua 源变化由脚本运行时替换环境并保留 World。关卡展开数据或渲染资源指纹变化时提交候选关卡。脚本初始化与重载契约见 [脚本与玩法](scripts-gameplay.md)。
+
+后台任务每 500 ms 检查一次资源变化。依赖变化向引用资源传播，候选关卡在帧边界加载。成功热重载重新初始化当前关卡的运行状态。
+
+新切关请求使用扫描后的候选资源库。上传完成且渲染器就绪后，候选提交为活动关卡。预加载缓存按活动资源指纹检查有效性。
+
+渲染资源准备等待 GPU 完成信号，成功后释放当前资源。失败准备释放候选资源，当前渲染器继续服务。
+
+## 接口契约
+
+`refresh()` 返回变化的 UUID，失败扫描保留有效索引。`readSource()` 校验缓存，损坏缓存从当前有效源文件重建。依赖缺失、循环、重复 UUID 和越界路径产生错误。
+
+`.azurelevel` 包含版本、关卡标识、渲染器类型、资源、节点和 Prefab 实例。组件对象以稳定类型名称为键，值使用反射存档包。节点父子关系、资源引用与组件数据均在加载时验证。
+
+Prefab 实例包含资源标识、实例名称和覆盖对象。实例名称形成节点前缀，覆盖以源节点标识定位，使用 JSON Merge Patch 合并。源节点标识由 Prefab 持有，覆盖修改属性。
+
+## 线程与同步
+
+主线程持有活动数据库与关卡。后台任务扫描数据库副本并解析候选。GPU 上传在主线程分帧准备，候选就绪后提交 World。录制线程读取不可变渲染快照。
+
+取消、缓存与容量规则见[可玩关卡性能与加载](playable-performance.md)。
+
+## 序列化与兼容
+
+### 缓存发布与读取
+
+缓存按资源 UUID 和内容指纹确定最终路径。
+发布前逐字节核对已有最终文件。
+完整同内容缓存由当前调用直接复用。
+
+需要发布时，在缓存根目录独占创建暂存目录。
+暂存路径长度受最终路径的支持范围约束。
+写入完成并关闭文件后，通过原子操作发布。
+
+同一指纹已有完整缓存时，使用其验证结果。
+损坏缓存从匹配当前快照的源内容重建。
+失败时清理本次拥有的暂存文件与目录。
+其他操作的临时路径保持其原有内容。
+
+Windows 缓存读取共享读取、写入和删除访问。
+读取句柄持有完整文件，并在退出读取时关闭。
+读取结果继续校验版本、指纹、长度和内容。
+原生读取失败记录文件路径与系统错误原因。
+
+并发验证覆盖已有侧车的项目和不可变缓存。
+新资源侧车的创建由所属写入会话执行。
+源内容变更按所属版本校验与事务规则提交。
+实际覆盖见[缓存并发验收](../acceptance/u16/cache-publication.md)。
+
+完整缓存复用及实际主场景见[专项验证](../acceptance/nr/complete-asset-cache-reuse.md)。
+
+资源侧车、关卡、Prefab 与目录资源包均为版本 1。缓存采用 `AZCACHE1` 标识，随后为小端 64 位指纹、负载长度和原始字节。缓存以 UUID 与指纹定位，有效版本在候选导入失败时保留。导入缓存用于稳定读取与失效判断，GPU 格式由 Render Core 解析。
+
+目录资源包使用 `manifest.azurepack`，保留挂载目录结构、UUID 侧车、内容指纹和依赖。读取验证相对路径与内容指纹，glTF 外部引用沿原目录结构解析。FNV-1a 指纹用于缓存失效判断。
+
+## 平台行为
+
+Windows Player 支持 `.azurelevel` 启动场景，项目挂载沿用 Project 的路径边界。Android 为 Deferred。
+
+## 使用示例
+
+项目文件的 `startupScene` 可设为 `assets:/start.azurelevel`。通过 `AzurePlayer --project project.azureproject --runtime-report runtime.json` 启动并保存最终节点快照。
+
+`AssetDatabase::writePack()` 要求空输出目录。`resolvePack()` 验证资源包条目并返回路径。
+
+## 诊断与排错
+
+UUID 重复时检查侧车复制流程。资源移动后检查源文件与侧车的位置。关卡重载错误从 `LevelSession::lastError()` 读取，修复后下一次成功加载提交新状态。
+
+## 验收与证据
+
+AssetLevel 测试覆盖移动、缓存修复、依赖失效、Prefab 覆盖、循环、资源包和切换事务。LevelPlayer 测试通过实际 Vulkan Player 验证 JSON 关卡与热重载。
+
+独立索引测试覆盖常驻内存及引用事务。
+大型结构文档、热刷新及实际项目见[索引验证](../acceptance/recovery/asset-dependency-index.md)。
+
+## 参考来源
+
+资产数据库、关卡与 Prefab 为项目实现。JSON 使用固定的 nlohmann/json，组件定义使用 G1 反射注册表。外部文件解析沿用 tinygltf 与现行 Render Core。

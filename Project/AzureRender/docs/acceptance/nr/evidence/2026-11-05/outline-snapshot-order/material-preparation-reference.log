@@ -1,0 +1,20 @@
+[OUTPUT] 
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+[HANDLER_OUTPUT] 
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+    Start 109: AzureRender.CharacterRepair
+1/1 Test #109: AzureRender.CharacterRepair ......***Failed   61.61 sec
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =  61.66 sec
+
+The following tests FAILED:
+	109 - AzureRender.CharacterRepair (Failed)
+[ERROR_MESSAGE] 
+Errors while running CTest
+
+Output from these tests are in: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug/Testing/Temporary/LastTest.log
+Use "--rerun-failed --output-on-failure" to re-run the failed cases verbosely.

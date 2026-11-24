@@ -1,0 +1,438 @@
+{
+  "diagnosticOnly": true,
+  "sourceCommit": "b3a9136d3c843aff4305831770995a5312741de7",
+  "completeAllocationCoverage": false,
+  "rootCauseConfirmedForFormalFailures": false,
+  "targets": [
+    {
+      "index": 1696,
+      "event": {
+        "qpc": 263552542700,
+        "threadId": 38296,
+        "api": 1,
+        "flags": 4096,
+        "protection": 4,
+        "status": 0,
+        "process": 18446744073709551615,
+        "inputBase": 0,
+        "inputSize": 14747320,
+        "base": 1459669041152,
+        "size": 14749696,
+        "frameCount": 16,
+        "published": 1,
+        "stack": [
+          140705207948353,
+          140706096898570,
+          140706096904942,
+          140706097074753,
+          140706097073684,
+          140706055196705,
+          140734653355437,
+          140734647689549,
+          140734647887615,
+          140734647888114,
+          140734647839821,
+          140734658884500,
+          140734658643176,
+          140734658648589,
+          140734653367784,
+          140706083891415
+        ]
+      },
+      "stack": [
+        {
+          "address": 140705207948353,
+          "candidates": [
+            {
+              "module": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\native-memory-trace\\compiled-ninja\\AzureNtTrace.dll",
+              "offset": 5185
+            }
+          ]
+        },
+        {
+          "address": 140706096898570,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+              "offset": 156170
+            }
+          ]
+        },
+        {
+          "address": 140706096904942,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+              "offset": 162542
+            }
+          ]
+        },
+        {
+          "address": 140706097074753,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+              "offset": 332353
+            }
+          ]
+        },
+        {
+          "address": 140706097073684,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+              "offset": 331284
+            }
+          ]
+        },
+        {
+          "address": 140706055196705,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\System32\\KERNELBASE.dll",
+              "offset": 593953
+            }
+          ]
+        },
+        {
+          "address": 140734653355437,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+              "offset": 10704301
+            }
+          ]
+        },
+        {
+          "address": 140734647689549,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+              "offset": 5038413
+            }
+          ]
+        },
+        {
+          "address": 140734647887615,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+              "offset": 5236479
+            }
+          ]
+        },
+        {
+          "address": 140734647888114,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+              "offset": 5236978
+            }
+          ]
+        },
+        {
+          "address": 140734647839821,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+              "offset": 5188685
+            }
+          ]
+        },
+        {
+          "address": 140734658884500,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+              "offset": 16233364
+            }
+          ]
+        },
+        {
+          "address": 140734658643176,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+              "offset": 15992040
+            }
+          ]
+        },
+        {
+          "address": 140734658648589,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+              "offset": 15997453
+            }
+          ]
+        },
+        {
+          "address": 140734653367784,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+              "offset": 10716648
+            }
+          ]
+        },
+        {
+          "address": 140706083891415,
+          "candidates": [
+            {
+              "module": "C:\\WINDOWS\\System32\\KERNEL32.DLL",
+              "offset": 190679
+            }
+          ]
+        }
+      ],
+      "overlappingCalls": [
+        {
+          "index": 1696,
+          "qpc": 263552542700,
+          "threadId": 38296,
+          "api": 1,
+          "flags": 4096,
+          "protection": 4,
+          "status": 0,
+          "process": 18446744073709551615,
+          "inputBase": 0,
+          "inputSize": 14747320,
+          "base": 1459669041152,
+          "size": 14749696,
+          "frameCount": 16,
+          "published": 1,
+          "stack": [
+            140705207948353,
+            140706096898570,
+            140706096904942,
+            140706097074753,
+            140706097073684,
+            140706055196705,
+            140734653355437,
+            140734647689549,
+            140734647887615,
+            140734647888114,
+            140734647839821,
+            140734658884500,
+            140734658643176,
+            140734658648589,
+            140734653367784,
+            140706083891415
+          ]
+        },
+        {
+          "index": 1697,
+          "qpc": 263552542751,
+          "threadId": 38296,
+          "api": 3,
+          "flags": 16384,
+          "protection": 0,
+          "status": 0,
+          "process": 18446744073709551615,
+          "inputBase": 1459669041152,
+          "inputSize": 20480,
+          "base": 1459669041152,
+          "size": 20480,
+          "frameCount": 16,
+          "published": 1,
+          "stack": [
+            140705207949281,
+            140706097499631,
+            140706096898599,
+            140706096904942,
+            140706097074753,
+            140706097073684,
+            140706055196705,
+            140734653355437,
+            140734647689549,
+            140734647887615,
+            140734647888114,
+            140734647839821,
+            140734658884500,
+            140734658643176,
+            140734658648589,
+            140734653367784
+          ]
+        },
+        {
+          "index": 1698,
+          "qpc": 263552542793,
+          "threadId": 38296,
+          "api": 3,
+          "flags": 16384,
+          "protection": 0,
+          "status": 0,
+          "process": 18446744073709551615,
+          "inputBase": 1459683786752,
+          "inputSize": 4096,
+          "base": 1459683786752,
+          "size": 4096,
+          "frameCount": 16,
+          "published": 1,
+          "stack": [
+            140705207949281,
+            140706097499631,
+            140706096898647,
+            140706096904942,
+            140706097074753,
+            140706097073684,
+            140706055196705,
+            140734653355437,
+            140734647689549,
+            140734647887615,
+            140734647888114,
+            140734647839821,
+            140734658884500,
+            140734658643176,
+            140734658648589,
+            140734653367784
+          ]
+        }
+      ],
+      "residentTimeline": [
+        {
+          "counterSeconds": 26351.0517369,
+          "residentBytes": 0,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26351.0593847,
+          "residentBytes": 0,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26352.0745431,
+          "residentBytes": 0,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26353.1128406,
+          "residentBytes": 0,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26354.1687275,
+          "residentBytes": 0,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26355.2233284,
+          "residentBytes": 0,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26356.2324342,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26357.2854841,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26358.3437029,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26359.3900568,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26360.392168,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26361.4101393,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26362.4424528,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26363.4958279,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26364.5282375,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26365.5470779,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26366.5623783,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26367.5780137,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26368.6005312,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26369.6178635,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26370.6433214,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26371.6799029,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26372.6991208,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26373.7476359,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        },
+        {
+          "counterSeconds": 26374.7865807,
+          "residentBytes": 12632064,
+          "racedPages": 0
+        }
+      ]
+    }
+  ],
+  "loadedCaptureModules": [
+    {
+      "base": 140737023901696,
+      "size": 319488,
+      "path": "C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll"
+    }
+  ],
+  "hashes": {
+    "summary.json": "fd269433e26066167fb20e39e614a206d2d70025295ec5a20d924d232110c290",
+    "events.bin": "86fc2db2dd28c0bda7000314fd7a272f0565f3fd387553985ec103124b2cfb9b",
+    "residency.json": "bd45ea6da6367de42a64d048e7e778076370dcf9dd6d7c775fbb62fa352faf52"
+  },
+  "limits": [
+    "Allocation and residency are correlated within this instrumented process only.",
+    "Formal performance failures have different run sources and require independent causal verification.",
+    "Module snapshots and 16-frame stacks do not identify heap suballocation ownership."
+  ]
+}

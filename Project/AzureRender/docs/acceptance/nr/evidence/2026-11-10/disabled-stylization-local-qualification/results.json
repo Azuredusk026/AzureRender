@@ -1,0 +1,48 @@
+{
+  "status": "isolated-below-native-admission",
+  "sourceBase": "4b0af14",
+  "allSixAttachmentsExact": true,
+  "scope": {
+    "allEventMs": {
+      "referenceMs": 13.378783999999943,
+      "candidateMs": 11.453423999999941,
+      "savedMs": 1.9253600000000013,
+      "reduction": 0.14391143470139056,
+      "share": 1.0
+    },
+    "matchedEventMs": {
+      "referenceMs": 9.825903999999959,
+      "candidateMs": 7.972960000000024,
+      "savedMs": 1.852943999999935,
+      "reduction": 0.18857745811478954,
+      "share": 0.7344392435067343
+    },
+    "mainEventMs": {
+      "referenceMs": 7.071344000000018,
+      "candidateMs": 5.793888000000022,
+      "savedMs": 1.2774559999999955,
+      "reduction": 0.18065250396529886,
+      "share": 0.5285490818896581
+    },
+    "ordinaryMainEventMs": {
+      "referenceMs": 3.59603200000001,
+      "candidateMs": 2.95457600000001,
+      "savedMs": 0.6414559999999998,
+      "reduction": 0.17837883533850585,
+      "share": 0.26878616173189024
+    },
+    "snapshotEventMs": {
+      "referenceMs": 2.7545599999999983,
+      "candidateMs": 2.1790719999999983,
+      "savedMs": 0.575488,
+      "reduction": 0.208921933085502,
+      "share": 0.20589016161708046
+    }
+  },
+  "sourceUnchanged": true,
+  "productsUnchanged": true,
+  "protectedFilesExact": 13,
+  "newNativeBatches": 0,
+  "seconds": 103.95299999997951,
+  "staticSamplingRemoved": 0
+}

@@ -1,0 +1,226 @@
+{
+  "status": "collision-geometry-queries-measured",
+  "scope": "CPU rays against declared rendered-geometry collision meshes. Capsule contact and native collision equivalence require actual physics checks.",
+  "sources": [
+    {
+      "asset": "structural-collision.glb",
+      "triangles": 16718,
+      "sha256": "e9b6a67ee3ba96ff608ef11ce584240def29014bba9a44082ff366adf6380df4"
+    },
+    {
+      "asset": "native-railing-collision.glb",
+      "triangles": 5356,
+      "sha256": "db2b66649f9d08e58840861f9e26de5a6de2a3ded05f67d05f047dc42976a766"
+    }
+  ],
+  "queries": [
+    {
+      "query": "floor",
+      "origin": [
+        0.0,
+        1.135,
+        9.0
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "maximumDistance": 5,
+      "hits": [
+        {
+          "distance": 0.10257093224702288,
+          "point": [
+            0.0,
+            1.032429067752977,
+            9.0
+          ],
+          "triangle": 2914
+        }
+      ]
+    },
+    {
+      "query": "forward-low",
+      "origin": [
+        0.0,
+        1.4,
+        9.0
+      ],
+      "direction": [
+        0,
+        0,
+        -1
+      ],
+      "maximumDistance": 12,
+      "hits": [
+        {
+          "distance": 2.9572055805426305,
+          "point": [
+            0.0,
+            1.4,
+            6.042794419457369
+          ],
+          "triangle": 17625
+        },
+        {
+          "distance": 2.9981086839161897,
+          "point": [
+            0.0,
+            1.4,
+            6.00189131608381
+          ],
+          "triangle": 17855
+        },
+        {
+          "distance": 11.204441864400033,
+          "point": [
+            0.0,
+            1.4,
+            -2.2044418644000334
+          ],
+          "triangle": 2153
+        },
+        {
+          "distance": 11.563502001632827,
+          "point": [
+            0.0,
+            1.4,
+            -2.563502001632827
+          ],
+          "triangle": 2128
+        },
+        {
+          "distance": 11.940745705423128,
+          "point": [
+            0.0,
+            1.4,
+            -2.9407457054231276
+          ],
+          "triangle": 2106
+        }
+      ]
+    },
+    {
+      "query": "forward-mid",
+      "origin": [
+        0.0,
+        1.9,
+        9.0
+      ],
+      "direction": [
+        0,
+        0,
+        -1
+      ],
+      "maximumDistance": 12,
+      "hits": [
+        {
+          "distance": 2.9572028077811723,
+          "point": [
+            0.0,
+            1.9,
+            6.042797192218828
+          ],
+          "triangle": 17625
+        },
+        {
+          "distance": 2.998106848248557,
+          "point": [
+            0.0,
+            1.9,
+            6.0018931517514424
+          ],
+          "triangle": 17855
+        },
+        {
+          "distance": 11.204441830063246,
+          "point": [
+            0.0,
+            1.9,
+            -2.204441830063246
+          ],
+          "triangle": 2153
+        },
+        {
+          "distance": 11.563423049792313,
+          "point": [
+            0.0,
+            1.9,
+            -2.5634230497923127
+          ],
+          "triangle": 2128
+        },
+        {
+          "distance": 11.940836512483175,
+          "point": [
+            0.0,
+            1.9,
+            -2.940836512483175
+          ],
+          "triangle": 2106
+        }
+      ]
+    },
+    {
+      "query": "right",
+      "origin": [
+        0.0,
+        1.4,
+        9.0
+      ],
+      "direction": [
+        1,
+        0,
+        0
+      ],
+      "maximumDistance": 25,
+      "hits": [
+        {
+          "distance": 7.408659230335035,
+          "point": [
+            7.408659230335035,
+            1.4,
+            9.0
+          ],
+          "triangle": 6371
+        },
+        {
+          "distance": 7.61445204371347,
+          "point": [
+            7.61445204371347,
+            1.4,
+            9.0
+          ],
+          "triangle": 7051
+        },
+        {
+          "distance": 7.7055690576523554,
+          "point": [
+            7.7055690576523554,
+            1.4,
+            9.0
+          ],
+          "triangle": 7053
+        },
+        {
+          "distance": 7.881539095775807,
+          "point": [
+            7.881539095775807,
+            1.4,
+            9.0
+          ],
+          "triangle": 6429
+        },
+        {
+          "distance": 13.515097361988163,
+          "point": [
+            13.515097361988163,
+            1.4,
+            9.0
+          ],
+          "triangle": 21035
+        }
+      ]
+    }
+  ]
+}

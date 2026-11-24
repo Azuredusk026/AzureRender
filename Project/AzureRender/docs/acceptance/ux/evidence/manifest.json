@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-14",
+  "status": "Ready",
+  "physicalInput": "not performed",
+  "nonGpu": {
+    "total": 188,
+    "firstRunPassed": 187,
+    "retryPassed": [
+      "AzureEditor.ContentDirectoryScale"
+    ]
+  },
+  "uiRegression": {
+    "passed": 5
+  },
+  "workspaceDpiCases": 8,
+  "guiDelivery": "passed before final context-menu availability-only fix; installed targeted regression passed after fix",
+  "binaries": {
+    "AzureRender.exe": "1c06d440915d60a4ed9674c0232bf964bc9a9ec4418951fc7c3be2dc579904b1",
+    "AzurePlayer.exe": "02e9e097899fb447c5cf42e0bc7024dd31e9216ec38978340f067f7c90b10d01"
+  },
+  "source": {
+    "src/editor/panels/ViewportPanel.cpp": "52bf32b8ee4f17bdbff36b2138d094ba7b0bb40b27b1a4397617d84f4098ee78",
+    "src/editor/panels/OutlinerPanel.cpp": "c30b2eaccb1a5e6691dd84f2897c05346d4ad546adf7f9b313187c15d926c928",
+    "src/editor/panels/AssetBrowserPanel.cpp": "4a1563029e1b61d3149490b291626ca60ffd4552ab30748def83f3647d45db6f",
+    "src/editor/panels/SettingsPanel.cpp": "bf0556289fed3bfb7b0d0af5db999d6d229340edd1e2f0ad9c04d467e394710d",
+    "src/editor/panels/InspectorPanel.cpp": "11b7504cdf50bc6c1d146303c5aad9aa3b864bf850ffd38e597922ccf0681e1f",
+    "src/editor/EditorHierarchyEditing.cpp": "a16f0688be2d2f1fada9d1c60935bb25ebbbbe21042f8741101b544f7a758437",
+    "src/editor/scripts/ScriptAuthoringOperations.cpp": "1fea9622c110bb93002dccdbce701406898a5c696202e0aa5f87b20135fdd296",
+    "src/foundation/SettingRegistry.hpp": "400c13fd0f2b0b2df8f12fb6c71f9cb2a91bae536824d726ee326c380e350b2f"
+  },
+  "finalTargetedRegression": "Debug and installed Release passed, including simulated-run context-menu protection"
+}

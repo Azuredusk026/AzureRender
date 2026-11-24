@@ -22,6 +22,10 @@ struct GpuBuffer {
     // Persistently mapped pointer for host-visible allocations, else null.
     void* mapped = nullptr;
     VkDeviceSize size = 0;
+    // Unknown backends retain UINT32_MAX and zero property flags.
+    std::uint32_t memoryTypeIndex = UINT32_MAX;
+    VkMemoryPropertyFlags memoryProperties = 0;
+    VkBufferUsageFlags usage = 0;
 };
 
 struct GpuImage {
@@ -30,6 +34,8 @@ struct GpuImage {
     std::uint32_t width = 0;
     std::uint32_t height = 0;
     std::uint32_t mipLevels = 1;
+    std::uint32_t arrayLayers = 1;
+    std::uint32_t depth = 1;
 };
 
 // Running totals used by the performance baseline to show that a structural
@@ -41,6 +47,10 @@ struct GpuAllocatorStatistics {
     std::uint64_t liveImages = 0;
     VkDeviceSize bufferBytes = 0;
     VkDeviceSize imageBytes = 0;
+    VkDeviceSize liveBufferBytes=0,liveImageBytes=0,deviceLocalPeakBytes=0;
+    std::uint64_t bufferMemoryPropertySamples=0;
+    VkDeviceSize liveDeviceLocalBufferBytes=0,liveNonDeviceLocalBufferBytes=0;
+    VkDeviceSize liveMappedDeviceBufferBytes=0,liveMappedNonLocalDeviceBufferBytes=0;
 };
 
 // Allocation interface. The production implementation is GpuAllocator (VMA);
@@ -73,6 +83,7 @@ public:
         const GpuBuffer& buffer,
         VkDeviceSize offset,
         VkDeviceSize size) = 0;
+    virtual void invalidate(const GpuBuffer&,VkDeviceSize offset,VkDeviceSize size)=0;
 
     [[nodiscard]] virtual const GpuAllocatorStatistics& statistics()
         const noexcept = 0;

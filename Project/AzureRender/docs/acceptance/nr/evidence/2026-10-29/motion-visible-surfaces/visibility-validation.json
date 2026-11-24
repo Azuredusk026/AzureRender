@@ -1,0 +1,47 @@
+[
+  {
+    "case": "kk",
+    "config": "debug",
+    "status": "passed",
+    "exitCode": 0,
+    "edgeErrorRatio": 0.795232015778979,
+    "maximumGhostPixelsOutsideTwoPixels": 0,
+    "maximumFlatByteError": 0
+  },
+  {
+    "case": "mask",
+    "config": "debug",
+    "status": "failed",
+    "exitCode": 1,
+    "edgeErrorRatio": 0.9321273447005346,
+    "maximumGhostPixelsOutsideTwoPixels": 0,
+    "maximumFlatByteError": 0
+  },
+  {
+    "case": "kk",
+    "config": "release",
+    "status": "passed",
+    "exitCode": 0,
+    "edgeErrorRatio": 0.795232015778979,
+    "maximumGhostPixelsOutsideTwoPixels": 0,
+    "maximumFlatByteError": 0
+  },
+  {
+    "case": "mask",
+    "config": "release",
+    "status": "failed",
+    "exitCode": 1,
+    "edgeErrorRatio": 0.9321273447005346,
+    "maximumGhostPixelsOutsideTwoPixels": 0,
+    "maximumFlatByteError": 0
+  },
+  {
+    "case": "cloth",
+    "config": "release",
+    "status": "failed",
+    "exitCode": 1,
+    "edgeErrorRatio": 1.5818887315442585,
+    "maximumGhostPixelsOutsideTwoPixels": 0,
+    "maximumFlatByteError": 0
+  }
+]

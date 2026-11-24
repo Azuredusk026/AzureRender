@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "variants": [
+    {
+      "name": "glsl",
+      "pixelHashes": [
+        "404fb09fd83ed7db78d067be74e1034d7c6b4491b2b438699c10ea952698a2f2",
+        "8f6f3fc95a45172f6444d28222aadbf5b29b121a30587c7bb068c3527d0d070e",
+        "e0343275029ce42cb97f7c897afcb3c1672a4a9440733585649965a46fcdac62",
+        "1a77401392f6964b08e26499f828ebd8055bbd3012193a696475df810e270437"
+      ],
+      "gpuAverageMs": 2.749167,
+      "gpuP95Ms": 2.935594,
+      "processSeconds": 1.1090000000003783,
+      "validationLayerInserted": true,
+      "released": true,
+      "shaderHash": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26"
+    },
+    {
+      "name": "direct",
+      "pixelHashes": [
+        "404fb09fd83ed7db78d067be74e1034d7c6b4491b2b438699c10ea952698a2f2",
+        "8f6f3fc95a45172f6444d28222aadbf5b29b121a30587c7bb068c3527d0d070e",
+        "e0343275029ce42cb97f7c897afcb3c1672a4a9440733585649965a46fcdac62",
+        "1a77401392f6964b08e26499f828ebd8055bbd3012193a696475df810e270437"
+      ],
+      "gpuAverageMs": 2.580816,
+      "gpuP95Ms": 2.670675,
+      "processSeconds": 1.110000000000582,
+      "validationLayerInserted": true,
+      "released": true,
+      "shaderHash": "afcc627569044edf16dc0d263cac02405963cc8c8d30fe7e4196acc9cd08ed43"
+    },
+    {
+      "name": "cached",
+      "pixelHashes": [
+        "404fb09fd83ed7db78d067be74e1034d7c6b4491b2b438699c10ea952698a2f2",
+        "8f6f3fc95a45172f6444d28222aadbf5b29b121a30587c7bb068c3527d0d070e",
+        "e0343275029ce42cb97f7c897afcb3c1672a4a9440733585649965a46fcdac62",
+        "1a77401392f6964b08e26499f828ebd8055bbd3012193a696475df810e270437"
+      ],
+      "gpuAverageMs": 2.635988,
+      "gpuP95Ms": 2.878464,
+      "processSeconds": 1.0780000000013388,
+      "validationLayerInserted": true,
+      "released": true,
+      "shaderHash": "23301eac711d0c2857d010ec727de046930a46f2c47a2422c3cd42e0ddd09bf4"
+    }
+  ],
+  "extent": [
+    960,
+    540
+  ],
+  "quality": "balanced",
+  "camera": "front",
+  "captureFrames": 4,
+  "timingFrames": 120,
+  "driverHash": null
+}

@@ -1,0 +1,434 @@
+{
+  "schemaVersion": 1,
+  "status": "implemented-compatible-loaded-resource-identities-allocation-invariant-verified-full-budgets-failed",
+  "sourceBase": "e0ecf1a",
+  "productionAdoption": true,
+  "buildAndCpu": {
+    "release": {
+      "cpuChecks": 20,
+      "buildSeconds": 24.56300000002375,
+      "checksSeconds": 23.26600000000326,
+      "productCount": 622,
+      "productionShaders535ByteIdentical": true
+    },
+    "debug": {
+      "cpuChecks": 20,
+      "buildSeconds": 19.06200000003446,
+      "checksSeconds": 49.73499999998603,
+      "productCount": 622,
+      "productionShaders535ByteIdentical": true
+    }
+  },
+  "allocationControls": {
+    "release": [
+      {
+        "indexed": false,
+        "ordinaryBytes": 114772,
+        "alias1024Bytes": 114772,
+        "deltaBytes": 0
+      },
+      {
+        "indexed": true,
+        "ordinaryBytes": 114580,
+        "alias1024Bytes": 114580,
+        "deltaBytes": 0
+      }
+    ],
+    "debug": [
+      {
+        "indexed": false,
+        "ordinaryBytes": 200804,
+        "alias1024Bytes": 200804,
+        "deltaBytes": 0
+      },
+      {
+        "indexed": true,
+        "ordinaryBytes": 200228,
+        "alias1024Bytes": 200228,
+        "deltaBytes": 0
+      }
+    ]
+  },
+  "modifiedTestSourceHashes": {
+    "tests/OpaqueTransparencyScratchTests.cpp": "1ca56ca2c889d10e47b24569822756651fb28027eeef9351f00afb279a681b7e",
+    "tests/StaticSkinningRecordingTests.cpp": "da556c606b3eab58cd3137b296ebfdf158e63a7d5ff8072ffb1cf7a03d43f50b"
+  },
+  "testSourceScope": "Modified test files frozen separately; runtime provenance source scope excludes tests",
+  "gpuMechanisms": {
+    "status": "passed",
+    "scope": "3 actual GPU cases x2configurations x2devices; synchronization validation and zero-resource assertions inside each original case; skinning includes actual normalized output reuse/cancel/dynamic overwrite and raw81word equivalence; individual/bulk barriers remain covered",
+    "rows": [
+      {
+        "configuration": "release",
+        "device": "nvidia",
+        "enumeratedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "deviceUUIDs": [
+          "961ce778-109e-0976-8431-c5edc76ff622"
+        ],
+        "enumerationEntries": 1,
+        "filter": "*nv-vk64*",
+        "exitCode": 0,
+        "seconds": 4.625,
+        "actualChecks": [
+          "AzureRender.MotionVectorGpu",
+          "AzureRender.SharedMotionGpu",
+          "AzureRender.SkinningGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\loaded-resource-identities\\gpu\\release-nvidia-tests.xml"
+        ]
+      },
+      {
+        "configuration": "release",
+        "device": "intel",
+        "enumeratedDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "deviceUUIDs": [
+          "868088a7-0400-0000-0002-000000000000"
+        ],
+        "enumerationEntries": 2,
+        "filter": "*igvk64*",
+        "exitCode": 0,
+        "seconds": 1.5320000000065193,
+        "actualChecks": [
+          "AzureRender.MotionVectorGpu",
+          "AzureRender.SharedMotionGpu",
+          "AzureRender.SkinningGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\loaded-resource-identities\\gpu\\release-intel-tests.xml"
+        ]
+      },
+      {
+        "configuration": "debug",
+        "device": "nvidia",
+        "enumeratedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "deviceUUIDs": [
+          "961ce778-109e-0976-8431-c5edc76ff622"
+        ],
+        "enumerationEntries": 1,
+        "filter": "*nv-vk64*",
+        "exitCode": 0,
+        "seconds": 5.703000000037719,
+        "actualChecks": [
+          "AzureRender.MotionVectorGpu",
+          "AzureRender.SharedMotionGpu",
+          "AzureRender.SkinningGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\loaded-resource-identities\\gpu\\debug-nvidia-tests.xml"
+        ]
+      },
+      {
+        "configuration": "debug",
+        "device": "intel",
+        "enumeratedDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "deviceUUIDs": [
+          "868088a7-0400-0000-0002-000000000000"
+        ],
+        "enumerationEntries": 2,
+        "filter": "*igvk64*",
+        "exitCode": 0,
+        "seconds": 1.7189999999827705,
+        "actualChecks": [
+          "AzureRender.MotionVectorGpu",
+          "AzureRender.SharedMotionGpu",
+          "AzureRender.SkinningGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\loaded-resource-identities\\gpu\\debug-intel-tests.xml"
+        ]
+      }
+    ],
+    "sourceInputsUnchanged": true,
+    "allRecordedProductsVerified": true
+  },
+  "nativeImage": {
+    "status": "passed",
+    "sourceBase": "e0ecf1a",
+    "executableSha256": "793a55025a4cca49a812d6da43de676a039288ffbfd0383f17d08d261711ddab",
+    "exitCode": 0,
+    "seconds": 115.81299999996554,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Loaded immutable resource identity map candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "nativeIdentities": {
+    "loadedResourceIdentityEntries": 374,
+    "uniqueMeshes": 374
+  },
+  "nativeTiming": {
+    "status": "measured",
+    "sourceBase": "e0ecf1a",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 110.38999999995576,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.598278666666667,
+        "p95": 2.776808,
+        "p99": 2.8402390399999997
+      },
+      "sceneMs": {
+        "mean": 29.827054933333333,
+        "p95": 31.0161408,
+        "p99": 31.618457600000003
+      },
+      "postProcessMs": {
+        "mean": 0.2966272,
+        "p95": 0.3062272,
+        "p99": 0.31110144
+      },
+      "frameMs": {
+        "mean": 32.7219608,
+        "p95": 33.9582288,
+        "p99": 34.59813696
+      }
+    },
+    "cpu": {
+      "mean": 21.033018333333338,
+      "p95": 30.288489999999484,
+      "p99": 31.340964000000326
+    },
+    "wait": {
+      "mean": 11.607232499999993,
+      "p95": 15.534709999999132,
+      "p99": 15.981296999999696
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7404195840,
+    "environmentFailures": [
+      "run observation 19: driver relative thermal headroom is insufficient"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "originalLimitsNumericallyMet": false,
+    "powerProfileStable": true,
+    "environmentPassed": false,
+    "diagnosticOnly": true,
+    "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+    "productionShaderFilesUnchanged": true,
+    "timingBenefitQualified": false,
+    "timingScope": "Current candidate only; no paired timing benefit or original1800sample acceptance claim"
+  },
+  "timingBenefitQualified": false,
+  "fullVisualAcceptance": "failed-user-review",
+  "fullPerformance": "failed",
+  "canonicalPngArchive": "docs/acceptance/nr/evidence/2026-11-05/runtime-node-identity/measurements.zip",
+  "archiveMembers": {
+    "archive_loaded_resource_identities.py": "91059a63e08543c902518f704c646bd462b10d8c64c934aa124e0e704415607b",
+    "capture_loaded_resource_identities.py": "100a76d4e13a62859247517110c762cfba6f7fd66f84da92fea24e8c0d78e0fb",
+    "loaded-resource-identities/alias-allocation-red-exit.txt": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+    "loaded-resource-identities/alias-allocation-red.log": "5635f3cd3bc5bd48c61d0e4f550df91166a43fef16f68a27f2215363c2676994",
+    "loaded-resource-identities/build-driver.log": "61943f891239947e8f1198b380633db73a4dcf76d3e1bbbe7075ca0fd5d942bb",
+    "loaded-resource-identities/engine-debug-build.json": "94294915e3823bbaf4f21a308128570f4305744dc9c85557e9ec22efcb6f777e",
+    "loaded-resource-identities/engine-debug-build.log": "91c1afde7b0afa2296e992585716f62afed62a1e7d571fdaa3870ca6d9f8bbf3",
+    "loaded-resource-identities/engine-debug-checks-full.log": "15bc89395e78e38a0662e7a73d1921ba0d12751b4379b6e78539c4cd23f83d8d",
+    "loaded-resource-identities/engine-debug-checks.json": "4d11d2deb44b125798988a8473c49a3117077e968dce007b6343a71e1cb4a2dc",
+    "loaded-resource-identities/engine-debug-checks.log": "7fe8419a877ab36d8659ec76ec5a94052452094edc253a037470db5976b1f795",
+    "loaded-resource-identities/engine-debug-checks.xml": "597aeada07562b3eae7a62b050e80520602d6db86c6d9b50aa10a7933595ba1e",
+    "loaded-resource-identities/engine-debug-provenance.json": "02a080dc58cc2ae9ead363ea94b5c549792b98c377783f005f21762555511225",
+    "loaded-resource-identities/engine-release-build.json": "fda06a5619477542f7fcf727fd9c9242d6dcb9018c6df88b08fe745b5aa21a55",
+    "loaded-resource-identities/engine-release-build.log": "ee385805b9d9654f16b7aef7fe710c34069584ef828ead1e9da7b95f4f47bc3d",
+    "loaded-resource-identities/engine-release-checks-full.log": "b713f7d8f236e31055ad0b7e77b51376be170762d5a92ebe92e7ba1646c39f0e",
+    "loaded-resource-identities/engine-release-checks.json": "d9d45e6f58cf37b8c981010ff72f01eff568caba7c47772916f39d038b19f733",
+    "loaded-resource-identities/engine-release-checks.log": "3bd8316b3f47095b695d20e708cd6438ffb56f494ad14a4d9b828c7154a311c0",
+    "loaded-resource-identities/engine-release-checks.xml": "16b9a453f42b61ae0477d9942e9e5d65c3176bf5387e289094a94b6643a2c0a9",
+    "loaded-resource-identities/engine-release-provenance.json": "fff246b68027f9dadb99d977109b2ebf40d2ed700239652e397af9ba6e39693f",
+    "loaded-resource-identities/gpu/debug-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "loaded-resource-identities/gpu/debug-intel-tests-full.log": "2fe0c66e96bc264f98023bca92ead9edfbcdaa7888c6075327b51dd18904f156",
+    "loaded-resource-identities/gpu/debug-intel-tests.log": "b64b7e2e74e3e557ccd412f62160f406871169b7c7eb8b3d4748e1f45f08f956",
+    "loaded-resource-identities/gpu/debug-intel-tests.xml": "584253d77152aaaf0333d32289f9d794568f3ff027d491e19ef913c47b0f8860",
+    "loaded-resource-identities/gpu/debug-nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+    "loaded-resource-identities/gpu/debug-nvidia-tests-full.log": "9bddaf1b6817e5d21f3c6f21d7222099e1d631a7829de99e37416b9fc6451fa5",
+    "loaded-resource-identities/gpu/debug-nvidia-tests.log": "621db982053abca33ef49a80d592478b767529718fd55684933b4a7221913a36",
+    "loaded-resource-identities/gpu/debug-nvidia-tests.xml": "b429ffaaee643587f396b9510c84d7fcc9c54f93752f2f8ee2edf47c62088153",
+    "loaded-resource-identities/gpu/gpu-checks.json": "ad48cac076712d7cfa7bde9da6b1af934948b91d29f24c1015d9dd79955c19d3",
+    "loaded-resource-identities/gpu/release-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "loaded-resource-identities/gpu/release-intel-tests-full.log": "e02c6ae5ffdf722623a866998bcdcf8f1db2ec0c6d349eb48e02e6079f9e5327",
+    "loaded-resource-identities/gpu/release-intel-tests.log": "f9e72257828d4f6ece7cd1791d624b03f5a27e19794b45fd745647f79b577036",
+    "loaded-resource-identities/gpu/release-intel-tests.xml": "0e3803b485e759004ff6eb86bab1062e9627dfc3b2591da8ea8df2ce0044ceab",
+    "loaded-resource-identities/gpu/release-nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+    "loaded-resource-identities/gpu/release-nvidia-tests-full.log": "050510c819789293a912f10f1e87b998d1f63a4d783bdab5717fc7eecd642b76",
+    "loaded-resource-identities/gpu/release-nvidia-tests.log": "62a7fd60c65b993e25698ac01a035206c3c1a2c3f7227d922d6b2ea19cfc29a0",
+    "loaded-resource-identities/gpu/release-nvidia-tests.xml": "7498e53a7acb2cbbbb89f0f58b5791e493c3da99adb8330f3b81ec7e5200867d",
+    "loaded-resource-identities/gpu/startup-environment.json": "c589a3047ce3884cb39b864c91416fa85cc40bddef0d2a71a299fb92f174a545",
+    "loaded-resource-identities/gpu-driver.log": "eb0af0daafff33f52acb30bbe8bc0be1cad948b305bda0f36694d5d8c890d175",
+    "loaded-resource-identities/image/bind-pose-workload.json": "4e8211c617939f54bac403c4d5f7daddb94feaf002400bd2fd29b7647ed871c3",
+    "loaded-resource-identities/image/command.json": "a7c5681278c1eacf404b625eb579a57263060699efea5ccea479bd4d801e7fd0",
+    "loaded-resource-identities/image/frames/capture_manifest.json": "2a160b3c9149339ddc7b33fdfb9c0db5fabd5727f250704e16e6bfbd86a2ef44",
+    "loaded-resource-identities/image/frames/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "loaded-resource-identities/image/frozen-inputs.json": "1c77af0f85645e016de85d180d540e625545fc858a6ecc61ad57fabd89212f22",
+    "loaded-resource-identities/image/identity-workload.json": "99835e64bab80baa2120034780f5bbd0e926efc0e5083f09b938e8cf348d2713",
+    "loaded-resource-identities/image/results.json": "163114f73ba67da7f445294cc91febd897789643bdc79de1ea6cf6f3ef40dc79",
+    "loaded-resource-identities/image/runtime.json": "202d61a0c3a2b33e205dba017d692e16e0c83d1f63ffe2da9f1a0fe355d4fcb3",
+    "loaded-resource-identities/image/stderr.log": "693ab86d4a105890c235e3c2a50dd5fc0a0cf913330a7ed69debb358ebc6e68a",
+    "loaded-resource-identities/image/stdout.log": "2dee0a624f1776f4ffd949e9b541863e6d91f23bc480343e1f6d2bde4d85d1a4",
+    "loaded-resource-identities/image/workload.json": "914510df2c090eb8efc35d59fa5bddb29a5956b573040a1d3e0a90b9b2cbe634",
+    "loaded-resource-identities/image-driver.log": "737667fde119bf7f29ab4ebe22c2ceaa9f1fb9954a3e5dd0e83f4fd9546e071a",
+    "loaded-resource-identities/initial-map-candidate/build-driver.log": "3ff4aa617885b9ebd6e7daa61f776e74d8e013cd831729e1b6bec31f4d4b5254",
+    "loaded-resource-identities/initial-map-candidate/CharacterSceneRenderer.cpp": "91fad5bdf3be1f8f4713a7c9cf0b0251b211f71df3293f8e769ee21cdd98a4f8",
+    "loaded-resource-identities/initial-map-candidate/engine-debug-build.json": "fb6e6ed313bc95c3822ea3441ec59815995c2b2ee89d7a75ce3c4f6f195d37f3",
+    "loaded-resource-identities/initial-map-candidate/engine-debug-build.log": "5499aa8c47c29d0b5c6b063edde4b743b6be8aece45114db811b03e52bb2afb8",
+    "loaded-resource-identities/initial-map-candidate/engine-debug-checks-full.log": "127d03233ebe3849856b8ea3b9ecb065aa86a554ffb13d37dabd099cdbaf8a35",
+    "loaded-resource-identities/initial-map-candidate/engine-debug-checks.json": "bc00ffa1d80f0cd87b4c22c3844a6318e2635f1dd6378e7cae51d8ae4ac8f99f",
+    "loaded-resource-identities/initial-map-candidate/engine-debug-checks.log": "5436f60c85b528b731c8846a3335b66e4cae1df83c53474d045492201b3abd12",
+    "loaded-resource-identities/initial-map-candidate/engine-debug-checks.xml": "b79019ff216a21670a809db656d91bc0944edb91986c886dd1b073a3893bdd9f",
+    "loaded-resource-identities/initial-map-candidate/engine-debug-provenance.json": "9bea34f42cf256e9f1ddb4bcc71257603688d9e26ddeb939fc229002e4f7d147",
+    "loaded-resource-identities/initial-map-candidate/engine-release-build.json": "57bca716c672f8302c245e9f4b92107a01f9f6d24580aec494005b91030f18f4",
+    "loaded-resource-identities/initial-map-candidate/engine-release-build.log": "85faa0c11862b14e9633d11d289718202b20d825604b5f1480c4dc7347d4153b",
+    "loaded-resource-identities/initial-map-candidate/engine-release-checks-full.log": "7f8480f1e9003de703d114640de269c9880e3d538e3adced7a1d896c239c255e",
+    "loaded-resource-identities/initial-map-candidate/engine-release-checks.json": "784343aaed3847726168390d867958bfa8b882a3f099437b0a7518cfb6f691be",
+    "loaded-resource-identities/initial-map-candidate/engine-release-checks.log": "3043a88e605598208782b69a01367fb02354b9d29af02fb047887cc6bcf2abc6",
+    "loaded-resource-identities/initial-map-candidate/engine-release-checks.xml": "8b72a370aa9374e3b7383e7a5bdd2512c70b1c147ee12f9a66698ff557512d5f",
+    "loaded-resource-identities/initial-map-candidate/engine-release-provenance.json": "03f5d5bb07b1cc705f4917126b6e096d804b0ad6123b7a659f9ed926d30d6731",
+    "loaded-resource-identities/modified-test-source-hashes.json": "30a3b017bb5322ec4e1bc0d8dcb0b6ea6c42406b55556b7368c077356ee0afee",
+    "loaded-resource-identities/performance/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "loaded-resource-identities/performance/environment.json": "0963235ff19a549d20c1fefd2a47657aca5575f9c8cce15dbbb506b3859de960",
+    "loaded-resource-identities/performance/frozen-inputs.json": "f861385f6d36749d57ed218bed25b99001858fec882f05aa4dd16a15bd804aa6",
+    "loaded-resource-identities/performance/memory.json": "2fc7aef747f107929551cd0fbf4a002432ba2774aa8a5abddabc0eb243966069",
+    "loaded-resource-identities/performance/results.json": "bc6f81e101dac66f2543cffc7218c04cc6e0e79bda6d7adf36a1ae9571abe82d",
+    "loaded-resource-identities/performance/runtime.json": "d0e2af0e43dae0c5113d1be85eeb961fb380aa86885501769f86242813ef5149",
+    "loaded-resource-identities/performance/stderr.log": "1f915703137b5466c43998642881376bd35342e9ed4b4795e72e31f97688c3fe",
+    "loaded-resource-identities/performance/stdout.log": "a995f938844ed3af16e5b2b0e93c656b1a24d42677cfb33e4b6db9d85716cd9b",
+    "loaded-resource-identities/performance/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "loaded-resource-identities/performance/task.json": "2100a7e6c7f0edfcbef2fa738127e1cc2575fb8c97742b489bf97ceb8ad72440",
+    "loaded-resource-identities/performance/timing.csv": "6021d17f55bf4d6e545822de2a8d16f7879f9e2e43376a4d24087050d9e84578",
+    "loaded-resource-identities/performance/timing.json": "a49af82ef6248c3074f5c2d654071c4e1d79f151ce6a047dd8eed58461ea2643",
+    "loaded-resource-identities/performance/workload.json": "1a55b90c0790a84b0651d310dcc7f67e04c679ffcffba6ba6b823055348ca733",
+    "loaded-resource-identities/performance-driver.log": "a140f1dd03736b2885fb4f6926d87e95a52f5e35c8276a47782876287b0fa715",
+    "loaded-resource-identities/red-build.log": "f373416ee3297925a04ed7686052f3b4fe47c7c62a5e940156cbb7732454a2cb",
+    "loaded-resource-identities/reuse-identity-red-build.log": "015cca514c9b4506231fe0dd1655ccc2fd26b198308d206ef1fd19062e86739a",
+    "loaded-resource-identities/reuse-identity-red-exit.txt": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+    "loaded-resource-identities/reuse-identity-red.log": "cdd55d727b7e8c0e4025dc0d8b08ab4da23cd223f369102a704b81cf28e93ea5",
+    "loaded-resource-identities/selected.json": "2db0b4beef3ad2fbee14ff145e298922f485f71cea18bc8e6c5378b4a1161083",
+    "loaded-resource-identities/source/production.diff": "a9ddadc3afa0f0bbc9c64f4f6cb21e8e4cffd10e6442cea16cdb9a373711bae0",
+    "loaded-resource-identities/source/src/scenes/CharacterSceneRenderer.cpp": "8a7db9c5f51a2c6ea234e6278ed2413356e35029a490aaae9313427a5ede2f32",
+    "loaded-resource-identities/source/src/scenes/CharacterSceneRenderer.hpp": "e94967393f41ab92a1e0dfa64733b260aaf55bec004a5a1ba220805d84ca6bb2",
+    "loaded-resource-identities/source/tests/OpaqueTransparencyScratchTests.cpp": "1ca56ca2c889d10e47b24569822756651fb28027eeef9351f00afb279a681b7e",
+    "loaded-resource-identities/source/tests/StaticSkinningRecordingTests.cpp": "da556c606b3eab58cd3137b296ebfdf158e63a7d5ff8072ffb1cf7a03d43f50b",
+    "measure_loaded_resource_identities.py": "60b6f76a01b7dbc5013e82d07a2adb231fc859acf856564140cf6462687d3dd7",
+    "prepare_loaded_resource_identity_checks.py": "8dcef2b7d699451ee116bd41c1baba29e24bb26e8f767498e7f69ed0ecab43b3",
+    "run_loaded_resource_identity_gpu_checks.py": "23d2145f383f04196dc4a6f5278a6c10a258d942c1e4633d226cea85b34cb717",
+    "validate_loaded_resource_identities.py": "e3a50d51fe6b21cd3c2faab244150eb4675b13cbc7b917e6fd91c3b279f900ee"
+  },
+  "archiveSha256": "2164c667c74d3d2f0000d1a314220dd83477ca59559800953a615068b61d5759"
+}

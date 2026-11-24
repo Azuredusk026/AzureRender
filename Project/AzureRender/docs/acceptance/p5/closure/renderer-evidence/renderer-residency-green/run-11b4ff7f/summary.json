@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "physicalInput": false,
+  "cases": [
+    {
+      "workflow": "platformer",
+      "thirdSceneEviction": true,
+      "emptySceneRestart": true,
+      "released": true
+    },
+    {
+      "workflow": "scene_inspector",
+      "thirdSceneEviction": true,
+      "emptySceneRestart": true,
+      "released": true
+    }
+  ]
+}

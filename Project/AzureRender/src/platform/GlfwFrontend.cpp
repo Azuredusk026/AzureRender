@@ -25,6 +25,8 @@ GlfwFrontend::GlfwFrontend(const GlfwFrontendConfig& config) {
     glfwSetWindowUserPointer(window_, config.userPointer);
     glfwSetFramebufferSizeCallback(window_, config.framebufferSizeCallback);
     glfwSetKeyCallback(window_, config.keyCallback);
+    glfwSetScrollCallback(window_, config.scrollCallback);
+    glfwSetDropCallback(window_, config.dropCallback);
 }
 
 GlfwFrontend::~GlfwFrontend() {
@@ -62,9 +64,18 @@ std::vector<const char*> GlfwFrontend::requiredVulkanExtensions() const {
 void GlfwFrontend::pollEvents() const {
     glfwPollEvents();
 }
+void GlfwFrontend::recordFileDrop(int count,const char** paths) {
+    if(count<=0||count>32||fileDrops_.size()>=32)return;
+    FileDropEvent event;glfwGetCursorPos(window_,&event.x,&event.y);
+    for(int i=0;i<count;++i)event.paths.push_back(std::filesystem::u8path(paths[i]));
+    fileDrops_.push_back(std::move(event));
+}
 
 void GlfwFrontend::waitEvents() const {
     glfwWaitEvents();
+}
+void GlfwFrontend::waitEventsTimeout(double timeoutSeconds) const {
+    glfwWaitEventsTimeout(timeoutSeconds);
 }
 
 void GlfwFrontend::requestClose() const {

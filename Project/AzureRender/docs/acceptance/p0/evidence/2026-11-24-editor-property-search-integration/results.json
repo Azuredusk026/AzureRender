@@ -1,0 +1,170 @@
+{
+  "base": "453159b50de6911f3be52e44a9595902c72c656b",
+  "editorCandidate": "9baa14fb128f65b57d90da356c89f3c01c651b8d",
+  "runtimeProduct": {
+    "executable": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+    "sha256": "2d8f837c3e89921b1717e37ccfd9b402fdef54d6b751e9e1106c5c355593ad3b",
+    "patchSha256": "262186e4806c7f354af689e75ab036d849e59d3b11b8dc7ad213865d3217d67c",
+    "base": "453159b50de6911f3be52e44a9595902c72c656b"
+  },
+  "compiledFrom": "local mainline candidate tree with preserved local modifications",
+  "nativeDriver": "595.79, NVIDIA GeForce RTX 4060 Laptop GPU",
+  "cpuChecks": [
+    "AzureEditor.EditTransaction",
+    "AzureEditor.PropertyEditing"
+  ],
+  "automatedWorkflows": {
+    "property-workflow\\run-f9fe3c37\\summary.json": [
+      {
+        "workflow": "exploration",
+        "passed": true,
+        "targets": [
+          "multi-a",
+          "multi-b"
+        ],
+        "untouched": "multi-c",
+        "axisPreservesMixedYZ": true,
+        "singleObjectControlsDisabled": true,
+        "referenceEscapeAndFocusCancel": true,
+        "referenceCapturedOwners": true,
+        "addComponentSearchAndSave": true,
+        "inspectorSearchAndClear": true,
+        "dragFocusLossCancels": true,
+        "undoRedo": true,
+        "saveReopen": true,
+        "physicalInput": false
+      },
+      {
+        "workflow": "inspector",
+        "passed": true,
+        "targets": [
+          "multi-a",
+          "multi-b"
+        ],
+        "untouched": "multi-c",
+        "axisPreservesMixedYZ": true,
+        "singleObjectControlsDisabled": true,
+        "referenceEscapeAndFocusCancel": true,
+        "referenceCapturedOwners": true,
+        "addComponentSearchAndSave": true,
+        "inspectorSearchAndClear": true,
+        "dragFocusLossCancels": true,
+        "undoRedo": true,
+        "saveReopen": true,
+        "physicalInput": false
+      }
+    ],
+    "reference-search\\summary.json": [
+      {
+        "workflow": "exploration",
+        "passed": true,
+        "physicalInput": false
+      },
+      {
+        "workflow": "inspector",
+        "passed": true,
+        "physicalInput": false
+      }
+    ]
+  },
+  "sourceInputCount": 856,
+  "historicalBundles": {
+    "Project/AzureRender/docs/plans/editor-add-component-search-2026-11-19/results.json": {
+      "resultSha256": "046862fdcf2b77825de861ae5f5f10e22f5ab4f36d641f5df37280eb9dc1b7b3",
+      "zipSha256": "e0502fb004a05183b615b3be539da9eea8426112e94c55b8b52773a480d91c1e",
+      "archiveMembers": 34
+    },
+    "Project/AzureRender/docs/plans/editor-inspector-search-2026-11-19/results.json": {
+      "resultSha256": "61527395392765136ee0f195ed7548abeb9a4ae9769f0d14bc47bb4316026c38",
+      "zipSha256": "7166a040b6c5c2d488c6ed91f8f4274871d185db8ea62ecc17aeff56b41126f4",
+      "archiveMembers": 33
+    },
+    "Project/AzureRender/docs/plans/editor-multi-properties-2026-11-19/results.json": {
+      "resultSha256": "a3b27dd482769bdbf948d8f273d6f91747bca15de0da9b426ddb2e864e3ee3f2",
+      "zipSha256": "ff997945b8ffc7fa949a7647dade9b5aef6562f98721c349cdb044848fc4667d",
+      "archiveMembers": 28
+    },
+    "Project/AzureRender/docs/plans/editor-property-drag-cancel-2026-11-19/results.json": {
+      "resultSha256": "9e1e3a5d94b47b7f1089df99203c7920b14a04569a3888274ae9022c3eec91a4",
+      "zipSha256": "ce1856e1f46ecfae74f85599c493cf35444041fa2573581c2d9b0123c115dde7",
+      "archiveMembers": 52
+    },
+    "Project/AzureRender/docs/plans/editor-property-focus-2026-11-24/results.json": {
+      "resultSha256": "274f043793696fd1714cb0c435bce0fb38ff6d285fdcea01079ab430f794da54",
+      "zipSha256": "32629de997712e00535d08659fae063bcf26c6dbc3b19e2ad14149ef2e6829f2",
+      "archiveMembers": 35
+    },
+    "Project/AzureRender/docs/plans/editor-reference-search-2026-11-19/results.json": {
+      "resultSha256": "9fca27879bb0734e42363e7fe4a85df5c4c5ad99a40fa84698f0cc4a66362bc8",
+      "zipSha256": "6cd6c59119602141cd6f195fb0960fab1f91a90f2f680f27f178ef0e3dec508c",
+      "archiveMembers": 52
+    }
+  },
+  "protectedFiles": 31,
+  "integrationPaths": [
+    "Project/AzureRender/docs/plans/editor-add-component-search-2026-11-19/.gitattributes",
+    "Project/AzureRender/docs/plans/editor-add-component-search-2026-11-19/README.md",
+    "Project/AzureRender/docs/plans/editor-add-component-search-2026-11-19/results.json",
+    "Project/AzureRender/docs/plans/editor-add-component-search-2026-11-19/verification.zip",
+    "Project/AzureRender/docs/plans/editor-inspector-search-2026-11-19/.gitattributes",
+    "Project/AzureRender/docs/plans/editor-inspector-search-2026-11-19/README.md",
+    "Project/AzureRender/docs/plans/editor-inspector-search-2026-11-19/results.json",
+    "Project/AzureRender/docs/plans/editor-inspector-search-2026-11-19/verification.zip",
+    "Project/AzureRender/docs/plans/editor-interaction-evidence.json",
+    "Project/AzureRender/docs/plans/editor-interaction-physical-review.md",
+    "Project/AzureRender/docs/plans/editor-multi-properties-2026-11-19/.gitattributes",
+    "Project/AzureRender/docs/plans/editor-multi-properties-2026-11-19/README.md",
+    "Project/AzureRender/docs/plans/editor-multi-properties-2026-11-19/results.json",
+    "Project/AzureRender/docs/plans/editor-multi-properties-2026-11-19/verification.zip",
+    "Project/AzureRender/docs/plans/editor-property-drag-cancel-2026-11-19/.gitattributes",
+    "Project/AzureRender/docs/plans/editor-property-drag-cancel-2026-11-19/README.md",
+    "Project/AzureRender/docs/plans/editor-property-drag-cancel-2026-11-19/results.json",
+    "Project/AzureRender/docs/plans/editor-property-drag-cancel-2026-11-19/verification.zip",
+    "Project/AzureRender/docs/plans/editor-property-focus-2026-11-24/.gitattributes",
+    "Project/AzureRender/docs/plans/editor-property-focus-2026-11-24/README.md",
+    "Project/AzureRender/docs/plans/editor-property-focus-2026-11-24/results.json",
+    "Project/AzureRender/docs/plans/editor-property-focus-2026-11-24/verification.zip",
+    "Project/AzureRender/docs/plans/editor-reference-search-2026-11-19/.gitattributes",
+    "Project/AzureRender/docs/plans/editor-reference-search-2026-11-19/README.md",
+    "Project/AzureRender/docs/plans/editor-reference-search-2026-11-19/results.json",
+    "Project/AzureRender/docs/plans/editor-reference-search-2026-11-19/verification.zip",
+    "Project/AzureRender/docs/plans/manual-review-manifest.json",
+    "Project/AzureRender/src/editor/commands/EditService.cpp",
+    "Project/AzureRender/src/editor/commands/EditService.hpp",
+    "Project/AzureRender/src/editor/commands/EditorOperations.cpp",
+    "Project/AzureRender/src/editor/panels/CorePanels.hpp",
+    "Project/AzureRender/src/editor/panels/InspectorPanel.cpp",
+    "Project/AzureRender/src/editor/properties/PropertyWidgets.cpp",
+    "Project/AzureRender/src/ui/localization/Catalog.inc",
+    "Project/AzureRender/tests/EditTransactionTests.cpp",
+    "Project/AzureRender/tools/test_editor_multi_properties.py",
+    "Project/AzureRender/tools/test_editor_reference_search.py"
+  ],
+  "localPlanProtected": [
+    "Project/AzureRender/docs/plans/2026-10-14-editor-generalization.md"
+  ],
+  "manualState": "待人工复验",
+  "jobs": [
+    {
+      "id": 2429,
+      "task": "mainline-editor-property-composition-build",
+      "state": "succeeded",
+      "exit_code": 0,
+      "reason": null,
+      "run_seconds": 123.71799999999348
+    },
+    {
+      "id": 2434,
+      "task": "mainline-editor-property-replays",
+      "state": "succeeded",
+      "exit_code": 0,
+      "reason": null,
+      "run_seconds": 77.71899999998277
+    }
+  ],
+  "archive": {
+    "sha256": "4bb7fd9467426b56f7de90424e278074b209c2e1de12de90b740ed382ed9a09a",
+    "bytes": 56778,
+    "members": 21
+  }
+}

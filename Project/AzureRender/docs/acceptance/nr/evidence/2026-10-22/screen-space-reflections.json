@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR5-R4",
+  "status": "public-contract-passed",
+  "formalNr5Status": "Pending",
+  "nativeFrameEquivalenceVerified": false,
+  "configurations": {
+    "debug": {
+      "gpuCaptures": 44,
+      "gpuMetrics": 60,
+      "gpu": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/gpu-production-debug-extended/summary.json",
+        "sha256": "a371c96548deb2036b3ce5eb5d8e05e6abb4a4303ebf2341b0dcce342895202b"
+      },
+      "cpu": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/cpu-production-debug-verified.log",
+        "sha256": "fa06b4da50c6ef61bccf74a5b6920a6a74479c00665a27cd2242185c8db31704"
+      },
+      "build": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/production-green-debug.log",
+        "sha256": "ed3004f19da53bfe78a1895919e73a4be664af3205eaba01b41c68e1579b0ceb"
+      }
+    },
+    "release": {
+      "gpuCaptures": 44,
+      "gpuMetrics": 60,
+      "gpu": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/gpu-production-release-extended/summary.json",
+        "sha256": "4e4f2090df677e28fa10cd2e268b9a9a9312fbbe36c10b8f8f47ea641b850d80"
+      },
+      "cpu": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/cpu-production-release-verified.log",
+        "sha256": "ec6f945960f16de7c13ee41f9317c4cd91658a5e835bb282f8a2f094561496a7"
+      },
+      "build": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/production-green-release.log",
+        "sha256": "d15541679b165fb705a98fdd02fc7465705a6b1978b0a3c12213956a468ca1cd"
+      }
+    }
+  },
+  "productionRed": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/production-red-debug.log",
+    "sha256": "09531a45f2eb411d9235da9e335cfb54960aafaf6a2ee5c44f009ddeafea9ac6"
+  },
+  "irradianceReleaseAssertionRed": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/production-irradiance-assertion-red-release.log",
+    "sha256": "d3fe880b20771f481d3c4af3cc330b5844e2d4d123c7aca7dfb474d38b354b03"
+  },
+  "affectedGpuRegression": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/gpu-regression-debug.log",
+    "sha256": "3b64e51c98b8eed31792f783a4fa2d6463cae4da3854e3d86461c7b73666538e"
+  },
+  "candidateUpgrade": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/candidate-upgrade/receipt.json",
+    "sha256": "835624c30fea16736821052df333db383bbe854acfb3120a861cb709d41ce163"
+  },
+  "jointCapture": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/joint-production/receipt.json",
+    "sha256": "0f432703ae873f2bd634b7b66079c11ea9346089377bf9ceddf12aeb573035ce"
+  },
+  "video": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/joint-production/atrium-advanced-lighting.mp4",
+    "sha256": "75a98786a06a95bd1bb8f7f47d29e12558589be9308d3519327dd576ea668d00"
+  },
+  "visualReview": {
+    "views": [
+      "fullbody",
+      "wide-first",
+      "wide-last"
+    ],
+    "groundCharacterReflectionVisible": true,
+    "antiAliasing": 1,
+    "remaining": [
+      "roughness filtering",
+      "floor three-channel surface conversion",
+      "wall reflection artifacts",
+      "hair highlights and mouth shadow",
+      "native frame binding and parity"
+    ]
+  },
+  "sources": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "a90336cf5cb4d68aae2096c671e5d6d64b9edd6a56e010bc9902e216bc717a1d"
+    },
+    {
+      "path": "src/render/ScreenSpaceReflection.hpp",
+      "sha256": "33922ff8f3e1b2d572003b1f307869e09ba1633986b480985c606b381bb58f39"
+    },
+    {
+      "path": "src/render/RenderSettings.hpp",
+      "sha256": "55de790ade3455f3050935ffada5c652698f8e8648ec07a92a5f03dd305a6f87"
+    },
+    {
+      "path": "src/render/RenderSettings.cpp",
+      "sha256": "00cfa11db6a9c5693b79a9fd0eef95357091b6421370367149be0267d7caad84"
+    },
+    {
+      "path": "src/runtime/LevelRenderSettings.hpp",
+      "sha256": "318ecc5f55d9030a46ebaa6afe86cc67a5b0813133e9611fd47cab0df64e9c72"
+    },
+    {
+      "path": "src/runtime/SceneDocument.cpp",
+      "sha256": "7e7112e213fb1231b4da5621e2654978e1d3b3a8384358db42355d5fa52b29a9"
+    },
+    {
+      "path": "src/scenes/CharacterSceneRenderer.hpp",
+      "sha256": "16cdebc3ba51722d8a6054baa7a3eb29f6fc43213ad10d3bb2b5a537be14fa36"
+    },
+    {
+      "path": "src/scenes/CharacterSceneRenderer.cpp",
+      "sha256": "bfbd378d39bd7e64b473652c26b562a729982a88ebb0d0dee8452b129ea838fb"
+    },
+    {
+      "path": "shaders/mesh.frag",
+      "sha256": "de6369eb3b2c11dad8940d72de35bfb0b36fac6868edc1aabc2cb2fc45356b4b"
+    },
+    {
+      "path": "shaders/screen_space_reflection.glsl",
+      "sha256": "4107cd135979e9c730f33c69a697a94cf374a22576a79333bbefa2d3c700d365"
+    },
+    {
+      "path": "tests/ScreenSpaceReflectionTests.cpp",
+      "sha256": "edb4726c699ffb1e4c8e809879c09344f72668e476050cf9f7b5e69c60c4e27a"
+    },
+    {
+      "path": "tests/EnvironmentSpecularTests.cpp",
+      "sha256": "b20bf76cee3dc70cf2e73b83a0d07010a0e763ab84e150c45e106eefaaf2c9df"
+    },
+    {
+      "path": "tests/IrradianceVolumeTests.cpp",
+      "sha256": "848a477b51d9aa7320c6feb7e7bb7a77334ca1f03da2174bdd50b2063ee7549a"
+    },
+    {
+      "path": "tools/test_screen_space_reflections_gpu.py",
+      "sha256": "1b2cb550d0a82333be39d957a287b3439a373e20a7adfff2030073f5645fde59"
+    }
+  ],
+  "performanceDiagnostic": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/performance-diagnostic-utf8/summary.json",
+    "sha256": "835064f6e05b3a18e6f8f33eb55c00bab112415669de5b983d0839ded18490a0"
+  },
+  "formalPerformanceAcceptance": false
+}

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "diagnosticOnly": true,
+  "probeEvents": 7,
+  "traceEvents": 409,
+  "probeSummary": {
+    "diagnosticOnly": true,
+    "successfulAllocations": 2,
+    "successfulReleases": 2,
+    "failedCalls": 3,
+    "partialOrAmbiguousCalls": 0,
+    "trackedLiveBytes": 0,
+    "liveRegions": [],
+    "completeAllocationCoverage": false
+  },
+  "unmatchedCalls": 402,
+  "sourceProof": "build/p5-p6-implementation-2026-10-10/native-allocation-proof-final.json",
+  "trace": "build\\p5-p6-implementation-2026-10-10\\returned-trace-native-final"
+}

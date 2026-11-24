@@ -1,9 +1,11 @@
 #pragma once
 
-#include "app/AzureRenderInternal.hpp"
+#include "render/RenderMath.hpp"
 
 #include <array>
 #include <cmath>
+#include <limits>
+#include <stdexcept>
 
 namespace azurerender::scene {
 
@@ -11,7 +13,18 @@ namespace azurerender::scene {
 // inside when every signed distance is non-negative.
 struct FrustumPlanes {
     std::array<std::array<float, 4>, 6> planes{};
+    float conservativeMargin=-1.F;
+    std::array<float,4> referenceWPlane{0,0,0,1};
 };
+
+inline void validateFrustumGuard(float margin,const std::array<float,4>& wPlane){
+    if(!std::isfinite(margin)||(margin<0&&margin!=-1))throw std::invalid_argument("Frustum margin must be -1 or finite nonnegative");
+    for(float v:wPlane)if(!std::isfinite(v))throw std::invalid_argument("Reference W plane must be finite");
+}
+inline float frustumRoundingBound(const std::array<float,4>& plane,const internal::Vector3& minimum,const internal::Vector3& maximum){
+    float magnitude=std::abs(plane[3]);for(unsigned i=0;i<3;++i)magnitude+=std::abs(plane[i])*std::max(std::abs(minimum[i]),std::abs(maximum[i]));
+    return 64*std::numeric_limits<float>::epsilon()*magnitude+64*std::numeric_limits<float>::min();
+}
 
 // Gribb/Hartmann plane extraction from a column-major view-projection
 // matrix. Vulkan clip volume: -w <= x,y <= w, 0 <= z <= w, so the near
@@ -57,6 +70,14 @@ struct FrustumPlanes {
     const FrustumPlanes& frustum,
     const azurerender::internal::Vector3& minimum,
     const azurerender::internal::Vector3& maximum) {
+    validateFrustumGuard(frustum.conservativeMargin,frustum.referenceWPlane);
+    if(frustum.conservativeMargin>=0){
+        for(unsigned i=0;i<3;++i)if(!std::isfinite(minimum[i])||!std::isfinite(maximum[i])||minimum[i]>maximum[i])throw std::invalid_argument("Conservative frustum bounds must be finite and ordered");
+        const auto& plane=frustum.referenceWPlane;float lo=plane[3],hi=plane[3];
+        for(unsigned i=0;i<3;++i){lo+=plane[i]*(plane[i]>=0?minimum[i]:maximum[i]);hi+=plane[i]*(plane[i]>=0?maximum[i]:minimum[i]);}
+        const float error=frustum.conservativeMargin+frustumRoundingBound(plane,minimum,maximum);
+        if(!std::isfinite(lo)||!std::isfinite(hi)||!std::isfinite(error)||(lo<=error&&hi>=-error))return true;
+    }
     for (const std::array<float, 4>& plane : frustum.planes) {
         const float positiveX =
             plane[0] >= 0.0F ? maximum[0] : minimum[0];
@@ -66,7 +87,9 @@ struct FrustumPlanes {
             plane[2] >= 0.0F ? maximum[2] : minimum[2];
         const float distance = plane[0] * positiveX + plane[1] * positiveY
             + plane[2] * positiveZ + plane[3];
-        if (distance < 0.0F) {
+        const float margin=frustum.conservativeMargin<0?0.F:frustum.conservativeMargin+frustumRoundingBound(plane,minimum,maximum);
+        if(frustum.conservativeMargin>=0&&(!std::isfinite(distance)||!std::isfinite(margin)))return true;
+        if (distance < -margin) {
             return false;
         }
     }

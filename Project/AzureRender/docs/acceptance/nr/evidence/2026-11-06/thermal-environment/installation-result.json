@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "status": "installed-restarted-services-and-fan-control-verified",
+  "recordedAt": "2026-11-06T19:20:55.630473+08:00",
+  "runtimeImplementation": "3c46f48",
+  "checkpointCommit": "24f6ca1",
+  "installerScriptExitCode": 0,
+  "sdkVersion": "1.0.91.0",
+  "preRestartBootTime": "2026-11-01T19:01:11.7567400+08:00",
+  "postRestartBootTime": "2026-11-06T18:50:19.5000000+08:00",
+  "restartCompletedObserved": true,
+  "postRestartSystem": {
+    "recordedAt": "2026-11-06T19:18:14.9790051+08:00",
+    "lastBootUpTime": "2026-11-06T18:50:19.5000000+08:00",
+    "sdkVersion": "1.0.91.0",
+    "services": [
+      {
+        "Name": "HPOmenCap",
+        "State": "Running",
+        "StartMode": "Auto",
+        "PathName": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\hpomencustomcapcomp.inf_amd64_38ec91e432e20182\\x64\\OmenCap\\OmenCap.exe"
+      },
+      {
+        "Name": "XTU3SERVICE",
+        "State": "Running",
+        "StartMode": "Auto",
+        "PathName": "C:\\WINDOWS\\SysWOW64\\XtuService.exe"
+      }
+    ],
+    "powerPlan": "\u7535\u6e90\u65b9\u6848 GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (\u5e73\u8861)\r\n",
+    "gpuSummary": "56, 0 %, 75.00 W, 80.00 W\r\n",
+    "playerSha256": "83304AC0A57077D46D45C9A8227093658AF2D9AEFCBE0564194E157733D46019"
+  },
+  "ui": {
+    "source": "Observed official OMEN Gaming Hub via sky after restart",
+    "performanceControlAvailable": true,
+    "performanceProfile": "Balanced",
+    "observations": [
+      {
+        "mode": "Auto",
+        "rpm": 3700,
+        "cpuTemperatureC": 97,
+        "gpuTemperatureC": 56,
+        "cpuUtilizationPercent": null
+      },
+      {
+        "mode": "Max-immediate",
+        "rpm": 4600,
+        "cpuTemperatureC": 89,
+        "gpuTemperatureC": 56,
+        "cpuUtilizationPercent": 21
+      },
+      {
+        "mode": "Max-after-30-seconds",
+        "rpm": 6000,
+        "cpuTemperatureC": 84,
+        "gpuTemperatureC": 52,
+        "cpuUtilizationPercent": 14
+      },
+      {
+        "mode": "Auto-restored",
+        "rpm": 6000,
+        "cpuTemperatureC": 87,
+        "gpuTemperatureC": 51,
+        "cpuUtilizationPercent": 19
+      }
+    ],
+    "fanRestoredToAuto": true,
+    "scope": "Point observations with varying background CPU load; RPM after restore is transient; no isolated temperature or native frame-time benefit claim"
+  },
+  "remaining": [
+    "Stable background workload and power/thermal evidence for formal native performance",
+    "Original CPU/GPU/visual/sustained-run acceptance"
+  ],
+  "overallAcceptance": "open",
+  "archive": {
+    "path": "installation-measurements.zip",
+    "sha256": "2401a5dc0c762d3c23744afbede4e1a94b31b81ad33899785046faed62a51d20",
+    "bytes": 8618,
+    "members": 8
+  }
+}

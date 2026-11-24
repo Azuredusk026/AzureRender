@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Azure level or prefab",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "nodes"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "type": "integer"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sceneType": {
+      "enum": [
+        "sample",
+        "character",
+        "blackhole"
+      ]
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "asset"
+        ]
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "components": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "required": [
+                "type",
+                "version",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "prefabs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "asset",
+          "instance"
+        ],
+        "properties": {
+          "overrides": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

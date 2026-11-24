@@ -1,13 +1,22 @@
 #pragma once
 
 #include <array>
+#include <algorithm>
 #include <cstddef>
 #include <cstdint>
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <filesystem>
 
 #include "scene/TransformMath.hpp"
+#include "assets/MaterialBinding.hpp"
+#include "ecs/LightShape.hpp"
+#include "render/ReflectionProbe.hpp"
+#include "render/IrradianceVolumeBinding.hpp"
+#include "render/ViewFogBinding.hpp"
+#include "ecs/ObjectShadow.hpp"
+#include <optional>
 
 namespace azurerender::scene {
 
@@ -17,6 +26,7 @@ namespace azurerender::scene {
 struct SceneResourceDesc {
     std::string id;
     std::string path;
+    std::map<std::string,MaterialBinding> materials;
 };
 
 // One placed occurrence. Nodes sharing a resourceId instance the same mesh
@@ -29,6 +39,7 @@ struct SceneNodeDesc {
     std::array<float, 3> rotation{0.0F, 0.0F, 0.0F};
     std::array<float, 3> scale{1.0F, 1.0F, 1.0F};
     bool visible = true;
+    std::optional<ecs::ObjectShadowComponent> objectShadow;
 };
 
 struct SceneLightDesc {
@@ -39,6 +50,7 @@ struct SceneLightDesc {
     float intensity = 1.0F;
     float radius = 5.0F;
     bool enabled = true;
+    LightShape shape;
 };
 
 // Engine-provided scene content for renderers. Replaces the single-asset
@@ -48,6 +60,30 @@ struct SceneDescription {
     std::vector<SceneResourceDesc> resources;
     std::vector<SceneNodeDesc> nodes;
     std::vector<SceneLightDesc> lights;
+    ReflectionProbe reflectionProbe;
+    IrradianceVolumeBinding irradianceVolume;
+    ViewFogBinding viewFog;
+};
+
+struct ResourceLayout {
+    std::vector<std::string> paths;
+    std::vector<std::string> keys;
+    std::vector<std::map<std::string,MaterialBinding>> materials;
+    std::unordered_map<std::string,std::size_t> identities;
+    explicit ResourceLayout(const SceneDescription& scene) {
+        for(const auto& resource:scene.resources){
+            const auto path=std::filesystem::u8path(resource.path).lexically_normal().generic_u8string();
+            auto key=path;
+            for(const auto& [slot,binding]:resource.materials)key+="|"+std::to_string(slot.size())+":"+slot+":"+binding.path+":"+binding.fingerprint;
+            auto found=std::find(keys.begin(),keys.end(),key);
+            const auto index=static_cast<std::size_t>(found-keys.begin());
+            if(found==keys.end()){paths.push_back(path);keys.push_back(key);materials.push_back(resource.materials);}
+            identities.emplace(resource.id,index);
+        }
+    }
+    std::size_t meshKey(const std::string& id) const {
+        const auto found=identities.find(id);return found==identities.end()?paths.size():found->second;
+    }
 };
 
 // Resolves editor node links into deterministic world transforms. The

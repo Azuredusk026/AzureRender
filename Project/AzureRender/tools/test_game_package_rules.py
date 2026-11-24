@@ -1,0 +1,263 @@
+"""Check package transactions, portable mounts, provenance and immutable hashes."""
+import json
+import os
+import pathlib
+import subprocess
+import sys
+import tempfile
+import unittest
+from unittest.mock import patch
+import build_game
+
+
+class GamePackageRules(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(prefix="azure_pack_rules_")
+        self.root = pathlib.Path(self.temp.name)
+        self.project = self.root / "source/project.azureproject"
+        self.project.parent.mkdir()
+        (self.project.parent / "content").mkdir()
+        self.project.write_text(json.dumps({"schemaVersion": 1, "id": "game", "name": "Game",
+            "mounts": [{"name": "assets", "path": "content"}], "startupScene": "assets:/start.azurelevel"}))
+        (self.project.parent / "content/start.azurelevel").write_text('{"schemaVersion":1}')
+        self.install = self.root / "engine"
+        share = self.install / "share/AzureRender"
+        (self.install / "bin").mkdir(parents=True)
+        for name in ["AzureGameLauncher.exe", "AzurePlayer.exe", "AzureRender.exe", "AzureMetaGen.exe", "rmlui.dll"]:
+            (self.install / "bin" / name).write_bytes(b"MZ fixture")
+        for name in ["shaders/game-ui.vert.spv", "shaders/game-ui.frag.spv", "assets_public/fonts/LatoLatin-Regular.ttf"]:
+            path = share / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(b"fixture")
+        (share / "runtime-build.json").write_text(json.dumps({"configuration": "Release", "architecture": "x64", "engineVersion": "0.1"}))
+        (share / "licenses").mkdir()
+        for name in build_game.REQUIRED_LICENSES:
+            (share / "licenses" / name).write_text("Upstream license fixture")
+        self.output = self.root / "published"
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def validate(self, player, project):
+        config = json.loads(project.read_text())
+        root = project.parent / config["mounts"][0]["path"]
+        if not (root / "start.azurelevel").is_file():
+            raise ValueError("Startup missing")
+
+    def build(self, **kwargs):
+        return build_game.build_game(self.project, self.install, self.output, validator=self.validate, **kwargs)
+
+    def test_native_executable_entry(self):
+        manifest=self.build()
+        self.assertEqual(manifest['entry'], 'Game.exe')
+        self.assertTrue((self.output/'Game.exe').is_file())
+        self.assertEqual(json.loads((self.output/'game-launch.json').read_text())['project'], 'game/project.azureproject')
+
+    @unittest.skipUnless(os.name == "nt", "Windows directory enumeration sharing")
+    def test_publish_retries_after_a_directory_scan_releases_its_handle(self):
+        rename = pathlib.Path.rename
+        blocked = []
+
+        def rename_with_scan(source, destination):
+            if destination != self.output or blocked:
+                return rename(source, destination)
+            with os.scandir(source / "game") as entries:
+                next(entries)
+                try:
+                    return rename(source, destination)
+                except PermissionError as error:
+                    blocked.append(error.winerror)
+                    raise
+
+        with patch.object(pathlib.Path, "rename", rename_with_scan):
+            self.build()
+
+        self.assertEqual(len(blocked), 1)
+        self.assertIn(blocked[0], (5, 32, 33))
+        build_game.verify_package(self.output)
+        self.assertFalse(list(self.root.glob(".published-candidate-*")))
+
+    def test_project_settings_survive_portable_packaging(self):
+        settings = self.project.parent / "config/engine-settings.json"
+        settings.parent.mkdir()
+        settings.write_text(json.dumps({"schemaVersion": 1, "values": {"render.exposure": 1.25}}), encoding="utf-8")
+        self.build()
+        self.assertEqual((self.output / "game/config/engine-settings.json").read_bytes(), settings.read_bytes())
+        build_game.verify_package(self.output)
+
+    def test_reference_views_and_profile_survive_portable_packaging(self):
+        config = self.project.parent / "config"
+        config.mkdir()
+        views = config / "reference-views.json"
+        views.write_text(json.dumps({"schemaVersion": 1, "views": {"objects": {}},
+            "objectVisibilityArithmetic": "profile-v1"}), encoding="utf-8")
+        profile = config / "object-visibility-profile-v1.bin"
+        profile.write_bytes(b"\x55" * 2097152)
+        (config / "editor-only.json").write_text("{}")
+        manifest = self.build()
+        installed = self.output / "game/config"
+        self.assertEqual((installed / views.name).read_bytes(), views.read_bytes())
+        self.assertEqual(build_game.digest(installed / profile.name), build_game.digest(profile))
+        self.assertFalse((installed / "editor-only.json").exists())
+        entries = {entry["path"]: entry for entry in manifest["files"]}
+        self.assertEqual(entries["game/config/" + profile.name]["sha256"], build_game.digest(profile))
+        build_game.verify_package(self.output)
+        (installed / profile.name).unlink()
+        with self.assertRaises(ValueError):
+            build_game.verify_package(self.output)
+        previous = (self.output / "game_manifest.json").read_bytes()
+        profile.unlink()
+        with self.assertRaisesRegex(ValueError, "profile"):
+            self.build(replace=True)
+        self.assertEqual((self.output / "game_manifest.json").read_bytes(), previous)
+
+    def test_portable_tree_and_hashes(self):
+        cache = self.project.parent / "content/.azure"
+        cache.mkdir()
+        (cache / "private-machine-cache").write_text("cache")
+        self.build()
+        build_game.verify_package(self.output)
+        self.assertEqual(json.loads((self.output / "game/project.azureproject").read_text())["mounts"][0]["path"], "assets")
+        self.assertFalse((self.output / "bin/AzureRender.exe").exists())
+        self.assertFalse((self.output / "bin/AzureMetaGen.exe").exists())
+        self.assertFalse((self.output / "game/assets/.azure").exists())
+
+        (self.output / "game/assets/start.azurelevel").write_text("tamper")
+        with self.assertRaises(ValueError):
+            build_game.verify_package(self.output)
+
+    def test_failure_retains_existing_package(self):
+        self.build()
+        original = (self.output / "game_manifest.json").read_bytes()
+        def fail(player, project):
+            if project.parent.name == "game":
+                raise ValueError("Candidate validation failed")
+        with self.assertRaises(ValueError):
+            build_game.build_game(self.project, self.install, self.output, replace=True, validator=fail)
+        self.assertEqual((self.output / "game_manifest.json").read_bytes(), original)
+        build_game.verify_package(self.output)
+        self.assertFalse(list(self.root.glob(".published-candidate-*")))
+
+    def test_successful_replace_and_conflict(self):
+        self.build()
+        with self.assertRaises(ValueError):
+            self.build()
+        (self.project.parent / "content/extra.txt").write_text("extra")
+        self.build(replace=True)
+        self.assertTrue((self.output / "game/assets/extra.txt").is_file())
+        build_game.verify_package(self.output)
+
+    def test_release_fonts_and_private_boundary(self):
+        metadata = self.install / "share/AzureRender/runtime-build.json"
+        metadata.write_text('{"configuration":"Debug","architecture":"x64"}')
+        with self.assertRaises(ValueError):
+            self.build()
+        metadata.write_text('{"configuration":"Release","architecture":"x64"}')
+        secret = self.project.parent / "content/assets_private"
+        secret.mkdir()
+        (secret / "secret.gltf").write_text("secret")
+        with self.assertRaises(ValueError):
+            self.build()
+        secret.rename(secret.with_name("ordinary"))
+        (self.install / "share/AzureRender/assets_public/fonts/LatoLatin-Regular.ttf").unlink()
+        with self.assertRaises(ValueError):
+            self.build()
+
+    def test_vector_and_chinese_licenses_are_required(self):
+        self.assertIn("NanoSVG-LICENSE.txt", build_game.REQUIRED_LICENSES)
+        self.assertIn("NotoSansCJK-LICENSE.txt", build_game.REQUIRED_LICENSES)
+
+    def test_output_cannot_overlap_inputs(self):
+        with self.assertRaises(ValueError):
+            build_game.build_game(self.project, self.install, self.project.parent / "out", validator=self.validate)
+        self.output.mkdir()
+        (self.output / "user-file.txt").write_text("preserve")
+        with self.assertRaises(ValueError):
+            self.build(replace=True)
+        self.assertEqual((self.output / "user-file.txt").read_text(), "preserve")
+
+    def test_private_mount_name_is_rejected(self):
+        config = json.loads(self.project.read_text())
+        config["mounts"][0]["name"] = "assets_private"
+        self.project.write_text(json.dumps(config))
+        with self.assertRaises(ValueError):
+            self.build()
+
+    def test_delivery_documents_are_immutable(self):
+        (self.project.parent / "GAME-GUIDE.md").write_text("Controls and quest")
+        (self.project.parent / "QUALITY.json").write_text('{"width":1920,"height":1080}')
+        self.build()
+        self.assertEqual((self.output / "GAME-GUIDE.md").read_text(), "Controls and quest")
+        self.assertEqual(json.loads((self.output / "QUALITY.json").read_text())["width"], 1920)
+        self.assertIn("--width 1920 --height 1080", (self.output / "start-game.cmd").read_text())
+        (self.output / "GAME-GUIDE.md").write_text("tamper")
+        with self.assertRaises(ValueError):
+            build_game.verify_package(self.output)
+
+    def test_delivery_document_directory_is_rejected(self):
+        (self.project.parent / "GAME-GUIDE.md").mkdir()
+        with self.assertRaises(ValueError):
+            self.build()
+
+    def test_delivery_resolution_rejects_command_text(self):
+        (self.project.parent / "QUALITY.json").write_text('{"width":"1920 & echo injected","height":1080}')
+        with self.assertRaises(ValueError):
+            self.build()
+
+    def test_delivery_quality_requires_an_object(self):
+        (self.project.parent / "QUALITY.json").write_text('[]')
+        with self.assertRaises(ValueError):
+            self.build()
+
+    def test_project_validation_default_budget(self):
+        with patch.object(build_game.subprocess,'run',return_value=subprocess.CompletedProcess([],0,'','')) as launch:
+            build_game.validate_project(self.install/'bin/AzurePlayer.exe',self.project)
+        self.assertEqual(launch.call_args.kwargs['timeout'],1800)
+
+    def test_explicit_budget_reaches_both_player_checks(self):
+        with patch.object(build_game.subprocess,'run',return_value=subprocess.CompletedProcess([],0,'','')) as launch:
+            build_game.build_game(self.project,self.install,self.output,validation_timeout=61.25)
+        self.assertEqual(launch.call_count,2)
+        self.assertEqual([call.kwargs['timeout'] for call in launch.call_args_list],[61.25,61.25])
+        self.assertEqual(launch.call_args_list[0].args[0][1:],['--project',str(self.project),'--check-project'])
+        self.assertEqual(launch.call_args_list[1].args[0][-1],'--check-project')
+        build_game.verify_package(self.output)
+
+    def test_direct_validation_budget(self):
+        for budget in [.25,3600]:
+            with patch.object(build_game.subprocess,'run',return_value=subprocess.CompletedProcess([],0,'','')) as launch:
+                build_game.validate_project(self.install/'bin/AzurePlayer.exe',self.project,timeout=budget)
+            self.assertEqual(launch.call_args.kwargs['timeout'],budget)
+
+    def test_invalid_validation_budgets_reject_before_launch(self):
+        for budget in [0,-1,True,'60',float('nan'),float('inf'),3600.01,10**1000]:
+            with self.subTest(budget=budget),patch.object(build_game.subprocess,'run') as launch:
+                with self.assertRaises(ValueError):
+                    build_game.build_game(self.project,self.install,self.output,validation_timeout=budget)
+                launch.assert_not_called()
+                self.assertFalse(self.output.exists())
+                with self.assertRaises(ValueError):
+                    build_game.validate_project(self.install/'bin/AzurePlayer.exe',self.project,timeout=budget)
+                launch.assert_not_called()
+
+    def test_validation_timeout_retains_existing_package(self):
+        self.build();original=(self.output/'game_manifest.json').read_bytes()
+        def validate(player,project,timeout):
+            if project.parent.name=='game':raise subprocess.TimeoutExpired([str(player)],timeout)
+        with patch.object(build_game,'validate_project',side_effect=validate):
+            with self.assertRaises(subprocess.TimeoutExpired):
+                build_game.build_game(self.project,self.install,self.output,replace=True,validation_timeout=.01)
+        self.assertEqual((self.output/'game_manifest.json').read_bytes(),original)
+        build_game.verify_package(self.output)
+        self.assertFalse(list(self.root.glob('.published-candidate-*')))
+
+    def test_cli_rejects_nonfinite_validation_budget(self):
+        result=subprocess.run([sys.executable,str(pathlib.Path(build_game.__file__)),'--project',str(self.project),
+            '--install',str(self.install),'--output',str(self.output),'--validation-timeout','nan'],capture_output=True,text=True)
+        self.assertEqual(result.returncode,1,result.stdout+result.stderr)
+        self.assertIn('validation timeout',result.stderr.lower())
+        self.assertFalse(self.output.exists())
+
+
+if __name__ == "__main__":
+    unittest.main()

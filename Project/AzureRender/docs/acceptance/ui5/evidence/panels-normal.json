@@ -1,0 +1,81 @@
+{
+  "root": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui5\\panels-first\\run-633e17bf",
+  "passed": true,
+  "workflows": [
+    {
+      "project": "scene_inspector",
+      "size": [
+        1920,
+        1080
+      ],
+      "dpi": 1,
+      "consoleSearch": true,
+      "pause": true,
+      "emptyFilter": true,
+      "clearFilter": true
+    },
+    {
+      "project": "scene_inspector",
+      "size": [
+        1280,
+        720
+      ],
+      "dpi": 1,
+      "consoleSearch": true,
+      "pause": true,
+      "emptyFilter": true,
+      "clearFilter": true
+    },
+    {
+      "project": "scene_inspector",
+      "size": [
+        1920,
+        1080
+      ],
+      "dpi": 1.5,
+      "consoleSearch": true,
+      "pause": true,
+      "emptyFilter": true,
+      "clearFilter": true
+    },
+    {
+      "project": "exploration",
+      "size": [
+        1920,
+        1080
+      ],
+      "dpi": 1,
+      "consoleSearch": true,
+      "pause": true,
+      "emptyFilter": true,
+      "clearFilter": true
+    },
+    {
+      "project": "exploration",
+      "size": [
+        1280,
+        720
+      ],
+      "dpi": 1,
+      "consoleSearch": true,
+      "pause": true,
+      "emptyFilter": true,
+      "clearFilter": true
+    },
+    {
+      "project": "exploration",
+      "size": [
+        1920,
+        1080
+      ],
+      "dpi": 1.5,
+      "consoleSearch": true,
+      "pause": true,
+      "emptyFilter": true,
+      "clearFilter": true
+    }
+  ],
+  "levelFilter": true,
+  "input": "production ImGui replay",
+  "physicalInput": "not performed"
+}

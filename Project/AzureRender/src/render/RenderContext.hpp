@@ -1,18 +1,25 @@
 #pragma once
+#include <map>
 
 #include <vulkan/vulkan.h>
 
 #include <cstdint>
+#include <array>
 #include <limits>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
 
 #include "render/EnvironmentAsset.hpp"
+#include "animation/AnimationClipSample.hpp"
+#include "render/RenderCamera.hpp"
 #include "scene/SceneDescription.hpp"
 
 // Defined in assets/GltfLoader.hpp (global namespace).
 struct LoadedAsset;
+struct AssetPose;
+struct ExpressionPose;
 
 namespace azurerender {
 
@@ -20,9 +27,14 @@ namespace rhi {
 class IGpuAllocator;
 class IRhi;
 class ICommandRecorder;
+struct RenderPassDesc;
 }
 
 struct RenderSettings;
+struct ScreenObjectVisibilityNumerics;
+class MotionVectorTarget;
+class RecordingWorkerPool;
+struct TemporalPreparedFrame;
 
 // Opt-in per-frame submission counters. The engine owns the storage and passes
 // a pointer through RenderContext; a scene renderer increments the fields while
@@ -43,10 +55,14 @@ struct SceneSubmissionCounters {
 // editor integration (picking, gizmos, HUD). A renderer without pickable
 // geometry (e.g. the blackhole renderer) leaves the pointer null.
 struct RendererSceneState {
+    std::uint32_t accumulatedSamples=0,targetSamples=0;
+    struct Pickable { std::string node; const LoadedAsset* asset=nullptr; std::array<float,16> model{}; const AssetPose* pose=nullptr; std::array<float,2> morph{}; };
+    std::vector<Pickable> pickables;
     const LoadedAsset* asset = nullptr;
     const float* modelMatrix = nullptr;  // 16 floats, column-major
     std::int32_t selectedPrimitiveIndex = -1;
     std::size_t primitiveCount = 0;
+    const TemporalPreparedFrame* temporalFrame = nullptr;
 };
 
 // Declares what a scene renderer needs from the engine-owned frame.
@@ -54,14 +70,28 @@ struct RendererSceneState {
 // renderer is loaded, so a scene renderer can never silently depend on a
 // resource the engine does not provide.
 struct SceneRendererCapabilities {
-    static constexpr std::uint32_t kApiVersion = 1;
+    static constexpr std::uint32_t kApiVersion = 17;
 
     bool requiresSceneDepth = true;
     bool requiresSceneNormal = true;
     // Diagnostic view names shown by the engine HUD / technical sequence.
     // Index 0 must be the Beauty (final composite) name.
     std::vector<std::string> diagnosticViewNames;
+    bool supportsProjectionOffset=false;
+    bool supportsMotionVectors=false;
+    bool supportsMultisampleShading=false;
+    bool supportsMaterialDisplayTransform=false;
+    bool supportsMaterialLightingReception=false;
+    bool supportsNprRampComposition=false;
+    bool supportsMaterialCoverage=false;
+    bool supportsReferenceCamera=false;
 };
+inline void validateSceneRendererCamera(const SceneRendererCapabilities& capabilities,const CameraViewDescriptor& camera){
+    if(camera.referenceCalibration&&!capabilities.supportsReferenceCamera)
+        throw std::invalid_argument("Scene renderer does not support reference camera calibration");
+    if((camera.projectionOffsetX!=0||camera.projectionOffsetY!=0)&&!capabilities.supportsProjectionOffset)
+        throw std::invalid_argument("Scene renderer does not support camera projection offsets");
+}
 
 inline void validateSceneRendererCapabilities(
     const SceneRendererCapabilities& capabilities) {
@@ -76,20 +106,40 @@ inline void validateSceneRendererCapabilities(
 // simulation state (camera, animation, QA flags) is forwarded here so the
 // engine stays the single owner of host-level input while the renderer owns
 // the scene rendering itself.
+struct NodeAnimationFrame {
+    std::string node;
+    std::uint32_t clip = 0;
+    double time = 0;
+    bool loop = true;
+    std::uint32_t previousClip = 0;
+    double previousTime = 0;
+    float blend = 1;
+    bool previousLoop = true;
+    std::array<float, 2> morph{};
+    std::vector<float> morphOverrides;
+    std::shared_ptr<const ExpressionPose> expression;
+    float expressionWeight=1;
+    std::vector<AnimationClipSample> samples;
+};
 struct SceneFrameData {
     float deltaSeconds = 0.0F;
     double timeSeconds = 0.0;
 
     const RenderSettings* renderSettings = nullptr;
+    std::shared_ptr<const scene::SceneDescription> sceneSnapshot;
+    std::vector<NodeAnimationFrame> animations;
 
     float cameraPosition[3]{0.0F, 0.0F, 0.0F};
     float cameraTarget[3]{0.0F, 0.0F, 0.0F};
+    bool cameraOverride=false;
+    RenderCamera camera;
     float rotationAngle = 0.0F;
 
     std::uint32_t qaIsolationMode = 0;
     std::uint32_t qaEffectMode = 0;
     bool qaEffectEnabled = true;
     bool qaHarnessEnabled = false;
+    bool qaLightScan = false;
 
     std::uint64_t capturedFrames = 0;
     std::uint32_t captureFps = 60;
@@ -115,6 +165,7 @@ struct SceneFrameData {
 // framebuffer are owned by the engine and outlive the renderer; the renderer
 // must never destroy them.
 struct RenderContext {
+    const std::map<std::string,std::shared_ptr<const LoadedAsset>>* preparedMeshes=nullptr;
     VkDevice device = VK_NULL_HANDLE;
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
     VkQueue graphicsQueue = VK_NULL_HANDLE;
@@ -135,20 +186,31 @@ struct RenderContext {
     // global texture array instead of per-material descriptor sets. False
     // selects the fixed-table path.
     bool bindlessTextures = false;
+    // Ordinary descriptor-layout limits queried from the active physical
+    // device. Zero denotes unknown capacity and prevents indexed selection.
+    VkPhysicalDeviceLimits descriptorLimits{};
 
     // R16G16B16A16_SFLOAT supports storage-image writes on this device.
     bool rgba16fStorageImage = false;
 
-    // Compute skinning/morph is available on the active queue and enabled
-    // for this run. False selects vertex-shader skinning/morph.
+    // Compute execution is supported by the active queue.
+    bool computeShaders = false;
+    // Skinning/morph is enabled for this run; false selects vertex skinning.
     bool computeSkinning = false;
     bool gpuCulling = false;
+    bool referenceCameraPrograms = false;
+    bool referenceSceneDepthPrograms = false;
+    bool referenceSceneVisibilityPrograms = false;
+    bool referenceSceneObjectVisibilityPrograms = false;
+    bool visibilityPrototype = false;
     bool multiDrawIndirect = false;
     std::uint32_t maxDrawIndirectCount = 1;
 
     // Frustum culling by instance bounds. Renderers may skip instances
     // outside the view frustum; when false every instance is submitted.
     bool cullingEnabled = true;
+    bool faceCullingEnabled = true;
+    bool depthTestEnabled = true;
 
     // QA stress knob: how many clones of the default asset entity the
     // renderer submits per frame.
@@ -164,7 +226,10 @@ struct RenderContext {
     VkFormat sceneColorFormat = VK_FORMAT_UNDEFINED;
     VkFormat depthFormat = VK_FORMAT_UNDEFINED;
     VkFormat normalFormat = VK_FORMAT_R8G8B8A8_UNORM;
+    // Optional R8_UNORM scene-display coverage, attached after the normal target.
+    bool displayMaskEnabled=false;
 
+    VkSampleCountFlagBits rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;
     VkRenderPass sceneRenderPass = VK_NULL_HANDLE;
     VkRenderPass postProcessRenderPass = VK_NULL_HANDLE;
     VkPipelineLayout postProcessPipelineLayout = VK_NULL_HANDLE;
@@ -179,16 +244,25 @@ struct RenderContext {
     VkRenderPass shadowRenderPass = VK_NULL_HANDLE;
     VkFramebuffer shadowFramebuffer = VK_NULL_HANDLE;
     VkImageView shadowImageView = VK_NULL_HANDLE;
+    VkImage shadowImage = VK_NULL_HANDLE;
     VkSampler shadowSampler = VK_NULL_HANDLE;
     std::uint32_t shadowMapSize = 2048;
 
     // Current in-flight scene framebuffer the renderer records into.
     VkFramebuffer sceneFramebuffer = VK_NULL_HANDLE;
+    // Optional single-sample framebuffer metadata and borrowed mip-zero images.
+    // Color images follow the pass's color-reference order. The host keeps
+    // these bindings alive for every recorded consumer of this frame.
+    std::shared_ptr<const rhi::RenderPassDesc> scenePassDescription;
+    VkImage sceneDepthImage=VK_NULL_HANDLE;
+    VkImageView sceneDepthView=VK_NULL_HANDLE;
+    std::array<VkImage,3> sceneColorImages{};
 
     // Scene content the renderer instantiates on onLoad: referenced assets
     // and placed nodes. Single-asset scenes carry exactly one resource and
     // one node.
     scene::SceneDescription scene;
+    bool sceneWorldCoordinates = false;
     // Directory holding compiled .spv shaders for renderer pipelines.
     std::string shaderDirectory;
     // Scene-independent environment source. Renderers may sample the shared
@@ -206,6 +280,23 @@ struct RenderContext {
     SceneSubmissionCounters* submissionCounters = nullptr;
 
     const RenderSettings* renderSettings = nullptr;
+    // View-owned output. Retire renderer recording before replacing this target.
+    MotionVectorTarget* motionOutput = nullptr;
+    RecordingWorkerPool* preparationWorkers = nullptr;
+    // An editor replacement may compile graphics pipelines while the active
+    // renderer continues to submit frames. Uploads remain on the device owner.
+    bool backgroundPipelinePreparation = false;
+    bool fragmentPrimitiveIdentity = false;
+    bool fragmentStorageAtomics = false;
+    bool fragmentQuadControl = false;
+    // The project may supply immutable arithmetic data for its reference views.
+    std::shared_ptr<const ScreenObjectVisibilityNumerics> referenceObjectVisibilityNumerics;
 };
+inline std::uint32_t sceneColorAttachmentCount(const RenderContext& context) noexcept {
+    return context.displayMaskEnabled?3U:2U;
+}
+inline VkClearValue sceneDisplayMaskClearValue() noexcept {
+    VkClearValue value{};value.color.float32[0]=1;return value;
+}
 
 }  // namespace azurerender

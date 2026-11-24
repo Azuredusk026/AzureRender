@@ -37,12 +37,13 @@ def main():
                 item["uri"] = (asset.parent / uri).resolve().as_posix()
     primitive = document["meshes"][0]["primitives"][0]
     target = primitive["targets"][0]
-    primitive["targets"] = [target, target, target]
+    for part in document["meshes"][0]["primitives"]:
+        part["targets"] = [target] * 65
     with tempfile.TemporaryDirectory(prefix="azr-morph-limit-") as directory:
         fixture = Path(directory) / "too-many-targets.gltf"
         fixture.write_text(json.dumps(document), encoding="utf-8")
         output = run(executable, ["--asset", str(fixture), "--smoke-frames", "1"], False)
-        if "supports at most 2" not in output:
+        if "supports at most 64" not in output:
             raise RuntimeError("Morph fixture failed without the expected limit diagnostic: " + output)
     print("Sample timing and Morph limit regressions passed")
 

@@ -1,0 +1,82 @@
+{
+  "build": {
+    "scope": "reconstructed historical source",
+    "source": "cd8d95dd004a59f58ef134b8a9ba34ed2a3abfe2",
+    "builtPlayerSha256": "47775ae433c32d5e4a062e4a02c4dde70aebec8f1a82705e1f58e425db0e5e0d",
+    "frozenPlayerSha256": "2a079225f4b60cdec94d3030f92332c042d9f75b54f803b6a93bf12042f95da8",
+    "builtShaders": 535,
+    "frozenShaders": 535,
+    "matchingShaders": 535,
+    "missingShaders": [],
+    "changedShaders": []
+  },
+  "driver": "595.79",
+  "frames": [
+    {
+      "name": "frame_000000.png",
+      "actualSha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+      "frozenDeltaPixels": 228,
+      "frozenDeltaMaximum": 1,
+      "main59579DeltaPixels": 0,
+      "main59579DeltaMaximum": 0
+    },
+    {
+      "name": "frame_000001.png",
+      "actualSha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+      "frozenDeltaPixels": 330,
+      "frozenDeltaMaximum": 7,
+      "main59579DeltaPixels": 0,
+      "main59579DeltaMaximum": 0
+    },
+    {
+      "name": "frame_000002.png",
+      "actualSha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+      "frozenDeltaPixels": 397,
+      "frozenDeltaMaximum": 37,
+      "main59579DeltaPixels": 0,
+      "main59579DeltaMaximum": 0
+    },
+    {
+      "name": "frame_000003.png",
+      "actualSha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+      "frozenDeltaPixels": 421,
+      "frozenDeltaMaximum": 23,
+      "main59579DeltaPixels": 0,
+      "main59579DeltaMaximum": 0
+    }
+  ],
+  "recordedSourceMatches": {
+    "src/assets/GltfLoader.cpp": {
+      "rebuiltSourceSha256": "8ea16a7616d1b806813434d792a71aa71f697b7a119a17144a51974b62d5f6ae",
+      "frozenCanonicalSha256": "8ea16a7616d1b806813434d792a71aa71f697b7a119a17144a51974b62d5f6ae",
+      "matches": true
+    },
+    "src/scenes/CharacterOutlinePass.inc": {
+      "rebuiltSourceSha256": "94a0ccab2515339b7fa4fde0aadc859ff9ea8520f00d2104fcc4864e3a02949d",
+      "frozenCanonicalSha256": "94a0ccab2515339b7fa4fde0aadc859ff9ea8520f00d2104fcc4864e3a02949d",
+      "matches": true
+    },
+    "src/scenes/CharacterSceneRenderer.cpp": {
+      "rebuiltSourceSha256": "3b430d6668e6413c96d4f5d291c2b9dd47ed0e1b4475f3dfd87adef1a4cffe3a",
+      "frozenCanonicalSha256": "3b430d6668e6413c96d4f5d291c2b9dd47ed0e1b4475f3dfd87adef1a4cffe3a",
+      "matches": true
+    },
+    "src/scenes/CharacterSceneRenderer.hpp": {
+      "rebuiltSourceSha256": "19847f0dc165064b77128ea2a2805ae90f9d572dac8847e49cfa1b7f72f29a9d",
+      "frozenCanonicalSha256": "19847f0dc165064b77128ea2a2805ae90f9d572dac8847e49cfa1b7f72f29a9d",
+      "matches": true
+    },
+    "tests/CharacterRepairTests.cpp": {
+      "rebuiltSourceSha256": "17ebacc3cd2aeb3ee9c6c5bec28fe0783024e87371a147d41390d4ec3c302897",
+      "frozenCanonicalSha256": "17ebacc3cd2aeb3ee9c6c5bec28fe0783024e87371a147d41390d4ec3c302897",
+      "matches": true
+    },
+    "tests/OutlineCoverageRecordingTests.cpp": {
+      "rebuiltSourceSha256": "366c57c1b3bfd4143a938e1ab01fecc76fe2ce35a5b654b45b1527db6a931947",
+      "frozenCanonicalSha256": "366c57c1b3bfd4143a938e1ab01fecc76fe2ce35a5b654b45b1527db6a931947",
+      "matches": true
+    }
+  },
+  "archiveMembers": 17,
+  "archiveSha256": "aad5161fd842cdb5932cb44d0c50f2be35eaf970c25a87dc5d66ea4eddef5b8a"
+}

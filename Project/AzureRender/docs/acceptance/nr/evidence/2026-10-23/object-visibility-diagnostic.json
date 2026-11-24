@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "scope": "Public object visibility diagnostic; native leg visibility mismatch remains open",
+  "run": "build/runs/20261023-205700-character-visibility-inputs-01a025",
+  "checks": [
+    {
+      "config": "release",
+      "cliLog": "build/runs/20261023-205700-character-visibility-inputs-01a025/cli-release.log",
+      "publicGpu": {
+        "schemaVersion": 1,
+        "status": "passed",
+        "playerSha256": "8338e65943ad0bc99dcc7f66992d08d519eb2abff4db8dae7bf10948e0a73ac2",
+        "captures": [
+          {
+            "name": "visibility",
+            "validationEnabled": false,
+            "objectPages": 1,
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "shadowMean": 0.0,
+            "control": [
+              255,
+              255,
+              255
+            ],
+            "imageSha256": "1d57fbda45dc8e1026505eaa6eecc758ab8a17bcca90ad5d3ee55f505e908b23"
+          },
+          {
+            "name": "visibility-lit",
+            "validationEnabled": false,
+            "objectPages": 1,
+            "center": [
+              255,
+              255,
+              255
+            ],
+            "shadowMean": 255.0,
+            "control": [
+              255,
+              255,
+              255
+            ],
+            "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc"
+          },
+          {
+            "name": "visibility-disabled",
+            "validationEnabled": false,
+            "objectPages": 0,
+            "center": [
+              255,
+              255,
+              255
+            ],
+            "shadowMean": 255.0,
+            "control": [
+              255,
+              255,
+              255
+            ],
+            "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc"
+          }
+        ]
+      }
+    },
+    {
+      "config": "debug",
+      "cliLog": "build/runs/20261023-205700-character-visibility-inputs-01a025/cli-debug.log",
+      "publicGpu": {
+        "schemaVersion": 1,
+        "status": "passed",
+        "playerSha256": "b0451cf6ff2d3e8f2c08ba29146e71505dd38a4f652cde9a9ad3094148a0b42d",
+        "captures": [
+          {
+            "name": "visibility",
+            "validationEnabled": true,
+            "objectPages": 1,
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "shadowMean": 0.0,
+            "control": [
+              255,
+              255,
+              255
+            ],
+            "imageSha256": "1d57fbda45dc8e1026505eaa6eecc758ab8a17bcca90ad5d3ee55f505e908b23"
+          },
+          {
+            "name": "visibility-lit",
+            "validationEnabled": true,
+            "objectPages": 1,
+            "center": [
+              255,
+              255,
+              255
+            ],
+            "shadowMean": 255.0,
+            "control": [
+              255,
+              255,
+              255
+            ],
+            "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc"
+          },
+          {
+            "name": "visibility-disabled",
+            "validationEnabled": true,
+            "objectPages": 0,
+            "center": [
+              255,
+              255,
+              255
+            ],
+            "shadowMean": 255.0,
+            "control": [
+              255,
+              255,
+              255
+            ],
+            "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc"
+          }
+        ]
+      }
+    }
+  ],
+  "actual": [
+    {
+      "playerSha256": "8338e65943ad0bc99dcc7f66992d08d519eb2abff4db8dae7bf10948e0a73ac2",
+      "points": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        }
+      ],
+      "config": "release",
+      "imageSha256": "44f7be729360e24deca7bfdec4b9adcf3fd3d0148a6d310ceafe015236c93630",
+      "manifest": {
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "width": 2560,
+        "height": 1440,
+        "qaIsolation": "object-shadow-visibility",
+        "instanceDataLayoutVersion": 2,
+        "materialSurfaceProfileLayoutVersion": 7,
+        "objectShadowPages": 1,
+        "objectShadowDepthBytes": 16777216,
+        "gradeSettings": {
+          "schemaVersion": 2,
+          "exposureEv": 0,
+          "saturation": 1,
+          "contrast": 1,
+          "tint": [
+            1,
+            1,
+            1
+          ],
+          "toneMappingEnabled": false,
+          "lut": {
+            "schemaVersion": 1,
+            "asset": "",
+            "exposureMultiplier": 1,
+            "dimension": 0,
+            "inputDomain": "linear",
+            "outputDomain": "linear",
+            "fingerprintAlgorithm": "FNV-1a-64",
+            "fingerprint": ""
+          }
+        }
+      }
+    },
+    {
+      "playerSha256": "b0451cf6ff2d3e8f2c08ba29146e71505dd38a4f652cde9a9ad3094148a0b42d",
+      "points": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        }
+      ],
+      "config": "debug",
+      "imageSha256": "44f7be729360e24deca7bfdec4b9adcf3fd3d0148a6d310ceafe015236c93630",
+      "manifest": {
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "width": 2560,
+        "height": 1440,
+        "qaIsolation": "object-shadow-visibility",
+        "instanceDataLayoutVersion": 2,
+        "materialSurfaceProfileLayoutVersion": 7,
+        "objectShadowPages": 1,
+        "objectShadowDepthBytes": 16777216,
+        "gradeSettings": {
+          "schemaVersion": 2,
+          "exposureEv": 0,
+          "saturation": 1,
+          "contrast": 1,
+          "tint": [
+            1,
+            1,
+            1
+          ],
+          "toneMappingEnabled": false,
+          "lut": {
+            "schemaVersion": 1,
+            "asset": "",
+            "exposureMultiplier": 1,
+            "dimension": 0,
+            "inputDomain": "linear",
+            "outputDomain": "linear",
+            "fingerprintAlgorithm": "FNV-1a-64",
+            "fingerprint": ""
+          }
+        }
+      }
+    }
+  ],
+  "nativeLinearVisibility": [
+    0.0196078431372549,
+    1,
+    1,
+    1
+  ],
+  "candidateLinearVisibility": [
+    0,
+    1,
+    1,
+    1
+  ],
+  "fixedIndexedByteEqual": true
+}

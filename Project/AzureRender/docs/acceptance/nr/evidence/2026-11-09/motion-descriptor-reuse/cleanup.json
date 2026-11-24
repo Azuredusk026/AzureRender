@@ -1,0 +1,42 @@
+{
+  "removed": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-102841-motion-descriptor-reuse-af9de2\\image-final-motion-bindings\\frames-104116\\frame_000000.png",
+      "result": [
+        5714675,
+        1794192219.6798131
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-102841-motion-descriptor-reuse-af9de2\\image-final-motion-bindings\\frames-104116\\frame_000001.png",
+      "result": [
+        5713820,
+        1794192220.5442107
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-102841-motion-descriptor-reuse-af9de2\\image-final-motion-bindings\\frames-104116\\frame_000002.png",
+      "result": [
+        5713834,
+        1794192221.395978
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-102841-motion-descriptor-reuse-af9de2\\image-final-motion-bindings\\frames-104116\\frame_000003.png",
+      "result": [
+        5714218,
+        1794192222.3484826
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-102841-motion-descriptor-reuse-af9de2\\tmp",
+      "result": [
+        276,
+        1794192223.1356888
+      ]
+    }
+  ],
+  "freeBefore": 157880107008,
+  "freeAfter": 157902974976,
+  "observedFreedBytes": 22867968
+}

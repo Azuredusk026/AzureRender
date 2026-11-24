@@ -1,9 +1,30 @@
+#include "ui/localization/Localization.hpp"
+#include "editor/panels/CorePanels.hpp"
+#include "ui/BrandMark.hpp"
+#include "platform/WindowIcon.hpp"
+#include "runtime/InputPreferences.hpp"
 #include "ImGuiEditorLayer.hpp"
+#include "render/RenderMath.hpp"
+#include "render/CameraProjection.hpp"
+#include <cstdio>
+#include "input/EditorInputRouter.hpp"
+#include "EditorTheme.hpp"
+#include "panels/UiCatalogPanel.hpp"
+#include "EditorToolbar.hpp"
+#include "resources/ResourceLocator.hpp"
+#include "foundation/Environment.hpp"
+#include <GLFW/glfw3.h>
+#include <cstdlib>
+#include "reflection/Registry.hpp"
+#include "runtime/ComponentRegistry.hpp"
+#include "ecs/Components.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "extensions/ExtensionRegistry.hpp"
+#include "editor/GameplayDebugGeometry.hpp"
 
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
+#include "ImGuizmo.h"
 #ifdef IMGUI_HAS_DOCK
 #include <imgui_internal.h>
 #endif
@@ -20,8 +41,10 @@
 #include <cmath>
 #include <cstring>
 #include <functional>
+#include <fstream>
 #include <stdexcept>
 #include <utility>
+#include <set>
 #endif
 
 namespace azurerender {
@@ -48,19 +71,19 @@ public:
     CallbackEditorPanel(
         const std::string_view id,
         const std::string_view title,
-        std::function<void()> draw)
+        std::function<void(PanelContext&)> draw)
         : id_(id), title_(title), draw_(std::move(draw)) {}
 
     [[nodiscard]] std::string_view id() const noexcept override { return id_; }
     [[nodiscard]] std::string_view title() const noexcept override {
         return title_;
     }
-    void draw(EditorContext&) override { draw_(); }
+    void draw(PanelContext& context) override { draw_(context); }
 
 private:
     std::string_view id_;
     std::string_view title_;
-    std::function<void()> draw_;
+    std::function<void(PanelContext&)> draw_;
 };
 
 }  // namespace
@@ -71,11 +94,13 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
         throw std::invalid_argument("ImGui editor requires an editor session");
     }
     context_ = &session_->context();
+    installPath_=ResourceLocator{}.installationRoot().u8string();
+    if(!context_->isProject())workspace_.setVisible("projects",true);
     EditorPanelRegistry registry;
     const auto addPanel = [&registry](
                               const char* id,
                               const char* title,
-                              std::function<void()> draw) {
+                              std::function<void(PanelContext&)> draw) {
         registry.registerFactory(
             {std::string("panel.") + id, 1, {"editor.panel"}, {}},
             [id, title, draw = std::move(draw)] {
@@ -83,13 +108,45 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
                     id, title, draw);
             });
     };
-    addPanel("viewport", "Viewport", [this] { drawViewportPanel(); });
-    addPanel("outliner", "Scene Outliner", [this] { drawOutlinerPanel(); });
-    addPanel("inspector", "Inspector", [this] { drawInspectorPanel(); });
-    addPanel("assets", "Asset Browser", [this] { drawAssetBrowserPanel(); });
-    addPanel("capture", "Capture", [this] { drawCapturePanel(); });
-    addPanel("console", "Console", [this] { drawConsolePanel(); });
-    panels_ = registry.createAll();
+    addPanel("viewport", "Viewport", [this](PanelContext& context) { drawViewportPanel(context); });
+    addPanel("capture", "Capture", [this](PanelContext& context) { drawCapturePanel(context); });
+    addPanel("console", "Console", [this](PanelContext& context) { drawConsolePanel(context); });
+    addPanel("build", "Build Game", [this](PanelContext& context) { drawBuildPanel(context); });
+    addPanel("animation", "Animation Preview", [this](PanelContext& context) { drawAnimationPanel(context); });
+    addPanel("gameplay-debug", "Gameplay Debug", [this](PanelContext& context) { drawGameplayDebugPanel(context); });
+    addPanel("settings", "Settings", [this](PanelContext& context) { drawSettingsPanel(context); });
+    addPanel("projects", "Projects", [this](PanelContext& context) { drawProjectBrowserPanel(context); });
+    addPanel("environment", "Environment", [this](PanelContext& context) { drawEnvironmentPanel(context); });
+    workspace_.registerPanel("scripts","Script Authoring",false);
+    workspace_.registerPanel("problems","Problems",false);
+    workspace_.registerPanel("assistance","Content Assistance",false);
+    workspace_.registerPanel("prefabs","Prefab Authoring",false);
+    addPanel("prefabs", "Prefab Authoring", [this](PanelContext& context) { drawPrefabAuthoringPanel(context); });
+    addPanel("assistance", "Content Assistance", [this](PanelContext& context) { drawContentAssistancePanel(context); });
+    addPanel("scripts", "Script Authoring", [this](PanelContext& context) { drawScriptAuthoringPanel(context); });
+    addPanel("problems", "Problems", [this](PanelContext& context) { drawProblemsPanel(context); });
+    workspace_.registerPanel("ui-catalog","控件目录",false);
+    addPanel("ui-catalog", "控件目录", [](PanelContext&) { drawUiCatalog(); });
+    CorePanelServices services{*session_,workspace_,dpi_,widgets_,
+        [this](const auto& id){observeWidget(id);},
+        [this]{inspectorPanel_->presentation.focusObjectName_=true;},
+        [this](nlohmann::json request){assetPanel_->presentation.exportRequest_=std::move(request);assetPanel_->presentation.exportDialogRequested_=true;},
+        [this](const auto& node){drawMaterialSlots(node);},[this](const auto& node){drawPhysicsAuthoring(node);},
+        [this]{drawTextureAssetPanel();},[this](const auto& asset){openMaterialAsset(asset);},
+        [this](auto handle){return previewTexture(handle);},
+        [this](const auto* label,auto& value,const auto& purpose,bool directory,const auto& extensions){drawPathInput(label,value,purpose,directory,extensions);}};
+    registry.registerFactory({"panel.outliner",1,{"editor.panel"},{}},[this,services]{auto panel=std::make_unique<OutlinerPanel>(services);outlinerPanel_=panel.get();return panel;});
+    registry.registerFactory({"panel.inspector",1,{"editor.panel"},{}},[this,services]{auto panel=std::make_unique<InspectorPanel>(services);inspectorPanel_=panel.get();return panel;});
+    registry.registerFactory({"panel.assets",1,{"editor.panel"},{}},[this,services]{auto panel=std::make_unique<AssetBrowserPanel>(services);assetPanel_=panel.get();return panel;});
+    panels_=registry.createAll();
+    // Stable workspace order also keeps docking tab submission deterministic.
+    const auto order=[this](std::string_view id){const auto& declarations=workspace_.panels();return std::find_if(declarations.begin(),declarations.end(),[&](const auto& panel){return panel.id==id;})-declarations.begin();};
+    std::stable_sort(panels_.begin(),panels_.end(),[&](const auto& a,const auto& b){return order(a->id())<order(b->id());});
+    auto extensions=session_->panelRegistry().createAll();
+    for(auto& panel:extensions) {
+        workspace_.registerPanel(std::string(panel->id()),std::string(panel->title()));
+        panels_.push_back(std::move(panel));
+    }
 }
 
 ImGuiEditorLayer::~ImGuiEditorLayer() {
@@ -104,7 +161,7 @@ void ImGuiEditorLayer::initialize(
     const std::uint32_t queueFamily,
     const VkQueue queue,
     const VkRenderPass renderPass,
-    const std::uint32_t imageCount) {
+    const std::uint32_t imageCount, const VkFormat colorFormat) {
     if (initialized_) {
         shutdownVulkan();
     }
@@ -117,9 +174,31 @@ void ImGuiEditorLayer::initialize(
 #ifdef IMGUI_HAS_DOCK
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 #endif
-    io.IniFilename = "azurerender-editor.ini";
-    ImGui::StyleColorsDark();
-    ImGui::GetStyle().Colors[ImGuiCol_WindowBg].w = 1.0F;
+    window_=window;
+    setWindowIcon(window_,64,ui::brandPixels(64));
+    configDirectory_=EditorWorkspace::configDirectory();
+    try{session_->setPathHistoryFile(configDirectory_/"path-history.json");}catch(const std::exception& error){session_->log(std::string("Path history: ")+error.what());}
+    const bool restored=workspace_.load(configDirectory_);
+    for(const auto& [category,policy]:workspace_.overlayPolicies)if(session_->viewportOverlays().contains(category))session_->viewportOverlayPolicies()[category]=policy;
+    std::filesystem::create_directories(configDirectory_);
+    iniPath_=(configDirectory_/"layout.ini").u8string();
+    io.IniFilename=nullptr;
+    if(restored && std::filesystem::exists(configDirectory_/"layout.ini")) {
+        std::ifstream file(configDirectory_/"layout.ini");std::string contents((std::istreambuf_iterator<char>(file)),{});
+        if(contents.find("[Docking][Data]")!=std::string::npos)ImGui::LoadIniSettingsFromMemory(contents.c_str());
+        else { workspace_.diagnostic="Invalid docking data. Default layout loaded.";workspace_.reset(); }
+    }
+    if(!workspace_.diagnostic.empty())context_->log(workspace_.diagnostic);
+    if(const auto* value=std::getenv("AZURERENDER_EDITOR_DPI"))dpiOverride_=std::stof(value);
+    float scaleY=1;glfwGetWindowContentScale(window_,&dpi_,&scaleY);if(dpiOverride_>0)dpi_=dpiOverride_;
+    dpi_=std::clamp(dpi_*session_->settings().get("editor.scale").get<float>(),.75F,3.F);
+    EditorTheme::apply(dpi_);
+    const auto font=ResourceLocator{}.publicAsset("fonts/NotoSansCJKsc-Regular.otf");
+    if(io.Fonts->AddFontFromFileTTF(font.u8string().c_str(),14)==nullptr)throw std::runtime_error("Editor font could not be loaded");
+    if(uiFrame_==0)if(const auto path=environmentPath("AZURERENDER_EDITOR_UI_ACTIONS")) {
+        std::ifstream file(*path);file>>uiActions_;
+        if(!uiActions_.is_array())throw std::invalid_argument("UI actions must be an array");
+    }
 
     if (!ImGui_ImplGlfw_InitForVulkan(window, true)) {
         ImGui::DestroyContext();
@@ -166,6 +245,16 @@ void ImGuiEditorLayer::initialize(
     initInfo.ImageCount = imageCount;
     initInfo.PipelineInfoMain.RenderPass = renderPass;
     initInfo.PipelineInfoMain.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
+    const bool srgb=colorFormat==VK_FORMAT_B8G8R8A8_SRGB || colorFormat==VK_FORMAT_R8G8B8A8_SRGB;
+    const auto shader=ResourceLocator{}.shaderDirectory()/(srgb?"editor_ui_srgb.frag.spv":"editor_ui.frag.spv");
+    std::ifstream bytecode(shader,std::ios::binary|std::ios::ate);
+    const auto bytes=bytecode.tellg();
+    if(bytes<=0 || bytes%4!=0)throw std::runtime_error("Editor UI shader is invalid");
+    uiFragmentCode_.resize(static_cast<std::size_t>(bytes)/4);bytecode.seekg(0);
+    bytecode.read(reinterpret_cast<char*>(uiFragmentCode_.data()),bytes);
+    initInfo.CustomShaderFragCreateInfo.sType=VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+    initInfo.CustomShaderFragCreateInfo.codeSize=uiFragmentCode_.size()*4;
+    initInfo.CustomShaderFragCreateInfo.pCode=uiFragmentCode_.data();
     if (!ImGui_ImplVulkan_Init(&initInfo)) {
         vkDestroyDescriptorPool(device, descriptorPool_, nullptr);
         descriptorPool_ = VK_NULL_HANDLE;
@@ -180,10 +269,16 @@ void ImGuiEditorLayer::shutdownVulkan() {
     if (!initialized_) {
         return;
     }
+    setNavigationCapture(false);
+    workspace_.overlayPolicies=session_->viewportOverlayPolicies();
+    try { ImGui::SaveIniSettingsToDisk(iniPath_.c_str());workspace_.save(configDirectory_); }
+    catch(const std::exception& error){context_->log(std::string("Workspace: ")+error.what());}
     for (const VkDescriptorSet texture : viewportTextures_) {
         ImGui_ImplVulkan_RemoveTexture(texture);
     }
     viewportTextures_.clear();
+    for(const auto& entry:previewTextures_)ImGui_ImplVulkan_RemoveTexture(entry.second.texture);
+    previewTextures_.clear();
     ImGui_ImplVulkan_Shutdown();
     if (descriptorPool_ != VK_NULL_HANDLE) {
         vkDestroyDescriptorPool(device_, descriptorPool_, nullptr);
@@ -195,110 +290,150 @@ void ImGuiEditorLayer::shutdownVulkan() {
     initialized_ = false;
 }
 
-void ImGuiEditorLayer::newFrame() {
+void ImGuiEditorLayer::newFrame(float fixedDeltaSeconds) {
     if (!initialized_) {
         return;
     }
+    session_->pollModel();
     ImGui_ImplVulkan_NewFrame();
     ImGui_ImplGlfw_NewFrame();
+    if(fixedDeltaSeconds>0)ImGui::GetIO().DeltaTime=fixedDeltaSeconds;
+    float nextDpi=1,scaleY=1;glfwGetWindowContentScale(window_,&nextDpi,&scaleY);
+    session_->settings().applyPending();
+    ui::setLanguage(static_cast<ui::Language>(session_->settings().get("editor.language").get<int>()));
+    const auto compact=session_->settings().get("editor.compact").get<bool>();
+    if(compactPreference_!=compact){compactPreference_=compact;workspaceRebuildRequested_=true;dockingLayoutInitialized_=false;}
+    if(settingsSaveRequested_) {
+        settingsSaveRequested_=false;
+        try{session_->settings().saveUser(session_->userSettingsPath().empty()?configDirectory_/"settings.json":session_->userSettingsPath());settingDiagnostic_.clear();}
+        catch(const std::exception& error){settingDiagnostic_=error.what();}
+    }
+    if(dpiOverride_>0)nextDpi=dpiOverride_;
+    nextDpi=std::clamp(nextDpi*session_->settings().get("editor.scale").get<float>(),.75F,3.F);
+    if(std::abs(nextDpi-dpi_)>.01F){dpi_=nextDpi;EditorTheme::apply(dpi_);dockingLayoutInitialized_=false;workspaceRebuildRequested_=true;}
+    ++uiFrame_;injectUiEvents();
     ImGui::NewFrame();
+    ImGuizmo::BeginFrame();
 }
 
 void ImGuiEditorLayer::drawPanels() {
     if (!initialized_) {
         return;
     }
-#ifdef IMGUI_HAS_DOCK
-    const ImGuiID dockspace = ImGui::DockSpaceOverViewport(
-        0,
-        ImGui::GetMainViewport(),
-        ImGuiDockNodeFlags_PassthruCentralNode);
-    const bool resetLayout = session_->consumeLayoutResetRequest();
-    if (resetLayout) {
-        ImGui::DockBuilderRemoveNode(dockspace);
-        dockingLayoutInitialized_ = false;
-    }
-    if (!dockingLayoutInitialized_) {
-        ImGuiDockNode* node = ImGui::DockBuilderGetNode(dockspace);
-        if (resetLayout || (node != nullptr && node->IsEmpty())) {
-            ImGui::DockBuilderRemoveNode(dockspace);
-            ImGui::DockBuilderAddNode(
-                dockspace,
-                ImGuiDockNodeFlags_DockSpace
-                    | ImGuiDockNodeFlags_PassthruCentralNode);
-            ImGui::DockBuilderSetNodeSize(
-                dockspace, ImGui::GetMainViewport()->Size);
-            ImGuiID center = dockspace;
-            const ImGuiID left = ImGui::DockBuilderSplitNode(
-                center, ImGuiDir_Left, 0.20F, nullptr, &center);
-            const ImGuiID right = ImGui::DockBuilderSplitNode(
-                center, ImGuiDir_Right, 0.24F, nullptr, &center);
-            const ImGuiID bottom = ImGui::DockBuilderSplitNode(
-                center, ImGuiDir_Down, 0.28F, nullptr, &center);
-            ImGui::DockBuilderDockWindow("Scene Outliner", left);
-            ImGui::DockBuilderDockWindow("Inspector", right);
-            ImGui::DockBuilderDockWindow("Asset Browser", bottom);
-            ImGui::DockBuilderDockWindow("Capture", bottom);
-            ImGui::DockBuilderDockWindow("Console", bottom);
-            ImGui::DockBuilderDockWindow("Viewport", center);
-            ImGui::DockBuilderFinish(dockspace);
-        }
-        dockingLayoutInitialized_ = true;
-    }
-#endif
+    context_=&session_->context();
+    widgets_=nlohmann::json::object();
+    EditorToolbar::draw(*session_,workspace_,dpi_,[this](const std::string& id){observeWidget(id);});
+    drawWorkspace();
+    const bool focusHierarchy=session_->selection().consumeHierarchyFocus();
+    if(focusHierarchy)workspace_.setVisible("outliner",true);
     const ImGuiIO& io = ImGui::GetIO();
-    if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_S, false)) {
-        static_cast<void>(session_->execute(EditorCommand::Save));
-    }
-    if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_Z, false)) {
-        static_cast<void>(session_->execute(EditorCommand::Undo));
-    }
-    if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_Y, false)) {
-        static_cast<void>(session_->execute(EditorCommand::Redo));
-    }
-    if (ImGui::BeginMainMenuBar()) {
-        if (ImGui::BeginMenu("File")) {
-            if (ImGui::MenuItem("Save", "Ctrl+S")) {
-                static_cast<void>(session_->execute(EditorCommand::Save));
-            }
-            if (ImGui::MenuItem("Reload")) {
-                static_cast<void>(session_->execute(EditorCommand::Reload));
-            }
-            ImGui::EndMenu();
-        }
-        if (ImGui::BeginMenu("Edit")) {
-            if (ImGui::MenuItem("Undo", "Ctrl+Z", false, context_->canUndo())) {
-                static_cast<void>(session_->execute(EditorCommand::Undo));
-            }
-            if (ImGui::MenuItem("Redo", "Ctrl+Y", false, context_->canRedo())) {
-                static_cast<void>(session_->execute(EditorCommand::Redo));
-            }
-            if (ImGui::MenuItem("Reload Assets")) {
-                static_cast<void>(session_->execute(EditorCommand::ReloadAssets));
-            }
-            ImGui::EndMenu();
-        }
-        if (ImGui::BeginMenu("View")) {
-            if (ImGui::MenuItem("Reset Layout")) {
-                static_cast<void>(
-                    session_->execute(EditorCommand::ResetLayout));
-            }
-            ImGui::EndMenu();
-        }
-        if (context_->dirty()) {
-            ImGui::TextUnformatted("Unsaved changes");
-        }
-        if (!session_->lastError().empty()) {
-            ImGui::TextColored(
-                ImVec4(0.95F, 0.35F, 0.30F, 1.0F),
-                "%s",
-                session_->lastError().c_str());
-        }
-        ImGui::EndMainMenuBar();
+    viewportFocused_=false;viewportAcceptsShortcuts_=false;
+    gameCaptureRequested_=false;gameInputAllowed_=false;
+    const bool nativeFocus=!io.AppFocusLost;
+    if(session_->references().active()&&(!nativeFocus||ImGui::IsKeyPressed(ImGuiKey_Escape,false)))session_->edit("reference.cancel");
+    if(!nativeFocus || !workspace_.visible("viewport")) {
+        cancelViewportGizmo();navigationButton_=-1;viewportInput_={};
+        setNavigationCapture(false);
     }
     for (const std::unique_ptr<IEditorPanel>& panel : panels_) {
-        panel->draw(*context_);
+        if(!workspace_.visible(std::string(panel->id())))continue;
+        if(focusHierarchy && panel->id()=="outliner")ImGui::SetNextWindowFocus();
+        const bool editable=std::string(panel->id())=="viewport" || std::string(panel->id())=="console" || std::string(panel->id())=="capture";
+        ImGui::BeginDisabled((session_->playing() || session_->building()) && !editable && panel->id()!="build" && panel->id()!="settings");auto panelContext=session_->panelContext();panel->draw(panelContext);ImGui::EndDisabled();
     }
+    drawAssetTransferPanel();
+    drawMaterialAssetPanel();
+    processFileDrops();
+    if(session_->assetRevealPending()){
+        workspace_.setVisible("assets",true);
+        ImGui::SetWindowFocus(ui::tr("资源###assets"));
+    }
+    const auto* nav=ImGui::GetCurrentContext()->NavWindow;
+    const bool sceneFocus=viewportFocused_ || (nav && std::string(nav->Name).find("###outliner")!=std::string::npos);
+    const bool modal=ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel);
+    std::map<std::string,std::string> bindings;
+    for(const auto& entry:std::vector<std::pair<const char*,const char*>>{{"W","move"},{"E","rotate"},{"R","scale"},{"Q","select"},{"F","frame"}})
+        bindings[entry.first]=session_->settings().get(std::string("editor.shortcuts.")+entry.second).get<std::string>();
+    for(int key=ImGuiKey_NamedKey_BEGIN;key<ImGuiKey_NamedKey_END;++key) {
+        const auto imguiKey=static_cast<ImGuiKey>(key);
+        if(!ImGui::IsKeyPressed(imguiKey,false))continue;
+        EditorInputEvent event;event.key=ImGui::GetKeyName(imguiKey);event.ctrl=io.KeyCtrl;
+        event.text=io.WantTextInput || ImGui::IsAnyItemActive();event.modal=modal;
+        event.scene=sceneFocus;event.viewport=viewportFocused_;event.navigating=navigationButton_>=0;
+        event.playing=session_->playing();event.simulating=session_->simulating();event.building=session_->building();
+        const auto routed=EditorInputRouter::route(event,bindings);
+        if(routed.consumed)session_->edit(routed.operation,routed.mode>=0?nlohmann::json{{"value",routed.mode}}:nlohmann::json::object());
+    }
+    auto& guard=session_->documentGuard();
+    if(guard.state()==DocumentActionState::AwaitingDecision || guard.state()==DocumentActionState::Failed){
+        ImGui::OpenPopup("Unsaved changes");
+        const auto* viewport=ImGui::GetMainViewport();
+        const auto width=std::min(520.F*dpi_,viewport->WorkSize.x*.9F);
+        ImGui::SetNextWindowPos(viewport->GetWorkCenter(),ImGuiCond_Always,{.5F,.5F});
+        ImGui::SetNextWindowSize({width,0},ImGuiCond_Always);
+    }
+    if(ImGui::BeginPopupModal("Unsaved changes",nullptr,ImGuiWindowFlags_AlwaysAutoResize)) {
+        ImGui::TextWrapped("%s",guard.action()==DocumentAction::Close?"Save changes before closing?":guard.action()==DocumentAction::Open?"Save changes before switching project?":"Save changes before reloading?");
+        if(!guard.diagnostic().empty()){
+            const auto size=ImGui::GetMainViewport()->WorkSize;
+            const auto height=std::min(130.F*dpi_,size.y*.25F);
+            if(ImGui::BeginChild("document-diagnostic",{0,height},ImGuiChildFlags_Borders)){
+                ImGui::TextWrapped("%s",guard.diagnostic().c_str());
+            }
+            ImGui::EndChild();
+        }
+        for(const auto* decision:{"save","discard","cancel"}) {
+            if(ImGui::Button(decision)) {session_->edit("document.decision",{{"value",decision}});if(guard.state()!=DocumentActionState::Failed)ImGui::CloseCurrentPopup();}
+            observeWidget(std::string("document.")+decision);ImGui::SameLine();
+        }
+        ImGui::NewLine();ImGui::EndPopup();
+    }
+    EditorToolbar::status(*session_,dpi_,[this](const auto& id){observeWidget(id);},[this](const auto& id){
+        consoleTaskReveal_=id;
+        workspace_.setVisible("console",true);
+        ImGui::SetWindowFocus(ui::tr("日志###console"));
+    });
+    if(!ImGui::IsAnyItemActive()&&!viewportGizmoDragActive_)context_->closeEditMerge();
+#ifdef IMGUI_HAS_DOCK
+    for(const auto& panel:workspace_.panels())if(const auto* window=ImGui::FindWindowByName(panel.title.c_str())) {
+        widgets_["panelrect."+panel.id]={window->Pos.x,window->Pos.y,window->Size.x,window->Size.y};
+        if(window->DockNode && window->DockNode->TabBar) {
+            const auto* bar=window->DockNode->TabBar;
+            for(const auto& tab:bar->Tabs)if(tab.Window==window)
+                {
+                widgets_["tab."+panel.id]={bar->BarRect.Min.x+tab.Offset,bar->BarRect.Min.y,tab.Width,bar->BarRect.GetHeight()};
+                widgets_["tool."+panel.id]=widgets_["tab."+panel.id];
+                }
+        }
+    }
+#endif
+    if(!uiActions_.empty()&&uiHistory_.size()<8192)uiHistory_.push_back({{"frame",uiFrame_},{"playing",session_->playing()},
+        {"paused",session_->runtime()&&session_->runtime()->state()==RuntimeLifecycle::State::Paused},
+        {"selected",context_->selectedNode()?context_->selectedNode()->id:""},{"dirty",context_->dirty()},
+        {"nodeCount",context_->scene().nodes.size()},{"translation",context_->gizmoTranslation()},
+        {"rotation",context_->gizmoRotation()},{"scale",context_->gizmoScale()},
+        {"gizmoMode",static_cast<unsigned>(context_->gizmoMode())},{"camera",cameraPosition_},{"target",cameraTarget_},
+        {"navigationButton",navigationButton_},{"gizmoCapture",viewportGizmoDragActive_},{"undoCount",context_->undoCount()},
+        {"cursorCaptured",navigationCursorCaptured_},{"flySpeed",session_->settings().get("editor.camera.flySpeed")},
+        {"mouse",{io.MousePos.x,io.MousePos.y}},{"mouseDown",io.MouseDown[0]},
+        {"activeId",ImGui::GetCurrentContext()->ActiveId},
+        {"movingWindow",ImGui::GetCurrentContext()->MovingWindow?ImGui::GetCurrentContext()->MovingWindow->Name:""}});
+    if(uiFrame_%12==0)if(const auto path=environmentPath("AZURERENDER_UI_OBSERVATION")) {
+        auto snapshot=workspaceSnapshot(false);snapshot["phase"]="Editor";snapshot["frame"]=uiFrame_;
+        std::ofstream output(*path);output<<snapshot.dump();
+    }
+}
+void ImGuiEditorLayer::completePreviewTextures(std::uint64_t completed){
+    for(auto it=previewTextures_.begin();it!=previewTextures_.end();){
+        if(it->second.lastUse<=completed){if(initialized_)ImGui_ImplVulkan_RemoveTexture(it->second.texture);it=previewTextures_.erase(it);}else ++it;
+    }
+}
+VkDescriptorSet ImGuiEditorLayer::previewTexture(std::uint64_t handle){
+    if(!session_->developerServices().image)return VK_NULL_HANDLE;
+    const auto image=session_->developerServices().image(handle);if(!image.image)return VK_NULL_HANDLE;
+    auto& texture=previewTextures_[handle];
+    if(!texture.texture)texture.texture=ImGui_ImplVulkan_AddTexture(image.sampler,image.image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    texture.lastUse=previewSubmission_;return texture.texture;
 }
 
 void ImGuiEditorLayer::render(const VkCommandBuffer commandBuffer) {
@@ -368,403 +503,14 @@ bool ImGuiEditorLayer::consumeViewportResizeRequest(
     return true;
 }
 
-void ImGuiEditorLayer::drawViewportPanel() {
-#ifndef IMGUI_HAS_DOCK
-    setFallbackPanelRect(0.20F, 0.0F, 0.56F, 0.72F);
-#endif
-    ImGui::Begin("Viewport");
-    viewportFocused_ = ImGui::IsWindowFocused(
-        ImGuiFocusedFlags_RootAndChildWindows);
-    if (!viewportTextures_.empty()) {
-        const ImVec2 available = ImGui::GetContentRegionAvail();
-        const ImVec2 framebufferScale = ImGui::GetIO().DisplayFramebufferScale;
-        const std::uint32_t desiredWidth = static_cast<std::uint32_t>(
-            std::max(std::floor(available.x * framebufferScale.x), 64.0F));
-        const std::uint32_t desiredHeight = static_cast<std::uint32_t>(
-            std::max(std::floor(available.y * framebufferScale.y), 64.0F));
-        if (desiredWidth == resizeCandidateWidth_
-            && desiredHeight == resizeCandidateHeight_) {
-            resizeStableFrames_ = std::min(resizeStableFrames_ + 1, 60U);
-        } else {
-            resizeCandidateWidth_ = desiredWidth;
-            resizeCandidateHeight_ = desiredHeight;
-            resizeStableFrames_ = 0;
-        }
-        if (resizeStableFrames_ >= 4
-            && (desiredWidth != viewportWidth_
-                || desiredHeight != viewportHeight_)
-            && !ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
-            viewportResizePending_ = true;
-        }
-        const float aspect = static_cast<float>(viewportWidth_)
-            / static_cast<float>(viewportHeight_);
-        ImVec2 imageSize{available.x, available.x / aspect};
-        if (imageSize.y > available.y) {
-            imageSize.y = available.y;
-            imageSize.x = available.y * aspect;
-        }
-        const ImVec2 cursor = ImGui::GetCursorPos();
-        ImGui::SetCursorPos({
-            cursor.x + std::max((available.x - imageSize.x) * 0.5F, 0.0F),
-            cursor.y + std::max((available.y - imageSize.y) * 0.5F, 0.0F),
-        });
-        ImGui::Image(
-            reinterpret_cast<ImTextureID>(
-                viewportTextures_[viewportImageIndex_]),
-            imageSize);
-        // Draw the viewport gizmo handles (if any selected primitive has a
-        // valid screen projection). We compute endpoints here so the click
-        // and drag logic can hit-test against them.
-        const auto& gizmoScreen = context_->gizmoScreen();
-        const ImVec2 itemMin = ImGui::GetItemRectMin();
-        ImVec2 gizmoCenter{0.0F, 0.0F};
-        ImVec2 gizmoAxisEnds[3] = {{0.0F, 0.0F}, {0.0F, 0.0F}, {0.0F, 0.0F}};
-        bool gizmoDrawn = false;
-        if (gizmoScreen.valid && imageSize.x > 0.0F && imageSize.y > 0.0F) {
-            gizmoCenter = ImVec2(
-                itemMin.x + gizmoScreen.centerX * imageSize.x,
-                itemMin.y + gizmoScreen.centerY * imageSize.y);
-            const float axes[3][2] = {
-                {gizmoScreen.axisXScreenX, gizmoScreen.axisXScreenY},
-                {gizmoScreen.axisYScreenX, gizmoScreen.axisYScreenY},
-                {gizmoScreen.axisZScreenX, gizmoScreen.axisZScreenY},
-            };
-            const ImU32 colors[3] = {
-                IM_COL32(230, 80, 80, 255),
-                IM_COL32(80, 220, 110, 255),
-                IM_COL32(90, 140, 230, 255),
-            };
-            ImDrawList* drawList = ImGui::GetWindowDrawList();
-            for (int axis = 0; axis < 3; ++axis) {
-                gizmoAxisEnds[axis] = ImVec2(
-                    gizmoCenter.x + axes[axis][0] * 40.0F,
-                    gizmoCenter.y + axes[axis][1] * 40.0F);
-                drawList->AddLine(
-                    gizmoCenter, gizmoAxisEnds[axis], colors[axis], 3.0F);
-                drawList->AddCircleFilled(
-                    gizmoAxisEnds[axis], 5.0F, colors[axis]);
-            }
-            gizmoDrawn = true;
-        }
-        if (ImGui::IsItemHovered()) {
-            const ImGuiIO& io = ImGui::GetIO();
-            viewportInput_.zoomSteps += io.MouseWheel;
-            if (ImGui::IsMouseDown(ImGuiMouseButton_Right)) {
-                viewportInput_.orbitDeltaX += io.MouseDelta.x;
-                viewportInput_.orbitDeltaY += io.MouseDelta.y;
-            }
-            if (ImGui::IsMouseDown(ImGuiMouseButton_Middle)) {
-                viewportInput_.panDeltaX += io.MouseDelta.x;
-                viewportInput_.panDeltaY += io.MouseDelta.y;
-            }
-            bool pickThisClick = true;
-            if (gizmoDrawn
-                && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
-                const ImVec2 mousePosition = io.MousePos;
-                float bestDistance = 12.0F;
-                std::int32_t bestAxis = -1;
-                for (int axis = 0; axis < 3; ++axis) {
-                    const float distance = std::hypot(
-                        mousePosition.x - gizmoAxisEnds[axis].x,
-                        mousePosition.y - gizmoAxisEnds[axis].y);
-                    if (distance < bestDistance) {
-                        bestDistance = distance;
-                        bestAxis = axis;
-                    }
-                }
-                if (bestAxis >= 0) {
-                    gizmoDragAxis_ = bestAxis;
-                    gizmoDragStartMouse_ = mousePosition;
-                    gizmoDragStartTranslation_ = context_->gizmoTranslation();
-                    viewportGizmoDragActive_ = true;
-                    pickThisClick = false;
-                }
-            }
-            if (pickThisClick
-                && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
-                const ImVec2 mousePosition = io.MousePos;
-                if (imageSize.x > 0.0F && imageSize.y > 0.0F) {
-                    viewportInput_.pickX = std::clamp(
-                        (mousePosition.x - itemMin.x) / imageSize.x,
-                        0.0F,
-                        1.0F);
-                    viewportInput_.pickY = std::clamp(
-                        (mousePosition.y - itemMin.y) / imageSize.y,
-                        0.0F,
-                        1.0F);
-                    viewportInput_.pickRequested = true;
-                }
-            }
-            if (viewportGizmoDragActive_
-                && gizmoDragAxis_ >= 0
-                && gizmoScreen.valid
-                && ImGui::IsMouseDragging(ImGuiMouseButton_Left)) {
-                const float axes[3][2] = {
-                    {gizmoScreen.axisXScreenX, gizmoScreen.axisXScreenY},
-                    {gizmoScreen.axisYScreenX, gizmoScreen.axisYScreenY},
-                    {gizmoScreen.axisZScreenX, gizmoScreen.axisZScreenY},
-                };
-                const float projection =
-                    io.MouseDelta.x * axes[gizmoDragAxis_][0]
-                    + io.MouseDelta.y * axes[gizmoDragAxis_][1];
-                const float worldDelta = projection * gizmoScreen.pixelToWorld;
-                std::array<float, 3> translation =
-                    gizmoDragStartTranslation_;
-                translation[gizmoDragAxis_] += worldDelta;
-                context_->setGizmoTranslation(translation);
-            }
-            if (ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
-                viewportGizmoDragActive_ = false;
-                gizmoDragAxis_ = -1;
-            }
-        }
+void ImGuiEditorLayer::setNavigationCapture(bool captured){
+    if(captured==navigationCursorCaptured_||!window_)return;
+    if(captured){glfwGetCursorPos(window_,&savedNavigationCursor_[0],&savedNavigationCursor_[1]);navigationRawMouse_=session_->settings().get("editor.camera.rawMouse").get<bool>()&&glfwRawMouseMotionSupported()==GLFW_TRUE;
+        glfwSetInputMode(window_,GLFW_CURSOR,GLFW_CURSOR_DISABLED);if(navigationRawMouse_)glfwSetInputMode(window_,GLFW_RAW_MOUSE_MOTION,GLFW_TRUE);
+    }else{if(navigationRawMouse_)glfwSetInputMode(window_,GLFW_RAW_MOUSE_MOTION,GLFW_FALSE);glfwSetInputMode(window_,GLFW_CURSOR,GLFW_CURSOR_NORMAL);
+        if(glfwGetWindowAttrib(window_,GLFW_FOCUSED))glfwSetCursorPos(window_,savedNavigationCursor_[0],savedNavigationCursor_[1]);
     }
-    viewportAcceptsShortcuts_ = viewportFocused_
-        && !ImGui::GetIO().WantTextInput
-        && !ImGui::IsAnyItemActive();
-    ImGui::End();
-}
-
-void ImGuiEditorLayer::drawOutlinerPanel() {
-#ifndef IMGUI_HAS_DOCK
-    setFallbackPanelRect(0.0F, 0.0F, 0.20F, 0.72F);
-#endif
-    ImGui::Begin("Scene Outliner");
-    const auto& nodes = context_->scene().nodes;
-    if (ImGui::Button("Add Child")) {
-        if (!nodes.empty()) {
-            try {
-                context_->addChildNode(context_->selectedNodeIndex());
-            } catch (const std::exception& exception) {
-                context_->log(std::string("ERROR: ") + exception.what());
-            }
-        }
-    }
-    ImGui::SameLine();
-    if (ImGui::Button("Delete") && !nodes.empty()) {
-        context_->removeNode(context_->selectedNodeIndex());
-    }
-    ImGui::Separator();
-    if (nodes.empty()) {
-        ImGui::TextUnformatted("(empty scene)");
-        ImGui::End();
-        return;
-    }
-    // Recursive tree draw: children are nodes whose parentId equals the
-    // current node id. Use an index-based recursion to avoid iterator
-    // invalidation while nodes stay stable during a frame.
-    const auto drawNode = [&](const auto& self,
-                              const std::string& parentId,
-                              const int depth) -> void {
-        for (std::size_t index = 0; index < nodes.size(); ++index) {
-            if (nodes[index].parentId != parentId) {
-                continue;
-            }
-            const bool selected = index == context_->selectedNodeIndex();
-            bool hasChildren = false;
-            for (const SceneNode& candidate : nodes) {
-                if (candidate.parentId == nodes[index].id) {
-                    hasChildren = true;
-                    break;
-                }
-            }
-            ImGui::PushID(static_cast<int>(index));
-            bool open = false;
-            if (hasChildren) {
-                const bool clicked = ImGui::TreeNodeEx(
-                    nodes[index].name.c_str(),
-                    ImGuiTreeNodeFlags_OpenOnArrow
-                        | ImGuiTreeNodeFlags_SpanAvailWidth
-                        | (selected ? ImGuiTreeNodeFlags_Selected : 0));
-                open = clicked;
-            } else {
-                ImGui::Selectable(
-                    nodes[index].name.c_str(),
-                    selected,
-                    ImGuiSelectableFlags_SpanAvailWidth);
-            }
-            if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
-                context_->selectNode(index);
-            }
-            if (open) {
-                self(self, nodes[index].id, depth + 1);
-                ImGui::TreePop();
-            }
-            ImGui::PopID();
-        }
-    };
-    drawNode(drawNode, "", 0);
-    ImGui::End();
-}
-
-void ImGuiEditorLayer::drawInspectorPanel() {
-#ifndef IMGUI_HAS_DOCK
-    setFallbackPanelRect(0.76F, 0.0F, 0.24F, 0.72F);
-#endif
-    ImGui::Begin("Inspector");
-    if (const SceneNode* node = context_->selectedNode(); node != nullptr) {
-        ImGui::Text("Node: %s", node->name.c_str());
-        ImGui::Text("Id: %s", node->id.c_str());
-        bool visible = node->visible;
-        if (ImGui::Checkbox("Visible", &visible)) {
-            context_->setSelectedNodeVisible(visible);
-        }
-        ImGui::TextUnformatted("Name");
-        std::array<char, 128> nameBuffer{};
-        const std::size_t copyLength = std::min(
-            node->name.size(), nameBuffer.size() - 1);
-        std::memcpy(
-            nameBuffer.data(), node->name.data(), copyLength);
-        if (ImGui::InputText("##name", nameBuffer.data(), nameBuffer.size())) {
-            context_->setSelectedNodeName(nameBuffer.data());
-        }
-        ImGui::TextUnformatted("Prefab Source");
-        std::array<char, 256> prefabBuffer{};
-        std::memcpy(prefabBuffer.data(), node->prefabSource.data(),
-            std::min(node->prefabSource.size(), prefabBuffer.size() - 1));
-        if (ImGui::InputText("##prefab", prefabBuffer.data(), prefabBuffer.size())) {
-            context_->setSelectedNodePrefab(prefabBuffer.data());
-        }
-        ImGui::TextUnformatted("Instance Of");
-        std::array<char, 128> instanceBuffer{};
-        std::memcpy(instanceBuffer.data(), node->instanceOf.data(),
-            std::min(node->instanceOf.size(), instanceBuffer.size() - 1));
-        if (ImGui::InputText("##instance", instanceBuffer.data(), instanceBuffer.size())) {
-            context_->setSelectedNodeInstance(instanceBuffer.data());
-        }
-    }
-    ImGui::Separator();
-    ImGui::Text("Transform Gizmo");
-    std::array<float, 3> translation = context_->gizmoTranslation();
-    if (ImGui::DragFloat3("Translate", translation.data(), 0.01F)) {
-        context_->setGizmoTranslation(translation);
-    }
-    std::array<float, 3> rotation = context_->gizmoRotation();
-    if (ImGui::DragFloat3("Rotate (deg)", rotation.data(), 0.5F)) {
-        context_->setGizmoRotation(rotation);
-    }
-    std::array<float, 3> scale = context_->gizmoScale();
-    if (ImGui::DragFloat3("Scale", scale.data(), 0.01F, 0.01F, 100.0F)) {
-        context_->setGizmoScale(scale);
-    }
-    RenderSettings& settings = context_->renderSettings();
-    if (ImGui::BeginCombo(
-            "Showcase Look",
-            std::string(showcasePresetName(settings.showcasePreset)).c_str())) {
-        for (std::uint32_t preset = 0; preset < 5; ++preset) {
-            const bool selected = settings.showcasePreset == preset;
-            const std::string name(showcasePresetName(preset));
-            if (ImGui::Selectable(name.c_str(), selected)) {
-                context_->beginEdit();
-                applyShowcasePresetLook(settings, preset);
-            }
-            if (selected) ImGui::SetItemDefaultFocus();
-        }
-        ImGui::EndCombo();
-    }
-    bool background = settings.characterPresentation.backgroundEnabled;
-    if (ImGui::Checkbox("Background", &background)) {
-        context_->beginEdit();
-        settings.characterPresentation.backgroundEnabled = background;
-    }
-    bool platform = settings.characterPresentation.platformEnabled;
-    if (ImGui::Checkbox("Showcase Platform", &platform)) {
-        context_->beginEdit();
-        settings.characterPresentation.platformEnabled = platform;
-    }
-    bool faceSdf = settings.faceSdf.enabled;
-    if (ImGui::Checkbox("Face SDF", &faceSdf)) {
-        context_->beginEdit();
-        settings.faceSdf.enabled = faceSdf;
-    }
-    float threshold = settings.faceSdf.threshold;
-    if (ImGui::SliderFloat("Face SDF Threshold", &threshold, 0.0F, 1.0F)) {
-        context_->beginEdit();
-        settings.faceSdf.threshold = threshold;
-    }
-    float softness = settings.faceSdf.softness;
-    if (ImGui::SliderFloat("Face SDF Softness", &softness, 0.001F, 0.5F)) {
-        context_->beginEdit();
-        settings.faceSdf.softness = softness;
-    }
-    float outline = settings.outline.strength;
-    if (ImGui::SliderFloat("Outline", &outline, 0.0F, 2.0F)) {
-        context_->beginEdit();
-        settings.outline.strength = outline;
-    }
-    float shadowRadius = settings.shadow.maximumFilterRadiusTexels;
-    if (ImGui::SliderFloat(
-            "Shadow Softness", &shadowRadius, 1.0F, 16.0F, "%.1f texels")) {
-        context_->beginEdit();
-        settings.shadow.maximumFilterRadiusTexels = shadowRadius;
-    }
-    float exposure = settings.grade.exposureEv;
-    if (ImGui::SliderFloat("Exposure EV", &exposure, -8.0F, 8.0F)) {
-        context_->beginEdit();
-        settings.grade.exposureEv = exposure;
-    }
-    ImGui::End();
-}
-
-void ImGuiEditorLayer::drawAssetBrowserPanel() {
-#ifndef IMGUI_HAS_DOCK
-    setFallbackPanelRect(0.0F, 0.72F, 0.50F, 0.28F);
-#endif
-    ImGui::Begin("Asset Browser");
-    if (ImGui::Button("Reload Assets")) {
-        static_cast<void>(session_->execute(EditorCommand::ReloadAssets));
-    }
-    if (ImGui::BeginTable(
-            "assets", 4, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg)) {
-        ImGui::TableSetupColumn("Id");
-        ImGui::TableSetupColumn("Path");
-        ImGui::TableSetupColumn("State");
-        ImGui::TableSetupColumn("Users");
-        ImGui::TableHeadersRow();
-        for (const EditorContext::ResourceStatus& resource
-             : context_->resourceStatuses()) {
-            ImGui::TableNextRow();
-            ImGui::TableSetColumnIndex(0);
-            ImGui::TextUnformatted(resource.id.c_str());
-            ImGui::TableSetColumnIndex(1);
-            ImGui::TextUnformatted(resource.path.generic_string().c_str());
-            ImGui::TableSetColumnIndex(2);
-            ImGui::TextUnformatted(resource.exists ? "Ready" : "Missing");
-            ImGui::TableSetColumnIndex(3);
-            ImGui::Text("%zu", resource.dependentNodeCount);
-        }
-        ImGui::EndTable();
-    }
-    ImGui::End();
-}
-
-void ImGuiEditorLayer::drawCapturePanel() {
-    ImGui::Begin("Capture");
-    std::array<char, 128> label{};
-    const std::string& current = session_->captureLabel();
-    std::memcpy(label.data(), current.data(),
-        std::min(current.size(), label.size() - 1));
-    if (ImGui::InputText("Label", label.data(), label.size())) {
-        session_->setCaptureLabel(label.data());
-    }
-    if (ImGui::Button("Capture Viewport")) {
-        static_cast<void>(session_->execute(EditorCommand::Capture));
-    }
-    ImGui::SameLine();
-    ImGui::TextUnformatted("PNG + semantic label");
-    ImGui::End();
-}
-
-void ImGuiEditorLayer::drawConsolePanel() {
-#ifndef IMGUI_HAS_DOCK
-    setFallbackPanelRect(0.50F, 0.72F, 0.50F, 0.28F);
-#endif
-    ImGui::Begin("Console");
-    for (const std::string& message :
-         azurerender::RuntimeDiagnostics::instance().messages()) {
-        ImGui::TextUnformatted(message.c_str());
-    }
-    ImGui::End();
+    navigationCursorCaptured_=captured;
 }
 
 }  // namespace azurerender
@@ -781,11 +527,12 @@ ImGuiEditorLayer::~ImGuiEditorLayer() = default;
 
 void ImGuiEditorLayer::initialize(
     GLFWwindow*, VkInstance, VkPhysicalDevice, VkDevice, std::uint32_t,
-    VkQueue, VkRenderPass, std::uint32_t) {}
+    VkQueue, VkRenderPass, std::uint32_t, VkFormat) {}
 
 void ImGuiEditorLayer::shutdownVulkan() {}
-void ImGuiEditorLayer::newFrame() {}
+void ImGuiEditorLayer::newFrame(float) {}
 void ImGuiEditorLayer::drawPanels() {}
+void ImGuiEditorLayer::completePreviewTextures(std::uint64_t) {}
 void ImGuiEditorLayer::render(VkCommandBuffer) {}
 void ImGuiEditorLayer::setViewportImages(
     VkSampler, const std::vector<VkImageView>&, std::uint32_t, std::uint32_t) {}

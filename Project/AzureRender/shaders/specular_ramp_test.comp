@@ -1,0 +1,18 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "specular_ramp.glsl"
+layout(local_size_x=1) in;
+struct Probe {vec4 normal,view,camera,light,surface,ramp,f0,mainColor,weights,controls;};
+layout(std430,binding=0) readonly buffer Inputs {Probe values[];} inputData;
+layout(std430,binding=1) buffer Outputs {vec4 values[];} outputData;
+void main(){
+    uint index=gl_GlobalInvocationID.x;Probe p=inputData.values[index];
+    SpecularRampCoordinates c=specularRampCoordinates(p.normal.xyz,p.view.xyz,p.camera.xyz,p.light.xyz,
+        p.surface.x,p.surface.y,p.surface.z,p.surface.w);
+    CharacterDiffuseResponse response=characterDiffuseResponse(vec3(1),vec3(1),0,1,
+        vec4(1,1,1,p.weights.z),p.weights.x,vec2(1,0),1,p.weights.y,p.surface.z);
+    float weight=specularRampFullDiffuse(p.weights.w,response.aoMask,response.litMask,p.surface.z);
+    outputData.values[index*3u]=vec4(c.uv,c.lobe,c.distribution);
+    outputData.values[index*3u+1u]=vec4(specularRampMain(p.f0.rgb,p.ramp.rgb,c.lobe,weight,p.mainColor,p.controls.x),weight);
+    outputData.values[index*3u+2u]=vec4(specularRampEnvironment(p.f0.rgb,p.ramp.rgb,p.surface.w),0);
+}

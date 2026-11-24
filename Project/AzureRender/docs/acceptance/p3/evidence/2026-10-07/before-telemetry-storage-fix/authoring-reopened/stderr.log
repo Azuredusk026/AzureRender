@@ -1,0 +1,25 @@
+[1791339841893][info][editor][code=0] Opened scene: editor-exploration
+[1791339842217][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791339842463][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791339842478][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791339842489][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791339842493][info][editor][code=0] Opened scene: editor-exploration
+[1791339842494][info][editor][code=0] Selected node: Placed Object
+[1791339842512][info][editor][code=0] Opened scene: editor-exploration
+[1791339842513][info][editor][code=0] Selected node: Placed Object
+[1791339842520][info][editor][code=0] Asset reload requested; changed files: 0
+[1791339842525][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791339842537][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791339842547][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791339842549][info][editor][code=0] Renderer resources reloaded
+[1791339842556][info][editor][code=0] Opened scene: editor-exploration
+[1791339842574][info][editor][code=0] Undo
+[1791339843702][info][editor][code=0] Play started
+[1791339843708][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791339843720][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791339843732][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791339843854][info][editor][code=0] Play stopped; edit state restored
+[1791339843861][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791339843873][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791339843883][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791339843901][info][editor][code=0] Saved scene: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\p3\authoring\game\assets\exploration.azurelevel

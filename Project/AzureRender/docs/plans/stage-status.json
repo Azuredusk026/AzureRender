@@ -1,0 +1,1856 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-10-31",
+  "states": {
+    "Complete": "完成",
+    "Ready": "Ready",
+    "Active": "开发中",
+    "Pending": "待完成"
+  },
+  "stages": [
+    {
+      "id": "F4",
+      "name": "模块与类型契约",
+      "status": "Complete",
+      "scope": "已验收范围及原型边界",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/f4/2026-10-06.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "G8",
+      "name": "共享机制与应用分层",
+      "status": "Complete",
+      "scope": "已验收范围及原型边界",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g8/2026-10-06.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "U3",
+      "name": "编辑操作与文档事务",
+      "status": "Complete",
+      "scope": "已验收范围及原型边界",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u3/2026-10-06.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "F5",
+      "name": "观察、内容与工具闭环",
+      "status": "Complete",
+      "scope": "已验收范围及原型边界",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/f5/2026-10-06.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "U4",
+      "name": "UI 基础与设置",
+      "status": "Complete",
+      "scope": "已验收范围及原型边界",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u4/2026-10-06.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "G9",
+      "name": "有界 AI 内容辅助",
+      "status": "Complete",
+      "scope": "已验收范围及原型边界",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g9/2026-10-06.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "R7",
+      "name": "热重载与资产预览",
+      "status": "Complete",
+      "scope": "已验收范围及原型边界",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/r7/2026-10-06.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "G10",
+      "name": "程序化内容",
+      "status": "Complete",
+      "scope": "已验收范围及原型边界",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g10/2026-10-07.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "R8",
+      "name": "着色模块原型",
+      "status": "Complete",
+      "scope": "已验收范围及原型边界",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/r8/2026-10-07.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "R9",
+      "name": "GPU 可见性原型",
+      "status": "Complete",
+      "scope": "已验收范围及原型边界",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/r9/2026-10-07.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "G11",
+      "name": "脚本后端原型",
+      "status": "Complete",
+      "scope": "已验收范围及原型边界",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g11/2026-10-07.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "P3",
+      "name": "引擎复用与交付",
+      "status": "Complete",
+      "scope": "已验收范围及原型边界",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/p3/2026-10-07.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "U5",
+      "name": "导航与快捷键",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u5/2026-10-08.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "U6",
+      "name": "选择与变换",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u6/2026-10-08.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "U7",
+      "name": "内容制作与恢复",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u7/2026-10-08.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "P4",
+      "name": "编辑器体验收尾",
+      "status": "Ready",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/plans/editor-usability-manifest.json"
+      ],
+      "requiredAcceptance": [
+        "P4-input"
+      ]
+    },
+    {
+      "id": "U8",
+      "name": "工作区与配置",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u8/2026-10-10.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "U9",
+      "name": "属性与引用",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u9/2026-10-10.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "G12",
+      "name": "资产文件操作",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g12/2026-10-10.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "U10",
+      "name": "资源导航与打开",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u10/2026-10-10.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "U11",
+      "name": "日志与诊断",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u11/2026-10-10.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "U12",
+      "name": "运行预览会话",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u12/2026-10-10.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "G13",
+      "name": "制作与运行机制",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g13/2026-10-10.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "U13",
+      "name": "预览与交互反馈",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u13/2026-10-10.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "G15",
+      "name": "探索路线与环境",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g15/2026-10-10.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "G16",
+      "name": "平台玩法与恢复",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g16/2026-10-10.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "P5",
+      "name": "性能稳定性与交付收尾",
+      "status": "Ready",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/plans/2026-10-12-p5-deferred-to-p8.md"
+      ],
+      "requiredAcceptance": [
+        "P5-causality",
+        "P5-performance",
+        "P5-long-run",
+        "P5-delivery",
+        "P5-D-gameplay",
+        "P5-D-audio"
+      ]
+    },
+    {
+      "id": "U15",
+      "name": "制作效率基线",
+      "status": "Ready",
+      "scope": "自动门禁通过，集中收尾待验",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u15/automatic-2026-10-12/manifest.json"
+      ],
+      "requiredAcceptance": [
+        "U15-baseline"
+      ]
+    },
+    {
+      "id": "U16",
+      "name": "制作缺陷与恢复",
+      "status": "Ready",
+      "scope": "自动门禁通过，集中收尾待验",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u16/automatic-2026-10-12/manifest.json"
+      ],
+      "requiredAcceptance": [
+        "U16-recovery",
+        "UX-008-causality"
+      ]
+    },
+    {
+      "id": "P6",
+      "name": "双工作流制作交付",
+      "status": "Ready",
+      "scope": "自动门禁通过，集中收尾待验",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/p6/2026-10-12.md"
+      ],
+      "requiredAcceptance": [
+        "P6-authoring"
+      ]
+    },
+    {
+      "id": "G17",
+      "name": "格式注册与交换基础",
+      "status": "Ready",
+      "scope": "自动门禁通过，最终复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g17/evidence/2026-10-12/manifest.json"
+      ],
+      "requiredAcceptance": [
+        "P8-final"
+      ]
+    },
+    {
+      "id": "G18",
+      "name": "模型与场景交换",
+      "status": "Ready",
+      "scope": "自动门禁通过，最终复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g18/evidence/2026-10-12/manifest.json"
+      ],
+      "requiredAcceptance": [
+        "P8-final"
+      ]
+    },
+    {
+      "id": "G19",
+      "name": "图像格式交换",
+      "status": "Ready",
+      "scope": "自动门禁通过，最终复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g19/evidence/2026-10-12/manifest.json"
+      ],
+      "requiredAcceptance": [
+        "P8-final"
+      ]
+    },
+    {
+      "id": "G20",
+      "name": "第一批音频交换",
+      "status": "Ready",
+      "scope": "自动门禁通过，最终复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g20/evidence/2026-10-12/manifest.json"
+      ],
+      "requiredAcceptance": [
+        "G20-audio"
+      ]
+    },
+    {
+      "id": "G21",
+      "name": "场景数据交换",
+      "status": "Ready",
+      "scope": "自动门禁通过，最终复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
+      ],
+      "requiredAcceptance": [
+        "P8-final"
+      ]
+    },
+    {
+      "id": "U17",
+      "name": "导入导出交互",
+      "status": "Ready",
+      "scope": "自动门禁通过，最终复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u17/evidence/2026-10-12/manifest.json"
+      ],
+      "requiredAcceptance": [
+        "U17-transfer"
+      ]
+    },
+    {
+      "id": "P7",
+      "name": "第一批格式集成交付",
+      "status": "Ready",
+      "scope": "自动门禁通过，最终复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/p7/evidence/2026-10-12/manifest.json"
+      ],
+      "requiredAcceptance": [
+        "P7-exchange"
+      ]
+    },
+    {
+      "id": "G22",
+      "name": "压缩纹理与 mip",
+      "status": "Ready",
+      "scope": "自动门禁通过，最终复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g22/evidence/2026-10-12/manifest.json"
+      ],
+      "requiredAcceptance": [
+        "P8-final"
+      ]
+    },
+    {
+      "id": "G23",
+      "name": "压缩音频与编码",
+      "status": "Ready",
+      "scope": "自动门禁通过，最终复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g23/evidence/2026-10-12/manifest.json"
+      ],
+      "requiredAcceptance": [
+        "G23-audio"
+      ]
+    },
+    {
+      "id": "U14",
+      "name": "材质画布",
+      "status": "Complete",
+      "scope": "专项规格规定的实现与检查",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/u14/2026-10-12.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "G24",
+      "name": "扩展格式",
+      "status": "Complete",
+      "scope": "专项规格规定的实现与检查",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g24/2026-10-12.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "G14",
+      "name": "二维内容",
+      "status": "Complete",
+      "scope": "专项规格规定的实现与检查",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/g14/2026-10-12.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "B1",
+      "name": "音频关闭问题收尾",
+      "status": "Ready",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/b1/2026-10-12.md"
+      ],
+      "requiredAcceptance": [
+        "P5-long-run"
+      ]
+    },
+    {
+      "id": "P9",
+      "name": "内容扩展集成交付收尾",
+      "status": "Ready",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/p9/2026-10-12.md"
+      ],
+      "requiredAcceptance": [
+        "P5-performance",
+        "P5-long-run",
+        "P5-causality",
+        "P8-final"
+      ]
+    },
+    {
+      "id": "UI1",
+      "name": "启动与项目中心",
+      "status": "Complete",
+      "scope": "该批实现与自动检查，实体复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/ui1/2026-10-12.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UI2",
+      "name": "项目隔离与游戏入口",
+      "status": "Complete",
+      "scope": "该批实现与自动检查，实体复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/ui2/2026-10-12.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UI3",
+      "name": "设计系统与发布界面",
+      "status": "Complete",
+      "scope": "该批实现与自动检查，实体复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/ui3/2026-10-12.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UI4",
+      "name": "安装版制作发布",
+      "status": "Complete",
+      "scope": "该批实现与自动检查，实体复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/ui4/2026-10-12.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UI5",
+      "name": "资源与日志面板",
+      "status": "Complete",
+      "scope": "该批实现与自动检查，实体复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/ui5/2026-10-12.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UI6",
+      "name": "层级与属性面板",
+      "status": "Complete",
+      "scope": "该批实现与自动检查，实体复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/ui6/2026-10-12.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UI7",
+      "name": "场景视口与工具栏",
+      "status": "Complete",
+      "scope": "该批实现与自动检查，实体复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/ui7/2026-10-12.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UI8",
+      "name": "工作区集中交付检查",
+      "status": "Complete",
+      "scope": "该批实现与自动检查，实体复核归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/ui8/2026-10-12.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "R10",
+      "name": "渲染扩展候选",
+      "status": "Pending",
+      "scope": "候选规格与实施范围待落实",
+      "checksPassed": false,
+      "dependsOn": [],
+      "evidence": [
+        "docs/plans/hazel-fermion-manifest.json"
+      ],
+      "requiredAcceptance": [],
+      "kind": "candidate"
+    },
+    {
+      "id": "WF1",
+      "name": "阶段状态与一致性检查",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/wf1/2026-10-12.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "WF2",
+      "name": "验收执行队列与准备报告",
+      "status": "Complete",
+      "scope": "本阶段交付",
+      "checksPassed": true,
+      "dependsOn": [
+        "WF1"
+      ],
+      "evidence": [
+        "docs/acceptance/wf2/2026-10-13.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED0",
+      "name": "源码审查与职责契约",
+      "status": "Complete",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/ed0/2026-10-14.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED1",
+      "name": "基础创建、命名与碰撞策略",
+      "status": "Complete",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": true,
+      "dependsOn": [
+        "ED0"
+      ],
+      "evidence": [
+        "docs/acceptance/ed1/2026-10-14.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED2",
+      "name": "层级与对象操作",
+      "status": "Complete",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": true,
+      "dependsOn": [
+        "ED1"
+      ],
+      "evidence": [
+        "docs/acceptance/ed2/2026-10-14.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED3",
+      "name": "组件生命周期与属性引用",
+      "status": "Complete",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": true,
+      "dependsOn": [
+        "ED2"
+      ],
+      "evidence": [
+        "docs/acceptance/ed3/2026-10-14.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED4",
+      "name": "外部拖放与视口交互",
+      "status": "Complete",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": true,
+      "dependsOn": [
+        "ED3"
+      ],
+      "evidence": [
+        "docs/acceptance/ed4/2026-10-14.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED5",
+      "name": "设置分层与统一工作区",
+      "status": "Complete",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": true,
+      "dependsOn": [
+        "ED4"
+      ],
+      "evidence": [
+        "docs/acceptance/ed5/2026-10-14.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED6",
+      "name": "可选渲染特性与项目隔离",
+      "status": "Complete",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": true,
+      "dependsOn": [
+        "ED5"
+      ],
+      "evidence": [
+        "docs/acceptance/ed6/2026-10-14.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED7",
+      "name": "制作集成与交付准备",
+      "status": "Complete",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": true,
+      "dependsOn": [
+        "ED6"
+      ],
+      "evidence": [
+        "docs/acceptance/ed7/2026-10-14.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "P8",
+      "name": "最终交付验收",
+      "status": "Ready",
+      "scope": "开发与机器批次已整理，实体操作及其余正式条件待满足",
+      "checksPassed": false,
+      "dependsOn": [
+        "UI8",
+        "U14",
+        "G24",
+        "G14",
+        "ED7"
+      ],
+      "evidence": [
+        "docs/acceptance/p8/2026-10-14.md",
+        "docs/acceptance/p8/2026-10-13.md",
+        "docs/acceptance/p8/2026-10-12.md",
+        "docs/acceptance/p8/2026-10-31-environment.md"
+      ],
+      "requiredAcceptance": [
+        "P5-causality",
+        "P5-performance",
+        "P5-long-run",
+        "P5-delivery",
+        "UX-008-causality",
+        "P4-input",
+        "P5-D-gameplay",
+        "P5-D-audio",
+        "U15-baseline",
+        "U16-recovery",
+        "P6-authoring",
+        "G20-audio",
+        "U17-transfer",
+        "P7-exchange",
+        "G23-audio",
+        "P8-final",
+        "UI8-input-ime",
+        "UI8-directory-causality",
+        "ED-workflow"
+      ],
+      "remainingEvidence": "docs/acceptance/p8/evidence/2026-10-14/execution.json"
+    },
+    {
+      "id": "UX-A",
+      "name": "创建与层级",
+      "status": "Complete",
+      "scope": "Unity 操作习惯与通用编辑器职责",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/editor-usability-audit.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UX-B",
+      "name": "工作区与视口",
+      "status": "Complete",
+      "scope": "Unity 操作习惯与通用编辑器职责",
+      "checksPassed": true,
+      "dependsOn": [
+        "UX-A"
+      ],
+      "evidence": [
+        "docs/editor-usability-audit.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UX-C",
+      "name": "组件与脚本",
+      "status": "Complete",
+      "scope": "Unity 操作习惯与通用编辑器职责",
+      "checksPassed": true,
+      "dependsOn": [
+        "UX-B"
+      ],
+      "evidence": [
+        "docs/editor-usability-audit.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UX-D",
+      "name": "设置与扩展归属",
+      "status": "Complete",
+      "scope": "Unity 操作习惯与通用编辑器职责",
+      "checksPassed": true,
+      "dependsOn": [
+        "UX-C"
+      ],
+      "evidence": [
+        "docs/editor-usability-audit.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UX-E",
+      "name": "集中交互复核",
+      "status": "Ready",
+      "scope": "Unity 操作习惯与通用编辑器职责",
+      "checksPassed": true,
+      "dependsOn": [
+        "UX-D"
+      ],
+      "evidence": [
+        "docs/acceptance/ux/2026-10-14.md"
+      ],
+      "requiredAcceptance": [
+        "UX-E-HUMAN"
+      ]
+    },
+    {
+      "id": "VD0",
+      "name": "参考研究与视觉设计",
+      "status": "Complete",
+      "scope": "界面现代化与职责分层",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "VD1",
+      "name": "公共界面基础",
+      "status": "Complete",
+      "scope": "界面现代化与职责分层",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD0"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "VD2",
+      "name": "品牌与项目中心",
+      "status": "Complete",
+      "scope": "界面现代化与职责分层",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD1"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "VD3",
+      "name": "工作台与视口外壳",
+      "status": "Complete",
+      "scope": "界面现代化与职责分层",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD2"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "VD4",
+      "name": "层级属性与资源面板",
+      "status": "Complete",
+      "scope": "界面现代化与职责分层",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD3"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "VD5",
+      "name": "设置制作与发布界面",
+      "status": "Complete",
+      "scope": "界面现代化与职责分层",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD4"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "VD6",
+      "name": "集中验证与交付",
+      "status": "Ready",
+      "scope": "界面现代化与职责分层",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD5"
+      ],
+      "evidence": [
+        "docs/acceptance/vd/2026-10-14.md",
+        "docs/acceptance/vd/manifest.json"
+      ],
+      "requiredAcceptance": [
+        "VD6-HUMAN"
+      ]
+    },
+    {
+      "id": "WC1",
+      "name": "固定世界网格与轴",
+      "status": "Complete",
+      "scope": "世界参照、相机与渲染",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD5"
+      ],
+      "evidence": [
+        "docs/acceptance/wc/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "WC2",
+      "name": "世界方向天空与纯色设置",
+      "status": "Complete",
+      "scope": "世界参照、相机与渲染",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD5"
+      ],
+      "evidence": [
+        "docs/acceptance/wc/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "WC3",
+      "name": "编辑游戏与最终渲染相机",
+      "status": "Complete",
+      "scope": "世界参照、相机与渲染",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD5"
+      ],
+      "evidence": [
+        "docs/acceptance/wc/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "WC4",
+      "name": "中英双语界面",
+      "status": "Complete",
+      "scope": "世界参照、相机与渲染",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD5"
+      ],
+      "evidence": [
+        "docs/acceptance/wc/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "WC5",
+      "name": "路径追踪与独立演示",
+      "status": "Complete",
+      "scope": "世界参照、相机与渲染",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD5"
+      ],
+      "evidence": [
+        "docs/acceptance/wc/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "WC6",
+      "name": "交互修复与集中交付",
+      "status": "Complete",
+      "scope": "世界参照、相机与渲染",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD5"
+      ],
+      "evidence": [
+        "docs/acceptance/wc/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "PT0",
+      "name": "公开素材与支持契约",
+      "status": "Complete",
+      "scope": "下一轮路径追踪补齐与公开演示",
+      "checksPassed": true,
+      "dependsOn": [
+        "WC6"
+      ],
+      "evidence": [
+        "docs/acceptance/pt/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "PT1",
+      "name": "直接光与反射求值",
+      "status": "Complete",
+      "scope": "下一轮路径追踪补齐与公开演示",
+      "checksPassed": true,
+      "dependsOn": [
+        "PT0"
+      ],
+      "evidence": [
+        "docs/acceptance/pt/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "PT2",
+      "name": "法线与材质输入",
+      "status": "Complete",
+      "scope": "下一轮路径追踪补齐与公开演示",
+      "checksPassed": true,
+      "dependsOn": [
+        "PT1"
+      ],
+      "evidence": [
+        "docs/acceptance/pt/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "PT3",
+      "name": "面光源与环境采样",
+      "status": "Complete",
+      "scope": "下一轮路径追踪补齐与公开演示",
+      "checksPassed": true,
+      "dependsOn": [
+        "PT2"
+      ],
+      "evidence": [
+        "docs/acceptance/pt/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "PT4",
+      "name": "玻璃与粗糙透射",
+      "status": "Complete",
+      "scope": "下一轮路径追踪补齐与公开演示",
+      "checksPassed": true,
+      "dependsOn": [
+        "PT3"
+      ],
+      "evidence": [
+        "docs/acceptance/pt/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "PT5",
+      "name": "预览降噪与诊断",
+      "status": "Complete",
+      "scope": "下一轮路径追踪补齐与公开演示",
+      "checksPassed": true,
+      "dependsOn": [
+        "PT4"
+      ],
+      "evidence": [
+        "docs/acceptance/pt/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "PT6",
+      "name": "三个公开素材演示",
+      "status": "Complete",
+      "scope": "下一轮路径追踪补齐与公开演示",
+      "checksPassed": true,
+      "dependsOn": [
+        "PT5"
+      ],
+      "evidence": [
+        "docs/acceptance/pt/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "PT7",
+      "name": "集中验收与画面交付",
+      "status": "Complete",
+      "scope": "下一轮路径追踪补齐与公开演示",
+      "checksPassed": true,
+      "dependsOn": [
+        "PT6"
+      ],
+      "evidence": [
+        "docs/acceptance/pt/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "NR0",
+      "name": "参考与诊断基准",
+      "status": "Active",
+      "scope": "九份原生帧加载及通道通过；参考标定与专项绑定待验",
+      "checksPassed": false,
+      "dependsOn": [],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/reference-baseline.md",
+        "docs/plans/2026-10-21-native-render-evidence-execution.md",
+        "docs/acceptance/nr/editor-resource-load-baseline.md",
+        "docs/acceptance/nr/native-game-captures.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md",
+        "docs/acceptance/recovery/2026-10-30.md"
+      ],
+      "requiredAcceptance": [
+        "NR0.delivery"
+      ]
+    },
+    {
+      "id": "NR1",
+      "name": "有效场景与资源链",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR0"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/layered-content.md",
+        "docs/acceptance/nr/source-geometry-detail.md",
+        "docs/plans/2026-10-21-atrium-completeness-antialiasing.md",
+        "docs/acceptance/nr/atrium-completeness.md",
+        "docs/acceptance/nr/logistics-multiclip.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
+      ],
+      "requiredAcceptance": [
+        "NR1.delivery"
+      ]
+    },
+    {
+      "id": "NR2",
+      "name": "原生材质与颜色",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR1"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/runtime/scene-color-refraction.md",
+        "docs/acceptance/nr/native-glass.md",
+        "docs/acceptance/nr/upper-geometry.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
+      ],
+      "requiredAcceptance": [
+        "NR2.delivery"
+      ]
+    },
+    {
+      "id": "NR3",
+      "name": "直接光与局部阴影",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR2"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/light-attenuation.md",
+        "docs/acceptance/nr/directional-lighting.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
+      ],
+      "requiredAcceptance": [
+        "NR3.delivery"
+      ]
+    },
+    {
+      "id": "NR4",
+      "name": "原生全局光照",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR2"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/irradiance-coverage.md",
+        "docs/acceptance/nr/floor-surface-conversion.md",
+        "docs/acceptance/nr/irradiance-composition.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
+      ],
+      "requiredAcceptance": [
+        "NR4.delivery"
+      ]
+    },
+    {
+      "id": "NR5",
+      "name": "原生反射",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR2"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/reflection-cube.md",
+        "docs/acceptance/nr/environment-specular.md",
+        "docs/acceptance/nr/screen-space-reflections.md",
+        "docs/acceptance/nr/reflection-roughness.md",
+        "docs/acceptance/nr/reflection-ray-math.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
+      ],
+      "requiredAcceptance": [
+        "NR5.delivery"
+      ]
+    },
+    {
+      "id": "NR6",
+      "name": "角色着色与二级运动",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR3",
+        "NR4",
+        "NR5"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/character-surfaces.md",
+        "docs/acceptance/nr/character-face-sdf.md",
+        "docs/runtime/dual-face-sdf.md",
+        "docs/acceptance/nr/character-shadow-lut.md",
+        "docs/acceptance/nr/character-scene-lighting.md",
+        "docs/acceptance/nr/multiply-composite.md",
+        "docs/acceptance/nr/projected-hair.md",
+        "docs/acceptance/nr/outline-coverage.md",
+        "docs/acceptance/nr/character-logistics-joint.md",
+        "docs/acceptance/nr/character-logistics-restored.md",
+        "docs/acceptance/nr/face-specular-control.md",
+        "docs/acceptance/nr/character-probe-controls.md",
+        "docs/acceptance/nr/eye-radial-surface.md",
+        "docs/acceptance/nr/character-color-receivers.md",
+        "docs/acceptance/nr/character-main-shadow.md",
+        "docs/acceptance/nr/character-indirect-normal.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md",
+        "docs/acceptance/nr/cloth-native-integration.md",
+        "docs/acceptance/nr/hair-depth-coverage.md",
+        "docs/acceptance/nr/hair-object-visibility.md",
+        "docs/acceptance/nr/object-shadow-exact-bias.md",
+        "docs/acceptance/nr/hair-sampling-boundary.md"
+      ],
+      "requiredAcceptance": [
+        "NR6.delivery"
+      ]
+    },
+    {
+      "id": "NR7",
+      "name": "环境后处理与场景动态",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR6"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/runtime/rigid-node-animation.md",
+        "docs/acceptance/nr/logistics-evidence.md",
+        "docs/acceptance/nr/spatial-antialiasing.md",
+        "docs/acceptance/nr/native-atrium-antialiasing.md",
+        "docs/acceptance/nr/atrium-completeness.md",
+        "docs/assets/native-spline-compiler.md",
+        "docs/acceptance/nr/logistics-multiclip.md",
+        "docs/acceptance/nr/node-opacity.md",
+        "docs/acceptance/nr/character-logistics-joint.md",
+        "docs/acceptance/nr/unlit-surface.md",
+        "docs/acceptance/nr/character-logistics-restored.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md",
+        "docs/acceptance/nr/hair-sampling-boundary.md",
+        "docs/acceptance/nr/main-aa-cost-attribution.md"
+      ],
+      "requiredAcceptance": [
+        "NR7.delivery"
+      ]
+    },
+    {
+      "id": "NR8",
+      "name": "渲染联合验收",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR7"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/character-logistics-joint.md",
+        "docs/acceptance/nr/character-logistics-restored.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md",
+        "docs/acceptance/nr/cloth-native-integration.md",
+        "docs/acceptance/nr/hair-depth-coverage.md",
+        "docs/acceptance/nr/hair-object-visibility.md",
+        "docs/acceptance/nr/object-shadow-exact-bias.md",
+        "docs/acceptance/nr/main-aa-cost-attribution.md",
+        "docs/acceptance/nr/material-class-feature-specialization.md"
+      ],
+      "requiredAcceptance": [
+        "NR8.delivery"
+      ]
+    },
+    {
+      "id": "NR9",
+      "name": "原生移动动作集",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR1"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/native-locomotion.md"
+      ],
+      "requiredAcceptance": [
+        "NR9.delivery"
+      ]
+    },
+    {
+      "id": "NR10",
+      "name": "WASD 与场景移动",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR1"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR10.delivery"
+      ]
+    },
+    {
+      "id": "NR11",
+      "name": "速度驱动动画混合",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR9",
+        "NR10"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/locomotion-blending.md"
+      ],
+      "requiredAcceptance": [
+        "NR11.delivery"
+      ]
+    },
+    {
+      "id": "NR12",
+      "name": "可玩场景联合交付",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR8",
+        "NR11"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
+      ],
+      "requiredAcceptance": [
+        "NR12.delivery"
+      ]
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "P5-causality",
+      "originPhase": "P5",
+      "ownerPhase": "P8",
+      "result": "pending",
+      "transferEvidence": "docs/plans/2026-10-12-p5-deferred-to-p8.md",
+      "source": "docs/plans/p8-deferred-acceptance-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "P5-performance",
+      "originPhase": "P5",
+      "ownerPhase": "P8",
+      "result": "failed",
+      "transferEvidence": "docs/plans/2026-10-12-p5-deferred-to-p8.md",
+      "source": "docs/plans/p8-deferred-acceptance-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json",
+      "evidence": "docs/acceptance/p8/evidence/2026-10-14/performance-summary.json"
+    },
+    {
+      "id": "P5-long-run",
+      "originPhase": "P5",
+      "ownerPhase": "P8",
+      "result": "passed",
+      "transferEvidence": "docs/plans/2026-10-12-p5-deferred-to-p8.md",
+      "source": "docs/plans/p8-deferred-acceptance-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json",
+      "evidence": "docs/acceptance/p8/evidence/2026-10-14/long-run-final-status.json"
+    },
+    {
+      "id": "P5-delivery",
+      "originPhase": "P5",
+      "ownerPhase": "P8",
+      "result": "pending",
+      "transferEvidence": "docs/plans/2026-10-12-p5-deferred-to-p8.md",
+      "source": "docs/plans/p8-deferred-acceptance-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "UX-008-causality",
+      "originPhase": "U16",
+      "ownerPhase": "P8",
+      "result": "pending",
+      "transferEvidence": "docs/plans/2026-10-12-p5-deferred-to-p8.md",
+      "source": "docs/plans/p8-deferred-acceptance-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "P4-input",
+      "originPhase": "P4",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/manual-review-manifest.json",
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "P5-D-gameplay",
+      "originPhase": "P5",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/manual-review-manifest.json",
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "P5-D-audio",
+      "originPhase": "P5",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/manual-review-manifest.json",
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "U15-baseline",
+      "originPhase": "U15",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/manual-review-manifest.json",
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "U16-recovery",
+      "originPhase": "U16",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/manual-review-manifest.json",
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "P6-authoring",
+      "originPhase": "P6",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/manual-review-manifest.json",
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "G20-audio",
+      "originPhase": "G20",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/manual-review-manifest.json",
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "U17-transfer",
+      "originPhase": "U17",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/manual-review-manifest.json",
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "P7-exchange",
+      "originPhase": "P7",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/manual-review-manifest.json",
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "G23-audio",
+      "originPhase": "G23",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/manual-review-manifest.json",
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "P8-final",
+      "originPhase": "P8",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/manual-review-manifest.json",
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "UI8-input-ime",
+      "originPhase": "UI8",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/acceptance/ui8/2026-10-12.md",
+      "source": "docs/acceptance/ui8/2026-10-12.md",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "UI8-directory-causality",
+      "originPhase": "UI8",
+      "ownerPhase": "P8",
+      "result": "pending",
+      "transferEvidence": "docs/acceptance/ui8/2026-10-12.md",
+      "source": "docs/acceptance/ui8/2026-10-12.md",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "ED-workflow",
+      "originPhase": "ED7",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/2026-10-14-editor-generalization.md",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "UX-E-HUMAN",
+      "originPhase": "UX-E",
+      "ownerPhase": "UX-E",
+      "result": "pending",
+      "description": "新版交互的集中实体操作与使用体验确认",
+      "evidence": "docs/acceptance/ux/2026-10-14.md"
+    },
+    {
+      "id": "VD6-HUMAN",
+      "ownerPhase": "VD6",
+      "originPhase": "VD6",
+      "result": "pending",
+      "description": "集中确认中文输入、实体拖拽、焦点与连续制作体验",
+      "evidence": "docs/acceptance/vd/2026-10-14.md"
+    },
+    {
+      "id": "NR0.delivery",
+      "originPhase": "NR0",
+      "ownerPhase": "NR0",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR1.delivery",
+      "originPhase": "NR1",
+      "ownerPhase": "NR1",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR2.delivery",
+      "originPhase": "NR2",
+      "ownerPhase": "NR2",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR3.delivery",
+      "originPhase": "NR3",
+      "ownerPhase": "NR3",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR4.delivery",
+      "originPhase": "NR4",
+      "ownerPhase": "NR4",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR5.delivery",
+      "originPhase": "NR5",
+      "ownerPhase": "NR5",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR6.delivery",
+      "originPhase": "NR6",
+      "ownerPhase": "NR6",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR7.delivery",
+      "originPhase": "NR7",
+      "ownerPhase": "NR7",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR8.delivery",
+      "originPhase": "NR8",
+      "ownerPhase": "NR8",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR9.delivery",
+      "originPhase": "NR9",
+      "ownerPhase": "NR9",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR10.delivery",
+      "originPhase": "NR10",
+      "ownerPhase": "NR10",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR11.delivery",
+      "originPhase": "NR11",
+      "ownerPhase": "NR11",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR12.delivery",
+      "originPhase": "NR12",
+      "ownerPhase": "NR12",
+      "result": "notExecuted",
+      "evidence": null
+    }
+  ],
+  "mirrors": [
+    "docs/plans/engine-evolution-manifest.json",
+    "docs/plans/editor-usability-manifest.json",
+    "docs/plans/hazel-fermion-manifest.json",
+    "docs/plans/authoring-usability-manifest.json",
+    "docs/plans/asset-format-manifest.json",
+    "docs/plans/content-expansion-manifest.json"
+  ],
+  "acceptanceSources": [
+    "docs/plans/p8-deferred-acceptance-manifest.json",
+    "docs/plans/manual-review-manifest.json"
+  ],
+  "executionOrder": [
+    "NR0",
+    "NR1",
+    "NR2",
+    "NR3",
+    "NR4",
+    "NR5",
+    "NR6",
+    "NR7",
+    "NR8",
+    "NR9",
+    "NR10",
+    "NR11",
+    "NR12",
+    "PT0",
+    "PT1",
+    "PT2",
+    "PT3",
+    "PT4",
+    "PT5",
+    "PT6",
+    "PT7",
+    "WC1",
+    "WC2",
+    "WC3",
+    "WC4",
+    "WC5",
+    "WC6",
+    "ED0",
+    "ED1",
+    "ED2",
+    "ED3",
+    "ED4",
+    "ED5",
+    "ED6",
+    "ED7",
+    "UX-A",
+    "UX-B",
+    "UX-C",
+    "UX-D",
+    "UX-E",
+    "P8"
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "c7204c51f69c8d49d002f003d961731f37c3a6ff",
+  "conditions": "Same working tree; sequential first and repeat samples; filesystem cache not flushed; wall time includes Python startup.",
+  "tasks": [
+    {
+      "task": "MaterialDocument",
+      "expectedFile": "src/runtime/MaterialDocument.hpp",
+      "attempts": [
+        {
+          "kind": "broad",
+          "query": "MaterialDocument",
+          "pass": "first",
+          "fullTextMs": 563.0,
+          "boundedMs": 844.0,
+          "fullTextChars": 29068,
+          "boundedChars": 4928,
+          "expectedFileFound": true,
+          "truncated": false,
+          "exitCode": 0
+        },
+        {
+          "kind": "broad",
+          "query": "MaterialDocument",
+          "pass": "repeat",
+          "fullTextMs": 593.0,
+          "boundedMs": 829.0,
+          "fullTextChars": 29068,
+          "boundedChars": 4928,
+          "expectedFileFound": true,
+          "truncated": false,
+          "exitCode": 0
+        },
+        {
+          "kind": "definition",
+          "query": "using MaterialDocument=",
+          "pass": "first",
+          "fullTextMs": 578.0,
+          "boundedMs": 828.0,
+          "fullTextChars": 74,
+          "boundedChars": 319,
+          "expectedFileFound": true,
+          "truncated": false,
+          "exitCode": 0
+        },
+        {
+          "kind": "definition",
+          "query": "using MaterialDocument=",
+          "pass": "repeat",
+          "fullTextMs": 578.0,
+          "boundedMs": 828.0,
+          "fullTextChars": 74,
+          "boundedChars": 319,
+          "expectedFileFound": true,
+          "truncated": false,
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "task": "RenderGraph",
+      "expectedFile": "src/render/RenderGraph.hpp",
+      "attempts": [
+        {
+          "kind": "broad",
+          "query": "RenderGraph",
+          "pass": "first",
+          "fullTextMs": 578.0,
+          "boundedMs": 750.0,
+          "fullTextChars": 285848,
+          "boundedChars": 4320,
+          "expectedFileFound": false,
+          "truncated": true,
+          "exitCode": 0
+        },
+        {
+          "kind": "broad",
+          "query": "RenderGraph",
+          "pass": "repeat",
+          "fullTextMs": 563.0,
+          "boundedMs": 765.0,
+          "fullTextChars": 285848,
+          "boundedChars": 4320,
+          "expectedFileFound": false,
+          "truncated": true,
+          "exitCode": 0
+        },
+        {
+          "kind": "definition",
+          "query": "struct RenderGraphResource",
+          "pass": "first",
+          "fullTextMs": 594.0,
+          "boundedMs": 781.0,
+          "fullTextChars": 608,
+          "boundedChars": 306,
+          "expectedFileFound": true,
+          "truncated": false,
+          "exitCode": 0
+        },
+        {
+          "kind": "definition",
+          "query": "struct RenderGraphResource",
+          "pass": "repeat",
+          "fullTextMs": 563.0,
+          "boundedMs": 750.0,
+          "fullTextChars": 608,
+          "boundedChars": 306,
+          "expectedFileFound": true,
+          "truncated": false,
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "task": "EditRegistry",
+      "expectedFile": "src/editor/commands/EditRegistry.hpp",
+      "attempts": [
+        {
+          "kind": "broad",
+          "query": "EditRegistry",
+          "pass": "first",
+          "fullTextMs": 547.0,
+          "boundedMs": 718.0,
+          "fullTextChars": 54841,
+          "boundedChars": 4376,
+          "expectedFileFound": true,
+          "truncated": true,
+          "exitCode": 0
+        },
+        {
+          "kind": "broad",
+          "query": "EditRegistry",
+          "pass": "repeat",
+          "fullTextMs": 579.0,
+          "boundedMs": 687.0,
+          "fullTextChars": 54841,
+          "boundedChars": 4376,
+          "expectedFileFound": true,
+          "truncated": true,
+          "exitCode": 0
+        },
+        {
+          "kind": "definition",
+          "query": "class EditRegistry",
+          "pass": "first",
+          "fullTextMs": 547.0,
+          "boundedMs": 891.0,
+          "fullTextChars": 1476,
+          "boundedChars": 1021,
+          "expectedFileFound": true,
+          "truncated": false,
+          "exitCode": 0
+        },
+        {
+          "kind": "definition",
+          "query": "class EditRegistry",
+          "pass": "repeat",
+          "fullTextMs": 515.0,
+          "boundedMs": 797.0,
+          "fullTextChars": 1476,
+          "boundedChars": 1021,
+          "expectedFileFound": true,
+          "truncated": false,
+          "exitCode": 0
+        }
+      ]
+    }
+  ]
+}

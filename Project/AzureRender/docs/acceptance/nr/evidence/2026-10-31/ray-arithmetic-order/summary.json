@@ -1,0 +1,2070 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "phase": "P2-ray-arithmetic-order",
+  "status": "frozen-reference-passed; Vulkan-production-pending",
+  "sourceBaseCommit": "ac7d1277187e8beb20d6012d25c47937fa8b75dc",
+  "artifactRoot": "build/runs/20261031-041625-ray-compiler-45f6e6",
+  "sourceFiles": {
+    "CMakeLists.txt": {
+      "sha256": "df7568258d74ed9156c162d4287b8828fa067dfaf90e92e7df59406b4a8e21e7",
+      "gitBlobId": "99654de622ef43337badaa0ba0027b9de6efb3ae"
+    },
+    "THIRD_PARTY_NOTICES.md": {
+      "sha256": "f00c28abdcf0510b9d80d9895153ba5de48859c381a73556cb9ee40d1e50d7b1",
+      "gitBlobId": "5eed4c7dbe726b94ee3a5f6792f0d95dc02a6f3a"
+    },
+    "tools/native_render/shader_arithmetic_order.py": {
+      "sha256": "743a8617832c675c3340a90e9c894c86bba1776c7843a83562663d9b59e3dfd1",
+      "gitBlobId": "5fad260d1635fa43c313ffda48b94c68dfde0833"
+    },
+    "tools/test_shader_arithmetic_order.py": {
+      "sha256": "b6368b45fc0393de82ffb0c56918cac583ed249a259de592c237ef4b040253c6",
+      "gitBlobId": "2b72c33e0071ff5278e09ea4b88debec8edce97f"
+    },
+    "tests/fixtures/shader_arithmetic_order/compiled-ray-mirror.dxbc": {
+      "sha256": "109762a00c8f5419bc059e34a1bdc7ef1bd6474304c9e37fad7c13a065f3a2e1",
+      "gitBlobId": "4322d38698316dee0f48b62756f175fb9e520daa"
+    },
+    "tests/fixtures/shader_arithmetic_order/ordered-ray-mirror.dxbc": {
+      "sha256": "3f840809e726d0e43160ace716716ae74143885bb60519d7b87abe41d9c9a51f",
+      "gitBlobId": "074e5cad8ee51f7637aa88f024df0717f345c8fc"
+    },
+    "tests/fixtures/shader_arithmetic_order/ray-policy.json": {
+      "sha256": "bfc8b5b4028e8fa38a687da3a4b73227c4d559432e1c281759047fb385869984",
+      "gitBlobId": "3a0ee2619e2011adafcede087565ede789115c15"
+    },
+    "tests/fixtures/shader_arithmetic_order/rounding-policy.json": {
+      "sha256": "bd325cfbf51bad32c9f70cd5630c76792fab4d186f4bc27b24979e3650aa8b04",
+      "gitBlobId": "60698c68f3550cd8f9278cda5a365beb0c8f5c69"
+    },
+    "tests/fixtures/shader_arithmetic_order/rounding-tail56.dxbc": {
+      "sha256": "361d7aaafeabcb48b24813d3bedaf81172f5a85ba01084c59cc1ee973c8e1ecc",
+      "gitBlobId": "d6b439f6ea86e0fb49ae5cf78f4d91fcea37d4d1"
+    },
+    "tests/fixtures/shader_arithmetic_order/rounding-tail63.dxbc": {
+      "sha256": "621318e812433c233bd1da15332fb596320867a539d6a179e193890def0fc62b",
+      "gitBlobId": "fbfc1972c6bd961b0467919e466b8769084789ee"
+    },
+    "tests/fixtures/shader_arithmetic_order/rounding.dxbc": {
+      "sha256": "efe14266260a66df3fd1613f2846742b97ad868b83dd286704339b3a8f534d02",
+      "gitBlobId": "0f4a90b16d609de5d595db5c6aa9d4e2e4df2a56"
+    },
+    "tests/fixtures/shader_arithmetic_order/rounding.hlsl": {
+      "sha256": "e0bdf06d44e424d8bd4870f59dd137d6da1af9cc8464d88f99a00cb811124fa6",
+      "gitBlobId": "6bf19f087c39ffbe5def45a1f7cebff5b3f0574e"
+    },
+    "tests/fixtures/shader_arithmetic_order/source.json": {
+      "sha256": "d17dba9e2c89405a5a2ab384f31986770e5de0dc5c9174a1e3e784916a2d0097",
+      "gitBlobId": "1cd231672a5c10b62127127fdacb189056948c8d"
+    },
+    "third_party/shader_arithmetic_order/LICENSE-DirectX-Headers.txt": {
+      "sha256": "903df5512f7d02609fed0c780a9b704f5a3eeb6e4d84ebe42a29845c81899a3c",
+      "gitBlobId": "63447fd8bbbf720abce8bb9794177779c8fb5bb1"
+    },
+    "third_party/shader_arithmetic_order/LICENSE-DXC.txt": {
+      "sha256": "27a49e35d1da96eba18fba54bc882667ff0ff8c0254f16f2b6e165d605ba7df8",
+      "gitBlobId": "8987f9b91c3bbd6c86dc103ecd4038ec9dfcc2af"
+    },
+    "third_party/shader_arithmetic_order/source.json": {
+      "sha256": "d619678d2c416d4a12ba2b076bf383ecb754f0bf673727a105c9431ab720115e",
+      "gitBlobId": "4e01eda87d45131aed9c16bdfec17f975fb344a8"
+    },
+    "docs/acceptance/nr/evidence/2026-10-31/ray-arithmetic-order/reference.json": {
+      "sha256": "4f74b49d2f94c0c0ae9709cdc2ddd33d18f0ba74906c241971da1e8d614192f5",
+      "gitBlobId": "581fbf041da7ab197d0e6d28a1717a368ae1758e"
+    },
+    "docs/acceptance/nr/evidence/2026-10-31/ray-arithmetic-order/replay_worker.py": {
+      "sha256": "6ced4eabe76a19650e027ab72ad5f5d9039638e516fe32ccc4e941b6e7ead8c3",
+      "gitBlobId": "b927f775ebc9ed475760e1dbbea11a77f93f2113"
+    },
+    "docs/acceptance/nr/evidence/2026-10-31/ray-arithmetic-order/run_replay.py": {
+      "sha256": "0665d855610bb61963b1796fcf54f20419f23bf046b51826caf261cfd8192fbd",
+      "gitBlobId": "4bbf88d4b87bb9d996625ce88db6e743f41783c9"
+    }
+  },
+  "inputReference": {
+    "schemaVersion": 1,
+    "captureSha256": "5bf129d05acb43d41ab54042f6648c3d728decb253c94d0250037f01f0b778b3",
+    "captureBytes": 944717392,
+    "event": 8702,
+    "originalShaderSha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+    "outputs": [
+      {
+        "resource": 15861,
+        "bytes": 3686400,
+        "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+      },
+      {
+        "resource": 16501,
+        "bytes": 3686400,
+        "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+      },
+      {
+        "resource": 15781,
+        "bytes": 921600,
+        "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+      }
+    ],
+    "expectedControlDifferences": [
+      1,
+      9312,
+      0
+    ]
+  },
+  "tooling": {
+    "schemaVersion": 1,
+    "scope": "Offline DXBC arithmetic-order tooling",
+    "format": {
+      "project": "Microsoft DirectX-Headers",
+      "commit": "c526f205c5f96cd2884bf0834c14c7e61bb726c8",
+      "source": "https://github.com/microsoft/DirectX-Headers/blob/c526f205c5f96cd2884bf0834c14c7e61bb726c8/include/directx/D3D12TokenizedProgramFormat.hpp",
+      "license": "MIT",
+      "adaptation": "Token field interpretation and opcode constants; Python operand and instruction processing",
+      "downloadedHeaderSha256": "5862ef7c8b819f0d02ba73563a9df4dc0e89f11fe59d8f598def39122273c626"
+    },
+    "hashing": {
+      "project": "Microsoft DirectXShaderCompiler",
+      "commit": "84f68ed1a40db3f3444a306162cab6ac0adfe842",
+      "source": "https://github.com/microsoft/DirectXShaderCompiler/blob/84f68ed1a40db3f3444a306162cab6ac0adfe842/lib/DxilHash/DxilHash.cpp",
+      "license": "University of Illinois/NCSA",
+      "adaptation": "Retail DXBC hash padding expressed in Python with standard MD5 compression rounds",
+      "upstreamSourceSha256": "d66b631ea28d4c90a8217fac004f9290eaac07f79115451e0c4e954c0b0c94af"
+    },
+    "licenses": {
+      "LICENSE-DirectX-Headers.txt": "903df5512f7d02609fed0c780a9b704f5a3eeb6e4d84ebe42a29845c81899a3c",
+      "LICENSE-DXC.txt": "27a49e35d1da96eba18fba54bc882667ff0ff8c0254f16f2b6e165d605ba7df8"
+    }
+  },
+  "diagnostics": {
+    "summary.json": {
+      "receipt": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/summary.json",
+        "sha256": "621ebe1987e27f15fe228ff87a499c31176a38e6a12c142fe63bd0eddb43a51f",
+        "bytes": 7226
+      },
+      "result": {
+        "status": "completed",
+        "startUtc": "2026-10-30T20:17:15.385625+00:00",
+        "scope": "Offline compiler comparison only; no GPU replay and no production source changes",
+        "hypothesis": "The mirror was built through RenderDoc with debug/default optimization; compiler settings may account for extra instructions. Original flags are stripped and remain unknown.",
+        "sourceSha256": "b72d73f2aadc5955290dc92652f8534eb464fe2a2485c9670318128d9a14a8f1",
+        "originalSha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+        "compiler": {
+          "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261021-172156-native-render-evidence-623c52\\renderdoc\\portable-1.46\\RenderDoc_1.46_64\\d3dcompiler_47.dll",
+          "sha256": "21df5696011156fe64f2dff47c8ed5e90817021f91f70b6d9707fd58cd1b0b81"
+        },
+        "original": {
+          "instructionCount": 331,
+          "chunkSizes": {
+            "ISGN": 8,
+            "OSGN": 8,
+            "SHEX": 10884
+          },
+          "codeSha256": "e7be3e21b11581da0c0441cb276e7c24a429a876b785cd00123ed72ca7b6e749"
+        },
+        "variants": [
+          {
+            "label": "debug-o1",
+            "flags": 1,
+            "hresult": 0,
+            "diagnostic": "",
+            "binarySha256": "d8d1e9429e6ceea1f7b3bd7c5ab76365cbb2f995104aeab259065a07fc67a027",
+            "codeSha256": "b5baea5513b358be08def5831f4bb4a34700ede213835883417535ea6a6301d1",
+            "codeBytesExact": false,
+            "instructionCount": 338,
+            "opcodeSequenceRatio": 0.9865470852017937,
+            "opcodeCountDifference": {
+              "and": 2,
+              "mov": 4,
+              "xor": 1
+            },
+            "chunkSizes": {
+              "RDEF": 1028,
+              "ISGN": 8,
+              "OSGN": 8,
+              "SHEX": 11056,
+              "SFI0": 8,
+              "STAT": 148,
+              "SPDB": 140800
+            }
+          },
+          {
+            "label": "debug-o3",
+            "flags": 32769,
+            "hresult": 0,
+            "diagnostic": "",
+            "binarySha256": "944c90b6a73a1813ce7a11aa45ab6e8afcbb49c422ca8241300aa98b18b82b98",
+            "codeSha256": "b5baea5513b358be08def5831f4bb4a34700ede213835883417535ea6a6301d1",
+            "codeBytesExact": false,
+            "instructionCount": 338,
+            "opcodeSequenceRatio": 0.9865470852017937,
+            "opcodeCountDifference": {
+              "and": 2,
+              "mov": 4,
+              "xor": 1
+            },
+            "chunkSizes": {
+              "RDEF": 1028,
+              "ISGN": 8,
+              "OSGN": 8,
+              "SHEX": 11056,
+              "SFI0": 8,
+              "STAT": 148,
+              "SPDB": 140800
+            }
+          },
+          {
+            "label": "debug-o0",
+            "flags": 16385,
+            "hresult": 0,
+            "diagnostic": "",
+            "binarySha256": "67d5c1e2ac5d28299d835f70a83ed0b53bbdd3faefb986c3f41174c371a7df39",
+            "codeSha256": "b5baea5513b358be08def5831f4bb4a34700ede213835883417535ea6a6301d1",
+            "codeBytesExact": false,
+            "instructionCount": 338,
+            "opcodeSequenceRatio": 0.9865470852017937,
+            "opcodeCountDifference": {
+              "and": 2,
+              "mov": 4,
+              "xor": 1
+            },
+            "chunkSizes": {
+              "RDEF": 1028,
+              "ISGN": 8,
+              "OSGN": 8,
+              "SHEX": 11056,
+              "SFI0": 8,
+              "STAT": 148,
+              "SPDB": 140800
+            }
+          },
+          {
+            "label": "debug-od",
+            "flags": 5,
+            "hresult": 0,
+            "diagnostic": "",
+            "binarySha256": "9e2ade2807f107a72cf44defb5220ad8211df347a7c0686fb0d9a3988823b5cd",
+            "codeSha256": "a62d977137cb950dea0c62adb306be084892c1264fa41fbe58d2766d30cfa897",
+            "codeBytesExact": false,
+            "instructionCount": 972,
+            "opcodeSequenceRatio": 0.39293937068303914,
+            "opcodeCountDifference": {
+              "and": 19,
+              "div": 2,
+              "div_sat": -2,
+              "iadd": 3,
+              "imad": -1,
+              "imul": 20,
+              "ine": 16,
+              "ineg": 2,
+              "ld_structured_indexable": 1,
+              "mad": 1,
+              "mad_sat": -1,
+              "max": 14,
+              "min": 3,
+              "mov": 561,
+              "sincos": 1,
+              "ushr": 1,
+              "xor": 1
+            },
+            "chunkSizes": {
+              "RDEF": 1028,
+              "ISGN": 8,
+              "OSGN": 8,
+              "SHEX": 24572,
+              "SFI0": 8,
+              "STAT": 148,
+              "SPDB": 167424
+            }
+          },
+          {
+            "label": "o1",
+            "flags": 0,
+            "hresult": 0,
+            "diagnostic": "",
+            "binarySha256": "109762a00c8f5419bc059e34a1bdc7ef1bd6474304c9e37fad7c13a065f3a2e1",
+            "codeSha256": "b5baea5513b358be08def5831f4bb4a34700ede213835883417535ea6a6301d1",
+            "codeBytesExact": false,
+            "instructionCount": 338,
+            "opcodeSequenceRatio": 0.9865470852017937,
+            "opcodeCountDifference": {
+              "and": 2,
+              "mov": 4,
+              "xor": 1
+            },
+            "chunkSizes": {
+              "RDEF": 1028,
+              "ISGN": 8,
+              "OSGN": 8,
+              "SHEX": 11056,
+              "SFI0": 8,
+              "STAT": 148
+            }
+          },
+          {
+            "label": "o3",
+            "flags": 32768,
+            "hresult": 0,
+            "diagnostic": "",
+            "binarySha256": "40a57fc201bd1e98cf2c2aa414c4dd60c898f36f06895491e521b6716a19b097",
+            "codeSha256": "b5baea5513b358be08def5831f4bb4a34700ede213835883417535ea6a6301d1",
+            "codeBytesExact": false,
+            "instructionCount": 338,
+            "opcodeSequenceRatio": 0.9865470852017937,
+            "opcodeCountDifference": {
+              "and": 2,
+              "mov": 4,
+              "xor": 1
+            },
+            "chunkSizes": {
+              "RDEF": 1028,
+              "ISGN": 8,
+              "OSGN": 8,
+              "SHEX": 11056,
+              "SFI0": 8,
+              "STAT": 148
+            }
+          },
+          {
+            "label": "debug-o1-ieee",
+            "flags": 8193,
+            "hresult": 0,
+            "diagnostic": "",
+            "binarySha256": "d5d8bb5f9382bdd10805d8a94f455916cb89abb8ac9005d5a9e87859be60794d",
+            "codeSha256": "9b4d845c3e58be828e33b431f50380de1391a6d3460b82db88707b646a6c63cd",
+            "codeBytesExact": false,
+            "instructionCount": 337,
+            "opcodeSequenceRatio": 0.9850299401197605,
+            "opcodeCountDifference": {
+              "and": 2,
+              "mad": 1,
+              "mad_sat": -1,
+              "mov": 2,
+              "mov_sat": 1,
+              "xor": 1
+            },
+            "chunkSizes": {
+              "RDEF": 1028,
+              "ISGN": 8,
+              "OSGN": 8,
+              "SHEX": 11040,
+              "SFI0": 8,
+              "STAT": 148,
+              "SPDB": 140800
+            }
+          },
+          {
+            "label": "debug-o3-ieee",
+            "flags": 40961,
+            "hresult": 0,
+            "diagnostic": "",
+            "binarySha256": "494c554726d6aa4f147bcb363460cdd49bf63e76cb9aca852f39348b822ae407",
+            "codeSha256": "9b4d845c3e58be828e33b431f50380de1391a6d3460b82db88707b646a6c63cd",
+            "codeBytesExact": false,
+            "instructionCount": 337,
+            "opcodeSequenceRatio": 0.9850299401197605,
+            "opcodeCountDifference": {
+              "and": 2,
+              "mad": 1,
+              "mad_sat": -1,
+              "mov": 2,
+              "mov_sat": 1,
+              "xor": 1
+            },
+            "chunkSizes": {
+              "RDEF": 1028,
+              "ISGN": 8,
+              "OSGN": 8,
+              "SHEX": 11040,
+              "SFI0": 8,
+              "STAT": 148,
+              "SPDB": 140800
+            }
+          }
+        ],
+        "endUtc": "2026-10-30T20:17:16.256356+00:00",
+        "conclusion": "Optimization levels 0/1/3 and debug flag produce identical SHEX. IEEE strictness produces a distinct precise instruction stream. No GPU equivalence conclusion is implied."
+      }
+    },
+    "gpu-summary.json": {
+      "receipt": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/gpu-summary.json",
+        "sha256": "27475f3cd060c7148fa7da088ca823b906ba763a47f05f68df2143dd9c30ebf5",
+        "bytes": 3587
+      },
+      "result": {
+        "status": "diagnostic-completed",
+        "startUtc": "2026-10-30T20:19:17.994399+00:00",
+        "scope": "Frozen D3D11 event 8702; byte comparison of all three outputs",
+        "hypothesis": "The IEEE-precise stream changes arithmetic optimization; measure against original hardware outputs without relying on shader interpreter arithmetic",
+        "variants": [
+          {
+            "label": "original-dxbc",
+            "binarySha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 0,
+                "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 0,
+                "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": true
+          },
+          {
+            "label": "default-mirror",
+            "binarySha256": "d8d1e9429e6ceea1f7b3bd7c5ab76365cbb2f995104aeab259065a07fc67a027",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 1,
+                "sha256": "b97d92e5dbdc341aae33c8a4fe67c96e6bd91959ec15e5bf8189607e4f97a57e"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 9312,
+                "sha256": "9b2d3b12e529ffb07c7953e52a9c88a1651c8966c8af58b8b650a6477cab78e2"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": false
+          },
+          {
+            "label": "ieee-mirror",
+            "binarySha256": "d5d8bb5f9382bdd10805d8a94f455916cb89abb8ac9005d5a9e87859be60794d",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 50,
+                "sha256": "6b34724443649be14f21421f4f4cfebbd4f76d19fcff71e20e065f74ca72c7bc"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 12728,
+                "sha256": "774235ee4272630fbe11a556b2dfbd5f127bf1cebc0207ad7396c050ee22791d"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 3,
+                "sha256": "35f70320b3e98cf87f272465f72c7c37ae37233a89bb68be8a2b22e832002390"
+              }
+            ],
+            "kernelByteEquivalence": false
+          }
+        ],
+        "encodings": [
+          "1",
+          "5"
+        ],
+        "originalShaderSha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+        "reference": [
+          {
+            "resource": 15861,
+            "bytes": 3686400,
+            "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+          },
+          {
+            "resource": 16501,
+            "bytes": 3686400,
+            "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+          },
+          {
+            "resource": 15781,
+            "bytes": 921600,
+            "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+          }
+        ],
+        "nativeRestoredExact": true,
+        "endUtc": "2026-10-30T20:19:33.270672+00:00"
+      }
+    },
+    "matrix-summary.json": {
+      "receipt": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/matrix-summary.json",
+        "sha256": "9d2b82cedb9ec32ead581bdb5ab5ae91036a3795479907c0e42d6aff834b491a",
+        "bytes": 4434
+      },
+      "result": {
+        "status": "diagnostic-completed",
+        "startUtc": "2026-10-30T20:29:21.308113+00:00",
+        "scope": "Frozen D3D11 event 8702; byte comparison of all three outputs",
+        "hypothesis": "The IEEE-precise stream changes arithmetic optimization; measure against original hardware outputs without relying on shader interpreter arithmetic",
+        "variants": [
+          {
+            "label": "normal-order",
+            "binarySha256": "44d9eb43b3c1bf409420d40552a5aa2bd9aa4ed2b9827d0d009c2ff805ca75e7",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 0,
+                "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 8990,
+                "sha256": "5018923d8d7ee62998513b7b51c3b4b30f7f9746329ef343f9ded719493ab57f"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": false
+          },
+          {
+            "label": "position-order",
+            "binarySha256": "965878032d458aeb23e177ca5e828987309968a3b30b7745871f9c75426a3009",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 1,
+                "sha256": "b97d92e5dbdc341aae33c8a4fe67c96e6bd91959ec15e5bf8189607e4f97a57e"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 9312,
+                "sha256": "9b2d3b12e529ffb07c7953e52a9c88a1651c8966c8af58b8b650a6477cab78e2"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": false
+          },
+          {
+            "label": "view-order",
+            "binarySha256": "35cb902baf192766559f47fe0479cbb24208709793d7ed0d15de47c53949ed3c",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 1,
+                "sha256": "b97d92e5dbdc341aae33c8a4fe67c96e6bd91959ec15e5bf8189607e4f97a57e"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 9312,
+                "sha256": "9b2d3b12e529ffb07c7953e52a9c88a1651c8966c8af58b8b650a6477cab78e2"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": false
+          },
+          {
+            "label": "matrix-orders",
+            "binarySha256": "93daf118a8892e7f4358d4a58662cf2d417ca42ce66bc1613c341668e65478b6",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 0,
+                "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 8990,
+                "sha256": "5018923d8d7ee62998513b7b51c3b4b30f7f9746329ef343f9ded719493ab57f"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": false
+          }
+        ],
+        "encodings": [
+          "1",
+          "5"
+        ],
+        "originalShaderSha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+        "reference": [
+          {
+            "resource": 15861,
+            "bytes": 3686400,
+            "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+          },
+          {
+            "resource": 16501,
+            "bytes": 3686400,
+            "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+          },
+          {
+            "resource": 15781,
+            "bytes": 921600,
+            "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+          }
+        ],
+        "nativeRestoredExact": true,
+        "endUtc": "2026-10-30T20:29:40.192653+00:00"
+      }
+    },
+    "order-controls-summary.json": {
+      "receipt": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/order-controls-summary.json",
+        "sha256": "31573fd4ead4ca8d830e53b308ee5fce907e74b4bf89ac629570df006b4d2574",
+        "bytes": 3606
+      },
+      "result": {
+        "status": "diagnostic-completed",
+        "startUtc": "2026-10-30T20:31:45.063800+00:00",
+        "scope": "Frozen D3D11 event 8702; byte comparison of all three outputs",
+        "hypothesis": "The IEEE-precise stream changes arithmetic optimization; measure against original hardware outputs without relying on shader interpreter arithmetic",
+        "variants": [
+          {
+            "label": "precise-matrix-products",
+            "binarySha256": "7b6c0b4e5823e3a51faabae571ee7283f1c3a6c547ca719c47251403053153e2",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 50,
+                "sha256": "6b34724443649be14f21421f4f4cfebbd4f76d19fcff71e20e065f74ca72c7bc"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 20577,
+                "sha256": "87dd87d9fd23af4d917d150cb1de046e9122523917fb083dadf5220d23b8c7c3"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 3,
+                "sha256": "35f70320b3e98cf87f272465f72c7c37ae37233a89bb68be8a2b22e832002390"
+              }
+            ],
+            "kernelByteEquivalence": false
+          },
+          {
+            "label": "precise-matrix-pairs",
+            "binarySha256": "a17daeae8396e26b9e2477ae736ee55175c4a70930901a2132e4d2769e2c2759",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 50,
+                "sha256": "6b34724443649be14f21421f4f4cfebbd4f76d19fcff71e20e065f74ca72c7bc"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 19113,
+                "sha256": "541764a1602ee343682dc7c897f1cf5f01be2b6bf452a2dd4469f87a8e83e4b2"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 3,
+                "sha256": "35f70320b3e98cf87f272465f72c7c37ae37233a89bb68be8a2b22e832002390"
+              }
+            ],
+            "kernelByteEquivalence": false
+          },
+          {
+            "label": "debug-od",
+            "binarySha256": "9e2ade2807f107a72cf44defb5220ad8211df347a7c0686fb0d9a3988823b5cd",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 10,
+                "sha256": "6590624d7efec8c956af053b165f042395f5d243b7acd7138daba38aae6c2640"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 210,
+                "sha256": "6726917daa936bb98e23c5e2e29c8543178632c8d3d59a821bf6543446091fa2"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": false
+          }
+        ],
+        "encodings": [
+          "1",
+          "5"
+        ],
+        "originalShaderSha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+        "reference": [
+          {
+            "resource": 15861,
+            "bytes": 3686400,
+            "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+          },
+          {
+            "resource": 16501,
+            "bytes": 3686400,
+            "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+          },
+          {
+            "resource": 15781,
+            "bytes": 921600,
+            "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+          }
+        ],
+        "nativeRestoredExact": true,
+        "endUtc": "2026-10-30T20:32:00.222008+00:00"
+      }
+    },
+    "footprint-orders-summary.json": {
+      "receipt": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/footprint-orders-summary.json",
+        "sha256": "44776002d73d03bffb2b2d2ff6039fb41e1c237ebaee499aa9a25916ca0f9a59",
+        "bytes": 2756
+      },
+      "result": {
+        "status": "diagnostic-completed",
+        "startUtc": "2026-10-30T20:33:10.597174+00:00",
+        "scope": "Frozen D3D11 event 8702; byte comparison of all three outputs",
+        "hypothesis": "The IEEE-precise stream changes arithmetic optimization; measure against original hardware outputs without relying on shader interpreter arithmetic",
+        "variants": [
+          {
+            "label": "footprint-orders",
+            "binarySha256": "9687a7cabb5c94acb36f7fcccbfb79f802a8882c546d92c226d15035dc0a01da",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 1,
+                "sha256": "b97d92e5dbdc341aae33c8a4fe67c96e6bd91959ec15e5bf8189607e4f97a57e"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 6942,
+                "sha256": "3cbc667545926512bdf11a8aabba971cee112fc851d04017cf60b034bac3efb0"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": false
+          },
+          {
+            "label": "normal-footprint-orders",
+            "binarySha256": "c2506d7f229d486fd9955a787b86008750324f184b79f5f3cc0d43f20cc57f6c",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 0,
+                "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 6580,
+                "sha256": "72c62eb77ce321d760009c78d331f95351e98f4f4e6ce763ba17cf9a07fd099f"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": false
+          }
+        ],
+        "encodings": [
+          "1",
+          "5"
+        ],
+        "originalShaderSha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+        "reference": [
+          {
+            "resource": 15861,
+            "bytes": 3686400,
+            "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+          },
+          {
+            "resource": 16501,
+            "bytes": 3686400,
+            "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+          },
+          {
+            "resource": 15781,
+            "bytes": 921600,
+            "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+          }
+        ],
+        "nativeRestoredExact": true,
+        "endUtc": "2026-10-30T20:33:21.502821+00:00"
+      }
+    },
+    "all-orders-summary.json": {
+      "receipt": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/all-orders-summary.json",
+        "sha256": "abebe32d06955b8e4770ac1286114ea0e2dc52decac3dc73b24025d4ba72b03c",
+        "bytes": 2756
+      },
+      "result": {
+        "status": "diagnostic-completed",
+        "startUtc": "2026-10-30T20:34:59.301447+00:00",
+        "scope": "Frozen D3D11 event 8702; byte comparison of all three outputs",
+        "hypothesis": "The IEEE-precise stream changes arithmetic optimization; measure against original hardware outputs without relying on shader interpreter arithmetic",
+        "variants": [
+          {
+            "label": "all-matrix-orders",
+            "binarySha256": "6d6303b4ef616b5e1d9ec9678baa9f08a8ba597e9d11effc65aeeaecb139723e",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 0,
+                "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 465,
+                "sha256": "e8ddf74de200d7bc37353be89e2549ed8d72e7bf9d523e039cbd07afb8b3b5c8"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": false
+          },
+          {
+            "label": "all-matrix-orders-negate",
+            "binarySha256": "898aae30e4022d16e7955196842ea9707249bf7dc16e2c1936c2ad589e6060c9",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 0,
+                "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 465,
+                "sha256": "e8ddf74de200d7bc37353be89e2549ed8d72e7bf9d523e039cbd07afb8b3b5c8"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": false
+          }
+        ],
+        "encodings": [
+          "1",
+          "5"
+        ],
+        "originalShaderSha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+        "reference": [
+          {
+            "resource": 15861,
+            "bytes": 3686400,
+            "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+          },
+          {
+            "resource": 16501,
+            "bytes": 3686400,
+            "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+          },
+          {
+            "resource": 15781,
+            "bytes": 921600,
+            "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+          }
+        ],
+        "nativeRestoredExact": true,
+        "endUtc": "2026-10-30T20:35:10.145658+00:00"
+      }
+    },
+    "dot-order-summary.json": {
+      "receipt": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/dot-order-summary.json",
+        "sha256": "62836f69787e0a663f8ba4ecdd54e8f260f0ec00f874a2b36aaa02d7384093f2",
+        "bytes": 3613
+      },
+      "result": {
+        "status": "diagnostic-completed",
+        "startUtc": "2026-10-30T20:37:22.596767+00:00",
+        "scope": "Frozen D3D11 event 8702; byte comparison of all three outputs",
+        "hypothesis": "The IEEE-precise stream changes arithmetic optimization; measure against original hardware outputs without relying on shader interpreter arithmetic",
+        "variants": [
+          {
+            "label": "matrix-norm-dot-order",
+            "binarySha256": "877ca27208f7f600927c0de3ebc2530d4f20213ea5532de2a93024bfa3a90f5c",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 0,
+                "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 418,
+                "sha256": "d37c70808fe669a582be8a85083492cb20d8f66e659713fd69bf60fa9021f133"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": false
+          },
+          {
+            "label": "matrix-footprint-dot-orders",
+            "binarySha256": "937d4ea5504fc30990ad8e90bbbffa8786f325fe3fe9af8b26764f2870e7b2ea",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 0,
+                "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 54,
+                "sha256": "a338303597507d4a1087afef0073d73967c538a4db835124fd8687b764e8bc74"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": false
+          },
+          {
+            "label": "matrix-all-dot-orders",
+            "binarySha256": "3f840809e726d0e43160ace716716ae74143885bb60519d7b87abe41d9c9a51f",
+            "compilerDiagnostic": "",
+            "outputs": [
+              {
+                "resource": 15861,
+                "bytes": 3686400,
+                "differentBytes": 0,
+                "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+              },
+              {
+                "resource": 16501,
+                "bytes": 3686400,
+                "differentBytes": 0,
+                "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+              },
+              {
+                "resource": 15781,
+                "bytes": 921600,
+                "differentBytes": 0,
+                "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+              }
+            ],
+            "kernelByteEquivalence": true
+          }
+        ],
+        "encodings": [
+          "1",
+          "5"
+        ],
+        "originalShaderSha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+        "reference": [
+          {
+            "resource": 15861,
+            "bytes": 3686400,
+            "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+          },
+          {
+            "resource": 16501,
+            "bytes": 3686400,
+            "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+          },
+          {
+            "resource": 15781,
+            "bytes": 921600,
+            "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+          }
+        ],
+        "nativeRestoredExact": true,
+        "endUtc": "2026-10-30T20:37:37.326081+00:00"
+      }
+    }
+  },
+  "unitTests": {
+    "red": {
+      "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-red.log",
+      "sha256": "219f8163cf6daa4d08f133848d31b3406d1a395d71cc98d44ad5072a88c0ff9f",
+      "bytes": 6537
+    },
+    "firstGreenFailure": {
+      "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-green-first.log",
+      "sha256": "2727b3425a85412dca2bc4ebc67b1fbf3f27ac22e599f90851a11da7eca892c7",
+      "bytes": 2800
+    },
+    "green": {
+      "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-green.log",
+      "sha256": "ab1063e285fedd7e0d703943141fc4298954a3a665faf7776e9192fb0ddcbe53",
+      "bytes": 115
+    },
+    "count": 11,
+    "independentFmaCase": {
+      "compiledOrderResult": 1,
+      "requestedOrderResult": 0,
+      "reason": "A first rounded product followed by one fused multiply-add has a different result under the alternate declared order"
+    },
+    "finalCount": 12,
+    "boundaryGreen": {
+      "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-green-boundaries.log",
+      "sha256": "49c2b5e23cbe07d49be4a61f88ca46705fd4f044e4ce8fb37035dd39e0480e39",
+      "bytes": 116
+    },
+    "officialPaddingFixtures": [
+      {
+        "name": "rounding-tail56.dxbc",
+        "payloadTailBytes": 56,
+        "privateDataBytes": 44,
+        "sha256": "361d7aaafeabcb48b24813d3bedaf81172f5a85ba01084c59cc1ee973c8e1ecc"
+      },
+      {
+        "name": "rounding-tail63.dxbc",
+        "payloadTailBytes": 63,
+        "privateDataBytes": 51,
+        "sha256": "621318e812433c233bd1da15332fb596320867a539d6a179e193890def0fc62b"
+      }
+    ]
+  },
+  "verification": {
+    "status": "passed",
+    "cases": [
+      {
+        "configuration": "debug",
+        "command": [
+          "D:\\Tools\\VS2022BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^AzureTools.ShaderArithmeticOrder$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-041625-ray-compiler-45f6e6\\tool-debug.xml"
+        ],
+        "exitCode": 0
+      },
+      {
+        "configuration": "release",
+        "command": [
+          "D:\\Tools\\VS2022BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^AzureTools.ShaderArithmeticOrder$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-041625-ray-compiler-45f6e6\\tool-release.xml"
+        ],
+        "exitCode": 0
+      },
+      {
+        "case": "existing CLI output",
+        "exitCode": 1,
+        "existingOutputPreserved": true
+      },
+      {
+        "case": "invalid CLI policy",
+        "exitCode": 1,
+        "outputPublished": false
+      }
+    ]
+  },
+  "configurations": {
+    "debug": {
+      "configure": {
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+          "cmake",
+          "--preset",
+          "msvc-debug",
+          "-DAZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE=ON",
+          "-DPython3_EXECUTABLE=D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-DVCPKG_INSTALLED_DIR=D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed"
+        ],
+        "startUtc": "2026-10-30T20:51:42.844760+00:00",
+        "endUtc": "2026-10-30T20:51:58.108630+00:00",
+        "exitCode": 0
+      },
+      "ctest": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-debug.log",
+        "sha256": "18831378907eebd26454bed215f63008d76f9aca3850daa0e9df9bdd7fe5f55e",
+        "bytes": 373
+      },
+      "junit": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-debug.xml",
+        "sha256": "62f0d002de7476e4190e2ede83e5e257c7360184049a75c2cf35b897d3f42be2",
+        "bytes": 515
+      },
+      "finalCtest": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-debug-final.log",
+        "sha256": "18831378907eebd26454bed215f63008d76f9aca3850daa0e9df9bdd7fe5f55e",
+        "bytes": 373
+      },
+      "finalJunit": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-debug-final.xml",
+        "sha256": "114fd3a64c84248ba2f875878e06d3747439fed361272cf5058510c0aa458657",
+        "bytes": 516
+      }
+    },
+    "release": {
+      "configure": {
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+          "cmake",
+          "--preset",
+          "msvc-release",
+          "-DAZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE=ON",
+          "-DPython3_EXECUTABLE=D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-DVCPKG_INSTALLED_DIR=D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed"
+        ],
+        "startUtc": "2026-10-30T20:51:58.197364+00:00",
+        "endUtc": "2026-10-30T20:52:13.740120+00:00",
+        "exitCode": 0
+      },
+      "ctest": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-release.log",
+        "sha256": "f7420956a58f339bc8ebb26cd82e99e507f8c2af6770a44233672119ea1388f4",
+        "bytes": 377
+      },
+      "junit": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-release.xml",
+        "sha256": "30bd437aab2ba6727e3abfb9ede71920ebb5037d85495eb21e1e57b9493c4bee",
+        "bytes": 515
+      },
+      "finalCtest": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-release-final.log",
+        "sha256": "081786d5c87ecbaa88b5cbccdfd321b1b2d9958bafb496db65643cd4854e1564",
+        "bytes": 377
+      },
+      "finalJunit": {
+        "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-release-final.xml",
+        "sha256": "64fa7ae1c2ca030917576407b7f75c8c2e0df3a9594eaaba074069627d0dd823",
+        "bytes": 516
+      }
+    }
+  },
+  "gpuObservation": {
+    "result": {
+      "status": "gpu-observation-qualified",
+      "scope": "Actual GPU value of final surface green-channel operand; two 16-bit packed observations, active tile set verified across every replay",
+      "activeTiles": 9115,
+      "activePixels": 583360,
+      "knownPattern": "0xfedcba98",
+      "patternExact": true,
+      "unchangedSurfaceAndConfidence": true,
+      "nativeRestoredExact": true,
+      "metrics": {
+        "original": {
+          "quantizationMismatches": 14501,
+          "maxQuantizationError": 1,
+          "floatBitsSha256": "40b238aa8f2e0fc1da4d54dd79a35ae24000cc4ea8f0a3e5a6ca30bb4640650c"
+        },
+        "mirror": {
+          "quantizationMismatches": 14430,
+          "maxQuantizationError": 1,
+          "floatBitsSha256": "b494e5bd3f91852023621d2b4653b2a86ea08cbdf6ff98ae97a43bb19edb989c"
+        }
+      },
+      "differentFloatPixels": 260241,
+      "differentUnormPixels": 9273,
+      "maximumFloatDifference": 0.00024563074111938477,
+      "maximumUlpDifference": 612083,
+      "maximumUnormDifference": 16,
+      "samples": [
+        {
+          "pixel": [
+            9,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1009123716,
+            "value": 0.01013219729065895,
+            "unorm16": 664
+          },
+          "mirror": {
+            "bits": 1009114745,
+            "value": 0.010123842395842075,
+            "unorm16": 663
+          },
+          "floatUlpDifference": 8971,
+          "quantizedDifference": 1
+        },
+        {
+          "pixel": [
+            457,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1054491074,
+            "value": 0.42628294229507446,
+            "unorm16": 27936
+          },
+          "mirror": {
+            "bits": 1054491074,
+            "value": 0.42628294229507446,
+            "unorm16": 27936
+          },
+          "floatUlpDifference": 0,
+          "quantizedDifference": 0
+        },
+        {
+          "pixel": [
+            113,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 0,
+            "value": 0.0,
+            "unorm16": 0
+          },
+          "mirror": {
+            "bits": 0,
+            "value": 0.0,
+            "unorm16": 0
+          },
+          "floatUlpDifference": 0,
+          "quantizedDifference": 0
+        },
+        {
+          "pixel": [
+            244,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1055883762,
+            "value": 0.4677882790565491,
+            "unorm16": 30656
+          },
+          "mirror": {
+            "bits": 1055883776,
+            "value": 0.4677886962890625,
+            "unorm16": 30657
+          },
+          "floatUlpDifference": 14,
+          "quantizedDifference": 1
+        },
+        {
+          "pixel": [
+            278,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1055304220,
+            "value": 0.45051658153533936,
+            "unorm16": 29525
+          },
+          "mirror": {
+            "bits": 1055304166,
+            "value": 0.4505149722099304,
+            "unorm16": 29524
+          },
+          "floatUlpDifference": 54,
+          "quantizedDifference": 1
+        },
+        {
+          "pixel": [
+            300,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1054823888,
+            "value": 0.4362015724182129,
+            "unorm16": 28586
+          },
+          "mirror": {
+            "bits": 1054823915,
+            "value": 0.43620237708091736,
+            "unorm16": 28587
+          },
+          "floatUlpDifference": 27,
+          "quantizedDifference": 1
+        },
+        {
+          "pixel": [
+            379,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1057228293,
+            "value": 0.5157168507575989,
+            "unorm16": 33797
+          },
+          "mirror": {
+            "bits": 1057228310,
+            "value": 0.5157178640365601,
+            "unorm16": 33798
+          },
+          "floatUlpDifference": 17,
+          "quantizedDifference": 1
+        },
+        {
+          "pixel": [
+            425,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1056653820,
+            "value": 0.49073779582977295,
+            "unorm16": 32160
+          },
+          "mirror": {
+            "bits": 1056653836,
+            "value": 0.49073827266693115,
+            "unorm16": 32161
+          },
+          "floatUlpDifference": 16,
+          "quantizedDifference": 1
+        },
+        {
+          "pixel": [
+            561,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1056128000,
+            "value": 0.475067138671875,
+            "unorm16": 31134
+          },
+          "mirror": {
+            "bits": 1056127992,
+            "value": 0.4750669002532959,
+            "unorm16": 31133
+          },
+          "floatUlpDifference": 8,
+          "quantizedDifference": 1
+        },
+        {
+          "pixel": [
+            576,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1056715775,
+            "value": 0.4925841987133026,
+            "unorm16": 32281
+          },
+          "mirror": {
+            "bits": 1056715784,
+            "value": 0.4925844669342041,
+            "unorm16": 32282
+          },
+          "floatUlpDifference": 9,
+          "quantizedDifference": 1
+        },
+        {
+          "pixel": [
+            609,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1056823298,
+            "value": 0.4957886338233948,
+            "unorm16": 32492
+          },
+          "mirror": {
+            "bits": 1056823271,
+            "value": 0.4957878291606903,
+            "unorm16": 32491
+          },
+          "floatUlpDifference": 27,
+          "quantizedDifference": 1
+        },
+        {
+          "pixel": [
+            717,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1057263644,
+            "value": 0.5178239345550537,
+            "unorm16": 33936
+          },
+          "mirror": {
+            "bits": 1057263626,
+            "value": 0.5178228616714478,
+            "unorm16": 33935
+          },
+          "floatUlpDifference": 18,
+          "quantizedDifference": 1
+        },
+        {
+          "pixel": [
+            919,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1057184544,
+            "value": 0.5131092071533203,
+            "unorm16": 33627
+          },
+          "mirror": {
+            "bits": 1057184525,
+            "value": 0.5131080746650696,
+            "unorm16": 33626
+          },
+          "floatUlpDifference": 19,
+          "quantizedDifference": 1
+        },
+        {
+          "pixel": [
+            933,
+            0
+          ],
+          "active": true,
+          "original": {
+            "bits": 1057952782,
+            "value": 0.5588997602462769,
+            "unorm16": 36627
+          },
+          "mirror": {
+            "bits": 1057952807,
+            "value": 0.5589012503623962,
+            "unorm16": 36628
+          },
+          "floatUlpDifference": 25,
+          "quantizedDifference": 1
+        },
+        {
+          "pixel": [
+            1247,
+            324
+          ],
+          "active": true,
+          "original": {
+            "bits": 1058318464,
+            "value": 0.5806961059570312,
+            "unorm16": 38056
+          },
+          "mirror": {
+            "bits": 1058322585,
+            "value": 0.5809417366981506,
+            "unorm16": 38072
+          },
+          "floatUlpDifference": 4121,
+          "quantizedDifference": 16
+        }
+      ]
+    },
+    "receipt": {
+      "path": "build/runs/20261031-041625-ray-compiler-45f6e6/gpu-footprint-values.json",
+      "sha256": "508077b33217eeb83bfb23b1753b5dd025879841d8c94b3b35690bdb912d9800",
+      "bytes": 6974
+    },
+    "probeQualification": {
+      "status": "diagnostic-completed",
+      "startUtc": "2026-10-30T20:26:38.875339+00:00",
+      "scope": "Frozen D3D11 event 8702; byte comparison of all three outputs",
+      "hypothesis": "The IEEE-precise stream changes arithmetic optimization; measure against original hardware outputs without relying on shader interpreter arithmetic",
+      "variants": [
+        {
+          "label": "original-half-low",
+          "binarySha256": "70254c46464f8c548dd678e48bcc4e7974c3602ec5712792f487749b2603f2bd",
+          "compilerDiagnostic": "",
+          "outputs": [
+            {
+              "resource": 15861,
+              "bytes": 3686400,
+              "differentBytes": 2330786,
+              "sha256": "5b22a9b1adbe73ca115e3ed10cf0679cf8b89135a39cebe3ee564df2a86e3f03"
+            },
+            {
+              "resource": 16501,
+              "bytes": 3686400,
+              "differentBytes": 0,
+              "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+            },
+            {
+              "resource": 15781,
+              "bytes": 921600,
+              "differentBytes": 0,
+              "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+            }
+          ],
+          "kernelByteEquivalence": false,
+          "tiles": {
+            "resource": "ResourceId::16505",
+            "byteSize": 115200,
+            "sha256": "e374ff413b40a513a53a114aa6b95fabdde50fdc26a34f2b2955855153165cfe"
+          },
+          "surfaceUnchanged": true,
+          "confidenceUnchanged": true,
+          "probeQualified": true
+        },
+        {
+          "label": "original-half-high",
+          "binarySha256": "47a147f673cb2e9f39e33df84af48cad09a352c948ff0468468b908ca7c43c63",
+          "compilerDiagnostic": "",
+          "outputs": [
+            {
+              "resource": 15861,
+              "bytes": 3686400,
+              "differentBytes": 2330471,
+              "sha256": "d2cfd2a9f66282ecee63b26539eb81ace7dd09f001bf291c6270df1986dc7859"
+            },
+            {
+              "resource": 16501,
+              "bytes": 3686400,
+              "differentBytes": 0,
+              "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+            },
+            {
+              "resource": 15781,
+              "bytes": 921600,
+              "differentBytes": 0,
+              "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+            }
+          ],
+          "kernelByteEquivalence": false,
+          "tiles": {
+            "resource": "ResourceId::16505",
+            "byteSize": 115200,
+            "sha256": "48a4ec9f8031d536c77aef5554cd9f4ff71e2f2ecd3a48d69051040e836960d3"
+          },
+          "surfaceUnchanged": true,
+          "confidenceUnchanged": true,
+          "probeQualified": true
+        },
+        {
+          "label": "mirror-half-low",
+          "binarySha256": "28005bb12a402489e5869deab9d9f90a77dba20e7658354c25ca45cfd01d216b",
+          "compilerDiagnostic": "",
+          "outputs": [
+            {
+              "resource": 15861,
+              "bytes": 3686400,
+              "differentBytes": 2330710,
+              "sha256": "96f1b8df423612ae918a467733a0e73f2840f4d72862daeaff2acbe61a31823f"
+            },
+            {
+              "resource": 16501,
+              "bytes": 3686400,
+              "differentBytes": 9312,
+              "sha256": "9b2d3b12e529ffb07c7953e52a9c88a1651c8966c8af58b8b650a6477cab78e2"
+            },
+            {
+              "resource": 15781,
+              "bytes": 921600,
+              "differentBytes": 0,
+              "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+            }
+          ],
+          "kernelByteEquivalence": false,
+          "tiles": {
+            "resource": "ResourceId::16505",
+            "byteSize": 115200,
+            "sha256": "28889d486066ee43e9fc4920ac3dca0f107651413cb11a254acc5e851f7cfbb5"
+          },
+          "surfaceUnchanged": true,
+          "confidenceUnchanged": true,
+          "probeQualified": true
+        },
+        {
+          "label": "mirror-half-high",
+          "binarySha256": "f7411714bc21fbe0ba9921de099ec094d291746bf69c75ef1df9fffdd6f1702e",
+          "compilerDiagnostic": "",
+          "outputs": [
+            {
+              "resource": 15861,
+              "bytes": 3686400,
+              "differentBytes": 2330470,
+              "sha256": "02283447ddbc2c0f4f361e244353e7cb05c94dc275c6cfef72046d4c68d0f198"
+            },
+            {
+              "resource": 16501,
+              "bytes": 3686400,
+              "differentBytes": 9312,
+              "sha256": "9b2d3b12e529ffb07c7953e52a9c88a1651c8966c8af58b8b650a6477cab78e2"
+            },
+            {
+              "resource": 15781,
+              "bytes": 921600,
+              "differentBytes": 0,
+              "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+            }
+          ],
+          "kernelByteEquivalence": false,
+          "tiles": {
+            "resource": "ResourceId::16505",
+            "byteSize": 115200,
+            "sha256": "796a77adcdb21363844fb599b1db82f878cf250a4665fdf8eb469d07814b7cdb"
+          },
+          "surfaceUnchanged": true,
+          "confidenceUnchanged": true,
+          "probeQualified": true
+        },
+        {
+          "label": "pattern-half-low",
+          "binarySha256": "90fd35ea42156a6081c023a4d8932c596d935818e6c1f94cea3bd951f7bc17a1",
+          "compilerDiagnostic": "",
+          "outputs": [
+            {
+              "resource": 15861,
+              "bytes": 3686400,
+              "differentBytes": 2331434,
+              "sha256": "3e212cea6dd366f5ec97c34a8257d68dce7a8fdb00d4f4a27c7f449726a80621"
+            },
+            {
+              "resource": 16501,
+              "bytes": 3686400,
+              "differentBytes": 0,
+              "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+            },
+            {
+              "resource": 15781,
+              "bytes": 921600,
+              "differentBytes": 0,
+              "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+            }
+          ],
+          "kernelByteEquivalence": false,
+          "tiles": {
+            "resource": "ResourceId::16505",
+            "byteSize": 115200,
+            "sha256": "43a11bcc048d734aa2d224f80e06f3c9e46ad873ec4e9a9fa78d79bc823a4d72"
+          },
+          "surfaceUnchanged": true,
+          "confidenceUnchanged": true,
+          "probeQualified": true
+        },
+        {
+          "label": "pattern-half-high",
+          "binarySha256": "4300ca15c9c226c0d17974bce08cb4a686905f246f944db5a269cc5c13502a9d",
+          "compilerDiagnostic": "",
+          "outputs": [
+            {
+              "resource": 15861,
+              "bytes": 3686400,
+              "differentBytes": 2330617,
+              "sha256": "db09402ae1e8893232c9fb7c87f353aa253a0f808bf83a1671155936775c6d1d"
+            },
+            {
+              "resource": 16501,
+              "bytes": 3686400,
+              "differentBytes": 0,
+              "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+            },
+            {
+              "resource": 15781,
+              "bytes": 921600,
+              "differentBytes": 0,
+              "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+            }
+          ],
+          "kernelByteEquivalence": false,
+          "tiles": {
+            "resource": "ResourceId::16505",
+            "byteSize": 115200,
+            "sha256": "e3c5b3d09a0cde7e3dde7711c2d1639bd55e29461394d027102fe58b5909f741"
+          },
+          "surfaceUnchanged": true,
+          "confidenceUnchanged": true,
+          "probeQualified": true
+        }
+      ],
+      "encodings": [
+        "1",
+        "5"
+      ],
+      "originalShaderSha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+      "reference": [
+        {
+          "resource": 15861,
+          "bytes": 3686400,
+          "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+        },
+        {
+          "resource": 16501,
+          "bytes": 3686400,
+          "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+        },
+        {
+          "resource": 15781,
+          "bytes": 921600,
+          "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+        }
+      ],
+      "dispatchDimension": [
+        9115,
+        1,
+        1
+      ],
+      "nativeTiles": {
+        "resource": "ResourceId::16505",
+        "byteSize": 115200,
+        "sha256": "59964ed42db8ae51d78ba052e448e7abd7956b8516fd4b7478ea3dec1fbafa17"
+      },
+      "nativeRestoredExact": true,
+      "probeQualificationPassed": true,
+      "endUtc": "2026-10-30T20:27:06.542820+00:00"
+    },
+    "rejectedEncoding": {
+      "status": "initial encoding rejected before value interpretation",
+      "actualColorUavFormat": "R11G11B10_FLOAT",
+      "incorrectAssumption": "RGBA8 normalized byte packing cannot be decoded from this output format",
+      "preserved": [
+        "original surface output unchanged",
+        "confidence output unchanged",
+        "original restored exact"
+      ],
+      "next": "Two 16-bit observations using integer RGB components of 6/6/4 bits, all exactly representable by the actual color format; known-pattern controls required"
+    }
+  },
+  "finalCtest": {
+    "status": "passed",
+    "cases": [
+      {
+        "configuration": "debug",
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^AzureTools.ShaderArithmeticOrder$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-041625-ray-compiler-45f6e6\\tool-debug-final.xml"
+        ],
+        "exitCode": 0,
+        "unitCases": 12
+      },
+      {
+        "configuration": "release",
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^AzureTools.ShaderArithmeticOrder$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-041625-ray-compiler-45f6e6\\tool-release-final.xml"
+        ],
+        "exitCode": 0,
+        "unitCases": 12
+      }
+    ]
+  },
+  "documentation": {
+    "commands": [
+      {
+        "name": "ray-order-doc-style",
+        "exitCode": 0,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "tools/check_doc_style.py",
+          "README.md",
+          "THIRD_PARTY_NOTICES.md",
+          "docs/plans/2026-10-31-ray-arithmetic-order.md",
+          "docs/acceptance/nr/native-ray-arithmetic-order.md",
+          "docs/acceptance/nr/native-ray-source.md",
+          "docs/plans/2026-10-28-reflection-filter-integration.md",
+          "docs/plans/2026-10-30-development-recovery.md",
+          "docs/plans/azure-engine-plan.md",
+          "docs/plans/2026-10-31-asset-dependency-index.md",
+          "docs/plans/2026-10-31-managed-workflow-cleanup.md"
+        ]
+      },
+      {
+        "name": "ray-order-doc-links",
+        "exitCode": 0,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-041625-ray-compiler-45f6e6\\check-phase-links.py",
+          "README.md",
+          "THIRD_PARTY_NOTICES.md",
+          "docs/plans/2026-10-31-ray-arithmetic-order.md",
+          "docs/acceptance/nr/native-ray-arithmetic-order.md",
+          "docs/acceptance/nr/native-ray-source.md",
+          "docs/plans/2026-10-28-reflection-filter-integration.md",
+          "docs/plans/2026-10-30-development-recovery.md",
+          "docs/plans/azure-engine-plan.md",
+          "docs/plans/2026-10-31-asset-dependency-index.md",
+          "docs/plans/2026-10-31-managed-workflow-cleanup.md"
+        ]
+      },
+      {
+        "name": "ray-order-stage-status",
+        "exitCode": 0,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "tools/check_stage_status.py"
+        ]
+      },
+      {
+        "name": "ray-order-stage-tests",
+        "exitCode": 0,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "tools/test_stage_status.py"
+        ]
+      },
+      {
+        "name": "ray-order-mkdocs-configured",
+        "exitCode": 0,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-m",
+          "mkdocs",
+          "build",
+          "--config-file",
+          "mkdocs.yml",
+          "--site-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-041625-ray-compiler-45f6e6\\ray-order-docs-site"
+        ]
+      }
+    ],
+    "warningAudit": {
+      "status": "passed",
+      "warningCount": 85,
+      "added": [],
+      "removed": [],
+      "unchangedInfoNotices": [
+        "Doc file 'acceptance/ev/ev6.md' contains an unrecognized relative link '../../../build/runs/20261016-142829-ev6-scene-exchange-41ac3c/', it was left as is.",
+        "Doc file 'acceptance/nr/atrium-completeness.md' contains an unrecognized relative link '../../../build/runs/20261021-172156-native-render-evidence-623c52/joint-acceptance/post-corridor-v10/media', it was left as is.",
+        "Doc file 'acceptance/nr/actual-motion-velocity.md' contains a link '../../runtime/physics-input.md#\u89d2\u8272\u901f\u5ea6\u89c2\u6d4b', but the doc 'runtime/physics-input.md' does not contain an anchor '#\u89d2\u8272\u901f\u5ea6\u89c2\u6d4b'.",
+        "Doc file 'research/2026-10-09-character-presentation-refinement.md' contains a link '2026-10-09-character-rendering-diagnosis.md#\u672c\u5730\u5b9e\u73b0\u4e0e\u8054\u7f51\u53c2\u8003', but the doc 'research/2026-10-09-character-rendering-diagnosis.md' does not contain an anchor '#\u672c\u5730\u5b9e\u73b0\u4e0e\u8054\u7f51\u53c2\u8003'."
+      ],
+      "strictPriorExitCode": 1,
+      "initialAuditCorrection": "Broad matching counted two INFO notices as warnings. Both notices are present in the previous completed build. Final audit compares severity and text separately."
+    },
+    "paragraphs": {
+      "status": "passed",
+      "files": 10,
+      "maximumSentences": 4
+    }
+  },
+  "frozenPrograms": {
+    "compiled": {
+      "path": "tests/fixtures/shader_arithmetic_order/compiled-ray-mirror.dxbc",
+      "sha256": "109762a00c8f5419bc059e34a1bdc7ef1bd6474304c9e37fad7c13a065f3a2e1",
+      "bytes": 12360
+    },
+    "normalized": {
+      "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-final-gpu/normalized-tool.dxbc",
+      "sha256": "85b746363dbc3d2624f25762378805b180907cfc8246bedd24957c6853bd68bd",
+      "bytes": 12360
+    },
+    "independentOrderControl": {
+      "path": "tests/fixtures/shader_arithmetic_order/ordered-ray-mirror.dxbc",
+      "sha256": "3f840809e726d0e43160ace716716ae74143885bb60519d7b87abe41d9c9a51f",
+      "bytes": 153222
+    },
+    "sourceCodeSha256": "b5baea5513b358be08def5831f4bb4a34700ede213835883417535ea6a6301d1",
+    "normalizedCodeSha256": "2d6fef1a73001b45ce58dc1e4dab579c299e4c9c94dd1a1f739ef5cdc062a192",
+    "sourceMirror": {
+      "path": "docs/acceptance/nr/evidence/2026-10-29/native-ray-source/ray-mirror-raw.hlsl",
+      "sha256": "b72d73f2aadc5955290dc92652f8534eb464fe2a2485c9670318128d9a14a8f1",
+      "bytes": 47483
+    },
+    "fixtureCompiler": {
+      "source": "Source HLSL and fixed compiler options",
+      "compilerSha256": "21df5696011156fe64f2dff47c8ed5e90817021f91f70b6d9707fd58cd1b0b81",
+      "flags": 0,
+      "files": {
+        "compiled-ray-mirror.dxbc": "109762a00c8f5419bc059e34a1bdc7ef1bd6474304c9e37fad7c13a065f3a2e1",
+        "ordered-ray-mirror.dxbc": "3f840809e726d0e43160ace716716ae74143885bb60519d7b87abe41d9c9a51f",
+        "ray-policy.json": "bfc8b5b4028e8fa38a687da3a4b73227c4d559432e1c281759047fb385869984",
+        "rounding-policy.json": "bd325cfbf51bad32c9f70cd5630c76792fab4d186f4bc27b24979e3650aa8b04",
+        "rounding.dxbc": "efe14266260a66df3fd1613f2846742b97ad868b83dd286704339b3a8f534d02",
+        "rounding.hlsl": "e0bdf06d44e424d8bd4870f59dd137d6da1af9cc8464d88f99a00cb811124fa6"
+      }
+    }
+  },
+  "gpuFinal": {
+    "result": {
+      "status": "passed",
+      "variants": [
+        {
+          "label": "compiled-control",
+          "binarySha256": "109762a00c8f5419bc059e34a1bdc7ef1bd6474304c9e37fad7c13a065f3a2e1",
+          "outputs": [
+            {
+              "resource": 15861,
+              "bytes": 3686400,
+              "differentBytes": 1,
+              "sha256": "b97d92e5dbdc341aae33c8a4fe67c96e6bd91959ec15e5bf8189607e4f97a57e"
+            },
+            {
+              "resource": 16501,
+              "bytes": 3686400,
+              "differentBytes": 9312,
+              "sha256": "9b2d3b12e529ffb07c7953e52a9c88a1651c8966c8af58b8b650a6477cab78e2"
+            },
+            {
+              "resource": 15781,
+              "bytes": 921600,
+              "differentBytes": 0,
+              "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+            }
+          ],
+          "kernelByteEquivalence": false
+        },
+        {
+          "label": "normalized-tool",
+          "binarySha256": "85b746363dbc3d2624f25762378805b180907cfc8246bedd24957c6853bd68bd",
+          "outputs": [
+            {
+              "resource": 15861,
+              "bytes": 3686400,
+              "differentBytes": 0,
+              "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+            },
+            {
+              "resource": 16501,
+              "bytes": 3686400,
+              "differentBytes": 0,
+              "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+            },
+            {
+              "resource": 15781,
+              "bytes": 921600,
+              "differentBytes": 0,
+              "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+            }
+          ],
+          "kernelByteEquivalence": true
+        }
+      ],
+      "singleByteNegativeControl": "rejected",
+      "nativeRestoredExact": true
+    },
+    "receipt": {
+      "startUtc": "2026-10-30T20:49:57.845790+00:00",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261021-172156-native-render-evidence-623c52\\renderdoc\\portable-1.46\\RenderDoc_1.46_64\\qrenderdoc.exe",
+        "--python",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\docs\\acceptance\\nr\\evidence\\2026-10-31\\ray-arithmetic-order\\replay_worker.py"
+      ],
+      "captureSha256": "5bf129d05acb43d41ab54042f6648c3d728decb253c94d0250037f01f0b778b3",
+      "policySha256": "bfc8b5b4028e8fa38a687da3a4b73227c4d559432e1c281759047fb385869984",
+      "workerSha256": "6ced4eabe76a19650e027ab72ad5f5d9039638e516fe32ccc4e941b6e7ead8c3",
+      "normalizerSha256": "743a8617832c675c3340a90e9c894c86bba1776c7843a83562663d9b59e3dfd1",
+      "renderdocSha256": "c5e9d3f254d80a7649fbd9eae1c67618cb19278c603710370c220de469397277",
+      "timeoutSeconds": 300,
+      "removedCaptureEnvironmentKeys": [],
+      "pid": 15416,
+      "exitCode": 0,
+      "endUtc": "2026-10-30T20:50:11.785041+00:00"
+    },
+    "resultFile": {
+      "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-final-gpu/result.json",
+      "sha256": "1dc79f781b0cbb7fcdc8e3b21b513372fead41f508b420f840abfb52d7ce7485",
+      "bytes": 1753
+    },
+    "receiptFile": {
+      "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-final-gpu/receipt.json",
+      "sha256": "ee740b93b0692dcccc9764047199cadad9f196a80db2f036d1128b2e61dfd935",
+      "bytes": 986
+    },
+    "workerLog": {
+      "path": "build/runs/20261031-041625-ray-compiler-45f6e6/tool-final-gpu/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "limitations": [
+    "This phase validates the frozen 1280x720 compute outputs. Vulkan production integration and continuous history remain pending.",
+    "The policy is locked to one compiled shader program SHA-256; other compiler/program versions are rejected.",
+    "The GPU observation postlude preserves existing surface/confidence output bytes, but does not prove every unobserved internal bit is unchanged.",
+    "CPU binary64-to-UNORM modeling is diagnostic; the observed hardware conversion is the reference.",
+    "Original startup fault attribution, full Debug startup, archived Vulkan image environment compatibility, sustained AA4 thermal budget and final manual/dual-device acceptance remain pending."
+  ]
+}

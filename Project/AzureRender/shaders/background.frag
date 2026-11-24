@@ -1,4 +1,7 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#include "fragment_sampling.glsl"
+#include "sky.glsl"
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
@@ -13,6 +16,13 @@ layout(binding = 0) uniform CameraData {
     vec4 faceLightDirection;
     vec4 faceSdfParameters;
     vec4 faceSdfShadowColor;
+    vec4 mainLightDirection;
+    vec4 cascadeDepthRanges;
+    vec4 skyRight;
+    vec4 skyUp;
+    vec4 skyForward;
+    vec4 skyColor;
+    vec4 skyParameters;
 } camera;
 
 // The background samples the equirect environment so external HDR assets are
@@ -25,7 +35,7 @@ layout(binding = 4) uniform sampler2D environmentTexture;
 #define AZ_TEX_ENVIRONMENT environmentTexture
 #endif
 
-layout(location = 0) in vec2 screenUv;
+layout(location = 0) AZURE_SAMPLE in vec2 screenUv;
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
 
@@ -37,7 +47,7 @@ vec2 directionToEquirectangular(vec3 direction) {
     return vec2(u, v);
 }
 
-void main() {
+vec3 showcaseBackdrop() {
     vec2 uv = clamp(screenUv, vec2(0.0), vec2(1.0));
     float vertical = smoothstep(0.0, 1.0, uv.y);
     float preset = floor(camera.showcaseParameters.x + 0.5);
@@ -91,8 +101,6 @@ void main() {
             uv.y * 2.0 - 1.0,
             1.0)));
     vec3 environmentColor = texture(AZ_TEX_ENVIRONMENT, envUv).rgb * 1.15;
-    // Endfield previously suppressed the loaded sky to 8%, making the
-    // environment indistinguishable from its procedural fallback.
     float environmentMix = preset == 1.0 ? 0.82 : 0.88;
     color = mix(color, environmentColor, environmentMix);
 
@@ -100,6 +108,29 @@ void main() {
     float vignette = smoothstep(0.20, 0.78, dot(vignetteOffset, vignetteOffset));
     float vignetteFloor = preset == 1.0 ? 0.92 : (preset == 2.0 ? 0.82 : 0.68);
     color *= mix(1.0, vignetteFloor, vignette);
-    outputColor = vec4(color, 1.0);
-    outputNormal = vec4(0.5, 0.5, 1.0, 0.0);
+    return color;
+}
+
+// Infinite sky uses orientation and projection, never camera translation.
+void main() {
+    if (camera.skyParameters.w > 0.5) {
+        outputColor = vec4(showcaseBackdrop(), 1.0);
+        outputNormal = vec4(0.5, 0.5, 1.0, 0.0);
+        return;
+    }
+    vec3 direction=normalize(camera.skyForward.xyz
+        +(screenUv.x*2.0-1.0)*camera.skyRight.xyz
+        +(1.0-screenUv.y*2.0)*camera.skyUp.xyz);
+    float angle=camera.skyParameters.z;
+    direction.xz=mat2(cos(angle),sin(angle),-sin(angle),cos(angle))*direction.xz;
+    vec3 color;
+    if(camera.skyParameters.x>1.5){
+        color=camera.skyColor.rgb;
+    }else if(camera.skyParameters.x>.5){
+        color=texture(AZ_TEX_ENVIRONMENT,directionToEquirectangular(direction)).rgb;
+    }else{
+        color=azureProceduralSky(direction);
+    }
+    outputColor=vec4(color*camera.skyParameters.y,1.0);
+    outputNormal=vec4(.5,.5,1.0,0.0);
 }

@@ -129,6 +129,18 @@ RenderSettings migrateRenderSettings(
     if (sourceSchemaVersion < 7) {
         settings.shadow = {};
     }
+    if (sourceSchemaVersion < 8) {
+        settings.cameraNear=.1F;settings.cameraFar=100;settings.shadowDistance=100;
+    }
+    if (sourceSchemaVersion < 9) settings.antiAliasing = 1;
+    if(sourceSchemaVersion<19&&settings.antiAliasing>3)
+        throw std::invalid_argument("Multisample anti-aliasing requires RenderSettings version 19");
+    if(sourceSchemaVersion<18&&settings.antiAliasing>2)
+        throw std::invalid_argument("Temporal anti-aliasing requires RenderSettings version 18");
+    if (sourceSchemaVersion < 14) settings.grade.lut = {};
+    if (sourceSchemaVersion < 15) settings.environmentSpecularModel=EnvironmentSpecularModel::LegacySchlick;
+    if(sourceSchemaVersion<16)settings.screenSpaceReflection={};
+    if(sourceSchemaVersion<17)settings.nprLighting={};
     validateRenderSettings(settings);
     return settings;
 }
@@ -160,6 +172,8 @@ void applyShowcasePresetLook(
 }
 
 void validateRenderSettings(const RenderSettings& settings) {
+    validateScreenSpaceReflection(settings.screenSpaceReflection);
+    validateNprLighting(settings.nprLighting);
     const auto requireRange = [](
                                   const float value,
                                   const float minimum,
@@ -172,6 +186,13 @@ void validateRenderSettings(const RenderSettings& settings) {
                 + std::to_string(maximum));
         }
     };
+    if(settings.pathTraceSamples<1||settings.pathTraceSamples>65536||settings.pathTraceBounces<1||settings.pathTraceBounces>16) throw std::invalid_argument("Path tracing requires 1..65536 samples and 1..16 bounces");
+    if(environmentSpecularModelName(settings.environmentSpecularModel)=="unknown")
+        throw std::invalid_argument("Unknown environment specular model");
+    if (static_cast<std::uint32_t>(settings.sky.mode)>2) throw std::invalid_argument("Unknown sky mode");
+    requireRange(settings.sky.intensity,0.F,32.F,"sky.intensity");
+    requireRange(settings.sky.rotationDegrees,-360.F,360.F,"sky.rotationDegrees");
+    for(float value:settings.sky.color)requireRange(value,0.F,1.F,"sky.color");
     if (blackholeQualityName(settings.blackhole.quality) == "unknown") {
         throw std::invalid_argument("Unknown blackhole quality profile");
     }
@@ -179,7 +200,15 @@ void validateRenderSettings(const RenderSettings& settings) {
         throw std::invalid_argument("Unknown blackhole camera preset");
     }
 
+    requireRange(settings.outline.silhouetteWidthPixels,0.F,8.F,"outline.silhouetteWidthPixels");
+    if (settings.antiAliasing > 4) throw std::invalid_argument("Unknown anti-aliasing quality");
     requireRange(settings.styleMaskStrength, 0.0F, 2.0F, "styleMaskStrength");
+    requireRange(settings.cameraNear,.01F,10,"cameraNear");
+    requireRange(settings.cameraFar,.01F,5000,"cameraFar");
+    requireRange(settings.shadowDistance,.01F,5000,"shadowDistance");
+    if (settings.cameraNear>=settings.cameraFar || settings.shadowDistance<=settings.cameraNear
+        || settings.shadowDistance>settings.cameraFar)
+        throw std::invalid_argument("Camera requires near < shadowDistance <= far");
     requireRange(
         settings.diffuseBandThreshold,
         0.05F,
@@ -207,6 +236,7 @@ void validateRenderSettings(const RenderSettings& settings) {
         requireRange(channel, 0.0F, 1.0F, "faceSdf.shadowColor channel");
     }
     requireRange(settings.bloom.threshold, 0.0F, 8.0F, "bloom.threshold");
+    validateUnlitEffectFrame(settings.unlitEffects);
     requireRange(settings.bloom.strength, 0.0F, 2.0F, "bloom.strength");
     requireRange(settings.outline.strength, 0.0F, 2.0F, "outline.strength");
     requireRange(
@@ -230,9 +260,25 @@ void validateRenderSettings(const RenderSettings& settings) {
     requireRange(settings.grade.exposureEv, -8.0F, 8.0F, "grade.exposureEv");
     requireRange(settings.grade.saturation, 0.0F, 2.0F, "grade.saturation");
     requireRange(settings.grade.contrast, 0.0F, 2.0F, "grade.contrast");
+    if(!std::isfinite(settings.grade.lut.exposureMultiplier)||settings.grade.lut.exposureMultiplier<=0
+        ||settings.grade.lut.exposureMultiplier>65536.F)
+        throw std::invalid_argument("grade.lut.exposureMultiplier must be finite and in (0,65536]");
+    if(settings.grade.lut.asset.size()>4096||settings.grade.lut.asset.find('\0')!=std::string::npos)
+        throw std::invalid_argument("grade.lut.asset reference is invalid");
     for (const float channel : settings.grade.tint) {
         requireRange(channel, 0.0F, 2.0F, "grade.tint channel");
     }
 }
 
 }  // namespace azurerender
+
+#include "foundation/SettingRegistry.hpp"
+namespace azurerender {
+void registerRenderSettings(SettingRegistry& r) {
+    r.add({"render.shadowDistance","Shadow coverage distance in metres",100.0,.01,5000.,false,true,false});
+    r.add({"render.antiAliasing","Anti-aliasing: off, edge adaptive, supersampling, temporal, multisampling",1,0.,4.,false,true,false});
+    r.add({"render.diagnosticView","Diagnostic view: beauty, normal, outline, shadow, depth",0,0.,4.,false,true,false});
+    r.add({"render.exposure","Temporary exposure in EV",0.0,-8.,8.,false,true,false});
+    r.add({"render.blackholeQuality","Blackhole quality: performance, balanced, cinematic",2,0.,2.,false,true,false,false});
+}
+}

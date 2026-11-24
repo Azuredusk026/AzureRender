@@ -1,0 +1,16 @@
+[0/2] Re-checking globbed directories...
+[1/13] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/13] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_shader_types.py --description D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/shared-layout.json --cpp D:/Assigment/2609/FYP/Project/AzureRender/src/render/ShaderSharedTypes.hpp --slang D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/SharedTypes.slang --check"
+[3/13] Generating verified engine interface snapshots and schemas
+{"status": "passed", "coveredItems": 18, "files": 42}
+[4/13] Linking CXX executable AzureContentDirectoryScaleTests.exe
+[5/13] Linking CXX executable AzureViewportOverlayTests.exe
+[6/13] Linking CXX executable AzureManagedAuthoringTests.exe
+[7/13] Linking CXX executable AzureMaterialSlotEditingTests.exe
+[8/13] Linking CXX executable AzureDomainAuthoringTests.exe
+[9/13] Linking CXX executable AzurePrefabAuthoringTests.exe
+[10/13] Linking CXX executable AzureAnimationAuthoringTests.exe
+[11/13] Linking CXX executable AzurePreviewSimulationTests.exe
+[12/13] Linking CXX executable AzureAuthoringWorkflowTests.exe
+{"status": "passed", "manifest": "build\\ninja-msvc-debug\\build-provenance.json"}

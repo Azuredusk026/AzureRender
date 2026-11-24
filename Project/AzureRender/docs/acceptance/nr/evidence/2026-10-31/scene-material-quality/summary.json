@@ -1,0 +1,141 @@
+{
+  "status": "diagnosis-complete-visual-fix-pending",
+  "baseCommit": "01776f284e6df309f7e2fba5bf0b2ca3f1005d47",
+  "run": "build\\runs\\20261031-122504-projected-footprint-quality-5daf40",
+  "scope": "No renderer or shader implementation changed. User image equals projected actor frame. Actual footprint filtering diagnosed; seven actor and lighting diagnostic captures completed. Native complete region and default strict compatibility gates remain pending.",
+  "retainedCapture": "capture-indexed/capture_frame1.rdc",
+  "captureSha256": "b9e7a50a2a6ac38d32c72979ba911235ff3dae832ca3e64ff03c5ad53a7537b1",
+  "artifacts": [
+    {
+      "file": "actor-albedo.png",
+      "bytes": 2279958,
+      "sha256": "ae66ee98a8c71caff78417331c27fff27f0afc66c780e449cd23a2eba482d853"
+    },
+    {
+      "file": "actor-beauty.png",
+      "bytes": 2958920,
+      "sha256": "01cb440b02309cb873fd935002aabf0946a4fb3a78d5f712d5618bee9fbbba91"
+    },
+    {
+      "file": "actor-closeup/main-shadow-disabled-summary.json",
+      "bytes": 1395,
+      "sha256": "54adcc16d53d7d963bf9b888e0160b7e88392c4d4bf1659ad7cedcba60a4681e"
+    },
+    {
+      "file": "actor-closeup/summary.json",
+      "bytes": 4891,
+      "sha256": "1359916d4db08dd0c77e44943d606e71fa59578b49e51025f2df1f8a8a86bf33"
+    },
+    {
+      "file": "actor-lighting-analysis.json",
+      "bytes": 1104,
+      "sha256": "e8ba41fb66c20efb50e91fcce9d30edb840ae1078d51dc6efb4cde8a0db15523"
+    },
+    {
+      "file": "actor-lighting-lab/summary.json",
+      "bytes": 2465,
+      "sha256": "562b8f5bf013bdef860d375bc87bf30f601d95ae7433f8e22688a993852d489a"
+    },
+    {
+      "file": "actor-main-shadow-disabled.png",
+      "bytes": 3069637,
+      "sha256": "3e9de7c488de9b22b4284711c30c2de1d03fd92646665ab054855dc6eb78f2e0"
+    },
+    {
+      "file": "actor-object-shadow-visibility.png",
+      "bytes": 199111,
+      "sha256": "296ddadf2e82a5cd04915a0349817e3ba4aa15d1b1462aada1e4db59be1d9d83"
+    },
+    {
+      "file": "actor-shaded-normal.png",
+      "bytes": 1870976,
+      "sha256": "6dfd522ae170f347288197b929a2e04da7ba1498a78aa978a755af8214c8edfe"
+    },
+    {
+      "file": "bars/summary.json",
+      "bytes": 94568,
+      "sha256": "a08376209867ad21d812a4abbe3f890d1457d62424f80843e188a997fad9d6d3"
+    },
+    {
+      "file": "baseline.json",
+      "bytes": 26545,
+      "sha256": "a6da16c71a5d50f53853686981365a311bd6d668e4006d1e7d5ad69754feba90"
+    },
+    {
+      "file": "capture-indexed/receipt.json",
+      "bytes": 7951,
+      "sha256": "1f2ef3ca90fcdc06de3cd1f499bcdbe93b8965cde337cdd2579694f4d6e8a635"
+    },
+    {
+      "file": "capture-indexed/request.json",
+      "bytes": 2133,
+      "sha256": "bdbe2deb35830b2646722ecf163f43685af9203ed286dcacdf1c1f2225fb47d8"
+    },
+    {
+      "file": "capture-inputs-v2/summary.json",
+      "bytes": 18374,
+      "sha256": "424f58910613b4d08905f3e8e26aa23a37a6e1af117d64ae28390ca65fa5c726"
+    },
+    {
+      "file": "diagnostic-scripts-and-logs.zip",
+      "bytes": 359886,
+      "sha256": "73ef03e24232eb95306d14f4964307a73572673f70e00401d43e3d4904278baf"
+    },
+    {
+      "file": "doc-verification.json",
+      "bytes": 96,
+      "sha256": "7b9123692a5322e441708d6c997d60845cbf37d1628e490cd4a0cbe828571bce"
+    },
+    {
+      "file": "filter-parameters/summary.json",
+      "bytes": 566,
+      "sha256": "60ee4a5879a98c23f44b549617577a9b8ca11631d913f905ca094cd30f41d349"
+    },
+    {
+      "file": "full-floor-input-analysis.json",
+      "bytes": 1229,
+      "sha256": "b9e4ec3431949770c9376d58d663101470c8c31c0f716933be9f8076d8c88ad5"
+    },
+    {
+      "file": "full-roughness/summary.json",
+      "bytes": 13207,
+      "sha256": "c73b413f3839ca6976fddf29910a3f548ca3ac9d46c63a3afba940f474e8cc25"
+    },
+    {
+      "file": "main-shadow-analysis.json",
+      "bytes": 367,
+      "sha256": "e77d1c4557edd0911697d6aecfb49479ecc9e9f6eb444fb1176d482e259472de"
+    },
+    {
+      "file": "renderdoc-download.json",
+      "bytes": 429,
+      "sha256": "4870c93fb1210e7bc5bcd5d62b137fb1f95b1eaaa11220c581e6a1174eadfc23"
+    },
+    {
+      "file": "renderdoc-installation.json",
+      "bytes": 746,
+      "sha256": "29184edae0d3113dedc6bd222d92d2ff0e0c21b5fbccb10d30d0da46609200fb"
+    },
+    {
+      "file": "rigid-invariance/summary.json",
+      "bytes": 68108,
+      "sha256": "7a96e1cd27dd31c8448f443ae968fd4d89cef88cac232b68f8155a2d785828fc"
+    },
+    {
+      "file": "unchanged-inputs.json",
+      "bytes": 175,
+      "sha256": "acd4e94c911e64773aae96f2794c8d140eb279e1536df3562a65ca4953241ac1"
+    },
+    {
+      "file": "user-image-comparison.json",
+      "bytes": 1146,
+      "sha256": "23eceb33f66d3886fd75c28cbbb636b1db572159ce1a5bc0adf731d55c147a22"
+    }
+  ],
+  "documentation": {
+    "status": "passed",
+    "files": 7,
+    "localLinks": 617,
+    "paragraphAudit": "passed"
+  }
+}

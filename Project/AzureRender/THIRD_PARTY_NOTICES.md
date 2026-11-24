@@ -1,22 +1,173 @@
-# Third-Party Notices
+# 第三方许可说明
 
-AzureRender links or includes the following dependencies. Release builds must preserve the license files supplied by the package manager or upstream distribution.
+AzureRender 使用以下第三方依赖。发布目录保留包管理器或上游分发提供的许可证文件。本文说明第三方依赖的版权与分发许可。
 
-- Vulkan Headers and Loader: Apache License 2.0
-- GLFW: zlib/libpng license
-- Dear ImGui: MIT License
-- tinygltf: MIT License
-- stb libraries: MIT License or public-domain dual option
-- OpenEXR and Imath: BSD-3-Clause
-- libdeflate: MIT License
-- OpenJPH: BSD-2-Clause
+离线动画采样工具使用 [ufbx](https://github.com/ufbx/ufbx/tree/v0.17.1) 0.17.1，许可证为 MIT。`prepare_fbx_tool.py` 校验源码 SHA-256，下载许可证并编译宿主工具。源码与许可证位于本机 `build/f1/ufbx/`。该工具用于素材准入与离线重定向，运行时读取 glTF 2.0。
 
-Dear ImGui is vendored under `third_party/imgui` (docking branch, version 1.92.8) and
-compiled from source with the project toolchain so the library ABI always matches the
-project compiler. Its MIT license text is preserved at `third_party/imgui/LICENSE.txt`.
-The vcpkg imgui package is not used on Windows/MinGW builds because its MSVC-compiled
-static library is not linkable from the MinGW toolchain.
+离线着色程序工具采用 Microsoft 的 DXBC 格式及校验规则。
+令牌格式依据 DirectX-Headers 的固定提交。
+容器校验采用 DirectXShaderCompiler 的规则，并以 Python 表达。
+固定版本、适配范围及许可见[来源清单](third_party/shader_arithmetic_order/source.json)。
 
-The public demo under `assets_public/` is project-owned. Private character assets and derived captures are intentionally excluded from release packages.
+| 依赖 | 许可证 |
+| --- | --- |
+| Vulkan Headers 与 Loader | Apache License 2.0 |
+| GLFW | zlib/libpng |
+| Dear ImGui | MIT |
+| ImGuizmo 1.92.5 WIP | MIT |
+| tinygltf | MIT |
+| stb | MIT 或公有领域双许可 |
+| OpenEXR 与 Imath | BSD-3-Clause |
+| libdeflate | MIT |
+| Zstandard 1.5.7 | BSD-3-Clause，可选 GPLv2 双许可中的 BSD 条款 |
+| OpenJPH | BSD-2-Clause |
+| nlohmann/json | MIT |
+| Jolt Physics | MIT |
+| Lua 与 sol2 | MIT |
+| RmlUi | MIT |
+| miniaudio | MIT-0 |
+| FreeType | FreeType License |
+| libpng、zlib、bzip2、Brotli | 对应上游许可随安装树分发 |
+| LatoLatin | SIL Open Font License 1.1 |
+| Manifold 3.5.2 | Apache License 2.0 |
+| Clipper2 2.0.1 | Boost Software License 1.0 |
+| oneTBB 2023.1.0 | Apache License 2.0 |
+| hwloc 2.11.2 | BSD 类许可，以随包版权文本为准 |
 
-No license grant for the AzureRender project source itself is established by this notice.
+Dear ImGui 使用 docking 分支 1.92.8，源码位于 `third_party/imgui`。它由项目工具链编译，保证库与项目的 ABI 一致。许可证保存在 `third_party/imgui/LICENSE.txt`。
+
+发布包使用 `assets_public/` 中的项目公开资源。私有角色资产与派生捕获由本机授权范围管理。
+
+## ImGuizmo
+
+旋转捕获以零角作为起点，保持吸附步长精度。
+
+ImGuizmo 提供编辑器的操纵器绘制和命中。
+源码位于 `third_party/ImGuizmo`。
+版权归 Cedric Guillemet，使用 MIT 许可。
+原始版权年份为 2016 至 2021。
+
+来源为 gkNextEngine 的 `src/ThirdParty/ImGuizmo`。
+参考提交为 `4ba5b7cd106c282e7ed166ff853aeea87b392680`。
+版本、文件和本地适配见该目录的 `source.json`。
+编辑服务负责合法变换、事务和撤销。
+
+适配采用 Dear ImGui 1.92.8 的折线契约。
+快速悬停切换、裁剪栈和缩放方块遵守视口规则。
+MSVC C4245 仅在此第三方编译单元关闭。
+本地引擎源码使用项目的严格警告规则。
+
+安装保留 `licenses/ImGuizmo-LICENSE.txt`。
+来源清单安装为 `licenses/ImGuizmo-source.json`。
+源码和许可的完整性随交付记录核对。
+
+## Jolt Physics
+
+[Jolt Physics 5.6.0](https://github.com/jrouwe/JoltPhysics/tree/v5.6.0) 以静态库链接。发布许可证路径为 `licenses/joltphysics-LICENSE.txt`。本地封装使用 PhysicsSystem、CharacterVirtual、碰撞过滤和查询的公开 API。
+
+## Lua 与 sol2
+
+[Lua 5.4.8](https://www.lua.org/versions.html) 与 [sol2 3.5.0](https://github.com/ThePhD/sol2/tree/v3.5.0) 通过 vcpkg 安装。sol2 端口修订号为 1，Lua 使用 manifest 版本覆盖固定为 5.4.8。
+
+许可证安装为 `licenses/lua-LICENSE.txt` 和 `licenses/sol2-LICENSE.txt`。本地绑定使用状态、环境、保护函数和指令钩子的公开 API。
+
+MSVC C5321 在包含 sol2 头时局部关闭，适用对象为 UTF-8 表情符号字面量。项目代码继续使用严格警告。上游版本与本地适配由 Debug、Release 和 Player 验证。
+
+## 游戏界面与音频
+
+[RmlUi 6.3](https://github.com/mikke89/RmlUi/tree/6.3) 提供文档布局与字体界面。本地 Vulkan 适配使用公开 RenderInterface，资源由项目 RHI 管理。
+
+[miniaudio 0.11.25](https://github.com/mackron/miniaudio/tree/0.11.25) 提供音频引擎和解码。本项目选择 MIT-0 许可。实现头在独立编译单元内处理上游警告。
+
+FreeType 与其压缩依赖经 vcpkg 安装。安装树保留 RmlUi、miniaudio、FreeType、libpng、zlib、bzip2 和 Brotli 的许可证。
+
+`assets_public/fonts/LatoLatin-Regular.ttf` 来自 RmlUi 6.3 示例。原始许可保存在同目录，并安装为 `licenses/LatoLatin-LICENSE.txt`。公开 WAV 为项目生成的衰减正弦音效。
+
+Windows 游戏包随 Player 分发运行库、着色器、字体与第三方许可。`game_manifest.json` 为每份许可记录文件大小与 SHA-256。模板使用项目公开模型、脚本和音效，Python 发布工具由项目自行实现。
+
+## Windows 编译器运行库
+
+`assets_public/third_person/material_fixture.gltf`、`fixture_hair_data.png` 和生成工具由本项目自行制作，采用项目 MIT 许可。Face SDF 使用项目已有公共纹理。私有主角与用户提供动作保存在本机输入范围。
+
+MSVC 构建随安装树分发 Visual C++ 可再分发运行库。CMake 从当前工具链确定 DLL，VS2022 使用 VC143 目录。使用范围遵循 [Visual Studio 可分发代码条款](https://learn.microsoft.com/visualstudio/releases/2022/redistribution)，本机验收工具链为 MSVC 14.44。
+
+## 编辑器字体
+
+`assets_public/fonts/NotoSansCJKsc-Regular.otf` 使用 Noto Sans CJK SC Regular。来源为 [Noto CJK 字体仓库](https://github.com/notofonts/noto-cjk)。该字体覆盖中文项目名、对象名与资源名。
+
+字体采用 SIL Open Font License 1.1。完整许可位于同目录的 `NotoSansCJK-LICENSE.txt`。安装树保留该字体与许可，并记录文件哈希。
+
+## gkNextEngine
+
+UI 作用域参考 gkNextEngine 的 `UiScopes.hpp`。
+来源提交为 `4ba5b7cd106c282e7ed166ff853aeea87b392680`。
+版权所有为 2024 至 2026 年 gameknife。
+适配模式使用 MIT 许可。
+
+源码路径为 `src/Modules/NextUI/UI/UiScopes.hpp`。
+本地适配位于 `src/editor/ui/UiScopes.hpp`。
+许可保存于 `third_party/gknextengine/LICENSE.txt`。
+发布安装保留 `licenses/gkNextEngine-LICENSE.txt`。
+
+控件、面板与设置采用本项目的公共契约。
+参考设计包括类型、来源与帧边界应用。
+验收依据见[U4 实施步骤](docs/plans/2026-10-06-ai-native-editor-steps.md#u4-ui-基础与设置体系)。
+
+开发期资源服务参考相同提交的 B6 与 B7。
+参考路径为 `src/Modules/LiveCoding/ShaderHotReloader.cpp`。
+视图参考路径为 `src/Engine/Rendering/Preview/RenderViewServices.hpp`。
+缩略图参考位于 `src/Application/Editor/Common/Preview/AssetThumbnailRenderer.hpp`。
+
+本项目按 RHI、帧图与生产操作契约自行适配。
+着色编译器由当前 Vulkan SDK 提供。
+完整采用范围见[开发期资源服务](docs/runtime/development-previews.md)。
+
+## 程序化内容依赖
+
+Manifold 固定为 3.5.2，提供闭合体布尔运算。
+上游提交为 `11235e6b8ebea2dbed8aec4285685aafd3d95667`。
+安装树保留 Manifold 与传递依赖的完整许可。
+许可文件使用 `manifold-LICENSE.txt` 等包名。
+
+刚体文本契约参考 gkNextEngine 的 ScadRig。
+参考路径为 `src/Modules/ScadLoader/FScadRig.h`。
+动作说明来自 `docs/AGENT_GUIDE/ScadRig.md`。
+参考提交与版权见本页 gkNextEngine 条目。
+
+本项目按生成资产、动画图和服务契约自行适配。
+源文件为版本化 JSON，支持受限几何语义。
+采用范围见[程序化内容契约](docs/runtime/procedural-content.md)。
+
+## 着色模块工具链
+
+Slang 2026.8 来自 Vulkan SDK 的宿主编译工具。
+上游许可为 Apache-2.0 WITH LLVM-exception。
+许可依据为[固定版本的原文](https://github.com/shader-slang/slang/blob/v2026.8/LICENSE)。
+引擎安装树包含编译后的 SPIR-V 和来源记录。
+
+工具链指纹包含可执行文件与 Slang 动态库。
+运行项目消费标准 Vulkan 着色产物。
+模块接口参考 gkNextEngine 的算法职责分解。
+Bloom 算法、采样策略和共享参数由本项目实现。
+
+参考文件为 `assets/shaders/common/Interfaces.slang`。
+组合依据位于 `assets/shaders/common/PathTracingRenderer.slang`。
+参考提交与版权见本页 gkNextEngine 条目。
+使用范围见[着色模块说明](docs/runtime/shader-modules.md)。
+
+## 终末地离线资源读取
+
+字段契约参考 [Endfield Extractor](https://github.com/An1X3R/Endfield-map-extractor)。
+固定提交为 `6226108267942ec940cc65b6850ea8c49198c20f`。
+上游原创源码采用 MIT 许可。
+外部源码与发行包由本机任务目录持有。
+
+`tools/endfield_native/lighting.py` 参考灯光字段映射。
+对应上游文件为 `src/extractor_core/lights.py`。
+适配覆盖原始块读取、字段校验和当前版本布局。
+配对校验及来源指纹调用固定版本的上游接口。
+
+场景材质节点由上游转换器构建。
+本项目的通道烘焙工具执行 Blender 节点求值。
+游戏资产与转换产物保留于本机运行目录。
+依赖许可及来源记录见[原生资产验收](docs/acceptance/ev/native-assets.md)。

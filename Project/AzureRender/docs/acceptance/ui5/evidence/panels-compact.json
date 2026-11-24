@@ -1,0 +1,33 @@
+{
+  "root": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui5\\panels-compact-green\\run-9bbd2f3b",
+  "passed": true,
+  "workflows": [
+    {
+      "project": "scene_inspector",
+      "size": [
+        1120,
+        720
+      ],
+      "dpi": 1,
+      "consoleSearch": true,
+      "pause": true,
+      "emptyFilter": true,
+      "clearFilter": true
+    },
+    {
+      "project": "exploration",
+      "size": [
+        1120,
+        720
+      ],
+      "dpi": 1,
+      "consoleSearch": true,
+      "pause": true,
+      "emptyFilter": true,
+      "clearFilter": true
+    }
+  ],
+  "levelFilter": true,
+  "input": "production ImGui replay",
+  "physicalInput": "not performed"
+}

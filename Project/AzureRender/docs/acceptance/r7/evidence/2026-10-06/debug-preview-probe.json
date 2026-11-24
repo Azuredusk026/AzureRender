@@ -1,0 +1,371 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "sourceHash": "571730e4acbcae6ea9a9024938c241406515ea3ab78c3bbd65743b57a31bba1b",
+  "workflows": {
+    "exploration": {
+      "disabled": [
+        {
+          "gpu": {
+            "mean": 0.5731397333333333,
+            "p95": 2.194968,
+            "p99": 2.20970112
+          },
+          "cpu": {
+            "mean": 7.787448333333334,
+            "p95": 8.827045000000004,
+            "p99": 9.095142999999997
+          },
+          "peakWorkingSetBytes": 281350144,
+          "deviceLocalPeakBytes": 183042048,
+          "samples": 60,
+          "warmup": 100,
+          "elapsedSeconds": 2.7180000000007567,
+          "previewEnabled": false,
+          "developer": {
+            "camera": null,
+            "completedSubmission": 160,
+            "diagnostic": "",
+            "schemaVersion": 1,
+            "shaderAvailable": false,
+            "shaderDiagnostic": "",
+            "shaderGeneration": 0,
+            "shaderReplacements": 0,
+            "shaderState": "Idle",
+            "thumbnails": [],
+            "views": []
+          },
+          "settings": {
+            "window": [
+              1920,
+              1080
+            ],
+            "cameraExtent": [
+              320,
+              180
+            ],
+            "thumbnailExtent": [
+              128,
+              128
+            ],
+            "capacity": 3
+          },
+          "passed": true
+        }
+      ],
+      "enabled": [
+        {
+          "gpu": {
+            "mean": 0.8110362666666667,
+            "p95": 0.9811744,
+            "p99": 1.5011331199999955
+          },
+          "cpu": {
+            "mean": 50.67781333333333,
+            "p95": 62.89554499999998,
+            "p99": 81.33624399999995
+          },
+          "peakWorkingSetBytes": 289140736,
+          "deviceLocalPeakBytes": 183042048,
+          "samples": 60,
+          "warmup": 100,
+          "elapsedSeconds": 8.906999999999243,
+          "previewEnabled": true,
+          "developer": {
+            "camera": {
+              "cameraPosition": [
+                3.0,
+                2.9000000953674316,
+                5.0
+              ],
+              "cameraTarget": [
+                0.0,
+                0.8999999761581421,
+                0.0
+              ],
+              "capacity": 3,
+              "colorImage": 1365593441699034,
+              "completedSubmission": 160,
+              "extent": [
+                320,
+                180
+              ],
+              "lastUseSubmission": 160,
+              "outputFormat": "rgba8-linear",
+              "renderCount": 110,
+              "renderer": "character",
+              "requested": false,
+              "resolvedImage": 1380986604487912,
+              "retired": 0,
+              "schemaVersion": 1,
+              "worldCoordinates": true
+            },
+            "completedSubmission": 160,
+            "diagnostic": "",
+            "schemaVersion": 1,
+            "shaderAvailable": false,
+            "shaderDiagnostic": "",
+            "shaderGeneration": 0,
+            "shaderReplacements": 0,
+            "shaderState": "Idle",
+            "thumbnails": [
+              {
+                "asset": "230da6bb-2b68-4b34-9770-4534013d4d82",
+                "fingerprint": "5309309381637495498",
+                "handle": 4294967296,
+                "settings": "128x128-bounds-fit-camera",
+                "view": {
+                  "cameraPosition": [
+                    2.799999952316284,
+                    2.0999999046325684,
+                    3.200000047683716
+                  ],
+                  "cameraTarget": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "capacity": 3,
+                  "colorImage": 914793674310464,
+                  "completedSubmission": 160,
+                  "extent": [
+                    128,
+                    128
+                  ],
+                  "lastUseSubmission": 36,
+                  "outputFormat": "rgba8-linear",
+                  "renderCount": 1,
+                  "renderer": "character",
+                  "requested": false,
+                  "resolvedImage": 930186837099342,
+                  "retired": 0,
+                  "schemaVersion": 1,
+                  "worldCoordinates": false
+                }
+              },
+              {
+                "asset": "a8ec0e84-0001-4fba-950e-e501085f4e9f",
+                "fingerprint": "14850552707534680045",
+                "handle": 8589934593,
+                "settings": "128x128-bounds-fit-camera",
+                "view": {
+                  "cameraPosition": [
+                    2.799999952316284,
+                    2.0999999046325684,
+                    3.200000047683716
+                  ],
+                  "cameraTarget": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "capacity": 3,
+                  "colorImage": 1129198441726979,
+                  "completedSubmission": 160,
+                  "extent": [
+                    128,
+                    128
+                  ],
+                  "lastUseSubmission": 36,
+                  "outputFormat": "rgba8-linear",
+                  "renderCount": 1,
+                  "renderer": "character",
+                  "requested": false,
+                  "resolvedImage": 1144591604515857,
+                  "retired": 0,
+                  "schemaVersion": 1,
+                  "worldCoordinates": false
+                }
+              }
+            ],
+            "views": []
+          },
+          "settings": {
+            "window": [
+              1920,
+              1080
+            ],
+            "cameraExtent": [
+              320,
+              180
+            ],
+            "thumbnailExtent": [
+              128,
+              128
+            ],
+            "capacity": 3
+          },
+          "passed": false
+        }
+      ]
+    },
+    "inspector": {
+      "disabled": [
+        {
+          "gpu": {
+            "mean": 0.19358933333333334,
+            "p95": 0.21300319999999998,
+            "p99": 0.21798688
+          },
+          "cpu": {
+            "mean": 5.276163333333333,
+            "p95": 6.399144999999996,
+            "p99": 6.955107999999994
+          },
+          "peakWorkingSetBytes": 278732800,
+          "deviceLocalPeakBytes": 183042048,
+          "samples": 60,
+          "warmup": 100,
+          "elapsedSeconds": 2.109999999998763,
+          "previewEnabled": false,
+          "developer": {
+            "camera": null,
+            "completedSubmission": 160,
+            "diagnostic": "",
+            "schemaVersion": 1,
+            "shaderAvailable": false,
+            "shaderDiagnostic": "",
+            "shaderGeneration": 0,
+            "shaderReplacements": 0,
+            "shaderState": "Idle",
+            "thumbnails": [],
+            "views": []
+          },
+          "settings": {
+            "window": [
+              1920,
+              1080
+            ],
+            "cameraExtent": [
+              320,
+              180
+            ],
+            "thumbnailExtent": [
+              128,
+              128
+            ],
+            "capacity": 3
+          },
+          "passed": true
+        }
+      ],
+      "enabled": [
+        {
+          "gpu": {
+            "mean": 0.2667728,
+            "p95": 0.28281119999999993,
+            "p99": 0.29507616
+          },
+          "cpu": {
+            "mean": 18.935826666666667,
+            "p95": 20.856874999999988,
+            "p99": 21.849990999999996
+          },
+          "peakWorkingSetBytes": 279216128,
+          "deviceLocalPeakBytes": 183042048,
+          "samples": 60,
+          "warmup": 100,
+          "elapsedSeconds": 3.8430000000007567,
+          "previewEnabled": true,
+          "developer": {
+            "camera": {
+              "cameraPosition": [
+                2.799999952316284,
+                2.0999999046325684,
+                3.200000047683716
+              ],
+              "cameraTarget": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "capacity": 3,
+              "colorImage": 832330302227189,
+              "completedSubmission": 160,
+              "extent": [
+                320,
+                180
+              ],
+              "lastUseSubmission": 160,
+              "outputFormat": "rgba8-linear",
+              "renderCount": 110,
+              "renderer": "character",
+              "requested": false,
+              "resolvedImage": 847723465016067,
+              "retired": 0,
+              "schemaVersion": 1,
+              "worldCoordinates": true
+            },
+            "completedSubmission": 160,
+            "diagnostic": "",
+            "schemaVersion": 1,
+            "shaderAvailable": false,
+            "shaderDiagnostic": "",
+            "shaderGeneration": 0,
+            "shaderReplacements": 0,
+            "shaderState": "Idle",
+            "thumbnails": [
+              {
+                "asset": "02d463b5-8bb5-4c78-a306-d5e7c38f5b3b",
+                "fingerprint": "14850552707534680045",
+                "handle": 4294967296,
+                "settings": "128x128-bounds-fit-camera",
+                "view": {
+                  "cameraPosition": [
+                    2.799999952316284,
+                    2.0999999046325684,
+                    3.200000047683716
+                  ],
+                  "cameraTarget": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "capacity": 3,
+                  "colorImage": 606930418532904,
+                  "completedSubmission": 160,
+                  "extent": [
+                    128,
+                    128
+                  ],
+                  "lastUseSubmission": 36,
+                  "outputFormat": "rgba8-linear",
+                  "renderCount": 1,
+                  "renderer": "character",
+                  "requested": false,
+                  "resolvedImage": 622323581321782,
+                  "retired": 0,
+                  "schemaVersion": 1,
+                  "worldCoordinates": false
+                }
+              }
+            ],
+            "views": []
+          },
+          "settings": {
+            "window": [
+              1920,
+              1080
+            ],
+            "cameraExtent": [
+              320,
+              180
+            ],
+            "thumbnailExtent": [
+              128,
+              128
+            ],
+            "capacity": 3
+          },
+          "passed": false
+        }
+      ]
+    }
+  },
+  "formalBudget": {
+    "gpuP95Ms": 16.6,
+    "editorCpuP95Ms": 10,
+    "workingSetBytes": 2147483648,
+    "deviceLocalBytes": 1610612736.0
+  }
+}

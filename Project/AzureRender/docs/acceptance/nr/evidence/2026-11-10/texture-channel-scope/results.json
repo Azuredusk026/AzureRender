@@ -1,0 +1,59 @@
+{
+  "status": "decoded-source-channel-scope",
+  "seconds": 34.68699999997625,
+  "uniqueSourceFiles": 541,
+  "encodedImages": 476,
+  "uniqueDecodedImages": 468,
+  "groups": {
+    "0": {
+      "images": 6,
+      "baseBytes": 33554496
+    },
+    "1": {
+      "images": 63,
+      "baseBytes": 201285696
+    },
+    "2": {
+      "images": 107,
+      "baseBytes": 461914112
+    },
+    "3": {
+      "images": 243,
+      "baseBytes": 1160872960
+    },
+    "4": {
+      "images": 49,
+      "baseBytes": 328477696
+    }
+  },
+  "scope": "Pillow-decoded frozen source images at base level; GPU cache entries, generated mips, swizzle, sampling and format qualification remain separate",
+  "frozenSourceHashesVerified": 541,
+  "sourceVerificationSeconds": 3.655999999959022,
+  "sourceBase": "9e6bc99",
+  "errors": [],
+  "productionChanged": false,
+  "nativeImageCaptures": 0,
+  "wholeFrameTimingRuns": 0,
+  "archive": {
+    "file": "validation.zip",
+    "bytes": 46383,
+    "sha256": "bdef90c467d344dfafc049d4ab9e3cb3bd6b59f5f73dc716982e231f4d8d3a7f"
+  },
+  "members": [
+    {
+      "path": "scope.py",
+      "bytes": 3566,
+      "sha256": "fd6ec6da33d851831f310c0f0b0163e84f00f71f06c982358103334b2bb2c1e6"
+    },
+    {
+      "path": "results.json",
+      "bytes": 288152,
+      "sha256": "14d30dc4306611ec6a8dbcaa9a7ecda3ab486f4ae3088f623af8abb459aa0aef"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 436,
+      "sha256": "ddeb19049717a0dbadc4f9d572b283c3ef38047c191719957e723395ba6743f2"
+    }
+  ]
+}

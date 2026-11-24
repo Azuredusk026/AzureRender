@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\diagnose_devtools_host.py", line 214, in <module>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\diagnose_devtools_host.py", line 214, in <listcomp>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\diagnose_devtools_host.py", line 167, in run
+    call('wait-until', name='developer.shaderState', equals='Idle', timeoutMs=60000)
+  File "D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\diagnose_devtools_host.py", line 77, in call
+    assert response['passed'] == passed, response
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'code': 'Timeout', 'elapsedMs': 60009.5318, 'message': 'Request deadline elapsed', 'passed': False, 'schemaVersion': 1}

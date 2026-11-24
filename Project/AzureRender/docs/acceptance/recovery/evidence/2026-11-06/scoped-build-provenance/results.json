@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "status": "scoped-build-and-product-verification-passed",
+  "sourceBase": "d3adcc8e2d2d9187d977ea3f2de9d1e3c032d612",
+  "sourceSha256": {
+    "tools/build_provenance.py": "3147998896bc900a197a91d11b6a8de4aa8fb000884466737f243e37b6d55a2e",
+    "tools/test_build_provenance.py": "8d7a1d62aa9cc9e3b3e4f9beee66f7ed3d4f4008526025194c8e3f88f0f42996"
+  },
+  "patchSha256": "bdada7bb2e1ccc486257420d37ad29a658fb5ccaa96e1abddad1b85ae7501dc4",
+  "pythonChecks": 18,
+  "realCmakeFixture": {
+    "status": "passed",
+    "scope": "Actual CMake/Ninja on an orchestration fixture; files are fixture products, not renderer executables",
+    "rows": [
+      {
+        "mode": "all",
+        "products": 20,
+        "buildScope": {
+          "kind": "all",
+          "targets": [],
+          "testProducts": {}
+        },
+        "unrelatedTargetBuilt": true
+      },
+      {
+        "mode": "selected",
+        "products": 21,
+        "buildScope": {
+          "kind": "runtime-and-tests",
+          "targets": [
+            "AzureRender",
+            "AzurePlayer",
+            "AzureMetaGen",
+            "AzureGeometryCompiler",
+            "AzureAssetExchange",
+            "AzureMaterialValidator",
+            "AzureGameLauncher",
+            "AzureEngineContracts",
+            "AzureManagedArtifacts",
+            "AzureShaderModulePrototypes",
+            "SelectedTests"
+          ],
+          "testProducts": {
+            "SelectedTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\scoped-build-real-fixture\\selected\\SelectedTests.exe"
+          }
+        },
+        "unrelatedTargetBuilt": false
+      },
+      {
+        "mode": "runtime",
+        "products": 20,
+        "buildScope": {
+          "kind": "runtime",
+          "targets": [
+            "AzureRender",
+            "AzurePlayer",
+            "AzureMetaGen",
+            "AzureGeometryCompiler",
+            "AzureAssetExchange",
+            "AzureMaterialValidator",
+            "AzureGameLauncher",
+            "AzureEngineContracts",
+            "AzureManagedArtifacts",
+            "AzureShaderModulePrototypes"
+          ],
+          "testProducts": {}
+        },
+        "unrelatedTargetBuilt": false
+      }
+    ]
+  },
+  "engine": {
+    "release": {
+      "build": {
+        "status": "passed",
+        "exitCode": 0,
+        "seconds": 19.35999999998603,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+          "build",
+          "--source",
+          "D:\\Projects\\FYP\\Project\\AzureRender",
+          "--build-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "--config",
+          "Release",
+          "--test-target",
+          "AzureCameraSystemTests",
+          "--test-target",
+          "AzureContentDirectoryScaleTests"
+        ],
+        "buildScope": {
+          "kind": "runtime-and-tests",
+          "targets": [
+            "AzureRender",
+            "AzurePlayer",
+            "AzureMetaGen",
+            "AzureGeometryCompiler",
+            "AzureAssetExchange",
+            "AzureMaterialValidator",
+            "AzureGameLauncher",
+            "AzureEngineContracts",
+            "AzureManagedArtifacts",
+            "AzureShaderModulePrototypes",
+            "AzureCameraSystemTests",
+            "AzureContentDirectoryScaleTests"
+          ],
+          "testProducts": {
+            "AzureCameraSystemTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureCameraSystemTests.exe",
+            "AzureContentDirectoryScaleTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureContentDirectoryScaleTests.exe"
+          }
+        },
+        "productCount": 602,
+        "productionShaders535ByteIdentical": true,
+        "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+      },
+      "checks": {
+        "exitCode": 0,
+        "seconds": 2.0780000000377186,
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^(AzureRuntime.CameraSystem|AzureEngine.BuildProvenance)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\scoped-build-validation\\engine-release-checks.xml"
+        ],
+        "expectedChecks": 2
+      }
+    },
+    "debug": {
+      "build": {
+        "status": "passed",
+        "exitCode": 0,
+        "seconds": 18.45299999997951,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+          "build",
+          "--source",
+          "D:\\Projects\\FYP\\Project\\AzureRender",
+          "--build-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "--config",
+          "Debug",
+          "--test-target",
+          "AzureCameraSystemTests",
+          "--test-target",
+          "AzureContentDirectoryScaleTests"
+        ],
+        "buildScope": {
+          "kind": "runtime-and-tests",
+          "targets": [
+            "AzureRender",
+            "AzurePlayer",
+            "AzureMetaGen",
+            "AzureGeometryCompiler",
+            "AzureAssetExchange",
+            "AzureMaterialValidator",
+            "AzureGameLauncher",
+            "AzureEngineContracts",
+            "AzureManagedArtifacts",
+            "AzureShaderModulePrototypes",
+            "AzureCameraSystemTests",
+            "AzureContentDirectoryScaleTests"
+          ],
+          "testProducts": {
+            "AzureCameraSystemTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureCameraSystemTests.exe",
+            "AzureContentDirectoryScaleTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureContentDirectoryScaleTests.exe"
+          }
+        },
+        "productCount": 602,
+        "productionShaders535ByteIdentical": true,
+        "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+      },
+      "checks": {
+        "exitCode": 0,
+        "seconds": 2.0459999999729916,
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^(AzureRuntime.CameraSystem|AzureEngine.BuildProvenance)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\scoped-build-validation\\engine-debug-checks.xml"
+        ],
+        "expectedChecks": 2
+      }
+    }
+  },
+  "nativeGpuChecks": "deferred-by-user-not-run",
+  "fullVisualAcceptance": "failed-user-review",
+  "directoryScale": "debug-original180s-timeout-unresolved",
+  "archiveSha256": "89a038e3fe20c66cde85179dc436f6428ab852d9d87955199269e9a3e43f8e07",
+  "archiveMembers": {
+    "validation/engine-debug-build.json": "43dcb288a8fe1f1ba61dcaa92cc6c43e0563b71b46bf4ce860f20b19bd014f1e",
+    "validation/engine-debug-build.log": "9519b4a84f69b0f6b9278a3e96688b5bd9e245134887311ed08e970213709e7d",
+    "validation/engine-debug-checks.json": "e6abcfe6ae809a3d1e1c9d8b5831668fedb98af6882824bd54cdde2f4bc3c33a",
+    "validation/engine-debug-checks.log": "19b50f09763f90fb640f24c95d5c9a45dcc6b4241cf25cca52834aab764a5240",
+    "validation/engine-debug-checks.xml": "f02a7e6883cb1b32da8cfb0531a59435da4e16324221cc381d74c1a59467c165",
+    "validation/engine-release-build.json": "72258a11ba378a9461c86e17e8cf1c017132367207338a65dc7fdacb50eec141",
+    "validation/engine-release-build.log": "aa1e59b53085112c278f8106278baf20e35bb8eef7256397e51c96004946e325",
+    "validation/engine-release-checks.json": "9deae0a2e844279959b678198b54ab11c188961fb4130bfbf38c503a475d6db4",
+    "validation/engine-release-checks.log": "14aa5f1c0508febf83bdce6a644115e75b7f54065f5753273762c97ba7ab0b37",
+    "validation/engine-release-checks.xml": "cd6955ec8579b078adc103c7674df60051c2411a92337ba66f6560b3461a2bfe",
+    "validation/green.json": "e07180a56e9d86e63ada481f2b28c908cc58084a28ddc174d6a9ac6a9dc33f10",
+    "validation/green.log": "f9856cb669a0ec3728d87cf0a49d2b5f7f6803b920a784b92e287ce89dd9128c",
+    "validation/inventory-red.log": "f73503a0061967388b079ae906df64bcf5b749759dde6e70bd591586f670ffca",
+    "validation/real-all-v2.log": "e7eb0c57516145579b2f63fa12bac5d873b9420c579408288f9336c9dec1ebdc",
+    "validation/real-all.log": "68afa7f621285988ffaaa264e34a456ec26785a2b1fd6c72498df8d6d8e35c21",
+    "validation/real-cmake-initial.json": "8a144bd3c1d03c35b97d4d4915fa2152eb3a79369264058c361ad5a45dbbb8b2",
+    "validation/real-cmake.json": "44ff670b94cbbbf613b2bf25c49377630839a3916859537cf558debe6cd4d4bc",
+    "validation/real-runtime-v2.log": "4e69f848b67a4cd7c3466f5a5cbcbb73dbe2ff1181a93b30f1a4d12e99aa30e2",
+    "validation/real-runtime.log": "7616af718c322704b6d113b71d61151a211692eac1764694053a98aee82afabf",
+    "validation/real-selected-v2.log": "8cddc62b44e4f35b70afd1ab2314492b114c2c5e37629db750cd58d27ee9d45c",
+    "validation/real-selected.log": "446abc7da2544ce020f7ff5e0ceed6a2518cc2c17db115eb64f6e5e0ddd38bc7",
+    "validation/red-cli.log": "2bccd2b74a9eabd83b031d15055b6dc66b9ea35e7a4075dfab9d0b685bce0542",
+    "validation/red.json": "489157289b3d37894110111d4435dcf80f9930bb28aa6fc8dd59ae4bc4d1687f",
+    "validation/red.log": "69acb514063137293f8f8d2d802aa5d665065a35ec86042b3bfd0f53e097b29c",
+    "validation/required-products-fixture-error.log": "7b5b12d7e69222a500ab915f12617e1fbe6131a8301691d9d7156188a03bbbc5",
+    "validation/required-products-red.json": "9b7a8d8dd92bba38aae072a03fc56576767fa6aa734a6e6317d7d3aa008105de",
+    "validation/required-products-red.log": "0e26a7e1ba40ad9de277343af2667801e04620775d71d55f423b17d6c0b61ccc",
+    "validation/task.json": "f7fb0249922fd363ce8a037eb4898ce276022e4983cd687a4fc59cc479458b99",
+    "source/tools/build_provenance.py": "3147998896bc900a197a91d11b6a8de4aa8fb000884466737f243e37b6d55a2e",
+    "source/tools/test_build_provenance.py": "8d7a1d62aa9cc9e3b3e4f9beee66f7ed3d4f4008526025194c8e3f88f0f42996",
+    "fixture/CMakeLists.txt": "fb30803cc131256be9d29619213f1114bed98a8ec23f9952bbfa6daaa15d0af5",
+    "fixture/tools/fixture_builder.py": "5ef23e5c372602164bcf1aa18a0ef3529ee2cce615ef57ef54b61079fba16188",
+    "fixture/src/Runtime.hpp": "f6d779dc165fda38a306c58e03d704d063b2d5f52cfc4884ad7deb333b3dc3ab",
+    "drivers/validate_scoped_engine.py": "9d85abcb74f0f015c0fa61a059b6f2ed52c95ec437afe5918bf3c482820b69ae",
+    "engine-release/build-provenance.json": "5ff47dd979030e23d3c04c999aa89300dcab65ab57c910acf8bc5e2217e0ac50",
+    "engine-debug/build-provenance.json": "26a444fbed5ef4e8bd2882d02d117643501a698015f7c94ce1e37ec6c330bcde"
+  }
+}

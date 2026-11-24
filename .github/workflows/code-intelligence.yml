@@ -1,0 +1,58 @@
+name: Code intelligence tools
+
+on:
+  push:
+    branches: [main, engine-dev]
+    paths:
+      - 'Project/AzureRender/tools/code_*.py'
+      - 'Project/AzureRender/tools/code_query_scopes.json'
+      - 'Project/AzureRender/tools/evidence_*.py'
+      - 'Project/AzureRender/tools/audit_repository.py'
+      - 'Project/AzureRender/tools/artifact_cleanup.py'
+      - 'Project/AzureRender/tools/test_code_*.py'
+      - 'Project/AzureRender/tools/test_evidence_archive.py'
+      - 'Project/AzureRender/tools/test_repository_audit.py'
+      - 'Project/AzureRender/tools/test_artifact_cleanup.py'
+      - 'Project/AzureRender/tools/requirements-code-intelligence.txt'
+      - '.github/workflows/code-intelligence.yml'
+  pull_request:
+    paths:
+      - 'Project/AzureRender/tools/code_*.py'
+      - 'Project/AzureRender/tools/code_query_scopes.json'
+      - 'Project/AzureRender/tools/evidence_*.py'
+      - 'Project/AzureRender/tools/audit_repository.py'
+      - 'Project/AzureRender/tools/artifact_cleanup.py'
+      - 'Project/AzureRender/tools/test_code_*.py'
+      - 'Project/AzureRender/tools/test_evidence_archive.py'
+      - 'Project/AzureRender/tools/test_repository_audit.py'
+      - 'Project/AzureRender/tools/test_artifact_cleanup.py'
+      - 'Project/AzureRender/tools/requirements-code-intelligence.txt'
+      - '.github/workflows/code-intelligence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: Project/AzureRender
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install query dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ripgrep
+          python -m pip install --only-binary=:all: --target build/qa-python/code-intelligence -r tools/requirements-code-intelligence.txt
+      - name: Run tool contract suites
+        run: |
+          python tools/test_code_query.py
+          python tools/test_code_symbols.py
+          python tools/test_repository_audit.py
+          python tools/test_evidence_archive.py
+          python tools/test_artifact_cleanup.py

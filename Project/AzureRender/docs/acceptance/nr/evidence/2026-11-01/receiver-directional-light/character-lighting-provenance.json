@@ -1,0 +1,13 @@
+{
+  "status": "diagnostic-not-promoted",
+  "referenceProject": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-135416-character-portrait-recovery-0773ca\\original-reference\\project\\high\\reference.azurelevel",
+  "referenceSha256": "382ac9bedb99db6ae96e3edb3e5a8c42346f9d1efb5ae4c9e9513b3ffc09e39f",
+  "referenceExposureEv": -2,
+  "targetExposureEv": 0,
+  "linearExposureTransfer": 0.25,
+  "mainAndAmbientGain": "reference outdoorGain multiplied by exposure transfer; shadowOverride is 1",
+  "localLightIntensity": "reference local intensity multiplied by exposure transfer",
+  "lightFrame": "reference local lights parented to the character transform through normal scene hierarchy",
+  "environmentPolicy": "Original light surface receivers, scene geometry, GI, reflection, exposure, LUT and tone mapping retained",
+  "scope": "Authored reference-lighting experiment. Complete visual acceptance, native scene equivalence and moving character quality remain pending."
+}

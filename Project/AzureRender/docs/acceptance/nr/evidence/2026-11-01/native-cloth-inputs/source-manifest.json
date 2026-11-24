@@ -1,0 +1,136 @@
+{
+  "status": "frozen-source-inputs",
+  "materialIndicesByEvent": {
+    "868": 4,
+    "889": 1,
+    "910": 5,
+    "928": 2
+  },
+  "sharedPixelShaderEvents": [
+    910,
+    928
+  ],
+  "files": [
+    {
+      "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/e868-ps.asm",
+      "sha256": "fd1350d42c6a76d32dbec1ccdbed7173f7ca2aba57dc6d96a59b138d0565c796",
+      "bytes": 97585,
+      "frozen": "source/e868-ps.asm.gz"
+    },
+    {
+      "path": "build/runs/20261023-140322-skin-ramp-capture-validation-4e1751/e889-ps-complete.asm",
+      "sha256": "55154341dbcce75a3b521cb45ad73bd00be47bae5e95333b83d950f25dc21750",
+      "bytes": 98704,
+      "frozen": "source/e889-ps-complete.asm.gz"
+    },
+    {
+      "path": "build/runs/20261023-140322-skin-ramp-capture-validation-4e1751/e910-ps-complete.asm",
+      "sha256": "2fc0222f750e0f758e48189da8401a542639c26f12193f4e49c279b8f6216ebc",
+      "bytes": 104462,
+      "frozen": "source/e910-ps-complete.asm.gz"
+    },
+    {
+      "path": "build/runs/20261023-140322-skin-ramp-capture-validation-4e1751/e928-ps-complete.asm",
+      "sha256": "2fc0222f750e0f758e48189da8401a542639c26f12193f4e49c279b8f6216ebc",
+      "bytes": 104462,
+      "frozen": "source/e928-ps-complete.asm.gz"
+    },
+    {
+      "path": "build/runs/20261023-140322-skin-ramp-capture-validation-4e1751/e889-pipeline.json",
+      "sha256": "a5e5907ca85804734ceb41b26ade8f6fba7b888c613419906876eddbfc32ff6c",
+      "bytes": 1527,
+      "frozen": "source/e889-pipeline.json.gz"
+    },
+    {
+      "path": "build/runs/20261023-140322-skin-ramp-capture-validation-4e1751/e910-pipeline.json",
+      "sha256": "abfe4172cd0a43e1d1c88157bde2b14357e4aeef28051880454771aab69bd387",
+      "bytes": 1557,
+      "frozen": "source/e910-pipeline.json.gz"
+    },
+    {
+      "path": "build/runs/20261023-140322-skin-ramp-capture-validation-4e1751/e928-pipeline.json",
+      "sha256": "90341c5ceebe6bb08f6b5e36d864b493f188f08a9e569309b894a133ef433a9b",
+      "bytes": 1557,
+      "frozen": "source/e928-pipeline.json.gz"
+    },
+    {
+      "path": "build/runs/20261101-120125-character-environment-reception-fa70a7/clothing-source-brief.json",
+      "sha256": "c6894a5aff70bf13f8dfd5cad72739324171b3df96bfeb3026a551945042afb5",
+      "bytes": 7104,
+      "frozen": "source/clothing-source-brief.json.gz"
+    },
+    {
+      "path": "build/runs/20261101-120125-character-environment-reception-fa70a7/lighting-candidate.json",
+      "sha256": "3336916dc7e159a270fce2f1f4abb48c5f626fd1821f18b9c92425a7d382bab9",
+      "bytes": 416518,
+      "frozen": "source/lighting-candidate.json.gz"
+    }
+  ],
+  "shaders": [
+    {
+      "event": 868,
+      "sha256": "fd1350d42c6a76d32dbec1ccdbed7173f7ca2aba57dc6d96a59b138d0565c796",
+      "lines": 2085,
+      "instructions": 2023,
+      "constantBufferRows": [
+        "cb0[45]",
+        "cb1[141]",
+        "cb2[4094]",
+        "cb3[2054]",
+        "cb4[4]",
+        "cb5[66]",
+        "cb6[10]",
+        "cb7[160]"
+      ]
+    },
+    {
+      "event": 889,
+      "sha256": "55154341dbcce75a3b521cb45ad73bd00be47bae5e95333b83d950f25dc21750",
+      "lines": 2102,
+      "instructions": 2039,
+      "constantBufferRows": [
+        "cb0[45]",
+        "cb1[141]",
+        "cb2[4094]",
+        "cb3[2054]",
+        "cb4[4]",
+        "cb5[66]",
+        "cb6[10]",
+        "cb7[160]"
+      ]
+    },
+    {
+      "event": 910,
+      "sha256": "2fc0222f750e0f758e48189da8401a542639c26f12193f4e49c279b8f6216ebc",
+      "lines": 2244,
+      "instructions": 2179,
+      "constantBufferRows": [
+        "cb0[45]",
+        "cb1[141]",
+        "cb2[4094]",
+        "cb3[2054]",
+        "cb4[4]",
+        "cb5[66]",
+        "cb6[27]",
+        "cb7[160]"
+      ]
+    },
+    {
+      "event": 928,
+      "sha256": "2fc0222f750e0f758e48189da8401a542639c26f12193f4e49c279b8f6216ebc",
+      "lines": 2244,
+      "instructions": 2179,
+      "constantBufferRows": [
+        "cb0[45]",
+        "cb1[141]",
+        "cb2[4094]",
+        "cb3[2054]",
+        "cb4[4]",
+        "cb5[66]",
+        "cb6[27]",
+        "cb7[160]"
+      ]
+    }
+  ],
+  "visualAcceptance": "failed-user-review"
+}

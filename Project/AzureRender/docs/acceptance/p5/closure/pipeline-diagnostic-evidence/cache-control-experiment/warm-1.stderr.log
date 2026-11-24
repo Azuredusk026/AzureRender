@@ -1,0 +1,5 @@
+[1791661112732][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791661113062][info][render][code=0] Character texture access: indexed, requested slots=195, stage sampler limit=1048576
+[1791661113081][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791661113187][info][render][code=0] Character skinning and morph: Vulkan compute path
+AZURE_DIAGNOSTIC_CACHE graphics=15 compute=6 loaded=477510 saved=477510 failed=0

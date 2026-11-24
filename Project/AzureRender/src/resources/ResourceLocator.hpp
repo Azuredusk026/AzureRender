@@ -8,6 +8,8 @@ namespace azurerender {
 
 class ResourceLocator final {
 public:
+    static std::filesystem::path executableDirectory();
+    std::filesystem::path installationRoot() const;
     explicit ResourceLocator(std::filesystem::path explicitRoot = {});
 
     [[nodiscard]] std::filesystem::path shaderDirectory() const;
@@ -17,6 +19,7 @@ public:
     [[nodiscard]] std::filesystem::path rampAtlas() const;
     [[nodiscard]] std::filesystem::path showcaseLooks() const;
     [[nodiscard]] std::filesystem::path captureDirectory() const;
+    [[nodiscard]] std::filesystem::path generatedCacheDirectory(const std::filesystem::path& projectFile) const;
     [[nodiscard]] std::filesystem::path resolveAsset(
         const std::filesystem::path& requested) const;
     [[nodiscard]] const std::vector<std::filesystem::path>& searchRoots() const noexcept {

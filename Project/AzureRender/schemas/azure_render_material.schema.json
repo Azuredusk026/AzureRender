@@ -1,19 +1,20 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://azurerender.local/schema/material-profile-v1.json",
-  "title": "AzureRender glTF Material Profile v1",
+  "$id": "https://azurerender.local/schema/material-profile.json",
+  "title": "AzureRender glTF Material Profile",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "schemaVersion",
-    "class",
-    "features",
-    "styleParameters",
-    "featureParameters"
+    "class"
   ],
   "properties": {
     "schemaVersion": {
-      "const": 1
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
     },
     "class": {
       "enum": [
@@ -29,6 +30,123 @@
         "showcase"
       ]
     },
+    "displayTransform": {
+      "type": "string",
+      "enum": [
+        "scene",
+        "linear"
+      ],
+      "default": "scene"
+    },
+    "environmentLighting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "diffuse": {
+          "type": "string",
+          "enum": [
+            "scene",
+            "global-environment"
+          ],
+          "default": "scene"
+        },
+        "reflection": {
+          "type": "string",
+          "enum": [
+            "scene",
+            "global-environment"
+          ],
+          "default": "scene"
+        },
+        "reflectionLayer": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "specularModel": {
+          "type": "string",
+          "enum": [
+            "scene",
+            "ggx-multiscatter-fit"
+          ],
+          "default": "scene"
+        },
+        "globalIntensity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 16
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "reflectionLayer"
+            ]
+          },
+          "then": {
+            "properties": {
+              "reflection": {
+                "const": "scene"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "globalIntensity"
+            ]
+          },
+          "then": {
+            "anyOf": [
+              {
+                "required": [
+                  "diffuse"
+                ],
+                "properties": {
+                  "diffuse": {
+                    "const": "global-environment"
+                  }
+                }
+              },
+              {
+                "required": [
+                  "reflection"
+                ],
+                "properties": {
+                  "reflection": {
+                    "const": "global-environment"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "mainLightShadow": {
+      "type": "string",
+      "enum": [
+        "scene",
+        "object-shadow"
+      ],
+      "default": "scene"
+    },
+    "radianceScale": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 16,
+      "default": 1,
+      "description": "Linear outgoing-radiance multiplier after material response and before view transport. Multiplicative surfaces require one."
+    },
     "features": {
       "type": "array",
       "uniqueItems": true,
@@ -40,12 +158,28 @@
           "emissive-mask",
           "overlay",
           "neutral-fallback",
-          "brow-overlay"
+          "brow-overlay",
+          "surface-ao",
+          "scene-tint",
+          "hair-ramp",
+          "scene-refraction",
+          "diffuse-ramp",
+          "silhouette-outline",
+          "multiply-composite",
+          "hair-projected-ramp",
+          "eye-radial-surface",
+          "unlit-surface",
+          "geometry-shadow",
+          "sqrt-alpha-shadow",
+          "hair-pixel-integral",
+          "unlit-texture-layers",
+          "r11g11b10-output",
+          "mirrored-coarse-uv"
         ]
       }
     },
     "styleParameters": {
-      "description": "Class-dependent style vector. Lit materials use toon/shadow/specular/rim; brow-overlay uses local vertical lift, Face-D ink expansion radius in texels and two reserved values.",
+      "description": "Class-dependent style vector. Lit materials use toon/shadow/specular/rim. Brow-overlay uses bind-space island expansion in metres (clamped to 0.0012), Face-D ink expansion radius in texels and two reserved values. Named brow joints select islands; eyelash geometry is preserved. Card culling uses the standard glTF material.doubleSided property.",
       "$ref": "#/$defs/parameterVector"
     },
     "featureParameters": {
@@ -53,18 +187,496 @@
       "$ref": "#/$defs/parameterVector"
     },
     "faceSdf": {
-      "$ref": "#/$defs/faceSdfProfile"
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "texture",
+        "texCoord",
+        "headNode"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "texture": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "texCoord": {
+          "const": 0
+        },
+        "headNode": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "hair": {
+      "type": "object",
+      "properties": {
+        "projectedRamp": {
+          "type": "object",
+          "properties": {
+            "primaryTextureFootprint": {
+              "type": "string",
+              "const": "axis-diagonal",
+              "description": "使用轴向与对角足迹选择头发基色 RGB、参数和双法线的纹理层级。"
+            },
+            "snapshotNormal": {
+              "type": "string",
+              "enum": [
+                "lighting",
+                "material-normal-rg"
+              ],
+              "default": "lighting"
+            },
+            "lighting": {
+              "type": "object",
+              "properties": {
+                "mainBrightnessSaturation": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "按环境和所选主灯组合的亮度增强色度。"
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "diffuseRamp": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "shadowColorLut": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "eyeSurface": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "outlineSurface": {
+      "$ref": "outline_surface.schema.json"
+    },
+    "specularInput": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "nprDiffuse": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter.",
+      "properties": {
+        "shadowSaturation": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 4,
+          "default": 1
+        },
+        "lightingNormal": {
+          "type": "string",
+          "enum": [
+            "surface",
+            "origin-radial-horizontal",
+            "screen-surface"
+          ]
+        },
+        "transparentHighlights": {
+          "type": "boolean",
+          "default": false
+        },
+        "rampComposition": {
+          "type": "string",
+          "enum": [
+            "mask-visibility",
+            "view-ramp-alpha",
+            "view-facing-mask"
+          ]
+        },
+        "rimResponse": {
+          "type": "string",
+          "enum": [
+            "screen-depth",
+            "view-facing",
+            "face-masked"
+          ],
+          "default": "screen-depth"
+        }
+      }
+    },
+    "surface": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schemaVersion",
+            "lighting"
+          ],
+          "properties": {
+            "schemaVersion": {
+              "type": "integer",
+              "const": 1
+            },
+            "lighting": {
+              "const": "unlit"
+            }
+          }
+        },
+        {
+          "$ref": "unlit_texture_layers.schema.json"
+        }
+      ]
+    },
+    "composite": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "sceneRefraction": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "coverageTexture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "texture"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "enum": [1, 2]
+        },
+        "texture": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "channel": {
+          "enum": [
+            "red",
+            "alpha"
+          ]
+        },
+        "lodPolicy": {
+          "const": "ellipse-major"
+        }
+      },
+      "if": {
+        "properties": { "schemaVersion": { "const": 2 } }
+      },
+      "then": { "required": ["lodPolicy"] },
+      "else": { "not": { "required": ["lodPolicy"] } }
+    },
+    "referenceDepthStencil": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "role"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "role": {
+          "enum": ["protect", "respect"]
+        }
+      }
+    },
+    "referenceNormal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "encoding"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "encoding": {
+          "type": "string",
+          "enum": ["sampled-rg", "geometry", "hair-point-mip"]
+        }
+      }
+    },
+    "blendDepth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "write": {
+          "type": "boolean",
+          "default": false
+        },
+        "compare": {
+          "type": "string",
+          "enum": [
+            "less",
+            "less-or-equal"
+          ],
+          "default": "less"
+        }
+      }
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "anyOf": [
+          {
+            "required": [
+              "environmentLighting"
+            ]
+          },
+          {
+            "required": [
+              "mainLightShadow"
+            ]
+          },
+          {
+            "required": [
+              "referenceNormal"
+            ]
+          },
+          {
+            "required": [
+              "referenceDepthStencil"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "properties": {
+          "schemaVersion": {
+            "const": 2
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "displayTransform"
+        ]
+      },
+      "then": {
+        "properties": {
+          "schemaVersion": {
+            "const": 2
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "radianceScale"
+        ]
+      },
+      "then": {
+        "properties": {
+          "schemaVersion": {
+            "const": 2
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "features"
+        ],
+        "properties": {
+          "features": {
+            "contains": {
+              "const": "multiply-composite"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "radianceScale": {
+            "const": 1
+          },
+          "displayTransform": {
+            "const": "scene"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "nprDiffuse"
+        ],
+        "properties": {
+          "nprDiffuse": {
+            "required": [
+              "rimResponse"
+            ],
+            "properties": {
+              "rimResponse": {
+                "const": "face-masked"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "faceSdf"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": 2
+          },
+          "faceSdf": {
+            "properties": {
+              "schemaVersion": {
+                "const": 2
+              }
+            }
+          },
+          "class": {
+            "const": "face"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "features"
+        ],
+        "properties": {
+          "features": {
+            "contains": {
+              "const": "r11g11b10-output"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "schemaVersion": {
+            "const": 2
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "features"
+              ],
+              "properties": {
+                "features": {
+                  "contains": {
+                    "enum": [
+                      "unlit-surface",
+                      "unlit-texture-layers",
+                      "overlay",
+                      "scene-tint",
+                      "multiply-composite"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "class": {
+                  "const": "overlay"
+                }
+              }
+            },
+            {
+              "required": [
+                "surface"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "features"
+        ],
+        "properties": {
+          "features": {
+            "contains": {
+              "const": "mirrored-coarse-uv"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "schemaVersion": {
+            "const": 2
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "properties": {
+                "features": {
+                  "contains": {
+                    "enum": [
+                      "hair-pixel-integral",
+                      "unlit-surface",
+                      "unlit-texture-layers",
+                      "eye-radial-surface",
+                      "scene-refraction",
+                      "scene-tint",
+                      "multiply-composite",
+                      "overlay"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "class": {
+                  "const": "overlay"
+                }
+              }
+            },
+            {
+              "required": [
+                "surface"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
   "$defs": {
     "parameterVector": {
       "type": "array",
       "minItems": 4,
       "maxItems": 4,
       "items": {
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 4.0
+        "type": "number"
       }
     },
     "faceSdfProfile": {
@@ -93,17 +705,30 @@
           "const": 0
         },
         "channel": {
-          "enum": ["r", "g", "b", "a"]
+          "enum": [
+            "r",
+            "g",
+            "b",
+            "a"
+          ]
         },
         "maskChannel": {
-          "enum": ["r", "g", "b", "a"]
+          "enum": [
+            "r",
+            "g",
+            "b",
+            "a"
+          ]
         },
         "shadowOnLowValues": {
           "type": "boolean"
         },
         "horizontalAxis": {
           "description": "Which face side is stored at increasing U.",
-          "enum": ["left-to-right", "right-to-left"]
+          "enum": [
+            "left-to-right",
+            "right-to-left"
+          ]
         },
         "headNode": {
           "type": "string",
@@ -111,5 +736,6 @@
         }
       }
     }
-  }
+  },
+  "description": "Structural profile schema. Texture ownership, node bindings and valid feature combinations use AzureMaterialValidator and the production interpreter."
 }

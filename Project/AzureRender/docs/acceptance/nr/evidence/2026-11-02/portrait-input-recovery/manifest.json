@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "status": "reference-entry-and-matched-interior-regions-verified",
+  "visualAcceptance": "failed-user-review",
+  "sourceCommit": "f9affb1080bef123b1099ca9de533246430685ba",
+  "originalRun": "build/runs/20261101-143507-native-cloth-variants-d877ef",
+  "sourceInputsVerified": 50,
+  "bundles": [
+    {
+      "path": "metadata.json.gz",
+      "sha256": "bd964ac0aea00ca6da2bb36a75414728b960944901a4240eba94403d6162b5ac",
+      "sourceFiles": 50
+    }
+  ],
+  "directFiles": [
+    {
+      "path": "user-reference-current-comparison.png",
+      "sourcePath": "build/runs/20261101-143507-native-cloth-variants-d877ef/user-reference-current-comparison.png",
+      "sha256": "16628f3be7c24e5f064cd8a0d91505ec218f719b5b70bad0e7e214208b142d85",
+      "bytes": 152267
+    },
+    {
+      "path": "portrait-captures/near-world-linear/frames/frame_000000.png",
+      "sourcePath": "build/runs/20261101-143507-native-cloth-variants-d877ef/portrait-captures/near-world-linear/frames/frame_000000.png",
+      "sha256": "3ca338868a932ccba451616eb9ad3245fcb498ff8531528c9b804af99fe552e7",
+      "bytes": 3412226
+    },
+    {
+      "path": "portrait-captures/near-linear-isolated/frames/frame_000000.png",
+      "sourcePath": "build/runs/20261101-143507-native-cloth-variants-d877ef/portrait-captures/near-linear-isolated/frames/frame_000000.png",
+      "sha256": "72d60857e2adb4abf2186a88db363cb6db9195f639f551512ceb3b3ea105718c",
+      "bytes": 3327371
+    },
+    {
+      "path": "portrait-temporal-captures/near-world-linear/frames/frame_000063.png",
+      "sourcePath": "build/runs/20261101-143507-native-cloth-variants-d877ef/portrait-temporal-captures/near-world-linear/frames/frame_000063.png",
+      "sha256": "4185d204efc7acfc750e1663628aa4ebd8f6e9bd75b4c56939943fcb16e90fde",
+      "bytes": 3213658
+    },
+    {
+      "path": "portrait-temporal-captures/near-linear-isolated/frames/frame_000063.png",
+      "sourcePath": "build/runs/20261101-143507-native-cloth-variants-d877ef/portrait-temporal-captures/near-linear-isolated/frames/frame_000063.png",
+      "sha256": "9507a88ddc1078c79263146166fdf1bc3f3c21f7fd02ab0b7f684a17f183c9e2",
+      "bytes": 3129301
+    }
+  ]
+}

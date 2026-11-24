@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "editorSha256": "0043f5b342d2e1163315ecece95c5f6828c6e8044e0f64a4a2b449a19400e05e",
+  "ui7SourceAndArtifactMatch": true,
+  "inheritedUi7Scopes": [
+    "viewport design",
+    "navigation",
+    "workspace"
+  ],
+  "playerSha256": "9f9cb18c46f8db31d1cb89a8a3b90a5f3608f73e1a080a091a5d85b3eed04fd9",
+  "launcherSha256": "f50166d03e0d776ebda7f9e28a79bcd451106c8a533f45cb47a694664298569f"
+}

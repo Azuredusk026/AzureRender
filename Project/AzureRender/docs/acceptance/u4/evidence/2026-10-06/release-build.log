@@ -1,0 +1,298 @@
+[0/1] Re-running CMake...
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+-- Automatically setting %HTTP(S)_PROXY% environment variables to "127.0.0.1:7897".
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+  * brotli:x64-windows@1.2.0 -- git+https://github.com/microsoft/vcpkg@0fb79bb13588702a9e06057745b4aed95ce5c861
+  * bzip2[core,tool]:x64-windows@1.0.8#6 -- git+https://github.com/microsoft/vcpkg@2d029da682847c5ebdc54e4dbea001331a02207e
+  * freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3 -- git+https://github.com/microsoft/vcpkg@37a2b08e48b987c9b2a45a075fed1bc382e8de03
+    glfw3:x64-windows@3.5.1 -- git+https://github.com/microsoft/vcpkg@983a9c6ea042da294d61cb405600725dd7c22bbd
+  * imath:x64-windows@3.2.2 -- git+https://github.com/microsoft/vcpkg@b167f9479ce8752a2839c39ee8f52c11af4c0266
+  * itlib:x64-windows@1.12.2 -- git+https://github.com/microsoft/vcpkg@8a453b8f5e7fdbda2367527993839428ec50343f
+    joltphysics:x64-windows@5.6.0 -- git+https://github.com/microsoft/vcpkg@2eab0b6e73bfbe491fa0ffb297fd3ffdb6bf4ecf
+  * libdeflate[compression,core,decompression,gzip,zlib]:x64-windows@1.25 -- git+https://github.com/microsoft/vcpkg@ceffc2e1864a1a1da49e655da03c323723a9816d
+  * libpng:x64-windows@1.6.58 -- git+https://github.com/microsoft/vcpkg@909d98e06046a0901fd11300b3d725d6a80d27bf
+    lua:x64-windows@5.4.8 -- git+https://github.com/microsoft/vcpkg@062ae235ae46d4bce8b00be2c74667e0763cc2c1
+    miniaudio:x64-windows@0.11.25 -- git+https://github.com/microsoft/vcpkg@f019711e3ca3673819cc9b8436af74b095dcb580
+  * nlohmann-json:x64-windows@3.12.0#2 -- git+https://github.com/microsoft/vcpkg@ac3b8821cf486e45dd543bef2a4ba1d1ba230258
+    openexr:x64-windows@3.4.13 -- git+https://github.com/microsoft/vcpkg@48521629e41c4a321b28dc3db54695be41c66e2f
+  * openjph:x64-windows@0.31.0 -- git+https://github.com/microsoft/vcpkg@ad25bd553f9d4644ed6a978f8a6fc5d6387a923b
+    rmlui[core,freetype]:x64-windows@6.3 -- git+https://github.com/microsoft/vcpkg@190d18bbd429a7eab3a01d54051362e47538bfb0
+  * robin-hood-hashing:x64-windows@3.11.5#2 -- git+https://github.com/microsoft/vcpkg@1a989171742275cc32060ed37157eeb0efcdc739
+    sol2:x64-windows@3.5.0#1 -- git+https://github.com/microsoft/vcpkg@b3089bcbf6e652b82348192c6289d0ba2d0d9fe7
+    stb:x64-windows@2024-07-29#1 -- git+https://github.com/microsoft/vcpkg@c362152d1d02973e7b1ce777960f8a6876656560
+    tinygltf:x64-windows@3.0.0#1 -- git+https://github.com/microsoft/vcpkg@9c983959bc083131a4f5ca06ea51178a3e5a04b1
+  * vcpkg-cmake:x64-windows@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:x64-windows@2026-07-21 -- git+https://github.com/microsoft/vcpkg@51befcb03097f8d19c1c59f9ec3625e69d85322a
+    vulkan-memory-allocator:x64-windows@3.4.0 -- git+https://github.com/microsoft/vcpkg@a5328a01836eccf4c520e20e58f4d45d36cd1035
+  * zlib:x64-windows@1.3.2#1 -- git+https://github.com/microsoft/vcpkg@f49b05c666425471a7f6dc8b6156e9b3675a3c90
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+miniaudio is header-only and can be used from CMake via:
+
+  find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
+  target_include_directories(main PRIVATE ${MINIAUDIO_INCLUDE_DIRS})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+rmlui provides CMake targets:
+
+    find_package(RmlUi CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE RmlUi::RmlUi)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+All requested installations completed successfully in: 659 us
+-- Running vcpkg install - done
+-- Found Freetype target Freetype::Freetype - Freetype font engine enabled
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+[1/172] Linking CXX static library AzureFoundation.lib
+[2/172] Linking CXX static library AzureRenderCore.lib
+[3/172] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\render\ComputePass.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[4/172] Linking CXX executable AzureRenderFrameTaskSchedulerTests.exe
+[5/172] Linking CXX executable AzureRenderCommandLineTests.exe
+[6/172] Linking CXX static library AzurePlatform.lib
+[7/172] Linking CXX executable AzureRenderExtensionRegistryTests.exe
+[8/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SceneRenderSnapshot.cpp.obj
+[9/172] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\rhi\NullRhi.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[10/172] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\diagnostics\RuntimeDiagnostics.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[11/172] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\render\RenderGraph.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[12/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SceneDocument.cpp.obj
+[13/172] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\render\EnvironmentAsset.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[14/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\EngineSettings.cpp.obj
+[15/172] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\SharedSystems.cpp.obj
+[16/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\CapturePanel.cpp.obj
+[17/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SystemRegistry.cpp.obj
+[18/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ui\Widgets.cpp.obj
+[19/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ui\AppChrome.cpp.obj
+[20/172] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\scenes\BlackholeSceneRenderer.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[21/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditRegistry.cpp.obj
+[22/172] Building CXX object CMakeFiles\AzureRenderSceneModelTests.dir\tests\SceneModelTests.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[23/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorCameraController.cpp.obj
+[24/172] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\LocomotionSystem.cpp.obj
+[25/172] Building CXX object CMakeFiles\AzureProjectRuntime.dir\src\app\ProjectRuntimeAssembly.cpp.obj
+[26/172] Building CXX object CMakeFiles\AzureRenderSceneModelTests.dir\src\runtime\SceneDocument.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[27/172] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\CameraFollowSystem.cpp.obj
+[28/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\BuildPanel.cpp.obj
+[29/172] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\CharacterMovementSystem.cpp.obj
+[30/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\GameplayDebugPanel.cpp.obj
+[31/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\SelectionService.cpp.obj
+[32/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorTheme.cpp.obj
+[33/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorToolbar.cpp.obj
+[34/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\OutlinerPanel.cpp.obj
+[35/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\GameBuildJob.cpp.obj
+[36/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PresentationRuntime.cpp.obj
+[37/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ConsolePanel.cpp.obj
+[38/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\app\CommandLine.cpp.obj
+[39/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AnimationPanel.cpp.obj
+[40/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PhysicsWorld.cpp.obj
+[41/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\SettingsPanel.cpp.obj
+[42/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\GameRuntime.cpp.obj
+[43/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Prefab.cpp.obj
+[44/172] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\render\RenderSettings.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[45/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\InspectorPanel.cpp.obj
+[46/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspace.cpp.obj
+[47/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AssetBrowserPanel.cpp.obj
+[48/172] Building CXX object CMakeFiles\AzureValidation.dir\src\validation\ValidationService.cpp.obj
+[49/172] Building CXX object CMakeFiles\AzureRenderSceneModelTests.dir\src\render\RenderSettings.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[50/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditService.cpp.obj
+[51/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorContext.cpp.obj
+[52/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AssetGeneration.cpp.obj
+[53/172] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\tests\NullRhiPassTests.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[54/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\LevelSession.cpp.obj
+[55/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditTransaction.cpp.obj
+[56/172] Building CXX object CMakeFiles\AzureValidation.dir\src\validation\ValidationTransport.cpp.obj
+[57/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Project.cpp.obj
+[58/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\AssetImportJob.cpp.obj
+[59/172] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[60/172] Building CXX object CMakeFiles\AzureGameUiTests.dir\tests\GameUiTests.cpp.obj
+[61/172] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderResources.cpp.obj
+[62/172] Building CXX object CMakeFiles\AzureProjectTests.dir\tests\ProjectTests.cpp.obj
+[63/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspaceUI.cpp.obj
+[64/172] Building CXX object CMakeFiles\AzureGameplayPresentationTests.dir\tests\GameplayPresentationTests.cpp.obj
+[65/172] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSettings.cpp.obj
+[66/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditorOperations.cpp.obj
+[67/172] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[68/172] Building CXX object CMakeFiles\AzureEditorWorkspaceTests.dir\tests\EditorWorkspaceTests.cpp.obj
+[69/172] Building CXX object CMakeFiles\AzurePresentationRuntimeTests.dir\tests\PresentationRuntimeTests.cpp.obj
+[70/172] Building CXX object CMakeFiles\AzureRegisteredComponentHost.dir\tests\RegisterHostExtension.cpp.obj
+[71/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Level.cpp.obj
+[72/172] Building CXX object CMakeFiles\AzureEngineSettingsTests.dir\tests\EngineSettingsTests.cpp.obj
+[73/172] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSupport.cpp.obj
+[74/172] Building CXX object CMakeFiles\AzureUiFoundationTests.dir\tests\UiFoundationTests.cpp.obj
+[75/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorSession.cpp.obj
+[76/172] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[77/172] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[78/172] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderResources.cpp.obj
+[79/172] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[80/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorAutomation.cpp.obj
+[81/172] Building CXX object CMakeFiles\AzureModuleAssemblyTests.dir\tests\ModuleAssemblyTests.cpp.obj
+[82/172] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSettings.cpp.obj
+[83/172] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[84/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AssetDatabase.cpp.obj
+[85/172] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderCapture.cpp.obj
+[86/172] Building CXX object CMakeFiles\AzurePhysicsInputTests.dir\tests\PhysicsInputTests.cpp.obj
+[87/172] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderCapture.cpp.obj
+[88/172] Building CXX object CMakeFiles\AzureValidationProbe.dir\tests\ValidationProbe.cpp.obj
+[89/172] Building CXX object CMakeFiles\AzureObservationTests.dir\tests\ObservationTests.cpp.obj
+[90/172] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[91/172] Building CXX object CMakeFiles\AzureRuntimeLifecycleTests.dir\tests\RuntimeLifecycleTests.cpp.obj
+[92/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[93/172] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSupport.cpp.obj
+[94/172] Linking CXX executable AzureRenderSceneModelTests.exe
+[95/172] Building CXX object CMakeFiles\AzureRegisteredComponentWorkflowTests.dir\tests\RegisteredComponentWorkflowTests.cpp.obj
+[96/172] Linking CXX executable AzureMetadataGenerationTests.exe
+[97/172] Building CXX object CMakeFiles\AzurePanelContextTests.dir\tests\PanelContextTests.cpp.obj
+[98/172] Building CXX object CMakeFiles\AzureInteractionTests.dir\tests\InteractionTests.cpp.obj
+[99/172] Linking CXX executable AzureSettingRegistryTests.exe
+[100/172] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderFrame.cpp.obj
+[101/172] Building CXX object CMakeFiles\AzurePlayableQuestTests.dir\tests\PlayableQuestTests.cpp.obj
+[102/172] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderValidation.cpp.obj
+[103/172] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderApp.cpp.obj
+[104/172] Linking CXX executable AzureBrowRegionTests.exe
+[105/172] Linking CXX executable AzureGameUiRendererTests.exe
+[106/172] Linking CXX executable AzureAnimationPoseTests.exe
+[107/172] Building CXX object CMakeFiles\AzureSystemCompositionTests.dir\tests\SystemCompositionTests.cpp.obj
+[108/172] Linking CXX executable AzureReflectionTests.exe
+[109/172] Building CXX object CMakeFiles\AzureEditorObservationTests.dir\tests\EditorObservationTests.cpp.obj
+[110/172] Building CXX object CMakeFiles\AzureGenerationManifestTests.dir\tests\GenerationManifestTests.cpp.obj
+[111/172] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorProjectEditing.cpp.obj
+[112/172] Building CXX object CMakeFiles\AzureEditServiceTests.dir\tests\EditServiceTests.cpp.obj
+[113/172] Building CXX object CMakeFiles\AzureComponentRegistryTests.dir\tests\ComponentRegistryTests.cpp.obj
+[114/172] Building CXX object CMakeFiles\AzureSceneVisibilityTests.dir\tests\SceneVisibilityTests.cpp.obj
+[115/172] Building CXX object CMakeFiles\AzureLocomotionTests.dir\tests\LocomotionTests.cpp.obj
+[116/172] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderValidation.cpp.obj
+[117/172] Building CXX object CMakeFiles\AzureScriptEntityTests.dir\tests\ScriptEntityTests.cpp.obj
+[118/172] Building CXX object CMakeFiles\AzureRender.dir\src\main.cpp.obj
+[119/172] Building CXX object CMakeFiles\AzureScriptRuntimeTests.dir\tests\ScriptRuntimeTests.cpp.obj
+[120/172] Building CXX object CMakeFiles\AzureRegisteredComponentHost.dir\src\main.cpp.obj
+[121/172] Building CXX object CMakeFiles\AzureRenderEditorSessionTests.dir\tests\EditorSessionTests.cpp.obj
+[122/172] Building CXX object CMakeFiles\AzurePlayer.dir\src\player\main.cpp.obj
+[123/172] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderFrame.cpp.obj
+[124/172] Building CXX object CMakeFiles\AzureEditTransactionTests.dir\tests\EditTransactionTests.cpp.obj
+[125/172] Building CXX object CMakeFiles\AzureEditorWorkflowTests.dir\tests\EditorWorkflowTests.cpp.obj
+[126/172] Building CXX object CMakeFiles\AzureThirdPersonTests.dir\tests\ThirdPersonTests.cpp.obj
+[127/172] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ScriptRuntime.cpp.obj
+[128/172] Linking CXX static library AzureRuntime.lib
+[129/172] Linking CXX static library AzureGameplay.lib
+[130/172] Linking CXX static library AzureValidation.lib
+[131/172] Linking CXX executable AzureProjectTests.exe
+[132/172] Building CXX object CMakeFiles\AzureAssetLevelTests.dir\tests\AssetLevelTests.cpp.obj
+[133/172] Linking CXX executable AzureGameUiTests.exe
+[134/172] Linking CXX executable AzureGameplayPresentationTests.exe
+[135/172] Linking CXX executable AzurePresentationRuntimeTests.exe
+[136/172] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\assets\GltfLoader.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[137/172] Linking CXX executable AzureEngineSettingsTests.exe
+[138/172] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderApp.cpp.obj
+[139/172] Linking CXX executable AzureGenerationManifestTests.exe
+[140/172] Linking CXX executable AzureModuleAssemblyTests.exe
+[141/172] Linking CXX executable AzureComponentRegistryTests.exe
+[142/172] Linking CXX executable AzureSceneVisibilityTests.exe
+[143/172] Linking CXX executable AzureRuntimeLifecycleTests.exe
+[144/172] Linking CXX static library AzureProjectRuntime.lib
+[145/172] Linking CXX executable AzureObservationTests.exe
+[146/172] Linking CXX executable AzureValidationProbe.exe
+[147/172] Linking CXX executable AzureAssetLevelTests.exe
+[148/172] Linking CXX executable AzureRenderNullRhiPassTests.exe
+[149/172] Linking CXX static library AzureEditor.lib
+[150/172] Linking CXX static library AzurePlayerHost.lib
+[151/172] Linking CXX executable AzurePlayableQuestTests.exe
+[152/172] Linking CXX executable AzureSystemCompositionTests.exe
+[153/172] Linking CXX executable AzurePhysicsInputTests.exe
+[154/172] Linking CXX executable AzureThirdPersonTests.exe
+[155/172] Linking CXX executable AzureScriptRuntimeTests.exe
+[156/172] Linking CXX executable AzureLocomotionTests.exe
+[157/172] Linking CXX executable AzureInteractionTests.exe
+[158/172] Linking CXX executable AzureScriptEntityTests.exe
+[159/172] Linking CXX static library AzureRenderHost.lib
+[160/172] Linking CXX executable AzureRegisteredComponentWorkflowTests.exe
+[161/172] Linking CXX executable AzureEditorWorkspaceTests.exe
+[162/172] Linking CXX executable AzureEditServiceTests.exe
+[163/172] Linking CXX executable AzurePanelContextTests.exe
+[164/172] Linking CXX executable AzureUiFoundationTests.exe
+[165/172] Linking CXX executable AzureEditorObservationTests.exe
+[166/172] Linking CXX executable AzureEditTransactionTests.exe
+[167/172] Linking CXX executable AzureEditorWorkflowTests.exe
+[168/172] Linking CXX executable AzureRenderEditorSessionTests.exe
+[169/172] Linking CXX executable AzurePlayer.exe
+[170/172] Linking CXX executable AzureRegisteredComponentHost.exe
+[171/172] Linking CXX executable AzureRender.exe
+{"status": "passed", "manifest": "build\\ninja-msvc-release\\build-provenance.json"}

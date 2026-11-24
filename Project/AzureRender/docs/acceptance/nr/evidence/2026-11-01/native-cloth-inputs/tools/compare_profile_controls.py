@@ -1,0 +1,6 @@
+import hashlib,json
+from pathlib import Path
+root=Path.cwd();run=Path(__file__).resolve().parent;project=root/'build/runs/20261101-120125-character-environment-reception-fa70a7/candidate-project';constants=json.loads((run/'native-npr-constant-rows.json').read_text());gain=next(r for r in constants['draws'] if r['event']==868)['globalRows']['110'][2];rows=[]
+for i in [1,2,3,4,5]:
+ path=project/f'assets/linear-display-materials/material-{i}.azurematerial';d=json.loads(path.read_text());p=d['surface']['materials'][0]['extras']['azureRenderMaterial'];rows.append(dict(index=i,materialFileSha256=hashlib.sha256(path.read_bytes()).hexdigest(),nprDiffusePresent='nprDiffuse' in p,currentShadowScale=p.get('nprDiffuse',{}).get('shadowScale'),currentStyleParameters=p.get('styleParameters'),specularRampPresent='specularRamp' in p))
+settings=json.loads((project/'scene/fullbody-world-aa0.azurelevel').read_text())['renderSettings'];record=dict(status='measured-input-differences',nativeGlobalGain110Z=gain,currentSceneSpecularFloor=settings['nprLighting']['specularFloor'],sourceFormula='e868 instructions 1141 and 1100-1101 consume global gain 110.Z as shadow scaling and specular visibility floor.',materials=rows,visualAcceptance='failed-user-review');(run/'profile-lighting-differences.json').write_bytes((json.dumps(record,indent=2)+'\n').encode());print(json.dumps(record))

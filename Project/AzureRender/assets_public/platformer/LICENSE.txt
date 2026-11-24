@@ -1,0 +1,1 @@
+Original Azure platformer models, textures, scripts and synthesized sounds: CC0-1.0

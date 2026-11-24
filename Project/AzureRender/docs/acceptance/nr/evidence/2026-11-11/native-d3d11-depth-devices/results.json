@@ -1,0 +1,717 @@
+{
+  "baseCommit": "698e53d",
+  "productionSourceChanged": false,
+  "acceptedFrozenMaximumColorError": 1,
+  "comparison": {
+    "status": "actual-d3d11-depth-replay-compared",
+    "scope": "Actual event 422 output and visibility depth input at event 699",
+    "overall": "failed-user-review",
+    "maskPixels": 17017,
+    "devices": {
+      "nvidia": {
+        "changedWhole": 19063,
+        "changedMask": 17017,
+        "afterVsFrozen": {
+          "exact": 17017,
+          "different": 0,
+          "withinOneUlp": 17017,
+          "maximumUlp": 0,
+          "clearMismatches": 0
+        },
+        "activeVendor": "GPUVendor.nVidia",
+        "producerMatchesConsumer": {
+          "exact": 17017,
+          "different": 0,
+          "withinOneUlp": 17017,
+          "maximumUlp": 0,
+          "clearMismatches": 0
+        },
+        "visibilityDepthVsFrozen": {
+          "exact": 17017,
+          "different": 0,
+          "withinOneUlp": 17017,
+          "maximumUlp": 0,
+          "clearMismatches": 0
+        },
+        "visibilityInputFingerprints": {
+          "0": {
+            "resource": "ResourceId::141928",
+            "format": "R32_FLOAT",
+            "sha256": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+            "bytes": 14745600
+          },
+          "2": {
+            "resource": "ResourceId::158089",
+            "format": "R16_TYPELESS",
+            "sha256": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+            "bytes": 16777216
+          },
+          "6": {
+            "resource": "ResourceId::141952",
+            "format": "R10G10B10A2_UNORM",
+            "sha256": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+            "bytes": 14745600
+          }
+        },
+        "replayedVsVulkan": {
+          "exact": 17017,
+          "different": 0,
+          "withinOneUlp": 17017,
+          "maximumUlp": 0,
+          "clearMismatches": 0
+        },
+        "hairColorVsFrozen": {
+          "packedExact": 17017,
+          "overOne": 0,
+          "maximumByteError": 0,
+          "source": {
+            "event": 950,
+            "resource": "ResourceId::141976",
+            "format": "R11G11B10_FLOAT",
+            "sha256": "7590b5bbe131bdd9960f3357dd4240f5b48208ebee9a5f713197431f9bafcf6e",
+            "cropSha256": "c1256d71f9d17cf65b280afac24d3d30e26a71755385031034d6f5e9f75fbd87",
+            "uses": [
+              "ResourceUsage.ColorTarget"
+            ]
+          }
+        },
+        "runtimeVsSameDeviceD3D11": {
+          "overOne": 43,
+          "maximumByteError": 5,
+          "exact": 10902,
+          "bothOverOneVsFrozen": 0,
+          "runtimeOnlyOverOneVsFrozen": 43,
+          "d3dOnlyOverOneVsFrozen": 0
+        },
+        "probePixels": [
+          {
+            "pixel": [
+              1322,
+              320
+            ],
+            "d3dDepthBits": 1023161751,
+            "vulkanDepthBits": 1023161751,
+            "depthUlp": 0,
+            "frozenRgb": [
+              114,
+              51,
+              52
+            ],
+            "nativeDeviceRgb": [
+              114,
+              51,
+              52
+            ],
+            "runtimeRgb": [
+              119,
+              55,
+              55
+            ]
+          },
+          {
+            "pixel": [
+              1324,
+              289
+            ],
+            "d3dDepthBits": 1023189268,
+            "vulkanDepthBits": 1023189268,
+            "depthUlp": 0,
+            "frozenRgb": [
+              121,
+              52,
+              52
+            ],
+            "nativeDeviceRgb": [
+              121,
+              52,
+              52
+            ],
+            "runtimeRgb": [
+              116,
+              49,
+              49
+            ]
+          },
+          {
+            "pixel": [
+              1326,
+              177
+            ],
+            "d3dDepthBits": 1023224849,
+            "vulkanDepthBits": 1023224849,
+            "depthUlp": 0,
+            "frozenRgb": [
+              69,
+              18,
+              23
+            ],
+            "nativeDeviceRgb": [
+              69,
+              18,
+              23
+            ],
+            "runtimeRgb": [
+              69,
+              18,
+              23
+            ]
+          },
+          {
+            "pixel": [
+              1375,
+              276
+            ],
+            "d3dDepthBits": 1023001228,
+            "vulkanDepthBits": 1023001228,
+            "depthUlp": 0,
+            "frozenRgb": [
+              207,
+              113,
+              105
+            ],
+            "nativeDeviceRgb": [
+              207,
+              113,
+              105
+            ],
+            "runtimeRgb": [
+              207,
+              113,
+              105
+            ]
+          }
+        ]
+      },
+      "intel": {
+        "changedWhole": 19063,
+        "changedMask": 17017,
+        "afterVsFrozen": {
+          "exact": 7964,
+          "different": 9053,
+          "withinOneUlp": 15678,
+          "maximumUlp": 217835,
+          "clearMismatches": 0
+        },
+        "activeVendor": "GPUVendor.Intel",
+        "producerMatchesConsumer": {
+          "exact": 17017,
+          "different": 0,
+          "withinOneUlp": 17017,
+          "maximumUlp": 0,
+          "clearMismatches": 0
+        },
+        "visibilityDepthVsFrozen": {
+          "exact": 7964,
+          "different": 9053,
+          "withinOneUlp": 15678,
+          "maximumUlp": 217835,
+          "clearMismatches": 0
+        },
+        "visibilityInputFingerprints": {
+          "0": {
+            "resource": "ResourceId::141928",
+            "format": "R32_FLOAT",
+            "sha256": "8451887aa25aaa64e05e646f6bf7cc3cf21978839e875b17f8c8a6f1b1fd8b05",
+            "bytes": 14745600
+          },
+          "2": {
+            "resource": "ResourceId::158089",
+            "format": "R16_TYPELESS",
+            "sha256": "274ec8f330e614a6f8a321b1ad60f14a73ba2737c3df589eb9130e20cd5ae54b",
+            "bytes": 16777216
+          },
+          "6": {
+            "resource": "ResourceId::141952",
+            "format": "R10G10B10A2_UNORM",
+            "sha256": "72d09a594320170da810f9fbb5c4863daf726a1004e3a5187443f741985b030c",
+            "bytes": 14745600
+          }
+        },
+        "replayedVsVulkan": {
+          "exact": 17014,
+          "different": 3,
+          "withinOneUlp": 17014,
+          "maximumUlp": 217835,
+          "clearMismatches": 0
+        },
+        "hairColorVsFrozen": {
+          "packedExact": 10784,
+          "overOne": 580,
+          "maximumByteError": 166,
+          "source": {
+            "event": 950,
+            "resource": "ResourceId::141976",
+            "format": "R11G11B10_FLOAT",
+            "sha256": "bbc7645fac6096d838f611c3904b6bfcc201800fbd3a35b7735aa81f78d7aaf1",
+            "cropSha256": "25603b7b6de27ca09ad778de37bffdfcfef5978dbe067f6818a811e5de41b37e",
+            "uses": [
+              "ResourceUsage.ColorTarget"
+            ]
+          }
+        },
+        "runtimeVsSameDeviceD3D11": {
+          "overOne": 43,
+          "maximumByteError": 164,
+          "exact": 13814,
+          "bothOverOneVsFrozen": 562,
+          "runtimeOnlyOverOneVsFrozen": 35,
+          "d3dOnlyOverOneVsFrozen": 18
+        },
+        "runtimeDeviceCoverageVsSameDeviceD3D11": {
+          "overOne": 42,
+          "maximumByteError": 39,
+          "exact": 13815,
+          "ellipseChangedPixels": 1,
+          "strongest": [
+            {
+              "pixel": [
+                1353,
+                325
+              ],
+              "maximumByteError": 39,
+              "nativeDeviceRgb": [
+                82,
+                24,
+                26
+              ],
+              "runtimeRgb": [
+                121,
+                60,
+                56
+              ]
+            },
+            {
+              "pixel": [
+                1348,
+                332
+              ],
+              "maximumByteError": 13,
+              "nativeDeviceRgb": [
+                107,
+                48,
+                46
+              ],
+              "runtimeRgb": [
+                111,
+                60,
+                59
+              ]
+            },
+            {
+              "pixel": [
+                1324,
+                289
+              ],
+              "maximumByteError": 5,
+              "nativeDeviceRgb": [
+                120,
+                52,
+                52
+              ],
+              "runtimeRgb": [
+                115,
+                49,
+                49
+              ]
+            },
+            {
+              "pixel": [
+                1325,
+                289
+              ],
+              "maximumByteError": 5,
+              "nativeDeviceRgb": [
+                118,
+                62,
+                58
+              ],
+              "runtimeRgb": [
+                113,
+                59,
+                55
+              ]
+            },
+            {
+              "pixel": [
+                1327,
+                287
+              ],
+              "maximumByteError": 5,
+              "nativeDeviceRgb": [
+                121,
+                52,
+                56
+              ],
+              "runtimeRgb": [
+                116,
+                49,
+                53
+              ]
+            }
+          ]
+        },
+        "probePixels": [
+          {
+            "pixel": [
+              1311,
+              355
+            ],
+            "d3dDepthBits": 1023461132,
+            "vulkanDepthBits": 1023461123,
+            "depthUlp": 9,
+            "frozenRgb": [
+              109,
+              35,
+              38
+            ],
+            "nativeDeviceRgb": [
+              110,
+              35,
+              38
+            ],
+            "runtimeRgb": [
+              110,
+              35,
+              38
+            ]
+          },
+          {
+            "pixel": [
+              1312,
+              355
+            ],
+            "d3dDepthBits": 1023464687,
+            "vulkanDepthBits": 1023464682,
+            "depthUlp": 5,
+            "frozenRgb": [
+              107,
+              33,
+              37
+            ],
+            "nativeDeviceRgb": [
+              107,
+              32,
+              37
+            ],
+            "runtimeRgb": [
+              107,
+              32,
+              37
+            ]
+          },
+          {
+            "pixel": [
+              1322,
+              320
+            ],
+            "d3dDepthBits": 1023161751,
+            "vulkanDepthBits": 1023161751,
+            "depthUlp": 0,
+            "frozenRgb": [
+              114,
+              51,
+              52
+            ],
+            "nativeDeviceRgb": [
+              121,
+              55,
+              57
+            ],
+            "runtimeRgb": [
+              121,
+              55,
+              57
+            ]
+          },
+          {
+            "pixel": [
+              1324,
+              289
+            ],
+            "d3dDepthBits": 1023189268,
+            "vulkanDepthBits": 1023189268,
+            "depthUlp": 0,
+            "frozenRgb": [
+              121,
+              52,
+              52
+            ],
+            "nativeDeviceRgb": [
+              120,
+              52,
+              52
+            ],
+            "runtimeRgb": [
+              115,
+              49,
+              49
+            ]
+          },
+          {
+            "pixel": [
+              1326,
+              177
+            ],
+            "d3dDepthBits": 1023007014,
+            "vulkanDepthBits": 1023224849,
+            "depthUlp": 217835,
+            "frozenRgb": [
+              69,
+              18,
+              23
+            ],
+            "nativeDeviceRgb": [
+              235,
+              119,
+              113
+            ],
+            "runtimeRgb": [
+              71,
+              20,
+              23
+            ]
+          },
+          {
+            "pixel": [
+              1375,
+              276
+            ],
+            "d3dDepthBits": 1023001227,
+            "vulkanDepthBits": 1023001227,
+            "depthUlp": 0,
+            "frozenRgb": [
+              207,
+              113,
+              105
+            ],
+            "nativeDeviceRgb": [
+              110,
+              38,
+              40
+            ],
+            "runtimeRgb": [
+              110,
+              38,
+              40
+            ]
+          }
+        ]
+      }
+    },
+    "betweenDevices": {
+      "exact": 7964,
+      "different": 9053,
+      "withinOneUlp": 15678,
+      "maximumUlp": 217835,
+      "clearMismatches": 0
+    },
+    "frozenVulkanBetweenDevices": {
+      "exact": 7965,
+      "different": 9052,
+      "withinOneUlp": 15677,
+      "maximumUlp": 212,
+      "clearMismatches": 0
+    },
+    "writeSetDifferences": 0,
+    "sharedSameDeviceRuntimeFailures": {
+      "count": 27,
+      "pixels": [
+        [
+          1300,
+          171
+        ],
+        [
+          1273,
+          177
+        ],
+        [
+          1351,
+          256
+        ],
+        [
+          1351,
+          258
+        ],
+        [
+          1351,
+          259
+        ],
+        [
+          1216,
+          261
+        ],
+        [
+          1352,
+          264
+        ],
+        [
+          1357,
+          264
+        ],
+        [
+          1348,
+          265
+        ],
+        [
+          1351,
+          267
+        ],
+        [
+          1367,
+          276
+        ],
+        [
+          1220,
+          278
+        ],
+        [
+          1368,
+          278
+        ],
+        [
+          1368,
+          281
+        ],
+        [
+          1220,
+          282
+        ],
+        [
+          1221,
+          283
+        ],
+        [
+          1222,
+          283
+        ],
+        [
+          1326,
+          283
+        ],
+        [
+          1324,
+          284
+        ],
+        [
+          1321,
+          287
+        ],
+        [
+          1323,
+          289
+        ],
+        [
+          1324,
+          289
+        ],
+        [
+          1229,
+          292
+        ],
+        [
+          1347,
+          305
+        ],
+        [
+          1241,
+          327
+        ],
+        [
+          1250,
+          328
+        ],
+        [
+          1250,
+          330
+        ]
+      ]
+    }
+  },
+  "source": {
+    "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+    "bytes": 345416012,
+    "sha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+    "frame": 10401,
+    "depthEvent": 422,
+    "irisEvent": 846,
+    "hairColorEvent": 950
+  },
+  "receipts": {
+    "nvidia": {
+      "process": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 3.5160000000032596,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-210839-native-d3d11-depth-devices-9e7a22\\replay.py",
+          "nvidia"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-210839-native-d3d11-depth-devices-9e7a22\\tmp"
+      },
+      "requestedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "debugMessages": [
+        "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+        "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+      ]
+    },
+    "intel": {
+      "process": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 17.23399999999674,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-210839-native-d3d11-depth-devices-9e7a22\\replay.py",
+          "intel"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-210839-native-d3d11-depth-devices-9e7a22\\tmp"
+      },
+      "requestedDevice": "Intel(R) UHD Graphics",
+      "debugMessages": []
+    }
+  },
+  "previousDefaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true
+  },
+  "archive": {
+    "bytes": 584250,
+    "sha256": "fc0b8756d506cf695728626538264e4f9e25b78d5a487b28fc0323b68e89e40d",
+    "members": 42
+  }
+}

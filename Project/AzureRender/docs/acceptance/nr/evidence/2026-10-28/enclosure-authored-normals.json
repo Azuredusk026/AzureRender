@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "phase": "NR1-S6",
+  "status": "enclosure-authored-normals-passed",
+  "run": "build/runs/20261028-010811-native-enclosure-authored-normals-bdab65",
+  "source": {
+    "tools/blender/native_mesh_frames.py": "9efca6bb83d469b2a633fedeaa58499ca23fc4b0817c2435a8802df35b72ca3d",
+    "tools/blender/native_mesh_uvs.py": "01c04974afc76a6224dd351817a49f7f25ae59ee701c6fb7b13fa1a960b76a27",
+    "tools/endfield_native/mesh_corners.py": "99173ab1f0a3048407f25d69280db26ee891e89165bc5c791f8f30c7fd80001c"
+  },
+  "tests": {
+    "gpuCaptures": 11,
+    "configurationAndDescriptorExact": true,
+    "resourceUnloadClean": true
+  },
+  "geometry": {
+    "mapped": 281,
+    "unreferenced": 49,
+    "unresolved": [
+      {
+        "file": "content-back/details/native-3116a3570042d6eb.glb",
+        "error": "Source cardinality 0"
+      }
+    ],
+    "uv1Sources": 178,
+    "maximumSourcePositionError": 1.9669532775878906e-06,
+    "maximumSourceUvError": 0.0,
+    "materialAndImageBytesExact": true,
+    "uv0Exact": true,
+    "existingUv1Exact": true,
+    "normalChangeAboveOneDegree": 232
+  },
+  "fullCamera": {
+    "default": {
+      "meanAbsoluteByteError": 17.126005045572917,
+      "panelRgb": [
+        [
+          41,
+          43,
+          40
+        ],
+        [
+          39,
+          40,
+          34
+        ]
+      ]
+    },
+    "native": {
+      "meanAbsoluteByteError": 17.156202256944443,
+      "panelRgb": [
+        [
+          42,
+          44,
+          41
+        ],
+        [
+          39,
+          40,
+          34
+        ]
+      ]
+    }
+  },
+  "normalComparison": {
+    "validSource": {
+      "pixels": 3686400,
+      "before": {
+        "mean": 11.752181273942588,
+        "median": 0.8180808564581512
+      },
+      "after": {
+        "mean": 9.827272367972336,
+        "median": 0.6004131440689037
+      }
+    },
+    "matchingAlbedo": {
+      "pixels": 2151685,
+      "before": {
+        "mean": 6.5202654127415425,
+        "median": 0.5619080676104832
+      },
+      "after": {
+        "mean": 5.8519748985161,
+        "median": 0.5619080676104832
+      }
+    },
+    "changedMatchingAlbedo": {
+      "pixels": 529967,
+      "before": {
+        "mean": 5.474984772208044,
+        "median": 2.288875026146543
+      },
+      "after": {
+        "mean": 2.7636554857311353,
+        "median": 1.127513872002912
+      }
+    }
+  },
+  "primaryProject": "full-candidate/enclosure-default.azureproject",
+  "boundaries": [
+    "One far-background mesh lacks entity-to-source binding and remains unchanged.",
+    "Image masks do not establish identical geometry across the entire frame.",
+    "Logistics, remaining material consumers and NR0-NR12 final gates remain open."
+  ],
+  "artifacts": [
+    {
+      "path": "plan.md",
+      "sha256": "5f07d37abbba2f92b7a70b85069564c204e56eafed34a90b669792cc5ac6ac6d"
+    },
+    {
+      "path": "index_geometry.py",
+      "sha256": "58ed2c8efc250ea2facc12788632b65e65c80cb907564afbf1704f9a6a42a0b1"
+    },
+    {
+      "path": "export_geometry.py",
+      "sha256": "a8d3e87346516b67b6ef7f723b899c1c1d08384fac07ec90d3e4a426b44c23c3"
+    },
+    {
+      "path": "apply_geometry.py",
+      "sha256": "bb1083455bab361ff5097f0d1a68e8aef776369947a8c40f2ba22f80b3964201"
+    },
+    {
+      "path": "capture_geometry.py",
+      "sha256": "85ccf5fbfb2b78b91d43850790e91a34d31e0c67f9d482ff04397079ec1bb0cf"
+    },
+    {
+      "path": "geometry-source-index.json",
+      "sha256": "e4f47399947af732928812c5466ae09a62e3eeb6c12ce86097088d5f18fa40d9"
+    },
+    {
+      "path": "geometry-export-exact.json",
+      "sha256": "c74740c05f02a777d5fd86bc1cd22e213b43defad6d104c523d6edb98b3859b4"
+    },
+    {
+      "path": "geometry-application.json",
+      "sha256": "e89ffdf00002149b4418ced8e87480a3d5ad2768a338153e2f9d80c357cc285f"
+    },
+    {
+      "path": "geometry-gpu.json",
+      "sha256": "7c5589ba838942787b932f09baff2cce24f79105fa838ba27a3532e95849aa58"
+    },
+    {
+      "path": "full-geometry-comparison.json",
+      "sha256": "cccc04984cfca76fd81e632934e34ef704d2c633287dc8eedff1f9fd0e5a215b"
+    },
+    {
+      "path": "source-normal-comparison.json",
+      "sha256": "9987a1d471a03cc6d321cf846fd353c30bb7f2cdea7954a71c3b2e682a4b0c9f"
+    },
+    {
+      "path": "existing-uv1-preservation.json",
+      "sha256": "2158eddaf8841af51117f0c322f8a0ab48b7372dda8e45f63913c7d6219d2951"
+    },
+    {
+      "path": "mini-selection.json",
+      "sha256": "088789e21a04eccc6a9f3e177a7ea68f1d4d7b7205c828565be102df10e4bb67"
+    },
+    {
+      "path": "export-final.log",
+      "sha256": "8f0911b210c52471c626ea406a1900c089bd3df6bd316abf17ad8971010e5bc8"
+    },
+    {
+      "path": "enclosure-normal-side-by-side.png",
+      "sha256": "d594f092a2083527d97eb322d23ff58c4d687a8c837fb9ed55ecfceb4ee36d56"
+    },
+    {
+      "path": "mini-debug-fixed-shaded-normal/frames/capture_manifest.json",
+      "sha256": "25948b659eccaed995f93d6b6fddd3101ab9b18d609ae634e282f0643d1058c5"
+    },
+    {
+      "path": "mini-debug-fixed-world-normal/frames/capture_manifest.json",
+      "sha256": "5dde8fe6c30f11c75cb2b7abf543ba7146db03eb8a978baaccd96a46bab8c349"
+    },
+    {
+      "path": "mini-debug-indexed-shaded-normal/frames/capture_manifest.json",
+      "sha256": "6b6b92e758926b6614757618a90a5ad45f1a75b05dd68feb03d18d8b2525dcc7"
+    },
+    {
+      "path": "mini-debug-indexed-world-normal/frames/capture_manifest.json",
+      "sha256": "0d6b633ba600ce057c14954e6fb06f721bf3fbcd71a61f04e603d6048680463f"
+    },
+    {
+      "path": "mini-release-fixed-shaded-normal/frames/capture_manifest.json",
+      "sha256": "0ea966d8800384e17a583bd9d1b9723498278f02b5263c4b77cd3c5d451b3efc"
+    },
+    {
+      "path": "mini-release-fixed-world-normal/frames/capture_manifest.json",
+      "sha256": "6361df535b8ea18c5a6249a093dae20fb3753bf3b259f7c933c89ac6d0a5c2ac"
+    },
+    {
+      "path": "mini-release-indexed-shaded-normal/frames/capture_manifest.json",
+      "sha256": "4f54c512818dc89face8ce263f3138206060d24482b948870ded1a2b1e3e1dcc"
+    },
+    {
+      "path": "mini-release-indexed-world-normal/frames/capture_manifest.json",
+      "sha256": "52c1f708ff4a1751a758b5bb3414e701b861f32707086f78fdd4d951be511981"
+    },
+    {
+      "path": "full-default/frames/capture_manifest.json",
+      "sha256": "6263c49cd87c47ef9ebec883384829511027611287a4a6de4b23e420bad8cd8e"
+    },
+    {
+      "path": "full-native/frames/capture_manifest.json",
+      "sha256": "c9f80bfddc473ee3a884527dec1153c4ecd7f75ea0a83e30e0806cba1cba638b"
+    },
+    {
+      "path": "full-normal/frames/capture_manifest.json",
+      "sha256": "7ec075c15aac41c3038996d6cd78bfd2a13975f8ef84c1344fdf5d0af9753965"
+    },
+    {
+      "path": "mini-debug-fixed-shaded-normal.log",
+      "sha256": "68a89438079cf176bef294864c24299fcc180f570556068b2cf7a72aa6aca417"
+    },
+    {
+      "path": "mini-debug-fixed-world-normal.log",
+      "sha256": "7dc82e1c2cd57d4f294d8e651fd4938432e22494ac2a77d28ce50354911939b3"
+    },
+    {
+      "path": "mini-debug-indexed-shaded-normal.log",
+      "sha256": "ca6ae469b33aaebf19316159b7299eeb9f70cd7e414a5112f7f627205e3d712f"
+    },
+    {
+      "path": "mini-debug-indexed-world-normal.log",
+      "sha256": "62edbf6397895f812e0351a164f7b452e7b9f98abe7b11bbba39d9aa58d0d7b5"
+    },
+    {
+      "path": "mini-release-fixed-shaded-normal.log",
+      "sha256": "8c3ff2e4d22e0f37fca5232c944723327e9f64f2cf3652267b0b19a4dc83746d"
+    },
+    {
+      "path": "mini-release-fixed-world-normal.log",
+      "sha256": "c624a8f24134734dd551e16b7621efe9a13920ef9b2c90d79489a2f4daeb243b"
+    },
+    {
+      "path": "mini-release-indexed-shaded-normal.log",
+      "sha256": "6031852548ea13b78df5f1ce0a7150cb921479011ba83a315572347d608f6514"
+    },
+    {
+      "path": "mini-release-indexed-world-normal.log",
+      "sha256": "cae83d4a25338e06a0a77c7060d5ad8e7450c9a4993ab8a353a61b7a500d8a2d"
+    },
+    {
+      "path": "full-default.log",
+      "sha256": "69246caedbca202387b141ec373982a403ea7818bd1538da46ca603efef730ee"
+    },
+    {
+      "path": "full-native.log",
+      "sha256": "e459b846b4c137dfb1ebe506e0dc551c7765ef126fd8a60c0c1fe826d6ffd6b7"
+    },
+    {
+      "path": "full-normal.log",
+      "sha256": "dba87a39bc89c8eaa9bf38b7204c2c10fed12eb404986f4f8352b3102628a357"
+    }
+  ]
+}

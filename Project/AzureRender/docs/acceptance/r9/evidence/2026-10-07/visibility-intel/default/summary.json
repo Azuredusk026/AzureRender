@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "surfacePixels": {
+    "positive": 39244,
+    "mirror": 39244,
+    "double-mirror": 39244,
+    "baked-mirror": 39244,
+    "back": 0,
+    "double-sided-back": 39244,
+    "far": 4696,
+    "far-clipped": 0,
+    "depth": 832,
+    "transparent": 15448,
+    "transparent-mirror": 15448,
+    "mixed": 19016,
+    "near": 33522,
+    "near-clipped": 0,
+    "edge": 20748
+  },
+  "visibilityMeanDifference": [
+    0.0,
+    0.0
+  ],
+  "normalMeanDifference": 0.0,
+  "tangentMeanDifference": 0.0,
+  "validationErrors": 0,
+  "failures": []
+}

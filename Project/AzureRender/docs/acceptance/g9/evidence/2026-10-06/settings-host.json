@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "workflows": [
+    {
+      "workflow": "exploration",
+      "operations": 31,
+      "realCheckbox": true,
+      "sources": true,
+      "reset": true,
+      "invalidRejected": true,
+      "documentPreserved": true,
+      "persistence": true,
+      "reopen": true
+    },
+    {
+      "workflow": "inspector",
+      "operations": 31,
+      "realCheckbox": true,
+      "sources": true,
+      "reset": true,
+      "invalidRejected": true,
+      "documentPreserved": true,
+      "persistence": true,
+      "reopen": true
+    }
+  ],
+  "physicalKeyboardMouse": "not performed"
+}

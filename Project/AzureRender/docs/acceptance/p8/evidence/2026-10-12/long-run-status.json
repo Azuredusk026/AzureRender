@@ -1,0 +1,12 @@
+[
+  {
+    "workload": "standard",
+    "exitCode": 1,
+    "evidence": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\standard-long-run"
+  },
+  {
+    "workload": "platformer",
+    "exitCode": 1,
+    "evidence": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\platformer-long-run"
+  }
+]

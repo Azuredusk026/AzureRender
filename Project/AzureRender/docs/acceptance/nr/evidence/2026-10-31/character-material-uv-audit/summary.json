@@ -1,0 +1,11 @@
+{
+  "status": "source-correspondence-reviewed",
+  "sourceCommit": "4188d66",
+  "materialCount": 13,
+  "indexCorrespondingMaterials": 12,
+  "exactUvCorrespondingMaterials": 10,
+  "irisMaximumUvDifference": 2.9802322387695312e-08,
+  "actualGuardRejections": 3,
+  "geometryOrTextureWrites": 0,
+  "scope": "Read-only inventory. Body topology and cloth/brow tangent conventions retain separate source requirements; visual acceptance is unchanged."
+}

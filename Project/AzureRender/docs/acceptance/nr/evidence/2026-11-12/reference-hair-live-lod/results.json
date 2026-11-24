@@ -1,0 +1,330 @@
+{
+  "status": "qualified-reference-hair-live-lod",
+  "overallStatus": "failed-user-review",
+  "devices": {
+    "nvidia": {
+      "device": "nvidia",
+      "playerSha256": "d293ef322a9defd006967f0a7134cf974ffd7452138376d4782eddc2608f7ea6",
+      "shaderSha256": "72e1d7a43195860367fca3a4dfb50161b67bda768b5b1c891a3a5f27220d3183",
+      "frozenSamples": 17017,
+      "lodBaseRange": [
+        0.8628333210945129,
+        8.274251937866211
+      ],
+      "samplerBias": -1,
+      "lodSha256": "f4fc7f5674f5adc4478df1b0572d616a9b2b30efd913de33f5ae9ff40bbe3cd2",
+      "depthSha256": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+      "priorPayloadPredicateRejected": 3067,
+      "analyzedExisting": true,
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "validationClean": true,
+      "allocatorZero": true,
+      "modeMatchedNativeMip": 17017,
+      "matchingCandidateMipsByRounding": {
+        "unrounded-nearest-up": 17017,
+        "round-even-8-nearest-down": 17004,
+        "round-even-8-nearest-up": 17002,
+        "truncate-8-nearest-down": 16997,
+        "truncate-8-nearest-up": 17017
+      },
+      "introducedReceiverLod": [
+        {
+          "pixel": [
+            1303,
+            1097
+          ],
+          "lodAfterBias": 0.5023593902587891,
+          "deltaFromHalfLevel": 0.0023593902587890625,
+          "estimatedNearestUp": 1,
+          "nearest8Preferred": 1,
+          "candidateVisibility": 252,
+          "frozenVisibility": 254
+        },
+        {
+          "pixel": [
+            1247,
+            1091
+          ],
+          "lodAfterBias": 3.499438762664795,
+          "deltaFromHalfLevel": -0.0005612373352050781,
+          "estimatedNearestUp": 3,
+          "nearest8Preferred": 3,
+          "candidateVisibility": 232,
+          "frozenVisibility": 242,
+          "actualCandidateMips": [
+            3,
+            7
+          ]
+        },
+        {
+          "pixel": [
+            1246,
+            1090
+          ],
+          "lodAfterBias": 3.499438762664795,
+          "deltaFromHalfLevel": -0.0005612373352050781,
+          "estimatedNearestUp": 3,
+          "nearest8Preferred": 3,
+          "candidateVisibility": 251,
+          "frozenVisibility": 253,
+          "actualCandidateMips": [
+            3
+          ]
+        }
+      ]
+    },
+    "intel": {
+      "device": "intel",
+      "playerSha256": "d293ef322a9defd006967f0a7134cf974ffd7452138376d4782eddc2608f7ea6",
+      "shaderSha256": "72e1d7a43195860367fca3a4dfb50161b67bda768b5b1c891a3a5f27220d3183",
+      "frozenSamples": 17017,
+      "lodBaseRange": [
+        0.8628499507904053,
+        8.27425765991211
+      ],
+      "samplerBias": -1,
+      "lodSha256": "e18d30e6eb49f7ea2bd6e370cfe0a395e349bdea6a3f575158a559c44f69c688",
+      "depthSha256": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+      "priorPayloadPredicateRejected": 3067,
+      "analyzedExisting": false,
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "validationClean": true,
+      "allocatorZero": true,
+      "modeMatchedNativeMip": 17016,
+      "matchingCandidateMipsByRounding": {
+        "unrounded-nearest-up": 17016,
+        "round-even-8-nearest-down": 17003,
+        "round-even-8-nearest-up": 17001,
+        "truncate-8-nearest-down": 16996,
+        "truncate-8-nearest-up": 17016
+      },
+      "introducedReceiverLod": [
+        {
+          "pixel": [
+            1232,
+            1160
+          ],
+          "lodAfterBias": 2.577867269515991,
+          "deltaFromHalfLevel": 0.07786726951599121,
+          "estimatedNearestUp": 3,
+          "nearest8Preferred": 3,
+          "candidateVisibility": 232,
+          "frozenVisibility": 235,
+          "actualCandidateMips": [
+            3
+          ]
+        },
+        {
+          "pixel": [
+            1303,
+            1097
+          ],
+          "lodAfterBias": 0.5023826360702515,
+          "deltaFromHalfLevel": 0.002382636070251465,
+          "estimatedNearestUp": 1,
+          "nearest8Preferred": 1,
+          "candidateVisibility": 252,
+          "frozenVisibility": 254
+        }
+      ]
+    }
+  },
+  "boundaries": {
+    "nvidia": {
+      "device": "nvidia",
+      "receiverSamples": 49384,
+      "changedNormals": 8,
+      "nearHalfWithinOneFixedLodUnit": 8,
+      "completeAttachmentChangedNormals": 8,
+      "completeAttachmentNearHalf": 8,
+      "nearWithFrozenBaselineExact": 8,
+      "fixedLodUnit": 0.00390625,
+      "frozenHairSamples": 17017,
+      "frozenHairNearHalf": 46,
+      "frozenHairNormalsOverOne": 6,
+      "frozenHairPredictedBoundaryFallbackNormalsOverOne": 0
+    },
+    "intel": {
+      "device": "intel",
+      "receiverSamples": 49384,
+      "changedNormals": 1061,
+      "nearHalfWithinOneFixedLodUnit": 27,
+      "completeAttachmentChangedNormals": 1061,
+      "completeAttachmentNearHalf": 27,
+      "nearWithFrozenBaselineExact": 6,
+      "fixedLodUnit": 0.00390625,
+      "frozenHairSamples": 17017,
+      "frozenHairNearHalf": 45,
+      "frozenHairNormalsOverOne": 13,
+      "frozenHairPredictedBoundaryFallbackNormalsOverOne": 25
+    }
+  },
+  "executions": {
+    "nvidia": {
+      "status": "exited",
+      "exitCode": 1,
+      "reason": null,
+      "seconds": 124.68699999997625,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd\\capture-lod.py",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd\\tmp"
+    },
+    "intel": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 162.34399999998277,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd\\capture-lod.py",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd\\tmp"
+    }
+  },
+  "lease": {
+    "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+    "task": "quality-reference-hair-live-lod",
+    "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd",
+    "pid": 9628,
+    "token": "add5ba7a442b4d0d81cda5ee639b2247",
+    "started": 1794472503.8404226,
+    "state": "released",
+    "ended": 1794472666.7424104
+  },
+  "firstLease": {
+    "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+    "task": "quality-reference-hair-live-lod",
+    "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd",
+    "pid": 3732,
+    "token": "faa75274bde44cd780a6cbe2c19956c8",
+    "started": 1794471155.4805095,
+    "state": "released",
+    "ended": 1794471280.427779
+  },
+  "scope": {
+    "local": "external-input-495f23555c274fccb3788693551b6d64",
+    "main": "external-input-7848f244ba2c435998087fe3f6096db6",
+    "sourceBase": "95dbc04ac51735cdc207ac2cd57b41babd052c74",
+    "plannedBytes": 402653184,
+    "localInputs": [
+      "20261112-010418-scene-reference-object-visibility-709f68",
+      "20261112-013522-scene-visibility-atlas-source-33c6c3",
+      "20261111-232828-scene-reference-normal-60ddfa",
+      "20261110-030251-hair-main-chroma-public-9e799c",
+      "20261110-031856-hair-main-chroma-debug-668bf2",
+      "20261110-003435-visibility-numeric-contract-4f95e7",
+      "20261110-003031-reciprocal-compact-profile-4e7929",
+      "20261110-112309-hair-relative-projection-control-b9da17",
+      "20261111-213928-scene-reference-depth-728062",
+      "20261112-020715-scene-visibility-reference-calibration-f77af1",
+      "20261112-024632-native-atlas-and-receiver-producers-d5e705",
+      "20261112-025941-visibility-projection-depth-c1c792",
+      "20261112-032619-native-object-record-calibration-19d2f9",
+      "20261112-033450-native-object-record-source-capture-071c26",
+      "20261112-040725-reference-object-shadow-raster-2c9e58",
+      "20261112-041837-reference-object-shadow-raster-capture-60f161",
+      "20261112-044926-material-reference-object-visibility-344def",
+      "20261112-053111-intel-reference-visibility-sources-5238e2",
+      "20261112-061922-project-reference-visibility-profile-47902e",
+      "20261112-072016-native-receiver-producer-replay-523058",
+      "20261112-073905-reference-scene-outline-depth-d97cff",
+      "20261112-083618-native-cloth-receiver-normal-input-a94a9c",
+      "20261112-084230-cloth-receiver-authored-mips-a73d87",
+      "20261112-090101-cloth-receiver-native-sampler-e301d1",
+      "20261112-091515-cloth-receiver-normal-y-29da47",
+      "20261112-093321-reference-normal-sampled-rg-ceb2c6",
+      "20261112-103417-eyebrow-receiver-producer-1f8f43",
+      "20261112-104825-native-hair-normal-mip-bias-883aba",
+      "20261112-105542-native-eyebrow-hair-stencil-8ad501",
+      "20261112-110307-reference-depth-stencil-coverage-198047",
+      "20261112-114419-reference-geometric-normal-3e57b5",
+      "20261112-133809-reference-receiver-source-isolation-6cdff0",
+      "20261112-135432-reference-outline-projection-d784cf",
+      "20261112-143340-native-texture-sampling-footprint-750e56",
+      "20261112-153052-reference-hair-mip-footprint-510ded"
+    ],
+    "mainInputs": [
+      "20261103-234012-character-reference-stages-5abe6c",
+      "20261022-201845-endfield-capture-954719",
+      "20261027-022702-object-visibility-depth-reconstruction-c7312f"
+    ],
+    "change": "Read-only overlay of actual candidate footprint LOD",
+    "gate": "Exact executable and candidate shaders before instrumentation, unchanged depth and IDs, byte-level gate remains"
+  },
+  "overlay": {
+    "shaderCount": 895,
+    "isolatedPlayerSha256": "d293ef322a9defd006967f0a7134cf974ffd7452138376d4782eddc2608f7ea6",
+    "productionPlayerSha256": "eea374f276ff53b04b9d93d5ab281c7eb539bbc636f84af01c50e6924c9f0517",
+    "candidateShaders": {
+      "reference_scene_visibility.frag.spv": "268aa7dc1ca6d1d7ce567c53b3a6df25c21bb5b7933c6527e89088c8c71b1236",
+      "reference_scene_visibility_bindless.frag.spv": "78f304f756dadc164e12d792b727247c38460cff7929ed19eabaa92c79091f67"
+    },
+    "instrumentedShaders": {
+      "reference_scene_visibility.frag.spv": "72e1d7a43195860367fca3a4dfb50161b67bda768b5b1c891a3a5f27220d3183",
+      "reference_scene_visibility_bindless.frag.spv": "70c1cba45dbf27595b68a15e2d45ac6f628bcff42e258b5003312e4f9601d594"
+    },
+    "commands": {
+      "candidate-reference_scene_visibility.frag.spv": [
+        "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+        "--target-env=vulkan1.1",
+        "-DAZURE_REFERENCE_MATERIAL_UV=1",
+        "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+        "-DAZURE_INDEPENDENT_COVERAGE=1",
+        "-DAZURE_REFERENCE_SCENE_VISIBILITY=1",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd\\source\\Project\\AzureRender\\shaders\\reference_scene_depth.frag",
+        "-o",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd\\candidate-reference_scene_visibility.frag.spv"
+      ],
+      "candidate-reference_scene_visibility_bindless.frag.spv": [
+        "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+        "--target-env=vulkan1.1",
+        "-DAZURE_REFERENCE_MATERIAL_UV=1",
+        "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+        "-DAZURE_INDEPENDENT_COVERAGE=1",
+        "-DAZURE_REFERENCE_SCENE_VISIBILITY=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd\\source\\Project\\AzureRender\\shaders\\reference_scene_depth.frag",
+        "-o",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd\\candidate-reference_scene_visibility_bindless.frag.spv"
+      ],
+      "probe-reference_scene_visibility.frag.spv": [
+        "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+        "--target-env=vulkan1.1",
+        "-DAZURE_REFERENCE_MATERIAL_UV=1",
+        "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+        "-DAZURE_INDEPENDENT_COVERAGE=1",
+        "-DAZURE_REFERENCE_SCENE_VISIBILITY=1",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd\\source\\Project\\AzureRender\\shaders\\reference_scene_depth.frag",
+        "-o",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd\\overlay\\shaders\\reference_scene_visibility.frag.spv"
+      ],
+      "probe-reference_scene_visibility_bindless.frag.spv": [
+        "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+        "--target-env=vulkan1.1",
+        "-DAZURE_REFERENCE_MATERIAL_UV=1",
+        "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+        "-DAZURE_INDEPENDENT_COVERAGE=1",
+        "-DAZURE_REFERENCE_SCENE_VISIBILITY=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd\\source\\Project\\AzureRender\\shaders\\reference_scene_depth.frag",
+        "-o",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-155601-reference-hair-live-lod-2d2bfd\\overlay\\shaders\\reference_scene_visibility_bindless.frag.spv"
+      ]
+    }
+  },
+  "archive": {
+    "sha256": "3fbf0ecc81293e500cd5e08927584cbeb1853f11f422f853133a1084761aaf6c",
+    "bytes": 523781,
+    "members": 44
+  }
+}

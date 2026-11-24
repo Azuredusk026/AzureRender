@@ -1,0 +1,304 @@
+[
+  {
+    "index": 1,
+    "alphaMode": "OPAQUE",
+    "profile": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "shadowColorLut": {
+        "schemaVersion": 1,
+        "texture": 27,
+        "flipV": true
+      },
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 38
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "surface-ao",
+        "geometry-shadow"
+      ],
+      "nprDiffuse": {
+        "schemaVersion": 1,
+        "shadowScale": 1,
+        "lightingInputs": "host-scene-radiance",
+        "shadowMask": "none",
+        "baseAo": "albedo-alpha"
+      },
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      }
+    },
+    "sourceMaterial": {
+      "source": "CAB-1f2c0e2d8d2f6171136b77dd9c9321ed",
+      "path_id": 3574475141527933335,
+      "type": "Material",
+      "name": "M_actor_laevat_cloth_01"
+    },
+    "keywords": [
+      "_DIFF_RAMP_ON",
+      "_EMISSION",
+      "_METALLICSPECGLOSSMAP",
+      "_NORMALMAP",
+      "_SHADOW_LUT_TEX",
+      "_SPEC_RAMP_ON"
+    ],
+    "floats": {
+      "_EnableRealisticLighting": 0,
+      "_DisableSelfShadow": 0,
+      "_ShadowColorInput": 1,
+      "_NPRInput": 0,
+      "_PBRInput": 0,
+      "_UseShadowLutTex": 1,
+      "_UseDiffRampMap": 1,
+      "_Specular": 1,
+      "_ShadowColorBrightness": 0.5,
+      "_ShadowColorSaturation": 1
+    }
+  },
+  {
+    "index": 2,
+    "alphaMode": "OPAQUE",
+    "profile": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 38
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "surface-ao",
+        "geometry-shadow"
+      ],
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      }
+    },
+    "sourceMaterial": {
+      "source": "CAB-f1ee1f8310bedb82a619a1b3c4e37e23",
+      "path_id": 6470072797553846160,
+      "type": "Material",
+      "name": "M_actor_laevat_cloth_02"
+    },
+    "keywords": [
+      "_CHARACTER_VFX_SPECIAL",
+      "_DIFF_RAMP_ON",
+      "_EMISSION",
+      "_METALLICSPECGLOSSMAP",
+      "_NORMALMAP",
+      "_SPEC_RAMP_ON"
+    ],
+    "floats": {
+      "_EnableRealisticLighting": 0,
+      "_DisableSelfShadow": 0,
+      "_ShadowColorInput": 0,
+      "_NPRInput": 0,
+      "_PBRInput": 0,
+      "_UseShadowLutTex": 0,
+      "_UseDiffRampMap": 1,
+      "_Specular": 1,
+      "_ShadowColorBrightness": 0.5,
+      "_ShadowColorSaturation": 1
+    }
+  },
+  {
+    "index": 3,
+    "alphaMode": "BLEND",
+    "profile": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 39
+      },
+      "features": [
+        "diffuse-ramp",
+        "stylized-shadow",
+        "surface-ao",
+        "sqrt-alpha-shadow"
+      ],
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      }
+    },
+    "sourceMaterial": {
+      "source": "CAB-ed76ec5bde9521d32a608106bc8e3c58",
+      "path_id": -8392104132147645647,
+      "type": "Material",
+      "name": "M_actor_laevat_cloth_03"
+    },
+    "keywords": [
+      "_ALPHABLEND_ON",
+      "_DIFF_RAMP_ON",
+      "_METALLICSPECGLOSSMAP",
+      "_NORMALMAP",
+      "_PANTYHOSE",
+      "_SPEC_RAMP_ON"
+    ],
+    "floats": {
+      "_EnableRealisticLighting": 0,
+      "_DisableSelfShadow": 0,
+      "_ShadowColorInput": 0,
+      "_NPRInput": 0,
+      "_PBRInput": 0,
+      "_UseShadowLutTex": 0,
+      "_UseDiffRampMap": 1,
+      "_Specular": 1,
+      "_ShadowColorBrightness": 0.5,
+      "_ShadowColorSaturation": 1
+    }
+  },
+  {
+    "index": 4,
+    "alphaMode": "OPAQUE",
+    "profile": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 64
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "geometry-shadow"
+      ],
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      },
+      "specularRamp": {
+        "schemaVersion": 1,
+        "texture": 65,
+        "flipV": false,
+        "iridescence": 0,
+        "lightingInputs": "host-main-light"
+      },
+      "nprDiffuse": {
+        "schemaVersion": 1,
+        "shadowScale": 0.5,
+        "shadowAlbedo": "base-color",
+        "lightingInputs": "host-scene-radiance",
+        "shadowMask": "one",
+        "baseAo": "metallic-roughness-red",
+        "indirectNormal": "surface",
+        "characterVisibility": "object-shadow",
+        "mainRamp": {
+          "schemaVersion": 1,
+          "bias": 0
+        },
+        "rimOrigin": {
+          "schemaVersion": 1,
+          "node": "quan_jnt"
+        },
+        "lighting": {
+          "schemaVersion": 1,
+          "ambientColor": [
+            0.8783068656921387,
+            0.9302293062210083,
+            1.1216931343078613
+          ],
+          "mainColor": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "styleParameters": [
+        1,
+        1,
+        1,
+        0.5
+      ]
+    },
+    "sourceMaterial": {
+      "source": "CAB-12464b38f86ad8e01ca3a20d55054c6a",
+      "path_id": 223600555178718960,
+      "type": "Material",
+      "name": "M_actor_laevat_cloth_04"
+    },
+    "keywords": [
+      "_DIFF_RAMP_ON",
+      "_METALLICSPECGLOSSMAP",
+      "_NORMALMAP",
+      "_SPEC_RAMP_ON"
+    ],
+    "floats": {
+      "_EnableRealisticLighting": 0,
+      "_DisableSelfShadow": 0,
+      "_ShadowColorInput": 0,
+      "_NPRInput": 0,
+      "_PBRInput": 0,
+      "_UseShadowLutTex": 0,
+      "_UseDiffRampMap": 1,
+      "_Specular": 1,
+      "_ShadowColorBrightness": 0.5,
+      "_ShadowColorSaturation": 1
+    }
+  },
+  {
+    "index": 5,
+    "alphaMode": "OPAQUE",
+    "profile": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 38
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "surface-ao",
+        "geometry-shadow"
+      ],
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      }
+    },
+    "sourceMaterial": {
+      "source": "CAB-a5e52950c6f7ad99915457f12acc77a6",
+      "path_id": 3739401631618412962,
+      "type": "Material",
+      "name": "M_actor_laevat_cloth_05"
+    },
+    "keywords": [
+      "_CHARACTER_VFX_SPECIAL",
+      "_DIFF_RAMP_ON",
+      "_EMISSION",
+      "_METALLICSPECGLOSSMAP",
+      "_NORMALMAP",
+      "_SPEC_RAMP_ON"
+    ],
+    "floats": {
+      "_EnableRealisticLighting": 0,
+      "_DisableSelfShadow": 0,
+      "_ShadowColorInput": 0,
+      "_NPRInput": 0,
+      "_PBRInput": 0,
+      "_UseShadowLutTex": 0,
+      "_UseDiffRampMap": 1,
+      "_Specular": 1,
+      "_ShadowColorBrightness": 0.5,
+      "_ShadowColorSaturation": 1
+    }
+  }
+]

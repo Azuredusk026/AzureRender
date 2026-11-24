@@ -1,0 +1,92 @@
+[
+  {
+    "repository": "KhronosGroup/Vulkan-Samples",
+    "branch": "main",
+    "commit": "56a72bd1c43268781a75d73a520e4458b6cac766",
+    "date": "2026-11-02T16:20:45Z",
+    "license": {
+      "key": "apache-2.0",
+      "name": "Apache License 2.0",
+      "spdx_id": "Apache-2.0",
+      "url": "https://api.github.com/licenses/apache-2.0",
+      "node_id": "MDc6TGljZW5zZTI="
+    },
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/KhronosGroup/Vulkan-Samples/56a72bd1c43268781a75d73a520e4458b6cac766/LICENSE",
+        "sha256": "9c18288ad9997b4b8d62a544e01d960d3effa28e45e8cfcea6e0cacb9db33f6b",
+        "bytes": 11355
+      },
+      {
+        "path": "samples/performance/multi_draw_indirect/README.adoc",
+        "url": "https://raw.githubusercontent.com/KhronosGroup/Vulkan-Samples/56a72bd1c43268781a75d73a520e4458b6cac766/samples/performance/multi_draw_indirect/README.adoc",
+        "sha256": "22904cd1333f2f726d0c4d61dba4757a6a91fe06af30c6c6149e6cbe907d2404",
+        "bytes": 5988
+      },
+      {
+        "path": "samples/performance/multi_draw_indirect/multi_draw_indirect.cpp",
+        "url": "https://raw.githubusercontent.com/KhronosGroup/Vulkan-Samples/56a72bd1c43268781a75d73a520e4458b6cac766/samples/performance/multi_draw_indirect/multi_draw_indirect.cpp",
+        "sha256": "60d796df461f4cb00c79e0f9b02d8346bf637de7b9ef019125eb1064e8fcd5ac",
+        "bytes": 42061
+      }
+    ],
+    "usage": "Architecture comparison; no third-party implementation copied into production"
+  },
+  {
+    "repository": "google/filament",
+    "branch": "main",
+    "commit": "f868cc1168a16d5609da6796df9306a3eccbff58",
+    "date": "2026-11-04T23:18:22Z",
+    "license": {
+      "key": "apache-2.0",
+      "name": "Apache License 2.0",
+      "spdx_id": "Apache-2.0",
+      "url": "https://api.github.com/licenses/apache-2.0",
+      "node_id": "MDc6TGljZW5zZTI="
+    },
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/google/filament/f868cc1168a16d5609da6796df9306a3eccbff58/LICENSE",
+        "sha256": "02d70b593dd8e9355dd8e1ca8d13c303bee5bcaf3065b66ff6e4f534e1e6a2c1",
+        "bytes": 11362
+      },
+      {
+        "path": "filament/src/RenderPass.cpp",
+        "url": "https://raw.githubusercontent.com/google/filament/f868cc1168a16d5609da6796df9306a3eccbff58/filament/src/RenderPass.cpp",
+        "sha256": "9aed411c5cd47019652fce5a82eb8d520d7d2b4b42b6982a7f6f328129e28645",
+        "bytes": 60034
+      }
+    ],
+    "usage": "Architecture comparison; no third-party implementation copied into production"
+  },
+  {
+    "repository": "skypjack/entt",
+    "branch": "main",
+    "commit": "1dcd7aab6548786f7672ff578639188bd2f0d837",
+    "date": "2026-10-07T13:53:00Z",
+    "license": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/skypjack/entt/1dcd7aab6548786f7672ff578639188bd2f0d837/LICENSE",
+        "sha256": "73547f6370ee16ea560665329bb62d4e2d8250f41eaa204b47a6c694ca3286ea",
+        "bytes": 1097
+      },
+      {
+        "path": "src/entt/entity/sparse_set.hpp",
+        "url": "https://raw.githubusercontent.com/skypjack/entt/1dcd7aab6548786f7672ff578639188bd2f0d837/src/entt/entity/sparse_set.hpp",
+        "sha256": "60ee74b80cf75e5e2d6e7cec7f7f5506e78521f4133bfb2961ffb086024b4402",
+        "bytes": 38309
+      }
+    ],
+    "usage": "Architecture comparison; no third-party implementation copied into production"
+  }
+]

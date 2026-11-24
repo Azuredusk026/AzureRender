@@ -1,0 +1,164 @@
+{
+  "diagnosticOnly": true,
+  "command": [
+    "python",
+    "-c",
+    "import time; time.sleep(30)"
+  ],
+  "exitCode": 1,
+  "errors": [
+    {
+      "type": "TimeoutError",
+      "message": "Owned diagnostic process exceeded timeout"
+    }
+  ],
+  "observations": [
+    {
+      "peak": 2142208,
+      "working": 2142208,
+      "privateBytes": 409600,
+      "seconds": 0.0
+    },
+    {
+      "peak": 16330752,
+      "working": 16130048,
+      "privateBytes": 10883072,
+      "seconds": 0.06199999999989814
+    },
+    {
+      "peak": 16662528,
+      "working": 16662528,
+      "privateBytes": 12181504,
+      "seconds": 0.10900000000037835
+    },
+    {
+      "peak": 16662528,
+      "working": 16662528,
+      "privateBytes": 12181504,
+      "seconds": 0.15599999999994907
+    },
+    {
+      "peak": 16662528,
+      "working": 16662528,
+      "privateBytes": 12181504,
+      "seconds": 0.20300000000042928
+    }
+  ],
+  "snapshots": [
+    {
+      "monotonicSeconds": 8027.875,
+      "pid": 29568,
+      "pageSize": 4096,
+      "residentPages": 523,
+      "regions": [
+        {
+          "allocation": 2147352576,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 4096
+        },
+        {
+          "allocation": 335175221248,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 12288,
+          "queriedRegionBytes": 12288
+        },
+        {
+          "allocation": 335177318400,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 1575549796352,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 12288
+        },
+        {
+          "allocation": 1575549861888,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 1575549927424,
+          "kind": 262144,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\C_936.NLS",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 200704
+        },
+        {
+          "allocation": 1575550189568,
+          "kind": 262144,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\l_intl.nls",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 12288
+        },
+        {
+          "allocation": 1575550255104,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 24576,
+          "queriedRegionBytes": 32768
+        },
+        {
+          "allocation": 1575550320640,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 24576,
+          "queriedRegionBytes": 32768
+        },
+        {
+          "allocation": 1575550386176,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 1575550451712,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 1575550582784,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 53248,
+          "queriedRegionBytes": 57344
+        },
+        {
+          "allocation": 1575551631360,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 140699495366656,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+          "residentBytes": 24576,
+          "queriedRegionBytes": 102400
+        },
+        {
+          "allocation": 140706096742400,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "residentBytes": 1949696,
+          "queriedRegionBytes": 2531328
+        }
+      ],
+      "diagnosticOnly": true
+    }
+  ],
+  "coverage": "resident regions, process counters; allocation call stacks require separate tracing"
+}

@@ -1,0 +1,10 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/runs/20261109-220112-thesis-qualification-21b89c/build
+Test project D:/Projects/FYP/Project/AzureRender/build/runs/20261109-220112-thesis-qualification-21b89c/build
+    Start 1: Thesis.Workload
+1/2 Test #1: Thesis.Workload ..................   Passed    2.61 sec
+    Start 2: Thesis.Contracts
+2/2 Test #2: Thesis.Contracts .................   Passed    0.36 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   2.98 sec

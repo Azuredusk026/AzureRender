@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\probe-shutdown.py", line 10, in <module>
+    module.run(OUT/'arena-delivery/Moved exploration',OUT/'platformer-shutdown-probe',90,True,
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\diagnostic-long-run.py", line 157, in run
+    environment=wait_and_record(environment_path,policy=dict(maxIdleUtilization=max_idle_utilization))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\gpu_environment.py", line 178, in wait_and_record
+    result=wait_until_ready(policy=policy,observations=observations,**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\gpu_environment.py", line 169, in wait_until_ready
+    if clock()-start>=timeout:raise TimeoutError('GPU environment not ready: '+'; '.join(errors))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: GPU environment not ready: background GPU load exceeds the declared idle limit

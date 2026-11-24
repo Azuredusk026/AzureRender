@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR6-C11-main-light-energy-visibility",
+  "status": "host-adapter-passed-native-appearance-incomplete",
+  "formalNr6Status": "Pending",
+  "nativeFullIlluminationVerified": false,
+  "red": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/npr-main-shadow-red/summary.json",
+    "sha256": "f034fffd873fb61bfa6b0d298b8b9931a5486c550e8a33737ceac7a2f9c15230"
+  },
+  "diagnosis": {
+    "receipt": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/native-illumination-diagnostics/receipt.json",
+      "sha256": "a88fea7a9d8aa43c8f4c0cc7d5df2e56b1f4fffe845694e14a1b9ffe106c5d48"
+    },
+    "measurements": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/native-illumination-diagnostics/roi-measurements.json",
+      "sha256": "a53468658b6a0103993957bb8ec440023e6eb374328255b4c9267cd40ecabb1f"
+    },
+    "source": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-face/actor-face-vulkan117.hlsl",
+      "sha256": "0c89cbc71337183892353b7419771b263f429c411a9f768aa35853f03c96e834"
+    },
+    "illuminationLine": 1294,
+    "colorLine": 1297
+  },
+  "gpu": {
+    "debug": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/npr-main-shadow-debug/summary.json",
+      "sha256": "fa3139d09888fa9629c87bc16947b4d4905aecd824cd4eaa2a71128d6224ce32"
+    },
+    "release": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/npr-main-shadow-release/summary.json",
+      "sha256": "8c565e4c3a211f4699867b1366bafdf68f632ceaee7f88cef4215a0390a1c3f2"
+    }
+  },
+  "sourceSnapshot": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/main-shadow-fixed-source/source-index.json",
+    "sha256": "c4e48f53cee460898b4b3c0d3bb0da4236dfcdfb4d07ffd9dc699c1a8ead9f40"
+  },
+  "shaderLink": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/main-shadow-fixed-source/shader-link.json",
+    "sha256": "9611953ba2136c8acfedf1648f183a5a9601e54e1ccb79a7d4e8cbcb9e056232"
+  },
+  "build": {
+    "debug": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/npr-main-shadow-debug-build.log",
+      "sha256": "c78b6d59e9bed369c1c0f1fe1fa3564c1964d76c6883dcda3c0007dfb76c9cd8"
+    },
+    "release": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/npr-main-shadow-release-build.log",
+      "sha256": "c6d4e554a4d5a13bcdc5eda851ba611452e6f4efc7538329c21e44e168bd2874"
+    }
+  },
+  "actualCaptures": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-main-shadow-fixed/receipt.json",
+    "sha256": "767816a5598ba791e21f8437b64ed3c32b6300da7adf4157a7acebefe71d33e4"
+  },
+  "captureInputs": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-main-shadow-fixed/source-index.json",
+    "sha256": "c1405e9867c4f2cec78f7be498aa5fbdcadd6172c69fb163693400c038898b02"
+  },
+  "sameContentFiles": 1114,
+  "visualMetrics": {
+    "npr": {
+      "image": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-main-shadow-fixed/npr/frames/frame_000000.png",
+        "sha256": "db713c3e972658e81b5de6dfeadad625cb919ead5c57f4c373b49ec6ae75e047"
+      },
+      "changedPixels": 230142,
+      "faceRoi": [
+        740,
+        520,
+        890,
+        740
+      ],
+      "baseline": {
+        "allChannelsAtLeast250Fraction": 0.02296969696969697,
+        "meanSrgb": [
+          206.26848484848486,
+          138.79584848484848,
+          142.81284848484847
+        ]
+      },
+      "candidate": {
+        "allChannelsAtLeast250Fraction": 0.0,
+        "meanSrgb": [
+          172.40469696969697,
+          93.91054545454546,
+          94.0469090909091
+        ]
+      }
+    },
+    "face": {
+      "image": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-main-shadow-fixed/face/frames/frame_000000.png",
+        "sha256": "13b5409bce6957d0a86f515989e633702fbdd4e244cb00ce012d532b1a4d0e81"
+      },
+      "changedPixels": 249305,
+      "faceRoi": [
+        740,
+        520,
+        890,
+        740
+      ],
+      "baseline": {
+        "allChannelsAtLeast250Fraction": 0.09115151515151515,
+        "meanSrgb": [
+          210.2730909090909,
+          144.5232121212121,
+          147.25151515151515
+        ]
+      },
+      "candidate": {
+        "allChannelsAtLeast250Fraction": 0.0,
+        "meanSrgb": [
+          174.01157575757577,
+          94.78530303030303,
+          94.28212121212121
+        ]
+      }
+    },
+    "fullbody": {
+      "image": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-main-shadow-fixed/fullbody/frames/frame_000000.png",
+        "sha256": "df00c559d9fa98694054d0368c6263dc3e349d8e92cb53dd143cf94c7a082940"
+      },
+      "changedPixels": 51009
+    },
+    "wide": {
+      "image": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-main-shadow-fixed/wide/frames/frame_000000.png",
+        "sha256": "18dc509e3fdd566c527377882dfb99ad45400c904f1f5e1d891d5165ac3e621a"
+      },
+      "changedPixels": 3791
+    }
+  },
+  "formalVisualAcceptance": false,
+  "limitations": [
+    "Native globals and full illumination remain unverified.",
+    "Native radial GI normal frame and horizontal cameraFacing binding remain incomplete.",
+    "Hair, eye, cloth specular ramps and forehead/depth masks retain separate acceptance.",
+    "Partial shadow visibility and multiple directional-light shadow ownership are not independently verified."
+  ]
+}

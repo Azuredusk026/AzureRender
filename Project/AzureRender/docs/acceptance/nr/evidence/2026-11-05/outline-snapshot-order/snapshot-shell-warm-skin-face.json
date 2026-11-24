@@ -1,0 +1,16 @@
+{
+  "skin": {
+    "pixels": 28966,
+    "ssim": 0.9874421265636502,
+    "medianLuminanceRelativeError": 0.05794346758991619,
+    "medianRgbError": 3.0,
+    "maxRgbError": 41
+  },
+  "face": {
+    "pixels": 1176,
+    "ssim": 0.9950358150600968,
+    "medianLuminanceRelativeError": 0.036272222618005605,
+    "medianRgbError": 2.0,
+    "maxRgbError": 47
+  }
+}

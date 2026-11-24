@@ -1,0 +1,54 @@
+{
+  "id": "Mechanism",
+  "lights": [],
+  "nodes": [
+    {
+      "components": {
+        "azure.renderable": {
+          "data": {
+            "primitiveIndex": 0,
+            "visible": true
+          },
+          "type": "azure.renderable",
+          "version": 1
+        },
+        "azure.transform": {
+          "data": {
+            "rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "translation": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "type": "azure.transform",
+          "version": 1
+        }
+      },
+      "id": "authored-model",
+      "materialSlots": {
+        "name:second-surface": "25fad2e6-49be-468d-b920-1325a28e3e19",
+        "name:stone": "96d766b5-a5e4-4107-a2dd-0430edeb5a5a"
+      },
+      "name": "Placed Object",
+      "parentId": "",
+      "resourceId": "73d4ece8-54e9-40de-b52c-fb26a6394cfc"
+    }
+  ],
+  "resources": [
+    {
+      "asset": "73d4ece8-54e9-40de-b52c-fb26a6394cfc",
+      "id": "73d4ece8-54e9-40de-b52c-fb26a6394cfc"
+    }
+  ],
+  "schemaVersion": 1
+}

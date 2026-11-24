@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "packages": [
+    {
+      "kind": "engine",
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\p3\\packages\\final-AzureRender-0.1.0-rc1-Windows-x64.tar.gz",
+      "sha256": "d95e20f2536401ffa0e30d3b19a0b4e08995544a612442efb8e513e7ecf85755",
+      "bytes": 28129028
+    },
+    {
+      "kind": "source-snapshot",
+      "status": "passed",
+      "files": 710,
+      "productionInputs": 585,
+      "archive": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\p3\\packages\\AzureEngine-P3-source.tar.gz",
+      "sha256": "8b126dd31521f208b8117636536d8b38ec369154ada660923418e69ec3c3f6b9",
+      "bytes": 16994416
+    },
+    {
+      "kind": "exploration",
+      "directory": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\playable-package\\Azure Exploration",
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\p3\\packages\\AzureEngine-P3-exploration.tar.gz",
+      "sha256": "45b98d5e4a939e654e75e60acdcc63f34848b7eadfad424a1e312e1e3d2d9f00",
+      "bytes": 21709401,
+      "manifestSha256": "c8d1bd55259935e6764ed101a27094c4342729a6247108a98103528351b11ba5"
+    },
+    {
+      "kind": "scene-inspector",
+      "directory": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\p3\\inspector-package\\Moved Scene Inspector",
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\p3\\packages\\AzureEngine-P3-scene-inspector.tar.gz",
+      "sha256": "23e784f8a3993b7ea9c3249d1f7ae95c1da157d9a42a1b45cc1669e38fcccf98",
+      "bytes": 21637257,
+      "manifestSha256": "3a146194a26254c6bd4f0c861c4d3471e38e968885adf7f03d3e54b08234a6b6"
+    }
+  ],
+  "portableProvenance": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\p3\\packages\\AzureEngine-P3-provenance.json"
+}

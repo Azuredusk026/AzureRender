@@ -1,0 +1,593 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-21T23:04:17.716947+00:00",
+  "stage": "NR7-L2",
+  "scope": "通用节点透明度、动画、不可变快照与光栅绘制",
+  "status": "raster-contract-verified",
+  "nativeVisualEquivalenceVerified": false,
+  "run": "build/runs/20261022-051129-character-logistics-restoration-0f2e71",
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "sourceFingerprints": [
+    {
+      "path": "CMakeLists.txt",
+      "workspaceSha256": "ec29aecaac5cbfe8d773d98dc92fa765ab2e7b255a7340d9d0e466fe66594215",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/CMakeLists.txt",
+      "nr7SnapshotSha256": "1543b19701eca1bfcc9a963278ade976f6f2ec9514abec54cb406b4abdc488d0"
+    },
+    {
+      "path": "src/assets/GltfLoader.cpp",
+      "workspaceSha256": "2e4ad37f8599c29f0cb319fcaf185d56716c0f2b83b223b0ee26cb2526398002",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/src/assets/GltfLoader.cpp",
+      "nr7SnapshotSha256": "a132bdc7346da07b7adee5e8c9c747f78c789fcdcb363cb0e8616f8cfa7440d5"
+    },
+    {
+      "path": "src/assets/GltfLoader.hpp",
+      "workspaceSha256": "ca85dfaa272939b3923d50722232fa7ca9258b3af220d61a06abbced95e0b40a",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/src/assets/GltfLoader.hpp",
+      "nr7SnapshotSha256": "dc08aeadadd1b764c1c291bf572b4858b75987df73693cccbd635a28700be4ee"
+    },
+    {
+      "path": "src/animation/AnimationBlend.cpp",
+      "workspaceSha256": "5f12527e66071228f66bb66e917696e56911e202fead9c307b1c5a187000aa4b",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/src/animation/AnimationBlend.cpp",
+      "nr7SnapshotSha256": "5f12527e66071228f66bb66e917696e56911e202fead9c307b1c5a187000aa4b"
+    },
+    {
+      "path": "src/render/PrimitiveOpacity.hpp",
+      "workspaceSha256": "dfb404baf7b3786ddfaba79cd86000ec3866cd14be1f1e0f6be5e5c146d7ac53",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/src/render/PrimitiveOpacity.hpp",
+      "nr7SnapshotSha256": "dfb404baf7b3786ddfaba79cd86000ec3866cd14be1f1e0f6be5e5c146d7ac53"
+    },
+    {
+      "path": "src/render/OutlineMaskLayout.hpp",
+      "workspaceSha256": "0f178b71d3bb43c9ba99a72b71932029353f4b7c70bad89af1841bc421ce86df",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/src/render/OutlineMaskLayout.hpp",
+      "nr7SnapshotSha256": "0f178b71d3bb43c9ba99a72b71932029353f4b7c70bad89af1841bc421ce86df"
+    },
+    {
+      "path": "src/render/SceneInstanceSnapshot.hpp",
+      "workspaceSha256": "6b6c91ce9974b5a29418a657bde5895a59c4a3bff3eb493a75224302caae8a46",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/src/render/SceneInstanceSnapshot.hpp",
+      "nr7SnapshotSha256": "83639c39a1579d136de85d8090dd1b5177a61972d87e1c680c27fc64aac54edd"
+    },
+    {
+      "path": "src/scenes/CharacterSceneRenderer.cpp",
+      "workspaceSha256": "9c09df4ae5875f2547a74659fd3770908ec00dd8d4416861264aec159da7b3d4",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/src/scenes/CharacterSceneRenderer.cpp",
+      "nr7SnapshotSha256": "fca22351c760e7220f6fd12f045abe4896104d0e6c52053e19a5f799567b3d2b"
+    },
+    {
+      "path": "src/scenes/CharacterSceneRenderer.hpp",
+      "workspaceSha256": "e355214b4230ed3113433c26b07bae43f47f0545603eae415349590a83d62436",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/src/scenes/CharacterSceneRenderer.hpp",
+      "nr7SnapshotSha256": "3652e0eccfbc45e1f6f7320fa33fb0d37f725e0334adaf7d7e878fa54f8e4160"
+    },
+    {
+      "path": "shaders/node_opacity.glsl",
+      "workspaceSha256": "486782ba816cea8714f1f30058e648615880a0d0d3c209069dc3245fb81b9ab7",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/shaders/node_opacity.glsl",
+      "nr7SnapshotSha256": "486782ba816cea8714f1f30058e648615880a0d0d3c209069dc3245fb81b9ab7"
+    },
+    {
+      "path": "shaders/outline_mask.frag",
+      "workspaceSha256": "443579deb1fffd7791141266202d8ca28d8e5bc198d52ba9530dee7a8e5b5dcb",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/shaders/outline_mask.frag",
+      "nr7SnapshotSha256": "443579deb1fffd7791141266202d8ca28d8e5bc198d52ba9530dee7a8e5b5dcb"
+    },
+    {
+      "path": "shaders/mesh.vert",
+      "workspaceSha256": "43999261da1e5b7bb98f8cb547bb98ab9717932e0526105e9e165bf583def066",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/shaders/mesh.vert",
+      "nr7SnapshotSha256": "35d6d76c15c9c5783b4124cdf05f40111c98b8f262b2172ca6c4571e0c39c98b"
+    },
+    {
+      "path": "shaders/mesh.frag",
+      "workspaceSha256": "dc21e196ee85ed2e2a4038776ab97c235bd972758714c83036e932b64cdc91b5",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/shaders/mesh.frag",
+      "nr7SnapshotSha256": "2a281392bbdb34bb1fe676e3ad76cae0257b20eace9be603fce29788b8179523"
+    },
+    {
+      "path": "shaders/shadow.vert",
+      "workspaceSha256": "16fc5827863d90d53d540c2218874e2bbd1c105f967ae6cfa426338b1019fb71",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/shaders/shadow.vert",
+      "nr7SnapshotSha256": "16fc5827863d90d53d540c2218874e2bbd1c105f967ae6cfa426338b1019fb71"
+    },
+    {
+      "path": "shaders/shadow.frag",
+      "workspaceSha256": "7cec306c16dedefa9b71ef14a1725bbff802e426eb6d83c6931fd1599d52db63",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/shaders/shadow.frag",
+      "nr7SnapshotSha256": "3f7a7a0d43b1e96ee02f9df6029f1c1d5b9f31a8ead73955f590b9a9a1406fce"
+    },
+    {
+      "path": "shaders/character_depth.frag",
+      "workspaceSha256": "b09462f6a9e61b25ec327da4bbb473a663f01e996583e3855118b0fc2b377900",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/shaders/character_depth.frag",
+      "nr7SnapshotSha256": "b09462f6a9e61b25ec327da4bbb473a663f01e996583e3855118b0fc2b377900"
+    },
+    {
+      "path": "shaders/outline.vert",
+      "workspaceSha256": "1dd3bf86fbe308b82d601a33197cb391076a9bb8fb2b04fcd3847c045a145fe1",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/shaders/outline.vert",
+      "nr7SnapshotSha256": "1dd3bf86fbe308b82d601a33197cb391076a9bb8fb2b04fcd3847c045a145fe1"
+    },
+    {
+      "path": "shaders/outline.frag",
+      "workspaceSha256": "6e5d5a476b3d8929ecbbeb44630d5a8b202a1223c3b0b770baabac6b1141e424",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/shaders/outline.frag",
+      "nr7SnapshotSha256": "5e2897438aa391bc4a7b42ebeac5866e25a8dea39faaaa941e0192708ccf8664"
+    },
+    {
+      "path": "tests/NodeOpacityTests.cpp",
+      "workspaceSha256": "79591b53a9357a3b9e2f9d4b5e91e372d6a069a5c6ecf6f9fa7fdc9391537dd5",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/tests/NodeOpacityTests.cpp",
+      "nr7SnapshotSha256": "79591b53a9357a3b9e2f9d4b5e91e372d6a069a5c6ecf6f9fa7fdc9391537dd5"
+    },
+    {
+      "path": "tests/PrimitiveOpacityTests.cpp",
+      "workspaceSha256": "0f21f310e29da716a9d03442fbc71dc867ffb0571387e699c565bdd753b788f5",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/tests/PrimitiveOpacityTests.cpp",
+      "nr7SnapshotSha256": "0f21f310e29da716a9d03442fbc71dc867ffb0571387e699c565bdd753b788f5"
+    },
+    {
+      "path": "tests/FrameTaskSchedulerTests.cpp",
+      "workspaceSha256": "b208a25093ad190421c0b1269f94de964dc7aa02c5342ab03bf7a9264d166bd4",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/tests/FrameTaskSchedulerTests.cpp",
+      "nr7SnapshotSha256": "1ce86b1fdd83ff8ea266238bab73d529919209d51c58aa0bb15746dc941dfa0a"
+    },
+    {
+      "path": "tools/test_node_opacity_gpu.py",
+      "workspaceSha256": "051a640231925b2d59076e6775aafd2007884e317e60e768b0d241b34ccdf0b3",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/tools/test_node_opacity_gpu.py",
+      "nr7SnapshotSha256": "051a640231925b2d59076e6775aafd2007884e317e60e768b0d241b34ccdf0b3"
+    },
+    {
+      "path": "docs/assets/node-opacity.md",
+      "workspaceSha256": "1da57184d5d229800b56e78be07a2ece9230bfc279d048b971468dbc6518b023",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/docs/assets/node-opacity.md",
+      "nr7SnapshotSha256": "1da57184d5d229800b56e78be07a2ece9230bfc279d048b971468dbc6518b023"
+    },
+    {
+      "path": "docs/acceptance/nr/node-opacity.md",
+      "workspaceSha256": "9db2500bc21767828f1a041f439eb4297c48e79a34fbf48bbf29dacb72beeac4",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/docs/acceptance/nr/node-opacity.md",
+      "nr7SnapshotSha256": "9db2500bc21767828f1a041f439eb4297c48e79a34fbf48bbf29dacb72beeac4"
+    },
+    {
+      "path": "tests/NodeOpacityRecordingTests.cpp",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/tests/NodeOpacityRecordingTests.cpp",
+      "workspaceSha256": "7a84012acb368c45f413ba61dbb72e3e16c3b420415e6a0d4b909733a70b22df",
+      "nr7SnapshotSha256": "7a84012acb368c45f413ba61dbb72e3e16c3b420415e6a0d4b909733a70b22df"
+    },
+    {
+      "path": "tests/NullRhiPassTests.cpp",
+      "nr7Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/nr7-snapshot/tests/NullRhiPassTests.cpp",
+      "workspaceSha256": "a852b65381fcb10d24947937f3451f3b77109d1f6e75035d4668ef4dd85d99d4",
+      "nr7SnapshotSha256": "74c04cbc37036d840c7809382bc26b5d2888443ad0668d659e9007b4dfd294b3"
+    }
+  ],
+  "buildArtifacts": [
+    {
+      "path": "build/ninja-msvc-debug/AzurePlayer.exe",
+      "sha256": "c96e79c4873e61b9d997f643903ec7aacdf4423432b8ba3b9bb83b0ebfd50f11"
+    },
+    {
+      "path": "build/ninja-msvc-debug/shaders/mesh.vert.spv",
+      "sha256": "e942c66cffb0e278ab1668fee4795bc00b4aae4df9f0e74e5a10ac82f1564ece"
+    },
+    {
+      "path": "build/ninja-msvc-debug/shaders/mesh_compute.vert.spv",
+      "sha256": "cdf8d203c8ede28ee13dae2069fc1b9b68c5012e5c6779b61e9febf1e06c298c"
+    },
+    {
+      "path": "build/ninja-msvc-debug/shaders/outline.frag.spv",
+      "sha256": "a65b5679ddc386c651216f45f373145cfa77a87fa07db8de52a3a006a9b72681"
+    },
+    {
+      "path": "build/ninja-msvc-debug/shaders/outline_mask.vert.spv",
+      "sha256": "c8a232f948351fcfba31bb971972be33ef8186ad621c248e2bc7ea7e44fe93d7"
+    },
+    {
+      "path": "build/ninja-msvc-debug/shaders/outline_mask_compute.vert.spv",
+      "sha256": "961775e4df56db0888d4441e42cba318162883734b36ac30bad13ab5a161419b"
+    },
+    {
+      "path": "build/ninja-msvc-debug/shaders/outline_mask.frag.spv",
+      "sha256": "c6c0875b058ce8b2fd8d1bc7504687ded47690cc4753fae9e2ff9b839a43a4c9"
+    },
+    {
+      "path": "build/ninja-msvc-release/AzurePlayer.exe",
+      "sha256": "013d88ba8bbe0a6ba0af8b3cdbeb289cdb286ee24082ad76e216ee63e9f08b96"
+    },
+    {
+      "path": "build/ninja-msvc-release/shaders/mesh.vert.spv",
+      "sha256": "e942c66cffb0e278ab1668fee4795bc00b4aae4df9f0e74e5a10ac82f1564ece"
+    },
+    {
+      "path": "build/ninja-msvc-release/shaders/mesh_compute.vert.spv",
+      "sha256": "cdf8d203c8ede28ee13dae2069fc1b9b68c5012e5c6779b61e9febf1e06c298c"
+    },
+    {
+      "path": "build/ninja-msvc-release/shaders/outline.frag.spv",
+      "sha256": "a65b5679ddc386c651216f45f373145cfa77a87fa07db8de52a3a006a9b72681"
+    },
+    {
+      "path": "build/ninja-msvc-release/shaders/outline_mask.vert.spv",
+      "sha256": "c8a232f948351fcfba31bb971972be33ef8186ad621c248e2bc7ea7e44fe93d7"
+    },
+    {
+      "path": "build/ninja-msvc-release/shaders/outline_mask_compute.vert.spv",
+      "sha256": "961775e4df56db0888d4441e42cba318162883734b36ac30bad13ab5a161419b"
+    },
+    {
+      "path": "build/ninja-msvc-release/shaders/outline_mask.frag.spv",
+      "sha256": "c6c0875b058ce8b2fd8d1bc7504687ded47690cc4753fae9e2ff9b839a43a4c9"
+    }
+  ],
+  "contract": {
+    "extension": "AZURE_node_opacity",
+    "schemaVersion": 1,
+    "defaultOpacity": 1,
+    "range": [
+      0,
+      1
+    ],
+    "interpolation": [
+      "STEP",
+      "LINEAR",
+      "CUBICSPLINE"
+    ],
+    "worldOpacity": "混合局部透明度后按祖先链相乘",
+    "outlineMask": "每个淡出描边实例各自持有完整几何遮罩区域",
+    "outlineMaskFrameBudgetBytes": 134217728,
+    "outlineMaskFormat": "VK_FORMAT_R8_UNORM"
+  },
+  "cpu": {
+    "debug": {
+      "passed": 9,
+      "failed": 0
+    },
+    "release": {
+      "passed": 9,
+      "failed": 0
+    },
+    "tests": [
+      "AzureRender.PrimitiveOpacity",
+      "AzureRender.AnimationPose",
+      "AzureRender.NodeOpacity",
+      "AzureAssets.MorphTargets",
+      "AzureRender.AnimationCurve",
+      "AzureRender.ExpressionPose",
+      "AzureRender.FrameTaskScheduler",
+      "AzureRender.NodeOpacityRecording",
+      "AzureRender.NullRhiPass"
+    ],
+    "logs": [
+      "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/gizmo-debug-cpu.log",
+      "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/gizmo-release-cpu.log"
+    ]
+  },
+  "gpu": {
+    "debug": {
+      "modes": [
+        "opaque",
+        "blend",
+        "depth",
+        "shadow",
+        "outline"
+      ],
+      "metrics": {
+        "opaqueHalfResponse": 0.4984391259105099,
+        "opaqueEndpointMismatches": 0,
+        "blendHalfResponse": 0.640495867768595,
+        "blendLinearHalfResponse": 0.5004311185322116,
+        "depthHalfResponse": 0.4984391259105099,
+        "depthEndpointMismatches": 0,
+        "shadowHalfResponse": 0.13233098542110314,
+        "outlineHalfResponse": 0.7432719849514771,
+        "outlineEndpointMismatches": 0,
+        "overlapFullRimPixels": 456,
+        "overlapExpectedRimPixels": 456,
+        "overlapHalfRimMissingPixels": 0,
+        "outlineFallbackMaximumDifference": 0,
+        "fallbackMaximumDifference": 0,
+        "independentVisiblePixels": [
+          3658,
+          2040,
+          0
+        ]
+      },
+      "captures": [
+        {
+          "name": "opaque-0",
+          "validationEnabled": true
+        },
+        {
+          "name": "opaque-0.5",
+          "validationEnabled": true
+        },
+        {
+          "name": "opaque-1",
+          "validationEnabled": true
+        },
+        {
+          "name": "blend-0",
+          "validationEnabled": true
+        },
+        {
+          "name": "blend-0.5",
+          "validationEnabled": true
+        },
+        {
+          "name": "blend-1",
+          "validationEnabled": true
+        },
+        {
+          "name": "depth-0",
+          "validationEnabled": true
+        },
+        {
+          "name": "depth-0.5",
+          "validationEnabled": true
+        },
+        {
+          "name": "depth-1",
+          "validationEnabled": true
+        },
+        {
+          "name": "shadow-0",
+          "validationEnabled": true
+        },
+        {
+          "name": "shadow-0.5",
+          "validationEnabled": true
+        },
+        {
+          "name": "shadow-1",
+          "validationEnabled": true
+        },
+        {
+          "name": "outline-0",
+          "validationEnabled": true
+        },
+        {
+          "name": "outline-0.5",
+          "validationEnabled": true
+        },
+        {
+          "name": "outline-1",
+          "validationEnabled": true
+        },
+        {
+          "name": "overlap-front-plain",
+          "validationEnabled": true
+        },
+        {
+          "name": "overlap-front-full",
+          "validationEnabled": true
+        },
+        {
+          "name": "overlap-front-half",
+          "validationEnabled": true
+        },
+        {
+          "name": "overlap-back-full",
+          "validationEnabled": true
+        },
+        {
+          "name": "overlap-pair-full",
+          "validationEnabled": true
+        },
+        {
+          "name": "overlap-pair-half",
+          "validationEnabled": true
+        },
+        {
+          "name": "overlap-pair-half-fixed",
+          "validationEnabled": true
+        },
+        {
+          "name": "opaque-half-fixed",
+          "validationEnabled": true
+        },
+        {
+          "name": "independent-ages",
+          "validationEnabled": true
+        }
+      ],
+      "validationErrors": 0,
+      "summaryPath": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/gpu-debug-gizmo/summary.json",
+      "validationWarnings": 0,
+      "allocatorUnloadZero": true,
+      "maskAllocations": 4
+    },
+    "release": {
+      "modes": [
+        "opaque",
+        "blend",
+        "depth",
+        "shadow",
+        "outline"
+      ],
+      "metrics": {
+        "opaqueHalfResponse": 0.4984391259105099,
+        "opaqueEndpointMismatches": 0,
+        "blendHalfResponse": 0.640495867768595,
+        "blendLinearHalfResponse": 0.5004311185322116,
+        "depthHalfResponse": 0.4984391259105099,
+        "depthEndpointMismatches": 0,
+        "shadowHalfResponse": 0.13233098542110314,
+        "outlineHalfResponse": 0.7432719849514771,
+        "outlineEndpointMismatches": 0,
+        "overlapFullRimPixels": 456,
+        "overlapExpectedRimPixels": 456,
+        "overlapHalfRimMissingPixels": 0,
+        "outlineFallbackMaximumDifference": 0,
+        "fallbackMaximumDifference": 0,
+        "independentVisiblePixels": [
+          3658,
+          2040,
+          0
+        ]
+      },
+      "captures": [
+        {
+          "name": "opaque-0",
+          "validationEnabled": false
+        },
+        {
+          "name": "opaque-0.5",
+          "validationEnabled": false
+        },
+        {
+          "name": "opaque-1",
+          "validationEnabled": false
+        },
+        {
+          "name": "blend-0",
+          "validationEnabled": false
+        },
+        {
+          "name": "blend-0.5",
+          "validationEnabled": false
+        },
+        {
+          "name": "blend-1",
+          "validationEnabled": false
+        },
+        {
+          "name": "depth-0",
+          "validationEnabled": false
+        },
+        {
+          "name": "depth-0.5",
+          "validationEnabled": false
+        },
+        {
+          "name": "depth-1",
+          "validationEnabled": false
+        },
+        {
+          "name": "shadow-0",
+          "validationEnabled": false
+        },
+        {
+          "name": "shadow-0.5",
+          "validationEnabled": false
+        },
+        {
+          "name": "shadow-1",
+          "validationEnabled": false
+        },
+        {
+          "name": "outline-0",
+          "validationEnabled": false
+        },
+        {
+          "name": "outline-0.5",
+          "validationEnabled": false
+        },
+        {
+          "name": "outline-1",
+          "validationEnabled": false
+        },
+        {
+          "name": "overlap-front-plain",
+          "validationEnabled": false
+        },
+        {
+          "name": "overlap-front-full",
+          "validationEnabled": false
+        },
+        {
+          "name": "overlap-front-half",
+          "validationEnabled": false
+        },
+        {
+          "name": "overlap-back-full",
+          "validationEnabled": false
+        },
+        {
+          "name": "overlap-pair-full",
+          "validationEnabled": false
+        },
+        {
+          "name": "overlap-pair-half",
+          "validationEnabled": false
+        },
+        {
+          "name": "overlap-pair-half-fixed",
+          "validationEnabled": false
+        },
+        {
+          "name": "opaque-half-fixed",
+          "validationEnabled": false
+        },
+        {
+          "name": "independent-ages",
+          "validationEnabled": false
+        }
+      ],
+      "validationErrors": 0,
+      "summaryPath": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/gpu-release-gizmo/summary.json",
+      "validationWarnings": 0,
+      "allocatorUnloadZero": true,
+      "maskAllocations": 4
+    }
+  },
+  "regression": {
+    "configuration": "Debug",
+    "passed": 3,
+    "failed": 0,
+    "tests": [
+      "AzureEngine.IndependentAnimationGpu",
+      "AzureEngine.SceneRefractionGpu",
+      "AzureEngine.SceneCharacterGpu"
+    ],
+    "log": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/gizmo-debug-regression.log"
+  },
+  "failureEvidence": [
+    {
+      "issue": "封闭几何的反向外壳填入半透明孔洞",
+      "endpointMismatches": 4235,
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/gpu-debug.log"
+    },
+    {
+      "issue": "前景轮廓被随后绘制的后景表面覆盖",
+      "actualRimPixels": 0,
+      "expectedRimPixels": 456,
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/gpu-debug-overlap-red.log"
+    },
+    {
+      "issue": "遮罩管线输出未消费的顶点变量",
+      "observedValidationWarnings": 10,
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/gpu-debug-final/opaque-1/player.log"
+    },
+    {
+      "issue": "选中图元变换未进入阴影等消费通道",
+      "firstFailingPass": 1,
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/gizmo-red.log"
+    }
+  ],
+  "gizmoRecording": {
+    "passed": true,
+    "configurations": 4,
+    "transform": [
+      "translation",
+      "rotation",
+      "scale"
+    ],
+    "unselectedPrimitivesRetainIdentity": true,
+    "sharedHelper": "primitiveGizmoTransform"
+  },
+  "limitations": [
+    "路径追踪尚需接入节点透明度",
+    "目标场景的高分辨率性能需联合测量",
+    "原生发射语义与最终外观单独验收",
+    "Release验证层关闭"
+  ],
+  "verificationWorkspace": {
+    "inactiveCandidateFeature": "multiply-composite",
+    "nr7SnapshotExcludesCandidate": true,
+    "recordedFingerprintsAreBuildSource": true
+  }
+}

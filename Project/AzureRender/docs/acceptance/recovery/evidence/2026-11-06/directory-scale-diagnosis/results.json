@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-failed-production-source-restored",
+  "base": "a9f7e58",
+  "diagnostic": {
+    "status": "failed-timeout",
+    "exitCode": 1,
+    "seconds": 180.4220000000205,
+    "samples": [
+      {
+        "elapsedSeconds": 20.07799999997951,
+        "samplerExitCode": 0
+      },
+      {
+        "elapsedSeconds": 33.18699999997625,
+        "samplerExitCode": 0
+      },
+      {
+        "elapsedSeconds": 47.0,
+        "samplerExitCode": 0
+      },
+      {
+        "elapsedSeconds": 62.21899999998277,
+        "samplerExitCode": 0
+      },
+      {
+        "elapsedSeconds": 79.15600000001723,
+        "samplerExitCode": 0
+      },
+      {
+        "elapsedSeconds": 99.14100000000326,
+        "samplerExitCode": 0
+      },
+      {
+        "elapsedSeconds": 122.10899999999674,
+        "samplerExitCode": 0
+      },
+      {
+        "elapsedSeconds": 146.06199999997625,
+        "samplerExitCode": 0
+      }
+    ]
+  },
+  "candidateBuild": {
+    "status": "passed",
+    "exitCode": 0,
+    "seconds": 52.5,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+      "build",
+      "--source",
+      "D:\\Projects\\FYP\\Project\\AzureRender",
+      "--build-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+      "--config",
+      "Debug",
+      "--test-target",
+      "AzureEditorProjectFlowTests",
+      "--test-target",
+      "AzureContentOperationTests",
+      "--test-target",
+      "AzureContentNavigationTests",
+      "--test-target",
+      "AzureContentDirectoryScaleTests"
+    ],
+    "buildScope": {
+      "kind": "runtime-and-tests",
+      "targets": [
+        "AzureRender",
+        "AzurePlayer",
+        "AzureMetaGen",
+        "AzureGeometryCompiler",
+        "AzureAssetExchange",
+        "AzureMaterialValidator",
+        "AzureGameLauncher",
+        "AzureEngineContracts",
+        "AzureManagedArtifacts",
+        "AzureShaderModulePrototypes",
+        "AzureEditorProjectFlowTests",
+        "AzureContentOperationTests",
+        "AzureContentNavigationTests",
+        "AzureContentDirectoryScaleTests"
+      ],
+      "testProducts": {
+        "AzureEditorProjectFlowTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureEditorProjectFlowTests.exe",
+        "AzureContentOperationTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureContentOperationTests.exe",
+        "AzureContentNavigationTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureContentNavigationTests.exe",
+        "AzureContentDirectoryScaleTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureContentDirectoryScaleTests.exe"
+      }
+    },
+    "productCount": 604,
+    "productionShaders535ByteIdentical": true,
+    "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+  },
+  "candidateChecks": {
+    "exitCode": 8,
+    "seconds": 195.93800000002375,
+    "command": [
+      "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+      "--test-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+      "-R",
+      "^(AzureEditor.ProjectFlow|AzureEditor.ContentOperations|AzureEditor.ContentNavigation|AzureEditor.ContentDirectoryScale|AzureEngine.BuildProvenance)$",
+      "--output-on-failure",
+      "--no-tests=error",
+      "--output-junit",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\directory-scale-candidate\\engine-debug-checks.xml"
+    ],
+    "expectedChecks": 5
+  },
+  "candidateDirectoryScale": "failed-original180s-timeout",
+  "candidateShortCpuChecksPassed": 4,
+  "candidateReleaseChecks": "not-run",
+  "restoredBuild": {
+    "status": "passed",
+    "exitCode": 0,
+    "seconds": 30.0,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+      "build",
+      "--source",
+      "D:\\Projects\\FYP\\Project\\AzureRender",
+      "--build-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+      "--config",
+      "Debug",
+      "--test-target",
+      "AzureEditorProjectFlowTests",
+      "--test-target",
+      "AzureContentOperationTests",
+      "--test-target",
+      "AzureContentNavigationTests",
+      "--test-target",
+      "AzureContentDirectoryScaleTests"
+    ],
+    "buildScope": {
+      "kind": "runtime-and-tests",
+      "targets": [
+        "AzureRender",
+        "AzurePlayer",
+        "AzureMetaGen",
+        "AzureGeometryCompiler",
+        "AzureAssetExchange",
+        "AzureMaterialValidator",
+        "AzureGameLauncher",
+        "AzureEngineContracts",
+        "AzureManagedArtifacts",
+        "AzureShaderModulePrototypes",
+        "AzureEditorProjectFlowTests",
+        "AzureContentOperationTests",
+        "AzureContentNavigationTests",
+        "AzureContentDirectoryScaleTests"
+      ],
+      "testProducts": {
+        "AzureEditorProjectFlowTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureEditorProjectFlowTests.exe",
+        "AzureContentOperationTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureContentOperationTests.exe",
+        "AzureContentNavigationTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureContentNavigationTests.exe",
+        "AzureContentDirectoryScaleTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureContentDirectoryScaleTests.exe"
+      }
+    },
+    "productCount": 604,
+    "productionShaders535ByteIdentical": true,
+    "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+  },
+  "restoredChecks": {
+    "exitCode": 0,
+    "seconds": 18.5,
+    "command": [
+      "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+      "--test-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+      "-R",
+      "^(AzureEditor.ProjectFlow|AzureEditor.ContentOperations|AzureEditor.ContentNavigation|AzureEngine.BuildProvenance)$",
+      "--output-on-failure",
+      "--no-tests=error",
+      "--output-junit",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\directory-scale-restored\\engine-debug-checks.xml"
+    ],
+    "expectedChecks": 4
+  },
+  "productionSourceByteIdenticalToHead": true,
+  "archiveSha256": "cc28143aad636412ac0eea81113f735b775dd0e1f7e61f0f230ec304beb4b7df",
+  "archiveMembers": {
+    "directory-scale-diagnosis/results.json": "64af84b63b4b244d8f0505bc07ac92d52828fc92a1aa892c84cfd6aa7072e214",
+    "directory-scale-diagnosis/stack-00.log": "9c3b8d4c13081b8bbe10362ddfddd961b204e86958ca87f687d7ddab428ea3bb",
+    "directory-scale-diagnosis/stack-01.log": "85934ef4c928b412ba9ebff0f338e92ed614b8708dd5b968f4e687b140ae2633",
+    "directory-scale-diagnosis/stack-02.log": "db1fb5fa1dfb8f4dfe32713bef45b8a1c3ac6dcfa05350b83d05ecb90d5fd655",
+    "directory-scale-diagnosis/stack-03.log": "4f2a62aabf0a0a2bc79f01d6e1cda14e601ca4ed1a5722b01edef1e8ada083e8",
+    "directory-scale-diagnosis/stack-04.log": "310f28cf327284c128dac5a9a84f492f2b13c7a6bd666cfdca3ec959f8a2594f",
+    "directory-scale-diagnosis/stack-05.log": "a1f388694aeeb84db6d91e50c196acc07802f6a4b3c2246fa8393f2bd27de4c3",
+    "directory-scale-diagnosis/stack-06.log": "8470dbfe5a6497301ed4cc886c886e4cb1e187875ccccd8917650e3198ad7240",
+    "directory-scale-diagnosis/stack-07.log": "f93ad9452f7430c427c84ccd369ea198c24a87bd4d8cf019acd296cba994a87d",
+    "directory-scale-diagnosis/task.json": "26dd39ae463081f557e0cdce9d413b5df90bd024859f6779d9780a6af4169bc1",
+    "directory-scale-diagnosis/test.log": "5069bd626449216b2015d1491e00529528cdb3426b5b30c7d704bb959af3a628",
+    "directory-scale-candidate/candidate-build-provenance.json": "73bb927a8f4bf060f9ba406cd55f0579ff6dd408aaa32921ab11da6fe243dc15",
+    "directory-scale-candidate/candidate.cpp": "9937a29cfa343ae38f962aea181a2d45f95d59dd2ebf96b86721239086bbd5e4",
+    "directory-scale-candidate/candidate.patch": "122e2ca16a99a01e185e5accf42082fdf26ff43b0274dcc256db2ea182cd5633",
+    "directory-scale-candidate/engine-debug-build.json": "8d42093d3671d7fdd68cf838ced5dcf326cf557c70ed8eeb33ffff03c64907e1",
+    "directory-scale-candidate/engine-debug-build.log": "312781f4e3434d9d4d06e24db5899c0decbf66a5dfb6f887877854954e96507e",
+    "directory-scale-candidate/engine-debug-checks.json": "60ccdf00eb1b0b3c6f1c532ff7cb486fa27b26af25fd3a56003130792e192382",
+    "directory-scale-candidate/engine-debug-checks.log": "9c636745ec2fabc215516bce1b40bf4c16a867f10823a99a6106a5429126c2f3",
+    "directory-scale-candidate/engine-debug-checks.xml": "a8aecc8ec42bf9b385176ccf4a4f64e2e8f1d5ea87f416475c8cb9cbcf40fa9e",
+    "directory-scale-candidate/selected.json": "bc94120a1d9a78f1cd35776be0c45ef73b92b41246bc1e9cda9be7e91d70d3ba",
+    "directory-scale-restored/engine-debug-build.json": "df2bc0b6a4ac74a889d1b0493057b38bec3dadab0fb68cf1dad10b9b8a318d18",
+    "directory-scale-restored/engine-debug-build.log": "312781f4e3434d9d4d06e24db5899c0decbf66a5dfb6f887877854954e96507e",
+    "directory-scale-restored/engine-debug-checks.json": "69b2820af5e748da88d67aed1de88449d4f0e2b7ae3ab03267d07e2350c2571d",
+    "directory-scale-restored/engine-debug-checks.log": "2b75782c738d63933069995f150c0fb1abb2d0e28b321b68d15b28ba54780ac7",
+    "directory-scale-restored/engine-debug-checks.xml": "6dc20a694a35f37dbe97b10a28919c9d3584c6de054dcf249c280cec6a6f0aaa",
+    "diagnose_directory_scale.py": "de9ff3e717f8dd67c9192c6f818a403523fba774d8fea785bdcc2e69814b9a0d",
+    "validate_directory_candidate.py": "35632f99341fc3996940ebbc2d92c07b04027d6b6fe034243dd0b56a307d68b9",
+    "restore_directory_baseline.py": "42fad92197a97f1726069780d265f164101d546581c48113835f18f595346917"
+  },
+  "nextTrigger": "Phase-specific asset count and I/O evidence; maintain original time and cache/cancellation budgets"
+}

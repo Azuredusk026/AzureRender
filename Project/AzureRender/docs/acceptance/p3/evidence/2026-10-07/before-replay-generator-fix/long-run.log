@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 284, in <module>
+    else:run(args.package,args.output,args.seconds,args.probe)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 167, in run
+    assert process.poll() is None, 'Player exited before the real-time duration'
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Player exited before the real-time duration

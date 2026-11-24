@@ -1,0 +1,23 @@
+[1791651333057][info][editor][code=0] Opened scene: inspection
+[1791651333386][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791651333719][info][render][code=0] Character texture access: indexed, requested slots=27, stage sampler limit=1048576
+[1791651333737][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791651333739][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791651333760][info][editor][code=0] Asset reload requested; changed files: 0
+[1791651333765][info][render][code=0] Character texture access: indexed, requested slots=27, stage sampler limit=1048576
+[1791651333782][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791651333784][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791651333789][info][editor][code=0] Renderer resources reloaded
+[1791651333900][info][editor][code=0] Opened scene: startup
+[1791651333918][info][editor][code=0] Opened scene: startup
+[1791651333940][info][editor][code=0] Opened scene: startup
+[1791651333941][info][editor][code=0] ERROR [document.close]: Operation requires an idle edit session
+[1791651333948][info][editor][code=0] Opened scene: startup
+[1791651333955][info][editor][code=0] Asset reload requested; changed files: 0
+[1791651333960][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=1048576
+[1791651333978][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791651333979][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791651333986][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=1048576
+[1791651334004][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791651334006][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791651334011][info][editor][code=0] Renderer resources reloaded

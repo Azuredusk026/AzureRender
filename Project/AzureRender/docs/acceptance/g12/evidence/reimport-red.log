@@ -1,0 +1,17 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 184: AzureEditor.ContentEditingWorkflow
+1/1 Test #184: AzureEditor.ContentEditingWorkflow ...***Failed    0.18 sec
+[1791569043465][info][editor][code=0] Opened scene: startup
+[1791569043525][info][editor][code=0] Opened scene: startup
+[1791569043548][info][editor][code=0] Opened scene: startup
+[1791569043556][info][editor][code=0] ERROR [asset.reimport]: Unknown operation: asset.reimport
+Reimport must return a cancellable asynchronous task
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.19 sec
+
+The following tests FAILED:
+	184 - AzureEditor.ContentEditingWorkflow (Failed)

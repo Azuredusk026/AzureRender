@@ -1,0 +1,81 @@
+#pragma once
+#include "editor/EditorRenderResourceState.hpp"
+#include <stdexcept>
+
+inline void checkEditorRenderResourceState() {
+    using namespace azurerender;
+    const auto require=[](bool value,const char* message){
+        if(!value)throw std::runtime_error(message);
+    };
+    SceneDocument scene;
+    scene.resources.push_back({"mesh-a","mesh","models/a.glb"});
+    SceneNode node;node.id="actor";node.resourceId="mesh-a";
+    node.resolvedMaterials["body"]={"materials/body.azmaterial","body-v1",{}};
+    scene.nodes.push_back(node);
+    EditorRenderResourceState state;
+    require(state.needsReload(scene),"An unloaded renderer needs scene resources");
+    state.load(scene,[]{});
+    require(!state.needsReload(scene),"First synchronization after a successful load must be idle");
+    auto organization=scene;
+    SceneNode parent;
+    parent.id="group";
+    organization.nodes.push_back(parent);
+    organization.nodes.front().parentId=parent.id;
+    organization.lights.push_back({"light","group"});
+    require(!state.needsReload(organization),
+        "A resource-free parent and a light must use the per-frame scene path");
+    SceneNode camera;
+    camera.id="camera";
+    organization.nodes.push_back(camera);
+    require(!state.needsReload(organization),"Adding a camera must leave render resources loaded");
+    organization.nodes.back().objectShadow=ecs::ObjectShadowComponent{};
+    organization.nodes.back().objectShadow->enabled=true;
+    require(state.needsReload(organization),
+        "A declared object shadow feature can change the renderer's resource requirements");
+    auto imported=scene;
+    imported.resources.push_back({"mesh-b","mesh","models/b.glb"});
+    require(!state.needsReload(imported),"Importing an unplaced model must leave the renderer idle");
+    require(EditorRenderResourceState::describe(imported).resources.size()==1,
+        "The renderer must receive only placed models while editing");
+    auto placed=imported;
+    auto instance=node;instance.id="second-actor";instance.resourceId="mesh-b";
+    placed.nodes.push_back(instance);
+    require(state.needsReload(placed),"First placement of the imported mesh must request a reload");
+    const auto description=EditorRenderResourceState::describe(placed);
+    require(description.resources.size()==2&&description.resources[1].id=="mesh-b",
+        "The placed mesh must reach the renderer in document resource order");
+    auto changed=scene;changed.resources[0].path="models/b.glb";
+    require(state.needsReload(changed),"A changed mesh path must request a reload");
+    changed=scene;changed.nodes[0].resourceId="mesh-b";
+    require(state.needsReload(changed),"A changed node resource binding must request a reload");
+    changed=scene;changed.nodes[0].resolvedMaterials["body"].path="materials/other.azmaterial";
+    require(state.needsReload(changed),"A changed material path must request a reload");
+    changed=scene;changed.nodes[0].resolvedMaterials["body"].fingerprint="body-v2";
+    require(state.needsReload(changed),"Changed material content must request a reload");
+    bool loadFailed=false;
+    try{state.load(changed,[]{throw std::runtime_error("load failed");});}
+    catch(const std::runtime_error&){loadFailed=true;}
+    require(loadFailed,"A failed resource load must propagate its diagnostic");
+    require(state.needsReload(changed),"A failed load must retain the pending material change");
+    require(!state.needsReload(scene),"A failed load must preserve the last successful baseline");
+    state.load(changed,[]{});
+    require(!state.needsReload(changed),"A successful retry must publish its loaded snapshot");
+    changed=scene;changed.nodes[0].translation[0]=5;changed.nodes[0].visible=false;
+    state.load(scene,[]{});
+    require(!state.needsReload(changed),"Instance transforms and visibility use the per-frame scene path");
+    SceneDocument empty;empty.renderSettings.sceneType=SceneType::Blackhole;
+    state.load(empty,[]{});
+    require(!state.needsReload(empty),"A second renderer without mesh resources has a valid baseline");
+    empty.renderSettings.sceneType=SceneType::Sample;
+    require(state.needsReload(empty),"Changing the renderer type must request a reload");
+    auto duringLoad=scene;
+    state.load(duringLoad,[&]{duringLoad.resources[0].path="models/newer.glb";});
+    require(state.needsReload(duringLoad),"The baseline must describe the submitted load snapshot");
+    require(!state.needsReload(scene),"Later edits must not be published by an earlier load");
+    auto first=scene,second=scene;
+    first.resources[0].id="mesh-a";first.resources[0].path="bc";
+    second.resources[0].id="mesh-ab";second.resources[0].path="c";
+    second.nodes[0].resourceId="mesh-ab";
+    state.load(first,[]{});
+    require(state.needsReload(second),"Resource field boundaries must not alias in the signature");
+}

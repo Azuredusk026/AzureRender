@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "id": "door",
+  "resources": [
+    {
+      "id": "mesh",
+      "asset": "assets:/cube.gltf"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "body",
+      "resourceId": "mesh",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              1.5,
+              -290
+            ],
+            "scale": [
+              2.5,
+              1.5,
+              0.2
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.door": {
+          "type": "azure.door",
+          "version": 1,
+          "data": {}
+        },
+        "azure.interactable": {
+          "type": "azure.interactable",
+          "version": 1,
+          "data": {
+            "prompt": "Open gate [E]",
+            "range": 3.5,
+            "offset": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/door.lua"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+Thread 24408 priorSuspend=0
+  7ff99a631ce4 win32u+1ce4 NtUserShowWindow+14
+  7ff9780f4771 libffi-8+4771 ffi_prep_go_closure+71
+  7ff9780f4493 libffi-8+4493 ffi_call_go+1c3
+  7ff9780f42c2 libffi-8+42c2 ffi_call+12
+  7ff964463c05 _ctypes+3c05
+  7ff964462aca _ctypes+2aca
+  7ff9644626c8 _ctypes+26c8
+  7ff8ec9c83de python311+483de PyObject_MakeTpCall+37e
+  7ff8ec9cbddf python311+4bddf PyObject_Vectorcall+28f
+  7ff8ec9cd423 python311+4d423 PyEval_EvalFrameDefault+803
+  7ff8ec9a7feb python311+27feb PyType_CalculateMetaclass+fb
+  7ff8eca72533 python311+f2533 PyEval_EvalCode+97
+  7ff8eca727ca python311+f27ca PyEval_EvalCode+32e
+  7ff8eca72746 python311+f2746 PyEval_EvalCode+2aa
+  7ff8ecb6ed26 python311+1eed26 PyThread_tss_is_created+550ae
+  7ff8ecadf0c9 python311+15f0c9 PyRun_SimpleFileObject+11d
+  7ff8ecadee38 python311+15ee38 PyRun_AnyFileObject+54
+  7ff8ecadea87 python311+15ea87 PyDict_Values+cd7
+  7ff8ecade943 python311+15e943 PyDict_Values+b93
+  7ff8ec99a4ec python311+1a4ec Py_RunMain+184
+  7ff8ec99a37d python311+1a37d Py_RunMain+15
+  7ff8ec99880d python311+1880d Py_Main+25
+  7ff6c29c1230 python+1230
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 2856 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 29940 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 21640 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 27604 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 27612 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 26016 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 31400 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 23728 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 684 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 26716 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 11176 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 31328 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 26460 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 23764 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 8684 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 33672 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 31180 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 24960 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 33176 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 19000 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 6228 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 16472 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 9848 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e95f5833 libscipy_openblas64_-4bb64bb73b+255833 scipy_openblas_set_threads_callback_function64_+233
+Thread 6632 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff8eca35162 python311+b5162 PyTime_GetPerfCounter+d6
+  7ff8eca36cbb python311+b6cbb PyThread_acquire_lock_timed+173
+  7ff8eca36b9e python311+b6b9e PyThread_acquire_lock_timed+56
+  7ff8eca36748 python311+b6748 PyThread_release_lock+15c
+  7ff8eca3666d python311+b666d PyThread_release_lock+81
+  7ff8ec9af8fe python311+2f8fe Py_HashDouble+11f2
+  7ff8ec9cc13b python311+4c13b PyObject_Vectorcall+5eb
+  7ff8ec9cd423 python311+4d423 PyEval_EvalFrameDefault+803
+  7ff8ec9cae64 python311+4ae64 PyFunction_Vectorcall+1a4
+  7ff8eca15c7f python311+95c7f PyIter_Send+1ebb
+  7ff8eca74cf3 python311+f4cf3 PyObject_CallObject+407
+  7ff8ec9d1f7f python311+51f7f PyEval_EvalFrameDefault+535f
+  7ff8ec9cae64 python311+4ae64 PyFunction_Vectorcall+1a4
+  7ff8eca15c7f python311+95c7f PyIter_Send+1ebb
+  7ff8eca75073 python311+f5073 PyObject_Call+5b
+  7ff8eca32aa0 python311+b2aa0 PyInterpreterState_Delete+3b4
+  7ff8eca32a06 python311+b2a06 PyInterpreterState_Delete+31a
+  7ff99a6637b0 ucrtbase+37b0 wcsrchr+150
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 11224 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff8eca35162 python311+b5162 PyTime_GetPerfCounter+d6
+  7ff8eca36c2c python311+b6c2c PyThread_acquire_lock_timed+e4
+  7ff8eca36b9e python311+b6b9e PyThread_acquire_lock_timed+56
+  7ff978752202 _queue+2202 PyInit__queue+10c2
+  7ff9787520cc _queue+20cc PyInit__queue+f8c
+  7ff8eca4e688 python311+ce688 PyDict_New+2b4
+  7ff8ec9cc13b python311+4c13b PyObject_Vectorcall+5eb
+  7ff8ec9cd423 python311+4d423 PyEval_EvalFrameDefault+803
+  7ff8ec9cae64 python311+4ae64 PyFunction_Vectorcall+1a4
+  7ff8eca74cf3 python311+f4cf3 PyObject_CallObject+407
+  7ff8ec9d1f7f python311+51f7f PyEval_EvalFrameDefault+535f
+  7ff8ec9cae64 python311+4ae64 PyFunction_Vectorcall+1a4
+  7ff8eca15c7f python311+95c7f PyIter_Send+1ebb
+  7ff8eca75073 python311+f5073 PyObject_Call+5b
+  7ff8eca32aa0 python311+b2aa0 PyInterpreterState_Delete+3b4
+  7ff8eca32a06 python311+b2a06 PyInterpreterState_Delete+31a
+  7ff99a6637b0 ucrtbase+37b0 wcsrchr+150
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c

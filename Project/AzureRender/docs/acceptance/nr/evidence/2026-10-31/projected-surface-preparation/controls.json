@@ -1,0 +1,25 @@
+{
+  "shaderSha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+  "executableSha256": "5cea86c2508427db5853ea16536fb501d19d8f4ae36ab22c149f41d7017cbf74",
+  "sourceRun": "build\\runs\\20261031-083234-projected-camera-gpu-cb6471",
+  "panels": [
+    {
+      "mode": "positive",
+      "colorSha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "footprintSha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+    },
+    {
+      "mode": "wrong-convention",
+      "colorSha256": "193fc010073f8de38818a717d5f1e56f13f38171b71493184ae24657a1a560d8",
+      "footprintSha256": "5366fb3507d0c69da9c9ab995c9b5cbda6cbee88554490fbe4e4d858881b0ae3"
+    },
+    {
+      "mode": "wrong-motion",
+      "colorSha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281",
+      "footprintSha256": "c8d91b8740ca5c4df87e2df3427f89aa3a9e1b02bda35756cf1e9d58a0cbddd6"
+    }
+  ],
+  "figureSha256": "59bedb71009d5672e19e947377abbea793995ca6829a2256ff6846013a4495a0",
+  "preparationSha256": "7df185c8630c180a7d8d4bd8ace2a15572dc07e13e401140df595335d666e4da",
+  "renderer": "../projected-camera-adapter/render_controls.py"
+}

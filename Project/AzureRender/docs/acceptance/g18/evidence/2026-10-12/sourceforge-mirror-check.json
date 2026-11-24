@@ -1,0 +1,17 @@
+[
+  {
+    "url": "https://downloads.sourceforge.net/project/polyclipping/clipper_ver6.4.2.zip",
+    "verified": false,
+    "error": "<urlopen error _ssl.c:989: The handshake operation timed out>"
+  },
+  {
+    "url": "https://phoenixnap.dl.sourceforge.net/project/polyclipping/clipper_ver6.4.2.zip",
+    "verified": false,
+    "error": "<urlopen error _ssl.c:989: The handshake operation timed out>"
+  },
+  {
+    "url": "https://netix.dl.sourceforge.net/project/polyclipping/clipper_ver6.4.2.zip",
+    "verified": false,
+    "error": "<urlopen error _ssl.c:989: The handshake operation timed out>"
+  }
+]

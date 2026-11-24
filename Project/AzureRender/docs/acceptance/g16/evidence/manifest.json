@@ -1,0 +1,136 @@
+{
+  "stage": "G16",
+  "nonGpuTests": 154,
+  "affectedGpuTests": 4,
+  "physicalInput": "pending P5",
+  "files": [
+    {
+      "file": ".gitattributes",
+      "sha256": "2c1a2bde4ba997282efe8927796ceb6c271363d8c4cc9e0809bc0a519fc47a5b"
+    },
+    {
+      "file": "capture_manifest.json",
+      "sha256": "2cc012cfff422bdf18107b1b40aa608ecb118ee05688497e1d75624d2aee4d7d"
+    },
+    {
+      "file": "g16-build-final.log",
+      "sha256": "5ae7c6a4a468530686af0c5b2f3bce7d138284281cdcd957fda13cbed342bd15"
+    },
+    {
+      "file": "g16-carry-green.log",
+      "sha256": "670daa5b2f328acd535888cbaa92a045ffc98914edd2643242ee3dc8f396c891"
+    },
+    {
+      "file": "g16-carry-red.log",
+      "sha256": "505269d3780facb0305d044d16e1b1a1fd803fa5fda33971264680b68f77bad6"
+    },
+    {
+      "file": "g16-content-version-green.log",
+      "sha256": "5f7530487d003b8261be05c58429d9805b803ea5fd75fbefd12a191f7d8135f2"
+    },
+    {
+      "file": "g16-content-version-red.log",
+      "sha256": "bd91ab7af2362d7d7f0d1018abc4496049921443ed89a1dc7053cfc681d407af"
+    },
+    {
+      "file": "g16-cpu-final.log",
+      "sha256": "2329effad39503734de09444d8bd3a44fe05d5411d8d7b7c23a044383d7af5e1"
+    },
+    {
+      "file": "g16-gpu-final.log",
+      "sha256": "5b0076f97c30e049f743b7553a77135ef5d1d86adf5e027dd11972f024c8de6a"
+    },
+    {
+      "file": "g16-island-green.log",
+      "sha256": "5f7530487d003b8261be05c58429d9805b803ea5fd75fbefd12a191f7d8135f2"
+    },
+    {
+      "file": "g16-island-red.log",
+      "sha256": "e8c5045b99cdf76309edbbec693516b21fe6fb14d19d173808beb09c85960bd8"
+    },
+    {
+      "file": "g16-movement.json",
+      "sha256": "1cdc892d81c29a4939a542e6641bc1676af4e5c996aa03e7cec1dead92281294"
+    },
+    {
+      "file": "g16-query-red.log",
+      "sha256": "1e5b9923a23ea8520aa0991ee7cfd76785f3bedd97be8b3eea830eda19de4e88"
+    },
+    {
+      "file": "g16-visual-final.log",
+      "sha256": "10165adbc21779b8f4e62213ddab3efcd98a84403ec08b0340071b4e1fe92517"
+    },
+    {
+      "file": "gpu_capabilities.json",
+      "sha256": "8891b4401836d2ab6424d40ddfd94e47cbf8c737bde20d36944397e8905dd7b9"
+    },
+    {
+      "file": "platformer-course.png",
+      "sha256": "f34e6851e01b2963aa9fa4a5f6abee958a3a5a10df6c3f8d20b32c4d949c9429"
+    },
+    {
+      "file": "platformer-flow.json",
+      "sha256": "4a2882c81b62358de0621109f5c4a924937b96e3a889d8327acc489940cabdf8"
+    },
+    {
+      "file": "platformer-gpu-summary.json",
+      "sha256": "774ce66b8c3b649fc5b1bd3e6a3a59bef36215683a63c94a9da834a51e404d1d"
+    },
+    {
+      "file": "platformer-input.json",
+      "sha256": "c584b22e26201a9b845e02ac0d664772d1169cdf663f2d68abdb9fb989206573"
+    },
+    {
+      "file": "platformer-phase4.json",
+      "sha256": "d0f7c7f112392e1fdb68af6dc83395f0a6e92f73611ccce9db7c2c266436f3bb"
+    },
+    {
+      "file": "platformer-phase9.json",
+      "sha256": "98baa048d0314a75587afaa6965690290cceccc435e5b0afa8fb5317cd460caa"
+    },
+    {
+      "file": "platformer-runtime.json.gz",
+      "sha256": "01db6467f37709de62fff34a8a04c2cde2f4fbab1d6f6638f8da1d8f00d1cab1"
+    },
+    {
+      "file": "platformer-stderr.log",
+      "sha256": "fda31cf1b5eb03d55bf3e47b7c39a9abce523e8a61f17c7563ca82de3552a18c"
+    },
+    {
+      "file": "platformer-stdout.log",
+      "sha256": "dcb8ce6691b58af908c70c578fdec99959bc7c7f0529f25f1ce9cac571542fcf"
+    },
+    {
+      "file": "platformer-summary.json",
+      "sha256": "4a2882c81b62358de0621109f5c4a924937b96e3a889d8327acc489940cabdf8"
+    },
+    {
+      "file": "sequence-input.json",
+      "sha256": "8b2465d2e4605038df7771d898020648893278a7dac3bcb70e8cc425004270ad"
+    },
+    {
+      "file": "sequence-runtime.json.gz",
+      "sha256": "1df14157d727a12c0b8d90d2b8c8d845e991b7b304e588c16a94bae89b827de5"
+    },
+    {
+      "file": "sequence-sequence-summary.json",
+      "sha256": "c40e6f916558e4ec9d59eb0bc4425f8712bec7c4a45738e58a02736f37975a62"
+    },
+    {
+      "file": "sequence-stderr.log",
+      "sha256": "1c1bf74d2fadab4d4bab7bf40f8f6d7a4633115b1d2cf3426942bbc02e3a3c8d"
+    },
+    {
+      "file": "sequence-stdout.log",
+      "sha256": "9f2a0e4f5acbf41215c7fdccc3916f7678d3365f156075ac5e374b6ecd3c9bc9"
+    },
+    {
+      "file": "sequence-summary.json",
+      "sha256": "4a2882c81b62358de0621109f5c4a924937b96e3a889d8327acc489940cabdf8"
+    },
+    {
+      "file": "source-products.json",
+      "sha256": "8efda333120a5882215dad9bba51fd34de67b9deb4e025100b6e520eccdfda47"
+    }
+  ]
+}

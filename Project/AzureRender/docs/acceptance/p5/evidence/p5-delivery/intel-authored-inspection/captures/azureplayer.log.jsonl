@@ -1,0 +1,12 @@
+{"timestamp_ms":1791609612623,"level":"print","subsystem":"input","code":0,"message":"Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot"}
+{"timestamp_ms":1791609612623,"level":"print","subsystem":"gpu","code":0,"message":"Validation layer: disabled"}
+{"timestamp_ms":1791609612736,"level":"print","subsystem":"gpu","code":0,"message":"Selected GPU: Intel(R) RaptorLake-S Mobile Graphics Controller"}
+{"timestamp_ms":1791609612737,"level":"print","subsystem":"gpu","code":0,"message":"HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)"}
+{"timestamp_ms":1791609612737,"level":"print","subsystem":"gpu","code":0,"message":"GPU timing: enabled, timestamp period 52.083332 ns, 36 valid bits"}
+{"timestamp_ms":1791609612748,"level":"info","subsystem":"gpu","code":0,"message":"GPU capability report: captures\\gpu_capabilities.json"}
+{"timestamp_ms":1791609612858,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791609612858,"level":"print","subsystem":"render","code":0,"message":"Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off"}
+{"timestamp_ms":1791609613086,"level":"print","subsystem":"gpu","code":0,"message":"GPU timing samples: 30   Shadow: 0.375 ms (7.730%)   Main scene: 0.061 ms (1.249%)   Internal outline: 4.419 ms (91.021%)   Total render: 4.855 ms avg, 3.860 ms min, 7.752 ms max   Percentiles: p50 4.425 ms, p95 7.318 ms, p99 7.671 ms   Submission per frame: 0.000 draws, 0.000 descriptor binds   CPU recording: 0.373 ms per frame, worker passes: 0"}
+{"timestamp_ms":1791609613087,"level":"print","subsystem":"gpu","code":0,"message":"GPU timing report: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-delivery\\intel-authored-inspection\\timing.json"}
+{"timestamp_ms":1791609613152,"level":"print","subsystem":"render","code":0,"message":"Rendered frames: 30"}
+{"timestamp_ms":1791609613163,"level":"print","subsystem":"render","code":0,"message":"Allocator after unload: buffers=0 images=0"}

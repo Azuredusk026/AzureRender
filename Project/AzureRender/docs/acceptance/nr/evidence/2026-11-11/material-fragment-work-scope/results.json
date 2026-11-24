@@ -1,0 +1,1444 @@
+{
+  "status": "actual-material-fragment-scope",
+  "sourceBase": "f3071a4",
+  "captureSourceBase": "73300ab",
+  "captureSha256": "35077c571bcb70bc99688bfb97eec1b291bd6567df7482746fd3f5db49f339b3",
+  "totalEvents": 3453,
+  "materialPipelines": 34,
+  "programs": {
+    "mesh_object_bindless_clipmap_field_early.frag.spv": {
+      "sha256": "7e2a55c935cd66a49d8b8c5e20fb81c40e8676fd3597dd7dca6c4a4dcaf846bb",
+      "earlyFragmentTests": true,
+      "defines": [
+        "AZURE_ORDINARY_EARLY_DEPTH=1",
+        "AZURE_PROBE_FIELD=1",
+        "AZURE_IRRADIANCE_CLIPMAP=1",
+        "AZURE_OBJECT_SHADOW=1",
+        "AZURE_BINDLESS=1"
+      ]
+    },
+    "character_snapshot_object_bindless_clipmap_field_early.frag.spv": {
+      "sha256": "2ec5707eaab465ad75bbd0a1585c56b659625cc3d99710a6ba11fafdbbf6b48e",
+      "earlyFragmentTests": true,
+      "defines": [
+        "AZURE_ORDINARY_EARLY_DEPTH=1",
+        "AZURE_PROBE_FIELD=1",
+        "AZURE_IRRADIANCE_CLIPMAP=1",
+        "AZURE_OBJECT_SHADOW=1",
+        "AZURE_BINDLESS=1",
+        "AZURE_OPAQUE_SNAPSHOT=1"
+      ]
+    },
+    "mesh_object_bindless_clipmap_field.frag.spv": {
+      "sha256": "b2362f801369b6a356bb74e00abdacfb6d72bc5f0069c1c6ab5a5bc7f4c18ce0",
+      "earlyFragmentTests": false,
+      "defines": [
+        "AZURE_PROBE_FIELD=1",
+        "AZURE_IRRADIANCE_CLIPMAP=1",
+        "AZURE_OBJECT_SHADOW=1",
+        "AZURE_BINDLESS=1"
+      ]
+    },
+    "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv": {
+      "sha256": "33ea4f7370255dd98ff662931f4c373b4112d5881e0193917a4c7917c38a1607",
+      "earlyFragmentTests": true,
+      "defines": [
+        "AZURE_EXTENDED_MATERIAL_LIGHTING=1",
+        "AZURE_ORDINARY_EARLY_DEPTH=1",
+        "AZURE_PROBE_FIELD=1",
+        "AZURE_IRRADIANCE_CLIPMAP=1",
+        "AZURE_OBJECT_SHADOW=1",
+        "AZURE_BINDLESS=1",
+        "AZURE_OPAQUE_SNAPSHOT=1"
+      ]
+    },
+    "mesh_object_bindless_clipmap_field_lighting.frag.spv": {
+      "sha256": "6da0ac0d7af32723e8fcb5277023738ee07784f61da2c59882a2ed1aa8edebb5",
+      "earlyFragmentTests": false,
+      "defines": [
+        "AZURE_EXTENDED_MATERIAL_LIGHTING=1",
+        "AZURE_PROBE_FIELD=1",
+        "AZURE_IRRADIANCE_CLIPMAP=1",
+        "AZURE_OBJECT_SHADOW=1",
+        "AZURE_BINDLESS=1"
+      ]
+    },
+    "mesh_object_bindless_clipmap_field_early_lighting.frag.spv": {
+      "sha256": "afabab1a34665cafcdfca9c51955b5e79798313a174e1169c99c32d8679a2575",
+      "earlyFragmentTests": true,
+      "defines": [
+        "AZURE_EXTENDED_MATERIAL_LIGHTING=1",
+        "AZURE_ORDINARY_EARLY_DEPTH=1",
+        "AZURE_PROBE_FIELD=1",
+        "AZURE_IRRADIANCE_CLIPMAP=1",
+        "AZURE_OBJECT_SHADOW=1",
+        "AZURE_BINDLESS=1"
+      ]
+    },
+    "character_snapshot_object_bindless_clipmap_field.frag.spv": {
+      "sha256": "6e8776dd2437b2085265fd10d2a4dd0ef9bf59cd767167b968729d40751368ba",
+      "earlyFragmentTests": false,
+      "defines": [
+        "AZURE_PROBE_FIELD=1",
+        "AZURE_IRRADIANCE_CLIPMAP=1",
+        "AZURE_OBJECT_SHADOW=1",
+        "AZURE_BINDLESS=1",
+        "AZURE_OPAQUE_SNAPSHOT=1"
+      ]
+    },
+    "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv": {
+      "sha256": "ac517591c6330279970f66337660ddd23159db9ccab417824f62248b13169349",
+      "earlyFragmentTests": false,
+      "defines": [
+        "AZURE_INDEPENDENT_COVERAGE=1",
+        "AZURE_EXTENDED_MATERIAL_LIGHTING=1",
+        "AZURE_PROBE_FIELD=1",
+        "AZURE_IRRADIANCE_CLIPMAP=1",
+        "AZURE_OBJECT_SHADOW=1",
+        "AZURE_BINDLESS=1"
+      ]
+    },
+    "mesh_object_bindless_clipmap_field_coverage.frag.spv": {
+      "sha256": "f4fd5ca539191a240ee496fb7371a5f1fa969e84ffe49f2aa64f8c08156a6947",
+      "earlyFragmentTests": false,
+      "defines": [
+        "AZURE_INDEPENDENT_COVERAGE=1",
+        "AZURE_PROBE_FIELD=1",
+        "AZURE_IRRADIANCE_CLIPMAP=1",
+        "AZURE_OBJECT_SHADOW=1",
+        "AZURE_BINDLESS=1"
+      ]
+    },
+    "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv": {
+      "sha256": "e29893e7252afe79d87b2a3c1f763919ae200565c3a4497959ff556216e31014",
+      "earlyFragmentTests": false,
+      "defines": [
+        "AZURE_INDEPENDENT_COVERAGE=1",
+        "AZURE_PROBE_FIELD=1",
+        "AZURE_IRRADIANCE_CLIPMAP=1",
+        "AZURE_OBJECT_SHADOW=1",
+        "AZURE_BINDLESS=1",
+        "AZURE_OPAQUE_SNAPSHOT=1"
+      ]
+    }
+  },
+  "groups": [
+    {
+      "pipeline": "ResourceId::10368",
+      "program": "mesh_object_bindless_clipmap_field_early.frag.spv",
+      "events": 435,
+      "milliseconds": 3.5424319999999994,
+      "psInvocations": 863113,
+      "samplesPassed": 863113,
+      "ordinary": true,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 1
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10372",
+      "program": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+      "events": 218,
+      "milliseconds": 1.7203199999999925,
+      "psInvocations": 863775,
+      "samplesPassed": 863775,
+      "ordinary": true,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 1
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10378",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "events": 54,
+      "milliseconds": 0.8299200000000002,
+      "psInvocations": 83453,
+      "samplesPassed": 20955,
+      "ordinary": false,
+      "fixedClass": 0,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1073741823
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 40
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 0
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10633",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "events": 29,
+      "milliseconds": 0.5120000000000002,
+      "psInvocations": 351491,
+      "samplesPassed": 351491,
+      "ordinary": false,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10515",
+      "program": "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv",
+      "events": 4,
+      "milliseconds": 0.49971199999999993,
+      "psInvocations": 20560,
+      "samplesPassed": 20560,
+      "ordinary": false,
+      "fixedClass": 4,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1038069751
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 532481
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10471",
+      "program": "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+      "events": 2,
+      "milliseconds": 0.482304,
+      "psInvocations": 15838,
+      "samplesPassed": 1931,
+      "ordinary": false,
+      "fixedClass": 4,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1038069751
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 532481
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10507",
+      "program": "mesh_object_bindless_clipmap_field_early_lighting.frag.spv",
+      "events": 4,
+      "milliseconds": 0.467968,
+      "psInvocations": 19459,
+      "samplesPassed": 19459,
+      "ordinary": false,
+      "fixedClass": 4,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1038069751
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 532481
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10380",
+      "program": "character_snapshot_object_bindless_clipmap_field.frag.spv",
+      "events": 30,
+      "milliseconds": 0.26624,
+      "psInvocations": 83494,
+      "samplesPassed": 20986,
+      "ordinary": false,
+      "fixedClass": 0,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1073741823
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 40
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 0
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10599",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "events": 1,
+      "milliseconds": 0.238592,
+      "psInvocations": 3252,
+      "samplesPassed": 23,
+      "ordinary": false,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10602",
+      "program": "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+      "events": 1,
+      "milliseconds": 0.237568,
+      "psInvocations": 3686,
+      "samplesPassed": 23,
+      "ordinary": false,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10464",
+      "program": "mesh_object_bindless_clipmap_field_early.frag.spv",
+      "events": 17,
+      "milliseconds": 0.23532799999999995,
+      "psInvocations": 2572,
+      "samplesPassed": 2572,
+      "ordinary": false,
+      "fixedClass": 3,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1036967927
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 3
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 3
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10473",
+      "program": "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv",
+      "events": 1,
+      "milliseconds": 0.19968000000000002,
+      "psInvocations": 4177,
+      "samplesPassed": 495,
+      "ordinary": false,
+      "fixedClass": 4,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1038069751
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 532481
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10439",
+      "program": "mesh_object_bindless_clipmap_field_coverage.frag.spv",
+      "events": 1,
+      "milliseconds": 0.169984,
+      "psInvocations": 4309,
+      "samplesPassed": 2342,
+      "ordinary": false,
+      "fixedClass": 3,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1036967927
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 3
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 3
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10443",
+      "program": "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv",
+      "events": 1,
+      "milliseconds": 0.159744,
+      "psInvocations": 4306,
+      "samplesPassed": 2384,
+      "ordinary": false,
+      "fixedClass": 3,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1036967927
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 3
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 3
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10388",
+      "program": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+      "events": 2,
+      "milliseconds": 0.05632,
+      "psInvocations": 1812,
+      "samplesPassed": 1812,
+      "ordinary": false,
+      "fixedClass": 1,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1073725439
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 2633729
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 1
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10352",
+      "program": "mesh_object_bindless_clipmap_field_early.frag.spv",
+      "events": 72,
+      "milliseconds": 0.05529599999999996,
+      "psInvocations": 28283,
+      "samplesPassed": 28283,
+      "ordinary": true,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 1
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10384",
+      "program": "mesh_object_bindless_clipmap_field_early.frag.spv",
+      "events": 2,
+      "milliseconds": 0.053248,
+      "psInvocations": 1727,
+      "samplesPassed": 1727,
+      "ordinary": false,
+      "fixedClass": 1,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1073725439
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 2633729
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 1
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10624",
+      "program": "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+      "events": 1,
+      "milliseconds": 0.043008,
+      "psInvocations": 144,
+      "samplesPassed": 144,
+      "ordinary": false,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10356",
+      "program": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+      "events": 72,
+      "milliseconds": 0.04300799999999998,
+      "psInvocations": 28342,
+      "samplesPassed": 28342,
+      "ordinary": true,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 1
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10468",
+      "program": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+      "events": 7,
+      "milliseconds": 0.024576000000000004,
+      "psInvocations": 2582,
+      "samplesPassed": 2582,
+      "ordinary": false,
+      "fixedClass": 3,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1036967927
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 3
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 3
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10681",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "events": 7,
+      "milliseconds": 0.018432,
+      "psInvocations": 62133,
+      "samplesPassed": 62133,
+      "ordinary": false,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10807",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "events": 2,
+      "milliseconds": 0.018432,
+      "psInvocations": 17,
+      "samplesPassed": 17,
+      "ordinary": false,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10406",
+      "program": "mesh_object_bindless_clipmap_field_early_lighting.frag.spv",
+      "events": 1,
+      "milliseconds": 0.011264,
+      "psInvocations": 649,
+      "samplesPassed": 649,
+      "ordinary": false,
+      "fixedClass": 2,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1073741823
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 2643973
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 2
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10350",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "events": 13,
+      "milliseconds": 0.010240000000000004,
+      "psInvocations": 0,
+      "samplesPassed": 0,
+      "ordinary": true,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 1
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10364",
+      "program": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+      "events": 1,
+      "milliseconds": 0.01024,
+      "psInvocations": 74,
+      "samplesPassed": 74,
+      "ordinary": true,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 1
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10360",
+      "program": "mesh_object_bindless_clipmap_field_early.frag.spv",
+      "events": 1,
+      "milliseconds": 0.01024,
+      "psInvocations": 61,
+      "samplesPassed": 61,
+      "ordinary": true,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 1
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10418",
+      "program": "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv",
+      "events": 1,
+      "milliseconds": 0.008192000000000001,
+      "psInvocations": 650,
+      "samplesPassed": 650,
+      "ordinary": false,
+      "fixedClass": 2,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1073741823
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 2643973
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 2
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10354",
+      "program": "character_snapshot_object_bindless_clipmap_field.frag.spv",
+      "events": 13,
+      "milliseconds": 0.0071680000000000025,
+      "psInvocations": 0,
+      "samplesPassed": 0,
+      "ordinary": true,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 1
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10570",
+      "program": "character_snapshot_object_bindless_clipmap_field.frag.spv",
+      "events": 4,
+      "milliseconds": 0.004096000000000001,
+      "psInvocations": 26124,
+      "samplesPassed": 26124,
+      "ordinary": false,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10566",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "events": 4,
+      "milliseconds": 0.0030720000000000005,
+      "psInvocations": 25084,
+      "samplesPassed": 25084,
+      "ordinary": false,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10753",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "events": 2,
+      "milliseconds": 0.0020480000000000003,
+      "psInvocations": 19362,
+      "samplesPassed": 19362,
+      "ordinary": false,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10777",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "events": 1,
+      "milliseconds": 0.0010240000000000002,
+      "psInvocations": 800,
+      "samplesPassed": 800,
+      "ordinary": false,
+      "fixedClass": 4294967295,
+      "earlyFragmentTests": false,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 4294967295
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10540",
+      "program": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+      "events": 1,
+      "milliseconds": 0.0,
+      "psInvocations": 8,
+      "samplesPassed": 8,
+      "ordinary": false,
+      "fixedClass": 6,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1073741823
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 2228224
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 6
+        }
+      ]
+    },
+    {
+      "pipeline": "ResourceId::10536",
+      "program": "mesh_object_bindless_clipmap_field_early.frag.spv",
+      "events": 1,
+      "milliseconds": 0.0,
+      "psInvocations": 6,
+      "samplesPassed": 6,
+      "ordinary": false,
+      "fixedClass": 6,
+      "earlyFragmentTests": true,
+      "specialization": [
+        {
+          "name": "azureOrdinaryOpaque",
+          "id": 0,
+          "offset": 0,
+          "valueU32": 0
+        },
+        {
+          "name": "azureFixedMaterialFeatureMask",
+          "id": 2,
+          "offset": 8,
+          "valueU32": 1073741823
+        },
+        {
+          "name": "azureFixedMaterialFeatureValue",
+          "id": 3,
+          "offset": 16,
+          "valueU32": 2228224
+        },
+        {
+          "name": "azureFixedMaterialClass",
+          "id": 1,
+          "offset": 24,
+          "valueU32": 6
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "all-material": {
+      "events": 1006,
+      "milliseconds": 9.941695999999991,
+      "psInvocations": 2521343,
+      "samplesPassed": 2367967,
+      "frameShare": 0.7302836484329629,
+      "psToPassedRatio": 1.0647711729090819,
+      "positiveInvocationDifference": 153376
+    },
+    "early": {
+      "events": 839,
+      "milliseconds": 6.738143999999991,
+      "psInvocations": 1833673,
+      "samplesPassed": 1833673,
+      "frameShare": 0.4949614617049924,
+      "psToPassedRatio": 1.0,
+      "positiveInvocationDifference": 0
+    },
+    "late": {
+      "events": 167,
+      "milliseconds": 3.2035519999999997,
+      "psInvocations": 687670,
+      "samplesPassed": 534294,
+      "frameShare": 0.23532218672797045,
+      "psToPassedRatio": 1.287062927901118,
+      "positiveInvocationDifference": 153376
+    },
+    "ordinary": {
+      "events": 825,
+      "milliseconds": 5.398943999999991,
+      "psInvocations": 1783648,
+      "samplesPassed": 1783648,
+      "frameShare": 0.39658832074580147,
+      "psToPassedRatio": 1.0,
+      "positiveInvocationDifference": 0
+    },
+    "class-specialized": {
+      "events": 129,
+      "milliseconds": 3.46448,
+      "psInvocations": 245602,
+      "samplesPassed": 99118,
+      "frameShare": 0.25448908257937414,
+      "psToPassedRatio": 2.477874856231966,
+      "positiveInvocationDifference": 146484
+    },
+    "dynamic": {
+      "events": 52,
+      "milliseconds": 1.0782720000000003,
+      "psInvocations": 492093,
+      "samplesPassed": 485201,
+      "frameShare": 0.07920624510778732,
+      "psToPassedRatio": 1.0142044224970683,
+      "positiveInvocationDifference": 6892
+    }
+  },
+  "scope": "Existing complete capture timing and generic counters; positive PS-minus-passed difference is descriptive and includes shader/coverage/helper effects, not a proven removable overdraw count",
+  "nativeAdmission": false,
+  "sourceUnchanged": true
+}

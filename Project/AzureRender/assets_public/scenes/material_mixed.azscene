@@ -1,0 +1,37 @@
+AzureRender Scene v1
+schemaVersion 3
+renderSettingsVersion 7
+sceneId "r5-material-mixed"
+resourceCount 2
+resource "hero" "gltf" "third_person/material_fixture.gltf"
+resource "box" "gltf" "test_model.gltf"
+nodeCount 4
+node "hero" "Material fixture" "" "hero"
+visible true
+transform 0 0 0 0 0 0 1 1 1
+prefab "" ""
+node "floor" "Ground" "" "box"
+visible true
+transform 0 -0.1 0 0 0 0 2 0.1 2
+prefab "" ""
+node "wall" "Wall" "" "box"
+visible true
+transform 0 0.56 -0.9 0 0 0 1.1 0.7 0.08
+prefab "" ""
+node "object" "Prop" "" "box"
+visible true
+transform 0.6 0.16 0.15 0 0.3 0 0.16 0.2 0.16
+prefab "" ""
+lightCount 0
+showcasePreset 0
+styleMaskStrength 1
+diffuseBandThreshold 0.4
+shadowMaximumFilterRadiusTexels 8
+innerOutlineEnabled true
+outlineStrength 0.4
+gradeExposureEv 0
+characterBackgroundEnabled true
+characterPlatformEnabled false
+blackholeQuality cinematic
+blackholeCamera front
+sceneRenderer character

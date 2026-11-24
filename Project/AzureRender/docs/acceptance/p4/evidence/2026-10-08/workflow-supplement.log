@@ -1,0 +1,1 @@
+[{"workflow": "exploration", "passed": true, "createDuplicateDeleteUndo": true, "worldLocal": true, "multiParentChild": true, "singleUndo": true, "inputSource": "Dear ImGui production input"}, {"workflow": "inspector", "passed": true, "createDuplicateDeleteUndo": true, "worldLocal": true, "multiParentChild": true, "singleUndo": true, "inputSource": "Dear ImGui production input"}]

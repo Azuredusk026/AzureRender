@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "failure": "E gizmo remained 0 instead of 1",
+  "foregroundMatched": true,
+  "failedImGuiMouse": [
+    2123,
+    397
+  ],
+  "failedGlfwMouse": [
+    472,
+    357
+  ],
+  "rootCause": "Queued cursor enter/leave restored stale ImGui mouse position; GLFW suppressed identical coordinate replay",
+  "correction": "Two distinct native mouse moves before the initial viewport click",
+  "fixedImGuiAndGlfwMouse": [
+    472,
+    357
+  ],
+  "repeatedRuns": 8,
+  "workflowsPerRun": 2,
+  "physicalKeyboardMouse": "NotExecuted",
+  "userOwnedTool": "tools/test_editor_native_input.py",
+  "incrementalPatch": "native-input-replay.patch",
+  "temporaryDiagnosticsRemoved": true,
+  "userOwnedToolSha256": "85bda43ae9bf63eece31c43fe5b52509de1b2c7f05794abfdb16ff6da844262a",
+  "baselineSha256": "2e119298adaf852527aef3d28d9ddeb54440fa034b74b142be05a2e2eb767765",
+  "diagnosticRuns": 5,
+  "finalExecutableRepeatedRuns": 3,
+  "finalFullRegressionAdditionalRuns": 1
+}

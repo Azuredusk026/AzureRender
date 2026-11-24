@@ -1,0 +1,1251 @@
+{
+  "schemaVersion": 2,
+  "policy": {
+    "idleSeconds": 10,
+    "temperatureRange": 4,
+    "maxIdleUtilization": 10,
+    "startHeadroom": 2
+  },
+  "startup": [
+    {
+      "temperature": 46.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 41.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 0.0,
+      "powerDrawWatts": 2.12,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 210.0,
+      "smClockMHz": 210.0,
+      "memoryClockMHz": 405.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 0.1569999999992433
+    },
+    {
+      "temperature": 46.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 41.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 0.0,
+      "powerDrawWatts": 1.85,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 210.0,
+      "smClockMHz": 210.0,
+      "memoryClockMHz": 405.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 5.281999999999243
+    },
+    {
+      "temperature": 46.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 41.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 0.0,
+      "powerDrawWatts": 2.14,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 210.0,
+      "smClockMHz": 210.0,
+      "memoryClockMHz": 405.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 10.421999999998661
+    }
+  ],
+  "observations": [
+    {
+      "temperature": 46.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 41.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 0.0,
+      "powerDrawWatts": 2.12,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 210.0,
+      "smClockMHz": 210.0,
+      "memoryClockMHz": 405.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 0.1569999999992433
+    },
+    {
+      "temperature": 46.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 41.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 0.0,
+      "powerDrawWatts": 1.85,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 210.0,
+      "smClockMHz": 210.0,
+      "memoryClockMHz": 405.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 5.281999999999243
+    },
+    {
+      "temperature": 46.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 41.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 0.0,
+      "powerDrawWatts": 2.14,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 210.0,
+      "smClockMHz": 210.0,
+      "memoryClockMHz": 405.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 10.421999999998661
+    }
+  ],
+  "coverage": "PeriodicDuringRun",
+  "runSeconds": 182.8829753000009,
+  "runObservations": [
+    {
+      "temperature": 46.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 41.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 0.0,
+      "powerDrawWatts": 2.14,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 210.0,
+      "smClockMHz": 210.0,
+      "memoryClockMHz": 405.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 0
+    },
+    {
+      "temperature": 71.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 16.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 60.0,
+      "powerDrawWatts": 59.02,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 2535.0,
+      "smClockMHz": 2535.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 5.34135630000128
+    },
+    {
+      "temperature": 61.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 26.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 22.0,
+      "powerDrawWatts": 37.54,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 2550.0,
+      "smClockMHz": 2550.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 10.494300500000463
+    },
+    {
+      "temperature": 64.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 27.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 23.0,
+      "powerDrawWatts": 36.17,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 2535.0,
+      "smClockMHz": 2535.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 15.711373699999967
+    },
+    {
+      "temperature": 56.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 31.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 32.0,
+      "powerDrawWatts": 19.25,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1590.0,
+      "smClockMHz": 1590.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 20.848317900001348
+    },
+    {
+      "temperature": 56.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 31.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 36.0,
+      "powerDrawWatts": 19.18,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1455.0,
+      "smClockMHz": 1455.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 25.983893300001
+    },
+    {
+      "temperature": 57.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 31.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 38.0,
+      "powerDrawWatts": 19.76,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1455.0,
+      "smClockMHz": 1455.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 31.135549900000115
+    },
+    {
+      "temperature": 61.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 26.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 25.0,
+      "powerDrawWatts": 30.09,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 2325.0,
+      "smClockMHz": 2325.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 36.27923800000099
+    },
+    {
+      "temperature": 57.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 30.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 27.0,
+      "powerDrawWatts": 18.75,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1545.0,
+      "smClockMHz": 1545.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 41.42693959999997
+    },
+    {
+      "temperature": 58.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 30.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 35.0,
+      "powerDrawWatts": 19.24,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1500.0,
+      "smClockMHz": 1500.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 46.56582260000141
+    },
+    {
+      "temperature": 58.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 29.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 36.0,
+      "powerDrawWatts": 19.65,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1455.0,
+      "smClockMHz": 1455.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 51.7156630999998
+    },
+    {
+      "temperature": 64.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 22.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 26.0,
+      "powerDrawWatts": 38.53,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 2550.0,
+      "smClockMHz": 2550.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 56.85983390000001
+    },
+    {
+      "temperature": 59.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 29.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 36.0,
+      "powerDrawWatts": 20.94,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1575.0,
+      "smClockMHz": 1575.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 62.00389260000156
+    },
+    {
+      "temperature": 58.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 29.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 43.0,
+      "powerDrawWatts": 19.24,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1365.0,
+      "smClockMHz": 1365.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 67.14336220000041
+    },
+    {
+      "temperature": 58.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 29.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 36.0,
+      "powerDrawWatts": 19.98,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1455.0,
+      "smClockMHz": 1455.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 72.28599570000006
+    },
+    {
+      "temperature": 64.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 23.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 25.0,
+      "powerDrawWatts": 36.19,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1815.0,
+      "smClockMHz": 1815.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 77.43257919999996
+    },
+    {
+      "temperature": 59.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 28.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 41.0,
+      "powerDrawWatts": 21.4,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1545.0,
+      "smClockMHz": 1545.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 82.56662910000159
+    },
+    {
+      "temperature": 58.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 29.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 31.0,
+      "powerDrawWatts": 19.23,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1455.0,
+      "smClockMHz": 1455.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 87.70850060000157
+    },
+    {
+      "temperature": 58.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 28.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 36.0,
+      "powerDrawWatts": 19.11,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1440.0,
+      "smClockMHz": 1440.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 92.85862869999983
+    },
+    {
+      "temperature": 61.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 26.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 41.0,
+      "powerDrawWatts": 26.15,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1770.0,
+      "smClockMHz": 1770.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 98.02178120000099
+    },
+    {
+      "temperature": 59.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 28.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 33.0,
+      "powerDrawWatts": 20.98,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1575.0,
+      "smClockMHz": 1575.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 103.1838931000002
+    },
+    {
+      "temperature": 59.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 28.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 39.0,
+      "powerDrawWatts": 19.8,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1530.0,
+      "smClockMHz": 1530.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 108.35032980000142
+    },
+    {
+      "temperature": 60.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 27.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 39.0,
+      "powerDrawWatts": 19.41,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1440.0,
+      "smClockMHz": 1440.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 113.50467500000013
+    },
+    {
+      "temperature": 60.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 27.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 41.0,
+      "powerDrawWatts": 21.99,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1470.0,
+      "smClockMHz": 1470.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 118.6561357999999
+    },
+    {
+      "temperature": 61.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 26.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 40.0,
+      "powerDrawWatts": 21.99,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1620.0,
+      "smClockMHz": 1620.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 123.80445780000082
+    },
+    {
+      "temperature": 60.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 27.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 42.0,
+      "powerDrawWatts": 19.48,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1455.0,
+      "smClockMHz": 1455.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 128.9430984999999
+    },
+    {
+      "temperature": 60.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 27.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 39.0,
+      "powerDrawWatts": 21.51,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1545.0,
+      "smClockMHz": 1545.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 134.09002580000015
+    },
+    {
+      "temperature": 60.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 27.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 33.0,
+      "powerDrawWatts": 20.56,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1515.0,
+      "smClockMHz": 1515.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 139.25121690000014
+    },
+    {
+      "temperature": 61.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 26.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 34.0,
+      "powerDrawWatts": 22.21,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1605.0,
+      "smClockMHz": 1605.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 144.41174750000027
+    },
+    {
+      "temperature": 61.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 26.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 40.0,
+      "powerDrawWatts": 20.83,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1515.0,
+      "smClockMHz": 1515.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 149.55009510000127
+    },
+    {
+      "temperature": 60.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 27.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 31.0,
+      "powerDrawWatts": 20.73,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1530.0,
+      "smClockMHz": 1530.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 154.73256589999983
+    },
+    {
+      "temperature": 60.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 27.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 36.0,
+      "powerDrawWatts": 21.37,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1485.0,
+      "smClockMHz": 1485.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 159.87142649999987
+    },
+    {
+      "temperature": 61.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 26.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 35.0,
+      "powerDrawWatts": 21.17,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1560.0,
+      "smClockMHz": 1560.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 165.0278838000013
+    },
+    {
+      "temperature": 61.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 26.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 40.0,
+      "powerDrawWatts": 20.16,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1455.0,
+      "smClockMHz": 1455.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 170.170060800001
+    },
+    {
+      "temperature": 60.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 27.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 35.0,
+      "powerDrawWatts": 19.59,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1545.0,
+      "smClockMHz": 1545.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 175.32392840000102
+    },
+    {
+      "temperature": 61.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 26.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 39.0,
+      "powerDrawWatts": 21.45,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 1365.0,
+      "smClockMHz": 1365.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 180.4780918000015
+    },
+    {
+      "temperature": 61.0,
+      "thermalLimit": null,
+      "thermalLimits": [],
+      "thermalMargin": 27.0,
+      "relativeThermalThreshold": 0.0,
+      "relativeThermalThresholds": [
+        -2.0,
+        0.0
+      ],
+      "targetTemperature": 87.0,
+      "thermalLimitStatus": "RelativeReported",
+      "thermalSlowdown": {
+        "hardware": false,
+        "software": false
+      },
+      "powerCap": "Not Active",
+      "gpuUtilization": 0.0,
+      "powerDrawWatts": 18.78,
+      "powerLimitWatts": 80.0,
+      "graphicsClockMHz": 2325.0,
+      "smClockMHz": 2325.0,
+      "memoryClockMHz": 8001.0,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "driver": "595.79",
+      "deviceId": "00000000:01:00.0",
+      "seconds": 182.8829753000009
+    }
+  ],
+  "monitorErrors": [],
+  "final": {
+    "temperature": 61.0,
+    "thermalLimit": null,
+    "thermalLimits": [],
+    "thermalMargin": 27.0,
+    "relativeThermalThreshold": 0.0,
+    "relativeThermalThresholds": [
+      -2.0,
+      0.0
+    ],
+    "targetTemperature": 87.0,
+    "thermalLimitStatus": "RelativeReported",
+    "thermalSlowdown": {
+      "hardware": false,
+      "software": false
+    },
+    "powerCap": "Not Active",
+    "gpuUtilization": 0.0,
+    "powerDrawWatts": 18.78,
+    "powerLimitWatts": 80.0,
+    "graphicsClockMHz": 2325.0,
+    "smClockMHz": 2325.0,
+    "memoryClockMHz": 8001.0,
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "driver": "595.79",
+    "deviceId": "00000000:01:00.0"
+  },
+  "rawEvidence": "platform-focus-probe-environment.json.gz",
+  "receiptKind": "DerivedWithoutRawDriverXml"
+}

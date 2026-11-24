@@ -1,13 +1,23 @@
 #include "rhi/VulkanRhi.hpp"
+#include "rhi/VulkanSpecialization.hpp"
 
-#include "app/AzureRenderInternal.hpp"
+#include "render/RenderMath.hpp"
 
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <stdexcept>
 #include <vector>
+#include <unordered_set>
+#include <iterator>
 
 namespace azurerender::rhi {
+namespace {
+std::mutex& pipelineInspectionMutex() {
+    static std::mutex mutex;
+    return mutex;
+}
+}
 
 using azurerender::internal::vkCheck;
 
@@ -66,7 +76,7 @@ void VulkanRhi::transitionImageLayout(
         barrier.image = image.image;
         barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
         barrier.subresourceRange.levelCount = mipLevels;
-        barrier.subresourceRange.layerCount = 1;
+        barrier.subresourceRange.layerCount = image.arrayLayers;
 
         VkPipelineStageFlags sourceStage = 0;
         VkPipelineStageFlags destinationStage = 0;
@@ -81,7 +91,7 @@ void VulkanRhi::transitionImageLayout(
             barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
             barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
             sourceStage = VK_PIPELINE_STAGE_TRANSFER_BIT;
-            destinationStage = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+            destinationStage = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT;
         } else {
             throw std::runtime_error("Unsupported image layout transition");
         }
@@ -100,23 +110,48 @@ void VulkanRhi::transitionImageLayout(
     });
 }
 
+bool VulkanRhi::supportsSampledImage(VkFormat format,bool linearFilter) const {
+    VkFormatProperties properties{};vkGetPhysicalDeviceFormatProperties(physicalDevice_,format,&properties);
+    const VkFormatFeatureFlags required=VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT|VK_FORMAT_FEATURE_TRANSFER_DST_BIT|(linearFilter?VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT:0);
+    return (properties.optimalTilingFeatures&required)==required;
+}
+bool VulkanRhi::supportsStorageImage(VkFormat format) const {
+    if(format==VK_FORMAT_UNDEFINED)return false;
+    VkFormatProperties properties{};vkGetPhysicalDeviceFormatProperties(physicalDevice_,format,&properties);
+    return (properties.optimalTilingFeatures&VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT)!=0;
+}
+VkSampleCountFlags VulkanRhi::imageSampleCounts(VkFormat format,VkImageUsageFlags usage) const {
+    if(format==VK_FORMAT_UNDEFINED||!usage)return 0;
+    VkImageFormatProperties properties{};
+    const auto result=vkGetPhysicalDeviceImageFormatProperties(physicalDevice_,format,VK_IMAGE_TYPE_2D,
+        VK_IMAGE_TILING_OPTIMAL,usage,0,&properties);
+    if(result==VK_ERROR_FORMAT_NOT_SUPPORTED)return 0;
+    vkCheck(result,"vkGetPhysicalDeviceImageFormatProperties");return properties.sampleCounts;
+}
 void VulkanRhi::copyBufferToImage(
     const GpuBuffer& source,
     const GpuImage& destination,
     const std::uint32_t width,
-    const std::uint32_t height) {
+    const std::uint32_t height,
+    const std::uint32_t mipLevels, const std::uint32_t bytesPerTexel) {
     runOneShot("copyBufferToImage", [&](VkCommandBuffer commandBuffer) {
-        VkBufferImageCopy region{};
+        std::vector<VkBufferImageCopy> regions;
+        VkDeviceSize offset=0;unsigned w=width,h=height,d=destination.depth;
+        for(unsigned level=0;level<mipLevels;++level){
+        VkBufferImageCopy region{};region.bufferOffset=offset;region.imageSubresource.mipLevel=level;
         region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-        region.imageSubresource.layerCount = 1;
-        region.imageExtent = {width, height, 1};
+        region.imageSubresource.layerCount = destination.arrayLayers;
+        region.imageExtent = {w, h, d};
+        regions.push_back(region);offset+=VkDeviceSize(w)*h*d*bytesPerTexel*destination.arrayLayers;
+        w=std::max(w/2,1U);h=std::max(h/2,1U);d=std::max(d/2,1U);
+        }
         vkCmdCopyBufferToImage(
             commandBuffer,
             source.buffer,
             destination.image,
             VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-            1,
-            &region);
+            static_cast<unsigned>(regions.size()),
+            regions.data());
     });
 }
 
@@ -126,7 +161,7 @@ void VulkanRhi::clearImage(const GpuImage& image) {
         VkImageSubresourceRange range{};
         range.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
         range.levelCount = 1;
-        range.layerCount = 1;
+        range.layerCount = image.arrayLayers;
         vkCmdClearColorImage(
             commandBuffer,
             image.image,
@@ -163,7 +198,7 @@ void VulkanRhi::generateMipmaps(
             barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
             barrier.subresourceRange.baseMipLevel = level - 1;
             barrier.subresourceRange.levelCount = 1;
-            barrier.subresourceRange.layerCount = 1;
+            barrier.subresourceRange.layerCount = image.arrayLayers;
             barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
             barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
             barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
@@ -186,7 +221,7 @@ void VulkanRhi::generateMipmaps(
             blit.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
             blit.srcSubresource.mipLevel = level - 1;
             blit.srcSubresource.baseArrayLayer = 0;
-            blit.srcSubresource.layerCount = 1;
+            blit.srcSubresource.layerCount = image.arrayLayers;
             blit.dstOffsets[0] = {0, 0, 0};
             blit.dstOffsets[1] = {
                 mipWidth > 1 ? mipWidth / 2 : 1,
@@ -195,7 +230,7 @@ void VulkanRhi::generateMipmaps(
             blit.dstSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
             blit.dstSubresource.mipLevel = level;
             blit.dstSubresource.baseArrayLayer = 0;
-            blit.dstSubresource.layerCount = 1;
+            blit.dstSubresource.layerCount = image.arrayLayers;
             vkCmdBlitImage(
                 commandBuffer,
                 image.image,
@@ -213,7 +248,7 @@ void VulkanRhi::generateMipmaps(
             vkCmdPipelineBarrier(
                 commandBuffer,
                 VK_PIPELINE_STAGE_TRANSFER_BIT,
-                VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+                VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
                 0,
                 0,
                 nullptr,
@@ -236,7 +271,7 @@ void VulkanRhi::generateMipmaps(
         lastBarrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
         lastBarrier.subresourceRange.baseMipLevel = mipLevels - 1;
         lastBarrier.subresourceRange.levelCount = 1;
-        lastBarrier.subresourceRange.layerCount = 1;
+        lastBarrier.subresourceRange.layerCount = image.arrayLayers;
         lastBarrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
         lastBarrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
         lastBarrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
@@ -244,7 +279,7 @@ void VulkanRhi::generateMipmaps(
         vkCmdPipelineBarrier(
             commandBuffer,
             VK_PIPELINE_STAGE_TRANSFER_BIT,
-            VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+            VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
             0,
             0,
             nullptr,
@@ -260,15 +295,17 @@ VkImageView VulkanRhi::createImageView(
     const VkFormat format,
     const VkImageAspectFlags aspect,
     const std::uint32_t mipLevels,
-    const std::uint32_t baseMipLevel) {
+    const std::uint32_t baseMipLevel,
+    const VkImageViewType viewType,
+    const std::uint32_t arrayLayers) {
     VkImageViewCreateInfo createInfo{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};
     createInfo.image = image;
-    createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+    createInfo.viewType = viewType;
     createInfo.format = format;
     createInfo.subresourceRange.aspectMask = aspect;
     createInfo.subresourceRange.baseMipLevel = baseMipLevel;
     createInfo.subresourceRange.levelCount = std::max(mipLevels, 1U);
-    createInfo.subresourceRange.layerCount = 1;
+    createInfo.subresourceRange.layerCount = arrayLayers;
 
     VkImageView imageView = VK_NULL_HANDLE;
     vkCheck(
@@ -282,8 +319,12 @@ void VulkanRhi::destroyImageView(const VkImageView view) {
 }
 
 VkSampler VulkanRhi::createSampler(const SamplerDesc& desc) {
+    if(!std::isfinite(desc.mipLodBias))throw std::invalid_argument("Sampler mip bias must be finite");
+    if((desc.filter!=VK_FILTER_LINEAR&&desc.filter!=VK_FILTER_NEAREST)
+        ||(desc.effectiveMagFilter()!=VK_FILTER_LINEAR&&desc.effectiveMagFilter()!=VK_FILTER_NEAREST))
+        throw std::invalid_argument("Unsupported sampler filter");
     VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
-    samplerInfo.magFilter = desc.filter;
+    samplerInfo.magFilter = desc.effectiveMagFilter();
     samplerInfo.minFilter = desc.filter;
     samplerInfo.addressModeU = desc.addressU;
     samplerInfo.addressModeV = desc.addressV;
@@ -292,6 +333,13 @@ VkSampler VulkanRhi::createSampler(const SamplerDesc& desc) {
         ? VK_SAMPLER_MIPMAP_MODE_LINEAR
         : VK_SAMPLER_MIPMAP_MODE_NEAREST;
     samplerInfo.maxLod = desc.maxLod;
+    VkPhysicalDeviceFeatures features{};vkGetPhysicalDeviceFeatures(physicalDevice_,&features);
+    VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);
+    samplerInfo.mipLodBias=std::clamp(desc.mipLodBias,-properties.limits.maxSamplerLodBias,properties.limits.maxSamplerLodBias);
+    if(samplerAnisotropyEnabled_ && features.samplerAnisotropy && desc.maxAnisotropy>1){
+        samplerInfo.anisotropyEnable=VK_TRUE;
+        samplerInfo.maxAnisotropy=std::clamp(desc.maxAnisotropy,1.F,properties.limits.maxSamplerAnisotropy);
+    }
     VkSampler sampler = VK_NULL_HANDLE;
     vkCheck(
         vkCreateSampler(device_, &samplerInfo, nullptr, &sampler),
@@ -355,15 +403,25 @@ void VulkanRhi::destroyPipelineLayout(const VkPipelineLayout layout) {
 }
 
 VkPipeline VulkanRhi::createComputePipeline(const ComputePipelineDesc& desc) {
+    const VulkanSpecialization specialization(desc.specialization);
     if (!desc.shader || !desc.layout) throw std::invalid_argument("Compute pipeline requires shader and layout");
     VkComputePipelineCreateInfo info{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};
+    info.flags=pipelineInspection_?pipelineInspection_->creationFlags():0;
     info.stage = {VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
     info.stage.stage = VK_SHADER_STAGE_COMPUTE_BIT;
     info.stage.module = desc.shader;
     info.stage.pName = "main";
+    info.stage.pSpecializationInfo=specialization.get();
     info.layout = desc.layout;
+    VkPipelineCreationFeedback feedback{};VkPipelineCreationFeedbackCreateInfo cacheFeedback{VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO};cacheFeedback.pPipelineCreationFeedback=&feedback;
+    if(cacheFeedbackEnabled_)info.pNext=&cacheFeedback;
     VkPipeline pipeline = VK_NULL_HANDLE;
-    vkCheck(vkCreateComputePipelines(device_, VK_NULL_HANDLE, 1, &info, nullptr, &pipeline), "vkCreateComputePipelines");
+    vkCheck(vkCreateComputePipelines(device_, pipelineCache_, 1, &info, nullptr, &pipeline), "vkCreateComputePipelines");
+    notePipelineCache(feedback);
+    if (pipelineInspection_) {
+        const std::lock_guard<std::mutex> lock(pipelineInspectionMutex());
+        pipelineInspection_->inspect(pipeline,info.flags);
+    }
     return pipeline;
 }
 void VulkanCommandRecorder::bindComputePipeline(VkPipeline pipeline) {
@@ -380,37 +438,58 @@ void VulkanCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, Vk
 
 VkPipeline VulkanRhi::createGraphicsPipeline(
     const GraphicsPipelineDesc& desc) {
+    const auto vertexBindings=resolveGraphicsVertexBindings(desc);
+    for(const auto& attribute:desc.vertexAttributes) {
+        VkFormatProperties properties{};vkGetPhysicalDeviceFormatProperties(physicalDevice_,attribute.format,&properties);
+        if(!(properties.bufferFeatures&VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT))
+            throw std::runtime_error("Vertex input format is unavailable on this device");
+    }
+    const VulkanSpecialization vertexSpecialization(desc.vertexSpecialization);
+    const VulkanSpecialization fragmentSpecialization(desc.fragmentSpecialization);
+    validateGraphicsColorWriteMasks(desc);
+    validateGraphicsMultisampling(desc);
+    if(desc.depthBiasExact&&!desc.depthBias)throw std::invalid_argument("Exact depth bias requires enabled depth bias");
+    if(desc.depthBiasExact&&!supportsExactDepthBias())throw std::runtime_error("Exact depth bias is unavailable on this backend");
+    if(desc.minSampleShading>0&&!supportsSampleShading())
+        throw std::runtime_error("Sample shading is unavailable on this backend");
+    {
+        std::lock_guard<std::mutex> lock(renderPassMutex_);
+        const auto pass=renderPassSamples_.find(desc.renderPass);
+        if(pass!=renderPassSamples_.end()&&pass->second!=desc.rasterizationSamples)
+            throw std::invalid_argument("Pipeline and render pass sample counts must match");
+    }
     VkPipelineShaderStageCreateInfo vertexStage{
         VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
     vertexStage.stage = VK_SHADER_STAGE_VERTEX_BIT;
     vertexStage.module = desc.vertexShader;
     vertexStage.pName = "main";
+    vertexStage.pSpecializationInfo=vertexSpecialization.get();
     VkPipelineShaderStageCreateInfo fragmentStage{
         VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
     fragmentStage.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
     fragmentStage.module = desc.fragmentShader;
     fragmentStage.pName = "main";
+    fragmentStage.pSpecializationInfo=fragmentSpecialization.get();
     const std::array shaderStages = {vertexStage, fragmentStage};
 
-    VkVertexInputBindingDescription bindingDescription{};
-    bindingDescription.binding = 0;
-    bindingDescription.stride = desc.vertexStride;
-    bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
+    std::vector<VkVertexInputBindingDescription> bindingDescriptions;
+    bindingDescriptions.reserve(vertexBindings.size());
+    for(const auto& binding:vertexBindings)bindingDescriptions.push_back({binding.binding,binding.stride,binding.inputRate});
     std::vector<VkVertexInputAttributeDescription> attributes(
         desc.vertexAttributes.size());
     for (std::size_t index = 0; index < desc.vertexAttributes.size(); ++index) {
         attributes[index] = {
             desc.vertexAttributes[index].location,
-            0,
+            desc.vertexAttributes[index].binding,
             desc.vertexAttributes[index].format,
             desc.vertexAttributes[index].offset,
         };
     }
     VkPipelineVertexInputStateCreateInfo vertexInput{
         VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
-    if (desc.vertexStride > 0) {
-        vertexInput.vertexBindingDescriptionCount = 1;
-        vertexInput.pVertexBindingDescriptions = &bindingDescription;
+    if (!bindingDescriptions.empty()) {
+        vertexInput.vertexBindingDescriptionCount = static_cast<std::uint32_t>(bindingDescriptions.size());
+        vertexInput.pVertexBindingDescriptions = bindingDescriptions.data();
         vertexInput.vertexAttributeDescriptionCount =
             static_cast<std::uint32_t>(attributes.size());
         vertexInput.pVertexAttributeDescriptions = attributes.data();
@@ -427,8 +506,13 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
         VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO};
     rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
     rasterizer.cullMode = desc.cullMode;
-    rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
+    rasterizer.frontFace = desc.frontFace;
     rasterizer.lineWidth = 1.0F;
+    VkDepthBiasRepresentationInfoEXT biasRepresentation{VK_STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT};
+    if(desc.depthBiasExact){
+        biasRepresentation.depthBiasRepresentation=VK_DEPTH_BIAS_REPRESENTATION_LEAST_REPRESENTABLE_VALUE_FORMAT_EXT;
+        biasRepresentation.depthBiasExact=VK_TRUE;rasterizer.pNext=&biasRepresentation;
+    }
     if (desc.depthBias) {
         rasterizer.depthBiasEnable = VK_TRUE;
         rasterizer.depthBiasConstantFactor = desc.depthBiasConstant;
@@ -436,22 +520,48 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
     }
     VkPipelineMultisampleStateCreateInfo multisampling{
         VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO};
-    multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+    multisampling.rasterizationSamples = desc.rasterizationSamples;
+    multisampling.sampleShadingEnable = desc.minSampleShading>0?VK_TRUE:VK_FALSE;
+    multisampling.minSampleShading = desc.minSampleShading;
     VkPipelineDepthStencilStateCreateInfo depthStencil{
         VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO};
     depthStencil.depthTestEnable = desc.depthTest ? VK_TRUE : VK_FALSE;
     depthStencil.depthWriteEnable = desc.depthWrite ? VK_TRUE : VK_FALSE;
-    depthStencil.depthCompareOp = VK_COMPARE_OP_LESS;
+    depthStencil.depthCompareOp = desc.depthCompare;
+    if (desc.stencil) {
+        depthStencil.stencilTestEnable = VK_TRUE;
+        depthStencil.front = depthStencil.back = *desc.stencil;
+    }
 
     std::vector<VkPipelineColorBlendAttachmentState> colorBlendAttachments(
         desc.colorAttachmentCount);
-    for (auto& attachment : colorBlendAttachments) {
-        attachment.colorWriteMask =
-            VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT
-            | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
-        if (desc.alphaBlend) {
+    for (std::size_t index=0;index<colorBlendAttachments.size();++index) {
+        auto& attachment=colorBlendAttachments[index];
+        attachment.colorWriteMask = graphicsColorWriteMask(desc,index);
+        if (desc.alphaBlend && attachment.colorWriteMask != 0) {
+            if(index==0&&desc.primaryColorBlend==PrimaryColorBlend::Additive) {
+                attachment.blendEnable=VK_TRUE;
+                attachment.srcColorBlendFactor=desc.premultipliedAlpha?VK_BLEND_FACTOR_ONE:VK_BLEND_FACTOR_SRC_ALPHA;
+                attachment.dstColorBlendFactor=VK_BLEND_FACTOR_ONE;
+                attachment.colorBlendOp=VK_BLEND_OP_ADD;
+                attachment.srcAlphaBlendFactor=VK_BLEND_FACTOR_ZERO;
+                attachment.dstAlphaBlendFactor=VK_BLEND_FACTOR_ONE;
+                attachment.alphaBlendOp=VK_BLEND_OP_ADD;
+                continue;
+            }
+            if(desc.primaryColorBlend==PrimaryColorBlend::Multiply) {
+                if(index!=0) {attachment.colorWriteMask=0;continue;}
+                attachment.blendEnable=VK_TRUE;
+                attachment.srcColorBlendFactor=VK_BLEND_FACTOR_ZERO;
+                attachment.dstColorBlendFactor=VK_BLEND_FACTOR_SRC_COLOR;
+                attachment.colorBlendOp=VK_BLEND_OP_ADD;
+                attachment.srcAlphaBlendFactor=VK_BLEND_FACTOR_ZERO;
+                attachment.dstAlphaBlendFactor=VK_BLEND_FACTOR_ONE;
+                attachment.alphaBlendOp=VK_BLEND_OP_ADD;
+                continue;
+            }
             attachment.blendEnable = VK_TRUE;
-            attachment.srcColorBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;
+            attachment.srcColorBlendFactor = desc.premultipliedAlpha ? VK_BLEND_FACTOR_ONE : VK_BLEND_FACTOR_SRC_ALPHA;
             attachment.dstColorBlendFactor =
                 VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
             attachment.colorBlendOp = VK_BLEND_OP_ADD;
@@ -479,8 +589,7 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
 
     VkGraphicsPipelineCreateInfo pipelineInfo{
         VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO};
-    pipelineInfo.stageCount =
-        static_cast<std::uint32_t>(shaderStages.size());
+    pipelineInfo.stageCount = desc.fragmentShader == VK_NULL_HANDLE ? 1U : 2U;
     pipelineInfo.pStages = shaderStages.data();
     pipelineInfo.pVertexInputState = &vertexInput;
     pipelineInfo.pInputAssemblyState = &inputAssembly;
@@ -493,12 +602,20 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
     pipelineInfo.layout = desc.layout;
     pipelineInfo.renderPass = desc.renderPass;
     pipelineInfo.subpass = 0;
+    pipelineInfo.flags=pipelineInspection_?pipelineInspection_->creationFlags():0;
+    VkPipelineCreationFeedback feedback{};VkPipelineCreationFeedbackCreateInfo cacheFeedback{VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO};cacheFeedback.pPipelineCreationFeedback=&feedback;
+    if(cacheFeedbackEnabled_)pipelineInfo.pNext=&cacheFeedback;
 
     VkPipeline pipeline = VK_NULL_HANDLE;
     vkCheck(
         vkCreateGraphicsPipelines(
-            device_, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline),
+            device_, pipelineCache_, 1, &pipelineInfo, nullptr, &pipeline),
         "vkCreateGraphicsPipelines");
+    notePipelineCache(feedback);
+    if (pipelineInspection_) {
+        const std::lock_guard<std::mutex> lock(pipelineInspectionMutex());
+        pipelineInspection_->inspect(pipeline,pipelineInfo.flags);
+    }
     return pipeline;
 }
 
@@ -611,6 +728,10 @@ void VulkanRhi::writeDescriptorBuffer(const DescriptorBufferWrite& write) {
 }
 
 VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
+    validateRenderPassDesc(desc);
+    for(const auto& source:desc.attachments)if(source.samples!=VK_SAMPLE_COUNT_1_BIT
+        &&(imageSampleCounts(source.format,source.isDepth?VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT:VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT)&source.samples)==0)
+        throw std::runtime_error("Requested attachment sampling is unavailable");
     std::vector<VkAttachmentDescription> attachments(desc.attachments.size());
     std::vector<VkAttachmentReference> colorReferences;
     VkAttachmentReference depthReference{};
@@ -618,22 +739,23 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
         const RenderPassAttachmentDesc& source = desc.attachments[index];
         VkAttachmentDescription& attachment = attachments[index];
         attachment.format = source.format;
-        attachment.samples = VK_SAMPLE_COUNT_1_BIT;
+        attachment.samples = source.samples;
         attachment.loadOp = source.clear
             ? VK_ATTACHMENT_LOAD_OP_CLEAR
-            : VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+            : source.load?VK_ATTACHMENT_LOAD_OP_LOAD:VK_ATTACHMENT_LOAD_OP_DONT_CARE;
         attachment.storeOp = source.store
             ? VK_ATTACHMENT_STORE_OP_STORE
             : VK_ATTACHMENT_STORE_OP_DONT_CARE;
-        attachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
-        attachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+        attachment.stencilLoadOp = source.clearStencil ? VK_ATTACHMENT_LOAD_OP_CLEAR
+            : source.isDepth && source.load ? VK_ATTACHMENT_LOAD_OP_LOAD : VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+        attachment.stencilStoreOp = source.isDepth&&source.load&&source.store?VK_ATTACHMENT_STORE_OP_STORE:VK_ATTACHMENT_STORE_OP_DONT_CARE;
         attachment.initialLayout = source.initialLayout;
         attachment.finalLayout = source.finalLayout;
-        if (source.isDepth) {
+        if (source.isDepth&&static_cast<std::int32_t>(index)==desc.depthAttachment) {
             depthReference.attachment = static_cast<std::uint32_t>(index);
             depthReference.layout =
-                VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
-        } else {
+                desc.depthReadOnly?VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+        } else if(!source.isDepth) {
             VkAttachmentReference reference{};
             reference.attachment = static_cast<std::uint32_t>(index);
             reference.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
@@ -651,15 +773,21 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
         desc.depthAttachment >= 0 ? &depthReference : nullptr;
 
     std::vector<VkSubpassDependency> dependencies;
-    if (desc.externalReadDependency) {
+    if(!desc.dependencies.empty())dependencies=desc.dependencies;
+    else if (desc.externalReadDependency) {
         VkSubpassDependency externalToPass{};
         externalToPass.srcSubpass = VK_SUBPASS_EXTERNAL;
         externalToPass.dstSubpass = 0;
-        externalToPass.srcStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+        externalToPass.srcStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT | VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
         externalToPass.dstStageMask =
             VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
         externalToPass.srcAccessMask = VK_ACCESS_SHADER_READ_BIT;
         externalToPass.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+        if(desc.depthAttachment>=0){
+            externalToPass.dstStageMask |= VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+            // STORE preserves the values but is still an attachment memory write.
+            externalToPass.dstAccessMask |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT|VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+        }
         externalToPass.dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
         dependencies.push_back(externalToPass);
 
@@ -668,9 +796,14 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
         passToExternal.dstSubpass = VK_SUBPASS_EXTERNAL;
         passToExternal.srcStageMask =
             VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-        passToExternal.dstStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+        passToExternal.dstStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT | VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
         passToExternal.srcAccessMask =
             VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+        if(desc.depthAttachment>=0){
+            passToExternal.srcStageMask |= VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+            passToExternal.srcAccessMask |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+            if(desc.depthReadOnly)passToExternal.srcAccessMask |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT;
+        }
         passToExternal.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
         passToExternal.dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
         dependencies.push_back(passToExternal);
@@ -691,10 +824,15 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
     vkCheck(
         vkCreateRenderPass(device_, &renderPassInfo, nullptr, &renderPass),
         "vkCreateRenderPass");
+    try{if(!desc.attachments.empty()){std::lock_guard<std::mutex> lock(renderPassMutex_);
+        renderPassSamples_[renderPass]=desc.attachments.empty()?VK_SAMPLE_COUNT_1_BIT:desc.attachments.front().samples;}
+    }
+    catch(...){vkDestroyRenderPass(device_,renderPass,nullptr);throw;}
     return renderPass;
 }
 
 void VulkanRhi::destroyRenderPass(const VkRenderPass renderPass) {
+    {std::lock_guard<std::mutex> lock(renderPassMutex_);renderPassSamples_.erase(renderPass);}
     vkDestroyRenderPass(device_, renderPass, nullptr);
 }
 
@@ -807,6 +945,11 @@ void VulkanCommandRecorder::bindIndexBuffer(
         commandBuffer_, buffer, offset, VK_INDEX_TYPE_UINT32);
 }
 
+void VulkanCommandRecorder::bindVertexStream(std::uint32_t binding,VkBuffer buffer,VkDeviceSize offset) {
+    if(binding>=kMaximumVertexBindings||!buffer)throw std::invalid_argument("Invalid vertex stream binding or buffer");
+    vkCmdBindVertexBuffers(commandBuffer_,binding,1,&buffer,&offset);
+}
+
 void VulkanCommandRecorder::draw(const std::uint32_t vertexCount) {
     vkCmdDraw(commandBuffer_, vertexCount, 1, 0, 0);
 }
@@ -910,6 +1053,32 @@ void VulkanCommandRecorder::bufferBarrier(const BufferBarrierDesc& barrier) {
     vkCmdPipelineBarrier(
         commandBuffer_, sourceStage, destinationStage, 0, 0, nullptr, 1,
         &bufferBarrier, 0, nullptr);
+}
+
+void VulkanCommandRecorder::bufferBarriers(const BufferBarrierDesc* barriers,std::size_t count){
+    if(count&&!barriers)throw std::invalid_argument("Missing buffer barrier storage");
+    if(count>UINT32_MAX)throw std::length_error("Too many buffer barriers");
+    if(!count)return;
+    struct Batch{VkPipelineStageFlags source,destination;std::vector<VkBufferMemoryBarrier> buffers;};
+    std::vector<Batch> batches;std::unordered_set<VkBuffer> pending;pending.reserve(count);
+    const auto flush=[&]{for(const auto& batch:batches)
+        vkCmdPipelineBarrier(commandBuffer_,batch.source,batch.destination,0,0,nullptr,
+            static_cast<std::uint32_t>(batch.buffers.size()),batch.buffers.data(),0,nullptr);
+        batches.clear();pending.clear();};
+    for(std::size_t i=0;i<count;++i){const auto& barrier=barriers[i];
+        // Independent buffers may share a non-adjacent stage group. A repeated
+        // handle retires every group before the next possible alias access.
+        if(pending.find(barrier.buffer)!=pending.end())flush();
+        pending.insert(barrier.buffer);
+        const VkPipelineStageFlags source=barrier.srcStageMask?barrier.srcStageMask:VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
+        const VkPipelineStageFlags destination=barrier.dstStageMask?barrier.dstStageMask:VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
+        auto batch=std::find_if(batches.begin(),batches.end(),[&](const auto& value){return value.source==source&&value.destination==destination;});
+        if(batch==batches.end()){batches.push_back({source,destination,{}});batch=std::prev(batches.end());}
+        VkBufferMemoryBarrier entry{VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER};entry.srcAccessMask=barrier.srcAccessMask;entry.dstAccessMask=barrier.dstAccessMask;
+        entry.srcQueueFamilyIndex=VK_QUEUE_FAMILY_IGNORED;entry.dstQueueFamilyIndex=VK_QUEUE_FAMILY_IGNORED;
+        entry.buffer=barrier.buffer;entry.offset=barrier.offset;entry.size=barrier.size;batch->buffers.push_back(entry);
+    }
+    flush();
 }
 
 void VulkanCommandRecorder::clearColorImage(

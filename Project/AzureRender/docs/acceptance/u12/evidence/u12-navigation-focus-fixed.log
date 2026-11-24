@@ -1,0 +1,15 @@
+[OUTPUT]
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+[HANDLER_OUTPUT]
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+    Start 195: AzureEditor.ViewportNavigationGpu
+1/1 Test #195: AzureEditor.ViewportNavigationGpu ...   Passed   92.78 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Label Time Summary:
+gpu    =  92.78 sec*proc (1 test)
+
+Total Test time (real) =  92.78 sec

@@ -1,0 +1,422 @@
+{
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "sourceBounds": [
+    0,
+    4
+  ],
+  "schema": "outline_surface.schema.json",
+  "referenceDraws": [
+    {
+      "event": 1079,
+      "pixel": [
+        1363,
+        541
+      ],
+      "status": "exported",
+      "primitive": 8872,
+      "hardwareShaderOutput": [
+        0.15317979454994202,
+        0.1664532721042633,
+        0.1693357527256012,
+        1.0
+      ],
+      "path": "native-outline-light-trace-qualified-1363-541.json",
+      "steps": 986,
+      "sha256": "623eee3c4a1becd82bc672321634670844c48618ad7d0a076092109a3e2d86e3"
+    },
+    {
+      "event": 1079,
+      "pixel": [
+        1132,
+        408
+      ],
+      "status": "exported",
+      "primitive": 28489,
+      "hardwareShaderOutput": [
+        0.3052936792373657,
+        0.3044608533382416,
+        0.30954527854919434,
+        1.0
+      ],
+      "path": "native-outline-light-trace-qualified-1132-408.json",
+      "steps": 938,
+      "sha256": "df1e1ddf614d00bccae4f0e6891259a84db1857cc819ffdbcbb5b20311389098"
+    },
+    {
+      "event": 1079,
+      "pixel": [
+        1392,
+        387
+      ],
+      "status": "exported",
+      "primitive": 29885,
+      "hardwareShaderOutput": [
+        0.7366997003555298,
+        0.649880588054657,
+        0.6374544501304626,
+        1.0
+      ],
+      "path": "native-outline-light-trace-qualified-1392-387.json",
+      "steps": 1272,
+      "sha256": "aa126e9f45f44c04f3009731490e82329c107e038a3169fa0a6a5c55d859da66"
+    },
+    {
+      "event": 1116,
+      "pixel": [
+        1523,
+        874
+      ],
+      "status": "exported",
+      "primitive": 18023,
+      "hardwareShaderOutput": [
+        0.0793357864022255,
+        0.002286277711391449,
+        0.034672558307647705,
+        1.0
+      ],
+      "path": "native-outline-light-trace-qualified-1523-874.json",
+      "steps": 894,
+      "sha256": "51ab121f9ad609cc467f98c7541589936914af7567c1022d8229db149d5843b6"
+    },
+    {
+      "event": 1116,
+      "pixel": [
+        1183,
+        691
+      ],
+      "status": "exported",
+      "primitive": 17510,
+      "hardwareShaderOutput": [
+        0.1325361430644989,
+        0.00952458381652832,
+        0.08894845098257065,
+        1.0
+      ],
+      "path": "native-outline-light-trace-qualified-1183-691.json",
+      "steps": 793,
+      "sha256": "557df20d8b741f18829db66856b4e3309078f1fe2f405b7edf2b542811645a05"
+    },
+    {
+      "event": 1116,
+      "pixel": [
+        1495,
+        840
+      ],
+      "status": "exported",
+      "primitive": 9054,
+      "hardwareShaderOutput": [
+        0.7815043330192566,
+        0.42140018939971924,
+        0.6353204846382141,
+        1.0
+      ],
+      "path": "native-outline-light-trace-qualified-1495-840.json",
+      "steps": 894,
+      "sha256": "ec7542f66d04f0dba3c0410739d00eb5af5d4985241253c9e85f935adb93a676"
+    }
+  ],
+  "sourceLighting": [
+    {
+      "event": 1079,
+      "pixel": [
+        1363,
+        541
+      ],
+      "stages": {
+        "beforeLocal": [
+          0.158184215426445,
+          0.17263087630271912,
+          0.17434388399124146
+        ],
+        "afterLocal": [
+          0.1531798094511032,
+          0.1664533019065857,
+          0.16933581233024597
+        ]
+      },
+      "hardwareOutput": [
+        0.15317979454994202,
+        0.1664532721042633,
+        0.1693357527256012,
+        1.0
+      ]
+    },
+    {
+      "event": 1079,
+      "pixel": [
+        1132,
+        408
+      ],
+      "stages": {
+        "beforeLocal": [
+          0.329794317483902,
+          0.3298357129096985,
+          0.33415648341178894
+        ],
+        "afterLocal": [
+          0.3052936792373657,
+          0.3044608533382416,
+          0.30954527854919434
+        ]
+      },
+      "hardwareOutput": [
+        0.3052936792373657,
+        0.3044608533382416,
+        0.30954527854919434,
+        1.0
+      ]
+    },
+    {
+      "event": 1079,
+      "pixel": [
+        1392,
+        387
+      ],
+      "stages": {
+        "beforeLocal": [
+          0.3975198268890381,
+          0.3971550762653351,
+          0.4343299865722656
+        ],
+        "afterLocal": [
+          0.736699640750885,
+          0.6498805284500122,
+          0.6374543905258179
+        ]
+      },
+      "hardwareOutput": [
+        0.7366997003555298,
+        0.649880588054657,
+        0.6374544501304626,
+        1.0
+      ]
+    },
+    {
+      "event": 1116,
+      "pixel": [
+        1523,
+        874
+      ],
+      "stages": {
+        "afterLocal": [
+          0.0793357864022255,
+          0.0022862758487462997,
+          0.034672558307647705
+        ]
+      },
+      "hardwareOutput": [
+        0.0793357864022255,
+        0.002286277711391449,
+        0.034672558307647705,
+        1.0
+      ]
+    },
+    {
+      "event": 1116,
+      "pixel": [
+        1183,
+        691
+      ],
+      "stages": {
+        "afterLocal": [
+          0.1325361430644989,
+          0.009524580091238022,
+          0.08894844353199005
+        ]
+      },
+      "hardwareOutput": [
+        0.1325361430644989,
+        0.00952458381652832,
+        0.08894845098257065,
+        1.0
+      ]
+    },
+    {
+      "event": 1116,
+      "pixel": [
+        1495,
+        840
+      ],
+      "stages": {
+        "afterLocal": [
+          0.7815043330192566,
+          0.42140018939971924,
+          0.6353204846382141
+        ]
+      },
+      "hardwareOutput": [
+        0.7815043330192566,
+        0.42140018939971924,
+        0.6353204846382141,
+        1.0
+      ]
+    }
+  ],
+  "fixedCaptureSha256": "a53e4dbdd7d3b873105613f951fe7954097599370a6d540e23f0f83d08ccb783",
+  "prototypePixelsEqual": true,
+  "characterRegions": [
+    {
+      "event": 889,
+      "qualifiedPixels": 45988,
+      "ssim": 0.9403130601713591,
+      "nativeMedianLuminance": 0.02662850351388315,
+      "currentMedianLuminance": 0.025201914716260328,
+      "medianLuminanceRelativeError": 0.053573750281500014,
+      "p95ByteError": 16.0,
+      "maximumByteError": 156,
+      "worstPixel": [
+        1399,
+        621
+      ],
+      "passed": false
+    },
+    {
+      "event": 910,
+      "qualifiedPixels": 17990,
+      "ssim": 0.9971133404550964,
+      "nativeMedianLuminance": 0.014355474145918727,
+      "currentMedianLuminance": 0.014246552491091293,
+      "medianLuminanceRelativeError": 0.007587464804037823,
+      "p95ByteError": 1.0,
+      "maximumByteError": 41,
+      "worstPixel": [
+        1557,
+        1130
+      ],
+      "passed": true
+    },
+    {
+      "event": 928,
+      "qualifiedPixels": 118661,
+      "ssim": 0.949582153617019,
+      "nativeMedianLuminance": 0.022130240144565362,
+      "currentMedianLuminance": 0.020927474285306773,
+      "medianLuminanceRelativeError": 0.05434942645906889,
+      "p95ByteError": 16.0,
+      "maximumByteError": 127,
+      "worstPixel": [
+        1069,
+        703
+      ],
+      "passed": false
+    }
+  ],
+  "tests": [
+    {
+      "configuration": "release",
+      "ctestLogSha256": "70e75ac1fd4c9a624cecb1380a5829aab065e1af24923e8412afaa0f0b134b9d",
+      "gpuCases": [
+        {
+          "name": "wide",
+          "outlinePixels": 154,
+          "playerSha256": "b553c19aa6ea7181a79a9215a13f8072b11d4c7e8ac3cace8757948a45a15b9b",
+          "imageSha256": "ed241e6c302fb96cc5dc7752bd99cb73c85a2096819698b5a151cd9630bc493d",
+          "validationEnabled": false,
+          "antiAliasing": 0,
+          "rasterizationSamples": 1,
+          "outlineBytes": 144,
+          "size": 256,
+          "distance": 5,
+          "maximumHorizontalBoundaryErrorPixels": 0.12647354385734388
+        },
+        {
+          "name": "textured",
+          "outlinePixels": 0,
+          "playerSha256": "b553c19aa6ea7181a79a9215a13f8072b11d4c7e8ac3cace8757948a45a15b9b",
+          "imageSha256": "7a0e26cc0df3d81344d8b64e881612d04f140844bbd80021e9b5d952bfcbbd31",
+          "validationEnabled": false,
+          "antiAliasing": 0,
+          "rasterizationSamples": 1,
+          "outlineBytes": 144,
+          "size": 256,
+          "distance": 5,
+          "maximumHorizontalBoundaryErrorPixels": null
+        },
+        {
+          "name": "textured-coverage",
+          "outlinePixels": 0,
+          "playerSha256": "b553c19aa6ea7181a79a9215a13f8072b11d4c7e8ac3cace8757948a45a15b9b",
+          "imageSha256": "7a0e26cc0df3d81344d8b64e881612d04f140844bbd80021e9b5d952bfcbbd31",
+          "validationEnabled": false,
+          "antiAliasing": 0,
+          "rasterizationSamples": 1,
+          "outlineBytes": 144,
+          "size": 256,
+          "distance": 5,
+          "maximumHorizontalBoundaryErrorPixels": null
+        },
+        {
+          "name": "textured-coverage-fixed",
+          "outlinePixels": 0,
+          "playerSha256": "b553c19aa6ea7181a79a9215a13f8072b11d4c7e8ac3cace8757948a45a15b9b",
+          "imageSha256": "7a0e26cc0df3d81344d8b64e881612d04f140844bbd80021e9b5d952bfcbbd31",
+          "validationEnabled": false,
+          "antiAliasing": 0,
+          "rasterizationSamples": 1,
+          "outlineBytes": 144,
+          "size": 256,
+          "distance": 5,
+          "maximumHorizontalBoundaryErrorPixels": null
+        }
+      ]
+    },
+    {
+      "configuration": "debug",
+      "ctestLogSha256": "2e209af8660d2d48595d6dd4d3b9890f0cac1eb5e1c83bb138bfa4d67aca34d0",
+      "gpuCases": [
+        {
+          "name": "wide",
+          "outlinePixels": 154,
+          "playerSha256": "a68b9e2a4b245706122bfb4df3916f07017b6bddee002223ce65b517574c408c",
+          "imageSha256": "ed241e6c302fb96cc5dc7752bd99cb73c85a2096819698b5a151cd9630bc493d",
+          "validationEnabled": true,
+          "antiAliasing": 0,
+          "rasterizationSamples": 1,
+          "outlineBytes": 144,
+          "size": 256,
+          "distance": 5,
+          "maximumHorizontalBoundaryErrorPixels": 0.12647354385734388
+        },
+        {
+          "name": "textured",
+          "outlinePixels": 0,
+          "playerSha256": "a68b9e2a4b245706122bfb4df3916f07017b6bddee002223ce65b517574c408c",
+          "imageSha256": "7a0e26cc0df3d81344d8b64e881612d04f140844bbd80021e9b5d952bfcbbd31",
+          "validationEnabled": true,
+          "antiAliasing": 0,
+          "rasterizationSamples": 1,
+          "outlineBytes": 144,
+          "size": 256,
+          "distance": 5,
+          "maximumHorizontalBoundaryErrorPixels": null
+        },
+        {
+          "name": "textured-coverage",
+          "outlinePixels": 0,
+          "playerSha256": "a68b9e2a4b245706122bfb4df3916f07017b6bddee002223ce65b517574c408c",
+          "imageSha256": "7a0e26cc0df3d81344d8b64e881612d04f140844bbd80021e9b5d952bfcbbd31",
+          "validationEnabled": true,
+          "antiAliasing": 0,
+          "rasterizationSamples": 1,
+          "outlineBytes": 144,
+          "size": 256,
+          "distance": 5,
+          "maximumHorizontalBoundaryErrorPixels": null
+        },
+        {
+          "name": "textured-coverage-fixed",
+          "outlinePixels": 0,
+          "playerSha256": "a68b9e2a4b245706122bfb4df3916f07017b6bddee002223ce65b517574c408c",
+          "imageSha256": "7a0e26cc0df3d81344d8b64e881612d04f140844bbd80021e9b5d952bfcbbd31",
+          "validationEnabled": true,
+          "antiAliasing": 0,
+          "rasterizationSamples": 1,
+          "outlineBytes": 144,
+          "size": 256,
+          "distance": 5,
+          "maximumHorizontalBoundaryErrorPixels": null
+        }
+      ]
+    }
+  ]
+}

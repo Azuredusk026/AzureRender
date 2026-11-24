@@ -1,0 +1,401 @@
+{
+  "status": "seal-lifecycle-and-strict-four-frames-passed",
+  "sourceBase": "63ac7ea",
+  "red": {
+    "expectedCompileFailure": true,
+    "exitCode": 1,
+    "reason": "New seal lifecycle contract is absent"
+  },
+  "build": {
+    "checks": [
+      {
+        "config": "Release",
+        "tests": 9,
+        "skips": 0,
+        "seconds": 53.46899999998277
+      },
+      {
+        "config": "Debug",
+        "tests": 9,
+        "skips": 0,
+        "seconds": 58.48499999998603
+      }
+    ],
+    "sourceUnchanged": true,
+    "programsUnchanged": true,
+    "cacheCasesPerConfiguration": 10
+  },
+  "sharing": {
+    "checks": [
+      {
+        "config": "Release",
+        "additionalTests": 1,
+        "previousRuntimeAndTestProductsIdentical": true,
+        "reusedChecks": 9,
+        "skips": 0
+      },
+      {
+        "config": "Debug",
+        "additionalTests": 1,
+        "previousRuntimeAndTestProductsIdentical": true,
+        "reusedChecks": 9,
+        "skips": 0
+      }
+    ],
+    "totalEffectiveChecks": 20,
+    "runtimeSourceUnchanged": true,
+    "testSourceDelta": [
+      "tests/MaterialTextureSharingTests.cpp"
+    ]
+  },
+  "capture": {
+    "materialTextureCache": {
+      "requests": 6169,
+      "hits": 5784,
+      "uniqueTextures": 385,
+      "requestedBytes": 8394487848,
+      "residentBytes": 2155557400,
+      "retainedPixelBytes": 0,
+      "releasedIdentityBytes": 1664821444,
+      "sealed": true,
+      "hashedPixelBytes": 6365826220,
+      "copiedPixelBytes": 1048576,
+      "transferredPixelBytes": 1663772868,
+      "discardedPixelBytes": 4698907616,
+      "hashMs": 1499.1,
+      "matchMs": 620.576,
+      "mipMs": 8803.89,
+      "uploadMs": 2366.34
+    },
+    "sceneLoad": {
+      "cpuPrepareMs": 41599.7,
+      "meshUploadMs": 548.142,
+      "materialUploadMs": 13378.4,
+      "sharedTexturesMs": 375.017,
+      "buffersMs": 88.2421,
+      "skinningMs": 12.1451,
+      "descriptorsMs": 157.407,
+      "pipelinesMs": 32158.9,
+      "decodedMaterialPixelBytes": 6365826224,
+      "remainingMaterialPixelBytes": 8
+    },
+    "exitCode": 0,
+    "seconds": 124.0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngIdentical": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngIdentical": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngIdentical": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngIdentical": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "defaultIsolationDisabled": true,
+    "shadowHistoryDisabled": true,
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "memoryObservation": {
+    "peakWorkingSetBytes": 7492677632,
+    "captureWindowSamples": 16,
+    "captureWindowWorkingSetMinimumBytes": 823803904,
+    "captureWindowWorkingSetMaximumBytes": 939085824,
+    "formalMemoryBudgetEvaluation": "pending"
+  },
+  "protectedFilesUnchanged": 13,
+  "bothConfigurationsVerified": true,
+  "wholeFrameTimingRuns": 0,
+  "formalRuns": 0,
+  "overallStatus": "failed-user-review",
+  "archive": {
+    "name": "validation.zip",
+    "bytes": 946687,
+    "sha256": "e039963cbfe91d5e4f5b04d34b24c6485b34a8abe4ace14a6261dc5e8ecf3511"
+  },
+  "members": [
+    {
+      "name": "archive.py",
+      "bytes": 4653,
+      "sha256": "09f95113e21b123ee898ff84c7636f44e515f5a10c081d34120dd2e04176ae3b"
+    },
+    {
+      "name": "baseline-programs.json",
+      "bytes": 152349,
+      "sha256": "de10086a60c4fcc2ae96cba67ba3c68f39b83e0be44192b00f35bab42c9bd429"
+    },
+    {
+      "name": "baseline-source.json",
+      "bytes": 189339,
+      "sha256": "2d9aba691726358a896a2f63c752fa2c74fe8d5d12725916855b505b88712975"
+    },
+    {
+      "name": "build-results.json",
+      "bytes": 350,
+      "sha256": "25d0b78c45031f920a9727003f872eb4e4b949f7bebee4d4748a3cb23e7c3d9f"
+    },
+    {
+      "name": "build.py",
+      "bytes": 2797,
+      "sha256": "bc25ac62279e7d9e4de6b586221a3e845cb1d69030b0eb36dacedd98d0314242"
+    },
+    {
+      "name": "capture-command.json",
+      "bytes": 843,
+      "sha256": "cf1f87a899ab444625433a4420071bd5143c90c88ad7467af4e6be8d0d6eeb15"
+    },
+    {
+      "name": "capture-manifest.json",
+      "bytes": 17428,
+      "sha256": "9ad8c1875de1409ba87c462d65f9f52eae78cc9b0b541c4b125a7938a8ae502a"
+    },
+    {
+      "name": "capture-results.json",
+      "bytes": 2031,
+      "sha256": "88af35e843d7bec07b85a444ddc8a0371f35166552da7ad23ebb2029d55beeef"
+    },
+    {
+      "name": "capture.log",
+      "bytes": 26785,
+      "sha256": "4f8de4c44e4a8ae28939b41d8a8f93914bcb25fb4128794802ce2ac84595dd75"
+    },
+    {
+      "name": "capture.py",
+      "bytes": 3636,
+      "sha256": "95f1a886da465a80eb6712fc644317725108ccb257dcb2ca6bfc2772260cf690"
+    },
+    {
+      "name": "CharacterSceneRenderer.cpp.baseline",
+      "bytes": 344272,
+      "sha256": "d2160f0954915cea1305573013a5593a68f514ee2988bd496acf2dac7208663b"
+    },
+    {
+      "name": "debug-build-provenance.json",
+      "bytes": 390578,
+      "sha256": "0fa3d6d9b410fb459d782658b8d486ff74cebe958a1952c244b2ac536499708b"
+    },
+    {
+      "name": "debug-build.log",
+      "bytes": 3501,
+      "sha256": "c21b04bb846e73e4a5f60bda3c691c7b51e3430136ac432294cb590d05256363"
+    },
+    {
+      "name": "debug-final-build-provenance.json",
+      "bytes": 390949,
+      "sha256": "23926c9dcea1e86f9184590a7b1533def894078d331d694809f2e3ecf2aacd77"
+    },
+    {
+      "name": "debug-sharing-build.log",
+      "bytes": 1292,
+      "sha256": "5489f743081a5c769a683610a0c2476c038bff89e1311d501e482c1c4c06b15d"
+    },
+    {
+      "name": "debug-sharing.log",
+      "bytes": 377,
+      "sha256": "a7d548796117744b7fb744501e6d91eba28ecac7608f67a0e618253d4147462c"
+    },
+    {
+      "name": "debug-sharing.xml",
+      "bytes": 1541,
+      "sha256": "5eeb00d8bbbf55f43cf67c1335c2f61e2bbe000627c2d3159bfc68dfad7b7e0a"
+    },
+    {
+      "name": "debug-tests.log",
+      "bytes": 1339,
+      "sha256": "0504b7d79c3c33aa96a13ec47873828f3a67d0a60b403cb64faca1807164e78e"
+    },
+    {
+      "name": "debug-tests.xml",
+      "bytes": 6993,
+      "sha256": "4fa630b7738bdf201950f69018fb9056364dfeb3908943c25fc95fa469dcf7b5"
+    },
+    {
+      "name": "frozen-project-inputs.json",
+      "bytes": 454954,
+      "sha256": "bf0d040c42daa7d9b12e751d7b0338a9535a8bbfa51b4fa3c264d8d66fe5e13f"
+    },
+    {
+      "name": "MaterialTextureSharingTests.cpp.baseline",
+      "bytes": 11114,
+      "sha256": "ecef55efc4d48f73ec5040597a910acde9170a695af9aa52e5827d81ebdeb3de"
+    },
+    {
+      "name": "memory-observations.json",
+      "bytes": 124946,
+      "sha256": "1d8459741da66c8447edc788e59d24619e4ee9958c596a478f588f0bbbca31c8"
+    },
+    {
+      "name": "memory-observer-selfcheck.json",
+      "bytes": 642,
+      "sha256": "b473dd4afb7a8679cad041c2e68818e55374899a3b10b2a3d7094c8977f20496"
+    },
+    {
+      "name": "memory-observer-selfcheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "memory_observer.py",
+      "bytes": 1478,
+      "sha256": "2ca8659c1015a3aab7d27b76fdf4a8a4c88f3f38dfdf18316855bd339acf7cb3"
+    },
+    {
+      "name": "NullRhiPassTests.cpp.baseline",
+      "bytes": 39391,
+      "sha256": "c85832442ad34663d298d5aa5317e1525e8ea73a38d78c15a486ade5e2f4b844"
+    },
+    {
+      "name": "red-result.json",
+      "bytes": 110,
+      "sha256": "5be3d2d777c1c876f761204edf85ebe9ca1d7cdcc7806988815157d1cc1d1743"
+    },
+    {
+      "name": "red.log",
+      "bytes": 4972,
+      "sha256": "45d034cd403ec9327659131a8eee65d3b7afbaa5b0bf837d0273592454abc955"
+    },
+    {
+      "name": "red.py",
+      "bytes": 1121,
+      "sha256": "04d1a7982baa0b8609a786526bef4f333bc61170ce7a295906f757ec86d6c10e"
+    },
+    {
+      "name": "release-build-provenance.json",
+      "bytes": 414635,
+      "sha256": "93f3cdcaa1e0ae986054e133d597d79850b83b516b3d8456f48b32adbe777f19"
+    },
+    {
+      "name": "release-build.log",
+      "bytes": 3188,
+      "sha256": "2d2e9043de3a6a90f1cc8a49cf950d2512c77b464e030dbc8559faf76d6d3168"
+    },
+    {
+      "name": "release-final-build-provenance.json",
+      "bytes": 415010,
+      "sha256": "c1c249d39d0f1167f1832615ba825229b695ad5dfe7e3b84f8158e604f89a5ba"
+    },
+    {
+      "name": "release-sharing-build.log",
+      "bytes": 1298,
+      "sha256": "93be2fbcedc54e8fbc3b255e11a7b365ca670536da6eaeffd859835ecaefbc4d"
+    },
+    {
+      "name": "release-sharing.log",
+      "bytes": 381,
+      "sha256": "342b29d40f2ff119e084773af897c66d34376edce0ccd81077ae9f3429cf774a"
+    },
+    {
+      "name": "release-sharing.xml",
+      "bytes": 1541,
+      "sha256": "df2b23842bfbe1a05367346df9600fa315dad2996bd1ca5a53d9675509a65425"
+    },
+    {
+      "name": "release-tests.log",
+      "bytes": 1343,
+      "sha256": "9dcb6c34cf228c7ec5399f29b7b0c80a69b0cac3b50e799c4a001d35e3b77267"
+    },
+    {
+      "name": "release-tests.xml",
+      "bytes": 6991,
+      "sha256": "3c6a11441f3becbe63b146f456ec1f4a6a6936c3091a9168eb781fb66824932e"
+    },
+    {
+      "name": "runtime.json",
+      "bytes": 317962,
+      "sha256": "7797ad732ac79bd87a59a7640c2c2d5f90131c581f90adb21c5c04a4ec6ce86f"
+    },
+    {
+      "name": "SampledTextureCache.cpp.baseline",
+      "bytes": 9630,
+      "sha256": "8647786bb1cbbd6b3d4a393d34c7d56a062ca043d74066b95ae76aa2eca194bb"
+    },
+    {
+      "name": "SampledTextureCache.hpp.baseline",
+      "bytes": 2804,
+      "sha256": "394a52f1f3630fa3920790de80b5de98350306ec6f8c6f3016b3cf2b098b4805"
+    },
+    {
+      "name": "SampledTextureCacheTests.cpp.baseline",
+      "bytes": 16240,
+      "sha256": "7dd14442cf2a48271c3f660f1d4b6cab246474bf7a7a2042e2f71aa5584449e6"
+    },
+    {
+      "name": "seal-cases.cpp",
+      "bytes": 3018,
+      "sha256": "cee200e0e4619ed274eeb3ef471c3fffc179ca144bd7fb25b306f8b2b35eca9b"
+    },
+    {
+      "name": "sharing-check.py",
+      "bytes": 2955,
+      "sha256": "325918fdc247cc8eeee35aa248964d95a73eaeff787e177150b7f4ffb4826d3f"
+    },
+    {
+      "name": "sharing-results.json",
+      "bytes": 506,
+      "sha256": "aa7953eaaf6898a586d4c40c454f50c037e596a8c0191e65b2169336754c28a2"
+    },
+    {
+      "name": "sharing-runtime-source-guard.log",
+      "bytes": 323,
+      "sha256": "59e5f760485a6f191b1517970ea5ad173e1e648d09fb04e02bb2b3e8829bbd99"
+    },
+    {
+      "name": "source/src/render/SampledTextureCache.cpp",
+      "bytes": 10013,
+      "sha256": "67ad227816f77bd7c1e4494c94bc810fa70f30f9a8f3b475b29ce0145f1b07b0"
+    },
+    {
+      "name": "source/src/render/SampledTextureCache.hpp",
+      "bytes": 3191,
+      "sha256": "79ec726d6ca12bbfd77c9af05f948009abe05656c8d8aeeab6b00c7e0de4799b"
+    },
+    {
+      "name": "source/src/scenes/CharacterSceneRenderer.cpp",
+      "bytes": 344578,
+      "sha256": "f85f847dff924fc0b4bdee970522edeecb86237e013f6e8bff04da542e8cba27"
+    },
+    {
+      "name": "source/tests/MaterialTextureSharingTests.cpp",
+      "bytes": 11509,
+      "sha256": "02ac85a837a282da64f8ab8eb367a74b59dd5908b5ae97fa6e036db29f2effaa"
+    },
+    {
+      "name": "source/tests/NullRhiPassTests.cpp",
+      "bytes": 40351,
+      "sha256": "c3527936907bce395ffa9f3a6632f904be2e7c8c97725be701fdbcf8932e2013"
+    },
+    {
+      "name": "source/tests/SampledTextureCacheTests.cpp",
+      "bytes": 19417,
+      "sha256": "c81b5a1fc0f494e6062ada33edc60d3554bf1dd0eacb8970eff26ace78c16811"
+    },
+    {
+      "name": "source-diff.patch",
+      "bytes": 13381,
+      "sha256": "5c7c065b49ddb4bbab2b1df023113e94aadfc51e519523022d27866585e425bd"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "changedInputs": [
+    "tools/run_platformer_long_run.py",
+    "tools/test_platformer_long_run.py"
+  ],
+  "productsIdentical": true,
+  "affectedScope": "PlatformerScenario focus recovery; standard long-run tool and runtime unchanged.",
+  "standardEvidence": "standard-long-run-final/summary.json",
+  "sixPackagesUnchanged": true
+}

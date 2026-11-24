@@ -1,0 +1,100 @@
+{
+  "status": "independent-joint-validation-passed",
+  "sourceBase": "316caf7",
+  "project": "build/runs/20261031-183314-full-scene-playable-validation-d5257e/project/playable.azureproject",
+  "projectSha256": "40674c80b7f3acb531bbf550d3bd9e0c0ec7ab194cc3221a65895765471e57e3",
+  "levelSha256": "d9fedfffa93fc4b4092a9cdaf2ac75a67043bed76d222327d37fed003e965b0a",
+  "projectInputFiles": 1545,
+  "unchangedMaterialFiles": 26,
+  "characterModelSha256": "f188722c428358787a12be615d944f4a07185e9a8eaab72b9aa21105f3b7f997",
+  "release": {
+    "status": "passed",
+    "frames": 540,
+    "actions": 13,
+    "walkSpeed": 1.1999988555908203,
+    "sprintSpeed": 3.000011444091797,
+    "walkClip": 7,
+    "sprintClip": 8,
+    "focusReleased": true,
+    "revisionTransitions": [
+      [
+        451,
+        2,
+        3
+      ]
+    ],
+    "finalIdleGrounded": true,
+    "obstructedFrames": 136,
+    "cameraDistanceRange": [
+      3.532900529056994,
+      4.004996365161682
+    ],
+    "cameraRelativeForwardCosine": 0.9999999998540834,
+    "rawLensForwardCosine": 0.9987478376513353,
+    "cameraYawDegrees": -67.5,
+    "cameraSensitivitySource": "src/ecs/GameComponents.hpp: default .15 degrees per input unit",
+    "minimumCharacterHeight": 1.0317745208740234,
+    "scope": "Production fixed-step input, actual displacement, animation samples, focus, camera collision and script restart. Planter traversal is not a wall-blocking or native-collision-equivalence result."
+  },
+  "debug": {
+    "status": "passed",
+    "frames": 540,
+    "actions": 13,
+    "walkSpeed": 1.1999988555908203,
+    "sprintSpeed": 3.000011444091797,
+    "walkClip": 7,
+    "sprintClip": 8,
+    "focusReleased": true,
+    "revisionTransitions": [
+      [
+        451,
+        2,
+        3
+      ]
+    ],
+    "finalIdleGrounded": true,
+    "obstructedFrames": 136,
+    "cameraDistanceRange": [
+      3.532900529056994,
+      4.004996365161682
+    ],
+    "cameraRelativeForwardCosine": 0.9999999998540834,
+    "rawLensForwardCosine": 0.9987478376513353,
+    "cameraYawDegrees": -67.5,
+    "cameraSensitivitySource": "src/ecs/GameComponents.hpp: default .15 degrees per input unit",
+    "minimumCharacterHeight": 1.0317745208740234,
+    "scope": "Production fixed-step input, actual displacement, animation samples, focus, camera collision and script restart. Planter traversal is not a wall-blocking or native-collision-equivalence result."
+  },
+  "railing": {
+    "status": "passed",
+    "frames": 540,
+    "actions": 5,
+    "barrierRayPlaneZ": 6.042794419457369,
+    "capsuleRadius": 0.3,
+    "heldFrames": [
+      150,
+      280
+    ],
+    "heldContactPosition": [
+      -0.0006435868563130498,
+      1.2417584657669067,
+      6.362800121307373
+    ],
+    "heldMaximumHorizontalSpeed": 0.0,
+    "finalPosition": [
+      -0.0012210163986310363,
+      1.0811060667037964,
+      6.504214286804199
+    ],
+    "minimumZ": 6.362800121307373,
+    "lastSixtyGroundedIdle": true,
+    "lastSixtyMaximumHorizontalSpeed": 0.0,
+    "revision": 2,
+    "scope": "Continued-input blocking against the declared railing, then release and settling; native collider equivalence remains separate."
+  },
+  "fixedRegressionFrames": 3,
+  "formalQualityStage": "Q1 executing; Q2/Q3/Q4 overall gates remain pending",
+  "physicalInput": false,
+  "publishing": false,
+  "scope": "Component/script assembly, functional input replay, source collision geometry and byte-exact fixed visual regression; native appearance, native collision equivalence and performance remain separate."
+}

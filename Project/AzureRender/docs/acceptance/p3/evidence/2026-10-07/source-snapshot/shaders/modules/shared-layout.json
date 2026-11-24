@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "types": [
+    {
+      "name": "BloomParameters",
+      "size": 8,
+      "alignment": 4,
+      "fields": [
+        {"name": "threshold", "type": "float32", "offset": 0, "default": 1.2},
+        {"name": "extractBright", "type": "uint32", "offset": 4, "default": 0}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "id": "resource-validation-public",
+  "sceneType": "character",
+  "renderSettings": {
+    "platform": false
+  },
+  "resources": [
+    {
+      "id": "character",
+      "asset": "assets:/character.gltf"
+    },
+    {
+      "id": "platform",
+      "asset": "assets:/platform.gltf"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "character",
+      "resourceId": "character",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "azure.animator": {
+          "type": "azure.animator",
+          "version": 2,
+          "data": {
+            "asset": "assets:/idle.json",
+            "state": "idle"
+          }
+        }
+      }
+    },
+    {
+      "id": "platform",
+      "resourceId": "platform",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -0.15,
+              0
+            ],
+            "scale": [
+              4,
+              0.15,
+              4
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

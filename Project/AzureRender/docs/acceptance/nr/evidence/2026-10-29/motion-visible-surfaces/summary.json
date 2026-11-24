@@ -1,0 +1,276 @@
+{
+  "phase": "NR7-AA5-E2",
+  "status": "motion-visibility-contract-verified-aa-quality-pending",
+  "sourceBaseCommit": "c47a681",
+  "run": "build/runs/20261029-060530-temporal-cloth-edge-74920a",
+  "source": {
+    "src/scenes/CharacterMotionPass.inc": "239042ae7a0d7482793e1d86a4a0521e7ed6fd587f479016df5d0757ae879f92",
+    "shaders/temporal_resolve.frag": "79e5eb4164f3be064558cbf31d270fa42b2fe53cbca7f7dc04b96810ffbda13e"
+  },
+  "debugTestsPassed": 5,
+  "releaseTestsPassed": 5,
+  "shadersUnchanged": 209,
+  "privateParameterBytesChanged": 0,
+  "newImages": 0,
+  "motionDraws": {
+    "coverage-probe": 3,
+    "visibility-probe": 2,
+    "enabled-platform-probe": 3
+  },
+  "pixel": [
+    64,
+    101
+  ],
+  "fixedCompatibility": {
+    "frames": 80,
+    "identicalPairs": 80
+  },
+  "dynamic": [
+    {
+      "case": "kk",
+      "config": "debug",
+      "status": "passed",
+      "exitCode": 0,
+      "edgeErrorRatio": 0.795232015778979,
+      "maximumGhostPixelsOutsideTwoPixels": 0,
+      "maximumFlatByteError": 0
+    },
+    {
+      "case": "mask",
+      "config": "debug",
+      "status": "failed",
+      "exitCode": 1,
+      "edgeErrorRatio": 0.9321273447005346,
+      "maximumGhostPixelsOutsideTwoPixels": 0,
+      "maximumFlatByteError": 0
+    },
+    {
+      "case": "kk",
+      "config": "release",
+      "status": "passed",
+      "exitCode": 0,
+      "edgeErrorRatio": 0.795232015778979,
+      "maximumGhostPixelsOutsideTwoPixels": 0,
+      "maximumFlatByteError": 0
+    },
+    {
+      "case": "mask",
+      "config": "release",
+      "status": "failed",
+      "exitCode": 1,
+      "edgeErrorRatio": 0.9321273447005346,
+      "maximumGhostPixelsOutsideTwoPixels": 0,
+      "maximumFlatByteError": 0
+    },
+    {
+      "case": "cloth",
+      "config": "release",
+      "status": "failed",
+      "exitCode": 1,
+      "edgeErrorRatio": 1.5818887315442585,
+      "maximumGhostPixelsOutsideTwoPixels": 0,
+      "maximumFlatByteError": 0
+    }
+  ],
+  "clothDebugQuality": {
+    "movingEnergyRatios": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "lastEightEnergyRatios": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "sourceMovingEnergyRatios": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "movingMeanAbsoluteError": 5.4932910072598893e-17,
+    "sourceMovingMeanAbsoluteError": 5.4932910072598893e-17,
+    "errorRatio": 5.4932910072598894e-05,
+    "residualChange": 1.1937881985216738e-18,
+    "sourceResidualChange": 1.1937881985216738e-18,
+    "residualChangeRatio": 1.193788198521674e-06,
+    "edgeErrorRatio": 1.5818887315442585,
+    "maximumGhostPixelsOutsideTwoPixels": 0,
+    "referenceCentroidDisplacement": 12.5,
+    "maximumFlatByteError": 0
+  },
+  "cameraBytes": 688,
+  "materialBytes": 336,
+  "aa5Passed": false,
+  "aa6Passed": false,
+  "defaultAaPromoted": false,
+  "displayReconstructionAdopted": false,
+  "mainNativeEvidenceReused": "NR5-R8-Q: AA1 beauty uses unchanged shaders; early reflection motion already excluded hidden platforms",
+  "cleanup": [
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/enabled-platform/.azure",
+      "bytes": 188405
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/green-cloth-debug/candidate/.azure",
+      "bytes": 188406
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/green-cloth-debug/reference/.azure",
+      "bytes": 188406
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/green-cloth-debug/source/.azure",
+      "bytes": 188406
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/red-cloth/candidate/.azure",
+      "bytes": 188406
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/red-cloth/reference/.azure",
+      "bytes": 188406
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/red-cloth/source/.azure",
+      "bytes": 188406
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-cloth-debug/candidate/.azure",
+      "bytes": 188406
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-cloth-debug/reference/.azure",
+      "bytes": 188406
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-cloth-debug/source/.azure",
+      "bytes": 188406
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-cloth-release/candidate/.azure",
+      "bytes": 188406
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-cloth-release/reference/.azure",
+      "bytes": 188406
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-cloth-release/source/.azure",
+      "bytes": 188406
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-kk-debug/integral/.azure",
+      "bytes": 184857
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-kk-debug/reference/.azure",
+      "bytes": 184811
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-kk-debug/source/.azure",
+      "bytes": 184811
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-kk-release/integral/.azure",
+      "bytes": 184857
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-kk-release/reference/.azure",
+      "bytes": 184811
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-kk-release/source/.azure",
+      "bytes": 184811
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-mask-debug/candidate/.azure",
+      "bytes": 188402
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-mask-debug/reference/.azure",
+      "bytes": 188402
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-mask-debug/source/.azure",
+      "bytes": 188402
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-mask-release/candidate/.azure",
+      "bytes": 188402
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-mask-release/reference/.azure",
+      "bytes": 188402
+    },
+    {
+      "path": "build/runs/20261029-060530-temporal-cloth-edge-74920a/visibility-mask-release/source/.azure",
+      "bytes": 188402
+    }
+  ],
+  "removedBytes": 4688647,
+  "freeBytes": 28713709568
+}

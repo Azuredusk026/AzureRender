@@ -1,0 +1,10 @@
+{
+  "debug": {
+    "passed": true,
+    "link": "build AzurePlayer.exe: CXX_EXECUTABLE_LINKER__AzurePlayer_Debug CMakeFiles\\AzurePlayer.dir\\src\\player\\main.cpp.obj | AzurePlayerHost.lib AzureRuntime.lib AzureRenderCore.lib vcpkg_installed\\x64-windows\\debug\\lib\\OpenEXR-3_4_d.lib vcpkg_installed\\x64-windows\\debug\\lib\\IlmThread-3_4_d.lib vcpkg_installed\\x64-windows\\debug\\lib\\Iex-3_4_d.lib vcpkg_installed\\x64-windows\\debug\\lib\\OpenEXRCore-3_4_d.lib vcpkg_installed\\x64-windows\\debug\\lib\\Imath-3_2_d.lib AzurePlatform.lib AzureFoundation.lib C$:\\VulkanSDK\\1.4.350.0\\Lib\\vulkan-1.lib vcpkg_installed\\x64-windows\\debug\\lib\\glfw3dll.lib || AzureFoundation.lib AzurePlatform.lib AzurePlayerHost.lib AzureRenderCore.lib AzureRenderShaders AzureRuntime.lib"
+  },
+  "release": {
+    "passed": true,
+    "link": "build AzurePlayer.exe: CXX_EXECUTABLE_LINKER__AzurePlayer_Release CMakeFiles\\AzurePlayer.dir\\src\\player\\main.cpp.obj | AzurePlayerHost.lib AzureRuntime.lib AzureRenderCore.lib vcpkg_installed\\x64-windows\\lib\\OpenEXR-3_4.lib vcpkg_installed\\x64-windows\\lib\\IlmThread-3_4.lib vcpkg_installed\\x64-windows\\lib\\Iex-3_4.lib vcpkg_installed\\x64-windows\\lib\\OpenEXRCore-3_4.lib vcpkg_installed\\x64-windows\\lib\\Imath-3_2.lib AzurePlatform.lib AzureFoundation.lib C$:\\VulkanSDK\\1.4.350.0\\Lib\\vulkan-1.lib vcpkg_installed\\x64-windows\\lib\\glfw3dll.lib || AzureFoundation.lib AzurePlatform.lib AzurePlayerHost.lib AzureRenderCore.lib AzureRenderShaders AzureRuntime.lib"
+  }
+}

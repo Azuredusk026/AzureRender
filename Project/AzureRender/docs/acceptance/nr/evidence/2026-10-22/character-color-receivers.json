@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "scope": [
+    "NR6-C8",
+    "NR6-C10"
+  ],
+  "status": "public-mechanisms-passed-native-appearance-incomplete",
+  "formalNr6Status": "Pending",
+  "nativeGlobalsVerified": false,
+  "mechanisms": {
+    "materialSchema": 2,
+    "nprSchema": 1,
+    "receiverSchema": 1,
+    "sceneSchema": 11,
+    "gpuLightBytes": 128,
+    "formulaProbes": 127
+  },
+  "regression": {
+    "debug": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/receivers-regression-debug.log",
+      "sha256": "bb29f0d3941577a3c91165b41b952224ab45ef6931e9b849aa3040800add32f3"
+    },
+    "release": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/receivers-regression-release.log",
+      "sha256": "67d6230bcec56251e42081a9a21fd08fd69ddcacb729ba1f7f613c9ce5227480"
+    }
+  },
+  "gpu": {
+    "debug": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/receivers-npr-gpu-debug.json",
+      "sha256": "9a1be731d94c927772fe06b7c12c4a35ca8445fe51773a3e1f4c516a3b9cfc32"
+    },
+    "release": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/receivers-npr-gpu-release.json",
+      "sha256": "caab063c7dcb943e6e365fa3c32ad98db6b325302c9573eac83ee26f346d60dc"
+    }
+  },
+  "shaderLink": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/frozen-production/shader-link.json",
+    "sha256": "3443a639e81c81a71c24ca7e0768991c9672d4814b73ad39952765f44907d568"
+  },
+  "sourceSnapshot": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/frozen-production/source-index.json",
+    "sha256": "4a4a0f232c2ac10b7bc6b535d9893af8184a44e819d7bdf87576cf270ec56ea4"
+  },
+  "sourceReader": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-light-source-full-final.log",
+    "sha256": "9219664d5f58d2714734ca49375c1ea426e125f1d0a51e368f82433c38c5c16f"
+  },
+  "realSourceRecords": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/native-character-light-record-validation.json",
+    "sha256": "a5240eb11a8bd90e8767802956f813f4261df187482ce5a7a5888e2b69f7532b"
+  },
+  "lightPolicyAudit": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/native-character-light-policy-audit.json",
+    "sha256": "2ba10135f559089ecb003aea1ce52cdbfe573476760c2afd7f8aab7c3e2d0872"
+  },
+  "candidate": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/source-lighting-candidate.json",
+    "sha256": "ab571c1f964f12f388ace588c1b687dfac68eaa392b8764a70fade092258ad47"
+  },
+  "originalColorReference": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/shadow-lut-pixel-reference.json",
+    "sha256": "d567588be43adbded79d4aacdeaf5c8f6cf5702edb28ddc465a2bd826f568207"
+  },
+  "formulaInputs": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/npr-compute-reference.json",
+    "sha256": "79043f5ed280405b8e985ba5dc19c94f2aaaf98c4abdbdba73575ee05fe0c83c"
+  },
+  "visualReview": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/native-appearance-review.json",
+    "sha256": "0406443e4ac1715f0499dc8d8d3e653a4a07ae062b5ce1ef6addb41266bf2055"
+  },
+  "red": [
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/npr-loader-red.log",
+      "sha256": "7f00916a0d4ba147e4a7791eee86bae7d756d7361f703663aca7e5b64f6efd36"
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/npr-formula-red.log",
+      "sha256": "262d46c025f2406ab299918f5f839e88886bf0dcf54b9436ed43bab04964a4da"
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/npr-beauty-red-v3.log",
+      "sha256": "9559ecc5f448ee83243acf77aca30afbc244006663afcd3bcae7927a2661d605"
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/npr-local-red.log",
+      "sha256": "2a7079ac051a50ab4767e193c08a6e2af1bd9bba2a40df6ee10bb0e9b62a7024"
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/receivers-red-v2.log",
+      "sha256": "4c4b2401cb7fa471849c8291b3dac2cd11a25f8bcc3611d92a0e42c3afffec92"
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/receivers-red-gpu.log",
+      "sha256": "6ff44cab9b1898f0ba846bb702f8119eb7479d9986d76cd516f99a11c46f6466"
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/receivers-save-red-v2.log",
+      "sha256": "454616e0c6973cddc7752fc52c5d83ed6edbe987c2ad6a86897f9561b23a1675"
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-light-source-red.log",
+      "sha256": "c023461caee730f3d1e3d5f32bca72a35592f3cac74a3184ab144c9841c31413"
+    }
+  ],
+  "limitations": [
+    "Host incident illumination is not the recovered native fullDiffuseIllumination.",
+    "Native material color composition remains an explicit candidate and is not promoted to the active scene.",
+    "Native default local-light tone, energy compression and runtime globals remain unbound.",
+    "Eye, cloth specular ramp, hair masks and outline masks retain their separate gates.",
+    "Formal visual, performance, cross-device and NR0-NR12 gates remain incomplete."
+  ],
+  "actualCaptures": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-source-lighting-final/receipt.json",
+    "sha256": "0014950e17ab90447870a1ad267a8a83b6513db0bc227af91e13a0d5614c4cf1"
+  },
+  "actualSourceIndex": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-source-lighting-final/source-index.json",
+    "sha256": "87d331616c1157b9afac269f67d1a76e598f8f4fb389d3e834e632614b87bde4"
+  },
+  "actualCaptureFrames": 35,
+  "diagnosticVideo": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-source-lighting-final/wide-diagnostic.mp4",
+    "sha256": "cf95421f722b0c235f1ce9648fe644d78c9751c2348715a1ccc696489f7522bd"
+  },
+  "postVerificationFormatting": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/format-normalization.json",
+    "sha256": "dd3874b50cb72b052aeceb6c2385e52418a90a487421a3afba1f6358e92ec7fe"
+  }
+}

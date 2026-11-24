@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-implementation-2026-10-10\trace_argument_roundtrip.py", line 14, in <module>
+    assert actual==expected,(actual,expected)
+           ^^^^^^^^^^^^^^^^
+AssertionError: (['C:/Source/path with spaces/file', 'quoted "name"', '����Ŀ¼'], ['C:\\Source\\path with spaces\\file', 'quoted "name"', '����Ŀ¼'])

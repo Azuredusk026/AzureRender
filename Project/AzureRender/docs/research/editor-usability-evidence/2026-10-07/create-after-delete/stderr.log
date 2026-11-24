@@ -1,0 +1,34 @@
+[1791387801537][info][editor][code=0] Opened scene: exploration
+[1791387801858][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791387802124][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791387802139][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791387802151][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791387802155][info][editor][code=0] Opened scene: exploration
+[1791387802156][info][editor][code=0] Selected node: hero:body
+[1791387802178][info][editor][code=0] Asset reload requested; changed files: 0
+[1791387802186][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791387802199][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791387802209][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791387802211][info][editor][code=0] Renderer resources reloaded
+[1791387802305][info][editor][code=0] Opened scene: exploration
+[1791387802307][info][editor][code=0] Selected node: node-21
+[1791387802314][info][editor][code=0] Asset reload requested; changed files: 0
+[1791387802322][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791387802335][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791387802348][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791387802350][info][editor][code=0] Renderer resources reloaded
+[1791387802361][info][editor][code=0] Opened scene: exploration
+[1791387802362][info][editor][code=0] Selected node: node-22
+[1791387802368][info][editor][code=0] Asset reload requested; changed files: 0
+[1791387802376][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791387802389][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791387802398][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791387802400][info][editor][code=0] Renderer resources reloaded
+[1791387802426][info][editor][code=0] Opened scene: exploration
+[1791387802428][info][editor][code=0] Selected node: node-23
+[1791387802436][info][editor][code=0] Asset reload requested; changed files: 0
+[1791387802444][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791387802458][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791387802470][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791387802472][info][editor][code=0] Renderer resources reloaded
+[1791387802508][info][editor][code=0] Saved scene: D:\Assigment\2609\FYP\Project\AzureRender\build\ux-audit\2026-10-07\game\assets\exploration.azurelevel

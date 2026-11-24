@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "scope": "The scene probe adaptation fix preserves the existing native material policy candidate outside the mixed-source field control.",
+  "cases": [
+    {
+      "name": "fullbody-world-aa0",
+      "frames": 64,
+      "differentFrames": []
+    },
+    {
+      "name": "fullbody-source-aa0",
+      "frames": 64,
+      "differentFrames": []
+    }
+  ]
+}

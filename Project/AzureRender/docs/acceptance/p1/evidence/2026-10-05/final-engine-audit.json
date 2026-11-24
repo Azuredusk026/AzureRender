@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "gateStatus": "passed",
+  "archive": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender-0.1.0-rc1-Windows-x64.tar.gz",
+  "sha256": "8fa3ea1d1d034b358efe23c2c72114f5b4ef5c28947b195595de862adda207cc",
+  "sizeBytes": 9706992,
+  "finalDocumentationMatches": true,
+  "privateAssetsExcluded": true,
+  "preservedArchive": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p1\\engine-release-final.tar.gz"
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "results": {
+    "publicQuest": "passed",
+    "movedPackage": "passed",
+    "cycles": "passed",
+    "thermalLongRun": "passed",
+    "privateQuest": "passed",
+    "additionalGpu": "passed",
+    "fullRegression": "passed",
+    "publicPackagePerformance": "passed",
+    "zipExtractionAndQuest": "passed",
+    "licensesAndHashes": "passed"
+  },
+  "quality": {
+    "schemaVersion": 1,
+    "platform": "Windows x64",
+    "vulkanApi": "1.3",
+    "width": 1920,
+    "height": 1080,
+    "targetHz": 60,
+    "shadowMapSize": 2048,
+    "shadowCascades": 4,
+    "entities": 100,
+    "animatedCharacters": 4,
+    "fullGameUi": true,
+    "materialQuality": "full",
+    "privateCharacter": false,
+    "pointLights": 8
+  },
+  "compatibility": [
+    {
+      "device": "RTX 4060 Laptop",
+      "resolution": "1920x1080",
+      "scope": "正式预算、任务、循环、窗口恢复与30分钟长跑"
+    },
+    {
+      "device": "Intel RaptorLake-S Mobile Graphics Controller",
+      "resolution": "960x540",
+      "scope": "完整任务、两次重开和退出释放"
+    }
+  ],
+  "knownLimits": [
+    "Windows x64",
+    "兼容声明覆盖实测设备与质量配置",
+    "私有主角资源保留在本机忽略目录"
+  ],
+  "originalSourceInputsRemoved": true,
+  "zip": {
+    "status": "passed",
+    "archive": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p1\\Delivery\\Azure-Exploration-Windows-x64.zip",
+    "sha256": "d622e56e4c72ae9b5e403e602d633499fbfac70a0f4ac41e3e12076dc68468a8",
+    "sizeBytes": 7264304,
+    "files": 207,
+    "extracted": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p1\\Delivery\\Zip Verification\\Azure Exploration",
+    "manifestHash": "0dcedb54323dc4bcf2cc0747e9677fdd2ac03548a4b0030701218075dff4edfe",
+    "cacheExcluded": true,
+    "privateAssetsExcluded": true
+  }
+}

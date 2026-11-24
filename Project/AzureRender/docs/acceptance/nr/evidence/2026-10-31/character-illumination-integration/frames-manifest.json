@@ -1,0 +1,170 @@
+[
+  {
+    "case": "near",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-near\\frames\\frame_000000.png",
+    "bytes": 2979155,
+    "sha256": "8742be6ed6d8dd9da85dad78894d3bbdcdd18fc476d52571f52060766429bfad"
+  },
+  {
+    "case": "full",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-full\\frames\\frame_000000.png",
+    "bytes": 5622525,
+    "sha256": "7ce6dab7136bfc1f47efdd7880eb49d52ff44187d676ea5ca2155da62aa2451c"
+  },
+  {
+    "case": "full",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-full\\frames\\frame_000001.png",
+    "bytes": 5622738,
+    "sha256": "0b162f37684b88fade1aaedfb4f306af1ca3b2dafefadad1adaf67675947aecd"
+  },
+  {
+    "case": "full",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-full\\frames\\frame_000002.png",
+    "bytes": 5623569,
+    "sha256": "7b269a7fbb4a6ccd9dbcdf336ec1719b9a34463345552f7b3dac419885951c6c"
+  },
+  {
+    "case": "hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-hidden\\frames\\frame_000000.png",
+    "bytes": 5576281,
+    "sha256": "0fda0452feef2f4df5b9bc8c51aa47df8354834d04e4a19e62998f3a2d78e7d4"
+  },
+  {
+    "case": "hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-hidden\\frames\\frame_000001.png",
+    "bytes": 5577174,
+    "sha256": "5532c8d1176f00adf257a628b03fb72d0195659e3354639949bb4ef14c960c19"
+  },
+  {
+    "case": "hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-hidden\\frames\\frame_000002.png",
+    "bytes": 5577792,
+    "sha256": "91cc7197980d975bb177754f95ed004330b8ced920b9ab59d745eb2573c4e216"
+  },
+  {
+    "case": "hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-hidden\\frames\\frame_000003.png",
+    "bytes": 5577070,
+    "sha256": "9b77c2e35db0d4cd1d9cef7d85bfd4c9b13b94ea595df70deac0c61562c2549b"
+  },
+  {
+    "case": "hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-hidden\\frames\\frame_000004.png",
+    "bytes": 5578159,
+    "sha256": "8c18aa7ed46e72a7e76a1729a07b5a35b9185b9ad3c1ae3ff172be80c7f5540b"
+  },
+  {
+    "case": "hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-hidden\\frames\\frame_000005.png",
+    "bytes": 5577682,
+    "sha256": "28f7a1aacb77315b4195d1a2aaed6414501876bd9322dcce91e5b8143f8781b6"
+  },
+  {
+    "case": "hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-hidden\\frames\\frame_000006.png",
+    "bytes": 5579217,
+    "sha256": "85a2a0b7c53dd55f38efecf5573cb7117b1d2afb6700bd9296004f38d1b6fa9d"
+  },
+  {
+    "case": "hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-hidden\\frames\\frame_000007.png",
+    "bytes": 5579035,
+    "sha256": "20151f1cf58155198593b3d482987b38e36f1896cdedec65ffbc414b78bb4d9d"
+  },
+  {
+    "case": "hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-hidden\\frames\\frame_000008.png",
+    "bytes": 5579296,
+    "sha256": "34b39e70c53dfc3f68b81c157f8410821a6bfa475a5f340a0dcf586b21d4dc89"
+  },
+  {
+    "case": "hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-hidden\\frames\\frame_000009.png",
+    "bytes": 5579509,
+    "sha256": "6eb6bccc3aefaa63efce32fb534e6c6bcc353aa94d709719616c217e0826975e"
+  },
+  {
+    "case": "hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-hidden\\frames\\frame_000010.png",
+    "bytes": 5580000,
+    "sha256": "168769447af1ca56aa8ec4c2a5bf32828cfa79ec90e4bf39fc9ba0149ee5a1ed"
+  },
+  {
+    "case": "hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-hidden\\frames\\frame_000011.png",
+    "bytes": 5580774,
+    "sha256": "fcd8ffeed8fe9eede0cbe4b80b15adbb7f360bf3c530db82bb75ff7dcbc4a854"
+  },
+  {
+    "case": "control-hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-control-hidden\\frames\\frame_000000.png",
+    "bytes": 5576281,
+    "sha256": "0fda0452feef2f4df5b9bc8c51aa47df8354834d04e4a19e62998f3a2d78e7d4"
+  },
+  {
+    "case": "control-hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-control-hidden\\frames\\frame_000001.png",
+    "bytes": 5577174,
+    "sha256": "5532c8d1176f00adf257a628b03fb72d0195659e3354639949bb4ef14c960c19"
+  },
+  {
+    "case": "control-hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-control-hidden\\frames\\frame_000002.png",
+    "bytes": 5577792,
+    "sha256": "91cc7197980d975bb177754f95ed004330b8ced920b9ab59d745eb2573c4e216"
+  },
+  {
+    "case": "control-hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-control-hidden\\frames\\frame_000003.png",
+    "bytes": 5577070,
+    "sha256": "9b77c2e35db0d4cd1d9cef7d85bfd4c9b13b94ea595df70deac0c61562c2549b"
+  },
+  {
+    "case": "control-hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-control-hidden\\frames\\frame_000004.png",
+    "bytes": 5578159,
+    "sha256": "8c18aa7ed46e72a7e76a1729a07b5a35b9185b9ad3c1ae3ff172be80c7f5540b"
+  },
+  {
+    "case": "control-hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-control-hidden\\frames\\frame_000005.png",
+    "bytes": 5577682,
+    "sha256": "28f7a1aacb77315b4195d1a2aaed6414501876bd9322dcce91e5b8143f8781b6"
+  },
+  {
+    "case": "control-hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-control-hidden\\frames\\frame_000006.png",
+    "bytes": 5579217,
+    "sha256": "85a2a0b7c53dd55f38efecf5573cb7117b1d2afb6700bd9296004f38d1b6fa9d"
+  },
+  {
+    "case": "control-hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-control-hidden\\frames\\frame_000007.png",
+    "bytes": 5579035,
+    "sha256": "20151f1cf58155198593b3d482987b38e36f1896cdedec65ffbc414b78bb4d9d"
+  },
+  {
+    "case": "control-hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-control-hidden\\frames\\frame_000008.png",
+    "bytes": 5579296,
+    "sha256": "34b39e70c53dfc3f68b81c157f8410821a6bfa475a5f340a0dcf586b21d4dc89"
+  },
+  {
+    "case": "control-hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-control-hidden\\frames\\frame_000009.png",
+    "bytes": 5579509,
+    "sha256": "6eb6bccc3aefaa63efce32fb534e6c6bcc353aa94d709719616c217e0826975e"
+  },
+  {
+    "case": "control-hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-control-hidden\\frames\\frame_000010.png",
+    "bytes": 5580000,
+    "sha256": "168769447af1ca56aa8ec4c2a5bf32828cfa79ec90e4bf39fc9ba0149ee5a1ed"
+  },
+  {
+    "case": "control-hidden",
+    "file": "build\\runs\\20261031-155126-temporal-reference-quality-a9c045\\illumination-control-hidden\\frames\\frame_000011.png",
+    "bytes": 5580774,
+    "sha256": "fcd8ffeed8fe9eede0cbe4b80b15adbb7f360bf3c530db82bb75ff7dcbc4a854"
+  }
+]

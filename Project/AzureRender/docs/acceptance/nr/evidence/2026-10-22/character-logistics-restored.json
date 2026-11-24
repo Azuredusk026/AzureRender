@@ -1,0 +1,444 @@
+{
+  "schemaVersion": 1,
+  "capture": {
+    "schemaVersion": 1,
+    "status": "engineering-preview-native-equivalence-pending",
+    "width": 1920,
+    "height": 1080,
+    "fps": 15,
+    "durationSeconds": 8,
+    "validationEnabled": false,
+    "sources": {
+      "build\\ninja-msvc-release\\AzurePlayer.exe": "fb95d28f99886e581b3a9aba8514ef1a07f25e997f63fbc1cb0684a329b4d59d",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-character\\hero-profile.glb": "8642f0e738024a4eaba33c85099cda5bb7064f17dba25f0c544baf3240a25b7c",
+      "build\\ninja-msvc-release\\shaders\\background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+      "build\\ninja-msvc-release\\shaders\\background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+      "build\\ninja-msvc-release\\shaders\\background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+      "build\\ninja-msvc-release\\shaders\\blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+      "build\\ninja-msvc-release\\shaders\\blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+      "build\\ninja-msvc-release\\shaders\\blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+      "build\\ninja-msvc-release\\shaders\\blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+      "build\\ninja-msvc-release\\shaders\\blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+      "build\\ninja-msvc-release\\shaders\\bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+      "build\\ninja-msvc-release\\shaders\\bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+      "build\\ninja-msvc-release\\shaders\\character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+      "build\\ninja-msvc-release\\shaders\\character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+      "build\\ninja-msvc-release\\shaders\\character_snapshot.frag.spv": "919ed7a86a3f0780e22466b42d93fbce65ca4c38b9391dfa59a62b70b7e93783",
+      "build\\ninja-msvc-release\\shaders\\character_snapshot_bindless.frag.spv": "3eb8c725a5b507386977d99993e8a14f03ff53219e9a15dd3f56a84781487e8d",
+      "build\\ninja-msvc-release\\shaders\\clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+      "build\\ninja-msvc-release\\shaders\\color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+      "build\\ninja-msvc-release\\shaders\\cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+      "build\\ninja-msvc-release\\shaders\\editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+      "build\\ninja-msvc-release\\shaders\\editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+      "build\\ninja-msvc-release\\shaders\\game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+      "build\\ninja-msvc-release\\shaders\\game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+      "build\\ninja-msvc-release\\shaders\\hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+      "build\\ninja-msvc-release\\shaders\\hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+      "build\\ninja-msvc-release\\shaders\\ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+      "build\\ninja-msvc-release\\shaders\\inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+      "build\\ninja-msvc-release\\shaders\\inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+      "build\\ninja-msvc-release\\shaders\\mesh.frag.spv": "d21ec8e671576245c2d3147a15220d5a153d9446c37e405e43714f067cd8efab",
+      "build\\ninja-msvc-release\\shaders\\mesh.vert.spv": "91d2350d95d5c1a286bd7222d78d86d3040346b1126ee1a0f5bfa87ccdc1f430",
+      "build\\ninja-msvc-release\\shaders\\mesh_bindless.frag.spv": "70f1d91d8a26fbc53801c42d22dc94a6a51cb557d1ef6a4c5b61e543082b6399",
+      "build\\ninja-msvc-release\\shaders\\mesh_compute.vert.spv": "56ac991cffba0e57fb21d49588e8d8648aec92cbc7cfd15afffe53cba3d11904",
+      "build\\ninja-msvc-release\\shaders\\outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+      "build\\ninja-msvc-release\\shaders\\outline.vert.spv": "fcb1503f585505b1d3a77bec3802089e11f335e327435c2fc7bef7dca7ae988d",
+      "build\\ninja-msvc-release\\shaders\\outline_compute.vert.spv": "72d37cc9ada34c79ad525456cc144fed6cd15ba82e065ac22791fcfc33a7a61a",
+      "build\\ninja-msvc-release\\shaders\\outline_mask.frag.spv": "c6c0875b058ce8b2fd8d1bc7504687ded47690cc4753fae9e2ff9b839a43a4c9",
+      "build\\ninja-msvc-release\\shaders\\outline_mask.vert.spv": "80b9ecfa3f1fd2b1dea4c93da4950117f50e86f6b6661f81fae08b384c512c85",
+      "build\\ninja-msvc-release\\shaders\\outline_mask_bindless.frag.spv": "4bc09476228361b8159d2ef404f692e13672f63cef9213dcc6372f3dcf0dcb5d",
+      "build\\ninja-msvc-release\\shaders\\outline_mask_compute.vert.spv": "4ee7d0e2e37e47141e834bc87c15bd3a71ab5655a39e11a0d9eb909f56a08753",
+      "build\\ninja-msvc-release\\shaders\\pathtracing.comp.spv": "88322fbe2b402933218fa79e886d035abed769a449fcef963ac80eee7f6bdb7b",
+      "build\\ninja-msvc-release\\shaders\\pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+      "build\\ninja-msvc-release\\shaders\\shadow.frag.spv": "3d4dae2f7f80c0ad190ecc37f6e0e00c0ee2513a3be06796200939d7b9298daf",
+      "build\\ninja-msvc-release\\shaders\\shadow.vert.spv": "f77f4a08f86ecb4cbdbfb60d5c76c876925d5d3af2a640d22edc920313cb5443",
+      "build\\ninja-msvc-release\\shaders\\shadow_bindless.frag.spv": "e00496a5ed0f66a4a776d96881fcf6453204883485d4a82712d93ff7331aa20f",
+      "build\\ninja-msvc-release\\shaders\\shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+      "build\\ninja-msvc-release\\shaders\\shadow_compute.vert.spv": "4464815c6638a890f0dac62b6b1d47641374adb5fa4d24b15f32d987308bb79d",
+      "build\\ninja-msvc-release\\shaders\\shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+      "build\\ninja-msvc-release\\shaders\\skin.comp.spv": "c568f268629009a4421afe0c452f52c1d6fd7cb494a5587545528e6983c02d26",
+      "build\\ninja-msvc-release\\shaders\\sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+      "build\\ninja-msvc-release\\shaders\\spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+      "build\\ninja-msvc-release\\shaders\\surface_response_test.comp.spv": "d09c5f4c32619b5f8776b420bf58367e3f675234a56f5848e58f1ce357c8e6d7",
+      "build\\ninja-msvc-release\\shaders\\view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+      "build\\ninja-msvc-release\\shaders\\visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-down_b_s01.glb": "e918b44f2316c2908b54ebe44eeb562b99c3f2206dc5bfb5d0ec039d114637d9",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-down_b_s02.glb": "8239ec664910ce84efc66c38d4befddbfc6bdb6005f4750bafa71ae02df653ae",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-down_b_s03.glb": "c1c1701b9b556aaa59c2c4c08e6bbdb81fe2de09097181d4c7b34bc64943ea4e",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-down_b_s04.glb": "2f6693d57efde18554db27e0163ed7f0dd0f6329f7ddbffc9b9dc3f58ce9b9d0",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-single.glb": "f3bd816b5477a901d7b39bb7f8ba9f5610998d9c5d3175c831d1bd42cbde3608",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-up_b_s01.glb": "948a6fceb057c659d71e07836711adbbc326514671622d28ebda23dd9a460d8e",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-up_b_s02.glb": "0d00e0d2f2b557fc49b56d4ff730127c51a9721c92ae5a1fc4ee00f79ba05558",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-up_b_s03.glb": "4ead4a27e56a21fde3da36c270b2406b3f5efd240bb883ea75eaa237f52793b4",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-up_b_s04.glb": "8bc138f327fbe841d2d257aae0c30ad288e7468f8c949cc06a299d5e44d5f86d",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-up_q_01.glb": "17a43f75cb5f1305d77e9788a1a2cf2789e8eb8ffd63c32f9ecdbf3993353933",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-up_q_02.glb": "512377d401bc7e45f6459059b4b236cbe8d4a6dbf2c2849df01cf5be5c9f6600",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\view-wide.azureproject": "e76fea8fa3941969785ced45a2aba50c42311cc920c3dfe99908ac411e610027",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\view-face.azureproject": "5ea6ad5aaeb792ec3ff6ec0baa5d797f5123a11f30c78ca879b1d1bca51ee424",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\view-fullbody.azureproject": "688fa009ad3907028c734162671eb08671516489c65bf9773cce1bc8d100db8e",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\view-logistics.azureproject": "60c1d9c46f9a8583af0e542ed003a43bab89b5f436340dba98c819aeb3fb1274",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\view-wide.azurelevel": "eed6eb58ee762144cc63397e23cb16c07ea90cc0dcdf60e8c98bb515ea793894",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\view-face.azurelevel": "d46b5c9cefb620c23cc39918514902ff93f87f648f178eb6e7e1638cfd38510d",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\view-fullbody.azurelevel": "3fe894e3fe78e7815385660daca6f03806c95b485b86bfe32a3d6942db29ecc4",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\view-logistics.azurelevel": "e24b9dc9d1d74d9b092a895dbb71797825c5ee6d094bf5b21cb6d4662c936fcb",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\playable-safe.azureproject": "f7b5504f9ea0b975fe133b1eef7d53dc1c1a5c3ea57c3bfd508313f5cc74a07d",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\playable-safe.azurelevel": "2561d43f0692584ea4a60bc2391497fc82adf8e0c0944c6b0a92fcb979eb482d",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\native-closed-speed-blend.json": "30ab5df776ea36da040cc21a8716e003a9e19f3b829a2b4cca448d482cf0d8e3",
+      "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\atrium-safety.lua": "c53df03a7ffa1230a7b7505630da3a014ae2d16807372494bd4d51c9c11a55ee"
+    },
+    "views": [
+      {
+        "view": "wide",
+        "frames": 30,
+        "exitCode": 0,
+        "scriptErrors": 0,
+        "presentationErrors": 0,
+        "allocatorImagesAfterUnload": 0,
+        "allocatorBuffersAfterUnload": 0,
+        "firstFrameSha256": "66ee544047061a134ead3867b13311d872b1f38b407e0cd4a17dd10fba6d402a",
+        "lastFrameSha256": "6cb0b7fb335fd672bfb86d21daf95518e8994643f699acc7b2a821d0141058e9",
+        "meanFirstLastEncodedDifference": 4.007642103909465
+      },
+      {
+        "view": "fullbody",
+        "frames": 30,
+        "exitCode": 0,
+        "scriptErrors": 0,
+        "presentationErrors": 0,
+        "allocatorImagesAfterUnload": 0,
+        "allocatorBuffersAfterUnload": 0,
+        "firstFrameSha256": "0d7597f808183b812ff8908db48a00bdbbc42464880136916a9f40906e2a560c",
+        "lastFrameSha256": "375e5c956fced7f449f4efe4fda7e57901d274cac9a425247c97faf0e668e54f",
+        "meanFirstLastEncodedDifference": 8.221617155349794
+      },
+      {
+        "view": "face",
+        "frames": 30,
+        "exitCode": 0,
+        "scriptErrors": 0,
+        "presentationErrors": 0,
+        "allocatorImagesAfterUnload": 0,
+        "allocatorBuffersAfterUnload": 0,
+        "firstFrameSha256": "2f04499d8a72e13aeecd55fb7121406f4f59ef37c4322e187fb84bb392632da3",
+        "lastFrameSha256": "3a3004569bda4f4a813f243c16c21c6921033122959bcd76ff1ab2c2dfca9079",
+        "meanFirstLastEncodedDifference": 13.96096579218107
+      },
+      {
+        "view": "logistics",
+        "frames": 30,
+        "exitCode": 0,
+        "scriptErrors": 0,
+        "presentationErrors": 0,
+        "allocatorImagesAfterUnload": 0,
+        "allocatorBuffersAfterUnload": 0,
+        "firstFrameSha256": "7094be045710b3b729b5eb35c4379ec80a21e6f38873f4fd20b34619d5ec6a46",
+        "lastFrameSha256": "03c2faca7e531fe34eab60a60da0f52919bc6e52cadbdb9860ed6032bb128af8",
+        "meanFirstLastEncodedDifference": 5.401396283436214
+      }
+    ],
+    "movement": {
+      "frames": 300,
+      "replayedActions": 10,
+      "maximumDisplacement": 1.7799214253759355,
+      "maximumWeightError": 4.027242539450526e-08,
+      "mixedFrames": 250,
+      "dominantClips": [
+        0,
+        7,
+        8
+      ],
+      "finalIdleAndGrounded": true,
+      "scriptErrors": 0,
+      "presentationErrors": 0,
+      "allocatorBuffersAfterUnload": 0,
+      "allocatorImagesAfterUnload": 0
+    },
+    "videoSha256": "16e9a55f4b5c9ba0e80adee6861fde2c9575560a40aa4edeb50147e45deafedd",
+    "commit": "616ce98d503fde35a5a3596dd060a01e3b3bb5b8"
+  },
+  "inputArchive": {
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\AzurePlayer.exe": "fb95d28f99886e581b3a9aba8514ef1a07f25e997f63fbc1cb0684a329b4d59d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-character\\hero-profile.glb": "8642f0e738024a4eaba33c85099cda5bb7064f17dba25f0c544baf3240a25b7c",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\character_snapshot.frag.spv": "919ed7a86a3f0780e22466b42d93fbce65ca4c38b9391dfa59a62b70b7e93783",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\character_snapshot_bindless.frag.spv": "3eb8c725a5b507386977d99993e8a14f03ff53219e9a15dd3f56a84781487e8d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\mesh.frag.spv": "d21ec8e671576245c2d3147a15220d5a153d9446c37e405e43714f067cd8efab",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\mesh.vert.spv": "91d2350d95d5c1a286bd7222d78d86d3040346b1126ee1a0f5bfa87ccdc1f430",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\mesh_bindless.frag.spv": "70f1d91d8a26fbc53801c42d22dc94a6a51cb557d1ef6a4c5b61e543082b6399",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\mesh_compute.vert.spv": "56ac991cffba0e57fb21d49588e8d8648aec92cbc7cfd15afffe53cba3d11904",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\outline.vert.spv": "fcb1503f585505b1d3a77bec3802089e11f335e327435c2fc7bef7dca7ae988d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\outline_compute.vert.spv": "72d37cc9ada34c79ad525456cc144fed6cd15ba82e065ac22791fcfc33a7a61a",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\outline_mask.frag.spv": "c6c0875b058ce8b2fd8d1bc7504687ded47690cc4753fae9e2ff9b839a43a4c9",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\outline_mask.vert.spv": "80b9ecfa3f1fd2b1dea4c93da4950117f50e86f6b6661f81fae08b384c512c85",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\outline_mask_bindless.frag.spv": "4bc09476228361b8159d2ef404f692e13672f63cef9213dcc6372f3dcf0dcb5d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\outline_mask_compute.vert.spv": "4ee7d0e2e37e47141e834bc87c15bd3a71ab5655a39e11a0d9eb909f56a08753",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\pathtracing.comp.spv": "88322fbe2b402933218fa79e886d035abed769a449fcef963ac80eee7f6bdb7b",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\shadow.frag.spv": "3d4dae2f7f80c0ad190ecc37f6e0e00c0ee2513a3be06796200939d7b9298daf",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\shadow.vert.spv": "f77f4a08f86ecb4cbdbfb60d5c76c876925d5d3af2a640d22edc920313cb5443",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\shadow_bindless.frag.spv": "e00496a5ed0f66a4a776d96881fcf6453204883485d4a82712d93ff7331aa20f",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\shadow_compute.vert.spv": "4464815c6638a890f0dac62b6b1d47641374adb5fa4d24b15f32d987308bb79d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\skin.comp.spv": "c568f268629009a4421afe0c452f52c1d6fd7cb494a5587545528e6983c02d26",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\surface_response_test.comp.spv": "d09c5f4c32619b5f8776b420bf58367e3f675234a56f5848e58f1ce357c8e6d7",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\ninja-msvc-release\\shaders\\visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-down_b_s01.glb": "e918b44f2316c2908b54ebe44eeb562b99c3f2206dc5bfb5d0ec039d114637d9",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-down_b_s02.glb": "8239ec664910ce84efc66c38d4befddbfc6bdb6005f4750bafa71ae02df653ae",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-down_b_s03.glb": "c1c1701b9b556aaa59c2c4c08e6bbdb81fe2de09097181d4c7b34bc64943ea4e",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-down_b_s04.glb": "2f6693d57efde18554db27e0163ed7f0dd0f6329f7ddbffc9b9dc3f58ce9b9d0",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-single.glb": "f3bd816b5477a901d7b39bb7f8ba9f5610998d9c5d3175c831d1bd42cbde3608",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-up_b_s01.glb": "948a6fceb057c659d71e07836711adbbc326514671622d28ebda23dd9a460d8e",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-up_b_s02.glb": "0d00e0d2f2b557fc49b56d4ff730127c51a9721c92ae5a1fc4ee00f79ba05558",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-up_b_s03.glb": "4ead4a27e56a21fde3da36c270b2406b3f5efd240bb883ea75eaa237f52793b4",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-up_b_s04.glb": "8bc138f327fbe841d2d257aae0c30ad288e7468f8c949cc06a299d5e44d5f86d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-up_q_01.glb": "17a43f75cb5f1305d77e9788a1a2cf2789e8eb8ffd63c32f9ecdbf3993353933",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\logistics-up_q_02.glb": "512377d401bc7e45f6459059b4b236cbe8d4a6dbf2c2849df01cf5be5c9f6600",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\view-wide.azureproject": "e76fea8fa3941969785ced45a2aba50c42311cc920c3dfe99908ac411e610027",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\view-face.azureproject": "5ea6ad5aaeb792ec3ff6ec0baa5d797f5123a11f30c78ca879b1d1bca51ee424",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\view-fullbody.azureproject": "688fa009ad3907028c734162671eb08671516489c65bf9773cce1bc8d100db8e",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\view-logistics.azureproject": "60c1d9c46f9a8583af0e542ed003a43bab89b5f436340dba98c819aeb3fb1274",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\view-wide.azurelevel": "eed6eb58ee762144cc63397e23cb16c07ea90cc0dcdf60e8c98bb515ea793894",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\view-face.azurelevel": "d46b5c9cefb620c23cc39918514902ff93f87f648f178eb6e7e1638cfd38510d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\view-fullbody.azurelevel": "3fe894e3fe78e7815385660daca6f03806c95b485b86bfe32a3d6942db29ecc4",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\view-logistics.azurelevel": "e24b9dc9d1d74d9b092a895dbb71797825c5ee6d094bf5b21cb6d4662c936fcb",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\playable-safe.azureproject": "f7b5504f9ea0b975fe133b1eef7d53dc1c1a5c3ea57c3bfd508313f5cc74a07d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\playable-safe.azurelevel": "2561d43f0692584ea4a60bc2391497fc82adf8e0c0944c6b0a92fcb979eb482d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\native-closed-speed-blend.json": "30ab5df776ea36da040cc21a8716e003a9e19f3b829a2b4cca448d482cf0d8e3",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-restored\\inputs\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-assets\\atrium-safety.lua": "c53df03a7ffa1230a7b7505630da3a014ae2d16807372494bd4d51c9c11a55ee"
+  },
+  "videoDecodeVerified": true,
+  "logisticsConsumers": [
+    {
+      "view": "wide",
+      "activeLogisticsAnimationNodes": 10,
+      "time": 1.9333333333333331
+    },
+    {
+      "view": "fullbody",
+      "activeLogisticsAnimationNodes": 10,
+      "time": 1.9333333333333331
+    },
+    {
+      "view": "face",
+      "activeLogisticsAnimationNodes": 10,
+      "time": 1.9333333333333331
+    },
+    {
+      "view": "logistics",
+      "activeLogisticsAnimationNodes": 10,
+      "time": 1.9333333333333331
+    }
+  ],
+  "sceneAudit": {
+    "schemaVersion": 1,
+    "observedUtc": "2026-10-22T01:16:19.564199+00:00",
+    "method": "\u53ea\u8bfb\u8d44\u4ea7\u3001\u914d\u7f6e\u3001\u65e2\u6709\u622a\u56fe\u53ca\u9a8c\u6536\u8bc1\u636e\u3002",
+    "gpuExecuted": false,
+    "buildExecuted": false,
+    "sharedCodeModified": false,
+    "savedScene": {
+      "path": "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\playable-safe.azurelevel",
+      "sha256": "2561d43f0692584ea4a60bc2391497fc82adf8e0c0944c6b0a92fcb979eb482d",
+      "nodes": 1931,
+      "resources": 402,
+      "antiAliasing": 1,
+      "cameraFar": 1000.0
+    },
+    "rearTotals": {
+      "sourceGroups": 605,
+      "draws": 898,
+      "resources": 283,
+      "missingNodes": 0,
+      "changedNodes": 0,
+      "missingResourceFiles": 0
+    },
+    "rearGroups": {
+      "endfield-atrium-rear-corridor-source-extension-v1": {
+        "source": "back:/rear-corridor-v1/scene.azuresceneexchange",
+        "nodes": 157,
+        "sourceGroups": 67,
+        "draws": 90,
+        "resources": 26,
+        "missingNodes": [],
+        "changedFromImportBaseline": [],
+        "missingResourceFiles": [],
+        "hiddenDraws": []
+      },
+      "endfield-atrium-rear-source-complete": {
+        "source": "back:/scene.azuresceneexchange",
+        "nodes": 1346,
+        "sourceGroups": 538,
+        "draws": 808,
+        "resources": 257,
+        "missingNodes": [],
+        "changedFromImportBaseline": [],
+        "missingResourceFiles": [],
+        "hiddenDraws": [
+          {
+            "id": "exchange-node-17926049248410700-1460",
+            "name": "native-113277178-draw-0",
+            "resource": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-back\\details\\native-79b76f75c907ec31.glb",
+            "parentName": "P_module_tyrailing+1_002_01 (1)_ECSMerged#0_6C078FA"
+          }
+        ]
+      }
+    },
+    "rearClosureEvidence": {
+      "sourceGeometryMaskMisses": {
+        "rear": 0,
+        "west": 0,
+        "east": 0
+      },
+      "maskPixels": {
+        "rear": 578557,
+        "west": 46807,
+        "east": 39853
+      },
+      "historicalLoaderWorldErrorMeters": {
+        "rearCorridor": 2.463e-06,
+        "rearStructureAndDetails": 6.7621e-05
+      },
+      "toleranceMeters": 0.0001,
+      "evidence": "docs/acceptance/nr/atrium-completeness.md",
+      "scope": "\u56fa\u5b9a\u89c6\u56fe\u4e0e\u6e90\u51e0\u4f55\u5360\u7528\uff0c\u4e0d\u7b49\u4e8e\u5168\u573a\u666f\u539f\u751f\u6fc0\u6d3b\u6216\u50cf\u7d20\u7b49\u4ef7\u3002"
+    },
+    "aa": {
+      "mode": 1,
+      "modeMeaning": "\u5f53\u524d\u5e27\u8fb9\u7f18\u81ea\u9002\u5e94\u7a7a\u95f4\u8fc7\u6ee4\u3002",
+      "actualCapture": {
+        "width": 1920,
+        "height": 1080,
+        "antiAliasing": 1,
+        "antiAliasingPipeline": "linear-display-spatial-v1",
+        "sceneRenderWidth": 1920,
+        "sceneRenderHeight": 1080
+      },
+      "cameraNear": 0.10000000149011612,
+      "cameraFar": 1000,
+      "auxiliary": {
+        "path": "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\aa-aux-rebuilt\\summary.json",
+        "edgeErrorRatio": 0.669877537205965,
+        "temporalErrorRatio": 0.6964659618612029,
+        "maximumFlatByteDelta": 0.0
+      },
+      "nativeHistorical": {
+        "path": "build\\runs\\20261021-172156-native-render-evidence-623c52\\native-aa-post-corridor-v1\\summary.json",
+        "passed": true,
+        "edgeErrorRatio": 0.9453301613350825,
+        "temporalErrorRatio": 0.9509227559692771,
+        "flatMaximumByteDelta": 0.0,
+        "scope": "\u540e\u8d70\u5eca\u5019\u9009\u7684\u4e09\u6a21\u5f0f\u5bf9\u7167\uff0c\u89d2\u8272\u7740\u8272\u66f4\u65b0\u540e\u9700\u72ec\u7acb\u8054\u5408\u590d\u9a8c\u3002"
+      },
+      "gameReference": {
+        "outputExtent": [
+          2560,
+          1440
+        ],
+        "windowCaptureExtent": [
+          1707,
+          960
+        ],
+        "dlss": "\u5e73\u8861",
+        "frameGeneration": 2,
+        "sharpening": 0,
+        "ssr": "\u4e2d\u6863",
+        "source": "docs/acceptance/nr/reference-baseline.md"
+      },
+      "remaining": [
+        "\u540c\u7248\u672c\u539f\u751f\u76f8\u673a\u3001\u66dd\u5149\u548c\u52a8\u6001\u76f8\u4f4d\u4ecd\u9700\u6807\u5b9a\u3002",
+        "\u65f6\u57df\u91cd\u5efa\u4e0e\u5f53\u524d\u7a7a\u95f4\u8fc7\u6ee4\u5c1a\u672a\u5efa\u7acb\u7b49\u4ef7\u5173\u7cfb\u3002",
+        "\u7ec6\u5c0f\u51e0\u4f55\u7684\u7f3a\u5931\u8986\u76d6\u9700\u8981\u989d\u5916\u91c7\u6837\u3002"
+      ]
+    },
+    "character": {
+      "asset": "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-character\\hero-profile.glb",
+      "sha256": "9efb58b36b4c0df32a7e13451b6e199d0c089b8305561dbd3cc2c2468008ba5c",
+      "materials": 13,
+      "explicitProfiles": 12,
+      "nativeAnimations": 9,
+      "nativeChannels": 8451,
+      "projectedHairInstalled": false,
+      "projectedHairCandidate": "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\hair-projected\\hero-source-strand-final.glb",
+      "eyeFeatures": [
+        "diffuse-ramp",
+        "stylized-shadow"
+      ],
+      "remaining": [
+        "\u539f\u751f\u4e8c\u7ef4\u9ad8\u5149\u5019\u9009\u9700\u5b89\u88c5\u81f3\u8054\u5408\u8d44\u4ea7\u5e76\u590d\u9a8c\u3002",
+        "\u773c\u775b\u5f84\u5411\u6cd5\u7ebf\u3001\u89c6\u5dee\u4e0e\u6750\u8d28\u6355\u83b7\u901a\u9053\u5f85\u5b9e\u73b0\u3002",
+        "\u8986\u76d6\u9634\u5f71\u7684\u6a21\u677f\u3001\u9884\u6df1\u5ea6\u4e0e\u5c4f\u5e55\u6291\u5236\u5f85\u9a8c\u6536\u3002",
+        "\u5934\u53d1\u865a\u62df\u4e3b\u706f\u3001\u5bf9\u8c61\u589e\u76ca\u548c\u6761\u7eb9\u5206\u652f\u5f85\u652f\u6301\u3002",
+        "\u539f\u59cb\u53c2\u6570\u7eb9\u7406 B \u901a\u9053\u7684\u9634\u5f71\u4e0e\u8f6e\u5ed3\u6d88\u8d39\u5f85\u63a5\u5165\u3002",
+        "\u5b9e\u9645\u8fd0\u884c\u5168\u5c40\u5e38\u91cf\u4e0e\u91c7\u6837\u5668\u7ed1\u5b9a\u5f85\u53d6\u5f97\u3002",
+        "\u8138\u90e8\u9ad8\u5149\u6b63\u63a7\u5236\u53ca\u5b8c\u6574\u5341\u4e8c\u5f20\u63cf\u8fb9\u95e8\u7981\u4ecd\u672a\u901a\u8fc7\u3002",
+        "\u6b63\u5f0f\u540c\u673a\u4f4d\u539f\u6e38\u620f\u50cf\u7d20\u7b49\u4ef7\u53c2\u8003\u6570\u91cf\u4ecd\u4e3a\u96f6\u3002"
+      ]
+    },
+    "geometryLimits": [
+      "\u56fa\u5b9a\u906e\u7f69\u5df2\u8bc1\u660e\u6e90\u51e0\u4f55\u5360\u7528\uff0c\u5b9e\u65f6\u6fc0\u6d3b\u4ecd\u5f85\u6838\u9a8c\u3002",
+      "100 \u7c73\u524d\u5411\u6df1\u5ea6\u539f\u95e8\u7981\u4ecd\u6709 1063 \u4e2a\u9ed1\u50cf\u7d20\u3002",
+      "\u539f\u751f\u900f\u660e\u73bb\u7483\u547d\u4e2d\u6df1\u5ea6\u7ea6 148 \u81f3 166 \u7c73\u3002",
+      "1000 \u7c73\u76f8\u673a\u8fdc\u5e73\u9762\u4f9d\u636e\u5185\u5bb9\u8303\u56f4\u8bbe\u7f6e\u3002",
+      "\u539f\u751f\u5b8c\u6574\u6750\u8d28\u3001\u5149\u7167\u3001GI \u4e0e\u53cd\u5c04\u4ecd\u672a\u9a8c\u6536\u3002"
+    ],
+    "outline": {
+      "status": "\u5341\u4e8c\u5f20\u517c\u5bb9\u95e8\u7981\u4fdd\u6301\u672a\u901a\u8fc7\u3002",
+      "diagnostic": "\u5168\u90e8125\u4e2a\u8d85\u9608\u503c\u50cf\u7d20\u5747\u4f4d\u4e8e\u7403\u4f53\u8868\u9762\u3002",
+      "candidateScript": "measure_outline_independent_coverage.py",
+      "candidateExecuted": false,
+      "requiredInput": "\u72ec\u7acb\u4e8c\u503c\u8986\u76d6\u56fe\uff0c\u6216\u540c\u673a\u4f4d\u540c\u540e\u5904\u7406\u7684\u7a7a\u80cc\u666f\u56fe\u3002",
+      "thresholds": {
+        "maxP99Pixels": 2.25,
+        "minExteriorPixelsExclusive": 100
+      },
+      "backgroundCaution": "\u5176\u4ed6\u76f8\u673a\u80cc\u666f\u4e0d\u7b26\u5408\u8f93\u5165\u5951\u7ea6\uff1b\u5929\u7a7a\u968f\u671d\u5411\u53d8\u5316\u3002",
+      "crossCameraClearRegionMaximumDifference": 74,
+      "baselineHost": "\u4efb\u52a1\u4e0e\u5386\u53f2\u8bc1\u636e\u76ee\u5f55\u5185\u672a\u627e\u5230 f0dbcef \u7684\u51bb\u7ed3\u7f16\u8f91\u5bbf\u4e3b\u3002",
+      "availableHistoricalPlayer": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/binary-snapshot/AzurePlayer-53f469001bfa.exe",
+      "historicalPlayerScope": "\u8be5\u7a0b\u5e8f\u5c5e\u4e8e\u66f4\u65e9\u6279\u6b21\uff0c\u4e0d\u80fd\u4f5c\u4e3a\u540c\u6e90\u7f16\u8f91\u5bbf\u4e3b\u5f52\u56e0\u3002"
+    },
+    "indexes": {
+      "detail": "candidate-state.json",
+      "attribution": "outline-p99-attribution.json"
+    },
+    "sourceFiles": {
+      "candidate-state.json": "4200de7243ab43c0f411464b1d691fc89f28afa94bc180d6c648066804f6a74f",
+      "outline-p99-attribution.json": "a0fcd8ff13704991a460e36c9a2f08c72b6542e71a5617616c333ff70bb57b96",
+      "measure_outline_independent_coverage.py": "2bfd931e86ede4e04edf7059f4727278d039f9b011c17a038edcde3bb52dd325"
+    }
+  },
+  "unlitReceiptSha256": "5547036cf4f0af7ec1f4dae5c4090d9e9a9fb69c9e078bc47f9d71789d04b2cd",
+  "formalStageStatusChanged": false,
+  "limitations": [
+    "Original-game capture and exact native shading equivalence remain pending.",
+    "Static scene dependencies were audited separately; the archive covers replaced content and runtime inputs."
+  ]
+}

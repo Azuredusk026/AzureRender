@@ -1,0 +1,39 @@
+{
+  "source": "Source HLSL and fixed compiler options",
+  "compilerSha256": "21df5696011156fe64f2dff47c8ed5e90817021f91f70b6d9707fd58cd1b0b81",
+  "flags": 0,
+  "files": {
+    "compiled-ray-mirror.dxbc": "109762a00c8f5419bc059e34a1bdc7ef1bd6474304c9e37fad7c13a065f3a2e1",
+    "ordered-ray-mirror.dxbc": "3f840809e726d0e43160ace716716ae74143885bb60519d7b87abe41d9c9a51f",
+    "ray-policy.json": "bfc8b5b4028e8fa38a687da3a4b73227c4d559432e1c281759047fb385869984",
+    "rounding-policy.json": "bd325cfbf51bad32c9f70cd5630c76792fab4d186f4bc27b24979e3650aa8b04",
+    "rounding.dxbc": "efe14266260a66df3fd1613f2846742b97ad868b83dd286704339b3a8f534d02",
+    "rounding.hlsl": "e0bdf06d44e424d8bd4870f59dd137d6da1af9cc8464d88f99a00cb811124fa6"
+  },
+  "schemaVersion": 1,
+  "compiler": "Microsoft HLSL compiler 10.1 through d3dcompiler_47.dll",
+  "target": "cs_5_0",
+  "entryPoint": "main",
+  "raySource": "docs/acceptance/nr/evidence/2026-10-29/native-ray-source/ray-mirror-raw.hlsl",
+  "raySourceSha256": "b72d73f2aadc5955290dc92652f8534eb464fe2a2485c9670318128d9a14a8f1",
+  "orderedFixture": "Independent manual matrix/dot order control validated on original frozen GPU inputs before the reusable normalizer implementation",
+  "independentRounding": "rounding.hlsl uses four constant-buffer vectors; two product orders give binary32 results one and zero",
+  "paddingBoundaryFixtures": {
+    "provider": "Microsoft D3DSetBlobPart",
+    "compilerSha256": "21df5696011156fe64f2dff47c8ed5e90817021f91f70b6d9707fd58cd1b0b81",
+    "cases": [
+      {
+        "name": "rounding-tail56.dxbc",
+        "payloadTailBytes": 56,
+        "privateDataBytes": 44,
+        "sha256": "361d7aaafeabcb48b24813d3bedaf81172f5a85ba01084c59cc1ee973c8e1ecc"
+      },
+      {
+        "name": "rounding-tail63.dxbc",
+        "payloadTailBytes": 63,
+        "privateDataBytes": 51,
+        "sha256": "621318e812433c233bd1da15332fb596320867a539d6a179e193890def0fc62b"
+      }
+    ]
+  }
+}

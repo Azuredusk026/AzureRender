@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 7: AzureRender.HotReload
+1/1 Test #7: AzureRender.HotReload ............***Failed    0.67 sec
+remove_all: The process cannot access the file because it is being used by another process.: "D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug\hot-reload-tests\candidates\4"
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.68 sec
+
+The following tests FAILED:
+	  7 - AzureRender.HotReload (Failed)
+Errors while running CTest

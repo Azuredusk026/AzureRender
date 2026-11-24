@@ -1,0 +1,109 @@
+# 项目编辑与游戏表现
+
+> 文档类型：运行时说明
+> 状态：生效
+> 更新日期：2026-10-05
+> 适用范围：Windows 编辑器与 Player
+> 源码入口：`src/editor/`、`src/runtime/PresentationRuntime.*`、`src/render/GameUiRenderer.*`
+
+## 打开与编辑项目
+
+完整制作步骤见[从空关卡制作并发布游戏](../tutorials/editor-first-game.md)。顶部菜单为 File、Edit、View、Tools、Help。工具栏组织保存、变换、运行与构建。状态栏显示项目、关卡、未保存状态与进度。
+
+九个面板使用稳定标识停靠。View 显示面板与恢复默认布局。用户配置位于 `%LOCALAPPDATA%/AzureRender/editor`。`workspace.json` 保存版本、可见性与停靠文件完整性摘要。
+
+字体使用 Noto Sans CJK SC，正文为 14 逻辑像素。100%、150%、200% DPI 从基础样式计算尺寸。紧凑布局收起左侧创建区，中间视口保持至少 480×270。界面颜色按交换链格式保持正确的 sRGB 显示。
+
+Content Browser 以资产数据库和场景资源为数据来源。Directory、Search assets 和 Type 可组合筛选。Import / Create 展开制作操作，列表与 Grid 展示资源。Console 支持等级、搜索、复制与节点定位。
+
+使用 `AzureRender.exe --editor-project <project.azureproject>` 打开项目。公开示例位于 `assets_public/gameplay/project.azureproject`。基础 `.azscene` 项目与 JSON 关卡均可编辑。
+
+资源浏览器接受 glTF 或 GLB 文件路径。导入任务复制模型与相对依赖，验证候选资源后提交。进度与取消按钮显示当前状态。取消和失败保留有效场景。
+
+导入结果显示顶点、关节、材质和动画片段。片段列表包含名称、索引和时长。受损模型和缺失依赖通过 Console 定位。
+
+双击资源可放置对象，也可将资源拖入视口。层级中按 Ctrl 可多选。复制、删除、重命名和组件字段编辑进入操作历史。Ctrl+D 复制，Delete 删除，Ctrl+Z 撤销，Ctrl+Y 重做。
+
+Details 根据反射字段提供角色、刚体、脚本、动画、音频和界面属性。字段类型和数值范围在提交时校验。Ctrl+S 保存项目关卡。渲染参数、组件、原生节点和 Prefab 实例覆盖随关卡保存。
+
+相机、交互、收集物、门、检查点和任务状态均可配置。整数计数按整数提交。资源字段使用资产列表，相机目标使用节点列表。角色和刚体使用各自的物理节点。
+
+动画图的语义状态和片段索引须与模型匹配。相机距离和俯仰上下界须构成有效范围。引用和兼容性在候选提交前校验。失败候选保留场景与撤销历史。
+
+在资源浏览器填写实例身份，再选择 Prefab 放置。实例节点、资源和灯光使用稳定身份展开。撤销和重做同步恢复实例来源与覆盖。空节点用于相机、界面和触发区域。
+
+空关卡显示可编辑视口。导入并放置模型后显示关卡内容。实例身份应保持唯一，长度最多为 128 字节。
+
+## 动画预览与玩法调试
+
+Animation Preview 显示语义状态、循环和片段索引。选择状态后设置时间与淡化时长，点击 Preview pose。预览按运行时动画契约进入视口。Clear preview 释放预览，Set initial semantic 保存初始状态。
+
+Gameplay Debug 提供碰撞和相机叠加开关。盒体按旋转、缩放与半尺寸显示，角色显示胶囊。运行时列出速度、落地状态与相机遮挡距离。交互目标和脚本诊断提供节点定位入口。
+
+## 运行与输入
+
+主工具栏提供 Play、Pause、Resume、Step 和 Stop。Ctrl+P 启动或停止运行。Play 从当前编辑内容创建独立 World。暂停时 Step 推进一次 60 Hz 固定步。
+
+运行时组件和关卡使用运行 World。停止后显示编辑内容，编辑历史继续可用。运行期间编辑面板按启用条件锁定。
+
+视口获得焦点时接收 WASD、Shift、Space、E 与相机鼠标输入。Esc 释放视口输入与鼠标捕获，点击视口获取焦点。文本与交互控件由界面焦点处理。
+
+Console 显示脚本、关卡和表现资源的错误。修改 Lua 文件后进行受控重载。失败重载保留有效脚本，运行错误隔离对应回调。Player 使用 P 暂停或恢复，O 推进一次暂停步。
+
+## 组件与接口
+
+| 组件 | 字段与行为 |
+| --- | --- |
+| `azure.animator` | 状态图、实体时钟、淡化、配置驱动与 Morph，使用版本 3 |
+| `azure.third-person-camera` | 跟随目标、距离、俯仰、肩偏移与遮挡参数，使用版本 1 |
+| `azure.audio-source` | `asset`、`loop`、`autoplay`、`volume` 和 `enabled` 控制声音 |
+| `azure.game-ui` | `asset` 指向 RML 文档，`enabled` 控制界面 |
+
+动画图版本为 1，包含 `initial`、`states` 和 `transitions`。状态指定 glTF 动画索引。条件转换读取布尔参数，切换状态重置播放时间。公共示例的 idle 与 run 使用两种动画节奏。
+
+角色渲染器按节点身份采样各资源的独立姿态。相同资源共享骨架、片段和原始网格，各实例保留自己的时钟、混合、头部基底与 Morph。配置与验收入口见[独立动画与第三人称控制](third-person-animation.md)。
+
+miniaudio 提供设备输出和离线混音。声音随实体、组件和关卡生命周期释放。暂停保留播放游标，恢复继续播放。无设备环境记录诊断，并使用离线混音。
+
+Lua 的 `self:audio_play()` 播放当前实体音源，`self:ui_text(id, text)` 更新界面纯文本。这两个接口遵守回调和初始化事务。失败初始化的副作用保持隔离。
+
+## 游戏界面
+
+RmlUi 负责文档布局、字体、文本与事件。GameUiRenderer 通过项目 RHI 创建几何、纹理和管线，并在公共后处理合成阶段绘制。Player 的链接边界为运行时与渲染模块。
+
+适配层支持纹理、字体、预乘透明、矩形裁剪和矩阵变换。文档使用这些能力构建界面。窗口尺寸与显示密度传给 RmlUi，编辑器将鼠标坐标转换到视口像素。
+
+GPU 对象按在途帧延迟回收。交换链重建和退出在 GPU 空闲后销毁界面资源。高级裁剪蒙版、滤镜和图层属于后续适配能力。
+
+## 自动验收
+
+`--editor-actions <json>` 执行按帧排序的生产编辑命令。`--runtime-report <json>` 输出操作耗时、运行步数、切关、错误恢复、动画帧与界面绘制统计。
+
+```powershell
+python tools/test_editor_workflow.py --executable build/ninja-msvc-debug/AzureRender.exe --project assets_public/gameplay/project.azureproject
+python tools/test_game_presentation.py --executable build/ninja-msvc-debug/AzurePlayer.exe --project assets_public/gameplay/project.azureproject
+```
+
+编辑任务验证导入、编辑、历史、保存、运行、脚本修复、切关和停止。图像任务比较实际状态动画与界面合成。单元验证覆盖导入取消、Prefab、基础项目兼容、混音与资源退休。
+
+`build` 命令接收 `install`、`output` 和可选 `replace`。`wait-build` 按帧等待异步构建，并检查发布结果。自动化任务完成后结束烟雾运行，完整流程见 [Windows 游戏发布](game-publishing.md)。
+
+`level` 请求切换至 `value` 指定的关卡。`wait-level` 按帧等待该关卡提交。加载失败使自动化命令报错，后续命令在就绪后执行。
+
+`component-add` 和 `component-field` 使用生产组件命令。`prefab` 接收 `asset` 与 `instance`。`node` 和 `place` 可指定稳定节点身份。`select` 接收 `id` 或 `indices`，`reload` 重开保存内容。
+
+`import` 的可选 `key` 为后续放置登记资源。`place` 的 `resource` 选择该资源键。`preview` 接收状态、时间、前一状态与淡化时长。`debug-overlay` 的 `enabled` 控制调试叠加。
+
+空关卡制作验收使用以下入口。输出目录应为空，构建时提供 Release 安装树。
+
+```powershell
+python tools/test_editor_playable.py --executable build/ninja-msvc-release/AzureRender.exe --output build/u1/authoring --install build/ninja-msvc-release/release-gate/install-moved
+```
+
+## 来源与许可
+
+编辑器字体来自 [Noto CJK](https://github.com/notofonts/noto-cjk)，采用 SIL OFL 1.1。字体与许可进入安装树和安装清单。界面组织参考 UE 编辑器，项目使用 Dear ImGui 实现控件与布局。
+
+[RmlUi 6.3](https://github.com/mikke89/RmlUi/tree/6.3) 使用 MIT 许可。[miniaudio 0.11.25](https://github.com/mackron/miniaudio/tree/0.11.25) 采用 MIT-0 许可。字体来自 RmlUi 6.3 示例，LatoLatin 使用 SIL OFL 1.1。
+
+本地 Vulkan 适配依据公开 RenderInterface 实现。资源由宿主分配器和在途帧管理。公开音效由项目生成，模型与动画由项目公开测试资产派生。许可证进入安装清单。

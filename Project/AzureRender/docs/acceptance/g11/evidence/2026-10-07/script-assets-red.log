@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 72: AzureEngine.AssetLevel
+1/1 Test #72: AzureEngine.AssetLevel ...........***Failed    0.17 sec
+Asset/level contract failed
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.18 sec
+
+The following tests FAILED:
+	 72 - AzureEngine.AssetLevel (Failed)
+Errors while running CTest

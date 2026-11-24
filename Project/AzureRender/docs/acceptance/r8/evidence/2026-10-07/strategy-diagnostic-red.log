@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_both_strategies_and_incompatible_interface (__main__.CompositionTests.test_both_strategies_and_incompatible_interface)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_shader_composition.py", line 33, in test_both_strategies_and_incompatible_interface
+    self.assertIn('interface',result.stderr.lower())
+AssertionError: 'interface' not found in "shader compiler failed: error[e39999]: no overload for '+=' applicable to arguments of type (vector<float,3>, vector<float,2>)\n --> c:\\users\\23587\\appdata\\local\\temp\\azure shader composition s7muaa0g\\modules\\bloomalgorithm.slang:6:52\n  |\n6 | for (uint index = 0; index < 4; ++index) color += source.read(index);\n  |                                                ^^ no overload for '+=' applicable to arguments of type (vector<float,3>, vector<float,2>)\n--'\nerror[e39999]: import failed due to compilation error\n --> c:\\users\\23587\\appdata\\local\\temp\\azure shader composition s7muaa0g\\modules\\bloom.slang:2:8\n  |\n2 | import bloomalgorithm;\n  |        ^^^^^^^^^^^^^^ import of module 'bloomalgorithm' failed because of a compilation error\n--'\nfatal error[e40003]: compilation ceased\n\n"
+
+----------------------------------------------------------------------
+Ran 1 test in 6.741s
+
+FAILED (failures=1)

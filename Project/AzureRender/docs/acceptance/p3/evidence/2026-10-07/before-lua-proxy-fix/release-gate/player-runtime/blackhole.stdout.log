@@ -1,0 +1,19 @@
+Project loaded: project (20b0f069-6f61-4f21-baea-83a6df6371dc)
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+GPU timing: enabled, timestamp period 1.000000 ns, 64 valid bits
+Scene renderer: blackhole (sceneType=blackhole)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+GPU timing samples: 30
+  Shadow: 0.008 ms (0.044%)
+  Main scene: 19.297 ms (99.764%)
+  Internal outline: 0.037 ms (0.193%)
+  Total render: 19.342 ms avg, 16.366 ms min, 24.072 ms max
+  Percentiles: p50 18.959 ms, p95 22.035 ms, p99 23.513 ms
+  Submission per frame: 3.000 draws, 3.000 descriptor binds
+  CPU recording: 0.199 ms per frame, worker passes: 0
+GPU timing report: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\release-gate\player-runtime\blackhole.json
+Rendered frames: 30
+Allocator after unload: buffers=0 images=0

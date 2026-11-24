@@ -1,0 +1,147 @@
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+F....EE.EEEEEEE.....F..E.
+======================================================================
+ERROR: test_direct_validation_budget (__main__.GamePackageRules.test_direct_validation_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 178, in test_direct_validation_budget
+    build_game.validate_project(self.install/'bin/AzurePlayer.exe',self.project,timeout=budget)
+TypeError: validate_project() got an unexpected keyword argument 'timeout'
+
+======================================================================
+ERROR: test_explicit_budget_reaches_both_player_checks (__main__.GamePackageRules.test_explicit_budget_reaches_both_player_checks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 168, in test_explicit_budget_reaches_both_player_checks
+    build_game.build_game(self.project,self.install,self.output,validation_timeout=61.25)
+TypeError: build_game() got an unexpected keyword argument 'validation_timeout'
+
+======================================================================
+ERROR: test_invalid_validation_budgets_reject_before_launch (__main__.GamePackageRules.test_invalid_validation_budgets_reject_before_launch) (budget=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 185, in test_invalid_validation_budgets_reject_before_launch
+    build_game.build_game(self.project,self.install,self.output,validation_timeout=budget)
+TypeError: build_game() got an unexpected keyword argument 'validation_timeout'
+
+======================================================================
+ERROR: test_invalid_validation_budgets_reject_before_launch (__main__.GamePackageRules.test_invalid_validation_budgets_reject_before_launch) (budget=-1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 185, in test_invalid_validation_budgets_reject_before_launch
+    build_game.build_game(self.project,self.install,self.output,validation_timeout=budget)
+TypeError: build_game() got an unexpected keyword argument 'validation_timeout'
+
+======================================================================
+ERROR: test_invalid_validation_budgets_reject_before_launch (__main__.GamePackageRules.test_invalid_validation_budgets_reject_before_launch) (budget=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 185, in test_invalid_validation_budgets_reject_before_launch
+    build_game.build_game(self.project,self.install,self.output,validation_timeout=budget)
+TypeError: build_game() got an unexpected keyword argument 'validation_timeout'
+
+======================================================================
+ERROR: test_invalid_validation_budgets_reject_before_launch (__main__.GamePackageRules.test_invalid_validation_budgets_reject_before_launch) (budget='60')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 185, in test_invalid_validation_budgets_reject_before_launch
+    build_game.build_game(self.project,self.install,self.output,validation_timeout=budget)
+TypeError: build_game() got an unexpected keyword argument 'validation_timeout'
+
+======================================================================
+ERROR: test_invalid_validation_budgets_reject_before_launch (__main__.GamePackageRules.test_invalid_validation_budgets_reject_before_launch) (budget=nan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 185, in test_invalid_validation_budgets_reject_before_launch
+    build_game.build_game(self.project,self.install,self.output,validation_timeout=budget)
+TypeError: build_game() got an unexpected keyword argument 'validation_timeout'
+
+======================================================================
+ERROR: test_invalid_validation_budgets_reject_before_launch (__main__.GamePackageRules.test_invalid_validation_budgets_reject_before_launch) (budget=inf)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 185, in test_invalid_validation_budgets_reject_before_launch
+    build_game.build_game(self.project,self.install,self.output,validation_timeout=budget)
+TypeError: build_game() got an unexpected keyword argument 'validation_timeout'
+
+======================================================================
+ERROR: test_invalid_validation_budgets_reject_before_launch (__main__.GamePackageRules.test_invalid_validation_budgets_reject_before_launch) (budget=3600.01)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 185, in test_invalid_validation_budgets_reject_before_launch
+    build_game.build_game(self.project,self.install,self.output,validation_timeout=budget)
+TypeError: build_game() got an unexpected keyword argument 'validation_timeout'
+
+======================================================================
+ERROR: test_validation_timeout_retains_existing_package (__main__.GamePackageRules.test_validation_timeout_retains_existing_package)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 198, in test_validation_timeout_retains_existing_package
+    build_game.build_game(self.project,self.install,self.output,replace=True,validation_timeout=.01)
+TypeError: build_game() got an unexpected keyword argument 'validation_timeout'
+
+======================================================================
+FAIL: test_cli_rejects_nonfinite_validation_budget (__main__.GamePackageRules.test_cli_rejects_nonfinite_validation_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 206, in test_cli_rejects_nonfinite_validation_budget
+    self.assertEqual(result.returncode,1,result.stdout+result.stderr)
+AssertionError: 2 != 1 : usage: build_game.py [-h] [--project PROJECT] [--install INSTALL]
+                     [--output OUTPUT] [--replace] [--verify VERIFY]
+build_game.py: error: unrecognized arguments: --validation-timeout nan
+
+
+======================================================================
+FAIL: test_project_validation_default_budget (__main__.GamePackageRules.test_project_validation_default_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 164, in test_project_validation_default_budget
+    self.assertEqual(launch.call_args.kwargs['timeout'],1800)
+AssertionError: 60 != 1800
+
+----------------------------------------------------------------------
+Ran 19 tests in 1.840s
+
+FAILED (failures=2, errors=10)

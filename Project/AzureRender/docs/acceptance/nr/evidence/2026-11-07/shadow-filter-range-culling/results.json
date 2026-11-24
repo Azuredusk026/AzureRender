@@ -1,0 +1,168 @@
+{
+  "status": "isolated-compatible-slower",
+  "productionIntegrated": false,
+  "counts": {
+    "status": "attributed",
+    "scope": "Per-visible-pixel filter quads: total, single 8x8 bound, provably lit, provably dark. Diagnostic reads are additional work. No GPU performance claim.",
+    "visiblePixels": 921600,
+    "filterPixels": 136908,
+    "filterQuads": 7684969,
+    "singleTileQuads": 5880156,
+    "provablyLitQuads": 332623,
+    "provablyDarkQuads": 4428286,
+    "potentialSavedDepthGatherFraction": 0.6195092003624217,
+    "coverageFraction": 0.765150256299017,
+    "productionIntegrated": false,
+    "performanceMeasured": false,
+    "limitations": [
+      "Only four opaque snapshot programs and final visible pixels; overdraw and later main-pass pixels are outside this count.",
+      "Additional range reads, branch divergence, register pressure and cache locality must be included in actual candidate timing.",
+      "No pixel compatibility or native frame-time acceptance is claimed."
+    ]
+  },
+  "localReplay": {
+    "status": "compared",
+    "seconds": 62.046999999991385,
+    "allTargetsEqual": true,
+    "summary": [
+      {
+        "mode": "baseline",
+        "allEventMs": 16.469407999999977,
+        "matchedEventMs": 11.797759999999936
+      },
+      {
+        "mode": "candidate",
+        "allEventMs": 17.42835200000008,
+        "matchedEventMs": 12.781983999999943
+      },
+      {
+        "mode": "candidate",
+        "allEventMs": 17.50371200000013,
+        "matchedEventMs": 12.868223999999913
+      },
+      {
+        "mode": "baseline",
+        "allEventMs": 16.502976,
+        "matchedEventMs": 11.828159999999963
+      }
+    ],
+    "environmentErrors": [],
+    "sourceAndProductsUnchanged": true,
+    "replayProcessExitCode": 0
+  },
+  "matchedCostIncreaseFraction": 0.08568081158320884,
+  "compiler": {
+    "status": "queried",
+    "rows": [
+      {
+        "mode": "baseline",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-181940-direct-pipeline-executables-144edf\\probe.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\mesh_object_compute.vert.spv",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\mesh_object_bindless_clipmap_field_early.frag.spv",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-221043-shadow-filter-range-culling-d81a60\\baseline-compiler.json"
+        ],
+        "probeSha256": "87ae48329f38089f96e5a72452647c816a73e2fbd60cd8884ceb8b7dc761154f",
+        "fragmentSha256": "77a6fa3c6f2e6ec927fa4a753502eeef4c54038953171dcdd379b6bb816ca38d",
+        "registers": 128,
+        "binaryBytes": 108928,
+        "localMemoryRaw": 68719476800,
+        "seconds": 2.889999999999418,
+        "queueSubmissions": 0,
+        "validationErrors": []
+      },
+      {
+        "mode": "candidate",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-181940-direct-pipeline-executables-144edf\\probe.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\mesh_object_compute.vert.spv",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-221043-shadow-filter-range-culling-d81a60\\candidate\\mesh_object_bindless_clipmap_field_early.frag.spv",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-221043-shadow-filter-range-culling-d81a60\\candidate-compiler.json"
+        ],
+        "probeSha256": "87ae48329f38089f96e5a72452647c816a73e2fbd60cd8884ceb8b7dc761154f",
+        "fragmentSha256": "750612b58db187bd0548e6e3913e45644d22f641d4f75f81d141e7650f8f5de9",
+        "registers": 128,
+        "binaryBytes": 112128,
+        "localMemoryRaw": 68719476800,
+        "seconds": 1.3279999999940628,
+        "queueSubmissions": 0,
+        "validationErrors": []
+      }
+    ],
+    "scope": "Private pipeline compilation only; local-memory raw high bits remain uninterpreted; actual occupancy/stalls are not measured.",
+    "productionSourceUnchanged": true
+  },
+  "startupCorrection": {
+    "status": "timeout",
+    "seconds": 240,
+    "inspectionReceiptPresent": false,
+    "observation": "GPU utilization observed zero; replay operation reached is unknown. Script used __file__ before guarded try block."
+  },
+  "templateCorrection": {
+    "status": "corrected-before-candidate-assessment",
+    "reason": "Template output directory substitution matched no text; previous isolated candidate was replayed instead of the new program. No new-candidate timing was obtained.",
+    "priorRunReceiptRestoredSha256": "b867b1643d4a6549cc5037d2524f3a5ff6d0b9f632de9bd1785c0c2f2f33d3a8",
+    "preservedMisroutedObservation": "wrong-target-control.json"
+  },
+  "sourceInputsUnchanged": true,
+  "protectedDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "originalAcceptanceRetained": true,
+  "archive": {
+    "path": "validation.zip",
+    "bytes": 2587809,
+    "sha256": "c0b7d907491147086367781f6a0066e188d691c5c18029137c303d02afeef353"
+  },
+  "members": {
+    "analyse.py": "a88e609855f1febf036783e54a7c4fb5e385864fdcddc1de46baaf9845f07bc1",
+    "baseline-compiler.json": "767dfd5b5e832ba7521424766e0e2acc9852b863f9f54cdc5965555cd355ec4d",
+    "baseline-compiler.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "baseline-compiler.stdout": "cd242a977c3ba67fa0acb8befff9b986bf5e2eb0958aca71999b7ad66dc169a4",
+    "boot.json": "6366b2e181ac972f9ba0d4d58b54b7425e55a80285f15185089dcd7b781ce167",
+    "budget.json": "fe6db42683c578ed95467f88246f778e8db0928ebe1447d0b27ed7463db31be3",
+    "builds.json": "16afcdd8a27b6b6fad2899ba901bcd62983abf68fa5fe94521427a96b265bcea",
+    "candidate/candidate-build.json": "f68cd509f2043be0defa366768441689e5ffb303f78f977fa66d52fb8501c603",
+    "candidate/character_snapshot_object_bindless_clipmap_field.frag.spv": "077f4328e0984a99a85fd00d4d2723c796e98bed8f3760eaa15ae87d79fe0d00",
+    "candidate/character_snapshot_object_bindless_clipmap_field_coverage.frag.spv": "0b2a24aa0cec59e318d829251820cdb932c52e14b4c0db7b7ea24ae54e55005d",
+    "candidate/character_snapshot_object_bindless_clipmap_field_early.frag.spv": "e21736aa91b800dbe14006e1ccfdaaac0446016aa0411fc83c508b1ef134bcf6",
+    "candidate/character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv": "4e60cb1a89f15c2cd1b8697f3ea6ec9d37891ae596221dc8f0328f0b3625901b",
+    "candidate/compare-state.json": "a7270d5581840903878ea95d250a2c8c0b930a5118ac814ebfd94f425fc7291e",
+    "candidate/compare.py": "5880c7a95711444a17c2e3e12d380b05503d4fe931217bb3b6566e4776ab5baa",
+    "candidate/driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "candidate/environment.json": "25426d4dd1c4d8cde27f775944f692692f82cb6c6984cc0b67afb217c7709529",
+    "candidate/mesh.frag": "7729d01b0c14eea0381e1488264cf2a4f39378046e1020b92fa758a28f1cd2df",
+    "candidate/mesh_fog_bindless.frag.spv": "f68789180f6bb6f32cd40301afdf1a7db08496e9d48f25189e1a372ce0e1b98c",
+    "candidate/mesh_object_bindless_clipmap_field.frag.spv": "e6c113e3e2aec2e4b6820e5da35e7e01876becb3a77ead038a76eeb71feca325",
+    "candidate/mesh_object_bindless_clipmap_field_coverage.frag.spv": "b96745409916462234ade0d85836c65b61e18a0a0823268b71b7b7d664e6b97e",
+    "candidate/mesh_object_bindless_clipmap_field_early.frag.spv": "750612b58db187bd0548e6e3913e45644d22f641d4f75f81d141e7650f8f5de9",
+    "candidate/mesh_object_bindless_clipmap_field_early_lighting.frag.spv": "973e80d1d59eaa4799f2fec00e5235bf6220f167e72bca54b537635b204a781f",
+    "candidate/mesh_object_bindless_clipmap_field_lighting.frag.spv": "4aa6786f9529bffc7bf4cbf336394d1988be4993630338221b6de92d0381c826",
+    "candidate/mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv": "b6fb1a17da9d41937587734eee18cd440a599036c6313f19369309b2ee67684a",
+    "candidate/result.json": "3c424d998d46ce6404f172108f33db018c49c6ad1ef978b391d19c131e7cc7d3",
+    "candidate/run_compare.py": "6dfa847d78a681fa7990fdd3aa199d305486913acbedd23cfa45d0f0782ccec8",
+    "candidate-compiler.json": "78975b1c8a834aa552ff247dea28ed939cc67f532ca74f1314d8776df4c90e91",
+    "candidate-compiler.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "candidate-compiler.stdout": "1f439ac2a4f8d670fff09b44397fd7a0a065f359c050765d4a2ba76af3f9b44e",
+    "capture_counts.py": "fed0d5c2fec3debecd26a3ef61431a90a7d474f23c9628f4eebf88996fd62706",
+    "character_snapshot_object_bindless_clipmap_field.frag.spv": "005dc372ad11b0fac1668d2c7efdc50d28fea123c68884b61b6c0c75746d86b6",
+    "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv": "12c4de9f6021a2225c4513d7ebde59a6caaa0c7fb4049ab878514794e1b7d69c",
+    "character_snapshot_object_bindless_clipmap_field_early.frag.spv": "2f6ab29e8c918ed3d7dcd138a4365fb65506daee1517879b4ac25da3d3010a0f",
+    "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv": "156f1fbc80b154d58905386cde93041abc94d28b69117b6ddd0ae4e6ca30e90d",
+    "compiler-summary.json": "eb4b2f3509fcdb01bcf1d85e4c80a890d60e02849be80dac7ffc981256e7f62d",
+    "compiler_stats.py": "682ed0adf4c0547a0f14f82d320fe09df438b8615180ecf32df3f2e127cbb22d",
+    "counts-summary.json": "f5bd99b2b4ff6250583f9d2601909ee794e8c79968173c76cc02f7ef0ef8fb99",
+    "counts.bin.zlib": "6d15078e30b99debbe9443a216df4808ea8ce1be005d1939bf33a9fffef81df0",
+    "driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "first-attempt.json": "143a45c72f230b0fcef640f22f99f9dc3f363e662da9802d765369783d03f81b",
+    "first-capture_counts.py": "1304350b891994efefe389ddb72010d7c53952a1d8021805447b0f45e099e2eb",
+    "inspection.json": "3bd39232a41a176966e01fa45863ec1a9457def90a6a8955fc11d69c8302c6c3",
+    "mesh.frag": "7e91bccc3566e64da55e87a027d158595309a190d92bcb258a19a898fa1fbce9",
+    "prepare.py": "b223876c3f0decd024b7104c6f927f44d78241d4aaa1a73e223413e45b2dda53",
+    "prepare_candidate.py": "80545d53b0d7e61735affc84a7ea170c6ad18f65e9ba84fe7ffea78dc4fb73f2",
+    "run.py": "61e21fc2a91d366e63ba87e3277bf15265736020b5a81e8a32349506982b2c99",
+    "script-correction.json": "50113f69eadaf3f9e5c71ff7f877f9b67a09b7317d9b4cdda8f1dc96cb907743",
+    "source-inputs.json": "0273ba7cebd18c9b4929503284b9b0b64c51adb99d46e19ac5bf88d1ebf0a664",
+    "stage.json": "cc1c61d8a82cb648902a095b37bdd691ec58fe6476c6bd06c673c6d4ef00eb03",
+    "task-card.json": "aecba20bb5d745fd6ad0bf654fa448b29512e5f3ac483225d92cb5e99e2d8bfa",
+    "wrong-target-control.json": "84bd774d6abf7555e4676659bf466d76f21a8e8b4d293527c442b1fb93c7123e"
+  }
+}

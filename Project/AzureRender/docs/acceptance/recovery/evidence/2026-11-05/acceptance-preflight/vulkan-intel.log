@@ -1,0 +1,1 @@
+ERROR at C:\SDKBuild\build-X64-1.4.350.0\Vulkan-Tools\vulkaninfo\vulkaninfo.h:249:vkEnumerateInstanceExtensionProperties failed with ERROR_OUT_OF_HOST_MEMORY

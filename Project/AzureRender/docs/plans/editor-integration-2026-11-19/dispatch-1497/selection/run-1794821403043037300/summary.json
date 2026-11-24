@@ -1,0 +1,24 @@
+[
+  {
+    "workflow": "exploration",
+    "passed": true,
+    "restoredSearchAfterCreate": true,
+    "filteredCtrl": true,
+    "filteredRange": true,
+    "activeEndpoint": true,
+    "blankClear": true,
+    "ctrlBlankPreserves": true,
+    "sceneBytes": true
+  },
+  {
+    "workflow": "inspector",
+    "passed": true,
+    "restoredSearchAfterCreate": true,
+    "filteredCtrl": true,
+    "filteredRange": true,
+    "activeEndpoint": true,
+    "blankClear": true,
+    "ctrlBlankPreserves": true,
+    "sceneBytes": true
+  }
+]

@@ -1,0 +1,12 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 35: AzureEngine.PlayablePackage
+1/1 Test #35: AzureEngine.PlayablePackage ......   Passed   29.79 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Label Time Summary:
+gpu        =  29.79 sec*proc (1 test)
+release    =  29.79 sec*proc (1 test)
+
+Total Test time (real) =  29.80 sec

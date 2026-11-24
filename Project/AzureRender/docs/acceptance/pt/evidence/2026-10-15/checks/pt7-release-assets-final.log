@@ -1,0 +1,34 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+      Start 227: AzureEditor.ExtendedAssetWorkflow
+      Start 266: AzureAssets.RoundTrip
+      Start 261: AzureEditor.AssetTransfer
+      Start 225: AzureAssets.Scene2DDependencies
+ 1/11 Test #225: AzureAssets.Scene2DDependencies ........   Passed    0.34 sec
+      Start  34: AzureRender.PathTracing
+ 2/11 Test  #34: AzureRender.PathTracing ................   Passed    0.08 sec
+      Start 153: AzureEditor.AssetWorkflow
+ 3/11 Test #227: AzureEditor.ExtendedAssetWorkflow ......   Passed    1.44 sec
+      Start 102: AzureEngine.AssetLevel
+ 4/11 Test #261: AzureEditor.AssetTransfer ..............   Passed    1.62 sec
+      Start 199: AzureAssets.TextureMaterialImport
+ 5/11 Test #199: AzureAssets.TextureMaterialImport ......   Passed    0.31 sec
+      Start 132: AzureEngine.Project
+ 6/11 Test #102: AzureEngine.AssetLevel .................***Failed    0.84 sec
+Cannot open level: C:\Users\23587\AppData\Local\Temp\azure_asset_level_tests\assets/start.azurelevel
+
+      Start 191: AzureRender.InstallManifestRoundTrip
+ 7/11 Test #266: AzureAssets.RoundTrip ..................   Passed    2.76 sec
+      Start 203: AzureEditor.AssetOpen
+ 8/11 Test #203: AzureEditor.AssetOpen ..................   Passed    0.29 sec
+ 9/11 Test #153: AzureEditor.AssetWorkflow ..............   Passed    2.67 sec
+10/11 Test #132: AzureEngine.Project ....................   Passed    1.41 sec
+11/11 Test #191: AzureRender.InstallManifestRoundTrip ...   Passed    1.44 sec
+
+91% tests passed, 1 tests failed out of 11
+
+Total Test time (real) =   3.77 sec
+
+The following tests FAILED:
+	102 - AzureEngine.AssetLevel (Failed)
+Errors while running CTest

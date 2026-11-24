@@ -1,0 +1,506 @@
+#include "assets/GltfLoader.hpp"
+#include "assets/MaterialSurfaceProfile.hpp"
+#include "assets/MaterialData.hpp"
+#include "assets/MaterialGraph.hpp"
+#include "resources/ResourceLocator.hpp"
+#include <stb_image_write.h>
+#include <chrono>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <limits>
+#include <nlohmann/json.hpp>
+
+using Json=nlohmann::json;
+namespace {
+void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
+}
+int main(){
+ const auto root=std::filesystem::temp_directory_path()/("azure-shadow-lut-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
+ try {
+  std::filesystem::create_directories(root);
+  Json source;std::ifstream(azurerender::ResourceLocator().publicAsset("test_model.gltf"))>>source;
+  // A 2-cube strip has two red texels per blue slice and two green rows.
+  const unsigned char pixels[]={0,0,0,255,255,0,0,255,0,0,255,255,255,0,255,255,
+                                0,255,0,255,255,255,0,255,0,255,255,255,255,255,255,255};
+  require(stbi_write_png((root/"lut.png").string().c_str(),4,2,4,pixels,16)!=0,"Cannot create LUT fixture");
+  source["images"].push_back({{"uri","lut.png"}});
+  const auto index=source["textures"].size();
+  source["textures"].push_back({{"source",source["images"].size()-1}});
+  source["materials"][0]["extras"]["azureRenderMaterial"]={{"schemaVersion",2},{"class","generic"},{"features",Json::array()},
+    {"shadowColorLut",{{"schemaVersion",1},{"texture",index},{"flipV",false}}}};
+  auto load=[&](const Json& document){std::ofstream(root/"model.gltf")<<document.dump();return loadGltfAsset((root/"model.gltf").string());};
+  const auto asset=load(source);
+  auto tangentFixture=source;unsigned tangentFixtureIndex=0;
+  for(auto& mesh:tangentFixture["meshes"])for(auto& primitive:mesh["primitives"]) {
+    const auto count=tangentFixture["accessors"][primitive["attributes"]["POSITION"].get<std::size_t>()]["count"].get<std::size_t>();
+    const auto name="parallel-normal-"+std::to_string(tangentFixtureIndex++)+".bin";
+    {std::ofstream output(root/name,std::ios::binary);const std::array<float,3> normal{1,0,0};
+      for(std::size_t vertex=0;vertex<count;++vertex)output.write(reinterpret_cast<const char*>(normal.data()),sizeof(normal));}
+    const auto buffer=tangentFixture["buffers"].size();tangentFixture["buffers"].push_back({{"byteLength",count*12},{"uri",name}});
+    const auto view=tangentFixture["bufferViews"].size();tangentFixture["bufferViews"].push_back({{"buffer",buffer},{"byteLength",count*12}});
+    const auto accessor=tangentFixture["accessors"].size();tangentFixture["accessors"].push_back({{"bufferView",view},{"componentType",5126},{"count",count},{"type","VEC3"}});
+    primitive["attributes"]["NORMAL"]=accessor;primitive["attributes"].erase("TANGENT");
+  }
+  const auto tangentAsset=load(tangentFixture);
+  for(const auto& vertex:tangentAsset.vertices) {
+    float dot=0,length=0;for(unsigned i=0;i<3;++i){dot+=vertex.normal[i]*vertex.tangent[i];length+=vertex.tangent[i]*vertex.tangent[i];}
+    require(std::isfinite(dot)&&std::abs(dot)<1e-5F&&std::isfinite(length)&&std::abs(length-1)<1e-5F,
+      "Generated tangent fallbacks must remain finite, unit and orthogonal to custom normals");
+  }
+  require((asset.materials[0].materialFeatures&4096U)!=0,"Explicit shadow LUT must reach runtime material features");
+  require(asset.materials[0].textureSettings.size()==9,"Shadow LUT requires an independent texture slot");
+  require(asset.materials[0].shadowColorLutPixels==std::vector<std::uint8_t>(std::begin(pixels),std::end(pixels)),"LUT bytes must preserve source sRGB encoding");
+  auto flipped=source;flipped["materials"][0]["extras"]["azureRenderMaterial"]["shadowColorLut"]["flipV"]=true;
+  const auto inverted=load(flipped);
+  require(inverted.materials[0].shadowColorLutPixels[1]==255&&inverted.materials[0].shadowColorLutPixels[17]==0,"Explicit source row flipping must preserve cube orientation");
+  const auto& settings=asset.materials[0].textureSettings.at(8);
+  require(settings.colorSpace=="srgb"&&settings.filter=="linear"&&settings.mipPolicy=="none"&&settings.wrapU=="clamp"&&settings.wrapV=="clamp","LUT sampling must decode sRGB before interpolation at LOD zero with edge clamping");
+  const auto baseline=source;
+  for(const auto& entry:std::vector<std::pair<const char*,std::uint32_t>>{{"geometry-shadow",1U<<21U},{"sqrt-alpha-shadow",1U<<22U}}) {
+    auto covered=source;covered["materials"][0]["extras"]["azureRenderMaterial"]["features"]={entry.first};
+    const auto configured=load(covered);
+    require((configured.materials[0].materialFeatures&entry.second)!=0,"Explicit shadow coverage must reach material flags");
+    auto legacyCoverage=covered;auto& legacyProfile=legacyCoverage["materials"][0]["extras"]["azureRenderMaterial"];
+    legacyProfile["schemaVersion"]=1;legacyProfile.erase("shadowColorLut");
+    bool rejectedLegacy=false;try{load(legacyCoverage);}catch(const std::exception&){rejectedLegacy=true;}
+    require(rejectedLegacy,"Explicit shadow coverage must reject legacy material profile versions");
+  }
+  auto conflictingCoverage=source;
+  conflictingCoverage["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"geometry-shadow","sqrt-alpha-shadow"};
+  bool coverageRejected=false;try{load(conflictingCoverage);}catch(const std::exception&){coverageRejected=true;}
+  require(coverageRejected,"Conflicting material shadow coverage modes must reject");
+  auto composed=source;
+  auto& npr=composed["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"];
+  npr={{"schemaVersion",1},{"shadowScale",.7},{"lightingInputs","host-scene-radiance"},
+    {"shadowMask","none"},{"baseAo","albedo-alpha"}};
+  const auto response=load(composed);
+  auto viewComposed=composed;
+  const unsigned char viewRampPixels[]={180,150,170,64,180,150,170,64};
+  require(stbi_write_png((root/"view-ramp.png").string().c_str(),2,1,4,viewRampPixels,8)!=0,
+    "Cannot create view-ramp fixture");
+  viewComposed["images"].push_back({{"uri","view-ramp.png"}});
+  const auto viewRampTexture=viewComposed["textures"].size();
+  viewComposed["textures"].push_back({{"source",viewComposed["images"].size()-1}});
+  auto& rampColorProfile=viewComposed["materials"][0]["extras"]["azureRenderMaterial"];
+  rampColorProfile["features"]={"diffuse-ramp"};
+  rampColorProfile["diffuseRamp"]={{"schemaVersion",1},{"texture",viewRampTexture}};
+  rampColorProfile["nprDiffuse"]["rampComposition"]="view-ramp-alpha";
+  const auto viewMaterial=load(viewComposed).materials[0];
+  require(azurerender::packMaterialSurfaceProfile(viewMaterial).rows[1][3]==1,
+    "View-ramp color composition must reach the shared NPR profile");
+  auto facingComposed=viewComposed;
+  facingComposed["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rampComposition"]="view-facing-mask";
+  facingComposed["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["shadowSaturation"]=1.1;
+  const auto facingMaterial=load(facingComposed).materials[0];
+  const auto packedFacing=azurerender::packMaterialSurfaceProfile(facingMaterial);
+  require(packedFacing.rows[1][3]==2&&std::abs(packedFacing.rows[6][0]-.1F)<1e-6F,
+    "Procedural view masks and independent shadow saturation must reach the GPU profile");
+  require(viewMaterial.nprDiffuse.shadowSaturation==1&&azurerender::packMaterialSurfaceProfile(viewMaterial).rows[6][0]==0,
+    "Default shadow saturation must preserve the packed zero lane");
+  for(const auto& value:std::vector<Json>{nullptr,true,"1",-1,4.001}) {
+    auto invalid=facingComposed;
+    invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["shadowSaturation"]=value;
+    bool rejected=false;try{load(invalid);}catch(const std::exception& error){
+      rejected=std::string(error.what()).find("shadowSaturation")!=std::string::npos;
+    }
+    require(rejected,"Invalid shadow saturation must identify its field");
+  }
+  for(float value:{0.F,4.F}) {
+    auto boundary=facingComposed;boundary["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["shadowSaturation"]=value;
+    require(load(boundary).materials[0].nprDiffuse.shadowSaturation==value,"Shadow saturation boundaries must remain valid");
+  }
+  for(unsigned invalidCase=0;invalidCase<4;++invalidCase) {
+    auto invalid=facingMaterial;
+    if(invalidCase==0)invalid.nprDiffuse.present=false;
+    else if(invalidCase==1)invalid.materialProfileVersion=1;
+    else if(invalidCase==2)invalid.nprDiffuse.shadowSaturation=-1;
+    else invalid.materialFeatures|=MaterialFeatureUnlitSurface;
+    bool rejected=false;try{(void)azurerender::packMaterialSurfaceProfile(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Procedural view inputs require a valid lit version-two NPR owner");
+  }
+  for(unsigned invalidCase=0;invalidCase<5;++invalidCase) {
+    auto invalid=facingMaterial;
+    invalid.nprDiffuse.rampComposition=azurerender::NprRampComposition::MaskVisibility;
+    if(invalidCase==0)invalid.nprDiffuse.present=false;
+    else if(invalidCase==1)invalid.materialProfileVersion=1;
+    else if(invalidCase==2)invalid.nprDiffuse.shadowSaturation=std::numeric_limits<float>::quiet_NaN();
+    else if(invalidCase==3)invalid.nprDiffuse.shadowSaturation=std::numeric_limits<float>::infinity();
+    else invalid.materialFeatures|=MaterialFeatureUnlitSurface;
+    bool rejected=false;try{(void)azurerender::packMaterialSurfaceProfile(invalid);}catch(const std::exception& error){
+      rejected=std::string(error.what()).find("shadowSaturation")!=std::string::npos;
+    }
+    require(rejected,"Shadow saturation must independently validate its typed owner and finite input");
+  }
+  auto defaultComposed=viewComposed;
+  defaultComposed["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"].erase("rampComposition");
+  auto explicitDefault=defaultComposed;
+  explicitDefault["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rampComposition"]="mask-visibility";
+  require(azurerender::packMaterialSurfaceProfile(load(defaultComposed).materials[0]).rows
+      ==azurerender::packMaterialSurfaceProfile(load(explicitDefault).materials[0]).rows,
+    "Explicit default composition must retain every packed byte");
+  for(const auto& invalidValue:std::vector<Json>{nullptr,true,1,"unknown",Json::object()}) {
+    auto invalid=viewComposed;
+    invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rampComposition"]=invalidValue;
+    bool rejected=false;try{load(invalid);}catch(const std::exception& error){
+      rejected=std::string(error.what()).find("rampComposition")!=std::string::npos;
+    }
+    require(rejected,"Invalid composition policies must identify rampComposition");
+  }
+  auto missingViewRamp=viewComposed;
+  missingViewRamp["materials"][0]["extras"]["azureRenderMaterial"].erase("diffuseRamp");
+  missingViewRamp["materials"][0]["extras"]["azureRenderMaterial"]["features"]=Json::array();
+  bool missingViewRampRejected=false;try{load(missingViewRamp);}catch(const std::exception&){missingViewRampRejected=true;}
+  require(missingViewRampRejected,"View-ramp color composition requires a diffuse-ramp owner");
+  auto invalidTypedComposition=viewMaterial;
+  invalidTypedComposition.nprDiffuse.rampComposition=static_cast<azurerender::NprRampComposition>(42);
+  bool invalidTypedCompositionRejected=false;
+  try{(void)azurerender::packMaterialSurfaceProfile(invalidTypedComposition);}
+  catch(const std::exception&){invalidTypedCompositionRejected=true;}
+  require(invalidTypedCompositionRejected,"Typed packing must reject unknown composition policies");
+  for(unsigned variant=0;variant<4;++variant) {
+    auto incompatible=viewMaterial;
+    if(variant==0)incompatible.nprDiffuse.present=false;
+    if(variant==1)incompatible.materialProfileVersion=1;
+    if(variant==2)incompatible.materialFeatures&=~MaterialFeatureDiffuseRamp;
+    if(variant==3)incompatible.materialFeatures|=MaterialFeatureUnlitSurface;
+    bool rejected=false;try{(void)azurerender::packMaterialSurfaceProfile(incompatible);}
+    catch(const std::exception&){rejected=true;}
+    require(rejected,"View-ramp policy must reject incompatible typed owners");
+  }
+  const Json compositionPatch={{"schemaVersion",2},{"mode","parameters"},{"typeId","azure.pbr"},
+    {"parameters",{{"roughness",.4}}},{"textures",Json::object()}};
+  require(azurerender::packMaterialSurfaceProfile(azurerender::MaterialData::parse(compositionPatch).interpret(
+      [](const auto&){return std::filesystem::path();},&viewMaterial)).rows[1][3]==1,
+    "Parameter overrides must preserve the inherited ramp composition");
+  auto anchored=composed;
+  anchored["nodes"].push_back({{"name","material-rim-origin"},{"translation",{.25,.5,.75}}});
+  anchored["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rimOrigin"]={
+    {"schemaVersion",1},{"node","material-rim-origin"}};
+  const auto anchoredAsset=load(anchored);
+  const auto& origin=anchoredAsset.materials[0].nprDiffuse.rimOrigin;
+  require(origin.present&&origin.node==anchored["nodes"].size()-1&&origin.nodeName=="material-rim-origin",
+    "Material rim origin must resolve its own source node independently of the shared face frame");
+  require(!response.materials[0].nprDiffuse.rimOrigin.present,"Omitted rim origin must preserve the shared frame source");
+  for(const auto& bad:std::vector<Json>{nullptr,{{"schemaVersion",2},{"node","material-rim-origin"}},
+      {{"schemaVersion",1.0},{"node","material-rim-origin"}},{{"schemaVersion",1},{"node",42}},
+      {{"schemaVersion",1},{"node",""}},{{"schemaVersion",1},{"node","missing"}},
+      {{"schemaVersion",1},{"node","material-rim-origin"},{"offset",{0,0,0}}}}) {
+    auto invalid=anchored;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rimOrigin"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed or unresolved rim origins must reject during import");
+  }
+  auto ambiguousOrigin=anchored;ambiguousOrigin["nodes"].push_back({{"name","material-rim-origin"}});
+  bool ambiguousRejected=false;try{load(ambiguousOrigin);}catch(const std::exception&){ambiguousRejected=true;}
+  require(ambiguousRejected,"Rim origin names must identify one node");
+  for(const auto* kind:{"generic","skin","fabric","metal"}) {
+    auto accepted=anchored;accepted["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;
+    require(load(accepted).materials[0].nprDiffuse.rimOrigin.present,"Supported NPR surfaces must share the origin contract");
+  }
+  for(const auto* kind:{"face","hair","eye","overlay"}) {
+    auto invalid=anchored;invalid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Rim origin overrides must reject incompatible material frame owners");
+  }
+  auto surfaceMaterial=anchored["materials"][0];
+  surfaceMaterial.erase("normalTexture");surfaceMaterial.erase("occlusionTexture");surfaceMaterial.erase("emissiveTexture");
+  surfaceMaterial["pbrMetallicRoughness"].erase("baseColorTexture");
+  surfaceMaterial["pbrMetallicRoughness"].erase("metallicRoughnessTexture");
+  surfaceMaterial["extras"]["azureRenderMaterial"]["shadowColorLut"]["texture"]=0;
+  const Json complete={{"schemaVersion",3},{"typeId","azure.profile"},{"parameters",Json::object()},
+    {"textures",{{"0",{{"asset","00000000-0000-4000-8000-000000000017"},{"usage","albedo"}}}}},
+    {"surface",{{"asset",{{"version","2.0"}}},{"materials",Json::array({surfaceMaterial})},
+      {"textures",Json::array({{{"source",0}}})},{"nodes",Json::array({{{"name","material-rim-origin"}}})}}}};
+  const auto document=azurerender::MaterialData::parse(complete);
+  auto colorComplete=complete;
+  auto& colorCompleteProfile=colorComplete["surface"]["materials"][0]["extras"]["azureRenderMaterial"];
+  colorCompleteProfile["features"]={"diffuse-ramp"};
+  colorCompleteProfile["diffuseRamp"]={{"schemaVersion",1},{"texture",1}};
+  colorCompleteProfile["nprDiffuse"]["rampComposition"]="view-ramp-alpha";
+  colorComplete["surface"]["textures"].push_back({{"source",1}});
+  colorComplete["textures"]["1"]={{"asset","00000000-0000-4000-8000-000000000018"},{"usage","mask"}};
+  const auto colorDocument=azurerender::MaterialData::parse(colorComplete);
+  require(colorDocument.encode()==colorComplete&&azurerender::MaterialGraph::fromMaterial(colorDocument).compile().encode()==colorComplete,
+    "Full documents and graphs must preserve the ramp composition policy");
+  const auto colorLoaded=colorDocument.interpret([&](const auto& identity){
+    return root/(identity=="00000000-0000-4000-8000-000000000018"?"view-ramp.png":"lut.png");});
+  require(azurerender::packMaterialSurfaceProfile(colorLoaded).rows[1][3]==1,
+    "Standalone material documents must consume the explicit ramp composition");
+  require(document.encode()==complete&&azurerender::MaterialGraph::fromMaterial(document).compile().encode()==complete,
+    "Complete material documents and graphs must preserve the rim origin by name");
+  require(document.interpret([&](const auto&){return root/"lut.png";}).nprDiffuse.rimOrigin.node==0,
+    "Standalone complete documents must resolve their declared origin node");
+  const auto documentPath=root/"origin.azurematerial";std::ofstream(documentPath)<<document.encode().dump();
+  auto rebound=anchoredAsset;
+  const auto slot=azurerender::materialSlotIds(rebound).at(0);
+  const azurerender::MaterialBinding binding{documentPath.string(),"rim-origin-contract",{{"00000000-0000-4000-8000-000000000017",(root/"lut.png").string()}}};
+  azurerender::applyMaterialBindings(rebound,{{slot,binding}});
+  require(rebound.materials[0].nprDiffuse.rimOrigin.node==origin.node&&rebound.nodeWorldMatrices==anchoredAsset.nodeWorldMatrices,
+    "Complete document binding must resolve against the target model and preserve its node transforms");
+  require((response.materials[0].materialFeatures&(1U<<19U))!=0,"NPR color composition must be explicitly selected");
+  const auto packed=azurerender::packMaterialSurfaceProfile(response.materials[0]);
+  require(std::abs(packed.rows[0][0]-.7F)<1e-6F&&packed.rows[0][1]==0&&packed.rows[0][2]==1,
+    "NPR scale and source selectors must reach the immutable GPU table");
+  require(response.materials[0].nprDiffuse.indirectNormal==AssetMaterial::NprDiffuse::IndirectNormal::Surface
+    &&packed.rows[0][3]==0,"Omitted indirect normal mode must preserve the surface normal");
+  require(packed.rows[10][3]==0,"Omitted material lighting must retain scene-owned colors");
+  auto colored=composed;
+  auto wrapped=composed;
+  wrapped["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["localDiffuseFloorScale"]=2;
+  const auto wrappedPacked=azurerender::packMaterialSurfaceProfile(load(wrapped).materials[0]);
+  require(wrappedPacked.rows[3][1]==2&&packed.rows[3][1]==1,
+    "Material local wrap scale must pack independently with an identity default");
+  for(const Json& bad:std::vector<Json>{-0.001,4.001,true,"2",nullptr}) {
+    auto invalid=wrapped;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["localDiffuseFloorScale"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Invalid local wrap scale must reject");
+  }
+  for(float endpoint:{0.F,4.F}) {
+    wrapped["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["localDiffuseFloorScale"]=endpoint;
+    require(azurerender::packMaterialSurfaceProfile(load(wrapped).materials[0]).rows[3][1]==endpoint,
+      "Local wrap scale endpoints must remain legal");
+  }
+  colored["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["lighting"]={
+    {"schemaVersion",1},{"ambientColor",{1.2,.8,.6}},{"mainColor",{.7,.9,1.1}}};
+  const auto coloredMaterial=load(colored).materials[0];
+  auto independent=colored;
+  auto& independentNpr=independent["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"];
+  independentNpr["shadowMask"]="one";independentNpr["characterVisibility"]="main-light-shadow";
+  const auto independentPacked=azurerender::packMaterialSurfaceProfile(load(independent).materials[0]);
+  require(independentPacked.rows[0][1]==2&&independentPacked.rows[3][0]==1,
+    "Character visibility source and full receiver mask must have independent packed selectors");
+  require(packed.rows[3][0]==0,"Omitted character visibility source must preserve the scene visibility alias");
+  independentNpr["characterVisibility"]="object-shadow";
+  require(azurerender::packMaterialSurfaceProfile(load(independent).materials[0]).rows[3][0]==2,
+    "Object shadow visibility must retain its explicit packed source");
+  for(const auto& bad:std::vector<Json>{nullptr,true,0,"unknown"}) {
+    auto invalid=independent;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["characterVisibility"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Invalid character visibility sources must reject during shared material interpretation");
+  }
+  auto signedRamp=colored;
+  require(stbi_write_png((root/"ramp.png").string().c_str(),4,1,4,pixels,16)!=0,"Cannot create ramp fixture");
+  signedRamp["images"].push_back({{"uri","ramp.png"}});
+  const auto rampTexture=signedRamp["textures"].size();
+  signedRamp["textures"].push_back({{"source",signedRamp["images"].size()-1}});
+  signedRamp["materials"][0]["extras"]["azureRenderMaterial"]["features"].push_back("diffuse-ramp");
+  signedRamp["materials"][0]["extras"]["azureRenderMaterial"]["diffuseRamp"]={{"schemaVersion",1},{"texture",rampTexture}};
+  signedRamp["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["mainRamp"]={{"schemaVersion",1},{"bias",.2F}};
+  const auto signedRampMaterial=load(signedRamp).materials[0];
+  require(azurerender::packMaterialSurfaceProfile(signedRampMaterial).rows[1]==std::array<float,4>{0,1,.2F,0},
+    "Signed main-light ramp inputs must reach their owned material row");
+  auto missingRamp=signedRamp;missingRamp["materials"][0]["extras"]["azureRenderMaterial"].erase("diffuseRamp");
+  bool missingRampRejected=false;try{load(missingRamp);}catch(const std::exception&){missingRampRejected=true;}
+  require(missingRampRejected,"Explicit main ramp inputs require an owned diffuse ramp texture");
+  for(const auto& bad:std::vector<Json>{nullptr,true,Json::array(),Json{{"schemaVersion",1}},
+      Json{{"schemaVersion",2},{"bias",0}},Json{{"schemaVersion",1},{"bias",true}},
+      Json{{"schemaVersion",1},{"bias",-1.01}},Json{{"schemaVersion",1},{"bias",1.01}},
+      Json{{"schemaVersion",1},{"bias",0},{"extra",0}}}) {
+    auto invalid=signedRamp;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["mainRamp"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Invalid main ramp fields, versions and bias must fail import");
+  }
+  auto viewColored=colored;
+  auto& viewProfile=viewColored["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"];
+  viewProfile["rimResponse"]="view-facing";
+  viewProfile["viewTint"]={{"schemaVersion",1},{"scale",.595F},{"color",{.38F,.12F,.14F}}};
+  const auto viewPacked=azurerender::packMaterialSurfaceProfile(load(viewColored).materials[0]);
+  require(viewPacked.rows[1][0]==1&&viewPacked.rows[2]==std::array<float,4>{.38F,.12F,.14F,.595F},
+    "View rim selection and lit-albedo tint must reach distinct union fields");
+  require(packed.rows[1][0]==0&&packed.rows[2][3]==0,"Omitted rim response and view tint must retain compatible defaults");
+  for(const auto& bad:std::vector<Json>{nullptr,true,0,"unknown"}) {
+    auto invalid=viewColored;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rimResponse"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed rim response must reject before producing a GPU profile");
+  }
+  for(const auto& bad:std::vector<Json>{nullptr,Json{{"schemaVersion",2},{"scale",1},{"color",{1,1,1}}},
+      Json{{"schemaVersion",1},{"scale",true},{"color",{1,1,1}}},Json{{"schemaVersion",1},{"scale",65},{"color",{1,1,1}}},
+      Json{{"schemaVersion",1},{"scale",-1},{"color",{1,1,1}}},Json{{"schemaVersion",1},{"scale",1},{"color",{1,1}}},
+      Json{{"schemaVersion",1},{"scale",1},{"color",{1,false,1}}},Json{{"schemaVersion",1},{"scale",1},{"color",{1,1,65}}},
+      Json{{"schemaVersion",1},{"scale",1},{"color",{1,1,1}},{"extra",0}}}) {
+    auto invalid=viewColored;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["viewTint"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed view tint fields and versions must reject");
+  }
+  const auto coloredPacked=azurerender::packMaterialSurfaceProfile(coloredMaterial);
+  require(coloredPacked.rows[10]==std::array<float,4>{1.2F,.8F,.6F,1}
+    &&coloredPacked.rows[11]==std::array<float,4>{.7F,.9F,1.1F,0},
+    "Explicit material ambient and main colors must occupy the versioned union without changing its size");
+  for(const auto& value:std::vector<Json>{nullptr,true,Json::array(),Json{{"schemaVersion",1}},
+      Json{{"schemaVersion",2},{"ambientColor",{1,1,1}},{"mainColor",{1,1,1}}},
+      Json{{"schemaVersion",1},{"ambientColor",{1,1}},{"mainColor",{1,1,1}}},
+      Json{{"schemaVersion",1},{"ambientColor",{1,true,1}},{"mainColor",{1,1,1}}},
+      Json{{"schemaVersion",1},{"ambientColor",{1,1,1}},{"mainColor",{1,-1,1}}},
+      Json{{"schemaVersion",1},{"ambientColor",{65,1,1}},{"mainColor",{1,1,1}}},
+      Json{{"schemaVersion",1},{"ambientColor",{1,1,1}},{"mainColor",{1,1,1}},{"unknown",1}}}) {
+    auto invalid=colored;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["lighting"]=value;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed material lighting colors and versions must fail import");
+  }
+  for(const char* mode:{"surface","world-horizontal"}) {
+    auto valid=composed;valid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["indirectNormal"]=mode;
+    const auto configured=load(valid);
+    const bool horizontal=std::string(mode)=="world-horizontal";
+    require(configured.materials[0].nprDiffuse.indirectNormal==(horizontal
+      ?AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal:AssetMaterial::NprDiffuse::IndirectNormal::Surface)
+      &&azurerender::packMaterialSurfaceProfile(configured.materials[0]).rows[0][3]==(horizontal?1.F:0.F),
+      "Explicit indirect normal mode must reach the immutable GPU table");
+  }
+  for(const auto& mode:std::vector<Json>{nullptr,true,0,1.5,Json::array(),Json::object(),"unknown","WORLD-HORIZONTAL"}) {
+    auto invalid=composed;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["indirectNormal"]=mode;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed indirect normal modes must fail import");
+  }
+  auto face=composed;
+  face["nodes"].push_back({{"name","IndirectFaceHead"}});
+  face["scenes"][0]["nodes"].push_back(face["nodes"].size()-1);
+  auto& faceProfile=face["materials"][0]["extras"]["azureRenderMaterial"];
+  faceProfile["class"]="face";faceProfile["features"]={"face-sdf-eligible"};
+  faceProfile["faceSdf"]={{"schemaVersion",2},{"texture",index},{"maskTexture",index},{"rampTexture",index},
+    {"texCoord",0},{"headNode","IndirectFaceHead"},{"headBasis",{1,0,0,0,1,0,0,0,1}}};
+  faceProfile["nprDiffuse"]["indirectNormal"]="face-frame-radial-horizontal";
+  const unsigned char faceNormalPixels[]={192,217,191,255};
+  require(stbi_write_png((root/"face-normal.png").string().c_str(),1,1,4,faceNormalPixels,4)!=0,
+    "Cannot create the non-neutral face normal fixture");
+  face["images"].push_back({{"uri","face-normal.png"}});
+  face["textures"].push_back({{"source",face["images"].size()-1}});
+  face["materials"][0]["normalTexture"]={{"index",face["textures"].size()-1},{"scale",1}};
+  const auto faceResponse=load(face);
+  require(faceResponse.materials[0].textureSettings[1].colorSpace=="linear"
+    &&faceResponse.materials[0].normalWidth==1&&faceResponse.materials[0].normalHeight==1
+    &&faceResponse.materials[0].normalPixels==std::vector<std::uint8_t>(std::begin(faceNormalPixels),std::end(faceNormalPixels)),
+    "Face normal fixture must retain its non-neutral linear texture bytes");
+  require(faceResponse.materials[0].nprDiffuse.indirectNormal==AssetMaterial::NprDiffuse::IndirectNormal::FaceFrameRadialHorizontal
+    &&azurerender::packMaterialSurfaceProfile(faceResponse.materials[0]).rows[0][3]==2,
+    "Explicit face-frame radial mode must survive import and GPU packing");
+  for(const char* kind:{"generic","skin","fabric","metal","face"}) {
+    auto invalid=composed;auto& p=invalid["materials"][0]["extras"]["azureRenderMaterial"];
+    p["class"]=kind;p["nprDiffuse"]["indirectNormal"]="face-frame-radial-horizontal";
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Face radial mode requires a face material with a resolved version 2 SDF frame");
+  }
+  auto legacyFace=face;auto& legacySdf=legacyFace["materials"][0]["extras"]["azureRenderMaterial"]["faceSdf"];
+  legacySdf["schemaVersion"]=1;legacySdf["channel"]="r";legacySdf["maskChannel"]="a";
+  legacySdf["shadowOnLowValues"]=true;legacySdf["horizontalAxis"]="left-to-right";
+  auto legacyControl=legacyFace;
+  legacyControl["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["indirectNormal"]="surface";
+  require(load(legacyControl).materials[0].faceSdf.schemaVersion==1,"Legacy SDF control must remain valid");
+  bool legacyRejected=false;try{load(legacyFace);}catch(const std::exception&){legacyRejected=true;}
+  require(legacyRejected,"Face radial indirect mode must reject a legacy SDF frame");
+  for(const char* kind:{"generic","skin","face","fabric","metal"}) {
+    auto valid=composed;valid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;
+    require((load(valid).materials[0].materialFeatures&(1U<<19U))!=0,"NPR composition must support declared surface classes");
+  }
+  auto mask=composed;mask["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["shadowMask"]="style-mask-gb";
+  require(azurerender::packMaterialSurfaceProfile(load(mask).materials[0]).rows[0][1]==1,"Source mask selector must survive packing");
+  for(const auto& bad:std::vector<Json>{nullptr,Json::array(),Json{{"schemaVersion",1}},
+    Json{{"schemaVersion",2},{"shadowScale",1},{"lightingInputs","host-scene-radiance"},{"shadowMask","none"},{"baseAo","one"}}}) {
+    auto invalid=composed;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Incomplete or unsupported NPR composition must fail import");
+  }
+  for(const auto& field:std::vector<std::pair<std::string,Json>>{{"schemaVersion",1.5},{"schemaVersion",true},
+    {"shadowScale",-1},{"shadowScale",65},{"shadowScale",nullptr},{"shadowScale",true},
+    {"lightingInputs","native-unverified"},{"shadowMask","unknown"},{"baseAo","packed-ao"},{"unknown",1}}) {
+    auto invalid=composed;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"][field.first]=field.second;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed NPR composition fields must fail import");
+  }
+  for(const char* kind:{"hair","eye","overlay","emissive","showcase"}) {
+    auto invalid=composed;invalid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Incompatible material table owners must fail import");
+  }
+  auto noLut=composed;noLut["materials"][0]["extras"]["azureRenderMaterial"].erase("shadowColorLut");
+  bool missingRejected=false;try{load(noLut);}catch(const std::exception&){missingRejected=true;}
+  require(missingRejected,"NPR composition requires an explicit shadow LUT");
+  for(const auto& schema:std::vector<Json>{1,2.5,"2",nullptr}) {
+    auto invalid=composed;invalid["materials"][0]["extras"]["azureRenderMaterial"]["schemaVersion"]=schema;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"NPR composition requires integer parent schema two");
+  }
+  for(const auto& bad:std::vector<Json>{Json{{"schemaVersion",2},{"texture",index}},Json{{"schemaVersion",1.5},{"texture",index}},
+     Json{{"schemaVersion",1},{"texture",-1}},Json{{"schemaVersion",1},{"texture",.5}},
+     Json{{"schemaVersion",1},{"texture",index},{"flipV",1}},Json{{"schemaVersion",1},{"texture",index},{"unknown",true}}}){
+    auto invalid=baseline;invalid["materials"][0]["extras"]["azureRenderMaterial"]["shadowColorLut"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed shadow LUT configuration must fail import");
+  }
+  auto clothRamp=composed;
+  auto& clothProfile=clothRamp["materials"][0]["extras"]["azureRenderMaterial"];
+  clothProfile["class"]="fabric";
+  clothProfile["nprDiffuse"]["baseAo"]="metallic-roughness-red";
+  clothProfile["specularRamp"]={{"schemaVersion",1},{"texture",index},{"flipV",false},
+    {"iridescence",.35},{"lightingInputs","host-main-light"}};
+  const auto clothPacked=azurerender::packMaterialSurfaceProfile(load(clothRamp).materials[0]);
+  require(clothPacked.rows[0][2]==2.F&&clothPacked.rows[4][0]==0.F&&clothPacked.rows[4][1]==0.F&&clothPacked.rows[4][2]==.35F&&clothPacked.rows[4][3]==1.F,
+    "Two-dimensional cloth specular ramps require a typed material consumer");
+  require(azurerender::packMaterialSurfaceProfile(response.materials[0]).rows[4][3]==0,
+    "Omitted specular ramps must preserve the default surface response");
+  for(const char* kind:{"generic","fabric","metal"}){
+    auto valid=clothRamp;valid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;
+    const auto material=load(valid).materials[0];const auto& sampler=material.textureSettings[5];
+    require(material.specularRamp.present&&material.matcapWidth==4&&material.matcapHeight==2
+      &&material.matcapPixels==std::vector<std::uint8_t>(pixels,pixels+32),
+      "Specular ramp owners must retain their linear two-dimensional texels");
+    require(sampler.colorSpace=="linear"&&sampler.filter=="linear"&&sampler.wrapU=="clamp"&&sampler.wrapV=="clamp"
+      &&sampler.mipPolicy=="none"&&sampler.mipBias==0&&sampler.anisotropy==1,
+      "Specular ramp lookup sampling must preserve explicit linear zero-level semantics");
+  }
+  auto flippedRamp=clothRamp;flippedRamp["materials"][0]["extras"]["azureRenderMaterial"]["specularRamp"]["flipV"]=true;
+  require(azurerender::packMaterialSurfaceProfile(load(flippedRamp).materials[0]).rows[4][3]==-1,
+    "Specular ramp row orientation must have an explicit packed selector");
+  const auto rejectRamp=[&](const Json& candidate){bool failed=false;try{load(candidate);}catch(const std::exception&){failed=true;}
+    require(failed,"Invalid or conflicting specular ramp contracts must reject");};
+  for(const char* kind:{"skin","face","hair","eye","overlay"}){
+    auto invalid=clothRamp;invalid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;rejectRamp(invalid);
+  }
+  for(const auto& field:std::vector<std::pair<std::string,Json>>{{"schemaVersion",2},{"schemaVersion",1.5},
+    {"schemaVersion",true},{"texture",-1},{"texture",.5},{"texture",999999},{"texture",true},
+    {"flipV",0},{"iridescence",-.01},{"iridescence",1.01},{"iridescence",true},{"iridescence",nullptr},
+    {"lightingInputs","unknown"},{"lightingInputs",nullptr},{"unknown",0}}){
+    auto invalid=clothRamp;invalid["materials"][0]["extras"]["azureRenderMaterial"]["specularRamp"][field.first]=field.second;rejectRamp(invalid);
+  }
+  for(const auto& field:clothProfile["specularRamp"].items()){
+    auto invalid=clothRamp;invalid["materials"][0]["extras"]["azureRenderMaterial"]["specularRamp"].erase(field.key());rejectRamp(invalid);
+  }
+  auto noDiffuse=clothRamp;noDiffuse["materials"][0]["extras"]["azureRenderMaterial"].erase("nprDiffuse");rejectRamp(noDiffuse);
+  auto occupied=clothRamp;occupied["materials"][0]["extras"]["afterglowMatcapTexture"]=index;rejectRamp(occupied);
+  auto matcapOwner=clothRamp;matcapOwner["materials"][0]["extras"]["azureRenderMaterial"]["features"].push_back("face-sdf-eligible");rejectRamp(matcapOwner);
+  require(stbi_write_png((root/"ramp-line.png").string().c_str(),4,1,4,pixels,16)!=0,"Cannot create line ramp control");
+  auto lineRamp=clothRamp;const auto lineIndex=lineRamp["textures"].size();
+  lineRamp["textures"].push_back({{"source",lineRamp["images"].size()}});lineRamp["images"].push_back({{"uri","ramp-line.png"}});
+  lineRamp["materials"][0]["extras"]["azureRenderMaterial"]["specularRamp"]["texture"]=lineIndex;rejectRamp(lineRamp);
+  auto clothComplete=complete;
+  clothComplete["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["class"]="fabric";
+  clothComplete["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["specularRamp"]=clothProfile["specularRamp"];
+  clothComplete["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["specularRamp"]["texture"]=0;
+  const auto clothDocument=azurerender::MaterialData::parse(clothComplete);
+  require(clothDocument.encode()==clothComplete&&azurerender::MaterialGraph::fromMaterial(clothDocument).compile().encode()==clothComplete,
+    "Complete material documents and graphs must retain every specular ramp field");
+  require(clothDocument.interpret([&](const auto&){return root/"lut.png";}).specularRamp.present,
+    "Complete material documents must reach the typed specular ramp loader");
+  auto baseShadow=clothRamp;auto& baseShadowProfile=baseShadow["materials"][0]["extras"]["azureRenderMaterial"];
+  baseShadowProfile.erase("shadowColorLut");baseShadowProfile["nprDiffuse"]["shadowAlbedo"]="base-color";
+  const auto baseShadowMaterial=load(baseShadow).materials[0];
+  require(baseShadowMaterial.nprDiffuse.present&&baseShadowMaterial.specularRamp.present
+    &&!(baseShadowMaterial.materialFeatures&MaterialFeatureShadowColorLut),
+    "Explicit base-color shadows must compose with specular ramps without an invented lookup image");
+  for(const Json& policy:std::vector<Json>{nullptr,true,"unknown"}){
+    auto invalid=baseShadow;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["shadowAlbedo"]=policy;rejectRamp(invalid);
+  }
+  auto conflictingShadow=clothRamp;
+  conflictingShadow["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["shadowAlbedo"]="base-color";rejectRamp(conflictingShadow);
+  auto baseDocument=clothComplete;auto& baseDocumentProfile=baseDocument["surface"]["materials"][0]["extras"]["azureRenderMaterial"];
+  baseDocumentProfile.erase("shadowColorLut");baseDocumentProfile["nprDiffuse"]["shadowAlbedo"]="base-color";
+  const auto baseData=azurerender::MaterialData::parse(baseDocument);
+  require(azurerender::MaterialGraph::fromMaterial(baseData).compile().encode()==baseDocument
+    &&!(baseData.interpret([&](const auto&){return root/"lut.png";}).materialFeatures&MaterialFeatureShadowColorLut),
+    "Complete documents must preserve explicit base-color shadows without adding a lookup dependency");
+  require(stbi_write_png((root/"lut.png").string().c_str(),2,2,4,pixels,8)!=0,"Cannot create invalid LUT fixture");
+  bool rejected=false;try{load(baseline);}catch(const std::exception&){rejected=true;}
+  require(rejected,"LUT strip dimensions must encode a complete cube");
+  std::filesystem::remove_all(root);
+  std::cout<<"Shadow LUT import, sampling semantics and invalid inputs passed\n";return 0;
+ }catch(const std::exception& error){std::cerr<<error.what()<<'\n';std::filesystem::remove_all(root);return 1;}
+}

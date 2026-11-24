@@ -1,0 +1,9 @@
+{
+  "status": "compared",
+  "fullSamePixelFraction": 0.9988001844618055,
+  "fullMaximumByteError": 11,
+  "headMeanByteError": 0.007497219132369299,
+  "headMaximumByteError": 11,
+  "referenceFile": "build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\receiver-final-release\\frames\\frame_000000.png",
+  "currentSha256": "c0873ed464ffe19f8d4e70126b7a094c18c4b1471148f884d5f1ebb7fac3940c"
+}

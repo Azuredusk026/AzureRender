@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "diagnosticOnly": true,
+  "events": [
+    {
+      "api": "NtAllocateVirtualMemory",
+      "action": "allocate",
+      "base": 2273449017344,
+      "size": 4194304,
+      "status": 0,
+      "flags": 12288
+    },
+    {
+      "api": "NtFreeVirtualMemory",
+      "action": "release",
+      "base": 2273449017344,
+      "size": 0,
+      "status": 0,
+      "flags": 32768
+    },
+    {
+      "api": "NtFreeVirtualMemory",
+      "action": "release",
+      "base": 2273449017344,
+      "size": 0,
+      "status": 3221225632,
+      "flags": 32768
+    },
+    {
+      "api": "NtAllocateVirtualMemoryEx",
+      "action": "allocate",
+      "base": 2273449017344,
+      "size": 1048576,
+      "status": 0,
+      "flags": 12288
+    },
+    {
+      "api": "NtFreeVirtualMemory",
+      "action": "release",
+      "base": 2273449017344,
+      "size": 0,
+      "status": 0,
+      "flags": 32768
+    },
+    {
+      "api": "NtFreeVirtualMemory",
+      "action": "release",
+      "base": 2273449017344,
+      "size": 0,
+      "status": 3221225632,
+      "flags": 32768
+    },
+    {
+      "api": "NtAllocateVirtualMemory",
+      "action": "allocate",
+      "base": 0,
+      "size": 0,
+      "status": 3221225485,
+      "flags": 12288
+    }
+  ]
+}

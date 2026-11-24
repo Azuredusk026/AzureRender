@@ -1,0 +1,221 @@
+........EEEEEEEEEEEEEEEEEEEEEEEE...
+======================================================================
+ERROR: test_scene_context_keeps_its_own_direction_and_visibility (test_native_npr_lighting.NprLightingTests.test_scene_context_keeps_its_own_direction_and_visibility)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 17, in test_scene_context_keeps_its_own_direction_and_visibility
+    self.assertEqual(subject.decode_scene_settings(g,ambient_row=113),dict(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_do_not_require_object_light_rows (test_native_npr_lighting.NprLightingTests.test_scene_settings_do_not_require_object_light_rows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 11, in test_scene_settings_do_not_require_object_light_rows
+    self.assertEqual(subject.decode_scene_settings(g,ambient_row=113),expected)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (missing=27)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 34, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (missing=29)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 34, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (missing=110)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 34, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (missing=111)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 34, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (missing=112)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 34, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (missing=116)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 34, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (missing=117)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 34, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (missing=122)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 34, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=27, component=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=29, component=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=110, component=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=110, component=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=111, component=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=112, component=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=116, component=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=117, component=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=117, component=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=117, component=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=122, component=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=122, component=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_reject_missing_and_invalid_source_fields (test_native_npr_lighting.NprLightingTests.test_scene_settings_reject_missing_and_invalid_source_fields) (field=117, component=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 40, in test_scene_settings_reject_missing_and_invalid_source_fields
+    subject.decode_scene_settings(g,ambient_row=112)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+======================================================================
+ERROR: test_scene_settings_respect_direction_convention_and_input_ownership (test_native_npr_lighting.NprLightingTests.test_scene_settings_respect_direction_convention_and_input_ownership)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_npr_lighting.py", line 26, in test_scene_settings_respect_direction_convention_and_input_ownership
+    self.assertEqual(subject.decode_scene_settings(g,ambient_row=112)['ambientDirection'],[-.6,.8,0])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'endfield_native.npr_lighting' has no attribute 'decode_scene_settings'
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.005s
+
+FAILED (errors=24)

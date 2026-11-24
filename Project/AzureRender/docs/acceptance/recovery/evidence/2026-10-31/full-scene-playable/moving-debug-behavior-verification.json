@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "frames": 540,
+  "actions": 13,
+  "walkSpeed": 1.1999988555908203,
+  "sprintSpeed": 3.000011444091797,
+  "walkClip": 7,
+  "sprintClip": 8,
+  "focusReleased": true,
+  "revisionTransitions": [
+    [
+      451,
+      2,
+      3
+    ]
+  ],
+  "finalIdleGrounded": true,
+  "obstructedFrames": 136,
+  "cameraDistanceRange": [
+    3.532900529056994,
+    4.004996365161682
+  ],
+  "cameraRelativeForwardCosine": 0.9999999998540834,
+  "rawLensForwardCosine": 0.9987478376513353,
+  "cameraYawDegrees": -67.5,
+  "cameraSensitivitySource": "src/ecs/GameComponents.hpp: default .15 degrees per input unit",
+  "minimumCharacterHeight": 1.0317745208740234,
+  "scope": "Production fixed-step input, actual displacement, animation samples, focus, camera collision and script restart. Planter traversal is not a wall-blocking or native-collision-equivalence result."
+}

@@ -1,0 +1,7 @@
+{
+  "status": "failed-timeout",
+  "deadlineSeconds": 600,
+  "ownedProcessId": 36644,
+  "operation": "three full replay cycles with SetFrameEvent(0,True)",
+  "conclusion": "No completed measurement; no replay stability claim."
+}

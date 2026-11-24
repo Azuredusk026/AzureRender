@@ -1,0 +1,445 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "phase": "NR6-C16-R1-F",
+  "status": "public-material-origin-verified-complete-appearance-open",
+  "baseCommit": "56bdaac",
+  "sourceManifest": {
+    "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/final-source-manifest.json",
+    "bytes": 30126,
+    "sha256": "f3280872795f443ce38e312f9902dae5ab3a9b4ebc92a0fc7260154fa09fc111"
+  },
+  "captureSource": {
+    "schemaVersion": 1,
+    "scope": "Captured body reserved frame and ordered source bone palette; two poses",
+    "sourceAuditSha256": "26b40382c63a4783ed1576bf42e9f6a9241623d90b69eb49a74b9ceca4269858",
+    "rows": [
+      {
+        "frame": 10401,
+        "event": 783,
+        "paletteRow": 24772,
+        "boneIndex": 10,
+        "sourcePath": "chr_0016_laevat_postmodel/Root/Bip001/Bip001_Pelvis",
+        "positionResidualMetres": 1.1618247686342839e-05,
+        "matrixMaximumError": 9.677256912254961e-06,
+        "nativeOrigin": [
+          -299.9510498046875,
+          301.0088195800781,
+          -299.9464111328125
+        ],
+        "headOrigin": [
+          -300.00433349609375,
+          301.53741455078125,
+          -299.9794921875
+        ],
+        "horizontalSeparationMetres": 0.06271768450057644,
+        "sourceInstanceSha256": "87737414ffb38ef3e3a8b464a8943e0ea6a9f602436d47fd9c1fca4ac4b4d890"
+      },
+      {
+        "frame": 6834,
+        "event": 768,
+        "paletteRow": 40189,
+        "boneIndex": 10,
+        "sourcePath": "chr_0016_laevat_postmodel/Root/Bip001/Bip001_Pelvis",
+        "positionResidualMetres": 1.3730158071108371e-05,
+        "matrixMaximumError": 9.818943254913393e-06,
+        "nativeOrigin": [
+          -198.9062957763672,
+          301.0019836425781,
+          -201.14471435546875
+        ],
+        "headOrigin": [
+          -199.0074005126953,
+          301.5189208984375,
+          -201.167724609375
+        ],
+        "horizontalSeparationMetres": 0.10369011280160598,
+        "sourceInstanceSha256": "a670249e56b0d7c16023c81ea7cfb6852ecde6b91aa3c5208115284e58d32fae"
+      }
+    ]
+  },
+  "publicContract": {
+    "path": "nprDiffuse.rimOrigin",
+    "schemaVersion": 1,
+    "classes": [
+      "generic",
+      "skin",
+      "fabric",
+      "metal"
+    ],
+    "instanceBytes": 496,
+    "instanceLayoutVersion": 2,
+    "materialBytes": 192,
+    "descriptorChanges": 0,
+    "sharedRecords": "physical source instance plus unique node"
+  },
+  "tests": {
+    "debug": {
+      "cpu": {
+        "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/rim-origin-verified-cpu-debug.log",
+        "bytes": 1694,
+        "sha256": "865d2bffa4cb0b2476c43d5bf780866821f9f9474033eb0d6d5345d035710218"
+      },
+      "build": {
+        "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/rim-origin-final-build-debug.log",
+        "bytes": 1280,
+        "sha256": "91a8a48ddc75cab4f5bd2042398c4414d5e7ce381618e27d04bc3dd9c082f1fc"
+      },
+      "cpuTests": 11,
+      "gpu": {
+        "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/final-origin-gpu-debug/summary.json",
+        "bytes": 3760,
+        "sha256": "100d53f942c93599798434f9709f0286b24d7b45c17a9608774474e620211002"
+      },
+      "gpuFrames": 39,
+      "maximumLinearError": 0.0008035252141625759
+    },
+    "release": {
+      "cpu": {
+        "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/rim-origin-verified-cpu-release.log",
+        "bytes": 1698,
+        "sha256": "c525bcf93fba67bb1d8dc4484fd5c3a5baa07e4544f00b6697a1822f0fe626ae"
+      },
+      "build": {
+        "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/rim-origin-final-build-release.log",
+        "bytes": 1397,
+        "sha256": "ce862f958bf6e2beb8a5cf7e083c29b6c46c542256bbc92370cc6c93016695fc"
+      },
+      "cpuTests": 11,
+      "gpu": {
+        "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/final-origin-gpu-release/summary.json",
+        "bytes": 3768,
+        "sha256": "34f07ce7a00ec5e058f528c9f37fb9cda8d574ca90c5f126e0f8cfb2dd494373"
+      },
+      "gpuFrames": 39,
+      "maximumLinearError": 0.0008035252141625759
+    }
+  },
+  "diagnosticEvidence": [
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/normal-frame-proof.json",
+      "bytes": 2902,
+      "sha256": "6c51241ce939008b096d55b2418ce9c288721e756cf1485887f34800a0171429"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/rim-origin-red.log",
+      "bytes": 26,
+      "sha256": "ff280e5aa9fa905348ef6634cded80fc61de01572edd5f46b32daee2f1a7ac57"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/origin-instances-red.log",
+      "bytes": 69,
+      "sha256": "12336b4c4fe35a7c67b34982929d2435158b7b37a7b42633e27d2b620441498d"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/origin-budget-red.log",
+      "bytes": 13611,
+      "sha256": "d4aca2ba3c6bdaf820cfb2ec7b80251ff3774cba429313a0bc92d551869656a2"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/public-origin-red-results.json",
+      "bytes": 892,
+      "sha256": "5b3af092268096d00a45f064a1b127a923109a6951564e863a0bb3c91b606f1c"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/public-origin-green-debug-results.json",
+      "bytes": 894,
+      "sha256": "8301a1bc1f1f2da7bdecba403ec95fe7458be79c2f72f800cf66c22650d8ecbe"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/main-candidate-v3.json",
+      "bytes": 2983,
+      "sha256": "1bfe484fccfe8ac8d96a92d103565351ff11edb381ccd06e83bf9b50f3a2cd06"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/main-cache-location.json",
+      "bytes": 423,
+      "sha256": "f1c7aa11821acf721ab7d670f6ef80771d3086920e1378da6333faefb9bfcd0e"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/default-main-result.json",
+      "bytes": 337,
+      "sha256": "5dfc67b493028d82cba0b8a5f36dd36c639b5df183210fd3a0a2f1c61c6e2c41"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/main-v3-result.json",
+      "bytes": 343,
+      "sha256": "40ab8f43103f609b98a9ebe0892909daeb61bedb540a5dcde5006c92060ebc1d"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/run_final_captures.py",
+      "bytes": 2478,
+      "sha256": "212b5f28582db5782773d6a2f5588747c752033f295515a64eed482de77a5718"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/run_main_path_diagnosis.py",
+      "bytes": 2073,
+      "sha256": "41ac813a15d0d0026da4e95bf00a305d706adfee800d3fb28a660432456a0f39"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/main-path-isolation-results.json",
+      "bytes": 925,
+      "sha256": "cbc212c66d338d48ea5e2eba951d0c48c80a9475df1796417fa66d265899240e"
+    },
+    {
+      "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/main-path-difference-red.json",
+      "bytes": 2318,
+      "sha256": "760c5e0bdde073112b49c33d7dc18ccbf0d2a6bc22c39020e4ab8636bd19bbb7"
+    }
+  ],
+  "remaining": [
+    "Complete character appearance and face color",
+    "Executed body geometry and complete authored tangent frames",
+    "World material-rim light provenance",
+    "Gizmo raster combined with animation has recording coverage only",
+    "60 FPS and dual-hardware gates",
+    "Compute versus vertex skinning: 61 changed main-scene pixels, maximum channel difference 10"
+  ],
+  "finalBodyCaptures": [
+    {
+      "name": "final-body-debug",
+      "playerSha256": "efe9d78de7982b0cfb44902cd1b4c05955f18f4651d622891976aed2a01b64d1",
+      "imageSha256": "152782b406bce1a61b2cae6ac14c7f91b37bc17a260ecd8af9fe1c790e30fab3",
+      "processSeconds": 125.125,
+      "validationEnabled": true,
+      "leg": [
+        85,
+        59,
+        52
+      ],
+      "upperBody": [
+        146,
+        114,
+        100
+      ]
+    },
+    {
+      "name": "final-body-release",
+      "playerSha256": "d4f8b25cd6d9e29cae7950bcca47233d174a66a7544e591182bc7ef6623ceb6f",
+      "imageSha256": "152782b406bce1a61b2cae6ac14c7f91b37bc17a260ecd8af9fe1c790e30fab3",
+      "processSeconds": 59.8440000000046,
+      "validationEnabled": false,
+      "leg": [
+        85,
+        59,
+        52
+      ],
+      "upperBody": [
+        146,
+        114,
+        100
+      ]
+    }
+  ],
+  "mainPathIsolation": [
+    {
+      "name": "final-main-default-release",
+      "playerSha256": "d4f8b25cd6d9e29cae7950bcca47233d174a66a7544e591182bc7ef6623ceb6f",
+      "imageSha256": "1a5f5698798fa47272dd2a219c4844a1e154117cfde29635df35a160aaab4ec9",
+      "processSeconds": 174.98399999999674,
+      "versusDefault": {
+        "maximumByteDifference": 0,
+        "changedPixels": 0
+      },
+      "versusFixed": {
+        "maximumByteDifference": 10,
+        "changedPixels": 61
+      }
+    },
+    {
+      "name": "final-main-vertex-only-release",
+      "playerSha256": "d4f8b25cd6d9e29cae7950bcca47233d174a66a7544e591182bc7ef6623ceb6f",
+      "imageSha256": "966fe47b1c57be16708a274e827000b011c419b458d84700dd20ae8145d973a4",
+      "processSeconds": 161.28100000000268,
+      "versusDefault": {
+        "maximumByteDifference": 10,
+        "changedPixels": 61
+      },
+      "versusFixed": {
+        "maximumByteDifference": 0,
+        "changedPixels": 0
+      }
+    }
+  ],
+  "mainPathDifference": {
+    "changedPixels": 61,
+    "maximumByteDifference": 10,
+    "bounds": [
+      63,
+      185,
+      1064,
+      1019
+    ],
+    "points": [
+      {
+        "x": 960,
+        "y": 468,
+        "before": [
+          48,
+          47,
+          55
+        ],
+        "fixed": [
+          50,
+          49,
+          56
+        ]
+      },
+      {
+        "x": 961,
+        "y": 472,
+        "before": [
+          54,
+          53,
+          60
+        ],
+        "fixed": [
+          52,
+          51,
+          59
+        ]
+      },
+      {
+        "x": 961,
+        "y": 474,
+        "before": [
+          53,
+          51,
+          59
+        ],
+        "fixed": [
+          52,
+          49,
+          58
+        ]
+      },
+      {
+        "x": 1029,
+        "y": 487,
+        "before": [
+          122,
+          85,
+          122
+        ],
+        "fixed": [
+          125,
+          87,
+          125
+        ]
+      },
+      {
+        "x": 877,
+        "y": 297,
+        "before": [
+          39,
+          54,
+          32
+        ],
+        "fixed": [
+          42,
+          57,
+          32
+        ]
+      },
+      {
+        "x": 908,
+        "y": 384,
+        "before": [
+          68,
+          58,
+          61
+        ],
+        "fixed": [
+          71,
+          59,
+          62
+        ]
+      },
+      {
+        "x": 908,
+        "y": 383,
+        "before": [
+          62,
+          52,
+          56
+        ],
+        "fixed": [
+          63,
+          56,
+          59
+        ]
+      },
+      {
+        "x": 960,
+        "y": 472,
+        "before": [
+          47,
+          46,
+          55
+        ],
+        "fixed": [
+          43,
+          43,
+          52
+        ]
+      },
+      {
+        "x": 960,
+        "y": 469,
+        "before": [
+          43,
+          43,
+          54
+        ],
+        "fixed": [
+          47,
+          47,
+          56
+        ]
+      },
+      {
+        "x": 960,
+        "y": 471,
+        "before": [
+          50,
+          50,
+          59
+        ],
+        "fixed": [
+          44,
+          44,
+          54
+        ]
+      },
+      {
+        "x": 909,
+        "y": 383,
+        "before": [
+          50,
+          49,
+          56
+        ],
+        "fixed": [
+          59,
+          54,
+          58
+        ]
+      },
+      {
+        "x": 1029,
+        "y": 488,
+        "before": [
+          63,
+          62,
+          62
+        ],
+        "fixed": [
+          71,
+          70,
+          72
+        ]
+      }
+    ],
+    "attribution": "Disabling compute skinning alone exactly reproduces the all-fixed path; numerical deformation equivalence remains a separate NR7 gate"
+  }
+}

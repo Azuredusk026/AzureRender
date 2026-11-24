@@ -1,6 +1,6 @@
 # 环境资源运行时说明
 
-环境资源通过 `loadEnvironmentImage` 读取为 RGBA16F。Radiance HDR 保持浮点动态范围；PNG、JPG 等 LDR 输入先转换到线性空间；OpenEXR 的 R、G、B 通道按线性浮点读取，Alpha 固定为 1。
+环境资源通过 `loadEnvironmentImage` 读取为 RGBA16F。Radiance HDR 保持浮点动态范围。PNG、JPG 等 LDR 输入先转换到线性空间。OpenEXR 的 R、G、B 通道按线性浮点读取，Alpha 固定为 1。
 
 Character 在支持 RGBA16F 存储图像的设备上，将环境基准层上传后通过 Compute 生成粗糙度预滤波 Mip。漫反射 IBL 采样最粗 Mip，镜面 IBL 按材质粗糙度选择 Mip。环境 Mip 共享同一图像，Compute 按子资源屏障写入各层。设备不支持存储图像时使用 Vulkan 线性 Blit 生成 Mip。
 

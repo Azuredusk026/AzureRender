@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "stage": "NR6-C1/C2",
+  "nativeVisualEquivalenceVerified": false,
+  "run": "build/runs/20261022-051129-character-logistics-restoration-0f2e71",
+  "sourceFingerprints": [
+    {
+      "path": "shaders/character_surface.glsl",
+      "workspaceSha256": "163d8b2c5f924afacadf42147fb157573a86a4724dc267c901a36bc5df493757",
+      "nr6Snapshot": "shaders/character_surface.glsl",
+      "nr6SnapshotSha256": "163d8b2c5f924afacadf42147fb157573a86a4724dc267c901a36bc5df493757"
+    },
+    {
+      "path": "shaders/mesh.frag",
+      "workspaceSha256": "39b28f7111295713cd82b81c3b7b2e38affa6b025217ee2b6d566a2f548dca9f",
+      "nr6Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/c1-split/shaders/mesh.frag",
+      "nr6SnapshotSha256": "cab124c7f5a2a04b5151ba6f76ac426ec03c83f659e072d65a66aa8816b66dbf"
+    },
+    {
+      "path": "src/assets/GltfLoader.hpp",
+      "workspaceSha256": "0ea07076019b652aa2491296fc1d01d63e8ec538af7a4d3a69e5b28403ccff85",
+      "nr6Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/c1-split/src/assets/GltfLoader.hpp",
+      "nr6SnapshotSha256": "3644df563a474b753b5c379ceaca76bb9a0a50c6d0535d17c64291e21c96d6ee"
+    },
+    {
+      "path": "src/assets/GltfLoader.cpp",
+      "workspaceSha256": "d6fbfff1bf6e25607409cdc5b743089e02648c0caccb14ac8983481b493b406d",
+      "nr6Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/c1-split/src/assets/GltfLoader.cpp",
+      "nr6SnapshotSha256": "6bdcbfa7a91497e978f166aebd6f94d5d219d0ccfbfcb2b7ec55f0265276bc00"
+    },
+    {
+      "path": "src/scenes/CharacterSceneRenderer.cpp",
+      "workspaceSha256": "19291961729fa6cf52c92b5b1b2bb49bc4667e33b75d42c3a08d6c757ce993e7",
+      "nr6Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/c1-split/src/scenes/CharacterSceneRenderer.cpp",
+      "nr6SnapshotSha256": "7f762883dc39ad06bcc51663cc32fd8c670322c6c88ca92c780764e3e31399a9"
+    },
+    {
+      "path": "tools/endfield_native/character_profiles.py",
+      "workspaceSha256": "86bdc75ea45c2359bd4d9d1d18e221d10c9bcd6d569fe2863cf2999ad139def4",
+      "nr6Snapshot": "tools/endfield_native/character_profiles.py",
+      "nr6SnapshotSha256": "86bdc75ea45c2359bd4d9d1d18e221d10c9bcd6d569fe2863cf2999ad139def4"
+    },
+    {
+      "path": "tools/endfield_native/shadow_lut.py",
+      "workspaceSha256": "b0c38efee08614925e96db25077d6e8b2fedab1862f5265103ff3f9b0c4acacf",
+      "nr6Snapshot": "tools/endfield_native/shadow_lut.py",
+      "nr6SnapshotSha256": "b0c38efee08614925e96db25077d6e8b2fedab1862f5265103ff3f9b0c4acacf"
+    },
+    {
+      "path": "tools/test_native_character_profiles.py",
+      "workspaceSha256": "ca36a4c26f0a16321f00252cd2ab8796979fce3458e92239174e9e9b1bb16c8d",
+      "nr6Snapshot": "tools/test_native_character_profiles.py",
+      "nr6SnapshotSha256": "ca36a4c26f0a16321f00252cd2ab8796979fce3458e92239174e9e9b1bb16c8d"
+    },
+    {
+      "path": "tools/test_scene_character_gpu.py",
+      "workspaceSha256": "bc8a88419f2a49a413e4131f6a537e5946a78651412c0cf5bef00520b7bc1e2a",
+      "nr6Snapshot": "tools/test_scene_character_gpu.py",
+      "nr6SnapshotSha256": "bc8a88419f2a49a413e4131f6a537e5946a78651412c0cf5bef00520b7bc1e2a"
+    },
+    {
+      "path": "tests/CharacterRepairTests.cpp",
+      "workspaceSha256": "ba08e12d1a5a0dd6dc4d754618398944b6499e47112637d35e0a1dcacbbced25",
+      "nr6Snapshot": "tests/CharacterRepairTests.cpp",
+      "nr6SnapshotSha256": "ba08e12d1a5a0dd6dc4d754618398944b6499e47112637d35e0a1dcacbbced25"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "workspaceSha256": "3d0a7f8ef08632e2cde4575f4a146a75e22c4c18ddc256ffef6fb6a43621b097",
+      "nr6Snapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/c1-split/CMakeLists.txt",
+      "nr6SnapshotSha256": "4d9056ef8c203acba48afdc0ce3167b9e3e8d12fd0867577d0b701a9944fcb7b"
+    }
+  ],
+  "asset": {
+    "inputSha256": "683ce9ae3249942b4dc7049b06c74808b06021e4f9f972ae83668c71830d8015",
+    "outputSha256": "12f8f145eaa9d8e07e8d462bda80f08a6d22329028593b90decad8e06b85f3b1",
+    "profileReceiptSha256": "39181c0e545c19210f0dd71ffe0c287ae61f386899eff7227d01aa688ec1c39b",
+    "consumerAuditSha256": "f0186da289bc263128fda925ced3b5876d4a45d3753b46bdcc97a3b6715e3dcb",
+    "materialCount": 13,
+    "profileMaterialCount": 12,
+    "classes": {
+      "skin": 2,
+      "fabric": 5,
+      "overlay": 2,
+      "face": 1,
+      "hair": 1,
+      "eye": 1
+    },
+    "binaryTailPreserved": true,
+    "animationsIdentical": true,
+    "animationCount": 9,
+    "animationChannelCount": 8451
+  },
+  "cpu": {
+    "command": "ctest --test-dir build/ninja-msvc-release --output-on-failure -R 'AzureRender.CharacterRepair|AzureTools.NativeCharacter|AzureTools.EndfieldNative'",
+    "passedGroups": 3,
+    "failedGroups": 0,
+    "log": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/character/cpu-regression.log",
+    "logSha256": "7a4c796e856f102205cf4721755ece9fc414a1a1015d79d78f0ff2ae59788965"
+  },
+  "gpu": {
+    "redFailures": [
+      "scene light must produce a visible hair KK contribution",
+      "scene hair effect toggle must affect pixels",
+      "KK must consume the actual scene light color"
+    ],
+    "metrics": {
+      "hairLitMean": 193.5327380952381,
+      "hairDarkMaximum": 0,
+      "hairDisabledMaximum": 0,
+      "hairEffectDifference": 193.5327380952381,
+      "hairGreenChannels": [
+        0.0,
+        186.74744897959184,
+        0.0
+      ],
+      "fixedMaximumDifference": 0,
+      "pbr-litReferenceMaximumDifference": 0,
+      "pbr-darkReferenceMaximumDifference": 0
+    },
+    "captureCount": 7,
+    "failures": [],
+    "validationLayerEnabled": false,
+    "playerSha256": "abff5d8d8b5a9f46a5f327e632c9a00e0c7a0757b59feb4d18139b264cd82ba2",
+    "receipt": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/character-gpu-green/summary.json",
+    "receiptSha256": "4b0a07992d4a9df9b38f7709d59c979891331397b6a3d9e906563212aa18100c"
+  },
+  "shaderEvidence": {
+    "extractionReceipt": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/character/native-shaders/extraction-receipt.json",
+    "extractionReceiptSha256": "2b0c3b70f5a2a1cdbaeccbc342b49355246d142333a3009a1a0ca91781d094ce",
+    "hairPixelProgram": 263,
+    "hairParameterBlob": 45,
+    "hairPixelSha256": "aa51065398a5add02eb65dcf53a5dbd6894b487cad8589b8aacf6273f10099e9",
+    "eyePixelProgram": 52,
+    "eyePixelSha256": "1b47a993091ca55540356cf312228a05d0e76327dc8cc6f47717e770b5823626",
+    "overlayBlend": {
+      "source": "zero",
+      "destination": "source-color",
+      "depthWrite": false,
+      "stencilReadMask": 20
+    }
+  },
+  "visual": {
+    "host": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/joint-face-initial/frames/frame_000000.png",
+    "hostSha256": "436683c3fb82a1c06289547dd08411b8d3ccf0dd38d6b69806515d7669c0296d",
+    "reference": "build/runs/20261017-175206-nr-playable-integration-d4e789/game-reference/laevatain-preview-front.jpg",
+    "registeredComparison": false,
+    "findings": [
+      "Dense narrow white hair highlights remain visible.",
+      "Camera, pose and lighting differ from the game preview.",
+      "Pixel-equivalent native character rendering remains unverified."
+    ]
+  },
+  "remaining": [
+    "Native 2D hair specular ramp and original P channels",
+    "Native eye parallax, highlight and matcap",
+    "Native overlay shadow multiply and stencil routing",
+    "Screen-space hair shadow and under-brow pass",
+    "Registered native camera/lighting comparison",
+    "Debug build and broader affected GPU regression"
+  ]
+}

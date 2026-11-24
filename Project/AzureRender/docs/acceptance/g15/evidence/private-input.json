@@ -1,0 +1,269 @@
+{
+  "schemaVersion": 1,
+  "actions": [
+    {
+      "frame": 4,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 5,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 8,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 44,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 48,
+      "action": "key",
+      "key": 65,
+      "down": true
+    },
+    {
+      "frame": 58,
+      "action": "key",
+      "key": 65,
+      "down": false
+    },
+    {
+      "frame": 62,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 63,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 66,
+      "action": "key",
+      "key": 68,
+      "down": true
+    },
+    {
+      "frame": 76,
+      "action": "key",
+      "key": 68,
+      "down": false
+    },
+    {
+      "frame": 80,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 134,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 138,
+      "action": "key",
+      "key": 68,
+      "down": true
+    },
+    {
+      "frame": 148,
+      "action": "key",
+      "key": 68,
+      "down": false
+    },
+    {
+      "frame": 152,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 153,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 156,
+      "action": "key",
+      "key": 65,
+      "down": true
+    },
+    {
+      "frame": 166,
+      "action": "key",
+      "key": 65,
+      "down": false
+    },
+    {
+      "frame": 170,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 178,
+      "action": "key",
+      "key": 32,
+      "down": true
+    },
+    {
+      "frame": 179,
+      "action": "key",
+      "key": 32,
+      "down": false
+    },
+    {
+      "frame": 228,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 232,
+      "action": "key",
+      "key": 65,
+      "down": true
+    },
+    {
+      "frame": 242,
+      "action": "key",
+      "key": 65,
+      "down": false
+    },
+    {
+      "frame": 246,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 247,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 250,
+      "action": "key",
+      "key": 68,
+      "down": true
+    },
+    {
+      "frame": 260,
+      "action": "key",
+      "key": 68,
+      "down": false
+    },
+    {
+      "frame": 264,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 302,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 306,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 307,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 310,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 340,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 356,
+      "action": "key",
+      "key": 82,
+      "down": true
+    },
+    {
+      "frame": 357,
+      "action": "key",
+      "key": 82,
+      "down": false
+    },
+    {
+      "frame": 364,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 365,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 368,
+      "action": "key",
+      "key": 340,
+      "down": true
+    },
+    {
+      "frame": 368,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 376,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 376,
+      "action": "key",
+      "key": 340,
+      "down": false
+    },
+    {
+      "frame": 384,
+      "action": "key",
+      "key": 82,
+      "down": true
+    },
+    {
+      "frame": 385,
+      "action": "key",
+      "key": 82,
+      "down": false
+    }
+  ]
+}

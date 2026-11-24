@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-playable\\playable.azureproject",
+        "--width",
+        "960",
+        "--height",
+        "540",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-isolation",
+        "beauty",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-release\\runtime.json",
+        "--game-actions",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\input-route.json",
+        "--capture-frames",
+        "540",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-release\\frames"
+      ],
+      "behavior": {
+        "status": "passed",
+        "frames": 540,
+        "actions": 13,
+        "walkSpeed": 1.1999988555908203,
+        "sprintSpeed": 3.000011444091797,
+        "walkClip": 7,
+        "sprintClip": 8,
+        "focusReleased": true,
+        "revisionTransitions": [
+          [
+            451,
+            2,
+            3
+          ]
+        ],
+        "finalIdleGrounded": true,
+        "obstructedFrames": 136,
+        "cameraDistanceRange": [
+          1.0000006646093962,
+          1.0000006646093962
+        ],
+        "cameraRelativeForwardCosine": 0.9999999998540834,
+        "rawLensForwardCosine": -0.3872228649121946,
+        "cameraYawDegrees": -67.5,
+        "cameraSensitivitySource": "src/ecs/GameComponents.hpp: default .15 degrees per input unit",
+        "minimumCharacterHeight": 1.0317745208740234,
+        "scope": "Production fixed-step input, actual displacement, animation samples, focus, camera collision and script restart. Planter traversal is not a wall-blocking or native-collision-equivalence result."
+      },
+      "playerSha256": "642ad4d341fc9652aa41c796cca0b43debc9c3706ea68aa8e4ef5a0193e245fc"
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-playable\\playable.azureproject",
+        "--width",
+        "960",
+        "--height",
+        "540",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-isolation",
+        "beauty",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-debug\\runtime.json",
+        "--game-actions",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\input-route.json",
+        "--capture-frames",
+        "540",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-debug\\frames"
+      ],
+      "behavior": {
+        "status": "passed",
+        "frames": 540,
+        "actions": 13,
+        "walkSpeed": 1.1999988555908203,
+        "sprintSpeed": 3.000011444091797,
+        "walkClip": 7,
+        "sprintClip": 8,
+        "focusReleased": true,
+        "revisionTransitions": [
+          [
+            451,
+            2,
+            3
+          ]
+        ],
+        "finalIdleGrounded": true,
+        "obstructedFrames": 136,
+        "cameraDistanceRange": [
+          1.0000006646093962,
+          1.0000006646093962
+        ],
+        "cameraRelativeForwardCosine": 0.9999999998540834,
+        "rawLensForwardCosine": -0.3872228649121946,
+        "cameraYawDegrees": -67.5,
+        "cameraSensitivitySource": "src/ecs/GameComponents.hpp: default .15 degrees per input unit",
+        "minimumCharacterHeight": 1.0317745208740234,
+        "scope": "Production fixed-step input, actual displacement, animation samples, focus, camera collision and script restart. Planter traversal is not a wall-blocking or native-collision-equivalence result."
+      },
+      "playerSha256": "a1fd5dfe919d091ce2cf8b9d10b3c0512f90425eff2a9c4f837d816c6dc2f1e9"
+    }
+  ]
+}

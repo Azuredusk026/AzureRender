@@ -1,0 +1,454 @@
+{
+  "schemaVersion": 1,
+  "phase": "NR3-L8",
+  "status": "ordinary-profile-color-binding-passed",
+  "run": "build/runs/20261027-233926-native-local-light-runtime-audit-1b643d",
+  "source": {
+    "tools/endfield_native/light_profiles.py": "7ce080db3d0b0feb3f8b87a258511e4c41e30c7f93f32c255680668a3834ccbb",
+    "tools/bind_native_light_profiles.py": "29fabb8ecb107d66a9bbc928ede34cd6b30136ee74f830ea818848161c7a69f2",
+    "tools/test_native_light_profiles.py": "67d8f76f475ffefdb82bc3bd89c1ad6b00aee708f6251dd8d18f4c94f10038ed"
+  },
+  "binding": {
+    "encoding": "authored-srgb",
+    "boundLights": 45,
+    "coloredLights": 42,
+    "unresolvedColorLights": [
+      "native-light-74065168",
+      "native-light-102236873",
+      "native-light-104366995"
+    ]
+  },
+  "sourceRadianceProof": [
+    {
+      "entity": 14337397,
+      "sourceIndex": 3,
+      "radiance": [
+        2.1585233211517334,
+        2.684546709060669,
+        3.0
+      ],
+      "bitExact": true
+    },
+    {
+      "entity": 43609168,
+      "sourceIndex": 0,
+      "radiance": [
+        131.60000610351562,
+        124.35221099853516,
+        117.91789245605469
+      ],
+      "bitExact": true
+    },
+    {
+      "entity": 108890456,
+      "sourceIndex": 1,
+      "radiance": [
+        61.08363342285156,
+        67.45567321777344,
+        70.30000305175781
+      ],
+      "bitExact": true
+    }
+  ],
+  "tests": {
+    "cpu": 41,
+    "gpuCaptures": 24,
+    "configurationAndDescriptorExact": true,
+    "reflectionExact": true
+  },
+  "fullCamera": {
+    "default": {
+      "meanAbsoluteByteError": 18.98644730179398,
+      "panelRgb": [
+        [
+          52,
+          51,
+          48
+        ],
+        [
+          49,
+          46,
+          42
+        ]
+      ]
+    },
+    "native": {
+      "meanAbsoluteByteError": 20.485382758246526,
+      "panelRgb": [
+        [
+          53,
+          52,
+          49
+        ],
+        [
+          49,
+          46,
+          42
+        ]
+      ]
+    }
+  },
+  "boundaries": [
+    "Three temperature-enabled light colors retain prior configuration and remain explicitly unresolved.",
+    "Active cluster masks and duplicate runtime record identities require separate capture confirmation.",
+    "Full native post-processing, remaining normals, logistics and NR0-NR12 visual/performance gates remain open."
+  ],
+  "artifacts": [
+    {
+      "path": "profile-final.log",
+      "sha256": "71778ac30a66b2731c2a8188c169cc9b59e21e35a39b6ac34d5c33695b284bfc"
+    },
+    {
+      "path": "captured-final.log",
+      "sha256": "5cf99b69faedf33c5ffb2368aa725c93db4278d5d614082052216293177828eb"
+    },
+    {
+      "path": "ecs-final.log",
+      "sha256": "7fa2c3f39772ba088198b95aa567e627f67c3902377d56005c27e26c62e660a9"
+    },
+    {
+      "path": "color-red.log",
+      "sha256": "083afadaf03c29e432882139747cf60f93ce29b8c02768a11e0d819546df963c"
+    },
+    {
+      "path": "srgb-float32-proof.json",
+      "sha256": "4fe2ed7bb2b237376d4a44b5684ea1d069156f7df6435cc876ea820f79768161"
+    },
+    {
+      "path": "srgb-source-comparison.json",
+      "sha256": "e5bfc6b34a52e739940f8c24cc17bcc1d257e440724caadcd8d996e79171843b"
+    },
+    {
+      "path": "local-runtime-matches.json",
+      "sha256": "fa4563077ceee19e87e07965fdeec268b5360ed00f3669d0db688769c5bcd04b"
+    },
+    {
+      "path": "color-gpu.json",
+      "sha256": "dd47407d74ec73b9398eaa7ecf468f4fc1828aa7bf882754d511c93b147106c8"
+    },
+    {
+      "path": "color-default-binding.json",
+      "sha256": "1b4a6566be7b315a445a94e832f07e9eafafede14ae977a216b0acaab69e4849"
+    },
+    {
+      "path": "color-native-binding.json",
+      "sha256": "723d068bdd55dba2f3a4968ddd8b354b3ddb0bd964995b50238cf9d6a99a47e6"
+    },
+    {
+      "path": "full-color-comparison.json",
+      "sha256": "629e21d67f247b8f61f42b16cab964a759719f437e47614acd598696134c175f"
+    },
+    {
+      "path": "color-release-indexed-baseline-direct-specular/frames/frame_000000.png",
+      "sha256": "f7adc3ae46f1cff3d06c591f018e1ae84267073f2f6579809ebb1d5ab3beadb3"
+    },
+    {
+      "path": "color-release-indexed-baseline-direct-specular/frames/capture_manifest.json",
+      "sha256": "141a1c5aaa4a2c9736e000147028ffbbf011ce81b8e940d130ba7149b5f3e9e8"
+    },
+    {
+      "path": "color-release-indexed-baseline-direct-specular.log",
+      "sha256": "7cf8e41fbcd85c301684301b3572efdeed1e0a41755e9579bb6dd2f988302276"
+    },
+    {
+      "path": "color-release-indexed-baseline-direct-diffuse/frames/frame_000000.png",
+      "sha256": "ebaff72a7f793ddc311a34c33ee4ef7916c9b2aea7ea6b413ba36c5c4a5bea0c"
+    },
+    {
+      "path": "color-release-indexed-baseline-direct-diffuse/frames/capture_manifest.json",
+      "sha256": "dc37cf543733764b11f85043161591cfc44237e21ca767a5127fa7aed340f4f1"
+    },
+    {
+      "path": "color-release-indexed-baseline-direct-diffuse.log",
+      "sha256": "6f2de07909212c6ddc6417577f53477db110db7d845b9ed4fd434e09804d18cf"
+    },
+    {
+      "path": "color-release-indexed-baseline-reflection/frames/frame_000000.png",
+      "sha256": "a588108e71e8934b7afbf3bdfc3a43ecde61b3cadaccc4c81761fb24551d8d86"
+    },
+    {
+      "path": "color-release-indexed-baseline-reflection/frames/capture_manifest.json",
+      "sha256": "ca44bc11fa7dc0f22018e1b03da615912b1dba1b1184bc32348de3b455fe09c5"
+    },
+    {
+      "path": "color-release-indexed-baseline-reflection.log",
+      "sha256": "4e95d5a20852ba3d07c93561d5ebce4da8191e376281e346f6a514b123ed46da"
+    },
+    {
+      "path": "color-release-indexed-linear-direct-specular/frames/frame_000000.png",
+      "sha256": "11d65c022e22530de52394d45a331f2e5d979eccfa060dc6841913962bfdedac"
+    },
+    {
+      "path": "color-release-indexed-linear-direct-specular/frames/capture_manifest.json",
+      "sha256": "35188c6ef8a1f3e9353e78bc0bc9208ca469ee381340f120dd62c33c3999947d"
+    },
+    {
+      "path": "color-release-indexed-linear-direct-specular.log",
+      "sha256": "d9988f5105d98e4211a484d983c2ab373a3d75255ac8115af8fda2d92c9f2578"
+    },
+    {
+      "path": "color-release-indexed-linear-direct-diffuse/frames/frame_000000.png",
+      "sha256": "4d4295a3fd00d612457fab00c3aa6568108820704141bdf1956f15ade15667be"
+    },
+    {
+      "path": "color-release-indexed-linear-direct-diffuse/frames/capture_manifest.json",
+      "sha256": "d085a1f259b724846fb53e8a32b819c25eb21fd11949e7dbd6cae9d0e2aa32ae"
+    },
+    {
+      "path": "color-release-indexed-linear-direct-diffuse.log",
+      "sha256": "1aeec30256611a809a73afec02f9692c9f3d9e30f362a3052a6dd6428f109ed6"
+    },
+    {
+      "path": "color-release-indexed-linear-reflection/frames/frame_000000.png",
+      "sha256": "a588108e71e8934b7afbf3bdfc3a43ecde61b3cadaccc4c81761fb24551d8d86"
+    },
+    {
+      "path": "color-release-indexed-linear-reflection/frames/capture_manifest.json",
+      "sha256": "0f390d39baea7098c715f284a97ba783161216b849a650c4fa25c7418ad9e572"
+    },
+    {
+      "path": "color-release-indexed-linear-reflection.log",
+      "sha256": "a52dddb2e0706b1da7da9412828045a047dda7602dda86163e1757a61b2904ec"
+    },
+    {
+      "path": "color-release-fixed-baseline-direct-specular/frames/frame_000000.png",
+      "sha256": "f7adc3ae46f1cff3d06c591f018e1ae84267073f2f6579809ebb1d5ab3beadb3"
+    },
+    {
+      "path": "color-release-fixed-baseline-direct-specular/frames/capture_manifest.json",
+      "sha256": "8d537a89569f15684cf656a4b8f4e5210051f5500c01e2ae5dd88d9199b0056e"
+    },
+    {
+      "path": "color-release-fixed-baseline-direct-specular.log",
+      "sha256": "10e956e47465d5ae6bdcb894fec8e87277135df4ff5bbff798110907c54ebc27"
+    },
+    {
+      "path": "color-release-fixed-baseline-direct-diffuse/frames/frame_000000.png",
+      "sha256": "ebaff72a7f793ddc311a34c33ee4ef7916c9b2aea7ea6b413ba36c5c4a5bea0c"
+    },
+    {
+      "path": "color-release-fixed-baseline-direct-diffuse/frames/capture_manifest.json",
+      "sha256": "ce23ff4738eb6569a0fa861ae2d88363f9b6898e1602ea2d7b300cba5703eb8d"
+    },
+    {
+      "path": "color-release-fixed-baseline-direct-diffuse.log",
+      "sha256": "0b5cb91bc59ae835d21abc5661a5789a5d9da78171cc672a460e3d1ae4d79e24"
+    },
+    {
+      "path": "color-release-fixed-baseline-reflection/frames/frame_000000.png",
+      "sha256": "a588108e71e8934b7afbf3bdfc3a43ecde61b3cadaccc4c81761fb24551d8d86"
+    },
+    {
+      "path": "color-release-fixed-baseline-reflection/frames/capture_manifest.json",
+      "sha256": "dc861e27fc3ac1b7e9782ff219232dd62ee4005de38db8501a54080f6ff38e78"
+    },
+    {
+      "path": "color-release-fixed-baseline-reflection.log",
+      "sha256": "7c22741ff32ce87817b74051e31845914d0dd8bad6b5d24387ec558b105b837f"
+    },
+    {
+      "path": "color-release-fixed-linear-direct-specular/frames/frame_000000.png",
+      "sha256": "11d65c022e22530de52394d45a331f2e5d979eccfa060dc6841913962bfdedac"
+    },
+    {
+      "path": "color-release-fixed-linear-direct-specular/frames/capture_manifest.json",
+      "sha256": "24f1e8fb2259595d45182910f771f41b0f8811bb5ffd8aef85ecfa1d09c378a5"
+    },
+    {
+      "path": "color-release-fixed-linear-direct-specular.log",
+      "sha256": "3b6d2b6aa1bdaa5c0b24514946f53962b10c65f5c730f1613d348992bf7de45a"
+    },
+    {
+      "path": "color-release-fixed-linear-direct-diffuse/frames/frame_000000.png",
+      "sha256": "4d4295a3fd00d612457fab00c3aa6568108820704141bdf1956f15ade15667be"
+    },
+    {
+      "path": "color-release-fixed-linear-direct-diffuse/frames/capture_manifest.json",
+      "sha256": "13b0c9abc8f483f02d971344ca6e26df7f982395a1bdbbd362ed18c1c528500a"
+    },
+    {
+      "path": "color-release-fixed-linear-direct-diffuse.log",
+      "sha256": "da385f29931fbffa355fe2312b7fd4b49e91014fc187c39be61aff2a6c3ceba7"
+    },
+    {
+      "path": "color-release-fixed-linear-reflection/frames/frame_000000.png",
+      "sha256": "a588108e71e8934b7afbf3bdfc3a43ecde61b3cadaccc4c81761fb24551d8d86"
+    },
+    {
+      "path": "color-release-fixed-linear-reflection/frames/capture_manifest.json",
+      "sha256": "b3af01405a8b50ea479eeccdb2b3fa68a91f5237305cb6314af23c262ecfdcf6"
+    },
+    {
+      "path": "color-release-fixed-linear-reflection.log",
+      "sha256": "d6cfb4af30389c3dafb84ca5ac09d2b23d5413702a5eba57abdbcc625b59e80e"
+    },
+    {
+      "path": "color-debug-indexed-baseline-direct-specular/frames/frame_000000.png",
+      "sha256": "f7adc3ae46f1cff3d06c591f018e1ae84267073f2f6579809ebb1d5ab3beadb3"
+    },
+    {
+      "path": "color-debug-indexed-baseline-direct-specular/frames/capture_manifest.json",
+      "sha256": "72c6533072c42e3a7dd80354c83fec77403b76494d7c5dfdc856c79d5a44cd4e"
+    },
+    {
+      "path": "color-debug-indexed-baseline-direct-specular.log",
+      "sha256": "176bdc68229039f9c61173c3d3f9150e5b50680df7375353ca12edd4f8e129d3"
+    },
+    {
+      "path": "color-debug-indexed-baseline-direct-diffuse/frames/frame_000000.png",
+      "sha256": "ebaff72a7f793ddc311a34c33ee4ef7916c9b2aea7ea6b413ba36c5c4a5bea0c"
+    },
+    {
+      "path": "color-debug-indexed-baseline-direct-diffuse/frames/capture_manifest.json",
+      "sha256": "14f86284026201a3b7b477cd2c32432471802a1e5d4ce6a8257baaf89bf5217b"
+    },
+    {
+      "path": "color-debug-indexed-baseline-direct-diffuse.log",
+      "sha256": "895b63a5016147863a1776055643f672ef8dbe6dc30584a01399365b0813595a"
+    },
+    {
+      "path": "color-debug-indexed-baseline-reflection/frames/frame_000000.png",
+      "sha256": "a588108e71e8934b7afbf3bdfc3a43ecde61b3cadaccc4c81761fb24551d8d86"
+    },
+    {
+      "path": "color-debug-indexed-baseline-reflection/frames/capture_manifest.json",
+      "sha256": "5ddd12af86fb384c30e3e4a005eae43cdccb4fc40932d6ed171c0146c8d1c6f1"
+    },
+    {
+      "path": "color-debug-indexed-baseline-reflection.log",
+      "sha256": "132e8290e20abbcd4e83e5b952ff10efb4557e4f72a1344aad21a69532d358b3"
+    },
+    {
+      "path": "color-debug-indexed-linear-direct-specular/frames/frame_000000.png",
+      "sha256": "11d65c022e22530de52394d45a331f2e5d979eccfa060dc6841913962bfdedac"
+    },
+    {
+      "path": "color-debug-indexed-linear-direct-specular/frames/capture_manifest.json",
+      "sha256": "09cfae8e8095e3671f8e9d65d880d9f78ff46df6ce6e5d6564a320fce67ca474"
+    },
+    {
+      "path": "color-debug-indexed-linear-direct-specular.log",
+      "sha256": "e71fc9fe27edf6f6fb29f400e3a38bf1123d65cb52b73a6d7727777c2620adb9"
+    },
+    {
+      "path": "color-debug-indexed-linear-direct-diffuse/frames/frame_000000.png",
+      "sha256": "4d4295a3fd00d612457fab00c3aa6568108820704141bdf1956f15ade15667be"
+    },
+    {
+      "path": "color-debug-indexed-linear-direct-diffuse/frames/capture_manifest.json",
+      "sha256": "023bdb9ec503931e4df8e61c7d217795cc2d239853d4023e373756d5142b73bd"
+    },
+    {
+      "path": "color-debug-indexed-linear-direct-diffuse.log",
+      "sha256": "d9194a42ee0da947dd34ff41b882f38aab65e904753e7f910a849ba9c866517b"
+    },
+    {
+      "path": "color-debug-indexed-linear-reflection/frames/frame_000000.png",
+      "sha256": "a588108e71e8934b7afbf3bdfc3a43ecde61b3cadaccc4c81761fb24551d8d86"
+    },
+    {
+      "path": "color-debug-indexed-linear-reflection/frames/capture_manifest.json",
+      "sha256": "a606a6c59c35bdbfe795280cb70c6c405b222e7d620d575de615e174af4e58ac"
+    },
+    {
+      "path": "color-debug-indexed-linear-reflection.log",
+      "sha256": "3318bd257510bad1cb6409729775edcfed2e0779771341b081c98f1e8bb9bcee"
+    },
+    {
+      "path": "color-debug-fixed-baseline-direct-specular/frames/frame_000000.png",
+      "sha256": "f7adc3ae46f1cff3d06c591f018e1ae84267073f2f6579809ebb1d5ab3beadb3"
+    },
+    {
+      "path": "color-debug-fixed-baseline-direct-specular/frames/capture_manifest.json",
+      "sha256": "9b8b4f776fe27e975287a267df2a3f652200bb5cb303122818ec4f81c276d035"
+    },
+    {
+      "path": "color-debug-fixed-baseline-direct-specular.log",
+      "sha256": "1f96abf75d41000bcf721f49b59ccbf778e3921d6a75ff21cd44ddd7ec33feae"
+    },
+    {
+      "path": "color-debug-fixed-baseline-direct-diffuse/frames/frame_000000.png",
+      "sha256": "ebaff72a7f793ddc311a34c33ee4ef7916c9b2aea7ea6b413ba36c5c4a5bea0c"
+    },
+    {
+      "path": "color-debug-fixed-baseline-direct-diffuse/frames/capture_manifest.json",
+      "sha256": "57b68863b823f0230f5a4c36b19c37fae490913eb3f62606fbe45ad4f301637b"
+    },
+    {
+      "path": "color-debug-fixed-baseline-direct-diffuse.log",
+      "sha256": "0ec9286e73e0305dbf55b7db69104b2f68b589ff1dfd5a0bbf1b3394a20a6098"
+    },
+    {
+      "path": "color-debug-fixed-baseline-reflection/frames/frame_000000.png",
+      "sha256": "a588108e71e8934b7afbf3bdfc3a43ecde61b3cadaccc4c81761fb24551d8d86"
+    },
+    {
+      "path": "color-debug-fixed-baseline-reflection/frames/capture_manifest.json",
+      "sha256": "a101003896faba3cc2a208c3c145ea11da0f24913c6739199ed9aeefef628abf"
+    },
+    {
+      "path": "color-debug-fixed-baseline-reflection.log",
+      "sha256": "714d81d9927489aa049c7de0f4af7de53e201b0b270e090e72531e0f0f6bb253"
+    },
+    {
+      "path": "color-debug-fixed-linear-direct-specular/frames/frame_000000.png",
+      "sha256": "11d65c022e22530de52394d45a331f2e5d979eccfa060dc6841913962bfdedac"
+    },
+    {
+      "path": "color-debug-fixed-linear-direct-specular/frames/capture_manifest.json",
+      "sha256": "69450a6b9b614cf5c8294fa54404f9d9ece0f8550b96fe80e8624054693c886b"
+    },
+    {
+      "path": "color-debug-fixed-linear-direct-specular.log",
+      "sha256": "dfb9ee5e692d578c6bcc1b0c9a8f3cbd60aad8837560e9a75829de5fbe27034e"
+    },
+    {
+      "path": "color-debug-fixed-linear-direct-diffuse/frames/frame_000000.png",
+      "sha256": "4d4295a3fd00d612457fab00c3aa6568108820704141bdf1956f15ade15667be"
+    },
+    {
+      "path": "color-debug-fixed-linear-direct-diffuse/frames/capture_manifest.json",
+      "sha256": "ee33a14482a09b6745f1d717230b9a1a40d60fd4578b49b41d4af36b9a1a8996"
+    },
+    {
+      "path": "color-debug-fixed-linear-direct-diffuse.log",
+      "sha256": "0d4a5833af10c140d78446570d3452160e1328d287425a850265258102c1467c"
+    },
+    {
+      "path": "color-debug-fixed-linear-reflection/frames/frame_000000.png",
+      "sha256": "a588108e71e8934b7afbf3bdfc3a43ecde61b3cadaccc4c81761fb24551d8d86"
+    },
+    {
+      "path": "color-debug-fixed-linear-reflection/frames/capture_manifest.json",
+      "sha256": "2bb8cc637627afc106cea3735a1e0d9bbc3701e64314781c6e6bf51be2171209"
+    },
+    {
+      "path": "color-debug-fixed-linear-reflection.log",
+      "sha256": "fe1d60a8ac9cfa6c38fad6754d35c19cb5eeaef63867e0773298cec95f7596c7"
+    },
+    {
+      "path": "full-default/frames/frame_000000.png",
+      "sha256": "41e5dd1558e5fb23dcccfe7f2e4b5cdf3c98c3e4b025d8baf40b47d7a824a5cd"
+    },
+    {
+      "path": "full-default/frames/capture_manifest.json",
+      "sha256": "5182b5514e0de251608e3517bc9ff37a58c9d27f1b07d5073b28672dc250dcf6"
+    },
+    {
+      "path": "full-default.log",
+      "sha256": "d97e3776eb9eddb30d64b76f64a481835867e5db1fd5f42c7359f88a6596ca2f"
+    },
+    {
+      "path": "full-native/frames/frame_000000.png",
+      "sha256": "bf3bddb68dd86b829c3d6cb95325dfcae492fdc4f943536f17b3ed8028a9949d"
+    },
+    {
+      "path": "full-native/frames/capture_manifest.json",
+      "sha256": "095a735b6997b460ac3392ebabae4ca0934c38e20db8e84da913c2d1db1382d6"
+    },
+    {
+      "path": "full-native.log",
+      "sha256": "7809123a4db61c52b41ec8a5c7d5bc76f715e1d9f47b429eb9b45894dc2ae423"
+    }
+  ]
+}

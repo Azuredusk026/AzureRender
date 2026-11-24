@@ -1,0 +1,1383 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "phase": "P1-material-feature-specialization",
+  "status": "affected-functional-validation-passed; formal-budget-pending",
+  "sourceBaseCommit": "3f75396f97751b037c75a36dc813886fe706bfcd",
+  "sourceFiles": {
+    "CMakeLists.txt": "a93fbffabf025a7eb6c66f935f4795b0adb7366ce4e5fdb258c0096f6e80be35",
+    "shaders/mesh.frag": "1195c9bc89676e6cf096997f762deecab0ccb9347a03b17ad87fa04df5c0736e",
+    "src/render/MaterialPipelinePolicy.hpp": "eb3e19971ce9259ee21df64df79e10118fb26a5c1c89cbe259c4e72112fe12d9",
+    "src/scenes/CharacterMaterialSampling.inc": "e9fa8baffebc910d5d4af775b24e9c765becc4e4d334063d57cb112fda772970",
+    "src/scenes/CharacterSceneRenderer.cpp": "180f5cd486e8f18f60dbb7c3a8c5916431c7a8ec2bffe1893f9af4ff2713977b",
+    "src/scenes/CharacterSceneRenderer.hpp": "ac941645dc2695e992effaa2ca8b7669e3e1a9eab548c086df155ac53f5bd498",
+    "tests/MaterialPipelinePolicyTests.cpp": "557c1c749794a051a597392a23b014c03389de2839005645316ef1be1dce7439",
+    "tools/test_material_feature_specialization_gpu.py": "1259056aa07b8273220710e546949b1680e7bc5ebba74ce3efd38c6789a549d5"
+  },
+  "artifactRoot": "build/runs/20261030-232017-recovery-init-crash-3bd962",
+  "builds": {
+    "debug": {
+      "receipt": {
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+          "cmake",
+          "--build",
+          "--preset",
+          "msvc-debug",
+          "-j",
+          "2",
+          "--target",
+          "AzureRender",
+          "AzurePlayer",
+          "AzureMaterialPipelinePolicyTests",
+          "AzureSceneMultisamplingGpuTests",
+          "AzureSceneMultisamplingTests",
+          "AzureTemporalViewGpuTests",
+          "AzureMotionVectorGpuTests",
+          "AzureSharedMotionGpuTests",
+          "AzureRenderRenderGraphTests",
+          "AzureRenderNullRhiPassTests",
+          "AzureScreenReflectionTests",
+          "AzureReflectionRayGpuTests",
+          "AzureShaderSpecializationGpuTests",
+          "AzureTextureContainerTests",
+          "AzureSampledTextureCacheTests"
+        ],
+        "startUtc": "2026-10-30T17:57:57.133305+00:00",
+        "endUtc": "2026-10-30T17:58:45.113123+00:00",
+        "exitCode": 0
+      },
+      "logSha256": "9e26392fff603c7fc98b7eb2905476fde260065753a924a6dc9d8c87c2b0abb6",
+      "playerSha256": "a68e42b2baaf7e9556c5f6849aad427a315c5b4a6c0b791d935d44f27c0cc67a",
+      "hostSha256": "739bf9e19447a18d62f5471519a239005ba6cf2bb2eb4b448f28b64f332385b9"
+    },
+    "release": {
+      "receipt": {
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+          "cmake",
+          "--build",
+          "--preset",
+          "msvc-release",
+          "-j",
+          "2",
+          "--target",
+          "AzureRender",
+          "AzurePlayer",
+          "AzureMaterialPipelinePolicyTests",
+          "AzureSceneMultisamplingGpuTests",
+          "AzureSceneMultisamplingTests",
+          "AzureTemporalViewGpuTests",
+          "AzureMotionVectorGpuTests",
+          "AzureSharedMotionGpuTests",
+          "AzureRenderRenderGraphTests",
+          "AzureRenderNullRhiPassTests",
+          "AzureScreenReflectionTests",
+          "AzureReflectionRayGpuTests",
+          "AzureShaderSpecializationGpuTests",
+          "AzureTextureContainerTests",
+          "AzureSampledTextureCacheTests"
+        ],
+        "startUtc": "2026-10-30T18:04:59.087691+00:00",
+        "endUtc": "2026-10-30T18:05:41.122089+00:00",
+        "exitCode": 0
+      },
+      "logSha256": "b6db4f90015c19f893ccb7fd3a3783d65f4d91266a6c71f176a63d474c503f9e",
+      "playerSha256": "2895b224242ae42857318d58767d190b038f93817cffa82702bb389c09fdeca4",
+      "hostSha256": "861d1844db8119eb733e6451ba9b49279cb78f88faaeadf099f05c4fb54b9f88"
+    }
+  },
+  "regressions": {
+    "debug": {
+      "report": {
+        "schemaVersion": 1,
+        "configuration": "debug",
+        "sourceCommit": "3f75396f97751b037c75a36dc813886fe706bfcd",
+        "steps": [
+          {
+            "name": "class-regression",
+            "startUtc": "2026-10-30T18:27:17.917382+00:00",
+            "exitCode": 0,
+            "logSha256": "ecf39fb63bdbc24ecb1762c0280a1039ba76789b69c01b6f69633066b10755d9"
+          },
+          {
+            "name": "loader-managed-regression",
+            "reusedLog": "loader-managed-debug.log",
+            "exitCode": 0,
+            "logSha256": "24cbedbcb2b59c762e1d46ac275da369fa742c8a96cbbba857f9eae110de57ef"
+          },
+          {
+            "name": "public-smoke",
+            "startUtc": "2026-10-30T18:27:48.556470+00:00",
+            "exitCode": 0,
+            "logSha256": "007af6d19a2e441c31d520323f8e41e02ecdbe8bc4fa77f9c1c5eb6e5eb3eeb2"
+          },
+          {
+            "name": "history-owned",
+            "startUtc": "2026-10-30T18:27:58.320000+00:00",
+            "exitCode": 0,
+            "logSha256": "b298ff56064a979dcb62abd1a072b5c6ed2af6415843f7bdbb56e5aa7997e1e5"
+          },
+          {
+            "name": "history-shared",
+            "startUtc": "2026-10-30T18:28:04.215916+00:00",
+            "exitCode": 0,
+            "logSha256": "c063a335ff0c2d81c66a8125b289f6aae41245de63ed9984ea8bb1d49f5003c0"
+          },
+          {
+            "name": "history-fixed",
+            "startUtc": "2026-10-30T18:28:09.721774+00:00",
+            "exitCode": 0,
+            "logSha256": "48484bbe717a1468c70d86ae798e49758e2914c8dd36727a50682c0cc910c8d7"
+          },
+          {
+            "name": "history-off",
+            "startUtc": "2026-10-30T18:28:15.284295+00:00",
+            "exitCode": 0,
+            "logSha256": "ae0643751480e4aea1c493fa1bb4d585ebd70e6e603c7efd28679ee69da57d20"
+          },
+          {
+            "name": "history-multisample",
+            "startUtc": "2026-10-30T18:28:20.605604+00:00",
+            "exitCode": 0,
+            "logSha256": "c1588d6cdf32c2803c6c4443c7569195ab1cbdb59e57ace660f0978b97edf9ab"
+          },
+          {
+            "name": "history-motion",
+            "startUtc": "2026-10-30T18:28:26.066777+00:00",
+            "exitCode": 0,
+            "logSha256": "d5efa8068eebb8759b195e6ff8aa09b0dd6c9aad77e0d2e6755d471a5cfb52ee"
+          },
+          {
+            "name": "surface-snapshot",
+            "startUtc": "2026-10-30T18:28:31.890801+00:00",
+            "exitCode": 0,
+            "logSha256": "f2889307a6cdc1c17a25530ee8ebb6c4f1deccf85b90bb37040475376b77d576"
+          }
+        ],
+        "status": "passed"
+      },
+      "extraCtestCount": 6,
+      "extraLogSha256": "c65498735c848c54eb3946bc593f627bd9d2b5f9c2df103f8edab9f7d2247f8e",
+      "extraJunitSha256": "5acba54acb367d3dfa51070e078b4f77000e0ece7a7a5848b8f0360bf5ef03a9"
+    },
+    "release": {
+      "report": {
+        "schemaVersion": 1,
+        "configuration": "release",
+        "sourceCommit": "3f75396f97751b037c75a36dc813886fe706bfcd",
+        "steps": [
+          {
+            "name": "class-regression",
+            "startUtc": "2026-10-30T18:25:15.116954+00:00",
+            "exitCode": 0,
+            "logSha256": "974c2a99c8131e548e9c94e92eeb0ffdd4f939958bc4250eda34ed36ab8865a0"
+          },
+          {
+            "name": "loader-managed-regression",
+            "reusedLog": "loader-managed-release.log",
+            "exitCode": 0,
+            "logSha256": "bd813c3d9c76a14926a667cbef926ddea7707dbcdce5e7ded1c5c860c5b1bc37"
+          },
+          {
+            "name": "public-smoke",
+            "startUtc": "2026-10-30T18:25:50.008238+00:00",
+            "exitCode": 0,
+            "logSha256": "7d1fb6c134ac3dc8f5b522ce422681c0c6352aaaaf1744407fcee1f4b9dc16dc"
+          },
+          {
+            "name": "history-owned",
+            "startUtc": "2026-10-30T18:26:05.260901+00:00",
+            "exitCode": 0,
+            "logSha256": "b298ff56064a979dcb62abd1a072b5c6ed2af6415843f7bdbb56e5aa7997e1e5"
+          },
+          {
+            "name": "history-shared",
+            "startUtc": "2026-10-30T18:26:08.543436+00:00",
+            "exitCode": 0,
+            "logSha256": "c063a335ff0c2d81c66a8125b289f6aae41245de63ed9984ea8bb1d49f5003c0"
+          },
+          {
+            "name": "history-fixed",
+            "startUtc": "2026-10-30T18:26:11.230910+00:00",
+            "exitCode": 0,
+            "logSha256": "48484bbe717a1468c70d86ae798e49758e2914c8dd36727a50682c0cc910c8d7"
+          },
+          {
+            "name": "history-off",
+            "startUtc": "2026-10-30T18:26:24.437083+00:00",
+            "exitCode": 0,
+            "logSha256": "ae0643751480e4aea1c493fa1bb4d585ebd70e6e603c7efd28679ee69da57d20"
+          },
+          {
+            "name": "history-multisample",
+            "startUtc": "2026-10-30T18:26:26.691172+00:00",
+            "exitCode": 0,
+            "logSha256": "c1588d6cdf32c2803c6c4443c7569195ab1cbdb59e57ace660f0978b97edf9ab"
+          },
+          {
+            "name": "history-motion",
+            "startUtc": "2026-10-30T18:26:33.206670+00:00",
+            "exitCode": 0,
+            "logSha256": "d5efa8068eebb8759b195e6ff8aa09b0dd6c9aad77e0d2e6755d471a5cfb52ee"
+          },
+          {
+            "name": "surface-snapshot",
+            "startUtc": "2026-10-30T18:26:35.994053+00:00",
+            "exitCode": 0,
+            "logSha256": "f2889307a6cdc1c17a25530ee8ebb6c4f1deccf85b90bb37040475376b77d576"
+          }
+        ],
+        "status": "passed"
+      },
+      "extraCtestCount": 6,
+      "extraLogSha256": "590b1dba1a95d040e189358a9b04d9f2021dd06ec3f96da36b6ba9266015b5c0",
+      "extraJunitSha256": "dfff818930dc50cc5ea7bfd049bc34a35ac264ca2f2b5cee482a59e10bd3328e"
+    }
+  },
+  "fixtures": [
+    {
+      "configuration": "debug",
+      "antiAliasing": 0,
+      "redDiagnostic": "Player capture lacks material-class feature specialization policies",
+      "controlPlayerSha256": "4ab198bddc9f577338b2ca968c0c526b5a2a8d4f02248ad91ae2d57ffbc05ddc",
+      "playerSha256": "a68e42b2baaf7e9556c5f6849aad427a315c5b4a6c0b791d935d44f27c0cc67a",
+      "exactPngPairs": 2,
+      "inputs": {
+        "assets/floor.gltf": "1b55168948e96ff69566f3203099f6471df1be51c0fccba8521970a92dbe6652",
+        "assets/probe.azenv": "b01a95a769c39c2f6a11a30cdcaab0b08a33d523dabe8cc7e32d8fc163467a02",
+        "assets/scene.azurelevel": "ef14a7d211d63f300516504199f525ddd813065f5188284cb32c596d22a82ae4",
+        "assets/target.gltf": "70f552287799860caff409053cb2f879b6127cd622fba5801fc2f81384246a9b"
+      },
+      "images": {
+        "frame_000000.png": "371b679669eed4cd5f41fbb5ecb226f99858e5b0bd17e3aebd9047ac4175fac1",
+        "frame_000001.png": "371b679669eed4cd5f41fbb5ecb226f99858e5b0bd17e3aebd9047ac4175fac1"
+      },
+      "policies": [
+        {
+          "class": 4,
+          "fixedMask": 1073741815,
+          "fixedValue": 32
+        },
+        {
+          "class": 9,
+          "fixedMask": 1073741823,
+          "fixedValue": 0
+        }
+      ],
+      "shaderSetSha256": "ff32f5e3c8c03512ee5f0e593d81fb2720808c28bbc37256ef1b80561ae20f75",
+      "resultSha256": "2605e720bee23ca5a25a859ea35c7bf105b46678f863bff253ad74c2fd2ef939"
+    },
+    {
+      "configuration": "debug",
+      "antiAliasing": 3,
+      "redDiagnostic": "Player capture lacks material-class feature specialization policies",
+      "controlPlayerSha256": "4ab198bddc9f577338b2ca968c0c526b5a2a8d4f02248ad91ae2d57ffbc05ddc",
+      "playerSha256": "a68e42b2baaf7e9556c5f6849aad427a315c5b4a6c0b791d935d44f27c0cc67a",
+      "exactPngPairs": 6,
+      "inputs": {
+        "assets/floor.gltf": "1b55168948e96ff69566f3203099f6471df1be51c0fccba8521970a92dbe6652",
+        "assets/probe.azenv": "b01a95a769c39c2f6a11a30cdcaab0b08a33d523dabe8cc7e32d8fc163467a02",
+        "assets/scene.azurelevel": "76a21d3c718a1603a964308b89a67c10f77ef394d12cf4a5051d84b3061625b0",
+        "assets/target.gltf": "70f552287799860caff409053cb2f879b6127cd622fba5801fc2f81384246a9b"
+      },
+      "images": {
+        "frame_000000.png": "371b679669eed4cd5f41fbb5ecb226f99858e5b0bd17e3aebd9047ac4175fac1",
+        "frame_000001.png": "1ee2748b1df7e75723b0dde4cf119a0bcfe9a9a0f66d3be4fc0827af83b7dee6",
+        "frame_000002.png": "d010680dda2d723b18fec6f072600e18765af207813fc91ce3a228b122e5c7fc",
+        "frame_000003.png": "4785ffb8919e5c43266b70af0667f5ea10634e3cbacc4fef5ef6e4cb12865588",
+        "frame_000004.png": "5c3c763e1067bdf2f99bf26c5d9160381e775ed818dc743b36190562599e2e2d",
+        "frame_000005.png": "07b1e1002195e7e35dbeea1efc6d88914d2cfb83f11c36fe9aabdbf064e8a84d"
+      },
+      "policies": [
+        {
+          "class": 4,
+          "fixedMask": 1073741815,
+          "fixedValue": 32
+        },
+        {
+          "class": 9,
+          "fixedMask": 1073741823,
+          "fixedValue": 0
+        }
+      ],
+      "shaderSetSha256": "ff32f5e3c8c03512ee5f0e593d81fb2720808c28bbc37256ef1b80561ae20f75",
+      "resultSha256": "d4fc468ece467b7caf014d8f55f4c74d18b2948764002aef5ef9ace65aa7c224"
+    },
+    {
+      "configuration": "debug",
+      "antiAliasing": 4,
+      "redDiagnostic": "Player capture lacks material-class feature specialization policies",
+      "controlPlayerSha256": "4ab198bddc9f577338b2ca968c0c526b5a2a8d4f02248ad91ae2d57ffbc05ddc",
+      "playerSha256": "a68e42b2baaf7e9556c5f6849aad427a315c5b4a6c0b791d935d44f27c0cc67a",
+      "exactPngPairs": 2,
+      "inputs": {
+        "assets/floor.gltf": "1b55168948e96ff69566f3203099f6471df1be51c0fccba8521970a92dbe6652",
+        "assets/probe.azenv": "b01a95a769c39c2f6a11a30cdcaab0b08a33d523dabe8cc7e32d8fc163467a02",
+        "assets/scene.azurelevel": "077296eb19961800f6c618c64a6831c17755e8808862dd778636ed22a6e80b93",
+        "assets/target.gltf": "70f552287799860caff409053cb2f879b6127cd622fba5801fc2f81384246a9b"
+      },
+      "images": {
+        "frame_000000.png": "f4d13d2a0efb87b793d01a178588c6c4857c2dcd08a3a47e5e46cf94f3b90496",
+        "frame_000001.png": "f4d13d2a0efb87b793d01a178588c6c4857c2dcd08a3a47e5e46cf94f3b90496"
+      },
+      "policies": [
+        {
+          "class": 4,
+          "fixedMask": 1073741815,
+          "fixedValue": 32
+        },
+        {
+          "class": 9,
+          "fixedMask": 1073741823,
+          "fixedValue": 0
+        }
+      ],
+      "shaderSetSha256": "ff32f5e3c8c03512ee5f0e593d81fb2720808c28bbc37256ef1b80561ae20f75",
+      "resultSha256": "587a8fe2517c98a44f0e93963d6d7a0887fdc4a92392763b437478619e2920fa"
+    },
+    {
+      "configuration": "release",
+      "antiAliasing": 0,
+      "redDiagnostic": "Player capture lacks material-class feature specialization policies",
+      "controlPlayerSha256": "4ab198bddc9f577338b2ca968c0c526b5a2a8d4f02248ad91ae2d57ffbc05ddc",
+      "playerSha256": "2895b224242ae42857318d58767d190b038f93817cffa82702bb389c09fdeca4",
+      "exactPngPairs": 2,
+      "inputs": {
+        "assets/floor.gltf": "1b55168948e96ff69566f3203099f6471df1be51c0fccba8521970a92dbe6652",
+        "assets/probe.azenv": "b01a95a769c39c2f6a11a30cdcaab0b08a33d523dabe8cc7e32d8fc163467a02",
+        "assets/scene.azurelevel": "ef14a7d211d63f300516504199f525ddd813065f5188284cb32c596d22a82ae4",
+        "assets/target.gltf": "70f552287799860caff409053cb2f879b6127cd622fba5801fc2f81384246a9b"
+      },
+      "images": {
+        "frame_000000.png": "371b679669eed4cd5f41fbb5ecb226f99858e5b0bd17e3aebd9047ac4175fac1",
+        "frame_000001.png": "371b679669eed4cd5f41fbb5ecb226f99858e5b0bd17e3aebd9047ac4175fac1"
+      },
+      "policies": [
+        {
+          "class": 4,
+          "fixedMask": 1073741815,
+          "fixedValue": 32
+        },
+        {
+          "class": 9,
+          "fixedMask": 1073741823,
+          "fixedValue": 0
+        }
+      ],
+      "shaderSetSha256": "ff32f5e3c8c03512ee5f0e593d81fb2720808c28bbc37256ef1b80561ae20f75",
+      "resultSha256": "65995913836fee2012d58ab3213caf8b1af1f21e0d1f12461ddb86fad5ede2c0"
+    },
+    {
+      "configuration": "release",
+      "antiAliasing": 3,
+      "redDiagnostic": "Player capture lacks material-class feature specialization policies",
+      "controlPlayerSha256": "4ab198bddc9f577338b2ca968c0c526b5a2a8d4f02248ad91ae2d57ffbc05ddc",
+      "playerSha256": "2895b224242ae42857318d58767d190b038f93817cffa82702bb389c09fdeca4",
+      "exactPngPairs": 6,
+      "inputs": {
+        "assets/floor.gltf": "1b55168948e96ff69566f3203099f6471df1be51c0fccba8521970a92dbe6652",
+        "assets/probe.azenv": "b01a95a769c39c2f6a11a30cdcaab0b08a33d523dabe8cc7e32d8fc163467a02",
+        "assets/scene.azurelevel": "76a21d3c718a1603a964308b89a67c10f77ef394d12cf4a5051d84b3061625b0",
+        "assets/target.gltf": "70f552287799860caff409053cb2f879b6127cd622fba5801fc2f81384246a9b"
+      },
+      "images": {
+        "frame_000000.png": "371b679669eed4cd5f41fbb5ecb226f99858e5b0bd17e3aebd9047ac4175fac1",
+        "frame_000001.png": "1ee2748b1df7e75723b0dde4cf119a0bcfe9a9a0f66d3be4fc0827af83b7dee6",
+        "frame_000002.png": "d010680dda2d723b18fec6f072600e18765af207813fc91ce3a228b122e5c7fc",
+        "frame_000003.png": "4785ffb8919e5c43266b70af0667f5ea10634e3cbacc4fef5ef6e4cb12865588",
+        "frame_000004.png": "5c3c763e1067bdf2f99bf26c5d9160381e775ed818dc743b36190562599e2e2d",
+        "frame_000005.png": "07b1e1002195e7e35dbeea1efc6d88914d2cfb83f11c36fe9aabdbf064e8a84d"
+      },
+      "policies": [
+        {
+          "class": 4,
+          "fixedMask": 1073741815,
+          "fixedValue": 32
+        },
+        {
+          "class": 9,
+          "fixedMask": 1073741823,
+          "fixedValue": 0
+        }
+      ],
+      "shaderSetSha256": "ff32f5e3c8c03512ee5f0e593d81fb2720808c28bbc37256ef1b80561ae20f75",
+      "resultSha256": "7f10d22d6b65bd943c014f065aa32c9bf52d7c44e6f382623b1c38ae06bc7c68"
+    },
+    {
+      "configuration": "release",
+      "antiAliasing": 4,
+      "redDiagnostic": "Player capture lacks material-class feature specialization policies",
+      "controlPlayerSha256": "4ab198bddc9f577338b2ca968c0c526b5a2a8d4f02248ad91ae2d57ffbc05ddc",
+      "playerSha256": "2895b224242ae42857318d58767d190b038f93817cffa82702bb389c09fdeca4",
+      "exactPngPairs": 2,
+      "inputs": {
+        "assets/floor.gltf": "1b55168948e96ff69566f3203099f6471df1be51c0fccba8521970a92dbe6652",
+        "assets/probe.azenv": "b01a95a769c39c2f6a11a30cdcaab0b08a33d523dabe8cc7e32d8fc163467a02",
+        "assets/scene.azurelevel": "077296eb19961800f6c618c64a6831c17755e8808862dd778636ed22a6e80b93",
+        "assets/target.gltf": "70f552287799860caff409053cb2f879b6127cd622fba5801fc2f81384246a9b"
+      },
+      "images": {
+        "frame_000000.png": "f4d13d2a0efb87b793d01a178588c6c4857c2dcd08a3a47e5e46cf94f3b90496",
+        "frame_000001.png": "f4d13d2a0efb87b793d01a178588c6c4857c2dcd08a3a47e5e46cf94f3b90496"
+      },
+      "policies": [
+        {
+          "class": 4,
+          "fixedMask": 1073741815,
+          "fixedValue": 32
+        },
+        {
+          "class": 9,
+          "fixedMask": 1073741823,
+          "fixedValue": 0
+        }
+      ],
+      "shaderSetSha256": "ff32f5e3c8c03512ee5f0e593d81fb2720808c28bbc37256ef1b80561ae20f75",
+      "resultSha256": "a2616e3d12b903474e01c56c2977b7da77427108fe241210e43fbf924944eb3f"
+    }
+  ],
+  "native": {
+    "aa1": {
+      "status": "passed",
+      "baseline": false,
+      "playerSha256": "2895b224242ae42857318d58767d190b038f93817cffa82702bb389c09fdeca4",
+      "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\frozen-current-recovery\\frames",
+      "scope": "New feature delta on restored environment; archival strict gate remains independently failed",
+      "comparisons": [
+        {
+          "frame": "frame_000000.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0,
+          "outputSha256": "b565f136509856b2ad24ed0b61d9578467c76857f30b447e4381afdf11485950",
+          "referenceSha256": "b565f136509856b2ad24ed0b61d9578467c76857f30b447e4381afdf11485950"
+        },
+        {
+          "frame": "frame_000001.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0,
+          "outputSha256": "3ff0ec7fc4e6ee3574068f3f5ce7322391d1fa5e1d6bca3032d62c061d6ad3be",
+          "referenceSha256": "3ff0ec7fc4e6ee3574068f3f5ce7322391d1fa5e1d6bca3032d62c061d6ad3be"
+        },
+        {
+          "frame": "frame_000002.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0,
+          "outputSha256": "baff819f0089671ce229efae1865bb3bf19ff054d816da92670262beee0cced5",
+          "referenceSha256": "baff819f0089671ce229efae1865bb3bf19ff054d816da92670262beee0cced5"
+        },
+        {
+          "frame": "frame_000003.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0,
+          "outputSha256": "5035cfcc4e16c557c894ec0c12938eee6ee7d24388bf2ca045ce998bacec91de",
+          "referenceSha256": "5035cfcc4e16c557c894ec0c12938eee6ee7d24388bf2ca045ce998bacec91de"
+        },
+        {
+          "frame": "frame_000004.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0,
+          "outputSha256": "9af55bcfcd45196d720be48b225356ec6f4d76ea2b412b081a05f30a7b636bd7",
+          "referenceSha256": "9af55bcfcd45196d720be48b225356ec6f4d76ea2b412b081a05f30a7b636bd7"
+        },
+        {
+          "frame": "frame_000005.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0,
+          "outputSha256": "bae9c631d5074c60cf140fa8df90dbcb66211daf9349d19f6dba061c177525a8",
+          "referenceSha256": "bae9c631d5074c60cf140fa8df90dbcb66211daf9349d19f6dba061c177525a8"
+        },
+        {
+          "frame": "frame_000006.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0,
+          "outputSha256": "869247031c347b033a1bfc35b5a47da5e050e6e07084722002c495a3c613ac4f",
+          "referenceSha256": "869247031c347b033a1bfc35b5a47da5e050e6e07084722002c495a3c613ac4f"
+        },
+        {
+          "frame": "frame_000007.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0,
+          "outputSha256": "5b5b2c20ebf96525b2b68de9c96db5e56eb7ca2ee9c97654171cb9242c644696",
+          "referenceSha256": "5b5b2c20ebf96525b2b68de9c96db5e56eb7ca2ee9c97654171cb9242c644696"
+        }
+      ],
+      "exitCode": 0,
+      "materialClassPipelineCount": 28,
+      "antiAliasing": 1,
+      "exactPngPairs": 8
+    },
+    "aa4": {
+      "status": "passed",
+      "scope": "Native AA4 feature delta on restored environment; archival gate independent",
+      "runs": [
+        {
+          "name": "control",
+          "playerSha256": "4ab198bddc9f577338b2ca968c0c526b5a2a8d4f02248ad91ae2d57ffbc05ddc",
+          "exitCode": 0,
+          "images": {
+            "frame_000000.png": "895fed285a46aeb8f2fab868c218d1bd3283b36bbd61ffb2a56dca58ceeb6133",
+            "frame_000001.png": "bccfd43576c6d157e47eee8c5a7330898d3bc1e75d170828784f65af9181dd3a",
+            "frame_000002.png": "eb54fc36ab7029c7beb299e9345619dd8a24b1d1abb66480343f674d199ffd3a",
+            "frame_000003.png": "926c31d8818ca0f185f7856be7d738c6e39eb57c75963395e9903ccfe3943537",
+            "frame_000004.png": "c256024e474772469dcec89de3f8eb46286b51e20c318293d827bd6a0d3aceb9",
+            "frame_000005.png": "6dc70f70371a9d5fb73c9df5b2f5f4644a56889c98f45f52cdcdae002d3f62fc",
+            "frame_000006.png": "c9ebde148f8b57ee71957afc5919ce7d6fa1de4f6b3414949d824f9252546171",
+            "frame_000007.png": "9d4dc200357a57a2460f60fe5bffe8b096b872159b157f27eeadd8c262de1c10"
+          },
+          "materialClassPipelineCount": 28
+        },
+        {
+          "name": "feature",
+          "playerSha256": "2895b224242ae42857318d58767d190b038f93817cffa82702bb389c09fdeca4",
+          "exitCode": 0,
+          "images": {
+            "frame_000000.png": "895fed285a46aeb8f2fab868c218d1bd3283b36bbd61ffb2a56dca58ceeb6133",
+            "frame_000001.png": "bccfd43576c6d157e47eee8c5a7330898d3bc1e75d170828784f65af9181dd3a",
+            "frame_000002.png": "eb54fc36ab7029c7beb299e9345619dd8a24b1d1abb66480343f674d199ffd3a",
+            "frame_000003.png": "926c31d8818ca0f185f7856be7d738c6e39eb57c75963395e9903ccfe3943537",
+            "frame_000004.png": "c256024e474772469dcec89de3f8eb46286b51e20c318293d827bd6a0d3aceb9",
+            "frame_000005.png": "6dc70f70371a9d5fb73c9df5b2f5f4644a56889c98f45f52cdcdae002d3f62fc",
+            "frame_000006.png": "c9ebde148f8b57ee71957afc5919ce7d6fa1de4f6b3414949d824f9252546171",
+            "frame_000007.png": "9d4dc200357a57a2460f60fe5bffe8b096b872159b157f27eeadd8c262de1c10"
+          },
+          "materialClassPipelineCount": 28
+        }
+      ],
+      "comparisons": [
+        {
+          "frame": "frame_000000.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0
+        },
+        {
+          "frame": "frame_000001.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0
+        },
+        {
+          "frame": "frame_000002.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0
+        },
+        {
+          "frame": "frame_000003.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0
+        },
+        {
+          "frame": "frame_000004.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0
+        },
+        {
+          "frame": "frame_000005.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0
+        },
+        {
+          "frame": "frame_000006.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0
+        },
+        {
+          "frame": "frame_000007.png",
+          "pngBytesExact": true,
+          "differentPixels": 0,
+          "maximumChannelError": 0
+        }
+      ],
+      "exactPngPairs": 8
+    }
+  },
+  "physicalGpu": {
+    "status": "passed",
+    "method": "RenderDoc reflected compile-constant blocks and raw captured shader identity; no inferred packing",
+    "draws": [
+      {
+        "event": 263,
+        "programs": [
+          "character_snapshot_object_bindless.frag.spv"
+        ],
+        "materialFeatures": 2147483680,
+        "constants": {
+          "azureOrdinaryOpaque": 0,
+          "azureFixedMaterialFeatureMask": 1073741815,
+          "azureFixedMaterialFeatureValue": 32,
+          "azureFixedMaterialClass": 4
+        }
+      },
+      {
+        "event": 268,
+        "programs": [
+          "character_snapshot_object_bindless.frag.spv"
+        ],
+        "materialFeatures": 2147483688,
+        "constants": {
+          "azureOrdinaryOpaque": 0,
+          "azureFixedMaterialFeatureMask": 1073741815,
+          "azureFixedMaterialFeatureValue": 32,
+          "azureFixedMaterialClass": 4
+        }
+      },
+      {
+        "event": 434,
+        "programs": [
+          "mesh_object_bindless.frag.spv"
+        ],
+        "materialFeatures": 2147483680,
+        "constants": {
+          "azureOrdinaryOpaque": 0,
+          "azureFixedMaterialFeatureMask": 1073741815,
+          "azureFixedMaterialFeatureValue": 32,
+          "azureFixedMaterialClass": 4
+        }
+      },
+      {
+        "event": 441,
+        "programs": [
+          "mesh_object_bindless.frag.spv"
+        ],
+        "materialFeatures": 2147483688,
+        "constants": {
+          "azureOrdinaryOpaque": 0,
+          "azureFixedMaterialFeatureMask": 1073741815,
+          "azureFixedMaterialFeatureValue": 32,
+          "azureFixedMaterialClass": 4
+        }
+      }
+    ],
+    "capture": "feature-pipeline-probe-retry/capture_frame30.rdc",
+    "sourceDataSha256": "9f84dac22b33c2964b6a9caeeda68c6e6f8fa40cc55c7c63e362a117c682dd34",
+    "captureSha256": "488fd43c6e7ee88975ec305a5f9d90317541486b8935fc0a21efe5aba3e95743",
+    "captureBytes": 22300246,
+    "diagnosticFailuresPreserved": [
+      "feature-pipeline-injection-red.json",
+      "feature-pipeline-probe-retry/receipt.json"
+    ]
+  },
+  "performance": {
+    "schemaVersion": 1,
+    "status": "failed",
+    "scope": "One paired short diagnostic per mode; formal sustained budget remains pending",
+    "sourceCommit": "3f75396f97751b037c75a36dc813886fe706bfcd",
+    "players": {
+      "control": "4ab198bddc9f577338b2ca968c0c526b5a2a8d4f02248ad91ae2d57ffbc05ddc",
+      "feature": "2895b224242ae42857318d58767d190b038f93817cffa82702bb389c09fdeca4"
+    },
+    "shaders": {
+      "control": {
+        "background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+        "background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+        "background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+        "background_bindless_samples.frag.spv": "7937f35e40fc9efc0d323b14c69f57088e8319316aad8e4a729cb17f11806ca0",
+        "background_samples.frag.spv": "a73edda9980479f648b8a5d7bf8e90c7f702a85e6c43a985eaac2a690c2a49d3",
+        "blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+        "blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+        "blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+        "blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+        "bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+        "bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+        "character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+        "character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+        "character_snapshot.frag.spv": "f5b934538d44dea4ee16814e52a1cb1360178a49d3b41e3d7fd91980566f7f65",
+        "character_snapshot_bindless.frag.spv": "bfb9ea461a317ffcee1b5b3868e21b5a8acf7b7e94f441c5486cc4c463012837",
+        "character_snapshot_bindless_clipmap.frag.spv": "e1ab01a5763f76d97991603a483dd1831d6564af81864967b3ff5c5d1fc0c1d9",
+        "character_snapshot_bindless_clipmap_field.frag.spv": "21fbaceea76c949fad249dfeaf05980d3b2e1ea08a77082574c5b4927539f2af",
+        "character_snapshot_bindless_field.frag.spv": "ee4e38b01c75fe171e6354ee6cac48354ef3bd7c2631554c1f02be3c696568e7",
+        "character_snapshot_bindless_samples.frag.spv": "8203a98c1905122e272ea05f27fa115f08d62e1e637e551b8ca826a3f7790a94",
+        "character_snapshot_bindless_samples_clipmap.frag.spv": "24c29764ba6e89a36fb67cb47a6fd17e4d5b8ac24d8ff14d9e1db5472b9081c2",
+        "character_snapshot_bindless_samples_clipmap_field.frag.spv": "90d8dcff8e712e2720a6682b8e5306353022e8a23e382507d9a9c448a4051e76",
+        "character_snapshot_bindless_samples_field.frag.spv": "959b502417737638bb7697f468189dd4f50e9a36d4ddab14a2dea0c0ca351672",
+        "character_snapshot_clipmap.frag.spv": "9624d5f4f17ff10b71b80f71bb659e6ae8b180d8ddf1ff4d956ea1d27307aca9",
+        "character_snapshot_clipmap_field.frag.spv": "fa8afacec1f0efeb64d3e3557f47f7737dfac7fa9d1b55ef4b4b128fa95149db",
+        "character_snapshot_depth.frag.spv": "beee6901bfb65d8c04d09ff20df76f49ea80045f5c14816cc1ad76fb55baf8e1",
+        "character_snapshot_depth.vert.spv": "c25cf604b8499b2c0a44f6507f6489b9d125514e53576e673ab1bb36f4915cde",
+        "character_snapshot_depth_bindless.frag.spv": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+        "character_snapshot_depth_bindless_samples.frag.spv": "67ed2047713fe1a1e60816978b6c3464102fa36feae97bf30ec0245ce2adf11c",
+        "character_snapshot_depth_compute.vert.spv": "580b4777a721c1f6646be2d9fe618ed44f6f4c4fdb6fae877aab233462e977d9",
+        "character_snapshot_depth_samples.frag.spv": "83ce6bc8a4e7cb98aef5022dfbb7f88aeeacf75dbdf4f778769c7eebfe92cab3",
+        "character_snapshot_field.frag.spv": "833c339ac5451c580a17d4d33cb1669090966636e21fe026f74ce0cd3985aef5",
+        "character_snapshot_integral.frag.spv": "0ff36367606c6419946778b34d946e439a9f671abb7f2b47916f663086bbd909",
+        "character_snapshot_integral_bindless.frag.spv": "576e484189f98f06d48fdafb801a67a4aecec9cf12431bfa02a69e4677b47e7f",
+        "character_snapshot_integral_bindless_clipmap.frag.spv": "142118db48041b58d3669a7a82ccbf51cc1af0d6b9ca8b166bc5a912b21d7cc1",
+        "character_snapshot_integral_bindless_clipmap_field.frag.spv": "8c1e63fc26c59e516933613e5dce542792bfcf30f2f1751c19aef168fd3183f1",
+        "character_snapshot_integral_bindless_field.frag.spv": "17c7f564ca7b168a7b3b8dc0a0d407cfa883db04979f86fe7632928c6b6299c4",
+        "character_snapshot_integral_clipmap.frag.spv": "55538fa6d28db5a4956bc150974c91e3a41d790dc2b285456eb4d68a06240696",
+        "character_snapshot_integral_clipmap_field.frag.spv": "b5e89222a078385b581fcf3fc0c2ea3bc6f142fcc36ce905f730b9ac0a25c4de",
+        "character_snapshot_integral_field.frag.spv": "e7d2b8e12cb126cfd29d2cb1e2435e256edff9eebd4bdb5279b2227968172ad1",
+        "character_snapshot_integral_object.frag.spv": "3215e0a057ca6fbdded273ba0ffad720c2a33df970fba6b893f5ec7a342c2dea",
+        "character_snapshot_integral_object_bindless.frag.spv": "69ac8a638daa8c25f7fa64a0cbe9181c2179e8063a401815e397f1eb3c2e8153",
+        "character_snapshot_integral_object_bindless_clipmap.frag.spv": "0b0492dd57c145a481b1cdf66921845f10b937c0982e0fce9ba8500f6b478264",
+        "character_snapshot_integral_object_bindless_clipmap_field.frag.spv": "5b28255cfc2d4c01283d4b70935cfe9609537788b92c47b6d92473cbadc233bf",
+        "character_snapshot_integral_object_bindless_field.frag.spv": "287e8540d287b61a90296d507246a5a5660a6d154fa05ae43c6373c172bef8f8",
+        "character_snapshot_integral_object_clipmap.frag.spv": "eb00830dc0653d35001c0f426a7edc4d7252b230f9ac550297363c0883348dac",
+        "character_snapshot_integral_object_clipmap_field.frag.spv": "2ec0dcd883e6b30ef024c6bbd5b69b56b76f5e408cc3ed5c56f8d4117939346d",
+        "character_snapshot_integral_object_field.frag.spv": "9d2428d708bc566e309c02efce0972b252afadf6623e960c9da9bf7027bf2ad3",
+        "character_snapshot_object.frag.spv": "69dd8ea4b035ca354921b499323524e54e787d0ea0359ba0f2ab3839d3645d7e",
+        "character_snapshot_object_bindless.frag.spv": "c025cfb4c2fcdc93709f764bd0a0e8d6b2790980a8618c4523b84ebceb148e36",
+        "character_snapshot_object_bindless_clipmap.frag.spv": "709d5e01e09707f6df591de214aa864efa22c25b093341deb97fdca673d10feb",
+        "character_snapshot_object_bindless_clipmap_field.frag.spv": "b06e4641ddacf8c729fb247873d7c7d588c4ab28d5b62da1bc2a5a2ca83f62ec",
+        "character_snapshot_object_bindless_field.frag.spv": "747fc22a418ebe5c1e7267bdca66fa08cac9730b69410c8196019156fdd475e9",
+        "character_snapshot_object_bindless_samples.frag.spv": "7cdd370b8de72609ad86887ad26464ad92286817b34d4861c0efbe6774d244f8",
+        "character_snapshot_object_bindless_samples_clipmap.frag.spv": "2d52e621d9de2c76886df6135c93f8e53f45e28f47f28623829005497138b6e0",
+        "character_snapshot_object_bindless_samples_clipmap_field.frag.spv": "0fd369870e8bba8267b5e9dad69ea65ed8cd999b6a2052a04a9748b032c72334",
+        "character_snapshot_object_bindless_samples_field.frag.spv": "a7eb026d8ced43f5bbaa0b169f25d1159aa5e02ec09544c99961c38f9c682dc0",
+        "character_snapshot_object_clipmap.frag.spv": "76497ef9c14808948720b8912b4bfb026c2ca9302f515086d74bb3e545c8b7d7",
+        "character_snapshot_object_clipmap_field.frag.spv": "45e9f096afd4cee71707c48c63fe4167f1f6b1239f5e0bf97d8f827ed122dabf",
+        "character_snapshot_object_field.frag.spv": "138d41107ad4c9bbe65e7d8ea00ef263061fec37cfd960e2944c3e41a974fad1",
+        "character_snapshot_object_samples.frag.spv": "43778813e895678f80a81e3d519cde3bbf268ff84c15e7551a4e4453b7ca2778",
+        "character_snapshot_object_samples_clipmap.frag.spv": "932161795a2b0eb6fa88b63ede17480f2ceff755bfb1acde7d093cf0ab01f192",
+        "character_snapshot_object_samples_clipmap_field.frag.spv": "617df3ef316ce4e5834decef81fb747f823665a234afbb2901449031112a5be1",
+        "character_snapshot_object_samples_field.frag.spv": "9013b2ef290a5281e001f9f34d064d133115ebd76b7371955f9e7e383ac1aaeb",
+        "character_snapshot_samples.frag.spv": "1c53d0cfabe6f991b9814bacd9b3db9a852da6635ca4dec7e10f1bd8f257071b",
+        "character_snapshot_samples_clipmap.frag.spv": "50648f152c8d73ae60c779ec55f26027c8942716c42beac192f95abcbf31bf28",
+        "character_snapshot_samples_clipmap_field.frag.spv": "8e4f4e217a3b8b88cf22bb95a37503818f61d4a0e2a4563503732446fddd384f",
+        "character_snapshot_samples_field.frag.spv": "6959a77c9481ada6eabdd4375683e7c5df1a283ea3e3e56b74d26826a699f0e0",
+        "clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+        "color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+        "cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+        "depth_bias_test.frag.spv": "d3a2d3f4239115d2744fc926736df58c11ab517e1522946d23e28408a821ccd9",
+        "depth_pyramid.comp.spv": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0",
+        "editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+        "editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+        "game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+        "game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+        "hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+        "hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+        "ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+        "inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+        "inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "irradiance_clipmap_test.comp.spv": "18327769bd6bfc0fc9ce5274060e267fab85edea147a7d7076642b910bc926d5",
+        "irradiance_query_test.comp.spv": "bd2ceb9f86c3a14a99b71945b8b7394a34a93239246310a16df997d392655553",
+        "mesh.frag.spv": "be2b26a53670db95b56483179c3e56b7c0cb09c9e94f933fdfa3d748e9b40ac3",
+        "mesh.vert.spv": "813283b39cb948a389b3fa674396df792bb88ed5cd481002bb6bd5a18d7bb84a",
+        "mesh_bindless.frag.spv": "3e257b1dd1e9d9afa52d631775c3662937424758b6dd2a7d2eac010aae63ab88",
+        "mesh_bindless_clipmap.frag.spv": "517f105f9ac1a88df3425c1a8d651a84e971ccb68048d9a7d85db63eeb90c56b",
+        "mesh_bindless_clipmap_field.frag.spv": "6809fc2944f0b9b74d1d0a8c0044681ddd7bc45c62bc3c87169a5bd39bf4d81c",
+        "mesh_bindless_field.frag.spv": "c46dbb5f43a46ced779ad6098fb682f936ea54e76dd2e10e88de6c152a0f62ea",
+        "mesh_bindless_samples.frag.spv": "9ffba4a76a04b9f0c5a6c298cb8c4877b89626969e4a37654ee95b8cfc8c322d",
+        "mesh_bindless_samples_clipmap.frag.spv": "bcaa132b546a63937a2dad57ff9ad15ccafd631fa585af4bdc0f4c3666c65507",
+        "mesh_bindless_samples_clipmap_field.frag.spv": "07f5530c63454b283baa8db98dce1aa4acf82a80667109ad6e8354539da365d8",
+        "mesh_bindless_samples_field.frag.spv": "cb12aacec40d34b5dac929f435fbe6157b5f18974f548957654ec2ecab127587",
+        "mesh_clipmap.frag.spv": "0782517356bea2eb1eb6785390a0b19f4288a212ca840437ae1ca65484fc45d7",
+        "mesh_clipmap_field.frag.spv": "799ff4763fd329bf82168bdde8b06baf32b7ae23a3d9b57a4fd546ccfd8e5870",
+        "mesh_compute.vert.spv": "bb6f4d819030f26b041375782b49fe3142e1ed92acf02bda6805b0984533a550",
+        "mesh_field.frag.spv": "e14155482e37fd3dd1fe296cd6c6343cdecd33940dd291f5d10f0f580b07dbf0",
+        "mesh_fog.frag.spv": "46eb6093b6c04909e37a8566f81266675f4c08e9fc45bca71d34daae47a10058",
+        "mesh_fog_bindless.frag.spv": "2981920acecb666364487174577905ac82c8eb74491fec0847c345f585d7d3d2",
+        "mesh_fog_bindless_samples.frag.spv": "9f0f7f9b2e6c8a22682b522cc58fd8ddb18738fb28622a478a09f138402c35af",
+        "mesh_fog_samples.frag.spv": "58393f0e62651ea7212beda88363f2427b6ca8d9538e31e79e663c346d31ca90",
+        "mesh_integral.frag.spv": "acb00beb400121bbfb2cfef61745fb5fd9eb8647aac0c7e27934529064f4b2c7",
+        "mesh_integral_bindless.frag.spv": "164461b14c46b4907fdc08980b59779ac1320251cb13ad2fe2bb6c89d730cd46",
+        "mesh_integral_bindless_clipmap.frag.spv": "d8107278ba0d65f20566da962acee740c7901884d2901ccfeff702c0d20b35f5",
+        "mesh_integral_bindless_clipmap_field.frag.spv": "4bd01f10e5592335589798f5af96d47a79a2a2f98cd36e177af4255ca8597df1",
+        "mesh_integral_bindless_field.frag.spv": "63a016963a36fcd4d5100e8ee0e6ee6f0169d92ccead5ac489ac82c20f8edd9f",
+        "mesh_integral_clipmap.frag.spv": "4b6afb6ed06901326e1a7df9c80a32a5a6feb58691174fd0a5a29a60240a4653",
+        "mesh_integral_clipmap_field.frag.spv": "754690658218fbc53d3d16a9115491e4ab02a827c09e88024fcf8248241ab274",
+        "mesh_integral_field.frag.spv": "fd7bebb8d65639c44d6c861867a894d6a0667d9e23b2a17eda61919452d3d92f",
+        "mesh_integral_object.frag.spv": "2f6155f64e2e011045233197ea5ef381ba8acaaa638865f4302354707da13d6a",
+        "mesh_integral_object_bindless.frag.spv": "03535ace68489302535866baa8e9430ae412359e72a9d13e2b48182d33e2a908",
+        "mesh_integral_object_bindless_clipmap.frag.spv": "9e06296cf2442bf13e7a6f0aef2f6f76a73e19cd4e7d02b064b236bb70a429a8",
+        "mesh_integral_object_bindless_clipmap_field.frag.spv": "04ff53b6e1ec27c0469b4103a21dddbac6fda207cc070402463978cae31181bc",
+        "mesh_integral_object_bindless_field.frag.spv": "66c72bd283d73373f504cab0013fa818f466f7c79cdff41b69b542ffe0943e84",
+        "mesh_integral_object_clipmap.frag.spv": "96fd6bc9076b28e28c109d269a7a9d5612e9682df25725fe99e0cb303ef1c724",
+        "mesh_integral_object_clipmap_field.frag.spv": "4409b5e138987d9d94ffcab3cf83f2f297ddffe8dae132f3dc0587b7c3d29d69",
+        "mesh_integral_object_field.frag.spv": "9dfd48489df26835d563a2db328ad3815754183b3ea4ef62ca5438d284a24d7d",
+        "mesh_object.frag.spv": "9a5beb1087168c7b0606fa2e50b4f34589757308fff91ec1c949a4e2629564ef",
+        "mesh_object.vert.spv": "cdb4e6f952a66fe9d7007271078ac2a4e7e1de86e5998291973ab93638841d54",
+        "mesh_object_bindless.frag.spv": "a3cb6203c5071ce94df55aac7e733479a2a99256ec185335f0a4d23efe7223b8",
+        "mesh_object_bindless_clipmap.frag.spv": "69b7834d6b603ac713598feae16e00d841b9f073b196f0fbd2331cc874636a9b",
+        "mesh_object_bindless_clipmap_field.frag.spv": "7372fc989c7d1ecca23ebc6d06771e4cd05667784a8cb473d1f2810d97170e27",
+        "mesh_object_bindless_field.frag.spv": "c9ee1eadefaeb93aecfe0fcdba34b24735e6dad53e8724b2cae2a0095a972354",
+        "mesh_object_bindless_samples.frag.spv": "b6270b384d1b9cc4fe46a012e4e8c39bee8b9e0e39d9f877e22f7294f454d842",
+        "mesh_object_bindless_samples_clipmap.frag.spv": "1b551dea7c26ec6a317987e31e6068429ed7e0d35b2bcffe6b6ca7a084f352f8",
+        "mesh_object_bindless_samples_clipmap_field.frag.spv": "7955190c777f67b7abca2deb9df96074f7caeb4500808d8609c4191157ce23b7",
+        "mesh_object_bindless_samples_field.frag.spv": "311f845163a474549be4bbc09b4da8b56b83c2545d696dfaebc9fac77593d2f4",
+        "mesh_object_clipmap.frag.spv": "7aa394004450f85d321ba77f4d068de720958f36b39aef70c6ebbc11d1db9801",
+        "mesh_object_clipmap_field.frag.spv": "2ebb60532de169b1916210de335f4ce4ab593476b29ee4137b911e86009ae89c",
+        "mesh_object_compute.vert.spv": "edaa575d1dd7a1401110c0f1b0fe30abfca33ffdbf49ef710bed412bcc246a4c",
+        "mesh_object_field.frag.spv": "d89b521fb943940b98a2313f4e48789c9db1ed46260aca17b5b0ec7f51b60792",
+        "mesh_object_samples.frag.spv": "89af3ba6e4c98164c6dadb72778052d71d55fd062c0a9681feec94b0809458a9",
+        "mesh_object_samples_clipmap.frag.spv": "bc9d500ef5508c3cc36b21273c6ff2ffa4fbce7b2f3c97d89e06cf45a3b7f5f4",
+        "mesh_object_samples_clipmap_field.frag.spv": "5d065760da1a555c79217623aaa7c67e573ae6e096e55777ac92b36c1cf8caf6",
+        "mesh_object_samples_field.frag.spv": "3d2eb8677e06f86bf559c8135e304ea1d2fdd6040846f18051e02cb8a457581a",
+        "mesh_samples.frag.spv": "b57878088393c61aa7633126668635940d7892a7db295fd2d3a562ff58161058",
+        "mesh_samples_clipmap.frag.spv": "cb572664e549c8a6fbd6e925a6a7aacbe3f56f73c4b56c3cdf3aea0e22ca69a9",
+        "mesh_samples_clipmap_field.frag.spv": "5ce9324efb08caa1e740ddfbd16a049f98223704f40138a3135ba82af92b970d",
+        "mesh_samples_field.frag.spv": "f79645243b7e0e0992bb11babcbb7f5ed6bbc6c34d131bfdf11c4a4f7c996499",
+        "motion_outline.vert.spv": "20bdc865d9d02cccd775ff18dc645675c32f0f1d17aac37e5867a574cb3d6875",
+        "motion_pose_test.comp.spv": "c657318588f6a94ba16b53a750ad3c59a13d9559012d740bcb0b374b58f3f2ec",
+        "motion_projection_test.comp.spv": "ba985c261cb80b1a0869152fc6b75b8c98f6813aa102b91c239171d7d99821ec",
+        "motion_vector.frag.spv": "41734e1b4299cc052b723d29b0994fe5af468baa04fb0348538cf5fedc2feab8",
+        "motion_vector.vert.spv": "0b7450cba1a1fae84341b764777148c760874f6661a89627fcf47aa5f598e583",
+        "multisample_probe.frag.spv": "8f52538e91940803f1d514b0826b39b5b3c4873318b8f33fe5b92a8f7325a7ec",
+        "multisample_probe.vert.spv": "c926a7e110f846f93f37225b9739c0b92d240988c7dcd9a1ae6a4fadc18031dd",
+        "object_shadow_filter_test.comp.spv": "290a118205df0b2a1efe23685536bce54c7199b46c5fc3acb6d9d46be74c3708",
+        "octahedral_environment_test.comp.spv": "1fc426b94f46af33bba7fb12fa06a5e55494e42252cda392ad9279725b46f630",
+        "outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+        "outline.vert.spv": "ab345fb7947c37da4d9154e4c38fc0fd695a0379ddaec4194c3253e207e80894",
+        "outline_compute.vert.spv": "072ccaaaa6c3a8ee3c97a4cfbf1384c2463656ceecbb20def4772a2c0e802ece",
+        "outline_depth.frag.spv": "0e848e0d66ab546443c5ce4f941ef6d5ce18397a11dbdc1a98831aa4a1bd3079",
+        "outline_depth_bindless.frag.spv": "8b658a22dc7145d27864e0555bcfc425ebc4c1b1aa78e16aca51e893ab6a3171",
+        "outline_depth_bindless_samples.frag.spv": "33d7e9187782d0a2163e1dc37805c306505c105b6c318e9c227e9d136db9fd66",
+        "outline_depth_samples.frag.spv": "044d24b1c37c664e161bdd9c9d81939f4bfb573609c780b7c83193336ef27180",
+        "outline_mask.frag.spv": "2b31604545789a8c07a1d2d9b979d5352fdb1a9fbc5e1219fa5d8376bef23b86",
+        "outline_mask.vert.spv": "254ea599605ab1d157f51102e049c089a7f64058f6d486a7776860efcca91e73",
+        "outline_mask_bindless.frag.spv": "4cc56fc9d2ec292ca9eb164ba43c19e871afa9575e6d09b912705a63e3ddcfb3",
+        "outline_mask_bindless_samples.frag.spv": "343b7b2a5deef6c97bbbccfb2557a725311f9d86a5c26db85d7849b80ac1d2be",
+        "outline_mask_compute.vert.spv": "86b117e98b537b5e3a2b96bd77af1a662597bc10c0cb7a4f6ad38def587e6e97",
+        "outline_mask_samples.frag.spv": "5247371d64a4782baf5487e47dd76d0046ddcb0afadafc313ecf43d1e64727c4",
+        "outline_samples.frag.spv": "e15a79625808349bb5137c2c5bd1386f1360fe80f555bbc70afbbbc8d01c003c",
+        "outline_view_scaled.frag.spv": "5e5f39bb2cc36e8801afb8dd0e80915b77dfa01dfa44944063ba39d658c3b321",
+        "outline_view_scaled.vert.spv": "6832ed81cab49e76c25f3ff043c15ea0c62104c5fa92e3150d38132cff63e9f9",
+        "outline_view_scaled_bindless.frag.spv": "0bd2f66eeed847b0fb30d9ed3805cf87366c7f171077fe657c6e5f1f78243db2",
+        "outline_view_scaled_bindless.vert.spv": "785773d452b53ad047d11b2643d3d6e29c562c3ada1fba3e7018d35bc726ba5a",
+        "outline_view_scaled_bindless_samples.frag.spv": "22e56eca66e79089655ae60b8831c95e32fa42067fd16f82436319a0a64761ac",
+        "outline_view_scaled_compute.vert.spv": "8af0169fb7d2cb5ebd92d589af6bcb117553d648dde9eaccbdcb0b34d95abe56",
+        "outline_view_scaled_compute_bindless.vert.spv": "825bfc8694d71362793dc7865701a16aa115aa1417e420aa370f1c91f65469a2",
+        "outline_view_scaled_samples.frag.spv": "f634d82cc5d256d287c17f96db218642c4c1105c56cb109049a52774bd713464",
+        "pathtracing.comp.spv": "6f90a3444d1a07b8ead9eba67d063f70e9c46310058146a496c5e4eea47dfcec",
+        "pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+        "readonly_depth_test.frag.spv": "b7afe007df9e050c21c89832a50e7cdb976e225c6ec6b5376589d1aa021352a9",
+        "readonly_depth_test.vert.spv": "11d36fc78f75992904f31c89130be22737be87dd4dd99b65508d6fcc40fe2ce3",
+        "reflection_probe_field_test.comp.spv": "94135d202f7410504e29b1e9562421d1161c5f77c6e341a432eeb985164f5a1e",
+        "reflection_reprojection.comp.spv": "b54cc4ccbcf1dc7fdf7ede3815ce51afccfdac2e853daa0e024f02f24d472158",
+        "reflection_signal_pyramid_float.comp.spv": "5017c38801528ef1c47e3fabbd4d1d8417e5cfa729788fe54e13aeab9706d6c7",
+        "reflection_signal_pyramid_packed.comp.spv": "9d9fc987c83a72728ac0296cdbf85596c658e1535a0ef72edc25aab44792926f",
+        "reflection_spatial_filter.comp.spv": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+        "reflection_surface_test.comp.spv": "d959c5051a98ef66fd9e46278dee1baaa248f30fbe536e39e869619f7a2552e1",
+        "reflection_temporal_float.comp.spv": "66c44b623b83f9e6176e7c44f7039992ada997ac29933d4224cac71c7bc00020",
+        "reflection_temporal_packed.comp.spv": "3cf689766f41dfa0d0422942943cdd48702e2405c13b8f6d2ba4fd37b8ded9d3",
+        "reflection_trace_float.comp.spv": "4e89f2e77717f918f86538b504a38d3469609848c4c59b8990d6c24625ee4351",
+        "reflection_trace_packed.comp.spv": "7e23f88e362db04579bd8b8e57094009325d7a246d4809d487b03b0d9b5a0de0",
+        "sampled_upload_test.comp.spv": "a7b9be273214e05f06f7441f6e3a1187e929faa531beedf545eaf0291b3fd582",
+        "scene_instance_layout_test.comp.spv": "36d658cb7a429516ca78d6f99d9f72209dd98542374bb00dbb4fa8e428181984",
+        "scene_multisample_probe.frag.spv": "b01b9af31ae9f4e53d16ec248c0ff6cba9dd320abd55e92d83eb1f68c4ad9dfb",
+        "scene_multisample_resolve.frag.spv": "442a2b06917d60cb1c9006a45ff95afdd919ce96d5648491a9eedefbee64118c",
+        "shadow.frag.spv": "91ac2f1e32ea6ee107bbb9143c9e96cdffef43e22ae53b9626c3eb7d7a1af245",
+        "shadow.vert.spv": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5",
+        "shadow_bindless.frag.spv": "6d38dc03e16eda0b761a21b00ebea4a223e9046bc73b7ac5d531ff028b34f36f",
+        "shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+        "shadow_compute.vert.spv": "ac557aaeb75d6cf3e75af60d345a25e1cc78ee9b8c90943d05a73e9bfe66bc2e",
+        "shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+        "skin.comp.spv": "a0f5f99f22082c9e6550cc5f6926bb3df82db4f70ef1130f7130b51b204b6fe4",
+        "sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+        "spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+        "specialization_test.comp.spv": "b38e220726a262bbd12a1893fae88b010832f88f2381402e36a3d783f766ea96",
+        "specialization_test.frag.spv": "c3f301bbf5bdbe5c7279f138fc158f51bde7502a9e3a5042cfe5c264e22c44a8",
+        "specialization_test.vert.spv": "cd32916b0e5871e6206493e6fc9f4e9ddc9fd467f77126a3aa4ecdebdb435e41",
+        "specular_ramp_test.comp.spv": "579badc92e94a243bec3335fe5064122d6b65f93d64baf6b6e7fe74b0f2e6da3",
+        "surface_response_test.comp.spv": "afe36fc87f9472aa759275224bfff0b5d0c94bf22a1044de69c774dd2252ee76",
+        "temporal_copy.frag.spv": "b406af1147ab75cf5fdca93cccece032d0dfe1d0cf7fa1bab24e16024db65ce7",
+        "temporal_resolve.frag.spv": "244855bdaf134cd6ad898eefb753931d363fd3d8bfa8c7518c03ab9d2c999ef0",
+        "view_fog_surface.frag.spv": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0",
+        "view_fog_surface_samples.frag.spv": "4f9f518a961e886c094b92c70d4232b5e3ca70ece4721182dd4429f5b8673ef1",
+        "view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+        "visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+      },
+      "feature": {
+        "background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+        "background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+        "background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+        "background_bindless_samples.frag.spv": "7937f35e40fc9efc0d323b14c69f57088e8319316aad8e4a729cb17f11806ca0",
+        "background_samples.frag.spv": "a73edda9980479f648b8a5d7bf8e90c7f702a85e6c43a985eaac2a690c2a49d3",
+        "blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+        "blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+        "blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+        "blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+        "bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+        "bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+        "character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+        "character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+        "character_snapshot.frag.spv": "e38784af2c7238ad8f2b1e36582cf5f10f2c6a393c5a8be02bf9563a690b558c",
+        "character_snapshot_bindless.frag.spv": "6904326b911e76b1a2b9ed8ac941772b1046f01ff136c11b81f474efc9e3ff7f",
+        "character_snapshot_bindless_clipmap.frag.spv": "e4f81966744954d9e948d50291373426ec01c18eb53c60a1329950f0765a1da7",
+        "character_snapshot_bindless_clipmap_field.frag.spv": "bc3eeadea21ca5ff9c7f1b7c710e398fecd3ebb21bf83a3106717942383de52a",
+        "character_snapshot_bindless_field.frag.spv": "72eb9a8c0fb16fd682d418180ad9377c3784ad9f60f14fea3a815041f3be8934",
+        "character_snapshot_bindless_samples.frag.spv": "e8a60592a9f395e35ac9d285ba7f849069b42ffe3ef81a3a3ddf7495ef6e1612",
+        "character_snapshot_bindless_samples_clipmap.frag.spv": "32007a081014aad4894ad74749a64b661b614a887c2d273e47a499b95dc63cfa",
+        "character_snapshot_bindless_samples_clipmap_field.frag.spv": "e037112b5c12c0e6913caa75b5eccebaf7de10eb3e974c2f8a91b4aa04627b0d",
+        "character_snapshot_bindless_samples_field.frag.spv": "453f5815f88138bdda39520cf586c2828ada0de5a005a807204261ecfadd97e0",
+        "character_snapshot_clipmap.frag.spv": "5a5b95b032f3d273de729eb4b3d1615dbd0c63a2185a625db82d287be9befb6c",
+        "character_snapshot_clipmap_field.frag.spv": "37eac53befaf200c3b394d6fd8635a35686bb1a90f9b79bd4d8cbc0194c2e87e",
+        "character_snapshot_depth.frag.spv": "beee6901bfb65d8c04d09ff20df76f49ea80045f5c14816cc1ad76fb55baf8e1",
+        "character_snapshot_depth.vert.spv": "c25cf604b8499b2c0a44f6507f6489b9d125514e53576e673ab1bb36f4915cde",
+        "character_snapshot_depth_bindless.frag.spv": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+        "character_snapshot_depth_bindless_samples.frag.spv": "67ed2047713fe1a1e60816978b6c3464102fa36feae97bf30ec0245ce2adf11c",
+        "character_snapshot_depth_compute.vert.spv": "580b4777a721c1f6646be2d9fe618ed44f6f4c4fdb6fae877aab233462e977d9",
+        "character_snapshot_depth_samples.frag.spv": "83ce6bc8a4e7cb98aef5022dfbb7f88aeeacf75dbdf4f778769c7eebfe92cab3",
+        "character_snapshot_field.frag.spv": "dadba73e5680b3161fd5c66f189cbd559f7f51a46ee9a4c05b727f6bc998d8d7",
+        "character_snapshot_integral.frag.spv": "bd5f3fcbe550d0f01bc28eebeae3e458599e177a2dd2314ccf8b166a7be6df92",
+        "character_snapshot_integral_bindless.frag.spv": "50690464b6c94fc29b856dc27ef8fd68f6ea87d6e9714770e2ed25ded106fb53",
+        "character_snapshot_integral_bindless_clipmap.frag.spv": "4bbac44b6bd226cefcc61e43e59c239f35faae7d818e20f349094ae476e3ac23",
+        "character_snapshot_integral_bindless_clipmap_field.frag.spv": "b344c11ce9e605449e6fb6b88458478a1f1cbc47067836ced06862481fbeb673",
+        "character_snapshot_integral_bindless_field.frag.spv": "1b3de9dc5b48d15ba83802c2bb4de9d18121f4e557fa2fd3cefe993e7445a760",
+        "character_snapshot_integral_clipmap.frag.spv": "007fc66252b67bca77c80ef9100ec966cf96ecc23ae80cdaf666d095cbb171ba",
+        "character_snapshot_integral_clipmap_field.frag.spv": "2d07d7b272db670cdf9cf7145024853ff2d0400c408df2295e02f3d2f27cd22b",
+        "character_snapshot_integral_field.frag.spv": "cb095daf66898395c97d84eb4ea202db609f2da48f8dbbb43ae51db423600b9d",
+        "character_snapshot_integral_object.frag.spv": "e7f2805b404ce12f2e06b9d20b7ff748a2626f9ee87674b55765661e59122138",
+        "character_snapshot_integral_object_bindless.frag.spv": "587baa3b1f861d2b0d5c2a366ea7b2116c8a58064aee7eb715bb381dd26fa944",
+        "character_snapshot_integral_object_bindless_clipmap.frag.spv": "6d4679ab059511ca442d97861bab08057928092b6b148e3dc979b0d1d4c42295",
+        "character_snapshot_integral_object_bindless_clipmap_field.frag.spv": "c589f70125867f798c7794bcbe683a99e5aa803ab2fdec245f8e287127f9d841",
+        "character_snapshot_integral_object_bindless_field.frag.spv": "274f6bcf3bf969a6cf0e4fab80a477372faaa7fed8bb1268ce9d03026be6ebbe",
+        "character_snapshot_integral_object_clipmap.frag.spv": "b7f0d7c8da51b7bb02811d62cff0465f364bb14e7d194f2d52124b0bfc94641e",
+        "character_snapshot_integral_object_clipmap_field.frag.spv": "42785aa514db8a5a69413a15b9afa14f7ba15ed03afe5b107bc9e98895606a76",
+        "character_snapshot_integral_object_field.frag.spv": "a488cf6113e92f96c9a55708812266419aa73329d195f5a60122c578cee90ae3",
+        "character_snapshot_object.frag.spv": "2be4fdfed69d2684662d5afacd552cfd58efa7be4a6b42ddb1406b7469e232c6",
+        "character_snapshot_object_bindless.frag.spv": "793de13091eb9e4a9c271c4fe5e41e4ab00989fb003b05df2ca7cdc96ad93a0b",
+        "character_snapshot_object_bindless_clipmap.frag.spv": "18d21d00997c04f0f01603fc2df7073527661196650e37acbfca7e12c7b96cfa",
+        "character_snapshot_object_bindless_clipmap_field.frag.spv": "5de060392c9a4e68a0e6d7b88d03c0b086803ad27da99af96fc53a13f3ce6710",
+        "character_snapshot_object_bindless_field.frag.spv": "0b46500fadc07343e6c6a26a9b38ab03606eadfe664d5fe0498eb7b886cfd682",
+        "character_snapshot_object_bindless_samples.frag.spv": "d8e69d8f6d8d8d04b4680f760ec988a1b48b2ff27f31b88da19f69edff741f30",
+        "character_snapshot_object_bindless_samples_clipmap.frag.spv": "367d2a88944038e87308672e689978fedcabea1411636b74595bbe87f0206c38",
+        "character_snapshot_object_bindless_samples_clipmap_field.frag.spv": "c0858b6bc23b352c10b48639d4616e223604378cd3d8a58fff826615175506e2",
+        "character_snapshot_object_bindless_samples_field.frag.spv": "604960339f65922a4c8a164e51e73b2c0f28bf90cfceab9adcfda6badce04b49",
+        "character_snapshot_object_clipmap.frag.spv": "ae99c7a71f5102aadaa65b66de1ed48101afd2c4ce03af5e0c41313dfcd00189",
+        "character_snapshot_object_clipmap_field.frag.spv": "38ec3e1d3d1ecac4d2754ba0cb6a5ded1d19463c396decf211fab15a3862a9b7",
+        "character_snapshot_object_field.frag.spv": "34af9bc4cec81f77a6063af97804bed733a60124ca97bb7b1cb3d8ca15ec6040",
+        "character_snapshot_object_samples.frag.spv": "983cbfdfd449e10c871540f58546f2d66773487adfdcd7d9f1a861810879b8f3",
+        "character_snapshot_object_samples_clipmap.frag.spv": "fccc35925f611c563e06dd573de3db0b30155b12b43539edfed55e907eecc05d",
+        "character_snapshot_object_samples_clipmap_field.frag.spv": "8417e17fa20338e44427870df359d1aef516bf1b76fab57783af1e4ba236b905",
+        "character_snapshot_object_samples_field.frag.spv": "35ec8ec6e728a88bcfa417eb8e2c28a0c3b03e2583ca7e0bb99a00f20b239db6",
+        "character_snapshot_samples.frag.spv": "40aaf9082903e0ade56741eca98491133610660d4365fd2f088cc4467518c8f8",
+        "character_snapshot_samples_clipmap.frag.spv": "e69c5c1c6278328b5cbab63d616b17404a8609dd35b060252e1d146d39593fa5",
+        "character_snapshot_samples_clipmap_field.frag.spv": "1156d7f21c8c0dd75076e231df99a3187e89239334b7424e3044cf413eb295e3",
+        "character_snapshot_samples_field.frag.spv": "f67cbacb02233ef6fc8b57a3ae2ed80abc6cf61a77c8d10c85cc680738dbba37",
+        "clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+        "color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+        "cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+        "depth_bias_test.frag.spv": "d3a2d3f4239115d2744fc926736df58c11ab517e1522946d23e28408a821ccd9",
+        "depth_pyramid.comp.spv": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0",
+        "editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+        "editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+        "game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+        "game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+        "hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+        "hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+        "ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+        "inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+        "inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "irradiance_clipmap_test.comp.spv": "18327769bd6bfc0fc9ce5274060e267fab85edea147a7d7076642b910bc926d5",
+        "irradiance_query_test.comp.spv": "bd2ceb9f86c3a14a99b71945b8b7394a34a93239246310a16df997d392655553",
+        "mesh.frag.spv": "00459eb4a8ba4b60ec0c6e67549a7154c5a97d6f98d542489e1590695258ddd1",
+        "mesh.vert.spv": "813283b39cb948a389b3fa674396df792bb88ed5cd481002bb6bd5a18d7bb84a",
+        "mesh_bindless.frag.spv": "4b139e07b34a7b73dcbb638c763cd8f1356801d5bbe8891a76fc260da8928df2",
+        "mesh_bindless_clipmap.frag.spv": "dae20f3b04611c897e02b38fdc4918d53eaf6e193d08d5e13be176ef81f4f446",
+        "mesh_bindless_clipmap_field.frag.spv": "cbb2f3b8b0acfe6af698509e1b6d940b490c9a213095ff67e952faa719dea84c",
+        "mesh_bindless_field.frag.spv": "dedb3daceb13ecabdea084816fd862ac4ad6b4e6a4bc577b85e4e9e5b6db812c",
+        "mesh_bindless_samples.frag.spv": "440ed0e3964a8ec274be74448551854e97cb0400e026a25179cbfb8df6fd9f42",
+        "mesh_bindless_samples_clipmap.frag.spv": "25a5f33c0bda601b45e603e6b658e16a0767d2d4affa632488d98d7a6c9c932b",
+        "mesh_bindless_samples_clipmap_field.frag.spv": "51b820a7a32049aff3bf0da39e5b865bbfcc2775a5c50ce029f5fc7b2a31aa88",
+        "mesh_bindless_samples_field.frag.spv": "1044961ab84ed080df1bc467eb80fb65fb8a0a464482f643936ccf44266478dd",
+        "mesh_clipmap.frag.spv": "0e834fdf5ccfdfa2f4ea180cd3d559a0a4506240c431130888e4fee0f3f6d6ac",
+        "mesh_clipmap_field.frag.spv": "9d5b44901e5db3a4856cb40568e571544ee8c78833ac3329ad272b2461dcac5b",
+        "mesh_compute.vert.spv": "bb6f4d819030f26b041375782b49fe3142e1ed92acf02bda6805b0984533a550",
+        "mesh_field.frag.spv": "181bb2babd28acb704e82f5e81308dc25aa974203493adc6b7121d41bdf73621",
+        "mesh_fog.frag.spv": "93174b0548e0a8f46a10b52fce4f8f0866c5f85fbc7466c35c4aed3310ba10a0",
+        "mesh_fog_bindless.frag.spv": "f5389ffcc76ee5d7cc71c656d5de0a0ac73345cbd4c0f4c73193d6caa165393e",
+        "mesh_fog_bindless_samples.frag.spv": "678556d6d0b82a2afeb0fef5aedfb46262fd61ea91576f374ef68646c9cf9d99",
+        "mesh_fog_samples.frag.spv": "2c80e6e083bca60633a13b16636d866cede0da2f99ce19d1ea4ea3d95c3ea7f7",
+        "mesh_integral.frag.spv": "955c9804134f1c916bd7181f536c94d1db9390b7ef42f1307e2dd1679d41f2db",
+        "mesh_integral_bindless.frag.spv": "b2a6c387aac7d675b808691eafe309052cb1461cd6dd1d9e2cb444a564a9fa5f",
+        "mesh_integral_bindless_clipmap.frag.spv": "cd3eca7c4a7ef3aa361e150a8e2a56da0d82633bb021c89c4c5f90689871cdcb",
+        "mesh_integral_bindless_clipmap_field.frag.spv": "c0a79522f6fbbdc9d66ac2dc3bdb978c01d172464583a7cb45ca3aeb272cc819",
+        "mesh_integral_bindless_field.frag.spv": "d9ef86a2db274731b6bed372a81a8fb5c7da69a3fc43d3269e39bab289651b25",
+        "mesh_integral_clipmap.frag.spv": "1f057e821b9b126333b244a4be091c220d57dd83235f7c11fad2907e8b84a32a",
+        "mesh_integral_clipmap_field.frag.spv": "02b7e18d45e5ac63592416b18ce5d6ac246d9baae607c06a8a211d7671ead08a",
+        "mesh_integral_field.frag.spv": "1e156706d706807faa47bea58fc1d757e467d9fa5c0bd62055692e52d0d2186d",
+        "mesh_integral_object.frag.spv": "fb7d4bdd1a9631ccd7aebc361920f723f314d4abe62517acee0f1d7fcd428213",
+        "mesh_integral_object_bindless.frag.spv": "d7148c6f725bf6470ec8678482188ce7c5f6557f4305b64f81b8edc7dd2ec41c",
+        "mesh_integral_object_bindless_clipmap.frag.spv": "5c8842bb775f62e957dd667af86db63a2ba59ebe5c6a4239d70b73a28fdadf67",
+        "mesh_integral_object_bindless_clipmap_field.frag.spv": "2a55fbd29078404e324b8758d79ad55776a6aefcc438fdca851af4a36e5ff708",
+        "mesh_integral_object_bindless_field.frag.spv": "7cb723a9203643cc5fc8bb2926042038770ffc3645e07308165a45c61e848207",
+        "mesh_integral_object_clipmap.frag.spv": "931fe22705dbae8d3602df582f8fafa8df272a75843cb80305c9e64701cc4f4f",
+        "mesh_integral_object_clipmap_field.frag.spv": "1b7085eec7ad28fd7c8ce1f2a4ed2670ce8ad6127de7ec29940513315ee388cc",
+        "mesh_integral_object_field.frag.spv": "de05599557a6f16d85d9c76dfc2f0284b844579713c9fe4cac7c5e5a88fe7da3",
+        "mesh_object.frag.spv": "2f9e046a167e78a374e59499908d63378e8c59ac39b47b2cc53e4760c1fc97cd",
+        "mesh_object.vert.spv": "cdb4e6f952a66fe9d7007271078ac2a4e7e1de86e5998291973ab93638841d54",
+        "mesh_object_bindless.frag.spv": "2aa61cabcfccebf292b2f7f1fdd536d51c2d0a7a6669a28dad2e7c8e348b3266",
+        "mesh_object_bindless_clipmap.frag.spv": "3c74f06496aa555a8a37e4c397236a6b6f5b2269da6fd2eb5f07ea1bf419a09b",
+        "mesh_object_bindless_clipmap_field.frag.spv": "72d2fb9592feeccc5a8cae4a4ef16fa44a2644375e26279924356e0152cfdbe8",
+        "mesh_object_bindless_field.frag.spv": "cae5324a0638859e477b3c84499791592e90802cabdcde64912a602d73abbe86",
+        "mesh_object_bindless_samples.frag.spv": "8dbd199feca9faeeb62d39427b489762b07996678ec28d8f718ff3a1ce36166c",
+        "mesh_object_bindless_samples_clipmap.frag.spv": "7079adc29bead87bf348ac2bf7587e66b601052f9a6d0942c542bbde6b95cf10",
+        "mesh_object_bindless_samples_clipmap_field.frag.spv": "5ac07408bc0d331eacd4d6f2d45607ba558ea65440302078cd4439a9b5ff0f9c",
+        "mesh_object_bindless_samples_field.frag.spv": "bc7fd47f44135b4acd67006050af9c6d44681c02fa7b2c6e63814b26c57ed49d",
+        "mesh_object_clipmap.frag.spv": "5bf4f6de956b7a14b6b6fd06f4bd5974d56e44259cbe0e1380f39779eb824579",
+        "mesh_object_clipmap_field.frag.spv": "bd9218b325158029266b92bd28bc75dff8076c5682489b516eb962137e251cc0",
+        "mesh_object_compute.vert.spv": "edaa575d1dd7a1401110c0f1b0fe30abfca33ffdbf49ef710bed412bcc246a4c",
+        "mesh_object_field.frag.spv": "e966d4c253b9b153cece0a6717b067ada7344f34baa7e795bb7d84450856bb3c",
+        "mesh_object_samples.frag.spv": "5f9f7b0e67ce6ccfa498d764a2a6f4965e8638b4d0298bcf1d34e7ca8cf31b2d",
+        "mesh_object_samples_clipmap.frag.spv": "96ff1d69533f811588cef826456002611c027eeb5e6eec19f86d7fd356224524",
+        "mesh_object_samples_clipmap_field.frag.spv": "babc1344667915e041640b9c8043673c609fbc23aec25616da5eaf27df795757",
+        "mesh_object_samples_field.frag.spv": "9c0e9e0a46597ed36afc03876d779d446fdcaedbcc69e0fb7a612ed5bcd752df",
+        "mesh_samples.frag.spv": "4eed29b21d9fb03faea8e66ecfc2003279d66136733ac3500d06f2d082bbe477",
+        "mesh_samples_clipmap.frag.spv": "cd6d08d88d6a4cc6fe6a9b7f695aacfac85f87f702fd9075adb5be731cc47805",
+        "mesh_samples_clipmap_field.frag.spv": "c3194dead79e4cbf10e8cb30febd9e59c06eb402ae989a46e52eba80a103e987",
+        "mesh_samples_field.frag.spv": "abc4b47ec64ea4d9ba61fc2e15bba8dcdb801301986b96a8abc82bf68ce24d8b",
+        "motion_outline.vert.spv": "20bdc865d9d02cccd775ff18dc645675c32f0f1d17aac37e5867a574cb3d6875",
+        "motion_pose_test.comp.spv": "c657318588f6a94ba16b53a750ad3c59a13d9559012d740bcb0b374b58f3f2ec",
+        "motion_projection_test.comp.spv": "ba985c261cb80b1a0869152fc6b75b8c98f6813aa102b91c239171d7d99821ec",
+        "motion_vector.frag.spv": "41734e1b4299cc052b723d29b0994fe5af468baa04fb0348538cf5fedc2feab8",
+        "motion_vector.vert.spv": "0b7450cba1a1fae84341b764777148c760874f6661a89627fcf47aa5f598e583",
+        "multisample_probe.frag.spv": "8f52538e91940803f1d514b0826b39b5b3c4873318b8f33fe5b92a8f7325a7ec",
+        "multisample_probe.vert.spv": "c926a7e110f846f93f37225b9739c0b92d240988c7dcd9a1ae6a4fadc18031dd",
+        "object_shadow_filter_test.comp.spv": "290a118205df0b2a1efe23685536bce54c7199b46c5fc3acb6d9d46be74c3708",
+        "octahedral_environment_test.comp.spv": "1fc426b94f46af33bba7fb12fa06a5e55494e42252cda392ad9279725b46f630",
+        "outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+        "outline.vert.spv": "ab345fb7947c37da4d9154e4c38fc0fd695a0379ddaec4194c3253e207e80894",
+        "outline_compute.vert.spv": "072ccaaaa6c3a8ee3c97a4cfbf1384c2463656ceecbb20def4772a2c0e802ece",
+        "outline_depth.frag.spv": "0e848e0d66ab546443c5ce4f941ef6d5ce18397a11dbdc1a98831aa4a1bd3079",
+        "outline_depth_bindless.frag.spv": "8b658a22dc7145d27864e0555bcfc425ebc4c1b1aa78e16aca51e893ab6a3171",
+        "outline_depth_bindless_samples.frag.spv": "33d7e9187782d0a2163e1dc37805c306505c105b6c318e9c227e9d136db9fd66",
+        "outline_depth_samples.frag.spv": "044d24b1c37c664e161bdd9c9d81939f4bfb573609c780b7c83193336ef27180",
+        "outline_mask.frag.spv": "2b31604545789a8c07a1d2d9b979d5352fdb1a9fbc5e1219fa5d8376bef23b86",
+        "outline_mask.vert.spv": "254ea599605ab1d157f51102e049c089a7f64058f6d486a7776860efcca91e73",
+        "outline_mask_bindless.frag.spv": "4cc56fc9d2ec292ca9eb164ba43c19e871afa9575e6d09b912705a63e3ddcfb3",
+        "outline_mask_bindless_samples.frag.spv": "343b7b2a5deef6c97bbbccfb2557a725311f9d86a5c26db85d7849b80ac1d2be",
+        "outline_mask_compute.vert.spv": "86b117e98b537b5e3a2b96bd77af1a662597bc10c0cb7a4f6ad38def587e6e97",
+        "outline_mask_samples.frag.spv": "5247371d64a4782baf5487e47dd76d0046ddcb0afadafc313ecf43d1e64727c4",
+        "outline_samples.frag.spv": "e15a79625808349bb5137c2c5bd1386f1360fe80f555bbc70afbbbc8d01c003c",
+        "outline_view_scaled.frag.spv": "5e5f39bb2cc36e8801afb8dd0e80915b77dfa01dfa44944063ba39d658c3b321",
+        "outline_view_scaled.vert.spv": "6832ed81cab49e76c25f3ff043c15ea0c62104c5fa92e3150d38132cff63e9f9",
+        "outline_view_scaled_bindless.frag.spv": "0bd2f66eeed847b0fb30d9ed3805cf87366c7f171077fe657c6e5f1f78243db2",
+        "outline_view_scaled_bindless.vert.spv": "785773d452b53ad047d11b2643d3d6e29c562c3ada1fba3e7018d35bc726ba5a",
+        "outline_view_scaled_bindless_samples.frag.spv": "22e56eca66e79089655ae60b8831c95e32fa42067fd16f82436319a0a64761ac",
+        "outline_view_scaled_compute.vert.spv": "8af0169fb7d2cb5ebd92d589af6bcb117553d648dde9eaccbdcb0b34d95abe56",
+        "outline_view_scaled_compute_bindless.vert.spv": "825bfc8694d71362793dc7865701a16aa115aa1417e420aa370f1c91f65469a2",
+        "outline_view_scaled_samples.frag.spv": "f634d82cc5d256d287c17f96db218642c4c1105c56cb109049a52774bd713464",
+        "pathtracing.comp.spv": "6f90a3444d1a07b8ead9eba67d063f70e9c46310058146a496c5e4eea47dfcec",
+        "pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+        "readonly_depth_test.frag.spv": "b7afe007df9e050c21c89832a50e7cdb976e225c6ec6b5376589d1aa021352a9",
+        "readonly_depth_test.vert.spv": "11d36fc78f75992904f31c89130be22737be87dd4dd99b65508d6fcc40fe2ce3",
+        "reflection_probe_field_test.comp.spv": "94135d202f7410504e29b1e9562421d1161c5f77c6e341a432eeb985164f5a1e",
+        "reflection_reprojection.comp.spv": "b54cc4ccbcf1dc7fdf7ede3815ce51afccfdac2e853daa0e024f02f24d472158",
+        "reflection_signal_pyramid_float.comp.spv": "5017c38801528ef1c47e3fabbd4d1d8417e5cfa729788fe54e13aeab9706d6c7",
+        "reflection_signal_pyramid_packed.comp.spv": "9d9fc987c83a72728ac0296cdbf85596c658e1535a0ef72edc25aab44792926f",
+        "reflection_spatial_filter.comp.spv": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+        "reflection_surface_test.comp.spv": "d959c5051a98ef66fd9e46278dee1baaa248f30fbe536e39e869619f7a2552e1",
+        "reflection_temporal_float.comp.spv": "66c44b623b83f9e6176e7c44f7039992ada997ac29933d4224cac71c7bc00020",
+        "reflection_temporal_packed.comp.spv": "3cf689766f41dfa0d0422942943cdd48702e2405c13b8f6d2ba4fd37b8ded9d3",
+        "reflection_trace_float.comp.spv": "4e89f2e77717f918f86538b504a38d3469609848c4c59b8990d6c24625ee4351",
+        "reflection_trace_packed.comp.spv": "7e23f88e362db04579bd8b8e57094009325d7a246d4809d487b03b0d9b5a0de0",
+        "sampled_upload_test.comp.spv": "a7b9be273214e05f06f7441f6e3a1187e929faa531beedf545eaf0291b3fd582",
+        "scene_instance_layout_test.comp.spv": "36d658cb7a429516ca78d6f99d9f72209dd98542374bb00dbb4fa8e428181984",
+        "scene_multisample_probe.frag.spv": "b01b9af31ae9f4e53d16ec248c0ff6cba9dd320abd55e92d83eb1f68c4ad9dfb",
+        "scene_multisample_resolve.frag.spv": "442a2b06917d60cb1c9006a45ff95afdd919ce96d5648491a9eedefbee64118c",
+        "shadow.frag.spv": "91ac2f1e32ea6ee107bbb9143c9e96cdffef43e22ae53b9626c3eb7d7a1af245",
+        "shadow.vert.spv": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5",
+        "shadow_bindless.frag.spv": "6d38dc03e16eda0b761a21b00ebea4a223e9046bc73b7ac5d531ff028b34f36f",
+        "shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+        "shadow_compute.vert.spv": "ac557aaeb75d6cf3e75af60d345a25e1cc78ee9b8c90943d05a73e9bfe66bc2e",
+        "shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+        "skin.comp.spv": "a0f5f99f22082c9e6550cc5f6926bb3df82db4f70ef1130f7130b51b204b6fe4",
+        "sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+        "spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+        "specialization_test.comp.spv": "b38e220726a262bbd12a1893fae88b010832f88f2381402e36a3d783f766ea96",
+        "specialization_test.frag.spv": "c3f301bbf5bdbe5c7279f138fc158f51bde7502a9e3a5042cfe5c264e22c44a8",
+        "specialization_test.vert.spv": "cd32916b0e5871e6206493e6fc9f4e9ddc9fd467f77126a3aa4ecdebdb435e41",
+        "specular_ramp_test.comp.spv": "579badc92e94a243bec3335fe5064122d6b65f93d64baf6b6e7fe74b0f2e6da3",
+        "surface_response_test.comp.spv": "afe36fc87f9472aa759275224bfff0b5d0c94bf22a1044de69c774dd2252ee76",
+        "temporal_copy.frag.spv": "b406af1147ab75cf5fdca93cccece032d0dfe1d0cf7fa1bab24e16024db65ce7",
+        "temporal_resolve.frag.spv": "244855bdaf134cd6ad898eefb753931d363fd3d8bfa8c7518c03ab9d2c999ef0",
+        "view_fog_surface.frag.spv": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0",
+        "view_fog_surface_samples.frag.spv": "4f9f518a961e886c094b92c70d4232b5e3ca70ece4721182dd4429f5b8673ef1",
+        "view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+        "visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+      }
+    },
+    "projectSha256": "da6121f2f9af86c013d83b96785287c3f19ca51b845f61a1bf01bb3fbece3213",
+    "runs": [
+      {
+        "name": "control",
+        "antiAliasing": 1,
+        "playerSha256": "4ab198bddc9f577338b2ca968c0c526b5a2a8d4f02248ad91ae2d57ffbc05ddc",
+        "startUtc": "2026-10-30T18:33:02.317268+00:00",
+        "endUtc": "2026-10-30T18:35:40.218737+00:00",
+        "frames": 150,
+        "warmupFrames": 30,
+        "steadyFrames": 120,
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "allocator": {
+          "bufferAllocations": 2070,
+          "imageAllocations": 461,
+          "liveBuffers": 857,
+          "liveImages": 461,
+          "bufferBytes": 2673633712,
+          "imageBytes": 2849141760,
+          "liveBufferBytes": 251455792,
+          "liveImageBytes": 2849141760,
+          "deviceLocalPeakBytes": 3243103360
+        },
+        "materialClassPipelineCount": 28,
+        "snapshotMultisampleAllocatedBytes": 0,
+        "environmentStatus": "passed",
+        "originalInitializationFault": "not observed; root cause remains unresolved",
+        "shadowMs": {
+          "mean": 3.8037914666666666,
+          "p50": 3.7981759999999998,
+          "p95": 3.8521663999999998,
+          "maximum": 3.878848
+        },
+        "sceneMs": {
+          "mean": 19.4662656,
+          "p50": 19.458048,
+          "p95": 19.6172288,
+          "maximum": 19.853312
+        },
+        "postProcessMs": {
+          "mean": 0.20432213333333332,
+          "p50": 0.203776,
+          "p95": 0.205824,
+          "maximum": 0.216064
+        },
+        "frameMs": {
+          "mean": 23.474379199999998,
+          "p50": 23.46864,
+          "p95": 23.6584272,
+          "maximum": 23.921888
+        },
+        "passes60FpsGpuBudget": false
+      },
+      {
+        "name": "feature",
+        "antiAliasing": 1,
+        "playerSha256": "2895b224242ae42857318d58767d190b038f93817cffa82702bb389c09fdeca4",
+        "startUtc": "2026-10-30T18:35:51.705490+00:00",
+        "endUtc": "2026-10-30T18:38:25.026223+00:00",
+        "frames": 150,
+        "warmupFrames": 30,
+        "steadyFrames": 120,
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "allocator": {
+          "bufferAllocations": 2070,
+          "imageAllocations": 461,
+          "liveBuffers": 857,
+          "liveImages": 461,
+          "bufferBytes": 2673633712,
+          "imageBytes": 2849141760,
+          "liveBufferBytes": 251455792,
+          "liveImageBytes": 2849141760,
+          "deviceLocalPeakBytes": 3243103360
+        },
+        "materialClassPipelineCount": 28,
+        "snapshotMultisampleAllocatedBytes": 0,
+        "environmentStatus": "passed",
+        "originalInitializationFault": "not observed; root cause remains unresolved",
+        "shadowMs": {
+          "mean": 3.8002701333333335,
+          "p50": 3.794288,
+          "p95": 3.8461824,
+          "maximum": 3.87648
+        },
+        "sceneMs": {
+          "mean": 19.15708586666667,
+          "p50": 19.15904,
+          "p95": 19.3126912,
+          "maximum": 19.620864
+        },
+        "postProcessMs": {
+          "mean": 0.20472320000000005,
+          "p50": 0.2048,
+          "p95": 0.205824,
+          "maximum": 0.218112
+        },
+        "frameMs": {
+          "mean": 23.1620792,
+          "p50": 23.1576,
+          "p95": 23.32048,
+          "maximum": 23.686496
+        },
+        "passes60FpsGpuBudget": false
+      }
+    ],
+    "error": "['run observation 31: software thermal slowdown is active', 'run observation 32: driver relative thermal headroom is insufficient', 'run observation 32: software thermal slowdown is active']",
+    "aa4FunctionalRun": {
+      "status": "passed",
+      "frames": 150,
+      "snapshotSamples": 4,
+      "outlineSamples": 4,
+      "classPipelines": 28,
+      "deviceLocalPeakBytes": 3946468480,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "originalInitializationFault": "not observed; root cause unresolved"
+    },
+    "aa4RejectedEnvironmentObservations": [
+      {
+        "seconds": 163.91552049999882,
+        "temperature": 80.0,
+        "thermalMargin": 15.0,
+        "thermalSlowdown": {
+          "hardware": false,
+          "software": true
+        },
+        "gpuUtilization": 100.0,
+        "graphicsClockMHz": 2355.0
+      },
+      {
+        "seconds": 169.08424390000073,
+        "temperature": 85.0,
+        "thermalMargin": -1.0,
+        "thermalSlowdown": {
+          "hardware": false,
+          "software": true
+        },
+        "gpuUtilization": 100.0,
+        "graphicsClockMHz": 2295.0
+      }
+    ],
+    "aa4EnvironmentSha256": "6e5a26f3c027652ac99e4bd6d5ace948127d8b15fdf672f295501219e1bf5133",
+    "aa4TimingSha256": "0b2ecc578b530a24c9a0653787027bf2f3e501e9aec8eebc1558afb45124672d",
+    "aa4ControlTiming": "not run after environment rejection"
+  },
+  "limitations": [
+    "Archived native image compatibility remains failed on the restored environment; formal gate and thresholds are unchanged.",
+    "Original TinyGLTF startup fault root cause remains unresolved; no recurrence observed in the rebuilt Release runs.",
+    "Full Debug native scene exceeded the 600-second startup diagnostic budget.",
+    "AA4 performance diagnostic rejected by thermal environment gate; AA4 control timing was not run.",
+    "One paired AA1 diagnostic does not establish a stable performance improvement; 1080p60 and sustained NR12 budget remain pending.",
+    "Dual-device delivery and physical/manual review remain for the final frozen candidate."
+  ],
+  "finalTemporaryDirectoryCheck": {
+    "status": "passed",
+    "logSha256": "e0eba0956a5beaa9bbe27d8678cabaf6abe10c76c9305af2abd0518260c63162"
+  },
+  "nativeInputFiles": [
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/project.azureproject",
+      "sha256": "da6121f2f9af86c013d83b96785287c3f19ca51b845f61a1bf01bb3fbece3213",
+      "bytes": 621
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/scene.azurelevel",
+      "sha256": "251aa2be3af2da38c800877b4bf64e8ac5c1ed409681f776cb43a5bba6218b97",
+      "bytes": 4170104
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/content-character/hero-restored-inputs-v7.glb",
+      "sha256": "af8ebb6d417899a6b74c97056ebbf636dd910ec9b1367045f65fc5f0ea7c2dfb",
+      "bytes": 28283500
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-0.azurematerial",
+      "sha256": "b959f3c38e6be013641ad68221bdbeb1ea1b58ebf74892a290a991893022fad7",
+      "bytes": 28005
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-1.azurematerial",
+      "sha256": "7b05827ef427a5137ff194a0b271ca2796c857d0a81b187c7897f835e140986d",
+      "bytes": 31909
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-10.azurematerial",
+      "sha256": "1207dd33c57674142f54985a991a73475a2929c397a81f356ed8a7e448843348",
+      "bytes": 21533
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-11.azurematerial",
+      "sha256": "501827cef6d5b914db31794f61b8858015167ec6552c8c8a9015b05ff42c4665",
+      "bytes": 22418
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-12.azurematerial",
+      "sha256": "cefbf58df2ac625fbbbaf96be68a89d0beea7b11bec33cc6a93598f168979682",
+      "bytes": 20012
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-2.azurematerial",
+      "sha256": "63465376ec9a222028f8e0400ca015b9054523d37eff2ef360d1033685a2d539",
+      "bytes": 31413
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-3.azurematerial",
+      "sha256": "55e4b31fff80d95b5e14685efc08c512444a70015aa0433aacc7485e6050221b",
+      "bytes": 30741
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-4.azurematerial",
+      "sha256": "76ea758de67f868299b0dc6120c8ed7356a3076242da605345d82821b85a15e5",
+      "bytes": 32627
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-5.azurematerial",
+      "sha256": "6216895e3fbf40146d4c09250c9111ccb7b35db91989624cbe4f0d3ff103a133",
+      "bytes": 31413
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-6.azurematerial",
+      "sha256": "950d7bc898265fda9d0a50656ebb5302750779fd51d67dfaba326bec71d6b189",
+      "bytes": 25478
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-7.azurematerial",
+      "sha256": "988af44d222563ff63279726c5417d99ba241cdba3c6dde6d0e9fb1b74d07914",
+      "bytes": 21591
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-8.azurematerial",
+      "sha256": "02ecdceafa9a95cc9fcd4abb8971f68e628839aed8a3e877b07fee0c4eb81959",
+      "bytes": 28252
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-9.azurematerial",
+      "sha256": "4325859f1a6f7414ffe5d2eac331fbc26375c211782b92dae8cefb5322e81663",
+      "bytes": 30804
+    },
+    {
+      "path": "build/runs/20261029-071130-main-character-joint-budget-2cddc4/continuation.json",
+      "sha256": "72589a6dee4786a0eb8d5d21787c20daf7d8bbe6e066702a939548e92956a4f5",
+      "bytes": 4086
+    },
+    {
+      "path": "build/runs/20261029-071130-main-character-joint-budget-2cddc4/original-crash-analysis.json",
+      "sha256": "d5f8798f45e24c75561443a8514f95f2de78d784ccff6acbdbdaac28454e69fe",
+      "bytes": 32746
+    },
+    {
+      "path": "build/runs/20261029-071130-main-character-joint-budget-2cddc4/original-crash.dmp",
+      "sha256": "4c75197ded58caa4457e8ec7031754560a084dc7fd092236d34cebca1c873191",
+      "bytes": 59823279
+    }
+  ],
+  "documentation": {
+    "markdownFilesValidated": 7,
+    "proseFilesValidated": 7,
+    "stageStatusTestsPassed": 16,
+    "configuredSiteBuild": "passed",
+    "configuredSiteLogSha256": "a2723da4d4540e4d9d374438213972fd0ecd40e731977353fe3da2ed431594c5",
+    "strictSiteBuild": "failed with 85 pre-existing source-link warnings",
+    "warningAuditSha256": "ff210132091d3c5fbbf6ae19bfbaa426456af6e22e4ac18cbbb1959f0221c2d6",
+    "newLinkWarnings": 0
+  },
+  "sourceGitBlobs": {
+    "CMakeLists.txt": "5bc2efa372d981e3499f538709db905cbfc6ce7b",
+    "shaders/mesh.frag": "4848f9db17ef7d23ac9eed6e7315fbb4fe6afe7c",
+    "src/render/MaterialPipelinePolicy.hpp": "00013d166a9e2fb29e923760735ca00db8cb012a",
+    "src/scenes/CharacterMaterialSampling.inc": "2071b97b92c26553a2c84777b5059e6f6f211d99",
+    "src/scenes/CharacterSceneRenderer.cpp": "48346c44fbbe62fc2bf2bfda6b779bc3bdd20c9e",
+    "src/scenes/CharacterSceneRenderer.hpp": "8bc259386d305b9900f1e7349d5e9619e6ceea15",
+    "tests/MaterialPipelinePolicyTests.cpp": "04e0acee27e61f328ab9cde57f1bc4708fe9ed1d",
+    "tools/test_material_feature_specialization_gpu.py": "e4df90336433bd34ab02b33b924d6cfb21646471"
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "cases": [
+    {
+      "case": "mixed",
+      "views": [
+        {
+          "cameraPosition": [
+            2.799999952316284,
+            2.0999999046325684,
+            3.200000047683716
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2329922233432,
+          "completedSubmission": 24,
+          "extent": [
+            256,
+            128
+          ],
+          "lastUseSubmission": 1,
+          "outputFormat": "rgba8-srgb-encoded",
+          "renderCount": 1,
+          "renderer": "character",
+          "requested": false,
+          "resolvedImage": 2329922245272,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": false
+        },
+        {
+          "cameraPosition": [
+            2.0,
+            1.0,
+            3.0
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2329933425784,
+          "completedSubmission": 24,
+          "extent": [
+            128,
+            128
+          ],
+          "lastUseSubmission": 1,
+          "outputFormat": "rgba8-srgb-encoded",
+          "renderCount": 1,
+          "renderer": "sample",
+          "requested": false,
+          "resolvedImage": 2329924317976,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": false
+        },
+        {
+          "cameraPosition": [
+            0.0,
+            3.5,
+            22.0
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2329924320936,
+          "completedSubmission": 24,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 1,
+          "outputFormat": "rgba8-srgb-encoded",
+          "renderCount": 1,
+          "renderer": "blackhole",
+          "requested": false,
+          "resolvedImage": 2329924332776,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": false
+        }
+      ],
+      "released": true,
+      "validationErrors": 0
+    },
+    {
+      "case": "cameras",
+      "views": [
+        {
+          "cameraPosition": [
+            0.0,
+            3.5,
+            22.0
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 1696192012920,
+          "completedSubmission": 24,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 1,
+          "outputFormat": "rgba8-srgb-encoded",
+          "renderCount": 1,
+          "renderer": "blackhole",
+          "requested": false,
+          "resolvedImage": 1696192004040,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": false
+        },
+        {
+          "cameraPosition": [
+            -12.0,
+            8.0,
+            23.0
+          ],
+          "cameraTarget": [
+            -7.0,
+            4.5,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 1696192057320,
+          "completedSubmission": 24,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 1,
+          "outputFormat": "rgba8-srgb-encoded",
+          "renderCount": 1,
+          "renderer": "blackhole",
+          "requested": false,
+          "resolvedImage": 1696192054360,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": false
+        }
+      ],
+      "released": true,
+      "validationErrors": 0
+    },
+    {
+      "case": "grading",
+      "views": [
+        {
+          "cameraPosition": [
+            2.799999952316284,
+            2.0999999046325684,
+            3.200000047683716
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2910916146264,
+          "completedSubmission": 24,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 1,
+          "outputFormat": "rgba8-srgb-encoded",
+          "renderCount": 1,
+          "renderer": "character",
+          "requested": false,
+          "resolvedImage": 2910916161064,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": false
+        },
+        {
+          "cameraPosition": [
+            2.799999952316284,
+            2.0999999046325684,
+            3.200000047683716
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2910917488424,
+          "completedSubmission": 24,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 1,
+          "outputFormat": "rgba8-srgb-encoded",
+          "renderCount": 1,
+          "renderer": "character",
+          "requested": false,
+          "resolvedImage": 2910917518024,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": false
+        }
+      ],
+      "released": true,
+      "validationErrors": 0
+    }
+  ],
+  "physicalKeyboardMouse": "not performed"
+}

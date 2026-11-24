@@ -1,0 +1,35 @@
+{
+  "status": "measured-hypothesis",
+  "hypothesis": "implicit UV derivative selection",
+  "conclusion": "rejected-for-selected-glyph-samples",
+  "variants": [
+    {
+      "mode": "captured-control",
+      "vsBaselinePixels": 13,
+      "vsBaselineMax": 5,
+      "vsCapturedPixels": 0,
+      "vsCapturedMax": 0
+    },
+    {
+      "mode": "original",
+      "vsBaselinePixels": 13,
+      "vsBaselineMax": 5,
+      "vsCapturedPixels": 0,
+      "vsCapturedMax": 0
+    },
+    {
+      "mode": "fine",
+      "vsBaselinePixels": 13,
+      "vsBaselineMax": 5,
+      "vsCapturedPixels": 0,
+      "vsCapturedMax": 0
+    },
+    {
+      "mode": "coarse",
+      "vsBaselinePixels": 13,
+      "vsBaselineMax": 5,
+      "vsCapturedPixels": 0,
+      "vsCapturedMax": 0
+    }
+  ]
+}

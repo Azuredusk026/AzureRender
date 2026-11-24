@@ -1,0 +1,13 @@
+{
+  "sourceBase": "23015e7",
+  "changedInputs": [
+    "tools/artifact_budget.py",
+    "tools/artifact_cleanup.py",
+    "tools/test_artifact_budget.py"
+  ],
+  "changedProductionInputs": [],
+  "releasePlayerSha256": "83304ac0a57077d46d45c9a8227093658af2d9aefcbe0564194e157733d46019",
+  "expectedPlayerSha256": "83304ac0a57077d46d45c9a8227093658af2d9aefcbe0564194e157733d46019",
+  "provenanceVerification": "failed-source-inputs-differ",
+  "runtimeRebuilt": false
+}

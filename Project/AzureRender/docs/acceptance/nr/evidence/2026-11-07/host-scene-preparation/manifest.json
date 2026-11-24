@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "kind": "NativeOptimizationEvidence",
+  "sourceBase": "723286a",
+  "status": "adopted-diagnostic-cpu-improvement",
+  "sourceChanges": {
+    "CMakeLists.txt": "83109d24ac0736c64fb8a1adc556a94b448ec82777be07da38adf61bde4b1728",
+    "src/app/AzureRenderApp.cpp": "239ff20247c976a862cc2e2136e4a4dca17d19bfda46b41a6c2b529fbf9c8c07",
+    "src/app/AzureRenderApp.hpp": "153f4e1f968962ed23799f45d70edd4eecff3c5bfc29d5b896086b534cb0e788",
+    "src/runtime/GameRuntime.cpp": "c4a359969d334ea8b52c83fbc1dd7bc0bed925bbe3cb8e732e59d63b50755a35",
+    "src/runtime/GameRuntime.hpp": "d2d144d67604d931034342770d94f6e38a4d3e22f38101993014a9ca05f8031f",
+    "src/runtime/RuntimeLifecycle.hpp": "d499bb246a4786a5f4b5210fb05edd8d97a9f1ca718c5cff39eaee74312a080d",
+    "src/runtime/RuntimeRenderSnapshotCache.cpp": "8ae94a0f19fc0d6da030c8653619140a0f3d27254def514df699ac2a44a51fa4",
+    "src/runtime/RuntimeRenderSnapshotCache.hpp": "169b5a3491e325bc953e891d68d0e442bc0dd01469e5bf4acff8a9ac1d7334d0",
+    "src/runtime/RuntimeSceneSnapshotCache.hpp": "a06c5bb8da7b3df4563eba677e58ac9e0dc666fa1f22aeac45888c346e63dd5e"
+  },
+  "tests": {
+    "tests/RuntimeSceneSnapshotCacheTests.cpp": "5421b889871f815e1ea36a37af53840e7c9e8d974d51ca922fa71bdc5b390c8c",
+    "tests/RuntimeRenderSnapshotCacheTests.cpp": "41d01cda8cc1ecfb3d20c14957b93f231d995a6dc522138f636e377d3bf9f348",
+    "tests/CameraSystemTests.cpp": "e25f3e37d7324c1b6e846102c0e14085e13c79eeaea73aeccb3708b122196fad"
+  },
+  "configuration": "Release",
+  "buildProvenanceSha256": "ae584e62aa62b38897dd093fd4ca216dd5eddff27c5c40760d31accb6d8882a8",
+  "buildScope": {
+    "kind": "runtime-and-tests",
+    "targets": [
+      "AzureRender",
+      "AzurePlayer",
+      "AzureMetaGen",
+      "AzureGeometryCompiler",
+      "AzureAssetExchange",
+      "AzureMaterialValidator",
+      "AzureGameLauncher",
+      "AzureEngineContracts",
+      "AzureManagedArtifacts",
+      "AzureShaderModulePrototypes",
+      "AzureRuntimeLifecycleTests",
+      "AzureRuntimeSceneSnapshotCacheTests",
+      "AzureRuntimeRenderSnapshotCacheTests",
+      "AzureCameraSystemTests",
+      "AzureRenderEcsTests",
+      "AzureSceneRenderSnapshotTests",
+      "AzureRenderSceneGraphTests",
+      "AzurePresentationRuntimeTests"
+    ],
+    "testProducts": {
+      "AzureRuntimeLifecycleTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRuntimeLifecycleTests.exe",
+      "AzureRuntimeSceneSnapshotCacheTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRuntimeSceneSnapshotCacheTests.exe",
+      "AzureRuntimeRenderSnapshotCacheTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRuntimeRenderSnapshotCacheTests.exe",
+      "AzureCameraSystemTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureCameraSystemTests.exe",
+      "AzureRenderEcsTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderEcsTests.exe",
+      "AzureSceneRenderSnapshotTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureSceneRenderSnapshotTests.exe",
+      "AzureRenderSceneGraphTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderSceneGraphTests.exe",
+      "AzurePresentationRuntimeTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePresentationRuntimeTests.exe"
+    }
+  },
+  "playerSha256": "968077eec3cdab75f8185ec111fe1cb086fc61598c5f718336d0dc04e66079d1",
+  "programCount": 663,
+  "allProgramsByteIdentical": true,
+  "results": {
+    "file": "results.json",
+    "sha256": "3d27cabba3eb0ac614ec5a4513aea01d0b591b14bdf1e5c2cba9ef7d70b3878b"
+  },
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 1860128,
+    "sha256": "b8ef8371997cc0545e61bd25e873052ea1de997ab1f6ac7a8a140cd772563a78"
+  },
+  "phaseChecksPassed": true,
+  "formalPerformanceAccepted": false,
+  "overallVisualAccepted": false
+}

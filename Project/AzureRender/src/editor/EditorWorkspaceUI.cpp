@@ -1,0 +1,222 @@
+#include "ui/localization/Localization.hpp"
+#include "editor/panels/CorePanels.hpp"
+#include "ImGuiEditorLayer.hpp"
+#include "EditorTheme.hpp"
+#include "ui/Widgets.hpp"
+#ifdef AZURERENDER_HAS_IMGUI
+#include <GLFW/glfw3.h>
+#include <imgui_internal.h>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <set>
+#include <stdexcept>
+namespace azurerender {
+void ImGuiEditorLayer::drawPathInput(const char* label,std::string& value,const std::string& purpose,bool directory,const std::vector<std::string>& extensions) {
+    ImGui::PushID(purpose.c_str());ImGui::TextUnformatted(label);ImGui::SetNextItemWidth(-1);
+    ui::inputText("##path",value);observeWidget(purpose+".path");
+    if(ui::button(ui::tr("Browse..."))){
+        const auto result=session_->edit("path.choose",{{"purpose",purpose},{"title",label},{"directory",directory},{"extensions",extensions}});
+        if(result&&!result.value.value("cancelled",true))value=result.value.at("path").get<std::string>();
+    }observeWidget(purpose+".browse");ImGui::SameLine();ImGui::SetNextItemWidth(-1);
+    if(ImGui::BeginCombo("##Recent",ui::tr("Recent directories"))){
+        for(const auto& path:session_->pathHistory().directories(purpose))if(ImGui::Selectable(path.c_str())){
+            if(directory)value=path;
+            else{
+                session_->edit("path.remember",{{"purpose",purpose},{"path",path},{"directory",true}});
+                const auto result=session_->edit("path.choose",{{"purpose",purpose},{"title",label},{"directory",false},{"extensions",extensions}});
+                if(result&&!result.value.value("cancelled",true))value=result.value.at("path").get<std::string>();
+            }
+        }
+        ImGui::EndCombo();
+    }
+    ImGui::PopID();
+}
+void ImGuiEditorLayer::queueInputEvent(nlohmann::json event) {
+    if(uiCursor_>=1024) { uiActions_.erase(uiActions_.begin(),uiActions_.begin()+static_cast<std::ptrdiff_t>(uiCursor_));uiCursor_=0; }
+    if(uiActions_.size()-uiCursor_>=1024||event.dump().size()>65536)throw std::invalid_argument("UI event queue exceeds budget");
+    const auto action=event.at("action").get<std::string>();
+    if(action=="mouse"||action=="click") {
+        const auto target=event.at("target").get<std::string>();
+        if(!widgets_.contains(target))throw std::invalid_argument("Unknown UI target: "+target);
+        for(const auto v:event.value("offset",std::array<float,2>{0,0}))if(!std::isfinite(v)||std::abs(v)>10000)throw std::invalid_argument("Invalid mouse offset");
+        event.value("down",true);
+        const auto button=event.value("button",std::string("left"));
+        if(button!="left"&&button!="right"&&button!="middle")throw std::invalid_argument("Unknown mouse button");
+    }else if(action=="focus")event.at("focused").get<bool>();
+    else if(action=="text")event.at("text").get<std::string>();
+    else if(action=="key") {
+        const std::set<std::string> keys={"0","A","D","W","S","E","R","F","Q","P","Z","Y","Delete","Enter","Escape","Shift","Alt"};
+        if(!keys.count(event.at("key").get<std::string>()))throw std::invalid_argument("Unsupported UI key");
+        event.value("down",true);event.value("ctrl",false);
+    }else if(action=="wheel") {
+        for(const char* axis:{"x","y"})if(!std::isfinite(event.value(axis,0.F)))throw std::invalid_argument("Invalid wheel input");
+    }else throw std::invalid_argument("Unknown UI event");
+    event["frame"]=uiFrame_+1;uiActions_.push_back(std::move(event));
+    std::stable_sort(uiActions_.begin()+static_cast<std::ptrdiff_t>(uiCursor_),uiActions_.end(),[](const auto& a,const auto& b){return a.at("frame")<b.at("frame");});
+}
+void ImGuiEditorLayer::observeWidget(const std::string& id) {
+    const auto a=ImGui::GetItemRectMin(),b=ImGui::GetItemRectMax();
+    widgets_[id]={a.x,a.y,b.x-a.x,b.y-a.y};
+}
+void ImGuiEditorLayer::injectUiEvents() {
+    if(uiActions_.empty())return;
+    auto& io=ImGui::GetIO();io.AddFocusEvent(injectedFocus_);io.AddMousePosEvent(uiMousePosition_[0],uiMousePosition_[1]);
+    if(injectedMouseDown_){io.AddMouseButtonEvent(injectedClickButton_,false);injectedMouseDown_=false;}
+    // Overlapping controls (including dock tabs) require a hovered frame before press.
+    if(injectedClickPending_){io.AddMouseButtonEvent(injectedClickButton_,true);injectedMouseDown_=true;injectedClickPending_=false;}
+    while(uiCursor_<uiActions_.size()&&uiActions_[uiCursor_].at("frame").get<std::uint64_t>()<=uiFrame_) {
+        const auto action=uiActions_[uiCursor_++];
+        try {
+            const auto kind=action.at("action").get<std::string>();
+            if(kind=="click" || kind=="mouse") {
+                const auto target=action.at("target").get<std::string>();
+                const auto rect=widgets_.at(target).get<std::array<float,4>>();
+                const auto offset=action.value("offset",std::array<float,2>{0,0});
+                uiMousePosition_={rect[0]+rect[2]/2+offset[0],rect[1]+rect[3]/2+offset[1]};
+                io.AddMousePosEvent(uiMousePosition_[0],uiMousePosition_[1]);
+                const auto button=action.value("button",std::string("left"));
+                const int index=button=="right"?1:button=="middle"?2:0;
+                io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Ctrl),action.value("ctrl",false));
+                io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Shift),action.value("shift",false));
+                io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Alt),action.value("alt",false));
+                if(kind=="click") {injectedClickPending_=true;injectedClickButton_=index;}
+                else io.AddMouseButtonEvent(index,action.value("down",true));
+            }else if(kind=="focus"){injectedFocus_=action.at("focused").get<bool>();io.AddFocusEvent(injectedFocus_);}
+            else if(kind=="text")io.AddInputCharactersUTF8(action.at("text").get<std::string>().c_str());
+            else if(kind=="wheel")io.AddMouseWheelEvent(action.value("x",0.F),action.value("y",0.F));
+            else if(kind=="key") {
+                static const std::map<std::string,ImGuiKey> keys={{"0",ImGuiKey_0},{"A",ImGuiKey_A},{"D",ImGuiKey_D},{"W",ImGuiKey_W},
+                    {"S",ImGuiKey_S},{"E",ImGuiKey_E},{"R",ImGuiKey_R},{"F",ImGuiKey_F},{"Q",ImGuiKey_Q},{"P",ImGuiKey_P},{"Alt",ImGuiKey_LeftAlt},{"Z",ImGuiKey_Z},{"Y",ImGuiKey_Y},{"Delete",ImGuiKey_Delete},
+                    {"Enter",ImGuiKey_Enter},{"Escape",ImGuiKey_Escape},{"Shift",ImGuiKey_LeftShift}};
+                io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Ctrl),action.value("ctrl",false));
+                io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Alt),action.value("alt",false));
+                if(action.contains("shift")||action.at("key")=="Shift")
+                    io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Shift),action.value("shift",action.value("down",true)));
+                io.AddKeyEvent(keys.at(action.at("key").get<std::string>()),action.value("down",true));
+            }else if(kind=="dpi") {
+                dpiOverride_=action.at("scale").get<float>();dpi_=dpiOverride_;
+                EditorTheme::apply(dpi_);dockingLayoutInitialized_=false;workspaceRebuildRequested_=true;
+            }else throw std::invalid_argument("Unknown UI event");
+        }catch(const std::exception& error){uiErrors_.push_back({{"frame",uiFrame_},{"action",action},{"error",error.what()}});}
+    }
+}
+void ImGuiEditorLayer::drawWorkspace() {
+    const auto* vp=ImGui::GetMainViewport();const auto layout=EditorWorkspace::layout(vp->Size.x,vp->Size.y,dpi_,session_->settings().get("editor.compact").get<bool>());
+    const auto hostPos=ImVec2(vp->Pos.x,vp->Pos.y+layout.menu+layout.toolbar);
+    const auto hostSize=ImVec2(vp->Size.x,vp->Size.y-layout.menu-layout.toolbar-layout.status);
+    ImGui::SetNextWindowPos(hostPos);ImGui::SetNextWindowSize(hostSize);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{0,0});ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize,0);
+    constexpr auto flags=ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoMove
+        |ImGuiWindowFlags_NoDocking|ImGuiWindowFlags_NoBringToFrontOnFocus|ImGuiWindowFlags_NoSavedSettings;
+    ImGui::Begin(ui::tr("Workspace###workspace-host"),nullptr,flags);
+#ifdef IMGUI_HAS_DOCK
+    const auto dockspace=ImGui::GetID("AzureWorkspace");
+    const auto preset=session_->consumeWorkspacePreset();
+    if(!preset.empty()){workspace_.preset(preset);dockingLayoutInitialized_=false;workspaceRebuildRequested_=true;}
+    const bool reset=session_->consumeLayoutResetRequest();
+    if(reset){workspace_.reset();dockingLayoutInitialized_=false;}
+    if(!dockingLayoutInitialized_) {
+        const auto* node=ImGui::DockBuilderGetNode(dockspace);
+        if(reset || workspaceRebuildRequested_ || node==nullptr || node->IsEmpty()) {
+            ImGui::DockBuilderRemoveNode(dockspace);
+            ImGui::DockBuilderAddNode(dockspace,ImGuiDockNodeFlags_DockSpace);
+            ImGui::DockBuilderSetNodePos(dockspace,hostPos);ImGui::DockBuilderSetNodeSize(dockspace,hostSize);
+            ImGuiID center=dockspace;
+            const auto right=ImGui::DockBuilderSplitNode(center,ImGuiDir_Right,layout.right/hostSize.x,nullptr,&center);
+            const auto objects=ImGui::DockBuilderSplitNode(center,ImGuiDir_Left,layout.left/(hostSize.x-layout.right),nullptr,&center);
+            const auto details=right;
+            const auto bottom=ImGui::DockBuilderSplitNode(center,ImGuiDir_Down,layout.bottom/hostSize.y,nullptr,&center);
+            for(const auto& panel:workspace_.panels()) {
+                const auto target=(panel.id=="viewport"||panel.id=="projects")?center:panel.id=="outliner"?objects:(panel.id=="inspector"||panel.id=="environment"||panel.id=="settings")?details:bottom;
+                ImGui::DockBuilderDockWindow(panel.title.c_str(),target);
+            }
+            ImGui::DockBuilderFinish(dockspace);
+        }
+        dockingLayoutInitialized_=true;
+        workspaceRebuildRequested_=false;
+    }
+    // Preserve panel/tab placement while giving a restored compact viewport room.
+    if(layout.compact&&!ImGui::IsMouseDown(ImGuiMouseButton_Left)){
+        const auto* viewport=ImGui::FindWindowByName(ui::tr("场景###viewport"));
+        if(viewport&&viewport->DockNode&&viewport->DockNode->ID!=dockspace){
+            auto* child=viewport->DockNode;
+            float missing=480*dpi_+2*ui::UiMetrics::fromScale(dpi_).padding+4*dpi_-child->Size.x;
+            while(missing>0&&child->ParentNode){
+                auto* parent=child->ParentNode;
+                if(parent->SplitAxis==ImGuiAxis_X){
+                    auto* sibling=parent->ChildNodes[parent->ChildNodes[0]==child?1:0];
+                    const float reclaimed=std::min(missing,std::max(0.F,sibling->SizeRef.x-160*dpi_));
+                    sibling->SizeRef.x-=reclaimed;child->SizeRef.x+=reclaimed;missing-=reclaimed;
+                }
+                child=parent;
+            }
+        }
+    }
+    ImGui::DockSpace(dockspace,{0,0},ImGuiDockNodeFlags_PassthruCentralNode);
+#endif
+    ImGui::End();ImGui::PopStyleVar(2);
+
+}
+nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
+    const auto* context=&session_->context();
+    nlohmann::json data={{"version",EditorWorkspace::version},{"preset",workspace_.snapshot().at("preset")},{"dpi",dpi_},{"panels",nlohmann::json::object()},
+        {"image",{{"x",imageRect_[0]},{"y",imageRect_[1]},{"width",imageRect_[2]},{"height",imageRect_[3]}}},
+        {"widgets",widgets_},{"uiErrors",uiErrors_},{"historyCount",uiHistory_.size()},{"diagnostic",workspace_.diagnostic},
+        {"selectedName",context->selectedNode()?context->selectedNode()->name:""},
+        {"nodeCount",context->scene().nodes.size()},{"gizmoTranslation",context->gizmoTranslation()},
+        {"gizmoRotation",context->gizmoRotation()},{"gizmoScale",context->gizmoScale()},{"visibleAssets",assetPanel_->presentation.visibleAssets_}};
+    data["camera"]={{"position",cameraPosition_},{"target",cameraTarget_}};
+    data["viewportView"]={{"projection",session_->viewportView().projection==CameraProjectionKind::Orthographic?"orthographic":"perspective"},{"editCameraActive",session_->editCameraActive()}};
+    data["consoleView"]=consoleView_;data["contentView"]=assetPanel_->presentation.contentView_;
+    data["previewMode"]=session_->previewMode();
+    data["document"]=context->documentVersion().describe();
+    data["documents"]=session_->documents().describe(context->documentId());
+    data["animationTimelines"]=session_->animations().describe();
+    data["previewSteps"]=session_->game()?session_->game()->steps():0;
+    data["physicsBodies"]=nlohmann::json::array();data["physicsConstraints"]=0;
+    if(auto* runtime=session_->runtime()){
+        runtime->world().each<ecs::TransformComponent,game::RigidBody>([&](auto entity,const auto& transform,const auto& body){data["physicsBodies"].push_back({{"node",runtime->nodeId(entity)},{"position",transform.translation},{"rotation",transform.rotation},{"shape",body.shape}});});
+        if(session_->game())data["physicsConstraints"]=session_->game()->physics().constraintCount();
+    }
+    data["view"]=session_->edit("viewport.describe").value;
+    data["windowClosePending"]=session_->windowClosePending();
+    data["viewportOverlayPolicies"]=session_->viewportOverlayPolicies();
+    data["navigation"]={{"mode",navigationButton_==1?"fly":navigationButton_==2?"pan":navigationButton_==0?"orbit":"idle"},{"speed",session_->settings().get("editor.camera.flySpeed")},{"cursorCaptured",navigationCursorCaptured_}};
+    data["navigation"]["nativeCursorMode"]=window_&&glfwGetInputMode(window_,GLFW_CURSOR)==GLFW_CURSOR_DISABLED?"disabled":"normal";
+    data["navigation"]["rawMouse"]=window_&&glfwRawMouseMotionSupported()&&glfwGetInputMode(window_,GLFW_RAW_MOUSE_MOTION)==GLFW_TRUE;
+    data["materialEditor"]={{"asset",assetPanel_->presentation.materialAsset_},{"snapshot",assetPanel_->presentation.materialSnapshot_}};
+    data["contentNavigation"]={{"mount",assetPanel_->presentation.assetMount_},{"path",assetPanel_->presentation.assetDirectory_},{"historyIndex",assetPanel_->presentation.assetNavigationIndex_},{"historySize",assetPanel_->presentation.assetNavigation_.size()},{"selected",assetPanel_->presentation.selectedAssets_},{"previewHandle",assetPanel_->presentation.assetPreviewHandle_},{"statistics",session_->contentDirectories().statistics()}};
+    if(includeHistory)data["history"]=uiHistory_;
+    data["gizmoSpace"]=context->gizmoSpace()==EditorContext::GizmoSpace::World?"world":"local";
+    data["gizmoPivot"]=context->gizmoPivot()==EditorContext::GizmoPivot::Active?"active":"bounds";
+    data["referencePicker"]=session_->references().active();
+    data["activeSelection"]=session_->selection().active();
+    data["feedback"]=session_->feedback().report();data["tasks"]=session_->tasks().report();
+    data["gizmoMode"]=static_cast<unsigned>(context->gizmoMode());
+    data["capture"]={{"navigationButton",navigationButton_},{"gizmo",viewportGizmoDragActive_}};
+    data["documentGuard"]=static_cast<unsigned>(session_->documentGuard().state());
+    data["dirty"]=context->dirty();data["undoCount"]=context->undoCount();data["selection"]=session_->selection().selected();
+    data["settings"]=session_->settings().describe();
+    data["project"]=context->isProject()?nlohmann::json{{"id",context->project().id},{"name",context->project().name},{"path",context->project().file.u8string()}}:nlohmann::json::object();
+    const auto& receipt=session_->buildResult();
+    data["build"]={{"running",session_->building()},{"passed",receipt.passed},{"message",receipt.message},
+        {"progress",session_->buildProgress()},{"install",installPath_},{"output",outputPath_},
+        {"resultOutput",receipt.outputDirectory.u8string()},{"resultLog",receipt.logFile.u8string()}};
+    for(const auto& panel:workspace_.panels()) {
+        const auto* window=ImGui::FindWindowByName(panel.title.c_str());
+        data["panels"][panel.id]={{"open",panel.visible},{"docked",window&&window->DockId!=0},
+            {"rect",window?nlohmann::json{window->Pos.x,window->Pos.y,window->Size.x,window->Size.y}:nlohmann::json::array()}};
+    }
+    return data;
+}
+}
+#else
+namespace azurerender {
+void ImGuiEditorLayer::observeWidget(const std::string&){}
+void ImGuiEditorLayer::injectUiEvents(){}
+void ImGuiEditorLayer::queueInputEvent(nlohmann::json) { throw std::logic_error("UI input requires ImGui"); }
+void ImGuiEditorLayer::drawWorkspace(){}
+nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool) const{return {};}
+}
+#endif

@@ -1,0 +1,19 @@
+[1791249861211][info][editor][code=0] Opened scene: test
+[1791249861224][info][editor][code=0] Opened scene: test
+[1791249861226][info][editor][code=0] Opened scene: test
+[1791249861227][info][editor][code=0] Selected node: generated
+[1791249861235][info][editor][code=0] Opened scene: test
+[1791249861239][info][editor][code=0] Opened scene: test
+[1791249861240][info][editor][code=0] Selected node: generated
+[1791249861248][info][editor][code=0] Opened scene: test
+[1791249861249][info][editor][code=0] Selected node: generated
+[1791249861257][info][editor][code=0] Undo
+[1791249861277][info][editor][code=0] Opened scene: test
+[1791249861280][info][editor][code=0] Opened scene: test
+[1791249861281][info][editor][code=0] Selected node: after-repair
+[1791249861316][info][editor][code=0] Opened scene: test
+[1791249861319][info][editor][code=0] Opened scene: test
+[1791249861320][info][editor][code=0] Selected node: stale
+[1791249861329][info][editor][code=0] Opened scene: test
+[1791249861330][info][editor][code=0] Selected node: manual
+Frame polling must mark a ready proposal stale after manual editing

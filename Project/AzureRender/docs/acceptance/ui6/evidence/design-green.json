@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "workflows": [
+    {
+      "workflow": "scene_inspector",
+      "searchRecovery": true,
+      "axisBounds": true,
+      "focusProtection": true
+    },
+    {
+      "workflow": "exploration",
+      "searchRecovery": true,
+      "axisBounds": true,
+      "focusProtection": true
+    }
+  ],
+  "input": "production ImGui replay",
+  "physicalInput": "not performed"
+}

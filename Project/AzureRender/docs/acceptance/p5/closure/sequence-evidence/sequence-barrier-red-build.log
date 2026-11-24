@@ -1,0 +1,15 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.23
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+[0/2] Re-checking globbed directories...
+[1/4] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/4] Building CXX object CMakeFiles\AzureSystemCompositionTests.dir\tests\SystemCompositionTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzureSystemCompositionTests.dir/tests/SystemCompositionTests.cpp.obj 
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DAZURE_INSPECTOR_PROJECT=\"D:/Assigment/2609/FYP/Project/AzureRender/assets_public/scene_inspector\" -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DJPH_FLOATING_POINT_EXCEPTIONS_ENABLED -DJPH_OBJECT_STREAM -DJPH_USE_CPU_COMPUTE -DNDEBUG -DOPENEXR_DLL -I..\..\src -Igenerated -Ivcpkg_installed\x64-windows\include -IC:\VulkanSDK\1.4.350.0\Include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath /DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -MD /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzureSystemCompositionTests.dir\tests\SystemCompositionTests.cpp.obj /FdCMakeFiles\AzureSystemCompositionTests.dir\ /FS -c ..\..\tests\SystemCompositionTests.cpp
+D:\Visual Studio\2022\VC\Tools\MSVC\14.38.33130\include\ammintrin.h(337): error C2220: 以下警告被视为错误
+D:\Visual Studio\2022\VC\Tools\MSVC\14.38.33130\include\ammintrin.h(337): warning C4392: “unsigned int __rmpupdate(unsigned __int64,rmp_seg *,int)”: 不正确的内部函数参数个数，应为“2”个参数
+D:\Visual Studio\2022\VC\Tools\MSVC\14.38.33130\include\ammintrin.h(340): warning C4392: “unsigned int __rmpadjust(unsigned __int64,int,int)”: 不正确的内部函数参数个数，应为“4”个参数
+ninja: build stopped: subcommand failed.

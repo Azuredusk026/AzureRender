@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "configurations": [
+    "Release",
+    "Debug"
+  ],
+  "seconds": 153.21799999999348,
+  "shaderModulesEnabled": true
+}

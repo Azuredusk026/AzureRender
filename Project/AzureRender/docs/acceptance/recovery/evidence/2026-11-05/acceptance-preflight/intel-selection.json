@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "environment": {
+    "VK_LOADER_DRIVERS_SELECT": "*igvk64*"
+  },
+  "source": "https://github.com/KhronosGroup/Vulkan-Loader/blob/main/docs/LoaderDriverInterface.md",
+  "scope": "Registered-driver selection and physical-device enumeration; rendering separately verified"
+}

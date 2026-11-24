@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "generator": "azure.material-overlays",
+  "generatorVersion": 1,
+  "sourceSha256": "30c3a49d9c4032d8227df8b62d3bd8dac4069a2ea7107a04889e58707afd019b",
+  "configSha256": "cc200a47aec84835f960a47c48c0acca3af1f07f358890088480a7e0748c4ba2",
+  "toolSha256": "55f10960982471ef3c289fda37b67f44e931e01ed48eb8f83b2dc79c06ec96fe",
+  "outputSha256": "c17969c807e32c9d8fce26e434f189124b70a098a98210b6cb9c4c80e9c7631f",
+  "bindings": [
+    {
+      "sourceSlot": "name:M_actor_laevat_cloth_05",
+      "outputSlot": "name:source-cloth5-vfx-0",
+      "material": 15,
+      "uvSet": 1,
+      "primitives": 1
+    },
+    {
+      "sourceSlot": "name:M_actor_laevat_cloth_05",
+      "outputSlot": "name:source-cloth5-vfx-1",
+      "material": 16,
+      "uvSet": 1,
+      "primitives": 1
+    }
+  ],
+  "binaryChunkPreserved": true
+}

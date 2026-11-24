@@ -1,0 +1,69 @@
+{
+  "status": "passed",
+  "tests": {
+    "AzureEngine.GamePackageRules": 6.14778,
+    "AzureEngine.PlayablePackage": 354.099,
+    "AzureRender.ReleaseGateMissingBuild": 0.110097,
+    "AzureRender.InstallManifestRoundTrip": 0.595685,
+    "AzureEngine.GamePackage": 155.218
+  },
+  "packages": {
+    "game-package": {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\game-package\\Windows Game",
+      "playerSha256": "f94abf7d3947681216c41c19530702f8050a9233bc73356e08f280e961ad99dd",
+      "files": 1370,
+      "manifestSha256": "294b1c4012880e253a043da5b34cd6e834a50ee858218f3e9d84eb6928b4fa55"
+    },
+    "playable-package": {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\playable-package\\Azure Exploration",
+      "playerSha256": "f94abf7d3947681216c41c19530702f8050a9233bc73356e08f280e961ad99dd",
+      "files": 1396,
+      "manifestSha256": "61f78d65bb430c16ee64d4af5149331f0ce882fdc800d809bd383a7f4aabc265",
+      "moves": {
+        "switches": 20,
+        "restarts": 20
+      }
+    }
+  },
+  "dispatch": [
+    [
+      1001,
+      "failed",
+      75
+    ],
+    [
+      1005,
+      "succeeded",
+      0
+    ]
+  ],
+  "archive": {
+    "sha256": "4d2af148728c25b96da70545ba168766b2c08cf47ddb32e6c4b99976bee02876",
+    "files": {
+      "source/archive_package_retention.py": "9a38bf277306f7f6b848f951b9081c9bc9b28d3ae3780eda28e55c526c604641",
+      "source/release-products.json": "b1283ecdd5079fc8205032e76774fd5c8ee60f18fea9c55f5c3c4448a014f422",
+      "source/release-cache-retention-packages.json": "97ad6ca6ca0613650c40f55e99f7cfcd0c16bd42c5dc5f04729d832bff6ccf41",
+      "source/release-cache-retention-packages.txt": "ecc64bfe79ff22f40d68acb10f4d96962c7c4476e6512ac18e20a1e80fe03029",
+      "source/release-cache-retention-packages.xml": "e579d018c7a871bef5440c5f369e921b229307e57fe294c6c4be0d7b890003b6",
+      "source/release-cache-retention-packages-ordinary.log": "b9b0142eaa88cd2e44ff811771b1c13ffe389b1313cb5788c3fc9384378a88ba",
+      "source/release-cache-retention-packages-ordinary.xml": "27098e9751c9c69ab86e77b17af5a876f3b12a04c866109e50b8bf25de52a100",
+      "source/release-cache-retention-packages-ordinary.txt": "0b1961adc8369eb9eea308b202270b51fa59411c78742e86a038b5596c70e6b9",
+      "source/release-cache-retention-packages-filesystem-fixtures.log": "3082fb6e71d96c70f9eeea74aa871eb01477c2c626b678f9c2d111bb4cfc9915",
+      "source/release-cache-retention-packages-filesystem-fixtures.xml": "9b1e61fad1bfbccddc58ad13bd49d796b2081eccc78355958370028576dc4ad4",
+      "source/release-cache-retention-packages-filesystem-fixtures.txt": "ff211e765fde8e0c865e55e0c2730955ebfdb57e881d5574d68d14784d7297c8",
+      "game-package/game_manifest.json": "294b1c4012880e253a043da5b34cd6e834a50ee858218f3e9d84eb6928b4fa55",
+      "game-package/summary.json": "4f9e42e08db9f111dac7e74cb059e4d9be66541dd2628dd81bd557be5b50ab2e",
+      "game-package/editor-report.json": "13b4305c9dee9fd8510d426bfb3591cc2981c026a699274ded8a252b3ff4c1e7",
+      "game-package/player-report.json": "31f4e3a62b08ea82e49b0452a5edc927e56cbc77f77e4862a179f06e09f1e43a",
+      "game-package/editor.log": "8c820f35483bbdaf40a58579646d003b450170f06c4ebafcbd8cece92f86e04d",
+      "game-package/player.log": "71240f671506309caf8361d1e01faff09f795815fd98c78dec967f3bd031edf0",
+      "game-package/failure-rollback.log": "cf651ddbae93879ea039a9656ec221531d71b06bcfbccc6ecec0aff4f699a206",
+      "playable-package/game_manifest.json": "61f78d65bb430c16ee64d4af5149331f0ce882fdc800d809bd383a7f4aabc265",
+      "playable-package/summary.json": "61b71953c1e1f5d81e439f019313cedab2ad8f460dbfa117b2a14ec667b38866",
+      "playable-package/cycles.summary.json": "ce438605ec6e6c8d921a613e4601b34887b433bb1c20616f3978e7150f6c3d8b",
+      "playable-package/cycles.log": "7963f96752049719ba78fdeaa01ada23e0b8506bfa7c3605fe7c9ac81b9d908a",
+      "playable-package/entry.log": "bd40ea9ee5c41d34d0560d4857ae243f70dc2af40cbc3042b7c0e4d1478e065a",
+      "playable-package/editor.log": "a6a79e40da36c4022c602fa47b0ba3f944f677085b20f6d591096aea5c89042d"
+    }
+  }
+}

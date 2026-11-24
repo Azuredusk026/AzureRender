@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "reviewedDate": "2026-10-05",
+  "checks": [
+    "Three images inspected visually at actual resolution",
+    "Workspace menus, docked panels and viewport remain readable",
+    "Side profile shows visible arms, knees, feet and ground shadow",
+    "Exploration HUD and public scene objects are visible",
+    "All images use public project assets"
+  ],
+  "images": {
+    "portfolio/images/editor/editor_workspace_1920x1080.png": "4b9703325799c92fab4eefdcad6c7002defa01355eefcf8b6800e51b74e335aa",
+    "portfolio/images/gameplay/robot_walk_side_1920x1080.png": "b3fa7aadde7dbd55e55113f8c75bb699da7c2f7ea741d4d30e3faa6997a833ee",
+    "portfolio/images/gameplay/exploration_1920x1080.png": "d58cf3be5573257c41adb4ee1cead27f69204419443e1950e7edf3bdc4e51b35"
+  }
+}

@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 200, in <module>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 200, in <listcomp>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 153, in run
+    call('wait-until', name='developer.shaderState', equals='Idle', timeoutMs=60000)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 70, in call
+    response = exchange(endpoint, token, dict(op=op, **fields))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_validation_protocol.py", line 21, in exchange
+    return json.loads(line)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\json\__init__.py", line 346, in loads
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\json\decoder.py", line 337, in decode
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\json\decoder.py", line 355, in raw_decode
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)

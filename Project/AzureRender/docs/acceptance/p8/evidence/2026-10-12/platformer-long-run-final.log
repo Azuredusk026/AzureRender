@@ -1,0 +1,53 @@
+{"seconds": 60, "gpuFrames": 3219, "workingMiB": 277.7}
+{"seconds": 120, "gpuFrames": 6603, "workingMiB": 297.3}
+{"seconds": 180, "gpuFrames": 9980, "workingMiB": 306.9}
+{"seconds": 240, "gpuFrames": 13369, "workingMiB": 307.8}
+{"seconds": 300, "gpuFrames": 16759, "workingMiB": 309.2}
+{"seconds": 360, "gpuFrames": 20146, "workingMiB": 309.9}
+{"seconds": 420, "gpuFrames": 23532, "workingMiB": 309.8}
+{"seconds": 480, "gpuFrames": 26923, "workingMiB": 309.9}
+{"seconds": 540, "gpuFrames": 30306, "workingMiB": 310.1}
+{"seconds": 600, "gpuFrames": 33685, "workingMiB": 310.4}
+{"seconds": 660, "gpuFrames": 37068, "workingMiB": 310.4}
+{"seconds": 720, "gpuFrames": 40454, "workingMiB": 310.4}
+{"seconds": 780, "gpuFrames": 43837, "workingMiB": 310.3}
+{"seconds": 840, "gpuFrames": 47225, "workingMiB": 310.3}
+{"seconds": 900, "gpuFrames": 50611, "workingMiB": 310.3}
+{"seconds": 960, "gpuFrames": 53996, "workingMiB": 310.3}
+{"seconds": 1020, "gpuFrames": 57378, "workingMiB": 310.3}
+{"seconds": 1080, "gpuFrames": 60764, "workingMiB": 310.4}
+{"seconds": 1140, "gpuFrames": 64146, "workingMiB": 310.4}
+{"seconds": 1200, "gpuFrames": 67527, "workingMiB": 310.4}
+{"seconds": 1260, "gpuFrames": 70914, "workingMiB": 310.4}
+{"seconds": 1320, "gpuFrames": 74300, "workingMiB": 310.4}
+{"seconds": 1380, "gpuFrames": 77673, "workingMiB": 304.5}
+{"seconds": 1440, "gpuFrames": 81057, "workingMiB": 304.6}
+{"seconds": 1500, "gpuFrames": 84436, "workingMiB": 304.5}
+{"seconds": 1560, "gpuFrames": 87817, "workingMiB": 305.6}
+{"seconds": 1620, "gpuFrames": 91192, "workingMiB": 305.7}
+{"seconds": 1680, "gpuFrames": 94559, "workingMiB": 307.7}
+{"seconds": 1740, "gpuFrames": 97170, "workingMiB": 309.0}
+{"seconds": 1800, "gpuFrames": 99098, "workingMiB": 309.1}
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 204, in run
+    assert process.wait(timeout=60)==0, 'Normal WM_CLOSE shutdown failed'
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 1593, in _wait
+    raise TimeoutExpired(self.args, timeout)
+subprocess.TimeoutExpired: Command '['D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\Moved exploration\\bin\\AzurePlayer.exe', '--project', 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\Moved exploration\\game\\project.azureproject', '--resource-root', 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\Moved exploration\\share\\AzureRender', '--width', '1920', '--height', '1080', '--game-actions', 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\platformer-long-run-final\\input.json', '--gpu-timing', '--gpu-timing-output', 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\platformer-long-run-final\\timing.json', '--runtime-report', 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\platformer-long-run-final\\runtime.json', '--validation-token-env', 'AZURE_PLATFORMER_LONG_RUN_TOKEN', '--validation-endpoint', 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\platformer-long-run-final\\endpoint.json']' timed out after 60 seconds
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_platformer_long_run.py", line 237, in <module>
+    run(a.package,a.output,a.seconds,a.probe,scenario=PlatformerScenario(),max_idle_utilization=a.max_idle_gpu_utilization)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 212, in run
+    window.restore();window.close()
+                     ^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 123, in close
+    def close(self):assert self.user.PostMessageW(self.handle,0x10,0,0)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

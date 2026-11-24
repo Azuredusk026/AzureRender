@@ -1,0 +1,32 @@
+[
+  {
+    "index": 0,
+    "exitCode": 0,
+    "missingCleanupLine": false,
+    "seconds": 6.5310000000172295
+  },
+  {
+    "index": 1,
+    "exitCode": 0,
+    "missingCleanupLine": false,
+    "seconds": 4.875
+  },
+  {
+    "index": 2,
+    "exitCode": 0,
+    "missingCleanupLine": false,
+    "seconds": 4.780999999959022
+  },
+  {
+    "index": 3,
+    "exitCode": 0,
+    "missingCleanupLine": false,
+    "seconds": 5.14100000000326
+  },
+  {
+    "index": 4,
+    "exitCode": 0,
+    "missingCleanupLine": false,
+    "seconds": 4.73399999999674
+  }
+]

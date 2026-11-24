@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "baseCommit": "630c11a",
+  "run": "build/runs/20261024-172000-multisample-rhi-contract-d44491",
+  "scope": "MS1 RHI sample declarations, capabilities, per-sample interpolation and alpha coverage; production view and material multisampling remain planned",
+  "rendererApiVersion": 4,
+  "materialBytes": 192,
+  "cameraBytes": 640,
+  "motionPushBytes": 128,
+  "temporalBytesPerPixel": 52,
+  "configurations": {
+    "debug": {
+      "registeredChecks": 16,
+      "multisampleNumericChecks": 8192,
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "standardSampleLocations": true,
+      "sampleShadingEnabled": true,
+      "hdrSampleCountMask": 15,
+      "checksLogSha256": "46eb094e21c61b51d98d86e170585dd60486bdf164f397017d5ec731cbe3b0ff",
+      "detailsLogSha256": "286271117414324f953de65beaf389722a929c3c6ebe83c6a8a99dce0c21d93c",
+      "buildLogSha256": "7b7e1485f77a351a3fa7b9458415e56d6ac2a69ff42a36353c81b42ea98fa0b1",
+      "playerSha256": "545551d8242f3468862ad0d58aff57f07cdf9ab20bec59f6066d8e443c5ff91b",
+      "editorSha256": "7572480c4637512dc4c5a2ea82fc06a52fcf56fa2fa74968e80c7db1878bf31e"
+    },
+    "release": {
+      "registeredChecks": 16,
+      "multisampleNumericChecks": 8192,
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "standardSampleLocations": true,
+      "sampleShadingEnabled": true,
+      "hdrSampleCountMask": 15,
+      "checksLogSha256": "ccb69ca7fb68aa40aad66aaedfbba73686bd0a0e0805093d3efd85bca99e829b",
+      "detailsLogSha256": "86e4c6fd4083508be42a2308fecc911f135736754a7dbbbf1ecc4728cdb4d8b0",
+      "buildLogSha256": "483a506e27fc5cd082728fb1845ae6f1352214d5d79b65a3c4226e2dec2c4b3b",
+      "playerSha256": "2496a357792b875b144f5df9e2fa0480b7abd9f81af7e2448b598383b362609a",
+      "editorSha256": "3288459e718b4fb297e78a39b6fcabf3399ffaad774b3e8950ee69a5a369fec2"
+    }
+  },
+  "shaders": {
+    "count": 87,
+    "crossConfigurationIdentical": true,
+    "frozenExistingShaders": 85,
+    "existingChanged": [],
+    "added": [
+      "multisample_probe.frag.spv",
+      "multisample_probe.vert.spv"
+    ]
+  },
+  "native": {
+    "configuration": "release",
+    "frames": 32,
+    "maximumByteDifference": 0,
+    "receiptSha256": "536fd353bfa9fe4efcd81aa227ca4cdf203016cc3312f4cc6f2f83bea44cb6fb"
+  },
+  "sourceBeauty": {
+    "sha256": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e",
+    "rimMaximumByteErrors": [
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0
+    ]
+  },
+  "redTests": {
+    "missingContractLogSha256": "06ce9ddc98bf82b8dde30850b1dbc833e687e774650646abb4e748ae8e30e86a",
+    "driverForwardingLogSha256": "d521ff32473baa6b5188ce3e5a3fab9b3bba99402f30ade26b72114e0551771e",
+    "invalidDriverSubmissionPrevented": true,
+    "restoredFreshGpuVerification": true
+  },
+  "sourceHashes": {
+    "CMakeLists.txt": "977eaa5b94f02df41b2f5eda55effa47a9474d48e952a2a7e7b212fe1b3b50a4",
+    "src/rhi/Rhi.hpp": "5778261537c6805acb0f24d2c76f26e7b2986eab055212a61943c0e4c8fe2480",
+    "src/rhi/VulkanRhi.hpp": "2938d00f7bb5459200ff3a0823de588a31a48224123d5cac3e67736d85d14095",
+    "src/rhi/VulkanRhi.cpp": "5aaabbeaba65a5f662339cd36f0aa0b20c222715f215816af7a04787e5853cd7",
+    "src/rhi/NullRhi.hpp": "7909333eb7f22c8a9f4253e33e4888e9c40f545da240095459f9bdd86c893182",
+    "src/rhi/NullRhi.cpp": "0560d83f359501f71fcefadc585a7062787efe16ddb7d91eb7daebe2a12b6354",
+    "tests/support/VulkanComputeFixture.hpp": "1dae51a3c17d781594a5529ec3e2356b4a1dbdc73f00af9871ed2973eb0c7956",
+    "tests/MultisampleContractTests.cpp": "e027623cda3925f8a98b346413fbb6c7c592675c6a1bdb479c2ffb367318f47e",
+    "tests/MultisampleGpuTests.cpp": "e07b786c32e8e2fad1e94a4bdea704e001b440b4222c8d5ac212b75a8849a50f",
+    "shaders/multisample_probe.vert": "427ae53a6d08b6e02e592e6266d56593da65597099c7052d7f338f32b3abc0e5",
+    "shaders/multisample_probe.frag": "31ea3eca5a68b2d400e6998b01c25841d2627f588cc94131b4034aa3f8eb46f4"
+  },
+  "remaining": [
+    "MS2 shared main/auxiliary multisample targets and quality contract",
+    "MS3 actual material per-sample shading and native quality gates",
+    "MS4 snapshot depth and outline coverage",
+    "MS5 budgets, AA5/AA6 and NR0-NR12 joint acceptance"
+  ]
+}

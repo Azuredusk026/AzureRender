@@ -1,0 +1,44 @@
+{
+  "status": "partial",
+  "visualAcceptance": "failed-user-review",
+  "publicLighting": [
+    {
+      "configuration": "release",
+      "captures": 84
+    },
+    {
+      "configuration": "debug",
+      "captures": 84
+    }
+  ],
+  "related": [
+    {
+      "configuration": "release",
+      "suites": 7,
+      "frames": 255,
+      "successfulPlayerInstances": 154
+    },
+    {
+      "configuration": "debug",
+      "suites": 7,
+      "frames": 255,
+      "successfulPlayerInstances": 154
+    }
+  ],
+  "routes": [
+    {
+      "configuration": "release",
+      "frames": 540,
+      "actions": 13,
+      "status": "passed"
+    },
+    {
+      "configuration": "debug",
+      "frames": 540,
+      "actions": 13,
+      "status": "passed"
+    }
+  ],
+  "nativeFrames": 282,
+  "strictEnvironmentCompatibility": "failed"
+}

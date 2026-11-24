@@ -1,0 +1,33 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 2: AzureEditor.EditTransaction
+1/1 Test #2: AzureEditor.EditTransaction ......***Failed    0.15 sec
+[1791232012601][info][editor][code=0] Opened scene: test
+[1791232012607][info][editor][code=0] Opened scene: test
+[1791232012607][info][editor][code=0] Selected node: candidate
+[1791232012612][info][editor][code=0] Opened scene: test
+[1791232012612][info][editor][code=0] Selected node: first
+[1791232012619][info][editor][code=0] Undo
+[1791232012625][info][editor][code=0] Redo
+[1791232012631][info][editor][code=0] Undo
+[1791232012635][info][editor][code=0] Redo
+[1791232012644][info][editor][code=0] Opened scene: test
+[1791232012652][info][editor][code=0] Opened scene: test
+[1791232012660][info][editor][code=0] Opened scene: test
+[1791232012666][info][editor][code=0] Undo
+[1791232012671][info][editor][code=0] Redo
+[1791232012677][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-edit-transaction.azscene
+[1791232012684][info][editor][code=0] Reloaded scene: test
+[1791232012687][info][editor][code=0] Opened scene: test
+[1791232012692][info][editor][code=0] Selected node: Batch object
+[1791232012694][info][editor][code=0] Opened scene: test
+A target selection change must invalidate an implicit-target proposal
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.15 sec
+
+The following tests FAILED:
+	  2 - AzureEditor.EditTransaction (Failed)
+Errors while running CTest

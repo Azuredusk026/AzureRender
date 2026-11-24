@@ -1,0 +1,19 @@
+{
+  "phase": "NR5-R8-P",
+  "sourceBaseCommit": "b8150c9",
+  "run": "build/runs/20261029-044333-reflection-pass-profile-087370",
+  "removed": [
+    {
+      "path": "build/runs/20261029-044333-reflection-pass-profile-087370/full-candidate/.azure",
+      "bytes": 3256452820
+    }
+  ],
+  "removedBytes": 3256452820,
+  "freeBytes": 28948434944,
+  "source": {
+    "tools/native_render/renderdoc_profile.py": "4a22f12a43d7f023507163f07bc90fc4f429a6680be5af3e6ee12cbcbf6c35a6",
+    "tools/test_native_render_gpu_profile.py": "211f613d9faeb444926edd7cdb263bd2f7135228adcc2f5c69e5f053f07d188b"
+  },
+  "mainFormalPerformancePassed": false,
+  "measurementScope": "GPU replay counters; bounded shader inspection; no renderer or shader modification"
+}

@@ -1,0 +1,5 @@
+[1/5] Building CXX object CMakeFiles\AzureThesisBenchmark.dir\src\Subpasses.cpp.obj
+[2/5] Building CXX object CMakeFiles\AzureThesisBenchmark.dir\src\benchmark.cpp.obj
+[3/5] Building CXX object CMakeFiles\AzureThesisBenchmark.dir\src\Dynamic.cpp.obj
+[4/5] Building CXX object CMakeFiles\AzureThesisBenchmark.dir\src\Capture.cpp.obj
+[5/5] Linking CXX executable AzureThesisBenchmark.exe

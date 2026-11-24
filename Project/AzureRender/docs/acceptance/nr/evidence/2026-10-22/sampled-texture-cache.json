@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "scope": "Immutable RGBA8 material texture sharing; native scene acceptance is separate",
+  "sourceHead": "3d35070d1e07147db33d4c5375363bee21efcf55",
+  "runRoot": "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu",
+  "sourceSha256": {
+    "CMakeLists.txt": "c841f72f1e28a9b9f8e6214450d09c1382287c3c8aab26d3f2da3495f9df2b97",
+    "src/render/SampledTextureCache.hpp": "fd18bee56166a9560f737ec6a943d652960ee49c0257b0e122258faa9df91fec",
+    "src/render/SampledTextureCache.cpp": "fc7109af2fcecd42a8aec8ac554088d2e73712daf08c7033f907f2ab69e0faae",
+    "src/scenes/CharacterSceneRenderer.hpp": "8cb7d300ca23acc61926819b16b9a26fb7311816a86d57249461d57962e15fa0",
+    "src/scenes/CharacterSceneRenderer.cpp": "4a38348e36546c037dab66153ab0053df1c60f0d965f2fc323b031bb1da6f321",
+    "tests/SampledTextureCacheTests.cpp": "9d21b18b0714f90f74d20265bed10b10fa0fa7bf44504147911388dad05633a1",
+    "tests/MaterialTextureSharingTests.cpp": "2b0d2bb2de7029fce584aaf56f44bea0433e9fd3c5889e3ea669e8c3109a2313",
+    "tests/NullRhiPassTests.cpp": "8d275e0bd9cb3be5de8465ebd314a90005638a132d2fc16fa4a9e116a27255e3",
+    "assets_public/texture_sharing/material-a.gltf": "9b6b344060535056e2ff0c319e12d9d6f024006fe8d80cfda0fe738662e7da43",
+    "assets_public/texture_sharing/material-b.gltf": "1f9d07460bf4b961acab2b8f1f779c08e6d8c0c2367ecdb285d705cc4181798d"
+  },
+  "evidenceSha256": {
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/cache-red.log": "3d3a8abb675a7dffb6518ad6dc61c585791a7707a11cfaf80a32b4e7d6b62028",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/cache-green-debug.log": "f62a03fde3c1e4efb21510a87e56a73b170b26066f377dc0496f191b4f28237a",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/integration-red.log": "bf533e8028f6a802ab1c8273bf6ea2aeb35377eae4f36f94f67b66213fc54c07",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/cpu-final-debug.log": "6de422e902ec066705b1267f26573a2df08813591eae443ddbae8469f5308218",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/cpu-final-release.log": "1c2a15927edd0ce8020efd71d834d1d0d5e39bc8384130bf19d86d12b8b69ecc",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/cpu-green-final-debug.log": "5f4d4be32f45543733374ce250ac069ca6f62e297c9e9d7b058faa82db6b9a70",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/cpu-green-final-release.log": "6e7daa58653e425d7f90ba59476f910c2a87d66bc46e3d457c9ac534e7666562",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/build-debug.log": "2ac8a3768bb8058fb4d19b187b9942df4cc49c168fb7e6ed8730713ae86dd5e4",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/build-debug-final.log": "faef7ceb4ebb1c23e81320b96e5388c881bdc021a1150752c96f57252256965d",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/build-release.log": "f172b971e17e1c44a1117ac2a4117d0df604f81c2fb11fc23f8d13af3f4f2ee3",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/build-null-debug.log": "5df5da47a5fb459b35d730dfe77d959e80a7ccd3e92aef7a95efc1f6f0ae6968",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/build-null-release.log": "954327973c8de28b97b86218dcbaf05b14d539a98e3fb5e910d8f888dcf2da34",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/gpu-baseline-release-v2/report.json": "ac7eebfe5ff6dc83eddd123e17bdf12b7e2d8fdce5a298021d9dff1e7b2ccd17",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/gpu-cached-debug/report.json": "45a3af032450e2cafdafe37e68bef1d6b6f9d0b4f7f484acfb9010853d1bc455",
+    "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/gpu-cached-release/report.json": "05a8ce0851387c2ce7f0d2bf078dc0b70d5f58711725ae604a8aed64d79786d1"
+  },
+  "gpu": {
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "extent": [
+      640,
+      360
+    ],
+    "reference": {
+      "directory": "gpu-baseline-release-v2",
+      "executableSha256": "00322d0124693c62e9aee28168d7ae3a70b3d9e334cc7176e89a2e3f14faf956"
+    },
+    "cases": [
+      {
+        "configuration": "Debug",
+        "mode": "fixed",
+        "directory": "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/gpu-cached-debug/fixed",
+        "executableSha256": "ef36dcb0909004a3d7aef76c1517e6de891ddf9e08932e30558e5efd9b379537",
+        "imageSha256": "1d0ca7b0d3d3c1c34471bb98841026fa5343200936b30c16fe3e365d6777de4f",
+        "changedPixels": 0,
+        "maximumChannelDifference": 0,
+        "cache": {
+          "requests": 32,
+          "hits": 23,
+          "uniqueTextures": 9,
+          "requestedBytes": 576,
+          "residentBytes": 164,
+          "retainedPixelBytes": 132
+        },
+        "allocator": {
+          "bufferAllocations": 48,
+          "imageAllocations": 31,
+          "liveBuffers": 32,
+          "liveImages": 31,
+          "bufferBytes": 11898208,
+          "imageBytes": 94081024,
+          "liveBufferBytes": 10846064,
+          "liveImageBytes": 94081024,
+          "deviceLocalPeakBytes": 100663296
+        },
+        "allocatorAfterUnloadZero": true,
+        "validationLogClean": true,
+        "applicationValidationLayerEnabled": true,
+        "requestedLayer": "VK_LAYER_KHRONOS_validation"
+      },
+      {
+        "configuration": "Debug",
+        "mode": "indexed",
+        "directory": "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/gpu-cached-debug/indexed",
+        "executableSha256": "ef36dcb0909004a3d7aef76c1517e6de891ddf9e08932e30558e5efd9b379537",
+        "imageSha256": "1d0ca7b0d3d3c1c34471bb98841026fa5343200936b30c16fe3e365d6777de4f",
+        "changedPixels": 0,
+        "maximumChannelDifference": 0,
+        "cache": {
+          "requests": 32,
+          "hits": 23,
+          "uniqueTextures": 9,
+          "requestedBytes": 576,
+          "residentBytes": 164,
+          "retainedPixelBytes": 132
+        },
+        "allocator": {
+          "bufferAllocations": 48,
+          "imageAllocations": 31,
+          "liveBuffers": 32,
+          "liveImages": 31,
+          "bufferBytes": 11898208,
+          "imageBytes": 94081024,
+          "liveBufferBytes": 10846064,
+          "liveImageBytes": 94081024,
+          "deviceLocalPeakBytes": 100663296
+        },
+        "allocatorAfterUnloadZero": true,
+        "validationLogClean": true,
+        "applicationValidationLayerEnabled": true,
+        "requestedLayer": "VK_LAYER_KHRONOS_validation"
+      },
+      {
+        "configuration": "Release",
+        "mode": "fixed",
+        "directory": "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/gpu-cached-release/fixed",
+        "executableSha256": "64b6c6868ee8110167ad2dc182a3aee3023f1bf8571f95b7fb9f5c0960ccefed",
+        "imageSha256": "1d0ca7b0d3d3c1c34471bb98841026fa5343200936b30c16fe3e365d6777de4f",
+        "changedPixels": 0,
+        "maximumChannelDifference": 0,
+        "cache": {
+          "requests": 32,
+          "hits": 23,
+          "uniqueTextures": 9,
+          "requestedBytes": 576,
+          "residentBytes": 164,
+          "retainedPixelBytes": 132
+        },
+        "allocator": {
+          "bufferAllocations": 48,
+          "imageAllocations": 31,
+          "liveBuffers": 32,
+          "liveImages": 31,
+          "bufferBytes": 11898208,
+          "imageBytes": 94081024,
+          "liveBufferBytes": 10846064,
+          "liveImageBytes": 94081024,
+          "deviceLocalPeakBytes": 100663296
+        },
+        "allocatorAfterUnloadZero": true,
+        "validationLogClean": true,
+        "applicationValidationLayerEnabled": false,
+        "requestedLayer": "VK_LAYER_KHRONOS_validation"
+      },
+      {
+        "configuration": "Release",
+        "mode": "indexed",
+        "directory": "build/runs/20261021-172156-native-render-evidence-623c52/material-texture-cache-cpu/gpu-cached-release/indexed",
+        "executableSha256": "64b6c6868ee8110167ad2dc182a3aee3023f1bf8571f95b7fb9f5c0960ccefed",
+        "imageSha256": "1d0ca7b0d3d3c1c34471bb98841026fa5343200936b30c16fe3e365d6777de4f",
+        "changedPixels": 0,
+        "maximumChannelDifference": 0,
+        "cache": {
+          "requests": 32,
+          "hits": 23,
+          "uniqueTextures": 9,
+          "requestedBytes": 576,
+          "residentBytes": 164,
+          "retainedPixelBytes": 132
+        },
+        "allocator": {
+          "bufferAllocations": 48,
+          "imageAllocations": 31,
+          "liveBuffers": 32,
+          "liveImages": 31,
+          "bufferBytes": 11898208,
+          "imageBytes": 94081024,
+          "liveBufferBytes": 10846064,
+          "liveImageBytes": 94081024,
+          "deviceLocalPeakBytes": 100663296
+        },
+        "allocatorAfterUnloadZero": true,
+        "validationLogClean": true,
+        "applicationValidationLayerEnabled": false,
+        "requestedLayer": "VK_LAYER_KHRONOS_validation"
+      }
+    ]
+  },
+  "cpu": {
+    "Debug": {
+      "tests": 4,
+      "passed": 4
+    },
+    "Release": {
+      "tests": 4,
+      "passed": 4
+    }
+  },
+  "limitations": [
+    "Logical texture bytes exclude GPU allocation alignment.",
+    "The cache retains unique input pixels in host memory for exact equality.",
+    "Full native-scene residency and appearance are validated separately."
+  ],
+  "provenance": {
+    "implementation": "Project-authored implementation using existing IRhi and IGpuAllocator contracts.",
+    "fixtures": "Project-authored triangle and checker pixels; CC0 1.0 as declared in assets_public/texture_sharing/README.md.",
+    "thirdPartySourceAdded": false,
+    "existingDependencies": [
+      "Vulkan",
+      "existing project glTF and image loaders"
+    ]
+  }
+}

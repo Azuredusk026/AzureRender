@@ -1,0 +1,441 @@
+{
+  "schemaVersion": 1,
+  "sourceBaseCommit": "435c8be",
+  "run": "build/runs/20261023-034902-hair-native-fragment-trace-c67167",
+  "scope": "Projected hair orientation, procedural ramp and neutral component transfer; full native visual equivalence remains pending",
+  "materialLayout": {
+    "version": 2,
+    "bytes": 192,
+    "tangentSignByteOffset": 76,
+    "textureSlots": 9,
+    "newGpuDescriptors": 0
+  },
+  "nativeFragment": {
+    "pixel": [
+      1280,
+      1244
+    ],
+    "event": 950,
+    "steps": 1869,
+    "scope": "RenderDoc selected-fragment simulation; output colour requires visible-fragment attribution",
+    "nativeInputs": {
+      "v0": [
+        1280.5,
+        1244.5,
+        0.029733559116721153,
+        3.3621113300323486
+      ],
+      "v1": [
+        0.46649450063705444,
+        0.2542416453361511
+      ],
+      "v2": [
+        -0.00036987647763453424,
+        0.814812958240509,
+        -3.3521018028259277
+      ],
+      "v3": [
+        0.8107324838638306,
+        -0.3485989272594452,
+        0.4660736918449402
+      ],
+      "v4": [
+        -0.5833499431610107,
+        -0.5381392240524292,
+        0.5957953929901123,
+        -1.0
+      ],
+      "v5": [
+        0.000659864628687501,
+        -2.4499778747558594,
+        3.3621110916137695
+      ],
+      "v6": [
+        0.0004590387106873095,
+        -2.4495391845703125,
+        3.3622491359710693
+      ],
+      "v7": [
+        0.7665539979934692,
+        -0.5431051850318909,
+        -0.33676210045814514
+      ],
+      "v8": [
+        -0.6388359069824219,
+        -0.5943140983581543,
+        -0.47278356552124023,
+        -1.0
+      ],
+      "v9": [
+        0.014628191478550434,
+        0.07120918482542038,
+        1.7039341926574707
+      ],
+      "v10": [
+        0.0
+      ],
+      "v11": [
+        "nan"
+      ]
+    },
+    "encodedNormalAfterImport": [
+      0.17773708701133728,
+      0.2401922345161438
+    ],
+    "expectedReflectedNormal": [
+      -0.811209499835968,
+      0.5455429553985596,
+      0.21052826941013336
+    ],
+    "uncompensatedNormal": [
+      -0.8561810782527237,
+      -0.24180945318661723,
+      -0.456598455529136
+    ],
+    "compensatedNormal": [
+      -0.811209415796601,
+      0.5455429810749477,
+      0.2105282392525921
+    ],
+    "uncompensatedMaximumError": 0.7873524085851769,
+    "compensatedMaximumError": 8.403936702094938e-08,
+    "nativeOutputSimulation": [
+      0.37865859270095825,
+      0.06636291742324829,
+      0.07781444489955902,
+      1.0
+    ]
+  },
+  "nativeTraceSha256": "daedbd77e7a9c3bba5637b075b1fc87c21ef8789a10f0e3f3ae092f88d0efedf",
+  "pixelHistorySha256": "04f21af68fdf45efcc3e1bc422a12f0934e5d17981ca4e80646494f83dcabfb7",
+  "capturedRamp": {
+    "schemaVersion": 1,
+    "canonicalRampRgbaSha256": "b7af9f4dbc43a290d7d8b6534655a0f28c2a99243c2044d5cc8bccb78c1af91d",
+    "nativeRgbaExact": true,
+    "kkLightTransportScale": 0.0625,
+    "variants": [
+      {
+        "name": "canonical",
+        "glbSha256": "06e4153176a9faf1d18bf6883efb8a348c949d98b5d61d1e9bbacfc06bef6a7c"
+      },
+      {
+        "name": "primary",
+        "glbSha256": "6897768f71f5a1cc5df213bb7719d52ebeacfb6ac35b485483ce285aa8b088fd"
+      },
+      {
+        "name": "secondary",
+        "glbSha256": "52b0ca6121117e7f49e409d512ecf5d9722d48e44849f469228b1acdd40d731a"
+      },
+      {
+        "name": "zero",
+        "glbSha256": "0e6a85af89040c059002984704b5365c3d1ec55ceb931492047177b02e28e73e"
+      }
+    ]
+  },
+  "linearComposition": {
+    "schemaVersion": 1,
+    "linearErrorBudget": 0.008,
+    "maximumLinearCompositionError": 0.0020394778574385902,
+    "transportLightScale": 0.0625,
+    "diagnosticDisplayMultiplier": 3,
+    "primaryPositiveMaximum": 0.06480326669290577,
+    "secondaryPositiveMaximum": 0.11697066775851084,
+    "combinedClippedPixels": 0,
+    "fixedDebugMaximumByteDifference": 0,
+    "status": "passed"
+  },
+  "gpu": {
+    "gpu-release": {
+      "status": "passed",
+      "captures": 25,
+      "playerSha256": "91da8e5439e014c0f7f2e0c2dda8895e840cb1c891a09de36328ee85e259f201",
+      "maximumLinearError": 0.002741651722259708,
+      "validationEnabled": false,
+      "summarySha256": "ff88a5978217a2472a17d384a18ae1ba4c6669d546ea5655a89934509d0484fb"
+    },
+    "gpu-debug": {
+      "status": "passed",
+      "captures": 25,
+      "playerSha256": "4aa3ebfaa7c61282221e7c01dff30d659bd49e9de6e453a07f4dbf16d03f6a54",
+      "maximumLinearError": 0.002741651722259708,
+      "validationEnabled": true,
+      "summarySha256": "2403fa39d0b4f21ecc7a92ecd99fea55a2c6293ef29c756359b09035e0bb0b76"
+    },
+    "gpu-final-release": {
+      "status": "passed",
+      "captures": 25,
+      "playerSha256": "ed5ac3cff7a3a4ab1fcea9126ea56fe170aed2583edde4b424f682355a9c07dc",
+      "maximumLinearError": 0.002741651722259708,
+      "validationEnabled": false,
+      "summarySha256": "da8a21a80e4f6a5deb5125d2354a66898e7da705b13e7282edec8d576b7b9282"
+    },
+    "line-debug": {
+      "status": "passed",
+      "captures": 15,
+      "playerSha256": "4aa3ebfaa7c61282221e7c01dff30d659bd49e9de6e453a07f4dbf16d03f6a54",
+      "maximumLinearError": 0.0016617199790341652,
+      "validationEnabled": true,
+      "summarySha256": "8b944c17bf045c457995b5499796ed42b4eec830d7d8385a96816af273e0116b"
+    },
+    "surface-release": {
+      "status": "passed",
+      "captures": 10,
+      "playerSha256": "91da8e5439e014c0f7f2e0c2dda8895e840cb1c891a09de36328ee85e259f201",
+      "maximumLinearError": 0.0013252993818627934,
+      "validationEnabled": false,
+      "summarySha256": "d94d7654cd4955cad6295ba78877802367c2f09a43839545ecab1107e0cf78c5"
+    },
+    "lut-release-v3": {
+      "captures": 7,
+      "playerSha256": "ed5ac3cff7a3a4ab1fcea9126ea56fe170aed2583edde4b424f682355a9c07dc",
+      "validationEnabled": false,
+      "componentZeroPixel": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "summarySha256": "e9ba74af9eb605bcc5cda953054525785000de83779462cbd3000e126423a33d"
+    },
+    "lut-debug-v3": {
+      "captures": 7,
+      "playerSha256": "aef9ea020c712ed7a22c89567faaca40ce1858109638f4f69f82159f1ec30ca5",
+      "validationEnabled": true,
+      "componentZeroPixel": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "summarySha256": "23e32a6a5a6caadb8f22a70372cb6d6526d6fdeccb230f969d4c46050bcb7681"
+    },
+    "legacy-final": {
+      "metrics": {
+        "hairLitMean": 193.5327380952381,
+        "hairDarkMaximum": 0,
+        "hairDisabledMaximum": 0,
+        "hairEffectDifference": 193.5327380952381,
+        "hairGreenChannels": [
+          0.0,
+          186.74744897959184,
+          0.0
+        ],
+        "fixedMaximumDifference": 0,
+        "pbr-litReferenceMaximumDifference": 0,
+        "pbr-darkReferenceMaximumDifference": 0
+      },
+      "failures": [],
+      "captures": [
+        {
+          "name": "hair-lit",
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-034902-hair-native-fragment-trace-c67167\\legacy-final\\hair-lit\\frames\\frame_000000.png",
+          "sha256": "98309a4c560131b0ef74eb9822fcef4c112e1ce1549a3e38fe44f1325733470a",
+          "validationEnabled": false
+        },
+        {
+          "name": "hair-dark",
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-034902-hair-native-fragment-trace-c67167\\legacy-final\\hair-dark\\frames\\frame_000000.png",
+          "sha256": "40ba815014874cd1b9850ce6745e5d2fd24014336761823dca8cc0e36114fa79",
+          "validationEnabled": false
+        },
+        {
+          "name": "hair-disabled",
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-034902-hair-native-fragment-trace-c67167\\legacy-final\\hair-disabled\\frames\\frame_000000.png",
+          "sha256": "40ba815014874cd1b9850ce6745e5d2fd24014336761823dca8cc0e36114fa79",
+          "validationEnabled": false
+        },
+        {
+          "name": "hair-green",
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-034902-hair-native-fragment-trace-c67167\\legacy-final\\hair-green\\frames\\frame_000000.png",
+          "sha256": "c72a71e10cb0b48fc3b55c14fb5d40240b1b05de4f91a05de2836913d8afcfbb",
+          "validationEnabled": false
+        },
+        {
+          "name": "hair-fixed",
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-034902-hair-native-fragment-trace-c67167\\legacy-final\\hair-fixed\\frames\\frame_000000.png",
+          "sha256": "98309a4c560131b0ef74eb9822fcef4c112e1ce1549a3e38fe44f1325733470a",
+          "validationEnabled": false
+        },
+        {
+          "name": "pbr-lit",
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-034902-hair-native-fragment-trace-c67167\\legacy-final\\pbr-lit\\frames\\frame_000000.png",
+          "sha256": "32c834512acf980599f97b970d4925e064871312bc7f3f502c8f3ad13ecfd177",
+          "validationEnabled": false
+        },
+        {
+          "name": "pbr-dark",
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-034902-hair-native-fragment-trace-c67167\\legacy-final\\pbr-dark\\frames\\frame_000000.png",
+          "sha256": "18886ab6a52fd64a058e540909cf6cc5ce2a6e7297f20d3bc182679182db734a",
+          "validationEnabled": false
+        }
+      ],
+      "player": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+      "playerSha256": "ed5ac3cff7a3a4ab1fcea9126ea56fe170aed2583edde4b424f682355a9c07dc"
+    }
+  },
+  "cpu": {
+    "nativeHairMath": 10,
+    "nativeCharacterProfiles": 12,
+    "characterRepairDebug": "passed",
+    "characterRepairRelease": "passed",
+    "materialDocument": "passed",
+    "materialGraph": "passed",
+    "materialGraphEditing": "passed",
+    "moduleBoundaries": "passed"
+  },
+  "actual": {
+    "actual-captures": {
+      "schemaVersion": 1,
+      "captures": [
+        {
+          "name": "positive-beauty-release",
+          "playerSha256": "91da8e5439e014c0f7f2e0c2dda8895e840cb1c891a09de36328ee85e259f201",
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-034902-hair-native-fragment-trace-c67167\\positive-beauty-release\\frames\\frame_000000.png",
+          "imageSha256": "dad866b5fee9d5899e0ea7144997df56506963debb2a0ea98bf050a8c2562dd2",
+          "validationEnabled": false
+        },
+        {
+          "name": "negative-beauty-release",
+          "playerSha256": "91da8e5439e014c0f7f2e0c2dda8895e840cb1c891a09de36328ee85e259f201",
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-034902-hair-native-fragment-trace-c67167\\negative-beauty-release\\frames\\frame_000000.png",
+          "imageSha256": "4ad945d4d03cc938bfdf64ba8b8560b18de61869ec47f5aea96d004f2d901d8f",
+          "validationEnabled": false
+        },
+        {
+          "name": "positive-hair-kk-release",
+          "playerSha256": "91da8e5439e014c0f7f2e0c2dda8895e840cb1c891a09de36328ee85e259f201",
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-034902-hair-native-fragment-trace-c67167\\positive-hair-kk-release\\frames\\frame_000000.png",
+          "imageSha256": "51ae289a011cfe3f1945c0c259a843a0f6cd1c8ce76a31bfb6454f81e31014c5",
+          "validationEnabled": false
+        },
+        {
+          "name": "negative-hair-kk-release",
+          "playerSha256": "91da8e5439e014c0f7f2e0c2dda8895e840cb1c891a09de36328ee85e259f201",
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-034902-hair-native-fragment-trace-c67167\\negative-hair-kk-release\\frames\\frame_000000.png",
+          "imageSha256": "c429bb4bfb93e1f86d293ef6158d61c242d8902ee4e3881262a76fc4bebc2d95",
+          "validationEnabled": false
+        },
+        {
+          "name": "negative-hair-kk-debug",
+          "playerSha256": "4aa3ebfaa7c61282221e7c01dff30d659bd49e9de6e453a07f4dbf16d03f6a54",
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-034902-hair-native-fragment-trace-c67167\\negative-hair-kk-debug\\frames\\frame_000000.png",
+          "imageSha256": "c429bb4bfb93e1f86d293ef6158d61c242d8902ee4e3881262a76fc4bebc2d95",
+          "validationEnabled": true
+        }
+      ],
+      "status": "passed",
+      "scope": "Early sign controls; beauty is valid, early hair-kk includes LUT and is excluded from linear acceptance"
+    },
+    "layer-captures-linear": {
+      "schemaVersion": 1,
+      "captures": [
+        {
+          "name": "canonical-beauty-release",
+          "imageSha256": "ee9ad67315997b14e7c0190155c74c5d0d4d87a0ce1820d10bec4b3b0fc48c6d",
+          "playerSha256": "ed5ac3cff7a3a4ab1fcea9126ea56fe170aed2583edde4b424f682355a9c07dc",
+          "validationEnabled": false
+        },
+        {
+          "name": "canonical-kk-release",
+          "imageSha256": "b3700dc2ffb5c30775f0246a66621880ed375da645da6584d185bf2c5ff13e27",
+          "playerSha256": "ed5ac3cff7a3a4ab1fcea9126ea56fe170aed2583edde4b424f682355a9c07dc",
+          "validationEnabled": false
+        },
+        {
+          "name": "primary-kk-release",
+          "imageSha256": "77b57e395fb1652d948cd26d322ff05b1bb643d5b4a271b426eaa676c7740257",
+          "playerSha256": "ed5ac3cff7a3a4ab1fcea9126ea56fe170aed2583edde4b424f682355a9c07dc",
+          "validationEnabled": false
+        },
+        {
+          "name": "secondary-kk-release",
+          "imageSha256": "585f20a608ff9c19d00a856b1b2be350874a419ee10785efbd254aaa55a23c28",
+          "playerSha256": "ed5ac3cff7a3a4ab1fcea9126ea56fe170aed2583edde4b424f682355a9c07dc",
+          "validationEnabled": false
+        },
+        {
+          "name": "zero-kk-release",
+          "imageSha256": "278736d8ae41fc2a4d878cbf79c5d412b4bab3fe908c4bd8bfdced6693b3f169",
+          "playerSha256": "ed5ac3cff7a3a4ab1fcea9126ea56fe170aed2583edde4b424f682355a9c07dc",
+          "validationEnabled": false
+        },
+        {
+          "name": "canonical-kk-debug",
+          "imageSha256": "b3700dc2ffb5c30775f0246a66621880ed375da645da6584d185bf2c5ff13e27",
+          "playerSha256": "aef9ea020c712ed7a22c89567faaca40ce1858109638f4f69f82159f1ec30ca5",
+          "validationEnabled": true
+        }
+      ],
+      "status": "passed"
+    },
+    "beautySignControl": {
+      "changedPixels": 16570,
+      "maximumByteDifference": 152
+    },
+    "hair-kkSignControl": {
+      "changedPixels": 14494,
+      "maximumByteDifference": 232
+    },
+    "mainProject": {
+      "schemaVersion": 1,
+      "status": "passed",
+      "playerSha256": "ed5ac3cff7a3a4ab1fcea9126ea56fe170aed2583edde4b424f682355a9c07dc",
+      "imageSha256": "b4112fc3f1d22c582f5a6e2ab07b87282ef717f51ca3a0706b46d3c3ca542763",
+      "scope": "Final frame-context and shader build; existing main-project startup, scene rendering and clean unload"
+    }
+  },
+  "nativePixelFragments": [
+    {
+      "primitive": 1017,
+      "depthTestFailed": false,
+      "shaderRgb": [
+        1.1794253587722778,
+        0.20474468171596527,
+        0.21604281663894653
+      ],
+      "attachmentRgb": [
+        1.171875,
+        0.203125,
+        0.21484375
+      ]
+    },
+    {
+      "primitive": 6378,
+      "depthTestFailed": true,
+      "shaderRgb": [
+        0.3270171880722046,
+        0.05195196717977524,
+        0.06433213502168655
+      ],
+      "attachmentRgb": [
+        1.171875,
+        0.203125,
+        0.21484375
+      ]
+    },
+    {
+      "primitive": 6841,
+      "depthTestFailed": true,
+      "shaderRgb": [
+        0.37865856289863586,
+        0.06636291742324829,
+        0.07781444489955902
+      ],
+      "attachmentRgb": [
+        1.171875,
+        0.203125,
+        0.21484375
+      ]
+    }
+  ],
+  "programs": {
+    "mesh.frag.spv": "777b0449879e83343ef571fdeabd9fae8634e2bb197aad9f768fb561a9a6bb2a",
+    "mesh_bindless.frag.spv": "15117c0b6a02347761b73779f0f48e1145992533df27865b0338622880537ab3"
+  },
+  "remaining": [
+    "Visible-fragment full colour comparison",
+    "Native parameter/normal mip and sampler agreement",
+    "Per-material illumination and shadow/rim terms",
+    "Overlay depth/stencil rules",
+    "Head-turn and front/side/rear views",
+    "Main-project promotion"
+  ]
+}

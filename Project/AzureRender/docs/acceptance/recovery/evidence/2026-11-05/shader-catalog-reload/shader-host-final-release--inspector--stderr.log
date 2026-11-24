@@ -1,0 +1,34 @@
+[1793833381198][info][editor][code=0] Opened scene: inspection
+[1793833382401][info][startup][code=0] Starting logical device
+[1793833382691][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1793833382692][info][startup][code=0] Completed logical device in 290 ms
+[1793833382692][info][startup][code=0] Starting shadow resources
+[1793833382696][info][startup][code=0] Completed shadow resources in 3 ms
+[1793833382977][info][startup][code=0] Starting graphics pipelines
+[1793833382983][info][startup][code=0] Completed graphics pipelines in 5 ms
+[1793833382984][info][startup][code=0] Starting scene renderer
+[1793833382988][info][render][code=0] Character texture access: indexed, requested slots=29, stage sampler limit=1048576
+[1793833382996][info][render][code=0] Scene load CPU preparation: 10.942900 ms, materialPixelBytes=348
+[1793833383011][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1793833383014][info][render][code=0] Scene load shared textures: 12.892600 ms
+[1793833383014][info][render][code=0] Scene load buffers: 0.051100 ms
+[1793833383015][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1793833383015][info][render][code=0] Scene load skinning: 0.984900 ms
+[1793833383019][info][render][code=0] Scene load descriptors: 3.448900 ms
+[1793833383041][info][render][code=0] Scene load pipelines: 21.428400 ms
+[1793833383041][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=true
+[1793833383041][info][startup][code=0] Completed scene renderer in 56 ms
+[1793833383041][info][startup][code=0] Starting editor interface
+[1793833383061][info][startup][code=0] Completed editor interface in 19 ms
+[1793833383061][info][startup][code=0] Starting developer views
+[1793833383325][info][startup][code=0] Completed developer views in 263 ms
+[1793833429721][info][render][code=0] Character texture access: indexed, requested slots=29, stage sampler limit=1048576
+[1793833429721][info][render][code=0] Scene load CPU preparation: 2.953600 ms, materialPixelBytes=348
+[1793833429742][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1793833429745][info][render][code=0] Scene load shared textures: 17.215500 ms
+[1793833429745][info][render][code=0] Scene load buffers: 0.044100 ms
+[1793833429746][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1793833429746][info][render][code=0] Scene load skinning: 0.639500 ms
+[1793833429751][info][render][code=0] Scene load descriptors: 4.206700 ms
+[1793833429756][info][render][code=0] Scene load pipelines: 4.947800 ms
+[1793833429756][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=true

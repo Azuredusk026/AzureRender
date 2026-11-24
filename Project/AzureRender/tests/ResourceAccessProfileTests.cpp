@@ -1,0 +1,170 @@
+#include "render/ResourceAccessProfile.hpp"
+#include "render/ResourceIndexTable.hpp"
+#include "rhi/NullRhi.hpp"
+#include <iostream>
+#include <limits>
+#include <memory>
+#include <stdexcept>
+
+using namespace azurerender;
+namespace {
+void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
+template<class F> void rejects(F function,const char* message){bool failed=false;try{function();}catch(const std::exception&){failed=true;}require(failed,message);}
+struct OwnedBuffer {
+    rhi::IGpuAllocator& allocator;
+    rhi::GpuBuffer buffer;
+    explicit OwnedBuffer(rhi::IGpuAllocator& value):allocator(value),buffer(value.createBuffer(32,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true)){}
+    ~OwnedBuffer(){allocator.destroyBuffer(buffer);}
+};
+}
+int main(){
+    try {
+        DeviceCapabilities device;
+        device.descriptorIndexingSupported=true;device.descriptorIndexingEnabled=true;
+        auto& limits=device.limits;
+        limits.maxPerStageDescriptorSamplers=64;limits.maxDescriptorSetSamplers=64;
+        limits.maxPerStageDescriptorSampledImages=64;limits.maxDescriptorSetSampledImages=64;
+        limits.maxPerStageResources=128;
+        ResourceAccessRequirements request{35,11,4};
+        require(ResourceAccessProfile::select(device,request).mode==ResourceAccessMode::Indexed,"Valid indexed layout rejected");
+        auto shared=device;
+        shared.limits.maxPerStageDescriptorSamplers=16;shared.limits.maxDescriptorSetSamplers=16;
+        ResourceAccessRequirements sharedDepth{17,17,7};
+        sharedDepth.separateImageSlots=sharedDepth.fixedSeparateImageSlots=2;
+        sharedDepth.separateSamplerSlots=sharedDepth.fixedSeparateSamplerSlots=1;
+        require(ResourceAccessProfile::select(shared,sharedDepth).mode==ResourceAccessMode::Indexed,
+            "Seventeen images sharing sixteen samplers must use independent limits");
+        auto splitStages=shared;splitStages.limits.maxDescriptorSetSamplers=17;
+        splitStages.limits.maxDescriptorSetSampledImages=18;
+        auto vertexRequest=sharedDepth;vertexRequest.vertexCombinedImageSamplers=1;
+        vertexRequest.fixedVertexCombinedImageSamplers=1;vertexRequest.vertexBuffers=5;
+        require(ResourceAccessProfile::select(splitStages,vertexRequest).mode==ResourceAccessMode::Indexed,
+            "Vertex and fragment samplers need independent stage budgets and a shared set budget");
+        auto limitedSet=splitStages;limitedSet.limits.maxDescriptorSetSamplers=16;
+        require(ResourceAccessProfile::select(limitedSet,vertexRequest).mode==ResourceAccessMode::Unsupported,
+            "Vertex-only samplers must count against the descriptor set");
+        limitedSet=splitStages;limitedSet.limits.maxDescriptorSetSampledImages=17;
+        require(ResourceAccessProfile::select(limitedSet,vertexRequest).mode==ResourceAccessMode::Unsupported,
+            "Vertex-only images must count against the descriptor set");
+        auto indexedVertex=vertexRequest;indexedVertex.vertexCombinedImageSamplers=17;
+        auto vertexStageDevice=splitStages;vertexStageDevice.limits.maxDescriptorSetSamplers=64;
+        vertexStageDevice.limits.maxDescriptorSetSampledImages=64;
+        require(ResourceAccessProfile::select(vertexStageDevice,indexedVertex).mode==ResourceAccessMode::Fixed,
+            "A vertex array exceeding the stage budget must select the fixed layout");
+        indexedVertex.fixedVertexCombinedImageSamplers=17;
+        require(ResourceAccessProfile::select(vertexStageDevice,indexedVertex).mode==ResourceAccessMode::Unsupported,
+            "Both layout stages must fit the device");
+        auto tooManyVertexBuffers=vertexRequest;tooManyVertexBuffers.vertexBuffers=128;
+        require(ResourceAccessProfile::select(splitStages,tooManyVertexBuffers).mode==ResourceAccessMode::Unsupported,
+            "Vertex buffers must count against total stage resources");
+        auto attachmentRequest=sharedDepth;attachmentRequest.fragmentColorAttachments=2;
+        auto attachmentDevice=shared;attachmentDevice.limits.maxPerStageResources=25;
+        require(ResourceAccessProfile::select(attachmentDevice,attachmentRequest).mode==ResourceAccessMode::Unsupported,"Fragment color attachments must count against total stage resources");
+        attachmentDevice.limits.maxPerStageResources=26;
+        require(ResourceAccessProfile::select(attachmentDevice,attachmentRequest).mode==ResourceAccessMode::Indexed,"Exact stage capacity must include color attachments without double counting samplers");
+        attachmentRequest.fragmentColorAttachments=std::numeric_limits<std::uint64_t>::max();
+        require(ResourceAccessProfile::select(attachmentDevice,attachmentRequest).mode==ResourceAccessMode::Unsupported,"Attachment resource arithmetic must not overflow");
+        auto fewerImages=shared;fewerImages.limits.maxPerStageDescriptorSampledImages=16;
+        require(ResourceAccessProfile::select(fewerImages,sharedDepth).mode==ResourceAccessMode::Unsupported,"Sampled-image capacity must remain independently bounded");
+        auto fewerSamplers=shared;fewerSamplers.limits.maxPerStageDescriptorSamplers=15;
+        require(ResourceAccessProfile::select(fewerSamplers,sharedDepth).mode==ResourceAccessMode::Unsupported,"Shared samplers must retain their sampler capacity check");
+        auto malformed=sharedDepth;malformed.separateImageSlots=18;
+        rejects([&]{ResourceAccessProfile::select(shared,malformed);},"Separate images cannot exceed total image descriptors");
+        malformed=sharedDepth;malformed.separateSamplerSlots=std::numeric_limits<std::uint64_t>::max();
+        rejects([&]{ResourceAccessProfile::select(shared,malformed);},"Separate sampler arithmetic must not overflow");
+        for(unsigned field=0;field<5;++field){
+            auto bounded=device;
+            std::uint32_t* capacities[]={&bounded.limits.maxPerStageDescriptorSamplers,&bounded.limits.maxDescriptorSetSamplers,
+                &bounded.limits.maxPerStageDescriptorSampledImages,&bounded.limits.maxDescriptorSetSampledImages,&bounded.limits.maxPerStageResources};
+            *capacities[field]=field==4?38U:34U;
+            const auto selection=ResourceAccessProfile::select(bounded,request);
+            require(selection.mode==ResourceAccessMode::Fixed && !selection.diagnostic.empty(),"Each independent limit must select fixed access");
+        }
+        auto unsupported=device;unsupported.descriptorIndexingEnabled=false;
+        require(ResourceAccessProfile::select(unsupported,request).mode==ResourceAccessMode::Fixed,"Supported feature must also be enabled");
+        unsupported=device;unsupported.descriptorIndexingSupported=false;
+        require(ResourceAccessProfile::select(unsupported,request).mode==ResourceAccessMode::Fixed,"Missing descriptor feature must use fixed access");
+        unsupported=device;unsupported.limits={};
+        require(ResourceAccessProfile::select(unsupported,request).mode==ResourceAccessMode::Fixed,"Unknown limits must use portable fixed access");
+        unsupported=device;unsupported.limits.maxPerStageDescriptorSamplers=10;
+        require(ResourceAccessProfile::select(unsupported,request).mode==ResourceAccessMode::Unsupported,"Impossible fixed layout must be diagnosed");
+        auto address=request;address.requireDeviceAddress=true;
+        device.deviceAddressSupported=true;
+        require(ResourceAccessProfile::select(device,address).mode==ResourceAccessMode::Unsupported,"Address support alone is insufficient");
+        device.deviceAddressEnabled=true;
+        require(ResourceAccessProfile::select(device,address).mode==ResourceAccessMode::Unsupported,"Allocator address flag is required");
+        device.allocatorDeviceAddressEnabled=true;
+        require(ResourceAccessProfile::select(device,address).deviceAddress,"Enabled address contract must be observable");
+        auto updates=request;updates.requireUpdateAfterBind=true;
+        require(ResourceAccessProfile::select(device,updates).mode==ResourceAccessMode::Unsupported,"In-flight descriptor mutation requires an enabled contract");
+        auto updating=device;updating.updateAfterBindSupported=true;updating.updateAfterBindEnabled=true;
+        auto& updateLimits=updating.indexingLimits;
+        updateLimits.maxPerStageDescriptorUpdateAfterBindSamplers=64;
+        updateLimits.maxDescriptorSetUpdateAfterBindSamplers=64;
+        updateLimits.maxPerStageDescriptorUpdateAfterBindSampledImages=64;
+        updateLimits.maxDescriptorSetUpdateAfterBindSampledImages=64;
+        updateLimits.maxPerStageUpdateAfterBindResources=64;
+        updateLimits.maxUpdateAfterBindDescriptorsInAllPools=64;
+        updating.limits.maxPerStageDescriptorSamplers=16;
+        require(ResourceAccessProfile::select(updating,updates).mode==ResourceAccessMode::Indexed,
+            "Update-after-bind layouts must use their separately queried limits");
+        updateLimits.maxUpdateAfterBindDescriptorsInAllPools=38;
+        require(ResourceAccessProfile::select(updating,updates).mode==ResourceAccessMode::Unsupported,
+            "Update-after-bind pool-wide capacity must be checked");
+        auto sharedUpdates=sharedDepth;sharedUpdates.requireUpdateAfterBind=true;
+        updateLimits.maxUpdateAfterBindDescriptorsInAllPools=24;
+        require(ResourceAccessProfile::select(updating,sharedUpdates).mode==ResourceAccessMode::Unsupported,"Standalone samplers must count against pool-wide descriptor capacity");
+        updateLimits.maxUpdateAfterBindDescriptorsInAllPools=25;
+        require(ResourceAccessProfile::select(updating,sharedUpdates).mode==ResourceAccessMode::Indexed,"Exact separate-descriptor pool capacity must remain valid");
+        sharedUpdates.fragmentColorAttachments=2;updateLimits.maxPerStageUpdateAfterBindResources=25;
+        require(ResourceAccessProfile::select(updating,sharedUpdates).mode==ResourceAccessMode::Unsupported,"Update-after-bind stage totals must include color attachments");
+        updateLimits.maxPerStageUpdateAfterBindResources=26;
+        require(ResourceAccessProfile::select(updating,sharedUpdates).mode==ResourceAccessMode::Indexed,"Color attachments must not consume descriptor pool slots");
+        auto stagedUpdates=sharedUpdates;stagedUpdates.vertexCombinedImageSamplers=1;
+        stagedUpdates.fixedVertexCombinedImageSamplers=1;stagedUpdates.vertexBuffers=5;
+        stagedUpdates.descriptorSetBuffers=13;updateLimits.maxUpdateAfterBindDescriptorsInAllPools=31;
+        require(ResourceAccessProfile::select(updating,stagedUpdates).mode==ResourceAccessMode::Unsupported,
+            "Pool capacity must include vertex descriptors and the distinct buffer bindings");
+        updateLimits.maxUpdateAfterBindDescriptorsInAllPools=32;
+        require(ResourceAccessProfile::select(updating,stagedUpdates).mode==ResourceAccessMode::Indexed,
+            "Exact combined-stage pool capacity must remain valid");
+        auto huge=request;huge.sampledImageSlots=std::numeric_limits<std::uint64_t>::max();
+        require(ResourceAccessProfile::select(device,huge).mode==ResourceAccessMode::Fixed,"Resource sums must not overflow");
+        auto invalid=request;invalid.fixedSampledImageSlots=0;
+        rejects([&]{ResourceAccessProfile::select(device,invalid);},"Empty fixed layout must be rejected");
+
+        rhi::NullRhi backend;
+        ResourceIndexTable<OwnedBuffer> table(2);
+        auto first=table.insert(std::make_shared<OwnedBuffer>(backend.allocator()));
+        auto snapshot=table.acquire(first,7);
+        const auto second=table.replace(first,std::make_shared<OwnedBuffer>(backend.allocator()));
+        require(second.slot!=first.slot,"In-flight replacement must use a new slot");
+        rejects([&]{table.acquire(first,8);},"Retired handle must be rejected immediately");
+        require(backend.allocator().statistics().liveBuffers==2,"In-flight resource owner was released prematurely");
+        snapshot.resource.reset();table.collect(6);
+        require(backend.allocator().statistics().liveBuffers==2,"Fence retirement occurred too early");
+        table.collect(7);
+        require(backend.allocator().statistics().liveBuffers==1,"Completed resource was not released");
+        auto secondSnapshot=table.acquire(second,8);secondSnapshot.resource.reset();
+        const auto third=table.replace(second,std::make_shared<OwnedBuffer>(backend.allocator()));
+        require(third.slot==first.slot && third.generation!=first.generation,"Reused slots require a new generation");
+        rejects([&]{table.acquire(first,9);},"ABA handle must remain stale after reuse");
+        table.collect(8);table.erase(third);table.collect(8);
+        require(backend.allocator().statistics().liveBuffers==0,"Resource index table leaked allocation owners");
+        rejects([&]{table.collect(7);},"Completed serial must be monotonic");
+        ResourceIndexTable<int> one(1),other(1);
+        const auto handle=one.insert(std::make_shared<const int>(1));
+        const auto foreign=other.insert(std::make_shared<const int>(2));
+        rejects([&]{one.acquire(foreign,1);},"Handles from another table must be rejected");
+        auto retained=one.acquire(handle,2);retained.resource.reset();
+        rejects([&]{one.replace(handle,std::make_shared<const int>(3));},"Full in-flight table must reject replacement");
+        require(*one.acquire(handle,2).resource==1,"Failed replacement must retain active resource");
+        one.collect(2);
+        const auto replaced=one.replace(handle,std::make_shared<const int>(4));
+        require(replaced.slot==handle.slot && replaced.generation!=handle.generation,"Completed slot can be replaced safely");
+        rejects([&]{one.acquire(replaced,1);},"Submission serial must not precede completion");
+        one.erase(replaced);one.collect(2);other.erase(foreign);other.collect(0);
+        require(one.liveCount()==0 && one.retiredCount()==0,"Logical resource slots leaked");
+        std::cout<<"Device limits, enabled capabilities, immutable index generations and fence retirement passed\n";
+    }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}
+}

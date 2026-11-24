@@ -1,0 +1,29 @@
+{
+  "root": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui5\\diagnostics-green\\run-de0c8993",
+  "passed": true,
+  "workflows": [
+    {
+      "project": "scene_inspector",
+      "size": [
+        1120,
+        720
+      ],
+      "activeError": true,
+      "toolbarAccessible": true,
+      "errorDismiss": true
+    },
+    {
+      "project": "exploration",
+      "size": [
+        1120,
+        720
+      ],
+      "activeError": true,
+      "toolbarAccessible": true,
+      "errorDismiss": true
+    }
+  ],
+  "levelFilter": false,
+  "input": "production ImGui replay",
+  "physicalInput": "not performed"
+}

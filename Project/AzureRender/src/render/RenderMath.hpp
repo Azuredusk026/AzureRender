@@ -1,0 +1,13 @@
+#pragma once
+#include "render/LinearMath.hpp"
+#include <vulkan/vulkan.h>
+namespace azurerender::internal {
+inline void vkCheck(const VkResult result, const char* operation) {
+    if (result != VK_SUCCESS) {
+        throw std::runtime_error(
+            std::string(operation) + " failed with VkResult "
+            + std::to_string(result));
+    }
+}
+
+}  // namespace azurerender::internal

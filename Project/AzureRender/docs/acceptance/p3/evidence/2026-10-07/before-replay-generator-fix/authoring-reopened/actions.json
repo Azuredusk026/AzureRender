@@ -1,0 +1,1 @@
+[{"frame": 1, "command": "select", "id": "hero:body"}, {"frame": 2, "command": "component-field", "type": "azure.transform", "field": "translation", "value": [0, 0, 4]}, {"frame": 3, "command": "undo"}, {"frame": 4, "command": "play"}, {"frame": 14, "command": "stop"}, {"frame": 15, "command": "save"}]

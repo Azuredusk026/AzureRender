@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "status": "task-local-temporary-storage-verified",
+  "sourceBase": "74b4dfc",
+  "toolTests": {
+    "run": 54,
+    "passed": 53,
+    "skipped": 1,
+    "finalScopedPassed": 3
+  },
+  "temporaryProbe": {
+    "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-090934-managed-temporary-storage-6b0786\\tmp\\tmpsti_h4q1\\probe.bin",
+    "bytes": 30,
+    "environment": {
+      "TEMP": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-090934-managed-temporary-storage-6b0786\\tmp",
+      "TMP": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-090934-managed-temporary-storage-6b0786\\tmp",
+      "TMPDIR": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-090934-managed-temporary-storage-6b0786\\tmp",
+      "SQLITE_TMPDIR": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-090934-managed-temporary-storage-6b0786\\tmp"
+    }
+  },
+  "processReceipt": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 1.2339999999967404,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:/Projects/FYP/Project/AzureRender/build/reinstall-environment/venv/Scripts/python.exe",
+      "-X",
+      "utf8",
+      "D:/Projects/FYP/Project/AzureRender/build/runs/20261108-090934-managed-temporary-storage-6b0786/temporary_probe.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-090934-managed-temporary-storage-6b0786\\tmp"
+  },
+  "skillFiles": [
+    {
+      "path": "SKILL.md",
+      "bytes": 5673,
+      "sha256": "19d178e7f3d15d654dd21007b4432f67c9df6ca8bf7a626b92ba32d7699abd19"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "bytes": 259,
+      "sha256": "1c94f9997499c4c4e59f19bfb026e91454486fced9259d561b44b95ab7c8b56a"
+    },
+    {
+      "path": "references/legacy-recovery.md",
+      "bytes": 2746,
+      "sha256": "05ae3685952e4e299ea282606a69709906b2e4e0547088c007335710053ed2e3"
+    },
+    {
+      "path": "scripts/maintain.py",
+      "bytes": 1346,
+      "sha256": "3b1649fcdfdf58aeb1c1b713b02a83d5ed842b9aa01ec11dfa9ed0677de63b9f"
+    }
+  ],
+  "cDriveProjectArchiveFiles": 0,
+  "dailySchedule": {
+    "id": "azurerender",
+    "name": "AzureRender 每日产物维护",
+    "status": "ACTIVE",
+    "rrule": "DTSTART;TZID=Asia/Shanghai:20261108T100000\nRRULE:FREQ=DAILY;BYHOUR=10;BYMINUTE=0",
+    "notification_policy": "failed_runs_only",
+    "cwds": null
+  },
+  "scheduleObservedExecuting": false,
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "sha256": "554503565e029ee3a28f236714229f78df8423c89c1309e0775bed296620618c"
+    },
+    {
+      "configuration": "debug",
+      "sha256": "f18253cd9eea593935afd670ddf6402112856643ce7cdd358646cd8cb45a7c8c"
+    }
+  ],
+  "unchangedProducts": 1468,
+  "unchangedRuntimeFiles": 754,
+  "unchangedProjectInputs": 1729,
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "volumeFreeBytes": 142053273600,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 131248,
+  "evidenceSha256": "c12874626146f69a51da14f662502c2f4b92751cc2f4edad245e6259658dbb13"
+}

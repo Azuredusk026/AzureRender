@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "backend": "nativeaot",
+  "configuration": "Debug",
+  "workflows": [
+    {
+      "workflow": "annotation",
+      "translation": [
+        4.0,
+        5.0,
+        6.0
+      ],
+      "activeScripts": 1
+    },
+    {
+      "workflow": "controller",
+      "translation": [
+        0.0,
+        0.0,
+        -2.5858068466186523
+      ],
+      "activeScripts": 1
+    }
+  ],
+  "previewRestored": true,
+  "package": null,
+  "inputs": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\managed-workflows\\nativeaot\\managed-inputs-au0wbo88"
+}

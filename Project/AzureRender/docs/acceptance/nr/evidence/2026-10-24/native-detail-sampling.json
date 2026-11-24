@@ -1,0 +1,305 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "baseCommit": "e5c2c85",
+  "run": "build/runs/20261024-162103-native-hair-motion-response-580cde",
+  "scope": "Shared high-frequency metric, native sampling investigation and offline rotated four-sample prediction; GPU multisampling implementation remains planned",
+  "cpuIndependentTests": 5,
+  "configurations": {
+    "debug": {
+      "registeredMetricCheck": true,
+      "logSha256": "75e66a232302d08a480153be71b5012171860f7353b169162fedb5467e2cb6de"
+    },
+    "release": {
+      "registeredMetricCheck": true,
+      "logSha256": "262ee3b7ba5833ce55f3aaf20c3a35c1ea59d860b39b9c185d37b3ed9026aaeb"
+    }
+  },
+  "metricRedSha256": "c85f5c06dea8217b855187eb5bc5ce87878873ff075a0a631c8eaf85e5e86331",
+  "metricGreenSha256": "ae7797158be8a9377103248bed634b40246a4ddfaf6865df626486b309209e24",
+  "frozenSequenceCompatibility": [
+    {
+      "case": "fading-release",
+      "maximumDifference": 0.0
+    },
+    {
+      "case": "fade-cycle-release-v2",
+      "maximumDifference": 0.0
+    }
+  ],
+  "baseline": {
+    "errorRatio": 0.6787668466567993,
+    "residualChangeRatio": 0.5058115720748901,
+    "highFrequencyRange": [
+      0.28648999333381653,
+      0.9299867749214172
+    ]
+  },
+  "rejectedCandidates": {
+    "half-response": {
+      "aggregatePassed": true,
+      "highFrequencyPassed": false,
+      "movingEnergyRange": [
+        0.9944741725921631,
+        0.9970166683197021
+      ],
+      "errorRatio": 0.7139651775360107,
+      "residualChangeRatio": 0.7196592092514038,
+      "highFrequencyRange": [
+        0.5411009192466736,
+        0.9994773864746094
+      ],
+      "metricsSha256": "c572fb4daf15a5e475a689552d58ba67f438c492afe1d5aa35cfe443ac67fe36",
+      "captureReceiptSha256": "221b9fc4ab9163ee10e44a4c98b0f7638363c4eaf72761cfbb41c290a178fc74"
+    },
+    "strong-response": {
+      "aggregatePassed": false,
+      "highFrequencyPassed": false,
+      "movingEnergyRange": [
+        0.9944862723350525,
+        0.9976891875267029
+      ],
+      "errorRatio": 0.8635416626930237,
+      "residualChangeRatio": 0.9707473516464233,
+      "highFrequencyRange": [
+        0.58652663230896,
+        1.1551936864852905
+      ],
+      "metricsSha256": "7da991465a137f41d4708cbb4d8b22a7509ad079e1949dedec878f9e3714cfd0",
+      "captureReceiptSha256": "c3cca9c4a9a7f99a87c809debfa7f755e570a5e358714cd324df7a3992009120"
+    },
+    "smooth-integral": {
+      "aggregatePassed": true,
+      "highFrequencyPassed": false,
+      "movingEnergyRange": [
+        0.9944741725921631,
+        0.9970166683197021
+      ],
+      "errorRatio": 0.7139651775360107,
+      "residualChangeRatio": 0.7196592092514038,
+      "highFrequencyRange": [
+        0.5411009192466736,
+        0.9994773864746094
+      ],
+      "metricsSha256": "c572fb4daf15a5e475a689552d58ba67f438c492afe1d5aa35cfe443ac67fe36",
+      "captureReceiptSha256": "221b9fc4ab9163ee10e44a4c98b0f7638363c4eaf72761cfbb41c290a178fc74"
+    },
+    "smooth-0.05-responsive": {
+      "aggregatePassed": true,
+      "highFrequencyPassed": false,
+      "movingEnergyRange": [
+        0.9944741725921631,
+        0.997032642364502
+      ],
+      "errorRatio": 0.7140113711357117,
+      "residualChangeRatio": 0.719726026058197,
+      "highFrequencyRange": [
+        0.5411306619644165,
+        0.999470055103302
+      ],
+      "metricsSha256": "24a7e2361f76fc5ef7c46127d54044bef6d0a0db0983062e2effbffef068dd87",
+      "captureReceiptSha256": "96cf022ab6b32ad7111ef8181f88b22057881445f4b8bc88f5f2f6584a1edd55"
+    },
+    "smooth-0.1-responsive": {
+      "aggregatePassed": true,
+      "highFrequencyPassed": false,
+      "movingEnergyRange": [
+        0.9938202500343323,
+        0.9969860315322876
+      ],
+      "errorRatio": 0.7067492008209229,
+      "residualChangeRatio": 0.7100993394851685,
+      "highFrequencyRange": [
+        0.5440428853034973,
+        1.0014145374298096
+      ],
+      "metricsSha256": "777b04d9a9624d11f07273537f51ed2e1b9599414ec9c6681fe499ac7f9dfa25",
+      "captureReceiptSha256": "ba745843ad802570095e93d61ce858aa1887317fc8d9554e08d3b44c48cf373f"
+    }
+  },
+  "gradient": {
+    "metrics": {
+      "encoding": "log2-gradient-times-1/16-plus-0.5",
+      "rows": [
+        {
+          "region": "crown",
+          "pixels": 1903,
+          "gradientQuantiles": [
+            [
+              0.005797397345304489,
+              0.007147649303078651,
+              0.008896274492144585
+            ],
+            [
+              0.06843730062246323,
+              0.05737233906984329,
+              0.12211052775383006
+            ],
+            [
+              0.20340175926685333,
+              0.20340175926685333,
+              0.4022494852542877
+            ],
+            [
+              0.9052161574363708,
+              0.9052161574363708,
+              1.9098347425460815
+            ],
+            [
+              11.86700439453125,
+              11.86700439453125,
+              23.208908081054688
+            ]
+          ],
+          "combinedFractionBelow": {
+            "0.01": 0.0005254860746190226,
+            "0.05": 0.0005254860746190226,
+            "0.1": 0.06200735680504467,
+            "0.25": 0.33158171308460327,
+            "0.5": 0.5727798213347346,
+            "1": 0.8118759852863899
+          }
+        },
+        {
+          "region": "hair",
+          "pixels": 4025,
+          "gradientQuantiles": [
+            [
+              0.00390625,
+              0.00390625,
+              0.00390625
+            ],
+            [
+              0.07845263928174973,
+              0.0715954378247261,
+              0.14808014035224915
+            ],
+            [
+              0.2268865555524826,
+              0.2268865555524826,
+              0.4534605145454407
+            ],
+            [
+              1.1035126447677612,
+              1.1035126447677612,
+              2.2007551193237305
+            ],
+            [
+              12.882798194885254,
+              12.882798194885254,
+              25.29479217529297
+            ]
+          ],
+          "combinedFractionBelow": {
+            "0.01": 0.003975155279503106,
+            "0.05": 0.003975155279503106,
+            "0.1": 0.04074534161490683,
+            "0.25": 0.25490683229813665,
+            "0.5": 0.5376397515527951,
+            "1": 0.7701863354037267
+          }
+        }
+      ]
+    },
+    "metricsSha256": "929e77221a0aa2bc211d1c5599ac095b67f3bdff15d81759b82d04133b597356",
+    "captureManifestSha256": "5a5e81c1e9ff9422d78a354d99080ef9775759e17d6d1fe9ce1422d198fe5b53"
+  },
+  "offlinePrediction": {
+    "scope": "Ideal four rotated sample resolve selected from actual fourfold captures; not a hardware multisample implementation",
+    "sampleIndicesYX": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        2
+      ]
+    ],
+    "metricsSha256": "b0973d645dac71328d8b6a2ec5e37910387e1903fd6241c4155e3c80ce06ca48",
+    "rows": {
+      "cutout": {
+        "passed": true,
+        "movingEnergyRange": [
+          0.9979216518002658,
+          1.0026872255778119
+        ],
+        "lastEightEnergyRange": [
+          1.0001477732281803,
+          1.0001477732281803
+        ],
+        "errorRatio": 0.11541849286729143,
+        "residualChangeRatio": 0.12251925135371744,
+        "edgeErrorRatio": 0.08325816514962962,
+        "detailRange": [
+          1.0084971412210633,
+          1.058453375019974
+        ]
+      },
+      "native": {
+        "passed": true,
+        "movingEnergyRange": [
+          0.9995441856238906,
+          1.000445424827953
+        ],
+        "lastEightEnergyRange": [
+          0.99985429425286,
+          0.99985429425286
+        ],
+        "errorRatio": 0.24316278757129506,
+        "residualChangeRatio": 0.34532714924622465,
+        "edgeErrorRatio": null,
+        "detailRange": [
+          0.9777298356656795,
+          1.0111821340492726
+        ]
+      },
+      "cloth": {
+        "passed": true,
+        "movingEnergyRange": [
+          1.0,
+          1.0
+        ],
+        "lastEightEnergyRange": [
+          1.0,
+          1.0
+        ],
+        "errorRatio": 5.4932910072598894e-05,
+        "residualChangeRatio": 1.193788198521674e-06,
+        "edgeErrorRatio": 1.9665394787895315e-15,
+        "detailRange": null
+      }
+    }
+  },
+  "runtimeShaders": {
+    "restoredToBaseCommit": true,
+    "count": 85,
+    "crossConfigurationIdentical": true,
+    "frozenFingerprintSha256": "534ee92f0db62e8b84165c2b5d7f11b6ad6b459cb0f9d6bb114a395c5bb27b5e"
+  },
+  "sourceHashes": {
+    "tools/temporal_coverage_metrics.py": "5dc8851cfb595f1f4068116ecb2bac4d02395a21c234d22d5a59c4a720963948",
+    "tools/test_temporal_coverage_metrics.py": "64a16d2ab905190854d64ea6d586c1a5d2d5d6a527547a2442827e64b4f4e2a6",
+    "tools/test_temporal_alpha_coverage_gpu.py": "5fa4f9671085815da945b280565aa49702c864fdea528b51a1d640f27c804589"
+  },
+  "referenceScripts": {
+    "measure_native.py": "8237b1a903ff88d536489c6b909e6e3bcf928caac9865f9a293a0254422353e6",
+    "probe_rotated_samples.py": "dd5743f86a5bd8fdfe386a3da72d4f8aabd1588ff121b6431f20f1172c03a651",
+    "capture_candidate.py": "1ecf465f84cbe99980c30380180ccce313a4839328e714bc53e13b883c1d5230",
+    "capture_gradients.py": "b378ab0c4a5479716e883e68307748d412021554994d062fd5035d3033b41802"
+  },
+  "remaining": [
+    "RHI sample-count and sample-shading support",
+    "Actual GPU geometric four-sample shading and resolve",
+    "Main/auxiliary view, material, snapshots and outlines",
+    "NR7-AA5/AA6 and NR0-NR12 joint acceptance"
+  ]
+}

@@ -1,0 +1,20 @@
+..F..
+======================================================================
+FAIL: test_help_describe_and_unknown_target (__main__.CliTests.test_help_describe_and_unknown_target)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_azure_cli.py", line 51, in test_help_describe_and_unknown_target
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 2 != 0 : usage: Thin command entry for configured engine builds and production validation.
+       [-h] [--preset PRESET] [--target TARGET] [--json] [--endpoint ENDPOINT]
+       [--token-env TOKEN_ENV] [--request REQUEST] [--name NAME]
+       [--label LABEL] [--script SCRIPT] [--report REPORT]
+       {doctor,build,run,test,describe,shot,capture,query,edit,validate,package,provenance}
+       ...
+Thin command entry for configured engine builds and production validation.: error: Runtime arguments require --
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.585s
+
+FAILED (failures=1)

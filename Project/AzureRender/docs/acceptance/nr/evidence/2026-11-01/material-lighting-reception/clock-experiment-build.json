@@ -1,0 +1,66 @@
+{
+  "status": "compiled-isolated-clock-controls",
+  "variants": [
+    {
+      "mode": "original",
+      "shader": "unlit-clock-experiment/original.spv",
+      "sha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-clock-experiment\\original\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-clock-experiment\\original.spv"
+      ]
+    },
+    {
+      "mode": "tau-minus",
+      "shader": "unlit-clock-experiment/tau-minus.spv",
+      "sha256": "8161c999cc6eb8473701b5234bc4ad6f3eec5121acf49cd2d75fa02b3df6a5a5",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-clock-experiment\\tau-minus\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-clock-experiment\\tau-minus.spv"
+      ]
+    },
+    {
+      "mode": "tau-plus",
+      "shader": "unlit-clock-experiment/tau-plus.spv",
+      "sha256": "03adf365e9788e6fc1f2c426f487d1e7cf6cdbd3b810499d47e206450145b1c8",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-clock-experiment\\tau-plus\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-clock-experiment\\tau-plus.spv"
+      ]
+    },
+    {
+      "mode": "precise-uv",
+      "shader": "unlit-clock-experiment/precise-uv.spv",
+      "sha256": "29e6ad915d94aea8509ad0f6315e0af66084bf6eac3636ab0a1234267a26da18",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-clock-experiment\\precise-uv\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-clock-experiment\\precise-uv.spv"
+      ]
+    }
+  ],
+  "scope": "Capture-only numerical diagnosis; production source and installed shaders remain frozen."
+}

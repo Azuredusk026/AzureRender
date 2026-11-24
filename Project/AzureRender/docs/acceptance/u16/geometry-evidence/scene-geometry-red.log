@@ -1,0 +1,10 @@
+D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_scene_geometry.py:25: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  changed=sum(max(pixel)>12 for pixel in diff.getdata())
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_scene_geometry.py", line 33, in <module>
+    a=p.parse_args();run(a.editor.resolve(),a.output.resolve())
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_scene_geometry.py", line 26, in run
+    assert changed>1000,('Placed geometry must render, not only exist in the document',changed)
+           ^^^^^^^^^^^^
+AssertionError: ('Placed geometry must render, not only exist in the document', 0)

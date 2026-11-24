@@ -1,0 +1,19 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 138: AzureEditor.TaskService
+1/2 Test #138: AzureEditor.TaskService ..........***Failed    0.30 sec
+[1791587041760][info][editor][code=0] Opened scene: startup
+[1791587041867][info][editor][code=0] Imported asset: test_model.gltf (48 vertices)
+[1791587041933][info][editor][code=0] ERROR [asset.import: C:\Users\23587\AppData\Local\Temp\azure-tasks-37847855228400\missing.gltf]: [{"code":"OperationFailed","message":"Import dependency missing: C:\\Users\\23587\\AppData\\Local\\Temp\\azure-tasks-37847855228400\\missing.gltf"}]
+Asynchronous import problems retain their exact input path
+
+    Start 197: AzureEditor.AnimationAuthoring
+2/2 Test #197: AzureEditor.AnimationAuthoring ...   Passed    0.53 sec
+
+50% tests passed, 1 tests failed out of 2
+
+Total Test time (real) =   0.84 sec
+
+The following tests FAILED:
+	138 - AzureEditor.TaskService (Failed)
+Errors while running CTest

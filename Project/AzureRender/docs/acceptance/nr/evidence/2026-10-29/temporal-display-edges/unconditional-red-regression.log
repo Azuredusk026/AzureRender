@@ -1,0 +1,126 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  35: AzureRender.TemporalViewGpu
+1/5 Test  #35: AzureRender.TemporalViewGpu ..........***Failed    8.32 sec
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793228262386][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=1048576
+[1793228262386][info][render][code=0] Scene load CPU preparation: 3.702300 ms, materialPixelBytes=232
+[1793228262410][info][render][code=0] Character IBL: hardware mip fallback path
+[1793228262418][info][render][code=0] Scene load shared textures: 25.876700 ms
+[1793228262418][info][render][code=0] Scene load buffers: 0.098500 ms
+[1793228262418][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793228262418][info][render][code=0] Scene load skinning: 0.025500 ms
+[1793228262423][info][render][code=0] Scene load descriptors: 4.601200 ms
+[1793228263709][info][render][code=0] Scene load pipelines: 1285.615200 ms
+[1793228263709][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public/test_model.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1793228263720][info][render][code=0] Character texture access: fixed, requested slots=29, stage sampler limit=1048576
+[1793228263720][info][render][code=0] Scene load CPU preparation: 5.318000 ms, materialPixelBytes=348
+[1793228263746][info][render][code=0] Character IBL: hardware mip fallback path
+[1793228263753][info][render][code=0] Scene load shared textures: 23.853000 ms
+[1793228263753][info][render][code=0] Scene load buffers: 0.086800 ms
+[1793228263753][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793228263753][info][render][code=0] Scene load skinning: 0.063100 ms
+[1793228263757][info][render][code=0] Scene load descriptors: 3.778500 ms
+[1793228265131][info][render][code=0] Scene load pipelines: 1374.178800 ms
+[1793228265131][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793228265255][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=1048576
+[1793228265255][info][render][code=0] Scene load CPU preparation: 5.330200 ms, materialPixelBytes=232
+[1793228265287][info][render][code=0] Character IBL: hardware mip fallback path
+[1793228265297][info][render][code=0] Scene load shared textures: 29.280600 ms
+[1793228265297][info][render][code=0] Scene load buffers: 0.146000 ms
+[1793228265297][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793228265297][info][render][code=0] Scene load skinning: 0.053400 ms
+[1793228265303][info][render][code=0] Scene load descriptors: 5.699800 ms
+[1793228266613][info][render][code=0] Scene load pipelines: 1310.400100 ms
+[1793228266613][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793228266633][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=1048576
+[1793228266633][info][render][code=0] Scene load CPU preparation: 4.027100 ms, materialPixelBytes=232
+[1793228266674][info][render][code=0] Character IBL: hardware mip fallback path
+[1793228266682][info][render][code=0] Scene load shared textures: 30.766100 ms
+[1793228266682][info][render][code=0] Scene load buffers: 0.080400 ms
+[1793228266682][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793228266682][info][render][code=0] Scene load skinning: 0.022400 ms
+[1793228266689][info][render][code=0] Scene load descriptors: 6.735600 ms
+[1793228268156][info][render][code=0] Scene load pipelines: 1466.740800 ms
+[1793228268156][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793228268183][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=1048576
+[1793228268183][info][render][code=0] Scene load CPU preparation: 6.691200 ms, materialPixelBytes=232
+[1793228268247][info][render][code=0] Character IBL: hardware mip fallback path
+[1793228268258][info][render][code=0] Scene load shared textures: 36.783000 ms
+[1793228268259][info][render][code=0] Scene load buffers: 0.136000 ms
+[1793228268259][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793228268259][info][render][code=0] Scene load skinning: 0.058100 ms
+[1793228268267][info][render][code=0] Scene load descriptors: 8.131100 ms
+[1793228269745][info][render][code=0] Scene load pipelines: 1477.855400 ms
+[1793228269745][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+Temporal static edge error must stay within 80 percent of independently rendered mode zero
+
+    Start  36: AzureRender.MotionVectorGpu
+2/5 Test  #36: AzureRender.MotionVectorGpu ..........   Passed    1.17 sec
+    Start 103: AzureRender.TemporalReconstruction
+3/5 Test #103: AzureRender.TemporalReconstruction ...   Passed    1.16 sec
+    Start 104: AzureRender.SharedMotionGpu
+4/5 Test #104: AzureRender.SharedMotionGpu ..........   Passed    1.47 sec
+    Start 113: AzureRender.TemporalViewState
+5/5 Test #113: AzureRender.TemporalViewState ........   Passed    0.92 sec
+
+80% tests passed, 1 tests failed out of 5
+
+Label Time Summary:
+gpu    =  10.96 sec*proc (3 tests)
+
+Total Test time (real) =  13.06 sec
+
+The following tests FAILED:
+	 35 - AzureRender.TemporalViewGpu (Failed)
+Errors while running CTest

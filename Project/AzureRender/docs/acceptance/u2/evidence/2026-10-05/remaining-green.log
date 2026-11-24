@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\u2\probe_remaining.py", line 12, in <module>
+    assert drag['panels']['assets']['docked'] and drag['panels']['assets']['rect'][1]<500,drag['panels']['assets']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'docked': True, 'open': True, 'rect': [220.0, 836.0, 1378.0, 220.0]}

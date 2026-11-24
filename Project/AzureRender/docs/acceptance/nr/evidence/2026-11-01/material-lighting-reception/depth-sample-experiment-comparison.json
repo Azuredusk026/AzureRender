@@ -1,0 +1,45 @@
+{
+  "status": "measured-hypothesis",
+  "hypothesis": "filtered scene depth intersection",
+  "variants": [
+    {
+      "mode": "captured-control",
+      "vsBaselinePixels": 13,
+      "vsBaselineMax": 5,
+      "vsCapturedPixels": 0,
+      "vsCapturedMax": 0,
+      "pixel": [
+        104,
+        139,
+        212,
+        255
+      ]
+    },
+    {
+      "mode": "original",
+      "vsBaselinePixels": 13,
+      "vsBaselineMax": 5,
+      "vsCapturedPixels": 0,
+      "vsCapturedMax": 0,
+      "pixel": [
+        104,
+        139,
+        212,
+        255
+      ]
+    },
+    {
+      "mode": "point-depth",
+      "vsBaselinePixels": 13,
+      "vsBaselineMax": 5,
+      "vsCapturedPixels": 0,
+      "vsCapturedMax": 0,
+      "pixel": [
+        104,
+        139,
+        212,
+        255
+      ]
+    }
+  ]
+}

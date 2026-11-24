@@ -1,0 +1,415 @@
+{
+  "status": "authored-source-candidates-verified",
+  "qualification": "Authored material source; actual captured shader resource bindings remain independently required.",
+  "sourceFiles": {
+    "source_audit.json": "26b40382c63a4783ed1576bf42e9f6a9241623d90b69eb49a74b9ceca4269858",
+    "source_texture_artifacts.json": "f62e86bfa4d3e98ff933535c7207efa00de20d89ba7834101bc7386b36b4f409"
+  },
+  "materials": [
+    {
+      "name": "M_actor_laevat_cloth_01",
+      "source": {
+        "source": "CAB-1f2c0e2d8d2f6171136b77dd9c9321ed",
+        "path_id": 3574475141527933335,
+        "type": "Material",
+        "name": "M_actor_laevat_cloth_01"
+      },
+      "shader": {
+        "file_id": 3,
+        "path_id": -7822190029627442914,
+        "resolved": {
+          "source": "CAB-8e64a7d61483ea16539b04f304be9ed7",
+          "path_id": -7822190029627442914,
+          "type": "Shader",
+          "name": ""
+        }
+      },
+      "textures": [
+        {
+          "slot": "_DiffRampMap",
+          "source": {
+            "source": "CAB-eff4f28cb0756e81b20b174fde9ac010",
+            "path_id": 2595675294308502756,
+            "type": "Texture2D",
+            "name": "T_actor_common_cloth_04_RD"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\AB4614C583949F82DEB087AFAE1D5076E79F55068069064311DF877DC6155A8A_2405B0ED7D840CE4.png",
+          "sha256": "ff12009a3f80f1542591d90ec301b09eaadb752aed10d4206e26936dfe6f9685"
+        },
+        {
+          "slot": "_MetallicGlossMap",
+          "source": {
+            "source": "CAB-841e3601b3c24ff2cdb4e9e01cd09819",
+            "path_id": 3681487117840402225,
+            "type": "Texture2D",
+            "name": "T_actor_laevat_cloth_01_P"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\DB8B10BCE327ACF85614FEDF966F75F74707B45BFBB692A5ED5744B953DD5429_33174507400DC731.png",
+          "sha256": "a3ae6a383465c5482ea8395dd8662fb50b846c6e80a0cbe0c94bc2323159d8ed"
+        },
+        {
+          "slot": "_SpecRampMap",
+          "source": {
+            "source": "CAB-fff078017aaea35c73aeda4a76467a17",
+            "path_id": 4523718382697154697,
+            "type": "Texture2D",
+            "name": "T_actor_common_cloth_04_RS"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\39878777EA493946FDDC3E66CB66E39CF12DD8A544D7EB49012E95D767FB1D4C_3EC779E6C0918889.png",
+          "sha256": "bdf45f9f6c3b9b2d924dbcbd4ab33598b3c285106381f778c6113c86cdf0a148"
+        }
+      ]
+    },
+    {
+      "name": "M_actor_laevat_cloth_02",
+      "source": {
+        "source": "CAB-f1ee1f8310bedb82a619a1b3c4e37e23",
+        "path_id": 6470072797553846160,
+        "type": "Material",
+        "name": "M_actor_laevat_cloth_02"
+      },
+      "shader": {
+        "file_id": 2,
+        "path_id": -7822190029627442914,
+        "resolved": {
+          "source": "CAB-8e64a7d61483ea16539b04f304be9ed7",
+          "path_id": -7822190029627442914,
+          "type": "Shader",
+          "name": ""
+        }
+      },
+      "textures": [
+        {
+          "slot": "_DiffRampMap",
+          "source": {
+            "source": "CAB-eff4f28cb0756e81b20b174fde9ac010",
+            "path_id": 2595675294308502756,
+            "type": "Texture2D",
+            "name": "T_actor_common_cloth_04_RD"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\AB4614C583949F82DEB087AFAE1D5076E79F55068069064311DF877DC6155A8A_2405B0ED7D840CE4.png",
+          "sha256": "ff12009a3f80f1542591d90ec301b09eaadb752aed10d4206e26936dfe6f9685"
+        },
+        {
+          "slot": "_MetallicGlossMap",
+          "source": {
+            "source": "CAB-ede90f10394caadec66317875dce622e",
+            "path_id": -6712760058522892523,
+            "type": "Texture2D",
+            "name": "T_actor_laevat_cloth_02_P"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\2E8BB013EBC28F010557636EF7A789425594E43F5E6675612A2C489BD4A427DC_A2D77C4AE1500715.png",
+          "sha256": "7427f9ff68c4cab77dca5bf373d683bc5731b28d21ffb024779a47b35ac00651"
+        },
+        {
+          "slot": "_SpecRampMap",
+          "source": {
+            "source": "CAB-fff078017aaea35c73aeda4a76467a17",
+            "path_id": 4523718382697154697,
+            "type": "Texture2D",
+            "name": "T_actor_common_cloth_04_RS"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\39878777EA493946FDDC3E66CB66E39CF12DD8A544D7EB49012E95D767FB1D4C_3EC779E6C0918889.png",
+          "sha256": "bdf45f9f6c3b9b2d924dbcbd4ab33598b3c285106381f778c6113c86cdf0a148"
+        }
+      ]
+    },
+    {
+      "name": "M_actor_laevat_cloth_03",
+      "source": {
+        "source": "CAB-ed76ec5bde9521d32a608106bc8e3c58",
+        "path_id": -8392104132147645647,
+        "type": "Material",
+        "name": "M_actor_laevat_cloth_03"
+      },
+      "shader": {
+        "file_id": 1,
+        "path_id": -7822190029627442914,
+        "resolved": {
+          "source": "CAB-8e64a7d61483ea16539b04f304be9ed7",
+          "path_id": -7822190029627442914,
+          "type": "Shader",
+          "name": ""
+        }
+      },
+      "textures": [
+        {
+          "slot": "_DiffRampMap",
+          "source": {
+            "source": "CAB-b4c798d9cc7307b4d8431945741093c4",
+            "path_id": -611492742664895746,
+            "type": "Texture2D",
+            "name": "T_actor_common_cloth_01_RD"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\1627B55E12C4CFF19089FFB789688A5306FBF23E2D3CEBA94F7AD5B454039D09_F7838A9722BAC2FE.png",
+          "sha256": "13175ff9a8ecd9beefc65ea04198ce89760354cce138b202ba4311d3a488b325"
+        },
+        {
+          "slot": "_MetallicGlossMap",
+          "source": {
+            "source": "CAB-ede90f10394caadec66317875dce622e",
+            "path_id": -6712760058522892523,
+            "type": "Texture2D",
+            "name": "T_actor_laevat_cloth_02_P"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\2E8BB013EBC28F010557636EF7A789425594E43F5E6675612A2C489BD4A427DC_A2D77C4AE1500715.png",
+          "sha256": "7427f9ff68c4cab77dca5bf373d683bc5731b28d21ffb024779a47b35ac00651"
+        },
+        {
+          "slot": "_SpecRampMap",
+          "source": {
+            "source": "CAB-fff078017aaea35c73aeda4a76467a17",
+            "path_id": 4523718382697154697,
+            "type": "Texture2D",
+            "name": "T_actor_common_cloth_04_RS"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\39878777EA493946FDDC3E66CB66E39CF12DD8A544D7EB49012E95D767FB1D4C_3EC779E6C0918889.png",
+          "sha256": "bdf45f9f6c3b9b2d924dbcbd4ab33598b3c285106381f778c6113c86cdf0a148"
+        }
+      ]
+    },
+    {
+      "name": "M_actor_laevat_cloth_04",
+      "source": {
+        "source": "CAB-12464b38f86ad8e01ca3a20d55054c6a",
+        "path_id": 223600555178718960,
+        "type": "Material",
+        "name": "M_actor_laevat_cloth_04"
+      },
+      "shader": {
+        "file_id": 1,
+        "path_id": -7822190029627442914,
+        "resolved": {
+          "source": "CAB-8e64a7d61483ea16539b04f304be9ed7",
+          "path_id": -7822190029627442914,
+          "type": "Shader",
+          "name": ""
+        }
+      },
+      "textures": [
+        {
+          "slot": "_DiffRampMap",
+          "source": {
+            "source": "CAB-eff4f28cb0756e81b20b174fde9ac010",
+            "path_id": 2595675294308502756,
+            "type": "Texture2D",
+            "name": "T_actor_common_cloth_04_RD"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\AB4614C583949F82DEB087AFAE1D5076E79F55068069064311DF877DC6155A8A_2405B0ED7D840CE4.png",
+          "sha256": "ff12009a3f80f1542591d90ec301b09eaadb752aed10d4206e26936dfe6f9685"
+        },
+        {
+          "slot": "_MetallicGlossMap",
+          "source": {
+            "source": "CAB-ccb88ac07861d7be525325a857dacdf5",
+            "path_id": -1065131171822543209,
+            "type": "Texture2D",
+            "name": "T_wpn_misc_0016_01_P"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\E6EA1043295B98605F9B43A8BB20AEBFC9E2F17A40653B65858D90CBC3CFF307_F137E4D7B0525E97.png",
+          "sha256": "a99b8a10bc8c0310eba20a52f572ca8373d8f32b97bd24f3ef988d787848c45e"
+        },
+        {
+          "slot": "_SpecRampMap",
+          "source": {
+            "source": "CAB-fff078017aaea35c73aeda4a76467a17",
+            "path_id": 4523718382697154697,
+            "type": "Texture2D",
+            "name": "T_actor_common_cloth_04_RS"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\39878777EA493946FDDC3E66CB66E39CF12DD8A544D7EB49012E95D767FB1D4C_3EC779E6C0918889.png",
+          "sha256": "bdf45f9f6c3b9b2d924dbcbd4ab33598b3c285106381f778c6113c86cdf0a148"
+        }
+      ]
+    },
+    {
+      "name": "M_actor_laevat_cloth_05",
+      "source": {
+        "source": "CAB-a5e52950c6f7ad99915457f12acc77a6",
+        "path_id": 3739401631618412962,
+        "type": "Material",
+        "name": "M_actor_laevat_cloth_05"
+      },
+      "shader": {
+        "file_id": 2,
+        "path_id": -7822190029627442914,
+        "resolved": {
+          "source": "CAB-8e64a7d61483ea16539b04f304be9ed7",
+          "path_id": -7822190029627442914,
+          "type": "Shader",
+          "name": ""
+        }
+      },
+      "textures": [
+        {
+          "slot": "_DiffRampMap",
+          "source": {
+            "source": "CAB-eff4f28cb0756e81b20b174fde9ac010",
+            "path_id": 2595675294308502756,
+            "type": "Texture2D",
+            "name": "T_actor_common_cloth_04_RD"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\AB4614C583949F82DEB087AFAE1D5076E79F55068069064311DF877DC6155A8A_2405B0ED7D840CE4.png",
+          "sha256": "ff12009a3f80f1542591d90ec301b09eaadb752aed10d4206e26936dfe6f9685"
+        },
+        {
+          "slot": "_MetallicGlossMap",
+          "source": {
+            "source": "CAB-ede90f10394caadec66317875dce622e",
+            "path_id": -6712760058522892523,
+            "type": "Texture2D",
+            "name": "T_actor_laevat_cloth_02_P"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\2E8BB013EBC28F010557636EF7A789425594E43F5E6675612A2C489BD4A427DC_A2D77C4AE1500715.png",
+          "sha256": "7427f9ff68c4cab77dca5bf373d683bc5731b28d21ffb024779a47b35ac00651"
+        },
+        {
+          "slot": "_SpecRampMap",
+          "source": {
+            "source": "CAB-fff078017aaea35c73aeda4a76467a17",
+            "path_id": 4523718382697154697,
+            "type": "Texture2D",
+            "name": "T_actor_common_cloth_04_RS"
+          },
+          "colorSpace": 0,
+          "scale": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "pngPath": "build\\runs\\20261017-000956-endfield-native-3caf73\\laevat-static\\source_textures\\39878777EA493946FDDC3E66CB66E39CF12DD8A544D7EB49012E95D767FB1D4C_3EC779E6C0918889.png",
+          "sha256": "bdf45f9f6c3b9b2d924dbcbd4ab33598b3c285106381f778c6113c86cdf0a148"
+        }
+      ]
+    }
+  ]
+}

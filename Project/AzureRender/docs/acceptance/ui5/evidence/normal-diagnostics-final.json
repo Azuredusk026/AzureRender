@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "workflow": "scene_inspector",
+  "longErrorDismiss": true,
+  "input": "production ImGui replay"
+}

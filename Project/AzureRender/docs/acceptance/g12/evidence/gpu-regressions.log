@@ -1,0 +1,31 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 144: AzureEditor.ContentGpu
+1/5 Test #144: AzureEditor.ContentGpu ...............   Passed   75.87 sec
+    Start 147: AzureEditor.DocumentGuardGpu
+2/5 Test #147: AzureEditor.DocumentGuardGpu .........   Passed   36.93 sec
+    Start 177: AzureEditor.ProductizationGpu
+3/5 Test #177: AzureEditor.ProductizationGpu ........   Passed   54.04 sec
+    Start 180: AzureEditor.PropertiesGpu
+4/5 Test #180: AzureEditor.PropertiesGpu ............   Passed   26.60 sec
+    Start 185: AzureEditor.ContentTransactionsGpu
+5/5 Test #185: AzureEditor.ContentTransactionsGpu ...***Failed   40.37 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content_transactions.py", line 70, in <module>
+    run(args.executable.resolve(), args.output.resolve())
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content_transactions.py", line 50, in run
+    assert not image.exists() and (image.parent / 'edited.png').exists()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+
+80% tests passed, 1 tests failed out of 5
+
+Label Time Summary:
+gpu    = 233.80 sec*proc (5 tests)
+
+Total Test time (real) = 233.82 sec
+
+The following tests FAILED:
+	185 - AzureEditor.ContentTransactionsGpu (Failed)
+Errors while running CTest

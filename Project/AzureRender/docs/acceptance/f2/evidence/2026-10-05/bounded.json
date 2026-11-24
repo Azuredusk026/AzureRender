@@ -1,0 +1,9 @@
+{
+  "frames": 8400,
+  "retained": 8192,
+  "offset": 208,
+  "physicsSamples": 8192,
+  "physicsCountSum": 8192,
+  "sceneTriangles": 2724,
+  "passed": true
+}

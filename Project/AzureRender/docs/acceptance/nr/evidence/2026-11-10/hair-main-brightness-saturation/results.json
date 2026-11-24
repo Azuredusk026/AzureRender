@@ -1,0 +1,2969 @@
+{
+  "status": "public-main-brightness-saturation-qualified",
+  "overallVisualAcceptance": "failed-user-review",
+  "productionHairColorPassed": false,
+  "privateSelectedMainRemainingFailures": 14,
+  "layoutVersion": 22,
+  "configurations": {
+    "Release": {
+      "checks": [
+        {
+          "name": "material-contract",
+          "exitCode": 0,
+          "command": [
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureCharacterRepairTests.exe",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\assets_public\\third_person\\material_fixture.gltf"
+          ],
+          "validationErrors": false
+        },
+        {
+          "name": "nvidia-surface",
+          "exitCode": 0,
+          "command": [
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureSurfaceResponseGpuTests.exe",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\surface_response_test.comp.spv",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\assets_public\\showcase_looks.json"
+          ],
+          "validationErrors": false,
+          "effectiveProbes": 317
+        },
+        {
+          "name": "intel-surface",
+          "exitCode": 0,
+          "command": [
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureSurfaceResponseGpuTests.exe",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\surface_response_test.comp.spv",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\assets_public\\showcase_looks.json"
+          ],
+          "validationErrors": false,
+          "effectiveProbes": 317
+        }
+      ],
+      "materialImages": {
+        "nvidia": {
+          "schemaVersion": 1,
+          "status": "passed",
+          "playerSha256": "00394dc6d33bbd1e6c461f765d224b534c4c380dc02978579c33cc768b4bbfce",
+          "captures": [
+            {
+              "name": "direct",
+              "maximumLinearError": 0.0021208128493623024,
+              "imageSha256": "339d5afe91fbdcaf5113919430580a7fc715f5166e0881201ed732c035ccf073",
+              "validationEnabled": false,
+              "measured": [
+                0.08021982031446832,
+                0.1651321945016676,
+                0.24620132670783548
+              ],
+              "expected": [
+                0.07959942013139663,
+                0.1666131946086012,
+                0.244109285520208
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "ambient",
+              "maximumLinearError": 0.0038459847413587767,
+              "imageSha256": "23bd1b21c047cbbf93b618093d7bf6b4468a3020953e3f4cebc2655b4d5c6642",
+              "validationEnabled": false,
+              "measured": [
+                0.3662525955988395,
+                0.7156935005064807,
+                0.9734452903984125
+              ],
+              "expected": [
+                0.36842978682462346,
+                0.7144866615758548,
+                0.9696980841203551
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "kk",
+              "maximumLinearError": 0.004610726522784048,
+              "imageSha256": "3f87f443fad2c0938c765f969ef69993512e173010143aea47c362c233f657d8",
+              "validationEnabled": false,
+              "measured": [
+                0.1946178304415758,
+                0.0,
+                0.7835377915261935
+              ],
+              "expected": [
+                0.19606808272214715,
+                0.00015775856043730163,
+                0.7859470707666626
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "kk-fixed",
+              "maximumLinearError": 0.004610726522784048,
+              "imageSha256": "3f87f443fad2c0938c765f969ef69993512e173010143aea47c362c233f657d8",
+              "validationEnabled": false,
+              "measured": [
+                0.1946178304415758,
+                0.0,
+                0.7835377915261935
+              ],
+              "expected": [
+                0.19606808272214715,
+                0.00015775856043730163,
+                0.7859470707666626
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "local-kk",
+              "maximumLinearError": 0.00016799330948271703,
+              "imageSha256": "0700836bff4366745fae02f450a542473279931fd4b5fbe583098afec2c606a0",
+              "validationEnabled": false,
+              "measured": [
+                0.00121410793419535,
+                0.0003035269835488375,
+                0.0
+              ],
+              "expected": [
+                0.0012335114986603782,
+                0.00015897710344450723,
+                0.0
+              ],
+              "mainSaturationGainRange": [
+                1.0253795853025687,
+                1.0253795853025687
+              ]
+            },
+            {
+              "name": "no-main",
+              "maximumLinearError": 0.0,
+              "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+              "validationEnabled": false,
+              "measured": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mainSaturationGainRange": [
+                1.0253795853025687,
+                1.0253795853025687
+              ]
+            },
+            {
+              "name": "local-kk-control",
+              "maximumLinearError": 0.00016799330948271703,
+              "imageSha256": "0700836bff4366745fae02f450a542473279931fd4b5fbe583098afec2c606a0",
+              "validationEnabled": false,
+              "measured": [
+                0.00121410793419535,
+                0.0003035269835488375,
+                0.0
+              ],
+              "expected": [
+                0.0012335114986603782,
+                0.00015897710344450723,
+                0.0
+              ],
+              "mainSaturationGainRange": [
+                1.0253795853025687,
+                1.0253795853025687
+              ]
+            }
+          ],
+          "mainBrightnessSaturation": true
+        },
+        "intel": {
+          "schemaVersion": 1,
+          "status": "passed",
+          "playerSha256": "00394dc6d33bbd1e6c461f765d224b534c4c380dc02978579c33cc768b4bbfce",
+          "captures": [
+            {
+              "name": "direct",
+              "maximumLinearError": 0.0018377201228693962,
+              "imageSha256": "7c8698f985e890287484ec39ab83e95c662e195db3ef849d1354fa17dcecd032",
+              "validationEnabled": false,
+              "measured": [
+                0.08021982031446832,
+                0.1651321945016676,
+                0.24228112246555486
+              ],
+              "expected": [
+                0.07959942013139663,
+                0.1666131946086012,
+                0.244109285520208
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "ambient",
+              "maximumLinearError": 0.0038459847413587767,
+              "imageSha256": "2c0db773166900958e016aebceb581e2537d86f73849e42ecde8ea4843a6f529",
+              "validationEnabled": false,
+              "measured": [
+                0.3712376804741491,
+                0.7156935005064807,
+                0.9734452903984125
+              ],
+              "expected": [
+                0.36842978682462346,
+                0.7144866615758548,
+                0.9696980841203551
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "kk",
+              "maximumLinearError": 0.004610726522784048,
+              "imageSha256": "f731609fd2adaa731943a625b6a217300f9262b94d0c164aa9e388045933181a",
+              "validationEnabled": false,
+              "measured": [
+                0.1946178304415758,
+                0.0,
+                0.7835377915261935
+              ],
+              "expected": [
+                0.19606808272214715,
+                0.00015775856043730163,
+                0.7859470707666626
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "kk-fixed",
+              "maximumLinearError": 0.004610726522784048,
+              "imageSha256": "f731609fd2adaa731943a625b6a217300f9262b94d0c164aa9e388045933181a",
+              "validationEnabled": false,
+              "measured": [
+                0.1946178304415758,
+                0.0,
+                0.7835377915261935
+              ],
+              "expected": [
+                0.19606808272214715,
+                0.00015775856043730163,
+                0.7859470707666626
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "local-kk",
+              "maximumLinearError": 0.00018219227793250087,
+              "imageSha256": "8028a65addd6b7d1d13dae903cbcd8b12d36d4bc72e86290dc27f87c5cf2a6aa",
+              "validationEnabled": false,
+              "measured": [
+                0.00121410793419535,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0012335114986603782,
+                0.00015897710344450723,
+                0.0
+              ],
+              "mainSaturationGainRange": [
+                1.0253795853025687,
+                1.0253795853025687
+              ]
+            },
+            {
+              "name": "no-main",
+              "maximumLinearError": 0.0,
+              "imageSha256": "e7116f3121ee5082947a5caa7cf35d7b0d5364f2f30b140ff32245693dd46d53",
+              "validationEnabled": false,
+              "measured": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mainSaturationGainRange": [
+                1.0253795853025687,
+                1.0253795853025687
+              ]
+            },
+            {
+              "name": "local-kk-control",
+              "maximumLinearError": 0.00018219227793250087,
+              "imageSha256": "8028a65addd6b7d1d13dae903cbcd8b12d36d4bc72e86290dc27f87c5cf2a6aa",
+              "validationEnabled": false,
+              "measured": [
+                0.00121410793419535,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0012335114986603782,
+                0.00015897710344450723,
+                0.0
+              ],
+              "mainSaturationGainRange": [
+                1.0253795853025687,
+                1.0253795853025687
+              ]
+            }
+          ],
+          "mainBrightnessSaturation": true
+        }
+      },
+      "playerSha256": "00394dc6d33bbd1e6c461f765d224b534c4c380dc02978579c33cc768b4bbfce"
+    },
+    "Debug": {
+      "checks": [
+        {
+          "name": "material-contract",
+          "exitCode": 0,
+          "command": [
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureCharacterRepairTests.exe",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\assets_public\\third_person\\material_fixture.gltf"
+          ],
+          "validationErrors": false
+        },
+        {
+          "name": "nvidia-surface",
+          "exitCode": 0,
+          "command": [
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureSurfaceResponseGpuTests.exe",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\surface_response_test.comp.spv",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\assets_public\\showcase_looks.json"
+          ],
+          "validationErrors": false,
+          "effectiveProbes": 317
+        },
+        {
+          "name": "intel-surface",
+          "exitCode": 0,
+          "command": [
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureSurfaceResponseGpuTests.exe",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\surface_response_test.comp.spv",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\assets_public\\showcase_looks.json"
+          ],
+          "validationErrors": false,
+          "effectiveProbes": 317
+        }
+      ],
+      "materialImages": {
+        "nvidia": {
+          "schemaVersion": 1,
+          "status": "passed",
+          "playerSha256": "f802741d11c5351548f83431a8cec81b3e5261a3bced1a299203f296282bd9fb",
+          "captures": [
+            {
+              "name": "direct",
+              "maximumLinearError": 0.0021208128493623024,
+              "imageSha256": "339d5afe91fbdcaf5113919430580a7fc715f5166e0881201ed732c035ccf073",
+              "validationEnabled": true,
+              "measured": [
+                0.08021982031446832,
+                0.1651321945016676,
+                0.24620132670783548
+              ],
+              "expected": [
+                0.07959942013139663,
+                0.1666131946086012,
+                0.244109285520208
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "ambient",
+              "maximumLinearError": 0.0038459847413587767,
+              "imageSha256": "23bd1b21c047cbbf93b618093d7bf6b4468a3020953e3f4cebc2655b4d5c6642",
+              "validationEnabled": true,
+              "measured": [
+                0.3662525955988395,
+                0.7156935005064807,
+                0.9734452903984125
+              ],
+              "expected": [
+                0.36842978682462346,
+                0.7144866615758548,
+                0.9696980841203551
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "kk",
+              "maximumLinearError": 0.004610726522784048,
+              "imageSha256": "3f87f443fad2c0938c765f969ef69993512e173010143aea47c362c233f657d8",
+              "validationEnabled": true,
+              "measured": [
+                0.1946178304415758,
+                0.0,
+                0.7835377915261935
+              ],
+              "expected": [
+                0.19606808272214715,
+                0.00015775856043730163,
+                0.7859470707666626
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "kk-fixed",
+              "maximumLinearError": 0.004610726522784048,
+              "imageSha256": "3f87f443fad2c0938c765f969ef69993512e173010143aea47c362c233f657d8",
+              "validationEnabled": true,
+              "measured": [
+                0.1946178304415758,
+                0.0,
+                0.7835377915261935
+              ],
+              "expected": [
+                0.19606808272214715,
+                0.00015775856043730163,
+                0.7859470707666626
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "local-kk",
+              "maximumLinearError": 0.00016799330948271703,
+              "imageSha256": "0700836bff4366745fae02f450a542473279931fd4b5fbe583098afec2c606a0",
+              "validationEnabled": true,
+              "measured": [
+                0.00121410793419535,
+                0.0003035269835488375,
+                0.0
+              ],
+              "expected": [
+                0.0012335114986603782,
+                0.00015897710344450723,
+                0.0
+              ],
+              "mainSaturationGainRange": [
+                1.0253795853025687,
+                1.0253795853025687
+              ]
+            },
+            {
+              "name": "no-main",
+              "maximumLinearError": 0.0,
+              "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+              "validationEnabled": true,
+              "measured": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mainSaturationGainRange": [
+                1.0253795853025687,
+                1.0253795853025687
+              ]
+            },
+            {
+              "name": "local-kk-control",
+              "maximumLinearError": 0.00016799330948271703,
+              "imageSha256": "0700836bff4366745fae02f450a542473279931fd4b5fbe583098afec2c606a0",
+              "validationEnabled": true,
+              "measured": [
+                0.00121410793419535,
+                0.0003035269835488375,
+                0.0
+              ],
+              "expected": [
+                0.0012335114986603782,
+                0.00015897710344450723,
+                0.0
+              ],
+              "mainSaturationGainRange": [
+                1.0253795853025687,
+                1.0253795853025687
+              ]
+            }
+          ],
+          "mainBrightnessSaturation": true
+        },
+        "intel": {
+          "schemaVersion": 1,
+          "status": "passed",
+          "playerSha256": "f802741d11c5351548f83431a8cec81b3e5261a3bced1a299203f296282bd9fb",
+          "captures": [
+            {
+              "name": "direct",
+              "maximumLinearError": 0.0018377201228693962,
+              "imageSha256": "7c8698f985e890287484ec39ab83e95c662e195db3ef849d1354fa17dcecd032",
+              "validationEnabled": true,
+              "measured": [
+                0.08021982031446832,
+                0.1651321945016676,
+                0.24228112246555486
+              ],
+              "expected": [
+                0.07959942013139663,
+                0.1666131946086012,
+                0.244109285520208
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "ambient",
+              "maximumLinearError": 0.0038459847413587767,
+              "imageSha256": "2c0db773166900958e016aebceb581e2537d86f73849e42ecde8ea4843a6f529",
+              "validationEnabled": true,
+              "measured": [
+                0.3712376804741491,
+                0.7156935005064807,
+                0.9734452903984125
+              ],
+              "expected": [
+                0.36842978682462346,
+                0.7144866615758548,
+                0.9696980841203551
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "kk",
+              "maximumLinearError": 0.004610726522784048,
+              "imageSha256": "f731609fd2adaa731943a625b6a217300f9262b94d0c164aa9e388045933181a",
+              "validationEnabled": true,
+              "measured": [
+                0.1946178304415758,
+                0.0,
+                0.7835377915261935
+              ],
+              "expected": [
+                0.19606808272214715,
+                0.00015775856043730163,
+                0.7859470707666626
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "kk-fixed",
+              "maximumLinearError": 0.004610726522784048,
+              "imageSha256": "f731609fd2adaa731943a625b6a217300f9262b94d0c164aa9e388045933181a",
+              "validationEnabled": true,
+              "measured": [
+                0.1946178304415758,
+                0.0,
+                0.7835377915261935
+              ],
+              "expected": [
+                0.19606808272214715,
+                0.00015775856043730163,
+                0.7859470707666626
+              ],
+              "mainSaturationGainRange": [
+                1.1068675685472233,
+                1.11973499049185
+              ]
+            },
+            {
+              "name": "local-kk",
+              "maximumLinearError": 0.00018219227793250087,
+              "imageSha256": "8028a65addd6b7d1d13dae903cbcd8b12d36d4bc72e86290dc27f87c5cf2a6aa",
+              "validationEnabled": true,
+              "measured": [
+                0.00121410793419535,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0012335114986603782,
+                0.00015897710344450723,
+                0.0
+              ],
+              "mainSaturationGainRange": [
+                1.0253795853025687,
+                1.0253795853025687
+              ]
+            },
+            {
+              "name": "no-main",
+              "maximumLinearError": 0.0,
+              "imageSha256": "e7116f3121ee5082947a5caa7cf35d7b0d5364f2f30b140ff32245693dd46d53",
+              "validationEnabled": true,
+              "measured": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mainSaturationGainRange": [
+                1.0253795853025687,
+                1.0253795853025687
+              ]
+            },
+            {
+              "name": "local-kk-control",
+              "maximumLinearError": 0.00018219227793250087,
+              "imageSha256": "8028a65addd6b7d1d13dae903cbcd8b12d36d4bc72e86290dc27f87c5cf2a6aa",
+              "validationEnabled": true,
+              "measured": [
+                0.00121410793419535,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0012335114986603782,
+                0.00015897710344450723,
+                0.0
+              ],
+              "mainSaturationGainRange": [
+                1.0253795853025687,
+                1.0253795853025687
+              ]
+            }
+          ],
+          "mainBrightnessSaturation": true
+        }
+      },
+      "playerSha256": "f802741d11c5351548f83431a8cec81b3e5261a3bced1a299203f296282bd9fb"
+    }
+  },
+  "defaultFourFrames": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true,
+    "validationLayerEnabled": false,
+    "validationScope": "No validation error/warning was present in the Release capture log; Debug material fixtures explicitly enable validation."
+  },
+  "converterTests": 27,
+  "scope": "Public opt-in selected-main chroma operation; original full native color, current depth producer and remaining sampling/storage differences retain separate gates.",
+  "sourceFiles": [
+    {
+      "path": "source/Project/AzureRender/CHANGELOG.md",
+      "sha256": "e896827309f4ceb2db033a8a6c549f45fbf7f852527ab7bbdd70632bdca46a87",
+      "bytes": 207069
+    },
+    {
+      "path": "source/Project/AzureRender/CMakeLists.txt",
+      "sha256": "491f9d7087b7a2ac99beabebe24cf3da1203fd3095078e15320923f284445a10",
+      "bytes": 292885
+    },
+    {
+      "path": "source/Project/AzureRender/README.md",
+      "sha256": "271bd1fa92e9a22ff5f94b9c459973dcc90b97c23be847c076bb989b12e0b7b3",
+      "bytes": 58826
+    },
+    {
+      "path": "source/Project/AzureRender/docs/plans/2026-11-09-native-quality.md",
+      "sha256": "cf5b6258051ccf8b1f714b94fcf507191191cd2da086d5f8983d4e8f1605f462",
+      "bytes": 7814
+    },
+    {
+      "path": "source/Project/AzureRender/docs/plans/azure-engine-plan.md",
+      "sha256": "8522682620f58e550a401ba79c9bf33dcd2087c6d7b9438bb302723ae95542b8",
+      "bytes": 85442
+    },
+    {
+      "path": "source/Project/AzureRender/docs/runtime/material-input-layout.md",
+      "sha256": "15363aaafdab0167084fcc1bd2655c00a90456c0aa4475cb6f9d37e176882c96",
+      "bytes": 10831
+    },
+    {
+      "path": "source/Project/AzureRender/docs/runtime/projected-hair-lighting.md",
+      "sha256": "044bb8f73b96e7cf3d13f036d806d044bb2258764cb1eda1b45cb9ab9946da33",
+      "bytes": 5570
+    },
+    {
+      "path": "source/Project/AzureRender/schemas/azure_render_material.schema.json",
+      "sha256": "299fa4de63e2a6f30338d24d20d401d3c22c260bbda6fc442443f40a4ab34280",
+      "bytes": 13124
+    },
+    {
+      "path": "source/Project/AzureRender/shaders/character_diffuse.glsl",
+      "sha256": "6d021adc1f220489eeb879dad2a75354da86c1b960ab43482aed35923000e31e",
+      "bytes": 5815
+    },
+    {
+      "path": "source/Project/AzureRender/shaders/mesh.frag",
+      "sha256": "094a5a71b285e6698f58b4a78afc20d0c7a7cc9631d9fde09fe856cb7f334237",
+      "bytes": 121536
+    },
+    {
+      "path": "source/Project/AzureRender/shaders/surface_response_test.comp",
+      "sha256": "65a62395c86e3cb2716bc08bbf48b0249ff171cbb62b465f0208eea380465a22",
+      "bytes": 13113
+    },
+    {
+      "path": "source/Project/AzureRender/src/assets/GltfLoader.cpp",
+      "sha256": "e4e6a2361a81a1aeb6e32897d5da2039871c1018fe01234cbfd17ba7016c61c0",
+      "bytes": 196762
+    },
+    {
+      "path": "source/Project/AzureRender/src/assets/GltfLoader.hpp",
+      "sha256": "fd7d673463075cd185b819af7e0f4546fc73544c9a834ac57eddb660ae6e74fc",
+      "bytes": 19010
+    },
+    {
+      "path": "source/Project/AzureRender/src/assets/MaterialSurfaceProfile.hpp",
+      "sha256": "230a34d24b8125d0a4aa40db7af959d064dd9df59fdf7d186d7b5df4d9e71b47",
+      "bytes": 12008
+    },
+    {
+      "path": "source/Project/AzureRender/tests/CharacterRepairTests.cpp",
+      "sha256": "f9dc4508a729e8c727b477842d9f20451d7ab060e8b2ff58f6f9ac8a8b6a66e2",
+      "bytes": 88390
+    },
+    {
+      "path": "source/Project/AzureRender/tests/SurfaceResponseGpuTests.cpp",
+      "sha256": "662fc16d730b519036ca9222a310d09df598e8cdef4fd9403e4bcb04906e2de4",
+      "bytes": 7663
+    },
+    {
+      "path": "source/Project/AzureRender/tools/endfield_native/npr_lighting.py",
+      "sha256": "83f7bd81bc7fc1f276d9dc80ab61c0895ad9369e75924c57a16976b83a9cbe5d",
+      "bytes": 5944
+    },
+    {
+      "path": "source/Project/AzureRender/tools/test_native_npr_lighting.py",
+      "sha256": "3e2ef76435475c60aaff78cadcd160a7f39ea12a64150753fa22bac7fb43ccb7",
+      "bytes": 6914
+    },
+    {
+      "path": "source/Project/AzureRender/tools/test_projected_hair_lighting_gpu.py",
+      "sha256": "ac159beda138d951943b6870d2d9f33da7bc80a24121b79c7f4419bd8756b9be",
+      "bytes": 16638
+    },
+    {
+      "path": "source/Project/AzureRender/docs/acceptance/nr/hair-main-brightness-saturation.md",
+      "sha256": "0aafb94b0d208442edd07af7618c8f852bd329b08f73cbf6368deaf5813d46e2",
+      "bytes": 2659
+    }
+  ],
+  "archiveBytes": 960300,
+  "archiveSha256": "07ab36bb44a4b70881020dd7823a88cda81b99bc3b254e1068f1f2400945458b",
+  "archiveFiles": [
+    {
+      "path": "source/Project/AzureRender/CHANGELOG.md",
+      "bytes": 207069,
+      "sha256": "e896827309f4ceb2db033a8a6c549f45fbf7f852527ab7bbdd70632bdca46a87"
+    },
+    {
+      "path": "source/Project/AzureRender/CMakeLists.txt",
+      "bytes": 292885,
+      "sha256": "491f9d7087b7a2ac99beabebe24cf3da1203fd3095078e15320923f284445a10"
+    },
+    {
+      "path": "source/Project/AzureRender/README.md",
+      "bytes": 58826,
+      "sha256": "271bd1fa92e9a22ff5f94b9c459973dcc90b97c23be847c076bb989b12e0b7b3"
+    },
+    {
+      "path": "source/Project/AzureRender/docs/plans/2026-11-09-native-quality.md",
+      "bytes": 7814,
+      "sha256": "cf5b6258051ccf8b1f714b94fcf507191191cd2da086d5f8983d4e8f1605f462"
+    },
+    {
+      "path": "source/Project/AzureRender/docs/plans/azure-engine-plan.md",
+      "bytes": 85442,
+      "sha256": "8522682620f58e550a401ba79c9bf33dcd2087c6d7b9438bb302723ae95542b8"
+    },
+    {
+      "path": "source/Project/AzureRender/docs/runtime/material-input-layout.md",
+      "bytes": 10831,
+      "sha256": "15363aaafdab0167084fcc1bd2655c00a90456c0aa4475cb6f9d37e176882c96"
+    },
+    {
+      "path": "source/Project/AzureRender/docs/runtime/projected-hair-lighting.md",
+      "bytes": 5570,
+      "sha256": "044bb8f73b96e7cf3d13f036d806d044bb2258764cb1eda1b45cb9ab9946da33"
+    },
+    {
+      "path": "source/Project/AzureRender/schemas/azure_render_material.schema.json",
+      "bytes": 13124,
+      "sha256": "299fa4de63e2a6f30338d24d20d401d3c22c260bbda6fc442443f40a4ab34280"
+    },
+    {
+      "path": "source/Project/AzureRender/shaders/character_diffuse.glsl",
+      "bytes": 5815,
+      "sha256": "6d021adc1f220489eeb879dad2a75354da86c1b960ab43482aed35923000e31e"
+    },
+    {
+      "path": "source/Project/AzureRender/shaders/mesh.frag",
+      "bytes": 121536,
+      "sha256": "094a5a71b285e6698f58b4a78afc20d0c7a7cc9631d9fde09fe856cb7f334237"
+    },
+    {
+      "path": "source/Project/AzureRender/shaders/surface_response_test.comp",
+      "bytes": 13113,
+      "sha256": "65a62395c86e3cb2716bc08bbf48b0249ff171cbb62b465f0208eea380465a22"
+    },
+    {
+      "path": "source/Project/AzureRender/src/assets/GltfLoader.cpp",
+      "bytes": 196762,
+      "sha256": "e4e6a2361a81a1aeb6e32897d5da2039871c1018fe01234cbfd17ba7016c61c0"
+    },
+    {
+      "path": "source/Project/AzureRender/src/assets/GltfLoader.hpp",
+      "bytes": 19010,
+      "sha256": "fd7d673463075cd185b819af7e0f4546fc73544c9a834ac57eddb660ae6e74fc"
+    },
+    {
+      "path": "source/Project/AzureRender/src/assets/MaterialSurfaceProfile.hpp",
+      "bytes": 12008,
+      "sha256": "230a34d24b8125d0a4aa40db7af959d064dd9df59fdf7d186d7b5df4d9e71b47"
+    },
+    {
+      "path": "source/Project/AzureRender/tests/CharacterRepairTests.cpp",
+      "bytes": 88390,
+      "sha256": "f9dc4508a729e8c727b477842d9f20451d7ab060e8b2ff58f6f9ac8a8b6a66e2"
+    },
+    {
+      "path": "source/Project/AzureRender/tests/SurfaceResponseGpuTests.cpp",
+      "bytes": 7663,
+      "sha256": "662fc16d730b519036ca9222a310d09df598e8cdef4fd9403e4bcb04906e2de4"
+    },
+    {
+      "path": "source/Project/AzureRender/tools/endfield_native/npr_lighting.py",
+      "bytes": 5944,
+      "sha256": "83f7bd81bc7fc1f276d9dc80ab61c0895ad9369e75924c57a16976b83a9cbe5d"
+    },
+    {
+      "path": "source/Project/AzureRender/tools/test_native_npr_lighting.py",
+      "bytes": 6914,
+      "sha256": "3e2ef76435475c60aaff78cadcd160a7f39ea12a64150753fa22bac7fb43ccb7"
+    },
+    {
+      "path": "source/Project/AzureRender/tools/test_projected_hair_lighting_gpu.py",
+      "bytes": 16638,
+      "sha256": "ac159beda138d951943b6870d2d9f33da7bc80a24121b79c7f4419bd8756b9be"
+    },
+    {
+      "path": "release/budget.json",
+      "bytes": 437,
+      "sha256": "a3621082d0ac1b80a7475127b0836baf8e1b9fe957cb2cc4d902b834e94ececf"
+    },
+    {
+      "path": "release/build-release.py",
+      "bytes": 1242,
+      "sha256": "b88024e203ec37a720f8db60302c5d364c9473fe1cccb72519655c112c7f9fcc"
+    },
+    {
+      "path": "release/converter-green-result.json",
+      "bytes": 21,
+      "sha256": "2c3265f2c8bbea5b81766f695a9df10dc49ae21d5e4c841fcfafacea2bd7cf99"
+    },
+    {
+      "path": "release/converter-green.log",
+      "bytes": 131,
+      "sha256": "49203ce967928d68adebb3a3430c98d999c4b236a68eed18a5d4fa2f3dec0cbf"
+    },
+    {
+      "path": "release/converter-red-result.json",
+      "bytes": 80,
+      "sha256": "39057ca16ff8a33db264d39b5e24c602191a86697cae5b41691674de6338c252"
+    },
+    {
+      "path": "release/converter-red.log",
+      "bytes": 1175,
+      "sha256": "9fca2ac2f5317962c0465e915900761bf62494a278631e83f711f9befaddf16f"
+    },
+    {
+      "path": "release/default-four-command.json",
+      "bytes": 1046,
+      "sha256": "80db8c5b0d523d01c3a5d38d15d22c2e528b120f292ca7fb68f7b42c3fba75b3"
+    },
+    {
+      "path": "release/default-four-results.json",
+      "bytes": 1313,
+      "sha256": "c77cdf1407b014ef65ecb17d1572fe88c6b78b2c812b7c195f0718dc800aca42"
+    },
+    {
+      "path": "release/default-four.log",
+      "bytes": 13994,
+      "sha256": "bad12c554191cdb593bc0db381ee09dfb7606bae017a2f770275d3660a031673"
+    },
+    {
+      "path": "release/default-four.py",
+      "bytes": 1842,
+      "sha256": "c2aa916338aa616dba6e87a30c2a827082d3fbd0d4ab6d232e28abff7aad271a"
+    },
+    {
+      "path": "release/default-runtime.json",
+      "bytes": 317962,
+      "sha256": "4b094dfcc068c4e71200200abbe7c075096dac543f2dd1a627f0dc7d4cde8daa"
+    },
+    {
+      "path": "release/failed-fixture-v1.py",
+      "bytes": 16144,
+      "sha256": "13605dbc9ddfd815bbd5372b53339985c0f3152f90e1301e0007c5e1a6774e34"
+    },
+    {
+      "path": "release/finalize.py",
+      "bytes": 3687,
+      "sha256": "60a726e570018e9f7a296ceedafe4dd1ddac4cf68bcaef0cff5441e16a1470d8"
+    },
+    {
+      "path": "release/initial-checks.json",
+      "bytes": 1650,
+      "sha256": "5a26234423e5a7cadb0980b06783f2d1d9dfd424100313aff207a7df6eb43d63"
+    },
+    {
+      "path": "release/initial-checks.py",
+      "bytes": 1624,
+      "sha256": "2d17cbcc36641b666a56b948a28c4e90f43903a2bcdb5ff4cef5b3ec2b1fa2e5"
+    },
+    {
+      "path": "release/intel-controlled-material-chroma.log",
+      "bytes": 68,
+      "sha256": "7e99a93e408dff4d870694b5062b4b76afc89e25915932d775d3d477cbed90ad"
+    },
+    {
+      "path": "release/intel-controlled-material-command.json",
+      "bytes": 605,
+      "sha256": "106a61f6a610cf5d9db6fdb498143f0d4818de732eecd40d4166cb79559ae47e"
+    },
+    {
+      "path": "release/intel-direct-error-analysis.json",
+      "bytes": 19040,
+      "sha256": "ab8b4df6b58f8c609222a8ca5ebcf8349bdab82d7550ff905c5f62db0e0f545e"
+    },
+    {
+      "path": "release/intel-material-chroma.log",
+      "bytes": 814,
+      "sha256": "aa3148928281a76226922cc094c59191bb50a8be35ff27db7b554b23f4280153"
+    },
+    {
+      "path": "release/intel-material-command.json",
+      "bytes": 604,
+      "sha256": "fdcb9aa693ae3df99dbadbc80c42457de8f7244ae901d045050ada8aafd64e74"
+    },
+    {
+      "path": "release/intel-material-execution.json",
+      "bytes": 580,
+      "sha256": "2858fa5595ee060236a74a43cd59809ef1cb0c732b0f64e927a071e11ddad29c"
+    },
+    {
+      "path": "release/intel-shadow-batch.json",
+      "bytes": 577,
+      "sha256": "f896e5754161f28c4ad875c4800a19e79e9d4b7431d2f8b6e5b01ed0faa9a576"
+    },
+    {
+      "path": "release/intel-shadow-command.json",
+      "bytes": 748,
+      "sha256": "768fdf1781599b49164bc947dc5825c5c3c5322c46299f8bcb3ffc9b99c15698"
+    },
+    {
+      "path": "release/intel-shadow-execution.json",
+      "bytes": 15,
+      "sha256": "47b8b6b49d4695fe6e036bd916538aff4f46773e212ca0d429db80f3963e2cfe"
+    },
+    {
+      "path": "release/intel-shadow-model.json",
+      "bytes": 318,
+      "sha256": "421ecf74ba4d4c7c83cb8aec217603a8512e541632bbc6f3ee38d48a577ed015"
+    },
+    {
+      "path": "release/intel-shadow-results.json",
+      "bytes": 825,
+      "sha256": "fffc513573558037e7db1c143a74987ecd02660b7cf71f3b3163f3f376da7926"
+    },
+    {
+      "path": "release/intel-shadow.log",
+      "bytes": 3998,
+      "sha256": "3952ab4d6cdfc41bbf6207691e323ddc35f337dcb702b9f27f66b644884bce2d"
+    },
+    {
+      "path": "release/intel-surface.log",
+      "bytes": 13233,
+      "sha256": "147e1fabbf5529a183be140573cc3747673bab68a913f954734d40fd05bcc7ad"
+    },
+    {
+      "path": "release/invalid-cli-intel-shadow-batch.json",
+      "bytes": 577,
+      "sha256": "d68048f6d773754c3f3b1ab04791f38b4a0c060254bc23824885e8345fece488"
+    },
+    {
+      "path": "release/invalid-cli-intel-shadow.log",
+      "bytes": 94,
+      "sha256": "864501ac2bc38cfa649eb0a8660a36bcdcc3216d46530dc04c79d698a63c2455"
+    },
+    {
+      "path": "release/invalid-cli-shadow-probe.py",
+      "bytes": 1161,
+      "sha256": "45d27bbb148619be9b646cd39bdbad3f74dec4fe30f3139fdb519a225e34bc35"
+    },
+    {
+      "path": "release/material-contract.log",
+      "bytes": 267,
+      "sha256": "23229a86673721fb3c8da38762f4171a6af5285154db6dacc3a9cb393bcf6bc4"
+    },
+    {
+      "path": "release/material-gpu.py",
+      "bytes": 1211,
+      "sha256": "f1d37b2e56927bc185131606ac46251f931b4a5310ee19ab8169c6e3b379e0fa"
+    },
+    {
+      "path": "release/material-summary.json",
+      "bytes": 677,
+      "sha256": "c51e231b34fa09fa36b4d628d6861f01640094e2fa325cbecca2429cb9818fd0"
+    },
+    {
+      "path": "release/nvidia-controlled-material-chroma.log",
+      "bytes": 68,
+      "sha256": "7e99a93e408dff4d870694b5062b4b76afc89e25915932d775d3d477cbed90ad"
+    },
+    {
+      "path": "release/nvidia-controlled-material-command.json",
+      "bytes": 606,
+      "sha256": "885be5d8024da89b1e03a1828cc6d4a1d9ba26da609127ce915822ef3cf5abf8"
+    },
+    {
+      "path": "release/nvidia-material-chroma.log",
+      "bytes": 50,
+      "sha256": "31f5c359a140d403d62eeea150f90edbed9341c4264f2bdece6cc983044b2274"
+    },
+    {
+      "path": "release/nvidia-material-command.json",
+      "bytes": 605,
+      "sha256": "301bf7b86cbb6f288b58badb3a1d00046ec27729e5ede80f221a677cbd7bd6cc"
+    },
+    {
+      "path": "release/nvidia-material-execution.json",
+      "bytes": 592,
+      "sha256": "59121012c38edfef6361470feeb057645df9c045ce37fb1548f1584e3f4f4add"
+    },
+    {
+      "path": "release/nvidia-surface.log",
+      "bytes": 13239,
+      "sha256": "a44f48a78b0baee083cfda16a60bf5dad8766001395e4cff881fe53a1da13957"
+    },
+    {
+      "path": "release/process.log",
+      "bytes": 1210,
+      "sha256": "3757f69589f859b64582e3631b4cd0c7e917d052d86f65bb5d5cc51f71b9b09b"
+    },
+    {
+      "path": "release/queued-material-intel.py",
+      "bytes": 915,
+      "sha256": "078a7eb2776d25a90bc7e1c997078d367a768ba3569685cc3cfe57d25c6a0cf9"
+    },
+    {
+      "path": "release/queued-material.py",
+      "bytes": 917,
+      "sha256": "effba9f05ad20bdea183ffda51eab9f9697a5b29000046de994fe9e9e805adf8"
+    },
+    {
+      "path": "release/queued-release-final.py",
+      "bytes": 905,
+      "sha256": "8bc7c029e5b6e9e1619376260107dfecbedae978dee3938f16dc9e70e22c2024"
+    },
+    {
+      "path": "release/queued-shadow.py",
+      "bytes": 898,
+      "sha256": "dd622eefead59283c2a18b774d505218550b6c3faa93a2e24d79ff2e865d15c2"
+    },
+    {
+      "path": "release/red-build.log",
+      "bytes": 746,
+      "sha256": "e501c621442b8ec5c412276b72899ab9ed31cf7656cb78d2d2e94fb44c8aa97c"
+    },
+    {
+      "path": "release/red-command.txt",
+      "bytes": 1349,
+      "sha256": "de69a1f66a9b86bf21a0e823598a3e11ce4a1e611a43c6193c8c8e167336d258"
+    },
+    {
+      "path": "release/red-result.json",
+      "bytes": 247,
+      "sha256": "56fef9bbba598e33b489d2650fda7e11478c6b025b1eeecd5cf883a8061c9cd7"
+    },
+    {
+      "path": "release/red.py",
+      "bytes": 1494,
+      "sha256": "2b1c70073852afde219f1fc7451129da61a91def0ec6af55bd48ec5630e3dedc"
+    },
+    {
+      "path": "release/release-build-commands.json",
+      "bytes": 1185,
+      "sha256": "73cea91a5c57cca7f97827818323a89809fb223927a0c12586ec4fb91735596f"
+    },
+    {
+      "path": "release/release-build.log",
+      "bytes": 70255,
+      "sha256": "a51631845796fa861fccce6586f831acb1623113e5b233c72d463b692990de34"
+    },
+    {
+      "path": "release/release-final-contract-build.log",
+      "bytes": 478,
+      "sha256": "5a9d3b41c832b500b3f6a0792628e63be351f124048291ff35d98f6e96c02c91"
+    },
+    {
+      "path": "release/release-final-contract.json",
+      "bytes": 386,
+      "sha256": "2d50bd3516668f107a1d61e7ffefb516a02b8570458cba6c88cdc0fb38696dea"
+    },
+    {
+      "path": "release/release-final-contract.log",
+      "bytes": 267,
+      "sha256": "9e3aa736f47e1f76f53788521cf09079bb3df953026fd5d11e3e1e4f5f04af21"
+    },
+    {
+      "path": "release/release-final-execution.json",
+      "bytes": 578,
+      "sha256": "8087a671f44436e53c5a792853fcf6e1cdcf457ed92d134c8182ae22d9216399"
+    },
+    {
+      "path": "release/release-final.py",
+      "bytes": 1178,
+      "sha256": "16751d884abf52b3c24bed4e73a25fda5afe6d6e10ccdcab26ee52d19bb3b625"
+    },
+    {
+      "path": "release/shader-red-result.json",
+      "bytes": 487,
+      "sha256": "8db988677fc8c00f4445d4dfd9db6a4090283ef9249cbd9b2060bebc119659ee"
+    },
+    {
+      "path": "release/shader-red.log",
+      "bytes": 381,
+      "sha256": "be10f80141a81ff44d20528fb6247d394b6452eeaf0e008be0fcadb4f5b2789d"
+    },
+    {
+      "path": "release/shadow-probe.py",
+      "bytes": 1172,
+      "sha256": "d6c5220bc17c23226ec12fd0e988307ad230d6eb59e9558bdd3e406f30797a36"
+    },
+    {
+      "path": "release/uncontrolled-shadow-fixture-v2.py",
+      "bytes": 16598,
+      "sha256": "dfe75bdd0ec71936d31deedb3e93fa4614ba84a36c35759cc0691434f209e3ea"
+    },
+    {
+      "path": "release/uncontrolled-shadow-intel-execution.json",
+      "bytes": 591,
+      "sha256": "63f0b2b46ca7d4f8ce4f4b4ef4a5606b027c993a497a56cbac0dcf09c9427e7e"
+    },
+    {
+      "path": "release/uncontrolled-shadow-intel-material-chroma.log",
+      "bytes": 814,
+      "sha256": "aa3148928281a76226922cc094c59191bb50a8be35ff27db7b554b23f4280153"
+    },
+    {
+      "path": "release/uncontrolled-shadow-intel-material-command.json",
+      "bytes": 604,
+      "sha256": "fdcb9aa693ae3df99dbadbc80c42457de8f7244ae901d045050ada8aafd64e74"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/summary.json",
+      "bytes": 3871,
+      "sha256": "eb2dcacbae5dbe27069daf28b16b0c5d14136a6e152e5d333c58d96edc57c7c9"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/ambient/command.json",
+      "bytes": 764,
+      "sha256": "ceb229f27a0ab145bc7d468bd05f0af788aeccf870bdc418e5ea19d6659e25ab"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/ambient/expected.json",
+      "bytes": 14694,
+      "sha256": "d2d75e6126e034ecfe2d4e88f2aae048d60d7031d3f6e5d133fad1abd40c3d32"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/ambient/player.log",
+      "bytes": 4037,
+      "sha256": "89fa12fc26dc0d7d88cc904328cb1756c9dba3b547784a581310a0beb5cd5ab1"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/ambient/test.azureproject",
+      "bytes": 165,
+      "sha256": "1c8469cf55627cd3884c0c0847882c8614a4ef91c5f023fb92f74f5ac130a06e"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/ambient/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/ambient/assets/scene.azurelevel",
+      "bytes": 1601,
+      "sha256": "52ef303275d199180cd428e94d8cb870b88680e186a59fbac13b884e96548ba1"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/ambient/frames/capture_manifest.json",
+      "bytes": 11163,
+      "sha256": "12e238b96b7b1fce2f99c9353c5aae2627ecc37c7ebb17d2749f8231fa722fc0"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/ambient/frames/frame_000000.png",
+      "bytes": 959,
+      "sha256": "2c0db773166900958e016aebceb581e2537d86f73849e42ecde8ea4843a6f529"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/ambient/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/direct/command.json",
+      "bytes": 769,
+      "sha256": "eeffdad903101c158f188e84c3e8a4880534265afe4d8dd8db9671541cf20bb0"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/direct/expected.json",
+      "bytes": 14693,
+      "sha256": "c8ee57835447ae84d421bda03f92d036a109f0d2da66d90b5db75d6d949af9dc"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/direct/player.log",
+      "bytes": 4039,
+      "sha256": "ad854815866c1eaaa6547a43b5879fddd700b48040fccac419b5a252ad360f37"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/direct/test.azureproject",
+      "bytes": 164,
+      "sha256": "36356f3d98f36d8cc8e1c14b665ea66f8e2fba60fbfde608b5c3b3b7809ce7a9"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/direct/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/direct/assets/scene.azurelevel",
+      "bytes": 1600,
+      "sha256": "9878e4db03b6252a84a1c2f76866822b81ee080a47ac739ca8d7f0985fdca5a9"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/direct/frames/capture_manifest.json",
+      "bytes": 11167,
+      "sha256": "3a4a0c6f22d6b643e43ec9005e576c0601b5b18db7e32684773d620a1f05c9b4"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/direct/frames/frame_000000.png",
+      "bytes": 849,
+      "sha256": "7c8698f985e890287484ec39ab83e95c662e195db3ef849d1354fa17dcecd032"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/direct/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk/command.json",
+      "bytes": 754,
+      "sha256": "62364c49def3526a182a2deca806e83d6e2605086ffb03cdad2bc4292a259f39"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk/expected.json",
+      "bytes": 14689,
+      "sha256": "f2f27931a455a75f2e82dc8086b8cdb543565adb438f729643818ca5b527ec3a"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk/player.log",
+      "bytes": 4017,
+      "sha256": "4cf51bfdb4117923a6af5b2d46f1b870356930a98ccd7b868bcf423f8c3fd283"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk/test.azureproject",
+      "bytes": 160,
+      "sha256": "6fba73e52a7e38471c8e19924638d50b97e12c29396a3ef26f14a7424f09dde8"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk/assets/scene.azurelevel",
+      "bytes": 1596,
+      "sha256": "bd2f7ea3830dec966c1aa734784b48fed05263c224a1b3e438e7174329743f30"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk/frames/capture_manifest.json",
+      "bytes": 11158,
+      "sha256": "30051a193d4b99267bff5854892bbc15c42e3f4a3b3cb2bafbe3906cd856aba2"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk/frames/frame_000000.png",
+      "bytes": 3524,
+      "sha256": "f731609fd2adaa731943a625b6a217300f9262b94d0c164aa9e388045933181a"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk-fixed/command.json",
+      "bytes": 859,
+      "sha256": "02022acbd13c9f10ad24554df7258fe9ea5ceb10224d3fe0addc8315337e1ada"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk-fixed/expected.json",
+      "bytes": 14695,
+      "sha256": "3ee3d191e4f5c4571368c4b5774e919b5e461d4fdbaa91ab436aaa9b461b2f22"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk-fixed/player.log",
+      "bytes": 4048,
+      "sha256": "ab5a8263955394913c82c50538bf2ebd61520f27e8d42d6cfb8f5bc39e6e70e7"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk-fixed/test.azureproject",
+      "bytes": 166,
+      "sha256": "4b379874dce674d90b30c6cbbd7e0eb8026b19988ea622e0a98b66f7cb5b64b5"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk-fixed/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk-fixed/assets/scene.azurelevel",
+      "bytes": 1602,
+      "sha256": "455b941b8627d4767cca5d732f58809de4e1b3c6d9cc979a4d3012e279c0cf5c"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk-fixed/frames/capture_manifest.json",
+      "bytes": 11152,
+      "sha256": "1a39edd146e72e2e95cb3fdabc75cf664cb2f8fb5bab3fdafe48f58536c6c787"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk-fixed/frames/frame_000000.png",
+      "bytes": 3524,
+      "sha256": "f731609fd2adaa731943a625b6a217300f9262b94d0c164aa9e388045933181a"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/kk-fixed/frames/gpu_capabilities.json",
+      "bytes": 6682,
+      "sha256": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk/command.json",
+      "bytes": 766,
+      "sha256": "f014ed33260254e7ecf8cf2e589e661db22f41558fc088bcdf57a18b565b7456"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk/expected.json",
+      "bytes": 14695,
+      "sha256": "26983162a2d0b5d35ae6036194d6c67eb9105963b85d22f192f9d8b4eb592665"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk/player.log",
+      "bytes": 4039,
+      "sha256": "5cab60e211e9e9309eb9fab5552508581f24714f3d27cc7ed3a68549718322fc"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk/test.azureproject",
+      "bytes": 166,
+      "sha256": "5da982a1ce486da040250412724f7721233ced3f12e0aaff55e8e5bbf714c383"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk/assets/scene.azurelevel",
+      "bytes": 1596,
+      "sha256": "caa360f7bbfa620b2c4c29cc56b514cc6f681afabbff9bf345d2358c6b9bcb3e"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk/frames/capture_manifest.json",
+      "bytes": 11163,
+      "sha256": "68910ee8ff2c2556db5dc26c3f1f07b205726951c7f73c0809505f1bd2d5a09c"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk/frames/frame_000000.png",
+      "bytes": 1197,
+      "sha256": "8028a65addd6b7d1d13dae903cbcd8b12d36d4bc72e86290dc27f87c5cf2a6aa"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk-control/command.json",
+      "bytes": 782,
+      "sha256": "ea6cda9bcc4f131b523891dd1bb26a60ecf4ed9827bfb6a317190fbcc65eb688"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk-control/expected.json",
+      "bytes": 14703,
+      "sha256": "58b272c9719e022a05425615b23e5cc87ffa37282dc31c4a675247953b2cb306"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk-control/player.log",
+      "bytes": 4071,
+      "sha256": "282d957b4f965d8cc0013c5d439ff5ad4e001719f4938aef769c7e13c0537d1e"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk-control/test.azureproject",
+      "bytes": 174,
+      "sha256": "459907106be3a23a05a599d7fd9beb59627e54334da3f049019bbb45f49bf84a"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk-control/assets/panels.gltf",
+      "bytes": 5870,
+      "sha256": "fa3035b93c9e9e896a419af8ff0c4c34eb2d3c952fa452907d91b708de2f9b3d"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk-control/assets/scene.azurelevel",
+      "bytes": 1604,
+      "sha256": "b2fc749a8fc00e7a504fd40976446665278178696c3bc383658d779f53c7cac0"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk-control/frames/capture_manifest.json",
+      "bytes": 11171,
+      "sha256": "9a9bcd3c7ede6d322d567d30e86d8a67e3c2bff3d6caea87935cb3b2756ed160"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk-control/frames/frame_000000.png",
+      "bytes": 1197,
+      "sha256": "8028a65addd6b7d1d13dae903cbcd8b12d36d4bc72e86290dc27f87c5cf2a6aa"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/local-kk-control/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/no-main/command.json",
+      "bytes": 764,
+      "sha256": "3eb6d779f1d9356373c7669e6d9315a5383e798ae97a1f850199c427a21caca2"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/no-main/expected.json",
+      "bytes": 14694,
+      "sha256": "8584a54cf78df8d499d09da1be6cf046efd1da297122a03b0001729f46f2f192"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/no-main/player.log",
+      "bytes": 4029,
+      "sha256": "503308a9a74991302cf99f5a40c4b24110b7475979f6e6ffbed5f1d39cd85ac5"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/no-main/test.azureproject",
+      "bytes": 165,
+      "sha256": "4d09d8c4ae04a6342aeb4935beb2509bb7cd96b2d1bb97a3ceec8946bb6669db"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/no-main/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/no-main/assets/scene.azurelevel",
+      "bytes": 1602,
+      "sha256": "4a6166da7ffd25c36e0102873781323decbaac77f976c41140c59de28009dc8a"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/no-main/frames/capture_manifest.json",
+      "bytes": 11162,
+      "sha256": "0a29e5034ce27b0cafcd58f332820b6d315cbe72747d5f8b6c4b286bbea235af"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/no-main/frames/frame_000000.png",
+      "bytes": 811,
+      "sha256": "e7116f3121ee5082947a5caa7cf35d7b0d5364f2f30b140ff32245693dd46d53"
+    },
+    {
+      "path": "release/intel-material-chroma-controlled/no-main/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/summary.json",
+      "bytes": 3907,
+      "sha256": "0582420f929a851be41ea4e32c62be5ce97f075295a827930ecd2d5a3257968f"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/ambient/command.json",
+      "bytes": 766,
+      "sha256": "f4ff1d97e236379077f56b3f55cf84eb1916b5c134fef7c65530541c26dfeeb5"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/ambient/expected.json",
+      "bytes": 14694,
+      "sha256": "d2d75e6126e034ecfe2d4e88f2aae048d60d7031d3f6e5d133fad1abd40c3d32"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/ambient/player.log",
+      "bytes": 4032,
+      "sha256": "b584d0b3872c2e0782a6f7f73eafdeb5e5d206852404e215fda00173857fd98d"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/ambient/test.azureproject",
+      "bytes": 165,
+      "sha256": "1c8469cf55627cd3884c0c0847882c8614a4ef91c5f023fb92f74f5ac130a06e"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/ambient/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/ambient/assets/scene.azurelevel",
+      "bytes": 1601,
+      "sha256": "52ef303275d199180cd428e94d8cb870b88680e186a59fbac13b884e96548ba1"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/ambient/frames/capture_manifest.json",
+      "bytes": 11150,
+      "sha256": "df19dc7efa87f3489dd81653d2c8386975556e15c205c1bcc863a7803461160b"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/ambient/frames/frame_000000.png",
+      "bytes": 849,
+      "sha256": "23bd1b21c047cbbf93b618093d7bf6b4468a3020953e3f4cebc2655b4d5c6642"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/ambient/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/direct/command.json",
+      "bytes": 771,
+      "sha256": "5fa3f275b6bf8e5e04a0c090ae07fe7aa058f5cb5b33080f95e8a489cb4a971d"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/direct/expected.json",
+      "bytes": 14693,
+      "sha256": "c8ee57835447ae84d421bda03f92d036a109f0d2da66d90b5db75d6d949af9dc"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/direct/player.log",
+      "bytes": 4035,
+      "sha256": "2501109cdee1faabee4b0025d0c41683d48d288594da01258eab94ea496a76e1"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/direct/test.azureproject",
+      "bytes": 164,
+      "sha256": "36356f3d98f36d8cc8e1c14b665ea66f8e2fba60fbfde608b5c3b3b7809ce7a9"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/direct/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/direct/assets/scene.azurelevel",
+      "bytes": 1600,
+      "sha256": "9878e4db03b6252a84a1c2f76866822b81ee080a47ac739ca8d7f0985fdca5a9"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/direct/frames/capture_manifest.json",
+      "bytes": 11157,
+      "sha256": "ef5c8f75a99b22adb90067bb5f45ff2a107ca19cf884cc92e1307750cd5885bc"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/direct/frames/frame_000000.png",
+      "bytes": 950,
+      "sha256": "339d5afe91fbdcaf5113919430580a7fc715f5166e0881201ed732c035ccf073"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/direct/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk/command.json",
+      "bytes": 756,
+      "sha256": "d4d7b2ff4ab072a53314df87872a1fa23e12c03ca5c457535bb9cd13c9a01986"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk/expected.json",
+      "bytes": 14689,
+      "sha256": "f2f27931a455a75f2e82dc8086b8cdb543565adb438f729643818ca5b527ec3a"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk/player.log",
+      "bytes": 4012,
+      "sha256": "f46862c9d0a609e2f20fc65a03f26818f3807e10813c649b0ec8209a1acd09b8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk/test.azureproject",
+      "bytes": 160,
+      "sha256": "6fba73e52a7e38471c8e19924638d50b97e12c29396a3ef26f14a7424f09dde8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk/assets/scene.azurelevel",
+      "bytes": 1596,
+      "sha256": "bd2f7ea3830dec966c1aa734784b48fed05263c224a1b3e438e7174329743f30"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk/frames/capture_manifest.json",
+      "bytes": 11144,
+      "sha256": "c80fb4f06695d47eef9a60e1bd68c34bf15181b09b8624c7a750f155dd4c055a"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk/frames/frame_000000.png",
+      "bytes": 3535,
+      "sha256": "3f87f443fad2c0938c765f969ef69993512e173010143aea47c362c233f657d8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk-fixed/command.json",
+      "bytes": 861,
+      "sha256": "f8e61b190cee4d6f72a25dfdf5d6e2b762206d96b21d52b31f110df05adb1ef5"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk-fixed/expected.json",
+      "bytes": 14695,
+      "sha256": "3ee3d191e4f5c4571368c4b5774e919b5e461d4fdbaa91ab436aaa9b461b2f22"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk-fixed/player.log",
+      "bytes": 4042,
+      "sha256": "d37343a106559768c67a957e6799a0da3fa34cf721b7c2797ff14b6ac1007418"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk-fixed/test.azureproject",
+      "bytes": 166,
+      "sha256": "4b379874dce674d90b30c6cbbd7e0eb8026b19988ea622e0a98b66f7cb5b64b5"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk-fixed/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk-fixed/assets/scene.azurelevel",
+      "bytes": 1602,
+      "sha256": "455b941b8627d4767cca5d732f58809de4e1b3c6d9cc979a4d3012e279c0cf5c"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk-fixed/frames/capture_manifest.json",
+      "bytes": 11146,
+      "sha256": "fab84eb8b775cb5a350d12c36b6b1a5c9748bdc1da68e3c337c4a4ce798bc8c5"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk-fixed/frames/frame_000000.png",
+      "bytes": 3535,
+      "sha256": "3f87f443fad2c0938c765f969ef69993512e173010143aea47c362c233f657d8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/kk-fixed/frames/gpu_capabilities.json",
+      "bytes": 11109,
+      "sha256": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk/command.json",
+      "bytes": 768,
+      "sha256": "4a3b02576e3ede8d66d01f5aebf6992f8dc39fe54f44be706106afe84dc37ca9"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk/expected.json",
+      "bytes": 14695,
+      "sha256": "26983162a2d0b5d35ae6036194d6c67eb9105963b85d22f192f9d8b4eb592665"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk/player.log",
+      "bytes": 4035,
+      "sha256": "93efef2be4aac3ea136678a5ea8d24c6ef609a8d80f3b4c9dfea0242b3a2f5b0"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk/test.azureproject",
+      "bytes": 166,
+      "sha256": "5da982a1ce486da040250412724f7721233ced3f12e0aaff55e8e5bbf714c383"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk/assets/scene.azurelevel",
+      "bytes": 1596,
+      "sha256": "caa360f7bbfa620b2c4c29cc56b514cc6f681afabbff9bf345d2358c6b9bcb3e"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk/frames/capture_manifest.json",
+      "bytes": 11152,
+      "sha256": "433f2f63ca50e15b6789ebd69aa1bece2497a9b113efd300024b85a4888609d7"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk/frames/frame_000000.png",
+      "bytes": 1228,
+      "sha256": "0700836bff4366745fae02f450a542473279931fd4b5fbe583098afec2c606a0"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk-control/command.json",
+      "bytes": 784,
+      "sha256": "208ebf2260956606d2cfb99907403b3df9f1b3e37bebd9171eaef0c8a5b5058e"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk-control/expected.json",
+      "bytes": 14703,
+      "sha256": "58b272c9719e022a05425615b23e5cc87ffa37282dc31c4a675247953b2cb306"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk-control/player.log",
+      "bytes": 4067,
+      "sha256": "11824b4cda9e853bdcbead3c73e212ab32fe6ebc8e86e7af45ab1ad557c129c0"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk-control/test.azureproject",
+      "bytes": 174,
+      "sha256": "459907106be3a23a05a599d7fd9beb59627e54334da3f049019bbb45f49bf84a"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk-control/assets/panels.gltf",
+      "bytes": 5870,
+      "sha256": "fa3035b93c9e9e896a419af8ff0c4c34eb2d3c952fa452907d91b708de2f9b3d"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk-control/assets/scene.azurelevel",
+      "bytes": 1604,
+      "sha256": "b2fc749a8fc00e7a504fd40976446665278178696c3bc383658d779f53c7cac0"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk-control/frames/capture_manifest.json",
+      "bytes": 11156,
+      "sha256": "73babc60b2d6afa624316ed7fc9c2f1531d85da9c9bf14ed30ca20bb137f3af3"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk-control/frames/frame_000000.png",
+      "bytes": 1228,
+      "sha256": "0700836bff4366745fae02f450a542473279931fd4b5fbe583098afec2c606a0"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/local-kk-control/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/no-main/command.json",
+      "bytes": 766,
+      "sha256": "4868b5d6455277a750a8565107e8e4ba607c5656c0f4805c360d33b2bde2af4e"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/no-main/expected.json",
+      "bytes": 14694,
+      "sha256": "8584a54cf78df8d499d09da1be6cf046efd1da297122a03b0001729f46f2f192"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/no-main/player.log",
+      "bytes": 4025,
+      "sha256": "4498369729d8888234ab22dab8993e3527497c7d4effd7909fad4e59e78652ac"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/no-main/test.azureproject",
+      "bytes": 165,
+      "sha256": "4d09d8c4ae04a6342aeb4935beb2509bb7cd96b2d1bb97a3ceec8946bb6669db"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/no-main/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/no-main/assets/scene.azurelevel",
+      "bytes": 1602,
+      "sha256": "4a6166da7ffd25c36e0102873781323decbaac77f976c41140c59de28009dc8a"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/no-main/frames/capture_manifest.json",
+      "bytes": 11151,
+      "sha256": "4a339f7ed1447d7cab1f7f7d6969979278ee1edd1b76b97a6aa047637b5f9b7c"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/no-main/frames/frame_000000.png",
+      "bytes": 811,
+      "sha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781"
+    },
+    {
+      "path": "release/nvidia-material-chroma-controlled/no-main/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "release/intel-material-chroma-qualified/summary.json",
+      "bytes": 885,
+      "sha256": "a6f4a0a9df16541c18e6f9c048d65deb51e1f3b031c98fe054c24d651e2bbbbe"
+    },
+    {
+      "path": "release/intel-material-chroma-qualified/direct/command.json",
+      "bytes": 767,
+      "sha256": "3f20596e7983f93e730c81abc0540266583d214269dde328a856e900fc19aabe"
+    },
+    {
+      "path": "release/intel-material-chroma-qualified/direct/expected.json",
+      "bytes": 14693,
+      "sha256": "c8ee57835447ae84d421bda03f92d036a109f0d2da66d90b5db75d6d949af9dc"
+    },
+    {
+      "path": "release/intel-material-chroma-qualified/direct/player.log",
+      "bytes": 4031,
+      "sha256": "49fa69bbd449546b94691488acda79a51fa69b8fc58ec61531fa77a6f44282aa"
+    },
+    {
+      "path": "release/intel-material-chroma-qualified/direct/test.azureproject",
+      "bytes": 164,
+      "sha256": "36356f3d98f36d8cc8e1c14b665ea66f8e2fba60fbfde608b5c3b3b7809ce7a9"
+    },
+    {
+      "path": "release/intel-material-chroma-qualified/direct/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/intel-material-chroma-qualified/direct/assets/scene.azurelevel",
+      "bytes": 1600,
+      "sha256": "039b04a9f5eb8642b5d4bc9d9ed19efb35800b8bb75207d68a585c213fcbf833"
+    },
+    {
+      "path": "release/intel-material-chroma-qualified/direct/frames/capture_manifest.json",
+      "bytes": 11166,
+      "sha256": "f333ba6381f57cda0df57d98a0270a638b7022ef5de3de658b0dd08cd00a9c0c"
+    },
+    {
+      "path": "release/intel-material-chroma-qualified/direct/frames/frame_000000.png",
+      "bytes": 1130,
+      "sha256": "92cdfe56d83326e9526e81195864891be10baceb18dcbdf161a5a8805609b3a7"
+    },
+    {
+      "path": "release/intel-material-chroma-qualified/direct/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/summary.json",
+      "bytes": 3362,
+      "sha256": "9b204001187724da72ba9b9f0243580ab4464e7869ec29bc18c29872daef1881"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/ambient/command.json",
+      "bytes": 764,
+      "sha256": "5b3c438e56c2d3588e7e64c3c916773c6ca1303cc161332a4d020f4f96b85117"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/ambient/expected.json",
+      "bytes": 14694,
+      "sha256": "d2d75e6126e034ecfe2d4e88f2aae048d60d7031d3f6e5d133fad1abd40c3d32"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/ambient/player.log",
+      "bytes": 4026,
+      "sha256": "b879adcd293a0824f14fa2af03aacb265236bd5c4d49e92e83531c80d29fd8f0"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/ambient/test.azureproject",
+      "bytes": 165,
+      "sha256": "1c8469cf55627cd3884c0c0847882c8614a4ef91c5f023fb92f74f5ac130a06e"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/ambient/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/ambient/assets/scene.azurelevel",
+      "bytes": 1601,
+      "sha256": "1b29a6b4b240375c274cfeba53d44a5b90a07089d2e021ab6f556c79da68d4f7"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/ambient/frames/capture_manifest.json",
+      "bytes": 11146,
+      "sha256": "553e6141ae0a756b4a85f82703772b91789eaab88795d839e440e58749ac1bba"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/ambient/frames/frame_000000.png",
+      "bytes": 849,
+      "sha256": "23bd1b21c047cbbf93b618093d7bf6b4468a3020953e3f4cebc2655b4d5c6642"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/ambient/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/direct/command.json",
+      "bytes": 769,
+      "sha256": "f9b9917a7fe16b36519dd522c6107baddf3b0bc13a2deab2ddcb3637a81b9c3d"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/direct/expected.json",
+      "bytes": 14693,
+      "sha256": "c8ee57835447ae84d421bda03f92d036a109f0d2da66d90b5db75d6d949af9dc"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/direct/player.log",
+      "bytes": 4030,
+      "sha256": "b9592300d769d9a846a5bbae33b26566f7b94e61a094de1e7a0715b0e9d213bb"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/direct/test.azureproject",
+      "bytes": 164,
+      "sha256": "36356f3d98f36d8cc8e1c14b665ea66f8e2fba60fbfde608b5c3b3b7809ce7a9"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/direct/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/direct/assets/scene.azurelevel",
+      "bytes": 1600,
+      "sha256": "039b04a9f5eb8642b5d4bc9d9ed19efb35800b8bb75207d68a585c213fcbf833"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/direct/frames/capture_manifest.json",
+      "bytes": 11153,
+      "sha256": "1abc8955848d41a8548fa5a7fd466237e617188d64fbd9b1b05bab520565dc96"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/direct/frames/frame_000000.png",
+      "bytes": 950,
+      "sha256": "339d5afe91fbdcaf5113919430580a7fc715f5166e0881201ed732c035ccf073"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/direct/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk/command.json",
+      "bytes": 754,
+      "sha256": "5222a72e92559990149563dda78503d9ee2ddae95319713db259b5fff9864182"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk/expected.json",
+      "bytes": 14689,
+      "sha256": "f2f27931a455a75f2e82dc8086b8cdb543565adb438f729643818ca5b527ec3a"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk/player.log",
+      "bytes": 4006,
+      "sha256": "2c9c1281aa046a5e83aba37c0dd2f132996a6f06dfd3e035b71a973341cdc687"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk/test.azureproject",
+      "bytes": 160,
+      "sha256": "6fba73e52a7e38471c8e19924638d50b97e12c29396a3ef26f14a7424f09dde8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk/assets/scene.azurelevel",
+      "bytes": 1596,
+      "sha256": "4005a9c95f5e0b687f74f064409c79ccb01c0bc38775b82f01dcb22cef272187"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk/frames/capture_manifest.json",
+      "bytes": 11142,
+      "sha256": "d2d93562082ca9859ae8b60738cfe129d0cfcf41fc29ca664f0616086c9fbbab"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk/frames/frame_000000.png",
+      "bytes": 3535,
+      "sha256": "3f87f443fad2c0938c765f969ef69993512e173010143aea47c362c233f657d8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk-fixed/command.json",
+      "bytes": 859,
+      "sha256": "25e2300749012766d0efc9540f273df60d85136a54d8147459ba72956d0ca0d8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk-fixed/expected.json",
+      "bytes": 14695,
+      "sha256": "3ee3d191e4f5c4571368c4b5774e919b5e461d4fdbaa91ab436aaa9b461b2f22"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk-fixed/player.log",
+      "bytes": 4039,
+      "sha256": "06e22b8e0ef3f81522d6bb3838268ecaf38167e671af09a4b767b0262c8efe84"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk-fixed/test.azureproject",
+      "bytes": 166,
+      "sha256": "4b379874dce674d90b30c6cbbd7e0eb8026b19988ea622e0a98b66f7cb5b64b5"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk-fixed/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk-fixed/assets/scene.azurelevel",
+      "bytes": 1602,
+      "sha256": "4742d67326cb76376f4b368eff423be271bb2e52ec62dec224e80842b320c61d"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk-fixed/frames/capture_manifest.json",
+      "bytes": 11141,
+      "sha256": "bd9c36b23c853b278a17a5a661e016645aec31f8ab145f5b94503b4ba6597cf7"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk-fixed/frames/frame_000000.png",
+      "bytes": 3535,
+      "sha256": "3f87f443fad2c0938c765f969ef69993512e173010143aea47c362c233f657d8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/kk-fixed/frames/gpu_capabilities.json",
+      "bytes": 11109,
+      "sha256": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/local-kk/command.json",
+      "bytes": 766,
+      "sha256": "10c6ed7f905bab7d73ab18e49c905a216b493c0db752b2504aefd9fe00aed87c"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/local-kk/expected.json",
+      "bytes": 14695,
+      "sha256": "26983162a2d0b5d35ae6036194d6c67eb9105963b85d22f192f9d8b4eb592665"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/local-kk/player.log",
+      "bytes": 4031,
+      "sha256": "456319b9569ef0969b8744c68e209b39be53a634c756730405f839a26f8795c0"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/local-kk/test.azureproject",
+      "bytes": 166,
+      "sha256": "5da982a1ce486da040250412724f7721233ced3f12e0aaff55e8e5bbf714c383"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/local-kk/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/local-kk/assets/scene.azurelevel",
+      "bytes": 1596,
+      "sha256": "3bb1d86c56db9a8fe131d04bd66141153ea66473539dd095537d594b1f5d8e94"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/local-kk/frames/capture_manifest.json",
+      "bytes": 11146,
+      "sha256": "48f8ab13401ec8e0e7cdd58c9cd90450c9b423a35a8aa115625a7a5652fef0d3"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/local-kk/frames/frame_000000.png",
+      "bytes": 1228,
+      "sha256": "0700836bff4366745fae02f450a542473279931fd4b5fbe583098afec2c606a0"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/local-kk/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/no-main/command.json",
+      "bytes": 764,
+      "sha256": "d87b42b59a3b3da7aa3e2312ab5fd9d9e30cd1830897101dd62a8e3e5d381ef1"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/no-main/expected.json",
+      "bytes": 14694,
+      "sha256": "8584a54cf78df8d499d09da1be6cf046efd1da297122a03b0001729f46f2f192"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/no-main/player.log",
+      "bytes": 4021,
+      "sha256": "099b3aa6a219d8848801e562b63a67b8c2009a02a346b215c505c0769796b782"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/no-main/test.azureproject",
+      "bytes": 165,
+      "sha256": "4d09d8c4ae04a6342aeb4935beb2509bb7cd96b2d1bb97a3ceec8946bb6669db"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/no-main/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/no-main/assets/scene.azurelevel",
+      "bytes": 1602,
+      "sha256": "e452dd2ffb91c6938a7854a61cb0f0692bd57c500b4ff4819ae573a4820bfcf0"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/no-main/frames/capture_manifest.json",
+      "bytes": 11146,
+      "sha256": "66267360be729f90c13b89a913165d207dfdb528c36ff9e272aba1d5926049c8"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/no-main/frames/frame_000000.png",
+      "bytes": 811,
+      "sha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781"
+    },
+    {
+      "path": "release/nvidia-material-chroma-qualified/no-main/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "release/intel-direct-shadow-probe/capture_manifest.json",
+      "bytes": 11170,
+      "sha256": "83e6c3db9fba3252dd9d9146a062c7fef212b016210be26fbc0a5a7b822460a8"
+    },
+    {
+      "path": "release/intel-direct-shadow-probe/frame_000000.png",
+      "bytes": 1096,
+      "sha256": "397b4fc8e647126ead44b55fb52a2e6d98b4d6bc20ad60650b5bbc4317d02808"
+    },
+    {
+      "path": "release/intel-direct-shadow-probe/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "debug/budget.json",
+      "bytes": 438,
+      "sha256": "097676f7b61873084f7e199c26c2a397d68fb272af234a63824ce5067a7ff6b7"
+    },
+    {
+      "path": "debug/build-debug.py",
+      "bytes": 1290,
+      "sha256": "ae4d109178a0ef29e7714fad7e5bbcb953dde7739eefe429bad095b77be53d07"
+    },
+    {
+      "path": "debug/debug-build-commands.json",
+      "bytes": 1243,
+      "sha256": "9ae2c6a8fac83093a15270b1396cc92ba7a8bd85cc3c3d74bf91d03932b6eb91"
+    },
+    {
+      "path": "debug/debug-build.log",
+      "bytes": 70640,
+      "sha256": "1e9537a0e9fe889248c58b80fa9a6a2d15d5ebc92fe7b476387af49ebd80b9bb"
+    },
+    {
+      "path": "debug/execution.json",
+      "bytes": 575,
+      "sha256": "4196b7ae599907e87abfa66835c3e0473a755de61bbe2d387f078e4a719a6043"
+    },
+    {
+      "path": "debug/initial-checks.json",
+      "bytes": 1633,
+      "sha256": "4916d6adfd802c1bfbdb1d2da2210f03c5286953ee8ce5b625e0432d7f463af9"
+    },
+    {
+      "path": "debug/initial-checks.py",
+      "bytes": 1622,
+      "sha256": "db56c8791699b6e7834f9cf6820e4abbfa2fbbd5e12c480658b50e683627cd70"
+    },
+    {
+      "path": "debug/intel-controlled-material-chroma.log",
+      "bytes": 68,
+      "sha256": "7e99a93e408dff4d870694b5062b4b76afc89e25915932d775d3d477cbed90ad"
+    },
+    {
+      "path": "debug/intel-controlled-material-command.json",
+      "bytes": 601,
+      "sha256": "e266b9f7329ac16439d1d08103aeb3b0d5922cd702a47cab1b2bfcbc3bd1a64e"
+    },
+    {
+      "path": "debug/intel-material-execution.json",
+      "bytes": 589,
+      "sha256": "93ac213cf3fa0350718e2c6567916c00e9caa5b2b970f0fee9319f065c0b9e51"
+    },
+    {
+      "path": "debug/intel-surface.log",
+      "bytes": 13233,
+      "sha256": "147e1fabbf5529a183be140573cc3747673bab68a913f954734d40fd05bcc7ad"
+    },
+    {
+      "path": "debug/material-contract.log",
+      "bytes": 267,
+      "sha256": "dfb335afa9d8f66fda1d7fbb215d452f3ecb7cf3d3baeb806d97c4c3c6635aec"
+    },
+    {
+      "path": "debug/material-gpu.py",
+      "bytes": 1209,
+      "sha256": "a503c2326142ec24bc6003737a39636962ec1162f9b72f4bef81beaf0f9297bb"
+    },
+    {
+      "path": "debug/nvidia-controlled-material-chroma.log",
+      "bytes": 68,
+      "sha256": "7e99a93e408dff4d870694b5062b4b76afc89e25915932d775d3d477cbed90ad"
+    },
+    {
+      "path": "debug/nvidia-controlled-material-command.json",
+      "bytes": 602,
+      "sha256": "eb52728fa766aa581ca689db5743392e8d52e3c3cf8fb2de1c5c334141f7f200"
+    },
+    {
+      "path": "debug/nvidia-material-execution.json",
+      "bytes": 590,
+      "sha256": "c0f5513017a7bb18abb34e5f7d4524c4b2b8003d5a9f89cb823ac72f67f3f7e8"
+    },
+    {
+      "path": "debug/nvidia-surface.log",
+      "bytes": 13239,
+      "sha256": "a44f48a78b0baee083cfda16a60bf5dad8766001395e4cff881fe53a1da13957"
+    },
+    {
+      "path": "debug/process.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "debug/queued-build.py",
+      "bytes": 887,
+      "sha256": "96aaa570d2652cbdc0c95b47366d3009df025a11fc69ae4a46e9e4da44e7618d"
+    },
+    {
+      "path": "debug/queued-material-intel.py",
+      "bytes": 914,
+      "sha256": "c1b6b1021fb1e5d9e7f3c009869c36ccc5ee5ae0fcc0253ae890b9447cbe2199"
+    },
+    {
+      "path": "debug/queued-material.py",
+      "bytes": 916,
+      "sha256": "8138a1335f5eec13e62fed5683e4721b284e32995935f630795662dcfc6294f2"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/summary.json",
+      "bytes": 3864,
+      "sha256": "6169ed7b013e4eae8ae84240924aff745937d9940f94ae2e72903fc49df5dec5"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/ambient/command.json",
+      "bytes": 759,
+      "sha256": "a880e393bbb76503d0545577e87e949986e013938870bbf1bfaf0839cd257a80"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/ambient/expected.json",
+      "bytes": 14694,
+      "sha256": "d2d75e6126e034ecfe2d4e88f2aae048d60d7031d3f6e5d133fad1abd40c3d32"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/ambient/player.log",
+      "bytes": 4034,
+      "sha256": "571c70423befc22153e8e90d9d922891a0e562ce3903d2b3d40456cd8a6924a0"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/ambient/test.azureproject",
+      "bytes": 165,
+      "sha256": "1c8469cf55627cd3884c0c0847882c8614a4ef91c5f023fb92f74f5ac130a06e"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/ambient/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/ambient/assets/scene.azurelevel",
+      "bytes": 1601,
+      "sha256": "52ef303275d199180cd428e94d8cb870b88680e186a59fbac13b884e96548ba1"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/ambient/frames/capture_manifest.json",
+      "bytes": 11164,
+      "sha256": "3db0f58a35e4a42ba7aaf96a21649beed30540e235e612dfcce3863feb6021f0"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/ambient/frames/frame_000000.png",
+      "bytes": 959,
+      "sha256": "2c0db773166900958e016aebceb581e2537d86f73849e42ecde8ea4843a6f529"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/ambient/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/direct/command.json",
+      "bytes": 764,
+      "sha256": "55f1fb3f5dc05d5aaa99761527ed77e5dd5045d6dbb7553bcf50c96fdd123d9c"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/direct/expected.json",
+      "bytes": 14693,
+      "sha256": "c8ee57835447ae84d421bda03f92d036a109f0d2da66d90b5db75d6d949af9dc"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/direct/player.log",
+      "bytes": 4037,
+      "sha256": "2be1190921bd730867f6f70254a2f72347c3ae5cbb4b865e36f5d6ea0311bf13"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/direct/test.azureproject",
+      "bytes": 164,
+      "sha256": "36356f3d98f36d8cc8e1c14b665ea66f8e2fba60fbfde608b5c3b3b7809ce7a9"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/direct/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/direct/assets/scene.azurelevel",
+      "bytes": 1600,
+      "sha256": "9878e4db03b6252a84a1c2f76866822b81ee080a47ac739ca8d7f0985fdca5a9"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/direct/frames/capture_manifest.json",
+      "bytes": 11165,
+      "sha256": "dda7a53007a04d8f94ee95c73381683ee516ffa17a9697aa396f8521bc6dbff7"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/direct/frames/frame_000000.png",
+      "bytes": 849,
+      "sha256": "7c8698f985e890287484ec39ab83e95c662e195db3ef849d1354fa17dcecd032"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/direct/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk/command.json",
+      "bytes": 749,
+      "sha256": "1adc581ebd09df628233bfd8faa0635f41baf6dcc7338342a61ba70e7b4efd13"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk/expected.json",
+      "bytes": 14689,
+      "sha256": "f2f27931a455a75f2e82dc8086b8cdb543565adb438f729643818ca5b527ec3a"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk/player.log",
+      "bytes": 4014,
+      "sha256": "11b4131c2cea86882881f16c98e8e5c6852e8146d6383a18735403db326d29ff"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk/test.azureproject",
+      "bytes": 160,
+      "sha256": "6fba73e52a7e38471c8e19924638d50b97e12c29396a3ef26f14a7424f09dde8"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk/assets/scene.azurelevel",
+      "bytes": 1596,
+      "sha256": "bd2f7ea3830dec966c1aa734784b48fed05263c224a1b3e438e7174329743f30"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk/frames/capture_manifest.json",
+      "bytes": 11158,
+      "sha256": "c7a7d4cda2f4da8a2ec1795b63ae3bfdbf71e59db3afc3dd8ed3752cdb128d8f"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk/frames/frame_000000.png",
+      "bytes": 3524,
+      "sha256": "f731609fd2adaa731943a625b6a217300f9262b94d0c164aa9e388045933181a"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk-fixed/command.json",
+      "bytes": 854,
+      "sha256": "ac8ffc9dcda4f18362ba47fddf91f521197d461206deaf2890de14b3fe8df6d5"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk-fixed/expected.json",
+      "bytes": 14695,
+      "sha256": "3ee3d191e4f5c4571368c4b5774e919b5e461d4fdbaa91ab436aaa9b461b2f22"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk-fixed/player.log",
+      "bytes": 4044,
+      "sha256": "5c4f188d3b088e0ddb27a00063a6ed76140965c7739029ef7b0268ebf85347ef"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk-fixed/test.azureproject",
+      "bytes": 166,
+      "sha256": "4b379874dce674d90b30c6cbbd7e0eb8026b19988ea622e0a98b66f7cb5b64b5"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk-fixed/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk-fixed/assets/scene.azurelevel",
+      "bytes": 1602,
+      "sha256": "455b941b8627d4767cca5d732f58809de4e1b3c6d9cc979a4d3012e279c0cf5c"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk-fixed/frames/capture_manifest.json",
+      "bytes": 11157,
+      "sha256": "13ccd21c1664401fac7d08c57794fe1ef913c95c59382263ee3e7964a6d52ea4"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk-fixed/frames/frame_000000.png",
+      "bytes": 3524,
+      "sha256": "f731609fd2adaa731943a625b6a217300f9262b94d0c164aa9e388045933181a"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/kk-fixed/frames/gpu_capabilities.json",
+      "bytes": 6682,
+      "sha256": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk/command.json",
+      "bytes": 761,
+      "sha256": "fc180f23ae2067e921ac6293063539371cc7266c3b515e8be58d4e6d347247e6"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk/expected.json",
+      "bytes": 14695,
+      "sha256": "26983162a2d0b5d35ae6036194d6c67eb9105963b85d22f192f9d8b4eb592665"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk/player.log",
+      "bytes": 4037,
+      "sha256": "3235a4afb97d2f43c538b7c7e14ea08e0ce0588f0f360243feef8e121eebb920"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk/test.azureproject",
+      "bytes": 166,
+      "sha256": "5da982a1ce486da040250412724f7721233ced3f12e0aaff55e8e5bbf714c383"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk/assets/scene.azurelevel",
+      "bytes": 1596,
+      "sha256": "caa360f7bbfa620b2c4c29cc56b514cc6f681afabbff9bf345d2358c6b9bcb3e"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk/frames/capture_manifest.json",
+      "bytes": 11162,
+      "sha256": "77d96e54e1eb50dd3021ff31e7e99a1f6f62bc3d77e135d218db1c857e51ec8e"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk/frames/frame_000000.png",
+      "bytes": 1197,
+      "sha256": "8028a65addd6b7d1d13dae903cbcd8b12d36d4bc72e86290dc27f87c5cf2a6aa"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk-control/command.json",
+      "bytes": 777,
+      "sha256": "54d42e49b81439ad58bffa23da70fd62790f148347e7f4db8320a34c426dd252"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk-control/expected.json",
+      "bytes": 14703,
+      "sha256": "58b272c9719e022a05425615b23e5cc87ffa37282dc31c4a675247953b2cb306"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk-control/player.log",
+      "bytes": 4069,
+      "sha256": "52dc8c7cf35068b38a0e931a46896d1900b291a76b8390f69889bba699d490d5"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk-control/test.azureproject",
+      "bytes": 174,
+      "sha256": "459907106be3a23a05a599d7fd9beb59627e54334da3f049019bbb45f49bf84a"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk-control/assets/panels.gltf",
+      "bytes": 5870,
+      "sha256": "fa3035b93c9e9e896a419af8ff0c4c34eb2d3c952fa452907d91b708de2f9b3d"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk-control/assets/scene.azurelevel",
+      "bytes": 1604,
+      "sha256": "b2fc749a8fc00e7a504fd40976446665278178696c3bc383658d779f53c7cac0"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk-control/frames/capture_manifest.json",
+      "bytes": 11172,
+      "sha256": "9114903c9cab6b73d556bbca44b7ab328cf28d6011d6352f80ac41119d4aa029"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk-control/frames/frame_000000.png",
+      "bytes": 1197,
+      "sha256": "8028a65addd6b7d1d13dae903cbcd8b12d36d4bc72e86290dc27f87c5cf2a6aa"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/local-kk-control/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/no-main/command.json",
+      "bytes": 759,
+      "sha256": "5e13696b300a7befadd4b511b10b59e6d72bfffd3bbc46bd433881fa42d3a8ff"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/no-main/expected.json",
+      "bytes": 14694,
+      "sha256": "8584a54cf78df8d499d09da1be6cf046efd1da297122a03b0001729f46f2f192"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/no-main/player.log",
+      "bytes": 4027,
+      "sha256": "628746d6799e14b6877c5f0e30e978e68ca06944e2b9b60fb1c128243700b25e"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/no-main/test.azureproject",
+      "bytes": 165,
+      "sha256": "4d09d8c4ae04a6342aeb4935beb2509bb7cd96b2d1bb97a3ceec8946bb6669db"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/no-main/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/no-main/assets/scene.azurelevel",
+      "bytes": 1602,
+      "sha256": "4a6166da7ffd25c36e0102873781323decbaac77f976c41140c59de28009dc8a"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/no-main/frames/capture_manifest.json",
+      "bytes": 11164,
+      "sha256": "ffd6b2b100a483ed5fbef90f01d7bee89783417acc6552db4f9062f90f483a97"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/no-main/frames/frame_000000.png",
+      "bytes": 811,
+      "sha256": "e7116f3121ee5082947a5caa7cf35d7b0d5364f2f30b140ff32245693dd46d53"
+    },
+    {
+      "path": "debug/intel-material-chroma-controlled/no-main/frames/gpu_capabilities.json",
+      "bytes": 6681,
+      "sha256": "052830ed89bea19f0e9a17839082b9f979cfab2b17908f9ee83df5f0e0bcd85f"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/summary.json",
+      "bytes": 3900,
+      "sha256": "6a07504cca86c7766cb0f8481ce1d39ab61cc52f9a8cdeb9c49dac0027096048"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/ambient/command.json",
+      "bytes": 761,
+      "sha256": "a1a1acdd6abe0bae49b9b943331fef37de8ad7c7e5eb8c5c63dd493711108e4d"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/ambient/expected.json",
+      "bytes": 14694,
+      "sha256": "d2d75e6126e034ecfe2d4e88f2aae048d60d7031d3f6e5d133fad1abd40c3d32"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/ambient/player.log",
+      "bytes": 4030,
+      "sha256": "f65df04d307be39df3e07fdb26bbe02b3f8988038a28950d5e4043a685f756b4"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/ambient/test.azureproject",
+      "bytes": 165,
+      "sha256": "1c8469cf55627cd3884c0c0847882c8614a4ef91c5f023fb92f74f5ac130a06e"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/ambient/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/ambient/assets/scene.azurelevel",
+      "bytes": 1601,
+      "sha256": "52ef303275d199180cd428e94d8cb870b88680e186a59fbac13b884e96548ba1"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/ambient/frames/capture_manifest.json",
+      "bytes": 11151,
+      "sha256": "5419cc966cfd4d7d77eda4a27cb22a06df8df45acc5ae919b2f3542686708a79"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/ambient/frames/frame_000000.png",
+      "bytes": 849,
+      "sha256": "23bd1b21c047cbbf93b618093d7bf6b4468a3020953e3f4cebc2655b4d5c6642"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/ambient/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/direct/command.json",
+      "bytes": 766,
+      "sha256": "43cddc0ec109dd543fe35a38f0b1f3384d0c8f8a31ce5f1416351c1a50b0cf3b"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/direct/expected.json",
+      "bytes": 14693,
+      "sha256": "c8ee57835447ae84d421bda03f92d036a109f0d2da66d90b5db75d6d949af9dc"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/direct/player.log",
+      "bytes": 4033,
+      "sha256": "887f38ba52c9141b8b513456e26363d8eff05af2b08dee5ef76f74c3e4d4bc0b"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/direct/test.azureproject",
+      "bytes": 164,
+      "sha256": "36356f3d98f36d8cc8e1c14b665ea66f8e2fba60fbfde608b5c3b3b7809ce7a9"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/direct/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/direct/assets/scene.azurelevel",
+      "bytes": 1600,
+      "sha256": "9878e4db03b6252a84a1c2f76866822b81ee080a47ac739ca8d7f0985fdca5a9"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/direct/frames/capture_manifest.json",
+      "bytes": 11157,
+      "sha256": "eea9a85230bd80cd1d5572e01f5df4e45ae5395a7f194a1a6ad5521aaab1de92"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/direct/frames/frame_000000.png",
+      "bytes": 950,
+      "sha256": "339d5afe91fbdcaf5113919430580a7fc715f5166e0881201ed732c035ccf073"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/direct/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk/command.json",
+      "bytes": 751,
+      "sha256": "f072defcec27c32747daf6ba05e92023d385169475e7facd969dac35024efb68"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk/expected.json",
+      "bytes": 14689,
+      "sha256": "f2f27931a455a75f2e82dc8086b8cdb543565adb438f729643818ca5b527ec3a"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk/player.log",
+      "bytes": 4009,
+      "sha256": "52e530171b92444f4be0c1474cdacfa7347927d3b061e6664eace5e669de89ff"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk/test.azureproject",
+      "bytes": 160,
+      "sha256": "6fba73e52a7e38471c8e19924638d50b97e12c29396a3ef26f14a7424f09dde8"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk/assets/scene.azurelevel",
+      "bytes": 1596,
+      "sha256": "bd2f7ea3830dec966c1aa734784b48fed05263c224a1b3e438e7174329743f30"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk/frames/capture_manifest.json",
+      "bytes": 11146,
+      "sha256": "c02128a9c7afa01c24d6977ed9bf93e6344954bd5ce99e0477240820666e99c7"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk/frames/frame_000000.png",
+      "bytes": 3535,
+      "sha256": "3f87f443fad2c0938c765f969ef69993512e173010143aea47c362c233f657d8"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk-fixed/command.json",
+      "bytes": 856,
+      "sha256": "7cb62f8a15e91b9a1cecb3fe874663d50e81c94475045443733a2d1e5bd1a858"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk-fixed/expected.json",
+      "bytes": 14695,
+      "sha256": "3ee3d191e4f5c4571368c4b5774e919b5e461d4fdbaa91ab436aaa9b461b2f22"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk-fixed/player.log",
+      "bytes": 4039,
+      "sha256": "5e0f7e578738a831d20114009860e72554aab83232cb046e81f546719c83ee12"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk-fixed/test.azureproject",
+      "bytes": 166,
+      "sha256": "4b379874dce674d90b30c6cbbd7e0eb8026b19988ea622e0a98b66f7cb5b64b5"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk-fixed/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk-fixed/assets/scene.azurelevel",
+      "bytes": 1602,
+      "sha256": "455b941b8627d4767cca5d732f58809de4e1b3c6d9cc979a4d3012e279c0cf5c"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk-fixed/frames/capture_manifest.json",
+      "bytes": 11145,
+      "sha256": "db9f154ebeb0af88a0ecd75abc886043e2cebf116d2e7ba45f743a4cb2e13775"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk-fixed/frames/frame_000000.png",
+      "bytes": 3535,
+      "sha256": "3f87f443fad2c0938c765f969ef69993512e173010143aea47c362c233f657d8"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/kk-fixed/frames/gpu_capabilities.json",
+      "bytes": 11109,
+      "sha256": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk/command.json",
+      "bytes": 763,
+      "sha256": "3cd0298df173bec51a950747adb31377dc419760bb25c6c8392bdc2de62e0b11"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk/expected.json",
+      "bytes": 14695,
+      "sha256": "26983162a2d0b5d35ae6036194d6c67eb9105963b85d22f192f9d8b4eb592665"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk/player.log",
+      "bytes": 4032,
+      "sha256": "572d7296b1bc374bf0f2bfeaf571ebdd023567c36fbdd2ac8f688f44205845ef"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk/test.azureproject",
+      "bytes": 166,
+      "sha256": "5da982a1ce486da040250412724f7721233ced3f12e0aaff55e8e5bbf714c383"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk/assets/scene.azurelevel",
+      "bytes": 1596,
+      "sha256": "caa360f7bbfa620b2c4c29cc56b514cc6f681afabbff9bf345d2358c6b9bcb3e"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk/frames/capture_manifest.json",
+      "bytes": 11149,
+      "sha256": "6205ee0075e646dc3898a85795c12454aa962b173ab519ef34b01a972e8f4ca7"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk/frames/frame_000000.png",
+      "bytes": 1228,
+      "sha256": "0700836bff4366745fae02f450a542473279931fd4b5fbe583098afec2c606a0"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk-control/command.json",
+      "bytes": 779,
+      "sha256": "f6e9f7190ce337725478724230443d9df9cb009c4ac6b30c63080d2a3604d282"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk-control/expected.json",
+      "bytes": 14703,
+      "sha256": "58b272c9719e022a05425615b23e5cc87ffa37282dc31c4a675247953b2cb306"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk-control/player.log",
+      "bytes": 4064,
+      "sha256": "6548eeed3bc6ab9431bb68322c00d8214a165a40e5175b8b5d98cb0189d87b87"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk-control/test.azureproject",
+      "bytes": 174,
+      "sha256": "459907106be3a23a05a599d7fd9beb59627e54334da3f049019bbb45f49bf84a"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk-control/assets/panels.gltf",
+      "bytes": 5870,
+      "sha256": "fa3035b93c9e9e896a419af8ff0c4c34eb2d3c952fa452907d91b708de2f9b3d"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk-control/assets/scene.azurelevel",
+      "bytes": 1604,
+      "sha256": "b2fc749a8fc00e7a504fd40976446665278178696c3bc383658d779f53c7cac0"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk-control/frames/capture_manifest.json",
+      "bytes": 11158,
+      "sha256": "b38f408acd2bc0906b57b4c8c5edafa313e24621948ba3291980d4a30fa42364"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk-control/frames/frame_000000.png",
+      "bytes": 1228,
+      "sha256": "0700836bff4366745fae02f450a542473279931fd4b5fbe583098afec2c606a0"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/local-kk-control/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/no-main/command.json",
+      "bytes": 761,
+      "sha256": "abd3961e0000cec6f95acb25c0618e464c693ddd87f20381cc339091c1ef08a3"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/no-main/expected.json",
+      "bytes": 14694,
+      "sha256": "8584a54cf78df8d499d09da1be6cf046efd1da297122a03b0001729f46f2f192"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/no-main/player.log",
+      "bytes": 4022,
+      "sha256": "3e4a4ef5d13af2484a9780b9bfcd00cf6ff444b1921aeda8f23f665a4b363ced"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/no-main/test.azureproject",
+      "bytes": 165,
+      "sha256": "4d09d8c4ae04a6342aeb4935beb2509bb7cd96b2d1bb97a3ceec8946bb6669db"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/no-main/assets/panels.gltf",
+      "bytes": 5868,
+      "sha256": "ef6340dc9424f8c502e3f0f46ba2e9fca676b594b6f4da81af2c998f240a6ed8"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/no-main/assets/scene.azurelevel",
+      "bytes": 1602,
+      "sha256": "4a6166da7ffd25c36e0102873781323decbaac77f976c41140c59de28009dc8a"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/no-main/frames/capture_manifest.json",
+      "bytes": 11149,
+      "sha256": "55b64b71e835ee7ed8ae55d8fbfe00b62dd46956de3f82ecaafe5e19dbeba179"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/no-main/frames/frame_000000.png",
+      "bytes": 811,
+      "sha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781"
+    },
+    {
+      "path": "debug/nvidia-material-chroma-controlled/no-main/frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "source/Project/AzureRender/docs/acceptance/nr/hair-main-brightness-saturation.md",
+      "bytes": 2659,
+      "sha256": "0aafb94b0d208442edd07af7618c8f852bd329b08f73cbf6368deaf5813d46e2"
+    },
+    {
+      "path": "source.patch",
+      "bytes": 38290,
+      "sha256": "6999606238fbaadeb72cb7945b14348635318c9b71ecd075ab65703b81508613"
+    },
+    {
+      "path": "results-before-archive.json",
+      "bytes": 29378,
+      "sha256": "ad5dd9fddd82a65aadafd2d75bbb3d452e4932ea43f8d367c9df24a7a7939f34"
+    }
+  ]
+}

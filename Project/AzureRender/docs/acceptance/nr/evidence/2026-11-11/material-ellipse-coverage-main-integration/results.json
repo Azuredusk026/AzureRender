@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "run": "20261111-211029-ellipse-coverage-main-integration-b59590",
+  "mainHead": "3810892",
+  "qualityCommit": "698e53d",
+  "buildRows": [
+    {
+      "config": "Release",
+      "tests": 11,
+      "programs": 886,
+      "programsChanged": 44,
+      "validationPassed": true
+    },
+    {
+      "config": "Debug",
+      "tests": 11,
+      "programs": 886,
+      "programsChanged": 44,
+      "validationPassed": true
+    }
+  ],
+  "gpuCaptures": [
+    {
+      "device": "nvidia",
+      "frames": [
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+      ],
+      "qualityControlExact": true,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "device": "intel",
+      "frames": [
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+      ],
+      "qualityControlExact": true,
+      "validationClean": true,
+      "allocatorZero": true
+    }
+  ],
+  "frozenCapture": {
+    "exitCode": 0,
+    "seconds": 130.18699999997625,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "programsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "qualityArchive": {
+    "commit": "698e53d",
+    "archive": {
+      "bytes": 360736,
+      "sha256": "5b4d6f0d8847ce69a5e78bb7fb4a8343840dd9eb48eeae4611713611e089a762",
+      "members": 154
+    },
+    "memberSha256Verified": 153
+  },
+  "protectedFiles": {
+    "docs/acceptance/p5/closure/source-evidence/interruption.json": "4bd07a5e3af10be9aceac2b0ddaa0e5e80c850bc704cc3eae4dfed332e04e979",
+    "docs/acceptance/p5/closure/source-evidence/manifest.json": "11f99d3171d7609a1200aa86920c7fb1251fae4e96e6ecebb76a391359488c43",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-green.log": "b0d7a3991dec0248b49e57e2d9cbdede8e7f286838add2f0723593d8598ee0e7",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-red.log": "f7c1533fc970cbb4665bfbf9267a17ee044e5e01bb22d3d0b74aafc2217c98c4",
+    "src/app/AzureRenderSupport.cpp": "a150ee53a294246d87d8cde42be2881e53e0dd1908481ef91b8786808e80b201",
+    "src/rhi/GpuAllocator.hpp": "2e81204107f3e5cfa765bde0e90c1e6a0131721b6ea6b521b3c73490793164dd",
+    "src/rhi/VulkanRhi.cpp": "4ca84f5a9c7ce471c5f9a75009fd26af8a3fd6b6291be8674e829178291d1840",
+    "tests/MaterialPipelinePolicyTests.cpp": "01f18ad44129c11d97bc2c1d8b0c2c1f3f85bffd0af5403f43d2db513acc7c31",
+    "tests/MotionRecordingTests.cpp": "f8e27feb08afaed0ec723fe7caa76d196909ecba97d06ca7c7ed5943bdc3311e",
+    "tests/ObjectShadowAtlasTests.cpp": "dfb7219c73f059415061b73bc4844a7f0a207b7cb75f0ef81c75b376f8f0ab15",
+    "tests/ShadowTileBoundsGpuTests.cpp": "62504a6a47633cc04f8f886a9013b64f55293b8294afe8e12b69e1c634303b6b",
+    "tools/endfield_native/character_surfaces.py": "6c7c476448f3860b7ec8b3dbddd37cbb7c95b1596ebc3355f2fd1f25cb46c8bb",
+    "tools/test_native_character_surfaces.py": "0c870dfb4a2fb9203fc8ef364a4e494d30d1c8ba133f5514d96db40c839cb1d4"
+  },
+  "fixtureFiles": 42,
+  "fixtureInventorySha256": "736d049799a3ee7348ad36cea07d8c219adfe930c881f52d0c802de2584e6a76",
+  "archive": {
+    "bytes": 600461,
+    "members": 34,
+    "sha256": "b6e75a7ed2082a544f88fe5b0fe5a4e66735792cf56e149dd7fa437ed44425d3"
+  }
+}

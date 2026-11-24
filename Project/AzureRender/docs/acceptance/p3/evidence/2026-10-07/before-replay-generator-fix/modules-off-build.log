@@ -1,0 +1,226 @@
+[1/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\ResourceAccessProfile.cpp.obj
+[2/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\rhi\UploadRingBuffer.cpp.obj
+[3/206] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[4/206] Building CXX object CMakeFiles\AzurePlatform.dir\src\platform\GlfwFrontend.cpp.obj
+[5/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\rhi\GpuAllocator.cpp.obj
+[6/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\ComputePass.cpp.obj
+[7/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\TransientResourcePool.cpp.obj
+[8/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\VisibilityPrototype.cpp.obj
+[9/206] Building CXX object CMakeFiles\azure_imgui.dir\third_party\imgui\imgui_draw.cpp.obj
+[10/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\rhi\VulkanRhi.cpp.obj
+[11/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\RendererCore.cpp.obj
+[12/206] Building CXX object CMakeFiles\azure_imgui.dir\third_party\imgui\backends\imgui_impl_vulkan.cpp.obj
+[13/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\rhi\NullRhi.cpp.obj
+[14/206] Building CXX object CMakeFiles\azure_imgui.dir\third_party\imgui\backends\imgui_impl_glfw.cpp.obj
+[15/206] Building CXX object CMakeFiles\azure_imgui.dir\third_party\imgui\imgui_tables.cpp.obj
+[16/206] Building CXX object CMakeFiles\AzureFoundation.dir\src\diagnostics\RuntimeDiagnostics.cpp.obj
+[17/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\RenderGraph.cpp.obj
+[18/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\rhi\VulkanMemoryAllocatorImpl.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/W4”(用“/W0”)
+[19/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\SampleSceneRenderer.cpp.obj
+[20/206] Building CXX object CMakeFiles\AzurePlatform.dir\src\platform\ProcessRunner.cpp.obj
+[21/206] Compiling background.vert
+[22/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\EnvironmentAsset.cpp.obj
+[23/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\GameUiRenderer.cpp.obj
+[24/206] Building CXX object CMakeFiles\AzureFoundation.dir\src\resources\ResourceLocator.cpp.obj
+[25/206] Compiling background_bindless.frag
+[26/206] Compiling blackhole.frag
+[27/206] Compiling blackhole.vert
+[28/206] Compiling background.frag
+[29/206] Compiling blackhole_composite.frag
+[30/206] Compiling blackhole_taa_compute.frag
+[31/206] Compiling blackhole_taa.frag
+[32/206] Compiling bloom_composite.comp
+[33/206] Compiling bloom_downsample.comp
+[34/206] Compiling clear.comp
+[35/206] Compiling cull_indirect.comp
+[36/206] Compiling editor_ui_srgb.frag
+[37/206] Compiling game-ui.vert
+[38/206] Compiling editor_ui.frag
+[39/206] Compiling hud.frag
+[40/206] Compiling hud.vert
+[41/206] Compiling ibl_prefilter.comp
+[42/206] Compiling game-ui.frag
+[43/206] Compiling inner_outline.frag
+[44/206] Compiling inner_outline.vert
+[45/206] Compiling mesh.vert
+[46/206] Compiling mesh.frag
+[47/206] Compiling mesh_compute.vert
+[48/206] Compiling mesh_bindless.frag
+[49/206] Compiling outline.frag
+[50/206] Compiling outline_compute.vert
+[51/206] Compiling outline.vert
+[52/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\BuiltinRendererCatalog.cpp.obj
+[53/206] Compiling shadow.vert
+[54/206] Compiling shadow.frag
+[55/206] Building CXX object CMakeFiles\AzureMetaGen.dir\tools\metagen\main.cpp.obj
+[56/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\BlackholeSceneRenderer.cpp.obj
+[57/206] Compiling shadow_compute.vert
+[58/206] Compiling skin.comp
+[59/206] Compiling shadow_bindless.frag
+[60/206] Building CXX object CMakeFiles\azure_imgui.dir\third_party\imgui\imgui_widgets.cpp.obj
+[61/206] Compiling view_resolve.frag
+[62/206] Compiling visibility_prototype.comp
+[63/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\RenderViewOutput.cpp.obj
+[64/206] Linking CXX executable AzureMetaGen.exe
+[65/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\RenderSettings.cpp.obj
+[66/206] Generating verified engine interface snapshots and schemas
+{"status": "passed", "coveredItems": 18, "files": 42}
+[67/206] Building CXX object CMakeFiles\AzureDevtools.dir\src\devtools\ShaderCompileJob.cpp.obj
+[68/206] Building CXX object CMakeFiles\azure_imgui.dir\third_party\imgui\imgui.cpp.obj
+[69/206] Linking CXX static library azure_imgui.lib
+[70/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\assets\GeneratorRegistry.cpp.obj
+[71/206] Building CXX object CMakeFiles\AzureProcedural.dir\src\assets\generators\ScadGenerator.cpp.obj
+[72/206] Building CXX object CMakeFiles\AzureAI.dir\src\ai\ModelClient.cpp.obj
+[73/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\RenderViewService.cpp.obj
+[74/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\diagnostics\GpuCapabilityReport.cpp.obj
+[75/206] Building CXX object CMakeFiles\AzureAI.dir\src\ai\ModelProcess.cpp.obj
+[76/206] Building CXX object CMakeFiles\AzureDevtools.dir\src\devtools\GeometryProcessCompiler.cpp.obj
+[77/206] Building CXX object CMakeFiles\AzureFoundation.dir\src\foundation\SettingRegistry.cpp.obj
+[78/206] Building CXX object CMakeFiles\AzureProcedural.dir\src\assets\generators\ProceduralGltfWriter.cpp.obj
+[79/206] Linking CXX static library AzureFoundation.lib
+[80/206] Building CXX object CMakeFiles\AzureDevtools.dir\src\devtools\ShaderHotReloader.cpp.obj
+[81/206] Generating generated/reflection/GeneratedRegistry.hpp, generated/runtime/GeneratedComponents.hpp
+[82/206] Linking CXX static library AzurePlatform.lib
+[83/206] Linking CXX static library AzureAI.lib
+[84/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[85/206] Building CXX object CMakeFiles\AzureGeometryCompiler.dir\tools\procedural\main.cpp.obj
+[86/206] Building CXX object CMakeFiles\AzureProcedural.dir\src\assets\generators\GeometryCompilerAdapter.cpp.obj
+[87/206] Building CXX object CMakeFiles\AzureProcedural.dir\src\assets\generators\RigTextGenerator.cpp.obj
+[88/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ModuleAssembly.cpp.obj
+[89/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AudioRuntime.cpp.obj
+[90/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SceneRenderSnapshot.cpp.obj
+[91/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\GameUi.cpp.obj
+[92/206] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\BindingDescriptor.cpp.obj
+[93/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SceneDocument.cpp.obj
+[94/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\EngineSettings.cpp.obj
+[95/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ScriptRuntimeRegistry.cpp.obj
+[96/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SystemRegistry.cpp.obj
+[97/206] Building CXX object CMakeFiles\AzureLuaScripting.dir\src\scripting\lua\LuaScriptingModule.cpp.obj
+[98/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ObservationRegistry.cpp.obj
+[99/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PhysicsWorld.cpp.obj
+[100/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AnimationStateMachine.cpp.obj
+[101/206] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\CameraFollowSystem.cpp.obj
+[102/206] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\CharacterMovementSystem.cpp.obj
+[103/206] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\SharedSystems.cpp.obj
+[104/206] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\LocomotionSystem.cpp.obj
+[105/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\GameRuntime.cpp.obj
+[106/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ui\AppChrome.cpp.obj
+[107/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ui\Widgets.cpp.obj
+[108/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\preview\AssetThumbnailService.cpp.obj
+[109/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\app\CommandLine.cpp.obj
+[110/206] Building CXX object CMakeFiles\AzureProjectRuntime.dir\src\app\ProjectRuntimeAssembly.cpp.obj
+[111/206] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\ScriptHostSession.cpp.obj
+[112/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Level.cpp.obj
+[113/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Prefab.cpp.obj
+[114/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\preview\DeveloperServices.cpp.obj
+[115/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ComponentRegistry.cpp.obj
+[116/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\MiniaudioImpl.cpp.obj
+[117/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorCameraController.cpp.obj
+[118/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AssetGeneration.cpp.obj
+[119/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PresentationRuntime.cpp.obj
+[120/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Project.cpp.obj
+[121/206] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\ScriptBindingHost.cpp.obj
+[122/206] Building CXX object CMakeFiles\AzureReflection.dir\src\reflection\Registry.cpp.obj
+[123/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\OutlinerPanel.cpp.obj
+[124/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\LevelSession.cpp.obj
+[125/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\CapturePanel.cpp.obj
+[126/206] Building CXX object CMakeFiles\AzureLuaScripting.dir\src\scripting\lua\ScriptRuntime.cpp.obj
+[127/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorTheme.cpp.obj
+[128/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\ProposalOperations.cpp.obj
+[129/206] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AssetDatabase.cpp.obj
+[130/206] Building CXX object CMakeFiles\AzureRenderCore.dir\src\assets\GltfLoader.cpp.obj
+[131/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\ProposalController.cpp.obj
+[132/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\BuildPanel.cpp.obj
+[133/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\GameplayDebugPanel.cpp.obj
+[134/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\SelectionService.cpp.obj
+[135/206] Linking CXX static library AzureReflection.lib
+[136/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\SettingsPanel.cpp.obj
+[137/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\InspectorPanel.cpp.obj
+[138/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditRegistry.cpp.obj
+[139/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AssetBrowserPanel.cpp.obj
+[140/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AnimationPanel.cpp.obj
+[141/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ConsolePanel.cpp.obj
+[142/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\adapters\ProposalAdapters.cpp.obj
+[143/206] Linking CXX static library AzureRenderCore.lib
+[144/206] Linking CXX static library AzureRuntime.lib
+[145/206] Linking CXX static library AzureScriptingHost.lib
+[146/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditService.cpp.obj
+[147/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\GameBuildJob.cpp.obj
+[148/206] Linking CXX static library AzureLuaScripting.lib
+[149/206] Linking CXX static library AzureGameplay.lib
+[150/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditTransaction.cpp.obj
+[151/206] Linking CXX static library AzureProcedural.lib
+[152/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspace.cpp.obj
+[153/206] Linking CXX static library AzureProjectRuntime.lib
+[154/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorContext.cpp.obj
+[155/206] Linking CXX static library AzureDevtools.lib
+[156/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditorOperations.cpp.obj
+[157/206] Building CXX object CMakeFiles\AzureValidation.dir\src\validation\ValidationService.cpp.obj
+[158/206] Building CXX object CMakeFiles\AzureValidation.dir\src\validation\ValidationTransport.cpp.obj
+[159/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorToolbar.cpp.obj
+[160/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\AssetImportJob.cpp.obj
+[161/206] Linking CXX static library AzureValidation.lib
+[162/206] Linking CXX executable AzureGeometryCompiler.exe
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\manifold.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\manifold.dll done
+[163/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorSession.cpp.obj
+[164/206] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[165/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspaceUI.cpp.obj
+[166/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorProjectEditing.cpp.obj
+[167/206] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDevtools.cpp.obj
+[168/206] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[169/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorAutomation.cpp.obj
+[170/206] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSettings.cpp.obj
+[171/206] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderResources.cpp.obj
+[172/206] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSettings.cpp.obj
+[173/206] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSupport.cpp.obj
+[174/206] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[175/206] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[176/206] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[177/206] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderCapture.cpp.obj
+[178/206] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[179/206] Building CXX object CMakeFiles\AzureProjectTests.dir\tests\ProjectTests.cpp.obj
+[180/206] Building CXX object CMakeFiles\AzureModuleAssemblyTests.dir\tests\ModuleAssemblyTests.cpp.obj
+[181/206] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[182/206] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderCapture.cpp.obj
+[183/206] Linking CXX static library AzureEditor.lib
+[184/206] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderDevtools.cpp.obj
+[185/206] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderResources.cpp.obj
+[186/206] Linking CXX executable AzureProjectTests.exe
+[187/206] Linking CXX executable AzureModuleAssemblyTests.exe
+[188/206] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSupport.cpp.obj
+[189/206] Building CXX object CMakeFiles\AzureScriptBackendContractTests.dir\tests\ScriptBackendContractTests.cpp.obj
+[190/206] Building CXX object CMakeFiles\AzureScriptEntityTests.dir\tests\ScriptEntityTests.cpp.obj
+[191/206] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderValidation.cpp.obj
+[192/206] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderValidation.cpp.obj
+[193/206] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderFrame.cpp.obj
+[194/206] Building CXX object CMakeFiles\AzureScriptRuntimeTests.dir\tests\ScriptRuntimeTests.cpp.obj
+[195/206] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderApp.cpp.obj
+[196/206] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderFrame.cpp.obj
+[197/206] Linking CXX executable AzureScriptEntityTests.exe
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\lua.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\lua.dll done
+[198/206] Linking CXX executable AzureScriptBackendContractTests.exe
+[199/206] Building CXX object CMakeFiles\AzureRender.dir\src\main.cpp.obj
+[200/206] Building CXX object CMakeFiles\AzurePlayer.dir\src\player\main.cpp.obj
+[201/206] Linking CXX static library AzurePlayerHost.lib
+[202/206] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderApp.cpp.obj
+[203/206] Linking CXX executable AzureScriptRuntimeTests.exe
+[204/206] Linking CXX static library AzureRenderHost.lib
+[205/206] Linking CXX executable AzurePlayer.exe
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\glfw3.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\glfw3.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\OpenEXR-3_4.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\OpenEXR-3_4.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\IlmThread-3_4.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\IlmThread-3_4.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\Iex-3_4.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\Iex-3_4.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\OpenEXRCore-3_4.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\OpenEXRCore-3_4.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\deflate.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\deflate.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\openjph.0.31.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\openjph.0.31.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\Imath-3_2.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\Imath-3_2.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\rmlui.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\rmlui.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\freetype.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\freetype.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\z.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\z.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\bz2.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\bz2.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\libpng16.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\libpng16.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\brotlidec.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\brotlidec.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\brotlicommon.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off\brotlicommon.dll done
+[206/206] Linking CXX executable AzureRender.exe

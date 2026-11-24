@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "status": "isolated-insufficient-benefit",
+  "sourceBase": "80f74e6",
+  "capture": {
+    "path": "current_frame320.rdc",
+    "bytes": 2115957464,
+    "sha256": "5cbfc0ecf9fa24a7a8d8949ed54c3fc3691b7a1a58075d68f63f257b34ca6942"
+  },
+  "physicalDeviceFeatures": {
+    "nvidiaDynamicIndex": true,
+    "intelDynamicIndex": true
+  },
+  "recordedDeviceFeature": [
+    {
+      "path": "/vkCreateDevice/CreateInfo/pEnabledFeatures/shaderSampledImageArrayDynamicIndexing",
+      "value": 1
+    }
+  ],
+  "profile": {
+    "seconds": 5.937999999994645,
+    "mappedDrawEvents": 3394,
+    "reflectedShaders": 23,
+    "scope": "Full recorded pipeline bindings and direct shader reflection, with two replay duration sweeps and no SetFrameEvent inspection loops. Native frame acceptance remains separate."
+  },
+  "comparison": {
+    "seconds": 56.687,
+    "drawCount": 1009,
+    "allNineTargetsIdentical": true,
+    "pairedTimings": [
+      {
+        "mode": "baseline",
+        "allEventMs": 16.435904000000008,
+        "matchedEventMs": 11.778335999999946
+      },
+      {
+        "mode": "candidate",
+        "allEventMs": 16.425088000000002,
+        "matchedEventMs": 11.776415999999951
+      },
+      {
+        "mode": "candidate",
+        "allEventMs": 16.492032000000005,
+        "matchedEventMs": 11.792863999999959
+      },
+      {
+        "mode": "baseline",
+        "allEventMs": 16.53536,
+        "matchedEventMs": 11.841919999999952
+      }
+    ]
+  },
+  "qualification": {
+    "qualified": false,
+    "baselineMatchedMs": 11.810127999999949,
+    "candidateMatchedMs": 11.784639999999955,
+    "savedMatchedMs": 0.02548799999999396,
+    "matchedReduction": 0.0021581476508970576,
+    "affectedFrameFraction": 0.7163891563271549,
+    "reason": "Matched reduction below 20%; no native image or whole-frame batch is authorized by this cost evidence"
+  },
+  "productionInputsUnchanged": true,
+  "nativeBatchRun": false,
+  "formalAccepted": false,
+  "archive": {
+    "file": "controls.zip",
+    "bytes": 475182,
+    "sha256": "a53098ffcf79faa3c414818a08a339d14ede0d2f94057e6d517140c336290fae"
+  }
+}

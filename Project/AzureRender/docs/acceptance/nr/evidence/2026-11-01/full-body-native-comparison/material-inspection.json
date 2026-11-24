@@ -1,0 +1,624 @@
+[
+  {
+    "file": "material-0.azurematerial",
+    "type": "azure.profile",
+    "name": "M_actor_laevat_body_01",
+    "alphaMode": "OPAQUE",
+    "surface": {
+      "schemaVersion": 2,
+      "class": "skin",
+      "shadowColorLut": {
+        "schemaVersion": 1,
+        "texture": 1,
+        "flipV": false
+      },
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 2
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "geometry-shadow"
+      ],
+      "nprDiffuse": {
+        "schemaVersion": 1,
+        "shadowScale": 0.550000011920929,
+        "lightingInputs": "host-scene-radiance",
+        "shadowMask": "one",
+        "baseAo": "albedo-alpha",
+        "indirectNormal": "world-horizontal",
+        "lighting": {
+          "schemaVersion": 1,
+          "ambientColor": [
+            1.1870100498199463,
+            0.9272286891937256,
+            0.8129898905754089
+          ],
+          "mainColor": [
+            1.0,
+            0.926181972026825,
+            0.8666666746139526
+          ]
+        },
+        "rimResponse": "view-facing",
+        "viewTint": {
+          "schemaVersion": 1,
+          "scale": 0.5949999898672104,
+          "color": [
+            0.3813261091709137,
+            0.1247718408703804,
+            0.1384316235780716
+          ]
+        },
+        "mainRamp": {
+          "schemaVersion": 1,
+          "bias": 0.0
+        },
+        "characterVisibility": "object-shadow",
+        "localDiffuseFloorScale": 2,
+        "rimOrigin": {
+          "schemaVersion": 1,
+          "node": "Bip001_Pelvis"
+        }
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    }
+  },
+  {
+    "file": "material-1.azurematerial",
+    "type": "azure.profile",
+    "name": "M_actor_laevat_cloth_01",
+    "alphaMode": "OPAQUE",
+    "surface": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "shadowColorLut": {
+        "schemaVersion": 1,
+        "texture": 2,
+        "flipV": true
+      },
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 3
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "surface-ao",
+        "geometry-shadow"
+      ],
+      "nprDiffuse": {
+        "schemaVersion": 1,
+        "shadowScale": 1,
+        "lightingInputs": "host-scene-radiance",
+        "shadowMask": "none",
+        "baseAo": "albedo-alpha"
+      },
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    }
+  },
+  {
+    "file": "material-10.azurematerial",
+    "type": "azure.profile",
+    "name": "M_hairshadow_common_04",
+    "alphaMode": "BLEND",
+    "surface": {
+      "schemaVersion": 2,
+      "class": "overlay",
+      "features": [
+        "multiply-composite",
+        "overlay"
+      ],
+      "composite": {
+        "schemaVersion": 1,
+        "mode": "multiply"
+      },
+      "radianceScale": 1,
+      "displayTransform": "scene"
+    }
+  },
+  {
+    "file": "material-11.azurematerial",
+    "type": "azure.profile",
+    "name": "M_actor_laevat_iris_01",
+    "alphaMode": "OPAQUE",
+    "surface": {
+      "schemaVersion": 2,
+      "class": "eye",
+      "features": [
+        "eye-radial-surface",
+        "geometry-shadow"
+      ],
+      "eyeSurface": {
+        "schemaVersion": 1,
+        "diffuseRampTexture": 1,
+        "matcapTexture": 2,
+        "parallaxScale": 0.15000000596046448,
+        "matcapNormalScale": 1.0,
+        "alphaPremultiply": 0.0,
+        "highlightColor": [
+          3.4415907859802246,
+          3.0091395378112793,
+          2.8109328746795654
+        ],
+        "scatteringColor": [
+          0.0,
+          3.283193826675415,
+          16.948379516601562
+        ],
+        "matcapColor": [
+          1.2754714488983154,
+          0.2382483333349228,
+          0.7329827547073364,
+          1.0
+        ],
+        "uvScaleOffset": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "lightingInputs": {
+          "source": "host-authored",
+          "illuminationModel": "npr-main-ambient",
+          "matcapShadowFloor": 0.550000011920929,
+          "directWeights": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shadowScale": 0.302500013113022,
+          "ambientColor": [
+            0.8783068656921387,
+            0.9302293062210083,
+            1.1216931343078613
+          ],
+          "mainColor": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    }
+  },
+  {
+    "file": "material-12.azurematerial",
+    "type": "azure.profile",
+    "name": "M_fx_laevat_toppotential_01",
+    "alphaMode": null,
+    "surface": {
+      "schemaVersion": 2,
+      "class": "generic",
+      "features": [],
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    }
+  },
+  {
+    "file": "material-2.azurematerial",
+    "type": "azure.profile",
+    "name": "M_actor_laevat_cloth_02",
+    "alphaMode": "OPAQUE",
+    "surface": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 2
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "surface-ao",
+        "geometry-shadow"
+      ],
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    }
+  },
+  {
+    "file": "material-3.azurematerial",
+    "type": "azure.profile",
+    "name": "M_actor_laevat_cloth_03",
+    "alphaMode": "BLEND",
+    "surface": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 3
+      },
+      "features": [
+        "diffuse-ramp",
+        "stylized-shadow",
+        "surface-ao",
+        "sqrt-alpha-shadow"
+      ],
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    }
+  },
+  {
+    "file": "material-4.azurematerial",
+    "type": "azure.profile",
+    "name": "M_actor_laevat_cloth_04",
+    "alphaMode": "OPAQUE",
+    "surface": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 2
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "geometry-shadow"
+      ],
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      },
+      "specularRamp": {
+        "schemaVersion": 1,
+        "texture": 3,
+        "flipV": false,
+        "iridescence": 0,
+        "lightingInputs": "host-main-light"
+      },
+      "nprDiffuse": {
+        "schemaVersion": 1,
+        "shadowScale": 0.5,
+        "shadowAlbedo": "base-color",
+        "lightingInputs": "host-scene-radiance",
+        "shadowMask": "one",
+        "baseAo": "metallic-roughness-red",
+        "indirectNormal": "surface",
+        "characterVisibility": "object-shadow",
+        "mainRamp": {
+          "schemaVersion": 1,
+          "bias": 0
+        },
+        "rimOrigin": {
+          "schemaVersion": 1,
+          "node": "quan_jnt"
+        },
+        "lighting": {
+          "schemaVersion": 1,
+          "ambientColor": [
+            0.8783068656921387,
+            0.9302293062210083,
+            1.1216931343078613
+          ],
+          "mainColor": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "styleParameters": [
+        1,
+        1,
+        1,
+        0.5
+      ],
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    }
+  },
+  {
+    "file": "material-5.azurematerial",
+    "type": "azure.profile",
+    "name": "M_actor_laevat_cloth_05",
+    "alphaMode": "OPAQUE",
+    "surface": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 2
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "surface-ao",
+        "geometry-shadow"
+      ],
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    }
+  },
+  {
+    "file": "material-6.azurematerial",
+    "type": "azure.profile",
+    "name": "M_actor_laevat_brow_01",
+    "alphaMode": "OPAQUE",
+    "surface": {
+      "schemaVersion": 2,
+      "class": "skin",
+      "shadowColorLut": {
+        "schemaVersion": 1,
+        "texture": 1,
+        "flipV": true
+      },
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 2
+      },
+      "features": [
+        "diffuse-ramp",
+        "stylized-shadow",
+        "geometry-shadow"
+      ],
+      "nprDiffuse": {
+        "schemaVersion": 1,
+        "shadowScale": 1,
+        "lightingInputs": "host-scene-radiance",
+        "shadowMask": "none",
+        "baseAo": "albedo-alpha"
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    }
+  },
+  {
+    "file": "material-7.azurematerial",
+    "type": "azure.profile",
+    "name": "M_eyewhiteshadow_common_01",
+    "alphaMode": "BLEND",
+    "surface": {
+      "schemaVersion": 2,
+      "class": "overlay",
+      "features": [
+        "multiply-composite",
+        "overlay"
+      ],
+      "composite": {
+        "schemaVersion": 1,
+        "mode": "multiply"
+      },
+      "radianceScale": 1,
+      "displayTransform": "scene"
+    }
+  },
+  {
+    "file": "material-8.azurematerial",
+    "type": "azure.profile",
+    "name": "M_actor_laevat_face_01",
+    "alphaMode": "OPAQUE",
+    "surface": {
+      "schemaVersion": 2,
+      "class": "face",
+      "features": [
+        "face-sdf-eligible",
+        "silhouette-outline",
+        "stylized-shadow",
+        "geometry-shadow"
+      ],
+      "faceSdf": {
+        "schemaVersion": 2,
+        "texture": 1,
+        "maskTexture": 2,
+        "rampTexture": 3,
+        "texCoord": 0,
+        "headNode": "Bip001_Head",
+        "headBasis": [
+          -1.2556207821560323e-06,
+          2.7855764703915194e-06,
+          -0.9999999999953323,
+          0.999999999999211,
+          -4.4843204444759344e-08,
+          -1.2556209066996796e-06,
+          4.484670207260324e-08,
+          0.9999999999961199,
+          2.7855764142771456e-06
+        ],
+        "lightAdjustment": [
+          0,
+          0,
+          0
+        ]
+      },
+      "shadowColorLut": {
+        "schemaVersion": 1,
+        "texture": 4,
+        "flipV": true
+      },
+      "nprDiffuse": {
+        "schemaVersion": 1,
+        "shadowScale": 0.550000011920929,
+        "lightingInputs": "host-scene-radiance",
+        "shadowMask": "style-mask-gb",
+        "baseAo": "albedo-alpha",
+        "indirectNormal": "face-frame-radial-horizontal",
+        "lighting": {
+          "schemaVersion": 1,
+          "ambientColor": [
+            1.1870100498199463,
+            0.9272286891937256,
+            0.8129898905754089
+          ],
+          "mainColor": [
+            1.0,
+            0.926181972026825,
+            0.8666666746139526
+          ]
+        }
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    }
+  },
+  {
+    "file": "material-9.azurematerial",
+    "type": "azure.profile",
+    "name": "M_actor_laevat_hair_01",
+    "alphaMode": "MASK",
+    "surface": {
+      "schemaVersion": 2,
+      "class": "hair",
+      "hair": {
+        "power": 200,
+        "strength": 1.3,
+        "rampRow": 3,
+        "strandShift": 0.1,
+        "cameraOffset": [
+          0,
+          0,
+          0
+        ],
+        "upperLimit": 4,
+        "dataTexture": 1,
+        "dataNormalY": "positive",
+        "projectedRamp": {
+          "schemaVersion": 1,
+          "primaryShift": -0.020000000000000018,
+          "secondaryShift": 0.020000000000000018,
+          "intensity": 1.3,
+          "secondaryRange": 0.5,
+          "edgeFade": 5,
+          "specularNormalScale": 1,
+          "surfaceNormalScale": 1,
+          "directionX": 0,
+          "parameterTexture": 2,
+          "rampTexture": 3,
+          "secondaryColor": [
+            0.4091444674721517,
+            0.0,
+            0.00033774597523219814
+          ],
+          "objectBasis": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "surfaceResponse": "strand-diffuse",
+          "diffuseScale": 0.96,
+          "virtualLight": {
+            "schemaVersion": 1,
+            "blend": 1,
+            "objectGain": 1
+          },
+          "line": {
+            "schemaVersion": 1,
+            "texture": 4,
+            "frequency": 300,
+            "strandShift": 0.4,
+            "range": 0.95,
+            "depth": 0.22,
+            "alternation": 1,
+            "saturation": 1.5,
+            "uvTransform": [
+              9.3,
+              1,
+              -0.32,
+              0
+            ],
+            "diffuseTarget": "main-and-ambient"
+          },
+          "frame": {
+            "schemaVersion": 1,
+            "node": "Bip001_Head",
+            "basis": [
+              -1.2556207821560323e-06,
+              2.7855764703915194e-06,
+              -0.9999999999953323,
+              0.999999999999211,
+              -4.4843204444759344e-08,
+              -1.2556209066996796e-06,
+              4.484670207260324e-08,
+              0.9999999999961199,
+              2.7855764142771456e-06
+            ]
+          },
+          "tangentSign": -1,
+          "lighting": {
+            "schemaVersion": 1,
+            "shadowBrightness": 0.550000011920929,
+            "shadowSaturation": 1.100000023841858,
+            "shadowScale": 0.550000011920929,
+            "ambientColor": [
+              0.8783068656921387,
+              0.9302293062210083,
+              1.1216931343078613
+            ],
+            "mainColor": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "characterVisibility": "object-shadow"
+          }
+        }
+      },
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 5
+      },
+      "features": [
+        "diffuse-ramp",
+        "hair-anisotropy",
+        "hair-projected-ramp",
+        "stylized-shadow",
+        "geometry-shadow"
+      ],
+      "styleParameters": [
+        1,
+        1,
+        0.4,
+        0
+      ],
+      "outlineSurface": {
+        "schemaVersion": 1,
+        "mode": "view-scaled",
+        "width": 0.5,
+        "minimumPixels": 0.5,
+        "depthOffset": 0,
+        "normalSource": "tangent-octahedral-uv1",
+        "depthPrepass": true,
+        "maskTexture": 6
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    }
+  }
+]

@@ -1,0 +1,14 @@
+import hashlib,json,os,re,subprocess,sys
+from pathlib import Path
+import numpy as np
+from PIL import Image
+root=Path.cwd();run=Path(__file__).resolve().parent;sys.path.insert(0,str(root/'tools'));from native_render.probe_field_lab import prepare
+from test_character_probe_gpu import linear
+player=root/'build/ninja-msvc-release/AzurePlayer.exe';build=json.loads((run/'release-build.json').read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();assert sha(player)==build['programs']['AzurePlayer'];assert {p.name:sha(p) for p in (player.parent/'shaders').glob('*.spv')}==build['shaders'];report=dict(status='running',programSha256=sha(player),shaders=build['shaders'],budget=.008,cases=[]);env=os.environ.copy();env['DOTNET_ROOT']='D:/Tools/dotnet9';startup=subprocess.STARTUPINFO();startup.dwFlags|=subprocess.STARTF_USESHOWWINDOW;startup.wShowWindow=0
+for selected in [False,True]:
+ name='diffuse-global' if selected else 'scene-default';folder=run/'probe-coupling-red'/name;project=prepare(folder/'project',dict(name='adapted'));path=folder/'project/assets/surface.gltf';model=json.loads(path.read_text());material=model['materials'][0];material['extras']={'azureRenderMaterial':dict(schemaVersion=2,**{'class':'generic'},features=[],styleParameters=[0,0,1,0])}
+ if selected:material['extras']['azureRenderMaterial']['environmentLighting']=dict(schemaVersion=1,diffuse='global-environment')
+ path.write_bytes((json.dumps(model,indent=2)+'\n').encode());command=[str(player),'--project',str(project),'--width','128','--height','128','--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene','--qa-isolation','reflection','--capture-dir',str(folder/'frames'),'--runtime-report',str(folder/'runtime.json')]
+ with (folder/'player.log').open('wb') as log:result=subprocess.run(command,cwd=folder,stdout=log,stderr=log,env=env,startupinfo=startup,timeout=120)
+ assert result.returncode==0;logs=[json.loads(line) for line in (folder/'captures/azureplayer.log.jsonl').read_text().splitlines()];assert not any(r['level']=='error' or r['subsystem']=='validation' and r['level']=='warning' for r in logs);assert any(r['message']=='Allocator after unload: buffers=0 images=0' for r in logs);actual=linear(np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))[62:66,62:66]);expected=np.array([.25,.0625,.125]);error=float(np.abs(actual-expected).max());row=dict(name=name,expected=expected.tolist(),actual=actual.mean(axis=(0,1)).tolist(),maximumLinearError=error);report['cases'].append(row);print(json.dumps(row),flush=True)
+assert report['cases'][0]['maximumLinearError']<=.008 and report['cases'][1]['maximumLinearError']>.008;report['status']='red-confirmed';(run/'probe-coupling-red.json').write_bytes((json.dumps(report,indent=2)+'\n').encode());print('CONFIRMED independent diffuse selection incorrectly changes scene probe reflection')

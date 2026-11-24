@@ -1,0 +1,31 @@
+{
+  "phase": "NR5-R8-E",
+  "status": "component-verified",
+  "mainSceneIntegrated": false,
+  "policies": [
+    "Average",
+    "Minimum",
+    "MinimumDepthSample"
+  ],
+  "metadataFormat": "RGBA32F",
+  "bytesPerPixelPerSlot": 112,
+  "sourceSlots": 2,
+  "tests": [
+    "nearest-complete-sample",
+    "equal-depth-first-sample",
+    "existing-average-and-minimum",
+    "slot-isolation",
+    "format-budget",
+    "zero-validation-errors",
+    "resource-retirement"
+  ],
+  "sources": {
+    "src/render/SceneMultisampling.hpp": "9509ca46d618158d3ceff0b613e28d1734c458210e91d7fc4c8850f8410248a4",
+    "src/render/SceneMultisampling.cpp": "751efc029b10e7036db6a8ea0837b2fe02ef1660634b65ba2cf3212e05aec070",
+    "shaders/scene_multisample_resolve.frag": "caed3b439301630e2a64f72b27e06df5e7913e74f39236857362ebc37f263297",
+    "shaders/scene_multisample_probe.frag": "43b24d517715d30d58d2405f20b4c6790661a77c52a02cf01cd3e9cf84dec47e",
+    "tests/SceneMultisamplingGpuTests.cpp": "3f1c195ff9a832a1717afc69fd2650c10a14e8ef9c3f6991e24ba0c25d8417b9"
+  },
+  "debug": "Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug\r\nTest project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug\r\n    Start 31: AzureRender.SceneMultisamplingGpu\r\n1/2 Test #31: AzureRender.SceneMultisamplingGpu ...   Passed    1.30 sec\r\n    Start 32: AzureRender.SceneMultisampling\r\n2/2 Test #32: AzureRender.SceneMultisampling ......   Passed    1.05 sec\r\n\r\n100% tests passed, 0 tests failed out of 2\r\n\r\nLabel Time Summary:\r\ngpu    =   1.30 sec*proc (1 test)\r\n\r\nTotal Test time (real) =   2.36 sec\r\n",
+  "release": "Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release\r\nTest project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release\r\n    Start 31: AzureRender.SceneMultisamplingGpu\r\n1/2 Test #31: AzureRender.SceneMultisamplingGpu ...   Passed    0.79 sec\r\n    Start 32: AzureRender.SceneMultisampling\r\n2/2 Test #32: AzureRender.SceneMultisampling ......   Passed    0.47 sec\r\n\r\n100% tests passed, 0 tests failed out of 2\r\n\r\nLabel Time Summary:\r\ngpu    =   0.79 sec*proc (1 test)\r\n\r\nTotal Test time (real) =   1.27 sec\r\n"
+}

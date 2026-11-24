@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <queue>
+#include <limits>
 
 namespace azurerender {
 
@@ -74,6 +75,8 @@ void RenderGraph::use(
     const bool isWrite) {
     std::string error;
     if (!valid(pass, resource, error)) throw std::out_of_range(error);
+    if(usage==RenderGraphUsage::DepthReadAttachment&&isWrite)
+        throw std::invalid_argument("Read-only depth cannot declare writes");
     compiled_ = false;
     if (isWrite) passes_[pass].writes.push_back(resource);
     else passes_[pass].reads.push_back(resource);
@@ -82,10 +85,10 @@ void RenderGraph::use(
 
 void RenderGraph::attachment(PassId pass, ResourceId resource,
                              RenderGraphUsage usage, VkImageLayout finalLayout) {
-    if ((usage != RenderGraphUsage::ColorAttachment && usage != RenderGraphUsage::DepthAttachment)
+    if ((usage != RenderGraphUsage::ColorAttachment && usage != RenderGraphUsage::DepthAttachment&&usage!=RenderGraphUsage::DepthReadAttachment)
         || finalLayout == VK_IMAGE_LAYOUT_UNDEFINED)
         throw std::invalid_argument("Attachment requires valid usage and final layout");
-    use(pass, resource, usage, true);
+    use(pass, resource, usage, usage!=RenderGraphUsage::DepthReadAttachment);
     passes_[pass].uses.back().attachmentFinalLayout = finalLayout;
 }
 
@@ -123,7 +126,8 @@ void RenderGraph::setRecordingChunks(PassId pass,
 }
 
 void RenderGraph::execute(rhi::ICommandRecorder* recorder,
-    const std::function<bool(PassId)>& executeRecorded, bool useFullInlineCallback) const {
+    const std::function<bool(PassId)>& executeRecorded, bool useFullInlineCallback,
+    const std::function<void(PassId, bool)>& passBoundary) const {
     if (!compiled_) throw std::logic_error("Render graph must compile before execution");
     for (const auto& barrier : barriers_)
         if (barrier.image.image != VK_NULL_HANDLE && recorder == nullptr)
@@ -134,8 +138,9 @@ void RenderGraph::execute(rhi::ICommandRecorder* recorder,
         if (pass.recordCommands && recorder == nullptr)
             throw std::logic_error("Command pass requires command recorder");
     for (const auto pass : executionOrder_) {
-        for (const auto index : bufferBarrierIndices_[pass])
-            recorder->bufferBarrier(bufferBarriers_[index].buffer);
+        if(passBoundary)passBoundary(pass,true);
+        const auto& buffers = passBufferBarriers_[pass];
+        if (!buffers.empty()) recorder->bufferBarriers(buffers.data(), buffers.size());
         for (const auto index : imageBarrierIndices_[pass])
             recorder->imageBarrier(barriers_[index].image);
         if (passes_[pass].record) passes_[pass].record();
@@ -149,6 +154,7 @@ void RenderGraph::execute(rhi::ICommandRecorder* recorder,
             }
             if (passes_[pass].afterRenderPass) passes_[pass].afterRenderPass(*recorder);
         }
+        if(passBoundary)passBoundary(pass,false);
     }
 }
 
@@ -233,6 +239,8 @@ bool RenderGraph::compile(std::string& error) {
         VkImageLayout layout = VK_IMAGE_LAYOUT_UNDEFINED;
     };
     std::vector<ResourceState> states(resources_.size());
+    const auto noReadScope=std::numeric_limits<std::size_t>::max();
+    std::vector<std::size_t> bufferReadScopes(resources_.size(),noReadScope);
     for (std::size_t i = 0; i < resources_.size(); ++i) {
         const auto& initial = resources_[i].initial;
         const auto& buffer = resources_[i].initialBuffer;
@@ -247,6 +255,10 @@ bool RenderGraph::compile(std::string& error) {
     const auto stateFor = [](const RenderGraphUsage usage, const bool write) {
         ResourceState state{};
         switch (usage) {
+        case RenderGraphUsage::FragmentUniform:
+            state.stage=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+            state.access=VK_ACCESS_UNIFORM_READ_BIT;
+            break;
         case RenderGraphUsage::Present:
             state.stage = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
             state.access = 0;
@@ -271,6 +283,12 @@ bool RenderGraph::compile(std::string& error) {
             state.stage = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
             state.access = write ? VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT : VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT;
             state.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+            break;
+        case RenderGraphUsage::DepthReadAttachment:
+            state.stage=VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT|VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+            // STORE preserves depth values but is still an attachment memory write.
+            state.access=VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT|VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+            state.layout=VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
             break;
         case RenderGraphUsage::VertexBuffer:
             state.stage = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT;
@@ -318,7 +336,7 @@ bool RenderGraph::compile(std::string& error) {
     for (const PassId pass : executionOrder_) {
         for (const RenderGraphUse& use : passes_[pass].uses) {
             ResourceState next = stateFor(use.usage, use.write);
-            if (use.attachmentFinalLayout != VK_IMAGE_LAYOUT_UNDEFINED) {
+            if (use.attachmentFinalLayout != VK_IMAGE_LAYOUT_UNDEFINED&&use.usage!=RenderGraphUsage::DepthReadAttachment) {
                 next.layout = use.attachmentFinalLayout;
                 states[use.resource] = next;
                 continue;
@@ -329,6 +347,16 @@ bool RenderGraph::compile(std::string& error) {
                 next.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
             const ResourceState previous = states[use.resource];
             if (resources_[use.resource].initialBuffer.buffer != VK_NULL_HANDLE) {
+                auto& scope=bufferReadScopes[use.resource];
+                if(!use.write&&scope!=noReadScope){
+                    // Publish the producer's writes to every consumer stage
+                    // at the barrier preceding this complete read streak.
+                    auto& first=bufferBarriers_[scope].buffer;
+                    first.dstStageMask|=next.stage;first.dstAccessMask|=next.access;
+                    states[use.resource].stage|=next.stage;
+                    states[use.resource].access|=next.access;
+                    continue;
+                }
                 RenderGraphBufferBarrier barrier{};
                 barrier.pass = pass;
                 barrier.resource = use.resource;
@@ -337,6 +365,7 @@ bool RenderGraph::compile(std::string& error) {
                 barrier.buffer.srcAccessMask = previous.access;
                 barrier.buffer.dstStageMask = next.stage;
                 barrier.buffer.dstAccessMask = next.access;
+                scope=use.write?noReadScope:bufferBarriers_.size();
                 bufferBarriers_.push_back(barrier);
                 states[use.resource] = next;
                 continue;
@@ -353,15 +382,16 @@ bool RenderGraph::compile(std::string& error) {
             barrier.image.dstAccessMask = next.access;
             barriers_.push_back(barrier);
             states[use.resource] = next;
+            if(use.attachmentFinalLayout!=VK_IMAGE_LAYOUT_UNDEFINED)states[use.resource].layout=use.attachmentFinalLayout;
         }
     }
     imageBarrierIndices_.assign(passes_.size(), {});
-    bufferBarrierIndices_.assign(passes_.size(), {});
+    passBufferBarriers_.assign(passes_.size(), {});
     for (std::size_t i = 0; i < barriers_.size(); ++i)
         if (barriers_[i].image.image != VK_NULL_HANDLE)
             imageBarrierIndices_[barriers_[i].pass].push_back(i);
-    for (std::size_t i = 0; i < bufferBarriers_.size(); ++i)
-        bufferBarrierIndices_[bufferBarriers_[i].pass].push_back(i);
+    for (const auto& barrier : bufferBarriers_)
+        passBufferBarriers_[barrier.pass].push_back(barrier.buffer);
     compiled_ = true;
     return true;
 }

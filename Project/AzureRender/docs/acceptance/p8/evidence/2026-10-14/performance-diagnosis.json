@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "executed": 15,
+  "passed": 10,
+  "failed": [
+    {
+      "workload": "stress",
+      "round": 2,
+      "passed": false,
+      "failures": [
+        "device environment: software thermal slowdown is active",
+        "device environment: run observation 6: driver relative thermal headroom is insufficient",
+        "device environment: run observation 7: driver relative thermal headroom is insufficient",
+        "device environment: run observation 8: software thermal slowdown is active"
+      ],
+      "gpuP95Ms": 8.4818368,
+      "cpuP95Ms": 4.722740000000025,
+      "physicsP95Ms": 1.1422949999999996
+    },
+    {
+      "workload": "stress",
+      "round": 3,
+      "passed": false,
+      "failures": [
+        "device environment: run observation 3: driver relative thermal headroom is insufficient",
+        "device environment: run observation 4: software thermal slowdown is active",
+        "device environment: run observation 5: driver relative thermal headroom is insufficient",
+        "device environment: run observation 5: software thermal slowdown is active",
+        "device environment: run observation 6: software thermal slowdown is active",
+        "device environment: run observation 7: software thermal slowdown is active"
+      ],
+      "gpuP95Ms": 8.5112016,
+      "cpuP95Ms": 4.849680000000004,
+      "physicsP95Ms": 1.119105
+    },
+    {
+      "workload": "exploration",
+      "round": 1,
+      "passed": false,
+      "failures": [
+        "device environment: software thermal slowdown is active",
+        "device environment: run observation 2: driver relative thermal headroom is insufficient",
+        "device environment: run observation 2: software thermal slowdown is active",
+        "device environment: run observation 3: driver relative thermal headroom is insufficient",
+        "device environment: run observation 4: driver relative thermal headroom is insufficient",
+        "device environment: run observation 4: hardware thermal slowdown is active",
+        "device environment: run observation 5: driver relative thermal headroom is insufficient",
+        "device environment: run observation 5: software thermal slowdown is active",
+        "device environment: run observation 6: software thermal slowdown is active",
+        "device environment: run observation 7: driver relative thermal headroom is insufficient",
+        "device environment: run observation 7: software thermal slowdown is active",
+        "device environment: run observation 8: software thermal slowdown is active"
+      ],
+      "gpuP95Ms": 11.483609600000001,
+      "cpuP95Ms": 2.7895549999999982,
+      "physicsP95Ms": 0.46141499999999996
+    },
+    {
+      "workload": "exploration",
+      "round": 2,
+      "passed": false,
+      "failures": [
+        "device environment: run observation 1: driver relative thermal headroom is insufficient",
+        "device environment: run observation 3: driver relative thermal headroom is insufficient",
+        "device environment: run observation 3: software thermal slowdown is active",
+        "device environment: run observation 4: driver relative thermal headroom is insufficient",
+        "device environment: run observation 4: software thermal slowdown is active",
+        "device environment: run observation 5: driver relative thermal headroom is insufficient",
+        "device environment: run observation 5: software thermal slowdown is active",
+        "device environment: run observation 6: driver relative thermal headroom is insufficient",
+        "device environment: run observation 6: software thermal slowdown is active",
+        "device environment: run observation 7: driver relative thermal headroom is insufficient",
+        "device environment: run observation 7: software thermal slowdown is active"
+      ],
+      "gpuP95Ms": 11.494910399999998,
+      "cpuP95Ms": 2.7080900000000003,
+      "physicsP95Ms": 0.4368149999999999
+    },
+    {
+      "workload": "exploration",
+      "round": 3,
+      "passed": false,
+      "failures": [
+        "device environment: run observation 2: software thermal slowdown is active",
+        "device environment: run observation 3: software thermal slowdown is active",
+        "device environment: run observation 4: driver relative thermal headroom is insufficient",
+        "device environment: run observation 4: software thermal slowdown is active",
+        "device environment: run observation 5: software thermal slowdown is active",
+        "device environment: run observation 6: software thermal slowdown is active",
+        "device environment: run observation 7: driver relative thermal headroom is insufficient",
+        "device environment: run observation 7: software thermal slowdown is active"
+      ],
+      "gpuP95Ms": 11.494339199999999,
+      "cpuP95Ms": 2.6620050000000095,
+      "physicsP95Ms": 0.4619849999999998
+    }
+  ],
+  "allTimingAndMemoryBudgetsPassed": true,
+  "unresolvedCondition": "Driver thermal headroom and hardware/software thermal slowdown",
+  "owner": "设备环境与性能调查",
+  "retryTrigger": "设备热状态改善或相关性能机制修复通过",
+  "nextAttempt": "Concentrated acceptance after an actual change in environment or implementation",
+  "sourceCommit": "0dcc91349b90c129152df70d22f873934c6e3309",
+  "sourceHash": "1179fe9b3e86d3bd48bab78990e33febfd84a7b55a1096287848c48e158fafe2",
+  "budgets": {
+    "gpuP95Ms": 16.6,
+    "playerCpuP95Ms": 8,
+    "editorCpuP95Ms": 10,
+    "physicsP95Ms": 2,
+    "stableWorkingSetGrowth": 0.05,
+    "peakWorkingSetBytes": 2147483648,
+    "deviceLocalBytes": 1610612736.0
+  }
+}

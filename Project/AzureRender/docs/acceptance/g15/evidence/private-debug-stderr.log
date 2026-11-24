@@ -1,0 +1,6 @@
+[1791590666486][info][gpu][code=0] GPU capability report: D:\Assigment\2609\FYP\Project\AzureRender\build\implementation-2026-10-10\g15-private-debug-visual\capture\gpu_capabilities.json
+[1791590677688][info][render][code=0] Character texture access: indexed, requested slots=123, stage sampler limit=1048576
+[1791590685378][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791590685385][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791590685742][info][capture][code=0] Capture progress: 1 / 3
+[1791590686468][info][capture][code=0] Capture progress: 3 / 3

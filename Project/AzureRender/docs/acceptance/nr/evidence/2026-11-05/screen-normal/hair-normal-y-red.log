@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_screen_normal_gpu.py", line 224, in <module>
+    run(args.executable.resolve(), args.output.resolve(), args.quality, args.case, args.expected_validation)
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_screen_normal_gpu.py", line 193, in run
+    assert np.max(np.abs(actual - expected)) <= .008, (name, actual, expected)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('hair-normal', array([0.06124605, 0.06124605, 0.06124605]), array([0.1290748, 0.1290748, 0.1290748]))

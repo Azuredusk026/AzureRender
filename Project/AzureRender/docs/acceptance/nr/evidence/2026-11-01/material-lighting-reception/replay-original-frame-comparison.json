@@ -1,0 +1,135 @@
+{
+  "status": "measured",
+  "captures": [
+    {
+      "kind": "parallel",
+      "frames": [
+        {
+          "frame": "frame_000000.png",
+          "pixels": 114696,
+          "max": 147
+        },
+        {
+          "frame": "frame_000001.png",
+          "pixels": 103100,
+          "max": 143
+        },
+        {
+          "frame": "frame_000002.png",
+          "pixels": 83730,
+          "max": 134
+        },
+        {
+          "frame": "frame_000003.png",
+          "pixels": 76089,
+          "max": 132
+        },
+        {
+          "frame": "frame_000004.png",
+          "pixels": 71849,
+          "max": 125
+        },
+        {
+          "frame": "frame_000005.png",
+          "pixels": 68198,
+          "max": 128
+        },
+        {
+          "frame": "frame_000006.png",
+          "pixels": 64754,
+          "max": 126
+        },
+        {
+          "frame": "frame_000007.png",
+          "pixels": 60240,
+          "max": 118
+        },
+        {
+          "frame": "frame_000008.png",
+          "pixels": 54227,
+          "max": 118
+        },
+        {
+          "frame": "frame_000009.png",
+          "pixels": 44806,
+          "max": 134
+        },
+        {
+          "frame": "frame_000010.png",
+          "pixels": 0,
+          "max": 0
+        },
+        {
+          "frame": "frame_000011.png",
+          "pixels": 45032,
+          "max": 102
+        }
+      ]
+    },
+    {
+      "kind": "serial",
+      "frames": [
+        {
+          "frame": "frame_000000.png",
+          "pixels": 114696,
+          "max": 147
+        },
+        {
+          "frame": "frame_000001.png",
+          "pixels": 103100,
+          "max": 143
+        },
+        {
+          "frame": "frame_000002.png",
+          "pixels": 83730,
+          "max": 134
+        },
+        {
+          "frame": "frame_000003.png",
+          "pixels": 76089,
+          "max": 132
+        },
+        {
+          "frame": "frame_000004.png",
+          "pixels": 71849,
+          "max": 125
+        },
+        {
+          "frame": "frame_000005.png",
+          "pixels": 68198,
+          "max": 128
+        },
+        {
+          "frame": "frame_000006.png",
+          "pixels": 64754,
+          "max": 126
+        },
+        {
+          "frame": "frame_000007.png",
+          "pixels": 60240,
+          "max": 118
+        },
+        {
+          "frame": "frame_000008.png",
+          "pixels": 54227,
+          "max": 118
+        },
+        {
+          "frame": "frame_000009.png",
+          "pixels": 44817,
+          "max": 134
+        },
+        {
+          "frame": "frame_000010.png",
+          "pixels": 0,
+          "max": 0
+        },
+        {
+          "frame": "frame_000011.png",
+          "pixels": 45032,
+          "max": 102
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+cmake_minimum_required(VERSION 3.20)
+
+if(NOT DEFINED SOURCE_DIR)
+    get_filename_component(SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/.." ABSOLUTE)
+endif()
+if(NOT DEFINED BUILD_DIR)
+    message(FATAL_ERROR "BUILD_DIR is required")
+endif()
+get_filename_component(BUILD_DIR "${BUILD_DIR}" ABSOLUTE)
+if(NOT IS_DIRECTORY "${BUILD_DIR}" OR NOT EXISTS "${BUILD_DIR}/CMakeCache.txt")
+    message(FATAL_ERROR "Release gate requires a configured build directory: ${BUILD_DIR}")
+endif()
+if(NOT DEFINED CONFIG)
+    set(CONFIG Release)
+endif()
+
+set(GATE_DIR "${BUILD_DIR}/release-gate")
+set(INSTALL_DIR "${GATE_DIR}/install")
+set(MOVED_DIR "${GATE_DIR}/install-moved")
+set(RESULT_FILE "${GATE_DIR}/result.json")
+file(REMOVE_RECURSE "${GATE_DIR}")
+file(MAKE_DIRECTORY "${GATE_DIR}")
+
+function(run_gate_stage NAME)
+    execute_process(
+        COMMAND ${ARGN}
+        RESULT_VARIABLE STAGE_RESULT
+        OUTPUT_VARIABLE STAGE_OUTPUT
+        ERROR_VARIABLE STAGE_ERROR)
+    file(WRITE "${GATE_DIR}/${NAME}.log" "${STAGE_OUTPUT}${STAGE_ERROR}")
+    if(NOT STAGE_RESULT EQUAL 0)
+        file(WRITE "${RESULT_FILE}"
+            "{\n  \"schema_version\": 1,\n  \"status\": \"failed\",\n"
+            "  \"failed_stage\": \"${NAME}\"\n}\n")
+        message(FATAL_ERROR "Release gate stage '${NAME}' failed; see ${GATE_DIR}/${NAME}.log")
+    endif()
+endfunction()
+
+run_gate_stage(configure
+    "${CMAKE_COMMAND}" -S "${SOURCE_DIR}" -B "${BUILD_DIR}")
+run_gate_stage(build
+    "${CMAKE_COMMAND}" --build "${BUILD_DIR}" --config "${CONFIG}")
+run_gate_stage(test
+    "${CMAKE_CTEST_COMMAND}" --test-dir "${BUILD_DIR}" -C "${CONFIG}"
+    --output-on-failure)
+run_gate_stage(install
+    "${CMAKE_COMMAND}" --install "${BUILD_DIR}" --config "${CONFIG}"
+    --prefix "${INSTALL_DIR}")
+file(RENAME "${INSTALL_DIR}" "${MOVED_DIR}")
+
+# AR-5.5: reproducible content manifest for the staged install tree, then
+# verify the tree against it (license texts + file hashes).
+set(INSTALL_MANIFEST "${MOVED_DIR}/install_manifest.json")
+run_gate_stage(write-install-manifest
+    "${CMAKE_COMMAND}" -DINSTALL_DIR=${MOVED_DIR}
+    -DOUTPUT_FILE=${INSTALL_MANIFEST}
+    -P "${SOURCE_DIR}/tools/write_install_manifest.cmake")
+run_gate_stage(verify-install-manifest
+    "${CMAKE_COMMAND}" -DINSTALL_DIR=${MOVED_DIR}
+    -DMANIFEST_FILE=${INSTALL_MANIFEST}
+    -P "${SOURCE_DIR}/tools/verify_install_manifest.cmake")
+
+string(TOUPPER "${CONFIG}" CONFIG_UPPER)
+if(WIN32 AND CONFIG_UPPER STREQUAL "DEBUG")
+    file(TO_CMAKE_PATH "${MOVED_DIR}" INSTALL_TREE_PATH)
+    file(WRITE "${RESULT_FILE}"
+        "{\n"
+        "  \"schema_version\": 1,\n"
+        "  \"status\": \"development-only\",\n"
+        "  \"configuration\": \"Debug\",\n"
+        "  \"install_tree\": \"${INSTALL_TREE_PATH}\",\n"
+        "  \"reason\": \"Windows Debug CRT and dependency runtimes require the development toolchain\",\n"
+        "  \"stages\": [\"configure\", \"build\", \"test\", \"install\", \"write-install-manifest\", \"verify-install-manifest\"]\n"
+        "}\n")
+    message(STATUS
+        "Windows Debug install validated for development use: ${RESULT_FILE}")
+    return()
+endif()
+
+if(WIN32)
+    set(INSTALLED_EXECUTABLE "${MOVED_DIR}/bin/AzureRender.exe")
+else()
+    set(INSTALLED_EXECUTABLE "${MOVED_DIR}/bin/AzureRender")
+endif()
+run_gate_stage(version "${INSTALLED_EXECUTABLE}" --version)
+run_gate_stage(resources "${INSTALLED_EXECUTABLE}" --check-resources)
+if(WIN32)
+    run_gate_stage(isolated-runtime
+        powershell.exe -NoProfile -ExecutionPolicy Bypass
+        -File "${SOURCE_DIR}/tools/verify_windows_runtime.ps1"
+        -Executable "${INSTALLED_EXECUTABLE}")
+endif()
+
+if(WIN32)
+    run_gate_stage(isolated-player
+        powershell.exe -NoProfile -ExecutionPolicy Bypass
+        -File "${SOURCE_DIR}/tools/verify_windows_runtime.ps1"
+        -Executable "${MOVED_DIR}/bin/AzurePlayer.exe")
+    run_gate_stage(player-project-runtime
+        powershell.exe -NoProfile -ExecutionPolicy Bypass
+        -File "${SOURCE_DIR}/tools/verify_player_runtime.ps1"
+        -Executable "${MOVED_DIR}/bin/AzurePlayer.exe"
+        -OutputDirectory "${GATE_DIR}/player-runtime")
+    find_program(AZURE_GATE_PYTHON NAMES python python3 REQUIRED)
+    run_gate_stage(player-script-runtime
+        "${AZURE_GATE_PYTHON}" "${SOURCE_DIR}/tools/test_script_player.py"
+        "${MOVED_DIR}/bin/AzurePlayer.exe"
+        "${MOVED_DIR}/share/AzureRender/assets_public/gameplay")
+endif()
+
+run_gate_stage(package
+    "${CMAKE_CPACK_COMMAND}" -G TGZ -C "${CONFIG}"
+    -B "${BUILD_DIR}" --config "${BUILD_DIR}/CPackConfig.cmake")
+include("${BUILD_DIR}/CPackConfig.cmake")
+set(PACKAGE_FILE "${BUILD_DIR}/${CPACK_PACKAGE_FILE_NAME}.tar.gz")
+if(NOT EXISTS "${PACKAGE_FILE}")
+    message(FATAL_ERROR "Release gate package was not generated: ${PACKAGE_FILE}")
+endif()
+
+execute_process(
+    COMMAND "${CMAKE_COMMAND}" -E tar tf "${PACKAGE_FILE}"
+    RESULT_VARIABLE LIST_RESULT
+    OUTPUT_VARIABLE PACKAGE_CONTENTS)
+if(NOT LIST_RESULT EQUAL 0
+    OR PACKAGE_CONTENTS MATCHES "assets_private"
+    OR PACKAGE_CONTENTS MATCHES "captures/")
+    message(FATAL_ERROR "Release package content/privacy check failed")
+endif()
+
+set(MANIFEST_FILE "${PACKAGE_FILE}.manifest.json")
+run_gate_stage(manifest
+    "${CMAKE_COMMAND}" -DPACKAGE_FILE=${PACKAGE_FILE}
+    -DOUTPUT_FILE=${MANIFEST_FILE}
+    -P "${SOURCE_DIR}/tools/write_rc_manifest.cmake")
+file(SHA256 "${PACKAGE_FILE}" PACKAGE_SHA256)
+file(SIZE "${PACKAGE_FILE}" PACKAGE_SIZE)
+file(TO_CMAKE_PATH "${PACKAGE_FILE}" PACKAGE_JSON_PATH)
+file(WRITE "${RESULT_FILE}"
+    "{\n"
+    "  \"schema_version\": 1,\n"
+    "  \"status\": \"passed\",\n"
+    "  \"configuration\": \"${CONFIG}\",\n"
+    "  \"package\": \"${PACKAGE_JSON_PATH}\",\n"
+    "  \"size_bytes\": ${PACKAGE_SIZE},\n"
+    "  \"sha256\": \"${PACKAGE_SHA256}\",\n"
+    "  \"stages\": [\"configure\", \"build\", \"test\", \"install\", \"version\", \"resources\", \"isolated-runtime\", \"isolated-player\", \"player-project-runtime\", \"player-script-runtime\", \"package\", \"manifest\"]\n"
+    "}\n")
+message(STATUS "Release gate passed: ${RESULT_FILE}")

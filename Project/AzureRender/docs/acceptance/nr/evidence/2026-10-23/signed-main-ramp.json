@@ -1,0 +1,513 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "scope": "Public signed main-light ramp and captured body inputs; full skin appearance remains pending",
+  "run": "build/runs/20261023-161800-body-postvs-light-input-validation-f58330",
+  "cpu": [
+    {
+      "config": "release",
+      "groups": 11,
+      "passed": true
+    },
+    {
+      "config": "debug",
+      "groups": 11,
+      "passed": true
+    }
+  ],
+  "gpu": [
+    {
+      "suite": "numeric",
+      "config": "release",
+      "probes": 248,
+      "passed": true
+    },
+    {
+      "suite": "npr",
+      "config": "release",
+      "captures": 18,
+      "passed": true
+    },
+    {
+      "suite": "rim",
+      "config": "release",
+      "captures": 6,
+      "passed": true
+    },
+    {
+      "suite": "hair",
+      "config": "release",
+      "captures": 4,
+      "passed": true
+    },
+    {
+      "suite": "numeric",
+      "config": "debug",
+      "probes": 248,
+      "passed": true
+    },
+    {
+      "suite": "npr",
+      "config": "debug",
+      "captures": 18,
+      "passed": true
+    },
+    {
+      "suite": "rim",
+      "config": "debug",
+      "captures": 6,
+      "passed": true
+    },
+    {
+      "suite": "hair",
+      "config": "debug",
+      "captures": 4,
+      "passed": true
+    }
+  ],
+  "actualCaptures": [
+    {
+      "name": "body-ramp",
+      "playerSha256": "f951d2580de0356ffa1ac299f68644c392e0727b5053fc0d68a69a0fbcb19507",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "before": [
+            81,
+            57,
+            52
+          ],
+          "actual": [
+            111,
+            75,
+            63
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "before": [
+            126,
+            97,
+            84
+          ],
+          "actual": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "before": [
+            156,
+            131,
+            118
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "before": [
+            161,
+            138,
+            125
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ],
+      "imageSha256": "bc6a8eb1293bea9e77fb25695818d0b305391127615815b6f8d0ae32db6035e5"
+    },
+    {
+      "name": "body-original-ramp",
+      "playerSha256": "f951d2580de0356ffa1ac299f68644c392e0727b5053fc0d68a69a0fbcb19507",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "before": [
+            81,
+            57,
+            52
+          ],
+          "actual": [
+            111,
+            75,
+            63
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "before": [
+            126,
+            97,
+            84
+          ],
+          "actual": [
+            145,
+            114,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "before": [
+            156,
+            131,
+            118
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "before": [
+            161,
+            138,
+            125
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ],
+      "imageSha256": "a3638cc3f548db49ce1b4a1eb5526a8a1507f03983c3ef197f1dc7ac230a0449"
+    },
+    {
+      "name": "body-ramp-fixed",
+      "playerSha256": "8860a98a34d3ce7621458e98c8ce21c08ae0a7e1c588da14be43b2d181c14f38",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "before": [
+            81,
+            57,
+            52
+          ],
+          "actual": [
+            111,
+            75,
+            63
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "before": [
+            126,
+            97,
+            84
+          ],
+          "actual": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "before": [
+            156,
+            131,
+            118
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "before": [
+            161,
+            138,
+            125
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ],
+      "maximumByteDifference": 0,
+      "imageSha256": "bc6a8eb1293bea9e77fb25695818d0b305391127615815b6f8d0ae32db6035e5"
+    },
+    {
+      "name": "compatible-body",
+      "playerSha256": "f951d2580de0356ffa1ac299f68644c392e0727b5053fc0d68a69a0fbcb19507",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "before": [
+            81,
+            57,
+            52
+          ],
+          "actual": [
+            81,
+            57,
+            52
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "before": [
+            126,
+            97,
+            84
+          ],
+          "actual": [
+            124,
+            96,
+            83
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "before": [
+            156,
+            131,
+            118
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "before": [
+            161,
+            138,
+            125
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ],
+      "compatibleMaximumByteDifference": 0,
+      "imageSha256": "92c5988aea0cb09176949bcf1fc897c87faf79e2da18ab849f154ea46c789578"
+    },
+    {
+      "name": "main",
+      "playerSha256": "f951d2580de0356ffa1ac299f68644c392e0727b5053fc0d68a69a0fbcb19507",
+      "pixels": [],
+      "compatibleMaximumByteDifference": 0,
+      "imageSha256": "c226beac7b389f90447785ea4c1d3ccf45fc052a5e3bc40210462d7d88841919"
+    }
+  ],
+  "nativeRamp": [
+    {
+      "pixel": [
+        1251,
+        919
+      ],
+      "normal": [
+        -0.9425703883171082,
+        0.05772292613983154,
+        0.32898181676864624
+      ],
+      "incoming": [
+        0.14726203680038452,
+        0.5299192667007446,
+        0.8351643085479736
+      ],
+      "bias": 0,
+      "native": 0.5832687616348267,
+      "predicted": 0.5832687635034883,
+      "error": 1.8686616698460057e-09,
+      "traceSha256": "a70ae9b1ee12ec196f7c4e152077567747a68e7e7508c89132ae2f8b91a14bd0"
+    },
+    {
+      "pixel": [
+        1368,
+        380
+      ],
+      "normal": [
+        -0.8271552324295044,
+        0.20668473839759827,
+        0.5225856900215149
+      ],
+      "incoming": [
+        0.14726203680038452,
+        0.5299192667007446,
+        0.8351643085479736
+      ],
+      "bias": 0,
+      "native": 0.7120813131332397,
+      "predicted": 0.7120812885980552,
+      "error": 2.453518455070025e-08,
+      "traceSha256": "6708b24b1b11e04893e8e80b252b77bae9885f6b004af364c1a18d7404656d24"
+    }
+  ],
+  "geometry": {
+    "schemaVersion": 1,
+    "scope": "Diagnostic captured-pose body; production animation preserved",
+    "sourceEvent": 783,
+    "sourceVertices": 3289,
+    "sourceIndices": 17037,
+    "candidateVertices": 3346,
+    "candidateIndices": 17337,
+    "sourceManifestSha256": "b45857dcd37e701e87db4c720789e67bcf2906882a0ab6a84f42bd08f750ce4e",
+    "candidateSha256": "655a1b03b0e642822445835ccc11d804fdbba955d2583db7cf0bea1cfa8e8b36",
+    "sourceUVMaximumNearestError": null
+  },
+  "localInputs": [
+    {
+      "sourceIndex": 0,
+      "worldPosition": [
+        0.12402282655239105,
+        1.3977935314178467,
+        0.09705018997192383
+      ],
+      "predictedIncoming": [
+        -0.20733581483364105,
+        0.06500554084777832,
+        0.18398618698120117
+      ],
+      "nativeIncoming": [
+        -0.20733642578125,
+        0.06500244140625,
+        0.183990478515625
+      ],
+      "incomingMaximumError": 4.291534423828125e-06,
+      "predictedDistanceAttenuation": 0.672595689424744,
+      "nativeAttenuation": 0.6725866198539734,
+      "attenuationError": 9.069570770625646e-06,
+      "materialDiffuseFloor": 0.5,
+      "hairDiffuseFloor": 0.25
+    },
+    {
+      "sourceIndex": 6,
+      "worldPosition": [
+        0.12402282655239105,
+        1.3977935314178467,
+        0.09705018997192383
+      ],
+      "predictedIncoming": [
+        0.10397399961948395,
+        0.15161442756652832,
+        -0.06103944778442383
+      ],
+      "nativeIncoming": [
+        0.103973388671875,
+        0.151611328125,
+        -0.06103515625
+      ],
+      "incomingMaximumError": 4.291534423828125e-06,
+      "predictedDistanceAttenuation": 0.4829775295239559,
+      "nativeAttenuation": 0.48301219940185547,
+      "attenuationError": 3.466987789957354e-05,
+      "materialDiffuseFloor": 0.0,
+      "hairDiffuseFloor": 0.0
+    }
+  ],
+  "tangentInputs": {
+    "normalMaximumUnitError": 1.7881393432617188e-07,
+    "tangentMaximumUnitError": 1.7881393432617188e-07,
+    "maximumNormalTangentDot": 0.39864152669906616,
+    "status": "Source basis measured; importer orthogonalization remains a separate input gate"
+  },
+  "regionComparison": [
+    {
+      "name": "source",
+      "visiblePixels": 47458,
+      "meanByteError": 0.0,
+      "maximumByteError": 0,
+      "quarterLinearClippedPixels": 0
+    },
+    {
+      "name": "before",
+      "visiblePixels": 47458,
+      "meanByteError": 15.897495329203366,
+      "maximumByteError": 98,
+      "quarterLinearClippedPixels": 0
+    },
+    {
+      "name": "postvs",
+      "visiblePixels": 47458,
+      "meanByteError": 15.706006714709146,
+      "maximumByteError": 98,
+      "quarterLinearClippedPixels": 0
+    },
+    {
+      "name": "signedRamp",
+      "visiblePixels": 47458,
+      "meanByteError": 10.788416424347142,
+      "maximumByteError": 98,
+      "quarterLinearClippedPixels": 0
+    }
+  ],
+  "remaining": [
+    "Independent character and scene visibility producers and consumers",
+    "Per-material default local-light wrap floor",
+    "Native nonorthogonal tangent basis",
+    "Skin dielectric specular input and compact response",
+    "Full native grading, temporal composition and dynamic promotion"
+  ],
+  "sourceAssetSha256": "05a370372e92c4416f08847dcaccd4ed2a1d750f683914265061c57a8f1e96f9"
+}

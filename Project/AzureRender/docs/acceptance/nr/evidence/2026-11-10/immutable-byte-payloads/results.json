@@ -1,0 +1,298 @@
+{
+  "status": "immutable-payload-api-and-gpu-input-qualified",
+  "sourceBase": "3986d34",
+  "build": {
+    "checks": [
+      {
+        "config": "Release",
+        "tests": 13,
+        "skips": 0,
+        "seconds": 75.46899999998277
+      },
+      {
+        "config": "Debug",
+        "tests": 13,
+        "skips": 0,
+        "seconds": 105.15700000000652
+      }
+    ],
+    "sourceUnchanged": true,
+    "cacheCasesPerConfiguration": 17
+  },
+  "intel": {
+    "checks": [
+      {
+        "config": "Release",
+        "target": "AzureSampledTextureChannelsGpuTests",
+        "seconds": 4.125
+      },
+      {
+        "config": "Release",
+        "target": "AzureSurfaceResponseGpuTests",
+        "seconds": 0.46899999998277053
+      },
+      {
+        "config": "Debug",
+        "target": "AzureSampledTextureChannelsGpuTests",
+        "seconds": 9.15600000001723
+      },
+      {
+        "config": "Debug",
+        "target": "AzureSurfaceResponseGpuTests",
+        "seconds": 0.3899999999557622
+      }
+    ],
+    "sourceUnchanged": true
+  },
+  "red": {
+    "exitCode": 1,
+    "expectedMissingContract": true
+  },
+  "gpuProbe": {
+    "casesPerConfigurationPerDevice": 648,
+    "compactedCases": 504,
+    "compressedInputs": 162,
+    "rawInputs": 486,
+    "bitComparisonsPerConfigurationPerDevice": 10616832,
+    "configurations": [
+      "Release",
+      "Debug"
+    ],
+    "devices": [
+      "NVIDIA RTX 4060 Laptop",
+      "Intel RaptorLake-S Mobile"
+    ]
+  },
+  "protectedFilesUnchanged": 13,
+  "existingShaderProgramsUnchanged": 773,
+  "nativeImageCaptures": 0,
+  "wholeFrameTimingRuns": 0,
+  "defaultSceneUsesPreparedPayloads": false,
+  "formalMemoryPassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "diagnostics": {
+    "overloadAmbiguityPreserved": true,
+    "explicitAcquirePreparedFix": true,
+    "immutableCopyDisabled": true,
+    "highEntropyFallback": true,
+    "concurrentReads": true,
+    "intelExecutedAsSeparateManagedCommand": true
+  },
+  "archive": {
+    "file": "validation.zip",
+    "bytes": 636389,
+    "sha256": "aeabbbbbeb2c905a3c2c51b3b610ba7f19ca85908a6a5f679ad5e48dc0111249"
+  },
+  "members": [
+    {
+      "path": "budget.json",
+      "bytes": 437,
+      "sha256": "3a963be73eba33264e4f7834bd3bea1555c5deff601d468bf6e245fa7a9745d4"
+    },
+    {
+      "path": "build-results.json",
+      "bytes": 323,
+      "sha256": "2f669527524a9cc4f19c18bccc982fa3aab3254d12694c3854623bb2dd8e24db"
+    },
+    {
+      "path": "build.py",
+      "bytes": 2913,
+      "sha256": "c4a00ceea0e64fe4d92644383e309ca6a679996ca94de1ccb6251fa1ea5cfd39"
+    },
+    {
+      "path": "CMakeLists.txt.baseline",
+      "bytes": 296766,
+      "sha256": "d4851eddba1f5476260c09c6a053e2c7ccab59af3e13a096d7a658a6c39f7369"
+    },
+    {
+      "path": "debug-build-provenance.json",
+      "bytes": 392835,
+      "sha256": "89898a174e70510990bba7491b733a426ec8c567df3c302a0bfe7ebeeda02a60"
+    },
+    {
+      "path": "debug-build.log",
+      "bytes": 2695,
+      "sha256": "b632c4f2a993a8a479a966c1cd395656f16dcb02803f1248928e0b76dba012ae"
+    },
+    {
+      "path": "debug-intel-AzureSampledTextureChannelsGpuTests.log",
+      "bytes": 155,
+      "sha256": "b148d8726d1e9ef127497805fe2de7e9d8fdb786fcb987fca706f6633db99c60"
+    },
+    {
+      "path": "debug-intel-AzureSurfaceResponseGpuTests.log",
+      "bytes": 13233,
+      "sha256": "147e1fabbf5529a183be140573cc3747673bab68a913f954734d40fd05bcc7ad"
+    },
+    {
+      "path": "debug-tests.log",
+      "bytes": 1970,
+      "sha256": "43a2521e66a43ec95f6662bb824c24fcf7097c214b2626dc774fc15ba7e10d02"
+    },
+    {
+      "path": "debug-tests.xml",
+      "bytes": 10749,
+      "sha256": "1408a63c9bfcc7be465dde5ee88ce7ba482d6cab59a61a1b3572052962f9f479"
+    },
+    {
+      "path": "final.py",
+      "bytes": 215,
+      "sha256": "698645faf7f8081206a99f3ecd008cc6fc12c35cafe52268f5aecfddf4ded4e0"
+    },
+    {
+      "path": "initial-build-results.json",
+      "bytes": 324,
+      "sha256": "ce25dd7733ebe0146fd01a36094b5db014109e8845edb61ff914f41b99838960"
+    },
+    {
+      "path": "initial-debug-build-provenance.json",
+      "bytes": 392835,
+      "sha256": "485db9ad752f8f579ebb9a0954dcfe2d23c0280199ebe0d5a0a0db521b196ad7"
+    },
+    {
+      "path": "initial-release-build-provenance.json",
+      "bytes": 416967,
+      "sha256": "ac4acfcfce2c83d2c17e698d8766eb325bbe1e433d7bd9a859b5b8cff8879be7"
+    },
+    {
+      "path": "intel-results.json",
+      "bytes": 563,
+      "sha256": "eef458150c170ec98e96aa651ea379867e36f3a60355e87f481b105de1d8175e"
+    },
+    {
+      "path": "intel.py",
+      "bytes": 1551,
+      "sha256": "ae16ab774328ea4cda9e0ce4564668b9ae1bdaf4c44cd2f226e2bdc5e2a5b1c4"
+    },
+    {
+      "path": "process.log",
+      "bytes": 26776,
+      "sha256": "7d3137dc787dc7e544f2c8a8e5099ca8cb47360cfe0cba0961503610e596bd17"
+    },
+    {
+      "path": "red-build.log",
+      "bytes": 961,
+      "sha256": "fe1ee3cc062c68bd041bb246677a21adbe69cb4c6b4b0dcd8e450b78356574e6"
+    },
+    {
+      "path": "red.json",
+      "bytes": 48,
+      "sha256": "fa8fc51f32648d410e46a79dd9216fef87446f852807952a0a489f86e4b1e25f"
+    },
+    {
+      "path": "red.py",
+      "bytes": 760,
+      "sha256": "c6d0dd96bcdde82e93ca50b9ffa849e301247a5b236f4d3bd999a8c722a8e502"
+    },
+    {
+      "path": "release-build-provenance.json",
+      "bytes": 416967,
+      "sha256": "7c433378f972292152723f8995b2ac9e4360c5d8b03b002c36d08c248c66c6f4"
+    },
+    {
+      "path": "release-build.log",
+      "bytes": 2701,
+      "sha256": "c224869f85d5371ce9adc3572b557bcb48b47ed6a185fcdec8b6b1acba2222a7"
+    },
+    {
+      "path": "release-intel-AzureSampledTextureChannelsGpuTests.log",
+      "bytes": 155,
+      "sha256": "b148d8726d1e9ef127497805fe2de7e9d8fdb786fcb987fca706f6633db99c60"
+    },
+    {
+      "path": "release-intel-AzureSurfaceResponseGpuTests.log",
+      "bytes": 13233,
+      "sha256": "147e1fabbf5529a183be140573cc3747673bab68a913f954734d40fd05bcc7ad"
+    },
+    {
+      "path": "release-tests.log",
+      "bytes": 1974,
+      "sha256": "83007992c2d02b6488b3af98fd4580e30a68dd89c8bc566bc9878c34e6bed913"
+    },
+    {
+      "path": "release-tests.xml",
+      "bytes": 10749,
+      "sha256": "4c35de0f5d9931656524389a30736721e96dd7e7d528ba3ee33c3bec98fa8844"
+    },
+    {
+      "path": "results.json",
+      "bytes": 2054,
+      "sha256": "943208277cab342b912925d965a47ac75508734f5196f72bc2d9e5cc0a5bec7a"
+    },
+    {
+      "path": "src__render__SampledTextureCache.cpp.baseline",
+      "bytes": 13565,
+      "sha256": "b6d1505dbbf0fe66b4b73b114eb5619f7874819282b1ccbb4dd9e86bd63d06d2"
+    },
+    {
+      "path": "src__render__SampledTextureCache.hpp.baseline",
+      "bytes": 3327,
+      "sha256": "7af3d3b5a41297d270a745b77f68925024be4413e1321f556849a93716604d13"
+    },
+    {
+      "path": "tests__SampledTextureCacheTests.cpp.baseline",
+      "bytes": 23777,
+      "sha256": "c96d30fd018949ea97d4bf1b2f05881a817edeacbbbfeaf49907fa0d90dc3909"
+    },
+    {
+      "path": "tests__SampledTextureChannelsGpuTests.cpp.baseline",
+      "bytes": 5864,
+      "sha256": "7d0bb27394f001d9b22bebe72beadabeea4d69cf8f9f5ebcf5b53599592d8fb0"
+    },
+    {
+      "path": "unit-build-overload-failure.log",
+      "bytes": 10995,
+      "sha256": "a6532e7e6cbc73430459da54941718ae14b020c9b683aded37db6d93604c8784"
+    },
+    {
+      "path": "unit-build.log",
+      "bytes": 328,
+      "sha256": "c70bb1f600d87df9089bbbc6c26c82072ac8bee72f5a98580827c0324ea3b8a3"
+    },
+    {
+      "path": "unit-tests.log",
+      "bytes": 547,
+      "sha256": "e615dbd2884f6958ef59b70a205eccf6b2f21bbda56035ec90bc83204ecdefcf"
+    },
+    {
+      "path": "unit.py",
+      "bytes": 711,
+      "sha256": "2d0cbcd326b99e80d6b9f88017cef5ca825e2c7d86a67a766a3ffcd1658dc362"
+    },
+    {
+      "path": "sources/CMakeLists.txt",
+      "bytes": 296883,
+      "sha256": "e7980e4bdddbffbedd27f43efe763d40fbade81019cc37e189b52582ee8b508c"
+    },
+    {
+      "path": "sources/src/foundation/ImmutableBytes.cpp",
+      "bytes": 3622,
+      "sha256": "a3333ca95f2dd60ae644a5302df2df754c61e2efc4e32dea0b995c8e965a8719"
+    },
+    {
+      "path": "sources/src/foundation/ImmutableBytes.hpp",
+      "bytes": 1692,
+      "sha256": "9ae23d83238d22b9ab0257f7a081d9032091dc03cbd98b72821e29e170995ad6"
+    },
+    {
+      "path": "sources/src/render/SampledTextureCache.cpp",
+      "bytes": 14691,
+      "sha256": "fa42cb216d726b235bc8f07f9d94adb98eb465002435a56c590a431a89b41dc3"
+    },
+    {
+      "path": "sources/src/render/SampledTextureCache.hpp",
+      "bytes": 3812,
+      "sha256": "4acbb66ce9726bd4cfb82788ce1c3e4c61e644dc72d61981833c77ac08bbc356"
+    },
+    {
+      "path": "sources/tests/SampledTextureCacheTests.cpp",
+      "bytes": 28666,
+      "sha256": "7cfd866bd31e2ae3b0630fa5ff8942c74cdab5c5c2fc8d19ff58f22e3c70ea79"
+    },
+    {
+      "path": "sources/tests/SampledTextureChannelsGpuTests.cpp",
+      "bytes": 6328,
+      "sha256": "cf78cfb63976339953c30c31d27924fb11902cbfd2e1ba4f907b9e826cbd3eab"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-scoped-conveyor-motion",
+  "visualAcceptance": "failed-user-review",
+  "sourceCommit": "104604434eefd020d24dbc8e80a2cea2f4d947b8",
+  "programSha256": "e0c47f0f99be428145af067501b2a5b3ace5437e62948043ae8f1f86e5aadce5",
+  "playerProcesses": 2,
+  "capturedFrames": 204,
+  "bundles": [
+    {
+      "path": "execution.json.gz",
+      "sha256": "0545a1bd0dcc9e79b907f7516db9416e55af45c56d9cd646891aeb91b5d28bff",
+      "sourceFiles": 44
+    },
+    {
+      "path": "recorder-regression.json.gz",
+      "sha256": "863d1bf1f40b3b626e90e281f5c251e78db3b1a2175edf0aed6129d09c994582",
+      "sourceFiles": 7
+    }
+  ],
+  "directFiles": [
+    {
+      "path": "closer-static/frames/frame_000011.png",
+      "bytes": 5686844,
+      "sha256": "cd5e697230dff16225d2f349333de335414483d5dd133a7b6f77750eb12c77d6"
+    },
+    {
+      "path": "joint-motion/frames/frame_000048.png",
+      "bytes": 5689541,
+      "sha256": "c4987079dd5e17cb265d58bb2581e761461150828fc1b13a943d84d0be3ef0fa"
+    },
+    {
+      "path": "media/joint-motion-original-idle.mp4",
+      "bytes": 4823661,
+      "sha256": "bc23b111fb21a36554fcd50e19015f9d8ad9608a131e4176234bc8dbe915a34b"
+    },
+    {
+      "path": "media/joint-motion-original-idle.json",
+      "bytes": 1319,
+      "sha256": "f1037366ee31d66872614a01dfdafe05966f51c720e83ad988eb66da9367b773"
+    }
+  ],
+  "compiledSourceReceipt": {
+    "path": "docs/acceptance/nr/evidence/2026-11-03/material-coverage-mips/manifest.json",
+    "sha256": "1d261325c7deb78dbb9ef399ca4510977670c00201cb21e26c30ef07de54649e"
+  },
+  "retainedProject": "build/runs/20261103-012115-joint-scene-dynamics-e9e4e1/project/joint-dynamic.azureproject",
+  "regressionScope": "12 CPU/tool CTest cases per configuration; recorder failure and correction retained"
+}

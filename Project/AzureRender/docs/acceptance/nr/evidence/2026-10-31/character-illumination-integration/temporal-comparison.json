@@ -1,0 +1,180 @@
+{
+  "status": "characterized",
+  "scope": "Beauty-only linear-display AA diagnostics against the same actual 4x reference. Fixed historical masks and regions; native HDR and full visual gates remain separate.",
+  "baseCommit": "ca9a217",
+  "maskSha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7",
+  "regions": [
+    {
+      "name": "crown",
+      "boxXYXY": [
+        607,
+        80,
+        670,
+        121
+      ],
+      "pixels": 1903,
+      "referenceEnergy": 651.2884521484375,
+      "current": {
+        "lastEightEnergyRatios": [
+          0.9857542514801025,
+          0.9857630729675293,
+          0.9862174987792969,
+          0.986423134803772,
+          0.9865779280662537,
+          0.9860219359397888,
+          0.9861150979995728,
+          0.9858624339103699
+        ],
+        "meanAbsoluteError": 0.00497759273275733,
+        "temporalMeanDeviation": 0.001018606242723763,
+        "temporalMaximumRange": 0.1515294909477234
+      },
+      "historical": {
+        "lastEightEnergyRatios": [
+          0.9868700504302979,
+          0.9870805144309998,
+          0.9876090884208679,
+          0.9871470332145691,
+          0.9874061942100525,
+          0.9867865443229675,
+          0.9874038100242615,
+          0.9872121214866638
+        ],
+        "meanAbsoluteError": 0.00509951077401638,
+        "temporalMeanDeviation": 0.0010227992897853255,
+        "temporalMaximumRange": 0.08655962347984314
+      },
+      "currentToHistoricalErrorRatio": 0.9760922083192252,
+      "currentToHistoricalTemporalDeviationRatio": 0.9959004204408055
+    },
+    {
+      "name": "hair-interior",
+      "boxXYXY": [
+        570,
+        65,
+        715,
+        220
+      ],
+      "pixels": 4025,
+      "referenceEnergy": 1070.216796875,
+      "current": {
+        "lastEightEnergyRatios": [
+          0.9961378574371338,
+          0.9969543218612671,
+          0.9958153367042542,
+          0.9969393014907837,
+          0.9963480830192566,
+          0.9957359433174133,
+          0.9949756264686584,
+          0.9969993829727173
+        ],
+        "meanAbsoluteError": 0.0047123609110713005,
+        "temporalMeanDeviation": 0.0010640250984579325,
+        "temporalMaximumRange": 0.17997999489307404
+      },
+      "historical": {
+        "lastEightEnergyRatios": [
+          0.9978311061859131,
+          0.99896639585495,
+          0.9981117248535156,
+          0.9982144832611084,
+          0.9980533123016357,
+          0.9975776672363281,
+          0.9970043897628784,
+          0.99879390001297
+        ],
+        "meanAbsoluteError": 0.004914011340588331,
+        "temporalMeanDeviation": 0.001050865976139903,
+        "temporalMaximumRange": 0.11645707488059998
+      },
+      "currentToHistoricalErrorRatio": 0.958964191260314,
+      "currentToHistoricalTemporalDeviationRatio": 1.0125221699215785
+    },
+    {
+      "name": "fine-hair-boundary",
+      "boxXYXY": [
+        570,
+        65,
+        715,
+        220
+      ],
+      "pixels": 1068,
+      "referenceEnergy": 290.978759765625,
+      "current": {
+        "lastEightEnergyRatios": [
+          0.9904442429542542,
+          0.9857504963874817,
+          0.991601288318634,
+          0.9841225743293762,
+          0.9935451149940491,
+          0.9921903014183044,
+          0.9906167984008789,
+          0.9827477931976318
+        ],
+        "meanAbsoluteError": 0.010110890492796898,
+        "temporalMeanDeviation": 0.00387782184407115,
+        "temporalMaximumRange": 0.48836490511894226
+      },
+      "historical": {
+        "lastEightEnergyRatios": [
+          0.9869652390480042,
+          0.9795265793800354,
+          0.9903005957603455,
+          0.9847570657730103,
+          0.9898949265480042,
+          0.989205539226532,
+          0.9925416111946106,
+          0.9833537936210632
+        ],
+        "meanAbsoluteError": 0.010457347147166729,
+        "temporalMeanDeviation": 0.003517434000968933,
+        "temporalMaximumRange": 0.44784292578697205
+      },
+      "currentToHistoricalErrorRatio": 0.9668695464065474,
+      "currentToHistoricalTemporalDeviationRatio": 1.1024575992052565
+    },
+    {
+      "name": "clothing",
+      "boxXYXY": [
+        500,
+        220,
+        800,
+        550
+      ],
+      "pixels": 60486,
+      "referenceEnergy": 7438.8818359375,
+      "current": {
+        "lastEightEnergyRatios": [
+          0.9981412291526794,
+          0.9988656044006348,
+          0.9979963898658752,
+          0.9981504678726196,
+          0.999470055103302,
+          0.9977405667304993,
+          0.9989627599716187,
+          0.99918133020401
+        ],
+        "meanAbsoluteError": 0.0015823831781744957,
+        "temporalMeanDeviation": 0.0006551174446940422,
+        "temporalMaximumRange": 0.3481861650943756
+      },
+      "historical": {
+        "lastEightEnergyRatios": [
+          0.9975079894065857,
+          0.9973006844520569,
+          0.9973394274711609,
+          0.9968161582946777,
+          0.9975966811180115,
+          0.9970269203186035,
+          0.9970476031303406,
+          0.997033417224884
+        ],
+        "meanAbsoluteError": 0.0016029372345656157,
+        "temporalMeanDeviation": 0.0005418400396592915,
+        "temporalMaximumRange": 0.23195137083530426
+      },
+      "currentToHistoricalErrorRatio": 0.9871772543878239,
+      "currentToHistoricalTemporalDeviationRatio": 1.2090606022876778
+    }
+  ]
+}

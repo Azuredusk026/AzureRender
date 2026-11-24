@@ -1,0 +1,139 @@
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+-- Automatically setting %HTTP(S)_PROXY% environment variables to "127.0.0.1:7897".
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+    glfw3:x64-windows@3.5.1
+  * imath:x64-windows@3.2.2
+    joltphysics:x64-windows@5.6.0
+  * libdeflate[core,zlib,gzip,decompression,compression]:x64-windows@1.25
+  * nlohmann-json:x64-windows@3.12.0#2
+    openexr:x64-windows@3.4.13
+  * openjph:x64-windows@0.31.0
+    stb:x64-windows@2024-07-29#1
+    tinygltf:x64-windows@3.0.0#1
+  * vcpkg-cmake:x64-windows@2024-04-23
+  * vcpkg-cmake-config:x64-windows@2026-07-21
+    vulkan-memory-allocator:x64-windows@3.4.0
+The following packages will be built and installed:
+    lua:x64-windows@5.4.8
+    sol2:x64-windows@3.5.0#1
+Restored 0 package(s) from C:\Users\23587\AppData\Local\vcpkg\archives in 356 us. Use --debug to see more details.
+Installing 1/2 lua:x64-windows@5.4.8...
+lua:x64-windows@5.4.8 package ABI: 860bbbc21bfa207d55d4b3d224c9902562552ef7b7b9a0256d05957aea2b70e8
+Building lua:x64-windows@5.4.8...
+Downloading https://www.lua.org/ftp/lua-5.4.8.tar.gz -> lua-5.4.8.tar.gz
+Successfully downloaded lua-5.4.8.tar.gz
+-- Extracting source C:/Users/23587/Tools/vcpkg/downloads/lua-5.4.8.tar.gz
+-- Applying patch vs2015-impl-c99.patch
+-- Applying patch fix-ios-system.patch
+-- Using source at C:/Users/23587/Tools/vcpkg/buildtrees/lua/src/lua-5-c26d6d7c04.clean
+-- Installing: C:/Users/23587/Tools/vcpkg/buildtrees/lua/src/lua-5-c26d6d7c04.clean/cpp/CMakeLists.txt
+-- Configuring x64-windows
+-- Building x64-windows-dbg
+-- Building x64-windows-rel
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/lua_x64-windows/share/lua/usage
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/lua_x64-windows/share/lua/copyright
+-- Performing post-build validation
+Starting submission of lua:x64-windows@5.4.8 to 1 binary cache(s) in the background
+Elapsed time to handle lua:x64-windows: 10 s
+Installing 2/2 sol2:x64-windows@3.5.0#1...
+sol2:x64-windows@3.5.0#1 package ABI: 4e58e4726f79c0276c76c0181d90354482271eac2c53547286cd3f6c39b91bc0
+Building sol2:x64-windows@3.5.0#1...
+Downloading https://github.com/ThePhD/sol2/archive/v3.5.0.tar.gz -> ThePhD-sol2-v3.5.0.tar.gz
+Successfully downloaded ThePhD-sol2-v3.5.0.tar.gz
+-- Extracting source C:/Users/23587/Tools/vcpkg/downloads/ThePhD-sol2-v3.5.0.tar.gz
+-- Applying patch header-only.patch
+-- Applying patch lua-5.5.diff
+-- Applying patch pkgconfig.diff
+-- Using source at C:/Users/23587/Tools/vcpkg/buildtrees/sol2/src/v3.5.0-f13bb4a017.clean
+-- Configuring x64-windows
+-- Building x64-windows-rel
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/sol2_x64-windows/share/pkgconfig/sol2.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.5.1-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.5-1-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/23587/Tools/vcpkg/downloads/tools/msys2/3e71d1f8e22ab23f
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/sol2_x64-windows/share/sol2/copyright
+-- Performing post-build validation
+Starting submission of sol2:x64-windows@3.5.0#1 to 1 binary cache(s) in the background
+Elapsed time to handle sol2:x64-windows: 15 s
+Installed contents are licensed to you by owners. Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Some packages did not declare an SPDX license. Check the `copyright` file for each package for more information about their licensing.
+Packages installed in this vcpkg installation declare the following licenses:
+MIT
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+Completed submission of lua:x64-windows@5.4.8 to 1 binary cache(s) in 222 ms
+Waiting for 1 remaining binary cache submissions...
+Completed submission of sol2:x64-windows@3.5.0#1 to 1 binary cache(s) in 124 ms (1/1)
+All requested installations completed successfully in: 25 s
+-- Running vcpkg install - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug

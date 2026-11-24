@@ -1,0 +1,851 @@
+{
+  "source": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+  "driver": "595.79",
+  "pixelComparison": {
+    "driver": "595.79",
+    "source": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sameDriverExact": true,
+        "sameDriverChangedPixels": 0,
+        "sameDriverMaximumByteError": 0,
+        "sha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "expected": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "exact": false,
+        "changedPixels": 228,
+        "maximumByteError": 1
+      },
+      {
+        "name": "frame_000001.png",
+        "sameDriverExact": true,
+        "sameDriverChangedPixels": 0,
+        "sameDriverMaximumByteError": 0,
+        "sha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "expected": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "exact": false,
+        "changedPixels": 330,
+        "maximumByteError": 7
+      },
+      {
+        "name": "frame_000002.png",
+        "sameDriverExact": true,
+        "sameDriverChangedPixels": 0,
+        "sameDriverMaximumByteError": 0,
+        "sha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "expected": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "exact": false,
+        "changedPixels": 397,
+        "maximumByteError": 37
+      },
+      {
+        "name": "frame_000003.png",
+        "sameDriverExact": true,
+        "sameDriverChangedPixels": 0,
+        "sameDriverMaximumByteError": 0,
+        "sha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "expected": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "exact": false,
+        "changedPixels": 421,
+        "maximumByteError": 23
+      }
+    ],
+    "scope": "nonlocal-image-pixel-diagnostic",
+    "nonlocalAllocations": 224,
+    "nonlocalBytes": 1588625408,
+    "backgroundUtilizationAtStart": 0.0,
+    "watts": [
+      80.0
+    ],
+    "allocatorZero": true
+  },
+  "fourFrameDeviceLocalPeakBytes": 1705712448,
+  "shortSamples": [
+    {
+      "role": "short-local-before",
+      "sampled": 60,
+      "gpuFrameMs": {
+        "mean": 16.0851888,
+        "p95": 16.5651008
+      },
+      "gpuSceneMs": {
+        "mean": 14.094574933333336,
+        "p95": 14.246656
+      },
+      "cpuMs": {
+        "mean": 4.865611666666666,
+        "p95": 5.357510000000008
+      },
+      "deviceLocalPeakBytes": 2784680768,
+      "workingSetPeakBytes": 2038034432,
+      "allocationCount": 0,
+      "allocationBytes": 0,
+      "allocatorZero": true,
+      "temperatureRange": [
+        52.0,
+        82.0
+      ],
+      "powerLimits": [
+        80.0
+      ],
+      "drivers": [
+        "595.79"
+      ],
+      "softwareThermalObservations": 0
+    },
+    {
+      "role": "short-nonlocal",
+      "sampled": 60,
+      "gpuFrameMs": {
+        "mean": 15.976158933333334,
+        "p95": 16.227081599999998
+      },
+      "gpuSceneMs": {
+        "mean": 14.0295168,
+        "p95": 14.2813184
+      },
+      "cpuMs": {
+        "mean": 4.726346666666667,
+        "p95": 5.382874999999992
+      },
+      "deviceLocalPeakBytes": 1442503488,
+      "workingSetPeakBytes": 2037755904,
+      "allocationCount": 224,
+      "allocationBytes": 1588625408,
+      "allocatorZero": true,
+      "temperatureRange": [
+        52.0,
+        76.0
+      ],
+      "powerLimits": [
+        80.0
+      ],
+      "drivers": [
+        "595.79"
+      ],
+      "softwareThermalObservations": 0
+    },
+    {
+      "role": "short-local-after",
+      "sampled": 60,
+      "gpuFrameMs": {
+        "mean": 15.841216533333332,
+        "p95": 16.130448
+      },
+      "gpuSceneMs": {
+        "mean": 13.907985066666667,
+        "p95": 14.1942272
+      },
+      "cpuMs": {
+        "mean": 4.723671666666666,
+        "p95": 5.377150000000039
+      },
+      "deviceLocalPeakBytes": 2784680768,
+      "workingSetPeakBytes": 2037497856,
+      "allocationCount": 0,
+      "allocationBytes": 0,
+      "allocatorZero": true,
+      "temperatureRange": [
+        51.0,
+        63.0
+      ],
+      "powerLimits": [
+        80.0
+      ],
+      "drivers": [
+        "595.79"
+      ],
+      "softwareThermalObservations": 0
+    }
+  ],
+  "shortDeviceLocalReductionBytes": 1342177280,
+  "shortDeviceLocalHeadroomBytes": 168109248,
+  "shortGPUFrameMeanReductionMs": -0.012956266666666494,
+  "mixedSparseCapacity": {
+    "source": "Frozen frame image inventory and NVIDIA sparse image requirements",
+    "images": 224,
+    "shapes": {
+      "43/1024/1024/11": 128,
+      "37/1024/1024/11": 76,
+      "37/2048/2048/12": 11,
+      "43/2048/2048/12": 9
+    },
+    "placement": [
+      {
+        "hostHighLevels": 1,
+        "hostBytes": 1191182336,
+        "localLowBytes": 406847488
+      },
+      {
+        "hostHighLevels": 2,
+        "hostBytes": 1488977920,
+        "localLowBytes": 109051904
+      },
+      {
+        "hostHighLevels": 3,
+        "hostBytes": 1563426816,
+        "localLowBytes": 34603008
+      }
+    ],
+    "scope": "Static sparse allocation estimate. Measured allocator peaks and graphics workloads are independent."
+  },
+  "mixedSparseProbe": {
+    "nvidia": {
+      "supported": true,
+      "localHostSplitExact": true,
+      "validation": 0,
+      "placements": [
+        {
+          "mipTailFirst": "6",
+          "pages": "1365",
+          "hostBytes": "83886080",
+          "localBytes": "5636096"
+        },
+        {
+          "mipTailFirst": "6",
+          "pages": "1365",
+          "hostBytes": "83886080",
+          "localBytes": "5636096"
+        }
+      ],
+      "timingPositionMedianMs": {
+        "37/0/0/0": 0.177168,
+        "37/0/1/1": 0.177264,
+        "37/0/2/2": 0.17758400000000002,
+        "37/0/0/1": 0.178064,
+        "37/0/1/2": 0.17776,
+        "37/0/2/0": 0.17771199999999998,
+        "37/0/0/2": 0.17752,
+        "37/0/1/0": 0.177232,
+        "37/0/2/1": 0.177632,
+        "37/1/0/0": 0.356336,
+        "37/1/1/1": 0.356144,
+        "37/1/2/2": 0.355472,
+        "37/1/0/1": 0.35592,
+        "37/1/1/2": 0.35544,
+        "37/1/2/0": 0.355696,
+        "37/1/0/2": 0.35604800000000003,
+        "37/1/1/0": 0.35620799999999997,
+        "37/1/2/1": 0.356224,
+        "37/2/0/0": 0.058976,
+        "37/2/1/1": 0.058704,
+        "37/2/2/2": 0.058303999999999995,
+        "37/2/0/1": 0.059088,
+        "37/2/1/2": 0.058848,
+        "37/2/2/0": 0.058512,
+        "37/2/0/2": 0.058736,
+        "37/2/1/0": 0.058432,
+        "37/2/2/1": 0.058704,
+        "37/3/0/0": 0.104848,
+        "37/3/1/1": 0.104544,
+        "37/3/2/2": 0.181056,
+        "37/3/0/1": 0.105152,
+        "37/3/1/2": 0.16020800000000002,
+        "37/3/2/0": 0.129968,
+        "37/3/0/2": 0.160864,
+        "37/3/1/0": 0.104864,
+        "37/3/2/1": 0.129584,
+        "37/4/0/0": 0.06939200000000001,
+        "37/4/1/1": 0.069552,
+        "37/4/2/2": 0.06923199999999999,
+        "37/4/0/1": 0.06896,
+        "37/4/1/2": 0.068944,
+        "37/4/2/0": 0.069312,
+        "37/4/0/2": 0.06992000000000001,
+        "37/4/1/0": 0.06934399999999999,
+        "37/4/2/1": 0.069312,
+        "43/0/0/0": 0.177872,
+        "43/0/1/1": 0.177664,
+        "43/0/2/2": 0.177776,
+        "43/0/0/1": 0.177376,
+        "43/0/1/2": 0.177376,
+        "43/0/2/0": 0.17737599999999998,
+        "43/0/0/2": 0.177632,
+        "43/0/1/0": 0.177456,
+        "43/0/2/1": 0.177728,
+        "43/1/0/0": 0.356624,
+        "43/1/1/1": 0.355696,
+        "43/1/2/2": 0.355808,
+        "43/1/0/1": 0.355776,
+        "43/1/1/2": 0.35519999999999996,
+        "43/1/2/0": 0.35574399999999995,
+        "43/1/0/2": 0.35552,
+        "43/1/1/0": 0.35641599999999996,
+        "43/1/2/1": 0.356192,
+        "43/2/0/0": 0.058256,
+        "43/2/1/1": 0.058144,
+        "43/2/2/2": 0.058415999999999996,
+        "43/2/0/1": 0.058688000000000004,
+        "43/2/1/2": 0.058976,
+        "43/2/2/0": 0.058416,
+        "43/2/0/2": 0.059135999999999994,
+        "43/2/1/0": 0.059248,
+        "43/2/2/1": 0.058112,
+        "43/3/0/0": 0.104928,
+        "43/3/1/1": 0.10655999999999999,
+        "43/3/2/2": 0.181456,
+        "43/3/0/1": 0.104912,
+        "43/3/1/2": 0.160624,
+        "43/3/2/0": 0.13064,
+        "43/3/0/2": 0.160256,
+        "43/3/1/0": 0.104672,
+        "43/3/2/1": 0.130336,
+        "43/4/0/0": 0.069312,
+        "43/4/1/1": 0.0692,
+        "43/4/2/2": 0.06896,
+        "43/4/0/1": 0.069744,
+        "43/4/1/2": 0.06928000000000001,
+        "43/4/2/0": 0.069248,
+        "43/4/0/2": 0.069152,
+        "43/4/1/0": 0.069504,
+        "43/4/2/1": 0.06915199999999999
+      }
+    },
+    "intel": {
+      "supported": false,
+      "localHostSplitExact": false,
+      "validation": 0,
+      "placements": [],
+      "timingPositionMedianMs": {}
+    }
+  },
+  "frozenZeroPixelPassed": false,
+  "formalTiming": {
+    "scope": "isolated-nonlocal-material-images-1080p60",
+    "nonlocalAllocations": 224,
+    "nonlocalBytes": 1588625408,
+    "source": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+    "driver": "595.79",
+    "warmup": 300,
+    "frames": 1800,
+    "gpuPowerLimitWatts": [
+      80.0
+    ],
+    "environmentFailures": [
+      "run observation 48: driver relative thermal headroom is insufficient",
+      "run observation 48: software thermal slowdown is active",
+      "run observation 49: software thermal slowdown is active",
+      "run observation 50: driver relative thermal headroom is insufficient",
+      "run observation 50: software thermal slowdown is active",
+      "run observation 51: software thermal slowdown is active",
+      "run observation 52: software thermal slowdown is active",
+      "run observation 53: driver relative thermal headroom is insufficient",
+      "run observation 53: software thermal slowdown is active",
+      "run observation 54: driver relative thermal headroom is insufficient",
+      "run observation 54: software thermal slowdown is active",
+      "run observation 55: software thermal slowdown is active",
+      "run observation 56: software thermal slowdown is active",
+      "run observation 57: software thermal slowdown is active",
+      "run observation 58: software thermal slowdown is active",
+      "run observation 59: driver relative thermal headroom is insufficient",
+      "run observation 59: software thermal slowdown is active",
+      "run observation 60: driver relative thermal headroom is insufficient",
+      "run observation 60: software thermal slowdown is active",
+      "run observation 61: driver relative thermal headroom is insufficient",
+      "run observation 61: software thermal slowdown is active",
+      "run observation 62: software thermal slowdown is active"
+    ],
+    "peakTemperatureC": 88.0,
+    "observationCount": 69,
+    "softwareThermalSlowdownObservations": 15,
+    "timings": {
+      "frameMs": {
+        "mean": 17.632810026666668,
+        "p95": 18.6095648,
+        "peak": 19.191008
+      },
+      "sceneMs": {
+        "mean": 15.258938026666668,
+        "p95": 16.1014272,
+        "peak": 16.62464
+      },
+      "shadowMs": {
+        "mean": 2.0738308977777775,
+        "p95": 2.2104864,
+        "peak": 2.290432
+      },
+      "postProcessMs": {
+        "mean": 0.30004110222222213,
+        "p95": 0.316416,
+        "peak": 0.5888
+      },
+      "cpuWorkMs": {
+        "mean": 5.692563388888888,
+        "p95": 7.526720000000204,
+        "peak": 15.522400000000045
+      }
+    },
+    "deviceLocalPeakBytes": 1442503488,
+    "workingSetPeakBytes": 2038882304,
+    "allocatorZero": true,
+    "gates": {
+      "fixed80W": true,
+      "thermalAndAC": false,
+      "gpuP95": false,
+      "cpuP95": true,
+      "deviceLocal": true,
+      "workingSet": true
+    },
+    "windows": [
+      {
+        "frameMs": {
+          "mean": 16.468137279999997,
+          "p95": 17.713912,
+          "peak": 18.082048
+        },
+        "sceneMs": {
+          "mean": 14.405993813333334,
+          "p95": 15.318988800000001,
+          "peak": 15.584256
+        },
+        "shadowMs": {
+          "mean": 1.7792873599999999,
+          "p95": 2.1630768,
+          "peak": 2.199808
+        },
+        "postProcessMs": {
+          "mean": 0.28285610666666666,
+          "p95": 0.300032,
+          "peak": 0.3072
+        },
+        "cpuWorkMs": {
+          "mean": 5.093800333333336,
+          "p95": 6.14783500000011,
+          "peak": 11.353799999999929
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 17.300609493333333,
+          "p95": 18.410519999999998,
+          "peak": 18.882912
+        },
+        "sceneMs": {
+          "mean": 15.026845013333334,
+          "p95": 15.9210496,
+          "peak": 16.336896
+        },
+        "shadowMs": {
+          "mean": 1.9782278400000004,
+          "p95": 2.2033343999999997,
+          "peak": 2.290432
+        },
+        "postProcessMs": {
+          "mean": 0.29553663999999996,
+          "p95": 0.315392,
+          "peak": 0.5888
+        },
+        "cpuWorkMs": {
+          "mean": 5.377587666666665,
+          "p95": 6.243144999999992,
+          "peak": 10.83350000000004
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 17.689508586666665,
+          "p95": 18.6832976,
+          "peak": 19.17008
+        },
+        "sceneMs": {
+          "mean": 15.244834133333335,
+          "p95": 16.173056,
+          "peak": 16.605184
+        },
+        "shadowMs": {
+          "mean": 2.14433184,
+          "p95": 2.213888,
+          "peak": 2.250784
+        },
+        "postProcessMs": {
+          "mean": 0.3003426133333334,
+          "p95": 0.321536,
+          "peak": 0.535552
+        },
+        "cpuWorkMs": {
+          "mean": 5.317510000000002,
+          "p95": 5.956575000000038,
+          "peak": 15.522400000000045
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 17.938046826666667,
+          "p95": 18.4024256,
+          "peak": 18.990624
+        },
+        "sceneMs": {
+          "mean": 15.46180608,
+          "p95": 15.9198208,
+          "peak": 16.49664
+        },
+        "shadowMs": {
+          "mean": 2.17297632,
+          "p95": 2.1990768000000003,
+          "peak": 2.21504
+        },
+        "postProcessMs": {
+          "mean": 0.30326442666666664,
+          "p95": 0.310272,
+          "peak": 0.313344
+        },
+        "cpuWorkMs": {
+          "mean": 5.514361333333336,
+          "p95": 6.663950000000064,
+          "peak": 10.687400000000068
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 18.12106368,
+          "p95": 18.7305632,
+          "peak": 19.135904
+        },
+        "sceneMs": {
+          "mean": 15.632523946666668,
+          "p95": 16.1899008,
+          "peak": 16.620544
+        },
+        "shadowMs": {
+          "mean": 2.18108032,
+          "p95": 2.2124464,
+          "peak": 2.230912
+        },
+        "postProcessMs": {
+          "mean": 0.3074594133333333,
+          "p95": 0.318464,
+          "peak": 0.320512
+        },
+        "cpuWorkMs": {
+          "mean": 6.25884833333332,
+          "p95": 8.475024999999757,
+          "peak": 11.313599999999052
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 18.279494293333332,
+          "p95": 18.7285936,
+          "peak": 19.191008
+        },
+        "sceneMs": {
+          "mean": 15.781625173333335,
+          "p95": 16.2038784,
+          "peak": 16.62464
+        },
+        "shadowMs": {
+          "mean": 2.187081706666667,
+          "p95": 2.2202896,
+          "peak": 2.24416
+        },
+        "postProcessMs": {
+          "mean": 0.3107874133333333,
+          "p95": 0.320512,
+          "peak": 0.328704
+        },
+        "cpuWorkMs": {
+          "mean": 6.593272666666674,
+          "p95": 9.268344999999611,
+          "peak": 12.361899999999345
+        }
+      }
+    ]
+  },
+  "formalLongRunScope": false,
+  "thermalAlignment": {
+    "graphicsPipelineStartupOffsetSeconds": 0.8899998664855957,
+    "firstRenderApproxSeconds": 76.0,
+    "firstSoftwareThermalSeconds": 107.77070960000128,
+    "startToFirstThermalApproxSeconds": 31.770709600001283,
+    "preThermalActive": {
+      "temperature": {
+        "minimum": 83.0,
+        "median": 84.5,
+        "maximum": 86.0
+      },
+      "graphicsClockMHz": {
+        "minimum": 2415.0,
+        "median": 2452.5,
+        "maximum": 2490.0
+      },
+      "gpuUtilization": {
+        "minimum": 94.0,
+        "median": 94.5,
+        "maximum": 95.0
+      },
+      "powerDrawWatts": {
+        "minimum": 79.42,
+        "median": 80.11500000000001,
+        "maximum": 80.81
+      }
+    },
+    "thermalLateActive": {
+      "temperature": {
+        "minimum": 86.0,
+        "median": 87.0,
+        "maximum": 88.0
+      },
+      "graphicsClockMHz": {
+        "minimum": 2100.0,
+        "median": 2235.0,
+        "maximum": 2430.0
+      },
+      "gpuUtilization": {
+        "minimum": 90.0,
+        "median": 100.0,
+        "maximum": 100.0
+      },
+      "powerDrawWatts": {
+        "minimum": 64.39,
+        "median": 70.18,
+        "maximum": 78.11
+      }
+    },
+    "earlySlices": {
+      "61-120": {
+        "frameMs": {
+          "mean": 15.978737066666667,
+          "p95": 16.2790656
+        },
+        "sceneMs": {
+          "mean": 14.022280533333333,
+          "p95": 14.2546432
+        },
+        "shadowMs": {
+          "mean": 1.6817002666666667,
+          "p95": 1.6921023999999996
+        },
+        "postProcessMs": {
+          "mean": 0.27475626666666664,
+          "p95": 0.27755519999999995
+        }
+      },
+      "121-180": {
+        "frameMs": {
+          "mean": 16.1114592,
+          "p95": 16.3311648
+        },
+        "sceneMs": {
+          "mean": 14.161885866666667,
+          "p95": 14.3719936
+        },
+        "shadowMs": {
+          "mean": 1.6732128,
+          "p95": 1.6779536000000002
+        },
+        "postProcessMs": {
+          "mean": 0.2763605333333333,
+          "p95": 0.28062719999999997
+        }
+      },
+      "181-240": {
+        "frameMs": {
+          "mean": 16.108544000000002,
+          "p95": 16.346912
+        },
+        "sceneMs": {
+          "mean": 14.165538133333333,
+          "p95": 14.4001536
+        },
+        "shadowMs": {
+          "mean": 1.6665770666666666,
+          "p95": 1.676024
+        },
+        "postProcessMs": {
+          "mean": 0.2764288,
+          "p95": 0.2816512
+        }
+      },
+      "241-300": {
+        "frameMs": {
+          "mean": 16.1758032,
+          "p95": 16.4506528
+        },
+        "sceneMs": {
+          "mean": 14.207829333333333,
+          "p95": 14.415616
+        },
+        "shadowMs": {
+          "mean": 1.6905552,
+          "p95": 1.7026383999999988
+        },
+        "postProcessMs": {
+          "mean": 0.27741866666666665,
+          "p95": 0.2827264
+        }
+      },
+      "301-360": {
+        "frameMs": {
+          "mean": 16.003068266666666,
+          "p95": 17.047086399999998
+        },
+        "sceneMs": {
+          "mean": 14.0156416,
+          "p95": 14.893414400000001
+        },
+        "shadowMs": {
+          "mean": 1.7104176,
+          "p95": 1.9106255999999993
+        },
+        "postProcessMs": {
+          "mean": 0.2770090666666667,
+          "p95": 0.29189119999999996
+        }
+      },
+      "301-600": {
+        "frameMs": {
+          "mean": 16.46813728,
+          "p95": 17.713912
+        },
+        "sceneMs": {
+          "mean": 14.405993813333334,
+          "p95": 15.318988800000001
+        },
+        "shadowMs": {
+          "mean": 1.77928736,
+          "p95": 2.1630768
+        },
+        "postProcessMs": {
+          "mean": 0.28285610666666666,
+          "p95": 0.300032
+        }
+      },
+      "1801-2100": {
+        "frameMs": {
+          "mean": 18.279494293333332,
+          "p95": 18.7285936
+        },
+        "sceneMs": {
+          "mean": 15.781625173333333,
+          "p95": 16.2038784
+        },
+        "shadowMs": {
+          "mean": 2.1870817066666666,
+          "p95": 2.2202896
+        },
+        "postProcessMs": {
+          "mean": 0.3107874133333333,
+          "p95": 0.320512
+        }
+      }
+    },
+    "gpuPassTimingsSummary": []
+  },
+  "allocatorFallbacks": {
+    "intel": true,
+    "nvidiaOptionDisabled": true
+  },
+  "sampleOrderControl": {
+    "37/0": {
+      "hostFirst": {
+        "count": 8,
+        "medianMs": 0.116544
+      },
+      "localSecond": {
+        "count": 8,
+        "medianMs": 0.177872
+      },
+      "localFirst": {
+        "count": 7,
+        "medianMs": 0.116736
+      },
+      "hostSecond": {
+        "count": 7,
+        "medianMs": 0.177408
+      }
+    },
+    "37/1": {
+      "hostFirst": {
+        "count": 8,
+        "medianMs": 0.324608
+      },
+      "localSecond": {
+        "count": 8,
+        "medianMs": 0.356656
+      },
+      "localFirst": {
+        "count": 7,
+        "medianMs": 0.324736
+      },
+      "hostSecond": {
+        "count": 7,
+        "medianMs": 0.356832
+      }
+    },
+    "37/2": {
+      "hostFirst": {
+        "count": 8,
+        "medianMs": 0.057887999999999995
+      },
+      "localSecond": {
+        "count": 8,
+        "medianMs": 0.057952000000000004
+      },
+      "localFirst": {
+        "count": 7,
+        "medianMs": 0.058144
+      },
+      "hostSecond": {
+        "count": 7,
+        "medianMs": 0.05808
+      }
+    },
+    "43/0": {
+      "hostFirst": {
+        "count": 8,
+        "medianMs": 0.116704
+      },
+      "localSecond": {
+        "count": 8,
+        "medianMs": 0.177424
+      },
+      "localFirst": {
+        "count": 7,
+        "medianMs": 0.116416
+      },
+      "hostSecond": {
+        "count": 7,
+        "medianMs": 0.177632
+      }
+    },
+    "43/1": {
+      "hostFirst": {
+        "count": 8,
+        "medianMs": 0.324608
+      },
+      "localSecond": {
+        "count": 8,
+        "medianMs": 0.35607999999999995
+      },
+      "localFirst": {
+        "count": 7,
+        "medianMs": 0.325152
+      },
+      "hostSecond": {
+        "count": 7,
+        "medianMs": 0.356224
+      }
+    },
+    "43/2": {
+      "hostFirst": {
+        "count": 8,
+        "medianMs": 0.057904
+      },
+      "localSecond": {
+        "count": 8,
+        "medianMs": 0.05832
+      },
+      "localFirst": {
+        "count": 7,
+        "medianMs": 0.058336
+      },
+      "hostSecond": {
+        "count": 7,
+        "medianMs": 0.057664
+      }
+    }
+  },
+  "archiveSha256": "6a3339bfc0994670aa4671d5bd55adc0f7ae6989d703fef6282299cd0344631e",
+  "archiveMembers": 77,
+  "candidateExecutableSha256": "15df1b4471f3592d038ef504b0ec32ca7a3cc9e71a86a03f240c5873e795312c"
+}

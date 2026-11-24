@@ -1,0 +1,37 @@
+[
+  {
+    "name": "near-control",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-231334-receiver-directional-light-911ab7\\project\\near-control.azureproject",
+    "levelSha256": "0834f3f1289c60aa756fd1d5e30eae61872ebaae38a455fde6982d3f48f7039e"
+  },
+  {
+    "name": "near-reference-light",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-231334-receiver-directional-light-911ab7\\project\\near-reference-light.azureproject",
+    "levelSha256": "0098e42a18d44e468c353f8fa6005e38b9b28f7a5c22abb34c631fdbe4376d19"
+  },
+  {
+    "name": "full-control",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-231334-receiver-directional-light-911ab7\\project\\full-control.azureproject",
+    "levelSha256": "b0f0243229f8d89891aaa5552cca235e3cd79b637ba1c1d449418f14718bab42"
+  },
+  {
+    "name": "full-reference-light",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-231334-receiver-directional-light-911ab7\\project\\full-reference-light.azureproject",
+    "levelSha256": "dade7f71ce780de1e1157603aa6c082c51538fe6a3747d5da131a088d082071d"
+  },
+  {
+    "name": "hidden-control",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-231334-receiver-directional-light-911ab7\\project\\hidden-control.azureproject",
+    "levelSha256": "4c4fe0b38c0b23c705e9dda2c61b2aba27e4ba0f28f572454cc51c89f342ef97"
+  },
+  {
+    "name": "hidden-reference-light",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-231334-receiver-directional-light-911ab7\\project\\hidden-reference-light.azureproject",
+    "levelSha256": "830794979c28e8bae121c38b8d5d0d48ef26542db0a462968b1f09fd67b99cfd"
+  },
+  {
+    "name": "near-reference-source-display",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-231334-receiver-directional-light-911ab7\\project\\near-reference-source-display.azureproject",
+    "levelSha256": "e7d763413c48f73e35b6683104a6dd4b4d29ccb0a85b6f19c2438f20fae12b14"
+  }
+]

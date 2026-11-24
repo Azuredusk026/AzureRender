@@ -1,0 +1,222 @@
+{
+  "status": "qualified-relative-quad-gradient-control",
+  "rows": [
+    {
+      "name": "control",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 1,
+      "maximumByteError": 2,
+      "meanAbsoluteByteError": 0.13656931303990127,
+      "resolvedOriginalFailures": 73,
+      "newOriginalFailures": 1,
+      "resolvedControlFailures": 0,
+      "newControlFailures": 0,
+      "changedHairPixels": 0,
+      "failures": [
+        {
+          "pixel": [
+            1322,
+            262
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "candidate",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 0,
+      "maximumByteError": 1,
+      "meanAbsoluteByteError": 0.1364713717654894,
+      "resolvedOriginalFailures": 73,
+      "newOriginalFailures": 0,
+      "resolvedControlFailures": 1,
+      "newControlFailures": 0,
+      "changedHairPixels": 2,
+      "failures": []
+    }
+  ],
+  "state": {
+    "status": "qualified",
+    "variants": [
+      {
+        "name": "control",
+        "hdrSha256": "cdb97913c654144fcd595131b62e95d259df8316e477e3e61fc5e38cfda266e8",
+        "finalSha256": "ce741d6b5877989291f7d2cb087106e8a41afa002028aaf7c261353a21577ac1",
+        "hdrExact": true,
+        "finalExact": true,
+        "geometryBaselineRestored": true
+      },
+      {
+        "name": "candidate",
+        "hdrSha256": "25f04aab2bf219dc18e4fa8a810596d4ddd66320d33088e4cbfc1a67415d59e2",
+        "finalSha256": "4440bed1274701611d5f941b8ec3dc09df9bbbe601bc8cddd34d4edac91ee657",
+        "geometryBaselineRestored": true
+      }
+    ],
+    "uvProbes": [],
+    "activeVariant": "candidate",
+    "baselineRestored": true,
+    "debugMessages": [],
+    "cleanupBaselineRestored": true
+  },
+  "operations": {
+    "replacedOperations": 22,
+    "dxQuadLane": 2,
+    "dyQuadLane": 0,
+    "scope": "Subgroup",
+    "target": "vulkan1.1"
+  },
+  "productionChanged": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "scope": "Private flipped-quad derivative control after source camera projection, source visibility, selected-main saturation and storage-grid controls. Frozen17017 mask and one-byte threshold unchanged; this diagnostic does not imply portable production equivalence.",
+  "archiveBytes": 1421031,
+  "archiveSha256": "50c7b3a4e255184354df9517b57140adea90334b08569022c956451c40ef4bd8",
+  "archiveFiles": [
+    {
+      "path": "analysis.log",
+      "bytes": 1383,
+      "sha256": "d5afb4c78cbc6dab383f1631e4495c3d2bba3cb50db385112bcd0786b181b379"
+    },
+    {
+      "path": "analyze.py",
+      "bytes": 2010,
+      "sha256": "05a38a52441e4bc34806c42810e6ad6a8cdd4cca80b20021589e7e660410de8f"
+    },
+    {
+      "path": "baseline.py",
+      "bytes": 2150,
+      "sha256": "3ce0b955c9e57c95321f2c3ed3400a0c93c0e395065ec61a7d9ad3a54c59257e"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 436,
+      "sha256": "259ab2a26a07711a7725fe190b21f88cc6459dbbfddae81151ae4ee387625d6b"
+    },
+    {
+      "path": "candidate-final.zlib",
+      "bytes": 99150,
+      "sha256": "a70b76a7ac96ee84eccb9f4c14039ec395e84b56479775cff08a0c7618fcd43d"
+    },
+    {
+      "path": "candidate-hdr.zlib",
+      "bytes": 134751,
+      "sha256": "4f4d8e2eb757a755991b4d09e0bdd368efd2617b9f0d5dad14d076373fb98fd5"
+    },
+    {
+      "path": "candidate.spv",
+      "bytes": 474688,
+      "sha256": "adea9803eb790f0cbceb786b077c65c0d77f3dc6c302a828812d7b2e0a5cf2eb"
+    },
+    {
+      "path": "candidate.spvasm",
+      "bytes": 1506843,
+      "sha256": "6b620756811c1b19943e5a81d68627595f855625bdbe4d3963df07358ef9d9f7"
+    },
+    {
+      "path": "collect.py",
+      "bytes": 3327,
+      "sha256": "7305127a86b04114645d1794f1b87a866003136acd99fbc03e3a7e4b48e655c6"
+    },
+    {
+      "path": "control-final.zlib",
+      "bytes": 105122,
+      "sha256": "ed26a902e2ad723fa33d9b0e6cb908c4195905b65b8093a04402bb030c489d0e"
+    },
+    {
+      "path": "control-hdr.zlib",
+      "bytes": 145841,
+      "sha256": "688ed9139ab461e300cb55fcb6c6bc50ed9bb0bc3eceb5534f45da2b45d2a07a"
+    },
+    {
+      "path": "control.spv",
+      "bytes": 473568,
+      "sha256": "0e0e683bbacd833383fb90dfa3e318e4d741e706d119112a67afe7adf6b98228"
+    },
+    {
+      "path": "control.spvasm",
+      "bytes": 1502009,
+      "sha256": "ddb4fc1189b9e72ec33b63af2427bfa72c60aef470cf82a4595e002839905e57"
+    },
+    {
+      "path": "driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "execution.json",
+      "bytes": 581,
+      "sha256": "792b373b21a9c9bff59e1b8791c3f50fbbc5f7da72e08f98b7665a51b3ac3449"
+    },
+    {
+      "path": "operations.json",
+      "bytes": 122,
+      "sha256": "8fa825569283f2afff3b57d9ecc0630538d24ebe266d0e05eb10354ef2370b72"
+    },
+    {
+      "path": "prepare.py",
+      "bytes": 1861,
+      "sha256": "f091b5a1af03b55c1eac0013fa20982d6d7f7505f6a84263dc8cff177ed843b1"
+    },
+    {
+      "path": "process.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "queued.py",
+      "bytes": 891,
+      "sha256": "f00c25ccd25ca4bc97c0917d180e8fad7ce0eac04da61e71c5fd7fc19a62549e"
+    },
+    {
+      "path": "results.json",
+      "bytes": 2360,
+      "sha256": "ae8d133334666d7b8f5baabbfbba06b31ddc216a2655d3cdacfef85477c3fe62"
+    },
+    {
+      "path": "run.py",
+      "bytes": 969,
+      "sha256": "934357bd34bed69b95311bdd9bc5cd2e9159ec67097ecdd06ae1899a999490bf"
+    },
+    {
+      "path": "state.json",
+      "bytes": 766,
+      "sha256": "4d1fa2ca26c62ff5910f2048caf10dbfad947fd842ea6af245dd724b6a611f2e"
+    },
+    {
+      "path": "task.json",
+      "bytes": 388,
+      "sha256": "6cb856ea27c49fc2a817b2eb9883245066d57def98cd3843cafd473c2d24edc2"
+    },
+    {
+      "path": "vertex.spv",
+      "bytes": 19228,
+      "sha256": "008f3ee25a37d39ad9bc3ddffcdba33c648eeaf330af4a538fc39f697c6d02b0"
+    },
+    {
+      "path": "inputs/manifest.json",
+      "bytes": 685,
+      "sha256": "36e88310c26848c643061e174c94f156fa73b0d9b1f4d00f5ce32b9508e88cfc"
+    },
+    {
+      "path": "inputs/mask.png",
+      "bytes": 8418,
+      "sha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7"
+    },
+    {
+      "path": "inputs/native-packed-crop.zlib",
+      "bytes": 150197,
+      "sha256": "d9422dbf4eb42766c1d536741ce574e2c6a871ed722ffc5107e42ec6b1cbcb0e"
+    },
+    {
+      "path": "inputs/original-final.zlib",
+      "bytes": 113298,
+      "sha256": "6485d01364e0f3abc656ff5ad7cdfcdd067a70db9d79ce3618bfede8b46648d5"
+    }
+  ],
+  "archiveReproductionPassed": true
+}

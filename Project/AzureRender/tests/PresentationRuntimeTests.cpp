@@ -1,0 +1,45 @@
+#include "runtime/PresentationRuntime.hpp"
+#include "runtime/LevelSession.hpp"
+#include <iostream>
+#include <stdexcept>
+#include <thread>
+using namespace azurerender;
+void check(bool condition,const char* message){if(!condition)throw std::runtime_error(message);}
+int main(int argc,char** argv){
+ if(argc!=2)return 2;
+ try{
+  const auto graph=AnimationStateMachine::parse({{"schemaVersion",2},{"initial","idle"},
+      {"states",{{{"name","idle"},{"clip",0}}}},{"transitions",nlohmann::json::array()},
+      {"locomotion",{{"schemaVersion",1},{"samples",{
+          {{"clip",0},{"speed",0},{"duration",2}},{{"clip",1},{"speed",1},{"duration",1}}}}}}});
+  check(graph.locomotionProfile().has_value(),"Version two graph exposes its validated locomotion profile");
+  for(int kind=0;kind<2;++kind){
+      nlohmann::json invalid={{"schemaVersion",kind==0?1:3},{"initial","idle"},
+          {"states",{{{"name","idle"},{"clip",0}}}},{"transitions",nlohmann::json::array()},
+          {"locomotion",{{"schemaVersion",1},{"samples",{
+              {{"clip",0},{"speed",0},{"duration",2}},{{"clip",1},{"speed",1},{"duration",1}}}}}}};
+      bool rejected=false;try{(void)AnimationStateMachine::parse(invalid);}catch(const std::exception&){rejected=true;}
+      check(rejected,"Version one locomotion extensions and unsupported graph versions must reject");
+  }
+  RuntimeLifecycle runtime;LevelSession levels(Project::load(argv[1]),runtime);runtime.start();
+  auto entity=runtime.entity("hero");
+  runtime.world().addComponent(entity,game::Animator{"assets:/motion.json","idle",true});
+  runtime.world().addComponent(entity,game::AudioSource{"assets:/portal.wav",false,false,0.5F,true});
+  PresentationRuntime presentation(runtime,levels.assets(),false);
+  presentation.update(0.1);check(presentation.animations().size()==1,"Animator must produce a renderer frame");
+  runtime.world().tryGet<game::Animator>(entity)->state="run";presentation.play(entity);presentation.update(0.1);
+  check(presentation.animations().at(0).clip==1,"Reflected state must drive renderer clip");
+  check(presentation.audioStarts()==1 && presentation.mixedEnergy()>0.01,"Gameplay sound must reach real mixer");
+  runtime.pause();auto time=presentation.animations().at(0).time;presentation.update(0);
+  check(presentation.animations().at(0).time==time,"Paused animation must stay frozen");
+  const auto sounds=presentation.soundCount();runtime.resume();runtime.world().destroyEntity(entity);presentation.update(0.1);
+  check(presentation.animations().empty() && presentation.soundCount()+1==sounds,"Destroyed entities must release their presentation");
+  levels.preload("assets:/destination.azurelevel");
+  const auto deadline=std::chrono::steady_clock::now()+std::chrono::seconds(5);
+  do{levels.poll();std::this_thread::yield();}while(levels.loading() && std::chrono::steady_clock::now()<deadline);
+  check(levels.preloaded("assets:/destination.azurelevel"),"Background candidate must become ready");
+  levels.request("assets:/destination.azurelevel");check(levels.poll(),"Prepared level must change at the boundary");presentation.update(0.1);
+  check(presentation.errors().empty(),"Public presentation assets must be valid");
+  std::cout<<"World animation, real audio, pause, entity destruction and level replacement passed\n";
+ }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
+}

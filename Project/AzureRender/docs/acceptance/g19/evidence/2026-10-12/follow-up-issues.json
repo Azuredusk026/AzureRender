@@ -1,0 +1,6 @@
+{
+  "U17": [
+    "Capture manifest asset paths currently use Windows local encoding: input \u56fe can be reported as U+037C; actual Unicode loading and independent source hashes passed. Add a public capture path test and repair the remaining string() UTF-8 boundary.",
+    "Exercise Unicode output directories for capture and Player runtime reports. G18 fixed native argv and actual model loading, but some output stream constructors may still use narrow paths."
+  ]
+}

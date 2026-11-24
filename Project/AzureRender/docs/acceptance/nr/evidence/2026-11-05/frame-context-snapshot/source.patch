@@ -1,0 +1,56 @@
+diff --git a/Project/AzureRender/src/app/AzureRenderApp.cpp b/Project/AzureRender/src/app/AzureRenderApp.cpp
+index 66657f5..dcc31e2 100644
+--- a/Project/AzureRender/src/app/AzureRenderApp.cpp
++++ b/Project/AzureRender/src/app/AzureRenderApp.cpp
+@@ -551,7 +551,8 @@ azurerender::scene::SceneDescription AzureRenderApp::resolveRenderDescription(
+ }
+ 
+ void AzureRenderApp::buildRenderContext(
+-    azurerender::RenderContext& context,const azurerender::RenderSettings* frameSettings) {
++    azurerender::RenderContext& context,const azurerender::RenderSettings* frameSettings,
++    const azurerender::scene::SceneDescription* frameScene) {
+     context.device = device_;
+     context.physicalDevice = physicalDevice_;
+     context.graphicsQueue = graphicsQueue_;
+@@ -598,7 +599,12 @@ void AzureRenderApp::buildRenderContext(
+     context.shadowImageView = shadowImageView_;
+     context.shadowSampler = shadowSampler_;
+     context.shadowMapSize = kShadowMapSize;
+-    {
++    if (frameScene != nullptr) {
++        // Frame preparation resolves resource paths once. Recording consumes
++        // the same immutable scene that supplied the renderer update.
++        context.scene = *frameScene;
++        context.sceneWorldCoordinates = true;
++    } else {
+         const azurerender::SceneDocument* document = nullptr;
+ #if AZURE_WITH_EDITOR
+         azurerender::SceneDocument editorDocument;
+diff --git a/Project/AzureRender/src/app/AzureRenderApp.hpp b/Project/AzureRender/src/app/AzureRenderApp.hpp
+index aafbfc1..8cb0df0 100644
+--- a/Project/AzureRender/src/app/AzureRenderApp.hpp
++++ b/Project/AzureRender/src/app/AzureRenderApp.hpp
+@@ -455,7 +455,9 @@ private:
+     azurerender::GameRuntime* activeGame();
+     azurerender::IScriptRuntime* activeScripts();
+     azurerender::AssetDatabase* activeAssets();
+-    void buildRenderContext(azurerender::RenderContext& context,const azurerender::RenderSettings* frameSettings=nullptr);
++    void buildRenderContext(azurerender::RenderContext& context,
++        const azurerender::RenderSettings* frameSettings=nullptr,
++        const azurerender::scene::SceneDescription* frameScene=nullptr);
+     azurerender::scene::SceneDescription resolveRenderDescription(
+         const azurerender::SceneDocument& document) const;
+     void buildSceneFrameData(azurerender::SceneFrameData& frame);
+diff --git a/Project/AzureRender/src/app/AzureRenderFrame.cpp b/Project/AzureRender/src/app/AzureRenderFrame.cpp
+index 2776e77..7de4009 100644
+--- a/Project/AzureRender/src/app/AzureRenderFrame.cpp
++++ b/Project/AzureRender/src/app/AzureRenderFrame.cpp
+@@ -978,7 +978,7 @@ void AzureRenderApp::recordCommandBuffer(
+     auto& gridBuffer=groundGridUniforms_.at(imageIndex);
+     std::memcpy(gridBuffer.mapped,&grid,sizeof(grid));gpuAllocator_.flush(gridBuffer,0,sizeof(grid));
+     azurerender::RenderContext sceneContext;
+-    buildRenderContext(sceneContext,frame.renderSettings);
++    buildRenderContext(sceneContext,frame.renderSettings,frame.sceneSnapshot.get());
+     sceneContext.currentFrame = static_cast<std::uint32_t>(currentFrame_);
+     sceneContext.imageIndex = imageIndex;
+     sceneContext.commandBuffer = commandBuffer;

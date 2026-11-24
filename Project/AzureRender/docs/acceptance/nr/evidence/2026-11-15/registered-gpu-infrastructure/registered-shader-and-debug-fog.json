@@ -1,0 +1,60 @@
+{
+  "debug": {
+    "contract": {
+      "wrapperSeconds": 4.73399999999674,
+      "compileSeconds": null,
+      "programCount": null,
+      "candidateSha256": "7066c2e6bebccc768bfa9f21328efcd7ca3a3ac7312b4cc888420012b6679872"
+    },
+    "catalog": {
+      "wrapperSeconds": 61.70299999999406,
+      "compileSeconds": 33.2383374,
+      "programCount": 897,
+      "candidateSha256": "7066c2e6bebccc768bfa9f21328efcd7ca3a3ac7312b4cc888420012b6679872"
+    }
+  },
+  "release": {
+    "contract": {
+      "wrapperSeconds": 4.110000000000582,
+      "compileSeconds": null,
+      "programCount": null,
+      "candidateSha256": "2e397b257a84d566dee4d9c78f613d5054a5fc64aae2c145945d45d17e60d444"
+    },
+    "catalog": {
+      "wrapperSeconds": 62.86000000000058,
+      "compileSeconds": 40.0266436,
+      "programCount": 897,
+      "candidateSha256": "2e397b257a84d566dee4d9c78f613d5054a5fc64aae2c145945d45d17e60d444"
+    }
+  },
+  "debugFog": {
+    "job": 694,
+    "seconds": 512.477,
+    "captures": 50,
+    "exactDescriptorPairs": 25
+  },
+  "memoControl": {
+    "job": 690,
+    "sameRgbFrames": 6,
+    "ratios": {
+      "indexed-none": 7.2757313163289465,
+      "indexed-coplanar-additive": 9.101352223602014,
+      "indexed-object-shadow": 9.356064692227712,
+      "fixed-none": 8.273255137038312,
+      "fixed-coplanar-additive": 4.385370153031456,
+      "fixed-object-shadow": 5.8551296512624855
+    }
+  },
+  "archiveMembers": {
+    "compiler/debug/contract.json": "19c785e55f264dbff151e9ddff9c6bae9ec101b06878e6ff0b6b41eeb9610591",
+    "compiler/debug/catalog.json": "953a32cd81568234053c7ff22725404858fdaf6b8fc5fa964690a915091498ac",
+    "compiler/release/contract.json": "8b5bc2e91baa262a519acb5db228b0767d8f5fc5fb99e474671405271358aab0",
+    "compiler/release/catalog.json": "a23f5c3ca4b0fb09a245535f3a577a70522dc16cdc5abb7167d7850f855886f4",
+    "fog/debug-gpu-95.json": "d67930921b0eb13e6c389bc609c5c28ae841c388e75622a2828dea7c7b92307f",
+    "fog/debug-gpu-95.xml": "f7d0326675439f7cd51e720f66cc6b3904dcee7f649abe83f37d1fbf1a8e9c80",
+    "fog/debug-gpu-95-queue.log": "ec9dde5671b25a66544011a55585f5523ec840d21f77fa75e50dedfe35c9cd5c",
+    "fog/full-fog-observation-694.json": "d3f1fb227a111a3359f2417ac92b74cea6251efba96042edba499b162dfea119",
+    "specialization/retry-result.json": "6ed4b5bc70aeca50e964689663882cd395370ae98b5526f010462b7d23452dc4",
+    "specialization/dispatch.json": "73d6293c2bc8d0807dbeaa92334741c20647b64779ce54384f2777c4fc012d14"
+  }
+}

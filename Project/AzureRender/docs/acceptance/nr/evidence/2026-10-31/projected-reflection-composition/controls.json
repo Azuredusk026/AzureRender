@@ -1,0 +1,33 @@
+{
+  "sourceRun": "build\\runs\\20261031-084655-projected-camera-gpu-0d8024",
+  "shaderSha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+  "executableSha256": "f05ae62d0eabc3b234069c03539f56226770d5fa8c3017228f4cd6fabdd8f93f",
+  "display": "linear HDR multiplied by confidence, clipped to one, gamma 1/2.2",
+  "panels": [
+    {
+      "mode": "positive",
+      "sourceSha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+    },
+    {
+      "mode": "history-tinted",
+      "sourceSha256": "6edec5b80dc60747588c98d87dfe4244444a72a22918166999834d8a27634916"
+    },
+    {
+      "mode": "history-shifted",
+      "sourceSha256": "6edec5b80dc60747588c98d87dfe4244444a72a22918166999834d8a27634916"
+    },
+    {
+      "mode": "history-wrong-pose",
+      "sourceSha256": "64c588482bd953e634473919c99664a8ea9f4e3ede5e0bbee7bda0888e698d14"
+    },
+    {
+      "mode": "history-disoccluded",
+      "sourceSha256": "64c588482bd953e634473919c99664a8ea9f4e3ede5e0bbee7bda0888e698d14"
+    },
+    {
+      "mode": "wide-edge",
+      "sourceSha256": "b9120c2404c6f163e6cacecc4dcbe623b46f297dbc9fe43dfd6dddad3c91737f"
+    }
+  ],
+  "figureSha256": "eeb7a3897153266d351a0603382e0e7606dcddcc2d1dac972546a709c298b714"
+}

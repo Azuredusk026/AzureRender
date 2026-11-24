@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "file": "review-cube.gltf",
+      "source": "assets_public/scene_inspector/assets/cube.gltf",
+      "license": "CC0-1.0",
+      "sha256": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651"
+    },
+    {
+      "file": "review-checker.png",
+      "source": "procedural checker, RGBA 128x128",
+      "license": "CC0-1.0",
+      "sha256": "338730624bdccf5dc9af6422289b5159cbc21546e16a1f8adbaae76e297f63a0"
+    },
+    {
+      "file": "review-tone.wav",
+      "source": "procedural sine, mono PCM16 48000Hz 440Hz 1s",
+      "license": "CC0-1.0",
+      "sha256": "b2d5cdaf6d41120b26b90f47ebba84ba40dcb2d73e3a029a307d125d66dc241a"
+    }
+  ],
+  "externalDependencies": false
+}

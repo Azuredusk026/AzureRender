@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "frames": 90,
+  "lastSixtyGroundedIdle": true,
+  "referenceGroundHeight": 1.032429067752977,
+  "maximumSettledHeightError": 1.558508696142269e-05,
+  "scope": "Independent source triangle height and production capsule contact at spawn; not a performance or native collider equivalence result"
+}

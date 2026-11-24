@@ -1,0 +1,8 @@
+{"status": "failed", "surfacePixels": {"positive": 39244, "mirror": 39244, "double-mirror": 39244, "baked-mirror": 39244, "back": 0, "double-sided-back": 39244, "far": 4696, "far-clipped": 0, "depth": 832, "transparent": 15326, "transparent-mirror": 15326}, "visibilityMeanDifference": [0.0, 0.0], "normalMeanDifference": 26.666666666666668, "validationErrors": 0, "failures": ["nonuniform runtime normal differs from baked inverse-transpose: 26.666666666666668"]}
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_scene_visibility_gpu.py", line 86, in <module>
+    run(args.executable.resolve(), args.output.resolve() if args.output else Path(temporary))
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_scene_visibility_gpu.py", line 76, in run
+    assert not failures, failures
+           ^^^^^^^^^^^^
+AssertionError: ['nonuniform runtime normal differs from baked inverse-transpose: 26.666666666666668']

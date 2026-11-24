@@ -1,0 +1,65 @@
+{
+  "status": "captured-diagnostic",
+  "cases": [
+    {
+      "case": "base",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\actor-lighting-lab\\base.azureproject",
+        "--width",
+        "1280",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\actor-lighting-lab\\base\\frames",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-isolation",
+        "beauty",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\actor-lighting-lab\\base\\runtime.json"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 64.42792960000224,
+      "imageSha256": "fbcaed5ad03f1c8d10d83a732c03508c0f2d2d0c216a42c2d69134df9b073fb4"
+    },
+    {
+      "case": "no-object-shadow",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\actor-lighting-lab\\no-object-shadow.azureproject",
+        "--width",
+        "1280",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\actor-lighting-lab\\no-object-shadow\\frames",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-isolation",
+        "beauty",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\actor-lighting-lab\\no-object-shadow\\runtime.json"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 39.947246300005645,
+      "imageSha256": "80dacec05f46ae7e70de10404549645fbef90bec24afaec57eda45aecbca2f4c"
+    }
+  ]
+}

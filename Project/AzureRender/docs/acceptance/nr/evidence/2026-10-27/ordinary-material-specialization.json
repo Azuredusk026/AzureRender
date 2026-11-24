@@ -1,0 +1,597 @@
+{
+  "schemaVersion": 1,
+  "verified": "2026-10-27",
+  "phase": "NR7-AA5",
+  "status": "main-only-specialization-integrated-formal-aa-and-performance-gates-open",
+  "baseCommit": "d165848",
+  "rhi": {
+    "maximumConstantsPerStage": 16,
+    "valueBits": 32,
+    "stages": [
+      "compute",
+      "vertex",
+      "fragment"
+    ],
+    "defaultEmpty": true
+  },
+  "materialPolicy": {
+    "materialClass": "generic",
+    "alphaMode": "opaque",
+    "features": "dynamic",
+    "mainFacingPipelines": 3,
+    "snapshot": "full-shader",
+    "materialProfileLayoutVersion": 10,
+    "instanceLayoutVersion": 2,
+    "objectShadowLayoutVersion": 2
+  },
+  "shaderBinaries": {
+    "count": 117,
+    "debugReleaseByteEqual": true
+  },
+  "contracts": {
+    "debugPassed": 7,
+    "releasePassed": 7
+  },
+  "npr": {
+    "debug": {
+      "status": "passed",
+      "captures": 36,
+      "maximumLinearError": 0.0029339036009812802,
+      "budget": 0.008,
+      "playerSha256": "9c339085943e0776fa7b53181091ddc6672a74b2dba03b4f25ac14e92bcd9f67",
+      "log": "build/runs/20261027-042606-ordinary-material-specialization-af947b/npr-final-debug.log"
+    },
+    "release": {
+      "status": "passed",
+      "captures": 36,
+      "maximumLinearError": 0.0029339036009812802,
+      "budget": 0.008,
+      "playerSha256": "88a995a7f9c1935231662bd10486cbc7e47b5fc79e3d13b83d1d3c2d295a53e8",
+      "log": "build/runs/20261027-042606-ordinary-material-specialization-af947b/npr-final-release.log"
+    }
+  },
+  "captures": {
+    "main-debug": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "imageExact": true,
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "pipelines": 45,
+      "playerSha256": "9c339085943e0776fa7b53181091ddc6672a74b2dba03b4f25ac14e92bcd9f67",
+      "receipt": "build/runs/20261027-042606-ordinary-material-specialization-af947b/final-main-debug/receipt.json"
+    },
+    "character-debug": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "imageExact": true,
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "pipelines": 44,
+      "playerSha256": "9c339085943e0776fa7b53181091ddc6672a74b2dba03b4f25ac14e92bcd9f67",
+      "receipt": "build/runs/20261027-042606-ordinary-material-specialization-af947b/final-character-debug/receipt.json"
+    },
+    "main-release": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "imageExact": true,
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "pipelines": 45,
+      "playerSha256": "88a995a7f9c1935231662bd10486cbc7e47b5fc79e3d13b83d1d3c2d295a53e8",
+      "receipt": "build/runs/20261027-042606-ordinary-material-specialization-af947b/final-main-release/receipt.json"
+    },
+    "character-release": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "imageExact": true,
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "pipelines": 44,
+      "playerSha256": "88a995a7f9c1935231662bd10486cbc7e47b5fc79e3d13b83d1d3c2d295a53e8",
+      "receipt": "build/runs/20261027-042606-ordinary-material-specialization-af947b/final-character-release/receipt.json"
+    }
+  },
+  "multisample": {
+    "validationErrors": 0,
+    "resourcesReleased": true,
+    "ordinaryPipelines": 3,
+    "rasterizationSamples": 4,
+    "imageExact": false,
+    "maximumByteError": 1,
+    "changedPixels": 4,
+    "publishedBudget": {
+      "status": "passed-existing-one-byte-budget",
+      "existingBudget": 1,
+      "strictByteEqual": false,
+      "strictDiagnosticRetained": true,
+      "maximumByteError": 1,
+      "points": [
+        {
+          "pixel": [
+            444,
+            167
+          ],
+          "baseline": [
+            53,
+            52,
+            53,
+            255
+          ],
+          "candidate": [
+            53,
+            52,
+            52,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            1569,
+            680
+          ],
+          "baseline": [
+            222,
+            220,
+            221,
+            255
+          ],
+          "candidate": [
+            222,
+            220,
+            222,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            480,
+            718
+          ],
+          "baseline": [
+            126,
+            122,
+            125,
+            255
+          ],
+          "candidate": [
+            126,
+            123,
+            125,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            369,
+            889
+          ],
+          "baseline": [
+            136,
+            133,
+            136,
+            255
+          ],
+          "candidate": [
+            135,
+            133,
+            136,
+            255
+          ]
+        }
+      ]
+    }
+  },
+  "playable": {
+    "status": "passed-runtime-replay",
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "changedPixels": 1,
+        "maximumByteError": 1
+      },
+      {
+        "frame": "frame_000001.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000002.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000003.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000004.png",
+        "changedPixels": 1,
+        "maximumByteError": 1
+      },
+      {
+        "frame": "frame_000005.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000006.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000007.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000008.png",
+        "changedPixels": 1,
+        "maximumByteError": 1
+      },
+      {
+        "frame": "frame_000009.png",
+        "changedPixels": 1,
+        "maximumByteError": 1
+      },
+      {
+        "frame": "frame_000010.png",
+        "changedPixels": 1,
+        "maximumByteError": 1
+      },
+      {
+        "frame": "frame_000011.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000012.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000013.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000014.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000015.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "stateAndPositionsExact": true,
+    "animationFrames": 176,
+    "fixedSteps": 112,
+    "actions": 4,
+    "horizontalDisplacement": 1.1557965296672654,
+    "resourcesReleased": true,
+    "errors": 0
+  },
+  "compiledCosts": [
+    {
+      "pipeline": 0,
+      "registerCount": 32,
+      "binaryBytes": 9472
+    },
+    {
+      "pipeline": 1,
+      "registerCount": 32,
+      "binaryBytes": 9472
+    },
+    {
+      "pipeline": 2,
+      "registerCount": 32,
+      "binaryBytes": 9472
+    },
+    {
+      "pipeline": 3,
+      "registerCount": 40,
+      "binaryBytes": 11136
+    },
+    {
+      "pipeline": 4,
+      "registerCount": 16,
+      "binaryBytes": 512
+    },
+    {
+      "pipeline": 9,
+      "registerCount": 255,
+      "binaryBytes": 251776
+    },
+    {
+      "pipeline": 10,
+      "registerCount": 255,
+      "binaryBytes": 251776
+    },
+    {
+      "pipeline": 11,
+      "registerCount": 255,
+      "binaryBytes": 229888
+    },
+    {
+      "pipeline": 12,
+      "registerCount": 255,
+      "binaryBytes": 229888
+    },
+    {
+      "pipeline": 13,
+      "registerCount": 255,
+      "binaryBytes": 229888
+    },
+    {
+      "pipeline": 14,
+      "registerCount": 168,
+      "binaryBytes": 173696
+    },
+    {
+      "pipeline": 15,
+      "registerCount": 168,
+      "binaryBytes": 173696
+    },
+    {
+      "pipeline": 16,
+      "registerCount": 168,
+      "binaryBytes": 173696
+    },
+    {
+      "pipeline": 17,
+      "registerCount": 16,
+      "binaryBytes": 1664
+    },
+    {
+      "pipeline": 18,
+      "registerCount": 16,
+      "binaryBytes": 1664
+    },
+    {
+      "pipeline": 19,
+      "registerCount": 16,
+      "binaryBytes": 1664
+    },
+    {
+      "pipeline": 20,
+      "registerCount": 16,
+      "binaryBytes": 1664
+    },
+    {
+      "pipeline": 21,
+      "registerCount": 16,
+      "binaryBytes": 1664
+    },
+    {
+      "pipeline": 22,
+      "registerCount": 16,
+      "binaryBytes": 1664
+    },
+    {
+      "pipeline": 23,
+      "registerCount": 16,
+      "binaryBytes": 1664
+    },
+    {
+      "pipeline": 24,
+      "registerCount": 16,
+      "binaryBytes": 1664
+    },
+    {
+      "pipeline": 25,
+      "registerCount": 16,
+      "binaryBytes": 1664
+    },
+    {
+      "pipeline": 26,
+      "registerCount": 255,
+      "binaryBytes": 251776
+    },
+    {
+      "pipeline": 27,
+      "registerCount": 255,
+      "binaryBytes": 251776
+    },
+    {
+      "pipeline": 28,
+      "registerCount": 255,
+      "binaryBytes": 251776
+    },
+    {
+      "pipeline": 29,
+      "registerCount": 255,
+      "binaryBytes": 251776
+    },
+    {
+      "pipeline": 30,
+      "registerCount": 255,
+      "binaryBytes": 251776
+    },
+    {
+      "pipeline": 31,
+      "registerCount": 255,
+      "binaryBytes": 251776
+    },
+    {
+      "pipeline": 32,
+      "registerCount": 255,
+      "binaryBytes": 251776
+    },
+    {
+      "pipeline": 33,
+      "registerCount": 255,
+      "binaryBytes": 251776
+    },
+    {
+      "pipeline": 34,
+      "registerCount": 16,
+      "binaryBytes": 1024
+    },
+    {
+      "pipeline": 35,
+      "registerCount": 16,
+      "binaryBytes": 1024
+    },
+    {
+      "pipeline": 36,
+      "registerCount": 16,
+      "binaryBytes": 1024
+    },
+    {
+      "pipeline": 37,
+      "registerCount": 16,
+      "binaryBytes": 2688
+    },
+    {
+      "pipeline": 38,
+      "registerCount": 16,
+      "binaryBytes": 2688
+    },
+    {
+      "pipeline": 39,
+      "registerCount": 16,
+      "binaryBytes": 1664
+    },
+    {
+      "pipeline": 40,
+      "registerCount": 16,
+      "binaryBytes": 1664
+    },
+    {
+      "pipeline": 41,
+      "registerCount": 16,
+      "binaryBytes": 3200
+    },
+    {
+      "pipeline": 42,
+      "registerCount": 16,
+      "binaryBytes": 2176
+    },
+    {
+      "pipeline": 43,
+      "registerCount": 16,
+      "binaryBytes": 2176
+    }
+  ],
+  "performance": {
+    "actualExtent": [
+      1920,
+      1080
+    ],
+    "qualityMode": 1,
+    "warmupFrames": 16,
+    "steadyFrames": 80,
+    "baseline": {
+      "shadowMs": {
+        "mean": 4.2006072,
+        "p95": 4.4144192
+      },
+      "sceneMs": {
+        "mean": 68.6977536,
+        "p95": 71.2881152
+      },
+      "postProcessMs": {
+        "mean": 0.2176384,
+        "p95": 0.2150912
+      },
+      "frameMs": {
+        "mean": 73.1159992,
+        "p95": 75.7194768
+      }
+    },
+    "mainOnly": {
+      "shadowMs": {
+        "mean": 4.0541604,
+        "p95": 4.3799168
+      },
+      "sceneMs": {
+        "mean": 55.9350272,
+        "p95": 58.7121664
+      },
+      "postProcessMs": {
+        "mean": 0.208704,
+        "p95": 0.21411840000000001
+      },
+      "frameMs": {
+        "mean": 60.197891600000005,
+        "p95": 62.9027728
+      }
+    },
+    "rejectedBothColors": {
+      "shadowMs": {
+        "mean": 3.8026332,
+        "p95": 4.216825599999999
+      },
+      "sceneMs": {
+        "mean": 50.193024,
+        "p95": 52.7635968
+      },
+      "postProcessMs": {
+        "mean": 0.2143872,
+        "p95": 0.21949439999999998
+      },
+      "frameMs": {
+        "mean": 54.2100444,
+        "p95": 56.8584704
+      }
+    },
+    "passes60FpsGpuBudget": false
+  },
+  "rejectedExperiment": {
+    "changedPixels": 1,
+    "pixel": [
+      268,
+      398
+    ],
+    "maximumByteError": 2,
+    "source": [
+      54,
+      52,
+      52,
+      255
+    ],
+    "bothColors": [
+      56,
+      54,
+      54,
+      255
+    ],
+    "mainOnlyByteEqual": true,
+    "allConstantsFalseByteEqual": true,
+    "snapshotOnlyRepeatsResidual": true,
+    "replayReplacementReproducesPlayerDelta": false
+  },
+  "sourceHashes": {
+    "CMakeLists.txt": "69c3256c864e73f4a9f3ebb10d3ab2d42b2c2ed9fb084dcd13078b41e9343096",
+    "src/rhi/Rhi.hpp": "d9f9edafdaa2cf73b6e35a2fd6333dac1199f39b30dc5949ad5ab319107f3c0d",
+    "src/rhi/VulkanRhi.cpp": "7a18be75598c52f4faaea84bd136ef0e2756100f94e19287179b17802bc61f1b",
+    "src/rhi/NullRhi.cpp": "0f85366d996ecfe8b9cdaf462c4b5cb474cfbf9c4f2e2a0a5b2dc8bc07700a84",
+    "src/rhi/VulkanSpecialization.hpp": "da89f0399cf51d38ac94946f8bdc1cc8b1acf1568e5552a0d394bde2e958dce9",
+    "src/render/MaterialPipelinePolicy.hpp": "e1aef4b8bd87404780d0b8a738d962d6a1ad66d711de197bb46c448b843dfc56",
+    "src/scenes/CharacterSceneRenderer.cpp": "4f359533ffbeab759337bd485f30104ca4facb517da8b8e94366887a05011339",
+    "src/scenes/CharacterSceneRenderer.hpp": "dae74544396b9f42254813e5477072c4807430d6dd8816bbb7057649a5599921",
+    "src/scenes/CharacterMaterialSampling.inc": "76e1cbfa275aa765fc6cebddc23d49bab01911d820e3e982fb04a4c24faa7795",
+    "shaders/mesh.frag": "c17cd9bbee6d7582bc706b79eb70d4e618aad022948c88c54f082a2e8c807845",
+    "shaders/specialization_test.vert": "61edc8f9102e0411c1d786ad6801b3c0e193748d9c4b4eab3d3d37c54eb68de5",
+    "shaders/specialization_test.frag": "4177db5c790a68b4053f6064b3e1bc55af5da96e205b96c6b473827668728c7d",
+    "shaders/specialization_test.comp": "3cdc0ac612e817842412c81f3e1597148efa7877af85e46b28719eb1bc1f9214",
+    "tests/NullRhiTests.cpp": "dddfefbb2be461073b707f15d71167e581197334cd79ddc6569c9b40ffb0a959",
+    "tests/ShaderSpecializationGpuTests.cpp": "c51003d77cdcee741a918c1b5162ab13bbcfdfd241345a8650653a0ed2b43e8b",
+    "tests/MaterialPipelinePolicyTests.cpp": "a7d9f65f05c9c2a7c940d4e37b37486291f7a4106dbddf3c4e14f78d9e35fad6"
+  },
+  "remaining": [
+    "NR0-NR12 formal acceptance",
+    "AA4-AA6 joint static/motion acceptance",
+    "1080p 60 fps budget",
+    "full native hair and eye sampler boundaries",
+    "strict mode4 byte equivalence: four one-byte pixels",
+    "strict playable byte equivalence: five frames with one one-byte pixel each"
+  ]
+}

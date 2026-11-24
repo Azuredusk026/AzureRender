@@ -1,0 +1,239 @@
+{
+  "status": "implemented-compatible-local-cpu-gains-native-gpu-observation-formal-acceptance-open",
+  "sourceBase": "7b01fb1",
+  "sourceHashes": {
+    "CMakeLists.txt": "dd4e23dd3517900dd52f729ac4e743c366ac481b6eb5e5ee1ed0f1d3c1951da7",
+    "src/render/MaterialPipelinePolicy.hpp": "d7262329863b11d93a682d1aa53017c54bf0418fb7487c9dc8344091622db5df",
+    "src/render/StableDepthOrder.hpp": "fe3610786b09e69c3953ac9b6f360c756d92044935e47d9f9bbd96106a974e10",
+    "src/render/ClusteredLightGrid.hpp": "7cddb28ba471b346c6e28318c1b30a92e05a33c5d3108a8fb21b3f232df4e0a4",
+    "src/scenes/CharacterMaterialSampling.inc": "b6df6605a74b32434913341a723ad4af6cb151c0cbb96b446f550282c5674307",
+    "src/scenes/CharacterSceneRenderer.cpp": "bc5a2dae268c5d97cc1237155e15ba29fa3c105935779e71058bde5a10fd17f0",
+    "src/scenes/CharacterSceneRenderer.hpp": "a477ff7415100118da7c0cb8e70fb9ccce182ea397a38f1721f3dfbc462553ae",
+    "tests/StableDepthOrderTests.cpp": "4c68708f5d0b99dd13b6f6bb8888def8c410ce9f2f715d0c8b019c74a4ec06a7",
+    "tests/ClusteredLightGridTests.cpp": "a244408ef717c8b9aa10de8b9411c2741c3318a4c1b3b3437738623ab07c8a54",
+    "tests/MaterialClassEarlyDepthTests.cpp": "f989911d65746f05a75d60c3dfa877989ecb925f3616308b7f634c017e339772"
+  },
+  "baseline": {
+    "scope": "Predeclared baseline window300:420; historical same frozen input and shader bytes; environment qualification separate",
+    "warmup": 300,
+    "samples": 120,
+    "cpu": {
+      "mean": 21.560384999999997,
+      "p95": 30.58153000000044,
+      "p99": 37.58883899999955
+    },
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.566604,
+        "p95": 2.741072,
+        "p99": 2.79219872
+      },
+      "sceneMs": {
+        "mean": 26.2158592,
+        "p95": 27.4111488,
+        "p99": 27.7832704
+      },
+      "postProcessMs": {
+        "mean": 0.3022762666666667,
+        "p95": 0.31656959999999995,
+        "p99": 0.321536
+      },
+      "frameMs": {
+        "mean": 29.084739466666665,
+        "p95": 30.4211536,
+        "p99": 30.828646720000002
+      }
+    }
+  },
+  "candidate": {
+    "status": "measured",
+    "sourceBase": "7b01fb1-with-batched-performance-candidate",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 207.75,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.453536533333333,
+        "p95": 2.511952,
+        "p99": 2.52575616
+      },
+      "sceneMs": {
+        "mean": 21.497173333333333,
+        "p95": 22.2157312,
+        "p99": 22.2566912
+      },
+      "postProcessMs": {
+        "mean": 0.27715413333333333,
+        "p95": 0.280576,
+        "p99": 0.28530688
+      },
+      "frameMs": {
+        "mean": 24.227864,
+        "p95": 24.9721248,
+        "p99": 25.0122768
+      }
+    },
+    "cpu": {
+      "mean": 21.229494999999993,
+      "p95": 24.286785000000467,
+      "p99": 27.33478400000046
+    },
+    "wait": {
+      "mean": 2.81770583333334,
+      "p95": 4.578274999999985,
+      "p99": 5.076485000000444
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7401578496,
+    "environmentFailures": [
+      "run observation 36: driver relative thermal headroom is insufficient",
+      "run observation 36: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "diagnosticOnly": true,
+    "formalSampleCountSatisfied": false,
+    "allMountedProjectBytesUnchanged": true,
+    "powerAcceptanceUnchanged": true,
+    "powerDeviationIsFailure": true,
+    "timingBudgetPassed": false,
+    "powerProfileStable": false,
+    "environmentPassed": false
+  },
+  "nativeComparison": {
+    "kind": "Historical frozen baseline matched window300:420; not a new paired run",
+    "gpuSceneMeanReductionMs": 4.718685866666668,
+    "gpuFrameP95Reduction": 0.1791197293714727,
+    "cpuMeanReductionMs": 0.3308900000000037,
+    "qualifiedFormalBenefit": false
+  },
+  "image": {
+    "status": "passed",
+    "frozenChangedPixels": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "allMountedProjectBytesUnchanged": true,
+    "zeroAllocator": true,
+    "validationClean": true,
+    "playerSha256": "18df101e1dbae01aa1b62b6d6a2d4cc93d15e2851ebdff9d56491a778b55f049"
+  },
+  "depthMicrobenchmark": [
+    {
+      "count": 4096,
+      "shape": 0,
+      "rounds": 40,
+      "baselineMs": 0.065975,
+      "candidateMs": 0.036145,
+      "reduction": 0.452141,
+      "keyEvaluations": 163840,
+      "scatterPasses": 80,
+      "skippedPasses": 80,
+      "identical": true
+    },
+    {
+      "count": 4096,
+      "shape": 1,
+      "rounds": 40,
+      "baselineMs": 0.0609375,
+      "candidateMs": 0.038505,
+      "reduction": 0.368123,
+      "keyEvaluations": 163840,
+      "scatterPasses": 160,
+      "skippedPasses": 0,
+      "identical": true
+    },
+    {
+      "count": 32768,
+      "shape": 0,
+      "rounds": 40,
+      "baselineMs": 0.574037,
+      "candidateMs": 0.24746,
+      "reduction": 0.568913,
+      "keyEvaluations": 1310720,
+      "scatterPasses": 80,
+      "skippedPasses": 80,
+      "identical": true
+    },
+    {
+      "count": 32768,
+      "shape": 1,
+      "rounds": 40,
+      "baselineMs": 0.52476,
+      "candidateMs": 0.363565,
+      "reduction": 0.307179,
+      "keyEvaluations": 1310720,
+      "scatterPasses": 160,
+      "skippedPasses": 0,
+      "identical": true
+    },
+    {
+      "count": 65536,
+      "shape": 0,
+      "rounds": 40,
+      "baselineMs": 1.11992,
+      "candidateMs": 0.467465,
+      "reduction": 0.582593,
+      "keyEvaluations": 2621440,
+      "scatterPasses": 80,
+      "skippedPasses": 80,
+      "identical": true
+    },
+    {
+      "count": 65536,
+      "shape": 1,
+      "rounds": 40,
+      "baselineMs": 0.973823,
+      "candidateMs": 0.672138,
+      "reduction": 0.309795,
+      "keyEvaluations": 2621440,
+      "scatterPasses": 160,
+      "skippedPasses": 0,
+      "identical": true
+    }
+  ],
+  "gridMicrobenchmark": [
+    {
+      "rounds": 80,
+      "clusters": 3456,
+      "lights": 16,
+      "references": 4607,
+      "baselineMs": 0.228159,
+      "candidateMs": 0.051825,
+      "reduction": 0.772856,
+      "identical": true
+    }
+  ],
+  "remaining": [
+    "Formal CPU8ms and GPU16.6ms targets",
+    "Thermal and80W stability",
+    "Debug and dual-device concentrated regression",
+    "CPU dominant work reduction",
+    "User visual acceptance"
+  ],
+  "validationPolicy": "Single main configuration; scoped mechanisms and short native assessment; broad queued dual-configuration checks canceled at user request"
+}

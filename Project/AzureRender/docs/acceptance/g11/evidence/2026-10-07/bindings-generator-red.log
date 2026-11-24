@@ -1,0 +1,14 @@
+F..
+======================================================================
+FAIL: test_check_rejects_drift_without_rewriting (__main__.ScriptBindingGenerationTests.test_check_rejects_drift_without_rewriting)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_script_bindings.py", line 27, in test_check_rejects_drift_without_rewriting
+    self.assertEqual(generated.returncode,0,generated.stderr)
+AssertionError: 2 != 0 : C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\generate_script_bindings.py': [Errno 2] No such file or directory
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.365s
+
+FAILED (failures=1)

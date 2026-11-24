@@ -1,0 +1,8 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 328: AzureEngine.PlayerCli
+1/1 Test #328: AzureEngine.PlayerCli ............   Passed    2.49 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   2.51 sec

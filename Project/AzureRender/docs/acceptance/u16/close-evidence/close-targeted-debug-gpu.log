@@ -1,0 +1,35 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 152: AzureEditor.NativeInputGpu
+1/4 Test #152: AzureEditor.NativeInputGpu .......***Failed   38.54 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 230, in <module>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 230, in <listcomp>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 199, in run
+    choose('import.browse',via_browse=True)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 129, in choose
+    assert dialog,'Browse must open a dialog owned by the editor'
+           ^^^^^^
+AssertionError: Browse must open a dialog owned by the editor
+
+    Start 154: AzureEditor.DocumentGuardGpu
+2/4 Test #154: AzureEditor.DocumentGuardGpu .....   Passed   27.73 sec
+    Start 184: AzureEditor.ProductizationGpu
+3/4 Test #184: AzureEditor.ProductizationGpu ....   Passed   53.16 sec
+    Start 223: AzureEditor.SceneGeometryGpu
+4/4 Test #223: AzureEditor.SceneGeometryGpu .....   Passed    5.43 sec
+
+75% tests passed, 1 tests failed out of 4
+
+Label Time Summary:
+gpu    = 124.86 sec*proc (4 tests)
+
+Total Test time (real) = 124.89 sec
+
+The following tests FAILED:
+	152 - AzureEditor.NativeInputGpu (Failed)
+Errors while running CTest

@@ -1,0 +1,499 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+  * brotli:x64-windows@1.2.0
+  * bzip2[core,tool]:x64-windows@1.0.8#6
+  * clipper2:x64-windows@2.0.1
+  * freetype[core,zlib,png,bzip2,brotli]:x64-windows@2.14.3
+    glfw3:x64-windows@3.5.1
+  * hwloc:x64-windows@2.11.2
+  * imath:x64-windows@3.2.2
+  * itlib:x64-windows@1.12.2
+    joltphysics:x64-windows@5.6.0
+  * libdeflate[core,zlib,gzip,decompression,compression]:x64-windows@1.25
+  * libpng:x64-windows@1.6.58
+    lua:x64-windows@5.4.8
+    manifold:x64-windows@3.5.2
+    miniaudio:x64-windows@0.11.25
+  * nlohmann-json:x64-windows@3.12.0#2
+    openexr:x64-windows@3.4.13
+  * openjph:x64-windows@0.31.0
+    rmlui[core,freetype]:x64-windows@6.3
+  * robin-hood-hashing:x64-windows@3.11.5#2
+    sol2:x64-windows@3.5.0#1
+    stb:x64-windows@2024-07-29#1
+  * tbb[core,hwloc]:x64-windows@2023.1.0
+    tinygltf:x64-windows@3.0.0#1
+  * vcpkg-cmake:x64-windows@2024-04-23
+  * vcpkg-cmake-config:x64-windows@2026-07-21
+    vulkan-memory-allocator:x64-windows@3.4.0
+  * zlib:x64-windows@1.3.2#1
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+manifold provides CMake targets:
+
+  find_package(manifold CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE manifold::manifold)
+
+miniaudio is header-only and can be used from CMake via:
+
+  find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
+  target_include_directories(main PRIVATE ${MINIAUDIO_INCLUDE_DIRS})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+rmlui provides CMake targets:
+
+    find_package(RmlUi CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE RmlUi::RmlUi)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+All requested installations completed successfully in: 406 us
+-- Running vcpkg install - done
+-- Found Freetype target Freetype::Freetype - Freetype font engine enabled
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+[0/4] Re-checking globbed directories...
+[1/339] Generating generated/reflection/GeneratedRegistry.hpp, generated/runtime/GeneratedComponents.hpp
+[2/339] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[3/339] Building CXX object CMakeFiles\AzureRenderPickMathTests.dir\tests\PickMathTests.cpp.obj
+[4/339] Building CXX object CMakeFiles\AzureEditorInputRouterTests.dir\src\editor\input\EditorInputRouter.cpp.obj
+[5/339] Building CXX object CMakeFiles\AzureRenderClusteredLightGridTests.dir\tests\ClusteredLightGridTests.cpp.obj
+[6/339] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_shader_types.py --description D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/shared-layout.json --cpp D:/Assigment/2609/FYP/Project/AzureRender/src/render/ShaderSharedTypes.hpp --slang D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/SharedTypes.slang --check"
+[7/339] Building CXX object CMakeFiles\AzureRenderEditorCameraTests.dir\tests\EditorCameraControllerTests.cpp.obj
+[8/339] Building CXX object CMakeFiles\AzureTextureFilteringTests.dir\tests\TextureFilteringTests.cpp.obj
+[9/339] Building CXX object CMakeFiles\AzureEditorInputRouterTests.dir\tests\EditorInputRouterTests.cpp.obj
+[10/339] Building CXX object CMakeFiles\AzureRenderEcsTests.dir\tests\EcsTests.cpp.obj
+[11/339] Building CXX object CMakeFiles\AzureVisibilityPrototypeTests.dir\tests\VisibilityPrototypeTests.cpp.obj
+[12/339] Building CXX object CMakeFiles\AzureRenderEditorCameraTests.dir\src\editor\EditorCameraController.cpp.obj
+[13/339] Building CXX object CMakeFiles\AzureViewBatchingTests.dir\tests\ViewBatchingTests.cpp.obj
+[14/339] Building CXX object CMakeFiles\AzureRenderSceneGraphTests.dir\tests\SceneGraphTests.cpp.obj
+[15/339] Building CXX object CMakeFiles\AzureRenderExtensionRegistryTests.dir\tests\ExtensionRegistryTests.cpp.obj
+[16/339] Building CXX object CMakeFiles\AzureRenderSceneModelTests.dir\tests\SceneModelTests.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[17/339] Building CXX object CMakeFiles\AzureAssetDeformationTests.dir\tests\AssetDeformationTests.cpp.obj
+[18/339] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\scenes\BlackholeSceneRenderer.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[19/339] Building CXX object CMakeFiles\AzureRenderSceneModelTests.dir\src\runtime\SceneDocument.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[20/339] Building CXX object CMakeFiles\AzureBrowRegionTests.dir\tests\BrowRegionTests.cpp.obj
+[21/339] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SystemRegistry.cpp.obj
+[22/339] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\BindingDescriptor.cpp.obj
+[23/339] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\physics\PhysicsShapeFactory.cpp.obj
+[24/339] Building CXX object CMakeFiles\AzureRenderCommandLineTests.dir\src\app\CommandLine.cpp.obj
+[25/339] Building CXX object CMakeFiles\AzureLuaScripting.dir\src\scripting\lua\LuaScriptingModule.cpp.obj
+[26/339] Building CXX object CMakeFiles\AzureRenderSceneModelTests.dir\src\render\RenderSettings.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[27/339] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PhysicsWorld.cpp.obj
+[28/339] Building CXX object CMakeFiles\AzurePrimitiveGeneratorTests.dir\tests\PrimitiveGeneratorTests.cpp.obj
+[29/339] Building CXX object CMakeFiles\AzureVisibilityGpuTests.dir\tests\VisibilityGpuTests.cpp.obj
+[30/339] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\SharedSystems.cpp.obj
+[31/339] Building CXX object CMakeFiles\AzureAnimationPoseTests.dir\tests\AnimationPoseTests.cpp.obj
+[32/339] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\CameraFollowSystem.cpp.obj
+[33/339] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\CharacterMovementSystem.cpp.obj
+[34/339] Building CXX object CMakeFiles\AzureRenderCommandLineTests.dir\tests\CommandLineTests.cpp.obj
+[35/339] Building CXX object CMakeFiles\AzureRenderViewTests.dir\tests\RenderViewTests.cpp.obj
+[36/339] Building CXX object CMakeFiles\AzureProceduralGeometryTests.dir\tests\ProceduralGeometryTests.cpp.obj
+[37/339] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\GameRuntime.cpp.obj
+[38/339] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\LocomotionSystem.cpp.obj
+[39/339] Building CXX object CMakeFiles\AzureEngineSettingsTests.dir\tests\EngineSettingsTests.cpp.obj
+[40/339] Building CXX object CMakeFiles\AzureProjectTests.dir\tests\ProjectTests.cpp.obj
+[41/339] Building CXX object CMakeFiles\AzurePresentationRuntimeTests.dir\tests\PresentationRuntimeTests.cpp.obj
+[42/339] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\ScriptHostSession.cpp.obj
+[43/339] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\render\VisibilityPrototype.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[44/339] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\assets\MaterialData.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[45/339] Building CXX object CMakeFiles\AzureTextureMaterialImportTests.dir\tests\TextureMaterialImportTests.cpp.obj
+[46/339] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PresentationRuntime.cpp.obj
+[47/339] Building CXX object CMakeFiles\AzureRenderFrameTaskSchedulerTests.dir\tests\FrameTaskSchedulerTests.cpp.obj
+[48/339] Building CXX object CMakeFiles\AzureModuleAssemblyTests.dir\tests\ModuleAssemblyTests.cpp.obj
+[49/339] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\ScriptBindingHost.cpp.obj
+[50/339] Linking CXX executable AzureViewBatchingTests.exe
+[51/339] Linking CXX executable AzureVisibilityPrototypeTests.exe
+[52/339] Linking CXX executable AzureRenderSceneModelTests.exe
+[53/339] Linking CXX executable AzureSkinningGpuTests.exe
+[54/339] Linking CXX executable AzureResourceAccessProfileTests.exe
+[55/339] Linking CXX executable AzureRenderViewTests.exe
+[56/339] Linking CXX executable AzureVisibilityGpuTests.exe
+[57/339] Linking CXX executable AzureSurfaceResponseGpuTests.exe
+[58/339] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\tests\NullRhiPassTests.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[59/339] Linking CXX executable AzureShaderModuleTests.exe
+[60/339] Linking CXX executable AzureSkinningBatchTests.exe
+[61/339] Building CXX object CMakeFiles\AzureRuntimeLifecycleTests.dir\tests\RuntimeLifecycleTests.cpp.obj
+[62/339] Linking CXX executable AzureShaderCompositionTests.exe
+[63/339] Linking CXX executable AzureProcessRunnerTests.exe
+[64/339] Linking CXX executable AzureRenderSceneGraphTests.exe
+[65/339] Linking CXX executable AzureTextureFilteringTests.exe
+[66/339] Linking CXX executable AzureProceduralProcessTests.exe
+[67/339] Linking CXX executable AzureProceduralGeometryTests.exe
+[68/339] Linking CXX executable AzureRenderPickMathTests.exe
+[69/339] Linking CXX executable AzureHotReloadTests.exe
+[70/339] Linking CXX executable AzureRenderClusteredLightGridTests.exe
+[71/339] Linking CXX executable AzureBrowRegionTests.exe
+[72/339] Linking CXX executable AzurePrimitiveGeneratorTests.exe
+[73/339] Linking CXX executable AzureGameUiRendererTests.exe
+[74/339] Linking CXX executable AzureAnimationPoseTests.exe
+[75/339] Linking CXX executable AzureRenderFrameTaskSchedulerTests.exe
+[76/339] Linking CXX executable AzureRenderCommandLineTests.exe
+[77/339] Linking CXX executable AzureRenderEditorCameraTests.exe
+[78/339] Building CXX object CMakeFiles\AzureLuaScripting.dir\src\scripting\lua\ScriptRuntime.cpp.obj
+[79/339] Linking CXX executable AzureRenderEcsTests.exe
+[80/339] Linking CXX executable AzureEditorInputRouterTests.exe
+[81/339] Linking CXX executable AzureAssetDeformationTests.exe
+[82/339] Linking CXX executable AzureRenderExtensionRegistryTests.exe
+[83/339] Linking CXX executable AzureTextureMaterialImportTests.exe
+[84/339] Building CXX object CMakeFiles\AzureCharacterRepairTests.dir\tests\CharacterRepairTests.cpp.obj
+[85/339] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ComponentRegistry.cpp.obj
+[86/339] Building CXX object CMakeFiles\AzureReflectionTests.dir\tests\ReflectionTests.cpp.obj
+[87/339] Building CXX object CMakeFiles\AzureRigTextTests.dir\tests\RigTextTests.cpp.obj
+[88/339] Building CXX object CMakeFiles\AzureSceneVisibilityTests.dir\tests\SceneVisibilityTests.cpp.obj
+[89/339] Building CXX object CMakeFiles\AzureMaterialDocumentTests.dir\tests\MaterialDocumentTests.cpp.obj
+[90/339] Building CXX object CMakeFiles\AzureTextureImportContractTests.dir\tests\TextureImportContractTests.cpp.obj
+[91/339] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\assets\TextureImportSettings.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[92/339] Building CXX object CMakeFiles\AzureComponentRegistryTests.dir\tests\ComponentRegistryTests.cpp.obj
+[93/339] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[94/339] Generating verified engine interface snapshots and schemas
+{"status": "passed", "coveredItems": 18, "files": 42}
+[95/339] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\render\RenderSettings.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[96/339] Linking CXX executable AzureTextureImportContractTests.exe
+[97/339] Linking CXX executable AzureMaterialDocumentTests.exe
+[98/339] Building CXX object CMakeFiles\AzureReflection.dir\src\reflection\Registry.cpp.obj
+[99/339] Linking CXX static library AzureReflection.lib
+[100/339] Generating generated/fixtures/GeneratedToolRegistry.hpp
+[101/339] Building CXX object CMakeFiles\AzureGenerationManifestTests.dir\tests\GenerationManifestTests.cpp.obj
+[102/339] Building CXX object CMakeFiles\AzurePhysicsAuthoringTests.dir\tests\PhysicsAuthoringTests.cpp.obj
+[103/339] Linking CXX static library AzureRuntime.lib
+[104/339] Linking CXX static library AzureScriptingHost.lib
+[105/339] Linking CXX static library AzureGameplay.lib
+[106/339] Linking CXX executable AzureReflectionTests.exe
+[107/339] Building CXX object CMakeFiles\AzureExplorationDesignTests.dir\tests\ExplorationDesignTests.cpp.obj
+[108/339] Linking CXX static library AzureLuaScripting.lib
+[109/339] Linking CXX executable AzureEngineSettingsTests.exe
+[110/339] Linking CXX executable AzureGameplayPresentationTests.exe
+[111/339] Linking CXX executable AzureValidationProbe.exe
+[112/339] Linking CXX executable AzureModuleAssemblyTests.exe
+[113/339] Linking CXX executable AzureObservationTests.exe
+[114/339] Linking CXX executable AzureResourceFrameTraceTests.exe
+[115/339] Linking CXX executable AzureRuntimeLifecycleTests.exe
+[116/339] Linking CXX executable AzureGameUiTests.exe
+[117/339] Linking CXX executable AzureRigTextTests.exe
+[118/339] Linking CXX executable AzureCharacterRepairTests.exe
+[119/339] Linking CXX executable AzureComponentRegistryTests.exe
+[120/339] Linking CXX executable AzureSceneVisibilityTests.exe
+[121/339] Linking CXX executable AzureProjectTests.exe
+[122/339] Linking CXX executable AzurePresentationRuntimeTests.exe
+[123/339] Linking CXX executable AzureGenerationManifestTests.exe
+[124/339] Linking CXX executable AzurePhysicsAuthoringTests.exe
+[125/339] Linking CXX executable AzureExplorationDesignTests.exe
+[126/339] Building CXX object CMakeFiles\AzureAssetLevelTests.dir\tests\AssetLevelTests.cpp.obj
+[127/339] Linking CXX executable AzureAssetLevelTests.exe
+[128/339] Building CXX object CMakeFiles\AzureMetadataGenerationTests.dir\tests\MetadataGenerationTests.cpp.obj
+[129/339] Linking CXX executable AzureMetadataGenerationTests.exe
+[130/339] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\assets\GltfLoader.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[131/339] Linking CXX executable AzureRenderNullRhiPassTests.exe
+[132/339] Generating managed/complete.stamp
+Script binding artifacts verified
+  正在确定要还原的项目…
+  所有项目均是最新的，无法还原。
+  AzureEngineBindings -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\managed\coreclr\Azure.Engine.dll
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:15.13
+  正在确定要还原的项目…
+  所有项目均是最新的，无法还原。
+  AzureSamples -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\managed\coreclr\Azure.Samples.dll
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:02.50
+  正在确定要还原的项目…
+  所有项目均是最新的，无法还原。
+  Azure.Engine.Native -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\managed\projects\native\bin\x64\Release\net9.0\win-x64\Azure.Engine.Native.dll
+  Generating native code
+    正在创建库 bin\x64\Release\net9.0\win-x64\native\Azure.Engine.Native.lib 和对象 bin\x64\Release\net9.0\win-x64\native\Azure.Engine.Native.exp
+  Azure.Engine.Native -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\managed\nativeaot\
+[{"backend": "coreclr", "buildSeconds": 16.825478799997654, "bytes": 52573, "distributionBytes": 25225}, {"backend": "coreclr-samples", "buildSeconds": 2.9045545999979367, "bytes": 52573, "distributionBytes": 25225}, {"backend": "nativeaot", "buildSeconds": 5.905445199998212, "bytes": 10276864, "distributionBytes": 1785856}]
+[133/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ui\AppChrome.cpp.obj
+[134/339] Building CXX object CMakeFiles\AzureManagedScripting.dir\src\scripting\dotnet\ManagedScriptingModule.cpp.obj
+[135/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ui\Widgets.cpp.obj
+[136/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\documents\DocumentBatchTransaction.cpp.obj
+[137/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\scripts\ScriptAuthoringRegistry.cpp.obj
+[138/339] Building CXX object CMakeFiles\AzureProjectRuntime.dir\src\app\ProjectRuntimeAssembly.cpp.obj
+[139/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\SelectionService.cpp.obj
+[140/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\properties\ReferencePickerService.cpp.obj
+[141/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\documents\EditorDocumentManager.cpp.obj
+[142/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\GizmoController.cpp.obj
+[143/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\CapturePanel.cpp.obj
+[144/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\properties\PropertyEditorRegistry.cpp.obj
+[145/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\SettingsPanel.cpp.obj
+[146/339] Building CXX object CMakeFiles\AzureManagedScripting.dir\src\scripting\dotnet\ManagedScriptRuntime.cpp.obj
+[147/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditService.cpp.obj
+[148/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\ProposalOperations.cpp.obj
+[149/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\documents\EditorDocumentSession.cpp.obj
+[150/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\BuildPanel.cpp.obj
+[151/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\scripts\ScriptAuthoringOperations.cpp.obj
+[152/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\animation\AnimationPreviewService.cpp.obj
+[153/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\preview\DeveloperServices.cpp.obj
+[154/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\ProposalController.cpp.obj
+[155/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\OutlinerPanel.cpp.obj
+[156/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AnimationPanel.cpp.obj
+[157/339] Linking CXX static library AzureManagedScripting.lib
+[158/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\GameplayDebugPanel.cpp.obj
+[159/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\documents\DiagnosticOperations.cpp.obj
+[160/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorHierarchyEditing.cpp.obj
+[161/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\adapters\ProposalAdapters.cpp.obj
+[162/339] Linking CXX static library AzureProjectRuntime.lib
+[163/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\InspectorPanel.cpp.obj
+[164/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ConsolePanel.cpp.obj
+[165/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorContext.cpp.obj
+[166/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditTransaction.cpp.obj
+[167/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\content\PrefabAuthoringOperations.cpp.obj
+[168/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\content\PrefabAuthoringService.cpp.obj
+[169/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorProjectEditing.cpp.obj
+[170/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AssetBrowserPanel.cpp.obj
+[171/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\material\MaterialEditingService.cpp.obj
+[172/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\PrefabAuthoringPanel.cpp.obj
+[173/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\ViewportOverlayRegistry.cpp.obj
+[174/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\PhysicsAuthoringPanel.cpp.obj
+[175/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\TextureAssetPanel.cpp.obj
+[176/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\content\NodePresetRegistry.cpp.obj
+[177/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\PhysicsOverlays.cpp.obj
+[178/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ContentAssistancePanel.cpp.obj
+[179/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\projects\ProjectCreateJob.cpp.obj
+[180/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ScriptAuthoringPanel.cpp.obj
+[181/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\MaterialAssetPanel.cpp.obj
+[182/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\DocumentTabs.cpp.obj
+[183/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\ViewportOverlays.cpp.obj
+[184/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\ViewportGizmo.cpp.obj
+[185/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ProblemsPanel.cpp.obj
+[186/339] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSettings.cpp.obj
+[187/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorToolbar.cpp.obj
+[188/339] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[189/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\content\AssetCatalog.cpp.obj
+[190/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\EnvironmentPanel.cpp.obj
+[191/339] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderResources.cpp.obj
+[192/339] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[193/339] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[194/339] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDevtools.cpp.obj
+[195/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ProjectBrowserPanel.cpp.obj
+[196/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\content\ContentDirectoryModel.cpp.obj
+[197/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\projects\ProjectOpenService.cpp.obj
+[198/339] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSettings.cpp.obj
+[199/339] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderDevtools.cpp.obj
+[200/339] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSupport.cpp.obj
+[201/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditorOperations.cpp.obj
+[202/339] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderValidation.cpp.obj
+[203/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorSession.cpp.obj
+[204/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspaceUI.cpp.obj
+[205/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[206/339] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderCapture.cpp.obj
+[207/339] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorAutomation.cpp.obj
+[208/339] Building CXX object CMakeFiles\AzureRegisteredComponentHost.dir\tests\RegisterHostExtension.cpp.obj
+[209/339] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[210/339] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[211/339] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderFrame.cpp.obj
+[212/339] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderValidation.cpp.obj
+[213/339] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[214/339] Linking CXX static library AzureEditor.lib
+[215/339] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderResources.cpp.obj
+[216/339] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderCapture.cpp.obj
+[217/339] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSupport.cpp.obj
+[218/339] Building CXX object CMakeFiles\AzureThumbnailTests.dir\tests\ThumbnailTests.cpp.obj
+[219/339] Building CXX object CMakeFiles\AzureUiFoundationTests.dir\tests\UiFoundationTests.cpp.obj
+[220/339] Building CXX object CMakeFiles\AzurePlayableQuestTests.dir\tests\PlayableQuestTests.cpp.obj
+[221/339] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderApp.cpp.obj
+[222/339] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderFrame.cpp.obj
+[223/339] Building CXX object CMakeFiles\AzureEditorWorkspaceTests.dir\tests\EditorWorkspaceTests.cpp.obj
+[224/339] Linking CXX static library AzureRenderHost.lib
+[225/339] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderApp.cpp.obj
+[226/339] Building CXX object CMakeFiles\AzureLocomotionTests.dir\tests\LocomotionTests.cpp.obj
+[227/339] Building CXX object CMakeFiles\AzureSelectionServiceTests.dir\tests\SelectionServiceTests.cpp.obj
+[228/339] Building CXX object CMakeFiles\AzurePhysicsInputTests.dir\tests\PhysicsInputTests.cpp.obj
+[229/339] Linking CXX static library AzurePlayerHost.lib
+[230/339] Building CXX object CMakeFiles\AzureContentDirectoryScaleTests.dir\tests\ContentDirectoryScaleTests.cpp.obj
+[231/339] Building CXX object CMakeFiles\AzureRegisteredComponentHost.dir\src\main.cpp.obj
+[232/339] Building CXX object CMakeFiles\AzureTransformEditingTests.dir\tests\TransformEditingTests.cpp.obj
+[233/339] Building CXX object CMakeFiles\AzurePlayer.dir\src\player\main.cpp.obj
+[234/339] Building CXX object CMakeFiles\AzureDocumentBackupTests.dir\tests\DocumentBackupTests.cpp.obj
+[235/339] Building CXX object CMakeFiles\AzurePanelContextTests.dir\tests\PanelContextTests.cpp.obj
+[236/339] Building CXX object CMakeFiles\AzureSelectionBoundsTests.dir\tests\SelectionBoundsTests.cpp.obj
+[237/339] Building CXX object CMakeFiles\AzureRender.dir\src\main.cpp.obj
+[238/339] Building CXX object CMakeFiles\AzureEditorCameraServiceTests.dir\tests\EditorCameraServiceTests.cpp.obj
+[239/339] Building CXX object CMakeFiles\AzureProposalControllerTests.dir\tests\ProposalControllerTests.cpp.obj
+[240/339] Building CXX object CMakeFiles\AzureEditorObservationTests.dir\tests\EditorObservationTests.cpp.obj
+[241/339] Building CXX object CMakeFiles\AzureEditTransactionTests.dir\tests\EditTransactionTests.cpp.obj
+[242/339] Building CXX object CMakeFiles\AzureSystemCompositionTests.dir\tests\SystemCompositionTests.cpp.obj
+[243/339] Building CXX object CMakeFiles\AzureScriptBackendContractTests.dir\tests\ScriptBackendContractTests.cpp.obj
+[244/339] Building CXX object CMakeFiles\AzureEditorProjectionTests.dir\tests\EditorProjectionTests.cpp.obj
+[245/339] Building CXX object CMakeFiles\AzureAssetOpenTests.dir\tests\AssetOpenTests.cpp.obj
+[246/339] Building CXX object CMakeFiles\AzureManagedModuleTests.dir\tests\ManagedModuleTests.cpp.obj
+[247/339] Building CXX object CMakeFiles\AzureEditorWorkflowTests.dir\tests\EditorWorkflowTests.cpp.obj
+[248/339] Building CXX object CMakeFiles\AzureContentEditingWorkflowTests.dir\tests\ContentEditingWorkflowTests.cpp.obj
+[249/339] Building CXX object CMakeFiles\AzureScriptInteropTests.dir\tests\ScriptInteropTests.cpp.obj
+[250/339] Building CXX object CMakeFiles\AzureInteractionTests.dir\tests\InteractionTests.cpp.obj
+[251/339] Building CXX object CMakeFiles\AzureDocumentActionGuardTests.dir\tests\DocumentActionGuardTests.cpp.obj
+[252/339] Building CXX object CMakeFiles\AzureGizmoControllerTests.dir\tests\GizmoControllerTests.cpp.obj
+[253/339] Building CXX object CMakeFiles\AzureEditServiceTests.dir\tests\EditServiceTests.cpp.obj
+[254/339] Building CXX object CMakeFiles\AzureScriptEntityTests.dir\tests\ScriptEntityTests.cpp.obj
+[255/339] Building CXX object CMakeFiles\AzureScriptRuntimeTests.dir\tests\ScriptRuntimeTests.cpp.obj
+[256/339] Building CXX object CMakeFiles\AzureEditorTaskServiceTests.dir\tests\EditorTaskServiceTests.cpp.obj
+[257/339] Building CXX object CMakeFiles\AzureManagedScriptRuntimeTests.dir\tests\ManagedScriptRuntimeTests.cpp.obj
+[258/339] Building CXX object CMakeFiles\AzureProposalAdapterTests.dir\tests\ProposalAdapterTests.cpp.obj
+[259/339] Building CXX object CMakeFiles\AzurePropertyEditingTests.dir\tests\PropertyEditingTests.cpp.obj
+[260/339] Linking CXX executable AzurePlayer.exe
+[261/339] Linking CXX executable AzurePlayableQuestTests.exe
+[262/339] Linking CXX executable AzureContentDirectoryScaleTests.exe
+[263/339] Building CXX object CMakeFiles\AzureRegisteredComponentWorkflowTests.dir\tests\RegisteredComponentWorkflowTests.cpp.obj
+[264/339] Building CXX object CMakeFiles\AzureEditorDocumentManagerTests.dir\tests\EditorDocumentManagerTests.cpp.obj
+[265/339] Building CXX object CMakeFiles\AzureRenderEditorSessionTests.dir\tests\EditorSessionTests.cpp.obj
+[266/339] Linking CXX executable AzureUiFoundationTests.exe
+[267/339] Building CXX object CMakeFiles\AzureReferencePickerTests.dir\tests\ReferencePickerTests.cpp.obj
+[268/339] Linking CXX executable AzurePhysicsInputTests.exe
+[269/339] Linking CXX executable AzureThumbnailTests.exe
+[270/339] Linking CXX executable AzureLocomotionTests.exe
+[271/339] Building CXX object CMakeFiles\AzurePlatformerFlowTests.dir\tests\PlatformerFlowTests.cpp.obj
+[272/339] Linking CXX executable AzureDocumentBackupTests.exe
+[273/339] Building CXX object CMakeFiles\AzureThirdPersonTests.dir\tests\ThirdPersonTests.cpp.obj
+[274/339] Building CXX object CMakeFiles\AzurePlatformerPhysicsTests.dir\tests\PlatformerPhysicsTests.cpp.obj
+[275/339] Building CXX object CMakeFiles\AzureEditorContentWorkflowTests.dir\tests\EditorContentWorkflowTests.cpp.obj
+[276/339] Linking CXX executable AzureSelectionServiceTests.exe
+[277/339] Building CXX object CMakeFiles\AzureEditorAssetWorkflowTests.dir\tests\EditorAssetWorkflowTests.cpp.obj
+[278/339] Building CXX object CMakeFiles\AzureEditorProjectFlowTests.dir\tests\EditorProjectFlowTests.cpp.obj
+[279/339] Linking CXX executable AzureEditorWorkspaceTests.exe
+[280/339] Linking CXX executable AzureRegisteredComponentHost.exe
+[281/339] Building CXX object CMakeFiles\AzureContentNavigationTests.dir\tests\ContentNavigationTests.cpp.obj
+[282/339] Linking CXX executable AzurePanelContextTests.exe
+[283/339] Linking CXX executable AzureScriptBackendContractTests.exe
+[284/339] Linking CXX executable AzureRender.exe
+[285/339] Linking CXX executable AzureSelectionBoundsTests.exe
+[286/339] Linking CXX executable AzureScriptInteropTests.exe
+[287/339] Linking CXX executable AzureScriptRuntimeTests.exe
+[288/339] Linking CXX executable AzureThirdPersonTests.exe
+[289/339] Linking CXX executable AzureProposalControllerTests.exe
+[290/339] Linking CXX executable AzureSystemCompositionTests.exe
+[291/339] Building CXX object CMakeFiles\AzureContentOperationTests.dir\tests\ContentOperationTests.cpp.obj
+[292/339] Linking CXX executable AzureEditServiceTests.exe
+[293/339] Linking CXX executable AzureEditorProjectionTests.exe
+[294/339] Linking CXX executable AzureInteractionTests.exe
+[295/339] Linking CXX executable AzureProposalAdapterTests.exe
+[296/339] Linking CXX executable AzureEditorObservationTests.exe
+[297/339] Building CXX object CMakeFiles\AzureViewportOverlayTests.dir\tests\ViewportOverlayTests.cpp.obj
+[298/339] Linking CXX executable AzureManagedModuleTests.exe
+[299/339] Linking CXX executable AzureTransformEditingTests.exe
+[300/339] Linking CXX executable AzureScriptEntityTests.exe
+[301/339] Linking CXX executable AzureManagedScriptRuntimeTests.exe
+[302/339] Linking CXX executable AzureEditTransactionTests.exe
+[303/339] Linking CXX executable AzureContentEditingWorkflowTests.exe
+[304/339] Linking CXX executable AzureRegisteredComponentWorkflowTests.exe
+[305/339] Linking CXX executable AzurePlatformerFlowTests.exe
+[306/339] Linking CXX executable AzureEditorCameraServiceTests.exe
+[307/339] Linking CXX executable AzureEditorWorkflowTests.exe
+[308/339] Linking CXX executable AzureAssetOpenTests.exe
+[309/339] Building CXX object CMakeFiles\AzureAnimationAuthoringTests.dir\tests\AnimationAuthoringTests.cpp.obj
+[310/339] Linking CXX executable AzureDocumentActionGuardTests.exe
+[311/339] Linking CXX executable AzureEditorDocumentManagerTests.exe
+[312/339] Linking CXX executable AzureContentOperationTests.exe
+[313/339] Linking CXX executable AzureViewportOverlayTests.exe
+[314/339] Linking CXX executable AzurePlatformerPhysicsTests.exe
+[315/339] Building CXX object CMakeFiles\AzureMaterialSlotEditingTests.dir\tests\MaterialSlotEditingTests.cpp.obj
+[316/339] Linking CXX executable AzureGizmoControllerTests.exe
+[317/339] Building CXX object CMakeFiles\AzureManagedAuthoringTests.dir\tests\ManagedAuthoringTests.cpp.obj
+[318/339] Linking CXX executable AzureEditorAssetWorkflowTests.exe
+[319/339] Linking CXX executable AzureEditorContentWorkflowTests.exe
+[320/339] Linking CXX executable AzureEditorTaskServiceTests.exe
+[321/339] Linking CXX executable AzureReferencePickerTests.exe
+[322/339] Linking CXX executable AzureRenderEditorSessionTests.exe
+[323/339] Building CXX object CMakeFiles\AzurePreviewSimulationTests.dir\tests\PreviewSimulationTests.cpp.obj
+[324/339] Linking CXX executable AzureEditorProjectFlowTests.exe
+[325/339] Linking CXX executable AzurePropertyEditingTests.exe
+[326/339] Linking CXX executable AzureContentNavigationTests.exe
+[327/339] Building CXX object CMakeFiles\AzureAuthoringWorkflowTests.dir\tests\AuthoringWorkflowTests.cpp.obj
+[328/339] Linking CXX executable AzureAnimationAuthoringTests.exe
+[329/339] Building CXX object CMakeFiles\AzureDomainAuthoringTests.dir\tests\DomainAuthoringTests.cpp.obj
+[330/339] Linking CXX executable AzureMaterialSlotEditingTests.exe
+[331/339] Linking CXX executable AzureManagedAuthoringTests.exe
+[332/339] Linking CXX executable AzurePreviewSimulationTests.exe
+[333/339] Building CXX object CMakeFiles\AzurePrefabAuthoringTests.dir\tests\PrefabAuthoringTests.cpp.obj
+[334/339] Linking CXX executable AzureAuthoringWorkflowTests.exe
+[335/339] Linking CXX executable AzureDomainAuthoringTests.exe
+[336/339] Linking CXX executable AzurePrefabAuthoringTests.exe
+{"status": "passed", "manifest": "build\\ninja-msvc-release\\build-provenance.json"}

@@ -1,0 +1,17 @@
+{
+  "phaseComplete": false,
+  "physicalInput": false,
+  "files": {
+    "hidden.png": "58798636d830c92fbdfeae1dea1768832a6bba25f47f1a4cf1cc2081099fd12c",
+    "player-frame_000019.png": "d3bc52e33c778ddabf8f4861f2e732672692f74b0dfd3c2b301c9ac5e25c24ff",
+    "player-stderr.log": "d5e3fc108b2f2dacbab8676fc27f885a6744f7fdb391b2cc62d80c0c01293d6f",
+    "player-stdout.log": "db71982b147c2ad88070a82432a208b80af6d6203307b8702c31dbd98aaa5f7e",
+    "scene-geometry-build.log": "c9a04b03675b7e90af2613ef63e866ba8eea920cc921a8ea9b9044fa136b85d3",
+    "scene-geometry-green.log": "16bb68a733252320081d12a653c1b484c833ee4bd22c419c757a82ee61a746df",
+    "scene-geometry-red.log": "a6289196e060edfecbdbe3a9bbcd740211fcae0e50633a268e1455094404a2db",
+    "shown.png": "baf0947e58c73eb6db4e1666edb3fb7fb7f6419c1c6d1b393d35cdecca6ff5dd",
+    "stderr.log": "32ca9ce90dafb5a7bf3b2a49fe1e507c6a242695e2367e22c11bd02253adeb23",
+    "stdout.log": "9a0d4a6e8887b0e7b858d5a5f54a4520c28842d1a5ecb0fc7bad37a923fc450a",
+    "summary.json": "f7e697ec1673c14231899da2b2b029e6effaad5897340951a79c8853d23c980f"
+  }
+}

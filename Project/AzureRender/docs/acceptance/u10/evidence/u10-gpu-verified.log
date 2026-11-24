@@ -1,0 +1,21 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 144: AzureEditor.ContentGpu
+1/6 Test #144: AzureEditor.ContentGpu ...............   Passed   46.13 sec
+    Start 147: AzureEditor.DocumentGuardGpu
+2/6 Test #147: AzureEditor.DocumentGuardGpu .........   Passed   26.44 sec
+    Start 177: AzureEditor.ProductizationGpu
+3/6 Test #177: AzureEditor.ProductizationGpu ........   Passed   57.21 sec
+    Start 180: AzureEditor.PropertiesGpu
+4/6 Test #180: AzureEditor.PropertiesGpu ............   Passed   26.69 sec
+    Start 185: AzureEditor.ContentTransactionsGpu
+5/6 Test #185: AzureEditor.ContentTransactionsGpu ...   Passed   74.98 sec
+    Start 189: AzureEditor.ContentNavigationGpu
+6/6 Test #189: AzureEditor.ContentNavigationGpu .....   Passed   70.77 sec
+
+100% tests passed, 0 tests failed out of 6
+
+Label Time Summary:
+gpu    = 302.22 sec*proc (6 tests)
+
+Total Test time (real) = 302.24 sec

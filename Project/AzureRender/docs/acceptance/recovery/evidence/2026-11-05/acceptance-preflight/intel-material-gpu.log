@@ -1,0 +1,41 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 404: AzureRender.ScreenSurfaceNormalGpu
+1/3 Test #404: AzureRender.ScreenSurfaceNormalGpu .........   Passed   99.21 sec
+    Start 405: AzureRender.NprViewMaskGpu
+2/3 Test #405: AzureRender.NprViewMaskGpu .................***Failed  129.42 sec
+generic-0
+generic-0.5
+generic-1
+fabric-0
+fabric-0.5
+fabric-1
+low
+front
+saturated
+shadow-only
+shadow-default
+fixed
+document
+blend
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_npr_view_mask_gpu.py", line 142, in <module>
+    run(args.executable, Path(temporary) / "capture", args.case, args.expected_validation, args.quality)
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_npr_view_mask_gpu.py", line 103, in run
+    assert "Character texture access: " + ("fixed" if name == "fixed" else "indexed") in text, name
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: blend
+
+    Start 406: AzureRender.ScreenSurfaceNormalShadowGpu
+3/3 Test #406: AzureRender.ScreenSurfaceNormalShadowGpu ...   Passed   45.00 sec
+
+67% tests passed, 1 tests failed out of 3
+
+Label Time Summary:
+gpu    = 273.63 sec*proc (3 tests)
+
+Total Test time (real) = 273.66 sec
+
+The following tests FAILED:
+	405 - AzureRender.NprViewMaskGpu (Failed)               gpu
+Errors while running CTest

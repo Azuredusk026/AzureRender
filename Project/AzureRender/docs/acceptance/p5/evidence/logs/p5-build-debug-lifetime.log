@@ -1,0 +1,55 @@
+[0/2] Re-checking globbed directories...
+[1/48] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/48] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_shader_types.py --description D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/shared-layout.json --cpp D:/Assigment/2609/FYP/Project/AzureRender/src/render/ShaderSharedTypes.hpp --slang D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/SharedTypes.slang --check"
+[3/48] Generating verified engine interface snapshots and schemas
+{"status": "passed", "coveredItems": 18, "files": 42}
+[4/48] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspaceUI.cpp.obj
+[5/48] Linking CXX static library AzureEditor.lib
+[6/48] Linking CXX executable AzureContentDirectoryScaleTests.exe
+FAILED: [code=4294967295] AzureContentDirectoryScaleTests.exe 
+cmd.exe /C "cd . && "C:\Program Files\CMake\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\AzureContentDirectoryScaleTests.dir --rc=rc --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100261~1.0\x64\mt.exe --manifests  -- "D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\link.exe" /nologo CMakeFiles\AzureContentDirectoryScaleTests.dir\tests\ContentDirectoryScaleTests.cpp.obj  /out:AzureContentDirectoryScaleTests.exe /implib:AzureContentDirectoryScaleTests.lib /pdb:AzureContentDirectoryScaleTests.pdb /version:0.0 /subsystem:console  AzureEditor.lib  AzurePlatform.lib  shell32.lib  AzureProjectRuntime.lib  AzureGameplay.lib  AzureLuaScripting.lib  vcpkg_installed\x64-windows\debug\lib\lua.lib  AzureManagedScripting.lib  AzureScriptingHost.lib  AzureRuntime.lib  AzureRenderCore.lib  vcpkg_installed\x64-windows\debug\lib\OpenEXR-3_4_d.lib  vcpkg_installed\x64-windows\debug\lib\IlmThread-3_4_d.lib  vcpkg_installed\x64-windows\debug\lib\Iex-3_4_d.lib  vcpkg_installed\x64-windows\debug\lib\OpenEXRCore-3_4_d.lib  vcpkg_installed\x64-windows\debug\lib\Imath-3_2_d.lib  AzureReflection.lib  vcpkg_installed\x64-windows\debug\lib\Jolt.lib  vcpkg_installed\x64-windows\debug\lib\rmlui_debugger.lib  vcpkg_installed\x64-windows\debug\lib\rmlui.lib  winmm.lib  ole32.lib  uuid.lib  AzureAI.lib  AzureFoundation.lib  azure_imgui.lib  C:\VulkanSDK\1.4.350.0\Lib\vulkan-1.lib  vcpkg_installed\x64-windows\debug\lib\glfw3dll.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\Tools\vcpkg\vcpkg.exe z-applocal --target-binary=D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureContentDirectoryScaleTests.exe --installed-bin-dir=D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/vcpkg_installed/x64-windows/debug/bin""
+LINK: command "D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\link.exe /nologo CMakeFiles\AzureContentDirectoryScaleTests.dir\tests\ContentDirectoryScaleTests.cpp.obj /out:AzureContentDirectoryScaleTests.exe /implib:AzureContentDirectoryScaleTests.lib /pdb:AzureContentDirectoryScaleTests.pdb /version:0.0 /subsystem:console AzureEditor.lib AzurePlatform.lib shell32.lib AzureProjectRuntime.lib AzureGameplay.lib AzureLuaScripting.lib vcpkg_installed\x64-windows\debug\lib\lua.lib AzureManagedScripting.lib AzureScriptingHost.lib AzureRuntime.lib AzureRenderCore.lib vcpkg_installed\x64-windows\debug\lib\OpenEXR-3_4_d.lib vcpkg_installed\x64-windows\debug\lib\IlmThread-3_4_d.lib vcpkg_installed\x64-windows\debug\lib\Iex-3_4_d.lib vcpkg_installed\x64-windows\debug\lib\OpenEXRCore-3_4_d.lib vcpkg_installed\x64-windows\debug\lib\Imath-3_2_d.lib AzureReflection.lib vcpkg_installed\x64-windows\debug\lib\Jolt.lib vcpkg_installed\x64-windows\debug\lib\rmlui_debugger.lib vcpkg_installed\x64-windows\debug\lib\rmlui.lib winmm.lib ole32.lib uuid.lib AzureAI.lib AzureFoundation.lib azure_imgui.lib C:\VulkanSDK\1.4.350.0\Lib\vulkan-1.lib vcpkg_installed\x64-windows\debug\lib\glfw3dll.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:AzureContentDirectoryScaleTests.exe.manifest" failed (exit code 1104) with the following output:
+LINK : fatal error LNK1104: 无法打开文件“AzureContentDirectoryScaleTests.exe�?
+[7/48] Linking CXX executable AzureTransformEditingTests.exe
+[8/48] Linking CXX executable AzureUiFoundationTests.exe
+[9/48] Linking CXX executable AzureThumbnailTests.exe
+[10/48] Linking CXX executable AzureSelectionBoundsTests.exe
+[11/48] Linking CXX executable AzureEditorCameraServiceTests.exe
+[12/48] Linking CXX executable AzureEditorWorkspaceTests.exe
+[13/48] Linking CXX executable AzureAssetOpenTests.exe
+[14/48] Linking CXX executable AzureDocumentBackupTests.exe
+[15/48] Linking CXX executable AzureDocumentActionGuardTests.exe
+[16/48] Linking CXX executable AzureContentOperationTests.exe
+[17/48] Linking CXX executable AzureProposalControllerTests.exe
+[18/48] Linking CXX executable AzureContentEditingWorkflowTests.exe
+[19/48] Linking CXX executable AzureEditorProjectionTests.exe
+[20/48] Linking CXX executable AzurePanelContextTests.exe
+[21/48] Linking CXX executable AzureProposalAdapterTests.exe
+[22/48] Linking CXX executable AzureEditorWorkflowTests.exe
+[23/48] Linking CXX executable AzureSelectionServiceTests.exe
+[24/48] Linking CXX executable AzureEditTransactionTests.exe
+[25/48] Linking CXX executable AzureEditorObservationTests.exe
+[26/48] Linking CXX executable AzureEditorAssetWorkflowTests.exe
+[27/48] Linking CXX executable AzureEditServiceTests.exe
+[28/48] Linking CXX executable AzureEditorDocumentManagerTests.exe
+[29/48] Linking CXX executable AzureEditorTaskServiceTests.exe
+[30/48] Linking CXX executable AzureEditorProjectFlowTests.exe
+[31/48] Linking CXX executable AzureGizmoControllerTests.exe
+[32/48] Linking CXX executable AzureReferencePickerTests.exe
+[33/48] Linking CXX executable AzureContentNavigationTests.exe
+[34/48] Linking CXX executable AzurePropertyEditingTests.exe
+[35/48] Linking CXX executable AzureRegisteredComponentWorkflowTests.exe
+[36/48] Linking CXX executable AzureEditorContentWorkflowTests.exe
+[37/48] Linking CXX executable AzureRenderEditorSessionTests.exe
+[38/48] Linking CXX executable AzureRegisteredComponentHost.exe
+[39/48] Linking CXX executable AzureRender.exe
+ninja: build stopped: subcommand failed.
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\build_provenance.py", line 86, in <module>
+    main()
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\build_provenance.py", line 74, in main
+    subprocess.run(["cmake", "--build", str(args.build_dir), "--config", args.config], check=True)
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['cmake', '--build', 'build\\ninja-msvc-debug', '--config', 'Debug']' returned non-zero exit status 4294967295.

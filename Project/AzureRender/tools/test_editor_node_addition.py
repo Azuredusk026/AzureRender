@@ -1,0 +1,59 @@
+"""Exercise empty-scene Add and disabled actions through production ImGui."""
+import argparse,json,shutil,uuid
+from pathlib import Path
+from test_editor_workspace import launch
+
+def run(executable,output,source):
+    root=output/('run-'+uuid.uuid4().hex[:8]);root.mkdir(parents=True)
+    results=[]
+    for workflow in ('exploration','scene_inspector'):
+        for dpi in (1,1.5):
+            case=root/(workflow+'-'+str(dpi));case.mkdir()
+            shutil.copytree(source/workflow,case/'game',ignore=shutil.ignore_patterns('.azure'))
+            config=json.loads((case/'game/project.azureproject').read_text(encoding='utf-8'))
+            path=case/'game/assets'/config['startupScene'].split(':/',1)[1]
+            level=json.loads(path.read_text(encoding='utf-8'));level['nodes']=[];level['prefabs']=[];level['lights']=[]
+            empty=json.dumps(level,indent=2)+'\n';path.write_text(empty,encoding='utf-8')
+            disabled=launch(executable,case,'disabled',(1280,720),dpi,[
+                dict(frame=25,action='click',target='viewport.image',button='right'),
+                dict(frame=30,action='click',target='viewport.delete'),
+                dict(frame=35,action='click',target='viewport.duplicate'),
+                dict(frame=40,action='key',key='Escape',down=True),
+                dict(frame=41,action='key',key='Escape',down=False)],capture=False)
+            assert disabled['nodeCount']==0 and disabled['undoCount']==0
+            assert disabled['feedback']==[]
+            actions=[dict(frame=23,action='click',target='outliner.create'),dict(frame=28,action='click',target='preset.empty'),
+                dict(frame=34,action='click',target='outliner.create'),dict(frame=39,action='click',target='preset.empty'),dict(frame=44,action='click',target='save')]
+            roots=launch(executable,case,'add-two-roots',(1280,720),dpi,actions,capture=False)
+            saved=json.loads(path.read_text(encoding='utf-8'))['nodes']
+            assert roots['nodeCount']==2 and len(saved)==2
+            assert all(not node.get('parentId') for node in saved), 'Creating a root must ignore the active selection'
+            path.write_text(empty,encoding='utf-8')
+            actions[2]=dict(actions[2],target='outliner.create-child')
+            created=launch(executable,case,'add-root-child',(1280,720),dpi,actions,capture=False)
+            assert created['nodeCount']==2 and created['undoCount']==2 and len(created['selection'])==1
+            saved=json.loads(path.read_text(encoding='utf-8'))['nodes']
+            child=next(n for n in saved if n['id']==created['selection'][0])
+            assert child['parentId'] and any(n['id']==child['parentId'] for n in saved),saved
+            path.write_text(empty,encoding='utf-8')
+            undo=launch(executable,case,'undo-redo',(1280,720),dpi,actions[:-1]+[
+                dict(frame=44,action='key',key='Z',ctrl=True,down=True),dict(frame=45,action='key',key='Z',ctrl=True,down=False),
+                dict(frame=48,action='key',key='Z',ctrl=True,down=True),dict(frame=49,action='key',key='Z',ctrl=True,down=False),
+                dict(frame=52,action='key',key='Y',ctrl=True,down=True),dict(frame=53,action='key',key='Y',ctrl=True,down=False),
+                dict(frame=56,action='key',key='Y',ctrl=True,down=True),dict(frame=57,action='key',key='Y',ctrl=True,down=False),
+                dict(frame=59,action='key',key='Y',ctrl=False,down=False),dict(frame=62,action='click',target='save')],capture=False)
+            assert undo['nodeCount']==2 and undo['undoCount']==2
+            history={row['frame']:row for row in undo['history']}
+            assert [history[frame]['nodeCount'] for frame in (46,50,54,58)]==[1,0,1,2]
+            assert len(json.loads(path.read_text(encoding='utf-8'))['nodes'])==2
+            assert undo['feedback']==[]
+            results.append(dict(workflow=workflow,dpi=dpi,window=[1280,720],passed=True,
+                rootIgnoresSelection=True,rootAndChild=True,disabledActions=True,twoUndoRedo=True))
+    (root/'summary.json').write_text(json.dumps(dict(passed=True,input='production ImGui replay',
+        physicalInput=False,cases=results),indent=2)+'\n',encoding='utf-8')
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser(__doc__);p.add_argument('--executable',type=Path,required=True)
+    p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--assets',type=Path,default=Path(__file__).resolve().parents[1]/'assets_public')
+    a=p.parse_args();run(a.executable.resolve(),a.output.resolve(),a.assets.resolve())

@@ -1,0 +1,5094 @@
+{
+  "schemaVersion": 1,
+  "status": "shadow-cost-material-scope-attributed",
+  "sourceBase": "ca47eed",
+  "eligibility": {
+    "captureSha256": "5cbfc0ecf9fa24a7a8d8949ed54c3fc3691b7a1a58075d68f63f257b34ca6942",
+    "width": 1280,
+    "height": 720,
+    "scope": "captured-pipeline-specialization-qualified-ablation-subtotals",
+    "groups": [
+      {
+        "events": [
+          20837,
+          20846,
+          20847,
+          20855,
+          20856,
+          20864,
+          20871,
+          20878,
+          20898,
+          20905,
+          20925,
+          20934,
+          20950,
+          20951,
+          20959,
+          20960,
+          20961,
+          20962,
+          20963,
+          20964,
+          20965,
+          20973,
+          20974,
+          20982,
+          20983,
+          20984,
+          20985,
+          20986,
+          20987,
+          20988,
+          20996,
+          20997,
+          21005,
+          21006,
+          21007,
+          21008,
+          21009,
+          21010,
+          21011,
+          21044,
+          21045,
+          21046,
+          21054,
+          21061,
+          21068,
+          21075,
+          21082,
+          21100,
+          21122,
+          21154,
+          21161,
+          21168,
+          21175,
+          21182,
+          21189,
+          21196,
+          21203,
+          21221,
+          21228,
+          21244,
+          21251,
+          21258,
+          21259,
+          21267,
+          21283,
+          21290,
+          21297,
+          21304,
+          21311,
+          21329,
+          21336,
+          21352,
+          21359,
+          21366,
+          21382,
+          21389,
+          21390,
+          21391,
+          21392,
+          21393,
+          21401,
+          21402,
+          21403,
+          21411,
+          21412,
+          21413,
+          21414,
+          21415,
+          21423,
+          21424,
+          21425,
+          21426,
+          21427,
+          21435,
+          21442,
+          21443,
+          21444,
+          21445,
+          21446,
+          21447,
+          21448,
+          21456,
+          21463,
+          21464,
+          21465,
+          21473,
+          21480,
+          21481,
+          21482,
+          21490,
+          21491,
+          21492,
+          21493,
+          21501,
+          21517,
+          21518,
+          21519,
+          21527,
+          21528,
+          21529,
+          21530,
+          21538,
+          21539,
+          21540,
+          21541,
+          21542,
+          21550,
+          21551,
+          21552,
+          21553,
+          21561,
+          21568,
+          21575,
+          21576,
+          21577,
+          21578,
+          21579,
+          21587,
+          21594,
+          21595,
+          21596,
+          21604,
+          21605,
+          21606,
+          21614,
+          21621,
+          21622,
+          21623,
+          21624,
+          21625,
+          21633,
+          21640,
+          21641,
+          21642,
+          21650,
+          21651,
+          21652,
+          21660,
+          21667,
+          21674,
+          21697,
+          21704,
+          21720,
+          21727,
+          21734,
+          21741,
+          21748,
+          21749,
+          21757,
+          21773,
+          21774,
+          21782,
+          21783,
+          21791,
+          21792,
+          21793,
+          21801,
+          21802,
+          21803,
+          21811,
+          21812,
+          21813,
+          21821,
+          21822,
+          21830,
+          21837,
+          21844,
+          21851,
+          21858,
+          21874,
+          21881,
+          21888,
+          21895,
+          21902,
+          21909,
+          21916,
+          21923,
+          21930,
+          21937,
+          21944,
+          21951,
+          21958,
+          21965,
+          21972,
+          21979,
+          21986,
+          21993,
+          22000,
+          22007,
+          22014,
+          22021,
+          22028,
+          22035,
+          22042,
+          22049,
+          22056,
+          22063,
+          22070,
+          22086,
+          22093,
+          22100,
+          22107,
+          22114,
+          22121,
+          22128,
+          22135,
+          22142,
+          22158,
+          22165,
+          22172,
+          22179,
+          22186,
+          22193,
+          22200,
+          22201,
+          22202,
+          22203,
+          22204,
+          22205,
+          22213,
+          22214,
+          22215,
+          22216,
+          22217,
+          22218,
+          22226,
+          22227,
+          22228,
+          22229,
+          22237,
+          22238,
+          22239,
+          22247,
+          22254,
+          22261,
+          22268,
+          22269,
+          22277,
+          22278,
+          22286,
+          22293,
+          22325,
+          22326,
+          22327,
+          22328,
+          22329,
+          22337,
+          22344,
+          22351,
+          22352,
+          22360,
+          22361,
+          22369,
+          22376,
+          22383,
+          22390,
+          22426,
+          22427,
+          22428,
+          22429,
+          22430,
+          22431,
+          22439,
+          22440,
+          22448,
+          22466,
+          22467,
+          22475,
+          22482,
+          22489,
+          22507,
+          22530,
+          22531,
+          22532,
+          22533,
+          22541,
+          22542,
+          22543,
+          22551,
+          22558,
+          22565,
+          22572,
+          22579,
+          22586,
+          22593,
+          22600,
+          22607,
+          22614,
+          22615,
+          22616,
+          22617,
+          22618,
+          22619,
+          22627,
+          22634,
+          22635,
+          22636,
+          22637,
+          22638,
+          22646,
+          22647,
+          22648,
+          22649,
+          22650,
+          22651,
+          22659,
+          22666,
+          22667,
+          22668,
+          22669,
+          22670,
+          22678,
+          22679,
+          22680,
+          22681,
+          22682,
+          22683,
+          22691,
+          22698,
+          22699,
+          22700,
+          22701,
+          22702,
+          22744,
+          22745,
+          22746,
+          22747,
+          22755,
+          22756,
+          22764,
+          22765,
+          22766,
+          22767,
+          22768,
+          22769,
+          22770,
+          22771,
+          22772,
+          22773,
+          22774,
+          22775,
+          22776,
+          22777,
+          22785,
+          22786,
+          22787,
+          22788,
+          22789,
+          22790,
+          22791,
+          22792,
+          22793,
+          22794,
+          22795,
+          22796,
+          22797,
+          22805,
+          22806,
+          22807,
+          22808,
+          22809,
+          22810,
+          22811,
+          22812,
+          22820,
+          22821,
+          22822,
+          22823,
+          22831,
+          22832,
+          22833,
+          22834,
+          22835,
+          22836,
+          22837,
+          22838,
+          22839,
+          22840,
+          22841,
+          22842,
+          22850,
+          22851,
+          22852,
+          22853,
+          22854,
+          22855,
+          22856,
+          22857,
+          22858,
+          22859,
+          22860,
+          22861,
+          22869,
+          22876,
+          22883,
+          22890,
+          22897,
+          22898,
+          22899,
+          22900,
+          22908,
+          22915,
+          22922,
+          22929,
+          22936,
+          22943,
+          22950,
+          22957,
+          22964,
+          22971,
+          22978,
+          22985,
+          22992,
+          23065,
+          23072,
+          23146,
+          23154,
+          23159,
+          23164,
+          23169,
+          23174,
+          23179,
+          23198,
+          23203,
+          23208,
+          23213,
+          23218,
+          23223,
+          23228,
+          23233,
+          23238,
+          23243,
+          23248,
+          23253,
+          23258,
+          23263,
+          23268,
+          23292,
+          23297,
+          23302,
+          23307,
+          23312,
+          23317,
+          23322,
+          23327,
+          23332,
+          23351,
+          23356,
+          23361,
+          23366,
+          23371,
+          23385,
+          23390,
+          23395,
+          23400,
+          23405,
+          23410,
+          23415,
+          23420,
+          23425,
+          23430,
+          23449,
+          23454,
+          23459,
+          23464,
+          23478,
+          23483,
+          23488,
+          23495,
+          23500,
+          23505,
+          23510,
+          23517,
+          23522,
+          23527,
+          23532,
+          23537,
+          23542,
+          23547,
+          23552,
+          23566,
+          23571,
+          23576,
+          23581,
+          23586,
+          23591,
+          23596,
+          23601
+        ],
+        "baselineMs": 5.058095999999993,
+        "candidateMs": 3.5841600000000153,
+        "category": "main-ordinary-early",
+        "savedMs": 1.4739359999999775
+      },
+      {
+        "events": [
+          20886,
+          20887,
+          20942,
+          21020,
+          21021,
+          21029,
+          21030,
+          21031,
+          21032,
+          21033,
+          21034,
+          21035,
+          21090,
+          21091,
+          21130,
+          21146,
+          21213,
+          21236,
+          21275,
+          21319,
+          21320,
+          21344,
+          21374,
+          21509,
+          21682,
+          21689,
+          21712,
+          21765,
+          21866,
+          22078,
+          22150,
+          22301,
+          22308,
+          22315,
+          22316,
+          22398,
+          22399,
+          22407,
+          22408,
+          22409,
+          22410,
+          22418,
+          22711,
+          22712,
+          22713,
+          22714,
+          22715,
+          22716,
+          22724,
+          22731,
+          22732,
+          22733,
+          22734,
+          22735,
+          23091,
+          23101,
+          23128,
+          23134,
+          23614,
+          23618,
+          23622,
+          23626,
+          23668,
+          23675,
+          23700,
+          23721,
+          23728,
+          23735,
+          23742,
+          23749,
+          23756,
+          23897,
+          24760,
+          24767,
+          24774,
+          24781,
+          24788,
+          24798,
+          24805,
+          24812,
+          24819,
+          24826,
+          24833,
+          24840,
+          24847,
+          24854,
+          24861,
+          24868,
+          24875,
+          24882,
+          24889,
+          24897,
+          24905,
+          24912,
+          24920,
+          24927,
+          24934,
+          24942,
+          24950,
+          24957,
+          24965,
+          24973,
+          24981,
+          24988,
+          25000,
+          25006,
+          25012,
+          25018,
+          25024
+        ],
+        "baselineMs": 2.948208000000004,
+        "candidateMs": 1.8940319999999993,
+        "category": "main-class-other",
+        "savedMs": 1.0541760000000049
+      },
+      {
+        "events": [
+          14691,
+          14698,
+          14703,
+          14708,
+          14713,
+          14718,
+          14732,
+          14737,
+          14749,
+          14756,
+          14768,
+          14773,
+          14778,
+          14783,
+          14788,
+          14793,
+          14810,
+          14815,
+          14820,
+          14825,
+          14830,
+          14835,
+          14847,
+          14859,
+          14883,
+          14888,
+          14893,
+          14898,
+          14903,
+          14908,
+          14913,
+          14918,
+          14932,
+          14937,
+          14949,
+          14954,
+          14959,
+          14964,
+          14976,
+          14981,
+          14986,
+          14991,
+          14996,
+          15008,
+          15013,
+          15025,
+          15030,
+          15035,
+          15047,
+          15052,
+          15057,
+          15062,
+          15067,
+          15072,
+          15077,
+          15082,
+          15087,
+          15092,
+          15097,
+          15102,
+          15107,
+          15119,
+          15124,
+          15129,
+          15134,
+          15139,
+          15144,
+          15149,
+          15154,
+          15159,
+          15164,
+          15169,
+          15174,
+          15179,
+          15184,
+          15189,
+          15194,
+          15199,
+          15204,
+          15221,
+          15226,
+          15238,
+          15243,
+          15248,
+          15253,
+          15258,
+          15263,
+          15275,
+          15280,
+          15285,
+          15290,
+          15295,
+          15300,
+          15305,
+          15310,
+          15315,
+          15320,
+          15325,
+          15337,
+          15342,
+          15347,
+          15352,
+          15357,
+          15362,
+          15367,
+          15372,
+          15377,
+          15382,
+          15387,
+          15392,
+          15397,
+          15402,
+          15407,
+          15412,
+          15417,
+          15422,
+          15427,
+          15432,
+          15437,
+          15442,
+          15447,
+          15452,
+          15457,
+          15462,
+          15467,
+          15472,
+          15477,
+          15489,
+          15494,
+          15499,
+          15504,
+          15509,
+          15514,
+          15519,
+          15524,
+          15529,
+          15541,
+          15546,
+          15551,
+          15556,
+          15561,
+          15566,
+          15571,
+          15576,
+          15581,
+          15586,
+          15591,
+          15596,
+          15601,
+          15606,
+          15611,
+          15616,
+          15621,
+          15643,
+          15648,
+          15653,
+          15658,
+          15663,
+          15668,
+          15673,
+          15678,
+          15683,
+          15705,
+          15710,
+          15715,
+          15727,
+          15732,
+          15737,
+          15742,
+          15754,
+          15771,
+          15776,
+          15781,
+          15786,
+          15791,
+          15796,
+          15801,
+          15806,
+          15811,
+          15816,
+          15821,
+          15826,
+          15831,
+          15836,
+          15841,
+          15846,
+          15851,
+          15856,
+          15861,
+          15866,
+          15888,
+          15893,
+          15898,
+          15903,
+          15908,
+          15913,
+          15918,
+          15923,
+          15928,
+          15933,
+          15938,
+          15943,
+          15948,
+          15953,
+          15958,
+          15963,
+          15968,
+          15973,
+          15978,
+          15983,
+          15988,
+          15993,
+          15998,
+          16003,
+          16008,
+          16013,
+          16084,
+          16089,
+          16128,
+          16142,
+          16145,
+          16148,
+          16151,
+          16154,
+          16157,
+          16170,
+          16173,
+          16176,
+          16179,
+          16182,
+          16185,
+          16188,
+          16191,
+          16194,
+          16197,
+          16200,
+          16203,
+          16206,
+          16209,
+          16212,
+          16229,
+          16232,
+          16235,
+          16238,
+          16241,
+          16244,
+          16247,
+          16250,
+          16253,
+          16266,
+          16269,
+          16272,
+          16275,
+          16278,
+          16289,
+          16292,
+          16295,
+          16298,
+          16301,
+          16304,
+          16307,
+          16310,
+          16313,
+          16316,
+          16330,
+          16333,
+          16336,
+          16339,
+          16350,
+          16353,
+          16356,
+          16361,
+          16364,
+          16367,
+          16370,
+          16375,
+          16378,
+          16381,
+          16384,
+          16387,
+          16390,
+          16393,
+          16396,
+          16407,
+          16410,
+          16413,
+          16416,
+          16419,
+          16422,
+          16425,
+          16428
+        ],
+        "baselineMs": 1.951231999999994,
+        "candidateMs": 1.2405759999999943,
+        "category": "snapshot-ordinary-early",
+        "savedMs": 0.7106559999999997
+      },
+      {
+        "events": [
+          14724,
+          14762,
+          14799,
+          14804,
+          14841,
+          14865,
+          14877,
+          14926,
+          14943,
+          14970,
+          15002,
+          15019,
+          15041,
+          15113,
+          15210,
+          15215,
+          15232,
+          15269,
+          15331,
+          15483,
+          15535,
+          15627,
+          15632,
+          15637,
+          15689,
+          15694,
+          15699,
+          15872,
+          15877,
+          15882,
+          16120,
+          16440,
+          16444,
+          16448,
+          16452
+        ],
+        "baselineMs": 0.5447680000000001,
+        "candidateMs": 0.18534399999999995,
+        "category": "snapshot-class-other",
+        "savedMs": 0.3594240000000002
+      },
+      {
+        "events": [
+          14743,
+          14853,
+          14871,
+          15721,
+          15748,
+          15760,
+          15765,
+          16095,
+          16099,
+          16102,
+          16105,
+          16108,
+          16112,
+          16116,
+          16124
+        ],
+        "baselineMs": 0.5744640000000001,
+        "candidateMs": 0.30822400000000005,
+        "category": "snapshot-class-early",
+        "savedMs": 0.26624000000000003
+      },
+      {
+        "events": [
+          20913,
+          20914,
+          20915,
+          20916,
+          21108,
+          21109,
+          21110,
+          21111,
+          21112,
+          21113,
+          21138,
+          22456,
+          22457,
+          22497,
+          22498,
+          22515,
+          22522,
+          23079,
+          23085,
+          23096,
+          23106,
+          23110,
+          23116,
+          23122,
+          23140
+        ],
+        "baselineMs": 0.8189280000000001,
+        "candidateMs": 0.5983680000000001,
+        "category": "main-class-early",
+        "savedMs": 0.22055999999999998
+      },
+      {
+        "events": [
+          23185,
+          23190,
+          23274,
+          23279,
+          23284,
+          23338,
+          23343,
+          23377,
+          23436,
+          23441,
+          23470,
+          23558,
+          23607
+        ],
+        "baselineMs": 0.010240000000000004,
+        "candidateMs": 0.007680000000000003,
+        "category": "main-ordinary-other",
+        "savedMs": 0.0025600000000000015
+      },
+      {
+        "events": [
+          16161,
+          16164,
+          16216,
+          16219,
+          16223,
+          16257,
+          16260,
+          16282,
+          16320,
+          16324,
+          16343,
+          16401,
+          16433
+        ],
+        "baselineMs": 0.011776000000000005,
+        "candidateMs": 0.009728000000000004,
+        "category": "snapshot-ordinary-other",
+        "savedMs": 0.002048000000000001
+      }
+    ],
+    "pipelineStates": {
+      "ResourceId::10349": {
+        "constants": {
+          "0": 1,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": true,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10351": {
+        "constants": {
+          "0": 1,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": true,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10353": {
+        "constants": {
+          "0": 1,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": true,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10355": {
+        "constants": {
+          "0": 1,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": true,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10359": {
+        "constants": {
+          "0": 1,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": true,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10363": {
+        "constants": {
+          "0": 1,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": true,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10367": {
+        "constants": {
+          "0": 1,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": true,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10371": {
+        "constants": {
+          "0": 1,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": true,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10385": {
+        "constants": {
+          "0": 0,
+          "2": 1073741823,
+          "3": 40,
+          "1": 0
+        },
+        "ordinary": false,
+        "materialClass": 0
+      },
+      "ResourceId::10387": {
+        "constants": {
+          "0": 0,
+          "2": 1073741823,
+          "3": 40,
+          "1": 0
+        },
+        "ordinary": false,
+        "materialClass": 0
+      },
+      "ResourceId::10407": {
+        "constants": {
+          "0": 0,
+          "2": 1073725439,
+          "3": 2633729,
+          "1": 1
+        },
+        "ordinary": false,
+        "materialClass": 1
+      },
+      "ResourceId::10411": {
+        "constants": {
+          "0": 0,
+          "2": 1073725439,
+          "3": 2633729,
+          "1": 1
+        },
+        "ordinary": false,
+        "materialClass": 1
+      },
+      "ResourceId::10466": {
+        "constants": {
+          "0": 0,
+          "2": 1073741823,
+          "3": 2643973,
+          "1": 2
+        },
+        "ordinary": false,
+        "materialClass": 2
+      },
+      "ResourceId::10474": {
+        "constants": {
+          "0": 0,
+          "2": 1073741823,
+          "3": 2643973,
+          "1": 2
+        },
+        "ordinary": false,
+        "materialClass": 2
+      },
+      "ResourceId::10494": {
+        "constants": {
+          "0": 0,
+          "2": 1036967927,
+          "3": 3,
+          "1": 3
+        },
+        "ordinary": false,
+        "materialClass": 3
+      },
+      "ResourceId::10498": {
+        "constants": {
+          "0": 0,
+          "2": 1036967927,
+          "3": 3,
+          "1": 3
+        },
+        "ordinary": false,
+        "materialClass": 3
+      },
+      "ResourceId::10519": {
+        "constants": {
+          "0": 0,
+          "2": 1036967927,
+          "3": 3,
+          "1": 3
+        },
+        "ordinary": false,
+        "materialClass": 3
+      },
+      "ResourceId::10523": {
+        "constants": {
+          "0": 0,
+          "2": 1036967927,
+          "3": 3,
+          "1": 3
+        },
+        "ordinary": false,
+        "materialClass": 3
+      },
+      "ResourceId::10526": {
+        "constants": {
+          "0": 0,
+          "2": 1038069751,
+          "3": 532481,
+          "1": 4
+        },
+        "ordinary": false,
+        "materialClass": 4
+      },
+      "ResourceId::10528": {
+        "constants": {
+          "0": 0,
+          "2": 1038069751,
+          "3": 532481,
+          "1": 4
+        },
+        "ordinary": false,
+        "materialClass": 4
+      },
+      "ResourceId::10562": {
+        "constants": {
+          "0": 0,
+          "2": 1038069751,
+          "3": 532481,
+          "1": 4
+        },
+        "ordinary": false,
+        "materialClass": 4
+      },
+      "ResourceId::10570": {
+        "constants": {
+          "0": 0,
+          "2": 1038069751,
+          "3": 532481,
+          "1": 4
+        },
+        "ordinary": false,
+        "materialClass": 4
+      },
+      "ResourceId::10607": {
+        "constants": {
+          "0": 0,
+          "2": 1073741823,
+          "3": 2228224,
+          "1": 6
+        },
+        "ordinary": false,
+        "materialClass": 6
+      },
+      "ResourceId::10611": {
+        "constants": {
+          "0": 0,
+          "2": 1073741823,
+          "3": 2228224,
+          "1": 6
+        },
+        "ordinary": false,
+        "materialClass": 6
+      },
+      "ResourceId::10653": {
+        "constants": {
+          "0": 0,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": false,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10657": {
+        "constants": {
+          "0": 0,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": false,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10686": {
+        "constants": {
+          "0": 0,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": false,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10689": {
+        "constants": {
+          "0": 0,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": false,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10711": {
+        "constants": {
+          "0": 0,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": false,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10720": {
+        "constants": {
+          "0": 0,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": false,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10768": {
+        "constants": {
+          "0": 0,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": false,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10840": {
+        "constants": {
+          "0": 0,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": false,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10864": {
+        "constants": {
+          "0": 0,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": false,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10891": {
+        "constants": {
+          "0": 0,
+          "1": 4294967295,
+          "2": 0,
+          "3": 0
+        },
+        "ordinary": false,
+        "materialClass": 4294967295
+      },
+      "ResourceId::10894": {
+        "constants": {
+          "0": 0,
+          "2": 0,
+          "3": 0,
+          "1": 4294967295
+        },
+        "ordinary": false,
+        "materialClass": 4294967295
+      }
+    },
+    "ordinaryEarlyMainEvents": 508,
+    "ordinaryEarlyMainAblationSavedMs": 1.4739360000000001,
+    "allMatchedSavedMs": 4.08959999999994,
+    "allMainAblationSavedMs": 2.751231999999982,
+    "allMainBaselineMs": 8.835471999999996,
+    "eligibleEvents": [
+      {
+        "event": 20837,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20846,
+        "baselineMs": 0.025168000000000003,
+        "candidateMs": 0.021392,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20847,
+        "baselineMs": 0.03872,
+        "candidateMs": 0.038064,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20855,
+        "baselineMs": 0.006912,
+        "candidateMs": 0.0052,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20856,
+        "baselineMs": 0.023504,
+        "candidateMs": 0.018048,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20864,
+        "baselineMs": 0.035840000000000004,
+        "candidateMs": 0.020992,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20871,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.009216,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20878,
+        "baselineMs": 0.01792,
+        "candidateMs": 0.009728,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20898,
+        "baselineMs": 0.045568,
+        "candidateMs": 0.037888,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20905,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20925,
+        "baselineMs": 0.006144,
+        "candidateMs": 0.004096000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20934,
+        "baselineMs": 0.033280000000000004,
+        "candidateMs": 0.013312000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20950,
+        "baselineMs": 0.02552,
+        "candidateMs": 0.020479999999999998,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20951,
+        "baselineMs": 0.024064000000000002,
+        "candidateMs": 0.018480000000000003,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20959,
+        "baselineMs": 0.006815999999999999,
+        "candidateMs": 0.00536,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20960,
+        "baselineMs": 0.0232,
+        "candidateMs": 0.017648,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20961,
+        "baselineMs": 0.006624,
+        "candidateMs": 0.005056,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20962,
+        "baselineMs": 0.022496000000000002,
+        "candidateMs": 0.017504,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20963,
+        "baselineMs": 0.006192,
+        "candidateMs": 0.005264,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20964,
+        "baselineMs": 0.020256,
+        "candidateMs": 0.016832,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20965,
+        "baselineMs": 0.020816,
+        "candidateMs": 0.016304,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20973,
+        "baselineMs": 0.007088,
+        "candidateMs": 0.0054719999999999994,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20974,
+        "baselineMs": 0.021104,
+        "candidateMs": 0.018352,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20982,
+        "baselineMs": 0.007424,
+        "candidateMs": 0.0054719999999999994,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20983,
+        "baselineMs": 0.005952,
+        "candidateMs": 0.004784,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20984,
+        "baselineMs": 0.006208,
+        "candidateMs": 0.004592000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20985,
+        "baselineMs": 0.0060160000000000005,
+        "candidateMs": 0.005216,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20986,
+        "baselineMs": 0.006752,
+        "candidateMs": 0.005168,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20987,
+        "baselineMs": 0.01968,
+        "candidateMs": 0.015664,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20988,
+        "baselineMs": 0.007056,
+        "candidateMs": 0.004928,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20996,
+        "baselineMs": 0.023472,
+        "candidateMs": 0.020496,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 20997,
+        "baselineMs": 0.020368,
+        "candidateMs": 0.016416,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21005,
+        "baselineMs": 0.006368,
+        "candidateMs": 0.004736,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21006,
+        "baselineMs": 0.020367999999999997,
+        "candidateMs": 0.017376000000000003,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21007,
+        "baselineMs": 0.00672,
+        "candidateMs": 0.0048319999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21008,
+        "baselineMs": 0.021248,
+        "candidateMs": 0.01704,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21009,
+        "baselineMs": 0.006672,
+        "candidateMs": 0.005520000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21010,
+        "baselineMs": 0.0196,
+        "candidateMs": 0.016064000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21011,
+        "baselineMs": 0.020976,
+        "candidateMs": 0.01672,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21044,
+        "baselineMs": 0.006704,
+        "candidateMs": 0.005856,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21045,
+        "baselineMs": 0.006928,
+        "candidateMs": 0.005024,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21046,
+        "baselineMs": 0.007184,
+        "candidateMs": 0.004912,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21054,
+        "baselineMs": 0.09267199999999999,
+        "candidateMs": 0.0768,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21061,
+        "baselineMs": 0.18944,
+        "candidateMs": 0.13619199999999998,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21068,
+        "baselineMs": 0.007168000000000001,
+        "candidateMs": 0.007680000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21075,
+        "baselineMs": 0.036864,
+        "candidateMs": 0.030208,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21082,
+        "baselineMs": 0.20019199999999998,
+        "candidateMs": 0.140288,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21100,
+        "baselineMs": 0.021504,
+        "candidateMs": 0.01792,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21122,
+        "baselineMs": 0.005632,
+        "candidateMs": 0.005632,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21154,
+        "baselineMs": 0.196096,
+        "candidateMs": 0.078336,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21161,
+        "baselineMs": 0.169984,
+        "candidateMs": 0.078336,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21168,
+        "baselineMs": 0.049152,
+        "candidateMs": 0.018944000000000003,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21175,
+        "baselineMs": 0.014336,
+        "candidateMs": 0.006144,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21182,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21189,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21196,
+        "baselineMs": 0.023039999999999998,
+        "candidateMs": 0.009728,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21203,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0035840000000000004,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21221,
+        "baselineMs": 0.008192000000000001,
+        "candidateMs": 0.007168,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21228,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21244,
+        "baselineMs": 0.0066560000000000005,
+        "candidateMs": 0.0035840000000000004,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21251,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21258,
+        "baselineMs": 0.00728,
+        "candidateMs": 0.005504,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21259,
+        "baselineMs": 0.006432,
+        "candidateMs": 0.0050880000000000005,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21267,
+        "baselineMs": 0.023039999999999998,
+        "candidateMs": 0.026112,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21283,
+        "baselineMs": 0.07424,
+        "candidateMs": 0.041472,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21290,
+        "baselineMs": 0.015872,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21297,
+        "baselineMs": 0.06809599999999999,
+        "candidateMs": 0.03686400000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21304,
+        "baselineMs": 0.010752000000000001,
+        "candidateMs": 0.004096000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21311,
+        "baselineMs": 0.25804800000000006,
+        "candidateMs": 0.13004800000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21329,
+        "baselineMs": 0.006144,
+        "candidateMs": 0.008704,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21336,
+        "baselineMs": 0.180224,
+        "candidateMs": 0.138752,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21352,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21359,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21366,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21382,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21389,
+        "baselineMs": 0.007679999999999999,
+        "candidateMs": 0.005823999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21390,
+        "baselineMs": 0.005984,
+        "candidateMs": 0.005568,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21391,
+        "baselineMs": 0.00672,
+        "candidateMs": 0.00488,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21392,
+        "baselineMs": 0.0056159999999999995,
+        "candidateMs": 0.00488,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21393,
+        "baselineMs": 0.0060479999999999996,
+        "candidateMs": 0.00504,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21401,
+        "baselineMs": 0.00584,
+        "candidateMs": 0.005104,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21402,
+        "baselineMs": 0.0065439999999999995,
+        "candidateMs": 0.005248,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21403,
+        "baselineMs": 0.0060479999999999996,
+        "candidateMs": 0.004736000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21411,
+        "baselineMs": 0.006304000000000001,
+        "candidateMs": 0.005568,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21412,
+        "baselineMs": 0.006624,
+        "candidateMs": 0.005536,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21413,
+        "baselineMs": 0.005872,
+        "candidateMs": 0.005104,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21414,
+        "baselineMs": 0.006304,
+        "candidateMs": 0.0051199999999999996,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21415,
+        "baselineMs": 0.006208,
+        "candidateMs": 0.00496,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21423,
+        "baselineMs": 0.00632,
+        "candidateMs": 0.005312,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21424,
+        "baselineMs": 0.0057599999999999995,
+        "candidateMs": 0.004912,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21425,
+        "baselineMs": 0.006256000000000001,
+        "candidateMs": 0.0052,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21426,
+        "baselineMs": 0.006176000000000001,
+        "candidateMs": 0.005183999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21427,
+        "baselineMs": 0.006879999999999999,
+        "candidateMs": 0.005488,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21435,
+        "baselineMs": 0.00512,
+        "candidateMs": 0.003072,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21442,
+        "baselineMs": 0.006496,
+        "candidateMs": 0.005104000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21443,
+        "baselineMs": 0.006464,
+        "candidateMs": 0.005184,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21444,
+        "baselineMs": 0.005712,
+        "candidateMs": 0.004992,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21445,
+        "baselineMs": 0.006416,
+        "candidateMs": 0.0051199999999999996,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21446,
+        "baselineMs": 0.006464000000000001,
+        "candidateMs": 0.005216,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21447,
+        "baselineMs": 0.0069759999999999996,
+        "candidateMs": 0.005152,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21448,
+        "baselineMs": 0.00648,
+        "candidateMs": 0.005184,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21456,
+        "baselineMs": 0.004096000000000001,
+        "candidateMs": 0.00256,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21463,
+        "baselineMs": 0.005807999999999999,
+        "candidateMs": 0.005183999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21464,
+        "baselineMs": 0.00712,
+        "candidateMs": 0.004880000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21465,
+        "baselineMs": 0.006208,
+        "candidateMs": 0.005376000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21473,
+        "baselineMs": 0.004096000000000001,
+        "candidateMs": 0.00256,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21480,
+        "baselineMs": 0.006,
+        "candidateMs": 0.004688,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21481,
+        "baselineMs": 0.00656,
+        "candidateMs": 0.0048319999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21482,
+        "baselineMs": 0.005744,
+        "candidateMs": 0.004752,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21490,
+        "baselineMs": 0.006736,
+        "candidateMs": 0.005184,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21491,
+        "baselineMs": 0.006512,
+        "candidateMs": 0.004976,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21492,
+        "baselineMs": 0.006048,
+        "candidateMs": 0.004880000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21493,
+        "baselineMs": 0.006784,
+        "candidateMs": 0.005344,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21501,
+        "baselineMs": 0.00512,
+        "candidateMs": 0.004096000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21517,
+        "baselineMs": 0.006352,
+        "candidateMs": 0.005264,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21518,
+        "baselineMs": 0.006751999999999999,
+        "candidateMs": 0.00504,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21519,
+        "baselineMs": 0.006144,
+        "candidateMs": 0.005296,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21527,
+        "baselineMs": 0.006319999999999999,
+        "candidateMs": 0.005056,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21528,
+        "baselineMs": 0.00656,
+        "candidateMs": 0.0048319999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21529,
+        "baselineMs": 0.005952,
+        "candidateMs": 0.005056,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21530,
+        "baselineMs": 0.006288,
+        "candidateMs": 0.005056,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21538,
+        "baselineMs": 0.006208,
+        "candidateMs": 0.0052,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21539,
+        "baselineMs": 0.006512,
+        "candidateMs": 0.005535999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21540,
+        "baselineMs": 0.005952,
+        "candidateMs": 0.004768,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21541,
+        "baselineMs": 0.0065439999999999995,
+        "candidateMs": 0.005216,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21542,
+        "baselineMs": 0.00648,
+        "candidateMs": 0.004912,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21550,
+        "baselineMs": 0.006448000000000001,
+        "candidateMs": 0.005168000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21551,
+        "baselineMs": 0.006304000000000001,
+        "candidateMs": 0.005024000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21552,
+        "baselineMs": 0.0060479999999999996,
+        "candidateMs": 0.004784,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21553,
+        "baselineMs": 0.006224,
+        "candidateMs": 0.004848,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21561,
+        "baselineMs": 0.004096000000000001,
+        "candidateMs": 0.003072,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21568,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21575,
+        "baselineMs": 0.006864,
+        "candidateMs": 0.0054080000000000005,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21576,
+        "baselineMs": 0.0068000000000000005,
+        "candidateMs": 0.005392,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21577,
+        "baselineMs": 0.005824,
+        "candidateMs": 0.004912,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21578,
+        "baselineMs": 0.006768,
+        "candidateMs": 0.0052,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21579,
+        "baselineMs": 0.0063999999999999994,
+        "candidateMs": 0.004928,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21587,
+        "baselineMs": 0.0035840000000000004,
+        "candidateMs": 0.00256,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21594,
+        "baselineMs": 0.005823999999999999,
+        "candidateMs": 0.005152,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21595,
+        "baselineMs": 0.006224,
+        "candidateMs": 0.005024,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21596,
+        "baselineMs": 0.005808000000000001,
+        "candidateMs": 0.0051199999999999996,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21604,
+        "baselineMs": 0.006448000000000001,
+        "candidateMs": 0.005392,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21605,
+        "baselineMs": 0.007072,
+        "candidateMs": 0.005679999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21606,
+        "baselineMs": 0.0059039999999999995,
+        "candidateMs": 0.005072,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21614,
+        "baselineMs": 0.004608000000000001,
+        "candidateMs": 0.003072,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21621,
+        "baselineMs": 0.006496,
+        "candidateMs": 0.0054719999999999994,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21622,
+        "baselineMs": 0.006576,
+        "candidateMs": 0.0052959999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21623,
+        "baselineMs": 0.006144,
+        "candidateMs": 0.00472,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21624,
+        "baselineMs": 0.00696,
+        "candidateMs": 0.005327999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21625,
+        "baselineMs": 0.006111999999999999,
+        "candidateMs": 0.005344,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21633,
+        "baselineMs": 0.004096000000000001,
+        "candidateMs": 0.0035840000000000004,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21640,
+        "baselineMs": 0.006176,
+        "candidateMs": 0.005136,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21641,
+        "baselineMs": 0.024928,
+        "candidateMs": 0.01848,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21642,
+        "baselineMs": 0.006576,
+        "candidateMs": 0.005008,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21650,
+        "baselineMs": 0.005664,
+        "candidateMs": 0.0047680000000000005,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21651,
+        "baselineMs": 0.00592,
+        "candidateMs": 0.005152,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21652,
+        "baselineMs": 0.005952,
+        "candidateMs": 0.0046879999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21660,
+        "baselineMs": 0.00512,
+        "candidateMs": 0.004608000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21667,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21674,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21697,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21704,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21720,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21727,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21734,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21741,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21748,
+        "baselineMs": 0.007264,
+        "candidateMs": 0.0059039999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21749,
+        "baselineMs": 0.006768,
+        "candidateMs": 0.005344,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21757,
+        "baselineMs": 0.015872,
+        "candidateMs": 0.013312000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21773,
+        "baselineMs": 0.04155199999999999,
+        "candidateMs": 0.020768000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21774,
+        "baselineMs": 0.03728000000000001,
+        "candidateMs": 0.01736,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21782,
+        "baselineMs": 0.149904,
+        "candidateMs": 0.059344,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21783,
+        "baselineMs": 0.036224000000000006,
+        "candidateMs": 0.017487999999999997,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21791,
+        "baselineMs": 0.007904,
+        "candidateMs": 0.006192,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21792,
+        "baselineMs": 0.006432,
+        "candidateMs": 0.005152,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21793,
+        "baselineMs": 0.006751999999999999,
+        "candidateMs": 0.005696,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21801,
+        "baselineMs": 0.0074719999999999995,
+        "candidateMs": 0.0057280000000000005,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21802,
+        "baselineMs": 0.00584,
+        "candidateMs": 0.0046879999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21803,
+        "baselineMs": 0.00672,
+        "candidateMs": 0.005039999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21811,
+        "baselineMs": 0.007216,
+        "candidateMs": 0.005568,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21812,
+        "baselineMs": 0.006112,
+        "candidateMs": 0.004928,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21813,
+        "baselineMs": 0.006624,
+        "candidateMs": 0.004992,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21821,
+        "baselineMs": 0.0072640000000000005,
+        "candidateMs": 0.005216,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21822,
+        "baselineMs": 0.006384,
+        "candidateMs": 0.004784,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21830,
+        "baselineMs": 0.005632,
+        "candidateMs": 0.006144,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21837,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21844,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0020480000000000003,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21851,
+        "baselineMs": 0.0015360000000000003,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21858,
+        "baselineMs": 0.075776,
+        "candidateMs": 0.04864,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21874,
+        "baselineMs": 0.0128,
+        "candidateMs": 0.012288,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21881,
+        "baselineMs": 0.004096,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21888,
+        "baselineMs": 0.005632000000000001,
+        "candidateMs": 0.014336,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21895,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21902,
+        "baselineMs": 0.014848,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21909,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0015360000000000003,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21916,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21923,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21930,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21937,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21944,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21951,
+        "baselineMs": 0.0015360000000000003,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21958,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21965,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21972,
+        "baselineMs": 0.0020480000000000003,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21979,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21986,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 21993,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22000,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22007,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22014,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22021,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22028,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22035,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22042,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22049,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22056,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22063,
+        "baselineMs": 0.0015360000000000003,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22070,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22086,
+        "baselineMs": 0.0035840000000000004,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22093,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22100,
+        "baselineMs": 0.0015360000000000003,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22107,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22114,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22121,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22128,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22135,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22142,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22158,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22165,
+        "baselineMs": 0.0066560000000000005,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22172,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22179,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22186,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22193,
+        "baselineMs": 0.0020480000000000003,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22200,
+        "baselineMs": 0.006448000000000001,
+        "candidateMs": 0.0059039999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22201,
+        "baselineMs": 0.006496,
+        "candidateMs": 0.004592000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22202,
+        "baselineMs": 0.005792,
+        "candidateMs": 0.005328,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22203,
+        "baselineMs": 0.00624,
+        "candidateMs": 0.005248,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22204,
+        "baselineMs": 0.006128,
+        "candidateMs": 0.004736,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22205,
+        "baselineMs": 0.006448000000000001,
+        "candidateMs": 0.005039999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22213,
+        "baselineMs": 0.006576,
+        "candidateMs": 0.005056,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22214,
+        "baselineMs": 0.005952000000000001,
+        "candidateMs": 0.00472,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22215,
+        "baselineMs": 0.0066560000000000005,
+        "candidateMs": 0.00488,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22216,
+        "baselineMs": 0.00608,
+        "candidateMs": 0.004448,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22217,
+        "baselineMs": 0.006592,
+        "candidateMs": 0.005136,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22218,
+        "baselineMs": 0.005552,
+        "candidateMs": 0.004912,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22226,
+        "baselineMs": 0.006144,
+        "candidateMs": 0.0049759999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22227,
+        "baselineMs": 0.0068000000000000005,
+        "candidateMs": 0.005216,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22228,
+        "baselineMs": 0.0056960000000000005,
+        "candidateMs": 0.005696,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22229,
+        "baselineMs": 0.006176000000000001,
+        "candidateMs": 0.0048319999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22237,
+        "baselineMs": 0.00648,
+        "candidateMs": 0.0050880000000000005,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22238,
+        "baselineMs": 0.005536,
+        "candidateMs": 0.00472,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22239,
+        "baselineMs": 0.00656,
+        "candidateMs": 0.004576,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22247,
+        "baselineMs": 0.008704,
+        "candidateMs": 0.006144,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22254,
+        "baselineMs": 0.00256,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22261,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22268,
+        "baselineMs": 0.006032,
+        "candidateMs": 0.004784,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22269,
+        "baselineMs": 0.006896,
+        "candidateMs": 0.0052320000000000005,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22277,
+        "baselineMs": 0.008336,
+        "candidateMs": 0.0056159999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22278,
+        "baselineMs": 0.007952,
+        "candidateMs": 0.005312,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22286,
+        "baselineMs": 0.006144,
+        "candidateMs": 0.006144,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22293,
+        "baselineMs": 0.012288,
+        "candidateMs": 0.008704,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22325,
+        "baselineMs": 0.00672,
+        "candidateMs": 0.005391999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22326,
+        "baselineMs": 0.006224,
+        "candidateMs": 0.004784,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22327,
+        "baselineMs": 0.005584,
+        "candidateMs": 0.004864,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22328,
+        "baselineMs": 0.006496,
+        "candidateMs": 0.005039999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22329,
+        "baselineMs": 0.005744,
+        "candidateMs": 0.00472,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22337,
+        "baselineMs": 0.004608000000000001,
+        "candidateMs": 0.0035840000000000004,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22344,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22351,
+        "baselineMs": 0.008511999999999999,
+        "candidateMs": 0.005536,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22352,
+        "baselineMs": 0.007216,
+        "candidateMs": 0.005856,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22360,
+        "baselineMs": 0.0061600000000000005,
+        "candidateMs": 0.005104000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22361,
+        "baselineMs": 0.0068000000000000005,
+        "candidateMs": 0.00496,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22369,
+        "baselineMs": 0.005632,
+        "candidateMs": 0.0035840000000000004,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22376,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22383,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22390,
+        "baselineMs": 0.017408,
+        "candidateMs": 0.0128,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22426,
+        "baselineMs": 0.007344,
+        "candidateMs": 0.00592,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22427,
+        "baselineMs": 0.006463999999999999,
+        "candidateMs": 0.005264,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22428,
+        "baselineMs": 0.006384000000000001,
+        "candidateMs": 0.005248,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22429,
+        "baselineMs": 0.006848,
+        "candidateMs": 0.004896,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22430,
+        "baselineMs": 0.005888,
+        "candidateMs": 0.005392,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22431,
+        "baselineMs": 0.006751999999999999,
+        "candidateMs": 0.004512,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22439,
+        "baselineMs": 0.006928,
+        "candidateMs": 0.005504,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22440,
+        "baselineMs": 0.006784,
+        "candidateMs": 0.004912,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22448,
+        "baselineMs": 0.022528,
+        "candidateMs": 0.018432,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22466,
+        "baselineMs": 0.007392,
+        "candidateMs": 0.005888000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22467,
+        "baselineMs": 0.006448,
+        "candidateMs": 0.005520000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22475,
+        "baselineMs": 0.023552,
+        "candidateMs": 0.018944000000000003,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22482,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22489,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22507,
+        "baselineMs": 0.035328,
+        "candidateMs": 0.017408,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22530,
+        "baselineMs": 0.026352,
+        "candidateMs": 0.020336,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22531,
+        "baselineMs": 0.006464,
+        "candidateMs": 0.005168,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22532,
+        "baselineMs": 0.006304000000000001,
+        "candidateMs": 0.005296,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22533,
+        "baselineMs": 0.00624,
+        "candidateMs": 0.004768,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22541,
+        "baselineMs": 0.006992,
+        "candidateMs": 0.005424,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22542,
+        "baselineMs": 0.0063999999999999994,
+        "candidateMs": 0.004656,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22543,
+        "baselineMs": 0.007103999999999999,
+        "candidateMs": 0.005104,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22551,
+        "baselineMs": 0.023552,
+        "candidateMs": 0.019968,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22558,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22565,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22572,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22579,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22586,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22593,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22600,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22607,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22614,
+        "baselineMs": 0.006752,
+        "candidateMs": 0.005744,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22615,
+        "baselineMs": 0.022767999999999997,
+        "candidateMs": 0.018912,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22616,
+        "baselineMs": 0.021200000000000004,
+        "candidateMs": 0.017744,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22617,
+        "baselineMs": 0.021424,
+        "candidateMs": 0.017568,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22618,
+        "baselineMs": 0.005712,
+        "candidateMs": 0.00472,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22619,
+        "baselineMs": 0.006240000000000001,
+        "candidateMs": 0.004736000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22627,
+        "baselineMs": 0.00512,
+        "candidateMs": 0.003072,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22634,
+        "baselineMs": 0.005344,
+        "candidateMs": 0.0056159999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22635,
+        "baselineMs": 0.039071999999999996,
+        "candidateMs": 0.016928,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22636,
+        "baselineMs": 0.005376000000000001,
+        "candidateMs": 0.004896,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22637,
+        "baselineMs": 0.006144,
+        "candidateMs": 0.00496,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22638,
+        "baselineMs": 0.006336,
+        "candidateMs": 0.004576,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22646,
+        "baselineMs": 0.00672,
+        "candidateMs": 0.0054719999999999994,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22647,
+        "baselineMs": 0.006336,
+        "candidateMs": 0.0048000000000000004,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22648,
+        "baselineMs": 0.006176,
+        "candidateMs": 0.004880000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22649,
+        "baselineMs": 0.005808,
+        "candidateMs": 0.005072,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22650,
+        "baselineMs": 0.00608,
+        "candidateMs": 0.005488,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22651,
+        "baselineMs": 0.006352,
+        "candidateMs": 0.004607999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22659,
+        "baselineMs": 0.00512,
+        "candidateMs": 0.00256,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22666,
+        "baselineMs": 0.00624,
+        "candidateMs": 0.0049759999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22667,
+        "baselineMs": 0.006463999999999999,
+        "candidateMs": 0.005296,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22668,
+        "baselineMs": 0.005936,
+        "candidateMs": 0.004864,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22669,
+        "baselineMs": 0.007184,
+        "candidateMs": 0.004816000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22670,
+        "baselineMs": 0.006224,
+        "candidateMs": 0.004880000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22678,
+        "baselineMs": 0.023632,
+        "candidateMs": 0.019088,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22679,
+        "baselineMs": 0.007216,
+        "candidateMs": 0.005456,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22680,
+        "baselineMs": 0.020479999999999998,
+        "candidateMs": 0.017088,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22681,
+        "baselineMs": 0.020256000000000003,
+        "candidateMs": 0.01696,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22682,
+        "baselineMs": 0.006288,
+        "candidateMs": 0.004928,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22683,
+        "baselineMs": 0.00728,
+        "candidateMs": 0.00456,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22691,
+        "baselineMs": 0.00512,
+        "candidateMs": 0.003072,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22698,
+        "baselineMs": 0.007039999999999999,
+        "candidateMs": 0.005072,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22699,
+        "baselineMs": 0.021679999999999998,
+        "candidateMs": 0.016832,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22700,
+        "baselineMs": 0.005744,
+        "candidateMs": 0.005456,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22701,
+        "baselineMs": 0.006496,
+        "candidateMs": 0.004736,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22702,
+        "baselineMs": 0.0066879999999999995,
+        "candidateMs": 0.0052320000000000005,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22744,
+        "baselineMs": 0.007072,
+        "candidateMs": 0.005232,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22745,
+        "baselineMs": 0.005776,
+        "candidateMs": 0.004319999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22746,
+        "baselineMs": 0.00648,
+        "candidateMs": 0.005024,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22747,
+        "baselineMs": 0.018832,
+        "candidateMs": 0.016815999999999998,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22755,
+        "baselineMs": 0.006768,
+        "candidateMs": 0.005504,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22756,
+        "baselineMs": 0.019824,
+        "candidateMs": 0.018032,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22764,
+        "baselineMs": 0.00672,
+        "candidateMs": 0.005744,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22765,
+        "baselineMs": 0.005967999999999999,
+        "candidateMs": 0.004912,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22766,
+        "baselineMs": 0.017759999999999998,
+        "candidateMs": 0.015200000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22767,
+        "baselineMs": 0.005568,
+        "candidateMs": 0.004960000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22768,
+        "baselineMs": 0.006608,
+        "candidateMs": 0.0049759999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22769,
+        "baselineMs": 0.005584,
+        "candidateMs": 0.004992,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22770,
+        "baselineMs": 0.006144,
+        "candidateMs": 0.004592,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22771,
+        "baselineMs": 0.005712,
+        "candidateMs": 0.005216,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22772,
+        "baselineMs": 0.006255999999999999,
+        "candidateMs": 0.004928,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22773,
+        "baselineMs": 0.006368,
+        "candidateMs": 0.005584,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22774,
+        "baselineMs": 0.006895999999999999,
+        "candidateMs": 0.004816,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22775,
+        "baselineMs": 0.005808000000000001,
+        "candidateMs": 0.004848,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22776,
+        "baselineMs": 0.016912,
+        "candidateMs": 0.01464,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22777,
+        "baselineMs": 0.006256000000000001,
+        "candidateMs": 0.0052320000000000005,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22785,
+        "baselineMs": 0.007296,
+        "candidateMs": 0.005216,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22786,
+        "baselineMs": 0.00648,
+        "candidateMs": 0.0049440000000000005,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22787,
+        "baselineMs": 0.006736,
+        "candidateMs": 0.0049759999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22788,
+        "baselineMs": 0.005504,
+        "candidateMs": 0.004880000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22789,
+        "baselineMs": 0.019024,
+        "candidateMs": 0.016752000000000003,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22790,
+        "baselineMs": 0.005536,
+        "candidateMs": 0.005136,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22791,
+        "baselineMs": 0.016352,
+        "candidateMs": 0.013968,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22792,
+        "baselineMs": 0.005776,
+        "candidateMs": 0.005056,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22793,
+        "baselineMs": 0.018096,
+        "candidateMs": 0.014672000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22794,
+        "baselineMs": 0.020224,
+        "candidateMs": 0.014960000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22795,
+        "baselineMs": 0.017008000000000002,
+        "candidateMs": 0.014879999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22796,
+        "baselineMs": 0.005824,
+        "candidateMs": 0.004928,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22797,
+        "baselineMs": 0.006336,
+        "candidateMs": 0.0048000000000000004,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22805,
+        "baselineMs": 0.006751999999999999,
+        "candidateMs": 0.0049759999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22806,
+        "baselineMs": 0.006784,
+        "candidateMs": 0.004928,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22807,
+        "baselineMs": 0.018576000000000002,
+        "candidateMs": 0.0172,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22808,
+        "baselineMs": 0.006448000000000001,
+        "candidateMs": 0.0051199999999999996,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22809,
+        "baselineMs": 0.011152,
+        "candidateMs": 0.010192,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22810,
+        "baselineMs": 0.032336000000000004,
+        "candidateMs": 0.030288000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22811,
+        "baselineMs": 0.006416,
+        "candidateMs": 0.005664000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22812,
+        "baselineMs": 0.006864,
+        "candidateMs": 0.004992,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22820,
+        "baselineMs": 0.00672,
+        "candidateMs": 0.005648,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22821,
+        "baselineMs": 0.006463999999999999,
+        "candidateMs": 0.005344,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22822,
+        "baselineMs": 0.005887999999999999,
+        "candidateMs": 0.004912,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22823,
+        "baselineMs": 0.006304000000000001,
+        "candidateMs": 0.004912,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22831,
+        "baselineMs": 0.006448,
+        "candidateMs": 0.005056000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22832,
+        "baselineMs": 0.006624,
+        "candidateMs": 0.005391999999999999,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22833,
+        "baselineMs": 0.005984,
+        "candidateMs": 0.004912,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22834,
+        "baselineMs": 0.006416,
+        "candidateMs": 0.004512,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22835,
+        "baselineMs": 0.0054719999999999994,
+        "candidateMs": 0.005056,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22836,
+        "baselineMs": 0.006128,
+        "candidateMs": 0.005536,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22837,
+        "baselineMs": 0.005808000000000001,
+        "candidateMs": 0.004816,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22838,
+        "baselineMs": 0.0066879999999999995,
+        "candidateMs": 0.0048319999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22839,
+        "baselineMs": 0.006128,
+        "candidateMs": 0.0049759999999999995,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22840,
+        "baselineMs": 0.0066560000000000005,
+        "candidateMs": 0.0050880000000000005,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22841,
+        "baselineMs": 0.0060479999999999996,
+        "candidateMs": 0.004880000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22842,
+        "baselineMs": 0.006928,
+        "candidateMs": 0.005296,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22850,
+        "baselineMs": 0.03016,
+        "candidateMs": 0.022832,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22851,
+        "baselineMs": 0.020527999999999998,
+        "candidateMs": 0.014672000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22852,
+        "baselineMs": 0.0058720000000000005,
+        "candidateMs": 0.00488,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22853,
+        "baselineMs": 0.0060160000000000005,
+        "candidateMs": 0.004464,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22854,
+        "baselineMs": 0.005503999999999999,
+        "candidateMs": 0.005248,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22855,
+        "baselineMs": 0.006288,
+        "candidateMs": 0.004784,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22856,
+        "baselineMs": 0.005600000000000001,
+        "candidateMs": 0.004896,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22857,
+        "baselineMs": 0.0063999999999999994,
+        "candidateMs": 0.005248,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22858,
+        "baselineMs": 0.005824,
+        "candidateMs": 0.004624,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22859,
+        "baselineMs": 0.005984,
+        "candidateMs": 0.004736,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22860,
+        "baselineMs": 0.005488,
+        "candidateMs": 0.00464,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22861,
+        "baselineMs": 0.0064,
+        "candidateMs": 0.004832,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22869,
+        "baselineMs": 0.005632,
+        "candidateMs": 0.003072,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22876,
+        "baselineMs": 0.014336,
+        "candidateMs": 0.011264,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22883,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22890,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22897,
+        "baselineMs": 0.006896,
+        "candidateMs": 0.005536,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22898,
+        "baselineMs": 0.0069440000000000005,
+        "candidateMs": 0.0052640000000000004,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22899,
+        "baselineMs": 0.006496,
+        "candidateMs": 0.005024,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22900,
+        "baselineMs": 0.00696,
+        "candidateMs": 0.005376000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22908,
+        "baselineMs": 0.00512,
+        "candidateMs": 0.006144,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22915,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22922,
+        "baselineMs": 0.0020480000000000003,
+        "candidateMs": 0.0015360000000000003,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22929,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22936,
+        "baselineMs": 0.0015360000000000003,
+        "candidateMs": 0.0015360000000000003,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22943,
+        "baselineMs": 0.027648,
+        "candidateMs": 0.009728,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22950,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22957,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22964,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22971,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22978,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0015360000000000003,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22985,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 22992,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23065,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23072,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10367",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23146,
+        "baselineMs": 0.005632000000000001,
+        "candidateMs": 0.00768,
+        "pipeline": "ResourceId::10359",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23154,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23159,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0015360000000000003,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23164,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23169,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23174,
+        "baselineMs": 0.0015360000000000003,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23179,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23198,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23203,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23208,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23213,
+        "baselineMs": 0.0015360000000000003,
+        "candidateMs": 0.0,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23218,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23223,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23228,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23233,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23238,
+        "baselineMs": 0.0015360000000000003,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23243,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23248,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23253,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23258,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23263,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23268,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23292,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.003072,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23297,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23302,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23307,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0020480000000000003,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23312,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.007168,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23317,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23322,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0015360000000000003,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23327,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23332,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0015360000000000003,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23351,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23356,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23361,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23366,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23371,
+        "baselineMs": 0.0020480000000000003,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23385,
+        "baselineMs": 0.0015360000000000003,
+        "candidateMs": 0.0015360000000000003,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23390,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23395,
+        "baselineMs": 0.008192,
+        "candidateMs": 0.0,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23400,
+        "baselineMs": 0.0015360000000000003,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23405,
+        "baselineMs": 0.0020480000000000003,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23410,
+        "baselineMs": 0.007680000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23415,
+        "baselineMs": 0.0015360000000000003,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23420,
+        "baselineMs": 0.0020480000000000003,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23425,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23430,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23449,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23454,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23459,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23464,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23478,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23483,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23488,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23495,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23500,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23505,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23510,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23517,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23522,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23527,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23532,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23537,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23542,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23547,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23552,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23566,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23571,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23576,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23581,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23586,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23591,
+        "baselineMs": 0.0005120000000000001,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23596,
+        "baselineMs": 0.0,
+        "candidateMs": 0.0005120000000000001,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      },
+      {
+        "event": 23601,
+        "baselineMs": 0.0010240000000000002,
+        "candidateMs": 0.0010240000000000002,
+        "pipeline": "ResourceId::10351",
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv"
+      }
+    ],
+    "surfaceCacheMatchingNotObserved": true,
+    "bandwidthCostNotMeasured": true,
+    "newGpuTimingExecuted": false
+  },
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "sha256": "554503565e029ee3a28f236714229f78df8423c89c1309e0775bed296620618c"
+    },
+    {
+      "configuration": "debug",
+      "sha256": "f18253cd9eea593935afd670ddf6402112856643ce7cdd358646cd8cb45a7c8c"
+    }
+  ],
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "newGpuTimingExecuted": false,
+  "nativeBatchStarted": false,
+  "candidateAdopted": false,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 282640,
+  "evidenceSha256": "79d928cd98b8ad0aa45b0cd852f02df95c6cfaf96186874a4af0babec73f8015",
+  "members": [
+    {
+      "path": "analyze.py",
+      "bytes": 2235,
+      "sha256": "b57452173352e2f133d1de3d374d98ea25871b50a57a1282867123b5aa9574cb"
+    },
+    {
+      "path": "borrowed/20261107-122133-material-contribution-cost-c567b5/control-builds.json",
+      "bytes": 42475,
+      "sha256": "4a5240a1764087f5cab052deba4f36ad85473857daa68df86ce44c41271b63e0"
+    },
+    {
+      "path": "borrowed/20261107-122133-material-contribution-cost-c567b5/profile.json",
+      "bytes": 1449387,
+      "sha256": "aa2365b0709bb213bb349d210a03a6b001cea4ed61be4b3a3483b830335f03f5"
+    },
+    {
+      "path": "borrowed/20261107-135517-replay-continuity-check-ceda91/control-state.json",
+      "bytes": 2007125,
+      "sha256": "76a8dbc7ac6c66181dfee1e8ecbcf6baeb198e02b0673a414b56a0c384fb1421"
+    },
+    {
+      "path": "borrowed/cache-material-policy.inc",
+      "bytes": 21215,
+      "sha256": "3409a1f0fdf790ca972548cd756720e8adec919f4c30dc42bc524177d45163d5"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 433,
+      "sha256": "f32c4d7c09687ddab7d15252bbb7bf9f6cc82fa59296a817e70e81d7ec01a62b"
+    },
+    {
+      "path": "classify.py",
+      "bytes": 3103,
+      "sha256": "2f8a062ec3489832f5f185139ae14d35c71ac6ecb36082a757259ac3739e5561"
+    },
+    {
+      "path": "eligibility-analysis.json",
+      "bytes": 139191,
+      "sha256": "cdae7278a8ecd695d2823866c1cf5d3f445076c1297a77338b5bec3e9f8cf98d"
+    },
+    {
+      "path": "package.py",
+      "bytes": 4399,
+      "sha256": "c3d67bcc17a0b4105e3c1036bff0f4f421cf6df36ee0f9c77f3081d16e1eee56"
+    },
+    {
+      "path": "pipeline-specialization.json",
+      "bytes": 135218,
+      "sha256": "7341226abd359be74d990232d6549b31f253fe7a8dabb17f8a603fb20c1a1888"
+    },
+    {
+      "path": "read_pipeline_specialization.py",
+      "bytes": 2807,
+      "sha256": "e13159e5f062e72d6bf4c1cf23698123a946d51183b83af023472d294b04b495"
+    },
+    {
+      "path": "run_specialization.py",
+      "bytes": 1331,
+      "sha256": "624a2940b93d18ff263f9eec7ed1d3df864136c545021a1162fd6fa7b9ac02c1"
+    },
+    {
+      "path": "scope-analysis.json",
+      "bytes": 21170,
+      "sha256": "36edc34cbc99793bbcb299a57901ed91a795fc2ce6aaf45568490c2f74ec4893"
+    },
+    {
+      "path": "specialization.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "status": "isolated-history-prototype-qualified-not-runtime-accepted",
+  "rows": [
+    {
+      "mode": "before",
+      "times": [
+        {
+          "role": 0,
+          "meanMs": 0.326469,
+          "medianMs": 0.326384,
+          "samples": 64
+        },
+        {
+          "role": 1,
+          "meanMs": 0.324445,
+          "medianMs": 0.324608,
+          "samples": 64
+        },
+        {
+          "role": 2,
+          "meanMs": 0.324546,
+          "medianMs": 0.324608,
+          "samples": 64
+        }
+      ],
+      "referenceMeanMs": 0.3255075,
+      "candidateMeanMs": 0.324445,
+      "referenceDrift": 0.005907697979309257,
+      "reduction": 0.003264133698916427,
+      "qualified": true,
+      "matchingVisibilityBitPatterns": true,
+      "hits": 0,
+      "samples": 49384,
+      "hitFraction": 0.0,
+      "historyClearIncluded": false,
+      "firstWriterEntriesVerified": 49384
+    },
+    {
+      "mode": "producer",
+      "times": [
+        {
+          "role": 0,
+          "meanMs": 0.290501,
+          "medianMs": 0.290112,
+          "samples": 64
+        },
+        {
+          "role": 1,
+          "meanMs": 0.299807,
+          "medianMs": 0.300032,
+          "samples": 64
+        },
+        {
+          "role": 2,
+          "meanMs": 0.288483,
+          "medianMs": 0.287744,
+          "samples": 64
+        }
+      ],
+      "referenceMeanMs": 0.28949199999999997,
+      "candidateMeanMs": 0.299807,
+      "referenceDrift": 0.006970831663742072,
+      "reduction": -0.03563138186892911,
+      "qualified": true,
+      "matchingVisibilityBitPatterns": true,
+      "hits": 0,
+      "samples": 49384,
+      "hitFraction": 0.0,
+      "historyClearIncluded": true,
+      "firstWriterEntriesVerified": 49384
+    },
+    {
+      "mode": "cold",
+      "times": [
+        {
+          "role": 0,
+          "meanMs": 0.451981,
+          "medianMs": 0.443456,
+          "samples": 64
+        },
+        {
+          "role": 1,
+          "meanMs": 0.485371,
+          "medianMs": 0.475392,
+          "samples": 64
+        },
+        {
+          "role": 2,
+          "meanMs": 0.452327,
+          "medianMs": 0.441344,
+          "samples": 64
+        }
+      ],
+      "referenceMeanMs": 0.452154,
+      "candidateMeanMs": 0.485371,
+      "referenceDrift": 0.0007652260070682941,
+      "reduction": -0.07346390831442373,
+      "qualified": true,
+      "matchingVisibilityBitPatterns": true,
+      "hits": 0,
+      "samples": 49384,
+      "hitFraction": 0.0,
+      "historyClearIncluded": true,
+      "firstWriterEntriesVerified": 49384
+    },
+    {
+      "mode": "warm",
+      "times": [
+        {
+          "role": 0,
+          "meanMs": 0.347131,
+          "medianMs": 0.35424,
+          "samples": 64
+        },
+        {
+          "role": 1,
+          "meanMs": 0.09556,
+          "medianMs": 0.09728,
+          "samples": 64
+        },
+        {
+          "role": 2,
+          "meanMs": 0.344616,
+          "medianMs": 0.352256,
+          "samples": 64
+        }
+      ],
+      "referenceMeanMs": 0.3458735,
+      "candidateMeanMs": 0.09556,
+      "referenceDrift": 0.007271444617757778,
+      "reduction": 0.7237140168298526,
+      "qualified": true,
+      "matchingVisibilityBitPatterns": true,
+      "hits": 49384,
+      "samples": 49384,
+      "hitFraction": 1.0,
+      "historyClearIncluded": true,
+      "firstWriterEntriesVerified": 49384
+    },
+    {
+      "mode": "coherent",
+      "times": [
+        {
+          "role": 0,
+          "meanMs": 0.291983,
+          "medianMs": 0.29184,
+          "samples": 64
+        },
+        {
+          "role": 1,
+          "meanMs": 0.119347,
+          "medianMs": 0.11904,
+          "samples": 64
+        },
+        {
+          "role": 2,
+          "meanMs": 0.290153,
+          "medianMs": 0.289792,
+          "samples": 64
+        }
+      ],
+      "referenceMeanMs": 0.291068,
+      "candidateMeanMs": 0.119347,
+      "referenceDrift": 0.00628719062212266,
+      "reduction": 0.5899686671155882,
+      "qualified": true,
+      "matchingVisibilityBitPatterns": true,
+      "hits": 40960,
+      "samples": 49384,
+      "hitFraction": 0.8294184351206869,
+      "historyClearIncluded": true,
+      "firstWriterEntriesVerified": 49384
+    },
+    {
+      "mode": "mixed",
+      "times": [
+        {
+          "role": 0,
+          "meanMs": 0.387906,
+          "medianMs": 0.365312,
+          "samples": 64
+        },
+        {
+          "role": 1,
+          "meanMs": 0.136552,
+          "medianMs": 0.128592,
+          "samples": 64
+        },
+        {
+          "role": 2,
+          "meanMs": 0.385987,
+          "medianMs": 0.36352,
+          "samples": 64
+        }
+      ],
+      "referenceMeanMs": 0.38694649999999997,
+      "candidateMeanMs": 0.136552,
+      "referenceDrift": 0.004959341924529486,
+      "reduction": 0.6471036693703134,
+      "qualified": true,
+      "matchingVisibilityBitPatterns": true,
+      "hits": 39520,
+      "samples": 49384,
+      "hitFraction": 0.8002591932609752,
+      "historyClearIncluded": true,
+      "firstWriterEntriesVerified": 49384
+    },
+    {
+      "mode": "after",
+      "times": [
+        {
+          "role": 0,
+          "meanMs": 0.384847,
+          "medianMs": 0.364896,
+          "samples": 64
+        },
+        {
+          "role": 1,
+          "meanMs": 0.382648,
+          "medianMs": 0.362656,
+          "samples": 64
+        },
+        {
+          "role": 2,
+          "meanMs": 0.382086,
+          "medianMs": 0.362576,
+          "samples": 64
+        }
+      ],
+      "referenceMeanMs": 0.3834665,
+      "candidateMeanMs": 0.382648,
+      "referenceDrift": 0.007200107440936858,
+      "reduction": 0.0021344758929398022,
+      "qualified": true,
+      "matchingVisibilityBitPatterns": true,
+      "hits": 0,
+      "samples": 49384,
+      "hitFraction": 0.0,
+      "historyClearIncluded": false,
+      "firstWriterEntriesVerified": 49384
+    }
+  ],
+  "recordBytes": 8,
+  "sceneHitFractionMeasured": false,
+  "fragmentStagePerformanceMeasured": false,
+  "newNativeImageProcesses": 0,
+  "newNativeCostProcesses": 0,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "ownership": [
+    {
+      "device": "nvidia",
+      "records": 49152,
+      "workflows": 2,
+      "maximumOverlappingLayers": 128,
+      "validationClean": true,
+      "liveAllocationsAfterUnload": 0
+    },
+    {
+      "device": "intel",
+      "records": 49152,
+      "workflows": 2,
+      "maximumOverlappingLayers": 128,
+      "validationClean": true,
+      "liveAllocationsAfterUnload": 0
+    }
+  ],
+  "policyChecks": 5,
+  "builds": {
+    "release": {
+      "verified": true,
+      "sourceCount": 1675
+    },
+    "debug": {
+      "verified": true,
+      "sourceCount": 1675
+    }
+  },
+  "protectedDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "newFullAssetCopies": 0,
+  "initialReadbackUsageFailureCorrected": true,
+  "interprocessTimingsQualified": false,
+  "package": {
+    "bytes": 325014,
+    "files": 66,
+    "sha256": "0c7ab6dc3a564e1245b05788b82941dbee194bcc97d4116a193fa53418ee988e"
+  }
+}

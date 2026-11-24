@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "status": "pending",
+  "owner": "P8 final environment review",
+  "artifactRoot": "build/runs/20261030-232017-recovery-init-crash-3bd962",
+  "candidatePlayerSha256": "2895b224242ae42857318d58767d190b038f93817cffa82702bb389c09fdeca4",
+  "items": [
+    {
+      "id": "native-archive-environment",
+      "state": "Pending",
+      "evidence": "docs/acceptance/recovery/evidence/2026-10-31-baseline.json",
+      "retryTrigger": "Driver/environment attribution completed; use the original archival strict image gate"
+    },
+    {
+      "id": "native-aa4-thermal-performance",
+      "state": "Pending",
+      "failedDiagnostic": "feature-performance/summary.json",
+      "thermalObservations": [
+        {
+          "seconds": 163.91552049999882,
+          "temperature": 80.0,
+          "thermalMargin": 15.0,
+          "thermalSlowdown": {
+            "hardware": false,
+            "software": true
+          },
+          "gpuUtilization": 100.0,
+          "graphicsClockMHz": 2355.0
+        },
+        {
+          "seconds": 169.08424390000073,
+          "temperature": 85.0,
+          "thermalMargin": -1.0,
+          "thermalSlowdown": {
+            "hardware": false,
+            "software": true
+          },
+          "gpuUtilization": 100.0,
+          "graphicsClockMHz": 2295.0
+        }
+      ],
+      "retryTrigger": "Cooling/power environment change or a measured reduction of main GPU work; preserve thermal headroom throughout warm rendering",
+      "required": "Paired short comparison first, then formal 15-round and 30-minute batches for the final frozen candidate",
+      "qualifiedRetests": [
+        {
+          "sourceCandidate": "ac7d127",
+          "evidence": "docs/acceptance/p8/evidence/2026-10-31/index-aa4-review.json",
+          "status": "environment-rejected",
+          "reason": "Measured compact-index memory/warm-refresh change qualified one short diagnostic",
+          "functionalFrames": 150,
+          "controlRun": false
+        }
+      ]
+    },
+    {
+      "id": "native-debug-startup",
+      "state": "Passed",
+      "owner": "Runtime recovery and resource loading",
+      "evidence": "docs/acceptance/recovery/evidence/2026-10-31-startup-context.json",
+      "failedDiagnostic": "index-native-debug-aa4/summary.json",
+      "retryTrigger": "Regression on related startup or resource-loading changes; deadline remains 600 seconds",
+      "candidatePlayerSha256": "829ef66c2f4820336a3b1c97a7dced62740e7bdae3520c5654e20cbed4438b71",
+      "previousEvidence": "docs/acceptance/recovery/evidence/2026-10-31-dependency-index.json",
+      "qualifiedRetest": {
+        "sourceFiles": {
+          "src/runtime/Project.cpp": {
+            "sha256": "0ababe3f0e6af5982b6c757633aeed3b1104ce1999fa885a3ab9956773afbd9f",
+            "gitBlobId": "1112f63a23b2877ee3bbe5920be4a44893ae1acf"
+          },
+          "src/runtime/Project.hpp": {
+            "sha256": "9fe4fd72c4e9a58bae9536f476d91db002517b4d5e2d1e8a250b88180fdd4b65",
+            "gitBlobId": "d0fd86dc5f51aaa2b7ac908b2ee68709c678a9d7"
+          },
+          "src/runtime/AssetDatabase.hpp": {
+            "sha256": "9550a58cd9fe65ebc00ed3f3fe106b31f3e95250a61b4f1ad7eca2e0a7cefe5e",
+            "gitBlobId": "71ae55ff086623100c8bf883421ac114f6b66c65"
+          },
+          "src/runtime/LevelSession.cpp": {
+            "sha256": "39fb26f94d3913ab132573a5d42a20c2ab1ebf48696131318b07f8e104cba3ce",
+            "gitBlobId": "47b9792b6fbb5cb7dfdef14e12b3db44081432f1"
+          },
+          "src/runtime/LevelSession.hpp": {
+            "sha256": "f120d3769a967afc758ea425f0cfb5d534a41a0735e4f7594033740550aa5955",
+            "gitBlobId": "d71c5dcc105af53f8835b953616471a654756cc0"
+          },
+          "src/app/AzureRenderOptions.hpp": {
+            "sha256": "f96e88d78295baa296c9fd04edab50ad67a80e475f1e892522d1d0e16376b8ab",
+            "gitBlobId": "a0cfda4f3dae90f312e71fc4e939e1b9c15be5a1"
+          },
+          "src/app/AzureRenderApp.cpp": {
+            "sha256": "2092d5447d182a15eb85cf904993632dce4bcbde91f28ff2135bc5c747f16e7f",
+            "gitBlobId": "e2c0bb7c63f3e8a48b9d141bae94c83f4f4be22b"
+          },
+          "src/player/main.cpp": {
+            "sha256": "c3a4ea628fe214ac2e13a30f05e4214447066fe9ab21d05f665e2f7e00f163dd",
+            "gitBlobId": "c5cfe9213e63a95eeb16d162dda49a510bde2acf"
+          },
+          "tests/ProjectStartupTests.cpp": {
+            "sha256": "0594f1a451b717735d972c2dfa52506da583ef84c94cd20f1922ce51f3aed14f",
+            "gitBlobId": "518a92809dd4b9e9fc2aee7fc45d9d851a761b28"
+          },
+          "CMakeLists.txt": {
+            "sha256": "053dfad2e2ac58ca1e4bbe92f852dbdd854c03a4a85fad2d6ebd39e29641f7ae",
+            "gitBlobId": "3168794348cd3c5f8faf0c52d9546b0a0a4cf57a"
+          }
+        },
+        "artifactRoot": "build/runs/20261031-053326-startup-context-d7dce6",
+        "hypothesis": "Reuse one prepared startup index and level instead of rescanning and reparsing; retain the 600-second deadline",
+        "deadlineSeconds": 600,
+        "processSeconds": 521.2512633999941,
+        "exactPngPairs": 8,
+        "validation": "passed",
+        "unloadBuffers": 0,
+        "unloadImages": 0,
+        "originalFaultAttribution": "open"
+      }
+    }
+  ],
+  "unchangedAcceptance": [
+    "NR12 1080p60",
+    "archived strict image comparison",
+    "dual-device delivery",
+    "physical input and audio review"
+  ],
+  "debugAssetThumbnailRefresh": {
+    "status": "pending",
+    "requestFrames": 25,
+    "deadlineMs": 10000,
+    "observedMs": 11938.9605,
+    "operations": 56,
+    "validationEnabled": true,
+    "shaderReloadControlsReached": false,
+    "owner": "编辑预览性能及运行时恢复任务",
+    "retryCondition": "相关预览重建成本优化或实际环境改善",
+    "releaseWorkflowsPassed": [
+      "exploration",
+      "inspector"
+    ],
+    "releaseValidationEnabled": false,
+    "source": "docs/acceptance/recovery/shader-compiler-contract.md",
+    "pipelineCreations": 5,
+    "pipelineTotalMs": 11038.9312,
+    "shaderSnapshotDebugMs": [
+      39.0834,
+      36.2019,
+      34.7958
+    ],
+    "sourceFiles": 122,
+    "sourceBytes": 403325,
+    "sourceFingerprint": "389a03c1c5b531af"
+  },
+  "fullSceneVisualReplay": {
+    "status": "content reproduced; strict pixel compatibility pending",
+    "source": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-visual/summary.json",
+    "configuration": "Release",
+    "frames": 12,
+    "width": 2560,
+    "height": 1440,
+    "minimumExactPixelFraction": 0.9998768446180556,
+    "maximumMeanAbsoluteByteError": 5.054615162037037e-05,
+    "maximumChannelError": 9,
+    "pngBytesExactPairs": 0,
+    "owner": "运行环境及渲染兼容复核任务",
+    "retryCondition": "相关渲染修复、环境变化或明确的新诊断假设"
+  },
+  "fullSceneCharacterComposition": {
+    "status": "strict environment PNG gate pending",
+    "source": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/summary.json",
+    "configuration": "Release",
+    "frames": 12,
+    "visibleCapturePassed": true,
+    "hiddenPngBytesExactPairs": 5,
+    "maximumDifferentPixels": 15,
+    "maximumChannelError": 5,
+    "repeatPngBytesExactPairs": 12,
+    "minimumExactPixelFraction": 0.9999959309895833,
+    "owner": "运行环境及渲染兼容复核任务",
+    "retryCondition": "相关渲染修复或明确的范围调整",
+    "rootCause": "unproven; shared Hair class specialization changed alongside stable tiny differences"
+  }
+}

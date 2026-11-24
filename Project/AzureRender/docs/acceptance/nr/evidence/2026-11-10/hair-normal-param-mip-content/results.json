@@ -1,0 +1,1214 @@
+{
+  "status": "actual-bound-texture-content-audited",
+  "mips": [
+    {
+      "field": "parameters",
+      "mip": 0,
+      "extent": [
+        2048,
+        2048
+      ],
+      "texels": 4194304,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 0,
+      "verticalFlipDifferentPixels": 4189696,
+      "nativeDecodedSha256": "01ae43bf5e2f40e713be322bfe13f2e10f1c19fe670a7ad660595d9b18743bf8",
+      "vulkanDecodedSha256": "01ae43bf5e2f40e713be322bfe13f2e10f1c19fe670a7ad660595d9b18743bf8",
+      "canonicalVulkanSha256": "01ae43bf5e2f40e713be322bfe13f2e10f1c19fe670a7ad660595d9b18743bf8"
+    },
+    {
+      "field": "parameters",
+      "mip": 1,
+      "extent": [
+        1024,
+        1024
+      ],
+      "texels": 1048576,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 0,
+      "verticalFlipDifferentPixels": 1047394,
+      "nativeDecodedSha256": "47698bc836b1685d99a358de55be9cc5ef171199e26e31b19bdeee9488b43571",
+      "vulkanDecodedSha256": "47698bc836b1685d99a358de55be9cc5ef171199e26e31b19bdeee9488b43571",
+      "canonicalVulkanSha256": "47698bc836b1685d99a358de55be9cc5ef171199e26e31b19bdeee9488b43571"
+    },
+    {
+      "field": "parameters",
+      "mip": 2,
+      "extent": [
+        512,
+        512
+      ],
+      "texels": 262144,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 0,
+      "verticalFlipDifferentPixels": 261784,
+      "nativeDecodedSha256": "f148d7ee24f1800f3a6182e813be18782ae1420206f5320f8145794a808f3bbe",
+      "vulkanDecodedSha256": "f148d7ee24f1800f3a6182e813be18782ae1420206f5320f8145794a808f3bbe",
+      "canonicalVulkanSha256": "f148d7ee24f1800f3a6182e813be18782ae1420206f5320f8145794a808f3bbe"
+    },
+    {
+      "field": "parameters",
+      "mip": 3,
+      "extent": [
+        256,
+        256
+      ],
+      "texels": 65536,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 0,
+      "verticalFlipDifferentPixels": 65462,
+      "nativeDecodedSha256": "643491a50a555642dbd60e58bd6e20868eff6611c4aac7c7d31b241d5d47ae58",
+      "vulkanDecodedSha256": "643491a50a555642dbd60e58bd6e20868eff6611c4aac7c7d31b241d5d47ae58",
+      "canonicalVulkanSha256": "643491a50a555642dbd60e58bd6e20868eff6611c4aac7c7d31b241d5d47ae58"
+    },
+    {
+      "field": "parameters",
+      "mip": 4,
+      "extent": [
+        128,
+        128
+      ],
+      "texels": 16384,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 0,
+      "verticalFlipDifferentPixels": 16372,
+      "nativeDecodedSha256": "8e82c9e82174d97f0e51ebc83ad10f7aaa5896645ab5dffdd4250e4af44241e0",
+      "vulkanDecodedSha256": "8e82c9e82174d97f0e51ebc83ad10f7aaa5896645ab5dffdd4250e4af44241e0",
+      "canonicalVulkanSha256": "8e82c9e82174d97f0e51ebc83ad10f7aaa5896645ab5dffdd4250e4af44241e0"
+    },
+    {
+      "field": "parameters",
+      "mip": 5,
+      "extent": [
+        64,
+        64
+      ],
+      "texels": 4096,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 0,
+      "verticalFlipDifferentPixels": 4096,
+      "nativeDecodedSha256": "9db554a4d1bdffadd04fd291e2542471352019b24df925c0c12f9894026783ec",
+      "vulkanDecodedSha256": "9db554a4d1bdffadd04fd291e2542471352019b24df925c0c12f9894026783ec",
+      "canonicalVulkanSha256": "9db554a4d1bdffadd04fd291e2542471352019b24df925c0c12f9894026783ec"
+    },
+    {
+      "field": "parameters",
+      "mip": 6,
+      "extent": [
+        32,
+        32
+      ],
+      "texels": 1024,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 0,
+      "verticalFlipDifferentPixels": 1024,
+      "nativeDecodedSha256": "7ac6ec1ab72f857ed21128a7e8bb995b07faa7efea142d75ab6eb2c4d25fa4a0",
+      "vulkanDecodedSha256": "7ac6ec1ab72f857ed21128a7e8bb995b07faa7efea142d75ab6eb2c4d25fa4a0",
+      "canonicalVulkanSha256": "7ac6ec1ab72f857ed21128a7e8bb995b07faa7efea142d75ab6eb2c4d25fa4a0"
+    },
+    {
+      "field": "parameters",
+      "mip": 7,
+      "extent": [
+        16,
+        16
+      ],
+      "texels": 256,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 0,
+      "verticalFlipDifferentPixels": 256,
+      "nativeDecodedSha256": "7e5b5e720e5bc2185eaf5ff76e3e1e4e6a14b31d2c6eb79ea4a11a2bbb45af16",
+      "vulkanDecodedSha256": "7e5b5e720e5bc2185eaf5ff76e3e1e4e6a14b31d2c6eb79ea4a11a2bbb45af16",
+      "canonicalVulkanSha256": "7e5b5e720e5bc2185eaf5ff76e3e1e4e6a14b31d2c6eb79ea4a11a2bbb45af16"
+    },
+    {
+      "field": "parameters",
+      "mip": 8,
+      "extent": [
+        8,
+        8
+      ],
+      "texels": 64,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 0,
+      "verticalFlipDifferentPixels": 64,
+      "nativeDecodedSha256": "7a420911d2ba7e0a39425261fea0046af46791eeae02c2b77b611b9608be58ad",
+      "vulkanDecodedSha256": "7a420911d2ba7e0a39425261fea0046af46791eeae02c2b77b611b9608be58ad",
+      "canonicalVulkanSha256": "7a420911d2ba7e0a39425261fea0046af46791eeae02c2b77b611b9608be58ad"
+    },
+    {
+      "field": "parameters",
+      "mip": 9,
+      "extent": [
+        4,
+        4
+      ],
+      "texels": 16,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 0,
+      "verticalFlipDifferentPixels": 14,
+      "nativeDecodedSha256": "ace8518f8be60006a52f8e603035a56c0fcbc9d6bc7297e055d9f23ecfe79a41",
+      "vulkanDecodedSha256": "ace8518f8be60006a52f8e603035a56c0fcbc9d6bc7297e055d9f23ecfe79a41",
+      "canonicalVulkanSha256": "ace8518f8be60006a52f8e603035a56c0fcbc9d6bc7297e055d9f23ecfe79a41"
+    },
+    {
+      "field": "parameters",
+      "mip": 10,
+      "extent": [
+        2,
+        2
+      ],
+      "texels": 4,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 0,
+      "verticalFlipDifferentPixels": 4,
+      "nativeDecodedSha256": "c277c700600082d278197f4fffd6afe012632f9440d1930b3955c53d3feeb47f",
+      "vulkanDecodedSha256": "c277c700600082d278197f4fffd6afe012632f9440d1930b3955c53d3feeb47f",
+      "canonicalVulkanSha256": "c277c700600082d278197f4fffd6afe012632f9440d1930b3955c53d3feeb47f"
+    },
+    {
+      "field": "parameters",
+      "mip": 11,
+      "extent": [
+        1,
+        1
+      ],
+      "texels": 1,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 0,
+      "verticalFlipDifferentPixels": 0,
+      "nativeDecodedSha256": "7a5708f3e39e90f0692ef9d95e627b10e6b73079c585f5b13fe2d69cdc8d0901",
+      "vulkanDecodedSha256": "7a5708f3e39e90f0692ef9d95e627b10e6b73079c585f5b13fe2d69cdc8d0901",
+      "canonicalVulkanSha256": "7a5708f3e39e90f0692ef9d95e627b10e6b73079c585f5b13fe2d69cdc8d0901"
+    },
+    {
+      "field": "normals",
+      "mip": 0,
+      "extent": [
+        2048,
+        2048
+      ],
+      "texels": 4194304,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 4194304,
+      "verticalFlipDifferentPixels": 4190764,
+      "nativeDecodedSha256": "a8f343f755d73d6b2b5b6e557d1690a2ee7087769da2cdb3b6f825668e2eb112",
+      "vulkanDecodedSha256": "1c7290ee67d7aeee144923b43b896ce06cc9e545c68e1de7abc85bff1ea74d57",
+      "canonicalVulkanSha256": "a8f343f755d73d6b2b5b6e557d1690a2ee7087769da2cdb3b6f825668e2eb112"
+    },
+    {
+      "field": "normals",
+      "mip": 1,
+      "extent": [
+        1024,
+        1024
+      ],
+      "texels": 1048576,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 1048576,
+      "verticalFlipDifferentPixels": 1047896,
+      "nativeDecodedSha256": "c3fb8fd36305f39009b862cfe580ec419e2548e17ec5a983598f698f6c49e39b",
+      "vulkanDecodedSha256": "13a293eeb12c2ab6bdd187309cfe55b30d75806aae771f49cb235208ce354e92",
+      "canonicalVulkanSha256": "c3fb8fd36305f39009b862cfe580ec419e2548e17ec5a983598f698f6c49e39b"
+    },
+    {
+      "field": "normals",
+      "mip": 2,
+      "extent": [
+        512,
+        512
+      ],
+      "texels": 262144,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 262144,
+      "verticalFlipDifferentPixels": 262050,
+      "nativeDecodedSha256": "d189a813e0f76da6a98d80281576fffe1a987911e59796a6961e7edc1ec31456",
+      "vulkanDecodedSha256": "3beaf2a0a9ee2e774f758bef3e947a2bc5429017920fb2fef3b5689916445298",
+      "canonicalVulkanSha256": "d189a813e0f76da6a98d80281576fffe1a987911e59796a6961e7edc1ec31456"
+    },
+    {
+      "field": "normals",
+      "mip": 3,
+      "extent": [
+        256,
+        256
+      ],
+      "texels": 65536,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 65536,
+      "verticalFlipDifferentPixels": 65528,
+      "nativeDecodedSha256": "7720ace9408a82a5883c3911f1fcaab34bf245b4563ec35776d7818bfa61d5bc",
+      "vulkanDecodedSha256": "9cebe5fca641a3689d18fe4036f1d6ab8cb7cec4acb6c946b29b844856747b7f",
+      "canonicalVulkanSha256": "7720ace9408a82a5883c3911f1fcaab34bf245b4563ec35776d7818bfa61d5bc"
+    },
+    {
+      "field": "normals",
+      "mip": 4,
+      "extent": [
+        128,
+        128
+      ],
+      "texels": 16384,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 16384,
+      "verticalFlipDifferentPixels": 16384,
+      "nativeDecodedSha256": "379d1b7734e44b48faae420b19cff6388f62f30dc045319bfe06a3a8e9214f73",
+      "vulkanDecodedSha256": "18603d5922942292f53e911bf792559a35888cd8dfec20c2e45c3b1e813820ef",
+      "canonicalVulkanSha256": "379d1b7734e44b48faae420b19cff6388f62f30dc045319bfe06a3a8e9214f73"
+    },
+    {
+      "field": "normals",
+      "mip": 5,
+      "extent": [
+        64,
+        64
+      ],
+      "texels": 4096,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 4096,
+      "verticalFlipDifferentPixels": 4096,
+      "nativeDecodedSha256": "6be1f1eb137963087d3fb324df991d9f244eac96fc6ab810adca3fa7c4f48f7e",
+      "vulkanDecodedSha256": "2065edd62dac1716eee3b16cbcd2ef640c94999138c0923f63f39e05026d33f9",
+      "canonicalVulkanSha256": "6be1f1eb137963087d3fb324df991d9f244eac96fc6ab810adca3fa7c4f48f7e"
+    },
+    {
+      "field": "normals",
+      "mip": 6,
+      "extent": [
+        32,
+        32
+      ],
+      "texels": 1024,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 1024,
+      "verticalFlipDifferentPixels": 1024,
+      "nativeDecodedSha256": "31ef5d47e8e9e4a6f87f13a882e2855ddd518dafe3562376bf2c894380e9250d",
+      "vulkanDecodedSha256": "e6e2299b66691d0259c956b8565462a35678bcf37b3400fefd009d6149f45220",
+      "canonicalVulkanSha256": "31ef5d47e8e9e4a6f87f13a882e2855ddd518dafe3562376bf2c894380e9250d"
+    },
+    {
+      "field": "normals",
+      "mip": 7,
+      "extent": [
+        16,
+        16
+      ],
+      "texels": 256,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 256,
+      "verticalFlipDifferentPixels": 256,
+      "nativeDecodedSha256": "dd66dc888fbe8064cfd4712724bd3f1820a1285637691e5cb0b2113920acc4e8",
+      "vulkanDecodedSha256": "d7d8b3e9d6822591f5d0d73c660045e2051224e3943b7c1595efe99ee7fde146",
+      "canonicalVulkanSha256": "dd66dc888fbe8064cfd4712724bd3f1820a1285637691e5cb0b2113920acc4e8"
+    },
+    {
+      "field": "normals",
+      "mip": 8,
+      "extent": [
+        8,
+        8
+      ],
+      "texels": 64,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 64,
+      "verticalFlipDifferentPixels": 64,
+      "nativeDecodedSha256": "abdebe94eb5a6dcf9e62af1cedf330bcd6be969983d9d08834d3bd262dcdc38b",
+      "vulkanDecodedSha256": "c6b92ebefc797789aa30fd43b2074f09151f4869b1bb2066bf5aa6330d8874c3",
+      "canonicalVulkanSha256": "abdebe94eb5a6dcf9e62af1cedf330bcd6be969983d9d08834d3bd262dcdc38b"
+    },
+    {
+      "field": "normals",
+      "mip": 9,
+      "extent": [
+        4,
+        4
+      ],
+      "texels": 16,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 16,
+      "verticalFlipDifferentPixels": 16,
+      "nativeDecodedSha256": "908b4227baf7b45b01a8e7c2a82f7b97477f1723626a0ee6889f3a88293cb33a",
+      "vulkanDecodedSha256": "0fad1d0b5f71c584ade40199a92ed6310c4334c5b45678297b93e90055bf2fb8",
+      "canonicalVulkanSha256": "908b4227baf7b45b01a8e7c2a82f7b97477f1723626a0ee6889f3a88293cb33a"
+    },
+    {
+      "field": "normals",
+      "mip": 10,
+      "extent": [
+        2,
+        2
+      ],
+      "texels": 4,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 4,
+      "verticalFlipDifferentPixels": 4,
+      "nativeDecodedSha256": "3d3f2b5422d90743c1350c069ad2dbe2411276f92c4326fc3d236c1289c00e17",
+      "vulkanDecodedSha256": "6df046e35e0ec9c68859ea06ee1960b8a9a82f75f04b0ae328bf456e5d37354d",
+      "canonicalVulkanSha256": "3d3f2b5422d90743c1350c069ad2dbe2411276f92c4326fc3d236c1289c00e17"
+    },
+    {
+      "field": "normals",
+      "mip": 11,
+      "extent": [
+        1,
+        1
+      ],
+      "texels": 1,
+      "differentPixels": 0,
+      "maxByteError": 0,
+      "differentComponentsPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxPerChannel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawDifferentPixels": 1,
+      "verticalFlipDifferentPixels": 0,
+      "nativeDecodedSha256": "6a0701ca73946353a71a74530e01232f86bcbf9222cf6ec7ef94b955020a403a",
+      "vulkanDecodedSha256": "33ee545e176c97fd67c5169c64aea3ef198ea937f0416ecf2db8aa83506d79d3",
+      "canonicalVulkanSha256": "6a0701ca73946353a71a74530e01232f86bcbf9222cf6ec7ef94b955020a403a"
+    }
+  ],
+  "export": {
+    "status": "exported",
+    "textures": [
+      {
+        "label": "native",
+        "field": "parameters",
+        "event": 950,
+        "binding": 17,
+        "resource": "ResourceId::139671",
+        "format": "BC7_UNORM",
+        "width": 2048,
+        "height": 2048,
+        "mips": 12,
+        "files": [
+          {
+            "mip": 0,
+            "name": "native-parameters-0.dds",
+            "bytes": 4194452,
+            "sha256": "030fb71b317f793d7df9a003f2ecb700c661e2b8704b2af27860b222b5805fc6"
+          },
+          {
+            "mip": 1,
+            "name": "native-parameters-1.dds",
+            "bytes": 1048724,
+            "sha256": "22ef4634b813af655310c9724a6c66628879e940c14b08caed3b3c406e332c48"
+          },
+          {
+            "mip": 2,
+            "name": "native-parameters-2.dds",
+            "bytes": 262292,
+            "sha256": "7918522cb5e3693d21ee512fbb4f3c0dae2c58e17f58af57d6bacd87cf75c476"
+          },
+          {
+            "mip": 3,
+            "name": "native-parameters-3.dds",
+            "bytes": 65684,
+            "sha256": "11dbc0b5e2bab3ae06b83053f372acac676cd7cbd2540c6d7a28651b6e50d095"
+          },
+          {
+            "mip": 4,
+            "name": "native-parameters-4.dds",
+            "bytes": 16532,
+            "sha256": "8cf02f234572806eeeed08685894d643117ef553f8f9af298cf0952905d414ad"
+          },
+          {
+            "mip": 5,
+            "name": "native-parameters-5.dds",
+            "bytes": 4244,
+            "sha256": "650c21a48ef4c4ce8aa2d5c8dc719607a83bbf535b2002aa224d2834af59224c"
+          },
+          {
+            "mip": 6,
+            "name": "native-parameters-6.dds",
+            "bytes": 1172,
+            "sha256": "53813377deb7f206c88b990232bb68e9ee3adf614c3ac485905ef558ceff397a"
+          },
+          {
+            "mip": 7,
+            "name": "native-parameters-7.dds",
+            "bytes": 404,
+            "sha256": "3bd45fac8bb1bbf7e5b27cdb1d14eddb2c73470ec0a748ac201542922e4ab620"
+          },
+          {
+            "mip": 8,
+            "name": "native-parameters-8.dds",
+            "bytes": 212,
+            "sha256": "add6ac8932f26951bb2a9a90aa16ac4d812060d6c4cbcd9727a56e4f7c4cddfc"
+          },
+          {
+            "mip": 9,
+            "name": "native-parameters-9.dds",
+            "bytes": 164,
+            "sha256": "6724c92061f4dd6d5e6c2bc7ff27ccda2eec774c8de2707101ef5597a1812d4a"
+          },
+          {
+            "mip": 10,
+            "name": "native-parameters-10.dds",
+            "bytes": 164,
+            "sha256": "dc3c5b388f3f6e0749a7af822ae364a07180087b3f4aaaadb8d6b625215e351d"
+          },
+          {
+            "mip": 11,
+            "name": "native-parameters-11.dds",
+            "bytes": 164,
+            "sha256": "5e69fe400d93b1e77654f82dd76d5ddcd13b3b127ade012cc05f562112e31a2d"
+          }
+        ],
+        "debugMessages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      {
+        "label": "native",
+        "field": "normals",
+        "event": 950,
+        "binding": 18,
+        "resource": "ResourceId::139862",
+        "format": "BC7_UNORM",
+        "width": 2048,
+        "height": 2048,
+        "mips": 12,
+        "files": [
+          {
+            "mip": 0,
+            "name": "native-normals-0.dds",
+            "bytes": 4194452,
+            "sha256": "ea78cb631d11944c6522181671130f98a74d90d8944223d24eae19f1cd33a8f5"
+          },
+          {
+            "mip": 1,
+            "name": "native-normals-1.dds",
+            "bytes": 1048724,
+            "sha256": "724332bec5ec2b7c32ac5378ec3632e202abc947bc82489db1ea5e3bc1162ef0"
+          },
+          {
+            "mip": 2,
+            "name": "native-normals-2.dds",
+            "bytes": 262292,
+            "sha256": "25b8d44253296800750d1b24337ebf6c35520afc4d996aa8d7659d9ff4506ce5"
+          },
+          {
+            "mip": 3,
+            "name": "native-normals-3.dds",
+            "bytes": 65684,
+            "sha256": "0826e76988f67b184ca77d2a16e6de13c2425627e5d147b7b67ce4b712934cff"
+          },
+          {
+            "mip": 4,
+            "name": "native-normals-4.dds",
+            "bytes": 16532,
+            "sha256": "06eb115ccef323ef79db985ae1be615a348d83df82ccc57a82a37f53063d4111"
+          },
+          {
+            "mip": 5,
+            "name": "native-normals-5.dds",
+            "bytes": 4244,
+            "sha256": "201d63fe8976892711af883998432459dc6bb590807a3cccc58f6786f1858af1"
+          },
+          {
+            "mip": 6,
+            "name": "native-normals-6.dds",
+            "bytes": 1172,
+            "sha256": "9b8bf635644ad3217cea73bad5697738eb854412c3f9d70fce53558f4f470673"
+          },
+          {
+            "mip": 7,
+            "name": "native-normals-7.dds",
+            "bytes": 404,
+            "sha256": "cb793952d51a6cac84840655f5dfd418b8e26e1a4b7121d8bfa4ad380d9bfeaa"
+          },
+          {
+            "mip": 8,
+            "name": "native-normals-8.dds",
+            "bytes": 212,
+            "sha256": "daa134f3fb30769c72f46f6eb4af7c616ecf78c71bb524ab5a3bebe8579f7e92"
+          },
+          {
+            "mip": 9,
+            "name": "native-normals-9.dds",
+            "bytes": 164,
+            "sha256": "1f4051be96ae0cf4342266eb875064867d701e787a8cfd2b72a3c3bf8bb516b7"
+          },
+          {
+            "mip": 10,
+            "name": "native-normals-10.dds",
+            "bytes": 164,
+            "sha256": "a77c55aff5c8054ff2acd8a359c61d2c5ea8d9923739492147761d8d2791dac3"
+          },
+          {
+            "mip": 11,
+            "name": "native-normals-11.dds",
+            "bytes": 164,
+            "sha256": "90515c10d0c8a9016ccef470b570d9437e363825c7c9bc1575012f6dbd8457f4"
+          }
+        ],
+        "debugMessages": []
+      },
+      {
+        "label": "vulkan",
+        "field": "parameters",
+        "event": 493,
+        "binding": 12,
+        "resource": "ResourceId::804",
+        "format": "R8G8B8A8_UNORM",
+        "width": 2048,
+        "height": 2048,
+        "mips": 12,
+        "files": [
+          {
+            "mip": 0,
+            "name": "vulkan-parameters-0.dds",
+            "bytes": 16777344,
+            "sha256": "eaef1501de7e3c377b6d3ad2d516f9d376e5b685408a447f4cbaffda10679390"
+          },
+          {
+            "mip": 1,
+            "name": "vulkan-parameters-1.dds",
+            "bytes": 4194432,
+            "sha256": "a492c9eedb72d93841b938db6e415a31de0ca1bfe4d2bbaffe80058d225af1a2"
+          },
+          {
+            "mip": 2,
+            "name": "vulkan-parameters-2.dds",
+            "bytes": 1048704,
+            "sha256": "c4c0dedc3ea5f6c1fd29fbf7a7d6871b94b3a239cddb24b162843be2ec2b4402"
+          },
+          {
+            "mip": 3,
+            "name": "vulkan-parameters-3.dds",
+            "bytes": 262272,
+            "sha256": "17ad4cac47570580fa34f8138deb97124675864b2b900e29a31826eac42d044d"
+          },
+          {
+            "mip": 4,
+            "name": "vulkan-parameters-4.dds",
+            "bytes": 65664,
+            "sha256": "5496be0373049beefd7774bd9dfcca7b7b00f90707717e77497b3fcdc32c756c"
+          },
+          {
+            "mip": 5,
+            "name": "vulkan-parameters-5.dds",
+            "bytes": 16512,
+            "sha256": "f176832f31f59efba134290799f427b260b8382cc4065cca3b981af3bbf22958"
+          },
+          {
+            "mip": 6,
+            "name": "vulkan-parameters-6.dds",
+            "bytes": 4224,
+            "sha256": "d1b9fe1ccc2c086475e898ee7245bcb9e6158d49f6ecd3eb9ab7da0dced7da13"
+          },
+          {
+            "mip": 7,
+            "name": "vulkan-parameters-7.dds",
+            "bytes": 1152,
+            "sha256": "f0af5b2d5dc7347ff63f9c8bf3b8d72a4f24f2d8164634835245d9c2c9230d92"
+          },
+          {
+            "mip": 8,
+            "name": "vulkan-parameters-8.dds",
+            "bytes": 384,
+            "sha256": "addcefcf923f692e451426c80bb5569b35674c255aad8b14797a463ef568b0c7"
+          },
+          {
+            "mip": 9,
+            "name": "vulkan-parameters-9.dds",
+            "bytes": 192,
+            "sha256": "5ebb3559c2b3f90770bd64d79f7821126cf3385577167c57f6620c22b324d96b"
+          },
+          {
+            "mip": 10,
+            "name": "vulkan-parameters-10.dds",
+            "bytes": 144,
+            "sha256": "102f02fab17bc3a777dd0f2432e4920eef40bd657c7412f832c4337971c380e7"
+          },
+          {
+            "mip": 11,
+            "name": "vulkan-parameters-11.dds",
+            "bytes": 132,
+            "sha256": "c90e7a021929e1bcba2d0d87a5818a633d11052c95c659ad6aae49a71c828943"
+          }
+        ],
+        "debugMessages": []
+      },
+      {
+        "label": "vulkan",
+        "field": "normals",
+        "event": 493,
+        "binding": 8,
+        "resource": "ResourceId::791",
+        "format": "R8G8B8A8_UNORM",
+        "width": 2048,
+        "height": 2048,
+        "mips": 12,
+        "files": [
+          {
+            "mip": 0,
+            "name": "vulkan-normals-0.dds",
+            "bytes": 16777344,
+            "sha256": "260847277f345a1c313c6ccdb953ab39a4564c2128a701fd3a198635b80ee38f"
+          },
+          {
+            "mip": 1,
+            "name": "vulkan-normals-1.dds",
+            "bytes": 4194432,
+            "sha256": "747f8966929062bbca8414002036a25ddc3d94a9d542e945e3d0644362b4a143"
+          },
+          {
+            "mip": 2,
+            "name": "vulkan-normals-2.dds",
+            "bytes": 1048704,
+            "sha256": "b91c2cfbdbc522b0171bcae48fdea2c85d5f168c942381c5a1f8dd9551051877"
+          },
+          {
+            "mip": 3,
+            "name": "vulkan-normals-3.dds",
+            "bytes": 262272,
+            "sha256": "bab0e9db9229534298f44356124719c2c0d3987ed5bce0aa1a49a1aa9b547aae"
+          },
+          {
+            "mip": 4,
+            "name": "vulkan-normals-4.dds",
+            "bytes": 65664,
+            "sha256": "d48a2ba9e63770eb85df9439cee7911e1bad861db36309fa8a0fba6822db0690"
+          },
+          {
+            "mip": 5,
+            "name": "vulkan-normals-5.dds",
+            "bytes": 16512,
+            "sha256": "eaa948fca46ec5cde097099430d47fe9c674a96b7b5022e6a77895a9b31a6839"
+          },
+          {
+            "mip": 6,
+            "name": "vulkan-normals-6.dds",
+            "bytes": 4224,
+            "sha256": "5208dc88a5c89511689f6da0d7f9356853d90d3c8e01bfdd7ddd4e6f237198c1"
+          },
+          {
+            "mip": 7,
+            "name": "vulkan-normals-7.dds",
+            "bytes": 1152,
+            "sha256": "91dcc57ab6a06a7f81eecbd3c44fb7f1d833df24968b9fe03a30230eb036cc39"
+          },
+          {
+            "mip": 8,
+            "name": "vulkan-normals-8.dds",
+            "bytes": 384,
+            "sha256": "2bd3231e77c0a3fdb22911a8b30ce963bef637a05a12d56e59aa69b970b28a2e"
+          },
+          {
+            "mip": 9,
+            "name": "vulkan-normals-9.dds",
+            "bytes": 192,
+            "sha256": "0d21156c5c81e3f1bfb620642eacc8c4c51eb60ccb3796222b7680cda678fbf2"
+          },
+          {
+            "mip": 10,
+            "name": "vulkan-normals-10.dds",
+            "bytes": 144,
+            "sha256": "a7524d75241d0fa33f27bfe69bc6ea04155ba10d0d3e5f54e755c37162d30e04"
+          },
+          {
+            "mip": 11,
+            "name": "vulkan-normals-11.dds",
+            "bytes": 132,
+            "sha256": "e2a8853de97cba77bd0fc8675b253b288b4a11d02bc438824478b41ecc347375"
+          }
+        ],
+        "debugMessages": []
+      }
+    ]
+  },
+  "pillowVersion": "12.2.0",
+  "allParametersExact": true,
+  "allCanonicalNormalsExact": true,
+  "scope": "DDS/Pillow decoded content only. Normal G/A uses byte complement. Actual filtered sample values and color gates remain separate.",
+  "productionChanged": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "archiveBytes": 26933,
+  "archiveSha256": "976241d676a3141259ab4c861a762de5706a833109dcdfe59d1a169d14bbb55b",
+  "archiveFiles": [
+    {
+      "path": "task.json",
+      "bytes": 456,
+      "sha256": "1b2459e347347fad3b74c3d9bbdefc7ab2fc35670d63e8ab18a98f6ab973a6c9"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 437,
+      "sha256": "3b61aa4200ec0f93fe48a9911f207b1f9f0180ead1450868f6332317a9d4af28"
+    },
+    {
+      "path": "export_mips.py",
+      "bytes": 2852,
+      "sha256": "3e3dd98350363540b29fc748f9ee19b6d7cfce1aecdca5964d97229a92d606ce"
+    },
+    {
+      "path": "run.py",
+      "bytes": 1001,
+      "sha256": "00dcdec87ba5eed0c575379ea8cbf14bfeef55620d5223978ae23afa554ea2a0"
+    },
+    {
+      "path": "queued.py",
+      "bytes": 878,
+      "sha256": "056ca44c85ae78f0911a020be456b7f6f9323b79e9b312a05c14cf9ed62f109c"
+    },
+    {
+      "path": "compare.py",
+      "bytes": 2982,
+      "sha256": "8719ada2762d388f6831659f155913d63b33e1dc46c8d0e9a2223141497042a8"
+    },
+    {
+      "path": "execution.json",
+      "bytes": 580,
+      "sha256": "88092873e1e3c66e653351f1930bb886433c36984b9e88f906e81177a33351ec"
+    },
+    {
+      "path": "export-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "export-state.json",
+      "bytes": 11313,
+      "sha256": "910f8fb46d41fc3bf9caca1dcb01f0f94ef0fac9e7c5ad7ff21a48bb66cd7a2c"
+    },
+    {
+      "path": "process.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results.json",
+      "bytes": 30285,
+      "sha256": "c07377e9387be330163a4f2761b628cac94f7ccd3fc4a22b95d6b91db1c7da2c"
+    },
+    {
+      "path": "native-parameters-6.dds",
+      "bytes": 1172,
+      "sha256": "53813377deb7f206c88b990232bb68e9ee3adf614c3ac485905ef558ceff397a"
+    },
+    {
+      "path": "native-parameters-7.dds",
+      "bytes": 404,
+      "sha256": "3bd45fac8bb1bbf7e5b27cdb1d14eddb2c73470ec0a748ac201542922e4ab620"
+    },
+    {
+      "path": "native-parameters-8.dds",
+      "bytes": 212,
+      "sha256": "add6ac8932f26951bb2a9a90aa16ac4d812060d6c4cbcd9727a56e4f7c4cddfc"
+    },
+    {
+      "path": "native-parameters-9.dds",
+      "bytes": 164,
+      "sha256": "6724c92061f4dd6d5e6c2bc7ff27ccda2eec774c8de2707101ef5597a1812d4a"
+    },
+    {
+      "path": "native-parameters-10.dds",
+      "bytes": 164,
+      "sha256": "dc3c5b388f3f6e0749a7af822ae364a07180087b3f4aaaadb8d6b625215e351d"
+    },
+    {
+      "path": "native-parameters-11.dds",
+      "bytes": 164,
+      "sha256": "5e69fe400d93b1e77654f82dd76d5ddcd13b3b127ade012cc05f562112e31a2d"
+    },
+    {
+      "path": "native-normals-6.dds",
+      "bytes": 1172,
+      "sha256": "9b8bf635644ad3217cea73bad5697738eb854412c3f9d70fce53558f4f470673"
+    },
+    {
+      "path": "native-normals-7.dds",
+      "bytes": 404,
+      "sha256": "cb793952d51a6cac84840655f5dfd418b8e26e1a4b7121d8bfa4ad380d9bfeaa"
+    },
+    {
+      "path": "native-normals-8.dds",
+      "bytes": 212,
+      "sha256": "daa134f3fb30769c72f46f6eb4af7c616ecf78c71bb524ab5a3bebe8579f7e92"
+    },
+    {
+      "path": "native-normals-9.dds",
+      "bytes": 164,
+      "sha256": "1f4051be96ae0cf4342266eb875064867d701e787a8cfd2b72a3c3bf8bb516b7"
+    },
+    {
+      "path": "native-normals-10.dds",
+      "bytes": 164,
+      "sha256": "a77c55aff5c8054ff2acd8a359c61d2c5ea8d9923739492147761d8d2791dac3"
+    },
+    {
+      "path": "native-normals-11.dds",
+      "bytes": 164,
+      "sha256": "90515c10d0c8a9016ccef470b570d9437e363825c7c9bc1575012f6dbd8457f4"
+    },
+    {
+      "path": "vulkan-parameters-6.dds",
+      "bytes": 4224,
+      "sha256": "d1b9fe1ccc2c086475e898ee7245bcb9e6158d49f6ecd3eb9ab7da0dced7da13"
+    },
+    {
+      "path": "vulkan-parameters-7.dds",
+      "bytes": 1152,
+      "sha256": "f0af5b2d5dc7347ff63f9c8bf3b8d72a4f24f2d8164634835245d9c2c9230d92"
+    },
+    {
+      "path": "vulkan-parameters-8.dds",
+      "bytes": 384,
+      "sha256": "addcefcf923f692e451426c80bb5569b35674c255aad8b14797a463ef568b0c7"
+    },
+    {
+      "path": "vulkan-parameters-9.dds",
+      "bytes": 192,
+      "sha256": "5ebb3559c2b3f90770bd64d79f7821126cf3385577167c57f6620c22b324d96b"
+    },
+    {
+      "path": "vulkan-parameters-10.dds",
+      "bytes": 144,
+      "sha256": "102f02fab17bc3a777dd0f2432e4920eef40bd657c7412f832c4337971c380e7"
+    },
+    {
+      "path": "vulkan-parameters-11.dds",
+      "bytes": 132,
+      "sha256": "c90e7a021929e1bcba2d0d87a5818a633d11052c95c659ad6aae49a71c828943"
+    },
+    {
+      "path": "vulkan-normals-6.dds",
+      "bytes": 4224,
+      "sha256": "5208dc88a5c89511689f6da0d7f9356853d90d3c8e01bfdd7ddd4e6f237198c1"
+    },
+    {
+      "path": "vulkan-normals-7.dds",
+      "bytes": 1152,
+      "sha256": "91dcc57ab6a06a7f81eecbd3c44fb7f1d833df24968b9fe03a30230eb036cc39"
+    },
+    {
+      "path": "vulkan-normals-8.dds",
+      "bytes": 384,
+      "sha256": "2bd3231e77c0a3fdb22911a8b30ce963bef637a05a12d56e59aa69b970b28a2e"
+    },
+    {
+      "path": "vulkan-normals-9.dds",
+      "bytes": 192,
+      "sha256": "0d21156c5c81e3f1bfb620642eacc8c4c51eb60ccb3796222b7680cda678fbf2"
+    },
+    {
+      "path": "vulkan-normals-10.dds",
+      "bytes": 144,
+      "sha256": "a7524d75241d0fa33f27bfe69bc6ea04155ba10d0d3e5f54e755c37162d30e04"
+    },
+    {
+      "path": "vulkan-normals-11.dds",
+      "bytes": 132,
+      "sha256": "e2a8853de97cba77bd0fc8675b253b288b4a11d02bc438824478b41ecc347375"
+    }
+  ]
+}

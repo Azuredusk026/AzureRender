@@ -1,0 +1,10 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start  25: AzureRender.OutlineCoverageRecording
+1/2 Test  #25: AzureRender.OutlineCoverageRecording ...   Passed    7.32 sec
+    Start 471: AzureAssets.MaterialDocument
+2/2 Test #471: AzureAssets.MaterialDocument ...........   Passed    4.22 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =  11.63 sec

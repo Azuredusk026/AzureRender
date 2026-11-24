@@ -1,0 +1,25 @@
+[0/2] Re-checking globbed directories...
+[1/6] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/6] Building CXX object CMakeFiles\AzureEditorProjectFlowTests.dir\tests\EditorProjectFlowTests.cpp.obj
+[3/6] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\SettingsPanel.cpp.obj
+[4/6] Linking CXX static library AzureEditor.lib
+[5/6] Linking CXX executable AzureEditorProjectFlowTests.exe
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 177: AzureEditor.ProjectFlow
+1/1 Test #177: AzureEditor.ProjectFlow ..........***Failed    0.22 sec
+[1791593439772][info][editor][code=0] Opened scene: startup
+[1791593439795][info][editor][code=0] Opened scene: startup
+[1791593439830][info][editor][code=0] Opened scene: startup
+[1791593439854][info][editor][code=0] Opened scene: startup
+Scene template must retain registered components and Prefab sources in its startup format
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.23 sec
+
+The following tests FAILED:
+	177 - AzureEditor.ProjectFlow (Failed)
+Errors while running CTest

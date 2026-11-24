@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_driver_window_cannot_receive_engine_close (__main__.NativeWindowTests.test_driver_window_cannot_receive_engine_close)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_native_window.py", line 26, in test_driver_window_cannot_receive_engine_close
+    self.assertEqual(engine.find(), windows[0],
+AssertionError: 22285050 != 21301274 : The native close target must be the engine window, regardless of driver helper size
+
+----------------------------------------------------------------------
+Ran 1 test in 0.008s
+
+FAILED (failures=1)

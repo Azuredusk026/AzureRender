@@ -1,0 +1,12 @@
+{
+  "generator": "tools/create_physics_project.py",
+  "version": 1,
+  "mechanism": "door",
+  "inputs": [
+    {
+      "path": "assets_public/scene_inspector/assets/cube.gltf",
+      "sha256": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651"
+    }
+  ],
+  "license": "MIT"
+}

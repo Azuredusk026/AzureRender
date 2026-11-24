@@ -1,0 +1,37 @@
+[
+  {
+    "gain": 1,
+    "edgeErrorRatio": 1.581668708784404,
+    "maximumEnergyError": 0.0,
+    "maximumFlatByteError": 0,
+    "ghosts": 0
+  },
+  {
+    "gain": 1.125,
+    "edgeErrorRatio": 1.238934290914666,
+    "maximumEnergyError": 0.0,
+    "maximumFlatByteError": 0,
+    "ghosts": 0
+  },
+  {
+    "gain": 1.25,
+    "edgeErrorRatio": 0.967728298654909,
+    "maximumEnergyError": 0.0,
+    "maximumFlatByteError": 0,
+    "ghosts": 0
+  },
+  {
+    "gain": 1.375,
+    "edgeErrorRatio": 0.8111232695715604,
+    "maximumEnergyError": 0.0,
+    "maximumFlatByteError": 0,
+    "ghosts": 0
+  },
+  {
+    "gain": 1.5,
+    "edgeErrorRatio": 0.7293630973509142,
+    "maximumEnergyError": 0.0,
+    "maximumFlatByteError": 0,
+    "ghosts": 0
+  }
+]

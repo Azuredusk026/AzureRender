@@ -1,0 +1,1751 @@
+{
+  "schemaVersion": 1,
+  "status": "PartialVerifiedPendingIdleGpuEnvironment",
+  "sourceHash": "2f5618d62593c83a59a4000654b3e14a2ee9e80dc8a6a77a4ace41ab3a37b901",
+  "cpuFullSuitePassedUniqueTests": 326,
+  "additionalCpuChecksPassed": 6,
+  "gpuVerifiedUniqueTests": 87,
+  "gpuCurrentSourcePassedTests": 55,
+  "gpuByteEquivalentAssociatedTests": 32,
+  "gpuPassedByConfiguration": {
+    "debug": 63,
+    "release": 24
+  },
+  "retainedFailedGpuRuns": 2,
+  "interruptedDiagnosticRuns": 1,
+  "pending": [
+    {
+      "configuration": "debug",
+      "test": "AzureEditor.NativeInputGpu",
+      "status": "DeferredToP8DesktopInput"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.PlayablePackage",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.WorkspaceGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.MaterialFixtureGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.IndependentAnimationGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.ThirdPersonPlayer",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.PlayablePlayer",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.OptionalRuntimeTrace",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.RuntimeSpawnGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.PresentationGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.EditorHost",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.EditorPlayable",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.PhysicsPlayer",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.ScriptPlayer",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.ContentGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.NativeInputGpu",
+      "status": "DeferredToP8DesktopInput"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.UsabilityGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.DocumentGuardGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureRender.VisualRegression",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureRender.VisualRegressionLegacyDescriptors",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureRender.BlackholeComputeGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureRender.CharacterIblComputeGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureRender.CharacterSkinningComputeGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureRender.R3Comparison",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureRender.R3TransparentComparison",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureRender.AuditRegressions",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureRender.VisualRegressionLegacySkinning",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureRender.CharacterMorphComputeGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureRender.ClusteredLightingGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.ProductizationGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.PropertiesGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.ContentTransactionsGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.ContentNavigationGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureGame.PlatformerCompletion",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.LiveGameState",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.NodeAdditionGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureGame.GameSequence",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureGame.ExplorationCompletion",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.AuthoringGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.SimulationGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.ViewportNavigationGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEditor.SceneGeometryGpu",
+      "status": "PendingIdleGpuEnvironment"
+    },
+    {
+      "configuration": "release",
+      "test": "AzureEngine.RendererResidency",
+      "status": "PendingIdleGpuEnvironment"
+    }
+  ],
+  "nonDesktopGpuExpectedTests": 128,
+  "fullGpuRegressionPassed": false,
+  "formalRounds": 0,
+  "formalPerformancePassed": false,
+  "currentSourceLongRuns": 0,
+  "priorWorkingSetCauseResolved": false,
+  "physicalOperatorVerification": false,
+  "subjectiveAudioVerification": false,
+  "manualReviewPhase": "P8",
+  "externalGpuLoadConfirmed": true,
+  "packageFailureCauseConfirmed": false,
+  "files": [
+    {
+      "file": "pacing-header-red.log.gz",
+      "originalBytes": 1190,
+      "originalSha256": "1cd80dbabe03fecdf35aae7ba6c59cde0181f292d7aa270d3e7410cd35acf21e",
+      "compressedSha256": "c6bef7033b84359ae6ed7ca3b92ef939b0bd3208fc25a75dba19794bd0088441"
+    },
+    {
+      "file": "pacing-setting-red.log.gz",
+      "originalBytes": 242,
+      "originalSha256": "48e3726995022029faead4905e2e37c7ce4cf0cc3f5d90b16ba641e27db93a6b",
+      "compressedSha256": "2262f683937001517d36a34ee054fbb24b0caa831121ed83075471c10dd9a738"
+    },
+    {
+      "file": "pacing-green.log.gz",
+      "originalBytes": 286,
+      "originalSha256": "64d097117e991c1ed0e3fe140759a2f49f364d043521f59f765e0aca35030264",
+      "compressedSha256": "134cdb9b3f5913739240fc0a24cf298ca904028df76e2b8ce98c8929329cb791"
+    },
+    {
+      "file": "pacing-build.log.gz",
+      "originalBytes": 16807,
+      "originalSha256": "aa346bc3e7c6f6bcdd8146e1bbcca3fc81aadc97415ef2548aa0e4a8cca1a0df",
+      "compressedSha256": "f382ed13dc59fd6b738cbd917271bb46377fdb226e486bb4c3ade8edce2d396e"
+    },
+    {
+      "file": "presentation-header-red.log.gz",
+      "originalBytes": 1132,
+      "originalSha256": "fde8ad0860fd6a1f60b9969153cbeb7d5d94b07dd2710f189edf9166f57b9766",
+      "compressedSha256": "c23fa5343d46a904cd4a0f5e7f525dd3ef2df68354058441688c1cdd4c381b41"
+    },
+    {
+      "file": "presentation-setting-red.log.gz",
+      "originalBytes": 225,
+      "originalSha256": "8e28a208020ef4eae64873f9fc2b276c8c6259a75feeaccf8cd4247d3b147a9c",
+      "compressedSha256": "4247d3f47aa08bc07afd18444a4b65548914ce2ab04dea724dbf9255e7d83118"
+    },
+    {
+      "file": "presentation-green.log.gz",
+      "originalBytes": 292,
+      "originalSha256": "bd56da723c4fe1d64201726243d83d8a27a4fc70eaae6136d5ac5a409e62f152",
+      "compressedSha256": "26e06c16185c1936ff741d8806fc7ab41346f553ff5c07d20582ff6991b757c6"
+    },
+    {
+      "file": "presentation-setting-green.log.gz",
+      "originalBytes": 286,
+      "originalSha256": "64d097117e991c1ed0e3fe140759a2f49f364d043521f59f765e0aca35030264",
+      "compressedSha256": "134cdb9b3f5913739240fc0a24cf298ca904028df76e2b8ce98c8929329cb791"
+    },
+    {
+      "file": "presentation-build.log.gz",
+      "originalBytes": 16987,
+      "originalSha256": "54f8e241c7d5d46b9dfedc7d34b047d8344dc201d08049933cb93f29ceedd9b4",
+      "compressedSha256": "052cdeb6b2be730bf074652e1afe503bb9d38f1af7686ff00ca8dda548ab661a"
+    },
+    {
+      "file": "pacing-control.log.gz",
+      "originalBytes": 7653,
+      "originalSha256": "c5c3c3217f1d5957d9b9a8c5b46a0f9084b7baa99849ca59a14f4f0c9b8f413a",
+      "compressedSha256": "94033f3701bb598e77e470a7b13e7c773701985f3944c779b2eba9fc5e9c7f7f"
+    },
+    {
+      "file": "presentation-control.log.gz",
+      "originalBytes": 3330,
+      "originalSha256": "3f3e0bfead07b6370c1ce5b3d45dc9b6077082bb0c8d4b818638b809e34ddffe",
+      "compressedSha256": "a6f5b2738949245d48efa67e2ce7cdbf504ad8bbc48414d0a5b86675ce1abf39"
+    },
+    {
+      "file": "pacing-debug-cpu.log.gz",
+      "originalBytes": 21961,
+      "originalSha256": "ce81aab0ab4219e7a0247d4cca1c706ecbd16bbeb830ba8edda67f988637dc5b",
+      "compressedSha256": "6043ca6efea8fd17df1e9f0146c1adb0e9545ae9d0d3ffb378842155322ff0f2"
+    },
+    {
+      "file": "pacing-release-cpu.log.gz",
+      "originalBytes": 21965,
+      "originalSha256": "ab91a33861880d14429e2e75c7d3d0cbb5ed40cfb5e3aa5da2ebc89ca6df80aa",
+      "compressedSha256": "ad9bb474b6972f2704888b12e252bbaa2fa56f999004b4148152c35c97ed0fdf"
+    },
+    {
+      "file": "pacing-regression-and-performance.log.gz",
+      "originalBytes": 6765,
+      "originalSha256": "ee8e5c1aa8a5051ff7b60a3b69cf150a882b31861b451c105a51500940091c74",
+      "compressedSha256": "589265bec02dfb7e9eca4551bc3bec013ca20046bbc33dc83673c73d769e3585"
+    },
+    {
+      "file": "pacing-gpu-partial.json.gz",
+      "originalBytes": 8027,
+      "originalSha256": "986e3725d0198fec72406ca0ae26eaff08b24c56cb4534b6a5396d080c3dabc4",
+      "compressedSha256": "5bca3bbbb0a132a5056144b46ecb65036c8f115c7d222ad1633767e07d449eb1"
+    },
+    {
+      "file": "pacing-resumed-regression.log.gz",
+      "originalBytes": 15680,
+      "originalSha256": "1f4143fc7117d8b4ab5422708ac6f7cebb60b9ca9ef0847d052e5fdd434c0779",
+      "compressedSha256": "0763b71146cd4b8f1517b4c4b3faa61581700649c12716f0c394dfde232d68e8"
+    },
+    {
+      "file": "pacing-tool-build.log.gz",
+      "originalBytes": 2052,
+      "originalSha256": "35c4e6e4df199ffc42eb72dd91d176af473b5dd84c9c0f2f23cde7a36784aff4",
+      "compressedSha256": "413c199ef88cbb8196bf715f142dd61051f856fbdc25294eb0ae00f761a1ab5e"
+    },
+    {
+      "file": "pacing-tool-debug-cpu.log.gz",
+      "originalBytes": 619,
+      "originalSha256": "cd48642ad6e5b69012ba869193629c7c6c1fefa84d634b0cdad7c5b1203ab981",
+      "compressedSha256": "e1e3f74e89f8382da17c2fc37f96220a4e632f22965031f6494e59569b164e99"
+    },
+    {
+      "file": "pacing-tool-release-cpu.log.gz",
+      "originalBytes": 623,
+      "originalSha256": "f9e1798d3de3a9caefc43f440926227e5b9c653b1520e6dd808d77cce142867b",
+      "compressedSha256": "17bfe89f58e9e97c3706bfcc67dd61a14a5401e62833fa858609b3c0a47ef323"
+    },
+    {
+      "file": "pacing-tool-association.json.gz",
+      "originalBytes": 633,
+      "originalSha256": "cc6a43bf718f632055598466d1c26f6263b9b92459ab1f1a17153cb580a5d3e0",
+      "compressedSha256": "5f8b0e62f644a4c93ca94a728234829417b939920936313c780bf3fc0be41ee9"
+    },
+    {
+      "file": "pacing-debug-provenance.json.gz",
+      "originalBytes": 150661,
+      "originalSha256": "3e2c450d0f0a02dff30e5e68a71f3d9a8fba4033932f5d5fd7ee03a7ca5efb40",
+      "compressedSha256": "ceb79890af8d858cccdd1fcaeec894c1bbae84760165e169ac6c7e3fcc5b63fd"
+    },
+    {
+      "file": "pacing-release-provenance.json.gz",
+      "originalBytes": 147763,
+      "originalSha256": "454caebe3c036fb82727a697bab68587a67f576d4e0b5066f87255a5725f3cee",
+      "compressedSha256": "f7c69c9ba66cfeb3cdfbcf04bd4118a5b5d13dd45274bbc05613e1a1963994c2"
+    },
+    {
+      "file": "pacing-tool-debug-provenance.json.gz",
+      "originalBytes": 150661,
+      "originalSha256": "e0b6a1eedf2b8067bc630288c7a37d6556173a66760faf757c93e0b9d28e06dc",
+      "compressedSha256": "9c5090de5c527058dd3af297318689e33c91e402c965f2054edd9b66018ad918"
+    },
+    {
+      "file": "pacing-tool-release-provenance.json.gz",
+      "originalBytes": 147763,
+      "originalSha256": "185766da293e30072cc0bf323eb6085b20ceebe87de8bd63d2f93a7ae774a78e",
+      "compressedSha256": "d9f8d91f5281ad3f96bb132cea1ec80478c4b7ddf4e36d91abddeb887452d1e2"
+    },
+    {
+      "file": "pacing-tool-gpu-partial.json.gz",
+      "originalBytes": 26758,
+      "originalSha256": "250b523b09a0c9c7cc58d5147e6fe2f5ee7724902010e74f66345ccb49ba1f8d",
+      "compressedSha256": "d558bc3d029a6639d9be2065e2e07e894def555b9e8c6ce58cec886c333b8a1b"
+    },
+    {
+      "file": "level-player-debug-green.log.gz",
+      "originalBytes": 1644,
+      "originalSha256": "bb44e7cc2139b2c8bada0e18e277b7c2c3ef19fc0526731db3fa5aa966ed5589",
+      "compressedSha256": "109001c354efec2c31c99081d60dea508af317d77424c64af05cbe28374a7abb"
+    },
+    {
+      "file": "level-player-release-green.log.gz",
+      "originalBytes": 1660,
+      "originalSha256": "ae9876a50041ce947a2aab1fdc6da63d5388e6254ea485ac1cce7690781bdbd4",
+      "compressedSha256": "c20924ca136a6fd2718a55e0c35a095be310ff15f12af529726641572bfceb20"
+    },
+    {
+      "file": "package-presentation.log.gz",
+      "originalBytes": 513,
+      "originalSha256": "704196f0e24ff74ecf268ae4b05f7437dfba1fbcca775a77d49c74715553135f",
+      "compressedSha256": "ad5514c4ca7a8a1624e70cddab2eb20c76b4f7ec66d493c70090699f4ce2e76e"
+    },
+    {
+      "file": "probe-pacing.py.gz",
+      "originalBytes": 2412,
+      "originalSha256": "a91f12ef1bb62b456b0366f82dbe18ff64ef305f80ca0c1400bdfb971bd7cbf3",
+      "compressedSha256": "4683025296626f4a56fbf3d17e625c92301b46703c308ce3580ecbaf5bbad17f"
+    },
+    {
+      "file": "probe-presentation.py.gz",
+      "originalBytes": 2629,
+      "originalSha256": "27c66cc118495e5c3f57b4c625bd615acb101e2f6e2e6c91399a6fc5bd0c64eb",
+      "compressedSha256": "e6ffd4b8b33a26c7904667c4cda39a379b1583d23827fee76aeb932cefda7ab0"
+    },
+    {
+      "file": "probe-package-presentation.py.gz",
+      "originalBytes": 2036,
+      "originalSha256": "b832e80a74d5f7973dd478a56fbf48fc24592d23c201c9a5a9f3f9e151312f06",
+      "compressedSha256": "727f81249fdaf63e5a5e808c84cc584e0d2ada8b524d9a63661bac1c7e8f16aa"
+    },
+    {
+      "file": "verify-pacing.py.gz",
+      "originalBytes": 3266,
+      "originalSha256": "2c251770ed79f9e54265a36215b77417ce35f78a7cbae822f896a819fa94a838",
+      "compressedSha256": "efe35c9c319388f6fe70873fbda2d415f717f8bb731c3dd04d0441306e1cee80"
+    },
+    {
+      "file": "resume-pacing.py.gz",
+      "originalBytes": 4126,
+      "originalSha256": "99888f954209d6109ef6d822bcc1a9aa62d94b35b164c94abf145dc4e35e2cd5",
+      "compressedSha256": "9792cdb8a9817450b974ab8dc6b7364e1358c4187e0a52d36c7f6a2cf16434d9"
+    },
+    {
+      "file": "associate-pacing-tools.py.gz",
+      "originalBytes": 1093,
+      "originalSha256": "c79c022fb4cf9cc90eff98ce16a44163de8a337e0ce5fac7c432b7c8904a8b70",
+      "compressedSha256": "1d766df10c723860e1afe2eb9cfd6cb97f330e9f817cc953aa6879dc90d46d2e"
+    },
+    {
+      "file": "verify-offline.py.gz",
+      "originalBytes": 3352,
+      "originalSha256": "e8497c4fcc0485e63d5626b8c1f3271c5efed602dc4f1ca0e22bdb8998e92cdb",
+      "compressedSha256": "eadbbd6b94656ab902bda3d57cadeee4d65060cd924680c5345443145f964e25"
+    },
+    {
+      "file": "offline-verification.json.gz",
+      "originalBytes": 5155,
+      "originalSha256": "e54cfdb5b605e0799a32d4736506f83400310daa946c43f294ce7e5782b31a5a",
+      "compressedSha256": "38bb433b3bb584acb4abc91d0784a2baefbbebb15b4ac0b919abdd503495a194"
+    },
+    {
+      "file": "offline-verification.log.gz",
+      "originalBytes": 3836,
+      "originalSha256": "a87b6a3b11a56b1af584774236130d8ce522f4ca8bb2cd4fae72669a945746ba",
+      "compressedSha256": "8771bb7fcffdbb1792b2c7ed46cd2474c83a240c7a7abdcaf8e40bdb1b7e8e10"
+    },
+    {
+      "file": "pacing-debug-gpu-inventory.json.gz",
+      "originalBytes": 72929,
+      "originalSha256": "29a94a59296b0b96cb15b90690a2a42fcd8835f0f55fc3c136a59a29e39d97c9",
+      "compressedSha256": "0d17df047fefc34ba8c91858c6adc7b29b0b5e4d6a4ba2cdab9f1772da6c41b5"
+    },
+    {
+      "file": "pacing-release-gpu-inventory.json.gz",
+      "originalBytes": 76563,
+      "originalSha256": "49804e0462dada03b9338d4ad4c14439232c408ab16e153e156c7a4c227b167b",
+      "compressedSha256": "216a8c937f253563136b04c28a085ff296cac6058ad174149c97fb846873ea6a"
+    },
+    {
+      "file": "pacing-debug-AzureAssets.ProceduralHost.log.gz",
+      "originalBytes": 3343,
+      "originalSha256": "ae1a50e6ef51d13857ba6bee0cfe993f090d14b8c913509a0039b863a066789a",
+      "compressedSha256": "6679f8de4f5e55a90545c0588b472d96f048940875981c1f8fdf9b3a42307655"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.AuthoringGpu.log.gz",
+      "originalBytes": 1629,
+      "originalSha256": "5537109107d6de2de5fcc0e68a455148a8fc5316f82fd00ef75a42cdca363d9f",
+      "compressedSha256": "04d35b4ad860ace44d477ac0c86c87ad062ac199daf9487df574b74a694acd39"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.ContentGpu.log.gz",
+      "originalBytes": 2160,
+      "originalSha256": "4479124ce13b954085a7271e5f62356b690e5217b15fc1158d0800a9f10f02e9",
+      "compressedSha256": "e15b27cba70166c41e3cb3ae157f4c4dd0e17f83ba1eb80292085b8ae6423f06"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.ContentNavigationGpu.log.gz",
+      "originalBytes": 1934,
+      "originalSha256": "b26595fca145d314eda1e97ccaa371f387673891ebc0f52b82ed7451fca261d7",
+      "compressedSha256": "97f732999cb60b62081f917231144edccb4efa7d07726ff241a3572f16f93c27"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.ContentTransactionsGpu.log.gz",
+      "originalBytes": 1928,
+      "originalSha256": "a0615da30a8b8ad992b2203de6e3738202ef9332b85d121df585176b4e38e5d8",
+      "compressedSha256": "036bd7f122f47b30aaaba91e48d07ea589242c8527b783e3fe087aa2efc09dc0"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.DevtoolsHost.log.gz",
+      "originalBytes": 1969,
+      "originalSha256": "6bad7337ed30570abb9a9e245c13efd644c79296375a7a2694aa1a7ae5685f99",
+      "compressedSha256": "c81bacdbbcbc678163094e1ca0836cf8ee67c309b3c6cea98628c7041ddb684d"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.DocumentGuardGpu.log.gz",
+      "originalBytes": 2107,
+      "originalSha256": "1a2a385cde24a8f02b82bd1d2d41a659d28ccd6eeb5339c56278c68b4dd19045",
+      "compressedSha256": "8559f2a96a6b12b492c1963915167ddd57b76d7073d37ffe398bd4006346d2de"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.GizmoGpu.log.gz",
+      "originalBytes": 2053,
+      "originalSha256": "b16b55f01f9dd2cf5b817fae49485db1335d01f9bf2263c262bffa399d3029ac",
+      "compressedSha256": "bd6cc63a29d85ea144a5cc82957060e52b7a0ed5061c07b1f08bcfa1615aff09"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.NodeAdditionGpu.log.gz",
+      "originalBytes": 1640,
+      "originalSha256": "df2c2d11e7a40b0bd8e202c8aa437b04ace0c7a4902d053b80e03dd473683c20",
+      "compressedSha256": "d0ce48821f960d1b4a05540c0259c404edb04fc948e8ba9f36feffde53dc65f9"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.ObservationHost.log.gz",
+      "originalBytes": 1844,
+      "originalSha256": "b5acb2ae283fa5a5c814484769e00d130e3fee00623fed7f8e7fb96a0ded9c2b",
+      "compressedSha256": "55d9f77c2d2a4b9d66d38580b9173e3d74f2325a8610f6badb9a2fa19a6c412e"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.ProductizationGpu.log.gz",
+      "originalBytes": 2663,
+      "originalSha256": "e3b9250e8d11bae89af4c17ca82e46666280b1e3d9261cb3a3c37da9494ef604",
+      "compressedSha256": "ba15dba9c6766c85df8ef15a4523b2c29510730a10dda90bcdf63109dd2b0338"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.PropertiesGpu.log.gz",
+      "originalBytes": 1911,
+      "originalSha256": "7a63bdc690e8d5e685945816a44e8349ea26c2ac99112ec3855fe7f579874771",
+      "compressedSha256": "4a51a2a37c396b84aadcbac2bf567813113b90aef6739f71dee42c6018f2a1c5"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.ProposalHost.log.gz",
+      "originalBytes": 2358,
+      "originalSha256": "89946ee15119a2d2a5d43136cf6a5dc0bfbe7bb623ac80ce02886e1834ac6583",
+      "compressedSha256": "0dc39dd9ebfff66469a88d0bb8ade448e2bb9ea151e6dc83346b6b87931a1d16"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.SceneGeometryGpu.log.gz",
+      "originalBytes": 1919,
+      "originalSha256": "d7e6a97d17f94f46ca8f373f2712a93aa29acc876eb7e7fd2fdb8d685aa02cfe",
+      "compressedSha256": "c5faeb6c6a1e98b0b0658dfbcb4e11fc592ff73f0ab4a9c096e1fefe6bedcaec"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.SelectionGpu.log.gz",
+      "originalBytes": 1987,
+      "originalSha256": "ab9e73c1d113e4a2197f74de1b0bdc3ed036b20c1721d0188946ed86afb4a0b2",
+      "compressedSha256": "12f7b63a67913e93fa74cca7a0dfff69c22e7d249d4a84fed10a4b7dd03cf126"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.SettingsHost.log.gz",
+      "originalBytes": 2006,
+      "originalSha256": "cd48096b017ccddbd94471f40f284cc6dfacade303b9e4022f957f7128d8a6ea",
+      "compressedSha256": "8d750e3858158c092c2085f6c19a6acc514260f14b9a9dd700a706324675b8b6"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.SimulationGpu.log.gz",
+      "originalBytes": 1981,
+      "originalSha256": "5a157fde41ca9d6c11cba9ec25a39d30f44297ba4ea88de3b7e5840c56ec0837",
+      "compressedSha256": "ea619470033dbd531cd589bd815f64bffcd99328d66f1a1b039e8109cbc454ac"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.UsabilityGpu.log.gz",
+      "originalBytes": 2124,
+      "originalSha256": "e0a80823064994665d2a96bf5c6e12e84d976795020236b9dd6ecc7c54f6b086",
+      "compressedSha256": "7b2b0791649182188a5145f06a17103b51e2befe4651a8eced2574d414398d9e"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.ViewportNavigationGpu.log.gz",
+      "originalBytes": 2027,
+      "originalSha256": "e16b9a309c533b7c9b2288615a7d1b123e83711f7c12b5c098b104ce9ae23ae7",
+      "compressedSha256": "efc33ee6f84c78f18bc25ad6ecc5ac3216d07f74a487bf0a3a112fe8753e5abc"
+    },
+    {
+      "file": "pacing-debug-AzureEditor.WorkspaceGpu.log.gz",
+      "originalBytes": 3195,
+      "originalSha256": "dbcfee2027d25186e97ea2e4a90cfe313bf6c0cbd6a360186f7e6e3c733eeef7",
+      "compressedSha256": "b8588c9210371a648ae9b9ae7f22fd7646af71fbb4b88f38a48fe58d5ef7f770"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.EditorHost.log.gz",
+      "originalBytes": 24281,
+      "originalSha256": "f9c154fe2dc31115b7d338bb35b4307218021155be9d108f35c9d24b63dce6ef",
+      "compressedSha256": "19ae2bbf66590d8299715dc87be35eb09c9ad66f17dfeb4097beff46e7fcc432"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.EditorPlayable.log.gz",
+      "originalBytes": 1680,
+      "originalSha256": "eeedc057dcadfb309b89352dc4d2d7ec386adfdd9bfffeb1d33790a745af2149",
+      "compressedSha256": "7ff79bb6f08ffcd941d4f34c03a75eb2147cac1eb847bd7f29a190b02a9c51df"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.IndependentAnimationGpu.log.gz",
+      "originalBytes": 1775,
+      "originalSha256": "42fb0db98e6ecf30748df467c6228880a5b1910c2da3df4e5fa2b74c78ebc178",
+      "compressedSha256": "32e218041593c6e9ca2a28528837d95680aa84f12418cf829f432928b2bc5ae2"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.LevelPlayer.log.gz",
+      "originalBytes": 7392,
+      "originalSha256": "334e471a7f4d2403d9645f3d473878dc3c913a8913f8515e4e3b83ced3923b1e",
+      "compressedSha256": "62ec7d7665cdff04810c53ef6f46439a1589a25b87c1374e395b3c55368559a6"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.LiveGameState.log.gz",
+      "originalBytes": 1728,
+      "originalSha256": "c908bab3e950fbb9cb61d3c24f29d7936d5e105249fd9d1e235ee6c726b9763d",
+      "compressedSha256": "e37b7c0f0fdb498a8e2f1b7036b3d086a4c379a642a467ebeb95747bd2c161a3"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.LocomotionPlayer.log.gz",
+      "originalBytes": 4351,
+      "originalSha256": "f69996640f86993bbcf26a45205cde6dd2ee5d365d419ea7ba0dec1a5e883148",
+      "compressedSha256": "b44f7bcf5fe25a577d1222f5e8e991929e3312c2b1a9aac7706efc0234582fbd"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.ManagedWorkflows.coreclr.log.gz",
+      "originalBytes": 2181,
+      "originalSha256": "50fc80be51c710fb9490e5efdc616096651982ae1dee8dbe4da033d523557f3e",
+      "compressedSha256": "9c472ee6437506fbb08f89634239df64bd2de74141cb2105ae79d6231e91fedd"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.ManagedWorkflows.nativeaot.log.gz",
+      "originalBytes": 2195,
+      "originalSha256": "a4874c9a31caedb9f8bd372975c36e09bda4ef86104477d07c8cb7091fa04403",
+      "compressedSha256": "7af5189d7764ff7ce02ff575f36842ea9fc5735c127cbf38071cd772621859c0"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.MaterialFixtureGpu.log.gz",
+      "originalBytes": 2006,
+      "originalSha256": "2b5798c057f35974fa717786f28ed96eb12608dcd0e890fb3bd30cdc7b80a1c0",
+      "compressedSha256": "ac9387c05e11c7e3bce872e3084fa8848c1b5a001fb7c6f42edc3655ea4e78f5"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.OptionalRuntimeTrace.log.gz",
+      "originalBytes": 1659,
+      "originalSha256": "88c6a48f310098be8ccde3c4a83e1cc98e7dec19f96a1394c9fe052b962b8d33",
+      "compressedSha256": "518e32fba2ed5d6dda3465477a09a43ec6cc9b1a416243ebbf520825e33831db"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.PhysicsPlayer.log.gz",
+      "originalBytes": 1594,
+      "originalSha256": "b7c54cd432b568d64c040e3e8807fb676d80d5c185c92e160f59023b65af4f5d",
+      "compressedSha256": "619e6b212b4169d737428bd1a934b1121c28badcb9011971de7626afe60c5a0d"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.PlayablePlayer.log.gz",
+      "originalBytes": 1679,
+      "originalSha256": "8f0cd6678c37f34a017f7eb4ec9528fad3945d74ee2476200419955d92e3660f",
+      "compressedSha256": "d539b13ddb18192d89545696660a3cf869fb5212a9e4fdcb58bbcc24d9d628f6"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.PresentationGpu.log.gz",
+      "originalBytes": 1707,
+      "originalSha256": "f7c7a985e6be2c690fc17c74ede78290dd6afe2191bfaa332401cc8a7a5cbb5a",
+      "compressedSha256": "9803951220001f9fa72a05d5ada99a66999e54881c270f52f2967a452cb8f734"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.RegisteredComponentHost.log.gz",
+      "originalBytes": 23185,
+      "originalSha256": "8e530ea2730bbd7c58cf58bb8d6a34b7c4e6e683670b7455780ef1cc785b7edd",
+      "compressedSha256": "81159786a689b93d137aeb7dfdd19af5d2a6d4efe8e0fd678b69fa5faa5c0816"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.RendererResidency.log.gz",
+      "originalBytes": 1640,
+      "originalSha256": "41011eaef64a6fc2f616591f0ba3b9cb89bf3dd890e3982ea4ea335ae0ae5adc",
+      "compressedSha256": "4f2d0a2963bf4c3d03a1110554027a581449027c9037ed7a7ddc6913ad47e456"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.RuntimeSpawnGpu.log.gz",
+      "originalBytes": 1657,
+      "originalSha256": "84314e5420942f5020b7925d95fe1e68c99d76933bd870f1666d3356bb24bf58",
+      "compressedSha256": "ec6e2cea9f02a90bde0e84b70dbe626208855fcf5666ec12a6e1cf546d7431ef"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.SceneInspectorHost.log.gz",
+      "originalBytes": 1872,
+      "originalSha256": "48feae12ba4ca577cc5a8a66090c7e6af21917149b9d04797dc6604998b9a8b3",
+      "compressedSha256": "c6aabc59f3c745c45fd1a7fd2c9126607ebbbabe48c0098d602d38a662296902"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.ScriptPlayer.log.gz",
+      "originalBytes": 2657,
+      "originalSha256": "a448e0dab53600264823bb0c01c9f5e722208550b9ad9c5abd83c3ec198c74ff",
+      "compressedSha256": "3070af73b0c1a389d0a6a48cdf13f5ba31b000c272886fe85a663aacd01d2358"
+    },
+    {
+      "file": "pacing-debug-AzureEngine.ThirdPersonPlayer.log.gz",
+      "originalBytes": 1778,
+      "originalSha256": "0904e0922a578f548d0895a6dbeeb1c0ce5e36f673c88859ca8a9c8367285b41",
+      "compressedSha256": "d593ccd5646dea2aa8462a498eabc9086e402df77f4edeaa34ebe4786727566f"
+    },
+    {
+      "file": "pacing-debug-AzureGame.ExplorationCompletion.log.gz",
+      "originalBytes": 2012,
+      "originalSha256": "e4d94aa3602dafebb1804caec94c159467079ab672fb7a8a06aaed2dcb3349c1",
+      "compressedSha256": "b8986519573274181eb6e4a1cdf6e29ddcc725ffd92b9aba2018e4bddd2ea833"
+    },
+    {
+      "file": "pacing-debug-AzureGame.GameSequence.log.gz",
+      "originalBytes": 2450,
+      "originalSha256": "0d680bbd2d130d860bcdd1adcc74f90cda5de84b851c033967172baec74dcee4",
+      "compressedSha256": "5da160d58adc593d1c05bf3c4e0f22543bf5711477a6977aac6305432a2928d4"
+    },
+    {
+      "file": "pacing-debug-AzureGame.PlatformerCompletion.log.gz",
+      "originalBytes": 2188,
+      "originalSha256": "1d4873e1cdfbc33c8f3f67f2d2e5d128f5d310c04ecb4763f80c25fd1d9f3262",
+      "compressedSha256": "3e7ab2e5ae0944f941994b56b8be92f1cb5b57d05d857dd70e7c97d4ad19ad19"
+    },
+    {
+      "file": "pacing-debug-AzureRender.AuditRegressions.log.gz",
+      "originalBytes": 1596,
+      "originalSha256": "59c474e43e312f138c5fb10d5ec4ff7a5c7097e778fdde21580388b58e3d06e2",
+      "compressedSha256": "517adff845884ca65a0f436b1ba1df3806be8b1673e708945cfe3ba518252a0f"
+    },
+    {
+      "file": "pacing-debug-AzureRender.BlackholeComputeGpu.log.gz",
+      "originalBytes": 1755,
+      "originalSha256": "d96464be927d85c72a8909e173252fe70cd425143bbc22fd2bf5e856ea8b1089",
+      "compressedSha256": "6e0ec33540210a8fbcbc4e445043900524b3ce402424db49507b2537d3a1dc8c"
+    },
+    {
+      "file": "pacing-debug-AzureRender.CharacterIblComputeGpu.log.gz",
+      "originalBytes": 1745,
+      "originalSha256": "cf56e844689df1edee76462dbe0161d26cb78eed759d67df917b51eeba0b5eab",
+      "compressedSha256": "a27269e11ab3f5d8e0e7f9a7fece24f68708487acd03565374e7dd8d25fe985f"
+    },
+    {
+      "file": "pacing-debug-AzureRender.CharacterMorphComputeGpu.log.gz",
+      "originalBytes": 1779,
+      "originalSha256": "2ded49e1780b36ddaa83b52bfacc15fe4996f6ed9fecfcccadb00a02e397a9bf",
+      "compressedSha256": "6b9cc91fa4eaf18deadc7953c83d08c9bd319d9d86b675f91e7235b080f5e521"
+    },
+    {
+      "file": "pacing-debug-AzureRender.CharacterSkinningComputeGpu.log.gz",
+      "originalBytes": 1779,
+      "originalSha256": "f521335681309145eb688cf3aa2ea3e8465eb5c0f0d1626fedfe294939b44caa",
+      "compressedSha256": "b8770fa8d73c4c2cf89757f29f6891ef4e0c6190054d734454d1c5c9b50d94f7"
+    },
+    {
+      "file": "pacing-debug-AzureRender.ClusteredLightingGpu.log.gz",
+      "originalBytes": 1724,
+      "originalSha256": "68010c5db1a18fa916ae6b3a327dde604d190ce0d7bca4dcb27ab7b2c75c3a18",
+      "compressedSha256": "6899a19053a6cf479bd1b08fd8097a814b9adaf232dfbf2de16d23ca76432a06"
+    },
+    {
+      "file": "pacing-debug-AzureRender.PreviewHost.log.gz",
+      "originalBytes": 4672,
+      "originalSha256": "f514ac19400f9bd5716746af0c5ca1df2ea7272397d4087b6f56661acae5f479",
+      "compressedSha256": "81f4d5df473111e0bce846e4144ecc4ce95c8a36cf9dcd03d207394a96419d25"
+    },
+    {
+      "file": "pacing-debug-AzureRender.R3Comparison.log.gz",
+      "originalBytes": 1712,
+      "originalSha256": "e818f77ff5893591bb64b0e5ffe80783a99340760a30a9d25f44c2a7375d93fb",
+      "compressedSha256": "6250ff8f1686e4dbcf23df127fae725afc2b0bc15e3f7c8085ce63cef4240156"
+    },
+    {
+      "file": "pacing-debug-AzureRender.R3TransparentComparison.log.gz",
+      "originalBytes": 1775,
+      "originalSha256": "d97d173bc52a4b1696720ebb4ea497c62722ef550e2ab61a96c29840d9781743",
+      "compressedSha256": "86d4dc184017d06d4e430262dac5dbf2488df6b24b88d34c18b3778b763a8fd6"
+    },
+    {
+      "file": "pacing-debug-AzureRender.SamplingGpu.log.gz",
+      "originalBytes": 2128,
+      "originalSha256": "5b28b1d413d3b4340ce39ce3549a7e9f87dbc1ef33f48f2a9cbaa52b6548a044",
+      "compressedSha256": "ee96cdcd4fd73014023917cca3bf369b58384d7aa12e2b1826cf7bdfbe77f497"
+    },
+    {
+      "file": "pacing-debug-AzureRender.SamplingHostGpu.log.gz",
+      "originalBytes": 1778,
+      "originalSha256": "a377287277a639d9922b8955e4355dd3aa8fb64a7312dffb3bc7728bd29024a2",
+      "compressedSha256": "f85b8b82de95dbae5cfa09ea894726f1031a7bf1983b3b3cb2dc8088605d1349"
+    },
+    {
+      "file": "pacing-debug-AzureRender.SceneVisibilityGpu.log.gz",
+      "originalBytes": 2017,
+      "originalSha256": "cebea161f1ade12049be0f4a0674a8db8d81fc7087bcfcb1066ba9e9f8870f3a",
+      "compressedSha256": "ed572c0a7eee9934ee5553cf74a5c88e86d79a71735bab14edbbd131a95c1b14"
+    },
+    {
+      "file": "pacing-debug-AzureRender.ShaderComposition.log.gz",
+      "originalBytes": 1877,
+      "originalSha256": "8fdf01fdbc335a4df4b67436e0161c2aef1aaf72fd969eb482ba267bdf5baf8b",
+      "compressedSha256": "da8e052bf520c7b64b1b2ecf09ba51184cdec35ac88a3b3043d3790006147422"
+    },
+    {
+      "file": "pacing-debug-AzureRender.ShadowFilteringGpu.log.gz",
+      "originalBytes": 1637,
+      "originalSha256": "4b0c573f27b43ad64f9d0cfbb45217256e38eb3868a7497ca3e1a70cd5357fdc",
+      "compressedSha256": "798460d816ca1c2fb40a07104ad9883e81b4e4b50fbea7cdd0272d70f500cf59"
+    },
+    {
+      "file": "pacing-debug-AzureRender.ShadowTileBoundsGpu.log.gz",
+      "originalBytes": 1595,
+      "originalSha256": "6a45b62366ead9eb365c248442044e6830f17baaa36e2bff84418776b762b5af",
+      "compressedSha256": "0d1ff84a4ce871a78bfd458df55ee09ee8d3d246bca13f2a8cdaa627608fec29"
+    },
+    {
+      "file": "pacing-debug-AzureRender.SkinningGpu.log.gz",
+      "originalBytes": 1550,
+      "originalSha256": "559eedbb03a662b0c04795ee1670137a68a679e918b210f2d2d990ff4ba17027",
+      "compressedSha256": "2ebac7b866ecbcb8eaa81ac96f27ebcc9e5c1f73d045b304aa0d6bd3aa5c6c42"
+    },
+    {
+      "file": "pacing-debug-AzureRender.SurfaceResponseGpu.log.gz",
+      "originalBytes": 2534,
+      "originalSha256": "bca2f8f95307ab04357aaa7a3e546bbb10f5f6d625472eabeb977c65dd913b90",
+      "compressedSha256": "9cebc82f7b370a785d05a43243e505cd9052c7314f73039853583aa58c0fa3e6"
+    },
+    {
+      "file": "pacing-debug-AzureRender.VisibilityGpu.log.gz",
+      "originalBytes": 11175,
+      "originalSha256": "c1f1f9c68ee93861bafb2882689ad2573acf26307a1411a48a7ba692cf76ab85",
+      "compressedSha256": "843f7a5e1e2c8038e27868a7f124de1a36f57702d8602d0732e7641cbf3d1804"
+    },
+    {
+      "file": "pacing-debug-AzureRender.VisualRegression.log.gz",
+      "originalBytes": 2311,
+      "originalSha256": "914cb5b6651cfff4db0ef0d1c689dc2c8e8bd2097be2e23eb751bf5d7fbb0de6",
+      "compressedSha256": "de452515898ef47159bf7811f6f463d7034cf6ae5f19537b601ea20e1c321e9c"
+    },
+    {
+      "file": "pacing-debug-AzureRender.VisualRegressionLegacyDescriptors.log.gz",
+      "originalBytes": 2410,
+      "originalSha256": "781ffd782f0d8901b513ddc3c7f6a78c97a3536741668d93b1b742338ab92ea7",
+      "compressedSha256": "4044c5731b50b824485f2dbf24eeabfa77841a5cfc6bcf8b0686cbe6c5914684"
+    },
+    {
+      "file": "pacing-debug-AzureRender.VisualRegressionLegacySkinning.log.gz",
+      "originalBytes": 2427,
+      "originalSha256": "fe69b1e63c0ab3d91f8b2d4a85b1c97abe5f68b9cc3e5b8d3506013f00eacea5",
+      "compressedSha256": "0c7f86407310eecdf0dc1d8186d47e41171eaa21306c7ce626101d0cafa87ead"
+    },
+    {
+      "file": "pacing-release-AzureAssets.ProceduralHost.log.gz",
+      "originalBytes": 3376,
+      "originalSha256": "c898cc00dd7db3c11e59e5dbaa8ecc3c09bb668afaa29655b00b38c271944aaa",
+      "compressedSha256": "3a287f0654a73d67fa32aab22ab9c9b069192d526c28c690aaa693499514c957"
+    },
+    {
+      "file": "pacing-release-AzureEditor.DevtoolsHost.log.gz",
+      "originalBytes": 1987,
+      "originalSha256": "e17c02ca54558de7bfd4c5effcb0667e582c61094e254277a984f2988bdff27a",
+      "compressedSha256": "bb3aa382d651517577599879ea1e5831c78f96a24437df972cb1d207529145fd"
+    },
+    {
+      "file": "pacing-release-AzureEditor.GizmoGpu.log.gz",
+      "originalBytes": 2071,
+      "originalSha256": "ecf0df174ec951b058e8459e3f8ee3a5416747ccc443f029037b9b42a887fd02",
+      "compressedSha256": "cefefdd13c2d82d0172369251ee45cd9bd87276451f8e277042ce9bf7557dbd4"
+    },
+    {
+      "file": "pacing-release-AzureEditor.ObservationHost.log.gz",
+      "originalBytes": 1860,
+      "originalSha256": "8ac416cb7f3c14f8eda6b2d8d851583a7b348870e3aeff7f0959ce2e9850aa42",
+      "compressedSha256": "3098c15d9f8a326fb364093c68aeea787171c87044cdcce1014a35a5cafb4c2c"
+    },
+    {
+      "file": "pacing-release-AzureEditor.ProposalHost.log.gz",
+      "originalBytes": 2374,
+      "originalSha256": "e55d16b8f605e0636e1479bb894d14327f28014b2ad2189784931e89d95e96b2",
+      "compressedSha256": "d5d69038db35b0c1f2fa79114481f538d5223b6733c1a8bc56a35189f5adafef"
+    },
+    {
+      "file": "pacing-release-AzureEditor.SelectionGpu.log.gz",
+      "originalBytes": 2005,
+      "originalSha256": "036839434ef5555273c76ba0bf7eedd42b266a9c9c0d27dac9b049dc69b05339",
+      "compressedSha256": "fc52a06a2e26f513021d38243aa2cd4cb3ee09f8756770fdd79ae48115f9d8af"
+    },
+    {
+      "file": "pacing-release-AzureEditor.SettingsHost.log.gz",
+      "originalBytes": 2022,
+      "originalSha256": "efa8ebc372e3ab05cbcd46aac92870c949110217d40a11bf0fb079b1d78d1482",
+      "compressedSha256": "9dcc97a51df9b3356411fa0b722a41fac2fc521b716d62684a4b5ae7ea1b15a5"
+    },
+    {
+      "file": "pacing-release-AzureEngine.GamePackage.log.gz",
+      "originalBytes": 2369,
+      "originalSha256": "cb5198dbb6d095c24caadff53443867d679e5e7ce6645516545cf5ca31f3b548",
+      "compressedSha256": "a3b883ae4042e3ef89a6b42fb135c2f816392611f3e01f1ec0dee4b2de9766b0"
+    },
+    {
+      "file": "pacing-release-AzureEngine.LocomotionPlayer.log.gz",
+      "originalBytes": 4367,
+      "originalSha256": "28f983982fac4b5225ec91ae7be35e14dfa32c20bc390d941ff2e54a38be917a",
+      "compressedSha256": "ae32aebda46d4261b03448e28a8e639e19bd2aa316fb0548c42efaf4e8e9a77b"
+    },
+    {
+      "file": "pacing-release-AzureEngine.ManagedWorkflows.coreclr.log.gz",
+      "originalBytes": 2418,
+      "originalSha256": "0756f6a0dafae709a18a78368c5929f14af1f40af75699c2631ada82d9095d27",
+      "compressedSha256": "343bae733362c5d325b458af7b0389584744e4e4aa55fede3f424c0e298a7c9d"
+    },
+    {
+      "file": "pacing-release-AzureEngine.ManagedWorkflows.nativeaot.log.gz",
+      "originalBytes": 2433,
+      "originalSha256": "292f4be6cc716b8361fe9753ed9363a319dcdfe504d285664447ca8dab72f463",
+      "compressedSha256": "c2adf69ffcc16cf05ffbb156871971fcaf8688d5f1b0ae22d7ac1314d43bbced"
+    },
+    {
+      "file": "pacing-release-AzureEngine.PlayablePackage.log.gz",
+      "originalBytes": 7232,
+      "originalSha256": "1548e71f5c1405b79a12b03e7db92765dc93676bf96ea50b2c149cbedd702447",
+      "compressedSha256": "862b31c3d0058d7793eab19412fd88edb6611e8b6edee4062ee3b1c3d5b7fbd6"
+    },
+    {
+      "file": "pacing-release-AzureEngine.RegisteredComponentHost.log.gz",
+      "originalBytes": 23188,
+      "originalSha256": "6b933d318dd605d4895b2be8d44fbd739bb3f9b8ca6ac1e832639a97eaffaa7e",
+      "compressedSha256": "86d8bc51fc45996b96625656f05da0a2562ab22cc70131df479df11da414173b"
+    },
+    {
+      "file": "pacing-release-AzureEngine.SceneInspectorHost.log.gz",
+      "originalBytes": 1890,
+      "originalSha256": "513539e4f03a0cd8001ee708f92ffc725740acf2df2fe34b967685add332381e",
+      "compressedSha256": "0f59b517acd31044a78277d261f5779ce0e018485ab73421d44b89be66f7a46d"
+    },
+    {
+      "file": "pacing-release-AzureRender.PreviewHost.log.gz",
+      "originalBytes": 4660,
+      "originalSha256": "3b95de95b88770bf4aa6d4e2fdfb5b5b1eaef348626456ad3c07fb4421d8a54e",
+      "compressedSha256": "0e9cec7dc4ee1695259683a801eb912c43aac6f8754b9eb2af46501d747ddad1"
+    },
+    {
+      "file": "pacing-release-AzureRender.SamplingGpu.log.gz",
+      "originalBytes": 2148,
+      "originalSha256": "d5f8d4d97b1c946e01545453b1eed0622cc4b8723167f0369024f37bd63668fd",
+      "compressedSha256": "9fa7650676d31359736a855159d42d8501912823c605802a067c6ee4b890a9e6"
+    },
+    {
+      "file": "pacing-release-AzureRender.SamplingHostGpu.log.gz",
+      "originalBytes": 1796,
+      "originalSha256": "e22068b4fa9e522c13a8e0f510e9c0de59f6a5f626f3983aef8ea1471e887a83",
+      "compressedSha256": "14647d4efaad9a718231b2991775f8e6d458fe8a3db88b694fd247adab81b02d"
+    },
+    {
+      "file": "pacing-release-AzureRender.SceneVisibilityGpu.log.gz",
+      "originalBytes": 2033,
+      "originalSha256": "3753bd8e68bac782ba2893b8cdd196a2a37a57dd90d423e662965533162c4b2c",
+      "compressedSha256": "cd62d78b038a9d88e4097bc36ecfefe5ac08096cc74537ee774fa281b0fbd540"
+    },
+    {
+      "file": "pacing-release-AzureRender.ShaderComposition.log.gz",
+      "originalBytes": 1901,
+      "originalSha256": "c3d1aa301e166f6d52a566833a9fc2d105e42fb2bd802b08b693c6b9d135622e",
+      "compressedSha256": "ebf92d876bec429b037b1a7c8837473511540308e94791b1de838e0cf3414eb5"
+    },
+    {
+      "file": "pacing-release-AzureRender.ShadowFilteringGpu.log.gz",
+      "originalBytes": 1655,
+      "originalSha256": "c8d5590aea7416c90ddb752fe9a2bc8022b609cb612ef8d82ff357c57d5738d3",
+      "compressedSha256": "74accab7a25364528ae81b253bd9506e0a1e91c8f7d4206156dcda72fd123cb0"
+    },
+    {
+      "file": "pacing-release-AzureRender.ShadowTileBoundsGpu.log.gz",
+      "originalBytes": 1613,
+      "originalSha256": "81c91dca7b3d2aa729f3d3133d91ea9a280068f9ad161a254a19263b02840705",
+      "compressedSha256": "178f2af6bed6601e5f69e2c748bac76b0bab4538995ac46edf81595a040aeb7a"
+    },
+    {
+      "file": "pacing-release-AzureRender.SkinningGpu.log.gz",
+      "originalBytes": 1568,
+      "originalSha256": "2c183c8eaae1b1f7b59b24dc865bf786e6b34cc0ae77a633cd6af7e3b8fec956",
+      "compressedSha256": "7d398fef17c733d03692860ba8b13289db3a80a94936eaaae5f8816f3b3cc057"
+    },
+    {
+      "file": "pacing-release-AzureRender.SurfaceResponseGpu.log.gz",
+      "originalBytes": 2552,
+      "originalSha256": "7f0ad2fbac69ee52a4f9bb1ae44ffd09a418f4e36f8e4832f2de898419713782",
+      "compressedSha256": "78ac6c9621dd9cff80a66af773e330d151c1e49ba71980a2c609417b1d44d301"
+    },
+    {
+      "file": "pacing-release-AzureRender.VisibilityGpu.log.gz",
+      "originalBytes": 11204,
+      "originalSha256": "748f9de6ef7d8467fa7e58f6d152e431b799e68cc0d178b9889d704040b1b056",
+      "compressedSha256": "c880e2e7080023a149611175ca943d4dfa51ae0cbb63d626557a03161809bf05"
+    },
+    {
+      "file": "pacing-control/exploration-1.csv.gz",
+      "originalBytes": 112410,
+      "originalSha256": "7c7b21a245862ccf9edca5db20291357f819277e91b080c02c444a5426416d4e",
+      "compressedSha256": "e02ff26ef8011a48fab6b644f987737da307770e00cb795ae1d9cb73ce877372"
+    },
+    {
+      "file": "pacing-control/exploration-1.environment.json.gz",
+      "originalBytes": 1056144,
+      "originalSha256": "2e29a350b5d95391d914872e249f4539f76e78f054cbaaf0e26048ec70e26588",
+      "compressedSha256": "c8c5ab88283f3075a40a4e7d08aa41c7b485bc0c19e4cff9beabf95ff6235ff6"
+    },
+    {
+      "file": "pacing-control/exploration-1.input.json.gz",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "pacing-control/exploration-1.json.gz",
+      "originalBytes": 120382,
+      "originalSha256": "85a53e0553a95ba29e5a0f6cfaaaadf3a2494d45631362cb99482a7315ea888a",
+      "compressedSha256": "e052d61d3a48ae298d96ceb104d48f89d8ce45cbe26088da732fbfdc61a4faae"
+    },
+    {
+      "file": "pacing-control/exploration-1.memory.json.gz",
+      "originalBytes": 62227,
+      "originalSha256": "05cb8a567ef011bbac83147f4fe3b45bc22d1a9dc240b505657d4da14ecd09cc",
+      "compressedSha256": "c8ea6fec0b0f45337cc17f593bac20d3bb041f57717f713c84ad8fe2259d4b09"
+    },
+    {
+      "file": "pacing-control/exploration-1.result.json.gz",
+      "originalBytes": 1142862,
+      "originalSha256": "e61c4ba67d7ba6823da1b690d745a98301b48b035ec1c489a13634e98c5d3c90",
+      "compressedSha256": "903124da778fe3b4764638f6552b7a57698da0100041d23334ef31494f4e7d42"
+    },
+    {
+      "file": "pacing-control/exploration-1.stderr.log.gz",
+      "originalBytes": 394,
+      "originalSha256": "96f252eafced767dc51d60dbf71059859df555571e8c909ebc7516c2bc42159a",
+      "compressedSha256": "f7e37a7ec0329b82e8271d12067feed87827de4bd3771eb73b0f1725143eeb0a"
+    },
+    {
+      "file": "pacing-control/exploration-1.stdout.log.gz",
+      "originalBytes": 2068,
+      "originalSha256": "e3339c4059a9cc1b729a6efa4c74441e0458677441ffe1a60790f0dd0e124f1b",
+      "compressedSha256": "4572d011deadda4266fb688573baef5f3cc85cac881ddef31b39b65438df75ae"
+    },
+    {
+      "file": "pacing-control/exploration-2.csv.gz",
+      "originalBytes": 110257,
+      "originalSha256": "38890a9b1dc6cffd41d4e32556252924a268537debba4467562f8587cd0f2856",
+      "compressedSha256": "c8c48a0afa3e45be3d1163ff424cf366dacfacf3328f37e4a099fb59d5389fa5"
+    },
+    {
+      "file": "pacing-control/exploration-2.environment.json.gz",
+      "originalBytes": 1283256,
+      "originalSha256": "4f9a3e490aa8ae6782af3b5e3af34889c523e3d1db43b03a05eaeee378182240",
+      "compressedSha256": "f3c5572fe9013ef54db8c357b099422211f4e47b7ec30d8927a61f78d849da05"
+    },
+    {
+      "file": "pacing-control/exploration-2.input.json.gz",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "pacing-control/exploration-2.json.gz",
+      "originalBytes": 121789,
+      "originalSha256": "7edf8146d7639fc0a4ac09a167abf85ab6ee061e55082256fbbb6945c09fccf9",
+      "compressedSha256": "22cde2deab07bf82684034f9b4c94667efa508d906407fe942d7501e406d944e"
+    },
+    {
+      "file": "pacing-control/exploration-2.memory.json.gz",
+      "originalBytes": 96808,
+      "originalSha256": "d920b27f823448b4b09279aba84485ce163ccda37a5867458d639aaab82edd28",
+      "compressedSha256": "d382909352a1e6842c40c4e429e7bd947f3c35004e5f9cf4e0b681ecfec7c58c"
+    },
+    {
+      "file": "pacing-control/exploration-2.result.json.gz",
+      "originalBytes": 1374319,
+      "originalSha256": "03f8c7c8fc2659f1e5f44401eeed6b8bcf36be6c2b46693281beebfeb9406bc0",
+      "compressedSha256": "2a3b4992050a5dab105297c90c3d5d20517b07512f1af32a3337f268cf75f83b"
+    },
+    {
+      "file": "pacing-control/exploration-2.stderr.log.gz",
+      "originalBytes": 394,
+      "originalSha256": "e0c34eb7c90f716e05b208cd593d0146c0ce80c2b612f772058b4683d9468441",
+      "compressedSha256": "ae48b1809c814d8fa71f843c8c6bb109ede61bfe3de8a156fa872ad880f4962d"
+    },
+    {
+      "file": "pacing-control/exploration-2.stdout.log.gz",
+      "originalBytes": 2064,
+      "originalSha256": "d3034b87afe6732125c88869a76aff6022589c1209e15ac0ae06398f3f4b7bb5",
+      "compressedSha256": "1e2764ebfedea4b7e28ccb1ab5b89e824b8d5cde5145836b5f07d6b794778e6d"
+    },
+    {
+      "file": "pacing-control/exploration-3.csv.gz",
+      "originalBytes": 112417,
+      "originalSha256": "de1cce26db196091e72c88e1273cd92014f39b3f8021a306ca69caaf86034cfa",
+      "compressedSha256": "ab2f370db4e26e08ada842e84fbb2f076d982f8264cdd09d1710770eaf3fc30d"
+    },
+    {
+      "file": "pacing-control/exploration-3.environment.json.gz",
+      "originalBytes": 1056145,
+      "originalSha256": "7cf3dd1d8524c625cd2e173c30495a55301907a88f76a88025091dfa071482a6",
+      "compressedSha256": "4f6b95a584d20ab32f958d2a5d425b71c0b3f5b90985015a02051dc5ab032067"
+    },
+    {
+      "file": "pacing-control/exploration-3.input.json.gz",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "pacing-control/exploration-3.json.gz",
+      "originalBytes": 120168,
+      "originalSha256": "3746520143731abee12e41dcce531c2d5e847ecab6159778965c0c8691269d27",
+      "compressedSha256": "68133233274091e6c970d584ce397f6b19c3524756f017b43ff7a31340e7df55"
+    },
+    {
+      "file": "pacing-control/exploration-3.memory.json.gz",
+      "originalBytes": 62430,
+      "originalSha256": "cbe0948c7ed3834e2a45c14da9b118e30f47085a70d85f4821e0691a09eddc35",
+      "compressedSha256": "6281b336f16b44818cd7f3115d89640774c82a4513d8072019dd1aac359decd8"
+    },
+    {
+      "file": "pacing-control/exploration-3.result.json.gz",
+      "originalBytes": 1143037,
+      "originalSha256": "7c8d55cf9c2a87fcd3b150f0ac43059146d334ca6386d4b04b9b6c73737c0ab3",
+      "compressedSha256": "af8991101491b777f2c56587577ee21536f19af5ece8145b20865456f59c262c"
+    },
+    {
+      "file": "pacing-control/exploration-3.stderr.log.gz",
+      "originalBytes": 394,
+      "originalSha256": "06f82715bb49924af2f96d1e9882c0d55a5675a8440e3c70ac8ba92ebca612c8",
+      "compressedSha256": "37c8496b2e90b5d6735e4ba0a87da95e4c3111ebd75a1554a1e1769dd8a81995"
+    },
+    {
+      "file": "pacing-control/exploration-3.stdout.log.gz",
+      "originalBytes": 2068,
+      "originalSha256": "93bc6a3ad525849fc39c4e75b352606d4e17631c7b0fc6496c6304a6d05c6d60",
+      "compressedSha256": "4ded7ec977db6f61045eed390db00db8208e54c38aea1a1976c962bd514d4d57"
+    },
+    {
+      "file": "pacing-control/exploration-4.csv.gz",
+      "originalBytes": 110324,
+      "originalSha256": "f5e50f1472eb9864e178f2baf24aadb2a6db6a8c95790ac8a0f0e79304aadfb1",
+      "compressedSha256": "d88f42f0c45ca32cbc3dc552cf3abc57b1cf8bed7fbdce94ba8b6b0cea9eae30"
+    },
+    {
+      "file": "pacing-control/exploration-4.environment.json.gz",
+      "originalBytes": 1283258,
+      "originalSha256": "de2a44d766f4a7ff6e32f166a560813e917adf08c5541376e2a4a364a5b5312c",
+      "compressedSha256": "56fda8194086bf24fa690716a06540743241bdef901c411f76ad23889adca9a3"
+    },
+    {
+      "file": "pacing-control/exploration-4.input.json.gz",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "pacing-control/exploration-4.json.gz",
+      "originalBytes": 121828,
+      "originalSha256": "b2355bd3de072e0cb8956cc01e0d9ee1fcfc270e15f8a9c4e70e2c55651428be",
+      "compressedSha256": "7f9074a2f47d0175865eb0f283ea063f443fa5fb3342549911144bb059fa3eba"
+    },
+    {
+      "file": "pacing-control/exploration-4.memory.json.gz",
+      "originalBytes": 96895,
+      "originalSha256": "f23356f215497a667a6c31394a4170ca01bf74bda4e1f0fcaefc1e9531bdf253",
+      "compressedSha256": "c52fd5e93b507e285ca89e6f9165d9d9eea5fc860ce409e900f02b5224cf42dd"
+    },
+    {
+      "file": "pacing-control/exploration-4.result.json.gz",
+      "originalBytes": 1374161,
+      "originalSha256": "5b5ad5bd4638f77b6e5c37c3d4d6ebb24422773053b5436c04e63be07c639ee7",
+      "compressedSha256": "00c3eef6210ef999d748cc327cd352eb60ad24e44c0c2ce625fba6d7b3a09b2b"
+    },
+    {
+      "file": "pacing-control/exploration-4.stderr.log.gz",
+      "originalBytes": 394,
+      "originalSha256": "5cea7d098b55675a73e0711f8e811ba293e54919e8870013b65fafcadc5b17d1",
+      "compressedSha256": "5a9e63f3354d34fbe9bb14d99973c4a0703b458b0bd89166bef96b493e3e4c52"
+    },
+    {
+      "file": "pacing-control/exploration-4.stdout.log.gz",
+      "originalBytes": 2065,
+      "originalSha256": "b5d12a5804674927e9de2f836b36afea66be9eec33c6e4222648e5082a6f3cc0",
+      "compressedSha256": "f5337062e085237b5b671803bd1969ab6b930a48c94511b87cbfc984ccd27210"
+    },
+    {
+      "file": "pacing-control/standard-1.csv.gz",
+      "originalBytes": 110249,
+      "originalSha256": "a96df63c8cca9ef401c47c2700d0bd7647666d6d41cdd27154fbf8dce73fa389",
+      "compressedSha256": "e24b5c39f64b5a11d8aedaaf711f0e3c625d6d433f070ca919b2b36e37252cc1"
+    },
+    {
+      "file": "pacing-control/standard-1.environment.json.gz",
+      "originalBytes": 905133,
+      "originalSha256": "0e668e62b56059c335ae38f130a97e0580f743ff4d171c8402e0011938a5bbdd",
+      "compressedSha256": "6a9381f00f4843d3f14e74dc8b16abfe6cbe7eb4b2039456086c4173ba689c6d"
+    },
+    {
+      "file": "pacing-control/standard-1.input.json.gz",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "pacing-control/standard-1.json.gz",
+      "originalBytes": 118530,
+      "originalSha256": "614797535ec4c2f55b79ed2a7209c3729daa35502f66852dc466f919397e809a",
+      "compressedSha256": "c770277dc493cee41aa6165600382db8fa0f784431543439ddf2094ea61771b8"
+    },
+    {
+      "file": "pacing-control/standard-1.memory.json.gz",
+      "originalBytes": 40852,
+      "originalSha256": "df7d9399f8e69b2d7ea0ef2cf562f1a8b5d5549cd43097addd363517cf03734f",
+      "compressedSha256": "a7f8ec7342984e2a528f58419466745a538ca4bc351a9190dba37af98b3ccc21"
+    },
+    {
+      "file": "pacing-control/standard-1.result.json.gz",
+      "originalBytes": 988918,
+      "originalSha256": "d9816ae4d73031f59936b3854c5541f3c11e41b83f428963ede3624b1867155d",
+      "compressedSha256": "859a672207d178d684493997c3cc8698f2f4ed704d960d7bc147b31622f02af7"
+    },
+    {
+      "file": "pacing-control/standard-1.stderr.log.gz",
+      "originalBytes": 393,
+      "originalSha256": "f0d7e24e89066c8fc76e6a0d975e8ed5edd972121ea5d7542b509db4b4986f73",
+      "compressedSha256": "2a589570005f0a567365f8ffa786ed81aed20327fb34053ca66cd0782491e3db"
+    },
+    {
+      "file": "pacing-control/standard-1.stdout.log.gz",
+      "originalBytes": 2059,
+      "originalSha256": "c33316127b5420ea6142adf332e6bb1f32bb7432edc9f2d93298ba8c610a08c0",
+      "compressedSha256": "2ab76e693e1d8361f71683c81579f1bc26e323dd125e7ed0b7226fcdaf645bd5"
+    },
+    {
+      "file": "pacing-control/standard-2.csv.gz",
+      "originalBytes": 110249,
+      "originalSha256": "563800775e76d89858952c8d02902cbf5af9131cad553a5c81ced361cacccf7c",
+      "compressedSha256": "621ce705c1457f43a6c6ae42a6ef9a35ce3750aa33c518a3f8a52a71c365e607"
+    },
+    {
+      "file": "pacing-control/standard-2.environment.json.gz",
+      "originalBytes": 1283291,
+      "originalSha256": "4d5deaaeba1736aaf8d1c14805b7fa9fede647adb940ce95e058f08b3b3f5d80",
+      "compressedSha256": "8ed267f24e23666d6325e9a8759b7f6b59dd00d1238069b29fea423189ea62d7"
+    },
+    {
+      "file": "pacing-control/standard-2.input.json.gz",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "pacing-control/standard-2.json.gz",
+      "originalBytes": 121267,
+      "originalSha256": "ff054515839a02e8449a1def574972cdbe813b84db9455ad0ade46f401b8516d",
+      "compressedSha256": "4a8bc2c7a0f0309224cbfd524a6ba44148e9799f3da19221e26cb81fb7641b36"
+    },
+    {
+      "file": "pacing-control/standard-2.memory.json.gz",
+      "originalBytes": 96531,
+      "originalSha256": "180907d0c21d10169557efd269cca07020d151cdda8b1d25e5ca86b7f0de4559",
+      "compressedSha256": "c23367bcb0459cbbcfc5021946dc6ef65ba808203278d3d650385153254b5a86"
+    },
+    {
+      "file": "pacing-control/standard-2.result.json.gz",
+      "originalBytes": 1374071,
+      "originalSha256": "66a25ee84492bc90e1ed771c4b9007c8b18e54434911c5ab2bbc972adf9be541",
+      "compressedSha256": "0f5bbd3cf994e0e6744e0fc81f0eb8887200f94b1351bd56f01795ff29b6ea7c"
+    },
+    {
+      "file": "pacing-control/standard-2.stderr.log.gz",
+      "originalBytes": 393,
+      "originalSha256": "3d8131b8b7330196d53b7ef029378b10923c0754fa351977dd5409edc5061ada",
+      "compressedSha256": "e7e0708092296550ebf7d53b2b87cbd9c1a19306904d59e3a2e825000f4f0ad9"
+    },
+    {
+      "file": "pacing-control/standard-2.stdout.log.gz",
+      "originalBytes": 2059,
+      "originalSha256": "53877f709de1113565aa4eb6852d27a75e7447884cf18c44a1cd6820026ab7d0",
+      "compressedSha256": "d3a506953814a0a5418186aee66aef0f53314a6e9f8f43152ec35e52a53c9828"
+    },
+    {
+      "file": "pacing-control/standard-3.csv.gz",
+      "originalBytes": 110255,
+      "originalSha256": "cc17495fa0adf30ebcafca115403b48603b7f582ba2364c5333210263a106479",
+      "compressedSha256": "d590c087872390a7450794995797649d35a2292c177fe0c487859aba7f9055db"
+    },
+    {
+      "file": "pacing-control/standard-3.environment.json.gz",
+      "originalBytes": 980427,
+      "originalSha256": "12be829b3bcefc8cc8c86900abf1835515ebce2f3266f8d0329141a63ef5907c",
+      "compressedSha256": "7c9c065711df64a0a919961bf1247fc70139386e059eb5317b423399a55a92f7"
+    },
+    {
+      "file": "pacing-control/standard-3.input.json.gz",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "pacing-control/standard-3.json.gz",
+      "originalBytes": 118484,
+      "originalSha256": "8cd0c7d55026c235835377fdebfd045eddf095654870923c0066b5929b1c0e29",
+      "compressedSha256": "6fd476f76dcd59da7c24afab1dfad0d6cc1fa44b8db0c9161377a169682470f0"
+    },
+    {
+      "file": "pacing-control/standard-3.memory.json.gz",
+      "originalBytes": 42997,
+      "originalSha256": "855d6b48be1f915414123e5f433fa57c0e94df0f57115375d4cae0bf57a2ffc4",
+      "compressedSha256": "72129bbccb143d3dad1fa9a645cc5b3421232465fdfff97aff402ee5cdc25a5a"
+    },
+    {
+      "file": "pacing-control/standard-3.result.json.gz",
+      "originalBytes": 1064561,
+      "originalSha256": "38d341b750c3e1e5f9b04c727998265d44f7574ebb0516b9eae6ad7f20d007ba",
+      "compressedSha256": "d2358adf79a0362341f0063da49cf9204f0905b1aa59f7dc4721f6c6478d2c3c"
+    },
+    {
+      "file": "pacing-control/standard-3.stderr.log.gz",
+      "originalBytes": 393,
+      "originalSha256": "923d5cb470b195b91987f174437e1fc0af6141257992c5317e919d330502b667",
+      "compressedSha256": "a660b40fd74694f9b55abbff349aeda623cf783d6b059b40da7a77bea7e51d69"
+    },
+    {
+      "file": "pacing-control/standard-3.stdout.log.gz",
+      "originalBytes": 2060,
+      "originalSha256": "cfee7075339df5010a3c3c215dd06931f408065a493a3662aee4ea3c472ef2f3",
+      "compressedSha256": "7485657bcc66ade1279efbc5b3cdd8bbe77895cbf235d2a92725ff6f781fb689"
+    },
+    {
+      "file": "pacing-control/standard-4.csv.gz",
+      "originalBytes": 110249,
+      "originalSha256": "fe64d34e4dce2606a9242705d2e47a871909ac5c1a357141d6d3aa9f45e69a63",
+      "compressedSha256": "02d21d1465130ea3507f2c70ec2ad9fc5118145e949631f083fd2e4f0d465d1e"
+    },
+    {
+      "file": "pacing-control/standard-4.environment.json.gz",
+      "originalBytes": 1283286,
+      "originalSha256": "a944a4a06e72404c32da27fde008b7a14ca73150182ee3e73a6dea92decbd40a",
+      "compressedSha256": "76059992273274231a2ecd4b485c6494f29a0bfb938304250c869f9c758224a3"
+    },
+    {
+      "file": "pacing-control/standard-4.input.json.gz",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "pacing-control/standard-4.json.gz",
+      "originalBytes": 121383,
+      "originalSha256": "33bd5754ee683169a0711f37c2088fea8692d99d2949547bdda9156cb289d4d2",
+      "compressedSha256": "7f406a13e3832f168a076189659faa94e4b0bd0a9f3c99e5e19eca9cdbd2f0e4"
+    },
+    {
+      "file": "pacing-control/standard-4.memory.json.gz",
+      "originalBytes": 96680,
+      "originalSha256": "4e488bc859b6cc1a7787328488238af864e69678529c0629d169b56ab03d8fad",
+      "compressedSha256": "21e04ef9e11e9b046cd1240b67f248c59308f4a2abe453e842279ec4cdc5d9ec"
+    },
+    {
+      "file": "pacing-control/standard-4.result.json.gz",
+      "originalBytes": 1374059,
+      "originalSha256": "0a970a0c8ba3679f4ca6fc36aea60bd53b93444c9c1d7ceb0f9c2fd57d23309d",
+      "compressedSha256": "30de348ac6b402fb92eb1ba9de654d921d422799ec20f896b433bad381e1447e"
+    },
+    {
+      "file": "pacing-control/standard-4.stderr.log.gz",
+      "originalBytes": 393,
+      "originalSha256": "2b108bd97f042ce6ea8ffba0badca3c152c58f8b2df80fd5eb24bcdfe013f37e",
+      "compressedSha256": "b261db2eb882fe71e113e28c8414867b1ea1ad5b49f62fc84b454f5d3ecaa46c"
+    },
+    {
+      "file": "pacing-control/standard-4.stdout.log.gz",
+      "originalBytes": 2059,
+      "originalSha256": "30400bce034564c35227d30d8b24637e904136a54ace9361cce720f1de8edcf2",
+      "compressedSha256": "faff056da31067a210b4580ce38e86e52dedb13cec306a44592ef68711500058"
+    },
+    {
+      "file": "pacing-control/summary.json.gz",
+      "originalBytes": 6385,
+      "originalSha256": "d7cf71ac4c0df41aa1a168daf98da07ffa11600ef21ddecc40a52dc63aa8a8b3",
+      "compressedSha256": "e6768f80d9a88c0394ce4ebdbb40080cfa18fa985f4df15467e39dc994f193e7"
+    },
+    {
+      "file": "presentation-control/exploration-1.csv.gz",
+      "originalBytes": 110253,
+      "originalSha256": "2212913deeb40903ef413f2d0e01b748fe046edc32355c56551776cb65c47f08",
+      "compressedSha256": "68d263959213702b3d4af3200e97f7ad7d3784b5bba9a1d4c58873c6568a5af4"
+    },
+    {
+      "file": "presentation-control/exploration-1.environment.json.gz",
+      "originalBytes": 1207957,
+      "originalSha256": "42413f85996cb7612406740206976711b602580b8faee94924c159944daa61f8",
+      "compressedSha256": "39af64beda36c8b6a076dd1edb702a557d4c9f5677090971f5c3f31f4ea16a2f"
+    },
+    {
+      "file": "presentation-control/exploration-1.input.json.gz",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "presentation-control/exploration-1.json.gz",
+      "originalBytes": 121706,
+      "originalSha256": "7f857e1b2d91c98957e2abaeec0c0c6cf3b209bf1d29172f62b519738000bbe9",
+      "compressedSha256": "6e0d7fda376eead5e787f929cf90f7826edc7da99099360f51d6fc00a2503d47"
+    },
+    {
+      "file": "presentation-control/exploration-1.memory.json.gz",
+      "originalBytes": 97049,
+      "originalSha256": "4881f0db51d2950fd7f6c0507f56314e7e8757619c3530d8c9165b61532242c0",
+      "compressedSha256": "cc84a4c512e669cab4a64eb3067f93a69f5ceeb9de9b427c2000b6b98148853f"
+    },
+    {
+      "file": "presentation-control/exploration-1.result.json.gz",
+      "originalBytes": 1298820,
+      "originalSha256": "b548c084b6824263fd845c7e1d579a8d6f837c175e4fe850709ff68f3d9f7edd",
+      "compressedSha256": "b8b37366853e80de0420bee8f146c817b98380272af2aefd93d761b95be0fa1a"
+    },
+    {
+      "file": "presentation-control/exploration-1.stderr.log.gz",
+      "originalBytes": 394,
+      "originalSha256": "b5323f2b46325aa68bea232081b0a87aff580efc99bb1c71ab3b83b6b9789972",
+      "compressedSha256": "d445d24805a8a02b500b3a5dbfc078bcd2b23c963afe8667ecca89b1e6593b5c"
+    },
+    {
+      "file": "presentation-control/exploration-1.stdout.log.gz",
+      "originalBytes": 2070,
+      "originalSha256": "32df59dce60b4a59fb9979231f59ea32bd082aa59e9846342f61cbb6908ecab3",
+      "compressedSha256": "15153d0aa46c3ea253f34af3abe67884d84464cc2d3a3fdc8ccebaed66a55044"
+    },
+    {
+      "file": "presentation-control/exploration-2.csv.gz",
+      "originalBytes": 110260,
+      "originalSha256": "d2be779532b469f5208efb036973d7f0bca8151442e741e0f55c697905642363",
+      "compressedSha256": "36f016226e8791ae7ba9143df740c57c928c7519bc0cf68b8453a66cc8859ff6"
+    },
+    {
+      "file": "presentation-control/exploration-2.environment.json.gz",
+      "originalBytes": 1283270,
+      "originalSha256": "96545995e7a00713d01b7e58e76b4643a73b01b4984d86c6153ae9b469ee3af2",
+      "compressedSha256": "028011b9e9ee2b530d72d9360b7043278c2b62c5074fa1db459c00dd7dd5105c"
+    },
+    {
+      "file": "presentation-control/exploration-2.input.json.gz",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "presentation-control/exploration-2.json.gz",
+      "originalBytes": 121909,
+      "originalSha256": "87480db40a36c4bb2919b3da1b747bcdaada3f25fdc1839a3d851e5f019d2d45",
+      "compressedSha256": "c973b5acf6069c3c985944e90c3746ca2879e30d21f1b2783dacee65ac07a711"
+    },
+    {
+      "file": "presentation-control/exploration-2.memory.json.gz",
+      "originalBytes": 96605,
+      "originalSha256": "32a7f1106c78a78418211c644c18015e19bc3e1487c8fec72059abd416e2e05c",
+      "compressedSha256": "114cb117d08794475a3f6b51dcbec544da6eebeb04b7e6db647750ecd7065bc6"
+    },
+    {
+      "file": "presentation-control/exploration-2.result.json.gz",
+      "originalBytes": 1374130,
+      "originalSha256": "e3e4aa33b6c5736ea3dc28470ab548146ecca69cee0cc5fd32d663a241bb8e91",
+      "compressedSha256": "3368534878e871a87b125f5ae118abea0e67639c81814f6a66443724e57af9a6"
+    },
+    {
+      "file": "presentation-control/exploration-2.stderr.log.gz",
+      "originalBytes": 394,
+      "originalSha256": "c85f27875390541baa91638b886be5ece2ed7401f62df2264fbc3f1d4e9a7942",
+      "compressedSha256": "1a635f930e33f4e9251832a7c568055d7026f4c8b36bfe108c60f3c2dbd27673"
+    },
+    {
+      "file": "presentation-control/exploration-2.stdout.log.gz",
+      "originalBytes": 2070,
+      "originalSha256": "d1c021961a4b15172e40257db72607228fab216feb4ca9853ba722366861bec4",
+      "compressedSha256": "28370a975faf26e74d52459c5905b8bab2f2cabf0cbfee128dcce9cbc3a74af2"
+    },
+    {
+      "file": "presentation-control/exploration-3.csv.gz",
+      "originalBytes": 110260,
+      "originalSha256": "2cfd6a23dfcdd7c3b1ebdd2422acd69a17a588c1099f8c59e233bbfb361415cb",
+      "compressedSha256": "50549b48dd725d329e4d644315f6bcf9ae3e338da24c99249fa5e4782eee2ab3"
+    },
+    {
+      "file": "presentation-control/exploration-3.environment.json.gz",
+      "originalBytes": 1283291,
+      "originalSha256": "7256dceb0a46c3d6ad7f71235f6a99103e23dffe525b063841bc86275dbb1027",
+      "compressedSha256": "cab3f1d231c0dc5fb97a01eb3de6079b961d6afecc301137a8804e22de45e874"
+    },
+    {
+      "file": "presentation-control/exploration-3.input.json.gz",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "presentation-control/exploration-3.json.gz",
+      "originalBytes": 121796,
+      "originalSha256": "6b74a3a63de05ada77fd14f1de19cfff599ccce43d15cfc94fd44722b0e76dff",
+      "compressedSha256": "2242f265f015235a7f50d757f3a2379ce05cc6deb50daab5da2d98ca42bbcd94"
+    },
+    {
+      "file": "presentation-control/exploration-3.memory.json.gz",
+      "originalBytes": 97088,
+      "originalSha256": "cd37d2adc102994fbd3ac10bd69a798384c805a7d12e65e2377661974ce731a0",
+      "compressedSha256": "2e282dc3bcd5306be7ec086c9888b33c886659b53c4e14e10be18a95ec57f9a9"
+    },
+    {
+      "file": "presentation-control/exploration-3.result.json.gz",
+      "originalBytes": 1374219,
+      "originalSha256": "49c135a295962c9605a75c044f47167ffd1be664ea288492e8a203c2c1d43fe9",
+      "compressedSha256": "df79966eae7534f2073215f30da06d1adc1a6bc87f0541278c059d00d19b1d5a"
+    },
+    {
+      "file": "presentation-control/exploration-3.stderr.log.gz",
+      "originalBytes": 394,
+      "originalSha256": "43460661c041791ba9f07fd3e29861310c60f4b55e9383e02147e100eb44f731",
+      "compressedSha256": "4b2880dfd4c0440cd50bfb0358965dd3c4b8baba2422aedfdc7cce4ca4fd58d9"
+    },
+    {
+      "file": "presentation-control/exploration-3.stdout.log.gz",
+      "originalBytes": 2070,
+      "originalSha256": "5c4265e5255ce37506e825c3b7aaac2111ddf12f3cd0bdafe3196c7de74e85fb",
+      "compressedSha256": "ec534000e0069abe3ee819fdee077ed4baa82d0e22dd28b4f3bff9d9f9c822d8"
+    },
+    {
+      "file": "presentation-control/exploration-4.csv.gz",
+      "originalBytes": 110286,
+      "originalSha256": "7242da323134484de73c969233fb01e8ef91fe2f733d9bc4247f88c3fb2c2f4b",
+      "compressedSha256": "ac600c83a823221a41b03e452597a2348603c1cfaf3c19b1850b1e6073d474db"
+    },
+    {
+      "file": "presentation-control/exploration-4.environment.json.gz",
+      "originalBytes": 1283262,
+      "originalSha256": "3ec48ef63764d2ed5e2543a7a35268a1f85af89f3931309e451bc27372dc9e46",
+      "compressedSha256": "1127901593d0fb845c7621421dc26f01f970289443c8aa8da5fbc5bb25eca2e4"
+    },
+    {
+      "file": "presentation-control/exploration-4.input.json.gz",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "presentation-control/exploration-4.json.gz",
+      "originalBytes": 121803,
+      "originalSha256": "08539f094bc38462c69c315bcc217d76b40260307dcbcfd51014b1944631979d",
+      "compressedSha256": "13f1b66a94edbe8332198fbabbab6943594f7d5943578ebb6b89d7fba80101dd"
+    },
+    {
+      "file": "presentation-control/exploration-4.memory.json.gz",
+      "originalBytes": 96999,
+      "originalSha256": "37fb9a2234e7547e0ec087c356e43a4ab3d89d853042b99c8a3c0ee17544a7f6",
+      "compressedSha256": "f1724bb7ed9338c5f42a3552935e72ef5dd16df36eda8f7e5b2e9ba772a5435b"
+    },
+    {
+      "file": "presentation-control/exploration-4.result.json.gz",
+      "originalBytes": 1374471,
+      "originalSha256": "0bbfd0f7c983bb4e440af62d44d6fee2235fab7e6b6c44efe6b6c524426f0761",
+      "compressedSha256": "eb4db0b50cac9cacf2684645b0edf77f497a644cc570929de6d99b981205c93d"
+    },
+    {
+      "file": "presentation-control/exploration-4.stderr.log.gz",
+      "originalBytes": 394,
+      "originalSha256": "272aa39b5687a7cf90a0e41b43fdbfd9c510ab2b62ee7d759028921395afba48",
+      "compressedSha256": "7132a1824cb6cdae1bf0ce352abddcf14e419bab27f26796862bd303169914ae"
+    },
+    {
+      "file": "presentation-control/exploration-4.stdout.log.gz",
+      "originalBytes": 2071,
+      "originalSha256": "7c7cc750e3835e98359d8818a818fe9296b76498f4fccc1544c0e83c6ab69dfa",
+      "compressedSha256": "cbcce8c048e376271bf7f54093aab721d05406f246db2d55947bee92dafc4d40"
+    },
+    {
+      "file": "presentation-control/summary.json.gz",
+      "originalBytes": 2730,
+      "originalSha256": "d67be2dae132368a4f82da86cc90ff8e0339db95a43f3e724fb3cf064ade26cf",
+      "compressedSha256": "e37c19c9c133dab8c53844015f9cfb9f2f6574baae23bb5eb07b7234f79508be"
+    },
+    {
+      "file": "package-mailbox-control/command.json.gz",
+      "originalBytes": 914,
+      "originalSha256": "dbd90cb565a1bdd01a71c494e3aa92def8ec0d84d54105b3f6cf24ff42211da9",
+      "compressedSha256": "f90850bd2a966ced2f8b596c2899759c8af15f9146b7e86884376c0b1baae933"
+    },
+    {
+      "file": "package-mailbox-control/runtime.json.gz",
+      "originalBytes": 3753156,
+      "originalSha256": "04a4132bd749ceab4d7e828b41fc09821d8d2bd8c2e16178f7aa85349e254123",
+      "compressedSha256": "3e09c44e3c8ff190df97ebeb040aae3b0b7132d5643e02bda89b0d7418c649fa"
+    },
+    {
+      "file": "package-mailbox-control/stderr.log.gz",
+      "originalBytes": 1678,
+      "originalSha256": "ebcd904fef40c86ac427200a43ad12c36182bef33fef5e77d107e50706522e8f",
+      "compressedSha256": "b87d272c69de800ef188ef0b2941f44dfd39882391b8f5c21c11f7a585547e45"
+    },
+    {
+      "file": "package-mailbox-control/stdout.log.gz",
+      "originalBytes": 2728,
+      "originalSha256": "243a3cfc59993840a3ec87e092b19db7a53adc0e2ae6cf5fdfa72b5d7c051340",
+      "compressedSha256": "9714101bcfbb18eb1b10dbbdda716fc39e5f49e25c9c2381feb69e657c50ddc2"
+    },
+    {
+      "file": "package-mailbox-control/timing.csv.gz",
+      "originalBytes": 158159,
+      "originalSha256": "89014781002b0c12632c976510b990480f96aa8f9281353a1315e319f2b30e3d",
+      "compressedSha256": "7cecf1823cbf3f33813c480af63bdc30e507ca87fbd032b8465d9c9684103430"
+    },
+    {
+      "file": "package-mailbox-control/timing.json.gz",
+      "originalBytes": 167972,
+      "originalSha256": "6e5ea92505a6ed249a83111edb0c281776394b5a71eab10d7444931a1c4f5dc2",
+      "compressedSha256": "8369cded77791caf01a4631eb3f4c738caf4e37a3dbe8d286be90c5ebf1b4567"
+    },
+    {
+      "file": "external-gpu-load/gpu-counters.json.gz",
+      "originalBytes": 1144,
+      "originalSha256": "8772e54d2a05e7bff91a725e002d01365d9f7f57f5ad20cdc88952c76b9442dd",
+      "compressedSha256": "3d33ce422f00682d789e4796a14c8cb17842462b5dbb71bd75f1f149050b8482"
+    },
+    {
+      "file": "external-gpu-load/nvidia.xml.gz",
+      "originalBytes": 70504,
+      "originalSha256": "5171744eb74638223c56c6cfcfc77ef3f036c374c26852c27347dfa05821b72c",
+      "compressedSha256": "25f6b5aac6b3216cf0f5190a9672ee241b05f9f45b487dcbae7a91d8c2bc3aab"
+    },
+    {
+      "file": "external-gpu-load/observation-time.txt.gz",
+      "originalBytes": 35,
+      "originalSha256": "dd17004507d994b024f2e8becdf66fbb863957e4d4ce88a10abbfb88f009fa61",
+      "compressedSha256": "1ad5110f586865cf3e6659af7d616eab5be987eb4987855299a784fbda947408"
+    },
+    {
+      "file": "external-gpu-load/processes.json.gz",
+      "originalBytes": 1763,
+      "originalSha256": "e6b7660faae5adf2b927015cb1f73ba872d472092c3fb3dbe3a7ca3a67b903ce",
+      "compressedSha256": "5d9823201d1163d7aa2abb51bb888c41f53002ab9322f3daee91316dc279bb91"
+    },
+    {
+      "file": "source/src/foundation/FramePacing.hpp.gz",
+      "originalBytes": 620,
+      "originalSha256": "60ee917394af39b1249b086447408c6c7fa3ca29fdd142f1e0796413b3868d6c",
+      "compressedSha256": "798d09f10ff1d439f3a1c5fcd14bed68a258e813b39e6f0240b203fdfc77acec"
+    },
+    {
+      "file": "source/src/rhi/PresentationPolicy.hpp.gz",
+      "originalBytes": 678,
+      "originalSha256": "02039fff06a9e13b05f9f3c3aa6bc41e3ffd7ea10a814e1bf0c8159fbad0fc37",
+      "compressedSha256": "9d92d36e06cdfa12c32fac7d83e602f60254cc7e4fdaede202c7d1f3f4de14b6"
+    },
+    {
+      "file": "source/src/runtime/EngineSettings.cpp.gz",
+      "originalBytes": 2276,
+      "originalSha256": "c58e9ab72a2dc0227570f03458a99cac7fde12975adfed12ad22386d58fd78ee",
+      "compressedSha256": "09f366958be4b2630ac5493f0ebf1c661651f24f0d4d5fea61f901c34f341628"
+    },
+    {
+      "file": "source/src/app/AzureRenderApp.cpp.gz",
+      "originalBytes": 85425,
+      "originalSha256": "db2ff2b9fe576228ae823a2a300e1ab8c515242d8f4d2535580e657726de4094",
+      "compressedSha256": "180e84bcf3cadaeaf4963d2510c633497b94fe1ebabee6bc59133547c9f16561"
+    },
+    {
+      "file": "source/src/app/AzureRenderApp.hpp.gz",
+      "originalBytes": 21308,
+      "originalSha256": "0151f25c8fd2f0921c470de4d73ae2c5d1cd6d59cb673e452f0eacd4ac596bb0",
+      "compressedSha256": "deaf33007f9cdb7e3e8613aa9a99fdeb9830d5d08f95df7ef077859bea360810"
+    },
+    {
+      "file": "source/src/app/AzureRenderSupport.cpp.gz",
+      "originalBytes": 30166,
+      "originalSha256": "f7d576ff1a63355dd17879b14457d2a4f0665c4b0951e83f7b57189afff4e6a3",
+      "compressedSha256": "d0a053dcdf0419ba361ec75568654c83d624e78d0a5303032b5ec9a397a6bc9c"
+    },
+    {
+      "file": "source/src/app/AzureRenderCapture.cpp.gz",
+      "originalBytes": 36033,
+      "originalSha256": "eaaaa35fe7ee4ba86ff80a0cb4d6bbeaf6e5ed1ccdb7f2156ef1765e53061d9e",
+      "compressedSha256": "41278ebdd30ceedc98914f8e9ebe6160d4965e7619e878c323d06f4fc01cc1fe"
+    },
+    {
+      "file": "source/tests/EngineSettingsTests.cpp.gz",
+      "originalBytes": 4643,
+      "originalSha256": "6a9c894072db61ac8f039d673588c5c8239bfa8d658e7740413b6f7739bee5f2",
+      "compressedSha256": "953c68d34d43d7509389e250c39fd0374601cf48a001eb3991eef212a0c01244"
+    },
+    {
+      "file": "source/tests/PipelineInspectionTests.cpp.gz",
+      "originalBytes": 5366,
+      "originalSha256": "68711d0b6deb89f08272c8c6ec0ceb34d9672c1ea014da9fcba1d1d5604bdbcc",
+      "compressedSha256": "616be963380c7e304d65eb7843669a7eec532d74b9a2cb52b79586b1f4891435"
+    },
+    {
+      "file": "source/tools/run_playable_performance.py.gz",
+      "originalBytes": 14346,
+      "originalSha256": "6ddf146471ff17d3e786ea741573f9ba643c5abc2a47deae226909e91e0a3fa3",
+      "compressedSha256": "a8cb44427650d9863c23df5afb079caa2ae59bf44e1f8902d83966be12d1ac04"
+    },
+    {
+      "file": "source/tools/run_playable_long_run.py.gz",
+      "originalBytes": 20912,
+      "originalSha256": "45e8fb5c68d705a1026f627582b51ea77b3e56ba1bcf92008fa340eef3b67577",
+      "compressedSha256": "9bee743444a7ab5a557c83470c7dfa782ad9badbcceaa2c6f2c8ce5fa4a48cbc"
+    },
+    {
+      "file": "source/tools/test_level_player.py.gz",
+      "originalBytes": 2936,
+      "originalSha256": "8b76a35e7530297c4c32c566ef8fbf97fa8d556dc092e4541f556cfdf78e9b90",
+      "compressedSha256": "15a8ba2e3007f9c2d787f0881fcca01b6e4e271fcc5cfd99876fff550b5828cc"
+    },
+    {
+      "file": "offline-style.log.gz",
+      "originalBytes": 49,
+      "originalSha256": "31c9abfeee2149006c07892e0b28df83ba245aa3bcc620c6638b699e8846b87d",
+      "compressedSha256": "bd949f8f35b41fa337a1f5760e70b585da4957331fad062c5c35a5782d38e042"
+    },
+    {
+      "file": "offline-docs.log.gz",
+      "originalBytes": 5126,
+      "originalSha256": "a16bc0a4d33694e7d70fb9b2c8e8cb3408d59ef3c361ddc25a1c6ba034f16982",
+      "compressedSha256": "a0e1589e372aa7610bda3b04105eb205249fb446e97131097a739625235ccab6"
+    },
+    {
+      "file": "resume-idle-pacing.py.gz",
+      "originalBytes": 4708,
+      "originalSha256": "ce79259af82f5c73c5104f09ad963784cb94ef2f9e3ef45326952ce3020b127c",
+      "compressedSha256": "6b954897d9a01099e959353a4f60f51929733c066688d05e557f922dfed7dbb0"
+    },
+    {
+      "file": "resume-idle-dry-run.log.gz",
+      "originalBytes": 182,
+      "originalSha256": "1dac745598865c26756c111423d06d4d7ec814b533f60d27a85ee9ea81053ff3",
+      "compressedSha256": "65968e19b08fabdf18e2dab56ec80af61b2664b1b19d64bace1cadb5bbea8536"
+    }
+  ],
+  "offlinePackageIntegrityVerified": 9,
+  "currentRegressionArtifactsPlayerByteEquivalent": 4,
+  "documentationStyleVerifiedFiles": 106,
+  "strictDocumentationBuildPassed": true,
+  "resumeInventoryDryRunPassed": true
+}

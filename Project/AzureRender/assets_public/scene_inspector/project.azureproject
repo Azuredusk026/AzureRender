@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "98793b70-80e1-4a13-a487-5d8b2c3d4876",
+  "name": "Scene Inspector",
+  "mounts": [
+    {
+      "name": "assets",
+      "path": "assets"
+    }
+  ],
+  "startupScene": "assets:/inspection.azurelevel",
+  "runtime": {
+    "schemaVersion": 1,
+    "input": {
+      "select-asset": [
+        70
+      ]
+    },
+    "systems": [
+      {
+        "id": "camera",
+        "config": {
+          "mode": "orbit",
+          "target": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
+      {
+        "id": "interaction",
+        "config": {
+          "actor": "observer",
+          "action": "select-asset"
+        }
+      }
+    ]
+  }
+}

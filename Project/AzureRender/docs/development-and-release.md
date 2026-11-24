@@ -1,10 +1,12 @@
 # 开发、测试与发布
 
+Windows 源码、产物关联与素材准入使用[构建复现说明](runtime/build-reproducibility.md)。公共回归、本机 GPU 与发布门禁的入口在该页集中维护。
+
 AzureRender 按修改风险选择测试。纯数据或 CLI 变更通常可以用单元测试覆盖。Vulkan 生命周期变更需要运行 Debug Validation。
 
 R3 工作线程录制可用 `--disable-parallel-recording` 切换回主线程录制，用于同条件视觉和性能比较。当前工作线程路径覆盖 Character 蒙皮、GPU 剔除、阴影和主场景。主线程按图顺序执行这些命令缓冲。
 
-Character 不透明绘制使用 GPU 剔除与间接参数。`--disable-gpu-culling` 切回 CPU 可见性和直接绘制；缺少 Compute 或 drawIndirectFirstInstance 能力时自动使用该路径。透明排序和轮廓仍使用 CPU 可见列表。
+Character 不透明绘制使用 GPU 剔除与间接参数。`--disable-gpu-culling` 切回 CPU 可见性和直接绘制。缺少 Compute 或 drawIndirectFirstInstance 能力时自动使用该路径。透明排序和轮廓仍使用 CPU 可见列表。
 
 `--disable-multi-draw-indirect` 强制每次提交一个间接命令，用于验证不支持批量间接的设备路径。
 
@@ -179,7 +181,7 @@ cmake -DBUILD_DIR="$PWD/build/ninja-release" `
 
 发布门禁会检查配置、Shader、目标构建和 CTest。它也检查安装、Manifest、版本、资源和运行时。修改 GPU 路径或视觉效果后，还要在真实 GPU 上运行 Validation 和 Capture。
 
-Windows Release 构建会生成可分发的压缩包，并完成隔离运行检查。Windows Debug 构建仅用于开发；Debug 门禁验证配置、构建、CTest 和安装清单，并在结果中标记 `development-only`。调试运行库依赖本机 Visual Studio 工具链。
+Windows Release 构建会生成可分发的压缩包，并完成隔离运行检查。Windows Debug 构建仅用于开发。Debug 门禁验证配置、构建、CTest 和安装清单，并在结果中标记 `development-only`。调试运行库依赖本机 Visual Studio 工具链。
 
 ## 安装树
 
@@ -281,15 +283,24 @@ GitHub Actions 在 Pull Request 中执行严格构建，在 `main` 分支构建�
 3. `CHANGELOG.md`。
 4. Archive 和旧 Git 历史。
 
+## Windows 游戏发布
+
+游戏项目通过 Build Game 面板或安装树内的 `tools/build_game.py` 构建。发布输入使用 Release x64 安装树，构建机需要 Python 3.11+。运行包包含 Player、DLL、项目资源、字体、着色器、许可证和哈希清单。
+
+Release 门禁的 `AzureEngine.GamePackage` 完成编辑器构建、目录移动和系统 PATH 隔离运行。任务覆盖角色运动、切关、界面、动画、音效及正常退出。使用方式见 [Windows 游戏发布](runtime/game-publishing.md)。
+
 ## 后续路线
 
-项目当前优先级是巩固可发布渲染器，而不是扩张无关场景。合理的后续候选包括：
+执行顺序和阶段状态见[开发总计划](plans/azure-engine-plan.md)。
+正式范围见[引擎实施计划](plans/2026-10-06-engine-evolution.md)。
+模块、类型、系统与编辑事务构成公共基础。
+观察、UI、内容辅助与专项原型按依赖进入。
 
-- 系统化 Vulkan Debug Marker 和 Object Name，改善 RenderDoc 分析。
-- 更明确的 Render Graph/Attachment 能力声明。
-- GPU 内存预算、子分配和资源生命周期统计。
-- 自动生成部分 CLI/Schema 参考，减少文档漂移。
-- 使用公开授权角色资产建立可发布的高质量 Character 基线。
-- Renderer 动态插件仅在 ABI、版本和卸载隔离方案完成后再启用。
+探索项目与场景检视工具验证引擎复用。
+每阶段交付源码、测试、文档和独立提交。
+支持设备、视觉基线与性能预算保持有效。
+发布清单关联来源、许可与可移动产物。
 
-论文相关的 Render Path 扩展目前暂停，等待项目所有者主动恢复。工业科幻场景不在当前需求中。Blackhole P1 已冻结。Character P2 继续处理材质正确性、光照稳定和公开证据。
+研究型 Render Path 扩展暂停，等待项目所有者主动恢复。
+当前角色与黑洞视觉使用冻结基线回归。
+动态插件的采用范围由 ABI 与卸载设计明确。

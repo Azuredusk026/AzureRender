@@ -39,6 +39,12 @@ int main() {
     using azurerender::ecs::Entity;
     using azurerender::ecs::World;
 
+    {
+        World lifecycle;
+        auto removed=lifecycle.createEntity();lifecycle.destroyEntity(removed);lifecycle.destroyEntity(removed);
+        auto first=lifecycle.createEntity();auto second=lifecycle.createEntity();
+        if(first==second||lifecycle.entityCount()!=2)return 1;
+    }
     World world;
     const Entity e1 = world.createEntity();
     const Entity e2 = world.createEntity();
@@ -124,6 +130,9 @@ int main() {
     denseWorld.addComponent(d2, TransformComponent{20.0F, 0.0F, 0.0F});
     denseWorld.addComponent(d3, TransformComponent{30.0F, 0.0F, 0.0F});
     auto& denseTransforms = denseWorld.componentArray<TransformComponent>();
+    const World& borrowedWorld=denseWorld;
+    assert(borrowedWorld.findComponentArray<TransformComponent>()==&denseTransforms);
+    assert(borrowedWorld.findComponentArray<TagComponent>()==nullptr);
     assert(denseTransforms.dense().size() == 3);
     assert(denseTransforms.entities().size() == 3);
     assert(denseTransforms.dense()[1].x == 20.0F);

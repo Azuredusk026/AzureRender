@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_viewport_navigation.py", line 35, in <module>
+    args=parser.parse_args();run(args.executable.resolve(),args.output.resolve())
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_viewport_navigation.py", line 13, in run
+    assert wheel['camera']==baseline['camera'],'Held RMB wheel must adjust speed without dollying camera'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Held RMB wheel must adjust speed without dollying camera

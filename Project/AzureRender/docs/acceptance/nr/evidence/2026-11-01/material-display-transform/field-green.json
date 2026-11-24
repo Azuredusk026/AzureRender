@@ -1,0 +1,13 @@
+{
+  "expected": "valid-version-two-linear-display-profile-accepted",
+  "exitCode": 0,
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\field-fixture\\lab.azureproject",
+    "--check-project"
+  ],
+  "field": "displayTransform",
+  "accepted": true,
+  "unknownFieldDiagnostic": false
+}

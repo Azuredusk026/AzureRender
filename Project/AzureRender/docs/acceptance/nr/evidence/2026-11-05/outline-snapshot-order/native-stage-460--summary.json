@@ -1,0 +1,95 @@
+{
+  "status": "exported",
+  "stride": 104,
+  "indexStride": 2,
+  "indices": 2304,
+  "baseVertex": 0,
+  "vertices": 509,
+  "signature": [
+    {
+      "name": "SV_Position",
+      "index": 0,
+      "register": 0,
+      "count": 4,
+      "system": "ShaderBuiltin.Position"
+    },
+    {
+      "name": "TEXCOORD",
+      "index": 0,
+      "register": 1,
+      "count": 2,
+      "system": "ShaderBuiltin.Undefined"
+    },
+    {
+      "name": "TEXCOORD",
+      "index": 1,
+      "register": 1,
+      "count": 2,
+      "system": "ShaderBuiltin.Undefined"
+    },
+    {
+      "name": "TEXCOORD",
+      "index": 2,
+      "register": 2,
+      "count": 3,
+      "system": "ShaderBuiltin.Undefined"
+    },
+    {
+      "name": "TEXCOORD",
+      "index": 3,
+      "register": 3,
+      "count": 4,
+      "system": "ShaderBuiltin.Undefined"
+    },
+    {
+      "name": "TEXCOORD",
+      "index": 4,
+      "register": 4,
+      "count": 4,
+      "system": "ShaderBuiltin.Undefined"
+    },
+    {
+      "name": "TEXCOORD",
+      "index": 5,
+      "register": 5,
+      "count": 3,
+      "system": "ShaderBuiltin.Undefined"
+    },
+    {
+      "name": "TEXCOORD",
+      "index": 6,
+      "register": 6,
+      "count": 3,
+      "system": "ShaderBuiltin.Undefined"
+    },
+    {
+      "name": "TEXCOORD",
+      "index": 7,
+      "register": 7,
+      "count": 1,
+      "system": "ShaderBuiltin.Undefined"
+    }
+  ],
+  "clipWRange": [
+    -22.237451553344727,
+    27.7501277923584
+  ],
+  "clipRanges": [
+    [
+      -44.55780029296875,
+      44.62907791137695
+    ],
+    [
+      -76.38127899169922,
+      82.1856918334961
+    ],
+    [
+      0.09972476959228516,
+      0.10022234171628952
+    ],
+    [
+      -22.237451553344727,
+      27.7501277923584
+    ]
+  ]
+}

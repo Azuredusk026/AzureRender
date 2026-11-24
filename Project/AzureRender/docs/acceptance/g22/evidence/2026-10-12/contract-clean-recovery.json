@@ -1,0 +1,12 @@
+[
+  {
+    "configuration": "debug",
+    "files": 42,
+    "manifestPresent": false
+  },
+  {
+    "configuration": "release",
+    "files": 42,
+    "manifestPresent": false
+  }
+]

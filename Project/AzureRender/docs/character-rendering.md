@@ -9,7 +9,7 @@ Character Renderer 负责还原角色资产中的分层美术信息。它不会�
 ```mermaid
 flowchart LR
     Asset[glTF + Material Profile] --> CPU[Animation / skin / sorting]
-    CPU --> Shadow[2048 Shadow Pass]
+    CPU --> Shadow[4096 Shadow Atlas]
     Shadow --> Main[Character Main Pass]
     Env[HDR / Cubemap] --> Main
     Ramp[Toon Ramp Atlas] --> Main
@@ -45,7 +45,7 @@ Loader 在 CPU 侧生成 `LoadedAsset`。`CharacterSceneRenderer` 把网格和�
 
 缺少纹理时，Renderer 会绑定类型正确的回退资源。Descriptor 不会留下空 Binding。
 
-蒙皮在顶点阶段执行。CPU 根据当前动画计算节点世界矩阵与最终 Joint Matrix，写入当前 in-flight frame 的 Joint Buffer。静态模型走单位 Skin 兼容路径，不要求另外一套 Pipeline。
+CPU 根据动画计算节点世界矩阵与关节矩阵，写入当前帧槽的关节缓冲。Compute 蒙皮生成位置、法线和切线，顶点着色器提供兼容路径。静态模型使用单位蒙皮矩阵。
 
 ## 材质分类
 
@@ -66,7 +66,23 @@ Material Profile v1 使用明确类别而不是材质名称猜测：
 
 Profile 的 `features` 用来开启具体能力，比如 `stylized-shadow`、`hair-anisotropy` 和 `face-sdf-eligible`。其他可选能力包括 `emissive-mask`、`overlay`、`neutral-fallback` 和 `brow-overlay`。材质类别决定基础规则，Feature 只负责开关功能。两者不能互相代替。
 
-Skin、Face、Hair、Fabric 和 Eye 默认按介电质处理。每个类别都会限制 Metallic 的最大值，避免皮肤或头发出现白色金属反射。只有 Metal 类使用完整的 Metallic/F0 路径。
+皮肤、脸和头发限制金属度，眼睛使用介质响应。
+衣料保留金属遮罩，扣件与纤维共享分类材质。
+金属类使用贴图底色作为法向反射率。
+
+画像版本 2 的角色表面支持场景逐灯照明。
+线性色带、头发数据及材质外轮廓使用显式字段。
+字段约束见[角色材质画像](runtime/character-material-profile.md)。
+真实资源的消费范围见[场景角色验收](acceptance/nr/character-scene-lighting.md)。
+
+普通表面、衣料、金属和地台使用 GGX 高光。
+可见度采用高度相关的 Smith 项。
+菲涅耳项由视线与半角方向计算。
+源介质参数 0.5 对应 4% 的法向反射率。
+
+粗糙度保留贴图值，并叠加法线方差过滤。
+主光和局部光各自提供颜色与光源强度。
+分类材质参数继续控制风格强度和高光遮罩。
 
 ## Toon Ramp 与明暗分区
 
@@ -106,20 +122,38 @@ HDR 合成先计算线性光照、AO、Ramp、镜面、Rim 和自发光。之后
 
 ## PCSS 软阴影
 
-Shadow Pass 从固定主光记录角色与地台深度，分辨率为 2048。Main Pass 把世界位置变换到 Light Clip Space，得到 Shadow UV 和接收面深度。
+阴影通道从固定主光记录角色与地台深度。
+图集分辨率为 4096×4096，包含四个级联。
+每级联使用 2048×2048 纹素。
+主通道把世界位置变换为阴影坐标和接收深度。
 
 PCSS 分两步：
 
-1. 在接收点周围用 Poisson Disk 搜索 Blocker，计算平均遮挡深度 $z_b$。
-2. 根据接收面与遮挡面的距离估计 Penumbra，再用扩大后的 Poisson Kernel 计算可见度。
+1. 用五乘五搜索位置读取相邻深度纹素。
+   先比较遮挡，再按双线性覆盖累积深度矩。
+   遮挡质量提供平均遮挡深度 $z_b$。
+2. 按世界空间遮挡间距估计半影半径。
+   对圆盘覆盖的全部纹素加权比较。
+   核边界采用一纹素的覆盖过渡。
 
 概念公式：
 
 $$
-r_p \propto \frac{z_r-z_b}{z_b}\,R_{light}
+r_p = \operatorname{clamp}\left(r_c + 0.035\,\frac{d_{world}}{t_{world}},r_c,r_{max}\right)
 $$
 
-其中 $z_r$ 是 Receiver 深度。$R_{light}$ 对应设置中的最大过滤尺度。`maximumFilterRadiusTexels` 会限制半影宽度，默认值是 8 texel。编辑器中的 Shadow Softness 可以修改它。
+其中 $d_{world}$ 是接收面与遮挡面的世界间距。
+$t_{world}$ 为级联纹素的世界尺寸。
+接触半径 $r_c$ 按级联纹素密度缩放。
+1024 纹素级联的基准半径为 3。
+当前 2048 纹素级联的接触半径为 6。
+接触半径始终受配置的最大半径限制。
+`maximumFilterRadiusTexels` 默认值为 8。
+
+接收偏置按几何法线和纹素尺寸计算。
+平面深度修正在曲率较高的足迹内衰减。
+采样坐标始终限制在当前级联内。
+根由和指标见[画面根由报告](research/2026-10-09-character-presentation-refinement.md)。
 
 接触位置满足 $z_r\approx z_b$，所以阴影较窄。接收面远离遮挡物后，阴影会逐渐变软。深度 Bias 会同时考虑固定偏移和表面朝向，用来减少 Shadow Acne。Bias 不能过大，否则会出现 Peter Panning。
 
@@ -170,6 +204,8 @@ $$
 $$
 I_{face}=\operatorname{smoothstep}(t-s,t+s,d)
 $$
+
+横向混合窗口采用 $\epsilon=0.60$，阈值柔化宽度 $s$ 至少为 0.18。固定相机的 120 帧主光扫描按标注脸部区域检查连续性。
 
 计算结果会按遮罩和权重混入 Ramp 坐标。暗部使用暖色 `faceSdfShadowColor`。SDF 控制设计好的脸部阴影形状。实时 Shadow Map 继续处理头发、附件和环境对脸部的遮挡。
 
@@ -234,6 +270,8 @@ Hair AO 是独立的风格化体积层，由以下信号组合：
 3. 使用 Unlit 风格输出和材质常量透明度。
 4. 透明 Primitive 按视图更新排序索引。
 5. 对真正眉毛顶点做局部、拓扑感知的厚度补偿，保持远景可读。
+
+眉毛卡片的剔除规则由 glTF `doubleSided` 决定。区域选择依据骨骼名称、权重与三角形连接关系，绑定空间的扩展随角色蒙皮运动。`brow-mask` 隔离图保留头发和实体的真实深度遮挡。
 
 原始实例中的 `4.679` 使用厘米单位，glTF 米制路径应转换为 `0.04679 m`。直接使用 `4.679 m` 会把眉毛推离角色。
 
@@ -311,6 +349,7 @@ Bloom 只提取超过 Threshold 的能量。受光面应该清楚，但不能依
 | Shadow Tint | AO、Ramp 暗部和染色 |
 | Face SDF | SDF 遮罩、方向和连续性 |
 | Overlay | 眉毛等透明覆盖层 |
+| Brow Mask | 可见眉毛区域与真实遮挡 |
 | Bloom | HDR 高亮提取 |
 
 ## 固定验收方法
@@ -319,12 +358,14 @@ Bloom 只提取超过 Threshold 的能量。受光面应该清楚，但不能依
 
 1. 公共资产 Debug Validation 120 帧。
 2. `full-body-front` Beauty：构图、转轴、全身材质与地台投影。
-3. `face-front` 和 `face-three-quarter`：肤色、Face SDF、眉毛和头发前方高光。
+3. 脸部正面、左右三分之四与左右侧面：肤色、Face SDF、眉毛和头发前方高光。
 4. 完整 16 秒转台：插值连续、透明排序、阴影和背面细节。
 5. Albedo、World Normal、Shadow Visibility、Hair KK、Face SDF、Outline 隔离图。
 6. Stylized On/Off 对照，证明效果来自目标分支而不是曝光或资产变化。
 
 自动化可以验证参数、Schema、捕获状态和像素差，但“发丝是否有层次”“脸部阴影是否自然”仍需要人工视觉判断。人工判断也不能替代 Validation 和资源审计。
+
+固定输入、派生素材、标注格式与执行命令见[角色材质定稿与验收](runtime/character-finish.md)。
 
 ## 已知限制
 
@@ -333,3 +374,27 @@ Bloom 只提取超过 Threshold 的能量。受光面应该清楚，但不能依
 - 透明层使用排序路径，不是通用 OIT。
 - Silhouette 宽度仍受模型单位和导入尺度影响，需要资产 Profile 保持单位一致。
 - 私有角色及其派生媒体不能用于公开 CI 或发行。公共 Test Model 负责可复现门禁。
+
+## 皮肤色阶与间接光
+
+身体与脸部使用各自的线性 RGB 色阶。
+亮部保留暖色，中间调采用连续插值。
+环境和补光混合半量色阶归一化色度。
+色阶关闭时采用中性间接光响应。
+
+图集由 `tools/build_toon_ramp_atlas.py` 生成。
+输入为 `assets_public/toon_ramp_profiles.json`。
+表面夹具覆盖脸部、身体、白色和零值色阶。
+角色验收检查肩颈、脸部及三种光照预设。
+
+## 资源转换与形变
+
+多目标形变支持位置、法线及切线增量。
+身体动作、表情与实例覆盖按顺序求值。
+计算蒙皮、顶点回退、阴影和描边共用目标数据。
+CPU 拾取与路径追踪读取相同实例姿态。
+
+材质恢复通过稳定槽位匹配。
+Blender 往返丢失的贴图可由源资产显式恢复。
+恢复工具校验源文件指纹并嵌入原图像字节。
+验收范围见[材质语义记录](acceptance/ev/ev7.md)。

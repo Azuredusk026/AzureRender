@@ -1,0 +1,618 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azurerender.local/schema/unlit_texture_layers.schema.json",
+  "title": "无光照纹理图层",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "lighting",
+    "layers",
+    "tint",
+    "blendTint",
+    "clock",
+    "softIntersection",
+    "highlightExpansion",
+    "postExposureWeight",
+    "globalColorWeight"
+  ],
+  "properties": {
+    "fogMode": {
+      "type": "string",
+      "enum": [
+        "none",
+        "scene"
+      ],
+      "default": "none"
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "const": 2
+    },
+    "lighting": {
+      "const": "unlit"
+    },
+    "layers": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "role",
+            "texture",
+            "sampleMode",
+            "uv"
+          ],
+          "properties": {
+            "role": {
+              "enum": [
+                "base"
+              ]
+            },
+            "texture": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "sampleMode": {
+              "enum": [
+                "rgba",
+                "red-as-alpha"
+              ]
+            },
+            "uv": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "set",
+                "scaleOffset",
+                "rotation",
+                "speed"
+              ],
+              "properties": {
+                "set": {
+                  "type": "integer",
+                  "const": 0
+                },
+                "scaleOffset": {
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "number",
+                    "minimum": -3.4028234663852886e+38,
+                    "maximum": 3.4028234663852886e+38
+                  }
+                },
+                "rotation": {
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "number",
+                    "minimum": -3.4028234663852886e+38,
+                    "maximum": 3.4028234663852886e+38
+                  }
+                },
+                "speed": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                    "type": "number",
+                    "minimum": -3.4028234663852886e+38,
+                    "maximum": 3.4028234663852886e+38
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "role",
+            "texture",
+            "sampleMode",
+            "uv"
+          ],
+          "properties": {
+            "role": {
+              "enum": [
+                "mask",
+                "blend"
+              ]
+            },
+            "texture": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "sampleMode": {
+              "enum": [
+                "rgba",
+                "red-as-alpha"
+              ]
+            },
+            "uv": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "set",
+                "scaleOffset",
+                "rotation",
+                "speed"
+              ],
+              "properties": {
+                "set": {
+                  "type": "integer",
+                  "const": 0
+                },
+                "scaleOffset": {
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "number",
+                    "minimum": -3.4028234663852886e+38,
+                    "maximum": 3.4028234663852886e+38
+                  }
+                },
+                "rotation": {
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "number",
+                    "minimum": -3.4028234663852886e+38,
+                    "maximum": 3.4028234663852886e+38
+                  }
+                },
+                "speed": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                    "type": "number",
+                    "minimum": -3.4028234663852886e+38,
+                    "maximum": 3.4028234663852886e+38
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "items": false
+    },
+    "tint": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "number",
+        "minimum": -3.4028234663852886e+38,
+        "maximum": 3.4028234663852886e+38
+      }
+    },
+    "blendTint": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "number",
+        "minimum": -3.4028234663852886e+38,
+        "maximum": 3.4028234663852886e+38
+      }
+    },
+    "clock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rate",
+        "offsetSeconds"
+      ],
+      "properties": {
+        "rate": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38
+        },
+        "offsetSeconds": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38
+        }
+      }
+    },
+    "softIntersection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "distance",
+        "bias"
+      ],
+      "properties": {
+        "distance": {
+          "type": "number",
+          "maximum": 3.4028234663852886e+38,
+          "exclusiveMinimum": 0
+        },
+        "bias": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "highlightExpansion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "threshold",
+        "gain"
+      ],
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3.4028234663852886e+38
+        },
+        "gain": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3.4028234663852886e+38
+        }
+      }
+    },
+    "postExposureWeight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "globalColorWeight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "viewDepthFade": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "near",
+        "far"
+      ],
+      "properties": {
+        "near": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 3.4028234663852886e+38
+          }
+        },
+        "far": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 3.4028234663852886e+38
+          }
+        }
+      }
+    },
+    "vertexColor": {
+      "type": "boolean",
+      "default": false
+    },
+    "viewCoverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bias",
+        "exponent",
+        "invertWeight",
+        "weight"
+      ],
+      "properties": {
+        "bias": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38
+        },
+        "exponent": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 3.4028234663852886e+38
+        },
+        "invertWeight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "composite": {
+      "enum": [
+        "alpha",
+        "additive"
+      ],
+      "default": "alpha"
+    },
+    "coverageLayer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "texture",
+        "sampleMode",
+        "uv",
+        "threshold",
+        "gain"
+      ],
+      "properties": {
+        "texture": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "sampleMode": {
+          "enum": [
+            "rgba",
+            "red-as-alpha"
+          ]
+        },
+        "uv": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "set",
+            "scaleOffset",
+            "rotation",
+            "speed"
+          ],
+          "properties": {
+            "set": {
+              "type": "integer",
+              "const": 0
+            },
+            "scaleOffset": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "number",
+                "minimum": -3.4028234663852886e+38,
+                "maximum": 3.4028234663852886e+38
+              }
+            },
+            "rotation": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "number",
+                "minimum": -3.4028234663852886e+38,
+                "maximum": 3.4028234663852886e+38
+              }
+            },
+            "speed": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": -3.4028234663852886e+38,
+                "maximum": 3.4028234663852886e+38
+              }
+            }
+          }
+        },
+        "threshold": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38
+        },
+        "gain": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 3.4028234663852886e+38
+        }
+      }
+    },
+    "baseUvDistortion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "texture",
+        "channels",
+        "uv",
+        "scale",
+        "bias"
+      ],
+      "properties": {
+        "texture": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "uv": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "set",
+            "scaleOffset",
+            "rotation",
+            "speed"
+          ],
+          "properties": {
+            "set": {
+              "type": "integer",
+              "const": 0
+            },
+            "scaleOffset": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "number",
+                "minimum": -3.4028234663852886e+38,
+                "maximum": 3.4028234663852886e+38
+              }
+            },
+            "rotation": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "number",
+                "minimum": -3.4028234663852886e+38,
+                "maximum": 3.4028234663852886e+38
+              }
+            },
+            "speed": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": -3.4028234663852886e+38,
+                "maximum": 3.4028234663852886e+38
+              }
+            }
+          }
+        },
+        "channels": {
+          "enum": [
+            "red",
+            "rg"
+          ]
+        },
+        "scale": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number",
+            "minimum": -3.4028234663852886e+38,
+            "maximum": 3.4028234663852886e+38
+          }
+        },
+        "bias": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number",
+            "minimum": -3.4028234663852886e+38,
+            "maximum": 3.4028234663852886e+38
+          }
+        }
+      }
+    },
+    "submission": {
+      "type": "string",
+      "enum": [
+        "transparent",
+        "opaque-overlay"
+      ],
+      "default": "transparent"
+    },
+    "depthCompare": {
+      "type": "string",
+      "enum": [
+        "less",
+        "less-or-equal"
+      ],
+      "default": "less"
+    },
+    "colorBlendResponse": {
+      "type": "string",
+      "enum": [
+        "none",
+        "attenuate-emission"
+      ],
+      "default": "none"
+    }
+  },
+  "description": "公共材质解释器另行验证能力组合、纹理资源及采样器所有权。",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "submission": {
+            "const": "opaque-overlay"
+          }
+        },
+        "required": [
+          "submission"
+        ]
+      },
+      "then": {
+        "required": [
+          "composite",
+          "depthCompare"
+        ],
+        "properties": {
+          "composite": {
+            "const": "additive"
+          },
+          "depthCompare": {
+            "const": "less-or-equal"
+          },
+          "fogMode": {
+            "const": "none"
+          },
+          "softIntersection": {
+            "required": [
+              "enabled"
+            ],
+            "properties": {
+              "enabled": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "colorBlendResponse"
+        ],
+        "properties": {
+          "colorBlendResponse": {
+            "const": "attenuate-emission"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "submission"
+        ],
+        "properties": {
+          "submission": {
+            "const": "opaque-overlay"
+          }
+        }
+      }
+    }
+  ]
+}

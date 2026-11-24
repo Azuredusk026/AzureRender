@@ -1,0 +1,16 @@
+[1/2] Building CXX object CMakeFiles\AzureEditorWorkflowTests.dir\tests\EditorWorkflowTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzureEditorWorkflowTests.dir/tests/EditorWorkflowTests.cpp.obj
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_ENABLE_VALIDATION=1 -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DGLFW_DLL -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DJPH_FLOATING_POINT_EXCEPTIONS_ENABLED -DJPH_OBJECT_STREAM -DJPH_USE_CPU_COMPUTE -DOPENEXR_DLL -I..\..\src -Igenerated -I..\..\third_party\imgui -I..\..\third_party\imgui\backends -IC:\VulkanSDK\1.4.350.0\include -Ivcpkg_installed\x64-windows\include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath -MDd /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzureEditorWorkflowTests.dir\tests\EditorWorkflowTests.cpp.obj /FdCMakeFiles\AzureEditorWorkflowTests.dir\ /FS -c ..\..\tests\EditorWorkflowTests.cpp
+..\..\tests\EditorWorkflowTests.cpp(47): error C2039: "startImport": 不是 "azurerender::EditorContext" 的成员
+D:\Assigment\2609\FYP\Project\AzureRender\src\editor\EditorContext.hpp(20): note: 参见“azurerender::EditorContext”的声明
+..\..\tests\EditorWorkflowTests.cpp(47): error C2039: "cancelImport": 不是 "azurerender::EditorContext" 的成员
+D:\Assigment\2609\FYP\Project\AzureRender\src\editor\EditorContext.hpp(20): note: 参见“azurerender::EditorContext”的声明
+..\..\tests\EditorWorkflowTests.cpp(48): error C2039: "importing": 不是 "azurerender::EditorContext" 的成员
+D:\Assigment\2609\FYP\Project\AzureRender\src\editor\EditorContext.hpp(20): note: 参见“azurerender::EditorContext”的声明
+..\..\tests\EditorWorkflowTests.cpp(48): error C2039: "pollImport": 不是 "azurerender::EditorContext" 的成员
+D:\Assigment\2609\FYP\Project\AzureRender\src\editor\EditorContext.hpp(20): note: 参见“azurerender::EditorContext”的声明
+..\..\tests\EditorWorkflowTests.cpp(48): error C3083: “this_thread”:“::”左侧的符号必须是一种类型
+..\..\tests\EditorWorkflowTests.cpp(48): error C2039: "yield": 不是 "std" 的成员
+D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\include\iostream(19): note: 参见“std”的声明
+..\..\tests\EditorWorkflowTests.cpp(48): error C3861: “yield”: 找不到标识符
+ninja: build stopped: subcommand failed.

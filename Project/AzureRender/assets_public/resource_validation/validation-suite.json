@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "source": {"scope": "technical fixture; native source acceptance tracked separately"},
+  "steps": [
+    {
+      "id": "project-contract",
+      "argv": ["{player}", "--project", "{project}", "--check-project"],
+      "timeout": 60,
+      "requiredLog": ["validation passed"]
+    },
+    {
+      "id": "player-five-poses",
+      "argv": ["{player}", "--project", "{project}", "--width", "1280", "--height", "720", "--capture-dir", "{output}/capture", "--capture-frames", "5", "--capture-fps", "1", "--fixed-frame-step", "--qa-animation", "--qa-camera", "full-body-front", "--qa-light", "neutral-material", "--runtime-report", "{output}/runtime.json"],
+      "timeout": 180,
+      "requiredFiles": ["runtime.json", "capture/capture_manifest.json", "capture/frame_000000.png", "capture/frame_000001.png", "capture/frame_000002.png", "capture/frame_000003.png", "capture/frame_000004.png"],
+      "requiredLog": ["Allocator after unload: buffers=0 images=0"]
+    }
+  ]
+}

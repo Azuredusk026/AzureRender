@@ -1,0 +1,38 @@
+{
+  "reviewed": true,
+  "reason": "Zero-black-point grading and direct-light GGX response; geometry, world normal and outline preserved; strict zero-error thresholds unchanged",
+  "cases": [
+    {
+      "name": "character_beauty_fullbody",
+      "beforeSha256": "ac18da2345efd7edb2fe98d8adc47b63d0fbfd821b6cdec0d365cbef5375af56",
+      "afterSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e"
+    },
+    {
+      "name": "character_albedo_fullbody",
+      "beforeSha256": "64a1bb6cfd1a43000ca199b103cf0541f500ab1a9ef8c1487a25be4314c5d728",
+      "afterSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373"
+    },
+    {
+      "name": "character_material_id_fullbody",
+      "beforeSha256": "bfb50105c98c61bd82fa9f9e0174fd5f2cafde6d77ee1ce047c96a9ab965eacf",
+      "afterSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95"
+    },
+    {
+      "name": "character_direct_diffuse_fullbody",
+      "beforeSha256": "386fd73893889b07686ea929bb2a397cc0d9ec1a89a2c225f5ecef458050f0ad",
+      "afterSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4"
+    },
+    {
+      "name": "character_face_sdf_closeup",
+      "beforeSha256": "6bb9df55735ff383793c5a60868d60009b34eb4d2b5bcffef6dfd7cbd41b19da",
+      "afterSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c"
+    }
+  ],
+  "contactFootprintReview": "Resolution-scaled contact disk; public diffuse and beauty changes are confined to the intended shadow edge; strict zero-error thresholds unchanged",
+  "gatherVectorReview": "Visually reviewed complete disk gather; beauty two pixels and direct diffuse one pixel differ by one quantization level. Strict zero-error thresholds retained.",
+  "skinReview": "Reviewed final face and body ramp against neutral, key and rim light captures; final shoulder ramp warmth exceeds 8/255.",
+  "rampSha256": {
+    "toon_ramp_profiles.json": "b2da510c855c12071a79c1d89cfcfb877c2d9436a5a1e21dd0a67f1622bad270",
+    "toon_ramp_atlas.ppm": "4219a644eca0712bcf0dcd736e41ab29c19d73a4f815530116c5815567fd8baa"
+  }
+}

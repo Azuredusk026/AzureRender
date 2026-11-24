@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "lights": [
+    "stylized-key",
+    "neutral-material",
+    "specular-rim"
+  ],
+  "region": {
+    "x": 541,
+    "y": 410,
+    "width": 8,
+    "height": 8
+  },
+  "rampSampleRgb": [
+    230.0,
+    226.0,
+    221.890625
+  ],
+  "minimumRedBlueDifference255": 8,
+  "redBlueDifference255": 8.109375,
+  "profileSha256": "b2da510c855c12071a79c1d89cfcfb877c2d9436a5a1e21dd0a67f1622bad270",
+  "atlasSha256": "4219a644eca0712bcf0dcd736e41ab29c19d73a4f815530116c5815567fd8baa",
+  "scope": "Reviewed shoulder region; visual face and body calibration, not an official game colorimetry match"
+}

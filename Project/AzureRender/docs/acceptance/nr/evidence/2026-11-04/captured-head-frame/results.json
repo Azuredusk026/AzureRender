@@ -1,0 +1,160 @@
+{
+  "nativeFrame": 10401,
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "comparisons": [
+    {
+      "name": "visible-native-hair",
+      "pixels": 17017,
+      "comparisons": {
+        "jointMaterialFixedPose": {
+          "overOne": 3797,
+          "mean": 1.2407396525043584,
+          "p95": 6.0,
+          "max": 180
+        },
+        "captureAlignedFixedPose": {
+          "overOne": 584,
+          "mean": 0.8849581790758262,
+          "p95": 1.0,
+          "max": 180
+        }
+      }
+    },
+    {
+      "name": "remaining-opaque",
+      "pixels": 16459,
+      "comparisons": {
+        "jointMaterialFixedPose": {
+          "overOne": 3280,
+          "mean": 0.6477914818640258,
+          "p95": 4.0,
+          "max": 43
+        },
+        "captureAlignedFixedPose": {
+          "overOne": 72,
+          "mean": 0.290256597201126,
+          "p95": 1.0,
+          "max": 6
+        }
+      }
+    },
+    {
+      "name": "later-layer-hair",
+      "pixels": 449,
+      "comparisons": {
+        "jointMaterialFixedPose": {
+          "overOne": 408,
+          "mean": 16.7268002969562,
+          "p95": 76.7999999999999,
+          "max": 180
+        },
+        "captureAlignedFixedPose": {
+          "overOne": 403,
+          "mean": 16.347438752783965,
+          "p95": 76.19999999999993,
+          "max": 180
+        }
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "case": "live",
+      "files": {
+        "qualified-emission-static/qualified.azureproject": "ce56dfa930b3a6a1ba5138e2e0df19521927855d557651a9823b58b7b3429039",
+        "qualified-emission-static/scene/static-qualified.azurelevel": "07fdbcbfa3b5557d1e803b06fec91fe4dede93076804895f6491b84267f8a276",
+        "qualified-emission-static/character/captured-opaque-overlays.glb": "c17969c807e32c9d8fce26e434f189124b70a098a98210b6cb9c4c80e9c7631f",
+        "emission-pose/frames/frame_000000.png": "40add94533fb5252a6b8cd12ba2ee0de90973d4edae3972c1bb67e9614f0bee9",
+        "qualified-emission-static/materials/596a1696-19c2-57af-b0dc-378a6effa15b.azurematerial": "c949edcf77d5bb6cbebcdeaa0b68e8fd3560f1d0fdb92fa255f644f8f28aa4d6",
+        "qualified-emission-static/materials/bb40e191-8bee-50ec-9830-2f6656e3ec3a.azurematerial": "4b6debaba427beb1f5b79f47e3a86e06a875488cfecfcb619688bfc195739514"
+      }
+    },
+    {
+      "case": "captured",
+      "files": {
+        "capture-aligned-head/qualified.azureproject": "ce56dfa930b3a6a1ba5138e2e0df19521927855d557651a9823b58b7b3429039",
+        "capture-aligned-head/scene/static-qualified.azurelevel": "07fdbcbfa3b5557d1e803b06fec91fe4dede93076804895f6491b84267f8a276",
+        "capture-aligned-head/character/captured-opaque-overlays.glb": "c17969c807e32c9d8fce26e434f189124b70a098a98210b6cb9c4c80e9c7631f",
+        "aligned-head-capture/frames/frame_000000.png": "98e98eeab11d873a4be2b7b435572f489fb46a6a8c8cf5ef8d8d678e959a33d9",
+        "capture-aligned-head/materials/596a1696-19c2-57af-b0dc-378a6effa15b.azurematerial": "bdc26e72b51a1588cbd63af4bb7711966af53a6f84c1759da205038650f015b3",
+        "capture-aligned-head/materials/bb40e191-8bee-50ec-9830-2f6656e3ec3a.azurematerial": "b413a6cdb99b269fea69f868f8a8a4d12573281bb9b80a578c3fc97ed14e5e55"
+      }
+    }
+  ],
+  "sourceDraws": [
+    {
+      "event": 1291,
+      "pixel": [
+        1333,
+        185
+      ],
+      "status": "exported",
+      "primitive": 10187,
+      "hardwareShaderOutput": [
+        4.867392063140869,
+        1.2124348878860474,
+        1.0749059915542603,
+        0.5764400959014893
+      ],
+      "path": "native-head-layer-trace-qualified-1333-185.json",
+      "steps": 2448,
+      "sha256": "fcca6356d269d3d9b28c52a6f4eef0c3a15bd826306b4c56cf1f80ba9b7a90e4"
+    },
+    {
+      "event": 1291,
+      "pixel": [
+        1334,
+        186
+      ],
+      "status": "exported",
+      "primitive": 10187,
+      "hardwareShaderOutput": [
+        4.532479763031006,
+        1.1364977359771729,
+        0.9679909348487854,
+        0.5672541260719299
+      ],
+      "path": "native-head-layer-trace-qualified-1334-186.json",
+      "steps": 2448,
+      "sha256": "223d07066bc09b6bff8ebbc608ff051ec9acdadbd315edf5a20ceca7b4da62a0"
+    },
+    {
+      "event": 1314,
+      "pixel": [
+        1356,
+        257
+      ],
+      "status": "exported",
+      "primitive": 4034,
+      "hardwareShaderOutput": [
+        1.1900768280029297,
+        0.3514972925186157,
+        0.3037324547767639,
+        1.0
+      ],
+      "path": "native-head-layer-trace-qualified-1356-257.json",
+      "steps": 1575,
+      "sha256": "fe01c6f6f4746f432fe2121dc15eaa97047d6966bf28fc59b23c3391957f8fe5"
+    },
+    {
+      "event": 1314,
+      "pixel": [
+        1324,
+        175
+      ],
+      "status": "exported",
+      "primitive": 4750,
+      "hardwareShaderOutput": [
+        0.17587153613567352,
+        0.015492728911340237,
+        0.020522309467196465,
+        1.0
+      ],
+      "path": "native-head-layer-trace-qualified-1324-175.json",
+      "steps": 1669,
+      "sha256": "76de93c8a1e425c6aea2b5bcd3073faea919c9a684ff09866283e6470ca643fa"
+    }
+  ],
+  "nativeReferenceSha256": "48afd6546c23cfa85099a765cc94ada4813a684538c695faf6d70d6daf2261b5",
+  "frozenMaskSha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7"
+}

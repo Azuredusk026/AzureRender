@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "phase": "P0-runtime",
+  "scope": "Environment and pre-feature runtime validation; NR formal gates are unchanged",
+  "runtimeSource": "8eca1e9",
+  "baselineSource": "53a6c11",
+  "startupRelease": {
+    "status": "not-reproduced-in-fresh-build",
+    "configuration": "release",
+    "sourceCommit": "5a2bc284b384fc8834fb6c625bfefde5833b39b0",
+    "playerSha256": "4ab198bddc9f577338b2ca968c0c526b5a2a8d4f02248ad91ae2d57ffbc05ddc",
+    "originalFault": "preserved; root cause unresolved",
+    "attempts": [
+      {
+        "iteration": 1,
+        "exitCode": 0,
+        "startUtc": "2026-10-30T17:08:35.700265+00:00",
+        "endUtc": "2026-10-30T17:12:07.055650+00:00",
+        "logSha256": "2124c8d134e58ef648676e9c4a877de151005b47d79ca4b8867b701beb5441f0"
+      },
+      {
+        "iteration": 2,
+        "exitCode": 0,
+        "startUtc": "2026-10-30T17:12:07.073647+00:00",
+        "endUtc": "2026-10-30T17:15:02.629595+00:00",
+        "logSha256": "7a566269fafccbed3468fb92b2db8dfea2343683abbc5c4a14d97b81da853591"
+      },
+      {
+        "iteration": 3,
+        "exitCode": 0,
+        "startUtc": "2026-10-30T17:15:02.637941+00:00",
+        "endUtc": "2026-10-30T17:18:05.717446+00:00",
+        "logSha256": "3786fca3fcdb997d5582651b9faf57922ef3150dce113a96d7ddb5fb8aa5d961"
+      },
+      {
+        "iteration": 4,
+        "exitCode": 0,
+        "startUtc": "2026-10-30T17:18:05.726877+00:00",
+        "endUtc": "2026-10-30T17:21:20.204860+00:00",
+        "logSha256": "c1afb79041399244ff927b19e48821760634eb9f8dcab8637f4df25f96d2a514"
+      },
+      {
+        "iteration": 5,
+        "exitCode": 0,
+        "startUtc": "2026-10-30T17:21:20.218950+00:00",
+        "endUtc": "2026-10-30T17:24:16.709197+00:00",
+        "logSha256": "8b7b260780d0c22c599d0cda299f7dc096a26d3c97aaeef43e124d2da28fb9a6"
+      }
+    ]
+  },
+  "publicChecks": {
+    "debug": {
+      "schemaVersion": 1,
+      "configuration": "debug",
+      "sourceCommit": "5a2bc284b384fc8834fb6c625bfefde5833b39b0",
+      "steps": [
+        {
+          "name": "class-regression",
+          "startUtc": "2026-10-30T17:01:31.459436+00:00",
+          "exitCode": 0,
+          "logSha256": "048e989338762a4dfcae57c18260ad7d24fbd3763cf69178fd96eb846102ff48"
+        },
+        {
+          "name": "loader-managed-regression",
+          "reusedLog": "loader-managed-debug.log",
+          "exitCode": 0
+        },
+        {
+          "name": "public-smoke",
+          "startUtc": "2026-10-30T17:03:20.654083+00:00",
+          "exitCode": 0,
+          "logSha256": "6ce4d5b16b1d27c43b5d58e8b1a0d778b0c2f23bdc82b4f2b4c236016a637592"
+        },
+        {
+          "name": "history-owned",
+          "startUtc": "2026-10-30T17:03:47.154927+00:00",
+          "exitCode": 0,
+          "logSha256": "b298ff56064a979dcb62abd1a072b5c6ed2af6415843f7bdbb56e5aa7997e1e5"
+        },
+        {
+          "name": "history-shared",
+          "startUtc": "2026-10-30T17:04:11.643580+00:00",
+          "exitCode": 0,
+          "logSha256": "c063a335ff0c2d81c66a8125b289f6aae41245de63ed9984ea8bb1d49f5003c0"
+        },
+        {
+          "name": "history-fixed",
+          "startUtc": "2026-10-30T17:04:17.642492+00:00",
+          "exitCode": 0,
+          "logSha256": "48484bbe717a1468c70d86ae798e49758e2914c8dd36727a50682c0cc910c8d7"
+        },
+        {
+          "name": "history-off",
+          "startUtc": "2026-10-30T17:04:38.993344+00:00",
+          "exitCode": 0,
+          "logSha256": "ae0643751480e4aea1c493fa1bb4d585ebd70e6e603c7efd28679ee69da57d20"
+        },
+        {
+          "name": "history-multisample",
+          "startUtc": "2026-10-30T17:04:49.161002+00:00",
+          "exitCode": 0,
+          "logSha256": "c1588d6cdf32c2803c6c4443c7569195ab1cbdb59e57ace660f0978b97edf9ab"
+        },
+        {
+          "name": "history-motion",
+          "startUtc": "2026-10-30T17:05:13.255497+00:00",
+          "exitCode": 0,
+          "logSha256": "d5efa8068eebb8759b195e6ff8aa09b0dd6c9aad77e0d2e6755d471a5cfb52ee"
+        },
+        {
+          "name": "surface-snapshot",
+          "startUtc": "2026-10-30T17:05:19.680038+00:00",
+          "exitCode": 0,
+          "logSha256": "f2889307a6cdc1c17a25530ee8ebb6c4f1deccf85b90bb37040475376b77d576"
+        }
+      ],
+      "status": "passed"
+    },
+    "release": {
+      "schemaVersion": 1,
+      "configuration": "release",
+      "sourceCommit": "730c766159ecb2637cee25948f77eee0c78c23be",
+      "steps": [
+        {
+          "name": "class-regression",
+          "startUtc": "2026-10-30T17:39:51.400658+00:00",
+          "exitCode": 0,
+          "logSha256": "eca245571de3364397350246519d3f0571010efe2ef3b4d8bab8d26c595899ba"
+        },
+        {
+          "name": "loader-managed-regression",
+          "reusedLog": "loader-managed-release.log",
+          "exitCode": 0,
+          "logSha256": "bd813c3d9c76a14926a667cbef926ddea7707dbcdce5e7ded1c5c860c5b1bc37"
+        },
+        {
+          "name": "public-smoke",
+          "startUtc": "2026-10-30T17:40:21.553377+00:00",
+          "exitCode": 0,
+          "logSha256": "aa6a5e59e8f72566b5c0756288b9d3add49da91e66e85818d41b0b0a1858af76"
+        },
+        {
+          "name": "history-owned",
+          "startUtc": "2026-10-30T17:40:26.842415+00:00",
+          "exitCode": 0,
+          "logSha256": "b298ff56064a979dcb62abd1a072b5c6ed2af6415843f7bdbb56e5aa7997e1e5"
+        },
+        {
+          "name": "history-shared",
+          "startUtc": "2026-10-30T17:40:30.314740+00:00",
+          "exitCode": 0,
+          "logSha256": "c063a335ff0c2d81c66a8125b289f6aae41245de63ed9984ea8bb1d49f5003c0"
+        },
+        {
+          "name": "history-fixed",
+          "startUtc": "2026-10-30T17:40:33.095209+00:00",
+          "exitCode": 0,
+          "logSha256": "48484bbe717a1468c70d86ae798e49758e2914c8dd36727a50682c0cc910c8d7"
+        },
+        {
+          "name": "history-off",
+          "startUtc": "2026-10-30T17:40:35.974795+00:00",
+          "exitCode": 0,
+          "logSha256": "ae0643751480e4aea1c493fa1bb4d585ebd70e6e603c7efd28679ee69da57d20"
+        },
+        {
+          "name": "history-multisample",
+          "startUtc": "2026-10-30T17:40:38.769862+00:00",
+          "exitCode": 0,
+          "logSha256": "c1588d6cdf32c2803c6c4443c7569195ab1cbdb59e57ace660f0978b97edf9ab"
+        },
+        {
+          "name": "history-motion",
+          "startUtc": "2026-10-30T17:40:41.490536+00:00",
+          "exitCode": 0,
+          "logSha256": "d5efa8068eebb8759b195e6ff8aa09b0dd6c9aad77e0d2e6755d471a5cfb52ee"
+        },
+        {
+          "name": "surface-snapshot",
+          "startUtc": "2026-10-30T17:40:44.383869+00:00",
+          "exitCode": 0,
+          "logSha256": "f2889307a6cdc1c17a25530ee8ebb6c4f1deccf85b90bb37040475376b77d576"
+        }
+      ],
+      "status": "passed"
+    }
+  },
+  "freshSourceComparison": {
+    "status": "passed-current-versus-fresh-source-baseline",
+    "comparisons": [
+      {
+        "frame": "frame_000000.png",
+        "pngBytesExact": true,
+        "currentSha256": "b565f136509856b2ad24ed0b61d9578467c76857f30b447e4381afdf11485950",
+        "freshBaselineSha256": "b565f136509856b2ad24ed0b61d9578467c76857f30b447e4381afdf11485950"
+      },
+      {
+        "frame": "frame_000001.png",
+        "pngBytesExact": true,
+        "currentSha256": "3ff0ec7fc4e6ee3574068f3f5ce7322391d1fa5e1d6bca3032d62c061d6ad3be",
+        "freshBaselineSha256": "3ff0ec7fc4e6ee3574068f3f5ce7322391d1fa5e1d6bca3032d62c061d6ad3be"
+      },
+      {
+        "frame": "frame_000002.png",
+        "pngBytesExact": true,
+        "currentSha256": "baff819f0089671ce229efae1865bb3bf19ff054d816da92670262beee0cced5",
+        "freshBaselineSha256": "baff819f0089671ce229efae1865bb3bf19ff054d816da92670262beee0cced5"
+      },
+      {
+        "frame": "frame_000003.png",
+        "pngBytesExact": true,
+        "currentSha256": "5035cfcc4e16c557c894ec0c12938eee6ee7d24388bf2ca045ce998bacec91de",
+        "freshBaselineSha256": "5035cfcc4e16c557c894ec0c12938eee6ee7d24388bf2ca045ce998bacec91de"
+      },
+      {
+        "frame": "frame_000004.png",
+        "pngBytesExact": true,
+        "currentSha256": "9af55bcfcd45196d720be48b225356ec6f4d76ea2b412b081a05f30a7b636bd7",
+        "freshBaselineSha256": "9af55bcfcd45196d720be48b225356ec6f4d76ea2b412b081a05f30a7b636bd7"
+      },
+      {
+        "frame": "frame_000005.png",
+        "pngBytesExact": true,
+        "currentSha256": "bae9c631d5074c60cf140fa8df90dbcb66211daf9349d19f6dba061c177525a8",
+        "freshBaselineSha256": "bae9c631d5074c60cf140fa8df90dbcb66211daf9349d19f6dba061c177525a8"
+      },
+      {
+        "frame": "frame_000006.png",
+        "pngBytesExact": true,
+        "currentSha256": "869247031c347b033a1bfc35b5a47da5e050e6e07084722002c495a3c613ac4f",
+        "freshBaselineSha256": "869247031c347b033a1bfc35b5a47da5e050e6e07084722002c495a3c613ac4f"
+      },
+      {
+        "frame": "frame_000007.png",
+        "pngBytesExact": true,
+        "currentSha256": "5b5b2c20ebf96525b2b68de9c96db5e56eb7ca2ee9c97654171cb9242c644696",
+        "freshBaselineSha256": "5b5b2c20ebf96525b2b68de9c96db5e56eb7ca2ee9c97654171cb9242c644696"
+      }
+    ],
+    "currentClassPipelines": 28,
+    "baselineClassPipelines": 0,
+    "historicalArchiveGate": "failed for both source baseline and candidate; original strict result preserved",
+    "interpretation": "Both rebuilt programs produce identical frames. The archived-frame drift is not introduced by material class specialization; environment/rebuild attribution remains open.",
+    "currentDriver": "592.82",
+    "archivedWindowsDriver": "32.0.16.1091 (610.91)",
+    "sourceBaseline": "53a6c11",
+    "candidateRuntimeSource": "8eca1e9"
+  },
+  "archivedVulkanReplay": {
+    "status": "replayed",
+    "purpose": "Replay the archived immutable Vulkan input on the restored machine; compare the saved original replay separately",
+    "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261029-071130-main-character-joint-budget-2cddc4\\profile\\capture_frame30.rdc",
+    "sourceBaseCommit": "53a6c11",
+    "toolVersion": "1.46",
+    "event": 24869,
+    "resource": "ResourceId::159",
+    "output": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\old-vulkan-replayed-present.png",
+    "imageSha256": "aef1e9353c2aa1a46a49bc092ba44aae5d9e0d01b3662a03717c99c52e6b9f07",
+    "shaders": [
+      {
+        "stage": "ShaderStage.Vertex",
+        "bytes": 1316,
+        "sha256": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "file": "old-vulkan-final-Vertex.spv",
+        "matchingFreshBaselineProgram": "inner_outline.vert.spv"
+      },
+      {
+        "stage": "ShaderStage.Pixel",
+        "bytes": 15292,
+        "sha256": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+        "file": "old-vulkan-final-Pixel.spv",
+        "matchingFreshBaselineProgram": "spatial_antialiasing.frag.spv"
+      }
+    ],
+    "comparison": {
+      "width": 1920,
+      "height": 1080,
+      "differentPixels": 103,
+      "maximumChannelError": 76,
+      "pngBytesExact": false
+    }
+  },
+  "baselineBuild": {
+    "command": [
+      "D:\\Projects\\FYP-baseline-53a6c11\\Project\\AzureRender\\tools\\msvc_env.bat",
+      "cmake",
+      "--build",
+      "--preset",
+      "msvc-release",
+      "-j",
+      "2",
+      "--target",
+      "AzurePlayer"
+    ],
+    "startUtc": "2026-10-30T17:19:30.188619+00:00",
+    "endUtc": "2026-10-30T17:23:15.111402+00:00",
+    "exitCode": 0
+  },
+  "frozenPreFeaturePlayer": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\frozen-candidate-player\\AzurePlayer.exe",
+  "frozenReceiptSha256": "a215478c0ecc2c6b9598d83bf53cf9e047f6ba3e345c8cbe22fa195084a57def",
+  "limits": [
+    "Original TinyGLTF access violation is preserved and not reproduced; root cause unresolved",
+    "Large Debug project reached the 600-second diagnostic limit",
+    "Archival strict native image gate failed for both rebuilt sources; immutable Vulkan replay also differs",
+    "Archived NVIDIA driver is 610.91; current is 592.82; exact cause of environment variation is not fully isolated",
+    "Performance runs overlapping builds are diagnostics, not formal budget results"
+  ],
+  "cpuLogs": {
+    "loader-managed-debug.log": {
+      "sha256": "24cbedbcb2b59c762e1d46ac275da369fa742c8a96cbbba857f9eae110de57ef",
+      "bytes": 1413
+    },
+    "loader-managed-release.log": {
+      "sha256": "bd813c3d9c76a14926a667cbef926ddea7707dbcdce5e7ded1c5c860c5b1bc37",
+      "bytes": 1417
+    },
+    "format-debug.log": {
+      "sha256": "3f90879a9226e2e2ee7efd7d9e5fcb4e9cc2e5ec53faac6f63bb203a4546b7c6",
+      "bytes": 3125
+    },
+    "format-release.log": {
+      "sha256": "ce1ae7c912390436d2473a0a33878245f64f2f514e0de763256590131a028099",
+      "bytes": 1213
+    },
+    "texture-sampler-debug-green.log": {
+      "sha256": "baca4eb4f4284a69479f96cdab346f20efaf6e72e522b0ddfe7566260f802f09",
+      "bytes": 376
+    },
+    "texture-sampler-release-green.log": {
+      "sha256": "18b256f5ab84c3f076149f12c4bcae66ada71960fc0a53253422ab39aa3b1705",
+      "bytes": 380
+    }
+  }
+}

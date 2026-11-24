@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "routeMeters": 138.0,
+  "passageWidth": 4.6,
+  "walkRoute": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      -18
+    ],
+    [
+      -5,
+      -18
+    ],
+    [
+      0,
+      -18
+    ],
+    [
+      0,
+      -45
+    ],
+    [
+      5,
+      -45
+    ],
+    [
+      0,
+      -45
+    ],
+    [
+      0,
+      -74
+    ],
+    [
+      -5,
+      -74
+    ],
+    [
+      0,
+      -74
+    ],
+    [
+      0,
+      -93
+    ],
+    [
+      0,
+      -108
+    ]
+  ],
+  "interactionStops": [
+    0,
+    2,
+    5,
+    8,
+    10
+  ],
+  "environmentAssets": [
+    "assets:/environment/ground.glb",
+    "assets:/environment/trail.glb",
+    "assets:/environment/branch.glb",
+    "assets:/environment/rock.glb",
+    "assets:/environment/shrub.glb",
+    "assets:/environment/ruin.glb",
+    "assets:/environment/arch.glb",
+    "assets:/environment/relic.glb"
+  ],
+  "walkSpeed": 2,
+  "sprintSpeed": 5,
+  "learningRamp": true
+}

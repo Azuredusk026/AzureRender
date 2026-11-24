@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR3-F1I",
+  "status": "passed",
+  "run": "build/runs/20261028-115139-native-scene-fog-composition-c2726a",
+  "primaryProject": "build/runs/20261028-115139-native-scene-fog-composition-c2726a/full-candidate/enclosure-composed-fog.azureproject",
+  "changedSource": [
+    "CMakeLists.txt",
+    "src/render/AnalyticFog.hpp",
+    "src/render/AnalyticFog.cpp",
+    "src/render/ViewFogBinding.hpp",
+    "src/render/ViewFogBinding.cpp",
+    "src/render/ViewFogBindingJson.cpp",
+    "src/render/ViewFogGpu.hpp",
+    "src/render/ViewFogGpu.cpp",
+    "src/runtime/Level.cpp",
+    "src/runtime/LevelSession.cpp",
+    "src/scenes/CharacterSceneRenderer.cpp",
+    "src/scenes/CharacterViewFog.inc",
+    "shaders/view_fog.glsl",
+    "tests/ViewFogBindingTests.cpp",
+    "tests/ViewFogGpuTests.cpp",
+    "tests/SceneModelTests.cpp",
+    "tests/AssetLevelTests.cpp",
+    "tools/test_scene_fog_gpu.py"
+  ],
+  "source": {
+    "CMakeLists.txt": "e74d67de5da68b541bf1a4fe7d45b1e491a9353755f8636211185493714f71c6",
+    "src/render/AnalyticFog.hpp": "57df1d9b70f59b1b396a3301c1a350d11fcd615efc64d406ab10c098a83bd599",
+    "src/render/AnalyticFog.cpp": "1cca333f2c51a6ad199aec415c0fdbb577adc9108b95b26d8e229b2e5c7ec3b8",
+    "src/render/ViewFogBinding.hpp": "2272b9670959c56075bf39121faee24771e5bab30e2307bdbf3251018b123b05",
+    "src/render/ViewFogBinding.cpp": "b2515c7abe1563acddd93c51a16f8ec3d9f6006e2df88bbc45399c5ca3a0669e",
+    "src/render/ViewFogBindingJson.cpp": "8de35e0a8d3a510de627b4f296f0db4bab6dee7477fcd54f27af8cac941855a9",
+    "src/render/ViewFogGpu.hpp": "2d7499674414f818a0e479eae7f0bbaaf3c32c0c70534eb0b9e3457f62980315",
+    "src/render/ViewFogGpu.cpp": "76537f7150dfaf43706e2605fcac56be20739756bc95757d07c3c44884360d86",
+    "src/runtime/Level.cpp": "02c79460cf60984ff759af9b998060e83d893b649adc99cd059579e3aaa46755",
+    "src/runtime/LevelSession.cpp": "d5ca582b50b6cdaf21c17b0b29891a7447c4088d057948c719651c4c1f9c603d",
+    "src/scenes/CharacterSceneRenderer.cpp": "835880f7117de3431b61115f1e6f177220b7cafa45332f2c1bc6d45052fe4dbf",
+    "src/scenes/CharacterViewFog.inc": "97f45bc7fb7b665bc28e98d64b41bfc707e20deee2482ed4b2f3be7fa8eb1a0d",
+    "shaders/view_fog.glsl": "8445c5a92dc477c2c5376d0afb8da5bee710045ed458ec7ec54594de649ea615",
+    "tests/ViewFogBindingTests.cpp": "96550185a7ca645e01d91f7783098bd2b5bd87083208b646b28faf89ef30159d",
+    "tests/ViewFogGpuTests.cpp": "9fde2701934643c52c942c327f66735a163ade3c262c650441e42d94c6284a0c",
+    "tests/SceneModelTests.cpp": "0237c9a909508c300a4ad778b5945644e36556b0add43218145603b7f7cda120",
+    "tests/AssetLevelTests.cpp": "49f265a4fde414dfa1b8f05bf8e0db752cdb6935928902972859974b28d28f91",
+    "tools/test_scene_fog_gpu.py": "ac45f3c1260f53c560d9e51f10a3afeea9c3d520156d658edd2c1afb624d48c0"
+  },
+  "artifacts": [
+    {
+      "path": "scene-gpu-debug/report.json",
+      "bytes": 41410,
+      "sha256": "7b8ed2c17eea3539f976537022ff42bd32c440c4ec22185c42348cbc96d618a3"
+    },
+    {
+      "path": "legacy-gpu-debug/report.json",
+      "bytes": 42690,
+      "sha256": "b6645098c543ebd6684b4fa11004f397c95784bc5e02578a1ee3bc8430ad6470"
+    },
+    {
+      "path": "msaa-gpu-debug/report.json",
+      "bytes": 42805,
+      "sha256": "d84f8cb218fbefd5dd6d24a09c1eaf8649e755463b0c0b9bf1b810872a96f241"
+    },
+    {
+      "path": "scene-gpu-release/report.json",
+      "bytes": 41810,
+      "sha256": "a585b07ec90b8b1dc721e51f2c6cd63f9d41d9b7e2f0e228503bc594f2e4d12f"
+    },
+    {
+      "path": "legacy-gpu-release/report.json",
+      "bytes": 43090,
+      "sha256": "18643381126f2257eda9b058be411149e2aee34c700a65fac82fdcb617178326"
+    },
+    {
+      "path": "msaa-gpu-release/report.json",
+      "bytes": 43205,
+      "sha256": "61b03da772573e0e56238f343394e08c0c11dcfb40b2311ead1235a4da7cee1d"
+    },
+    {
+      "path": "native-probes-debug.json",
+      "bytes": 3765,
+      "sha256": "e1b82cd89ce546c4ce29e170077fda2d6f4d0271295a05dc1d55bf8f01638cd1"
+    },
+    {
+      "path": "native-probes-release.json",
+      "bytes": 3769,
+      "sha256": "58d9a9098b7b36b4913453bc5dbc4fa9ec0585902029acfb62155ac84cc12d46"
+    },
+    {
+      "path": "native-glyph-hdr.json",
+      "bytes": 1758,
+      "sha256": "651058f6a6636ff8ab20469474da913836aaf858f7e6aa21030f1ded5afacc91"
+    },
+    {
+      "path": "main-release.json",
+      "bytes": 343,
+      "sha256": "fbda1eba9724519867024858ea7c92fcf2dc239421540acbe1ffdb8f90998b96"
+    },
+    {
+      "path": "source-conversion.json",
+      "bytes": 1957,
+      "sha256": "98f7e51d7ea66a9cec66b102cec65b6c529b0fb08248dbf7eb272f69a18f6acd"
+    },
+    {
+      "path": "native-probes.json",
+      "bytes": 1509,
+      "sha256": "d9fc40899a2f66ab49d17427a8b21b941a7a7b1472b6125f47fe4811354623a2"
+    },
+    {
+      "path": "debug-cpu.log",
+      "bytes": 970,
+      "sha256": "a737ff31d5d9fcb8ebf4ea2240d38043bcdda366af512304d56c68153d244b73"
+    },
+    {
+      "path": "release-cpu.log",
+      "bytes": 974,
+      "sha256": "85f2095001d1d4a767e13b54adf619e11b35de3080686fd28d70623f6261892f"
+    },
+    {
+      "path": "debug-build.log",
+      "bytes": 16091,
+      "sha256": "72a642689cf9597a738c2342d06cf7524d39bd006d86c0f564be0d3b93be6f33"
+    },
+    {
+      "path": "debug-scene-build.log",
+      "bytes": 594,
+      "sha256": "ea430140df12c8286f1d3b48014834e36efa04982f402ebe97080a78a21958aa"
+    },
+    {
+      "path": "release-build.log",
+      "bytes": 16522,
+      "sha256": "2adc8172e92bf94173c7478d76c7d64865446bcb3a9f2f822cdf2b60b66b4336"
+    },
+    {
+      "path": "own-hdr-capture.json",
+      "bytes": 3093,
+      "sha256": "0653ed964dec75dd82f5b42734b4fd2dac9098b4609bae3238d885c55572bc27"
+    },
+    {
+      "path": "own-hdr-draws.json",
+      "bytes": 1954,
+      "sha256": "673cc1deb888b7af204268de22e6e2f382f5443dc4d81c10f80dc60954b6cb7e"
+    },
+    {
+      "path": "debug-full-startup-observation.json",
+      "bytes": 291,
+      "sha256": "6e3dfc5c6e2036e1007014437a462f7156de59be0e7571baf78e5c0e83bd447a"
+    },
+    {
+      "path": "image-compatibility.json",
+      "bytes": 734,
+      "sha256": "6922d0cc1ae3d0a000b8c432416f87e98e9fed970790b00961f44b55718d3861"
+    },
+    {
+      "path": "debug-level.log",
+      "bytes": 381,
+      "sha256": "eadff10731a38600b9addae0a0e2fbabcc171f06a8d2121a83d0bcdf816b9b7c"
+    },
+    {
+      "path": "release-level.log",
+      "bytes": 385,
+      "sha256": "67dbc24bfb8cecefbaadb474f86323ce0dc429ffadf37249dd8ed3fa63a9b59d"
+    },
+    {
+      "path": "debug-level-build.log",
+      "bytes": 190,
+      "sha256": "7f13f8b4a73872a4d924af9cc4012af98ec705d727a7162259c5e1f0188e4e99"
+    },
+    {
+      "path": "release-level-build.log",
+      "bytes": 190,
+      "sha256": "7f13f8b4a73872a4d924af9cc4012af98ec705d727a7162259c5e1f0188e4e99"
+    },
+    {
+      "path": "performance-off.json",
+      "bytes": 22963,
+      "sha256": "352127f32b1c482610bfa6cb300bffe8468c4372c5d3dcb0f29f04a1dcfb4fd2"
+    },
+    {
+      "path": "performance-on.json",
+      "bytes": 23517,
+      "sha256": "fe736a0adaff25507876109c01817c4d5d51a2f656f72dbed7a1f8c583e26b42"
+    },
+    {
+      "path": "performance-composed.json",
+      "bytes": 23551,
+      "sha256": "f298925bcc57a6e9a2a91b90234a5e1623a574cce96d3b6e2e7906e87ad9994d"
+    }
+  ],
+  "contracts": {
+    "bindingVersions": [
+      1,
+      2
+    ],
+    "frameLayoutVersion": 2,
+    "frameBytes": 336,
+    "applicationPrograms": 199,
+    "materialProfileLayoutVersion": 17,
+    "materialBytes": 336,
+    "cameraBytes": 688
+  },
+  "remaining": [
+    "NR0 whole-frame SSIM and sustained 1080p60",
+    "NR7-AA5/AA6",
+    "Moving-view captured volume generation",
+    "Full Debug scene startup observation incomplete"
+  ]
+}

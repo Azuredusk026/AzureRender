@@ -1,0 +1,139 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+      Start 492: AzureAssets.AudioFormats
+      Start 470: AzureEditor.ManagedAuthoring
+ 1/50 Test #492: AzureAssets.AudioFormats .............   Passed    1.75 sec
+      Start 361: AzureEditor.ProjectFlow
+ 2/50 Test #361: AzureEditor.ProjectFlow ..............   Passed    4.30 sec
+      Start 322: AzureEditor.AssetWorkflow
+ 3/50 Test #322: AzureEditor.AssetWorkflow ............   Passed    2.89 sec
+      Start 461: AzureEditor.ExtendedAssetWorkflow
+ 4/50 Test #461: AzureEditor.ExtendedAssetWorkflow ....   Passed    2.94 sec
+      Start 474: AzureEditor.AnimationAuthoring
+ 5/50 Test #474: AzureEditor.AnimationAuthoring .......   Passed    1.27 sec
+      Start 457: AzureEditor.MaterialSlotEditing
+ 6/50 Test #457: AzureEditor.MaterialSlotEditing ......   Passed    2.11 sec
+      Start 467: AzureEditor.MaterialGraphEditing
+ 7/50 Test #467: AzureEditor.MaterialGraphEditing .....   Passed    3.05 sec
+      Start 469: AzureAssets.MaterialDocument
+ 8/50 Test #469: AzureAssets.MaterialDocument .........   Passed    2.66 sec
+      Start 125: AzureEditor.UiFoundation
+ 9/50 Test #125: AzureEditor.UiFoundation .............   Passed    0.89 sec
+      Start 126: AzureEditor.ConsoleLogModel
+10/50 Test #126: AzureEditor.ConsoleLogModel ..........   Passed    0.84 sec
+      Start 127: AzureEditor.PanelContext
+11/50 Test #127: AzureEditor.PanelContext .............   Passed    2.74 sec
+      Start 129: AzureEditor.Thumbnail
+12/50 Test #129: AzureEditor.Thumbnail ................   Passed    1.46 sec
+      Start 140: AzureEditor.ProposalController
+13/50 Test #140: AzureEditor.ProposalController .......   Passed    3.50 sec
+      Start 141: AzureEditor.ProposalAdapter
+14/50 Test #141: AzureEditor.ProposalAdapter ..........   Passed    2.81 sec
+      Start 142: AzureEditor.Observation
+15/50 Test #142: AzureEditor.Observation ..............   Passed    2.22 sec
+      Start 150: AzureEditor.EditService
+16/50 Test #150: AzureEditor.EditService ..............   Passed    3.01 sec
+      Start 151: AzureEditor.EditTransaction
+17/50 Test #151: AzureEditor.EditTransaction ..........   Passed    3.73 sec
+      Start 167: AzureEditor.Workspace
+18/50 Test #167: AzureEditor.Workspace ................   Passed    1.74 sec
+      Start 194: AzureEditor.SceneImportWorkflow
+19/50 Test #194: AzureEditor.SceneImportWorkflow ......   Passed    7.18 sec
+      Start 314: AzureEditor.SelectionBounds
+20/50 Test #314: AzureEditor.SelectionBounds ..........   Passed    1.44 sec
+      Start 315: AzureEditor.TransformEditing
+21/50 Test #315: AzureEditor.TransformEditing .........   Passed    1.40 sec
+      Start 317: AzureEditor.GizmoController
+22/50 Test #317: AzureEditor.GizmoController ..........   Passed    2.28 sec
+      Start 318: AzureEditor.NodeAddition
+23/50 Test #318: AzureEditor.NodeAddition .............   Passed    2.55 sec
+      Start 319: AzureEditor.SelectionService
+24/50 Test #319: AzureEditor.SelectionService .........   Passed    2.89 sec
+      Start 320: AzureEditor.ContentWorkflow
+25/50 Test #320: AzureEditor.ContentWorkflow ..........   Passed    4.13 sec
+      Start 321: AzureEditor.TaskService
+26/50 Test #470: AzureEditor.ManagedAuthoring .........   Passed   67.49 sec
+      Start 332: AzureEditor.ContentScanWait
+27/50 Test #321: AzureEditor.TaskService ..............   Passed    3.66 sec
+      Start 363: AzureEditor.PropertyEditing
+28/50 Test #332: AzureEditor.ContentScanWait ..........   Passed    2.90 sec
+      Start 364: AzureEditor.ReferencePicker
+29/50 Test #363: AzureEditor.PropertyEditing ..........   Passed    4.51 sec
+      Start 367: AzureEditor.ContentOperations
+30/50 Test #364: AzureEditor.ReferencePicker ..........   Passed    4.03 sec
+      Start 434: AzureEditor.ContentEditingWorkflow
+31/50 Test #434: AzureEditor.ContentEditingWorkflow ...   Passed    3.84 sec
+      Start 436: AzureEditor.ContentNavigation
+32/50 Test #367: AzureEditor.ContentOperations ........   Passed    7.74 sec
+      Start 437: AzureEditor.AssetOpen
+33/50 Test #436: AzureEditor.ContentNavigation ........   Passed    4.16 sec
+      Start 439: AzureEditor.Creation
+34/50 Test #437: AzureEditor.AssetOpen ................   Passed    4.16 sec
+      Start 440: AzureEditor.ContentDirectoryScale
+35/50 Test #439: AzureEditor.Creation .................   Passed    5.74 sec
+      Start 471: AzureEditor.PrefabAuthoring
+36/50 Test #471: AzureEditor.PrefabAuthoring ..........   Passed    4.13 sec
+      Start 472: AzureEditor.DomainAuthoring
+37/50 Test #472: AzureEditor.DomainAuthoring ..........   Passed    2.17 sec
+      Start 473: AzureEditor.AuthoringWorkflow
+38/50 Test #473: AzureEditor.AuthoringWorkflow ........   Passed    3.16 sec
+      Start 475: AzureEditor.DocumentManager
+39/50 Test #475: AzureEditor.DocumentManager ..........   Passed    2.05 sec
+      Start 477: AzureEditor.PreviewSimulation
+40/50 Test #477: AzureEditor.PreviewSimulation ........   Passed    1.85 sec
+      Start 480: AzureEditor.EditorProjection
+41/50 Test #480: AzureEditor.EditorProjection .........   Passed    1.59 sec
+      Start 481: AzureEditor.ViewportOverlays
+42/50 Test #481: AzureEditor.ViewportOverlays .........   Passed    1.40 sec
+      Start 493: AzureEditor.AudioWorkflow
+43/50 Test #493: AzureEditor.AudioWorkflow ............   Passed    3.46 sec
+      Start 494: AzureEditor.FirstBatchAuthoring
+44/50 Test #494: AzureEditor.FirstBatchAuthoring ......   Passed    5.82 sec
+      Start 495: AzureEditor.AssetTransfer
+45/50 Test #495: AzureEditor.AssetTransfer ............   Passed    3.39 sec
+46/50 Test #440: AzureEditor.ContentDirectoryScale ....   Passed  135.04 sec
+      Start 136: AzureEditor.DevtoolsHost
+47/50 Test #136: AzureEditor.DevtoolsHost .............***Failed   40.20 sec
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 209, in <module>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 209, in <listcomp>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 105, in run
+    click('assets.grid');frames(20)
+    ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 82, in click
+    call('input', event=dict(action='click', target=target)); frames()
+                                                              ^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 80, in frames
+    call('wait-frames', frames=count, timeoutMs=10000)
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 70, in call
+    response = exchange(endpoint, token, dict(op=op, **fields))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_validation_protocol.py", line 19, in exchange
+    line = stream.readline(1024 * 1024 + 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\Python311\Lib\socket.py", line 706, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+      Start 139: AzureEditor.ProposalHost
+48/50 Test #139: AzureEditor.ProposalHost .............   Passed   52.75 sec
+      Start 145: AzureEditor.SettingsHost
+49/50 Test #145: AzureEditor.SettingsHost .............   Passed   58.65 sec
+      Start 146: AzureEditor.ObservationHost
+50/50 Test #146: AzureEditor.ObservationHost ..........   Passed   53.05 sec
+
+98% tests passed, 1 tests failed out of 50
+
+Label Time Summary:
+gpu    = 204.65 sec*proc (4 tests)
+
+Total Test time (real) = 425.73 sec
+
+The following tests FAILED:
+	136 - AzureEditor.DevtoolsHost (Failed)                 gpu
+Errors while running CTest

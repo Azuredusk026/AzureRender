@@ -1,0 +1,13 @@
+{"config": "debug", "case": "owned", "status": "passed"}
+{"config": "debug", "case": "shared", "status": "passed"}
+{"config": "debug", "case": "fixed", "status": "passed"}
+{"config": "debug", "case": "off", "status": "passed"}
+{"config": "debug", "case": "multisample", "status": "passed"}
+{"config": "debug", "case": "motion", "status": "passed"}
+{"config": "release", "case": "owned", "status": "passed"}
+{"config": "release", "case": "shared", "status": "passed"}
+{"config": "release", "case": "fixed", "status": "passed"}
+{"config": "release", "case": "off", "status": "passed"}
+{"config": "release", "case": "multisample", "status": "passed"}
+{"config": "release", "case": "motion", "status": "passed"}
+All affected regression and Player paths passed

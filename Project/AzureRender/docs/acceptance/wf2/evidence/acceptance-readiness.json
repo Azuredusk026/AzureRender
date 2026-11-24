@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "stage": "WF2",
+  "prepared": true,
+  "finalCandidateReady": false,
+  "ui8": {
+    "sourceInputs": 820,
+    "changedInputs": [],
+    "artifacts": [
+      {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+        "sha256": "0043f5b342d2e1163315ecece95c5f6828c6e8044e0f64a4a2b449a19400e05e",
+        "matched": true
+      },
+      {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRender.exe",
+        "sha256": "45c79c4e05da2a1317c0ae0e4a4ce8f9083a903c8e8cff2a9bdc9ee3bc8cd701",
+        "matched": true
+      },
+      {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\bin\\AzureRender.exe",
+        "sha256": "0043f5b342d2e1163315ecece95c5f6828c6e8044e0f64a4a2b449a19400e05e",
+        "matched": true
+      },
+      {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\bin\\AzurePlayer.exe",
+        "sha256": "9f9cb18c46f8db31d1cb89a8a3b90a5f3608f73e1a080a091a5d85b3eed04fd9",
+        "matched": true
+      },
+      {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\bin\\AzureGameLauncher.exe",
+        "sha256": "f50166d03e0d776ebda7f9e28a79bcd451106c8a533f45cb47a694664298569f",
+        "matched": true
+      },
+      {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\install_manifest.json",
+        "sha256": "63d6c406622eeb8f6258edc4a21223b1c16fb81c12651423f84f6e03ecf51810",
+        "matched": true
+      }
+    ],
+    "evidenceHashesMatched": true
+  },
+  "p8HistoricalCandidate": {
+    "sourceHash": "e92878225aabd0f98e3e0ed25b246f38af512a69f751818de0c1503212a9bd7e",
+    "sourceInputs": 969,
+    "changedInputs": [
+      "CMakeLists.txt",
+      "docs/plans/engine-evolution-manifest.json",
+      "src/app/AzureRenderApp.cpp",
+      "src/app/AzureRenderApp.hpp",
+      "src/app/AzureRenderGameplay.cpp",
+      "src/app/AzureRenderPipeline.cpp",
+      "src/app/AzureRenderSupport.cpp",
+      "src/app/CommandLine.cpp",
+      "src/assets/AssetTransfer.cpp",
+      "src/assets/image/ImageCodec.cpp",
+      "src/assets/image/ImageCodec.hpp",
+      "src/assets/image/ImageFormatAdapter.cpp",
+      "src/assets/MaterialData.cpp",
+      "src/assets/MaterialData.hpp",
+      "src/editor/commands/EditorOperations.cpp",
+      "src/editor/EditorSession.hpp",
+      "src/editor/EditorWorkspace.cpp",
+      "src/editor/EditorWorkspaceUI.cpp",
+      "src/editor/GameBuildJob.cpp",
+      "src/editor/GameBuildJob.hpp",
+      "src/editor/ImGuiEditorLayer.cpp",
+      "src/editor/ImGuiEditorLayer.hpp",
+      "src/editor/material/MaterialEditingService.cpp",
+      "src/editor/panels/AssetBrowserPanel.cpp",
+      "src/editor/panels/BuildPanel.cpp",
+      "src/editor/panels/ConsolePanel.cpp",
+      "src/editor/panels/InspectorPanel.cpp",
+      "src/editor/panels/MaterialAssetPanel.cpp",
+      "src/editor/panels/OutlinerPanel.cpp",
+      "src/editor/panels/ProjectBrowserPanel.cpp",
+      "src/editor/projects/ProjectOpenService.cpp",
+      "src/editor/ui/AppChrome.cpp",
+      "src/editor/ui/ThemeTokens.hpp",
+      "src/editor/ui/UiMetrics.hpp",
+      "src/editor/ui/Widgets.cpp",
+      "src/editor/ui/Widgets.hpp",
+      "src/main.cpp",
+      "src/player/main.cpp",
+      "src/render/GameUiRenderer.cpp",
+      "src/resources/BinaryFile.hpp",
+      "src/resources/ResourceLocator.cpp",
+      "src/resources/ResourceLocator.hpp",
+      "src/runtime/AssetDatabase.cpp",
+      "src/runtime/AssetTypeRegistry.hpp",
+      "src/runtime/AudioRuntime.cpp",
+      "src/runtime/GameUi.cpp",
+      "src/runtime/MiniaudioImpl.cpp",
+      "src/runtime/Project.cpp",
+      "src/scenes/CharacterSceneRenderer.cpp",
+      "tools/build_game.py",
+      "tools/check_docs.sh",
+      "tools/fix_msvc_deps_prefix.py",
+      "tools/run_playable_long_run.py",
+      "tools/test_game_package_rules.py"
+    ],
+    "packages": [
+      {
+        "kind": "engine",
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\packages\\Azure-P8-final-engine.zip",
+        "sha256": "43f2126a94577170e59c82e9e6da567dca52b842534247015b21b5d4eabce4e7",
+        "matched": true
+      },
+      {
+        "kind": "exploration",
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\packages\\Azure-P8-final-exploration.zip",
+        "sha256": "8c7267cdbc4e2fd3fffe304ae8c267576702b147db952e01f719270d0f55af19",
+        "matched": true
+      },
+      {
+        "kind": "platformer",
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\packages\\Azure-P8-final-platformer.zip",
+        "sha256": "6059cbef82dcd171263c6265d7c06a10f14b8a114364ca89d6bfc870dfbaacad",
+        "matched": true
+      },
+      {
+        "kind": "scene_inspector",
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\packages\\Azure-P8-final-scene_inspector.zip",
+        "sha256": "185f3650f04a5c04bc93d03514448ea199c2d0fc3ad566614de7dbb25082ced9",
+        "matched": true
+      },
+      {
+        "kind": "authored-exploration",
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\packages\\Azure-P8-final-authored-exploration.zip",
+        "sha256": "20e98e7a69c42ebf722f57edbfc81f3d36d62a9f716fe5fde93129ff1e139309",
+        "matched": true
+      },
+      {
+        "kind": "authored-inspection",
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\packages\\Azure-P8-final-authored-inspection.zip",
+        "sha256": "5d822abc4a064ff4e10b9277168aa2cfaa7fa2483e1f7cd3a699acb9e869ef1d",
+        "matched": true
+      }
+    ],
+    "coversCurrentSource": false
+  },
+  "nextTasks": [
+    {
+      "id": "P8.1",
+      "status": "Ready",
+      "owner": "发布与验收工具",
+      "action": "绑定当前候选的源码、资产、安装树及项目包",
+      "requires": "更新与当前来源不一致的六包绑定"
+    },
+    {
+      "id": "P8.2",
+      "status": "Ready",
+      "owner": "缺陷调查",
+      "action": "按原始记录调查工作集、创建失败和目录超时",
+      "requires": "有新假设的受影响检查及明确结论"
+    },
+    {
+      "id": "P8.3",
+      "status": "Pending",
+      "owner": "平台与音频生命周期",
+      "action": "标准与平台原始 1800 秒持续运行及关闭复核",
+      "requires": "P8.1 候选绑定完成及原设备启动条件满足"
+    },
+    {
+      "id": "P8.4",
+      "status": "Pending",
+      "owner": "设备环境与性能调查",
+      "action": "五类负载各三轮正式性能",
+      "requires": "候选绑定完成，稳定设备环境，GPU 队列空闲"
+    },
+    {
+      "id": "P8.5",
+      "status": "Pending",
+      "owner": "实际操作者",
+      "action": "实体输入、输入法、试听和制作效率复核",
+      "requires": "记录操作者、候选包、设备和可交互桌面"
+    },
+    {
+      "id": "P8.6",
+      "status": "Pending",
+      "owner": "阶段收尾",
+      "action": "核对所有必需项并更新阶段为完成",
+      "requires": "18 项验收条目全部通过"
+    }
+  ],
+  "execution": "source and package verification only; no runtime acceptance repeated"
+}

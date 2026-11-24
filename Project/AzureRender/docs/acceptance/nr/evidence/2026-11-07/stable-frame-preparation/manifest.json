@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "kind": "NativeOptimizationEvidence",
+  "sourceBase": "aca7dfc",
+  "status": "adopted-diagnostic-cpu-improvement",
+  "sourceChanges": {
+    "CMakeLists.txt": "9d513d826aaf32b0aea50d0a91cd493c1c5499c8b9756e7fd60f8b449c5b13ff",
+    "src/runtime/GameRuntime.cpp": "1973bf30acaafb82cd2bc98f371474cb88e2cdd68c226921d14efe27e22a5b12",
+    "src/runtime/GameRuntime.hpp": "5f69bd4b45f241da817483fb78c8140239fc15f0405377e71760fe740e731171",
+    "src/runtime/PreviousTransformSnapshot.cpp": "55013fa9a7e75eb6b43713a7a13d10c8ebfc341984e3a66012e3d028445482cb",
+    "src/runtime/PreviousTransformSnapshot.hpp": "3f867d6629f35f4f69dbd3a03b2468ba3e2fa3f238f40f828025864e84a2314e",
+    "src/scene/SceneTransformCache.hpp": "c5d8b54dbca024a75d0efaa480cfa62df8e865792b1d4234f45d55d3f3ccac25",
+    "src/scenes/CharacterSceneRenderer.cpp": "a47e2d864b875641634c076c441d4e745de7f4d1f50d06e08f12df178d7216b0",
+    "src/scenes/CharacterSceneRenderer.hpp": "313ba7945ffb38367ba9d6cd32914740e0b6c098d94c053e28b56b073f9f90b0"
+  },
+  "tests": {
+    "tests/PreviousTransformSnapshotTests.cpp": "a7fb26dd65b753de367dfae6fdf9db1ec995526ad2ccad6abdd706e76a06121b",
+    "tests/SceneTransformCacheTests.cpp": "ccd3df967b39cde0aac88f1234b60507c19dd01de38d4801a98cbd264fe266e8"
+  },
+  "configuration": "Release",
+  "buildProvenanceSha256": "f25abda589b216872154e2b21dbc5041018cf96719f4a222b666fe2917110a57",
+  "buildScope": {
+    "kind": "runtime-and-tests",
+    "targets": [
+      "AzureRender",
+      "AzurePlayer",
+      "AzureMetaGen",
+      "AzureGeometryCompiler",
+      "AzureAssetExchange",
+      "AzureMaterialValidator",
+      "AzureGameLauncher",
+      "AzureEngineContracts",
+      "AzureManagedArtifacts",
+      "AzureShaderModulePrototypes",
+      "AzurePreviousTransformSnapshotTests",
+      "AzureSceneTransformCacheTests",
+      "AzureCameraSystemTests",
+      "AzureRuntimeSceneSnapshotCacheTests",
+      "AzureRuntimeRenderSnapshotCacheTests",
+      "AzureRuntimeLifecycleTests",
+      "AzureRenderSceneGraphTests",
+      "AzureRenderNullRhiPassTests",
+      "AzureObjectShadowRecordingTests",
+      "AzurePhysicsInputTests"
+    ],
+    "testProducts": {
+      "AzurePreviousTransformSnapshotTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePreviousTransformSnapshotTests.exe",
+      "AzureSceneTransformCacheTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureSceneTransformCacheTests.exe",
+      "AzureCameraSystemTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureCameraSystemTests.exe",
+      "AzureRuntimeSceneSnapshotCacheTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRuntimeSceneSnapshotCacheTests.exe",
+      "AzureRuntimeRenderSnapshotCacheTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRuntimeRenderSnapshotCacheTests.exe",
+      "AzureRuntimeLifecycleTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRuntimeLifecycleTests.exe",
+      "AzureRenderSceneGraphTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderSceneGraphTests.exe",
+      "AzureRenderNullRhiPassTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderNullRhiPassTests.exe",
+      "AzureObjectShadowRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureObjectShadowRecordingTests.exe",
+      "AzurePhysicsInputTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePhysicsInputTests.exe"
+    }
+  },
+  "playerSha256": "99130ce546ed398cbb61b9bd20bc701d899556be9b6ef8b3bfba6262e8a3025f",
+  "programCount": 663,
+  "allProgramsByteIdentical": true,
+  "results": {
+    "file": "results.json",
+    "sha256": "6e6f3e448d340d6781c44ed94bf9e45863dcfc8139844a0379cca91efc765ac7"
+  },
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 1416106,
+    "sha256": "ca7583134db9973531bc075412bc72b1fd60cf20f0a452bfdcb91e58e29dbe20"
+  },
+  "phaseChecksPassed": true,
+  "formalPerformanceAccepted": false,
+  "overallVisualAccepted": false
+}

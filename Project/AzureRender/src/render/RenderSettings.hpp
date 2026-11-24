@@ -1,13 +1,22 @@
 #pragma once
 
 #include "extensions/SceneType.hpp"
+#include "render/EnvironmentSpecular.hpp"
+#include "render/ScreenSpaceReflection.hpp"
+#include "render/NprLighting.hpp"
+#include "assets/UnlitTextureLayers.hpp"
+#include "render/CameraViewDescriptor.hpp"
+#include <optional>
 
 #include <array>
 #include <cstdint>
 #include <filesystem>
+#include <string>
 #include <string_view>
 
 namespace azurerender {
+class SettingRegistry;
+void registerRenderSettings(SettingRegistry& registry);
 
 inline constexpr std::uint32_t kShowcasePresetVersion = 1;
 
@@ -34,20 +43,31 @@ struct BloomSettings {
 struct OutlineSettings {
     static constexpr std::uint32_t kSchemaVersion = 1;
 
+    float silhouetteWidthPixels = .8F;
     float strength = 0.40F;
     float depthThreshold = 0.18F;
     float normalThreshold = 0.20F;
     std::array<float, 3> color{0.008F, 0.013F, 0.022F};
 };
 
-struct GradeSettings {
+struct ColorGradingLutSettings {
     static constexpr std::uint32_t kSchemaVersion = 1;
+    std::string asset;
+    float exposureMultiplier = 1.0F;
+    // Resolved by the content layer. Authoring serialization retains asset.
+    std::filesystem::path resolvedAsset;
+    std::string resourceFingerprint;
+};
+
+struct GradeSettings {
+    static constexpr std::uint32_t kSchemaVersion = 2;
 
     float exposureEv = 0.0F;
     float saturation = 1.0F;
     float contrast = 1.0F;
     std::array<float, 3> tint{1.0F, 1.0F, 1.0F};
     bool toneMappingEnabled = true;
+    ColorGradingLutSettings lut;
 };
 
 struct ShadowSettings {
@@ -86,10 +106,26 @@ struct BlackholeQualityParameters {
 struct CharacterPresentationSettings {
     bool backgroundEnabled = true;
     bool platformEnabled = true;
+    bool showcaseBackdrop = false;
+};
+
+enum class SkyMode : std::uint32_t { Procedural = 0, Environment = 1, Solid = 2 };
+struct SkySettings {
+    SkyMode mode = SkyMode::Procedural;
+    std::array<float,3> color{.035F,.045F,.065F};
+    float intensity = 1.F;
+    float rotationDegrees = 0.F;
 };
 
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 7;
+    static constexpr std::uint32_t kSchemaVersion = 20;
+    bool faceSdfFeature=true,showcasePlatformFeature=true;
+    // 0: off, 1: edge adaptive, 2: four-sample supersampling, 3: native temporal, 4: per-sample MSAA.
+    std::uint32_t antiAliasing = 1;
+    float cameraNear = .1F;
+    float cameraFar = 100.0F;
+    std::optional<CameraViewDescriptor> cameraView;
+    float shadowDistance = 100.0F;
 
     // Selects the pluggable scene renderer that draws the current frame.
     // Character is the default stylized character pipeline; Blackhole is the
@@ -108,6 +144,12 @@ struct RenderSettings {
 
     RenderPath renderPath = RenderPath::Traditional;
     bool stylizedLightingEnabled = true;
+    // Explicit local lights and authored environment, without showcase fill/rim.
+    bool sceneLightingEnabled = false;
+    EnvironmentSpecularModel environmentSpecularModel=EnvironmentSpecularModel::LegacySchlick;
+    ScreenSpaceReflectionSettings screenSpaceReflection;
+    NprLightingSettings nprLighting;
+    UnlitEffectFrame unlitEffects;
     float styleMaskStrength = 1.0F;
     float diffuseBandThreshold = 0.40F;
     std::uint32_t showcasePreset = 0;
@@ -122,6 +164,11 @@ struct RenderSettings {
     GradeSettings grade;
     BlackholeSettings blackhole;
     CharacterPresentationSettings characterPresentation;
+    SkySettings sky;
+    std::uint32_t pathTraceSamples=256;
+    std::uint32_t pathTraceBounces=6;
+    bool pathTraceDenoise=false;
+    std::uint32_t pathTraceSeed=0;
 };
 
 void validateRenderSettings(const RenderSettings& settings);

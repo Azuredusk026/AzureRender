@@ -1,0 +1,30 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 154: AzureEditor.NativeInputGpu
+1/1 Test #154: AzureEditor.NativeInputGpu .......***Failed    3.05 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 244, in <module>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 244, in <listcomp>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 178, in run
+    time.sleep(.35);double_click_widget('node.'+other)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 107, in double_click_widget
+    rect=state()['widgets'][identity];cx=rect[0]+rect[2]/2;cy=rect[1]+rect[3]/2
+         ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+KeyError: 'node.ground'
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+gpu    =   3.05 sec*proc (1 test)
+
+Total Test time (real) =   3.06 sec
+
+The following tests FAILED:
+	154 - AzureEditor.NativeInputGpu (Failed)
+Errors while running CTest

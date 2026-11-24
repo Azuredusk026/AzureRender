@@ -1,0 +1,701 @@
+{
+  "diagnosticOnly": true,
+  "requestCount": 5202,
+  "sampledWorkingSetGrowth": 0.10488102006009914,
+  "sampledPrivateGrowth": 0.06390741145605605,
+  "memoryObservations": 720,
+  "completion": {
+    "diagnosticOnly": true,
+    "elapsedSeconds": 80.39100000000008,
+    "debugger": "C:\\Program Files\\LLVM\\bin\\lldb.exe",
+    "debuggerSha256": "414b5463e2d2be0a72dd6e219a6f36925857e38b2712109162ccbebc1027d669",
+    "executableSha256": "3716af4670aeb0469a0760b524ebe893f06c9294b82bd2f027c6111d60aacad5",
+    "debuggerExitCode": 0,
+    "completed": true,
+    "unchangedBudgets": true,
+    "covers": "NtAllocateVirtualMemory requests; not all heap allocations"
+  },
+  "limitations": [
+    "Requests do not prove successful allocations, current residency, or leaks.",
+    "Debugger timing and heaps differ from formal runs.",
+    "NtAllocateVirtualMemoryEx and allocation reuse are outside coverage.",
+    "Release binary provides module and address evidence, not source symbols.",
+    "Formal working-set failures remain unresolved."
+  ],
+  "residentGrowth": {
+    "baselineSeconds": 40.016000000000076,
+    "peakSeconds": 79.25,
+    "positiveRegions": [
+      {
+        "allocation": 2541682425856,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 16416768,
+        "regionBytes": 16424960,
+        "increaseBytes": 8359936,
+        "baselineResidentBytes": 8056832
+      },
+      {
+        "allocation": 2540028624896,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 29528064,
+        "regionBytes": 29753344,
+        "increaseBytes": 5615616,
+        "baselineResidentBytes": 23912448
+      },
+      {
+        "allocation": 2541647036416,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 2228224,
+        "regionBytes": 2228224,
+        "increaseBytes": 2228224,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541560987648,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 2097152,
+        "regionBytes": 2097152,
+        "increaseBytes": 2097152,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541699006464,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 1536000,
+        "regionBytes": 2695168,
+        "increaseBytes": 1536000,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541569900544,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 1384448,
+        "regionBytes": 1392640,
+        "increaseBytes": 1384448,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 140697480396800,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+        "residentBytes": 4866048,
+        "regionBytes": 7688192,
+        "increaseBytes": 1056768,
+        "baselineResidentBytes": 3809280
+      },
+      {
+        "allocation": 140734568529920,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\rmlui.dll",
+        "residentBytes": 1134592,
+        "regionBytes": 1699840,
+        "increaseBytes": 946176,
+        "baselineResidentBytes": 188416
+      },
+      {
+        "allocation": 2539986354176,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 16011264,
+        "regionBytes": 33488896,
+        "increaseBytes": 827392,
+        "baselineResidentBytes": 15183872
+      },
+      {
+        "allocation": 2541518585856,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 491520,
+        "regionBytes": 491520,
+        "increaseBytes": 491520,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 140704386842624,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvwgf2umx.dll",
+        "residentBytes": 9879552,
+        "regionBytes": 78483456,
+        "increaseBytes": 401408,
+        "baselineResidentBytes": 9478144
+      },
+      {
+        "allocation": 140735308693504,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\freetype.dll",
+        "residentBytes": 303104,
+        "regionBytes": 684032,
+        "increaseBytes": 258048,
+        "baselineResidentBytes": 45056
+      },
+      {
+        "allocation": 140705836498944,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll",
+        "residentBytes": 2936832,
+        "regionBytes": 25550848,
+        "increaseBytes": 176128,
+        "baselineResidentBytes": 2760704
+      },
+      {
+        "allocation": 140734504370176,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+        "residentBytes": 6017024,
+        "regionBytes": 45531136,
+        "increaseBytes": 163840,
+        "baselineResidentBytes": 5853184
+      },
+      {
+        "allocation": 702816452608,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 110592,
+        "regionBytes": 110592,
+        "increaseBytes": 98304,
+        "baselineResidentBytes": 12288
+      },
+      {
+        "allocation": 702843715584,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 110592,
+        "regionBytes": 110592,
+        "increaseBytes": 98304,
+        "baselineResidentBytes": 12288
+      },
+      {
+        "allocation": 140706007285760,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dxgi.dll",
+        "residentBytes": 770048,
+        "regionBytes": 1277952,
+        "increaseBytes": 81920,
+        "baselineResidentBytes": 688128
+      },
+      {
+        "allocation": 702838472704,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 73728,
+        "regionBytes": 73728,
+        "increaseBytes": 61440,
+        "baselineResidentBytes": 12288
+      },
+      {
+        "allocation": 140705881391104,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\CoreUIComponents.dll",
+        "residentBytes": 757760,
+        "regionBytes": 2871296,
+        "increaseBytes": 49152,
+        "baselineResidentBytes": 708608
+      },
+      {
+        "allocation": 140705515765760,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\TextInputFramework.dll",
+        "residentBytes": 868352,
+        "regionBytes": 1290240,
+        "increaseBytes": 40960,
+        "baselineResidentBytes": 827392
+      },
+      {
+        "allocation": 702805966848,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 331776,
+        "regionBytes": 331776,
+        "increaseBytes": 32768,
+        "baselineResidentBytes": 299008
+      },
+      {
+        "allocation": 140704839172096,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\D3D12Core.dll",
+        "residentBytes": 1400832,
+        "regionBytes": 2531328,
+        "increaseBytes": 32768,
+        "baselineResidentBytes": 1368064
+      },
+      {
+        "allocation": 140706053226496,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+        "residentBytes": 745472,
+        "regionBytes": 1302528,
+        "increaseBytes": 32768,
+        "baselineResidentBytes": 712704
+      },
+      {
+        "allocation": 140706004598784,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\d3d11.dll",
+        "residentBytes": 880640,
+        "regionBytes": 2404352,
+        "increaseBytes": 24576,
+        "baselineResidentBytes": 856064
+      },
+      {
+        "allocation": 140706054602752,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+        "residentBytes": 1241088,
+        "regionBytes": 4108288,
+        "increaseBytes": 24576,
+        "baselineResidentBytes": 1216512
+      },
+      {
+        "allocation": 2538325671936,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 352256,
+        "regionBytes": 2424832,
+        "increaseBytes": 20480,
+        "baselineResidentBytes": 331776
+      },
+      {
+        "allocation": 140705321910272,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\vcruntime140.dll",
+        "residentBytes": 86016,
+        "regionBytes": 180224,
+        "increaseBytes": 20480,
+        "baselineResidentBytes": 65536
+      },
+      {
+        "allocation": 140705904197632,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\nvspcap64.dll",
+        "residentBytes": 786432,
+        "regionBytes": 1384448,
+        "increaseBytes": 20480,
+        "baselineResidentBytes": 765952
+      },
+      {
+        "allocation": 2541664731136,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 16384,
+        "regionBytes": 16781312,
+        "increaseBytes": 16384,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 702805835776,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 12288,
+        "regionBytes": 12288,
+        "increaseBytes": 12288,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 702844764160,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 12288,
+        "regionBytes": 12288,
+        "increaseBytes": 12288,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 702845812736,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 12288,
+        "regionBytes": 12288,
+        "increaseBytes": 12288,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 702846861312,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 12288,
+        "regionBytes": 12288,
+        "increaseBytes": 12288,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 140705359265792,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\vcruntime140_1.dll",
+        "residentBytes": 45056,
+        "regionBytes": 49152,
+        "increaseBytes": 12288,
+        "baselineResidentBytes": 32768
+      },
+      {
+        "allocation": 140737017741312,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\lua.dll",
+        "residentBytes": 204800,
+        "regionBytes": 245760,
+        "increaseBytes": 12288,
+        "baselineResidentBytes": 192512
+      },
+      {
+        "allocation": 2541430046720,
+        "kind": 262144,
+        "path": "",
+        "residentBytes": 4096,
+        "regionBytes": 4096,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541637730304,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 4096,
+        "regionBytes": 4096,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541637795840,
+        "kind": 262144,
+        "path": "",
+        "residentBytes": 4096,
+        "regionBytes": 45056,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541637861376,
+        "kind": 262144,
+        "path": "",
+        "residentBytes": 4096,
+        "regionBytes": 4096,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541638189056,
+        "kind": 262144,
+        "path": "",
+        "residentBytes": 4096,
+        "regionBytes": 524288,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 140705824047104,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igdgmm64.dll",
+        "residentBytes": 1261568,
+        "regionBytes": 4268032,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 1257472
+      },
+      {
+        "allocation": 140705892204544,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\winmm.dll",
+        "residentBytes": 94208,
+        "regionBytes": 212992,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 90112
+      },
+      {
+        "allocation": 140706044379136,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\cfgmgr32.dll",
+        "residentBytes": 192512,
+        "regionBytes": 348160,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 188416
+      },
+      {
+        "allocation": 140706053029888,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\win32u.dll",
+        "residentBytes": 126976,
+        "regionBytes": 139264,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 122880
+      },
+      {
+        "allocation": 140706070724608,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msctf.dll",
+        "residentBytes": 790528,
+        "regionBytes": 1347584,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 786432
+      },
+      {
+        "allocation": 140706074984448,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\imm32.dll",
+        "residentBytes": 98304,
+        "regionBytes": 184320,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 94208
+      },
+      {
+        "allocation": 140706093268992,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\sechost.dll",
+        "residentBytes": 212992,
+        "regionBytes": 663552,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 208896
+      }
+    ]
+  }
+}
+{
+  "unattributed": {
+    "requests": 75,
+    "requestedBytes": 8048640,
+    "maxRequestBytes": 4194304
+  },
+  "msvcrt.dll": {
+    "requests": 12,
+    "requestedBytes": 2068480,
+    "maxRequestBytes": 1048576
+  },
+  "vulkan-1.dll": {
+    "requests": 130,
+    "requestedBytes": 1040384,
+    "maxRequestBytes": 135168
+  },
+  "gdi32full.dll": {
+    "requests": 2,
+    "requestedBytes": 1908736,
+    "maxRequestBytes": 1900544
+  },
+  "shell32.dll": {
+    "requests": 1,
+    "requestedBytes": 4096,
+    "maxRequestBytes": 4096
+  },
+  "msvcp140.dll": {
+    "requests": 1,
+    "requestedBytes": 4096,
+    "maxRequestBytes": 4096
+  },
+  "OpenEXR-3_4.dll": {
+    "requests": 1,
+    "requestedBytes": 4096,
+    "maxRequestBytes": 4096
+  },
+  "AzureRender.exe": {
+    "requests": 3217,
+    "requestedBytes": 96171016,
+    "maxRequestBytes": 16834664
+  },
+  "CoreMessaging.dll": {
+    "requests": 5,
+    "requestedBytes": 8409088,
+    "maxRequestBytes": 8388608
+  },
+  "uxtheme.dll": {
+    "requests": 5,
+    "requestedBytes": 806912,
+    "maxRequestBytes": 786432
+  },
+  "imm32.dll": {
+    "requests": 2,
+    "requestedBytes": 1052656,
+    "maxRequestBytes": 1048560
+  },
+  "opengl32.dll": {
+    "requests": 18,
+    "requestedBytes": 861696,
+    "maxRequestBytes": 652800
+  },
+  "igdgmm64.dll": {
+    "requests": 20,
+    "requestedBytes": 4510360,
+    "maxRequestBytes": 4235928
+  },
+  "igc64.dll": {
+    "requests": 74,
+    "requestedBytes": 368640,
+    "maxRequestBytes": 28672
+  },
+  "igvk64.dll": {
+    "requests": 20,
+    "requestedBytes": 1474560,
+    "maxRequestBytes": 425984
+  },
+  "kernel32.dll": {
+    "requests": 2,
+    "requestedBytes": 8192,
+    "maxRequestBytes": 4096
+  },
+  "setupapi.dll": {
+    "requests": 1,
+    "requestedBytes": 4096,
+    "maxRequestBytes": 4096
+  },
+  "crypt32.dll": {
+    "requests": 26,
+    "requestedBytes": 12687912,
+    "maxRequestBytes": 1370632
+  },
+  "nvoglv64.dll": {
+    "requests": 241,
+    "requestedBytes": 1143833960,
+    "maxRequestBytes": 1073741824
+  },
+  "cfgmgr32.dll": {
+    "requests": 2,
+    "requestedBytes": 73728,
+    "maxRequestBytes": 36864
+  },
+  "devobj.dll": {
+    "requests": 2,
+    "requestedBytes": 73728,
+    "maxRequestBytes": 36864
+  },
+  "msasn1.dll": {
+    "requests": 13,
+    "requestedBytes": 7536640,
+    "maxRequestBytes": 778240
+  },
+  "nvgpucomp64.dll": {
+    "requests": 188,
+    "requestedBytes": 1478656,
+    "maxRequestBytes": 65536
+  },
+  "dxgi.dll": {
+    "requests": 4,
+    "requestedBytes": 28672,
+    "maxRequestBytes": 16384
+  },
+  "rometadata.dll": {
+    "requests": 2,
+    "requestedBytes": 12288,
+    "maxRequestBytes": 8192
+  },
+  "advapi32.dll": {
+    "requests": 2,
+    "requestedBytes": 12288,
+    "maxRequestBytes": 8192
+  },
+  "nvspcap64.dll": {
+    "requests": 5,
+    "requestedBytes": 20480,
+    "maxRequestBytes": 4096
+  },
+  "nvapi64.dll": {
+    "requests": 32,
+    "requestedBytes": 1736704,
+    "maxRequestBytes": 200704
+  },
+  "nvrtum64.dll": {
+    "requests": 48,
+    "requestedBytes": 2326712,
+    "maxRequestBytes": 1097912
+  },
+  "graphics-hook64.dll": {
+    "requests": 6,
+    "requestedBytes": 24576,
+    "maxRequestBytes": 4096
+  },
+  "nvldumdx.dll": {
+    "requests": 5,
+    "requestedBytes": 2680480,
+    "maxRequestBytes": 1342856
+  },
+  "nvwgf2umx.dll": {
+    "requests": 679,
+    "requestedBytes": 1084762544,
+    "maxRequestBytes": 1073741824
+  },
+  "D3D12.dll": {
+    "requests": 5,
+    "requestedBytes": 45056,
+    "maxRequestBytes": 16384
+  },
+  "D3D12Core.dll": {
+    "requests": 12,
+    "requestedBytes": 57344,
+    "maxRequestBytes": 12288
+  },
+  "NvMemMapStoragex.dll": {
+    "requests": 19,
+    "requestedBytes": 98304,
+    "maxRequestBytes": 20480
+  },
+  "D3DSCache.dll": {
+    "requests": 2,
+    "requestedBytes": 73728,
+    "maxRequestBytes": 36864
+  },
+  "rpcrt4.dll": {
+    "requests": 2,
+    "requestedBytes": 12288,
+    "maxRequestBytes": 8192
+  },
+  "nvppex.dll": {
+    "requests": 5,
+    "requestedBytes": 20480,
+    "maxRequestBytes": 4096
+  },
+  "dcomp.dll": {
+    "requests": 3,
+    "requestedBytes": 143360,
+    "maxRequestBytes": 69632
+  },
+  "directxdatabasehelper.dll": {
+    "requests": 1,
+    "requestedBytes": 20480,
+    "maxRequestBytes": 20480
+  },
+  "apphelp.dll": {
+    "requests": 1,
+    "requestedBytes": 20480,
+    "maxRequestBytes": 20480
+  },
+  "igd10iumd64.dll": {
+    "requests": 6,
+    "requestedBytes": 229376,
+    "maxRequestBytes": 61440
+  },
+  "igd10um64xe.dll": {
+    "requests": 292,
+    "requestedBytes": 122538432,
+    "maxRequestBytes": 33619968
+  },
+  "IntelControlLib.dll": {
+    "requests": 5,
+    "requestedBytes": 53248,
+    "maxRequestBytes": 20480
+  },
+  "d3d11.dll": {
+    "requests": 1,
+    "requestedBytes": 73728,
+    "maxRequestBytes": 73728
+  },
+  "AudioSes.dll": {
+    "requests": 3,
+    "requestedBytes": 61440,
+    "maxRequestBytes": 40960
+  },
+  "MMDevAPI.dll": {
+    "requests": 1,
+    "requestedBytes": 72,
+    "maxRequestBytes": 72
+  },
+  "rmlui.dll": {
+    "requests": 2,
+    "requestedBytes": 139264,
+    "maxRequestBytes": 135168
+  },
+  "lua.dll": {
+    "requests": 1,
+    "requestedBytes": 4096,
+    "maxRequestBytes": 4096
+  }
+}

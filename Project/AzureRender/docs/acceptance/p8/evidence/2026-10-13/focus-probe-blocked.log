@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p8-final-2026-10-13\probe-focus.py", line 12, in <module>
+    s=run(root/'build/p8-final-2026-10-13/arena-delivery-final/Moved exploration',out,180,True,scenario=FocusProbe())
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 159, in run
+    environment=wait_and_record(environment_path,policy=dict(maxIdleUtilization=max_idle_utilization))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\gpu_environment.py", line 178, in wait_and_record
+    result=wait_until_ready(policy=policy,observations=observations,**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\gpu_environment.py", line 169, in wait_until_ready
+    if clock()-start>=timeout:raise TimeoutError('GPU environment not ready: '+'; '.join(errors))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: GPU environment not ready: background GPU load exceeds the declared idle limit; background GPU load exceeds the declared idle limit; background GPU load exceeds the declared idle limit

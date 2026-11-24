@@ -1,0 +1,4123 @@
+{
+  "status": "qualified-stripe-modulation",
+  "points": 31,
+  "lineExactPoints": 20,
+  "maximumLineAbsolute": 0.0011264681816101074,
+  "rows": [
+    {
+      "pixel": [
+        1306,
+        156
+      ],
+      "nativeLineBits": [
+        1065350343,
+        1065353934
+      ],
+      "vulkanLineBits": [
+        1065350370,
+        1065353928
+      ],
+      "nativeLines": [
+        0.9998287558555603,
+        1.0000855922698975
+      ],
+      "vulkanLines": [
+        0.9998303651809692,
+        1.0000848770141602
+      ],
+      "lineExact": false,
+      "maximumLineAbsolute": 1.6093254089355469e-06,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.745867908000946,
+        0.11219454556703568,
+        0.13597305119037628,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1061089587,
+        1038468673,
+        1040923781,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.1813792586326599,
+        0.027769770473241806,
+        0.035740964114665985,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1043970940,
+        1021541742,
+        1024615710,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1278,
+        163
+      ],
+      "nativeLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "vulkanLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "nativeLines": [
+        1.0,
+        1.0
+      ],
+      "vulkanLines": [
+        1.0,
+        1.0
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.7394622564315796,
+        0.10126770287752151,
+        0.1266365349292755,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1060982118,
+        1037002097,
+        1040297218,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.09957561641931534,
+        0.013840765692293644,
+        0.018239056691527367,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1036774989,
+        1013105761,
+        1016424979,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1313,
+        168
+      ],
+      "nativeLineBits": [
+        1065352888,
+        1065353298
+      ],
+      "vulkanLineBits": [
+        1065352888,
+        1065353298
+      ],
+      "nativeLines": [
+        0.9999804496765137,
+        1.0000097751617432
+      ],
+      "vulkanLines": [
+        0.9999804496765137,
+        1.0000097751617432
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.6566289067268372,
+        0.08794508874416351,
+        0.10386022925376892,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1059592405,
+        1035213966,
+        1037350060,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.1364169418811798,
+        0.01863003894686699,
+        0.023528384044766426,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1040953570,
+        1016634886,
+        1019264665,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1319,
+        172
+      ],
+      "nativeLineBits": [
+        1065352039,
+        1065353510
+      ],
+      "vulkanLineBits": [
+        1065352039,
+        1065353510
+      ],
+      "nativeLines": [
+        0.9999298453330994,
+        1.000035047531128
+      ],
+      "vulkanLines": [
+        0.9999298453330994,
+        1.000035047531128
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.6953357458114624,
+        0.09188517928123474,
+        0.1159132644534111,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1060241798,
+        1035742796,
+        1038967791,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.1394493728876114,
+        0.018720440566539764,
+        0.02495383843779564,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1041157073,
+        1016683420,
+        1020029950,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1267,
+        211
+      ],
+      "nativeLineBits": [
+        1065333077,
+        1065358251
+      ],
+      "vulkanLineBits": [
+        1065333078,
+        1065358250
+      ],
+      "nativeLines": [
+        0.9987996220588684,
+        1.0006002187728882
+      ],
+      "vulkanLines": [
+        0.9987996816635132,
+        1.0006000995635986
+      ],
+      "lineExact": false,
+      "maximumLineAbsolute": 1.1920928955078125e-07,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.0259126424789429,
+        0.1819184273481369,
+        0.19994203746318817,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065570587,
+        1044007123,
+        1045216667,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.16357125341892242,
+        0.029066331684589386,
+        0.03219404071569443,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1042775865,
+        1022237828,
+        1023663590,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1282,
+        211
+      ],
+      "nativeLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "vulkanLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "nativeLines": [
+        1.0,
+        1.0
+      ],
+      "vulkanLines": [
+        1.0,
+        1.0
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.0243785381317139,
+        0.1902805119752884,
+        0.21045070886611938,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065557718,
+        1044568293,
+        1045921892,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.15119962394237518,
+        0.028216436505317688,
+        0.03173850476741791,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1041945619,
+        1021781544,
+        1023541308,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1283,
+        211
+      ],
+      "nativeLineBits": [
+        1065238955,
+        1065381781
+      ],
+      "vulkanLineBits": [
+        1065238961,
+        1065381780
+      ],
+      "nativeLines": [
+        0.9931895136833191,
+        1.003405213356018
+      ],
+      "vulkanLines": [
+        0.9931898713111877,
+        1.0034050941467285
+      ],
+      "lineExact": false,
+      "maximumLineAbsolute": 3.5762786865234375e-07,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.0558192729949951,
+        0.20714016258716583,
+        0.22725486755371094,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065821462,
+        1045699725,
+        1047049600,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.1551826000213623,
+        0.03054083324968815,
+        0.03389275074005127,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1042212912,
+        1023029445,
+        1024119584,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1284,
+        211
+      ],
+      "nativeLineBits": [
+        1065304963,
+        1065365279
+      ],
+      "vulkanLineBits": [
+        1065304964,
+        1065365279
+      ],
+      "nativeLines": [
+        0.9971238970756531,
+        1.001438021659851
+      ],
+      "vulkanLines": [
+        0.9971239566802979,
+        1.001438021659851
+      ],
+      "lineExact": false,
+      "maximumLineAbsolute": 5.960464477539063e-08,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.053977131843567,
+        0.20935292541980743,
+        0.2275463491678238,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065806009,
+        1045848221,
+        1047069161,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.15468500554561615,
+        0.030852342024445534,
+        0.034040987491607666,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1042179519,
+        1023196685,
+        1024159376,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1268,
+        212
+      ],
+      "nativeLineBits": [
+        1065314139,
+        1065362985
+      ],
+      "vulkanLineBits": [
+        1065314141,
+        1065362985
+      ],
+      "nativeLines": [
+        0.9976708292961121,
+        1.0011645555496216
+      ],
+      "vulkanLines": [
+        0.9976709485054016,
+        1.0011645555496216
+      ],
+      "lineExact": false,
+      "maximumLineAbsolute": 1.1920928955078125e-07,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.9938412308692932,
+        0.15912406146526337,
+        0.18391387164592743,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065249889,
+        1042477419,
+        1044141035,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.15283311903476715,
+        0.024538610130548477,
+        0.028652619570493698,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1042055241,
+        1019807026,
+        1022015718,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1281,
+        212
+      ],
+      "nativeLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "vulkanLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "nativeLines": [
+        1.0,
+        1.0
+      ],
+      "vulkanLines": [
+        1.0,
+        1.0
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.045859694480896,
+        0.1938614696264267,
+        0.21426889300346375,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065737915,
+        1044808607,
+        1046178126,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.15652525424957275,
+        0.029138267040252686,
+        0.03271166607737541,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1042303016,
+        1022276448,
+        1023802539,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1282,
+        212
+      ],
+      "nativeLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "vulkanLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "nativeLines": [
+        1.0,
+        1.0
+      ],
+      "vulkanLines": [
+        1.0,
+        1.0
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.0272839069366455,
+        0.18637429177761078,
+        0.21149642765522003,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065582090,
+        1044306151,
+        1045992069,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.1516427844762802,
+        0.027648037299513817,
+        0.03194309026002884,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1041975359,
+        1021476387,
+        1023596226,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1283,
+        212
+      ],
+      "nativeLineBits": [
+        1065262464,
+        1065375904
+      ],
+      "vulkanLineBits": [
+        1065262464,
+        1065375904
+      ],
+      "nativeLines": [
+        0.9945907592773438,
+        1.0027046203613281
+      ],
+      "vulkanLines": [
+        0.9945907592773438,
+        1.0027046203613281
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.0428224802017212,
+        0.19595682621002197,
+        0.2147340476512909,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065712437,
+        1044949224,
+        1046209342,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.14794562757015228,
+        0.027901219204068184,
+        0.030980756506323814,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1041727247,
+        1021612313,
+        1023265627,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1284,
+        212
+      ],
+      "nativeLineBits": [
+        1065300548,
+        1065366383
+      ],
+      "vulkanLineBits": [
+        1065300548,
+        1065366383
+      ],
+      "nativeLines": [
+        0.9968607425689697,
+        1.0015696287155151
+      ],
+      "vulkanLines": [
+        0.9968607425689697,
+        1.0015696287155151
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.0540539026260376,
+        0.20872661471366882,
+        0.2188527137041092,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065806653,
+        1045806190,
+        1046485741,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.15355736017227173,
+        0.03053119033575058,
+        0.03248772770166397,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1042103844,
+        1023024268,
+        1023742426,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1268,
+        213
+      ],
+      "nativeLineBits": [
+        1065323277,
+        1065360701
+      ],
+      "vulkanLineBits": [
+        1065323277,
+        1065360701
+      ],
+      "nativeLines": [
+        0.9982154965400696,
+        1.0008922815322876
+      ],
+      "vulkanLines": [
+        0.9982154965400696,
+        1.0008922815322876
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.9974517226219177,
+        0.15875889360904694,
+        0.18379829823970795,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065310463,
+        1042452913,
+        1044133279,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.15290053188800812,
+        0.024400820955634117,
+        0.02852398343384266,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1042059765,
+        1019733051,
+        1021946657,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1281,
+        213
+      ],
+      "nativeLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "vulkanLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "nativeLines": [
+        1.0,
+        1.0
+      ],
+      "vulkanLines": [
+        1.0,
+        1.0
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.0348485708236694,
+        0.18969020247459412,
+        0.212926983833313,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065645547,
+        1044528678,
+        1046088072,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.1520613133907318,
+        0.028000295162200928,
+        0.03195441886782646,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1042003446,
+        1021665504,
+        1023599267,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1282,
+        213
+      ],
+      "nativeLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "vulkanLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "nativeLines": [
+        1.0,
+        1.0
+      ],
+      "vulkanLines": [
+        1.0,
+        1.0
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.0209317207336426,
+        0.18495695292949677,
+        0.21103018522262573,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065528804,
+        1044211035,
+        1045960780,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.14857150614261627,
+        0.027055921033024788,
+        0.03145650774240494,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1041769249,
+        1021158497,
+        1023465610,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1283,
+        213
+      ],
+      "nativeLineBits": [
+        1065197718,
+        1065392090
+      ],
+      "vulkanLineBits": [
+        1065197718,
+        1065392090
+      ],
+      "nativeLines": [
+        0.9907315969467163,
+        1.004634141921997
+      ],
+      "vulkanLines": [
+        0.9907315969467163,
+        1.004634141921997
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.0354869365692139,
+        0.19474568963050842,
+        0.21341601014137268,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065650902,
+        1044867946,
+        1046120890,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.14414700865745544,
+        0.02721531316637993,
+        0.03024893067777157,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1041472326,
+        1021244070,
+        1022872731,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1284,
+        213
+      ],
+      "nativeLineBits": [
+        1065298201,
+        1065366970
+      ],
+      "vulkanLineBits": [
+        1065298201,
+        1065366970
+      ],
+      "nativeLines": [
+        0.9967208504676819,
+        1.0016396045684814
+      ],
+      "vulkanLines": [
+        0.9967208504676819,
+        1.0016396045684814
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.046905279159546,
+        0.20726020634174347,
+        0.2172313779592514,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065746686,
+        1045707781,
+        1046376935,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.14985500276088715,
+        0.029795261099934578,
+        0.03172112628817558,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1041855383,
+        1022629169,
+        1023536643,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1269,
+        214
+      ],
+      "nativeLineBits": [
+        1065279219,
+        1065371715
+      ],
+      "vulkanLineBits": [
+        1065279219,
+        1065371715
+      ],
+      "nativeLines": [
+        0.9955894351005554,
+        1.0022052526474
+      ],
+      "vulkanLines": [
+        0.9955894351005554,
+        1.0022052526474
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.9384142756462097,
+        0.14582093060016632,
+        0.17729595303535461,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1064319979,
+        1041584661,
+        1043696914,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.13503894209861755,
+        0.021070977672934532,
+        0.026008637621998787,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1040861094,
+        1017945355,
+        1020596241,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1281,
+        214
+      ],
+      "nativeLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "vulkanLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "nativeLines": [
+        1.0,
+        1.0
+      ],
+      "vulkanLines": [
+        1.0,
+        1.0
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.0199530124664307,
+        0.18889114260673523,
+        0.21122638881206512,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065520594,
+        1044475054,
+        1045973947,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.14691700041294098,
+        0.027338825166225433,
+        0.03110715188086033,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1041658217,
+        1021310380,
+        1023333485,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1284,
+        214
+      ],
+      "nativeLineBits": [
+        1065275158,
+        1065372730
+      ],
+      "vulkanLineBits": [
+        1065275158,
+        1065372730
+      ],
+      "nativeLines": [
+        0.9953473806381226,
+        1.002326250076294
+      ],
+      "vulkanLines": [
+        0.9953473806381226,
+        1.002326250076294
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.034497618675232,
+        0.19846121966838837,
+        0.21740233898162842,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065642603,
+        1045117291,
+        1046388408,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.1483941227197647,
+        0.028590502217411995,
+        0.03181080520153046,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1041757345,
+        1021982369,
+        1023560716,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1282,
+        215
+      ],
+      "nativeLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "vulkanLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "nativeLines": [
+        1.0,
+        1.0
+      ],
+      "vulkanLines": [
+        1.0,
+        1.0
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.9910361766815186,
+        0.18260397017002106,
+        0.20674720406532288,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065202828,
+        1044053129,
+        1045673354,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.14072512090206146,
+        0.02608405239880085,
+        0.03017551824450493,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1041242687,
+        1020636729,
+        1022833318,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1283,
+        216
+      ],
+      "nativeLineBits": [
+        1065112541,
+        1065413385
+      ],
+      "vulkanLineBits": [
+        1065112541,
+        1065413385
+      ],
+      "nativeLines": [
+        0.9856546521186829,
+        1.007172703742981
+      ],
+      "vulkanLines": [
+        0.9856546521186829,
+        1.007172703742981
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        1.00130295753479,
+        0.19053009152412415,
+        0.20890997350215912,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1065364146,
+        1044585042,
+        1045818495,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.13314659893512726,
+        0.025455089285969734,
+        0.028392860665917397,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1040734101,
+        1020299057,
+        1021876261,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1264,
+        217
+      ],
+      "nativeLineBits": [
+        1065329236,
+        1065359211
+      ],
+      "vulkanLineBits": [
+        1065329235,
+        1065359211
+      ],
+      "nativeLines": [
+        0.9985706806182861,
+        1.000714659690857
+      ],
+      "vulkanLines": [
+        0.9985706210136414,
+        1.000714659690857
+      ],
+      "lineExact": false,
+      "maximumLineAbsolute": 5.960464477539063e-08,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.8983052968978882,
+        0.16341321170330048,
+        0.19096089899539948,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1063647062,
+        1042765259,
+        1044613953,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.12133292853832245,
+        0.02227691188454628,
+        0.026909245178103447,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1039695206,
+        1018592786,
+        1021079751,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1367,
+        261
+      ],
+      "nativeLineBits": [
+        1065178963,
+        1065396779
+      ],
+      "vulkanLineBits": [
+        1065178963,
+        1065396779
+      ],
+      "nativeLines": [
+        0.9896137118339539,
+        1.0051931142807007
+      ],
+      "vulkanLines": [
+        0.9896137118339539,
+        1.0051931142807007
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.3239750564098358,
+        0.02959122508764267,
+        0.03522821515798569,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1051058191,
+        1022519628,
+        1024478070,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.04732233285903931,
+        0.004494690336287022,
+        0.00608398113399744,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1027724560,
+        999508018,
+        1002920994,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1367,
+        262
+      ],
+      "nativeLineBits": [
+        1065195846,
+        1065392558
+      ],
+      "vulkanLineBits": [
+        1065195847,
+        1065392558
+      ],
+      "nativeLines": [
+        0.9906200170516968,
+        1.0046899318695068
+      ],
+      "vulkanLines": [
+        0.9906200766563416,
+        1.0046899318695068
+      ],
+      "lineExact": false,
+      "maximumLineAbsolute": 5.960464477539063e-08,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.32537323236465454,
+        0.029371563345193863,
+        0.03508651629090309,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1051105106,
+        1022401698,
+        1024440033,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.04746666178107262,
+        0.00445464625954628,
+        0.006046270485967398,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1027763303,
+        999422024,
+        1002840011,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1322,
+        263
+      ],
+      "nativeLineBits": [
+        1065334317,
+        1065357941
+      ],
+      "vulkanLineBits": [
+        1065353216,
+        1065353216
+      ],
+      "nativeLines": [
+        0.9988735318183899,
+        1.0005632638931274
+      ],
+      "vulkanLines": [
+        1.0,
+        1.0
+      ],
+      "lineExact": false,
+      "maximumLineAbsolute": 0.0011264681816101074,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.3559514582157135,
+        0.06728292256593704,
+        0.07173866033554077,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1052131141,
+        1032440737,
+        1033038776,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.028566574677824974,
+        0.006303578149527311,
+        0.008145956322550774,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1021969523,
+        1003392575,
+        1006991006,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1380,
+        276
+      ],
+      "nativeLineBits": [
+        1065348078,
+        1065354500
+      ],
+      "vulkanLineBits": [
+        1065348078,
+        1065354500
+      ],
+      "nativeLines": [
+        0.999693751335144,
+        1.0001530647277832
+      ],
+      "vulkanLines": [
+        0.999693751335144,
+        1.0001530647277832
+      ],
+      "lineExact": true,
+      "maximumLineAbsolute": 0.0,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.38542622327804565,
+        0.0442364364862442,
+        0.052846115082502365,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1053120150,
+        1026896196,
+        1029207339,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.09781138598918915,
+        0.011374603025615215,
+        0.01422885898500681,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1036538198,
+        1010457739,
+        1013522473,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1193,
+        295
+      ],
+      "nativeLineBits": [
+        1065348588,
+        1065354373
+      ],
+      "vulkanLineBits": [
+        1065338263,
+        1065356954
+      ],
+      "nativeLines": [
+        0.9997241497039795,
+        1.0001379251480103
+      ],
+      "vulkanLines": [
+        0.9991087317466736,
+        1.0004456043243408
+      ],
+      "lineExact": false,
+      "maximumLineAbsolute": 0.0006154179573059082,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.3109927177429199,
+        0.036542534828186035,
+        0.04630640149116516,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1050622576,
+        1024830880,
+        1027451848,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.035445574671030045,
+        0.004676892422139645,
+        0.005867448635399342,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1024536417,
+        999899294,
+        1002455994,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1193,
+        296
+      ],
+      "nativeLineBits": [
+        1065346211,
+        1065354967
+      ],
+      "vulkanLineBits": [
+        1065338894,
+        1065356796
+      ],
+      "nativeLines": [
+        0.9995824694633484,
+        1.0002087354660034
+      ],
+      "vulkanLines": [
+        0.9991463422775269,
+        1.0004267692565918
+      ],
+      "lineExact": false,
+      "maximumLineAbsolute": 0.0004361271858215332,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.2859818637371063,
+        0.032794397324323654,
+        0.04086954891681671,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1049783351,
+        1023824747,
+        1025992404,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.03071814402937889,
+        0.0039029442705214024,
+        0.004990844056010246,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1023124638,
+        998230154,
+        1000573500,
+        1065353216
+      ]
+    },
+    {
+      "pixel": [
+        1193,
+        297
+      ],
+      "nativeLineBits": [
+        1065345398,
+        1065355170
+      ],
+      "vulkanLineBits": [
+        1065340726,
+        1065356338
+      ],
+      "nativeLines": [
+        0.999534010887146,
+        1.0002329349517822
+      ],
+      "vulkanLines": [
+        0.9992555379867554,
+        1.0003721714019775
+      ],
+      "lineExact": false,
+      "maximumLineAbsolute": 0.000278472900390625,
+      "nativeCompositeDiffuseBeforeStripe": [
+        0.25066131353378296,
+        0.024699876084923744,
+        0.03447175770998001,
+        1.0
+      ],
+      "nativeCompositeDiffuseBeforeStripeBits": [
+        1048598190,
+        1019893605,
+        1024275010,
+        1065353216
+      ],
+      "vulkanAmbientDiffuseBeforeStripe": [
+        0.025873778387904167,
+        0.00301010487601161,
+        0.00402415357530117,
+        1.0
+      ],
+      "vulkanAmbientDiffuseBeforeStripeBits": [
+        1020523839,
+        994395438,
+        998497548,
+        1065353216
+      ]
+    }
+  ],
+  "qualification": {
+    "status": "qualified",
+    "points": [
+      [
+        1306,
+        156
+      ],
+      [
+        1278,
+        163
+      ],
+      [
+        1313,
+        168
+      ],
+      [
+        1319,
+        172
+      ],
+      [
+        1267,
+        211
+      ],
+      [
+        1282,
+        211
+      ],
+      [
+        1283,
+        211
+      ],
+      [
+        1284,
+        211
+      ],
+      [
+        1268,
+        212
+      ],
+      [
+        1281,
+        212
+      ],
+      [
+        1282,
+        212
+      ],
+      [
+        1283,
+        212
+      ],
+      [
+        1284,
+        212
+      ],
+      [
+        1268,
+        213
+      ],
+      [
+        1281,
+        213
+      ],
+      [
+        1282,
+        213
+      ],
+      [
+        1283,
+        213
+      ],
+      [
+        1284,
+        213
+      ],
+      [
+        1269,
+        214
+      ],
+      [
+        1281,
+        214
+      ],
+      [
+        1284,
+        214
+      ],
+      [
+        1282,
+        215
+      ],
+      [
+        1283,
+        216
+      ],
+      [
+        1264,
+        217
+      ],
+      [
+        1367,
+        261
+      ],
+      [
+        1367,
+        262
+      ],
+      [
+        1322,
+        263
+      ],
+      [
+        1380,
+        276
+      ],
+      [
+        1193,
+        295
+      ],
+      [
+        1193,
+        296
+      ],
+      [
+        1193,
+        297
+      ]
+    ],
+    "captures": [
+      {
+        "label": "native",
+        "event": 950,
+        "sourceSha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee",
+        "runs": [
+          {
+            "case": {
+              "name": "ambient-0-0",
+              "field": "ambient",
+              "component": 0,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "a72dc959d766bf7e2f8e572d7f229bd17bf78455d8e2c7ebf66942300edbe5ff",
+            "values": [
+              307,
+              3430,
+              2261,
+              390,
+              283,
+              3798,
+              1302,
+              2233,
+              3169,
+              3771,
+              3594,
+              2869,
+              2877,
+              2303,
+              1515,
+              3556,
+              2774,
+              254,
+              3051,
+              3538,
+              2667,
+              1164,
+              2738,
+              1878,
+              15,
+              1874,
+              3909,
+              1686,
+              2672,
+              3127,
+              1710
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-0-12",
+              "field": "ambient",
+              "component": 0,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "63a6cc629a25c7678d8cafbdf1a804c089fdeb750eaeadd8bcb8b5a6a7c3a397",
+            "values": [
+              1007,
+              980,
+              641,
+              800,
+              2101,
+              2097,
+              2162,
+              2158,
+              2022,
+              2141,
+              2103,
+              2135,
+              2158,
+              2037,
+              2119,
+              2090,
+              2120,
+              2144,
+              1795,
+              2088,
+              2118,
+              2011,
+              2050,
+              1631,
+              2654,
+              2665,
+              2915,
+              3157,
+              2547,
+              2342,
+              2053
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-0-24",
+              "field": "ambient",
+              "component": 0,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "bbd16b3cab16da5d45403c2fa96d8453053b84d6d0512e88934467ef931284e4",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-1-0",
+              "field": "ambient",
+              "component": 1,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "061013f9eb1ede99cf42cba39aea809b116eba7995ae5ab0716003795cb9c61a",
+            "values": [
+              1601,
+              1393,
+              3214,
+              3660,
+              2259,
+              2277,
+              3213,
+              157,
+              363,
+              927,
+              2279,
+              2280,
+              3182,
+              433,
+              3622,
+              1371,
+              2922,
+              3077,
+              533,
+              3246,
+              2411,
+              3209,
+              2642,
+              1483,
+              2380,
+              3234,
+              2977,
+              324,
+              3488,
+              875,
+              1893
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-1-12",
+              "field": "ambient",
+              "component": 1,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "8b9e216e95ab7921df565948949e7c1ecebd0f64ab2efc5ea552a35eef529b35",
+            "values": [
+              3676,
+              3318,
+              2881,
+              3010,
+              932,
+              1069,
+              1345,
+              1382,
+              559,
+              1128,
+              1005,
+              1162,
+              1371,
+              553,
+              1059,
+              982,
+              1142,
+              1347,
+              341,
+              1046,
+              1203,
+              943,
+              1073,
+              629,
+              3878,
+              3849,
+              2204,
+              851,
+              346,
+              101,
+              3237
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-1-24",
+              "field": "ambient",
+              "component": 1,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "e0d3c4eb971df029797ac41ff561589320ce3db6a898ea1cf1906af37a9ed959",
+            "values": [
+              61,
+              61,
+              61,
+              61,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              60,
+              60,
+              61,
+              61,
+              61,
+              61,
+              60
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-2-0",
+              "field": "ambient",
+              "component": 2,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "b2cda98b9fc5723f041ea2d37b9b6729f4a3456bc3f943c2463fffdb4d05d8b9",
+            "values": [
+              3205,
+              3330,
+              1196,
+              1007,
+              3483,
+              100,
+              1408,
+              489,
+              1003,
+              2382,
+              645,
+              830,
+              2797,
+              1439,
+              2440,
+              2124,
+              2490,
+              487,
+              3346,
+              3003,
+              3768,
+              1418,
+              3199,
+              2881,
+              2934,
+              1761,
+              3000,
+              1323,
+              3016,
+              1748,
+              578
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-2-12",
+              "field": "ambient",
+              "component": 2,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "fd7c3a9bd90713ad7ec3e54b2787cd4eafc175589b82b939dda277f114df4bb3",
+            "values": [
+              179,
+              26,
+              3403,
+              3798,
+              1227,
+              1400,
+              1675,
+              1680,
+              965,
+              1462,
+              1417,
+              1470,
+              1537,
+              963,
+              1440,
+              1409,
+              1448,
+              1511,
+              856,
+              1412,
+              1513,
+              1339,
+              1374,
+              1080,
+              260,
+              251,
+              2350,
+              1415,
+              986,
+              630,
+              211
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-2-24",
+              "field": "ambient",
+              "component": 2,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "5ac07be09135dc1069cada98986b76caeae1e1fc2f82188d15e92093fd458a4f",
+            "values": [
+              62,
+              62,
+              61,
+              61,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-3-0",
+              "field": "ambient",
+              "component": 3,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "8ccb04bf2440a381e68b30863f7ed1eef105d65240616a3b0b1bb3650aa5184c",
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-3-12",
+              "field": "ambient",
+              "component": 3,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "3a09f274e494f185a5184529b5a626d3fae2df1425f5916293712e077b2e9262",
+            "values": [
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-3-24",
+              "field": "ambient",
+              "component": 3,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "045480eb039ca5c6c5ffdd396a124dc66455b80264e38e7c71b8d6e76f94d196",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "line-0-0",
+              "field": "line",
+              "component": 0,
+              "components": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "a75952f36ede42ab3ad70ffa591e9906cd791d9751845a4414eabfe5bdb9d0fd",
+            "values": [
+              1223,
+              0,
+              3768,
+              2919,
+              341,
+              0,
+              427,
+              899,
+              1883,
+              0,
+              0,
+              3456,
+              580,
+              2829,
+              0,
+              0,
+              150,
+              2329,
+              3827,
+              0,
+              3862,
+              0,
+              989,
+              596,
+              1875,
+              2374,
+              1581,
+              3054,
+              3564,
+              1187,
+              374
+            ]
+          },
+          {
+            "case": {
+              "name": "line-0-12",
+              "field": "line",
+              "component": 0,
+              "components": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "b67aee66ac8b7cff4afa00cf23ef97ee65a2000c7ef3c6ef574332eed662743e",
+            "values": [
+              2047,
+              2048,
+              2047,
+              2047,
+              2043,
+              2048,
+              2020,
+              2036,
+              2038,
+              2048,
+              2048,
+              2025,
+              2035,
+              2040,
+              2048,
+              2048,
+              2010,
+              2034,
+              2029,
+              2048,
+              2028,
+              2048,
+              1989,
+              2042,
+              2005,
+              2009,
+              2043,
+              2046,
+              2046,
+              2046,
+              2046
+            ]
+          },
+          {
+            "case": {
+              "name": "line-0-24",
+              "field": "line",
+              "component": 0,
+              "components": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "6f8e4a5a9cfd8f9356f8e62b29e4e76a6a6969a0d3bbe44d63e9d32156255a1a",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "line-1-0",
+              "field": "line",
+              "component": 1,
+              "components": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "d91b9ec2cf38355ce0753114e0506e8eaeb81ea89f76cb4d5d7c2af7b0368cc9",
+            "values": [
+              718,
+              0,
+              82,
+              294,
+              939,
+              0,
+              3989,
+              3871,
+              1577,
+              0,
+              0,
+              2208,
+              879,
+              3389,
+              0,
+              0,
+              2010,
+              1466,
+              2115,
+              0,
+              3130,
+              0,
+              2825,
+              1899,
+              2603,
+              2478,
+              629,
+              1284,
+              1157,
+              1751,
+              1954
+            ]
+          },
+          {
+            "case": {
+              "name": "line-1-12",
+              "field": "line",
+              "component": 1,
+              "components": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "e851bccfbe9656ad9372ef1753b1ac1ae79269d1c7b50c7163289eae40c7cf3d",
+            "values": [
+              2048,
+              2048,
+              2048,
+              2048,
+              2049,
+              2048,
+              2054,
+              2050,
+              2050,
+              2048,
+              2048,
+              2053,
+              2051,
+              2049,
+              2048,
+              2048,
+              2057,
+              2051,
+              2052,
+              2048,
+              2052,
+              2048,
+              2062,
+              2049,
+              2058,
+              2057,
+              2049,
+              2048,
+              2048,
+              2048,
+              2048
+            ]
+          },
+          {
+            "case": {
+              "name": "line-1-24",
+              "field": "line",
+              "component": 1,
+              "components": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "1ecbdd60831e3409d794ca90b0f0b9dd8a0d837fd936715721bfcde0583dc430",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          }
+        ],
+        "samplers": [
+          {
+            "object": "ResourceId::318",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ],
+            "filter": {
+              "minify": "FilterMode.Point",
+              "magnify": "FilterMode.Point",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Normal"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1000.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Never",
+            "unnormalized": false,
+            "shader_binding_index": 0,
+            "array_element": 0
+          },
+          {
+            "object": "ResourceId::365",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ],
+            "filter": {
+              "minify": "FilterMode.Linear",
+              "magnify": "FilterMode.Linear",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Normal"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1000.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Never",
+            "unnormalized": false,
+            "shader_binding_index": 1,
+            "array_element": 0
+          },
+          {
+            "object": "ResourceId::338",
+            "address": [
+              "AddressMode.Wrap",
+              "AddressMode.Wrap",
+              "AddressMode.Wrap"
+            ],
+            "filter": {
+              "minify": "FilterMode.Linear",
+              "magnify": "FilterMode.Linear",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Normal"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1000.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Never",
+            "unnormalized": false,
+            "shader_binding_index": 2,
+            "array_element": 0
+          },
+          {
+            "object": "ResourceId::960",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ],
+            "filter": {
+              "minify": "FilterMode.Linear",
+              "magnify": "FilterMode.Linear",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Comparison"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1000.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Greater",
+            "unnormalized": false,
+            "shader_binding_index": 3,
+            "array_element": 0
+          }
+        ],
+        "declaredResources": [
+          {
+            "name": "structuredbuffer0",
+            "binding": 0,
+            "index": 0
+          },
+          {
+            "name": "structuredbuffer1",
+            "binding": 1,
+            "index": 1
+          },
+          {
+            "name": "bytebuffer2",
+            "binding": 2,
+            "index": 2
+          },
+          {
+            "name": "texture3",
+            "binding": 3,
+            "index": 3
+          },
+          {
+            "name": "texture4",
+            "binding": 4,
+            "index": 4
+          },
+          {
+            "name": "texture5",
+            "binding": 5,
+            "index": 5
+          },
+          {
+            "name": "texture6",
+            "binding": 6,
+            "index": 6
+          },
+          {
+            "name": "texture7",
+            "binding": 7,
+            "index": 7
+          },
+          {
+            "name": "texture8",
+            "binding": 8,
+            "index": 8
+          },
+          {
+            "name": "texture9",
+            "binding": 9,
+            "index": 9
+          },
+          {
+            "name": "texture10",
+            "binding": 10,
+            "index": 10
+          },
+          {
+            "name": "texture11",
+            "binding": 11,
+            "index": 11
+          },
+          {
+            "name": "texture12",
+            "binding": 12,
+            "index": 12
+          },
+          {
+            "name": "texture13",
+            "binding": 13,
+            "index": 13
+          },
+          {
+            "name": "texture14",
+            "binding": 14,
+            "index": 14
+          },
+          {
+            "name": "texture15",
+            "binding": 15,
+            "index": 15
+          },
+          {
+            "name": "texture16",
+            "binding": 16,
+            "index": 16
+          },
+          {
+            "name": "texture17",
+            "binding": 17,
+            "index": 17
+          },
+          {
+            "name": "texture18",
+            "binding": 18,
+            "index": 18
+          },
+          {
+            "name": "texture19",
+            "binding": 19,
+            "index": 19
+          },
+          {
+            "name": "texture20",
+            "binding": 20,
+            "index": 20
+          }
+        ],
+        "resources": [
+          {
+            "index": 0,
+            "arrayElement": 0,
+            "resource": "ResourceId::141964",
+            "format": "Undefined"
+          },
+          {
+            "index": 1,
+            "arrayElement": 0,
+            "resource": "ResourceId::399",
+            "format": "Undefined"
+          },
+          {
+            "index": 2,
+            "arrayElement": 0,
+            "resource": "ResourceId::609",
+            "format": "R32_TYPELESS"
+          },
+          {
+            "index": 3,
+            "arrayElement": 0,
+            "resource": "ResourceId::141928",
+            "format": "R32_FLOAT"
+          },
+          {
+            "index": 4,
+            "arrayElement": 0,
+            "resource": "ResourceId::14647",
+            "format": "R16_UNORM"
+          },
+          {
+            "index": 5,
+            "arrayElement": 0,
+            "resource": "ResourceId::141931",
+            "format": "R8G8_UNORM"
+          },
+          {
+            "index": 6,
+            "arrayElement": 0,
+            "resource": "ResourceId::11293",
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "index": 7,
+            "arrayElement": 0,
+            "resource": "ResourceId::11296",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 8,
+            "arrayElement": 0,
+            "resource": "ResourceId::11299",
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "index": 9,
+            "arrayElement": 0,
+            "resource": "ResourceId::11302",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 10,
+            "arrayElement": 0,
+            "resource": "ResourceId::11305",
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "index": 11,
+            "arrayElement": 0,
+            "resource": "ResourceId::11308",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 12,
+            "arrayElement": 0,
+            "resource": "ResourceId::20170",
+            "format": "BC7_UNORM"
+          },
+          {
+            "index": 13,
+            "arrayElement": 0,
+            "resource": "ResourceId::6196",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 14,
+            "arrayElement": 0,
+            "resource": "ResourceId::13524",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 15,
+            "arrayElement": 0,
+            "resource": "ResourceId::701",
+            "format": "BC7_UNORM"
+          },
+          {
+            "index": 16,
+            "arrayElement": 0,
+            "resource": "ResourceId::139677",
+            "format": "BC7_SRGB"
+          },
+          {
+            "index": 17,
+            "arrayElement": 0,
+            "resource": "ResourceId::139671",
+            "format": "BC7_UNORM"
+          },
+          {
+            "index": 18,
+            "arrayElement": 0,
+            "resource": "ResourceId::139862",
+            "format": "BC7_UNORM"
+          },
+          {
+            "index": 19,
+            "arrayElement": 0,
+            "resource": "ResourceId::339",
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "index": 20,
+            "arrayElement": 0,
+            "resource": "ResourceId::345",
+            "format": "R8G8B8A8_SRGB"
+          }
+        ],
+        "rampTexture": {
+          "resource": "ResourceId::6196",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "shaderName": "texture13",
+          "bytes": 1024,
+          "sha256": "6894c4ace481d9f4b2446004dcd7ea349d9f875bbe51a7f5bb5fd76755a50315"
+        },
+        "sourceControlQualified": true,
+        "controlSha256": "dc6dab3c8b7b218269140c9d55af9634b0d903501492795f52858af03130bc50",
+        "baselineRestored": true,
+        "debugMessages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      {
+        "label": "vulkan",
+        "event": 493,
+        "sourceSha256": "5b076fb5ca571c93b5c2d5036ff97b84e0a96d34a81e932c4b4698821a28c4ca",
+        "runs": [
+          {
+            "case": {
+              "name": "ambient-0-0",
+              "field": "ambient",
+              "component": 0,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "f13f2f47f28f3fb14e796b14a97bbf3e75a9859802ad9ede821868f8225f016c",
+            "values": [
+              2940,
+              3661,
+              226,
+              3025,
+              3897,
+              1043,
+              2096,
+              1471,
+              73,
+              2088,
+              2111,
+              3855,
+              3620,
+              501,
+              1526,
+              801,
+              2886,
+              919,
+              1958,
+              361,
+              1185,
+              2623,
+              1941,
+              3430,
+              1296,
+              3175,
+              1139,
+              342,
+              3937,
+              1182,
+              1343
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-0-12",
+              "field": "ambient",
+              "component": 0,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "a9b87d7739d51be18ea1c8d2fccb32a28a191da560a9c57ffc10ef4a960296de",
+            "values": [
+              923,
+              3262,
+              187,
+              236,
+              631,
+              429,
+              494,
+              486,
+              456,
+              516,
+              436,
+              375,
+              467,
+              457,
+              443,
+              386,
+              313,
+              407,
+              164,
+              359,
+              383,
+              257,
+              133,
+              3975,
+              1053,
+              1062,
+              3744,
+              3205,
+              274,
+              4026,
+              3391
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-0-24",
+              "field": "ambient",
+              "component": 0,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "86e16a040d9781dc8a4be8b2f026fc2f8d999ae92064b26b23e79447ac82582f",
+            "values": [
+              62,
+              61,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              61,
+              61,
+              61,
+              60,
+              61,
+              61,
+              60,
+              60
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-1-0",
+              "field": "ambient",
+              "component": 1,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "fc36a99caf75f719813566f1e624f3a7d93dcec0632af94a3d89f9d96c73ab6d",
+            "values": [
+              3438,
+              1121,
+              3590,
+              2972,
+              3204,
+              1576,
+              197,
+              3597,
+              1330,
+              864,
+              3619,
+              281,
+              3212,
+              1083,
+              224,
+              1121,
+              678,
+              1329,
+              3339,
+              1452,
+              1697,
+              3641,
+              1841,
+              3602,
+              2098,
+              2120,
+              3647,
+              3211,
+              158,
+              2186,
+              1326
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-1-12",
+              "field": "ambient",
+              "component": 1,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "429708aabe985a52ff709cb121c3bcb34b035e8ad25b2c196cf518fa2d5f27b1",
+            "values": [
+              3639,
+              1580,
+              2441,
+              2453,
+              3809,
+              3698,
+              4003,
+              4043,
+              3216,
+              3819,
+              3623,
+              3657,
+              4001,
+              3198,
+              3670,
+              3546,
+              3567,
+              3905,
+              2761,
+              3583,
+              3747,
+              3418,
+              3336,
+              2919,
+              2356,
+              2335,
+              3304,
+              933,
+              2452,
+              2044,
+              1108
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-1-24",
+              "field": "ambient",
+              "component": 1,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "b44c06422dc44489552feb5a3a2b4540d44600c51f379a7a8b3a1928a1b06145",
+            "values": [
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              59,
+              59,
+              59,
+              60,
+              59,
+              59,
+              59
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-2-0",
+              "field": "ambient",
+              "component": 2,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "730b31506582ddb2929d8eb3314097aa2270bbed8a0c783be4341a17f084fb88",
+            "values": [
+              1310,
+              2579,
+              3737,
+              3070,
+              3558,
+              60,
+              800,
+              3728,
+              2278,
+              3243,
+              1730,
+              2907,
+              474,
+              2849,
+              675,
+              2186,
+              3227,
+              3587,
+              17,
+              1133,
+              3084,
+              678,
+              2085,
+              199,
+              3106,
+              4043,
+              1694,
+              41,
+              954,
+              2620,
+              3340
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-2-12",
+              "field": "ambient",
+              "component": 2,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "d775fcdf0319c35bb82a2224f8dc690d1f4d397ab8119a87d9126baeccaec59f",
+            "values": [
+              294,
+              2390,
+              3083,
+              3270,
+              61,
+              32,
+              173,
+              182,
+              3755,
+              95,
+              45,
+              4060,
+              81,
+              3738,
+              46,
+              13,
+              3964,
+              30,
+              3409,
+              4077,
+              36,
+              3955,
+              3721,
+              3527,
+              3189,
+              3169,
+              87,
+              1682,
+              3076,
+              2616,
+              2109
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-2-24",
+              "field": "ambient",
+              "component": 2,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "daac04e4e2fb671be67bf1417c0e6118f0b4ff1b06138400cbe7f5a44a9b8b75",
+            "values": [
+              61,
+              60,
+              60,
+              60,
+              61,
+              61,
+              61,
+              61,
+              60,
+              61,
+              61,
+              60,
+              61,
+              60,
+              61,
+              61,
+              60,
+              61,
+              60,
+              60,
+              61,
+              60,
+              60,
+              60,
+              59,
+              59,
+              60,
+              60,
+              59,
+              59,
+              59
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-3-0",
+              "field": "ambient",
+              "component": 3,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "106a96e1b74cfcfbb24c41fd48c4287e6afe4db6c40f70947ef335d6876f60a4",
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-3-12",
+              "field": "ambient",
+              "component": 3,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "42ae865dad5f01b97810fb80464f022f02663d61b6dface94ada487110e47502",
+            "values": [
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048
+            ]
+          },
+          {
+            "case": {
+              "name": "ambient-3-24",
+              "field": "ambient",
+              "component": 3,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "623a3bf5b80b85917a5270509a7979d4f444a7bf979d50bb5ae3e27d7845b941",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "line-0-0",
+              "field": "line",
+              "component": 0,
+              "components": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "5651d26fb9b43469695096e5d59dabc6b86d43ed824f94a0724ac030b87a6fd0",
+            "values": [
+              1250,
+              0,
+              3768,
+              2919,
+              342,
+              0,
+              433,
+              900,
+              1885,
+              0,
+              0,
+              3456,
+              580,
+              2829,
+              0,
+              0,
+              150,
+              2329,
+              3827,
+              0,
+              3862,
+              0,
+              989,
+              595,
+              1875,
+              2375,
+              0,
+              3054,
+              1431,
+              2062,
+              3894
+            ]
+          },
+          {
+            "case": {
+              "name": "line-0-12",
+              "field": "line",
+              "component": 0,
+              "components": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "79a9ef10c50d2ca780f0bba966cc274cdd2c6274c34f77e1cb896e4890714c55",
+            "values": [
+              2047,
+              2048,
+              2047,
+              2047,
+              2043,
+              2048,
+              2020,
+              2036,
+              2038,
+              2048,
+              2048,
+              2025,
+              2035,
+              2040,
+              2048,
+              2048,
+              2010,
+              2034,
+              2029,
+              2048,
+              2028,
+              2048,
+              1989,
+              2042,
+              2005,
+              2009,
+              2048,
+              2046,
+              2044,
+              2044,
+              2044
+            ]
+          },
+          {
+            "case": {
+              "name": "line-0-24",
+              "field": "line",
+              "component": 0,
+              "components": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "005c561f0fb8da6196a54a6e18be16e6992c183f1ac35d8a8e5c6c0932ac9e40",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "line-1-0",
+              "field": "line",
+              "component": 1,
+              "components": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "cb04684fcef39213a19be0d9c442acb9eec9c67408a31a0f19ecd2d48f75bec3",
+            "values": [
+              712,
+              0,
+              82,
+              294,
+              938,
+              0,
+              3988,
+              3871,
+              1577,
+              0,
+              0,
+              2208,
+              879,
+              3389,
+              0,
+              0,
+              2010,
+              1466,
+              2115,
+              0,
+              3130,
+              0,
+              2825,
+              1899,
+              2603,
+              2478,
+              0,
+              1284,
+              3738,
+              3580,
+              3122
+            ]
+          },
+          {
+            "case": {
+              "name": "line-1-12",
+              "field": "line",
+              "component": 1,
+              "components": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "f11f5f88808a6d56a1e2b6284033818e5da438a574ecc5efb74a4ed79403af46",
+            "values": [
+              2048,
+              2048,
+              2048,
+              2048,
+              2049,
+              2048,
+              2054,
+              2050,
+              2050,
+              2048,
+              2048,
+              2053,
+              2051,
+              2049,
+              2048,
+              2048,
+              2057,
+              2051,
+              2052,
+              2048,
+              2052,
+              2048,
+              2062,
+              2049,
+              2058,
+              2057,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048
+            ]
+          },
+          {
+            "case": {
+              "name": "line-1-24",
+              "field": "line",
+              "component": 1,
+              "components": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "deb15a08994ff0c5f14afcd0a90f0ee2cbf7d171e4f2dcf419421d1089eed8a9",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          }
+        ],
+        "samplers": [
+          {
+            "object": "ResourceId::152",
+            "address": [
+              "AddressMode.ClampBorder",
+              "AddressMode.ClampBorder",
+              "AddressMode.ClampBorder"
+            ],
+            "filter": {
+              "minify": "FilterMode.Linear",
+              "magnify": "FilterMode.Linear",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Normal"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Never",
+            "unnormalized": false,
+            "shader_binding_index": 0,
+            "array_element": 0
+          }
+        ],
+        "declaredResources": [
+          {
+            "name": "baseColorTexture",
+            "binding": 1,
+            "index": 0
+          },
+          {
+            "name": "normalTexture",
+            "binding": 2,
+            "index": 1
+          },
+          {
+            "name": "metallicRoughnessTexture",
+            "binding": 3,
+            "index": 2
+          },
+          {
+            "name": "environmentTexture",
+            "binding": 4,
+            "index": 3
+          },
+          {
+            "name": "specularEmissiveTexture",
+            "binding": 5,
+            "index": 4
+          },
+          {
+            "name": "styleMaskTexture",
+            "binding": 6,
+            "index": 5
+          },
+          {
+            "name": "matcapTexture",
+            "binding": 7,
+            "index": 6
+          },
+          {
+            "name": "hairDataTexture",
+            "binding": 8,
+            "index": 7
+          },
+          {
+            "name": "mainShadowDepth",
+            "binding": 9,
+            "index": 8
+          },
+          {
+            "name": "toonRampTexture",
+            "binding": 11,
+            "index": 9
+          },
+          {
+            "name": "faceSdfTexture",
+            "binding": 12,
+            "index": 10
+          },
+          {
+            "name": "overlaySceneDepth",
+            "binding": 18,
+            "index": 11
+          },
+          {
+            "name": "opaqueSceneColor",
+            "binding": 19,
+            "index": 12
+          },
+          {
+            "name": "reflectionProbeTexture",
+            "binding": 23,
+            "index": 13
+          },
+          {
+            "name": "shadowColorLutTexture",
+            "binding": 25,
+            "index": 14
+          },
+          {
+            "name": "objectShadowDepth",
+            "binding": 29,
+            "index": 15
+          }
+        ],
+        "resources": [
+          {
+            "index": 0,
+            "arrayElement": 0,
+            "resource": "ResourceId::752",
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "index": 1,
+            "arrayElement": 0,
+            "resource": "ResourceId::635",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 2,
+            "arrayElement": 0,
+            "resource": "ResourceId::648",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 3,
+            "arrayElement": 0,
+            "resource": "ResourceId::934",
+            "format": "R16G16B16A16_FLOAT"
+          },
+          {
+            "index": 4,
+            "arrayElement": 0,
+            "resource": "ResourceId::343",
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "index": 5,
+            "arrayElement": 0,
+            "resource": "ResourceId::765",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 6,
+            "arrayElement": 0,
+            "resource": "ResourceId::778",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 7,
+            "arrayElement": 0,
+            "resource": "ResourceId::791",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 8,
+            "arrayElement": 0,
+            "resource": "ResourceId::149",
+            "format": "D32"
+          },
+          {
+            "index": 9,
+            "arrayElement": 0,
+            "resource": "ResourceId::982",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 10,
+            "arrayElement": 0,
+            "resource": "ResourceId::804",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 11,
+            "arrayElement": 0,
+            "resource": "ResourceId::1044",
+            "format": "R32_FLOAT"
+          },
+          {
+            "index": 12,
+            "arrayElement": 0,
+            "resource": "ResourceId::1041",
+            "format": "R16G16B16A16_FLOAT"
+          },
+          {
+            "index": 13,
+            "arrayElement": 0,
+            "resource": "ResourceId::968",
+            "format": "R16G16B16A16_FLOAT"
+          },
+          {
+            "index": 14,
+            "arrayElement": 0,
+            "resource": "ResourceId::817",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 15,
+            "arrayElement": 0,
+            "resource": "ResourceId::1167",
+            "format": "D16"
+          }
+        ],
+        "rampTexture": {
+          "resource": "ResourceId::765",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "shaderName": "styleMaskTexture",
+          "bytes": 1024,
+          "sha256": "6894c4ace481d9f4b2446004dcd7ea349d9f875bbe51a7f5bb5fd76755a50315"
+        },
+        "sourceControlQualified": true,
+        "controlSha256": "5ee2fcf833c8d1c2363c26aa87ad4c092c6c3895bd2c086228fa1b3a3c4d2abf",
+        "baselineRestored": true,
+        "debugMessages": []
+      }
+    ]
+  },
+  "scope": "Stripe intensity and saturation are corresponding scalar terms. Native r16 is composite diffuse; Vulkan ambientDiffuse is the ambient-only term. Their raw vectors have different scopes and must not be treated as a color-error comparison. Fourth components are native scene visibility and a Vulkan constant-one sentinel.",
+  "largeChromaStableMaterialGroup": {
+    "points": 20,
+    "lineExactPoints": 15,
+    "maximumLineAbsolute": 3.5762786865234375e-07
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 172.7029999999795,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-023220-hair-stripe-modulation-94006f\\run.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-023220-hair-stripe-modulation-94006f\\tmp"
+  },
+  "archiveFiles": [
+    {
+      "path": "ambient-0-0.dxbc",
+      "bytes": 68164,
+      "sha256": "a72dc959d766bf7e2f8e572d7f229bd17bf78455d8e2c7ebf66942300edbe5ff"
+    },
+    {
+      "path": "ambient-0-0.spv",
+      "bytes": 472408,
+      "sha256": "f13f2f47f28f3fb14e796b14a97bbf3e75a9859802ad9ede821868f8225f016c"
+    },
+    {
+      "path": "ambient-0-12.dxbc",
+      "bytes": 68164,
+      "sha256": "63a6cc629a25c7678d8cafbdf1a804c089fdeb750eaeadd8bcb8b5a6a7c3a397"
+    },
+    {
+      "path": "ambient-0-12.spv",
+      "bytes": 472408,
+      "sha256": "a9b87d7739d51be18ea1c8d2fccb32a28a191da560a9c57ffc10ef4a960296de"
+    },
+    {
+      "path": "ambient-0-24.dxbc",
+      "bytes": 68248,
+      "sha256": "bbd16b3cab16da5d45403c2fa96d8453053b84d6d0512e88934467ef931284e4"
+    },
+    {
+      "path": "ambient-0-24.spv",
+      "bytes": 472548,
+      "sha256": "86e16a040d9781dc8a4be8b2f026fc2f8d999ae92064b26b23e79447ac82582f"
+    },
+    {
+      "path": "ambient-1-0.dxbc",
+      "bytes": 68164,
+      "sha256": "061013f9eb1ede99cf42cba39aea809b116eba7995ae5ab0716003795cb9c61a"
+    },
+    {
+      "path": "ambient-1-0.spv",
+      "bytes": 472408,
+      "sha256": "fc36a99caf75f719813566f1e624f3a7d93dcec0632af94a3d89f9d96c73ab6d"
+    },
+    {
+      "path": "ambient-1-12.dxbc",
+      "bytes": 68164,
+      "sha256": "8b9e216e95ab7921df565948949e7c1ecebd0f64ab2efc5ea552a35eef529b35"
+    },
+    {
+      "path": "ambient-1-12.spv",
+      "bytes": 472408,
+      "sha256": "429708aabe985a52ff709cb121c3bcb34b035e8ad25b2c196cf518fa2d5f27b1"
+    },
+    {
+      "path": "ambient-1-24.dxbc",
+      "bytes": 68248,
+      "sha256": "e0d3c4eb971df029797ac41ff561589320ce3db6a898ea1cf1906af37a9ed959"
+    },
+    {
+      "path": "ambient-1-24.spv",
+      "bytes": 472548,
+      "sha256": "b44c06422dc44489552feb5a3a2b4540d44600c51f379a7a8b3a1928a1b06145"
+    },
+    {
+      "path": "ambient-2-0.dxbc",
+      "bytes": 68164,
+      "sha256": "b2cda98b9fc5723f041ea2d37b9b6729f4a3456bc3f943c2463fffdb4d05d8b9"
+    },
+    {
+      "path": "ambient-2-0.spv",
+      "bytes": 472408,
+      "sha256": "730b31506582ddb2929d8eb3314097aa2270bbed8a0c783be4341a17f084fb88"
+    },
+    {
+      "path": "ambient-2-12.dxbc",
+      "bytes": 68164,
+      "sha256": "fd7c3a9bd90713ad7ec3e54b2787cd4eafc175589b82b939dda277f114df4bb3"
+    },
+    {
+      "path": "ambient-2-12.spv",
+      "bytes": 472408,
+      "sha256": "d775fcdf0319c35bb82a2224f8dc690d1f4d397ab8119a87d9126baeccaec59f"
+    },
+    {
+      "path": "ambient-2-24.dxbc",
+      "bytes": 68248,
+      "sha256": "5ac07be09135dc1069cada98986b76caeae1e1fc2f82188d15e92093fd458a4f"
+    },
+    {
+      "path": "ambient-2-24.spv",
+      "bytes": 472548,
+      "sha256": "daac04e4e2fb671be67bf1417c0e6118f0b4ff1b06138400cbe7f5a44a9b8b75"
+    },
+    {
+      "path": "ambient-3-0.dxbc",
+      "bytes": 68164,
+      "sha256": "8ccb04bf2440a381e68b30863f7ed1eef105d65240616a3b0b1bb3650aa5184c"
+    },
+    {
+      "path": "ambient-3-0.spv",
+      "bytes": 472408,
+      "sha256": "106a96e1b74cfcfbb24c41fd48c4287e6afe4db6c40f70947ef335d6876f60a4"
+    },
+    {
+      "path": "ambient-3-12.dxbc",
+      "bytes": 68164,
+      "sha256": "3a09f274e494f185a5184529b5a626d3fae2df1425f5916293712e077b2e9262"
+    },
+    {
+      "path": "ambient-3-12.spv",
+      "bytes": 472408,
+      "sha256": "42ae865dad5f01b97810fb80464f022f02663d61b6dface94ada487110e47502"
+    },
+    {
+      "path": "ambient-3-24.dxbc",
+      "bytes": 68248,
+      "sha256": "045480eb039ca5c6c5ffdd396a124dc66455b80264e38e7c71b8d6e76f94d196"
+    },
+    {
+      "path": "ambient-3-24.spv",
+      "bytes": 472548,
+      "sha256": "623a3bf5b80b85917a5270509a7979d4f444a7bf979d50bb5ae3e27d7845b941"
+    },
+    {
+      "path": "analyze.py",
+      "bytes": 3577,
+      "sha256": "0fd5712b712ee18cdfbaea5e0ac547b7e1d73b89d63777b886e4dd16f30568eb"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 434,
+      "sha256": "3dc0351f0688b09ee6b3e5f593fab71beee47e8016733430db2c3f0491eaa983"
+    },
+    {
+      "path": "cases.json",
+      "bytes": 2205,
+      "sha256": "8ae9ce9996fc61385c5b123f13b36d0838504fb77ef782f9cedcdc8829997635"
+    },
+    {
+      "path": "checksum-source.json",
+      "bytes": 464,
+      "sha256": "1d39ff44c3da8c2a736d607211bf6fb3614425895c7b8b94d52c268a49e04907"
+    },
+    {
+      "path": "collect.py",
+      "bytes": 6404,
+      "sha256": "77b7c2bb03839ec88ec8882142b11567e5ecef437f05f71c751a0e28f9201138"
+    },
+    {
+      "path": "D3D12TokenizedProgramFormat.hpp",
+      "bytes": 130378,
+      "sha256": "5862ef7c8b819f0d02ba73563a9df4dc0e89f11fe59d8f598def39122273c626"
+    },
+    {
+      "path": "driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dxbc_util.py",
+      "bytes": 3858,
+      "sha256": "fe1a625c044318c64372608b635dc677dd75aff9c7556fa097656cb0d6f16376"
+    },
+    {
+      "path": "execution.json",
+      "bytes": 566,
+      "sha256": "a2c4802607fc83dea071af998cb8fc652f3ba3a34e263c648876d35efe85bebf"
+    },
+    {
+      "path": "generate.py",
+      "bytes": 8850,
+      "sha256": "49cafacb00bb9f8cb3bf51a32598199cc29f35d776c63942e02a40b7a65ef02c"
+    },
+    {
+      "path": "header-source.json",
+      "bytes": 420,
+      "sha256": "76a466942d51c360b1264e5b81c27e84c4696b5a3ffbbdec39d9b835d5487c2b"
+    },
+    {
+      "path": "LICENSE-RenderDoc.txt",
+      "bytes": 1336,
+      "sha256": "108b3bbf970884d6449b774c0516712c3c6d3f9d3d181a1d2580a2c2cd308db7"
+    },
+    {
+      "path": "line-0-0.dxbc",
+      "bytes": 68164,
+      "sha256": "a75952f36ede42ab3ad70ffa591e9906cd791d9751845a4414eabfe5bdb9d0fd"
+    },
+    {
+      "path": "line-0-0.spv",
+      "bytes": 472408,
+      "sha256": "5651d26fb9b43469695096e5d59dabc6b86d43ed824f94a0724ac030b87a6fd0"
+    },
+    {
+      "path": "line-0-12.dxbc",
+      "bytes": 68164,
+      "sha256": "b67aee66ac8b7cff4afa00cf23ef97ee65a2000c7ef3c6ef574332eed662743e"
+    },
+    {
+      "path": "line-0-12.spv",
+      "bytes": 472408,
+      "sha256": "79a9ef10c50d2ca780f0bba966cc274cdd2c6274c34f77e1cb896e4890714c55"
+    },
+    {
+      "path": "line-0-24.dxbc",
+      "bytes": 68248,
+      "sha256": "6f8e4a5a9cfd8f9356f8e62b29e4e76a6a6969a0d3bbe44d63e9d32156255a1a"
+    },
+    {
+      "path": "line-0-24.spv",
+      "bytes": 472548,
+      "sha256": "005c561f0fb8da6196a54a6e18be16e6992c183f1ac35d8a8e5c6c0932ac9e40"
+    },
+    {
+      "path": "line-1-0.dxbc",
+      "bytes": 68164,
+      "sha256": "d91b9ec2cf38355ce0753114e0506e8eaeb81ea89f76cb4d5d7c2af7b0368cc9"
+    },
+    {
+      "path": "line-1-0.spv",
+      "bytes": 472408,
+      "sha256": "cb04684fcef39213a19be0d9c442acb9eec9c67408a31a0f19ecd2d48f75bec3"
+    },
+    {
+      "path": "line-1-12.dxbc",
+      "bytes": 68164,
+      "sha256": "e851bccfbe9656ad9372ef1753b1ac1ae79269d1c7b50c7163289eae40c7cf3d"
+    },
+    {
+      "path": "line-1-12.spv",
+      "bytes": 472408,
+      "sha256": "f11f5f88808a6d56a1e2b6284033818e5da438a574ecc5efb74a4ed79403af46"
+    },
+    {
+      "path": "line-1-24.dxbc",
+      "bytes": 68248,
+      "sha256": "1ecbdd60831e3409d794ca90b0f0b9dd8a0d837fd936715721bfcde0583dc430"
+    },
+    {
+      "path": "line-1-24.spv",
+      "bytes": 472548,
+      "sha256": "deb15a08994ff0c5f14afcd0a90f0ee2cbf7d171e4f2dcf419421d1089eed8a9"
+    },
+    {
+      "path": "native-original.shader",
+      "bytes": 67836,
+      "sha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee"
+    },
+    {
+      "path": "native-output-control.dxbc",
+      "bytes": 67916,
+      "sha256": "dc6dab3c8b7b218269140c9d55af9634b0d903501492795f52858af03130bc50"
+    },
+    {
+      "path": "native-ramp-top-mip.bin",
+      "bytes": 1024,
+      "sha256": "6894c4ace481d9f4b2446004dcd7ea349d9f875bbe51a7f5bb5fd76755a50315"
+    },
+    {
+      "path": "native-source.shader",
+      "bytes": 67836,
+      "sha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee"
+    },
+    {
+      "path": "native-stored-baseline.zlib",
+      "bytes": 150197,
+      "sha256": "d9422dbf4eb42766c1d536741ce574e2c6a871ed722ffc5107e42ec6b1cbcb0e"
+    },
+    {
+      "path": "process.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "queued.py",
+      "bytes": 878,
+      "sha256": "102f24d5537e3a235a769464c43a149e4dd11df04e5f67f2a5090e9bacd23b94"
+    },
+    {
+      "path": "results.json",
+      "bytes": 88702,
+      "sha256": "5abae7bc86cb1c3758b91229551b667c2a7c83d7bafaefe88c633229f539542c"
+    },
+    {
+      "path": "run.py",
+      "bytes": 969,
+      "sha256": "934357bd34bed69b95311bdd9bc5cd2e9159ec67097ecdd06ae1899a999490bf"
+    },
+    {
+      "path": "state.json",
+      "bytes": 49913,
+      "sha256": "d832f196bdb9ab4f9fe26b3ac568f74dbf76680c124bd66ebaf7489545fd801a"
+    },
+    {
+      "path": "vulkan-ramp-top-mip.bin",
+      "bytes": 1024,
+      "sha256": "6894c4ace481d9f4b2446004dcd7ea349d9f875bbe51a7f5bb5fd76755a50315"
+    },
+    {
+      "path": "vulkan-source.shader",
+      "bytes": 346352,
+      "sha256": "5b076fb5ca571c93b5c2d5036ff97b84e0a96d34a81e932c4b4698821a28c4ca"
+    },
+    {
+      "path": "vulkan-stored-baseline.zlib",
+      "bytes": 281493,
+      "sha256": "c7ffde423b4cc9dfed702725bcc9b8cad608aadbbb6de97fa604a560163a38a0"
+    }
+  ],
+  "archiveBytes": 3476985,
+  "archiveSha256": "e87e7bf38d33d84c5c9b4d2ffad781a06739fc62ab8ae7ec11f8349515734463"
+}

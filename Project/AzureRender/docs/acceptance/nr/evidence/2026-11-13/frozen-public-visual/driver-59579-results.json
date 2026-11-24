@@ -1,0 +1,427 @@
+{
+  "driver": "595.79",
+  "frozenCommit": "eb916a6",
+  "checks": {
+    "reference/indexed": {
+      "character_beauty_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+        "referenceSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e"
+      },
+      "character_albedo_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+        "referenceSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373"
+      },
+      "character_world_normal_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+        "referenceSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+      },
+      "character_material_id_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+        "referenceSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95"
+      },
+      "character_outline_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+        "referenceSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56"
+      },
+      "character_direct_diffuse_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+        "referenceSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4"
+      },
+      "character_face_sdf_closeup": {
+        "changedPixels": 0,
+        "captureSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+        "referenceSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c"
+      }
+    },
+    "reference/fixed": {
+      "character_beauty_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+        "referenceSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e"
+      },
+      "character_albedo_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+        "referenceSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373"
+      },
+      "character_world_normal_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+        "referenceSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+      },
+      "character_material_id_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+        "referenceSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95"
+      },
+      "character_outline_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+        "referenceSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56"
+      },
+      "character_direct_diffuse_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+        "referenceSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4"
+      },
+      "character_face_sdf_closeup": {
+        "changedPixels": 0,
+        "captureSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+        "referenceSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c"
+      }
+    },
+    "reference/cpu-skinning": {
+      "character_beauty_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+        "referenceSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e"
+      },
+      "character_albedo_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+        "referenceSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373"
+      },
+      "character_world_normal_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+        "referenceSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+      },
+      "character_material_id_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+        "referenceSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95"
+      },
+      "character_outline_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+        "referenceSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56"
+      },
+      "character_direct_diffuse_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+        "referenceSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4"
+      },
+      "character_face_sdf_closeup": {
+        "changedPixels": 0,
+        "captureSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+        "referenceSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c"
+      }
+    },
+    "candidate/indexed": {
+      "character_beauty_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+        "referenceSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e"
+      },
+      "character_albedo_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+        "referenceSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373"
+      },
+      "character_world_normal_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+        "referenceSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+      },
+      "character_material_id_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+        "referenceSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95"
+      },
+      "character_outline_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+        "referenceSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56"
+      },
+      "character_direct_diffuse_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+        "referenceSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4"
+      },
+      "character_face_sdf_closeup": {
+        "changedPixels": 0,
+        "captureSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+        "referenceSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c"
+      }
+    },
+    "candidate/fixed": {
+      "character_beauty_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+        "referenceSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e"
+      },
+      "character_albedo_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+        "referenceSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373"
+      },
+      "character_world_normal_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+        "referenceSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+      },
+      "character_material_id_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+        "referenceSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95"
+      },
+      "character_outline_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+        "referenceSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56"
+      },
+      "character_direct_diffuse_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+        "referenceSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4"
+      },
+      "character_face_sdf_closeup": {
+        "changedPixels": 0,
+        "captureSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+        "referenceSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c"
+      }
+    },
+    "candidate/cpu-skinning": {
+      "character_beauty_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+        "referenceSha256": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e"
+      },
+      "character_albedo_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+        "referenceSha256": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373"
+      },
+      "character_world_normal_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+        "referenceSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+      },
+      "character_material_id_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+        "referenceSha256": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95"
+      },
+      "character_outline_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+        "referenceSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56"
+      },
+      "character_direct_diffuse_fullbody": {
+        "changedPixels": 0,
+        "captureSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+        "referenceSha256": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4"
+      },
+      "character_face_sdf_closeup": {
+        "changedPixels": 0,
+        "captureSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+        "referenceSha256": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c"
+      }
+    }
+  },
+  "main": {
+    "release": {
+      "config": "Release",
+      "rendererSha256": "5e5cf51a6b1687e69c469a363000e6156ed4e8b4b817112b197d6d26d1196472",
+      "playerSha256": "8ba1645ea990be7cece11bee467da188010c236abaa16fa1e21968e50cdb19c4",
+      "results": {
+        "visual": {
+          "AzureRender.VisualRegression": {
+            "passed": true,
+            "time": 31.139,
+            "zeroPixels": true
+          },
+          "AzureRender.VisualRegressionLegacyDescriptors": {
+            "passed": true,
+            "time": 25.1622,
+            "zeroPixels": true
+          },
+          "AzureRender.VisualRegressionLegacySkinning": {
+            "passed": true,
+            "time": 21.3906,
+            "zeroPixels": true
+          }
+        },
+        "related": {
+          "AzureRender.StaticSkinningRecording": {
+            "passed": true,
+            "time": 1.59588
+          },
+          "AzureRender.SkinningBatch": {
+            "passed": true,
+            "time": 0.807838
+          },
+          "AzureRender.SkinningGpu": {
+            "passed": true,
+            "time": 1.94216
+          },
+          "AzureRender.MaterialDisplayViewGpu": {
+            "passed": true,
+            "time": 72.6684
+          },
+          "AzureRender.SpatialAntiAliasingGpu": {
+            "passed": true,
+            "time": 80.3174
+          },
+          "AzureRender.SpatialAntiAliasingAuxiliaryGpu": {
+            "passed": true,
+            "time": 46.2577
+          },
+          "AzureRender.SpatialAntiAliasingTransferGpu": {
+            "passed": true,
+            "time": 4.83167
+          },
+          "AzureRender.ColorGradingLutProduction": {
+            "passed": true,
+            "time": 52.4481
+          },
+          "AzureEngine.MaterialDisplayGpu": {
+            "passed": true,
+            "time": 342.6
+          },
+          "AzureRender.CommandLine": {
+            "passed": true,
+            "time": 1.43766
+          },
+          "AzureRender.CharacterSkinningComputeGpu": {
+            "passed": true,
+            "time": 4.70234
+          },
+          "AzureEngine.ObjectShadowGpu": {
+            "passed": true,
+            "time": 157.59
+          },
+          "AzureTools.GpuTextureAccess": {
+            "passed": true,
+            "time": 0.143283
+          },
+          "AzureRender.CameraProjectionGpu": {
+            "passed": true,
+            "time": 46.5338
+          },
+          "AzureRender.CaptureCameraGpu": {
+            "passed": true,
+            "time": 43.1164
+          },
+          "AzureEngine.NprIlluminationGpu": {
+            "passed": true,
+            "time": 97.9551
+          },
+          "AzureRender.CharacterLocalLightGpu": {
+            "passed": true,
+            "time": 43.5328
+          },
+          "AzureGame.ExplorationCompletion": {
+            "passed": true,
+            "time": 36.5881
+          }
+        }
+      }
+    },
+    "debug": {
+      "config": "Debug",
+      "rendererSha256": "21f21b429d249ec975a418bb148666a02b4ca710c788de33a77e448de552b6b4",
+      "playerSha256": "a8e0ce254171a1248571cb07f4fb5fc6f9909e8327a192587d3c28b0cf05d9f2",
+      "results": {
+        "visual": {
+          "AzureRender.VisualRegression": {
+            "passed": true,
+            "time": 61.9174,
+            "zeroPixels": true
+          },
+          "AzureRender.VisualRegressionLegacyDescriptors": {
+            "passed": true,
+            "time": 42.4571,
+            "zeroPixels": true
+          },
+          "AzureRender.VisualRegressionLegacySkinning": {
+            "passed": true,
+            "time": 43.4591,
+            "zeroPixels": true
+          }
+        },
+        "related": {
+          "AzureRender.StaticSkinningRecording": {
+            "passed": true,
+            "time": 2.21893
+          },
+          "AzureRender.SkinningBatch": {
+            "passed": true,
+            "time": 0.63543
+          },
+          "AzureRender.SkinningGpu": {
+            "passed": true,
+            "time": 1.57536
+          },
+          "AzureRender.MaterialDisplayViewGpu": {
+            "passed": true,
+            "time": 43.0843
+          },
+          "AzureRender.SpatialAntiAliasingGpu": {
+            "passed": true,
+            "time": 152.923
+          },
+          "AzureRender.SpatialAntiAliasingAuxiliaryGpu": {
+            "passed": true,
+            "time": 202.625
+          },
+          "AzureRender.SpatialAntiAliasingTransferGpu": {
+            "passed": true,
+            "time": 10.3156
+          },
+          "AzureRender.ColorGradingLutProduction": {
+            "passed": true,
+            "time": 41.9037
+          },
+          "AzureEngine.MaterialDisplayGpu": {
+            "passed": true,
+            "time": 463.731
+          },
+          "AzureRender.CommandLine": {
+            "passed": true,
+            "time": 3.00779
+          },
+          "AzureRender.CharacterSkinningComputeGpu": {
+            "passed": true,
+            "time": 7.20943
+          },
+          "AzureEngine.ObjectShadowGpu": {
+            "passed": true,
+            "time": 261.784
+          },
+          "AzureTools.GpuTextureAccess": {
+            "passed": true,
+            "time": 0.262934
+          },
+          "AzureRender.CameraProjectionGpu": {
+            "passed": true,
+            "time": 93.7355
+          },
+          "AzureRender.CaptureCameraGpu": {
+            "passed": true,
+            "time": 69.2265
+          },
+          "AzureEngine.NprIlluminationGpu": {
+            "passed": true,
+            "time": 163.673
+          },
+          "AzureRender.CharacterLocalLightGpu": {
+            "passed": true,
+            "time": 86.0213
+          },
+          "AzureGame.ExplorationCompletion": {
+            "passed": true,
+            "time": 24.9892
+          }
+        }
+      }
+    }
+  },
+  "archiveSha256": "4cde32d67005dfcb6b7d6ca27475cc3cbef897f5960759ebaf73c50eb89d236a"
+}

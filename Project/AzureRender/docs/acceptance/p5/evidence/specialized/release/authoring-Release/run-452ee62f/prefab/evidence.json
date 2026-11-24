@@ -1,0 +1,895 @@
+[
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 32.844,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.5836,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:0ce034e1e3e8b2ff\",\"documentId\":\"17916077346708308-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "authoring-1",
+      "commandId": "selection.click",
+      "parameters": {
+        "id": "fixed"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:0ce034e1e3e8b2ff",
+        "documentId": "17916077346708308-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 1.2841,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:0ce034e1e3e8b2ff",
+          "documentId": "17916077346708308-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.433,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:0ce034e1e3e8b2ff\",\"documentId\":\"17916077346708308-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "authoring-3",
+      "commandId": "selection.click",
+      "parameters": {
+        "id": "moving",
+        "ctrl": true
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:0ce034e1e3e8b2ff",
+        "documentId": "17916077346708308-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 1.1681,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:0ce034e1e3e8b2ff",
+          "documentId": "17916077346708308-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.2209,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:0ce034e1e3e8b2ff\",\"documentId\":\"17916077346708308-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "authoring-5",
+      "commandId": "selection.click",
+      "parameters": {
+        "id": "joint",
+        "ctrl": true
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:0ce034e1e3e8b2ff",
+        "documentId": "17916077346708308-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 0.6575,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:0ce034e1e3e8b2ff",
+          "documentId": "17916077346708308-1",
+          "revision": 3
+        }
+      }
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "tool.prefabs"
+      }
+    },
+    "response": {
+      "elapsedMs": 1.7212,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 18.2021,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "prefab.create"
+      }
+    },
+    "response": {
+      "elapsedMs": 2.0245,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 60.0381,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.4276,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:0ce034e1e3e8b2ff\",\"documentId\":\"17916077346708308-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "authoring-11",
+      "commandId": "prefab.place",
+      "parameters": {
+        "asset": "assets:/NewPrefab.azureprefab",
+        "instance": "door-copy"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:0ce034e1e3e8b2ff",
+        "documentId": "17916077346708308-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "elapsedMs": 1.998,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "add",
+            "path": "/components/door-copy:fixed",
+            "value": {
+              "azure.renderable": {
+                "data": {
+                  "primitiveIndex": 0,
+                  "visible": true
+                },
+                "type": "azure.renderable",
+                "version": 1
+              },
+              "azure.rigid-body": {
+                "data": {
+                  "dynamic": false,
+                  "halfExtent": [
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "halfHeight": 0.5,
+                  "kinematic": false,
+                  "mesh": "",
+                  "radius": 0.5,
+                  "shape": "box",
+                  "trigger": false
+                },
+                "type": "azure.rigid-body",
+                "version": 3
+              },
+              "azure.transform": {
+                "data": {
+                  "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "scale": [
+                    0.11999999731779099,
+                    0.11999999731779099,
+                    0.11999999731779099
+                  ],
+                  "translation": [
+                    0.0,
+                    3.0,
+                    0.0
+                  ]
+                },
+                "type": "azure.transform",
+                "version": 1
+              }
+            }
+          },
+          {
+            "op": "add",
+            "path": "/components/door-copy:joint",
+            "value": {
+              "azure.hinge": {
+                "data": {
+                  "anchorA": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "anchorB": [
+                    -1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "axis": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ],
+                  "bodyA": "door-copy:fixed",
+                  "bodyB": "door-copy:moving",
+                  "maximumAngle": 100.0,
+                  "minimumAngle": -15.0,
+                  "normal": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "type": "azure.hinge",
+                "version": 1
+              },
+              "azure.renderable": {
+                "data": {
+                  "primitiveIndex": 0,
+                  "visible": false
+                },
+                "type": "azure.renderable",
+                "version": 1
+              },
+              "azure.transform": {
+                "data": {
+                  "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "type": "azure.transform",
+                "version": 1
+              }
+            }
+          },
+          {
+            "op": "add",
+            "path": "/components/door-copy:moving",
+            "value": {
+              "azure.renderable": {
+                "data": {
+                  "primitiveIndex": 0,
+                  "visible": true
+                },
+                "type": "azure.renderable",
+                "version": 1
+              },
+              "azure.rigid-body": {
+                "data": {
+                  "dynamic": true,
+                  "halfExtent": [
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "halfHeight": 0.5,
+                  "kinematic": false,
+                  "mesh": "",
+                  "radius": 0.5,
+                  "shape": "box",
+                  "trigger": false
+                },
+                "type": "azure.rigid-body",
+                "version": 3
+              },
+              "azure.transform": {
+                "data": {
+                  "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "scale": [
+                    1.0,
+                    1.0,
+                    0.11999999731779099
+                  ],
+                  "translation": [
+                    1.0,
+                    3.0,
+                    0.0
+                  ]
+                },
+                "type": "azure.transform",
+                "version": 1
+              }
+            }
+          },
+          {
+            "op": "add",
+            "path": "/nodes/-",
+            "value": {
+              "id": "door-copy:fixed",
+              "instanceOf": "fixed",
+              "materialSlots": {},
+              "name": "fixed",
+              "parentId": "",
+              "prefabSource": "assets:/NewPrefab.azureprefab",
+              "resourceId": "door-copy:cube",
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "scale": [
+                0.11999999731779099,
+                0.11999999731779099,
+                0.11999999731779099
+              ],
+              "translation": [
+                0.0,
+                3.0,
+                0.0
+              ],
+              "visible": true
+            }
+          },
+          {
+            "op": "add",
+            "path": "/nodes/-",
+            "value": {
+              "id": "door-copy:moving",
+              "instanceOf": "moving",
+              "materialSlots": {},
+              "name": "moving",
+              "parentId": "",
+              "prefabSource": "assets:/NewPrefab.azureprefab",
+              "resourceId": "door-copy:cube",
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                0.11999999731779099
+              ],
+              "translation": [
+                1.0,
+                3.0,
+                0.0
+              ],
+              "visible": true
+            }
+          },
+          {
+            "op": "add",
+            "path": "/nodes/-",
+            "value": {
+              "id": "door-copy:joint",
+              "instanceOf": "joint",
+              "materialSlots": {},
+              "name": "Hinge",
+              "parentId": "",
+              "prefabSource": "assets:/NewPrefab.azureprefab",
+              "resourceId": "",
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "visible": false
+            }
+          },
+          {
+            "op": "add",
+            "path": "/resources/-",
+            "value": {
+              "id": "door-copy:cube",
+              "path": "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/authoring-Release/run-452ee62f/prefab-project/assets/cube.gltf",
+              "type": "gltf"
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs",
+            "value": [
+              {
+                "asset": "assets:/NewPrefab.azureprefab",
+                "instance": "door-copy"
+              }
+            ]
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:96fa33b728f31ef0",
+          "documentId": "17916077346708308-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 10.1218,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:96fa33b728f31ef0\",\"documentId\":\"17916077346708308-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "authoring-13",
+      "commandId": "node.select",
+      "parameters": {
+        "id": "door-copy:moving"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:96fa33b728f31ef0",
+        "documentId": "17916077346708308-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 1.3204,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:96fa33b728f31ef0",
+          "documentId": "17916077346708308-1",
+          "revision": 6
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 3.6817,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:96fa33b728f31ef0\",\"documentId\":\"17916077346708308-1\",\"revision\":6}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "authoring-15",
+      "commandId": "node.rename",
+      "parameters": {
+        "value": "Reusable door"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:96fa33b728f31ef0",
+        "documentId": "17916077346708308-1",
+        "revision": 6
+      }
+    },
+    "response": {
+      "elapsedMs": 3.7549,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "replace",
+            "path": "/nodes/5/name",
+            "value": "Reusable door"
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:45811e76f28fe003",
+          "documentId": "17916077346708308-1",
+          "revision": 7
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 28.9409,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "prefab.field.moving/name"
+      }
+    },
+    "response": {
+      "elapsedMs": 2.9224,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 23.8848,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "prefab.revert"
+      }
+    },
+    "response": {
+      "elapsedMs": 1.0391,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 22.4182,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "editor.workspace"
+    },
+    "response": {
+      "elapsedMs": 3.0266,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"activeSelection\":\"door-copy:moving\",\"animationTimelines\":{},\"camera\":{\"position\":[2.799999952316284,2.0999999046325684,3.200000047683716],\"target\":[0.0,0.0,0.0]},\"capture\":{\"gizmo\":false,\"navigationButton\":-1},\"contentNavigation\":{\"historyIndex\":0,\"historySize\":1,\"mount\":\"\",\"path\":\"\",\"previewHandle\":0,\"selected\":[],\"statistics\":{\"catalogBuilds\":1,\"directoryEnumerations\":1,\"refreshing\":false,\"snapshots\":1}},\"diagnostic\":\"\",\"dirty\":true,\"document\":{\"contentHash\":\"fnv1a64:96fa33b728f31ef0\",\"documentId\":\"17916077346708308-1\",\"revision\":8},\"documentGuard\":0,\"documents\":[{\"active\":true,\"dirty\":true,\"id\":\"17916077346708308-1\",\"path\":\"D:\\\\Assigment\\\\2609\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\ninja-msvc-release\\\\authoring-Release\\\\run-452ee62f\\\\prefab-project\\\\assets\\\\mechanism.azurelevel\",\"redoCount\":0,\"undoCount\":3,\"version\":{\"contentHash\":\"fnv1a64:96fa33b728f31ef0\",\"documentId\":\"17916077346708308-1\",\"revision\":8}}],\"dpi\":1.0,\"feedback\":[],\"gizmoMode\":0,\"gizmoPivot\":\"active\",\"gizmoRotation\":[0.0,0.0,0.0],\"gizmoScale\":[1.0,1.0,0.11999999731779099],\"gizmoSpace\":\"world\",\"gizmoTranslation\":[1.0,3.0,0.0],\"historyCount\":78,\"image\":{\"height\":680.0,\"width\":1362.0,\"x\":228.0,\"y\":146.0},\"materialEditor\":{\"asset\":\"\",\"snapshot\":null},\"navigation\":{\"cursorCaptured\":false,\"mode\":\"idle\",\"nativeCursorMode\":\"normal\",\"rawMouse\":false,\"speed\":5.0},\"nodeCount\":7,\"panels\":{\"animation\":{\"docked\":true,\"open\":true,\"rect\":[220.0,836.0,1378.0,220.0]},\"assets\":{\"docked\":true,\"open\":true,\"rect\":[220.0,836.0,1378.0,220.0]},\"assistance\":{\"docked\":false,\"open\":false,\"rect\":[]},\"build\":{\"docked\":true,\"open\":true,\"rect\":[220.0,836.0,1378.0,220.0]},\"capture\":{\"docked\":true,\"open\":true,\"rect\":[220.0,836.0,1378.0,220.0]},\"console\":{\"docked\":true,\"open\":true,\"rect\":[220.0,836.0,1378.0,220.0]},\"environment\":{\"docked\":false,\"open\":false,\"rect\":[]},\"gameplay-debug\":{\"docked\":true,\"open\":true,\"rect\":[220.0,836.0,1378.0,220.0]},\"inspector\":{\"docked\":true,\"open\":true,\"rect\":[1600.0,481.0,320.0,575.0]},\"outliner\":{\"docked\":true,\"open\":true,\"rect\":[1600.0,64.0,320.0,415.0]},\"prefabs\":{\"docked\":true,\"open\":true,\"rect\":[220.0,836.0,1378.0,220.0]},\"problems\":{\"docked\":false,\"open\":false,\"rect\":[]},\"projects\":{\"docked\":false,\"open\":false,\"rect\":[]},\"scripts\":{\"docked\":false,\"open\":false,\"rect\":[]},\"settings\":{\"docked\":false,\"open\":false,\"rect\":[]},\"viewport\":{\"docked\":true,\"open\":true,\"rect\":[220.0,64.0,1378.0,770.0]}},\"physicsBodies\":[],\"physicsConstraints\":0,\"preset\":\"custom\",\"previewMode\":\"edit\",\"previewSteps\":0,\"project\":{\"id\":\"physics-door\",\"name\":\"Physics door\",\"path\":\"D:\\\\Assigment\\\\2609\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\ninja-msvc-release\\\\authoring-Release\\\\run-452ee62f\\\\prefab-project\\\\project.azureproject\"},\"referencePicker\":false,\"selectedName\":\"moving\",\"selection\":[\"door-copy:moving\"],\"settings\":{\"ai.enabled\":{\"default\":false,\"description\":\"Enable optional content assistance\",\"layers\":{\"default\":false},\"pending\":false,\"pendingSource\":\"default\",\"persistent\":false,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":true,\"type\":\"boolean\",\"value\":false},\"ai.maxHistoryBytes\":{\"default\":131072,\"description\":\"Maximum proposal history bytes\",\"layers\":{\"default\":131072},\"maximum\":131072.0,\"minimum\":2.0,\"pending\":131072,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"integer\",\"value\":131072},\"ai.maxHistoryMessages\":{\"default\":24,\"description\":\"Maximum proposal history messages\",\"layers\":{\"default\":24},\"maximum\":24.0,\"minimum\":1.0,\"pending\":24,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"integer\",\"value\":24},\"ai.maxOperations\":{\"default\":128,\"description\":\"Maximum proposal operations\",\"layers\":{\"default\":128},\"maximum\":128.0,\"minimum\":1.0,\"pending\":128,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"integer\",\"value\":128},\"ai.maxRepairs\":{\"default\":1,\"description\":\"Maximum proposal repairs\",\"layers\":{\"default\":1},\"maximum\":1.0,\"minimum\":0.0,\"pending\":1,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"integer\",\"value\":1},\"ai.maxSourceBytes\":{\"default\":2097152,\"description\":\"Maximum proposal source bytes\",\"layers\":{\"default\":2097152},\"maximum\":2097152.0,\"minimum\":1.0,\"pending\":2097152,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"integer\",\"value\":2097152},\"ai.profile\":{\"default\":\"content\",\"description\":\"Model tool profile\",\"layers\":{\"default\":\"content\"},\"pending\":\"content\",\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"string\",\"value\":\"content\"},\"ai.timeoutMs\":{\"default\":300000,\"description\":\"Total proposal deadline\",\"layers\":{\"default\":300000},\"maximum\":300000.0,\"minimum\":1.0,\"pending\":300000,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"integer\",\"value\":300000},\"developer.maxViews\":{\"default\":3,\"description\":\"Maximum owned auxiliary render views\",\"layers\":{\"default\":3},\"maximum\":3.0,\"minimum\":1.0,\"pending\":3,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":true,\"type\":\"integer\",\"value\":3},\"diagnostics.verbose\":{\"default\":false,\"description\":\"Verbose development diagnostics\",\"layers\":{\"default\":false},\"pending\":false,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"boolean\",\"value\":false},\"editor.camera.boost\":{\"default\":4.0,\"description\":\"Editor flight acceleration\",\"layers\":{\"default\":4.0},\"maximum\":100.0,\"minimum\":1.0,\"pending\":4.0,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"number\",\"value\":4.0},\"editor.camera.flySpeed\":{\"default\":5.0,\"description\":\"Editor flight speed\",\"layers\":{\"default\":5.0},\"maximum\":10000.0,\"minimum\":0.01,\"pending\":5.0,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"number\",\"value\":5.0},\"editor.camera.invertX\":{\"default\":false,\"description\":\"Invert horizontal editor camera input\",\"layers\":{\"default\":false},\"pending\":false,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"boolean\",\"value\":false},\"editor.camera.invertY\":{\"default\":false,\"description\":\"Invert vertical editor camera input\",\"layers\":{\"default\":false},\"pending\":false,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"boolean\",\"value\":false},\"editor.camera.orbitSensitivity\":{\"default\":1.0,\"description\":\"Editor orbit sensitivity\",\"layers\":{\"default\":1.0},\"maximum\":10.0,\"minimum\":0.01,\"pending\":1.0,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"number\",\"value\":1.0},\"editor.camera.rawMouse\":{\"default\":true,\"description\":\"Use raw mouse motion during captured flight\",\"layers\":{\"default\":true},\"pending\":true,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"boolean\",\"value\":true},\"editor.compact\":{\"default\":false,\"description\":\"Compact workspace\",\"layers\":{\"default\":false},\"pending\":false,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"boolean\",\"value\":false},\"editor.gizmo.moveStep\":{\"default\":0.5,\"description\":\"Gizmo translation snap step\",\"layers\":{\"default\":0.5},\"maximum\":10000.0,\"minimum\":0.001,\"pending\":0.5,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"number\",\"value\":0.5},\"editor.gizmo.rotateStep\":{\"default\":15.0,\"description\":\"Gizmo rotation snap degrees\",\"layers\":{\"default\":15.0},\"maximum\":90.0,\"minimum\":0.1,\"pending\":15.0,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"number\",\"value\":15.0},\"editor.gizmo.scaleStep\":{\"default\":0.1,\"description\":\"Gizmo scale snap step\",\"layers\":{\"default\":0.1},\"maximum\":10.0,\"minimum\":0.001,\"pending\":0.1,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"number\",\"value\":0.1},\"editor.gizmo.snap\":{\"default\":false,\"description\":\"Snap gizmo transforms\",\"layers\":{\"default\":false},\"pending\":false,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"boolean\",\"value\":false},\"editor.scale\":{\"default\":1.0,\"description\":\"Interface scale multiplier\",\"layers\":{\"default\":1.0},\"maximum\":3.0,\"minimum\":0.75,\"pending\":1.0,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"number\",\"value\":1.0},\"editor.shortcuts.frame\":{\"default\":\"F\",\"description\":\"Scene shortcut (one uppercase letter)\",\"layers\":{\"default\":\"F\"},\"pending\":\"F\",\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"string\",\"value\":\"F\"},\"editor.shortcuts.move\":{\"default\":\"W\",\"description\":\"Scene shortcut (one uppercase letter)\",\"layers\":{\"default\":\"W\"},\"pending\":\"W\",\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"string\",\"value\":\"W\"},\"editor.shortcuts.rotate\":{\"default\":\"E\",\"description\":\"Scene shortcut (one uppercase letter)\",\"layers\":{\"default\":\"E\"},\"pending\":\"E\",\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"string\",\"value\":\"E\"},\"editor.shortcuts.scale\":{\"default\":\"R\",\"description\":\"Scene shortcut (one uppercase letter)\",\"layers\":{\"default\":\"R\"},\"pending\":\"R\",\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"string\",\"value\":\"R\"},\"editor.shortcuts.select\":{\"default\":\"Q\",\"description\":\"Scene shortcut (one uppercase letter)\",\"layers\":{\"default\":\"Q\"},\"pending\":\"Q\",\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"string\",\"value\":\"Q\"},\"editor.thumbnailSize\":{\"default\":96,\"description\":\"Content thumbnail size\",\"layers\":{\"default\":96},\"maximum\":192.0,\"minimum\":64.0,\"pending\":96,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"integer\",\"value\":96},\"input.cameraSensitivity\":{\"default\":1.0,\"description\":\"Mouse camera sensitivity multiplier\",\"layers\":{\"default\":1.0},\"maximum\":4.0,\"minimum\":0.1,\"pending\":1.0,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"number\",\"value\":1.0},\"render.antiAliasing\":{\"default\":1,\"description\":\"Anti-aliasing: off, edge adaptive, supersampling\",\"layers\":{\"default\":1},\"maximum\":2.0,\"minimum\":0.0,\"pending\":1,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"integer\",\"value\":1},\"render.blackholeQuality\":{\"default\":2,\"description\":\"Blackhole quality: performance, balanced, cinematic\",\"layers\":{\"default\":2},\"maximum\":2.0,\"minimum\":0.0,\"pending\":2,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"integer\",\"value\":2},\"render.diagnosticView\":{\"default\":0,\"description\":\"Diagnostic view: beauty, normal, outline, shadow, depth\",\"layers\":{\"default\":0},\"maximum\":4.0,\"minimum\":0.0,\"pending\":0,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"integer\",\"value\":0},\"render.exposure\":{\"default\":0.0,\"description\":\"Temporary exposure in EV\",\"layers\":{\"default\":0.0},\"maximum\":8.0,\"minimum\":-8.0,\"pending\":0.0,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"number\",\"value\":0.0},\"render.shadowDistance\":{\"default\":100.0,\"description\":\"Shadow coverage distance in metres\",\"layers\":{\"default\":100.0},\"maximum\":5000.0,\"minimum\":0.01,\"pending\":100.0,\"pendingSource\":\"default\",\"persistent\":true,\"readOnly\":false,\"source\":\"default\",\"startupOnly\":false,\"type\":\"number\",\"value\":100.0}},\"tasks\":[],\"uiErrors\":[],\"undoCount\":3,\"version\":2,\"view\":{\"far\":100.0,\"fov\":0.6926040053367615,\"near\":0.10000000149011612,\"orthoHeight\":5.0,\"position\":[2.799999952316284,2.0999999046325684,3.200000047683716],\"projection\":\"perspective\",\"target\":[0.0,0.0,0.0],\"up\":[0.0,1.0,0.0]},\"viewportOverlayPolicies\":{\"camera\":\"selected\",\"collision\":\"selected\",\"grid\":\"all\",\"hinge\":\"selected\",\"light\":\"selected\"},\"visibleAssets\":[{\"id\":\"43f14a7f-4cd8-4067-b072-a0e5b57d248e\",\"path\":\"assets:/cube.gltf\",\"ready\":true,\"resources\":[\"cube\"],\"source\":\"D:\\\\Assigment\\\\2609\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\ninja-msvc-release\\\\authoring-Release\\\\run-452ee62f\\\\prefab-project\\\\assets\\\\cube.gltf\",\"type\":\"model\",\"users\":3},{\"id\":\"ed09ad67-5172-44ca-91b2-6ddfb796db4b\",\"path\":\"assets:/mechanism.azurelevel\",\"ready\":true,\"resources\":[],\"source\":\"D:\\\\Assigment\\\\2609\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\ninja-msvc-release\\\\authoring-Release\\\\run-452ee62f\\\\prefab-project\\\\assets\\\\mechanism.azurelevel\",\"type\":\"level\",\"users\":0}],\"widgets\":{\"axis.reset.azure.transform.rotation.0\":[1608.0,1007.0,22.0,22.0],\"axis.reset.azure.transform.rotation.1\":[1707.0,1007.0,22.0,22.0],\"axis.reset.azure.transform.rotation.2\":[1806.0,1007.0,22.0,22.0],\"axis.reset.azure.transform.scale.0\":[1608.0,1051.0,22.0,22.0],\"axis.reset.azure.transform.scale.1\":[1707.0,1051.0,22.0,22.0],\"axis.reset.azure.transform.scale.2\":[1806.0,1051.0,22.0,22.0],\"axis.reset.azure.transform.translation.0\":[1608.0,963.0,22.0,22.0],\"axis.reset.azure.transform.translation.1\":[1707.0,963.0,22.0,22.0],\"axis.reset.azure.transform.translation.2\":[1806.0,963.0,22.0,22.0],\"axis.value.azure.transform.rotation.0\":[1632.0,1007.0,67.0,22.0],\"axis.value.azure.transform.rotation.1\":[1731.0,1007.0,67.0,22.0],\"axis.value.azure.transform.rotation.2\":[1830.0,1007.0,67.0,22.0],\"axis.value.azure.transform.scale.0\":[1632.0,1051.0,67.0,22.0],\"axis.value.azure.transform.scale.1\":[1731.0,1051.0,67.0,22.0],\"axis.value.azure.transform.scale.2\":[1830.0,1051.0,67.0,22.0],\"axis.value.azure.transform.translation.0\":[1632.0,963.0,67.0,22.0],\"axis.value.azure.transform.translation.1\":[1731.0,963.0,67.0,22.0],\"axis.value.azure.transform.translation.2\":[1830.0,963.0,67.0,22.0],\"build\":[495.0,32.0,40.0,22.0],\"component.azure.rigid-body\":[1604.0,1077.0,298.0,22.0],\"component.azure.transform\":[1604.0,919.0,298.0,22.0],\"create.empty\":[8.0,151.0,203.0,22.0],\"document.tab.mechanism.azurelevel\":[228.0,94.0,136.0,22.0],\"field.azure.transform.rotation\":[1608.0,1007.0,289.0,22.0],\"field.azure.transform.scale\":[1608.0,1051.0,289.0,22.0],\"field.azure.transform.translation\":[1608.0,963.0,289.0,22.0],\"focus\":[228.0,120.0,84.0,22.0],\"gizmo.0\":[1204.1143798828125,-328.1601257324219,6.0,6.0],\"gizmo.1\":[1163.1888427734375,-382.4937744140625,6.0,6.0],\"gizmo.2\":[1132.323974609375,-329.7654113769531,6.0,6.0],\"gizmo.center\":[1159.1453857421875,-315.3256530761719,2,2],\"gizmo.options\":[366.0,120.0,64.0,22.0],\"hierarchy.root\":[1704.0,122.0,48.0,26.0],\"material.slots-header\":[1604.0,511.0,298.0,22.0],\"menu.Edit\":[37.0,2.0,34.0,18.0],\"menu.File\":[4.0,2.0,33.0,18.0],\"menu.Help\":[150.0,2.0,38.0,18.0],\"menu.Tools\":[109.0,2.0,41.0,18.0],\"menu.View\":[71.0,2.0,38.0,18.0],\"mode.Move\":[50.0,34.0,63.0,18.0],\"mode.Rotate\":[113.0,34.0,63.0,18.0],\"mode.Scale\":[176.0,34.0,63.0,18.0],\"name\":[1608.0,779.0,289.0,22.0],\"node.door-copy:fixed\":[1604.0,225.0,312.0,18.0],\"node.door-copy:joint\":[1604.0,261.0,312.0,18.0],\"node.door-copy:moving\":[1604.0,243.0,312.0,18.0],\"node.fixed\":[1604.0,153.0,312.0,18.0],\"node.ground\":[1604.0,207.0,312.0,18.0],\"node.joint\":[1604.0,189.0,312.0,18.0],\"node.moving\":[1604.0,171.0,312.0,18.0],\"outliner.search\":[1608.0,94.0,303.0,22.0],\"panelrect.animation\":[220.0,836.0,1378.0,220.0],\"panelrect.assets\":[220.0,836.0,1378.0,220.0],\"panelrect.build\":[220.0,836.0,1378.0,220.0],\"panelrect.capture\":[220.0,836.0,1378.0,220.0],\"panelrect.console\":[220.0,836.0,1378.0,220.0],\"panelrect.gameplay-debug\":[220.0,836.0,1378.0,220.0],\"panelrect.inspector\":[1600.0,481.0,320.0,575.0],\"panelrect.outliner\":[1600.0,64.0,320.0,415.0],\"panelrect.prefabs\":[220.0,836.0,1378.0,220.0],\"panelrect.viewport\":[220.0,64.0,1378.0,770.0],\"pause\":[352.0,32.0,44.0,22.0],\"physics.shape\":[1608.0,581.0,289.0,22.0],\"pick.door-copy:fixed\":[908.0,-257.3929443359375,2,2],\"pick.door-copy:moving\":[1159.1453857421875,-315.3256530761719,2,2],\"pick.fixed\":[908.0,-257.3929443359375,2,2],\"pick.ground\":[908.0,519.9755859375,2,2],\"pick.moving\":[1159.1453857421875,-315.3256530761719,2,2],\"play\":[243.0,32.0,36.0,22.0],\"prefab.apply\":[348.0,985.0,153.0,22.0],\"prefab.create\":[228.0,892.0,113.0,22.0],\"prefab.instance\":[228.0,923.0,938.0,22.0],\"prefab.output\":[228.0,866.0,1416.0,22.0],\"prefab.redo-apply\":[363.0,1011.0,126.0,22.0],\"prefab.revert\":[228.0,985.0,112.0,22.0],\"prefab.undo-apply\":[228.0,1011.0,127.0,22.0],\"save\":[8.0,32.0,38.0,22.0],\"simulate\":[287.0,32.0,57.0,22.0],\"step\":[404.0,32.0,37.0,22.0],\"stop\":[449.0,32.0,38.0,22.0],\"tab.animation\":[601.0,836.0,120.0,22.0],\"tab.assets\":[246.0,836.0,110.0,22.0],\"tab.build\":[510.0,836.0,87.0,22.0],\"tab.capture\":[360.0,836.0,71.0,22.0],\"tab.console\":[435.0,836.0,71.0,22.0],\"tab.gameplay-debug\":[725.0,836.0,112.0,22.0],\"tab.inspector\":[1626.0,481.0,66.0,22.0],\"tab.outliner\":[1626.0,64.0,101.0,22.0],\"tab.prefabs\":[841.0,836.0,111.0,22.0],\"tab.viewport\":[246.0,64.0,75.0,22.0],\"tool.animation\":[8.0,252.0,203.0,22.0],\"tool.assets\":[8.0,226.0,203.0,22.0],\"tool.assistance\":[8.0,330.0,203.0,22.0],\"tool.build\":[8.0,408.0,203.0,22.0],\"tool.capture\":[8.0,434.0,203.0,22.0],\"tool.console\":[8.0,460.0,203.0,22.0],\"tool.environment\":[8.0,512.0,203.0,22.0],\"tool.gameplay-debug\":[8.0,382.0,203.0,22.0],\"tool.prefabs\":[8.0,356.0,203.0,22.0],\"tool.problems\":[8.0,304.0,203.0,22.0],\"tool.projects\":[8.0,538.0,203.0,22.0],\"tool.scripts\":[8.0,278.0,203.0,22.0],\"tool.settings\":[8.0,486.0,203.0,22.0],\"viewport.axis.+X\":[1547.587646484375,203.914306640625,20.0,20.0],\"viewport.axis.+Y\":[1522.0,163.51519775390625,20.0,20.0],\"viewport.axis.+Z\":[1499.61083984375,205.33062744140625,20.0,20.0],\"viewport.axis.-X\":[1499.412353515625,187.085693359375,14.0,14.0],\"viewport.axis.-Y\":[1525.0,227.48480224609375,14.0,14.0],\"viewport.axis.-Z\":[1547.38916015625,185.66937255859375,14.0,14.0],\"viewport.image\":[228.0,146.0,1362.0,680.0],\"viewport.view-options\":[320.0,120.0,38.0,22.0]}}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 4.8493,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:96fa33b728f31ef0\",\"documentId\":\"17916077346708308-1\",\"revision\":8}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "authoring-23",
+      "commandId": "history.undo",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:96fa33b728f31ef0",
+        "documentId": "17916077346708308-1",
+        "revision": 8
+      }
+    },
+    "response": {
+      "elapsedMs": 0.4724,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "replace",
+            "path": "/nodes/5/name",
+            "value": "Reusable door"
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:45811e76f28fe003",
+          "documentId": "17916077346708308-1",
+          "revision": 9
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 27.2937,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "prefab.field.moving/name"
+      }
+    },
+    "response": {
+      "elapsedMs": 1.1925,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 24.7464,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "prefab.apply"
+      }
+    },
+    "response": {
+      "elapsedMs": 2.3745,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 43.2514,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "screenshot",
+    "fields": {
+      "label": "u13-prefab-source"
+    },
+    "response": {
+      "elapsedMs": 2.4906,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "label": "u13-prefab-source",
+        "scheduled": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 188.7538,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "prefab.undo-apply"
+      }
+    },
+    "response": {
+      "elapsedMs": 0.7089,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 40.2253,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "prefab.redo-apply"
+      }
+    },
+    "response": {
+      "elapsedMs": 0.0445,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 42.2982,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  }
+]

@@ -1,0 +1,2662 @@
+{
+  "schemaVersion": 1,
+  "sourceHash": "fc5ea0a97abea1c180be8778ac4e0732e4cc56aea8242fdb013be344cdf5e851",
+  "files": [
+    {
+      "path": "debug-provenance.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\debug-provenance.json",
+      "originalSha256": "55ab0d0a73399523d3073220ef20b690944c0dc9b163474c0223a4d0efbf948b",
+      "archivedContentSha256": "55ab0d0a73399523d3073220ef20b690944c0dc9b163474c0223a4d0efbf948b",
+      "compressedSha256": "d2c63dcb9e1f1ca507f6fcc01847b496cd7756d8f1cc256dcc1c65d43433937e",
+      "originalBytes": 150445,
+      "archivedBytes": 150445,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "release-provenance.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\release-provenance.json",
+      "originalSha256": "fb5e771da126ae709f2be1ade4028dbd60a301c61f9aca8a1de1fb9f29bc3b6e",
+      "archivedContentSha256": "fb5e771da126ae709f2be1ade4028dbd60a301c61f9aca8a1de1fb9f29bc3b6e",
+      "compressedSha256": "5a39321646f04e10e765f06c1a1ae5d65ec4f95a50a61b1e91653bfdd8b9af56",
+      "originalBytes": 147547,
+      "archivedBytes": 147547,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "source-association.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\source-association.json",
+      "originalSha256": "898af7841a7a5efcc585b80fd3a8ab952081f3de47833567bee3f155e34a824d",
+      "archivedContentSha256": "898af7841a7a5efcc585b80fd3a8ab952081f3de47833567bee3f155e34a824d",
+      "compressedSha256": "24c836dcf630babf493426ec2bfcef71cc3dc0606762193b9dd94adb85debd23",
+      "originalBytes": 23071,
+      "archivedBytes": 23071,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-completion.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-completion.json",
+      "originalSha256": "5e8490be18b51723a49ba738b2663ccd66482bae1cdda032e18d46a52c113361",
+      "archivedContentSha256": "5e8490be18b51723a49ba738b2663ccd66482bae1cdda032e18d46a52c113361",
+      "compressedSha256": "0aee328e9e073f2c6b4423141b2091b0e2f47c1a54282a363ba32ab13a3c4b77",
+      "originalBytes": 124,
+      "archivedBytes": 124,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "performance-followup-completion.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\performance-followup-completion.json",
+      "originalSha256": "9a3241d9e7639f2d48eba4a5b2ebfdfe6d5df4c771e622b8cbef64a9dda76b1f",
+      "archivedContentSha256": "9a3241d9e7639f2d48eba4a5b2ebfdfe6d5df4c771e622b8cbef64a9dda76b1f",
+      "compressedSha256": "e14cc340389ea5826f68718f6084a49b43bb39093d26326c514032882e905e16",
+      "originalBytes": 1587,
+      "archivedBytes": 1587,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "standard-jump-correlation.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\standard-jump-correlation.json",
+      "originalSha256": "3929e3fe2b66490a4ad57f1f515412a02f903807633779259042617eb572ed43",
+      "archivedContentSha256": "3929e3fe2b66490a4ad57f1f515412a02f903807633779259042617eb572ed43",
+      "compressedSha256": "ddb5947daa8e79b75bc9b83426ea9f3f990922f1accbc50f106bb2b225c77cba",
+      "originalBytes": 3244,
+      "archivedBytes": 3244,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-export-completion.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-export-completion.json",
+      "originalSha256": "e1d1a5919dac390f9062bc22e2a3e3502247131cdb67fdf0644e864af1549e89",
+      "archivedContentSha256": "e1d1a5919dac390f9062bc22e2a3e3502247131cdb67fdf0644e864af1549e89",
+      "compressedSha256": "d22d6d601ae628030e9486669dd45796eeb53547de19c4f4a1e638ebe6be85ed",
+      "originalBytes": 2109,
+      "archivedBytes": 2109,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-analysis-summary.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-analysis-summary.json",
+      "originalSha256": "6283f3fd423a3378161b4699b7b08dc6a81cfc4a6b79c0f10773c5cd24fc628c",
+      "archivedContentSha256": "6283f3fd423a3378161b4699b7b08dc6a81cfc4a6b79c0f10773c5cd24fc628c",
+      "compressedSha256": "32f2ef8eb78d8d4d9a186b9e723b3a4280d2df3bb9b50a51946aa2db09014212",
+      "originalBytes": 22536,
+      "archivedBytes": 22536,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "windowed-diagnostic-decision.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\windowed-diagnostic-decision.json",
+      "originalSha256": "3e6c6197ac13608d8d2911919acad1670224df59792667b56eda11e393729ab5",
+      "archivedContentSha256": "3e6c6197ac13608d8d2911919acad1670224df59792667b56eda11e393729ab5",
+      "compressedSha256": "da707f20971424b8d17392a9ff76b38bfd404b0f1e29697234c7a3c59f16ae1e",
+      "originalBytes": 88,
+      "archivedBytes": 88,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "verify-obs-layer-exclusion.py.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\verify-obs-layer-exclusion.py",
+      "originalSha256": "4d27b5f061354a4923f04b43521ce0910cc98b6984915131446e6e0ec7116f3c",
+      "archivedContentSha256": "4d27b5f061354a4923f04b43521ce0910cc98b6984915131446e6e0ec7116f3c",
+      "compressedSha256": "95abd054a949a21a745f63cc9f5d1709da888fef81e2ca92b5c094c8711955de",
+      "originalBytes": 3957,
+      "archivedBytes": 3957,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "run-followup-performance.py.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\run-followup-performance.py",
+      "originalSha256": "a35a1545dca5120c3d18648bfe8a5653d1fee2905dcf1bd6356585fbe5ee93a7",
+      "archivedContentSha256": "a35a1545dca5120c3d18648bfe8a5653d1fee2905dcf1bd6356585fbe5ee93a7",
+      "compressedSha256": "cd73a61a7276358866a2352baa0b4bdb19f8742f1f40bed5364af89da0ee3420",
+      "originalBytes": 5807,
+      "archivedBytes": 5807,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "export-minimal-faults.py.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\export-minimal-faults.py",
+      "originalSha256": "992ca5b3784c89fbb981936d6c620a9aa23e460b15339d285e5a2ee35224ae31",
+      "archivedContentSha256": "992ca5b3784c89fbb981936d6c620a9aa23e460b15339d285e5a2ee35224ae31",
+      "compressedSha256": "1af8d005cfe9a57164acaf918829df8e18a4211302fc25fdbea1f8fb4b270a96",
+      "originalBytes": 3424,
+      "archivedBytes": 3424,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "analyze-minimal-faults.py.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\analyze-minimal-faults.py",
+      "originalSha256": "ec12f943ca6fb561ce82b9268143d4d78b26f46d972fd5cc9f549f51e2817b2d",
+      "archivedContentSha256": "ec12f943ca6fb561ce82b9268143d4d78b26f46d972fd5cc9f549f51e2817b2d",
+      "compressedSha256": "82dee517cf61adfe64640b1c00e63ee6a35642499004492deecd2e156468cdba",
+      "originalBytes": 5992,
+      "archivedBytes": 5992,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "azure-pagefaults.wprp.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\azure-pagefaults.wprp",
+      "originalSha256": "1e73156698c5b3b3dc66596bceeacbff34d6d6522aa9918690e3549dcade0927",
+      "archivedContentSha256": "1e73156698c5b3b3dc66596bceeacbff34d6d6522aa9918690e3549dcade0927",
+      "compressedSha256": "9ef94f892c655864dd9096ce0e6049d1f0947334ba4eaf2ff860561aff12d5af",
+      "originalBytes": 1224,
+      "archivedBytes": 1224,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "control-pagefault-session.ps1.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\control-pagefault-session.ps1",
+      "originalSha256": "88573e9e7334197eb6d3b5159d6ce204ea9422e953ca5d9c01a6fbea0baed77a",
+      "archivedContentSha256": "88573e9e7334197eb6d3b5159d6ce204ea9422e953ca5d9c01a6fbea0baed77a",
+      "compressedSha256": "519037931f799b4b76912eee6ad8d8be940b59995fa6411792311e40750f1091",
+      "originalBytes": 2451,
+      "archivedBytes": 2451,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "obs-layer-control-module-inventory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\obs-layer-control\\module-inventory.json",
+      "originalSha256": "8e674bd64a4d6481cbff1d07be78951f91e7a0e9604f691642c7ab6fd5ade55b",
+      "archivedContentSha256": "8e674bd64a4d6481cbff1d07be78951f91e7a0e9604f691642c7ab6fd5ade55b",
+      "compressedSha256": "77258cb4f1efed13a606bce8cc03e15954c9b09919154995172d6b48ad9b8564",
+      "originalBytes": 3292,
+      "archivedBytes": 3292,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "obs-layer-control-stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\obs-layer-control\\stdout.log",
+      "originalSha256": "b56dfde79c19874d37026ef20b0221d34863cd55a4826e15dab3c9cfae261e1f",
+      "archivedContentSha256": "b56dfde79c19874d37026ef20b0221d34863cd55a4826e15dab3c9cfae261e1f",
+      "compressedSha256": "426c70c39226bb58665baa1630578e102894f8cab8002b67d4efa34b5db93bf0",
+      "originalBytes": 2067,
+      "archivedBytes": 2067,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "obs-layer-control-stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\obs-layer-control\\stderr.log",
+      "originalSha256": "f2487ee1df4fb4326384d63c129851ff43e775c5ce012eb5da23b7f1393678fc",
+      "archivedContentSha256": "f2487ee1df4fb4326384d63c129851ff43e775c5ce012eb5da23b7f1393678fc",
+      "compressedSha256": "7888b41b86e85060d55ef69c9c3ed8a0936f9c11498b0b3bde185ea834c60ce9",
+      "originalBytes": 393,
+      "archivedBytes": 393,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-performance-frozen-inputs.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\frozen-inputs.json",
+      "originalSha256": "003605a606b5baa1738f67426038c89e3d94d55ae90304f666ff85683393bc5f",
+      "archivedContentSha256": "003605a606b5baa1738f67426038c89e3d94d55ae90304f666ff85683393bc5f",
+      "compressedSha256": "1f7c42af9bcd8f4760b0c969537b174ba92aecde127d6f6f28599846ea5e33e6",
+      "originalBytes": 128608,
+      "archivedBytes": 128608,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-summary.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\summary.json",
+      "originalSha256": "12840c24a269ca40ebeedbe79386d33d66ee67e0884aacf97179fde623889446",
+      "archivedContentSha256": "8e588a413072f523df8b1cb87d8aa362e9c0a63570728147e36dc7eb15065253",
+      "compressedSha256": "06585ea6f9069f0eaa793326e96ddb46d57f7ff9d8cd8c542d98eb89a01968fc",
+      "originalBytes": 11061981,
+      "archivedBytes": 320047,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-standard-1.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-1.csv",
+      "originalSha256": "4871d65140199dfb72771a86bab3897610e2056d499109d9465753cd61dac900",
+      "archivedContentSha256": "4871d65140199dfb72771a86bab3897610e2056d499109d9465753cd61dac900",
+      "compressedSha256": "3c560e686f643a5a316414cf3c8e14a95d1e6514ee4d229e2afb471200fb7350",
+      "originalBytes": 110253,
+      "archivedBytes": 110253,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-1.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-1.memory.json",
+      "originalSha256": "29d266b20765e0bd46906f51d0346e664def4586b26792e7bd763d780dbf5f35",
+      "archivedContentSha256": "29d266b20765e0bd46906f51d0346e664def4586b26792e7bd763d780dbf5f35",
+      "compressedSha256": "f918f6d77b27314505d9a9b3a5f5766a144150441f09644ef0b6e6f6b6ba0a3e",
+      "originalBytes": 48615,
+      "archivedBytes": 48615,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-1.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-1.json",
+      "originalSha256": "f2b50bcd327689180e36cd8498fd8990c840e5c9c6850ae7ba4b45f24aba4e96",
+      "archivedContentSha256": "f2b50bcd327689180e36cd8498fd8990c840e5c9c6850ae7ba4b45f24aba4e96",
+      "compressedSha256": "5acd77217e63d3b6034771ad40ce234847af01841c7a8df6aa821fbfdf982e63",
+      "originalBytes": 118320,
+      "archivedBytes": 118320,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-1.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-1.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-1.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-1.stdout.log",
+      "originalSha256": "36caf238aa770beccd8f5fa287641fd249c572a4f9bd2a40507214cb86f19908",
+      "archivedContentSha256": "36caf238aa770beccd8f5fa287641fd249c572a4f9bd2a40507214cb86f19908",
+      "compressedSha256": "4ec7715f5f0c0f2c16785ea1f9e9d1d30757b4373c68bb6c611279e5cecbb021",
+      "originalBytes": 2074,
+      "archivedBytes": 2074,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-1.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-1.stderr.log",
+      "originalSha256": "490daffd0280f834ab7b57f6b77cb2e8da13eca845838a5465ae9a6515dfa0c2",
+      "archivedContentSha256": "490daffd0280f834ab7b57f6b77cb2e8da13eca845838a5465ae9a6515dfa0c2",
+      "compressedSha256": "3710f4146a60cc98d96b5f19f6306b8eef03ae1f221c2551528cfc8617232e24",
+      "originalBytes": 393,
+      "archivedBytes": 393,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-1.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-1.environment.json",
+      "originalSha256": "e5453d43d5d9e74bce86a1e829c553c0d09fa3476f26e9c1dfaf8b05e25de545",
+      "archivedContentSha256": "79b0ff2f8ed93e8b77dbd406c8201c80cf09e5c36d3da298439f86faa0391b3d",
+      "compressedSha256": "fdbf65bf880cb63991d716634bd7dbe3414642a8a2daee5780c6716464c69080",
+      "originalBytes": 601414,
+      "archivedBytes": 5096,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-standard-2.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-2.csv",
+      "originalSha256": "b48d87c6c079af3387a06984aeb91385f08793d34abf69c77c2931332b6434b8",
+      "archivedContentSha256": "b48d87c6c079af3387a06984aeb91385f08793d34abf69c77c2931332b6434b8",
+      "compressedSha256": "c6e81b069e1ac689133c8276f6afcefb0f3995158850e631b8fde8558968cd75",
+      "originalBytes": 110251,
+      "archivedBytes": 110251,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-2.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-2.memory.json",
+      "originalSha256": "84ff928f03643355a76eb06e565406f14977160bcdbcc40cf68a9ddf7fb6624e",
+      "archivedContentSha256": "84ff928f03643355a76eb06e565406f14977160bcdbcc40cf68a9ddf7fb6624e",
+      "compressedSha256": "56e5a29e489da71b0ea371183e51a937b554208175d6b5bd27b593f3e97f6e08",
+      "originalBytes": 47543,
+      "archivedBytes": 47543,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-2.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-2.json",
+      "originalSha256": "4ea6d9006eccf4c928d3e7b7f4b8bb142f168869f0721f89edbd786b28381f30",
+      "archivedContentSha256": "4ea6d9006eccf4c928d3e7b7f4b8bb142f168869f0721f89edbd786b28381f30",
+      "compressedSha256": "295efbe24c96cd306ea9414d3df740940f06ca6eeef13a32a0536726eb6cafe2",
+      "originalBytes": 118256,
+      "archivedBytes": 118256,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-2.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-2.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-2.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-2.stdout.log",
+      "originalSha256": "7cfa0301129456b28f06cda68b1c68859b190b5822ef14275aadfc0721b1dd7d",
+      "archivedContentSha256": "7cfa0301129456b28f06cda68b1c68859b190b5822ef14275aadfc0721b1dd7d",
+      "compressedSha256": "a971e798d642f69440c2a18ae2202c0703491f049726d879c07b811ec76b9dbd",
+      "originalBytes": 2074,
+      "archivedBytes": 2074,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-2.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-2.stderr.log",
+      "originalSha256": "3e5d18e149806bb5760330a29bf713e686f2c28a2897293cafe2045e2dc12921",
+      "archivedContentSha256": "3e5d18e149806bb5760330a29bf713e686f2c28a2897293cafe2045e2dc12921",
+      "compressedSha256": "8efa19aede480505be543fb03f611fc68087b5c7e1ec8d66f26e515f6bda6bc2",
+      "originalBytes": 393,
+      "archivedBytes": 393,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-2.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-2.environment.json",
+      "originalSha256": "1b64bdd3cc937f6b05de1e520b15f89401f0c3ec35567e95168f18df489c2a82",
+      "archivedContentSha256": "83fb89403c79a94ff38f182439074732278c57134dc381993ee64825b4a3c3e5",
+      "compressedSha256": "6d9b56bdf3f26dc39157755a5aa2fb9ce3ef98ae2553b74891d67bb1761fefb5",
+      "originalBytes": 601429,
+      "archivedBytes": 5101,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-standard-3.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-3.csv",
+      "originalSha256": "a6eca735638198987821a4311bf96ba393127d02285abaefab16006ebecf0578",
+      "archivedContentSha256": "a6eca735638198987821a4311bf96ba393127d02285abaefab16006ebecf0578",
+      "compressedSha256": "08e60bf12cd0c2228f1f7c930162fe68155aaf66d59cfd3c6634b5e925d20dd2",
+      "originalBytes": 110268,
+      "archivedBytes": 110268,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-3.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-3.memory.json",
+      "originalSha256": "c90c856c304cd5e03b4270674625ad1d688a619cb51be51558f1bfa1d67612b6",
+      "archivedContentSha256": "c90c856c304cd5e03b4270674625ad1d688a619cb51be51558f1bfa1d67612b6",
+      "compressedSha256": "34c723c70edffa7b5cd1fde78f7eb38f811de1a87a18f2843dc4bce7db9ac21c",
+      "originalBytes": 50127,
+      "archivedBytes": 50127,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-3.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-3.json",
+      "originalSha256": "f7cf9691362c6a6475eb0afe36d05f80f19407e06951a5926b8b05e2ba71ca67",
+      "archivedContentSha256": "f7cf9691362c6a6475eb0afe36d05f80f19407e06951a5926b8b05e2ba71ca67",
+      "compressedSha256": "631e765ec4cc73b38f3697e77386df90918792bc93974cd1b48efd3b69e83af0",
+      "originalBytes": 118479,
+      "archivedBytes": 118479,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-3.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-3.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-3.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-3.stdout.log",
+      "originalSha256": "e680ca72bfa228c415e9c7b12b2d4754558ca27d8e8631b9b11fb372fc8705d2",
+      "archivedContentSha256": "e680ca72bfa228c415e9c7b12b2d4754558ca27d8e8631b9b11fb372fc8705d2",
+      "compressedSha256": "f74631dbe9b2a0eef6e5d92208619ddb4ec52064a2c7b8e15dd0db9a69cdf6e4",
+      "originalBytes": 2074,
+      "archivedBytes": 2074,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-3.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-3.stderr.log",
+      "originalSha256": "dcaf5bd913634163f61d7c6c1bb1d7145883b51a26c3f9e570ea6015bda847ec",
+      "archivedContentSha256": "dcaf5bd913634163f61d7c6c1bb1d7145883b51a26c3f9e570ea6015bda847ec",
+      "compressedSha256": "f6a4e84767d339e4b1661ef22629c0f701e7107b4161c94395f4eab9237147b3",
+      "originalBytes": 393,
+      "archivedBytes": 393,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-standard-3.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\standard-3.environment.json",
+      "originalSha256": "00b8553fa2432088807ab9677338706d44336ce45f5f09b6f4d9f3f799c0f33a",
+      "archivedContentSha256": "0b16753420b22b81e9084c45da217bdafa6c29b5422a38813ee6f99f3bdcce6a",
+      "compressedSha256": "b9b2ff2202771d141056a2746e5d7e33331e0864ad9e03f6699ec582c0ddfb0e",
+      "originalBytes": 601389,
+      "archivedBytes": 5076,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-editor-1.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-1.csv",
+      "originalSha256": "511ce54490b72fca8257755965556a588897eec61ae8c3cd20ce0fd0c7b218db",
+      "archivedContentSha256": "511ce54490b72fca8257755965556a588897eec61ae8c3cd20ce0fd0c7b218db",
+      "compressedSha256": "e1bee74b4ffdf0b9115a0f825c5ba6cb7c348ad621c5a972d532003ab8e9d3f9",
+      "originalBytes": 110249,
+      "archivedBytes": 110249,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-1.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-1.memory.json",
+      "originalSha256": "fb2733f519d513df540e142c1314c4b984909223857cc820ac31e2c1489e66b3",
+      "archivedContentSha256": "fb2733f519d513df540e142c1314c4b984909223857cc820ac31e2c1489e66b3",
+      "compressedSha256": "bea6e71a5dfacb6e18226161793d1351af28fc9f471dd505768a6008ec9562ec",
+      "originalBytes": 26821,
+      "archivedBytes": 26821,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-1.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-1.json",
+      "originalSha256": "96973acf72717a6a6068c41f986cdc2ddf9bd1193e4fad1557470d0f201aafb1",
+      "archivedContentSha256": "96973acf72717a6a6068c41f986cdc2ddf9bd1193e4fad1557470d0f201aafb1",
+      "compressedSha256": "543ee47f11ff3ea31ae1037e66b3316155ffc81174c55f6e16fe88162b1cb1a1",
+      "originalBytes": 125499,
+      "archivedBytes": 125499,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-1.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-1.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-1.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-1.stdout.log",
+      "originalSha256": "ada301e45075616076e1cbe4af6b410481bfcf8e89da374afc2cada801076eb8",
+      "archivedContentSha256": "ada301e45075616076e1cbe4af6b410481bfcf8e89da374afc2cada801076eb8",
+      "compressedSha256": "0061dc9cee7240bc4aa1bf609de871c47cf7ff36a6d70e84afac555a9571293f",
+      "originalBytes": 2811,
+      "archivedBytes": 2811,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-1.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-1.stderr.log",
+      "originalSha256": "027a844c37324d2ed71c8a6a435207750bb50cf57f3d00d7a7a23f42e2b0de9c",
+      "archivedContentSha256": "027a844c37324d2ed71c8a6a435207750bb50cf57f3d00d7a7a23f42e2b0de9c",
+      "compressedSha256": "fff3be822306c8e2cecd1e3ea5386d8fedbebfb52172101cdc7040e7907965f2",
+      "originalBytes": 1015,
+      "archivedBytes": 1015,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-1.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-1.environment.json",
+      "originalSha256": "753206f3d59a835d115f8bf0e784e19e2ee3da27f6daaf2c8da2e33af7198394",
+      "archivedContentSha256": "c9a04700bb04760db823735f7de5c8451bf847ff30797bb38ca61cc1b2024f16",
+      "compressedSha256": "6b0fcab5b89aba416a0a2715064428175739eb297fed1ac472b078be09adc9a8",
+      "originalBytes": 601419,
+      "archivedBytes": 5100,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-editor-2.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-2.csv",
+      "originalSha256": "16411d286769eebc63fd5a6027879474a14bbaca8da5cd742ce16dd9e50db4c7",
+      "archivedContentSha256": "16411d286769eebc63fd5a6027879474a14bbaca8da5cd742ce16dd9e50db4c7",
+      "compressedSha256": "09a60a4ed0f678974fda79bdfc98bb6b29f62fc68312ec92784de5e464d7d08f",
+      "originalBytes": 110249,
+      "archivedBytes": 110249,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-2.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-2.memory.json",
+      "originalSha256": "ef4d6be6e0d69807a1c176977e7d14283fa5ee203a7b5c840afa522a2961e22c",
+      "archivedContentSha256": "ef4d6be6e0d69807a1c176977e7d14283fa5ee203a7b5c840afa522a2961e22c",
+      "compressedSha256": "90eeb901f47f51392c2bec2040352336cd07d37f5c128c3eaeca2b4795ee276b",
+      "originalBytes": 26846,
+      "archivedBytes": 26846,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-2.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-2.json",
+      "originalSha256": "c4d565207a3c5fc32e14bb23010a0051acc8431b3480ce87626474f71136ef95",
+      "archivedContentSha256": "c4d565207a3c5fc32e14bb23010a0051acc8431b3480ce87626474f71136ef95",
+      "compressedSha256": "e5d0ba3d9ab3793b12db6612e1f97c47b87906d81f7fac7e2311628bd64cfbeb",
+      "originalBytes": 125184,
+      "archivedBytes": 125184,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-2.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-2.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-2.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-2.stdout.log",
+      "originalSha256": "e4ceeea32e60e5fc469539f390e02d6e47dbf530e4001ed8eaf391e3db7fccf3",
+      "archivedContentSha256": "e4ceeea32e60e5fc469539f390e02d6e47dbf530e4001ed8eaf391e3db7fccf3",
+      "compressedSha256": "adc9bc66924a707376ecea9aa50f63cec2826398a4c7eb3c95e1c2177a0a63dd",
+      "originalBytes": 2811,
+      "archivedBytes": 2811,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-2.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-2.stderr.log",
+      "originalSha256": "32ea5666bcc1b42a029debc8c3df7f3f9a77b198d2e89c9fc91e69dce54e0a06",
+      "archivedContentSha256": "32ea5666bcc1b42a029debc8c3df7f3f9a77b198d2e89c9fc91e69dce54e0a06",
+      "compressedSha256": "f380590b92d30f2d144df8bad1dc46d012aa1b2634d5a79f4ea2ebe953802a35",
+      "originalBytes": 1015,
+      "archivedBytes": 1015,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-2.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-2.environment.json",
+      "originalSha256": "5de5de3a3f35d8df675cc4fe5281f531c5299ebe50e91ce94dba2143fa682b55",
+      "archivedContentSha256": "4d13c20f08071ff0ae95b664812b89dc584f54e7bc81280fff9ffa0c6d895c77",
+      "compressedSha256": "dd2067e2af2b4a5b1a6492d38a84367c28e81582b40f1cc36d64df7f1104c3a7",
+      "originalBytes": 751719,
+      "archivedBytes": 6330,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-editor-3.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-3.csv",
+      "originalSha256": "57cddcf1632d79035e108affdc69be5e1b422297cf55aef25d09d5f76a529105",
+      "archivedContentSha256": "57cddcf1632d79035e108affdc69be5e1b422297cf55aef25d09d5f76a529105",
+      "compressedSha256": "82c70203b8d1b9e737eb4b09e722d84b2467d8664229cb1e876544d0f485c667",
+      "originalBytes": 110249,
+      "archivedBytes": 110249,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-3.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-3.memory.json",
+      "originalSha256": "cd21fa20f8401806965d36ba3c6f290dc5d607597f03f7ae0ac4c896173544f2",
+      "archivedContentSha256": "cd21fa20f8401806965d36ba3c6f290dc5d607597f03f7ae0ac4c896173544f2",
+      "compressedSha256": "a01cc73b296b4777d6cefac30b0a2f1bcb609f6c3cbcb29a9638945aa3eeaab9",
+      "originalBytes": 25660,
+      "archivedBytes": 25660,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-3.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-3.json",
+      "originalSha256": "87046948e1564f52ee4b71617a2bb5f118c5c1cb79d80c2685f809b2c39840dc",
+      "archivedContentSha256": "87046948e1564f52ee4b71617a2bb5f118c5c1cb79d80c2685f809b2c39840dc",
+      "compressedSha256": "2a61551013fd45ee6b1942da6c055bb545f40c7cab4638819e35e292f86e366f",
+      "originalBytes": 125551,
+      "archivedBytes": 125551,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-3.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-3.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-3.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-3.stdout.log",
+      "originalSha256": "eb40dc17dc433a753dd1ffa37ed4e8c70c24104a76c42a1f4a1bf9de5dffb51b",
+      "archivedContentSha256": "eb40dc17dc433a753dd1ffa37ed4e8c70c24104a76c42a1f4a1bf9de5dffb51b",
+      "compressedSha256": "d07bfdbffa5ebf82b7e87cde2ca212796ab4dc4f82efb00de521735f46497576",
+      "originalBytes": 2811,
+      "archivedBytes": 2811,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-3.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-3.stderr.log",
+      "originalSha256": "a10ea159fd237a6db43c18ffb9ab81a660459126fe2d2c4fb5c11dbcec2ed880",
+      "archivedContentSha256": "a10ea159fd237a6db43c18ffb9ab81a660459126fe2d2c4fb5c11dbcec2ed880",
+      "compressedSha256": "8aaba2f86a6db5cfb34c597955edf7e08f81063b20d65a0d619c93278e1ac835",
+      "originalBytes": 1015,
+      "archivedBytes": 1015,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-editor-3.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\editor-3.environment.json",
+      "originalSha256": "1c24aea67363981f43da0465bf2b3bec0734884a0073693ee4cfb71c096ca638",
+      "archivedContentSha256": "110b201e450fb173a30f46e448c9e1578aeadc228a59685450c7682a26bd92b3",
+      "compressedSha256": "dca77e147f61375e2e59599f5ba45eca19e4d54dd67e91a1bef743fc7089eb7c",
+      "originalBytes": 601421,
+      "archivedBytes": 5096,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-stress-1.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-1.csv",
+      "originalSha256": "ad4b87d626c0f42ea485b85c907b991d01842076ed374ee60fb7b56cba398105",
+      "archivedContentSha256": "ad4b87d626c0f42ea485b85c907b991d01842076ed374ee60fb7b56cba398105",
+      "compressedSha256": "c743e90deeb7a5b5f101e275e086e4667bbd97e8f248cf3d1a5c48fa9b86510f",
+      "originalBytes": 111085,
+      "archivedBytes": 111085,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-1.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-1.memory.json",
+      "originalSha256": "49a4d8114ac18497148adf3489575695cd97a0b2045808a0f6d3f9a6a48c372b",
+      "archivedContentSha256": "49a4d8114ac18497148adf3489575695cd97a0b2045808a0f6d3f9a6a48c372b",
+      "compressedSha256": "e2f0756b2a864d94c5325542163dc41ed67ecd28e28296096499235e56f39a62",
+      "originalBytes": 58035,
+      "archivedBytes": 58035,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-1.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-1.json",
+      "originalSha256": "4cc1f769aab025c3e442223479e2d83c716d460b024a30ea91a91feb3388187b",
+      "archivedContentSha256": "4cc1f769aab025c3e442223479e2d83c716d460b024a30ea91a91feb3388187b",
+      "compressedSha256": "59b91aa7c9b1ebb273b9eda333278dfec2150f38fc08eff55dc7ace41e477242",
+      "originalBytes": 118821,
+      "archivedBytes": 118821,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-1.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-1.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-1.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-1.stdout.log",
+      "originalSha256": "00c71d8fc0fdd8140a57d2f4e1b7237881376061c6dc96daa4369c2554837bef",
+      "archivedContentSha256": "00c71d8fc0fdd8140a57d2f4e1b7237881376061c6dc96daa4369c2554837bef",
+      "compressedSha256": "549e40580ebb66bc99b2022440627a67e98bb408ba57cac324ee477cc27c5495",
+      "originalBytes": 2073,
+      "archivedBytes": 2073,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-1.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-1.stderr.log",
+      "originalSha256": "9ff14d7f43902c79e6724c5e4bbb64317dd341540dbc2798255cc54471e089bc",
+      "archivedContentSha256": "9ff14d7f43902c79e6724c5e4bbb64317dd341540dbc2798255cc54471e089bc",
+      "compressedSha256": "f07bc3bd163e8a3dbd8314d2204fe7c9662a797b2ee92ed44cf0f3809ce0c826",
+      "originalBytes": 393,
+      "archivedBytes": 393,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-1.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-1.environment.json",
+      "originalSha256": "c7b47e2d31a123487443cfbb4d127b013b24119233ed7c4ecb91e03639cfb9ba",
+      "archivedContentSha256": "6152e77da9ba650eefd5cab40894093a05c4cf4773fab689e8fc5e1d039b021f",
+      "compressedSha256": "cff6e97002ba441a77e862a1bd7dcc5f3ef0bc361a9ada671cc40959d2af092b",
+      "originalBytes": 601397,
+      "archivedBytes": 5086,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-stress-2.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-2.csv",
+      "originalSha256": "14697033f80c7c659d776fac004842e55748192288b80c6a23e996105322d45b",
+      "archivedContentSha256": "14697033f80c7c659d776fac004842e55748192288b80c6a23e996105322d45b",
+      "compressedSha256": "4ba840dc3c3c373797dd44b86046757aa4b1db50abcb1543c107915fef266701",
+      "originalBytes": 111331,
+      "archivedBytes": 111331,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-2.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-2.memory.json",
+      "originalSha256": "48cda3767f0c361e10f3e00587221e44391b038f213275ee913d7901b3f2e31c",
+      "archivedContentSha256": "48cda3767f0c361e10f3e00587221e44391b038f213275ee913d7901b3f2e31c",
+      "compressedSha256": "838f54726158e9f34c87be30549108b1452db14bde505960e7c9aaa8c2b4657f",
+      "originalBytes": 58733,
+      "archivedBytes": 58733,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-2.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-2.json",
+      "originalSha256": "605f5399313d78975d9686013c5ef7bca568afcd084b907a7c6ea5243ac8e2f5",
+      "archivedContentSha256": "605f5399313d78975d9686013c5ef7bca568afcd084b907a7c6ea5243ac8e2f5",
+      "compressedSha256": "4b914d40a349952122427389f854c8d6ef66137777de081ec6b15e048c97d7f2",
+      "originalBytes": 118931,
+      "archivedBytes": 118931,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-2.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-2.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-2.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-2.stdout.log",
+      "originalSha256": "ef44b8c0a55839292ea4a9af9a1472eea28fd17e01229b028db6b9a18792cafa",
+      "archivedContentSha256": "ef44b8c0a55839292ea4a9af9a1472eea28fd17e01229b028db6b9a18792cafa",
+      "compressedSha256": "f73df61a78f0b3fcd1e73022fb96824a60c0900005a5a76192e835de70577529",
+      "originalBytes": 2075,
+      "archivedBytes": 2075,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-2.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-2.stderr.log",
+      "originalSha256": "895ec7898b4a92db9ae191c2514e5522422cb9a5dc9f17daba64e117573dc632",
+      "archivedContentSha256": "895ec7898b4a92db9ae191c2514e5522422cb9a5dc9f17daba64e117573dc632",
+      "compressedSha256": "bee94f7d30c41b1931f89c15a8ef127972bc05300ed75022642f0b7974a6b99c",
+      "originalBytes": 393,
+      "archivedBytes": 393,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-2.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-2.environment.json",
+      "originalSha256": "2beabb1b046b1407bbe19fff428d5d41f4044e83e9cd5da26f65de425249d37d",
+      "archivedContentSha256": "8de7fb69f787d4b32148ccb772c7d3181a744f5a35443299485c9f2ec00000a3",
+      "compressedSha256": "d1f58ef7a1427d2decdfe0860a6514d2c28a22bbe0da4c8f27b6f1deb8487195",
+      "originalBytes": 601411,
+      "archivedBytes": 5098,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-stress-3.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-3.csv",
+      "originalSha256": "4c4adc615f3c75bc6cca558058f1b06e480581a5059fbbe419dcac9860ae09b2",
+      "archivedContentSha256": "4c4adc615f3c75bc6cca558058f1b06e480581a5059fbbe419dcac9860ae09b2",
+      "compressedSha256": "594d1ea0d7715a80603625d710826eb51137f2f4975c5edf6e27b198b0259c57",
+      "originalBytes": 111250,
+      "archivedBytes": 111250,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-3.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-3.memory.json",
+      "originalSha256": "f48762fb426983525a2168ec2270bd6428b7e078b101e60fe01876cc650b71a1",
+      "archivedContentSha256": "f48762fb426983525a2168ec2270bd6428b7e078b101e60fe01876cc650b71a1",
+      "compressedSha256": "a1f346bc32e09c212889a24d3fa8d7de235675e8bdab770e53284f2026c0b558",
+      "originalBytes": 58304,
+      "archivedBytes": 58304,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-3.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-3.json",
+      "originalSha256": "20c37d8b49be993cd8a184f2cdb877393b4deeab6aff304d10de88c0835bc5d7",
+      "archivedContentSha256": "20c37d8b49be993cd8a184f2cdb877393b4deeab6aff304d10de88c0835bc5d7",
+      "compressedSha256": "13b40b957b39a159eaa04d86c8d3e832ebe4fc2f8c36eca19c8570011a38c28e",
+      "originalBytes": 118740,
+      "archivedBytes": 118740,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-3.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-3.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-3.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-3.stdout.log",
+      "originalSha256": "b953c38d349ea55b49816ad1253b7ebf75e5ba4fb71f32b2dee3d1553bfdc914",
+      "archivedContentSha256": "b953c38d349ea55b49816ad1253b7ebf75e5ba4fb71f32b2dee3d1553bfdc914",
+      "compressedSha256": "b5149c3f7d33ecb1cb87ace158566e937c1c88120fdb16138557124d6756939b",
+      "originalBytes": 2074,
+      "archivedBytes": 2074,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-3.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-3.stderr.log",
+      "originalSha256": "21b7d721fcb52051834892267cd8ff96f28db08c166ca4f738da3e36df0ce29b",
+      "archivedContentSha256": "21b7d721fcb52051834892267cd8ff96f28db08c166ca4f738da3e36df0ce29b",
+      "compressedSha256": "cce4ecda64b37c681ee657611b3bcc0e630fd066ee60f3c96cbda3108e9fd597",
+      "originalBytes": 393,
+      "archivedBytes": 393,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-stress-3.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\stress-3.environment.json",
+      "originalSha256": "9f0b29351077f74649a8cba59231858d1bc8ad3d4c90e9a358c1d2e90aa8abb6",
+      "archivedContentSha256": "a7f266b7a375c15ce67446bed3a34af30bee4b15bede2517d9c2931c4fd3b9d2",
+      "compressedSha256": "237bdfd4b45060c90b64e5618429b537a9b7418da58469b297f2235be5d8919d",
+      "originalBytes": 751722,
+      "archivedBytes": 6333,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-exploration-1.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-1.csv",
+      "originalSha256": "1452a61c0bfaeb5a0627502922d8a7ae12f4fff2836ca7caed5c0b5c7fccf837",
+      "archivedContentSha256": "1452a61c0bfaeb5a0627502922d8a7ae12f4fff2836ca7caed5c0b5c7fccf837",
+      "compressedSha256": "9b1db1a813f46095147764506e0e6104edf50b494c71fee415caffd3bcbb12a5",
+      "originalBytes": 112540,
+      "archivedBytes": 112540,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-1.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-1.memory.json",
+      "originalSha256": "0490b1796f209e82da63b874be5a68d6dfa5ff8607b599c3e6e3b50e24c33a49",
+      "archivedContentSha256": "0490b1796f209e82da63b874be5a68d6dfa5ff8607b599c3e6e3b50e24c33a49",
+      "compressedSha256": "71889171fed879b015f594ca47ce0b756742eeee66ce47a22aa8eaaaa8c18a6e",
+      "originalBytes": 67389,
+      "archivedBytes": 67389,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-1.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-1.json",
+      "originalSha256": "042b27883e9d2b9e5637d93d929df6aa6fd39320960b48135e00d5b6ddaed91c",
+      "archivedContentSha256": "042b27883e9d2b9e5637d93d929df6aa6fd39320960b48135e00d5b6ddaed91c",
+      "compressedSha256": "7acdbf01a1e7858471757042a5f84f94cb893d43da8f0ef66b6b7bfd42971f1c",
+      "originalBytes": 120435,
+      "archivedBytes": 120435,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-1.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-1.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-1.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-1.stdout.log",
+      "originalSha256": "43c3d72b465fcc5eaa1aa03bddf69c8513a326374be77ce00a7aa90ba323913a",
+      "archivedContentSha256": "43c3d72b465fcc5eaa1aa03bddf69c8513a326374be77ce00a7aa90ba323913a",
+      "compressedSha256": "f6f55ad1266e32eacd55ed956d678648ac193d9db29393923a0b153634d50246",
+      "originalBytes": 2082,
+      "archivedBytes": 2082,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-1.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-1.stderr.log",
+      "originalSha256": "1a5b90c3c0ea02a11b2eb76af3939dd15183c436d322a01f2303cbf789359659",
+      "archivedContentSha256": "1a5b90c3c0ea02a11b2eb76af3939dd15183c436d322a01f2303cbf789359659",
+      "compressedSha256": "90162dfd406217673e814697cc40a5af826d4d18dc4679ace9dec803d1549410",
+      "originalBytes": 394,
+      "archivedBytes": 394,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-1.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-1.environment.json",
+      "originalSha256": "4241328f8f7002c1faae2a8b080f44e1aad7cc5ff5e010843ca26df91c86a30c",
+      "archivedContentSha256": "a5e26463e5d50154f31bcdbcb7dbc0e6b1f9ab4c723a7acfda84092f9169f8b7",
+      "compressedSha256": "ba6b9c3a592aab72dfdd061b7b103074d0f64d33818ded5cf38532a8eda02965",
+      "originalBytes": 676569,
+      "archivedBytes": 5710,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-exploration-2.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-2.csv",
+      "originalSha256": "8f3d755329a3a59e310409fda3afabff9a9b9a228ae21ce9c0da363a8663f9b3",
+      "archivedContentSha256": "8f3d755329a3a59e310409fda3afabff9a9b9a228ae21ce9c0da363a8663f9b3",
+      "compressedSha256": "997437cc7ff3b6ed2597538e0d160f3780de8ba233f58841e6bff0ca217a187c",
+      "originalBytes": 112529,
+      "archivedBytes": 112529,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-2.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-2.memory.json",
+      "originalSha256": "2b71256de64c6282b57ddf06fc648e849b16f1bc62e18085a22233a94b37c0ae",
+      "archivedContentSha256": "2b71256de64c6282b57ddf06fc648e849b16f1bc62e18085a22233a94b37c0ae",
+      "compressedSha256": "19f925b7935a44b70ca4131409000b6f570f8e1b57c435aefe8005b756ab54c9",
+      "originalBytes": 67496,
+      "archivedBytes": 67496,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-2.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-2.json",
+      "originalSha256": "a904e0d1c762c68c3c3403bdc862ed469f4aa2f617edc5aacb19f688a880a2f1",
+      "archivedContentSha256": "a904e0d1c762c68c3c3403bdc862ed469f4aa2f617edc5aacb19f688a880a2f1",
+      "compressedSha256": "a4b82f367616d7f7e89d0bb1942e123470cd11ee88c89268c9d2fbeb6d0f7f83",
+      "originalBytes": 120577,
+      "archivedBytes": 120577,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-2.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-2.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-2.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-2.stdout.log",
+      "originalSha256": "f1e2962aaa238da43be1eace13351e12c0743d16e8a9bcc68bfd9d358aebcc18",
+      "archivedContentSha256": "f1e2962aaa238da43be1eace13351e12c0743d16e8a9bcc68bfd9d358aebcc18",
+      "compressedSha256": "5ca1e63d81a2ca5b9dc9502d4c84d2c76e6a324b37c2318e791942df485576cd",
+      "originalBytes": 2083,
+      "archivedBytes": 2083,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-2.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-2.stderr.log",
+      "originalSha256": "ae8af3d259fec05d8f5f3efa5ee51ac856af9151b9e2f191a1a902fc947d29ab",
+      "archivedContentSha256": "ae8af3d259fec05d8f5f3efa5ee51ac856af9151b9e2f191a1a902fc947d29ab",
+      "compressedSha256": "cfb3b96bf4c31c39656fd6593e8209c5214ef1448d486e31049dd49dca5aa318",
+      "originalBytes": 394,
+      "archivedBytes": 394,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-2.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-2.environment.json",
+      "originalSha256": "b910e361e001f20a33e5fbe0f56d444204936a6405851b888a1a4f7b741435cc",
+      "archivedContentSha256": "4c572934f7dfaa99035ed75a71e7d5383278ede660e13911d4d748af9ce427ec",
+      "compressedSha256": "e14d3b417f206ba2a2bb01ad2c852fcee3cacff920dc9f326c202a3ec0bd7885",
+      "originalBytes": 601426,
+      "archivedBytes": 5088,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-exploration-3.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-3.csv",
+      "originalSha256": "f21ebe26b2f8273c0c1050e041912665abc2a7973befadfe5926e1f97cf78172",
+      "archivedContentSha256": "f21ebe26b2f8273c0c1050e041912665abc2a7973befadfe5926e1f97cf78172",
+      "compressedSha256": "15db798e462870259777dec5535ac19b2cc53d38aa3a407a366aac4a65dbba2f",
+      "originalBytes": 112442,
+      "archivedBytes": 112442,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-3.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-3.memory.json",
+      "originalSha256": "200dfec998d4e168d05080c0b8ab3da1978243cfac9217138197103cad4606a1",
+      "archivedContentSha256": "200dfec998d4e168d05080c0b8ab3da1978243cfac9217138197103cad4606a1",
+      "compressedSha256": "209f2ee89975d5d30e4c41dc9d403d4bc6e8525fbfcb8d77dbaa62a3b580ff73",
+      "originalBytes": 65966,
+      "archivedBytes": 65966,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-3.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-3.json",
+      "originalSha256": "3a0e3aa9b0cdcf6f93b4f922d7170472e5f20cca4e173dd59d0832e51f84ae65",
+      "archivedContentSha256": "3a0e3aa9b0cdcf6f93b4f922d7170472e5f20cca4e173dd59d0832e51f84ae65",
+      "compressedSha256": "6244e2bbcd2c17b558e99a4ad06a4e64191abaaa5d4690c9165b8c72a8c91ef6",
+      "originalBytes": 120355,
+      "archivedBytes": 120355,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-3.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-3.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-3.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-3.stdout.log",
+      "originalSha256": "5db4f0d56ba50324273178451cc52b1569dfded04c5502c6226e0a7a1ca85ec3",
+      "archivedContentSha256": "5db4f0d56ba50324273178451cc52b1569dfded04c5502c6226e0a7a1ca85ec3",
+      "compressedSha256": "6f6345b86db4c7fd47fa1aab749865fe66a683d09eb6af63809e6d8348eb26cc",
+      "originalBytes": 2082,
+      "archivedBytes": 2082,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-3.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-3.stderr.log",
+      "originalSha256": "facfc1372a298ee4de6a94263f3e7923d73886ef20e69d8a89aaac7e96c7d032",
+      "archivedContentSha256": "facfc1372a298ee4de6a94263f3e7923d73886ef20e69d8a89aaac7e96c7d032",
+      "compressedSha256": "25eabc3d5949c94b4247fe77bbc8544a0d90adba3a6441d21725b324a4081181",
+      "originalBytes": 394,
+      "archivedBytes": 394,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-exploration-3.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\exploration-3.environment.json",
+      "originalSha256": "25ecd5619ce6023a57a1b7489ee8361c368e4a1c4c2a2ac13008c1c2ad092c6a",
+      "archivedContentSha256": "35344b3c1a893e68f17d11e99c09fcf2bfa99bb6ca98ff3e4ab616180bda25d8",
+      "compressedSha256": "35077055827f8b8851173524f6d8b0d844cc2a4c813a6a9aa0829faae88334c0",
+      "originalBytes": 601412,
+      "archivedBytes": 5101,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-platformer-1.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-1.csv",
+      "originalSha256": "4c2420c887ecf4f570eea6b4b2dde0c50d28119309532000abaa7dfffa64d90c",
+      "archivedContentSha256": "4c2420c887ecf4f570eea6b4b2dde0c50d28119309532000abaa7dfffa64d90c",
+      "compressedSha256": "237f8710f8764f144f0e4bba9154fbcf06d163b0b1951fe6fb7c6ae0840faa5e",
+      "originalBytes": 110249,
+      "archivedBytes": 110249,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-1.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-1.memory.json",
+      "originalSha256": "9211831c69970c0549e2ecc2006faa1a856e0daf16672e9e7d2fc8b3e22a90cd",
+      "archivedContentSha256": "9211831c69970c0549e2ecc2006faa1a856e0daf16672e9e7d2fc8b3e22a90cd",
+      "compressedSha256": "b957a76c486b06fcff08d4e15b7082d5dde74d4c4b27c602890c244340dc8523",
+      "originalBytes": 30828,
+      "archivedBytes": 30828,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-1.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-1.json",
+      "originalSha256": "6de7ea8aa2f6e7ff111b84041c105b8a8fd9f2066141f0e8cd780af92207b04c",
+      "archivedContentSha256": "6de7ea8aa2f6e7ff111b84041c105b8a8fd9f2066141f0e8cd780af92207b04c",
+      "compressedSha256": "1e3577ca25a85d1f25f3279bca34ea6a03f7940c6fff404d1d1ece73d2e55bd1",
+      "originalBytes": 119738,
+      "archivedBytes": 119738,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-1.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-1.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-1.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-1.stdout.log",
+      "originalSha256": "da1a09447c86493ce9973403814a8abfc05a04ddd85921aaf824a6f6ae14a5cc",
+      "archivedContentSha256": "da1a09447c86493ce9973403814a8abfc05a04ddd85921aaf824a6f6ae14a5cc",
+      "compressedSha256": "73a661ca20e75c4f5e08df6d0752b3e8eda26fa620fa44f3e5b75305f5ee66c5",
+      "originalBytes": 2076,
+      "archivedBytes": 2076,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-1.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-1.stderr.log",
+      "originalSha256": "5c82033efbec650711ee98db7d840fda13f42ff6bce3008955d74e60835c7eb7",
+      "archivedContentSha256": "5c82033efbec650711ee98db7d840fda13f42ff6bce3008955d74e60835c7eb7",
+      "compressedSha256": "2eb7b193709e5ca2e9baa67c5f6b73d5b7059a4e9d3fba9869664c1bd7a43564",
+      "originalBytes": 394,
+      "archivedBytes": 394,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-1.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-1.environment.json",
+      "originalSha256": "575f3e8bb138d555ba234e3ccd585b35d171f6cf4fdce8b1b56b040fdf49746d",
+      "archivedContentSha256": "4a5b572ee17f50c48d55ab3072d0667e201b701bca0f7684ca73e5c49185c43d",
+      "compressedSha256": "58217d4d8f74d93d6a67a684fb17acdec6431e423ba4e23f9463b895c448dea6",
+      "originalBytes": 601432,
+      "archivedBytes": 5100,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-platformer-2.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-2.csv",
+      "originalSha256": "c486b88b908c47a40f1092e131e5ca6ba69e74bd2dae21fea173f88d407182dd",
+      "archivedContentSha256": "c486b88b908c47a40f1092e131e5ca6ba69e74bd2dae21fea173f88d407182dd",
+      "compressedSha256": "167b5d59222c0f01f45aa8e65b5de6d25d62b9608b297f082d739beef808a471",
+      "originalBytes": 110249,
+      "archivedBytes": 110249,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-2.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-2.memory.json",
+      "originalSha256": "641a352b70eceaaf28fd6b31e5433f13bde61bb1df588d648467326a5478ded4",
+      "archivedContentSha256": "641a352b70eceaaf28fd6b31e5433f13bde61bb1df588d648467326a5478ded4",
+      "compressedSha256": "018945e360f3a0975005fe07369bc3ec5faf703dc4b6e5335e43e40152b22c5b",
+      "originalBytes": 28609,
+      "archivedBytes": 28609,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-2.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-2.json",
+      "originalSha256": "19c4587ffc7fddbbcf8ac6ec76d83585480c47a76fc484da785480fe12b32570",
+      "archivedContentSha256": "19c4587ffc7fddbbcf8ac6ec76d83585480c47a76fc484da785480fe12b32570",
+      "compressedSha256": "984cfbe52bc2519841d0d873df437be0bd9ec2dc327e602236e8ce902723bce7",
+      "originalBytes": 119617,
+      "archivedBytes": 119617,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-2.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-2.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-2.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-2.stdout.log",
+      "originalSha256": "88adec7b27f4c43254ef8a7d06df057ccf3949a5230b57b41a52eae7487ec722",
+      "archivedContentSha256": "88adec7b27f4c43254ef8a7d06df057ccf3949a5230b57b41a52eae7487ec722",
+      "compressedSha256": "0e697f416e232c7117f1f7fecaf46857daaf0c0a8567c74cc54d5f5c4d1cf2bc",
+      "originalBytes": 2076,
+      "archivedBytes": 2076,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-2.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-2.stderr.log",
+      "originalSha256": "62f5680d99f29eea392037da62f7e7c0d590222c517eda462835bb601884fcff",
+      "archivedContentSha256": "62f5680d99f29eea392037da62f7e7c0d590222c517eda462835bb601884fcff",
+      "compressedSha256": "47cc07db1dbfaa298774bd097e743efb83664bb5bcfb283a83d47054ca630fd9",
+      "originalBytes": 394,
+      "archivedBytes": 394,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-2.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-2.environment.json",
+      "originalSha256": "d8697e4dd5bdbfaae0c9a8d39b9c589c4f88bdcac692ab996a46d13752e4ba84",
+      "archivedContentSha256": "1cab72e3d4dd1ac3658e56760edb1182e2a76902751db2df197e4ff24413808b",
+      "compressedSha256": "3889b703741a2db55e41e6219d75b56ff89d8ae3be30ff85f6a7bcd689167e5d",
+      "originalBytes": 601414,
+      "archivedBytes": 5096,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "formal-platformer-3.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-3.csv",
+      "originalSha256": "c9b6fbd332957d3385f7edca5d9e14400bb87ec9c9dfadd8b43d16cc5c1e17bc",
+      "archivedContentSha256": "c9b6fbd332957d3385f7edca5d9e14400bb87ec9c9dfadd8b43d16cc5c1e17bc",
+      "compressedSha256": "6a9524cebcd6f24cf5d90332d0ba356b24a2b73e34db6fc130cf469c50014002",
+      "originalBytes": 110249,
+      "archivedBytes": 110249,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-3.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-3.memory.json",
+      "originalSha256": "b09528ffac8d75efb11718eb14892d8e7901b690789a89185b50d9e8999f8068",
+      "archivedContentSha256": "b09528ffac8d75efb11718eb14892d8e7901b690789a89185b50d9e8999f8068",
+      "compressedSha256": "11d555b8772f758ecd1daf56a6a6fc99221b0f55a842fe64fcc14786b2dc55ab",
+      "originalBytes": 30123,
+      "archivedBytes": 30123,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-3.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-3.json",
+      "originalSha256": "e3d61f482ac1e879097601e6aaf601148ae58588493ad686a28d828338ac12a4",
+      "archivedContentSha256": "e3d61f482ac1e879097601e6aaf601148ae58588493ad686a28d828338ac12a4",
+      "compressedSha256": "4af03565dd457693550c2c393f0fb67b2d86a79779da1f94556905cf5a25debc",
+      "originalBytes": 119739,
+      "archivedBytes": 119739,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-3.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-3.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-3.stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-3.stdout.log",
+      "originalSha256": "375b07c324cd185a8626485cc7b192893a53ad67bfb3005402d50849575a4a8b",
+      "archivedContentSha256": "375b07c324cd185a8626485cc7b192893a53ad67bfb3005402d50849575a4a8b",
+      "compressedSha256": "30b946aab4bff5336d94d1f9f4b603fcbfdf76b30d66108555960f76e7e664cd",
+      "originalBytes": 2076,
+      "archivedBytes": 2076,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-3.stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-3.stderr.log",
+      "originalSha256": "2f2017fafd2300320dbebea2a9262e596bf4061185381f1262dbb5e1fc9eca6e",
+      "archivedContentSha256": "2f2017fafd2300320dbebea2a9262e596bf4061185381f1262dbb5e1fc9eca6e",
+      "compressedSha256": "add4f8e48afe707eca47b307d6e40502527209e80c8967e99a12970b7f00c9f0",
+      "originalBytes": 394,
+      "archivedBytes": 394,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-platformer-3.environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\formal-performance\\platformer-3.environment.json",
+      "originalSha256": "41808674571de0e06515fbb54cc53da70848b81a8ef7655cff386fb9ba7dc422",
+      "archivedContentSha256": "7832bfb4ea62c42e0196c0cb1b87fccd66021111a9faec7d5b8a4c78cc2c3047",
+      "compressedSha256": "f7746da7a11cc4d402f834fcfaa83797a5167053bcc537ecf6975b02e721d7c0",
+      "originalBytes": 902032,
+      "archivedBytes": 7568,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "minimal-fault-standard-1-result.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\result.json",
+      "originalSha256": "dabe4e46ab44f23a4f1f6b4af84501ad80f2afe18915687b3082806b7b319ed1",
+      "archivedContentSha256": "852e9b50cc387c4203691889e11aecaf17db533eb52ef225c163f3dc8d932112",
+      "compressedSha256": "bad0e2ee623c879daab28626ed3b7359fb439d3cb2c24f9acbf151b3401915e1",
+      "originalBytes": 609899,
+      "archivedBytes": 13122,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "minimal-fault-standard-1-measurement.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\measurement.memory.json",
+      "originalSha256": "bf419aa89fa28b4fdd7fd21ec37c7b06e58d48063e74ee6cff5abc384be32229",
+      "archivedContentSha256": "bf419aa89fa28b4fdd7fd21ec37c7b06e58d48063e74ee6cff5abc384be32229",
+      "compressedSha256": "19d6c26b1a309d7aa741431933350a0cc91e877c2621c50488adb630dc68e4e3",
+      "originalBytes": 47658,
+      "archivedBytes": 47658,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-1-measurement.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\measurement.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-1-measurement.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\measurement.csv",
+      "originalSha256": "dd0fff3421fd27837206c561984814c7f97d8dedbe7e8a1c0e865fa1b99a33a5",
+      "archivedContentSha256": "dd0fff3421fd27837206c561984814c7f97d8dedbe7e8a1c0e865fa1b99a33a5",
+      "compressedSha256": "34b9cd32dca80cb72f6ec49c1c8072dc82a0f034ec5da9bf85a46303b79654ee",
+      "originalBytes": 110267,
+      "archivedBytes": 110267,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-1-measurement.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\measurement.json",
+      "originalSha256": "843bbc3f0524b596a178336691fee125bb131ba68a1806e59f33035a6dafb92c",
+      "archivedContentSha256": "843bbc3f0524b596a178336691fee125bb131ba68a1806e59f33035a6dafb92c",
+      "compressedSha256": "e3534e3ee48587dd7fd068b57ee5ac750e038059dba768d95a24916fb1fcdf6d",
+      "originalBytes": 118559,
+      "archivedBytes": 118559,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-1-known-probe.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\known-probe.json",
+      "originalSha256": "ec8dd3411eb352a19e4952d0f25e8e6fe0ae918ff014ca2bdb874ba1dc7f93fe",
+      "archivedContentSha256": "ec8dd3411eb352a19e4952d0f25e8e6fe0ae918ff014ca2bdb874ba1dc7f93fe",
+      "compressedSha256": "ea0774e4bd771e7e5c1cf0a2812f54fc620cf758c4b9271f91631a2e956dbd4f",
+      "originalBytes": 9362,
+      "archivedBytes": 9362,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-1-known-probe-analysis.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\known-probe-analysis.json",
+      "originalSha256": "058c0fce731f0bce57d6c7666801ed9304d7a3d983f8692aa04fe8c541841e08",
+      "archivedContentSha256": "058c0fce731f0bce57d6c7666801ed9304d7a3d983f8692aa04fe8c541841e08",
+      "compressedSha256": "3a7c0c8dd979e7b511913836d1bca0643c40cd3d61d7ea7a754ea5c9817eff1c",
+      "originalBytes": 15882,
+      "archivedBytes": 15882,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-1-trace-timespan.txt.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\trace-timespan.txt",
+      "originalSha256": "0b8455b55276e1ed5134c0e6834e9b7cdc1c25f85c1f19a4c19e8fd28720b4fe",
+      "archivedContentSha256": "0b8455b55276e1ed5134c0e6834e9b7cdc1c25f85c1f19a4c19e8fd28720b4fe",
+      "compressedSha256": "1ce1b4b1dd6853e32a22cd5bc4bbb5631a8931ea80bfa677a245665c23ca4393",
+      "originalBytes": 1001,
+      "archivedBytes": 1001,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-1-trace-statistics.txt.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\trace-statistics.txt",
+      "originalSha256": "223355d01afd2f40c730d4fd1d016f38d7c449b6773b74de2e73eb21fe530090",
+      "archivedContentSha256": "223355d01afd2f40c730d4fd1d016f38d7c449b6773b74de2e73eb21fe530090",
+      "compressedSha256": "c68a49c0c5b46cc5c5447906ebf1efbb8ea1ae5b8dc4492fc29d7634ff5c121d",
+      "originalBytes": 13043,
+      "archivedBytes": 13043,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-1-control-completion.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\control-completion.json",
+      "originalSha256": "770b360fae86823f0cfea9677510aefb33970122b046d901cc019a180b2c5640",
+      "archivedContentSha256": "770b360fae86823f0cfea9677510aefb33970122b046d901cc019a180b2c5640",
+      "compressedSha256": "9103afb3c996c79dd22aa701f48ff36d51d9365ad07c20cc66e61f4788b00486",
+      "originalBytes": 139,
+      "archivedBytes": 139,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-1-ready.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\ready.json",
+      "originalSha256": "57d5f8e1ce1e802982b45173bdee432ccb8d5e99b34252f585507015b105f55c",
+      "archivedContentSha256": "57d5f8e1ce1e802982b45173bdee432ccb8d5e99b34252f585507015b105f55c",
+      "compressedSha256": "eea4de7afdbe8e376bf14d80608c5631fbd2575b14222c7aef134778511d611f",
+      "originalBytes": 149,
+      "archivedBytes": 149,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-1-target-memory-events.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\target-memory-events.csv",
+      "originalSha256": "a2c66ff2889dcdadf8db9c019700d0936d156b323a1cb48d60aacc9062bec278",
+      "archivedContentSha256": "a2c66ff2889dcdadf8db9c019700d0936d156b323a1cb48d60aacc9062bec278",
+      "compressedSha256": "a676e08e2ddd2dd558112272af158e748aebc9657cd34493ed7e3a38e401f561",
+      "originalBytes": 7187573,
+      "archivedBytes": 7187573,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-standard-1-target-commit-lifetimes.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\target-commit-lifetimes.csv",
+      "originalSha256": "a39c668c605caec6f24563d4b3a9cc66a7d6bfb5197f38b6af9cabed062ad998",
+      "archivedContentSha256": "a39c668c605caec6f24563d4b3a9cc66a7d6bfb5197f38b6af9cabed062ad998",
+      "compressedSha256": "9ee20aaee87350fd004d251ecf5e2db3c3ab06134536d40400a11500a28dbbfc",
+      "originalBytes": 6734368,
+      "archivedBytes": 6734368,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-standard-1-target-fault-analysis.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\target-fault-analysis.json",
+      "originalSha256": "b4fbccfc27fe86ce9ff6b5dbc3e1c1fabb27ff82a3503a833db53facea7493ad",
+      "archivedContentSha256": "b4fbccfc27fe86ce9ff6b5dbc3e1c1fabb27ff82a3503a833db53facea7493ad",
+      "compressedSha256": "d9b023cf9c9db0ed7ee49b1066393211b08061e87bb17906632f2f97b0cff605",
+      "originalBytes": 34624,
+      "archivedBytes": 34624,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-standard-1-target-fault-stacks.html.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\target-fault-stacks.html",
+      "originalSha256": "41bdc0a8f41cb613943cc89267fd682441a1cb1f684a465d3012d3ade7645e29",
+      "archivedContentSha256": "41bdc0a8f41cb613943cc89267fd682441a1cb1f684a465d3012d3ade7645e29",
+      "compressedSha256": "49394b892a2849f7725d4c4e035c315f729d43b05ee6e2c7b732a404015e3803",
+      "originalBytes": 471965,
+      "archivedBytes": 471965,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-standard-2-result.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\result.json",
+      "originalSha256": "57d62bcec2e8d4d506f7d0f90f43c60b9d1ceffd6f88b1bca3d0d2b2d72fa03e",
+      "archivedContentSha256": "a0213b9b9d1f1a766c735ece63eda18371ab746d7b00bef842591508ae4b9816",
+      "compressedSha256": "b1dbe237293db774dc3cef622dc5cb127633996ee94232294e66c6c168e8b606",
+      "originalBytes": 610007,
+      "archivedBytes": 13221,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "minimal-fault-standard-2-measurement.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\measurement.memory.json",
+      "originalSha256": "69771d1f82cf67084ba5cb669b6f8ce59477de42c22e4ba0197c0bb2c753ee21",
+      "archivedContentSha256": "69771d1f82cf67084ba5cb669b6f8ce59477de42c22e4ba0197c0bb2c753ee21",
+      "compressedSha256": "f71e88a723996ea5e512dad092a79a795dfe8a38b2ec923a7b2f2bc6a5c2f769",
+      "originalBytes": 47997,
+      "archivedBytes": 47997,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-2-measurement.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\measurement.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-2-measurement.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\measurement.csv",
+      "originalSha256": "64953699b45916afe394962f988b60961bac8a435ec86c86494f8ffcfc043eb4",
+      "archivedContentSha256": "64953699b45916afe394962f988b60961bac8a435ec86c86494f8ffcfc043eb4",
+      "compressedSha256": "f0e6aa977033f9590862f3bbc41dec730700d134866473c03502bab675a9ec13",
+      "originalBytes": 110263,
+      "archivedBytes": 110263,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-2-measurement.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\measurement.json",
+      "originalSha256": "2be953243ab0555fa87980f3c91e68f36a51db5933c1c9feb5bc1f8e65719002",
+      "archivedContentSha256": "2be953243ab0555fa87980f3c91e68f36a51db5933c1c9feb5bc1f8e65719002",
+      "compressedSha256": "2acf3d3fd9d15713960170a807f9d1c0b1a0cba74b4b7a7c573d5662f63f7d65",
+      "originalBytes": 118561,
+      "archivedBytes": 118561,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-2-known-probe.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\known-probe.json",
+      "originalSha256": "a89eeb102d93100337c248f2e4a99abeed22f6b528c09b036a94f0b24367d961",
+      "archivedContentSha256": "a89eeb102d93100337c248f2e4a99abeed22f6b528c09b036a94f0b24367d961",
+      "compressedSha256": "1feedd0c3ddf225bb7afa60d0e1cc5beba842b26223c0534df42cd28396371e8",
+      "originalBytes": 9362,
+      "archivedBytes": 9362,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-2-known-probe-analysis.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\known-probe-analysis.json",
+      "originalSha256": "48037eb07f137d824a3c21e0e980c6ddb9aabb34d9dbae4c27d76374ac0c6325",
+      "archivedContentSha256": "48037eb07f137d824a3c21e0e980c6ddb9aabb34d9dbae4c27d76374ac0c6325",
+      "compressedSha256": "5c09a4574fad49bec58dd4903052a6a8cf039d8a3f026e03e5bf8e790505dfbf",
+      "originalBytes": 16639,
+      "archivedBytes": 16639,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-2-trace-timespan.txt.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\trace-timespan.txt",
+      "originalSha256": "09e16aebb6f995433b7381648791353aaae2a36721e0bd3e2897e7d530f21261",
+      "archivedContentSha256": "09e16aebb6f995433b7381648791353aaae2a36721e0bd3e2897e7d530f21261",
+      "compressedSha256": "74cc22b0b8b75f4ed81ef6b1742134e5d672c7f91a13067b4de80950f5d0070e",
+      "originalBytes": 1001,
+      "archivedBytes": 1001,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-2-trace-statistics.txt.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\trace-statistics.txt",
+      "originalSha256": "f2b5a9b67010005a8d1c332c874fca4e4390798581ce907876dce2cee912d45b",
+      "archivedContentSha256": "f2b5a9b67010005a8d1c332c874fca4e4390798581ce907876dce2cee912d45b",
+      "compressedSha256": "7abcf568a5e7abeb6a5ab715d1d00efdd604692ab5750383d815fa844f81de41",
+      "originalBytes": 13043,
+      "archivedBytes": 13043,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-2-control-completion.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\control-completion.json",
+      "originalSha256": "e3f66769486ab28af815636cd4001ba834737a3c84c8f80d4ca7fe519aad3fdd",
+      "archivedContentSha256": "e3f66769486ab28af815636cd4001ba834737a3c84c8f80d4ca7fe519aad3fdd",
+      "compressedSha256": "00e6e0ab5523b5ee3ba6e3b1e6ef55d49b8e39a83da60d55a93314f1b83d41c0",
+      "originalBytes": 139,
+      "archivedBytes": 139,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-2-ready.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\ready.json",
+      "originalSha256": "9855d69007995013ab1a1507a9c5f39da706a82d6ca2dcd82bce8c071ef23e76",
+      "archivedContentSha256": "9855d69007995013ab1a1507a9c5f39da706a82d6ca2dcd82bce8c071ef23e76",
+      "compressedSha256": "2d4ad14115ed727362b3b4fe398f6cbb7d20c5268961f111bfb0cfd373551927",
+      "originalBytes": 148,
+      "archivedBytes": 148,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-standard-2-target-memory-events.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\target-memory-events.csv",
+      "originalSha256": "db95355bf01fc396c6d51b70194bd3938bbc393e30f2f0473cb0ddfe9d7f3b57",
+      "archivedContentSha256": "db95355bf01fc396c6d51b70194bd3938bbc393e30f2f0473cb0ddfe9d7f3b57",
+      "compressedSha256": "3b6020cd4086af2b760cc1827d2a9dc9fe9e099bd97b32cb840628d2ae0128a0",
+      "originalBytes": 7313577,
+      "archivedBytes": 7313577,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-standard-2-target-commit-lifetimes.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\target-commit-lifetimes.csv",
+      "originalSha256": "f8cddbf41a203e55aac1968ed1fe3fcb7d4cf67a1615a6384dcd926801bed494",
+      "archivedContentSha256": "f8cddbf41a203e55aac1968ed1fe3fcb7d4cf67a1615a6384dcd926801bed494",
+      "compressedSha256": "6b8b8249ccc63ecb4ec8802304f9e9c838e5769e681cb8746450153a7b016951",
+      "originalBytes": 6737584,
+      "archivedBytes": 6737584,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-standard-2-target-fault-analysis.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\target-fault-analysis.json",
+      "originalSha256": "b6e63e1e91f21ba4f8289a7817efdb1ac03113b8ad3a544500cf9726fb612415",
+      "archivedContentSha256": "b6e63e1e91f21ba4f8289a7817efdb1ac03113b8ad3a544500cf9726fb612415",
+      "compressedSha256": "68abae72716623984404317ccde03f86ef63f5b4f12a8287d392ace9d53351d3",
+      "originalBytes": 34706,
+      "archivedBytes": 34706,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-standard-2-target-fault-stacks.html.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\target-fault-stacks.html",
+      "originalSha256": "929950e64b31c4e2e2ab824f09c8e38e83511c7f372fbd0c0bd04fc733508103",
+      "archivedContentSha256": "929950e64b31c4e2e2ab824f09c8e38e83511c7f372fbd0c0bd04fc733508103",
+      "compressedSha256": "9479f55fddabd169919fdec7062d0d7ef18584a39b1bdd725190e4098d583ce4",
+      "originalBytes": 484832,
+      "archivedBytes": 484832,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-exploration-1-result.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\result.json",
+      "originalSha256": "4c71fbead74cbc45e2c3c66d446074d68fd2a1c216dd58eb5e3dc06ae5228d44",
+      "archivedContentSha256": "64e21e7940aa595baee5cc21220e38403894074c87a863e37cb59175ee09af46",
+      "compressedSha256": "6be2617f099071a776df296a5d05fb6471cece432831ceb25b632662fa00e5d9",
+      "originalBytes": 612256,
+      "archivedBytes": 15329,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "minimal-fault-exploration-1-measurement.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\measurement.memory.json",
+      "originalSha256": "efa3fb2e962e21a65fdccdd3f5b2a0a272bbed120132fc3a3765f296973d4cbd",
+      "archivedContentSha256": "efa3fb2e962e21a65fdccdd3f5b2a0a272bbed120132fc3a3765f296973d4cbd",
+      "compressedSha256": "96d783a26d6de39f5d0d68409d20c2f88bc1dc8c7c749a561799c9ab18524cc1",
+      "originalBytes": 66337,
+      "archivedBytes": 66337,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-1-measurement.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\measurement.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-1-measurement.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\measurement.csv",
+      "originalSha256": "fee786a5c2edc5058b341ce712d6e571fe6069e5c0f84726ad0b58490377e756",
+      "archivedContentSha256": "fee786a5c2edc5058b341ce712d6e571fe6069e5c0f84726ad0b58490377e756",
+      "compressedSha256": "47e88de8e9a3e45c32d658f4a3011399533ecbe628fb81bf5e34d56744f3c6f7",
+      "originalBytes": 112530,
+      "archivedBytes": 112530,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-1-measurement.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\measurement.json",
+      "originalSha256": "b2e3362db06e6330337a222981ab13f4ae0f43f6315cb3cc47b3bd94afe0b6dd",
+      "archivedContentSha256": "b2e3362db06e6330337a222981ab13f4ae0f43f6315cb3cc47b3bd94afe0b6dd",
+      "compressedSha256": "f31c9a0df4476667b49012f242dbcfefcadd796bab13706ce0fe80a26af84128",
+      "originalBytes": 120516,
+      "archivedBytes": 120516,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-1-known-probe.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\known-probe.json",
+      "originalSha256": "a9b07c84236151672612710dd3f44c637639acc609bfd15b365cb3354413a1dd",
+      "archivedContentSha256": "a9b07c84236151672612710dd3f44c637639acc609bfd15b365cb3354413a1dd",
+      "compressedSha256": "b283a82a2f99f0cc0529e3863160039ab6a22dd90709794e6486046b02b67ef1",
+      "originalBytes": 9362,
+      "archivedBytes": 9362,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-1-known-probe-analysis.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\known-probe-analysis.json",
+      "originalSha256": "af9dc75ea9a676a5b09cea176270249972edd60b312188ad20a3994cb6f08b83",
+      "archivedContentSha256": "af9dc75ea9a676a5b09cea176270249972edd60b312188ad20a3994cb6f08b83",
+      "compressedSha256": "55f9a06a0d7a8eed1d4b34b9c05f7a23b1f2b55bf3f51e7ec0f9e10aa1ea41dc",
+      "originalBytes": 16270,
+      "archivedBytes": 16270,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-1-trace-timespan.txt.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\trace-timespan.txt",
+      "originalSha256": "e43b0bf8a0cdc221af24011071b25352161abe92dba86e9438a09c5e042c0fc1",
+      "archivedContentSha256": "e43b0bf8a0cdc221af24011071b25352161abe92dba86e9438a09c5e042c0fc1",
+      "compressedSha256": "76b264aee06e1c8e4640250d29db79500265f44a07dc56ed7554dbc0a6b4526d",
+      "originalBytes": 1004,
+      "archivedBytes": 1004,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-1-trace-statistics.txt.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\trace-statistics.txt",
+      "originalSha256": "99f66f222b174e3d427934dbd229fecc7b56039f2e523239fc5ded06d7ed682d",
+      "archivedContentSha256": "99f66f222b174e3d427934dbd229fecc7b56039f2e523239fc5ded06d7ed682d",
+      "compressedSha256": "041c6562390e8fb52da237544ef30e919d6c5a8fbff9c1c5a7880e4ce409df96",
+      "originalBytes": 13043,
+      "archivedBytes": 13043,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-1-control-completion.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\control-completion.json",
+      "originalSha256": "671e2a454e1dcf903596626433bc797cf71cc235cece83a9bc2c1f6009c9b4a5",
+      "archivedContentSha256": "671e2a454e1dcf903596626433bc797cf71cc235cece83a9bc2c1f6009c9b4a5",
+      "compressedSha256": "b06c1953655593825c773dc4737141dc934e7536ed4aab1df3c8323c93e9e5c5",
+      "originalBytes": 139,
+      "archivedBytes": 139,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-1-ready.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\ready.json",
+      "originalSha256": "f5e7edb4fa54ea1d2d80a50a740064a36f971c834bc4904cc3a1edf9a39ac4e8",
+      "archivedContentSha256": "f5e7edb4fa54ea1d2d80a50a740064a36f971c834bc4904cc3a1edf9a39ac4e8",
+      "compressedSha256": "7f8dfd6460c5a980d24f3dab9bb50dc687b6e3deefc4b83c9e9f44919aafaffe",
+      "originalBytes": 149,
+      "archivedBytes": 149,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-1-target-memory-events.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\target-memory-events.csv",
+      "originalSha256": "d7546ba60dc34862dc0044ca3b9652c01b70f8f76a4fc7cbbc0f343c7c3f2b2d",
+      "archivedContentSha256": "d7546ba60dc34862dc0044ca3b9652c01b70f8f76a4fc7cbbc0f343c7c3f2b2d",
+      "compressedSha256": "7cae5646e5043e02cc194c2b443b4312ee205f2c9649f6b1c252c4a8d9bb0503",
+      "originalBytes": 8507575,
+      "archivedBytes": 8507575,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-exploration-1-target-commit-lifetimes.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\target-commit-lifetimes.csv",
+      "originalSha256": "ddb219ea3e6a2de82cecda33110d1add95221b7d46e906e1107bb861f5486937",
+      "archivedContentSha256": "ddb219ea3e6a2de82cecda33110d1add95221b7d46e906e1107bb861f5486937",
+      "compressedSha256": "3e123bf8ba218c4f313d92f8a91da2947e18ed2012e6bf28e106e216704fa122",
+      "originalBytes": 7695444,
+      "archivedBytes": 7695444,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-exploration-1-target-fault-analysis.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\target-fault-analysis.json",
+      "originalSha256": "f2bf6361223a70e05502fbf0928c31e9cf04d14d7d8169c280bf33537392ada6",
+      "archivedContentSha256": "f2bf6361223a70e05502fbf0928c31e9cf04d14d7d8169c280bf33537392ada6",
+      "compressedSha256": "b49ce08096831eb32d0eb70604c4c315a388bf5782acc2151b24ec93ef7657b1",
+      "originalBytes": 33610,
+      "archivedBytes": 33610,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-exploration-1-target-fault-stacks.html.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\target-fault-stacks.html",
+      "originalSha256": "a59812fdf530529a1246a8706f598bce1d8e328de67b20ad5933393e96ae269a",
+      "archivedContentSha256": "a59812fdf530529a1246a8706f598bce1d8e328de67b20ad5933393e96ae269a",
+      "compressedSha256": "d38c298dfe8d9d8e086fccb9e9b2eed06c86ce3f4b48c61eb3f40a88cea4533d",
+      "originalBytes": 474261,
+      "archivedBytes": 474261,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-exploration-2-result.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\result.json",
+      "originalSha256": "895d9552ec0b6d82501979dd616fef4e258b0617411bfef602a5e53c78b3a908",
+      "archivedContentSha256": "04c6395589ac7a970a03529b026c308837a40a03c4f0a78a979398cf637ead76",
+      "compressedSha256": "c1ad3d7b139b31eb011f5bf194f651e3c1848bfa9afc91f968e7f3a225fb63e1",
+      "originalBytes": 612348,
+      "archivedBytes": 15424,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "minimal-fault-exploration-2-measurement.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\measurement.memory.json",
+      "originalSha256": "b431a353b961939aee76fd9184426dc53550df829e68ec9317f753e9377a511b",
+      "archivedContentSha256": "b431a353b961939aee76fd9184426dc53550df829e68ec9317f753e9377a511b",
+      "compressedSha256": "3094af2c950fe74ac6864ec8c27c47ec682678a94630e9f388a403b77ac727ce",
+      "originalBytes": 67346,
+      "archivedBytes": 67346,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-2-measurement.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\measurement.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-2-measurement.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\measurement.csv",
+      "originalSha256": "b0e8da998d6c7dc6353401a0ca40012162b47e36e92c4c338f44cef43c230657",
+      "archivedContentSha256": "b0e8da998d6c7dc6353401a0ca40012162b47e36e92c4c338f44cef43c230657",
+      "compressedSha256": "aaca9f246cc4597882cfca68fe1d2af99b6d5c47f73b73292a44c301726053fb",
+      "originalBytes": 112537,
+      "archivedBytes": 112537,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-2-measurement.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\measurement.json",
+      "originalSha256": "933eb1370c5f306e8f2a4ecc29f9346f72a9eb772c4d1ddcff68544df18ba7e3",
+      "archivedContentSha256": "933eb1370c5f306e8f2a4ecc29f9346f72a9eb772c4d1ddcff68544df18ba7e3",
+      "compressedSha256": "0c2e9b610667670e9c7fa1936a2e23f1622ce137aadfa00e6ffa7d28d32263cd",
+      "originalBytes": 120539,
+      "archivedBytes": 120539,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-2-known-probe.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\known-probe.json",
+      "originalSha256": "c940f7f98a79d74d8f4c179f1aeaf2ba6473cd10cfb1527615185905bea3e489",
+      "archivedContentSha256": "c940f7f98a79d74d8f4c179f1aeaf2ba6473cd10cfb1527615185905bea3e489",
+      "compressedSha256": "f250c9e0ab98048ba99ec6dac2f4b5885fdbc7d6c37798fbe67e2e0c4276a7c0",
+      "originalBytes": 9362,
+      "archivedBytes": 9362,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-2-known-probe-analysis.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\known-probe-analysis.json",
+      "originalSha256": "e5d1344bd1c325e80baa2fbbdf824f933c5a32ca4d8d330b63240c5bb7bf6cf5",
+      "archivedContentSha256": "e5d1344bd1c325e80baa2fbbdf824f933c5a32ca4d8d330b63240c5bb7bf6cf5",
+      "compressedSha256": "64d23d89ea0058a3c8e1da34bec6764df35c197ede2392e2ed1d97b2874323b2",
+      "originalBytes": 16270,
+      "archivedBytes": 16270,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-2-trace-timespan.txt.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\trace-timespan.txt",
+      "originalSha256": "87727e70ece3e208cdc05d45bb4eea180d953fa23b74e2a48164704c5090059c",
+      "archivedContentSha256": "87727e70ece3e208cdc05d45bb4eea180d953fa23b74e2a48164704c5090059c",
+      "compressedSha256": "e72fcfec46a2731a6b0098b97bccb3ba5f6e4484fe2abdc907c457d3320af1f2",
+      "originalBytes": 1004,
+      "archivedBytes": 1004,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-2-trace-statistics.txt.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\trace-statistics.txt",
+      "originalSha256": "1661fdd246a6e91b85712b0c67ae26edf0eb1897e143235c253c57b25a6c5303",
+      "archivedContentSha256": "1661fdd246a6e91b85712b0c67ae26edf0eb1897e143235c253c57b25a6c5303",
+      "compressedSha256": "3f9400217115e020d4e11ca4c0f02540fa9edc1713004e8e2a5fd2d99469f95e",
+      "originalBytes": 13043,
+      "archivedBytes": 13043,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-2-control-completion.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\control-completion.json",
+      "originalSha256": "29e063eccec70b51463b480b9c78ef3affde168082026cc6e91de1f6aea9f2f0",
+      "archivedContentSha256": "29e063eccec70b51463b480b9c78ef3affde168082026cc6e91de1f6aea9f2f0",
+      "compressedSha256": "5eb882364cd06ee8841d063e36f0fad4b550a406a9d6e11933cc9183c4048255",
+      "originalBytes": 139,
+      "archivedBytes": 139,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-2-ready.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\ready.json",
+      "originalSha256": "4a3af8cdab4093ec4c4f711aec3a2c452a27dd6fd9eb5284be1ddaea9e5fabe4",
+      "archivedContentSha256": "4a3af8cdab4093ec4c4f711aec3a2c452a27dd6fd9eb5284be1ddaea9e5fabe4",
+      "compressedSha256": "861a08d067925ec8ae5b7c59ef42604bf96bb647c44c4d79675465772000dd44",
+      "originalBytes": 149,
+      "archivedBytes": 149,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-2-target-memory-events.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\target-memory-events.csv",
+      "originalSha256": "8bc3bffdd6e996090f06bfdae18c53c65e466b1ff118d08500d812fd15e2ba34",
+      "archivedContentSha256": "8bc3bffdd6e996090f06bfdae18c53c65e466b1ff118d08500d812fd15e2ba34",
+      "compressedSha256": "c8e9bc3b1c2776da1805eeb6d7814c563292d541493e67755cd1e280cfb08b35",
+      "originalBytes": 7881608,
+      "archivedBytes": 7881608,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-exploration-2-target-commit-lifetimes.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\target-commit-lifetimes.csv",
+      "originalSha256": "ac00bc65ac9b2a83fcf1e3163d24978e79f6ac1e6aed6a4ea866d1b25f388b12",
+      "archivedContentSha256": "ac00bc65ac9b2a83fcf1e3163d24978e79f6ac1e6aed6a4ea866d1b25f388b12",
+      "compressedSha256": "8d72e09b46a1fa410a12af58bbf843656913b5100796a4da691575db50145b53",
+      "originalBytes": 7022605,
+      "archivedBytes": 7022605,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-exploration-2-target-fault-analysis.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\target-fault-analysis.json",
+      "originalSha256": "6deaa20bf01e96b28eb35a359e3cadd0a86efbbfb0751ce923dd5f51e72f48d7",
+      "archivedContentSha256": "6deaa20bf01e96b28eb35a359e3cadd0a86efbbfb0751ce923dd5f51e72f48d7",
+      "compressedSha256": "3878b8e88b6357dfd9c0ed6a02c2d12ea5cc1b5599624b72ddf366533c1a7d31",
+      "originalBytes": 34078,
+      "archivedBytes": 34078,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-exploration-2-target-fault-stacks.html.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\target-fault-stacks.html",
+      "originalSha256": "ea1fa7029d80407f71e9415dc626305e04ec0e0782e59c0d220b25b07e27dfb5",
+      "archivedContentSha256": "ea1fa7029d80407f71e9415dc626305e04ec0e0782e59c0d220b25b07e27dfb5",
+      "compressedSha256": "83695e84b26b53ce1f3046595051ab36128cb5ba6cdb6e66310bf343cc171fdb",
+      "originalBytes": 481064,
+      "archivedBytes": 481064,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-exploration-3-result.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\result.json",
+      "originalSha256": "80726749939b201f8659ee38793dc9f08e432c4bed2f1698269382b0855fc53c",
+      "archivedContentSha256": "7dfcf59a8ed43de63e7aba16007cd404d564686ea3098b000792bf668058b9b7",
+      "compressedSha256": "8aa5181aaf8176adceb499df88c182b37512d3de7ba09aba40798dcb243dd8d5",
+      "originalBytes": 612217,
+      "archivedBytes": 15299,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "minimal-fault-exploration-3-measurement.memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\measurement.memory.json",
+      "originalSha256": "f386a63d1562e69a1106277899af3b56d67ee175886fbbe41b8c4f9041972b6f",
+      "archivedContentSha256": "f386a63d1562e69a1106277899af3b56d67ee175886fbbe41b8c4f9041972b6f",
+      "compressedSha256": "c9f26c45764dfce05f589a4a82353f8b7560719df24c39c71490724cb005c486",
+      "originalBytes": 66193,
+      "archivedBytes": 66193,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-3-measurement.input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\measurement.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "originalBytes": 1687,
+      "archivedBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-3-measurement.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\measurement.csv",
+      "originalSha256": "a981d49808d8a40af0944195f9d3c8982cb0921df37776bed412df00aca67427",
+      "archivedContentSha256": "a981d49808d8a40af0944195f9d3c8982cb0921df37776bed412df00aca67427",
+      "compressedSha256": "f87c3db37d2658609653bd20c12e4062c0f7564bed36fab40261c7a4a1c9fe67",
+      "originalBytes": 112525,
+      "archivedBytes": 112525,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-3-measurement.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\measurement.json",
+      "originalSha256": "eec62eb69017e0f3b060f5ae351f142777cd21f2a00c45a821c286e18abcc1f1",
+      "archivedContentSha256": "eec62eb69017e0f3b060f5ae351f142777cd21f2a00c45a821c286e18abcc1f1",
+      "compressedSha256": "5b9af9acaadc150cadc2a997e8c092d28b175e14fcda926dc045925b8490e10e",
+      "originalBytes": 120519,
+      "archivedBytes": 120519,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-3-known-probe.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\known-probe.json",
+      "originalSha256": "6b389bb5c4da8559fb2222629531d7aad05e55578705a7a5af0e3ddffa52e0f4",
+      "archivedContentSha256": "6b389bb5c4da8559fb2222629531d7aad05e55578705a7a5af0e3ddffa52e0f4",
+      "compressedSha256": "5d8124508062618954403ca70ee105e3d2c8f161a3d7f324cc0ad84269330803",
+      "originalBytes": 9362,
+      "archivedBytes": 9362,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-3-known-probe-analysis.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\known-probe-analysis.json",
+      "originalSha256": "90bb5160074cccd2e7d39edbc03966e9c0fc43db0dc4df566c91fa0784ed09a0",
+      "archivedContentSha256": "90bb5160074cccd2e7d39edbc03966e9c0fc43db0dc4df566c91fa0784ed09a0",
+      "compressedSha256": "56ad524ce464004a16be2fb7b05b85d0436910a52d63a5a6489abd2a7622d861",
+      "originalBytes": 16270,
+      "archivedBytes": 16270,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-3-trace-timespan.txt.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\trace-timespan.txt",
+      "originalSha256": "d4a71f63b52f87515488e1ec6be2b1a36df7a6750093cc2cd642e8d828bd22cf",
+      "archivedContentSha256": "d4a71f63b52f87515488e1ec6be2b1a36df7a6750093cc2cd642e8d828bd22cf",
+      "compressedSha256": "d712f979763cdd58d5ec55264c459af1053a237d64330815b1c63ca35cdd40ba",
+      "originalBytes": 1004,
+      "archivedBytes": 1004,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-3-trace-statistics.txt.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\trace-statistics.txt",
+      "originalSha256": "de18b429dc540995e63d9515a96798f9d3762b9308a7017795cb42a06466dad2",
+      "archivedContentSha256": "de18b429dc540995e63d9515a96798f9d3762b9308a7017795cb42a06466dad2",
+      "compressedSha256": "aa20049d8ceb6f0260527dd6cb0498b413e3d6686b045ecaf8cc5c823f7e707e",
+      "originalBytes": 13043,
+      "archivedBytes": 13043,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-3-control-completion.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\control-completion.json",
+      "originalSha256": "92471162f0479f4888f6182346a7419b0ca63d3f07dd2c0ceb18213109c57e73",
+      "archivedContentSha256": "92471162f0479f4888f6182346a7419b0ca63d3f07dd2c0ceb18213109c57e73",
+      "compressedSha256": "a0a0ec0a5c90abbbc0d90c8fd504d0fb1fccc0e3f1e57ce687d622be089e9cb2",
+      "originalBytes": 139,
+      "archivedBytes": 139,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-3-ready.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\ready.json",
+      "originalSha256": "744d695f56d6bde7890a22565eb4784c5836c956ef7a95977e34b45f0edace26",
+      "archivedContentSha256": "744d695f56d6bde7890a22565eb4784c5836c956ef7a95977e34b45f0edace26",
+      "compressedSha256": "0a2706d1242b8db36d145b6c2fa465f4f1d2f8cb4e78a9ea086d36410d0b2063",
+      "originalBytes": 149,
+      "archivedBytes": 149,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "minimal-fault-exploration-3-target-memory-events.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\target-memory-events.csv",
+      "originalSha256": "e35b9de86dc2601c5821b2c4de8fe64cc66bd05d201bd12c2f0c14d3231c1632",
+      "archivedContentSha256": "e35b9de86dc2601c5821b2c4de8fe64cc66bd05d201bd12c2f0c14d3231c1632",
+      "compressedSha256": "7d02a0d070ea4b8bd08b056764c4c31b524fc4bf704355efc9477a459065261b",
+      "originalBytes": 8524068,
+      "archivedBytes": 8524068,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-exploration-3-target-commit-lifetimes.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\target-commit-lifetimes.csv",
+      "originalSha256": "52f9242cf03b065c6c4bfc24c234a22b1867790c3db297c03c4de7952435b950",
+      "archivedContentSha256": "52f9242cf03b065c6c4bfc24c234a22b1867790c3db297c03c4de7952435b950",
+      "compressedSha256": "77117845bf92a042df07e01f1509af94c435613431f1e0acf253b34227999525",
+      "originalBytes": 7322887,
+      "archivedBytes": 7322887,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-exploration-3-target-fault-analysis.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\target-fault-analysis.json",
+      "originalSha256": "7b2336d3516abb9fc77a6b2faebcebc01ad4a0e0bb5bf3ec45a02d6db5f55c1c",
+      "archivedContentSha256": "7b2336d3516abb9fc77a6b2faebcebc01ad4a0e0bb5bf3ec45a02d6db5f55c1c",
+      "compressedSha256": "a2ea9c0715f3d1193bffd45a71300c68d7c600602793c7bbf66835c5b4a30ec9",
+      "originalBytes": 33973,
+      "archivedBytes": 33973,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-exploration-3-target-fault-stacks.html.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\target-fault-stacks.html",
+      "originalSha256": "168fb9dbffc09db54f80cf0aa6b45d0cee58e82782f49d17a98d12c3e35f55cc",
+      "archivedContentSha256": "168fb9dbffc09db54f80cf0aa6b45d0cee58e82782f49d17a98d12c3e35f55cc",
+      "compressedSha256": "2de0f51f8142b0a4251d9daa14d001be156b5237e7f3d71f51347c1e9fe1b339",
+      "originalBytes": 473978,
+      "archivedBytes": 473978,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "diagnostic-pipeline-control-probe.json.gz",
+      "source": "build\\p5-p6-closure-2026-10-10\\pipeline-control\\probe.json",
+      "originalSha256": "08f2a79226606bdec67272829cc6a09d46fe9265caf128d497985613fa81642e",
+      "archivedContentSha256": "08f2a79226606bdec67272829cc6a09d46fe9265caf128d497985613fa81642e",
+      "compressedSha256": "68942456bb3df61cd7fd92e1ef64673352e890362b7822e342c86e0d596cae81",
+      "originalBytes": 2330,
+      "archivedBytes": 2330,
+      "kind": "PriorIndependentDiagnosticSource"
+    },
+    {
+      "path": "diagnostic-pipeline-control-config.json.gz",
+      "source": "build\\p5-p6-closure-2026-10-10\\pipeline-control\\config.json",
+      "originalSha256": "6f9a718581b5cd15272028e65d3115bea44ba560f6336d6ec81f4983498eefae",
+      "archivedContentSha256": "6f9a718581b5cd15272028e65d3115bea44ba560f6336d6ec81f4983498eefae",
+      "compressedSha256": "fa8db8b4a5c3d6912aefcfb48167ab9f4f8f79dc5d39fbb124dbb946c380d844",
+      "originalBytes": 259,
+      "archivedBytes": 259,
+      "kind": "PriorIndependentDiagnosticSource"
+    },
+    {
+      "path": "diagnostic-pipeline-control-timing.csv.gz",
+      "source": "build\\p5-p6-closure-2026-10-10\\pipeline-control\\timing.csv",
+      "originalSha256": "d20091ae1acd0b41d96d1ae7d745111aeadb6283dcb7ae842f7c93d7845be2ba",
+      "archivedContentSha256": "d20091ae1acd0b41d96d1ae7d745111aeadb6283dcb7ae842f7c93d7845be2ba",
+      "compressedSha256": "c05c8bd0ff805738e6d85fdd9bbf25bfcdf36c9b2a54d324699d1eee2899a0dd",
+      "originalBytes": 112194,
+      "archivedBytes": 112194,
+      "kind": "PriorIndependentDiagnosticSource"
+    },
+    {
+      "path": "diagnostic-pipeline-unoptimized-probe.json.gz",
+      "source": "build\\p5-p6-closure-2026-10-10\\pipeline-unoptimized\\probe.json",
+      "originalSha256": "a4db19a54dba5d802e8620b3cd18cd39d48a7e32d00c9960764bd3dfeb528d37",
+      "archivedContentSha256": "a4db19a54dba5d802e8620b3cd18cd39d48a7e32d00c9960764bd3dfeb528d37",
+      "compressedSha256": "02f2f5fea3661c1fab314069ef4d1b6f25832e21bd8407eaaf8e70bf3b50f97a",
+      "originalBytes": 2333,
+      "archivedBytes": 2333,
+      "kind": "PriorIndependentDiagnosticSource"
+    },
+    {
+      "path": "diagnostic-pipeline-unoptimized-config.json.gz",
+      "source": "build\\p5-p6-closure-2026-10-10\\pipeline-unoptimized\\config.json",
+      "originalSha256": "6d63312347ecfe4b5f48e2205dc2f3f84cbfcedf1a40e98c7b49dd2aefba9c08",
+      "archivedContentSha256": "6d63312347ecfe4b5f48e2205dc2f3f84cbfcedf1a40e98c7b49dd2aefba9c08",
+      "compressedSha256": "a561d158f00bdde89abb2354e3d7956a9ab20adcf8aa60c7517fe9ffe194f358",
+      "originalBytes": 262,
+      "archivedBytes": 262,
+      "kind": "PriorIndependentDiagnosticSource"
+    },
+    {
+      "path": "diagnostic-pipeline-unoptimized-timing.csv.gz",
+      "source": "build\\p5-p6-closure-2026-10-10\\pipeline-unoptimized\\timing.csv",
+      "originalSha256": "058680ce6d1db0c811e2fc69bad1693ac87cfec0d7822adf7106219f0537711e",
+      "archivedContentSha256": "058680ce6d1db0c811e2fc69bad1693ac87cfec0d7822adf7106219f0537711e",
+      "compressedSha256": "627fa4340f7ed04f7ebe60c800ff0a067acc4c25b264878a93bcdecffafde76b",
+      "originalBytes": 114089,
+      "archivedBytes": 114089,
+      "kind": "PriorIndependentDiagnosticSource"
+    },
+    {
+      "path": "minimal-fault-standard-2-target-loader-events.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\target-loader-events.csv",
+      "originalSha256": "b5e0d0e3f9e8f60a087a1bdaa300ca119ec03b811cb07c33ecb0ed5b99c96226",
+      "archivedContentSha256": "b5e0d0e3f9e8f60a087a1bdaa300ca119ec03b811cb07c33ecb0ed5b99c96226",
+      "compressedSha256": "d9207e3c2f4271482c800b71d3ddd5594cf9a0e337290e7780dcb1e5ad39b16e",
+      "originalBytes": 75092,
+      "archivedBytes": 75092,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "minimal-fault-standard-2-target-module-faults.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\target-module-faults.json",
+      "originalSha256": "56b44b0d6bd917aad5be459f24b8d25a16984ce00c9146a4176169879183c028",
+      "archivedContentSha256": "56b44b0d6bd917aad5be459f24b8d25a16984ce00c9146a4176169879183c028",
+      "compressedSha256": "2d58df4bca42a4bbf556ac493e1c2ad9391adfcb4b5a942563ddcc5ff93115d7",
+      "originalBytes": 3262,
+      "archivedBytes": 3262,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "overlay-CMakeLists.txt.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\CMakeLists.txt",
+      "originalSha256": "40e253a2f72d5358d1ece1c002782d902b1310e6d9f2f13637a5c6af9175faaf",
+      "archivedContentSha256": "40e253a2f72d5358d1ece1c002782d902b1310e6d9f2f13637a5c6af9175faaf",
+      "compressedSha256": "b5a9882e8d914945f35cc24d83efcf2af9f97613027e5c05c4eaff495dee0b8d",
+      "originalBytes": 564,
+      "archivedBytes": 564,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-overlay.c.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\overlay.c",
+      "originalSha256": "e718ea7c82e4f672d3d62afffdcfeaa329f26dbc534b96dafbd5429cc1ec47b1",
+      "archivedContentSha256": "e718ea7c82e4f672d3d62afffdcfeaa329f26dbc534b96dafbd5429cc1ec47b1",
+      "compressedSha256": "f2643bbee806d1c625d697be16b6ef124afcc4fe0962c5651483e953bb0ed612",
+      "originalBytes": 2092,
+      "archivedBytes": 2092,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-fixture.c.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\fixture.c",
+      "originalSha256": "8c089ac77a9f80b0ab52c157664b6507937bf989940d2d6fedb4143a0ce11481",
+      "archivedContentSha256": "8c089ac77a9f80b0ab52c157664b6507937bf989940d2d6fedb4143a0ce11481",
+      "compressedSha256": "fe37fd5ddad91d93f9843e75fb15b37179aa17f2d1c5458555c71b9b670f498c",
+      "originalBytes": 191,
+      "archivedBytes": 191,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-probe.c.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\probe.c",
+      "originalSha256": "3c81c83579363a426b7203c66e5f913f22bced25feb26a0ca94917e59a3c572a",
+      "archivedContentSha256": "3c81c83579363a426b7203c66e5f913f22bced25feb26a0ca94917e59a3c572a",
+      "compressedSha256": "e95512b866bc22b7fcd7f694dcd4706fffcd4350e6804785803419b3d24a7a84",
+      "originalBytes": 560,
+      "archivedBytes": 560,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-build.cmd.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\build.cmd",
+      "originalSha256": "679f0cb1b80428449b87144c73817c28169682e21edb3ba070e17ed2ba74c1b0",
+      "archivedContentSha256": "679f0cb1b80428449b87144c73817c28169682e21edb3ba070e17ed2ba74c1b0",
+      "compressedSha256": "a76ab0908663b0e55d49101cfd6eb4b9f85cc76c0de050056f064f90f2079894",
+      "originalBytes": 596,
+      "archivedBytes": 596,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-run-control.py.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\run-control.py",
+      "originalSha256": "0bb2b0bc28135bf7748c4a01647b83f9548ae4c1d300d8b758856bb776969e01",
+      "archivedContentSha256": "0bb2b0bc28135bf7748c4a01647b83f9548ae4c1d300d8b758856bb776969e01",
+      "compressedSha256": "bb57ec6f9fcc865cd72e8df0aebb1b221f2ddc0c9e0dac96a7129d11ac47bf85",
+      "originalBytes": 6637,
+      "archivedBytes": 6637,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-probe-completion.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\probe-completion.json",
+      "originalSha256": "e3bf527cfc1977b126f7cf356ba9f0aca43252f8dc97db3662a97130895a4c9e",
+      "archivedContentSha256": "e3bf527cfc1977b126f7cf356ba9f0aca43252f8dc97db3662a97130895a4c9e",
+      "compressedSha256": "05f13c9bec8f8bc0d4d64a73a151c9b888063a2d3ce4f97da5a5eea8f23e39c1",
+      "originalBytes": 1729,
+      "archivedBytes": 1729,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-diagnostic-completion.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\diagnostic-completion.json",
+      "originalSha256": "626b5e7668dd3263aa19c8836aa22e8d6f346def710fc5f74d564f0bf032c6ff",
+      "archivedContentSha256": "626b5e7668dd3263aa19c8836aa22e8d6f346def710fc5f74d564f0bf032c6ff",
+      "compressedSha256": "f53a696a9f49c2947d4b05a1b8854c8e42e48f694881daabf4fd9cc9339e5b09",
+      "originalBytes": 14738,
+      "archivedBytes": 14738,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-overlay-control-build.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control-build.log",
+      "originalSha256": "a14bb2373855114b0846d4ac122e5da714995c398a465cc0824626087754bdf9",
+      "archivedContentSha256": "a14bb2373855114b0846d4ac122e5da714995c398a465cc0824626087754bdf9",
+      "compressedSha256": "a9b0b0482e0cd6bacc3c2c618a823f16a76243dbfd0ff4dbd5f69f5f07991342",
+      "originalBytes": 1005,
+      "archivedBytes": 1005,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-overlay-control-build-corrected.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control-build-corrected.log",
+      "originalSha256": "5f817c67286c8fb0d22187532051b74f2b42004d7335674714859712f7ea1d9c",
+      "archivedContentSha256": "5f817c67286c8fb0d22187532051b74f2b42004d7335674714859712f7ea1d9c",
+      "compressedSha256": "91ce40b165f23f6b0525235ba204b48843beb8ee722187fba68db6e66643cda0",
+      "originalBytes": 424,
+      "archivedBytes": 424,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-overlay-control-build-final.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control-build-final.log",
+      "originalSha256": "2b79ae76fe8a5848cd3ae7ce450f00edd90608647905c7d10bd530eacd19b432",
+      "archivedContentSha256": "2b79ae76fe8a5848cd3ae7ce450f00edd90608647905c7d10bd530eacd19b432",
+      "compressedSha256": "0d47c1907108b05380108dcb31eadd506da9b34bada9a0c197de1bf102699253",
+      "originalBytes": 145204,
+      "archivedBytes": 145204,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-overlay-control-build-green.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control-build-green.log",
+      "originalSha256": "501d850c8544fc0a25f98acefb0b3ced98f66b95b2ebca48ff1a13ea56afc982",
+      "archivedContentSha256": "501d850c8544fc0a25f98acefb0b3ced98f66b95b2ebca48ff1a13ea56afc982",
+      "compressedSha256": "ce7e4efeca2caf92d0149fcceb9845d29d5fa4675b2b1a1ec15f5819d0825f27",
+      "originalBytes": 31089,
+      "archivedBytes": 31089,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-overlay-control-build-probe.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control-build-probe.log",
+      "originalSha256": "5ccbe8bb9d21b16bc9b76d2430a8b64e25f2fbdb595b15bc1bade4e514591718",
+      "archivedContentSha256": "5ccbe8bb9d21b16bc9b76d2430a8b64e25f2fbdb595b15bc1bade4e514591718",
+      "compressedSha256": "ff5cb867c5c6683921a2ec63a985d6c2d7403031083c93726f371b0528362eb9",
+      "originalBytes": 14706,
+      "archivedBytes": 14706,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-overlay-control-run.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control-run.log",
+      "originalSha256": "cfdfc1b4d7121c7177e993bdac27430fa7554acf0cd9ada902e7d127419d20ef",
+      "archivedContentSha256": "cfdfc1b4d7121c7177e993bdac27430fa7554acf0cd9ada902e7d127419d20ef",
+      "compressedSha256": "09ae85b96f46267eaeceeadc56c39faa2688dd3ab954f51669b82ae4e0df968a",
+      "originalBytes": 1162,
+      "archivedBytes": 1162,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-inject_owned.py.gz",
+      "source": "build\\p5-p6-closure-2026-10-10\\native-memory-trace\\inject_owned.py",
+      "originalSha256": "19a6b2fbf673a0c4d26bd4816f3562a0db3ec5d03a615da3e623703c106a070c",
+      "archivedContentSha256": "19a6b2fbf673a0c4d26bd4816f3562a0db3ec5d03a615da3e623703c106a070c",
+      "compressedSha256": "ae9d67122eea13acddb8d0fe6004c5966d3a20db48c3c3f93eb742b9aab46339",
+      "originalBytes": 11936,
+      "archivedBytes": 11936,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-LICENSE.txt.gz",
+      "source": "build\\p5-p6-closure-2026-10-10\\native-memory-trace\\minhook\\LICENSE.txt",
+      "originalSha256": "4f21f857550d7be854da6ea5f2da4e6775ca4e3fbb535e4f3d961c47d0bf3335",
+      "archivedContentSha256": "4f21f857550d7be854da6ea5f2da4e6775ca4e3fbb535e4f3d961c47d0bf3335",
+      "compressedSha256": "69e9f82c2f4d64f5ba5982f475b4bfe6c916a6435f054142b7db7023950685e0",
+      "originalBytes": 4446,
+      "archivedBytes": 4446,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-probe-control-result.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\probe-control\\result.json",
+      "originalSha256": "9e0fa5e06e77ce7f1838373127d0046ae470491b6d5bf3689e1642b0c04491e9",
+      "archivedContentSha256": "9e0fa5e06e77ce7f1838373127d0046ae470491b6d5bf3689e1642b0c04491e9",
+      "compressedSha256": "709de91de17c7f012debf1d69ab7546220d71f08a744b89734c64253c771efcf",
+      "originalBytes": 810,
+      "archivedBytes": 810,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-probe-control-memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\probe-control\\memory.json",
+      "originalSha256": "4119411d650c4095ee874502aced254de241feae0cc7ccf7bf9aaaa98acd022b",
+      "archivedContentSha256": "4119411d650c4095ee874502aced254de241feae0cc7ccf7bf9aaaa98acd022b",
+      "compressedSha256": "5883596adb5c64fd9e516329c6f7aa5ffe1d5c2d4483abe9936a08d2bc367068",
+      "originalBytes": 724,
+      "archivedBytes": 724,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-probe-control-stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\probe-control\\stdout.log",
+      "originalSha256": "c52886c137cfa5fdd775478b8cc2188508e9e6e4379214b89ef1b57f4ee854f9",
+      "archivedContentSha256": "c52886c137cfa5fdd775478b8cc2188508e9e6e4379214b89ef1b57f4ee854f9",
+      "compressedSha256": "60cedfaae194c9cb46e0d425ef12f486e5a60301cd25ef09879d320dd55f8e31",
+      "originalBytes": 53,
+      "archivedBytes": 53,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-probe-control-stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\probe-control\\stderr.log",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archivedContentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressedSha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "originalBytes": 0,
+      "archivedBytes": 0,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-probe-block-result.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\probe-block\\result.json",
+      "originalSha256": "421b6b2a506baa6c4989d59c833376967493252e66fc86ff06b06669ef3c7f31",
+      "archivedContentSha256": "421b6b2a506baa6c4989d59c833376967493252e66fc86ff06b06669ef3c7f31",
+      "compressedSha256": "531f5fd9cf19f4a36da33a2ac46b762f4d378f911137b33c56950bdc45dae6ca",
+      "originalBytes": 796,
+      "archivedBytes": 796,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-probe-block-memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\probe-block\\memory.json",
+      "originalSha256": "58abacebd187a4bb96dfc97b904c1601040567a41eb52d1fa887c56868b4cf51",
+      "archivedContentSha256": "58abacebd187a4bb96dfc97b904c1601040567a41eb52d1fa887c56868b4cf51",
+      "compressedSha256": "7b09f7167f8788146379527131a8c235112d802371033d6fb922d009efc96b36",
+      "originalBytes": 862,
+      "archivedBytes": 862,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-probe-block-stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\probe-block\\stdout.log",
+      "originalSha256": "78a5f952ad057f350b483afe24e1b18bea36a644b74857882451a6f056ef1f3d",
+      "archivedContentSha256": "78a5f952ad057f350b483afe24e1b18bea36a644b74857882451a6f056ef1f3d",
+      "compressedSha256": "53427a0300cd9fa68c777b737306db8efd32edaa72a778b1a3ce9a7d0cfc860a",
+      "originalBytes": 53,
+      "archivedBytes": 53,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-probe-block-stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\probe-block\\stderr.log",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archivedContentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressedSha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "originalBytes": 0,
+      "archivedBytes": 0,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-1-result.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-1\\result.json",
+      "originalSha256": "44beb85047abc8a9be985ac5b2bd73c3cbc0fddbf8b3ac533c8e3d294afd0c45",
+      "archivedContentSha256": "44beb85047abc8a9be985ac5b2bd73c3cbc0fddbf8b3ac533c8e3d294afd0c45",
+      "compressedSha256": "5bf64638d4355b17cde472ff167801f31a881fa8aeeee8e3c3ff4f3109953ff9",
+      "originalBytes": 3407,
+      "archivedBytes": 3407,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-1-memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-1\\memory.json",
+      "originalSha256": "3e375b789ba320b66ae430782cc4fc7a828169eff064a4d9ca712ffbba062760",
+      "archivedContentSha256": "3e375b789ba320b66ae430782cc4fc7a828169eff064a4d9ca712ffbba062760",
+      "compressedSha256": "4448ae21291b6123acb85b33e7e08c0e8de12b0d7f179869aa52c1140cbf1612",
+      "originalBytes": 34004,
+      "archivedBytes": 34004,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-1-stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-1\\stdout.log",
+      "originalSha256": "d56c614665e886cc255de046d5d45a51b300861411ba8cd6b4ff12f1745c677b",
+      "archivedContentSha256": "d56c614665e886cc255de046d5d45a51b300861411ba8cd6b4ff12f1745c677b",
+      "compressedSha256": "7d227914492639ef4581f496356e256950736d1270dd3fe52d6a4a8965e5312c",
+      "originalBytes": 2078,
+      "archivedBytes": 2078,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-1-stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-1\\stderr.log",
+      "originalSha256": "61684bb49ac17005159bdf8cfc9f137149c68059f2bc91426b529b7916be2ab2",
+      "archivedContentSha256": "61684bb49ac17005159bdf8cfc9f137149c68059f2bc91426b529b7916be2ab2",
+      "compressedSha256": "df8150566e5f545e3b0d7bc763af74c86c4d1b8d81dccb485c28adcc7b4bb0ee",
+      "originalBytes": 393,
+      "archivedBytes": 393,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-1-environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-1\\environment.json",
+      "originalSha256": "03ec7a36a24d81df06317d970c11ea918073145475041de52fb69b147f58b646",
+      "archivedContentSha256": "1a8d5384732cccbcdf572247dd6b64af162e093c1ee9c4436c1865a541feb9a2",
+      "compressedSha256": "3d7d5e5f8b115c06c2dd0d63cc9804b6d3eabdd5d832ece7ddec74ced7fcb6f5",
+      "originalBytes": 526263,
+      "archivedBytes": 4486,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "overlay-standard-1-timing.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-1\\timing.json",
+      "originalSha256": "a2a273e23c8342c55abc445bb85cd2ea4bbfbcf0c54de0bb4a743e809d92644c",
+      "archivedContentSha256": "a2a273e23c8342c55abc445bb85cd2ea4bbfbcf0c54de0bb4a743e809d92644c",
+      "compressedSha256": "ab5647e8a6f7a772e0ae01c68d0c2ea718319fbeeb1a561efbc5730eef082056",
+      "originalBytes": 118417,
+      "archivedBytes": 118417,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-1-timing.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-1\\timing.csv",
+      "originalSha256": "eade9bf9cca94779f2dff024a90b49b1286eed81e18803681ce86ec678b09edf",
+      "archivedContentSha256": "eade9bf9cca94779f2dff024a90b49b1286eed81e18803681ce86ec678b09edf",
+      "compressedSha256": "633eafc038c460ea0a3eb115091aae3ea3803ccf04f3f0a4a02ab1b0029166ed",
+      "originalBytes": 110253,
+      "archivedBytes": 110253,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-2-result.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-2\\result.json",
+      "originalSha256": "f400b19a9311c7878095f9e4ac0b56255748631cd353405a642d2dcf9aa66255",
+      "archivedContentSha256": "f400b19a9311c7878095f9e4ac0b56255748631cd353405a642d2dcf9aa66255",
+      "compressedSha256": "be9e6c5f7504ff956868bd97a4e7b6a06d266019f0049425684c285735784054",
+      "originalBytes": 3374,
+      "archivedBytes": 3374,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-2-memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-2\\memory.json",
+      "originalSha256": "5249b47a6cff300f8e0e993ff1f1d2112c54b3e91abc05b15b996f53fbd94f47",
+      "archivedContentSha256": "5249b47a6cff300f8e0e993ff1f1d2112c54b3e91abc05b15b996f53fbd94f47",
+      "compressedSha256": "1500a33298c25378fc2928371b44bc32d304fdd197d27b64b84ede909c2cc7eb",
+      "originalBytes": 34565,
+      "archivedBytes": 34565,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-2-stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-2\\stdout.log",
+      "originalSha256": "f8dae9d109fa0f22b3e577327e47d11cfd043ed405007e278d7cbc54699c2ec1",
+      "archivedContentSha256": "f8dae9d109fa0f22b3e577327e47d11cfd043ed405007e278d7cbc54699c2ec1",
+      "compressedSha256": "11f0d0a17cf81b634b32bcb125f5046c14e63fb997dd9684566e1e58aa3edb38",
+      "originalBytes": 2078,
+      "archivedBytes": 2078,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-2-stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-2\\stderr.log",
+      "originalSha256": "28ef16b68c99c67e5dcdaf092724c03a7459da73026ecb1297c9d1169c10791d",
+      "archivedContentSha256": "28ef16b68c99c67e5dcdaf092724c03a7459da73026ecb1297c9d1169c10791d",
+      "compressedSha256": "3fbf74ee219ffe7fb8512333eb296595c5e1e3c85c25a104e14d88bed783c09a",
+      "originalBytes": 393,
+      "archivedBytes": 393,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-2-environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-2\\environment.json",
+      "originalSha256": "38a7b46cbf2503d5131205ec9ea87b19037a5193fe290ed5312a435696e79fb8",
+      "archivedContentSha256": "96334c3c85472cd4e2e9345b035a8f470fb69107ff37ef0580af298189039564",
+      "compressedSha256": "4d5ae6d8cb43c3cf46b01cf6afdcb8a181b593befae94fa3ab93fe3573237f67",
+      "originalBytes": 751720,
+      "archivedBytes": 6299,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "overlay-standard-2-timing.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-2\\timing.json",
+      "originalSha256": "5ac546bd7d6b6ef26d975994b02586a9db44e60da709bcbe7ee17b302c8c3280",
+      "archivedContentSha256": "5ac546bd7d6b6ef26d975994b02586a9db44e60da709bcbe7ee17b302c8c3280",
+      "compressedSha256": "3ed65fbd1efef033e3f089dcf10fb6a2212626e2996951a15aacffd21322c703",
+      "originalBytes": 118627,
+      "archivedBytes": 118627,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-2-timing.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-2\\timing.csv",
+      "originalSha256": "61e2ec7eb06bc9d686d110838b7d80c83e76ca3ba79e9d1227c317691d40bb9f",
+      "archivedContentSha256": "61e2ec7eb06bc9d686d110838b7d80c83e76ca3ba79e9d1227c317691d40bb9f",
+      "compressedSha256": "4e77f7a5fc0d3b06189851208e521fa5d53673664d5f80f5dc7093a43d253571",
+      "originalBytes": 110259,
+      "archivedBytes": 110259,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-3-result.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-3\\result.json",
+      "originalSha256": "9c48a5959f31fc7e7305b30d149d3bd43f132651af115300e48c8c622b246d51",
+      "archivedContentSha256": "9c48a5959f31fc7e7305b30d149d3bd43f132651af115300e48c8c622b246d51",
+      "compressedSha256": "be0a26f9936a192e5b46710b98a55a3b0c87cdfcc38caed6b877c384c63ed53d",
+      "originalBytes": 3412,
+      "archivedBytes": 3412,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-3-memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-3\\memory.json",
+      "originalSha256": "7be971e7545d86b601e0ea8268605c311cb09b3f69ba3f6da982b5101d113b63",
+      "archivedContentSha256": "7be971e7545d86b601e0ea8268605c311cb09b3f69ba3f6da982b5101d113b63",
+      "compressedSha256": "66ed68f51acd8bb56d545c9f2dc856d9dfea5ecd45a583795f3ec650c1f7334c",
+      "originalBytes": 37942,
+      "archivedBytes": 37942,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-3-stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-3\\stdout.log",
+      "originalSha256": "6d8b9d1eaf3e843f10a51791658b1929757bb02198bd78735a4a8521e8813be5",
+      "archivedContentSha256": "6d8b9d1eaf3e843f10a51791658b1929757bb02198bd78735a4a8521e8813be5",
+      "compressedSha256": "3396cfcbf97add6d186c871c0c7b45e01554ba27c9af526a48c7f0f02bf3ded8",
+      "originalBytes": 2078,
+      "archivedBytes": 2078,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-3-stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-3\\stderr.log",
+      "originalSha256": "4030ea0323b193152c02a09faba24b465dc21a36b718ff0372f6cac6f3c48804",
+      "archivedContentSha256": "4030ea0323b193152c02a09faba24b465dc21a36b718ff0372f6cac6f3c48804",
+      "compressedSha256": "4b36831f543fed8c4a2c9e1350e42ce1593975d2a4d0ae4a01d62a9eeee94ca6",
+      "originalBytes": 393,
+      "archivedBytes": 393,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-3-environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-3\\environment.json",
+      "originalSha256": "72c423e3be0f8fe0ca351f5b5309e8b41adf02489cd19b003b4cecce3bb73ebf",
+      "archivedContentSha256": "c96eb70ec4732872e8da563a26259ae78776e5db18fde609f1e6fe6c32c958ab",
+      "compressedSha256": "1c33ed0b59fe7f478fdb5e9bce85d84a6ab3953e0f7f773bae989a46443b269a",
+      "originalBytes": 601399,
+      "archivedBytes": 5060,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "overlay-standard-3-timing.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-3\\timing.json",
+      "originalSha256": "8e364423f2c13dff524fa699ea662d22f212b5fc029d3df75496e2cdcf1f5f31",
+      "archivedContentSha256": "8e364423f2c13dff524fa699ea662d22f212b5fc029d3df75496e2cdcf1f5f31",
+      "compressedSha256": "49cee6e5aca827a41dd28daf3e247afbe26a19f817182654b8d59bfd4125b79f",
+      "originalBytes": 118648,
+      "archivedBytes": 118648,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-3-timing.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-3\\timing.csv",
+      "originalSha256": "51dafd2b5ff1fbfcc3dce7d14a3200bab205f5e3296e2679e4649ca04898f406",
+      "archivedContentSha256": "51dafd2b5ff1fbfcc3dce7d14a3200bab205f5e3296e2679e4649ca04898f406",
+      "compressedSha256": "6c1310754eb39b24f152ed6ca38611f9812e75e608624d3eb21136f5b7ed6430",
+      "originalBytes": 110263,
+      "archivedBytes": 110263,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-4-result.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-4\\result.json",
+      "originalSha256": "84615866dcf2ce4a2b38bd49e309b2f88d085530747b7907cc843605279c156c",
+      "archivedContentSha256": "84615866dcf2ce4a2b38bd49e309b2f88d085530747b7907cc843605279c156c",
+      "compressedSha256": "51c5e5d87329c69f0ea6f122ef86023231426a27e446832abcc4bdd64c76a2e6",
+      "originalBytes": 3370,
+      "archivedBytes": 3370,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-4-memory.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-4\\memory.json",
+      "originalSha256": "d280c4a8f15cecc46deff334224a64baf048c07cd902c92b63714ad9dc765411",
+      "archivedContentSha256": "d280c4a8f15cecc46deff334224a64baf048c07cd902c92b63714ad9dc765411",
+      "compressedSha256": "a15004daed470a839101161ed534faa66fad9a4ffd967313d8cbeb5f3663add1",
+      "originalBytes": 36218,
+      "archivedBytes": 36218,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-4-stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-4\\stdout.log",
+      "originalSha256": "da2fba84d5c094f73d2c21a5c79af9fd810eb77b384867c93cc24120d0424b72",
+      "archivedContentSha256": "da2fba84d5c094f73d2c21a5c79af9fd810eb77b384867c93cc24120d0424b72",
+      "compressedSha256": "cc934132d8a8a015187adc9222c836040d3bfbfa3144f76915d047987b83d21d",
+      "originalBytes": 2078,
+      "archivedBytes": 2078,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-4-stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-4\\stderr.log",
+      "originalSha256": "9d4db4b9b5ce51b4950a035b24f18bc57cd88f0a41800b6951f9998eec4afc85",
+      "archivedContentSha256": "9d4db4b9b5ce51b4950a035b24f18bc57cd88f0a41800b6951f9998eec4afc85",
+      "compressedSha256": "afa234c7485533c520aaed9667498a0d5e5d05db99b0ea4d6be0803c6b30d929",
+      "originalBytes": 393,
+      "archivedBytes": 393,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-4-environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-4\\environment.json",
+      "originalSha256": "d321c65f483200ea26766874a19f0bda7e5687aa2841e6ed62c33abe1fdad444",
+      "archivedContentSha256": "57f9f44e17ca499e559726f6248ad33dbf38d855b0d65d9fab58e39d80280806",
+      "compressedSha256": "faf2b810beaf40e7cad85e17020b76f8de4049ddf5da1da7b8b174750f967849",
+      "originalBytes": 601434,
+      "archivedBytes": 5078,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "overlay-standard-4-timing.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-4\\timing.json",
+      "originalSha256": "80a62cd7ef68e10ed89545a8315a696f8d7bb5589919bedd7d29a5775646312b",
+      "archivedContentSha256": "80a62cd7ef68e10ed89545a8315a696f8d7bb5589919bedd7d29a5775646312b",
+      "compressedSha256": "3b6541ffd33fb687944b1d9e2027ed22fd23a57859c6c218e46e660d716a88cd",
+      "originalBytes": 118681,
+      "archivedBytes": 118681,
+      "kind": "OwnedProcessDiagnostic"
+    },
+    {
+      "path": "overlay-standard-4-timing.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\overlay-control\\standard-4\\timing.csv",
+      "originalSha256": "0e60837490cc3e8435b1549f60cc66251f207eecc5b49e52bae741e0a4808029",
+      "archivedContentSha256": "0e60837490cc3e8435b1549f60cc66251f207eecc5b49e52bae741e0a4808029",
+      "compressedSha256": "38ddda524fb4da2a1aae8087049f558569cc639aa81839cb0feb8e6aa14f2dcc",
+      "originalBytes": 110259,
+      "archivedBytes": 110259,
+      "kind": "OwnedProcessDiagnostic"
+    }
+  ],
+  "rawSystemTraces": [
+    {
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-1\\memory.etl",
+      "sha256": "a45ce0fdaba4fc3cf767673509552f9e02cad83da7f698e6318afcb25b0d603f",
+      "bytes": 204472320,
+      "retainedLocally": true
+    },
+    {
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-standard-2\\memory.etl",
+      "sha256": "5802d961f7e6113008a2877b911c3161b706f9dab24ea7ba6ad9862153a5d9af",
+      "bytes": 176160768,
+      "retainedLocally": true
+    },
+    {
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-1\\memory.etl",
+      "sha256": "bc7beb6bb36f948d2fc935a304d6b302c8649814fbaad8c169694cbf50d7141a",
+      "bytes": 206569472,
+      "retainedLocally": true
+    },
+    {
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-2\\memory.etl",
+      "sha256": "6d9a1048daa4fc3850feee75d9b437c8f083ddadd6d9afa4a3d4460a114f0dac",
+      "bytes": 304087040,
+      "retainedLocally": true
+    },
+    {
+      "source": "build\\p5-observation-control-2026-10-11\\minimal-fault-exploration-3\\memory.etl",
+      "sha256": "94d68a17513aa4c1d206392020115bddf45bdcdcdce064510242b5199c3df0c2",
+      "bytes": 147849216,
+      "retainedLocally": true
+    }
+  ],
+  "formalRounds": 15,
+  "formalPassedRounds": 8,
+  "obsLayerExclusionVerified": true,
+  "allCaptureModulesExcluded": false,
+  "formalRootCauseResolved": false,
+  "reproducedDiagnosticCount": 1,
+  "knownCommits": 200,
+  "knownReleases": 200,
+  "lostEvents": 0,
+  "lostBuffers": 0,
+  "physicalInputVerified": false,
+  "subjectiveAudioVerified": false,
+  "authoringEfficiencyVerified": false,
+  "priorPipelineFlagDataIsCurrentAcceptance": false,
+  "reproducedTraceObsModuleAbsent": true,
+  "reproducedTraceNvidiaCaptureModulePresent": true,
+  "nvidiaCaptureExclusionProbePassed": true,
+  "nvidiaCaptureExclusionDiagnosticRounds": 4,
+  "nvidiaCaptureCauseProven": false,
+  "diagnosticBinaries": {
+    "AzureOverlayControl.dll": "11bd05b5d72d6c7bc2976315b73cd6bff4a99007ca472f3e63bcf7c55c100e95",
+    "AzureOverlayProbe.exe": "0db87878e966608b53d87ae3595d58ceaa815989d194ed8ee7523cd0fa0787d0",
+    "nvspcap64.dll": "72bd25f82be3988758d5ef38ed25ea6a862a3c7d767d6a8cafd90bc875c4dd7f"
+  }
+}

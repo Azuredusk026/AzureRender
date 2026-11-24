@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "fileCount": 8551,
+  "licenseHashes": {
+    "assimp-LICENSE.txt": "21195d410708b82757d3e34c3a40c427f6e59339da862e9480d4fcdc79b7a1bd",
+    "jhasse-poly2tri-LICENSE.txt": "578790e1377a270831ede8c64d7c92d411b6e5a55ce32fbb84a35b376af25ee0",
+    "kubazip-LICENSE.txt": "6c1643ab0353b42030e903654fdb3845570b741da5ffafcaf9d305e8ec79a4a0",
+    "minizip-LICENSE.txt": "8a3aa14b12f22fa91a6cc84b39d76298dc28ea577fb6bbcf0ebe94e4eda77d1d",
+    "pugixml-LICENSE.txt": "90974fbb120e966b452654eaae3ba6ee55f3647db3b28918a7649733ee99da97",
+    "rapidjson-LICENSE.txt": "a140e5d46fe734a1c78f1a3c3ef207871dd75648be71fdda8e309b23ab8b1f32",
+    "utfcpp-LICENSE.txt": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566"
+  },
+  "installedBinaries": {
+    "AzureRender.exe": "a0490f53e9a2ea3794e26875d59e2a18b63e1c4cf6f49054a06a545ab316a0f0",
+    "AzurePlayer.exe": "039929144a80370c717cb8be7fdec5679e40de1cfc9885287a97a9c34aec89e7"
+  }
+}

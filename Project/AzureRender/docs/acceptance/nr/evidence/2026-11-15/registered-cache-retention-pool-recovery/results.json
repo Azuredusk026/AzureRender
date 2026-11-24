@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "recoveredManagedPoolBytes": 705311360,
+  "catalogs": [
+    {
+      "name": "20261110-174256-shader-catalog-4515d1",
+      "bytes": 249130529,
+      "archive": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\archives\\managed\\20261110-174256-shader-catalog-4515d1-4d6e35d773b8.zip",
+      "archiveSha256": "3c6509b78699bd2cf32800e250e68dbac630276d8706f53520a0f44f45009d0e",
+      "files": 940
+    },
+    {
+      "name": "20261110-195904-shader-catalog-066319",
+      "bytes": 210674878,
+      "archive": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\archives\\managed\\20261110-195904-shader-catalog-066319-f958eabd23aa.zip",
+      "archiveSha256": "5bc14c9786ede71f03b43e0bb9959ada88603cb2befcde18c5b6b2035d582374",
+      "files": 853
+    },
+    {
+      "name": "20261110-171744-shader-catalog-fd1b50",
+      "bytes": 245505953,
+      "archive": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\archives\\managed\\20261110-171744-shader-catalog-fd1b50-d6dc6ac17891.zip",
+      "archiveSha256": "64cffc55dd46a59a3ccc513ff8f8460e56c56fba6d8ff9c670d78647c078f128",
+      "files": 939
+    }
+  ],
+  "abortedFixture": {
+    "archive": "C:\\Users\\admin\\AppData\\Local\\AzureRender\\build-recovery\\20261115-113412-nr-standard-cache-retention-qualification-d65701-aborted-shader-host",
+    "bytes": 173483260,
+    "files": 905
+  },
+  "resolvedTests": {
+    "AzureEditor.GizmoGpu": 47.5738,
+    "AzureEditor.DevtoolsHost": 134.861,
+    "AzureEditor.ShaderReloadHost": 60.666,
+    "AzureEditor.ProposalHost": 17.8336,
+    "AzureAssets.ProceduralHost": 86.7689
+  },
+  "dispatch": [
+    [
+      1066,
+      "release-gpu-14",
+      "budget-stopped",
+      1,
+      "managed-pool-limit"
+    ],
+    [
+      1073,
+      "archive-expired-catalogs-for-registered-gpu",
+      "succeeded",
+      0,
+      null
+    ],
+    [
+      1074,
+      "release-gpu-14",
+      "succeeded",
+      0,
+      null
+    ]
+  ],
+  "archive": {
+    "sha256": "4cc973034a8827561abaf1cc5b8c9c728cf398b6a83005694888157b8a2b65a9",
+    "files": {
+      "release-gpu-14-pool-stop/devtools-stderr.log": "c5048c96f5c37ba5d6d652706412423fbc40ebe79de53a158ddcdbabcd3978bd",
+      "release-gpu-14-pool-stop/devtools-stdout.log": "1a6d6e66e46a0c68cc2a7ff352952a913e261debbbdf1fccb1718bd313920a25",
+      "release-gpu-14-pool-stop/process.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "release-gpu-14-pool-stop/registered-summary.json": "ac6e145696f1d67dfddd4135161a3b84a041c609b534d861c1b13933efe6bb3d",
+      "release-gpu-14-pool-stop/release-gpu-14-queue.log": "611052e2e76a20919de5b77b6e5a7322fae7c384b3e0b4304e1bc2edea2944ad",
+      "release-gpu-14-pool-stop/release-gpu-14.log": "1f14df5de4488bb2ead7d7ef16dceb3777041159cf1f193bf4d2b2f24826dc0b",
+      "release-gpu-14-pool-stop/release-gpu-14.txt": "b9b943f8e3074dede86fb5c998e7683d9d94963e625ab61d7472af6f9b971db9",
+      "archive_pool_recovery.py": "dda3137decfef0339b84c8e0581d3ffbaed0636c07a013f4d2179218ebf282bd",
+      "release-gpu-14.json": "d2b0b3a1f4c2198491b3ab0d82501ee9195dac9044179f8967cdf45f06726c31",
+      "release-gpu-14.xml": "9c7912f0453bf8595b203d04019a81bc33c1307b04cf90ddccb5c717c8c0030f",
+      "release-gpu-14.txt": "b9b943f8e3074dede86fb5c998e7683d9d94963e625ab61d7472af6f9b971db9",
+      "release-gpu-14.log": "fd1b2e4b008e8855d085e9c1841ef8d5cf62dcd6ba8b1444fd03d53f838cbfb4",
+      "release-gpu-14-queue.log": "50cb1cb76310fa0409a269686b9dc251ca57138058eff74e6650d8583a4223e6",
+      "registered-pool-capacity-recovery.json": "318c93f7176ecc9a2d9fb51d9966cc4e9c9ec7c61d1106fbd0c51dc928c50a2c",
+      "aborted-shader-host-copy.json": "6c010be587b2b1f76ef2ed978ba8fe4f790a626ec3f7e76b616d18a4ead375a0",
+      "archive_expired_shader_runs.py": "6826f9f2025e17b91ac32b1d29878cba91bf1b8a36855b4d66f67269548ca7b9",
+      "preserve_aborted_shader_host.py": "373910eac036bafda00d2b22b15841f7d3811c3bfb9c507cdb5ce1dde3a2327e",
+      "release-products.json": "b1283ecdd5079fc8205032e76774fd5c8ee60f18fea9c55f5c3c4448a014f422"
+    }
+  }
+}

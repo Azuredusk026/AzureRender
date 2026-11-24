@@ -1,0 +1,2356 @@
+{
+  "input": "production ImGui replay and public edit operations",
+  "elapsedSeconds": 10.031999999999243,
+  "physicalInput": false,
+  "steps": 76,
+  "injectedFailures": 1,
+  "operations": [
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.1559999999954016,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.select",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-2",
+        "commandId": "node.select",
+        "parameters": {
+          "indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:6a058cc41b7005f9",
+          "documentId": "17917350487764550-1",
+          "revision": 2
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.delete",
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-4",
+        "commandId": "node.delete",
+        "parameters": {},
+        "baseVersion": {
+          "contentHash": "fnv1a64:6a058cc41b7005f9",
+          "documentId": "17917350487764550-1",
+          "revision": 3
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01599999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "history.undo",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-7",
+        "commandId": "history.undo",
+        "parameters": {},
+        "baseVersion": {
+          "contentHash": "fnv1a64:11b0508934f3522f",
+          "documentId": "17917350487764550-1",
+          "revision": 4
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01599999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "history.redo",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-10",
+        "commandId": "history.redo",
+        "parameters": {},
+        "baseVersion": {
+          "contentHash": "fnv1a64:6a058cc41b7005f9",
+          "documentId": "17917350487764550-1",
+          "revision": 5
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "document.save",
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-13",
+        "commandId": "document.save",
+        "parameters": {},
+        "baseVersion": {
+          "contentHash": "fnv1a64:11b0508934f3522f",
+          "documentId": "17917350487764550-1",
+          "revision": 6
+        }
+      }
+    },
+    {
+      "op": "screenshot",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "label": "p6-exploration-empty"
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.2969999999986612,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.contentHash"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "asset.import",
+      "seconds": 0.07800000000133878,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-18",
+        "commandId": "asset.import",
+        "parameters": {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\automatic-forward-2026-10-12\\authoring-installed\\model-input\\model.gltf"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:11b0508934f3522f",
+          "documentId": "17917350487764550-1",
+          "revision": 7
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "assets.catalog",
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-20",
+        "commandId": "assets.catalog",
+        "parameters": {},
+        "baseVersion": {
+          "contentHash": "fnv1a64:aed4da7d9205b812",
+          "documentId": "17917350487764550-1",
+          "revision": 9
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01599999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "document.save",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-22",
+        "commandId": "document.save",
+        "parameters": {},
+        "baseVersion": {
+          "contentHash": "fnv1a64:aed4da7d9205b812",
+          "documentId": "17917350487764550-1",
+          "revision": 9
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "content.create-directory",
+      "seconds": 0.0940000000045984,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-24",
+        "commandId": "content.create-directory",
+        "parameters": {
+          "parent": "assets:/",
+          "name": "Authored"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:aed4da7d9205b812",
+          "documentId": "17917350487764550-1",
+          "revision": 10
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "asset.move",
+      "seconds": 0.0930000000007567,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-26",
+        "commandId": "asset.move",
+        "parameters": {
+          "asset": "c1b31409-67f0-4f11-8ef5-9bcdaf2ca322",
+          "destination": "assets:/Authored/model.gltf"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:aed4da7d9205b812",
+          "documentId": "17917350487764550-1",
+          "revision": 11
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "asset.rename",
+      "seconds": 0.09399999999732245,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-28",
+        "commandId": "asset.rename",
+        "parameters": {
+          "asset": "c1b31409-67f0-4f11-8ef5-9bcdaf2ca322",
+          "name": "Mechanical.gltf"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:e20f2e5df3651e0a",
+          "documentId": "17917350487764550-1",
+          "revision": 12
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.07800000000133878,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "asset.inspect",
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-30",
+        "commandId": "asset.inspect",
+        "parameters": {
+          "asset": "c1b31409-67f0-4f11-8ef5-9bcdaf2ca322"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:ac5ce5465f9aff6e",
+          "documentId": "17917350487764550-1",
+          "revision": 13
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "texture.settings",
+      "seconds": 0.07899999999790452,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-32",
+        "commandId": "texture.settings",
+        "parameters": {
+          "assets": [
+            "d4c911d5-defe-4663-b328-17bc4fee8a93"
+          ],
+          "values": {
+            "filter": "linear",
+            "usage": "albedo"
+          }
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:ac5ce5465f9aff6e",
+          "documentId": "17917350487764550-1",
+          "revision": 13
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.046000000002095476,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.place",
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-34",
+        "commandId": "node.place",
+        "parameters": {
+          "resource": "c1b31409-67f0-4f11-8ef5-9bcdaf2ca322",
+          "id": "authored-model"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:ac5ce5465f9aff6e",
+          "documentId": "17917350487764550-1",
+          "revision": 14
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "document.save",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-36",
+        "commandId": "document.save",
+        "parameters": {},
+        "baseVersion": {
+          "contentHash": "fnv1a64:5581ab281c5ea10e",
+          "documentId": "17917350487764550-1",
+          "revision": 15
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "material.create",
+      "seconds": 0.06300000000192085,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-38",
+        "commandId": "material.create",
+        "parameters": {
+          "type": "azure.pbr",
+          "destination": "assets:/Authored/Metal.azurematerial"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:5581ab281c5ea10e",
+          "documentId": "17917350487764550-1",
+          "revision": 16
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "material.field",
+      "seconds": 0.06199999999807915,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-40",
+        "commandId": "material.field",
+        "parameters": {
+          "asset": "25f300c7-0b41-46d0-994b-b9bd4d0e035f",
+          "field": "roughness",
+          "value": 0.4
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:5581ab281c5ea10e",
+          "documentId": "17917350487764550-1",
+          "revision": 16
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "material.assign",
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-42",
+        "commandId": "material.assign",
+        "parameters": {
+          "nodes": [
+            "authored-model"
+          ],
+          "slotId": "name:stone",
+          "material": "25f300c7-0b41-46d0-994b-b9bd4d0e035f"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:5581ab281c5ea10e",
+          "documentId": "17917350487764550-1",
+          "revision": 17
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.06199999999807915,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "reference.reveal",
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-44",
+        "commandId": "reference.reveal",
+        "parameters": {
+          "kind": "asset",
+          "id": "25f300c7-0b41-46d0-994b-b9bd4d0e035f"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:661aa9101794ab37",
+          "documentId": "17917350487764550-1",
+          "revision": 18
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "material.create",
+      "seconds": 0.0629999999946449,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-46",
+        "commandId": "material.create",
+        "parameters": {
+          "type": "azure.stylized",
+          "destination": "assets:/Authored/Style.azurematerial"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:661aa9101794ab37",
+          "documentId": "17917350487764550-1",
+          "revision": 18
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.062000000005355105,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "material.field",
+      "seconds": 0.0629999999946449,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-48",
+        "commandId": "material.field",
+        "parameters": {
+          "asset": "b30ba1e3-7fb3-4c0c-96e5-5c678bb20d9c",
+          "field": "roughness",
+          "value": 0.4
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:661aa9101794ab37",
+          "documentId": "17917350487764550-1",
+          "revision": 18
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.07800000000133878,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "material.assign",
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-50",
+        "commandId": "material.assign",
+        "parameters": {
+          "nodes": [
+            "authored-model"
+          ],
+          "slotId": "name:second-surface",
+          "material": "b30ba1e3-7fb3-4c0c-96e5-5c678bb20d9c"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:661aa9101794ab37",
+          "documentId": "17917350487764550-1",
+          "revision": 19
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.07800000000133878,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "reference.reveal",
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-52",
+        "commandId": "reference.reveal",
+        "parameters": {
+          "kind": "asset",
+          "id": "b30ba1e3-7fb3-4c0c-96e5-5c678bb20d9c"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:4bcbc651ebb06563",
+          "documentId": "17917350487764550-1",
+          "revision": 20
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "asset.generate",
+      "seconds": 0.07800000000133878,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-54",
+        "commandId": "asset.generate",
+        "parameters": {
+          "generator": "azure.primitive",
+          "output": "assets:/Authored/Cube.glb",
+          "parameters": {
+            "kind": "cube",
+            "size": [
+              1,
+              1,
+              1
+            ],
+            "segments": 1
+          },
+          "license": "CC0-1.0",
+          "replace": false
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:4bcbc651ebb06563",
+          "documentId": "17917350487764550-1",
+          "revision": 20
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.0629999999946449,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.place",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-56",
+        "commandId": "node.place",
+        "parameters": {
+          "resource": "db0a651f-54db-4c18-9d3b-4fda7eb809c9",
+          "id": "authored-fixed"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:4bcbc651ebb06563",
+          "documentId": "17917350487764550-1",
+          "revision": 21
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.07800000000133878,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.place",
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-58",
+        "commandId": "node.place",
+        "parameters": {
+          "resource": "db0a651f-54db-4c18-9d3b-4fda7eb809c9",
+          "id": "authored-moving"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:ec25b614ae48f07c",
+          "documentId": "17917350487764550-1",
+          "revision": 23
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.07800000000133878,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.batch-field",
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-60",
+        "commandId": "component.batch-field",
+        "parameters": {
+          "nodes": [
+            "authored-fixed",
+            "authored-moving"
+          ],
+          "type": "azure.transform",
+          "field": "scale",
+          "value": [
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:23eaef4d2b7bd170",
+          "documentId": "17917350487764550-1",
+          "revision": 24
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.create-preset",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-62",
+        "commandId": "node.create-preset",
+        "parameters": {
+          "preset": "light",
+          "id": "authored-light"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:2653b2151a6fd448",
+          "documentId": "17917350487764550-1",
+          "revision": 25
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.0629999999946449,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.create-preset",
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-64",
+        "commandId": "node.create-preset",
+        "parameters": {
+          "preset": "camera",
+          "id": "authored-camera"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:138f3624b5236e4d",
+          "documentId": "17917350487764550-1",
+          "revision": 26
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.06199999999807915,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "reference.begin",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-66",
+        "commandId": "reference.begin",
+        "parameters": {
+          "nodes": [
+            "authored-camera"
+          ],
+          "type": "azure.third-person-camera",
+          "field": "target"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:aff67e2797b81c82",
+          "documentId": "17917350487764550-1",
+          "revision": 27
+        }
+      }
+    },
+    {
+      "op": "input",
+      "command": null,
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "event": {
+          "action": "click",
+          "target": "node.authored-model"
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.125,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.select",
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-71",
+        "commandId": "node.select",
+        "parameters": {
+          "id": "authored-model"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:c7d2ce4d2df43836",
+          "documentId": "17917350487764550-1",
+          "revision": 28
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "prefab.create",
+      "seconds": 0.07800000000133878,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-73",
+        "commandId": "prefab.create",
+        "parameters": {
+          "nodes": [
+            "authored-model"
+          ],
+          "path": "assets:/Authored/Mechanism.azureprefab"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:c7d2ce4d2df43836",
+          "documentId": "17917350487764550-1",
+          "revision": 29
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "prefab.place",
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-75",
+        "commandId": "prefab.place",
+        "parameters": {
+          "asset": "e361423f-b3b2-487a-80a2-94b125b486d7",
+          "instance": "first"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:c7d2ce4d2df43836",
+          "documentId": "17917350487764550-1",
+          "revision": 29
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.07800000000133878,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.select",
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-77",
+        "commandId": "node.select",
+        "parameters": {
+          "id": "first:authored-model"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:b87f0e56b22c9083",
+          "documentId": "17917350487764550-1",
+          "revision": 31
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.rename",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-79",
+        "commandId": "node.rename",
+        "parameters": {
+          "value": "First override"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:b87f0e56b22c9083",
+          "documentId": "17917350487764550-1",
+          "revision": 31
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "prefab.overrides",
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-81",
+        "commandId": "prefab.overrides",
+        "parameters": {
+          "instance": "first"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:5d4b343ecb166de3",
+          "documentId": "17917350487764550-1",
+          "revision": 32
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "prefab.place",
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-83",
+        "commandId": "prefab.place",
+        "parameters": {
+          "asset": "e361423f-b3b2-487a-80a2-94b125b486d7",
+          "instance": "second"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:5d4b343ecb166de3",
+          "documentId": "17917350487764550-1",
+          "revision": 32
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.07800000000133878,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.select",
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-85",
+        "commandId": "node.select",
+        "parameters": {
+          "id": "second:authored-model"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:0ac88f5c74020983",
+          "documentId": "17917350487764550-1",
+          "revision": 34
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.rename",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-87",
+        "commandId": "node.rename",
+        "parameters": {
+          "value": "Second override"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:0ac88f5c74020983",
+          "documentId": "17917350487764550-1",
+          "revision": 34
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "prefab.overrides",
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-89",
+        "commandId": "prefab.overrides",
+        "parameters": {
+          "instance": "second"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:1f8764d4dd79288b",
+          "documentId": "17917350487764550-1",
+          "revision": 35
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.select",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-91",
+        "commandId": "node.select",
+        "parameters": {
+          "id": "authored-fixed"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:1f8764d4dd79288b",
+          "documentId": "17917350487764550-1",
+          "revision": 35
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.fields",
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-93",
+        "commandId": "component.fields",
+        "parameters": {
+          "type": "azure.transform",
+          "values": {
+            "translation": [
+              5,
+              3,
+              0
+            ]
+          }
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:1f8764d4dd79288b",
+          "documentId": "17917350487764550-1",
+          "revision": 36
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.add",
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-95",
+        "commandId": "component.add",
+        "parameters": {
+          "type": "azure.rigid-body"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:fc7c119c5f5d8a53",
+          "documentId": "17917350487764550-1",
+          "revision": 37
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.fields",
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-97",
+        "commandId": "component.fields",
+        "parameters": {
+          "type": "azure.rigid-body",
+          "values": {
+            "dynamic": false,
+            "shape": "box",
+            "halfExtent": [
+              0.25,
+              0.25,
+              0.25
+            ]
+          }
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:f9601722cc370a02",
+          "documentId": "17917350487764550-1",
+          "revision": 38
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.select",
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-99",
+        "commandId": "node.select",
+        "parameters": {
+          "id": "authored-moving"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:ca4b7c8a1dd5c758",
+          "documentId": "17917350487764550-1",
+          "revision": 39
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.fields",
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-101",
+        "commandId": "component.fields",
+        "parameters": {
+          "type": "azure.transform",
+          "values": {
+            "translation": [
+              5,
+              2,
+              0
+            ]
+          }
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:ca4b7c8a1dd5c758",
+          "documentId": "17917350487764550-1",
+          "revision": 40
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.0,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.add",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-103",
+        "commandId": "component.add",
+        "parameters": {
+          "type": "azure.rigid-body"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:fc4ecd61361cb25c",
+          "documentId": "17917350487764550-1",
+          "revision": 41
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.fields",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-105",
+        "commandId": "component.fields",
+        "parameters": {
+          "type": "azure.rigid-body",
+          "values": {
+            "dynamic": true,
+            "shape": "box",
+            "halfExtent": [
+              0.25,
+              0.25,
+              0.25
+            ]
+          }
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:67e782f022c3aeb3",
+          "documentId": "17917350487764550-1",
+          "revision": 42
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.create",
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-107",
+        "commandId": "node.create",
+        "parameters": {
+          "id": "authored-joint"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:64807f7075fdc8fc",
+          "documentId": "17917350487764550-1",
+          "revision": 43
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.06199999999807915,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.add",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-109",
+        "commandId": "component.add",
+        "parameters": {
+          "type": "azure.hinge"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:63838a3f7547e9c5",
+          "documentId": "17917350487764550-1",
+          "revision": 44
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01599999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.fields",
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-111",
+        "commandId": "component.fields",
+        "parameters": {
+          "type": "azure.hinge",
+          "values": {
+            "bodyA": "authored-fixed",
+            "bodyB": "authored-moving"
+          }
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:5956cb7fd82999c9",
+          "documentId": "17917350487764550-1",
+          "revision": 45
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "document.save",
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-113",
+        "commandId": "document.save",
+        "parameters": {},
+        "baseVersion": {
+          "contentHash": "fnv1a64:83a83b71f8c6c945",
+          "documentId": "17917350487764550-1",
+          "revision": 46
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.0,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.contentHash"
+      }
+    },
+    {
+      "op": "input",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "event": {
+          "action": "click",
+          "target": "simulate"
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.17199999999866122,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.5469999999986612,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 30
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "input",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "event": {
+          "action": "click",
+          "target": "pause"
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.14099999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "input",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "event": {
+          "action": "click",
+          "target": "step"
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.14099999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "input",
+      "command": null,
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "event": {
+          "action": "click",
+          "target": "stop"
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.17100000000209548,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01599999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.contentHash"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.select",
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-130",
+        "commandId": "node.select",
+        "parameters": {
+          "id": "authored-model"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:83a83b71f8c6c945",
+          "documentId": "17917350487764550-1",
+          "revision": 47
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "script.template",
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-132",
+        "commandId": "script.template",
+        "parameters": {
+          "backend": "lua",
+          "path": "assets:/Authored/Controller.lua"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:83a83b71f8c6c945",
+          "documentId": "17917350487764550-1",
+          "revision": 48
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "script.write",
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-134",
+        "commandId": "script.write",
+        "parameters": {
+          "path": "assets:/Authored/Controller.lua",
+          "value": "function init() end\nfunction update(dt) end\n"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:83a83b71f8c6c945",
+          "documentId": "17917350487764550-1",
+          "revision": 48
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.add",
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-136",
+        "commandId": "component.add",
+        "parameters": {
+          "type": "azure.script"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:83a83b71f8c6c945",
+          "documentId": "17917350487764550-1",
+          "revision": 48
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01599999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.field",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-138",
+        "commandId": "component.field",
+        "parameters": {
+          "type": "azure.script",
+          "field": "asset",
+          "value": "98c55d4a-e72c-43e7-ba1c-e892df1c4afa"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:fc1c965b1e073527",
+          "documentId": "17917350487764550-1",
+          "revision": 49
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.field",
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-140",
+        "commandId": "component.field",
+        "parameters": {
+          "type": "azure.script",
+          "field": "enabled",
+          "value": false
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:4f9d80106522bfc5",
+          "documentId": "17917350487764550-1",
+          "revision": 50
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.field",
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-142",
+        "commandId": "component.field",
+        "parameters": {
+          "type": "azure.script",
+          "field": "enabled",
+          "value": true
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:052c22789eaac59a",
+          "documentId": "17917350487764550-1",
+          "revision": 51
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "component.field",
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": false,
+      "fields": {
+        "requestId": "authoring-144",
+        "commandId": "component.field",
+        "parameters": {
+          "type": "azure.transform",
+          "field": "translation",
+          "value": "invalid"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:4f9d80106522bfc5",
+          "documentId": "17917350487764550-1",
+          "revision": 52
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01599999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "diagnostic.query",
+      "seconds": 0.04700000000593718,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-146",
+        "commandId": "diagnostic.query",
+        "parameters": {
+          "source": "component.field"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:4f9d80106522bfc5",
+          "documentId": "17917350487764550-1",
+          "revision": 52
+        }
+      }
+    },
+    {
+      "op": "input",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "event": {
+          "action": "click",
+          "target": "tool.problems"
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.14099999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "input",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "event": {
+          "action": "click",
+          "target": "problem.problem-1"
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.125,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "document.save",
+      "seconds": 0.07800000000133878,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-153",
+        "commandId": "document.save",
+        "parameters": {},
+        "baseVersion": {
+          "contentHash": "fnv1a64:4f9d80106522bfc5",
+          "documentId": "17917350487764550-1",
+          "revision": 52
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01599999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "assets.reload",
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-156",
+        "commandId": "assets.reload",
+        "parameters": {},
+        "baseVersion": {
+          "contentHash": "fnv1a64:4f9d80106522bfc5",
+          "documentId": "17917350487764550-1",
+          "revision": 53
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.17100000000209548,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "document.open",
+      "seconds": 0.046999999998661224,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-159",
+        "commandId": "document.open",
+        "parameters": {
+          "path": "assets:/second.azurelevel"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:4f9d80106522bfc5",
+          "documentId": "17917350487764550-1",
+          "revision": 53
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.2180000000007567,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01599999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.select",
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-162",
+        "commandId": "node.select",
+        "parameters": {
+          "id": "authored-model"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:218102f033c05115",
+          "documentId": "17917350570818246-44",
+          "revision": 1
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.rename",
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-164",
+        "commandId": "node.rename",
+        "parameters": {
+          "value": "Second document"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:218102f033c05115",
+          "documentId": "17917350570818246-44",
+          "revision": 1
+        }
+      }
+    },
+    {
+      "op": "input",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "event": {
+          "action": "click",
+          "target": "save"
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.13999999999941792,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01599999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "document.activate",
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-169",
+        "commandId": "document.activate",
+        "parameters": {
+          "id": "17917350487764550-1"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:c1c82d902f49c890",
+          "documentId": "17917350570818246-44",
+          "revision": 3
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.23500000000058208,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "screenshot",
+      "command": null,
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "label": "p5-exploration-authored"
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.2809999999954016,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "document.activate",
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-176",
+        "commandId": "document.activate",
+        "parameters": {
+          "id": "17917350570818246-44"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:4f9d80106522bfc5",
+          "documentId": "17917350487764550-1",
+          "revision": 53
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.21899999999732245,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.04700000000593718,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    }
+  ]
+}

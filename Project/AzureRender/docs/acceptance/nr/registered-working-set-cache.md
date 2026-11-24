@@ -1,0 +1,49 @@
+# 正式工作集与管线缓存
+
+2026-11-15 使用标准 Release 产物和 NVIDIA 595.79 执行五类正式负载。每类运行三轮，每轮预热 300 帧后统计 1,800 帧。采样采用平衡计划的处理器节能首选项 50 和最高风扇档，结束后核验原电源计划和自动风扇档位。
+
+## 工作集观测
+
+十五轮的帧耗时、热状态、设备本地容量及工作集峰值通过。稳定工作集增长的门槛为 5%，十五轮均超出门槛。逐次进程读数末半段的最高工作集出现在最后一次观察前 0.16 至 0.41 秒。
+
+| 负载 | 三轮稳定工作集增长 |
+| --- | --- |
+| 标准 | 41.97%、48.86%、48.80% |
+| 编辑器 | 33.13%、33.38%、33.59% |
+| 压力 | 40.40%、46.38%、46.72% |
+| 探索 | 46.72%、50.16%、50.29% |
+| 平台 | 40.39%、51.64%、51.55% |
+
+标准、编辑器和压力负载的九轮均完整命中应用管线缓存，退出时保存的载荷为 112,111,295 字节。探索和平台负载各有一轮记录到 28 次未命中，后两轮均完整命中。十五轮均在退出时执行缓存保存。
+
+`VulkanPipelineCache::flush` 读取驱动缓存到连续缓冲，`PipelineCacheStore::save` 生成带校验头的完整副本。工作集峰值的时点与缓存退出阶段吻合，修复候选继续使用原始工作集门槛复测。
+
+[正式失败清单](evidence/2026-11-15/registered-formal-working-set-control/results.json)和[验证归档](evidence/2026-11-15/registered-formal-working-set-control/verification.zip)保存十五轮的逐帧计时、内存时间序列、管线计数和设备状态。
+
+## 缓存保留验证
+
+全部管线请求均具备有效反馈且命中应用缓存时，退出流程核对驱动报告的缓存长度及磁盘校验头。匹配的缓存保留载荷并刷新使用时间。首次运行、未命中和缓存长度变化时，退出流程执行完整保存。
+
+隔离的 Release 播放器和编辑器各运行一次原负载。标准负载增长为 0.282%，编辑器负载为 0.446%，均通过 5% 门槛及本轮其他预算。管线请求分别为 67 次及 188 次，均命中磁盘缓存。对应的基线重放分别增长 57.950% 和 40.801%，退出阶段各写入 134,081,871 字节。
+
+[配对结果](evidence/2026-11-15/registered-cache-retention-paired/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-paired/verification.zip)保存隔离编译、逐帧计时、内存时间序列及设备复原记录。
+
+## 标准构建复测
+
+五类负载各执行三轮。十五轮的工作集增长均符合门槛，最大值为 0.422%。十三轮通过全部预算。编辑器第一、第二轮 CPU P95 分别为 11.53 和 10.33 毫秒，超过 10 毫秒门槛。第三轮 CPU P95 为 5.23 毫秒。
+
+[标准构建结果](evidence/2026-11-15/registered-cache-retention-formal-first/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-formal-first/verification.zip)保存所有轮次及两次 CPU 超限。
+
+## 十五轮正式验收
+
+正式复测在启动前连续观察系统 CPU 六十秒，其间的采样忙碌率为 2.26% 至 3.78%。五种负载各通过三轮，十五轮均预热 300 帧并统计 1,800 帧。工作集最大增长为 0.448%，GPU 帧 P95 最大为 7.07 毫秒，播放器 CPU P95 最大为 4.84 毫秒，编辑器 CPU P95 最大为 6.59 毫秒。全部轮次保留已验证的应用管线缓存，退出时核验系统平衡电源计划及自动风扇档位。
+
+[正式结果](evidence/2026-11-15/registered-cache-retention-formal-settled/results.json)和[验证归档](evidence/2026-11-15/registered-cache-retention-formal-settled/verification.zip)保存十五轮的来源摘要、逐帧计时、工作集序列和设备状态。
+
+[三条冻结画面路径](frozen-public-visual.md#管线缓存保留的标准构建复验)记录标准 Release 和 Debug 的 42 张零差异捕获。
+
+[标准发布包复验](registered-gpu-infrastructure.md#管线缓存保留的发布包复验)记录同一 Release 播放器的五项注册结果。
+
+[标准构建 CPU 回归](current-registered-cpu.md#管线缓存保留构建)记录 Release 和 Debug 各 333 项通过。
+
+[构建输入复核](current-registered-gpu-recoveries.md#构建输入复核与复测)记录共享工作区输入恢复和九项 GPU 注册结果。

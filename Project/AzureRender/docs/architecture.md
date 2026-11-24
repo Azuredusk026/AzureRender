@@ -4,6 +4,8 @@ AzureRender 把 Vulkan 宿主和场景算法分开。宿主管理设备、Swapch
 
 当前的 `ISceneRenderer` 只把场景写入 HDR Scene Color、Depth 和 Normal。Character、Blackhole 和 Sample Renderer 因此可以共用一个应用。主帧循环不需要为每个场景增加特殊分支。
 
+模块库、项目配置与独立 Player 的依赖和生命周期见 [引擎基础](runtime/engine-foundation.md)。
+
 ## 设计目标
 
 架构由四个约束驱动：
@@ -13,7 +15,43 @@ AzureRender 把 Vulkan 宿主和场景算法分开。宿主管理设备、Swapch
 3. **可验证**：CLI、Schema、生命周期、资源定位和 GPU 输出都有自动化或实机门禁。
 4. **可发布**：开发树和安装树使用同一资源定位逻辑，EXE 不依赖源码绝对路径。
 
-项目不是通用商业引擎，也没有承诺动态 DLL 插件 ABI。当前 SDK 是稳定版本号约束下的进程内 C++ 接口。
+引擎面向小型项目提供公共运行与制作契约。
+当前 SDK 使用版本约束下的进程内 C++ 接口。
+动态插件 ABI 按专项设计与兼容证据准入。
+
+## 可选模型与领域制作
+
+AzureAI 拥有异步进程和版本化请求协议。
+Python 工具管理供应方、配置、凭据与会话。
+领域模块声明模式、快照、校验器和修改范围。
+编辑器通过生产操作应用已审阅候选。
+
+```mermaid
+flowchart LR
+    Tool[模型服务与工具配置] --> Client[AzureAI 有界传输]
+    Client --> Domain[领域提案与校验]
+    Version[文档版本与受控快照] --> Domain
+    Domain --> Preview[候选差异与诊断]
+    Preview --> Edit[生产编辑或生成服务]
+    Edit --> Content[项目文档与来源清单]
+```
+
+通用传输消费请求与响应，领域拥有内容语义。
+场景装配通过批量事务形成一次撤销。
+资产参数通过注册生成器保存文本与来源。
+契约与预算见[内容提案](runtime/content-proposals.md)。
+
+## 资源档位与可见性
+
+Render Core 根据实际功能和容量选择资源访问。
+索引表维护表身份、世代与在途资源引用。
+普通与表面输出变体共享同一个视锥算法。
+渲染图声明主绘制对间接输出的消费。
+
+可见性查询使用独立的不可变帧映射。
+调用方声明场景、相机与帧身份。
+CPU 筛选、阴影集合与透明顺序各有归属。
+范围见[资源访问与可见性](runtime/resource-visibility.md)。
 
 ## 给 C++ 开发者的 Vulkan 入门
 
@@ -216,7 +254,7 @@ Debug 构建会开启 `VK_LAYER_KHRONOS_validation`。它能发现许多生命�
 | `tests` | 不依赖可见窗口的契约与逻辑测试 |
 | `tools` | 配置、资产处理、视觉 QA、安装验证和发布门禁 |
 
-`AzureRenderApp` 直接拥有许多 Vulkan Handle，所以实现被拆到多个 `.cpp` 文件中。资源、Pipeline、Descriptor、帧循环、Capture 和辅助代码各有一个文件。这些文件仍然实现同一个应用对象，没有改变资源所有权。
+`AzureRenderApp` 持有 GPU 宿主资源。资源、Pipeline、Descriptor、帧循环、Capture 和辅助代码分别实现同一应用对象的职责。源码以编辑与运行时变体编译到 AzureRenderHost 和 AzurePlayerHost，公共渲染库由两个宿主共享。
 
 ## 启动过程
 
@@ -286,7 +324,7 @@ Renderer 不自行持有 Swapchain，也不能缓存跨重建失效的 `sceneFra
 | HDR Scene Color | 场景线性高动态范围颜色 |
 | Depth | 深度测试、内部轮廓和诊断 |
 | Normal | 屏幕空间法线边缘与诊断 |
-| 2048 Shadow Map | Character 实时阴影及 Shadow Map 诊断 |
+| 4096×4096 阴影图集 | 四级联实时阴影与阴影图诊断。每级联为 2048×2048。 |
 | Swapchain Color | Tone Mapping 后的最终显示和 Present |
 
 `SceneRendererCapabilities` 决定场景 Render Pass 需要哪些 Attachment。Character 需要 Depth 和 Normal。纯全屏 Renderer 可以少声明一些几何缓冲。
@@ -342,7 +380,7 @@ CPU bytes
 
 Uniform、Joint Matrix 和透明排序 Index 每帧都会更新。项目按 `maxFramesInFlight` 为它们分配空间，并保持内存映射。
 
-创建 Image 时要指定 Format、Usage、Aspect、Mip 和 Layout。Sampler 单独描述过滤与寻址规则。`rhi::GpuAllocator` 通过 VMA 处理 Buffer/Image 的内存需求、分配、绑定和释放；上传流程由项目的 RHI 与宿主负责。
+创建 Image 时要指定 Format、Usage、Aspect、Mip 和 Layout。Sampler 单独描述过滤与寻址规则。`rhi::GpuAllocator` 通过 VMA 处理 Buffer/Image 的内存需求、分配、绑定和释放。上传流程由项目的 RHI 与宿主负责。
 
 ## 帧同步与 Command Buffer
 
@@ -454,9 +492,10 @@ flowchart TB
 
 | 契约 | 当前版本 |
 | --- | ---: |
-| `ISceneRenderer` API | 1 |
-| `RenderSettings` | 7 |
-| `.azscene` | 2 |
+| `ISceneRenderer` API | 5 |
+| `azure.camera` / `CameraViewDescriptor` | 2 |
+| `RenderSettings` | 19 |
+| `.azscene` | 3 |
 | glTF Material Profile | 1 |
 | Face SDF Profile | 1 |
 | Showcase Look Catalog | 1 |
@@ -477,13 +516,61 @@ flowchart TB
 ## 已知架构边界
 
 - 进程内 Renderer Registry 已稳定，动态二进制插件尚未建立 ABI、版本协商和卸载隔离。
-- Vulkan 内存由项目直接分配，尚无通用子分配器、预算追踪和碎片治理。
-- 公共环境光是实用型直接采样，不是完整预过滤 IBL 烘焙系统。
+- GPU 显存由 VMA 分配器管理。预算追踪与碎片分析按实测需求扩展。
+- 公共环境光包含 GPU 预过滤 IBL，环境资源格式与降级规则见 [环境资源](runtime/environment-assets.md)。
 - 编辑器热重载会在安全边界等待 GPU idle，正确但不适合高频自动监听。
 - Scene Renderer 能力目前主要描述 Depth/Normal，未来更复杂 Render Graph 需要更细的资源声明。
 - RenderDoc GPU Marker/Object Name 尚应进一步系统化，外部帧分析的可读性仍有提升空间。
 
 这些边界是后续演进方向，不影响当前 Character、Blackhole、Capture 和发布树的既有契约。
+
+## 编辑操作与候选文档
+
+编辑会话持有文档与统一操作服务。
+各前端通过注册描述调用领域处理器。
+候选文档在结构、类型与引用校验后提交。
+版本与历史规则见[编辑操作参考](runtime/edit-operations.md)。
+
+## 脚本服务与语言模块
+
+运行时核心声明 `IScriptRuntime` 与后端注册表。
+公共绑定宿主校验类型、权限与对象世代。
+Lua 和可选托管模块提供语言适配与生命周期。
+Player 和编辑预览消费项目装配入口。
+
+绑定生成、ABI 与部署见[脚本服务](runtime/script-services.md)。
+
+## 程序化内容模块
+
+
+`AzureProcedural` 提供参数化几何与刚体文本契约。
+编辑宿主注入受控编译服务并注册生成器。
+几何库依赖由生成模块的实现持有。
+Player 通过标准资产与动画图运行生成内容。
+
+来源、预算与失败恢复见[程序化内容契约](runtime/procedural-content.md)。
+
+## 路径追踪与项目内容
+
+`render/pathtracing` 构建世界空间几何、材质和采样分布。
+快照携带顶点法线、切线、纹理和物理透射参数。
+镜像实例保持三角形绕序与切线手性一致。
+CPU 描述与着色器缓冲遵循固定字段布局。
+
+`scenes/pathtracing` 持有 GPU 管线、缓冲和累积图像。
+宿主提供设备、命令记录、屏障及帧生命周期。
+公共 BSDF 负责材质求值、采样和概率密度。
+灯光模块组合点光源、发光面和环境采样。
+
+原始采样缓冲属于积分器。
+预览滤波使用独立的法线、深度和局部亮度信息。
+场景变更由现有设置服务触发历史重置。
+面板与自动工具共用编辑操作和项目保存服务。
+
+公开素材、相机和布光属于独立演示工程。
+来源清单记录原始校验值、许可和素材处理参数。
+发布服务复制工程挂载资源与所需运行依赖。
+使用及边界见[公开光追演示](tutorials/public-pathtracing-demos.md)。
 
 ## R1 同步与窗口生命周期
 

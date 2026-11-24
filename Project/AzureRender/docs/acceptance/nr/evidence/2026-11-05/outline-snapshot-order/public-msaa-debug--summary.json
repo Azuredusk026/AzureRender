@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "qualityMode": "multisample",
+  "playerSha256": "109b4b26abebf44d4f3c4335798f0f18fd0082d027bf5d59b0a84d4ef24d3d5a",
+  "captures": [
+    {
+      "name": "depth-only",
+      "outlinePixels": 0,
+      "playerSha256": "109b4b26abebf44d4f3c4335798f0f18fd0082d027bf5d59b0a84d4ef24d3d5a",
+      "imageSha256": "3389545ddb7f03a4747c4029d0c3c8e64e12f7a5e871e727c3aeedea6dc032db",
+      "validationEnabled": true,
+      "antiAliasing": 4,
+      "rasterizationSamples": 4,
+      "outlineBytes": 144,
+      "size": 256,
+      "distance": 5,
+      "maximumHorizontalBoundaryErrorPixels": null
+    },
+    {
+      "name": "masked-clear",
+      "outlinePixels": 0,
+      "playerSha256": "109b4b26abebf44d4f3c4335798f0f18fd0082d027bf5d59b0a84d4ef24d3d5a",
+      "imageSha256": "ec7c9b13b56a0cbd1a8e1194c5ce7221d300909ce5524ac12bd3d59b5d3cf79c",
+      "validationEnabled": true,
+      "antiAliasing": 4,
+      "rasterizationSamples": 4,
+      "outlineBytes": 144,
+      "size": 256,
+      "distance": 5,
+      "maximumHorizontalBoundaryErrorPixels": null
+    }
+  ],
+  "scope": "Public color, coverage and lifecycle controls; raw depth and native rim are separate acceptance evidence.",
+  "minimumMultisample": []
+}

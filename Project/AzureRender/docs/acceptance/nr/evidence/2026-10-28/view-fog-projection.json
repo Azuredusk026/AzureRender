@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR3-F1C",
+  "status": "view_mapping_and_native_gpu_sampling_passed_scene_pending",
+  "baseCommit": "b81b7de",
+  "run": "build/runs/20261028-073457-view-fog-projection-contract-0a6cea",
+  "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject",
+  "changedSource": [
+    "CMakeLists.txt",
+    "src/render/FogViewProjection.hpp",
+    "src/render/FogViewProjection.cpp",
+    "shaders/fog_view_projection.glsl",
+    "tests/FogViewProjectionTests.cpp",
+    "tests/support/FogViewProjectionFixture.hpp",
+    "tests/FogVolumeGpuTests.cpp",
+    "tests/shaders/fog_volume_test.comp"
+  ],
+  "source": {
+    "CMakeLists.txt": "c4151c57f055ce931c04b72d5444a97acd0c2e8380fe98e4cfa6f3414ec414f7",
+    "src/render/FogViewProjection.hpp": "bfc96373e75efacd9e94f41509d64d5d059393aa92f9b9242b1ce9ed19f34cf5",
+    "src/render/FogViewProjection.cpp": "bc17dc9cad54de08d49b11a0d001ac4ea752217a7e86c52e39afcc530726d398",
+    "shaders/fog_view_projection.glsl": "1e6b17dece86f57565fce31cfe6dc9b31d8d6d4f2d891667d6e30ea239254fef",
+    "tests/FogViewProjectionTests.cpp": "615e19e28b01561bc9771565de7bdcd2f833259f2f4b632692a949f9d4b3fa72",
+    "tests/support/FogViewProjectionFixture.hpp": "ee98732c197fcf9d51e6ccee05a5fecdfc18e9aac2c2b4ece452b173761a0049",
+    "tests/FogVolumeGpuTests.cpp": "c6aaa16fee5024031322cb0ad55988d85ebc9485ac1f3c9ae465dca7691904ce",
+    "tests/shaders/fog_volume_test.comp": "2cb42f113ca6a68384e3ec2578181732a7a8dec46efc6bf72a7d748797581fdd",
+    "src/render/FogVolumeGpu.hpp": "d090c9e61e47f43679c1e4dba491729a18625cd2fabfafbb7bb0a72d9dd77ae0",
+    "src/render/FogVolumeData.hpp": "cd8ed5b75e72c343ce651ff0e0c4d0830fdfc0ec87fe24af808f4e7b5231ba63",
+    "src/render/FogVolumeData.cpp": "5cd7de9a712dab43024ed67437c2ff6e972acc58e1f649cb5be281fa7cf9ede5",
+    "src/render/FogTransport.hpp": "737f82b1a6cfeb4cf3188ecd0198a6ca092630d18b98c5a7b945566791aea7af",
+    "src/render/FogTransport.cpp": "9e7fd3eab4fc6e86e49439cea375ff2f042699036dd8efce195c5d88ab63199e",
+    "shaders/fog_transport.glsl": "ba9c7267a55b9d687573e313d277686d3795ed93cd917bee4447703db748f97f",
+    "tests/support/VulkanComputeFixture.hpp": "eb73bcb798e7f42052f83e20673ef9e55a2797452d430f2c602fa9f17a57a733"
+  },
+  "binaries": {
+    "debug-AzureFogViewProjectionTests": "2cfdfed79c773d1421fcacb6c80357fce54d056ba288e021bc3b6430272f28b4",
+    "debug-AzureFogVolumeGpuTests": "ea45dd1f9760f5d7cb42360bc39a2e47748309416f7cdeca073bef2a8142b721",
+    "release-AzureFogViewProjectionTests": "c7bf26b164324d2c729e30df5006e370db264d4eab956fd14904631462aa125a",
+    "release-AzureFogVolumeGpuTests": "105ffe2f9baacc20bef858ee9db62c7a12c7ac63e34eda4a609c2deb95346c9b"
+  },
+  "shaderModules": {
+    "debug": "dfc7968ff6038ebd7287e34af8315c1b1e6c6f12435e4393555a40bae19641d1",
+    "release": "dfc7968ff6038ebd7287e34af8315c1b1e6c6f12435e4393555a40bae19641d1"
+  },
+  "artifacts": [
+    {
+      "path": "capture_projection_oracle.py",
+      "sha256": "9163d07c87055a5ccc93ff418f7e2ca20377d35531111665fb4224bc8be93a14"
+    },
+    {
+      "path": "debug-build.log",
+      "sha256": "f99a61a0854d6256ae892246012b85f7a06b14578eccc55a19b85c93719129ef"
+    },
+    {
+      "path": "debug-final-build.log",
+      "sha256": "ad7faa1f8150857d922a74c98f4f49818074bc9297957ab7af7edfcb3a14e007"
+    },
+    {
+      "path": "debug-final-tests.log",
+      "sha256": "ddc1686959cb9b61191796bfffb5adce21a09389e95c20ddb3f6c74503c4f8e0"
+    },
+    {
+      "path": "debug-native-cpu.log",
+      "sha256": "082b539eab0dce92ce1c2918768d1e8639d1576a6d3ef0f7418c90a56e45c9ee"
+    },
+    {
+      "path": "debug-native-projection-gpu.log",
+      "sha256": "7efc83552bf3e13596f05255b96fb0062f099c062ac8090b45836cd1729d1542"
+    },
+    {
+      "path": "debug-native-projection.log",
+      "sha256": "082b539eab0dce92ce1c2918768d1e8639d1576a6d3ef0f7418c90a56e45c9ee"
+    },
+    {
+      "path": "debug-native-raw-gpu.log",
+      "sha256": "d37df11f83139d055cc534ae3b8c620eb854eaa294a9e9409de4dfacf4188c01"
+    },
+    {
+      "path": "debug-tests.log",
+      "sha256": "7b009c8c544ce0c2733232f1efa14440144622f486db0eb9b77d97d9d92fb728"
+    },
+    {
+      "path": "gpu-red-build.log",
+      "sha256": "3e4a0798b8529db1c5defe10f57151b141335fb47ccb62bdbf27dc12a3302ee7"
+    },
+    {
+      "path": "gpu-red.log",
+      "sha256": "7021d2d0e4eb7261be8a9b2b25168948c9d45513b599fe73b542cdc30c8beddf"
+    },
+    {
+      "path": "native-projection-oracle.json",
+      "sha256": "7212fe04f7ee589afcccd1f7f4b4a945efa74c949da200f650013bb15a7ee514"
+    },
+    {
+      "path": "native-projection-oracle.txt",
+      "sha256": "7aa5cff847067676fe56edaaa56e08419ebc8b19b29253d4c665c9d7fe79307d"
+    },
+    {
+      "path": "plan.md",
+      "sha256": "a2e1dbd547b777c872b75dfb9d4e50321798dd0c5e30cb17bd212b056a2eab21"
+    },
+    {
+      "path": "red-build.log",
+      "sha256": "b436d60ba4aab512090fbc65616c5ce57548e0cc4ff8af5b61bc60090cafe247"
+    },
+    {
+      "path": "red.log",
+      "sha256": "65b2323e540f0f6666ae9ef4c99ad63fce1b2ff73251c1842ec3f7606d229276"
+    },
+    {
+      "path": "release-final-build.log",
+      "sha256": "23b48f71232f8c0f4dfe9f34a71a79d4eda591f51ef911e835afeb02c073589a"
+    },
+    {
+      "path": "release-final-tests.log",
+      "sha256": "3093cd636b200feb954b8db270e5e0394380b3498020db78f0591041b02d0f54"
+    },
+    {
+      "path": "release-native-cpu.log",
+      "sha256": "082b539eab0dce92ce1c2918768d1e8639d1576a6d3ef0f7418c90a56e45c9ee"
+    },
+    {
+      "path": "release-native-projection-gpu.log",
+      "sha256": "7efc83552bf3e13596f05255b96fb0062f099c062ac8090b45836cd1729d1542"
+    },
+    {
+      "path": "release-native-raw-gpu.log",
+      "sha256": "d37df11f83139d055cc534ae3b8c620eb854eaa294a9e9409de4dfacf4188c01"
+    }
+  ],
+  "tests": {
+    "checksPerConfiguration": 5,
+    "projectionGpuSamplesPerConfiguration": 12,
+    "nativeCoordinateSamples": 3,
+    "nativeSampleMaximumLinearError": 0,
+    "coordinateBudget": 2e-06,
+    "fixtureBudget": 1e-05,
+    "nativeBudget": 0.0001,
+    "liveBuffers": 0,
+    "liveImages": 0
+  },
+  "projection": {
+    "layoutVersion": 1,
+    "bytes": 48,
+    "profile": {
+      "extent": [
+        2560,
+        1440
+      ],
+      "pixelOrigin": "lower-left",
+      "framePhase": 6,
+      "pixelCenterOffset": 0,
+      "jitterRadius": 1.5,
+      "depthEncoding": [
+        0.2557745575904846,
+        0.9501239657402039,
+        0.25
+      ],
+      "minimumViewDepth": 0.0,
+      "nearFadeWidth": 1e-06
+    }
+  },
+  "baseline": {
+    "evidence": "docs/acceptance/nr/evidence/2026-10-28/fog-volume-gpu.json",
+    "sha256": "b76cf7618fde450f1c3c6e658d8183133652797085f7f21d781c5ec57f86fa21"
+  },
+  "limitations": [
+    "Scene resource configuration, source-view validity and actual surface integration remain open.",
+    "Full NR0 through NR12 image and performance gates remain active."
+  ]
+}

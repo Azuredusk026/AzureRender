@@ -1,0 +1,20 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 5: AzureRender.RenderView
+1/4 Test #5: AzureRender.RenderView ...........   Passed    0.04 sec
+    Start 6: AzureEditor.Thumbnail
+2/4 Test #6: AzureEditor.Thumbnail ............   Passed    0.06 sec
+    Start 7: AzureRender.HotReload
+3/4 Test #7: AzureRender.HotReload ............   Passed    0.69 sec
+    Start 8: AzurePlatform.ProcessRunner
+4/4 Test #8: AzurePlatform.ProcessRunner ......***Failed    0.07 sec
+Arguments retain quotes, Unicode and shell metacharacters
+
+
+75% tests passed, 1 tests failed out of 4
+
+Total Test time (real) =   0.88 sec
+
+The following tests FAILED:
+	  8 - AzurePlatform.ProcessRunner (Failed)
+Errors while running CTest

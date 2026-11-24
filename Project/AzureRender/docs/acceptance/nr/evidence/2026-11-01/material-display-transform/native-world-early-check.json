@@ -1,0 +1,22 @@
+[
+  {
+    "region": "hair-crown",
+    "medianLuminanceRelativeError": 0.0
+  },
+  {
+    "region": "hair-fringe",
+    "medianLuminanceRelativeError": 0.00044616577081012525
+  },
+  {
+    "region": "face-cheek",
+    "medianLuminanceRelativeError": 0.0
+  },
+  {
+    "region": "face-chin",
+    "medianLuminanceRelativeError": 0.0
+  },
+  {
+    "region": "eye-left",
+    "medianLuminanceRelativeError": 0.01735456498490053
+  }
+]

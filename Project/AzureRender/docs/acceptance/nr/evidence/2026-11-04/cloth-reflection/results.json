@@ -1,0 +1,497 @@
+{
+  "scope": "固定姿态。衣料像素沿用原生绘制归属及六像素腐蚀遮罩，皮肤及脸部使用各自的原生可见区域。",
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "nativeDraws": [
+    {
+      "event": 889,
+      "qualifiedPixels": 45988,
+      "ssim": 0.958362261246444,
+      "nativeMedianLuminance": 0.02662850351388315,
+      "currentMedianLuminance": 0.02572652922674392,
+      "medianLuminanceRelativeError": 0.03387251133616922,
+      "p95ByteError": 11.0,
+      "maximumByteError": 111,
+      "worstPixel": [
+        1422,
+        390
+      ],
+      "passed": true
+    },
+    {
+      "event": 910,
+      "qualifiedPixels": 17990,
+      "ssim": 0.9969378198355652,
+      "nativeMedianLuminance": 0.014355474145918727,
+      "currentMedianLuminance": 0.014187992342722621,
+      "medianLuminanceRelativeError": 0.011666755238712955,
+      "p95ByteError": 1.0,
+      "maximumByteError": 41,
+      "worstPixel": [
+        1557,
+        1130
+      ],
+      "passed": true
+    },
+    {
+      "event": 928,
+      "qualifiedPixels": 118661,
+      "ssim": 0.9631507974486359,
+      "nativeMedianLuminance": 0.022130240144565362,
+      "currentMedianLuminance": 0.021990602175170466,
+      "medianLuminanceRelativeError": 0.0063098262143887005,
+      "p95ByteError": 12.0,
+      "maximumByteError": 127,
+      "worstPixel": [
+        1069,
+        703
+      ],
+      "passed": true
+    }
+  ],
+  "skinAndFace": {
+    "skin": {
+      "pixels": 28966,
+      "ssim": 0.9883011336151029,
+      "medianLuminanceRelativeError": 0.002132151353702811,
+      "medianRgbError": 1.0,
+      "maxRgbError": 44
+    },
+    "face": {
+      "pixels": 1176,
+      "ssim": 0.9948966785519591,
+      "medianLuminanceRelativeError": 0.019484224638619554,
+      "medianRgbError": 2.0,
+      "maxRgbError": 46
+    }
+  },
+  "cubeSha256": "2662bc3f35c5435ce3e62474eb3b1bdceb894434bc433d3034919c69b309acbd",
+  "rawCubeResource": "ResourceId::11467",
+  "atlas": {
+    "old": "0d9f9c9550fc9b7b33940a3ef51ed2f8745caea257d8460747433e28c2232e7c",
+    "new": "be02661d0e6030f7c572a78805e096c27342bc12bb00aaeda26c92582ff1e0c7",
+    "retained": [
+      {
+        "mip": 0,
+        "originalLayers": 32,
+        "bytes": 42467328,
+        "sha256": "d274e3a6f48f4abb87c56018c855911ec029ed0dbc42c101c24082aa6a981632"
+      },
+      {
+        "mip": 1,
+        "originalLayers": 32,
+        "bytes": 10616832,
+        "sha256": "8f5b36708015ae853ad46eee1b605704480479797f5ac9997ce7ff898861e4bb"
+      },
+      {
+        "mip": 2,
+        "originalLayers": 32,
+        "bytes": 2654208,
+        "sha256": "e58ee4da244ade4ccbaeea0ced020692f840ce331819d05b413d530e3e35f30e"
+      },
+      {
+        "mip": 3,
+        "originalLayers": 32,
+        "bytes": 663552,
+        "sha256": "2efa423f7089dc6b6c14d30f4020bfbd2e429934aa0fedd503a3e2c6095023da"
+      },
+      {
+        "mip": 4,
+        "originalLayers": 32,
+        "bytes": 165888,
+        "sha256": "3fba74c8f40690ebe2e64e1ceb04665e1c716f1e63931c5d731f6eb78ec80510"
+      },
+      {
+        "mip": 5,
+        "originalLayers": 32,
+        "bytes": 41472,
+        "sha256": "01e7aee1d07fb87b7db42f14eed851d904c662fc50d1baf4cdc0a1fc3508c210"
+      },
+      {
+        "mip": 6,
+        "originalLayers": 32,
+        "bytes": 10368,
+        "sha256": "3b8b40b17f089bb594741d74ef45006e9f7bdbf1e4c59306cbaceeb5a29285c3"
+      },
+      {
+        "mip": 7,
+        "originalLayers": 32,
+        "bytes": 2048,
+        "sha256": "e5a00aa9991ac8a5ee3109844d84a55583bd20572ad3ffcd42792f3c36b183ad"
+      },
+      {
+        "mip": 8,
+        "originalLayers": 32,
+        "bytes": 512,
+        "sha256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+      },
+      {
+        "mip": 9,
+        "originalLayers": 32,
+        "bytes": 128,
+        "sha256": "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca"
+      }
+    ]
+  },
+  "joint": {
+    "status": "passed",
+    "frames": 192,
+    "animationNodeSamples": 2112,
+    "animationNodes": 11,
+    "reopen": {
+      "frame_000000.png": "d9483f46c901caea29723096334bd8c723f3a221dd1fd0fd10ccf219537ec823",
+      "frame_000001.png": "a73f65a388e7119bc01ec436c3fe17eed36c642d077c4665f3e6492469e271f5",
+      "frame_000002.png": "bdcf8971b435aebf4118946d86daa2706f095347edfe68b45595d3c2721ada1b",
+      "frame_000003.png": "beddd2bc4c74076b5ec1dae337e1289ea4048997eef9d6b764920d3324e84564"
+    },
+    "changes": [
+      {
+        "frame": 0,
+        "pixels": 66847,
+        "bounds": [
+          1261,
+          613,
+          2142,
+          1439
+        ]
+      },
+      {
+        "frame": 64,
+        "pixels": 67449,
+        "bounds": [
+          1278,
+          614,
+          2138,
+          1439
+        ]
+      },
+      {
+        "frame": 128,
+        "pixels": 67226,
+        "bounds": [
+          1255,
+          613,
+          2144,
+          1439
+        ]
+      },
+      {
+        "frame": 191,
+        "pixels": 67253,
+        "bounds": [
+          1264,
+          614,
+          2140,
+          1439
+        ]
+      }
+    ],
+    "playerSha256": "8a3054abc2ef7092c0ebeb391c2b20d4aa9cf4fd1948069ea47f38dfa7b71dd1",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-cloth-field-joint\\joint-materials.azureproject"
+  },
+  "roomFrameZero": {
+    "total": 66847,
+    "bounds": [
+      1261,
+      613,
+      2142,
+      1439
+    ],
+    "regions": {
+      "ceiling": {
+        "box": [
+          0,
+          0,
+          2560,
+          210
+        ],
+        "changed": 0,
+        "max": 0,
+        "mean": 0.0
+      },
+      "leftDoor": {
+        "box": [
+          70,
+          300,
+          720,
+          690
+        ],
+        "changed": 0,
+        "max": 0,
+        "mean": 0.0
+      },
+      "rightWall": {
+        "box": [
+          1920,
+          390,
+          2480,
+          620
+        ],
+        "changed": 0,
+        "max": 0,
+        "mean": 0.0
+      },
+      "centerFloor": {
+        "box": [
+          1010,
+          990,
+          1550,
+          1170
+        ],
+        "changed": 8789,
+        "max": 80,
+        "mean": 0.12470164609053498
+      },
+      "cyanRing": {
+        "box": [
+          1040,
+          1060,
+          1270,
+          1180
+        ],
+        "changed": 0,
+        "max": 0,
+        "mean": 0.0
+      },
+      "leftFloor": {
+        "box": [
+          60,
+          950,
+          545,
+          1090
+        ],
+        "changed": 0,
+        "max": 0,
+        "mean": 0.0
+      }
+    }
+  },
+  "video": {
+    "status": "encoded-and-header-verified",
+    "capture": "cloth-field-joint-motion",
+    "frames": 192,
+    "fps": 24,
+    "durationSeconds": 8,
+    "width": 2560,
+    "height": 1440,
+    "sha256": "693c0557b27425e7dc5083fedb9d464b9d0683b54a6c40bfcbe54c31c9d2b0f4",
+    "bytes": 5207161,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-framerate",
+      "24",
+      "-start_number",
+      "0",
+      "-i",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\cloth-field-joint-motion\\frames\\frame_%06d.png",
+      "-frames:v",
+      "192",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "fast",
+      "-crf",
+      "18",
+      "-profile:v",
+      "high",
+      "-pix_fmt",
+      "yuv420p",
+      "-color_primaries",
+      "bt709",
+      "-color_trc",
+      "bt709",
+      "-colorspace",
+      "bt709",
+      "-movflags",
+      "+faststart",
+      "-an",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\media\\joint-cloth-field.mp4"
+    ],
+    "ffmpegVersion": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers"
+  },
+  "releaseField": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "playerSha256": "605af4ff129b6829b7e39916de3fa8fc2d7926eccbf26d1d8eb0e2c790952bdd",
+    "budget": 0.004,
+    "captures": [
+      {
+        "name": "material-layer",
+        "indexed": true,
+        "expectedLinearRgb": [
+          0.25,
+          0.5,
+          0.125
+        ],
+        "validationErrors": 0,
+        "resourcesReleased": true,
+        "maximumDecodedCenterLinearError": 0.002886458032568706,
+        "maximumQuantizationIntervalLinearError": 0.0,
+        "maximumOutputByteDelta": 0
+      },
+      {
+        "name": "material-layer",
+        "indexed": false,
+        "expectedLinearRgb": [
+          0.25,
+          0.5,
+          0.125
+        ],
+        "validationErrors": 0,
+        "resourcesReleased": true,
+        "maximumDecodedCenterLinearError": 0.002886458032568706,
+        "maximumQuantizationIntervalLinearError": 0.0,
+        "maximumOutputByteDelta": 0
+      }
+    ]
+  },
+  "fixedFrameSha256": "c13f06c6d8fd11879a62a5b3ea75e8c7ef258528b5ad04716fdc3021f7e8a791",
+  "hiddenCharacter": {
+    "frames": [
+      "019e2f21f8dd83f7971c556aec0de58621429b9fec971887be7c96ed121dd5e0",
+      "019e2f21f8dd83f7971c556aec0de58621429b9fec971887be7c96ed121dd5e0"
+    ],
+    "changedPixels": 0,
+    "maxDelta": 0
+  },
+  "finalPlayerReopen": {
+    "status": "passed",
+    "player": "605af4ff129b6829b7e39916de3fa8fc2d7926eccbf26d1d8eb0e2c790952bdd",
+    "frames": {
+      "frame_000000.png": "d9483f46c901caea29723096334bd8c723f3a221dd1fd0fd10ccf219537ec823",
+      "frame_000001.png": "a73f65a388e7119bc01ec436c3fe17eed36c642d077c4665f3e6492469e271f5",
+      "frame_000002.png": "bdcf8971b435aebf4118946d86daa2706f095347edfe68b45595d3c2721ada1b",
+      "frame_000003.png": "beddd2bc4c74076b5ec1dae337e1289ea4048997eef9d6b764920d3324e84564"
+    }
+  },
+  "materialUnit": "AzureMaterialDocumentTests",
+  "staticBuilds": {
+    "release": "c13f06c6d8fd11879a62a5b3ea75e8c7ef258528b5ad04716fdc3021f7e8a791",
+    "debug": "c13f06c6d8fd11879a62a5b3ea75e8c7ef258528b5ad04716fdc3021f7e8a791"
+  },
+  "probeRegression": {
+    "release": {
+      "ctestSha256": "da10f23b9197efc83b5c5bcb6d29155bf01c9afd34d3682ab59263e46096ff63",
+      "materialField": {
+        "schemaVersion": 1,
+        "status": "passed",
+        "playerSha256": "81db1677343c408958a5cc6bd01186fec707192635487e18ef475a2caf19bc0e",
+        "budget": 0.004,
+        "captures": [
+          {
+            "name": "material-layer",
+            "indexed": true,
+            "expectedLinearRgb": [
+              0.25,
+              0.5,
+              0.125
+            ],
+            "validationErrors": 0,
+            "resourcesReleased": true,
+            "maximumDecodedCenterLinearError": 0.002886458032568706,
+            "maximumQuantizationIntervalLinearError": 0.0,
+            "maximumOutputByteDelta": 0
+          },
+          {
+            "name": "material-layer",
+            "indexed": false,
+            "expectedLinearRgb": [
+              0.25,
+              0.5,
+              0.125
+            ],
+            "validationErrors": 0,
+            "resourcesReleased": true,
+            "maximumDecodedCenterLinearError": 0.002886458032568706,
+            "maximumQuantizationIntervalLinearError": 0.0,
+            "maximumOutputByteDelta": 0
+          }
+        ]
+      }
+    },
+    "debug": {
+      "ctestSha256": "e5f8a301d458feda4518ae76f0957ac5109d02de74092c3f60b48f8e3746bbd5",
+      "materialField": {
+        "schemaVersion": 1,
+        "status": "passed",
+        "playerSha256": "1c5ab4c9d92feb34f9d9f053b79e1f025b2b2afb2cc8f5b5c29b622b08d62bbb",
+        "budget": 0.004,
+        "captures": [
+          {
+            "name": "material-layer",
+            "indexed": true,
+            "expectedLinearRgb": [
+              0.25,
+              0.5,
+              0.125
+            ],
+            "validationErrors": 0,
+            "resourcesReleased": true,
+            "maximumDecodedCenterLinearError": 0.002886458032568706,
+            "maximumQuantizationIntervalLinearError": 0.0,
+            "maximumOutputByteDelta": 0
+          },
+          {
+            "name": "material-layer",
+            "indexed": false,
+            "expectedLinearRgb": [
+              0.25,
+              0.5,
+              0.125
+            ],
+            "validationErrors": 0,
+            "resourcesReleased": true,
+            "maximumDecodedCenterLinearError": 0.002886458032568706,
+            "maximumQuantizationIntervalLinearError": 0.0,
+            "maximumOutputByteDelta": 0
+          }
+        ]
+      }
+    }
+  },
+  "playableRoute": {
+    "status": "passed",
+    "frames": 540,
+    "actions": 13,
+    "walkSpeed": 1.1999988555908203,
+    "sprintSpeed": 3.000011444091797,
+    "walkClip": 7,
+    "sprintClip": 8,
+    "focusReleased": true,
+    "revisionTransitions": [
+      [
+        451,
+        2,
+        3
+      ]
+    ],
+    "finalIdleGrounded": true,
+    "obstructedFrames": 136,
+    "cameraDistanceRange": [
+      1.0000006646093962,
+      1.0000006646093962
+    ],
+    "cameraRelativeForwardCosine": 0.9999999998540834,
+    "rawLensForwardCosine": -0.3872228649121946,
+    "cameraYawDegrees": -67.5,
+    "cameraSensitivitySource": "src/ecs/GameComponents.hpp: default .15 degrees per input unit",
+    "minimumCharacterHeight": 1.0317745208740234,
+    "scope": "Production fixed-step input, actual displacement, animation samples, focus, camera collision and script restart. Planter traversal is not a wall-blocking or native-collision-equivalence result."
+  },
+  "environmentSpecularRegression": {
+    "release": {
+      "tests": 3,
+      "passed": true,
+      "log": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\cloth-model-split-tests-release.log",
+      "sha256": "19a223902232a0da67adc4e7513308e17c160fb0c3927ac5d683ead2c765452b"
+    },
+    "debug": {
+      "tests": 3,
+      "passed": true,
+      "log": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\cloth-model-split-tests-debug.log",
+      "sha256": "b8450b4005b8e862c0ab47fb4dfa2f3b7ffa5e38aa5e405125a2df9c0707724c"
+    }
+  }
+}

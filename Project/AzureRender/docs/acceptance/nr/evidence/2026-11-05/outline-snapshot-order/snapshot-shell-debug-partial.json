@@ -1,0 +1,18 @@
+{
+  "status": "timeout-900-seconds",
+  "frames": [
+    {
+      "frame": "frame_000000.png",
+      "identical": true
+    },
+    {
+      "frame": "frame_000001.png",
+      "identical": true
+    },
+    {
+      "frame": "frame_000002.png",
+      "identical": true
+    }
+  ],
+  "unloadVerified": false
+}

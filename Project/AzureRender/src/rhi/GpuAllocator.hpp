@@ -14,6 +14,7 @@ namespace azurerender::rhi {
 // own allocator.
 class GpuAllocator final : public IGpuAllocator {
 public:
+    void invalidate(const GpuBuffer&,VkDeviceSize,VkDeviceSize) override;
     GpuAllocator() = default;
     ~GpuAllocator();
 
@@ -68,6 +69,7 @@ public:
     }
 
 private:
+    void updateMemoryHighWater();
     VmaAllocator allocator_ = nullptr;
     GpuAllocatorStatistics statistics_;
 };

@@ -1,0 +1,65 @@
+{
+  "sourceCommit": "2a24dba13e6f65d970c5d9e013ebf13e2bbee0ae",
+  "files": [
+    {
+      "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/frame10401/e804-PS-cb2.bin",
+      "bytes": 65536,
+      "sha256": "6b978361a3183c5ee19a5b263b333d9860cd0a90c4327a422a85ed91c4094a13"
+    },
+    {
+      "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/frame10401/e804-skin-matrices.bin",
+      "bytes": 8413184,
+      "sha256": "355a21275dc0d1f1775b4a1921c140e992dbe1878f5bfd0cf7c1238cd680e6db"
+    },
+    {
+      "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/frame10401/e950-ps-cb2-binding.bin",
+      "bytes": 65536,
+      "sha256": "670548c6705a52d9631365e6fe366da25ca7f93553a6ac1cc1f899baa55cbf58"
+    },
+    {
+      "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/frame10401/frame-bone-comparison.json",
+      "bytes": 45166,
+      "sha256": "c268a5f337c1bcf5ff360af10fda6542314cd83bb20906ee4b3d919333a336fd"
+    },
+    {
+      "path": "build/runs/20261017-000956-endfield-native-3caf73/laevat-static/model.geometry.json",
+      "bytes": 1491696,
+      "sha256": "81f617bdd8c6154da6f8f3d40d35e7e6fcc98e74c77a275b658554b3ba0324c2"
+    },
+    {
+      "path": "tools/retarget_animation.py",
+      "bytes": 12805,
+      "sha256": "ed4d520a26f5749703d611f39c611ff125a0df16bbd19222e703c7e02cb80e4c"
+    },
+    {
+      "path": "tools/endfield_native/capture_skin_frame.py",
+      "bytes": 7613,
+      "sha256": "3dda5c572e3b595b347e8bf074c09d6329bbc0b8364df52a99a3e80d1e7f0635"
+    },
+    {
+      "path": "build/ninja-msvc-release/AzurePlayer.exe",
+      "bytes": 6069760,
+      "sha256": "88ddbcafd7205aa6ab5cc94c71d507f61634058388e74d523e226d00e3d96e2f"
+    },
+    {
+      "path": "build/ninja-msvc-release/AzureIrradianceClipmapGpuTests.exe",
+      "bytes": 187392,
+      "sha256": "c877d9197667e032139b9bb5638a1a6eb73fe4d94c16a53e291d296afad5e05d"
+    },
+    {
+      "path": "build/ninja-msvc-release/shaders/irradiance_clipmap_test.comp.spv",
+      "bytes": 14448,
+      "sha256": "18327769bd6bfc0fc9ce5274060e267fab85edea147a7d7076642b910bc926d5"
+    },
+    {
+      "path": "build/runs/20261031-135416-character-portrait-recovery-0773ca/original-reference/project/native-character/outline-converted.glb",
+      "bytes": 118813340,
+      "sha256": "9246691bb5671d854029d9481e739e319d2fb756903c1d329a59b543271c1ed4"
+    },
+    {
+      "path": "build/runs/20261031-231334-receiver-directional-light-911ab7/project/content-character/hero-restored-inputs-v8.glb",
+      "bytes": 28376240,
+      "sha256": "f188722c428358787a12be615d944f4a07185e9a8eaab72b9aa21105f3b7f997"
+    }
+  ]
+}

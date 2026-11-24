@@ -2,11 +2,28 @@
 
 #include <algorithm>
 #include <cstdio>
+#include <cstring>
 #include <type_traits>
 
 namespace azurerender::rhi {
 
 namespace {
+
+bool earlyFragmentMain(const std::vector<char>& code) noexcept {
+    if(code.size()<20||code.size()%4)return false;
+    const auto word=[&](std::size_t index){std::uint32_t value;std::memcpy(&value,code.data()+index*4,4);return value;};
+    if(word(0)!=0x07230203U)return false;
+    std::uint32_t main=0;
+    for(std::size_t index=5;index<code.size()/4;){
+        const auto instruction=word(index),size=instruction>>16,opcode=instruction&65535U;
+        if(!size||size>code.size()/4-index)return false;
+        if(opcode==15&&size>=5&&word(index+1)==4
+            &&std::memcmp(code.data()+(index+3)*4,"main",5)==0)main=word(index+2);
+        if(opcode==16&&size>=3&&main&&word(index+1)==main&&word(index+2)==9)return true;
+        index+=size;
+    }
+    return false;
+}
 
 template <typename Handle>
 Handle fakeHandle(const std::uint64_t value) {
@@ -42,22 +59,26 @@ GpuBuffer NullGpuAllocator::createBuffer(
     const VkDeviceSize size,
     const VkBufferUsageFlags usage,
     const bool hostVisible) {
-    (void)usage;
+    if(allocationFailureAfter==0)throw std::bad_alloc();
+    if(allocationFailureAfter>0)--allocationFailureAfter;
     (void)hostVisible;
     GpuBuffer result;
     result.buffer = fakeHandle<VkBuffer>(nextHandle_++);
     result.size = size;
+    result.usage=usage;
     hostBlocks_.emplace_back(static_cast<std::size_t>(size));
     result.mapped = hostBlocks_.back().data();
     ++statistics_.bufferAllocations;
     ++statistics_.liveBuffers;
     statistics_.bufferBytes += size;
+    statistics_.liveBufferBytes+=size;
     return result;
 }
 
 void NullGpuAllocator::destroyBuffer(GpuBuffer& buffer) noexcept {
     if (buffer.buffer != VK_NULL_HANDLE && statistics_.liveBuffers > 0) {
         --statistics_.liveBuffers;
+        statistics_.liveBufferBytes-=buffer.size;
     }
     buffer = GpuBuffer{};
 }
@@ -65,22 +86,30 @@ void NullGpuAllocator::destroyBuffer(GpuBuffer& buffer) noexcept {
 GpuImage NullGpuAllocator::createImage(
     const VkImageCreateInfo& createInfo,
     const bool hostVisible) {
+    if(allocationFailureAfter==0)throw std::bad_alloc();
+    if(allocationFailureAfter>0)--allocationFailureAfter;
     (void)hostVisible;
     GpuImage result;
     result.image = fakeHandle<VkImage>(nextHandle_++);
     result.width = createInfo.extent.width;
     result.height = createInfo.extent.height;
     result.mipLevels = createInfo.mipLevels;
+    result.arrayLayers = createInfo.arrayLayers;
+    result.depth = createInfo.extent.depth;
     ++statistics_.imageAllocations;
     ++statistics_.liveImages;
-    statistics_.imageBytes += static_cast<VkDeviceSize>(createInfo.extent.width)
-        * createInfo.extent.height * 4;
+    const auto bytes=static_cast<VkDeviceSize>(result.width)*result.height*result.depth*4*result.arrayLayers
+        *std::max(1U,static_cast<unsigned>(createInfo.samples));
+    imageBytes_[result.image]=bytes;
+    statistics_.imageBytes+=bytes;statistics_.liveImageBytes+=bytes;
     return result;
 }
 
 void NullGpuAllocator::destroyImage(GpuImage& image) noexcept {
-    if (image.image != VK_NULL_HANDLE && statistics_.liveImages > 0) {
+    const auto found=imageBytes_.find(image.image);
+    if (found!=imageBytes_.end()) {
         --statistics_.liveImages;
+        statistics_.liveImageBytes-=found->second;imageBytes_.erase(found);
     }
     image = GpuImage{};
 }
@@ -152,12 +181,13 @@ void NullRhi::copyBufferToImage(
     const GpuBuffer& source,
     const GpuImage& destination,
     const std::uint32_t width,
-    const std::uint32_t height) {
-    (void)source;
+    const std::uint32_t height,
+    const std::uint32_t mipLevels, const std::uint32_t bytesPerTexel) {
+    if(collectImageUploads){ImageUpload upload{width,height,mipLevels,{},destination.depth};const auto* begin=static_cast<const std::uint8_t*>(source.mapped);if(begin)upload.pixels.assign(begin,begin+source.size);imageUploads.push_back(std::move(upload));}
     calls.push_back(
         {"copyBufferToImage",
          hexHandle(destination.image) + " " + std::to_string(width) + "x"
-             + std::to_string(height)});
+             + std::to_string(height) + " texelBytes=" + std::to_string(bytesPerTexel)});
 }
 
 void NullRhi::clearImage(const GpuImage& image) {
@@ -183,13 +213,17 @@ VkImageView NullRhi::createImageView(
     const VkFormat format,
     const VkImageAspectFlags aspect,
     const std::uint32_t mipLevels,
-    const std::uint32_t baseMipLevel) {
+    const std::uint32_t baseMipLevel,
+    const VkImageViewType viewType,
+    const std::uint32_t arrayLayers) {
     (void)image;
     (void)format;
     (void)aspect;
     (void)mipLevels;
     (void)baseMipLevel;
-    return mint<VkImageView>("createImageView");
+    const auto view=mint<VkImageView>("createImageView");
+    calls.back().detail+=" type="+std::to_string(viewType)+" layers="+std::to_string(arrayLayers);
+    return view;
 }
 
 void NullRhi::destroyImageView(const VkImageView view) {
@@ -197,7 +231,9 @@ void NullRhi::destroyImageView(const VkImageView view) {
 }
 
 VkSampler NullRhi::createSampler(const SamplerDesc& desc) {
-    (void)desc;
+    if((desc.filter!=VK_FILTER_LINEAR&&desc.filter!=VK_FILTER_NEAREST)
+        ||(desc.effectiveMagFilter()!=VK_FILTER_LINEAR&&desc.effectiveMagFilter()!=VK_FILTER_NEAREST))
+        throw std::invalid_argument("Unsupported sampler filter");
     return mint<VkSampler>("createSampler");
 }
 
@@ -214,8 +250,9 @@ void NullRhi::executeOneShot(
 }
 
 VkShaderModule NullRhi::createShaderModule(const std::vector<char>& code) {
-    (void)code;
-    return mint<VkShaderModule>("createShaderModule");
+    const auto module=mint<VkShaderModule>("createShaderModule");
+    if(earlyFragmentMain(code))calls.back().detail+=" earlyFragmentTests=1";
+    return module;
 }
 
 void NullRhi::destroyShaderModule(const VkShaderModule shader) {
@@ -235,8 +272,14 @@ void NullRhi::destroyPipelineLayout(const VkPipelineLayout layout) {
 }
 
 VkPipeline NullRhi::createComputePipeline(const ComputePipelineDesc& desc) {
+    validateShaderSpecialization(desc.specialization);
     if (!desc.shader || !desc.layout) throw std::invalid_argument("Compute pipeline requires shader and layout");
-    return mint<VkPipeline>("createComputePipeline");
+    const auto pipeline=mint<VkPipeline>("createComputePipeline");
+    if(!desc.specialization.empty()){
+        calls.back().detail+=" spec=";
+        for(const auto& v:desc.specialization)calls.back().detail+=std::to_string(v.id)+":"+std::to_string(v.value)+"/";
+    }
+    return pipeline;
 }
 void NullCommandRecorder::bindComputePipeline(VkPipeline pipeline) {
     calls.push_back({"bindComputePipeline", hexHandle(pipeline)});
@@ -247,12 +290,48 @@ void NullCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, VkDe
 }
 
 VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
+    const auto vertexBindings=resolveGraphicsVertexBindings(desc);
+    validateShaderSpecialization(desc.vertexSpecialization);
+    validateShaderSpecialization(desc.fragmentSpecialization);
+    validateGraphicsColorWriteMasks(desc);
+    validateGraphicsMultisampling(desc);
+    if(desc.depthBiasExact&&!desc.depthBias)throw std::invalid_argument("Exact depth bias requires enabled depth bias");
+    if(desc.depthBiasExact&&!supportsExactDepthBias())throw std::runtime_error("Exact depth bias is unavailable on this backend");
+    if((supportedSamples&desc.rasterizationSamples)==0||desc.minSampleShading>0&&!supportsSampleShading())
+        throw std::runtime_error("Requested raster sampling or sample shading is unavailable");
+    const auto pass=renderPassSamples_.find(desc.renderPass);
+    if(pass!=renderPassSamples_.end()&&pass->second!=desc.rasterizationSamples)
+        throw std::invalid_argument("Pipeline and render pass sample counts must match");
     const VkPipeline pipeline = mint<VkPipeline>("createGraphicsPipeline");
     calls.back().detail +=
         " cull=" + std::to_string(desc.cullMode)
+        + " front=" + std::to_string(desc.frontFace)
         + " blend=" + std::to_string(desc.alphaBlend)
         + " depth=" + std::to_string(desc.depthTest)
-        + "/" + std::to_string(desc.depthWrite);
+        + "/" + std::to_string(desc.depthWrite)
+        + " compare="+std::to_string(desc.depthCompare)
+        + " samples="+std::to_string(desc.rasterizationSamples)
+        + " sampleShading="+std::to_string(desc.minSampleShading);
+    calls.back().detail+=" fragment="+std::to_string(desc.fragmentShader!=VK_NULL_HANDLE);
+    calls.back().detail+=" fragmentModule="+hexHandle(desc.fragmentShader);
+    if(desc.depthBias)calls.back().detail+=" depthBias="+std::to_string(desc.depthBiasConstant)+"/"+std::to_string(desc.depthBiasSlope);
+    if(desc.depthBiasExact)calls.back().detail+=" exactDepthBias=1";
+    const auto recordSpecialization=[&](const char* name,const ShaderSpecialization& values){
+        if(values.empty())return;
+        calls.back().detail+=std::string(" ")+name+"=";
+        for(const auto& v:values)calls.back().detail+=std::to_string(v.id)+":"+std::to_string(v.value)+"/";
+    };
+    recordSpecialization("vertexSpec",desc.vertexSpecialization);
+    recordSpecialization("fragmentSpec",desc.fragmentSpecialization);
+    if(!vertexBindings.empty()) {
+        calls.back().detail+=" vertexBindings=";
+        for(const auto& binding:vertexBindings)calls.back().detail+=std::to_string(binding.binding)+":"
+            +std::to_string(binding.stride)+":"+std::to_string(binding.inputRate)+"/";
+    }
+    if(!desc.colorWriteMasks.empty()) {
+        calls.back().detail+=" masks=";
+        for(const auto mask:desc.colorWriteMasks)calls.back().detail+=std::to_string(mask)+"/";
+    }
     return pipeline;
 }
 
@@ -262,7 +341,7 @@ void NullRhi::destroyPipeline(const VkPipeline pipeline) {
 
 VkDescriptorSetLayout NullRhi::createDescriptorSetLayout(
     const std::vector<DescriptorBindingDesc>& bindings) {
-    (void)bindings;
+    descriptorLayouts.push_back(bindings);
     return mint<VkDescriptorSetLayout>(
         "createDescriptorSetLayout");
 }
@@ -272,7 +351,7 @@ void NullRhi::destroyDescriptorSetLayout(const VkDescriptorSetLayout layout) {
 }
 
 VkDescriptorPool NullRhi::createDescriptorPool(const DescriptorPoolDesc& desc) {
-    (void)desc;
+    descriptorPools.push_back(desc);
     return mint<VkDescriptorPool>("createDescriptorPool");
 }
 
@@ -294,6 +373,7 @@ std::vector<VkDescriptorSet> NullRhi::allocateDescriptorSets(
 }
 
 void NullRhi::writeDescriptorImage(const DescriptorImageWrite& write) {
+    descriptorImageWrites.push_back(write);
     calls.push_back(
         {"writeDescriptorImage",
          "set=" + hexHandle(write.set) + " binding="
@@ -317,11 +397,16 @@ void NullRhi::writeDescriptorBuffer(const DescriptorBufferWrite& write) {
 }
 
 VkRenderPass NullRhi::createRenderPass(const RenderPassDesc& desc) {
-    (void)desc;
-    return mint<VkRenderPass>("createRenderPass");
+    validateRenderPassDesc(desc);
+    const auto samples=desc.attachments.empty()?VK_SAMPLE_COUNT_1_BIT:desc.attachments.front().samples;
+    if(!desc.attachments.empty()&&(supportedSamples&samples)==0)throw std::runtime_error("Requested attachment sampling is unavailable");
+    const auto pass=mint<VkRenderPass>("createRenderPass");
+    if(!desc.attachments.empty()){renderPassSamples_[pass]=samples;calls.back().detail+=" samples="+std::to_string(samples);}
+    return pass;
 }
 
 void NullRhi::destroyRenderPass(const VkRenderPass renderPass) {
+    renderPassSamples_.erase(renderPass);
     calls.push_back({"destroyRenderPass", hexHandle(renderPass)});
 }
 
@@ -410,6 +495,11 @@ void NullCommandRecorder::bindIndexBuffer(
     calls.push_back(
         {"bindIndexBuffer",
          hexHandle(buffer) + " +" + std::to_string(offset)});
+}
+
+void NullCommandRecorder::bindVertexStream(std::uint32_t binding,VkBuffer buffer,VkDeviceSize offset) {
+    if(binding>=kMaximumVertexBindings||!buffer)throw std::invalid_argument("Invalid vertex stream binding or buffer");
+    calls.push_back({"bindVertexStream","binding="+std::to_string(binding)+" "+hexHandle(buffer)+" +"+std::to_string(offset)});
 }
 
 void NullCommandRecorder::draw(const std::uint32_t vertexCount) {

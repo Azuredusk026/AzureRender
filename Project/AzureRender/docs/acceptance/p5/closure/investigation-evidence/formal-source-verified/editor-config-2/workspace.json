@@ -1,0 +1,30 @@
+{
+  "layoutHash": 8320917584091123675,
+  "overlayPolicies": {
+    "camera": "selected",
+    "collision": "selected",
+    "grid": "all",
+    "hinge": "selected",
+    "light": "selected"
+  },
+  "panels": {
+    "animation": true,
+    "assets": true,
+    "assistance": false,
+    "build": true,
+    "capture": true,
+    "console": true,
+    "environment": false,
+    "gameplay-debug": true,
+    "inspector": true,
+    "outliner": true,
+    "prefabs": false,
+    "problems": false,
+    "projects": false,
+    "scripts": false,
+    "settings": false,
+    "viewport": true
+  },
+  "preset": "custom",
+  "version": 2
+}

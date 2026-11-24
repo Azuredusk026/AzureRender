@@ -1,0 +1,105 @@
+{
+  "input": "production ImGui replay and public edit operations",
+  "elapsedSeconds": 1.610000000000582,
+  "physicalInput": false,
+  "steps": 3,
+  "injectedFailures": 0,
+  "operations": [
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.17199999999866122,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "node.select",
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-1",
+        "commandId": "node.select",
+        "parameters": {
+          "id": "authored-moving"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:218102f033c05115",
+          "documentId": "17917350588362648-1",
+          "revision": 1
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "input",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "event": {
+          "action": "click",
+          "target": "simulate"
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.17199999999866122,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.030999999995401595,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "input",
+      "command": null,
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "event": {
+          "action": "click",
+          "target": "stop"
+        }
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.17100000000209548,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    }
+  ]
+}

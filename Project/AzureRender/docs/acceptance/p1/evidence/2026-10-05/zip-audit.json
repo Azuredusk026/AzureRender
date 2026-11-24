@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "archive": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p1\\Delivery\\Azure-Exploration-Windows-x64.zip",
+  "sha256": "d622e56e4c72ae9b5e403e602d633499fbfac70a0f4ac41e3e12076dc68468a8",
+  "sizeBytes": 7264304,
+  "files": 207,
+  "extracted": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p1\\Delivery\\Zip Verification\\Azure Exploration",
+  "manifestHash": "0dcedb54323dc4bcf2cc0747e9677fdd2ac03548a4b0030701218075dff4edfe",
+  "cacheExcluded": true,
+  "privateAssetsExcluded": true
+}

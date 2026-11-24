@@ -82,5 +82,28 @@ int main() {
         "pan must preserve camera-to-target offset");
     passed &= expect(target != originalTarget, "pan must move the target");
 
+    // A horizontal drag must turn the view towards the camera's local right.
+    position = {0,0,5}; target = {0,0,0};
+    azurerender::EditorViewportInput rightDrag; rightDrag.orbitDeltaX=10;
+    azurerender::EditorCameraController::apply(rightDrag,position,target);
+    passed &= expect(target[0]-position[0]>0, "right drag must look right");
+    position={0,0,1000};target={0,0,0};
+    azurerender::EditorViewportInput largePan;largePan.panDeltaX=1;
+    azurerender::EditorCameraController::apply(largePan,position,target);
+    passed &= expect(near(distance(position,target),1000,.01F), "large scene pan preserves distance");
+    position={0,0,5};target={0,0,0};
+    azurerender::EditorViewportInput frame;frame.frameRequested=true;frame.frameTarget={10,20,30};
+    azurerender::EditorCameraController::apply(frame,position,target);
+    passed &= expect(target==frame.frameTarget, "framing uses exact world centre");
+    passed &= expect(near(position[0],10)&&near(position[1],20), "framing preserves view direction");
+    position={0,0,5};target={0,0,0};
+    azurerender::EditorViewportInput look;look.lookDeltaX=10;look.lookDeltaY=-10;
+    azurerender::EditorCameraController::apply(look,position,target);
+    passed &= expect(position==std::array<float,3>{0,0,5}, "RMB look preserves camera position");
+    passed &= expect(target[0]>0 && target[1]>0, "RMB right/up follows local view directions");
+    position={0,0,5};target={0,0,0};
+    azurerender::EditorViewportInput fly;fly.flyForward=1;fly.deltaSeconds=.1F;
+    azurerender::EditorCameraController::apply(fly,position,target);
+    passed &= expect(near(position[2],4.5F)&&near(target[2],-.5F), "flight translates camera and target together");
     return passed ? EXIT_SUCCESS : EXIT_FAILURE;
 }

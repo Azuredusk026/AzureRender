@@ -1,0 +1,334 @@
+{
+  "schemaVersion": 1,
+  "sourceBaseCommit": "3b6bde2",
+  "scope": "Public NPR illumination composition; native HDR, grading and remaining material inputs pending.",
+  "run": "build/runs/20261023-024552-npr-illumination-composition-49f307",
+  "gpu": {
+    "gpu-release": {
+      "captures": 10,
+      "playerSha256": "6d2b145b5b74656edc04b9284c7449b418a9087e3b0fc0f8306b8d89c3049176",
+      "maximumLinearError": 0.0012367431527445516,
+      "validationEnabled": false,
+      "summarySha256": "5d955c752040328509e15231a969c1062402493fdd0dd9357da80b573ed24bcf"
+    },
+    "gpu-debug": {
+      "captures": 11,
+      "playerSha256": "f31dcf15c08dae9cf210c7035836bd3ccb136facc77231dd93bd623d61b9cd6b",
+      "maximumLinearError": 0.0012367431527445516,
+      "validationEnabled": true,
+      "summarySha256": "1c154f30ea0ba437a5ebaa56293929f80b40202bedce652cd9c2774c993db72d"
+    },
+    "shadow-debug-v2": {
+      "captures": 4,
+      "playerSha256": "3dd14cc8e7bae072635afa92826ddf1f7310bdef1f9d2bcaadddd4acdd3ddb84",
+      "maximumLinearError": 0.001010887882328615,
+      "validationEnabled": true,
+      "summarySha256": "73e33377a71e31d98ecbe9f9d3302dfc6b2dc130dea882977df59973479c71a9"
+    },
+    "provenance-debug": {
+      "captures": 2,
+      "playerSha256": "3dd14cc8e7bae072635afa92826ddf1f7310bdef1f9d2bcaadddd4acdd3ddb84",
+      "maximumLinearError": 0.001010887882328615,
+      "validationEnabled": true,
+      "summarySha256": "b1273ba0a5154943a89d9c3b9ac0604856deb6ceebcd82377a59a90f1844b263"
+    },
+    "receiver-green": {
+      "captures": 1,
+      "playerSha256": "f9daebe16ddc724ee35a9b94d1c510940ebfd84425a366c0eb99a9630f7e5b7a",
+      "maximumLinearError": 0.00031396016908327024,
+      "validationEnabled": false,
+      "summarySha256": "4a237966083b17f9cfa09a980994e4f9e7c0aa7e9aefdd733ee2ea7b5f5adf03"
+    },
+    "npr-regression-release": {
+      "status": "passed",
+      "captures": 36,
+      "playerSha256": "6d2b145b5b74656edc04b9284c7449b418a9087e3b0fc0f8306b8d89c3049176",
+      "summarySha256": "6effce97d84de69749e73e8bde4efe8324ee9bbd9fddce60abf8366dd5ba2b10"
+    },
+    "hair-regression-release": {
+      "status": "passed",
+      "captures": 20,
+      "playerSha256": "6d2b145b5b74656edc04b9284c7449b418a9087e3b0fc0f8306b8d89c3049176",
+      "summarySha256": "fe7c090ab6134e1a7017aff31ecd80bbfd84ec2f511c596ce96b9df8b4a5186d"
+    }
+  },
+  "cpu": {
+    "settingsRoundtripAndInvalidInputs": "passed",
+    "sceneDocumentMigration": "passed",
+    "environmentSpecular": "passed",
+    "moduleBoundaryFixtures": "passed",
+    "moduleBoundaries": "passed",
+    "nativeConstantDecoder": 3
+  },
+  "sourceLightingMatrix": {
+    "783": {
+      "settings": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "ambientColor": [
+          1.1870100498199463,
+          0.9272286891937256,
+          0.8129898905754089
+        ],
+        "ambientDirection": [
+          -0.0,
+          0.9999999999999991,
+          4.371138828673789e-08
+        ],
+        "directionBias": 0.15000000596046448,
+        "directionGain": 1.5,
+        "directionFloor": 0.5,
+        "outdoorGain": 1.0499999523162842,
+        "shadowAmbientGain": 0.800000011920929,
+        "indoorMix": 0.0,
+        "litAmbientMix": 1.0,
+        "mainColorMix": 1.0,
+        "shadowOverride": 1.0,
+        "useSceneIrradiance": false
+      },
+      "mainLight": {
+        "incomingDirection": [
+          -0.147262039821048,
+          0.529919277570537,
+          0.8351643256790032
+        ],
+        "color": [
+          1.0,
+          0.926181972026825,
+          0.8666666746139526
+        ],
+        "intensity": 1.6243867874145508
+      },
+      "materialShadowScale": 0.550000011920929,
+      "sourceChoices": {
+        "ambientRow": 113,
+        "mainColorRow": 114,
+        "directionBlend": 1.0,
+        "colorBlend": 1.0,
+        "intensityBlend": 0.0
+      },
+      "unverifiedInputs": [
+        "source ambient-occlusion producer",
+        "material-specific color inputs",
+        "native grading and unclipped HDR output"
+      ],
+      "sourceSha256": "8218b0a8fa01a42b710709beaa6a8c86712d6f49ad7ec2df1b338c3bcfddde3e"
+    },
+    "804": {
+      "settings": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "ambientColor": [
+          1.1870100498199463,
+          0.9272286891937256,
+          0.8129898905754089
+        ],
+        "ambientDirection": [
+          -0.0,
+          0.9999999999999991,
+          4.371138828673789e-08
+        ],
+        "directionBias": 0.15000000596046448,
+        "directionGain": 1.5,
+        "directionFloor": 0.5,
+        "outdoorGain": 1.0499999523162842,
+        "shadowAmbientGain": 0.800000011920929,
+        "indoorMix": 0.0,
+        "litAmbientMix": 1.0,
+        "mainColorMix": 1.0,
+        "shadowOverride": 1.0,
+        "useSceneIrradiance": false
+      },
+      "mainLight": {
+        "incomingDirection": [
+          -0.147262039821048,
+          0.529919277570537,
+          0.8351643256790032
+        ],
+        "color": [
+          1.0,
+          0.926181972026825,
+          0.8666666746139526
+        ],
+        "intensity": 1.6243867874145508
+      },
+      "materialShadowScale": 0.550000011920929,
+      "sourceChoices": {
+        "ambientRow": 113,
+        "mainColorRow": 114,
+        "directionBlend": 1.0,
+        "colorBlend": 1.0,
+        "intensityBlend": 0.0
+      },
+      "unverifiedInputs": [
+        "source ambient-occlusion producer",
+        "material-specific color inputs",
+        "native grading and unclipped HDR output"
+      ],
+      "sourceSha256": "e694c2e90016702a4af73f6c3b7fd18f1b47ea8a23edc2b08313c7b4b5363ec7"
+    },
+    "889": {
+      "settings": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "ambientColor": [
+          1.1870100498199463,
+          0.9272286891937256,
+          0.8129898905754089
+        ],
+        "ambientDirection": [
+          -0.0,
+          0.9999999999999991,
+          4.371138828673789e-08
+        ],
+        "directionBias": 0.15000000596046448,
+        "directionGain": 1.5,
+        "directionFloor": 0.5,
+        "outdoorGain": 1.0499999523162842,
+        "shadowAmbientGain": 0.800000011920929,
+        "indoorMix": 0.0,
+        "litAmbientMix": 1.0,
+        "mainColorMix": 1.0,
+        "shadowOverride": 1.0,
+        "useSceneIrradiance": false
+      },
+      "mainLight": {
+        "incomingDirection": [
+          -0.147262039821048,
+          0.529919277570537,
+          0.8351643256790032
+        ],
+        "color": [
+          1.0,
+          0.926181972026825,
+          0.8666666746139526
+        ],
+        "intensity": 1.6243867874145508
+      },
+      "materialShadowScale": 0.550000011920929,
+      "sourceChoices": {
+        "ambientRow": 113,
+        "mainColorRow": 114,
+        "directionBlend": 1.0,
+        "colorBlend": 1.0,
+        "intensityBlend": 0.0
+      },
+      "unverifiedInputs": [
+        "source ambient-occlusion producer",
+        "material-specific color inputs",
+        "native grading and unclipped HDR output"
+      ],
+      "sourceSha256": "cf185c4e715ca89edd5c069d7538d642d23b2719a1229093bc6a4c3925e27542"
+    },
+    "950": {
+      "settings": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "ambientColor": [
+          0.8783068656921387,
+          0.9302293062210083,
+          1.1216931343078613
+        ],
+        "ambientDirection": [
+          -0.0,
+          0.9999999999999991,
+          4.371138828673789e-08
+        ],
+        "directionBias": 0.15000000596046448,
+        "directionGain": 1.5,
+        "directionFloor": 0.5,
+        "outdoorGain": 1.0499999523162842,
+        "shadowAmbientGain": 0.800000011920929,
+        "indoorMix": 0.0,
+        "litAmbientMix": 1.0,
+        "mainColorMix": 1.0,
+        "shadowOverride": 1.0,
+        "useSceneIrradiance": false
+      },
+      "mainLight": {
+        "incomingDirection": [
+          -0.147262039821048,
+          0.529919277570537,
+          0.8351643256790032
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "intensity": 1.6243867874145508
+      },
+      "materialShadowScale": 0.550000011920929,
+      "sourceChoices": {
+        "ambientRow": 112,
+        "mainColorRow": 115,
+        "directionBlend": 1.0,
+        "colorBlend": 1.0,
+        "intensityBlend": 0.0
+      },
+      "unverifiedInputs": [
+        "source ambient-occlusion producer",
+        "material-specific color inputs",
+        "native grading and unclipped HDR output"
+      ],
+      "sourceSha256": "0678f363a8624c3da7375ce4e0827d5b6f915516a32a7a2fa2349fad5d15a7ee"
+    }
+  },
+  "formalCtest": {
+    "status": "passed",
+    "captures": 15,
+    "logSha256": "378bbf5cb65b8acc550d82ff1260155461e226febc4f3df6b4866cecb7f54779",
+    "tests": "AzureEngine.NprIlluminationGpu"
+  },
+  "actualCaptures": {
+    "status": "captured",
+    "playerSha256": "f9daebe16ddc724ee35a9b94d1c510940ebfd84425a366c0eb99a9630f7e5b7a",
+    "captures": [
+      {
+        "mode": "off",
+        "imageSha256": "451032123f04ea7882128b346402737ca11ba09473ef85c44ed439b920db90fa"
+      },
+      {
+        "mode": "on",
+        "imageSha256": "84cd56b41fe29fb3d624c5be56fe64f6bf79680c042bf32f7c0cc42bad0ffcb9"
+      }
+    ]
+  },
+  "actualDifference": {
+    "changedPixels": 124191,
+    "maximumByteDifference": 193,
+    "colorEquivalence": "pending-native-HDR-and-grading"
+  },
+  "sourceConstantCapture": {
+    "status": "captured",
+    "playerSha256": "d17ef543a56b9cd78d56424e7ddb03aa9812a0af2098cbeee34bcfaccd6fff7a",
+    "imageSha256": "63f255efbbe2f05d68f6fce385ff235be4f98ff0486e1b46ee406b32e4f57e7b",
+    "exposureEv": -2,
+    "toneMapping": false,
+    "captureNprLighting": {
+      "ambientColor": [
+        1.1870100498199463,
+        0.9272286891937256,
+        0.8129898905754089
+      ],
+      "ambientDirection": [
+        -0.0,
+        1.0,
+        4.371138828673793e-08
+      ],
+      "directionBias": 0.15000000596046448,
+      "directionFloor": 0.5,
+      "directionGain": 1.5,
+      "enabled": true,
+      "indoorMix": 0.0,
+      "litAmbientMix": 1.0,
+      "mainColorMix": 1.0,
+      "outdoorGain": 1.0499999523162842,
+      "schemaVersion": 1,
+      "shadowAmbientGain": 0.800000011920929,
+      "shadowOverride": 1.0,
+      "useSceneIrradiance": false
+    },
+    "scope": "Captured constants with explicit HDR transport exposure; native grading and full color equivalence pending."
+  }
+}

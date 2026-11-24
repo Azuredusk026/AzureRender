@@ -1,0 +1,31 @@
+usage: cleanup [-h] [--apply] [--legacy-list LEGACY_LIST]
+               [--run-list RUN_LIST] [--new-run TASK]
+               [--planned-bytes PLANNED_BYTES] [--diagnostic]
+               [--finish FINISH]
+cleanup: error: Deletion batch exceeds 10 directories; use a reviewed --run-list
+...usage: cleanup [-h] [--apply] [--legacy-list LEGACY_LIST]
+               [--run-list RUN_LIST] [--new-run TASK]
+               [--planned-bytes PLANNED_BYTES] [--diagnostic]
+               [--finish FINISH]
+cleanup: error: Link in artifact output path
+.usage: cleanup [-h] [--apply] [--legacy-list LEGACY_LIST]
+               [--run-list RUN_LIST] [--new-run TASK]
+               [--planned-bytes PLANNED_BYTES] [--diagnostic]
+               [--finish FINISH]
+cleanup: error: Artifact budget refused: {"allowed": false, "reasons": ["volume-reserve"], "totalBytes": 1073741824000, "freeBytes": 34359738368, "usedBytes": 0, "plannedBytes": 2147483648, "quotaBytes": 2147483648, "reserveBytes": 107374182400, "diagnostic": false}
+selected: 0 bytes
+..usage: cleanup [-h] [--apply] [--legacy-list LEGACY_LIST]
+               [--run-list RUN_LIST] [--new-run TASK]
+               [--planned-bytes PLANNED_BYTES] [--diagnostic]
+               [--finish FINISH]
+cleanup: error: --run-list contains an ineligible or out-of-scope run
+{"bytes": 0, "items": 1}
+old: 0 bytes
+{"bytes": 0, "items": 1}
+old: 0 bytes
+.......
+----------------------------------------------------------------------
+Ran 13 tests in 0.192s
+
+OK
+{"bytes": 0, "items": 1}

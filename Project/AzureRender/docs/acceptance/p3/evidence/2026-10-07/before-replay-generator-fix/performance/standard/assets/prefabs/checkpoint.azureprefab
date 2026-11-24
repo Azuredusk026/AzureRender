@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "checkpoint",
+  "resources": [
+    {
+      "id": "mesh",
+      "asset": "assets:/cube.gltf"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "body",
+      "resourceId": "mesh",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              1,
+              -165
+            ],
+            "scale": [
+              3,
+              2,
+              2
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.checkpoint": {
+          "type": "azure.checkpoint",
+          "version": 1,
+          "data": {
+            "position": [
+              0,
+              0,
+              -165
+            ]
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/checkpoint.lua"
+          }
+        },
+        "azure.renderable": {
+          "type": "azure.renderable",
+          "version": 1,
+          "data": {
+            "visible": false
+          }
+        }
+      }
+    }
+  ]
+}

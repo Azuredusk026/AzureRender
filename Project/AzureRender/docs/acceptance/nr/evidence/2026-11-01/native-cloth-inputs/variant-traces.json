@@ -1,0 +1,53 @@
+{
+  "status": "exported-variant-traces",
+  "traces": [
+    {
+      "event": 889,
+      "pixel": {
+        "x": 1266,
+        "y": 486,
+        "nativeY": 953
+      },
+      "status": "exported",
+      "path": "variant-trace-889.json",
+      "steps": 1230,
+      "sha256": "b5ab8cc3d4b1d0048e1bb7c08d5e8731b437ebf1a611a636faedc21528783771"
+    },
+    {
+      "event": 910,
+      "pixel": {
+        "x": 1493,
+        "y": 995,
+        "nativeY": 444
+      },
+      "status": "exported",
+      "path": "variant-trace-910.json",
+      "steps": 1123,
+      "sha256": "c0fc9a7dfed703101a749a3328b8525c0d71d07d73a888fff6d9ab4fa4a7969e"
+    },
+    {
+      "event": 928,
+      "pixel": {
+        "x": 1254,
+        "y": 770,
+        "nativeY": 669
+      },
+      "status": "exported",
+      "path": "variant-trace-928.json",
+      "steps": 1053,
+      "sha256": "b68532740e69601feae2dd119b851cec42f5f65008f24414120811b351e39c60"
+    },
+    {
+      "event": 1383,
+      "pixel": {
+        "x": 1237,
+        "y": 818,
+        "nativeY": 621
+      },
+      "status": "exported",
+      "path": "variant-trace-1383.json",
+      "steps": 1424,
+      "sha256": "66da9660c046dbb03142c5dcac6dcf8872acb1de54c4b302725c2b1c49b115c3"
+    }
+  ]
+}

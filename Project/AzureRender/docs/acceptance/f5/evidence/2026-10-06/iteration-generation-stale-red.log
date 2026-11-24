@@ -1,0 +1,20 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  1: AzureAssets.GenerationManifest
+1/4 Test  #1: AzureAssets.GenerationManifest ...***Failed    0.20 sec
+Generation input hash is stale: assets:/input.txt
+
+    Start  2: AzureTools.ValidationProtocol
+2/4 Test  #2: AzureTools.ValidationProtocol ....   Passed    0.88 sec
+    Start  3: AzureEngine.Observation
+3/4 Test  #3: AzureEngine.Observation ..........   Passed    0.07 sec
+    Start 30: AzureEngine.AssetLevel
+4/4 Test #30: AzureEngine.AssetLevel ...........   Passed    0.42 sec
+
+75% tests passed, 1 tests failed out of 4
+
+Total Test time (real) =   1.58 sec
+
+The following tests FAILED:
+	  1 - AzureAssets.GenerationManifest (Failed)
+Errors while running CTest

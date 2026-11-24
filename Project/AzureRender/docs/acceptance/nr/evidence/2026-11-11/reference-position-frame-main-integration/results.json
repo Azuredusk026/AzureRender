@@ -1,0 +1,175 @@
+{
+  "status": "reference-position-frame-main-integration-qualified",
+  "runtimeSourceCommit": "585440f",
+  "sourceBranchCommit": "7eabe70",
+  "documentationCommit": "7a7b98c",
+  "build": {
+    "status": "built-and-checked",
+    "checks": [
+      {
+        "config": "Release",
+        "tests": 9,
+        "skips": 0,
+        "seconds": 131.51600000000326
+      },
+      {
+        "config": "Debug",
+        "tests": 9,
+        "skips": 0,
+        "seconds": 127.96799999999348
+      }
+    ],
+    "gpuProcesses": [
+      {
+        "config": "Release",
+        "device": "nvidia",
+        "target": "AzureReferencePositionFrameGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Release",
+        "device": "nvidia",
+        "target": "AzureReferenceDepthGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Release",
+        "device": "nvidia",
+        "target": "AzureReferenceDepthCoverageGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Release",
+        "device": "intel",
+        "target": "AzureReferencePositionFrameGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Release",
+        "device": "intel",
+        "target": "AzureReferenceDepthGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Release",
+        "device": "intel",
+        "target": "AzureReferenceDepthCoverageGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "nvidia",
+        "target": "AzureReferencePositionFrameGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "nvidia",
+        "target": "AzureReferenceDepthGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "nvidia",
+        "target": "AzureReferenceDepthCoverageGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "intel",
+        "target": "AzureReferencePositionFrameGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "intel",
+        "target": "AzureReferenceDepthGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "intel",
+        "target": "AzureReferenceDepthCoverageGpuTests",
+        "passed": true
+      }
+    ],
+    "exactFrameComponents": 3330800,
+    "exactDepthCoverageValues": 675328,
+    "sourceUnchanged": true,
+    "productsVerified": true,
+    "existingProgramsExact": 856,
+    "childProgramsExact": 858,
+    "activeProgramCount": 859,
+    "allHostSectionsExact": false,
+    "dllsExact": true
+  },
+  "originalFour": {
+    "exitCode": 0,
+    "seconds": 134.81199999997625,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "programsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "descriptiveMemory": {
+    "peakWorkingSetBytes": 2045886464,
+    "observationIntervalMs": 50,
+    "observations": 2631,
+    "allocator": {
+      "bufferAllocations": 2042,
+      "imageAllocations": 442,
+      "liveBuffers": 881,
+      "liveImages": 442,
+      "bufferBytes": 2291424896,
+      "imageBytes": 2819632640,
+      "liveBufferBytes": 234193600,
+      "liveImageBytes": 2819632640,
+      "deviceLocalPeakBytes": 3316325184,
+      "bufferMemoryProperties": {
+        "samples": 2042,
+        "liveDeviceLocalBytes": 219448000,
+        "liveNonDeviceLocalBytes": 14745600,
+        "liveMappedDeviceBytes": 44368320,
+        "liveMappedNonLocalDeviceBytes": 0
+      }
+    },
+    "scope": "Strict four-frame joint capture; descriptive memory observation, separate from the formal P5 workload and steady-state sampling"
+  },
+  "protectedFilesExact": 13,
+  "projectInputsExact": 1729,
+  "sourceProofsFresh": true,
+  "childFullPlaneScope": "7372800 R32 values belong to the source branch diagnostic; root independently verifies 3330800 position components and 675328 depth/coverage values",
+  "overall": "failed-user-review",
+  "formalPerformanceAccepted": false
+}

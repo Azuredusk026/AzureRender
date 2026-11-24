@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "zip": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p2\\AzureExploration-Windows-x64.zip",
+  "sha256": "21c01fb9d2a7838faeff2fb3cc5ca1e4a6f3c598689458743842841c6907e9ee",
+  "bytes": 20569232,
+  "moved": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p2\\Delivery\\Moved Azure Exploration",
+  "isolatedPath": "C:\\WINDOWS\\System32",
+  "completeQuest": true,
+  "quest": {
+    "frames": 940,
+    "actions": 38,
+    "completionSeconds": 221.0,
+    "fixedSteps": 14085,
+    "restarts": 2,
+    "validationErrors": 0,
+    "released": true
+  },
+  "packageManifestHash": "b2b209c36fec5777e7842bba7065d14ce07afdaa34b71ca89f566696d1ced62d"
+}

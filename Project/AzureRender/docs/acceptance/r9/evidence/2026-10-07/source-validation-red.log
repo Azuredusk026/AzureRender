@@ -1,0 +1,8 @@
+[0/2] Re-checking globbed directories...
+[1/3] Building CXX object CMakeFiles\AzureVisibilityPrototypeTests.dir\tests\VisibilityPrototypeTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzureVisibilityPrototypeTests.dir/tests/VisibilityPrototypeTests.cpp.obj 
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_ENABLE_VALIDATION=1 -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DOPENEXR_DLL -I..\..\src -Ivcpkg_installed\x64-windows\include -IC:\VulkanSDK\1.4.350.0\include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath -MDd /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzureVisibilityPrototypeTests.dir\tests\VisibilityPrototypeTests.cpp.obj /FdCMakeFiles\AzureVisibilityPrototypeTests.dir\ /FS -c ..\..\tests\VisibilityPrototypeTests.cpp
+..\..\tests\VisibilityPrototypeTests.cpp(33): error C2039: "validateSources": 不是 "azurerender::VisibilityPrototype" 的成员
+..\..\src\render/VisibilityPrototype.hpp(20): note: 参见“azurerender::VisibilityPrototype”的声明
+..\..\tests\VisibilityPrototypeTests.cpp(33): error C3861: “validateSources”: 找不到标识符
+ninja: build stopped: subcommand failed.

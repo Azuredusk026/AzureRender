@@ -1,0 +1,19 @@
+#version 450
+layout(local_size_x=8,local_size_y=8) in;
+layout(binding=0) uniform sampler2D sourceDepth;
+layout(r32f,binding=1) uniform writeonly image2D targetDepth;
+layout(std140,binding=2) uniform Settings {uvec4 values;} settings;
+void main(){
+    ivec2 p=ivec2(gl_GlobalInvocationID.xy),extent=imageSize(targetDepth);
+    if(any(greaterThanEqual(p,extent)))return;
+    if(settings.values.x==0){imageStore(targetDepth,p,vec4(texelFetch(sourceDepth,p,0).r));return;}
+    ivec2 sourceExtent=textureSize(sourceDepth,0),base=p*2;
+    // Odd axes use overlapping three-tap coverage, as in the native reduction.
+    ivec2 taps=ivec2(2)+(sourceExtent&ivec2(1));
+    float value=texelFetch(sourceDepth,base,0).r;
+    for(int y=0;y<taps.y;++y)for(int x=0;x<taps.x;++x){
+        float next=texelFetch(sourceDepth,min(base+ivec2(x,y),sourceExtent-1),0).r;
+        value=settings.values.y==0?min(value,next):max(value,next);
+    }
+    imageStore(targetDepth,p,vec4(value));
+}

@@ -1,0 +1,1120 @@
+{
+  "basis": "Initial full Release batch plus targeted repair and newly registered tests; not a single clean full run",
+  "count": 277,
+  "passed": 274,
+  "failed": [
+    "AzureRender.VisualRegression",
+    "AzureRender.VisualRegressionLegacyDescriptors",
+    "AzureRender.VisualRegressionLegacySkinning"
+  ],
+  "tests": {
+    "AzureEngine.EvolutionCoverage": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.ScriptBindings": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.PerformanceBudget": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.GpuEnvironment": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.PerformanceProvenance": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.PlatformerLongRunRules": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.LongRunCleanup": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.MemoryResidency": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.VirtualAllocationTrace": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.VisibilityPrototype": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.VisibilityBenchmark": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.VisibilityGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.PipelineInspection": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ResourceAccessProfile": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.SkinningBatch": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ViewBatching": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.SkinningGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ShadowTileBoundsGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ShadowFilteringGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.SurfaceResponseGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ShaderModule": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ShaderComposition": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.ShaderModule": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.ShaderTypes": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.ShaderComposition": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.ProceduralGeometry": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.RigText": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.ProceduralProcess": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureUi.Localization": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRuntime.CameraSystem": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.PathTracing": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.TextureFiltering": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.SamplingGpu": {
+      "passed": true,
+      "evidence": "repair-ctest.log"
+    },
+    "AzureRender.SamplingHostGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.CharacterRepair": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.SurfaceConversion": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.SettingsOverlay": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.SettingRegistry": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.UiFoundation": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ConsoleLogModel": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.PanelContext": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.RenderView": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.Thumbnail": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.HotReload": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzurePlatform.ProcessRunner": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.PreviewHost": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.SelectionGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.GizmoGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.DevtoolsHost": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAI.ModelProtocol": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAI.Bridge": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ProposalHost": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ProposalController": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ProposalAdapter": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.Observation": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.Cli": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.ProceduralHost": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.SettingsHost": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ObservationHost": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.GenerationManifest": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.ValidationProtocol": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.Observation": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.EditService": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.EditTransaction": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.SystemComposition": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.SceneInspectorHost": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ModuleAssembly": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ComponentRegistry": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.MetadataGeneration": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.RegisteredComponentWorkflow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.RegisteredComponentHost": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ModuleBoundaryFixtures": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ModuleBoundaries": {
+      "passed": true,
+      "evidence": "repair-ctest.log"
+    },
+    "AzureEngine.GameUiRenderer": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.GameUi": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.Workspace": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.EditorWorkflow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.PresentationRuntime": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.GameplayPresentation": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ResourceFrameTrace": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ScriptBackendContract": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ScriptInterop": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ManagedModule.coreclr": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ManagedModule.nativeaot": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ManagedRuntime.coreclr": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ManagedRuntime.nativeaot": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ScriptBackendParity.lua": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ManagedWorkflows.coreclr": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ManagedWorkflows.nativeaot": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ScriptRuntime": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ThirdPerson": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.Locomotion": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.Interaction": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ScriptEntities": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.PlayableQuest": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.AnimationPose": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.MorphTargets": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.AnimationCurve": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ExpressionPose": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.SceneImport": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.SceneImportWorkflow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.BrowRegions": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.PhysicsInput": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.AssetLevel": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.Reflection": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.SceneVisibility": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.RepositoryAudit": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.SceneVisibilityGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.PublicGait": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.LocomotionPlayer": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.AnimationRetarget": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.SourceSkinRestore": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.GamePackageRules": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.PlayableDeliveryRules": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.BuildConfiguration": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.BuildProvenance": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.NativeWindow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.CharacterIntake": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.CharacterPreparation": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.WorkspaceGpu": {
+      "passed": true,
+      "evidence": "final-affected-ctest.log"
+    },
+    "AzureEngine.MaterialFixtureGpu": {
+      "passed": true,
+      "evidence": "repair-ctest.log"
+    },
+    "AzureEngine.IndependentAnimationGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.ThirdPersonPlayer": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.PlayablePlayer": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.OptionalRuntimeTrace": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.RuntimeSpawnGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.PresentationGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.EditorHost": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.EditorPlayable": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.MetaGenerator": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.LevelPlayer": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.PhysicsPlayer": {
+      "passed": true,
+      "evidence": "repair-ctest.log"
+    },
+    "AzureEngine.ScriptPlayer": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.Project": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.RuntimeLifecycle": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.EnvironmentAsset": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.RenderGraph": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.TransientResourcePool": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.LightBuffer": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.CascadedShadow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ClusteredLightGrid": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ComputePass": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.FrameTaskScheduler": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.SurfaceLifecycle": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.CommandLine": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.EditorCameraController": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.SelectionBounds": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.TransformEditing": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.AssetDeformation": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.GizmoController": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.NodeAddition": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.SelectionService": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ContentWorkflow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.TaskService": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.AssetWorkflow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.EditorInputRouter": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.EditorCameraService": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.DocumentBackup": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.DocumentActionGuard": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ContentGpu": {
+      "passed": true,
+      "evidence": "ui-repair-ctest.log"
+    },
+    "AzureEditor.NativeInputGpu": {
+      "passed": true,
+      "evidence": "native-final-ctest.log"
+    },
+    "AzureEditor.UsabilityGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.SceneContainerGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.DocumentGuardGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ContentScanWait": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.EditorSession": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.Ecs": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.PickMath": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.SceneModel": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.RuntimeDiagnostics": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.GpuCapabilityReport": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ResourceLocator": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ExtensionRegistry": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.UploadRing": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.NullRhi": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.NullRhiPass": {
+      "passed": true,
+      "evidence": "repair-ctest.log"
+    },
+    "AzureRender.SceneGraph": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.VisualRegression": {
+      "passed": false,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.VisualRegressionLegacyDescriptors": {
+      "passed": false,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.BlackholeComputeGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.CharacterIblComputeGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.CharacterSkinningComputeGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.R4AcceptanceRules": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.PlayerCli": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.BlackholeOptimizationRules": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.R3Comparison": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.R3TransparentComparison": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.AuditRegressions": {
+      "passed": true,
+      "evidence": "repair-ctest.log"
+    },
+    "AzureRender.VisualRegressionLegacySkinning": {
+      "passed": false,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.CharacterMorphComputeGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ClusteredLightingGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.ReleaseGateMissingBuild": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.InstallManifestRoundTrip": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ProjectFlow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ProductizationGpu": {
+      "passed": true,
+      "evidence": "ui-repair-ctest.log"
+    },
+    "AzureEditor.PropertyEditing": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ReferencePicker": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.PropertiesGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ContentOperations": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.TextureImportContract": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.TextureMaterialImport": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ContentEditingWorkflow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ContentTransactionsGpu": {
+      "passed": true,
+      "evidence": "repair-ctest.log"
+    },
+    "AzureEditor.ContentNavigation": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.AssetOpen": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.PrimitiveGenerator": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.Creation": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ContentDirectoryScale": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ContentNavigationGpu": {
+      "passed": true,
+      "evidence": "final-affected-ctest.log"
+    },
+    "AzureEditor.PanelDesignGpu": {
+      "passed": true,
+      "evidence": "final-affected-ctest.log"
+    },
+    "AzureEditor.PanelDiagnosticsGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.SelectionDesignGpu": {
+      "passed": true,
+      "evidence": "repair-ctest.log"
+    },
+    "AzureEditor.ViewportDesignGpu": {
+      "passed": true,
+      "evidence": "repair-ctest.log"
+    },
+    "AzureGame.PlatformerPhysics": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureGame.PlatformerFlow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureGame.PlatformerPhase4": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureGame.PlatformerPhase9": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureGame.PlatformerCompletion": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.LiveGameState": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.NodeAdditionGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.GeneralWorkflowGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureGame.GameSequence": {
+      "passed": true,
+      "evidence": "sequence-final-ctest.log"
+    },
+    "AzureGame.ExplorationDesign": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureGame.ExplorationCompletion": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.MaterialSlotEditing": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRender.Renderer2D": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.Scene2DDependencies": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.Scene2DWorkflow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ExtendedAssetWorkflow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRuntime.AudioDeviceShutdown": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureRuntime.AudioNotificationQueue": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.UsdaFormat": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.ExtendedImageFormats": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.Scene2D": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.MaterialGraphEditing": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.MaterialGraph": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.MaterialDocument": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ManagedAuthoring": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.PrefabAuthoring": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.DomainAuthoring": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.AuthoringWorkflow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.AnimationAuthoring": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.DocumentManager": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.AuthoringGpu": {
+      "passed": true,
+      "evidence": "repair-ctest.log"
+    },
+    "AzureEditor.PreviewSimulation": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.PhysicsAuthoring": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.SimulationGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.EditorProjection": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ViewportOverlays": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.ViewportNavigationGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.SceneGeometryGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.RendererResidency": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.FormatRegistry": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.ModelFormats": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.ImageFormats": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.TextureContainers": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.TextureContainersGpu": {
+      "passed": true,
+      "evidence": "ui-repair-ctest.log"
+    },
+    "AzureEditor.CompressedAudioGpu": {
+      "passed": true,
+      "evidence": "ui-repair-ctest.log"
+    },
+    "AzureAssets.CompressedAudioFormats": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.AudioFormats": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.AudioWorkflow": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.FirstBatchAuthoring": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.AssetTransfer": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEditor.AssetTransferGpu": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.UnicodeOutputsAzureRender": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureEngine.UnicodeOutputsAzurePlayer": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.AssetExchange": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureAssets.RoundTrip": {
+      "passed": true,
+      "evidence": "release-full-initial.log"
+    },
+    "AzureTools.ResourceManifest": {
+      "passed": true,
+      "evidence": "final-affected-ctest.log"
+    },
+    "AzureTools.ResourceReader": {
+      "passed": true,
+      "evidence": "final-affected-ctest.log"
+    },
+    "AzureTools.ResourceValidationRunner": {
+      "passed": true,
+      "evidence": "final-affected-ctest.log"
+    },
+    "AzureTools.ValidationAssetExport": {
+      "passed": true,
+      "evidence": "final-affected-ctest.log"
+    },
+    "AzureTools.SceneExchange": {
+      "passed": true,
+      "evidence": "final-affected-ctest.log"
+    },
+    "AzureTools.MaterialSemantics": {
+      "passed": true,
+      "evidence": "final-affected-ctest.log"
+    },
+    "AzureTools.EvolutionCoverage": {
+      "passed": true,
+      "evidence": "contracts-final-ctest.log"
+    },
+    "AzureTools.EngineContracts": {
+      "passed": true,
+      "evidence": "contracts-final-ctest.log"
+    },
+    "AzureEngine.ContractsSnapshot": {
+      "passed": true,
+      "evidence": "contracts-final-ctest.log"
+    }
+  }
+}

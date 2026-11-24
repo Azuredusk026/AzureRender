@@ -1,0 +1,22 @@
+[
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+  "--project",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+  "--width",
+  "2560",
+  "--height",
+  "1440",
+  "--qa-camera",
+  "scene",
+  "--qa-light",
+  "scene",
+  "--capture-frames",
+  "4",
+  "--capture-fps",
+  "24",
+  "--fixed-frame-step",
+  "--capture-dir",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint-after-image-prep\\frames",
+  "--runtime-report",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint-after-image-prep\\runtime.json"
+]

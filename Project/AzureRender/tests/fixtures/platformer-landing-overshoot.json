@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "seconds": 85.84399999999732,
+  "value": {
+    "audioStarts": 33,
+    "camera": [
+      0.24874995648860931,
+      2.745149612426758,
+      -2.217862606048584
+    ],
+    "cameraObstructed": false,
+    "characters": [
+      {
+        "grounded": true,
+        "node": "hero",
+        "playbackRate": 1.0,
+        "position": [
+          -6.1464584533155175e-09,
+          -5.960464477539063e-08,
+          -7.984439849853516
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "state": "idle",
+        "velocity": [
+          0.0,
+          -0.16350001096725464,
+          0.0
+        ]
+      }
+    ],
+    "checkpointActivated": false,
+    "collectibles": 8,
+    "doorOpen": false,
+    "focused": true,
+    "frame": 16402,
+    "interactionTarget": "",
+    "levelReference": "assets:/platformer/platformer.azurelevel",
+    "levelRevision": 6,
+    "loadError": "",
+    "loading": false,
+    "presentationErrors": [],
+    "rigidBodies": [
+      {
+        "node": "platform-3",
+        "position": [
+          -0.30000001192092896,
+          -0.20000000298023224,
+          -19.79132652282715
+        ]
+      },
+      {
+        "node": "platform-5",
+        "position": [
+          0.0,
+          0.0,
+          -33.15932083129883
+        ]
+      }
+    ],
+    "scriptErrors": [],
+    "target": [
+      -6.146457565137098e-09,
+      1.200000286102295,
+      -7.984438896179199
+    ],
+    "tasks": [
+      {
+        "collected": 2,
+        "completed": false,
+        "doorOpened": false,
+        "node": "hero",
+        "started": true
+      }
+    ]
+  },
+  "target": {
+    "id": "platform-1",
+    "x": 0,
+    "z": -7.033331394195557,
+    "top": 0,
+    "halfWidth": 3,
+    "halfLength": 2,
+    "gapRatio": 0.5
+  },
+  "originalError": {
+    "kind": "controller-error",
+    "seconds": 85.84399999999732,
+    "phase": "land",
+    "message": "Timed out in platform route phase: land"
+  }
+}

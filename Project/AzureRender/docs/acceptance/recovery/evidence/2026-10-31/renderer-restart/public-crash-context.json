@@ -1,0 +1,23 @@
+{
+  "dump": "C:\\Users\\admin\\AppData\\Local\\CrashDumps\\AzurePlayer.exe.34088.dmp",
+  "exceptionCode": "0xc0000005",
+  "exceptionAddress": "0x7ff762591c4b",
+  "thread": 4200,
+  "registers": {
+    "rax": "0x0",
+    "rcx": "0x38da56d3f8",
+    "rdx": "0x7ff7632c4c10",
+    "rbx": "0x0",
+    "rsp": "0x38da55c230",
+    "rbp": "0x0",
+    "rsi": "0x38da55d0b8",
+    "rdi": "0x38da55d0e0",
+    "rip": "0x7ff762591c4b"
+  },
+  "module": {
+    "base": 140700481683456,
+    "size": 21901312,
+    "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe"
+  },
+  "rva": "0x1e1c4b"
+}

@@ -1,0 +1,135 @@
+{
+  "status": "passed",
+  "programs": {
+    "release": "3c30e2fcbf0c3c29d86b6e177952c6f9aaa443726a9d8bd60f001e5f6fecaeac",
+    "debug": "74f7ada736a38e84a6a51f4600dbd3efe78ea01d1ea9168e12b5a484afb5111a"
+  },
+  "steps": [
+    {
+      "name": "backend_gpu-release",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\backend_gpu.py",
+        "--configuration",
+        "release"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 9.469420900000841
+    },
+    {
+      "name": "backend_gpu-debug",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\backend_gpu.py",
+        "--configuration",
+        "debug"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 7.571490999995149
+    },
+    {
+      "name": "supersample_gpu-release",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\supersample_gpu.py",
+        "--configuration",
+        "release"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 9.850702299998375
+    },
+    {
+      "name": "supersample_gpu-debug",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\supersample_gpu.py",
+        "--configuration",
+        "debug"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 18.788024299996323
+    },
+    {
+      "name": "related_gpu-release",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related_gpu.py",
+        "--configuration",
+        "release",
+        "--resume",
+        "--retry-suffix",
+        "retry4",
+        "--refresh",
+        "scene-fog",
+        "--refresh",
+        "fog-msaa"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 75.5602438999922
+    },
+    {
+      "name": "related_gpu-debug",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related_gpu.py",
+        "--configuration",
+        "debug",
+        "--resume",
+        "--retry-suffix",
+        "retry4",
+        "--refresh",
+        "scene-fog",
+        "--refresh",
+        "fog-msaa"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 131.2847000000038
+    },
+    {
+      "name": "view-gpu-debug-final",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\run_view_gpu.py",
+        "--configuration",
+        "debug",
+        "--suffix",
+        "debug-final"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 254.29881510000268
+    },
+    {
+      "name": "native-final",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\capture_native_final.py"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 1048.2463380000117
+    }
+  ]
+}

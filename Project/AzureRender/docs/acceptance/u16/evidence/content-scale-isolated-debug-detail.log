@@ -1,0 +1,21 @@
+Start testing: Oct 10 22:16 ?赤角∩?¯??～?米o㊣那℅?那㊣??
+----------------------------------------------------------
+194/218 Testing: AzureEditor.ContentDirectoryScale
+194/218 Test: AzureEditor.ContentDirectoryScale
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureContentDirectoryScaleTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+"AzureEditor.ContentDirectoryScale" start time: Oct 10 22:16 ?赤角∩?¯??～?米o㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+[1791641868364][info][editor][code=0] Opened scene: startup
+{"directoryResetMs":89.2848}
+{"assets":10000,"cachedP95Ms":0.0131,"firstSnapshotMs":2436.5178,"peakWorkingSetBytes":253812736,"samples":1800,"statistics":{"catalogBuilds":2,"directoryEnumerations":2,"refreshing":false,"snapshots":0},"warmup":300}
+<end of output>
+Test time =  69.68 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.ContentDirectoryScale" end time: Oct 10 22:18 ?赤角∩?¯??～?米o㊣那℅?那㊣??
+"AzureEditor.ContentDirectoryScale" time elapsed: 00:01:09
+----------------------------------------------------------
+
+End testing: Oct 10 22:18 ?赤角∩?¯??～?米o㊣那℅?那㊣??

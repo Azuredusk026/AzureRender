@@ -1,0 +1,612 @@
+{
+  "status": "isolated-sliding-range-kernel-qualified-native-admission-pending",
+  "sourceHead": "2c5c6ad",
+  "cpu": {
+    "status": "passed",
+    "seconds": 6.937999999965541,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+      "cl.exe",
+      "/nologo",
+      "/std:c++17",
+      "/EHsc",
+      "/O2",
+      "/MD",
+      "/FoD:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\query_tests.obj",
+      "/FeD:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\query_tests.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\query_tests.cpp",
+      "/link",
+      "/PDB:D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\query_tests.pdb"
+    ],
+    "output": "queries=50449 exact; fast=37718 reads=154659 directReads=273674 rejects=10\n"
+  },
+  "gpuBuild": {
+    "rows": [
+      {
+        "config": "release",
+        "seconds": 1.5929999999934807,
+        "compile": [
+          "cl.exe",
+          "-DAZURERENDER_VERSION=\"0.1.0-rc1\"",
+          "-DGLFW_INCLUDE_VULKAN",
+          "-DIMATH_DLL",
+          "-DOPENEXR_DLL",
+          "-ID:\\Projects\\FYP\\Project\\AzureRender\\src",
+          "-external:ID:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\include",
+          "-external:ID:\\Tools\\VulkanSDK\\1.4.350.0\\Include",
+          "-external:ID:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\include\\vma",
+          "-external:ID:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\include\\OpenEXR",
+          "-external:ID:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\include\\Imath",
+          "-external:W0",
+          "/DWIN32",
+          "/D_WINDOWS",
+          "/EHsc",
+          "/O2",
+          "/Ob2",
+          "/DNDEBUG",
+          "-std:c++17",
+          "-MD",
+          "/EHsc",
+          "/utf-8",
+          "/W4",
+          "/WX",
+          "/permissive-",
+          "/wd4127",
+          "/wd4456",
+          "/wd4996",
+          "/ID:\\Projects\\FYP\\Project\\AzureRender\\tests",
+          "/ID:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b",
+          "/c",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\gpu_tests.cpp",
+          "/FoD:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\release\\gpu_tests.obj",
+          "/FdD:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\release\\compile.pdb"
+        ],
+        "link": [
+          "link.exe",
+          "/machine:x64",
+          "/INCREMENTAL:NO",
+          "/subsystem:console",
+          "/OUT:D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\release\\gpu_tests.exe",
+          "/PDB:D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\release\\gpu_tests.pdb",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\release\\gpu_tests.obj",
+          "AzureRenderCore.lib",
+          "AzureFoundation.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\zstd.lib",
+          "D:\\Tools\\VulkanSDK\\1.4.350.0\\Lib\\vulkan-1.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\rmlui_debugger.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\rmlui.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\OpenEXR-3_4.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\IlmThread-3_4.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\Iex-3_4.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\OpenEXRCore-3_4.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\Imath-3_2.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\pugixml.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\opusfile.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\opus.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\libmp3lame.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\DirectXTex.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\ktx.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\assimp-vc143-mt.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\tiff.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\libwebp.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\libsharpyuv.lib",
+          "shlwapi.lib",
+          "windowscodecs.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\z.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\FLAC.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\vorbisenc.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\vorbis.lib",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\lib\\ogg.lib",
+          "winmm.lib",
+          "uuid.lib",
+          "mfplat.lib",
+          "mfreadwrite.lib",
+          "mfuuid.lib",
+          "ole32.lib",
+          "propsys.lib",
+          "kernel32.lib",
+          "user32.lib",
+          "gdi32.lib",
+          "winspool.lib",
+          "shell32.lib",
+          "ole32.lib",
+          "oleaut32.lib",
+          "uuid.lib",
+          "comdlg32.lib",
+          "advapi32.lib"
+        ],
+        "executableSha256": "d81c0da0b5580bffd1bc36b9924f27d3ffc044a5a8a2b5113a270ae37de80046"
+      },
+      {
+        "config": "debug",
+        "seconds": 1.5,
+        "compile": [
+          "cl.exe",
+          "-DAZURERENDER_ENABLE_VALIDATION=1",
+          "-DAZURERENDER_VERSION=\"0.1.0-rc1\"",
+          "-DGLFW_INCLUDE_VULKAN",
+          "-DIMATH_DLL",
+          "-DOPENEXR_DLL",
+          "-ID:\\Projects\\FYP\\Project\\AzureRender\\src",
+          "-external:ID:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\include",
+          "-external:ID:\\Tools\\VulkanSDK\\1.4.350.0\\Include",
+          "-external:ID:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\include\\vma",
+          "-external:ID:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\include\\OpenEXR",
+          "-external:ID:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed\\x64-windows\\include\\Imath",
+          "-external:W0",
+          "/DWIN32",
+          "/D_WINDOWS",
+          "/EHsc",
+          "/Zi",
+          "/Ob0",
+          "/Od",
+          "/RTC1",
+          "-std:c++17",
+          "-MDd",
+          "/EHsc",
+          "/utf-8",
+          "/W4",
+          "/WX",
+          "/permissive-",
+          "/wd4127",
+          "/wd4456",
+          "/wd4996",
+          "/ID:\\Projects\\FYP\\Project\\AzureRender\\tests",
+          "/ID:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b",
+          "/c",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\gpu_tests.cpp",
+          "/FoD:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\debug\\gpu_tests.obj",
+          "/FdD:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\debug\\compile.pdb"
+        ],
+        "link": [
+          "link.exe",
+          "/machine:x64",
+          "/debug",
+          "/INCREMENTAL",
+          "/subsystem:console",
+          "/OUT:D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\debug\\gpu_tests.exe",
+          "/PDB:D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\debug\\gpu_tests.pdb",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\debug\\gpu_tests.obj",
+          "AzureRenderCore.lib",
+          "AzureFoundation.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\zstd.lib",
+          "D:\\Tools\\VulkanSDK\\1.4.350.0\\Lib\\vulkan-1.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\rmlui_debugger.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\rmlui.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\OpenEXR-3_4_d.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\IlmThread-3_4_d.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\Iex-3_4_d.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\OpenEXRCore-3_4_d.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\Imath-3_2_d.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\pugixml.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\opusfile.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\opus.lib",
+          "vcpkg_installed\\x64-windows\\lib\\libmp3lame.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\DirectXTex.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\ktx.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\assimp-vc143-mtd.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\tiffd.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\libwebp.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\libsharpyuv.lib",
+          "shlwapi.lib",
+          "windowscodecs.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\zd.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\FLAC.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\vorbisenc.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\vorbis.lib",
+          "vcpkg_installed\\x64-windows\\debug\\lib\\ogg.lib",
+          "winmm.lib",
+          "uuid.lib",
+          "mfplat.lib",
+          "mfreadwrite.lib",
+          "mfuuid.lib",
+          "ole32.lib",
+          "propsys.lib",
+          "kernel32.lib",
+          "user32.lib",
+          "gdi32.lib",
+          "winspool.lib",
+          "shell32.lib",
+          "ole32.lib",
+          "oleaut32.lib",
+          "uuid.lib",
+          "comdlg32.lib",
+          "advapi32.lib"
+        ],
+        "executableSha256": "1f181d9141b1cad8a06beb8435e10a241b57d64472f0722f0b6ba3040ba23614"
+      }
+    ],
+    "shaderSha256": "61e5ecd4aaf7eeeb08714857697c97c777acc1886e380545bb3ecde4e1d21fe6",
+    "productionSourceUnchanged": true
+  },
+  "gpuNumeric": {
+    "status": "passed",
+    "rows": [
+      {
+        "config": "release",
+        "device": "nvidia",
+        "seconds": 7.063000000023749,
+        "grids": 4,
+        "queryModes": 2,
+        "validationClean": true
+      },
+      {
+        "config": "release",
+        "device": "intel",
+        "seconds": 1.8439999999827705,
+        "grids": 4,
+        "queryModes": 2,
+        "validationClean": true
+      },
+      {
+        "config": "debug",
+        "device": "nvidia",
+        "seconds": 5.717999999993481,
+        "grids": 4,
+        "queryModes": 2,
+        "validationClean": true
+      },
+      {
+        "config": "debug",
+        "device": "intel",
+        "seconds": 2.0160000000032596,
+        "grids": 4,
+        "queryModes": 2,
+        "validationClean": true
+      }
+    ],
+    "privateSourceFingerprints": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\gpu_tests.cpp": "78cdaa53a54ab1ba3212c522ab17a1b16e11539b42fe4bd484b7c441d780ef39",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\private_fixture.hpp": "47235951c2a7a0db590e7f53850a2fff4c47cf8abad2227971e550f00507345d",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\query_test.comp": "d312821b95b8fc2c2e11b162da47fd49957c227c947bd4050bcdb4afd2ec14eb",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\shadow_range_query.glsl": "a168dc07556be02e8b39300aa43a7e9d6703d37b2fa1c49301da56e96099f734",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-142925-sliding-shadow-range-prototype-c4f77b\\shadow_range_query.hpp": "31d77bacd6f80f8d38ffbaf11b21faff10c91b78bc21be20dc086e9afbf3c897"
+    },
+    "productionSourceUnchanged": true
+  },
+  "timing": {
+    "status": "isolated-query-timing-recorded",
+    "rows": [
+      {
+        "device": "nvidia",
+        "seconds": 2.0310000000172295,
+        "blocks": [
+          {
+            "block": 0,
+            "mode": "direct",
+            "milliseconds": 8.45626,
+            "repeats": 64
+          },
+          {
+            "block": 1,
+            "mode": "table",
+            "milliseconds": 5.30435,
+            "repeats": 64
+          },
+          {
+            "block": 2,
+            "mode": "table",
+            "milliseconds": 5.30227,
+            "repeats": 64
+          },
+          {
+            "block": 3,
+            "mode": "direct",
+            "milliseconds": 8.45619,
+            "repeats": 64
+          }
+        ],
+        "queriesPerDispatch": 262144,
+        "buildMilliseconds": 0.019424,
+        "additionalTableBytes": 4194304,
+        "referenceMillisecondsPerDispatch": 0.132128515625,
+        "tableMillisecondsPerDispatch": 0.08286421875,
+        "queryReduction": 0.37285136097963334,
+        "referenceDrift": 8.277925433737001e-06,
+        "validationEnabled": false
+      },
+      {
+        "device": "intel",
+        "seconds": 2.905999999959022,
+        "blocks": [
+          {
+            "block": 0,
+            "mode": "direct",
+            "milliseconds": 75.2021,
+            "repeats": 64
+          },
+          {
+            "block": 1,
+            "mode": "table",
+            "milliseconds": 30.194,
+            "repeats": 64
+          },
+          {
+            "block": 2,
+            "mode": "table",
+            "milliseconds": 29.6835,
+            "repeats": 64
+          },
+          {
+            "block": 3,
+            "mode": "direct",
+            "milliseconds": 71.1404,
+            "repeats": 64
+          }
+        ],
+        "queriesPerDispatch": 262144,
+        "buildMilliseconds": 0.324323,
+        "additionalTableBytes": 4194304,
+        "referenceMillisecondsPerDispatch": 1.14330078125,
+        "tableMillisecondsPerDispatch": 0.46779296875,
+        "queryReduction": 0.5908399815501307,
+        "referenceDrift": 0.05550950680766014,
+        "validationEnabled": false
+      }
+    ],
+    "productionSourceUnchanged": true,
+    "nativeOptimizationAdmitted": false
+  },
+  "grids": [
+    [
+      1,
+      1
+    ],
+    [
+      7,
+      9
+    ],
+    [
+      64,
+      61
+    ],
+    [
+      512,
+      512
+    ]
+  ],
+  "queriesPerNumericBatch": 286720,
+  "rangePairsPerBatch": 798336,
+  "floatComponentsPerBatch": 2743552,
+  "metadataWordsPerBatch": 1146880,
+  "totalFloatComponents": 10974208,
+  "totalMetadataWords": 4587520,
+  "privateFixtureValidationSwitchOnly": true,
+  "protectedFilesUnchanged": 13,
+  "productionSourceChanged": false,
+  "nativeBatchAdmitted": false,
+  "formalPerformancePassed": false,
+  "decision": "Keep isolated: query microbenchmark does not establish its fraction of actual material shading or whole-frame net benefit",
+  "archive": {
+    "file": "validation.zip",
+    "bytes": 333931,
+    "sha256": "10517e1df1ee9e0fdf9cbb2fcc96594854edc704822326d2b92e35b45accebcc"
+  },
+  "members": [
+    {
+      "path": "budget.json",
+      "bytes": 437,
+      "sha256": "37f4926e890b7fc248337ebeeeb748c8e9093776c438d582a0cb612afddb79d1"
+    },
+    {
+      "path": "build_gpu.py",
+      "bytes": 2002,
+      "sha256": "bd2ee7b7c30d945e5ebb24bb6223c6986af947c3314b06ca6b32aa4806f37e0e"
+    },
+    {
+      "path": "cpu-build.log",
+      "bytes": 17,
+      "sha256": "bcf8ccd459ca63df6e1511e5100e81d67ce50c55e99493ead877f37236d79943"
+    },
+    {
+      "path": "cpu-results.json",
+      "bytes": 887,
+      "sha256": "eb103e61f12a9e75fe54383e496d71392903cff9d8209030317d07514b40d3e6"
+    },
+    {
+      "path": "cpu-tests.log",
+      "bytes": 76,
+      "sha256": "3a49e87f52e150dd2fb7fc162a1307409791458f5660f91b382008777c2a336f"
+    },
+    {
+      "path": "cpu.py",
+      "bytes": 1003,
+      "sha256": "5ab46a96123454c61c5fcd41ca09f9832bbbc885a52fe5c4ebb92ab44dd85602"
+    },
+    {
+      "path": "debug-gpu-build.log",
+      "bytes": 264,
+      "sha256": "30b12f6ff74d42f86d5fcdfab4729ff88006ea771a1bfcbf070f89374b5e2917"
+    },
+    {
+      "path": "debug-intel-numeric.log",
+      "bytes": 599,
+      "sha256": "8ede4e3234b63e29ca9f27653300bb444eaab3eceda7fb4f2c37f476b17dd6eb"
+    },
+    {
+      "path": "debug-nvidia-numeric.log",
+      "bytes": 543,
+      "sha256": "2f3d99e5fa1235c3f09d8bcae25abdc2ac4f2b18082593ac183f964eba029533"
+    },
+    {
+      "path": "first-queue-timeout.json",
+      "bytes": 146,
+      "sha256": "f1fc283783ffce4c0941f0f383ed8b906bb6de30d0896a93c44fe3b30da94bb8"
+    },
+    {
+      "path": "gpu-build-results.json",
+      "bytes": 10870,
+      "sha256": "682fbac41db688dbc6bf6c12e77745f6eec757873c139389c128cbc001064e30"
+    },
+    {
+      "path": "gpu-interface-red.json",
+      "bytes": 547,
+      "sha256": "0bb2acd007a7b1ebceffa99488a38f4c8dfc468c6622addba26d417466b01882"
+    },
+    {
+      "path": "gpu-interface-red.log",
+      "bytes": 236,
+      "sha256": "08cc391636ebc3eebee35985444edd1a04e75a334db613e22f1ea06e94b208f9"
+    },
+    {
+      "path": "gpu-numeric-results.json",
+      "bytes": 1863,
+      "sha256": "7c5d3e0bb299bae0382546757ee3ff64512568dbf7dfc776e4f7bccbf8195206"
+    },
+    {
+      "path": "gpu_tests.cpp",
+      "bytes": 10122,
+      "sha256": "78cdaa53a54ab1ba3212c522ab17a1b16e11539b42fe4bd484b7c441d780ef39"
+    },
+    {
+      "path": "intel-timing-environment.json",
+      "bytes": 283624,
+      "sha256": "f89cd4a5615d13499b9350cfe4d54d0a681c90ba9956239172fd28ee96f29674"
+    },
+    {
+      "path": "intel-timing.log",
+      "bytes": 464,
+      "sha256": "aa5582325caae0e962de062356c23d7dccbdd65adfcbf25f4698c8e55f816fda"
+    },
+    {
+      "path": "nvidia-timing-environment.json",
+      "bytes": 212731,
+      "sha256": "00411394ad6c069315ab12a885fbe7a7fd16a3651619a245485bbc5f7dc84607"
+    },
+    {
+      "path": "nvidia-timing.log",
+      "bytes": 451,
+      "sha256": "0c375510d0f009b36abdb37aa5340b7e860571742a906fbe773aaa07fbe74989"
+    },
+    {
+      "path": "overflow-red.log",
+      "bytes": 450,
+      "sha256": "897445cc55c28f05c1a4bc27636aa5a4b5da024a4c9bdc1924766bbd661a7c5a"
+    },
+    {
+      "path": "private_fixture.hpp",
+      "bytes": 11808,
+      "sha256": "47235951c2a7a0db590e7f53850a2fff4c47cf8abad2227971e550f00507345d"
+    },
+    {
+      "path": "process.log",
+      "bytes": 915,
+      "sha256": "eaa543550025dd6aed9ffabe2c62ca7f5b5aec5a486e5afe4c2c87a79d532329"
+    },
+    {
+      "path": "qualify_gpu.py",
+      "bytes": 1886,
+      "sha256": "f2aabcd2d6954b692e58999c63ab162293752011e0fe570fbe34e4eb43469538"
+    },
+    {
+      "path": "query_test.comp",
+      "bytes": 1594,
+      "sha256": "d312821b95b8fc2c2e11b162da47fd49957c227c947bd4050bcdb4afd2ec14eb"
+    },
+    {
+      "path": "query_test.comp.spv",
+      "bytes": 10576,
+      "sha256": "61e5ecd4aaf7eeeb08714857697c97c777acc1886e380545bb3ecde4e1d21fe6"
+    },
+    {
+      "path": "query_tests.cpp",
+      "bytes": 3934,
+      "sha256": "556c8f1b04e2bd50cf58655c8dba40f22b3f7746275fa75616ae2ecde2cc393e"
+    },
+    {
+      "path": "queue-result.json",
+      "bytes": 146,
+      "sha256": "f1fc283783ffce4c0941f0f383ed8b906bb6de30d0896a93c44fe3b30da94bb8"
+    },
+    {
+      "path": "queue_gpu.py",
+      "bytes": 1062,
+      "sha256": "1c9f70d64b8832d958f94d4b39d9c4e7b35e47440efea4ab381b1f30fff9cbfa"
+    },
+    {
+      "path": "red.json",
+      "bytes": 371,
+      "sha256": "3cbf62f7fcba58911a823fd3b75507db0dcd03003ac35b9a80a04916cf5e0c47"
+    },
+    {
+      "path": "red.log",
+      "bytes": 236,
+      "sha256": "45da2cd45d3e5e14dea4d668150683a5fb8fe35e98afff0a8414148dd1089128"
+    },
+    {
+      "path": "red.py",
+      "bytes": 788,
+      "sha256": "920e7b8a9bc9ff2c33dc63951731ce2f2e775d444eb24fdb790acf0f59c6a2d9"
+    },
+    {
+      "path": "reference-build-options.json",
+      "bytes": 8186,
+      "sha256": "aeec4ec2b70c7f7b0c1239bf34ef0c35500fbcfd9942375e5903dcdfca7132ed"
+    },
+    {
+      "path": "release-gpu-build.log",
+      "bytes": 264,
+      "sha256": "30b12f6ff74d42f86d5fcdfab4729ff88006ea771a1bfcbf070f89374b5e2917"
+    },
+    {
+      "path": "release-intel-numeric.log",
+      "bytes": 599,
+      "sha256": "8ede4e3234b63e29ca9f27653300bb444eaab3eceda7fb4f2c37f476b17dd6eb"
+    },
+    {
+      "path": "release-nvidia-numeric.log",
+      "bytes": 543,
+      "sha256": "2f3d99e5fa1235c3f09d8bcae25abdc2ac4f2b18082593ac183f964eba029533"
+    },
+    {
+      "path": "shader-build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "shadow_range_query.glsl",
+      "bytes": 775,
+      "sha256": "a168dc07556be02e8b39300aa43a7e9d6703d37b2fa1c49301da56e96099f734"
+    },
+    {
+      "path": "shadow_range_query.hpp",
+      "bytes": 1643,
+      "sha256": "31d77bacd6f80f8d38ffbaf11b21faff10c91b78bc21be20dc086e9afbf3c897"
+    },
+    {
+      "path": "timing-results.json",
+      "bytes": 2151,
+      "sha256": "fd060206b834c6e8b8113d0494bbc4b1137f4185d5e5ebd9f0bd4ffd65fb29c9"
+    },
+    {
+      "path": "timing-startup-environment.json",
+      "bytes": 425602,
+      "sha256": "31328df858ea660f303d7557fc0f5ece6e3346336ce49e78aa281b21f59aa824"
+    },
+    {
+      "path": "timing.py",
+      "bytes": 2729,
+      "sha256": "fbdd4187bd5b9e1cc721543f7ddac38b7a89ac83f9719c3428b21b8f0abf85fc"
+    },
+    {
+      "path": "protected-files.json",
+      "bytes": 1518,
+      "sha256": "b2754b86d468b2594c906810b5681f8abbe6132d4f36f3872c3523443159f876"
+    },
+    {
+      "path": "original-fixture-sha256.txt",
+      "bytes": 65,
+      "sha256": "0b85df6f56efa0399225010ee028eb5dd43c835661933bd9efb6cb439759319e"
+    },
+    {
+      "path": "release-runtime-build-provenance.json",
+      "bytes": 415953,
+      "sha256": "5932925ffced3fce1b57c6a4d232bb11967b5a9f0e0d569a52c1da23f7faf732"
+    },
+    {
+      "path": "debug-runtime-build-provenance.json",
+      "bytes": 391847,
+      "sha256": "9a425e5f19ee56f5351bbf3ea4babbdb8ab8cbd3c56b63dea75b506aef589af5"
+    }
+  ]
+}

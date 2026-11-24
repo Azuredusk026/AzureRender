@@ -1,0 +1,302 @@
+{
+  "status": "gpu-and-thermal-gates-failed",
+  "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md#最高风扇档复验",
+  "dispatch": [
+    961,
+    "joint-80w-verified-maximum-fan",
+    "failed",
+    8
+  ],
+  "measurements": {
+    "scope": "isolated-nonlocal-material-images-1080p60",
+    "nonlocalAllocations": 224,
+    "nonlocalBytes": 1588625408,
+    "source": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+    "driver": "595.79",
+    "warmup": 300,
+    "frames": 1800,
+    "gpuPowerLimitWatts": [
+      80.0
+    ],
+    "environmentFailures": [
+      "run observation 93: driver relative thermal headroom is insufficient",
+      "run observation 93: software thermal slowdown is active",
+      "run observation 94: software thermal slowdown is active",
+      "run observation 95: driver relative thermal headroom is insufficient",
+      "run observation 95: software thermal slowdown is active"
+    ],
+    "peakTemperatureC": 87.0,
+    "observationCount": 103,
+    "softwareThermalSlowdownObservations": 3,
+    "timings": {
+      "frameMs": {
+        "mean": 16.12564248888889,
+        "p95": 16.9475952,
+        "peak": 18.629632
+      },
+      "sceneMs": {
+        "mean": 14.13453312,
+        "p95": 14.8246016,
+        "peak": 16.113664
+      },
+      "shadowMs": {
+        "mean": 1.7141150933333331,
+        "p95": 2.12,
+        "peak": 2.224
+      },
+      "postProcessMs": {
+        "mean": 0.27699427555555556,
+        "p95": 0.289792,
+        "peak": 0.31744
+      },
+      "cpuWorkMs": {
+        "mean": 4.441962944444444,
+        "p95": 5.4585399999999655,
+        "peak": 13.87479999999998
+      }
+    },
+    "deviceLocalPeakBytes": 1442503488,
+    "workingSetPeakBytes": 2044051456,
+    "allocatorZero": true,
+    "gates": {
+      "fixed80W": true,
+      "thermalAndAC": false,
+      "gpuP95": false,
+      "cpuP95": true,
+      "deviceLocal": true,
+      "workingSet": true
+    },
+    "windows": [
+      {
+        "frameMs": {
+          "mean": 15.975335360000003,
+          "p95": 16.2830944,
+          "peak": 16.587456
+        },
+        "sceneMs": {
+          "mean": 14.02353664,
+          "p95": 14.256332800000001,
+          "peak": 14.497792
+        },
+        "shadowMs": {
+          "mean": 1.6773496533333332,
+          "p95": 1.6783376,
+          "peak": 2.130048
+        },
+        "postProcessMs": {
+          "mean": 0.2744490666666667,
+          "p95": 0.278528,
+          "peak": 0.285696
+        },
+        "cpuWorkMs": {
+          "mean": 4.294274999999999,
+          "p95": 4.964509999999991,
+          "peak": 10.429500000000008
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 15.930527253333336,
+          "p95": 16.398628799999997,
+          "peak": 16.87648
+        },
+        "sceneMs": {
+          "mean": 13.962731519999998,
+          "p95": 14.3180288,
+          "peak": 14.498816
+        },
+        "shadowMs": {
+          "mean": 1.6938620799999997,
+          "p95": 2.0884128,
+          "peak": 2.1488
+        },
+        "postProcessMs": {
+          "mean": 0.2739336533333333,
+          "p95": 0.2806272,
+          "peak": 0.285696
+        },
+        "cpuWorkMs": {
+          "mean": 4.2898256666666645,
+          "p95": 5.118989999999951,
+          "peak": 12.820899999999948
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 16.065490986666667,
+          "p95": 16.3417024,
+          "peak": 16.536
+        },
+        "sceneMs": {
+          "mean": 14.112006826666665,
+          "p95": 14.3729664,
+          "peak": 14.560256
+        },
+        "shadowMs": {
+          "mean": 1.6775434666666669,
+          "p95": 1.6821936000000002,
+          "peak": 2.116032
+        },
+        "postProcessMs": {
+          "mean": 0.2759406933333333,
+          "p95": 0.2816,
+          "peak": 0.283648
+        },
+        "cpuWorkMs": {
+          "mean": 4.242710666666666,
+          "p95": 4.9687100000000015,
+          "peak": 7.371299999999947
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 16.099862506666664,
+          "p95": 16.9051184,
+          "peak": 18.629632
+        },
+        "sceneMs": {
+          "mean": 14.084823039999998,
+          "p95": 14.5256448,
+          "peak": 16.113664
+        },
+        "shadowMs": {
+          "mean": 1.7389076266666665,
+          "p95": 2.1416832,
+          "peak": 2.224
+        },
+        "postProcessMs": {
+          "mean": 0.27613184,
+          "p95": 0.284672,
+          "peak": 0.31744
+        },
+        "cpuWorkMs": {
+          "mean": 4.390425666666666,
+          "p95": 5.1835949999999995,
+          "peak": 13.87479999999998
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 16.229342186666667,
+          "p95": 17.1660912,
+          "peak": 17.65104
+        },
+        "sceneMs": {
+          "mean": 14.21348864,
+          "p95": 14.9275136,
+          "peak": 15.209472
+        },
+        "shadowMs": {
+          "mean": 1.7370183466666667,
+          "p95": 2.1272144,
+          "peak": 2.170208
+        },
+        "postProcessMs": {
+          "mean": 0.2788352,
+          "p95": 0.292864,
+          "peak": 0.297984
+        },
+        "cpuWorkMs": {
+          "mean": 4.769341333333333,
+          "p95": 6.177754999999969,
+          "peak": 10.508799999999981
+        }
+      },
+      {
+        "frameMs": {
+          "mean": 16.45329664,
+          "p95": 17.2647232,
+          "peak": 17.780768
+        },
+        "sceneMs": {
+          "mean": 14.410612053333335,
+          "p95": 15.0775296,
+          "peak": 15.32416
+        },
+        "shadowMs": {
+          "mean": 1.7600093866666664,
+          "p95": 2.1399728000000002,
+          "peak": 2.172192
+        },
+        "postProcessMs": {
+          "mean": 0.2826752,
+          "p95": 0.294912,
+          "peak": 0.299008
+        },
+        "cpuWorkMs": {
+          "mean": 4.665199333333334,
+          "p95": 5.556015000000008,
+          "peak": 11.94770000000002
+        }
+      }
+    ]
+  },
+  "product": {
+    "measurementPath": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261114-034546-nr-joint-nonlocal-80w-timing-c8b31a\\measure_overlay.py",
+    "measurementSha256": "208e52e3c974e5d38f5f0dd33e46776de2206de6c5b113003e45366a59d82ef3",
+    "sourceCommit": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+    "placementReceiptSha256": "b8f57806e16929dc278bf406c53da3f9cd1f076ad1814dfbb4eb8b570adc7447",
+    "playerPath": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261114-032038-nr-joint-nonlocal-image-candidate-92047b\\AzurePlayer.exe",
+    "playerSha256": "15df1b4471f3592d038ef504b0ec32ca7a3cc9e71a86a03f240c5873e795312c",
+    "frozenArchiveSha256": "585d50ab8d4167f41617bc7db01f304f7c0525370d6f8e41404045e494421ffd",
+    "frozenInputs": 1729,
+    "sourceResultsSha256": "42fc8dba4c800981b82da5640bfb87273d0e365b5fc2cb894a4a06b129452cb5",
+    "displayDriver": "595.79",
+    "gpuPowerLimitWatts": 80.0,
+    "powerMode": "balanced",
+    "fanMode": "maximum",
+    "minimumObservedFanRpm": 5600,
+    "warmupFrames": 300,
+    "measuredFrames": 1800,
+    "gates": {
+      "gpuP95Ms": 16.6,
+      "cpuWorkP95Ms": 8,
+      "deviceLocalBytes": 1610612736,
+      "workingSetBytes": 2147483648,
+      "softwareThermalSlowdownSamples": 0
+    }
+  },
+  "startingTemperaturesC": [
+    49.0,
+    49.0,
+    48.0
+  ],
+  "beforeSustainedLoadC": 45.0,
+  "softwareThermalSecondsAfterFirstLoadedSample": [
+    28.401107600002433,
+    30.61518530000467,
+    32.80241310001293
+  ],
+  "restored": {
+    "time": "2026-11-15T09:16:29.3000708+08:00",
+    "rpm": 6000,
+    "balanced": true,
+    "automatic": true,
+    "maximum": false
+  },
+  "archive": {
+    "sha256": "dce9d24deed9b040685f8313fde87a777c4747df653ad8766c84d376420e9582",
+    "files": {
+      "command.json": "a4e53dc2a9e8860e3c38142525021efe083d66f30db2c070df50f10dc98fe43a",
+      "cooling-control-preflight.json": "9cdfe1914d2fa01aeafee97ce4013bdfb9ffaa64678a2a03e257ad90ac464a43",
+      "cooling-control-result-identity.json": "84e82065efe4fb37c6cc607aafcdd1ebab4e2cd18cb313a75de40acfa04e14e3",
+      "environment.json": "66090ffcd518963be02193ad5246b34df6d4522cf519954f1682acfe399879af",
+      "fan-before.json": "432de0865b8b5b8829efb9ae6e8f7e282f395d94d106c6102f9ce1cabc1223fe",
+      "fan-observations.json": "6a27ea6956430b4257105580dd088df0a9340ad0bb97369f44d5f6e883fcdd82",
+      "fan-ready.json": "222d02c6e47ffbb514e987642fc7f1a0499596ba12cacbb78760f2b5fcc98ca8",
+      "fan-restored.json": "aecd3b890bd9ac3f57a28af35e61685b679cc3779387c8bc64119b3002036a69",
+      "measurement.log": "413cdf57b2558eca04733e4bf7cba0a5e1e4ec6e51be55909fd66669231a2386",
+      "measurement.stderr.log": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "measure_overlay.py": "208e52e3c974e5d38f5f0dd33e46776de2206de6c5b113003e45366a59d82ef3",
+      "omen-performance-controls.json": "fa5baf9dbb7d32f40be6ebff75187c744785e58de88cb1230796a7261325c420",
+      "player.log": "348def81d04936a2df15afbd7a5ec4e94b602627500ae82d0e29228b22169b37",
+      "prepare_max_fan_replay.py": "7c8964af8e77a5f5370fe63b5deeeb41d37dee3774adb5fa500c9ad6dafb71aa",
+      "process-memory.json": "353ecad937eab2a3e39d4885c0e139ca01347b75553afb835d335834309424ec",
+      "process.log": "ccbb8899f5df6455b4885963fadff32932c75dfd8cf42b38718ac86128042e44",
+      "results.json": "13afbceb2c191263a586aa79a62844231167f9c354074fe81e6ef5348f6e9e2b",
+      "run_max_fan_measurement.ps1": "f95893957e3ac428065c70f030bd0716617e6ae95d60bc0010a5825a0dcede73",
+      "timing.csv": "c3e9d3332f020daf1adaddb6828194057a328de768c97dbbe3926fe3962def21",
+      "timing.json": "065994ad026a80d58c6102ec85115b895085b5afe708ccab0e5d88938e13f595"
+    }
+  }
+}

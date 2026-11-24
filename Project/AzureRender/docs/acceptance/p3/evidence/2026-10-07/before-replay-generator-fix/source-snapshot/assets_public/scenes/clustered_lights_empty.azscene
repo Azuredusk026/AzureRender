@@ -1,0 +1,24 @@
+AzureRender Scene v1
+schemaVersion 3
+renderSettingsVersion 7
+sceneId "r2-clustered-lights-empty"
+resourceCount 1
+resource "asset-0" "gltf" "assets_public/test_model.gltf"
+nodeCount 1
+node "root" "Public character" "" "asset-0"
+visible true
+transform 0 0 0 0 0 0 1 1 1
+prefab "" ""
+lightCount 0
+showcasePreset 0
+styleMaskStrength 1
+diffuseBandThreshold 0.4
+shadowMaximumFilterRadiusTexels 8
+innerOutlineEnabled true
+outlineStrength 0.4
+gradeExposureEv 0
+characterBackgroundEnabled true
+characterPlatformEnabled true
+blackholeQuality cinematic
+blackholeCamera front
+sceneRenderer character

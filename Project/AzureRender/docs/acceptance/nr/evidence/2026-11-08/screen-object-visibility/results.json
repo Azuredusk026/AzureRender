@@ -1,0 +1,1322 @@
+{
+  "schemaVersion": 1,
+  "status": "public-mechanism-verified-calibration-pending",
+  "sourceBase": "093410c",
+  "builds": [
+    {
+      "configuration": "Release",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--test-target",
+        "AzureScreenObjectVisibilityTests",
+        "--test-target",
+        "AzureScreenObjectVisibilityGpuTests"
+      ],
+      "exitCode": 0,
+      "seconds": 9.875
+    },
+    {
+      "configuration": "Debug",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "--config",
+        "Debug",
+        "--test-target",
+        "AzureScreenObjectVisibilityTests",
+        "--test-target",
+        "AzureScreenObjectVisibilityGpuTests"
+      ],
+      "exitCode": 0,
+      "seconds": 9.640999999988708
+    }
+  ],
+  "scopedChecks": [
+    {
+      "configuration": "Release",
+      "device": "contract",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender.ScreenObjectVisibility$",
+        "-V",
+        "--timeout",
+        "120",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-045252-screen-object-visibility-ca2907\\release-contract.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 1.1719999999913853
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender.ScreenObjectVisibilityGpu$",
+        "-V",
+        "--timeout",
+        "120",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-045252-screen-object-visibility-ca2907\\release-nvidia.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 0.8439999999973224
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender.ScreenObjectVisibilityGpu$",
+        "-V",
+        "--timeout",
+        "120",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-045252-screen-object-visibility-ca2907\\release-intel.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 0.2649999999994179
+    },
+    {
+      "configuration": "Debug",
+      "device": "contract",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "-R",
+        "^AzureRender.ScreenObjectVisibility$",
+        "-V",
+        "--timeout",
+        "120",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-045252-screen-object-visibility-ca2907\\debug-contract.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 0.8590000000112923
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "-R",
+        "^AzureRender.ScreenObjectVisibilityGpu$",
+        "-V",
+        "--timeout",
+        "120",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-045252-screen-object-visibility-ca2907\\debug-nvidia.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 1.2029999999940628
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "-R",
+        "^AzureRender.ScreenObjectVisibilityGpu$",
+        "-V",
+        "--timeout",
+        "120",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-045252-screen-object-visibility-ca2907\\debug-intel.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 0.28100000000267755
+    }
+  ],
+  "nvidiaSourceRegion": {
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "exactPixels": 17017,
+    "maximumByteError": 0,
+    "mismatches": [],
+    "pixels": 17017,
+    "validationErrors": 0,
+    "withinOnePixels": 17017,
+    "zeroAllocator": true
+  },
+  "intelSourceRegion": {
+    "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+    "exactPixels": 16719,
+    "maximumByteError": 33,
+    "mismatches": [
+      [
+        1301,
+        1284,
+        160,
+        139
+      ],
+      [
+        1304,
+        1284,
+        208,
+        219
+      ],
+      [
+        1282,
+        1279,
+        27,
+        31
+      ],
+      [
+        1296,
+        1274,
+        68,
+        69
+      ],
+      [
+        1276,
+        1273,
+        95,
+        105
+      ],
+      [
+        1299,
+        1273,
+        3,
+        2
+      ],
+      [
+        1302,
+        1273,
+        61,
+        54
+      ],
+      [
+        1278,
+        1272,
+        213,
+        214
+      ],
+      [
+        1302,
+        1271,
+        1,
+        2
+      ],
+      [
+        1290,
+        1270,
+        232,
+        228
+      ],
+      [
+        1291,
+        1270,
+        228,
+        232
+      ],
+      [
+        1302,
+        1270,
+        20,
+        16
+      ],
+      [
+        1291,
+        1269,
+        207,
+        208
+      ],
+      [
+        1297,
+        1268,
+        19,
+        20
+      ],
+      [
+        1305,
+        1268,
+        3,
+        2
+      ],
+      [
+        1277,
+        1267,
+        1,
+        2
+      ]
+    ],
+    "pixels": 17017,
+    "validationErrors": 0,
+    "withinOnePixels": 16842,
+    "zeroAllocator": true
+  },
+  "intelPreciseControl": {
+    "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+    "exactPixels": 16679,
+    "maximumVisibilityByteError": 25,
+    "pixels": 17017,
+    "rows": [
+      {
+        "expectedVisibility": 208,
+        "normalAndCount": [
+          0.33205151557922363,
+          -0.9349154233932495,
+          0.1251997947692871,
+          21.0
+        ],
+        "pixel": [
+          1304,
+          155
+        ],
+        "projectionAndDelta": [
+          0.4419984817504883,
+          0.7487716674804688,
+          0.7308235168457031,
+          0.03131294250488281
+        ],
+        "uvAndUnorm": [
+          0.6104996204376221,
+          0.8743858337402344,
+          219.0,
+          0.6580312252044678
+        ],
+        "worldAndVisibility": [
+          -300.0334777832031,
+          301.7167663574219,
+          -299.9125061035156,
+          0.8583071827888489
+        ]
+      },
+      {
+        "expectedVisibility": 170,
+        "normalAndCount": [
+          -0.4610885977745056,
+          -0.8811598420143127,
+          0.10466425120830536,
+          27.0
+        ],
+        "pixel": [
+          1264,
+          157
+        ],
+        "projectionAndDelta": [
+          0.47504138946533203,
+          0.7487411499023438,
+          0.7310523986816406,
+          0.0300445556640625
+        ],
+        "uvAndUnorm": [
+          0.618760347366333,
+          0.8743705749511719,
+          178.0,
+          0.5525673627853394
+        ],
+        "worldAndVisibility": [
+          -299.9770202636719,
+          301.716064453125,
+          -299.9205322265625,
+          0.6994762420654297
+        ]
+      },
+      {
+        "expectedVisibility": 116,
+        "normalAndCount": [
+          -0.49187353253364563,
+          -0.8671025633811951,
+          0.07869976758956909,
+          34.0
+        ],
+        "pixel": [
+          1261,
+          159
+        ],
+        "projectionAndDelta": [
+          0.4778413772583008,
+          0.7482147216796875,
+          0.7301788330078125,
+          0.04046398401260376
+        ],
+        "uvAndUnorm": [
+          0.6194603443145752,
+          0.8741073608398438,
+          105.0,
+          0.5337985157966614
+        ],
+        "worldAndVisibility": [
+          -299.9727478027344,
+          301.71368408203125,
+          -299.92218017578125,
+          0.4120798110961914
+        ]
+      },
+      {
+        "expectedVisibility": 68,
+        "normalAndCount": [
+          -0.4157336354255676,
+          -0.8693991303443909,
+          0.2670406103134155,
+          38.0
+        ],
+        "pixel": [
+          1296,
+          165
+        ],
+        "projectionAndDelta": [
+          0.44529056549072266,
+          0.7418212890625,
+          0.7302818298339844,
+          0.10919749736785889
+        ],
+        "uvAndUnorm": [
+          0.6113226413726807,
+          0.87091064453125,
+          69.0,
+          0.70108962059021
+        ],
+        "worldAndVisibility": [
+          -300.0221862792969,
+          301.7011413574219,
+          -299.9066467285156,
+          0.2687317430973053
+        ]
+      },
+      {
+        "expectedVisibility": 3,
+        "normalAndCount": [
+          -0.06190986558794975,
+          -0.30825984477996826,
+          0.9492855668067932,
+          56.0
+        ],
+        "pixel": [
+          1299,
+          166
+        ],
+        "projectionAndDelta": [
+          0.4445199966430664,
+          0.7446212768554688,
+          0.7298660278320312,
+          0.2280290126800537
+        ],
+        "uvAndUnorm": [
+          0.6111299991607666,
+          0.8723106384277344,
+          2.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0265197753906,
+          301.7029724121094,
+          -299.919189453125,
+          0.00846630334854126
+        ]
+      },
+      {
+        "expectedVisibility": 213,
+        "normalAndCount": [
+          -0.06011947616934776,
+          0.9204955697059631,
+          -0.38610053062438965,
+          22.0
+        ],
+        "pixel": [
+          1278,
+          167
+        ],
+        "projectionAndDelta": [
+          0.46187305450439453,
+          0.7429962158203125,
+          0.7358055114746094,
+          0.02032029628753662
+        ],
+        "uvAndUnorm": [
+          0.6154682636260986,
+          0.8714981079101562,
+          214.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -299.9967956542969,
+          301.6958923339844,
+          -299.8971252441406,
+          0.8372968435287476
+        ]
+      },
+      {
+        "expectedVisibility": 1,
+        "normalAndCount": [
+          -0.010602789930999279,
+          -0.4545949399471283,
+          0.8906352519989014,
+          57.0
+        ],
+        "pixel": [
+          1302,
+          168
+        ],
+        "projectionAndDelta": [
+          0.4424409866333008,
+          0.7439193725585938,
+          0.72808837890625,
+          0.3370947241783142
+        ],
+        "uvAndUnorm": [
+          0.6106102466583252,
+          0.8719596862792969,
+          2.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.03076171875,
+          301.7005310058594,
+          -299.92083740234375,
+          0.006079643964767456
+        ]
+      },
+      {
+        "expectedVisibility": 207,
+        "normalAndCount": [
+          -0.1639937311410904,
+          -0.8712164759635925,
+          0.46269652247428894,
+          23.0
+        ],
+        "pixel": [
+          1291,
+          170
+        ],
+        "projectionAndDelta": [
+          0.4494447708129883,
+          0.7359390258789062,
+          0.7321014404296875,
+          0.03965592384338379
+        ],
+        "uvAndUnorm": [
+          0.6123611927032471,
+          0.8679695129394531,
+          208.0,
+          0.900603175163269
+        ],
+        "worldAndVisibility": [
+          -300.0151062011719,
+          301.69219970703125,
+          -299.89923095703125,
+          0.8139371871948242
+        ]
+      },
+      {
+        "expectedVisibility": 19,
+        "normalAndCount": [
+          -0.07263746112585068,
+          -0.48471587896347046,
+          0.8716503977775574,
+          47.0
+        ],
+        "pixel": [
+          1297,
+          171
+        ],
+        "projectionAndDelta": [
+          0.44662952423095703,
+          0.7426528930664062,
+          0.7270050048828125,
+          0.2910075783729553
+        ],
+        "uvAndUnorm": [
+          0.6116573810577393,
+          0.8713264465332031,
+          20.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0237121582031,
+          301.69671630859375,
+          -299.9224548339844,
+          0.07659021019935608
+        ]
+      },
+      {
+        "expectedVisibility": 19,
+        "normalAndCount": [
+          -0.06532444059848785,
+          -0.42324844002723694,
+          0.9036555886268616,
+          47.0
+        ],
+        "pixel": [
+          1297,
+          172
+        ],
+        "projectionAndDelta": [
+          0.4467287063598633,
+          0.7425308227539062,
+          0.7266998291015625,
+          0.29318928718566895
+        ],
+        "uvAndUnorm": [
+          0.6116821765899658,
+          0.8712654113769531,
+          20.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0237121582031,
+          301.6954650878906,
+          -299.9232177734375,
+          0.07660305500030518
+        ]
+      },
+      {
+        "expectedVisibility": 27,
+        "normalAndCount": [
+          -0.0553048811852932,
+          -0.48806607723236084,
+          0.8710527420043945,
+          43.0
+        ],
+        "pixel": [
+          1298,
+          172
+        ],
+        "projectionAndDelta": [
+          0.44594669342041016,
+          0.7425003051757812,
+          0.7263336181640625,
+          0.29233604669570923
+        ],
+        "uvAndUnorm": [
+          0.6114866733551025,
+          0.8712501525878906,
+          36.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.025146484375,
+          301.6955261230469,
+          -299.9234313964844,
+          0.14306020736694336
+        ]
+      },
+      {
+        "expectedVisibility": 0,
+        "normalAndCount": [
+          0.16851723194122314,
+          -0.4863346517086029,
+          0.8573683500289917,
+          59.0
+        ],
+        "pixel": [
+          1272,
+          173
+        ],
+        "projectionAndDelta": [
+          0.4705781936645508,
+          0.7420730590820312,
+          0.7268905639648438,
+          0.5447223782539368
+        ],
+        "uvAndUnorm": [
+          0.6176445484161377,
+          0.8710365295410156,
+          1.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -299.9883117675781,
+          301.6953430175781,
+          -299.9283752441406,
+          0.002875417470932007
+        ]
+      },
+      {
+        "expectedVisibility": 2,
+        "normalAndCount": [
+          0.4425208270549774,
+          -0.5069174766540527,
+          0.7397364377975464,
+          55.0
+        ],
+        "pixel": [
+          1279,
+          173
+        ],
+        "projectionAndDelta": [
+          0.46588611602783203,
+          0.7418289184570312,
+          0.7266998291015625,
+          0.5148236751556396
+        ],
+        "uvAndUnorm": [
+          0.616471529006958,
+          0.8709144592285156,
+          3.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -299.99822998046875,
+          301.69476318359375,
+          -299.92608642578125,
+          0.012791723012924194
+        ]
+      },
+      {
+        "expectedVisibility": 36,
+        "normalAndCount": [
+          -0.053713154047727585,
+          -0.5781238675117493,
+          0.8141791224479675,
+          43.0
+        ],
+        "pixel": [
+          1298,
+          173
+        ],
+        "projectionAndDelta": [
+          0.44612979888916016,
+          0.7420425415039062,
+          0.7254638671875,
+          0.3275379538536072
+        ],
+        "uvAndUnorm": [
+          0.61153244972229,
+          0.8710212707519531,
+          37.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0251159667969,
+          301.69427490234375,
+          -299.9241638183594,
+          0.14327311515808105
+        ]
+      },
+      {
+        "expectedVisibility": 61,
+        "normalAndCount": [
+          -0.019038580358028412,
+          -0.51540207862854,
+          0.856736958026886,
+          40.0
+        ],
+        "pixel": [
+          1300,
+          173
+        ],
+        "projectionAndDelta": [
+          0.44452381134033203,
+          0.742279052734375,
+          0.7255477905273438,
+          0.32375115156173706
+        ],
+        "uvAndUnorm": [
+          0.611130952835083,
+          0.8711395263671875,
+          54.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0279541015625,
+          301.6943054199219,
+          -299.92425537109375,
+          0.21276769042015076
+        ]
+      },
+      {
+        "expectedVisibility": 1,
+        "normalAndCount": [
+          -0.15604348480701447,
+          -0.577660858631134,
+          0.8012230396270752,
+          57.0
+        ],
+        "pixel": [
+          1292,
+          174
+        ],
+        "projectionAndDelta": [
+          0.45077991485595703,
+          0.741302490234375,
+          0.7255630493164062,
+          0.29765552282333374
+        ],
+        "uvAndUnorm": [
+          0.6126949787139893,
+          0.8706512451171875,
+          2.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0166320800781,
+          301.6928405761719,
+          -299.92413330078125,
+          0.005983293056488037
+        ]
+      },
+      {
+        "expectedVisibility": 255,
+        "normalAndCount": [
+          0.41856008768081665,
+          0.1347905993461609,
+          0.8981307744979858,
+          0.0
+        ],
+        "pixel": [
+          1258,
+          215
+        ],
+        "projectionAndDelta": [
+          0.4791688919067383,
+          0.7101211547851562,
+          0.7294845581054688,
+          -0.0
+        ],
+        "uvAndUnorm": [
+          0.6197922229766846,
+          0.8550605773925781,
+          255.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -299.9688415527344,
+          301.6252136230469,
+          -299.8841247558594,
+          1.0
+        ]
+      },
+      {
+        "expectedVisibility": 239,
+        "normalAndCount": [
+          -0.5928072929382324,
+          -0.3836780786514282,
+          0.7080752849578857,
+          16.0
+        ],
+        "pixel": [
+          1322,
+          263
+        ],
+        "projectionAndDelta": [
+          0.42118167877197266,
+          0.6982803344726562,
+          0.6986961364746094,
+          0.033526837825775146
+        ],
+        "uvAndUnorm": [
+          0.6052954196929932,
+          0.8491401672363281,
+          239.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0589294433594,
+          301.564453125,
+          -299.9146423339844,
+          0.936937689781189
+        ]
+      },
+      {
+        "expectedVisibility": 86,
+        "normalAndCount": [
+          -0.5327497720718384,
+          -0.24004706740379333,
+          0.8115140795707703,
+          38.0
+        ],
+        "pixel": [
+          1324,
+          289
+        ],
+        "projectionAndDelta": [
+          0.4215402603149414,
+          0.6914291381835938,
+          0.6856918334960938,
+          0.3415284752845764
+        ],
+        "uvAndUnorm": [
+          0.6053850650787354,
+          0.8457145690917969,
+          69.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0621032714844,
+          301.531494140625,
+          -299.9337158203125,
+          0.26999810338020325
+        ]
+      },
+      {
+        "expectedVisibility": 95,
+        "normalAndCount": [
+          0.3230167031288147,
+          0.693105936050415,
+          0.6444100141525269,
+          33.0
+        ],
+        "pixel": [
+          1322,
+          320
+        ],
+        "projectionAndDelta": [
+          0.42899036407470703,
+          0.6809539794921875,
+          0.6764907836914062,
+          0.031186699867248535
+        ],
+        "uvAndUnorm": [
+          0.6072475910186768,
+          0.8404769897460938,
+          116.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0593566894531,
+          301.4884948730469,
+          -299.93963623046875,
+          0.4546162188053131
+        ]
+      }
+    ],
+    "status": "evaluated",
+    "validationErrors": 0,
+    "withinOnePixels": 16812,
+    "zeroAllocator": true
+  },
+  "productionSources": {
+    "src/render/ScreenObjectVisibility.hpp": "fc290a632ee559e68ba5b3cdf56b8c37f8334b89a96c1c7dc3d5b4eef7e0c38a",
+    "src/render/ScreenObjectVisibility.cpp": "7b67f87df2881e8feea5dcf0b2152149c50dc8a8544fff02d56ba0ba83bfe967",
+    "shaders/screen_object_visibility.vert": "57ef5dd7a34db868a3aa8909c7fd9516fbd68eec85ccd3db60b544ca6c63e8fd",
+    "shaders/screen_object_visibility.frag": "87a18659dcf84925d1efd952a4ff2877fa34ffb60fbfcaf6d0590a2c41c2831a",
+    "tests/ScreenObjectVisibilityTests.cpp": "9e0b598a1acd451233640cdbe49ad1d718806fcdf4dd4c02730572ece12b49c8",
+    "tests/ScreenObjectVisibilityGpuTests.cpp": "37f6dd6442b1e5e88698b599718c6b777abb1694ba642012a67f523446be3ae6",
+    "CMakeLists.txt": "a09cf47b4743073edbfe7a315a3ba5f668a98bd2b8465b0a2fe6acddda2639b6"
+  },
+  "readOnlyInputs": {
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\producer-cb0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\producer-cb3.bin": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t0.bin": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t2.bin": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t5.bin": "e931fd14a21ccf9da1c1200a368fc6212211d10f4c87f36d649a6c52ad416270",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t6.bin": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\native-hair-visible-mask.png": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\native-screen-visibility.bin": "ed6b1149357db8d07e9fd5fd247d372890e31f50303879f4e1f8607ac8e8b76e"
+  },
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "status": "passed",
+      "sha256": "8a87b1046d085462754356937e91c0c29e6e8ca03f8c59fe1acf5881127adb35"
+    },
+    {
+      "configuration": "debug",
+      "status": "passed",
+      "sha256": "41d1f1775cb6b7c985fd6760ff6fae0dd2ba8f65fb3446f99f5a5fa9c93815f5"
+    }
+  ],
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "sceneIntegrated": false,
+  "fullHairColorPassed": false,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "nextConditions": [
+    "Intel source region arithmetic contract",
+    "Current scene input production and integration",
+    "Full hair color and original frame budgets"
+  ],
+  "evidenceBytes": 1623154,
+  "evidenceSha256": "91bf96d6faa910fcd71ad507730f9b80245eff0298bf9ddce761fd488e2c5055",
+  "members": [
+    {
+      "path": "budget.json",
+      "bytes": 434,
+      "sha256": "933d7c9eaf8bb3b572347aa139d41ea1907d8e0491f126fe0160dc0733a1ad43"
+    },
+    {
+      "path": "build_and_validate.py",
+      "bytes": 2679,
+      "sha256": "5ed9acb992a86976bc4bdc019729a7f88ee97824ecf853966de9340d14f32869"
+    },
+    {
+      "path": "calibration-compile.log",
+      "bytes": 17,
+      "sha256": "50c6784c0466b5dcbcfe20db8f39dd3a1320ea47acd2bc9773ce6560447e2791"
+    },
+    {
+      "path": "calibration-inputs.json",
+      "bytes": 1990,
+      "sha256": "67879e15461174c74652ca0ab94af735250f241aac71f0cee320908f5be97669"
+    },
+    {
+      "path": "calibration-link.log",
+      "bytes": 118,
+      "sha256": "84292bacb31dc99f0a69c537aa6acc825f178fe47c65897baef1c81870c8504b"
+    },
+    {
+      "path": "calibration-preparation.json",
+      "bytes": 189987,
+      "sha256": "32cd8d2c0f2b3b8cdd6cffe80cd30aad8732782bfdfc439c280ee37eea76b5df"
+    },
+    {
+      "path": "calibration-validation.json",
+      "bytes": 1135,
+      "sha256": "8f75d533e95e469a77fb365cc230f858871b006edf1ee132942b30bc8706546b"
+    },
+    {
+      "path": "calibration.cpp",
+      "bytes": 5904,
+      "sha256": "d978521a5e8a85e2740253f6008398061e1fee5645c19a85e8dc0688e3206ee3"
+    },
+    {
+      "path": "contract-red-build.log",
+      "bytes": 94,
+      "sha256": "dad8926eb1b195edd8ca56bc77bc1d747f296c0561216696b182bc27c81966a0"
+    },
+    {
+      "path": "contract-red-command.json",
+      "bytes": 834,
+      "sha256": "9a4905174c2d830882ce3204ec8c671c9a56602b388da2c06d7c73b0bdfe9001"
+    },
+    {
+      "path": "contract-red.log",
+      "bytes": 49,
+      "sha256": "1bb150d1372de47fa2af6f811b112926a7677a5c4d246a7eefd0fd24af0c78bf"
+    },
+    {
+      "path": "contract-release.log",
+      "bytes": 381,
+      "sha256": "036bf316c82fc167dd28b78db6a342aa090b73d866c8ad43e845082e3a93fa6c"
+    },
+    {
+      "path": "cross-device-precise.json",
+      "bytes": 528,
+      "sha256": "661c094ac23ecba3194734bde447985fc8a7f74ddc41a95f15ac1a6306790e68"
+    },
+    {
+      "path": "cross-device-probe.json",
+      "bytes": 7977,
+      "sha256": "4b0b68887448b541e9ac6f638f21ea900afbab51e3320b93fb237d5511f5ba13"
+    },
+    {
+      "path": "debug-contract-tests.log",
+      "bytes": 1388,
+      "sha256": "e84a92b296abb24549eb9b1a502251a686df6fcfb96e32c971d1e9ea7b052867"
+    },
+    {
+      "path": "debug-contract.xml",
+      "bytes": 469,
+      "sha256": "03af6bf8fb959ab475819a38d60baefcdb8c2d27648040d8b1dce43ccc2e9310"
+    },
+    {
+      "path": "debug-intel-tests.log",
+      "bytes": 1531,
+      "sha256": "0b6abb5934935a2cc130ff5093a1612d756932faf6943e06fce9712d197aac01"
+    },
+    {
+      "path": "debug-intel.xml",
+      "bytes": 537,
+      "sha256": "4ac6d0d71d069097cc5a13203b9f5a6581401f604f4036492fd790755deea81b"
+    },
+    {
+      "path": "debug-nvidia-tests.log",
+      "bytes": 1517,
+      "sha256": "d26ff9fd374ed7874f23dc58a5e580179397886d6d824a9ad1012722b7846d1d"
+    },
+    {
+      "path": "debug-nvidia.xml",
+      "bytes": 522,
+      "sha256": "a15119e20ec95771f3bfbfdd82af937a75f91721e67a130e50b78168bbbe3545"
+    },
+    {
+      "path": "debug-production-build.log",
+      "bytes": 1916,
+      "sha256": "6c04a5756f57c08d132e72c9c72848520173bf1c1d31128968e12374e4e235f0"
+    },
+    {
+      "path": "expected.bin",
+      "bytes": 68068,
+      "sha256": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50"
+    },
+    {
+      "path": "gpu-inputs.json",
+      "bytes": 1051,
+      "sha256": "7ec6f629b2dd832ca60c87a2aaae5ce66fd1d320b034aa84d641c849de38c869"
+    },
+    {
+      "path": "intel-calibration-rg8.bin",
+      "bytes": 34034,
+      "sha256": "14ea24a5230824b91111a237b7b436ce7b3c3707fcadc811e6e0d60ffb4ea5e3"
+    },
+    {
+      "path": "intel-calibration.json",
+      "bytes": 1242,
+      "sha256": "38d9ce83a66e63c3dbf84e473c1836b3b5f91e6d1cda1a3772538b3501343def"
+    },
+    {
+      "path": "intel-calibration.log",
+      "bytes": 1244,
+      "sha256": "9dbd3ef43f290a4d6d29bc26a02bec56efce26d964861e9962706af0d920b354"
+    },
+    {
+      "path": "intel-operation-model.json",
+      "bytes": 855,
+      "sha256": "941b2d8b5c42ed777803562f92dc3f816ecb8ce07eec4ead1f4bee2ac1d53edb"
+    },
+    {
+      "path": "intel-precise-execution.json",
+      "bytes": 403,
+      "sha256": "6d1531799af38d90a0762efa9b464d3d7b33b2dd88cb8c03bbed50cd654b9fab"
+    },
+    {
+      "path": "intel-precise-output.bin",
+      "bytes": 1089088,
+      "sha256": "9c53a4149c38abd0892adde1e533571d8cb6a678ed72b068ba9b214a48943628"
+    },
+    {
+      "path": "intel-precise-result.json",
+      "bytes": 13818,
+      "sha256": "eafc264f80f513d4fba2b24bddc9ad73ece29b6411b7b27b74d1d39899949411"
+    },
+    {
+      "path": "intel-precise.log",
+      "bytes": 13820,
+      "sha256": "8b27cc56d8e48bb0eefd6cde4c27c5e23217029ca15909226f3da5b55cd78721"
+    },
+    {
+      "path": "intel-probe-execution.json",
+      "bytes": 403,
+      "sha256": "eeb8bc9518204344e7de6d7771f933b2411eec63829a7147acd236eeefa433bb"
+    },
+    {
+      "path": "intel-probe-output.bin",
+      "bytes": 1089088,
+      "sha256": "83a5eb094b71d63400aa32580130d067e469ab86d456383ac684c2c4ae9226c7"
+    },
+    {
+      "path": "intel-probe-result.json",
+      "bytes": 13839,
+      "sha256": "d43f535b59a498b0a66643b913ed9997e6e41609ef852f3ee6e5b1b087cacaf2"
+    },
+    {
+      "path": "intel-probe.log",
+      "bytes": 13841,
+      "sha256": "37205172da44c61e4bac9ef57f26c197b2eb7c2f12aa06047d4811afbfcb1647"
+    },
+    {
+      "path": "intel-release.log",
+      "bytes": 387,
+      "sha256": "a6eee5703817f4528eab7a92cf7e33934031e4e8b29bc965e3f66792c9388146"
+    },
+    {
+      "path": "nvidia-calibration-rg8.bin",
+      "bytes": 34034,
+      "sha256": "ec4fb9b7f81ea0d010b36c37c4b8d03325768fa19f8bd5d03d511f3f132f1a0e"
+    },
+    {
+      "path": "nvidia-calibration.json",
+      "bytes": 227,
+      "sha256": "86622f059753ccdee6b98b94ab04b5e6be7de18b69cbd2f43ad500487a5df844"
+    },
+    {
+      "path": "nvidia-calibration.log",
+      "bytes": 229,
+      "sha256": "d4e6d0246a856892ee690ed0c552446384cfb795207a0bf035400760639ffa47"
+    },
+    {
+      "path": "nvidia-operation-model.json",
+      "bytes": 786,
+      "sha256": "980f71612d35ba8eceb0606a86ec2f499cdf993390aba11be41bf67e70dbaeec"
+    },
+    {
+      "path": "nvidia-release.log",
+      "bytes": 387,
+      "sha256": "1ee6431d5c0ad990bf3d5d6ee65f0a6aa0804e415a82026135135948e253492b"
+    },
+    {
+      "path": "package.py",
+      "bytes": 4326,
+      "sha256": "543838dafce56cb87774df915c2de2e3781b258c14991bb34c19ffac3be0aca0"
+    },
+    {
+      "path": "prepare_calibration.py",
+      "bytes": 3388,
+      "sha256": "cbdfc64c7113725196cfa4ee4490001711bb4335a0e753e7ff8034cca4a60c5b"
+    },
+    {
+      "path": "probe-compile.log",
+      "bytes": 14,
+      "sha256": "2d1371c7d3d6b24c243d46a0cd5668c070c92213a03058a9aba0054db02472c7"
+    },
+    {
+      "path": "probe-link.log",
+      "bytes": 118,
+      "sha256": "84292bacb31dc99f0a69c537aa6acc825f178fe47c65897baef1c81870c8504b"
+    },
+    {
+      "path": "process.log",
+      "bytes": 13820,
+      "sha256": "8b27cc56d8e48bb0eefd6cde4c27c5e23217029ca15909226f3da5b55cd78721"
+    },
+    {
+      "path": "production-builds.json",
+      "bytes": 1515,
+      "sha256": "5a98e662710964acd6b9db24f882353c2e4689e41453acc66c0dfa0d7605d9fa"
+    },
+    {
+      "path": "production-tests.json",
+      "bytes": 3674,
+      "sha256": "89cd0c1ce6669f438e4b43cea6d38878882401f2b4393a109a63914165210d1b"
+    },
+    {
+      "path": "production/CMakeLists.txt",
+      "bytes": 269076,
+      "sha256": "a09cf47b4743073edbfe7a315a3ba5f668a98bd2b8465b0a2fe6acddda2639b6"
+    },
+    {
+      "path": "production/shaders/screen_object_visibility.frag",
+      "bytes": 4667,
+      "sha256": "87a18659dcf84925d1efd952a4ff2877fa34ffb60fbfcaf6d0590a2c41c2831a"
+    },
+    {
+      "path": "production/shaders/screen_object_visibility.vert",
+      "bytes": 120,
+      "sha256": "57ef5dd7a34db868a3aa8909c7fd9516fbd68eec85ccd3db60b544ca6c63e8fd"
+    },
+    {
+      "path": "production/src/render/ScreenObjectVisibility.cpp",
+      "bytes": 13730,
+      "sha256": "7b67f87df2881e8feea5dcf0b2152149c50dc8a8544fff02d56ba0ba83bfe967"
+    },
+    {
+      "path": "production/src/render/ScreenObjectVisibility.hpp",
+      "bytes": 2769,
+      "sha256": "fc290a632ee559e68ba5b3cdf56b8c37f8334b89a96c1c7dc3d5b4eef7e0c38a"
+    },
+    {
+      "path": "production/tests/ScreenObjectVisibilityGpuTests.cpp",
+      "bytes": 7219,
+      "sha256": "37f6dd6442b1e5e88698b599718c6b777abb1694ba642012a67f523446be3ae6"
+    },
+    {
+      "path": "production/tests/ScreenObjectVisibilityTests.cpp",
+      "bytes": 5058,
+      "sha256": "9e0b598a1acd451233640cdbe49ad1d718806fcdf4dd4c02730572ece12b49c8"
+    },
+    {
+      "path": "queries.bin",
+      "bytes": 272272,
+      "sha256": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8"
+    },
+    {
+      "path": "receiver-compiled.comp",
+      "bytes": 3472,
+      "sha256": "c965bd88557ba938dade81e8b9081aeac5c44a99360ab0c5557c68f1cff11fa6"
+    },
+    {
+      "path": "receiver-precise.comp",
+      "bytes": 3520,
+      "sha256": "db7ca7693513acc62f9bcca9e6146aeb704389eb0927cc08486cf9b7891745ab"
+    },
+    {
+      "path": "receiver-precise.spvasm",
+      "bytes": 34555,
+      "sha256": "d442dc1b37664a711747f899598dde4ab8d62f7c0dc3ae8d4325ecfae828383f"
+    },
+    {
+      "path": "receiver.cpp",
+      "bytes": 8137,
+      "sha256": "f939fad7450964a0882b46f79a60dfd21a0d98112f63db1130647f59c0d9cd3e"
+    },
+    {
+      "path": "receiver.spv",
+      "bytes": 12648,
+      "sha256": "d18418c975c46ae9009a6132794d11875a1c68d6a76f7d69c79d05b30821f615"
+    },
+    {
+      "path": "release-build-green.json",
+      "bytes": 516,
+      "sha256": "7be2c2c52de0d31d6bd5efa12e040e0349c089bcf964e1f9ee298b00681022c3"
+    },
+    {
+      "path": "release-build-green.log",
+      "bytes": 302,
+      "sha256": "abfb439452d712753bf03e4b6c09cb24c1f46c0c897f25d42607df716fa4f805"
+    },
+    {
+      "path": "release-build-red.log",
+      "bytes": 10568,
+      "sha256": "3497e3fd4cbce12767c1bc24757ba7daf16a135c44ddb8ca744fa1fcb6c06dc4"
+    },
+    {
+      "path": "release-build.json",
+      "bytes": 517,
+      "sha256": "94e760149ae90ac5ca7a3bc923651993971c06a3050fca53b563d16295ced2b4"
+    },
+    {
+      "path": "release-contract-tests.log",
+      "bytes": 1404,
+      "sha256": "054a7c762f470e29ff73d947bcebf5dfd3ee8c6711b7dcbd2daad0e70952ffc7"
+    },
+    {
+      "path": "release-contract.xml",
+      "bytes": 467,
+      "sha256": "03ab37d3df67a6c1f4d1f212808857460728c3ab644e141ce93c99dd69b82060"
+    },
+    {
+      "path": "release-intel-tests.log",
+      "bytes": 1549,
+      "sha256": "b2e4eca2fde4f6076772870cb095fcd79a42eff2e637f4a52c6053f17ae38ea3"
+    },
+    {
+      "path": "release-intel.xml",
+      "bytes": 537,
+      "sha256": "b5e6581e7e291d1129d5a7319cb5c46a414d48e0ecff60add3722b9edb373d63"
+    },
+    {
+      "path": "release-nvidia-tests.log",
+      "bytes": 1535,
+      "sha256": "5a1f3317bc553b2ea635ca7a64fda9307cf07ded9453aa2b05c003ab017d2526"
+    },
+    {
+      "path": "release-nvidia.xml",
+      "bytes": 523,
+      "sha256": "6ad13b83ccb4ffe660640f9b4b8d683a73d7822c94bfe3d5451f28ea8fcf7b61"
+    },
+    {
+      "path": "release-production-build.log",
+      "bytes": 1922,
+      "sha256": "f32314529074d8311cddebc418614c5d0e1e616de3d385f947638e42fb33233b"
+    },
+    {
+      "path": "release-validation.json",
+      "bytes": 1483,
+      "sha256": "79a5e3be56eb6958a88ee9ab2ec443fe541ca28af12bb761696db58d28be830b"
+    }
+  ]
+}

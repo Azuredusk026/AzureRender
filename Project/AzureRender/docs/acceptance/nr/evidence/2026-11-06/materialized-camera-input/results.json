@@ -1,0 +1,654 @@
+{
+  "schemaVersion": 1,
+  "status": "implemented-compatible-short-diagnostic-cpu-benefit-qualified-full-acceptance-failed",
+  "sourceBase": "f05f22e",
+  "mechanism": "Borrowed materialized scene-description overload for Runtime camera selection; existing Player/editor-play host shares one resolved description with frame geometry",
+  "productionAdoption": true,
+  "buildAndCpu": {
+    "release": {
+      "build": {
+        "status": "passed",
+        "exitCode": 0,
+        "seconds": 140.35899999999674,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+          "build",
+          "--source",
+          "D:\\Projects\\FYP\\Project\\AzureRender",
+          "--build-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "--config",
+          "Release",
+          "--test-target",
+          "AzureCameraSystemTests",
+          "--test-target",
+          "AzureRenderViewSubmissionTests",
+          "--test-target",
+          "AzureRenderViewTests",
+          "--test-target",
+          "AzurePresentationRuntimeTests",
+          "--test-target",
+          "AzureGameplayPresentationTests",
+          "--test-target",
+          "AzureRuntimeLifecycleTests",
+          "--test-target",
+          "AzureRenderRenderGraphTests",
+          "--test-target",
+          "AzureRenderSurfaceLifecycleTests",
+          "--test-target",
+          "AzureSceneRenderSnapshotTests",
+          "--test-target",
+          "AzurePlatformerPhysicsTests",
+          "--test-target",
+          "AzurePlatformerFlowTests",
+          "--test-target",
+          "AzurePlatformerFlowTests",
+          "--test-target",
+          "AzurePlatformerFlowTests",
+          "--test-target",
+          "AzureExplorationDesignTests"
+        ],
+        "buildScope": {
+          "kind": "runtime-and-tests",
+          "targets": [
+            "AzureRender",
+            "AzurePlayer",
+            "AzureMetaGen",
+            "AzureGeometryCompiler",
+            "AzureAssetExchange",
+            "AzureMaterialValidator",
+            "AzureGameLauncher",
+            "AzureEngineContracts",
+            "AzureManagedArtifacts",
+            "AzureShaderModulePrototypes",
+            "AzureCameraSystemTests",
+            "AzureRenderViewSubmissionTests",
+            "AzureRenderViewTests",
+            "AzurePresentationRuntimeTests",
+            "AzureGameplayPresentationTests",
+            "AzureRuntimeLifecycleTests",
+            "AzureRenderRenderGraphTests",
+            "AzureRenderSurfaceLifecycleTests",
+            "AzureSceneRenderSnapshotTests",
+            "AzurePlatformerPhysicsTests",
+            "AzurePlatformerFlowTests",
+            "AzureExplorationDesignTests"
+          ],
+          "testProducts": {
+            "AzureCameraSystemTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureCameraSystemTests.exe",
+            "AzureRenderViewSubmissionTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderViewSubmissionTests.exe",
+            "AzureRenderViewTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderViewTests.exe",
+            "AzurePresentationRuntimeTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePresentationRuntimeTests.exe",
+            "AzureGameplayPresentationTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureGameplayPresentationTests.exe",
+            "AzureRuntimeLifecycleTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRuntimeLifecycleTests.exe",
+            "AzureRenderRenderGraphTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderRenderGraphTests.exe",
+            "AzureRenderSurfaceLifecycleTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderSurfaceLifecycleTests.exe",
+            "AzureSceneRenderSnapshotTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureSceneRenderSnapshotTests.exe",
+            "AzurePlatformerPhysicsTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlatformerPhysicsTests.exe",
+            "AzurePlatformerFlowTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlatformerFlowTests.exe",
+            "AzureExplorationDesignTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureExplorationDesignTests.exe"
+          }
+        },
+        "productCount": 612,
+        "productionShaders535ByteIdentical": true,
+        "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+      },
+      "checks": {
+        "exitCode": 0,
+        "seconds": 13.530999999959022,
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^(AzureRuntime.CameraSystem|AzureRender.RenderViewSubmission|AzureRender.RenderView|AzureEngine.PresentationRuntime|AzureEngine.GameplayPresentation|AzureEngine.RuntimeLifecycle|AzureRender.RenderGraph|AzureRender.SurfaceLifecycle|AzureRuntime.SceneRenderSnapshot|AzureGame.PlatformerPhysics|AzureGame.PlatformerFlow|AzureGame.PlatformerPhase4|AzureGame.PlatformerPhase9|AzureGame.ExplorationDesign)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\materialized-camera-input\\engine-release-checks.xml"
+        ],
+        "expectedChecks": 14
+      },
+      "actualChecks": [
+        "AzureRuntime.CameraSystem",
+        "AzureRender.RenderViewSubmission",
+        "AzureRender.RenderView",
+        "AzureEngine.PresentationRuntime",
+        "AzureEngine.GameplayPresentation",
+        "AzureEngine.RuntimeLifecycle",
+        "AzureRender.RenderGraph",
+        "AzureRender.SurfaceLifecycle",
+        "AzureRuntime.SceneRenderSnapshot",
+        "AzureGame.PlatformerPhysics",
+        "AzureGame.PlatformerFlow",
+        "AzureGame.PlatformerPhase4",
+        "AzureGame.PlatformerPhase9",
+        "AzureGame.ExplorationDesign"
+      ]
+    },
+    "debug": {
+      "build": {
+        "status": "passed",
+        "exitCode": 0,
+        "seconds": 120.29700000002049,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+          "build",
+          "--source",
+          "D:\\Projects\\FYP\\Project\\AzureRender",
+          "--build-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "--config",
+          "Debug",
+          "--test-target",
+          "AzureCameraSystemTests",
+          "--test-target",
+          "AzureRenderViewSubmissionTests",
+          "--test-target",
+          "AzureRenderViewTests",
+          "--test-target",
+          "AzurePresentationRuntimeTests",
+          "--test-target",
+          "AzureGameplayPresentationTests",
+          "--test-target",
+          "AzureRuntimeLifecycleTests",
+          "--test-target",
+          "AzureRenderRenderGraphTests",
+          "--test-target",
+          "AzureRenderSurfaceLifecycleTests",
+          "--test-target",
+          "AzureSceneRenderSnapshotTests",
+          "--test-target",
+          "AzurePlatformerPhysicsTests",
+          "--test-target",
+          "AzurePlatformerFlowTests",
+          "--test-target",
+          "AzurePlatformerFlowTests",
+          "--test-target",
+          "AzurePlatformerFlowTests",
+          "--test-target",
+          "AzureExplorationDesignTests"
+        ],
+        "buildScope": {
+          "kind": "runtime-and-tests",
+          "targets": [
+            "AzureRender",
+            "AzurePlayer",
+            "AzureMetaGen",
+            "AzureGeometryCompiler",
+            "AzureAssetExchange",
+            "AzureMaterialValidator",
+            "AzureGameLauncher",
+            "AzureEngineContracts",
+            "AzureManagedArtifacts",
+            "AzureShaderModulePrototypes",
+            "AzureCameraSystemTests",
+            "AzureRenderViewSubmissionTests",
+            "AzureRenderViewTests",
+            "AzurePresentationRuntimeTests",
+            "AzureGameplayPresentationTests",
+            "AzureRuntimeLifecycleTests",
+            "AzureRenderRenderGraphTests",
+            "AzureRenderSurfaceLifecycleTests",
+            "AzureSceneRenderSnapshotTests",
+            "AzurePlatformerPhysicsTests",
+            "AzurePlatformerFlowTests",
+            "AzureExplorationDesignTests"
+          ],
+          "testProducts": {
+            "AzureCameraSystemTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureCameraSystemTests.exe",
+            "AzureRenderViewSubmissionTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderViewSubmissionTests.exe",
+            "AzureRenderViewTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderViewTests.exe",
+            "AzurePresentationRuntimeTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePresentationRuntimeTests.exe",
+            "AzureGameplayPresentationTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureGameplayPresentationTests.exe",
+            "AzureRuntimeLifecycleTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRuntimeLifecycleTests.exe",
+            "AzureRenderRenderGraphTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderRenderGraphTests.exe",
+            "AzureRenderSurfaceLifecycleTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderSurfaceLifecycleTests.exe",
+            "AzureSceneRenderSnapshotTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureSceneRenderSnapshotTests.exe",
+            "AzurePlatformerPhysicsTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlatformerPhysicsTests.exe",
+            "AzurePlatformerFlowTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlatformerFlowTests.exe",
+            "AzureExplorationDesignTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureExplorationDesignTests.exe"
+          }
+        },
+        "productCount": 612,
+        "productionShaders535ByteIdentical": true,
+        "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+      },
+      "checks": {
+        "exitCode": 0,
+        "seconds": 42.51600000000326,
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^(AzureRuntime.CameraSystem|AzureRender.RenderViewSubmission|AzureRender.RenderView|AzureEngine.PresentationRuntime|AzureEngine.GameplayPresentation|AzureEngine.RuntimeLifecycle|AzureRender.RenderGraph|AzureRender.SurfaceLifecycle|AzureRuntime.SceneRenderSnapshot|AzureGame.PlatformerPhysics|AzureGame.PlatformerFlow|AzureGame.PlatformerPhase4|AzureGame.PlatformerPhase9|AzureGame.ExplorationDesign)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\materialized-camera-input\\engine-debug-checks.xml"
+        ],
+        "expectedChecks": 14
+      },
+      "actualChecks": [
+        "AzureRuntime.CameraSystem",
+        "AzureRender.RenderViewSubmission",
+        "AzureRender.RenderView",
+        "AzureEngine.PresentationRuntime",
+        "AzureEngine.GameplayPresentation",
+        "AzureEngine.RuntimeLifecycle",
+        "AzureRender.RenderGraph",
+        "AzureRender.SurfaceLifecycle",
+        "AzureRuntime.SceneRenderSnapshot",
+        "AzureGame.PlatformerPhysics",
+        "AzureGame.PlatformerFlow",
+        "AzureGame.PlatformerPhase4",
+        "AzureGame.PlatformerPhase9",
+        "AzureGame.ExplorationDesign"
+      ]
+    }
+  },
+  "nativeImage": {
+    "status": "passed",
+    "sourceBase": "f05f22e",
+    "executableSha256": "c3c0d34f341a4ccfe8bfc6e775fd3efc7cad169bef1264ec796feb1380e5f36d",
+    "exitCode": 0,
+    "seconds": 118.20299999997951,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Shared materialized camera/presentation input candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "pairedCost": {
+    "status": "measured",
+    "sourceBase": "f05f22e",
+    "cpuBaselineMean": 20.725831250000027,
+    "cpuCandidateMean": 19.469400000000004,
+    "baselineRelativeDrift": 0.025829080639005488,
+    "diagnosticCpuRelativeReduction": 0.060621513069591446,
+    "diagnosticBenefitQualified": true,
+    "rows": [
+      {
+        "status": "measured",
+        "sourceBase": "f05f22e",
+        "visualAcceptance": "failed-user-review",
+        "seconds": 109.09399999998277,
+        "warmup": 300,
+        "samples": 120,
+        "gpu": {
+          "shadowMs": {
+            "mean": 4.511151466666667,
+            "p95": 4.6109472,
+            "p99": 4.924897280000001
+          },
+          "sceneMs": {
+            "mean": 29.1997696,
+            "p95": 30.1578752,
+            "p99": 31.872163840000002
+          },
+          "postProcessMs": {
+            "mean": 0.29579093333333334,
+            "p95": 0.30208,
+            "p99": 0.30495743999999997
+          },
+          "frameMs": {
+            "mean": 34.006712,
+            "p95": 34.9528816,
+            "p99": 36.65638368
+          }
+        },
+        "cpu": {
+          "mean": 20.993495833333363,
+          "p95": 23.30967500000143,
+          "p99": 32.41264100000042
+        },
+        "wait": {
+          "mean": 12.857809166666637,
+          "p95": 16.313964999999914,
+          "p99": 18.4974229999993
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "framePacing": {
+          "maximumRate": 60,
+          "presentMode": "FIFO",
+          "vsync": true,
+          "waitFrames": 0,
+          "waitMilliseconds": 0.0
+        },
+        "allocator": {
+          "bufferAllocations": 1997,
+          "imageAllocations": 440,
+          "liveBuffers": 834,
+          "liveImages": 440,
+          "bufferBytes": 2985576984,
+          "imageBytes": 2779192832,
+          "liveBufferBytes": 415610856,
+          "liveImageBytes": 2779192832,
+          "deviceLocalPeakBytes": 3291255520
+        },
+        "peakWorkingSetBytes": 7404486656,
+        "environmentFailures": [],
+        "zeroAllocator": true,
+        "validationClean": true,
+        "allMountedProjectBytesUnchanged": true,
+        "originalLimitsNumericallyMet": false,
+        "powerProfileStable": true,
+        "environmentPassed": true,
+        "diagnosticOnly": true,
+        "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "productionShaderFilesUnchanged": true,
+        "selectedExecutable": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\materialized-camera-input\\baseline\\AzurePlayer.exe",
+        "selectedExecutableSha256": "fc058d5deb71e536b046e90bedf896b6e6b223f0abeaa21546fd8be263bdea3e",
+        "baselineExecutableUnchanged": true
+      },
+      {
+        "status": "measured",
+        "sourceBase": "f05f22e",
+        "visualAcceptance": "failed-user-review",
+        "seconds": 108.95299999997951,
+        "warmup": 300,
+        "samples": 120,
+        "gpu": {
+          "shadowMs": {
+            "mean": 4.4526344,
+            "p95": 4.571929600000001,
+            "p99": 4.7043888
+          },
+          "sceneMs": {
+            "mean": 29.0752,
+            "p95": 29.5455744,
+            "p99": 29.71897856
+          },
+          "postProcessMs": {
+            "mean": 0.2962432,
+            "p95": 0.301056,
+            "p99": 0.30495743999999997
+          },
+          "frameMs": {
+            "mean": 33.8240776,
+            "p95": 34.4311584,
+            "p99": 34.65452384
+          }
+        },
+        "cpu": {
+          "mean": 19.469400000000004,
+          "p95": 21.794289999999243,
+          "p99": 29.231712000001114
+        },
+        "wait": {
+          "mean": 14.247697499999996,
+          "p95": 16.277784999999813,
+          "p99": 16.621413000000313
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "framePacing": {
+          "maximumRate": 60,
+          "presentMode": "FIFO",
+          "vsync": true,
+          "waitFrames": 0,
+          "waitMilliseconds": 0.0
+        },
+        "allocator": {
+          "bufferAllocations": 1997,
+          "imageAllocations": 440,
+          "liveBuffers": 834,
+          "liveImages": 440,
+          "bufferBytes": 2985576984,
+          "imageBytes": 2779192832,
+          "liveBufferBytes": 415610856,
+          "liveImageBytes": 2779192832,
+          "deviceLocalPeakBytes": 3291255520
+        },
+        "peakWorkingSetBytes": 7403085824,
+        "environmentFailures": [],
+        "zeroAllocator": true,
+        "validationClean": true,
+        "allMountedProjectBytesUnchanged": true,
+        "originalLimitsNumericallyMet": false,
+        "powerProfileStable": true,
+        "environmentPassed": true,
+        "diagnosticOnly": true,
+        "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "productionShaderFilesUnchanged": true,
+        "selectedExecutable": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "selectedExecutableSha256": "c3c0d34f341a4ccfe8bfc6e775fd3efc7cad169bef1264ec796feb1380e5f36d",
+        "baselineExecutableUnchanged": true
+      },
+      {
+        "status": "measured",
+        "sourceBase": "f05f22e",
+        "visualAcceptance": "failed-user-review",
+        "seconds": 109.5,
+        "warmup": 300,
+        "samples": 120,
+        "gpu": {
+          "shadowMs": {
+            "mean": 4.5169869333333335,
+            "p95": 4.6479136,
+            "p99": 4.91858944
+          },
+          "sceneMs": {
+            "mean": 29.238792533333335,
+            "p95": 30.2032384,
+            "p99": 31.999098880000002
+          },
+          "postProcessMs": {
+            "mean": 0.298752,
+            "p95": 0.30520319999999995,
+            "p99": 0.306176
+          },
+          "frameMs": {
+            "mean": 34.05453146666667,
+            "p95": 34.9596192,
+            "p99": 36.82902048
+          }
+        },
+        "cpu": {
+          "mean": 20.458166666666692,
+          "p95": 23.4527100000004,
+          "p99": 31.166655000000603
+        },
+        "wait": {
+          "mean": 13.458797499999976,
+          "p95": 16.322240000000647,
+          "p99": 18.124850000000198
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "framePacing": {
+          "maximumRate": 60,
+          "presentMode": "FIFO",
+          "vsync": true,
+          "waitFrames": 0,
+          "waitMilliseconds": 0.0
+        },
+        "allocator": {
+          "bufferAllocations": 1997,
+          "imageAllocations": 440,
+          "liveBuffers": 834,
+          "liveImages": 440,
+          "bufferBytes": 2985576984,
+          "imageBytes": 2779192832,
+          "liveBufferBytes": 415610856,
+          "liveImageBytes": 2779192832,
+          "deviceLocalPeakBytes": 3291255520
+        },
+        "peakWorkingSetBytes": 7403368448,
+        "environmentFailures": [],
+        "zeroAllocator": true,
+        "validationClean": true,
+        "allMountedProjectBytesUnchanged": true,
+        "originalLimitsNumericallyMet": false,
+        "powerProfileStable": true,
+        "environmentPassed": true,
+        "diagnosticOnly": true,
+        "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "productionShaderFilesUnchanged": true,
+        "selectedExecutable": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\materialized-camera-input\\baseline\\AzurePlayer.exe",
+        "selectedExecutableSha256": "fc058d5deb71e536b046e90bedf896b6e6b223f0abeaa21546fd8be263bdea3e",
+        "baselineExecutableUnchanged": true
+      }
+    ],
+    "sourceInputsUnchanged": true,
+    "productsVerified": true,
+    "scope": "Predeclared420frame paired diagnostic; no formal1800sample acceptance claim"
+  },
+  "performanceScope": "420frames per A/B/A process, each300warmup+120samples, predeclared drift<=5%, reduction>max(2%,baseline drift), all original environment checks passed; original1800-sample8ms/16.6ms gate remains unmet",
+  "fullVisualAcceptance": "failed-user-review",
+  "fullPerformanceAcceptance": "failed",
+  "reusedFrozenImages": "docs/acceptance/nr/evidence/2026-11-05/runtime-node-identity/measurements.zip; four PNG hashes verified",
+  "archiveSha256": "8ee8e978e2d660801890338014c6e9898c24a0d2ee5e4a72afc11a9d5af924e2",
+  "archiveMembers": {
+    "a-after-driver.log": "f9f1f83492aecb9426fd6e4d7a31453a5947e23adcdb58e550655286001b74b4",
+    "a-before-driver.log": "2b6aef981938c1a0c356e15f91b86c69d63f0e6a4ffb8997d32e7effea26780b",
+    "api-green-build.log": "4cbd3fe977f6f206dcaafbbdd70d87d8e951d86b62bd65bea76e5743bc5a6379",
+    "api-green.log": "10e7df322a4568a65cf6a6a56cd9ed13047ff6dcbbbb708ed9eb8db4d8104618",
+    "api-red-build.log": "a95ede86266a1bf8e4bd91a0084699ab48735a6db7484a3851c8d389928dc8ab",
+    "b-candidate-driver.log": "1fd6ad24cef73d0b5454d2b6b3b3e9fff80b1e54cdfceb904367dd97f6e05c3f",
+    "baseline/manifest.json": "be3931bdee939d91dc1cabce3908edf08be01a49280d55ac7943c101dfdd0b6e",
+    "drivers/capture_materialized_camera.py": "3250bee664e4af3e9cf1a0efef86d56e5bb4373caedbd10df312987b7b49ebf6",
+    "drivers/measure_materialized_camera_one.py": "7a7062c0e432d419b4efb2248e51c183b85b6cdc92cee2e42da23e90eb3f39a7",
+    "drivers/run_materialized_camera_aba.py": "4a4692ff073e9287cd107ecc26f15bfe49f34cca74e3182b94ca832297614dc9",
+    "drivers/validate_materialized_camera.py": "5896bb81065d51425e9ed9cf07254065d1db26345f783bcf3f6d30e527d6f742",
+    "engine-debug-build.json": "108b2c9dab77a8fc83d96c044bad2209ca3a926713cfce94b0d874d9c274bb6d",
+    "engine-debug-build.log": "6c8cdc8b65de7c032800368e3bc116714e6e25f91f82f1fb8cadf51dcc1d6de3",
+    "engine-debug-checks-full.log": "d03ce7532ab7ed2692169a646900b29d9a2da6b8538046c24cfa61f57bec07c0",
+    "engine-debug-checks.json": "4e6d0d412049537ccd95fc3b5284b46f3a6d06396ff632613dc4a0a4607150cb",
+    "engine-debug-checks.log": "a61cad14ba5a2868295f936b3307d2929280672f6edf7f9840c52354765edfe0",
+    "engine-debug-checks.xml": "46ee27e020d6242fe2e96a82c845738fd3ae1c8c7ffeb3d1649c66b7b6a62d3a",
+    "engine-debug-provenance.json": "a0d3e989b34b95bfe2081d9d2e57eae0a9301326f0aec871359bc5fc82baf3c5",
+    "engine-release-build.json": "0141b7e43972ec0691c71724009e448df1baca30ea86150c793bba0fc6f9bedb",
+    "engine-release-build.log": "9d9569d01c7a9a6aaafbe697ed7a1fcef9ad73156a46751d19dadc6ddca3a601",
+    "engine-release-checks-full.log": "68c4ef6cda541b9429d7e0c210424850ddafd4464d0ddc8616e9e7561222daad",
+    "engine-release-checks.json": "3bade32d39fa30fd8e47c03e29506512e693cfbdd1f606d1753613f99add3fbc",
+    "engine-release-checks.log": "342b02897c67d70559a6b7b4d49d51af63c8e15e881ce0a8f98b08c65cb9f2ec",
+    "engine-release-checks.xml": "fad6f1a3f3741bfa06faa05eb879e1868da25cc5ead4c3fb97818c2461648655",
+    "engine-release-provenance.json": "11dcfc3020351b4010328639c26638f320a435d00e5978de742c14646278ddc8",
+    "image/captures/azureplayer.log.jsonl": "31219408d3f393628d869efb3de17d5954c2cbd3ad99295ea94eead33994df87",
+    "image/command.json": "80237920d951c8e4b69f36153d40be0b6d5098480f090d96006e23c03e05cc4e",
+    "image/frozen-inputs.json": "7a6b433a6de11d2ed00dd88ae3da06310b570dac476bec404d5494b6f4b61be0",
+    "image/results.json": "69e2c58006864a38c55357a5e9f9b76347122765baf39a0a73d1d48912050a46",
+    "image/runtime.json": "8cdb0699be738abde1b31dc92f95ad6bf85531056e9f3ecb7a1224427c16a0a9",
+    "image/stderr.log": "c125a116f43e1342a8e1f7f656b11101b7c2be1b84f41fdbf8afed6f898e56ee",
+    "image/stdout.log": "223d0f587e2d5e8c57a2eec1e35c75cba7c7cbec4ee99cb0e5ce37be04bb4107",
+    "paired-cost-plan.json": "be6ce89d892c60362fde500a0ddd7bfdbe2bf3f8e973c92fb6b0f8b794b80a9a",
+    "paired-cost-results.json": "c7332d56aac95b50c0fbc3e01ff7406179adebd718708b070602368a41d481bb",
+    "performance/a-after/captures/azureplayer.log.jsonl": "562701b5dea7a0a91aefae7ba4e1aeb5934c826253e2916605a91e13a08306e9",
+    "performance/a-after/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "performance/a-after/environment.json": "9e6bb24b92a1350e08f4ee434e2ba8a15dd0a5ff1ea6e7ff45c7a5a61d3d5d48",
+    "performance/a-after/frozen-inputs.json": "06a0431fbfc9534c4389685f00a8f03a780463a733fac25293628e68564eb556",
+    "performance/a-after/memory.json": "f5552a9615549f2cdd870bdb349e963823a3dbc6f88b834a7a2b452b7c3fbe4f",
+    "performance/a-after/results.json": "bc8e08231a9aba593b22d0a39abf05589a34661000f9c662c3b469d94fbde2cf",
+    "performance/a-after/runtime.json": "4984ef4b27fbcd44f544d4ee7de0474280732c62b0a453fea709c5f71569e3f1",
+    "performance/a-after/stderr.log": "568ba3ce2b7fae94e7606514a2b242f43c53929d3ec24fb9c0fc08a55d24070e",
+    "performance/a-after/stdout.log": "1465f6d94169e5ec496c7c27ada4710893c0e119bd74a70e1226ad3e7ee70820",
+    "performance/a-after/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "performance/a-after/task.json": "3a244b53bec620037e97ec4bf3dad473b68bb397431fc439d90c06e065856e46",
+    "performance/a-after/timing.csv": "97d216aa1a08653e2e51798e320c7747cc01a7c64417762feab3f76756bf3207",
+    "performance/a-after/timing.json": "1bdeb6717aaade4b79cbd036543d4615db9b3dbb6d4f7193861d9789a2df43e9",
+    "performance/a-before/captures/azureplayer.log.jsonl": "ade01b60715e5464a62f80e96310c6dd1a0962e7f8cb32cf938b8df3541e3dcf",
+    "performance/a-before/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "performance/a-before/environment.json": "089df8d482c637abfd737cec6883c11248ee4334bc235e70bb46694b4f5b0142",
+    "performance/a-before/frozen-inputs.json": "06a0431fbfc9534c4389685f00a8f03a780463a733fac25293628e68564eb556",
+    "performance/a-before/memory.json": "6147bc692a5dd51c55550cac1317c72fdb6f2b3a890f2f0a03e61080049c4dff",
+    "performance/a-before/results.json": "52e1a369ed144b508cb8ec50e55c3991bb733c6f1e9e42af9ceb2512c906aa6b",
+    "performance/a-before/runtime.json": "9e66a4e7ef0ae0442dd6419883cc40b5bff82b4d34e7fe223446bb68c3bbee43",
+    "performance/a-before/stderr.log": "2c11723c2573db583d20fb54f2bb7a0bb6a11c11bfa26d7494c317eab8205ce3",
+    "performance/a-before/stdout.log": "57ff1a42a9364a5f0688034165bb9a0c3e2b66151e6a3b2e61bdfac7e605bdca",
+    "performance/a-before/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "performance/a-before/task.json": "64a6189bda9a24bc1e261576c85668ca211a7602881295c62563a7491f84be97",
+    "performance/a-before/timing.csv": "13bde07c6fcf007925821d97955c4cfe9c3a8a973b351541ea763e49731ea73b",
+    "performance/a-before/timing.json": "c42caeb0762e4020be4668ad6ab724e090e5a10376abd3b9538edbd4df7fbc89",
+    "performance/b-candidate/captures/azureplayer.log.jsonl": "8feb90330f1bcc0ff514f2448787359120dff9e236105212e886e33695428156",
+    "performance/b-candidate/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "performance/b-candidate/environment.json": "38edf7d1ee86de7cc5df983714918b266f83fcad9dc3ce815da3e87080214d9e",
+    "performance/b-candidate/frozen-inputs.json": "06a0431fbfc9534c4389685f00a8f03a780463a733fac25293628e68564eb556",
+    "performance/b-candidate/memory.json": "d5ee2a9ad40749c59f6bb52d62806a5def72f9d817d3dac46af3f244c3da15ea",
+    "performance/b-candidate/results.json": "1fb02d5476782918eb3bc55d74b483916b6e126b3d2823fbfa75447e3b264286",
+    "performance/b-candidate/runtime.json": "2c18a0bdff22a319eb673afa983b7d76a75681779b177996dc3595d89d595323",
+    "performance/b-candidate/stderr.log": "7d6593a9be9ccf3abdd4e13b9f90c2d4725b570418f2e2440ebd85d966eecf2d",
+    "performance/b-candidate/stdout.log": "a2e911105ee3b111dab4bbb17254a31bd475aff9fa30b2db8876412f87bc4baf",
+    "performance/b-candidate/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "performance/b-candidate/task.json": "aae803e4220b18f7e7e945667a230114847c203c2e212f8965be4d8e1afe760c",
+    "performance/b-candidate/timing.csv": "430bba75a5f847fea2d73a7df28346eb82bef9095e94ec2d55c2cf266b6a03d3",
+    "performance/b-candidate/timing.json": "f5b66a649454ead18eb667df2479d1999b500f740dcac109872fe6e39cc4c29b",
+    "selected.json": "a6b89436db5b47c70798ef870afc66c153137e279ec08e472152ab0dd013a15b"
+  }
+}

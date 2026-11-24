@@ -1,0 +1,2061 @@
+{
+  "status": "relocated-owned-evidence",
+  "reason": "Generated capture directories are ignored by the repository. Flat diagnostic filenames preserve exact compressed bytes.",
+  "files": [
+    {
+      "source": "backend-gpu/debug/blackhole/captures/azureplayer.log.jsonl.gz",
+      "target": "backend-gpu/debug/blackhole/diagnostics.jsonl.gz",
+      "sha256": "89041fb41dddb35987a128d91adf7c8116158a5afc4e79b99222df2615b1cd1a"
+    },
+    {
+      "source": "backend-gpu/debug/pathtracing/captures/azureplayer.log.jsonl.gz",
+      "target": "backend-gpu/debug/pathtracing/diagnostics.jsonl.gz",
+      "sha256": "9f1002735533bc29c686619daf0bda43dab51217e1189296d03b613b015e48ec"
+    },
+    {
+      "source": "backend-gpu/debug/sample/captures/azureplayer.log.jsonl.gz",
+      "target": "backend-gpu/debug/sample/diagnostics.jsonl.gz",
+      "sha256": "f78947cbbe1e8024e44c497f72a8e9a09fefeac7eb11e660fb8ae0589aee7da0"
+    },
+    {
+      "source": "backend-gpu/release/blackhole/captures/azureplayer.log.jsonl.gz",
+      "target": "backend-gpu/release/blackhole/diagnostics.jsonl.gz",
+      "sha256": "7399d83fc28415ecc4d4fd9799a57ce23371cec716fd49d308c7d3abccfe0fa5"
+    },
+    {
+      "source": "backend-gpu/release/pathtracing/captures/azureplayer.log.jsonl.gz",
+      "target": "backend-gpu/release/pathtracing/diagnostics.jsonl.gz",
+      "sha256": "f3465b731b26ca34646795ac6d0a1d4d9d09d0395a2709bac38541c083334228"
+    },
+    {
+      "source": "backend-gpu/release/sample/captures/azureplayer.log.jsonl.gz",
+      "target": "backend-gpu/release/sample/diagnostics.jsonl.gz",
+      "sha256": "e40c70957ec62658c1f96feff48ffaba0f5bceda92caac4796bd754977c704f1"
+    },
+    {
+      "source": "fog-field-green-debug/fixed-linear-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "fog-field-green-debug/fixed-linear-additive/diagnostics.jsonl.gz",
+      "sha256": "581559684c94d3b25f59d9fdffbfbe33a82af5326cb48a2ce5e33fb08d6d171d"
+    },
+    {
+      "source": "fog-field-green-debug/fixed-linear-display/captures/azureplayer.log.jsonl.gz",
+      "target": "fog-field-green-debug/fixed-linear-display/diagnostics.jsonl.gz",
+      "sha256": "e1885d8697e7aa838ad40f3de217b40ef5ee85b774aaefdd29cbb96033808381"
+    },
+    {
+      "source": "fog-field-green-debug/fixed-radiance-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "fog-field-green-debug/fixed-radiance-quarter/diagnostics.jsonl.gz",
+      "sha256": "94ea0debf7132c907bf3f875a7dbd92419c90ebd92c39fe39079b0efac90e2f4"
+    },
+    {
+      "source": "fog-field-green-debug/indexed-linear-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "fog-field-green-debug/indexed-linear-additive/diagnostics.jsonl.gz",
+      "sha256": "e4a9c8dc727bbb5d58217e705173f8bb9ef8b785197dd24fcff99c3c9fff024f"
+    },
+    {
+      "source": "fog-field-green-debug/indexed-linear-display/captures/azureplayer.log.jsonl.gz",
+      "target": "fog-field-green-debug/indexed-linear-display/diagnostics.jsonl.gz",
+      "sha256": "d8ed651082060104fa5c4ae51d75dff220a46fcd13eba036f0e6ec7197421c7b"
+    },
+    {
+      "source": "fog-field-green-debug/indexed-radiance-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "fog-field-green-debug/indexed-radiance-quarter/diagnostics.jsonl.gz",
+      "sha256": "d8214447ffdd41f44142327d81adb798a78f43c2902fdccf0ff744af794a9c0d"
+    },
+    {
+      "source": "fog-radiance-red/indexed-radiance-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "fog-radiance-red/indexed-radiance-quarter/diagnostics.jsonl.gz",
+      "sha256": "a91097d8e7ef06d7332d4c786b0c7361593e3af084e0f2b0df4416f685833fed"
+    },
+    {
+      "source": "gpu-complete-debug/additive-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/additive-linear/diagnostics.jsonl.gz",
+      "sha256": "3bf10cec6a7d60445f69872acccd1f1006d0ed4168994ef051c275ab4b1fde49"
+    },
+    {
+      "source": "gpu-complete-debug/additive-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/additive-reference/diagnostics.jsonl.gz",
+      "sha256": "11faa75061fdb6882550bdceff7fbe13f8ee3baf673ac73d72d7628b5942ae0c"
+    },
+    {
+      "source": "gpu-complete-debug/additive-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/additive-scene/diagnostics.jsonl.gz",
+      "sha256": "2b8cb029ef6cc264ddfc816aa927a182e04e1223cf1ef08c504a331beddde1b2"
+    },
+    {
+      "source": "gpu-complete-debug/cutout-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/cutout-linear/diagnostics.jsonl.gz",
+      "sha256": "987f856fbfea7f973d65ad4ea4f2d9aa2a31cf6462e5a1b24a6ba93daa6a4355"
+    },
+    {
+      "source": "gpu-complete-debug/cutout-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/cutout-reference/diagnostics.jsonl.gz",
+      "sha256": "0fe95cea8b72e6a2cece51a662582052ff8c9fa44c0ea7892d777d67b3fe9f3e"
+    },
+    {
+      "source": "gpu-complete-debug/cutout-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/cutout-scene/diagnostics.jsonl.gz",
+      "sha256": "141d389f3cb4bf777ef2c931220f1ec3251116ce01da79db93e4a242abc5909f"
+    },
+    {
+      "source": "gpu-complete-debug/eye-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/eye-linear/diagnostics.jsonl.gz",
+      "sha256": "4980ebbceac34c6fa262785ca5d55debe467c41ef537f172ca3f9cb380831b0f"
+    },
+    {
+      "source": "gpu-complete-debug/eye-linear-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/eye-linear-fixed/diagnostics.jsonl.gz",
+      "sha256": "b1f50700a4720e2aef0c393aeec31ccaeccdd3e9e7c41a382aadcb20f59a26f2"
+    },
+    {
+      "source": "gpu-complete-debug/eye-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/eye-reference/diagnostics.jsonl.gz",
+      "sha256": "f724c1eafe2675422344c017abe85ad3d9376df4d9bca95ba976a87c47df2777"
+    },
+    {
+      "source": "gpu-complete-debug/eye-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/eye-scene/diagnostics.jsonl.gz",
+      "sha256": "cf599f5ea0d576161c0edf50fb096bc7426f7d771154a468fd7913e107b53fdb"
+    },
+    {
+      "source": "gpu-complete-debug/hair-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/hair-linear/diagnostics.jsonl.gz",
+      "sha256": "c020e0f9c1bc2089c63f2dccbbc69f19d0d2945d22368fa34411270f59004bf8"
+    },
+    {
+      "source": "gpu-complete-debug/hair-linear-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/hair-linear-fixed/diagnostics.jsonl.gz",
+      "sha256": "cdbfc866a4a77403618ffc389ee10e05f9ff176fca739f4a2c7fc774ef047ede"
+    },
+    {
+      "source": "gpu-complete-debug/hair-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/hair-reference/diagnostics.jsonl.gz",
+      "sha256": "c7dd5820179aa9d672d78467d6d8ef9d2666f81aafacd61ee18ee83c0e209ff1"
+    },
+    {
+      "source": "gpu-complete-debug/hair-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/hair-scene/diagnostics.jsonl.gz",
+      "sha256": "0ece0cf68e6652617fa019e46e1286ba9bdb049afe56efa2c2e27f1bc3dbe9a0"
+    },
+    {
+      "source": "gpu-complete-debug/layers-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/layers-linear/diagnostics.jsonl.gz",
+      "sha256": "f4bdacd93a844a72ea30e15d1fb01a622553f5c27a2aeafbcd213195d77e185e"
+    },
+    {
+      "source": "gpu-complete-debug/layers-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/layers-reference/diagnostics.jsonl.gz",
+      "sha256": "103c73de17ca75056a15e09690c1ca56f505be1fc3d959986c64a3bae5d11077"
+    },
+    {
+      "source": "gpu-complete-debug/layers-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/layers-scene/diagnostics.jsonl.gz",
+      "sha256": "4955f96cc820d735de8fd699f0b99eafc4e300ddaa919ca9a69a3539daf2e93b"
+    },
+    {
+      "source": "gpu-complete-debug/mixed-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/mixed-linear/diagnostics.jsonl.gz",
+      "sha256": "f380f6e6e32c4e1d39df08533b347eaadfb7560ddfc5ad797f7c9c1f0a5bf5d9"
+    },
+    {
+      "source": "gpu-complete-debug/mixed-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/mixed-reference/diagnostics.jsonl.gz",
+      "sha256": "f2bb73ab28fb205c53af7beac32aff8c041a762ec07d8c4dcb236b2e3cb51332"
+    },
+    {
+      "source": "gpu-complete-debug/mixed-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/mixed-scene/diagnostics.jsonl.gz",
+      "sha256": "1fae1ce88cb72971cd7439be79b14f2f84d8877d91be9e2eef8f6a4ae2c2bcf7"
+    },
+    {
+      "source": "gpu-complete-debug/multiply-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/multiply-linear/diagnostics.jsonl.gz",
+      "sha256": "ad33c4f95beb777983ca5350fbca799f6854638992ba078d376c97c1ef754d3b"
+    },
+    {
+      "source": "gpu-complete-debug/multiply-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/multiply-reference/diagnostics.jsonl.gz",
+      "sha256": "5780e0142eb9b42ae5d73f4d41c506dab3ce94c01fd1aa8030e2fd5c12bf452c"
+    },
+    {
+      "source": "gpu-complete-debug/multiply-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/multiply-scene/diagnostics.jsonl.gz",
+      "sha256": "26261e5eabf66563d0a31f687ef287b6cd59e9e00b0f3cc34280f3e0f26e838c"
+    },
+    {
+      "source": "gpu-complete-debug/multisample-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/multisample-linear/diagnostics.jsonl.gz",
+      "sha256": "8bc2d9833245e018e254e7cfc6fb9f59e999e28b826f15e0ab25a38064186506"
+    },
+    {
+      "source": "gpu-complete-debug/multisample-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/multisample-reference/diagnostics.jsonl.gz",
+      "sha256": "81f0b87aa1a62328375658170efb373b778380180ab400412a3a1c76295ef730"
+    },
+    {
+      "source": "gpu-complete-debug/multisample-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/multisample-scene/diagnostics.jsonl.gz",
+      "sha256": "6ea41f0541f41840249f8e7616e15901c1c82756fdfa3517d9cf87292f3ae0e7"
+    },
+    {
+      "source": "gpu-complete-debug/npr-document-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/npr-document-linear/diagnostics.jsonl.gz",
+      "sha256": "ca4cec9e39cdea48178db8198f14146e336b35373d5795227eea321860425a7e"
+    },
+    {
+      "source": "gpu-complete-debug/npr-document-linear-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/npr-document-linear-fixed/diagnostics.jsonl.gz",
+      "sha256": "9bb788e3abb70948f2b5408eb63b8e79f63a28c23237824477aef19bfc3d5cec"
+    },
+    {
+      "source": "gpu-complete-debug/npr-document-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/npr-document-reference/diagnostics.jsonl.gz",
+      "sha256": "16db59cc1493716d1094e687bfcce538b20c967e3b3fbcce35ce4b86aa2b378d"
+    },
+    {
+      "source": "gpu-complete-debug/npr-document-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/npr-document-scene/diagnostics.jsonl.gz",
+      "sha256": "b6fccbab0dd077df82b434afe650dc068d3f839c696d55220426480b4f2e101a"
+    },
+    {
+      "source": "gpu-complete-debug/npr-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/npr-linear/diagnostics.jsonl.gz",
+      "sha256": "20a0e34e6e3da2b7a67f9786c6a43f77d40e984243b4a676d5bc81d229474ece"
+    },
+    {
+      "source": "gpu-complete-debug/npr-linear-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/npr-linear-fixed/diagnostics.jsonl.gz",
+      "sha256": "22be52ad2f6106bf5cfb482a2a91c428079e64e6408a4ec7a4419b6bd1064140"
+    },
+    {
+      "source": "gpu-complete-debug/npr-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/npr-reference/diagnostics.jsonl.gz",
+      "sha256": "54562c970be6add050eacfbb64e2a72ef690c3ee452fe6d402cfbe6402f7fb58"
+    },
+    {
+      "source": "gpu-complete-debug/npr-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/npr-scene/diagnostics.jsonl.gz",
+      "sha256": "a0fa00154fad6f2b9ba820bd5bcae6eec20933306d6d4c7ed67920e525219fc1"
+    },
+    {
+      "source": "gpu-complete-debug/opacity-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/opacity-linear/diagnostics.jsonl.gz",
+      "sha256": "174128aaa5e44396802e23a480285b4d7c268786fd88af864c24c3425fc59c2f"
+    },
+    {
+      "source": "gpu-complete-debug/opacity-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/opacity-reference/diagnostics.jsonl.gz",
+      "sha256": "213039114dd47525ca8ebc802d686f2a2cfa5120278f3026801123dd797dad57"
+    },
+    {
+      "source": "gpu-complete-debug/opacity-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/opacity-scene/diagnostics.jsonl.gz",
+      "sha256": "4a876fd6c8e369c3dd7d3c413d59e9f65cfe5403c3b480f86666c9f7e40bab29"
+    },
+    {
+      "source": "gpu-complete-debug/outline-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/outline-linear/diagnostics.jsonl.gz",
+      "sha256": "e29f929a41d339e80f5c7107913ff02a3469780be7253d1106137af529249006"
+    },
+    {
+      "source": "gpu-complete-debug/outline-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/outline-reference/diagnostics.jsonl.gz",
+      "sha256": "2e1943cf5f9d80b6d9fd51774e9dd9e7037fe6e5121fd16a6fa7bdf8d4d5b1a1"
+    },
+    {
+      "source": "gpu-complete-debug/outline-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/outline-scene/diagnostics.jsonl.gz",
+      "sha256": "07e36f78e7a95fc11ce2a10d7da3d9e2b84de48677710a157bd705a21cd39071"
+    },
+    {
+      "source": "gpu-complete-debug/pbr-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/pbr-linear/diagnostics.jsonl.gz",
+      "sha256": "d4e707d15c8d8a465ea48f4f014cbd240f10916dfd9733f5a663c73cbdbd0553"
+    },
+    {
+      "source": "gpu-complete-debug/pbr-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/pbr-reference/diagnostics.jsonl.gz",
+      "sha256": "62b5a8bbe698ef8fc5026a70c20ed485c23029aa3ef72e38a8601821cb642f7b"
+    },
+    {
+      "source": "gpu-complete-debug/pbr-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/pbr-scene/diagnostics.jsonl.gz",
+      "sha256": "e907c844866ef23b0ebc250f745e3dc978e4b0019c0d05342384eb7e822ddd30"
+    },
+    {
+      "source": "gpu-complete-debug/temporal-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/temporal-linear/diagnostics.jsonl.gz",
+      "sha256": "b2a922285b5758a3126378ee71b5f58d408afdeb388188b707b6f90f256e358c"
+    },
+    {
+      "source": "gpu-complete-debug/temporal-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/temporal-reference/diagnostics.jsonl.gz",
+      "sha256": "2cb979d139fa10968beb3bfdca5e7c0c6e0882c337a82127b9836ee214a1cb69"
+    },
+    {
+      "source": "gpu-complete-debug/temporal-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/temporal-scene/diagnostics.jsonl.gz",
+      "sha256": "2428625260531fac315761fcefd33976e32a8baa5cad283a46cb9d26231a1d13"
+    },
+    {
+      "source": "gpu-complete-debug/transparent-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/transparent-linear/diagnostics.jsonl.gz",
+      "sha256": "4dfb050e6e8882a78053b72ec73e99a7e2b4436651684d2d5b82cc4bb66ba71b"
+    },
+    {
+      "source": "gpu-complete-debug/transparent-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/transparent-reference/diagnostics.jsonl.gz",
+      "sha256": "35107428b07536dba41d28db299058a8df484dca130330a1928fcafce65dcef1"
+    },
+    {
+      "source": "gpu-complete-debug/transparent-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/transparent-scene/diagnostics.jsonl.gz",
+      "sha256": "ca4072400209bd9523d249126a79fc7218d6a60ad09d45fba38013e3dbdd9930"
+    },
+    {
+      "source": "gpu-complete-debug/unlit-explicit-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/unlit-explicit-scene/diagnostics.jsonl.gz",
+      "sha256": "acedd0042fd0f4bbde6ce42ed0e711549b49acff7244a422d87ce1621ba81ffb"
+    },
+    {
+      "source": "gpu-complete-debug/unlit-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/unlit-linear/diagnostics.jsonl.gz",
+      "sha256": "f7f0abd93b9ebb4375d484778cbf864253a98c342f5f333fb09e8ec2da7f089f"
+    },
+    {
+      "source": "gpu-complete-debug/unlit-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/unlit-reference/diagnostics.jsonl.gz",
+      "sha256": "cc91431b6d425e109efad1cb38a94eeabb32e5100e11fde0d64ae8837cb26c28"
+    },
+    {
+      "source": "gpu-complete-debug/unlit-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-debug/unlit-scene/diagnostics.jsonl.gz",
+      "sha256": "9c89489179998e075c03fee61769a608296ae74f6f898808270249d8426ff000"
+    },
+    {
+      "source": "gpu-complete-release/additive-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/additive-linear/diagnostics.jsonl.gz",
+      "sha256": "0d144361eb5b45d1d313b0e3fd76ddbe566161c1f6dec8939d3d1c9c787c1a76"
+    },
+    {
+      "source": "gpu-complete-release/additive-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/additive-reference/diagnostics.jsonl.gz",
+      "sha256": "c25636a1078e271f4d7e3f75e22a21a935c79c127e67901e69bf9f54cc9b6909"
+    },
+    {
+      "source": "gpu-complete-release/additive-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/additive-scene/diagnostics.jsonl.gz",
+      "sha256": "1f8f469692b93149567634ae59eba637418f14d562f37bc02904ca866c2ad0f9"
+    },
+    {
+      "source": "gpu-complete-release/cutout-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/cutout-linear/diagnostics.jsonl.gz",
+      "sha256": "cd14e5a32fd367c5b7acdb75e25525fae5cfcef41726e57230d73f6ebaf0df22"
+    },
+    {
+      "source": "gpu-complete-release/cutout-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/cutout-reference/diagnostics.jsonl.gz",
+      "sha256": "d7952f1d45fb13d330c9518287aa0ea3bd3c6e541bb3c36583826a43f84d1351"
+    },
+    {
+      "source": "gpu-complete-release/cutout-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/cutout-scene/diagnostics.jsonl.gz",
+      "sha256": "b40935aeadef1071e5d91983c803a6bbe76d0504e6a4a664f427ab3efaaeff2b"
+    },
+    {
+      "source": "gpu-complete-release/eye-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/eye-linear/diagnostics.jsonl.gz",
+      "sha256": "9b0affbb565ed07a4b39540de8126d4aa95ae32366627a8cfbe61064c779d6be"
+    },
+    {
+      "source": "gpu-complete-release/eye-linear-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/eye-linear-fixed/diagnostics.jsonl.gz",
+      "sha256": "098d49473e2e2ae4ec40787a45196c07119590e70825cb19430cd1bf09962501"
+    },
+    {
+      "source": "gpu-complete-release/eye-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/eye-reference/diagnostics.jsonl.gz",
+      "sha256": "299016de99a2601c06534e76705f817224eb7d53fb5e5a643c524f9e0ed9abcf"
+    },
+    {
+      "source": "gpu-complete-release/eye-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/eye-scene/diagnostics.jsonl.gz",
+      "sha256": "b08444b340378836074dd8eda606a781cf8ed54fba7a8c909a5d7fae6dc74ce0"
+    },
+    {
+      "source": "gpu-complete-release/hair-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/hair-linear/diagnostics.jsonl.gz",
+      "sha256": "c726b992f91fa2be2b3ea905aea7ca702d262ceaf02362139ae83045e7a85603"
+    },
+    {
+      "source": "gpu-complete-release/hair-linear-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/hair-linear-fixed/diagnostics.jsonl.gz",
+      "sha256": "e4441c918098c09af50ddd999a42192068f04396fc833605cffc24b227cca753"
+    },
+    {
+      "source": "gpu-complete-release/hair-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/hair-reference/diagnostics.jsonl.gz",
+      "sha256": "ccb533ce4f107784c668ae2b7e7cf472d9822c1988ceae2dbebe286806429cf5"
+    },
+    {
+      "source": "gpu-complete-release/hair-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/hair-scene/diagnostics.jsonl.gz",
+      "sha256": "e5735cf8c737dc322065e290ca2ff30d966d1bcdbb891b83a75eb33b80d898c7"
+    },
+    {
+      "source": "gpu-complete-release/layers-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/layers-linear/diagnostics.jsonl.gz",
+      "sha256": "9e81187027aa5c8f65f0698374b2518dc7080b5762b9e3207796e597963cef13"
+    },
+    {
+      "source": "gpu-complete-release/layers-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/layers-reference/diagnostics.jsonl.gz",
+      "sha256": "e16d697bdd87b7b5466c88dd1dcdeb68a82ca81c7a9ecf17770bdef6f10429db"
+    },
+    {
+      "source": "gpu-complete-release/layers-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/layers-scene/diagnostics.jsonl.gz",
+      "sha256": "ca4d0538f2bf481f8b655da3e6d3585af0dbf78c438fcd0782f29c2d8a4479a8"
+    },
+    {
+      "source": "gpu-complete-release/mixed-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/mixed-linear/diagnostics.jsonl.gz",
+      "sha256": "9fc50e4a9aa0cccdbd0a4d43522102a07965568dc842140daa4c68788633127c"
+    },
+    {
+      "source": "gpu-complete-release/mixed-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/mixed-reference/diagnostics.jsonl.gz",
+      "sha256": "1e8c8fcc003a1b6d51f024d1678c077a3e3242da47cecacccb9ddc30593bf1ae"
+    },
+    {
+      "source": "gpu-complete-release/mixed-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/mixed-scene/diagnostics.jsonl.gz",
+      "sha256": "7ec8e7a912f1493a187d77a8821f5c62d9ff0ad8381d3a25afb17b714a550504"
+    },
+    {
+      "source": "gpu-complete-release/multiply-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/multiply-linear/diagnostics.jsonl.gz",
+      "sha256": "a794a0d3bec55c024778d91bfa92a0baebc6d50b1179b8fcc506903041a487e5"
+    },
+    {
+      "source": "gpu-complete-release/multiply-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/multiply-reference/diagnostics.jsonl.gz",
+      "sha256": "8401383fcb93df92bcf7b278f42bfed0d3608be2ea5db55b6c7109cc9fa25413"
+    },
+    {
+      "source": "gpu-complete-release/multiply-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/multiply-scene/diagnostics.jsonl.gz",
+      "sha256": "71ebdd9f74d8784810fc477ebd0574df4c8e9401e3389ee28afe99e3bc8edb72"
+    },
+    {
+      "source": "gpu-complete-release/multisample-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/multisample-linear/diagnostics.jsonl.gz",
+      "sha256": "7c225823bd7dd90294208dc5eec524f16d809be979566f9965af7e5955249949"
+    },
+    {
+      "source": "gpu-complete-release/multisample-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/multisample-reference/diagnostics.jsonl.gz",
+      "sha256": "93e94147dc5b597b2422fea875d6d9b110faa3b9c80809debf60a605486cd918"
+    },
+    {
+      "source": "gpu-complete-release/multisample-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/multisample-scene/diagnostics.jsonl.gz",
+      "sha256": "a7c208d98e0d60b4f3fbde9ba2ebaaf8663a81390beb0a4114742fed1a41517a"
+    },
+    {
+      "source": "gpu-complete-release/npr-document-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/npr-document-linear/diagnostics.jsonl.gz",
+      "sha256": "197214d044d09d9979a013cd5a7410053d747fbf5afd9458d8c448b4bd779a18"
+    },
+    {
+      "source": "gpu-complete-release/npr-document-linear-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/npr-document-linear-fixed/diagnostics.jsonl.gz",
+      "sha256": "51fe2eecde05e32b7d5bf189ecec5c168bdafeab71e9949079a73c0cd4579c2f"
+    },
+    {
+      "source": "gpu-complete-release/npr-document-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/npr-document-reference/diagnostics.jsonl.gz",
+      "sha256": "79464bc73dd654e9d507ea1cb4107b2bba4054bb92037a1a283a07035ee880b5"
+    },
+    {
+      "source": "gpu-complete-release/npr-document-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/npr-document-scene/diagnostics.jsonl.gz",
+      "sha256": "5b8110c5f73168fa72ce86705fdc500664a0238a867a60820b320c1aec6bd4b7"
+    },
+    {
+      "source": "gpu-complete-release/npr-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/npr-linear/diagnostics.jsonl.gz",
+      "sha256": "5862a176362b615adc975af415f3d64171a54471de6356d004b507087acbc44e"
+    },
+    {
+      "source": "gpu-complete-release/npr-linear-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/npr-linear-fixed/diagnostics.jsonl.gz",
+      "sha256": "51fcf7135fef94367dc59b03e9af23e4c72ea929572bd4fff22e1e8275f2abd6"
+    },
+    {
+      "source": "gpu-complete-release/npr-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/npr-reference/diagnostics.jsonl.gz",
+      "sha256": "1fbda442f388f4f0d041c53871a3f720f3189bbe0b5ce1277d9c1736ef2ee85d"
+    },
+    {
+      "source": "gpu-complete-release/npr-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/npr-scene/diagnostics.jsonl.gz",
+      "sha256": "e025bc895e4151a982a4be222def19e0e2476aca2381e5a7e109811841262cca"
+    },
+    {
+      "source": "gpu-complete-release/opacity-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/opacity-linear/diagnostics.jsonl.gz",
+      "sha256": "228ab9a8fe6b493c7636bcf90692ccdf47c9a9c659a0ee0e2b2562c861533488"
+    },
+    {
+      "source": "gpu-complete-release/opacity-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/opacity-reference/diagnostics.jsonl.gz",
+      "sha256": "aafef063c451beba173dd4453f38fb67dae63246265436aa0feb15b07399b27c"
+    },
+    {
+      "source": "gpu-complete-release/opacity-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/opacity-scene/diagnostics.jsonl.gz",
+      "sha256": "86d4599181c05b8c0b8bad2f29106e8e025050b87a0e9afe0b7fcc44f4ae18c7"
+    },
+    {
+      "source": "gpu-complete-release/outline-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/outline-linear/diagnostics.jsonl.gz",
+      "sha256": "738496233d4aed0d7c30e8d5919d67922dc151db78ceb2f74562b259cc398f3f"
+    },
+    {
+      "source": "gpu-complete-release/outline-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/outline-reference/diagnostics.jsonl.gz",
+      "sha256": "2c90622b493743e2ef16033f9727f269e5dfa78746b21ca6f58973ac7da185ce"
+    },
+    {
+      "source": "gpu-complete-release/outline-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/outline-scene/diagnostics.jsonl.gz",
+      "sha256": "31bd6b4d0ed36a87f0673a29165b0d3f715aea598023c5080fe1eb415a746762"
+    },
+    {
+      "source": "gpu-complete-release/pbr-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/pbr-linear/diagnostics.jsonl.gz",
+      "sha256": "417e2a434e1f4e56eb21d16ecd9eab62fd13ac4456984c35934d3a4b93e1e7ee"
+    },
+    {
+      "source": "gpu-complete-release/pbr-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/pbr-reference/diagnostics.jsonl.gz",
+      "sha256": "1c62259632871abf4e6f663449fbb644fb2451daf3316ca6212570eac9cc483f"
+    },
+    {
+      "source": "gpu-complete-release/pbr-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/pbr-scene/diagnostics.jsonl.gz",
+      "sha256": "c56aad452b1a49a4c60d6c3d8f6abd5e4a42482aef9d6f16925e1aa433a80a64"
+    },
+    {
+      "source": "gpu-complete-release/temporal-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/temporal-linear/diagnostics.jsonl.gz",
+      "sha256": "d02c3950f1171ecd209a68a6d5cd1c5e2e1ad387fe44767a5a8d35a2c8ce4365"
+    },
+    {
+      "source": "gpu-complete-release/temporal-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/temporal-reference/diagnostics.jsonl.gz",
+      "sha256": "4c3e0fc19c8d204c4f13844f1990aee11a7b14c7f57c83dc8473d5b658f1caf3"
+    },
+    {
+      "source": "gpu-complete-release/temporal-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/temporal-scene/diagnostics.jsonl.gz",
+      "sha256": "9e401a48d6e1dc818a74e362f9e0153b2f3c2257a7175a5e22039a97307ec6de"
+    },
+    {
+      "source": "gpu-complete-release/transparent-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/transparent-linear/diagnostics.jsonl.gz",
+      "sha256": "926d3d87f96b21658c20be98ae2c4bf7e9a8e1c76ae590509fa795fbc25c0c53"
+    },
+    {
+      "source": "gpu-complete-release/transparent-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/transparent-reference/diagnostics.jsonl.gz",
+      "sha256": "d867d1af78623e218cca516fbd8ad1ac557007fb8f3a6f6a06715a21e7b9ad3f"
+    },
+    {
+      "source": "gpu-complete-release/transparent-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/transparent-scene/diagnostics.jsonl.gz",
+      "sha256": "4b355bb07da0bc04375a957a163eb2befc3b67ff2ad3494ab67d70d2a7f2e93e"
+    },
+    {
+      "source": "gpu-complete-release/unlit-explicit-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/unlit-explicit-scene/diagnostics.jsonl.gz",
+      "sha256": "74e743886ff8952803bca6c1cf263b78ee7bbec4be5f0a5d961e0ee44282e2e3"
+    },
+    {
+      "source": "gpu-complete-release/unlit-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/unlit-linear/diagnostics.jsonl.gz",
+      "sha256": "d3597d96181c64144be29539e0e3b0dc0f048a498942fbaee63174001f1e4b8f"
+    },
+    {
+      "source": "gpu-complete-release/unlit-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/unlit-reference/diagnostics.jsonl.gz",
+      "sha256": "fa278494ae330b468e4b921c16378d0febcc8438bad5e9fde2246e1be57d47f2"
+    },
+    {
+      "source": "gpu-complete-release/unlit-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-complete-release/unlit-scene/diagnostics.jsonl.gz",
+      "sha256": "e2dec7cf78216fa3610410c65ca4dcce24c55e2eedb13e7810e5886c64efe319"
+    },
+    {
+      "source": "gpu-edge-debug-after-history/layers-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-edge-debug-after-history/layers-linear/diagnostics.jsonl.gz",
+      "sha256": "dfe12613ae6dc1371dfb1247e1982fa5977dd7efc6010ba26113de5865c72e5a"
+    },
+    {
+      "source": "gpu-edge-debug-after-history/layers-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-edge-debug-after-history/layers-reference/diagnostics.jsonl.gz",
+      "sha256": "cf9c96329a5b7e80a2591ed64945f92fc899675c2c933274cdb60eda954209fa"
+    },
+    {
+      "source": "gpu-edge-debug-after-history/layers-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-edge-debug-after-history/layers-scene/diagnostics.jsonl.gz",
+      "sha256": "a64fe2ebc7713344bc56739e9e1c6f72aef3df9ef615d6d919dfeaa48089e283"
+    },
+    {
+      "source": "gpu-edge-debug-after-history/multisample-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-edge-debug-after-history/multisample-linear/diagnostics.jsonl.gz",
+      "sha256": "4b5a70f8bad1d114d396f3c80dc586b7f016f2da88f2a019cad8d13bb7c6e367"
+    },
+    {
+      "source": "gpu-edge-debug-after-history/multisample-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-edge-debug-after-history/multisample-reference/diagnostics.jsonl.gz",
+      "sha256": "37abfebd1f8553b5fd1d8b076301c2ac78905a8621184ae8a0dea4015dc2fe37"
+    },
+    {
+      "source": "gpu-edge-debug-after-history/multisample-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-edge-debug-after-history/multisample-scene/diagnostics.jsonl.gz",
+      "sha256": "bde336d464a0dfca52d10355483cf7736bc74c72cb1a01d7d0b7922ac50f0831"
+    },
+    {
+      "source": "gpu-edge-debug-after-history/temporal-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-edge-debug-after-history/temporal-linear/diagnostics.jsonl.gz",
+      "sha256": "896ed1ad8fa1f6213d571d4ee4e9503116301dd29524fa535cfc470c6f918a1e"
+    },
+    {
+      "source": "gpu-edge-debug-after-history/temporal-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-edge-debug-after-history/temporal-reference/diagnostics.jsonl.gz",
+      "sha256": "94f710340a221e7f3fa1fb3b23a74caeced21e69a60e25535aebe1462d92d8f5"
+    },
+    {
+      "source": "gpu-edge-debug-after-history/temporal-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-edge-debug-after-history/temporal-scene/diagnostics.jsonl.gz",
+      "sha256": "882d4e0bad57a8cd076c92b5c860a1718e288307c6cb98c04b4229892e2a95ce"
+    },
+    {
+      "source": "gpu-full-release/cutout-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/cutout-linear/diagnostics.jsonl.gz",
+      "sha256": "c5c623b14243fa17f20abf4fa3d89dfa6c6d475f631a1cd618a7c645aff5ff2a"
+    },
+    {
+      "source": "gpu-full-release/cutout-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/cutout-reference/diagnostics.jsonl.gz",
+      "sha256": "dc78b7508b965eed42959739ca04446236716537fafe1d03104d2837341f175e"
+    },
+    {
+      "source": "gpu-full-release/cutout-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/cutout-scene/diagnostics.jsonl.gz",
+      "sha256": "3b6e151ff5662cc8cff879e4646e9e07c1ecd9d9b27b4909d2071c5fb49aa9e2"
+    },
+    {
+      "source": "gpu-full-release/eye-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/eye-linear/diagnostics.jsonl.gz",
+      "sha256": "13b259fde6956acf3e25e150cbc640860b91db5a66ccf6c7f8001a98059a2ea9"
+    },
+    {
+      "source": "gpu-full-release/eye-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/eye-reference/diagnostics.jsonl.gz",
+      "sha256": "986f14ef36eb73b9e253c245dd7f01e527d515bb1c9b5aabf44f49e1a8fa5d95"
+    },
+    {
+      "source": "gpu-full-release/eye-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/eye-scene/diagnostics.jsonl.gz",
+      "sha256": "a24e44007cdbb00c620870349f1528c4569e56dbd54359bfaab4fbc85c748878"
+    },
+    {
+      "source": "gpu-full-release/hair-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/hair-linear/diagnostics.jsonl.gz",
+      "sha256": "9d4b5adeca189be5dfa280859eb41bf88a6e77a03fa8c6152cc8f7e7d48da828"
+    },
+    {
+      "source": "gpu-full-release/hair-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/hair-reference/diagnostics.jsonl.gz",
+      "sha256": "f29daad53599f1e8710a2990e1e1b645f888eecaab21e7d96df1f53e72610024"
+    },
+    {
+      "source": "gpu-full-release/hair-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/hair-scene/diagnostics.jsonl.gz",
+      "sha256": "da01bffefea9d985be5e88f64a7a0edc6fb9ee1e517e4b2fe1cb6214bc37587b"
+    },
+    {
+      "source": "gpu-full-release/layers-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/layers-reference/diagnostics.jsonl.gz",
+      "sha256": "3803ba5ae9fc5a99c7f98e94544b57989cfc8b3e9e5a1e7545af9865bdff7aa0"
+    },
+    {
+      "source": "gpu-full-release/mixed-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/mixed-linear/diagnostics.jsonl.gz",
+      "sha256": "0f541a9b301d2e065fe96a930400d425779d293bcd29fb67a60f2d6b0127dcf6"
+    },
+    {
+      "source": "gpu-full-release/mixed-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/mixed-reference/diagnostics.jsonl.gz",
+      "sha256": "7554613cd2d204dba6a778c11cfb2cb353c3d0e03caf4dbf266408f85ebb0fe1"
+    },
+    {
+      "source": "gpu-full-release/mixed-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/mixed-scene/diagnostics.jsonl.gz",
+      "sha256": "6059edd6a4f99875ee5f3e96c0825bb341387f409c9511426672a13969d0aefb"
+    },
+    {
+      "source": "gpu-full-release/multiply-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/multiply-linear/diagnostics.jsonl.gz",
+      "sha256": "18f0e521f2248d63ae6cd23dba7d299b44d1ccfcf7b7ac411b639935fa4a467f"
+    },
+    {
+      "source": "gpu-full-release/multiply-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/multiply-reference/diagnostics.jsonl.gz",
+      "sha256": "5a2681ad7965df59cea5ab050f2f47f3e0cfa837ae102af3376fa6830b8a53dc"
+    },
+    {
+      "source": "gpu-full-release/multiply-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/multiply-scene/diagnostics.jsonl.gz",
+      "sha256": "c7c369338e23ff8ac7112da2a69ceb76e664c7a52eca0b3f5a91d1105681bf16"
+    },
+    {
+      "source": "gpu-full-release/npr-document-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/npr-document-linear/diagnostics.jsonl.gz",
+      "sha256": "ad587d7f21a9bce88c4ca8f046e6d994dbbf38aea0a5d956078beda242c89a24"
+    },
+    {
+      "source": "gpu-full-release/npr-document-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/npr-document-reference/diagnostics.jsonl.gz",
+      "sha256": "a1e54c9292f4ee661b469c0efff4c0103ee5961bdf4b4351f873fd8c4bddc7a9"
+    },
+    {
+      "source": "gpu-full-release/npr-document-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/npr-document-scene/diagnostics.jsonl.gz",
+      "sha256": "ef051228fbad496d39ad754d387c3c4afe6728563cfb895ae063c5667ddc7ea5"
+    },
+    {
+      "source": "gpu-full-release/npr-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/npr-linear/diagnostics.jsonl.gz",
+      "sha256": "359149f843a378ba06b041eafb7e6ebe7c6734c1cae76d8b86b01882dc972840"
+    },
+    {
+      "source": "gpu-full-release/npr-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/npr-reference/diagnostics.jsonl.gz",
+      "sha256": "3cfdbbdeb4a89d2c3f4debccda64fd4fa6b0d8aa34e95315b91284402a6a2496"
+    },
+    {
+      "source": "gpu-full-release/npr-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/npr-scene/diagnostics.jsonl.gz",
+      "sha256": "763daab81cdd2531bb29029ed036b3c5678b5a4464d2c3b6ae412662b3720695"
+    },
+    {
+      "source": "gpu-full-release/opacity-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/opacity-linear/diagnostics.jsonl.gz",
+      "sha256": "9b853e6f777df34f727333e0c28c097568993d9fc0e4f64dddd836847b82b185"
+    },
+    {
+      "source": "gpu-full-release/opacity-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/opacity-reference/diagnostics.jsonl.gz",
+      "sha256": "f286882bf7cf319423675fba2dc33beafa2fad227849fbe383bb6f2fe14250ff"
+    },
+    {
+      "source": "gpu-full-release/opacity-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/opacity-scene/diagnostics.jsonl.gz",
+      "sha256": "844c31eb382640a16c443f87462b5e319b61c75748335f5acdc7c0636c84be82"
+    },
+    {
+      "source": "gpu-full-release/outline-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/outline-linear/diagnostics.jsonl.gz",
+      "sha256": "41990b9370eb02360e9b851f5bf1553ef6f5d4d8819e84c6796b542e857407de"
+    },
+    {
+      "source": "gpu-full-release/outline-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/outline-reference/diagnostics.jsonl.gz",
+      "sha256": "8868ee94f309f3905fa2443352bffe99e77143308244eefe139ee38da3556318"
+    },
+    {
+      "source": "gpu-full-release/outline-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/outline-scene/diagnostics.jsonl.gz",
+      "sha256": "786155478b04c40e793798094b5acd4d6a0754f1c4fe9f4250a51c86715bddc3"
+    },
+    {
+      "source": "gpu-full-release/pbr-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/pbr-linear/diagnostics.jsonl.gz",
+      "sha256": "db8931ae4a54d195e1babaf8f4eb911ca6394b788f8b49eb49a505826ffa060d"
+    },
+    {
+      "source": "gpu-full-release/pbr-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/pbr-reference/diagnostics.jsonl.gz",
+      "sha256": "f94ef4008b8d69f4fccef5430bf091634e9347f133de3993e6f5fbf9f75d5b19"
+    },
+    {
+      "source": "gpu-full-release/pbr-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/pbr-scene/diagnostics.jsonl.gz",
+      "sha256": "554efeb1510b8e6b4fa555219f1139ff8b99a1dfa5d604f74a69e60754de3af7"
+    },
+    {
+      "source": "gpu-full-release/transparent-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/transparent-linear/diagnostics.jsonl.gz",
+      "sha256": "dc5201759768bb3178d545767043ab95093c096af1338914a994d8a1acbf20b4"
+    },
+    {
+      "source": "gpu-full-release/transparent-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/transparent-reference/diagnostics.jsonl.gz",
+      "sha256": "9f4c1df34eb138847364a7c2796c82cf6db5d2d324a0731297556ea577e2d950"
+    },
+    {
+      "source": "gpu-full-release/transparent-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/transparent-scene/diagnostics.jsonl.gz",
+      "sha256": "bf61b6ace697ca23d97cca9ec48f117f7328dda152910091af128854d9947fbd"
+    },
+    {
+      "source": "gpu-full-release/unlit-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/unlit-linear/diagnostics.jsonl.gz",
+      "sha256": "e3b37f7f971afb687d34fdcd9c61315fbb76db4fa5a8728680040544b4fd5a00"
+    },
+    {
+      "source": "gpu-full-release/unlit-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/unlit-reference/diagnostics.jsonl.gz",
+      "sha256": "de9eb2bc53e529e35a2ba32f3f41278885968e1f4e53afc446969ffc2eba8cf6"
+    },
+    {
+      "source": "gpu-full-release/unlit-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-full-release/unlit-scene/diagnostics.jsonl.gz",
+      "sha256": "936fd02b9e5656a05b18ac1ef7a8e0c3b46fc58276aefe653a6fa053a6e7672c"
+    },
+    {
+      "source": "gpu-msaa-debug-first/multisample-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-msaa-debug-first/multisample-reference/diagnostics.jsonl.gz",
+      "sha256": "21af759facc30dda709e3d12b0825ee17282433531d517c6b4db82e8983329ff"
+    },
+    {
+      "source": "gpu-smoke-release/unlit-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release/unlit-reference/diagnostics.jsonl.gz",
+      "sha256": "8cbcc2a904d31d9ae2efbafc4607587934aadd909294ac9c927545c48fac57ed"
+    },
+    {
+      "source": "gpu-smoke-release-v2/unlit-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release-v2/unlit-linear/diagnostics.jsonl.gz",
+      "sha256": "75b117e41bde7394eeeea915cd34389898028a7bc9b3c4551ec1bfa4f3e89e2c"
+    },
+    {
+      "source": "gpu-smoke-release-v2/unlit-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release-v2/unlit-reference/diagnostics.jsonl.gz",
+      "sha256": "6c6b090ca3ec33981c08d8b51250e2c6089fd858277780f59f419f06d6fa4f55"
+    },
+    {
+      "source": "gpu-smoke-release-v2/unlit-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release-v2/unlit-scene/diagnostics.jsonl.gz",
+      "sha256": "0be643f5fb3aa66bb1e5fb349134e70af3df32408817ec1689edc68ec9d1cbc9"
+    },
+    {
+      "source": "gpu-smoke-release-v3/unlit-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release-v3/unlit-linear/diagnostics.jsonl.gz",
+      "sha256": "1d9757a3a787c1c40efaaa142bfa579bc090841fa1a70343599760640af904de"
+    },
+    {
+      "source": "gpu-smoke-release-v3/unlit-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release-v3/unlit-reference/diagnostics.jsonl.gz",
+      "sha256": "9a40c348066a654df9a9bd004325f22c7abef9f596a0df60529ebce1e17b7951"
+    },
+    {
+      "source": "gpu-smoke-release-v3/unlit-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release-v3/unlit-scene/diagnostics.jsonl.gz",
+      "sha256": "0e578c3e72c5f2c7f28c83a195d2ad9c82b49c4ea714ba63d3e7b6e7f51387a9"
+    },
+    {
+      "source": "gpu-smoke-release-v4/multisample-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release-v4/multisample-linear/diagnostics.jsonl.gz",
+      "sha256": "96d38e6f133227235a452eae4bef158d2a0d0d4a86b293284dd0e96070b7686a"
+    },
+    {
+      "source": "gpu-smoke-release-v4/multisample-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release-v4/multisample-reference/diagnostics.jsonl.gz",
+      "sha256": "b45d9570c1695023d1f5ee7336520c59beca7e055c175cb216f5d7b9ca6e0215"
+    },
+    {
+      "source": "gpu-smoke-release-v4/multisample-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release-v4/multisample-scene/diagnostics.jsonl.gz",
+      "sha256": "4d5f8c73276d35ce689a515bd4f31deeb11a05ccdfbade8f71772d2b90596e14"
+    },
+    {
+      "source": "gpu-smoke-release-v4/unlit-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release-v4/unlit-linear/diagnostics.jsonl.gz",
+      "sha256": "be64ac7f8e641c66be1e0b86ff83dfc8d365da2a93152393f99c22c6ca5612d7"
+    },
+    {
+      "source": "gpu-smoke-release-v4/unlit-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release-v4/unlit-reference/diagnostics.jsonl.gz",
+      "sha256": "483e803db42eba5337d153ef307aaa5f2d6aa61e8c642162dacf4202ffdab490"
+    },
+    {
+      "source": "gpu-smoke-release-v4/unlit-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-smoke-release-v4/unlit-scene/diagnostics.jsonl.gz",
+      "sha256": "4659ffdb54dea7aae14fe8363ab4a1018e02d8632a29238a6aeeb1dad2fe5424"
+    },
+    {
+      "source": "gpu-temporal-debug-first/temporal-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-temporal-debug-first/temporal-linear/diagnostics.jsonl.gz",
+      "sha256": "1fa15acd6ab04e8d14e281dd63951b2a985b4b92f2f2822fbdc0c1bf24101771"
+    },
+    {
+      "source": "gpu-temporal-debug-first/temporal-reference/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-temporal-debug-first/temporal-reference/diagnostics.jsonl.gz",
+      "sha256": "26c2ebb672ace0b054e536a5a8ca9406d75faf28603b0c7ea2eec00a27961b25"
+    },
+    {
+      "source": "gpu-temporal-debug-first/temporal-scene/captures/azureplayer.log.jsonl.gz",
+      "target": "gpu-temporal-debug-first/temporal-scene/diagnostics.jsonl.gz",
+      "sha256": "608731c57738198054c85f0a8aba9913796b58b9125d821898199520803ac44f"
+    },
+    {
+      "source": "native-captures/full-world-hidden/captures/azureplayer.log.jsonl.gz",
+      "target": "native-captures/full-world-hidden/diagnostics.jsonl.gz",
+      "sha256": "5a74a2a2d8929c2e30ef0b8b6adca26a0d090fedd531e0d19138875c8c4f5739"
+    },
+    {
+      "source": "native-captures/full-world-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "native-captures/full-world-linear/diagnostics.jsonl.gz",
+      "sha256": "4c8ff43c99bb1555e6e8ed0c248cbfc1b9478535826e6ec5bda7ffc2596a836e"
+    },
+    {
+      "source": "native-captures/near-default-compatibility/captures/azureplayer.log.jsonl.gz",
+      "target": "native-captures/near-default-compatibility/diagnostics.jsonl.gz",
+      "sha256": "d6f339493891c98eb23ddb009169b234e2fc5f3de3a6135d7cdf74150866f42d"
+    },
+    {
+      "source": "native-captures/near-linear-isolated/captures/azureplayer.log.jsonl.gz",
+      "target": "native-captures/near-linear-isolated/diagnostics.jsonl.gz",
+      "sha256": "a199f514a7cb00a72440d56f9df9ae7df72a7dd5d5be136fb5978d2f0ee4c2c8"
+    },
+    {
+      "source": "native-captures/near-world-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "native-captures/near-world-linear/diagnostics.jsonl.gz",
+      "sha256": "2fb87b1c923da4fd7c8900febc24837f512e556cfad6b023e14fafa3079ee96b"
+    },
+    {
+      "source": "native-captures/near-world-temporal/captures/azureplayer.log.jsonl.gz",
+      "target": "native-captures/near-world-temporal/diagnostics.jsonl.gz",
+      "sha256": "add94c1b4b084c2901a7dafd25df54bc65bdbedb18097c185b486948a38a97f7"
+    },
+    {
+      "source": "native-final-captures/full-world-hidden/captures/azureplayer.log.jsonl.gz",
+      "target": "native-final-captures/full-world-hidden/diagnostics.jsonl.gz",
+      "sha256": "01ed8ee9c66379e021464626fe3fe03e4412c2c7a0090ddbdffc5986c90fdb42"
+    },
+    {
+      "source": "native-final-captures/full-world-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "native-final-captures/full-world-linear/diagnostics.jsonl.gz",
+      "sha256": "ab66ee193e602946ea65a149f00a872c32ab88a6cb747ade7a16a904fb80fd48"
+    },
+    {
+      "source": "native-final-captures/near-default-compatibility/captures/azureplayer.log.jsonl.gz",
+      "target": "native-final-captures/near-default-compatibility/diagnostics.jsonl.gz",
+      "sha256": "9f99bdf5f7028ad1f15069663cbd7bebfe651560db31d48ac03760ce89d56188"
+    },
+    {
+      "source": "native-final-captures/near-linear-isolated/captures/azureplayer.log.jsonl.gz",
+      "target": "native-final-captures/near-linear-isolated/diagnostics.jsonl.gz",
+      "sha256": "9f99c2b4f062b80ff73400b2033febb2956c2b7461fcc946906aa92a33515138"
+    },
+    {
+      "source": "native-final-captures/near-world-linear/captures/azureplayer.log.jsonl.gz",
+      "target": "native-final-captures/near-world-linear/diagnostics.jsonl.gz",
+      "sha256": "f40b3565d73be8101a3df03a7adfe14225e19f9519f13e6dc92c086d1be20058"
+    },
+    {
+      "source": "native-final-captures/near-world-temporal/captures/azureplayer.log.jsonl.gz",
+      "target": "native-final-captures/near-world-temporal/diagnostics.jsonl.gz",
+      "sha256": "1679cef38f591dd26553178e11b375b3fa42cd22df471b7643e33fd1651d0db1"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/ambient/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/ambient/diagnostics.jsonl.gz",
+      "sha256": "f03e981b1b3722d0205260e8e680bfbd1e53c95bc9f3bdc293c6365bf63d5d25"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/combined/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/combined/diagnostics.jsonl.gz",
+      "sha256": "d07005c56416090a61e7abb6b91ca7d536cbc9ed6772969fc83b7583581dbbc4"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/dark/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/dark/diagnostics.jsonl.gz",
+      "sha256": "15cf77e3f0f1229c3e3f2afb27ed86011964b4eac21db2eebbd3eca12bafc373"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/document/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/document/diagnostics.jsonl.gz",
+      "sha256": "619328413c54c122adfb84d4cbd780ff282f7b506438af24e854b48ba0e2a5c2"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/fixed/diagnostics.jsonl.gz",
+      "sha256": "ae456a69881134947853891db744ed059cbef0cbc14128f7a61ba39dacb88b82"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/high-chroma/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/high-chroma/diagnostics.jsonl.gz",
+      "sha256": "a93b2e2b10c33b0139048a0844f6fbd8669e4e931115e9a774f6404cdddacff2"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/main/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/main/diagnostics.jsonl.gz",
+      "sha256": "13dfa92e3c9d309f5ce98f3ce0b7b2ed74ef6e30f114099bcbc81481bfac3efb"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/matcap-alpha/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/matcap-alpha/diagnostics.jsonl.gz",
+      "sha256": "ce0e34568ab8024e0d3761d216d22a96272b75f30a6fc4efc28bc36359b189ad"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/matcap-dark/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/matcap-dark/diagnostics.jsonl.gz",
+      "sha256": "9514b8f64a4e0cce7c289bb8e16d8fc39b67d53a1585d025603f1b3c3960cc55"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/matcap-rgb/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/matcap-rgb/diagnostics.jsonl.gz",
+      "sha256": "3b3378d47ac8394c60ea2f938c80d421c77d6b7dd3970c811bd1326a672db0a9"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/matcap-rgba/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/matcap-rgba/diagnostics.jsonl.gz",
+      "sha256": "1e27e8de803768489c4e697f262229edd0f0b77ef58c32f2eaf301f96db8f5da"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/mip-high/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/mip-high/diagnostics.jsonl.gz",
+      "sha256": "b7d7d77d7ac1b7211efe2f8371256f1556cec5580cb545ab2330a4a4e6a391f8"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/mip-low/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/mip-low/diagnostics.jsonl.gz",
+      "sha256": "ff77a2ed6fd07be0d3c53b8c78cfe3a89ea46e8f739745d153c9bd670291be89"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/shadow-one/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/shadow-one/diagnostics.jsonl.gz",
+      "sha256": "45c2e93969a5d0c5293f6a7eb4cb3fd143f7db04a12eaa3d2cae0abcc25d9f3d"
+    },
+    {
+      "source": "related-gpu/debug/eye-retry2/shadow-zero/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/eye-retry2/shadow-zero/diagnostics.jsonl.gz",
+      "sha256": "b1ba65051548d555ff1d08b215a0d0c04895d1a996f894bb141942adf1eb5f8c"
+    },
+    {
+      "source": "related-gpu/debug/radiance/eye-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/eye-control/diagnostics.jsonl.gz",
+      "sha256": "2b8e0a2ec00c2c2c8294c1f2198fb983b2d66df72a578b34036694f358195a73"
+    },
+    {
+      "source": "related-gpu/debug/radiance/eye-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/eye-exposure/diagnostics.jsonl.gz",
+      "sha256": "c4d2bf40ba6a623c4c7f5694865617f0d3e27c55b94017d7c58233073599fcbd"
+    },
+    {
+      "source": "related-gpu/debug/radiance/eye-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/eye-quarter/diagnostics.jsonl.gz",
+      "sha256": "f0b2086ba438217044e5ee1ded7ea5d656168b5b4e488d180df76558a3d3cc48"
+    },
+    {
+      "source": "related-gpu/debug/radiance/eye-quarter-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/eye-quarter-fixed/diagnostics.jsonl.gz",
+      "sha256": "60d2d2d807cdffc99b45e8014aabf54a91342f84ccbcc3cb9d6984579bdf4847"
+    },
+    {
+      "source": "related-gpu/debug/radiance/hair-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/hair-control/diagnostics.jsonl.gz",
+      "sha256": "c379d38ae417dc85600ebe79bc59a373b544e6fb0d2c00de6e5a4ea069c4828b"
+    },
+    {
+      "source": "related-gpu/debug/radiance/hair-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/hair-exposure/diagnostics.jsonl.gz",
+      "sha256": "a7c8678e9956bee2b350d343690010213fbae49d23edda36fb103ef9fd580a8a"
+    },
+    {
+      "source": "related-gpu/debug/radiance/hair-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/hair-quarter/diagnostics.jsonl.gz",
+      "sha256": "e1ba77bd845fc366f53f99061be0068e436b5142cffc966753517a4fb983c175"
+    },
+    {
+      "source": "related-gpu/debug/radiance/hair-quarter-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/hair-quarter-fixed/diagnostics.jsonl.gz",
+      "sha256": "0bb641bf80d78a2640b53f41e4e55f08be5e54be14fdb76f44a7baf3e9f95753"
+    },
+    {
+      "source": "related-gpu/debug/radiance/mixed-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/mixed-control/diagnostics.jsonl.gz",
+      "sha256": "f36b70fbc130ac1d39bd07f07772de3f65288318a2f9f49778aee4f28af4b0b2"
+    },
+    {
+      "source": "related-gpu/debug/radiance/mixed-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/mixed-exposure/diagnostics.jsonl.gz",
+      "sha256": "aefd8eee7a22c662554178797f80518ba96775786b4436d33d87eeb038f5490c"
+    },
+    {
+      "source": "related-gpu/debug/radiance/mixed-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/mixed-quarter/diagnostics.jsonl.gz",
+      "sha256": "026e40cd3db73503246102e8b7e8b832731e3ac086ac3c69979baaa3f46ef309"
+    },
+    {
+      "source": "related-gpu/debug/radiance/multiply-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/multiply-control/diagnostics.jsonl.gz",
+      "sha256": "2482b81dd1e0fe58612f2e534c8d8bb42ffccb48cfc263b86af308d27a3a601a"
+    },
+    {
+      "source": "related-gpu/debug/radiance/multiply-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/multiply-exposure/diagnostics.jsonl.gz",
+      "sha256": "dbd3d193dd1a03f26c7650379aecb5d3dd8cd24817bef1f89c00ec7104330784"
+    },
+    {
+      "source": "related-gpu/debug/radiance/multiply-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/multiply-quarter/diagnostics.jsonl.gz",
+      "sha256": "639a022f89305b4722113c202ad1e8d3572c4ce25f7d3b68227bcca7f930c53e"
+    },
+    {
+      "source": "related-gpu/debug/radiance/npr-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/npr-control/diagnostics.jsonl.gz",
+      "sha256": "59706a0a4d2a495249c554fb9802c20b6c5a882301feed62b772699c14110cbb"
+    },
+    {
+      "source": "related-gpu/debug/radiance/npr-document-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/npr-document-control/diagnostics.jsonl.gz",
+      "sha256": "f76f045dfe1ddd680f5bf9589ea73ba912bb2cc61bc4d097d118e2728ae480fc"
+    },
+    {
+      "source": "related-gpu/debug/radiance/npr-document-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/npr-document-exposure/diagnostics.jsonl.gz",
+      "sha256": "22f647dae40fa1d5fbb79f68981455502398d7bf36c454770c4e1db0d92d00fa"
+    },
+    {
+      "source": "related-gpu/debug/radiance/npr-document-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/npr-document-quarter/diagnostics.jsonl.gz",
+      "sha256": "f34a5999dad983b585563de1e41791f7df4a9079f3bc62f80c23199624333144"
+    },
+    {
+      "source": "related-gpu/debug/radiance/npr-document-quarter-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/npr-document-quarter-fixed/diagnostics.jsonl.gz",
+      "sha256": "121a224291f8f22b4924b7108f134b81c0a2dbe657c90818a076c523deab4f5b"
+    },
+    {
+      "source": "related-gpu/debug/radiance/npr-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/npr-exposure/diagnostics.jsonl.gz",
+      "sha256": "eedbc40c45352f2ae40de2489c39d6d74835657cfc13d4484f539ba628c6f765"
+    },
+    {
+      "source": "related-gpu/debug/radiance/npr-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/npr-quarter/diagnostics.jsonl.gz",
+      "sha256": "ab5a10159e4679ff74cc8c286d96c3f7eea4955997c6eab7d8b17e8d37e27662"
+    },
+    {
+      "source": "related-gpu/debug/radiance/npr-quarter-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/npr-quarter-fixed/diagnostics.jsonl.gz",
+      "sha256": "22e42d7af786b44c4b5bc988dc9ae0c142759066fdf230458b5733c2431d602f"
+    },
+    {
+      "source": "related-gpu/debug/radiance/outline-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/outline-control/diagnostics.jsonl.gz",
+      "sha256": "90503eedb827350f862f52fff3eec1222663b712545eab215d62fadcf833c12d"
+    },
+    {
+      "source": "related-gpu/debug/radiance/outline-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/outline-exposure/diagnostics.jsonl.gz",
+      "sha256": "a541010618ac6d040bafb0890154e60b01d46e41ad62f86c0eab929c4e750ee7"
+    },
+    {
+      "source": "related-gpu/debug/radiance/outline-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/outline-quarter/diagnostics.jsonl.gz",
+      "sha256": "ad872f5a2483244a4038fc8f1c9250c67d9f1eac0f32b03afaf69fd234c9277c"
+    },
+    {
+      "source": "related-gpu/debug/radiance/pbr-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/pbr-control/diagnostics.jsonl.gz",
+      "sha256": "e56de3ad395a389dce3ed00bf1430ac73b0ad489d6ea15416268c2e10e33ce20"
+    },
+    {
+      "source": "related-gpu/debug/radiance/pbr-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/pbr-exposure/diagnostics.jsonl.gz",
+      "sha256": "ecae1517138653336cf76fac9bdd1c9523591e8c77848331650ee99956a6a6c9"
+    },
+    {
+      "source": "related-gpu/debug/radiance/pbr-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/pbr-quarter/diagnostics.jsonl.gz",
+      "sha256": "2ffeb2d8b983515bbeb12c5d602d68b5778611c187e2f2c4ff0a63d0b967e9c5"
+    },
+    {
+      "source": "related-gpu/debug/radiance/transparent-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/transparent-control/diagnostics.jsonl.gz",
+      "sha256": "5901d7ec5eec19bd890893ded135bb30266a7ee3a5f3d9c818d0db29f35149a4"
+    },
+    {
+      "source": "related-gpu/debug/radiance/transparent-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/transparent-exposure/diagnostics.jsonl.gz",
+      "sha256": "85d09bd1a8df16fb3ac625a6e7d1f93d209ad1712e976699fc679e66e8e829e6"
+    },
+    {
+      "source": "related-gpu/debug/radiance/transparent-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/transparent-quarter/diagnostics.jsonl.gz",
+      "sha256": "d6748d83dd95124a8cba065a152a0a13fdacc334e2ec60a9ae288e0066388ecf"
+    },
+    {
+      "source": "related-gpu/debug/radiance/unlit-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/unlit-control/diagnostics.jsonl.gz",
+      "sha256": "d2f9698fae2e052de2cbd45c41d518fccc75ab9fdcdb96f3ca712b15e5e28e1f"
+    },
+    {
+      "source": "related-gpu/debug/radiance/unlit-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/unlit-exposure/diagnostics.jsonl.gz",
+      "sha256": "80bf245f0f37035c056670ce5dda6fbc062805487f13f983062ec51150492fd7"
+    },
+    {
+      "source": "related-gpu/debug/radiance/unlit-neutral/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/unlit-neutral/diagnostics.jsonl.gz",
+      "sha256": "94fe76e0c04b8e858f74c75056fbb65721fb32a5b71672814d3488bed5f32af2"
+    },
+    {
+      "source": "related-gpu/debug/radiance/unlit-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/unlit-quarter/diagnostics.jsonl.gz",
+      "sha256": "1e41a323140313408901572ceea16c23cdcb5ad9f5f68f8011a01cd31da2d172"
+    },
+    {
+      "source": "related-gpu/debug/radiance/unlit-zero/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/radiance/unlit-zero/diagnostics.jsonl.gz",
+      "sha256": "795029b8be4a290b30ab7d134c6ccdeb99fe0e41b6541f65f55dd4b7ce00eea0"
+    },
+    {
+      "source": "related-gpu/debug/scene-fog-retry4/fixed-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/scene-fog-retry4/fixed-additive/diagnostics.jsonl.gz",
+      "sha256": "ad93542db3bf8691d6fc488b633e8eaae9852a9ee2c71e2fc22b8218fbef1b0d"
+    },
+    {
+      "source": "related-gpu/debug/scene-fog-retry4/fixed-combined/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/scene-fog-retry4/fixed-combined/diagnostics.jsonl.gz",
+      "sha256": "248c6959ac4ad2b69f189b10767a06e216a6a40b1e1017adf00b33e6d77fa0cd"
+    },
+    {
+      "source": "related-gpu/debug/scene-fog-retry4/fixed-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/scene-fog-retry4/fixed-msaa/diagnostics.jsonl.gz",
+      "sha256": "3cc39c4915d702a60c29e0819fdfd42e08cf4b8c6861f22bad17556bd3962271"
+    },
+    {
+      "source": "related-gpu/debug/scene-fog-retry4/indexed-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/scene-fog-retry4/indexed-additive/diagnostics.jsonl.gz",
+      "sha256": "c02249085ac66d1f3cfe8f4b9deebe23f0d90b34bf8e97863ad81f32ad09c985"
+    },
+    {
+      "source": "related-gpu/debug/scene-fog-retry4/indexed-combined/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/scene-fog-retry4/indexed-combined/diagnostics.jsonl.gz",
+      "sha256": "a7835e8e37da7740636ac0e410d352769aa0135e480269034056027a39c3eb97"
+    },
+    {
+      "source": "related-gpu/debug/scene-fog-retry4/indexed-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/scene-fog-retry4/indexed-msaa/diagnostics.jsonl.gz",
+      "sha256": "c3f8a70d0a033c06d68b1684c98f52a5bfeab008fe0fd42231da360458d97f34"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry3/indexed-alpha/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry3/indexed-alpha/diagnostics.jsonl.gz",
+      "sha256": "742eb341858cea834130528939eecf287d721bce582d64ca387340870daf7fd4"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/fixed-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/fixed-additive/diagnostics.jsonl.gz",
+      "sha256": "eef743e0d81767fb9e9381a792b7a482be03e8d3c99a3cd0a310df2e5fe0acca"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/fixed-alpha/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/fixed-alpha/diagnostics.jsonl.gz",
+      "sha256": "64f5198f3edfa97a34612e825581180aea20c9b9b43a047dc161feb4a1b0b2f4"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/fixed-linear-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/fixed-linear-additive/diagnostics.jsonl.gz",
+      "sha256": "f3d90136c59e8adf5610e6aba89310ea2874b350f9f901d4a6ed3553a5fda928"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/fixed-linear-display/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/fixed-linear-display/diagnostics.jsonl.gz",
+      "sha256": "7f1e1dcb2e9d00d153a16f71a8f9fd52474ae2521eca6160038983ec7e046156"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/fixed-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/fixed-msaa/diagnostics.jsonl.gz",
+      "sha256": "a7209785c8e6d0eb45426545316ac80d09f77d4d136c9023d89b08fb9db5122e"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/fixed-object-shadow-additive-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/fixed-object-shadow-additive-msaa/diagnostics.jsonl.gz",
+      "sha256": "09735e3e5a4fb60b0468d6524f31d8425b6a4f2603934704a69dc70bda069fa4"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/fixed-radiance-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/fixed-radiance-quarter/diagnostics.jsonl.gz",
+      "sha256": "84ab02f8312af5816f0bce806b66b567a11ea22224b509bdbd7a603eeada3e1e"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/indexed-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/indexed-additive/diagnostics.jsonl.gz",
+      "sha256": "a856bd510775565e95c985a1922c3a1f4cfbdbe7e3520c96f16a3b781df961fc"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/indexed-alpha/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/indexed-alpha/diagnostics.jsonl.gz",
+      "sha256": "e8c7d9cbefcf2c1d5461d251bf6754c5719e67301cff76caffe4a638a450c76e"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/indexed-linear-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/indexed-linear-additive/diagnostics.jsonl.gz",
+      "sha256": "4fa642037b38f16d0049e674fd3dd0a283c9f732076610acffcc5d0fa98b7780"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/indexed-linear-display/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/indexed-linear-display/diagnostics.jsonl.gz",
+      "sha256": "b8a1e5f8ee6a25a040de493b0485e610129d2ff68512b03503da50b4ca8d9d4a"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/indexed-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/indexed-msaa/diagnostics.jsonl.gz",
+      "sha256": "b9bf57efcbb281a1d1a72dbf766ceca37bb947bc77485dc4a407116865628bf5"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/indexed-object-shadow-additive-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/indexed-object-shadow-additive-msaa/diagnostics.jsonl.gz",
+      "sha256": "8a2787ad8fbf4ef442d7fcfba31dcd5234dc6eaed82adeb62c826ef17e85ad65"
+    },
+    {
+      "source": "related-gpu/debug/view-fog-retry4/indexed-radiance-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/debug/view-fog-retry4/indexed-radiance-quarter/diagnostics.jsonl.gz",
+      "sha256": "02ba82122215149df9da5d2c80a9b45c9ea94efaf184aaf8bf64ffb06cc2019c"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/ambient/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/ambient/diagnostics.jsonl.gz",
+      "sha256": "1e41933c48794f2354013d8a978e4def187b0c668356f018f8d3455e3528d9c7"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/combined/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/combined/diagnostics.jsonl.gz",
+      "sha256": "90d4d96981318d525db4fdf70d7a07e5e8313405f765f0e387c7ed58b90c37b7"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/dark/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/dark/diagnostics.jsonl.gz",
+      "sha256": "97a22a69111239f6969c42a6a1e0bbddf22cb51f10e55984b2ed7001804e34d9"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/document/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/document/diagnostics.jsonl.gz",
+      "sha256": "402500f0af9505bb2495332a2983c924320fce27b57372e3cfa60439868528ee"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/fixed/diagnostics.jsonl.gz",
+      "sha256": "59cda46e71bbd7da1334a414e6ded5d8bd055743593e1abc958f30752debe939"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/high-chroma/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/high-chroma/diagnostics.jsonl.gz",
+      "sha256": "3dc3367cfc678f999628eaa8f41db715042985c9cf5010eb15d0ded521bed3ec"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/main/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/main/diagnostics.jsonl.gz",
+      "sha256": "1136e192d9fe2f60bb3ff1f78aa094c273309b075d01bca581b6ad93832078a6"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/matcap-alpha/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/matcap-alpha/diagnostics.jsonl.gz",
+      "sha256": "c90cfe9101b80ef638abc64c2cfcb234e43a383f09ca47e05b83ea46428543dd"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/matcap-dark/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/matcap-dark/diagnostics.jsonl.gz",
+      "sha256": "5e55d71f2b92c2fc32eacf6dfcb266820d3200e69226c37ac44b4eedae0784b8"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/matcap-rgb/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/matcap-rgb/diagnostics.jsonl.gz",
+      "sha256": "3a3af4feb15ee80b7e49c60e3fd72b6c8bfeb59c0e8cfcba54fbf7f3e95a714a"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/matcap-rgba/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/matcap-rgba/diagnostics.jsonl.gz",
+      "sha256": "5f3c27444d6deddb426b3f2f4263c86c4c29ccb8ffbefd26ee4f619becacd869"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/mip-high/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/mip-high/diagnostics.jsonl.gz",
+      "sha256": "955ebaafb6c151a72f5688093d4384d6537e59ab248a238982f1f925eecfb6c0"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/mip-low/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/mip-low/diagnostics.jsonl.gz",
+      "sha256": "b9fee9c72729e5b14cf960af967d706d3efd50d89393159a6ee7463413633ea0"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/shadow-one/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/shadow-one/diagnostics.jsonl.gz",
+      "sha256": "1429f86024594679acc0adb7895489ca6693cf5791e9197ef0e130c8bc6a297e"
+    },
+    {
+      "source": "related-gpu/release/eye-retry2/shadow-zero/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/eye-retry2/shadow-zero/diagnostics.jsonl.gz",
+      "sha256": "1ced6d7b850dbde8cdbeef006c7a761896d6b316379c68b23db178badf0d0be9"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/additional-directional/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/additional-directional/diagnostics.jsonl.gz",
+      "sha256": "bf536918974623c9d1ad8f291cbeaed314972150411619b02f79d3a6bee60abd"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/ambient/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/ambient/diagnostics.jsonl.gz",
+      "sha256": "2cc680e133250aba974a0afaa228e185e7d6a4df9eb5589562edf556a9762f1d"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/ambient-weight-direct/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/ambient-weight-direct/diagnostics.jsonl.gz",
+      "sha256": "d6a7d3ccf14b6002e824fa00267939c1b2228b373573b36ca3aeab2df54a3788"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/ambient-weight-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/ambient-weight-quarter/diagnostics.jsonl.gz",
+      "sha256": "fc6e81e9082f106b4aad7c6791c158b54ef7c4914dc9899de707f7261b1ee9d3"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/ambient-weight-shadow/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/ambient-weight-shadow/diagnostics.jsonl.gz",
+      "sha256": "9c2270c2265a07cf98c575908685c1eb89707226bb0fa768016e0549a3be8d23"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/ambient-weight-zero/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/ambient-weight-zero/diagnostics.jsonl.gz",
+      "sha256": "bd3e84052793de9a148e52e6ca6791b1ff5905be4d3faf5f31eb0da3ab4d7a0f"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/composed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/composed/diagnostics.jsonl.gz",
+      "sha256": "be9a47eb04a433445047296ad4f9c8c7f304a03ca719660377b01173e86f1891"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/direct/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/direct/diagnostics.jsonl.gz",
+      "sha256": "35c326b7933d1626c1148ad63b056a3ee29a9212ff1e92c94bdc9489e3b4d917"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/direction-negative/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/direction-negative/diagnostics.jsonl.gz",
+      "sha256": "9cdefe8a263c0cb33d6609c9b1bb6c3c3beda0d16ae4bea079f155307da9e75e"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/direction-positive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/direction-positive/diagnostics.jsonl.gz",
+      "sha256": "0670fd4b20f697b658cb4cb8a34b298f97ea3be1272139c443552f031d0226a5"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/disabled/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/disabled/diagnostics.jsonl.gz",
+      "sha256": "00d2899636e2c6ee5e52815ac420ec45d49a52318224835561f46f7144a94ff7"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/fixed/diagnostics.jsonl.gz",
+      "sha256": "33c2f2c110177d52c242b6bc89e7baf1e137224debfd5a4c87419cb35a0f8bca"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/indoor-shadow/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/indoor-shadow/diagnostics.jsonl.gz",
+      "sha256": "e245c284274bc04d7ff8e62eaff8c451bf70d09e630414972b63bd05b8e9d6f7"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/main-shadow/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/main-shadow/diagnostics.jsonl.gz",
+      "sha256": "3b9eb03b051e031ee228d1e072a03d7b924bc9ad5e8654acfc0cdeb00e3431d8"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/main-shadow-floor/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/main-shadow-floor/diagnostics.jsonl.gz",
+      "sha256": "a4b2dad090b55614870032356c446cd27561e9b414db7b09f783d40606997e55"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors/diagnostics.jsonl.gz",
+      "sha256": "58a0a3957c7bf76037b61b071fdaee4fed03b11c0211cc90531a8d85e6974b49"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-ambient/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-ambient/diagnostics.jsonl.gz",
+      "sha256": "ff6d6dbc6120d04655ed590ddd4bea4c1a7271137da8e96f1f47cc34982d481a"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-character-main-lit/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-character-main-lit/diagnostics.jsonl.gz",
+      "sha256": "7e8b3ec12f326cbc808cd2753d12a079a1fb94c1158397490b32712c2302374e"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-character-main-shadow/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-character-main-shadow/diagnostics.jsonl.gz",
+      "sha256": "ce39886e05effb41475b78d7bcc2c269e3d74fb3bee20bbf71773dcf352eec99"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-character-main-shadow-document/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-character-main-shadow-document/diagnostics.jsonl.gz",
+      "sha256": "a1cdc0bad56b7e664e61864c1a5e35ce38d1c36a3afd70991578750d6ccda119"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-character-main-shadow-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-character-main-shadow-fixed/diagnostics.jsonl.gz",
+      "sha256": "b1c7d690fdacd14a81785d7e84ac763c4638635f39159f84bc4728db2a5a0313"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-character-mask-none/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-character-mask-none/diagnostics.jsonl.gz",
+      "sha256": "0237ac859e20c1c9f221b0cb5d2804c03294a86a1958f9ac917ae4abba5cfcce"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-character-scene-shadow/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-character-scene-shadow/diagnostics.jsonl.gz",
+      "sha256": "1d2092b4c2efcbc5f9722b6fd07092bf889df88cf2764ac1792a96386d7564b3"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-direct/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-direct/diagnostics.jsonl.gz",
+      "sha256": "7edcd22dbe8eddca89c9121137e7e3d804ac5f411c18423ffb56d60e15cad1b4"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-disabled/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-disabled/diagnostics.jsonl.gz",
+      "sha256": "0450f3dfdc269521b2428769b352434ff970f689bce550ef56390c7e9cdf9062"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-document/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-document/diagnostics.jsonl.gz",
+      "sha256": "e8f4c52baee382edb32ca41b50109957bb7f8852767c06961350a49f340ce6d7"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-fabric/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-fabric/diagnostics.jsonl.gz",
+      "sha256": "25e495c847532d17e98f520628d2ce112c71487c4a9aa29dd5fa68936a30ca7d"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-fixed/diagnostics.jsonl.gz",
+      "sha256": "98c797a6fe95258f2937ffae0b2b94613b03e82cd80c9206ae0f095f28de0781"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-main-ramp-back/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-main-ramp-back/diagnostics.jsonl.gz",
+      "sha256": "b59655212feaa49ec62d36ae9dc87d15293e0667c09d50b7086c884c25ccf256"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-main-ramp-biased/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-main-ramp-biased/diagnostics.jsonl.gz",
+      "sha256": "8c8596caf97481f0894e0ebdba0a17c5b43c439f62f0ea64f2679057328a295d"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-main-ramp-document/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-main-ramp-document/diagnostics.jsonl.gz",
+      "sha256": "cb35d018edb070c58a45900d10486bf773bdfac3917d82c6f81d493eb4c7247d"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-main-ramp-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-main-ramp-fixed/diagnostics.jsonl.gz",
+      "sha256": "b4af7ceb7ee2c57b3138bd38f14d928c0b9a89f4038887bfc50a6b8a0030939c"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-main-ramp-front/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-main-ramp-front/diagnostics.jsonl.gz",
+      "sha256": "9394754e0d9133f5b3f128a8480a20b0f7944f667220b4791c75f4847860b254"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-main-ramp-high/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-main-ramp-high/diagnostics.jsonl.gz",
+      "sha256": "653181795d27ad0d71ced0bd55f20f1a408bb4458334aa884dc91e3f2c104111"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-main-ramp-low/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-main-ramp-low/diagnostics.jsonl.gz",
+      "sha256": "d3593b4ac2388f64537a4cfe347bf6eb2b196b5c94b626f6195db0fbd43c0293"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-main-ramp-side/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-main-ramp-side/diagnostics.jsonl.gz",
+      "sha256": "1c37385d5953125eed471f223b6e4dbab8c29a4aadb662e4e9d87de7ba2677e1"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-no-main/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-no-main/diagnostics.jsonl.gz",
+      "sha256": "adc06c8f70bbc34f689f3ef718868f5d9e7052dcc8d12e3a3000e9bf55407440"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-view-tint/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-view-tint/diagnostics.jsonl.gz",
+      "sha256": "eae00aac7dacb6d40ad7c92a841ef33b22f8c1acc62c27464aa202751b1f9941"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-view-tint-document/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-view-tint-document/diagnostics.jsonl.gz",
+      "sha256": "05718dc9911b3dc4bd55ec4b2e0126c85c5dcbb4f626aa7ce3256dfbc11e8005"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-volume/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-volume/diagnostics.jsonl.gz",
+      "sha256": "ed37893d007f55ca5fb05f0b210346e6ba4c24b431c780aa1dc5de5a1626e930"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/material-colors-zero/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/material-colors-zero/diagnostics.jsonl.gz",
+      "sha256": "5347127cf79ef89546c705bd90b4847774ba6ce9f5c02c62b3b0ffa09aa4fde5"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/offset-main-lit/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/offset-main-lit/diagnostics.jsonl.gz",
+      "sha256": "42a2c0d0b9914279a589cee11de075bc66daebaac3d36aca7908dc6d6a0006fa"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/offset-main-shadow/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/offset-main-shadow/diagnostics.jsonl.gz",
+      "sha256": "e199288fc630ef3c8c47b78ebc9bc2be00a3909272901367aa6325f7543d42ad"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/point-only/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/point-only/diagnostics.jsonl.gz",
+      "sha256": "88d165544d8d6429b7739c9524721e6a992d5c8a7c9c293b441089b4e158265e"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/receiver-main/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/receiver-main/diagnostics.jsonl.gz",
+      "sha256": "8b54324f4c219abd672fcb3f7fad9b7b2b89ccdee9a8e1ddc0cb4e7b4990f0a1"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/receiver-main-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/receiver-main-fixed/diagnostics.jsonl.gz",
+      "sha256": "b2e31501ed462f8174a78254f67e06c07f8407a8771da09c6aae6b0934ab4452"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/receiver-main-ramp-disabled/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/receiver-main-ramp-disabled/diagnostics.jsonl.gz",
+      "sha256": "7c7f5f86a99df967be8a45bf8118453d3f4c55d7621383c9fee802db298e4a90"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/receiver-main-ramp-side/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/receiver-main-ramp-side/diagnostics.jsonl.gz",
+      "sha256": "3e3eb0a858c862616c355f1f2fa4f8ac862794ccad2fa1a2c01e3c3222b4be51"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/receiver-main-shadow/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/receiver-main-shadow/diagnostics.jsonl.gz",
+      "sha256": "cac0c4d82f133463ad551a19721f85041f9ac694ed689b97770adc89dbc891d6"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/receiver-main-strong-shadow/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/receiver-main-strong-shadow/diagnostics.jsonl.gz",
+      "sha256": "f542a9db44e4f6e0ac3d020a23a039261397a682506c7b2241611a6b3af3b12c"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/receiver-main-strong-shadow-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/receiver-main-strong-shadow-fixed/diagnostics.jsonl.gz",
+      "sha256": "d8bf7f5a1821614079bbec4c45bed1e8a07940200597ada73232b24735138e9b"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/scene-volume/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/scene-volume/diagnostics.jsonl.gz",
+      "sha256": "1fc457b7c2b0503dc67802e78be3974448da00dc29867ae208eae59aed74f25f"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/surface-only/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/surface-only/diagnostics.jsonl.gz",
+      "sha256": "c9ab8acae955ada7601939ffaa21241a0434fbb1392d845be21a3652df481669"
+    },
+    {
+      "source": "related-gpu/release/npr-retry1/zero-radiance/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/npr-retry1/zero-radiance/diagnostics.jsonl.gz",
+      "sha256": "dc6e3e3bbf375b57c52c9627136e033e5374e796501bc6e6f30a4e66e7fcaeb6"
+    },
+    {
+      "source": "related-gpu/release/radiance/eye-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/eye-control/diagnostics.jsonl.gz",
+      "sha256": "92bfcdc103b52346ab3c0a87cb58c556f054e48d7df361ff55c16d3291466cf2"
+    },
+    {
+      "source": "related-gpu/release/radiance/eye-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/eye-exposure/diagnostics.jsonl.gz",
+      "sha256": "3177b657e1183954f33e195587e4e66c70463af8f8d124b4b8fe6c43c1d90b2a"
+    },
+    {
+      "source": "related-gpu/release/radiance/eye-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/eye-quarter/diagnostics.jsonl.gz",
+      "sha256": "826a79fcc2b4cf515ffe005e355ec76fa9afe1ef7c44ba9d13a0f66c39ff77cf"
+    },
+    {
+      "source": "related-gpu/release/radiance/eye-quarter-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/eye-quarter-fixed/diagnostics.jsonl.gz",
+      "sha256": "da19d7adccd2a068e537e5973307f68e08e31e890c13e4419de456e7c9bc58cd"
+    },
+    {
+      "source": "related-gpu/release/radiance/hair-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/hair-control/diagnostics.jsonl.gz",
+      "sha256": "d285102e1cee4a110b475afe68c033030bda7127f9cf9652e32729f67720d3e7"
+    },
+    {
+      "source": "related-gpu/release/radiance/hair-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/hair-exposure/diagnostics.jsonl.gz",
+      "sha256": "aac6e9184bd66a2e553581430cf4fd5f5ec506b331977098d924d03bce22c85e"
+    },
+    {
+      "source": "related-gpu/release/radiance/hair-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/hair-quarter/diagnostics.jsonl.gz",
+      "sha256": "e60b5b4cbb9bcb0c4f1eb4ca8996945f67d373b68b3270bb9bbacc17681c88ed"
+    },
+    {
+      "source": "related-gpu/release/radiance/hair-quarter-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/hair-quarter-fixed/diagnostics.jsonl.gz",
+      "sha256": "b33639254ad81170f5a6a14b99a9f0baea9c87e6736ba326ec217e5dad9700a7"
+    },
+    {
+      "source": "related-gpu/release/radiance/mixed-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/mixed-control/diagnostics.jsonl.gz",
+      "sha256": "ce9de97da22b93fefede19bee301cc1d45196a383b104e3db66049471d4c8534"
+    },
+    {
+      "source": "related-gpu/release/radiance/mixed-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/mixed-exposure/diagnostics.jsonl.gz",
+      "sha256": "92eecec79ab0b1fed1914817bc07e6905e29e6980339780ba3d929ad955e7087"
+    },
+    {
+      "source": "related-gpu/release/radiance/mixed-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/mixed-quarter/diagnostics.jsonl.gz",
+      "sha256": "cdb2e4dc8d9a722acde11383f16a49bc36b01fa6490eaf00b707cadc1eb215ba"
+    },
+    {
+      "source": "related-gpu/release/radiance/multiply-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/multiply-control/diagnostics.jsonl.gz",
+      "sha256": "4e7a024ae0112919b4b36ac809832dc1693576e562615739b3af1631e9566b53"
+    },
+    {
+      "source": "related-gpu/release/radiance/multiply-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/multiply-exposure/diagnostics.jsonl.gz",
+      "sha256": "27b436e44225279fa13d5fad7b93d64a264f54d7846f539d609e741c318a2259"
+    },
+    {
+      "source": "related-gpu/release/radiance/multiply-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/multiply-quarter/diagnostics.jsonl.gz",
+      "sha256": "ddd35026bc2bf92f4eef67bc6bc64c01ccdf6d5d5a46dc9170168fee001ad931"
+    },
+    {
+      "source": "related-gpu/release/radiance/npr-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/npr-control/diagnostics.jsonl.gz",
+      "sha256": "4600bfdddadb181dc1eac2ba2f10b5b1e217e7f079fa85fdc2eeec2e9adf65a5"
+    },
+    {
+      "source": "related-gpu/release/radiance/npr-document-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/npr-document-control/diagnostics.jsonl.gz",
+      "sha256": "e78c367f51192d79bb042211b62b2c4d00a616183fd187ccad5e44c1aeb26b22"
+    },
+    {
+      "source": "related-gpu/release/radiance/npr-document-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/npr-document-exposure/diagnostics.jsonl.gz",
+      "sha256": "57071001ad437e7a4f4f5588bc07adc09480e8665d75b9e8e9e57fd73a32fb4c"
+    },
+    {
+      "source": "related-gpu/release/radiance/npr-document-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/npr-document-quarter/diagnostics.jsonl.gz",
+      "sha256": "bd73fa1485f4d71f3bb59143054fd16ebef22a1b277a06d1c891d477c129547b"
+    },
+    {
+      "source": "related-gpu/release/radiance/npr-document-quarter-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/npr-document-quarter-fixed/diagnostics.jsonl.gz",
+      "sha256": "4025d608e38adafe142dc1b85e266605bfa75911d31736b032066a632cccd096"
+    },
+    {
+      "source": "related-gpu/release/radiance/npr-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/npr-exposure/diagnostics.jsonl.gz",
+      "sha256": "fa29ca2bc914d80a1f52c537de3d2003a35556e7019ab9f42b0520f30e4defef"
+    },
+    {
+      "source": "related-gpu/release/radiance/npr-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/npr-quarter/diagnostics.jsonl.gz",
+      "sha256": "6db2a184857c5aa1da4af10c13e0af5f7ff767bd1ee7faefec6efa9db58c72fb"
+    },
+    {
+      "source": "related-gpu/release/radiance/npr-quarter-fixed/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/npr-quarter-fixed/diagnostics.jsonl.gz",
+      "sha256": "50aafca0a6036736b7eb86a825be99bcd1c069d233ff022b44d4acadf9c00873"
+    },
+    {
+      "source": "related-gpu/release/radiance/outline-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/outline-control/diagnostics.jsonl.gz",
+      "sha256": "1124534304fd5aaeadbc35477992ef2c88172503d92734f5316c72cb1a4e7e9f"
+    },
+    {
+      "source": "related-gpu/release/radiance/outline-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/outline-exposure/diagnostics.jsonl.gz",
+      "sha256": "f000df75790ab6b54cda45c9fff4a8bc2901bd191c03a76f70fc79ba1e1d4398"
+    },
+    {
+      "source": "related-gpu/release/radiance/outline-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/outline-quarter/diagnostics.jsonl.gz",
+      "sha256": "e1e3e65194436a97dbf23fd734312d8df01b1d81db998d349a3694f1a6945b2a"
+    },
+    {
+      "source": "related-gpu/release/radiance/pbr-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/pbr-control/diagnostics.jsonl.gz",
+      "sha256": "50f4cd4a3cd18743b9ddc348245a0ab5140c2a0f5abd00f80c4e7d4f352dc059"
+    },
+    {
+      "source": "related-gpu/release/radiance/pbr-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/pbr-exposure/diagnostics.jsonl.gz",
+      "sha256": "7215a95dbd400648d5201ea0785f93a30d7b50c09d417dd34c595f83dc51802e"
+    },
+    {
+      "source": "related-gpu/release/radiance/pbr-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/pbr-quarter/diagnostics.jsonl.gz",
+      "sha256": "654294819a88b2f283f2da0b1b34d9e21869f73b5b6f1f631e0b0ae5187d37ea"
+    },
+    {
+      "source": "related-gpu/release/radiance/transparent-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/transparent-control/diagnostics.jsonl.gz",
+      "sha256": "0b3e206bab30988f0a18aa190e99b8e836fef9448c0dae7eed78b4989f88ef56"
+    },
+    {
+      "source": "related-gpu/release/radiance/transparent-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/transparent-exposure/diagnostics.jsonl.gz",
+      "sha256": "faa7c21cc605b56181adee8cd6b7706ddf5ae323ae71d37d2fed37818cccc6c7"
+    },
+    {
+      "source": "related-gpu/release/radiance/transparent-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/transparent-quarter/diagnostics.jsonl.gz",
+      "sha256": "db79a6af2b0f06029a8dd3beddcfc5ecb2eb2ece446ca48a5171aa00a5153b1b"
+    },
+    {
+      "source": "related-gpu/release/radiance/unlit-control/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/unlit-control/diagnostics.jsonl.gz",
+      "sha256": "ceac4e4dbde2e92ef9b8a3fcab35e8ed30c31230e2a724985a4e68343a1a0dd0"
+    },
+    {
+      "source": "related-gpu/release/radiance/unlit-exposure/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/unlit-exposure/diagnostics.jsonl.gz",
+      "sha256": "abe630214eebb824301493a5f34e28b287500e57093500b32e9b20b0f5dcf38c"
+    },
+    {
+      "source": "related-gpu/release/radiance/unlit-neutral/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/unlit-neutral/diagnostics.jsonl.gz",
+      "sha256": "4c26dbff78565bef8667e020c0882008d549f75c2b5a4fae8039f7257e3df50a"
+    },
+    {
+      "source": "related-gpu/release/radiance/unlit-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/unlit-quarter/diagnostics.jsonl.gz",
+      "sha256": "2f8015a61df85d87bbdbe826b17fc54f787c10185d65fa76d459344e1ea62d4e"
+    },
+    {
+      "source": "related-gpu/release/radiance/unlit-zero/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/radiance/unlit-zero/diagnostics.jsonl.gz",
+      "sha256": "9eaeb72b2e7f67a77a4945bedb40698a74e579a4f3b98b00a586a890dc4fd332"
+    },
+    {
+      "source": "related-gpu/release/scene-fog-retry1/fixed-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/scene-fog-retry1/fixed-additive/diagnostics.jsonl.gz",
+      "sha256": "7edba6e009e7938360d3bc0a64f5b783b1ada40818ed43f9dc1e2dc630a66cd2"
+    },
+    {
+      "source": "related-gpu/release/scene-fog-retry1/fixed-combined/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/scene-fog-retry1/fixed-combined/diagnostics.jsonl.gz",
+      "sha256": "8014a57a73403418e9d9a1b948bcb8ce1638598ec9b06e09adec2072c66dd54a"
+    },
+    {
+      "source": "related-gpu/release/scene-fog-retry1/fixed-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/scene-fog-retry1/fixed-msaa/diagnostics.jsonl.gz",
+      "sha256": "fe4744ad79f15273366a135d670f5e8b8f192b9549aca9b573401e9291991d7d"
+    },
+    {
+      "source": "related-gpu/release/scene-fog-retry1/indexed-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/scene-fog-retry1/indexed-additive/diagnostics.jsonl.gz",
+      "sha256": "23f76b84f347e3c15aae3f7b8250b6aafecb4e0dd7724c78af44fb7ea34b1096"
+    },
+    {
+      "source": "related-gpu/release/scene-fog-retry1/indexed-combined/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/scene-fog-retry1/indexed-combined/diagnostics.jsonl.gz",
+      "sha256": "2f85cf78ff990c31cf80f6375e74557719c26f106a3555b25db975ad51691770"
+    },
+    {
+      "source": "related-gpu/release/scene-fog-retry1/indexed-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/scene-fog-retry1/indexed-msaa/diagnostics.jsonl.gz",
+      "sha256": "550058b90666eed1a1c00bad315b0d535e457ce4a5adb65bd1fc7f19e3bbebc8"
+    },
+    {
+      "source": "related-gpu/release/scene-fog-retry4/fixed-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/scene-fog-retry4/fixed-additive/diagnostics.jsonl.gz",
+      "sha256": "95ea64ffe82f38a593e1e8897143e4b612f6d927ad36d6f28f2c07509d4ad15c"
+    },
+    {
+      "source": "related-gpu/release/scene-fog-retry4/fixed-combined/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/scene-fog-retry4/fixed-combined/diagnostics.jsonl.gz",
+      "sha256": "0217b9667be27df5387114b1fe01e8160a2e68ef4f552e8a62e4efcbb8fda5f6"
+    },
+    {
+      "source": "related-gpu/release/scene-fog-retry4/fixed-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/scene-fog-retry4/fixed-msaa/diagnostics.jsonl.gz",
+      "sha256": "231a2c2761f9bdfae340af0fe8034cf8913e7ef069032b4c7671ee42bf4dd294"
+    },
+    {
+      "source": "related-gpu/release/scene-fog-retry4/indexed-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/scene-fog-retry4/indexed-additive/diagnostics.jsonl.gz",
+      "sha256": "82da8158f3907487ededce38cee59d30a8b4bc799565e7c27003d045e3dd21a3"
+    },
+    {
+      "source": "related-gpu/release/scene-fog-retry4/indexed-combined/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/scene-fog-retry4/indexed-combined/diagnostics.jsonl.gz",
+      "sha256": "03f98d6ca32d9db74f728fc0fe0265ae041cf0801bfe21bb015bce6e3706f93f"
+    },
+    {
+      "source": "related-gpu/release/scene-fog-retry4/indexed-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/scene-fog-retry4/indexed-msaa/diagnostics.jsonl.gz",
+      "sha256": "3e8c4e3d462ad93a28c9685cd7befdadc62308035fb9819bda7c20b83b4deb5f"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry3/fixed-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry3/fixed-additive/diagnostics.jsonl.gz",
+      "sha256": "a380f9fe3c1b2b73ad6f7cf12bfefe3f3c79474786610ef44b2b3bb304987340"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry3/fixed-alpha/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry3/fixed-alpha/diagnostics.jsonl.gz",
+      "sha256": "68520e949530cba84bdab5c4917ee1effd8ad6bfe041803079011b8f5895c728"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry3/fixed-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry3/fixed-msaa/diagnostics.jsonl.gz",
+      "sha256": "8da6b181b3c51406922259207844009f1b8fd928f9511efa5e455425d4099412"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry3/fixed-object-shadow-additive-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry3/fixed-object-shadow-additive-msaa/diagnostics.jsonl.gz",
+      "sha256": "25c6c2a1412fb391c512cbc5cd66f83a8ab9a9b43bb6adfac4a186cd1295014a"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry3/indexed-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry3/indexed-additive/diagnostics.jsonl.gz",
+      "sha256": "7fd9fa12bd871e4040b2551056b9bc7633d3ede5020487c37046c4bee0e18a83"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry3/indexed-alpha/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry3/indexed-alpha/diagnostics.jsonl.gz",
+      "sha256": "4eded6b08f6482487bbd7ac76d02cc43382307e1c70843915f5ed03b927ab458"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry3/indexed-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry3/indexed-msaa/diagnostics.jsonl.gz",
+      "sha256": "53fbd87fa578a06c1f3e5543b93e637e00c83d64d6a836725d98d0b98efdbcbd"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry3/indexed-object-shadow-additive-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry3/indexed-object-shadow-additive-msaa/diagnostics.jsonl.gz",
+      "sha256": "8d3b4c36bd835ac350d625de7b9d05ba0d43542edaac247cc2e134b32061042c"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/fixed-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/fixed-additive/diagnostics.jsonl.gz",
+      "sha256": "8107cd6db356b961610e92d00313a4b80d494abbdaa158bd0c2ebbdb91518b7c"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/fixed-alpha/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/fixed-alpha/diagnostics.jsonl.gz",
+      "sha256": "6dbe3785abb24b97c40d5bfbf303aece56c3163a8217fe8bab7ef6de49a60420"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/fixed-linear-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/fixed-linear-additive/diagnostics.jsonl.gz",
+      "sha256": "022c38126defc27f59f93c2cddb3f33956149cdaabb4f859c4c64f16f7a282e1"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/fixed-linear-display/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/fixed-linear-display/diagnostics.jsonl.gz",
+      "sha256": "9a752e464fbd2a39cfa114394c3f04999acc317089652dde4241601715a7d302"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/fixed-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/fixed-msaa/diagnostics.jsonl.gz",
+      "sha256": "ccbac3deca40af2f66877b1315b97c12105c1c47ffcc3d9290136d0ac679a419"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/fixed-object-shadow-additive-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/fixed-object-shadow-additive-msaa/diagnostics.jsonl.gz",
+      "sha256": "80e764e23505edf443a6d3d82d02eda8578e59e1b617c7b6ecf1ba8f21ec82ea"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/fixed-radiance-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/fixed-radiance-quarter/diagnostics.jsonl.gz",
+      "sha256": "6a84c04b1a0b915f6032faab83a28eb3266cc10d7f175ccd57c5bb62337e90d8"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/indexed-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/indexed-additive/diagnostics.jsonl.gz",
+      "sha256": "541b05f1c36c5cf47d89b557fcd2a6b5970787a682dc5d45c7c609ec8000cec6"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/indexed-alpha/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/indexed-alpha/diagnostics.jsonl.gz",
+      "sha256": "ebc2b1216fa7d51169db05bd307fa1921f69361f9c94bae2d7fd9f4de0a7cfa9"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/indexed-linear-additive/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/indexed-linear-additive/diagnostics.jsonl.gz",
+      "sha256": "2e82d382151ac542aa08b97a39337c64967b1d95fccedc3b1d3e4eff7c87ddd4"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/indexed-linear-display/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/indexed-linear-display/diagnostics.jsonl.gz",
+      "sha256": "93b7dd944fe161b79ac8c586c25d86e5666adf44b47d89006a25a5cb37646b24"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/indexed-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/indexed-msaa/diagnostics.jsonl.gz",
+      "sha256": "1c745ea3ff5f0317ef428b701fc6ba90dba57fea69f2ac5a58ed896ff00f3382"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/indexed-object-shadow-additive-msaa/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/indexed-object-shadow-additive-msaa/diagnostics.jsonl.gz",
+      "sha256": "57d79c4df637994be47e4595014dcb64101c1f79bcc5ff964e6b429f76eb16af"
+    },
+    {
+      "source": "related-gpu/release/view-fog-retry4/indexed-radiance-quarter/captures/azureplayer.log.jsonl.gz",
+      "target": "related-gpu/release/view-fog-retry4/indexed-radiance-quarter/diagnostics.jsonl.gz",
+      "sha256": "079ebb173b6dc906f023219ce58e60afb0846df7ec49348e4c908d322101a98e"
+    },
+    {
+      "source": "supersample-gpu/debug/linear/captures/azureplayer.log.jsonl.gz",
+      "target": "supersample-gpu/debug/linear/diagnostics.jsonl.gz",
+      "sha256": "7c377d5a4813663ca97b4ade52f370ad6251b5c566684043640c7f43109d94ae"
+    },
+    {
+      "source": "supersample-gpu/debug/reference/captures/azureplayer.log.jsonl.gz",
+      "target": "supersample-gpu/debug/reference/diagnostics.jsonl.gz",
+      "sha256": "004effb6bbd9cc0e74bbe4f605ea292df00ac79d69c1002232eac04fd72c9163"
+    },
+    {
+      "source": "supersample-gpu/debug/scene/captures/azureplayer.log.jsonl.gz",
+      "target": "supersample-gpu/debug/scene/diagnostics.jsonl.gz",
+      "sha256": "e0f40aa303e1e722f9dda8299f9c3c9f953f3175c54e0dd3f3b2c54966b807bf"
+    },
+    {
+      "source": "supersample-gpu/release/linear/captures/azureplayer.log.jsonl.gz",
+      "target": "supersample-gpu/release/linear/diagnostics.jsonl.gz",
+      "sha256": "dbb3e4fc9f7104508970b8d8626ef36a2c7289decfd105a7897b4ed5a17acb73"
+    },
+    {
+      "source": "supersample-gpu/release/reference/captures/azureplayer.log.jsonl.gz",
+      "target": "supersample-gpu/release/reference/diagnostics.jsonl.gz",
+      "sha256": "0378e31e44bfabb83ee2720b118f0252cb4d11fcd9ee8b44ee48f0854f1ddd9a"
+    },
+    {
+      "source": "supersample-gpu/release/scene/captures/azureplayer.log.jsonl.gz",
+      "target": "supersample-gpu/release/scene/diagnostics.jsonl.gz",
+      "sha256": "1a440bf15752e768efac78f3ec14735222b45e29e41c138525c1db76eaf10ee2"
+    }
+  ]
+}

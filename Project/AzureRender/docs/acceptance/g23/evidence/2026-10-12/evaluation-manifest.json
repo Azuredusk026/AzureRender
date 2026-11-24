@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "evaluation": "FixedDependenciesAndNativeAac",
+  "opus": "1.6.1",
+  "opusfile": "0.12+20221121#1",
+  "lame": "3.100",
+  "windowsAacDecoders": 1,
+  "windowsAacEncoders": 1,
+  "m4aDecodedFrames": 48128,
+  "adtsDecodedFrames": 48128,
+  "authoringFrames": 48000,
+  "implementationStatus": "Planned",
+  "sourceDownloads": [
+    {
+      "repo": "xiph/opus",
+      "ref": "v1.6.1",
+      "url": "https://codeload.github.com/xiph/opus/tar.gz/v1.6.1",
+      "sha512": "b9a504f8576c977df57caee808412ab95e7424e9a64e3dd4045f05616c3ed58706bc3549195b61e25721e299547509d15206d246d96f1a307b82562b703b412c",
+      "bytes": 4888071
+    },
+    {
+      "repo": "xiph/opusfile",
+      "ref": "9d718345ce03b2fad5d7d28e0bcd1cc69ab2b166",
+      "url": "https://codeload.github.com/xiph/opusfile/tar.gz/9d718345ce03b2fad5d7d28e0bcd1cc69ab2b166",
+      "sha512": "17e323d6c031330f10b045a1438cd7ba44e2ac313ec7b3d69a8041dfa927c3f501d04246d974109fbd68dfa1a8d7b63584d96caed69ad5e38b68358aa35af65a",
+      "bytes": 149358
+    }
+  ],
+  "files": [
+    {
+      "path": "aac-fixture-source.json",
+      "sha256": "1043d78081386b7fe413dc42e3c305746d49df4fbe3c6ecaa1dd3b1d675679ce",
+      "bytes": 714
+    },
+    {
+      "path": "check-mf-build.log",
+      "sha256": "607f485a3c7327efcb48499ae236528228680f6840f3fe9cfa42af79051b38cd",
+      "bytes": 14
+    },
+    {
+      "path": "check-mf.cpp",
+      "sha256": "ab627053f7caabd6069d43403905f8e0a626290bccc3f37f085905352c7bddf5",
+      "bytes": 820
+    },
+    {
+      "path": "check-mf.log",
+      "sha256": "a93142f34da2579f6550605142cf98c64187d6081601420ba28b24973e388888",
+      "bytes": 48
+    },
+    {
+      "path": "create-mf-fixture-build-final.log",
+      "sha256": "7f06a66c2c113455c3cca82c50326abc9d7658805b40cc6bcb3e6822cf340043",
+      "bytes": 23
+    },
+    {
+      "path": "create-mf-fixture-build-fixed.log",
+      "sha256": "8a6e32a2a70d58ae0a007da5b486f629daa00d572f9ffcd18bfa3ff765ac79f6",
+      "bytes": 786
+    },
+    {
+      "path": "create-mf-fixture-build.log",
+      "sha256": "0171b7ccffc2e6688281181fe19238955efc2855e64293078793167cc20344cd",
+      "bytes": 9947
+    },
+    {
+      "path": "create-mf-fixture.cpp",
+      "sha256": "f359eac3c71a34b55cb890a174fc967553b7b683d19758f58896fd113be6dbab",
+      "bytes": 3781
+    },
+    {
+      "path": "create-mf-fixture.log",
+      "sha256": "2c6fd1b7dc75913fcc4c21df9454a98cd42388013273585b548812913df1a7ba",
+      "bytes": 30
+    },
+    {
+      "path": "dependency-build.log",
+      "sha256": "ca075611c018cc0ffb77b18b73ab28928575ec37f8cb1ee4f46735dd808244c6",
+      "bytes": 4075
+    },
+    {
+      "path": "install-retry.log",
+      "sha256": "1eb08c489d36d9223b547399ba4067a706e73794af9ae2fbb1657973ef90b099",
+      "bytes": 4273
+    },
+    {
+      "path": "opus-public-red.json",
+      "sha256": "ec41ec41c9f45c32d3802363dba9da83d614c04ddfdcdb6227e1a6a569935ab0",
+      "bytes": 287
+    },
+    {
+      "path": "opus-public-red.log",
+      "sha256": "9c1efe99488df0b837dd16ebd28276d2620bc1f34950071f59e49da027f9a651",
+      "bytes": 40
+    },
+    {
+      "path": "read-mf-adts-build.log",
+      "sha256": "ee56babce33d74ec573ad00d5d8f55a2e38919c5a9e9b65f2018e423ba106b6d",
+      "bytes": 18
+    },
+    {
+      "path": "read-mf-adts.cpp",
+      "sha256": "d3677e16b895871aa386146f0c24ac8a4eb51af02a6b6c2e1a935db6f2ee30c4",
+      "bytes": 3812
+    },
+    {
+      "path": "read-mf-adts.log",
+      "sha256": "bd6e5679a83daaf9d650fae7d5c26685c3d9b8d262181f419919da7ac88ba0e8",
+      "bytes": 30
+    },
+    {
+      "path": "reference.aac",
+      "sha256": "dffa66108db947694b6f6d60192d7f2e37cfa954777c740c825f0e32dac5e1fd",
+      "bytes": 24694
+    },
+    {
+      "path": "reference.m4a",
+      "sha256": "5c1c876a8eae7f210e89af58a3ec44e3f7c2927d60616670be5e6d52bd6f96b4",
+      "bytes": 25262
+    },
+    {
+      "path": "source-downloads.json",
+      "sha256": "2910f1b034d8c2e59ad7c8efd2284b10910f39aaddadde4e4f26107a7d351449",
+      "bytes": 670
+    },
+    {
+      "path": "source-downloads.log",
+      "sha256": "6286afa494cab6b330c0bffcef3ec822f8240936f474f1e69202227cda5fe472",
+      "bytes": 107
+    }
+  ]
+}

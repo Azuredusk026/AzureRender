@@ -1,0 +1,10 @@
+{
+  "status": "measured",
+  "serialDifferentFrames": [],
+  "defaultRepeatDifferentFrames": [
+    "frame_000003.png",
+    "frame_000009.png",
+    "frame_000010.png"
+  ],
+  "visualAcceptance": "failed-user-review"
+}

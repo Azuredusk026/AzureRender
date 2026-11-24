@@ -1,7 +1,7 @@
 {
- "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://azurerender.local/schema/gpu-capability-report-v2.json",
-  "title": "AzureRender GPU Capability Report v2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azurerender.local/schema/gpu-capability-report-v3.json",
+  "title": "AzureRender GPU Capability Report v3",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -14,11 +14,12 @@
     "features",
     "compute",
     "descriptor_indexing",
+    "resource_access",
     "extensions"
   ],
   "properties": {
     "schema_version": {
-      "const": 2
+      "const": 3
     },
     "device_name": {
       "type": "string",
@@ -43,7 +44,10 @@
     "features": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["sampler_anisotropy", "shader_int64"],
+      "required": [
+        "sampler_anisotropy",
+        "shader_int64"
+      ],
       "properties": {
         "sampler_anisotropy": {
           "type": "boolean"
@@ -56,10 +60,17 @@
     "compute": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["shader", "storage_image_write_without_format"],
+      "required": [
+        "shader",
+        "storage_image_write_without_format"
+      ],
       "properties": {
-        "shader": {"type": "boolean"},
-        "storage_image_write_without_format": {"type": "boolean"}
+        "shader": {
+          "type": "boolean"
+        },
+        "storage_image_write_without_format": {
+          "type": "boolean"
+        }
       }
     },
     "descriptor_indexing": {
@@ -91,6 +102,120 @@
       "items": {
         "type": "string",
         "minLength": 1
+      }
+    },
+    "resource_access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supported",
+        "enabled",
+        "limits"
+      ],
+      "properties": {
+        "supported": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "device_address",
+            "sampled_image_update_after_bind"
+          ],
+          "properties": {
+            "device_address": {
+              "type": "boolean"
+            },
+            "sampled_image_update_after_bind": {
+              "type": "boolean"
+            }
+          }
+        },
+        "enabled": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "descriptor_indexing",
+            "device_address",
+            "allocator_device_address",
+            "update_after_bind"
+          ],
+          "properties": {
+            "descriptor_indexing": {
+              "type": "boolean"
+            },
+            "device_address": {
+              "type": "boolean"
+            },
+            "allocator_device_address": {
+              "type": "boolean"
+            },
+            "update_after_bind": {
+              "type": "boolean"
+            }
+          }
+        },
+        "limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_per_stage_descriptor_samplers",
+            "max_descriptor_set_samplers",
+            "max_per_stage_descriptor_sampled_images",
+            "max_descriptor_set_sampled_images",
+            "max_per_stage_resources",
+            "max_per_stage_update_after_bind_samplers",
+            "max_set_update_after_bind_samplers",
+            "max_per_stage_update_after_bind_sampled_images",
+            "max_set_update_after_bind_sampled_images",
+            "max_per_stage_update_after_bind_resources",
+            "max_update_after_bind_descriptors_all_pools"
+          ],
+          "properties": {
+            "max_per_stage_descriptor_samplers": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_descriptor_set_samplers": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_per_stage_descriptor_sampled_images": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_descriptor_set_sampled_images": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_per_stage_resources": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_per_stage_update_after_bind_samplers": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_set_update_after_bind_samplers": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_per_stage_update_after_bind_sampled_images": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_set_update_after_bind_sampled_images": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_per_stage_update_after_bind_resources": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_update_after_bind_descriptors_all_pools": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
       }
     }
   }

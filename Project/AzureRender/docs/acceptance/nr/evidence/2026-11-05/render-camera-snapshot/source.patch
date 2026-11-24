@@ -1,0 +1,111 @@
+diff --git a/Project/AzureRender/src/app/AzureRenderApp.cpp b/Project/AzureRender/src/app/AzureRenderApp.cpp
+index dcc31e2..cc2f1a4 100644
+--- a/Project/AzureRender/src/app/AzureRenderApp.cpp
++++ b/Project/AzureRender/src/app/AzureRenderApp.cpp
+@@ -694,13 +694,15 @@ void AzureRenderApp::buildSceneFrameData(
+ #endif
+     {elapsed=game?game->advance(rawDeltaSeconds):runtime_.beginFrame(rawDeltaSeconds);if(presentationRuntime_)presentationRuntime_->update(elapsed);}
+     const float deltaSeconds=static_cast<float>(elapsed);
++    std::optional<azurerender::SceneDocument> gameScene;
++    if(game)gameScene=game->renderScene();
+     std::optional<azurerender::CameraViewDescriptor> gameView;
+     bool sceneViewActive=false;
+ #if AZURE_WITH_EDITOR
+     sceneViewActive=runOptions_.editorSession&&runOptions_.editorSession->editCameraActive();
+ #endif
+     if(game&&(!qaHarnessEnabled_||qaCameraName_=="scene")&&!sceneViewActive){
+-        gameView=game->renderCamera().view;
++        gameView=game->renderCamera(*gameScene).view;
+         const auto view=gameView.value_or(azurerender::CameraViewDescriptor{});
+         cameraPosition_=view.position;cameraTarget_=view.target;autoRotate_=false;rotationAngle_=0;
+     }
+@@ -714,11 +716,14 @@ void AzureRenderApp::buildSceneFrameData(
+     if(game&&gameInputReplay_&&!runOptions_.runtimeReportPath.empty()&&gameRouteFrames_.size()<8192)
+         gameRouteFrames_.push_back(observeGameState());
+ #if AZURE_WITH_EDITOR
+-    if(runOptions_.editorSession)frame.sceneSnapshot=std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(game?game->renderScene():runOptions_.editorSession->viewScene()));
++    if(runOptions_.editorSession){
++        if(gameScene)frame.sceneSnapshot=std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(*gameScene));
++        else frame.sceneSnapshot=std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(runOptions_.editorSession->viewScene()));
++    }
+ #endif
+     pausedTimeOffset_ += static_cast<double>(rawDeltaSeconds - deltaSeconds);
+     if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
+-        runOptions_.sceneDocument = game?game->renderScene():runtime_.snapshotScene();
++        runOptions_.sceneDocument = gameScene?std::move(*gameScene):runtime_.snapshotScene();
+     if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
+         frame.sceneSnapshot = std::make_shared<const azurerender::scene::SceneDescription>(
+             resolveRenderDescription(*runOptions_.sceneDocument));
+diff --git a/Project/AzureRender/src/runtime/GameRuntime.cpp b/Project/AzureRender/src/runtime/GameRuntime.cpp
+index 6d5201c..ab9254c 100644
+--- a/Project/AzureRender/src/runtime/GameRuntime.cpp
++++ b/Project/AzureRender/src/runtime/GameRuntime.cpp
+@@ -100,7 +100,10 @@ SceneDocument GameRuntime::renderScene() {
+     return scene;
+ }
+ GameCameraSelection GameRuntime::renderCamera(){
+-    auto selected=resolveGameCamera(runtime_,renderScene());
++    return renderCamera(renderScene());
++}
++GameCameraSelection GameRuntime::renderCamera(const SceneDocument& scene){
++    auto selected=resolveGameCamera(runtime_,scene);
+     if(!selected.view&&hasCamera_){
+         CameraViewDescriptor view;view.position=renderCameraPosition();view.target=renderCameraTarget();
+         selected.view=view;selected.node="follow-camera";selected.diagnostic.clear();
+diff --git a/Project/AzureRender/src/runtime/GameRuntime.hpp b/Project/AzureRender/src/runtime/GameRuntime.hpp
+index 46c2523..0b89dd8 100644
+--- a/Project/AzureRender/src/runtime/GameRuntime.hpp
++++ b/Project/AzureRender/src/runtime/GameRuntime.hpp
+@@ -39,6 +39,8 @@ public:
+     void cameraInput(float x, float y, float scroll);
+     SceneDocument renderScene();
+     GameCameraSelection renderCamera();
++    // The caller retains this frame's interpolated scene through selection.
++    GameCameraSelection renderCamera(const SceneDocument& scene);
+     std::array<float,3> renderCameraPosition() const;
+     std::array<float,3> renderCameraTarget() const;
+ private:
+diff --git a/Project/AzureRender/tests/CameraSystemTests.cpp b/Project/AzureRender/tests/CameraSystemTests.cpp
+index 7d60d43..4e6051d 100644
+--- a/Project/AzureRender/tests/CameraSystemTests.cpp
++++ b/Project/AzureRender/tests/CameraSystemTests.cpp
+@@ -1,13 +1,39 @@
+ #include "runtime/ComponentRegistry.hpp"
+ #include "runtime/camera/GameCameraService.hpp"
+ #include "runtime/RuntimeLifecycle.hpp"
++#include "runtime/GameRuntime.hpp"
+ #include "ecs/CameraComponents.hpp"
+ #include "render/RenderCamera.hpp"
+ #include "scene/TransformMath.hpp"
+ #include <iostream>
+ using namespace azurerender;
+ void check(bool value,const char* message){if(!value)throw std::runtime_error(message);}
++void checkSharedRenderScene(){
++    SceneDocument document;document.nodes={{"parent","Parent"},{"camera","Camera","parent"}};
++    document.nodes[0].translation={10,0,0};document.nodes[1].translation={0,2,3};
++    RuntimeLifecycle runtime;runtime.loadScene(document);runtime.start();
++    runtime.world().addComponent(runtime.entity("camera"),game::GameCamera{});
++    auto* camera=runtime.world().tryGet<game::GameCamera>(runtime.entity("camera"));
++    GameRuntime game(runtime);game.setBeforeStep([&](double){
++        runtime.world().tryGet<ecs::TransformComponent>(runtime.entity("parent"))->translation[0]=14;
++        runtime.world().tryGet<ecs::TransformComponent>(runtime.entity("camera"))->translation[2]=6;
++    });
++    game.advance(1.0/60);game.advance(1.0/120);
++    const auto snapshot=game.renderScene();const auto selected=game.renderCamera(snapshot);
++    check(selected.node=="camera"&&selected.view.has_value(),"Rendered scene camera must preserve authored selection");
++    check(std::abs(snapshot.nodes[0].translation[0]-12)<1e-5F,"Frame scene must retain the interpolation phase");
++    check(selected.view->position==std::array<float,3>{12,2,4.5F},"Camera and geometry must share interpolated parent and local transforms");
++    runtime.world().tryGet<ecs::TransformComponent>(runtime.entity("parent"))->translation[0]=40;
++    check(game.renderCamera(snapshot).view->position==selected.view->position,"Camera selection must use the caller's scene instead of fetching a newer scene");
++    const auto live=game.renderScene();check(game.renderCamera().view->position==game.renderCamera(live).view->position,"Standalone camera calls must preserve their existing scene acquisition behavior");
++    camera->enabled=false;game.activateCamera(game::ThirdPersonCamera{},std::array<float,3>{1,2,3});
++    const auto followed=game.renderCamera(snapshot);
++    check(followed.node=="follow-camera"&&followed.view->position==game.renderCameraPosition(),"Missing authored cameras must preserve interpolated follow-camera selection");
++    game.deactivateCamera();check(!game.renderCamera(snapshot).view,"Missing authored and follow cameras must remain observable");
++    check(snapshot.nodes[0].translation[0]==12&&selected.view->position[0]==12,"Returned camera and frame scene must retain their owned values");
++}
+ int main(){try{
++    checkSharedRenderScene();
+     auto registry=makeRuntimeComponentRegistry();
+     const auto camera=registry.defaults("azure.camera");registry.validate("azure.camera",camera);
+     check(camera.at("version")==2,"Projection offsets require camera component version two");

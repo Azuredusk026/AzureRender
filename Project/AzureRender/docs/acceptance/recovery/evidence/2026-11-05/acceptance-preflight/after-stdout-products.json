@@ -1,0 +1,16 @@
+{
+  "release": {
+    "programs": {
+      "AzurePlayer.exe": "d20f8927e118a698b437995aed8dd8a3af55f81ad3fa3e6a97ffc127e5abb719",
+      "AzureRender.exe": "d8ae601ce83cb0541c09898dce4939bc1e210c160646e1fc11c538d607b9f2a7"
+    },
+    "unchangedShaders": 535
+  },
+  "debug": {
+    "programs": {
+      "AzurePlayer.exe": "fc6f42c2099e8f8b225ba8eebb6b0d914404ac477e825a811baa6f9d303c61ed",
+      "AzureRender.exe": "41f5b62b6df9df7243db05200cad80457d8757e1a50962e62b08df338554fa4a"
+    },
+    "unchangedShaders": 535
+  }
+}

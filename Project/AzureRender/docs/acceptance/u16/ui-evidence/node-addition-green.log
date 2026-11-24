@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_node_addition.py", line 49, in <module>
+    p.add_argument('--output',type=Path,required=True);a=p.parse_args();run(a.executable.resolve(),a.output.resolve())
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_node_addition.py", line 40, in run
+    assert undo['nodeCount']==2 and undo['undoCount']==2 and undo['redoCount']==0
+                                                             ~~~~^^^^^^^^^^^^^
+KeyError: 'redoCount'

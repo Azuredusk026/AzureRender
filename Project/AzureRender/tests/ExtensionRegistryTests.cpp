@@ -2,6 +2,8 @@
 
 #include <cassert>
 #include <memory>
+#include <iostream>
+#include <initializer_list>
 #include <stdexcept>
 #include <string_view>
 
@@ -104,8 +106,17 @@ int main() {
     // Scene renderer registry reuses the same dependency/version contract and
     // the default diagnostic view lookup comes from capabilities.
     azurerender::SceneRendererRegistry sceneRegistry;
+    if(sceneRegistry.kApiVersion!=17||azurerender::SceneRendererCapabilities::kApiVersion!=17){
+        std::cerr<<"Reference stencil descriptors require scene renderer API version seventeen\n";return 1;
+    }
+    for(std::uint32_t legacyApi=1;legacyApi<17;++legacyApi){
+        bool oldSceneApiRejected=false;
+        try{sceneRegistry.registerFactory({"scene.old",legacyApi,{"render"},{}},[]{return std::make_unique<TestSceneRenderer>();});}
+        catch(const std::runtime_error&){oldSceneApiRejected=true;}
+        if(!oldSceneApiRejected){std::cerr<<"An older scene renderer API must be rejected before registration\n";return 1;}
+    }
     sceneRegistry.registerFactory(
-        {"scene.character", 1, {"render"}, {}},
+        {"scene.character", azurerender::SceneRendererRegistry::kApiVersion, {"render"}, {}},
         [] { return std::make_unique<TestSceneRenderer>(); });
     assert(sceneRegistry.contains("scene.character"));
     const auto selectedScene = sceneRegistry.create("scene.character");
@@ -118,6 +129,11 @@ int main() {
     assert(scenes[0]->diagnosticViewName(99) == "Unknown");
     azurerender::validateSceneRendererCapabilities(
         scenes[0]->capabilities());
+    azurerender::CameraViewDescriptor shiftedCamera;shiftedCamera.projectionOffsetX=.25F;
+    bool unsupportedOffset=false;
+    try{azurerender::validateSceneRendererCamera(scenes[0]->capabilities(),shiftedCamera);}
+    catch(const std::invalid_argument&){unsupportedOffset=true;}
+    if(!unsupportedOffset)throw std::runtime_error("A renderer must declare projection offset support explicitly");
     bool invalidCapabilitiesFailed = false;
     try {
         azurerender::SceneRendererCapabilities invalid;

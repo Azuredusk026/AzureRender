@@ -1,0 +1,11 @@
+{
+  "movedToUnicodeDirectory": true,
+  "sourceProjectUnavailable": true,
+  "entry": "Path Tracing Room.exe",
+  "exitCode": 0,
+  "renderer": "pathtracing",
+  "progress": {
+    "samples": 24,
+    "target": 256
+  }
+}

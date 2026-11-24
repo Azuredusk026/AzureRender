@@ -1,0 +1,22 @@
+[
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+  "--project",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\gpu-final-release\\unlit-exposure\\lab.azureproject",
+  "--width",
+  "128",
+  "--height",
+  "128",
+  "--capture-dir",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\gpu-final-release\\unlit-exposure\\frames",
+  "--capture-frames",
+  "1",
+  "--fixed-frame-step",
+  "--qa-camera",
+  "scene",
+  "--qa-light",
+  "scene",
+  "--qa-isolation",
+  "beauty",
+  "--runtime-report",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\gpu-final-release\\unlit-exposure\\runtime.json"
+]

@@ -1,0 +1,16 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.EditorProjection
+1/1 Test #193: AzureEditor.EditorProjection .....***Failed    0.07 sec
+[1791577586288][info][editor][code=0] Opened scene: untitled
+[1791577586296][info][editor][code=0] ERROR [viewport.orientation]: Unknown operation: viewport.orientation
+Six-axis orientations must use a registered production operation
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.07 sec
+
+The following tests FAILED:
+	193 - AzureEditor.EditorProjection (Failed)
+Errors while running CTest

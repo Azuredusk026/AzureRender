@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_tampered_cached_reflection_is_rejected (__main__.ShaderModuleTests.test_tampered_cached_reflection_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_shader_module.py", line 121, in test_tampered_cached_reflection_is_rejected
+    self.assertNotEqual(result.returncode,0,'Cached reflection must satisfy the same layout contract')
+AssertionError: 0 == 0 : Cached reflection must satisfy the same layout contract
+
+----------------------------------------------------------------------
+Ran 1 test in 1.419s
+
+FAILED (failures=1)

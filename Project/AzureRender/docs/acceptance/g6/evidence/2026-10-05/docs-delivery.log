@@ -1,0 +1,9 @@
+Documentation prose style passed for 45 files.
+warning: in the working copy of 'Project/AzureRender/docs/runtime/physics-input.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/EditorSession.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/runtime/ComponentCodec.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/runtime/GameComponents.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/runtime/GameInputReplay.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/runtime/InputActions.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/runtime/ScriptRuntime.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/runtime/ScriptRuntime.hpp', LF will be replaced by CRLF the next time Git touches it

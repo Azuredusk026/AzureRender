@@ -1,0 +1,23 @@
+{
+  "shaderSha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+  "executableSha256": "561e031437c4a12bca80700da97940ee5067a5ed705fb6c48ee05924683b3c7b",
+  "sourceRun": "build\\runs\\20261031-081749-projected-camera-gpu-c16583",
+  "panels": [
+    {
+      "mode": "positive",
+      "colorSha256": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b",
+      "footprintSha256": "47d67836e33295d070a01d77a89714af246f88510393860600ffb976ce8e91a6"
+    },
+    {
+      "mode": "wrong-convention",
+      "colorSha256": "b4b8f0d8ef5095e68cda27c733559c1fd3792e60a32c5d9785e9639ec3f25af0",
+      "footprintSha256": "33f53f414a56cf6a490c97715abc878f7a41f0b3c7ed7700495904ab97123edd"
+    },
+    {
+      "mode": "wrong-motion",
+      "colorSha256": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b",
+      "footprintSha256": "177c970530cf30162826323f85cf452443d451bbb6dc97624ee8a8f9b4ce4857"
+    }
+  ],
+  "figureSha256": "9e2e9d82cd80ff1d01cec0c14bc12eb63e9a9c24da5975536e2e5cd8b662c1da"
+}

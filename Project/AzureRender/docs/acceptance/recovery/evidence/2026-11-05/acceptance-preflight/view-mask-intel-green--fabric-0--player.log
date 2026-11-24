@@ -1,0 +1,43 @@
+Project loaded: Local light laboratory (light-lab)
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: Intel(R) RaptorLake-S Mobile Graphics Controller
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+[1793856187725][info][startup][code=0] Starting logical device
+[1793856187745][info][gpu][code=0] GPU capability report: D:\Projects\FYP\Project\AzureRender\build\runs\20261105-125529-automatic-acceptance-3d5b54\view-mask-intel-green\fabric-0\frames\gpu_capabilities.json
+[1793856187754][info][startup][code=0] Completed logical device in 28 ms
+[1793856187759][info][startup][code=0] Starting shadow resources
+[1793856187797][info][startup][code=0] Completed shadow resources in 37 ms
+[1793856187835][info][startup][code=0] Starting graphics pipelines
+[1793856187840][info][startup][code=0] Completed graphics pipelines in 4 ms
+[1793856187842][info][startup][code=0] Starting scene renderer
+Turntable foot pivot: [4.000000, -4.000000, 0.000000]
+Asset path: D:\Projects\FYP\Project\AzureRender\build\runs\20261105-125529-automatic-acceptance-3d5b54\view-mask-intel-green\fabric-0\plane.gltf
+Loaded asset: 293 vertices, 870 indices, 2 primitives, 4 materials
+Material Class v1 inventory:
+  [0] profile-index-padding -> generic, flags=0x20, source=fallback/inferred
+  [1] UnnamedMaterial -> fabric, flags=0x82000, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793856187874][info][render][code=0] Character texture access: indexed, requested slots=56, stage sampler limit=64
+[1793856187875][info][render][code=0] Scene load CPU preparation: 31.228400 ms, materialPixelBytes=676
+[1793856187893][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1793856187896][info][render][code=0] Scene load shared textures: 15.034200 ms
+[1793856187898][info][render][code=0] Scene material progress: resource=1, elapsedMs=5.008100, hashMs=0.004100, mipMs=0.114800, uploadMs=4.781400, transferredBytes=208, discardedBytes=468
+[1793856187898][info][render][code=0] Scene load buffers: 0.123500 ms
+[1793856187899][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1793856187899][info][render][code=0] Scene load skinning: 0.788600 ms
+[1793856187900][info][render][code=0] Scene load descriptors: 1.265800 ms
+[1793856187916][info][render][code=0] Scene load pipelines: 15.165400 ms
+[1793856187917][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=true
+Scene renderer: character (sceneType=character)
+[1793856187918][info][startup][code=0] Completed scene renderer in 75 ms
+[1793856187919][info][startup][code=0] Starting editor interface
+[1793856187919][info][startup][code=0] Completed editor interface in 0 ms
+CQ-0 QA: camera=scene, light=scene, effect=none, state=enabled, isolation=ambient
+Diagnostic view: Beauty, stylized lighting: off, internal outline: off, HUD: off
+Clustered lighting: 1 lights, 3456 cluster references
+[1793856187939][info][capture][code=0] Capture progress: 1 / 1

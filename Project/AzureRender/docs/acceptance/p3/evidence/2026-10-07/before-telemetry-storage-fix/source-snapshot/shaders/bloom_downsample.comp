@@ -1,0 +1,34 @@
+#version 450
+
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
+
+layout(set = 0, binding = 0) uniform sampler2D sourceImage;
+layout(set = 0, binding = 1, rgba16f) writeonly uniform image2D destinationImage;
+
+layout(push_constant) uniform BloomParameters {
+    float threshold;
+    uint extractBright;
+} parameters;
+
+void main() {
+    ivec2 destinationSize = imageSize(destinationImage);
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    if (any(greaterThanEqual(pixel, destinationSize))) {
+        return;
+    }
+
+    ivec2 sourceSize = textureSize(sourceImage, 0);
+    ivec2 origin = pixel * 2;
+    vec3 color = vec3(0.0);
+    for (int y = 0; y < 2; ++y) {
+        for (int x = 0; x < 2; ++x) {
+            ivec2 samplePixel = min(origin + ivec2(x, y), sourceSize - 1);
+            color += texelFetch(sourceImage, samplePixel, 0).rgb;
+        }
+    }
+    color *= 0.25;
+    if (parameters.extractBright != 0u) {
+        color = max(color - vec3(max(parameters.threshold, 0.0)), vec3(0.0));
+    }
+    imageStore(destinationImage, pixel, vec4(color, 1.0));
+}

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "actions": [
+    {
+      "frame": 0,
+      "action": "focus",
+      "focused": true
+    },
+    {
+      "frame": 30,
+      "action": "key",
+      "key": 68,
+      "down": true
+    },
+    {
+      "frame": 120,
+      "action": "key",
+      "key": 340,
+      "down": true
+    },
+    {
+      "frame": 240,
+      "action": "key",
+      "key": 340,
+      "down": false
+    },
+    {
+      "frame": 250,
+      "action": "key",
+      "key": 68,
+      "down": false
+    },
+    {
+      "frame": 270,
+      "action": "key",
+      "key": 65,
+      "down": true
+    },
+    {
+      "frame": 300,
+      "action": "focus",
+      "focused": false
+    },
+    {
+      "frame": 330,
+      "action": "focus",
+      "focused": true
+    },
+    {
+      "frame": 360,
+      "action": "camera",
+      "x": -450,
+      "y": -75,
+      "scroll": 0
+    },
+    {
+      "frame": 390,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 420,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 450,
+      "action": "key",
+      "key": 82,
+      "down": true
+    },
+    {
+      "frame": 451,
+      "action": "key",
+      "key": 82,
+      "down": false
+    }
+  ]
+}

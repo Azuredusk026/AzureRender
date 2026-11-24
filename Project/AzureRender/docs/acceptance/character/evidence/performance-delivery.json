@@ -1,0 +1,10 @@
+{
+  "renderWallSeconds": 141.0469946861267,
+  "launchToFirstPngSeconds": 5.089658975601196,
+  "gpuAverageMs": 75.024582,
+  "gpuP95Ms": 79.586566,
+  "deviceLocalPeakBytes": 1994391552,
+  "loadingMetric": "Launch through asset loading, texture preparation, IBL, first render and PNG creation",
+  "texturePreparationThroughIblWallMs": 2278,
+  "textureMetric": "CPU mip generation, texture transfer/synchronization, shared texture setup and IBL preparation combined"
+}

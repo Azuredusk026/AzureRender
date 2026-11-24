@@ -1,0 +1,16 @@
+{
+  "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-implementation-2026-10-10\\returned-trace-native-final",
+  "command": [
+    "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+    "tools/test_virtual_allocation_trace.py",
+    "--probe",
+    "build/p5-p6-implementation-2026-10-10/native-allocation-proof-final.json"
+  ],
+  "maxEvents": 100000,
+  "diagnosticOnly": true,
+  "fileHashes": {
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\trace_virtual_allocations.py": "9b0a0d82758f48ec2aa8c755bcddf5279aed06a37f8ab5be8061083af0fb12f8",
+    "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python.exe": "5f7b89a612c9b8af1d6456cdfcd1dbe5ca630849e79aebced9bee9a6694952ec",
+    "C:\\Program Files\\LLVM\\bin\\lldb.exe": "414b5463e2d2be0a72dd6e219a6f36925857e38b2712109162ccbebc1027d669"
+  }
+}

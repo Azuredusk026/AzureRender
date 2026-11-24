@@ -1,0 +1,18 @@
+[
+  "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+  "--project",
+  "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261029-044333-reflection-pass-profile-087370\\full-candidate\\enclosure-sampler.azureproject",
+  "--width",
+  "1920",
+  "--height",
+  "1080",
+  "--smoke-frames",
+  "90",
+  "--fixed-frame-step",
+  "--qa-camera",
+  "scene",
+  "--qa-light",
+  "scene",
+  "--qa-isolation",
+  "beauty"
+]

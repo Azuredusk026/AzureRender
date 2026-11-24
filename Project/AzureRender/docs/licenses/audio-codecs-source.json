@@ -1,0 +1,2511 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "name": "libvorbis",
+      "version": "1.3.7",
+      "portVersion": 4,
+      "portTree": "149b8037ad8023f0f1b130616cf1a90238083cb0",
+      "portfile": "vcpkg_from_github(\n    OUT_SOURCE_PATH SOURCE_PATH\n    REPO xiph/vorbis\n    REF v1.3.7\n    SHA512 bfb6f5dbfd49ed38b2b08b3667c06d02e68f649068a050f21a3cc7e1e56b27afd546aaa3199c4f6448f03f6e66a82f9a9dc2241c826d3d1d4acbd38339b9e9fb\n    HEAD_REF master\n    PATCHES\n        0001-Dont-export-vorbisenc-functions.patch\n        0002-Fixup-pkgconfig-libs.patch\n        0003-def-mingw-compat.patch\n        0004-ogg-find-dependency.patch\n)\n\nvcpkg_cmake_configure(\n    SOURCE_PATH \"${SOURCE_PATH}\"\n    OPTIONS\n        -DCMAKE_POLICY_VERSION_MINIMUM=3.5 # https://github.com/xiph/vorbis/issues/113\n    MAYBE_UNUSED_VARIABLES\n        CMAKE_POLICY_VERSION_MINIMUM\n)\n\nvcpkg_cmake_install()\nvcpkg_cmake_config_fixup(PACKAGE_NAME Vorbis CONFIG_PATH \"lib/cmake/Vorbis\")\nvcpkg_fixup_pkgconfig()\nvcpkg_copy_pdbs()\n\nfile(REMOVE_RECURSE \"${CURRENT_PACKAGES_DIR}/debug/include\")\n\nfile(INSTALL \"${CMAKE_CURRENT_LIST_DIR}/usage\" DESTINATION \"${CURRENT_PACKAGES_DIR}/share/${PORT}\")\nfile(INSTALL \"${SOURCE_PATH}/COPYING\" DESTINATION \"${CURRENT_PACKAGES_DIR}/share/${PORT}\" RENAME copyright)\n",
+      "licenseSha256": "ec1815db59fcd302846df949d7424876cb2e2dc5ed1606c5fb0b36787b1cf43a",
+      "spdx": {
+        "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.3/schemas/spdx-schema.json",
+        "spdxVersion": "SPDX-2.3",
+        "dataLicense": "CC0-1.0",
+        "SPDXID": "SPDXRef-DOCUMENT",
+        "documentNamespace": "https://spdx.org/spdxdocs/libvorbis-x64-windows-1.3.7#4-c60cec68-00b0-4355-8259-999674e153a1",
+        "name": "libvorbis:x64-windows@1.3.7#4 40433de2ec8368e64d3f2fff130b6f39bfd486cc6e11353e71ac4c107c82fb2f",
+        "creationInfo": {
+          "creators": [
+            "Tool: vcpkg-2026-07-27-98d7cb0cf1f4686a3e43aa5672b6230c1d56bce8"
+          ],
+          "created": "2026-10-11T18:38:11Z"
+        },
+        "relationships": [
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "GENERATES",
+            "relatedSpdxElement": "SPDXRef-binary"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-0"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-1"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-2"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-3"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-4"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-5"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-6"
+          },
+          {
+            "spdxElementId": "SPDXRef-port-file-6",
+            "relationshipType": "DEPENDENCY_MANIFEST_OF",
+            "relatedSpdxElement": "SPDXRef-port"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-0"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-1"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-2"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-3"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-4"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-5"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-6"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-7"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-8"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-9"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-10"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-11"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-12"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-13"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-14"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-15"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-16"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-17"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-18"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-19"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-20"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-21"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-22"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-23"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-24"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-25"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-26"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-27"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-28"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-29"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-30"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-31"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-32"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-33"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-34"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-35"
+          }
+        ],
+        "packages": [
+          {
+            "name": "libvorbis",
+            "SPDXID": "SPDXRef-port",
+            "versionInfo": "1.3.7#4",
+            "downloadLocation": "git+https://github.com/Microsoft/vcpkg#ports/libvorbis",
+            "homepage": "https://github.com/xiph/vorbis",
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "NOASSERTION",
+            "copyrightText": "NOASSERTION",
+            "description": "Ogg Vorbis is a fully open, non-proprietary, patent-and-royalty-free, general-purpose compressed audio format",
+            "comment": "This is the port (recipe) consumed by vcpkg.",
+            "externalRefs": [
+              {
+                "referenceCategory": "PACKAGE-MANAGER",
+                "referenceType": "purl",
+                "referenceLocator": "pkg:vcpkg/libvorbis@1.3.7?port_version=4&triplet=x64-windows&vcs_url=git%2Bhttps%3A%2F%2Fgithub.com%2FMicrosoft%2Fvcpkg%23ports%2Flibvorbis"
+              }
+            ]
+          },
+          {
+            "name": "libvorbis:x64-windows",
+            "SPDXID": "SPDXRef-binary",
+            "versionInfo": "40433de2ec8368e64d3f2fff130b6f39bfd486cc6e11353e71ac4c107c82fb2f",
+            "downloadLocation": "NONE",
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "NOASSERTION",
+            "copyrightText": "NOASSERTION",
+            "comment": "This is a binary package built by vcpkg."
+          },
+          {
+            "SPDXID": "SPDXRef-resource-0",
+            "checksums": [
+              {
+                "algorithm": "SHA512",
+                "checksumValue": "bfb6f5dbfd49ed38b2b08b3667c06d02e68f649068a050f21a3cc7e1e56b27afd546aaa3199c4f6448f03f6e66a82f9a9dc2241c826d3d1d4acbd38339b9e9fb"
+              }
+            ],
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "git+https://github.com/xiph/vorbis@v1.3.7",
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "xiph/vorbis"
+          }
+        ],
+        "files": [
+          {
+            "fileName": "./0001-Dont-export-vorbisenc-functions.patch",
+            "SPDXID": "SPDXRef-port-file-0",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "f0166ffd98153f2b04124caae3b5e6ee9f98a3204c5419e0a7a7690fea44590f"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./0002-Fixup-pkgconfig-libs.patch",
+            "SPDXID": "SPDXRef-port-file-1",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "01267e7be79a1a6034c2fea8f1221e3d44c71ac6995be1a76fe2bb9872954659"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./0003-def-mingw-compat.patch",
+            "SPDXID": "SPDXRef-port-file-2",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "44c998bdbc4bc8f581d25fbe81d006b68c243485eec826caf1716ad335a7f888"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./0004-ogg-find-dependency.patch",
+            "SPDXID": "SPDXRef-port-file-3",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5007ec749c29f63e4f9ac3acaa2b09ecb569d108ed01c028790efe6fe44ec6a0"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./portfile.cmake",
+            "SPDXID": "SPDXRef-port-file-4",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5e6204f69acfd3be187b7533efc3176e10bcdece44446029779b7f69e3e56362"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./usage",
+            "SPDXID": "SPDXRef-port-file-5",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "9131092ab8cdc9994318607cf888aff9601f1688a918a28d68c0704942c902d4"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./vcpkg.json",
+            "SPDXID": "SPDXRef-port-file-6",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "378f896e7211f65035f85cd6d3c8db035712107d60994f5f6e67e056b6c7b5d6"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/vorbis.dll",
+            "SPDXID": "SPDXRef-binary-file-0",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "602eafa3c277fd3bbea548e6f78e573a2c4a3a5e2ad465d4d10066dfde2cbc5c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/vorbis.pdb",
+            "SPDXID": "SPDXRef-binary-file-1",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "ed91896af981969c7bb3b63c8ca1e4060d30d3f2efc3084498fb5ae8ed30cb85"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/vorbisenc.dll",
+            "SPDXID": "SPDXRef-binary-file-2",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "527d2d643aecd28e7e2bc985f2306dafe17a4a55eacc613922cd2e1012b56748"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/vorbisenc.pdb",
+            "SPDXID": "SPDXRef-binary-file-3",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "603dea6a4cc6ed83964a427339bfa945b365133937331704757b8414b23a9349"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/vorbisfile.dll",
+            "SPDXID": "SPDXRef-binary-file-4",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5bb53c9acd8134568a15fa0488a2a9d12fec93fd395ad9ed49d5cb193b6396b6"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/vorbisfile.pdb",
+            "SPDXID": "SPDXRef-binary-file-5",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "40bef66c9c3ecf40e62488db91b855bf96fabf4b79ba3a06b34f777cbb6d2c6c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./BUILD_INFO",
+            "SPDXID": "SPDXRef-binary-file-6",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5e7f821ab4eb804deb535baa7b41edca682d0303cf21a91908c98d5c9a7dcf4d"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/vorbis.dll",
+            "SPDXID": "SPDXRef-binary-file-7",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "53c9f937df591a9e8c8ca22d06f6c9cb34b6fd4aef4ec37e1a8c46a431a784f7"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/vorbis.pdb",
+            "SPDXID": "SPDXRef-binary-file-8",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "bf17251f3ebc738f7d25f78936792a6609797331ba1b6f48ac3600c5ed9bf91f"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/vorbisenc.dll",
+            "SPDXID": "SPDXRef-binary-file-9",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "35a222485627e860e3206074505d30e9910bf4a5c2b6064dae57f39ea147826c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/vorbisenc.pdb",
+            "SPDXID": "SPDXRef-binary-file-10",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "99402b32667c8cf6536c95b746adb3ebd857acc04d1b138fe503d7a0864705ba"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/vorbisfile.dll",
+            "SPDXID": "SPDXRef-binary-file-11",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "9376915ffb5773c103baef0b2dd4a0ee72cebf371db174c4b94846e1b46b542e"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/vorbisfile.pdb",
+            "SPDXID": "SPDXRef-binary-file-12",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "10ef1c8ec150010942410e5716b23ca7bf23fe6aeeb5eaf79c3773097e111f2c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/pkgconfig/vorbis.pc",
+            "SPDXID": "SPDXRef-binary-file-13",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5e14def900a59ca866550f4a8a224dff36d8c304fb149e9c55c55a4246ebbe9b"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/pkgconfig/vorbisenc.pc",
+            "SPDXID": "SPDXRef-binary-file-14",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "8ba433b304395c2e7c55257633741d071ef679e0230f58a58f3e62abb88250b7"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/pkgconfig/vorbisfile.pc",
+            "SPDXID": "SPDXRef-binary-file-15",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "8c6103416f3f6a918ac8887086f7df2234381320b2ea918f7617650ffb4158ed"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/vorbis.lib",
+            "SPDXID": "SPDXRef-binary-file-16",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "7c54bc9395e37e13b3e581d93108fcf872898bdd08dbbf9c1db4eacb0f3be1b7"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/vorbisenc.lib",
+            "SPDXID": "SPDXRef-binary-file-17",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "0f7fc5c3bd8284aeb05a0f9e69dcf3e1be6f652ac1bf57e548ddcee36fba5e58"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/vorbisfile.lib",
+            "SPDXID": "SPDXRef-binary-file-18",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "86e1a54e66baabe11426e33cdfd48c78ef0b1b86a496a3dd6f82fa89b34f6c9e"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/vorbis/codec.h",
+            "SPDXID": "SPDXRef-binary-file-19",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "1d031e3cbae7defe966426e33802450a56388a1323eec1ec629e6d4095c676c5"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/vorbis/vorbisenc.h",
+            "SPDXID": "SPDXRef-binary-file-20",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "d2aba0527252dc265ffc40bc9b1955d5ac0dc8d5e16d9376fa366c05fa27dc7f"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/vorbis/vorbisfile.h",
+            "SPDXID": "SPDXRef-binary-file-21",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "7d98264e57b0190ef0a2701a0bea5f982e82fc1bedd93cd9408a2fff7790f803"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/pkgconfig/vorbis.pc",
+            "SPDXID": "SPDXRef-binary-file-22",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "77039cb780725409a5de4b3e5849fd2dafd1e5213f6cf3487a3e3ef6f415840b"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/pkgconfig/vorbisenc.pc",
+            "SPDXID": "SPDXRef-binary-file-23",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "ca423a69c25b72ed4027404c67d74c157f83a7738e4b40945807aad7596f20d5"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/pkgconfig/vorbisfile.pc",
+            "SPDXID": "SPDXRef-binary-file-24",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "4f16ac05ababaee7f89e9a4b70bc856918d901285148aa8d7c988f1b96d0abe3"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/vorbis.lib",
+            "SPDXID": "SPDXRef-binary-file-25",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "7c54bc9395e37e13b3e581d93108fcf872898bdd08dbbf9c1db4eacb0f3be1b7"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/vorbisenc.lib",
+            "SPDXID": "SPDXRef-binary-file-26",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "0f7fc5c3bd8284aeb05a0f9e69dcf3e1be6f652ac1bf57e548ddcee36fba5e58"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/vorbisfile.lib",
+            "SPDXID": "SPDXRef-binary-file-27",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "86e1a54e66baabe11426e33cdfd48c78ef0b1b86a496a3dd6f82fa89b34f6c9e"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/libvorbis/copyright",
+            "SPDXID": "SPDXRef-binary-file-28",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "ec1815db59fcd302846df949d7424876cb2e2dc5ed1606c5fb0b36787b1cf43a"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/libvorbis/usage",
+            "SPDXID": "SPDXRef-binary-file-29",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "9131092ab8cdc9994318607cf888aff9601f1688a918a28d68c0704942c902d4"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/libvorbis/vcpkg-spdx-resources.json",
+            "SPDXID": "SPDXRef-binary-file-30",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "59b73f541c15571bc25cfeecfe98cd24e0bdf6033c908f91663ec7bd7f4e766d"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/Vorbis/VorbisConfig.cmake",
+            "SPDXID": "SPDXRef-binary-file-31",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "fb0e6fc38d218ca7e8d7ece26383a3c1522629b1d572b5ec58ebdaee179a5352"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/Vorbis/VorbisConfigVersion.cmake",
+            "SPDXID": "SPDXRef-binary-file-32",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "02dce07a4e1c37145c3f835ddef8d22ca9a0d84fe0cadb67df8d46e8f29616fb"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/Vorbis/VorbisTargets-debug.cmake",
+            "SPDXID": "SPDXRef-binary-file-33",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "c7879aba793fdddad47e7c2eddc8a51d299002db92bb40b7e6f9745807859b63"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/Vorbis/VorbisTargets-release.cmake",
+            "SPDXID": "SPDXRef-binary-file-34",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "2fcde0115d5de942f13beaa9b0a79344fbe525ffc7c002763204c395883a8e20"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/Vorbis/VorbisTargets.cmake",
+            "SPDXID": "SPDXRef-binary-file-35",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "6800418092b654f0ce3d101764e58df4c4390047132e974de87c7a9535fd2aa5"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          }
+        ]
+      }
+    },
+    {
+      "name": "libogg",
+      "version": "1.3.6",
+      "portVersion": 0,
+      "portTree": "c203f0f666f0a1641c5ff3d865bc0be87b808879",
+      "portfile": "vcpkg_from_gitlab(\n    GITLAB_URL https://gitlab.xiph.org\n    OUT_SOURCE_PATH SOURCE_PATH\n    REPO xiph/ogg\n    REF v${VERSION}\n    SHA512 c41b71a0fcedd97251d01e1a61fd94f6185b2ab0fba96c38e878d354b488b0e9a9a9782674bc06f08c281681c3ddd775be704685d3f6a65131096caa46f261ba\n    HEAD_REF master\n)\n\nif(VCPKG_TARGET_IS_MINGW)\n    vcpkg_replace_string(\"${SOURCE_PATH}/win32/ogg.def\" \"LIBRARY ogg\" \"LIBRARY libogg\")\nendif()\n\nvcpkg_cmake_configure(\n    SOURCE_PATH \"${SOURCE_PATH}\"\n    OPTIONS\n        -DCMAKE_POLICY_VERSION_MINIMUM=3.5 #https://gitlab.xiph.org/xiph/ogg/-/issues/2304\n        -DINSTALL_DOCS=OFF\n        -DINSTALL_PKG_CONFIG_MODULE=ON\n        -DBUILD_TESTING=OFF\n    MAYBE_UNUSED_VARIABLES\n        CMAKE_POLICY_VERSION_MINIMUM\n)\n\nvcpkg_cmake_install()\n\nvcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/Ogg PACKAGE_NAME ogg)\n\nfile(REMOVE_RECURSE \"${CURRENT_PACKAGES_DIR}/debug/include\")\n\nvcpkg_copy_pdbs()\nvcpkg_fixup_pkgconfig()\n\nvcpkg_install_copyright(FILE_LIST \"${SOURCE_PATH}/COPYING\")\n",
+      "licenseSha256": "d2ab5758336489da61c12cc5bb757da5339c4ae9001f9bb0562b4370249af814",
+      "spdx": {
+        "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.3/schemas/spdx-schema.json",
+        "spdxVersion": "SPDX-2.3",
+        "dataLicense": "CC0-1.0",
+        "SPDXID": "SPDXRef-DOCUMENT",
+        "documentNamespace": "https://spdx.org/spdxdocs/libogg-x64-windows-1.3.6#1-139ce7eb-6609-4e2f-814d-58bbe84431e3",
+        "name": "libogg:x64-windows@1.3.6#1 6435b71b9d5cca3ef08039c703bd24a644545eab62427f1fb320aa59e07de9fc",
+        "creationInfo": {
+          "creators": [
+            "Tool: vcpkg-2026-07-27-98d7cb0cf1f4686a3e43aa5672b6230c1d56bce8"
+          ],
+          "created": "2026-10-11T18:37:16Z"
+        },
+        "relationships": [
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "GENERATES",
+            "relatedSpdxElement": "SPDXRef-binary"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-0"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-1"
+          },
+          {
+            "spdxElementId": "SPDXRef-port-file-1",
+            "relationshipType": "DEPENDENCY_MANIFEST_OF",
+            "relatedSpdxElement": "SPDXRef-port"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-0"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-1"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-2"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-3"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-4"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-5"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-6"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-7"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-8"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-9"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-10"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-11"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-12"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-13"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-14"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-15"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-16"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-17"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-18"
+          }
+        ],
+        "packages": [
+          {
+            "name": "libogg",
+            "SPDXID": "SPDXRef-port",
+            "versionInfo": "1.3.6#1",
+            "downloadLocation": "git+https://github.com/Microsoft/vcpkg#ports/libogg",
+            "homepage": "https://www.xiph.org/ogg",
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "NOASSERTION",
+            "copyrightText": "NOASSERTION",
+            "description": "Ogg is a multimedia container format, and the native file and stream format for the Xiph.org multimedia codecs.",
+            "comment": "This is the port (recipe) consumed by vcpkg.",
+            "externalRefs": [
+              {
+                "referenceCategory": "PACKAGE-MANAGER",
+                "referenceType": "purl",
+                "referenceLocator": "pkg:vcpkg/libogg@1.3.6?port_version=1&triplet=x64-windows&vcs_url=git%2Bhttps%3A%2F%2Fgithub.com%2FMicrosoft%2Fvcpkg%23ports%2Flibogg"
+              }
+            ]
+          },
+          {
+            "name": "libogg:x64-windows",
+            "SPDXID": "SPDXRef-binary",
+            "versionInfo": "6435b71b9d5cca3ef08039c703bd24a644545eab62427f1fb320aa59e07de9fc",
+            "downloadLocation": "NONE",
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "NOASSERTION",
+            "copyrightText": "NOASSERTION",
+            "comment": "This is a binary package built by vcpkg."
+          },
+          {
+            "SPDXID": "SPDXRef-resource-0",
+            "checksums": [
+              {
+                "algorithm": "SHA512",
+                "checksumValue": "c247e1da8b12f8b33272fafb6d7c171a1a2687c3632977439fa60b96ccc2ad751d88a2931bb3e18e1ddf2eea2e82cdd0aab087b2ec5393a9228c703476fa0167"
+              }
+            ],
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "git+https://github.com/xiph/ogg@v1.3.6",
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "xiph/ogg"
+          }
+        ],
+        "files": [
+          {
+            "fileName": "./portfile.cmake",
+            "SPDXID": "SPDXRef-port-file-0",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "8d990e3d15a7933a4c13cb5dfd6da12d5fdb8615b0803002246585ab51674b61"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./vcpkg.json",
+            "SPDXID": "SPDXRef-port-file-1",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "10bc86e9d2fe3302ba39da3aa7463331fe20920c3f466f9f002b26ac282c5856"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/ogg.dll",
+            "SPDXID": "SPDXRef-binary-file-0",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "64eed2f855bcf69bd40eefbfb6627bb13be95b7e88a41559f74c2fd5d6d1e0eb"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/ogg.pdb",
+            "SPDXID": "SPDXRef-binary-file-1",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "c237afe25c2a5bc52846a144e0143c3d79c8088bf100b5ce94640d3efa7336bb"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./BUILD_INFO",
+            "SPDXID": "SPDXRef-binary-file-2",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5e7f821ab4eb804deb535baa7b41edca682d0303cf21a91908c98d5c9a7dcf4d"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/ogg.dll",
+            "SPDXID": "SPDXRef-binary-file-3",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5b6cb99058033993bad5ab7b5cb37433282d0548373b542689cde6a8b9a5be5f"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/ogg.pdb",
+            "SPDXID": "SPDXRef-binary-file-4",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "1db1c0cf56943fa87761f17f8aa3ab6276849fc2d1598e0d821a1ffc81e41728"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/ogg.lib",
+            "SPDXID": "SPDXRef-binary-file-5",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "e4198eabe20e11bbb7a88f41a1769ef9031851baeeacaad5eda293ddbe35550c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/pkgconfig/ogg.pc",
+            "SPDXID": "SPDXRef-binary-file-6",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "ec69427acd840718aa0b0ac2eff0344513d7c0f57a7ec95a2f4aa0ef3a9f18b1"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/ogg/config_types.h",
+            "SPDXID": "SPDXRef-binary-file-7",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "2200f7d8664cdf27cd7d007f22fc70d1168e842f2af4d541b2ddaf7659375e95"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/ogg/ogg.h",
+            "SPDXID": "SPDXRef-binary-file-8",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "aad86109c1fdb377738675a63e0b19859e06ada25ae5c59c290ca7263d1dc4ca"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/ogg/os_types.h",
+            "SPDXID": "SPDXRef-binary-file-9",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "3bbab6a5d31e3c25c6080252b042afb87028e3ffff100e3e0285648b250b70f4"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/ogg.lib",
+            "SPDXID": "SPDXRef-binary-file-10",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "e4198eabe20e11bbb7a88f41a1769ef9031851baeeacaad5eda293ddbe35550c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/pkgconfig/ogg.pc",
+            "SPDXID": "SPDXRef-binary-file-11",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "3dc8571dc74cb5085c1f6262a6aaa40b986d48bc5a5196fb385d809c82c53031"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/libogg/copyright",
+            "SPDXID": "SPDXRef-binary-file-12",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "d2ab5758336489da61c12cc5bb757da5339c4ae9001f9bb0562b4370249af814"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/libogg/vcpkg-spdx-resources.json",
+            "SPDXID": "SPDXRef-binary-file-13",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "45225c075a60f6c3d3233a96e67480249fb166d6f78119fea0314258f02e1afb"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/ogg/OggConfig.cmake",
+            "SPDXID": "SPDXRef-binary-file-14",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "f378db15a256be4edaed220aabebf93c7d05b8ccba54dcc582fe2f38e74b920c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/ogg/OggConfigVersion.cmake",
+            "SPDXID": "SPDXRef-binary-file-15",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "59e69599961d1dd8a4b8b62af1007f9b8b16d9c6c5863b4e8cfdad13bef15c30"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/ogg/OggTargets-debug.cmake",
+            "SPDXID": "SPDXRef-binary-file-16",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "fe16aaa7dfe28d487836f14a896309fd594374b3a3334b2e311da1eae5b1e214"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/ogg/OggTargets-release.cmake",
+            "SPDXID": "SPDXRef-binary-file-17",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "ca95a58d9089d2aee769ee817a311f273d92054332deb2a31a9948be9aba84cd"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/ogg/OggTargets.cmake",
+            "SPDXID": "SPDXRef-binary-file-18",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "c54772269661d5593fc7e9a38b80d93dea8801e1a0b2fb6041e1df1b73aa82e3"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          }
+        ]
+      }
+    },
+    {
+      "name": "libflac",
+      "version": "1.5.0",
+      "portVersion": 0,
+      "portTree": "1b83f01536820e062681fe33109e44bb3f597aca",
+      "portfile": "vcpkg_from_github(\n    OUT_SOURCE_PATH SOURCE_PATH\n    REPO xiph/flac\n    REF \"${VERSION}\"\n    SHA512 c8e119462205cfd8bbe22b0aff112625d3e51ca11de97e4de06a46fb43a0768d7ec9c245b299b09b7aa4d811c6fc7b57856eaa1c217e82cca9b3ad1c0e545cbe\n    HEAD_REF master\n    PATCHES\n        android-cmake.diff\n        fix-compile-options.patch\n        fix-find-threads.patch\n)\n\nif(\"asm\" IN_LIST FEATURES)\n    vcpkg_find_acquire_program(NASM)\n    get_filename_component(NASM_PATH \"${NASM}\" DIRECTORY)\n    vcpkg_add_to_path(\"${NASM_PATH}\")\nendif()\n\nvcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS\n    FEATURES\n        asm WITH_ASM\n        stack-protector WITH_STACK_PROTECTOR\n        multithreading ENABLE_MULTITHREADING\n)\n\nvcpkg_cmake_configure(\n    SOURCE_PATH \"${SOURCE_PATH}\"\n    OPTIONS\n        ${FEATURE_OPTIONS}\n        -DBUILD_PROGRAMS=OFF\n        -DBUILD_EXAMPLES=OFF\n        -DBUILD_DOCS=OFF\n        -DBUILD_TESTING=OFF\n        -DINSTALL_MANPAGES=OFF\n)\n\nvcpkg_cmake_install()\n\nvcpkg_cmake_config_fixup(PACKAGE_NAME FLAC CONFIG_PATH lib/cmake/FLAC)\n\nvcpkg_copy_pdbs()\n\nfile(REMOVE_RECURSE \"${CURRENT_PACKAGES_DIR}/debug/include\")\nfile(REMOVE_RECURSE \"${CURRENT_PACKAGES_DIR}/debug/share\")\nfile(REMOVE \"${CURRENT_PACKAGES_DIR}/share/LICENSE\")\n\nif(VCPKG_LIBRARY_LINKAGE STREQUAL \"dynamic\")\n    vcpkg_replace_string(\"${CURRENT_PACKAGES_DIR}/include/FLAC/export.h\"\n        \"#if defined(FLAC__NO_DLL)\"\n        \"#if 0\"\n    )\n    vcpkg_replace_string(\"${CURRENT_PACKAGES_DIR}/include/FLAC++/export.h\"\n        \"#if defined(FLAC__NO_DLL)\"\n        \"#if 0\"\n    )\nelse()\n    vcpkg_replace_string(\"${CURRENT_PACKAGES_DIR}/include/FLAC/export.h\"\n        \"#if defined(FLAC__NO_DLL)\"\n        \"#if 1\"\n    )\n    vcpkg_replace_string(\"${CURRENT_PACKAGES_DIR}/include/FLAC++/export.h\"\n        \"#if defined(FLAC__NO_DLL)\"\n        \"#if 1\"\n    )\nendif()\n\nif(VCPKG_TARGET_IS_WINDOWS)\n    vcpkg_replace_string(\"${CURRENT_PACKAGES_DIR}/lib/pkgconfig/flac.pc\" \" -lm\" \"\")\n\n    if(EXISTS \"${CURRENT_PACKAGES_DIR}/debug/lib/pkgconfig/flac.pc\")\n        vcpkg_replace_string(\"${CURRENT_PACKAGES_DIR}/debug/lib/pkgconfig/flac.pc\" \" -lm\" \"\")\n    endif()\nendif()\n\nvcpkg_fixup_pkgconfig()\n\n# This license (BSD) is relevant only for library - if someone would want to install\n# FLAC cmd line tools as well additional license (GPL) should be included\nvcpkg_install_copyright(FILE_LIST \"${SOURCE_PATH}/COPYING.Xiph\")\n\nfile(INSTALL \"${CMAKE_CURRENT_LIST_DIR}/usage\" DESTINATION \"${CURRENT_PACKAGES_DIR}/share/${PORT}\")\n",
+      "licenseSha256": "7866ee98760fc1f0156b4fe6bf530257e02be487ab3fd94e2b63799dd32d6b2c",
+      "spdx": {
+        "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.3/schemas/spdx-schema.json",
+        "spdxVersion": "SPDX-2.3",
+        "dataLicense": "CC0-1.0",
+        "SPDXID": "SPDXRef-DOCUMENT",
+        "documentNamespace": "https://spdx.org/spdxdocs/libflac-x64-windows-1.5.0-299d01fb-c323-44a0-a4ae-f186ca38d70b",
+        "name": "libflac:x64-windows@1.5.0 79ab66db2b569c0c1fbf8df75b53eb5f745631a2ad4bb4dbf984612df9e4090e",
+        "creationInfo": {
+          "creators": [
+            "Tool: vcpkg-2026-07-27-98d7cb0cf1f4686a3e43aa5672b6230c1d56bce8"
+          ],
+          "created": "2026-10-11T18:37:56Z"
+        },
+        "relationships": [
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "GENERATES",
+            "relatedSpdxElement": "SPDXRef-binary"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-0"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-1"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-2"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-3"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-4"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-5"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-6"
+          },
+          {
+            "spdxElementId": "SPDXRef-port-file-6",
+            "relationshipType": "DEPENDENCY_MANIFEST_OF",
+            "relatedSpdxElement": "SPDXRef-port"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-0"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-1"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-2"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-3"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-4"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-5"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-6"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-7"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-8"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-9"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-10"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-11"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-12"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-13"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-14"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-15"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-16"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-17"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-18"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-19"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-20"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-21"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-22"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-23"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-24"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-25"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-26"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-27"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-28"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-29"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-30"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-31"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-32"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-33"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-34"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-35"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-36"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-37"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-38"
+          }
+        ],
+        "packages": [
+          {
+            "name": "libflac",
+            "SPDXID": "SPDXRef-port",
+            "versionInfo": "1.5.0",
+            "downloadLocation": "git+https://github.com/Microsoft/vcpkg#ports/libflac",
+            "homepage": "https://xiph.org/flac/",
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "NOASSERTION",
+            "copyrightText": "NOASSERTION",
+            "description": "Library for manipulating FLAC files",
+            "comment": "This is the port (recipe) consumed by vcpkg.",
+            "externalRefs": [
+              {
+                "referenceCategory": "PACKAGE-MANAGER",
+                "referenceType": "purl",
+                "referenceLocator": "pkg:vcpkg/libflac@1.5.0?triplet=x64-windows&vcs_url=git%2Bhttps%3A%2F%2Fgithub.com%2FMicrosoft%2Fvcpkg%23ports%2Flibflac"
+              }
+            ]
+          },
+          {
+            "name": "libflac:x64-windows",
+            "SPDXID": "SPDXRef-binary",
+            "versionInfo": "79ab66db2b569c0c1fbf8df75b53eb5f745631a2ad4bb4dbf984612df9e4090e",
+            "downloadLocation": "NONE",
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "NOASSERTION",
+            "copyrightText": "NOASSERTION",
+            "comment": "This is a binary package built by vcpkg."
+          },
+          {
+            "SPDXID": "SPDXRef-resource-0",
+            "checksums": [
+              {
+                "algorithm": "SHA512",
+                "checksumValue": "c8e119462205cfd8bbe22b0aff112625d3e51ca11de97e4de06a46fb43a0768d7ec9c245b299b09b7aa4d811c6fc7b57856eaa1c217e82cca9b3ad1c0e545cbe"
+              }
+            ],
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "git+https://github.com/xiph/flac@1.5.0",
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "xiph/flac"
+          }
+        ],
+        "files": [
+          {
+            "fileName": "./android-cmake.diff",
+            "SPDXID": "SPDXRef-port-file-0",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "034d2f3d69e31f3aaadf79544b9dcd32fed20a44d8916c19b5aa863da6da92fb"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./cmake-project-include.cmake",
+            "SPDXID": "SPDXRef-port-file-1",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./fix-compile-options.patch",
+            "SPDXID": "SPDXRef-port-file-2",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "02e10f5f2ac9f3ed601c8ca74454b33cccabdc833e4f72ec2a73887e3d066873"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./fix-find-threads.patch",
+            "SPDXID": "SPDXRef-port-file-3",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "326971747da526e18fa47e86cd127f2f3a80b9f85ac8f214a238c2456849be83"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./portfile.cmake",
+            "SPDXID": "SPDXRef-port-file-4",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "f245fa3658158140f6cb514d9f382876ee31392b2d2604be6c0c9f69730741bc"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./usage",
+            "SPDXID": "SPDXRef-port-file-5",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "89fa7950a9e5c2a1c2183605f5e9be620b5e6c0a9e981ac172687b4a10bb112a"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./vcpkg.json",
+            "SPDXID": "SPDXRef-port-file-6",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "b86c2d39f7e3cf84ac6b47da7d86d5c2d1bcb354dd9dbcab1f1e8f3745ec6e44"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/FLAC++.dll",
+            "SPDXID": "SPDXRef-binary-file-0",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "ea13f8ec958b88232df005dcc55bb708021c63b06b3dde29abee574a65252f24"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/FLAC++.pdb",
+            "SPDXID": "SPDXRef-binary-file-1",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "02a726583c38476f324fd46711cdcfcf0602d9055751431c6d4c8a0af0ac6e1d"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/FLAC.dll",
+            "SPDXID": "SPDXRef-binary-file-2",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "3536df2d9320b0555bfccb93ea1d526f1e1c5005b594d203d3884281e966c4e2"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/FLAC.pdb",
+            "SPDXID": "SPDXRef-binary-file-3",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "e2d3c9d07e9b09366c1710bd3bbe563eda1d04e1cc8e6e304dfdca82901e1e44"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./BUILD_INFO",
+            "SPDXID": "SPDXRef-binary-file-4",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5e7f821ab4eb804deb535baa7b41edca682d0303cf21a91908c98d5c9a7dcf4d"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/FLAC++.dll",
+            "SPDXID": "SPDXRef-binary-file-5",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "f081de53c77d8e71373b199a9e5bba8df326937a18deb48750a0398002da11c7"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/FLAC++.pdb",
+            "SPDXID": "SPDXRef-binary-file-6",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "15b2e5d0666a43fc7d6df274a47db236af2778db83af333b254764350a4519dc"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/FLAC.dll",
+            "SPDXID": "SPDXRef-binary-file-7",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "0807b6f9c22c34dec97e03b42afffed86a0e68c800a5fbc9543bb9ad73a6a22b"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/FLAC.pdb",
+            "SPDXID": "SPDXRef-binary-file-8",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "aa4b551f34dbb3d8a894c928a6004fda8b482bbcfdb51cc43c9ba5152ffcf353"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/FLAC++.lib",
+            "SPDXID": "SPDXRef-binary-file-9",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5d50abab7e58a3d11464b9a4deb00653dc519378602dea70d3a4972dc25256df"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/FLAC.lib",
+            "SPDXID": "SPDXRef-binary-file-10",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "9dc482e2ada396c5247d432379b62e960f345df63b2f6e2a0c8901250e913dab"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/pkgconfig/flac++.pc",
+            "SPDXID": "SPDXRef-binary-file-11",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "cf13e13d2f9e78fbaa1327bdacba5c2e172732ef33bc6f7087346b54145b5ae7"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/pkgconfig/flac.pc",
+            "SPDXID": "SPDXRef-binary-file-12",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "db15a7e2040c1d31f82d4c8e19bea45abfd7c37970e5a0872c26fe5b3f6d3350"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC/all.h",
+            "SPDXID": "SPDXRef-binary-file-13",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "ff88842fac3d3a79223df3cb2f80af926cd73cbeb32fb925e82d26c6ca65d9eb"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC/assert.h",
+            "SPDXID": "SPDXRef-binary-file-14",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "f819c5f88e7b6ea1efbcf5476faf4042db65915b519231449b7895e5d16ac539"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC/callback.h",
+            "SPDXID": "SPDXRef-binary-file-15",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "72340f12ab7197b0492eb7ce0b3d465e6ac359e976dcd222759034f82e56a992"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC/export.h",
+            "SPDXID": "SPDXRef-binary-file-16",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "4b9aebd2af1f7496574a84a8e7da888aeefbaa6cf3f324357ecc573c0a633cd2"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC/format.h",
+            "SPDXID": "SPDXRef-binary-file-17",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "7311a9c8e5be7aa44b3f48c0d98c96a6fde937a009ac9d4311d82f01b1b6d512"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC/metadata.h",
+            "SPDXID": "SPDXRef-binary-file-18",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "ed54ca45d24c4e3d18a8ba867ef7e66d7ed510a3b87f3cb1a14d0efb517bce8f"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC/ordinals.h",
+            "SPDXID": "SPDXRef-binary-file-19",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "206c45b8573fd50fec359028e4d69c626a5dfbeb75a53027195704d5f9a60c63"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC/stream_decoder.h",
+            "SPDXID": "SPDXRef-binary-file-20",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "375f08a6983ce0f75a00169b114d753965d0176fd95c620ecf265244e61be5f3"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC/stream_encoder.h",
+            "SPDXID": "SPDXRef-binary-file-21",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5aedffc9654871ed89055155b92ce3e784f3d059837b6d4d972a489d85f8dbb7"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC++/all.h",
+            "SPDXID": "SPDXRef-binary-file-22",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "14f2c68f790199cac206309179fcd1ad81090122e99f558778b51141f12cd963"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC++/decoder.h",
+            "SPDXID": "SPDXRef-binary-file-23",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "502ec12f5c8da8aa83d983ba00975b6ea2e62a120942bf5d341cbb4c25f7b331"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC++/encoder.h",
+            "SPDXID": "SPDXRef-binary-file-24",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "20ae45ad4602e2e445caecad60b2110b301bb2d58adca292a0b7098358a52eea"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC++/export.h",
+            "SPDXID": "SPDXRef-binary-file-25",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "ed49302aa853a8131460d40f2a9a67c1ee3d71c7a1c1eb4ebbf5285ff62507e8"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/FLAC++/metadata.h",
+            "SPDXID": "SPDXRef-binary-file-26",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "32b08559e9106fca0c96c8a73ca0443cb15b277f43271fd288163e990f2367d6"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/FLAC++.lib",
+            "SPDXID": "SPDXRef-binary-file-27",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5d50abab7e58a3d11464b9a4deb00653dc519378602dea70d3a4972dc25256df"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/FLAC.lib",
+            "SPDXID": "SPDXRef-binary-file-28",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "9dc482e2ada396c5247d432379b62e960f345df63b2f6e2a0c8901250e913dab"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/pkgconfig/flac++.pc",
+            "SPDXID": "SPDXRef-binary-file-29",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "229ccb4ab9953e3e7675a4a0b536b6f627fa144973bd1f4f924d82459e6b9c25"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/pkgconfig/flac.pc",
+            "SPDXID": "SPDXRef-binary-file-30",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "9e688bb003e713ddc9b245af694178684e212e361baf2458bea35d11c38eaf88"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/FLAC/flac-config-version.cmake",
+            "SPDXID": "SPDXRef-binary-file-31",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "55ea91700f6a8572c6663f4522b06e5a9430c008306f5da0b00534cf443b3406"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/FLAC/flac-config.cmake",
+            "SPDXID": "SPDXRef-binary-file-32",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "7a8827869f13625f50a82391712bf9a3d3f999f8857ffe759f9705074f7e4ee0"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/FLAC/targets-debug.cmake",
+            "SPDXID": "SPDXRef-binary-file-33",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "a7d25c5cd9fce59c3478fd5fca5429c11bb22b4edf5015168fe19beefc7039c9"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/FLAC/targets-release.cmake",
+            "SPDXID": "SPDXRef-binary-file-34",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "26935bf36bca46e9ea79bfe2f609e1695c927d6c8b5930c733ccdc5e2db09c49"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/FLAC/targets.cmake",
+            "SPDXID": "SPDXRef-binary-file-35",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "c79c3ebbc799e99a0a7def37ec5c436bf0ec243f02ddf0398ca2cfdda007b00e"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/libflac/copyright",
+            "SPDXID": "SPDXRef-binary-file-36",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "7866ee98760fc1f0156b4fe6bf530257e02be487ab3fd94e2b63799dd32d6b2c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/libflac/usage",
+            "SPDXID": "SPDXRef-binary-file-37",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "89fa7950a9e5c2a1c2183605f5e9be620b5e6c0a9e981ac172687b4a10bb112a"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/libflac/vcpkg-spdx-resources.json",
+            "SPDXID": "SPDXRef-binary-file-38",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5fb21abc14f4d498e10d36913db29a8e9a7cc132cf05cad8f2a39c9127d9d37b"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          }
+        ]
+      }
+    },
+    {
+      "name": "mp3lame",
+      "version": "3.100",
+      "portVersion": 17,
+      "portTree": "67a6a7a9a260c058627e8888ae8113e4f23f63ee",
+      "portfile": "vcpkg_from_sourceforge(\n    OUT_SOURCE_PATH SOURCE_PATH\n    REPO lame/lame\n    REF ${VERSION}\n    FILENAME \"lame-${VERSION}.tar.gz\"\n    SHA512 0844b9eadb4aacf8000444621451277de365041cc1d97b7f7a589da0b7a23899310afd4e4d81114b9912aa97832621d20588034715573d417b2923948c08634b\n    PATCHES\n        00001-msvc-upgrade-solution-up-to-vc11.patch\n        remove_lame_init_old_from_symbol_list.patch # deprecated https://github.com/zlargon/lame/blob/master/include/lame.h#L169\n        add-macos-universal-config.patch\n        fix-mingw-w64-compatibility.patch\n)\n\nif(VCPKG_TARGET_IS_WINDOWS AND NOT VCPKG_TARGET_IS_MINGW)\n\n    if(VCPKG_TARGET_ARCHITECTURE STREQUAL \"arm64\")\n        set(platform \"ARM64\")\n        set(machine \"ARM64\")\n    elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL \"arm\")\n        set(platform \"ARM\")\n        set(machine \"ARM\")\n    elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL \"x64\")\n        set(platform \"x64\")\n        set(machine \"x64\")\n    else()\n        set(platform \"Win32\")\n        set(machine \"x86\")\n    endif()\n\n    file(READ \"${SOURCE_PATH}/vc_solution/vc11_lame.sln\" sln_con)\n    string(REPLACE \"|Win32\" \"|${platform}\" sln_con \"${sln_con}\")\n    string(REPLACE \"\\\"vc11_\" \"\\\"${machine}_vc11_\" sln_con \"${sln_con}\")\n    file(WRITE \"${SOURCE_PATH}/vc_solution/${machine}_vc11_lame.sln\" \"${sln_con}\")\n\n    \n    file(GLOB vcxprojs RELATIVE \"${SOURCE_PATH}/vc_solution\" \"${SOURCE_PATH}/vc_solution/vc11_*.vcxproj\")\n    foreach(vcxproj ${vcxprojs})\n        file(READ \"${SOURCE_PATH}/vc_solution/${vcxproj}\" vcxproj_con)\n        \n        if(NOT VCPKG_CRT_LINKAGE STREQUAL \"dynamic\")\n            string(REPLACE \"DLL</RuntimeLibrary>\" \"</RuntimeLibrary>\" vcxproj_con \"${vcxproj_con}\")\n        endif()\n\n        string(REPLACE \"/machine:x86\" \"/machine:${machine}\" vcxproj_con \"${vcxproj_con}\")\n        string(REPLACE \"<Platform>Win32</Platform>\" \"<Platform>${platform}</Platform>\" vcxproj_con \"${vcxproj_con}\")\n        string(REPLACE \"|Win32\" \"|${platform}\" vcxproj_con \"${vcxproj_con}\")\n        string(REPLACE \"Include=\\\"vc11_\" \"Include=\\\"${machine}_vc11_\" vcxproj_con \"${vcxproj_con}\")\n \n        if(NOT VCPKG_TARGET_IS_UWP)\n            string(REPLACE \"/APPCONTAINER\" \"\" vcxproj_con \"${vcxproj_con}\")\n        endif()\n        \n        file(WRITE \"${SOURCE_PATH}/vc_solution/${machine}_${vcxproj}\" \"${vcxproj_con}\")\n    endforeach()\n\n    if(VCPKG_LIBRARY_LINKAGE STREQUAL \"static\")\n        vcpkg_msbuild_install(\n            SOURCE_PATH \"${SOURCE_PATH}\"\n            PROJECT_SUBPATH \"vc_solution/${machine}_vc11_lame.sln\"\n            TARGET \"libmp3lame-static\"\n            PLATFORM \"${platform}\"\n        )\n    else()\n        vcpkg_msbuild_install(\n            SOURCE_PATH \"${SOURCE_PATH}\"\n            PROJECT_SUBPATH \"vc_solution/${machine}_vc11_lame.sln\"\n            TARGET \"libmp3lame\"\n            PLATFORM \"${platform}\"\n        )\n    endif()\n    if(\"frontend\" IN_LIST FEATURES)\n        vcpkg_msbuild_install(\n            SOURCE_PATH \"${SOURCE_PATH}\"\n            PROJECT_SUBPATH \"vc_solution/${machine}_vc11_lame.sln\"\n            TARGET \"lame\"\n            PLATFORM \"${platform}\"\n        )\n    endif()\n\n    file(COPY \"${SOURCE_PATH}/include/lame.h\" DESTINATION \"${CURRENT_PACKAGES_DIR}/include/lame\")\n\n    if(VCPKG_LIBRARY_LINKAGE STREQUAL \"static\")\n        file(REMOVE_RECURSE\n            \"${CURRENT_PACKAGES_DIR}/bin\"\n            \"${CURRENT_PACKAGES_DIR}/lib/libmp3lame.lib\"\n            \"${CURRENT_PACKAGES_DIR}/debug/bin\"\n            \"${CURRENT_PACKAGES_DIR}/debug/lib/libmp3lame.lib\"\n        )\n    else()\n        file(REMOVE\n            \"${CURRENT_PACKAGES_DIR}/lib/libmp3lame-static.lib\"\n            \"${CURRENT_PACKAGES_DIR}/lib/libmpghip-static.lib\"\n            \"${CURRENT_PACKAGES_DIR}/debug/lib/libmp3lame-static.lib\"\n            \"${CURRENT_PACKAGES_DIR}/debug/lib/libmpghip-static.lib\"\n        )\n    endif()\n\nelse()\n\n    vcpkg_list(SET OPTIONS)\n    if(\"frontend\" IN_LIST FEATURES)\n        list(APPEND OPTIONS --enable-frontend)\n    else()\n        list(APPEND OPTIONS --disable-frontend)\n    endif()\n\n    if(NOT VCPKG_TARGET_IS_MINGW)\n        list(APPEND OPTIONS --with-pic=yes)\n    endif()\n\n    vcpkg_make_configure(\n        SOURCE_PATH \"${SOURCE_PATH}\"\n        OPTIONS\n            ${OPTIONS}\n    )\n    vcpkg_make_install()\n\n    file(REMOVE_RECURSE\n        \"${CURRENT_PACKAGES_DIR}/debug/include\"\n        \"${CURRENT_PACKAGES_DIR}/debug/share\"\n        \"${CURRENT_PACKAGES_DIR}/share/${PORT}/doc\"\n        \"${CURRENT_PACKAGES_DIR}/share/${PORT}/man1\"\n    )\n\nendif()\n\n# unofficial, but port legacy\nfile(COPY \"${CMAKE_CURRENT_LIST_DIR}/mp3lame-config.cmake\" DESTINATION \"${CURRENT_PACKAGES_DIR}/share/${PORT}\")\n\nvcpkg_install_copyright(FILE_LIST \"${SOURCE_PATH}/COPYING\")\n",
+      "licenseSha256": "bfe4a52dc4645385f356a8e83cc54216a293e3b6f1cb4f79f5fc0277abf937fd",
+      "spdx": {
+        "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.3/schemas/spdx-schema.json",
+        "spdxVersion": "SPDX-2.3",
+        "dataLicense": "CC0-1.0",
+        "SPDXID": "SPDXRef-DOCUMENT",
+        "documentNamespace": "https://spdx.org/spdxdocs/mp3lame-x64-windows-3.100#17-980fb545-de55-4799-98e7-a21522cd5d0d",
+        "name": "mp3lame:x64-windows@3.100#17 85f00e43e6fe467aa29c1db90ca356feacb59d74a4e4356d2daa4f3bea13daa4",
+        "creationInfo": {
+          "creators": [
+            "Tool: vcpkg-2026-07-27-98d7cb0cf1f4686a3e43aa5672b6230c1d56bce8"
+          ],
+          "created": "2026-10-11T18:42:43Z"
+        },
+        "relationships": [
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "GENERATES",
+            "relatedSpdxElement": "SPDXRef-binary"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-0"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-1"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-2"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-3"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-4"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-5"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-6"
+          },
+          {
+            "spdxElementId": "SPDXRef-port-file-6",
+            "relationshipType": "DEPENDENCY_MANIFEST_OF",
+            "relatedSpdxElement": "SPDXRef-port"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-0"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-1"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-2"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-3"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-4"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-5"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-6"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-7"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-8"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-9"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-10"
+          }
+        ],
+        "packages": [
+          {
+            "name": "mp3lame",
+            "SPDXID": "SPDXRef-port",
+            "versionInfo": "3.100#17",
+            "downloadLocation": "git+https://github.com/Microsoft/vcpkg#ports/mp3lame",
+            "homepage": "https://lame.sourceforge.io",
+            "licenseConcluded": "LGPL-2.0-only",
+            "licenseDeclared": "NOASSERTION",
+            "copyrightText": "NOASSERTION",
+            "description": "LAME is a high quality MPEG Audio Layer III (MP3) encoder licensed under the LGPL.",
+            "comment": "This is the port (recipe) consumed by vcpkg.",
+            "externalRefs": [
+              {
+                "referenceCategory": "PACKAGE-MANAGER",
+                "referenceType": "purl",
+                "referenceLocator": "pkg:vcpkg/mp3lame@3.100?port_version=17&triplet=x64-windows&vcs_url=git%2Bhttps%3A%2F%2Fgithub.com%2FMicrosoft%2Fvcpkg%23ports%2Fmp3lame"
+              }
+            ]
+          },
+          {
+            "name": "mp3lame:x64-windows",
+            "SPDXID": "SPDXRef-binary",
+            "versionInfo": "85f00e43e6fe467aa29c1db90ca356feacb59d74a4e4356d2daa4f3bea13daa4",
+            "downloadLocation": "NONE",
+            "licenseConcluded": "LGPL-2.0-only",
+            "licenseDeclared": "NOASSERTION",
+            "copyrightText": "NOASSERTION",
+            "comment": "This is a binary package built by vcpkg."
+          },
+          {
+            "SPDXID": "SPDXRef-resource-0",
+            "checksums": [
+              {
+                "algorithm": "SHA512",
+                "checksumValue": "0844b9eadb4aacf8000444621451277de365041cc1d97b7f7a589da0b7a23899310afd4e4d81114b9912aa97832621d20588034715573d417b2923948c08634b"
+              }
+            ],
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "https://sourceforge.net/projects/lame/lame/files/3.100/lame-3.100.tar.gz",
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "lame-3.100.tar.gz",
+            "packageFileName": "lame-3.100.tar.gz"
+          }
+        ],
+        "files": [
+          {
+            "fileName": "./00001-msvc-upgrade-solution-up-to-vc11.patch",
+            "SPDXID": "SPDXRef-port-file-0",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "a75204e3f5c8d94deba46101794b1ed08e373a8de7935e13e8a9cad5803f7291"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./add-macos-universal-config.patch",
+            "SPDXID": "SPDXRef-port-file-1",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "e50e5bd9a3a41b6374f45b8fdbe7bce062f967cafd1e5c7090735953fbc2f8fa"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./fix-mingw-w64-compatibility.patch",
+            "SPDXID": "SPDXRef-port-file-2",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "020c74f7683d511a14ddf25a7148a4cc15fb5fd5ff38d3cfb76f5ef3ee7ddfd9"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./mp3lame-config.cmake",
+            "SPDXID": "SPDXRef-port-file-3",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "3687d55e5ed1fdf3874ef57b8059d9f11a42b8c93316b582e0e354632f1afaf7"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./portfile.cmake",
+            "SPDXID": "SPDXRef-port-file-4",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "d9f7fb6a7e16121495413c56f178bfdede04391ec4618d9ead81369489810648"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./remove_lame_init_old_from_symbol_list.patch",
+            "SPDXID": "SPDXRef-port-file-5",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "ae9d1ca1781a329fe1fa932752eba9617b5a1ee98c1975759e18b18c3b482db5"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./vcpkg.json",
+            "SPDXID": "SPDXRef-port-file-6",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "bf19c2ee29c68a476299bfcb25beef94703bfb31e1ffe90f34fa54dd98975cb7"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/libmp3lame.dll",
+            "SPDXID": "SPDXRef-binary-file-0",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "87b1272f80fbe40acaeab7723114823e074d4775e06a1544cdb4a2eb3ea33504"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/libmp3lame.pdb",
+            "SPDXID": "SPDXRef-binary-file-1",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "75529b2ef2311ee69f834494dc7416c1a5b3f667852b07ac210f7e7a0f485394"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./BUILD_INFO",
+            "SPDXID": "SPDXRef-binary-file-2",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5e7f821ab4eb804deb535baa7b41edca682d0303cf21a91908c98d5c9a7dcf4d"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/libmp3lame.dll",
+            "SPDXID": "SPDXRef-binary-file-3",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "71a4564cf04865d2433b7d58ac930ccad03cfd70736c28ea386257c9c226cb94"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/libmp3lame.pdb",
+            "SPDXID": "SPDXRef-binary-file-4",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "3d613ffe159f5859b5f9b52c8be9fcc5fd5c9a69dac82a09da93c2543264183d"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/libmp3lame.lib",
+            "SPDXID": "SPDXRef-binary-file-5",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "4324032ce08e5ad29f27eaeef53e7c29eda2c3c2c51535612bc79d616305c69c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/lame/lame.h",
+            "SPDXID": "SPDXRef-binary-file-6",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "b30e4d3f5bb247bad2781758d90604f29cc44dd5bd79fee130aaef7c7d25bcf0"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/libmp3lame.lib",
+            "SPDXID": "SPDXRef-binary-file-7",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "4324032ce08e5ad29f27eaeef53e7c29eda2c3c2c51535612bc79d616305c69c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/mp3lame/copyright",
+            "SPDXID": "SPDXRef-binary-file-8",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "bfe4a52dc4645385f356a8e83cc54216a293e3b6f1cb4f79f5fc0277abf937fd"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/mp3lame/mp3lame-config.cmake",
+            "SPDXID": "SPDXRef-binary-file-9",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "3687d55e5ed1fdf3874ef57b8059d9f11a42b8c93316b582e0e354632f1afaf7"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/mp3lame/vcpkg-spdx-resources.json",
+            "SPDXID": "SPDXRef-binary-file-10",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "a955169e03d23da7ecdddc104db1b0a9d4d28ab082d1bc0919b3dca4e746261b"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          }
+        ]
+      }
+    }
+  ],
+  "fixtureLicense": "CC0-1.0",
+  "fixtureSource": "tests/AudioCodecTests.cpp",
+  "runtime": "miniaudio with stb_vorbis backend",
+  "nativePaths": "Windows wide-character file API",
+  "lameRole": "Deterministic MP3 fixtures; output adapter belongs to G23"
+}

@@ -1,0 +1,28 @@
+.FF......
+======================================================================
+FAIL: test_engine_subdirectory_detects_tracked_tool_state_at_repository_root (__main__.RepositoryAuditTests.test_engine_subdirectory_detects_tracked_tool_state_at_repository_root)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_repository_audit.py", line 54, in test_engine_subdirectory_detects_tracked_tool_state_at_repository_root
+    self.assertEqual(report['trackedToolState'], ['.codemaker/codemap/crash.log'])
+AssertionError: Lists differ: [] != ['.codemaker/codemap/crash.log']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'.codemaker/codemap/crash.log'
+
+- []
++ ['.codemaker/codemap/crash.log']
+
+======================================================================
+FAIL: test_engine_subdirectory_uses_repository_ignore_and_document_scope (__main__.RepositoryAuditTests.test_engine_subdirectory_uses_repository_ignore_and_document_scope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_repository_audit.py", line 40, in test_engine_subdirectory_uses_repository_ignore_and_document_scope
+    self.assertEqual(code, 0, report)
+AssertionError: 1 != 0 : {'schemaVersion': 1, 'status': 'failed', 'trackedToolState': [], 'danglingLinks': [], 'ignoreProbes': [{'path': 'Project/AzureRender/build/hygiene-probe.txt', 'expectedIgnored': True, 'ignored': True, 'passed': True}, {'path': '.codemaker/codemap/hygiene-probe.log', 'expectedIgnored': True, 'ignored': False, 'passed': False}, {'path': '.env', 'expectedIgnored': True, 'ignored': True, 'passed': True}, {'path': 'Project/AzureRender/src/main.cpp', 'expectedIgnored': False, 'ignored': False, 'passed': True}, {'path': 'Project/AzureRender/assets_public/hygiene-probe.gltf', 'expectedIgnored': False, 'ignored': False, 'passed': True}]}
+
+----------------------------------------------------------------------
+Ran 9 tests in 4.424s
+
+FAILED (failures=2)

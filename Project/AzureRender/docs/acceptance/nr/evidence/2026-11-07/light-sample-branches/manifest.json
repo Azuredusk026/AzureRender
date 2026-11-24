@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "sourceBase": "e8fc568",
+  "status": "isolated-insufficient-benefit",
+  "sourceControlSha256": "12ede4dcf5b404454c48b816aec4ee951100dbc0a4d1ff4d1b91d45ca448f16e",
+  "captureSha256": "5cbfc0ecf9fa24a7a8d8949ed54c3fc3691b7a1a58075d68f63f257b34ca6942",
+  "archive": {
+    "file": "controls.zip",
+    "bytes": 120441,
+    "sha256": "25ec4e429e7d099412464c1b8b35bd05ed3233a92a9fb35d35c2e061b7425e61"
+  },
+  "resultsSha256": "b41699932da1594e28cb944f39e55fda429fc13a29c63e6e6741fb6317408af5"
+}

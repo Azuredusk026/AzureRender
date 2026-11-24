@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "checks": [
+    [
+      "verify_behavior.py",
+      "--name",
+      "moving-green"
+    ],
+    [
+      "verify_behavior.py",
+      "--name",
+      "moving-debug"
+    ],
+    [
+      "verify_railing.py"
+    ],
+    [
+      "verify_inputs.py"
+    ]
+  ],
+  "fixedRegressionFrames": 3,
+  "stationaryFrames": 90,
+  "initialRailingSettlingFailureRetained": "railing-initial-review.json",
+  "extendedRailingFrames": 540
+}

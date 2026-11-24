@@ -1,0 +1,569 @@
+{
+  "status": "rejected-final-color-r11-control",
+  "rows": [
+    {
+      "name": "control",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 14,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.282678106207518,
+      "resolvedOriginalFailures": 59,
+      "newOriginalFailures": 0,
+      "resolvedControlFailures": 0,
+      "newAgainstControlFailures": 0,
+      "changedHairPixels": 0,
+      "failures": [
+        {
+          "pixel": [
+            1306,
+            156
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1278,
+            163
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1313,
+            168
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1319,
+            172
+          ],
+          "absoluteError": [
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            213
+          ],
+          "absoluteError": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            215
+          ],
+          "absoluteError": [
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            216
+          ],
+          "absoluteError": [
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1367,
+            261
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1367,
+            262
+          ],
+          "absoluteError": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1322,
+            263
+          ],
+          "absoluteError": [
+            2,
+            3,
+            6
+          ]
+        },
+        {
+          "pixel": [
+            1380,
+            276
+          ],
+          "absoluteError": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            295
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            296
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            297
+          ],
+          "absoluteError": [
+            1,
+            2,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "candidate",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 6,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.13768584356819652,
+      "resolvedOriginalFailures": 68,
+      "newOriginalFailures": 1,
+      "resolvedControlFailures": 9,
+      "newAgainstControlFailures": 1,
+      "changedHairPixels": 6421,
+      "failures": [
+        {
+          "pixel": [
+            1306,
+            156
+          ],
+          "absoluteError": [
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1322,
+            262
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1322,
+            263
+          ],
+          "absoluteError": [
+            2,
+            3,
+            6
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            295
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            296
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            297
+          ],
+          "absoluteError": [
+            1,
+            2,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "state": {
+    "status": "collected",
+    "variants": [
+      {
+        "name": "control",
+        "baselineRestored": true,
+        "shaderSha256": "64c57a75532d253bf7c6adeddc614041c99258ddb8839f3502017abfc14d7752",
+        "hdrSha256": "c0cb03b0ee3e7bb1112a5b08a1a58693dbb1c878c53df24a42d1c3847a4e2df2",
+        "finalSha256": "78484f2282c0aeec8234dcf1f5a60564588fc4afe77b08a51cb3b9f8d76d4e4a"
+      },
+      {
+        "name": "candidate",
+        "baselineRestored": true,
+        "shaderSha256": "f0ed540d11bbecdf38ec445735879089322b34bb69d33670d4fd576d7de2ffb1",
+        "hdrSha256": "e2eb49926d18cc9761e18870cb18b3adc753cda5451ebe121c4de6d236b014db",
+        "finalSha256": "03cc8bbf74286fb7542357bb357e8ee196a09248999918e3eb99ac2a8bf28b76"
+      }
+    ],
+    "activeVariant": "candidate",
+    "controlQualification": {
+      "hdrExact": true,
+      "finalExact": true
+    },
+    "debugMessages": [],
+    "cleanupBaselineRestored": true
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 16.75,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-095632-hair-r11-storage-control-93b2d8\\run.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-095632-hair-r11-storage-control-93b2d8\\tmp"
+  },
+  "scope": "GPU HDR storage truncation agrees with the model on all 17017 pixels. Final color retains six failures including one new failure; original threshold remains unchanged and the combined candidate is not accepted.",
+  "hdrComparison": {
+    "status": "actual-hdr-storage-comparison",
+    "maskPixels": 17017,
+    "predictionDifferentPixels": 0,
+    "nonNormalGridPixels": 0,
+    "rows": [
+      {
+        "pixel": [
+          1322,
+          262
+        ],
+        "source": [
+          0.5283203125,
+          0.09197998046875,
+          0.09283447265625,
+          1.0
+        ],
+        "actual": [
+          0.5234375,
+          0.091796875,
+          0.091796875,
+          1.0
+        ],
+        "predicted": [
+          0.5234375,
+          0.091796875,
+          0.091796875
+        ]
+      },
+      {
+        "pixel": [
+          1322,
+          263
+        ],
+        "source": [
+          0.57470703125,
+          0.11602783203125,
+          0.12457275390625,
+          1.0
+        ],
+        "actual": [
+          0.5703125,
+          0.115234375,
+          0.123046875,
+          1.0
+        ],
+        "predicted": [
+          0.5703125,
+          0.115234375,
+          0.123046875
+        ]
+      },
+      {
+        "pixel": [
+          1306,
+          156
+        ],
+        "source": [
+          3.24609375,
+          0.68212890625,
+          0.59375,
+          1.0
+        ],
+        "actual": [
+          3.21875,
+          0.6796875,
+          0.59375,
+          1.0
+        ],
+        "predicted": [
+          3.21875,
+          0.6796875,
+          0.59375
+        ]
+      }
+    ]
+  },
+  "cpuPrediction": {
+    "status": "cpu-storage-prediction-only",
+    "maskPixels": 17017,
+    "predictedFailures": 5,
+    "maximumByteError": 6,
+    "sourceMaximum": 4.12890625,
+    "failures": [
+      {
+        "pixel": [
+          1322,
+          262
+        ],
+        "error": [
+          2,
+          1,
+          1
+        ]
+      },
+      {
+        "pixel": [
+          1322,
+          263
+        ],
+        "error": [
+          1,
+          3,
+          6
+        ]
+      },
+      {
+        "pixel": [
+          1193,
+          295
+        ],
+        "error": [
+          2,
+          2,
+          1
+        ]
+      },
+      {
+        "pixel": [
+          1193,
+          296
+        ],
+        "error": [
+          1,
+          2,
+          1
+        ]
+      },
+      {
+        "pixel": [
+          1193,
+          297
+        ],
+        "error": [
+          1,
+          2,
+          0
+        ]
+      }
+    ]
+  },
+  "halfDomain": {
+    "status": "cpu-finite-half-storage-model-qualified",
+    "scope": "Finite half-domain source values only; independent frexp/floor reference, not a GPU result or a full F32 overflow contract.",
+    "rows": [
+      {
+        "mantissaBits": 6,
+        "finiteHalfInputs": 63488,
+        "different": 0
+      },
+      {
+        "mantissaBits": 5,
+        "finiteHalfInputs": 63488,
+        "different": 0
+      }
+    ]
+  },
+  "archiveBytes": 1077663,
+  "archiveSha256": "484e3db8308af90bd26a2909c197ffa963e08fbc5cd625996fe50ce01b0e8090",
+  "archiveFiles": [
+    {
+      "path": "analyze.py",
+      "bytes": 1960,
+      "sha256": "4ca3a23f428519f07e1cb4c73c210b7ad2b04849639514e0bbbecb67b0feedaf"
+    },
+    {
+      "path": "baseline.py",
+      "bytes": 1801,
+      "sha256": "5968d2d85f1f55472d0286ce0075c61524e5c4a6d06d96144842e0710bea6aa6"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 436,
+      "sha256": "d111c8d4ef9da32439e53464f9ee53b58347f9336cee8ca89da296096305bdb8"
+    },
+    {
+      "path": "candidate-execution.json",
+      "bytes": 558,
+      "sha256": "6234383dc2533a96ba180fdde54cefb675ae704af445963e967ca37a3926a5c2"
+    },
+    {
+      "path": "candidate-final.zlib",
+      "bytes": 101918,
+      "sha256": "6b72435aa37e972541aa21b6e631e93efa5e9e665b1d82007183d6988290dda1"
+    },
+    {
+      "path": "candidate-hdr.zlib",
+      "bytes": 139277,
+      "sha256": "e1b6b71123d02630ee8e303400a3653e43d4c4f2a06600eb33fd8a69b2b2433e"
+    },
+    {
+      "path": "candidate-results.json",
+      "bytes": 6356,
+      "sha256": "517fcc94e69f3d1560ed0cf73b2780e87f43f45e4ef382bfcdcd49407f858cd2"
+    },
+    {
+      "path": "candidate-state.json",
+      "bytes": 914,
+      "sha256": "b3b541479ce56fa54a86179b68be9044653d257e4f350855d431f9e50be0b372"
+    },
+    {
+      "path": "candidate.spv",
+      "bytes": 472592,
+      "sha256": "f0ed540d11bbecdf38ec445735879089322b34bb69d33670d4fd576d7de2ffb1"
+    },
+    {
+      "path": "candidate.spvasm",
+      "bytes": 1645754,
+      "sha256": "b791356cc13661993f5b450e6ff3c815c950f5ea1dc41e767fdd43547ab68d0b"
+    },
+    {
+      "path": "collect.py",
+      "bytes": 3557,
+      "sha256": "26971f017a850b5d920ca53d40b56720191d4896d893ffe1e9a7cceb4ba850d5"
+    },
+    {
+      "path": "control-final.zlib",
+      "bytes": 102883,
+      "sha256": "dd5eb9ce21bf1d4b4ef254d3316686ee7b298f40e12d826fbb86c72879406553"
+    },
+    {
+      "path": "control-hdr.zlib",
+      "bytes": 283286,
+      "sha256": "140ab3bf670632c4538b3fe86a7c6930a502202f05b07fa3ee5c69426f03ba42"
+    },
+    {
+      "path": "control.spv",
+      "bytes": 472016,
+      "sha256": "64c57a75532d253bf7c6adeddc614041c99258ddb8839f3502017abfc14d7752"
+    },
+    {
+      "path": "cpu-prediction.json",
+      "bytes": 843,
+      "sha256": "18437dd3b215bf0966f1714e1cbcf4018989c700002669d151f15569541f3391"
+    },
+    {
+      "path": "driver-candidate.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "half-domain-results.json",
+      "bytes": 410,
+      "sha256": "ff4a6e885243b9dc2bf2bb9710cd38a13a4fbabf1b68d91e9787bbd98b89e2b5"
+    },
+    {
+      "path": "half-domain.py",
+      "bytes": 1278,
+      "sha256": "02cd9b56f7e5da675262b52bb8cd6b5f38831edbf00a140327c0fa0bffc0ebb4"
+    },
+    {
+      "path": "hdr-comparison.json",
+      "bytes": 1296,
+      "sha256": "3a9077422d353a41fc3905ac48c1a97ff28c3b1aaae5c09fcdbad1545a3e3858"
+    },
+    {
+      "path": "predict.py",
+      "bytes": 1265,
+      "sha256": "981ceb6a7bb4b1d36725405567ae018949f400b6a77cdf32729667ee4b323798"
+    },
+    {
+      "path": "process.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "queued.py",
+      "bytes": 882,
+      "sha256": "8b3abbd0894385a9d658f9ba4d0220cf012ec88203979c51a837ba792931de3c"
+    },
+    {
+      "path": "run.py",
+      "bytes": 989,
+      "sha256": "2a283f93561f3450de0db4767915cc5bad26aa98960cf94b64e1ae072f5612a5"
+    }
+  ]
+}

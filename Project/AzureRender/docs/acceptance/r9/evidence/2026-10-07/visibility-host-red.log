@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\r9\check_visibility_variants.py", line 23, in <module>
+    summary=visibility.run(root/'build/ninja-msvc-release/AzureRender.exe',folder)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_scene_visibility_gpu.py", line 65, in run
+    check(int(red(images['mixed'])[:, :480].sum()) > 1000 and int(red(images['mixed'])[:, 480:].sum()) > 1000,
+                  ~~~~~~^^^^^^^^^
+KeyError: 'mixed'

@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "status": "isolated-below-workload-gate",
+  "sourceBase": "c3def68",
+  "benchmark": {
+    "checksum": 41649456,
+    "copyMs": 0.03716615,
+    "equal": true,
+    "leaseMs": 1.3499999999999994e-05,
+    "lights": 16,
+    "nodes": 1679,
+    "reduction": 0.9996367662510106,
+    "reflectionVolumes": 12,
+    "resources": 374,
+    "rounds": 2000,
+    "savedMs": 0.03715265,
+    "scope": "Actual node identities and transforms, field cardinalities and reflection metadata; authoring parse, material resolution, renderer work and Player frame excluded"
+  },
+  "productionRestored": true,
+  "buildVerification": [
+    {
+      "configuration": "release",
+      "status": "passed",
+      "receiptSha256": "0663d65c7891b7cb488d4dbf7ece8ebdbc575fabe9caeee52dd3aa571e904789"
+    },
+    {
+      "configuration": "debug",
+      "status": "passed",
+      "receiptSha256": "24ac453fb7b77f1ee13d0b60488e19974004c1a7e168fce3da2e02b6d003e394"
+    }
+  ],
+  "protectedDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "nativeCapturePerformed": false,
+  "gpuRegressionPerformed": false,
+  "framePerformanceMeasured": false,
+  "blockedCleanup": {
+    "status": "automatic-approval-review-rejected",
+    "reason": "blocked by policy",
+    "deleted": false,
+    "retryAllowed": false,
+    "paths": [
+      "D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release/CMakeFiles/AzureSceneFrameSourceTests.dir",
+      "D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release/AzureSceneFrameSourceTests.exe"
+    ],
+    "scope": "New temporary CPU candidate test outputs. The registered source candidate is isolated; generated outputs remain untouched after rejection."
+  },
+  "evidenceFiles": [
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/benchmark-build.log",
+      "bytes": 15,
+      "sha256": "8e9ab4b88858b67d764fe1ab6383dc601b70479649eaf061c017a1db17cbece9"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/benchmark-command.json",
+      "bytes": 1112,
+      "sha256": "93b11b6ad542d45c9d5785bd929240addb8e975ff91b71ad37fe865942d66558"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/benchmark.cpp",
+      "bytes": 4950,
+      "sha256": "216928221d22d6a91bef763f65e9ecd3e1809a9d8e90d3dbdb2d2172e8b83d19"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/benchmark.json",
+      "bytes": 451,
+      "sha256": "1c396150dfe6af88b5484e3f1f1d210b603d36a59ba34def729e8f867b6c689d"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/benchmark.log",
+      "bytes": 453,
+      "sha256": "3d19e71623d24ecb743e75bfd48f53eab71a42ba7239e44ad9d7de43559894fb"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/budget.json",
+      "bytes": 434,
+      "sha256": "9644fb8ad21ad235bf3099dedf9fcacb77d4100fc03deb494dd9b3fc4cb218da"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/build_benchmark.py",
+      "bytes": 1699,
+      "sha256": "8b97b1f2dea56a3b163bdd98ba44d937a8112f60f2f5cfb0314dd30982561052"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/candidate.patch",
+      "bytes": 22590,
+      "sha256": "9a14f5981721f688fff1d125459e830436e5b5a91c6283889c82568a592e3f2f"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/green-build.log",
+      "bytes": 208,
+      "sha256": "3a57603987d3cf276e209f98bf64a84fe28d78e595bf7138849cf87c2225c8de"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/isolate_candidate.py",
+      "bytes": 1876,
+      "sha256": "682a3d7f4383770c33725f405dbf319e9adfdb76c825aebd3b4fdf4454516654"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/missing-component-input.log",
+      "bytes": 62,
+      "sha256": "650228eb2b72fcf61c816ab3aaf80bb888751f322bcf31a3658e04af8a9d2c20"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/package.py",
+      "bytes": 2427,
+      "sha256": "0d02401e31e82c479460148c690b7ac4e2a046350d0a4af60bbe57967c12ebd7"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/prior-benchmark.cpp",
+      "bytes": 5372,
+      "sha256": "09ad31c420326e085fbfac262cef3b667f51eafcca057e1f0cd60a6eda47935d"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/prior-build.py",
+      "bytes": 2137,
+      "sha256": "7796f3c35bf37da010649f9ee304e5ff44146dc2ae1b8bd6e2c9edc3772f7441"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/red-build.log",
+      "bytes": 10114,
+      "sha256": "fb2ac980d15fe8326a217cdc01a8654ff2e578daa02666df2079d317e3166dd2"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/restoration.json",
+      "bytes": 478,
+      "sha256": "2fd39d2a99e40622520af39c61eb181714864c7908924b42b46eed461a736e85"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/restored-configure.log",
+      "bytes": 8543,
+      "sha256": "defd9755d54902448c9f2db6cfb384fbcee3c29f4ece0f7c8409027601b35767"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/candidate/CMakeLists.txt",
+      "bytes": 267526,
+      "sha256": "250e6594cfc20e8f6996ba317422b0fda7a831daeb861c5342066d1d5a5f6767"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/candidate/src/render/SceneFrameSource.hpp",
+      "bytes": 704,
+      "sha256": "ac7f9775909c83114a7ceb98774903cd04c45ae01233ddfc37e879d41a6a34d1"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/candidate/src/scenes/CharacterSceneRenderer.cpp",
+      "bytes": 305993,
+      "sha256": "f9538b37082b0bfc0fe84e64e3408943f57ffe713d5d8671dfbd7f5df406ded7"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/candidate/src/scenes/CharacterSceneRenderer.hpp",
+      "bytes": 36211,
+      "sha256": "b26b77d9e5616f2345610c9f2190a57b8360e4356ecceebfbbd0b1674718689b"
+    },
+    {
+      "path": "build/runs/20261108-010859-cpu-frame-scene-lease-933a8f/candidate/tests/SceneFrameSourceTests.cpp",
+      "bytes": 2735,
+      "sha256": "6457e08234fb87c8c69771d73e4264fdc373981f4cfe42e8ad81f0d0c3e2b617"
+    },
+    {
+      "path": "build/maintenance/20261108-temporary-target-cleanup-blocked.json",
+      "bytes": 510,
+      "sha256": "8a6f58dfe7537f2cd602f73c7b9b3cbf05c89e7700b6699efb1e6337d2982136"
+    }
+  ],
+  "evidenceBytes": 130516,
+  "evidenceSha256": "cda9942a4d825a7f16edeba36926e47cce83e4a24fd3e50a74737da7e78d57f2"
+}

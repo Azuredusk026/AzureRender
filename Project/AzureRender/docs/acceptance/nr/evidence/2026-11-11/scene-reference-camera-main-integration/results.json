@@ -1,0 +1,118 @@
+{
+  "status": "scene-reference-camera-main-integration-qualified",
+  "runtimeSourceCommit": "e1edea9",
+  "sourceBranchCommit": "6483e03",
+  "build": {
+    "status": "built-and-checked",
+    "checks": [
+      {
+        "config": "Release",
+        "tests": 17,
+        "skips": 0,
+        "reusedBuildAndChecks": false,
+        "seconds": 270.21899999998277
+      },
+      {
+        "config": "Debug",
+        "tests": 17,
+        "skips": 0,
+        "reusedBuildAndChecks": false,
+        "seconds": 249.170999999973
+      }
+    ],
+    "gpuProcesses": [
+      {
+        "config": "Release",
+        "device": "nvidia",
+        "target": "AzureReferenceRasterProjectionGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Release",
+        "device": "intel",
+        "target": "AzureReferenceRasterProjectionGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "nvidia",
+        "target": "AzureReferenceRasterProjectionGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "intel",
+        "target": "AzureReferenceRasterProjectionGpuTests",
+        "passed": true
+      }
+    ],
+    "nativeCpuRays": 34034,
+    "visibleVertexChecks": 23128,
+    "exactRasterComponents": 709824,
+    "sourceUnchanged": true,
+    "productsVerified": true,
+    "existingProgramsExact": 860,
+    "childProgramsExact": 859,
+    "activeProgramCount": 860,
+    "allHostSectionsExact": false,
+    "allHostBytesExact": false,
+    "dllsExact": true
+  },
+  "originalFour": {
+    "method": "fresh-capture",
+    "result": {
+      "exitCode": 0,
+      "seconds": 136.9220000000205,
+      "frames": [
+        {
+          "name": "frame_000000.png",
+          "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+          "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+          "changedPixels": 0,
+          "maximumByteError": 0
+        },
+        {
+          "name": "frame_000001.png",
+          "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+          "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+          "changedPixels": 0,
+          "maximumByteError": 0
+        },
+        {
+          "name": "frame_000002.png",
+          "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+          "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+          "changedPixels": 0,
+          "maximumByteError": 0
+        },
+        {
+          "name": "frame_000003.png",
+          "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+          "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+          "changedPixels": 0,
+          "maximumByteError": 0
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "sourceUnchanged": true,
+      "programsUnchanged": true,
+      "projectInputsUnchanged": true
+    }
+  },
+  "protectedFilesExact": 13,
+  "projectInputsExact": 1729,
+  "sourceProofsFresh": true,
+  "childGpuScope": {
+    "sourceCommit": "6483e03",
+    "integrationCommit": "e1edea9",
+    "archiveBytes": 170196,
+    "archiveSha256": "b3571490ffb83d622f0881e58532823216e645723b47e336d8affb8bbbe9da02",
+    "members": 74,
+    "memberHashesVerified": true,
+    "sourceConflicts": false,
+    "documentationConflict": "Additive CHANGELOG entries retained"
+  },
+  "overall": "failed-user-review",
+  "formalPerformanceAccepted": false
+}

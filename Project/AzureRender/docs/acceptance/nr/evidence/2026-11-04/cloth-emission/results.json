@@ -1,0 +1,95 @@
+{
+  "status": "validated-local-emission",
+  "fullVisualAcceptance": "open",
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "sourceDraw": 910,
+  "sourceSlot": "name:M_actor_laevat_cloth_05",
+  "maskPixels": 770,
+  "sourcePixel": [
+    1163,
+    1022
+  ],
+  "native": {
+    "meanAbsoluteByteError": 0.0,
+    "brightRedPixels": 770,
+    "probe": [
+      255,
+      80,
+      32
+    ]
+  },
+  "before": {
+    "meanAbsoluteByteError": 82.3922077922078,
+    "brightRedPixels": 0,
+    "probe": [
+      29,
+      29,
+      32
+    ]
+  },
+  "after": {
+    "meanAbsoluteByteError": 13.921212121212122,
+    "brightRedPixels": 747,
+    "probe": [
+      255,
+      87,
+      32
+    ]
+  },
+  "frameSha256": "40add94533fb5252a6b8cd12ba2ee0de90973d4edae3972c1bb67e9614f0bee9",
+  "controls": [
+    {
+      "frame": 0,
+      "changedPixels": 5200,
+      "fixedEnvironment": {
+        "ceiling": 0,
+        "leftWall": 0,
+        "rightWall": 0
+      }
+    },
+    {
+      "frame": 48,
+      "changedPixels": 2767,
+      "fixedEnvironment": {
+        "ceiling": 0,
+        "leftWall": 0,
+        "rightWall": 0
+      }
+    },
+    {
+      "frame": 96,
+      "changedPixels": 9175,
+      "fixedEnvironment": {
+        "ceiling": 0,
+        "leftWall": 0,
+        "rightWall": 0
+      }
+    },
+    {
+      "frame": 144,
+      "changedPixels": 6928,
+      "fixedEnvironment": {
+        "ceiling": 0,
+        "leftWall": 0,
+        "rightWall": 0
+      }
+    }
+  ],
+  "joint": {
+    "frames": 192,
+    "strictReopen": 4,
+    "video": "media/joint-native-emission.mp4",
+    "bytes": 5185136,
+    "sha256": "3ccd2af1a7c476d9a1b284b795f0740c49b1bcf15b9c518309b095b7501a9ca5"
+  },
+  "buildTests": {
+    "debug": {
+      "regressionLog": "emission-production-debug-tests.log",
+      "sha256": "aa1ab34f20d7be2365b735f089244e6740704508fd72ab24cb29175f85dd6152"
+    },
+    "release": {
+      "regressionLog": "emission-production-release-tests.log",
+      "sha256": "e337fe6c1a37fa23caa89136853548fdf595b97a7034ce7198a237849fae39ef"
+    }
+  }
+}

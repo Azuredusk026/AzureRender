@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_observation_host.py", line 135, in <module>
+    results = [run(args.executable.resolve(), output, workflow) for workflow in ('exploration', 'inspector')]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_observation_host.py", line 135, in <listcomp>
+    results = [run(args.executable.resolve(), output, workflow) for workflow in ('exploration', 'inspector')]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_observation_host.py", line 89, in run
+    call('assert', name='engine.gameInputSource', equals='window')
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_observation_host.py", line 47, in call
+    assert response['passed'] == passed, response
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'code': 'AssertionFailed', 'elapsedMs': 11.9211, 'message': 'Observation differs from expected value', 'passed': False, 'schemaVersion': 1}

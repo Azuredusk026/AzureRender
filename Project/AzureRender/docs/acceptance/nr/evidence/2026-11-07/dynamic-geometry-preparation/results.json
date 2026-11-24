@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 1,
+  "status": "adopted-diagnostic-cpu-improvement",
+  "sourceBase": "adfdc00",
+  "localControl": {
+    "animationInputs": 20,
+    "compactVertices": 25442,
+    "geometryBaselineMs": 1.0086555555555554,
+    "geometryCandidateMs": 0.5690861111111114,
+    "geometryReduction": 0.43579737604512025,
+    "indexBytesEqual": true,
+    "motionBaselineMs": 0.4465902777777779,
+    "motionCandidateMs": 0.15988888888888886,
+    "motionObjects": 871,
+    "motionReduction": 0.6419785722060677,
+    "motionWordsEqualToFrozenImplementation": true,
+    "preparationThreads": 5,
+    "rounds": 72,
+    "scope": "Actual hero asset/animation, explicit nonidentity model and native camera; motion uses 871 project identifiers, controlled static shapes and actual hero joints; full native cost remains separate",
+    "status": "controlled",
+    "transparentIndices": 97326,
+    "vertices": 207364,
+    "workerWakeBatches": 80,
+    "worldPositionBytesEqual": true,
+    "sourceBase": "adfdc00-with-dynamic-geometry-preparation",
+    "seconds": 7.530999999995402,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\GeometryControls.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\hero-idle-opaque-overlays.glb",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\motion-identities.json",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\native-camera.json"
+    ],
+    "inputs": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\hero-idle-opaque-overlays.glb": "9143d47429a20fbc9b545745ff18b8d2f4f940206d602b7075d89192aef58898",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-042805-host-scene-preparation-34e27e\\image\\frames\\capture_manifest.json": "6d7edb22765191f2ddc77fed752df55d662ac9feec31d1255d3731acf782b8fe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\native-camera.json": "6d7edb22765191f2ddc77fed752df55d662ac9feec31d1255d3731acf782b8fe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\motion-identities.json": "08d0763df36442cd0966971702e159a484e4b52d97cc64eb574cf957f382bafa",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\GeometryControls.exe": "0eef84b8040b7ad62cb8d22134c5796282a94c75c1b79ab873e32f0dfc8623d8",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\GeometryControls.cpp": "3322dbbf349a63b12fee94f2657921bd134d7b50fffaaea8ec313cf1e6280bcc",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\MotionPoseDataReference.cpp": "ad8237e11ea924fb229e9b8ddddbb91a195e6448c3d34f999f2dc8b1632b7b64",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\MotionPoseDataReference.hpp": "29f1516d071a616df04d482392472dc4759d3d976e0f37b4e70b642060d14904"
+    },
+    "productionUnchanged": true
+  },
+  "serialControl": {
+    "animationInputs": 20,
+    "compactVertices": 25442,
+    "geometryBaselineMs": 1.0639097222222227,
+    "geometryCandidateMs": 0.7869402777777776,
+    "geometryReduction": 0.26033171674183964,
+    "indexBytesEqual": true,
+    "motionBaselineMs": 0.4640069444444443,
+    "motionCandidateMs": 0.16931666666666664,
+    "motionObjects": 871,
+    "motionReduction": 0.6350988520885403,
+    "motionWordsEqualToFrozenImplementation": true,
+    "rounds": 72,
+    "scope": "Actual hero asset/animation, explicit nonidentity model and native camera; motion uses 871 project identifiers, controlled static shapes and actual hero joints; full native cost remains separate",
+    "status": "controlled",
+    "transparentIndices": 97326,
+    "vertices": 207364,
+    "worldPositionBytesEqual": true,
+    "sourceBase": "adfdc00-with-dynamic-geometry-preparation",
+    "seconds": 8.10899999999674,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\GeometryControls.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\hero-idle-opaque-overlays.glb",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\motion-identities.json",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\native-camera.json"
+    ],
+    "inputs": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\hero-idle-opaque-overlays.glb": "9143d47429a20fbc9b545745ff18b8d2f4f940206d602b7075d89192aef58898",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-042805-host-scene-preparation-34e27e\\image\\frames\\capture_manifest.json": "6d7edb22765191f2ddc77fed752df55d662ac9feec31d1255d3731acf782b8fe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\native-camera.json": "6d7edb22765191f2ddc77fed752df55d662ac9feec31d1255d3731acf782b8fe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\motion-identities.json": "08d0763df36442cd0966971702e159a484e4b52d97cc64eb574cf957f382bafa",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\GeometryControls.exe": "096f0f4d5e3ec07e78db5edaa70e95dfcc68da0a88b03bcb3b5ce03410cfc6a5",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\GeometryControls.cpp": "c7cf0ae88760857e0c9f68f2e47a649650eeec4ece21b062bec238f64f4f7b78",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\MotionPoseDataReference.cpp": "ad8237e11ea924fb229e9b8ddddbb91a195e6448c3d34f999f2dc8b1632b7b64",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\MotionPoseDataReference.hpp": "29f1516d071a616df04d482392472dc4759d3d976e0f37b4e70b642060d14904"
+    },
+    "productionUnchanged": true
+  },
+  "qualification": {
+    "kind": "AffectedPreparationHotspot",
+    "affectedMeanMs": 4.458,
+    "referenceCpuMeanMs": 13.80743,
+    "affectedCpuFraction": 0.32286964337316937,
+    "measuredGeometryReduction": 0.43579737604512025,
+    "measuredMotionCoreReduction": 0.6419785722060677,
+    "expectedReducedWorkFractionAtLeast": 0.2,
+    "qualified": true,
+    "scope": "Matched renderer preparation source, actual hero/animation geometry controls and separate ordered motion-core load; local motion does not include material input or draw construction; native whole-frame benefit remains pending"
+  },
+  "native": {
+    "baseline": {
+      "status": "measured",
+      "sourceBase": "adfdc00",
+      "visualAcceptance": "failed-user-review",
+      "seconds": 111.29699999999866,
+      "warmup": 300,
+      "samples": 120,
+      "gpu": {
+        "shadowMs": {
+          "mean": 2.5023253333333333,
+          "p95": 2.6023632,
+          "p99": 2.6318576
+        },
+        "sceneMs": {
+          "mean": 18.933777066666668,
+          "p95": 19.909888000000002,
+          "p99": 20.037099519999998
+        },
+        "postProcessMs": {
+          "mean": 0.2822912,
+          "p95": 0.299008,
+          "p99": 0.30086144
+        },
+        "frameMs": {
+          "mean": 21.7183936,
+          "p95": 22.810126399999998,
+          "p99": 22.965459199999998
+        }
+      },
+      "cpu": {
+        "mean": 13.14447833333332,
+        "p95": 14.833099999999721,
+        "p99": 17.339491000000137
+      },
+      "wait": {
+        "mean": 8.471898333333346,
+        "p95": 9.984420000000318,
+        "p99": 10.125279999999544
+      },
+      "sceneExtent": [
+        1920,
+        1080
+      ],
+      "framePacing": {
+        "maximumRate": 60,
+        "presentMode": "FIFO",
+        "vsync": true,
+        "waitFrames": 6,
+        "waitMilliseconds": 14.0995
+      },
+      "allocator": {
+        "bufferAllocations": 1997,
+        "imageAllocations": 440,
+        "liveBuffers": 834,
+        "liveImages": 440,
+        "bufferBytes": 2985576984,
+        "imageBytes": 2779192832,
+        "liveBufferBytes": 415610856,
+        "liveImageBytes": 2779192832,
+        "deviceLocalPeakBytes": 3291255520
+      },
+      "peakWorkingSetBytes": 7405359104,
+      "environmentFailures": [],
+      "zeroAllocator": true,
+      "validationClean": true,
+      "diagnosticOnly": true,
+      "formalSampleCountSatisfied": false,
+      "allMountedProjectBytesUnchanged": true,
+      "powerAcceptanceUnchanged": true,
+      "powerDeviationIsFailure": true,
+      "timingBudgetPassed": false,
+      "powerProfileStable": false,
+      "environmentPassed": false,
+      "executableSha256": "968077eec3cdab75f8185ec111fe1cb086fc61598c5f718336d0dc04e66079d1",
+      "pairRole": "baseline",
+      "instrumented": false
+    },
+    "candidate": {
+      "status": "measured",
+      "sourceBase": "adfdc00-with-dynamic-geometry-preparation",
+      "visualAcceptance": "failed-user-review",
+      "seconds": 114.82800000000134,
+      "warmup": 300,
+      "samples": 120,
+      "gpu": {
+        "shadowMs": {
+          "mean": 2.5162408,
+          "p95": 2.5640784,
+          "p99": 2.58021216
+        },
+        "sceneMs": {
+          "mean": 19.072426666666665,
+          "p95": 19.5501568,
+          "p99": 19.870382080000002
+        },
+        "postProcessMs": {
+          "mean": 0.2832981333333333,
+          "p95": 0.2888192,
+          "p99": 0.29164544
+        },
+        "frameMs": {
+          "mean": 21.8719656,
+          "p95": 22.409521599999998,
+          "p99": 22.67753408
+        }
+      },
+      "cpu": {
+        "mean": 10.760145000000003,
+        "p95": 11.507029999999913,
+        "p99": 11.888461000000042
+      },
+      "wait": {
+        "mean": 11.022832499999996,
+        "p95": 11.97004000000004,
+        "p99": 12.445198000000415
+      },
+      "sceneExtent": [
+        1920,
+        1080
+      ],
+      "framePacing": {
+        "maximumRate": 60,
+        "presentMode": "FIFO",
+        "vsync": true,
+        "waitFrames": 1,
+        "waitMilliseconds": 4.9238
+      },
+      "allocator": {
+        "bufferAllocations": 1997,
+        "imageAllocations": 440,
+        "liveBuffers": 834,
+        "liveImages": 440,
+        "bufferBytes": 2985576984,
+        "imageBytes": 2779192832,
+        "liveBufferBytes": 415610856,
+        "liveImageBytes": 2779192832,
+        "deviceLocalPeakBytes": 3291255520
+      },
+      "peakWorkingSetBytes": 7403536384,
+      "environmentFailures": [
+        "run observation 20: software thermal slowdown is active"
+      ],
+      "zeroAllocator": true,
+      "validationClean": true,
+      "diagnosticOnly": true,
+      "formalSampleCountSatisfied": false,
+      "allMountedProjectBytesUnchanged": true,
+      "powerAcceptanceUnchanged": true,
+      "powerDeviationIsFailure": true,
+      "timingBudgetPassed": false,
+      "powerProfileStable": false,
+      "environmentPassed": false,
+      "executableSha256": "64e8050fc1d4b359c3ac5f8733ecc2917e2064d656a05344c11dccb6567c49ea",
+      "pairRole": "candidate",
+      "instrumented": false
+    },
+    "savedCpuMeanMs": 2.3843333333333163,
+    "savedCpuP95Ms": 3.326069999999808,
+    "cpuMeanReduction": 0.18139429141792884,
+    "all663ProgramsByteIdentical": true,
+    "gpuBenefitClaimed": false,
+    "formalAcceptance": false
+  },
+  "image": {
+    "status": "passed",
+    "sourceBase": "adfdc00-with-dynamic-geometry-preparation",
+    "executableSha256": "64e8050fc1d4b359c3ac5f8733ecc2917e2064d656a05344c11dccb6567c49ea",
+    "exitCode": 0,
+    "seconds": 114.25,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "all663ProgramsByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Compact transparent preparation and reusable motion history; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "checks": [
+    {
+      "kind": "build",
+      "exitCode": 0,
+      "seconds": 183.04699999999866,
+      "command": [
+        "cmd",
+        "/d",
+        "/c",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--test-target",
+        "AzureTransparentTopologyTests",
+        "--test-target",
+        "AzureMotionPoseDataTests",
+        "--test-target",
+        "AzureStableDepthOrderTests",
+        "--test-target",
+        "AzureMotionVectorTargetTests",
+        "--test-target",
+        "AzureTemporalViewStateTests",
+        "--test-target",
+        "AzureMotionPoseGpuTests",
+        "--test-target",
+        "AzureMotionVectorGpuTests"
+      ]
+    },
+    {
+      "kind": "checks",
+      "exitCode": 0,
+      "seconds": 7.01600000000326,
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.(TransparentTopology|MotionPoseData|StableDepthOrder|MotionVectorTarget|TemporalViewState|MotionPoseGpu|MotionVectorGpu)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\release-checks.xml"
+      ]
+    }
+  ],
+  "batch": [
+    {
+      "name": "module-boundaries",
+      "exitCode": 0,
+      "seconds": 10.281000000002678,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\check_module_boundaries.py",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release"
+      ]
+    },
+    {
+      "name": "capture",
+      "exitCode": 0,
+      "seconds": 122.64099999999598,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\capture.py"
+      ]
+    },
+    {
+      "name": "measure_baseline",
+      "exitCode": 0,
+      "seconds": 138.48400000000402,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\measure_baseline.py"
+      ]
+    },
+    {
+      "name": "measure_candidate",
+      "exitCode": 0,
+      "seconds": 136.17199999999866,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-052311-dynamic-geometry-preparation-e7a5c3\\measure_candidate.py"
+      ]
+    }
+  ],
+  "required": {
+    "cpuP95Ms": 8,
+    "gpuP95Ms": 16.6,
+    "samples": 1800,
+    "stablePowerWatts": 80,
+    "overallVisual": "failed-user-review"
+  },
+  "limitations": [
+    "Motion local control uses actual 871 object identities with controlled joint and morph shapes, not a complete captured native pose set.",
+    "Motion local control covers history staging and packing; renderer material and draw preparation are outside its timing.",
+    "Serial and final parallel implementations each received an associated build and seven checks.",
+    "Candidate telemetry includes one software thermal slowdown observation.",
+    "The required all-observation 80 W condition remains failed.",
+    "Short native samples do not satisfy formal performance acceptance."
+  ],
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 1564025,
+    "sha256": "99e859707644c8b8adde0f9e9a77fc32504b992c0f83c9945fb00d834005b28e"
+  }
+}

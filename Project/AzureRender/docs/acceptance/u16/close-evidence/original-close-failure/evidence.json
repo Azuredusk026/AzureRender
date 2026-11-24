@@ -1,0 +1,71 @@
+[
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 6
+    },
+    "response": {
+      "elapsedMs": 54.7347,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.4949,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:eff5bccbb745ba9e\",\"documentId\":\"17916513330572252-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "authoring-1",
+      "commandId": "project.create",
+      "parameters": {
+        "templateId": "scene",
+        "destination": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\scene-geometry\\run-de89a5b5\\authored",
+        "name": "Geometry workflow"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:eff5bccbb745ba9e",
+        "documentId": "17916513330572252-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 0.4849,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "task": "task-1"
+        },
+        "version": {
+          "contentHash": "fnv1a64:eff5bccbb745ba9e",
+          "documentId": "17916513330572252-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 20
+    },
+    "response": {
+      "elapsedMs": 41.0939,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  }
+]

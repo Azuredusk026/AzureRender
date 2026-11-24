@@ -1,0 +1,567 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "phase": "NR4-G6",
+  "run": "build\\runs\\20261027-072533-reflection-trace-cost-isolation-d9ff39",
+  "scope": "Three-dimensional upload foundation and captured input verification; runtime GI composition remains pending",
+  "red": {
+    "log": "build\\runs\\20261027-072533-reflection-trace-cost-isolation-d9ff39\\upload-red-test.log",
+    "expectedFailure": "Three-dimensional mip/slice upload mismatch"
+  },
+  "gpuCases": [
+    {
+      "type": "3D",
+      "extent": [
+        5,
+        3,
+        4
+      ],
+      "levels": 3,
+      "format": "R32_UINT",
+      "checkedTexels": 65
+    },
+    {
+      "type": "cube",
+      "extent": [
+        4,
+        4,
+        1
+      ],
+      "layers": 6,
+      "levels": 3,
+      "format": "R32_UINT",
+      "checkedTexels": 126
+    }
+  ],
+  "tests": {
+    "debug": {
+      "log": "build\\runs\\20261027-072533-reflection-trace-cost-isolation-d9ff39\\upload-green-debug-test.log",
+      "passed": true
+    },
+    "release": {
+      "log": "build\\runs\\20261027-072533-reflection-trace-cost-isolation-d9ff39\\upload-green-release-test.log",
+      "passed": true
+    }
+  },
+  "images": {
+    "main-debug": {
+      "imageExact": true,
+      "changedPixels": 0,
+      "maximumByteError": 0,
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "pipelineStatisticsRequested": false
+    },
+    "character-debug": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "imageExact": true,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    "main-release": {
+      "imageExact": true,
+      "changedPixels": 0,
+      "maximumByteError": 0,
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "pipelineStatisticsRequested": false
+    },
+    "character-release": {
+      "imageExact": true,
+      "changedPixels": 0,
+      "maximumByteError": 0,
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "pipelineStatisticsRequested": false
+    }
+  },
+  "native": {
+    "status": "exported",
+    "source": "build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame3534.rdc",
+    "event": 8944,
+    "shader": {
+      "file": "deferred-lighting.dxbc",
+      "bytes": 93600,
+      "sha256": "61079a99ee8ee1f6ef25c97c11245fe3ef2df4e6589ce4cdb197b5b7996d0580"
+    },
+    "textures": [
+      {
+        "slot": 21,
+        "resource": "ResourceId::11293",
+        "format": "R11G11B10_FLOAT",
+        "width": 128,
+        "height": 64,
+        "depth": 128,
+        "mips": 1,
+        "firstMip": 0,
+        "file": "slot-21.bin",
+        "bytes": 4194304,
+        "sha256": "6f995a2b8487f155d7a915e7ebf5c11f5493ac0b50be62c8f3ff2fc3b11224d5"
+      },
+      {
+        "slot": 22,
+        "resource": "ResourceId::11296",
+        "format": "R8G8B8A8_UNORM",
+        "width": 128,
+        "height": 192,
+        "depth": 128,
+        "mips": 1,
+        "firstMip": 0,
+        "file": "slot-22.bin",
+        "bytes": 12582912,
+        "sha256": "b052a74093cccd5d86bf8cd8cb810aa06b070fbfa5492c830f17ad3f8f8a0987"
+      },
+      {
+        "slot": 23,
+        "resource": "ResourceId::11299",
+        "format": "R11G11B10_FLOAT",
+        "width": 128,
+        "height": 64,
+        "depth": 128,
+        "mips": 1,
+        "firstMip": 0,
+        "file": "slot-23.bin",
+        "bytes": 4194304,
+        "sha256": "883c4f590268161e53d35a22897cdd11afbf4c7bf903eed044473e02505b232c"
+      },
+      {
+        "slot": 24,
+        "resource": "ResourceId::11302",
+        "format": "R8G8B8A8_UNORM",
+        "width": 128,
+        "height": 192,
+        "depth": 128,
+        "mips": 1,
+        "firstMip": 0,
+        "file": "slot-24.bin",
+        "bytes": 12582912,
+        "sha256": "f66a7036145b60c6bd14b99ecd4a4b7c2b1fedef3d505aa09adef0b0ae524e0e"
+      },
+      {
+        "slot": 25,
+        "resource": "ResourceId::11305",
+        "format": "R11G11B10_FLOAT",
+        "width": 128,
+        "height": 64,
+        "depth": 128,
+        "mips": 1,
+        "firstMip": 0,
+        "file": "slot-25.bin",
+        "bytes": 4194304,
+        "sha256": "6b57899d7919dde5f4126724b332d53b8b2bac6a4df6e23818e99381a6ad694b"
+      },
+      {
+        "slot": 26,
+        "resource": "ResourceId::11308",
+        "format": "R8G8B8A8_UNORM",
+        "width": 128,
+        "height": 192,
+        "depth": 128,
+        "mips": 1,
+        "firstMip": 0,
+        "file": "slot-26.bin",
+        "bytes": 12582912,
+        "sha256": "1c16c4d642287962f53fe8834d1d8234158bbf2e366b27de2625dd5824f312eb"
+      }
+    ],
+    "samplers": [
+      {
+        "slot": 0,
+        "address": [
+          "AddressMode.ClampEdge",
+          "AddressMode.ClampEdge",
+          "AddressMode.ClampEdge"
+        ],
+        "filter": [
+          "FilterMode.Point",
+          "FilterMode.Point",
+          "FilterMode.Point"
+        ]
+      },
+      {
+        "slot": 1,
+        "address": [
+          "AddressMode.ClampEdge",
+          "AddressMode.ClampEdge",
+          "AddressMode.ClampEdge"
+        ],
+        "filter": [
+          "FilterMode.Linear",
+          "FilterMode.Linear",
+          "FilterMode.Point"
+        ]
+      },
+      {
+        "slot": 2,
+        "address": [
+          "AddressMode.Wrap",
+          "AddressMode.Wrap",
+          "AddressMode.Wrap"
+        ],
+        "filter": [
+          "FilterMode.Linear",
+          "FilterMode.Linear",
+          "FilterMode.Point"
+        ]
+      },
+      {
+        "slot": 3,
+        "address": [
+          "AddressMode.ClampEdge",
+          "AddressMode.ClampEdge",
+          "AddressMode.ClampEdge"
+        ],
+        "filter": [
+          "FilterMode.Linear",
+          "FilterMode.Linear",
+          "FilterMode.Linear"
+        ]
+      },
+      {
+        "slot": 4,
+        "address": [
+          "AddressMode.ClampEdge",
+          "AddressMode.ClampEdge",
+          "AddressMode.ClampEdge"
+        ],
+        "filter": [
+          "FilterMode.Linear",
+          "FilterMode.Linear",
+          "FilterMode.Point"
+        ]
+      }
+    ],
+    "constantBuffers": [
+      {
+        "slot": 0,
+        "resource": "ResourceId::405",
+        "offset": 64512,
+        "file": "cb0.bin",
+        "bytes": 1536,
+        "sha256": "89e555032b7ff5fef4ea1889d07984f16f5cb631167a2a6baaa9196b87dc72f9",
+        "selectedRows": {
+          "6": [
+            0.004926745314151049,
+            -0.059694841504096985,
+            -0.9982044696807861,
+            0.0
+          ],
+          "7": [
+            0.26604312658309937,
+            2.262058973312378,
+            -24.905324935913086,
+            1.0
+          ],
+          "44": [
+            0.26604312658309937,
+            2.262059211730957,
+            -24.905324935913086,
+            0.0
+          ]
+        }
+      },
+      {
+        "slot": 1,
+        "resource": "ResourceId::405",
+        "offset": 66048,
+        "file": "cb1.bin",
+        "bytes": 3328,
+        "sha256": "c588caf1f324c256cf22285ccb1dc0317f6373219e0af467189648d550114007",
+        "selectedRows": {
+          "135": [
+            0.25198274850845337,
+            1.0499153137207031,
+            -22.056467056274414,
+            -1.0
+          ],
+          "138": [
+            0.0021635701414197683,
+            0.010509317740797997,
+            -0.0008655044948682189,
+            0.03591318801045418
+          ],
+          "139": [
+            -0.002457847585901618,
+            0.009978373534977436,
+            -0.00026018379139713943,
+            0.029423058032989502
+          ],
+          "140": [
+            -0.014051021076738834,
+            0.019339708611369133,
+            0.0013843115884810686,
+            0.055289097130298615
+          ]
+        }
+      }
+    ],
+    "sourceSha256": "5bf129d05acb43d41ab54042f6648c3d728decb253c94d0250037f01f0b778b3",
+    "sourceBytes": 944717392,
+    "coordinateRows": {
+      "135": [
+        0.25198274850845337,
+        1.0499153137207031,
+        -22.056467056274414,
+        -1.0
+      ],
+      "136": [
+        0.0078125,
+        0.015625,
+        0.0078125,
+        0.0
+      ],
+      "137": [
+        49.0,
+        13.0,
+        52.0,
+        144.0
+      ]
+    }
+  },
+  "reference": {
+    "version": 1,
+    "scope": "Post-jitter sample positions; CPU texture sampling and composition only",
+    "cameraPosition": [
+      0.26604312658309937,
+      2.262058973312378,
+      -24.905324935913086
+    ],
+    "inverseViewZAxis": [
+      0.004926745314151049,
+      -0.059694841504096985,
+      -0.9982044696807861
+    ],
+    "referenceOrigin": [
+      0.25198274850845337,
+      1.0499153137207031,
+      -22.056467056274414
+    ],
+    "centerScales": [
+      13.0,
+      52.0,
+      144.0
+    ],
+    "reciprocalDimensions": [
+      0.0078125,
+      0.015625,
+      0.0078125
+    ],
+    "defaultCoefficients": [
+      [
+        0.0021635701414197683,
+        0.010509317740797997,
+        -0.0008655044948682189,
+        0.03591318801045418
+      ],
+      [
+        -0.002457847585901618,
+        0.009978373534977436,
+        -0.00026018379139713943,
+        0.029423058032989502
+      ],
+      [
+        -0.014051021076738834,
+        0.019339708611369133,
+        0.0013843115884810686,
+        0.055289097130298615
+      ]
+    ],
+    "privateReference": "build\\runs\\20261027-072533-reflection-trace-cost-isolation-d9ff39\\native-irradiance\\reference.json",
+    "privateReferenceSha256": "8fc042ffb313f9d0c8ea54e0cc3d086e449a52c3033729ac3ea51799758d550c",
+    "points": [
+      {
+        "name": "fine",
+        "worldPosition": [
+          0.18793505942448974,
+          1.825948253273964,
+          -9.079808950424194
+        ],
+        "layerWeights": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "volumeActive": true
+      },
+      {
+        "name": "fine-transition",
+        "worldPosition": [
+          30.18793505942449,
+          1.825948253273964,
+          -9.079808950424194
+        ],
+        "layerWeights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "volumeActive": true
+      },
+      {
+        "name": "medium",
+        "worldPosition": [
+          -0.004208007827401161,
+          4.154047071933746,
+          29.850165367126465
+        ],
+        "layerWeights": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "volumeActive": true
+      },
+      {
+        "name": "medium-transition",
+        "worldPosition": [
+          119.9957919921726,
+          4.154047071933746,
+          29.850165367126465
+        ],
+        "layerWeights": [
+          0.0,
+          0.5,
+          0.5
+        ],
+        "volumeActive": true
+      },
+      {
+        "name": "coarse",
+        "worldPosition": [
+          199.5425314232707,
+          9.645972490310669,
+          121.68497657775879
+        ],
+        "layerWeights": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "volumeActive": true
+      },
+      {
+        "name": "coarse-transition",
+        "worldPosition": [
+          479.5425314232707,
+          9.645972490310669,
+          121.68497657775879
+        ],
+        "layerWeights": [
+          0.0,
+          0.0,
+          0.5
+        ],
+        "volumeActive": true
+      },
+      {
+        "name": "default",
+        "worldPosition": [
+          499.5425314232707,
+          9.645972490310669,
+          121.68497657775879
+        ],
+        "layerWeights": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "volumeActive": false
+      }
+    ]
+  },
+  "cpuTests": {
+    "sampling": 4,
+    "composition": 24
+  },
+  "costAttribution": [
+    {
+      "name": "full",
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "imageBytes": 2685532672,
+      "timings": {
+        "shadowMs": {
+          "mean": 3.8215416000000006,
+          "p95": 4.4044112
+        },
+        "sceneMs": {
+          "mean": 50.391065600000005,
+          "p95": 52.859392
+        },
+        "postProcessMs": {
+          "mean": 0.21601279999999998,
+          "p95": 0.2305024
+        },
+        "frameMs": {
+          "mean": 54.42862,
+          "p95": 56.734337599999996
+        }
+      }
+    },
+    {
+      "name": "no-ssr",
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "imageBytes": 2685532672,
+      "timings": {
+        "shadowMs": {
+          "mean": 3.6461132,
+          "p95": 3.8679088
+        },
+        "sceneMs": {
+          "mean": 34.6312576,
+          "p95": 37.3003776
+        },
+        "postProcessMs": {
+          "mean": 0.2035072,
+          "p95": 0.2109952
+        },
+        "frameMs": {
+          "mean": 38.480878000000004,
+          "p95": 41.134744
+        }
+      }
+    },
+    {
+      "name": "no-locals",
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "imageBytes": 2685532672,
+      "timings": {
+        "shadowMs": {
+          "mean": 3.7018491999999994,
+          "p95": 3.9055104
+        },
+        "sceneMs": {
+          "mean": 42.303488,
+          "p95": 44.822220800000004
+        },
+        "postProcessMs": {
+          "mean": 0.2069248,
+          "p95": 0.2130944
+        },
+        "frameMs": {
+          "mean": 46.212261999999996,
+          "p95": 48.8410528
+        }
+      }
+    }
+  ],
+  "startupRetry": {
+    "initialMainDebugTimeoutSeconds": 600,
+    "captureWritten": true,
+    "processAccepted": false,
+    "retry": "Image/lifetime regression without optional pipeline statistics; 900-second tool deadline"
+  },
+  "limits": [
+    "Post-jitter positions only; native normal offset, temporal jitter and final directional gain are not validated",
+    "CPU sampling/composition is not a native GPU component oracle",
+    "NR4 runtime asset and joint scene acceptance remain pending",
+    "NR7 AA5, AA6 and 60-FPS budget remain pending"
+  ]
+}

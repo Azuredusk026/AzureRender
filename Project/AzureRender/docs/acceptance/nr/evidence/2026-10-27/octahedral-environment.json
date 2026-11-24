@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "phase": "NR5-R7",
+  "status": "resource-and-sampling-verified",
+  "run": "build/runs/20261027-145604-native-probe-array-sampling-52a968",
+  "source": {
+    "CMakeLists.txt": "c8fab545fcd3c44582587c841534073c48825a49dac68d6a1ec9680144051976",
+    "src/render/OctahedralEnvironment.hpp": "0ca320dc79ef3a02835b16d6adfd3297fe44d9429151321853455b02a698c6eb",
+    "src/render/OctahedralEnvironmentGpu.hpp": "fca5df98571358976f36e13c11ba7d6f7a1d167026d25103426f98c2117705b2",
+    "shaders/octahedral_environment.glsl": "3046fbd0e6e6332c410c682fa3dd14155c493f37b6766ab84f14a0d1dec7ee01",
+    "shaders/octahedral_environment_test.comp": "d878355c1ccfcdcebb0fa85b383f988cbdfced6d9f3175faef6e07e056a307d2",
+    "tests/OctahedralEnvironmentTests.cpp": "7fe018dd5c8b3ebd1ae75489b477097c244b1ba9feffc4fa72696685398fb9b6",
+    "tests/OctahedralEnvironmentOwnerTests.cpp": "17547894dbaa7e785fdbc9919a7581af38259bed15c1f71349c1faa057b6781e",
+    "tests/OctahedralEnvironmentGpuTests.cpp": "9257fbcde2236de08538d949341d663fa1e03241de3770f33685118b91fc51cf",
+    "tests/support/OctahedralEnvironmentFixture.hpp": "912d3b9ced75acffe13041e6b4083a5f4d4f5609c16b124f4cbab7ee8846e95e"
+  },
+  "asset": {
+    "status": "exported",
+    "width": 576,
+    "height": 576,
+    "layers": 32,
+    "mips": 10,
+    "uvScaleOffset": [
+      0.8888888955116272,
+      0.8888888955116272,
+      0.0555555559694767,
+      0.0555555559694767
+    ],
+    "foldZeroSign": 0,
+    "sourceArraySha256": "8cf45ce1435e808bfde10c0940567944fc347dfdc11c6b6509748ce1f3d2abf9",
+    "sourceSubresourcesVerified": 320,
+    "fileBytes": 56622384,
+    "sha256": "0d9f9c9550fc9b7b33940a3ef51ed2f8745caea257d8460747433e28c2232e7c"
+  },
+  "hardware": {
+    "debug": {
+      "status": "passed",
+      "queries": 295,
+      "capturedCalibrationColorBitExact": true,
+      "maximumColorError": 0.0,
+      "maximumUvError": 5.960464477539063e-08,
+      "colorBudget": 0.0001,
+      "uvBudget": 2e-06,
+      "sourceAssetSha256": "0d9f9c9550fc9b7b33940a3ef51ed2f8745caea257d8460747433e28c2232e7c",
+      "queriesSha256": "c3d50087e30c6a86f2c5433d849806befc4e6038bb8d417925815ed49f281298",
+      "resourcesReleased": true,
+      "validationErrors": 0
+    },
+    "release": {
+      "status": "passed",
+      "queries": 295,
+      "capturedCalibrationColorBitExact": true,
+      "maximumColorError": 0.0,
+      "maximumUvError": 5.960464477539063e-08,
+      "colorBudget": 0.0001,
+      "uvBudget": 2e-06,
+      "sourceAssetSha256": "0d9f9c9550fc9b7b33940a3ef51ed2f8745caea257d8460747433e28c2232e7c",
+      "queriesSha256": "c3d50087e30c6a86f2c5433d849806befc4e6038bb8d417925815ed49f281298",
+      "resourcesReleased": true,
+      "validationErrors": 0
+    }
+  },
+  "tests": {
+    "debug": {
+      "newCTest": 4,
+      "existingEnvironmentRegression": 2,
+      "passed": true
+    },
+    "release": {
+      "newCTest": 4,
+      "existingEnvironmentRegression": 2,
+      "passed": true
+    }
+  },
+  "shaderCount": 144,
+  "shaderConfigurationsExact": true,
+  "sceneIntegrated": false,
+  "remaining": [
+    "有序探针及主场景生产消费",
+    "完整原生反射链",
+    "独立角色探针",
+    "正式 NR5–NR12 验收"
+  ]
+}

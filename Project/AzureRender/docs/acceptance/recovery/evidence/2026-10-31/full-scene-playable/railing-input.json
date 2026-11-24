@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "actions": [
+    {
+      "frame": 0,
+      "action": "focus",
+      "focused": true
+    },
+    {
+      "frame": 30,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 90,
+      "action": "key",
+      "key": 340,
+      "down": true
+    },
+    {
+      "frame": 160,
+      "action": "key",
+      "key": 340,
+      "down": false
+    },
+    {
+      "frame": 170,
+      "action": "key",
+      "key": 87,
+      "down": false
+    }
+  ]
+}

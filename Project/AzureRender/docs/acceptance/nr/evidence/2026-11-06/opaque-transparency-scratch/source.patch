@@ -1,0 +1,29 @@
+diff --git a/Project/AzureRender/CMakeLists.txt b/Project/AzureRender/CMakeLists.txt
+index a43b6da..0c5a201 100644
+--- a/Project/AzureRender/CMakeLists.txt
++++ b/Project/AzureRender/CMakeLists.txt
+@@ -1134,6 +1134,12 @@ if(BUILD_TESTING)
+     add_dependencies(AzureSurfaceResponseGpuTests AzureRenderShaders)
+     add_test(NAME AzureRender.SurfaceResponseGpu COMMAND AzureSurfaceResponseGpuTests "${SHADER_BINARY_DIR}/surface_response_test.comp.spv" "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/showcase_looks.json")
+     set_tests_properties(AzureRender.SurfaceResponseGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
++    add_executable(AzureOpaqueTransparencyScratchTests tests/OpaqueTransparencyScratchTests.cpp)
++    target_link_libraries(AzureOpaqueTransparencyScratchTests PRIVATE AzureRenderCore)
++    add_dependencies(AzureOpaqueTransparencyScratchTests AzureRenderShaders)
++    add_test(NAME AzureRender.OpaqueTransparencyScratch COMMAND AzureOpaqueTransparencyScratchTests "${SHADER_BINARY_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}")
++    set_tests_properties(AzureRender.OpaqueTransparencyScratch PROPERTIES TIMEOUT 120)
++
+     add_executable(AzureBufferBarrierBatchTests tests/BufferBarrierBatchTests.cpp)
+     target_link_libraries(AzureBufferBarrierBatchTests PRIVATE AzureRenderCore)
+     add_test(NAME AzureRender.BufferBarrierBatch COMMAND AzureBufferBarrierBatchTests)
+diff --git a/Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp b/Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp
+index 1f33e09..173e1e9 100644
+--- a/Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp
++++ b/Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp
+@@ -4502,6 +4502,7 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
+     for (const auto& instance : sceneInstances_) {
+         const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
+         const auto& transparentPrimitives = transparentPrimitivesByMesh_[instance.meshKey];
++        if (transparentPrimitives.empty()) continue;
+         const auto& pose = instancePoses_.at(instance.sourceIndex);
+         std::vector<Vector3> positions(mesh.vertices.size());
+         std::vector<bool> prepared(mesh.vertices.size(),false);

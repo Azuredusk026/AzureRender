@@ -1,21 +1,17 @@
-# Local reference renderer (not part of AzureRender)
+# Local reference inputs and tool state
 /AfterglowRender/
-
-# Local/editor state
+/.codemaker/
 **/.idea/
 **/.vs/
-**/out/
 **/__pycache__/
 Thumbs.db
 .DS_Store
 
-# Build outputs and captures are reproducible/generated
+# Build outputs and captures
 **/build/
 **/cmake-build-*/
+**/out/
 **/captures/
-/AzureRender-*-Windows-AMD64/
-/AzureRender-*-Windows-AMD64.zip
-/AzureRender-*-Windows-AMD64.tar.gz
 *.dll
 *.exe
 *.pdb
@@ -23,7 +19,7 @@ Thumbs.db
 *.suo
 *.VC.db
 
-# Never commit local credentials
+# Local credentials
 .env
 .env.*
 *.pem

@@ -1,0 +1,26 @@
+{
+  "exploration": {
+    "passed": true,
+    "singlePreservesCamera": true,
+    "doubleFramesSelection": true,
+    "moveKey": true,
+    "navigationDirections": true,
+    "focusRelease": true,
+    "viewportCloseRelease": true,
+    "flight": true,
+    "previewCameraRestore": true,
+    "sceneBytes": true
+  },
+  "inspector": {
+    "passed": true,
+    "singlePreservesCamera": true,
+    "doubleFramesSelection": true,
+    "moveKey": true,
+    "navigationDirections": true,
+    "focusRelease": true,
+    "viewportCloseRelease": true,
+    "flight": true,
+    "previewCameraRestore": true,
+    "sceneBytes": true
+  }
+}

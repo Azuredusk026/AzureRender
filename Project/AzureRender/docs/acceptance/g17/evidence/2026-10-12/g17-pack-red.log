@@ -1,0 +1,16 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 148: AzureEditor.AssetWorkflow
+1/1 Test #148: AzureEditor.AssetWorkflow ........***Failed    0.27 sec
+[1791736432295][info][editor][code=0] Opened scene: startup
+[1791736432413][info][editor][code=0] Imported asset: 导入 模型.GLTF (48 vertices)
+Cannot read asset: C:\Users\23587\AppData\Local\Temp\azure-assets-43964066500900\移动资源包\assets\imports\asset-43964142453400-1\瀵煎叆 妯″瀷.GLTF (Windows error 2)
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.28 sec
+
+The following tests FAILED:
+	148 - AzureEditor.AssetWorkflow (Failed)
+Errors while running CTest

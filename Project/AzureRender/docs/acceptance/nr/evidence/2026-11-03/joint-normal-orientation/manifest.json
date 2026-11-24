@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-scoped-joint-normal-integration",
+  "visualAcceptance": "failed-user-review",
+  "sourceCommit": "167513bade3e8a3f0af340c60a9d131227717cfe",
+  "successfulPlayerProcesses": 1,
+  "capturedFrames": 192,
+  "pythonCasesPerConfiguration": 57,
+  "strictEnvironmentRegionsPassed": false,
+  "bundles": [
+    {
+      "path": "execution.json.gz",
+      "sha256": "3c1c339f769df965e4f8d643336b1c325fb1ecdb78ba94aa307cac5665087479",
+      "sourceFiles": 19
+    }
+  ],
+  "directFiles": [
+    {
+      "path": "joint-normal-capture/frames/frame_000120.png",
+      "sha256": "fef13fd5163dcb2ccb1b6c34c18f637f9740cafc48cf19c74d3696a601a6d337",
+      "bytes": 5692065
+    },
+    {
+      "path": "media/joint-normal-orientation.mp4",
+      "sha256": "a77859da077285d108d71290af5a711292b4320b0a72b63a1faec2b7d6fddd33",
+      "bytes": 4818526
+    },
+    {
+      "path": "media/joint-normal-orientation.json",
+      "sha256": "3ab02d3619654830ffe8ea25576c537de4d1a947664b1e8a5ea3f6846ed5e719",
+      "bytes": 1347
+    }
+  ],
+  "relatedManifest": {
+    "path": "docs/acceptance/nr/evidence/2026-11-03/native-normal-orientation/manifest.json",
+    "sha256": "08749fb7fce1cee8c2b65fe0a017c0fdb2045d06442c827cf184f187307fe885"
+  },
+  "retainedProject": "build/runs/20261103-130954-native-material-composition-221ac2/joint-current/joint-normal.azureproject"
+}

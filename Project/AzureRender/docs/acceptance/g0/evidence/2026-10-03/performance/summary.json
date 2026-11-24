@@ -1,0 +1,197 @@
+{
+  "status": "passed",
+  "mode": "performance",
+  "thermalStartMaximumC": 55,
+  "runs": [
+    {
+      "report": {
+        "format": "Afterglow GPU timing v1",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "asset": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\test_model.gltf",
+        "width": 1280,
+        "height": 720,
+        "samples": 300,
+        "timestampPeriodNanoseconds": 1.0,
+        "shadowAverageMs": 0.008417,
+        "mainSceneAverageMs": 18.261473,
+        "internalOutlineAverageMs": 0.036116,
+        "totalAverageMs": 18.306007,
+        "totalMinMs": 15.791264,
+        "totalMaxMs": 22.1888,
+        "totalP50Ms": 18.333232,
+        "totalP95Ms": 20.185098,
+        "totalP99Ms": 21.760734,
+        "cpuFrame": {
+          "attempts": 300,
+          "completedFrames": 300,
+          "frameSlotWaitMilliseconds": 5192.1089,
+          "acquireMilliseconds": 47.933,
+          "submitMilliseconds": 16.669,
+          "presentMilliseconds": 14.3508,
+          "cpuFrameMilliseconds": 5444.1603
+        },
+        "submission": {
+          "frames": 300,
+          "instances": 0,
+          "indirectDrawCalls": 0,
+          "visibleInstances": 0,
+          "visibleRatio": 0.0,
+          "recordingMilliseconds": 71.9099,
+          "graphPreparationMilliseconds": 40.0601,
+          "workerWaitMilliseconds": 0.3653,
+          "graphExecutionMilliseconds": 31.451,
+          "workerRecordedPasses": 0,
+          "workerRecordedChunks": 0,
+          "drawCalls": 900,
+          "descriptorSetBinds": 900,
+          "pipelineBinds": 900,
+          "pushConstantUpdates": 0,
+          "drawCallsPerFrame": 3.0,
+          "descriptorSetBindsPerFrame": 3.0
+        },
+        "allocator": {
+          "bufferAllocations": 6,
+          "imageAllocations": 19,
+          "liveBuffers": 5,
+          "liveImages": 19,
+          "bufferBytes": 2097552,
+          "imageBytes": 92348928
+        },
+        "renderPath": "traditional"
+      },
+      "processSecondsIncludingStartup": 6.17200000000048,
+      "startTemperatureC": 50,
+      "cooldownSeconds": 0.046000000000276486
+    },
+    {
+      "report": {
+        "format": "Afterglow GPU timing v1",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "asset": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\test_model.gltf",
+        "width": 1280,
+        "height": 720,
+        "samples": 300,
+        "timestampPeriodNanoseconds": 1.0,
+        "shadowAverageMs": 0.008744,
+        "mainSceneAverageMs": 18.898753,
+        "internalOutlineAverageMs": 0.037571,
+        "totalAverageMs": 18.945068,
+        "totalMinMs": 15.319616,
+        "totalMaxMs": 23.826976,
+        "totalP50Ms": 18.674,
+        "totalP95Ms": 21.816493,
+        "totalP99Ms": 22.261766,
+        "cpuFrame": {
+          "attempts": 300,
+          "completedFrames": 300,
+          "frameSlotWaitMilliseconds": 5348.8524,
+          "acquireMilliseconds": 78.7955,
+          "submitMilliseconds": 16.6728,
+          "presentMilliseconds": 14.9459,
+          "cpuFrameMilliseconds": 5633.9832
+        },
+        "submission": {
+          "frames": 300,
+          "instances": 0,
+          "indirectDrawCalls": 0,
+          "visibleInstances": 0,
+          "visibleRatio": 0.0,
+          "recordingMilliseconds": 72.1825,
+          "graphPreparationMilliseconds": 40.5003,
+          "workerWaitMilliseconds": 0.3321,
+          "graphExecutionMilliseconds": 31.3277,
+          "workerRecordedPasses": 0,
+          "workerRecordedChunks": 0,
+          "drawCalls": 900,
+          "descriptorSetBinds": 900,
+          "pipelineBinds": 900,
+          "pushConstantUpdates": 0,
+          "drawCallsPerFrame": 3.0,
+          "descriptorSetBindsPerFrame": 3.0
+        },
+        "allocator": {
+          "bufferAllocations": 6,
+          "imageAllocations": 19,
+          "liveBuffers": 5,
+          "liveImages": 19,
+          "bufferBytes": 2097552,
+          "imageBytes": 92348928
+        },
+        "renderPath": "traditional"
+      },
+      "processSecondsIncludingStartup": 6.375,
+      "startTemperatureC": 55,
+      "cooldownSeconds": 5.063000000000102
+    },
+    {
+      "report": {
+        "format": "Afterglow GPU timing v1",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "asset": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\test_model.gltf",
+        "width": 1280,
+        "height": 720,
+        "samples": 300,
+        "timestampPeriodNanoseconds": 1.0,
+        "shadowAverageMs": 0.008975,
+        "mainSceneAverageMs": 18.747989,
+        "internalOutlineAverageMs": 0.037646,
+        "totalAverageMs": 18.79461,
+        "totalMinMs": 16.110752,
+        "totalMaxMs": 23.216256,
+        "totalP50Ms": 18.781472,
+        "totalP95Ms": 21.495008,
+        "totalP99Ms": 22.339679,
+        "cpuFrame": {
+          "attempts": 300,
+          "completedFrames": 300,
+          "frameSlotWaitMilliseconds": 5276.6202,
+          "acquireMilliseconds": 94.4023,
+          "submitMilliseconds": 16.9096,
+          "presentMilliseconds": 15.0718,
+          "cpuFrameMilliseconds": 5591.9707
+        },
+        "submission": {
+          "frames": 300,
+          "instances": 0,
+          "indirectDrawCalls": 0,
+          "visibleInstances": 0,
+          "visibleRatio": 0.0,
+          "recordingMilliseconds": 73.5442,
+          "graphPreparationMilliseconds": 41.1647,
+          "workerWaitMilliseconds": 0.2943,
+          "graphExecutionMilliseconds": 32.058,
+          "workerRecordedPasses": 0,
+          "workerRecordedChunks": 0,
+          "drawCalls": 900,
+          "descriptorSetBinds": 900,
+          "pipelineBinds": 900,
+          "pushConstantUpdates": 0,
+          "drawCallsPerFrame": 3.0,
+          "descriptorSetBindsPerFrame": 3.0
+        },
+        "allocator": {
+          "bufferAllocations": 6,
+          "imageAllocations": 19,
+          "liveBuffers": 5,
+          "liveImages": 19,
+          "bufferBytes": 2097552,
+          "imageBytes": 92348928
+        },
+        "renderPath": "traditional"
+      },
+      "processSecondsIncludingStartup": 6.32799999999952,
+      "startTemperatureC": 55,
+      "cooldownSeconds": 10.109000000000378
+    }
+  ],
+  "budget": {
+    "averagesMs": [
+      18.306007,
+      18.945068,
+      18.79461
+    ],
+    "medianMs": 18.79461,
+    "limitExclusiveMs": 20.0,
+    "passed": true
+  }
+}

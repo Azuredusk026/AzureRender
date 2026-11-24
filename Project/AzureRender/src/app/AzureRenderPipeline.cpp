@@ -1,5 +1,6 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
+#include "rhi/RenderPassDescription.hpp"
 
 #include <array>
 #include <cstddef>
@@ -54,6 +55,7 @@ void AzureRenderApp::createRenderPass() {
     const std::array colorReferences = {
         colorReference,
         normalReference,
+        VkAttachmentReference{3,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL},
     };
 
     VkSubpassDescription subpass{};
@@ -89,10 +91,12 @@ void AzureRenderApp::createRenderPass() {
         | VK_ACCESS_COLOR_ATTACHMENT_READ_BIT
         | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
 
+    auto displayMaskAttachment=colorAttachment;displayMaskAttachment.format=VK_FORMAT_R8_UNORM;
     const std::array attachments = {
         colorAttachment,
         depthAttachment,
         normalAttachment,
+        displayMaskAttachment,
     };
     VkRenderPassCreateInfo createInfo{VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO};
     createInfo.attachmentCount = static_cast<std::uint32_t>(attachments.size());
@@ -103,6 +107,9 @@ void AzureRenderApp::createRenderPass() {
         static_cast<std::uint32_t>(dependencies.size());
     createInfo.pDependencies = dependencies.data();
 
+    scenePassDescription_.reset();
+    try{scenePassDescription_=std::make_shared<const azurerender::rhi::RenderPassDesc>(azurerender::rhi::describeRenderPass(createInfo));}
+    catch(const std::invalid_argument&){/* Optional split metadata is unavailable. */}
     vkCheck(vkCreateRenderPass(device_, &createInfo, nullptr, &renderPass_), "vkCreateRenderPass");
 }
 
@@ -223,11 +230,13 @@ void AzureRenderApp::createEditorUiRenderPass() {
 
 
 void AzureRenderApp::createGraphicsPipeline() {
-    const std::string shaderDirectory = resourceLocator_.shaderDirectory().string();
+    createSpatialAntiAliasingResources();
+    const std::string shaderDirectory = resourceLocator_.shaderDirectory().u8string();
     const auto innerOutlineVertexCode =
         readBinaryFile(shaderDirectory + "/inner_outline.vert.spv");
     const auto innerOutlineFragmentCode =
-        readBinaryFile(shaderDirectory + "/inner_outline.frag.spv");
+        readBinaryFile(shaderDirectory + (runOptions_.qaShowcasePresentation
+            ? "/inner_outline_showcase.frag.spv" : "/inner_outline.frag.spv"));
     const auto hudVertexCode =
         readBinaryFile(shaderDirectory + "/hud.vert.spv");
     const auto hudFragmentCode =
@@ -357,8 +366,10 @@ void AzureRenderApp::createGraphicsPipeline() {
         pipelineInfo.pColorBlendState = &colorBlending;
         pipelineInfo.pDynamicState = &dynamicState;
         pipelineInfo.layout = postProcessPipelineLayout_;
-        pipelineInfo.renderPass = postProcessRenderPass_;
+        pipelineInfo.renderPass = runOptions_.qaShowcasePresentation
+            ? postProcessRenderPass_ : spatialAntiAliasing_.at(0)->inputPass();
         pipelineInfo.subpass = 0;
+        pipelineInfo.flags=pipelineInspection_?pipelineInspection_->creationFlags():0;
         vkCheck(
             vkCreateGraphicsPipelines(
                 device_,
@@ -368,6 +379,7 @@ void AzureRenderApp::createGraphicsPipeline() {
                 nullptr,
                 &innerOutlinePipeline_),
             "vkCreateGraphicsPipelines(inner outline)");
+        if (pipelineInspection_) pipelineInspection_->inspect(innerOutlinePipeline_,pipelineInfo.flags);
 
         VkVertexInputBindingDescription hudBinding{};
         hudBinding.binding = 0;
@@ -400,6 +412,7 @@ void AzureRenderApp::createGraphicsPipeline() {
         pipelineInfo.pStages = hudShaderStages.data();
         pipelineInfo.pVertexInputState = &hudVertexInput;
         pipelineInfo.layout = hudPipelineLayout_;
+        pipelineInfo.renderPass = postProcessRenderPass_;
         vkCheck(
             vkCreateGraphicsPipelines(
                 device_,
@@ -409,6 +422,7 @@ void AzureRenderApp::createGraphicsPipeline() {
                 nullptr,
                 &hudPipeline_),
             "vkCreateGraphicsPipelines(HUD)");
+        if (pipelineInspection_) pipelineInspection_->inspect(hudPipeline_,pipelineInfo.flags);
     } catch (...) {
         vkDestroyShaderModule(device_, hudFragmentModule, nullptr);
         vkDestroyShaderModule(device_, hudVertexModule, nullptr);
@@ -441,13 +455,14 @@ void AzureRenderApp::createFramebuffers() {
             sceneColorImageViews_[index],
             depthImageViews_[index],
             normalImageViews_[index],
+            displayMaskImageViews_[index],
         };
         VkFramebufferCreateInfo createInfo{VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO};
         createInfo.renderPass = renderPass_;
         createInfo.attachmentCount = static_cast<std::uint32_t>(attachments.size());
         createInfo.pAttachments = attachments.data();
-        createInfo.width = renderExtent_.width;
-        createInfo.height = renderExtent_.height;
+        createInfo.width = sceneRenderExtent_.width;
+        createInfo.height = sceneRenderExtent_.height;
         createInfo.layers = 1;
         vkCheck(
             vkCreateFramebuffer(device_, &createInfo, nullptr, &swapchainFramebuffers_[index]),
@@ -456,6 +471,7 @@ void AzureRenderApp::createFramebuffers() {
 }
 
 void AzureRenderApp::createPostProcessFramebuffers() {
+    createSpatialAntiAliasingResources();
     const std::vector<VkImageView>& targetViews = editorUiEnabled_
         ? editorViewportImageViews_
         : swapchainImageViews_;
@@ -479,6 +495,14 @@ void AzureRenderApp::createPostProcessFramebuffers() {
                 &postProcessFramebuffers_[index]),
             "vkCreateFramebuffer(post process)");
     }
+}
+
+void AzureRenderApp::createSpatialAntiAliasingResources(){
+    if(runOptions_.qaShowcasePresentation || !spatialAntiAliasing_.empty())return;
+    const auto shaders=resourceLocator_.shaderDirectory().u8string();
+    for(std::size_t index=0;index<swapchainImages_.size();++index)
+        spatialAntiAliasing_.push_back(std::make_unique<azurerender::SpatialAntiAliasing>(
+            *rhi_,sceneRenderExtent_,shaders,postProcessRenderPass_));
 }
 
 void AzureRenderApp::createEditorUiFramebuffers() {

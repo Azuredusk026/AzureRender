@@ -1,0 +1,646 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnostic-complete-comparison-thermal-condition-failed",
+  "sourceBase": "9f04eb8",
+  "programPreparation": {
+    "status": "private-programs-ready",
+    "sourceBase": "9f04eb8",
+    "onlyVariable": "Four common fragment programs return full visibility from sampleCascadeShadow; dependent receiver calculations may become dead code; shadow-map generation and other programs remain",
+    "production535Unchanged": true,
+    "sourceUnchanged": true,
+    "seconds": 4.594000000040978,
+    "programs": [
+      {
+        "name": "mesh_object_bindless_clipmap_field.frag.spv",
+        "productionSha256": "59f0d8eef463bdd103cc163d9736698113ec6a4964198fd4eac05e8b65057ffe",
+        "reconstructed": {
+          "sha256": "59f0d8eef463bdd103cc163d9736698113ec6a4964198fd4eac05e8b65057ffe",
+          "bytes": 428120,
+          "compileCommand": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "-ID:\\Projects\\FYP\\Project\\AzureRender\\shaders",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_BINDLESS=1",
+            "-MD",
+            "-MF",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\reconstructed\\mesh_object_bindless_clipmap_field.frag.spv.d",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\shaders\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\reconstructed\\mesh_object_bindless_clipmap_field.frag.spv"
+          ],
+          "validationCommand": [
+            "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-val.exe",
+            "--target-env",
+            "vulkan1.0",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\reconstructed\\mesh_object_bindless_clipmap_field.frag.spv"
+          ],
+          "spirvValidationPassed": true
+        },
+        "control": {
+          "sha256": "f57cff508d2317b247a337b73953452b882a31e821adffe506d475b00049580a",
+          "bytes": 418548,
+          "compileCommand": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "-ID:\\Projects\\FYP\\Project\\AzureRender\\shaders",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_BINDLESS=1",
+            "-MD",
+            "-MF",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b\\shaders\\mesh_object_bindless_clipmap_field.frag.spv.d",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\source\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b\\shaders\\mesh_object_bindless_clipmap_field.frag.spv"
+          ],
+          "validationCommand": [
+            "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-val.exe",
+            "--target-env",
+            "vulkan1.0",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b\\shaders\\mesh_object_bindless_clipmap_field.frag.spv"
+          ],
+          "spirvValidationPassed": true
+        }
+      },
+      {
+        "name": "character_snapshot_object_bindless_clipmap_field.frag.spv",
+        "productionSha256": "8e407242e7bd65db0af16996e8993da70e7ed79165ce148ea16315f5979b8472",
+        "reconstructed": {
+          "sha256": "8e407242e7bd65db0af16996e8993da70e7ed79165ce148ea16315f5979b8472",
+          "bytes": 380828,
+          "compileCommand": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "-ID:\\Projects\\FYP\\Project\\AzureRender\\shaders",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_BINDLESS=1",
+            "-DAZURE_OPAQUE_SNAPSHOT=1",
+            "-MD",
+            "-MF",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\reconstructed\\character_snapshot_object_bindless_clipmap_field.frag.spv.d",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\shaders\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\reconstructed\\character_snapshot_object_bindless_clipmap_field.frag.spv"
+          ],
+          "validationCommand": [
+            "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-val.exe",
+            "--target-env",
+            "vulkan1.0",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\reconstructed\\character_snapshot_object_bindless_clipmap_field.frag.spv"
+          ],
+          "spirvValidationPassed": true
+        },
+        "control": {
+          "sha256": "8ab621b9090593a2dd769fe3fe2154eefddf47ef038297e2265e9285ab39fa45",
+          "bytes": 371256,
+          "compileCommand": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "-ID:\\Projects\\FYP\\Project\\AzureRender\\shaders",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_BINDLESS=1",
+            "-DAZURE_OPAQUE_SNAPSHOT=1",
+            "-MD",
+            "-MF",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b\\shaders\\character_snapshot_object_bindless_clipmap_field.frag.spv.d",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\source\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b\\shaders\\character_snapshot_object_bindless_clipmap_field.frag.spv"
+          ],
+          "validationCommand": [
+            "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-val.exe",
+            "--target-env",
+            "vulkan1.0",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b\\shaders\\character_snapshot_object_bindless_clipmap_field.frag.spv"
+          ],
+          "spirvValidationPassed": true
+        }
+      },
+      {
+        "name": "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+        "productionSha256": "60c24954cb4a3a2184a124eb37b082febf197ed4ab56d55802cdfa48eeaaa246",
+        "reconstructed": {
+          "sha256": "60c24954cb4a3a2184a124eb37b082febf197ed4ab56d55802cdfa48eeaaa246",
+          "bytes": 441156,
+          "compileCommand": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "-ID:\\Projects\\FYP\\Project\\AzureRender\\shaders",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_BINDLESS=1",
+            "-MD",
+            "-MF",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\reconstructed\\mesh_object_bindless_clipmap_field_lighting.frag.spv.d",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\shaders\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\reconstructed\\mesh_object_bindless_clipmap_field_lighting.frag.spv"
+          ],
+          "validationCommand": [
+            "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-val.exe",
+            "--target-env",
+            "vulkan1.0",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\reconstructed\\mesh_object_bindless_clipmap_field_lighting.frag.spv"
+          ],
+          "spirvValidationPassed": true
+        },
+        "control": {
+          "sha256": "e8774c431b2c2ec8c72dc572bdbaf598a9223285a22c432bb8003c03fe3479e4",
+          "bytes": 431584,
+          "compileCommand": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "-ID:\\Projects\\FYP\\Project\\AzureRender\\shaders",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_BINDLESS=1",
+            "-MD",
+            "-MF",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b\\shaders\\mesh_object_bindless_clipmap_field_lighting.frag.spv.d",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\source\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b\\shaders\\mesh_object_bindless_clipmap_field_lighting.frag.spv"
+          ],
+          "validationCommand": [
+            "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-val.exe",
+            "--target-env",
+            "vulkan1.0",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b\\shaders\\mesh_object_bindless_clipmap_field_lighting.frag.spv"
+          ],
+          "spirvValidationPassed": true
+        }
+      },
+      {
+        "name": "character_snapshot_object_bindless_clipmap_field_lighting.frag.spv",
+        "productionSha256": "7228f6ce6a15255d100fecab554cf098c4d809c9b8b087371afea62a4b545109",
+        "reconstructed": {
+          "sha256": "7228f6ce6a15255d100fecab554cf098c4d809c9b8b087371afea62a4b545109",
+          "bytes": 393772,
+          "compileCommand": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "-ID:\\Projects\\FYP\\Project\\AzureRender\\shaders",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_BINDLESS=1",
+            "-DAZURE_OPAQUE_SNAPSHOT=1",
+            "-MD",
+            "-MF",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\reconstructed\\character_snapshot_object_bindless_clipmap_field_lighting.frag.spv.d",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\shaders\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\reconstructed\\character_snapshot_object_bindless_clipmap_field_lighting.frag.spv"
+          ],
+          "validationCommand": [
+            "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-val.exe",
+            "--target-env",
+            "vulkan1.0",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\reconstructed\\character_snapshot_object_bindless_clipmap_field_lighting.frag.spv"
+          ],
+          "spirvValidationPassed": true
+        },
+        "control": {
+          "sha256": "028335addc79ad3893d4fb9047fc4dbea65da4e1648c51ada0fb6303d05cd1af",
+          "bytes": 384200,
+          "compileCommand": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "-ID:\\Projects\\FYP\\Project\\AzureRender\\shaders",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_BINDLESS=1",
+            "-DAZURE_OPAQUE_SNAPSHOT=1",
+            "-MD",
+            "-MF",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b\\shaders\\character_snapshot_object_bindless_clipmap_field_lighting.frag.spv.d",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\source\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b\\shaders\\character_snapshot_object_bindless_clipmap_field_lighting.frag.spv"
+          ],
+          "validationCommand": [
+            "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-val.exe",
+            "--target-env",
+            "vulkan1.0",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b\\shaders\\character_snapshot_object_bindless_clipmap_field_lighting.frag.spv"
+          ],
+          "spirvValidationPassed": true
+        }
+      }
+    ],
+    "allPrivateAByteIdentical": true,
+    "changedPrivateBPrograms": [
+      "character_snapshot_object_bindless_clipmap_field.frag.spv",
+      "character_snapshot_object_bindless_clipmap_field_lighting.frag.spv",
+      "mesh_object_bindless_clipmap_field.frag.spv",
+      "mesh_object_bindless_clipmap_field_lighting.frag.spv"
+    ]
+  },
+  "nativeAba": {
+    "status": "measured-comparison-conditions-failed",
+    "sourceBase": "9f04eb8",
+    "scope": "Private420-frame native receiver-path A/B/A diagnostic, not formal1800sample acceptance or a production quality candidate",
+    "baselineDriftFraction": 0.02101603439952139,
+    "baselineDriftLimit": 0.05,
+    "baselineMeanFrameMs": 34.96106373333333,
+    "controlMeanFrameMs": 25.1811656,
+    "differenceMs": 9.779898133333333,
+    "differenceFraction": 0.27973685834990114,
+    "seconds": 428.1570000000065,
+    "rows": [
+      {
+        "status": "measured",
+        "sourceBase": "9f04eb8",
+        "visualAcceptance": "failed-user-review",
+        "seconds": 113.46899999998277,
+        "warmup": 300,
+        "samples": 120,
+        "gpu": {
+          "shadowMs": {
+            "mean": 5.134294933333333,
+            "p95": 5.280472,
+            "p99": 5.3653759999999995
+          },
+          "sceneMs": {
+            "mean": 29.912004266666667,
+            "p95": 31.0675456,
+            "p99": 31.47241472
+          },
+          "postProcessMs": {
+            "mean": 0.2860373333333333,
+            "p95": 0.2970112,
+            "p99": 0.30500864
+          },
+          "frameMs": {
+            "mean": 35.33233653333333,
+            "p95": 36.619571199999996,
+            "p99": 37.0302736
+          }
+        },
+        "cpu": {
+          "mean": 22.293787500000004,
+          "p95": 25.10138000000022,
+          "p99": 30.87929100000007
+        },
+        "wait": {
+          "mean": 12.87801833333333,
+          "p95": 15.305549999999311,
+          "p99": 15.964834999999866
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "framePacing": {
+          "maximumRate": 60,
+          "presentMode": "FIFO",
+          "vsync": true,
+          "waitFrames": 0,
+          "waitMilliseconds": 0.0
+        },
+        "allocator": {
+          "bufferAllocations": 1997,
+          "imageAllocations": 440,
+          "liveBuffers": 834,
+          "liveImages": 440,
+          "bufferBytes": 2985576984,
+          "imageBytes": 2779192832,
+          "liveBufferBytes": 415610856,
+          "liveImageBytes": 2779192832,
+          "deviceLocalPeakBytes": 3291255520
+        },
+        "peakWorkingSetBytes": 7402852352,
+        "environmentFailures": [
+          "run observation 19: driver relative thermal headroom is insufficient",
+          "run observation 20: software thermal slowdown is active"
+        ],
+        "zeroAllocator": true,
+        "validationClean": true,
+        "allMountedProjectBytesUnchanged": true,
+        "originalLimitsNumericallyMet": false,
+        "powerProfileStable": true,
+        "environmentPassed": false,
+        "diagnosticOnly": true,
+        "privateResourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-a",
+        "privateShaderFilesUnchanged": true
+      },
+      {
+        "status": "measured",
+        "sourceBase": "9f04eb8",
+        "visualAcceptance": "failed-user-review",
+        "seconds": 140.73399999999674,
+        "warmup": 300,
+        "samples": 120,
+        "gpu": {
+          "shadowMs": {
+            "mean": 5.0744648,
+            "p95": 5.175928,
+            "p99": 5.22972096
+          },
+          "sceneMs": {
+            "mean": 19.823726933333333,
+            "p95": 20.2492416,
+            "p99": 20.34871296
+          },
+          "postProcessMs": {
+            "mean": 0.2829738666666667,
+            "p95": 0.28984319999999997,
+            "p99": 0.292864
+          },
+          "frameMs": {
+            "mean": 25.1811656,
+            "p95": 25.6965264,
+            "p99": 25.79888352
+          }
+        },
+        "cpu": {
+          "mean": 21.888415,
+          "p95": 23.504460000000513,
+          "p99": 35.43104900000015
+        },
+        "wait": {
+          "mean": 3.449176666666667,
+          "p95": 4.89394999999962,
+          "p99": 5.145428999999995
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "framePacing": {
+          "maximumRate": 60,
+          "presentMode": "FIFO",
+          "vsync": true,
+          "waitFrames": 0,
+          "waitMilliseconds": 0.0
+        },
+        "allocator": {
+          "bufferAllocations": 1997,
+          "imageAllocations": 440,
+          "liveBuffers": 834,
+          "liveImages": 440,
+          "bufferBytes": 2985576984,
+          "imageBytes": 2779192832,
+          "liveBufferBytes": 415610856,
+          "liveImageBytes": 2779192832,
+          "deviceLocalPeakBytes": 3291255520
+        },
+        "peakWorkingSetBytes": 7404883968,
+        "environmentFailures": [],
+        "zeroAllocator": true,
+        "validationClean": true,
+        "allMountedProjectBytesUnchanged": true,
+        "originalLimitsNumericallyMet": false,
+        "powerProfileStable": true,
+        "environmentPassed": true,
+        "diagnosticOnly": true,
+        "privateResourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-b",
+        "privateShaderFilesUnchanged": true
+      },
+      {
+        "status": "measured",
+        "sourceBase": "9f04eb8",
+        "visualAcceptance": "failed-user-review",
+        "seconds": 110.35899999999674,
+        "warmup": 300,
+        "samples": 120,
+        "gpu": {
+          "shadowMs": {
+            "mean": 5.110221866666667,
+            "p95": 5.2817744,
+            "p99": 5.3350288
+          },
+          "sceneMs": {
+            "mean": 29.1833856,
+            "p95": 29.9887104,
+            "p99": 30.91497984
+          },
+          "postProcessMs": {
+            "mean": 0.2961834666666667,
+            "p95": 0.3062784,
+            "p99": 0.31110144
+          },
+          "frameMs": {
+            "mean": 34.58979093333333,
+            "p95": 35.4818848,
+            "p99": 36.48856544
+          }
+        },
+        "cpu": {
+          "mean": 22.410456666666718,
+          "p95": 28.942850000000593,
+          "p99": 33.89520600000122
+        },
+        "wait": {
+          "mean": 12.096553333333281,
+          "p95": 14.997364999999537,
+          "p99": 15.654471000000886
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "framePacing": {
+          "maximumRate": 60,
+          "presentMode": "FIFO",
+          "vsync": true,
+          "waitFrames": 0,
+          "waitMilliseconds": 0.0
+        },
+        "allocator": {
+          "bufferAllocations": 1997,
+          "imageAllocations": 440,
+          "liveBuffers": 834,
+          "liveImages": 440,
+          "bufferBytes": 2985576984,
+          "imageBytes": 2779192832,
+          "liveBufferBytes": 415610856,
+          "liveImageBytes": 2779192832,
+          "deviceLocalPeakBytes": 3291255520
+        },
+        "peakWorkingSetBytes": 7404625920,
+        "environmentFailures": [
+          "run observation 19: software thermal slowdown is active"
+        ],
+        "zeroAllocator": true,
+        "validationClean": true,
+        "allMountedProjectBytesUnchanged": true,
+        "originalLimitsNumericallyMet": false,
+        "powerProfileStable": true,
+        "environmentPassed": false,
+        "diagnosticOnly": true,
+        "privateResourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-receiver-native-control\\resource-a",
+        "privateShaderFilesUnchanged": true
+      }
+    ]
+  },
+  "imageConsumptionProof": {
+    "status": "passed",
+    "sourceBase": "9f04eb8",
+    "executableSha256": "1cae1fe3b619667dd989ecf450c495946c898cd426c73733c64c1c3e2952a857",
+    "exitCode": 0,
+    "seconds": 101.43800000002375,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "a982a7e9bbfbf08387f544f668d7ffc7cc87a18e79e3f8ec3a0792709b4e08ba",
+        "frozen": {
+          "identical": false,
+          "changedPixels": 2800424,
+          "maxByteDifference": 208
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 2800424,
+          "maxByteDifference": 208
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "415d7a7b5179180db479d7af27d6dce80479d395c4c93a1d66e9de0a18025184",
+        "frozen": {
+          "identical": false,
+          "changedPixels": 2800897,
+          "maxByteDifference": 208
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 2800897,
+          "maxByteDifference": 208
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "502f040fb7eadf0258f3c1e64b56778a7b4aa1d02a4a7446cecd1a84b698286f",
+        "frozen": {
+          "identical": false,
+          "changedPixels": 2800938,
+          "maxByteDifference": 208
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 2800938,
+          "maxByteDifference": 208
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "f380c6e8f7d08921d0ebc8a8ecfe1a130b7d10686dba3a66dd4b6bade0f96c94",
+        "frozen": {
+          "identical": false,
+          "changedPixels": 2800826,
+          "maxByteDifference": 208
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 2800839,
+          "maxByteDifference": 208
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Private shadow-receiver-disabled control; expected visible difference confirms control consumption, not a production visual candidate"
+  },
+  "benefitQualified": false,
+  "productionAdoption": false,
+  "onlyVariable": "Four common fragment receiver functions return full visibility; downstream dependent work can be eliminated. Shadow-map generation and other shader programs remain",
+  "fullNativeBudgetStatus": "CPU8ms/GPU16.6ms/thermal thresholds unchanged and failed at previous2100-frame baseline",
+  "imageScope": "Private diagnostic image changes expected; not a user visual acceptance result",
+  "archiveSha256": "68e4483dfba122c5d229fdc0ac475869c28274ad3db1a83be8e779e548cf5a8f",
+  "archiveMembers": {
+    "a-after-driver.json": "73dba38bdf6c5af40ba8ff9dba0ed3917d97f3e24dff9cc08591bd645211ff5d",
+    "a-after-driver.log": "5c54fa7d8a6c2e1acbf9a4f9b9c60c8c1b8877e48af587acf8f9fc6b6e902482",
+    "a-before-driver.json": "ed61f122b6c802fc78bb5f4f049985ce013e4ba815f02ec1b0e6fbeef79724bc",
+    "a-before-driver.log": "83a8a778cbf4856e608afbb719e28e991c6cd6d1a7b8684482cda98c4f26d601",
+    "b-control-driver.json": "135a6f68b4ba4b797e124cbcc60d042524145f6ea83aa3656635721f4aff3c11",
+    "b-control-driver.log": "dd059c3294136e6a73aa0f8fab66f66aec0b5fbd85aa9bce0427f81b1c3e6f6b",
+    "character_snapshot_object_bindless_clipmap_field.frag.spv.control.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "character_snapshot_object_bindless_clipmap_field.frag.spv.control.validate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "character_snapshot_object_bindless_clipmap_field.frag.spv.reconstructed.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "character_snapshot_object_bindless_clipmap_field.frag.spv.reconstructed.validate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "character_snapshot_object_bindless_clipmap_field_lighting.frag.spv.control.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "character_snapshot_object_bindless_clipmap_field_lighting.frag.spv.control.validate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "character_snapshot_object_bindless_clipmap_field_lighting.frag.spv.reconstructed.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "character_snapshot_object_bindless_clipmap_field_lighting.frag.spv.reconstructed.validate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field.frag.spv.control.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field.frag.spv.control.validate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field.frag.spv.reconstructed.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field.frag.spv.reconstructed.validate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field_lighting.frag.spv.control.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field_lighting.frag.spv.control.validate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field_lighting.frag.spv.reconstructed.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field_lighting.frag.spv.reconstructed.validate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "programs.json": "654a20d83ae922b4aa33d0e2f9c0a000701e24ae8d89ae758ca2039cefee3308",
+    "results.json": "baee6f0f26394823e114509d5dccb8212d6ec395e9e3d7c33f2249e40625d96a",
+    "source/mesh.frag": "7c5f38e6ee86a46960179ada47a73a662e2674fe6345a283ca0a83ee153a3ed1",
+    "a-before/environment.json": "196f69922bd1795b6fab9818d28aa5dc8396f1b1269cd8bff997a59153f9fb97",
+    "a-before/frozen-inputs.json": "8815989f82d82fc425c50b33cddab25986162fad4c6483eadd39e13139e84976",
+    "a-before/memory.json": "ea6f11f9d26d3c5ebe83a7237bc1f33d7ad1e9aca0dce5d1f5d1accfa0b221f8",
+    "a-before/results.json": "811b0f058eb0bbbf966eb332af91baf5bd35ce3ea043211187f07a15d8dd63e5",
+    "a-before/runtime.json": "875daa6a605732f195ba867da471424355f7d13d158a58d7dabfda9f82ada9d4",
+    "a-before/stderr.log": "f85759a27c754de2e488c182a0ef26e95bb38c3a49580bd526074d25c82dd891",
+    "a-before/stdout.log": "748589625b9f756c5896c69053c936290dadfd0b59748956cc30affe791a0680",
+    "a-before/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "a-before/task.json": "513fbbc58654d29121dd354da9b945fa34f4c733058e5632b6952e210b504bc4",
+    "a-before/timing.csv": "de1f7a51c55f30df5eaaee486935e31259c77c327c9eef3ac2be8cef0db167c4",
+    "a-before/timing.json": "13a890246bc7d77f3bf1ee3921a776ca51b7a4e3b25c8f8d72256a01a609ec05",
+    "a-before/captures/azureplayer.log.jsonl": "b1394f1eb3389f07beafb545ddc83e7f9f4389d8f246cfc28f3d372b6c5e62e0",
+    "a-before/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "b-control/environment.json": "34b982da385df0427867309061089ba9f8c3ac75bef816de412fb77c415878f2",
+    "b-control/frozen-inputs.json": "1247313b2246315ab2711f377f0a2beef67240e9e4d6c8d54f75e77b0d823508",
+    "b-control/memory.json": "17c2ffec32cdb2501064a47976f5d0b07bf415d234e8b632e0cb6b2fcc473ff5",
+    "b-control/results.json": "815574e070d734b6f839f9bbf0c577b1056987e08e665842e7c3d41ab503e044",
+    "b-control/runtime.json": "e593710979517439957108f0d5a5c00fe4c89913af13f6763e49ac2f3959f92b",
+    "b-control/stderr.log": "98cb3124aa8f557de5c1d0d3ef99468278e6acbbc3e0ef32ceb4eaa7bc3120a4",
+    "b-control/stdout.log": "ded5982f9955a73642b2f25849d31730417ebddb5824fbe386431ca9feecb551",
+    "b-control/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "b-control/task.json": "98c2c4e0caa7f72fc643c6c505bac6e9b5dbe967d499bdda29e74570ce5504d6",
+    "b-control/timing.csv": "45dde46e754eb4b85134967973cb161c7619d5cec24c0a7a96f369f7032d585a",
+    "b-control/timing.json": "0040fd08887406bb9a5eade54d0a518100da5e1650002d99639d067a9ea6d15b",
+    "b-control/captures/azureplayer.log.jsonl": "4227500dec7b875a863952bc8886a389f6265c9ead31f07b8c24691b8f52ffb1",
+    "b-control/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "a-after/environment.json": "c2ac74e1d8b51b2d518ddc7efd790ae8d5a3309f23cb7814ba0221251941b495",
+    "a-after/frozen-inputs.json": "8815989f82d82fc425c50b33cddab25986162fad4c6483eadd39e13139e84976",
+    "a-after/memory.json": "c121b097b0ccaba17042bcbc7b25ccf683c182b3d2fdc80ec4015d9a4b01dd7e",
+    "a-after/results.json": "80d05a3060d8086f0a80106d660524e6b49c9456ab2d4f062d5ac01f1fd1dd08",
+    "a-after/runtime.json": "1123b02decabf9dc9e9d7b344b54929b427e249e92058b2f60a2faf63f4c4bcd",
+    "a-after/stderr.log": "8966642d61309337b5b7bcafddf4aa95e5f04e3d8cf361d77ffe2afb65487bde",
+    "a-after/stdout.log": "a19667e8fc4a8bf8b548e4eabf5122e4c1bb1a14000b0189b9a991ecb79a5e45",
+    "a-after/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "a-after/task.json": "491929dbb7bd7ef257f581dac41c412e33d55ca6feb1bd67b81bb593849e7a2e",
+    "a-after/timing.csv": "0b590f38cbcd7842c25b7b40a73fc2230f1021f20e1a07c9ceb1822ebbaa3276",
+    "a-after/timing.json": "178f1c25f7c6764df273c805a8fc53c5133d8f1a37ada78b4133d5a27160042e",
+    "a-after/captures/azureplayer.log.jsonl": "62d0ac97a6c97bc549342cb87170c3077c821485d13d8db9e09992ecec9e1b5f",
+    "a-after/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "control-image/command.json": "4dba3ebaa6515e9bcabd69dace991f986bdddf8a4f46712324054bd3c92b4d9e",
+    "control-image/frozen-inputs.json": "608ed660e6585467749b4c66275d84d4e8639ce6dee716a5d6217c4ac620dbbf",
+    "control-image/results.json": "821ec05c21b6defe49e97026a42671b41ee730a6135e9a5dec1cd0f7e0134db6",
+    "control-image/runtime.json": "24c8cd450782d226f3ee84f352b6929c3e96c8779a584ab7d1fa2eddb09424a6",
+    "control-image/stderr.log": "a42cad673a744148272ee0ad4515b1b6cfc0ddc5f8c8d85264b8512a66c8488b",
+    "control-image/stdout.log": "6d80ffd2baae3f82ceb409f30c651eda94e1c046f58f62cb3dbda19623cc79cc",
+    "control-image/captures/azureplayer.log.jsonl": "a5553beaee8556f2554aee015b1456e347ee40c2f0ec0df44138a058577262e9",
+    "control-image/frame_000003.png": "f380c6e8f7d08921d0ebc8a8ecfe1a130b7d10686dba3a66dd4b6bade0f96c94",
+    "control-programs/mesh_object_bindless_clipmap_field.frag.spv": "f57cff508d2317b247a337b73953452b882a31e821adffe506d475b00049580a",
+    "control-programs/character_snapshot_object_bindless_clipmap_field.frag.spv": "8ab621b9090593a2dd769fe3fe2154eefddf47ef038297e2265e9285ab39fa45",
+    "control-programs/mesh_object_bindless_clipmap_field_lighting.frag.spv": "e8774c431b2c2ec8c72dc572bdbaf598a9223285a22c432bb8003c03fe3479e4",
+    "control-programs/character_snapshot_object_bindless_clipmap_field_lighting.frag.spv": "028335addc79ad3893d4fb9047fc4dbea65da4e1648c51ada0fb6303d05cd1af",
+    "drivers/prepare_shadow_receiver_control.py": "b522290669814eb2a90a32874424c4fe18e990a53573339f0689e473e976a0b4",
+    "drivers/measure_shadow_receiver_one.py": "87d28d2c1c7253820160c3a7cc342eaec1192835f45c8aed4486ec0ac06dabed",
+    "drivers/run_shadow_receiver_aba.py": "fbd0e8902b05b4954d4720d1cde78479f6aaf821a6d421aa98dda89a58724b14",
+    "drivers/capture_shadow_receiver_control.py": "b60365e116f38961d69dbf5c5e2ac93b863d33fa327c9c7568ddccfe4a808eeb"
+  }
+}

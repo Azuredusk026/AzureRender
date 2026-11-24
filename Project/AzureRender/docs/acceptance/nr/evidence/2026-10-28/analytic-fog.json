@@ -1,0 +1,644 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR3-F1H",
+  "status": "analytic_cpu_gpu_contract_passed_scene_binding_pending",
+  "baseCommit": "5762644",
+  "run": "build/runs/20261028-105914-native-atmosphere-height-mapping-18f8ff",
+  "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject",
+  "changedSource": [
+    "CMakeLists.txt",
+    "src/render/AerialFog.hpp",
+    "src/render/AerialFog.cpp",
+    "src/render/FogMath.hpp",
+    "src/render/FogTransport.cpp",
+    "shaders/fog_analytic.glsl",
+    "tests/AerialFogTests.cpp",
+    "tests/AerialFogGpuTests.cpp",
+    "tests/FogTransportTests.cpp",
+    "tests/shaders/aerial_fog_test.comp"
+  ],
+  "source": {
+    "CMakeLists.txt": "5621ddf707134bbc6474cb3f94947a32765c1938cc16a59921b712bffc5c1b11",
+    "src/render/AerialFog.hpp": "0ea69b7d9382e811e536664c18f7fb86dc4d470e2310e30715bd962dea44c27f",
+    "src/render/AerialFog.cpp": "77583b0d157f4e90299699630d096b0bcf90aff6c477e2522a24b0b670bd316e",
+    "src/render/FogMath.hpp": "15230cb9dd2973732326239adb5043adc281d400d2c0ea64482d354d29901200",
+    "src/render/FogTransport.cpp": "ab955b94232e982dacae3949635d9491ac1c327d72b6660efcadc4caca45529a",
+    "shaders/fog_analytic.glsl": "62962bcdc9a2f0b02e720382779cf15b20f20ca75d48dd9073bf2816643698e6",
+    "tests/AerialFogTests.cpp": "b090e845053a90e3f671d511d4353efe00d8a58d6abe717d73c812eac9575674",
+    "tests/AerialFogGpuTests.cpp": "c73e08bd8e2fe694f939226c85ec411590ca6b0bbeb8c3d068b1f009db1adaf5",
+    "tests/FogTransportTests.cpp": "00508c1abf6e440d3267e2cd6f0c41ed0251f15c632a430404761443c338d478",
+    "tests/shaders/aerial_fog_test.comp": "ad716e42f256eee496ab4623751ca30871410dfb6d6d9dc3b99cb24ee163b444",
+    "src/render/FogTransport.hpp": "737f82b1a6cfeb4cf3188ecd0198a6ca092630d18b98c5a7b945566791aea7af",
+    "shaders/fog_transport.glsl": "ba9c7267a55b9d687573e313d277686d3795ed93cd917bee4447703db748f97f"
+  },
+  "artifacts": [
+    {
+      "path": "aerial-build.log",
+      "sha256": "7986069a1ef40521bf5d02ffd7b9a98ef308fa11d2a8c1c9037a64db28a5b0ba"
+    },
+    {
+      "path": "aerial-cpu-second.log",
+      "sha256": "6f2315d9dc6d8043a08ffa0ddb508ca53a4bd11fe0092bf15abe8cb8ccb83407"
+    },
+    {
+      "path": "aerial-cpu.log",
+      "sha256": "157ddd94d32b661f432c1d4094e185f29ce2d409c1cdb217afc19db0c7f4d00f"
+    },
+    {
+      "path": "aerial-diagnostic-build.log",
+      "sha256": "a89fc3e64064514551441d753ecb751b5838e0d36c226bf9c2ed00e3fde66a89"
+    },
+    {
+      "path": "aerial-red.log",
+      "sha256": "e43450f7d9391cbe445a94d2715d2d725255eaff146049147a3da052e5e82dd5"
+    },
+    {
+      "path": "analytic-build.log",
+      "sha256": "a283be4f5cd3d8ccb4d9b01c7b266e4a24a48c06c358379c681fe396257c4f59"
+    },
+    {
+      "path": "analytic-fixture-receipt.json",
+      "sha256": "57720a504940ebd66b56e6acb3e20bf7875aed5a7f1afd4828b311156c114e9f"
+    },
+    {
+      "path": "analytic-gpu-red.log",
+      "sha256": "470d16859f391f5d96d082b2e6390e55377f097f70e1d2d054a12a6c07178fd7"
+    },
+    {
+      "path": "analytic-tests.log",
+      "sha256": "20d975b7f8245890ecaec7d76715a3b7fe8a74bca9edc258f551ee7eeed06c54"
+    },
+    {
+      "path": "application-shader-compatibility.json",
+      "sha256": "e76ff9de876edb2de839b32e9dbf682e67ce116ca908bc4d5c7dbeadfd1321be"
+    },
+    {
+      "path": "budget-invalid-fixture.txt",
+      "sha256": "5a180da4cdbe5bab866e1a94485c0a914b45ece449e67514c2cb6fae473ddcae"
+    },
+    {
+      "path": "capture_depth.py",
+      "sha256": "f05347586ccdf05fb37dcbbb9ae327008eea8f11667a9edd727047955a240a90"
+    },
+    {
+      "path": "capture_far_history.py",
+      "sha256": "51437aa11948e10d55d995a7fc9aa2c1fb203338a05695cb283b3f8f330193d2"
+    },
+    {
+      "path": "capture_far_inputs.py",
+      "sha256": "d63aece75a1aa703620b37045a3e210b23b84675c48c638779dac6b3ce132a5a"
+    },
+    {
+      "path": "capture_far_traces.py",
+      "sha256": "355b7e0bff5a8bfb5caea589c00ce350c86ba7f6cccc47a550bfc76e4d53e9ed"
+    },
+    {
+      "path": "capture_fog_traces.py",
+      "sha256": "749ef2ff221c94af8408ef1d3c2b3672bb3be5dc719c322eb8d4d4979bf7d21d"
+    },
+    {
+      "path": "capture_opaque_traces.py",
+      "sha256": "d1738f291ce49035207a2c43e6122da5afdb3e22491ca55a670e8e52c930418e"
+    },
+    {
+      "path": "check_atmosphere_math.py",
+      "sha256": "fd496c50b4e1aecbc4fbbcf2a2988564392ee51608571f564b0cbe46d061eda6"
+    },
+    {
+      "path": "check_far_math.py",
+      "sha256": "b333331bf3b2ff8cc8f642593322930d76572a270c046f59fc35fdc4a69b0b03"
+    },
+    {
+      "path": "debug-final-build.log",
+      "sha256": "5c8444bc6dc3d3fe3b67df42be863e4f6977dba0fde92a2a813fda919b1cc424"
+    },
+    {
+      "path": "debug-final-cpu.log",
+      "sha256": "3b2dac1dda9cee3ce020a18f7b114757024e28df740d224db06c91218297ae85"
+    },
+    {
+      "path": "debug-final-native-gpu.log",
+      "sha256": "67b87f5c55751ded3483bc404c78c9341e6fec238f14bd37feb719a315a4de20"
+    },
+    {
+      "path": "debug-native-analytic.log",
+      "sha256": "c2802247265c3026c8c18cdf474c828931bb22dac99ba0d76370b99caf0aabd4"
+    },
+    {
+      "path": "density-extreme-red-build.log",
+      "sha256": "24e590d60ee0165743a420a93af597a7cfd0980e0a8b0cccb60cee80fde843cd"
+    },
+    {
+      "path": "density-extreme-red.log",
+      "sha256": "6f3795c2574b703f11febd70994a9fc390ffd7cbfcbb02d954f743ff8a3c4611"
+    },
+    {
+      "path": "depth-range-analysis.json",
+      "sha256": "ba24bc3b03d7d240dd81c90b7b7196d57f13d2e4f88ab6e658bf1234c493c82e"
+    },
+    {
+      "path": "extreme-red-build.log",
+      "sha256": "5d55867913db2b7e40e0db028f3a2b4a931608d1a0e077ba530713f05bdfe189"
+    },
+    {
+      "path": "extreme-red.log",
+      "sha256": "09e13d5a7933723a55fccc81e37df3450e7990d0da729a77a400aadccb7dc9ae"
+    },
+    {
+      "path": "far-fog-math.json",
+      "sha256": "50fc500522c0fb79a1863df204637a421d09c283ca27643eeb016d843e4ee574"
+    },
+    {
+      "path": "far-opaque-history.json",
+      "sha256": "3096a898a677d74548e5329065302ee7abe6811e8e46773e69f5ba2964bc2419"
+    },
+    {
+      "path": "far-probe-points.json",
+      "sha256": "f826cc6f02d963642c5c00fc9003b37eaebca046ec48e9c9794fe0d1f2ed8e51"
+    },
+    {
+      "path": "fixture-rejection.json",
+      "sha256": "c247c0f3e7e414998d8a3575f5bdbd620e08548af5b15898702603f40a2235ac"
+    },
+    {
+      "path": "flag-invalid-fixture.txt",
+      "sha256": "c2674a4d4ad375098b719962fde22d5531f9b443772108add6d446f5d480a0b9"
+    },
+    {
+      "path": "native-analytic-fixture.txt",
+      "sha256": "03a593ff088844aa4b378963e0079c0ce2c519f5560b0994c1bf73e1d334b78d"
+    },
+    {
+      "path": "native-far-fog-traces.json",
+      "sha256": "e4d937993634425b8ac0161333d6b2e3f942b61c76320550e49732c557de47f6"
+    },
+    {
+      "path": "native-forward-fog-traces-initial.nonfinite-json.txt",
+      "sha256": "0d05529b38d43b3c7ef2dd21ccde3d506553d6757b8216f5d0a11c03c6061b8e"
+    },
+    {
+      "path": "native-forward-fog-traces.json",
+      "sha256": "bf95c74b04772f6be93b0ebc8b6664dfa03b506b4d565c86ca33e39d0ac75591"
+    },
+    {
+      "path": "native-opaque-fog-traces.json",
+      "sha256": "21ee4882949835832bb430062a8b5f5ff9a4f2df9d551985aa10a1c57007c305"
+    },
+    {
+      "path": "near-atmosphere-math.json",
+      "sha256": "f91f598b6aa352ae5bf7dd13e4446c9c62145da007dece29e04287dedeb35141"
+    },
+    {
+      "path": "opaque-depth-15742.bin",
+      "sha256": "8e3f50a0343673677148d7a50bbb27b2b7bb9143b60d39c4b821ab6090cf4ebf"
+    },
+    {
+      "path": "opaque-depth-receipt.json",
+      "sha256": "96e07539928598b0a4633e6772cd54ecde280d422436860c594aa7f0d77f61cf"
+    },
+    {
+      "path": "plan.md",
+      "sha256": "65d3070db5715bded02f129b772f8339092788941e5e8704b7cb5f0eba22d56c"
+    },
+    {
+      "path": "release-build.log",
+      "sha256": "6d8412a3500561291862efa2c97040fb603b4ac235a78823f0134e68b9e8cf4a"
+    },
+    {
+      "path": "release-final-build.log",
+      "sha256": "2cb398c6a942eba2ab5be12009a5a0fa3e65ac3b959eba1b7623d2f3a04d5762"
+    },
+    {
+      "path": "release-final-cpu.log",
+      "sha256": "9fcc5524729f9f20bc3d07318fa49d6011d1f69a2bd9c416b8a1513f737b856e"
+    },
+    {
+      "path": "release-final-native-gpu.log",
+      "sha256": "67b87f5c55751ded3483bc404c78c9341e6fec238f14bd37feb719a315a4de20"
+    },
+    {
+      "path": "runtime-inputs.json",
+      "sha256": "fae64b9d44fad5c793d8a8ae26ad1dbcf39413a158c7638e9cedd67c84f8e3c6"
+    },
+    {
+      "path": "truncated-invalid-fixture.txt",
+      "sha256": "97d35791e667767fea23ae0fc9704044f0426b1a2d8791f67d7a5638e82ca9b9"
+    },
+    {
+      "path": "version-invalid-fixture.txt",
+      "sha256": "520899ddb3bf735a49bf4924a9b34cd7431674780b0b788493f139e7203fb373"
+    }
+  ],
+  "binaries": {
+    "debug-AzurePlayer": "57e80c8c705e20e084352a5230e6524ac0a6078a5df15bdb7508d812e7f102be",
+    "debug-AzureRender": "378ce9ac176df2b006cf7998104214f8ee697161a3d8c0c3adfa21fd768b747b",
+    "debug-AzureAerialFogTests": "be72d30b8599cd0fbbd6c791e41394f959f6bd647eaad43befb9d00ce81286cb",
+    "debug-AzureAerialFogGpuTests": "1c27f3c26cbc35f9861a981afdf23e9439e43158f00c4ea6ea1e42976b08b4d8",
+    "debug-AzureFogTransportTests": "f7fbe67c42788ae0097c4dc967fb4b56b66846292f55a86d02d3033da52d1bdf",
+    "release-AzurePlayer": "2215520f990c7af28b82d2e35c5a04e1cf73245dc5e474016404d4e22b3cd670",
+    "release-AzureRender": "ad9e17579a06a00ddfdc2f7c2ecdce1cd16d7f33a452c9a3b919e85db9ee4516",
+    "release-AzureAerialFogTests": "9b79ff3075dc7c4de3c4a79a750a5e566067e5c340defd85475acf1c78c12f1a",
+    "release-AzureAerialFogGpuTests": "8fe6b051a8f1f3cb51fca42b1124a77aa788898981d5895ce2d19ad43e502631",
+    "release-AzureFogTransportTests": "06c8f5fc2d1bd2d39f6475677fda09b1e61378eb9890307e45cdd181a2681d1b"
+  },
+  "testCompute": {
+    "debug": "36c9cd49a5b9ae5ee40f77108dc6b578addc4b51d932546a26a20dc0ad6e5479",
+    "release": "36c9cd49a5b9ae5ee40f77108dc6b578addc4b51d932546a26a20dc0ad6e5479"
+  },
+  "sourceNear": {
+    "status": "passed",
+    "samples": [
+      {
+        "event": 9160,
+        "x": 1260,
+        "y": 100,
+        "worldHeight": 13.754890441894531,
+        "cameraToPointDirection": [
+          -0.017448842525482178,
+          0.47812649607658386,
+          0.8781176805496216
+        ],
+        "distance": 24.037221908569336,
+        "heightIntegral": 0.01,
+        "column": 0.004148416847908424,
+        "atmosphere": {
+          "transmittance": [
+            0.9999105851083305,
+            0.9998911254733689,
+            0.9998508174612791
+          ],
+          "scattering": [
+            2.465361549114031e-05,
+            3.0349277007830384e-05,
+            4.507086153753777e-05
+          ]
+        },
+        "volume": [
+          0.003753662109375,
+          0.007724761962890625,
+          0.01235198974609375,
+          0.98974609375
+        ],
+        "errors": {
+          "atmosphereTransmittance": 5.168013839096375e-08,
+          "combinedTransmittance": 7.446238325936605e-08,
+          "combinedScattering": 1.4034495017956755e-08,
+          "surface": 2.853250352652381e-08
+        }
+      },
+      {
+        "event": 9160,
+        "x": 1254,
+        "y": 160,
+        "worldHeight": 12.739436149597168,
+        "cameraToPointDirection": [
+          -0.021941978484392166,
+          0.44448357820510864,
+          0.8955182433128357
+        ],
+        "distance": 23.572023391723633,
+        "heightIntegral": 0.01,
+        "column": 0.004071442917796773,
+        "atmosphere": {
+          "transmittance": [
+            0.9999122441300419,
+            0.9998931455337312,
+            0.9998535853426268
+          ],
+          "scattering": [
+            2.3568537204502814e-05,
+            2.901352110769285e-05,
+            4.308718396416333e-05
+          ]
+        },
+        "volume": [
+          0.003681182861328125,
+          0.00757598876953125,
+          0.01210784912109375,
+          0.990234375
+        ],
+        "errors": {
+          "atmosphereTransmittance": 4.1771796022160856e-08,
+          "combinedTransmittance": 6.429768673044123e-08,
+          "combinedScattering": 1.1045390463371163e-08,
+          "surface": 2.544549482230707e-08
+        }
+      },
+      {
+        "event": 9160,
+        "x": 1300,
+        "y": 318,
+        "worldHeight": 10.083022117614746,
+        "cameraToPointDirection": [
+          0.010500716045498848,
+          0.347591757774353,
+          0.9375871419906616
+        ],
+        "distance": 22.500425338745117,
+        "heightIntegral": 0.01,
+        "column": 0.003894633782522781,
+        "atmosphere": {
+          "transmittance": [
+            0.9999160549137196,
+            0.9998977856283043,
+            0.9998599431957371
+          ],
+          "scattering": [
+            2.1639261617590944e-05,
+            2.6638540551885288e-05,
+            3.956019950300432e-05
+          ]
+        },
+        "volume": [
+          0.0035152435302734375,
+          0.007232666015625,
+          0.01155853271484375,
+          0.990234375
+        ],
+        "errors": {
+          "atmosphereTransmittance": 6.719873890670414e-08,
+          "combinedTransmittance": 5.2107001269341424e-08,
+          "combinedScattering": 1.7145855443767566e-08,
+          "surface": 2.0226857855298874e-08
+        }
+      },
+      {
+        "event": 10875,
+        "x": 1260,
+        "y": 100,
+        "worldHeight": 13.754890441894531,
+        "cameraToPointDirection": [
+          -0.017448842525482178,
+          0.47812649607658386,
+          0.8781176805496216
+        ],
+        "distance": 24.037221908569336,
+        "heightIntegral": 0.01,
+        "column": 0.004148416847908424,
+        "atmosphere": {
+          "transmittance": [
+            0.9999105851083305,
+            0.9998911254733689,
+            0.9998508174612791
+          ],
+          "scattering": [
+            2.465361549114031e-05,
+            3.0349277007830384e-05,
+            4.507086153753777e-05
+          ]
+        },
+        "volume": [
+          0.003753662109375,
+          0.007724761962890625,
+          0.01235198974609375,
+          0.98974609375
+        ],
+        "errors": {
+          "atmosphereTransmittance": 5.168013839096375e-08,
+          "combinedTransmittance": 7.446238325936605e-08,
+          "combinedScattering": 1.4034495017956755e-08,
+          "surface": 1.1385999498791932e-07
+        }
+      },
+      {
+        "event": 10875,
+        "x": 1254,
+        "y": 160,
+        "worldHeight": 12.739436149597168,
+        "cameraToPointDirection": [
+          -0.021941978484392166,
+          0.44448357820510864,
+          0.8955182433128357
+        ],
+        "distance": 23.572023391723633,
+        "heightIntegral": 0.01,
+        "column": 0.004071442917796773,
+        "atmosphere": {
+          "transmittance": [
+            0.9999122441300419,
+            0.9998931455337312,
+            0.9998535853426268
+          ],
+          "scattering": [
+            2.3568537204502814e-05,
+            2.901352110769285e-05,
+            4.308718396416333e-05
+          ]
+        },
+        "volume": [
+          0.003681182861328125,
+          0.00757598876953125,
+          0.01210784912109375,
+          0.990234375
+        ],
+        "errors": {
+          "atmosphereTransmittance": 4.1771796022160856e-08,
+          "combinedTransmittance": 6.429768673044123e-08,
+          "combinedScattering": 1.1045390463371163e-08,
+          "surface": 2.9018345948372826e-08
+        }
+      },
+      {
+        "event": 10875,
+        "x": 1300,
+        "y": 318,
+        "worldHeight": 10.083022117614746,
+        "cameraToPointDirection": [
+          0.010500716045498848,
+          0.347591757774353,
+          0.9375871419906616
+        ],
+        "distance": 22.500425338745117,
+        "heightIntegral": 0.01,
+        "column": 0.003894633782522781,
+        "atmosphere": {
+          "transmittance": [
+            0.9999160549137196,
+            0.9998977856283043,
+            0.9998599431957371
+          ],
+          "scattering": [
+            2.1639261617590944e-05,
+            2.6638540551885288e-05,
+            3.956019950300432e-05
+          ]
+        },
+        "volume": [
+          0.0035152435302734375,
+          0.007232666015625,
+          0.01155853271484375,
+          0.990234375
+        ],
+        "errors": {
+          "atmosphereTransmittance": 6.719873890670414e-08,
+          "combinedTransmittance": 5.2107001269341424e-08,
+          "combinedScattering": 1.7145855443767566e-08,
+          "surface": 1.307440957720729e-07
+        }
+      }
+    ],
+    "maximumAbsoluteError": 1.307440957720729e-07,
+    "budget": 1e-06,
+    "compositionOrder": "volume, height segment, spectral atmosphere",
+    "heightSegmentCoverage": "identity only; far source still required"
+  },
+  "sourceFar": {
+    "status": "passed",
+    "samples": [
+      {
+        "x": 1339,
+        "y": 749,
+        "distance": 65.08322143554688,
+        "viewDepth": 65.00022888183594,
+        "worldHeight": 4.694904327392578,
+        "startHeight": 4.414183671217803,
+        "segmentLength": 7.509810020267686,
+        "heightTransmittance": 0.9996295521954124,
+        "sourceHeightTransmittance": 0.9996294975280762,
+        "volume": [
+          0.0090789794921875,
+          0.0186767578125,
+          0.029876708984375,
+          0.97509765625
+        ],
+        "sourceTransmittance": [
+          0.9744986891746521,
+          0.9744470119476318,
+          0.9743398427963257
+        ],
+        "sourceScattering": [
+          0.010574416257441044,
+          0.021028589457273483,
+          0.03349139168858528
+        ],
+        "errors": {
+          "height": 5.46673362133987e-08,
+          "transmittance": 5.966427363279792e-08,
+          "scattering": 5.170353914105141e-07
+        }
+      },
+      {
+        "x": 1285,
+        "y": 759,
+        "distance": 81.9898910522461,
+        "viewDepth": 81.95249938964844,
+        "worldHeight": 4.709652900695801,
+        "startHeight": 3.979354622909379,
+        "segmentLength": 24.463650360479313,
+        "heightTransmittance": 0.9987916217375535,
+        "sourceHeightTransmittance": 0.9987916350364685,
+        "volume": [
+          0.00907135009765625,
+          0.0186614990234375,
+          0.02984619140625,
+          0.97509765625
+        ],
+        "sourceTransmittance": [
+          0.9736201763153076,
+          0.9735551476478577,
+          0.973420262336731
+        ],
+        "sourceScattering": [
+          0.013839555904269218,
+          0.026197578758001328,
+          0.0414358451962471
+        ],
+        "errors": {
+          "height": 1.3298914969261943e-08,
+          "transmittance": 4.150000210145777e-08,
+          "scattering": 1.2406960910732456e-07
+        }
+      },
+      {
+        "x": 1317,
+        "y": 753,
+        "distance": 97.29683685302734,
+        "viewDepth": 97.22563171386719,
+        "worldHeight": 5.6069464683532715,
+        "startHeight": 4.240251699818359,
+        "segmentLength": 39.75472645864494,
+        "heightTransmittance": 0.9980465568539956,
+        "sourceHeightTransmittance": 0.9980465173721313,
+        "volume": [
+          0.00907135009765625,
+          0.0186614990234375,
+          0.02984619140625,
+          0.97509765625
+        ],
+        "sourceTransmittance": [
+          0.972838282585144,
+          0.9727611541748047,
+          0.9726014137268066
+        ],
+        "sourceScattering": [
+          0.016752686351537704,
+          0.030811207368969917,
+          0.04853285104036331
+        ],
+        "errors": {
+          "height": 3.9481864222423724e-08,
+          "transmittance": 8.994579581145246e-08,
+          "scattering": 3.746642713367554e-07
+        }
+      },
+      {
+        "x": 1245,
+        "y": 781,
+        "distance": 145.20555114746094,
+        "viewDepth": 145.00015258789062,
+        "worldHeight": 4.1802754402160645,
+        "startHeight": 3.022730372544382,
+        "segmentLength": 87.62409942805701,
+        "heightTransmittance": 0.9956516032663462,
+        "sourceHeightTransmittance": 0.9956515431404114,
+        "volume": [
+          0.0090789794921875,
+          0.0186767578125,
+          0.029876708984375,
+          0.97509765625
+        ],
+        "sourceTransmittance": [
+          0.9703291654586792,
+          0.9702141880989075,
+          0.9699761271476746
+        ],
+        "sourceScattering": [
+          0.02611500956118107,
+          0.04564495384693146,
+          0.07135879248380661
+        ],
+        "errors": {
+          "height": 6.012593478654793e-08,
+          "transmittance": 8.808301832363696e-08,
+          "scattering": 5.858341553671709e-07
+        }
+      }
+    ],
+    "maximumAbsoluteError": 5.858341553671709e-07,
+    "budget": 5e-06,
+    "compositionOrder": "volume, height segment, spectral atmosphere"
+  },
+  "tests": {
+    "cpuAndInterfaceChecksPerConfiguration": 8,
+    "aerialUnitChecks": 32,
+    "heightTransportChecks": 30,
+    "gpuSamplesPerConfiguration": 44,
+    "nativeSamples": 10,
+    "nativeCpuMaximumError": 5.88595867e-07,
+    "nativeCpuBudget": 5e-06,
+    "gpuMaximumError": 1.52587891e-05,
+    "gpuBudget": 3e-05,
+    "packedAerialBytes": 96,
+    "packedAerialVersion": 1,
+    "applicationShaderPrograms": 199,
+    "applicationShadersExact": true,
+    "liveBuffers": 0,
+    "liveImages": 0
+  },
+  "limitations": [
+    "Runtime scene parameters and surface evaluation remain pending; this stage delivers independent numeric contracts.",
+    "Source fixtures use the captured coordinate basis; scene conversion must apply the declared world basis once.",
+    "Only the active height layer contributes in the selected source; additional authored layer combinations remain runtime integration work.",
+    "Full native atmosphere, moving-view volume generation and all formal NR0-NR12 image/AA/performance gates remain open."
+  ]
+}

@@ -1,0 +1,389 @@
+{
+  "status": "isolated-not-adopted-production-restored",
+  "sourceBase": "95f0f38",
+  "candidateAdopted": false,
+  "pair": {
+    "sourceBase": "95f0f38",
+    "cpuBaseline": {
+      "mean": 15.080408333333319,
+      "p95": 16.402839999998534,
+      "p99": 18.271752000000607
+    },
+    "cpuCandidate": {
+      "mean": 15.54170333333335,
+      "p95": 16.956789999999675,
+      "p99": 21.381290000000185
+    },
+    "cpuMeanSavedMs": -0.46129500000003176,
+    "cpuP95SavedMs": -0.5539500000011408,
+    "cpuMeanReduction": -0.030589025827662653,
+    "gpuBaseline": {
+      "shadowMs": {
+        "mean": 2.501471733333333,
+        "p95": 2.563248,
+        "p99": 2.5909776
+      },
+      "sceneMs": {
+        "mean": 22.168004266666667,
+        "p95": 26.5921536,
+        "p99": 30.1292544
+      },
+      "postProcessMs": {
+        "mean": 0.28543999999999997,
+        "p95": 0.299008,
+        "p99": 0.30393344
+      },
+      "frameMs": {
+        "mean": 24.954916,
+        "p95": 29.4538096,
+        "p99": 33.01857632
+      }
+    },
+    "gpuCandidate": {
+      "shadowMs": {
+        "mean": 2.504737066666667,
+        "p95": 2.5627968,
+        "p99": 2.57490304
+      },
+      "sceneMs": {
+        "mean": 21.477393066666668,
+        "p95": 22.1214208,
+        "p99": 22.251264
+      },
+      "postProcessMs": {
+        "mean": 0.2905685333333333,
+        "p95": 0.2980352,
+        "p99": 0.300032
+      },
+      "frameMs": {
+        "mean": 24.272698666666667,
+        "p95": 24.9499344,
+        "p99": 25.051528
+      }
+    },
+    "environmentPassed": false,
+    "formalSamplesSatisfied": false,
+    "visualAcceptance": "failed-user-review",
+    "workload": {
+      "transparentIndexRequests": 118293,
+      "transparentComputedIndices": 97326,
+      "transparentHiddenIndices": 3648,
+      "transparentReusedIndices": 17319,
+      "transparentIndexCacheHits": 43,
+      "transparentIndexCacheMisses": 0,
+      "transparentIndexCacheBytes": 69276,
+      "avoidedFraction": 0.17724632903045826
+    },
+    "transformWorkload": {
+      "sceneTransformNodes": 1679,
+      "sceneTransformLocalEvaluations": 0,
+      "sceneTransformWorldEvaluations": 0,
+      "sceneTransformReusedWorld": 1679,
+      "sceneTransformLegacyFallback": false,
+      "avoidedWorldFraction": 1.0
+    }
+  },
+  "restoration": {
+    "status": "isolated-not-adopted",
+    "reason": "One paired native CPU window did not improve; no formal performance claim",
+    "candidateSourceHashes": {
+      "CMakeLists.txt": "d676b533867f0c63b2e5e7d95b9ed19550c1d0ff617026576327863e23d7f526",
+      "src/scenes/CharacterSceneRenderer.cpp": "7baf78b0e1443cf1243285a6c1cb7f78e616282b0873bae390b8277e5f58d2a9",
+      "src/scenes/CharacterSceneRenderer.hpp": "bde469be8af248c8b1b7d62adf374271ea3ef87cf1d7058db020bfe94d01bc6d",
+      "src/scene/SceneTransformCache.hpp": "c5d8b54dbca024a75d0efaa480cfa62df8e865792b1d4234f45d55d3f3ccac25",
+      "src/render/StaticTransparentIndexCache.hpp": "bd907fa34ee131faff5b37f45d6114b79d8b4df7853c92dbd121cb0610e3eea1",
+      "tests/SceneTransformCacheTests.cpp": "ccd3df967b39cde0aac88f1234b60507c19dd01de38d4801a98cbd264fe266e8",
+      "tests/StaticTransparentIndexCacheTests.cpp": "3af9dd3ffdb69fe92ff0ced05ea49b2e557bd76777b746e241f69631b36218e5",
+      "tests/TransparentPreparationRecordingTests.cpp": "c698674c3a18cd5a338b9e865d16c468971e128fc9b117284de06f51bf72a7c5"
+    },
+    "sourceBase": "95f0f38",
+    "candidatePlayerSha256": "0718c232633bb9bf05fbdb89531474c96d20c5cbe89460c85249ac60cfbf8480",
+    "restoredSourceByteIdentical": true,
+    "restoredProgramsByteIdentical": 663,
+    "restoredPlayerCodeSectionIdentical": true,
+    "restoredPlayerSha256": "65edb85bf71f66bf9de7efc6ec561038391a31b704cf8e59c196418be22d9bad",
+    "restoredCodeSectionSha256": "3b6558260a70dd4dfcf6703154e09300907f2d78ec302d6bd45779526b154116",
+    "buildSeconds": 37.71799999999712,
+    "buildCommand": [
+      "cmd",
+      "/d",
+      "/c",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+      "build",
+      "--source",
+      "D:\\Projects\\FYP\\Project\\AzureRender",
+      "--build-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+      "--config",
+      "Release",
+      "--runtime-only"
+    ],
+    "provenanceVerified": true
+  },
+  "buildChecks": [
+    {
+      "kind": "build",
+      "exitCode": 0,
+      "seconds": 36.63999999999942,
+      "command": [
+        "cmd",
+        "/d",
+        "/c",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--test-target",
+        "AzureSceneTransformCacheTests",
+        "--test-target",
+        "AzureStaticTransparentIndexCacheTests",
+        "--test-target",
+        "AzureTransparentPreparationRecordingTests",
+        "--test-target",
+        "AzureNodeOpacityRecordingTests",
+        "--test-target",
+        "AzureOpaqueTransparencyScratchTests"
+      ]
+    },
+    {
+      "kind": "checks",
+      "exitCode": 0,
+      "seconds": 3.922000000002299,
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.(SceneTransformCache|TransparentPreparationRecording|NodeOpacityRecording|OpaqueTransparencyScratch)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-013603-static-transparent-preparation-049ee8\\final-release-checks.xml"
+      ]
+    }
+  ],
+  "initialBuildChecks": [
+    {
+      "kind": "build",
+      "exitCode": 0,
+      "seconds": 35.21900000000096,
+      "command": [
+        "cmd",
+        "/d",
+        "/c",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--test-target",
+        "AzureStaticTransparentIndexCacheTests",
+        "--test-target",
+        "AzureTransparentPreparationRecordingTests",
+        "--test-target",
+        "AzureNodeOpacityRecordingTests",
+        "--test-target",
+        "AzureOpaqueTransparencyScratchTests"
+      ]
+    },
+    {
+      "kind": "checks",
+      "exitCode": 0,
+      "seconds": 6.1709999999984575,
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.(StaticTransparentIndexCache|TransparentPreparationRecording|NodeOpacityRecording|OpaqueTransparencyScratch)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-013603-static-transparent-preparation-049ee8\\release-checks.xml"
+      ]
+    }
+  ],
+  "image": {
+    "status": "passed",
+    "sourceBase": "95f0f38-with-static-transparent-preparation",
+    "executableSha256": "0718c232633bb9bf05fbdb89531474c96d20c5cbe89460c85249ac60cfbf8480",
+    "exitCode": 0,
+    "seconds": 107.82900000000154,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Static transparent preparation candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "firstStaticImage": {
+    "status": "passed",
+    "sourceBase": "95f0f38-with-static-transparent-preparation",
+    "executableSha256": "7a647f2ffb74f9a1fba1b866548e75b5e48498eaa0be23b9f81ed696e355674f",
+    "exitCode": 0,
+    "seconds": 128.35900000000038,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Static transparent preparation candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "packedPositionPrototype": {
+    "vertices": 207364,
+    "rounds": 24,
+    "baselineMs": 3.39408,
+    "candidateMs": 7.31706,
+    "reduction": -1.15583,
+    "identical": true
+  },
+  "visualAcceptance": "failed-user-review",
+  "formalPerformancePassed": false,
+  "archive": {
+    "path": "docs/acceptance/nr/evidence/2026-11-07/static-transparent-preparation/measurements.zip",
+    "sha256": "21ba25a0507af2175e46bb956614429032f92dd5baa161e30bd97a429a1141f8",
+    "bytes": 1487057,
+    "members": 92
+  }
+}

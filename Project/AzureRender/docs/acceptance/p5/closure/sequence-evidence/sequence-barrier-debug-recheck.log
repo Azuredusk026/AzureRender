@@ -1,0 +1,17 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  61: AzureEngine.SystemComposition
+1/4 Test  #61: AzureEngine.SystemComposition ....   Passed    0.74 sec
+    Start  87: AzureEngine.ThirdPerson
+2/4 Test  #87: AzureEngine.ThirdPerson ..........   Passed    0.27 sec
+    Start 114: AzureEngine.ThirdPersonPlayer
+3/4 Test #114: AzureEngine.ThirdPersonPlayer ....   Passed    5.00 sec
+    Start 205: AzureGame.GameSequence
+4/4 Test #205: AzureGame.GameSequence ...........   Passed   59.03 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Label Time Summary:
+gpu    =  64.03 sec*proc (2 tests)
+
+Total Test time (real) =  65.06 sec

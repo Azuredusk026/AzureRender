@@ -1,0 +1,82 @@
+{
+  "status": "measured",
+  "scope": "CPU replay of the authored LUT from quantized independent-source RGB. This is an inference about the display transform; fog, bloom and quantization remain separate. This is not an HDR readback or a visual acceptance result.",
+  "lut": {
+    "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\native-gi\\captured-3534.azlut",
+    "sha256": "266d3041215d9b50e570a42a8d36241d217c3ffc6bc3b68b8a1a8f9009b00a11",
+    "header": {
+      "channels": 4,
+      "dimension": 32,
+      "height": 32,
+      "inputDomain": "logc3-full-log",
+      "layout": "strip-rgb",
+      "outputDomain": "linear",
+      "precision": "float32-le",
+      "schemaVersion": 1,
+      "source": {
+        "evidence": 2,
+        "generator": "azure.endfield-native-color-grading",
+        "generatorVersion": 1,
+        "inputFingerprint": "8a88e41a1e22fc656136d6a90e118b452ca638169bce8aed767d7152da8d0809"
+      },
+      "width": 1024
+    }
+  },
+  "regions": [
+    {
+      "region": "hair-crown",
+      "validPixels": 16500,
+      "clippedOrZeroPixels": 0,
+      "lutPredictedMedianLinearDisplay": 0.0490821228239215,
+      "actualWorldMedianLinearDisplay": 0.04889255614760246,
+      "relativeMedianResidual": 0.003862234667377654,
+      "medianAbsoluteLinearResidual": 0.000269322323469262,
+      "p95AbsoluteLinearResidual": 0.002222975967944185,
+      "maximumAbsoluteLinearResidual": 0.005527482858644961
+    },
+    {
+      "region": "hair-fringe",
+      "validPixels": 8000,
+      "clippedOrZeroPixels": 0,
+      "lutPredictedMedianLinearDisplay": 0.0697117217530226,
+      "actualWorldMedianLinearDisplay": 0.06949749759403366,
+      "relativeMedianResidual": 0.0030730005457031695,
+      "medianAbsoluteLinearResidual": 0.00037842537702855936,
+      "p95AbsoluteLinearResidual": 0.0028575542745328517,
+      "maximumAbsoluteLinearResidual": 0.005944705154950658
+    },
+    {
+      "region": "face-cheek",
+      "validPixels": 2970,
+      "clippedOrZeroPixels": 0,
+      "lutPredictedMedianLinearDisplay": 0.20401483391773523,
+      "actualWorldMedianLinearDisplay": 0.2039057800516856,
+      "relativeMedianResidual": 0.000534538905605229,
+      "medianAbsoluteLinearResidual": 0.0007200025603370797,
+      "p95AbsoluteLinearResidual": 0.0032358767678741795,
+      "maximumAbsoluteLinearResidual": 0.0040653343233430506
+    },
+    {
+      "region": "face-chin",
+      "validPixels": 1000,
+      "clippedOrZeroPixels": 0,
+      "lutPredictedMedianLinearDisplay": 0.19542573194437918,
+      "actualWorldMedianLinearDisplay": 0.19531791988365646,
+      "relativeMedianResidual": 0.0005516779169766758,
+      "medianAbsoluteLinearResidual": 0.0012321856378515461,
+      "p95AbsoluteLinearResidual": 0.002821465946190538,
+      "maximumAbsoluteLinearResidual": 0.0037036524613514865
+    },
+    {
+      "region": "eye-left",
+      "validPixels": 1468,
+      "clippedOrZeroPixels": 272,
+      "lutPredictedMedianLinearDisplay": 0.045832463593420164,
+      "actualWorldMedianLinearDisplay": 0.04759402788930983,
+      "relativeMedianResidual": 0.03843485943754859,
+      "medianAbsoluteLinearResidual": 0.00042901019203579055,
+      "p95AbsoluteLinearResidual": 0.022275849358831937,
+      "maximumAbsoluteLinearResidual": 0.17316312622634739
+    }
+  ]
+}

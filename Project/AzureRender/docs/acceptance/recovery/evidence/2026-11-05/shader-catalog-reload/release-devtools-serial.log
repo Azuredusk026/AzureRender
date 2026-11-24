@@ -1,0 +1,29 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 136: AzureEditor.DevtoolsHost
+1/1 Test #136: AzureEditor.DevtoolsHost .........***Failed   91.91 sec
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 209, in <module>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 209, in <listcomp>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 162, in run
+    call('wait-until', name='developer.shaderState', equals='Idle', timeoutMs=60000)
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 72, in call
+    assert response['passed'] == passed, response
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'code': 'Timeout', 'elapsedMs': 60011.0184, 'message': 'Request deadline elapsed', 'passed': False, 'schemaVersion': 1}
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+gpu    =  91.91 sec*proc (1 test)
+
+Total Test time (real) =  91.96 sec
+
+The following tests FAILED:
+	136 - AzureEditor.DevtoolsHost (Failed)                 gpu
+Errors while running CTest

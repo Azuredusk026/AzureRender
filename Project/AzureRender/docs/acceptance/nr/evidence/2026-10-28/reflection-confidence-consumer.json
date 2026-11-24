@@ -1,0 +1,38 @@
+{
+  "phase": "NR5-R8-D",
+  "status": "component-verified",
+  "mainSceneIntegrated": false,
+  "confidenceBudgetBytes": 1,
+  "results": [
+    {
+      "configuration": "debug-r8",
+      "pixels": 921600,
+      "differentConfidencePixels": 23409,
+      "maximumByteError": 1,
+      "overOneBytePixels": 0,
+      "colorBitExact": true,
+      "outputSha256": "c1894c9dca3b6ac93c56d999cb4dd6ae8bbfdfb4fbc8a74a6f9d7278f6175cda"
+    },
+    {
+      "configuration": "release",
+      "pixels": 921600,
+      "differentConfidencePixels": 23409,
+      "maximumByteError": 1,
+      "overOneBytePixels": 0,
+      "colorBitExact": true,
+      "outputSha256": "c1894c9dca3b6ac93c56d999cb4dd6ae8bbfdfb4fbc8a74a6f9d7278f6175cda"
+    }
+  ],
+  "configurationParity": true,
+  "sourceSha256": {
+    "src/render/ReflectionSpatialFilter.hpp": "06e8e4dfabf02e1e467a408bfcf63155dc1bf8f42a554f4a313f9e5156d52a3b",
+    "src/render/ReflectionSpatialFilter.cpp": "f10eaeb2a50c4c9bc13efd0dff91b1c3c1035cfb78ae42a7cc75390897b0869c",
+    "shaders/reflection_spatial_filter.comp": "769a0a1638fda2034b8d08a8333603c1bf94b6c68ab0e58c4b8f1e79a9a812a7",
+    "tests/ReflectionSpatialFilterGpuTests.cpp": "89cc080536af718e5239a26e8564e3573439b4140c7201a7e2f75a693e7577f9",
+    "tests/ReflectionSpatialFilterTests.cpp": "d3ff145b73cde13a4ee2378c5dc13a003a0bcb742141f5017f9f7bc3c18eebc2"
+  },
+  "tests": {
+    "debug": "Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug\nTest project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug\n    Start 339: AzureRender.ReflectionSpatialFilter\n1/2 Test #339: AzureRender.ReflectionSpatialFilter ......   Passed    0.84 sec\n    Start 342: AzureRender.ReflectionSpatialFilterGpu\n2/2 Test #342: AzureRender.ReflectionSpatialFilterGpu ...   Passed    1.49 sec\n\n100% tests passed, 0 tests failed out of 2\n\nLabel Time Summary:\ngpu    =   1.49 sec*proc (1 test)\n\nTotal Test time (real) =   2.35 sec\n",
+    "release": "Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release\nTest project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release\n    Start 339: AzureRender.ReflectionSpatialFilter\n1/2 Test #339: AzureRender.ReflectionSpatialFilter ......   Passed    0.25 sec\n    Start 342: AzureRender.ReflectionSpatialFilterGpu\n2/2 Test #342: AzureRender.ReflectionSpatialFilterGpu ...   Passed    0.70 sec\n\n100% tests passed, 0 tests failed out of 2\n\nLabel Time Summary:\ngpu    =   0.70 sec*proc (1 test)\n\nTotal Test time (real) =   0.97 sec\n"
+  }
+}

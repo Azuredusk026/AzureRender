@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "workflows": [
+    {
+      "workflow": "sprite",
+      "uiDrawCalls": 24,
+      "screenshot": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\feature-expansion-2026-10-12\\delivery-verified\\sprite-capture\\frame_000007.png",
+      "files": 486
+    },
+    {
+      "workflow": "rectangle",
+      "uiDrawCalls": 16,
+      "screenshot": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\feature-expansion-2026-10-12\\delivery-verified\\rectangle-capture\\frame_000007.png",
+      "files": 486
+    }
+  ],
+  "physicalInput": "pending",
+  "fontAppearance": "pending human review"
+}

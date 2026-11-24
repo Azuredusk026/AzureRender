@@ -1,0 +1,279 @@
+#pragma once
+#include <cmath>
+#include <functional>
+#include <iterator>
+#include <map>
+#include <set>
+#include <stdexcept>
+#include <vector>
+
+#include "SceneDocument.hpp"
+#include "ecs/Components.hpp"
+#include "ecs/World.hpp"
+#include "runtime/RuntimeSceneSnapshotCache.hpp"
+namespace azurerender {
+class RuntimeLifecycle final {
+   public:
+    enum class State { Created, Running, Paused, Stopped };
+    ecs::World& world() noexcept { return world_; }
+    const ecs::World& world() const noexcept { return world_; }
+    State state() const noexcept { return state_; }
+    std::uint64_t sceneRevision() const noexcept { return sceneRevision_; }
+    bool stepPending() const noexcept { return step_; }
+    ecs::Entity entity(const std::string& nodeId) {
+        return nodeValid(nodeId) ? nodes_.at(nodeId) : ecs::kInvalidEntity;
+    }
+    std::string nodeId(ecs::Entity entityId) {
+        if (!world_.valid(entityId)) return {};
+        const auto* identity = world_.tryGet<NodeIdentity>(entityId);
+        if (identity == nullptr) return {};
+        const auto found = nodes_.find(identity->id);
+        return found != nodes_.end() && found->second == entityId
+            ? identity->id : std::string{};
+    }
+    void replaceScene(const SceneDocument& scene, const std::function<void(RuntimeLifecycle&)>& configure = {}) {
+        if (state_ == State::Stopped) throw std::logic_error("Cannot replace a stopped runtime");
+        RuntimeLifecycle candidate;
+        candidate.loadScene(scene);
+        if (configure) configure(candidate);
+        world_.swap(candidate.world_);
+        nodes_.swap(candidate.nodes_);
+        std::swap(scene_, candidate.scene_);
+        snapshotSource_.swap(candidate.snapshotSource_);
+        pending_.clear();
+        pendingSpawns_.clear();
+        ++sceneRevision_;
+    }
+    void start() {
+        if (state_ != State::Created) throw std::logic_error("Runtime start requires Created");
+        state_ = State::Running;
+    }
+    void pause() {
+        if (state_ != State::Running) throw std::logic_error("Runtime pause requires Running");
+        state_ = State::Paused;
+    }
+    void resume() {
+        if (state_ != State::Paused) throw std::logic_error("Runtime resume requires Paused");
+        step_ = false;
+        state_ = State::Running;
+    }
+    void step() {
+        if (state_ != State::Paused) throw std::logic_error("Runtime step requires Paused");
+        step_ = true;
+    }
+    void stop() noexcept {
+        pending_.clear();
+        pendingSpawns_.clear();
+        world_.clear();
+        nodes_.clear();
+        step_ = false;
+        state_ = State::Stopped;
+    }
+    void loadScene(const SceneDocument& scene) {
+        if (state_ != State::Created)
+            throw std::logic_error("Scene initialization requires Created");
+        if (!nodes_.empty()) throw std::logic_error("Runtime scene is already initialized");
+        std::map<std::string, std::string> parents;
+        for (const auto& node : scene.nodes)
+            if (node.id.empty() || !parents.emplace(node.id, node.parentId).second)
+                throw std::invalid_argument("Duplicate or empty runtime node id");
+        for (const auto& node : scene.nodes) {
+            if(node.objectShadow)node.objectShadow->validate();
+            auto parent = node.parentId;
+            std::size_t depth = 0;
+            while (!parent.empty()) {
+                if (!parents.count(parent))
+                    throw std::invalid_argument("Unknown runtime parent: " + parent);
+                if (++depth > parents.size())
+                    throw std::invalid_argument("Runtime hierarchy cycle");
+                parent = parents.at(parent);
+            }
+        }
+        scene_ = scene;
+        snapshotSource_=std::make_shared<const std::uint8_t>(0);
+        ++sceneRevision_;
+        for (const auto& node : scene.nodes) {
+            if (node.id.empty() || nodes_.count(node.id))
+                throw std::invalid_argument("Duplicate or empty runtime node id");
+            const auto entity = world_.createEntity();
+            nodes_.emplace(node.id, entity);
+            world_.addComponent(entity, NodeIdentity{node.id});
+            world_.addComponent(
+                entity, ecs::TransformComponent{node.translation, node.rotation, node.scale});
+            world_.addComponent(entity, ecs::RenderableComponent{0, node.visible});
+            if(node.objectShadow)world_.addComponent(entity,*node.objectShadow);
+        }
+    }
+    SceneDocument snapshotScene() {
+        SceneDocument result;
+        snapshotScene(result);
+        return result;
+    }
+    // The destination retains its vector/string storage across frames.
+    // It remains an owned document, independent of subsequent world changes.
+    void snapshotScene(SceneDocument& result) {
+        result = scene_;
+        const auto* identities = world_.findComponentArray<NodeIdentity>();
+        const auto* transforms = world_.findComponentArray<ecs::TransformComponent>();
+        const auto* renderables = world_.findComponentArray<ecs::RenderableComponent>();
+        const auto* shadows = world_.findComponentArray<ecs::ObjectShadowComponent>();
+        const auto validEntity = [&](const std::string& id) {
+            const auto found = nodes_.find(id);
+            if (found == nodes_.end() || !world_.valid(found->second))
+                return ecs::kInvalidEntity;
+            const auto* identity = identities ? identities->tryGet(found->second) : nullptr;
+            return identity && identity->id == id ? found->second : ecs::kInvalidEntity;
+        };
+        auto output = result.nodes.begin();
+        for (auto current = result.nodes.begin(); current != result.nodes.end(); ++current) {
+            auto& node = *current;
+            const auto entity = validEntity(node.id);
+            if (entity == ecs::kInvalidEntity) continue;
+            if (const auto* transform = transforms ? transforms->tryGet(entity) : nullptr) {
+                node.translation = transform->translation;
+                node.rotation = transform->rotation;
+                node.scale = transform->scale;
+            }
+            if (const auto* renderable = renderables ? renderables->tryGet(entity) : nullptr)
+                node.visible = renderable->visible;
+            if(const auto* shadow=shadows ? shadows->tryGet(entity) : nullptr){
+                shadow->validate();node.objectShadow=*shadow;
+            }else node.objectShadow.reset();
+            if (!node.parentId.empty() && validEntity(node.parentId) == ecs::kInvalidEntity) node.parentId.clear();
+            if (output != current) *output = std::move(node);
+            ++output;
+        }
+        result.nodes.erase(output, result.nodes.end());
+        result.lights.erase(
+            std::remove_if(result.lights.begin(), result.lights.end(),
+                           [&](const auto& light) { return validEntity(light.nodeId) == ecs::kInvalidEntity; }),
+            result.lights.end());
+    }
+    void snapshotScene(SceneDocument& result,RuntimeSceneSnapshotCache& cache) {
+        auto& output=cache.outputs_[&result];
+        if(output.source!=snapshotSource_){
+            SceneDocument prepared=scene_;
+            RuntimeSceneSnapshotCache::Output state;state.source=snapshotSource_;
+            const auto handle=[&](const std::string& id){
+                const auto value=entity(id);
+                return value==ecs::kInvalidEntity?ecs::EntityHandle{}:world_.handle(value);
+            };
+            state.nodes.reserve(prepared.nodes.size());
+            for(const auto& node:prepared.nodes)state.nodes.push_back({handle(node.id),handle(node.parentId),
+                {node.translation,node.rotation,node.scale},node.visible});
+            state.lights.reserve(prepared.lights.size());
+            for(const auto& light:prepared.lights)state.lights.push_back(handle(light.nodeId));
+            std::swap(result,prepared);output=std::move(state);
+        }
+        const auto* transforms=world_.findComponentArray<ecs::TransformComponent>();
+        const auto* renderables=world_.findComponentArray<ecs::RenderableComponent>();
+        const auto* shadows=world_.findComponentArray<ecs::ObjectShadowComponent>();
+        std::size_t kept=0;
+        for(std::size_t index=0;index<result.nodes.size();++index){
+            auto& node=result.nodes[index];const auto reference=output.nodes[index];
+            if(!world_.valid(reference.entity))continue;
+            const auto* current=transforms?transforms->tryGet(reference.entity.entity):nullptr;
+            const auto& transform=current?*current:reference.authored;
+            node.translation=transform.translation;node.rotation=transform.rotation;node.scale=transform.scale;
+            const auto* renderable=renderables?renderables->tryGet(reference.entity.entity):nullptr;
+            node.visible=renderable?renderable->visible:reference.visible;
+            if(const auto* shadow=shadows?shadows->tryGet(reference.entity.entity):nullptr){
+                shadow->validate();node.objectShadow=*shadow;
+            }else node.objectShadow.reset();
+            if(!node.parentId.empty()&&!world_.valid(reference.parent))node.parentId.clear();
+            if(kept!=index){result.nodes[kept]=std::move(node);output.nodes[kept]=reference;}
+            ++kept;
+        }
+        result.nodes.resize(kept);output.nodes.resize(kept);kept=0;
+        for(std::size_t index=0;index<result.lights.size();++index){
+            if(!world_.valid(output.lights[index]))continue;
+            if(kept!=index){result.lights[kept]=std::move(result.lights[index]);output.lights[kept]=output.lights[index];}
+            ++kept;
+        }
+        result.lights.resize(kept);output.lights.resize(kept);
+    }
+    void defer(ecs::System operation) {
+        if (state_ == State::Stopped) throw std::logic_error("Runtime is stopped");
+        if (!operation) throw std::invalid_argument("Empty deferred operation");
+        pending_.push_back(std::move(operation));
+    }
+    // Builder may enqueue only. Restore the entire queue and spawn reservations
+    // when validation or allocation fails before the next frame consumes it.
+    void transactionalQueue(const std::function<void()>& builder) {
+        auto operations=pending_;auto reservations=pendingSpawns_;
+        try{builder();}catch(...){pending_.swap(operations);pendingSpawns_.swap(reservations);throw;}
+    }
+    void validateSpawn(const SceneNode& node) {
+        if(node.objectShadow)node.objectShadow->validate();
+        if(node.id.empty()||node.id.size()>128||nodes_.count(node.id)||pendingSpawns_.count(node.id))
+            throw std::invalid_argument("Spawn identity is empty, too long or already reserved");
+        if(nodes_.size()+pendingSpawns_.size()>=4096)throw std::invalid_argument("Spawn node capacity exceeded");
+        if(!node.parentId.empty()&&!nodeValid(node.parentId))throw std::invalid_argument("Spawn parent is stale");
+        if(!node.resourceId.empty()&&std::none_of(scene_.resources.begin(),scene_.resources.end(),[&](const auto& r){return r.id==node.resourceId;}))
+            throw std::invalid_argument("Spawn resource is unavailable");
+    }
+    void deferSpawn(SceneNode node,std::function<void(ecs::World&,ecs::Entity)> configure={}) {
+        validateSpawn(node);const auto id=node.id;
+        defer([this,node=std::move(node),configure=std::move(configure)](auto& world){
+            pendingSpawns_.erase(node.id);
+            if(nodes_.count(node.id))throw std::invalid_argument("Spawn identity already exists: "+node.id);
+            if(!node.parentId.empty()&&!nodeValid(node.parentId))throw std::invalid_argument("Spawn parent is stale");
+            if(!node.resourceId.empty()&&std::none_of(scene_.resources.begin(),scene_.resources.end(),[&](const auto& r){return r.id==node.resourceId;}))
+                throw std::invalid_argument("Spawn resource is unavailable");
+            auto nodes=scene_.nodes;nodes.push_back(node);
+            auto snapshotSource=std::make_shared<const std::uint8_t>(0);
+            const auto entity=world.createEntity();
+            try {
+                world.addComponent(entity,NodeIdentity{node.id});
+                world.addComponent(entity,ecs::TransformComponent{node.translation,node.rotation,node.scale});
+                world.addComponent(entity,ecs::RenderableComponent{0,node.visible});
+                if(node.objectShadow)world.addComponent(entity,*node.objectShadow);
+                if(configure)configure(world,entity);
+                nodes_.emplace(node.id,entity);scene_.nodes.swap(nodes);snapshotSource_=std::move(snapshotSource);
+            }catch(...){world.destroyEntity(entity);throw;}
+        });
+        pendingSpawns_.insert(id);
+    }
+    double beginFrame(double delta) {
+        if (!std::isfinite(delta) || delta < 0)
+            throw std::invalid_argument("Runtime delta must be finite and nonnegative");
+        if (state_ == State::Created || state_ == State::Stopped) return 0;
+        auto operations = std::move(pending_);
+        pending_.clear();
+        const auto batchRevision=sceneRevision_;
+        for (std::size_t index=0;index<operations.size();++index) {
+            try{operations[index](world_);}
+            catch(...){
+                if(sceneRevision_==batchRevision&&state_!=State::Stopped)
+                    pending_.insert(pending_.begin(),std::make_move_iterator(operations.begin()+index+1),std::make_move_iterator(operations.end()));
+                throw;
+            }
+            if(sceneRevision_!=batchRevision||state_==State::Stopped)return 0;
+        }
+        if (state_ == State::Paused && !step_) return 0;
+        step_ = false;
+        world_.update();
+        return delta;
+    }
+
+   private:
+    struct NodeIdentity {
+        std::string id;
+    };
+    bool nodeValid(const std::string& id) {
+        const auto found = nodes_.find(id);
+        if (found == nodes_.end() || !world_.valid(found->second)) return false;
+        const auto* identity = world_.tryGet<NodeIdentity>(found->second);
+        return identity && identity->id == id;
+    }
+    std::uint64_t sceneRevision_ = 0;
+    SceneDocument scene_;
+    std::shared_ptr<const void> snapshotSource_=std::make_shared<const std::uint8_t>(0);
+    std::map<std::string, ecs::Entity> nodes_;
+    ecs::World world_;
+    State state_ = State::Created;
+    bool step_ = false;
+    std::vector<ecs::System> pending_;
+    std::set<std::string> pendingSpawns_;
+};
+}  // namespace azurerender

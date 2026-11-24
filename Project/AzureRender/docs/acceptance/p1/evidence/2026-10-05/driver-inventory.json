@@ -1,0 +1,16 @@
+[
+  {
+    "DriverDesc": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "VulkanDriverName": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nv-vk64.json",
+    "VulkanDriverNameWoW": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nv-vk32.json",
+    "manifestSha256": "03f225b04c69e55ee656b3fe3695d3c7a7c5a06dcd4727847e8fd630de62ae17",
+    "icdDeclaredApi": "1.4.329"
+  },
+  {
+    "DriverDesc": "Intel(R) UHD Graphics",
+    "VulkanDriverName": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igvk64.json",
+    "VulkanDriverNameWow": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igvk32.json",
+    "manifestSha256": "0c6ca9a3cc0139147153304801f81504246a9829fa405f80836ce028b85f3260",
+    "icdDeclaredApi": "1.1"
+  }
+]

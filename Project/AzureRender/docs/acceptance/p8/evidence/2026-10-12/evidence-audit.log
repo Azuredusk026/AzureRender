@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\audit-evidence.py", line 14, in <module>
+    end=data.index(b'\n',offset);header=data[offset:end].split();assert header[1]==b'blob',row['path'];size=int(header[2]);offset=end+1;blob=data[offset:offset+size];assert hashlib.sha256(blob).hexdigest()==row['sha256'],row['path'];offset+=size+1
+                                                                                                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Project/AzureRender/docs/acceptance/g17/evidence/2026-10-12/g17-debug-build-2.log

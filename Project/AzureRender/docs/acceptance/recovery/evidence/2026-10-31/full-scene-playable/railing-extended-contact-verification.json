@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "frames": 540,
+  "actions": 5,
+  "barrierRayPlaneZ": 6.042794419457369,
+  "capsuleRadius": 0.3,
+  "heldFrames": [
+    150,
+    280
+  ],
+  "heldContactPosition": [
+    -0.0006435868563130498,
+    1.2417584657669067,
+    6.362800121307373
+  ],
+  "heldMaximumHorizontalSpeed": 0.0,
+  "finalPosition": [
+    -0.0012210163986310363,
+    1.0811060667037964,
+    6.504214286804199
+  ],
+  "minimumZ": 6.362800121307373,
+  "lastSixtyGroundedIdle": true,
+  "lastSixtyMaximumHorizontalSpeed": 0.0,
+  "revision": 2,
+  "scope": "Continued-input blocking against the declared railing, then release and settling; native collider equivalence remains separate."
+}

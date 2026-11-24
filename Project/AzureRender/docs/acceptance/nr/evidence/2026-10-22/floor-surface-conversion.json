@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR4-G4",
+  "status": "source-algebra-passed",
+  "formalNr4Status": "Pending",
+  "nativeFrameEquivalenceVerified": false,
+  "device": "CPU",
+  "gpuExecuted": false,
+  "actualFloorAssetRebakePerformed": false,
+  "productionCases": {
+    "production-red": {
+      "groups": 6,
+      "failures": 12,
+      "receipt": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/floor-material-review/overlay/production-red/result.json",
+        "sha256": "b010154f5692f2195830f348561ce6528576ddb421d6b7b6d5c4e50e9228f111"
+      }
+    },
+    "production-green": {
+      "groups": 6,
+      "failures": 0,
+      "receipt": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/floor-material-review/overlay/production-green/result.json",
+        "sha256": "f095ac0d8179a0f15254ea2a9252ebf562b3c1e99a287359b9d9c097b8a3a6e5"
+      }
+    },
+    "production-via-spline": {
+      "groups": 6,
+      "failures": 0,
+      "receipt": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/floor-material-review/overlay/production-via-spline/result.json",
+        "sha256": "aa498a718d33d6ac19b29b4959289311958558d28527ebd7d0a950fb0aa68d5a"
+      }
+    },
+    "production-spline-regression": {
+      "groups": 7,
+      "failures": 0,
+      "receipt": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/floor-material-review/overlay/production-spline-regression/result.json",
+        "sha256": "86330a6a6f06bfc6d58aa65d7d019f7a8ab308cce88fd0109fb349fb639bf7ea"
+      }
+    }
+  },
+  "maximumAbsoluteChannelError": 0.002793315590565837,
+  "meshUvEvidence": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/floor-material-review/overlay/mesh-uv-evidence.json",
+    "sha256": "775fa7e58b6d19e0097fe92a292b566255e6bc05079bc3c8e9e95c6167927b99"
+  },
+  "sourceOracle": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/floor-material-review/overlay/tests/native-oracle.json",
+    "sha256": "2bd82401ea91eee3c557983bbc31f5b47df97adc1366471ace8afded82c37525"
+  },
+  "upstreamCandidateEvidence": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/floor-material-review/overlay/receipt.json",
+    "sha256": "31700c278dc47c63d90ce0ee629f1f4646f57159928a4be107a9ba18e6d4c647"
+  },
+  "splineProductionModules": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/floor-material-review/overlay/production-spline-regression/wrapper-receipt.json",
+    "sha256": "13c97cbcf3a172ac6c98c21e109ee4e7831f691a85365b1e5e5d90d802333ec3"
+  },
+  "remaining": [
+    "ECS extra vertex stream and UV binding",
+    "material constant upload",
+    "real floor rebake and native frame comparison"
+  ],
+  "sources": [
+    {
+      "path": "tools/blender/native_surface_materials.py",
+      "sha256": "dda29520c6f802951206bd13cc713b5fbf96eca67c72ae5c09e35f2cc280d3a1"
+    },
+    {
+      "path": "tools/blender/native_spline_materials.py",
+      "sha256": "6f045e7b510ff627708b63dcc603471a9c38f74d2bb02e463cb433d8a0fb9170"
+    },
+    {
+      "path": "tools/blender/build_native_spline_clips.py",
+      "sha256": "cc26cf90df7b1643f973fb7cc7059807206e92ec29bbe26cdd697ae85478a4e2"
+    },
+    {
+      "path": "tools/endfield_native/build_scene_preview.py",
+      "sha256": "a2fbb8ee495c3f378ecdab729c74d6fd97d08b01356b0aa1014fba6af19252e9"
+    },
+    {
+      "path": "tools/blender/test_native_surface_materials.py",
+      "sha256": "aecee0c28d5577a596693985136fbbed5ca660b553d547c6c169148bf806779f"
+    },
+    {
+      "path": "tools/blender/native_tri_surface_reference.py",
+      "sha256": "2be09fdabd0bcc0a899993c3b5547213f69a4e7d6a9d9d056a1769e698fa301d"
+    }
+  ],
+  "publicTest": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/floor-material-review/overlay/production-public-surface/result.json",
+    "sha256": "edf7c5de2418d1c0149f0e333f3bb99f965bf9d80b97a12d91efc47370e9cb0d"
+  }
+}

@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 16: AzureRender.SceneVisibility
+1/1 Test #16: AzureRender.SceneVisibility ......***Failed    0.07 sec
+[json.exception.out_of_range.403] key 'cameraNear' not found
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.08 sec
+
+The following tests FAILED:
+	 16 - AzureRender.SceneVisibility (Failed)
+Errors while running CTest

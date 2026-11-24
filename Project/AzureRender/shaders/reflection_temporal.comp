@@ -1,0 +1,59 @@
+#version 450
+layout(local_size_x=8,local_size_y=8) in;
+layout(binding=0) uniform sampler2D currentColor;
+layout(binding=1) uniform sampler2D currentConfidence;
+layout(binding=2) uniform sampler2D previousColor;
+layout(binding=3) uniform sampler2D previousConfidence;
+layout(binding=4) uniform sampler2D motionVectors;
+layout(binding=5) uniform sampler2D historyAcceptance;
+#if defined(AZURE_REFLECTION_PACKED)
+layout(r11f_g11f_b10f,binding=6) uniform writeonly image2D outputColor;
+layout(r8,binding=7) uniform writeonly image2D outputConfidence;
+#else
+layout(rgba32f,binding=6) uniform writeonly image2D outputColor;
+layout(r32f,binding=7) uniform writeonly image2D outputConfidence;
+#endif
+layout(std140,binding=8) uniform Settings {vec4 extent;vec4 limits;} frame;
+vec3 toLumaChroma(vec3 v){return vec3(dot(v.xzy,vec3(.25,.25,.5)),dot(v.xz,vec2(.5,-.5))+.501960814,dot(v.xzy,vec3(-.25,-.25,.5))+.501960814);}
+vec3 toRgb(vec3 v){v.yz-=.501960814;return vec3(v.x+v.y-v.z,v.x+v.z,v.x-v.y-v.z);}
+void storeSignal(ivec2 p,vec3 color,float confidence){
+    imageStore(outputColor,p,vec4(max(color,vec3(frame.limits.z)),1));
+    imageStore(outputConfidence,p,vec4(clamp(confidence,0,1)));
+}
+void main(){
+    ivec2 p=ivec2(gl_GlobalInvocationID.xy),extent=ivec2(frame.extent.xy);
+    if(any(greaterThanEqual(p,extent)))return;
+    vec3 current=texelFetch(currentColor,p,0).rgb;float confidence=texelFetch(currentConfidence,p,0).r;
+    int flags=int(frame.limits.w);
+    if((flags&1)==0){storeSignal(p,current,confidence);return;}
+    precise vec2 uv=(vec2(p)+.5)*frame.extent.zw;
+    vec2 motion=textureLod(motionVectors,uv,0).xy;
+    precise vec2 previousUv=uv-motion;
+    bool outside=any(lessThan(previousUv,vec2(0)))||any(greaterThan(previousUv,vec2(1)));
+    if(any(isnan(motion))||any(isinf(motion))||((flags&2)!=0&&outside)){storeSignal(p,current,confidence);return;}
+    float weight=clamp(textureLod(historyAcceptance,uv,0).r,0,1)*frame.limits.y;
+    if(!(weight>0)){storeSignal(p,current,confidence);return;}
+    vec3 history=textureLod(previousColor,previousUv,0).rgb;float historyMask=textureLod(previousConfidence,previousUv,0).r;
+    if(any(isnan(history))||any(isinf(history))||isnan(historyMask)||isinf(historyMask)){storeSignal(p,current,confidence);return;}
+    const ivec2 offsets[9]=ivec2[9](ivec2(0,-1),ivec2(-1,-1),ivec2(1,-1),ivec2(-1,0),ivec2(0),ivec2(1,0),ivec2(-1,1),ivec2(0,1),ivec2(1,1));
+    precise vec4 n[9];
+    for(int i=0;i<9;++i){ivec2 q=clamp(p+offsets[i],ivec2(0),extent-1);
+        n[i]=vec4(toLumaChroma(texelFetch(currentColor,q,0).rgb),texelFetch(currentConfidence,q,0).r);}
+    precise vec4 squares=n[0]*n[0];for(int i=1;i<9;++i)squares=fma(n[i],n[i],squares);
+    precise vec4 sum=n[0]+n[1];for(int i=2;i<9;++i)sum+=n[i];
+    precise vec4 mean=sum*(1.0/9.0);
+    precise vec4 deviation=sqrt(max(fma(squares,vec4(1.0/9.0),-mean*mean),vec4(0)))*frame.limits.x;
+    vec4 cornerLow=min(min(n[1],n[2]),min(n[6],n[8])),cornerHigh=max(max(n[1],n[2]),max(n[6],n[8]));
+    vec4 crossLow=min(min(min(n[7],n[5]),min(n[4],n[3])),n[0]),crossHigh=max(max(max(n[7],n[5]),max(n[4],n[3])),n[0]);
+    precise vec4 low=min(fma(sum,vec4(1.0/9.0),-deviation),(min(cornerLow,crossLow)+crossLow)*.5);
+    precise vec4 high=max(fma(sum,vec4(1.0/9.0),deviation),(max(cornerHigh,crossHigh)+crossHigh)*.5);
+    vec3 previous=toLumaChroma(history);
+    precise vec3 boundsSum=low.rgb+high.rgb,radius=(high.rgb-low.rgb)*.5;
+    precise vec3 difference=fma(-boundsSum,vec3(.5),previous);
+    vec3 normalized=abs(difference/radius);normalized=mix(normalized,vec3(0),isnan(normalized));
+    float maximum=max(max(normalized.z,normalized.y),normalized.x);
+    vec3 clipped=maximum>1?fma(boundsSum,vec3(.5),difference/maximum):previous;
+    vec3 result=fma(vec3(weight),toRgb(clipped)-current,current);
+    float mask=fma(weight,clamp(historyMask,low.w,high.w)-confidence,confidence);
+    storeSignal(p,result,mask);
+}

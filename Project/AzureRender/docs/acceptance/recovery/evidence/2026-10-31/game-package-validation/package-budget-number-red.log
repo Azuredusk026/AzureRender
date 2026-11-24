@@ -1,0 +1,69 @@
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime (timeout 61.25 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 61.25 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 0.01 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 0.01 s)
+........E..........
+======================================================================
+ERROR: test_invalid_validation_budgets_reject_before_launch (__main__.GamePackageRules.test_invalid_validation_budgets_reject_before_launch) (budget=10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 185, in test_invalid_validation_budgets_reject_before_launch
+    build_game.build_game(self.project,self.install,self.output,validation_timeout=budget)
+  File "D:\Projects\FYP\Project\AzureRender\tools\build_game.py", line 114, in build_game
+    validation_timeout = _validated_timeout(validation_timeout)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\build_game.py", line 23, in _validated_timeout
+    or not math.isfinite(value) or not 0 < value <= 3600):
+           ^^^^^^^^^^^^^^^^^^^^
+OverflowError: int too large to convert to float
+
+----------------------------------------------------------------------
+Ran 19 tests in 2.455s
+
+FAILED (errors=1)

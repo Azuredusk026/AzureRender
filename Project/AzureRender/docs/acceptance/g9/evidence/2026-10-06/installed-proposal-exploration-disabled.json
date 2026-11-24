@@ -1,0 +1,179 @@
+[
+  {
+    "elapsedMs": 22.2462,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": false
+  },
+  {
+    "elapsedMs": 1.3485,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "Disabled"
+  },
+  {
+    "elapsedMs": 0.8304,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "{\"contentHash\":\"fnv1a64:711ab960f4187a44\",\"documentId\":\"17912892385836626-1\",\"revision\":2}"
+  },
+  {
+    "elapsedMs": 2.2881,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": {
+      "diff": [
+        {
+          "op": "add",
+          "path": "/components/manual-without-model",
+          "value": {
+            "azure.renderable": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": false
+              },
+              "type": "azure.renderable",
+              "version": 1
+            },
+            "azure.transform": {
+              "data": {
+                "rotation": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "translation": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "type": "azure.transform",
+              "version": 1
+            }
+          }
+        },
+        {
+          "op": "add",
+          "path": "/nodes/-",
+          "value": {
+            "id": "manual-without-model",
+            "instanceOf": "",
+            "name": "manual-without-model",
+            "parentId": "",
+            "prefabSource": "",
+            "resourceId": "",
+            "rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "translation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "visible": false
+          }
+        }
+      ],
+      "value": null,
+      "version": {
+        "contentHash": "fnv1a64:e56839bd6c48b559",
+        "documentId": "17912892385836626-1",
+        "revision": 3
+      }
+    }
+  },
+  {
+    "elapsedMs": 42.8009,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "{\"contentHash\":\"fnv1a64:e56839bd6c48b559\",\"documentId\":\"17912892385836626-1\",\"revision\":3}"
+  },
+  {
+    "elapsedMs": 0.6187,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": {
+      "diff": [
+        {
+          "op": "remove",
+          "path": "/components/manual-without-model"
+        },
+        {
+          "op": "remove",
+          "path": "/nodes/22"
+        }
+      ],
+      "value": null,
+      "version": {
+        "contentHash": "fnv1a64:711ab960f4187a44",
+        "documentId": "17912892385836626-1",
+        "revision": 4
+      }
+    }
+  },
+  {
+    "elapsedMs": 39.399,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "{\"contentHash\":\"fnv1a64:711ab960f4187a44\",\"documentId\":\"17912892385836626-1\",\"revision\":4}"
+  },
+  {
+    "elapsedMs": 0.4149,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": {
+      "diff": [],
+      "value": null,
+      "version": {
+        "contentHash": "fnv1a64:711ab960f4187a44",
+        "documentId": "17912892385836626-1",
+        "revision": 4
+      }
+    }
+  },
+  {
+    "elapsedMs": 37.5819,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": true
+  },
+  {
+    "elapsedMs": 1.3926,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "{\"contentHash\":\"fnv1a64:711ab960f4187a44\",\"documentId\":\"17912892385836626-1\",\"revision\":4}"
+  },
+  {
+    "elapsedMs": 1.1441,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": {
+      "diff": [],
+      "value": null,
+      "version": {
+        "contentHash": "fnv1a64:711ab960f4187a44",
+        "documentId": "17912892385836626-1",
+        "revision": 4
+      }
+    }
+  },
+  {
+    "elapsedMs": 35.6006,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": false
+  }
+]

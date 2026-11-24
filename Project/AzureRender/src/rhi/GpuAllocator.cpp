@@ -8,6 +8,20 @@
 
 namespace azurerender::rhi {
 namespace {
+constexpr VkBufferUsageFlags deviceReadUsage=VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT
+    |VK_BUFFER_USAGE_STORAGE_BUFFER_BIT|VK_BUFFER_USAGE_VERTEX_BUFFER_BIT
+    |VK_BUFFER_USAGE_INDEX_BUFFER_BIT|VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT
+    |VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT|VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT;
+
+void accountBufferProperties(GpuAllocatorStatistics& statistics,const GpuBuffer& buffer,VkDeviceSize bytes,bool add) {
+    const bool local=(buffer.memoryProperties&VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT)!=0;
+    const auto update=[&](VkDeviceSize& value){if(add)value+=bytes;else value-=bytes;};
+    update(local?statistics.liveDeviceLocalBufferBytes:statistics.liveNonDeviceLocalBufferBytes);
+    if(buffer.mapped&&(buffer.usage&deviceReadUsage)){
+        update(statistics.liveMappedDeviceBufferBytes);
+        if(!local)update(statistics.liveMappedNonLocalDeviceBufferBytes);
+    }
+}
 
 void check(const VkResult result, const char* what) {
     if (result != VK_SUCCESS) {
@@ -61,6 +75,15 @@ void GpuAllocator::shutdown() {
     allocator_ = nullptr;
 }
 
+void GpuAllocator::updateMemoryHighWater(){
+    const VkPhysicalDeviceMemoryProperties* properties=nullptr;vmaGetMemoryProperties(allocator_,&properties);
+    VmaBudget budgets[VK_MAX_MEMORY_HEAPS]{};vmaGetHeapBudgets(allocator_,budgets);
+    VkDeviceSize bytes=0;
+    for(unsigned heap=0;heap<properties->memoryHeapCount;++heap)
+        if(properties->memoryHeaps[heap].flags & VK_MEMORY_HEAP_DEVICE_LOCAL_BIT)bytes+=budgets[heap].statistics.blockBytes;
+    statistics_.deviceLocalPeakBytes=std::max(statistics_.deviceLocalPeakBytes,bytes);
+}
+
 GpuBuffer GpuAllocator::createBuffer(
     const VkDeviceSize size,
     const VkBufferUsageFlags usage,
@@ -79,7 +102,8 @@ GpuBuffer GpuAllocator::createBuffer(
 
     VmaAllocationCreateInfo allocationInfo{};
     if (hostVisible) {
-        allocationInfo.usage = VMA_MEMORY_USAGE_AUTO_PREFER_HOST;
+        allocationInfo.usage = (usage & deviceReadUsage) != 0
+            ? VMA_MEMORY_USAGE_AUTO_PREFER_DEVICE : VMA_MEMORY_USAGE_AUTO_PREFER_HOST;
         allocationInfo.flags =
             VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT
             | VMA_ALLOCATION_CREATE_MAPPED_BIT;
@@ -106,10 +130,17 @@ GpuBuffer GpuAllocator::createBuffer(
         "vmaCreateBuffer");
     result.mapped = hostVisible ? info.pMappedData : nullptr;
     result.size = size;
+    result.usage=usage;
+    result.memoryTypeIndex=info.memoryType;
+    const VkPhysicalDeviceMemoryProperties* properties=nullptr;vmaGetMemoryProperties(allocator_,&properties);
+    result.memoryProperties=properties->memoryTypes[info.memoryType].propertyFlags;
 
     ++statistics_.bufferAllocations;
     ++statistics_.liveBuffers;
     statistics_.bufferBytes += info.size;
+    statistics_.liveBufferBytes+=info.size;updateMemoryHighWater();
+    ++statistics_.bufferMemoryPropertySamples;
+    accountBufferProperties(statistics_,result,info.size,true);
     return result;
 }
 
@@ -117,6 +148,9 @@ void GpuAllocator::destroyBuffer(GpuBuffer& buffer) noexcept {
     if (allocator_ == nullptr || buffer.buffer == VK_NULL_HANDLE) {
         return;
     }
+    VmaAllocationInfo info{};vmaGetAllocationInfo(allocator_,buffer.allocation,&info);
+    accountBufferProperties(statistics_,buffer,info.size,false);
+    statistics_.liveBufferBytes-=info.size;
     vmaDestroyBuffer(allocator_, buffer.buffer, buffer.allocation);
     if (statistics_.liveBuffers > 0) {
         --statistics_.liveBuffers;
@@ -158,10 +192,13 @@ GpuImage GpuAllocator::createImage(
     result.width = createInfo.extent.width;
     result.height = createInfo.extent.height;
     result.mipLevels = createInfo.mipLevels;
+    result.arrayLayers = createInfo.arrayLayers;
+    result.depth = createInfo.extent.depth;
 
     ++statistics_.imageAllocations;
     ++statistics_.liveImages;
     statistics_.imageBytes += info.size;
+    statistics_.liveImageBytes+=info.size;updateMemoryHighWater();
     return result;
 }
 
@@ -169,6 +206,8 @@ void GpuAllocator::destroyImage(GpuImage& image) noexcept {
     if (allocator_ == nullptr || image.image == VK_NULL_HANDLE) {
         return;
     }
+    VmaAllocationInfo info{};vmaGetAllocationInfo(allocator_,image.allocation,&info);
+    statistics_.liveImageBytes-=info.size;
     vmaDestroyImage(allocator_, image.image, image.allocation);
     if (statistics_.liveImages > 0) {
         --statistics_.liveImages;
@@ -209,4 +248,8 @@ void GpuAllocator::flush(
         "vmaFlushAllocation");
 }
 
+void GpuAllocator::invalidate(const GpuBuffer& buffer,VkDeviceSize offset,VkDeviceSize size){
+    if(!allocator_ || !buffer.allocation)throw std::invalid_argument("Readback requires an allocated buffer");
+    check(vmaInvalidateAllocation(allocator_,buffer.allocation,offset,size),"vmaInvalidateAllocation");
+}
 }  // namespace azurerender::rhi

@@ -1,0 +1,3 @@
+[1791039588623][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791039588980][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791039588987][info][render][code=0] Character skinning and morph: Vulkan compute path

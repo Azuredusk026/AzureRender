@@ -1,0 +1,27 @@
+{
+  "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\exploration-return-trace",
+  "command": [
+    "build/ninja-msvc-release-symbols/AzurePlayer.exe",
+    "--project",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\formal-source-verified\\exploration\\project.azureproject",
+    "--width",
+    "1920",
+    "--height",
+    "1080",
+    "--fixed-frame-step",
+    "--smoke-frames",
+    "2100",
+    "--game-actions",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\formal-source-verified\\exploration-1.input.json",
+    "--gpu-timing",
+    "--gpu-timing-output",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\exploration-trace-timing.json"
+  ],
+  "maxEvents": 100000,
+  "diagnosticOnly": true,
+  "fileHashes": {
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\trace_virtual_allocations.py": "9b0a0d82758f48ec2aa8c755bcddf5279aed06a37f8ab5be8061083af0fb12f8",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\AzurePlayer.exe": "d4b63b311852d63ecc1380831cc5653d26be7b08d8bbd6de512a81160553efe7",
+    "C:\\Program Files\\LLVM\\bin\\lldb.exe": "414b5463e2d2be0a72dd6e219a6f36925857e38b2712109162ccbebc1027d669"
+  }
+}

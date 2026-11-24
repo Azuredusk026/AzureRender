@@ -1,0 +1,25 @@
+#pragma once
+#include "UiMetrics.hpp"
+#include "ThemeTokens.hpp"
+#include <functional>
+#include <string>
+namespace azurerender::ui {
+enum class ButtonVariant { Default, Toolbar, Primary, Danger };
+struct ButtonOptions { ButtonVariant variant=ButtonVariant::Default;bool selected=false,disabled=false;std::string tooltip;ImVec2 size{0,0}; };
+bool button(const char* label,const ButtonOptions& options={});
+bool combo(const char* label,int* current,const char* items);
+bool inputText(const char* label,std::string& value,ImGuiInputTextFlags flags=0);
+bool inputTextMultiline(const char* label,std::string& value,ImVec2 size);
+void propertyRow(const char* label,const UiMetrics& metrics,const std::function<void()>& draw);
+void resultMessage(const std::string& message,bool failed);
+void sectionHeading(const char* title,const char* description="");
+void card(const char* id,const std::function<void()>& draw);
+void taskFeedback(const std::string& stage,const char* detail="");
+enum class StatusKind { Neutral, Info, Warning, Error, Success };
+bool searchField(const char* id,const char* hint,ImGuiTextFilter& filter,float width=-1);
+void nextToolbarItem(float width);
+float buttonWidth(const char* label);
+void statusText(const char* text,StatusKind kind);
+void emptyState(const char* title,const char* detail="");
+void previewPlaceholder(const char* label,ImVec2 size);
+}

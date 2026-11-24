@@ -1,0 +1,336 @@
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+-- Automatically setting %HTTP(S)_PROXY% environment variables to "127.0.0.1:7897".
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+    glfw3:x64-windows@3.5.1
+  * imath:x64-windows@3.2.2
+    joltphysics:x64-windows@5.6.0
+  * libdeflate[core,zlib,gzip,decompression,compression]:x64-windows@1.25
+    lua:x64-windows@5.4.8
+  * nlohmann-json:x64-windows@3.12.0#2
+    openexr:x64-windows@3.4.13
+  * openjph:x64-windows@0.31.0
+    sol2:x64-windows@3.5.0#1
+    stb:x64-windows@2024-07-29#1
+    tinygltf:x64-windows@3.0.0#1
+  * vcpkg-cmake:x64-windows@2024-04-23
+  * vcpkg-cmake-config:x64-windows@2026-07-21
+    vulkan-memory-allocator:x64-windows@3.4.0
+The following packages will be built and installed:
+  * brotli:x64-windows@1.2.0
+  * bzip2[core,tool]:x64-windows@1.0.8#6
+  * freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3
+  * itlib:x64-windows@1.12.2
+  * libpng:x64-windows@1.6.58
+    miniaudio:x64-windows@0.11.25
+    rmlui[core,freetype]:x64-windows@6.3
+  * robin-hood-hashing:x64-windows@3.11.5#2
+  * zlib:x64-windows@1.3.2#1
+Additional packages (*) will be modified to complete this operation.
+Restored 0 package(s) from C:\Users\23587\AppData\Local\vcpkg\archives in 928 us. Use --debug to see more details.
+Installing 1/9 miniaudio:x64-windows@0.11.25...
+miniaudio:x64-windows@0.11.25 package ABI: 3c7f6483902b4b4289af9c39703d0ca1f900370a32383ef21e0c1d69e9dc813b
+Building miniaudio:x64-windows@0.11.25...
+Downloading https://github.com/mackron/miniaudio/archive/0.11.25.tar.gz -> mackron-miniaudio-0.11.25.tar.gz
+Successfully downloaded mackron-miniaudio-0.11.25.tar.gz
+-- Extracting source C:/Users/23587/Tools/vcpkg/downloads/mackron-miniaudio-0.11.25.tar.gz
+-- Using source at C:/Users/23587/Tools/vcpkg/buildtrees/miniaudio/src/0.11.25-9ce6c48799.clean
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/miniaudio_x64-windows/include/miniaudio.h
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/miniaudio_x64-windows/share/miniaudio/copyright
+-- Performing post-build validation
+Starting submission of miniaudio:x64-windows@0.11.25 to 1 binary cache(s) in the background
+Elapsed time to handle miniaudio:x64-windows: 8.7 s
+Installing 2/9 zlib:x64-windows@1.3.2#1...
+zlib:x64-windows@1.3.2#1 package ABI: f7168ffc959275bf8eb1bef3431be32900b118176c8fbf25627c4ef11acc806d
+Building zlib:x64-windows@1.3.2#1...
+Downloading https://github.com/madler/zlib/archive/v1.3.2.tar.gz -> madler-zlib-v1.3.2.tar.gz
+Successfully downloaded madler-zlib-v1.3.2.tar.gz
+-- Extracting source C:/Users/23587/Tools/vcpkg/downloads/madler-zlib-v1.3.2.tar.gz
+-- Applying patch 0001-no-version-script-on-ohos.patch
+-- Using source at C:/Users/23587/Tools/vcpkg/buildtrees/zlib/src/v1.3.2-c19a0bfd23.clean
+-- Configuring x64-windows
+-- Building x64-windows-dbg
+-- Building x64-windows-rel
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/zlib_x64-windows/lib/pkgconfig/zlib.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.5.1-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.5-1-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/23587/Tools/vcpkg/downloads/tools/msys2/3e71d1f8e22ab23f
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/zlib_x64-windows/debug/lib/pkgconfig/zlib.pc
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/zlib_x64-windows/share/zlib/vcpkg-cmake-wrapper.cmake
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/zlib_x64-windows/share/zlib/copyright
+-- Performing post-build validation
+Starting submission of zlib:x64-windows@1.3.2#1 to 1 binary cache(s) in the background
+Elapsed time to handle zlib:x64-windows: 12 s
+Completed submission of miniaudio:x64-windows@0.11.25 to 1 binary cache(s) in 544 ms
+Installing 3/9 libpng:x64-windows@1.6.58...
+libpng:x64-windows@1.6.58 package ABI: 0d873164dc79134c70f771522112904f9ebe2053efa22686d2f5de8ceec37302
+Building libpng:x64-windows@1.6.58...
+Downloading https://github.com/pnggroup/libpng/archive/v1.6.58.tar.gz -> pnggroup-libpng-v1.6.58.tar.gz
+Successfully downloaded pnggroup-libpng-v1.6.58.tar.gz
+-- Extracting source C:/Users/23587/Tools/vcpkg/downloads/pnggroup-libpng-v1.6.58.tar.gz
+-- Applying patch cmake.patch
+-- Using source at C:/Users/23587/Tools/vcpkg/buildtrees/libpng/src/v1.6.58-b91136795d.clean
+-- Configuring x64-windows
+-- Building x64-windows-dbg
+-- Building x64-windows-rel
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/libpng_x64-windows/share/png/vcpkg-cmake-wrapper.cmake
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/libpng_x64-windows/share/libpng/libpng-config.cmake
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/libpng_x64-windows/lib/pkgconfig/libpng16.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.5.1-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.5-1-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/23587/Tools/vcpkg/downloads/tools/msys2/3e71d1f8e22ab23f
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/libpng_x64-windows/debug/lib/pkgconfig/libpng16.pc
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/libpng_x64-windows/debug/lib/pkgconfig/libpng.pc
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/libpng_x64-windows/lib/pkgconfig/libpng.pc
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/libpng_x64-windows/share/libpng/usage
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/libpng_x64-windows/share/libpng/copyright
+-- Performing post-build validation
+Starting submission of libpng:x64-windows@1.6.58 to 1 binary cache(s) in the background
+Elapsed time to handle libpng:x64-windows: 11 s
+Completed submission of zlib:x64-windows@1.3.2#1 to 1 binary cache(s) in 146 ms
+Installing 4/9 bzip2[core,tool]:x64-windows@1.0.8#6...
+bzip2[core,tool]:x64-windows@1.0.8#6 package ABI: e471703af655f3d375605c102513cbb851ef3bf9c2577651d61aa3d69be229b4
+Building bzip2[core,tool]:x64-windows@1.0.8#6...
+Downloading bzip2-1.0.8.tar.gz, trying https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz
+Successfully downloaded bzip2-1.0.8.tar.gz
+-- Extracting source C:/Users/23587/Tools/vcpkg/downloads/bzip2-1.0.8.tar.gz
+-- Applying patch fix-import-export-macros.patch
+-- Using source at C:/Users/23587/Tools/vcpkg/buildtrees/bzip2/src/bzip2-1-336d4794a3.clean
+-- Configuring x64-windows
+-- Building x64-windows-dbg
+-- Building x64-windows-rel
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/bzip2_x64-windows/lib/pkgconfig/bzip2.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.5.1-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.5-1-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/23587/Tools/vcpkg/downloads/tools/msys2/3e71d1f8e22ab23f
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/bzip2_x64-windows/debug/lib/pkgconfig/bzip2.pc
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/bzip2_x64-windows/share/bzip2/copyright
+-- Performing post-build validation
+Starting submission of bzip2[core,tool]:x64-windows@1.0.8#6 to 1 binary cache(s) in the background
+Elapsed time to handle bzip2:x64-windows: 9.1 s
+Completed submission of libpng:x64-windows@1.6.58 to 1 binary cache(s) in 194 ms
+Installing 5/9 brotli:x64-windows@1.2.0...
+brotli:x64-windows@1.2.0 package ABI: 938ac341d779b43ffa739aed2ac8728d3407d25f43b46f627187224a9018cebd
+Building brotli:x64-windows@1.2.0...
+Downloading https://github.com/google/brotli/archive/v1.2.0.tar.gz -> google-brotli-v1.2.0.tar.gz
+Successfully downloaded google-brotli-v1.2.0.tar.gz
+-- Extracting source C:/Users/23587/Tools/vcpkg/downloads/google-brotli-v1.2.0.tar.gz
+-- Applying patch install.patch
+-- Applying patch pkgconfig.patch
+-- Using source at C:/Users/23587/Tools/vcpkg/buildtrees/brotli/src/v1.2.0-7af7ca71ad.clean
+-- Configuring x64-windows
+-- Building x64-windows-dbg
+-- Building x64-windows-rel
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/brotli_x64-windows/lib/pkgconfig/libbrotlicommon.pc
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/brotli_x64-windows/lib/pkgconfig/libbrotlidec.pc
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/brotli_x64-windows/lib/pkgconfig/libbrotlienc.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.5.1-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.5-1-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/23587/Tools/vcpkg/downloads/tools/msys2/3e71d1f8e22ab23f
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/brotli_x64-windows/debug/lib/pkgconfig/libbrotlicommon.pc
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/brotli_x64-windows/debug/lib/pkgconfig/libbrotlidec.pc
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/brotli_x64-windows/debug/lib/pkgconfig/libbrotlienc.pc
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/brotli_x64-windows/share/brotli/usage
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/brotli_x64-windows/share/brotli/copyright
+-- Performing post-build validation
+Starting submission of brotli:x64-windows@1.2.0 to 1 binary cache(s) in the background
+Elapsed time to handle brotli:x64-windows: 12 s
+Completed submission of bzip2[core,tool]:x64-windows@1.0.8#6 to 1 binary cache(s) in 158 ms
+Installing 6/9 freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3...
+freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3 package ABI: a00add19821fca5c43fa9f8e4e3ce0945ef7cc1a137893a5f4a89705f38cfdfe
+Building freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3...
+Downloading https://gitlab.freedesktop.org//freetype/freetype/-/archive/VER-2-14-3/freetype-VER-2-14-3.tar.gz -> freetype-freetype-VER-2-14-3.tar.gz
+Successfully downloaded freetype-freetype-VER-2-14-3.tar.gz
+-- Extracting source C:/Users/23587/Tools/vcpkg/downloads/freetype-freetype-VER-2-14-3.tar.gz
+-- Applying patch 0003-Fix-UWP.patch
+-- Applying patch brotli-static.patch
+-- Applying patch bzip2.patch
+-- Applying patch fix-exports.patch
+-- Using source at C:/Users/23587/Tools/vcpkg/buildtrees/freetype/src/VER-2-14-3-46d5ca34ec.clean
+-- Configuring x64-windows
+-- Building x64-windows-dbg
+-- Building x64-windows-rel
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/freetype_x64-windows/lib/pkgconfig/freetype2.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.5.1-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.5-1-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/23587/Tools/vcpkg/downloads/tools/msys2/3e71d1f8e22ab23f
+-- Fixing pkgconfig file: C:/Users/23587/Tools/vcpkg/packages/freetype_x64-windows/debug/lib/pkgconfig/freetype2.pc
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/freetype_x64-windows/share/freetype/usage
+-- Performing post-build validation
+Starting submission of freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3 to 1 binary cache(s) in the background
+Elapsed time to handle freetype:x64-windows: 17 s
+Completed submission of brotli:x64-windows@1.2.0 to 1 binary cache(s) in 256 ms
+Installing 7/9 robin-hood-hashing:x64-windows@3.11.5#2...
+robin-hood-hashing:x64-windows@3.11.5#2 package ABI: 3b96f37d64603f6fed9899de6b6538b9a0ea4dea468802474b8fb5cf389ca9c0
+Building robin-hood-hashing:x64-windows@3.11.5#2...
+Downloading https://github.com/martinus/robin-hood-hashing/archive/3.11.5.tar.gz -> martinus-robin-hood-hashing-3.11.5.tar.gz
+Successfully downloaded martinus-robin-hood-hashing-3.11.5.tar.gz
+-- Extracting source C:/Users/23587/Tools/vcpkg/downloads/martinus-robin-hood-hashing-3.11.5.tar.gz
+-- Applying patch fix-missing-stdint.patch
+-- Using source at C:/Users/23587/Tools/vcpkg/buildtrees/robin-hood-hashing/src/3.11.5-1544b7a068.clean
+-- Configuring x64-windows
+-- Building x64-windows-dbg
+-- Building x64-windows-rel
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/robin-hood-hashing_x64-windows/share/robin-hood-hashing/copyright
+-- Performing post-build validation
+Starting submission of robin-hood-hashing:x64-windows@3.11.5#2 to 1 binary cache(s) in the background
+Elapsed time to handle robin-hood-hashing:x64-windows: 4.6 s
+Completed submission of freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3 to 1 binary cache(s) in 334 ms
+Installing 8/9 itlib:x64-windows@1.12.2...
+itlib:x64-windows@1.12.2 package ABI: 3c255ee620072b8be8458c04e5d28eb1d8bd682e0bffa36eb991f2be584d2931
+Building itlib:x64-windows@1.12.2...
+Downloading https://github.com/iboB/itlib/archive/v1.12.2.tar.gz -> iboB-itlib-v1.12.2.tar.gz
+Successfully downloaded iboB-itlib-v1.12.2.tar.gz
+-- Extracting source C:/Users/23587/Tools/vcpkg/downloads/iboB-itlib-v1.12.2.tar.gz
+-- Using source at C:/Users/23587/Tools/vcpkg/buildtrees/itlib/src/v1.12.2-7c651724e1.clean
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/any.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/atomic.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/atomic_shared_ptr_storage.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/data_mutex.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/dynamic_bitset.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/expected.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/flat_map.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/flat_set.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/generator.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/make_ptr.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/memory_view.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/mem_streambuf.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/mutex.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/opt_ref_buffer.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/pmr_allocator.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/pod_vector.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/poly_span.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/qalgorithm.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/rand_dist.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/ref_ptr.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/rstream.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/sentry.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/shared_from.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/small_vector.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/span.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/static_vector.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/stride_span.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/strutil.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/tep_vector.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/throw_ex.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/time_t.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/transparent_umap.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/type_traits.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/ufunction.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/include/itlib/utility.hpp
+-- Installing: C:/Users/23587/Tools/vcpkg/packages/itlib_x64-windows/share/itlib/copyright
+-- Performing post-build validation
+Starting submission of itlib:x64-windows@1.12.2 to 1 binary cache(s) in the background
+Elapsed time to handle itlib:x64-windows: 2.9 s
+Completed submission of robin-hood-hashing:x64-windows@3.11.5#2 to 1 binary cache(s) in 60.6 ms
+Installing 9/9 rmlui[core,freetype]:x64-windows@6.3...
+rmlui[core,freetype]:x64-windows@6.3 package ABI: 0c730615f93faf93e662718c9f2bb654c3ed1fd9c54092323daa8a4af636a907
+Building rmlui[core,freetype]:x64-windows@6.3...
+Downloading https://github.com/mikke89/RmlUi/archive/6.3.tar.gz -> mikke89-RmlUi-6.3.tar.gz
+Successfully downloaded mikke89-RmlUi-6.3.tar.gz
+-- Extracting source C:/Users/23587/Tools/vcpkg/downloads/mikke89-RmlUi-6.3.tar.gz
+-- Applying patch add-itlib-and-robin-hood.patch
+-- Applying patch skip-custom-find-modules.patch
+-- Using source at C:/Users/23587/Tools/vcpkg/buildtrees/rmlui/src/6.3-a8819a3876.clean
+-- Configuring x64-windows
+-- Building x64-windows-dbg
+-- Building x64-windows-rel
+-- Performing post-build validation
+Starting submission of rmlui[core,freetype]:x64-windows@6.3 to 1 binary cache(s) in the background
+Elapsed time to handle rmlui:x64-windows: 36 s
+Installed contents are licensed to you by owners. Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Packages installed in this vcpkg installation declare the following licenses:
+(FTL OR GPL-2.0-or-later)
+(Unlicense OR MIT-0)
+MIT
+Zlib
+bzip2-1.0.6
+libpng-2.0
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+miniaudio is header-only and can be used from CMake via:
+
+  find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
+  target_include_directories(main PRIVATE ${MINIAUDIO_INCLUDE_DIRS})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+rmlui provides CMake targets:
+
+    find_package(RmlUi CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE RmlUi::RmlUi)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+Completed submission of itlib:x64-windows@1.12.2 to 1 binary cache(s) in 106 ms
+Waiting for 1 remaining binary cache submissions...
+Completed submission of rmlui[core,freetype]:x64-windows@6.3 to 1 binary cache(s) in 2.9 s (1/1)
+All requested installations completed successfully in: 1.9 min
+-- Running vcpkg install - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug

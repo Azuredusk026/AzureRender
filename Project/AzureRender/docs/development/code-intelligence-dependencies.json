@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "installedBy": "python -m pip install --only-binary=:all: --target build/qa-python/code-intelligence -r tools/requirements-code-intelligence.txt",
+  "platform": "Windows x64 / Python 3.11",
+  "packages": [
+    {
+      "name": "tree-sitter",
+      "version": "0.25.2",
+      "license": "MIT",
+      "sources": [
+        "Homepage, https://tree-sitter.github.io/tree-sitter/",
+        "Source, https://github.com/tree-sitter/py-tree-sitter",
+        "Documentation, https://tree-sitter.github.io/py-tree-sitter/",
+        "Discord, https://discord.gg/w7nTvsVJhm",
+        "Matrix, https://matrix.to/#/#tree-sitter-chat:matrix.org"
+      ],
+      "licenseFiles": [
+        {
+          "file": "tree_sitter-0.25.2.dist-info/licenses/LICENSE",
+          "sha256": "c40a115b3d7d429c839bc51ace3464c2f37c9559bad6c6251a86281c27ea5431"
+        }
+      ]
+    },
+    {
+      "name": "tree-sitter-cpp",
+      "version": "0.23.4",
+      "license": "MIT",
+      "sources": [
+        "Homepage, https://github.com/tree-sitter/tree-sitter-cpp"
+      ],
+      "licenseFiles": [
+        {
+          "file": "tree_sitter_cpp-0.23.4.dist-info/LICENSE",
+          "sha256": "2e0110e07abef7c2548b26ec9d6969775617ca539a0dc8dbeeb14d6452c711d1"
+        }
+      ]
+    },
+    {
+      "name": "tree-sitter-python",
+      "version": "0.25.0",
+      "license": "MIT",
+      "sources": [
+        "Homepage, https://github.com/tree-sitter/tree-sitter-python"
+      ],
+      "licenseFiles": [
+        {
+          "file": "tree_sitter_python-0.25.0.dist-info/licenses/LICENSE",
+          "sha256": "d724405ce238a22c0d35769c5a36b386ad5958192efe8bbb304fb2896254575f"
+        }
+      ]
+    },
+    {
+      "name": "tree-sitter-c-sharp",
+      "version": "0.23.5",
+      "license": "MIT",
+      "sources": [
+        "Homepage, https://github.com/tree-sitter/tree-sitter-c-sharp"
+      ],
+      "licenseFiles": [
+        {
+          "file": "tree_sitter_c_sharp-0.23.5.dist-info/licenses/LICENSE",
+          "sha256": "778fb7d63b8c1844da315648c02f325c4713a6f4a5d19644fd413421422776d3"
+        }
+      ]
+    }
+  ]
+}

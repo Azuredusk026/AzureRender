@@ -1,0 +1,3385 @@
+Start testing: Oct 08 04:40 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+----------------------------------------------------------
+4/167 Testing: AzureEngine.EvolutionCoverage
+4/167 Test: AzureEngine.EvolutionCoverage
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/verify_evolution_coverage.py" "--manifest" "D:/Assigment/2609/FYP/Project/AzureRender/docs/plans/engine-evolution-manifest.json" "--evidence" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/evolution-coverage" "--build-dir" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release" "--configuration" "Release" "--historical-policy" "committed-content"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.EvolutionCoverage" start time: Oct 08 04:40 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+{"status": "passed", "coveredItems": 18, "phases": 11, "historicalByteAudit": "incomplete", "unverifiedHistoricalInputs": 24}
+<end of output>
+Test time =  21.36 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.EvolutionCoverage" end time: Oct 08 04:40 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.EvolutionCoverage" time elapsed: 00:00:21
+----------------------------------------------------------
+
+5/167 Testing: AzureTools.ScriptBindings
+5/167 Test: AzureTools.ScriptBindings
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_script_bindings.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureTools.ScriptBindings" start time: Oct 08 04:40 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+...
+----------------------------------------------------------------------
+Ran 3 tests in 2.695s
+
+OK
+<end of output>
+Test time =   3.28 sec
+----------------------------------------------------------
+Test Passed.
+"AzureTools.ScriptBindings" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureTools.ScriptBindings" time elapsed: 00:00:03
+----------------------------------------------------------
+
+17/167 Testing: AzureTools.ShaderComposition
+17/167 Test: AzureTools.ShaderComposition
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_shader_composition.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureTools.ShaderComposition" start time: Oct 08 04:40 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.011s
+
+OK
+<end of output>
+Test time =   4.91 sec
+----------------------------------------------------------
+Test Passed.
+"AzureTools.ShaderComposition" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureTools.ShaderComposition" time elapsed: 00:00:04
+----------------------------------------------------------
+
+34/167 Testing: AzureAI.Bridge
+34/167 Test: AzureAI.Bridge
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_ai_bridge.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureAI.Bridge" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 4.129s
+
+OK
+<end of output>
+Test time =   5.02 sec
+----------------------------------------------------------
+Test Passed.
+"AzureAI.Bridge" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureAI.Bridge" time elapsed: 00:00:05
+----------------------------------------------------------
+
+16/167 Testing: AzureTools.ShaderTypes
+16/167 Test: AzureTools.ShaderTypes
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_shader_types.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureTools.ShaderTypes" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.269s
+
+OK
+<end of output>
+Test time =   2.94 sec
+----------------------------------------------------------
+Test Passed.
+"AzureTools.ShaderTypes" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureTools.ShaderTypes" time elapsed: 00:00:02
+----------------------------------------------------------
+
+93/167 Testing: AzureEngine.BuildConfiguration
+93/167 Test: AzureEngine.BuildConfiguration
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_build_configuration.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.BuildConfiguration" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+...
+----------------------------------------------------------------------
+Ran 3 tests in 7.572s
+
+OK
+<end of output>
+Test time =   8.18 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.BuildConfiguration" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.BuildConfiguration" time elapsed: 00:00:08
+----------------------------------------------------------
+
+1/167 Testing: AzureTools.EvolutionCoverage
+1/167 Test: AzureTools.EvolutionCoverage
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_evolution_coverage.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureTools.EvolutionCoverage" start time: Oct 08 04:40 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.
+----------------------------------------------------------------------
+Ran 15 tests in 14.753s
+
+OK
+<end of output>
+Test time =  15.34 sec
+----------------------------------------------------------
+Test Passed.
+"AzureTools.EvolutionCoverage" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureTools.EvolutionCoverage" time elapsed: 00:00:15
+----------------------------------------------------------
+
+55/167 Testing: AzureEngine.ModuleBoundaryFixtures
+55/167 Test: AzureEngine.ModuleBoundaryFixtures
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_module_boundaries.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ModuleBoundaryFixtures" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+.........
+----------------------------------------------------------------------
+Ran 9 tests in 3.642s
+
+OK
+<end of output>
+Test time =   4.28 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ModuleBoundaryFixtures" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ModuleBoundaryFixtures" time elapsed: 00:00:04
+----------------------------------------------------------
+
+85/167 Testing: AzureEngine.RepositoryAudit
+85/167 Test: AzureEngine.RepositoryAudit
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_repository_audit.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.RepositoryAudit" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+....
+----------------------------------------------------------------------
+Ran 4 tests in 3.304s
+
+OK
+<end of output>
+Test time =   3.93 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.RepositoryAudit" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.RepositoryAudit" time elapsed: 00:00:03
+----------------------------------------------------------
+
+39/167 Testing: AzureTools.Cli
+39/167 Test: AzureTools.Cli
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_azure_cli.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureTools.Cli" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+......
+----------------------------------------------------------------------
+Ran 6 tests in 1.943s
+
+OK
+<end of output>
+Test time =   2.55 sec
+----------------------------------------------------------
+Test Passed.
+"AzureTools.Cli" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureTools.Cli" time elapsed: 00:00:02
+----------------------------------------------------------
+
+56/167 Testing: AzureEngine.ModuleBoundaries
+56/167 Test: AzureEngine.ModuleBoundaries
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/check_module_boundaries.py" "--source" "D:/Assigment/2609/FYP/Project/AzureRender" "--build-dir" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ModuleBoundaries" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+{
+  "status": "passed",
+  "targets": 17,
+  "includes": 7632,
+  "violations": []
+}
+<end of output>
+Test time =   2.84 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ModuleBoundaries" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ModuleBoundaries" time elapsed: 00:00:02
+----------------------------------------------------------
+
+2/167 Testing: AzureTools.EngineContracts
+2/167 Test: AzureTools.EngineContracts
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_engine_contracts.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureTools.EngineContracts" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.111s
+
+OK
+<end of output>
+Test time =   0.64 sec
+----------------------------------------------------------
+Test Passed.
+"AzureTools.EngineContracts" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureTools.EngineContracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+44/167 Testing: AzureTools.ValidationProtocol
+44/167 Test: AzureTools.ValidationProtocol
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_validation_protocol.py" "--probe" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureValidationProbe.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureTools.ValidationProtocol" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Validation transport: discovery, authentication, limits, timeout and shutdown passed
+<end of output>
+Test time =   1.97 sec
+----------------------------------------------------------
+Test Passed.
+"AzureTools.ValidationProtocol" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureTools.ValidationProtocol" time elapsed: 00:00:01
+----------------------------------------------------------
+
+95/167 Testing: AzureTools.NativeWindow
+95/167 Test: AzureTools.NativeWindow
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_native_window.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureTools.NativeWindow" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.024s
+
+OK
+<end of output>
+Test time =   1.00 sec
+----------------------------------------------------------
+Test Passed.
+"AzureTools.NativeWindow" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureTools.NativeWindow" time elapsed: 00:00:01
+----------------------------------------------------------
+
+7/167 Testing: AzureTools.VisibilityBenchmark
+7/167 Test: AzureTools.VisibilityBenchmark
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_visibility_benchmark.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureTools.VisibilityBenchmark" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+OK
+<end of output>
+Test time =   0.74 sec
+----------------------------------------------------------
+Test Passed.
+"AzureTools.VisibilityBenchmark" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureTools.VisibilityBenchmark" time elapsed: 00:00:00
+----------------------------------------------------------
+
+43/167 Testing: AzureAssets.GenerationManifest
+43/167 Test: AzureAssets.GenerationManifest
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureGenerationManifestTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureAssets.GenerationManifest" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Generated content provenance, rollback, movement and pack passed
+<end of output>
+Test time =   1.28 sec
+----------------------------------------------------------
+Test Passed.
+"AzureAssets.GenerationManifest" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureAssets.GenerationManifest" time elapsed: 00:00:01
+----------------------------------------------------------
+
+33/167 Testing: AzureAI.ModelProtocol
+33/167 Test: AzureAI.ModelProtocol
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureModelProtocolTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tests/fixtures/ai/protocol.json" "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/ai_bridge.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureAI.ModelProtocol" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Model framing, version, ordering, bounds and platform transport contract passed
+<end of output>
+Test time =   0.97 sec
+----------------------------------------------------------
+Test Passed.
+"AzureAI.ModelProtocol" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureAI.ModelProtocol" time elapsed: 00:00:00
+----------------------------------------------------------
+
+60/167 Testing: AzureEngine.EditorWorkflow
+60/167 Test: AzureEngine.EditorWorkflow
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureEditorWorkflowTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.EditorWorkflow" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405679422][info][editor][code=0] Opened scene: courtyard
+[1791405679481][info][editor][code=0] Imported asset: test_model.gltf (48 vertices)
+[1791405679525][info][editor][code=0] Selected node: Placed Object
+[1791405679525][info][editor][code=0] Selected node: configured-camera
+[1791405679525][info][editor][code=0] Undo
+[1791405679525][info][editor][code=0] Selected node: Placed Object
+[1791405679526][info][editor][code=0] Undo
+[1791405679526][info][editor][code=0] Redo
+[1791405679526][info][editor][code=0] Undo
+[1791405679526][info][editor][code=0] Selected node: hero
+[1791405679543][info][editor][code=0] Undo
+[1791405679594][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure_editor_workflow\assets\courtyard.azurelevel
+[1791405679646][info][editor][code=0] Opened scene: courtyard
+[1791405679698][info][editor][code=0] Generated asset: assets:/generated.azurelevel
+[1791405680971][info][editor][code=0] Play started
+[sol2] An exception occurred: UI handler unavailable
+[1791405680976][warning][script][code=0] assets:/player.lua: UI handler unavailable
+stack traceback:
+	[C]: in method 'ui_text'
+	...pData/Local/Temp/azure_editor_workflow/assets/player.lua:15: in function <...pData/Local/Temp/azure_editor_workflow/assets/player.lua:7>
+[1791405681030][info][editor][code=0] Play stopped; edit state restored
+[1791405681049][info][editor][code=0] Selected node: placed:root
+[1791405681049][info][editor][code=0] Placed prefab: placed
+[1791405681050][info][editor][code=0] Undo
+[1791405681051][info][editor][code=0] Redo
+[1791405681079][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure_editor_workflow\assets\courtyard.azurelevel
+[1791405681085][info][editor][code=0] Reloaded scene: courtyard
+[1791405681085][info][editor][code=0] Selected node: placed:root
+[1791405681085][info][editor][code=0] Selected node: hero
+[1791405681135][info][editor][code=0] Opened scene: courtyard
+[1791405681137][info][editor][code=0] Selected node: test:root
+[1791405681167][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure_editor_workflow\assets\courtyard.azurelevel
+[1791405681205][info][editor][code=0] Opened scene: courtyard
+[1791405681208][info][editor][code=0] Selected node: Prefab Override
+[1791405681208][info][editor][code=0] Selected node: Prefab Override
+[1791405681233][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure_editor_workflow\assets\courtyard.azurelevel
+[1791405681268][info][editor][code=0] Opened scene: courtyard
+[1791405681288][info][editor][code=0] Opened scene: startup
+[1791405681295][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure_editor_workflow\legacy\assets\startup.azscene
+[1791405681308][info][editor][code=0] Opened scene: startup
+Project import, placement, editing, history, save/reopen and isolated play passed
+<end of output>
+Test time =   2.08 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.EditorWorkflow" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.EditorWorkflow" time elapsed: 00:00:02
+----------------------------------------------------------
+
+27/167 Testing: AzureRender.HotReload
+27/167 Test: AzureRender.HotReload
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureHotReloadTests.exe" "C:/VulkanSDK/1.4.350.0/Bin/glslc.exe" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/hot-reload-tests"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.HotReload" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Shader dependencies, candidate preservation, recovery and cancellation passed
+<end of output>
+Test time =   0.85 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.HotReload" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.HotReload" time elapsed: 00:00:00
+----------------------------------------------------------
+
+131/167 Testing: AzureEditor.TaskService
+131/167 Test: AzureEditor.TaskService
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureEditorTaskServiceTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/test_model.gltf"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.TaskService" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405681391][info][editor][code=0] Opened scene: startup
+[1791405681452][info][editor][code=0] Imported asset: test_model.gltf (48 vertices)
+[1791405681510][info][editor][code=0] ERROR [asset.import: C:\Users\23587\AppData\Local\Temp\azure-tasks-33264477218200\missing.gltf]: [{"code":"OperationFailed","message":"Import dependency missing: C:\\Users\\23587\\AppData\\Local\\Temp\\azure-tasks-33264477218200\\missing.gltf"}]
+[1791405681547][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-tasks-33264477218200\assets\startup.azscene
+[1791405681561][info][editor][code=0] Opened scene: startup
+Panel-independent import, cancellation, failure and saved identity passed
+<end of output>
+Test time =   0.24 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.TaskService" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.TaskService" time elapsed: 00:00:00
+----------------------------------------------------------
+
+91/167 Testing: AzureEngine.GamePackageRules
+91/167 Test: AzureEngine.GamePackageRules
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_game_package_rules.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.GamePackageRules" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 1.399s
+
+OK
+<end of output>
+Test time =   1.99 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.GamePackageRules" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.GamePackageRules" time elapsed: 00:00:01
+----------------------------------------------------------
+
+3/167 Testing: AzureEngine.ContractsSnapshot
+3/167 Test: AzureEngine.ContractsSnapshot
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/write_engine_contracts.py" "--verify" "--output" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/contracts"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ContractsSnapshot" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+{"status": "passed", "coveredItems": 18, "files": 42}
+<end of output>
+Test time =   0.46 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ContractsSnapshot" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ContractsSnapshot" time elapsed: 00:00:00
+----------------------------------------------------------
+
+53/167 Testing: AzureEngine.RegisteredComponentWorkflow
+53/167 Test: AzureEngine.RegisteredComponentWorkflow
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRegisteredComponentWorkflowTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.RegisteredComponentWorkflow" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405681659][info][editor][code=0] Opened scene: inspection
+[1791405681660][info][editor][code=0] Selected node: tool
+[1791405681695][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure_registered_33264723827500\assets\inspect.azurelevel
+[1791405681725][info][editor][code=0] Opened scene: inspection
+[1791405682584][info][editor][code=0] Play started
+[1791405682632][info][editor][code=0] Play stopped; edit state restored
+Independent tool component: editor, save/reopen, Lua and preview isolation passed
+<end of output>
+Test time =   1.07 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.RegisteredComponentWorkflow" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.RegisteredComponentWorkflow" time elapsed: 00:00:01
+----------------------------------------------------------
+
+132/167 Testing: AzureEditor.AssetWorkflow
+132/167 Test: AzureEditor.AssetWorkflow
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureEditorAssetWorkflowTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/test_model.gltf"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.AssetWorkflow" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405682728][info][editor][code=0] Opened scene: startup
+[1791405682733][info][editor][code=0] Opened scene: startup
+[1791405682734][info][editor][code=0] Selected node: Placed Object
+[1791405682736][info][editor][code=0] Undo
+[1791405682736][info][editor][code=0] Opened scene: startup
+[1791405682737][info][editor][code=0] Selected node: Placed Object
+[1791405682738][info][editor][code=0] Opened scene: startup
+[1791405682739][info][editor][code=0] ERROR [asset.place]: Placement requires a nonzero ray direction
+[1791405682782][info][editor][code=0] Opened scene: save
+[1791405682785][info][editor][code=0] Opened scene: save
+[1791405682811][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-assets-33265791618000\save-project\assets\save.azurelevel
+Asset identity, ray placement, undo and UTF-8 directory history passed
+<end of output>
+Test time =   0.18 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.AssetWorkflow" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.AssetWorkflow" time elapsed: 00:00:00
+----------------------------------------------------------
+
+89/167 Testing: AzureEngine.AnimationRetarget
+89/167 Test: AzureEngine.AnimationRetarget
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_animation_retarget.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.AnimationRetarget" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.354s
+
+OK
+<end of output>
+Test time =   1.32 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.AnimationRetarget" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.AnimationRetarget" time elapsed: 00:00:01
+----------------------------------------------------------
+
+94/167 Testing: AzureEngine.BuildProvenance
+94/167 Test: AzureEngine.BuildProvenance
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_build_provenance.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.BuildProvenance" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.937s
+
+OK
+<end of output>
+Test time =   1.60 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.BuildProvenance" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.BuildProvenance" time elapsed: 00:00:01
+----------------------------------------------------------
+
+47/167 Testing: AzureEditor.EditTransaction
+47/167 Test: AzureEditor.EditTransaction
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureEditTransactionTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.EditTransaction" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405682858][info][editor][code=0] Opened scene: test
+[1791405682861][info][editor][code=0] Opened scene: test
+[1791405682862][info][editor][code=0] Selected node: candidate
+[1791405682863][info][editor][code=0] Opened scene: test
+[1791405682864][info][editor][code=0] Selected node: first
+[1791405682867][info][editor][code=0] Undo
+[1791405682869][info][editor][code=0] Redo
+[1791405682871][info][editor][code=0] Undo
+[1791405682872][info][editor][code=0] Redo
+[1791405682874][info][editor][code=0] Opened scene: test
+[1791405682877][info][editor][code=0] Opened scene: test
+[1791405682881][info][editor][code=0] Opened scene: test
+[1791405682883][info][editor][code=0] Undo
+[1791405682884][info][editor][code=0] Redo
+[1791405682886][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-edit-transaction.azscene
+[1791405682898][info][editor][code=0] Reloaded scene: test
+[1791405682898][info][editor][code=0] Opened scene: test
+[1791405682899][info][editor][code=0] Selected node: Batch object
+[1791405683032][info][editor][code=0] Opened scene: courtyard
+[1791405683035][info][editor][code=0] Opened scene: courtyard
+[1791405683036][info][editor][code=0] Selected node: hero
+[1791405683044][info][editor][code=0] Opened scene: courtyard
+[1791405683044][info][editor][code=0] Selected node: floor
+[1791405683062][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-edit-preview-project\assets\courtyard.azurelevel
+[1791405683064][info][editor][code=0] Game build started
+[1791405683065][info][editor][code=0] ERROR [node.create]: Operation requires an idle edit session
+Edit transaction, complete rollback, history and stale rejection passed
+<end of output>
+Test time =   0.73 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.EditTransaction" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.EditTransaction" time elapsed: 00:00:00
+----------------------------------------------------------
+
+68/167 Testing: AzureEngine.ManagedRuntime.coreclr
+68/167 Test: AzureEngine.ManagedRuntime.coreclr
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureManagedScriptRuntimeTests.exe" "coreclr" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/managed/coreclr"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ManagedRuntime.coreclr" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405683767][warning][script][code=0] assets:/control.azscript: Managed script: ÂÄôÈÄâÂàùÂßãÂåñÂ§±Ë¥•
+[1791405683816][warning][script][code=0] assets:/broken.azscript: Managed script: ËøêË°åÂõûË∞ÉÂ§±Ë¥•
+Registered coreclr service, components, events, reload, scene lifetime and shutdown passed
+{"backend":"coreclr","iterations":1000,"startupMs":88.6262,"stepMsPerIteration":0.0354906}
+<end of output>
+Test time =   0.27 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ManagedRuntime.coreclr" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ManagedRuntime.coreclr" time elapsed: 00:00:00
+----------------------------------------------------------
+
+130/167 Testing: AzureEditor.ContentWorkflow
+130/167 Test: AzureEditor.ContentWorkflow
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureEditorContentWorkflowTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.ContentWorkflow" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405683861][info][editor][code=0] Opened scene: content
+[1791405683863][info][editor][code=0] Opened scene: content
+[1791405683865][info][editor][code=0] Opened scene: content
+[1791405683868][info][editor][code=0] Opened scene: content
+[1791405683870][info][editor][code=0] Opened scene: content
+[1791405683872][info][editor][code=0] Opened scene: content
+[1791405683874][info][editor][code=0] Opened scene: content
+[1791405683876][info][editor][code=0] Opened scene: content
+[1791405683878][info][editor][code=0] Opened scene: content
+[1791405683881][info][editor][code=0] Undo
+[1791405683882][info][editor][code=0] Opened scene: content
+[1791405683884][info][editor][code=0] Opened scene: content
+subtree: passed
+[1791405683886][info][editor][code=0] Opened scene: content
+[1791405683887][info][editor][code=0] Opened scene: content
+[1791405683890][info][editor][code=0] Undo
+[1791405683892][info][editor][code=0] Opened scene: content
+[1791405683893][info][editor][code=0] ERROR [node.reparent]: Reparent would create a hierarchy cycle
+[1791405683894][info][editor][code=0] Opened scene: content
+[1791405683896][info][editor][code=0] Opened scene: content
+[1791405683898][info][editor][code=0] Opened scene: content
+[1791405683899][info][editor][code=0] ERROR [node.reparent]: Transform contains shear that local TRS cannot represent
+reparent: passed
+[1791405683899][info][editor][code=0] Opened scene: content
+[1791405683901][info][editor][code=0] Opened scene: content
+[1791405683904][info][editor][code=0] Opened scene: content
+[1791405683906][info][editor][code=0] Opened scene: content
+[1791405683909][info][editor][code=0] Opened scene: content
+[1791405683912][info][editor][code=0] Undo
+[1791405683912][info][editor][code=0] Opened scene: content
+[1791405683915][info][editor][code=0] Undo
+[1791405683916][info][editor][code=0] Opened scene: content
+[1791405683917][info][editor][code=0] ERROR [component.remove]: This component is required by the scene node
+[1791405683917][info][editor][code=0] Opened scene: content
+[1791405683921][info][editor][code=0] Opened scene: content
+[1791405683923][info][editor][code=0] Opened scene: content
+components: passed
+metadata: passed
+[1791405683925][info][editor][code=0] Opened scene: content
+[1791405683926][info][editor][code=0] Opened scene: content
+[1791405683927][info][editor][code=0] ERROR [node.reparent]: Unknown node: missing
+feedback: passed
+[1791405683929][info][editor][code=0] Opened scene: content
+[1791405683930][info][editor][code=0] Opened scene: content
+[1791405683932][info][editor][code=0] Opened scene: content
+[1791405683934][info][editor][code=0] Opened scene: content
+[1791405683936][info][editor][code=0] Opened scene: content
+[1791405683938][info][editor][code=0] Opened scene: content
+[1791405683941][info][editor][code=0] Opened scene: content
+[1791405683943][info][editor][code=0] Opened scene: content
+registered: passed
+[1791405683945][info][editor][code=0] Opened scene: content
+[1791405683946][info][editor][code=0] Opened scene: content
+[1791405683948][info][editor][code=0] Opened scene: content
+[1791405683953][info][editor][code=0] Opened scene: content
+[1791405683955][info][editor][code=0] Opened scene: content
+[1791405683957][info][editor][code=0] Undo
+[1791405683958][info][editor][code=0] Undo
+queries: passed
+<end of output>
+Test time =   0.13 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.ContentWorkflow" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.ContentWorkflow" time elapsed: 00:00:00
+----------------------------------------------------------
+
+92/167 Testing: AzureEngine.PlayableDeliveryRules
+92/167 Test: AzureEngine.PlayableDeliveryRules
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_playable_delivery_rules.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.PlayableDeliveryRules" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.028s
+
+OK
+<end of output>
+Test time =   1.00 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.PlayableDeliveryRules" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.PlayableDeliveryRules" time elapsed: 00:00:01
+----------------------------------------------------------
+
+37/167 Testing: AzureEditor.ProposalAdapter
+37/167 Test: AzureEditor.ProposalAdapter
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureProposalAdapterTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/scene_inspector"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.ProposalAdapter" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405683986][info][editor][code=0] Opened scene: test
+[1791405683987][info][editor][code=0] Opened scene: test
+[1791405683988][info][editor][code=0] Opened scene: test
+[1791405683988][info][editor][code=0] Selected node: candidate
+[1791405683990][info][editor][code=0] Opened scene: test
+[1791405683991][info][editor][code=0] Opened scene: test
+[1791405683991][info][editor][code=0] Opened scene: test
+[1791405683992][info][editor][code=0] Opened scene: test
+[1791405683993][info][editor][code=0] Opened scene: test
+[1791405683994][info][editor][code=0] Opened scene: test
+[1791405683994][info][editor][code=0] Selected node: duplicate
+[1791405683996][info][editor][code=0] Opened scene: test
+[1791405683996][info][editor][code=0] Opened scene: test
+[1791405683997][info][editor][code=0] Selected node: test
+[1791405684098][info][editor][code=0] Opened scene: courtyard
+[1791405684144][info][editor][code=0] Generated asset: assets:/generated-ai.json
+[1791405684181][info][editor][code=0] Generated asset: assets:/generated-ai.gltf
+[1791405684182][info][editor][code=0] Opened scene: courtyard
+[1791405684183][info][editor][code=0] Selected node: Placed Object
+[1791405684186][info][editor][code=0] Undo
+[1791405684187][info][editor][code=0] Opened scene: courtyard
+[1791405684188][info][editor][code=0] ERROR [node.place]: Placement requires a registered model asset
+[1791405684189][info][editor][code=0] Opened scene: courtyard
+[1791405684190][info][editor][code=0] Selected node: Placed Object
+[1791405684192][info][editor][code=0] Opened scene: courtyard
+[1791405684246][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\33267099400600\a0\assets\courtyard.azurelevel
+[1791405684256][info][editor][code=0] Reloaded scene: courtyard
+[1791405684297][info][editor][code=0] Opened scene: inspection
+[1791405684330][info][editor][code=0] Generated asset: assets:/generated-ai.json
+[1791405684379][info][editor][code=0] Generated asset: assets:/generated-ai.gltf
+[1791405684380][info][editor][code=0] Opened scene: inspection
+[1791405684381][info][editor][code=0] Selected node: Placed Object
+[1791405684383][info][editor][code=0] Undo
+[1791405684384][info][editor][code=0] Opened scene: inspection
+[1791405684385][info][editor][code=0] ERROR [node.place]: Placement requires a registered model asset
+[1791405684385][info][editor][code=0] Opened scene: inspection
+[1791405684386][info][editor][code=0] Selected node: Placed Object
+[1791405684388][info][editor][code=0] Opened scene: inspection
+[1791405684437][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\33267099400600\a1\assets\inspection.azurelevel
+[1791405684442][info][editor][code=0] Reloaded scene: inspection
+Two domain adapters, bounds, references, scope, preview and generation source passed
+<end of output>
+Test time =   0.49 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.ProposalAdapter" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.ProposalAdapter" time elapsed: 00:00:00
+----------------------------------------------------------
+
+73/167 Testing: AzureEngine.ScriptRuntime
+73/167 Test: AzureEngine.ScriptRuntime
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureScriptRuntimeTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ScriptRuntime" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405683342][warning][script][code=0] assets:/bad.lua: ...587/AppData/Local/Temp/azure_script_tests/assets/bad.lua:1: isolated error
+stack traceback:
+	[C]: in function 'base.error'
+	...587/AppData/Local/Temp/azure_script_tests/assets/bad.lua:1: in function <...587/AppData/Local/Temp/azure_script_tests/assets/bad.lua:1>
+[1791405683343][warning][script][code=0] assets:/loop.lua: Script instruction budget exceeded
+stack traceback:
+	...87/AppData/Local/Temp/azure_script_tests/assets/loop.lua:1: in function <...87/AppData/Local/Temp/azure_script_tests/assets/loop.lua:1>
+[1791405683345][warning][script][code=0] assets:/good.lua: ...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1: <name> or '...' expected near <eof>
+[1791405683349][warning][script][code=0] assets:/good.lua: ...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1: init failed
+stack traceback:
+	[C]: in function 'base.error'
+	...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1: in function <...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1>
+[sol2] An exception occurred: Gameplay mutation requires a runtime callback
+[1791405683359][warning][script][code=0] assets:/good.lua: Gameplay mutation requires a runtime callback
+stack traceback:
+	[C]: in method 'set'
+	...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1: in main chunk
+[sol2] An exception occurred: Script entity handle is stale
+[1791405683373][warning][script][code=0] assets:/good.lua: Script entity handle is stale
+stack traceback:
+	[C]: in method 'get'
+	...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1: in function <...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1>
+[1791405683996][warning][script][code=0] assets:/good.lua: [string "return function(backing, readOnly)..."]:8: Script object API fields are read only
+stack traceback:
+	[C]: in function 'base.error'
+	[string "return function(backing, readOnly)..."]:8: in metamethod 'newindex'
+	...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1: in function <...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1>
+[sol2] An exception occurred: Spawn identity is empty, too long or already reserved
+[1791405684008][warning][script][code=0] assets:/good.lua: Spawn identity is empty, too long or already reserved
+stack traceback:
+	[C]: in method 'spawn'
+	...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:2: in function <...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:2>
+Lua lookup private bytes: 58527744 -> 58527744
+Lua reflection, error and loop isolation, triggers, reload retention and entity cleanup passed
+<end of output>
+Test time =   1.20 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ScriptRuntime" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ScriptRuntime" time elapsed: 00:00:01
+----------------------------------------------------------
+
+20/167 Testing: AzureAssets.ProceduralProcess
+20/167 Test: AzureAssets.ProceduralProcess
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureProceduralProcessTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureGeometryCompiler.exe" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/procedural-process-tests"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureAssets.ProceduralProcess" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Real compiler process, deadlines, cancellation, cleanup and recovery passed
+<end of output>
+Test time =   0.26 sec
+----------------------------------------------------------
+Test Passed.
+"AzureAssets.ProceduralProcess" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureAssets.ProceduralProcess" time elapsed: 00:00:00
+----------------------------------------------------------
+
+28/167 Testing: AzurePlatform.ProcessRunner
+28/167 Test: AzurePlatform.ProcessRunner
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureProcessRunnerTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzurePlatform.ProcessRunner" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Controlled process arguments, deadlines, cancellation and output budgets passed
+<end of output>
+Test time =   0.35 sec
+----------------------------------------------------------
+Test Passed.
+"AzurePlatform.ProcessRunner" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzurePlatform.ProcessRunner" time elapsed: 00:00:00
+----------------------------------------------------------
+
+63/167 Testing: AzureEngine.ResourceFrameTrace
+63/167 Test: AzureEngine.ResourceFrameTrace
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureResourceFrameTraceTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ResourceFrameTrace" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Retained resource trace private bytes: 720896 -> 1904640
+Trace schema, bounded ordered retention and memory budgets passed
+<end of output>
+Test time =   0.14 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ResourceFrameTrace" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ResourceFrameTrace" time elapsed: 00:00:00
+----------------------------------------------------------
+
+69/167 Testing: AzureEngine.ManagedRuntime.nativeaot
+69/167 Test: AzureEngine.ManagedRuntime.nativeaot
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureManagedScriptRuntimeTests.exe" "nativeaot" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/managed/nativeaot"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ManagedRuntime.nativeaot" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405685036][warning][script][code=0] NativeAOT reload requires a rebuilt module and a new process
+[1791405685080][warning][script][code=0] assets:/broken.azscript: Managed script: ËøêË°åÂõûË∞ÉÂ§±Ë¥•
+Registered nativeaot service, components, events, reload, scene lifetime and shutdown passed
+{"backend":"nativeaot","iterations":1000,"startupMs":6.7452,"stepMsPerIteration":0.0220127}
+<end of output>
+Test time =   0.20 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ManagedRuntime.nativeaot" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ManagedRuntime.nativeaot" time elapsed: 00:00:00
+----------------------------------------------------------
+
+90/167 Testing: AzureEngine.SourceSkinRestore
+90/167 Test: AzureEngine.SourceSkinRestore
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_skin_restore.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.SourceSkinRestore" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+<end of output>
+Test time =   0.94 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.SourceSkinRestore" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.SourceSkinRestore" time elapsed: 00:00:00
+----------------------------------------------------------
+
+135/167 Testing: AzureRender.DocumentBackup
+135/167 Test: AzureRender.DocumentBackup
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureDocumentBackupTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.DocumentBackup" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405685111][info][editor][code=0] Opened scene: mesh
+[1791405685112][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-document-backup-33268224812200\scene.azscene
+[1791405685135][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-document-backup-33268224812200\scene.azscene
+[1791405685162][info][editor][code=0] Opened scene: startup
+[1791405685178][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-document-backup-33268224812200\project\assets\startup.azscene
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.DocumentBackup" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.DocumentBackup" time elapsed: 00:00:00
+----------------------------------------------------------
+
+158/167 Testing: AzureEngine.PlayerCli
+158/167 Test: AzureEngine.PlayerCli
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_player_cli.py" "--executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzurePlayer.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.PlayerCli" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Player CLI: creation, migration, validation and error contracts passed
+<end of output>
+Test time =   0.80 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.PlayerCli" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.PlayerCli" time elapsed: 00:00:00
+----------------------------------------------------------
+
+97/167 Testing: AzureEngine.CharacterPreparation
+97/167 Test: AzureEngine.CharacterPreparation
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_character_preparation.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.CharacterPreparation" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.018s
+
+OK
+<end of output>
+Test time =   0.62 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.CharacterPreparation" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.CharacterPreparation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+96/167 Testing: AzureEngine.CharacterIntake
+96/167 Test: AzureEngine.CharacterIntake
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_character_intake.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.CharacterIntake" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+<end of output>
+Test time =   0.68 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.CharacterIntake" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.CharacterIntake" time elapsed: 00:00:00
+----------------------------------------------------------
+
+66/167 Testing: AzureEngine.ManagedModule.coreclr
+66/167 Test: AzureEngine.ManagedModule.coreclr
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureManagedModuleTests.exe" "coreclr" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/managed/coreclr"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ManagedModule.coreclr" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+{"backend":"coreclr","diagnostics":{"liveContexts":0,"objects":0,"sessions":0},"startupMs":84.2899,"status":"passed"}
+<end of output>
+Test time =   0.17 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ManagedModule.coreclr" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ManagedModule.coreclr" time elapsed: 00:00:00
+----------------------------------------------------------
+
+136/167 Testing: AzureRender.DocumentActionGuard
+136/167 Test: AzureRender.DocumentActionGuard
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureDocumentActionGuardTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.DocumentActionGuard" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405686069][info][editor][code=0] Opened scene: mesh
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.DocumentActionGuard" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.DocumentActionGuard" time elapsed: 00:00:00
+----------------------------------------------------------
+
+15/167 Testing: AzureTools.ShaderModule
+15/167 Test: AzureTools.ShaderModule
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_shader_module.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureTools.ShaderModule" start time: Oct 08 04:40 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 25.479s
+
+OK
+<end of output>
+Test time =  26.41 sec
+----------------------------------------------------------
+Test Passed.
+"AzureTools.ShaderModule" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureTools.ShaderModule" time elapsed: 00:00:26
+----------------------------------------------------------
+
+36/167 Testing: AzureEditor.ProposalController
+36/167 Test: AzureEditor.ProposalController
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureProposalControllerTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.ProposalController" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405686110][info][editor][code=0] Opened scene: test
+[1791405686115][info][editor][code=0] Opened scene: test
+[1791405686116][info][editor][code=0] Opened scene: test
+[1791405686117][info][editor][code=0] Selected node: generated
+[1791405686119][info][editor][code=0] Opened scene: test
+[1791405686120][info][editor][code=0] Opened scene: test
+[1791405686120][info][editor][code=0] Selected node: generated
+[1791405686121][info][editor][code=0] Opened scene: test
+[1791405686122][info][editor][code=0] Selected node: generated
+[1791405686123][info][editor][code=0] Undo
+[1791405686127][info][editor][code=0] Opened scene: test
+[1791405686128][info][editor][code=0] Opened scene: test
+[1791405686129][info][editor][code=0] Selected node: after-repair
+[1791405686135][info][editor][code=0] Opened scene: test
+[1791405686136][info][editor][code=0] Opened scene: test
+[1791405686137][info][editor][code=0] Selected node: stale
+[1791405686138][info][editor][code=0] Opened scene: test
+[1791405686138][info][editor][code=0] Selected node: manual
+[1791405686149][info][editor][code=0] Opened scene: test
+[1791405686150][info][editor][code=0] Opened scene: test
+[1791405686150][info][editor][code=0] Selected node: stale
+[1791405686153][info][editor][code=0] Undo
+[1791405686156][info][editor][code=0] Opened scene: test
+[1791405686157][info][editor][code=0] Selected node: without-ai
+[1791405686161][info][editor][code=0] Opened scene: test
+[1791405686162][info][editor][code=0] Opened scene: test
+[1791405686163][info][editor][code=0] Selected node: within-budget
+[1791405686166][info][editor][code=0] Opened scene: test
+[1791405686168][info][editor][code=0] Opened scene: test
+[1791405686168][info][editor][code=0] Selected node: within-budget
+[1791405686171][info][editor][code=0] Opened scene: test
+[1791405686172][info][editor][code=0] Opened scene: test
+[1791405686173][info][editor][code=0] Selected node: within-budget
+[1791405686175][info][editor][code=0] Opened scene: test
+[1791405686176][info][editor][code=0] Opened scene: test
+[1791405686176][info][editor][code=0] Selected node: within-budget
+[1791405686180][info][editor][code=0] Opened scene: test
+[1791405686181][info][editor][code=0] Opened scene: test
+[1791405686181][info][editor][code=0] Selected node: within-budget
+[1791405686184][info][editor][code=0] Opened scene: test
+[1791405686185][info][editor][code=0] Opened scene: test
+[1791405686185][info][editor][code=0] Selected node: within-budget
+[1791405686188][info][editor][code=0] Opened scene: test
+[1791405686189][info][editor][code=0] Opened scene: test
+[1791405686189][info][editor][code=0] Selected node: within-budget
+[1791405686192][info][editor][code=0] Opened scene: test
+[1791405686193][info][editor][code=0] Opened scene: test
+[1791405686193][info][editor][code=0] Selected node: within-budget
+[1791405686196][info][editor][code=0] Opened scene: test
+[1791405686196][info][editor][code=0] Opened scene: test
+[1791405686197][info][editor][code=0] Selected node: within-budget
+[1791405686200][info][editor][code=0] Opened scene: test
+[1791405686201][info][editor][code=0] Opened scene: test
+[1791405686201][info][editor][code=0] Selected node: within-budget
+[1791405686203][info][editor][code=0] Opened scene: test
+[1791405686204][info][editor][code=0] Opened scene: test
+[1791405686205][info][editor][code=0] Selected node: within-budget
+[1791405686207][info][editor][code=0] Opened scene: test
+[1791405686208][info][editor][code=0] Opened scene: test
+[1791405686208][info][editor][code=0] Selected node: within-budget
+[1791405686211][info][editor][code=0] Opened scene: test
+[1791405686212][info][editor][code=0] Opened scene: test
+[1791405686212][info][editor][code=0] Selected node: within-budget
+[1791405686215][info][editor][code=0] Opened scene: test
+[1791405686216][info][editor][code=0] Opened scene: test
+[1791405686216][info][editor][code=0] Selected node: within-budget
+[1791405686219][info][editor][code=0] Opened scene: test
+[1791405686220][info][editor][code=0] Opened scene: test
+[1791405686220][info][editor][code=0] Selected node: within-budget
+[1791405686222][info][editor][code=0] Opened scene: test
+[1791405686223][info][editor][code=0] Opened scene: test
+[1791405686224][info][editor][code=0] Selected node: within-budget
+[1791405686226][info][editor][code=0] Opened scene: test
+[1791405686227][info][editor][code=0] Opened scene: test
+[1791405686227][info][editor][code=0] Selected node: within-budget
+[1791405686229][info][editor][code=0] Opened scene: test
+[1791405686230][info][editor][code=0] Opened scene: test
+[1791405686230][info][editor][code=0] Selected node: within-budget
+[1791405686233][info][editor][code=0] Opened scene: test
+[1791405686233][info][editor][code=0] Opened scene: test
+[1791405686234][info][editor][code=0] Selected node: within-budget
+[1791405686236][info][editor][code=0] Opened scene: test
+[1791405686237][info][editor][code=0] Opened scene: test
+[1791405686237][info][editor][code=0] Selected node: within-budget
+[1791405686240][info][editor][code=0] Opened scene: test
+[1791405686240][info][editor][code=0] Opened scene: test
+[1791405686241][info][editor][code=0] Selected node: within-budget
+[1791405686243][info][editor][code=0] Opened scene: test
+[1791405686244][info][editor][code=0] Opened scene: test
+[1791405686244][info][editor][code=0] Selected node: within-budget
+[1791405686247][info][editor][code=0] Opened scene: test
+[1791405686248][info][editor][code=0] Opened scene: test
+[1791405686248][info][editor][code=0] Selected node: within-budget
+[1791405686250][info][editor][code=0] Opened scene: test
+[1791405686251][info][editor][code=0] Opened scene: test
+[1791405686251][info][editor][code=0] Selected node: within-budget
+[1791405686254][info][editor][code=0] Opened scene: test
+[1791405686255][info][editor][code=0] Opened scene: test
+[1791405686255][info][editor][code=0] Selected node: within-budget
+[1791405686257][info][editor][code=0] Opened scene: test
+[1791405686258][info][editor][code=0] Opened scene: test
+[1791405686258][info][editor][code=0] Selected node: within-budget
+[1791405686261][info][editor][code=0] Opened scene: test
+[1791405686262][info][editor][code=0] Opened scene: test
+[1791405686262][info][editor][code=0] Selected node: within-budget
+[1791405686264][info][editor][code=0] Opened scene: test
+[1791405686265][info][editor][code=0] Opened scene: test
+[1791405686265][info][editor][code=0] Selected node: within-budget
+[1791405686268][info][editor][code=0] Opened scene: test
+[1791405686269][info][editor][code=0] Opened scene: test
+[1791405686269][info][editor][code=0] Selected node: within-budget
+[1791405686272][info][editor][code=0] Opened scene: test
+[1791405686272][info][editor][code=0] Opened scene: test
+[1791405686273][info][editor][code=0] Selected node: within-budget
+[1791405686275][info][editor][code=0] Opened scene: test
+[1791405686276][info][editor][code=0] Opened scene: test
+[1791405686276][info][editor][code=0] Selected node: within-budget
+[1791405686279][info][editor][code=0] Opened scene: test
+[1791405686280][info][editor][code=0] Opened scene: test
+[1791405686280][info][editor][code=0] Selected node: within-budget
+[1791405686283][info][editor][code=0] Opened scene: test
+[1791405686285][info][editor][code=0] Opened scene: test
+[1791405686285][info][editor][code=0] Selected node: within-budget
+[1791405686288][info][editor][code=0] Opened scene: test
+[1791405686289][info][editor][code=0] Opened scene: test
+[1791405686289][info][editor][code=0] Selected node: within-budget
+[1791405686292][info][editor][code=0] Opened scene: test
+[1791405686293][info][editor][code=0] Opened scene: test
+[1791405686294][info][editor][code=0] Selected node: within-budget
+[1791405686297][info][editor][code=0] Opened scene: test
+[1791405686297][info][editor][code=0] Opened scene: test
+[1791405686298][info][editor][code=0] Selected node: within-budget
+Proposal preview, repair, cancellation, stale rejection, transaction and history passed
+<end of output>
+Test time =   0.23 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.ProposalController" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.ProposalController" time elapsed: 00:00:00
+----------------------------------------------------------
+
+159/167 Testing: AzureRender.BlackholeOptimizationRules
+159/167 Test: AzureRender.BlackholeOptimizationRules
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_blackhole_optimization.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.BlackholeOptimizationRules" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
+<end of output>
+Test time =   0.75 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.BlackholeOptimizationRules" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.BlackholeOptimizationRules" time elapsed: 00:00:00
+----------------------------------------------------------
+
+157/167 Testing: AzureRender.R4AcceptanceRules
+157/167 Test: AzureRender.R4AcceptanceRules
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_r4_acceptance.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.R4AcceptanceRules" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
+<end of output>
+Test time =   0.78 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.R4AcceptanceRules" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.R4AcceptanceRules" time elapsed: 00:00:00
+----------------------------------------------------------
+
+70/167 Testing: AzureEngine.ScriptBackendParity.lua
+70/167 Test: AzureEngine.ScriptBackendParity.lua
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureManagedScriptRuntimeTests.exe" "lua" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/managed/coreclr"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ScriptBackendParity.lua" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405686647][warning][script][code=0] assets:/control.lua: ...Temp/azure-managed-lua-33269693042300/assets/control.lua:1: ÂÄôÈÄâÂàùÂßãÂåñÂ§±Ë¥•
+stack traceback:
+	[C]: in function 'base.error'
+	...Temp/azure-managed-lua-33269693042300/assets/control.lua:1: in function <...Temp/azure-managed-lua-33269693042300/assets/control.lua:1>
+[1791405686681][warning][script][code=0] assets:/broken.lua: .../Temp/azure-managed-lua-33269693042300/assets/broken.lua:1: ËøêË°åÂõûË∞ÉÂ§±Ë¥•
+stack traceback:
+	[C]: in function 'base.error'
+	.../Temp/azure-managed-lua-33269693042300/assets/broken.lua:1: in function <.../Temp/azure-managed-lua-33269693042300/assets/broken.lua:1>
+Registered lua service, components, events, reload, scene lifetime and shutdown passed
+{"backend":"lua","iterations":1000,"startupMs":0.2199,"stepMsPerIteration":0.0134739}
+<end of output>
+Test time =   0.13 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ScriptBackendParity.lua" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ScriptBackendParity.lua" time elapsed: 00:00:00
+----------------------------------------------------------
+
+129/167 Testing: AzureEditor.SelectionService
+129/167 Test: AzureEditor.SelectionService
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureSelectionServiceTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.SelectionService" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405686731][info][editor][code=0] Opened scene: selection
+[1791405686733][info][editor][code=0] Opened scene: selection
+[1791405686735][info][editor][code=0] Opened scene: selection
+[1791405686739][info][editor][code=0] Opened scene: selection
+[1791405686742][info][editor][code=0] Opened scene: selection
+[1791405686747][info][editor][code=0] Opened scene: selection
+[1791405686750][info][editor][code=0] ERROR [selection.click]: Unknown selection identity
+[1791405686751][info][editor][code=0] Opened scene: selection
+[1791405686754][info][editor][code=0] Opened scene: selection
+[1791405686757][info][editor][code=0] ERROR [viewport.gizmo-options]: Unknown gizmo pivot
+Active identity, filtered range and shared click semantics passed
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.SelectionService" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.SelectionService" time elapsed: 00:00:00
+----------------------------------------------------------
+
+108/167 Testing: AzureEngine.MetaGenerator
+108/167 Test: AzureEngine.MetaGenerator
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_metagen.py" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureMetaGen.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.MetaGenerator" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Incremental generation, source diagnostics and failed-output retention passed
+<end of output>
+Test time =   0.51 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.MetaGenerator" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.MetaGenerator" time elapsed: 00:00:00
+----------------------------------------------------------
+
+82/167 Testing: AzureEngine.AssetLevel
+82/167 Test: AzureEngine.AssetLevel
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureAssetLevelTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.AssetLevel" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405686730][warning][runtime][code=0] GPU preparation failed
+[1791405686734][warning][runtime][code=0] Asset reference missing: assets:/missing.azurelevel
+Asset relocation, cache repair, dependencies, prefab overrides, pack and transactional level switch passed
+<end of output>
+Test time =   0.44 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.AssetLevel" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.AssetLevel" time elapsed: 00:00:00
+----------------------------------------------------------
+
+134/167 Testing: AzureRender.EditorCameraService
+134/167 Test: AzureRender.EditorCameraService
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureEditorCameraServiceTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.EditorCameraService" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.EditorCameraService" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.EditorCameraService" time elapsed: 00:00:00
+----------------------------------------------------------
+
+125/167 Testing: AzureEditor.SelectionBounds
+125/167 Test: AzureEditor.SelectionBounds
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureSelectionBoundsTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.SelectionBounds" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.SelectionBounds" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.SelectionBounds" time elapsed: 00:00:00
+----------------------------------------------------------
+
+128/167 Testing: AzureEditor.GizmoController
+128/167 Test: AzureEditor.GizmoController
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureGizmoControllerTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.GizmoController" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405686855][info][editor][code=0] Opened scene: gizmo
+[1791405686858][info][editor][code=0] Opened scene: gizmo
+[1791405686862][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-gizmo-33269968210500\scene.azscene
+[1791405686864][info][editor][code=0] ERROR [viewport.gizmo-mode]: Operation requires an idle edit session
+[1791405686864][info][editor][code=0] ERROR [preview.play]: Operation requires an idle edit session
+[1791405686865][info][editor][code=0] Opened scene: gizmo
+[1791405686868][info][editor][code=0] Opened scene: gizmo
+[1791405686873][info][editor][code=0] Opened scene: gizmo
+[1791405686877][info][editor][code=0] Undo
+[1791405686879][info][editor][code=0] Opened scene: gizmo
+[1791405686883][info][editor][code=0] Opened scene: gizmo
+[1791405686886][info][editor][code=0] Opened scene: gizmo
+[1791405686890][info][editor][code=0] Undo
+[1791405686891][info][editor][code=0] Opened scene: gizmo
+[1791405686894][info][editor][code=0] Opened scene: gizmo
+[1791405686894][info][editor][code=0] ERROR [viewport.gizmo-update]: Transform contains shear that local TRS cannot represent
+[1791405686896][info][editor][code=0] Opened scene: gizmo
+[1791405686898][info][editor][code=0] ERROR [viewport.gizmo-begin]: Select objects before using a gizmo
+[1791405686898][info][editor][code=0] Opened scene: gizmo
+[1791405686901][info][editor][code=0] ERROR [viewport.gizmo-update]: Parameter type mismatch: number
+[1791405686904][info][editor][code=0] Opened scene: gizmo
+Gizmo world/local transforms, root selection, cancellation and history passed
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.GizmoController" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.GizmoController" time elapsed: 00:00:00
+----------------------------------------------------------
+
+150/167 Testing: AzureRender.NullRhiPass
+150/167 Test: AzureRender.NullRhiPass
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderNullRhiPassTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.NullRhiPass" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405686339][info][render][code=0] Blackhole bloom: fragment fallback path
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686340][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686346][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686348][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686350][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686356][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686358][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686360][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686367][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686368][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686370][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686377][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686379][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686381][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=35
+[1791405686387][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686389][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686390][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=34
+[1791405686397][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686398][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686400][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=35
+[1791405686406][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686408][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686409][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=35
+[1791405686415][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686416][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686418][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=35
+[1791405686424][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686425][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686427][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=35
+[1791405686433][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686435][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flag139/167 Testing: AzureEditor.DocumentGuardGpu
+139/167 Test: AzureEditor.DocumentGuardGpu
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_editor_document_guard.py" "--executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe" "--output" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/u5/documents"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.DocumentGuardGpu" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[{"workflow": "exploration", "decision": "exploration-save", "passed": true}, {"workflow": "exploration", "decision": "exploration-discard", "passed": true}, {"workflow": "exploration", "decision": "exploration-failure", "passed": true}, {"workflow": "inspector", "decision": "inspector-save", "passed": true}, {"workflow": "inspector", "decision": "inspector-discard", "passed": true}, {"workflow": "inspector", "decision": "inspector-failure", "passed": true}]
+<end of output>
+Test time =  20.09 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.DocumentGuardGpu" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.DocumentGuardGpu" time elapsed: 00:00:20
+----------------------------------------------------------
+
+152/167 Testing: AzureRender.VisualRegression
+152/167 Test: AzureRender.VisualRegression
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_visual_regression.py" "--executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe" "--tolerance" "strict" "--output-dir" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/visual-regression" "--summary" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/visual-regression-summary.json"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.VisualRegression" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[ OK ] character_beauty_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_world_normal_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_material_id_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_outline_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_direct_diffuse_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_face_sdf_closeup: mean=0.000000 changed=0.000000
+cases=7 failures=0
+<end of output>
+Test time =   9.57 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.VisualRegression" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.VisualRegression" time elapsed: 00:00:09
+----------------------------------------------------------
+
+153/167 Testing: AzureRender.VisualRegressionLegacyDescriptors
+153/167 Test: AzureRender.VisualRegressionLegacyDescriptors
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_visual_regression.py" "--executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe" "--tolerance" "strict" "--renderer-arg=--disable-bindless" "--output-dir" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/visual-regression-legacy" "--summary" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/visual-regression-legacy-summary.json"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.VisualRegressionLegacyDescriptors" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[ OK ] character_beauty_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_world_normal_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_material_id_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_outline_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_direct_diffuse_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_face_sdf_closeup: mean=0.000000 changed=0.000000
+cases=7 failures=0
+<end of output>
+Test time =   9.28 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.VisualRegressionLegacyDescriptors" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.VisualRegressionLegacyDescriptors" time elapsed: 00:00:09
+----------------------------------------------------------
+
+154/167 Testing: AzureRender.BlackholeComputeGpu
+154/167 Test: AzureRender.BlackholeComputeGpu
+Command: "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" "-NoProfile" "-ExecutionPolicy" "Bypass" "-File" "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_blackhole_compute_smoke.ps1" "-Executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe" "-OutputDirectory" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/blackhole-compute-smoke"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.BlackholeComputeGpu" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Blackhole four-level compute smoke passed.
+<end of output>
+Test time =   2.27 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.BlackholeComputeGpu" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.BlackholeComputeGpu" time elapsed: 00:00:02
+----------------------------------------------------------
+
+155/167 Testing: AzureRender.CharacterIblComputeGpu
+155/167 Test: AzureRender.CharacterIblComputeGpu
+Command: "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" "-NoProfile" "-ExecutionPolicy" "Bypass" "-File" "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_character_ibl_smoke.ps1" "-Executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe" "-OutputDirectory" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/character-ibl-smoke"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.CharacterIblComputeGpu" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Character GPU IBL smoke passed.
+<end of output>
+Test time =   1.27 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.CharacterIblComputeGpu" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.CharacterIblComputeGpu" time elapsed: 00:00:01
+----------------------------------------------------------
+
+156/167 Testing: AzureRender.CharacterSkinningComputeGpu
+156/167 Test: AzureRender.CharacterSkinningComputeGpu
+Command: "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" "-NoProfile" "-ExecutionPolicy" "Bypass" "-File" "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_character_skinning_smoke.ps1" "-Executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe" "-OutputDirectory" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/character-skinning-smoke"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.CharacterSkinningComputeGpu" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Character Compute skinning smoke passed.
+<end of output>
+Test time =   1.25 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.CharacterSkinningComputeGpu" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.CharacterSkinningComputeGpu" time elapsed: 00:00:01
+----------------------------------------------------------
+
+160/167 Testing: AzureRender.R3Comparison
+160/167 Test: AzureRender.R3Comparison
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_r3_comparison.py" "--executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe" "--output-dir" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/r3-comparison" "--frames" "10" "--instances" "64"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.R3Comparison" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+R3 four-path deterministic comparison passed
+<end of output>
+Test time =   7.61 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.R3Comparison" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.R3Comparison" time elapsed: 00:00:07
+----------------------------------------------------------
+
+161/167 Testing: AzureRender.R3TransparentComparison
+161/167 Test: AzureRender.R3TransparentComparison
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_r3_comparison.py" "--executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe" "--output-dir" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/r3-transparent-comparison" "--frames" "10" "--instances" "16" "--transparent-fixture"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.R3TransparentComparison" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+R3 four-path deterministic comparison passed
+<end of output>
+Test time =   9.58 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.R3TransparentComparison" end time: Oct 08 04:42 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.R3TransparentComparison" time elapsed: 00:00:09
+----------------------------------------------------------
+
+162/167 Testing: AzureRender.AuditRegressions
+162/167 Test: AzureRender.AuditRegressions
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_audit_regressions.py" "--executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.AuditRegressions" start time: Oct 08 04:42 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Sample timing and Morph limit regressions passed
+<end of output>
+Test time =   1.59 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.AuditRegressions" end time: Oct 08 04:42 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.AuditRegressions" time elapsed: 00:00:01
+----------------------------------------------------------
+
+163/167 Testing: AzureRender.VisualRegressionLegacySkinning
+163/167 Test: AzureRender.VisualRegressionLegacySkinning
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_visual_regression.py" "--executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe" "--tolerance" "strict" "--renderer-arg=--disable-compute-skinning" "--output-dir" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/visual-regression-legacy-skinning" "--summary" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/visual-regression-legacy-skinning-summary.json"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.VisualRegressionLegacySkinning" start time: Oct 08 04:42 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[ OK ] character_beauty_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_world_normal_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_material_id_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_outline_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_direct_diffuse_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_face_sdf_closeup: mean=0.000000 changed=0.000000
+cases=7 failures=0
+<end of output>
+Test time =   9.37 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.VisualRegressionLegacySkinning" end time: Oct 08 04:42 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.VisualRegressionLegacySkinning" time elapsed: 00:00:09
+----------------------------------------------------------
+
+164/167 Testing: AzureRender.CharacterMorphComputeGpu
+164/167 Test: AzureRender.CharacterMorphComputeGpu
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_morph_compute_regression.py" "--executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe" "--output-dir" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/morph-compute-regression"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.CharacterMorphComputeGpu" start time: Oct 08 04:42 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Morph change: mean=0.083957 changed=0.546392; Compute/fallback: mean=0.000000 changed=0.000000
+<end of output>
+Test time =  10.29 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.CharacterMorphComputeGpu" end time: Oct 08 04:42 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.CharacterMorphComputeGpu" time elapsed: 00:00:10
+----------------------------------------------------------
+
+165/167 Testing: AzureRender.ClusteredLightingGpu
+165/167 Test: AzureRender.ClusteredLightingGpu
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_clustered_lighting_smoke.py" "--executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe" "--output-dir" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/clustered-lighting-smoke"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.ClusteredLightingGpu" start time: Oct 08 04:42 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+16 clustered lights: mean=0.034148 changed=0.348818
+<end of output>
+Test time =   3.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ClusteredLightingGpu" end time: Oct 08 04:42 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.ClusteredLightingGpu" time elapsed: 00:00:03
+----------------------------------------------------------
+
+End testing: Oct 08 04:42 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+
+gpu = 479.08 sec*proc
+
+script =  30.86 sec*proc
+
+ces, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686603][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686615][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686617][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=2
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686621][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686629][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686632][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=2
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686635][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686646][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686649][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=2
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686651][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686659][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686661][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686663][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686675][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686677][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686679][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686685][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686687][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686689][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686698][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686700][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686703][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686713][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686715][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686716][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686724][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686725][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686728][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686735][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686737][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=2
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686741][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686748][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686749][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=2
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686751][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686758][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686761][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686763][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686770][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686772][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686775][info][render][code=0] Character texture access: fixed, requested slots=35, stage sampler limit=4096
+[1791405686782][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686783][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=2
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686787][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686794][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686795][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=2
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686799][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686810][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686812][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686815][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686823][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686825][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686827][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686836][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686839][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686842][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686854][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686856][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686858][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686864][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686865][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686867][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686877][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686879][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686881][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686890][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686892][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=2
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686895][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686905][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686907][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=2
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686910][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686916][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686918][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686920][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686927][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686929][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+computeSkinning test context enabled, nodes=1
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Assigment/2609/FYP/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1791405686933][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=4096
+[1791405686939][info][render][code=0] Character IBL: hardware mip fallback path
+[1791405686941][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+<end of output>
+Test time =   0.65 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.NullRhiPass" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.NullRhiPass" time elapsed: 00:00:00
+----------------------------------------------------------
+
+78/167 Testing: AzureEngine.PlayableQuest
+78/167 Test: AzureEngine.PlayableQuest
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzurePlayableQuestTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.PlayableQuest" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Production quest, duplicate input, goal prerequisites, UI, destruction, stale events and restart passed
+<end of output>
+Test time =   0.29 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.PlayableQuest" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.PlayableQuest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+48/167 Testing: AzureEngine.SystemComposition
+48/167 Test: AzureEngine.SystemComposition
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureSystemCompositionTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.SystemComposition" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Generic target selection passed
+<end of output>
+Test time =   0.16 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.SystemComposition" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.SystemComposition" time elapsed: 00:00:00
+----------------------------------------------------------
+
+126/167 Testing: AzureEditor.TransformEditing
+126/167 Test: AzureEditor.TransformEditing
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureTransformEditingTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.TransformEditing" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.TransformEditing" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.TransformEditing" time elapsed: 00:00:00
+----------------------------------------------------------
+
+87/167 Testing: AzureEngine.PublicGait
+87/167 Test: AzureEngine.PublicGait
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_public_gait.py"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.PublicGait" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Public knees and loop continuity: passed
+<end of output>
+Test time =   0.38 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.PublicGait" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.PublicGait" time elapsed: 00:00:00
+----------------------------------------------------------
+
+26/167 Testing: AzureEditor.Thumbnail
+26/167 Test: AzureEditor.Thumbnail
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureThumbnailTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/shaders"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.Thumbnail" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Thumbnail fingerprint reuse, static suspension and invalidation passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.Thumbnail" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.Thumbnail" time elapsed: 00:00:00
+----------------------------------------------------------
+
+38/167 Testing: AzureEditor.Observation
+38/167 Test: AzureEditor.Observation
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureEditorObservationTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.Observation" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405687126][info][editor][code=0] Opened scene: untitled
+[1791405687128][info][editor][code=0] Opened scene: untitled
+[1791405687129][info][editor][code=0] Selected node: after-ready
+[1791405687163][info][editor][code=0] ERROR [asset.generate]: Asset generation requires a project session
+Editor conditional observation gates passed
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.Observation" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.Observation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+64/167 Testing: AzureEngine.ScriptBackendContract
+64/167 Test: AzureEngine.ScriptBackendContract
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureScriptBackendContractTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ScriptBackendContract" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Script entity identities, binding permissions and shared initialization transactions passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ScriptBackendContract" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ScriptBackendContract" time elapsed: 00:00:00
+----------------------------------------------------------
+
+67/167 Testing: AzureEngine.ManagedModule.nativeaot
+67/167 Test: AzureEngine.ManagedModule.nativeaot
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureManagedModuleTests.exe" "nativeaot" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/managed/nativeaot"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ManagedModule.nativeaot" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+{"backend":"nativeaot","diagnostics":{"liveContexts":0,"objects":0,"sessions":0},"startupMs":8.5948,"status":"passed"}
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ManagedModule.nativeaot" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ManagedModule.nativeaot" time elapsed: 00:00:00
+----------------------------------------------------------
+
+127/167 Testing: AzureRender.AssetDeformation
+127/167 Test: AzureRender.AssetDeformation
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureAssetDeformationTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.AssetDeformation" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.AssetDeformation" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.AssetDeformation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+18/167 Testing: AzureAssets.ProceduralGeometry
+18/167 Test: AzureAssets.ProceduralGeometry
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureProceduralGeometryTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/procedural-tests"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureAssets.ProceduralGeometry" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Geometry, booleans, modules, seeds, coordinates, budgets, cancellation and provenance passed
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"AzureAssets.ProceduralGeometry" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureAssets.ProceduralGeometry" time elapsed: 00:00:00
+----------------------------------------------------------
+
+65/167 Testing: AzureEngine.ScriptInterop
+65/167 Test: AzureEngine.ScriptInterop
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureScriptInteropTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ScriptInterop" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Real script interop, output ownership, version, owner thread and expired session passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ScriptInterop" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ScriptInterop" time elapsed: 00:00:00
+----------------------------------------------------------
+
+24/167 Testing: AzureEditor.PanelContext
+24/167 Test: AzureEditor.PanelContext
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzurePanelContextTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.PanelContext" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405687221][info][editor][code=0] Opened scene: untitled
+[1791405687224][info][editor][code=0] Opened scene: untitled
+[1791405687228][info][editor][code=0] Opened scene: untitled
+[1791405687230][info][editor][code=0] Undo
+[1791405687230][info][editor][code=0] Opened scene: untitled
+[1791405687253][info][editor][code=0] ERROR [settings.set]: Setting outside range: editor.scale
+Minimal panel context and shared identity passed
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.PanelContext" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.PanelContext" time elapsed: 00:00:00
+----------------------------------------------------------
+
+112/167 Testing: AzureEngine.Project
+112/167 Test: AzureEngine.Project
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureProjectTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.Project" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Project contracts passed
+<end of output>
+Test time =   0.37 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.Project" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.Project" time elapsed: 00:00:00
+----------------------------------------------------------
+
+59/167 Testing: AzureEditor.Workspace
+59/167 Test: AzureEditor.Workspace
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureEditorWorkspaceTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.Workspace" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Editor workspace: passed
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.Workspace" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.Workspace" time elapsed: 00:00:00
+----------------------------------------------------------
+
+19/167 Testing: AzureAssets.RigText
+19/167 Test: AzureAssets.RigText
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRigTextTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/rig-text-tests"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureAssets.RigText" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Rigid hierarchy, ownership, coordinates, channels, loops, independent poses and failures passed
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureAssets.RigText" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureAssets.RigText" time elapsed: 00:00:00
+----------------------------------------------------------
+
+46/167 Testing: AzureEditor.EditService
+46/167 Test: AzureEditor.EditService
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureEditServiceTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.EditService" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405687261][info][editor][code=0] Opened scene: test
+[1791405687261][info][editor][code=0] Opened scene: test
+[1791405687264][info][editor][code=0] Opened scene: test
+[1791405687273][info][editor][code=0] Opened scene: test
+[1791405687276][info][editor][code=0] Undo
+[1791405687277][info][editor][code=0] Undo
+[1791405687279][info][editor][code=0] Opened scene: test
+[1791405687280][info][editor][code=0] Play started
+[1791405687281][info][editor][code=0] ERROR [extension.play-write]: Operation requires an idle edit session
+[1791405687282][info][editor][code=0] Play stopped; edit state restored
+[1791405687283][info][editor][code=0] Opened scene: test
+[1791405687286][info][editor][code=0] Opened scene: test
+[1791405687290][info][editor][code=0] ERROR [extension.failure]: Failure after mutation
+[1791405687291][info][editor][code=0] Opened scene: test
+[1791405687292][info][editor][code=0] ERROR [extension.invalid]: Duplicate or empty runtime node id
+[1791405687292][info][editor][code=0] Opened scene: test
+[1791405687293][info][editor][code=0] ERROR [extension.readonly]: Read-only operation modified the document
+[1791405687293][info][editor][code=0] Opened scene: test
+[1791405687295][info][editor][code=0] Opened scene: untitled
+[1791405687295][info][editor][code=0] Opened scene: test
+[1791405687296][info][editor][code=0] Selected node: Registered extension
+[1791405687297][info][editor][code=0] Opened scene: test
+[1791405687298][info][editor][code=0] Added node under: Registered extension
+[1791405687300][info][editor][code=0] Opened scene: test
+[1791405687301][info][editor][code=0] Selected node: New Node 1
+[1791405687302][info][editor][code=0] Opened scene: test
+[1791405687303][info][editor][code=0] Removed node (and descendants)
+[1791405687304][info][editor][code=0] Opened scene: test
+[1791405687305][info][editor][code=0] ERROR [extension.zero-scale]: Transform scale must have absolute magnitude at least 0.001
+[1791405687306][info][editor][code=0] Opened scene: test
+[1791405687307][info][editor][code=0] ERROR [extension.orphan-light]: Invalid candidate light identity, reference or range
+Edit discovery, frontend consistency, validation and preview guards passed
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.EditService" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.EditService" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/167 Testing: AzureRender.ResourceAccessProfile
+9/167 Test: AzureRender.ResourceAccessProfile
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureResourceAccessProfileTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.ResourceAccessProfile" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Device limits, enabled capabilities, immutable index generations and fence retirement passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ResourceAccessProfile" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.ResourceAccessProfile" time elapsed: 00:00:00
+----------------------------------------------------------
+
+133/167 Testing: AzureRender.EditorInputRouter
+133/167 Test: AzureRender.EditorInputRouter
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureEditorInputRouterTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.EditorInputRouter" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.EditorInputRouter" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.EditorInputRouter" time elapsed: 00:00:00
+----------------------------------------------------------
+
+13/167 Testing: AzureRender.ShaderModule
+13/167 Test: AzureRender.ShaderModule
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureShaderModuleTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/shader-modules/bloom-direct.spv.json" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/shader-modules/bloom-cached.spv.json"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.ShaderModule" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Shared host offsets, constant span and two compiled module layouts passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ShaderModule" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.ShaderModule" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/167 Testing: AzureRender.ViewBatching
+11/167 Test: AzureRender.ViewBatching
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureViewBatchingTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.ViewBatching" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Per-view spans, mesh boundaries and culling bypass passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ViewBatching" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.ViewBatching" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/167 Testing: AzureRender.SkinningBatch
+10/167 Test: AzureRender.SkinningBatch
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureSkinningBatchTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.SkinningBatch" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Skinning slices, independent joints, morph boundaries and dispatch limits passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.SkinningBatch" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.SkinningBatch" time elapsed: 00:00:00
+----------------------------------------------------------
+
+25/167 Testing: AzureRender.RenderView
+25/167 Test: AzureRender.RenderView
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderViewTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/shaders"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.RenderView" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+View isolation, demand scheduling, generation and sampled-resource retirement passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.RenderView" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.RenderView" time elapsed: 00:00:00
+----------------------------------------------------------
+
+23/167 Testing: AzureEditor.UiFoundation
+23/167 Test: AzureEditor.UiFoundation
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureUiFoundationTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEditor.UiFoundation" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+UI tokens, metrics and scopes passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.UiFoundation" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEditor.UiFoundation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+21/167 Testing: AzureEngine.SettingsOverlay
+21/167 Test: AzureEngine.SettingsOverlay
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureEngineSettingsTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.SettingsOverlay" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Rendering overlay, source and reset passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.SettingsOverlay" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.SettingsOverlay" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/167 Testing: AzureRender.VisibilityPrototype
+6/167 Test: AzureRender.VisibilityPrototype
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureVisibilityPrototypeTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.VisibilityPrototype" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Stable surface identities, picking, scene/camera/frame history rejection and bounds passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.VisibilityPrototype" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.VisibilityPrototype" time elapsed: 00:00:00
+----------------------------------------------------------
+
+22/167 Testing: AzureEngine.SettingRegistry
+22/167 Test: AzureEngine.SettingRegistry
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureSettingRegistryTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.SettingRegistry" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Setting sources, boundaries and persistence passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.SettingRegistry" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.SettingRegistry" time elapsed: 00:00:00
+----------------------------------------------------------
+
+50/167 Testing: AzureEngine.ModuleAssembly
+50/167 Test: AzureEngine.ModuleAssembly
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureModuleAssemblyTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ModuleAssembly" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Module lifecycle, graph rejection and rollback passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ModuleAssembly" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ModuleAssembly" time elapsed: 00:00:00
+----------------------------------------------------------
+
+77/167 Testing: AzureEngine.ScriptEntities
+77/167 Test: AzureEngine.ScriptEntities
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureScriptEntityTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ScriptEntities" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405687439][warning][script][code=0] assets:/controller.lua: .../Temp/azure_script_entity_contract/assets/controller.lua:1: transaction rollback
+stack traceback:
+	[C]: in function 'base.error'
+	.../Temp/azure_script_entity_contract/assets/controller.lua:1: in function <.../Temp/azure_script_entity_contract/assets/controller.lua:1>
+[sol2] An exception occurred: Script entity handle is stale
+[1791405687441][warning][script][code=0] assets:/controller.lua: Script entity handle is stale
+stack traceback:
+	[C]: in method 'get'
+	.../Temp/azure_script_entity_contract/assets/controller.lua:1: in function <.../Temp/azure_script_entity_contract/assets/controller.lua:1>
+[1791405687443][warning][script][code=0] assets:/controller.lua: .../Temp/azure_script_entity_contract/assets/controller.lua:1: abort structural effects
+stack traceback:
+	[C]: in function 'base.error'
+	.../Temp/azure_script_entity_contract/assets/controller.lua:1: in function <.../Temp/azure_script_entity_contract/assets/controller.lua:1>
+Lua entity queries, cross-entity init transaction, stale handles, interaction and structural effects passed
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ScriptEntities" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ScriptEntities" time elapsed: 00:00:00
+----------------------------------------------------------
+
+45/167 Testing: AzureEngine.Observation
+45/167 Test: AzureEngine.Observation
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureObservationTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.Observation" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Observation and validation contracts passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.Observation" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.Observation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+51/167 Testing: AzureEngine.ComponentRegistry
+51/167 Test: AzureEngine.ComponentRegistry
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureComponentRegistryTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ComponentRegistry" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Registered components, metadata, migration and production codec passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ComponentRegistry" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ComponentRegistry" time elapsed: 00:00:00
+----------------------------------------------------------
+
+84/167 Testing: AzureRender.SceneVisibility
+84/167 Test: AzureRender.SceneVisibility
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureSceneVisibilityTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/exploration/assets/cube.gltf"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.SceneVisibility" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Baked mirror retains twelve outward-facing triangles
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.SceneVisibility" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.SceneVisibility" time elapsed: 00:00:00
+----------------------------------------------------------
+
+52/167 Testing: AzureEngine.MetadataGeneration
+52/167 Test: AzureEngine.MetadataGeneration
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureMetadataGenerationTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.MetadataGeneration" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Generated metadata and content loading passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.MetadataGeneration" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.MetadataGeneration" time elapsed: 00:00:00
+----------------------------------------------------------
+
+74/167 Testing: AzureEngine.ThirdPerson
+74/167 Test: AzureEngine.ThirdPerson
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureThirdPersonTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.ThirdPerson" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Third-person camera, obstruction, camera-relative motion, fixed-step, focus, sweep and migration passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.ThirdPerson" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.ThirdPerson" time elapsed: 00:00:00
+----------------------------------------------------------
+
+75/167 Testing: AzureEngine.Locomotion
+75/167 Test: AzureEngine.Locomotion
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureLocomotionTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.Locomotion" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+PASS both Shift keys and release
+PASS Character migration and limits
+PASS walk sprint diagonal and idle
+PASS pause releases held controls
+PASS restart preserves focus and clears controls
+PASS 30 60 144 Hz fixed step
+PASS replay accepts both Shift keys
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.Locomotion" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.Locomotion" time elapsed: 00:00:00
+----------------------------------------------------------
+
+81/167 Testing: AzureEngine.PhysicsInput
+81/167 Test: AzureEngine.PhysicsInput
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzurePhysicsInputTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.PhysicsInput" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Jolt character, raycast, triggers, fixed-step, pause, input focus and deletion passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.PhysicsInput" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.PhysicsInput" time elapsed: 00:00:00
+----------------------------------------------------------
+
+76/167 Testing: AzureEngine.Interaction
+76/167 Test: AzureEngine.Interaction
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureInteractionTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.Interaction" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Interaction range, visibility, stable identity, press edges, spawn and task storage passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.Interaction" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.Interaction" time elapsed: 00:00:00
+----------------------------------------------------------
+
+61/167 Testing: AzureEngine.PresentationRuntime
+61/167 Test: AzureEngine.PresentationRuntime
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzurePresentationRuntimeTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay/project.azureproject"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.PresentationRuntime" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+World animation, real audio, pause, entity destruction and level replacement passed
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.PresentationRuntime" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.PresentationRuntime" time elapsed: 00:00:00
+----------------------------------------------------------
+
+58/167 Testing: AzureEngine.GameUi
+58/167 Test: AzureEngine.GameUi
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureGameUiTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay/assets/hud.rml" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/fonts/LatoLatin-Regular.ttf"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.GameUi" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+button: 28,61.6,90,37
+RmlUi document, text binding, button action, DPI resize and invalid element handling passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.GameUi" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.GameUi" time elapsed: 00:00:00
+----------------------------------------------------------
+
+62/167 Testing: AzureEngine.GameplayPresentation
+62/167 Test: AzureEngine.GameplayPresentation
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureGameplayPresentationTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay/assets/portal.wav"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.GameplayPresentation" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Animation transitions and real offline miniaudio decoding, playback, pause and release passed
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.GameplayPresentation" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.GameplayPresentation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+113/167 Testing: AzureEngine.RuntimeLifecycle
+113/167 Test: AzureEngine.RuntimeLifecycle
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRuntimeLifecycleTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.RuntimeLifecycle" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Runtime lifecycle contracts passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.RuntimeLifecycle" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.RuntimeLifecycle" time elapsed: 00:00:00
+----------------------------------------------------------
+
+143/167 Testing: AzureRender.SceneModel
+143/167 Test: AzureRender.SceneModel
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderSceneModelTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.SceneModel" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.SceneModel" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.SceneModel" time elapsed: 00:00:00
+----------------------------------------------------------
+
+57/167 Testing: AzureEngine.GameUiRenderer
+57/167 Test: AzureEngine.GameUiRenderer
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureGameUiRendererTests.exe" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/shaders"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.GameUiRenderer" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+UI geometry submission, deferred retirement and resource cleanup passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.GameUiRenderer" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.GameUiRenderer" time elapsed: 00:00:00
+----------------------------------------------------------
+
+80/167 Testing: AzureRender.BrowRegions
+80/167 Test: AzureRender.BrowRegions
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureBrowRegionTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.BrowRegions" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Brow named regions and eyelash preservation passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.BrowRegions" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.BrowRegions" time elapsed: 00:00:00
+----------------------------------------------------------
+
+83/167 Testing: AzureEngine.Reflection
+83/167 Test: AzureEngine.Reflection
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureReflectionTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureEngine.Reflection" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Reflection roundtrip, metadata, migration and transactional validation passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEngine.Reflection" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureEngine.Reflection" time elapsed: 00:00:00
+----------------------------------------------------------
+
+140/167 Testing: AzureRender.EditorSession
+140/167 Test: AzureRender.EditorSession
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderEditorSessionTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.EditorSession" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405687637][info][editor][code=0] Opened scene: test
+[1791405687639][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azurerender-session-33270751029200-multiple-lights.azscene
+[1791405687640][info][editor][code=0] Opened scene: azurerender-session-33270754268300
+[1791405687644][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azurerender-session-33270754148800.azscene
+[1791405687645][info][editor][code=0] Opened scene: azurerender-session-33270754268300
+[1791405687648][info][editor][code=0] Undo
+[1791405687649][info][editor][code=0] Opened scene: azurerender-session-33270754268300
+[1791405687650][info][editor][code=0] Selected node: node-33270764631000-1
+[1791405687652][info][editor][code=0] Opened scene: azurerender-session-33270754268300
+[1791405687654][info][editor][code=0] Opened scene: azurerender-session-33270754268300
+[1791405687655][info][editor][code=0] Selected node: node-33270769081900-2
+[1791405687656][info][editor][code=0] Undo
+[1791405687657][info][editor][code=0] Undo
+[1791405687659][info][editor][code=0] Undo
+[1791405687661][info][editor][code=0] ERROR [developer.describe]: Developer services are unavailable
+[1791405687663][info][editor][code=0] ERROR [developer.describe]: Developer services are unavailable
+[1791405687664][info][editor][code=0] ERROR [preview.resize]: Parameter number is outside its declared range
+[1791405687666][info][editor][code=0] ERROR [preview.resize]: Parameter number is outside its declared range
+[1791405687666][info][editor][code=0] Added node under: azurerender-session-33270754268300
+[1791405687666][info][editor][code=0] Selected node: New Node 1
+[1791405687666][info][editor][code=0] Added node under: Prefab Instance
+[1791405687666][info][editor][code=0] Added node under: Prefab Instance
+[1791405687666][info][editor][code=0] Removed node (and descendants)
+[1791405687666][info][editor][code=0] Cannot remove the root node
+[1791405687666][info][editor][code=0] Opened scene: test
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.EditorSession" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.EditorSession" time elapsed: 00:00:00
+----------------------------------------------------------
+
+119/167 Testing: AzureRender.ClusteredLightGrid
+119/167 Test: AzureRender.ClusteredLightGrid
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderClusteredLightGridTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.ClusteredLightGrid" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ClusteredLightGrid" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.ClusteredLightGrid" time elapsed: 00:00:00
+----------------------------------------------------------
+
+114/167 Testing: AzureRender.EnvironmentAsset
+114/167 Test: AzureRender.EnvironmentAsset
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderEnvironmentAssetTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.EnvironmentAsset" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.EnvironmentAsset" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.EnvironmentAsset" time elapsed: 00:00:00
+----------------------------------------------------------
+
+79/167 Testing: AzureRender.AnimationPose
+79/167 Test: AzureRender.AnimationPose
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureAnimationPoseTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.AnimationPose" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+Immutable sampling, independent instances, local blend and nonloop endpoint passed
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.AnimationPose" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.AnimationPose" time elapsed: 00:00:00
+----------------------------------------------------------
+
+167/167 Testing: AzureRender.InstallManifestRoundTrip
+167/167 Test: AzureRender.InstallManifestRoundTrip
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DSOURCE_DIR=D:/Assigment/2609/FYP/Project/AzureRender" "-P" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_install_manifest_roundtrip.cmake"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.InstallManifestRoundTrip" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+-- Install manifest: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/install-manifest-test-manifest.json (23 files, 21 licenses)
+-- Install manifest: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/verify-install-manifest/manifest.regenerated (23 files, 21 licenses)
+-- Install tree verified against manifest
+-- Install manifest: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/verify-install-manifest/manifest.regenerated (23 files, 21 licenses)
+CMake Error at D:/Assigment/2609/FYP/Project/AzureRender/tools/verify_install_manifest.cmake:78 (message):
+  Install tree verification failed:
+
+  tree contents differ from the recorded manifest (added/missing files or
+  hash/size changes)
+
+
+
+-- Install manifest round-trip test passed
+<end of output>
+Test time =   0.38 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.InstallManifestRoundTrip" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.InstallManifestRoundTrip" time elapsed: 00:00:00
+----------------------------------------------------------
+
+151/167 Testing: AzureRender.SceneGraph
+151/167 Test: AzureRender.SceneGraph
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderSceneGraphTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.SceneGraph" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.SceneGraph" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.SceneGraph" time elapsed: 00:00:00
+----------------------------------------------------------
+
+122/167 Testing: AzureRender.SurfaceLifecycle
+122/167 Test: AzureRender.SurfaceLifecycle
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderSurfaceLifecycleTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.SurfaceLifecycle" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.SurfaceLifecycle" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.SurfaceLifecycle" time elapsed: 00:00:00
+----------------------------------------------------------
+
+118/167 Testing: AzureRender.CascadedShadow
+118/167 Test: AzureRender.CascadedShadow
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderCascadedShadowTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.CascadedShadow" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.CascadedShadow" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.CascadedShadow" time elapsed: 00:00:00
+----------------------------------------------------------
+
+121/167 Testing: AzureRender.FrameTaskScheduler
+121/167 Test: AzureRender.FrameTaskScheduler
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderFrameTaskSchedulerTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.FrameTaskScheduler" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.FrameTaskScheduler" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.FrameTaskScheduler" time elapsed: 00:00:00
+----------------------------------------------------------
+
+147/167 Testing: AzureRender.ExtensionRegistry
+147/167 Test: AzureRender.ExtensionRegistry
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderExtensionRegistryTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.ExtensionRegistry" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ExtensionRegistry" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.ExtensionRegistry" time elapsed: 00:00:00
+----------------------------------------------------------
+
+144/167 Testing: AzureRender.RuntimeDiagnostics
+144/167 Test: AzureRender.RuntimeDiagnostics
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderRuntimeDiagnosticsTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.RuntimeDiagnostics" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+[1791405687776][info][test][code=0] hello
+[1791405687776][warning][test][code=0] soft warning
+[1791405687777][error][test][code=3] missing asset
+user-facing line
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.RuntimeDiagnostics" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.RuntimeDiagnostics" time elapsed: 00:00:00
+----------------------------------------------------------
+
+124/167 Testing: AzureRender.EditorCameraController
+124/167 Test: AzureRender.EditorCameraController
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderEditorCameraTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.EditorCameraController" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.EditorCameraController" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.EditorCameraController" time elapsed: 00:00:00
+----------------------------------------------------------
+
+115/167 Testing: AzureRender.RenderGraph
+115/167 Test: AzureRender.RenderGraph
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderRenderGraphTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.RenderGraph" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.RenderGraph" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.RenderGraph" time elapsed: 00:00:00
+----------------------------------------------------------
+
+117/167 Testing: AzureRender.LightBuffer
+117/167 Test: AzureRender.LightBuffer
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderLightBufferTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.LightBuffer" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.LightBuffer" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.LightBuffer" time elapsed: 00:00:00
+----------------------------------------------------------
+
+166/167 Testing: AzureRender.ReleaseGateMissingBuild
+166/167 Test: AzureRender.ReleaseGateMissingBuild
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DBUILD_DIR=D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/missing-release-gate-build" "-P" "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_release_gate.cmake"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.ReleaseGateMissingBuild" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+CMake Error at D:/Assigment/2609/FYP/Project/AzureRender/tools/run_release_gate.cmake:11 (message):
+  Release gate requires a configured build directory:
+  D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/missing-release-gate-build
+
+
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ReleaseGateMissingBuild" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.ReleaseGateMissingBuild" time elapsed: 00:00:00
+----------------------------------------------------------
+
+120/167 Testing: AzureRender.ComputePass
+120/167 Test: AzureRender.ComputePass
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderComputePassTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.ComputePass" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ComputePass" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.ComputePass" time elapsed: 00:00:00
+----------------------------------------------------------
+
+123/167 Testing: AzureRender.CommandLine
+123/167 Test: AzureRender.CommandLine
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderCommandLineTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.CommandLine" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.CommandLine" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.CommandLine" time elapsed: 00:00:00
+----------------------------------------------------------
+
+146/167 Testing: AzureRender.ResourceLocator
+146/167 Test: AzureRender.ResourceLocator
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderResourceLocatorTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.ResourceLocator" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ResourceLocator" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.ResourceLocator" time elapsed: 00:00:00
+----------------------------------------------------------
+
+141/167 Testing: AzureRender.Ecs
+141/167 Test: AzureRender.Ecs
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderEcsTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.Ecs" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.Ecs" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.Ecs" time elapsed: 00:00:00
+----------------------------------------------------------
+
+145/167 Testing: AzureRender.GpuCapabilityReport
+145/167 Test: AzureRender.GpuCapabilityReport
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderGpuCapabilityReportTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.GpuCapabilityReport" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.GpuCapabilityReport" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.GpuCapabilityReport" time elapsed: 00:00:00
+----------------------------------------------------------
+
+116/167 Testing: AzureRender.TransientResourcePool
+116/167 Test: AzureRender.TransientResourcePool
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderTransientResourcePoolTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.TransientResourcePool" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.TransientResourcePool" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.TransientResourcePool" time elapsed: 00:00:00
+----------------------------------------------------------
+
+142/167 Testing: AzureRender.PickMath
+142/167 Test: AzureRender.PickMath
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderPickMathTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.PickMath" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.PickMath" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.PickMath" time elapsed: 00:00:00
+----------------------------------------------------------
+
+149/167 Testing: AzureRender.NullRhi
+149/167 Test: AzureRender.NullRhi
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderNullRhiTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.NullRhi" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.NullRhi" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.NullRhi" time elapsed: 00:00:00
+----------------------------------------------------------
+
+148/167 Testing: AzureRender.UploadRing
+148/167 Test: AzureRender.UploadRing
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRenderUploadRingTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+"AzureRender.UploadRing" start time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.UploadRing" end time: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??
+"AzureRender.UploadRing" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 08 04:41 ?®™®§°‰?°¬??°„?¶Ão°¿®∫°¡?®∫°¿??

@@ -1,0 +1,6 @@
+[0/2] Re-checking globbed directories...
+[1/6] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\ResourceAccessProfile.cpp.obj
+[2/6] Linking CXX static library AzureRenderCore.lib
+[3/6] Linking CXX executable AzureResourceAccessProfileTests.exe
+[4/6] Building CXX object CMakeFiles\AzureVisibilityGpuTests.dir\tests\VisibilityGpuTests.cpp.obj
+[5/6] Linking CXX executable AzureVisibilityGpuTests.exe

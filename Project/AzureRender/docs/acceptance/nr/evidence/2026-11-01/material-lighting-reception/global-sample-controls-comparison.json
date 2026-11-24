@@ -1,0 +1,65 @@
+{
+  "status": "measured-qualified-controls",
+  "shaderResources": [
+    {
+      "event": 26380,
+      "shader": "ResourceId::10088"
+    },
+    {
+      "event": 26458,
+      "shader": "ResourceId::10088"
+    },
+    {
+      "event": 26473,
+      "shader": "ResourceId::10088"
+    },
+    {
+      "event": 26483,
+      "shader": "ResourceId::10088"
+    }
+  ],
+  "variants": [
+    {
+      "mode": "captured-control",
+      "changedPixels": 0,
+      "maximumByteError": 0,
+      "versusBaselinePixels": 13
+    },
+    {
+      "mode": "original",
+      "changedPixels": 0,
+      "maximumByteError": 0,
+      "versusBaselinePixels": 13
+    },
+    {
+      "mode": "positive-color",
+      "changedPixels": 3686400,
+      "maximumByteError": 255,
+      "versusBaselinePixels": 3686400
+    },
+    {
+      "mode": "fine-all",
+      "changedPixels": 990,
+      "maximumByteError": 15,
+      "versusBaselinePixels": 1003
+    },
+    {
+      "mode": "coarse-all",
+      "changedPixels": 0,
+      "maximumByteError": 0,
+      "versusBaselinePixels": 13
+    },
+    {
+      "mode": "point-depth",
+      "changedPixels": 0,
+      "maximumByteError": 0,
+      "versusBaselinePixels": 13
+    },
+    {
+      "mode": "precise-uv",
+      "changedPixels": 22,
+      "maximumByteError": 18,
+      "versusBaselinePixels": 35
+    }
+  ]
+}

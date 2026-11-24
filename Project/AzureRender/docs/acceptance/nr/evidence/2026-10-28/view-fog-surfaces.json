@@ -1,0 +1,506 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR3-F1E",
+  "status": "preintegrated_surface_integration_passed_full_native_fog_pending",
+  "baseCommit": "3ec826b",
+  "run": "build/runs/20261028-081005-native-fog-surface-inputs-4648ba",
+  "primaryProject": "build/runs/20261028-081005-native-fog-surface-inputs-4648ba/full-candidate/enclosure-view-fog.azureproject",
+  "changedSource": [
+    "CMakeLists.txt",
+    "src/render/ViewFogGpu.hpp",
+    "src/render/ViewFogGpu.cpp",
+    "src/assets/UnlitTextureLayers.hpp",
+    "src/assets/UnlitTextureLayers.cpp",
+    "src/assets/MaterialSurfaceProfile.hpp",
+    "src/scenes/CharacterSceneRenderer.hpp",
+    "src/scenes/CharacterSceneRenderer.cpp",
+    "src/scenes/CharacterViewFog.inc",
+    "shaders/mesh.frag",
+    "shaders/view_fog.glsl",
+    "shaders/view_fog_surface.frag",
+    "shaders/view_fog_material.glsl",
+    "shaders/unlit_surface_sample.glsl",
+    "schemas/unlit_texture_layers.schema.json",
+    "tests/ViewFogGpuTests.cpp",
+    "tests/UnlitTextureLayersTests.cpp",
+    "tests/UnlitTextureMaterialTests.cpp",
+    "tools/test_view_fog_gpu.py",
+    "tools/check_view_fog_shader_contract.py",
+    "tools/test_character_screen_rim_gpu.py",
+    "tools/test_eye_npr_gpu.py",
+    "tools/test_npr_illumination_gpu.py",
+    "tools/test_object_shadow_gpu.py",
+    "tools/test_unlit_texture_layers_gpu.py",
+    "tools/test_vertex_color_gpu.py"
+  ],
+  "source": {
+    "CMakeLists.txt": "c3c4f58aa5256cf864bd010167ca75034e78f4eeb05bbcf9cbb7f9f90f822519",
+    "src/render/ViewFogGpu.hpp": "08f62e569dd5f63c141fd6be0566217f1f9fff5a2d5393172e724f1927ab8c7e",
+    "src/render/ViewFogGpu.cpp": "fc3759621e3c7776c2094fb10f2dda7d4981b7281eb7aebca7731348d1a04dea",
+    "src/assets/UnlitTextureLayers.hpp": "84e4b93847d677aa72cdde488b2fb132829fd91fd0991cd770323e32e4696419",
+    "src/assets/UnlitTextureLayers.cpp": "08d6f0fca06812b3012b7c92c86dcb142592847aac865bd281a06fefd4e673c4",
+    "src/assets/MaterialSurfaceProfile.hpp": "d0a7a351eff143bf06deeed25ecf31e7f6a956a5a50f420bf4d9708c1b55eb3e",
+    "src/scenes/CharacterSceneRenderer.hpp": "3656a05d75c8c2add4bb4bc6dc01a86f7756edefbead69634c9cb78e034212e2",
+    "src/scenes/CharacterSceneRenderer.cpp": "923bf6646c201adf1da0e601fee3376a36590d30952d64cb57777db57a5bca42",
+    "src/scenes/CharacterViewFog.inc": "8367fdf921b1efe296017ab6d7dd7b96249373b1f17f8c9fd14d334d6d481f93",
+    "shaders/mesh.frag": "0149574ee2add6f464880cc4e224d3b7c83b1e1cab11d77c335a2d3136b66eec",
+    "shaders/view_fog.glsl": "a049575477f8f13a6c6ee518de787e8e26812bbc90a51f9d95c69b42c383920d",
+    "shaders/view_fog_surface.frag": "07366c255ee475e9607d4a9f2296d4c07050b55d9d4c575ecaef4c18dca8fe98",
+    "shaders/view_fog_material.glsl": "535c30542ca829f36cd0484690d1fac811b709ec06f38525182beb768c855234",
+    "shaders/unlit_surface_sample.glsl": "e0558240b66b72fce1fe1b20f26e1d55beaa16f385786a8c7d8bee5802a066dc",
+    "schemas/unlit_texture_layers.schema.json": "5e3ee0d0665478faa5e445f5b644270cdf258ced819fd031faed1c3c6cfc5487",
+    "tests/ViewFogGpuTests.cpp": "888141df37a743648062cba8ad9b58f1633c7b5962d2f339ea237134da91738b",
+    "tests/UnlitTextureLayersTests.cpp": "4b0fe549cc12ab9039a59338020d7630eb2c15ab5fcd0f4f06168dd3497b6f2a",
+    "tests/UnlitTextureMaterialTests.cpp": "6e4fe97250c8de657ce60fd390b1b14505a38240c68462a925c1d3a699e71b5b",
+    "tools/test_view_fog_gpu.py": "45a38e80994c7f8815e32cc0f64bccd7a93216d0f790cae4bed883a9e180d271",
+    "tools/check_view_fog_shader_contract.py": "829bbdd52a79881c0287d7a6d44cf140ac218503a828009691fe08b256fdd65f",
+    "tools/test_character_screen_rim_gpu.py": "34bb47869ce956d683e9e7835a5c99d37f144bb262c682735823291d0700d739",
+    "tools/test_eye_npr_gpu.py": "9504608d1cc00b8d21dd8be148c2337aa13b65a64c25bb1e6d288304cb22d286",
+    "tools/test_npr_illumination_gpu.py": "b0017a65e017ed348c562e3e136cbc04a85b31b42c0de88ea10d3b0c994a73de",
+    "tools/test_object_shadow_gpu.py": "bb3739dd5d0f01d889fcf07cf8b327fa7cfcb8032de05daa825cc80b4903bf21",
+    "tools/test_unlit_texture_layers_gpu.py": "a1e6d90ce5cc9d3664f9f36f3299fb7700999de463a5d9cab30f41bdc1f11371",
+    "tools/test_vertex_color_gpu.py": "58528aaf14daa9883001fd2044f3f871ac91e4c31ce5478c060a9f8c6c5cf4ef",
+    "src/render/ViewFogBinding.hpp": "db95634add6e5c7dcffb9111ea123ca5948407640982a839c6376ea4441d23ea",
+    "src/render/ViewFogBinding.cpp": "7c278d405493856004c5351d49e9eeb7e1c79b7668ffa98a1709358f7d8fbc37",
+    "src/render/FogVolumeGpu.hpp": "d090c9e61e47f43679c1e4dba491729a18625cd2fabfafbb7bb0a72d9dd77ae0",
+    "src/render/FogVolumeData.cpp": "5cd7de9a712dab43024ed67437c2ff6e972acc58e1f649cb5be281fa7cf9ede5",
+    "src/render/FogViewProjection.cpp": "bc17dc9cad54de08d49b11a0d001ac4ea752217a7e86c52e39afcc530726d398",
+    "shaders/fog_view_projection.glsl": "1e6b17dece86f57565fce31cfe6dc9b31d8d6d4f2d891667d6e30ea239254fef",
+    "shaders/fog_transport.glsl": "ba9c7267a55b9d687573e313d277686d3795ed93cd917bee4447703db748f97f"
+  },
+  "artifacts": [
+    {
+      "path": "actual-background-debug-indexed-9160.log",
+      "sha256": "85d9e7110b1e7f129edb96c58cb5ca4db3981f3c03f20e7c12bc2d381acd2875"
+    },
+    {
+      "path": "actual-debug-indexed-9160.log",
+      "sha256": "4962284b178dd1370f2ad2ffd5f27e1bc8a6509babce702a1fc3a596199c6d7f"
+    },
+    {
+      "path": "actual-fragments-debug-fixed-10875.log",
+      "sha256": "440b8beabb56ed222d8b1b6e8a56ffcdd87c72163075871860b87a78c358eade"
+    },
+    {
+      "path": "actual-fragments-debug-fixed-9160.log",
+      "sha256": "09c811b19dbf46da57bd97bb396e4086090af2034fa13702c413e58930423a71"
+    },
+    {
+      "path": "actual-fragments-debug-indexed-10875.log",
+      "sha256": "60dfe2d23c10a8d679f4b2db566d6ba2361e627629a204d4ef42fd1a1ab0ccec"
+    },
+    {
+      "path": "actual-fragments-debug-indexed-9160.log",
+      "sha256": "d6307beb6636c8593bf1bb31f3fb8c18a79163cfef7c151a0bfa9914a429e54b"
+    },
+    {
+      "path": "actual-fragments-release-fixed-10875.log",
+      "sha256": "ecaade3bd8c3ce3d67fd00573e8ea473e2aabe3ed172c89414e5e99a8707751a"
+    },
+    {
+      "path": "actual-fragments-release-fixed-9160.log",
+      "sha256": "f1efbc6cabc7ee214bd5d51ca67fababddce2a0f1fac1b07c58e91abeea6035f"
+    },
+    {
+      "path": "actual-fragments-release-indexed-10875.log",
+      "sha256": "be127458335131e62139ec39e94bfddb937e2a3e6d07a6d8d191ab2445ee4fa1"
+    },
+    {
+      "path": "actual-fragments-release-indexed-9160.log",
+      "sha256": "d5f2b07eb1c165a75a81ae7f3f819f96855de9d732522ba3906d8f941a94151f"
+    },
+    {
+      "path": "capture_full.py",
+      "sha256": "c9b09eb979ebe6ef75cd68b3a553527284392019915f62cbecbedb729d5cf59a"
+    },
+    {
+      "path": "capture_surface_history.py",
+      "sha256": "7e7864b525e26e9c18a473da7bfb4dd8f422ab28d1bcc3fe24e29a0edb2effae"
+    },
+    {
+      "path": "capture_surface_oracle.py",
+      "sha256": "c2912a6d71b8d4d7fa9ab44dc8f7f17681f4bea0fec4e3e707f2f53f7f95fd5d"
+    },
+    {
+      "path": "central-visual-comparison.png",
+      "sha256": "41bab3d39ab7e344f9095c0aaca4b0e44d7d49c9291aff6eb12300b8c907e18b"
+    },
+    {
+      "path": "check_actual_surfaces.py",
+      "sha256": "7ef09bb120cc16453e7ce63b968ef88ffab5fa75029ad5717e23928c12a46ff5"
+    },
+    {
+      "path": "check_performance.py",
+      "sha256": "0f8e2c403ae22d8f8c808fcb7cf972a3dbf43ce4d7cd5391f017fdeeb0dabca6"
+    },
+    {
+      "path": "configuration-exact.json",
+      "sha256": "ff102b1182760085c8388b2fb0e8110b8cad1d0dc64356a7142d56783849947c"
+    },
+    {
+      "path": "debug-actual-check.log",
+      "sha256": "664dd7ca46fba7a5f77bf75dada683f95fe3bf8d8abf72d1a73343305e7aab8f"
+    },
+    {
+      "path": "debug-actual-surfaces.json",
+      "sha256": "5a25439ecdeb22fc437c83c54a8e508bfef7a4b1fe1301e4f4069645d19bedfc"
+    },
+    {
+      "path": "debug-build.log",
+      "sha256": "c1522a70dd9641b71688f5fc37582b040963baaabd0abba1acfc2f580e3033e9"
+    },
+    {
+      "path": "debug-clear.log",
+      "sha256": "ca600009bd252cc4d287dfce1bed30b794fdfa8702d647ff22899486e01549af"
+    },
+    {
+      "path": "debug-cpu.log",
+      "sha256": "7d6727f494957c34d32bf8502ef74a6694a07c05e5edef9c5475a97ddf10dba5"
+    },
+    {
+      "path": "debug-editor-build.log",
+      "sha256": "d20a0a1789de6959ec8b467ff2c4912c15888f035e310277a89812694196e379"
+    },
+    {
+      "path": "debug-final-build.log",
+      "sha256": "4ebd9beb5a8adff4e5ed0dbeb10c33c0b01b97a5e3d120119adace12f2fd12aa"
+    },
+    {
+      "path": "debug-final-surface.log",
+      "sha256": "78aff2171fcc260382fb6a625f18839cfec59e635d8f6c4dd43c28a065868404"
+    },
+    {
+      "path": "debug-final-tests-build.log",
+      "sha256": "7a18fdc45cdf5ff98bd2f139f603e5c3a4af8fd1ef3b8654d4c459d8f1d4ff19"
+    },
+    {
+      "path": "debug-final-tests.log",
+      "sha256": "a3391567cffec2430f150ce66694f77112c7af08bfd78b198de57b2b9462682a"
+    },
+    {
+      "path": "debug-final-unlit-regression.log",
+      "sha256": "a631b6d9cf9402024a6c064d696704d21e35153d954dd034327716304708b4f4"
+    },
+    {
+      "path": "debug-shader-contract.json",
+      "sha256": "a9e5182cf24b1e33834c71a0cecba9e67fc03a52e2ed884c4b8d6f67d7fe4f51"
+    },
+    {
+      "path": "debug-surface.log",
+      "sha256": "78aff2171fcc260382fb6a625f18839cfec59e635d8f6c4dd43c28a065868404"
+    },
+    {
+      "path": "debug-unlit-entry-build.log",
+      "sha256": "4511b97de897faab48058de597487983810e941a99c19c7d9be5ce33122061ae"
+    },
+    {
+      "path": "debug-unlit-regression.log",
+      "sha256": "3134bb4095b5f34366a8e89d77df05a9f891271cc200c4720225c265229ca4dc"
+    },
+    {
+      "path": "default-main-gpu.json",
+      "sha256": "62e728737b8842b38ef615de40755702715b2c744722c336d6864f00129c1cc9"
+    },
+    {
+      "path": "default-main-release.log",
+      "sha256": "4cafa000731d2d7cc18cd532420ba3db6caf8ecd2fbe4b5cdbdc5e45e2f9096b"
+    },
+    {
+      "path": "first-actual-background-failure.log",
+      "sha256": "812a3ddb07f96ed879307a8d8bac43b7f8bc015bec36d59f2d8c372a9fdd7516"
+    },
+    {
+      "path": "first-actual-fragment-sequence-failure.log",
+      "sha256": "809765f9f2e780e59456fa9d938d7a3e32ab9832d7432955d1978e11040c3a5a"
+    },
+    {
+      "path": "first-alpha.log",
+      "sha256": "219fe8ad7494d5f66799c035939cf717266bcadc4169995003469e45cec0be67"
+    },
+    {
+      "path": "fog-fixed.spvasm",
+      "sha256": "d54ce23d5edb9d89ee6e24bfdd3fc7be2afd324e51b1e397ee370fd4bded2e8f"
+    },
+    {
+      "path": "full-check.log",
+      "sha256": "01e3aede64710f1d4988c0f0a3d944a22362dea926f042ea7d7d3535c385fdcb"
+    },
+    {
+      "path": "main-view-fog-comparison.json",
+      "sha256": "6c312ca956397836c2669db620fd349efd9b961a88bfbe39d8a611cfa2b78c2c"
+    },
+    {
+      "path": "main-view-fog-release.log",
+      "sha256": "e461ff9759e4c295bc60417da97092f4a91ff9b9adb0a3de43b60a99087c3815"
+    },
+    {
+      "path": "material-red-build.log",
+      "sha256": "b125f39ce2a0d5488a3e829aad7c837849a8681c0e84274d016df9766fcef2d0"
+    },
+    {
+      "path": "material-red.log",
+      "sha256": "799aab90ff28a3a01702344ced12cede83d2ca8972b9a4f4643ea00c905a0830"
+    },
+    {
+      "path": "mesh-input-receipt.json",
+      "sha256": "b7ed2c75a8c26773e600efaf6087f305398e3183ebd8e4a947606ea68cb239bc"
+    },
+    {
+      "path": "native-surface-history.json",
+      "sha256": "303837314951429cf6b0ffbb148ebaf0edbca170ffdfc145cdf3fe9b8c0de9b0"
+    },
+    {
+      "path": "native-surface-oracle.json",
+      "sha256": "16c9fa33a2ee48f8eee19bd8577c170c979435cc3fea397ad531e40db96255fa"
+    },
+    {
+      "path": "owner-build.log",
+      "sha256": "084ee590ee89033dd44af1bbea0b26436c3cebf61c07d713180b87464e10cba4"
+    },
+    {
+      "path": "performance-comparison.json",
+      "sha256": "21b2877a59384026784d1821c2ce7fbfc87139e583bc93f7d5453782d087d459"
+    },
+    {
+      "path": "performance-off.json",
+      "sha256": "76694b8bd74bb07c2bf3e0a37f5edbbb64f19062dc89ca6a8feeb2ad83a3df8b"
+    },
+    {
+      "path": "performance-off.log",
+      "sha256": "35338de84e97a7098f43a40b4642224cfdd1fedd1a3a13df9a0e47596ff76d36"
+    },
+    {
+      "path": "performance-on.json",
+      "sha256": "af312cec9528fdf64d76f4de1bcfd9de7afa76f43fe64878e902d3ca80db2a5d"
+    },
+    {
+      "path": "performance-on.log",
+      "sha256": "f270aa8272b37772ecbb285e26a94f342a66bcfaf15528e9054eeb33c98c1dfb"
+    },
+    {
+      "path": "performance.log",
+      "sha256": "8cd20d5c87f8d60417366a65b8eae8f383539b2ce314c6981e743f35a673aa69"
+    },
+    {
+      "path": "plan.md",
+      "sha256": "f1e10630cdf6a223434b5bf8234956e98170663b53e72089253063ff40408b92"
+    },
+    {
+      "path": "prepare_component.py",
+      "sha256": "eed084db26cc72ebfc06e6c845b0147c30a35bfde459dfef1c35623f78820c3f"
+    },
+    {
+      "path": "prepare_meshes.py",
+      "sha256": "c015e104f53afed2d1ccc2cbc075f4300938fb0ff36d9a2c15936719f24415e0"
+    },
+    {
+      "path": "prepare_scene.py",
+      "sha256": "02c5a77822cf4ea51465a15aa0da8a39398afe13fdc0a88fd6122f607bcd96d4"
+    },
+    {
+      "path": "prepare_scene_fog.py",
+      "sha256": "d0d55c8267c90b9d14fa7e14c8be6c31f2c809f6b7162e6fab4f27a512600ade"
+    },
+    {
+      "path": "red-build.log",
+      "sha256": "036e214aa7e83f7dbac86e8a6ac8dea1f7c41e7230709537da7442bafb2faa6d"
+    },
+    {
+      "path": "red.log",
+      "sha256": "00a4e3b9e49f97b19d57e5f8e3db9878ce6367a158ae56fadb2f9527060b0217"
+    },
+    {
+      "path": "release-actual-check.log",
+      "sha256": "001d95b016aa5e1806aab43fbc12f686ed265a65fa03c512020f1a46d33398f4"
+    },
+    {
+      "path": "release-actual-surfaces.json",
+      "sha256": "40dfc08dfa6ce68a526ee722a7821db8be3a545594862287984ccb94ec6570f3"
+    },
+    {
+      "path": "release-build.log",
+      "sha256": "c782c19e0298c3dcd0e5068475b24191455edcd09088849cfccb025d1d92ac16"
+    },
+    {
+      "path": "release-clear.log",
+      "sha256": "59bd8e0879f0c832fac8bbb2beabbddafdb63ec5983d139f5c5cb09413cdcd9c"
+    },
+    {
+      "path": "release-final-tests-build.log",
+      "sha256": "132133d1923eda5c7dc1cceea49b423bd9c11c86ea8bc4b45a44f4e77c9f9ad4"
+    },
+    {
+      "path": "release-final-tests.log",
+      "sha256": "4452c9d1537d21eb5c7d4829b5a7b2128a7eef49f14cd211833cdd3efb063e11"
+    },
+    {
+      "path": "release-surface.log",
+      "sha256": "78aff2171fcc260382fb6a625f18839cfec59e635d8f6c4dd43c28a065868404"
+    },
+    {
+      "path": "scene-binding-receipt.json",
+      "sha256": "c3bc330416480951c058f287876e5dce53d57d9f4a409ed993155591126f2f3d"
+    },
+    {
+      "path": "shader-contract-negative.json",
+      "sha256": "ab3b7a4235cc5d99343a0f86323092084988e2c137b3321b4e4e77e5de79a2e9"
+    }
+  ],
+  "assets": [
+    {
+      "path": "full-candidate/captured-fog/10875.dds",
+      "sha256": "50cc89574ae4ed10bc7ffab320d1f6582b375e98014d14a9f86b77d462fc2ff1"
+    },
+    {
+      "path": "full-candidate/captured-fog/10875.dds.azmeta",
+      "sha256": "221547df1e3ed476c244fa5280d186104250bff199df0402bc2f7c32f0a9bab1"
+    },
+    {
+      "path": "full-candidate/captured-fog/9160.dds",
+      "sha256": "51f6ea3119023d915b1ae2a61076d02cee14eea335ca201b2175535d17d0c2af"
+    },
+    {
+      "path": "full-candidate/captured-fog/9160.dds.azmeta",
+      "sha256": "a0a100c8cc8a938aeb258e569bfa6058c1980678be5119586f9f1ab07c021218"
+    },
+    {
+      "path": "full-candidate/captured-fog/captured-view.azfog",
+      "sha256": "3119f2f0268ddc99bbef1b3eb72412a156d8205e614f64e4eb466d92258bb1f9"
+    },
+    {
+      "path": "full-candidate/captured-fog/captured-view.azfog.azmeta",
+      "sha256": "1cd80cd8b29d301e359bc901b5dc0b7d7487495e1e9a9a63dfb5efbab87792ef"
+    },
+    {
+      "path": "full-candidate/captured-fog/event-10875.gltf",
+      "sha256": "c5eff125f3fc8036a4b3e5b106d7ab9d831dceed60fa6464dc37780d61b4f117"
+    },
+    {
+      "path": "full-candidate/captured-fog/event-10875.gltf.azmeta",
+      "sha256": "fb3679879f2d98f04eb1d792259bd2ab582bf5a8e7b189fa84f77c6a04892635"
+    },
+    {
+      "path": "full-candidate/captured-fog/event-9160.gltf",
+      "sha256": "558125560837ad81c34295fb02ed90387dbbffa832e9630b8de869f44a53e9c8"
+    },
+    {
+      "path": "full-candidate/captured-fog/event-9160.gltf.azmeta",
+      "sha256": "cf8fff6060f3ac56fe6d7fe29d0e163851472eecc68c94dcc7e080e9f0e774bf"
+    },
+    {
+      "path": "full-candidate/enclosure-view-fog.azureproject",
+      "sha256": "2682bdd7e98bcbbeac08af0769a7830f507b4d1760b70266724d899fe72b70fe"
+    },
+    {
+      "path": "full-candidate/native-gi/enclosure-view-fog.azurelevel",
+      "sha256": "e8773b274467bd68e8fa692c1f6a8557c43a0055f9efefe839d1a68ea4252367"
+    }
+  ],
+  "binaries": {
+    "debug-AzurePlayer": "7e4ae1fa1f720f8468e16348ad75bd4f378664e34f99567e213fa7a14d7a2bec",
+    "debug-AzureRender": "51e83adb08ec9fe2b4efc4bd640686547b2d1afe95084c2b614ae45d2f563082",
+    "debug-AzureMaterialValidator": "f17df4890824858106a7a247e9c54676f998653cd87f9b9432c8b403552cb96c",
+    "debug-AzureViewFogGpuTests": "039ef6c88ec2aa7055a87edc286ad0dcf8905e7301e81600f2ec5c1581ed874d",
+    "release-AzurePlayer": "85ea1486b0abb4ad3e0df7d000b7586c6fa7b8cb12481fd7433d82735f6c7289",
+    "release-AzureRender": "dfa497e81ebab6aa32522d594aaca4f9f0edf488132e915c00f97c5c6156b15e",
+    "release-AzureMaterialValidator": "eba48f059405e68fd5b4bdad045a6afa325c69713ba6d4fe04a5e9e328954861",
+    "release-AzureViewFogGpuTests": "157c99dfb195e5b6c750e87278c0b2cb077e4dc595d48dfe493e102fc8aa70bb"
+  },
+  "shaderCatalogs": {
+    "debug": {
+      "programs": 198,
+      "sha256": "434713178dbbd1bfc51f50181a571fcbeb924455d54f1876be0dd9b581028889",
+      "fogPrograms": {
+        "mesh_fog.frag.spv": "2a8461d5a0c9b91f7fdc1760ba2d43c6827dc2dd10ffbab72fc5ad0b4367e6dc",
+        "mesh_fog_bindless.frag.spv": "fc4a27301eccb1c238ba2f95cb848297210043ae60959e2827403c2cbf9318fa",
+        "mesh_fog_bindless_samples.frag.spv": "b3e4adb74afa16e7e6d4b8636874687f19a860c31b15ef39338c092934f26b0c",
+        "mesh_fog_samples.frag.spv": "d25ce7ec07a3288c9c37632fcb2144573316536a56a7f33adc1430f6b2cffa16"
+      }
+    },
+    "release": {
+      "programs": 198,
+      "sha256": "3c050d68833cabe4953cdb01a3cfa1bef7c4c540f5889ff18fca0d26856ddaac",
+      "fogPrograms": {
+        "mesh_fog.frag.spv": "2a8461d5a0c9b91f7fdc1760ba2d43c6827dc2dd10ffbab72fc5ad0b4367e6dc",
+        "mesh_fog_bindless.frag.spv": "fc4a27301eccb1c238ba2f95cb848297210043ae60959e2827403c2cbf9318fa",
+        "mesh_fog_bindless_samples.frag.spv": "b3e4adb74afa16e7e6d4b8636874687f19a860c31b15ef39338c092934f26b0c",
+        "mesh_fog_samples.frag.spv": "d25ce7ec07a3288c9c37632fcb2144573316536a56a7f33adc1430f6b2cffa16"
+      }
+    }
+  },
+  "tests": {
+    "cpuAndInterfaceChecksPerConfiguration": 13,
+    "publicGpuCasesPerConfiguration": 26,
+    "actualDrawCapturesPerConfiguration": 4,
+    "nativeEventPixels": 6,
+    "nativeFragments": 10,
+    "publicMaximumLinearError": 0.0022506575296962206,
+    "nativeMaximumLinearError": 0.0050765664661944765,
+    "linearBudget": 0.008,
+    "configurationAndDescriptorRgbExact": true,
+    "defaultMainChangedPixels": 0,
+    "liveBuffers": 0,
+    "liveImages": 0
+  },
+  "mainComparison": {
+    "status": "captured",
+    "changedPixels": 3016874,
+    "priorMeanAbsoluteByteError": 13.874364149305556,
+    "candidateMeanAbsoluteByteError": 13.30292679398148,
+    "regions": [
+      {
+        "event": 9160,
+        "sourceContributingPixels": 30531,
+        "priorError": 40.083357898529364,
+        "candidateError": 23.812682191870557
+      },
+      {
+        "event": 10875,
+        "sourceContributingPixels": 30428,
+        "priorError": 40.16569168748083,
+        "candidateError": 23.839763814030935
+      }
+    ],
+    "viewFogMatch": "matched",
+    "atmospherePending": true
+  },
+  "performance": {
+    "status": "measured",
+    "views": {
+      "off": {
+        "width": 1920,
+        "height": 1080,
+        "samples": 96,
+        "viewFogMatch": "disabled",
+        "totalAverageMs": 7.40701,
+        "totalP50Ms": 7.256096,
+        "totalP95Ms": 8.14112,
+        "mainSceneAverageMs": 7.298101
+      },
+      "on": {
+        "width": 1920,
+        "height": 1080,
+        "samples": 96,
+        "viewFogMatch": "matched",
+        "totalAverageMs": 7.102916,
+        "totalP50Ms": 6.994608,
+        "totalP95Ms": 7.81672,
+        "mainSceneAverageMs": 6.99536
+      }
+    },
+    "averageDeltaMs": -0.3040940000000001,
+    "scope": "One-texel constant volume; two-mesh scene; recorded GPU timing ranges; not a full-scene sustained budget"
+  },
+  "baseline": {
+    "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-scene-binding.json",
+    "sha256": "89a256061f84e9203626409334263ee41d7ec5bf23f585dc58c000b384b925e5"
+  },
+  "limitations": [
+    "Spectral atmosphere, distant height fog and moving-view generation remain open.",
+    "Source primitive-sequence checks isolate environment depth and reconstruct unclipped HDR values using -1 EV.",
+    "Full-scene central glyph/color-layer submission ordering remains under audit.",
+    "MSAA checks cover the supported path and interior pixels; per-sample edge coverage remains pending.",
+    "Short GPU measurements use a one-texel volume and a two-mesh scene; full-scene sustained performance is not claimed.",
+    "Full NR0 through NR12 image and performance gates remain active."
+  ]
+}

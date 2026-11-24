@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-101614-view-fog-reuse-814a54\\project\\full-world-linear.azureproject",
+    "--width",
+    "2560",
+    "--height",
+    "1440",
+    "--capture-frames",
+    "12",
+    "--fixed-frame-step",
+    "--capture-fps",
+    "60",
+    "--capture-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-101614-view-fog-reuse-814a54\\fixed-world\\frames",
+    "--qa-camera",
+    "scene",
+    "--qa-light",
+    "scene",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-101614-view-fog-reuse-814a54\\fixed-world\\runtime.json"
+  ],
+  "programSha256": "c630f233cfda22d88a98884358773bf37da6399e3d90d0910a6654cdad20a192",
+  "exitCode": 0,
+  "seconds": 159.47898920002626,
+  "pixelExactFrames": 12,
+  "images": {
+    "frame_000000.png": "e0327478c3a1a2fd3822db7a21c4e15637ab29e2b77b511156cac72dacb96ddc",
+    "frame_000001.png": "e9b203af5bcfd0aeabcee28e1fc1c6b3cc96abe7dd4fe50bd2b9f498e8dd9694",
+    "frame_000002.png": "7d684f72b40d3852a4610ba71a6ac52c7748ab46bb88d720de4d19ef8b465d5a",
+    "frame_000003.png": "dc962431755f345535818ba42525edf108e9425a94ca9fbf0a693b83effa7cfb",
+    "frame_000004.png": "da4a31da759fa5a2c61a21de70ee8a200b762642a1f96bcfb44849d9a93c5b49",
+    "frame_000005.png": "00172ce6a54d22b3872475e4a9fc3a6706d514e8551deb08af6afe0df67ca8ff",
+    "frame_000006.png": "52276868ac419dfcafb6716213d4086b9473e7d3367e149e31904f46902ce84a",
+    "frame_000007.png": "b9846d9542fb4b0cb1cc32f5156eaf34d1cb26d8027c31259b08f428e6859f48",
+    "frame_000008.png": "5ecf44f0bf6b1f3574a8c00d5381a0f059fee1c93d96ef052374b273d9658f03",
+    "frame_000009.png": "85ad8e4cae66e5151b222776c69b29cd65368b514b4705aabf3a0d1c3db93483",
+    "frame_000010.png": "1d952a7f8ae6451db836eb1a2fa95b5f3e07a79f620309a56c56d3026b9fcf02",
+    "frame_000011.png": "bfcee579f550762df291f4a8c95d77dcc8641323d0f14b067e73d4e126fa268d"
+  }
+}

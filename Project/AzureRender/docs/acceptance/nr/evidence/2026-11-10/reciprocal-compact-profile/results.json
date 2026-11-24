@@ -1,0 +1,94 @@
+{
+  "rows": [
+    {
+      "device": "intel",
+      "total": 8388608,
+      "exact": 8388608,
+      "differences": 0,
+      "sha256": "c408381446132e07fa5581e930dc33fb790bea7ec4276ef3621e322df2492a55"
+    },
+    {
+      "device": "nvidia",
+      "total": 8388608,
+      "exact": 8388608,
+      "differences": 0,
+      "sha256": "c408381446132e07fa5581e930dc33fb790bea7ec4276ef3621e322df2492a55"
+    }
+  ],
+  "profileBytes": 2097152,
+  "profileSha256": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c",
+  "archiveFiles": [
+    {
+      "name": "budget.json",
+      "bytes": 435,
+      "sha256": "4ba81e0ecbc0d76df7c0e24d901b2e358fcb03a1f443d6daaa565ae8333c1b72"
+    },
+    {
+      "name": "compact.comp",
+      "bytes": 2246,
+      "sha256": "a0c76ebf0fbc7f9856200542f97cb82de0a72e9076813f3116df85e266b78261"
+    },
+    {
+      "name": "compact.spv",
+      "bytes": 18716,
+      "sha256": "461439652bac08a2fa8c4f3cf5fe933d6c17219de4ef5bee5bbac8cd269db8c4"
+    },
+    {
+      "name": "compact_rcp.glsl",
+      "bytes": 776,
+      "sha256": "b8186c7e513ca22d6b94d9fad69ce2d4784b5b12f8fe1c5e626097830fb2d7a8"
+    },
+    {
+      "name": "fixture.json",
+      "bytes": 443,
+      "sha256": "b594dea3a3d49d02b3f07edcff4fcaad5eaf59610a7388282f438fa93dde3b54"
+    },
+    {
+      "name": "intel-compact.log",
+      "bytes": 10113,
+      "sha256": "fca034025b7300b5269d61e421d308c271604bdc0af8c469a33b1107b46842a5"
+    },
+    {
+      "name": "lookup-build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "nvidia-compact.log",
+      "bytes": 10083,
+      "sha256": "7a44cbde6961c920c685f5a3dd6bde86ca6e4ea6b15e8298092793cf561933c4"
+    },
+    {
+      "name": "object_shadow.glsl",
+      "bytes": 6392,
+      "sha256": "6fd7e87988d0632ba8ad4528f15f4bb4141c81da3ce1fbc843b622a5b77d72e6"
+    },
+    {
+      "name": "prepare.py",
+      "bytes": 1470,
+      "sha256": "9b6ef696cbaefa404c72a00357ec26cbd2a3a2d83789d16fe76abcc0a139ca62"
+    },
+    {
+      "name": "process.log",
+      "bytes": 18,
+      "sha256": "b2d4ec8c17b4aae3ca93c176b0981945fd95840926b364a4ddd1a2d724101d84"
+    },
+    {
+      "name": "results.json",
+      "bytes": 538,
+      "sha256": "e03a88dfe870df4de626d400bad914f49f4138e0363c2b32b26cca1bdbc2efd3"
+    },
+    {
+      "name": "run.py",
+      "bytes": 1343,
+      "sha256": "22dee8ef9cfa30376f56f1d4d12b30befc2c99863ad49c3485aa5d85a4018411"
+    },
+    {
+      "name": "correction.bin",
+      "bytes": 2097152,
+      "sha256": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+    }
+  ],
+  "archiveBytes": 167749,
+  "archiveSha256": "6d0fb232fdd994cf1e01c59fdd6cce70f0f049a5d8cdad1401eec054912165e1"
+}

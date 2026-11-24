@@ -1,0 +1,983 @@
+{
+  "status": "measured-post-pair",
+  "captures": [
+    {
+      "kind": "parallel",
+      "stage": "complete",
+      "passes": [
+        {
+          "program": "inner_outline.frag.spv",
+          "event": 26570,
+          "constants": [
+            {
+              "name": "grid",
+              "variables": [
+                {
+                  "name": "viewProjection",
+                  "type": "VarType.Float",
+                  "rows": 4,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "minorColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "majorColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "xAxis",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "zAxis",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "options",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                }
+              ]
+            },
+            {
+              "name": "outline",
+              "variables": [
+                {
+                  "name": "strength",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "depthThreshold",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.18000000715255737
+                  ],
+                  "uint32": [
+                    1043878380
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "normalThreshold",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.20000000298023224
+                  ],
+                  "uint32": [
+                    1045220557
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "diagnosticView",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "exposureEv",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "toneMappingEnabled",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "bloomStrength",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.1599999964237213
+                  ],
+                  "uint32": [
+                    1042536202
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "bloomIsolation",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "outlineColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.00800000037997961,
+                    0.013000000268220901,
+                    0.02199999988079071,
+                    1.0
+                  ],
+                  "uint32": [
+                    1006834287,
+                    1012202996,
+                    1018444120,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "gradeParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0499999523162842,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065772646,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "gradeTint",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "sampling",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.10000000149011612,
+                    10000.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1036831949,
+                    1176256512,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "colorGradingLut",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    32.0,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1107296256,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                }
+              ]
+            }
+          ],
+          "textures": [
+            {
+              "name": "normalTexture",
+              "resource": "ResourceId::194",
+              "width": 2560,
+              "height": 1440,
+              "depth": 1,
+              "format": "R8G8B8A8_UNORM",
+              "path": "parallel/inner_outline.frag.spv-normalTexture.gz",
+              "bytes": 14745600,
+              "sha256": "da7bd2ca2ad589cd0aca6a531ca295d6a32cb4993594867f4ef93cf89b721559"
+            },
+            {
+              "name": "depthTexture",
+              "resource": "ResourceId::185",
+              "width": 2560,
+              "height": 1440,
+              "depth": 1,
+              "format": "D32",
+              "path": "parallel/inner_outline.frag.spv-depthTexture.gz",
+              "bytes": 14745600,
+              "sha256": "acb71821a2bc93c58027399e581ec93fd6438b1539392542bef817f957a4c236"
+            },
+            {
+              "name": "sceneColorTexture",
+              "resource": "ResourceId::176",
+              "width": 2560,
+              "height": 1440,
+              "depth": 1,
+              "format": "R16G16B16A16_FLOAT",
+              "path": "parallel/inner_outline.frag.spv-sceneColorTexture.gz",
+              "bytes": 29491200,
+              "sha256": "aacc597695bf287c2de3660ce892158f9a8f64810afa9917f9bd52fec1614e08"
+            },
+            {
+              "name": "colorGradingLutTexture",
+              "resource": "ResourceId::268",
+              "width": 1024,
+              "height": 32,
+              "depth": 1,
+              "format": "R32G32B32A32_FLOAT",
+              "path": "parallel/inner_outline.frag.spv-colorGradingLutTexture.gz",
+              "bytes": 524288,
+              "sha256": "96b93ed337afd8b2ec0ddfc117765044a662e75d87d6bf5e71b3f656a7e89d41"
+            },
+            {
+              "name": "displayMaskTexture",
+              "resource": "ResourceId::197",
+              "width": 2560,
+              "height": 1440,
+              "depth": 1,
+              "format": "R8_UNORM",
+              "path": "parallel/inner_outline.frag.spv-displayMaskTexture.gz",
+              "bytes": 3686400,
+              "sha256": "c1a278749cec50862b38ddd306291242df759ab458eaf3ba194604ac2756128a"
+            }
+          ],
+          "samplers": [],
+          "output": {
+            "width": 2560,
+            "height": 1440,
+            "format": "R16G16B16A16_FLOAT",
+            "pixel911x4": [
+              0.1279296875,
+              0.234619140625,
+              0.654296875,
+              1.0
+            ],
+            "path": "parallel/inner_outline.frag.spv-output.gz",
+            "bytes": 29491200,
+            "sha256": "457fc4c4897f307b99ef713952df80b264e2bf3e6b697956040a50a07825ca46"
+          }
+        },
+        {
+          "program": "spatial_antialiasing.frag.spv",
+          "event": 26579,
+          "constants": [
+            {
+              "name": "resolve",
+              "variables": [
+                {
+                  "name": "options",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                }
+              ]
+            }
+          ],
+          "textures": [
+            {
+              "name": "linearSource",
+              "resource": "ResourceId::214",
+              "width": 2560,
+              "height": 1440,
+              "depth": 1,
+              "format": "R16G16B16A16_FLOAT",
+              "path": "parallel/spatial_antialiasing.frag.spv-linearSource.gz",
+              "bytes": 29491200,
+              "sha256": "457fc4c4897f307b99ef713952df80b264e2bf3e6b697956040a50a07825ca46"
+            }
+          ],
+          "samplers": [],
+          "output": {
+            "width": 2560,
+            "height": 1440,
+            "format": "B8G8R8A8_SRGB",
+            "pixel911x4": [
+              0.1298828125,
+              0.23828125,
+              0.65234375,
+              1.0
+            ],
+            "path": "parallel/spatial_antialiasing.frag.spv-output.gz",
+            "bytes": 14745600,
+            "sha256": "e3d6fb04247d9b7617af04aac3d9c572470e7f7c01b62f94a8ad2ae5a1daf895"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "serial",
+      "stage": "complete",
+      "passes": [
+        {
+          "program": "inner_outline.frag.spv",
+          "event": 25688,
+          "constants": [
+            {
+              "name": "grid",
+              "variables": [
+                {
+                  "name": "viewProjection",
+                  "type": "VarType.Float",
+                  "rows": 4,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "minorColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "majorColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "xAxis",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "zAxis",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "options",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                }
+              ]
+            },
+            {
+              "name": "outline",
+              "variables": [
+                {
+                  "name": "strength",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "depthThreshold",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.18000000715255737
+                  ],
+                  "uint32": [
+                    1043878380
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "normalThreshold",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.20000000298023224
+                  ],
+                  "uint32": [
+                    1045220557
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "diagnosticView",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "exposureEv",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "toneMappingEnabled",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "bloomStrength",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.1599999964237213
+                  ],
+                  "uint32": [
+                    1042536202
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "bloomIsolation",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "outlineColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.00800000037997961,
+                    0.013000000268220901,
+                    0.02199999988079071,
+                    1.0
+                  ],
+                  "uint32": [
+                    1006834287,
+                    1012202996,
+                    1018444120,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "gradeParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0499999523162842,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065772646,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "gradeTint",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "sampling",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.10000000149011612,
+                    10000.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1036831949,
+                    1176256512,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "colorGradingLut",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    32.0,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1107296256,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                }
+              ]
+            }
+          ],
+          "textures": [
+            {
+              "name": "normalTexture",
+              "resource": "ResourceId::194",
+              "width": 2560,
+              "height": 1440,
+              "depth": 1,
+              "format": "R8G8B8A8_UNORM",
+              "path": "serial/inner_outline.frag.spv-normalTexture.gz",
+              "bytes": 14745600,
+              "sha256": "da7bd2ca2ad589cd0aca6a531ca295d6a32cb4993594867f4ef93cf89b721559"
+            },
+            {
+              "name": "depthTexture",
+              "resource": "ResourceId::185",
+              "width": 2560,
+              "height": 1440,
+              "depth": 1,
+              "format": "D32",
+              "path": "serial/inner_outline.frag.spv-depthTexture.gz",
+              "bytes": 14745600,
+              "sha256": "acb71821a2bc93c58027399e581ec93fd6438b1539392542bef817f957a4c236"
+            },
+            {
+              "name": "sceneColorTexture",
+              "resource": "ResourceId::176",
+              "width": 2560,
+              "height": 1440,
+              "depth": 1,
+              "format": "R16G16B16A16_FLOAT",
+              "path": "serial/inner_outline.frag.spv-sceneColorTexture.gz",
+              "bytes": 29491200,
+              "sha256": "aacc597695bf287c2de3660ce892158f9a8f64810afa9917f9bd52fec1614e08"
+            },
+            {
+              "name": "colorGradingLutTexture",
+              "resource": "ResourceId::268",
+              "width": 1024,
+              "height": 32,
+              "depth": 1,
+              "format": "R32G32B32A32_FLOAT",
+              "path": "serial/inner_outline.frag.spv-colorGradingLutTexture.gz",
+              "bytes": 524288,
+              "sha256": "96b93ed337afd8b2ec0ddfc117765044a662e75d87d6bf5e71b3f656a7e89d41"
+            },
+            {
+              "name": "displayMaskTexture",
+              "resource": "ResourceId::197",
+              "width": 2560,
+              "height": 1440,
+              "depth": 1,
+              "format": "R8_UNORM",
+              "path": "serial/inner_outline.frag.spv-displayMaskTexture.gz",
+              "bytes": 3686400,
+              "sha256": "c1a278749cec50862b38ddd306291242df759ab458eaf3ba194604ac2756128a"
+            }
+          ],
+          "samplers": [],
+          "output": {
+            "width": 2560,
+            "height": 1440,
+            "format": "R16G16B16A16_FLOAT",
+            "pixel911x4": [
+              0.1279296875,
+              0.234619140625,
+              0.654296875,
+              1.0
+            ],
+            "path": "serial/inner_outline.frag.spv-output.gz",
+            "bytes": 29491200,
+            "sha256": "457fc4c4897f307b99ef713952df80b264e2bf3e6b697956040a50a07825ca46"
+          }
+        },
+        {
+          "program": "spatial_antialiasing.frag.spv",
+          "event": 25697,
+          "constants": [
+            {
+              "name": "resolve",
+              "variables": [
+                {
+                  "name": "options",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                }
+              ]
+            }
+          ],
+          "textures": [
+            {
+              "name": "linearSource",
+              "resource": "ResourceId::214",
+              "width": 2560,
+              "height": 1440,
+              "depth": 1,
+              "format": "R16G16B16A16_FLOAT",
+              "path": "serial/spatial_antialiasing.frag.spv-linearSource.gz",
+              "bytes": 29491200,
+              "sha256": "457fc4c4897f307b99ef713952df80b264e2bf3e6b697956040a50a07825ca46"
+            }
+          ],
+          "samplers": [],
+          "output": {
+            "width": 2560,
+            "height": 1440,
+            "format": "B8G8R8A8_SRGB",
+            "pixel911x4": [
+              0.1298828125,
+              0.23828125,
+              0.65234375,
+              1.0
+            ],
+            "path": "serial/spatial_antialiasing.frag.spv-output.gz",
+            "bytes": 14745600,
+            "sha256": "e3d6fb04247d9b7617af04aac3d9c572470e7f7c01b62f94a8ad2ae5a1daf895"
+          }
+        }
+      ]
+    }
+  ]
+}

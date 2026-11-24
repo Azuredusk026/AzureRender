@@ -12,46 +12,20 @@
 | 编译器 | MinGW/GCC 13+ 或项目 CI 支持的 MSVC/GCC |
 | 依赖 | vcpkg manifest mode |
 
-Windows 验证环境使用 Vulkan SDK 1.4、MinGW GCC 13 和 Ninja 1.13。Vulkan SDK 安装程序提供 `VULKAN_SDK`；使用 vcpkg 前需将 `VCPKG_ROOT` 指向本机 vcpkg 目录。
+Windows 主验收使用 MSVC 14.44、Vulkan SDK 1.4.350 和 Ninja。设置 `VULKAN_SDK` 与 `VCPKG_ROOT` 后，从工程目录执行命令。
 
 ## 配置与构建
 
 ```powershell
-# 将该路径替换为本机 vcpkg 工作目录
-$env:VCPKG_ROOT = (Resolve-Path "<vcpkg 目录>").Path
-.\tools\configure_windows.ps1 -Config Debug
-.\tools\configure_windows.ps1 -Config Release
-cmake --build .\build\ninja-debug
-cmake --build .\build\ninja-release
-```
-
-Windows 脚本会统一 Ninja、MinGW、vcpkg toolchain 和 `x64-mingw-dynamic` ABI。也可以显式配置：
-
-```powershell
-cmake -S . -B build/ninja-debug -G Ninja `
-  -DCMAKE_BUILD_TYPE=Debug `
-  -DCMAKE_CXX_COMPILER=g++ `
-  -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" `
-  -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic
-cmake --build build/ninja-debug
-```
-
-Visual Studio 2022 用户可以在 Developer PowerShell 或 Developer Command Prompt 中使用 MSVC 预设。先设置本机 vcpkg 目录：
-
-```powershell
-$env:VCPKG_ROOT = (Resolve-Path "<vcpkg 目录>").Path
-cmake --preset msvc-debug
-cmake --build .\build\ninja-msvc-debug
-```
-
-预设从当前开发环境发现 MSVC、Ninja 和 CMake。`tools/msvc_env.bat` 可以从普通命令提示符发现 Visual Studio 工具，并执行单条构建命令：
-
-```powershell
+.\tools\msvc_env.bat cmake --preset msvc-debug
+.\tools\msvc_env.bat cmake --build --preset msvc-debug
 .\tools\msvc_env.bat cmake --preset msvc-release
 .\tools\msvc_env.bat cmake --build --preset msvc-release
 ```
 
-MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设使用 `x64-mingw-dynamic`。
+MSVC 预设使用 `x64-windows` 依赖。MinGW 环境可使用 `ninja-debug`、`ninja-release` 预设及 `x64-mingw-dynamic` 依赖。
+
+源码与产物哈希、公共回归和本机 GPU 验收见[构建复现说明](runtime/build-reproducibility.md)。
 
 构建过程调用 `glslc`，把 GLSL 编译到构建目录的 `shaders/`。Shader 是主目标的显式依赖，编译失败会终止构建。
 
@@ -60,13 +34,13 @@ MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设使用 `x64-mingw-dy
 无参数启动默认选择 Character 和公共测试模型：
 
 ```powershell
-.\build\ninja-debug\AzureRender.exe
+.\build\ninja-msvc-debug\AzureRender.exe
 ```
 
 公共 Smoke：
 
 ```powershell
-.\build\ninja-debug\AzureRender.exe `
+.\build\ninja-msvc-debug\AzureRender.exe `
   --scene-type character `
   --asset .\assets_public\test_model.gltf `
   --smoke-frames 120
@@ -75,7 +49,7 @@ MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设使用 `x64-mingw-dy
 风格化检查预设：
 
 ```powershell
-.\build\ninja-release\AzureRender.exe `
+.\build\ninja-msvc-release\AzureRender.exe `
   --asset .\assets_public\test_model.gltf `
   --qa-camera full-body-front `
   --qa-light stylized-key
@@ -86,7 +60,7 @@ MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设使用 `x64-mingw-dy
 ## 运行黑洞场景
 
 ```powershell
-.\build\ninja-release\AzureRender.exe `
+.\build\ninja-msvc-release\AzureRender.exe `
   --scene-type blackhole `
   --blackhole-quality cinematic `
   --blackhole-camera front
@@ -99,7 +73,7 @@ MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设使用 `x64-mingw-dy
 `--environment` 可以读取单张等距柱状 `.hdr/.png/.jpg`，也可以读取包含六个面的目录。六个文件名分别以 `_Right`、`_Left`、`_Up`、`_Down`、`_Front` 和 `_Back` 结尾。加载器会把六面图转换成内部使用的等距柱状图。
 
 ```powershell
-.\build\ninja-debug\AzureRender.exe `
+.\build\ninja-msvc-debug\AzureRender.exe `
   --scene-type character `
   --environment D:\Assets\StudioEvening.hdr
 ```
@@ -109,12 +83,12 @@ MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设使用 `x64-mingw-dy
 ## 创建和打开编辑器场景
 
 ```powershell
-.\build\ninja-debug\AzureRender.exe `
+.\build\ninja-msvc-debug\AzureRender.exe `
   --asset .\assets_public\test_model.gltf `
-  --create-scene .\build\ninja-debug\public.azscene
+  --create-scene .\build\ninja-msvc-debug\public.azscene
 
-.\build\ninja-debug\AzureRender.exe `
-  --editor .\build\ninja-debug\public.azscene
+.\build\ninja-msvc-debug\AzureRender.exe `
+  --editor .\build\ninja-msvc-debug\public.azscene
 ```
 
 编辑器包含 Scene Outliner、Inspector 和 Asset Browser。它也支持 Renderer 选择、Undo/Redo、手动重载资产和语义化 Capture。详细数据格式见[资产、场景与编辑器](assets-and-editor.md)。
@@ -124,7 +98,7 @@ MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设使用 `x64-mingw-dy
 捕获目录必须不存在或为空：
 
 ```powershell
-.\build\ninja-release\AzureRender.exe `
+.\build\ninja-msvc-release\AzureRender.exe `
   --scene-type blackhole `
   --width 2560 --height 1440 `
   --capture-dir .\captures\blackhole\front-cinematic `
@@ -136,7 +110,7 @@ MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设使用 `x64-mingw-dy
 五章技术序列：
 
 ```powershell
-.\build\ninja-release\AzureRender.exe `
+.\build\ninja-msvc-release\AzureRender.exe `
   --portfolio --technical-sequence `
   --capture-dir .\captures\character\technical `
   --capture-frames 1920 --capture-fps 24 `
@@ -148,7 +122,7 @@ MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设使用 `x64-mingw-dy
 ## GPU Timing
 
 ```powershell
-.\build\ninja-release\AzureRender.exe `
+.\build\ninja-msvc-release\AzureRender.exe `
   --scene-type blackhole `
   --gpu-timing `
   --gpu-timing-output .\captures\blackhole\timing.json `
@@ -160,7 +134,7 @@ Timing 来自 Vulkan Timestamp Query。它只统计 Query 包围的 GPU Pass，�
 ## 诊断与 QA
 
 ```powershell
-.\build\ninja-debug\AzureRender.exe `
+.\build\ninja-msvc-debug\AzureRender.exe `
   --diagnostic-view normal `
   --hud --smoke-frames 120
 ```
@@ -168,7 +142,7 @@ Timing 来自 Vulkan Timestamp Query。它只统计 Query 包围的 GPU Pass，�
 角色还提供效果和缓冲隔离。例如观察 Face SDF：
 
 ```powershell
-.\build\ninja-debug\AzureRender.exe `
+.\build\ninja-msvc-debug\AzureRender.exe `
   --qa-camera face-three-quarter `
   --qa-light stylized-key `
   --qa-effect face-sdf `
@@ -180,8 +154,8 @@ Timing 来自 Vulkan Timestamp Query。它只统计 Query 包围的 GPU Pass，�
 ## 安装树与手动运行
 
 ```powershell
-cmake --install .\build\ninja-debug --prefix .\build\install-debug
-cmake --install .\build\ninja-release --prefix .\build\install-release
+cmake --install .\build\ninja-msvc-debug --prefix .\build\install-debug
+cmake --install .\build\ninja-msvc-release --prefix .\build\install-release
 
 .\build\install-debug\bin\AzureRender.exe --check-resources
 .\build\install-release\bin\AzureRender.exe --smoke-frames 120
@@ -203,7 +177,7 @@ Windows MinGW 安装树的 `bin/` 必须包含 `AzureRender.exe` 和 `glfw3.dll`
 ### 找不到 Shader 或资产
 
 ```powershell
-.\build\ninja-release\AzureRender.exe --check-resources
+.\build\ninja-msvc-release\AzureRender.exe --check-resources
 ```
 
 开发树、构建树与安装树由 `ResourceLocator` 统一探测。只有特殊部署才应传 `--resource-root`，不要把本机路径写入源码。

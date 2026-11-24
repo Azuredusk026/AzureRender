@@ -1,0 +1,648 @@
+{
+  "passing": {
+    "status": "diagnostic-reference-lookup",
+    "rows": [
+      {
+        "device": "intel",
+        "exactPixels": 49126,
+        "pixelsOverOneByte": 0,
+        "maximumByteError": 1,
+        "nativeWorldExactPixels": 49384,
+        "nativeWorldExactAmongFailures": 0,
+        "worldMaximumAbsolutePerComponent": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "outputSha256": "bbd828b8428f7f7823d9f76a5b8b3b72c54a285d2f9fd1fd787cfb07fd2ce59b"
+      },
+      {
+        "device": "nvidia",
+        "exactPixels": 49126,
+        "pixelsOverOneByte": 0,
+        "maximumByteError": 1,
+        "nativeWorldExactPixels": 49384,
+        "nativeWorldExactAmongFailures": 0,
+        "worldMaximumAbsolutePerComponent": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "outputSha256": "377a39c1ec50e13fa55a592ce55f7847fc6437710fa6e66f34584d181f5a738d"
+      }
+    ],
+    "scope": "Full normalized reciprocal reference in a private compute fixture; fixed sampling footprint and original queries preserved. Production remains unchanged."
+  },
+  "oracle": {
+    "rows": [
+      {
+        "device": "intel",
+        "total": 65536,
+        "differences": 0,
+        "indices": [],
+        "expected": [],
+        "actual": []
+      },
+      {
+        "device": "nvidia",
+        "total": 65536,
+        "differences": 0,
+        "indices": [],
+        "expected": [],
+        "actual": []
+      }
+    ]
+  },
+  "matrixOnly": {
+    "status": "diagnostic-reference-lookup",
+    "rows": [
+      {
+        "device": "intel",
+        "exactPixels": 49124,
+        "pixelsOverOneByte": 1,
+        "maximumByteError": 4,
+        "nativeWorldExactPixels": 49303,
+        "nativeWorldExactAmongFailures": 0,
+        "worldMaximumAbsolutePerComponent": [
+          3.0517578125e-05,
+          0.0,
+          0.0
+        ],
+        "outputSha256": "30768dd6e42aacbc5ed59379b7f7336006baa6f282292ff8a68d4890030f37e3"
+      },
+      {
+        "device": "nvidia",
+        "exactPixels": 49126,
+        "pixelsOverOneByte": 0,
+        "maximumByteError": 1,
+        "nativeWorldExactPixels": 49384,
+        "nativeWorldExactAmongFailures": 0,
+        "worldMaximumAbsolutePerComponent": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "outputSha256": "377a39c1ec50e13fa55a592ce55f7847fc6437710fa6e66f34584d181f5a738d"
+      }
+    ],
+    "scope": "Full normalized reciprocal reference in a private compute fixture; fixed sampling footprint and original queries preserved. Production remains unchanged."
+  },
+  "scalarViewport": {
+    "status": "diagnostic-reference-lookup",
+    "rows": [
+      {
+        "device": "intel",
+        "exactPixels": 49124,
+        "pixelsOverOneByte": 1,
+        "maximumByteError": 4,
+        "nativeWorldExactPixels": 49303,
+        "nativeWorldExactAmongFailures": 0,
+        "worldMaximumAbsolutePerComponent": [
+          3.0517578125e-05,
+          0.0,
+          0.0
+        ],
+        "outputSha256": "30768dd6e42aacbc5ed59379b7f7336006baa6f282292ff8a68d4890030f37e3"
+      },
+      {
+        "device": "nvidia",
+        "exactPixels": 49126,
+        "pixelsOverOneByte": 0,
+        "maximumByteError": 1,
+        "nativeWorldExactPixels": 49384,
+        "nativeWorldExactAmongFailures": 0,
+        "worldMaximumAbsolutePerComponent": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "outputSha256": "377a39c1ec50e13fa55a592ce55f7847fc6437710fa6e66f34584d181f5a738d"
+      }
+    ],
+    "scope": "Full normalized reciprocal reference in a private compute fixture; fixed sampling footprint and original queries preserved. Production remains unchanged."
+  },
+  "productOnly": {
+    "status": "diagnostic-reference-lookup",
+    "rows": [
+      {
+        "device": "intel",
+        "exactPixels": 49126,
+        "pixelsOverOneByte": 0,
+        "maximumByteError": 1,
+        "nativeWorldExactPixels": 49384,
+        "nativeWorldExactAmongFailures": 0,
+        "worldMaximumAbsolutePerComponent": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "outputSha256": "bbd828b8428f7f7823d9f76a5b8b3b72c54a285d2f9fd1fd787cfb07fd2ce59b"
+      }
+    ],
+    "scope": "Full normalized reciprocal reference in a private compute fixture; fixed sampling footprint and original queries preserved. Production remains unchanged."
+  },
+  "subtractOnly": {
+    "status": "diagnostic-reference-lookup",
+    "rows": [
+      {
+        "device": "intel",
+        "exactPixels": 49126,
+        "pixelsOverOneByte": 0,
+        "maximumByteError": 1,
+        "nativeWorldExactPixels": 49384,
+        "nativeWorldExactAmongFailures": 0,
+        "worldMaximumAbsolutePerComponent": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "outputSha256": "bbd828b8428f7f7823d9f76a5b8b3b72c54a285d2f9fd1fd787cfb07fd2ce59b"
+      }
+    ],
+    "scope": "Full normalized reciprocal reference in a private compute fixture; fixed sampling footprint and original queries preserved. Production remains unchanged."
+  },
+  "archiveFiles": [
+    {
+      "name": "analyze.py",
+      "bytes": 1791,
+      "sha256": "bb26916db8e42f19f983fb17b0932adb3ab2aaa737a703128a062280b0fa7503"
+    },
+    {
+      "name": "analyze_clip.py",
+      "bytes": 1807,
+      "sha256": "02b762bc685849b2a1e6a3bcb732e8545f1ba21b05c914ddd865e73c872bc2b5"
+    },
+    {
+      "name": "analyze_cliponly.py",
+      "bytes": 1806,
+      "sha256": "52aae3313fa59ea14b0c081560f8943a1ca7869eef454055e1fd937d09079fa7"
+    },
+    {
+      "name": "analyze_product.py",
+      "bytes": 1791,
+      "sha256": "6dad63b2b4ad042597affc80cb1a148f33332f731ae5e64d233048c40c7e2979"
+    },
+    {
+      "name": "analyze_scalar.py",
+      "bytes": 1794,
+      "sha256": "ac0faddad602454d444361567e421c0309bb5680344768d82202254ee1ec78c0"
+    },
+    {
+      "name": "analyze_subtract.py",
+      "bytes": 1797,
+      "sha256": "86579057772c0ea5421ef721842bfc6482184727c2101db0f03292b089fa40aa"
+    },
+    {
+      "name": "budget.json",
+      "bytes": 434,
+      "sha256": "274506b4858993c12a4cce445a61e570840f990f8251bff85030b3649e6e9b15"
+    },
+    {
+      "name": "clip-results.json",
+      "bytes": 1037,
+      "sha256": "0bebc5e8c2f4225fd6f330db7f588bd76b8ab371df3ec5420e774f0fbad2ffff"
+    },
+    {
+      "name": "cliponly-filter.comp",
+      "bytes": 2569,
+      "sha256": "b822c2c5416adeb284c9396957dd6c86131d727099055d26cda8c0e431abb0bd"
+    },
+    {
+      "name": "cliponly-filter.spv",
+      "bytes": 43976,
+      "sha256": "034876f761f2bf4b1f25c6008a1fbcb251e429e60ea72043f9b00b0686d297f9"
+    },
+    {
+      "name": "cliponly-results.json",
+      "bytes": 1037,
+      "sha256": "0bebc5e8c2f4225fd6f330db7f588bd76b8ab371df3ec5420e774f0fbad2ffff"
+    },
+    {
+      "name": "cliponly-world.comp",
+      "bytes": 2539,
+      "sha256": "49993ad7fbbb00df84c107776f0c7b2e35c385f2c3452c0529c0313854ffe630"
+    },
+    {
+      "name": "cliponly-world.spv",
+      "bytes": 43860,
+      "sha256": "c3114dfc7452a0ad8384aa436e4b740fa3c8a80a05f8a4f8545d32ebceeadf57"
+    },
+    {
+      "name": "exact-filter.comp",
+      "bytes": 2566,
+      "sha256": "5c92975a72c3016a17404623e8157660d3c3949ce9a7129d42dff680c9928ca3"
+    },
+    {
+      "name": "exact-filter.spv",
+      "bytes": 44436,
+      "sha256": "8a3b749f9919dd2ebf595388643f2dda2cc5c04420ebf7bb0a6b7d23b58e01ca"
+    },
+    {
+      "name": "exact-world.comp",
+      "bytes": 2536,
+      "sha256": "d35313f7b8cb98b121651882b860809ceeffba5bd9c76eee099018258635329c"
+    },
+    {
+      "name": "exact-world.spv",
+      "bytes": 44320,
+      "sha256": "59e80853db7932bec90c5586013d40a2b7eda43911e43ce57821a36cffdd002a"
+    },
+    {
+      "name": "exactclip-filter.comp",
+      "bytes": 2570,
+      "sha256": "27d7c93083f09619a52fbc14412d0c825ea48e3b8831dcd378b1dd9cade70805"
+    },
+    {
+      "name": "exactclip-filter.spv",
+      "bytes": 44988,
+      "sha256": "c9093804311475fac37ab4a98f6df46e9c4864b9abdff2d35f52c3a73c5bd86e"
+    },
+    {
+      "name": "exactclip-world.comp",
+      "bytes": 2540,
+      "sha256": "00bc164132309378a94eed0d56c50175a8b0708cac3edaf7a04b708882b0d310"
+    },
+    {
+      "name": "exactclip-world.spv",
+      "bytes": 44872,
+      "sha256": "28b694bda42b5712fd640cc34be5a5920956cf793510bc339a63f3ccb74d4ad9"
+    },
+    {
+      "name": "exact_fma.glsl",
+      "bytes": 2727,
+      "sha256": "8c893fe52e851d208b0c3d45a6c0759b40a423e2ef5f03bc36979e3fb3af5335"
+    },
+    {
+      "name": "fixture.json",
+      "bytes": 404,
+      "sha256": "e974851bb12649626ad4284415b037ca44b422fb2178729497515c2af8efb6bc"
+    },
+    {
+      "name": "intel-cliponly-filter.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "intel-cliponly-world.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "intel-exact-filter.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "intel-exact-world.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "intel-exactclip-filter.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "intel-exactclip-world.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "intel-oracle.log",
+      "bytes": 10111,
+      "sha256": "9b40065cd3be85ca065943299cf898757ec366b6f4a2ef22869c59791882ec5a"
+    },
+    {
+      "name": "intel-product-filter.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "intel-product-world.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "intel-scalar-filter.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "intel-scalar-world.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "intel-subtract-filter.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "intel-subtract-world.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "lookup-build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "native_receiver_cliponly.glsl",
+      "bytes": 2479,
+      "sha256": "0f899b3c3e58bdfaa2ac595f261cc00e0ca648229493e0bc27c3be5a09954da3"
+    },
+    {
+      "name": "native_receiver_exact.glsl",
+      "bytes": 2680,
+      "sha256": "33cd0c4fe0e3092f9168a5d295b327cac0d42e123e8a1a88fafeea4b7b21794b"
+    },
+    {
+      "name": "native_receiver_exactclip.glsl",
+      "bytes": 2749,
+      "sha256": "2ff9ccff25bc36cd68e649ddfe13c3b24ab4fad376995f7a460ec427656e4dc7"
+    },
+    {
+      "name": "native_receiver_lookup.glsl",
+      "bytes": 2383,
+      "sha256": "3a2f2b41b88bcc7c887fbe7b7e0d3c1550f0340e10bdf69f459d406040c8cb82"
+    },
+    {
+      "name": "native_receiver_product.glsl",
+      "bytes": 2457,
+      "sha256": "4f0a72ed17cd69e2a9818589040a93a3a8d944a8fd0bea8e18ddc38c2086a906"
+    },
+    {
+      "name": "native_receiver_scalar.glsl",
+      "bytes": 2438,
+      "sha256": "b1333eea2e17297599eb4c492866939de1b42234e0be0eefb14a85900e639296"
+    },
+    {
+      "name": "native_receiver_subtract.glsl",
+      "bytes": 2439,
+      "sha256": "7ceea87fef2e182c6b1c5aabf4daa0957310f4de0811e1281567d2f2f8be08ee"
+    },
+    {
+      "name": "nvidia-cliponly-filter.log",
+      "bytes": 10081,
+      "sha256": "96b85ba833c9fd147376081e9ad12c057517eb09c924a64ff4edc04724a98855"
+    },
+    {
+      "name": "nvidia-cliponly-world.log",
+      "bytes": 10081,
+      "sha256": "96b85ba833c9fd147376081e9ad12c057517eb09c924a64ff4edc04724a98855"
+    },
+    {
+      "name": "nvidia-exact-filter.log",
+      "bytes": 10081,
+      "sha256": "96b85ba833c9fd147376081e9ad12c057517eb09c924a64ff4edc04724a98855"
+    },
+    {
+      "name": "nvidia-exact-world.log",
+      "bytes": 10081,
+      "sha256": "96b85ba833c9fd147376081e9ad12c057517eb09c924a64ff4edc04724a98855"
+    },
+    {
+      "name": "nvidia-exactclip-filter.log",
+      "bytes": 10081,
+      "sha256": "96b85ba833c9fd147376081e9ad12c057517eb09c924a64ff4edc04724a98855"
+    },
+    {
+      "name": "nvidia-exactclip-world.log",
+      "bytes": 10081,
+      "sha256": "96b85ba833c9fd147376081e9ad12c057517eb09c924a64ff4edc04724a98855"
+    },
+    {
+      "name": "nvidia-oracle.log",
+      "bytes": 10081,
+      "sha256": "519dfb715868cfd7382b6b2b11f9295438c34345b7816ed83aed65e6d85155b9"
+    },
+    {
+      "name": "nvidia-scalar-filter.log",
+      "bytes": 10081,
+      "sha256": "96b85ba833c9fd147376081e9ad12c057517eb09c924a64ff4edc04724a98855"
+    },
+    {
+      "name": "nvidia-scalar-world.log",
+      "bytes": 10081,
+      "sha256": "96b85ba833c9fd147376081e9ad12c057517eb09c924a64ff4edc04724a98855"
+    },
+    {
+      "name": "object_shadow.glsl",
+      "bytes": 6392,
+      "sha256": "6fd7e87988d0632ba8ad4528f15f4bb4141c81da3ce1fbc843b622a5b77d72e6"
+    },
+    {
+      "name": "oracle-expected.u32",
+      "bytes": 262144,
+      "sha256": "f578e37e31dd5b425acf66d8ad6e9101a22505f986fe639978c8540655ca428c"
+    },
+    {
+      "name": "oracle-fixture.json",
+      "bytes": 409,
+      "sha256": "87a959c324b246b0c6ca9257e8f25f1bb07e42c06428ba604568e26cbdec86b1"
+    },
+    {
+      "name": "oracle-results.json",
+      "bytes": 330,
+      "sha256": "b2347ebc049dc7daa21b60e8ff5f82e6b355ad011107207513aa17d03b854aba"
+    },
+    {
+      "name": "oracle.comp",
+      "bytes": 2130,
+      "sha256": "c2c657c2fb92bbd3bc6473ed690ee3c2667aea0fd9b26953f68b0f78544faa0e"
+    },
+    {
+      "name": "oracle.spv",
+      "bytes": 29636,
+      "sha256": "0c0fcdf71d765b4612bc2d083c9ce397b38745497876d2f8316832816d963696"
+    },
+    {
+      "name": "original.spvasm",
+      "bytes": 86621,
+      "sha256": "3c80227ad80bc32a6192cee24d85ee76400164f99260e83d38c589d91e8feea1"
+    },
+    {
+      "name": "prepare.py",
+      "bytes": 1558,
+      "sha256": "c896bcd336a06e43e4a2fc66c9c5ae3444cee353eec74916e6f7cba8b5e1de95"
+    },
+    {
+      "name": "prepare_clip.py",
+      "bytes": 1111,
+      "sha256": "cd8045f88752cc7f77d34fa704ba8213712ed65d68cf01350321e575a6a4331d"
+    },
+    {
+      "name": "prepare_oracle.py",
+      "bytes": 2987,
+      "sha256": "76dd4a461a082775085fc7908e2fae6a9d3cd82eca3657bc43d99b6239199fbf"
+    },
+    {
+      "name": "prepare_scalar.py",
+      "bytes": 1047,
+      "sha256": "38b71ef34e98cd2b940018d227ed0eee27dca361bd9e4683af02fec7ddeade31"
+    },
+    {
+      "name": "prepare_split.py",
+      "bytes": 1467,
+      "sha256": "091beb241e5b81c3211b9e5e52affa40b3205341d8f8cd144060a0f4e9398e7e"
+    },
+    {
+      "name": "process.log",
+      "bytes": 18,
+      "sha256": "b2d4ec8c17b4aae3ca93c176b0981945fd95840926b364a4ddd1a2d724101d84"
+    },
+    {
+      "name": "product-filter.comp",
+      "bytes": 2568,
+      "sha256": "16da16f78781182343664fc02078c30eb0c3eee79e262199393380236a095c46"
+    },
+    {
+      "name": "product-filter.spv",
+      "bytes": 43720,
+      "sha256": "d9e75def9001312ddcd9dcebde21b5aaf8470fbe6e0d4853bc407b67803f13df"
+    },
+    {
+      "name": "product-results.json",
+      "bytes": 636,
+      "sha256": "288d0c5a0de3a6889087378db482201259d23b3e8910b7b032c63314dfd7f7c8"
+    },
+    {
+      "name": "product-world.comp",
+      "bytes": 2538,
+      "sha256": "174bdb7bfc860009a781254ae543cab82b469ef3ff5638bd25b7999a764574c6"
+    },
+    {
+      "name": "product-world.spv",
+      "bytes": 43604,
+      "sha256": "e7c09ce1600012e745e4863f55f5409b17075913fe51dd9204c6a0652c3e387c"
+    },
+    {
+      "name": "receiver-results.json",
+      "bytes": 1050,
+      "sha256": "69b2abeca62e00b5bdfb5f924654383da57774b44e30e6ee20aeff32a1dfdbf4"
+    },
+    {
+      "name": "run.py",
+      "bytes": 1381,
+      "sha256": "14479fd5841b324e7a79e8ba6b80e59c189da39bd2d0ebc8508a45253e3c4636"
+    },
+    {
+      "name": "run_clip.py",
+      "bytes": 1397,
+      "sha256": "26952d84df458de0821a16c4b0f4485cd981ae646afac4878b40aef5f197c345"
+    },
+    {
+      "name": "run_cliponly.py",
+      "bytes": 1393,
+      "sha256": "66d851e651029120d8f4b286a80566de26a59d0888dc94e8eab1a27419fb17fe"
+    },
+    {
+      "name": "run_oracle.py",
+      "bytes": 1348,
+      "sha256": "af65f26b30025ec14fa3a19bde26bd7502c19bd0439000bba9d67d5f8a7e2307"
+    },
+    {
+      "name": "run_product.py",
+      "bytes": 1389,
+      "sha256": "2fc135aae1e9e5411545abc6ed5eb92687aa0accff422354985bb0d450facff4"
+    },
+    {
+      "name": "run_scalar.py",
+      "bytes": 1385,
+      "sha256": "a614fc8bae2abaaaf71a289a131efe78ceb65864e53c1a75881386f41d66118a"
+    },
+    {
+      "name": "run_subtract.py",
+      "bytes": 1393,
+      "sha256": "411418316146c1c6e3fef7dc4f026308f907420a2316ca789cc19dd2fa05e178"
+    },
+    {
+      "name": "scalar-filter.comp",
+      "bytes": 2567,
+      "sha256": "a6bb2b5ff6c3de26ccfb6999153c192b8eced17403b769296c305d98111c808b"
+    },
+    {
+      "name": "scalar-filter.spv",
+      "bytes": 30460,
+      "sha256": "7d206ef017f421eff10d815ff9c3d4a6c154f9f4d8778c0b1013c17964d9c5ec"
+    },
+    {
+      "name": "scalar-results.json",
+      "bytes": 1050,
+      "sha256": "69b2abeca62e00b5bdfb5f924654383da57774b44e30e6ee20aeff32a1dfdbf4"
+    },
+    {
+      "name": "scalar-world.comp",
+      "bytes": 2537,
+      "sha256": "d65a4791b9eedfc719c15cd54627a1bc86fa9767b3ae8a621f2026274d3edafe"
+    },
+    {
+      "name": "scalar-world.spv",
+      "bytes": 30344,
+      "sha256": "dcba8c4b417ba15ffc76dc2335baaa9ae1e0615d5bd507df1def8d3f1c592a94"
+    },
+    {
+      "name": "subtract-filter.comp",
+      "bytes": 2569,
+      "sha256": "97e4bb8590ff7a17ef59b4b1194d64a532a6bf47fbbc4122958eced57a444e1e"
+    },
+    {
+      "name": "subtract-filter.spv",
+      "bytes": 43720,
+      "sha256": "258ed3c01e9aa9ab46629d7e2523e8e817747b813365f0ec3c5ce99e71f4ecfa"
+    },
+    {
+      "name": "subtract-results.json",
+      "bytes": 636,
+      "sha256": "288d0c5a0de3a6889087378db482201259d23b3e8910b7b032c63314dfd7f7c8"
+    },
+    {
+      "name": "subtract-world.comp",
+      "bytes": 2539,
+      "sha256": "8d8022285f051c5f54889fd73452d88251e17e6be2be106c509eae1627945fa5"
+    },
+    {
+      "name": "subtract-world.spv",
+      "bytes": 43604,
+      "sha256": "0b5fd94183736facfc587749ae47370e4c2ead473125b2fc1858aae086b9731e"
+    },
+    {
+      "name": "oracle-queries.bin",
+      "bytes": 3145728,
+      "sha256": "0080a1e42368036dee87c67b490431a9a6d955bf7b7dad43c8c3b49ba6abdb19"
+    },
+    {
+      "name": "intel-oracle.bin",
+      "bytes": 1048576,
+      "sha256": "191ad823fd1e8e7b140d72fa1b6fe83f5652b40a584c7585a24248c50edab119"
+    },
+    {
+      "name": "nvidia-oracle.bin",
+      "bytes": 1048576,
+      "sha256": "191ad823fd1e8e7b140d72fa1b6fe83f5652b40a584c7585a24248c50edab119"
+    },
+    {
+      "name": "intel-cliponly-filter.bin",
+      "bytes": 790144,
+      "sha256": "bbd828b8428f7f7823d9f76a5b8b3b72c54a285d2f9fd1fd787cfb07fd2ce59b"
+    },
+    {
+      "name": "intel-cliponly-world.bin",
+      "bytes": 790144,
+      "sha256": "2094c9f71481f4c9af0d18aa81460a87f778a997ce2c33a573a3d9e43d7ac849"
+    },
+    {
+      "name": "nvidia-cliponly-filter.bin",
+      "bytes": 790144,
+      "sha256": "377a39c1ec50e13fa55a592ce55f7847fc6437710fa6e66f34584d181f5a738d"
+    },
+    {
+      "name": "nvidia-cliponly-world.bin",
+      "bytes": 790144,
+      "sha256": "2094c9f71481f4c9af0d18aa81460a87f778a997ce2c33a573a3d9e43d7ac849"
+    }
+  ],
+  "archiveBytes": 2812193,
+  "archiveSha256": "9f9becc6e7d10b2c0d0319e603ad3a5ffdf4f8bb54f20db367193392ba80bec3"
+}

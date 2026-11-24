@@ -1,14 +1,37 @@
 #include "editor/SceneModel.hpp"
 
 #include <cassert>
+#ifdef _MSC_VER
+#include <crtdbg.h>
+#endif
 #include <chrono>
 #include <filesystem>
 #include <fstream>
 #include <cmath>
 #include <stdexcept>
 #include <string>
+#include <iostream>
 
 namespace {
+std::string withoutObjectShadows(std::string value) {
+    if(const auto line=value.find("viewFog ");line!=std::string::npos)
+        value.erase(line,value.find('\n',line)-line+1);
+    for(auto line=value.find("objectShadow ");line!=std::string::npos;line=value.find("objectShadow "))
+        value.erase(line,value.find('\n',line)-line+1);
+    return value;
+}
+std::string withoutCharacterLightResponse(std::string value) {
+    value=withoutObjectShadows(std::move(value));
+    const auto line=value.find("lightCharacterResponse ");
+    if(line==std::string::npos)throw std::runtime_error("Expected current character light response field");
+    value.erase(line,value.find('\n',line)-line+1);return value;
+}
+std::string withoutLightReceivers(std::string value) {
+    value=withoutCharacterLightResponse(std::move(value));
+    const auto line=value.find("lightReceivers ");
+    if(line==std::string::npos)throw std::runtime_error("Expected current receiver field");
+    value.erase(line,value.find('\n',line)-line+1);return value;
+}
 
 std::filesystem::path uniquePath(const std::string& suffix) {
     const auto stamp = std::chrono::steady_clock::now()
@@ -61,6 +84,18 @@ bool loadedDocumentMatches(const std::filesystem::path& path,
             || loadedLight.color != expectedLight.color
             || loadedLight.intensity != expectedLight.intensity
             || loadedLight.radius != expectedLight.radius
+            || loadedLight.shape.type != expectedLight.shape.type
+            || loadedLight.shape.direction != expectedLight.shape.direction
+            || loadedLight.shape.innerCone != expectedLight.shape.innerCone
+            || loadedLight.shape.outerCone != expectedLight.shape.outerCone
+            || loadedLight.shape.falloff != expectedLight.shape.falloff
+            || loadedLight.shape.specularScale != expectedLight.shape.specularScale
+            || loadedLight.shape.receivers.surfaces != expectedLight.shape.receivers.surfaces
+            || loadedLight.shape.receivers.characters != expectedLight.shape.receivers.characters
+            || loadedLight.shape.falloffExponent != expectedLight.shape.falloffExponent
+            || loadedLight.shape.influenceBox.enabled != expectedLight.shape.influenceBox.enabled
+            || loadedLight.shape.influenceBox.worldToBox != expectedLight.shape.influenceBox.worldToBox
+            || loadedLight.shape.influenceBox.falloffThreshold != expectedLight.shape.influenceBox.falloffThreshold
             || loadedLight.enabled != expectedLight.enabled) {
             return false;
         }
@@ -71,6 +106,10 @@ bool loadedDocumentMatches(const std::filesystem::path& path,
 }  // namespace
 
 int main() {
+#ifdef _MSC_VER
+    _CrtSetReportMode(_CRT_ASSERT,_CRTDBG_MODE_FILE);
+    _CrtSetReportFile(_CRT_ASSERT,_CRTDBG_FILE_STDERR);
+#endif
     // The data-driven look catalog rejects incompatible schemas before any
     // renderer state is changed.
     {
@@ -98,11 +137,11 @@ int main() {
         static_assert(azurerender::kShowcasePresetVersion == 1);
         assert(azurerender::showcasePresetName(1) == "Endfield Industrial");
         assert(settings.showcasePreset == 1);
-        assert(std::abs(settings.grade.exposureEv - 0.12F) < 0.0001F);
-        assert(std::abs(settings.grade.saturation - 0.96F) < 0.0001F);
-        assert(std::abs(settings.grade.contrast - 1.04F) < 0.0001F);
+        assert(std::abs(settings.grade.exposureEv) < 0.0001F);
+        assert(std::abs(settings.grade.saturation - 0.98F) < 0.0001F);
+        assert(std::abs(settings.grade.contrast - 1.0F) < 0.0001F);
         assert(std::abs(settings.bloom.strength - 0.10F) < 0.0001F);
-        assert(std::abs(settings.outline.strength - 0.42F) < 0.0001F);
+        assert(std::abs(settings.outline.strength - 0.22F) < 0.0001F);
         azurerender::validateRenderSettings(settings);
     }
 
@@ -112,23 +151,215 @@ int main() {
         const auto scenePath = directory / "scene.azscene";
         auto document = azurerender::SceneDocument::fromAsset("hero.glb");
         document.sceneId = "atomic-save-test";
+        document.reflectionProbe.texture="room.azenv";
+        document.reflectionProbe.halfExtents={5,3,4};
+        document.reflectionProbe.blendDistance=.5F;
+        auto probePayload=nlohmann::json(document.reflectionProbe);
+        probePayload["version"]=2;
+        probePayload["center"]={3,4,5};
+        probePayload["capturePosition"]={1,2,3};
+        probePayload["projectionOrigin"]={3,4,5};
+        document.reflectionProbe=probePayload.get<azurerender::ReflectionProbe>();
+        document.viewFog.enabled=true;document.viewFog.asset="view.azfog";
+        document.viewFog.captureView=azurerender::CameraViewDescriptor{};
+        document.viewFog.projection.extent={2560,1440};
+        document.irradianceVolume.asset="field.aziv";
+        document.irradianceVolume.intensity=.75F;
+        document.irradianceVolume.enabled=true;
+        document.irradianceVolume.sampling={.25F,.2F,49.875F};
+        document.renderSettings.sceneLightingEnabled = true;
         document.lights.push_back({
             "key-light", "root", {1.0F, 0.5F, 0.25F}, 2.0F, 5.0F, true});
+        document.lights[0].shape.type = azurerender::LightKind::Spot;
+        document.lights[0].shape.innerCone = .25F;
+        document.lights[0].shape.outerCone = .5F;
+        document.lights[0].shape.falloff=azurerender::LightFalloff::RangePower;
+        document.lights[0].shape.falloffExponent=3.5F;
+        document.lights[0].shape.specularScale=.195F;
+        document.lights[0].shape.receivers.characters=false;
+        document.lights[0].shape.influenceBox.enabled=true;
+        document.lights[0].shape.influenceBox.worldToBox[0]={0,.5F,0,-.5F};
+        document.lights[0].shape.influenceBox.worldToBox[1]={-1,0,0,0};
         document.save(scenePath);
+        auto analyticDocument=document;analyticDocument.viewFog.asset.clear();analyticDocument.viewFog.captureView.reset();
+        analyticDocument.viewFog.analytic=azurerender::AnalyticFogSettings{};
+        analyticDocument.viewFog.analytic->aerial=azurerender::ExponentialAerialFog{};
+        analyticDocument.viewFog.analytic->aerial->density=.1F;
+        analyticDocument.save(directory/"analytic-fog.azscene");
+        const auto analyticReloaded=azurerender::SceneDocument::load(directory/"analytic-fog.azscene");
+        assert(analyticReloaded.viewFog.asset.empty()&&analyticReloaded.viewFog.analytic);
+        assert(analyticReloaded.viewFog.analytic->aerial->density==.1F);
+
+        auto queryDocument=document;
+        queryDocument.irradianceVolume.sampling.pixelOrigin=azurerender::IrradianceQueryParameters::PixelOrigin::BottomLeft;
+        queryDocument.irradianceVolume.sampling.jitterSpace=azurerender::IrradianceQueryParameters::JitterSpace::Field;
+        queryDocument.save(directory/"query-frame.azscene");
+        const auto queryReloaded=azurerender::SceneDocument::load(directory/"query-frame.azscene");
+        assert(queryReloaded.irradianceVolume.sampling.pixelOrigin==azurerender::IrradianceQueryParameters::PixelOrigin::BottomLeft);
+        assert(queryReloaded.irradianceVolume.sampling.jitterSpace==azurerender::IrradianceQueryParameters::JitterSpace::Field);
+        auto fieldDocument=document;fieldDocument.reflectionProbe.field=azurerender::ReflectionProbeField{};
+        azurerender::ReflectionProbeVolume volume;volume.arrayLayer=2;volume.fade=.5F;fieldDocument.reflectionProbe.field->probes={volume};
+        fieldDocument.reflectionProbe.field->worldToField[0][0]=-1;
+        fieldDocument.save(directory/"probe-field.azscene");
+        const auto fieldReloaded=azurerender::SceneDocument::load(directory/"probe-field.azscene");
+        assert(fieldReloaded.reflectionProbe.field&&fieldReloaded.reflectionProbe.field->probes[0].arrayLayer==2);
+        assert(fieldReloaded.reflectionProbe.field->worldToField[0][0]==-1);
+        const auto shapeReloaded=azurerender::SceneDocument::load(scenePath).lights[0].shape;
+        auto responseDocument=document;
+        responseDocument.lights[0].shape.characterResponse={true,.25F,.8F};
+        responseDocument.save(directory/"character-response.azscene");
+        const auto localResponse=azurerender::SceneDocument::load(directory/"character-response.azscene").lights[0].shape.characterResponse;
+        if(!localResponse.present||localResponse.diffuseFloor!=.25F||localResponse.compression!=.8F) {
+            std::cerr<<"Scene documents must save and reopen the public character light response\n";return 1;
+        }
+        auto lineDocument=responseDocument;auto& lineShape=lineDocument.lights[0].shape;
+        lineShape.type=azurerender::LightKind::Point;lineShape.falloff=azurerender::LightFalloff::SmoothInverseSquare;
+        lineShape.characterResponse.schemaVersion=2;lineShape.characterResponse.linearLength=1;
+        lineDocument.save(directory/"line-response.azscene");
+        const auto lineResponse=azurerender::SceneDocument::load(directory/"line-response.azscene").lights[0].shape.characterResponse;
+        if(lineResponse.schemaVersion!=2||lineResponse.linearLength!=1) {
+            std::cerr<<"Scene documents must retain version two line-response fields\n";return 1;
+        }
+        assert(shapeReloaded.specularScale==.195F);
+        auto blendDocument=responseDocument;auto& blendShape=blendDocument.lights[0].shape;
+        blendShape.type=azurerender::LightKind::Spot;blendShape.falloff=azurerender::LightFalloff::RangePower;
+        blendShape.characterResponse={};auto& blendResponse=blendShape.characterResponse;
+        blendResponse.present=true;blendResponse.schemaVersion=3;blendResponse.strength=.7F;
+        blendResponse.facingWeight=.25F;blendResponse.projectedDistance=true;blendResponse.order=8;
+        blendDocument.save(directory/"blend-response.azscene");
+        const auto blendReloaded=azurerender::SceneDocument::load(directory/"blend-response.azscene").lights[0].shape.characterResponse;
+        if(!blendReloaded.isProjectedColorBlend()||blendReloaded.strength!=.7F||blendReloaded.facingWeight!=.25F||blendReloaded.order!=8)
+            throw std::runtime_error("Scene save and reopen must preserve ordered color composition");
+        assert(shapeReloaded.falloff==azurerender::LightFalloff::RangePower&&shapeReloaded.falloffExponent==3.5F);
+        auto rimDocument=blendDocument;auto& rimResponse=rimDocument.lights[0].shape.characterResponse;
+        rimResponse={};rimResponse.present=true;rimResponse.schemaVersion=4;
+        rimResponse.specialMode=azurerender::LightShape::CharacterResponse::SpecialMode::ScreenRim;
+        rimResponse.rimOffsetScale=.4F;rimResponse.rimSurfaceTint=.8F;
+        rimDocument.save(directory/"screen-rim.azscene");
+        const auto rimReloaded=azurerender::SceneDocument::load(directory/"screen-rim.azscene").lights[0].shape.characterResponse;
+        if(!rimReloaded.isCharacterOnly()||rimReloaded.rimOffsetScale!=.4F||rimReloaded.rimSurfaceTint!=.8F)
+            throw std::runtime_error("Scene save and reopen must retain special character light parameters");
+        assert(shapeReloaded.influenceBox.enabled&&shapeReloaded.influenceBox.worldToBox==document.lights[0].shape.influenceBox.worldToBox);
+        if(shapeReloaded.receivers.characters||!shapeReloaded.receivers.surfaces) {
+            std::cerr<<"Scene save and reopen must preserve light receiver selection\n";return 1;
+        }
+        auto directionalDocument=document;
+        directionalDocument.lights[0].shape.type=azurerender::LightKind::Directional;
+        directionalDocument.save(directory/"directional.azscene");
+        assert(azurerender::SceneDocument::load(directory/"directional.azscene").lights[0].shape.type==azurerender::LightKind::Directional);
+        const auto probeReloaded=azurerender::SceneDocument::load(scenePath).reflectionProbe;
+        assert(probeReloaded.texture=="room.azenv" && probeReloaded.halfExtents==document.reflectionProbe.halfExtents);
+        assert(probeReloaded.blendDistance==.5F);
+        assert((probeReloaded.project({3,4,5},{1,0,0})==std::array<float,3>{5,0,0}));
+        auto defaultOriginDocument=document;
+        probePayload.erase("projectionOrigin");probePayload["version"]=1;
+        defaultOriginDocument.reflectionProbe=probePayload.get<azurerender::ReflectionProbe>();
+        defaultOriginDocument.save(directory/"capture-origin.azscene");
+        auto defaultProbe=azurerender::SceneDocument::load(directory/"capture-origin.azscene").reflectionProbe;
+        assert((defaultProbe.project({3,4,5},{1,0,0})==std::array<float,3>{7,2,2}));
+        defaultProbe.capturePosition={2,3,4};
+        assert((defaultProbe.project({3,4,5},{1,0,0})==std::array<float,3>{6,1,1}));
+        const auto giReloaded=azurerender::SceneDocument::load(scenePath).irradianceVolume;
+        const auto fogReloaded=azurerender::SceneDocument::load(scenePath).viewFog;
+        if(!fogReloaded.enabled||fogReloaded.asset!=document.viewFog.asset||fogReloaded.projection.extent!=document.viewFog.projection.extent)
+            throw std::runtime_error("Scene save and reopen must retain view fog binding");
+        {
+            std::ifstream file(scenePath);
+            std::string legacy((std::istreambuf_iterator<char>(file)),std::istreambuf_iterator<char>());
+            const auto line=legacy.find("viewFog ");
+            legacy.erase(line,legacy.find('\n',line)-line+1);
+            const auto header=legacy.find("schemaVersion 14");legacy.replace(header,16,"schemaVersion 13");
+            const auto path=directory/"version-thirteen.azscene";{std::ofstream out(path);out<<legacy;}
+            if(azurerender::SceneDocument::load(path).viewFog.enabled)
+                throw std::runtime_error("Version thirteen must retain disabled fog default");
+        }
+        assert(giReloaded.asset=="field.aziv" && giReloaded.enabled && giReloaded.intensity==.75F);
+        assert(giReloaded.sampling.normalOffset==.25F && giReloaded.sampling.jitterAmplitude==.2F && giReloaded.sampling.phase==49.875F);
+        auto invalidGi=nlohmann::json(document.irradianceVolume);invalidGi["version"]=999;
+        bool rejectedGi=false;
+        try{(void)invalidGi.get<azurerender::IrradianceVolumeBinding>();}catch(const std::invalid_argument&){rejectedGi=true;}
+        assert(rejectedGi);
         {
             std::ifstream saved(scenePath);
             const std::string contents(
                 (std::istreambuf_iterator<char>(saved)),
                 std::istreambuf_iterator<char>());
-            assert(contents.find("renderSettingsVersion 7")
+            assert(contents.find("renderSettingsVersion "+std::to_string(azurerender::RenderSettings::kSchemaVersion))
                 != std::string::npos);
-            assert(contents.find("schemaVersion 3") != std::string::npos);
+            assert(contents.find("schemaVersion "+std::to_string(azurerender::SceneDocument::kSchemaVersion)) != std::string::npos);
             assert(contents.find("lightCount 1") != std::string::npos);
             assert(contents.find("shadowMaximumFilterRadiusTexels 8")
                 != std::string::npos);
+            auto legacy=withoutLightReceivers(contents);
+            const auto responseLine=legacy.find("lightSpecularScale ");assert(responseLine!=std::string::npos);
+            legacy.erase(responseLine,legacy.find('\n',responseLine)-responseLine+1);
+            const auto header=legacy.find("schemaVersion 14");assert(header!=std::string::npos);
+            legacy.replace(header,16,"schemaVersion 6");
+            const auto falloffLine=legacy.find("lightFalloff ");assert(falloffLine!=std::string::npos);
+            legacy.erase(falloffLine,legacy.find('\n',falloffLine)-falloffLine+1);
+            const auto boxLine=legacy.find("lightInfluenceBox ");assert(boxLine!=std::string::npos);
+            legacy.erase(boxLine,legacy.find('\n',boxLine)-boxLine+1);
+            const auto giLine=legacy.find("irradianceVolume ");assert(giLine!=std::string::npos);
+            legacy.erase(giLine,legacy.find('\n',giLine)-giLine+1);
+            const auto legacyPath=directory/"legacy.azscene";
+            {std::ofstream legacyFile(legacyPath);legacyFile<<legacy;}
+            assert(!azurerender::SceneDocument::load(legacyPath).irradianceVolume.enabled);
+            assert(!azurerender::SceneDocument::load(legacyPath).lights[0].shape.influenceBox.enabled);
+            assert(azurerender::SceneDocument::load(legacyPath).lights[0].shape.falloff==azurerender::LightFalloff::Legacy);
+        }
+        {
+            std::ifstream saved(scenePath);
+            std::string versionEight((std::istreambuf_iterator<char>(saved)),std::istreambuf_iterator<char>());
+            versionEight=withoutLightReceivers(versionEight);
+            const auto responseLine=versionEight.find("lightSpecularScale ");assert(responseLine!=std::string::npos);
+            versionEight.erase(responseLine,versionEight.find('\n',responseLine)-responseLine+1);
+            const auto header=versionEight.find("schemaVersion 14");assert(header!=std::string::npos);
+            versionEight.replace(header,16,"schemaVersion 8");
+            const auto boxLine=versionEight.find("lightInfluenceBox ");assert(boxLine!=std::string::npos);
+            versionEight.erase(boxLine,versionEight.find('\n',boxLine)-boxLine+1);
+            const auto path=directory/"version-eight.azscene";
+            {std::ofstream file(path);file<<versionEight;}
+            const auto reopened=azurerender::SceneDocument::load(path).lights[0].shape;
+            assert(!reopened.influenceBox.enabled&&reopened.falloff==azurerender::LightFalloff::RangePower&&reopened.falloffExponent==3.5F);
+        }
+        {
+            std::ifstream saved(scenePath);
+            std::string versionNine((std::istreambuf_iterator<char>(saved)),std::istreambuf_iterator<char>());
+            versionNine=withoutLightReceivers(versionNine);
+            const auto line=versionNine.find("lightSpecularScale ");assert(line!=std::string::npos);
+            versionNine.erase(line,versionNine.find('\n',line)-line+1);
+            const auto header=versionNine.find("schemaVersion 14");assert(header!=std::string::npos);
+            versionNine.replace(header,16,"schemaVersion 9");
+            const auto path=directory/"version-nine.azscene";
+            {std::ofstream file(path);file<<versionNine;}
+            const auto shape=azurerender::SceneDocument::load(path).lights[0].shape;
+            assert(shape.specularScale==1.F&&shape.influenceBox.enabled);
+        }
+        {
+            std::ifstream saved(scenePath);
+            std::string legacy((std::istreambuf_iterator<char>(saved)),std::istreambuf_iterator<char>());
+            legacy=withoutLightReceivers(legacy);
+            const auto header=legacy.find("schemaVersion 14");
+            legacy.replace(header,16,"schemaVersion 10");
+            const auto path=directory/"version-ten.azscene";
+            {std::ofstream file(path);file<<legacy;}
+            const auto receivers=azurerender::SceneDocument::load(path).lights[0].shape.receivers;
+            if(!receivers.surfaces||!receivers.characters) {
+                std::cerr<<"Version ten must default to all light receivers\n";return 1;
+            }
         }
         assert(std::filesystem::exists(scenePath));
+        {
+            std::ifstream file(scenePath);
+            auto legacy=withoutCharacterLightResponse(std::string((std::istreambuf_iterator<char>(file)),std::istreambuf_iterator<char>()));
+            const auto header=legacy.find("schemaVersion 14");legacy.replace(header,16,"schemaVersion 11");
+            const auto path=directory/"version-eleven.azscene";{std::ofstream out(path);out<<legacy;}
+            if(azurerender::SceneDocument::load(path).lights[0].shape.characterResponse.present) {
+                std::cerr<<"Version eleven must retain the default character response\n";return 1;
+            }
+        }
         assert(loadedDocumentMatches(scenePath, document));
+        assert(azurerender::SceneDocument::load(scenePath).renderSettings.sceneLightingEnabled);
         assert(countTemporaryFiles(directory) == 0);
         std::filesystem::remove_all(directory);
     }

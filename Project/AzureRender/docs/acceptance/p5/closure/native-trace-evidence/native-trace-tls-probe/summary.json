@@ -1,0 +1,323 @@
+{
+  "diagnosticOnly": true,
+  "childPid": 32840,
+  "childExitCode": 0,
+  "seconds": 2.3838265000013052,
+  "events": 1850,
+  "dropped": 0,
+  "reentrant": 0,
+  "invalidArguments": 0,
+  "unpublished": 0,
+  "counterFrequency": 10000000,
+  "completeAllocationCoverage": false,
+  "modules": [
+    {
+      "base": 140699199078400,
+      "size": 106496,
+      "path": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python.exe"
+    },
+    {
+      "base": 140706096742400,
+      "size": 2527232,
+      "path": "C:\\WINDOWS\\SYSTEM32\\ntdll.dll"
+    },
+    {
+      "base": 140706083700736,
+      "size": 823296,
+      "path": "C:\\WINDOWS\\System32\\KERNEL32.DLL"
+    },
+    {
+      "base": 140706054602752,
+      "size": 4141056,
+      "path": "C:\\WINDOWS\\System32\\KERNELBASE.dll"
+    },
+    {
+      "base": 140706053226496,
+      "size": 1355776,
+      "path": "C:\\WINDOWS\\System32\\ucrtbase.dll"
+    },
+    {
+      "base": 140734729879552,
+      "size": 6119424,
+      "path": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll"
+    },
+    {
+      "base": 140704837861376,
+      "size": 118784,
+      "path": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\VCRUNTIME140.dll"
+    },
+    {
+      "base": 140706060894208,
+      "size": 475136,
+      "path": "C:\\WINDOWS\\System32\\WS2_32.dll"
+    },
+    {
+      "base": 140706086387712,
+      "size": 1146880,
+      "path": "C:\\WINDOWS\\System32\\RPCRT4.dll"
+    },
+    {
+      "base": 140705915863040,
+      "size": 45056,
+      "path": "C:\\WINDOWS\\SYSTEM32\\VERSION.dll"
+    },
+    {
+      "base": 140706072166400,
+      "size": 737280,
+      "path": "C:\\WINDOWS\\System32\\ADVAPI32.dll"
+    },
+    {
+      "base": 140706095235072,
+      "size": 692224,
+      "path": "C:\\WINDOWS\\System32\\msvcrt.dll"
+    },
+    {
+      "base": 140706093268992,
+      "size": 679936,
+      "path": "C:\\WINDOWS\\System32\\sechost.dll"
+    },
+    {
+      "base": 140706046935040,
+      "size": 155648,
+      "path": "C:\\WINDOWS\\SYSTEM32\\bcrypt.dll"
+    },
+    {
+      "base": 140705227931648,
+      "size": 49152,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\native-memory-trace\\compiled-ninja\\AzureNtTrace.dll"
+    },
+    {
+      "base": 140706050342912,
+      "size": 626688,
+      "path": "C:\\WINDOWS\\System32\\bcryptprimitives.dll"
+    },
+    {
+      "base": 1860500914176,
+      "size": 61440,
+      "path": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python3.DLL"
+    },
+    {
+      "base": 140704792903680,
+      "size": 126976,
+      "path": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\_ctypes.pyd"
+    },
+    {
+      "base": 140706072952832,
+      "size": 1671168,
+      "path": "C:\\WINDOWS\\System32\\ole32.dll"
+    },
+    {
+      "base": 140706048049152,
+      "size": 667648,
+      "path": "C:\\WINDOWS\\System32\\msvcp_win.dll"
+    },
+    {
+      "base": 140705228718080,
+      "size": 45056,
+      "path": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\libffi-8.dll"
+    },
+    {
+      "base": 140706070528000,
+      "size": 176128,
+      "path": "C:\\WINDOWS\\System32\\GDI32.dll"
+    },
+    {
+      "base": 140706053029888,
+      "size": 159744,
+      "path": "C:\\WINDOWS\\System32\\win32u.dll"
+    },
+    {
+      "base": 140706050998272,
+      "size": 1232896,
+      "path": "C:\\WINDOWS\\System32\\gdi32full.dll"
+    },
+    {
+      "base": 140706087567360,
+      "size": 1851392,
+      "path": "C:\\WINDOWS\\System32\\USER32.dll"
+    },
+    {
+      "base": 140706080030720,
+      "size": 3649536,
+      "path": "C:\\WINDOWS\\System32\\combase.dll"
+    },
+    {
+      "base": 140706084552704,
+      "size": 880640,
+      "path": "C:\\WINDOWS\\System32\\OLEAUT32.dll"
+    },
+    {
+      "base": 140706074984448,
+      "size": 192512,
+      "path": "C:\\WINDOWS\\System32\\IMM32.DLL"
+    }
+  ],
+  "moduleSnapshots": [
+    {
+      "seconds": 2.010294399999111,
+      "modules": [
+        140699199078400,
+        140706096742400,
+        140706083700736,
+        140706054602752,
+        140706053226496,
+        140734729879552,
+        140704837861376,
+        140706060894208,
+        140706086387712,
+        140705915863040,
+        140706072166400,
+        140706095235072,
+        140706093268992,
+        140706046935040,
+        140705227931648
+      ]
+    },
+    {
+      "seconds": 2.0611291999994137,
+      "modules": [
+        140699199078400,
+        140706096742400,
+        140706083700736,
+        140706054602752,
+        140706053226496,
+        140734729879552,
+        140704837861376,
+        140706060894208,
+        140706086387712,
+        140705915863040,
+        140706072166400,
+        140706095235072,
+        140706093268992,
+        140706046935040,
+        140705227931648,
+        140706050342912
+      ]
+    },
+    {
+      "seconds": 2.112148899999738,
+      "modules": [
+        140699199078400,
+        140706096742400,
+        140706083700736,
+        140706054602752,
+        140706053226496,
+        140734729879552,
+        140704837861376,
+        140706060894208,
+        140706086387712,
+        140705915863040,
+        140706072166400,
+        140706095235072,
+        140706093268992,
+        140706046935040,
+        140705227931648,
+        140706050342912
+      ]
+    },
+    {
+      "seconds": 2.162749499999336,
+      "modules": [
+        140699199078400,
+        140706096742400,
+        140706083700736,
+        140706054602752,
+        140706053226496,
+        140734729879552,
+        140704837861376,
+        140706060894208,
+        140706086387712,
+        140705915863040,
+        140706072166400,
+        140706095235072,
+        140706093268992,
+        140706046935040,
+        140705227931648,
+        140706050342912
+      ]
+    },
+    {
+      "seconds": 2.2139258999995945,
+      "modules": [
+        140699199078400,
+        140706096742400,
+        140706083700736,
+        140706054602752,
+        140706053226496,
+        140734729879552,
+        140704837861376,
+        140706060894208,
+        140706086387712,
+        140705915863040,
+        140706072166400,
+        140706095235072,
+        140706093268992,
+        140706046935040,
+        140705227931648,
+        140706050342912,
+        1860500914176,
+        140704792903680,
+        140706072952832,
+        140706048049152,
+        140705228718080,
+        140706070528000,
+        140706053029888,
+        140706050998272,
+        140706087567360,
+        140706080030720,
+        140706084552704,
+        140706074984448
+      ]
+    },
+    {
+      "seconds": 2.264862700001686,
+      "modules": [
+        140699199078400,
+        140706096742400,
+        140706083700736,
+        140706054602752,
+        140706053226496,
+        140734729879552,
+        140704837861376,
+        140706060894208,
+        140706086387712,
+        140705915863040,
+        140706072166400,
+        140706095235072,
+        140706093268992,
+        140706046935040,
+        140705227931648,
+        140706050342912,
+        1860500914176,
+        140704792903680,
+        140706072952832,
+        140706048049152,
+        140705228718080,
+        140706070528000,
+        140706053029888,
+        140706050998272,
+        140706087567360,
+        140706080030720,
+        140706084552704,
+        140706074984448
+      ]
+    }
+  ],
+  "snapshotErrors": [],
+  "hashes": {
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\native-memory-trace\\inject_owned.py": "d8d7b66b2212283516e6ed209e44eddf4b5f36e56e478ccb9558ada65eee0468",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\native-memory-trace\\compiled-ninja\\AzureNtTrace.dll": "2fa3f74dab211364ff02c0f54c8f71f6f1f0d6cd17c6c3418476eff430859ec3",
+    "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python.exe": "5f7b89a612c9b8af1d6456cdfcd1dbe5ca630849e79aebced9bee9a6694952ec"
+  },
+  "command": [
+    "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "build/p5-p6-closure-2026-10-10/threaded_probe.py",
+    "build/p5-p6-closure-2026-10-10/native-trace-tls-proofs"
+  ],
+  "limits": [
+    "Process-local NT virtual allocation calls after explicit initialization only.",
+    "Mappings, heap suballocations and kernel allocations are outside coverage.",
+    "Injected buffer, hooks and stack capture affect memory and timing.",
+    "Periodic module snapshots may miss transient modules."
+  ]
+}

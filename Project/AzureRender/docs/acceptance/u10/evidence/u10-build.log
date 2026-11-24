@@ -1,0 +1,239 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+  * brotli:x64-windows@1.2.0
+  * bzip2[core,tool]:x64-windows@1.0.8#6
+  * clipper2:x64-windows@2.0.1
+  * freetype[core,zlib,png,bzip2,brotli]:x64-windows@2.14.3
+    glfw3:x64-windows@3.5.1
+  * hwloc:x64-windows@2.11.2
+  * imath:x64-windows@3.2.2
+  * itlib:x64-windows@1.12.2
+    joltphysics:x64-windows@5.6.0
+  * libdeflate[core,zlib,gzip,decompression,compression]:x64-windows@1.25
+  * libpng:x64-windows@1.6.58
+    lua:x64-windows@5.4.8
+    manifold:x64-windows@3.5.2
+    miniaudio:x64-windows@0.11.25
+  * nlohmann-json:x64-windows@3.12.0#2
+    openexr:x64-windows@3.4.13
+  * openjph:x64-windows@0.31.0
+    rmlui[core,freetype]:x64-windows@6.3
+  * robin-hood-hashing:x64-windows@3.11.5#2
+    sol2:x64-windows@3.5.0#1
+    stb:x64-windows@2024-07-29#1
+  * tbb[core,hwloc]:x64-windows@2023.1.0
+    tinygltf:x64-windows@3.0.0#1
+  * vcpkg-cmake:x64-windows@2024-04-23
+  * vcpkg-cmake-config:x64-windows@2026-07-21
+    vulkan-memory-allocator:x64-windows@3.4.0
+  * zlib:x64-windows@1.3.2#1
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+manifold provides CMake targets:
+
+  find_package(manifold CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE manifold::manifold)
+
+miniaudio is header-only and can be used from CMake via:
+
+  find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
+  target_include_directories(main PRIVATE ${MINIAUDIO_INCLUDE_DIRS})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+rmlui provides CMake targets:
+
+    find_package(RmlUi CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE RmlUi::RmlUi)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+All requested installations completed successfully in: 386 us
+-- Running vcpkg install - done
+-- Found Freetype target Freetype::Freetype - Freetype font engine enabled
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+[0/4] Re-checking globbed directories...
+[1/117] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/117] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_shader_types.py --description D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/shared-layout.json --cpp D:/Assigment/2609/FYP/Project/AzureRender/src/render/ShaderSharedTypes.hpp --slang D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/SharedTypes.slang --check"
+[3/117] Building CXX object CMakeFiles\AzureRenderCore.dir\src\assets\PrimitiveGenerator.cpp.obj
+[4/117] Building CXX object CMakeFiles\AzureRenderCore.dir\src\assets\GeneratorRegistry.cpp.obj
+[5/117] Linking CXX static library AzureRenderCore.lib
+[6/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\SettingsPanel.cpp.obj
+[7/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\OutlinerPanel.cpp.obj
+[8/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\InspectorPanel.cpp.obj
+[9/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AssetBrowserPanel.cpp.obj
+[10/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\CapturePanel.cpp.obj
+[11/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AnimationPanel.cpp.obj
+[12/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\GameplayDebugPanel.cpp.obj
+[13/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\BuildPanel.cpp.obj
+[14/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ConsolePanel.cpp.obj
+[15/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\TextureAssetPanel.cpp.obj
+[16/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspaceUI.cpp.obj
+[17/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[18/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\ViewportGizmo.cpp.obj
+[19/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ProjectBrowserPanel.cpp.obj
+[20/117] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\EnvironmentPanel.cpp.obj
+[21/117] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderDevtools.cpp.obj
+[22/117] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderValidation.cpp.obj
+[23/117] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderApp.cpp.obj
+[24/117] Linking CXX static library AzureEditor.lib
+[25/117] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[26/117] Linking CXX executable AzureGeometryCompiler.exe
+[27/117] Linking CXX executable AzureProjectTests.exe
+[28/117] Linking CXX executable AzureSelectionServiceTests.exe
+[29/117] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSupport.cpp.obj
+[30/117] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderFrame.cpp.obj
+[31/117] Linking CXX executable AzureGameplayPresentationTests.exe
+[32/117] Linking CXX static library AzureRenderHost.lib
+[33/117] Linking CXX executable AzurePresentationRuntimeTests.exe
+[34/117] Linking CXX executable AzurePlayableQuestTests.exe
+[35/117] Linking CXX executable AzureContentDirectoryScaleTests.exe
+[36/117] Linking CXX executable AzureRigTextTests.exe
+[37/117] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderFrame.cpp.obj
+[38/117] Linking CXX executable AzureSkinningBatchTests.exe
+[39/117] Linking CXX static library AzurePlayerHost.lib
+[40/117] Linking CXX executable AzureRegisteredComponentHost.exe
+[41/117] Linking CXX executable AzurePhysicsInputTests.exe
+[42/117] Linking CXX executable AzureLocomotionTests.exe
+[43/117] Linking CXX executable AzureRenderViewTests.exe
+[44/117] Linking CXX executable AzurePlayer.exe
+[45/117] Linking CXX executable AzureViewBatchingTests.exe
+[46/117] Linking CXX executable AzureSkinningGpuTests.exe
+[47/117] Linking CXX executable AzureRender.exe
+[48/117] Linking CXX executable AzureVisibilityPrototypeTests.exe
+[49/117] Linking CXX executable AzureVisibilityGpuTests.exe
+[50/117] Linking CXX executable AzureResourceAccessProfileTests.exe
+[51/117] Linking CXX executable AzureDocumentBackupTests.exe
+[52/117] Linking CXX executable AzureShadowFilteringGpuTests.exe
+[53/117] Linking CXX executable AzureSurfaceResponseGpuTests.exe
+[54/117] Linking CXX executable AzureShaderModuleTests.exe
+[55/117] Linking CXX executable AzureShaderCompositionTests.exe
+[56/117] Linking CXX executable AzureProceduralGeometryTests.exe
+[57/117] Linking CXX executable AzureProceduralProcessTests.exe
+[58/117] Linking CXX executable AzureEngineSettingsTests.exe
+[59/117] Linking CXX executable AzurePrimitiveGeneratorTests.exe
+[60/117] Linking CXX executable AzureUiFoundationTests.exe
+[61/117] Linking CXX executable AzurePanelContextTests.exe
+[62/117] Linking CXX executable AzureCharacterRepairTests.exe
+[63/117] Linking CXX executable AzureThumbnailTests.exe
+[64/117] Linking CXX executable AzureHotReloadTests.exe
+[65/117] Linking CXX executable AzureGenerationManifestTests.exe
+[66/117] Linking CXX executable AzureValidationProbe.exe
+[67/117] Linking CXX executable AzureProposalControllerTests.exe
+[68/117] Linking CXX executable AzureProposalAdapterTests.exe
+[69/117] Linking CXX executable AzureEditorObservationTests.exe
+[70/117] Linking CXX executable AzureObservationTests.exe
+[71/117] Linking CXX executable AzureModuleAssemblyTests.exe
+[72/117] Linking CXX executable AzureComponentRegistryTests.exe
+[73/117] Linking CXX executable AzureSystemCompositionTests.exe
+[74/117] Linking CXX executable AzureEditTransactionTests.exe
+[75/117] Linking CXX executable AzureEditServiceTests.exe
+[76/117] Linking CXX executable AzureGameUiTests.exe
+[77/117] Linking CXX executable AzureGameUiRendererTests.exe
+[78/117] Linking CXX executable AzureEditorWorkspaceTests.exe
+[79/117] Linking CXX executable AzureContentEditingWorkflowTests.exe
+[80/117] Linking CXX executable AzureRegisteredComponentWorkflowTests.exe
+[81/117] Linking CXX executable AzureThirdPersonTests.exe
+[82/117] Linking CXX executable AzureResourceFrameTraceTests.exe
+[83/117] Linking CXX executable AzureScriptBackendContractTests.exe
+[84/117] Linking CXX executable AzureScriptRuntimeTests.exe
+[85/117] Linking CXX executable AzureEditorWorkflowTests.exe
+[86/117] Linking CXX executable AzureScriptInteropTests.exe
+[87/117] Linking CXX executable AzureManagedModuleTests.exe
+[88/117] Linking CXX executable AzureManagedScriptRuntimeTests.exe
+[89/117] Linking CXX executable AzureInteractionTests.exe
+[90/117] Linking CXX executable AzureBrowRegionTests.exe
+[91/117] Linking CXX executable AzureScriptEntityTests.exe
+[92/117] Linking CXX executable AzureAnimationPoseTests.exe
+[93/117] Linking CXX executable AzureAssetLevelTests.exe
+[94/117] Linking CXX executable AzureRuntimeLifecycleTests.exe
+[95/117] Linking CXX executable AzureRenderFrameTaskSchedulerTests.exe
+[96/117] Linking CXX executable AzureSceneVisibilityTests.exe
+[97/117] Linking CXX executable AzureSelectionBoundsTests.exe
+[98/117] Linking CXX executable AzureTransformEditingTests.exe
+[99/117] Linking CXX executable AzureAssetDeformationTests.exe
+[100/117] Linking CXX executable AzureTextureMaterialImportTests.exe
+[101/117] Linking CXX executable AzureGizmoControllerTests.exe
+[102/117] Linking CXX executable AzureEditorContentWorkflowTests.exe
+[103/117] Linking CXX executable AzureEditorTaskServiceTests.exe
+[104/117] Linking CXX executable AzureEditorCameraServiceTests.exe
+[105/117] Linking CXX executable AzureEditorAssetWorkflowTests.exe
+[106/117] Linking CXX executable AzureDocumentActionGuardTests.exe
+[107/117] Linking CXX executable AzureRenderEditorSessionTests.exe
+[108/117] Linking CXX executable AzureEditorProjectFlowTests.exe
+[109/117] Linking CXX executable AzurePropertyEditingTests.exe
+[110/117] Linking CXX executable AzureTextureImportContractTests.exe
+[111/117] Linking CXX executable AzureReferencePickerTests.exe
+[112/117] Linking CXX executable AzureContentOperationTests.exe
+[113/117] Linking CXX executable AzureContentNavigationTests.exe
+[114/117] Generating verified engine interface snapshots and schemas
+{"status": "passed", "coveredItems": 18, "files": 42}

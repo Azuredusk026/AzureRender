@@ -1,0 +1,38 @@
+{
+  "status": "compatible-insufficient-benefit",
+  "seconds": 70.84399999999732,
+  "allTargetsEqual": true,
+  "summary": [
+    {
+      "mode": "baseline",
+      "allEventMs": 16.58668799999999,
+      "matchedEventMs": 11.904351999999948
+    },
+    {
+      "mode": "candidate",
+      "allEventMs": 16.39728,
+      "matchedEventMs": 11.730463999999962
+    },
+    {
+      "mode": "candidate",
+      "allEventMs": 16.491199999999978,
+      "matchedEventMs": 11.78787199999995
+    },
+    {
+      "mode": "baseline",
+      "allEventMs": 16.552511999999975,
+      "matchedEventMs": 11.803487999999954
+    }
+  ],
+  "environmentErrors": [],
+  "sourceAndProductsUnchanged": true,
+  "replayProcessExitCode": 0,
+  "baselineMatchedDriftFraction": 0.008545270686088235,
+  "matchedReduction": 0.0079933051682477,
+  "nativeBatchStarted": false,
+  "archive": {
+    "file": "candidate.zip",
+    "bytes": 1583897,
+    "sha256": "e2ef99dcecf3f9ff7e12febf1fc0dd444772dbc8416b3e0d44ef76f421412a8b"
+  }
+}

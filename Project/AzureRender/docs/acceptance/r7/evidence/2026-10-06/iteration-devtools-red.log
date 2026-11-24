@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 157, in <module>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 157, in <listcomp>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 77, in run
+    edit('preview.capture', handle=handles[0], label='independent-camera')
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 59, in edit
+    result = call('edit', passed=passed, requestId='devtools-' + str(len(evidence)),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 55, in call
+    assert response['passed'] == passed, response
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'code': 'InvalidRequest', 'elapsedMs': 1.7115, 'message': '[{"code":"RejectedOperation","message":"Unknown operation: preview.capture"}]', 'passed': False, 'schemaVersion': 1}

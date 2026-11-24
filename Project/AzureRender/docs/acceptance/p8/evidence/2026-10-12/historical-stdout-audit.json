@@ -1,0 +1,13 @@
+{
+  "evidence": "docs\\acceptance\\g22\\evidence\\2026-10-12\\moved-intel-dds-first-failed.log.gz",
+  "compressedSha256": "0e406bcbfe4080aff92238f546f56474b75916293468e7659d781f729a1ce963",
+  "bytes": 18928,
+  "markers": {
+    "Allocator after unload": false,
+    "Rendered frames": false,
+    "Capture manifest": false,
+    "Captured frames": false
+  },
+  "status": "HistoricalCauseUnconfirmed",
+  "scope": "Original evidence retained; successful rerun verifies current cleanup only"
+}

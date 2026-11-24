@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "path": "archive_package_validation.py",
+      "bytes": 2442,
+      "sha256": "655a0c450660b5aa30009291fd056ddc4ef89a22fd383558a79652c35b76de4e"
+    },
+    {
+      "path": "configure-debug.log.gz",
+      "bytes": 2505,
+      "sha256": "eba2bb58908f495063f3cdfeabb37b5b675ba533fb96f8cde1278e4afc84dc4b"
+    },
+    {
+      "path": "configure-release.log.gz",
+      "bytes": 2505,
+      "sha256": "1ba0b0d75913085c9ee60cee15be3d24e3935f4d5bb702e907a25aed8615082e"
+    },
+    {
+      "path": "initial-budget-green.log",
+      "bytes": 2806,
+      "sha256": "bbcd931ed182b72b30c7fbeb3db07c36197b53b37c169e6c5c60a055813393f2"
+    },
+    {
+      "path": "install-green.log.gz",
+      "bytes": 132371,
+      "sha256": "290c052f87e6f1914a76b6c2e12ef55658177d3afce5765300c9c599a8ac5325"
+    },
+    {
+      "path": "install-path-red.log",
+      "bytes": 164,
+      "sha256": "bd07ee815144dbb739f9b983ff91cb8b9f7fad7f5c837b19b87e2ab4d2f61a80"
+    },
+    {
+      "path": "install-verification.json",
+      "bytes": 1699,
+      "sha256": "216fbb2901f1cdebed389effacb7ae7b6ca790cae22a4e814d9cec4f62d50e8f"
+    },
+    {
+      "path": "install.log.gz",
+      "bytes": 134290,
+      "sha256": "89daad504f95a838d0f31ae798c156ea8988584aa323a5eebb8f1059b349e1cd"
+    },
+    {
+      "path": "package-budget-number-red.log",
+      "bytes": 4842,
+      "sha256": "469085343cc2d79cc9557e0d1fc5fb6f1138ea479b723122ef9cdab5971bb2da"
+    },
+    {
+      "path": "package-budget-red-final.log",
+      "bytes": 9695,
+      "sha256": "fe5c8f8293b076d7b9de0f8ab14cdba5ec0e62f2d49673a2a5d9e909a8e7583a"
+    },
+    {
+      "path": "package-budget-red.log",
+      "bytes": 9692,
+      "sha256": "9bd1e9a065505baf8cc127d47cfa976419906bde69a90f2fd484e3c2f6a89226"
+    },
+    {
+      "path": "package-rules-debug.log",
+      "bytes": 367,
+      "sha256": "bc6eabfc673c7065af96eb0eeae57ec88534155d40500b65685ecf7d010b5fb1"
+    },
+    {
+      "path": "package-rules-release.log",
+      "bytes": 371,
+      "sha256": "f3fa0a3aa85dfb038b1d95fdcc3a380b39c22379f1e9527ecf8bb66561eecebf"
+    },
+    {
+      "path": "probe_validation_budget.py",
+      "bytes": 1849,
+      "sha256": "663b7a393424adee8c9aaec405543e8b67e327f00926f126c035dae551b37d89"
+    },
+    {
+      "path": "publication.json",
+      "bytes": 1657,
+      "sha256": "bcead1aed699d66472afb37c516d7fa2f93772a590cb0df7f34c5481b99297d3"
+    },
+    {
+      "path": "publication.log.gz",
+      "bytes": 217,
+      "sha256": "6ea301ced0b7447bce3525133a5974738486204e820dba3e69b7ebbb950f348d"
+    },
+    {
+      "path": "publish.py",
+      "bytes": 3005,
+      "sha256": "f545c3b3adf665d5154c37693b3b7eda1330745d653de3e43cac89a7286c0d3a"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 1409,
+      "sha256": "ecb2dd3eb8d934a9f708988ae8edc662686c95bb3be53094f75698c96573cbf4"
+    },
+    {
+      "path": "validation-budget-probe.json",
+      "bytes": 926,
+      "sha256": "d496e6d81690a5d50c7545effc2e723704551df435a1b28cd5a3b0415be806a5"
+    },
+    {
+      "path": "validation-budget-stderr.log.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "validation-budget-stdout.log.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "verify_install.py",
+      "bytes": 1913,
+      "sha256": "78fa11cd8fb7fb7004ae87ccf22c6f29d81eb815de57d991fe25013031a4b790"
+    }
+  ]
+}

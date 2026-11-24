@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "stage": "UI8",
+  "headAtCollection": "628f78c78c402a66dc1608009be6f5afe8228d82",
+  "implementationCommits": [
+    "1b535aa",
+    "2739e10",
+    "628f78c"
+  ],
+  "source": {
+    "origin": "working tree with pre-existing user changes",
+    "inventory": "source-inventory.json",
+    "sha256": "345aeac2a48c14dc2d6acf24a5b171f09557f286b7a66489a423713234bba48c",
+    "files": 820
+  },
+  "cpu": {
+    "Release": {
+      "passed": 187,
+      "total": 187
+    },
+    "Debug": {
+      "passed": 187,
+      "total": 187
+    }
+  },
+  "directoryScale": {
+    "timeoutSeconds": 180,
+    "DebugSeconds": 62.27,
+    "ReleaseSeconds": 54.62,
+    "historicalCause": "unconfirmed"
+  },
+  "guiDelivery": "passed",
+  "projectRecovery": "passed",
+  "contentWorkflows": "both passed",
+  "inheritedUI7": "source and artifact fingerprints matched",
+  "installFiles": 9345,
+  "physicalInput": "not performed",
+  "remaining": [
+    "physical double-click, mouse/keyboard and Chinese IME",
+    "P8 formal performance and original long-run candidate gates",
+    "historical directory timeout cause"
+  ],
+  "artifacts": [
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+      "sha256": "0043f5b342d2e1163315ecece95c5f6828c6e8044e0f64a4a2b449a19400e05e",
+      "bytes": 8169472
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRender.exe",
+      "sha256": "45c79c4e05da2a1317c0ae0e4a4ce8f9083a903c8e8cff2a9bdc9ee3bc8cd701",
+      "bytes": 14476288
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\bin\\AzureRender.exe",
+      "sha256": "0043f5b342d2e1163315ecece95c5f6828c6e8044e0f64a4a2b449a19400e05e",
+      "bytes": 8169472
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\bin\\AzurePlayer.exe",
+      "sha256": "9f9cb18c46f8db31d1cb89a8a3b90a5f3608f73e1a080a091a5d85b3eed04fd9",
+      "bytes": 4994560
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\bin\\AzureGameLauncher.exe",
+      "sha256": "f50166d03e0d776ebda7f9e28a79bcd451106c8a533f45cb47a694664298569f",
+      "bytes": 378880
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\install_manifest.json",
+      "sha256": "63d6c406622eeb8f6258edc4a21223b1c16fb81c12651423f84f6e03ecf51810",
+      "bytes": 2292843
+    }
+  ],
+  "evidence": [
+    {
+      "path": "release-build.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\release-build.log",
+      "sourceSha256": "0ff5d46506f4fcff75078143c2949f49bdfd1a833518f7b8df66015ba1d7fa25",
+      "sha256": "0ff5d46506f4fcff75078143c2949f49bdfd1a833518f7b8df66015ba1d7fa25",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "debug-build.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\debug-build.log",
+      "sourceSha256": "43b3c015af15b6d78915a48ae535322f7c05da7e452f3c516a67279644763d88",
+      "sha256": "cc81bba293f7424203f5a28725024324ea0baa885e1ca911cbaeb11f12097d01",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "release-tests.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\release-tests.log",
+      "sourceSha256": "61a883721ffdc03f24c3cb2812e71e9b1ef284c237d22cb11557506b51252bfc",
+      "sha256": "61a883721ffdc03f24c3cb2812e71e9b1ef284c237d22cb11557506b51252bfc",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "debug-tests.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\debug-tests.log",
+      "sourceSha256": "8ce2e790030e6fe7c0312c14172e0e1116fe987e542bc5b33d7221c60c7ba8af",
+      "sha256": "8ce2e790030e6fe7c0312c14172e0e1116fe987e542bc5b33d7221c60c7ba8af",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "gui-delivery.json",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\gui-delivery\\summary.json",
+      "sourceSha256": "0143db11a64d5ee566ebfc7cc736fc84e74ee40a867e89c9a0f1cc317b867a72",
+      "sha256": "0143db11a64d5ee566ebfc7cc736fc84e74ee40a867e89c9a0f1cc317b867a72",
+      "normalization": "none"
+    },
+    {
+      "path": "project-recovery.json",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\project-recovery\\summary.json",
+      "sourceSha256": "38cef10b7d3877d94dea92d52df301777c0f9cb54db3ac05e3550b8c489826ab",
+      "sha256": "38cef10b7d3877d94dea92d52df301777c0f9cb54db3ac05e3550b8c489826ab",
+      "normalization": "none"
+    },
+    {
+      "path": "content-gpu.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\content-gpu.log",
+      "sourceSha256": "66d3548975151270de38ab1226edfefa6bb0cc53dce8da4283f98cfc76bdb8b4",
+      "sha256": "66d3548975151270de38ab1226edfefa6bb0cc53dce8da4283f98cfc76bdb8b4",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "install-verify.json",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\install-verify.json",
+      "sourceSha256": "5c55fb9dd26513e0713bf7656d4ff7bcdc76c70d1523620b81a1a5788aa76b5b",
+      "sha256": "5c55fb9dd26513e0713bf7656d4ff7bcdc76c70d1523620b81a1a5788aa76b5b",
+      "normalization": "none"
+    },
+    {
+      "path": "inheritance.json",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\inheritance.json",
+      "sourceSha256": "a82fe114c31b1bfa37b9b5ae890fc91b7b87d43d03058f3a259421dd03f92c70",
+      "sha256": "a82fe114c31b1bfa37b9b5ae890fc91b7b87d43d03058f3a259421dd03f92c70",
+      "normalization": "none"
+    },
+    {
+      "path": "docs-style.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\docs-style.log",
+      "sourceSha256": "8dcf30ffa655dca1c39f833caa2077b08acedd60ced297e55c1fbc1e4263531d",
+      "sha256": "8dcf30ffa655dca1c39f833caa2077b08acedd60ced297e55c1fbc1e4263531d",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "docs-links.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\docs-links.log",
+      "sourceSha256": "1eae8964e45b08f9813ada1c1fc2990b0cb8a9ac2e4e621a037e147c754bb042",
+      "sha256": "1eae8964e45b08f9813ada1c1fc2990b0cb8a9ac2e4e621a037e147c754bb042",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "site-build.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\site-build.log",
+      "sourceSha256": "84390f1cf7941a79b1759f9b9ad31d0caea0a37c00be44570b83a70eb15f7f1b",
+      "sha256": "84390f1cf7941a79b1759f9b9ad31d0caea0a37c00be44570b83a70eb15f7f1b",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "uuid-regex-benchmark.cpp",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\uuid-regex-benchmark.cpp",
+      "sourceSha256": "f128a9d0495b1fe0538a52e7fccb854623448485f8788a3a8044508d3a7e5e7b",
+      "sha256": "f128a9d0495b1fe0538a52e7fccb854623448485f8788a3a8044508d3a7e5e7b",
+      "normalization": "none"
+    },
+    {
+      "path": "uuid-regex-benchmark.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui8\\uuid-regex-benchmark.log",
+      "sourceSha256": "7ff65632fec23316b06372481606a5e222c00aec59f240a6218079d14a9109bc",
+      "sha256": "7ff65632fec23316b06372481606a5e222c00aec59f240a6218079d14a9109bc",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "workspace.png",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui7\\design-green\\scene_inspector\\orthographic-normal\\capture\\frame_000038.png",
+      "sha256": "a0c811d334c2111b8757f2e75ff376d09fe624adc7241390cf5986af997d2e17"
+    },
+    {
+      "path": "source-inventory.json",
+      "sha256": "345aeac2a48c14dc2d6acf24a5b171f09557f286b7a66489a423713234bba48c"
+    },
+    {
+      "path": "document-review.json",
+      "sha256": "ff1dc82783b9522cac0a45d5ba1579a1a959fbcdf41c2717387fd4cac5b82ffe"
+    }
+  ]
+}

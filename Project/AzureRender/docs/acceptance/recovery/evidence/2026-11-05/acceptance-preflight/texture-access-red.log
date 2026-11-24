@@ -1,0 +1,82 @@
+FFFFFFF
+======================================================================
+FAIL: test_capacity_requires_fixed (__main__.TextureAccessTests.test_capacity_requires_fixed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_gpu_texture_access.py", line 21, in test_capacity_requires_fixed
+    self.assertEqual(self.check("fixed", 74, 64)["mode"], "fixed")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_gpu_texture_access.py", line 12, in check
+    self.assertIsNotNone(require_texture_access, "GPU texture access checker is missing")
+AssertionError: unexpectedly None : GPU texture access checker is missing
+
+======================================================================
+FAIL: test_explicit_fixed (__main__.TextureAccessTests.test_explicit_fixed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_gpu_texture_access.py", line 24, in test_explicit_fixed
+    self.assertEqual(self.check("fixed", 18, 64, True)["mode"], "fixed")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_gpu_texture_access.py", line 12, in check
+    self.assertIsNotNone(require_texture_access, "GPU texture access checker is missing")
+AssertionError: unexpectedly None : GPU texture access checker is missing
+
+======================================================================
+FAIL: test_ignored_fixed_request_is_rejected (__main__.TextureAccessTests.test_ignored_fixed_request_is_rejected)
+----------------------------------------------------------------------
+AssertionError: unexpectedly None : GPU texture access checker is missing
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_gpu_texture_access.py", line 35, in test_ignored_fixed_request_is_rejected
+    with self.assertRaisesRegex(AssertionError, "expected fixed"):
+AssertionError: "expected fixed" does not match "unexpectedly None : GPU texture access checker is missing"
+
+======================================================================
+FAIL: test_indexed_within_capacity (__main__.TextureAccessTests.test_indexed_within_capacity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_gpu_texture_access.py", line 18, in test_indexed_within_capacity
+    self.assertEqual(self.check("indexed", 18, 64)["mode"], "indexed")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_gpu_texture_access.py", line 12, in check
+    self.assertIsNotNone(require_texture_access, "GPU texture access checker is missing")
+AssertionError: unexpectedly None : GPU texture access checker is missing
+
+======================================================================
+FAIL: test_missing_or_invalid_diagnostics_are_rejected (__main__.TextureAccessTests.test_missing_or_invalid_diagnostics_are_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_gpu_texture_access.py", line 39, in test_missing_or_invalid_diagnostics_are_rejected
+    self.assertIsNotNone(require_texture_access, "GPU texture access checker is missing")
+AssertionError: unexpectedly None : GPU texture access checker is missing
+
+======================================================================
+FAIL: test_over_capacity_indexed_is_rejected (__main__.TextureAccessTests.test_over_capacity_indexed_is_rejected)
+----------------------------------------------------------------------
+AssertionError: unexpectedly None : GPU texture access checker is missing
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_gpu_texture_access.py", line 31, in test_over_capacity_indexed_is_rejected
+    with self.assertRaisesRegex(AssertionError, "expected fixed"):
+AssertionError: "expected fixed" does not match "unexpectedly None : GPU texture access checker is missing"
+
+======================================================================
+FAIL: test_unexplained_fixed_is_rejected (__main__.TextureAccessTests.test_unexplained_fixed_is_rejected)
+----------------------------------------------------------------------
+AssertionError: unexpectedly None : GPU texture access checker is missing
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_gpu_texture_access.py", line 27, in test_unexplained_fixed_is_rejected
+    with self.assertRaisesRegex(AssertionError, "expected indexed"):
+AssertionError: "expected indexed" does not match "unexpectedly None : GPU texture access checker is missing"
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.001s
+
+FAILED (failures=7)

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "executionPhase": "P8",
+  "status": "ReadyForPhysicalReview",
+  "authorization": "用户要求所有人工复核推迟到 P8，并连续执行其余阶段",
+  "blocksIntermediateAutomaticProgress": false,
+  "blocksFinalCompletion": true,
+  "requiresFinalCandidateHashes": true,
+  "items": [
+    {
+      "id": "P4-input",
+      "ownerPhase": "P4",
+      "status": "ReadyForPhysicalReview",
+      "scope": "实体视口导航、大纲定位、快捷键与焦点",
+      "desktopInputAutomation": {
+        "test": "AzureEditor.NativeInputGpu",
+        "configurations": [
+          "Debug",
+          "Release"
+        ],
+        "executionPhase": "P8",
+        "status": "EnvironmentBlocked",
+        "requiresExclusiveDesktopWindow": true,
+        "changesSystemPointer": true,
+        "latestEvidence": "docs/acceptance/p8/evidence/2026-10-14/p8-release-gpu-retest.log.gz",
+        "blocker": "Windows 拒绝测试窗口获得前台焦点"
+      },
+      "result": "notExecuted"
+    },
+    {
+      "id": "P5-D-gameplay",
+      "ownerPhase": "P5-D",
+      "status": "ReadyForPhysicalReview",
+      "scope": "探索接平台完整游玩、失败恢复与操作反馈",
+      "result": "notExecuted"
+    },
+    {
+      "id": "P5-D-audio",
+      "ownerPhase": "P5-D",
+      "status": "ReadyForPhysicalReview",
+      "scope": "跳跃、落地、收集、重生与通关听感",
+      "result": "notExecuted"
+    },
+    {
+      "id": "U15-baseline",
+      "ownerPhase": "U15",
+      "status": "ReadyForPhysicalReview",
+      "scope": "两工作流真实制作耗时、步骤与误操作记录",
+      "result": "notExecuted"
+    },
+    {
+      "id": "U16-recovery",
+      "ownerPhase": "U16",
+      "status": "ReadyForPhysicalReview",
+      "scope": "交互理解性、反馈、取消与错误恢复",
+      "result": "notExecuted"
+    },
+    {
+      "id": "P6-authoring",
+      "ownerPhase": "P6",
+      "status": "ReadyForPhysicalReview",
+      "scope": "两个空项目到独立发布的实体制作与效率",
+      "result": "notExecuted"
+    },
+    {
+      "id": "G20-audio",
+      "ownerPhase": "G20",
+      "status": "ReadyForPhysicalReview",
+      "scope": "第一批音频播放、循环、音量与输出设备听感",
+      "result": "notExecuted"
+    },
+    {
+      "id": "U17-transfer",
+      "ownerPhase": "U17",
+      "status": "ReadyForPhysicalReview",
+      "scope": "导入、导出、重导入的路径、反馈与恢复",
+      "result": "notExecuted"
+    },
+    {
+      "id": "P7-exchange",
+      "ownerPhase": "P7",
+      "status": "ReadyForPhysicalReview",
+      "scope": "第一批真实资产交换、制作与发布体验",
+      "result": "notExecuted"
+    },
+    {
+      "id": "G23-audio",
+      "ownerPhase": "G23",
+      "status": "ReadyForPhysicalReview",
+      "scope": "第二批压缩音频、循环与编码听感",
+      "result": "notExecuted"
+    },
+    {
+      "id": "P8-final",
+      "ownerPhase": "P8",
+      "status": "ReadyForPhysicalReview",
+      "scope": "最终候选的全部实体操作、听感和制作复核",
+      "result": "notExecuted"
+    },
+    {
+      "id": "UI8-input-ime",
+      "ownerPhase": "UI8",
+      "status": "ReadyForPhysicalReview",
+      "scope": "实体输入法、缩放、焦点与中文输入",
+      "result": "notExecuted"
+    },
+    {
+      "id": "ED-workflow",
+      "ownerPhase": "ED7",
+      "status": "ReadyForPhysicalReview",
+      "scope": "新项目的实体创建、拖放、组件和独立发布",
+      "result": "notExecuted"
+    }
+  ],
+  "editorInteractionReview": {
+    "status": "PendingPhysicalReview",
+    "statusLabel": "待人工复验",
+    "candidateCommit": "9baa14fb128f65b57d90da356c89f3c01c651b8d",
+    "candidateExecutableSha256": "e2cdfbab6e3a150e8659fe4ccd738184a4f1d8641ae8412a1167023775f917c4",
+    "configuration": "Release",
+    "scheduleTrigger": "用户主动点名",
+    "runbook": "docs/plans/editor-interaction-physical-review.md",
+    "items": ["实体键鼠", "输入法", "多屏与缩放", "实体制作与效率", "反馈与错误恢复"],
+    "result": "notExecuted"
+  },
+  "complete": false,
+  "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json",
+  "currentReviewPage": "docs/acceptance/p8/2026-10-14-physical-review.md"
+}

@@ -1,0 +1,21 @@
+FF....
+======================================================================
+FAIL: test_adoption_manifest_is_a_build_input (__main__.ProvenanceTests.test_adoption_manifest_is_a_build_input)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_build_provenance.py", line 16, in test_adoption_manifest_is_a_build_input
+    self.assertIn('docs/plans/engine-evolution-manifest.json',manifest['source'])
+AssertionError: 'docs/plans/engine-evolution-manifest.json' not found in {}
+
+======================================================================
+FAIL: test_contract_snapshot_inventory_and_bytes_are_build_products (__main__.ProvenanceTests.test_contract_snapshot_inventory_and_bytes_are_build_products)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_build_provenance.py", line 30, in test_contract_snapshot_inventory_and_bytes_are_build_products
+    self.assertIn(output/'manifest.json',products)
+AssertionError: WindowsPath('C:/Users/23587/AppData/Local/Temp/tmpaljht196/contracts/manifest.json') not found in [WindowsPath('C:/Users/23587/AppData/Local/Temp/tmpaljht196/AzureRender.exe'), WindowsPath('C:/Users/23587/AppData/Local/Temp/tmpaljht196/AzurePlayer.exe'), WindowsPath('C:/Users/23587/AppData/Local/Temp/tmpaljht196/AzureMetaGen.exe'), WindowsPath('C:/Users/23587/AppData/Local/Temp/tmpaljht196/AzureGeometryCompiler.exe')]
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.509s
+
+FAILED (failures=2)

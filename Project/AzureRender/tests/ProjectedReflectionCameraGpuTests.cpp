@@ -1,0 +1,185 @@
+#include "support/VulkanComputeFixture.hpp"
+#include "support/ComputeTexture.hpp"
+#include "support/ComputeStorage.hpp"
+#include "render/ProjectedReflectionCamera.hpp"
+#include "render/ProjectedReflectionPreparation.hpp"
+#include "render/ProjectedScreenReflectionGpu.hpp"
+#include "render/LinearMath.hpp"
+#include "platform/NativeArguments.hpp"
+#include "resources/BinaryFile.hpp"
+#include <nlohmann/json.hpp>
+#include <filesystem>
+#include <fstream>
+#include <limits>
+#include <set>
+using namespace azurerender;
+namespace {
+using Json=nlohmann::json;
+template<class T>std::vector<char> bytes(const std::vector<T>& values){std::vector<char> result(values.size()*sizeof(T));std::memcpy(result.data(),values.data(),result.size());return result;}
+struct Buffers {
+    rhi::IRhi& backend;std::array<rhi::GpuBuffer,5> values{};
+    explicit Buffers(rhi::IRhi& value):backend(value){}
+    ~Buffers(){for(auto& value:values)backend.allocator().destroyBuffer(value);}
+};
+}
+int main(int argc,char** argv)try{
+    const auto args=nativeArguments(argc,argv);
+    if(args.size()!=4&&args.size()!=5&&args.size()!=6)throw std::runtime_error("Expected shader, output directory, case and optional preparation or composition");
+    const bool composed=args.size()==6&&args[4]=="--composition",control=args.size()==6&&args[4]=="--control",filtered=composed||control;
+    if(args.size()==6&&!filtered)throw std::runtime_error("Unknown composition mode");
+    const auto output=std::filesystem::absolute(std::filesystem::u8path(args[2]));
+    if(!std::filesystem::create_directory(output))throw std::runtime_error("Expected a new output directory");
+    const auto& mode=args[3];const std::set<std::string> modes{"positive","wide-edge","history-static","nonfinite-motion","wrong-convention","wrong-motion","history-tinted","history-shifted","history-wrong-pose","history-disoccluded",
+        "history-response-tracked","history-response-assumed","history-response-cutout","history-response-partial","history-response-background","history-response-missing","history-response-reactive","history-response-nonfinite","history-response-depth","history-response-zero-depth","history-response-outside","history-response-mixed","response-current","history-offset","history-wrong-offset"};
+    if(!modes.count(mode))throw std::runtime_error("Unknown physical mirror mode");
+    const bool response=mode.rfind("history-response-",0)==0,offset=mode=="history-offset"||mode=="history-wrong-offset";
+    const bool historyUsed=mode.rfind("history-",0)==0,shifted=mode=="history-shifted"||mode=="history-wrong-pose"||offset;
+    const bool reduced=mode=="history-response-cutout"||mode=="history-response-partial";
+    const unsigned minimumConfidence=reduced?32U:128U;
+    const float geometryScale=(historyUsed&&mode!="history-static")||mode=="response-current"?.1F:1.F;
+    constexpr unsigned width=640,height=480,traceWidth=320,traceHeight=240;
+    ReflectionTraceView camera;camera.projection=internal::perspective(3.14159265358979323846F/3,float(width)/height,.1F,1000.F);
+    camera.worldToClip=camera.projection;camera.right={1,0,0};camera.up={0,1,0};camera.forward={0,0,-1};
+    auto previousCamera=camera;if(shifted)previousCamera.position[0]=5;
+    auto declaredPrevious=previousCamera;if(mode=="history-wrong-pose")declaredPrevious.position[0]=0;
+    auto view=projectedReflectionView(camera,historyUsed?&declaredPrevious:nullptr);
+    ProjectedReflectionSettings settings;settings.maxSteps=64;settings.motionBlend=1;settings.motionEncoding=ProjectedReflectionMotionEncoding::LinearUv;
+    if(historyUsed)settings.motionBlend=0;
+    if(mode=="history-response-mixed")settings.motionBlend=.75F;
+    if(mode=="wide-edge")settings.edgeFade=.5F;
+    if(mode=="wrong-convention")view.convention=ProjectedReflectionConvention::MirroredViewY;
+    if(mode=="wrong-motion")settings.motionEncoding=ProjectedReflectionMotionEncoding::FourthRoot;
+    settings.requireTrackedMotion=(response&&mode!="history-response-assumed")||mode=="response-current";
+    if(mode=="history-offset")settings.motionUvOffset={.125F,0};
+    const auto surface=[&](float v){
+        const float dy=(2*v-1)/camera.projection[5];const float denominator=dy+.08F;const float floorDistance=denominator<0?-30.F/denominator:100000.F;
+        return std::array<float,2>{{std::min(180.F,floorDistance)*geometryScale,floorDistance<180?1.F:0.F}};
+    };
+    std::vector<float> scene(width*height*4),motion(width*height*4,0),depth(traceWidth*traceHeight),normal(traceWidth*traceHeight*4),snapshot(width*height*4);
+    if(mode=="nonfinite-motion")for(std::size_t index=0;index<motion.size();index+=4){motion[index]=std::numeric_limits<float>::quiet_NaN();motion[index+1]=std::numeric_limits<float>::infinity();}
+    std::vector<std::uint8_t> mask(traceWidth*traceHeight,255),eligibility(traceWidth*traceHeight,0);
+    for(unsigned y=0;y<height;++y)for(unsigned x=0;x<width;++x){const auto value=surface((y+.5F)/height);const auto i=(y*width+x)*4;
+        const bool lowerWall=(y+.5F)/height>.5F;
+        scene[i]=value[1]>0?0.F:lowerWall?1.F:0.F;scene[i+1]=value[1]>0||lowerWall?0.F:1.F;scene[i+2]=value[1]>0?1.F:0.F;scene[i+3]=1;
+        snapshot[i]=value[0];snapshot[i+1]=value[1]>0?.5F+.04F/1.08F:.5F;snapshot[i+2]=value[1]>0?1.F:.5F;snapshot[i+3]=value[1]>0?.15F:1.F;
+        if(shifted)motion[i]=5*camera.projection[0]/(2*value[0]);
+        if(offset)motion[i]-=.125F;
+        if(response){motion[i+2]=1.F-(1.F/value[0]-view.depthReciprocal[1])/view.depthReciprocal[0];motion[i+3]=1;
+            if(mode=="history-response-assumed"||mode=="history-response-background"||mode=="history-response-mixed")motion[i+3]=0;
+            if(mode=="history-response-cutout")motion[i+3]=2.75F;
+            if(mode=="history-response-partial")motion[i+3]=-.75F;
+            if(mode=="history-response-missing")motion[i+3]=-1;
+            if(mode=="history-response-reactive")motion[i+3]=-2;
+            if(mode=="history-response-nonfinite")motion[i+3]=std::numeric_limits<float>::quiet_NaN();
+            if(mode=="history-response-depth")motion[i+2]=-.1F;
+            if(mode=="history-response-outside")motion[i]=1;
+        }}
+    for(unsigned y=0;y<traceHeight;++y)for(unsigned x=0;x<traceWidth;++x){const auto value=surface((y+.5F)/traceHeight);const auto i=y*traceWidth+x;
+        depth[i]=(1.F/value[0]-view.depthReciprocal[1])/view.depthReciprocal[0];
+        normal[i*4]=.5F;normal[i*4+1]=value[1]>0?.5F-.04F/1.08F:1.F;normal[i*4+2]=value[1]>0?.15F:1.F;
+        eligibility[i]=value[1]>0?255:0;}
+    std::vector<std::uint32_t> tiles;for(unsigned y=0;y<traceHeight/8;++y)for(unsigned x=0;x<traceWidth/8;++x)tiles.push_back((x<<16)|y);
+    test::VulkanComputeFixture host;Json report={{"status","failed"},{"mode",mode},{"device",host.properties.deviceName}};bool correct=false;
+    {
+        auto& backend=*host.backend;Buffers buffers(backend);const auto tileData=bytes(tiles);
+        buffers.values[0]=backend.allocator().createBuffer(tileData.size(),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+        std::memcpy(buffers.values[0].mapped,tileData.data(),tileData.size());backend.allocator().flush(buffers.values[0],0,tileData.size());
+        test::ComputeTexture color(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(scene),16);
+        test::ComputeTexture deviceDepth(backend,traceWidth,traceHeight,1,VK_FORMAT_R32_SFLOAT,bytes(depth),4);
+        test::ComputeTexture delta(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(motion),16);
+        test::ComputeTexture surfaceMask(backend,traceWidth,traceHeight,1,VK_FORMAT_R8_UNORM,bytes(mask),1);
+        test::ComputeTexture normalRoughness(backend,traceWidth,traceHeight,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(normal),16);
+        test::ComputeTexture snapshotSurface(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(snapshot),16);
+        auto pastSnapshot=snapshot,currentColor=scene;
+        if(mode=="history-disoccluded")for(std::size_t i=0;i<pastSnapshot.size();i+=4)pastSnapshot[i]=1;
+        if(mode=="history-response-zero-depth")for(std::size_t i=0;i<pastSnapshot.size();i+=4)pastSnapshot[i]=100000;
+        if(mode=="history-tinted")for(std::size_t i=0;i<currentColor.size();i+=4){currentColor[i]=currentColor[i+1]=0;currentColor[i+2]=1;}
+        test::ComputeTexture previousSurface(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(pastSnapshot),16);
+        test::ComputeTexture changedColor(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(currentColor),16);
+        test::ComputeTexture occludedDepth(backend,traceWidth,traceHeight,1,VK_FORMAT_R32_SFLOAT,bytes(std::vector<float>(traceWidth*traceHeight,mode=="history-response-zero-depth"?0.F:(1.F-view.depthReciprocal[1])/view.depthReciprocal[0])),4);
+        test::ComputeStorage outputColor(backend,traceWidth,traceHeight,VK_FORMAT_B10G11R11_UFLOAT_PACK32,4,std::vector<char>(traceWidth*traceHeight*4,0));
+        test::ComputeStorage outputFootprint(backend,traceWidth,traceHeight,VK_FORMAT_R16G16_UNORM,4,std::vector<char>(traceWidth*traceHeight*4,0));
+        test::ComputeStorage outputConfidence(backend,traceWidth,traceHeight,VK_FORMAT_R8_UNORM,1,bytes(eligibility));
+        std::array<VkImage,3> storage{{outputColor.image.image,outputFootprint.image.image,outputConfidence.image.image}};
+        for(unsigned i=0;i<3;++i)buffers.values[1+i]=backend.allocator().createBuffer(traceWidth*traceHeight*(i==2?1:4),VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
+        ProjectedReflectionRayGpu kernel(backend,1,readBinaryFile(args[1]));ProjectedReflectionInputs inputs;
+        inputs.previousColor=color.view;inputs.previousDepth=inputs.currentDepth=deviceDepth.view;inputs.motion=delta.view;inputs.surfaceMask=surfaceMask.view;inputs.normalRoughness=normalRoughness.view;
+        inputs.sourceExtent={width,height};inputs.traceExtent={traceWidth,traceHeight};inputs.tiles=buffers.values[0].buffer;inputs.tileBytes=tileData.size();inputs.tileCount=static_cast<unsigned>(tiles.size());
+        ProjectedReflectionOutputs outputs{outputColor.view,outputFootprint.view,outputConfidence.view,{traceWidth,traceHeight}};
+        std::unique_ptr<ProjectedReflectionPreparationGpu> preparation;
+        std::unique_ptr<ProjectedScreenReflectionGpu> composition;
+        std::unique_ptr<DepthPyramidGpu> controlDepth;
+        std::unique_ptr<ReflectionSignalPyramidGpu> controlSignal;
+        std::unique_ptr<ReflectionSpatialFilterGpu> controlFilter;
+        const unsigned outputSlot=historyUsed?1U:0U;
+        if(args.size()==5||control){
+            preparation=std::make_unique<ProjectedReflectionPreparationGpu>(backend,VkExtent2D{width,height},1,readBinaryFile(control?args[5]+"/projected_reflection_prepare.comp.spv":args[4]),2);
+            const auto prepared=preparation->output(0);inputs.currentDepth=inputs.previousDepth=prepared.depth;inputs.surfaceMask=prepared.mask;inputs.normalRoughness=prepared.normalRoughness;
+            inputs.tiles=prepared.tiles;inputs.tileBytes=prepared.tileBytes;inputs.tileCount=prepared.tileCount;outputs.footprint=prepared.footprint;storage[1]=prepared.footprintImage;
+            if(mode=="history-disoccluded"||mode=="history-response-zero-depth")inputs.previousDepth=occludedDepth.view;
+        }
+        if(control){
+            const auto shaders=ProjectedScreenReflectionShaders::load(args[5]);
+            controlDepth=std::make_unique<DepthPyramidGpu>(backend,VkExtent2D{traceWidth,traceHeight},7,1,shaders.depth);
+            controlSignal=std::make_unique<ReflectionSignalPyramidGpu>(backend,VkExtent2D{traceWidth,traceHeight},7,1,ReflectionPyramidPrecision::RequirePacked,shaders.signal);
+            controlFilter=std::make_unique<ReflectionSpatialFilterGpu>(backend,VkExtent2D{traceWidth,traceHeight},1,shaders.filter,ReflectionFilterOutputAccess::StorageRead);
+            const auto base=controlSignal->base(0);outputs.color=base.color;outputs.confidence=base.confidence;storage[0]=base.colorImage;storage[2]=base.confidenceImage;
+        }
+        if(composed){
+            composition=std::make_unique<ProjectedScreenReflectionGpu>(backend,VkExtent2D{width,height},2,ProjectedScreenReflectionShaders::load(args[5]),7,2);
+            const auto prepared=composition->prepared(outputSlot);const auto signal=composition->signal(outputSlot);
+            storage={signal.colorImage,prepared.footprintImage,signal.confidenceImage};
+            bool canceled=false;try{host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
+                composition->record(commands,0,{snapshotSurface.view,color.view,VK_NULL_HANDLE,{width,height}},camera,{});canceled=true;throw std::runtime_error("cancel composed recording");
+            });}catch(const std::runtime_error&){if(!canceled)throw;}if(!canceled)throw std::runtime_error("Composition cancellation control did not execute");
+        }
+        if(filtered)buffers.values[4]=backend.allocator().createBuffer(traceWidth*traceHeight*16,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
+        report["surfacePreparation"]=preparation!=nullptr||composed;report["composition"]=composed?"public":control?"manual":"none";
+        host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
+            if(composed){
+                ProjectedScreenReflectionParameters parameters;parameters.maxSteps=settings.maxSteps;parameters.edgeFade=settings.edgeFade;
+                parameters.motionUvOffset=settings.motionUvOffset;parameters.requireTrackedMotion=settings.requireTrackedMotion;
+                ProjectedScreenReflectionInputs snapshot{snapshotSurface.view,changedColor.view,mode=="nonfinite-motion"||historyUsed?delta.view:VK_NULL_HANDLE,{width,height}};
+                if(historyUsed){
+                    composition->record(commands,0,{previousSurface.view,color.view,VK_NULL_HANDLE,{width,height}},previousCamera,parameters);
+                    const ProjectedScreenReflectionHistory history{0,color.view,declaredPrevious};composition->record(commands,1,snapshot,camera,parameters,&history);
+                }else composition->record(commands,0,snapshot,camera,parameters);
+            }else{
+            if(control)controlSignal->beginBaseWrite(commands,0);
+            if(preparation)preparation->record(commands,0,snapshotSurface.view,{storage[2],outputs.confidence,{traceWidth,traceHeight}},view.depthReciprocal,{});
+            commands.bufferBarrier({inputs.tiles,0,inputs.tileBytes,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+            kernel.record(commands,0,inputs,outputs,view,settings);
+            if(control){
+                commands.imageBarrier({storage[1],VK_IMAGE_LAYOUT_GENERAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+                controlDepth->record(commands,0,inputs.currentDepth,DepthReduction::Maximum);
+                ReflectionPyramidParameters pyramid;pyramid.depthDecode=view.depthReciprocal;pyramid.reciprocalDepth=true;
+                controlSignal->record(commands,0,controlDepth->output(0).view,7,pyramid);const auto signal=controlSignal->output(0);
+                ReflectionFilterInputViews source{controlDepth->output(0).view,outputs.footprint,signal.color,traceWidth,traceHeight,7,7};source.roughnessChannel=1;source.confidence=signal.confidence;source.confidenceLevels=7;
+                ReflectionFilterParameters parameters;parameters.depthDecode=view.depthReciprocal;parameters.reciprocalDepth=true;controlFilter->record(commands,0,source,parameters);
+            }
+            }
+            for(unsigned i=0;i<3;++i){auto& buffer=buffers.values[1+i];commands.imageBarrier({storage[i],filtered?VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_GENERAL,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,
+                VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});
+                commands.copyImageToBuffer(storage[i],buffer.buffer,{traceWidth,traceHeight});
+                commands.bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});}
+            if(filtered){const auto image=composed?composition->output(outputSlot).image:controlFilter->output(0).image;auto& buffer=buffers.values[4];
+                commands.imageBarrier({image,VK_IMAGE_LAYOUT_GENERAL,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});
+                commands.copyImageToBuffer(image,buffer.buffer,{traceWidth,traceHeight});commands.bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});}
+        });
+        for(unsigned i=0;i<(filtered?4U:3U);++i){auto& buffer=buffers.values[i+1];host.allocator.invalidate(buffer,0,buffer.size);std::ofstream file(output/(std::to_string(i)+".bin"),std::ios::binary);file.write(static_cast<const char*>(buffer.mapped),static_cast<std::streamsize>(buffer.size));if(!file)throw std::runtime_error("Cannot save mirror output");}
+        unsigned region=0,redHits=0,staticHits=0,filteredRedHits=0;
+        const auto* colors=static_cast<const char*>(buffers.values[1].mapped);const auto* footprints=static_cast<const char*>(buffers.values[2].mapped);const auto* confidence=static_cast<const unsigned char*>(buffers.values[3].mapped);
+        for(unsigned y=traceHeight*80/100;y<traceHeight*88/100;++y)for(unsigned x=traceWidth*30/100;x<traceWidth*70/100;++x){const auto index=y*traceWidth+x;++region;
+            std::uint32_t packed=0;std::uint16_t attenuation=0;std::memcpy(&packed,colors+index*4,4);std::memcpy(&attenuation,footprints+index*4,2);
+            const bool red=packed==0x380U&&confidence[index]>=minimumConfidence;redHits+=red;staticHits+=red&&attenuation==65535;
+            if(filtered){const auto* result=static_cast<const float*>(buffers.values[4].mapped)+index*4;filteredRedHits+=result[0]>.95F&&result[1]<.05F&&result[2]<.05F&&result[3]>=(reduced?.125F:.5F);}}
+        correct=redHits*4>=region*3&&staticHits*4>=region*3;
+        if(filtered){correct=correct&&filteredRedHits*4>=region*3;report["filteredRedHits"]=filteredRedHits;const auto* values=static_cast<const float*>(buffers.values[4].mapped);
+            for(unsigned i=0;i<traceWidth*traceHeight*4;++i)if(!std::isfinite(values[i])||values[i]<0||(i%4==3&&values[i]>1))throw std::runtime_error("Filtered reflection must be finite nonnegative HDR with unit confidence");}
+        report.update({{"regionPixels",region},{"redHits",redHits},{"staticHits",staticHits},{"minimumFraction",.75},{"minimumConfidence",minimumConfidence}});
+    }
+    report["validationErrors"]=host.errors.load();report["liveBuffers"]=host.allocator.statistics().liveBuffers;report["liveImages"]=host.allocator.statistics().liveImages;
+    correct=correct&&host.errors==0&&host.allocator.statistics().liveBuffers==0&&host.allocator.statistics().liveImages==0;report["status"]=correct?"passed":"failed";
+    std::ofstream file(output/"result.json");file<<report.dump(2)<<'\n';file.close();if(!file)throw std::runtime_error("Cannot save mirror report");
+    std::cout<<report.dump()<<'\n';return correct?0:1;
+}catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "sourceHash": "32636fe8bc21a8208d6916c18ba71c6afe341b1a1eeb737b2d7109ba67e1c6a8",
+  "strictDocsBuildPassed": true,
+  "repositoryAuditPassed": true,
+  "systemTraceStatus": "AccessDenied",
+  "systemTraceStarted": false,
+  "systemTraceError": "0x80070005",
+  "files": {
+    "build/p5-relative-thermal-docs-build.log.gz": {
+      "source": "build/p5-relative-thermal-docs-build.log",
+      "originalBytes": 4921,
+      "storedBytes": 1225,
+      "originalSha256": "22c71fe27ef45d79a236020ef7dff112bdbe9627a4ac46f31b296c591f3ca229",
+      "sha256": "bc717c18d341460eff9cb608595660f221fa07b13d67e77955b2bb9707e3d064"
+    },
+    "build/p5-relative-thermal-final-repository-audit.json.gz": {
+      "source": "build/p5-relative-thermal-final-repository-audit.json",
+      "originalBytes": 859,
+      "storedBytes": 261,
+      "originalSha256": "7f075209db82bd76bead82c94fdcd78cbdae43216685fb92ffc48809b41d199d",
+      "sha256": "9e61fe52c3445c18223b122efc56a2fd08f1b95f254ea78bf382aa79f3dc95e2"
+    },
+    "build/p5-relative-thermal-system-trace-attempt.log.gz": {
+      "source": "build/p5-relative-thermal-system-trace-attempt.log",
+      "originalBytes": 562,
+      "storedBytes": 347,
+      "originalSha256": "4ad2ba9211d0e4d50e70fb50ff2ae64d009281c9a2293fed97c0157b4d276808",
+      "sha256": "e9c792fbec56e1107e1620f048d7d55054306031d2f97146b07ece56a8bdecd5"
+    },
+    "build/p5-relative-thermal-final-verification.py.gz": {
+      "source": "build/p5-relative-thermal-final-verification.py",
+      "originalBytes": 2635,
+      "storedBytes": 1184,
+      "originalSha256": "46fb1a09ec286be822ffac53ee589700f2bea77a525e81fb7d3c85e68751bc72",
+      "sha256": "6bac49b7fcfdc0c926550860f16be07c77d9da00012e8d731231f889a95b461d"
+    },
+    "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/association.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/association.json",
+      "originalBytes": 395,
+      "storedBytes": 286,
+      "originalSha256": "ea22e2884fb38a6032aef34b8b45809f95ba7af42cb190729f22946f0857c617",
+      "sha256": "a86e41f41c39faba7e2b6c2152a46e5eb73896d22a1f73c0069a0bfd5fd4bdc1"
+    },
+    "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/build-provenance.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/build-provenance.json",
+      "originalBytes": 147445,
+      "storedBytes": 51983,
+      "originalSha256": "b5d2e110909bc66985ce0552834e71852337f3504eade4816450c32d25eaac63",
+      "sha256": "c0f60b6b3a5bc2ef1bf098c14ac3c1a270be08f290230e6f97e76debd20ba916"
+    },
+    "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/failure.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/failure.json",
+      "originalBytes": 270,
+      "storedBytes": 216,
+      "originalSha256": "d70d7452423a0ec6f483cab02c13079b4d20e9fe9abb5c6e58a359b40c49fe22",
+      "sha256": "a65aeb737196be98ffb726a17b33df38296d670239bfd7209603c138f01148d0"
+    },
+    "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/files.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/files.json",
+      "originalBytes": 1153,
+      "storedBytes": 477,
+      "originalSha256": "8e61ba9984eead13bd326149827c3f7769ab18edc7cceda091205b869999d427",
+      "sha256": "228dc70701d761ec8aa6ccb4d7570b5a8d700d9edcbc5441bc51792f20697581"
+    },
+    "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/observations.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/observations.json",
+      "originalBytes": 11,
+      "storedBytes": 31,
+      "originalSha256": "84b1c14e68260082e3e79edff0a78f4ebf1942cfd6c593246044ec2149cbb87d",
+      "sha256": "c94d2963bc2dc9fafdaa823dd1da7a803f87ffb5c82e05840c7f0178cb8196f1"
+    },
+    "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/wpr-start-error.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/wpr-start-error.log",
+      "originalBytes": 154,
+      "storedBytes": 133,
+      "originalSha256": "76cba4df27ea9850f5fd0f76aff012b302bc59d04989c04e71067af6424dcaec",
+      "sha256": "540ed210bc9f9070225efd6361bc9501bd1318a00d7b09ed7f9ade1e37b4c617"
+    },
+    "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/wpr-start.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/system-trace-1791700794802/wpr-start.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "build/p5-relative-thermal-docs-final-build.log.gz": {
+      "source": "build/p5-relative-thermal-docs-final-build.log",
+      "originalBytes": 4927,
+      "storedBytes": 1227,
+      "originalSha256": "b1792c8de23d4c08e5d9714eadabf596a3e6db74876a258a5a3261b42efe3d14",
+      "sha256": "60a2f567183e0d80be0607f343887d3c1c34e2510031d7a71c57de1cfbfa0183"
+    }
+  },
+  "finalRenderedPageChecked": true
+}

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_renderer_residency.py", line 60, in <module>
+    a=p.parse_args();run(a.player.resolve(),a.output.resolve())
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_renderer_residency.py", line 47, in run
+    assert residency['renderer']==expected and residency['entries']<=2,residency
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'activeResourceKey': '', 'bufferBytes': 11341104, 'buffers': 57, 'cachedLastSubmission': 121, 'cachedReady': True, 'cachedResourceKey': '', 'completedSubmission': 126, 'entries': 2, 'frame': 128, 'imageBytes': 121161216, 'images': 165, 'renderer': 'character'}

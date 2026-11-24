@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "status": "public_contract_passed_native_parity_pending",
+  "implementation": {
+    "shader": "shaders/mesh.frag",
+    "test": "tools/test_character_probe_gpu.py",
+    "ctest": "AzureEngine.CharacterProbeGpu",
+    "scope": "角色局部探针消费镜面权重和隔离开关。"
+  },
+  "sourceSha256": {
+    "shaders\\mesh.frag": "ae1c88b2a37a202c428f9b836378d63fe74971373c65ebdca2952eb8e311d17a",
+    "tools\\test_character_probe_gpu.py": "6088ae7fb73c83880e66ff941b94b80711e31d0b77882d21cd12d6bbe6d7ed3b",
+    "CMakeLists.txt": "5136d01ab0e91dd2a959e94ef6743172ae8c82839a6bea300c0403f2b7e67eb4"
+  },
+  "runRoot": "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\scene-audit\\character-probe",
+  "evidence": {
+    "redEvidence": "gpu-red-v2/summary.json",
+    "greenEvidence": {
+      "debug": "gpu-green-debug/summary.json",
+      "release": "gpu-green-release/summary.json"
+    },
+    "formalDebugCtest": {
+      "path": "debug-affected-ctest.log",
+      "groups": [
+        "AzureEngine.UnlitSurfaceGpu",
+        "AzureEngine.SceneCharacterGpu",
+        "AzureEngine.CharacterProbeGpu",
+        "AzureEngine.ProjectedHairSurfaceGpu"
+      ],
+      "passed": 4,
+      "failed": 0
+    },
+    "jointCapture": {
+      "receipt": "joint-face-release/receipt.json",
+      "sourceIndex": "joint-face-release/source-index.json",
+      "binarySnapshot": "joint-face-release/binary-snapshot.json",
+      "heroMatchesSourceStrandFinal": true,
+      "visualInspection": "Character skin, projected hair, clothing, scene probe and logistics meshes are visible. Strong scene reflections and mouth/face shadow shape remain native-parity concerns.",
+      "nativePixelEquivalenceVerified": false
+    }
+  },
+  "results": {
+    "debug": {
+      "retainedFrames": 26,
+      "imageHashesMatch": true,
+      "finalOraclePasses": true,
+      "maximumLinearError": 0.002403126005967371,
+      "maximumCharacterLinearError": 0.00018096795677382486,
+      "metrics": {
+        "indexedPbrProbeResponse": 0.6375968739940326,
+        "indexedSkinProbeResponse": 0.010329823029626936,
+        "fixedPbrProbeResponse": 0.6375968739940326,
+        "fixedSkinProbeResponse": 0.010329823029626936,
+        "pbr-onBackendMaximumByteDelta": 0,
+        "pbr-offBackendMaximumByteDelta": 0,
+        "skin-fullBackendMaximumByteDelta": 0,
+        "skin-halfBackendMaximumByteDelta": 0,
+        "skin-zeroBackendMaximumByteDelta": 0,
+        "skin-offBackendMaximumByteDelta": 0,
+        "face-fullBackendMaximumByteDelta": 0,
+        "hair-fullBackendMaximumByteDelta": 0,
+        "fabric-fullBackendMaximumByteDelta": 0,
+        "legacy-faceBackendMaximumByteDelta": 0,
+        "face-qa-disabledBackendMaximumByteDelta": 0,
+        "pbr-qa-disabledBackendMaximumByteDelta": 0,
+        "skin-beautyBackendMaximumByteDelta": 0
+      }
+    },
+    "release": {
+      "retainedFrames": 26,
+      "imageHashesMatch": true,
+      "finalOraclePasses": true,
+      "maximumLinearError": 0.002403126005967371,
+      "maximumCharacterLinearError": 0.00018096795677382486,
+      "metrics": {
+        "indexedPbrProbeResponse": 0.6375968739940326,
+        "indexedSkinProbeResponse": 0.010329823029626936,
+        "fixedPbrProbeResponse": 0.6375968739940326,
+        "fixedSkinProbeResponse": 0.010329823029626936,
+        "pbr-onBackendMaximumByteDelta": 0,
+        "pbr-offBackendMaximumByteDelta": 0,
+        "skin-fullBackendMaximumByteDelta": 0,
+        "skin-halfBackendMaximumByteDelta": 0,
+        "skin-zeroBackendMaximumByteDelta": 0,
+        "skin-offBackendMaximumByteDelta": 0,
+        "face-fullBackendMaximumByteDelta": 0,
+        "hair-fullBackendMaximumByteDelta": 0,
+        "fabric-fullBackendMaximumByteDelta": 0,
+        "legacy-faceBackendMaximumByteDelta": 0,
+        "face-qa-disabledBackendMaximumByteDelta": 0,
+        "pbr-qa-disabledBackendMaximumByteDelta": 0,
+        "skin-beautyBackendMaximumByteDelta": 0
+      }
+    }
+  },
+  "budgets": {
+    "characterLinear": 0.0005,
+    "otherLinear": 0.004,
+    "zeroStateMaximum": 0,
+    "backendMaximumByteDelta": 1
+  },
+  "builds": {
+    "Debug": [
+      "AzurePlayer",
+      "AzureRender"
+    ],
+    "Release": [
+      "AzurePlayer",
+      "AzureRender"
+    ],
+    "passed": true
+  },
+  "limitations": [
+    "Native DFG/GI compensation, mip mapping, projection origin and runtime activation are separate work.",
+    "The first gpu-red run had an invalid inferred-face positive control and is diagnostic only.",
+    "Green saved images are re-evaluated with the final stricter oracle; formal Debug CTest executes the final script.",
+    "The full-scene Debug integration capture timed out after 240 seconds during scene renderer initialization. Release integration capture passed."
+  ]
+}

@@ -1,0 +1,42 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 1: AzureEditor.EditService
+1/1 Test #1: AzureEditor.EditService ..........***Failed    0.22 sec
+[1791233251269][info][editor][code=0] Opened scene: test
+[1791233251269][info][editor][code=0] Opened scene: test
+[1791233251275][info][editor][code=0] Opened scene: test
+[1791233251285][info][editor][code=0] Opened scene: test
+[1791233251296][info][editor][code=0] Undo
+[1791233251301][info][editor][code=0] Undo
+[1791233251316][info][editor][code=0] Opened scene: test
+[1791233251328][info][editor][code=0] Play started
+[1791233251333][info][editor][code=0] ERROR: Operation requires an idle edit session
+[1791233251341][info][editor][code=0] Play stopped; edit state restored
+[1791233251346][info][editor][code=0] Opened scene: test
+[1791233251357][info][editor][code=0] Opened scene: test
+[1791233251369][info][editor][code=0] ERROR: Failure after mutation
+[1791233251377][info][editor][code=0] Opened scene: test
+[1791233251379][info][editor][code=0] ERROR: Duplicate or empty runtime node id
+[1791233251384][info][editor][code=0] Opened scene: test
+[1791233251386][info][editor][code=0] ERROR: Read-only operation modified the document
+[1791233251390][info][editor][code=0] Opened scene: test
+[1791233251395][info][editor][code=0] Opened scene: untitled
+[1791233251399][info][editor][code=0] Opened scene: test
+[1791233251400][info][editor][code=0] Selected node: Registered extension
+[1791233251407][info][editor][code=0] Opened scene: test
+[1791233251407][info][editor][code=0] Added node under: Registered extension
+[1791233251416][info][editor][code=0] Opened scene: test
+[1791233251417][info][editor][code=0] Selected node: New Node 1
+[1791233251426][info][editor][code=0] Opened scene: test
+[1791233251427][info][editor][code=0] Removed node (and descendants)
+[1791233251428][info][editor][code=0] ERROR: Candidate selection is out of range
+Removing a selected subtree must preserve a valid selection
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.23 sec
+
+The following tests FAILED:
+	  1 - AzureEditor.EditService (Failed)
+Errors while running CTest

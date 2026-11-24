@@ -1,0 +1,26 @@
+[
+  {
+    "mode": "absolute",
+    "absoluteLength": 295,
+    "argument": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\long-compiler-output-path\\owned-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\binary\\character_snapshot_integral_object_bindless_clipmap_lighting-absolute.frag.spv",
+    "exitCode": 1,
+    "error": "glslc: error: cannot open output file: 'D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\long-compiler-output-path\\owned-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\binary\\character_snapshot_integral_object_bindless_clipmap_lighting-absolute.frag.spv': No such file or directory\r\n",
+    "exists": false
+  },
+  {
+    "mode": "relative",
+    "absoluteLength": 295,
+    "argument": "../binary/character_snapshot_integral_object_bindless_clipmap_lighting-relative.frag.spv",
+    "exitCode": 1,
+    "error": "glslc: error: cannot open output file: '../binary/character_snapshot_integral_object_bindless_clipmap_lighting-relative.frag.spv': No such file or directory\r\n",
+    "exists": false
+  },
+  {
+    "mode": "extended",
+    "absoluteLength": 295,
+    "argument": "\\\\?\\D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\long-compiler-output-path\\owned-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\binary\\character_snapshot_integral_object_bindless_clipmap_lighting-extended.frag.spv",
+    "exitCode": 0,
+    "error": "",
+    "exists": true
+  }
+]

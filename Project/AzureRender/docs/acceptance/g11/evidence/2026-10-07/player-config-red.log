@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_player_cli.py", line 41, in <module>
+    verify(parser.parse_args().executable)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_player_cli.py", line 29, in verify
+    assert "backend unavailable" in run("--project",project,"--check-project",success=False)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_player_cli.py", line 15, in run
+    raise AssertionError(f"{args}: {result.stdout}{result.stderr}")
+AssertionError: ('--project', WindowsPath('C:/Users/23587/AppData/Local/Temp/azure-player-nqr9jtkw/moved/project.azureproject'), '--check-project'): Project loaded: original (7be90858-47ae-4f7d-92ba-18c52274e1bb)
+Project validation passed
+

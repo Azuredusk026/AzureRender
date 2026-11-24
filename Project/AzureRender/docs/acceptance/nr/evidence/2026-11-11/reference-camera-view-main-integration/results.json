@@ -1,0 +1,147 @@
+{
+  "status": "reference-camera-view-main-integration-qualified",
+  "runtimeSourceCommit": "6721bde",
+  "sourceBranchCommit": "7d9dd54",
+  "build": {
+    "status": "built-and-checked",
+    "checks": [
+      {
+        "config": "Release",
+        "tests": 10,
+        "skips": 0,
+        "seconds": 115.09399999998277
+      },
+      {
+        "config": "Debug",
+        "tests": 10,
+        "skips": 0,
+        "seconds": 115.96799999999348
+      }
+    ],
+    "gpuProcesses": [
+      {
+        "config": "Release",
+        "device": "nvidia",
+        "target": "AzureReferenceDepthGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Release",
+        "device": "nvidia",
+        "target": "AzureReferenceDepthCoverageGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Release",
+        "device": "intel",
+        "target": "AzureReferenceDepthGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Release",
+        "device": "intel",
+        "target": "AzureReferenceDepthCoverageGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "nvidia",
+        "target": "AzureReferenceDepthGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "nvidia",
+        "target": "AzureReferenceDepthCoverageGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "intel",
+        "target": "AzureReferenceDepthGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "intel",
+        "target": "AzureReferenceDepthCoverageGpuTests",
+        "passed": true
+      }
+    ],
+    "nativeCpuRays": 34034,
+    "visibleVertexChecks": 23128,
+    "exactDepthCoverageValues": 675328,
+    "sourceUnchanged": true,
+    "productsVerified": true,
+    "existingProgramsExact": 859,
+    "childProgramsExact": 858,
+    "activeProgramCount": 859,
+    "allHostSectionsExact": false,
+    "allHostBytesExact": false,
+    "dllsExact": true
+  },
+  "originalFour": {
+    "method": "fresh-capture",
+    "result": {
+      "exitCode": 0,
+      "seconds": 131.6720000000205,
+      "frames": [
+        {
+          "name": "frame_000000.png",
+          "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+          "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+          "changedPixels": 0,
+          "maximumByteError": 0
+        },
+        {
+          "name": "frame_000001.png",
+          "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+          "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+          "changedPixels": 0,
+          "maximumByteError": 0
+        },
+        {
+          "name": "frame_000002.png",
+          "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+          "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+          "changedPixels": 0,
+          "maximumByteError": 0
+        },
+        {
+          "name": "frame_000003.png",
+          "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+          "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+          "changedPixels": 0,
+          "maximumByteError": 0
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "sourceUnchanged": true,
+      "programsUnchanged": true,
+      "projectInputsUnchanged": true
+    }
+  },
+  "protectedFilesExact": 13,
+  "projectInputsExact": 1729,
+  "sourceProofsFresh": true,
+  "childGpuScope": {
+    "sourceCommit": "7d9dd54",
+    "integrationCommit": "6721bde",
+    "archiveSha256": "350c4286cfcea6ebfa0b9c94a535acd7a27b6dd3dba72fe42fc08c8fd9ad714d",
+    "members": 86,
+    "memberHashesVerified": 85,
+    "criticalSourceDiffEmpty": true,
+    "criticalHeaders": [
+      "ReferenceCameraView.hpp",
+      "ReferenceCameraDepth.hpp",
+      "ReferenceDepth.hpp",
+      "ReferenceDepthConvention.hpp",
+      "ReferenceClipProjection.hpp",
+      "ReferencePositionFrame.hpp"
+    ],
+    "gpuReuse": "Child complete 7372800-value and 17017-visibility-per-device batch; identical source contracts and all 858 child programs; root native camera queries and affected GPU contracts independently rerun"
+  },
+  "overall": "failed-user-review",
+  "formalPerformanceAccepted": false
+}

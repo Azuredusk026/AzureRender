@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "install": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine",
+  "root": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261014-202124-ui-modernization-b337fa\\temp\\Azure GUI 中文 ik9cwb04",
+  "package": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261014-202124-ui-modernization-b337fa\\temp\\Azure GUI 中文 ik9cwb04\\移动后的 GUI 发布",
+  "guiCreate": true,
+  "guiReopen": true,
+  "guiEditSave": true,
+  "unsavedCloseCancel": true,
+  "guiPublish": true,
+  "movedNativeEntry": true,
+  "sourceProjectUnavailable": true,
+  "input": "production Dear ImGui replay",
+  "physicalInput": "not performed"
+}

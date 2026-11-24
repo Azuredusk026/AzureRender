@@ -1,0 +1,8 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 109: AzureRender.CharacterRepair
+1/1 Test #109: AzureRender.CharacterRepair ......   Passed   59.42 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =  59.48 sec

@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "status": "pipeline-index-passed",
+  "frames": [
+    {
+      "frame": 10401,
+      "manifest": {
+        "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/frame10401-manifest.json",
+        "bytes": 25845568,
+        "sha256": "c87bb39e8155ba04c57741bb832a5750711c4e932c151ba21861eab585184327"
+      },
+      "capture": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+        "bytes": 345416012,
+        "sha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90"
+      },
+      "coverage": {
+        "draw_dispatch_count": 250,
+        "pipeline_index_complete": true,
+        "raw_payloads_exported": false,
+        "scope": "Pipeline descriptors and shader digests; raw payload exports have separate receipts"
+      },
+      "inputs": [
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401-inventory.json",
+          "bytes": 716753,
+          "sha256": "3953f5c84ebe80a6a2e48f6c396bb9446d4eb1da2286881a5b8a4f172af3e9f4"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame10401-pipelines.json",
+          "bytes": 10359893,
+          "sha256": "dee332beb81f2cc717be3fc2a7e96273bf6202d6de06db75a4dcddac25b07dee"
+        }
+      ]
+    },
+    {
+      "frame": 3534,
+      "manifest": {
+        "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/frame3534-manifest.json",
+        "bytes": 94733067,
+        "sha256": "e7162731abf9bf69fc0c16ef282a822e8cea9e1d47e0c870742883ebda373718"
+      },
+      "capture": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame3534.rdc",
+        "bytes": 944717392,
+        "sha256": "5bf129d05acb43d41ab54042f6648c3d728decb253c94d0250037f01f0b778b3"
+      },
+      "coverage": {
+        "draw_dispatch_count": 1021,
+        "pipeline_index_complete": true,
+        "raw_payloads_exported": false,
+        "scope": "Pipeline descriptors and shader digests; raw payload exports have separate receipts"
+      },
+      "inputs": [
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame3534-inventory.json",
+          "bytes": 2298684,
+          "sha256": "adacb1f0be4cb1103920a5c76f4593c5c57290c7b98ab467d688b7187efa357f"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame3534-pipelines-00.json",
+          "bytes": 4067335,
+          "sha256": "225d6144b26009e9cd1bc6aa1630747b92a3bf2954672c74e0ab0ea645e79f3c"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame3534-pipelines-01.json",
+          "bytes": 4228056,
+          "sha256": "e8c8f2a1ba0e136a29703725c2927e1cdde1d070bf0031596c6ec06a3062c5cd"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame3534-pipelines-02.json",
+          "bytes": 4124346,
+          "sha256": "38223de34a83146d18ec71bf074fe6fad58b08a0ca281ddb9778c27b6f5516b2"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame3534-pipelines-03.json",
+          "bytes": 5210331,
+          "sha256": "11e07c7ea42787c009c6f680d446a426c3d5c7b5d5e86cd7b92b2f755f021881"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame3534-pipelines-04.json",
+          "bytes": 5543890,
+          "sha256": "6ae90176ff7d469e7acfdaf46951fc3276ef76e6d61baa25fa6fbcf3fe69c49e"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame3534-pipelines-05.json",
+          "bytes": 4356939,
+          "sha256": "ac654ccf3ba2c54aee9126bab4d84bde9a316c238b7fbe94b83713b39c69e091"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame3534-pipelines-06.json",
+          "bytes": 5937571,
+          "sha256": "615106d2da1f3d12e756503ed448e36ee7a61a84b0b186e136666c80c18a4ca2"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame3534-pipelines-07.json",
+          "bytes": 5575233,
+          "sha256": "e762d7fa7e0288ced93296034d7c280b3fb80f702fc7c6bbfcc10ec20e91e507"
+        }
+      ]
+    }
+  ],
+  "implementation": [
+    {
+      "path": "tools/native_render/binding_manifest.py",
+      "bytes": 5231,
+      "sha256": "f669ec872db01d67429b25fb0ca6b529e9edeea51d118d7f38ddfc9463d7447c"
+    },
+    {
+      "path": "tools/test_native_render_binding_manifest.py",
+      "bytes": 4667,
+      "sha256": "29a2da866d302a063e6f0feb1161d14ee8118280032ecc32f3c50409da39d795"
+    }
+  ],
+  "validation": {
+    "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/face-final-regression.log",
+    "bytes": 728,
+    "sha256": "acd9ce1e47ab2c0299b4254044e9c3a6fc23e43cc344f225745a8ec79640cb37"
+  }
+}

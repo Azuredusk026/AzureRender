@@ -1,0 +1,22 @@
+{
+  "status": "failed",
+  "surfacePixels": {
+    "positive": 39244,
+    "mirror": 39244,
+    "double-mirror": 39244,
+    "baked-mirror": 39244,
+    "back": 0,
+    "double-sided-back": 39244,
+    "far": 0,
+    "far-clipped": 0,
+    "depth": 840
+  },
+  "visibilityMeanDifference": [
+    0.0,
+    0.0
+  ],
+  "validationErrors": 0,
+  "failures": [
+    "far surface clipped inside authored 500m range"
+  ]
+}

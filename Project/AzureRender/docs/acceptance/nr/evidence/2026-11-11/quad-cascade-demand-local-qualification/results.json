@@ -1,0 +1,120 @@
+{
+  "status": "isolated-below-native-admission",
+  "sourceBase": "73300ab",
+  "candidates": [
+    {
+      "candidate": "neighbor-upper-bound",
+      "allSixAttachmentsExact": true,
+      "sourceUnchanged": true,
+      "productsUnchanged": true,
+      "seconds": 103.14000000001397,
+      "scope": {
+        "allEventMs": {
+          "referenceMs": 13.372703999999924,
+          "candidateMs": 11.961103999999938,
+          "savedMs": 1.4115999999999858,
+          "reduction": 0.10555830742982075,
+          "share": 1.0,
+          "referenceDrift": 0.0006030194043013224
+        },
+        "matchedEventMs": {
+          "referenceMs": 9.83943999999996,
+          "candidateMs": 8.42171200000002,
+          "savedMs": 1.41772799999994,
+          "reduction": 0.14408624881090237,
+          "share": 0.7357853729507523,
+          "referenceDrift": 0.0026830795248518062
+        },
+        "mainEventMs": {
+          "referenceMs": 7.048016000000018,
+          "candidateMs": 6.236496000000017,
+          "savedMs": 0.8115200000000016,
+          "reduction": 0.11514162283400031,
+          "share": 0.5270449416961639,
+          "referenceDrift": 0.0020658295894908233
+        },
+        "ordinaryMainEventMs": {
+          "referenceMs": 3.6008800000000116,
+          "candidateMs": 3.4017600000000123,
+          "savedMs": 0.1991199999999993,
+          "reduction": 0.05529759392148548,
+          "share": 0.2692708968956489,
+          "referenceDrift": 0.0059096665259609086
+        },
+        "snapshotEventMs": {
+          "referenceMs": 2.791423999999998,
+          "candidateMs": 2.185215999999997,
+          "savedMs": 0.606208000000001,
+          "reduction": 0.21716801173881195,
+          "share": 0.20874043125459246,
+          "referenceDrift": 0.014673514306677135
+        }
+      },
+      "qualified": false
+    },
+    {
+      "candidate": "actual-blend-demand",
+      "allSixAttachmentsExact": true,
+      "sourceUnchanged": true,
+      "productsUnchanged": true,
+      "seconds": 104.59400000004098,
+      "scope": {
+        "allEventMs": {
+          "referenceMs": 13.391871999999925,
+          "candidateMs": 12.007007999999948,
+          "savedMs": 1.3848639999999772,
+          "reduction": 0.1034107852882693,
+          "share": 1.0,
+          "referenceDrift": 0.005863855329561421
+        },
+        "matchedEventMs": {
+          "referenceMs": 9.867791999999966,
+          "candidateMs": 8.48476800000002,
+          "savedMs": 1.3830239999999456,
+          "reduction": 0.1401553660636493,
+          "share": 0.7368493366722756,
+          "referenceDrift": 0.006664104796696818
+        },
+        "mainEventMs": {
+          "referenceMs": 7.076368000000017,
+          "candidateMs": 6.259616000000016,
+          "savedMs": 0.816752000000001,
+          "reduction": 0.11541966161171935,
+          "share": 0.5284076789264456,
+          "referenceDrift": 0.0023469666925164203
+        },
+        "ordinaryMainEventMs": {
+          "referenceMs": 3.596448000000014,
+          "candidateMs": 3.410224000000008,
+          "savedMs": 0.18622400000000594,
+          "reduction": 0.05177997846764504,
+          "share": 0.26855453815568386,
+          "referenceDrift": 0.004092927243769163
+        },
+        "snapshotEventMs": {
+          "referenceMs": 2.7914239999999992,
+          "candidateMs": 2.225151999999998,
+          "savedMs": 0.5662720000000014,
+          "reduction": 0.20286133528980244,
+          "share": 0.2084416577458338,
+          "referenceDrift": 0.017608217168012648
+        }
+      },
+      "qualified": false
+    }
+  ],
+  "materialPrograms": 10,
+  "materialDraws": 1006,
+  "capturedEvents": 3453,
+  "viewFieldsDynamic": true,
+  "targetEnvironment": "vulkan1.1",
+  "productionSourceChanges": 0,
+  "newNativeCandidateBatches": 0,
+  "protectedFilesExact": 13,
+  "deviceAndCaptureQualification": "ddc91d1",
+  "gates": {
+    "hotspotShare": 0.25,
+    "reduction": 0.2,
+    "alternativeGpuSavingMs": 3
+  }
+}

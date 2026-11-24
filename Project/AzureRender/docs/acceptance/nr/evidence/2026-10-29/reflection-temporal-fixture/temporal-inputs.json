@@ -1,0 +1,85 @@
+{
+  "status": "captured",
+  "textures": [
+    {
+      "event": 8732,
+      "resource": "ResourceId::15781",
+      "path": "current-confidence.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R8_UNORM",
+      "bytes": 921600,
+      "sha256": "dffe15783316e3129e0225d592ebbd05d22a1441d64547be0c845a60fe87cfd2"
+    },
+    {
+      "event": 8732,
+      "resource": "ResourceId::16508",
+      "path": "motion.bin",
+      "width": 2560,
+      "height": 1440,
+      "format": "R10G10B10A2_UNORM",
+      "bytes": 14745600,
+      "sha256": "5c114bb08d77d97949439fae4b43a9c62ff21636ca8a71768da408706ffb9549"
+    },
+    {
+      "event": 8732,
+      "resource": "ResourceId::16501",
+      "path": "surface-weight.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R16G16_UNORM",
+      "bytes": 3686400,
+      "sha256": "c2daded777b834dd8c3707dbbd4d2fd01724499262b096c2ac152d9b0e818bda"
+    },
+    {
+      "event": 8732,
+      "resource": "ResourceId::16396",
+      "path": "previous-confidence.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R8_UNORM",
+      "bytes": 921600,
+      "sha256": "2f0f076bff38ed54ca9edd1fcba7a887a4eb8a8f1adb4e70e8c7f05743e3d52d"
+    },
+    {
+      "event": 8732,
+      "resource": "ResourceId::16596",
+      "path": "temporal-confidence.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R8_UNORM",
+      "bytes": 921600,
+      "sha256": "0f45ba8b3561771b27887d28fb09342d827f2b58c4a39c9465382587d60232cc"
+    },
+    {
+      "event": 8741,
+      "resource": "ResourceId::15861",
+      "path": "current-color.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R11G11B10_FLOAT",
+      "bytes": 3686400,
+      "sha256": "d16077bceb536d0f622b05c8c6875b9e5f81ad4e2c62ebda2e2eaffbd25a5d69"
+    },
+    {
+      "event": 8741,
+      "resource": "ResourceId::16352",
+      "path": "previous-color.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R11G11B10_FLOAT",
+      "bytes": 3686400,
+      "sha256": "cbc4da684552bbd4ce07515897a8d153691b5873d3b2b437b8b6b063421f802a"
+    },
+    {
+      "event": 8741,
+      "resource": "ResourceId::16552",
+      "path": "temporal-color.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R11G11B10_FLOAT",
+      "bytes": 3686400,
+      "sha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272"
+    }
+  ]
+}

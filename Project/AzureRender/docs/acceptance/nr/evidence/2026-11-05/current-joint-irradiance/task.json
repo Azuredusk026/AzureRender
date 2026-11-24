@@ -1,0 +1,16 @@
+{
+  "state": "control-verified-final-quality-pending",
+  "startedUtc": "2026-11-05T03:06:06.828943+00:00",
+  "sourceCommit": "42e85a1",
+  "sourceProgramBase": "cd8d95d",
+  "totalMinutes": 30,
+  "hypothesis": "The current joint scene physically consumes the same irradiance volume as the backup; toggling only enabled must change physical surfaces.",
+  "onlyVariable": "irradianceVolume.enabled true to false",
+  "validation": "One fixed-step source-matched frame; unchanged camera, material, reflection and scene data; report physical-surface image differences without claiming final quality acceptance.",
+  "baseline": "snapshot-shell-order-regression/release-joint/frames/frame_000000.png",
+  "retryCondition": "New evidence or a source/consumer fix.",
+  "elapsedSeconds": 113.65600000001723,
+  "exitCode": 0,
+  "executableSha256": "f36ae780a645c69c680c46d7325b997a077350dd364a17bdcd74bb9191888cd4",
+  "finishedUtc": "2026-11-05T03:09:15.576097+00:00"
+}

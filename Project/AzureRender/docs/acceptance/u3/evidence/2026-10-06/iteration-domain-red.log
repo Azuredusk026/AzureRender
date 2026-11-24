@@ -1,0 +1,44 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 1: AzureEditor.EditService
+1/1 Test #1: AzureEditor.EditService ..........***Failed    0.27 sec
+[1791234080349][info][editor][code=0] Opened scene: test
+[1791234080349][info][editor][code=0] Opened scene: test
+[1791234080355][info][editor][code=0] Opened scene: test
+[1791234080367][info][editor][code=0] Opened scene: test
+[1791234080377][info][editor][code=0] Undo
+[1791234080381][info][editor][code=0] Undo
+[1791234080396][info][editor][code=0] Opened scene: test
+[1791234080407][info][editor][code=0] Play started
+[1791234080411][info][editor][code=0] ERROR: Operation requires an idle edit session
+[1791234080418][info][editor][code=0] Play stopped; edit state restored
+[1791234080424][info][editor][code=0] Opened scene: test
+[1791234080451][info][editor][code=0] Opened scene: test
+[1791234080463][info][editor][code=0] ERROR: Failure after mutation
+[1791234080471][info][editor][code=0] Opened scene: test
+[1791234080474][info][editor][code=0] ERROR: Duplicate or empty runtime node id
+[1791234080478][info][editor][code=0] Opened scene: test
+[1791234080480][info][editor][code=0] ERROR: Read-only operation modified the document
+[1791234080483][info][editor][code=0] Opened scene: test
+[1791234080488][info][editor][code=0] Opened scene: untitled
+[1791234080491][info][editor][code=0] Opened scene: test
+[1791234080492][info][editor][code=0] Selected node: Registered extension
+[1791234080500][info][editor][code=0] Opened scene: test
+[1791234080501][info][editor][code=0] Added node under: Registered extension
+[1791234080508][info][editor][code=0] Opened scene: test
+[1791234080509][info][editor][code=0] Selected node: New Node 1
+[1791234080518][info][editor][code=0] Opened scene: test
+[1791234080519][info][editor][code=0] Removed node (and descendants)
+[1791234080527][info][editor][code=0] Opened scene: test
+[1791234080531][info][editor][code=0] ERROR: Transform scale must have absolute magnitude at least 0.001
+[1791234080534][info][editor][code=0] Opened scene: test
+Candidate validation must reject lights referencing unknown nodes
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.27 sec
+
+The following tests FAILED:
+	  1 - AzureEditor.EditService (Failed)
+Errors while running CTest

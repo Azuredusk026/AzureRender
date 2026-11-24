@@ -1,0 +1,20 @@
+#version 450
+layout(local_size_x=128) in;
+layout(std430,binding=0) readonly buffer InputWords {uint words[];} source;
+layout(std430,binding=1) readonly buffer WorldPositions {vec4 values[];} positions;
+layout(std430,binding=2) writeonly buffer DepthKeys {uvec2 values[];} outputKeys;
+float value(uint at){return uintBitsToFloat(source.words[at]);}
+void main(){
+    uint index=gl_GlobalInvocationID.x;if(index>=source.words[3])return;
+    uint triangle=source.words[1]+index*6;
+    vec3 a=positions.values[source.words[triangle]].xyz;
+    vec3 b=positions.values[source.words[triangle+1]].xyz;
+    vec3 c=positions.values[source.words[triangle+2]].xyz;
+    precise vec3 center=((a+b)+c)*uintBitsToFloat(0x3eaaaaabu);
+    precise vec3 offset=center-vec3(value(4),value(5),value(6));
+    precise float x=offset.x*value(8),y=offset.y*value(9),z=offset.z*value(10);
+    precise float depth=(x+y)+z;
+    uint bits=depth==0.0?0u:floatBitsToUint(depth);
+    uint key=(bits&0x80000000u)!=0u?bits:(bits^0x7fffffffu);
+    outputKeys.values[index]=uvec2(key,index);
+}

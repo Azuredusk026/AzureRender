@@ -1,0 +1,751 @@
+{
+  "status": "scope-only-not-admitted",
+  "baseCommit": "3875360",
+  "fixtureLights": 16,
+  "scope": "Uniform cell weighting of frozen static fixture; not fragment invocation distribution or current whole-frame timing",
+  "productionChanged": false,
+  "nativeProcesses": 0,
+  "gpuTimingProcesses": 0,
+  "rows": [
+    {
+      "scale": 1,
+      "dimensions": [
+        16,
+        9,
+        24
+      ],
+      "cells": 3456,
+      "spatialReferences": 14291,
+      "packedReferences": 28192,
+      "initialAssignmentMs": 0.6796,
+      "twoSlotWorstCaseIndexBytes": 14155776,
+      "twoSlotHeaderBytes": 221184,
+      "slices": [
+        {
+          "slice": 0,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 1,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 2,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 3,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 4,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 5,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 6,
+          "receiverMeans": [
+            3.0,
+            3.0625,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 7,
+          "receiverMeans": [
+            3.05556,
+            3.25694,
+            4.05556,
+            1.0
+          ]
+        },
+        {
+          "slice": 8,
+          "receiverMeans": [
+            2.875,
+            2.38889,
+            3.875,
+            1.0
+          ]
+        },
+        {
+          "slice": 9,
+          "receiverMeans": [
+            3.125,
+            2.0,
+            4.125,
+            1.0
+          ]
+        },
+        {
+          "slice": 10,
+          "receiverMeans": [
+            2.95139,
+            2.0,
+            3.95139,
+            1.0
+          ]
+        },
+        {
+          "slice": 11,
+          "receiverMeans": [
+            2.49306,
+            2.0,
+            3.49306,
+            1.0
+          ]
+        },
+        {
+          "slice": 12,
+          "receiverMeans": [
+            1.8125,
+            2.0,
+            2.8125,
+            1.0
+          ]
+        },
+        {
+          "slice": 13,
+          "receiverMeans": [
+            1.22222,
+            2.0,
+            2.22222,
+            1.0
+          ]
+        },
+        {
+          "slice": 14,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 15,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 16,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 17,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 18,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 19,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 20,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 21,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 22,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 23,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        }
+      ],
+      "uniformReceiverMeans": [
+        2.022280416666667,
+        2.1128470833333335,
+        3.0222804166666664,
+        1.0
+      ],
+      "uniformReductionFractions": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "scale": 2,
+      "dimensions": [
+        32,
+        18,
+        48
+      ],
+      "cells": 27648,
+      "spatialReferences": 111226,
+      "packedReferences": 220258,
+      "initialAssignmentMs": 5.2412,
+      "twoSlotWorstCaseIndexBytes": 113246208,
+      "twoSlotHeaderBytes": 1769472,
+      "slices": [
+        {
+          "slice": 0,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 1,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 2,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 3,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 4,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 5,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 6,
+          "receiverMeans": [
+            3.0,
+            2.67882,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 7,
+          "receiverMeans": [
+            3.03038,
+            3.04514,
+            4.03038,
+            1.0
+          ]
+        },
+        {
+          "slice": 8,
+          "receiverMeans": [
+            2.7474,
+            2.18056,
+            3.7474,
+            1.0
+          ]
+        },
+        {
+          "slice": 9,
+          "receiverMeans": [
+            2.71701,
+            2.0,
+            3.71701,
+            1.0
+          ]
+        },
+        {
+          "slice": 10,
+          "receiverMeans": [
+            2.7092,
+            2.0,
+            3.7092,
+            1.0
+          ]
+        },
+        {
+          "slice": 11,
+          "receiverMeans": [
+            1.9349,
+            2.0,
+            2.9349,
+            1.0
+          ]
+        },
+        {
+          "slice": 12,
+          "receiverMeans": [
+            1.42882,
+            2.0,
+            2.42882,
+            1.0
+          ]
+        },
+        {
+          "slice": 13,
+          "receiverMeans": [
+            1.07812,
+            2.0,
+            2.07812,
+            1.0
+          ]
+        },
+        {
+          "slice": 14,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 15,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 16,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 17,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 18,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 19,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 20,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 21,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 22,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 23,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        }
+      ],
+      "uniformReceiverMeans": [
+        1.9435762500000002,
+        2.079355,
+        2.94357625,
+        1.0
+      ],
+      "uniformReductionFractions": [
+        0.03891852288041986,
+        0.01585163621046093,
+        0.02604131841395141,
+        0.0
+      ]
+    },
+    {
+      "scale": 4,
+      "dimensions": [
+        64,
+        36,
+        96
+      ],
+      "cells": 221184,
+      "spatialReferences": 879675,
+      "packedReferences": 1745464,
+      "initialAssignmentMs": 52.2198,
+      "twoSlotWorstCaseIndexBytes": 905969664,
+      "twoSlotHeaderBytes": 14155776,
+      "slices": [
+        {
+          "slice": 0,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 1,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 2,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 3,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 4,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 5,
+          "receiverMeans": [
+            3.0,
+            2.0,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 6,
+          "receiverMeans": [
+            3.0,
+            2.51649,
+            4.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 7,
+          "receiverMeans": [
+            2.99327,
+            2.90614,
+            3.99327,
+            1.0
+          ]
+        },
+        {
+          "slice": 8,
+          "receiverMeans": [
+            2.6811,
+            2.08409,
+            3.6811,
+            1.0
+          ]
+        },
+        {
+          "slice": 9,
+          "receiverMeans": [
+            2.52094,
+            2.0,
+            3.52094,
+            1.0
+          ]
+        },
+        {
+          "slice": 10,
+          "receiverMeans": [
+            2.62652,
+            2.0,
+            3.62652,
+            1.0
+          ]
+        },
+        {
+          "slice": 11,
+          "receiverMeans": [
+            1.8546,
+            2.0,
+            2.8546,
+            1.0
+          ]
+        },
+        {
+          "slice": 12,
+          "receiverMeans": [
+            1.23307,
+            2.0,
+            2.23307,
+            1.0
+          ]
+        },
+        {
+          "slice": 13,
+          "receiverMeans": [
+            1.03461,
+            2.0,
+            2.03461,
+            1.0
+          ]
+        },
+        {
+          "slice": 14,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 15,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 16,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 17,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 18,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 19,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 20,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 21,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 22,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        },
+        {
+          "slice": 23,
+          "receiverMeans": [
+            1.0,
+            2.0,
+            2.0,
+            1.0
+          ]
+        }
+      ],
+      "uniformReceiverMeans": [
+        1.9143379166666665,
+        2.06278,
+        2.9143379166666663,
+        1.0
+      ],
+      "uniformReductionFractions": [
+        0.05337662329634896,
+        0.023696501146853066,
+        0.03571558066046432,
+        0.0
+      ]
+    }
+  ],
+  "provenance": {
+    "input": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\slice_benchmark.cpp",
+    "sha256": "713b9b122baa2b2a199ac39a544b9bfc61ce75dc8bbd49750ae8f91155fc6b3c",
+    "gridHeaderSha256": "0ef9ceb7d00d88f364998b83cc9282d713e3e288894c64cd5f18025e80ab368d",
+    "scope": "Frozen 16-light static fixture; uniform cluster weighting, not actual fragment invocation weighting"
+  },
+  "retryTrigger": "Qualified actual fragment-weighted lamp visits and corresponding cost establish the hotspot reduction threshold",
+  "archiveSha256": "cd9e4b8e4fe3887d13ee49ecad5425fd744c542a9516000bcbead4eb1423e087"
+}

@@ -1,0 +1,31 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.DomainAuthoring
+1/2 Test #193: AzureEditor.DomainAuthoring ......   Passed    0.53 sec
+    Start 194: AzureEditor.AuthoringWorkflow
+2/2 Test #194: AzureEditor.AuthoringWorkflow ....***Failed    2.38 sec
+[1791584441131][info][editor][code=0] Opened scene: inspection
+[1791584441171][info][editor][code=0] ERROR [script.template]: Script destination already exists
+[1791584441174][info][editor][code=0] ERROR [script.template]: Unknown script authoring backend
+[1791584441178][info][editor][code=0] ERROR [script.template]: Project path escapes mount: ../outside.lua
+[1791584441182][info][editor][code=0] ERROR [script.template]: Script extension does not match backend
+[1791584441189][info][editor][code=0] Opened scene: inspection
+[1791584441208][info][editor][code=0] Opened scene: inspection
+[1791584442400][info][editor][code=0] Play started
+[1791584442420][info][editor][code=0] ERROR [script.reload]: Reload backend must match the active runtime
+[1791584442461][info][editor][code=0] Play stopped; edit state restored
+[1791584443315][info][editor][code=0] Play started
+[1791584443321][warning][script][code=0] 631c3018-bb21-4943-8730-857cbdf0d2e9: ...emp/azure-authoring-35247210628800/assets/Controller.lua:1: Authoring failure
+stack traceback:
+	[C]: in function 'base.error'
+	...emp/azure-authoring-35247210628800/assets/Controller.lua:1: in function <...emp/azure-authoring-35247210628800/assets/Controller.lua:1>
+Script failures enter structured problems
+
+
+50% tests passed, 1 tests failed out of 2
+
+Total Test time (real) =   2.92 sec
+
+The following tests FAILED:
+	194 - AzureEditor.AuthoringWorkflow (Failed)
+Errors while running CTest

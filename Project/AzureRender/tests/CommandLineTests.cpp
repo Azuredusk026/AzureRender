@@ -1,6 +1,7 @@
 #include "app/CommandLine.hpp"
 
 #include <cstdint>
+#include <cstdio>
 #include <initializer_list>
 #include <stdexcept>
 #include <string>
@@ -32,8 +33,101 @@ void expectError(
 
 }  // namespace
 
-int main() {
+int main() try {
+    require(!azurerender::parseCommandLine({}).options.gpuPassTimingEnabled,"Pass timing defaults off");
+    const auto passTiming=azurerender::parseCommandLine({"--gpu-pass-timing"});
+    require(passTiming.options.gpuPassTimingEnabled&&passTiming.options.gpuTimingEnabled,"Pass timing implies core timing");
+    require(!azurerender::parseCommandLine({}).options.qaDisableSurfaceRadianceReuse,"Radiance diagnostic defaults to off");
+    require(azurerender::parseCommandLine({"--qa-disable-surface-radiance"}).options.qaDisableSurfaceRadianceReuse,"Explicit complete shading control is preserved");
+    require(std::string(azurerender::commandLineHelp()).find("--qa-disable-surface-radiance")!=std::string::npos,"Radiance control is documented");
+    require(azurerender::parseCommandLine({"--qa-isolation","hair-kk","--qa-exposure","-4"}).options.qaIsolation=="hair-kk",
+        "Component isolation accepts explicit diagnostic exposure");
+    require(azurerender::parseCommandLine({"--qa-isolation","hair-kk","--qa-exposure","-4"}).options.qaExposureEv==-4.F,
+        "Diagnostic exposure retains its signed EV value");
+    require(azurerender::parseCommandLine({
+        "--qa-presentation", "showcase", "--qa-isolation", "albedo",
+        "--capture-dir", "frames", "--capture-frames", "1"
+    }).options.qaShowcasePresentation, "Showcase capture retains authored presentation");
+    expectError(CommandLineErrorCode::InvalidValue, "--qa-presentation", {
+        "--qa-presentation", "missing", "--qa-isolation", "albedo",
+        "--capture-dir", "frames", "--capture-frames", "1"});
+    expectError(CommandLineErrorCode::InvalidCombination, "--qa-presentation", {
+        "--qa-presentation", "showcase", "--qa-isolation", "albedo", "--qa-exposure", "-1",
+        "--capture-dir", "frames", "--capture-frames", "1"});
+    expectError(CommandLineErrorCode::InvalidCombination, "--qa-presentation", {
+        "--qa-presentation", "showcase", "--qa-isolation", "albedo"});
+    expectError(CommandLineErrorCode::InvalidCombination, "--qa-presentation", {
+        "--qa-presentation", "showcase", "--qa-isolation", "albedo", "--project", "game.azureproject",
+        "--capture-dir", "frames", "--capture-frames", "1"});
+    require(!azurerender::parseCommandLine({}).options.qaExposureEv,"Default diagnostic exposure remains implicit zero EV");
+    require(azurerender::parseCommandLine({"--qa-isolation","rim","--qa-exposure","0"}).options.qaExposureEv==0.F,
+        "Explicit zero diagnostic exposure is preserved");
+    require(azurerender::parseCommandLine({"--qa-isolation","specular","--qa-exposure","-8"}).options.qaExposureEv==-8.F
+        &&azurerender::parseCommandLine({"--qa-isolation","reflection","--qa-exposure","8"}).options.qaExposureEv==8.F,
+        "Both diagnostic exposure endpoints are accepted");
+    expectError(CommandLineErrorCode::MissingValue,"--qa-exposure",{"--qa-isolation","hair-kk","--qa-exposure"});
+    expectError(CommandLineErrorCode::InvalidValue,"--qa-exposure",{"--qa-isolation","hair-kk","--qa-exposure","nan"});
+    expectError(CommandLineErrorCode::InvalidValue,"--qa-exposure",{"--qa-isolation","hair-kk","--qa-exposure","9"});
+    expectError(CommandLineErrorCode::InvalidValue,"--qa-exposure",{"--qa-isolation","rim","--qa-exposure","-8.01"});
+    expectError(CommandLineErrorCode::InvalidValue,"--qa-exposure",{"--qa-isolation","rim","--qa-exposure","inf"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--qa-exposure",{"--qa-exposure","-4"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--qa-exposure",{"--qa-isolation","beauty","--qa-exposure","-4"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--qa-exposure",{"--qa-isolation","world-normal","--qa-exposure","-4"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--qa-exposure",{"--qa-isolation","hair-kk","--qa-effect","rim","--qa-effect-state","isolation","--qa-exposure","-4"});
+    require(azurerender::parseCommandLine({"--anti-aliasing","multisample"}).options.renderSettings.antiAliasing==4,
+        "Four-sample quality uses the production command line");
+    require(azurerender::parseCommandLine({"--anti-aliasing","temporal"}).options.renderSettings.antiAliasing==3,
+        "Native temporal sampling is available through the production command line");
+    const auto directProject=azurerender::parseCommandLine({"--project",u8"D:/用户项目/Monica.azureproject"});
+    require(directProject.options.editorMode && directProject.options.projectFile==u8"D:/用户项目/Monica.azureproject",
+        "Project shortcut must enter editor and preserve Unicode paths");
+    static_cast<void>(azurerender::parseCommandLine({"--editor-project","project.azureproject","--editor-close-policy","discard"}));
+    expectError(CommandLineErrorCode::InvalidValue,"--editor-close-policy",{"--editor-project","project.azureproject","--editor-close-policy","invalid"});
+    const auto development=azurerender::parseCommandLine({"--shader-reload","Shader config with spaces.json","--preview-views","Views with spaces.json"});
+    require(development.options.shaderReloadConfig=="Shader config with spaces.json" && development.options.previewViews=="Views with spaces.json",
+        "Developer configuration paths must preserve their bytes");
+    const auto ai=azurerender::parseCommandLine({"--editor-project","project.azureproject","--ai-python","Python with spaces/python.exe","--ai-config","model config.json"});
+    require(ai.options.aiPython=="Python with spaces/python.exe"&&ai.options.aiConfig=="model config.json","Model tool arguments must preserve paths");
+    expectError(CommandLineErrorCode::InvalidCombination,"--ai-config",{"--ai-config","config.json"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--ai-config/--ai-fixture",{"--editor-project","project.azureproject","--ai-config","config.json","--ai-fixture","fixed.json"});
+    const auto settings=azurerender::parseCommandLine({"--set","render.exposure=1.25","--settings-file","user settings.json","--default-settings","defaults.json","--project-settings","project.json"});
+    require(settings.options.settingOverrides.at("render.exposure")==1.25,"Typed setting value parsed");
+    require(settings.options.settingsFile=="user settings.json","Setting path preserved");
+    expectError(CommandLineErrorCode::InvalidValue,"--set",{"--set","missing-equals"});
+    expectError(CommandLineErrorCode::InvalidValue,"--set",{"--set","render.exposure=nan"});
+
+    const auto diagnostics=azurerender::parseCommandLine({"--qa-disable-face-culling", "--qa-disable-depth-test"});
+    require(diagnostics.options.qaDisableFaceCulling && diagnostics.options.qaDisableDepthTest,
+        "Independent material face and depth diagnostics must be accepted");
+    require(azurerender::parseCommandLine({"--qa-light-scan"}).options.qaLightScan,
+            "Fixed-camera light scanning must be accepted");
+    require(azurerender::parseCommandLine({"--qa-isolation", "brow-mask"}).options.qaIsolation == "brow-mask",
+            "Eyebrow region mask must be accepted");
+    for (const char* camera : {"face-three-quarter-left", "face-three-quarter-right",
+                              "face-side-left", "face-side-right"}) {
+        require(azurerender::parseCommandLine({"--qa-camera", camera}).options.qaCamera == camera,
+                "Character inspection camera must be accepted");
+    }
     const auto defaults = azurerender::parseCommandLine({});
+    const auto sceneDiagnostic=azurerender::parseCommandLine({"--qa-camera","scene","--qa-light","scene","--qa-isolation","beauty"});
+    require(sceneDiagnostic.options.qaCamera=="scene" && sceneDiagnostic.options.qaLight=="scene",
+            "Authored scene diagnostics must preserve camera and light selection");
+    for(const char* view:{"roughness","metallic","direct-specular","reflection","shaded-normal","object-shadow-visibility"})
+        require(azurerender::parseCommandLine({"--qa-isolation",view}).options.qaIsolation==view,
+                "Surface and lighting components must be selectable independently");
+    require(!defaults.options.pipelineInspectionDisabled,
+            "Supported pipeline inspection must default to enabled");
+    require(!azurerender::parseCommandLine({}).options.pipelineStatistics,
+            "Compile statistics must be opt-in");
+    require(azurerender::parseCommandLine({"--pipeline-statistics"}).options.pipelineStatistics,
+            "Compile statistics flag must be preserved");
+    require(azurerender::parseCommandLine({"--disable-pipeline-inspection"}).options.pipelineInspectionDisabled,
+            "Pipeline inspection diagnostic switch was not parsed");
+    require(!defaults.options.visibilityPrototype,"Visibility prototype must be optional");
+    require(azurerender::parseCommandLine({"--visibility-prototype"}).options.visibilityPrototype,
+            "Visibility prototype switch was not parsed");
+    require(!defaults.options.qaDisableFaceCulling && !defaults.options.qaDisableDepthTest,
+        "Face culling and depth must be enabled by default");
     require(azurerender::parseCommandLine({"--disable-multi-draw-indirect"}).options.multiDrawIndirectDisabled,
             "Single indirect command fallback was not parsed");
     require(azurerender::parseCommandLine({"--fixed-frame-step"}).options.fixedFrameStep,
@@ -147,6 +241,8 @@ int main() {
         "Over-shoulder blackhole camera was not parsed");
     expectError(CommandLineErrorCode::InvalidValue, "--blackhole-quality",
         {"--blackhole-quality", "ultra"});
+    require(azurerender::parseCommandLine({"--qa-animation"}).options.qaAnimation,
+            "Fixed-camera animation playback must be accepted");
     expectError(
         CommandLineErrorCode::InvalidValue,
         "--scene-type",
@@ -225,4 +321,7 @@ int main() {
         std::string(azurerender::commandLineUsage()).find("Usage:") == 0,
         "Usage contract is missing");
     return 0;
+} catch (const std::exception& error) {
+    std::fprintf(stderr, "%s\n", error.what());
+    return 1;
 }

@@ -1,0 +1,731 @@
+{
+  "status": "qualified-eyebrow-receiver-producer",
+  "overall": "failed-user-review",
+  "comparison": {
+    "nativeEvent": 296,
+    "hostEvent": 267,
+    "coverage": {
+      "nativePoints": 496,
+      "latestFailures": 140,
+      "hostDrawWrites": {
+        "all": 496,
+        "failed": 140
+      },
+      "hostDrawMissing": {
+        "all": 0,
+        "failed": 0
+      },
+      "hostDrawDepthRetained": {
+        "all": 361,
+        "failed": 24
+      },
+      "hostDrawNormalRetained": {
+        "all": 361,
+        "failed": 24
+      },
+      "hostDepthChangesSinceCapture": {
+        "all": 29,
+        "failed": 23
+      },
+      "hostNormalChangesSinceCapture": {
+        "all": 0,
+        "failed": 0
+      },
+      "intelFailures": 139,
+      "intelAtHostHairPoints": 116,
+      "depthOver64UlpAtHostHairPoints": 116,
+      "hostDepthOwner": {
+        "267": {
+          "all": 361,
+          "failed": 24
+        },
+        "274": {
+          "all": 135,
+          "failed": 116
+        }
+      },
+      "hostNormalOwner": {
+        "267": {
+          "all": 361,
+          "failed": 24
+        },
+        "274": {
+          "all": 135,
+          "failed": 116
+        }
+      }
+    },
+    "geometry": {
+      "nativeVertices": 578,
+      "hostVertices": 578,
+      "matchedUv": 578,
+      "indexedCorners": 1878,
+      "pairedVertices": 578,
+      "hostTriangleCornerOrder": [
+        2,
+        1,
+        0
+      ],
+      "hostUvFloatOffset": 12,
+      "nativeUvOrientation": "1-v",
+      "projection": {
+        "direct": {
+          "pixelMedian": 928.5547042036167,
+          "pixelP95": 948.4789804447171,
+          "pixelMaximum": 953.2467765636874,
+          "depthMedian": 0.0,
+          "depthMaximum": 2.316848764921664e-09
+        },
+        "invertedY": {
+          "pixelMedian": 0.0,
+          "pixelP95": 3.344907859093027e-05,
+          "pixelMaximum": 8.677269327073134e-05,
+          "depthMedian": 0.0,
+          "depthMaximum": 2.316848764921664e-09
+        }
+      }
+    }
+  },
+  "nativeAndPlayerReplay": {
+    "status": "qualified",
+    "captures": {
+      "native": {
+        "api": "GraphicsAPI.D3D11",
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "event": 296,
+        "beforeEvent": 276,
+        "finalEvent": 699,
+        "indexCount": 1878,
+        "depthResource": "ResourceId::141967",
+        "normalResource": "ResourceId::141952",
+        "programs": {
+          "vertex": {
+            "shaderSha256": "bee21d747a5ee3abea06b5db3535165471eea079222993a339377fe5e28b2a8e",
+            "assembly": {
+              "path": "native-vertex.asm",
+              "bytes": 9264,
+              "sha256": "6f408fb5f575fbc4e5c39fa5c1a03c7242750a7771adedc1f551a797df73fa1a",
+              "rawBytes": 9264,
+              "rawSha256": "6f408fb5f575fbc4e5c39fa5c1a03c7242750a7771adedc1f551a797df73fa1a"
+            }
+          },
+          "pixel": {
+            "shaderSha256": "207e55c4830c804557a1e732cea6f8e5573c0c231ef0f55964f56771f4d09a5f",
+            "assembly": {
+              "path": "native-pixel.asm",
+              "bytes": 2876,
+              "sha256": "6de6795dffe1caaacbd0271c0ee99a2d5ac9fd1c3d3c8f46a4a55e0748ab52d4",
+              "rawBytes": 2876,
+              "rawSha256": "6de6795dffe1caaacbd0271c0ee99a2d5ac9fd1c3d3c8f46a4a55e0748ab52d4"
+            }
+          }
+        },
+        "postVs": {
+          "vertices": 578,
+          "stride": 76,
+          "indexStride": 2,
+          "baseVertex": 0,
+          "signature": [
+            {
+              "name": "SV_Position",
+              "index": 0,
+              "count": 4,
+              "system": "ShaderBuiltin.Position",
+              "register": 0
+            },
+            {
+              "name": "TEXCOORD",
+              "index": 0,
+              "count": 2,
+              "system": "ShaderBuiltin.Undefined",
+              "register": 1
+            },
+            {
+              "name": "TEXCOORD",
+              "index": 1,
+              "count": 3,
+              "system": "ShaderBuiltin.Undefined",
+              "register": 2
+            },
+            {
+              "name": "TEXCOORD",
+              "index": 2,
+              "count": 3,
+              "system": "ShaderBuiltin.Undefined",
+              "register": 3
+            },
+            {
+              "name": "TEXCOORD",
+              "index": 3,
+              "count": 3,
+              "system": "ShaderBuiltin.Undefined",
+              "register": 4
+            },
+            {
+              "name": "TEXCOORD",
+              "index": 4,
+              "count": 3,
+              "system": "ShaderBuiltin.Undefined",
+              "register": 5
+            },
+            {
+              "name": "TEXCOORD",
+              "index": 5,
+              "count": 1,
+              "system": "ShaderBuiltin.Undefined",
+              "register": 6
+            }
+          ],
+          "vertexData": {
+            "path": "native-vertices.zlib",
+            "bytes": 30001,
+            "sha256": "dca42915cbaf5e976572d314fdbfc0ce5033437e2f66f579d94708473a353a9d",
+            "rawBytes": 43928,
+            "rawSha256": "d1d4cba8512bf833740797354df2acad789e8b27a20cf15088e4508da0f990ab"
+          },
+          "indexData": {
+            "path": "native-indices.zlib",
+            "bytes": 2034,
+            "sha256": "2e4e58792e3442b35e8f2ac27854f5c494c99240f12edf9b47bd5e6c455ce356",
+            "rawBytes": 3756,
+            "rawSha256": "766f1f03fb960dfc907ccf30c8cc0ff9f6a84a226520db8e1a6768a8d0dbc470"
+          }
+        },
+        "before": {
+          "depth": {
+            "fullSha256": "defe5059e4a7b5c797a007fa8428d93cf7586359b5d78c6c9c1a4a8586ea7a2a",
+            "crop": {
+              "path": "native-276-depth.zlib",
+              "bytes": 371,
+              "sha256": "87b69c698bab717e1401a1a6755c5876aa1c16605489db10cd58167601a32ce0",
+              "rawBytes": 359600,
+              "rawSha256": "9d36cb747aea24f68fcb28db078905d59d49106ac76dc97a126e50fc4ee49a5f"
+            }
+          },
+          "normal": {
+            "fullSha256": "defe5059e4a7b5c797a007fa8428d93cf7586359b5d78c6c9c1a4a8586ea7a2a",
+            "crop": {
+              "path": "native-276-normal.zlib",
+              "bytes": 371,
+              "sha256": "87b69c698bab717e1401a1a6755c5876aa1c16605489db10cd58167601a32ce0",
+              "rawBytes": 359600,
+              "rawSha256": "9d36cb747aea24f68fcb28db078905d59d49106ac76dc97a126e50fc4ee49a5f"
+            }
+          }
+        },
+        "after": {
+          "depth": {
+            "fullSha256": "f4fedc2648190441a00491eb28caa087d5a851fdd284720a57472061931a40f1",
+            "crop": {
+              "path": "native-296-depth.zlib",
+              "bytes": 2373,
+              "sha256": "803f0abb3d06ea577a50fcaa1ea6200db0fdc30a042213c20eed7d1bb4a1a0c9",
+              "rawBytes": 359600,
+              "rawSha256": "afe8186534890812ea4e18dfe81741490fc662a411d034a9239387828faa0ded"
+            }
+          },
+          "normal": {
+            "fullSha256": "54671ea142d909c181cb648bfadd7827aaecfd4e4b15b598c6cedc2700dbfbd1",
+            "crop": {
+              "path": "native-296-normal.zlib",
+              "bytes": 2245,
+              "sha256": "2f0b4df96714a05c3c1cd813cda7b372ae4891bbf0b8d1fe928a8f4f6fcb1a6c",
+              "rawBytes": 359600,
+              "rawSha256": "13589bf6bcfb6286ae4e26aad0b246b99a2943a9bce69c153c847c6ad8618cf4"
+            }
+          }
+        },
+        "final": {
+          "depth": {
+            "fullSha256": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+            "crop": {
+              "path": "native-699-depth.zlib",
+              "bytes": 270156,
+              "sha256": "511a07cfdfb6999d09575290403c0bce5a2752fde796d2099dd1b7d939ca23f8",
+              "rawBytes": 359600,
+              "rawSha256": "82d498977598bd654ad835438c3d5d6e6ff9b174be3c53fd27dfe891fa5b1331"
+            }
+          },
+          "normal": {
+            "fullSha256": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+            "crop": {
+              "path": "native-699-normal.zlib",
+              "bytes": 174056,
+              "sha256": "77131f7d50c290b62b459c1b5834fa03bb404f657548f158531ef7e561c2f6d2",
+              "rawBytes": 359600,
+              "rawSha256": "87390f640f8663e86f18a91fe08069b0675cce775eaa6fe2ca78d2df87191d7e"
+            }
+          }
+        },
+        "writers": {},
+        "messages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      "player": {
+        "api": "GraphicsAPI.Vulkan",
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "event": 267,
+        "beforeEvent": 264,
+        "finalEvent": 340,
+        "indexCount": 1878,
+        "depthResource": "ResourceId::1137",
+        "normalResource": "ResourceId::1143",
+        "programs": {
+          "vertex": {
+            "shaderSha256": "8e95d733a9e3584c71151752e7023190a78a8e3e6d4aa5c74dcaf20d589a772a",
+            "assembly": {
+              "path": "player-vertex.asm",
+              "bytes": 40083,
+              "sha256": "05cacf8652f6e6973e4ac19a38ac8b87cd5988f4a6a9cefbe017b70d6e78b37c",
+              "rawBytes": 40083,
+              "rawSha256": "05cacf8652f6e6973e4ac19a38ac8b87cd5988f4a6a9cefbe017b70d6e78b37c"
+            }
+          },
+          "pixel": {
+            "shaderSha256": "44339ad2968138ca483ed095f56c2fdfdc40620ef634e82a4d0134d32f70751b",
+            "assembly": {
+              "path": "player-pixel.asm",
+              "bytes": 19739,
+              "sha256": "e6a5183858fb8c6e0990efff6e2a36a14fe289e9a7b73aacbb58c5a642cb24d1",
+              "rawBytes": 19739,
+              "rawSha256": "e6a5183858fb8c6e0990efff6e2a36a14fe289e9a7b73aacbb58c5a642cb24d1"
+            }
+          }
+        },
+        "postVs": {
+          "vertices": 578,
+          "stride": 96,
+          "indexStride": 4,
+          "baseVertex": 0,
+          "signature": [
+            {
+              "name": "",
+              "index": 0,
+              "count": 4,
+              "system": "ShaderBuiltin.Position",
+              "register": 0
+            },
+            {
+              "name": "",
+              "index": 0,
+              "count": 3,
+              "system": "ShaderBuiltin.Undefined",
+              "register": 0
+            },
+            {
+              "name": "",
+              "index": 0,
+              "count": 4,
+              "system": "ShaderBuiltin.Undefined",
+              "register": 1
+            },
+            {
+              "name": "",
+              "index": 0,
+              "count": 2,
+              "system": "ShaderBuiltin.Undefined",
+              "register": 2
+            },
+            {
+              "name": "",
+              "index": 0,
+              "count": 3,
+              "system": "ShaderBuiltin.Undefined",
+              "register": 3
+            },
+            {
+              "name": "",
+              "index": 0,
+              "count": 3,
+              "system": "ShaderBuiltin.Undefined",
+              "register": 14
+            },
+            {
+              "name": "",
+              "index": 0,
+              "count": 1,
+              "system": "ShaderBuiltin.Undefined",
+              "register": 15
+            }
+          ],
+          "vertexData": {
+            "path": "player-vertices.zlib",
+            "bytes": 30596,
+            "sha256": "905a80769c3bd44cf3610c6a0171861095b8aa071a462e89f3a99d043f329d4f",
+            "rawBytes": 55488,
+            "rawSha256": "ee027db3acf89461cca6b474c362025c3e6f76d4b698843daab74e3af8a9da50"
+          },
+          "indexData": {
+            "path": "player-indices.zlib",
+            "bytes": 2079,
+            "sha256": "64696094c7f157266d753080dcd3ded0741f23bf8361dfa94f23e5bc31ecb443",
+            "rawBytes": 7512,
+            "rawSha256": "70daa89914df92c73661cdf909120ea5b40fd7d491ff7b81b76b43b5f84e80da"
+          }
+        },
+        "before": {
+          "depth": {
+            "fullSha256": "d233ea2b0a4e60d880ba04409acbf53c69787d244cb22257dd3b1417db6f23ca",
+            "crop": {
+              "path": "player-264-depth.zlib",
+              "bytes": 112447,
+              "sha256": "16d10dbc8c05e9d094afd04fc3b28f075efb4f394b7789968168ec918a20f902",
+              "rawBytes": 359600,
+              "rawSha256": "4b27059678071b7d0e20b38a0d2fe60eeb00ab56cb28bc0d601ff89d05bd15d5"
+            }
+          },
+          "normal": {
+            "fullSha256": "4defc257c541b78c5ae5a5f54c2eabb9beb91fce6efef00f876c4ad2772f2a7a",
+            "crop": {
+              "path": "player-264-normal.zlib",
+              "bytes": 109395,
+              "sha256": "b3171c76efdb306eb0b984a611a29860b767f7197fbda0bff2c7840e56323eae",
+              "rawBytes": 359600,
+              "rawSha256": "8ec474281a5851968b1203e4112233ce63fce945b064c460ec6725e40cbcfa6a"
+            }
+          }
+        },
+        "after": {
+          "depth": {
+            "fullSha256": "89d1fc50d5fcafa38ee075241b7fb12c6d13e9e4ab566162e0a1cae61cee0c45",
+            "crop": {
+              "path": "player-267-depth.zlib",
+              "bytes": 112678,
+              "sha256": "72a60d6aa07210b90abde3f291f1dec1247c640fcf6be84e3567520e1f54322e",
+              "rawBytes": 359600,
+              "rawSha256": "455f338fa8cc9e206104be9962752453ac774326c370d82ef48ffcd36bfe33c0"
+            }
+          },
+          "normal": {
+            "fullSha256": "e8a421df0a885be62aefe812aa887d3d7025a80efc971a927b12373c235628b5",
+            "crop": {
+              "path": "player-267-normal.zlib",
+              "bytes": 109413,
+              "sha256": "93e88f6a6347ed5a7aba29a55b03e5d182d351f92ec7cecfcf8f5f9307cec2bf",
+              "rawBytes": 359600,
+              "rawSha256": "789e2b8995bf77ba79fb2cd28182bd73294857e47065ad8a7e8dc1ad98f0450f"
+            }
+          }
+        },
+        "final": {
+          "depth": {
+            "fullSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+            "crop": {
+              "path": "player-340-depth.zlib",
+              "bytes": 154536,
+              "sha256": "f759ea84c40a10de690d5b12441df088ae77db177226fe089356cbfbfdd3a0c1",
+              "rawBytes": 359600,
+              "rawSha256": "f08e03c5b1e5a43033609c55e80332d469318018e3b51236fb1c24119d862b32"
+            }
+          },
+          "normal": {
+            "fullSha256": "cbe0d3780970ca90e61aecb34b4e890ddfa3d9d89aec0aafaabf29c6f4ed12e5",
+            "crop": {
+              "path": "player-340-normal.zlib",
+              "bytes": 149144,
+              "sha256": "fcf0134d021c476ec7159117851d83479ee11a9ce5b45c080ad7cc4890d53e28",
+              "rawBytes": 359600,
+              "rawSha256": "401244d8149000a14ae20cf1be979aaed2796ea748ef8a608607e1e4a554cff5"
+            }
+          }
+        },
+        "writers": {
+          "252": {
+            "indices": 17037,
+            "planes": {
+              "depth": {
+                "fullSha256": "32a3acdc7279dd58775a0b403f4c71aae7aec30129aa8d0268d038fd3ba48bf7",
+                "crop": {
+                  "path": "player-252-depth.zlib",
+                  "bytes": 86057,
+                  "sha256": "a2b5f25ac8fe813be032ad0d8d135d39abecec692896f7404752111f250ff118",
+                  "rawBytes": 359600,
+                  "rawSha256": "5cdcde4f9160899d6af48e777c554788cc11b21663e91687a3694cb871dac349"
+                }
+              },
+              "normal": {
+                "fullSha256": "59fc1f65f398bb8898f7b151eed70c5b925f0a7110237b769af99e9971649478",
+                "crop": {
+                  "path": "player-252-normal.zlib",
+                  "bytes": 82413,
+                  "sha256": "2f8296a17207d9571bd41172f40f16359bfd02eddd4bebd2238a15588a87e970",
+                  "rawBytes": 359600,
+                  "rawSha256": "55d504e1c8b9bb79e41c01f8fb417ec5f1e1f39e035f638de7da1eedef638aa8"
+                }
+              }
+            }
+          },
+          "255": {
+            "indices": 102927,
+            "planes": {
+              "depth": {
+                "fullSha256": "c0d9bf6d41e98d485585429a93acd9844e6f0bb4b8f87b4c24b7c971a6c77e9c",
+                "crop": {
+                  "path": "player-255-depth.zlib",
+                  "bytes": 112447,
+                  "sha256": "16d10dbc8c05e9d094afd04fc3b28f075efb4f394b7789968168ec918a20f902",
+                  "rawBytes": 359600,
+                  "rawSha256": "4b27059678071b7d0e20b38a0d2fe60eeb00ab56cb28bc0d601ff89d05bd15d5"
+                }
+              },
+              "normal": {
+                "fullSha256": "c194262034604dee1b8081b796c74017cc03b655dc6f7b442f74e73a41ae5ebd",
+                "crop": {
+                  "path": "player-255-normal.zlib",
+                  "bytes": 109395,
+                  "sha256": "b3171c76efdb306eb0b984a611a29860b767f7197fbda0bff2c7840e56323eae",
+                  "rawBytes": 359600,
+                  "rawSha256": "8ec474281a5851968b1203e4112233ce63fce945b064c460ec6725e40cbcfa6a"
+                }
+              }
+            }
+          },
+          "258": {
+            "indices": 61923,
+            "planes": {
+              "depth": {
+                "fullSha256": "135fb7b2f9fd85096e758bd019c155c4ea5338db9026e3ada3d62e5a50c47c79",
+                "crop": {
+                  "path": "player-258-depth.zlib",
+                  "bytes": 112447,
+                  "sha256": "16d10dbc8c05e9d094afd04fc3b28f075efb4f394b7789968168ec918a20f902",
+                  "rawBytes": 359600,
+                  "rawSha256": "4b27059678071b7d0e20b38a0d2fe60eeb00ab56cb28bc0d601ff89d05bd15d5"
+                }
+              },
+              "normal": {
+                "fullSha256": "2457f7e1f56d6bb50ae6d8f4d84e45ecc63f8eaea3af23b2f08cdb506320bda4",
+                "crop": {
+                  "path": "player-258-normal.zlib",
+                  "bytes": 109395,
+                  "sha256": "b3171c76efdb306eb0b984a611a29860b767f7197fbda0bff2c7840e56323eae",
+                  "rawBytes": 359600,
+                  "rawSha256": "8ec474281a5851968b1203e4112233ce63fce945b064c460ec6725e40cbcfa6a"
+                }
+              }
+            }
+          },
+          "261": {
+            "indices": 7698,
+            "planes": {
+              "depth": {
+                "fullSha256": "5d3082d447a1d5347699e9d32f1710842538402733faf23401f8d5ed5b77afdd",
+                "crop": {
+                  "path": "player-261-depth.zlib",
+                  "bytes": 112447,
+                  "sha256": "16d10dbc8c05e9d094afd04fc3b28f075efb4f394b7789968168ec918a20f902",
+                  "rawBytes": 359600,
+                  "rawSha256": "4b27059678071b7d0e20b38a0d2fe60eeb00ab56cb28bc0d601ff89d05bd15d5"
+                }
+              },
+              "normal": {
+                "fullSha256": "f4d894320d77fec04404548c5a229e125bb709d368bc64ddf2c71e41bb4130ce",
+                "crop": {
+                  "path": "player-261-normal.zlib",
+                  "bytes": 109395,
+                  "sha256": "b3171c76efdb306eb0b984a611a29860b767f7197fbda0bff2c7840e56323eae",
+                  "rawBytes": 359600,
+                  "rawSha256": "8ec474281a5851968b1203e4112233ce63fce945b064c460ec6725e40cbcfa6a"
+                }
+              }
+            }
+          },
+          "264": {
+            "indices": 21489,
+            "planes": {
+              "depth": {
+                "fullSha256": "d233ea2b0a4e60d880ba04409acbf53c69787d244cb22257dd3b1417db6f23ca",
+                "crop": {
+                  "path": "player-264-depth.zlib",
+                  "bytes": 112447,
+                  "sha256": "16d10dbc8c05e9d094afd04fc3b28f075efb4f394b7789968168ec918a20f902",
+                  "rawBytes": 359600,
+                  "rawSha256": "4b27059678071b7d0e20b38a0d2fe60eeb00ab56cb28bc0d601ff89d05bd15d5"
+                }
+              },
+              "normal": {
+                "fullSha256": "4defc257c541b78c5ae5a5f54c2eabb9beb91fce6efef00f876c4ad2772f2a7a",
+                "crop": {
+                  "path": "player-264-normal.zlib",
+                  "bytes": 109395,
+                  "sha256": "b3171c76efdb306eb0b984a611a29860b767f7197fbda0bff2c7840e56323eae",
+                  "rawBytes": 359600,
+                  "rawSha256": "8ec474281a5851968b1203e4112233ce63fce945b064c460ec6725e40cbcfa6a"
+                }
+              }
+            }
+          },
+          "267": {
+            "indices": 1878,
+            "planes": {
+              "depth": {
+                "fullSha256": "89d1fc50d5fcafa38ee075241b7fb12c6d13e9e4ab566162e0a1cae61cee0c45",
+                "crop": {
+                  "path": "player-267-depth.zlib",
+                  "bytes": 112678,
+                  "sha256": "72a60d6aa07210b90abde3f291f1dec1247c640fcf6be84e3567520e1f54322e",
+                  "rawBytes": 359600,
+                  "rawSha256": "455f338fa8cc9e206104be9962752453ac774326c370d82ef48ffcd36bfe33c0"
+                }
+              },
+              "normal": {
+                "fullSha256": "e8a421df0a885be62aefe812aa887d3d7025a80efc971a927b12373c235628b5",
+                "crop": {
+                  "path": "player-267-normal.zlib",
+                  "bytes": 109413,
+                  "sha256": "93e88f6a6347ed5a7aba29a55b03e5d182d351f92ec7cecfcf8f5f9307cec2bf",
+                  "rawBytes": 359600,
+                  "rawSha256": "789e2b8995bf77ba79fb2cd28182bd73294857e47065ad8a7e8dc1ad98f0450f"
+                }
+              }
+            }
+          },
+          "270": {
+            "indices": 8718,
+            "planes": {
+              "depth": {
+                "fullSha256": "e298ee3c446ff3653952f13617de23403e99a6f6528c14711d4ef78756dfd5a0",
+                "crop": {
+                  "path": "player-270-depth.zlib",
+                  "bytes": 120430,
+                  "sha256": "74893c70fc06af52864dd14c57f939f31e4836897a3bc05ceaf410c53e234500",
+                  "rawBytes": 359600,
+                  "rawSha256": "bc355a19459723691088aa4f17469b33570f9cf25ef46363ec86bc02907cfb25"
+                }
+              },
+              "normal": {
+                "fullSha256": "6aff1e2e7b2d5220b846060072a76263251fde108cc8b69ab5316f6391937bc8",
+                "crop": {
+                  "path": "player-270-normal.zlib",
+                  "bytes": 116591,
+                  "sha256": "0c647d1bf383ecddeee55908b9019744b66b66a4b7e69861a22328a28e1b3d95",
+                  "rawBytes": 359600,
+                  "rawSha256": "51fcec0029aac0a86555216ecd3595d0b072da4dd33c396b87373e172e38295d"
+                }
+              }
+            }
+          },
+          "274": {
+            "indices": 43044,
+            "planes": {
+              "depth": {
+                "fullSha256": "48a95e2d02d4d724df2093b1c2d1cd7d1ee7d2035a67b4666b0c8cbc4c0c2597",
+                "crop": {
+                  "path": "player-274-depth.zlib",
+                  "bytes": 154549,
+                  "sha256": "05f6525a14592cf82ee6afbf0febf13e9989bdad2cfc5981e674cb69644ff0cf",
+                  "rawBytes": 359600,
+                  "rawSha256": "a9f50c65ade59c427dd2b5da3467fe55b2ee1314b9ed89773fec686899994dc6"
+                }
+              },
+              "normal": {
+                "fullSha256": "04752bd6b88e9a7b63c7bfc61aa49c9a31789e8b3077483303e8e83712192894",
+                "crop": {
+                  "path": "player-274-normal.zlib",
+                  "bytes": 149630,
+                  "sha256": "ce315cf4e6107710d93a4ad6c00a27530072bb734bebc83a73030a47f5eee894",
+                  "rawBytes": 359600,
+                  "rawSha256": "bbd48c169be33e7d50dcf041b495e46f3e23b882d91590bc4598f532d9e99386"
+                }
+              }
+            }
+          },
+          "278": {
+            "indices": 948,
+            "planes": {
+              "depth": {
+                "fullSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+                "crop": {
+                  "path": "player-278-depth.zlib",
+                  "bytes": 154536,
+                  "sha256": "f759ea84c40a10de690d5b12441df088ae77db177226fe089356cbfbfdd3a0c1",
+                  "rawBytes": 359600,
+                  "rawSha256": "f08e03c5b1e5a43033609c55e80332d469318018e3b51236fb1c24119d862b32"
+                }
+              },
+              "normal": {
+                "fullSha256": "cbe0d3780970ca90e61aecb34b4e890ddfa3d9d89aec0aafaabf29c6f4ed12e5",
+                "crop": {
+                  "path": "player-278-normal.zlib",
+                  "bytes": 149144,
+                  "sha256": "fcf0134d021c476ec7159117851d83479ee11a9ce5b45c080ad7cc4890d53e28",
+                  "rawBytes": 359600,
+                  "rawSha256": "401244d8149000a14ae20cf1be979aaed2796ea748ef8a608607e1e4a554cff5"
+                }
+              }
+            }
+          }
+        },
+        "messages": []
+      }
+    }
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 13.077999999979511,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-B",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-103417-eyebrow-receiver-producer-1f8f43\\replay.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-103417-eyebrow-receiver-producer-1f8f43\\tmp"
+  },
+  "archive": {
+    "bytes": 2962937,
+    "sha256": "bcf52394d7c6a67c4d5529f24e74ffe49751ed41d617f838eff12efd1aac5c21",
+    "contents": {
+      "run/task-card.json": "39be35919d6390f582f19ff36d18249656fb888e2c104d0383fc05d9f04bdca6",
+      "run/replay.py": "7942ce3d1c337e0fa23e7b18011ff844611e804742c9341731027fbe71851d5e",
+      "run/replay-worker.py": "b7d86bca2ef5f7a838df96529ffc3240ee4f915fa67b38f38acd1823127fd059",
+      "run/queued-replay.py": "f0d1ebc878193bb0ab707ba773d30353857df230dbe9c1b9c874ce78738a38dc",
+      "run/replay-execution.json": "850142e74133ec1b92d010b7433f529406a1e0c1c70c7a661b605116205da744",
+      "run/analyze.py": "e4a10b02434922872bb87cf36c56533ba06b90c110831ab237169bad04a7fbac",
+      "run/package-evidence.py": "3bb7e0ce48c7f82802de7f06f0ae4f7c069563316a718492fce1e83556ae67e0",
+      "run/eyebrow-producer-comparison.json": "a99a92427dbeea8da1400bb80834ff3bd7e1545a8e6c928c56aafaf8caab1501",
+      "run/source-replay/command.json": "92fe2ae64430cc367f4a2ebe860124cfe18a4011686ba122e99b28aaee2e3b27",
+      "run/source-replay/native-276-depth.zlib": "87b69c698bab717e1401a1a6755c5876aa1c16605489db10cd58167601a32ce0",
+      "run/source-replay/native-276-normal.zlib": "87b69c698bab717e1401a1a6755c5876aa1c16605489db10cd58167601a32ce0",
+      "run/source-replay/native-296-depth.zlib": "803f0abb3d06ea577a50fcaa1ea6200db0fdc30a042213c20eed7d1bb4a1a0c9",
+      "run/source-replay/native-296-normal.zlib": "2f0b4df96714a05c3c1cd813cda7b372ae4891bbf0b8d1fe928a8f4f6fcb1a6c",
+      "run/source-replay/native-699-depth.zlib": "511a07cfdfb6999d09575290403c0bce5a2752fde796d2099dd1b7d939ca23f8",
+      "run/source-replay/native-699-normal.zlib": "77131f7d50c290b62b459c1b5834fa03bb404f657548f158531ef7e561c2f6d2",
+      "run/source-replay/native-indices.zlib": "2e4e58792e3442b35e8f2ac27854f5c494c99240f12edf9b47bd5e6c455ce356",
+      "run/source-replay/native-pixel.asm": "6de6795dffe1caaacbd0271c0ee99a2d5ac9fd1c3d3c8f46a4a55e0748ab52d4",
+      "run/source-replay/native-vertex.asm": "6f408fb5f575fbc4e5c39fa5c1a03c7242750a7771adedc1f551a797df73fa1a",
+      "run/source-replay/native-vertices.zlib": "dca42915cbaf5e976572d314fdbfc0ce5033437e2f66f579d94708473a353a9d",
+      "run/source-replay/player-252-depth.zlib": "a2b5f25ac8fe813be032ad0d8d135d39abecec692896f7404752111f250ff118",
+      "run/source-replay/player-252-normal.zlib": "2f8296a17207d9571bd41172f40f16359bfd02eddd4bebd2238a15588a87e970",
+      "run/source-replay/player-255-depth.zlib": "16d10dbc8c05e9d094afd04fc3b28f075efb4f394b7789968168ec918a20f902",
+      "run/source-replay/player-255-normal.zlib": "b3171c76efdb306eb0b984a611a29860b767f7197fbda0bff2c7840e56323eae",
+      "run/source-replay/player-258-depth.zlib": "16d10dbc8c05e9d094afd04fc3b28f075efb4f394b7789968168ec918a20f902",
+      "run/source-replay/player-258-normal.zlib": "b3171c76efdb306eb0b984a611a29860b767f7197fbda0bff2c7840e56323eae",
+      "run/source-replay/player-261-depth.zlib": "16d10dbc8c05e9d094afd04fc3b28f075efb4f394b7789968168ec918a20f902",
+      "run/source-replay/player-261-normal.zlib": "b3171c76efdb306eb0b984a611a29860b767f7197fbda0bff2c7840e56323eae",
+      "run/source-replay/player-264-depth.zlib": "16d10dbc8c05e9d094afd04fc3b28f075efb4f394b7789968168ec918a20f902",
+      "run/source-replay/player-264-normal.zlib": "b3171c76efdb306eb0b984a611a29860b767f7197fbda0bff2c7840e56323eae",
+      "run/source-replay/player-267-depth.zlib": "72a60d6aa07210b90abde3f291f1dec1247c640fcf6be84e3567520e1f54322e",
+      "run/source-replay/player-267-normal.zlib": "93e88f6a6347ed5a7aba29a55b03e5d182d351f92ec7cecfcf8f5f9307cec2bf",
+      "run/source-replay/player-270-depth.zlib": "74893c70fc06af52864dd14c57f939f31e4836897a3bc05ceaf410c53e234500",
+      "run/source-replay/player-270-normal.zlib": "0c647d1bf383ecddeee55908b9019744b66b66a4b7e69861a22328a28e1b3d95",
+      "run/source-replay/player-274-depth.zlib": "05f6525a14592cf82ee6afbf0febf13e9989bdad2cfc5981e674cb69644ff0cf",
+      "run/source-replay/player-274-normal.zlib": "ce315cf4e6107710d93a4ad6c00a27530072bb734bebc83a73030a47f5eee894",
+      "run/source-replay/player-278-depth.zlib": "f759ea84c40a10de690d5b12441df088ae77db177226fe089356cbfbfdd3a0c1",
+      "run/source-replay/player-278-normal.zlib": "fcf0134d021c476ec7159117851d83479ee11a9ce5b45c080ad7cc4890d53e28",
+      "run/source-replay/player-340-depth.zlib": "f759ea84c40a10de690d5b12441df088ae77db177226fe089356cbfbfdd3a0c1",
+      "run/source-replay/player-340-normal.zlib": "fcf0134d021c476ec7159117851d83479ee11a9ce5b45c080ad7cc4890d53e28",
+      "run/source-replay/player-indices.zlib": "64696094c7f157266d753080dcd3ded0741f23bf8361dfa94f23e5bc31ecb443",
+      "run/source-replay/player-pixel.asm": "e6a5183858fb8c6e0990efff6e2a36a14fe289e9a7b73aacbb58c5a642cb24d1",
+      "run/source-replay/player-vertex.asm": "05cacf8652f6e6973e4ac19a38ac8b87cd5988f4a6a9cefbe017b70d6e78b37c",
+      "run/source-replay/player-vertices.zlib": "905a80769c3bd44cf3610c6a0171861095b8aa071a462e89f3a99d043f329d4f",
+      "run/source-replay/process.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run/source-replay/report.json": "3ba505207feea68fb794024b43934fc248aa379a2bb02665606960ae27080ffd",
+      "run/source-replay/request.json": "d070457172f69654277bc2c8f2f6683e17ac35441e19a31ead13d1a968d49f0b"
+    }
+  }
+}

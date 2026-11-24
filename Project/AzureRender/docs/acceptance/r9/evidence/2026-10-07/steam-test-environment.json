@@ -1,0 +1,8 @@
+{
+  "path": "D:\\Steam\\steam.exe",
+  "pid": 4108,
+  "commandLine": "\"D:\\Steam\\steam.exe\" ",
+  "action": "graceful shutdown for GPU validation; restore afterward",
+  "restoreRequested": true,
+  "restoreRequestedAt": "2026-10-06T22:05:55.2013336Z"
+}

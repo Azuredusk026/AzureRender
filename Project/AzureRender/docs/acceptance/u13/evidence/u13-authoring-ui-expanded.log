@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_authoring.py", line 74, in <module>
+    args=parser.parse_args();run(args.executable.resolve(),args.output.resolve())
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_authoring.py", line 69, in run
+    retained_workflows(executable,root)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_authoring.py", line 17, in retained_workflows
+    host.edit('document.open',path='assets:/second.azurelevel');host.frames()
+                                                                ^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\editor_test_host.py", line 56, in frames
+    def frames(self,count=6):self.call('wait-frames',frames=count)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\editor_test_host.py", line 49, in call
+    result=exchange(self.endpoint,self.token,dict(op=op,**fields));self.evidence.append(dict(op=op,fields=fields,response=result))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_validation_protocol.py", line 21, in exchange
+    return json.loads(line)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\json\__init__.py", line 346, in loads
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\json\decoder.py", line 337, in decode
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\json\decoder.py", line 355, in raw_decode
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)

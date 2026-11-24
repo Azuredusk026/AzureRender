@@ -1,0 +1,582 @@
+{
+  "images": [
+    {
+      "index": 0,
+      "name": "2A214B5998D5E9305F832F39941225343FCC4724A1DC0E8EA67E730B2067B8B6_3C35A7E99925E9F7",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 1,
+      "name": "DB8B10BCE327ACF85614FEDF966F75F74707B45BFBB692A5ED5744B953DD5429_1F709A5AFA2C5132",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 2,
+      "name": "2E8BB013EBC28F010557636EF7A789425594E43F5E6675612A2C489BD4A427DC_B0FF4A6FB15D8738",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 3,
+      "name": "E6EA1043295B98605F9B43A8BB20AEBFC9E2F17A40653B65858D90CBC3CFF307_EB1487EF065A0874",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 4,
+      "name": "7AA7F3DCA634FAC87C5A7977F72F19339B50FE13AC09AB2AD5FD476310D81746_75F8A946D9783CC7",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 5,
+      "name": "4BF6DE4CBC622CD0352FBAFD0241E99FB024B95F3588BF132EDE53B3C5107856_1AF9F6EE6B0D822A",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 6,
+      "name": "980591AE4890EE0F815D2CEB98CFD5A865B469C64882964BED5BDE8593EDA38B_9E2CB5C9C491019C",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 7,
+      "name": "BEF2799C73B9692086A32EE2DBA25F219A18FF576B3FFEE968AF6345F5C8516E_387CA266B0C7064B",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 8,
+      "name": "9531F5B1B7C589BC1C101AFF9AED3A388E36D66D10D9720CA1871564F06618E6_424C60B8F95F3630",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 9,
+      "name": "T_actor_laevat_body_01_N-normal",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 10,
+      "name": "T_actor_laevat_cloth_01_N-normal",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 11,
+      "name": "T_actor_laevat_cloth_01_P-metallicRoughness",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 12,
+      "name": "T_actor_laevat_cloth_01_E-emissive",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 13,
+      "name": "T_actor_laevat_cloth_02_N-normal",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 14,
+      "name": "T_actor_laevat_cloth_02_P-metallicRoughness",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 15,
+      "name": "T_actor_laevat_cloth_02_E-emissive",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 16,
+      "name": "T_wpn_misc_0016_01_N-normal",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 17,
+      "name": "T_wpn_misc_0016_01_P-metallicRoughness",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 18,
+      "name": "T_actor_laevat_hair_01_HN-normal",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 19,
+      "name": "T_actor_laevat_hair_01_P-metallicRoughness",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 20,
+      "name": "_SDFLightmap-linear",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 21,
+      "name": "_SDFMask-linear",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 22,
+      "name": "_DiffRampMap-linear",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 23,
+      "name": "T_actor_common_femaleskincolor01_lut_D",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 24,
+      "name": "T_actor_common_cloth_lut_01_D",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 25,
+      "name": "T_actor_common_femaleskincolor01_lut_D",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 26,
+      "name": "T_actor_common_femaleskincolor01_lut_D",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 27,
+      "name": "T_actor_common_face_01_RD",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 28,
+      "name": "T_actor_common_cloth_04_RD",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 29,
+      "name": "T_actor_common_cloth_01_RD",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 30,
+      "name": "T_actor_common_eyeshadow_01_M-tinted-alpha",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 31,
+      "name": "T_actor_laevat_hair_01_HN",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 32,
+      "name": "T_actor_common_hair_01_RD",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 33,
+      "name": "T_actor_common_hairshadow_01_M-tinted-alpha",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 34,
+      "name": "T_actor_common_face_01_RD",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 35,
+      "name": "T_actor_common_cloth_04_RD",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 36,
+      "name": "T_actor_common_cloth_01_RD",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 37,
+      "name": "T_actor_common_eyeshadow_01_M-tinted-alpha",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 38,
+      "name": "T_actor_laevat_hair_01_HN",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 39,
+      "name": "T_actor_laevat_hair_01_P",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 40,
+      "name": "T_actor_leavat_hair_01_RS",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 41,
+      "name": "T_actor_common_hair_01_RD",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 42,
+      "name": "T_actor_common_hairshadow_01_M-tinted-alpha",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 43,
+      "name": "T_actor_laevat_cloth_01_P-metallicRoughness",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 44,
+      "name": "T_actor_laevat_cloth_02_P-metallicRoughness",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 45,
+      "name": "T_wpn_misc_0016_01_P-metallicRoughness",
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 46,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 47,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 48,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 49,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 50,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 51,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 52,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 53,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 54,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 55,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 56,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 57,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 58,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 59,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 60,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 61,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 62,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 63,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 64,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 65,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    },
+    {
+      "index": 66,
+      "name": null,
+      "storage": "uri",
+      "bufferView": null
+    }
+  ],
+  "profiles": [
+    {
+      "index": 1,
+      "name": "M_actor_laevat_cloth_01",
+      "profile": {
+        "schemaVersion": 2,
+        "class": "fabric",
+        "shadowColorLut": {
+          "schemaVersion": 1,
+          "texture": 27,
+          "flipV": true
+        },
+        "diffuseRamp": {
+          "schemaVersion": 1,
+          "texture": 38
+        },
+        "features": [
+          "diffuse-ramp",
+          "silhouette-outline",
+          "stylized-shadow",
+          "surface-ao",
+          "geometry-shadow"
+        ],
+        "nprDiffuse": {
+          "schemaVersion": 1,
+          "shadowScale": 1,
+          "lightingInputs": "host-scene-radiance",
+          "shadowMask": "none",
+          "baseAo": "albedo-alpha"
+        },
+        "specularInput": {
+          "schemaVersion": 1,
+          "source": "metallic-roughness-alpha",
+          "scale": 0.5
+        }
+      }
+    },
+    {
+      "index": 2,
+      "name": "M_actor_laevat_cloth_02",
+      "profile": {
+        "schemaVersion": 2,
+        "class": "fabric",
+        "diffuseRamp": {
+          "schemaVersion": 1,
+          "texture": 38
+        },
+        "features": [
+          "diffuse-ramp",
+          "silhouette-outline",
+          "stylized-shadow",
+          "surface-ao",
+          "geometry-shadow"
+        ],
+        "specularInput": {
+          "schemaVersion": 1,
+          "source": "metallic-roughness-alpha",
+          "scale": 0.5
+        }
+      }
+    },
+    {
+      "index": 3,
+      "name": "M_actor_laevat_cloth_03",
+      "profile": {
+        "schemaVersion": 2,
+        "class": "fabric",
+        "diffuseRamp": {
+          "schemaVersion": 1,
+          "texture": 39
+        },
+        "features": [
+          "diffuse-ramp",
+          "stylized-shadow",
+          "surface-ao",
+          "sqrt-alpha-shadow"
+        ],
+        "specularInput": {
+          "schemaVersion": 1,
+          "source": "metallic-roughness-alpha",
+          "scale": 0.5
+        }
+      }
+    },
+    {
+      "index": 4,
+      "name": "M_actor_laevat_cloth_04",
+      "profile": {
+        "schemaVersion": 2,
+        "class": "fabric",
+        "diffuseRamp": {
+          "schemaVersion": 1,
+          "texture": 64
+        },
+        "features": [
+          "diffuse-ramp",
+          "silhouette-outline",
+          "stylized-shadow",
+          "geometry-shadow"
+        ],
+        "specularInput": {
+          "schemaVersion": 1,
+          "source": "metallic-roughness-alpha",
+          "scale": 0.5
+        },
+        "specularRamp": {
+          "schemaVersion": 1,
+          "texture": 65,
+          "flipV": false,
+          "iridescence": 0,
+          "lightingInputs": "host-main-light"
+        },
+        "nprDiffuse": {
+          "schemaVersion": 1,
+          "shadowScale": 0.5,
+          "shadowAlbedo": "base-color",
+          "lightingInputs": "host-scene-radiance",
+          "shadowMask": "one",
+          "baseAo": "metallic-roughness-red",
+          "indirectNormal": "surface",
+          "characterVisibility": "object-shadow",
+          "mainRamp": {
+            "schemaVersion": 1,
+            "bias": 0
+          },
+          "rimOrigin": {
+            "schemaVersion": 1,
+            "node": "quan_jnt"
+          },
+          "lighting": {
+            "schemaVersion": 1,
+            "ambientColor": [
+              0.8783068656921387,
+              0.9302293062210083,
+              1.1216931343078613
+            ],
+            "mainColor": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        },
+        "styleParameters": [
+          1,
+          1,
+          1,
+          0.5
+        ]
+      }
+    },
+    {
+      "index": 5,
+      "name": "M_actor_laevat_cloth_05",
+      "profile": {
+        "schemaVersion": 2,
+        "class": "fabric",
+        "diffuseRamp": {
+          "schemaVersion": 1,
+          "texture": 38
+        },
+        "features": [
+          "diffuse-ramp",
+          "silhouette-outline",
+          "stylized-shadow",
+          "surface-ao",
+          "geometry-shadow"
+        ],
+        "specularInput": {
+          "schemaVersion": 1,
+          "source": "metallic-roughness-alpha",
+          "scale": 0.5
+        }
+      }
+    }
+  ]
+}

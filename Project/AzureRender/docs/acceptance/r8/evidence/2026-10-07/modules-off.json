@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "compilerUnavailable": true,
+  "prototypeTestsAbsent": true,
+  "productionHostsIdentical": true,
+  "sha256": {
+    "AzureRender.exe": "ab263fa343fd4209d8e5e11b490d3252aac39451e118a566d13c9c72e1e55cc9",
+    "AzurePlayer.exe": "8bdfbffb3392dd2d28e8298618d1e44b036df42417f9915b73a90f7907a4bb08"
+  }
+}

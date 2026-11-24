@@ -1,0 +1,115 @@
+[0/1] Re-running CMake...
+-- Found Freetype target Freetype::Freetype - Freetype font engine enabled
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/evolution/f4/registered-player-release
+[1/94] Building CXX object engine\CMakeFiles\AzureFoundation.dir\src\diagnostics\RuntimeDiagnostics.cpp.obj
+[2/94] Building CXX object engine\CMakeFiles\AzureMetaGen.dir\tools\metagen\main.cpp.obj
+[3/94] Linking CXX executable engine\AzureMetaGen.exe
+[4/94] Building CXX object engine\CMakeFiles\AzureFoundation.dir\src\resources\ResourceLocator.cpp.obj
+[5/94] Linking CXX static library engine\AzureFoundation.lib
+[6/94] Generating generated/reflection/GeneratedRegistry.hpp, generated/runtime/GeneratedComponents.hpp
+[7/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\render\RendererCore.cpp.obj
+[8/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\diagnostics\GpuCapabilityReport.cpp.obj
+[9/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\render\TransientResourcePool.cpp.obj
+[10/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\render\GameUiRenderer.cpp.obj
+[11/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\render\RenderGraph.cpp.obj
+[12/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\render\ComputePass.cpp.obj
+[13/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\rhi\GpuAllocator.cpp.obj
+[14/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\render\EnvironmentAsset.cpp.obj
+[15/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\rhi\NullRhi.cpp.obj
+[16/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\rhi\UploadRingBuffer.cpp.obj
+[17/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\render\RenderSettings.cpp.obj
+[18/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\rhi\VulkanRhi.cpp.obj
+[19/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\rhi\VulkanMemoryAllocatorImpl.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/W4”(用“/W0”)
+[20/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\scenes\BlackholeSceneRenderer.cpp.obj
+[21/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\scenes\BuiltinRendererCatalog.cpp.obj
+[22/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\scenes\SampleSceneRenderer.cpp.obj
+[23/94] Building CXX object engine\CMakeFiles\AzurePlatform.dir\src\platform\GlfwFrontend.cpp.obj
+[24/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\ModuleAssembly.cpp.obj
+[25/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\assets\GltfLoader.cpp.obj
+[26/94] Building CXX object engine\CMakeFiles\AzureRenderCore.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[27/94] Linking CXX static library engine\AzureRenderCore.lib
+[28/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\app\CommandLine.cpp.obj
+[29/94] Building CXX object engine\CMakeFiles\AzureReflection.dir\src\reflection\Registry.cpp.obj
+[30/94] Linking CXX static library engine\AzureReflection.lib
+[31/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\SceneRenderSnapshot.cpp.obj
+[32/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\SceneDocument.cpp.obj
+[33/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\ComponentRegistry.cpp.obj
+[34/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\Project.cpp.obj
+[35/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\Prefab.cpp.obj
+[36/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\AssetDatabase.cpp.obj
+[37/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\Level.cpp.obj
+[38/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\PhysicsWorld.cpp.obj
+[39/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\LevelSession.cpp.obj
+[40/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\GameRuntime.cpp.obj
+[41/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\GameUi.cpp.obj
+[42/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\AnimationStateMachine.cpp.obj
+[43/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\AudioRuntime.cpp.obj
+[44/94] Linking CXX static library engine\AzurePlatform.lib
+[45/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\PresentationRuntime.cpp.obj
+[46/94] Building CXX object engine\CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[47/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\MiniaudioImpl.cpp.obj
+[48/94] Building CXX object engine\CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[49/94] Building CXX object engine\CMakeFiles\AzureRuntime.dir\src\runtime\ScriptRuntime.cpp.obj
+[50/94] Building CXX object engine\CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderCapture.cpp.obj
+[51/94] Building CXX object engine\CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderResources.cpp.obj
+[52/94] Building CXX object engine\CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[53/94] Linking CXX static library engine\AzureRuntime.lib
+[54/94] Compiling background.frag
+[55/94] Building CXX object engine\CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderApp.cpp.obj
+[56/94] Compiling background.vert
+[57/94] Compiling background_bindless.frag
+[58/94] Building CXX object engine\CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderFrame.cpp.obj
+[59/94] Compiling blackhole.frag
+[60/94] Compiling blackhole.vert
+[61/94] Compiling blackhole_composite.frag
+[62/94] Compiling blackhole_taa.frag
+[63/94] Compiling blackhole_taa_compute.frag
+[64/94] Compiling bloom_composite.comp
+[65/94] Compiling bloom_downsample.comp
+[66/94] Compiling clear.comp
+[67/94] Compiling cull_indirect.comp
+[68/94] Compiling editor_ui.frag
+[69/94] Compiling editor_ui_srgb.frag
+[70/94] Compiling game-ui.frag
+[71/94] Compiling game-ui.vert
+[72/94] Compiling hud.frag
+[73/94] Compiling hud.vert
+[74/94] Compiling ibl_prefilter.comp
+[75/94] Compiling inner_outline.frag
+[76/94] Compiling inner_outline.vert
+[77/94] Compiling mesh.frag
+[78/94] Compiling mesh.vert
+[79/94] Compiling mesh_bindless.frag
+[80/94] Compiling mesh_compute.vert
+[81/94] Compiling outline.frag
+[82/94] Compiling outline.vert
+[83/94] Compiling outline_compute.vert
+[84/94] Compiling shadow.frag
+[85/94] Compiling shadow.vert
+[86/94] Compiling shadow_bindless.frag
+[87/94] Compiling shadow_compute.vert
+[88/94] Compiling skin.comp
+[89/94] Building CXX object engine\CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSupport.cpp.obj
+[90/94] Linking CXX static library engine\AzurePlayerHost.lib
+[91/94] Building CXX object CMakeFiles\AzureRegisteredPlayer.dir\D_\Assigment\2609\FYP\Project\AzureRender\tests\RegisterHostExtension.cpp.obj
+[92/94] Building CXX object CMakeFiles\AzureRegisteredPlayer.dir\D_\Assigment\2609\FYP\Project\AzureRender\src\player\main.cpp.obj
+[93/94] Linking CXX executable AzureRegisteredPlayer.exe
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\OpenEXR-3_4.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\OpenEXR-3_4.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\IlmThread-3_4.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\IlmThread-3_4.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\Iex-3_4.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\Iex-3_4.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\OpenEXRCore-3_4.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\OpenEXRCore-3_4.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\deflate.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\deflate.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\openjph.0.31.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\openjph.0.31.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\Imath-3_2.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\Imath-3_2.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\rmlui.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\rmlui.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\freetype.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\freetype.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\z.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\z.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\bz2.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\bz2.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\libpng16.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\libpng16.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\brotlidec.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\brotlidec.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\brotlicommon.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\brotlicommon.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\lua.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\lua.dll done
+D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\vcpkg_installed\x64-windows\bin\glfw3.dll -> D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\f4\registered-player-release\glfw3.dll done

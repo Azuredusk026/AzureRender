@@ -1,0 +1,490 @@
+"""Exercise recovery bytes and destructive boundaries in isolated fixtures."""
+import json
+import os
+from pathlib import Path
+import tempfile
+import time
+import unittest
+import sys
+import subprocess
+from contextlib import contextmanager
+from unittest.mock import patch
+
+import artifact_maintenance as maintenance
+
+
+class MaintenanceTests(unittest.TestCase):
+    def test_sdk_caches_inherit_the_managed_task_and_leave_parent_unchanged(self):
+        path=self.create(recovery=False)
+        keys=['DOTNET_CLI_HOME','NUGET_PACKAGES','NUGET_HTTP_CACHE_PATH',
+              'NUGET_PLUGINS_CACHE_PATH','NUGET_SCRATCH','DOTNET_BUNDLE_EXTRACT_BASE_DIR']
+        command=[sys.executable,'-c','import os,json; print(json.dumps({k:os.environ.get(k) for k in '+repr(keys)+'}))']
+        with patch.dict(os.environ,{key:'C:/inherited-cache' for key in keys}):
+            result=maintenance.guarded_run(self.build,path.name,command,timeout=5)
+            self.assertTrue(all(os.environ[key]=='C:/inherited-cache' for key in keys))
+        self.assertEqual(result['exitCode'],0)
+        actual=json.loads((path/'process.log').read_text())
+        for key in keys:
+            self.assertTrue(Path(actual[key]).is_relative_to(path/'tmp'),key)
+        environment=maintenance.managed_environment(path/'tmp',{'PATH':'preserved'})
+        self.assertEqual(environment['PATH'],'preserved')
+        self.assertEqual(environment['DOTNET_GENERATE_ASPNET_CERTIFICATE'],'false')
+        self.assertEqual(environment['DOTNET_ADD_GLOBAL_TOOLS_TO_PATH'],'false')
+
+    def test_measure_bounds_filesystem_queries_for_nested_payload(self):
+        path=self.build/'runs'/'bounded-scan';path.mkdir()
+        for directory in range(10):
+            folder=path/str(directory);folder.mkdir()
+            for index in range(10):(folder/str(index)).write_bytes(b'abc')
+        with patch.object(os,'stat',wraps=os.stat) as observations:
+            measured=maintenance.measure(path)
+        self.assertEqual(measured,300)
+        self.assertLessEqual(observations.call_count,500,'Per-file ancestor queries consume the foreground monitoring budget')
+
+    def test_measure_tolerates_a_file_removed_after_directory_enumeration(self):
+        path=self.create(recovery=False);temporary=path/'tmp';temporary.mkdir();fleeting=temporary/'linker.tmp';fleeting.write_bytes(b'transient')
+        scandir=os.scandir
+        @contextmanager
+        def observed(folder):
+            with scandir(folder) as entries:
+                captured=list(entries)
+                if Path(folder)==temporary and fleeting.exists():fleeting.unlink()
+                yield iter(captured)
+        with patch.object(os,'scandir',side_effect=observed):
+            measured=maintenance.measure(path)
+        self.assertFalse(fleeting.exists());self.assertGreaterEqual(measured,len(b'generated output'))
+
+    def test_measure_rejects_a_missing_task_root(self):
+        with self.assertRaises(FileNotFoundError):maintenance.measure(self.build/'runs'/'absent')
+
+    def test_measure_enforces_file_count_and_byte_limits(self):
+        path=self.build/'runs'/'quota-scan';path.mkdir()
+        for index in range(3):(path/str(index)).write_bytes(b'1234')
+        with patch.dict(maintenance.POLICY,maximumFiles=2):
+            with self.assertRaises(ValueError):maintenance.measure(path)
+        with patch.dict(maintenance.POLICY,runBytes=11):
+            with self.assertRaises(ValueError):maintenance.measure(path)
+        self.assertEqual(maintenance.measure(path),12)
+
+    def test_measure_rejects_nested_git_and_unreadable_directories(self):
+        path=self.build/'runs'/'protected-scan';path.mkdir();(path/'.git').mkdir()
+        with self.assertRaises(ValueError):maintenance.measure(path)
+        with patch.object(os,'scandir',side_effect=PermissionError('Unreadable task')):
+            with self.assertRaises(PermissionError):maintenance.measure(path)
+
+    def test_measure_rejects_directory_junctions(self):
+        path=self.create(recovery=False);outside=self.root/'measure-outside';outside.mkdir()
+        try:(path/'linked').symlink_to(outside,target_is_directory=True)
+        except OSError:
+            import _winapi
+            _winapi.CreateJunction(str(outside),str(path/'linked'))
+        with self.assertRaises(ValueError):maintenance.measure(path)
+        self.assertTrue(outside.exists())
+
+    def test_measure_rejects_an_ancestor_replaced_during_enumeration(self):
+        path=self.build/'runs'/'replaced-ancestor';path.mkdir()
+        branch=path/'branch';(branch/'nested').mkdir(parents=True)
+        outside=self.root/'foreign-tree';(outside/'nested').mkdir(parents=True)
+        (outside/'nested'/'payload').write_bytes(b'foreign')
+        scandir=os.scandir
+        @contextmanager
+        def observed(folder):
+            with scandir(folder) as entries:captured=list(entries)
+            if Path(folder)==branch:
+                branch.rename(path/'retired-branch')
+                try:branch.symlink_to(outside,target_is_directory=True)
+                except OSError:
+                    import _winapi
+                    _winapi.CreateJunction(str(outside),str(branch))
+            yield iter(captured)
+        with patch.object(os,'scandir',side_effect=observed):
+            with self.assertRaises(ValueError):maintenance.measure(path)
+        self.assertEqual((outside/'nested'/'payload').read_bytes(),b'foreign')
+
+    def test_foreground_temporary_files_are_inside_the_task_budget(self):
+        path=self.create(recovery=False)
+        outside=self.root/'inherited-temp';outside.mkdir()
+        keys=['TEMP','TMP','TMPDIR','SQLITE_TMPDIR']
+        command=[sys.executable,'-c',
+                 'import tempfile,pathlib,json,os; '
+                 'p=pathlib.Path(tempfile.mkdtemp())/"payload.bin"; '
+                 'p.write_bytes(b"temporary-payload"); '
+                 'print(json.dumps(dict(path=str(p),environment={k:os.environ.get(k) for k in ["TEMP","TMP","TMPDIR","SQLITE_TMPDIR"]})))']
+        with patch.dict(os.environ,{key:str(outside) for key in keys}):
+            result=maintenance.guarded_run(self.build,path.name,command,timeout=5)
+            self.assertTrue(all(os.environ[key]==str(outside) for key in keys))
+        self.assertEqual(result['exitCode'],0)
+        actual=json.loads((path/'process.log').read_text())
+        temporary=path/'tmp'
+        self.assertTrue(Path(actual['path']).is_relative_to(temporary))
+        self.assertEqual(set(actual['environment'].values()),{str(temporary.resolve())})
+        self.assertEqual(Path(actual['path']).read_bytes(),b'temporary-payload')
+        self.assertGreaterEqual(maintenance.measure(path),len(b'temporary-payload'))
+        self.assertEqual(list(outside.iterdir()),[])
+
+    def test_foreground_temporary_payload_cannot_escape_the_byte_budget(self):
+        path=self.create(recovery=False)
+        command=[sys.executable,'-c','import tempfile,pathlib; '
+                 'p=pathlib.Path(tempfile.mkdtemp())/"payload.bin"; '
+                 'p.write_bytes(bytes(131072))']
+        with patch.dict(maintenance.POLICY,runBytes=65536):
+            result=maintenance.guarded_run(self.build,path.name,command,timeout=5)
+        self.assertEqual(result['status'],'budget-stopped')
+        self.assertIn('byte/file-count',result['reason'])
+        with maintenance.database(self.build) as db:
+            self.assertIsNone(maintenance.rows(db)[path.name]['processPid'])
+
+    def test_invalid_temporary_directory_prevents_launch_and_releases_process_claim(self):
+        path=self.create(recovery=False);(path/'tmp').write_bytes(b'file')
+        with patch.object(maintenance.subprocess,'Popen') as launch:
+            with self.assertRaises(OSError):
+                maintenance.guarded_run(self.build,path.name,[sys.executable,'-c','pass'],timeout=5)
+        launch.assert_not_called()
+        with maintenance.database(self.build) as db:
+            self.assertIsNone(maintenance.rows(db)[path.name]['processPid'])
+
+    def test_git_tracking_protection_uses_index_paths_with_one_root_resolution(self):
+        subprocess.run(['git','init','--quiet',str(self.root)],check=True,capture_output=True)
+        folder=self.root/'sources';folder.mkdir()
+        expected=set()
+        for i in range(100):
+            path=folder/(str(i)+'.bin');path.write_bytes(b'source');expected.add(path.absolute())
+        subprocess.run(['git','-C',str(self.root),'add','sources'],check=True,capture_output=True)
+        resolve=Path.resolve;resolved=[]
+        def observed(path,*args,**kwargs):resolved.append(path);return resolve(path,*args,**kwargs)
+        with patch.object(Path,'resolve',observed):actual=maintenance.tracked_paths(self.root)
+        self.assertEqual(actual,expected);self.assertLessEqual(len(resolved),1)
+
+    def test_indexed_symbolic_link_protects_name_and_referent(self):
+        subprocess.run(['git','init','--quiet',str(self.root)],check=True,capture_output=True)
+        source=self.root/'source.glb';source.write_bytes(b'canonical')
+        link=self.root/'indexed.glb'
+        try:link.symlink_to(source.name)
+        except OSError:self.skipTest('Symbolic link creation is unavailable')
+        subprocess.run(['git','-C',str(self.root),'-c','core.symlinks=true','add','indexed.glb'],check=True,capture_output=True)
+        actual=maintenance.tracked_paths(self.root)
+        self.assertIn(link.absolute(),actual);self.assertIn(source.absolute(),actual)
+
+    def test_indexed_gitlink_protects_its_entire_directory(self):
+        subprocess.run(['git','init','--quiet',str(self.root)],check=True,capture_output=True)
+        module=self.root/'nested module';module.mkdir();(module/'output.bin').write_bytes(b'fixture')
+        entry='160000,'+'1'*40+',nested module'
+        subprocess.run(['git','-C',str(self.root),'update-index','--add','--cacheinfo',entry],check=True,capture_output=True)
+        tracked=maintenance.tracked_paths(self.root)
+        self.assertIn(module.absolute(),tracked)
+        self.assertTrue(tracked.protects(module/'output.bin'))
+        self.assertTrue(tracked.protects(self.root))
+        self.assertFalse(tracked.protects(self.root/'nested module-copy'/'output.bin'))
+
+    def test_daily_asset_copy_policy_removes_only_verified_model(self):
+        subprocess.run(['git','init','--quiet',str(self.root)],check=True,capture_output=True)
+        from test_artifact_asset_cleanup import AssetCopiesTests
+        _,source,target,catalog,lock=AssetCopiesTests().fixture(self.root)
+        maintenance.write_json(self.build/'maintenance/asset-copy-cleanup-policy.json',dict(catalog=str(catalog),lock=str(lock),maximumBytes=source.stat().st_size,maximumFiles=1))
+        with patch.object(maintenance,'active_processes',return_value=[]),patch('artifact_asset_cleanup.active_processes',return_value=[]):
+            result=maintenance.daily(self.build,apply=True)
+        self.assertFalse(target.exists());self.assertTrue(source.exists());self.assertEqual(result['assetCopies']['files'],1)
+
+    def test_daily_active_work_defers_model_cleanup_without_index(self):
+        from test_artifact_asset_cleanup import AssetCopiesTests
+        _,source,target,catalog,lock=AssetCopiesTests().fixture(self.root)
+        maintenance.write_json(self.build/'maintenance/asset-copy-cleanup-policy.json',dict(catalog=str(catalog),lock=str(lock)))
+        with patch.object(maintenance,'active_processes',return_value=['active-player']):result=maintenance.daily(self.build,apply=True)
+        self.assertTrue(target.exists());self.assertEqual(result['managed']['status'],'deferred-active-work');self.assertIsNone(result['assetCopies'])
+
+    def expired_generated_tasks(self,count):
+        result=[];when=time.time()-2*86400
+        for index in range(count):
+            path=self.create('daily-'+str(index),recovery=False);self.close(path)
+            with maintenance.database(self.build,True) as db:
+                record=maintenance.rows(db)[path.name];record['closed']=when;maintenance.save(db,path.name,record)
+            os.utime(path/'.finished',(when,when));result.append(path)
+        return result
+
+    def daily_fixture(self,**patches):
+        from contextlib import ExitStack
+        stack=ExitStack()
+        stack.enter_context(patch.object(maintenance,'active_processes',return_value=[]))
+        stack.enter_context(patch.object(maintenance,'tracked_paths',return_value=set()))
+        stack.enter_context(patch.object(maintenance,'git_state',return_value='same'))
+        stack.enter_context(patch('artifact_pipeline_cache.clean',return_value={'status':'idle'}))
+        stack.enter_context(patch.dict(maintenance.POLICY,maximumBatch=2,**patches))
+        return stack
+
+    def test_daily_drains_multiple_batches_of_expired_generated_tasks(self):
+        paths=self.expired_generated_tasks(5)
+        with self.daily_fixture():result=maintenance.daily(self.build,apply=True)
+        self.assertTrue(all(not path.exists() for path in paths))
+        self.assertEqual(len(result['managed']['items']),5)
+        self.assertEqual([len(batch['items']) for batch in result['managed']['batches']],[2,2,1])
+        self.assertEqual(result['managed']['stopReason'],'drained')
+
+    def test_daily_stops_at_its_batch_limit(self):
+        paths=self.expired_generated_tasks(5)
+        with self.daily_fixture(maximumDailyBatches=2):result=maintenance.daily(self.build,apply=True)
+        self.assertEqual(sum(path.exists() for path in paths),1)
+        self.assertEqual(result['managed']['stopReason'],'batch-limit')
+        self.assertEqual(len(result['managed']['batches']),2)
+
+    def test_daily_rechecks_activity_between_batches(self):
+        paths=self.expired_generated_tasks(5)
+        with self.daily_fixture(),patch.object(maintenance,'active_processes',side_effect=[[],['active-player']]):
+            result=maintenance.daily(self.build,apply=True)
+        self.assertEqual(sum(path.exists() for path in paths),3)
+        self.assertEqual(result['managed']['status'],'deferred-active-work')
+        self.assertEqual(result['managed']['stopReason'],'active-work')
+        self.assertIsNone(result['pipelineCaches'])
+
+    def test_daily_budget_is_shared_by_all_batches(self):
+        paths=self.expired_generated_tasks(5);clock=[0.0];original=maintenance.maintain
+        def first_batch(*args,**kwargs):
+            result=original(*args,**kwargs);clock[0]=maintenance.POLICY['maintenanceSeconds']+1;return result
+        with self.daily_fixture(),patch.object(maintenance.time,'monotonic',side_effect=lambda:clock[0]),patch.object(maintenance,'maintain',side_effect=first_batch):
+            result=maintenance.daily(self.build,apply=True)
+        self.assertEqual(sum(path.exists() for path in paths),3)
+        self.assertEqual(result['managed']['stopReason'],'time-budget')
+        self.assertIsNone(result['pipelineCaches'])
+
+    def test_daily_reports_blocked_batch_without_continuing(self):
+        paths=self.expired_generated_tasks(5);(paths[0]/'nested/payload.bin').write_bytes(b'changed after sealing')
+        with self.daily_fixture():result=maintenance.daily(self.build,apply=True)
+        self.assertEqual(result['status'],'blocked')
+        self.assertTrue(paths[0].exists());self.assertTrue(paths[2].exists())
+        self.assertEqual(result['managed']['stopReason'],'blocked')
+        self.assertIsNone(result['pipelineCaches'])
+
+    def test_shared_deadline_protects_expired_compact_evidence(self):
+        path=self.create(recovery=False);self.close(path);released=self.apply()['items'][0];evidence=Path(released['evidence'])
+        result=maintenance.maintain(self.build,apply=True,now=time.time()+40*86400,busy=[],tracked=set(),git=lambda:'same',deadline=time.monotonic()-1)
+        self.assertTrue(evidence.exists());self.assertEqual(result['items'],[])
+
+    def setUp(self):
+        fixtures = Path(__file__).resolve().parents[1]/"build/maintenance/tests"
+        fixtures.mkdir(parents=True, exist_ok=True)
+        self.temp = tempfile.TemporaryDirectory(dir=fixtures)
+        self.root = Path(self.temp.name)
+        self.build = self.root/'build'
+        (self.build/'runs').mkdir(parents=True)
+        self.cold = self.root/'cold'
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def create(self, name='example', payload=b'generated output',recovery=True):
+        path = self.build/'runs'/name
+        maintenance.create_run(self.build,path,dict(plannedBytes=64*2**20),retain_recovery=recovery)
+        (path/'nested').mkdir()
+        (path/'nested'/'payload.bin').write_bytes(payload)
+        return path
+
+    def close(self, path):
+        maintenance.seal(self.build,path)
+        (path/'.finished').touch()
+
+    def apply(self, **kwargs):
+        return maintenance.maintain(self.build,apply=True,cold=self.cold,
+                                    now=time.time()+8*86400,busy=[],tracked=set(),git=lambda:'same',**kwargs)
+
+    def test_status_has_no_recursive_scan_or_database_creation(self):
+        path=self.build/'runs'/'legacy';path.mkdir();(path/'.keep').touch()
+        with patch.object(maintenance,'inventory',side_effect=AssertionError('No tree scan')):
+            result=maintenance.status(self.build)
+        self.assertEqual(result['historicalTasks'],1)
+        self.assertFalse(result['recursiveScan'])
+        self.assertFalse((self.build/'maintenance').exists())
+
+    def test_pool_cap_blocks_creation_before_directory_exists(self):
+        self.create('first')
+        with patch.dict(maintenance.POLICY,poolBytes=64*2**20):
+            with self.assertRaises(ValueError):self.create('second')
+        self.assertFalse((self.build/'runs'/'second').exists())
+
+    def test_append_reservation_is_atomic_and_consumes_pool(self):
+        path=self.create('first')
+        other=self.create('second')
+        with patch.dict(maintenance.POLICY,poolBytes=150*2**20):
+            self.assertTrue(maintenance.reserve_write(self.build,path,0,80*2**20)['allowed'])
+            self.assertFalse(maintenance.reserve_write(self.build,other,0,80*2**20)['allowed'])
+
+    def test_expired_managed_recovery_has_finite_retention(self):
+        path=self.create();self.close(path);self.apply()
+        result=maintenance.maintain(self.build,apply=True,cold=self.cold,now=time.time()+100*86400,busy=[],tracked=set(),git=lambda:'same')
+        self.assertEqual(result['items'][0]['expiredRecoveryTask'],path.name)
+        self.assertFalse(list(self.cold.glob('*.zip')))
+
+    def test_recovery_round_trip_and_preview_preservation(self):
+        payload=bytes(range(256))*100
+        path=self.create(payload=payload);self.close(path)
+        preview=maintenance.maintain(self.build,now=time.time()+8*86400)
+        self.assertEqual(preview['candidates'],[str(path)])
+        self.assertTrue(path.exists())
+        result=self.apply();self.assertEqual(result['status'],'completed')
+        self.assertFalse(path.exists())
+        maintenance.restore(self.build,path.name)
+        self.assertEqual((path/'nested/payload.bin').read_bytes(),payload)
+        self.assertFalse((path/'.finished').exists())
+
+    def test_keep_and_active_input_lease_prevent_removal(self):
+        path=self.create();self.close(path);(path/'.keep').touch()
+        self.assertFalse(self.apply()['items'])
+        (path/'.keep').unlink()
+        other=self.build/'runs'/'consumer'
+        maintenance.create_run(self.build,other,dict(plannedBytes=64*2**20),[path.name])
+        self.assertFalse(self.apply()['items'])
+        self.close(other)
+        self.assertFalse(self.apply()['status']=='blocked')
+        self.assertFalse(path.exists())
+
+    def test_busy_process_defers_without_archiving(self):
+        path=self.create();self.close(path)
+        result=maintenance.maintain(self.build,apply=True,cold=self.cold,now=time.time()+8*86400,busy=['build'],tracked=set(),git=lambda:'same')
+        self.assertEqual(result['status'],'deferred-active-work')
+        self.assertFalse(self.cold.exists());self.assertTrue(path.exists())
+
+    def test_modified_sealed_content_is_preserved_and_quarantined(self):
+        path=self.create();self.close(path);(path/'nested/payload.bin').write_bytes(b'new content')
+        result=self.apply();self.assertEqual(result['status'],'blocked');self.assertTrue(path.exists())
+        self.assertFalse(self.apply()['candidates'])
+
+    def test_tracked_file_and_nested_worktree_are_protected(self):
+        path=self.create();self.close(path)
+        result=maintenance.maintain(self.build,apply=True,cold=self.cold,now=time.time()+8*86400,busy=[],tracked={(path/'nested/payload.bin').resolve()},git=lambda:'same')
+        self.assertEqual(result['status'],'blocked');self.assertTrue(path.exists())
+        other=self.create('worktree');(other/'.git').write_text('gitdir: elsewhere')
+        with self.assertRaises(ValueError):self.close(other)
+
+    def test_archive_corruption_blocks_restore(self):
+        path=self.create();self.close(path);self.apply()
+        archive=next(self.cold.glob('*.zip'));archive.write_bytes(b'broken')
+        with self.assertRaises(ValueError):maintenance.restore(self.build,path.name)
+        self.assertFalse(path.exists())
+
+    def test_resume_during_archive_is_not_overwritten_or_deleted(self):
+        path=self.create();self.close(path);original=maintenance.verify_archive;fired=[]
+        def verify(archive,*args,**kwargs):
+            result=original(archive,*args,**kwargs)
+            if Path(archive).suffix=='.zip' and not fired:
+                fired.append(True);maintenance.resume(self.build,path.name)
+            return result
+        with patch.object(maintenance,'verify_archive',side_effect=verify):self.apply()
+        self.assertTrue(path.exists())
+        with maintenance.database(self.build) as db:record=maintenance.rows(db)[path.name]
+        self.assertEqual(record['status'],'active');self.assertIsNone(record['blocked'])
+
+    def test_resealed_generation_is_not_deleted_by_old_candidate(self):
+        path=self.create();self.close(path);original=maintenance.verify_archive;fired=[]
+        def verify(archive,*args,**kwargs):
+            result=original(archive,*args,**kwargs)
+            if Path(archive).suffix=='.zip' and not fired:
+                fired.append(True);maintenance.resume(self.build,path.name);self.close(path)
+            return result
+        with patch.object(maintenance,'verify_archive',side_effect=verify):self.apply()
+        self.assertTrue(path.exists())
+        with maintenance.database(self.build) as db:record=maintenance.rows(db)[path.name]
+        self.assertEqual(record['status'],'closed');self.assertIsNone(record['blocked'])
+
+    def test_restore_during_expiry_keeps_archive_and_reservation(self):
+        path=self.create();self.close(path);self.apply();original=maintenance.digest;fired=[]
+        def digest(archive):
+            result=original(archive)
+            if Path(archive).suffix=='.zip' and not fired:
+                fired.append(True);maintenance.restore(self.build,path.name)
+            return result
+        with patch.object(maintenance,'digest',side_effect=digest):
+            maintenance.maintain(self.build,apply=True,cold=self.cold,now=time.time()+100*86400,busy=[],tracked=set(),git=lambda:'same')
+        self.assertTrue(path.exists());self.assertTrue(list(self.cold.glob('*.zip')))
+        with maintenance.database(self.build) as db:record=maintenance.rows(db)[path.name]
+        self.assertEqual(record['status'],'active');self.assertGreater(record['reservedBytes'],0)
+
+    def test_partial_restoration_remains_counted_and_protected(self):
+        path=self.create();self.close(path);self.apply()
+        def partial(source,target,*args):target.write(b'partial');raise OSError('Injected storage failure')
+        with patch.object(maintenance.shutil,'copyfileobj',side_effect=partial):
+            with self.assertRaises(OSError):maintenance.restore(self.build,path.name)
+        with maintenance.database(self.build) as db:record=maintenance.rows(db)[path.name]
+        self.assertEqual(record['status'],'blocked-restore');self.assertGreater(record['reservedBytes'],0)
+        self.assertTrue(path.exists());self.assertFalse(self.apply()['candidates'])
+
+    def test_guard_stops_only_owned_over_budget_child(self):
+        path=self.create()
+        command=[sys.executable,'-c',"from pathlib import Path;import time;Path(r'"+str(path/'too-large.bin')+"').write_bytes(b'x'*2000000);time.sleep(10)"]
+        with patch.dict(maintenance.POLICY,runBytes=1000000):
+            result=maintenance.guarded_run(self.build,path.name,command,timeout=5)
+        self.assertEqual(result['status'],'budget-stopped');self.assertLess(result['seconds'],8)
+        self.assertTrue(path.exists())
+
+    def test_guard_caps_log_without_stopping_successful_command(self):
+        path=self.create()
+        command=[sys.executable,'-c',"import sys;sys.stdout.buffer.write(b'x'*(20*1024*1024))"]
+        result=maintenance.guarded_run(self.build,path.name,command,timeout=5)
+        self.assertEqual(result['exitCode'],0);self.assertTrue(result['logTruncated'])
+        self.assertLessEqual((path/'process.log').stat().st_size,16*2**20)
+
+    def test_restore_rejects_path_traversal_without_writing(self):
+        for name in ['../outside','/absolute','a/../b','C:/outside','nested\\file']:
+            with self.assertRaises(ValueError):maintenance.relative_member(name)
+        with self.assertRaises(ValueError):maintenance.restore(self.build,'../outside')
+        self.assertFalse((self.root/'outside').exists())
+
+    def test_batch_limit_and_resume_invalidate_eligibility(self):
+        for index in range(3):self.close(self.create('task-'+str(index)))
+        with patch.dict(maintenance.POLICY,maximumBatch=2):result=self.apply()
+        self.assertEqual(len(result['items']),2)
+        path=self.build/'runs'/'task-2';maintenance.resume(self.build,path.name)
+        self.assertFalse((path/'.finished').exists());self.assertFalse(self.apply()['candidates'])
+
+    def test_daily_rebuildable_cleanup_keeps_small_evidence_without_full_backup(self):
+        path=self.create(payload=b'x'*200000,recovery=False)
+        (path/'candidate.cpp').write_text('int main(){return 0;}')
+        (path/'results.json').write_text('{"status":"isolated"}')
+        self.close(path)
+        result=maintenance.maintain(self.build,apply=True,cold=self.cold,now=time.time()+2*86400,busy=[],tracked=set(),git=lambda:'same')
+        self.assertFalse(path.exists());self.assertFalse(self.cold.exists())
+        self.assertIsNone(result['items'][0]['archive'])
+        evidence=Path(result['items'][0]['evidence']);self.assertLess(evidence.stat().st_size,10000)
+        import zipfile
+        with zipfile.ZipFile(evidence) as package:
+            self.assertEqual(package.read('files/candidate.cpp'),b'int main(){return 0;}')
+            self.assertNotIn('files/nested/payload.bin',package.namelist())
+
+    def test_compact_evidence_has_finite_retention(self):
+        path=self.create(recovery=False);self.close(path);self.apply()
+        result=maintenance.maintain(self.build,apply=True,cold=self.cold,now=time.time()+40*86400,busy=[],tracked=set(),git=lambda:'same')
+        self.assertEqual(result['items'][0]['expiredEvidenceTask'],path.name)
+        self.assertFalse(list((self.build/'maintenance/evidence').glob('*.zip')))
+
+    def test_incomplete_existing_evidence_cannot_be_sealed_as_verified(self):
+        path=self.create(recovery=False);(path/'recipe.ps1').write_text('Write-Output example');self.close(path)
+        with maintenance.database(self.build) as db:record=maintenance.rows(db)[path.name]
+        Path(record['evidence']).write_bytes(b'incomplete zip')
+        maintenance.resume(self.build,path.name)
+        import zipfile
+        with self.assertRaises(zipfile.BadZipFile):self.close(path)
+        self.assertTrue(path.exists());self.assertFalse((path/'.finished').exists())
+
+    def test_resealing_does_not_leave_permanent_unreferenced_evidence(self):
+        path=self.create(recovery=False);self.close(path)
+        with maintenance.database(self.build) as db:old=Path(maintenance.rows(db)[path.name]['evidence'])
+        maintenance.resume(self.build,path.name);(path/'recipe.py').write_text('print(1)');self.close(path)
+        when=time.time()-40*86400;os.utime(old,(when,when))
+        result=maintenance.maintain(self.build,apply=True,cold=self.cold,busy=[],tracked=set(),git=lambda:'same')
+        self.assertFalse(old.exists());self.assertTrue(path.exists())
+        self.assertTrue(any('expiredUnreferencedEvidence' in i for i in result['items']))
+
+    @unittest.skipUnless(os.name=='nt','Windows process audit')
+    def test_empty_process_audit_fails_closed(self):
+        import subprocess
+        with patch.object(maintenance.subprocess,'run',return_value=subprocess.CompletedProcess([],0,stdout='',stderr='')):
+            with self.assertRaises(ValueError):maintenance.active_processes(self.root)
+
+    def test_junction_or_symlink_is_rejected(self):
+        path=self.create();outside=self.root/'outside';outside.mkdir()
+        try:(path/'linked').symlink_to(outside,target_is_directory=True)
+        except OSError:
+            import _winapi
+            _winapi.CreateJunction(str(outside),str(path/'linked'))
+        with self.assertRaises(ValueError):self.close(path)
+        self.assertTrue(outside.exists())
+
+
+if __name__=='__main__':unittest.main()

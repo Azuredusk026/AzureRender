@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\implementation-2026-10-10\p5-workflows.py", line 36, in <module>
+    while host.workspace()['project']['name']!='P5 '+workflow:
+          ^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\editor_test_host.py", line 55, in workspace
+    def workspace(self):return json.loads(self.query('editor.workspace'))
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\editor_test_host.py", line 54, in query
+    def query(self,name):return self.call('query',name=name)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\editor_test_host.py", line 51, in call
+    result=exchange(self.endpoint,self.token,dict(op=op,**fields));self.evidence.append(dict(op=op,fields=fields,response=result))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_validation_protocol.py", line 19, in exchange
+    line = stream.readline(1024 * 1024 + 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\socket.py", line 706, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] Զ������ǿ�ȹر���һ�����е����ӡ�

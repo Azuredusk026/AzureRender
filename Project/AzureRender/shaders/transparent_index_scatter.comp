@@ -1,0 +1,12 @@
+#version 450
+layout(local_size_x=128) in;
+layout(std430,binding=0) readonly buffer InputWords {uint words[];} source;
+layout(std430,binding=1) readonly buffer SortedKeys {uvec2 values[];} sortedKeys;
+layout(std430,binding=2) writeonly buffer SortedIndices {uint values[];} outputIndices;
+void main(){
+    uint index=gl_GlobalInvocationID.x;if(index>=source.words[3])return;
+    uint triangle=source.words[1]+sortedKeys.values[index].y*6;
+    outputIndices.values[index*3]=source.words[triangle+3];
+    outputIndices.values[index*3+1]=source.words[triangle+4];
+    outputIndices.values[index*3+2]=source.words[triangle+5];
+}

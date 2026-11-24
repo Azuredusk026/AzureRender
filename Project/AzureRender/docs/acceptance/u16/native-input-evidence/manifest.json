@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "physicalInput": false,
+  "exclusiveDesktop": true,
+  "files": {
+    "native-system-release-gpu.log": {
+      "sha256": "1b5bac6d38a3ecd098b7273fecdaa99abf1a8bcd3f6eaad884d192eaf7751662",
+      "originalSha256": "1b5bac6d38a3ecd098b7273fecdaa99abf1a8bcd3f6eaad884d192eaf7751662",
+      "bytes": 1706
+    },
+    "native-system-debug-gpu.log": {
+      "sha256": "199f92d02502a1cb91cb6963b2fcf70cd20337e125c230542f8c99466f5fca36",
+      "originalSha256": "199f92d02502a1cb91cb6963b2fcf70cd20337e125c230542f8c99466f5fca36",
+      "bytes": 1571
+    },
+    "native-exclusive-release-gpu.log": {
+      "sha256": "67e690f0f0fafa609f9a9ade9571101ff21ad6338a909a10c867f85f98ac63c5",
+      "originalSha256": "67e690f0f0fafa609f9a9ade9571101ff21ad6338a909a10c867f85f98ac63c5",
+      "bytes": 447
+    },
+    "native-exclusive-debug-gpu.log": {
+      "sha256": "72e162fd2780783d6eff1abafafb1b3586a005bafd6e9c9eea0caacc93859058",
+      "originalSha256": "72e162fd2780783d6eff1abafafb1b3586a005bafd6e9c9eea0caacc93859058",
+      "bytes": 443
+    },
+    "native-dialog-system-input.log": {
+      "sha256": "d0f0f0a5225c2ff3acca59404a7a8883b9d20eedfa6960122594353b918bdff3",
+      "originalSha256": "d0f0f0a5225c2ff3acca59404a7a8883b9d20eedfa6960122594353b918bdff3",
+      "bytes": 1017
+    },
+    "native-dialog-system-input-recheck.log": {
+      "sha256": "d5f64b3d37cb9f0bdc7f03ee450f489a265467caff12028d5352f00dcc236281",
+      "originalSha256": "d5f64b3d37cb9f0bdc7f03ee450f489a265467caff12028d5352f00dcc236281",
+      "bytes": 1317
+    },
+    "candidate-gpu-interruption-reason.txt": {
+      "sha256": "859cbb906a430043cbb10cf589dad9d228f883219edb8b2ce1859b49869c7305",
+      "originalSha256": "859cbb906a430043cbb10cf589dad9d228f883219edb8b2ce1859b49869c7305",
+      "bytes": 125
+    },
+    "release/summary.json": {
+      "sha256": "4c78a678fbfb8d3058d9652a60c786ab9a4f30993b8e4e8bd567be7606a2e5a5",
+      "originalSha256": "4c78a678fbfb8d3058d9652a60c786ab9a4f30993b8e4e8bd567be7606a2e5a5",
+      "bytes": 1602
+    },
+    "release/exploration/events.json.gz": {
+      "sha256": "0cc649ff2ef9579d9f9431a9dad4299d3a471544abd5a8a1aa1bffc9f9bc7f3a",
+      "originalSha256": "6b65b4d8f2197261f166e24ee25644a45ea5526d08d575c8bfaecff46e6bbd33",
+      "bytes": 26364
+    },
+    "release/exploration/stderr.log": {
+      "sha256": "e2c2fad4323ae43f361272de25ce858769ce5a0f1a6270aa2a83452de382cc48",
+      "originalSha256": "e2c2fad4323ae43f361272de25ce858769ce5a0f1a6270aa2a83452de382cc48",
+      "bytes": 1232
+    },
+    "release/exploration/stdout.log": {
+      "sha256": "86bcc517fdd36048bb8e9666605dd6ec312c7144f0dab92b4af2daacb27342d6",
+      "originalSha256": "86bcc517fdd36048bb8e9666605dd6ec312c7144f0dab92b4af2daacb27342d6",
+      "bytes": 2642
+    },
+    "release/exploration/summary.json": {
+      "sha256": "26156983b86e5fae7c9a0f6ff0430012b7bdab747b4578eebdf28a2bffe1812b",
+      "originalSha256": "26156983b86e5fae7c9a0f6ff0430012b7bdab747b4578eebdf28a2bffe1812b",
+      "bytes": 745
+    },
+    "release/inspector/events.json.gz": {
+      "sha256": "6cff89d96bd5669fd648e76e3f04e05b3866b907f2243e4632ca36cdbe511b07",
+      "originalSha256": "faf5dba00cc74eba86c0a1c69243007c8481228b42f06bb4546c4a466dafc3ad",
+      "bytes": 21753
+    },
+    "release/inspector/stderr.log": {
+      "sha256": "1ff1ee755f7d3455618f7d3bd12320e0bcf40678274805f6bad013c8cafaa575",
+      "originalSha256": "1ff1ee755f7d3455618f7d3bd12320e0bcf40678274805f6bad013c8cafaa575",
+      "bytes": 1099
+    },
+    "release/inspector/stdout.log": {
+      "sha256": "218705df4d59eb20e8dc62d90d9acb9fad928b90abd64389cf3aec13f6c6945c",
+      "originalSha256": "218705df4d59eb20e8dc62d90d9acb9fad928b90abd64389cf3aec13f6c6945c",
+      "bytes": 2571
+    },
+    "release/inspector/summary.json": {
+      "sha256": "015a1cbcb4c397963eb55774905057f01bc17ac3cb99ebbfcdb09e04acb408c3",
+      "originalSha256": "015a1cbcb4c397963eb55774905057f01bc17ac3cb99ebbfcdb09e04acb408c3",
+      "bytes": 744
+    },
+    "debug/summary.json": {
+      "sha256": "4c78a678fbfb8d3058d9652a60c786ab9a4f30993b8e4e8bd567be7606a2e5a5",
+      "originalSha256": "4c78a678fbfb8d3058d9652a60c786ab9a4f30993b8e4e8bd567be7606a2e5a5",
+      "bytes": 1602
+    },
+    "debug/exploration/events.json.gz": {
+      "sha256": "c401ccf6f7b78672144b7d54241ff6c68015bcfde788dc587aec74504704808f",
+      "originalSha256": "ea816dc8d98b5d2d1bb16c2389a2aa78db84293229b6e8cf06e61618c38fbecc",
+      "bytes": 26633
+    },
+    "debug/exploration/stderr.log": {
+      "sha256": "2f729fa1705c5a3e1949059f31ea50c089c3282e6f05e2660758f8d50e865353",
+      "originalSha256": "2f729fa1705c5a3e1949059f31ea50c089c3282e6f05e2660758f8d50e865353",
+      "bytes": 1232
+    },
+    "debug/exploration/stdout.log": {
+      "sha256": "285538248bdfd939f6a9f36a088bcca1363dab22437b7e3452cdaa64a89401d0",
+      "originalSha256": "285538248bdfd939f6a9f36a088bcca1363dab22437b7e3452cdaa64a89401d0",
+      "bytes": 2636
+    },
+    "debug/exploration/summary.json": {
+      "sha256": "26156983b86e5fae7c9a0f6ff0430012b7bdab747b4578eebdf28a2bffe1812b",
+      "originalSha256": "26156983b86e5fae7c9a0f6ff0430012b7bdab747b4578eebdf28a2bffe1812b",
+      "bytes": 745
+    },
+    "debug/inspector/events.json.gz": {
+      "sha256": "0633bb3f5bbf635703a1007e800e829a689632d35969bf0a3a4ef4f69c72226c",
+      "originalSha256": "4c427443dde8f5d92d15834ae1071cbc1666cbfa40d076c82d4f255e190e5e95",
+      "bytes": 21513
+    },
+    "debug/inspector/stderr.log": {
+      "sha256": "9a281b3390544d11a1ce7b5091b6dc332be62c3c252868994c555e713c59fe45",
+      "originalSha256": "9a281b3390544d11a1ce7b5091b6dc332be62c3c252868994c555e713c59fe45",
+      "bytes": 1099
+    },
+    "debug/inspector/stdout.log": {
+      "sha256": "8dbe37a35d2a89ef70f041fc03e392f9c89a79b1bf4451735b2d4983b537c413",
+      "originalSha256": "8dbe37a35d2a89ef70f041fc03e392f9c89a79b1bf4451735b2d4983b537c413",
+      "bytes": 2565
+    },
+    "debug/inspector/summary.json": {
+      "sha256": "015a1cbcb4c397963eb55774905057f01bc17ac3cb99ebbfcdb09e04acb408c3",
+      "originalSha256": "015a1cbcb4c397963eb55774905057f01bc17ac3cb99ebbfcdb09e04acb408c3",
+      "bytes": 744
+    },
+    "test_editor_native_viewport.py": {
+      "sha256": "281596df15cf2b7900825e444965f2cbb03c6c6f8ebafa8047edded434dc1c87",
+      "originalSha256": "281596df15cf2b7900825e444965f2cbb03c6c6f8ebafa8047edded434dc1c87",
+      "bytes": 16606
+    }
+  }
+}

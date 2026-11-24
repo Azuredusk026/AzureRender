@@ -1917,6 +1917,11 @@ void ImGui_ImplVulkanH_CreateOrResizeWindow(VkInstance instance, VkPhysicalDevic
     ImGui_ImplVulkanH_CreateWindowSwapChain(physical_device, device, wd, allocator, width, height, min_image_count, image_usage);
     ImGui_ImplVulkanH_CreateWindowCommandBuffers(physical_device, device, wd, queue_family, allocator);
 
+    // AzureRender: a discard render pass transitions only the acquired image.
+    // Swapchain images cannot be submitted before vkAcquireNextImageKHR.
+    if (!wd->UseDynamicRendering && wd->AttachmentDesc.initialLayout == VK_IMAGE_LAYOUT_UNDEFINED)
+        return;
+
     // FIXME: to submit the command buffer, we need a queue. In the examples folder, the ImGui_ImplVulkanH_CreateOrResizeWindow function is called
     // before the ImGui_ImplVulkan_Init function, so we don't have access to the queue yet. Here we have the queue_family that we can use to grab
     // a queue from the device and submit the command buffer. It would be better to have access to the queue as suggested in the FIXME below.

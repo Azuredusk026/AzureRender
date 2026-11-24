@@ -1,0 +1,52 @@
+{
+  "status": "qualified-shared-specular-ramp",
+  "capture": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+  "captureSha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+  "sharedTexture": {
+    "path": "native-bindings/textures/ResourceId-6177.dds",
+    "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+  },
+  "draws": [
+    {
+      "event": 868,
+      "specularRampSlot": 12,
+      "resource": "ResourceId::6177",
+      "sampleInstruction": "1132: sample_l(texture2d)(float,float,float,float) r23.xzw, r24.xyxx, t12.xwyz, s0, l(0)",
+      "shaderSha256": "9f3e5a0ef3e820e863d2c0571cd8b6facc3e02c3433c4ee15364c0058da33ec2",
+      "assemblySha256": "c0a19512aae268c6b112007da32d6c03a4a50f81fba167a0da950d1dceac653d"
+    },
+    {
+      "event": 889,
+      "specularRampSlot": 12,
+      "resource": "ResourceId::6177",
+      "sampleInstruction": "1145: sample_l(texture2d)(float,float,float,float) r24.xzw, r25.xyxx, t12.xwyz, s0, l(0)",
+      "shaderSha256": "3d0f59dc13470cc6a6b40786bbcbef515b1fc352d96945ed5218b0140cd28d42",
+      "assemblySha256": "cb55378c781eb26ca9643bf4787788ccdcfc060b2bf198e958c31eb4d0da1407"
+    },
+    {
+      "event": 910,
+      "specularRampSlot": 12,
+      "resource": "ResourceId::6177",
+      "sampleInstruction": "1260: sample_l(texture2d)(float,float,float,float) r26.xzw, r27.xyxx, t12.xwyz, s0, l(0)",
+      "shaderSha256": "0d164a79b4c079e6d90f53fafb8eecb52119d06503b6dbb79f2749362012e753",
+      "assemblySha256": "6f8921a8ea2627231160c8de7c090e718abac0561a5c01a677f061b8edcc6911"
+    },
+    {
+      "event": 928,
+      "specularRampSlot": 12,
+      "resource": "ResourceId::6177",
+      "sampleInstruction": "1260: sample_l(texture2d)(float,float,float,float) r26.xzw, r27.xyxx, t12.xwyz, s0, l(0)",
+      "shaderSha256": "0d164a79b4c079e6d90f53fafb8eecb52119d06503b6dbb79f2749362012e753",
+      "assemblySha256": "6f8921a8ea2627231160c8de7c090e718abac0561a5c01a677f061b8edcc6911"
+    },
+    {
+      "event": 1383,
+      "specularRampSlot": 15,
+      "resource": "ResourceId::6177",
+      "sampleInstruction": "1464: sample_l(texture2d)(float,float,float,float) r23.xyz, r23.xyxx, t15.xyzw, s0, l(0)",
+      "shaderSha256": "135b25965ed786752775596a86f4069f58942eae340be4d143d291eea9429680",
+      "assemblySha256": "0f7b49c43aa50006c3567ba7e0e5dc8389f96353d5335de740c417ea3b0cf93d"
+    }
+  ],
+  "qualification": "Resource identity, texture dimension and actual sampling instruction jointly qualify the binding. Transparent draw 1383 uses slot 15; its slot 12 is a three-dimensional lighting resource."
+}

@@ -1,0 +1,19 @@
+import argparse,hashlib,json,os,re,subprocess,time
+from pathlib import Path
+root=Path.cwd();run=Path(__file__).resolve().parent;parser=argparse.ArgumentParser();parser.add_argument('--case',action='append');args=parser.parse_args();cfg='release';build=json.loads((run/(cfg+'-build.json')).read_text());assert build['status']=='built-contract-tests-passed';spec=json.loads((run/'lighting-candidate.json').read_text());player=root/'build/ninja-msvc-release/AzurePlayer.exe';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();assert sha(player)==build['programs']['AzurePlayer'];assert {p.name:sha(p) for p in (player.parent/'shaders').glob('*.spv')}==build['shaders'];cases=[(name,64,1536,1536,True) for name in ['fullbody-world-aa0','fullbody-source-aa0','fullbody-world-aa3','fullbody-source-aa3']]+[('near-world-linear',1,1536,1536,False),('full-world-hidden',12,2560,1440,False),('near-default-compatibility',1,1536,1536,False),('full-world-linear',12,2560,1440,False)]
+if args.case:assert set(args.case)<={c[0] for c in cases};cases=[c for c in cases if c[0] in args.case]
+env=os.environ.copy();env['DOTNET_ROOT']='D:/Tools/dotnet9';startup=subprocess.STARTUPINFO();startup.dwFlags|=subprocess.STARTF_USESHOWWINDOW;startup.wShowWindow=0;report=dict(status='running',programSha256=sha(player),shaders=build['shaders'],cases=[],visualAcceptance='failed-user-review')
+try:
+ for name,frames,width,height,animated in cases:
+  out=run/'shader-family-revision'/'native-captures'/name;out.mkdir(parents=True);project=run/'candidate-project'/(name+'.azureproject');assert project.is_file();command=[str(player),'--project',str(project),'--width',str(width),'--height',str(height),'--capture-frames',str(frames),'--capture-fps','60','--fixed-frame-step','--qa-camera','scene','--qa-light','scene','--capture-dir',str(out/'frames'),'--runtime-report',str(out/'runtime.json')]
+  if animated:command+=['--qa-animation']
+  row=dict(name=name,status='running',command=command);report['cases'].append(row);start=time.perf_counter();print('START',name,flush=True)
+  with (out/'player.log').open('wb') as log:result=subprocess.run(command,cwd=out,stdout=log,stderr=log,env=env,startupinfo=startup,timeout=700)
+  row.update(exitCode=result.returncode,seconds=time.perf_counter()-start);assert result.returncode==0,name;assert not re.search(r'VUID-|Validation (?:Error|Warning)|SYNC-HAZARD|\[error\]',(out/'player.log').read_text(errors='replace'),re.I);logs=[json.loads(line) for line in (out/'captures/azureplayer.log.jsonl').read_text().splitlines()];assert not any(r['level']=='error' or r['subsystem']=='validation' and r['level']=='warning' for r in logs);assert any(r['message']=='Allocator after unload: buffers=0 images=0' for r in logs);runtime=json.loads((out/'runtime.json').read_text());assert not runtime['scriptErrors'] and not runtime['presentationErrors'];manifest=json.loads((out/'frames/capture_manifest.json').read_text());assert manifest['materialSurfaceProfileLayoutVersion']==20 and manifest['capturedFrames']==frames
+  if name!='near-default-compatibility':assert len(manifest['materialLightingReceivers'])==5
+  images={p.name:sha(p) for p in sorted((out/'frames').glob('frame_*.png'))};assert len(images)==frames;row.update(status='captured',images=images);print('DONE',name,round(row['seconds'],2),flush=True);(run/'shader-family-revision'/'native-capture-summary.json').write_bytes((json.dumps(report,indent=2)+'\n').encode())
+ for name,digest in spec['inputs'].items():assert sha(run/'candidate-project'/name)==digest,name
+ assert sha(player)==report['programSha256'];report['status']='captured-inputs-unchanged'
+finally:
+ if report['status']=='running':report['status']='failed'
+ suffix='-'+','.join(args.case) if args.case else '';(run/'shader-family-revision'/('native-capture-summary'+suffix+'.json')).write_bytes((json.dumps(report,indent=2)+'\n').encode());print(report['status'])

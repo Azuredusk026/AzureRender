@@ -1,0 +1,1007 @@
+{
+  "schemaVersion": 1,
+  "status": "material-color-contract-verified-complete-skin-appearance-pending",
+  "run": "build\\runs\\20261023-140322-skin-ramp-capture-validation-4e1751",
+  "sourceCommit": "1f80c62",
+  "layout": {
+    "version": 3,
+    "bytes": 192,
+    "textureSlots": 9
+  },
+  "nativeExports": {
+    "schemaVersion": 1,
+    "shaders": [
+      {
+        "event": 783,
+        "stage": "PS",
+        "lines": 2047,
+        "shader": {
+          "sid": "ResourceId::16141",
+          "name": "HGRP/CharacterNPR_Skin(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _DIFF_RAMP_ON _NORMALMAP _SHADOW_LUT_TEX",
+          "resource_name": "HGRP/CharacterNPR_Skin(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _DIFF_RAMP_ON _NORMALMAP _SHADOW_LUT_TEX",
+          "source_name": "main",
+          "entry": "main"
+        },
+        "sha256": "002238aac2066e3037ce830f75627dcb13f506c83adc5f9a67bfdd28402c4c02"
+      },
+      {
+        "event": 804,
+        "stage": "PS",
+        "lines": 1684,
+        "shader": {
+          "sid": "ResourceId::19943",
+          "name": "HGRP/CharacterNPR_Skin(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _DIFF_RAMP_ON _EMOTION_MAP _HIGHLIGHT_MAP _SDFLIGHTMAP _SHADOW_LUT_TEX",
+          "resource_name": "HGRP/CharacterNPR_Skin(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _DIFF_RAMP_ON _EMOTION_MAP _HIGHLIGHT_MAP _SDFLIGHTMAP _SHADOW_LUT_TEX",
+          "source_name": "main",
+          "entry": "main"
+        },
+        "sha256": "f5d1be20c27e580cb0cd9ed3c1878843950d4b07e86d18e717ca1355381e2f08"
+      },
+      {
+        "event": 868,
+        "stage": "PS",
+        "lines": 2084,
+        "shader": {
+          "sid": "ResourceId::19949",
+          "name": "HGRP/CharacterNPR(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _DIFF_RAMP_ON _METALLICSPECGLOSSMAP _NORMALMAP _SPEC_RAMP_ON",
+          "resource_name": "HGRP/CharacterNPR(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _DIFF_RAMP_ON _METALLICSPECGLOSSMAP _NORMALMAP _SPEC_RAMP_ON",
+          "source_name": "main",
+          "entry": "main"
+        },
+        "sha256": "62fff602fdfd4c438d14bcf2e8b0306ccae28931dbac2a8ab90827c451c88169"
+      },
+      {
+        "event": 889,
+        "stage": "PS",
+        "lines": 2102,
+        "shader": {
+          "sid": "ResourceId::25965",
+          "name": "HGRP/CharacterNPR(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _DIFF_RAMP_ON _EMISSION _METALLICSPECGLOSSMAP _NORMALMAP _SHADOW_LUT_TEX _SPEC_RAMP_ON",
+          "resource_name": "HGRP/CharacterNPR(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _DIFF_RAMP_ON _EMISSION _METALLICSPECGLOSSMAP _NORMALMAP _SHADOW_LUT_TEX _SPEC_RAMP_ON",
+          "source_name": "main",
+          "entry": "main"
+        },
+        "sha256": "55154341dbcce75a3b521cb45ad73bd00be47bae5e95333b83d950f25dc21750"
+      },
+      {
+        "event": 910,
+        "stage": "PS",
+        "lines": 2244,
+        "shader": {
+          "sid": "ResourceId::139566",
+          "name": "HGRP/CharacterNPR(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _CHARACTER_VFX_SPECIAL _DIFF_RAMP_ON _EMISSION _METALLICSPECGLOSSMAP _NORMALMAP _SPEC_RAMP_ON",
+          "resource_name": "HGRP/CharacterNPR(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _CHARACTER_VFX_SPECIAL _DIFF_RAMP_ON _EMISSION _METALLICSPECGLOSSMAP _NORMALMAP _SPEC_RAMP_ON",
+          "source_name": "main",
+          "entry": "main"
+        },
+        "sha256": "2fc0222f750e0f758e48189da8401a542639c26f12193f4e49c279b8f6216ebc"
+      },
+      {
+        "event": 928,
+        "stage": "PS",
+        "lines": 2244,
+        "shader": {
+          "sid": "ResourceId::139566",
+          "name": "HGRP/CharacterNPR(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _CHARACTER_VFX_SPECIAL _DIFF_RAMP_ON _EMISSION _METALLICSPECGLOSSMAP _NORMALMAP _SPEC_RAMP_ON",
+          "resource_name": "HGRP/CharacterNPR(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _CHARACTER_VFX_SPECIAL _DIFF_RAMP_ON _EMISSION _METALLICSPECGLOSSMAP _NORMALMAP _SPEC_RAMP_ON",
+          "source_name": "main",
+          "entry": "main"
+        },
+        "sha256": "2fc0222f750e0f758e48189da8401a542639c26f12193f4e49c279b8f6216ebc"
+      },
+      {
+        "event": 1383,
+        "stage": "PS",
+        "lines": 2435,
+        "shader": {
+          "sid": "ResourceId::19968",
+          "name": "HGRP/CharacterNPR(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _ALPHABLEND_ON _DIFF_RAMP_ON _METALLICSPECGLOSSMAP _NORMALMAP _SPEC_RAMP_ON",
+          "resource_name": "HGRP/CharacterNPR(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _ALPHABLEND_ON _DIFF_RAMP_ON _METALLICSPECGLOSSMAP _NORMALMAP _SPEC_RAMP_ON",
+          "source_name": "main",
+          "entry": "main"
+        },
+        "sha256": "b802ce858bccdb8958c7f24c455e96852948bfc0587cdfc0390d18b779da48d4"
+      },
+      {
+        "event": 1038,
+        "stage": "VS",
+        "lines": 292,
+        "shader": {
+          "sid": "ResourceId::16197",
+          "name": "HGRP/CharacterNPR_Skin(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _DIFF_RAMP_ON _OUTLINE_MASK _SDFLIGHTMAP _SHADOW_LUT_TEX",
+          "resource_name": "HGRP/CharacterNPR_Skin(ShaderLOD: 600 PassName: ) | HG_ENABLE_PER_OBJECT_MV HG_ENABLE_SCREEN_SPACE_SHADOW_MASK SRP_INSTANCING_ON _DIFF_RAMP_ON _OUTLINE_MASK _SDFLIGHTMAP _SHADOW_LUT_TEX",
+          "source_name": "main",
+          "entry": "main"
+        },
+        "sha256": "18ea8b635bba1909e1b3bdbc815d5487fa1fef987b175c38aaa30a208c25a4a4"
+      }
+    ],
+    "textures": [
+      {
+        "event": 782,
+        "name": "before-skin",
+        "sha256": "a1551bf29e3458b7ae9ad6e2921ad21ca4242ca9774c5d81af7ab20a124c0261"
+      },
+      {
+        "event": 783,
+        "name": "after-skin",
+        "sha256": "017bb4eb2be6b1dc6a0b230351224ce8819d544cdbc3aeaab33d59d13b72bbe7"
+      },
+      {
+        "event": 803,
+        "name": "before-face",
+        "sha256": "017bb4eb2be6b1dc6a0b230351224ce8819d544cdbc3aeaab33d59d13b72bbe7"
+      },
+      {
+        "event": 804,
+        "name": "after-face",
+        "sha256": "9747ceffa3f9699eda8e58c5c158a4664fdd72b4d1c2f5e1e9359deb74a70c3b"
+      }
+    ],
+    "status": "passed"
+  },
+  "candidateInputs": {
+    "schemaVersion": 1,
+    "sourceModelSha256": "f3ae20294ab3d77517f1ec214a714a990d1284a492410f18446f0d046c5397dc",
+    "materials": {
+      "M_actor_laevat_body_01": {
+        "lighting": {
+          "schemaVersion": 1,
+          "ambientColor": [
+            1.1870100498199463,
+            0.9272286891937256,
+            0.8129898905754089
+          ],
+          "mainColor": [
+            1.0,
+            0.926181972026825,
+            0.8666666746139526
+          ]
+        },
+        "shadowScale": 0.550000011920929,
+        "sourceEvent": 783,
+        "sourceRows": {
+          "ambient": 113,
+          "main": 114,
+          "shadowScale": [
+            110,
+            2
+          ]
+        }
+      },
+      "M_actor_laevat_face_01": {
+        "lighting": {
+          "schemaVersion": 1,
+          "ambientColor": [
+            1.1870100498199463,
+            0.9272286891937256,
+            0.8129898905754089
+          ],
+          "mainColor": [
+            1.0,
+            0.926181972026825,
+            0.8666666746139526
+          ]
+        },
+        "shadowScale": 0.550000011920929,
+        "sourceEvent": 804,
+        "sourceRows": {
+          "ambient": 113,
+          "main": 114,
+          "shadowScale": [
+            110,
+            2
+          ]
+        }
+      }
+    },
+    "stages": [
+      "baseline",
+      "colors",
+      "colors-shadow",
+      "colors-shadow-rim"
+    ]
+  },
+  "nativeSkinProof": [
+    {
+      "event": 783,
+      "pixel": [
+        1251,
+        919
+      ],
+      "primitive": 4365,
+      "finalHdr": [
+        0.3650357127189636,
+        0.17765745520591736,
+        0.13960938155651093,
+        1.0
+      ],
+      "quarterExposureExpected": [
+        85,
+        59,
+        52
+      ],
+      "baselineMeasured": [
+        111,
+        79,
+        71
+      ],
+      "baselineMaximumByteError": 26,
+      "traceSha256": "a70ae9b1ee12ec196f7c4e152077567747a68e7e7508c89132ae2f8b91a14bd0",
+      "rampCoordinate": [
+        0.5832687616348267,
+        0.5
+      ],
+      "ramp": [
+        0.9122911691665649,
+        0.6064087748527527,
+        0.46594950556755066,
+        0.6142519116401672
+      ],
+      "base": [
+        0.4296633303165436,
+        0.23663552105426788,
+        0.18798868358135223
+      ],
+      "shadow": [
+        0.36165502667427063,
+        0.187611922621727,
+        0.1437707245349884
+      ],
+      "baseAo": 1.0,
+      "characterVisibility": 0.019607843831181526,
+      "sceneVisibility": 1.0,
+      "litMask": 0.019607843831181526,
+      "indirectNormal": [
+        -0.9441447257995605,
+        6.113709969213232e-05,
+        0.3295312821865082
+      ],
+      "predictedColor": [
+        0.19306905023781334,
+        0.08368145300802278,
+        0.05824268792897522
+      ],
+      "nativeColor": [
+        0.19306904077529907,
+        0.08368144184350967,
+        0.05824267864227295
+      ],
+      "predictedIllumination": [
+        1.8604580385702776,
+        1.787181711963824,
+        1.7518213955464825
+      ],
+      "nativeIllumination": [
+        1.8604581356048584,
+        1.7871816158294678,
+        1.751821517944336
+      ],
+      "errors": {
+        "color": 1.116451310567701e-08,
+        "illumination": 1.2239785340817377e-07
+      }
+    },
+    {
+      "event": 783,
+      "pixel": [
+        1368,
+        380
+      ],
+      "primitive": 1522,
+      "finalHdr": [
+        1.1466652154922485,
+        0.6806761026382446,
+        0.515252947807312,
+        1.0
+      ],
+      "quarterExposureExpected": [
+        146,
+        115,
+        101
+      ],
+      "baselineMeasured": [
+        223,
+        185,
+        165
+      ],
+      "baselineMaximumByteError": 77,
+      "traceSha256": "6708b24b1b11e04893e8e80b252b77bae9885f6b004af364c1a18d7404656d24",
+      "rampCoordinate": [
+        0.7120813131332397,
+        0.5
+      ],
+      "ramp": [
+        0.991348147392273,
+        0.8258334994316101,
+        0.7504997253417969,
+        0.8187991380691528
+      ],
+      "base": [
+        0.4862147569656372,
+        0.3430928587913513,
+        0.2961178123950958
+      ],
+      "shadow": [
+        0.4004618227481842,
+        0.2557000517845154,
+        0.21305888891220093
+      ],
+      "baseAo": 1.0,
+      "characterVisibility": 1.0,
+      "sceneVisibility": 1.0,
+      "litMask": 0.8187991380691528,
+      "indirectNormal": [
+        -0.845409631729126,
+        6.238213245524094e-05,
+        0.5341185331344604
+      ],
+      "predictedColor": [
+        0.43339939437447267,
+        0.2910624703986506,
+        0.24574488875556452
+      ],
+      "nativeColor": [
+        0.43339940905570984,
+        0.29106244444847107,
+        0.24574488401412964
+      ],
+      "predictedIllumination": [
+        1.9127964915948243,
+        1.783437301968359,
+        1.683526041695516
+      ],
+      "nativeIllumination": [
+        1.9127963781356812,
+        1.7834373712539673,
+        1.6835261583328247
+      ],
+      "errors": {
+        "color": 2.595017950524081e-08,
+        "illumination": 1.1663730870026257e-07
+      }
+    },
+    {
+      "event": 804,
+      "pixel": [
+        1276,
+        276
+      ],
+      "primitive": 2510,
+      "finalHdr": [
+        1.3467332124710083,
+        0.888913094997406,
+        0.6803919672966003,
+        1.0
+      ],
+      "quarterExposureExpected": [
+        157,
+        130,
+        115
+      ],
+      "baselineMeasured": [
+        157,
+        136,
+        125
+      ],
+      "baselineMaximumByteError": 10,
+      "traceSha256": "35a722b9ca6d1b9af379e8991bf16cb7c1d49d72342e2676e47db17f5574152e"
+    },
+    {
+      "event": 804,
+      "pixel": [
+        1281,
+        300
+      ],
+      "primitive": 1740,
+      "finalHdr": [
+        1.4288400411605835,
+        0.989357590675354,
+        0.7780953049659729,
+        1.0
+      ],
+      "quarterExposureExpected": [
+        161,
+        136,
+        122
+      ],
+      "baselineMeasured": [
+        161,
+        142,
+        133
+      ],
+      "baselineMaximumByteError": 11,
+      "traceSha256": "718720e47e29fe656e45ef4db13fbf9b7b70afb2beb76b59b7f2c10ead3bc031"
+    }
+  ],
+  "observations": [
+    {
+      "stage": "baseline",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "expected": [
+            85,
+            59,
+            52
+          ],
+          "measured": [
+            111,
+            79,
+            71
+          ],
+          "maximumByteError": 26
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "expected": [
+            146,
+            115,
+            101
+          ],
+          "measured": [
+            223,
+            185,
+            165
+          ],
+          "maximumByteError": 77
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "expected": [
+            157,
+            130,
+            115
+          ],
+          "measured": [
+            157,
+            136,
+            125
+          ],
+          "maximumByteError": 10
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "expected": [
+            161,
+            136,
+            122
+          ],
+          "measured": [
+            161,
+            142,
+            133
+          ],
+          "maximumByteError": 11
+        }
+      ]
+    },
+    {
+      "stage": "colors",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "expected": [
+            85,
+            59,
+            52
+          ],
+          "measured": [
+            108,
+            76,
+            69
+          ],
+          "maximumByteError": 23
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "expected": [
+            146,
+            115,
+            101
+          ],
+          "measured": [
+            222,
+            183,
+            163
+          ],
+          "maximumByteError": 76
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "expected": [
+            157,
+            130,
+            115
+          ],
+          "measured": [
+            157,
+            132,
+            118
+          ],
+          "maximumByteError": 3
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "expected": [
+            161,
+            136,
+            122
+          ],
+          "measured": [
+            161,
+            138,
+            125
+          ],
+          "maximumByteError": 3
+        }
+      ]
+    },
+    {
+      "stage": "colors-shadow",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "expected": [
+            85,
+            59,
+            52
+          ],
+          "measured": [
+            81,
+            57,
+            52
+          ],
+          "maximumByteError": 4
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "expected": [
+            146,
+            115,
+            101
+          ],
+          "measured": [
+            212,
+            177,
+            157
+          ],
+          "maximumByteError": 66
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "expected": [
+            157,
+            130,
+            115
+          ],
+          "measured": [
+            156,
+            131,
+            118
+          ],
+          "maximumByteError": 3
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "expected": [
+            161,
+            136,
+            122
+          ],
+          "measured": [
+            161,
+            138,
+            125
+          ],
+          "maximumByteError": 3
+        }
+      ]
+    },
+    {
+      "stage": "colors-shadow-rim",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "expected": [
+            85,
+            59,
+            52
+          ],
+          "measured": [
+            81,
+            57,
+            51
+          ],
+          "maximumByteError": 4
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "expected": [
+            146,
+            115,
+            101
+          ],
+          "measured": [
+            212,
+            176,
+            157
+          ],
+          "maximumByteError": 66
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "expected": [
+            157,
+            130,
+            115
+          ],
+          "measured": [
+            156,
+            131,
+            118
+          ],
+          "maximumByteError": 3
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "expected": [
+            161,
+            136,
+            122
+          ],
+          "measured": [
+            161,
+            138,
+            125
+          ],
+          "maximumByteError": 3
+        }
+      ]
+    }
+  ],
+  "cpu": [
+    {
+      "config": "release",
+      "tests": 5,
+      "passed": true
+    },
+    {
+      "config": "debug",
+      "tests": 5,
+      "passed": true
+    }
+  ],
+  "gpu": [
+    {
+      "config": "release",
+      "kind": "illumination",
+      "captures": 17,
+      "maximumLinearError": 0.001010887882328615,
+      "summaries": [
+        {
+          "path": "build\\runs\\20261023-140322-skin-ramp-capture-validation-4e1751\\illumination-release\\summary.json",
+          "sha256": "0614fb4c3eecde6f251aa054e5cdb5c7da5831a0ec5f720a9541e7682af24a4f"
+        },
+        {
+          "path": "build\\runs\\20261023-140322-skin-ramp-capture-validation-4e1751\\illumination-release-retry\\summary.json",
+          "sha256": "374bdd7801df0153ac06c66987705ee2d530a84f83bd264a3fac0e90e7232f1d"
+        }
+      ]
+    },
+    {
+      "config": "release",
+      "kind": "hair",
+      "captures": 4,
+      "maximumLinearError": 0.0012530151755288377,
+      "summaries": [
+        {
+          "path": "build\\runs\\20261023-140322-skin-ramp-capture-validation-4e1751\\hair-release\\summary.json",
+          "sha256": "17688c80bde069323e2a61bd5e92e24c9f66ff553a9a7bea916a327548d53521"
+        }
+      ]
+    },
+    {
+      "config": "debug",
+      "kind": "illumination",
+      "captures": 17,
+      "maximumLinearError": 0.001010887882328615,
+      "summaries": [
+        {
+          "path": "build\\runs\\20261023-140322-skin-ramp-capture-validation-4e1751\\illumination-debug\\summary.json",
+          "sha256": "a4aa309f07a2f019beef977eb238906350aca74f986bf603d7d75220a23b2274"
+        }
+      ]
+    },
+    {
+      "config": "debug",
+      "kind": "hair",
+      "captures": 4,
+      "maximumLinearError": 0.0012530151755288377,
+      "summaries": [
+        {
+          "path": "build\\runs\\20261023-140322-skin-ramp-capture-validation-4e1751\\hair-debug\\summary.json",
+          "sha256": "20268d6b0cd9e360ef2b39924aee77498ed2b24136011e97169d4cae509549a3"
+        }
+      ]
+    }
+  ],
+  "actualCaptures": [
+    {
+      "name": "baseline",
+      "config": "release",
+      "passed": true,
+      "playerSha256": "46ccb2796ed798e5c61e7509fba658dcdca5b65a50f1751b34727bbf35032f7e",
+      "imageSha256": "32b1a106ade95abc5df32fdceb7856ae86c91522746a300fbdd12f43118b4341",
+      "textureCache": {
+        "requests": 122,
+        "hits": 77,
+        "uniqueTextures": 45,
+        "requestedBytes": 449861588,
+        "residentBytes": 304190700,
+        "retainedPixelBytes": 246516260,
+        "hashedPixelBytes": 355836312,
+        "copiedPixelBytes": 0,
+        "transferredPixelBytes": 246516260,
+        "discardedPixelBytes": 109320052,
+        "hashMs": 360.687,
+        "matchMs": 13.1833,
+        "mipMs": 953.771,
+        "uploadMs": 317.93
+      },
+      "sceneLoad": {
+        "cpuPrepareMs": 5819.5,
+        "meshUploadMs": 9.2217,
+        "materialUploadMs": 1659.63,
+        "sharedTexturesMs": 11.4767,
+        "buffersMs": 0.0407,
+        "skinningMs": 0.5057,
+        "descriptorsMs": 1.5579,
+        "pipelinesMs": 4548.87,
+        "decodedMaterialPixelBytes": 355836316,
+        "remainingMaterialPixelBytes": 4
+      },
+      "maximumByteDifference": 0
+    },
+    {
+      "name": "colors",
+      "config": "release",
+      "passed": true,
+      "playerSha256": "46ccb2796ed798e5c61e7509fba658dcdca5b65a50f1751b34727bbf35032f7e",
+      "imageSha256": "f7276d65566d3d96c93d7af0de6fb06b0ae99996dafcd2ce553acb6a75650a54",
+      "textureCache": {
+        "requests": 122,
+        "hits": 77,
+        "uniqueTextures": 45,
+        "requestedBytes": 449861588,
+        "residentBytes": 304190700,
+        "retainedPixelBytes": 246516260,
+        "hashedPixelBytes": 355836312,
+        "copiedPixelBytes": 0,
+        "transferredPixelBytes": 246516260,
+        "discardedPixelBytes": 109320052,
+        "hashMs": 415.281,
+        "matchMs": 18.7322,
+        "mipMs": 1081.4,
+        "uploadMs": 102.735
+      },
+      "sceneLoad": {
+        "cpuPrepareMs": 6243.18,
+        "meshUploadMs": 6.2175,
+        "materialUploadMs": 1632.62,
+        "sharedTexturesMs": 10.2452,
+        "buffersMs": 0.0415,
+        "skinningMs": 0.5841,
+        "descriptorsMs": 1.2727,
+        "pipelinesMs": 7.6061,
+        "decodedMaterialPixelBytes": 355836316,
+        "remainingMaterialPixelBytes": 4
+      }
+    },
+    {
+      "name": "colors-shadow",
+      "config": "release",
+      "passed": true,
+      "playerSha256": "46ccb2796ed798e5c61e7509fba658dcdca5b65a50f1751b34727bbf35032f7e",
+      "imageSha256": "1bc92e4b2898d774e525390ed86aa117b49128e48e044dacb543e6a9fdcccef2",
+      "textureCache": {
+        "requests": 122,
+        "hits": 77,
+        "uniqueTextures": 45,
+        "requestedBytes": 449861588,
+        "residentBytes": 304190700,
+        "retainedPixelBytes": 246516260,
+        "hashedPixelBytes": 355836312,
+        "copiedPixelBytes": 0,
+        "transferredPixelBytes": 246516260,
+        "discardedPixelBytes": 109320052,
+        "hashMs": 432.575,
+        "matchMs": 15.6935,
+        "mipMs": 1096.52,
+        "uploadMs": 98.007
+      },
+      "sceneLoad": {
+        "cpuPrepareMs": 6110.4,
+        "meshUploadMs": 3.5442,
+        "materialUploadMs": 1657.25,
+        "sharedTexturesMs": 9.6197,
+        "buffersMs": 0.045,
+        "skinningMs": 0.942,
+        "descriptorsMs": 1.4986,
+        "pipelinesMs": 8.0646,
+        "decodedMaterialPixelBytes": 355836316,
+        "remainingMaterialPixelBytes": 4
+      }
+    },
+    {
+      "name": "colors-shadow-rim",
+      "config": "release",
+      "passed": true,
+      "playerSha256": "46ccb2796ed798e5c61e7509fba658dcdca5b65a50f1751b34727bbf35032f7e",
+      "imageSha256": "e9db2b17008b16a90d6853b79da84af69208ae51e0f6b7991fe6864481920a47",
+      "textureCache": {
+        "requests": 122,
+        "hits": 77,
+        "uniqueTextures": 45,
+        "requestedBytes": 449861588,
+        "residentBytes": 304190700,
+        "retainedPixelBytes": 246516260,
+        "hashedPixelBytes": 355836312,
+        "copiedPixelBytes": 0,
+        "transferredPixelBytes": 246516260,
+        "discardedPixelBytes": 109320052,
+        "hashMs": 490.712,
+        "matchMs": 16.6395,
+        "mipMs": 1306.86,
+        "uploadMs": 132.83
+      },
+      "sceneLoad": {
+        "cpuPrepareMs": 6373.67,
+        "meshUploadMs": 2.5415,
+        "materialUploadMs": 1963.94,
+        "sharedTexturesMs": 9.9519,
+        "buffersMs": 0.0435,
+        "skinningMs": 0.7051,
+        "descriptorsMs": 2.1895,
+        "pipelinesMs": 9.1653,
+        "decodedMaterialPixelBytes": 355836316,
+        "remainingMaterialPixelBytes": 4
+      }
+    },
+    {
+      "name": "fixed",
+      "config": "debug",
+      "passed": true,
+      "playerSha256": "52286e5ca7da2540adaef7d366257b18a0adf42064d214252a11963cc9998ff3",
+      "imageSha256": "e9db2b17008b16a90d6853b79da84af69208ae51e0f6b7991fe6864481920a47",
+      "textureCache": {
+        "requests": 122,
+        "hits": 77,
+        "uniqueTextures": 45,
+        "requestedBytes": 449861588,
+        "residentBytes": 304190700,
+        "retainedPixelBytes": 246516260,
+        "hashedPixelBytes": 355836312,
+        "copiedPixelBytes": 0,
+        "transferredPixelBytes": 246516260,
+        "discardedPixelBytes": 109320052,
+        "hashMs": 381.418,
+        "matchMs": 19.2937,
+        "mipMs": 2822.46,
+        "uploadMs": 294.899
+      },
+      "sceneLoad": {
+        "cpuPrepareMs": 28672.6,
+        "meshUploadMs": 10.1023,
+        "materialUploadMs": 3550.16,
+        "sharedTexturesMs": 25.4711,
+        "buffersMs": 0.1665,
+        "skinningMs": 0.1597,
+        "descriptorsMs": 4.6094,
+        "pipelinesMs": 23.9278,
+        "decodedMaterialPixelBytes": 355836316,
+        "remainingMaterialPixelBytes": 4
+      },
+      "maximumByteDifference": 0
+    },
+    {
+      "name": "main",
+      "config": "release",
+      "passed": true,
+      "playerSha256": "46ccb2796ed798e5c61e7509fba658dcdca5b65a50f1751b34727bbf35032f7e",
+      "imageSha256": "c226beac7b389f90447785ea4c1d3ccf45fc052a5e3bc40210462d7d88841919",
+      "textureCache": {
+        "requests": 6394,
+        "hits": 5984,
+        "uniqueTextures": 410,
+        "requestedBytes": 9374021700,
+        "residentBytes": 2383166896,
+        "retainedPixelBytes": 1788622036,
+        "hashedPixelBytes": 7031835932,
+        "copiedPixelBytes": 0,
+        "transferredPixelBytes": 1788622036,
+        "discardedPixelBytes": 5243213896,
+        "hashMs": 7702.33,
+        "matchMs": 935.763,
+        "mipMs": 11032.9,
+        "uploadMs": 2071.98
+      },
+      "sceneLoad": {
+        "cpuPrepareMs": 63412.6,
+        "meshUploadMs": 518.385,
+        "materialUploadMs": 21872.6,
+        "sharedTexturesMs": 49.4824,
+        "buffersMs": 1.7232,
+        "skinningMs": 2.929,
+        "descriptorsMs": 11.17,
+        "pipelinesMs": 4738.87,
+        "decodedMaterialPixelBytes": 7031835932,
+        "remainingMaterialPixelBytes": 0
+      },
+      "maximumByteDifference": 0
+    }
+  ],
+  "remaining": [
+    "independent character visibility and scene visibility",
+    "view-dependent lit-albedo tint",
+    "skin dielectric specular and complete contributions",
+    "one-byte and full-region image gates",
+    "NR8-V2 production promotion"
+  ],
+  "sources": {
+    "src/assets/GltfLoader.cpp": "d6eecc567dd0ae7af9fa7d9f34dedcbb5efcb80cc04ead54980c6ef7f3336749",
+    "src/assets/GltfLoader.hpp": "38c7452038974fcf1a1707f32ae9401795e4b0f7bd8ef8437e5c862ee1e30b94",
+    "src/assets/MaterialSurfaceProfile.hpp": "aee250db58d7ceeb14b2bbee7c76bc916797449dfe34c48b84e1704ab4f162c1",
+    "shaders/mesh.frag": "bea32831f39e1df6a9ccab31107c9ef0b05784425ad86e77eb699ad0bdde6628",
+    "src/scenes/CharacterSceneRenderer.cpp": "6c2de0949c020a043d8a0d3dd6219a899285f936d5a91b06f62e284be7b5a6ac",
+    "tools/endfield_native/npr_lighting.py": "297ca2d474aaa0978b0b6aaa3c504232f8204539df8f0bd38fe97b7a818291d1"
+  }
+}

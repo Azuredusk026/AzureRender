@@ -1,0 +1,246 @@
+{
+  "status": "candidate-isolated-full-region-failed",
+  "sourceCommit": "d7db45bb5513d7ad0d3ca62423dbfec807691981",
+  "sourceAndProductionUnchanged": true,
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "reference": {
+    "rows": [
+      {
+        "name": "original",
+        "maskPixels": 17017,
+        "pixelsOverOneByte": 73,
+        "maximumByteError": 6,
+        "meanAbsoluteByteError": 0.2899453487688782,
+        "changedHairPixels": 0,
+        "point1322_263": [
+          106,
+          47,
+          49
+        ]
+      },
+      {
+        "name": "roundtrip",
+        "maskPixels": 17017,
+        "pixelsOverOneByte": 73,
+        "maximumByteError": 6,
+        "meanAbsoluteByteError": 0.2899453487688782,
+        "changedHairPixels": 0,
+        "point1322_263": [
+          106,
+          47,
+          49
+        ]
+      },
+      {
+        "name": "coarse",
+        "maskPixels": 17017,
+        "pixelsOverOneByte": 73,
+        "maximumByteError": 6,
+        "meanAbsoluteByteError": 0.2899453487688782,
+        "changedHairPixels": 0,
+        "point1322_263": [
+          106,
+          47,
+          49
+        ]
+      },
+      {
+        "name": "fine",
+        "maskPixels": 17017,
+        "pixelsOverOneByte": 72,
+        "maximumByteError": 5,
+        "meanAbsoluteByteError": 0.28974946622005443,
+        "changedHairPixels": 2,
+        "point1322_263": [
+          105,
+          44,
+          44
+        ]
+      },
+      {
+        "name": "flipped-quad",
+        "maskPixels": 17017,
+        "pixelsOverOneByte": 72,
+        "maximumByteError": 5,
+        "meanAbsoluteByteError": 0.2897102897102897,
+        "changedHairPixels": 5,
+        "point1322_263": [
+          105,
+          44,
+          44
+        ]
+      }
+    ],
+    "nativeSha256": "7590b5bbe131bdd9960f3357dd4240f5b48208ebee9a5f713197431f9bafcf6e",
+    "maskSha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7",
+    "referenceScale": 0.25,
+    "transfer": "IEC sRGB; nearest integer byte",
+    "scope": "Original 17017-pixel mask and one-byte budget"
+  },
+  "variants": [
+    {
+      "name": "roundtrip",
+      "file": "roundtrip.spv",
+      "sha256": "dbb56418623da5daae948709a88193f23503d2f18cc20dc5400a0e40940aebfc",
+      "replacedOperations": 0,
+      "bindings": [],
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-as.exe",
+        "--target-env",
+        "vulkan1.0",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-191143-hair-gradient-region-08b1f9\\roundtrip.spvasm",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-191143-hair-gradient-region-08b1f9\\roundtrip.spv"
+      ]
+    },
+    {
+      "name": "coarse",
+      "file": "coarse.spv",
+      "sha256": "00277e0b3c16b3c0395122d1f09f99622a7ee7b2dab34a0a00157336cfc7dacd",
+      "replacedOperations": 22,
+      "bindings": [
+        1,
+        1,
+        2,
+        8,
+        3,
+        5,
+        6,
+        12,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        6,
+        12,
+        8,
+        12
+      ],
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-as.exe",
+        "--target-env",
+        "vulkan1.0",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-191143-hair-gradient-region-08b1f9\\coarse.spvasm",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-191143-hair-gradient-region-08b1f9\\coarse.spv"
+      ]
+    },
+    {
+      "name": "fine",
+      "file": "fine.spv",
+      "sha256": "d92f1d41a24e8fd428718a2ce49c201cbeff8fd0ea91e03b55238cdbebcfed57",
+      "replacedOperations": 22,
+      "bindings": [
+        1,
+        1,
+        2,
+        8,
+        3,
+        5,
+        6,
+        12,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        6,
+        12,
+        8,
+        12
+      ],
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-as.exe",
+        "--target-env",
+        "vulkan1.0",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-191143-hair-gradient-region-08b1f9\\fine.spvasm",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-191143-hair-gradient-region-08b1f9\\fine.spv"
+      ]
+    },
+    {
+      "name": "flipped-quad",
+      "file": "flipped-quad.spv",
+      "sha256": "0c701ab084a92ee913d33eb88f38f88040ef3cec8ee22994e4c1c76457c3f4b2",
+      "replacedOperations": 22,
+      "bindings": [
+        1,
+        1,
+        2,
+        8,
+        3,
+        5,
+        6,
+        12,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        6,
+        12,
+        8,
+        12
+      ],
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-as.exe",
+        "--target-env",
+        "vulkan1.1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-191143-hair-gradient-region-08b1f9\\flipped-quad.spvasm",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-191143-hair-gradient-region-08b1f9\\flipped-quad.spv"
+      ]
+    }
+  ],
+  "replay": {
+    "status": "compared",
+    "variants": [
+      {
+        "name": "roundtrip",
+        "cropSha256": "ba033dee54c9e28abada4d44dff1e29ce63fc25b6ead9a6d23b4d70c65eaefd9",
+        "debugMessages": [],
+        "debugMessageCount": 0
+      },
+      {
+        "name": "coarse",
+        "cropSha256": "ba033dee54c9e28abada4d44dff1e29ce63fc25b6ead9a6d23b4d70c65eaefd9",
+        "debugMessages": [],
+        "debugMessageCount": 0
+      },
+      {
+        "name": "fine",
+        "cropSha256": "4d45465c18729b526cab36c4345cd4effd86f93ae6052f448c0b31684d23764e",
+        "debugMessages": [],
+        "debugMessageCount": 0
+      },
+      {
+        "name": "flipped-quad",
+        "cropSha256": "1b5589188d0a100a60142dee311b55a5777f309dbd4d1ba5748985fb7b08a8c6",
+        "debugMessages": [],
+        "debugMessageCount": 0
+      }
+    ]
+  },
+  "initialValidationFailure": "Explicit fine/coarse instructions required DerivativeControl capability; the capability was added before the replay batch.",
+  "fullHairAccepted": false,
+  "productionPixelsOverOneByte": 73,
+  "performanceCountersUsed": false,
+  "archiveSha256": "2c2dc47e2ef8a9e678c80d27aa56fc4ab377cad42ac91428d64b85b4414a7d3d",
+  "archiveBytes": 2216068
+}

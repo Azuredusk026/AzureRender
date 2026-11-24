@@ -1,0 +1,249 @@
+{
+  "status": "implemented-verified",
+  "baselineCommit": "fd74b2e",
+  "run": "20261109-074654-buffer-memory-properties-29b40d",
+  "checks": [
+    {
+      "configuration": "release",
+      "device": "cpu",
+      "target": "AzureMaterialTextureSharingTests",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 2.4839999999967404,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMaterialTextureSharingTests.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-074654-buffer-memory-properties-29b40d\\tmp"
+      }
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "target": "AzureGpuBufferPolicyGpuTests",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 4.469000000011874,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureGpuBufferPolicyGpuTests.exe"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-074654-buffer-memory-properties-29b40d\\tmp"
+      }
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "target": "AzureGpuBufferPolicyGpuTests",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 3.1570000000065193,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureGpuBufferPolicyGpuTests.exe"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-074654-buffer-memory-properties-29b40d\\tmp"
+      }
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "target": "AzureVolumeImageUploadGpuTests",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 2.2820000000065193,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureVolumeImageUploadGpuTests.exe"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-074654-buffer-memory-properties-29b40d\\tmp"
+      }
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "target": "AzureVolumeImageUploadGpuTests",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 1.125,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureVolumeImageUploadGpuTests.exe"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-074654-buffer-memory-properties-29b40d\\tmp"
+      }
+    },
+    {
+      "configuration": "debug",
+      "device": "cpu",
+      "target": "AzureMaterialTextureSharingTests",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 3.48499999998603,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMaterialTextureSharingTests.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-074654-buffer-memory-properties-29b40d\\tmp"
+      }
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "target": "AzureGpuBufferPolicyGpuTests",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 6.094000000011874,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureGpuBufferPolicyGpuTests.exe"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-074654-buffer-memory-properties-29b40d\\tmp"
+      }
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "target": "AzureGpuBufferPolicyGpuTests",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 3.1570000000065193,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureGpuBufferPolicyGpuTests.exe"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-074654-buffer-memory-properties-29b40d\\tmp"
+      }
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "target": "AzureVolumeImageUploadGpuTests",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 3.0780000000086147,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureVolumeImageUploadGpuTests.exe"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-074654-buffer-memory-properties-29b40d\\tmp"
+      }
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "target": "AzureVolumeImageUploadGpuTests",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 1.0780000000086147,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureVolumeImageUploadGpuTests.exe"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-074654-buffer-memory-properties-29b40d\\tmp"
+      }
+    }
+  ],
+  "native": {
+    "status": "observed-selected-buffer-memory-types",
+    "allocator": {
+      "bufferAllocations": 2038,
+      "imageAllocations": 442,
+      "liveBuffers": 878,
+      "liveImages": 442,
+      "bufferBytes": 2569152016,
+      "imageBytes": 2803940864,
+      "liveBufferBytes": 208584240,
+      "liveImageBytes": 2803940864,
+      "deviceLocalPeakBytes": 3254442816,
+      "bufferMemoryProperties": {
+        "samples": 2038,
+        "liveDeviceLocalBytes": 208584240,
+        "liveNonDeviceLocalBytes": 0,
+        "liveMappedDeviceBytes": 33504560,
+        "liveMappedNonLocalDeviceBytes": 0
+      }
+    },
+    "sourceUnchanged": true,
+    "inputsVerified": 1729,
+    "sceneLoad": {
+      "cpuPrepareMs": 37511.0162,
+      "meshUploadMs": 483.3998,
+      "materialUploadMs": 12466.5615,
+      "sharedTexturesMs": 369.9969,
+      "buffersMs": 85.3362,
+      "skinningMs": 3.7796,
+      "descriptorsMs": 64.4933,
+      "pipelinesMs": 129.8474,
+      "decodedMaterialPixelBytes": 6365826224,
+      "remainingMaterialPixelBytes": 8
+    },
+    "frames": 2,
+    "formalPerformancePassed": false
+  },
+  "builds": {
+    "release": {
+      "manifestSha256": "ca42c065c8771246cca7c839e63005cc8983878a384a8df106138ac22e90970b",
+      "sourceCount": 1673
+    },
+    "debug": {
+      "manifestSha256": "a21a5eb822ce494c3611d025ab088e21d93c654ba06ca0852f9084b3700b6dc2",
+      "sourceCount": 1673
+    }
+  },
+  "sourceHashes": {
+    "src/rhi/IGpuAllocator.hpp": "e98d359fd29745caf3c4930d96a86250421a242245d7b4e18e093fee94e95b3b",
+    "src/rhi/GpuAllocator.cpp": "aa47e3a0ea3083090cf1b1653c12898d77160c7fb4336f2735e04b547762d070",
+    "src/rhi/NullRhi.cpp": "696ffd23e86d93e0b569bbea8b4027e69e9eda6670e16d2be38e9e39e3cde85b",
+    "src/app/AzureRenderCapture.cpp": "3331b3bddcf92e0250c3c8b6a6b4412964d0f585d19a97791b9c6c55b7dda046",
+    "tests/GpuBufferPolicyGpuTests.cpp": "1fed1156f12e0ae020be01815f326b6fe5709c6efbdb081decfcb49dfe135c75"
+  },
+  "shadersUnchangedPerConfiguration": 675,
+  "newNativeRuns": 1,
+  "nativeFrames": 2,
+  "nativeImages": 0,
+  "formalPerformancePassed": false,
+  "visualStatus": "failed-user-review",
+  "protectedUserDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "cleanup": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-074654-buffer-memory-properties-29b40d\\tmp",
+      "logicalBytes": 24
+    }
+  ],
+  "remainingRunBytes": 165601,
+  "archiveBytes": 279597,
+  "archiveSha256": "cdc44d4cb299d7feddf98170357c096c45784a48b9880434d3358d1aea9414a7"
+}

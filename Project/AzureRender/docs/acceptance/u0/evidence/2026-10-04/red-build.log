@@ -1,0 +1,139 @@
+[0/1] Re-running CMake...
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+-- Automatically setting %HTTP(S)_PROXY% environment variables to "127.0.0.1:7897".
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+    glfw3:x64-windows@3.5.1
+  * imath:x64-windows@3.2.2
+    joltphysics:x64-windows@5.6.0
+  * libdeflate[core,zlib,gzip,decompression,compression]:x64-windows@1.25
+    lua:x64-windows@5.4.8
+  * nlohmann-json:x64-windows@3.12.0#2
+    openexr:x64-windows@3.4.13
+  * openjph:x64-windows@0.31.0
+    sol2:x64-windows@3.5.0#1
+    stb:x64-windows@2024-07-29#1
+    tinygltf:x64-windows@3.0.0#1
+  * vcpkg-cmake:x64-windows@2024-04-23
+  * vcpkg-cmake-config:x64-windows@2026-07-21
+    vulkan-memory-allocator:x64-windows@3.4.0
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+All requested installations completed successfully in: 274 us
+-- Running vcpkg install - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+[1/5] Building CXX object CMakeFiles\AzureGameplayPresentationTests.dir\tests\GameplayPresentationTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzureGameplayPresentationTests.dir/tests/GameplayPresentationTests.cpp.obj
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_ENABLE_VALIDATION=1 -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DJPH_FLOATING_POINT_EXCEPTIONS_ENABLED -DJPH_OBJECT_STREAM -DJPH_USE_CPU_COMPUTE -DOPENEXR_DLL -I..\..\src -Igenerated -IC:\VulkanSDK\1.4.350.0\include -Ivcpkg_installed\x64-windows\include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath -MDd /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzureGameplayPresentationTests.dir\tests\GameplayPresentationTests.cpp.obj /FdCMakeFiles\AzureGameplayPresentationTests.dir\ /FS -c ..\..\tests\GameplayPresentationTests.cpp
+..\..\tests\GameplayPresentationTests.cpp(1): fatal error C1083: 无法打开包括文件: “runtime/AnimationStateMachine.hpp”: No such file or directory
+[2/5] Building CXX object CMakeFiles\AzureEditorWorkflowTests.dir\tests\EditorWorkflowTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzureEditorWorkflowTests.dir/tests/EditorWorkflowTests.cpp.obj
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_ENABLE_VALIDATION=1 -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DGLFW_DLL -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DJPH_FLOATING_POINT_EXCEPTIONS_ENABLED -DJPH_OBJECT_STREAM -DJPH_USE_CPU_COMPUTE -DOPENEXR_DLL -I..\..\src -Igenerated -I..\..\third_party\imgui -I..\..\third_party\imgui\backends -IC:\VulkanSDK\1.4.350.0\include -Ivcpkg_installed\x64-windows\include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath -MDd /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzureEditorWorkflowTests.dir\tests\EditorWorkflowTests.cpp.obj /FdCMakeFiles\AzureEditorWorkflowTests.dir\ /FS -c ..\..\tests\EditorWorkflowTests.cpp
+..\..\tests\EditorWorkflowTests.cpp(14): error C2039: "openProject": 不是 "azurerender::EditorContext" 的成员
+D:\Assigment\2609\FYP\Project\AzureRender\src\editor\EditorContext.hpp(17): note: 参见“azurerender::EditorContext”的声明
+..\..\tests\EditorWorkflowTests.cpp(14): error C3861: “openProject”: 找不到标识符
+..\..\tests\EditorWorkflowTests.cpp(15): error C2737: “original”: 必须初始化 const 对象
+..\..\tests\EditorWorkflowTests.cpp(16): error C2737: “resource”: 必须初始化 const 对象
+..\..\tests\EditorWorkflowTests.cpp(17): error C3536: “resource”: 初始化之前无法使用
+..\..\tests\EditorWorkflowTests.cpp(21): error C3536: “original”: 初始化之前无法使用
+..\..\tests\EditorWorkflowTests.cpp(30): error C2039: "openProject": 不是 "azurerender::EditorContext" 的成员
+D:\Assigment\2609\FYP\Project\AzureRender\src\editor\EditorContext.hpp(17): note: 参见“azurerender::EditorContext”的声明
+..\..\tests\EditorWorkflowTests.cpp(30): error C3861: “openProject”: 找不到标识符
+..\..\tests\EditorWorkflowTests.cpp(33): error C2737: “edited”: 必须初始化 const 对象
+..\..\tests\EditorWorkflowTests.cpp(34): error C2838: “Play”: 成员声明中的限定名称非法
+..\..\tests\EditorWorkflowTests.cpp(34): error C2065: “Play”: 未声明的标识符
+..\..\tests\EditorWorkflowTests.cpp(35): error C2039: "game": 不是 "azurerender::EditorSession" 的成员
+..\..\src\editor/EditorSession.hpp(20): note: 参见“azurerender::EditorSession”的声明
+..\..\tests\EditorWorkflowTests.cpp(35): error C2039: "advance": 不是 "azurerender::EditorSession" 的成员
+..\..\src\editor/EditorSession.hpp(20): note: 参见“azurerender::EditorSession”的声明
+..\..\tests\EditorWorkflowTests.cpp(36): error C3536: “edited”: 初始化之前无法使用
+..\..\tests\EditorWorkflowTests.cpp(37): error C2838: “Pause”: 成员声明中的限定名称非法
+..\..\tests\EditorWorkflowTests.cpp(37): error C2065: “Pause”: 未声明的标识符
+..\..\tests\EditorWorkflowTests.cpp(38): error C2039: "game": 不是 "azurerender::EditorSession" 的成员
+..\..\src\editor/EditorSession.hpp(20): note: 参见“azurerender::EditorSession”的声明
+..\..\tests\EditorWorkflowTests.cpp(38): error C2737: “steps”: 必须初始化 const 对象
+..\..\tests\EditorWorkflowTests.cpp(38): error C2039: "advance": 不是 "azurerender::EditorSession" 的成员
+..\..\src\editor/EditorSession.hpp(20): note: 参见“azurerender::EditorSession”的声明
+..\..\tests\EditorWorkflowTests.cpp(39): error C2039: "game": 不是 "azurerender::EditorSession" 的成员
+..\..\src\editor/EditorSession.hpp(20): note: 参见“azurerender::EditorSession”的声明
+..\..\tests\EditorWorkflowTests.cpp(39): error C3536: “steps”: 初始化之前无法使用
+..\..\tests\EditorWorkflowTests.cpp(40): error C2838: “Step”: 成员声明中的限定名称非法
+..\..\tests\EditorWorkflowTests.cpp(40): error C2065: “Step”: 未声明的标识符
+..\..\tests\EditorWorkflowTests.cpp(40): error C2039: "advance": 不是 "azurerender::EditorSession" 的成员
+..\..\src\editor/EditorSession.hpp(20): note: 参见“azurerender::EditorSession”的声明
+..\..\tests\EditorWorkflowTests.cpp(41): error C2039: "game": 不是 "azurerender::EditorSession" 的成员
+..\..\src\editor/EditorSession.hpp(20): note: 参见“azurerender::EditorSession”的声明
+..\..\tests\EditorWorkflowTests.cpp(42): error C2838: “Stop”: 成员声明中的限定名称非法
+..\..\tests\EditorWorkflowTests.cpp(42): error C2065: “Stop”: 未声明的标识符
+..\..\tests\EditorWorkflowTests.cpp(42): error C2039: "playing": 不是 "azurerender::EditorSession" 的成员
+..\..\src\editor/EditorSession.hpp(20): note: 参见“azurerender::EditorSession”的声明
+ninja: build stopped: subcommand failed.

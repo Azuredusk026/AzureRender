@@ -1,0 +1,18 @@
+{
+  "dependencies": [],
+  "generation": {
+    "dependencyHashes": {},
+    "generatorId": "azure.primitive",
+    "generatorVersion": 1,
+    "inputHashes": {},
+    "licenseSource": "CC0-1.0",
+    "outputHashes": {
+      "assets:/Authored/Cube.glb": "fnv1a64:ef9f104c24cf4675"
+    },
+    "parametersHash": "fnv1a64:97cc075d0d33d41d",
+    "schemaVersion": 1
+  },
+  "id": "ada85808-ea97-4b73-a54c-59d3cccbfff6",
+  "schemaVersion": 1,
+  "settings": {}
+}

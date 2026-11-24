@@ -1,0 +1,484 @@
+[
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 5
+    },
+    "response": {
+      "elapsedMs": 58.7098,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.7241,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cbdb0f7f028d0b0b\",\"documentId\":\"17912483034731041-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "render.exposure",
+      "equals": 1.25
+    },
+    "response": {
+      "elapsedMs": 1.2235,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 1.25
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "setting.source.render.exposure"
+    },
+    "response": {
+      "elapsedMs": 3.9284,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "command-line"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.5625,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cbdb0f7f028d0b0b\",\"documentId\":\"17912483034731041-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "settings-5",
+      "commandId": "settings.set",
+      "parameters": {
+        "name": "render.exposure",
+        "value": 2.0
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:cbdb0f7f028d0b0b",
+        "documentId": "17912483034731041-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 0.5515,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "queued": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:cbdb0f7f028d0b0b",
+          "documentId": "17912483034731041-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "render.exposure",
+      "equals": 2.0
+    },
+    "response": {
+      "elapsedMs": 0.8093,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 2.0
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.7188,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cbdb0f7f028d0b0b\",\"documentId\":\"17912483034731041-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "setting.source.render.exposure"
+    },
+    "response": {
+      "elapsedMs": 0.1488,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "console"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.6138,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cbdb0f7f028d0b0b\",\"documentId\":\"17912483034731041-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "settings-10",
+      "commandId": "settings.set",
+      "parameters": {
+        "name": "render.exposure",
+        "value": 20.0
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:cbdb0f7f028d0b0b",
+        "documentId": "17912483034731041-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 0.1571,
+      "message": "[{\"code\":\"RejectedOperation\",\"message\":\"Setting outside range: render.exposure\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "render.exposure",
+      "equals": 2.0
+    },
+    "response": {
+      "elapsedMs": 0.4739,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 2.0
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.6823,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cbdb0f7f028d0b0b\",\"documentId\":\"17912483034731041-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "settings-13",
+      "commandId": "settings.reset",
+      "parameters": {
+        "name": "render.exposure"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:cbdb0f7f028d0b0b",
+        "documentId": "17912483034731041-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 0.8018,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "queued": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:cbdb0f7f028d0b0b",
+          "documentId": "17912483034731041-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "render.exposure",
+      "equals": 1.25
+    },
+    "response": {
+      "elapsedMs": 0.7515,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 1.25
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.8329,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cbdb0f7f028d0b0b\",\"documentId\":\"17912483034731041-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "settings-16",
+      "commandId": "settings.set",
+      "parameters": {
+        "name": "editor.scale",
+        "value": 1.0,
+        "source": "user-file"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:cbdb0f7f028d0b0b",
+        "documentId": "17912483034731041-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 0.319,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "queued": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:cbdb0f7f028d0b0b",
+          "documentId": "17912483034731041-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 5
+    },
+    "response": {
+      "elapsedMs": 4.5803,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "tool.settings"
+      }
+    },
+    "response": {
+      "elapsedMs": 0.3009,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 5
+    },
+    "response": {
+      "elapsedMs": 4.4728,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "settings.search"
+      }
+    },
+    "response": {
+      "elapsedMs": 0.4977,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "text",
+        "text": "diagnostics.verbose"
+      }
+    },
+    "response": {
+      "elapsedMs": 0.2083,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 5
+    },
+    "response": {
+      "elapsedMs": 11.5184,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "setting.diagnostics.verbose"
+      }
+    },
+    "response": {
+      "elapsedMs": 0.7092,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "setting.diagnostics.verbose",
+      "equals": true
+    },
+    "response": {
+      "elapsedMs": 0.6408,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": true
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "setting.source.diagnostics.verbose"
+    },
+    "response": {
+      "elapsedMs": 0.7847,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "console"
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "settings.save"
+      }
+    },
+    "response": {
+      "elapsedMs": 0.1832,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 5
+    },
+    "response": {
+      "elapsedMs": 7.2238,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.5393,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cbdb0f7f028d0b0b\",\"documentId\":\"17912483034731041-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "screenshot",
+    "fields": {
+      "label": "u4-settings-inspector"
+    },
+    "response": {
+      "elapsedMs": 0.4831,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "label": "u4-settings-inspector",
+        "scheduled": true
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "engine.screenshots",
+      "equals": 1
+    },
+    "response": {
+      "elapsedMs": 138.4475,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 1
+    }
+  }
+]

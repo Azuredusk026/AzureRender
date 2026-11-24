@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "implementation": "feat(u2): 完成编辑器工作区与教程验收",
+  "debugTests": 84,
+  "releaseTests": 86,
+  "sourceHash": "0870bc9b76b2f28a31312dc41af677a4accad9c33bd0f93692703f895313ddb9",
+  "files": {
+    ".gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+    "authoring.json": "1719f5b90030b1a3f81cd81e976d5ca5324ae137387350fece2678637b963561",
+    "authoring.log": "a01098f47a3448ab245b8acd0d8326ec7fc48a808753e0854b642d5a7002210a",
+    "baseline.json": "986b5e2e9d830a7d6056d6a26ad2f3e00d8702555fb2ff6705f3cb9ded611ee9",
+    "cpu-green.log": "df5f7234f23a27f13c014175fc01896555ad9055543a5808010a71935fa67f69",
+    "dock-hover.log": "6fa82001e5d35e4939df369733ee32666e728734af32339f8451cc2bdbf06e6d",
+    "dock-trace.log": "ce3eae0f4f708b12c028f703ce2cf71b82c82ce8369f15100aa1a45b869532f3",
+    "docs-check.log": "cea54b892694c00ef801ea80a79f6d9e8a120da634448c9a396cd6ed99b91c67",
+    "final-install.log": "687a1c0f65a8f8a4c0c74635e33ae1b8b5bfae6da9e6b4588e5ab9214f43f1e9",
+    "final-package.log": "5e20a9448bd2b0fde789f41406b42eea1fdad009c71f8173616b88f0dbeb0ff3",
+    "final-rc-manifest.log": "3222509bad7a0896f24d69d22b85c199a80eb4a6895b8adef53ebab6e8f22f2e",
+    "final-verify-install-manifest.log": "1caa23bf93434be6202d73a2be375aa41dcc4ddfb0bd8e0a118aca26d893b005",
+    "final-write-install-manifest.log": "007b898e3262ef0fc31341f84812e5e7d35513a4f27ad4ba2b06655be7385c72",
+    "focus-red.log": "f34697cf59da606b548ddbc992e883e9a0051ef500c871fae6e1babcf3e1824f",
+    "gizmo-red.log": "f2c4a9e44da83a12aed89bd0de51f99f4cc77c9fc7cc5da7811257e84cbebd8a",
+    "gpu-contention.json": "38d97ac08626e0edb72a522565a80bc52aa2b9e6d333a1b6376e22c5560760ee",
+    "handle-centers.json": "dfad3ddd6ef53f3efc22fddf686bd21155256cab3e96df18bcb8471e62c7a2d0",
+    "hit-oracle.json": "5f789506474322e79775db07fc6d80745892325c9de1fbd504834e977e99ea37",
+    "ini-green.log": "f27d3289ecd8d8a7aac7e442342b17501bbba6ed12ac98daf0f3d6bbcf3bef0d",
+    "ini-red.log": "135cc70d89773585f16c3651069ba0aff03728aa4f4e67504bcce94d0e3271cf",
+    "install-roundtrip-green.log": "e56a2f3e46e01c68e88d4b98b417fe81429244c40577ec5de007d2d8adb38b6a",
+    "install_manifest.json": "612906fb7f658d4da41d1820762b8df33e18a4dbeb5c0257480b927e38a004cc",
+    "mkdocs.log": "132495a77fbb528bc0c6a6514ceb7eceecd064b48e72b1d7a8012c1754d979d2",
+    "performance.json": "c4a8c178e305daf7f53554dec8160e4a50aa7c1401ea3ed548e9acfb9bd9a7d5",
+    "performance.log": "8e3776fd1161c10a9d7ff91fa010a2d0d828658da33f64dbc60b6f796424875b",
+    "provenance-debug.json": "5b07b9fc7625b2e77e78e91252ded26877e4ca2ba5ffd5268bc19de75c3ed545",
+    "provenance-debug.log": "01c09bf27ccbf15b3358efb97ef16f72f6337ae013f3caae257a113edfb5b8b2",
+    "provenance-release.json": "074422a49eb22adcff4f6b205b38def98e3ee15b015a85746f466b6b49e97152",
+    "provenance-release.log": "c017c87df3ac61bbfb370b020cb5fdae73adbe232cd79fff0ff0e98634db0b47",
+    "regression-debug-red.log": "12c66cd493e9c2c59289917c1db7e70c3c46f24a32db4571d3701e1e9efeb09f",
+    "regression-debug.log": "84c150a1fda9f1dbf7182c98860a1e8310dd0ae0ff1b059b4bb1e561330b4c0f",
+    "regression-release-contention.log": "ca7efd43f13f2609b6602d935f5ea154b453cb1acb5b67905f02b7237555345c",
+    "regression-release.log": "1192822696fc23d99d33103dd7eec04306ef00090ffffa82b98ca582769aadf1",
+    "release-gate-contention.json": "2922fbc8bbd0712e7dac52e71a9ce962ddf5ce2ee978bd037b76f3544bf2362f",
+    "release-gate.json": "88f3003b571c87ea6ed083f14ca9686049096548c4c4576008d98ad0036b7de4",
+    "release-gate.log": "6abaf9998ffae9a0af8934507619a0dff0f908aab60eb4d41725f5e9f79b0fcc",
+    "remaining-green.log": "878be74fca0320fbd23fdba7ad86deff375dbbd739d4729a24450720e4c07701",
+    "repository-audit-current.json": "e17f3366aa26b31c7c237c01bf45a38718b433541cc4a3f57d3dd18a38f432fc",
+    "style-evidence.json": "7f44cd0161662a14e607ce37c78c2abca88acd9e8578b0a3ceb65daeab30daa5",
+    "theme-color-red.log": "8827b577090f602231e24122cb65d91fc55edecf8bad8484f989276768ecf586",
+    "workspace-api-red.log": "f09fbba370b424bae61886c7c7b350e4eba7499a9476abb41675ca09eb87d82f"
+  },
+  "tutorialImages": {
+    "docs/tutorials/images/animation.png": "37f47f77dad22a85a15329c6cdd2703836b5c4a394e1ea2c02afb8bbe256f297",
+    "docs/tutorials/images/assets.png": "276e4964c10eae50aa605446cfbbb9a56acdbaa099dfcdaf9b7c33314f4465f4",
+    "docs/tutorials/images/build.png": "92459a43ed84a5a3eee4667ef76f39412e534ef2fcdd837fddd1207cdb4c7e20",
+    "docs/tutorials/images/workspace.png": "a14f5557e1719086d2a13c35862f65f7c5e9ec0f24a86725f26a4b0b1fb3d5a4"
+  },
+  "limitations": [
+    "Physical keyboard and mouse verification requires an interactive foreground environment"
+  ],
+  "localProducts": {
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\u2\\engine-release-final.tar.gz": "b9951561f8c249b69797861f70a69a9dac55da39b391f97790e6b1f315a5760c"
+  }
+}

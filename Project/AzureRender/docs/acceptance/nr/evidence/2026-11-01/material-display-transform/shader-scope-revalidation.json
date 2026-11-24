@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "scope": "Only dedicated layer-fog shaders changed. Disabled-fog cases cannot construct ViewFogState in CharacterSceneRenderer; program bytes and every other shader are identical.",
+  "configurations": [
+    {
+      "configuration": "release",
+      "programsIdentical": true,
+      "changedShaders": [
+        "mesh_fog.frag.spv",
+        "mesh_fog_bindless.frag.spv",
+        "mesh_fog_bindless_samples.frag.spv",
+        "mesh_fog_samples.frag.spv"
+      ],
+      "inactiveFogMatrixCaptures": 53,
+      "reusedNonFogChecks": [
+        {
+          "name": "radiance",
+          "captures": 36
+        },
+        {
+          "name": "hair",
+          "captures": 25
+        },
+        {
+          "name": "layers",
+          "captures": 16
+        },
+        {
+          "name": "uv-distortion",
+          "captures": 18
+        },
+        {
+          "name": "npr",
+          "captures": 54
+        },
+        {
+          "name": "reflection-history-shared",
+          "captures": 1
+        },
+        {
+          "name": "reflection-history-msaa",
+          "captures": 1
+        },
+        {
+          "name": "eye",
+          "captures": 15
+        }
+      ]
+    },
+    {
+      "configuration": "debug",
+      "programsIdentical": true,
+      "changedShaders": [
+        "mesh_fog.frag.spv",
+        "mesh_fog_bindless.frag.spv",
+        "mesh_fog_bindless_samples.frag.spv",
+        "mesh_fog_samples.frag.spv"
+      ],
+      "inactiveFogMatrixCaptures": 53,
+      "reusedNonFogChecks": [
+        {
+          "name": "radiance",
+          "captures": 36
+        },
+        {
+          "name": "eye",
+          "captures": 15
+        },
+        {
+          "name": "hair",
+          "captures": 25
+        },
+        {
+          "name": "layers",
+          "captures": 16
+        },
+        {
+          "name": "uv-distortion",
+          "captures": 18
+        }
+      ]
+    }
+  ]
+}

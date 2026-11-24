@@ -1,0 +1,222 @@
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: Intel(R) RaptorLake-S Mobile Graphics Controller
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+Editor viewport render extent: 1920x1080
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+ECS visible renderables: 17
+Editor viewport resources rebuilt: 1083x520
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.900000, 0.000000, -0.400000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\parameterized.gltf
+Loaded asset: 373 vertices, 948 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] procedural_material_0 -> generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.900000, 0.000000, -0.400000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\parameterized.gltf
+Loaded asset: 373 vertices, 948 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] procedural_material_0 -> generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.900000, 0.000000, -0.400000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\imports\asset-44572689001500-1\direct-model.gltf
+Loaded asset: 373 vertices, 948 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] procedural_material_0 -> generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.480000, -0.150000, 0.480000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\articulated.gltf
+Loaded asset: 361 vertices, 936 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] procedural_material_0 -> generic, flags=0x20, source=fallback/inferred
+  [1] procedural_material_1 -> generic, flags=0x20, source=fallback/inferred
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 2 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "anim_sweep", 1.000000 s loop)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\intel-procedural\run-1791331272979513000\exploration\Procedural Project with spaces\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Rendered frames: 478
+Allocator after unload: buffers=0 images=0

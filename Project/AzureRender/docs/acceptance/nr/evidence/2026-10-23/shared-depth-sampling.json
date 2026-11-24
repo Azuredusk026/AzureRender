@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "scope": "独立深度图像、共享采样器与独立容量检查；对象图集继续待验",
+  "run": "build/runs/20261023-193204-shared-depth-sampling-090d6a",
+  "layout": {
+    "textureBindingVersion": 1,
+    "sharedIndexedSlots": 2,
+    "materialSlots": 9,
+    "fixedSamplers": 16,
+    "fixedImages": 16,
+    "depthImageBinding": 9,
+    "depthSamplerBinding": 28
+  },
+  "checks": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "checks": [
+      {
+        "config": "release",
+        "suite": "cpu",
+        "groups": 4,
+        "passed": true
+      },
+      {
+        "config": "release",
+        "suite": "gpu-numeric",
+        "groups": 3,
+        "passed": true
+      },
+      {
+        "config": "release",
+        "suite": "coverage",
+        "captures": 11,
+        "passed": true
+      },
+      {
+        "config": "release",
+        "suite": "npr",
+        "captures": 3,
+        "passed": true
+      },
+      {
+        "config": "debug",
+        "suite": "cpu",
+        "groups": 4,
+        "passed": true
+      },
+      {
+        "config": "debug",
+        "suite": "gpu-numeric",
+        "groups": 3,
+        "passed": true
+      },
+      {
+        "config": "debug",
+        "suite": "coverage",
+        "captures": 11,
+        "passed": true
+      },
+      {
+        "config": "debug",
+        "suite": "npr",
+        "captures": 3,
+        "passed": true
+      }
+    ],
+    "supplementalRefraction": {
+      "config": "debug",
+      "passed": true,
+      "captures": 4,
+      "releaseAttempt": "failed validation-enabled precondition; original harness unchanged"
+    }
+  },
+  "actualCaptures": [
+    {
+      "name": "native",
+      "config": "release",
+      "playerSha256": "77a79978a31c4034b3364193fba70d8eb00d1afaf6299c2f34b341023383898a",
+      "imageSha256": "ce6d74b0c356493590d69c4acc474555a606f1aff19e7534754ee75769ea2c04",
+      "maximumByteDifference": 0,
+      "textureBindingLayoutVersion": 1,
+      "sharedTextureSlots": 2
+    },
+    {
+      "name": "fixed",
+      "config": "debug",
+      "playerSha256": "a1d393fc1b4afdd5981eb1d95cdd19d6f3ab79a062508aba93dd2ad5630a3215",
+      "imageSha256": "ce6d74b0c356493590d69c4acc474555a606f1aff19e7534754ee75769ea2c04",
+      "maximumByteDifference": 0,
+      "textureBindingLayoutVersion": 1,
+      "sharedTextureSlots": 2
+    },
+    {
+      "name": "main",
+      "config": "release",
+      "playerSha256": "77a79978a31c4034b3364193fba70d8eb00d1afaf6299c2f34b341023383898a",
+      "imageSha256": "c226beac7b389f90447785ea4c1d3ccf45fc052a5e3bc40210462d7d88841919",
+      "maximumByteDifference": 0,
+      "textureBindingLayoutVersion": 1,
+      "sharedTextureSlots": 2
+    }
+  ],
+  "shaderBinaries": {
+    "identicalCount": 52,
+    "comparisonSha256": "bba416689eba99a66d7c8d8158bbcada324e661eb48d953f4796c7865fd75cb3",
+    "materialFragments": [
+      {
+        "name": "character_snapshot.frag.spv",
+        "releaseSha256": "557e628459acdb4eeffd758a550ea583500cb966d5b134b6bd30542976d5b613",
+        "debugSha256": "557e628459acdb4eeffd758a550ea583500cb966d5b134b6bd30542976d5b613",
+        "identical": true
+      },
+      {
+        "name": "character_snapshot_bindless.frag.spv",
+        "releaseSha256": "7c0c44ef96241dacf77e3b263538a45ad9d9a56a459e82732c8e45c71d1a0e44",
+        "debugSha256": "7c0c44ef96241dacf77e3b263538a45ad9d9a56a459e82732c8e45c71d1a0e44",
+        "identical": true
+      },
+      {
+        "name": "mesh.frag.spv",
+        "releaseSha256": "97efc5fac12da957de9a7917a02fe853c9037ca2e98d0c643d03f7d4b82ea15c",
+        "debugSha256": "97efc5fac12da957de9a7917a02fe853c9037ca2e98d0c643d03f7d4b82ea15c",
+        "identical": true
+      },
+      {
+        "name": "mesh_bindless.frag.spv",
+        "releaseSha256": "cfdefefb8ae57ad948ed5faded917e09f7a9793a11401cbb837b9df8ced1f5f9",
+        "debugSha256": "cfdefefb8ae57ad948ed5faded917e09f7a9793a11401cbb837b9df8ced1f5f9",
+        "identical": true
+      }
+    ]
+  },
+  "budgetRecording": {
+    "configurations": 2,
+    "exactPoolTypes": true,
+    "independentImageSamplerWrites": true
+  },
+  "failuresPreserved": {
+    "access-red.log": "5c538441fe875da5200f11a9061ce0d75370a89cf4413d84bbe17419cbd5ee65",
+    "depth-red.log": "bb2ab9cb7ebd61ee1df3f105b1c167996850f8386fafd143e2337646428c4419",
+    "depth-build-release.log": "4d68770b72396d2f4eebf6aeac20274bb387275f0a05a1f0c6470dad72adf88f",
+    "refraction-release.log": "65ea40797b69ef44d7d0c7f7ad2df1b17cdf127754f438ab0e88b5ec5b187df5"
+  },
+  "sourceFiles": {
+    "shaders/mesh.frag": "8eff1a822390240b08f717662f91a50409780a26c3d7f2cc5d60d39b359bda8f",
+    "shaders/shadow_compare.glsl": "a4eb1f408a4d9d2efa11b88cd88bad87119cbc14b41bbcca03606ef8a8a4d89e",
+    "src/render/ResourceAccessProfile.hpp": "2b2eda7caa34cb2c1b803259e805b031ba3cd43f375f57b27d1e50583197fdcf",
+    "src/render/ResourceAccessProfile.cpp": "ffae075094790e104918ce58d58713d97b4cc648a782663602db26941c1bfb9a",
+    "src/rhi/NullRhi.hpp": "b3d161c081efc7532fb251e41ab815e85a9d524c1859e476ca1a103fb163bbe2",
+    "src/rhi/NullRhi.cpp": "66a8887a163a4e2dd78ee7551045e7196d097cc812c9ded7ec51886a63769ca7",
+    "src/scenes/CharacterSceneRenderer.cpp": "28d0843b56c8d096db512c8259693913b3883ca7943fa53acc15134b794369da",
+    "src/scenes/CharacterSceneRenderer.hpp": "670603f2bb1e47337883c9fdcbc33062f220a33f68288677b3882598e858b25c",
+    "tests/NullRhiPassTests.cpp": "47cd7a9e04cded0b9c7a1283e3023a80104181dd7205062619e3efc11ccfc793",
+    "tests/ResourceAccessProfileTests.cpp": "6152d163fdb2e95395dafe0c242b21bfa44915f3711d4dae6d27a76dd293ecf9"
+  },
+  "remaining": [
+    "颜色附件的阶段总资源核对",
+    "有界对象图集及在途记录",
+    "独立接收过滤与原生角色图像门禁"
+  ]
+}

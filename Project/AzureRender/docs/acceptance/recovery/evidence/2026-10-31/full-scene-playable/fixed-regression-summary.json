@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\project\\full-restored.azureproject",
+    "--width",
+    "2560",
+    "--height",
+    "1440",
+    "--capture-frames",
+    "3",
+    "--capture-fps",
+    "60",
+    "--fixed-frame-step",
+    "--capture-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\fixed-regression\\frames",
+    "--qa-camera",
+    "scene",
+    "--qa-light",
+    "scene",
+    "--qa-isolation",
+    "beauty",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\fixed-regression\\runtime.json"
+  ],
+  "programSha256": "2b28e97fbdce571087760f373fa693cc2c6a3bf1fd7d54deb5347b9e719ac3ab",
+  "projectSha256": "3856c5fb14324b39378fa5b855e3898f8199704eced56caf4ccaabde260fc70a",
+  "exitCode": 0,
+  "elapsedSeconds": 98.03914019999502,
+  "frames": [
+    {
+      "frame": 0,
+      "changedPixels": 0,
+      "referenceSha256": "2c282b56fd870fe24c748b079aae4c0b3286f9b67aab4795b88319d8b6e11bd7",
+      "actualSha256": "2c282b56fd870fe24c748b079aae4c0b3286f9b67aab4795b88319d8b6e11bd7"
+    },
+    {
+      "frame": 1,
+      "changedPixels": 0,
+      "referenceSha256": "d345eab489775e420efb944f3c9b763dcd0bbb44ff9812ec3f7491d74698ffda",
+      "actualSha256": "d345eab489775e420efb944f3c9b763dcd0bbb44ff9812ec3f7491d74698ffda"
+    },
+    {
+      "frame": 2,
+      "changedPixels": 0,
+      "referenceSha256": "5dc882f13c2be8b61f0740b9fa61f03e2f43903aea97696a85ca63d1a2b5219f",
+      "actualSha256": "5dc882f13c2be8b61f0740b9fa61f03e2f43903aea97696a85ca63d1a2b5219f"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "baseCommit": "0c2d02f1bff93190558f13cc611b8223302c332d",
+  "sourceHashes": {
+    "CMakeLists.txt": "de990bada13afe236a8d33bab9ab43b1ee854dce9ed7ce893e6b4d3f5ac9a29a",
+    "src/render/RenderViewService.cpp": "af04b1980ae1cdcbe6e7d958862f7dc6cb2b314cdeed518f6dc7c2c0eddeb65e",
+    "src/render/sky/SkyPass.cpp": "0421ea3ccc0649ec5c972987b57228aeb4943c250cb607aa93cfc30fb96a4b9f",
+    "src/scenes/pathtracing/PathTracingSceneRenderer.cpp": "83f8fc6244681da31cb0784a0dbf8dfab56cc125514776e84d1aac25678ba43c",
+    "src/app/ProjectCenterHost.cpp": "8f7fa1570db4c746b635ac62a847723861e5959f5e96badd64dd62d240d00d9f",
+    "src/editor/EditorWorkspaceUI.cpp": "43e95bad914e62d659de4eac94942ee1dc46e75523fc9765b694bd78d8267709",
+    "shaders/sky.glsl": "cdd8ea76a882a6a325e1a86fa8acb02830e8f07c99c82a8c54ffd428af23613e",
+    "shaders/pathtracing.comp": "35de839230e8c6f8094acf263405b7971d16fcbf00312d6bf51da0e39fb4d7c4",
+    "third_party/imgui/backends/imgui_impl_vulkan.cpp": "a0109c0489dd6e74e974bbe28a0471521928972e57c06c24d4e0064470117b59"
+  },
+  "debugCpu": {
+    "total": 191,
+    "firstPassPassed": 189,
+    "firstPassFailures": [
+      "SceneModel stale schema assertion",
+      "ContentDirectoryScale timeout during concurrent compilation"
+    ],
+    "focusedRetestPassed": 2,
+    "thresholdChanged": false
+  },
+  "releaseFocusedTests": 6,
+  "gpu": {
+    "nvidia": "Debug validation and Release functional checks passed",
+    "intel": "Release functional checks passed using an isolated absolute-path ICD manifest; Vulkan validation disabled"
+  },
+  "language": {
+    "bothDirections": true,
+    "preferencesPersisted": true,
+    "narrowWidth": 960,
+    "projectCenterEnglish": true
+  },
+  "artifacts": {
+    "AzureRender.exe": "20dd585348aab7589f798720da609720e9c8999cef404cf47939407cac9e219e",
+    "AzurePlayer.exe": "2fed7a3b4994257c8e9cc5aa3f20d0dfaf3b44966b7319c8b1dacb029cb0458d"
+  },
+  "limitations": [
+    "Geometric shading normals; normal textures and transmission are not implemented in path tracing",
+    "No hardware ray query, denoiser, SHARC or ReSTIR",
+    "Physical keyboard/mouse feel and long-run performance are not new conclusions of this batch"
+  ]
+}

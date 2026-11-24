@@ -1,0 +1,803 @@
+{
+  "status": "qualified-intel-reference-visibility-sources",
+  "overall": "failed-user-review",
+  "baseCommit": "fa82f57",
+  "acceptedMaximumByteError": 1,
+  "liveAtlas": {
+    "intel": {
+      "resource": "ResourceId::1582",
+      "format": "D16",
+      "width": 4096,
+      "height": 2048,
+      "bytes": 16777216,
+      "sha256": "379c0962dd7b4cd89aee2d1c03843ba2b1ff96c0dd7825dc82d683fb6edf232c"
+    },
+    "nvidia": {
+      "resource": "ResourceId::1585",
+      "format": "D16",
+      "width": 4096,
+      "height": 2048,
+      "bytes": 16777216,
+      "sha256": "df174554896d0969532f372427354f38efb7b6ce7e7e57d1902e674d0d3ab7da"
+    },
+    "caster": {
+      "event": 272,
+      "shaderSha256": "a1699fb420a66764e05ded12d0cea2b5c1878d923a86106eeb53491c258f6798",
+      "parametersSha256": "bdc3a671b16ed0c5b792dc1dcaad9da9df762f6f02cb241931037b9f4ba8f19e",
+      "uniformResource": "ResourceId::1047",
+      "uniformOffset": 0,
+      "uniformBytes": 1824,
+      "vertexCount": 11564,
+      "vertexStride": 48,
+      "indexStride": 4,
+      "baseVertex": 0,
+      "verticesSha256": "b3bc571e38da40fff718bee7099ee5de3e53febabc94b31ce33867758f3e9e61",
+      "indicesSha256": "5e797a9af4f6e37b739a31bf1a5255a4ef1b6e4f307b5084ef00c9c9af482f7d"
+    },
+    "uniformExact": true,
+    "casterUniformExact": true,
+    "common": 182219,
+    "exact": 176144,
+    "withinOne": 182219,
+    "overTwo": 0,
+    "maximum": 1,
+    "intelOnly": 0,
+    "nvidiaOnly": 0,
+    "debugMessages": []
+  },
+  "atlasDelta": {
+    "tile": {
+      "common": 182219,
+      "exact": 176144,
+      "intelLower": 0,
+      "intelHigher": 6075
+    },
+    "casterPosition": {
+      "vertices": 11564,
+      "exact": 0,
+      "componentExact": [
+        0,
+        4304,
+        4951,
+        11564
+      ],
+      "signedMedian": [
+        -5.7220458984375e-06,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "maximumError": [
+        4.005618393421173e-05,
+        3.0517578125e-05,
+        7.62939453125e-06,
+        0.0
+      ],
+      "intelPath": "vertex",
+      "nvidiaPath": "compute"
+    },
+    "lastNativeWriter": {
+      "143": {
+        "common": 103,
+        "exact": 98,
+        "intelLower": 0,
+        "intelHigher": 5
+      },
+      "152": {
+        "common": 67,
+        "exact": 67,
+        "intelLower": 0,
+        "intelHigher": 0
+      },
+      "163": {
+        "common": 18132,
+        "exact": 17432,
+        "intelLower": 0,
+        "intelHigher": 700
+      },
+      "171": {
+        "common": 1062,
+        "exact": 1045,
+        "intelLower": 0,
+        "intelHigher": 17
+      },
+      "182": {
+        "common": 24873,
+        "exact": 24046,
+        "intelLower": 0,
+        "intelHigher": 827
+      },
+      "191": {
+        "common": 50622,
+        "exact": 48816,
+        "intelLower": 0,
+        "intelHigher": 1806
+      },
+      "200": {
+        "common": 11144,
+        "exact": 10762,
+        "intelLower": 0,
+        "intelHigher": 382
+      },
+      "208": {
+        "common": 63748,
+        "exact": 61809,
+        "intelLower": 0,
+        "intelHigher": 1939
+      },
+      "223": {
+        "common": 855,
+        "exact": 828,
+        "intelLower": 0,
+        "intelHigher": 27
+      },
+      "237": {
+        "common": 11613,
+        "exact": 11241,
+        "intelLower": 0,
+        "intelHigher": 372
+      }
+    }
+  },
+  "liveNumerics": {
+    "intel-device": {
+      "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "validationErrors": 0,
+      "vendor": 32902,
+      "zeroAllocator": true,
+      "sha256": "179bbf0b71f5f37960451e0bc4701bd0b0902c6eae0a656127ff9d9976454d13",
+      "sameProductionBytes": true,
+      "hair": {
+        "pixels": 17017,
+        "exact": 16645,
+        "overOne": 236,
+        "maximum": 55,
+        "closed": 0,
+        "introduced": 0
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 45722,
+        "overOne": 3031,
+        "maximum": 255,
+        "closed": 0,
+        "introduced": 0
+      }
+    },
+    "nvidia-device-same-input": {
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "validationErrors": 0,
+      "vendor": 4318,
+      "zeroAllocator": true,
+      "sha256": "c0bb4ef0722f87843a09804132e499d964ad7593a9a8afaf19d8801b51de553b",
+      "sameProductionBytes": false,
+      "hair": {
+        "pixels": 17017,
+        "exact": 16759,
+        "overOne": 208,
+        "maximum": 51,
+        "closed": 42,
+        "introduced": 14
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 45932,
+        "overOne": 2981,
+        "maximum": 255,
+        "closed": 91,
+        "introduced": 41
+      }
+    },
+    "intel-profile": {
+      "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "validationErrors": 0,
+      "vendor": 32902,
+      "zeroAllocator": true,
+      "sha256": "d54b15c7a622e089c89883abca66ca377632e425a7f7ceeff6074f97b79ae5d3",
+      "sameProductionBytes": false,
+      "hair": {
+        "pixels": 17017,
+        "exact": 16682,
+        "overOne": 208,
+        "maximum": 51,
+        "closed": 42,
+        "introduced": 14
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 45787,
+        "overOne": 2981,
+        "maximum": 255,
+        "closed": 90,
+        "introduced": 40
+      }
+    },
+    "nvidia-profile-same-input": {
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "validationErrors": 0,
+      "vendor": 4318,
+      "zeroAllocator": true,
+      "sha256": "c0bb4ef0722f87843a09804132e499d964ad7593a9a8afaf19d8801b51de553b",
+      "sameProductionBytes": false,
+      "hair": {
+        "pixels": 17017,
+        "exact": 16759,
+        "overOne": 208,
+        "maximum": 51,
+        "closed": 42,
+        "introduced": 14
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 45932,
+        "overOne": 2981,
+        "maximum": 255,
+        "closed": 91,
+        "introduced": 41
+      }
+    },
+    "intel-nvidia-live-atlas": {
+      "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "validationErrors": 0,
+      "vendor": 32902,
+      "zeroAllocator": true,
+      "sha256": "efeead0ce824ac73520f2b9b8c96e5058eb5bf8b7fa63cf2c4776bcc80698bc9",
+      "sameProductionBytes": false,
+      "hair": {
+        "pixels": 17017,
+        "exact": 16681,
+        "overOne": 208,
+        "maximum": 51,
+        "closed": 42,
+        "introduced": 14
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 45783,
+        "overOne": 2985,
+        "maximum": 255,
+        "closed": 90,
+        "introduced": 44
+      }
+    },
+    "intel-native-atlas": {
+      "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "validationErrors": 0,
+      "vendor": 32902,
+      "zeroAllocator": true,
+      "sha256": "d7b614ac5923137896a5f55c5547e0033d24ca5404e65af06a6fe905670e3d12",
+      "sameProductionBytes": false,
+      "hair": {
+        "pixels": 17017,
+        "exact": 16682,
+        "overOne": 208,
+        "maximum": 51,
+        "closed": 42,
+        "introduced": 14
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 45788,
+        "overOne": 2979,
+        "maximum": 255,
+        "closed": 91,
+        "introduced": 39
+      }
+    },
+    "intel-native-depth": {
+      "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "validationErrors": 0,
+      "vendor": 32902,
+      "zeroAllocator": true,
+      "sha256": "a0599d5f80ba10596da7a2ea478ac03a4e086041964ffc9c08304b2306c9f0ac",
+      "sameProductionBytes": false,
+      "hair": {
+        "pixels": 17017,
+        "exact": 16788,
+        "overOne": 130,
+        "maximum": 51,
+        "closed": 112,
+        "introduced": 6
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 47081,
+        "overOne": 1811,
+        "maximum": 253,
+        "closed": 1284,
+        "introduced": 64
+      }
+    },
+    "intel-native-normal": {
+      "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "validationErrors": 0,
+      "vendor": 32902,
+      "zeroAllocator": true,
+      "sha256": "b804ee25b41523d1f8b5945e0dc8b8aadcb6b9cc03545b4be19b9362b04a2d77",
+      "sameProductionBytes": false,
+      "hair": {
+        "pixels": 17017,
+        "exact": 16799,
+        "overOne": 96,
+        "maximum": 25,
+        "closed": 157,
+        "introduced": 17
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 47486,
+        "overOne": 1491,
+        "maximum": 255,
+        "closed": 1596,
+        "introduced": 56
+      }
+    },
+    "intel-native-all": {
+      "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "validationErrors": 0,
+      "vendor": 32902,
+      "zeroAllocator": true,
+      "sha256": "f49aed38731ee3c2246f9ac2f6d0ef8cbda6a89f7d5af57a399301270cd181cd",
+      "sameProductionBytes": false,
+      "hair": {
+        "pixels": 17017,
+        "exact": 16923,
+        "overOne": 0,
+        "maximum": 1,
+        "closed": 236,
+        "introduced": 0
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 49156,
+        "overOne": 0,
+        "maximum": 1,
+        "closed": 3031,
+        "introduced": 0
+      }
+    },
+    "crossDevice-device-hair": {
+      "exact": 16848,
+      "overOne": 63,
+      "maximum": 45
+    },
+    "crossDevice-device-receiver": {
+      "exact": 48877,
+      "overOne": 202,
+      "maximum": 45
+    },
+    "crossDevice-profile-hair": {
+      "exact": 16920,
+      "overOne": 0,
+      "maximum": 1
+    },
+    "crossDevice-profile-receiver": {
+      "exact": 49119,
+      "overOne": 0,
+      "maximum": 1
+    }
+  },
+  "sameDeviceInputs": {
+    "pixels": 17017,
+    "visibilityOutsideFrozen": 236,
+    "sameDeviceDepthExact": 17014,
+    "sameDeviceNormalExact": 16955,
+    "sameDeviceNormalWithinOne": 17016,
+    "residualBothInputsExact": 231,
+    "residualDepthExactNormalWithinOne": 235,
+    "residualDepthOverOne": 1,
+    "residualNormalOverOne": 1,
+    "nativeIntelDepthSelectedSha256": "2e0dbf515b175a7e3739271e6d598ce1d24a7e92937a166efb3cd809b347bf4f",
+    "nativeIntelNormalCropSha256": "b3541ede05c9c6c8893b37c908a617670915779a32de5736898082f7fed1de8f",
+    "frozenColorIntersections": {
+      "pixels": 580,
+      "withVisibilityOverOne": 86,
+      "withNormalOverOne": 538,
+      "withDepthOverOneUlp": 31,
+      "withExactDepthAndNormal": 6
+    }
+  },
+  "nativeMips": {
+    "nvidia": {
+      "samples": 17017,
+      "exactSomeLevel": 17017,
+      "withinOneSomeLevel": 17017,
+      "exactUniqueLevel": 16502
+    },
+    "intel": {
+      "samples": 17017,
+      "exactSomeLevel": 17017,
+      "withinOneSomeLevel": 17017,
+      "exactUniqueLevel": 16500
+    },
+    "crossDevice": {
+      "nativeOverOne": 886,
+      "uniqueBoth": 16446,
+      "uniqueAmongDifferences": 848,
+      "mipDelta": {
+        "-5": 1,
+        "-1": 843,
+        "0": 4
+      }
+    }
+  },
+  "mipFootprints": {
+    "samples": 17017,
+    "colorOverlapWithNativeNormalDifference": 538,
+    "colorWithBothUniqueMipAndNativeNormalDifference": 516,
+    "intelAtKnownNvidiaLevel": {
+      "availableOverOne": 6,
+      "fixedChoiceOverOne": 6
+    },
+    "tests": [
+      {
+        "vertices": "nearest-8",
+        "row": 0,
+        "col": 0,
+        "footprint": "ellipse-major",
+        "agreement": {
+          "nvidia": 16736,
+          "intel": 16083
+        },
+        "agreementAmongUniqueDifferences": {
+          "nvidia": 724,
+          "intel": 128
+        },
+        "intelOverOneVsFrozen": 274,
+        "nvidiaOverOneVsFrozen": 267,
+        "intelOverOneInColorMask": 85
+      },
+      {
+        "vertices": "nearest-8",
+        "row": 0,
+        "col": 2,
+        "footprint": "ellipse-major",
+        "agreement": {
+          "nvidia": 16734,
+          "intel": 16081
+        },
+        "agreementAmongUniqueDifferences": {
+          "nvidia": 724,
+          "intel": 128
+        },
+        "intelOverOneVsFrozen": 276,
+        "nvidiaOverOneVsFrozen": 269,
+        "intelOverOneInColorMask": 85
+      },
+      {
+        "vertices": "floor-8",
+        "row": 0,
+        "col": 0,
+        "footprint": "ellipse-major",
+        "agreement": {
+          "nvidia": 16734,
+          "intel": 16081
+        },
+        "agreementAmongUniqueDifferences": {
+          "nvidia": 725,
+          "intel": 127
+        },
+        "intelOverOneVsFrozen": 276,
+        "nvidiaOverOneVsFrozen": 269,
+        "intelOverOneInColorMask": 86
+      },
+      {
+        "vertices": "nearest-8",
+        "row": 0,
+        "col": 1,
+        "footprint": "ellipse-major",
+        "agreement": {
+          "nvidia": 16732,
+          "intel": 16079
+        },
+        "agreementAmongUniqueDifferences": {
+          "nvidia": 724,
+          "intel": 128
+        },
+        "intelOverOneVsFrozen": 278,
+        "nvidiaOverOneVsFrozen": 271,
+        "intelOverOneInColorMask": 85
+      },
+      {
+        "vertices": "nearest-8",
+        "row": 2,
+        "col": 0,
+        "footprint": "ellipse-major",
+        "agreement": {
+          "nvidia": 16731,
+          "intel": 16078
+        },
+        "agreementAmongUniqueDifferences": {
+          "nvidia": 724,
+          "intel": 128
+        },
+        "intelOverOneVsFrozen": 279,
+        "nvidiaOverOneVsFrozen": 272,
+        "intelOverOneInColorMask": 85
+      },
+      {
+        "vertices": "nearest-8",
+        "row": 2,
+        "col": 2,
+        "footprint": "ellipse-major",
+        "agreement": {
+          "nvidia": 16731,
+          "intel": 16078
+        },
+        "agreementAmongUniqueDifferences": {
+          "nvidia": 724,
+          "intel": 128
+        },
+        "intelOverOneVsFrozen": 279,
+        "nvidiaOverOneVsFrozen": 272,
+        "intelOverOneInColorMask": 85
+      }
+    ]
+  },
+  "nativeReceivers": {
+    "nvidia": {
+      "hair": {
+        "nativeVsFrozen": {
+          "pixels": 17017,
+          "exact": 17017,
+          "overOne": 0,
+          "maximum": 0
+        },
+        "liveVsSameDevice": {
+          "pixels": 17017,
+          "exact": 17013,
+          "overOne": 0,
+          "maximum": 1
+        },
+        "liveVsFrozen": {
+          "pixels": 17017,
+          "exact": 17013,
+          "overOne": 0,
+          "maximum": 1
+        },
+        "bothOutsideFrozen": 0
+      },
+      "receiver": {
+        "nativeVsFrozen": {
+          "pixels": 49384,
+          "exact": 49384,
+          "overOne": 0,
+          "maximum": 0
+        },
+        "liveVsSameDevice": {
+          "pixels": 49384,
+          "exact": 46231,
+          "overOne": 2736,
+          "maximum": 255
+        },
+        "liveVsFrozen": {
+          "pixels": 49384,
+          "exact": 46231,
+          "overOne": 2736,
+          "maximum": 255
+        },
+        "bothOutsideFrozen": 0
+      }
+    },
+    "intel": {
+      "hair": {
+        "nativeVsFrozen": {
+          "pixels": 17017,
+          "exact": 16673,
+          "overOne": 217,
+          "maximum": 232
+        },
+        "liveVsSameDevice": {
+          "pixels": 17017,
+          "exact": 16971,
+          "overOne": 35,
+          "maximum": 236
+        },
+        "liveVsFrozen": {
+          "pixels": 17017,
+          "exact": 16645,
+          "overOne": 236,
+          "maximum": 55
+        },
+        "bothOutsideFrozen": 211
+      },
+      "receiver": {
+        "nativeVsFrozen": {
+          "pixels": 49384,
+          "exact": 48454,
+          "overOne": 603,
+          "maximum": 232
+        },
+        "liveVsSameDevice": {
+          "pixels": 49384,
+          "exact": 46142,
+          "overOne": 2797,
+          "maximum": 255
+        },
+        "liveVsFrozen": {
+          "pixels": 49384,
+          "exact": 45722,
+          "overOne": 3031,
+          "maximum": 255
+        },
+        "bothOutsideFrozen": 527
+      }
+    },
+    "nativeAtlas": {
+      "shared": 182236,
+      "exact": 176806,
+      "withinOne": 182236,
+      "lower": 0,
+      "higher": 5430,
+      "overTwo": 0,
+      "maximum": 1,
+      "intelOnly": 0,
+      "nvidiaOnly": 0
+    }
+  },
+  "materialOriginalFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "depthCaptureAbsent": true,
+    "allExact": true,
+    "playerSha256": "02074cebf9ecb996d7f24755bab2e74d2a24a35a4f677a59ba1dec52f93abbbc",
+    "projectSha256": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "taskBytes": 70684162,
+    "taskBudgetBytes": 536870912
+  },
+  "archive": {
+    "bytes": 3695359,
+    "sha256": "57eaa0fb46641f35775f7db80dc70861d0a37ad1b323ce963fdf377914b520dc",
+    "files": 121,
+    "contents": {
+      "run/atlas-device-delta.json": "ed13d5bc45cac1ace0bf3dbbf98f4b92e0c19d7a0bffba273cc3bfc7fb701ec5",
+      "run/atlas-device-delta.py": "25e481e36b3d280e27abf5ffa0b3e1846aa452927b80ae0e3e8ae31ae5fbc434",
+      "run/budget.json": "b09bd58799bf77f57f54e5e81277553281920b6c4d9626c95f9046aaa4126730",
+      "run/build-numerics.py": "bab5c87794e74429cb537dc2061217d1fb64151a5a9419477a997e987a21bf13",
+      "run/capture-intel-atlas.py": "4ab3a644198c201890c1850d55f7cb56cf260c9225db8b41df24c32cbc3df8dc",
+      "run/claim-inputs.py": "a47d63691c49d6c36382d8506a31ef57563dbcdca67360ebf8c7dbfcfeb3ae20",
+      "run/command.json": "0b8ddf6eb2cc4186c80ba86a65ffe80f7a6bde014269643b6d9ae242b34398b9",
+      "run/compact-capture.py": "647af78a949d1ce53ca808a3e1adf3c19d1cb70a9836ccf62536672e3d23fe8a",
+      "run/compare-live-numerics.py": "bd92c92a63eaed39439dc023a6717143154770c08172ff0d9121446c4b8ccedd",
+      "run/compare-native-receiver.py": "69e69cf172090265f5f960084dfb0ec4543c35d9f281cc0c00f149144eb4dd40",
+      "run/cross-device-live-atlas.json": "9fb3e9acdd68405944ec253fac8550bf92962b91fe08336f1155a85c7fb13175",
+      "run/host-runtime.json": "dcdf866498754dd80ed8610a9fe45304f35f41f59cf0f0e19150ef136f25173b",
+      "run/intel-atlas-capture-intel-atlas-execution.json": "429bc42aca2c5a23657052e05aaabc869d13a9f29dd39f3f76d2d290a0e29480",
+      "run/intel-atlas-worker.py": "639a54078941c7e335aa2b009523dba583cda8a322f9ab0f3d2bd14fe693914f",
+      "run/intel-live-vs-native-inputs.json": "0e5a40c954ee7902ab6eeaee988cadf97126004ab4f3c832c43f7e8c69f9ce50",
+      "run/intel-live-vs-native-inputs.py": "599124ec7fc3baaa6b4fd5d6bdc498ae1ebf7471d785314ae49257fd834a94b2",
+      "run/live-numerics-build-numerics-execution.json": "b02c63ef0a2e21ade7140cbb88d25bbb73226fa1f03885e49bf9f6cdc844e7f3",
+      "run/live-numerics-compare-live-numerics-execution.json": "3dd3b8464efd820227be7a0dcfbf1386cab54277146b58189d43ae1e28b272c7",
+      "run/live-visibility-numerics.cpp": "28d71252278c69da02382b1f3d5e4dec72b92982ad47eb551d66bff8a4db4034",
+      "run/match-mip-footprints.py": "002542bacfdb269e3e0807153262add45d92caadb26da562e118e6d94aa65381",
+      "run/native-caster-geometry-worker.py": "224ba0520891b510a81f8ecea4f6b0d933dc939e6d36b902b116eaa31ee80345",
+      "run/native-caster-geometry.py": "b3a384f071f24f9c52abb9b7c82157594db67237f6044a65ca20d4306d448484",
+      "run/native-explicit-mip-comparison.json": "c075d44ce60f2c592330bae2f01829aa90392682e40a9ebd5f189e19ab1c9420",
+      "run/native-mip-footprint-comparison.json": "5137c8b72dee32f43332684928b1041b453fa09e98ddda67dd85eed3dad49fc7",
+      "run/native-mips-native-normal-explicit-mips-execution.json": "77261c4a8876c755159c6fcbab412e4dc386da67d0b819b579cc66d661ba619c",
+      "run/native-normal-explicit-mips-worker.py": "6eff935eaec9e9df609d23cb184af8ab550363ca18cfd7895b8b930f4bff440d",
+      "run/native-normal-explicit-mips.py": "bc96afd94aea33c05615505750e398f32b6582001de774a1b99e9cd0bc9fe5db",
+      "run/native-receiver-comparison.json": "3283da00d5fd3b3eed549e1c34c3633a189c0151eb5954adb343e8048cfc1633",
+      "run/numerics-build-commands.json": "c6c266bcc7b79a7d47609e3841853b33feb16cf58d4cc9c387e54f94993c2fda",
+      "run/numerics-build.log": "014170e9ab5b92291a5a734c484570c416cf5ac2ab1d26011ed4e8545624457f",
+      "run/package-evidence.py": "993d72a8e5f22491c9832c8154a5160809661eacd573051632a51e6e0f9069ef",
+      "run/process.log": "0ab2e925fe70edc638e4b32be21c71e5d8d20c8255c86e67a20530380fad44f4",
+      "run/queued-diagnostic.py": "c373f23cf75331891da0091b2dd99e98bd41b838c1bcdec1be5d245bb8f94d94",
+      "run/renderdoc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run/report.json": "9c2e669e2891ea68d6a424685647bcf2997826b56a262debe2d8a5bb506caeb7",
+      "run/request.json": "9812a650ad5de39c64128d44857cc71e6be61aff62d273a475bf6ef9f052ff15",
+      "run/task-card.json": "738bfd83634b179bce2cdd724a32aa9d62076f034a1e4e6a7cda0bc8ead89f10",
+      "run/caster-vertices.zlib": "de532242dc014cce20260018a144b7d9f009e74c2f9f71b829208b6de39538b5",
+      "run/caster-indices.zlib": "886d7249353f031a94310f1e020ae64da7f436f8fdb4d735942d007cc40482c8",
+      "run/caster-parameters.bin": "bdc3a671b16ed0c5b792dc1dcaad9da9df762f6f02cb241931037b9f4ba8f19e",
+      "run/parameters.bin": "4975464726f6c181e2ceb126e4e75f6b38309c958c6ba1ed1aaac516d2852fd9",
+      "run/atlas.bin.zlib": "aa4bccb555ec67b87b27e0783fd8c5c79396698d04521302517f06693c96ea32",
+      "run/live-numerics/intel-device/hair-selected.bin": "71bac2aa93b8ab119e91e43c0050ec7fb0fac94cfa403512f06d36578a36b45a",
+      "run/live-numerics/intel-device/process.log": "7de6e92e08775475bab12e913519a01f0ec81aa620658e71c58c08d7864d6a2b",
+      "run/live-numerics/intel-device/receiver-selected.bin": "f57310a3a45736b7eff2502d5d670fc66e32404e672d264c22e186b66dbaecb3",
+      "run/live-numerics/intel-device/request.json": "43efde8a4543884d543ff5e98d714c9b9eb0778c87bbff5792a53e372088e173",
+      "run/live-numerics/intel-native-all/hair-selected.bin": "9ef4279472137f66b22357bbb71eb52d3dd60be2321d376b73c8e092f2c19f37",
+      "run/live-numerics/intel-native-all/process.log": "7de6e92e08775475bab12e913519a01f0ec81aa620658e71c58c08d7864d6a2b",
+      "run/live-numerics/intel-native-all/receiver-selected.bin": "7895c2d67f4b39939e2d95817d59192bda9b6d3945368252d1b7e79fe4669393",
+      "run/live-numerics/intel-native-all/request.json": "dafe4cae24fec935a8515aa26d1b29594d615fd3361608afeefb1e422fcf3f7e",
+      "run/live-numerics/intel-native-atlas/hair-selected.bin": "934535617b833874267da38506e25782887db1b8a5eb98c290b95ed2ee18f106",
+      "run/live-numerics/intel-native-atlas/process.log": "7de6e92e08775475bab12e913519a01f0ec81aa620658e71c58c08d7864d6a2b",
+      "run/live-numerics/intel-native-atlas/receiver-selected.bin": "f25e6a1544537aae26581b388c409e6565a91a968ad73a0c00a9a0c0f3ad7f5c",
+      "run/live-numerics/intel-native-atlas/request.json": "6f48a2d24fa18a1b348e72a32bd645ad4fcedf38121bc5eff427a49b10a8235e",
+      "run/live-numerics/intel-native-depth/hair-selected.bin": "c255e25f3f6dbaca168a2060a52e7184c3fd88e00163eef02a710d7d5f74d04a",
+      "run/live-numerics/intel-native-depth/process.log": "7de6e92e08775475bab12e913519a01f0ec81aa620658e71c58c08d7864d6a2b",
+      "run/live-numerics/intel-native-depth/receiver-selected.bin": "948d92a8c56a817ccbe11650ddb500b0190ae838f3be3c724d3175c34c59b971",
+      "run/live-numerics/intel-native-depth/request.json": "7551af13e553008d367cb9808081be88f0870da87baa08dc0873e7639fa3bd74",
+      "run/live-numerics/intel-native-normal/hair-selected.bin": "de7ec28cfa240d4b8d7ac304ec624a4e32eba525471aacd943eb2d69eefcbec4",
+      "run/live-numerics/intel-native-normal/process.log": "7de6e92e08775475bab12e913519a01f0ec81aa620658e71c58c08d7864d6a2b",
+      "run/live-numerics/intel-native-normal/receiver-selected.bin": "4a8d3be34c798dc693890a8ab7d25490e20e61f391e49b219e32ef83df3ae4a6",
+      "run/live-numerics/intel-native-normal/request.json": "dfee6f8834b4e7f02415819b13eb962626e4805ca4b421369b0251b5e6d194d0",
+      "run/live-numerics/intel-nvidia-live-atlas/hair-selected.bin": "97be03b446c3d77bc9c00d7ed4416a2ebeb58ad6a46d3baace30d8a1660a1426",
+      "run/live-numerics/intel-nvidia-live-atlas/process.log": "7de6e92e08775475bab12e913519a01f0ec81aa620658e71c58c08d7864d6a2b",
+      "run/live-numerics/intel-nvidia-live-atlas/receiver-selected.bin": "1c7a91abcf268863897335b1357cb37057ea2be8c1244c2dc2f698cc26096c70",
+      "run/live-numerics/intel-nvidia-live-atlas/request.json": "1c7c3263bc267472c31982bced50a87073b862b3738329aa52d2592fced96e8e",
+      "run/live-numerics/intel-profile/hair-selected.bin": "934535617b833874267da38506e25782887db1b8a5eb98c290b95ed2ee18f106",
+      "run/live-numerics/intel-profile/process.log": "7de6e92e08775475bab12e913519a01f0ec81aa620658e71c58c08d7864d6a2b",
+      "run/live-numerics/intel-profile/receiver-selected.bin": "3f761a273c15e8cca90fa595cbb0284607e448daf917dd2363aa91caeacec5b6",
+      "run/live-numerics/intel-profile/request.json": "73a016c3dff05b39b59532d009375af089dd75f527b402c64078d98f960b8966",
+      "run/live-numerics/nvidia-device-same-input/hair-selected.bin": "a6ddce17ad1773316b7c05da09ced4c316e67d9bfbf9afb560c6535127773361",
+      "run/live-numerics/nvidia-device-same-input/process.log": "496bd90e4d0293767c7c20a690183b2e3520e506693c973e807284d095518527",
+      "run/live-numerics/nvidia-device-same-input/receiver-selected.bin": "88e52e40ddfcaeb3151075c7724c2bb28f130be807d71ac6c5c4c46fb68cb84b",
+      "run/live-numerics/nvidia-device-same-input/request.json": "a2d5aff4505cd745e6263c446ead00002a30a8895ec5b6f1560ba260c64fe229",
+      "run/live-numerics/nvidia-profile-same-input/hair-selected.bin": "a6ddce17ad1773316b7c05da09ced4c316e67d9bfbf9afb560c6535127773361",
+      "run/live-numerics/nvidia-profile-same-input/process.log": "496bd90e4d0293767c7c20a690183b2e3520e506693c973e807284d095518527",
+      "run/live-numerics/nvidia-profile-same-input/receiver-selected.bin": "88e52e40ddfcaeb3151075c7724c2bb28f130be807d71ac6c5c4c46fb68cb84b",
+      "run/live-numerics/nvidia-profile-same-input/request.json": "15b79d2cd2b57b8b8c1d781ec37d563bbafb70c190b82dbefb8118fa5d5960c3",
+      "run/live-numerics/results.json": "cbf4da8e8a8c749ded2934e7e8353c94624dbe2ecda2c4cc98884353e7c337b5",
+      "run/native-normal-explicit-mips/command.json": "c6ca5584cf41c26a78284b6e2903838e11181da54f7ae0eb8954ab02ff6a0bf2",
+      "run/native-normal-explicit-mips/D3D12TokenizedProgramFormat.hpp": "5862ef7c8b819f0d02ba73563a9df4dc0e89f11fe59d8f598def39122273c626",
+      "run/native-normal-explicit-mips/dxbc_util.py": "fe1a625c044318c64372608b635dc677dd75aff9c7556fa097656cb0d6f16376",
+      "run/native-normal-explicit-mips/explicit-normal-mips.json": "d6476b8c75520c6909a122e1edea2f47dd00809890763761c006e374c9334707",
+      "run/native-normal-explicit-mips/intel-implicit.bin": "89e6506c39fcbe31d39cf08f021c75cd544ec64864eddfb744e60888b8281999",
+      "run/native-normal-explicit-mips/intel-mip-00.bin": "e90ab8e65b50ec3a4535789ec829bc6d2631f0e9332f63e85ebe9309e31e5236",
+      "run/native-normal-explicit-mips/intel-mip-01.bin": "e82588a47897456e0162d207da0864955e81855c6a6df43f2f05f05bc5cfae86",
+      "run/native-normal-explicit-mips/intel-mip-02.bin": "e3eee2bb50462c44a71d3922f41db08dd01b3fcca71c60f91d1e0591fd148e83",
+      "run/native-normal-explicit-mips/intel-mip-03.bin": "a7289b6f2ca4f0127e38031ca6a5056339cc5abdba1202a58451f2d517165c3c",
+      "run/native-normal-explicit-mips/intel-mip-04.bin": "ec7ff77c25be6eeef2cac1241379af1d709b066aad97f48edac32ecad7c8e52a",
+      "run/native-normal-explicit-mips/intel-mip-05.bin": "86f6d94763ffc65d294de310a53dbc8898a809d55d1b7ac0044c4ee819bccbc2",
+      "run/native-normal-explicit-mips/intel-mip-06.bin": "c9641bd3f7b5483b3a5a912a37f26b7bc99223386357df08ec07d717db4ec571",
+      "run/native-normal-explicit-mips/intel-mip-07.bin": "afd9ad2132f384a2118717470c1808052e2ff241eb49d14a48c8df4a8160fe35",
+      "run/native-normal-explicit-mips/intel-mip-08.bin": "ca8be2dace98acc0627784448b87101e7c8f47039950ee44a73ecfab32635d26",
+      "run/native-normal-explicit-mips/intel-mip-09.bin": "e93f531851554a906963c88faba229d987593e9002c2631aa8c4790524cf9a5a",
+      "run/native-normal-explicit-mips/intel-mip-10.bin": "07c4a72844a3f288225b40d206497a2bb456ea79960d24f64cbbc549b7179c41",
+      "run/native-normal-explicit-mips/intel-mip-11.bin": "8441ad8f8ea844f7db6e6658a462cf8f3e50ca7707dc3d8c12802e3a4da6b35d",
+      "run/native-normal-explicit-mips/LICENSE-RenderDoc.txt": "108b3bbf970884d6449b774c0516712c3c6d3f9d3d181a1d2580a2c2cd308db7",
+      "run/native-normal-explicit-mips/nvidia-implicit.bin": "f216cb3656fdae6ddc371bd60fae390d33373f324537d1883fe86bcce9798fbe",
+      "run/native-normal-explicit-mips/nvidia-mip-00.bin": "246e2038e7f215ad782ed00b7d3eab4a02b7e33ef1db2824df2fa32b3f2ab8a8",
+      "run/native-normal-explicit-mips/nvidia-mip-01.bin": "0efe82614c45bece900da306d4f91d2efcf1ad85f0c7ef367617939555bd8536",
+      "run/native-normal-explicit-mips/nvidia-mip-02.bin": "0200554784e5fc607e7874ae5f139afcc1fb815cc187dcb4a37b0452bf074973",
+      "run/native-normal-explicit-mips/nvidia-mip-03.bin": "9586d8a76498871650e0fa57de185e07745bd356d5e284594de4d0df6570f1d0",
+      "run/native-normal-explicit-mips/nvidia-mip-04.bin": "b2866a107f784751414549c204a41767a8ba3dbdfcfb9a5ea72b284007fb8788",
+      "run/native-normal-explicit-mips/nvidia-mip-05.bin": "933103ee295e1c15e40dedd92ceaed40ebecbbd4d003eba577909d81f59e9de9",
+      "run/native-normal-explicit-mips/nvidia-mip-06.bin": "1ed5af6d1d47f8a7fb99be7b4225a9038481c679ec427488e7e2863e273a946c",
+      "run/native-normal-explicit-mips/nvidia-mip-07.bin": "700bb5449888dd5bd6674eff336adba7e01d5378984d62bdfd5a9779e2419466",
+      "run/native-normal-explicit-mips/nvidia-mip-08.bin": "64281ea9d6cbbbb6947474c91af1ad7dddb3d1b609202f9e33fab0c122b27f7a",
+      "run/native-normal-explicit-mips/nvidia-mip-09.bin": "5b473a53d340f3bad1ccdcc3746dc792797f8bdf27e81886e6302fb103b89c08",
+      "run/native-normal-explicit-mips/nvidia-mip-10.bin": "fd054fc98be83a843305946e921a2388eab3785877b0e0ace89862b97ca4058c",
+      "run/native-normal-explicit-mips/nvidia-mip-11.bin": "0d0f7b6801ebcf86f878e70750b9ea5a0e0d578bef54723ab1c54a30617c2f6f",
+      "run/native-normal-explicit-mips/process.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run/native-normal-explicit-mips/request.json": "42ed55f4b864e7b689937a1099da70ce4e58eec5bf5add3554aa5748790c6e4d",
+      "run/native-normal-explicit-mips/worker.py": "6eff935eaec9e9df609d23cb184af8ab550363ca18cfd7895b8b930f4bff440d",
+      "run/native-normal-explicit-mips/nvidia-depth-crop.zlib": "d57d39c7f9ecaf511df4de985c9a75c510891ece7ffac3452304da1bde794f5c",
+      "run/native-normal-explicit-mips/nvidia-atlas.zlib": "f045b09b57c9d6384e8f4c59dca62720f246df53273555068a49e234f248fb03",
+      "run/native-normal-explicit-mips/nvidia-normals-crop.zlib": "9bbacae1fe3533da84bf85daaacb6d50b66fa4461ee7943005738dfb4e3e3b17",
+      "run/native-normal-explicit-mips/nvidia-visibility-crop.zlib": "c8178d4564862bfcd7012241810e6b0547b8d3b4309477d90b470e66cd1ed2c8",
+      "run/native-normal-explicit-mips/intel-depth-crop.zlib": "163e3404d17e75a4232862ec3aac6b5fbe06c581b3a5d1fdfe001a282eb61add",
+      "run/native-normal-explicit-mips/intel-atlas.zlib": "da9758b37cb138a1f8f069e6b4259f2ecdad0e6c40c769ec215fc8db7e668af0",
+      "run/native-normal-explicit-mips/intel-normals-crop.zlib": "b413f537f1e4c4d694233431219f532eeb0401a191065fe8f192e74d40b9e3d1",
+      "run/native-normal-explicit-mips/intel-visibility-crop.zlib": "3ed2116c1b77829e295828cc47a28a61438912670c9df5561e43c0e0f59bfa60"
+    }
+  }
+}

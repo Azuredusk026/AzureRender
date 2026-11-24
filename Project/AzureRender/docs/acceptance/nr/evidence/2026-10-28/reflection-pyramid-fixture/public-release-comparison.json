@@ -1,0 +1,102 @@
+{
+  "status": "diagnostic",
+  "configuration": "public-release",
+  "levels": [
+    {
+      "role": "color",
+      "mip": 1,
+      "maximumQuantizationUnits": 0.0,
+      "differentBytes": 0,
+      "overOneUnit": 0,
+      "meanQuantizationUnits": 0.0
+    },
+    {
+      "role": "confidence",
+      "mip": 1,
+      "maximumQuantizationUnits": 0.0,
+      "differentBytes": 0,
+      "overOneUnit": 0,
+      "meanQuantizationUnits": 0.0
+    },
+    {
+      "role": "color",
+      "mip": 2,
+      "maximumQuantizationUnits": 0.0,
+      "differentBytes": 0,
+      "overOneUnit": 0,
+      "meanQuantizationUnits": 0.0
+    },
+    {
+      "role": "confidence",
+      "mip": 2,
+      "maximumQuantizationUnits": 0.0,
+      "differentBytes": 0,
+      "overOneUnit": 0,
+      "meanQuantizationUnits": 0.0
+    },
+    {
+      "role": "color",
+      "mip": 3,
+      "maximumQuantizationUnits": 0.0,
+      "differentBytes": 0,
+      "overOneUnit": 0,
+      "meanQuantizationUnits": 0.0
+    },
+    {
+      "role": "confidence",
+      "mip": 3,
+      "maximumQuantizationUnits": 0.0,
+      "differentBytes": 0,
+      "overOneUnit": 0,
+      "meanQuantizationUnits": 0.0
+    },
+    {
+      "role": "color",
+      "mip": 4,
+      "maximumQuantizationUnits": 0.0,
+      "differentBytes": 0,
+      "overOneUnit": 0,
+      "meanQuantizationUnits": 0.0
+    },
+    {
+      "role": "confidence",
+      "mip": 4,
+      "maximumQuantizationUnits": 0.0,
+      "differentBytes": 0,
+      "overOneUnit": 0,
+      "meanQuantizationUnits": 0.0
+    },
+    {
+      "role": "color",
+      "mip": 5,
+      "maximumQuantizationUnits": 0.0,
+      "differentBytes": 0,
+      "overOneUnit": 0,
+      "meanQuantizationUnits": 0.0
+    },
+    {
+      "role": "confidence",
+      "mip": 5,
+      "maximumQuantizationUnits": 0.0,
+      "differentBytes": 0,
+      "overOneUnit": 0,
+      "meanQuantizationUnits": 0.0
+    },
+    {
+      "role": "color",
+      "mip": 6,
+      "maximumQuantizationUnits": 0.0,
+      "differentBytes": 0,
+      "overOneUnit": 0,
+      "meanQuantizationUnits": 0.0
+    },
+    {
+      "role": "confidence",
+      "mip": 6,
+      "maximumQuantizationUnits": 0.0,
+      "differentBytes": 0,
+      "overOneUnit": 0,
+      "meanQuantizationUnits": 0.0
+    }
+  ]
+}

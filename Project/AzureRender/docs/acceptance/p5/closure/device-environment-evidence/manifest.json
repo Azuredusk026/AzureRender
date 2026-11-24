@@ -1,0 +1,3552 @@
+{
+  "schemaVersion": 1,
+  "sourceHash": "32636fe8bc21a8208d6916c18ba71c6afe341b1a1eeb737b2d7109ba67e1c6a8",
+  "currentCpuTests": 326,
+  "priorGpuTests": 130,
+  "associatedTotal": 456,
+  "priorGpuSourceHash": "b2af43f8a206f6edc16e30c259e41f6230fa64adf6b261e8fd7cbf4dec9b64c2",
+  "deliveryChecks": 10,
+  "formalRounds": 15,
+  "formalPassedRounds": 7,
+  "formalPerformancePassed": false,
+  "longRuns": {
+    "platformer": {
+      "status": "passed",
+      "actualSeconds": 1800.125,
+      "frames": 334401,
+      "workingSetGrowth": 0.005308961392426426
+    },
+    "standard": {
+      "status": "failed",
+      "actualSeconds": 1800.062,
+      "frames": 235480,
+      "workingSetGrowth": 0.013833662706254968
+    }
+  },
+  "physicalInputVerified": false,
+  "subjectiveAudioVerified": false,
+  "authoringEfficiencyVerified": false,
+  "priorWorkingSetCauseResolved": false,
+  "files": {
+    "method/acceptance-status.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/acceptance-status.json",
+      "originalBytes": 1957,
+      "storedBytes": 399,
+      "originalSha256": "b6fc44235912a2702ac51a7013d73e166f0dbafabbeab7f0a536c1466aa69798",
+      "sha256": "1206c15b08fdf6577afd9633ad33e958bc577be501750fedc6e725aa3e5d43cd",
+      "compressed": true
+    },
+    "method/acceptance.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/acceptance.py",
+      "originalBytes": 4377,
+      "storedBytes": 1694,
+      "originalSha256": "cdf29383448e0c6fd5a2e3e8866baa4fb1d99f46805516873b22ea615a5bbdad",
+      "sha256": "733d05ace1872a14ec6af62715ad4e54299d546d518fac3feedab43e0ad58002",
+      "compressed": true
+    },
+    "method/additional-entry-status.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/additional-entry-status.json",
+      "originalBytes": 689,
+      "storedBytes": 292,
+      "originalSha256": "8944806f16546a08cd0d373fab0035f693b5d633cfaa69714df044977af5e11d",
+      "sha256": "d56048dd25b5543ff14fbb96363816ca3255b35d02ab08d0fda778cdae42b54b",
+      "compressed": true
+    },
+    "method/analyze_working_sets.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/analyze_working_sets.py",
+      "originalBytes": 1447,
+      "storedBytes": 719,
+      "originalSha256": "5a9e81e78a0edeae0a2b05e59ef4e06f2177e4d83fe0e596751dc7d852b5018e",
+      "sha256": "4bc9ba63de62fd6903c3b1230bee663b4fd477477a2b460c81ab37e6c642273a",
+      "compressed": true
+    },
+    "method/archive_evidence.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/archive_evidence.py",
+      "originalBytes": 4498,
+      "storedBytes": 1773,
+      "originalSha256": "dded35f455f400cb223f9908f74a44e6885580ac39d61ddff0653dc9617f6200",
+      "sha256": "45e37ca6339711d7b7ff1177b8b507d2799a97da828b76bf52d09bb6839db2a6",
+      "compressed": true
+    },
+    "method/build.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/build.log",
+      "originalBytes": 2351,
+      "storedBytes": 592,
+      "originalSha256": "e2f585927044e2427cd3bc96a5fb35307266d6664b360a0cc0dce6036bf04718",
+      "sha256": "3dbf4635e3d9206d65de09ebdaf7211b2a2b6d7dd54163a527c9623f07d9c539",
+      "compressed": true
+    },
+    "method/capture-comparison.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/capture-comparison.log",
+      "originalBytes": 581,
+      "storedBytes": 390,
+      "originalSha256": "3629afe52a87318e72232097fe213e6e497a3d3ba9570be4887049d013d40981",
+      "sha256": "72a924973070ac75999abd033b530f97a810543f12c0f2aa659dcbcdee0bff00",
+      "compressed": true
+    },
+    "method/check_end_observation.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/check_end_observation.py",
+      "originalBytes": 1257,
+      "storedBytes": 576,
+      "originalSha256": "b9ae3a771c379cb4300d479f41debffc94ccec0045f76867deab1b71649029a5",
+      "sha256": "7c143a50aeb10b6ea1c3a2b99a2cf51b1c59622c520cc2ede9f5fba980b0578e",
+      "compressed": true
+    },
+    "method/cinematic-probe.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe.log",
+      "originalBytes": 356,
+      "storedBytes": 252,
+      "originalSha256": "43a773ae543af38c743061a6709380ffce787016405c966b39f5be2331deacc3",
+      "sha256": "ccda67896e5fe763f2c7730d8685ba467ab9bdf9f4db34bacbbbdbc09dacc422",
+      "compressed": true
+    },
+    "method/collect_system_trace.ps1.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/collect_system_trace.ps1",
+      "originalBytes": 7831,
+      "storedBytes": 2494,
+      "originalSha256": "6d30f1e0d5ba23edf1b2a56a587d54815b7f0f36fa853e126f0711647c9584a1",
+      "sha256": "caae722693b3e6a0143e45e96361fff41b6edf8fdb9c4f4ea464bdfd3bfd4324",
+      "compressed": true
+    },
+    "method/create_operator_packet.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/create_operator_packet.py",
+      "originalBytes": 4693,
+      "storedBytes": 2336,
+      "originalSha256": "b3bcb78f207d492e8eacf1aaa17a7eff913f37b91c9bc33a443c2ca6df718f5f",
+      "sha256": "cf7cd2206161b4bf8458ec0fe41bf0eac3d0703201ff951d0a0a4dec9ef153eb",
+      "compressed": true
+    },
+    "method/cycles.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cycles.input.json",
+      "originalBytes": 4574,
+      "storedBytes": 399,
+      "originalSha256": "a782cd4bb3a8c0fbba0308ccc47cc438bc32b182e07391f645eb3a2d646f03f4",
+      "sha256": "46635e5cd08f0319a4e641a73d68f37f716c392d9a1681574d0d8889601297d7",
+      "compressed": true
+    },
+    "method/debug-cpu.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/debug-cpu.log",
+      "originalBytes": 21629,
+      "storedBytes": 3772,
+      "originalSha256": "68698d5f5344319d22c8261ae70ccb150043addc5cfa84721ff4beacf1667e4f",
+      "sha256": "2987b2608f5d57d8b34d94fc3ae50fcd11398539cd004c54760fb5093447568d",
+      "compressed": true
+    },
+    "method/debug-provenance.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/debug-provenance.json",
+      "originalBytes": 150343,
+      "storedBytes": 52583,
+      "originalSha256": "a2d30d2422ae35b9541a3003d3ba8a1adf1c711156ad4859c0d819f2ae439816",
+      "sha256": "c099c541c28419a3330f53b717401e2e1f90521fa9002e017d1438af12ef27ec",
+      "compressed": true
+    },
+    "method/delivery.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/delivery.log",
+      "originalBytes": 2313,
+      "storedBytes": 678,
+      "originalSha256": "406256edd9801debc88f3a79998589f9b717f72584a412e8489e28d2d6bb0d82",
+      "sha256": "2109a92092ae0bca79db325a2ba17cc9b3731c0f89ae6a45a3d0b1606f396121",
+      "compressed": true
+    },
+    "method/dependency-equivalence.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/dependency-equivalence.json",
+      "originalBytes": 21401,
+      "storedBytes": 6115,
+      "originalSha256": "aef18750683e1e7d60c318b1340f5ce447f2b344d70eca631143ccd940eefea0",
+      "sha256": "85be02d1f4b7bf820b6860cb5e2f081fdb8046a386f321bb4ff5ad8221b33ec4",
+      "compressed": true
+    },
+    "method/detached-launch.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/detached-launch.json",
+      "originalBytes": 155,
+      "storedBytes": 147,
+      "originalSha256": "1bd008b171cbfa84820461a05756bea166c26b8aadb65422af8d09742b845c75",
+      "sha256": "57cb9abbca1eddfc857b3e17b845913c822220e8d70bad20d0f65197a56d60d6",
+      "compressed": true
+    },
+    "method/docs-style.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/docs-style.log",
+      "originalBytes": 47,
+      "storedBytes": 67,
+      "originalSha256": "1e1dfe2368f74d45757ec968b56ff795bc0e7f49b21fda9d888b160c5994fdc5",
+      "sha256": "29a0434f6fa8f1dd94fea8513ffccdc137cc7ef91468005e978cbfe81b4acc39",
+      "compressed": true
+    },
+    "method/entry-probes.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/entry-probes.log",
+      "originalBytes": 162,
+      "storedBytes": 119,
+      "originalSha256": "e521065e01748be13cbed2d201c49a671aa737f77968c6aea1b8c361dc122761",
+      "sha256": "2b2c1b075d8e74b71cd4d9e04e5c9afa4c90b36fea6cfd1d558866cdfe28a208",
+      "compressed": true
+    },
+    "method/finish_measurements.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/finish_measurements.py",
+      "originalBytes": 2470,
+      "storedBytes": 1134,
+      "originalSha256": "6ee4a207fe7c04a1b5d1af6fe5ebbf47dff094876dde526b42749e113db93067",
+      "sha256": "36fed8ccc8bd4d173f70cefbee83d4fe43243584edb5f763abf91d94f9c760fd",
+      "compressed": true
+    },
+    "method/formal-performance.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance.log",
+      "originalBytes": 4309,
+      "storedBytes": 1229,
+      "originalSha256": "0f6a42b37469f48cb8e068e4794e5b1d79c320744ab41341df431ece07bacaf4",
+      "sha256": "00dffca5be00c943cb56a3e4d3f5e729b760336a2ffcacbbfafcadfc67caee54",
+      "compressed": true
+    },
+    "method/independent-final-green.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/independent-final-green.log",
+      "originalBytes": 116,
+      "storedBytes": 60,
+      "originalSha256": "3491a12521010826f3399fb49cd3245a2a4528c33233894e31a514fe44c74155",
+      "sha256": "60e4f019c0455155066a35711fe5fe37b837b77a5ddb5214f1e90c092007f4fd",
+      "compressed": true
+    },
+    "method/independent-final-red.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/independent-final-red.log",
+      "originalBytes": 740,
+      "storedBytes": 342,
+      "originalSha256": "bcaf26216dc01f1b7353fc750a2a4db9a7d582deb65f53eff639c9be07ff8379",
+      "sha256": "fe1eb0b148342d6fdea8d1e08b55509fc71804a5cf69a5d64a5e09d57b2a2afa",
+      "compressed": true
+    },
+    "method/inventory.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/inventory.log",
+      "originalBytes": 34,
+      "storedBytes": 52,
+      "originalSha256": "7b3392451f8b2db5e8e06c20bd300d8f423a9a7055d65cd69160df5d2dd9e671",
+      "sha256": "779fdf4cc3b81c460590a1a3afea70a9157c4903ec227e29ef868e80de2fd3b6",
+      "compressed": true
+    },
+    "method/inventory_regression.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/inventory_regression.py",
+      "originalBytes": 1877,
+      "storedBytes": 997,
+      "originalSha256": "0c9d226541117222634a385efd76db10fbb2eb7ad75d5d5a88136328af40e06c",
+      "sha256": "3be4a01ad092a72bd79b9e9a1dce82bc37c4d679cbf8eab8cfd9f72ff0e85946",
+      "compressed": true
+    },
+    "method/longrun-module-observation.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/longrun-module-observation.json",
+      "originalBytes": 17637,
+      "storedBytes": 2347,
+      "originalSha256": "e3633f120c52870d2cb92cebc0dfea564e821510b61fca3aa8d33a1f0a770fd6",
+      "sha256": "dd40d3f1ff9acc9f7a9ef23ed4faa5b92a5b22712d647f34729d61809063a596",
+      "compressed": true
+    },
+    "method/memory-analysis.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/memory-analysis.log",
+      "originalBytes": 1310,
+      "storedBytes": 268,
+      "originalSha256": "b4685444fca9f6c932bb75e7dd1a2119ef9289317f86541c17ddd09715d99710",
+      "sha256": "552a7da56fecd3538ecc330096ebea74b36d2f949b279473343575a89f2f0f97",
+      "compressed": true
+    },
+    "method/module-enumerator-probe.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/module-enumerator-probe.json",
+      "originalBytes": 17362,
+      "storedBytes": 2355,
+      "originalSha256": "fb6706861d053d8b6796be1c7357d5664b8700c5e5df7f2f3f62f6e8d6b3895f",
+      "sha256": "58808859f47f20d283840dfd5af15ab9e818b96d2ec2a45ca973bdc4a7fd8937",
+      "compressed": true
+    },
+    "method/native-environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/native-environment.json",
+      "originalBytes": 443082,
+      "storedBytes": 26586,
+      "originalSha256": "f2268848269c1388a2bcdb75b1cd483a84bf1f8dfa8d7916e668890492d57355",
+      "sha256": "798b8f0fd945d5a08d7af8b860ecba3703f06a006c5cd9865899d86a9bb8ef46",
+      "compressed": true
+    },
+    "method/no-capture-modules.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-modules.json",
+      "originalBytes": 918905,
+      "storedBytes": 12812,
+      "originalSha256": "b966b04159051d665e220a35e9d2aa5840b94d7d9d4ac3398e8c10db0ede57e9",
+      "sha256": "eda81f3391206b9c5c61576d7ff3432c9e2c9d4b30ace79f92aa340d820b1b3c",
+      "compressed": true
+    },
+    "method/no-capture-performance.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance.log",
+      "originalBytes": 4269,
+      "storedBytes": 1215,
+      "originalSha256": "0b71c2fc4c8da6efb1673e4190999e85bd509f37d8a620fdd0cadf6c497418e9",
+      "sha256": "78862d86660bc4c7e29ba3696ada034c60a991d99ce22799c734ecdb17a667c7",
+      "compressed": true
+    },
+    "method/nvidia-smi-reference.html.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/nvidia-smi-reference.html",
+      "originalBytes": 218860,
+      "storedBytes": 48059,
+      "originalSha256": "017647ae72b332a94e01e6d9672d1d82367e56de1d0685132eb91a972035b17e",
+      "sha256": "735c565369518beaf4e0f24f0ffc603502a215a815d5262e8210ed3cea3c21a5",
+      "compressed": true
+    },
+    "method/obs-layer-manifest.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/obs-layer-manifest.json",
+      "originalBytes": 514,
+      "storedBytes": 297,
+      "originalSha256": "7b6b0813fb58b276847a8583eb5c3f94aee7d7ad0ae3a1ef6133d5d8771f20f4",
+      "sha256": "82b0fda91b96e1cc0dc697432b58541520db0c18c47bc9e353f01ad704d7a57a",
+      "compressed": true
+    },
+    "method/operator-packet.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/operator-packet.log",
+      "originalBytes": 237,
+      "storedBytes": 193,
+      "originalSha256": "00f67f1d9449878cc99e292f601b0bf83443c3b7651efec2c60337d81f245f00",
+      "sha256": "b5c278dcd61afd90dbe7485584175b10ec9fb3b34ec860c1359942e7f2dc4a37",
+      "compressed": true
+    },
+    "method/owned-child.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/owned-child.json",
+      "originalBytes": 94,
+      "storedBytes": 108,
+      "originalSha256": "07c346159a42bd81a95bf74b11769624f2b2ef5fc822b268e30cf44b6af93010",
+      "sha256": "811eab320f8e8b7667e9eb380a7b933509ae00194b105e298ae8396a2932dc7b",
+      "compressed": true
+    },
+    "method/platformer-longrun.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun.log",
+      "originalBytes": 536293,
+      "storedBytes": 34494,
+      "originalSha256": "48cdc1580873b8240f03ddb0137e78a5d334353278002a9ba2731200b2ff1486",
+      "sha256": "d162fecbc93bca1d0f52f18b61728cc113114ac5a7f3b984c3f84b72487ea507",
+      "compressed": true
+    },
+    "method/preview-probe.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe.log",
+      "originalBytes": 775,
+      "storedBytes": 296,
+      "originalSha256": "d36199b622b5d261dc158d005ba6f58b5aaa6a6b525af704f6c5ac6a1affca94",
+      "sha256": "ecdb0eb9d445166877981e36b59beb8d2e32a2fe4e9ee164ff88b51182e72911",
+      "compressed": true
+    },
+    "method/probe_remaining_entries.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/probe_remaining_entries.py",
+      "originalBytes": 2115,
+      "storedBytes": 998,
+      "originalSha256": "4e0215a7e8fe8266c47f18dc87ae4ca313da24c11bc4a241fd3547e81c657c82",
+      "sha256": "ac02a9eddc600cad30dc87d3dc3f0e8840d0e5510c1fa0df3cb3686375f4c0db",
+      "compressed": true
+    },
+    "method/rebuild.cmd.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/rebuild.cmd",
+      "originalBytes": 447,
+      "storedBytes": 269,
+      "originalSha256": "4dc69c343bb1a6b8d0b5363ce85cc4b01493c4f7b525598eaaddc67d9a2af609",
+      "sha256": "8e4f08baf06afcec333210c1a6f24fe8830e45cad3b7b2279dae8f4d3aeedabc",
+      "compressed": true
+    },
+    "method/regression-inventory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/regression-inventory.json",
+      "originalBytes": 18919,
+      "storedBytes": 2169,
+      "originalSha256": "127d42eba85168ed112243349f06d3135531d8c3840c2003e090a95ceee124a4",
+      "sha256": "d121e89a686d14177bbd7802e329f64546a85b559b05f98c6cfaef59d793b7fb",
+      "compressed": true
+    },
+    "method/regression-status.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/regression-status.json",
+      "originalBytes": 571,
+      "storedBytes": 276,
+      "originalSha256": "ec40bfd21ce85482fd1f552d489980a3d2500b62726fbc26d4db12727f5addc0",
+      "sha256": "3f840a1ed51b7a57c73c408a13aa9bab41c6563e9ec3ce166d07e0f2bb36c440",
+      "compressed": true
+    },
+    "method/regression.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/regression.log",
+      "originalBytes": 80,
+      "storedBytes": 66,
+      "originalSha256": "1dcef84368d797f846c363a8124cefc657477fc33508c8bf464d9253f66dfe85",
+      "sha256": "c1349c51c65f559eef07da59042cce6624b5ef64bf230f4e68907cbd88f9ff2c",
+      "compressed": true
+    },
+    "method/regression.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/regression.py",
+      "originalBytes": 1842,
+      "storedBytes": 878,
+      "originalSha256": "3a9be2722dc553735ba3afdbdee2685ab49ab45ceb52c8eea86b4467c58b63ad",
+      "sha256": "21b607c32e15988b5f251470f591f698877f896892320684f74cf03a157eeb1b",
+      "compressed": true
+    },
+    "method/relative-green.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/relative-green.log",
+      "originalBytes": 116,
+      "storedBytes": 60,
+      "originalSha256": "4af8e67d8921277c49e10f1942eed0e2aa4223a6c045185014b1b5a24742e682",
+      "sha256": "74f60c9c1d084432f0cc1bea47eb3aafc31d2df8bb91bef1e020c1e464a5c0c6",
+      "compressed": true
+    },
+    "method/relative-identity-green.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/relative-identity-green.log",
+      "originalBytes": 116,
+      "storedBytes": 60,
+      "originalSha256": "3491a12521010826f3399fb49cd3245a2a4528c33233894e31a514fe44c74155",
+      "sha256": "60e4f019c0455155066a35711fe5fe37b837b77a5ddb5214f1e90c092007f4fd",
+      "compressed": true
+    },
+    "method/relative-identity-red.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/relative-identity-red.log",
+      "originalBytes": 689,
+      "storedBytes": 319,
+      "originalSha256": "b199e0e83c656984ed7afaf8010ad9efc34946f58e3c2d96468727bba4b441a8",
+      "sha256": "4ca4cdf7d990eb9bd0d3dd40f8424a44a7d5c023d99f55ddc0158b30b6a2ee5c",
+      "compressed": true
+    },
+    "method/relative-red.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/relative-red.log",
+      "originalBytes": 1840,
+      "storedBytes": 458,
+      "originalSha256": "cebceb042d0878c63635017ef8561037774906dc50aabf660b3743983ae8ce05",
+      "sha256": "dd74ca8e4e8daee17e16be811472561a5d71013223db0baeae832b3d9d29bc52",
+      "compressed": true
+    },
+    "method/release-cpu.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/release-cpu.log",
+      "originalBytes": 21633,
+      "storedBytes": 3731,
+      "originalSha256": "a0b524f16e1abab943b71818619b95fe372f0e6bc37b94531f71d710209781f6",
+      "sha256": "5189d7f30bdc76113417c7ff0d3f8ef73beabe5ae9087c41e1715089a2e05f6f",
+      "compressed": true
+    },
+    "method/release-provenance.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/release-provenance.json",
+      "originalBytes": 147445,
+      "storedBytes": 51983,
+      "originalSha256": "b5d2e110909bc66985ce0552834e71852337f3504eade4816450c32d25eaac63",
+      "sha256": "c0f60b6b3a5bc2ef1bf098c14ac3c1a270be08f290230e6f97e76debd20ba916",
+      "compressed": true
+    },
+    "method/repeat_without_capture.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/repeat_without_capture.py",
+      "originalBytes": 6262,
+      "storedBytes": 2200,
+      "originalSha256": "e74a82316805c649425ce2f9babb5d026b84d43482f0b184878aefae904fbabd",
+      "sha256": "f96d744dc0d6e8d8b19e37a012af669f318898cca05fff9dca65c3efd68d314a",
+      "compressed": true
+    },
+    "method/repository-preflight.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/repository-preflight.json",
+      "originalBytes": 859,
+      "storedBytes": 261,
+      "originalSha256": "7f075209db82bd76bead82c94fdcd78cbdae43216685fb92ffc48809b41d199d",
+      "sha256": "9e61fe52c3445c18223b122efc56a2fd08f1b95f254ea78bf382aa79f3dc95e2",
+      "compressed": true
+    },
+    "method/runner.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/runner.stderr.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "compressed": true
+    },
+    "method/runner.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/runner.stdout.log",
+      "originalBytes": 633,
+      "storedBytes": 288,
+      "originalSha256": "b38b01633b575b8a4cb2db5b7f3af73170430b49693f4769d7149473b6e28dca",
+      "sha256": "d2533f53c0d6960d9122783a98facae60eecb54ebfe36f384d33d888ff77572f",
+      "compressed": true
+    },
+    "method/runtime-equivalence.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/runtime-equivalence.json",
+      "originalBytes": 1341,
+      "storedBytes": 339,
+      "originalSha256": "468ac589b2cc78f92709cf1276c6b9f27bf80b8b83461f0410cac1b73c458c56",
+      "sha256": "d399091aace0e20babf7a0a8c5280a6e76ed3e93fa9754e33367889fc78c27c7",
+      "compressed": true
+    },
+    "method/stage_environment_candidate.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/stage_environment_candidate.py",
+      "originalBytes": 3921,
+      "storedBytes": 1672,
+      "originalSha256": "f999c1695bfa06c41dde95dbc3a1a385465f5f074953e720f97d118062f52883",
+      "sha256": "d6d6aead89612021952af74096da36acae43b5d240e2ae4263cf014550756ac1",
+      "compressed": true
+    },
+    "method/standard-longrun.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/standard-longrun.log",
+      "originalBytes": 2690,
+      "storedBytes": 672,
+      "originalSha256": "a475e3f2c77bbddf954ff5c147b6536439cb69821b2c0f0c3e87ad76c379e8c2",
+      "sha256": "c9eb74942886111b023e89deeb5c109406a18bf2b017a99c449be7fb045fe59e",
+      "compressed": true
+    },
+    "method/sync-documents.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/sync-documents.log",
+      "originalBytes": 169,
+      "storedBytes": 156,
+      "originalSha256": "80be29bfef059f907c87357b708d1d2d2867b62dbab0a21634f32d30eaf78b6c",
+      "sha256": "d234a1ccb262ed4c7c403cb1ddf91a75df63a1d37a56b811a3f091f380da8924",
+      "compressed": true
+    },
+    "method/sync_documents.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/sync_documents.py",
+      "originalBytes": 11541,
+      "storedBytes": 4893,
+      "originalSha256": "0e279af9d4e641657f9ed4ac85b915652eb1b94816c430adee08e594b5c84758",
+      "sha256": "b73dad76f2ab85cdf397c96375432dcfb594ad87bf86980f7d59a6d870b26866",
+      "compressed": true
+    },
+    "method/verified_delivery.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/verified_delivery.py",
+      "originalBytes": 11385,
+      "storedBytes": 3994,
+      "originalSha256": "4b64a1de91450e5ec55d706a3c5e3c42212549583d9779f12e260420bda8d822",
+      "sha256": "7098256e2a93bc04a1c9a294b92784da739aa54b0a5274961ff49433000ba6c4",
+      "compressed": true
+    },
+    "method/verify_environment_candidate.py.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/verify_environment_candidate.py",
+      "originalBytes": 8914,
+      "storedBytes": 2796,
+      "originalSha256": "b0b51d28c6e6ab942428b1a2af188431f30a7e6c6949905971851e9e1d144fe2",
+      "sha256": "27612c22a62711abca69a35a851f797e1ffba70332398f051f11f26407274816",
+      "compressed": true
+    },
+    "method/working-set-observation-analysis.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/working-set-observation-analysis.json",
+      "originalBytes": 9063,
+      "storedBytes": 2132,
+      "originalSha256": "fecc4cc1794501d278f6a10714acb5e501c114fec873cc665de9b3bd6e848119",
+      "sha256": "0255a195344227b0e31048004620cd4174e4e07af25476c630bf818bea56680d",
+      "compressed": true
+    },
+    "formal-performance/editor-1.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-1.csv",
+      "originalBytes": 110249,
+      "storedBytes": 29022,
+      "originalSha256": "bccb43d77f5cefffba17db484b5ccae1e27607a35f68975bc50e94981822983b",
+      "sha256": "5155bdb8ae6f1afc74e4d2486a6b654fc9dad86773910223b4f54ce512e67133",
+      "compressed": true
+    },
+    "formal-performance/editor-1.editor.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-1.editor.json",
+      "originalBytes": 30,
+      "storedBytes": 50,
+      "originalSha256": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "sha256": "54e322161c0d8cef14591e7aeb33d757488089a2b6e38dc345cc51df6654fd94",
+      "compressed": true
+    },
+    "formal-performance/editor-1.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-1.environment.json",
+      "originalBytes": 590647,
+      "storedBytes": 35155,
+      "originalSha256": "0922f8f248a9308fd60d456fc99d63cdc519b290dc8ff65fb2e2fb7b5ea6ea16",
+      "sha256": "04b6e62674049f268255b2f01bd0970932fc3e146630fccbda6007c93cc0bc97",
+      "compressed": true
+    },
+    "formal-performance/editor-1.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/editor-1.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-1.json",
+      "originalBytes": 125876,
+      "storedBytes": 32953,
+      "originalSha256": "dae4def39412d4493d2e72247040083d3c466473fa6957a026973903190f1227",
+      "sha256": "04213a0633ec35cbc765fb94f36b95d936c060eb24086a1d0fd365bef02ad550",
+      "compressed": true
+    },
+    "formal-performance/editor-1.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-1.memory.json",
+      "originalBytes": 21632,
+      "storedBytes": 1684,
+      "originalSha256": "3d96dbaa98ca9fb968a3f05a74707edc2c4b7cfc87cdc8d6c9ea1f36e69b41fa",
+      "sha256": "27c0fbd4ba97be9b64b440d5034f5a7c3f9aa5c48918735988171ce0992d6769",
+      "compressed": true
+    },
+    "formal-performance/editor-1.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-1.stderr.log",
+      "originalBytes": 1015,
+      "storedBytes": 365,
+      "originalSha256": "dbdac24f78e0799b7ebe0eaed1755a2ca6dbf4a4a5c0d4e699dda5bdd6a4084a",
+      "sha256": "4ebc6a3d1cc7af63541e26e013e0a2b6fa41176ff131e44c864c2fdaeed4aa46",
+      "compressed": true
+    },
+    "formal-performance/editor-1.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-1.stdout.log",
+      "originalBytes": 2802,
+      "storedBytes": 1199,
+      "originalSha256": "0c77c2f311751cefee7f73cc35e890e8933673194c9711f91b344cec7304d35a",
+      "sha256": "e5501f347ddb698644c6af0b881b0e3ea0d90ec0761c170334c13cc39a47404d",
+      "compressed": true
+    },
+    "formal-performance/editor-2.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-2.csv",
+      "originalBytes": 110249,
+      "storedBytes": 29099,
+      "originalSha256": "0812bf109bb3883fb4dc06137400f465c461e23f9ea3c73167f15823f97ed9ea",
+      "sha256": "cd11581b19b65de8704bf891aa362a64d0402880ae9e1a08e676cbed3f768208",
+      "compressed": true
+    },
+    "formal-performance/editor-2.editor.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-2.editor.json",
+      "originalBytes": 30,
+      "storedBytes": 50,
+      "originalSha256": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "sha256": "54e322161c0d8cef14591e7aeb33d757488089a2b6e38dc345cc51df6654fd94",
+      "compressed": true
+    },
+    "formal-performance/editor-2.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-2.environment.json",
+      "originalBytes": 590651,
+      "storedBytes": 35160,
+      "originalSha256": "1669796aa6ae6ab6f67dbd0a880bc373338057d2b246b9d16ed344bc2cc43aad",
+      "sha256": "1077615735220bd193ba5eac89078fe9fca390d183ef9938baa0bac5dd43afcf",
+      "compressed": true
+    },
+    "formal-performance/editor-2.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/editor-2.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-2.json",
+      "originalBytes": 126024,
+      "storedBytes": 32704,
+      "originalSha256": "5916b71c6d38cc7bbf1325c7e992024a7632b1cadefd5c011b0a474cb174ef1a",
+      "sha256": "2b2d8add7cd7ef7ac3c27b830a7cbd8343bd3fbfe095bd943cb7e0c7720e72a8",
+      "compressed": true
+    },
+    "formal-performance/editor-2.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-2.memory.json",
+      "originalBytes": 20927,
+      "storedBytes": 1588,
+      "originalSha256": "9834eea9c217723033483a13b9e401ca9aeb1dc943cafdb12fc9783a0af7160b",
+      "sha256": "6aa3103f60c9c85d0bcf9427f83d17929f54383b13c5c52c05793d93fb56b633",
+      "compressed": true
+    },
+    "formal-performance/editor-2.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-2.stderr.log",
+      "originalBytes": 1015,
+      "storedBytes": 362,
+      "originalSha256": "8fcfca0dcd90218862a34332b29c9dca86563eee7362abd2670d15575366cb89",
+      "sha256": "4d73fe1f2115d4a28b5876c838d78c10eb9bcc1469c22b63107070a891c41462",
+      "compressed": true
+    },
+    "formal-performance/editor-2.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-2.stdout.log",
+      "originalBytes": 2802,
+      "storedBytes": 1195,
+      "originalSha256": "8ad12d95ebe81a4cd9b5cc5ab82f3e1b42afcd9207ebd85673b85f1c34d9205b",
+      "sha256": "3152bf1e42a418031cabeb145cb790367aa7dbc6d2b50f0ca447acf6c6054f50",
+      "compressed": true
+    },
+    "formal-performance/editor-3.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-3.csv",
+      "originalBytes": 110249,
+      "storedBytes": 28790,
+      "originalSha256": "8663bf8ea38377a9a24ce2271912e1d332824f78f501475f615fac070c0137ac",
+      "sha256": "3975c3e93a4f20557e6d795dcc5d8475619779e7f7aea60a287fd62f9cb1dcf9",
+      "compressed": true
+    },
+    "formal-performance/editor-3.editor.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-3.editor.json",
+      "originalBytes": 30,
+      "storedBytes": 50,
+      "originalSha256": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "sha256": "54e322161c0d8cef14591e7aeb33d757488089a2b6e38dc345cc51df6654fd94",
+      "compressed": true
+    },
+    "formal-performance/editor-3.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-3.environment.json",
+      "originalBytes": 590649,
+      "storedBytes": 35139,
+      "originalSha256": "0a4262ec43e0bb12444ac3f7a807bdb04024741c446fc299833976a5afdbbec7",
+      "sha256": "198168132f18d22a6d3d2785b423bbe0409dc8fced3314db837afff08e16f35e",
+      "compressed": true
+    },
+    "formal-performance/editor-3.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/editor-3.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-3.json",
+      "originalBytes": 125884,
+      "storedBytes": 32383,
+      "originalSha256": "9f434d86147a491da43ea714ca5fe6d77f1947d100a0b84fa723686385babdd5",
+      "sha256": "59d217cea71c4650cac8e17f03082516bd09872745876c1ba2e700ef98111182",
+      "compressed": true
+    },
+    "formal-performance/editor-3.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-3.memory.json",
+      "originalBytes": 21425,
+      "storedBytes": 1622,
+      "originalSha256": "96676471d1e16f18c7ca42f3eb8c26b4d998b334834afd306e12f2069c471194",
+      "sha256": "481a9553e1e5345fe1bf607d53baf1c1072586bf29e2ec63e3b86386447cc8f2",
+      "compressed": true
+    },
+    "formal-performance/editor-3.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-3.stderr.log",
+      "originalBytes": 1015,
+      "storedBytes": 364,
+      "originalSha256": "89d3ec45cb1c92671ac63c65b90f975644b9f2a246556f0c845f020fd38d9009",
+      "sha256": "7860d7a9adf639647b8e134824cbc2121fea4cac5ca862bff87c7e066884e59c",
+      "compressed": true
+    },
+    "formal-performance/editor-3.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/editor-3.stdout.log",
+      "originalBytes": 2802,
+      "storedBytes": 1197,
+      "originalSha256": "1513a84666d02d60860cb9fbb05f67e7c529a4e86a15dd97be0035389c8e2fd2",
+      "sha256": "206bd0e394a417f7aa006d77b413e83980c5a8d4d9c94d8d3494a8c55fd8d9e1",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-1.csv",
+      "originalBytes": 112477,
+      "storedBytes": 33804,
+      "originalSha256": "e22195896d4ede650b5f97e1b253f38b9492301447f0f8f5d1e7813e147676f3",
+      "sha256": "2f7ab99980d830180b4898f6b804188297b4cb1b592c486fa544eb2ecc1cae97",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-1.environment.json",
+      "originalBytes": 590651,
+      "storedBytes": 35158,
+      "originalSha256": "723eb56499a29d8adbea33fabfcb792cd9a0674906c440b44256b869501f3bb6",
+      "sha256": "d4cabd2e4c07785002243122cd3964ea72635a3e9f4c2e9a2d68b6a1683bd51d",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-1.json",
+      "originalBytes": 120878,
+      "storedBytes": 37328,
+      "originalSha256": "feb8ddd621925390d7a9e4fb7fc4862d40a2946bbb53f25e4839c67d2554388a",
+      "sha256": "8934630aeb9622bfc0e4a96743bb5ae8173cc003311dde860224ffa26a09ff1b",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-1.memory.json",
+      "originalBytes": 66343,
+      "storedBytes": 3416,
+      "originalSha256": "40be992779f27ba25ef5bbb19d60ade1dcb45cbdc5c7508f7ee9a62d4bd55f4d",
+      "sha256": "8f93973a0cd33a3788d9625c0c77d67b3b2d2973c1edd4f713dec04e69f9a487",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-1.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 251,
+      "originalSha256": "a149c98270ba2275d04e8901a1cfa51d215772c632482db36af948b502d4df5f",
+      "sha256": "664bd7d8105ff4b7229ba02dee4198a9e723d59ad453ce3db015f2cb386368fe",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-1.stdout.log",
+      "originalBytes": 2076,
+      "storedBytes": 1179,
+      "originalSha256": "5da06ca6b86b294bb9c310b81e15205eb80d998ffd7fe517adb0b0a33bb6cdcf",
+      "sha256": "350e34185232cf126730136d812b855eb5dde2247649ebc2aaa290ae3777937b",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-2.csv",
+      "originalBytes": 112422,
+      "storedBytes": 34025,
+      "originalSha256": "7d1c84ebd552a44e5bf3ca57dd3c1121386e87b11e172ab5249e864cf39492ef",
+      "sha256": "d31f3df81bf4f5ab965648231fed4778d31e349ec75a251a903414d522ad1d58",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-2.environment.json",
+      "originalBytes": 590629,
+      "storedBytes": 35133,
+      "originalSha256": "16713f1d61dc09696bdf28d3cc3db761632355a8dcb3f676578ec7ce317d5851",
+      "sha256": "6604c728dad3d1db7348e35d3d0b4c5fb05193203ea7aa59a92849d66857fe56",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-2.json",
+      "originalBytes": 120732,
+      "storedBytes": 37247,
+      "originalSha256": "e49e859e7757cfe73a7295be9ee3fd1f4bb8923b22e97e4d2f3fc6b1a30d945e",
+      "sha256": "90230ffd3efae22938804ec0cc22f20a9ff5675c6fdd4d4000c2668faaed070b",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-2.memory.json",
+      "originalBytes": 65499,
+      "storedBytes": 3219,
+      "originalSha256": "948219b3abd901c1d7c90da7a9ea766c1229b278d71090469050ca5735df3cfd",
+      "sha256": "ead43ae2817cbdc3970aff08917de7bfb2bae30a1c8e022b272f3a7b69d2dc80",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-2.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 251,
+      "originalSha256": "65246d0973bfb3d94c6ac79c966e97102227bfd6253ec5d1d8679824e112ae95",
+      "sha256": "efd30330d991f27d9a5a2bad585f4b09d07397b1544c615b49ccad84cd25e390",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-2.stdout.log",
+      "originalBytes": 2076,
+      "storedBytes": 1181,
+      "originalSha256": "5bb655f8fed70d79b621bc5bbad09165b2220e8a958366846737916fcf4301e4",
+      "sha256": "0a3fcb2c12b945843437f4beaf08bcea8bb30c6baf003cf8c6d587ab11f79a58",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-3.csv",
+      "originalBytes": 112416,
+      "storedBytes": 32995,
+      "originalSha256": "d5ea5305ba99e70d7007cce5a3dcd25ea3a683b44b820142534d7489463ef816",
+      "sha256": "93813f5dbfcb45a2c745e95a1f28d3888ac4edf17673dbbb4ecbe7ac82fe4f01",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-3.environment.json",
+      "originalBytes": 590644,
+      "storedBytes": 35144,
+      "originalSha256": "a902e7809885c588ac90718c7000fb4592e8e0c2878022378936ef4c3493a6ce",
+      "sha256": "e878b6cc75d05625c1c7490db780cabd51778ad00105f69769429d00d3c3f57a",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-3.json",
+      "originalBytes": 120770,
+      "storedBytes": 37006,
+      "originalSha256": "8f342a1be0b0117eff9f62ef1fe185c0ce495568c8fb9051a92db64f6117a373",
+      "sha256": "4a66eed3e4c8137f420a355b6880f9d722c5e0c342cfd158e4e3b226039e5eaf",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-3.memory.json",
+      "originalBytes": 65365,
+      "storedBytes": 3327,
+      "originalSha256": "cdbd21504d531be2697d2ef5ceeccc2f0177949ee39fa1a4a50265ca96d7c632",
+      "sha256": "c68cf2a9fd2f86049d651adb078baa4fb59b01a4190f8b0980417dc2b3cfa715",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-3.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 253,
+      "originalSha256": "9bc7ac9567fad4316b786f6953f12ff57e62af27f029302863d819534e561a68",
+      "sha256": "ce91f95b077b2a0843f2e0c2cbbf710d4df518ddbfbd8daf9a2f6e9d17419907",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/exploration-3.stdout.log",
+      "originalBytes": 2076,
+      "storedBytes": 1177,
+      "originalSha256": "9cb961a2085901a4cf6d4bc0e8e5a93838aea1da973a83026962182d6451f73e",
+      "sha256": "8e651ede08bea159bb05f4670d5df0a170eff60e30a90e63fce8a8dced529e8a",
+      "compressed": true
+    },
+    "formal-performance/frozen-inputs.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/frozen-inputs.json",
+      "originalBytes": 128504,
+      "storedBytes": 48870,
+      "originalSha256": "8c2a9b2706ae9fec0241329ae821b67848035970c9b69b530f44c44e17bc8526",
+      "sha256": "0db2c792f384a5a8e4157f4308f411cfbcc03d6761af8ab220b5d384fbb0be6b",
+      "compressed": true
+    },
+    "formal-performance/partial.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/partial.json",
+      "originalBytes": 10049885,
+      "storedBytes": 670791,
+      "originalSha256": "be997b6a5d2b59523d9b26ddf8497db5baa7405a571a633e9e974b2272d1f830",
+      "sha256": "7a5e8ab394e1924d16f22d45051c369decf2c885f14eb71f4663c1bead8611e6",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-1.csv",
+      "originalBytes": 110249,
+      "storedBytes": 30716,
+      "originalSha256": "2f4dc21ed091a6b3e2ea5edd8e3bafc1ee1b3bff19ad6e749ec1975ec0c8f00f",
+      "sha256": "f88ef8cd5f9b908272de253348aae1d958f4f84c2bb1f340a4cb4a005aef3a3a",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-1.environment.json",
+      "originalBytes": 590644,
+      "storedBytes": 35139,
+      "originalSha256": "a65fb957b19f24225ce5e5d0a8d9f00e05e4ddeb75627eb493c9a5a41232dff8",
+      "sha256": "c78330414162fbf0a7c6a9ae9ebded427af4c20205c61ce45a9e642d39fc3990",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-1.json",
+      "originalBytes": 119771,
+      "storedBytes": 36124,
+      "originalSha256": "fdee3ae56057e0838c7058b49ac639825900952ae758593c7aa12a0a1ac24bc9",
+      "sha256": "aa70fb1b31d94e7d28017781535deb7d70fd6a3418022c7ccfd51029c51a481d",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-1.memory.json",
+      "originalBytes": 30025,
+      "storedBytes": 2024,
+      "originalSha256": "dd3b10ac19231a90e6556260f84b3df6e68d6f9698a81d84d0edaf24ec366e4a",
+      "sha256": "9ff854045001ffbfcd2134f4f54db8aa8eaafa866b304de8cd0e2bb1e208e78b",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-1.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 252,
+      "originalSha256": "f5bbcfb29459b7e12a5a3cb4a96a02776eb20c23fdbcf8e9cda42815aeb3367f",
+      "sha256": "0b4a6476a4b7aa9bfcfe1bf58213caa3cac716a58fd1a2c8ca710b03e7ffad88",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-1.stdout.log",
+      "originalBytes": 2070,
+      "storedBytes": 1176,
+      "originalSha256": "3b5ccb16efed496a67fcbb1405fedebf3bfc53a620999ecea0bec5ff7413a206",
+      "sha256": "d25184fb11d66c6b210b667a73fb1a373b3490cddf2124090c4c9b51056efe20",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-2.csv",
+      "originalBytes": 110249,
+      "storedBytes": 30709,
+      "originalSha256": "ea7e35a603ea99ac3744a63a09d15761794a1063ec51ebfcf4191eb6e021488d",
+      "sha256": "7418185d2fb83547b331fb2f2b5d3c94b487989aa25bf4238d2303673d83c4c1",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-2.environment.json",
+      "originalBytes": 590642,
+      "storedBytes": 35163,
+      "originalSha256": "9c33cbcc7fe59f9b11f2734909303ed5a525cbbf5aed84e2da86bbc9d52fbc25",
+      "sha256": "ec7f081c3e8fe919fa24ccec3bfdbe52f5c58e2f5781ef2a674bc2671d8ab2b8",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-2.json",
+      "originalBytes": 119803,
+      "storedBytes": 36315,
+      "originalSha256": "12c6df2c8f8ba56005701d9a94aab5d6a1322c80c9fe90b138a5fd5132860ea3",
+      "sha256": "7ee096ac65e8defcfc9482a279ddeabd2b81f9537113a77f87c27e082778a781",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-2.memory.json",
+      "originalBytes": 30108,
+      "storedBytes": 2144,
+      "originalSha256": "051b53ed2c29772f23f031575e7780bee8b6f42620e8d3ce096f2c5a43582ce0",
+      "sha256": "1b9743a660d67fa914a544b8f61a3ab079047262e73c530e2e6c4eb4e097e1fc",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-2.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 252,
+      "originalSha256": "b4dc9939d40c30d53bda9d234a7180f9db5aa304008731864c28555e4c89267e",
+      "sha256": "1220ef0ed8e73077230ba671e2462b5ce27697f86cbd6a49ad9267c34033fbb5",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-2.stdout.log",
+      "originalBytes": 2070,
+      "storedBytes": 1178,
+      "originalSha256": "7357f2a8bbce89fba42d6f8ba078b72fc720c4bf51c8a4b6c363e2f946903ec7",
+      "sha256": "5808c1df81e6719c206e12048537902452dc8088a364c84c9fca94b376a54fe2",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-3.csv",
+      "originalBytes": 110249,
+      "storedBytes": 31334,
+      "originalSha256": "b8547deb20ebc0442b5abccd1b9028e565640048f86e2f05be0b1596a881d77a",
+      "sha256": "a600f015567217f42880b7daa67861b11867a00dd0c52f1b1ac62e766471609a",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-3.environment.json",
+      "originalBytes": 590598,
+      "storedBytes": 35122,
+      "originalSha256": "d0205b2d4c8427c9dc04a15b9ed54e4b8e3e27b9468b1043f20ba0b96620a6d3",
+      "sha256": "dd17d7192048f956aebb5243d2c9c89623c21b3a8a15c169857a1fe0c0399519",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-3.json",
+      "originalBytes": 119788,
+      "storedBytes": 36329,
+      "originalSha256": "e0b246fdb34d0c133b2e98cad49d496a7b90db75eae667e04c409a708802ba82",
+      "sha256": "f14d44fae4a968c443b0f302e8bf7af11433108894ac2b9df72a21860d1cb1fb",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-3.memory.json",
+      "originalBytes": 29574,
+      "storedBytes": 1988,
+      "originalSha256": "5a5ae91d606dd36d8502368d8813ace568a8443c024d45d4f424f6c84d0a43ed",
+      "sha256": "f3ed40b836f65cd4e80b753792eb59d823fd9e8037a6fbc05fcc7ded2865b6e4",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-3.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 252,
+      "originalSha256": "69f1ae3a8d39ee4628922239a6d3dcd4987b286ab8bfa782ec787da548003e7b",
+      "sha256": "7a821e4c6f0b3cc7f9f2840bf96e2524db1ac5dcb29d7a1b7fb80d86aead1ef5",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/platformer-3.stdout.log",
+      "originalBytes": 2070,
+      "storedBytes": 1183,
+      "originalSha256": "611cd8c2661e414948b6e3482dd7094fe3953e80ed4809ebd4c12f7ba8631755",
+      "sha256": "bd869e81c0fea40c52ba97c5f0b0517db9eebe9f5718bac21048c5c311e24c38",
+      "compressed": true
+    },
+    "formal-performance/standard-1.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-1.csv",
+      "originalBytes": 110252,
+      "storedBytes": 31183,
+      "originalSha256": "bd6bbe2b9c0e385ad1299d4c81de1b8ded78c047b44ed074c65f18a61ff81bed",
+      "sha256": "4ba8f57100e5898f869d09a2f2596750c5ce7ba33cd1cc4e0b56dba905f8686a",
+      "compressed": true
+    },
+    "formal-performance/standard-1.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-1.environment.json",
+      "originalBytes": 516834,
+      "storedBytes": 30864,
+      "originalSha256": "c5a5eff7cb97679e838f20ea1bd1faed0f169ff1736d23e135e50877cd4eb7c2",
+      "sha256": "05f0343abab3fbe41d585fc4da3892b45464704d120f2073aa2520b1ba7d4cee",
+      "compressed": true
+    },
+    "formal-performance/standard-1.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/standard-1.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-1.json",
+      "originalBytes": 118693,
+      "storedBytes": 36205,
+      "originalSha256": "66ad82161c23460a4e0ffd1fe70e4a185aec204de81f74b02e70ba60edabc462",
+      "sha256": "470ae1d880c952786c17fcffdbf97fa21ea60cba83483bcfb2b1074c66e6fc7d",
+      "compressed": true
+    },
+    "formal-performance/standard-1.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-1.memory.json",
+      "originalBytes": 44017,
+      "storedBytes": 2366,
+      "originalSha256": "c521f8b9cbe23fe01fa1f90f06bbe73b2fc7a1927846c270262b680743f46402",
+      "sha256": "f25c06494ef15142e58ae216ed3bd3eff56ad4d026b94fd673b4eb756afc95b7",
+      "compressed": true
+    },
+    "formal-performance/standard-1.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-1.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 251,
+      "originalSha256": "48c1c650db372ac57052aac35b3703bb443385919bb51354da143931891ede5c",
+      "sha256": "d08045c73b6f79f446918a1657a4cd26b121ee450ebdc61f0634680230fb6c4e",
+      "compressed": true
+    },
+    "formal-performance/standard-1.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-1.stdout.log",
+      "originalBytes": 2068,
+      "storedBytes": 1179,
+      "originalSha256": "4a894a33788e9c272d1baf38bc849d8b5f2797b1c271e4401a89eee77e2d6cf3",
+      "sha256": "5b7e59f64d59a35173ea8f02ea70a02ec7aa18d92ddd40e49387ddb9127a5e4b",
+      "compressed": true
+    },
+    "formal-performance/standard-2.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-2.csv",
+      "originalBytes": 110259,
+      "storedBytes": 31775,
+      "originalSha256": "e6f17180b1774d3e8cf6f398eda1f9fd2ab613fe95f817adb09d5b85d136be96",
+      "sha256": "26d322d45b64add6faad519fe07ae7436e68f11d4b4d3934d2ea21b12994ba3f",
+      "compressed": true
+    },
+    "formal-performance/standard-2.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-2.environment.json",
+      "originalBytes": 590653,
+      "storedBytes": 35151,
+      "originalSha256": "facadc5a6339a1461144d29b9fdd16197a48dd80f0aba814237d4810019cc8f3",
+      "sha256": "d1b60a65c37711c5f6899b231a5a9763d136f823ea73bd755b2911a03968627b",
+      "compressed": true
+    },
+    "formal-performance/standard-2.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/standard-2.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-2.json",
+      "originalBytes": 118656,
+      "storedBytes": 36483,
+      "originalSha256": "f8a5bf310a70c1e18d5c62836d15b0c8c4ba5b12da885adf625fca87a5cde6f2",
+      "sha256": "c9b990fa98a3f49f8d518a52bf2c56f7c1a61458ea21a01c778c2bfc1184bd7b",
+      "compressed": true
+    },
+    "formal-performance/standard-2.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-2.memory.json",
+      "originalBytes": 44634,
+      "storedBytes": 2401,
+      "originalSha256": "3d973dd218577d29e40a602b30db5da150615001d9c5d9277f447381a902bef2",
+      "sha256": "6d5fec56b18503f82aee80bb458cbe2215cb16415e98e45634202b41073e0413",
+      "compressed": true
+    },
+    "formal-performance/standard-2.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-2.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 252,
+      "originalSha256": "d4a3dc427a905c6565365c7a0a0dbbce5fc4fb78f94606469f979849fdc2f2bc",
+      "sha256": "db6f5a95ede8c38f38e1e7bd54883e52476e965270a97dddba2f4dd8de06447b",
+      "compressed": true
+    },
+    "formal-performance/standard-2.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-2.stdout.log",
+      "originalBytes": 2068,
+      "storedBytes": 1180,
+      "originalSha256": "ba061c5ded6f4bf6543f4db68713709a0944a0b528ffbd1131b10e68021439fa",
+      "sha256": "3c949d5e75c0f4564811fbe77634fb9da93f6707c9e57d15946ac33a96e35c2f",
+      "compressed": true
+    },
+    "formal-performance/standard-3.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-3.csv",
+      "originalBytes": 110259,
+      "storedBytes": 32219,
+      "originalSha256": "ebc690a1bd05eec62f7538b78f32ded6eef8a9a2d29aac959841d419d33f731b",
+      "sha256": "dd6e2f5efdedcccb75d1c05f64d80262499837069ad8c2e1c16958f00e0b529d",
+      "compressed": true
+    },
+    "formal-performance/standard-3.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-3.environment.json",
+      "originalBytes": 590627,
+      "storedBytes": 35157,
+      "originalSha256": "6d560f6db99ee045dfbba768aeaef6fd318dbec26909828963db9d4d6a4fea25",
+      "sha256": "f758d5969920a44159bbd28cf25710cea55f84841c2d15fe9db5b035453b52c8",
+      "compressed": true
+    },
+    "formal-performance/standard-3.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/standard-3.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-3.json",
+      "originalBytes": 118808,
+      "storedBytes": 36675,
+      "originalSha256": "551d362995d01d55f9a22fab6f9cce4583c6e61393228ad0e551b5153d4640fb",
+      "sha256": "2e2125ed6d4217e9e5a7090b79d4e162deafc64d517e74079717806d185e95e6",
+      "compressed": true
+    },
+    "formal-performance/standard-3.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-3.memory.json",
+      "originalBytes": 45399,
+      "storedBytes": 2538,
+      "originalSha256": "77079f1793d15c18d22cd7a5b725adc4e023d7ce5c0d12ffd89cca524632bab6",
+      "sha256": "9bffd81545c60e5fb3b65688982a3b17bce9b0881fd397e4ee05bb277d874b34",
+      "compressed": true
+    },
+    "formal-performance/standard-3.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-3.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 253,
+      "originalSha256": "a2ef4ecc3aeeabfc2b3ec2971aa79d60403fac7bbbe8fc9044b0b70e45a00f74",
+      "sha256": "10266c9e116fee26481e7833488aa9fafe4ac8597efa44a78f49492f23b3b8d3",
+      "compressed": true
+    },
+    "formal-performance/standard-3.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/standard-3.stdout.log",
+      "originalBytes": 2068,
+      "storedBytes": 1176,
+      "originalSha256": "115ca183edcc5df67360b31a53693cd25d13c71d2f162daf2360301ebdca5919",
+      "sha256": "2dcbcba92380bfdd17f2cff5539f603dd7cb1d462473dd56bba06781c8d08755",
+      "compressed": true
+    },
+    "formal-performance/stress-1.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-1.csv",
+      "originalBytes": 110779,
+      "storedBytes": 33746,
+      "originalSha256": "797aa408af1a80c8415f61138018c279ef286b723a0378a9ede82fd95be1365f",
+      "sha256": "7011f86384a8536cc5d2fca18509f26325e17ec995be4c716d05322821a7f23f",
+      "compressed": true
+    },
+    "formal-performance/stress-1.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-1.environment.json",
+      "originalBytes": 590644,
+      "storedBytes": 35142,
+      "originalSha256": "72249d0054eee95bdbe58428dbe45e479c0c346e7bd5058712aef6a535844bed",
+      "sha256": "4dbd85304d14e8cf9792bfd68cd83acb6eba8754768a25997f51f029042cf6ab",
+      "compressed": true
+    },
+    "formal-performance/stress-1.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/stress-1.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-1.json",
+      "originalBytes": 118826,
+      "storedBytes": 37535,
+      "originalSha256": "ce21e7bc467af1d943a7213d69716bc680b474e384b7fc1386608ac561b08b42",
+      "sha256": "7090cc28ba27ff21b99c44c6cd9305f488d3e079b4b469d1aa30e02a6769b4ca",
+      "compressed": true
+    },
+    "formal-performance/stress-1.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-1.memory.json",
+      "originalBytes": 55194,
+      "storedBytes": 4227,
+      "originalSha256": "f5900f1f5c4697047323904f8641efae48eecadb869916676b94329a3fb850c9",
+      "sha256": "2661543800a631e716b46fb6500505031e1f8b5e4ba2bebe3ce29f477309640b",
+      "compressed": true
+    },
+    "formal-performance/stress-1.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-1.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 250,
+      "originalSha256": "e0ab0d924a1abaa4f37558d3ade94ac963ac8f14561f475f34e46eea059a21c7",
+      "sha256": "1a9b548d3c239a77b66e20ccaceb0fe4d14764fdf59299c42e0aaa1108f90e46",
+      "compressed": true
+    },
+    "formal-performance/stress-1.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-1.stdout.log",
+      "originalBytes": 2067,
+      "storedBytes": 1179,
+      "originalSha256": "d3102588e617c05ec3b920272565571d9d8541453b41907aded2ad679287548e",
+      "sha256": "f37463022461fbaaf8c9f5659b61c0a3e47602ee5512eda27df7ac605eaae22b",
+      "compressed": true
+    },
+    "formal-performance/stress-2.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-2.csv",
+      "originalBytes": 111011,
+      "storedBytes": 34007,
+      "originalSha256": "028dfbe0c16e0fb0fa9f6242203d99090a9618e4fde7747891fe88cc01fc89ab",
+      "sha256": "6e98c10f4bb965d24f8e5545bc280ffdf5d72fcbbd4b1c094e5736e24767c63e",
+      "compressed": true
+    },
+    "formal-performance/stress-2.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-2.environment.json",
+      "originalBytes": 590639,
+      "storedBytes": 35141,
+      "originalSha256": "25cdad29839d972ef66abf986e09eba4632b659f7131893a2dff0f15b4b8cdd4",
+      "sha256": "9a5cc40bea94b8b5e446ecbb21b80560312b86fc4ff701edafef8e73a1991b0e",
+      "compressed": true
+    },
+    "formal-performance/stress-2.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/stress-2.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-2.json",
+      "originalBytes": 119011,
+      "storedBytes": 37573,
+      "originalSha256": "bedb8bad743e897baf25b2a2e2753c6f47884fb855d4e9c79377a2942c3dc949",
+      "sha256": "d3ee094a31078e52c6beb3eb88dbbbfaf84e21610b720250b4586fb166cf0e46",
+      "compressed": true
+    },
+    "formal-performance/stress-2.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-2.memory.json",
+      "originalBytes": 56238,
+      "storedBytes": 4840,
+      "originalSha256": "ba147bd74e9ec282a3e8f3f34a3de405ab9039501ddb14ab2d66862d8400fee9",
+      "sha256": "fe242308f01932e42252321fe9deb47092687072d102fd90e25367becea9d6b0",
+      "compressed": true
+    },
+    "formal-performance/stress-2.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-2.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 253,
+      "originalSha256": "50bcc06729506a0875beee431e16e36dae6047b6df712dbb31e73b67ee5f8f6d",
+      "sha256": "77f29525d839ba43599f1c32f0bde51cb1d94167448935015f975f13f8d99e96",
+      "compressed": true
+    },
+    "formal-performance/stress-2.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-2.stdout.log",
+      "originalBytes": 2067,
+      "storedBytes": 1182,
+      "originalSha256": "e7393bd4ca908ccc1df506a740b3ed085d5af8b6abdce6983727f146f0263cb5",
+      "sha256": "a2051af5406ad8ac065e580161dd18da820fab6af96442a2c43c4267690192ee",
+      "compressed": true
+    },
+    "formal-performance/stress-3.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-3.csv",
+      "originalBytes": 110831,
+      "storedBytes": 33872,
+      "originalSha256": "fe72973fe89a2e5d7c2d775f775ef4b4e69353c63233d31d048b3d501212cd69",
+      "sha256": "e79057b7d544050b209eee504b2500ba623b4d16116a521cca4278c02bfe0696",
+      "compressed": true
+    },
+    "formal-performance/stress-3.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-3.environment.json",
+      "originalBytes": 590638,
+      "storedBytes": 35138,
+      "originalSha256": "123a5b6aa5df216ab8d254d9e9a43dbc89ea56139ed74b3ce5ad321de2cb9e3f",
+      "sha256": "533fb054a32d7619652768e966a7181d90ab0bd1b9faaae918a6d998e5904922",
+      "compressed": true
+    },
+    "formal-performance/stress-3.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/stress-3.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-3.json",
+      "originalBytes": 118756,
+      "storedBytes": 37558,
+      "originalSha256": "e679e4519b73e3a63c4e552242fdd3187cd07cd810c1487405460b1078597035",
+      "sha256": "be67979b6c72d615f681a16e5b83c2d706d4a21040afe7336e6d49a6a8ce6d9f",
+      "compressed": true
+    },
+    "formal-performance/stress-3.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-3.memory.json",
+      "originalBytes": 55973,
+      "storedBytes": 4724,
+      "originalSha256": "fcd67bba7c0854ad1fc402b9271c12afbcc706d204d01de0fbfca2aa3860bb84",
+      "sha256": "1e5c77ad3fde6cca937610b103e3e5e6d04a7c16e703c601e398f1ef1fda842f",
+      "compressed": true
+    },
+    "formal-performance/stress-3.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-3.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 251,
+      "originalSha256": "2e6183db1ac82c5963ed0469954b7623f4c72baec2521bfd1f0cee27c9b3fa2f",
+      "sha256": "01b6ccc0efe03c43687de3539608b92727c377c79fafb031215a0b0cefa91025",
+      "compressed": true
+    },
+    "formal-performance/stress-3.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/stress-3.stdout.log",
+      "originalBytes": 2067,
+      "storedBytes": 1182,
+      "originalSha256": "51cef49c56c788fc895bb081a370353f15fcf5db07b2c881f776a4eb6543feac",
+      "sha256": "2acfcd9db955209abb990dc106f2f8797a4d9da9497898954b3fdf55617e2194",
+      "compressed": true
+    },
+    "formal-performance/summary.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/formal-performance/summary.json",
+      "originalBytes": 10121305,
+      "storedBytes": 689745,
+      "originalSha256": "e65236a2914392156615b833843aa9c3f878569c59293b0b83ca04514c00ab6f",
+      "sha256": "72a605133bd0d5c06d233e6d3fe9eefb8448695ce0234d1c2212d980503c1c1a",
+      "compressed": true
+    },
+    "no-capture-performance/editor-1.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-1.csv",
+      "originalBytes": 110249,
+      "storedBytes": 29258,
+      "originalSha256": "31ce55afed9d23d89f0965f0b8b34c88e147a84739be2ddedaa327c3d8e4aeb1",
+      "sha256": "b509de4b734b133d6711d2888119a6478d74bb7896f425a7924ddc962c160127",
+      "compressed": true
+    },
+    "no-capture-performance/editor-1.editor.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-1.editor.json",
+      "originalBytes": 30,
+      "storedBytes": 50,
+      "originalSha256": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "sha256": "54e322161c0d8cef14591e7aeb33d757488089a2b6e38dc345cc51df6654fd94",
+      "compressed": true
+    },
+    "no-capture-performance/editor-1.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-1.environment.json",
+      "originalBytes": 590655,
+      "storedBytes": 35179,
+      "originalSha256": "d08b748785003cd7930bb3cbb94edc068022191bcb37a1770b61021f1c299ca7",
+      "sha256": "a5ffee16a3d00dc2df69d021abec40307a6995746fad47c844f80f805645359e",
+      "compressed": true
+    },
+    "no-capture-performance/editor-1.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/editor-1.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-1.json",
+      "originalBytes": 125295,
+      "storedBytes": 32215,
+      "originalSha256": "ab7dda25b1868734655bfebd6fec776e38aad5601b32254f60a3d50a1e417af1",
+      "sha256": "0d165ed6a2d69bc57d44023e415076c1d9561228ecb5e9bae5335bb142965855",
+      "compressed": true
+    },
+    "no-capture-performance/editor-1.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-1.memory.json",
+      "originalBytes": 23739,
+      "storedBytes": 1784,
+      "originalSha256": "4766aadd0bbd05f3e3926d37c88280843a663a5c80439550ae7e11c9f0acfc3e",
+      "sha256": "c76b799913adf477c558454d514dc6e401f00b784f936408131a961558b685d6",
+      "compressed": true
+    },
+    "no-capture-performance/editor-1.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-1.stderr.log",
+      "originalBytes": 1015,
+      "storedBytes": 365,
+      "originalSha256": "452e9240c7a477c66193a009d3c613f86f660bf94d73fcb842b3120e70d12e11",
+      "sha256": "73a7e60cb3ae08c639ebf0aec3f1ed7336cfb443fd09cbeed98debaf7c51feba",
+      "compressed": true
+    },
+    "no-capture-performance/editor-1.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-1.stdout.log",
+      "originalBytes": 2814,
+      "storedBytes": 1200,
+      "originalSha256": "1692a0d1a80b5e804236ed620b0718478bcc1473c31f6c1cde04859ce1ec2234",
+      "sha256": "3fd6f1183fc823dbdefeffc3a84e836d71a2822794f6c03b189fdafb8ebe86bd",
+      "compressed": true
+    },
+    "no-capture-performance/editor-2.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-2.csv",
+      "originalBytes": 110249,
+      "storedBytes": 29776,
+      "originalSha256": "7cf6306deecc859deb921d28803f73336645800fda22fc71cc2668805b8a45d1",
+      "sha256": "a260f2115f9dbbada92227cf2cf2bf623018ac745bfaea4a048715254b5f1c83",
+      "compressed": true
+    },
+    "no-capture-performance/editor-2.editor.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-2.editor.json",
+      "originalBytes": 30,
+      "storedBytes": 50,
+      "originalSha256": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "sha256": "54e322161c0d8cef14591e7aeb33d757488089a2b6e38dc345cc51df6654fd94",
+      "compressed": true
+    },
+    "no-capture-performance/editor-2.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-2.environment.json",
+      "originalBytes": 590659,
+      "storedBytes": 35168,
+      "originalSha256": "9411ebaa914d6abcdd5e7c8fe765634e5199469adcbc2548f27c19fd1984cc24",
+      "sha256": "0f275993e78c15948106d4d77d50feeb50c4dc53acb78a6b919151000d20a046",
+      "compressed": true
+    },
+    "no-capture-performance/editor-2.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/editor-2.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-2.json",
+      "originalBytes": 125759,
+      "storedBytes": 33063,
+      "originalSha256": "bbf5edbda82e4b242fa367c6ba9282a2aa8f0a994d8bfb3db207441845099a5e",
+      "sha256": "3ac8c65341f83d4995739e5407e906f1267df9c296c2014caffbd17974be1f7f",
+      "compressed": true
+    },
+    "no-capture-performance/editor-2.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-2.memory.json",
+      "originalBytes": 21880,
+      "storedBytes": 1769,
+      "originalSha256": "fa063ba35432a43c8c6038cfe17d8ccd32770332f84cea00ac73a3f7b54eb954",
+      "sha256": "b3f0f6b83039993bde1b31a83b3e8be9c24ca98db95dae3f5e4324a1130e970a",
+      "compressed": true
+    },
+    "no-capture-performance/editor-2.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-2.stderr.log",
+      "originalBytes": 1015,
+      "storedBytes": 364,
+      "originalSha256": "d384e53d20374968d585b709734fafceeadd4d7a172eb3c416db91c464437935",
+      "sha256": "8b6798362c4641532264399bde9b1402d813defe2a9f2861b860bebdb7e849a5",
+      "compressed": true
+    },
+    "no-capture-performance/editor-2.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-2.stdout.log",
+      "originalBytes": 2814,
+      "storedBytes": 1202,
+      "originalSha256": "c258d70e5d7036ff24af240734110b385af69b7bb7c1b388ce82272eb6eb0e67",
+      "sha256": "b23d88acf6a74c503b238db19f7eaa8e7bc89466ed6d4938f6dd24fc0041c8da",
+      "compressed": true
+    },
+    "no-capture-performance/editor-3.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-3.csv",
+      "originalBytes": 110249,
+      "storedBytes": 29759,
+      "originalSha256": "195bc300a670abd6d62d71dc78cb24f545248bd80e025993a66c17636cde4dc4",
+      "sha256": "4cfcbb8d82303e46c22d47f9fc865efadf1c75d6b17f650afaf9d410b6c856f0",
+      "compressed": true
+    },
+    "no-capture-performance/editor-3.editor.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-3.editor.json",
+      "originalBytes": 30,
+      "storedBytes": 50,
+      "originalSha256": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "sha256": "54e322161c0d8cef14591e7aeb33d757488089a2b6e38dc345cc51df6654fd94",
+      "compressed": true
+    },
+    "no-capture-performance/editor-3.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-3.environment.json",
+      "originalBytes": 590660,
+      "storedBytes": 35170,
+      "originalSha256": "8ff2c8dc3b78580a4ab9267832d344e1ace57bf0253d3531fcd0d2ed90631a46",
+      "sha256": "f3996cbefabb7490ebde379137b898bc463912fdae946ad917c7c38dd2059205",
+      "compressed": true
+    },
+    "no-capture-performance/editor-3.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/editor-3.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-3.json",
+      "originalBytes": 125919,
+      "storedBytes": 32387,
+      "originalSha256": "b1d6efc3570566997ef906d396f5d42d5a1928b2af2d65950be21ee3404dc01e",
+      "sha256": "ae33f59b80ed6d44a9cd4759e18c4cfbb6f628e25c1fb69668c18ee5eaca323c",
+      "compressed": true
+    },
+    "no-capture-performance/editor-3.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-3.memory.json",
+      "originalBytes": 23019,
+      "storedBytes": 1667,
+      "originalSha256": "694d12c6304f0a823707df0bf18056dafc3703ca6cc2131918fb555eab1d62b5",
+      "sha256": "c5e4ca00f5858cf8905af3f5e77d74ecc673985126a3d5813d7107a17edc4842",
+      "compressed": true
+    },
+    "no-capture-performance/editor-3.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-3.stderr.log",
+      "originalBytes": 1015,
+      "storedBytes": 365,
+      "originalSha256": "42fc5dc8ddb6652e0cab252d8b9568a426c216373cd94a20740eae197ed95516",
+      "sha256": "5c95e09a17e58f2c051a11a97810de0fb1b2a8eeb07542391270e548ed5c6b22",
+      "compressed": true
+    },
+    "no-capture-performance/editor-3.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/editor-3.stdout.log",
+      "originalBytes": 2814,
+      "storedBytes": 1201,
+      "originalSha256": "9b6e8c2a285dbd26479b677a04c9f8871a3e27166f9622013c2f95066658b654",
+      "sha256": "a49bf128c3ae0d2026ba9da9535e6a31dad037ee33d77256986ad57f8082d55c",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-1.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-1.csv",
+      "originalBytes": 112409,
+      "storedBytes": 33179,
+      "originalSha256": "22fbb8af9f046c828673fd0fac9feab51740d5133180283b2e2356fbe61f7847",
+      "sha256": "a52aa7d0bc4a471986e91ce57ab366b5c47451b9b8a208c29299cc8c31afff63",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-1.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-1.environment.json",
+      "originalBytes": 590659,
+      "storedBytes": 35152,
+      "originalSha256": "77fef8fcdf5ef84a25ac6a8487ae1688d586980ba07aa6e3642cdec2eae38d98",
+      "sha256": "eef3c21e7953fdf83c0df7afe7a2925ffea386b7b7d8c46b70af598a8d2426e7",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-1.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-1.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-1.json",
+      "originalBytes": 120806,
+      "storedBytes": 37048,
+      "originalSha256": "a79d2cb9fe46bd4c2ea09dd24447ef14941c366cde8b81e4780b160f82c40649",
+      "sha256": "781ce7f00902d45836393aff667beed03ae68e1b95a8b4d8036fe7a6e5b9cce8",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-1.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-1.memory.json",
+      "originalBytes": 66655,
+      "storedBytes": 3481,
+      "originalSha256": "4afe5c322194e205aacc7d657763983d1bc8aa010b18b65fa7f743700517fd80",
+      "sha256": "6380678c08dda7834d4a7419ff25817394976a42680e0a95780c6ddbb468e883",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-1.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-1.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 252,
+      "originalSha256": "9e805ba38d4e82c0584403987a567f31d6321209afefd6220f4e9e3cb4150514",
+      "sha256": "0ec64514e7604f1d430fc0564949cedf7ae6062dd229b76ab3f667a48e0ccc79",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-1.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-1.stdout.log",
+      "originalBytes": 2084,
+      "storedBytes": 1185,
+      "originalSha256": "6ee5e32e98d142740a0f342c935e27e6ee7cd73750eb457305aaddeeb6155dee",
+      "sha256": "1b2135119b89316ebe64704f5c7d554f536df21b9c58aa15d5497393867828ac",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-2.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-2.csv",
+      "originalBytes": 112438,
+      "storedBytes": 33499,
+      "originalSha256": "65fde4e4676f1ee03468c711a11ea5e52f0754b683f03f4823a3da8aa3d09834",
+      "sha256": "c802ee590be4288b4cebecf3c30a59767a954f0fee6840d093851e86a6f60e56",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-2.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-2.environment.json",
+      "originalBytes": 590665,
+      "storedBytes": 35168,
+      "originalSha256": "50b2f76e6659aa499bacf6f50bb648450ab4c09ccdebcf36c56a98cd21750749",
+      "sha256": "51af0201aa0244f7f7ab46934e4e6f3ab2a674665c19e59b4db83f3ae8007426",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-2.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-2.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-2.json",
+      "originalBytes": 120910,
+      "storedBytes": 37385,
+      "originalSha256": "ad4cf83d4aa6fc7944fbc08b8c47256d29744a7ca41b2b250e1cf9a395751971",
+      "sha256": "186183c8db44e06627ee489af3f4930f80d51474e5dd8acb7f56b57ca56eaee7",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-2.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-2.memory.json",
+      "originalBytes": 66717,
+      "storedBytes": 3280,
+      "originalSha256": "bd4a0f524cb9d5e7d962dacb19ee64fa2551cda5d0176c83959588864119be0c",
+      "sha256": "96043df8af8ece42e1273a0a1ccd8244c586cc0cfc272792988ae55d53fbf499",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-2.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-2.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 252,
+      "originalSha256": "d685bf59fcca8ed66e5e6df235538e4cf9e1ae5b1b68710beaa493a00cd5b018",
+      "sha256": "7f4d10a0e43f771fd49b9413d0b4c4989c2c5267f5fee6aae0b57948cbd9df8e",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-2.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-2.stdout.log",
+      "originalBytes": 2084,
+      "storedBytes": 1184,
+      "originalSha256": "f2df29ce6aaa3d27bd5a65aac6baf967c6dd838325a61c8e64d40cf5db7115c3",
+      "sha256": "fa5480d895221deff9ef90672278058116c13858ec7cb9bfd50830a1a4a014fb",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-3.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-3.csv",
+      "originalBytes": 112455,
+      "storedBytes": 33797,
+      "originalSha256": "22381946638fb3c3e1fd394920a7b8474cf2c9e3d14767ac5548f8f4a389cf2b",
+      "sha256": "c6d2445e1bbf3b5f0abb6ea052cdc25683c8581dd71e5da66df2f223542a9164",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-3.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-3.environment.json",
+      "originalBytes": 590659,
+      "storedBytes": 35154,
+      "originalSha256": "650768eb80bc690f0c8a7e52eb7e26c5cc6b23fb4d8dc67dd15928686a468b54",
+      "sha256": "ab86c37d76f7ef74c319839aede925103ba95589050fff7adf7f7af1b5af8c95",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-3.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-3.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-3.json",
+      "originalBytes": 120960,
+      "storedBytes": 37323,
+      "originalSha256": "9a528ab9d5333d1904b7ae73ad2b1d8b12dca410ca58212f4fd3dadbfd1e158c",
+      "sha256": "d9684cb92d4c05926ba97dc28ebb1164939d41c31701a855a7cdf5312e743b03",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-3.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-3.memory.json",
+      "originalBytes": 66816,
+      "storedBytes": 4004,
+      "originalSha256": "e6fda51db732c3cc1aaaa90debc08661689ca0c2a1dbc07a28566be2c34c15c8",
+      "sha256": "a66395a5ec5a7a0382cf846dd421eec48da91dc92b63e4da7438db2c4fc882ea",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-3.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-3.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 253,
+      "originalSha256": "ea552c6de57aedf803cfe173d590593f445448a168e09a334da8c214bc051130",
+      "sha256": "85e4096f1aed5576c2b61b0112781ba226796157815d7abe52a9e0f2e463d624",
+      "compressed": true
+    },
+    "no-capture-performance/exploration-3.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/exploration-3.stdout.log",
+      "originalBytes": 2084,
+      "storedBytes": 1184,
+      "originalSha256": "f56a4442c0b7918b3c92e9481339f3bc59f176f95bbf17d2545550d9a1f931ac",
+      "sha256": "91b49499a2f1dfd192c8a3a274847c6c72d6e3cc63df3d9a5b2d00804507cebe",
+      "compressed": true
+    },
+    "no-capture-performance/frozen-inputs.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/frozen-inputs.json",
+      "originalBytes": 128504,
+      "storedBytes": 48870,
+      "originalSha256": "8c2a9b2706ae9fec0241329ae821b67848035970c9b69b530f44c44e17bc8526",
+      "sha256": "0db2c792f384a5a8e4157f4308f411cfbcc03d6761af8ab220b5d384fbb0be6b",
+      "compressed": true
+    },
+    "no-capture-performance/partial.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/partial.json",
+      "originalBytes": 10128169,
+      "storedBytes": 676256,
+      "originalSha256": "455519cce60d8f63591d8700e493cf0f9e13427bda79c7c4b0773faa24c94932",
+      "sha256": "145602eb4f3f9531c4afaae64db06c0bc64a61b90ca332d9db71c89c63f1d23b",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-1.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-1.csv",
+      "originalBytes": 110249,
+      "storedBytes": 31259,
+      "originalSha256": "0c27d9cabb85338211b3dcb0bf17c6ccf2e33e48a4c05d7b17503ed2b268c367",
+      "sha256": "9a38dba68b9916530cf2ac11393af089e0e83c816a1f674403dac6080a1b12a1",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-1.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-1.environment.json",
+      "originalBytes": 590630,
+      "storedBytes": 35153,
+      "originalSha256": "306642890b48e67a9d7efd4649072fb53fdfb8f6f8b11e32c8d39f89ce3eeb0e",
+      "sha256": "38d9d0cc37a33f2ab2bbaef2fb34b9a9a53dfb16058ebe22ab2a0762f1f109da",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-1.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-1.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-1.json",
+      "originalBytes": 119720,
+      "storedBytes": 36269,
+      "originalSha256": "461d597a8273b954f7fe9114e10cf3e13cd9d016826d61ee310264e66f78ad1c",
+      "sha256": "cab36efb82b02d3d425ce2d72b662f3beb45ac4fb5dab613c5f1b7e74c18126f",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-1.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-1.memory.json",
+      "originalBytes": 30745,
+      "storedBytes": 2019,
+      "originalSha256": "00fabe6219aff878f63ba88381c2751801223d976cb5c319262759eccbef9e7a",
+      "sha256": "4857684153146924f1850adc4693fd0e4e463ed04c97a40dd634d1a2b6d381f7",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-1.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-1.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 252,
+      "originalSha256": "8142282ba0d2089f6d41e996b86c6ff6f5668a3bb6c435974fcb3bbba31a43f9",
+      "sha256": "4daa95fbbc313f565352c3c2c5faa73a8ce660c8a585bb5ff6a39ade3c840361",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-1.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-1.stdout.log",
+      "originalBytes": 2078,
+      "storedBytes": 1184,
+      "originalSha256": "aebf8c49e842ba3c357fe34a5e2c47b547a16078d4630674a0bb00ecc4b3878a",
+      "sha256": "2ee4a8f025b6a3304d77fc2ff811246fc0862a98372bd76b58b4e867d379e122",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-2.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-2.csv",
+      "originalBytes": 110249,
+      "storedBytes": 31728,
+      "originalSha256": "0d6570e8b16ef7807fcf7bdaa7c80a5547080f5186b8b7235082e02e33a6e886",
+      "sha256": "ccbd60c2a9c85ee517d9ab64d33d066dcfce514fe04cf9ba26a14d78c2bfae5a",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-2.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-2.environment.json",
+      "originalBytes": 590654,
+      "storedBytes": 35163,
+      "originalSha256": "210b75577c0f6bef53573c995e4ce7c3361165e5395767425a6b44ebb3401437",
+      "sha256": "0c72a90b320a0151e849bcc5e5721495bf2117e2cc073ccb287d04478a1da75f",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-2.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-2.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-2.json",
+      "originalBytes": 119747,
+      "storedBytes": 36468,
+      "originalSha256": "a2f540a431206f7e7620ad660aeccc7d1fb1036deae3c03ab9398bf26a2d62b4",
+      "sha256": "9a2b01ec30aba34443ef25eed1f7b3123e64cd66d8ce3fd5599a7831d00a15f7",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-2.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-2.memory.json",
+      "originalBytes": 30408,
+      "storedBytes": 1949,
+      "originalSha256": "81ae4cb0883bb13d943f97d0e7dc8f08c42350006e2f20dfd135325fdd1d261f",
+      "sha256": "a58cea1c08ecca321d320711a2c65210897d5294499e75951a9301c0fd8e5903",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-2.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-2.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 252,
+      "originalSha256": "0f7486228678a3005847a2968a5151d6bf2c5a582339e572feb1b907b023e96a",
+      "sha256": "9f78a2dcc8f50eff4170243a7ab83729dbf3e3188fb28a6c4f53629c10cfe1f4",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-2.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-2.stdout.log",
+      "originalBytes": 2078,
+      "storedBytes": 1184,
+      "originalSha256": "fbc057d720236cf95540503590502b34dee789c29723bb47df783f2e484b7253",
+      "sha256": "adfd06c7a5463c3997fd9d0513745658a2d37c19bce17756a539158c8f7309f0",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-3.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-3.csv",
+      "originalBytes": 110249,
+      "storedBytes": 31344,
+      "originalSha256": "b78a4dd45cbf5de5d24a7e6691b876e55136d767ecd59da5ce48652a9fb459f9",
+      "sha256": "8a6b884550076802ec52f8436c75647a60361666faffb5fd1d83b86e30695bd6",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-3.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-3.environment.json",
+      "originalBytes": 590660,
+      "storedBytes": 35164,
+      "originalSha256": "8057264360b4030b887b8d303dd46b75bc46243f12843b01bdd0f004a6702ef4",
+      "sha256": "b36e930649a035741490fca648c3bc7667d778b6279c0a2f8b20bba03ef386c3",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-3.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-3.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-3.json",
+      "originalBytes": 119707,
+      "storedBytes": 36329,
+      "originalSha256": "de5401ddf0c060dc005a3bd95459d4e221ea54ef5e681112035358de310fb3af",
+      "sha256": "6d497cab5a0dfcd55f8eb8c559f2f41c1be46ced910ad8f6eaefa18a50b0ef7d",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-3.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-3.memory.json",
+      "originalBytes": 30334,
+      "storedBytes": 1989,
+      "originalSha256": "16616aec72f37e549449ce934ecf8425b5f6ab6c701ccb2373e9e218e53f56a9",
+      "sha256": "2fc2ccf2deea1c61407fd375033fb9e1e5313785ba1979acda3f1ce73f663c1c",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-3.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-3.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 252,
+      "originalSha256": "a2f5a99c8190842ac80204cb7f14a9bf8e4eccc922331b2c04458d3e7c799f79",
+      "sha256": "52b3fd02c492020a2c18efd28d5acf09b0ae213410aa5537fb0fffa121258920",
+      "compressed": true
+    },
+    "no-capture-performance/platformer-3.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/platformer-3.stdout.log",
+      "originalBytes": 2078,
+      "storedBytes": 1181,
+      "originalSha256": "b06277e418f33779a2baaf0891f165641d381ca4216b90ae0d4517c1172c4376",
+      "sha256": "1a22ee5ce1ba9885a74f61612fc1a09c9809c34a75d7d1282094f9efd15fbba7",
+      "compressed": true
+    },
+    "no-capture-performance/standard-1.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-1.csv",
+      "originalBytes": 110251,
+      "storedBytes": 29515,
+      "originalSha256": "18d735e2211d5d0bdf68db7cd9428907b29bb402256534c3ca90a9e438e6ad02",
+      "sha256": "7d6bc07754886b11a4ba7a422c62e6b377df71df24f24d67d35dd026de773598",
+      "compressed": true
+    },
+    "no-capture-performance/standard-1.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-1.environment.json",
+      "originalBytes": 590656,
+      "storedBytes": 35176,
+      "originalSha256": "e502536464370c493ad925aea15c48291442895178202f9d033d0f5eb63261b3",
+      "sha256": "822741c569c3ac69bc1e678a8a0cd239311ff4e5374677dcdfe69398f2ade83e",
+      "compressed": true
+    },
+    "no-capture-performance/standard-1.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/standard-1.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-1.json",
+      "originalBytes": 118564,
+      "storedBytes": 36477,
+      "originalSha256": "a22dff5ccb9eea18539984448841be47a3dabcd161b0b4d2b807440d1891b0dc",
+      "sha256": "ddaacde36f4a800c0adde0daca2780d385770e127fae386b7e25faf9047b8811",
+      "compressed": true
+    },
+    "no-capture-performance/standard-1.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-1.memory.json",
+      "originalBytes": 49937,
+      "storedBytes": 2585,
+      "originalSha256": "5fca77376c0e0d72c3fbeb148e5e64ceabfd971df682776ac804ebd18a5643f6",
+      "sha256": "9c37d99a7d8174cf4c8b5148103586b37362e655a813c6191458a2537d8e6d93",
+      "compressed": true
+    },
+    "no-capture-performance/standard-1.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-1.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 252,
+      "originalSha256": "e59c137df3afaefbeecceb9a673f1d2c88d99efc9d9e9e966849da9fd8299e77",
+      "sha256": "d1617f85fbdb5deeb85f711a9c39980456219220ab68713a0cc0d827f4c7a61b",
+      "compressed": true
+    },
+    "no-capture-performance/standard-1.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-1.stdout.log",
+      "originalBytes": 2076,
+      "storedBytes": 1182,
+      "originalSha256": "d115fd1bf7c1a85b6c9d5c61d3bd8fefbd607df509b327f5dcbdd726a699011f",
+      "sha256": "b3a3aff9ba5555877321fb4c17a65320e38d19cf38e697bf9d9a5fcea72bb36d",
+      "compressed": true
+    },
+    "no-capture-performance/standard-2.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-2.csv",
+      "originalBytes": 110250,
+      "storedBytes": 30312,
+      "originalSha256": "471a506065f89938a7b590106f3627abbba4a2df626f7cf0c52ca8436dbdcad7",
+      "sha256": "87b2a2c93a14b3bcb62e9d2ad69d626c23cee1eef38a56411a36a6707b897ad1",
+      "compressed": true
+    },
+    "no-capture-performance/standard-2.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-2.environment.json",
+      "originalBytes": 590656,
+      "storedBytes": 35162,
+      "originalSha256": "c7183d7d38d5af331f839e6c44a97163e372f2158ae92914535700e0938d4ff4",
+      "sha256": "b09b26387b637a90c3bf67081c1e99e5174fc0e2a5fc765d8b302e22f1ca89fa",
+      "compressed": true
+    },
+    "no-capture-performance/standard-2.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/standard-2.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-2.json",
+      "originalBytes": 118659,
+      "storedBytes": 36548,
+      "originalSha256": "a8f1034b4fe4a06e867667180fb9f0a5496014fd1b1e11f022cd4890e8fa7848",
+      "sha256": "198e5145c9e76471c1e2f9be601f88d2ee27ed122c8f3b13fad5b14b74495628",
+      "compressed": true
+    },
+    "no-capture-performance/standard-2.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-2.memory.json",
+      "originalBytes": 48458,
+      "storedBytes": 2586,
+      "originalSha256": "21ab16ca7bbdc90d9b4d94bc66e1a6a73ad9ae83ede63562f72775bd0032472f",
+      "sha256": "a5225b77d3cc1419f72cce3137dd413b087117d480c9bb72c3d305d5dc21b1be",
+      "compressed": true
+    },
+    "no-capture-performance/standard-2.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-2.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 253,
+      "originalSha256": "54bf716377319e453402e4341ca7181cb87e2df6b12ad206eda19bd83ceff0f1",
+      "sha256": "e2026ee813edc462d51790e684add439fb3157ee1a89442c95ed98b85db37b4b",
+      "compressed": true
+    },
+    "no-capture-performance/standard-2.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-2.stdout.log",
+      "originalBytes": 2076,
+      "storedBytes": 1185,
+      "originalSha256": "f7431897de2eeca17b1cfc01d808565b1477d5a98ee56ddb21b6f83031798c6e",
+      "sha256": "7683023be21d14ba05651d07c710ee66ea4a836a0b8325aec0c05e269aef837b",
+      "compressed": true
+    },
+    "no-capture-performance/standard-3.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-3.csv",
+      "originalBytes": 110254,
+      "storedBytes": 31099,
+      "originalSha256": "16c9adcf6423992df9b427e8fea2eecd9f1974a97c6f04414345d2bc036d5e59",
+      "sha256": "e5885b21d8f106a003fffb7361860791b9f62ab77da43fc3d7782dd58dbb38ee",
+      "compressed": true
+    },
+    "no-capture-performance/standard-3.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-3.environment.json",
+      "originalBytes": 590658,
+      "storedBytes": 35190,
+      "originalSha256": "3581ee387c13745d871721a59bd8175d1b9c5165834ac6cb3ab72cc8d2c1d508",
+      "sha256": "1fa8a98104d35f0545852d0a2d592c5d5a3305de2d228d77501bf53a1f2bdf72",
+      "compressed": true
+    },
+    "no-capture-performance/standard-3.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/standard-3.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-3.json",
+      "originalBytes": 118650,
+      "storedBytes": 36534,
+      "originalSha256": "8eea2c9d5314fc7969c528d8085e08bfdf25b9901ffebc2e5c2614504a321346",
+      "sha256": "2a6241927d9b90325283f486704fe29dbc75885db6f35840c377028baa94f6f9",
+      "compressed": true
+    },
+    "no-capture-performance/standard-3.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-3.memory.json",
+      "originalBytes": 48138,
+      "storedBytes": 2719,
+      "originalSha256": "72046a33e64f130e0231d2fa857cb97612470f17fcbfd449fb4c4ad9dede2aa0",
+      "sha256": "c11063b7bae1df7191c44c4d37f3a12a3341f582dea0459cf0b26d857761f94d",
+      "compressed": true
+    },
+    "no-capture-performance/standard-3.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-3.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 254,
+      "originalSha256": "0a80537bea6ee8e476b71fea43e68dc5ef2b7e0ed4fd2625cdb730daa510797e",
+      "sha256": "02299aa9b3476501dcca47f686e7fd3446dee753c6b39c948302af31c1157c4b",
+      "compressed": true
+    },
+    "no-capture-performance/standard-3.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/standard-3.stdout.log",
+      "originalBytes": 2076,
+      "storedBytes": 1183,
+      "originalSha256": "a8340d591fe56008bbdfd0eec8c5fe6b735d26e1bc06d484140792de8becdc75",
+      "sha256": "f5c482b559bd18fc2d8abcf8fa80b8ee8b4fa60b6e95b1108e9d999e6957dbde",
+      "compressed": true
+    },
+    "no-capture-performance/stress-1.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-1.csv",
+      "originalBytes": 110969,
+      "storedBytes": 33353,
+      "originalSha256": "6c009131945cdb5ad2ec733f0c937ea01e2245580133ccfce83c95e838ea5761",
+      "sha256": "9ce839a0a7550c6ee4aace876a773405e3388508e1596a76ceb4e7bfbbcfba8a",
+      "compressed": true
+    },
+    "no-capture-performance/stress-1.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-1.environment.json",
+      "originalBytes": 590657,
+      "storedBytes": 35166,
+      "originalSha256": "8f6c9fa1ebbc9c9f7b1435084e37c221d8ef8d75b78ef996e535323d8171d09c",
+      "sha256": "ac7a972ffccfa5d459fb0cedb5abea21241c0f1ff8d8a7b8acb1a37239190006",
+      "compressed": true
+    },
+    "no-capture-performance/stress-1.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/stress-1.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-1.json",
+      "originalBytes": 118842,
+      "storedBytes": 37584,
+      "originalSha256": "36a6def0d13483c899da8a16f37edc9ba3b4238e033c9422b9dcdd372e0c75a3",
+      "sha256": "861f4fe7e1f934af0a2848aeddc7a1277d0dcc7ab0041f84c7ca69163adde131",
+      "compressed": true
+    },
+    "no-capture-performance/stress-1.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-1.memory.json",
+      "originalBytes": 57828,
+      "storedBytes": 4956,
+      "originalSha256": "d85103e204a38dae18a220d73eb9257dbe667c8da4b954c7d70126d1789883e3",
+      "sha256": "d1b3f5071a738cf1dc6f13310ea3d8a1fb76585d4b16bb0278381bac68047201",
+      "compressed": true
+    },
+    "no-capture-performance/stress-1.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-1.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 252,
+      "originalSha256": "43a230ed4f72c3ce0a684a6d7bb3f1235af45fdf939b6ed1c676e7a9b3df50fa",
+      "sha256": "5fbce047497210985f98695f53ae88c55c03a625a585ae60c9f114a566a1b16e",
+      "compressed": true
+    },
+    "no-capture-performance/stress-1.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-1.stdout.log",
+      "originalBytes": 2075,
+      "storedBytes": 1183,
+      "originalSha256": "8a0a03219c172c94e782eed19562b111f91d72deb129d9f312050edb5609c0b2",
+      "sha256": "66114467e41bdd61d98de09c1dd3eeef491f4890cbd75e1d2ccae356899e824b",
+      "compressed": true
+    },
+    "no-capture-performance/stress-2.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-2.csv",
+      "originalBytes": 110910,
+      "storedBytes": 33497,
+      "originalSha256": "c8e94eba471572bdb005242acb0c42a32da7aaea3ac032b3b5843990e6d5df84",
+      "sha256": "b9f2bbe343a963415b1cf73d6e71a105275f5fa35517555e790f1a1a6d8d8a5e",
+      "compressed": true
+    },
+    "no-capture-performance/stress-2.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-2.environment.json",
+      "originalBytes": 590656,
+      "storedBytes": 35145,
+      "originalSha256": "e0d6f40ddf0c639c935128f0f33b68dde38b6fdd612e903b2d13735a3f36f305",
+      "sha256": "a7a48200c920a5909e666484e501681c1d36d99fb11fbb13b58b0e90511f1d1f",
+      "compressed": true
+    },
+    "no-capture-performance/stress-2.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/stress-2.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-2.json",
+      "originalBytes": 118989,
+      "storedBytes": 37484,
+      "originalSha256": "c8156158c828ba1f73b88e7abe32efaf387e99b34c4f5bc0f11ceb03edcd600b",
+      "sha256": "b64f6d041076d1128fe7e444b8f039b7e290d5c2ccf14e92722d0a0ef9662327",
+      "compressed": true
+    },
+    "no-capture-performance/stress-2.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-2.memory.json",
+      "originalBytes": 57592,
+      "storedBytes": 4306,
+      "originalSha256": "78ae0ff65b119f00206d70008dba61170fadd65c6e38a27aafec18cf622b851a",
+      "sha256": "05b7cffc7d7db0ecee2f19449b0fd48a0eb5024b8354bb6050f305cf0a54edc7",
+      "compressed": true
+    },
+    "no-capture-performance/stress-2.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-2.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 254,
+      "originalSha256": "3537a65d93bfc6c5660e409daaa687d71e266a468aaf51bacc88f86fc668efa1",
+      "sha256": "018999fe80507ca0c0c4ca3a59289d600e68922484e6adba8fe103312f575692",
+      "compressed": true
+    },
+    "no-capture-performance/stress-2.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-2.stdout.log",
+      "originalBytes": 2075,
+      "storedBytes": 1184,
+      "originalSha256": "5d013097e46c8dc2ff185869432bc93c0f93d0760c0016dd9ae070ab682e7686",
+      "sha256": "1e86e9e97c4e95a17d71946ad178f1532063e0b1356217ea42bc4fd2495e8095",
+      "compressed": true
+    },
+    "no-capture-performance/stress-3.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-3.csv",
+      "originalBytes": 110894,
+      "storedBytes": 33293,
+      "originalSha256": "12fcd162f900aefbffa48f8e9afb9c4fafc6420599b980d7e57667341ac03419",
+      "sha256": "4d5c88c422d31d833a7353f6665298431b34e853a867e2f00267a2c91fdab6dd",
+      "compressed": true
+    },
+    "no-capture-performance/stress-3.environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-3.environment.json",
+      "originalBytes": 590654,
+      "storedBytes": 35171,
+      "originalSha256": "f1729aba20ae98823b2c0a4f23c62f42011ff01b466d9db15a60538fcec97ba4",
+      "sha256": "c7e5ad9aae4ff399c91cd8f34d8bc68069198d76d7239e71094c64eac544d25d",
+      "compressed": true
+    },
+    "no-capture-performance/stress-3.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "no-capture-performance/stress-3.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-3.json",
+      "originalBytes": 119056,
+      "storedBytes": 37591,
+      "originalSha256": "24662a6dd50cce0c2f87a2cebec9ba602c1ad6ffb4e165fcdee245b75bb6c436",
+      "sha256": "178ff6e1c11c9ff04fa9c420de931160e5944ddd20eec3577b75c08639f6bbe9",
+      "compressed": true
+    },
+    "no-capture-performance/stress-3.memory.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-3.memory.json",
+      "originalBytes": 57398,
+      "storedBytes": 4300,
+      "originalSha256": "a46e2be91b1a27e6d5929a5dfde7150dda7cfde4b409eada0b19fc48e11797f0",
+      "sha256": "4f3d79bc5531981c29e2acc9afd8e14f0757c62a28afe55c8d86056bea0d2b8e",
+      "compressed": true
+    },
+    "no-capture-performance/stress-3.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-3.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 252,
+      "originalSha256": "2357da5d0d8c8200612035505a13f9cb1b8c95d4c4981e268e88c64777236ac9",
+      "sha256": "f95e2a7c7f94ab0d6b8f48f77dcc2c13a5f41e7eb0c8c10cc0272e9994d6d3ae",
+      "compressed": true
+    },
+    "no-capture-performance/stress-3.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/stress-3.stdout.log",
+      "originalBytes": 2075,
+      "storedBytes": 1186,
+      "originalSha256": "d32508e10026c9df09f82eb2ac6e4aefcf2c6e381f5c8c1643e31acc853fef27",
+      "sha256": "004378cdcedb3f43bb71ff06d0da0249fc89c613f6dc33ed591aa6becabab088",
+      "compressed": true
+    },
+    "no-capture-performance/summary.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/no-capture-performance/summary.json",
+      "originalBytes": 10200032,
+      "storedBytes": 694337,
+      "originalSha256": "aae481fab6531fea2b403138637b1b9f706281f99cc5aabeb58af7e7227c7f96",
+      "sha256": "54c967c2f1b74d0f558bf1aef31c3ddfd39bc8fafce8bcde107a13853aabc3e3",
+      "compressed": true
+    },
+    "platformer-longrun/endpoint.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun/endpoint.json",
+      "originalBytes": 70,
+      "storedBytes": 79,
+      "originalSha256": "a6fb492b5f91868f8677304b7049204bfe4f0adb839653dd34b97854e9a54151",
+      "sha256": "62b7a76d51fbba10cca97052ab97b345e29a495bbb26f2e44830192183c6b9d0",
+      "compressed": true
+    },
+    "platformer-longrun/environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun/environment.json",
+      "originalBytes": 516825,
+      "storedBytes": 30859,
+      "originalSha256": "32c905b576d45761c8fe689ab998c5da49b3c02a44f10e9129c679b4c2aa0e9a",
+      "sha256": "dc0df3fd73c731ef81bc4471152469c9afb4a86d72103dda0c25ec5fb123da37",
+      "compressed": true
+    },
+    "platformer-longrun/input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun/input.json",
+      "originalBytes": 35,
+      "storedBytes": 52,
+      "originalSha256": "a431a107e675d0560eca269d4886ffaf7c48fecb44db23fb4088cd15db1a1e59",
+      "sha256": "6958442ef055200411e0c8f77c5dbc6a5075d31616521a23fb5a2c8d27ab707a",
+      "compressed": true
+    },
+    "platformer-longrun/observation.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun/observation.json",
+      "originalBytes": 3813728,
+      "storedBytes": 216123,
+      "originalSha256": "92e973af4604ef907ee014d055212dd867af24de5dfcde9fd143515845196427",
+      "sha256": "b77e47afc3c5ebe34bb7b025b7246aa3e43a59bd793f33698bf26c459aacd017",
+      "compressed": true
+    },
+    "platformer-longrun/progress.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun/progress.json",
+      "originalBytes": 83,
+      "storedBytes": 92,
+      "originalSha256": "ef671b1ced64feccd07f5456d8cae061da21b265a9790dbbe5273d0bdc276f4a",
+      "sha256": "775b462e3467445ec7fb8c68b4caf79e994269c75ed3090fd8e2274d7a4f5c17",
+      "compressed": true
+    },
+    "platformer-longrun/route.jsonl.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun/route.jsonl",
+      "originalBytes": 14370232,
+      "storedBytes": 1379799,
+      "originalSha256": "863d70df8e7aa6a6215a9f46680cd4bc5e568fa7f372ad1511c9e890b1290acf",
+      "sha256": "14caa2295cada746c52a9354611b65a61bd7ad75bd221d82509b0bdc9107807b",
+      "compressed": true
+    },
+    "platformer-longrun/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun/runtime.json",
+      "originalBytes": 14115244,
+      "storedBytes": 557616,
+      "originalSha256": "76d6b8a84151cc3ae60e98efb3ee5bb1390394f75d441c75fcde06dc3841cfea",
+      "sha256": "4534275f94760aff5ae5eebd635826beab9f4a0d5892133e1d026c778bbb83e5",
+      "compressed": true
+    },
+    "platformer-longrun/stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun/stderr.log",
+      "originalBytes": 17576,
+      "storedBytes": 1530,
+      "originalSha256": "bd304bc56ed042ea925f824c4ca34f86393216b3050af5dc018f3be9ee1196bf",
+      "sha256": "90e0937080d144ded291efb5cdade626f9b99085ef7692ac3053447e325c72d9",
+      "compressed": true
+    },
+    "platformer-longrun/stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun/stdout.log",
+      "originalBytes": 2994,
+      "storedBytes": 1281,
+      "originalSha256": "7eb4322a6372267670e6351bf222162333e4064a89cb11b4f0d3478a0a6511ff",
+      "sha256": "dd81e4a4808076d7ea239f61d25dee58c5a4b1d24b50a0bc939f955883345931",
+      "compressed": true
+    },
+    "platformer-longrun/summary.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun/summary.json",
+      "originalBytes": 539677,
+      "storedBytes": 34513,
+      "originalSha256": "354ba35133a622332866595f4af3eb05f577105adfa4a1f7c27547a0e7582ebf",
+      "sha256": "cbdb199773a70bbd2570504662da28f04bab686d4938821795cb5b590a5f4790",
+      "compressed": true
+    },
+    "platformer-longrun/timing.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun/timing.csv",
+      "originalBytes": 18283759,
+      "storedBytes": 4959022,
+      "originalSha256": "add7c3027d093dc43ea4fb57ad6f763991404cfe31579c954aed9d9438a88d22",
+      "sha256": "7d1a8978b3098653c860ec5bbeb541490ccd76ae427dc8dcfd272e7d5908a99b",
+      "compressed": true
+    },
+    "platformer-longrun/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/platformer-longrun/timing.json",
+      "originalBytes": 976121,
+      "storedBytes": 178593,
+      "originalSha256": "3dc0cffb2b4921c39503f0e20f991e40f67a760687042b59014d0dc110c16d62",
+      "sha256": "eb405e2541fe3f0fac63c83f40cf96abddae29709248631f6ad2bf156be076dd",
+      "compressed": true
+    },
+    "standard-longrun/environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/standard-longrun/environment.json",
+      "originalBytes": 516840,
+      "storedBytes": 30891,
+      "originalSha256": "bed344f167789d6a00fd957379e025a576f8ffe3a2d9da7233124a0df01db449",
+      "sha256": "22db78387f96d6be4b6deee6dff2722cafa874f7fb91caacb704b4a5db8d89b7",
+      "compressed": true
+    },
+    "standard-longrun/input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/standard-longrun/input.json",
+      "originalBytes": 561339,
+      "storedBytes": 23716,
+      "originalSha256": "9574d6ab121b4d3cfd337ddec15d6c0b6f89409748896c20310692e74b3d4450",
+      "sha256": "f3b8f73d353f0d40a8f2af4e7197e99801788ddeee43ca8124960c73464a65bc",
+      "compressed": true
+    },
+    "standard-longrun/observation.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/standard-longrun/observation.json",
+      "originalBytes": 412392,
+      "storedBytes": 27607,
+      "originalSha256": "cccbc42616ccf7bfafc00f46e44182ed0e94f29e6c73ca62e25e865b4e6689cf",
+      "sha256": "b73cabd7d6cc4bf5e070269237cfff0e208298bbd411c56e0d834d42bc10703a",
+      "compressed": true
+    },
+    "standard-longrun/progress.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/standard-longrun/progress.json",
+      "originalBytes": 81,
+      "storedBytes": 92,
+      "originalSha256": "667ed4132292636580fea706ac12cf2ae44898d16f36605525ba91d6662fa77a",
+      "sha256": "70b5831fc89fa6c4747c24a7a2dac8e36a7cf364914f644c6c5df9fc9f1abe23",
+      "compressed": true
+    },
+    "standard-longrun/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/standard-longrun/runtime.json",
+      "originalBytes": 11111659,
+      "storedBytes": 261428,
+      "originalSha256": "eb31aba82e93a268b7ebc76e68ebfa636a35068edf9519836123a7c8ecd85c2e",
+      "sha256": "6a8c629c248447d7991fa92c5b200db9c66578d0b130810a300272269b8d29bc",
+      "compressed": true
+    },
+    "standard-longrun/stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/standard-longrun/stderr.log",
+      "originalBytes": 11148,
+      "storedBytes": 1113,
+      "originalSha256": "dc8421d509241081c15366ba67d316df0cef66c70a80fead600e3fff4219c886",
+      "sha256": "c4ce87ef9bf416ba0b90134f20110a63cde115440a322bf40e851f9c4ffc2a0d",
+      "compressed": true
+    },
+    "standard-longrun/stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/standard-longrun/stdout.log",
+      "originalBytes": 2260,
+      "storedBytes": 1233,
+      "originalSha256": "30f8a1dab8cfc3b8ff8e244854bc11fdb5f2754401e1e1154b807fc78af3df90",
+      "sha256": "e78add2b241ce17ae13d4d1eee3eadc22b3f37fdc05f8dd93ed4f27d7a79ef2f",
+      "compressed": true
+    },
+    "standard-longrun/summary.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/standard-longrun/summary.json",
+      "originalBytes": 526031,
+      "storedBytes": 33460,
+      "originalSha256": "fdf2445f3e369ca3ba1146c13656ea8de57933b8f216a4ee71a5ac006fe0c39e",
+      "sha256": "62938d55c5c98fe6804e88b3dcc26e6c40a01fe9afcecc9f0ce4e1d8046a4ee1",
+      "compressed": true
+    },
+    "standard-longrun/timing.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/standard-longrun/timing.csv",
+      "originalBytes": 12840567,
+      "storedBytes": 3205913,
+      "originalSha256": "3e43efcaec6783b5b68657926657db120724453a5236c4664c585d53fbe02267",
+      "sha256": "67dd6e2b3962f420fc6da1ddf1cb4a7e8aa42a3a1fdb35048cfe53efe1320f46",
+      "compressed": true
+    },
+    "standard-longrun/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/standard-longrun/timing.json",
+      "originalBytes": 805912,
+      "storedBytes": 165648,
+      "originalSha256": "9635bb8704f9fc8d3ff3c0d8b40d09eac1105d763b39e77e10d55c924f16b9ce",
+      "sha256": "917a5c424b79f324e7ebba05217b0c11af89289e8d80508d3b180b791641f7d6",
+      "compressed": true
+    },
+    "operator-review/feedback-template.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/operator-review/feedback-template.json",
+      "originalBytes": 2409,
+      "storedBytes": 777,
+      "originalSha256": "3519de97712fb9dc08744a63430690e68187df82681ce2a5de0f78209954be3c",
+      "sha256": "21e8148b0f40f6d8151c9d7f648b33096d1b6a4d01107a5d0af5e35aff8bd827",
+      "compressed": true
+    },
+    "operator-review/operator-checklist.md.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/operator-review/operator-checklist.md",
+      "originalBytes": 3302,
+      "storedBytes": 1755,
+      "originalSha256": "926490cf9a365e839c02c17c7cf8612cb3fe3ed6eb9ca820d5a5904aca2def13",
+      "sha256": "372dc525fb485240fca7e44500ba3deddea6b1a6a03615f3de2639e74431a71c",
+      "compressed": true
+    },
+    "preview-probe/summary.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/summary.json",
+      "originalBytes": 2382217,
+      "storedBytes": 158531,
+      "originalSha256": "10d34217bbf28f0a05a3a9e9067db5a8619c4e68d7147a68c7e5cba77b8cf913",
+      "sha256": "827064805f28c7dce94d06cb4005f53c53418389e2f6eef1932f95d23009ff71",
+      "compressed": true
+    },
+    "preview-probe/exploration/disabled-1/environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/disabled-1/environment.json",
+      "originalBytes": 590658,
+      "storedBytes": 35164,
+      "originalSha256": "47d05708501c481a89874cd9fcd797e8190b78facbeae35a90a05129a6daa5ef",
+      "sha256": "79ec7362d7143c845f45f268510c678e8bba03c48dde09e5ab4fc19fd30bcf2e",
+      "compressed": true
+    },
+    "preview-probe/exploration/disabled-1/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/disabled-1/runtime.json",
+      "originalBytes": 42441,
+      "storedBytes": 5845,
+      "originalSha256": "c7a3247c32ebeeca06acb5dd0ff99ce0955f7622190ffcac3e42339a88954a48",
+      "sha256": "5b4174b0f70889f32789c86bfd486b4ff4f47701cf83f3df0ee6824b8ace9909",
+      "compressed": true
+    },
+    "preview-probe/exploration/disabled-1/stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/disabled-1/stderr.log",
+      "originalBytes": 1037,
+      "storedBytes": 371,
+      "originalSha256": "05780f8049c34b952d51c34355347f9f0942d41b5dcad4c28170564dfec07d1e",
+      "sha256": "981b4933d6ab4f2691394c172a6708f323b4c6351026d2f8a544bcf1aa3559c6",
+      "compressed": true
+    },
+    "preview-probe/exploration/disabled-1/stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/disabled-1/stdout.log",
+      "originalBytes": 2830,
+      "storedBytes": 1201,
+      "originalSha256": "f5a601b565cafda050c91418cba6c8abf42a1ccc9b05c3078ad3bfcd7d7976d1",
+      "sha256": "2c4709e3d6cc86afb837595258287acbf9656fbe0fdf4a249d08ee29cda9d7c5",
+      "compressed": true
+    },
+    "preview-probe/exploration/disabled-1/timing.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/disabled-1/timing.csv",
+      "originalBytes": 110249,
+      "storedBytes": 27999,
+      "originalSha256": "8e21957d6345ea07173fad8f38b29e4d31dc45ad4610c90b4a5204aedfd78f1f",
+      "sha256": "5acd9d0f644e74365afb88d2c3039416bbafd252328361f8ce0a05e6b75b659b",
+      "compressed": true
+    },
+    "preview-probe/exploration/disabled-1/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/disabled-1/timing.json",
+      "originalBytes": 110050,
+      "storedBytes": 29947,
+      "originalSha256": "e2459b913f76a76807e176878e21acc7fb08a39194a75dc3b90bab5b5de64f88",
+      "sha256": "a4d18f98353779f29f3203c3f7a12b1da7b9a3e5c9ae8117479ee2ab05c900ff",
+      "compressed": true
+    },
+    "preview-probe/exploration/disabled-1/ui.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/disabled-1/ui.json",
+      "originalBytes": 2,
+      "storedBytes": 22,
+      "originalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sha256": "61663fde99b3394d71653f41c19fe91269442622a4a6695f8352a70fbf5ca4c1",
+      "compressed": true
+    },
+    "preview-probe/inspector/disabled-1/environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/disabled-1/environment.json",
+      "originalBytes": 590664,
+      "storedBytes": 35168,
+      "originalSha256": "bd280426fae152aba607513700399ced0c52176b68dba16add8fd0889007f700",
+      "sha256": "5ba4204fd9496d86212505e26d3c71d33acf095fcb2003307dac5a13e3655023",
+      "compressed": true
+    },
+    "preview-probe/inspector/disabled-1/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/disabled-1/runtime.json",
+      "originalBytes": 35208,
+      "storedBytes": 4888,
+      "originalSha256": "a395f9b2a2d9c00570fea49fb288176c96511aaa85e99ca001dfc86496d1f0a0",
+      "sha256": "f2bad070b6e2374ca98484386441628a69395572bf6e9060e89f444a418d7abb",
+      "compressed": true
+    },
+    "preview-probe/inspector/disabled-1/stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/disabled-1/stderr.log",
+      "originalBytes": 907,
+      "storedBytes": 343,
+      "originalSha256": "6f94ef9f6065212b8d440f34f5ac31b81334acd8e2450335f6bd5feb086192fb",
+      "sha256": "8ff481c40db22d1697150a9703551763338e94598f4c3270844311252caf6c86",
+      "compressed": true
+    },
+    "preview-probe/inspector/disabled-1/stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/disabled-1/stdout.log",
+      "originalBytes": 2757,
+      "storedBytes": 1163,
+      "originalSha256": "ab20893b1e99386485c1e3e81e3001ad3f86f042ab5e0cd2d1495d212dcb9da9",
+      "sha256": "0f64bf7a4a8e46df5d205cacbe2339446acbe9aa595cb64f685895c602e3bcf6",
+      "compressed": true
+    },
+    "preview-probe/inspector/disabled-1/timing.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/disabled-1/timing.csv",
+      "originalBytes": 110249,
+      "storedBytes": 26500,
+      "originalSha256": "b5a2639ed4ff43e813474a4a216a725c2ad706a3ce40392bc448365a751e56e7",
+      "sha256": "ee3838e672abfebd60674b626fad41a49a463a245472bdce72894e72d4d5ad15",
+      "compressed": true
+    },
+    "preview-probe/inspector/disabled-1/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/disabled-1/timing.json",
+      "originalBytes": 110318,
+      "storedBytes": 29353,
+      "originalSha256": "8e01fd4b9de6dfafd0edc8cb3b25c0cc416bd3fff20dbb6d60277744bdf61c13",
+      "sha256": "62498ce44cfcf39398c295c470f739ff6411d3c39d84bd2394c73167e0d70f5d",
+      "compressed": true
+    },
+    "preview-probe/inspector/disabled-1/ui.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/disabled-1/ui.json",
+      "originalBytes": 2,
+      "storedBytes": 22,
+      "originalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sha256": "61663fde99b3394d71653f41c19fe91269442622a4a6695f8352a70fbf5ca4c1",
+      "compressed": true
+    },
+    "preview-probe/exploration/enabled-1/environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/enabled-1/environment.json",
+      "originalBytes": 590669,
+      "storedBytes": 35174,
+      "originalSha256": "13e49ef713c51b91e2fdf2603617019463ceb3f38f50f200b15e70dd31698bd6",
+      "sha256": "79ccfec0a73f96530fb9f629e43b024edff9e77256db33b96ef031e0610e08fc",
+      "compressed": true
+    },
+    "preview-probe/exploration/enabled-1/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/enabled-1/runtime.json",
+      "originalBytes": 2045993,
+      "storedBytes": 21433,
+      "originalSha256": "d886fbf32aabf121b8b91913638a86efa127766df7306e116002cd9aa21ebaa3",
+      "sha256": "99cfa31b8f179a67b84044249f4648950c0ce20b8bef8dfa1eeb8aeb36432e08",
+      "compressed": true
+    },
+    "preview-probe/exploration/enabled-1/stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/enabled-1/stderr.log",
+      "originalBytes": 1946,
+      "storedBytes": 419,
+      "originalSha256": "94679de6f69570fb6badafcff38f330338b6e3fc29691fb607c3291b64dc0d17",
+      "sha256": "96aaa3d2e8e400e902e592fb83e33876c10e69c0186956175a234cbbfb98f8a8",
+      "compressed": true
+    },
+    "preview-probe/exploration/enabled-1/stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/enabled-1/stdout.log",
+      "originalBytes": 4920,
+      "storedBytes": 1293,
+      "originalSha256": "532a7da49b8735fa4114fec7264d59f74f10ce1b359d8a00a58f8dd48c569678",
+      "sha256": "19bb725fd66616f89116813d9f99b2144c60544d3612ba495ad11526d69d1257",
+      "compressed": true
+    },
+    "preview-probe/exploration/enabled-1/timing.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/enabled-1/timing.csv",
+      "originalBytes": 110249,
+      "storedBytes": 28420,
+      "originalSha256": "2e1c0d1e6f3d5128ee6416fddbcc44e999adcb6c04ad04b197b1c2eccbae951a",
+      "sha256": "bbba8fd7a1f5d35167c1c9c2128d14c84bd4f03d8720436b39a2684d4b009c72",
+      "compressed": true
+    },
+    "preview-probe/exploration/enabled-1/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/enabled-1/timing.json",
+      "originalBytes": 113300,
+      "storedBytes": 27462,
+      "originalSha256": "4bfb4ed57b77cacdba4ebfba11a6965703876608c231899f33dc89dec3347500",
+      "sha256": "b8dc2be8ee96ae5583ecc566116a9d9ccfb3e14ddde92cd4afd538f218ce36b1",
+      "compressed": true
+    },
+    "preview-probe/exploration/enabled-1/ui.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/exploration/enabled-1/ui.json",
+      "originalBytes": 181,
+      "storedBytes": 115,
+      "originalSha256": "4f687ed3b908a2d500a98a82c9be43b1d11dc77089d670c581601029fc39aa2d",
+      "sha256": "93f2e45ae2102f36124471e2506171d57d01be4690397ff2eba161bb30e9790e",
+      "compressed": true
+    },
+    "preview-probe/inspector/enabled-1/environment.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/enabled-1/environment.json",
+      "originalBytes": 590585,
+      "storedBytes": 35137,
+      "originalSha256": "38affcaffd7de283f75887fe3424c7e58cb0e2646970fffaf954e5ce9e811270",
+      "sha256": "220758aafb1913edb8dbde61cfb48f06f2d1a38d4c33342f85bd916016bfe9f8",
+      "compressed": true
+    },
+    "preview-probe/inspector/enabled-1/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/enabled-1/runtime.json",
+      "originalBytes": 2031591,
+      "storedBytes": 20212,
+      "originalSha256": "fb53c8094a4ead15cb5a860dff35eae6a31cc3a7458287f60faf4cb36a546013",
+      "sha256": "0cf25e39dffc25717aefcb3567a6ee59c24117f9648a818120befbf2a3ec27fb",
+      "compressed": true
+    },
+    "preview-probe/inspector/enabled-1/stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/enabled-1/stderr.log",
+      "originalBytes": 1513,
+      "storedBytes": 371,
+      "originalSha256": "63b829a3ef1b8ff2c2417347c9cd72758dad72f448604a710b3f58c831edcc6a",
+      "sha256": "4e5b20fb49472556299ce64773a6e2bed69e9014b60e7acb01eb70e047aaa745",
+      "compressed": true
+    },
+    "preview-probe/inspector/enabled-1/stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/enabled-1/stdout.log",
+      "originalBytes": 4102,
+      "storedBytes": 1185,
+      "originalSha256": "4b2e85eab1996274a6987af58a937829e3bab328c939a0107ad0e3cfd2b719e6",
+      "sha256": "3673a22918b0adafad71e9ed2d1431777234650f57466ef396ad80a436090446",
+      "compressed": true
+    },
+    "preview-probe/inspector/enabled-1/timing.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/enabled-1/timing.csv",
+      "originalBytes": 110249,
+      "storedBytes": 29412,
+      "originalSha256": "2e96ae16bb26463f588e1471cf5f7abd17a350a8da5f6b5f1fe4991396e93c96",
+      "sha256": "5e5acafe640b2fc26a86c84998c79161fa9a88a49b5f2ec2fa49dc533e0cd885",
+      "compressed": true
+    },
+    "preview-probe/inspector/enabled-1/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/enabled-1/timing.json",
+      "originalBytes": 112701,
+      "storedBytes": 29958,
+      "originalSha256": "65e56d12f0a5097e5f8d8495438e387f220687b5af7da9cc2434908ae5211878",
+      "sha256": "84ba5c457fce7c89082c183ada8c5b5cb39cd094b763d561d022b0ee8e52f324",
+      "compressed": true
+    },
+    "preview-probe/inspector/enabled-1/ui.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/preview-probe/inspector/enabled-1/ui.json",
+      "originalBytes": 181,
+      "storedBytes": 115,
+      "originalSha256": "4f687ed3b908a2d500a98a82c9be43b1d11dc77089d670c581601029fc39aa2d",
+      "sha256": "93f2e45ae2102f36124471e2506171d57d01be4690397ff2eba161bb30e9790e",
+      "compressed": true
+    },
+    "cinematic-probe/environment-0.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/environment-0.json",
+      "originalBytes": 590642,
+      "storedBytes": 35135,
+      "originalSha256": "c42f5e6824ec43a7f8018b7cae4d331a6b9fda02d39f93857b616edad7aa2cf5",
+      "sha256": "70599c60edd5ae68ead4ea27b9dbf192dd242440077212f4d61fe00af908b78b",
+      "compressed": true
+    },
+    "cinematic-probe/environment-1.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/environment-1.json",
+      "originalBytes": 590634,
+      "storedBytes": 35163,
+      "originalSha256": "3e7fa36091d0aefb791bf86a820f5cefbe2aad3085596ffef1e6c0fce51c3ccb",
+      "sha256": "fb915cbe19c32497b4304dafab3f842212e1c55ab9b47fbdb40e319d7fc9e231",
+      "compressed": true
+    },
+    "cinematic-probe/environment-2.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/environment-2.json",
+      "originalBytes": 590657,
+      "storedBytes": 35166,
+      "originalSha256": "d1281e243d91926969975433ee2d4a348cb0315c0f3a73a1a367a9c6260621cd",
+      "sha256": "7fc7766654b4be4a82c3344bf004ed834a7eca4df6b0d4540ffe65c5fc98e643",
+      "compressed": true
+    },
+    "cinematic-probe/gpu-state.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/gpu-state.csv",
+      "originalBytes": 3814,
+      "storedBytes": 814,
+      "originalSha256": "ac246ae78eaf702f6cb59f8dd8f53d27f888e6379bfd060a7f6bc4255e16a14c",
+      "sha256": "ab3bfac45102d5f41332e697cf7ab0c048d76173d1f2e7778546b03784a6509f",
+      "compressed": true
+    },
+    "cinematic-probe/summary.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/summary.json",
+      "originalBytes": 1890084,
+      "storedBytes": 136462,
+      "originalSha256": "1d4899edff560d47bc9869d920f887c8959c55c090714de49b96e268dd497253",
+      "sha256": "7b523b45fc897c60a8c9249283dc1fba089388f37f22553ef26e51066c8810f2",
+      "compressed": true
+    },
+    "cinematic-probe/timing-0.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/timing-0.csv",
+      "originalBytes": 16148,
+      "storedBytes": 4732,
+      "originalSha256": "84a92bd3103745c6dd5114c685069881f6b0b535d519171a27773d4b89997d55",
+      "sha256": "ddf9d3bc9637aa17f94844a80617d1a2f1e71e4164d3eee302bd2bf4bacdf400",
+      "compressed": true
+    },
+    "cinematic-probe/timing-0.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/timing-0.json",
+      "originalBytes": 18102,
+      "storedBytes": 6147,
+      "originalSha256": "aaa6bc18ec4c74013949f462e14325766f47098451febbb0e1b86c87fda6c4a9",
+      "sha256": "534f27d9638eec84e8a24535237048938c9d3b548b1e732656b129611eecf00f",
+      "compressed": true
+    },
+    "cinematic-probe/timing-0.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/timing-0.log",
+      "originalBytes": 1458,
+      "storedBytes": 909,
+      "originalSha256": "6ac88f172a76843238d26784e75d8c7109bff8cf05fb15d345ae5df676c9b454",
+      "sha256": "61f009d64c1d1fece9ed575eb5633d4113c8c7e81a289b032fff91311ba36f2b",
+      "compressed": true
+    },
+    "cinematic-probe/timing-1.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/timing-1.csv",
+      "originalBytes": 16148,
+      "storedBytes": 4769,
+      "originalSha256": "248a371477c2dece7593ac80b11bf6aa4dd8b85622ceea531e5c7769ed3d44ba",
+      "sha256": "b6ea69a151ed884d226c541e4cd9397e0362b1148fbc1e962b20abdbbf10fa9a",
+      "compressed": true
+    },
+    "cinematic-probe/timing-1.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/timing-1.json",
+      "originalBytes": 18124,
+      "storedBytes": 6187,
+      "originalSha256": "fca720dc9e7e68462f1c92a9465a854715af52bb472581a4823f7b1de9cd80e1",
+      "sha256": "858218e9ccc4f0d0a6d9afd0194b8103cde3001fe4c133468f903ae6c377d4d5",
+      "compressed": true
+    },
+    "cinematic-probe/timing-1.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/timing-1.log",
+      "originalBytes": 1458,
+      "storedBytes": 910,
+      "originalSha256": "aecc3320860b6f98b4873d5979e05542104ab8ae89f2de1e48e0b0f7c168eb88",
+      "sha256": "c4ed33a5143b891fa8c466e29ec738aeb3d312c40a483585e5514ed9607d3c8f",
+      "compressed": true
+    },
+    "cinematic-probe/timing-2.csv.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/timing-2.csv",
+      "originalBytes": 16148,
+      "storedBytes": 4768,
+      "originalSha256": "8436ff9b45e7fcdab68f92e19239fd0611eda1120f1436ca0a910ef66071fcf9",
+      "sha256": "4fd00f254c236fe3f50bc58917f17b8fcae35317e933fd292a5c2089891b2ccf",
+      "compressed": true
+    },
+    "cinematic-probe/timing-2.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/timing-2.json",
+      "originalBytes": 18156,
+      "storedBytes": 6222,
+      "originalSha256": "4b9957a03765cf2df508c9208087d7532a34a7c30f14d12b086c9b6136878b84",
+      "sha256": "92c725b68ec91d0fb7788d32c031f8bd8d53ef72ad414bbf9776e1efd449e656",
+      "compressed": true
+    },
+    "cinematic-probe/timing-2.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/cinematic-probe/timing-2.log",
+      "originalBytes": 1458,
+      "storedBytes": 911,
+      "originalSha256": "7d180f60f522eff26c2aec6bdc82c8439d0d6c31786633d488ba0181a3f04880",
+      "sha256": "0d9ebff7388553bf214f1b870f383ce5e1f145e2388c1a7bc251b2ba2aacf5b2",
+      "compressed": true
+    },
+    "delivery/entry-authored-exploration.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/entry-authored-exploration.stderr.log",
+      "originalBytes": 17327,
+      "storedBytes": 1665,
+      "originalSha256": "84a3ade4644f28be5f2264d60ba07a2e6b5b9391e0ae1f5e948950743a0e9b56",
+      "sha256": "53054f46e74d19f2ede3986762557e5f307940f7ed762299461297a25fec5069",
+      "compressed": true
+    },
+    "delivery/entry-authored-exploration.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/entry-authored-exploration.stdout.log",
+      "originalBytes": 1597,
+      "storedBytes": 944,
+      "originalSha256": "199a43897e0bf4c05a76324957344a463b928bfda7581d42b7c2e20092b1ad0c",
+      "sha256": "f25868e09b591f2e5679efdc889b38d25f8c289b5a3a369e1bc4172bceb80e3e",
+      "compressed": true
+    },
+    "delivery/entry-authored-inspection.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/entry-authored-inspection.stderr.log",
+      "originalBytes": 17326,
+      "storedBytes": 1663,
+      "originalSha256": "8ef69326796b8f2edd1d7c3e8cc4e62ef7597a9287afd631e727393ffbb16367",
+      "sha256": "a3378458e3f2c0f72ec089d217ce0ee807544d26c6b3a6909a236dad7e243d7f",
+      "compressed": true
+    },
+    "delivery/entry-authored-inspection.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/entry-authored-inspection.stdout.log",
+      "originalBytes": 1618,
+      "storedBytes": 959,
+      "originalSha256": "c68b2fce40e60506df77ea42ada0b3875581a0e76219d0b0479da04e01b2edbf",
+      "sha256": "87aff1aa0e3909c9fc7ee08a96b53ec5a61fcbfeed5f566f0023ccb30b276257",
+      "compressed": true
+    },
+    "delivery/entry-exploration.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/entry-exploration.stderr.log",
+      "originalBytes": 17327,
+      "storedBytes": 1664,
+      "originalSha256": "a1c9d6e8236ccc43a3390d113f9dd197e476577aa3f478651571e2c5055277b1",
+      "sha256": "7b802ae3c14310d6d18c737ae3f6d7d93b739f1f59cd8210d15374a75f124354",
+      "compressed": true
+    },
+    "delivery/entry-exploration.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/entry-exploration.stdout.log",
+      "originalBytes": 1507,
+      "storedBytes": 938,
+      "originalSha256": "7b92688bb27a6dcb408e0b82d0f8f7ab3872bd2f98a4d3ae0f5d7831a319a514",
+      "sha256": "54bf906f967ea897301f344d72dd65df4596a4b88cd53ec8fdee3fc4c3bc139e",
+      "compressed": true
+    },
+    "delivery/entry-platformer.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/entry-platformer.stderr.log",
+      "originalBytes": 17327,
+      "storedBytes": 1666,
+      "originalSha256": "836b1238ef0f8fe2924c915f0eab45af802896b5e97e9822bc34120bf27f1a09",
+      "sha256": "ff31923d727bc3ec8bb39dd2f6c5374af28311ffd0a8a5aa7879a32445b16d03",
+      "compressed": true
+    },
+    "delivery/entry-platformer.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/entry-platformer.stdout.log",
+      "originalBytes": 1507,
+      "storedBytes": 941,
+      "originalSha256": "9f432c57fd2b08bc9b5497b9299b6ab7ad9626f4e70fa149ecab3efbb2997abd",
+      "sha256": "200c471dc34baec130e6ab75020ac8402c714babe065d1dd5dfcfa505d2769b2",
+      "compressed": true
+    },
+    "delivery/entry-scene_inspector.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/entry-scene_inspector.stderr.log",
+      "originalBytes": 17326,
+      "storedBytes": 1663,
+      "originalSha256": "fa812ecfaaba0fddae41c017177fc5e205479549678e8cdab8645c584a661d3c",
+      "sha256": "3440ba5724ae3c17edd1f139062e344019e3e18bb747c7c2375eb6cb9560077b",
+      "compressed": true
+    },
+    "delivery/entry-scene_inspector.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/entry-scene_inspector.stdout.log",
+      "originalBytes": 1474,
+      "storedBytes": 897,
+      "originalSha256": "106076144fbfe78b31ccc97c217971cffccbcfd6a6faf1fbace3532687e1d4b5",
+      "sha256": "bfb3d8811f2007e9d406cdcb7c9610aa258191dad9d9771cb09d5f1c519cc39c",
+      "compressed": true
+    },
+    "delivery/install.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/install.stderr.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "compressed": true
+    },
+    "delivery/install.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/install.stdout.log",
+      "originalBytes": 2021403,
+      "storedBytes": 54025,
+      "originalSha256": "0d57c58d00161b09cf87d53b4cd1d9fac13186c937bdcd9bd949324890d2cde9",
+      "sha256": "c69bd2702e85cae62c95cd817c345d71cc8f0c0e893319d2f6a95268af07026f",
+      "compressed": true
+    },
+    "delivery/intel-authored-exploration.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-authored-exploration.stderr.log",
+      "originalBytes": 17334,
+      "storedBytes": 1693,
+      "originalSha256": "f514d2065904d8f88ada7e02764bb6e5743fafa457fdcc0d63886b2b978a717b",
+      "sha256": "0eba9f1f1400292b19df38055833000bb6fe148cf8d0f45c0146324b4ee973f5",
+      "compressed": true
+    },
+    "delivery/intel-authored-exploration.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-authored-exploration.stdout.log",
+      "originalBytes": 2200,
+      "storedBytes": 1210,
+      "originalSha256": "4b3114b4d5048e7d392702a832e04790e4adf35d88b07beb9bab38fe85ad228b",
+      "sha256": "eac21c592b27e9578316992120ae958e849158037a98617de3f8996c93735b0f",
+      "compressed": true
+    },
+    "delivery/intel-authored-inspection.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-authored-inspection.stderr.log",
+      "originalBytes": 17333,
+      "storedBytes": 1691,
+      "originalSha256": "3b4abb30a7384b63decb1c4df904923ecb58eab24224eff525948e447adb002e",
+      "sha256": "67e35ebd60027c60f235430fec323203cd8d8f7d88b50b18db40e90d88300c66",
+      "compressed": true
+    },
+    "delivery/intel-authored-inspection.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-authored-inspection.stdout.log",
+      "originalBytes": 2220,
+      "storedBytes": 1217,
+      "originalSha256": "db8fd15adb7eaca09a6943e40703275260c0f67d5f4a2030c1675ef669e2cd3e",
+      "sha256": "2dbe8213d05eb38b265bfedd932ace1c196ec095c5aacd7d5a544bc089d085c6",
+      "compressed": true
+    },
+    "delivery/intel-exploration.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-exploration.stderr.log",
+      "originalBytes": 17699,
+      "storedBytes": 1760,
+      "originalSha256": "7ab7b1d913eb755ddec798cbf71e61512f350bbed0266eabd47fb8e732e0c99f",
+      "sha256": "7570b215529f8ed35d7eba42a1c1bf0d7e1d9d10b63a0858868709ff8f92abb3",
+      "compressed": true
+    },
+    "delivery/intel-exploration.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-exploration.stdout.log",
+      "originalBytes": 2836,
+      "storedBytes": 1259,
+      "originalSha256": "9a44d0b4123d132ea8036b4796b4a274dde494fc6fed5fb412f318adff3b83b5",
+      "sha256": "65296ba0830f0a924b86dbd306fc7aad70f5f0d8092f05509a81563ec4ae6f2f",
+      "compressed": true
+    },
+    "delivery/intel-platformer.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-platformer.stderr.log",
+      "originalBytes": 17402,
+      "storedBytes": 1729,
+      "originalSha256": "3ef36bf4957f9e7ffee6ab25ed7641516ea14130be2980ee35b014583fe2d306",
+      "sha256": "14cc1fd0f7bf7fc7eaa589fd5e1c68a40156587306b806d8c852e558e23d9e57",
+      "compressed": true
+    },
+    "delivery/intel-platformer.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-platformer.stdout.log",
+      "originalBytes": 2103,
+      "storedBytes": 1207,
+      "originalSha256": "ae829995ffeaf6e64f57d663d74d0949f01088c6eae1596d0db8f15ef83b4826",
+      "sha256": "4d30e2c9fb89b80701992919ac8b4a406813a91c160fc4ec331535ba1b7bdef7",
+      "compressed": true
+    },
+    "delivery/intel-scene_inspector.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-scene_inspector.stderr.log",
+      "originalBytes": 17335,
+      "storedBytes": 1694,
+      "originalSha256": "baaeb897fdf7f329583861617d4f99a2c7223b415248347a2ab3a8781920762f",
+      "sha256": "862ea2c1edead19237f8f1e1f148d5d5e840f694579361f903f10e968e32ff9c",
+      "compressed": true
+    },
+    "delivery/intel-scene_inspector.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-scene_inspector.stdout.log",
+      "originalBytes": 2068,
+      "storedBytes": 1166,
+      "originalSha256": "16923acbd95020e2b0f131cec0fbf96416b569614d3ff48fad77f1515e2a9cd1",
+      "sha256": "77dbdd11d1694b62dafd23c2a720016c3c7ee6feb480d2ddd940875f74b21f60",
+      "compressed": true
+    },
+    "delivery/isolated-AzurePlayer.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/isolated-AzurePlayer.stderr.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "compressed": true
+    },
+    "delivery/isolated-AzurePlayer.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/isolated-AzurePlayer.stdout.log",
+      "originalBytes": 509,
+      "storedBytes": 249,
+      "originalSha256": "c4aadbbc81942345fd307fb29b0ae2bf3ef8bbd54339af88edf2a66cfdb87f16",
+      "sha256": "b8607d9ff9713b1719a75b30e347893c2d3e395a32f01974efecdc2a7aebdda5",
+      "compressed": true
+    },
+    "delivery/isolated-AzureRender.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/isolated-AzureRender.stderr.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "compressed": true
+    },
+    "delivery/isolated-AzureRender.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/isolated-AzureRender.stdout.log",
+      "originalBytes": 1037,
+      "storedBytes": 288,
+      "originalSha256": "8f9791f518e181064505368ca66d6c5395385a1a5c2772880798bc5732f24137",
+      "sha256": "69e8e7e78aee0f9686d2272bf006988494144032649ee9fb8b4e7c35177ca17a",
+      "compressed": true
+    },
+    "delivery/manifest-verify.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/manifest-verify.stderr.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "compressed": true
+    },
+    "delivery/manifest-verify.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/manifest-verify.stdout.log",
+      "originalBytes": 230,
+      "storedBytes": 186,
+      "originalSha256": "3f9ec06ed7f45750522be2286cd328f54c07144642f4f6886c63351c2e3387bd",
+      "sha256": "e86a4eac80e98d73ec14ba40822907029d9b4f4ffb06495e10a91c2832d34c06",
+      "compressed": true
+    },
+    "delivery/manifest-write.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/manifest-write.stderr.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "compressed": true
+    },
+    "delivery/manifest-write.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/manifest-write.stdout.log",
+      "originalBytes": 177,
+      "storedBytes": 170,
+      "originalSha256": "a380bccdd9bf6ce4ed3008713e749541f3b783707e8d21d4782b06a8c4f3874a",
+      "sha256": "8f946ea2632d79558ce788e91ee660eb6de69a07c10461ba50162f690314b312",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-exploration.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-authored-exploration.stderr.log",
+      "originalBytes": 17327,
+      "storedBytes": 1666,
+      "originalSha256": "8036a209314936d0ff65a6f3b2fdebbea1d0f7fe89ad3f209c1bf69383b6bc62",
+      "sha256": "641276b5d3dc942bb5e5a6c89094fe59781a09f9f71a9b07f9fe868868485236",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-exploration.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-authored-exploration.stdout.log",
+      "originalBytes": 2179,
+      "storedBytes": 1197,
+      "originalSha256": "3316d9e3d439717850bdaa544734311308df7ac7f7a9b92c7680b4fc8ea10f4e",
+      "sha256": "3c9b2a64bf925b6ca84676c268c1031403309d0dd6479fc43e148551da80de74",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-inspection.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-authored-inspection.stderr.log",
+      "originalBytes": 17326,
+      "storedBytes": 1662,
+      "originalSha256": "20fc7a3c94eaa3483dd5ac174f736fa17a25caf2fa20cfc1e97721a85f2daece",
+      "sha256": "020ed8d3e43e59ff97d78aa189ff7bca7d3254bdf2fab4dfaf642273d1964e7e",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-inspection.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-authored-inspection.stdout.log",
+      "originalBytes": 2199,
+      "storedBytes": 1201,
+      "originalSha256": "23119e0556af6c83e8408d15f8a9a056b88240d4b7601b44a7daf7fffa88cb49",
+      "sha256": "327f838a1e765169a05e92dd4d19c37d6db4fcc4d75f05c54273cf7a8200be2f",
+      "compressed": true
+    },
+    "delivery/nvidia-exploration.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-exploration.stderr.log",
+      "originalBytes": 17699,
+      "storedBytes": 1720,
+      "originalSha256": "efd9a1c2ba64b63e74f5180fe77114da840d5faf27770e7b0d7fba8586c5c444",
+      "sha256": "b07a9f25e5f6e51c66793aa4373299806c2d7afac40888708b4bb31bc3a8b7c6",
+      "compressed": true
+    },
+    "delivery/nvidia-exploration.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-exploration.stdout.log",
+      "originalBytes": 2814,
+      "storedBytes": 1242,
+      "originalSha256": "2cb9a9f11a40c77d6614448b25442dc22ddc0c5fee5f8e686cf06244c20cdb43",
+      "sha256": "0819bd54ebdaa5fe9d8d97442c33a0738f793065843aaf72c0d6040b33e6beb4",
+      "compressed": true
+    },
+    "delivery/nvidia-platformer.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-platformer.stderr.log",
+      "originalBytes": 17395,
+      "storedBytes": 1698,
+      "originalSha256": "03a63cbd30918906746784937cfa0957799bb85ad09b79dfec2082ec64dbeae6",
+      "sha256": "7af2950a4e2c5d5a6129b6970741ca9d235cffd188ee0d1c743e2493974f7042",
+      "compressed": true
+    },
+    "delivery/nvidia-platformer.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-platformer.stdout.log",
+      "originalBytes": 2082,
+      "storedBytes": 1189,
+      "originalSha256": "e804e3e09947255e2de6f7cd5bf514f991265e4205d775f07310912e897d579e",
+      "sha256": "8170dd5d3c5add35ad8f326b29a9e4c386a8a326dea7ea94a3fbc5f60019b17b",
+      "compressed": true
+    },
+    "delivery/nvidia-scene_inspector.stderr.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-scene_inspector.stderr.log",
+      "originalBytes": 17326,
+      "storedBytes": 1663,
+      "originalSha256": "669902a247ec7cee89a255ea1c818625c04372b119e1b4ad4e856904815769cc",
+      "sha256": "1dcffdfbfa38d2ff1e45b509a0eeb64e035ffed96adcb31c02251b8b9ceba60c",
+      "compressed": true
+    },
+    "delivery/nvidia-scene_inspector.stdout.log.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-scene_inspector.stdout.log",
+      "originalBytes": 2051,
+      "storedBytes": 1148,
+      "originalSha256": "8a9ffcab616c55bd96fa0ffefc4e2c93f08fc71c7f6bed0bb55c21903a192a0a",
+      "sha256": "3395dff9d6af890455ebaee1a558b4bc94c0a3cbd9a4757d252f1d694208016d",
+      "compressed": true
+    },
+    "delivery/partial.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/partial.json",
+      "originalBytes": 100871,
+      "storedBytes": 4928,
+      "originalSha256": "fbf7c8536307d391fac29a19e0f7ceb3b770464da90082aa6585c62a42c22092",
+      "sha256": "183fe4b5fede956a7162a654a88a90619392a87343dba2bfbf9bc67e3c692286",
+      "compressed": true
+    },
+    "delivery/platformer.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/platformer.input.json",
+      "originalBytes": 3391,
+      "storedBytes": 276,
+      "originalSha256": "c584b22e26201a9b845e02ac0d664772d1169cdf663f2d68abdb9fb989206573",
+      "sha256": "59e33635183390f24f6e0cbc4d4aed3c2e6f716638687beeb5a8127cb5919589",
+      "compressed": true
+    },
+    "delivery/sequence.input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/sequence.input.json",
+      "originalBytes": 6943,
+      "storedBytes": 513,
+      "originalSha256": "e771116d5c295428bb98feb8c87be4bef6a2ccfc33f71ee3c7bdccc48f8a7dfa",
+      "sha256": "bbe321aece73131dd7dc18bb18792fab514a9992ae51c1273d2e1f4ace5310fd",
+      "compressed": true
+    },
+    "delivery/summary.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/summary.json",
+      "originalBytes": 108916,
+      "storedBytes": 5828,
+      "originalSha256": "069fbff4d871dd163978ac93a73afd999c4e8b4b054ab3395a940a8cafb51ed2",
+      "sha256": "b42df59fa95bc50b28a2d8736a1586419b03880979c78dc5d800ee3836232b60",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-exploration/input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-authored-exploration/input.json",
+      "originalBytes": 210,
+      "storedBytes": 130,
+      "originalSha256": "3636e37beab26a56d25d8bb22eb83567cec720f0d98153f64874c5aef605d27c",
+      "sha256": "53473120cb895de9433ba2dab0b37150869bd9f9ec5b193abe8772f28813c286",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-exploration/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-authored-exploration/runtime.json",
+      "originalBytes": 22232,
+      "storedBytes": 910,
+      "originalSha256": "c642f1850f796fba203d16b1313dc7467e59d97de1013a12828e60837ccbfba3",
+      "sha256": "8e1d8ccebb084e72a292ab604bcfba9ff52166d4b57183378d0f8fc08728bfc7",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-exploration/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-authored-exploration/timing.json",
+      "originalBytes": 7147,
+      "storedBytes": 1889,
+      "originalSha256": "bb97020bc51a4fdfb33f6d87d4bef3007fe7dfccb76b8dabf4d236c5d0fd677c",
+      "sha256": "155c379d667eb3b0c984ed10d41f0bb83330bb43c590eb3454fa17d871377236",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-inspection/input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-authored-inspection/input.json",
+      "originalBytes": 210,
+      "storedBytes": 130,
+      "originalSha256": "3636e37beab26a56d25d8bb22eb83567cec720f0d98153f64874c5aef605d27c",
+      "sha256": "53473120cb895de9433ba2dab0b37150869bd9f9ec5b193abe8772f28813c286",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-inspection/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-authored-inspection/runtime.json",
+      "originalBytes": 22183,
+      "storedBytes": 909,
+      "originalSha256": "91f909f831596753dbda376e2ff636e9e120e7871d4872d83a61d9f8c38c5052",
+      "sha256": "b65c8918739d9da4de333f10d68b506aa747c77b1cef5970fe347bc660668408",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-inspection/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-authored-inspection/timing.json",
+      "originalBytes": 7152,
+      "storedBytes": 1901,
+      "originalSha256": "91ea7992292693fee7d1d71c7048b21018c5d8da35481466c8ec6878b695721b",
+      "sha256": "6d3c21c6d18c83c84d5eb76ef0ebf9bfdb8d21e7ee00f088cb2281c53e7fcf7e",
+      "compressed": true
+    },
+    "delivery/nvidia-exploration/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-exploration/runtime.json",
+      "originalBytes": 4381001,
+      "storedBytes": 123268,
+      "originalSha256": "e5d3ed441cad49d46f6ef8963d6042d551cd3250a6b87a020b0787734199d793",
+      "sha256": "9c2adb90e8c0dba5fc512e20b7cd91faac556c781958bda22742775d158977e0",
+      "compressed": true
+    },
+    "delivery/nvidia-exploration/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-exploration/timing.json",
+      "originalBytes": 216422,
+      "storedBytes": 60804,
+      "originalSha256": "b252d72fd40a7839bae81c94594a9e84454a21c02bd3bc243da2d144c56467fe",
+      "sha256": "6b38cadb70022298ab78367e763422cafd304635697638a993cea38ec9e353fe",
+      "compressed": true
+    },
+    "delivery/nvidia-platformer/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-platformer/runtime.json",
+      "originalBytes": 1092961,
+      "storedBytes": 45618,
+      "originalSha256": "606e0ebc9ab06f4f395817992dbeb674e225a4c1a621d9a1600f155e45c573fe",
+      "sha256": "f9bd974229c928ad548be1984d526e81e8cc84e47164bf0605659c7d6a92656a",
+      "compressed": true
+    },
+    "delivery/nvidia-platformer/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-platformer/timing.json",
+      "originalBytes": 52633,
+      "storedBytes": 15194,
+      "originalSha256": "e195a1d34e4d61d188c9f502108e351b5bfdfa08012f2cdbcbeec2c364fb4234",
+      "sha256": "5b8245192cc2067817f62ed4f70745b309728fe8434d69b3a8443422cdf488d8",
+      "compressed": true
+    },
+    "delivery/nvidia-scene_inspector/input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-scene_inspector/input.json",
+      "originalBytes": 210,
+      "storedBytes": 130,
+      "originalSha256": "3636e37beab26a56d25d8bb22eb83567cec720f0d98153f64874c5aef605d27c",
+      "sha256": "53473120cb895de9433ba2dab0b37150869bd9f9ec5b193abe8772f28813c286",
+      "compressed": true
+    },
+    "delivery/nvidia-scene_inspector/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-scene_inspector/runtime.json",
+      "originalBytes": 21736,
+      "storedBytes": 849,
+      "originalSha256": "89008325f39edfbdb08131896732503eb917e95c632081cd335d67594ea51117",
+      "sha256": "da64ceb28a9cd44786b3ad3a83db3e595284d4ddd663f947d0b7ee8212798331",
+      "compressed": true
+    },
+    "delivery/nvidia-scene_inspector/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/nvidia-scene_inspector/timing.json",
+      "originalBytes": 7148,
+      "storedBytes": 1857,
+      "originalSha256": "9901cf51de4f7506d39209bed1f4df3b0406128d29ceea9becae4630a5f6f749",
+      "sha256": "d93153896bf20226c8e6438065d5407e0076223844448408d8dd96c6c90b4c67",
+      "compressed": true
+    },
+    "delivery/intel-authored-exploration/input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-authored-exploration/input.json",
+      "originalBytes": 210,
+      "storedBytes": 130,
+      "originalSha256": "3636e37beab26a56d25d8bb22eb83567cec720f0d98153f64874c5aef605d27c",
+      "sha256": "53473120cb895de9433ba2dab0b37150869bd9f9ec5b193abe8772f28813c286",
+      "compressed": true
+    },
+    "delivery/intel-authored-exploration/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-authored-exploration/runtime.json",
+      "originalBytes": 22244,
+      "storedBytes": 913,
+      "originalSha256": "9fe67cae9a39034b3cdb9c7343419f31e94fb2a25ebcc0a650558979d45d848b",
+      "sha256": "122668870e2f2cdec6f8da5d5f7cb95fe04f16e92ede10b25c3b47048da379bf",
+      "compressed": true
+    },
+    "delivery/intel-authored-exploration/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-authored-exploration/timing.json",
+      "originalBytes": 9375,
+      "storedBytes": 2063,
+      "originalSha256": "a1cae27d93ed690118f9fcaa1aca56bb629389eb8e93f073949e5a4647544455",
+      "sha256": "9cc0a0b144279ef79ee449d35dcf8854dbfdc8b08763f59899cd9183c3d43a81",
+      "compressed": true
+    },
+    "delivery/intel-authored-inspection/input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-authored-inspection/input.json",
+      "originalBytes": 210,
+      "storedBytes": 130,
+      "originalSha256": "3636e37beab26a56d25d8bb22eb83567cec720f0d98153f64874c5aef605d27c",
+      "sha256": "53473120cb895de9433ba2dab0b37150869bd9f9ec5b193abe8772f28813c286",
+      "compressed": true
+    },
+    "delivery/intel-authored-inspection/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-authored-inspection/runtime.json",
+      "originalBytes": 22171,
+      "storedBytes": 906,
+      "originalSha256": "1d049a336ab4e1d5581b80e2a0f99d40801a8c95e6d44b788d779d619d963905",
+      "sha256": "6e5917f5e6041599002c74045af3ffa3f685882c3b59824351ec140f4d3904ab",
+      "compressed": true
+    },
+    "delivery/intel-authored-inspection/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-authored-inspection/timing.json",
+      "originalBytes": 9421,
+      "storedBytes": 2070,
+      "originalSha256": "27c1fd3504af4dff8362384aa30823321b9cce2f55e06bd7d64bedb4e2d00521",
+      "sha256": "68ed442053f6cbf9a94231efe562e88461469e6a951c44cb558dad7d1f178f70",
+      "compressed": true
+    },
+    "delivery/intel-exploration/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-exploration/runtime.json",
+      "originalBytes": 4340225,
+      "storedBytes": 122050,
+      "originalSha256": "9aef446a722720da3a3af2301b6f66ba80d871f0eb068b0a9695f5b90be3782f",
+      "sha256": "ad61b29acf57cfe89d7eba73376fb52b849fe21e056a99157bd2b72f2b845269",
+      "compressed": true
+    },
+    "delivery/intel-exploration/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-exploration/timing.json",
+      "originalBytes": 220994,
+      "storedBytes": 69921,
+      "originalSha256": "6d81922e156d09734aa2be49d9c4e22999c97a9bbdcc6c2a49451d652e108f2e",
+      "sha256": "345fcdf0d4d152160ece1505968c7131d5da1372c3db99143ef26f09af335c50",
+      "compressed": true
+    },
+    "delivery/intel-platformer/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-platformer/runtime.json",
+      "originalBytes": 1092944,
+      "storedBytes": 45681,
+      "originalSha256": "7e49b566c01aa915b260805ef1d5ff18025d8653597653db6037b2711f866b7a",
+      "sha256": "383355b6654d7de058c6547749fb2d0d83b4d0c2455b3c832aa41a25c7821bfb",
+      "compressed": true
+    },
+    "delivery/intel-platformer/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-platformer/timing.json",
+      "originalBytes": 55295,
+      "storedBytes": 17250,
+      "originalSha256": "ed21ffc5d947ed067bffaa9bcd62b13a509537861af16e612d268e43f7c8f985",
+      "sha256": "05a76eb6fbbd89b68835048761ec06664aa2fbb99f403a62d984501dc493afc9",
+      "compressed": true
+    },
+    "delivery/intel-scene_inspector/input.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-scene_inspector/input.json",
+      "originalBytes": 210,
+      "storedBytes": 130,
+      "originalSha256": "3636e37beab26a56d25d8bb22eb83567cec720f0d98153f64874c5aef605d27c",
+      "sha256": "53473120cb895de9433ba2dab0b37150869bd9f9ec5b193abe8772f28813c286",
+      "compressed": true
+    },
+    "delivery/intel-scene_inspector/runtime.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-scene_inspector/runtime.json",
+      "originalBytes": 21736,
+      "storedBytes": 847,
+      "originalSha256": "83e9cd7a7d8771ea51c5d302b6d27406a4cbfab3cb789f3a2058c9f3a2b148bf",
+      "sha256": "894ebe07f5dd634075cbe2d33e14880b548941c01b865b1591a2306b638daf6c",
+      "compressed": true
+    },
+    "delivery/intel-scene_inspector/timing.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/intel-scene_inspector/timing.json",
+      "originalBytes": 9339,
+      "storedBytes": 2011,
+      "originalSha256": "699cb30ed224e49aadbebefb4182f20d055cda4876c7b1d61b7971443ef0fe28",
+      "sha256": "cb587408d503a54e1a29de28bd29fddcd0eaaab63b58723b24748161bceb7772",
+      "compressed": true
+    },
+    "delivery/provenance.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/packages/provenance.json",
+      "originalBytes": 115969,
+      "storedBytes": 46336,
+      "originalSha256": "9c33585f794eabc266e0e343eb245ce1e206fee7c54210e488e0e8bec3c18656",
+      "sha256": "ad83e73946e345cd5bdf343d0a6318ad308940e24943c5b64f9ff7eaafc54b21",
+      "compressed": true
+    },
+    "rejected-candidate/manifest.json.gz": {
+      "source": "docs/acceptance/p5/closure/rejected-environment-evidence/manifest.json",
+      "originalBytes": 102971,
+      "storedBytes": 23066,
+      "originalSha256": "309acc55883dc2f2afcb37e073aa0e079ef8e0e578b8f180f44f54f24dff7c64",
+      "sha256": "dd2ed100b38c6b9f9d248f0597b54deeaad5aeaac76dee907bc07a74b54e3d53",
+      "compressed": true
+    },
+    "package-manifests/engine.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/Moved Engine/install_manifest.json",
+      "originalBytes": 1500831,
+      "storedBytes": 288901,
+      "originalSha256": "c9d231178e4c0733549d101628bb05fd58ec13a983e8fa2e4219f04f37b5feac",
+      "sha256": "81e9941b6f76fcc0c7ac314bb5ba4f463c2d95bf50b9a7ac5ece3de8c45c64e1",
+      "compressed": true
+    },
+    "package-manifests/exploration.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/Moved exploration/game_manifest.json",
+      "originalBytes": 103722,
+      "storedBytes": 19790,
+      "originalSha256": "06e595e4dc1e1ec3b30f425cbb6c70a0d49b19cbfd6604965273623cb1d1138a",
+      "sha256": "f9998494f4ea35eec0dee053ef0a0f6c7523f68645fc950d085393393f584cfa",
+      "compressed": true
+    },
+    "package-manifests/platformer.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/Moved platformer/game_manifest.json",
+      "originalBytes": 89500,
+      "storedBytes": 20691,
+      "originalSha256": "430d86436bad7a7f3da27ef86725556793a0009edfa169d0086fc94206a0761e",
+      "sha256": "808106dfc56d8740040bfae7597b8c11d0d76866f1f58e608025c14326662fff",
+      "compressed": true
+    },
+    "package-manifests/scene_inspector.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/Moved scene_inspector/game_manifest.json",
+      "originalBytes": 81604,
+      "storedBytes": 19378,
+      "originalSha256": "2125f048e5770b6684c34c6af593511a0ccb8212daaa0bb9731867914612fd76",
+      "sha256": "0501ad217087c27a6c6074e5ba81c01c71e2b0f65abc39505b6f377c8d162399",
+      "compressed": true
+    },
+    "package-manifests/authored-exploration.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/Moved authored-exploration/game_manifest.json",
+      "originalBytes": 86120,
+      "storedBytes": 20754,
+      "originalSha256": "a6a07fd3a1dc3771f96f8a3317468b4b15ed8be5a8f63e438f4378252e5418eb",
+      "sha256": "b0329d12713768171133359acded1ccc05c7413bdcfcae9c3d7e3c537f45a602",
+      "compressed": true
+    },
+    "package-manifests/authored-inspection.json.gz": {
+      "source": "build/p5-relative-thermal-2026-10-11/arena-delivery/Moved authored-inspection/game_manifest.json",
+      "originalBytes": 83473,
+      "storedBytes": 19996,
+      "originalSha256": "854dbc66ee53143b3ac35ed4af8016af405d5502b831169bdcbac2dd9ca121b5",
+      "sha256": "0caa5e9825b31227ee8a869d203d6a551a38a70c1ccad5ee47d3881979ba3015",
+      "compressed": true
+    },
+    "baseline-gpu/release.log.gz": {
+      "source": "build/p5-cache-publication-2026-10-11/release-gpu.log",
+      "originalBytes": 9279,
+      "storedBytes": 1861,
+      "originalSha256": "8f9bf0bd9fcc1aade0bfcf4a3a1175e4dfa2da57b9f8d9fd9088f38468e33900",
+      "sha256": "43cae602783c9aacfe7a0715f16bd04a78f262762b808cd487943480f32cd5d7",
+      "compressed": true
+    },
+    "baseline-gpu/debug.log.gz": {
+      "source": "build/p5-cache-publication-2026-10-11/debug-gpu.log",
+      "originalBytes": 8974,
+      "storedBytes": 1818,
+      "originalSha256": "7a595124e7e43aa483dade758869c24549624a891d6efd6128e4ac8c71f84ed2",
+      "sha256": "0b14ae421f5331160beb3a966ea526f61380fe6eba7c8e0f9cbe3782fc9602cf",
+      "compressed": true
+    },
+    "source/tools/gpu_environment.py.gz": {
+      "source": "tools/gpu_environment.py",
+      "originalBytes": 7688,
+      "storedBytes": 2411,
+      "originalSha256": "73044a359ba73f9d07f4c4498cce0baecb41d694ea8bcf546011475dbe7510d3",
+      "sha256": "91454663a6c32b3bb43e8a7c01466eea001057d92a7e40bfed4ba7a2f912b0c9",
+      "compressed": true
+    },
+    "source/tools/performance_budget.py.gz": {
+      "source": "tools/performance_budget.py",
+      "originalBytes": 3185,
+      "storedBytes": 1196,
+      "originalSha256": "7b9988531f31eedb203cfe818d3ee3eb84ef061a5f4f1a10899bb0c5ac728294",
+      "sha256": "91fe6d1bc407a9696601b39588233bb20e5697b9facee40ddfe503653684ccef",
+      "compressed": true
+    },
+    "source/tools/run_playable_performance.py.gz": {
+      "source": "tools/run_playable_performance.py",
+      "originalBytes": 14251,
+      "storedBytes": 4890,
+      "originalSha256": "de705a4f5e0e88aaf194eb0bf9228c4dedd782d2e792b94c027fa4ca718e16bd",
+      "sha256": "02b611da34d9fe99f846c0188139e59bfdd2db2c49f6a4f95af004076ba4c7ca",
+      "compressed": true
+    },
+    "source/tools/run_playable_long_run.py.gz": {
+      "source": "tools/run_playable_long_run.py",
+      "originalBytes": 21093,
+      "storedBytes": 6291,
+      "originalSha256": "64ee3d4776a000c2f9afcf713f6ea337d1f35aebf9ea0bd317fb0593270982ed",
+      "sha256": "7e3d348d1cae5c02d21b685961f0f3228df76e8ecf37cacc98c327256ebad0c5",
+      "compressed": true
+    },
+    "source/tools/run_platformer_long_run.py.gz": {
+      "source": "tools/run_platformer_long_run.py",
+      "originalBytes": 14725,
+      "storedBytes": 4428,
+      "originalSha256": "b361c7da2caf792e130b395343c48c07cc219f99934ed0f6712c14d8773af7de",
+      "sha256": "4abaf156a1094c35bf2aae5aed4abd145a087f51ef02eaa440ad517f706cd075",
+      "compressed": true
+    },
+    "source/tools/run_preview_comparison.py.gz": {
+      "source": "tools/run_preview_comparison.py",
+      "originalBytes": 6016,
+      "storedBytes": 2355,
+      "originalSha256": "ba1367e6a632b2d7d4c2fac0c55411e529a7618910353d1e4588afefeee5f114",
+      "sha256": "e7f0ea4ae80a2b981744fd5f08cb75630474669a3a130d951d49309441d293f4",
+      "compressed": true
+    },
+    "source/tools/measure_runtime_performance.py.gz": {
+      "source": "tools/measure_runtime_performance.py",
+      "originalBytes": 2788,
+      "storedBytes": 1221,
+      "originalSha256": "b339ea8ff1b14cafe205c2095bedc832ecc474fec0947e8c1d832b55cafced3d",
+      "sha256": "6b9733167949dd482fcd712da279bedea65b0eff559a082b62b848856fc5a76a",
+      "compressed": true
+    },
+    "source/tools/test_gpu_environment.py.gz": {
+      "source": "tools/test_gpu_environment.py",
+      "originalBytes": 7418,
+      "storedBytes": 1820,
+      "originalSha256": "4dab8036f70c843245ac262832816ca966d5641591c1e04b2534d1ce9aa85251",
+      "sha256": "7df818f7fe896722ae27376ca6fdae509e10c769c96c2a4b58a5a542634320f1",
+      "compressed": true
+    },
+    "source/tools/test_performance_budget.py.gz": {
+      "source": "tools/test_performance_budget.py",
+      "originalBytes": 4658,
+      "storedBytes": 1339,
+      "originalSha256": "d6f4a73ab086570c99b3fd2d278fd8379fed5bc975ada9c512e7780858bebe3c",
+      "sha256": "f9074940f4196bbcf53865c4f4deb44732431e237ef5522ed1282e532b76ca77",
+      "compressed": true
+    },
+    "source/tools/test_playable_delivery_rules.py.gz": {
+      "source": "tools/test_playable_delivery_rules.py",
+      "originalBytes": 4887,
+      "storedBytes": 1657,
+      "originalSha256": "de015d3c084bdaa815c94f5bb0e299a20bc5a691dd4222aa2ed456df5cfc317a",
+      "sha256": "e8cd3a309ed6db6abe33594036add6de46b860a5f653531ed57e8cc972d8d52a",
+      "compressed": true
+    }
+  }
+}

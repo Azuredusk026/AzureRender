@@ -1,0 +1,4580 @@
+{
+  "status": "measured",
+  "basis": "Any trilinear LUT sample is a convex combination of lattice values. A target exceeding a lattice support plane is unattainable for every LUT coordinate. The L1 norm of the plane normal converts the separation into a lower bound on maximum channel error.",
+  "certifiedUnattainableSamples": 16,
+  "maximumCertifiedChannelErrorLowerBound": 0.08746586732064546,
+  "certificates": [
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.8098032058840603,
+      "separation": 0.131373572657158,
+      "minimumMaximumChannelError": 0.08746586732064546
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.9254351456392854,
+      "separation": 0.11877813423345573,
+      "minimumMaximumChannelError": 0.08692388208538356
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.9413514888415315,
+      "separation": 0.11751407177518547,
+      "minimumMaximumChannelError": 0.0865723355751168
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.8648581532727528,
+      "separation": 0.12483383487412325,
+      "minimumMaximumChannelError": 0.08638988233729104
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.9242187878252154,
+      "separation": 0.1175617764193857,
+      "minimumMaximumChannelError": 0.08603373051088545
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.8072502975412991,
+      "separation": 0.12882066431439676,
+      "minimumMaximumChannelError": 0.08576619258490205
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.7532749550290705,
+      "separation": 0.12897689875106932,
+      "minimumMaximumChannelError": 0.08563531291499171
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.939856336901535,
+      "separation": 0.11601891983518897,
+      "minimumMaximumChannelError": 0.08547086071742664
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.863120897026148,
+      "separation": 0.12309657862751844,
+      "minimumMaximumChannelError": 0.08518763326046624
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.9216259803664176,
+      "separation": 0.11496896896058795,
+      "minimumMaximumChannelError": 0.08413626940600173
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.7509002522579357,
+      "separation": 0.1266021959799345,
+      "minimumMaximumChannelError": 0.08405860873885301
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9330859136379611,
+      "separation": 0.11091791609404977,
+      "minimumMaximumChannelError": 0.08363723866369722
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.9208291211303353,
+      "separation": 0.11417210972450564,
+      "minimumMaximumChannelError": 0.08355311410790851
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.932465250308282,
+      "separation": 0.11029725276437063,
+      "minimumMaximumChannelError": 0.08316922980757913
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.9366692474964142,
+      "separation": 0.11283183043006817,
+      "minimumMaximumChannelError": 0.08312293957640904
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.8594177342709653,
+      "separation": 0.11939341587233576,
+      "minimumMaximumChannelError": 0.08262490020801569
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.9356897449035496,
+      "separation": 0.11185232783720356,
+      "minimumMaximumChannelError": 0.08240134235928258
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9311422345871025,
+      "separation": 0.1089742370431912,
+      "minimumMaximumChannelError": 0.08217161476462898
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.8018084779416953,
+      "separation": 0.12337884471479299,
+      "minimumMaximumChannelError": 0.08214313916970746
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9307356261853383,
+      "separation": 0.108567628641427,
+      "minimumMaximumChannelError": 0.08186501322415123
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.858279624522719,
+      "separation": 0.11825530612408941,
+      "minimumMaximumChannelError": 0.08183728387517557
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.800136018926536,
+      "separation": 0.12170638569963366,
+      "minimumMaximumChannelError": 0.08102964978702244
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.7458382984593053,
+      "separation": 0.1215402421813041,
+      "minimumMaximumChannelError": 0.08069768130375023
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.7442825853177937,
+      "separation": 0.11998452903979251,
+      "minimumMaximumChannelError": 0.07966475228336466
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.9150516992142209,
+      "separation": 0.10839468780839123,
+      "minimumMaximumChannelError": 0.07932509735520565
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.9304088153094718,
+      "separation": 0.10657139824312578,
+      "minimumMaximumChannelError": 0.0785108941596687
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9253602867166795,
+      "separation": 0.10319228917276813,
+      "minimumMaximumChannelError": 0.0778117586565356
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.7071067811865475,
+      "separation": 0.10852172859457843,
+      "minimumMaximumChannelError": 0.07673645019531247
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.7071067811865475,
+      "separation": 0.10852172859457843,
+      "minimumMaximumChannelError": 0.07673645019531247
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.7071067811865475,
+      "separation": 0.10852172859457843,
+      "minimumMaximumChannelError": 0.07673645019531247
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.7071067811865475,
+      "separation": 0.10852172859457843,
+      "minimumMaximumChannelError": 0.07673645019531247
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.850746580964126,
+      "separation": 0.11072226256549644,
+      "minimumMaximumChannelError": 0.07662412393881096
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8624535577663816,
+      "separation": 0.10679086593857845,
+      "minimumMaximumChannelError": 0.07655461200578226
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8619941534446037,
+      "separation": 0.10633146161680063,
+      "minimumMaximumChannelError": 0.07622528122174584
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.79138201545865,
+      "separation": 0.11295238223174764,
+      "minimumMaximumChannelError": 0.07520141134941252
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.860499351228386,
+      "separation": 0.10483665940058284,
+      "minimumMaximumChannelError": 0.07515371014043488
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.9087543195192253,
+      "separation": 0.10209730811339557,
+      "minimumMaximumChannelError": 0.07471656655458873
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8597980980944456,
+      "separation": 0.10413540626664253,
+      "minimumMaximumChannelError": 0.07465100645772932
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.9084847902930763,
+      "separation": 0.10182777888724659,
+      "minimumMaximumChannelError": 0.074519320429925
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.9245731000377867,
+      "separation": 0.10073568297144064,
+      "minimumMaximumChannelError": 0.0742117366784466
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.9239599446307188,
+      "separation": 0.10012252756437279,
+      "minimumMaximumChannelError": 0.0737600265567692
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9198454052247516,
+      "separation": 0.09767740768084021,
+      "minimumMaximumChannelError": 0.0736532829495878
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9196071794684209,
+      "separation": 0.09743918192450951,
+      "minimumMaximumChannelError": 0.07347364971142656
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.9067330750140772,
+      "separation": 0.1000760636082475,
+      "minimumMaximumChannelError": 0.07323738505232757
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.7345657543447758,
+      "separation": 0.11026769806677461,
+      "minimumMaximumChannelError": 0.07321317941276505
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.9225358083044928,
+      "separation": 0.09869839123814672,
+      "minimumMaximumChannelError": 0.07271086873186954
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.9057864516654235,
+      "separation": 0.0991294402595938,
+      "minimumMaximumChannelError": 0.07254462980011998
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9179795711984647,
+      "separation": 0.0958115736545534,
+      "minimumMaximumChannelError": 0.07224635779936159
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.9215278965229698,
+      "separation": 0.09769047945662379,
+      "minimumMaximumChannelError": 0.0719683425334152
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9172889914547022,
+      "separation": 0.09512099391079087,
+      "minimumMaximumChannelError": 0.07172562873340613
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8552379299251645,
+      "separation": 0.09957523809736135,
+      "minimumMaximumChannelError": 0.07138198244699391
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.9358703332949833,
+      "separation": 0.10339612473847715,
+      "minimumMaximumChannelError": 0.07131006861819099
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.8425041981783224,
+      "separation": 0.10247987977969286,
+      "minimumMaximumChannelError": 0.07092007359250467
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.8420080148089627,
+      "separation": 0.10198369641033311,
+      "minimumMaximumChannelError": 0.07057669534941911
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.9022920933708349,
+      "separation": 0.09563508196500525,
+      "minimumMaximumChannelError": 0.06998739828336711
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.918786264994628,
+      "separation": 0.09494884792828195,
+      "minimumMaximumChannelError": 0.0699485891446551
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8804640799229893,
+      "separation": 0.10628774917715511,
+      "minimumMaximumChannelError": 0.06959971568345871
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.6968934414333525,
+      "separation": 0.09830838884138349,
+      "minimumMaximumChannelError": 0.06951452839726618
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.8397938633183709,
+      "separation": 0.09976954491974133,
+      "minimumMaximumChannelError": 0.06904441616451672
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.932382376714467,
+      "separation": 0.09990816815796089,
+      "minimumMaximumChannelError": 0.06890450048183194
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9134346475636969,
+      "separation": 0.09126665001978551,
+      "minimumMaximumChannelError": 0.06881927517704615
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.7816929212870876,
+      "separation": 0.10326328806018525,
+      "minimumMaximumChannelError": 0.06875060843581039
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.8385032924285282,
+      "separation": 0.09847897402989858,
+      "minimumMaximumChannelError": 0.06815129077560377
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.7487683837922698,
+      "separation": 0.1077533459828608,
+      "minimumMaximumChannelError": 0.06814914509481906
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.7806052777741403,
+      "separation": 0.10217564454723804,
+      "minimumMaximumChannelError": 0.06802647738516246
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8496214788211887,
+      "separation": 0.09395878699338556,
+      "minimumMaximumChannelError": 0.06735574638892493
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.876263951843896,
+      "separation": 0.10208762109806191,
+      "minimumMaximumChannelError": 0.0668493731237366
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.8976212535933569,
+      "separation": 0.09096424218752719,
+      "minimumMaximumChannelError": 0.06656919737730452
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.7782789246273308,
+      "separation": 0.09984929140042853,
+      "minimumMaximumChannelError": 0.06647763851624615
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.9140299839515647,
+      "separation": 0.0901925668852186,
+      "minimumMaximumChannelError": 0.06644464827757848
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.7239061917398046,
+      "separation": 0.09960813546180347,
+      "minimumMaximumChannelError": 0.06613567182766288
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8478334781750286,
+      "separation": 0.09217078634722553,
+      "minimumMaximumChannelError": 0.06607399167582433
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9097379215687023,
+      "separation": 0.08756992402479091,
+      "minimumMaximumChannelError": 0.0660317728040707
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.723138114728595,
+      "separation": 0.09884005845059385,
+      "minimumMaximumChannelError": 0.06562570053951232
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.7765804428098876,
+      "separation": 0.09815080958298528,
+      "minimumMaximumChannelError": 0.06534682367817585
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.7441711929972871,
+      "separation": 0.10315615518787802,
+      "minimumMaximumChannelError": 0.06524162867703952
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.8341256311134354,
+      "separation": 0.09410131271480582,
+      "minimumMaximumChannelError": 0.0651217784137932
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8464081801119028,
+      "separation": 0.09074548828409967,
+      "minimumMaximumChannelError": 0.06505224567483253
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8460521404467164,
+      "separation": 0.09038944861891329,
+      "minimumMaximumChannelError": 0.06479701337394746
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.5064805606230841,
+      "separation": 0.0907371373352831,
+      "minimumMaximumChannelError": 0.06462069206122406
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.9227999892780956,
+      "separation": 0.095513991890955,
+      "minimumMaximumChannelError": 0.06409100155094956
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.5055415273265985,
+      "separation": 0.08979810403879751,
+      "minimumMaximumChannelError": 0.06395193632052651
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.9249473935760237,
+      "separation": 0.09247318501951762,
+      "minimumMaximumChannelError": 0.06377675358494866
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.7203439018895458,
+      "separation": 0.09604584561154461,
+      "minimumMaximumChannelError": 0.06377045907270595
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.9097463420528201,
+      "separation": 0.08590892498647407,
+      "minimumMaximumChannelError": 0.06328889953753652
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.6877879934404948,
+      "separation": 0.08920294084852576,
+      "minimumMaximumChannelError": 0.06307600437577505
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.8927718118134291,
+      "separation": 0.08611480040759945,
+      "minimumMaximumChannelError": 0.06302029245318894
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.909370282238825,
+      "separation": 0.08553286517247893,
+      "minimumMaximumChannelError": 0.06301185717212698
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.7628095825446582,
+      "separation": 0.1003525104223818,
+      "minimumMaximumChannelError": 0.06296613747906432
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9055286182593213,
+      "separation": 0.08336062071540995,
+      "minimumMaximumChannelError": 0.0628577634294619
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.8923118529713061,
+      "separation": 0.08565484156547643,
+      "minimumMaximumChannelError": 0.0626836866594134
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.7186294040289044,
+      "separation": 0.09433134775090324,
+      "minimumMaximumChannelError": 0.0626321035826156
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.5035398691738545,
+      "separation": 0.08779644588605351,
+      "minimumMaximumChannelError": 0.06252640605917
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.7721236130005467,
+      "separation": 0.09369397977364435,
+      "minimumMaximumChannelError": 0.06237955654149065
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.9226623666011581,
+      "separation": 0.09018815804465197,
+      "minimumMaximumChannelError": 0.06220081995315899
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.5029246905260604,
+      "separation": 0.08718126723825936,
+      "minimumMaximumChannelError": 0.06208829140039634
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.6862069431251648,
+      "separation": 0.0876218905331958,
+      "minimumMaximumChannelError": 0.06195803297640811
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.927780416238492,
+      "separation": 0.0919404993317654,
+      "minimumMaximumChannelError": 0.06179009779614736
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9040388004416814,
+      "separation": 0.08187080289777005,
+      "minimumMaximumChannelError": 0.06173437189122093
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.9186130834642888,
+      "separation": 0.09132708607714823,
+      "minimumMaximumChannelError": 0.061281538961293305
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8673108927313489,
+      "separation": 0.09313456198551473,
+      "minimumMaximumChannelError": 0.06098669964015496
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.827843306683509,
+      "separation": 0.08781898828487944,
+      "minimumMaximumChannelError": 0.06077416489336188
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.9058108207053726,
+      "separation": 0.0819734036390265,
+      "minimumMaximumChannelError": 0.06038961037490697
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.8889110488554266,
+      "separation": 0.08225403744959692,
+      "minimumMaximumChannelError": 0.06019491970014141
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.6836981762546769,
+      "separation": 0.08511312366270785,
+      "minimumMaximumChannelError": 0.060184066909869924
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.9019771819322405,
+      "separation": 0.07980918438832918,
+      "minimumMaximumChannelError": 0.06017981618570807
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.7577593194913832,
+      "separation": 0.09530224736910675,
+      "minimumMaximumChannelError": 0.05979735220025546
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8390671894208631,
+      "separation": 0.08340449759306001,
+      "minimumMaximumChannelError": 0.059789747902655725
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.6828248709274923,
+      "separation": 0.0842398183355233,
+      "minimumMaximumChannelError": 0.05956654679097139
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8645593086054943,
+      "separation": 0.09038297785966021,
+      "minimumMaximumChannelError": 0.059184897698527666
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.7343717487508098,
+      "separation": 0.09335671094140074,
+      "minimumMaximumChannelError": 0.05904392092411282
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.7131406360755124,
+      "separation": 0.0888425797975112,
+      "minimumMaximumChannelError": 0.05898778924603284
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.9234987076404205,
+      "separation": 0.08765879073369398,
+      "minimumMaximumChannelError": 0.05891250636546834
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.9031002536926319,
+      "separation": 0.07926283662628586,
+      "minimumMaximumChannelError": 0.05839274214048182
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.9169366339917064,
+      "separation": 0.08446242543520044,
+      "minimumMaximumChannelError": 0.058251906139395335
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.9080378729170595,
+      "separation": 0.08860584840182095,
+      "minimumMaximumChannelError": 0.058145664330726085
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.8990737018675319,
+      "separation": 0.07690570432362054,
+      "minimumMaximumChannelError": 0.057990457931614885
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.8858784259911937,
+      "separation": 0.07922141458536403,
+      "minimumMaximumChannelError": 0.05797559411499706
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8360536212191773,
+      "separation": 0.08039092939137416,
+      "minimumMaximumChannelError": 0.057629426957550606
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.7313600412559922,
+      "separation": 0.09034500344658314,
+      "minimumMaximumChannelError": 0.057139151386096564
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.7641447458407532,
+      "separation": 0.0857151126138509,
+      "minimumMaximumChannelError": 0.05706738817876533
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.8214306485837107,
+      "separation": 0.08140633018508114,
+      "minimumMaximumChannelError": 0.056336355390277496
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.8211452489513843,
+      "separation": 0.08112093055275471,
+      "minimumMaximumChannelError": 0.056138847713927985
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.9096882091405104,
+      "separation": 0.08240221175336981,
+      "minimumMaximumChannelError": 0.05529284429150765
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.9032690289586462,
+      "separation": 0.08383700444340769,
+      "minimumMaximumChannelError": 0.05501621401731077
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8572655715644196,
+      "separation": 0.08308924081858549,
+      "minimumMaximumChannelError": 0.054408787297670465
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8313119071406257,
+      "separation": 0.07564921531282265,
+      "minimumMaximumChannelError": 0.05423025907614539
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.9102221496007304,
+      "separation": 0.07774794104422433,
+      "minimumMaximumChannelError": 0.05362107162923021
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.704867136528799,
+      "separation": 0.08056908025079768,
+      "minimumMaximumChannelError": 0.053494528596679684
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.9069452871731865,
+      "separation": 0.07965928978604586,
+      "minimumMaximumChannelError": 0.05345231168909487
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.6741095821930838,
+      "separation": 0.07552452960111478,
+      "minimumMaximumChannelError": 0.0534039070268724
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.4904164567365323,
+      "separation": 0.07467303344873127,
+      "minimumMaximumChannelError": 0.053180243960502194
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.7469940992889444,
+      "separation": 0.084537027166668,
+      "minimumMaximumChannelError": 0.05304271963146246
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.8163846626538133,
+      "separation": 0.07636034425518368,
+      "minimumMaximumChannelError": 0.052844336329907905
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.9143717502097531,
+      "separation": 0.0785318333030266,
+      "minimumMaximumChannelError": 0.05277858718598695
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.757154516221542,
+      "separation": 0.07872488299463964,
+      "minimumMaximumChannelError": 0.052413434692927294
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.9077710086698586,
+      "separation": 0.07529680011335249,
+      "minimumMaximumChannelError": 0.05193057279849132
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.7563764398477115,
+      "separation": 0.07794680662080922,
+      "minimumMaximumChannelError": 0.05189540718174449
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.9070891550402925,
+      "separation": 0.07461494648378642,
+      "minimumMaximumChannelError": 0.05146031311288992
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.7436855755041695,
+      "separation": 0.08122850338189302,
+      "minimumMaximumChannelError": 0.050966787872425645
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.7215774615838931,
+      "separation": 0.08056242377448408,
+      "minimumMaximumChannelError": 0.05095210971797475
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8266666163529001,
+      "separation": 0.07100392452509696,
+      "minimumMaximumChannelError": 0.0509002136571588
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.9115667211277516,
+      "separation": 0.07572680422102507,
+      "minimumMaximumChannelError": 0.050893422078578957
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.82612376736187,
+      "separation": 0.07046107553406689,
+      "minimumMaximumChannelError": 0.05051106432757157
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.9053016701526687,
+      "separation": 0.0728274615961626,
+      "minimumMaximumChannelError": 0.05022752348646208
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.8124547453616094,
+      "separation": 0.07243042696297985,
+      "minimumMaximumChannelError": 0.05012468029425767
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.904532564848194,
+      "separation": 0.07205835629168789,
+      "minimumMaximumChannelError": 0.04969708820974907
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.6685834082731787,
+      "separation": 0.06999835568120971,
+      "minimumMaximumChannelError": 0.04949631197409129
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.9007887404744066,
+      "separation": 0.07350274308726601,
+      "minimumMaximumChannelError": 0.049321197114065164
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8487627181244303,
+      "separation": 0.07458638737859613,
+      "minimumMaximumChannelError": 0.048840919067297074
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.8931036861276236,
+      "separation": 0.07367166161238503,
+      "minimumMaximumChannelError": 0.048345428479781294
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.7504701310977925,
+      "separation": 0.07204049787089017,
+      "minimumMaximumChannelError": 0.04796310628570854
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.6965162328762472,
+      "separation": 0.07221817659824603,
+      "minimumMaximumChannelError": 0.047949874830508415
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.8225231603623354,
+      "separation": 0.06686046853453231,
+      "minimumMaximumChannelError": 0.047929915936161284
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.6964261676639902,
+      "separation": 0.07212811138598907,
+      "minimumMaximumChannelError": 0.047890075264004135
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.845872857214947,
+      "separation": 0.07169652646911284,
+      "minimumMaximumChannelError": 0.04694857023855728
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.905562079785543,
+      "separation": 0.0697221628788165,
+      "minimumMaximumChannelError": 0.04685790586469576
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8448920381791707,
+      "separation": 0.07071570743333655,
+      "minimumMaximumChannelError": 0.04630630688689693
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.8899795253669164,
+      "separation": 0.07054750085167782,
+      "minimumMaximumChannelError": 0.04629526580786027
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.7341443847074532,
+      "separation": 0.0716873125851768,
+      "minimumMaximumChannelError": 0.044980172003112766
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.7459888569260821,
+      "separation": 0.06755922369917977,
+      "minimumMaximumChannelError": 0.04497956458700525
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8427054738703297,
+      "separation": 0.06852914312449554,
+      "minimumMaximumChannelError": 0.04487449319814076
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.8970046656125747,
+      "separation": 0.06453045705606864,
+      "minimumMaximumChannelError": 0.04450525909235596
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.47817174662087697,
+      "separation": 0.062428323333075963,
+      "minimumMaximumChannelError": 0.044459871409636684
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.8934785032102672,
+      "separation": 0.06619250582312664,
+      "minimumMaximumChannelError": 0.044415942726114765
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.6612839518649535,
+      "separation": 0.06269889927298444,
+      "minimumMaximumChannelError": 0.0443348168488596
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8414389215120193,
+      "separation": 0.06726259076618513,
+      "minimumMaximumChannelError": 0.04404512495279678
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.7103881025120796,
+      "separation": 0.06937306470267057,
+      "minimumMaximumChannelError": 0.04387534334986272
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.4771339677577112,
+      "separation": 0.06139054446991021,
+      "minimumMaximumChannelError": 0.043720791576244096
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.6899968026836881,
+      "separation": 0.06569874640568696,
+      "minimumMaximumChannelError": 0.04362124350215891
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.8951337442703187,
+      "separation": 0.06265953571381255,
+      "minimumMaximumChannelError": 0.043214925149638365
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.8904252543201762,
+      "separation": 0.06313925693303557,
+      "minimumMaximumChannelError": 0.04236717714239098
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.7075035857703623,
+      "separation": 0.06648854796095327,
+      "minimumMaximumChannelError": 0.042051016242739804
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.898391120712178,
+      "separation": 0.06255120380545143,
+      "minimumMaximumChannelError": 0.042038546978722106
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.8898937035329972,
+      "separation": 0.06260770614585665,
+      "minimumMaximumChannelError": 0.04201050037021307
+    },
+    {
+      "sample": 441,
+      "region": "eye-left",
+      "targetRgb": [
+        0.014443843596092545,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.883408396187697,
+      "separation": 0.0639763716724584,
+      "minimumMaximumChannelError": 0.04198310494692007
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.4735966679049424,
+      "separation": 0.05785324461714142,
+      "minimumMaximumChannelError": 0.04120161617324071
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.7057095255057628,
+      "separation": 0.06469448769635378,
+      "minimumMaximumChannelError": 0.04091635381378388
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.8878092963289154,
+      "separation": 0.06052329894177477,
+      "minimumMaximumChannelError": 0.040611838847384674
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.6560028654801792,
+      "separation": 0.05741781288821013,
+      "minimumMaximumChannelError": 0.04060052485415373
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.8874975297644299,
+      "separation": 0.06021153237728927,
+      "minimumMaximumChannelError": 0.04040263984970498
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.6849490749317992,
+      "separation": 0.06065101865379807,
+      "minimumMaximumChannelError": 0.04026976157222835
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.8908469231620613,
+      "separation": 0.058372714605555154,
+      "minimumMaximumChannelError": 0.040258397444591934
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.47217771227241834,
+      "separation": 0.05643428898461733,
+      "minimumMaximumChannelError": 0.04019107189478215
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.8952236431670719,
+      "separation": 0.05938372626034538,
+      "minimumMaximumChannelError": 0.03990979252663939
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.6546298637288921,
+      "separation": 0.056044811136923056,
+      "minimumMaximumChannelError": 0.03962966600523764
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.8947967068978548,
+      "separation": 0.0589567899911283,
+      "minimumMaximumChannelError": 0.039622863110121295
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.7031623989385792,
+      "separation": 0.06214736112917019,
+      "minimumMaximumChannelError": 0.03930541081782835
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.8926900116394948,
+      "separation": 0.05685009473276825,
+      "minimumMaximumChannelError": 0.038207024529877995
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.8926197643496812,
+      "separation": 0.05677984744295461,
+      "minimumMaximumChannelError": 0.03815981370397377
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.7231136184905435,
+      "separation": 0.060656546368267006,
+      "minimumMaximumChannelError": 0.03805892270710661
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8321581275008485,
+      "separation": 0.05798179675501436,
+      "minimumMaximumChannelError": 0.03796784295656586
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.8868392122413645,
+      "separation": 0.054365003684858415,
+      "minimumMaximumChannelError": 0.03749436599293342
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.7002407063799104,
+      "separation": 0.05922566857050138,
+      "minimumMaximumChannelError": 0.03745757167847722
+    },
+    {
+      "sample": 451,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0295568344378088,
+        0.10702310297826761,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.8755436607709849,
+      "separation": 0.05611163625574633,
+      "minimumMaximumChannelError": 0.03682204307754673
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8294138169364248,
+      "separation": 0.05523748619059066,
+      "minimumMaximumChannelError": 0.036170803913875754
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.7197582058205688,
+      "separation": 0.05730113369829237,
+      "minimumMaximumChannelError": 0.03595357053816381
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.884199576940497,
+      "separation": 0.05172536838399089,
+      "minimumMaximumChannelError": 0.035673866676271745
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.6489241210006688,
+      "separation": 0.05033906840869973,
+      "minimumMaximumChannelError": 0.03559509663040509
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.7182700634997299,
+      "separation": 0.055812991377453436,
+      "minimumMaximumChannelError": 0.03501983630901532
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.878848832868389,
+      "separation": 0.051562835481248404,
+      "minimumMaximumChannelError": 0.03459926345213302
+    },
+    {
+      "sample": 469,
+      "region": "eye-left",
+      "targetRgb": [
+        0.027320891639074894,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.8719977548747054,
+      "separation": 0.05256573035946688,
+      "minimumMaximumChannelError": 0.03449511931673129
+    },
+    {
+      "sample": 482,
+      "region": "eye-left",
+      "targetRgb": [
+        0.033104766570885055,
+        0.0953074666309647,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.8715689638179229,
+      "separation": 0.05213693930268437,
+      "minimumMaximumChannelError": 0.03421373449501358
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.8774856419197465,
+      "separation": 0.05019964453260595,
+      "minimumMaximumChannelError": 0.033684546440792634
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.46261246678865336,
+      "separation": 0.04686904350085236,
+      "minimumMaximumChannelError": 0.03337894622001682
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.7155749851554417,
+      "separation": 0.053117913033165265,
+      "minimumMaximumChannelError": 0.0333288106153975
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8244579863394482,
+      "separation": 0.05028165559361408,
+      "minimumMaximumChannelError": 0.032925609588139754
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.8692538790111821,
+      "separation": 0.04982185449594356,
+      "minimumMaximumChannelError": 0.03269451035238748
+    },
+    {
+      "sample": 471,
+      "region": "eye-left",
+      "targetRgb": [
+        0.03433980680868217,
+        0.08650046203654976,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.8692325630283736,
+      "separation": 0.04980053851313504,
+      "minimumMaximumChannelError": 0.0326805222014514
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.8839328559376002,
+      "separation": 0.04809293903087364,
+      "minimumMaximumChannelError": 0.0323216365760494
+    },
+    {
+      "sample": 431,
+      "region": "eye-left",
+      "targetRgb": [
+        0.046665086336880095,
+        0.11443537382697373,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.7133940321826282,
+      "separation": 0.050936960060351755,
+      "minimumMaximumChannelError": 0.031960372654617576
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.8828976224318005,
+      "separation": 0.047057705525073934,
+      "minimumMaximumChannelError": 0.031625891175163685
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.6891089774435306,
+      "separation": 0.04809393963412156,
+      "minimumMaximumChannelError": 0.030417253779094225
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.8719692699325816,
+      "separation": 0.04468327254544102,
+      "minimumMaximumChannelError": 0.02998299655699511
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8193720779490117,
+      "separation": 0.04519574720317754,
+      "minimumMaximumChannelError": 0.02959523726671155
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.8771057172015045,
+      "separation": 0.041265800294778,
+      "minimumMaximumChannelError": 0.027733347701861547
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.4546519727850415,
+      "separation": 0.038908549497240486,
+      "minimumMaximumChannelError": 0.027709683922686284
+    },
+    {
+      "sample": 494,
+      "region": "eye-left",
+      "targetRgb": [
+        0.11443537382697373,
+        0.11443537382697373,
+        0.9646862478944651
+      ],
+      "unitPlaneNormal": [
+        -0.36561802673538196,
+        0.06317230800509659,
+        0.9286187150964784
+      ],
+      "maximumLutVertexProjection": 0.8238374170663461,
+      "targetProjection": 0.8612152151057331,
+      "separation": 0.03737779803938701,
+      "minimumMaximumChannelError": 0.02753613440537809
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.8159706205476038,
+      "separation": 0.0417942898017698,
+      "minimumMaximumChannelError": 0.027367883033696534
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.6838888690193554,
+      "separation": 0.04287383120994637,
+      "minimumMaximumChannelError": 0.027115769976759328
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.867625303238404,
+      "separation": 0.04033930585126344,
+      "minimumMaximumChannelError": 0.02706814428643292
+    },
+    {
+      "sample": 494,
+      "region": "eye-left",
+      "targetRgb": [
+        0.11443537382697373,
+        0.11443537382697373,
+        0.9646862478944651
+      ],
+      "unitPlaneNormal": [
+        -0.3999920019680417,
+        0.05139285742091383,
+        0.9150765938257365
+      ],
+      "maximumLutVertexProjection": 0.8066570114058297,
+      "targetProjection": 0.8428697324117833,
+      "separation": 0.03621272100595363,
+      "minimumMaximumChannelError": 0.026501092234077137
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.8596417760257418,
+      "separation": 0.04020975151050321,
+      "minimumMaximumChannelError": 0.026386776452372154
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.8586324711859581,
+      "separation": 0.039200446670719535,
+      "minimumMaximumChannelError": 0.025724442063841738
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4262401941575611,
+        0.17690275923311904,
+        0.8871441318411759
+      ],
+      "maximumLutVertexProjection": 0.8272859973871406,
+      "targetProjection": 0.8648570245789399,
+      "separation": 0.03757102719179928,
+      "minimumMaximumChannelError": 0.02521059704812113
+    },
+    {
+      "sample": 494,
+      "region": "eye-left",
+      "targetRgb": [
+        0.11443537382697373,
+        0.11443537382697373,
+        0.9646862478944651
+      ],
+      "unitPlaneNormal": [
+        -0.3721543668690172,
+        0.02622391342384174,
+        0.9278003198884229
+      ],
+      "maximumLutVertexProjection": 0.8221679975439113,
+      "targetProjection": 0.855449528630314,
+      "separation": 0.03328153108640264,
+      "minimumMaximumChannelError": 0.02509581370250826
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.8728531801399212,
+      "separation": 0.03701326323319465,
+      "minimumMaximumChannelError": 0.02487536147352059
+    },
+    {
+      "sample": 491,
+      "region": "eye-left",
+      "targetRgb": [
+        0.05448027644244237,
+        0.08437621154414882,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.7018174914527903,
+      "separation": 0.03936041933051382,
+      "minimumMaximumChannelError": 0.024696677386219106
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.6793949238070964,
+      "separation": 0.03837988599768738,
+      "minimumMaximumChannelError": 0.024273551746551252
+    },
+    {
+      "sample": 498,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.20155625379439707,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6473751919608794,
+        0.3476186185898147,
+        0.6782821366093343
+      ],
+      "maximumLutVertexProjection": 0.7093922111850969,
+      "targetProjection": 0.7483468431214807,
+      "separation": 0.03895463193638382,
+      "minimumMaximumChannelError": 0.02328045891205193
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.4157232319957364,
+        0.18090831246626818,
+        0.8913172144975247
+      ],
+      "maximumLutVertexProjection": 0.8358399169067265,
+      "targetProjection": 0.8701849600979116,
+      "separation": 0.03434504319118503,
+      "minimumMaximumChannelError": 0.023082141091472348
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.6975678285422292,
+      "separation": 0.03511075641995276,
+      "minimumMaximumChannelError": 0.022030228306472038
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.8521212873846279,
+      "separation": 0.032689262869389335,
+      "minimumMaximumChannelError": 0.021451619055693368
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.4451562631414473,
+      "separation": 0.02941283985364629,
+      "minimumMaximumChannelError": 0.020947079912884768
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.6726559386669335,
+      "separation": 0.03164090085752447,
+      "minimumMaximumChannelError": 0.02001144673329402
+    },
+    {
+      "sample": 494,
+      "region": "eye-left",
+      "targetRgb": [
+        0.11443537382697373,
+        0.11443537382697373,
+        0.9646862478944651
+      ],
+      "unitPlaneNormal": [
+        -0.5215400948145713,
+        0.07340156124504317,
+        0.8500636095655419
+      ],
+      "maximumLutVertexProjection": 0.7400243183986296,
+      "targetProjection": 0.7687617733681075,
+      "separation": 0.028737454969477882,
+      "minimumMaximumChannelError": 0.019887439619152614
+    },
+    {
+      "sample": 446,
+      "region": "eye-left",
+      "targetRgb": [
+        0.06480326669290577,
+        0.07036009569659588,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.6920076482134969,
+      "separation": 0.02955057609122047,
+      "minimumMaximumChannelError": 0.018541495662776634
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.8474609439913839,
+      "separation": 0.028028919476145386,
+      "minimumMaximumChannelError": 0.01839336988256192
+    },
+    {
+      "sample": 495,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.17788841598362912,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6473751919608794,
+        0.3476186185898147,
+        0.6782821366093343
+      ],
+      "maximumLutVertexProjection": 0.7093922111850969,
+      "targetProjection": 0.7401194620366938,
+      "separation": 0.030727250851596888,
+      "minimumMaximumChannelError": 0.01836352868380663
+    },
+    {
+      "sample": 492,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07227185068231748,
+        0.11953842798834562,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.4406397140078708,
+      "separation": 0.02489629072006977,
+      "minimumMaximumChannelError": 0.017730507963278574
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6772836888614268,
+        0.19423788652511134,
+        0.7096185230393272
+      ],
+      "maximumLutVertexProjection": 0.641015037809409,
+      "targetProjection": 0.6679277191567335,
+      "separation": 0.026912681347324496,
+      "minimumMaximumChannelError": 0.01702106054619571
+    },
+    {
+      "sample": 494,
+      "region": "eye-left",
+      "targetRgb": [
+        0.11443537382697373,
+        0.11443537382697373,
+        0.9646862478944651
+      ],
+      "unitPlaneNormal": [
+        -0.6060716048084483,
+        0.10786402894816619,
+        0.7880625362900975
+      ],
+      "maximumLutVertexProjection": 0.6784296332269023,
+      "targetProjection": 0.7032205210528881,
+      "separation": 0.02479088782598582,
+      "minimumMaximumChannelError": 0.016505271657697707
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.45494325215465153,
+        0.20149047819837662,
+        0.867426206956153
+      ],
+      "maximumLutVertexProjection": 0.8194320245152386,
+      "targetProjection": 0.8445543343326881,
+      "separation": 0.025122309817449562,
+      "minimumMaximumChannelError": 0.016485970398178666
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.43693236333182806,
+      "separation": 0.02118894004402705,
+      "minimumMaximumChannelError": 0.01509022666903534
+    },
+    {
+      "sample": 464,
+      "region": "eye-left",
+      "targetRgb": [
+        0.07421356838014963,
+        0.06847816984440017,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.6853899046107091,
+      "separation": 0.022932832488432697,
+      "minimumMaximumChannelError": 0.014389195418961335
+    },
+    {
+      "sample": 494,
+      "region": "eye-left",
+      "targetRgb": [
+        0.11443537382697373,
+        0.11443537382697373,
+        0.9646862478944651
+      ],
+      "unitPlaneNormal": [
+        -0.499564246401088,
+        -0.029628947922793452,
+        0.8657699978416331
+      ],
+      "maximumLutVertexProjection": 0.7556626918278031,
+      "targetProjection": 0.7746379897383004,
+      "separation": 0.018975297910497346,
+      "minimumMaximumChannelError": 0.013602723008798856
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6605714561529437,
+        0.21338083747461645,
+        0.7198013403117635
+      ],
+      "maximumLutVertexProjection": 0.6624570721222764,
+      "targetProjection": 0.6808691606712488,
+      "separation": 0.01841208854897236,
+      "minimumMaximumChannelError": 0.01155265666969035
+    },
+    {
+      "sample": 494,
+      "region": "eye-left",
+      "targetRgb": [
+        0.11443537382697373,
+        0.11443537382697373,
+        0.9646862478944651
+      ],
+      "unitPlaneNormal": [
+        -0.6727316664967576,
+        0.1003345886566137,
+        0.7330518912134416
+      ],
+      "maximumLutVertexProjection": 0.6242980562780012,
+      "targetProjection": 0.6416626048665323,
+      "separation": 0.017364548588531203,
+      "minimumMaximumChannelError": 0.011529340264852032
+    },
+    {
+      "sample": 454,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0822827071298148,
+        0.07227185068231748,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.8659906697488693,
+        0.039675499891181715,
+        0.4984837154975975
+      ],
+      "maximumLutVertexProjection": 0.415743423287801,
+      "targetProjection": 0.43009508064538093,
+      "separation": 0.014351657357579928,
+      "minimumMaximumChannelError": 0.010220887035982658
+    },
+    {
+      "sample": 494,
+      "region": "eye-left",
+      "targetRgb": [
+        0.11443537382697373,
+        0.11443537382697373,
+        0.9646862478944651
+      ],
+      "unitPlaneNormal": [
+        -0.3964133626454217,
+        0.14737115440808937,
+        0.9061667554951331
+      ],
+      "maximumLutVertexProjection": 0.8324742085565061,
+      "targetProjection": 0.8456673691269669,
+      "separation": 0.013193160570460938,
+      "minimumMaximumChannelError": 0.009099037202312827
+    },
+    {
+      "sample": 481,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.12743768043564743,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6473751919608794,
+        0.3476186185898147,
+        0.6782821366093343
+      ],
+      "maximumLutVertexProjection": 0.7093922111850969,
+      "targetProjection": 0.7225818470386643,
+      "separation": 0.013189635853567472,
+      "minimumMaximumChannelError": 0.007882522829515126
+    },
+    {
+      "sample": 436,
+      "region": "eye-left",
+      "targetRgb": [
+        0.0,
+        0.1119324278369056,
+        1.0
+      ],
+      "unitPlaneNormal": [
+        -0.6473751919608794,
+        0.3476186185898147,
+        0.6782821366093343
+      ],
+      "maximumLutVertexProjection": 0.7093922111850969,
+      "targetProjection": 0.7171919325494036,
+      "separation": 0.007799721364306733,
+      "minimumMaximumChannelError": 0.004661347925035812
+    },
+    {
+      "sample": 494,
+      "region": "eye-left",
+      "targetRgb": [
+        0.11443537382697373,
+        0.11443537382697373,
+        0.9646862478944651
+      ],
+      "unitPlaneNormal": [
+        -0.5049720313399024,
+        0.1774614188534921,
+        0.844695621145841
+      ],
+      "maximumLutVertexProjection": 0.7741763307458341,
+      "targetProjection": 0.7773874500038824,
+      "separation": 0.0032111192580482895,
+      "minimumMaximumChannelError": 0.002102716344226397
+    },
+    {
+      "sample": 494,
+      "region": "eye-left",
+      "targetRgb": [
+        0.11443537382697373,
+        0.11443537382697373,
+        0.9646862478944651
+      ],
+      "unitPlaneNormal": [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      "maximumLutVertexProjection": 0.598585052591969,
+      "targetProjection": 0.6012181587629124,
+      "separation": 0.0026331061709433667,
+      "minimumMaximumChannelError": 0.0018618872290581995
+    }
+  ]
+}

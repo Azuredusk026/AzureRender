@@ -1,0 +1,2927 @@
+[
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 57.2082,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 4.595,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:ce63e5b07596c3ff\",\"documentId\":\"17913122563387860-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-1",
+      "commandId": "asset.generate",
+      "parameters": {
+        "generator": "azure.procedural",
+        "output": "assets:/parameterized.gltf",
+        "parameters": {
+          "source": "{\n  \"schemaVersion\": 1,\n  \"coordinates\": \"scad\",\n  \"parameters\": {\n    \"width\": {\"default\": 3, \"minimum\": 1, \"maximum\": 12},\n    \"depth\": {\"default\": 2, \"minimum\": 1, \"maximum\": 8},\n    \"height\": {\"default\": 4, \"minimum\": 1, \"maximum\": 20},\n    \"wall\": {\"default\": 0.25, \"minimum\": 0.1, \"maximum\": 0.5}\n  },\n  \"modules\": {\n    \"shell\": {\n      \"op\": \"difference\",\n      \"children\": [\n        {\"op\": \"cube\", \"size\": [{\"parameter\": \"width\"}, {\"parameter\": \"depth\"}, {\"parameter\": \"height\"}]},\n        {\"op\": \"cube\", \"size\": [0.5, 0.5, 24], \"translate\": [{\"parameter\": \"wall\"}, {\"parameter\": \"wall\"}, 0.25]}\n      ]\n    }\n  },\n  \"root\": {\"op\": \"module\", \"name\": \"shell\"},\n  \"material\": {\"color\": [0.5, 0.7, 0.9, 1], \"roughness\": 0.6}\n}\n",
+          "values": {
+            "width": 1.2,
+            "depth": 1,
+            "height": 1.5,
+            "wall": 0.15
+          },
+          "seed": 7
+        },
+        "license": "CC0-1.0 public procedural fixture"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:ce63e5b07596c3ff",
+        "documentId": "17913122563387860-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 9.4862,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": "ed409f3e-d9ec-4774-89ab-83d304dff705",
+        "version": {
+          "contentHash": "fnv1a64:ce63e5b07596c3ff",
+          "documentId": "17913122563387860-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 17.9337,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:ce63e5b07596c3ff\",\"documentId\":\"17913122563387860-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-3",
+      "commandId": "preview.clear",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:ce63e5b07596c3ff",
+        "documentId": "17913122563387860-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 1.9488,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:ce63e5b07596c3ff",
+          "documentId": "17913122563387860-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.0731,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:ce63e5b07596c3ff\",\"documentId\":\"17913122563387860-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-5",
+      "commandId": "preview.asset",
+      "parameters": {
+        "asset": "ed409f3e-d9ec-4774-89ab-83d304dff705"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:ce63e5b07596c3ff",
+        "documentId": "17913122563387860-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 2.9027,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 4294967296,
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g10\\installed-procedural\\run-1791312248030214800\\inspector\\Procedural Project with spaces\\assets\\parameterized.gltf",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 827932255716081,
+            "completedSubmission": 42,
+            "extent": [
+              128,
+              128
+            ],
+            "lastUseSubmission": 0,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 0,
+            "renderer": "character",
+            "requested": true,
+            "resolvedImage": 843325418504959,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": false
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:ce63e5b07596c3ff",
+          "documentId": "17913122563387860-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 16
+    },
+    "response": {
+      "elapsedMs": 38.9433,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.3421,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:ce63e5b07596c3ff\",\"documentId\":\"17913122563387860-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-8",
+      "commandId": "preview.capture",
+      "parameters": {
+        "handle": 4294967296,
+        "label": "parameterized-model"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:ce63e5b07596c3ff",
+        "documentId": "17913122563387860-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 2.4998,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g10\\installed-procedural\\run-1791312248030214800\\inspector\\captures\\parameterized-model.png",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 827932255716081,
+            "completedSubmission": 81,
+            "extent": [
+              128,
+              128
+            ],
+            "lastUseSubmission": 45,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 1,
+            "renderer": "character",
+            "requested": false,
+            "resolvedImage": 843325418504959,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": false
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:ce63e5b07596c3ff",
+          "documentId": "17913122563387860-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.7719,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:ce63e5b07596c3ff\",\"documentId\":\"17913122563387860-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-10",
+      "commandId": "asset.generate",
+      "parameters": {
+        "generator": "azure.procedural",
+        "output": "assets:/parameterized.gltf",
+        "parameters": {
+          "source": "{broken"
+        },
+        "license": "CC0-1.0"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:ce63e5b07596c3ff",
+        "documentId": "17913122563387860-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 7.2947,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Process failed: [json.exception.parse_error.101] parse error at line 1, column 2: syntax error while parsing object key - invalid literal; last read: '{b'; expected string literal\\r\\n\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 15.1844,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 3.1481,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:ce63e5b07596c3ff\",\"documentId\":\"17913122563387860-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-13",
+      "commandId": "preview.clear",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:ce63e5b07596c3ff",
+        "documentId": "17913122563387860-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 0.2757,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:ce63e5b07596c3ff",
+          "documentId": "17913122563387860-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.069,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:ce63e5b07596c3ff\",\"documentId\":\"17913122563387860-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-15",
+      "commandId": "preview.asset",
+      "parameters": {
+        "asset": "ed409f3e-d9ec-4774-89ab-83d304dff705"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:ce63e5b07596c3ff",
+        "documentId": "17913122563387860-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 2.1221,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 8589934592,
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g10\\installed-procedural\\run-1791312248030214800\\inspector\\Procedural Project with spaces\\assets\\parameterized.gltf",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 1053332139410366,
+            "completedSubmission": 136,
+            "extent": [
+              128,
+              128
+            ],
+            "lastUseSubmission": 0,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 0,
+            "renderer": "character",
+            "requested": true,
+            "resolvedImage": 1068725302199244,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": false
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:ce63e5b07596c3ff",
+          "documentId": "17913122563387860-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 16
+    },
+    "response": {
+      "elapsedMs": 45.3943,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.3439,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:ce63e5b07596c3ff\",\"documentId\":\"17913122563387860-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-18",
+      "commandId": "preview.capture",
+      "parameters": {
+        "handle": 8589934592,
+        "label": "valid-after-failure"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:ce63e5b07596c3ff",
+        "documentId": "17913122563387860-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 0.667,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g10\\installed-procedural\\run-1791312248030214800\\inspector\\captures\\valid-after-failure.png",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 1053332139410366,
+            "completedSubmission": 169,
+            "extent": [
+              128,
+              128
+            ],
+            "lastUseSubmission": 139,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 1,
+            "renderer": "character",
+            "requested": false,
+            "resolvedImage": 1068725302199244,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": false
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:ce63e5b07596c3ff",
+          "documentId": "17913122563387860-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.4179,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:ce63e5b07596c3ff\",\"documentId\":\"17913122563387860-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-20",
+      "commandId": "asset.import",
+      "parameters": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g10\\installed-procedural\\run-1791312248030214800\\inspector\\direct-model.gltf"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:ce63e5b07596c3ff",
+        "documentId": "17913122563387860-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 2.1389,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "add",
+            "path": "/resourceReferences/D:~1Assigment~12609~1FYP~1Project~1AzureRender~1build~1evolution~1g10~1installed-procedural~1run-1791312248030214800~1inspector~1Procedural Project with spaces~1assets~1imports~1asset-25554947795100-1~1direct-model.gltf",
+            "value": "92b97eda-5319-47a5-b981-864c20287801"
+          },
+          {
+            "op": "add",
+            "path": "/resources/-",
+            "value": {
+              "id": "92b97eda-5319-47a5-b981-864c20287801",
+              "path": "D:/Assigment/2609/FYP/Project/AzureRender/build/evolution/g10/installed-procedural/run-1791312248030214800/inspector/Procedural Project with spaces/assets/imports/asset-25554947795100-1/direct-model.gltf",
+              "type": "gltf"
+            }
+          }
+        ],
+        "value": "92b97eda-5319-47a5-b981-864c20287801",
+        "version": {
+          "contentHash": "fnv1a64:cb35e26871bff3d4",
+          "documentId": "17913122563387860-1",
+          "revision": 3
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 49.4667,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cb35e26871bff3d4\",\"documentId\":\"17913122563387860-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-22",
+      "commandId": "preview.clear",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:cb35e26871bff3d4",
+        "documentId": "17913122563387860-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 1.1001,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:cb35e26871bff3d4",
+          "documentId": "17913122563387860-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.9181,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cb35e26871bff3d4\",\"documentId\":\"17913122563387860-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-24",
+      "commandId": "preview.asset",
+      "parameters": {
+        "asset": "92b97eda-5319-47a5-b981-864c20287801"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:cb35e26871bff3d4",
+        "documentId": "17913122563387860-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 1.7429,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 12884901888,
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g10\\installed-procedural\\run-1791312248030214800\\inspector\\Procedural Project with spaces\\assets\\imports\\asset-25554947795100-1\\direct-model.gltf",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 1571202116093333,
+            "completedSubmission": 195,
+            "extent": [
+              128,
+              128
+            ],
+            "lastUseSubmission": 0,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 0,
+            "renderer": "character",
+            "requested": true,
+            "resolvedImage": 1586595278882211,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": false
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:cb35e26871bff3d4",
+          "documentId": "17913122563387860-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 16
+    },
+    "response": {
+      "elapsedMs": 32.3982,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.1689,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cb35e26871bff3d4\",\"documentId\":\"17913122563387860-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-27",
+      "commandId": "preview.capture",
+      "parameters": {
+        "handle": 12884901888,
+        "label": "direct-import"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:cb35e26871bff3d4",
+        "documentId": "17913122563387860-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 2.5381,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g10\\installed-procedural\\run-1791312248030214800\\inspector\\captures\\direct-import.png",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 1571202116093333,
+            "completedSubmission": 232,
+            "extent": [
+              128,
+              128
+            ],
+            "lastUseSubmission": 198,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 1,
+            "renderer": "character",
+            "requested": false,
+            "resolvedImage": 1586595278882211,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": false
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:cb35e26871bff3d4",
+          "documentId": "17913122563387860-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.5308,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cb35e26871bff3d4\",\"documentId\":\"17913122563387860-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-29",
+      "commandId": "asset.generate",
+      "parameters": {
+        "generator": "azure.rig-text",
+        "output": "assets:/articulated.gltf",
+        "parameters": {
+          "source": "{\n  \"schemaVersion\": 1,\n  \"coordinates\": \"scad\",\n  \"parameters\": {\"reach\":{\"default\":1,\"minimum\":0.5,\"maximum\":4}},\n  \"bones\": [\n    {\"name\":\"bone_root\",\"translation\":[0,0,0],\"geometry\":{\"op\":\"cube\",\"size\":[0.8,0.8,0.25],\"center\":true},\"material\":{\"color\":[0.2,0.3,0.4,1]}},\n    {\"name\":\"bone_arm\",\"parent\":\"bone_root\",\"translation\":[0,0,0.25],\"geometry\":{\"op\":\"cube\",\"size\":[0.2,0.2,{\"parameter\":\"reach\"}],\"translate\":[-0.1,-0.1,0]},\"material\":{\"color\":[0.9,0.5,0.2,1]}}\n  ],\n  \"animations\": [\n    {\"name\":\"anim_sweep\",\"loop\":true,\"channels\":[{\"bone\":\"bone_arm\",\"path\":\"rot\",\"keys\":[[0,[0,-30,0]],[0.5,[0,30,0]],[1,[0,-30,0]]]}]},\n    {\"name\":\"anim_extend\",\"loop\":false,\"channels\":[{\"bone\":\"bone_arm\",\"path\":\"scale\",\"keys\":[[0,[1,1,1]],[1,[1,1,1.5]]]},{\"bone\":\"bone_root\",\"path\":\"pos\",\"keys\":[[0,[0,0,0]],[1,[0,0,0.2]]]}]}\n  ]\n}\n",
+          "scale": 1.2
+        },
+        "license": "CC0-1.0 public procedural fixture"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:cb35e26871bff3d4",
+        "documentId": "17913122563387860-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 1.7506,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": "ec7c8396-b516-4305-a473-9116c215e109",
+        "version": {
+          "contentHash": "fnv1a64:cb35e26871bff3d4",
+          "documentId": "17913122563387860-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 22.8323,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cb35e26871bff3d4\",\"documentId\":\"17913122563387860-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-31",
+      "commandId": "asset.generate",
+      "parameters": {
+        "generator": "azure.rig-animation-graph",
+        "output": "assets:/articulated-graph.json",
+        "parameters": {
+          "source": "{\n  \"schemaVersion\": 1,\n  \"coordinates\": \"scad\",\n  \"parameters\": {\"reach\":{\"default\":1,\"minimum\":0.5,\"maximum\":4}},\n  \"bones\": [\n    {\"name\":\"bone_root\",\"translation\":[0,0,0],\"geometry\":{\"op\":\"cube\",\"size\":[0.8,0.8,0.25],\"center\":true},\"material\":{\"color\":[0.2,0.3,0.4,1]}},\n    {\"name\":\"bone_arm\",\"parent\":\"bone_root\",\"translation\":[0,0,0.25],\"geometry\":{\"op\":\"cube\",\"size\":[0.2,0.2,{\"parameter\":\"reach\"}],\"translate\":[-0.1,-0.1,0]},\"material\":{\"color\":[0.9,0.5,0.2,1]}}\n  ],\n  \"animations\": [\n    {\"name\":\"anim_sweep\",\"loop\":true,\"channels\":[{\"bone\":\"bone_arm\",\"path\":\"rot\",\"keys\":[[0,[0,-30,0]],[0.5,[0,30,0]],[1,[0,-30,0]]]}]},\n    {\"name\":\"anim_extend\",\"loop\":false,\"channels\":[{\"bone\":\"bone_arm\",\"path\":\"scale\",\"keys\":[[0,[1,1,1]],[1,[1,1,1.5]]]},{\"bone\":\"bone_root\",\"path\":\"pos\",\"keys\":[[0,[0,0,0]],[1,[0,0,0.2]]]}]}\n  ]\n}\n",
+          "scale": 1.2
+        },
+        "license": "CC0-1.0 public procedural fixture"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:cb35e26871bff3d4",
+        "documentId": "17913122563387860-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 1.9183,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": "9713302a-74ca-4cca-b3ee-a125f7dbda1d",
+        "version": {
+          "contentHash": "fnv1a64:cb35e26871bff3d4",
+          "documentId": "17913122563387860-1",
+          "revision": 6
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 17.0541,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cb35e26871bff3d4\",\"documentId\":\"17913122563387860-1\",\"revision\":6}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-33",
+      "commandId": "preview.clear",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:cb35e26871bff3d4",
+        "documentId": "17913122563387860-1",
+        "revision": 6
+      }
+    },
+    "response": {
+      "elapsedMs": 4.4714,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:cb35e26871bff3d4",
+          "documentId": "17913122563387860-1",
+          "revision": 6
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 3.5599,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cb35e26871bff3d4\",\"documentId\":\"17913122563387860-1\",\"revision\":6}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-35",
+      "commandId": "preview.asset",
+      "parameters": {
+        "asset": "ec7c8396-b516-4305-a473-9116c215e109"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:cb35e26871bff3d4",
+        "documentId": "17913122563387860-1",
+        "revision": 6
+      }
+    },
+    "response": {
+      "elapsedMs": 0.6816,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 17179869184,
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g10\\installed-procedural\\run-1791312248030214800\\inspector\\Procedural Project with spaces\\assets\\articulated.gltf",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 2363949999720550,
+            "completedSubmission": 285,
+            "extent": [
+              128,
+              128
+            ],
+            "lastUseSubmission": 0,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 0,
+            "renderer": "character",
+            "requested": true,
+            "resolvedImage": 2379343162509428,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": false
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:cb35e26871bff3d4",
+          "documentId": "17913122563387860-1",
+          "revision": 6
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 16
+    },
+    "response": {
+      "elapsedMs": 40.6986,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.6589,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cb35e26871bff3d4\",\"documentId\":\"17913122563387860-1\",\"revision\":6}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-38",
+      "commandId": "preview.capture",
+      "parameters": {
+        "handle": 17179869184,
+        "label": "rig-bind-pose"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:cb35e26871bff3d4",
+        "documentId": "17913122563387860-1",
+        "revision": 6
+      }
+    },
+    "response": {
+      "elapsedMs": 1.3204,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g10\\installed-procedural\\run-1791312248030214800\\inspector\\captures\\rig-bind-pose.png",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 2363949999720550,
+            "completedSubmission": 333,
+            "extent": [
+              128,
+              128
+            ],
+            "lastUseSubmission": 288,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 1,
+            "renderer": "character",
+            "requested": false,
+            "resolvedImage": 2379343162509428,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": false
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:cb35e26871bff3d4",
+          "documentId": "17913122563387860-1",
+          "revision": 6
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.1538,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:cb35e26871bff3d4\",\"documentId\":\"17913122563387860-1\",\"revision\":6}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-40",
+      "commandId": "node.place",
+      "parameters": {
+        "resource": "ec7c8396-b516-4305-a473-9116c215e109",
+        "id": "procedural-rig-0"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:cb35e26871bff3d4",
+        "documentId": "17913122563387860-1",
+        "revision": 6
+      }
+    },
+    "response": {
+      "elapsedMs": 1.8206,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "add",
+            "path": "/components/procedural-rig-0",
+            "value": {
+              "azure.renderable": {
+                "data": {
+                  "primitiveIndex": 0,
+                  "visible": true
+                },
+                "type": "azure.renderable",
+                "version": 1
+              },
+              "azure.transform": {
+                "data": {
+                  "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "type": "azure.transform",
+                "version": 1
+              }
+            }
+          },
+          {
+            "op": "add",
+            "path": "/nodes/-",
+            "value": {
+              "id": "procedural-rig-0",
+              "instanceOf": "",
+              "name": "Placed Object",
+              "parentId": "",
+              "prefabSource": "",
+              "resourceId": "ec7c8396-b516-4305-a473-9116c215e109",
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "visible": true
+            }
+          },
+          {
+            "op": "add",
+            "path": "/resourceReferences/D:~1Assigment~12609~1FYP~1Project~1AzureRender~1build~1evolution~1g10~1installed-procedural~1run-1791312248030214800~1inspector~1Procedural Project with spaces~1assets~1articulated.gltf",
+            "value": "ec7c8396-b516-4305-a473-9116c215e109"
+          },
+          {
+            "op": "add",
+            "path": "/resources/-",
+            "value": {
+              "id": "ec7c8396-b516-4305-a473-9116c215e109",
+              "path": "D:/Assigment/2609/FYP/Project/AzureRender/build/evolution/g10/installed-procedural/run-1791312248030214800/inspector/Procedural Project with spaces/assets/articulated.gltf",
+              "type": "gltf"
+            }
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:ce6e9c57c329c16b",
+          "documentId": "17913122563387860-1",
+          "revision": 7
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 39.0044,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:ce6e9c57c329c16b\",\"documentId\":\"17913122563387860-1\",\"revision\":8}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-42",
+      "commandId": "node.transform",
+      "parameters": {
+        "translation": [
+          0,
+          0,
+          -2
+        ]
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:ce6e9c57c329c16b",
+        "documentId": "17913122563387860-1",
+        "revision": 8
+      }
+    },
+    "response": {
+      "elapsedMs": 1.2859,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "replace",
+            "path": "/components/procedural-rig-0/azure.transform/data/translation/2",
+            "value": -2.0
+          },
+          {
+            "op": "replace",
+            "path": "/nodes/3/translation/2",
+            "value": -2.0
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:e852788e40e0603b",
+          "documentId": "17913122563387860-1",
+          "revision": 9
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.2058,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:e852788e40e0603b\",\"documentId\":\"17913122563387860-1\",\"revision\":9}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-44",
+      "commandId": "component.add",
+      "parameters": {
+        "type": "azure.animator"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:e852788e40e0603b",
+        "documentId": "17913122563387860-1",
+        "revision": 9
+      }
+    },
+    "response": {
+      "elapsedMs": 2.6872,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "add",
+            "path": "/components/procedural-rig-0/azure.animator",
+            "value": {
+              "data": {
+                "asset": "",
+                "crossfade": 0.18000000715255737,
+                "enabled": true,
+                "locomotion": false,
+                "locomotionProfile": "default",
+                "morph0": 0.0,
+                "morph1": 0.0,
+                "referenceSpeed": 2.0,
+                "startTime": 0.0,
+                "state": "idle"
+              },
+              "type": "azure.animator",
+              "version": 3
+            }
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:d16470aa9db1768a",
+          "documentId": "17913122563387860-1",
+          "revision": 10
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.2847,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:d16470aa9db1768a\",\"documentId\":\"17913122563387860-1\",\"revision\":10}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-46",
+      "commandId": "component.field",
+      "parameters": {
+        "type": "azure.animator",
+        "field": "state",
+        "value": "anim_sweep"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:d16470aa9db1768a",
+        "documentId": "17913122563387860-1",
+        "revision": 10
+      }
+    },
+    "response": {
+      "elapsedMs": 0.8816,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "replace",
+            "path": "/components/procedural-rig-0/azure.animator/data/state",
+            "value": "anim_sweep"
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:76b239be0e52ff82",
+          "documentId": "17913122563387860-1",
+          "revision": 11
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.0903,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:76b239be0e52ff82\",\"documentId\":\"17913122563387860-1\",\"revision\":11}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-48",
+      "commandId": "component.field",
+      "parameters": {
+        "type": "azure.animator",
+        "field": "asset",
+        "value": "9713302a-74ca-4cca-b3ee-a125f7dbda1d"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:76b239be0e52ff82",
+        "documentId": "17913122563387860-1",
+        "revision": 11
+      }
+    },
+    "response": {
+      "elapsedMs": 0.5094,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "replace",
+            "path": "/components/procedural-rig-0/azure.animator/data/asset",
+            "value": "9713302a-74ca-4cca-b3ee-a125f7dbda1d"
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:9ebf91b6e3c895df",
+          "documentId": "17913122563387860-1",
+          "revision": 12
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.7618,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:9ebf91b6e3c895df\",\"documentId\":\"17913122563387860-1\",\"revision\":12}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-50",
+      "commandId": "component.field",
+      "parameters": {
+        "type": "azure.animator",
+        "field": "startTime",
+        "value": 0.0
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:9ebf91b6e3c895df",
+        "documentId": "17913122563387860-1",
+        "revision": 12
+      }
+    },
+    "response": {
+      "elapsedMs": 1.2239,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:9ebf91b6e3c895df",
+          "documentId": "17913122563387860-1",
+          "revision": 12
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.0015,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:9ebf91b6e3c895df\",\"documentId\":\"17913122563387860-1\",\"revision\":12}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-52",
+      "commandId": "node.place",
+      "parameters": {
+        "resource": "ec7c8396-b516-4305-a473-9116c215e109",
+        "id": "procedural-rig-1"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:9ebf91b6e3c895df",
+        "documentId": "17913122563387860-1",
+        "revision": 12
+      }
+    },
+    "response": {
+      "elapsedMs": 0.9836,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "add",
+            "path": "/components/procedural-rig-1",
+            "value": {
+              "azure.renderable": {
+                "data": {
+                  "primitiveIndex": 0,
+                  "visible": true
+                },
+                "type": "azure.renderable",
+                "version": 1
+              },
+              "azure.transform": {
+                "data": {
+                  "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "type": "azure.transform",
+                "version": 1
+              }
+            }
+          },
+          {
+            "op": "add",
+            "path": "/nodes/-",
+            "value": {
+              "id": "procedural-rig-1",
+              "instanceOf": "",
+              "name": "Placed Object",
+              "parentId": "",
+              "prefabSource": "",
+              "resourceId": "ec7c8396-b516-4305-a473-9116c215e109",
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "visible": true
+            }
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:9417e87d763fb227",
+          "documentId": "17913122563387860-1",
+          "revision": 13
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 63.0686,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:9417e87d763fb227\",\"documentId\":\"17913122563387860-1\",\"revision\":13}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-54",
+      "commandId": "node.transform",
+      "parameters": {
+        "translation": [
+          2,
+          0,
+          -2
+        ]
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:9417e87d763fb227",
+        "documentId": "17913122563387860-1",
+        "revision": 13
+      }
+    },
+    "response": {
+      "elapsedMs": 2.1011,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "replace",
+            "path": "/components/procedural-rig-1/azure.transform/data/translation/0",
+            "value": 2.0
+          },
+          {
+            "op": "replace",
+            "path": "/components/procedural-rig-1/azure.transform/data/translation/2",
+            "value": -2.0
+          },
+          {
+            "op": "replace",
+            "path": "/nodes/4/translation/0",
+            "value": 2.0
+          },
+          {
+            "op": "replace",
+            "path": "/nodes/4/translation/2",
+            "value": -2.0
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:d5f1710c73a16a3b",
+          "documentId": "17913122563387860-1",
+          "revision": 14
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.7763,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:d5f1710c73a16a3b\",\"documentId\":\"17913122563387860-1\",\"revision\":14}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-56",
+      "commandId": "component.add",
+      "parameters": {
+        "type": "azure.animator"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:d5f1710c73a16a3b",
+        "documentId": "17913122563387860-1",
+        "revision": 14
+      }
+    },
+    "response": {
+      "elapsedMs": 2.3327,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "add",
+            "path": "/components/procedural-rig-1/azure.animator",
+            "value": {
+              "data": {
+                "asset": "",
+                "crossfade": 0.18000000715255737,
+                "enabled": true,
+                "locomotion": false,
+                "locomotionProfile": "default",
+                "morph0": 0.0,
+                "morph1": 0.0,
+                "referenceSpeed": 2.0,
+                "startTime": 0.0,
+                "state": "idle"
+              },
+              "type": "azure.animator",
+              "version": 3
+            }
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:d47cac92a3808606",
+          "documentId": "17913122563387860-1",
+          "revision": 15
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.347,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:d47cac92a3808606\",\"documentId\":\"17913122563387860-1\",\"revision\":15}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-58",
+      "commandId": "component.field",
+      "parameters": {
+        "type": "azure.animator",
+        "field": "state",
+        "value": "anim_sweep"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:d47cac92a3808606",
+        "documentId": "17913122563387860-1",
+        "revision": 15
+      }
+    },
+    "response": {
+      "elapsedMs": 1.0429,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "replace",
+            "path": "/components/procedural-rig-1/azure.animator/data/state",
+            "value": "anim_sweep"
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:0ca76ce8869514b6",
+          "documentId": "17913122563387860-1",
+          "revision": 16
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.2821,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:0ca76ce8869514b6\",\"documentId\":\"17913122563387860-1\",\"revision\":16}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-60",
+      "commandId": "component.field",
+      "parameters": {
+        "type": "azure.animator",
+        "field": "asset",
+        "value": "9713302a-74ca-4cca-b3ee-a125f7dbda1d"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:0ca76ce8869514b6",
+        "documentId": "17913122563387860-1",
+        "revision": 16
+      }
+    },
+    "response": {
+      "elapsedMs": 0.9843,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "replace",
+            "path": "/components/procedural-rig-1/azure.animator/data/asset",
+            "value": "9713302a-74ca-4cca-b3ee-a125f7dbda1d"
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:91f536f6370787b7",
+          "documentId": "17913122563387860-1",
+          "revision": 17
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.9366,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:91f536f6370787b7\",\"documentId\":\"17913122563387860-1\",\"revision\":17}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-62",
+      "commandId": "component.field",
+      "parameters": {
+        "type": "azure.animator",
+        "field": "startTime",
+        "value": 0.25
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:91f536f6370787b7",
+        "documentId": "17913122563387860-1",
+        "revision": 17
+      }
+    },
+    "response": {
+      "elapsedMs": 0.5075,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "replace",
+            "path": "/components/procedural-rig-1/azure.animator/data/startTime",
+            "value": 0.25
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:0022ed1f60ed31ac",
+          "documentId": "17913122563387860-1",
+          "revision": 18
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.4588,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:0022ed1f60ed31ac\",\"documentId\":\"17913122563387860-1\",\"revision\":18}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.0511,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:0022ed1f60ed31ac\",\"documentId\":\"17913122563387860-1\",\"revision\":18}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-65",
+      "commandId": "ai.generate",
+      "parameters": {
+        "runId": "procedural-model",
+        "domain": "asset-parameters",
+        "target": "document",
+        "instruction": "Generate the declared parametric model"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:0022ed1f60ed31ac",
+        "documentId": "17913122563387860-1",
+        "revision": 18
+      }
+    },
+    "response": {
+      "elapsedMs": 1.3419,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:0022ed1f60ed31ac",
+            "documentId": "17913122563387860-1",
+            "revision": 18
+          },
+          "diagnostics": [],
+          "diff": [],
+          "domain": "asset-parameters",
+          "historyBytes": 2,
+          "historyCount": 0,
+          "operations": [],
+          "repairCount": 0,
+          "runId": "procedural-model",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:cbf29ce484222325",
+          "state": "Generating",
+          "structuredMode": "",
+          "target": "document",
+          "transactional": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:0022ed1f60ed31ac",
+          "documentId": "17913122563387860-1",
+          "revision": 18
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Ready"
+    },
+    "response": {
+      "elapsedMs": 407.4044,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Ready"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.8989,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:0022ed1f60ed31ac\",\"documentId\":\"17913122563387860-1\",\"revision\":18}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 3.0483,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:0022ed1f60ed31ac\",\"documentId\":\"17913122563387860-1\",\"revision\":18}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-69",
+      "commandId": "ai.apply",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:0022ed1f60ed31ac",
+        "documentId": "17913122563387860-1",
+        "revision": 18
+      }
+    },
+    "response": {
+      "elapsedMs": 2.2017,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:0022ed1f60ed31ac",
+            "documentId": "17913122563387860-1",
+            "revision": 18
+          },
+          "diagnostics": [],
+          "diff": [
+            {
+              "dependencies": {},
+              "generator": "azure.procedural",
+              "generatorVersion": 1,
+              "inputs": {},
+              "op": "generate",
+              "output": "assets:/model-proposal.gltf",
+              "outputHash": "fnv1a64:0aed540dcbdeff88",
+              "previousHash": "fnv1a64:cbf29ce484222325"
+            }
+          ],
+          "domain": "asset-parameters",
+          "historyBytes": 223,
+          "historyCount": 1,
+          "operations": [
+            {
+              "command": "asset.generate",
+              "parameters": {
+                "generator": "azure.procedural",
+                "license": "CC0-1.0",
+                "output": "assets:/model-proposal.gltf",
+                "parameters": {
+                  "seed": 7,
+                  "source": "{\n  \"schemaVersion\": 1,\n  \"coordinates\": \"scad\",\n  \"parameters\": {\n    \"width\": {\"default\": 3, \"minimum\": 1, \"maximum\": 12},\n    \"depth\": {\"default\": 2, \"minimum\": 1, \"maximum\": 8},\n    \"height\": {\"default\": 4, \"minimum\": 1, \"maximum\": 20},\n    \"wall\": {\"default\": 0.25, \"minimum\": 0.1, \"maximum\": 0.5}\n  },\n  \"modules\": {\n    \"shell\": {\n      \"op\": \"difference\",\n      \"children\": [\n        {\"op\": \"cube\", \"size\": [{\"parameter\": \"width\"}, {\"parameter\": \"depth\"}, {\"parameter\": \"height\"}]},\n        {\"op\": \"cube\", \"size\": [0.5, 0.5, 24], \"translate\": [{\"parameter\": \"wall\"}, {\"parameter\": \"wall\"}, 0.25]}\n      ]\n    }\n  },\n  \"root\": {\"op\": \"module\", \"name\": \"shell\"},\n  \"material\": {\"color\": [0.5, 0.7, 0.9, 1], \"roughness\": 0.6}\n}\n",
+                  "values": {
+                    "depth": 1,
+                    "height": 1.5,
+                    "wall": 0.15,
+                    "width": 1.2
+                  }
+                }
+              }
+            }
+          ],
+          "repairCount": 0,
+          "runId": "procedural-model",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:d2f21baf5fbbaca4",
+          "state": "Applied",
+          "structuredMode": "json",
+          "target": "document",
+          "transactional": false
+        },
+        "version": {
+          "contentHash": "fnv1a64:0022ed1f60ed31ac",
+          "documentId": "17913122563387860-1",
+          "revision": 19
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Applied"
+    },
+    "response": {
+      "elapsedMs": 47.788,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Applied"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.4795,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:0022ed1f60ed31ac\",\"documentId\":\"17913122563387860-1\",\"revision\":19}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-72",
+      "commandId": "ai.generate",
+      "parameters": {
+        "runId": "procedural-rig",
+        "domain": "asset-parameters",
+        "target": "document",
+        "instruction": "Generate the declared rigid action asset"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:0022ed1f60ed31ac",
+        "documentId": "17913122563387860-1",
+        "revision": 19
+      }
+    },
+    "response": {
+      "elapsedMs": 1.2521,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:0022ed1f60ed31ac",
+            "documentId": "17913122563387860-1",
+            "revision": 19
+          },
+          "diagnostics": [],
+          "diff": [],
+          "domain": "asset-parameters",
+          "historyBytes": 223,
+          "historyCount": 1,
+          "operations": [],
+          "repairCount": 0,
+          "runId": "procedural-rig",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:cbf29ce484222325",
+          "state": "Generating",
+          "structuredMode": "",
+          "target": "document",
+          "transactional": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:0022ed1f60ed31ac",
+          "documentId": "17913122563387860-1",
+          "revision": 19
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Ready"
+    },
+    "response": {
+      "elapsedMs": 418.2789,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Ready"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.0517,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:0022ed1f60ed31ac\",\"documentId\":\"17913122563387860-1\",\"revision\":19}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-75",
+      "commandId": "ai.apply",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:0022ed1f60ed31ac",
+        "documentId": "17913122563387860-1",
+        "revision": 19
+      }
+    },
+    "response": {
+      "elapsedMs": 1.406,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:0022ed1f60ed31ac",
+            "documentId": "17913122563387860-1",
+            "revision": 19
+          },
+          "diagnostics": [],
+          "diff": [
+            {
+              "dependencies": {},
+              "generator": "azure.rig-text",
+              "generatorVersion": 1,
+              "inputs": {},
+              "op": "generate",
+              "output": "assets:/rig-proposal.gltf",
+              "outputHash": "fnv1a64:8db4902e5119378e",
+              "previousHash": "fnv1a64:cbf29ce484222325"
+            }
+          ],
+          "domain": "asset-parameters",
+          "historyBytes": 445,
+          "historyCount": 2,
+          "operations": [
+            {
+              "command": "asset.generate",
+              "parameters": {
+                "generator": "azure.rig-text",
+                "license": "CC0-1.0",
+                "output": "assets:/rig-proposal.gltf",
+                "parameters": {
+                  "scale": 1.2,
+                  "source": "{\n  \"schemaVersion\": 1,\n  \"coordinates\": \"scad\",\n  \"parameters\": {\"reach\":{\"default\":1,\"minimum\":0.5,\"maximum\":4}},\n  \"bones\": [\n    {\"name\":\"bone_root\",\"translation\":[0,0,0],\"geometry\":{\"op\":\"cube\",\"size\":[0.8,0.8,0.25],\"center\":true},\"material\":{\"color\":[0.2,0.3,0.4,1]}},\n    {\"name\":\"bone_arm\",\"parent\":\"bone_root\",\"translation\":[0,0,0.25],\"geometry\":{\"op\":\"cube\",\"size\":[0.2,0.2,{\"parameter\":\"reach\"}],\"translate\":[-0.1,-0.1,0]},\"material\":{\"color\":[0.9,0.5,0.2,1]}}\n  ],\n  \"animations\": [\n    {\"name\":\"anim_sweep\",\"loop\":true,\"channels\":[{\"bone\":\"bone_arm\",\"path\":\"rot\",\"keys\":[[0,[0,-30,0]],[0.5,[0,30,0]],[1,[0,-30,0]]]}]},\n    {\"name\":\"anim_extend\",\"loop\":false,\"channels\":[{\"bone\":\"bone_arm\",\"path\":\"scale\",\"keys\":[[0,[1,1,1]],[1,[1,1,1.5]]]},{\"bone\":\"bone_root\",\"path\":\"pos\",\"keys\":[[0,[0,0,0]],[1,[0,0,0.2]]]}]}\n  ]\n}\n"
+                }
+              }
+            }
+          ],
+          "repairCount": 0,
+          "runId": "procedural-rig",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:d38fce0be19b1e8c",
+          "state": "Applied",
+          "structuredMode": "json",
+          "target": "document",
+          "transactional": false
+        },
+        "version": {
+          "contentHash": "fnv1a64:0022ed1f60ed31ac",
+          "documentId": "17913122563387860-1",
+          "revision": 20
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Applied"
+    },
+    "response": {
+      "elapsedMs": 53.4432,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Applied"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.1501,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:0022ed1f60ed31ac\",\"documentId\":\"17913122563387860-1\",\"revision\":20}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-78",
+      "commandId": "document.save",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:0022ed1f60ed31ac",
+        "documentId": "17913122563387860-1",
+        "revision": 20
+      }
+    },
+    "response": {
+      "elapsedMs": 0.5323,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/0/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/0/components/azure.transform/data/scale",
+            "value": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/0/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": false
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/0/name",
+            "value": "observer"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/0/parentId",
+            "value": ""
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/1/components/azure.transform/data/scale/0",
+            "value": 0.4000000059604645
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/1/components/azure.transform/data/scale/1",
+            "value": 0.4000000059604645
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/1/components/azure.transform/data/scale/2",
+            "value": 0.4000000059604645
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/1/components/azure.transform/data/translation/0",
+            "value": -0.800000011920929
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/1/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/1/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/1/name",
+            "value": "asset-a"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/1/parentId",
+            "value": ""
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/2/components/azure.transform/data/scale/0",
+            "value": 0.4000000059604645
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/2/components/azure.transform/data/scale/1",
+            "value": 0.4000000059604645
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/2/components/azure.transform/data/scale/2",
+            "value": 0.4000000059604645
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/2/components/azure.transform/data/translation/0",
+            "value": 0.800000011920929
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/2/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/2/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/2/name",
+            "value": "asset-b"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/2/parentId",
+            "value": ""
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/-",
+            "value": {
+              "components": {
+                "azure.animator": {
+                  "data": {
+                    "asset": "9713302a-74ca-4cca-b3ee-a125f7dbda1d",
+                    "crossfade": 0.18000000715255737,
+                    "enabled": true,
+                    "locomotion": false,
+                    "locomotionProfile": "default",
+                    "morph0": 0.0,
+                    "morph1": 0.0,
+                    "referenceSpeed": 2.0,
+                    "startTime": 0.0,
+                    "state": "anim_sweep"
+                  },
+                  "type": "azure.animator",
+                  "version": 3
+                },
+                "azure.renderable": {
+                  "data": {
+                    "primitiveIndex": 0,
+                    "visible": true
+                  },
+                  "type": "azure.renderable",
+                  "version": 1
+                },
+                "azure.transform": {
+                  "data": {
+                    "rotation": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "translation": [
+                      0.0,
+                      0.0,
+                      -2.0
+                    ]
+                  },
+                  "type": "azure.transform",
+                  "version": 1
+                }
+              },
+              "id": "procedural-rig-0",
+              "name": "Placed Object",
+              "parentId": "",
+              "resourceId": "ec7c8396-b516-4305-a473-9116c215e109"
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/-",
+            "value": {
+              "components": {
+                "azure.animator": {
+                  "data": {
+                    "asset": "9713302a-74ca-4cca-b3ee-a125f7dbda1d",
+                    "crossfade": 0.18000000715255737,
+                    "enabled": true,
+                    "locomotion": false,
+                    "locomotionProfile": "default",
+                    "morph0": 0.0,
+                    "morph1": 0.0,
+                    "referenceSpeed": 2.0,
+                    "startTime": 0.25,
+                    "state": "anim_sweep"
+                  },
+                  "type": "azure.animator",
+                  "version": 3
+                },
+                "azure.renderable": {
+                  "data": {
+                    "primitiveIndex": 0,
+                    "visible": true
+                  },
+                  "type": "azure.renderable",
+                  "version": 1
+                },
+                "azure.transform": {
+                  "data": {
+                    "rotation": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "translation": [
+                      2.0,
+                      0.0,
+                      -2.0
+                    ]
+                  },
+                  "type": "azure.transform",
+                  "version": 1
+                }
+              },
+              "id": "procedural-rig-1",
+              "name": "Placed Object",
+              "parentId": "",
+              "resourceId": "ec7c8396-b516-4305-a473-9116c215e109"
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/background",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/bloomEnabled",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/bloomStrength",
+            "value": 0.1599999964237213
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/bloomThreshold",
+            "value": 1.0499999523162842
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/cameraFar",
+            "value": 100.0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/cameraNear",
+            "value": 0.10000000149011612
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/contrast",
+            "value": 1.0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/diagnosticView",
+            "value": 0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/diffuseBandThreshold",
+            "value": 0.4000000059604645
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/exposure",
+            "value": 0.0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/faceSdf",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/faceSoftness",
+            "value": 0.07999999821186066
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/faceThreshold",
+            "value": 0.5
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/innerOutline",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/outline",
+            "value": 0.4000000059604645
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/outlineColor",
+            "value": [
+              0.00800000037997961,
+              0.013000000268220901,
+              0.02199999988079071
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/outlineDepth",
+            "value": 0.18000000715255737
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/outlineNormal",
+            "value": 0.20000000298023224
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/saturation",
+            "value": 1.0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/shadowDistance",
+            "value": 100.0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/shadowRadius",
+            "value": 8.0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/showcasePreset",
+            "value": 0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/silhouetteOutline",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/styleMaskStrength",
+            "value": 1.0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/stylized",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/tint",
+            "value": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/toneMapping",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/resources/-",
+            "value": {
+              "asset": "92b97eda-5319-47a5-b981-864c20287801",
+              "id": "92b97eda-5319-47a5-b981-864c20287801"
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/resources/-",
+            "value": {
+              "asset": "ec7c8396-b516-4305-a473-9116c215e109",
+              "id": "ec7c8396-b516-4305-a473-9116c215e109"
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/lights",
+            "value": []
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:daca5c00443e39c7",
+          "documentId": "17913122563387860-1",
+          "revision": 21
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.4345,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:daca5c00443e39c7\",\"documentId\":\"17913122563387860-1\",\"revision\":21}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-80",
+      "commandId": "document.reload",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:daca5c00443e39c7",
+        "documentId": "17913122563387860-1",
+        "revision": 21
+      }
+    },
+    "response": {
+      "elapsedMs": 0.9801,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:daca5c00443e39c7",
+          "documentId": "17913122563387860-1",
+          "revision": 22
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.2799,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:daca5c00443e39c7\",\"documentId\":\"17913122563387860-1\",\"revision\":22}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-82",
+      "commandId": "document.save",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:daca5c00443e39c7",
+        "documentId": "17913122563387860-1",
+        "revision": 22
+      }
+    },
+    "response": {
+      "elapsedMs": 0.7442,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:daca5c00443e39c7",
+          "documentId": "17913122563387860-1",
+          "revision": 23
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.contentHash"
+    },
+    "response": {
+      "elapsedMs": 1.4204,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "fnv1a64:daca5c00443e39c7"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.6551,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:daca5c00443e39c7\",\"documentId\":\"17913122563387860-1\",\"revision\":23}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-85",
+      "commandId": "preview.play",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:daca5c00443e39c7",
+        "documentId": "17913122563387860-1",
+        "revision": 23
+      }
+    },
+    "response": {
+      "elapsedMs": 1.3913,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:daca5c00443e39c7",
+          "documentId": "17913122563387860-1",
+          "revision": 23
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 90
+    },
+    "response": {
+      "elapsedMs": 245.4315,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.4144,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:daca5c00443e39c7\",\"documentId\":\"17913122563387860-1\",\"revision\":23}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-88",
+      "commandId": "preview.stop",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:daca5c00443e39c7",
+        "documentId": "17913122563387860-1",
+        "revision": 23
+      }
+    },
+    "response": {
+      "elapsedMs": 5.4194,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:daca5c00443e39c7",
+          "documentId": "17913122563387860-1",
+          "revision": 23
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 46.9486,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.contentHash"
+    },
+    "response": {
+      "elapsedMs": 3.4745,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "fnv1a64:daca5c00443e39c7"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.2743,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:daca5c00443e39c7\",\"documentId\":\"17913122563387860-1\",\"revision\":23}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "procedural-92",
+      "commandId": "preview.play",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:daca5c00443e39c7",
+        "documentId": "17913122563387860-1",
+        "revision": 23
+      }
+    },
+    "response": {
+      "elapsedMs": 0.1258,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:daca5c00443e39c7",
+          "documentId": "17913122563387860-1",
+          "revision": 23
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 60
+    },
+    "response": {
+      "elapsedMs": 230.8497,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "screenshot",
+    "fields": {
+      "label": "procedural-live-rigs"
+    },
+    "response": {
+      "elapsedMs": 0.4631,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "label": "procedural-live-rigs",
+        "scheduled": true
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "engine.screenshots",
+      "equals": 1
+    },
+    "response": {
+      "elapsedMs": 139.6824,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 1
+    }
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "case": "AzureGame.GameSequence",
+  "configuration": "Release",
+  "jobs": [
+    {
+      "id": 1181,
+      "task": "release-gpu-42",
+      "state": "failed",
+      "exitCode": 8,
+      "reason": null
+    },
+    {
+      "id": 1187,
+      "task": "release-gpu-42-focused-retry-01",
+      "state": "succeeded",
+      "exitCode": 0,
+      "reason": null
+    }
+  ],
+  "initialTimeoutSeconds": 600,
+  "retestSeconds": 60.7265,
+  "inputActions": 69,
+  "replay": {
+    "passed": true,
+    "explorationCompleted": true,
+    "platformerCompleted": true,
+    "successorTransition": true,
+    "courseCoins": 8,
+    "released": true,
+    "frames": 2758,
+    "replayDelayedFrames": 9
+  },
+  "verificationSha256": "13d44e09f66157588a0b714ddb90aa4e85a2c3d173dca5f07e638b1bae50e4cf",
+  "files": {
+    "release-gpu-42-focused-retry-01-queue.log": "5ddad00b0bba719dbd8e8a28da4b0d9ab5a5df6f805cc7f67f8cf456f116f782",
+    "release-gpu-42-focused-retry-01-receipt.json": "22952b4373d1085f75b207e00f8f22c94aca5cc4de5a8a0c88ff309e9d812a5d",
+    "release-gpu-42-focused-retry-01.json": "8f8cfedf851bae58cc0dfd171e8b54f66c16027ec5641a044c0db73975644096",
+    "release-gpu-42-focused-retry-01.log": "70c055e171be9f5b3e5550a5d54b4b8e4cb91fe32bf9d7e9d3f582ddb78e643a",
+    "release-gpu-42-focused-retry-01.txt": "f6eea8e8c5ddf8827dbf0d6fd62b6faf6914feeede630b5f3bc6b9da5296070c",
+    "release-gpu-42-focused-retry-01.xml": "1326d9d781862dbb7c52a5a61b9db7cbab02ebfeabf5c19d113b2af290e719bd",
+    "release-gpu-42-queue.log": "c17ccfd583a30de9a1aed45b0ee5d4f686e551083b394d58920e86103136c15f",
+    "release-gpu-42.json": "19118967f81c0918a563b6f9469943376c13c8116ca417d2c7c2205ce57c352e",
+    "release-gpu-42.log": "78773b756db32160fbc349df65fe8a4df078d7988b8a916d069c09ef3f04521c",
+    "release-gpu-42.txt": "9321fd9cab976482290878c5ca8069263e094a3c76125d5a4c317657e37fda20",
+    "release-gpu-42.xml": "0eae182dd158d4427c06539a6c8881062e8aac42799af9220efc81eaef231676",
+    "release-inventory.json": "0eb387722d30059d105ef9b22f8eb59124af491f28ed0c2603be3071283b7aa2",
+    "release-products.json": "b1283ecdd5079fc8205032e76774fd5c8ee60f18fea9c55f5c3c4448a014f422",
+    "release-tests-source.json": "1f9b71616f53b77e13f8bd2c8649caa22659e0f60d85f0142519a5a34542dc6e",
+    "initial/input.json": "e771116d5c295428bb98feb8c87be4bef6a2ccfc33f71ee3c7bdccc48f8a7dfa",
+    "initial/summary.json": "4a2882c81b62358de0621109f5c4a924937b96e3a889d8327acc489940cabdf8",
+    "retry/input.json": "e771116d5c295428bb98feb8c87be4bef6a2ccfc33f71ee3c7bdccc48f8a7dfa",
+    "retry/summary.json": "4a2882c81b62358de0621109f5c4a924937b96e3a889d8327acc489940cabdf8",
+    "retry/sequence-summary.json": "85b0ffb0fcfa2ab205cd3c9a6bf7359349d7a773a3e784de3ab902584ace5ee3",
+    "retry/runtime.json": "9806da71477e9af7dc63376b6ffb13afef2571f2673cd2badb2850e2d413bbc4",
+    "retry/stdout.log": "6f35d661bee0db68c8c2d369a610ba3adc7db9a25373fd1d626dba3dcc412c81",
+    "retry/stderr.log": "f4db19768b0137f9081a454189c92c73aab75b80eeb0229f8557f93e2bc4e0dc",
+    "dispatch-jobs.json": "ebc1dd984d6643f0da9457c2fc5515b6bf17475364a063286b34c43e45dfab3c"
+  }
+}

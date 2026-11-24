@@ -1,0 +1,21 @@
+import argparse,hashlib,json,os,re,subprocess
+from pathlib import Path
+root=Path.cwd();run=Path(__file__).resolve().parent;parser=argparse.ArgumentParser();parser.add_argument('--configuration',choices=['release','debug']);args=parser.parse_args();cmake=Path('D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe');names=['MaterialDocumentTests','CharacterRepairTests','ExtensionRegistryTests','UnlitTextureMaterialTests','TextureMaterialImportTests','MaterialUvImportTests','MaterialPipelinePolicyTests','MaterialGraphTests','MaterialGraphEditingTests','SceneGraphTests','RenderViewTests','RenderViewSubmissionTests','TemporalViewStateTests','EnvironmentSpecularTests','AssetLevelTests','MaterialSlotEditingTests','MaterialOriginInstanceTests'];text=(root/'CMakeLists.txt').read_text();mapping={name:re.search(r'add_executable\(\s*(\w+)\s+tests/'+name+r'\.cpp',text).group(1) for name in names};targets=['AzurePlayer','AzureRender','AzureMaterialValidator',*mapping.values()];env=os.environ.copy();env.update(VCPKG_ROOT='D:/Tools/vcpkg',VULKAN_SDK='D:/Tools/VulkanSDK/1.4.350.0',DOTNET_ROOT='D:/Tools/dotnet9',DOTNET_CLI_HOME='D:/Tools/dotnet-home',NUGET_PACKAGES='D:/Tools/nuget-packages',DOTNET_PROCESSOR_COUNT='1',PYTHONUTF8='1');env['PATH']=str(root/'build/reinstall-environment/venv/Scripts')+';D:/Tools/Python311;D:/Tools/dotnet9;D:/Tools/VulkanSDK/1.4.350.0/Bin;'+env['PATH'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();files=[p for base in ['src','shaders','tests'] for p in (root/base).rglob('*') if p.is_file() and p.suffix in ['.cpp','.hpp','.inc','.glsl','.frag','.vert','.comp']]+[root/'CMakeLists.txt',root/'schemas/azure_render_material.schema.json'];frozen={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes().replace(b'\r\n',b'\n')).hexdigest() for p in files};tools_list=[root/'tools/test_material_lighting_gpu.py']+[root/row['path'] for row in json.loads((run/'layout-tool-updates.json').read_text())];tool_hashes={p.relative_to(root).as_posix():sha(p) for p in tools_list}
+for cfg in ([args.configuration] if args.configuration else ['release','debug']):
+ for name in [cfg+'-build.json','build-'+cfg+'.log','cpu-'+cfg+'.log']:
+  p=run/name
+  if p.exists():
+   n=1
+   while (run/'build-attempts'/str(n)/name).exists():n+=1
+   q=run/'build-attempts'/str(n)/name;q.parent.mkdir(parents=True,exist_ok=True);p.rename(q)
+ directory=root/('build/ninja-msvc-'+cfg);report=dict(status='building',sourceCommit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),sourceFiles=frozen,toolFiles=tool_hashes,targets=targets)
+ try:
+  print('BUILD',cfg,flush=True)
+  with (run/('build-'+cfg+'.log')).open('wb') as log:subprocess.run([str(root/'tools/msvc_env.bat'),str(cmake),'--build',str(directory),'--target',*targets,'--parallel','2'],stdout=log,stderr=log,env=env,check=True)
+  for name,digest in frozen.items():assert hashlib.sha256((root/name).read_bytes().replace(b'\r\n',b'\n')).hexdigest()==digest,name
+  for name,digest in tool_hashes.items():assert sha(root/name)==digest,name
+  ctest=str(cmake.with_name('ctest.exe'));listing=json.loads(subprocess.check_output([ctest,'--test-dir',str(directory),'--show-only=json-v1'],env=env));selected=[row['name'] for row in listing['tests'] if Path(row['command'][0]).stem in mapping.values()];assert len(selected)==len(names)
+  with (run/('cpu-'+cfg+'.log')).open('wb') as log:subprocess.run([ctest,'--test-dir',str(directory),'-R','^('+'|'.join(re.escape(n) for n in selected)+')$','--no-tests=error','-j','1','--output-on-failure'],stdout=log,stderr=log,env=env,check=True)
+  assert f'100% tests passed, 0 tests failed out of {len(names)}' in (run/('cpu-'+cfg+'.log')).read_text();report.update(status='built-contract-tests-passed',tests=selected,programs={name:sha(directory/(name+'.exe')) for name in ['AzurePlayer','AzureRender','AzureMaterialValidator']},shaders={p.name:sha(p) for p in sorted((directory/'shaders').glob('*.spv'))});print('PASS',cfg,len(names),'CPU checks',flush=True)
+ except Exception as error:report.update(status='failed',failure=str(error));raise
+ finally:(run/(cfg+'-build.json')).write_bytes((json.dumps(report,indent=2)+'\n').encode())

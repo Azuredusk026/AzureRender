@@ -1,0 +1,114 @@
+{
+  "status": "measured-resource-bindings",
+  "draws": [
+    {
+      "event": 868,
+      "shaderSha256": "9f3e5a0ef3e820e863d2c0571cd8b6facc3e02c3433c4ee15364c0058da33ec2",
+      "specularRampResource": "ResourceId::6177",
+      "specularRampSha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a",
+      "materialConstantBytes": 512,
+      "firstMaterialRows": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "event": 910,
+      "shaderSha256": "0d164a79b4c079e6d90f53fafb8eecb52119d06503b6dbb79f2749362012e753",
+      "specularRampResource": "ResourceId::6177",
+      "specularRampSha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a",
+      "materialConstantBytes": 768,
+      "firstMaterialRows": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          9.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "event": 928,
+      "shaderSha256": "0d164a79b4c079e6d90f53fafb8eecb52119d06503b6dbb79f2749362012e753",
+      "specularRampResource": "ResourceId::6177",
+      "specularRampSha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a",
+      "materialConstantBytes": 768,
+      "firstMaterialRows": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          9.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "event": 1383,
+      "shaderSha256": "135b25965ed786752775596a86f4069f58942eae340be4d143d291eea9429680",
+      "specularRampResource": "ResourceId::11305",
+      "specularRampSha256": "2014178ec81f0d4b31cdcfff15fa928156cde13834abefba93c203888592a8e0",
+      "materialConstantBytes": 512,
+      "firstMaterialRows": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    }
+  ],
+  "sourceCaptureSha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90"
+}

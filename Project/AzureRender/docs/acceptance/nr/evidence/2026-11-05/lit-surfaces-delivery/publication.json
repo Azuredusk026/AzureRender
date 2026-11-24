@@ -1,0 +1,28 @@
+{
+  "status": "built-isolation-review-pending",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\engine\\share\\AzureRender\\tools\\python\\python.exe",
+    "-X",
+    "utf8",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\engine\\share\\AzureRender\\tools\\build_game.py",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\移动后的完整场景\\playable.azureproject",
+    "--install",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\engine",
+    "--output",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\published-game",
+    "--validation-timeout",
+    "1800"
+  ],
+  "toolSha256": "ac2f67a2d9aaf5f07202fc3d2a058e6044c84df02b213ca80d4e34096080cc9b",
+  "playerSha256": "642ad4d341fc9652aa41c796cca0b43debc9c3706ea68aa8e4ef5a0193e245fc",
+  "projectSha256": "f8409a3c705bb0e0896a7cf92b4a735bbb836fb90a8c3d71bddb78680363d77a",
+  "levelSha256": "1efbfee357aa0a4d49a1c4f73479cdbeeb96ac28765ca9e9a0d774a7a184c149",
+  "qualitySha256": "00474324584a53cecc0d8433b2a96a43539908cf9000bb45e63cfdc0fc4b6c04",
+  "guideSha256": "750d37e2cc8575433c548dce907e27e7ece5e6959a60e1a1e4b28148f553da1f",
+  "exitCode": 0,
+  "elapsedSeconds": 715.5218614999903,
+  "files": 2718,
+  "entry": "完整联合场景显示验证.exe",
+  "manifestSha256": "a41a2fee04cb51e2b9f3c21e46b1ea1f0688f8c4466706b7100d71526761b3d0"
+}

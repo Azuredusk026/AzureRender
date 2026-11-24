@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "fileCount": 8566,
+  "licenseHashes": {
+    "assimp-LICENSE.txt": "21195d410708b82757d3e34c3a40c427f6e59339da862e9480d4fcdc79b7a1bd",
+    "tiff-LICENSE.txt": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade",
+    "libwebp-LICENSE.txt": "050b5ba2c8eb0bd3b996e12ef79312a1c62237f2de1b3c609843f00bb74744f3",
+    "libjpeg-turbo-LICENSE.txt": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579",
+    "liblzma-LICENSE.txt": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8"
+  },
+  "installedBinaries": {
+    "AzureRender.exe": "8494816c95bcde82f4b44c56ee8132baedb8222f6a5929c5518f3a79428d0761",
+    "AzurePlayer.exe": "90829c28e98850d1d7dd581303fca73e0284d840ba530f6df5788b961d39a574"
+  }
+}

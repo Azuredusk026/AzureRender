@@ -1,0 +1,23 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  7: AzureEngine.ThirdPerson
+1/3 Test  #7: AzureEngine.ThirdPerson ..........***Failed    0.25 sec
+Unknown replay action
+
+    Start 14: AzureEngine.AssetLevel
+2/3 Test #14: AzureEngine.AssetLevel ...........***Failed    0.30 sec
+Asset/level contract failed
+
+    Start 25: AzureEngine.ThirdPersonPlayer
+3/3 Test #25: AzureEngine.ThirdPersonPlayer ....   Passed    4.46 sec
+
+33% tests passed, 2 tests failed out of 3
+
+Label Time Summary:
+gpu    =   4.46 sec*proc (1 test)
+
+Total Test time (real) =   5.02 sec
+
+The following tests FAILED:
+	  7 - AzureEngine.ThirdPerson (Failed)
+	 14 - AzureEngine.AssetLevel (Failed)

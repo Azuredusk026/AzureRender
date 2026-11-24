@@ -1,0 +1,12 @@
+[1791647084086][info][editor][code=0] Opened scene: courtyard
+[1791647084506][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791647084855][info][render][code=0] Character texture access: indexed, requested slots=123, stage sampler limit=1048576
+[1791647084876][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791647084906][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791647084912][info][editor][code=0] Opened scene: courtyard
+[1791647084914][info][editor][code=0] Selected node: hero
+[1791647084932][info][editor][code=0] Asset reload requested; changed files: 0
+[1791647084940][info][render][code=0] Character texture access: indexed, requested slots=123, stage sampler limit=1048576
+[1791647084960][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791647084989][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791647084993][info][editor][code=0] Renderer resources reloaded

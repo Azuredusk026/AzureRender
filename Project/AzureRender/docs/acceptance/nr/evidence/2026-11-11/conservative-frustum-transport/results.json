@@ -1,0 +1,342 @@
+{
+  "status": "qualified-conservative-frustum-transport",
+  "overall": "failed-user-review",
+  "baseCommit": "6483e03",
+  "sourceSha256": {
+    "CMakeLists.txt": "8d9ddb862e8c652f3ccc6a16d0aa00a54c2770ffc71b5755f814eeaa0d2cf57b",
+    "src/scene/Frustum.hpp": "1afb6b7be9270f50ac0a7c9b46727842ece4eabea8aba88c0862fa508e661796",
+    "src/render/GpuCulling.hpp": "009d599f0073fa892afb31a76c79041653efd17ab9d183197c5a3f8b98ccf4b9",
+    "src/render/GpuCullingResources.hpp": "e62ed4425ec33537ccad8b307e740dc4b02178ba36fd3a4aad82d9c2ac8ae11f",
+    "src/render/ConservativeCullShader.hpp": "9c6666c7bcf50d69a0c4ef77a7c62f5dbe88b4beee7c7ae13ca6bb7b8665c2af",
+    "shaders/cull_indirect.comp": "0a0f44fce34195a33a5184992102682056ee4eac4fa41f03f8b3d1fb5a2b1b84",
+    "tests/ConservativeCullingGpuTests.cpp": "0e67ade546dd1e3d6ffccc21b3223e2e28b598c7b85c41522926e6bf2f6affa0"
+  },
+  "cpu": [
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureVisibilityPrototypeTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Stable surface identities, picking, scene/camera/frame history rejection and bounds passed",
+      "binarySha256": "be56a2eba8e2260fba2651c938fd48a929b2bf2e6ce40027936b96aeeee78123"
+    },
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureRenderFrameTaskSchedulerTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "binarySha256": "0c854ebc39c9da76719419b23211be970bd6658bb13b8456760af94661cd93d3"
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureVisibilityPrototypeTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Stable surface identities, picking, scene/camera/frame history rejection and bounds passed",
+      "binarySha256": "ccc870b8a4f458abd8b84e6e39c4f1442f492ce65c2f095cbe8928a2261d60af"
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureRenderFrameTaskSchedulerTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "binarySha256": "1c3e14449d5a7c53aa4046952a87a71c3f04b9c6abed92269a9d8d300946233d"
+    }
+  ],
+  "gpu": [
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "scope": "guard",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureConservativeCullingGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\visibility_prototype.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\legacy-cull_indirect.comp.spv"
+      ],
+      "exitCode": 0,
+      "validationClean": true
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "scope": "current-visibility",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureVisibilityGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\visibility_prototype.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\release-nvidia-current-visibility.json"
+      ],
+      "exitCode": 0,
+      "validationClean": true
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "scope": "legacy-visibility",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureVisibilityGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\legacy-cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\legacy-visibility_prototype.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\release-nvidia-legacy-visibility.json"
+      ],
+      "exitCode": 0,
+      "validationClean": true
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "scope": "guard",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureConservativeCullingGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\visibility_prototype.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\legacy-cull_indirect.comp.spv"
+      ],
+      "exitCode": 0,
+      "validationClean": true
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "scope": "current-visibility",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureVisibilityGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\visibility_prototype.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\release-intel-current-visibility.json"
+      ],
+      "exitCode": 0,
+      "validationClean": true
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "scope": "legacy-visibility",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureVisibilityGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\legacy-cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\legacy-visibility_prototype.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\release-intel-legacy-visibility.json"
+      ],
+      "exitCode": 0,
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "scope": "guard",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureConservativeCullingGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\visibility_prototype.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\legacy-cull_indirect.comp.spv"
+      ],
+      "exitCode": 0,
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "scope": "current-visibility",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureVisibilityGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\visibility_prototype.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\debug-nvidia-current-visibility.json"
+      ],
+      "exitCode": 0,
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "scope": "legacy-visibility",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureVisibilityGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\legacy-cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\legacy-visibility_prototype.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\debug-nvidia-legacy-visibility.json"
+      ],
+      "exitCode": 0,
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "scope": "guard",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureConservativeCullingGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\visibility_prototype.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\legacy-cull_indirect.comp.spv"
+      ],
+      "exitCode": 0,
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "scope": "current-visibility",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureVisibilityGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\visibility_prototype.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\debug-intel-current-visibility.json"
+      ],
+      "exitCode": 0,
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "scope": "legacy-visibility",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureVisibilityGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\legacy-cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\legacy-visibility_prototype.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\debug-intel-legacy-visibility.json"
+      ],
+      "exitCode": 0,
+      "validationClean": true
+    }
+  ],
+  "drawRecordsPerEndpoint": 49160,
+  "exactDrawRecords": 196640,
+  "identities": [
+    {
+      "configuration": "release",
+      "programCount": 859,
+      "oldProgramsExact": 857,
+      "changedPrograms": [
+        "cull_indirect.comp.spv",
+        "visibility_prototype.comp.spv"
+      ],
+      "playerSha256": "004bed1e7ebe0aa608d2d417a164392cec9b59830d640f7de32293438a4ce2e5",
+      "build": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 28.280999999959022,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\build.py",
+          "Release"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+      }
+    },
+    {
+      "configuration": "debug",
+      "programCount": 859,
+      "oldProgramsExact": 857,
+      "changedPrograms": [
+        "cull_indirect.comp.spv",
+        "visibility_prototype.comp.spv"
+      ],
+      "playerSha256": "065d99ad0b71dc5d2f146199a8d97252d7947399dacc259b6beca4e3dbf336b4",
+      "build": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 17.79700000002049,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\build.py",
+          "Debug"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+      }
+    }
+  ],
+  "shaderProgramsAdded": 0,
+  "defaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true
+  },
+  "fourExecution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 113.78099999995902,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\default-four.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\tmp"
+  },
+  "debugBudgetFailure": {
+    "status": "budget-stopped",
+    "exitCode": 1,
+    "reason": "Task byte/file-count budget exceeded",
+    "seconds": 22.39000000001397,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-034117-reference-conservative-frustum-f4c8f9\\build.py",
+      "Debug"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+  },
+  "reclaimedIntermediates": {
+    "status": "reclaimed-owned-rebuildable-debug-intermediates",
+    "items": 14,
+    "batches": 2,
+    "logicalBytes": 118829267,
+    "protectedProductsExact": 895,
+    "seconds": 1.3910000000032596
+  },
+  "remaining": [
+    "Reference XYW/device depth mixed plane preparation",
+    "Reference raster/picking consumers",
+    "Production hair 73 color failures",
+    "Intel reference depth/visibility 96 failures",
+    "Skin, eyes, GI, reflection and dynamic appearance gates"
+  ],
+  "archive": {
+    "bytes": 237527,
+    "sha256": "09a8e82ea9ab35fe58c2c9f3516605869d014b67b69a4964cd6f2296c2ce2fef",
+    "members": 83
+  }
+}

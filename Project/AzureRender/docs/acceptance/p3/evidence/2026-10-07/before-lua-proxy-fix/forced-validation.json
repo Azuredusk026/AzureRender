@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "device": "intel",
+      "status": "passed",
+      "layerInserted": true,
+      "synchronizationValidationRequested": true,
+      "workflows": 2
+    },
+    {
+      "device": "installed",
+      "status": "passed",
+      "layerInserted": true,
+      "synchronizationValidationRequested": true,
+      "workflows": 2
+    }
+  ]
+}

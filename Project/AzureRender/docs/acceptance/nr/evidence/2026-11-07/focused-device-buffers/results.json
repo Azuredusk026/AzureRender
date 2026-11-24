@@ -1,0 +1,201 @@
+{
+  "status": "implemented-functional-checks-passed-performance-pending",
+  "sourceBase": "6a474089003714d5c5b9216142b99e961bdefe9a",
+  "executableSha256": "d469cdeb4bc1d9407e4aeddc3216709eaec03d4aae106e5f1261e0ea759e69cf",
+  "checks": [
+    {
+      "file": "release-checks.xml",
+      "tests": 6,
+      "sha256": "994f4564241e1ee8f7bf0913f52fbf97a0e2f162e7a991abbabfa308c3efe2bb"
+    },
+    {
+      "file": "debug-checks.xml",
+      "tests": 6,
+      "sha256": "13625c13654b1204dfee6bdd4ce9c8527ec0b1f34586392709f6a753681073f8"
+    },
+    {
+      "file": "release-intel-checks.xml",
+      "tests": 5,
+      "sha256": "8ce35fb8a4dcce510ffa24a148ffa88d764bfb5e8fbfb0c47beaa456a3ccc62b"
+    },
+    {
+      "file": "debug-intel-checks.xml",
+      "tests": 5,
+      "sha256": "ab1f7c5529f8c6920bed1f67d5eeea13ca63b8b2adb582d87b17aeb20b4f999c"
+    }
+  ],
+  "native": {
+    "sceneTransformCache": {
+      "sceneTransformCachedNodes": 1679,
+      "sceneTransformReusedWorld": 1679,
+      "sceneTransformLocalEvaluations": 0,
+      "sceneTransformFallback": false
+    },
+    "status": "passed",
+    "sourceBase": "6a47408-focused-device-buffers",
+    "executableSha256": "d469cdeb4bc1d9407e4aeddc3216709eaec03d4aae106e5f1261e0ea759e69cf",
+    "exitCode": 0,
+    "seconds": 311.9850000000006,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "all663ProgramsByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Allocator-internal device preference with unchanged public headers; original frozen RGB zero-pixel gate"
+  },
+  "power": {
+    "temperature": 58.0,
+    "thermalLimit": null,
+    "thermalLimits": [],
+    "thermalMargin": 29.0,
+    "relativeThermalThreshold": 0.0,
+    "relativeThermalThresholds": [
+      -2.0,
+      0.0
+    ],
+    "targetTemperature": 87.0,
+    "thermalLimitStatus": "RelativeReported",
+    "thermalSlowdown": {
+      "hardware": false,
+      "software": false
+    },
+    "powerCap": "Not Active",
+    "gpuUtilization": 38.0,
+    "powerDrawWatts": 8.98,
+    "powerLimitWatts": 76.87,
+    "graphicsClockMHz": 525.0,
+    "smClockMHz": 525.0,
+    "memoryClockMHz": 810.0,
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "driver": "592.82",
+    "deviceId": "00000000:01:00.0",
+    "hostPower": {
+      "source": "Windows.GetSystemPowerStatus",
+      "status": "Reported",
+      "acLineStatus": 1,
+      "batteryFlags": 1,
+      "batteryPercent": 100,
+      "systemStatus": 0
+    }
+  },
+  "performance": {
+    "status": "not-measured",
+    "requiredPowerLimitWatts": 80,
+    "reason": "Observed power limit differs from original condition; prior driver request denied permissions",
+    "cpuP95BudgetMs": 8,
+    "gpuP95BudgetMs": 16.6
+  },
+  "archive": {
+    "path": "validation.zip",
+    "bytes": 363782,
+    "sha256": "44e8e0b1ca73d44a8ca4312b623d0023bda59e0040db316a913e29d04c03faac",
+    "members": {
+      "run/archive.py": "37a7c97057f0fa24818c566add0164a518a02b5929f30b96e154f5e05430fb10",
+      "run/baseline-products.json": "4a2228f804dd149db4392a75cebd1900b625eebe486bf43f52ffb4f162130496",
+      "run/budget.json": "a13e4f2add5036eb68a5bbfabd02a1bfbfdbff50676e6780aec063448ed0c033",
+      "run/build_and_check.py": "75128f0bc6108c69f122899e9dffe8e77c1ebc3b632abc3f243a92b0829fa30c",
+      "run/capture.py": "4f4ae28e35ee967ecc491848cbe5db66db2220f689f283437711a518954a7ed4",
+      "run/checks.json": "5b259ae2d5a5159afb7b3694bcb6cf607d72b43e999c2c23712f4207d255957c",
+      "run/check_intel.py": "420f32f27217b19a4f90c7196d41d16450c50a85d5ed809e2ee773449cd3902b",
+      "run/debug-build.log": "3a9a1e1caf30669da54cb917831d1e8cdc861c7f809001799b30508abc9b907a",
+      "run/debug-checks.log": "105965d0d5240c19895abacf89dbe6c06d0e842bec1c52ab80fb557e0fa4985b",
+      "run/debug-checks.xml": "13625c13654b1204dfee6bdd4ce9c8527ec0b1f34586392709f6a753681073f8",
+      "run/debug-configure.log": "e0114daf2b3eab95ea15eba3dceaffe3aa4cb897f4827c8a30f44559c2b364f2",
+      "run/debug-intel-checks.log": "be2da965ae4f604f2a4f3d64ed13a14c2aae12132ded4759596c948af246337e",
+      "run/debug-intel-checks.xml": "ab1f7c5529f8c6920bed1f67d5eeea13ca63b8b2adb582d87b17aeb20b4f999c",
+      "run/debug-intel-result.json": "45468651f85b90717e9d96ff388d3e2dd6bce72ae101a9ab0714b9a1feb44aa6",
+      "run/intel-device.txt": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+      "run/power-preflight.json": "1fa2bba180147de92148daaf8c8af710265cd89e82e2acce4e0d98817a37a769",
+      "run/prepare.py": "1a30304787fcd1d3fd51079c5ccc94633619f3376608d50af0d98496da96c8f2",
+      "run/red-compile.log": "306cab377b983095ae755fe056aa828a126ee813351336a5b9820aef1c00fcee",
+      "run/red-link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run/red.json": "ce85822f213cd779c79c045b31d777503da79e42c721c442379cfc57a9656c69",
+      "run/red.log": "481d0d861b95e799f7f7c743ae40aaaca252711552a6c33994ae788f64e208f0",
+      "run/red.py": "63ab4fef2e49c864c1b883cfaecf1ece0f551422176ac5f56548a24c06368104",
+      "run/release-build.log": "63310b1a6f6b51f62874ba513f60740900e5c03061890c3a0ab6b16712a2257f",
+      "run/release-checks.log": "02193d475ae5b6cc8670a8474c361497466aa58166ed9de9526e3f34e31a4bbd",
+      "run/release-checks.xml": "994f4564241e1ee8f7bf0913f52fbf97a0e2f162e7a991abbabfa308c3efe2bb",
+      "run/release-configure.log": "914e599ef765213935baa95be4a58a105837a855af0996151f84c73f7f8133b7",
+      "run/release-intel-checks.log": "e20de468e3cd07847f936f4a45d8b014c2f6c57c72c1e8d233f8261756927296",
+      "run/release-intel-checks.xml": "8ce35fb8a4dcce510ffa24a148ffa88d764bfb5e8fbfb0c47beaa456a3ccc62b",
+      "run/release-intel-result.json": "8e75e7d8ed43447792cf3beab21f724fc91eb5c4f9f41881c61446f4d9a05318",
+      "run/image/command.json": "77d248c4b2efb756069d40a6cb57357673f73523d8d6eafec56bcfdd07179cd8",
+      "run/image/frozen-inputs.json": "ed576d036a61f0f3a12a9e2d1b04e71c1efa5e340d65357f51cf30df29c9db0f",
+      "run/image/results.json": "2bfddbed60b5e4b5220d3b1e4f08060fa510582c5daad498c58b6741e476f1bf",
+      "run/image/runtime.json": "b6299477ac68aeaaba451b9d5bc71d8d1f11df9fa614e93f4366934392e738c4",
+      "run/image/stderr.log": "92050815ca7c61a102bff38ca91f7e2b0f1f75b37bdc04a5d299bec4d496927b",
+      "run/image/stdout.log": "ec08650659178de704bcd42da0d95f9e7166a1830499271de277e628434a9ece",
+      "run/image/frames/capture_manifest.json": "2b452be9da27a89909bd8f44df4e7ecf6d2160a56224160d073fb55f0e3fe3cc",
+      "run/image/frames/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+      "source/src/rhi/GpuAllocator.cpp": "a654781de721d5d2e124df14620b96098188b3fe408e77fa69802a1b1cca2336",
+      "source/tests/GpuBufferPolicyGpuTests.cpp": "389e5a6562a3e2316382bc0cb06cacf58e3df7a6c6e18a93d3ccd92c16ca753d",
+      "source/CMakeLists.txt": "80194a01cf63d737c6c37e90192d6c0afbd99b10fb938b5c88badfb195a93af3"
+    }
+  },
+  "acceptance": {
+    "overallVisual": "failed-user-review",
+    "overallPerformance": "pending-original-conditions",
+    "previousResidencyFailureRootCause": "unverified"
+  }
+}

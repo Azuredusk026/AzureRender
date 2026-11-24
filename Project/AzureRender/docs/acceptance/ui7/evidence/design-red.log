@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_viewport_design.py", line 44, in <module>
+    args=p.parse_args();run(args.executable.resolve(),args.output.resolve())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_viewport_design.py", line 20, in run
+    assert 'viewportView' in data, 'Projection feedback must expose actual camera service state'
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Projection feedback must expose actual camera service state

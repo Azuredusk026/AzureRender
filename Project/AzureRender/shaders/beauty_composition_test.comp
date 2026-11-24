@@ -1,0 +1,18 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "beauty_composition.glsl"
+layout(local_size_x=64) in;
+struct Case { vec4 value[12]; };
+layout(binding=0,std430) readonly buffer Inputs { Case cases[]; } inputs;
+layout(binding=1,std430) writeonly buffer Outputs { vec4 values[]; } outputs;
+void main(){
+    uint i=gl_GlobalInvocationID.x;if(i>=63)return;
+    Case c=inputs.cases[i];
+    outputs.values[i*3]=vec4(azureBeautySum(c.value[0].rgb,c.value[1].rgb,c.value[2].rgb,c.value[3].rgb,
+        c.value[4].rgb,c.value[5].rgb,c.value[6].rgb,c.value[7].rgb),float(i+1));
+    outputs.values[i*3+1]=vec4(azureBeautyReplace(c.value[8].rgb,c.value[9].rgb,c.value[10].rgb),float(i+1));
+    vec3 radiance=mix(c.value[9].rgb,c.value[11].rgb,c.value[11].a);
+    vec3 response=c.value[10].rgb*radiance;
+    vec3 ambient=vec3(c.value[8].a,c.value[9].a,c.value[10].a);
+    outputs.values[i*3+2]=vec4(azureBeautyReplace(c.value[8].rgb,response,ambient),float(i+1));
+}

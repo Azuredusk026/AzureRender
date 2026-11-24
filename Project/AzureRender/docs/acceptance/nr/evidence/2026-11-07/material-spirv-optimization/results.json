@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "status": "functional-readbacks-equal-shutdown-timeout",
+  "sourceBase": "2f0aa85",
+  "programCount": 11,
+  "baselineInstructions": 258120,
+  "candidateInstructions": 193475,
+  "instructionReductionFraction": 0.25044552921121954,
+  "allNineTargetsEqual": true,
+  "replayProcessExitQualified": false,
+  "replayShutdownTimeoutSeconds": 240,
+  "gpuCountersCollected": false,
+  "performanceBenefitQualified": false,
+  "nativeFourFrameQualified": false,
+  "production": {
+    "release": {
+      "provenanceVerified": true,
+      "originalProgramCount": 663,
+      "allProgramsByteIdentical": true
+    },
+    "debug": {
+      "provenanceVerified": true,
+      "originalProgramCount": 663,
+      "allProgramsByteIdentical": true
+    }
+  },
+  "nextTrigger": "AC power restored; first resolve or isolate replay teardown before timing qualification",
+  "archive": {
+    "file": "candidate.zip",
+    "bytes": 1193155,
+    "sha256": "41af3d4b13aee0a9e1c65614e4262b09594d0b818528eadaf6100db61137a92b"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "allowed": true,
+  "reasons": [],
+  "totalBytes": 1024208138240,
+  "freeBytes": 128357654528,
+  "usedBytes": 143438367,
+  "plannedBytes": 536870912,
+  "quotaBytes": 2147483648,
+  "reserveBytes": 102420813824,
+  "diagnostic": false
+}

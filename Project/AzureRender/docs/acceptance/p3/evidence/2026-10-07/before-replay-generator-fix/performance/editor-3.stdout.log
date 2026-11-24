@@ -1,0 +1,43 @@
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+GPU timing: enabled, timestamp period 1.000000 ns, 64 valid bits
+Editor viewport render extent: 1920x1080
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\p3\performance\editor\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\p3\performance\editor\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 8 lights, 11808 cluster references
+ECS visible renderables: 96
+Editor viewport resources rebuilt: 1083x520
+GPU timing samples: 2100
+  Shadow: 0.072 ms (12.671%)
+  Main scene: 0.329 ms (57.642%)
+  Internal outline: 0.169 ms (29.687%)
+  Total render: 0.571 ms avg, 0.532 ms min, 2.643 ms max
+  Percentiles: p50 0.560 ms, p95 0.612 ms, p99 0.777 ms
+  Submission per frame: 51.097 draws, 2.000 descriptor binds
+  CPU recording: 0.268 ms per frame, worker passes: 8400
+GPU timing report: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\p3\performance\editor-3.json
+Rendered frames: 2100
+Allocator after unload: buffers=0 images=0

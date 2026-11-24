@@ -1,0 +1,31 @@
+{
+  "status": "interrupted-for-public-minimal-reproduction",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\project\\playable.azureproject",
+    "--width",
+    "640",
+    "--height",
+    "360",
+    "--smoke-frames",
+    "90",
+    "--capture-fps",
+    "60",
+    "--fixed-frame-step",
+    "--qa-camera",
+    "scene",
+    "--qa-light",
+    "scene",
+    "--qa-isolation",
+    "beauty",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\restart-debug\\runtime.json",
+    "--game-actions",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\restart-debug\\actions.json"
+  ],
+  "programSha256": "22c9f79d87520598d3f3bd1d807a224bd309fa7e939dd2a75818161f743b9969",
+  "exitCode": 4294967295,
+  "elapsedSeconds": 285.6587145999947,
+  "reason": "Owned full-scene process stopped before gameplay; use small public fixture to diagnose restart"
+}

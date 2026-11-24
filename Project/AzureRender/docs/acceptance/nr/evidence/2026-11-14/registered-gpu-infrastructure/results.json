@@ -1,0 +1,13 @@
+{
+  "archive": {
+    "sizeBytes": 24193,
+    "members": 25,
+    "sha256": "f5b31717018dd177305bac67a96437cea456a314f93d851b28ee88ad75971d06"
+  },
+  "purpose": "Candidate evidence for review; no main registered status is changed",
+  "coverage": {
+    "releaseCapacityCandidatePasses": 8,
+    "viewFogSameProductTimeouts": 2,
+    "viewFogComparableExactImages": 43
+  }
+}

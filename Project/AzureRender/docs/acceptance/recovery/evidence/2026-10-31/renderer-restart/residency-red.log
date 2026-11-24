@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_renderer_residency.py", line 69, in <module>
+    a=p.parse_args();run(a.player.resolve(),a.output.resolve())
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_renderer_residency.py", line 53, in run
+    current=wait(reference,previous)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_renderer_residency.py", line 47, in wait
+    current=state();assert not current['loadError'] and not current['scriptErrors'] and not current['presentationErrors'],current
+            ^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_renderer_residency.py", line 43, in state
+    def state():return json.loads(call('query',name='game.state'))
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_renderer_residency.py", line 41, in call
+    result=exchange(address,token,dict(op=op,**fields));assert result['passed'],result
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_validation_protocol.py", line 19, in exchange
+    line = stream.readline(1024 * 1024 + 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\Python311\Lib\socket.py", line 706, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。

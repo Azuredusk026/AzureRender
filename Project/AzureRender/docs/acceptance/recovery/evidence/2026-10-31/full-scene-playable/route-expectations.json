@@ -1,0 +1,16 @@
+{
+  "status": "pre-capture-expectations",
+  "frames": 540,
+  "actions": 13,
+  "sourceSpeeds": [
+    0,
+    1.2,
+    3
+  ],
+  "walkSampleClip": 7,
+  "runSampleClip": 8,
+  "groundHeightAtSpawn": 1.032429067752977,
+  "rightCollisionRayX": 7.408659230335035,
+  "forwardRailingRayZ": 6.042794419457369,
+  "scope": "Input schedule and geometry are frozen before observation. Actual contact, animation weights and camera obstruction are verified from production route data. Native movement and collision equivalence remain separate gates."
+}

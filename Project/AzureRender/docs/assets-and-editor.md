@@ -1,5 +1,14 @@
 # 资产、场景与编辑器
 
+项目编辑入口为 `AzureRender.exe --editor-project <project.azureproject>`。导入、组件编辑、运行控制和游戏界面见 [项目编辑与游戏表现](runtime/editor-game-ui.md)。
+
+完整制作流程见[从空关卡制作并发布游戏](tutorials/editor-first-game.md)。工作区以视口、Scene Outliner、Details 和 Content Browser 组织场景编辑。View 菜单管理面板与布局恢复。
+
+可选[内容提案](runtime/content-proposals.md)支持场景与资产参数。
+候选生成后展示差异，并复核当前文档版本。
+场景应用与资产写入使用各自生产服务。
+生成资产保存输入、依赖、生成器版本和许可。
+
 AzureRender 会分开检查两件事：文件能否解析，以及其中的数据能否正确渲染。glTF 提供几何、动画和标准材质字段。AzureRender Material Profile 补充风格化类别、Feature、Face SDF 和类别参数。`.azscene` 保存场景节点、资源引用和 RenderSettings。
 
 ## 资产边界
@@ -167,21 +176,23 @@ lights[]
   id, nodeId, color, intensity, radius, enabled
 ```
 
-`renderSettings.sceneType` 选择场景渲染器。点光源通过 `nodeId` 关联场景节点，节点变换提供世界位置。v1 与 v2 文档读取后使用空光源列表；v3 保存完整光源数据。程序会拒绝未知的未来版本。
+`renderSettings.sceneType` 选择场景渲染器。点光源通过 `nodeId` 关联场景节点，节点变换提供世界位置。v1 与 v2 文档读取后使用空光源列表。
 
-保存场景时，程序先在同一目录写入临时文件，再原子替换目标文件。即使进程中断，原文件也不会只剩一半。`prefabSource` 和 `instanceOf` 目前只保存引用与 Transform 覆盖。项目还没有实现独立的 Prefab 文件展开系统。
+v3 保存完整光源数据。程序会拒绝未知的未来版本。
+
+保存场景时，程序先在同一目录写入临时文件，再原子替换目标文件。JSON 关卡支持 `.azureprefab` 实例展开与字段覆盖。`prefabSource` 和 `instanceOf` 保存来源与局部节点身份。保存重开恢复组件、资源、灯光和实例覆盖。
 
 ## 编辑器组成
 
 Dear ImGui 层提供：
 
 - Scene Outliner：节点层级、选择、可见性和增删。
-- Inspector：Transform、Renderer、Look、Face SDF、Shadow、Outline 等设置。
-- Asset Browser：资源 ID、路径、存在状态和依赖数。
+- Details：Transform、Renderer、Look、Face SDF、Shadow、Outline 等设置。
+- Content Browser：目录、搜索、类型、列表、网格、导入和放置。
 - Viewport：编辑器相机、Picking、Gizmo 和 Capture。
 - Diagnostics/HUD：资源、动画、Renderer、GPU Timing 和错误。
 
-编辑器通过 `EditorSession` 和 `EditorContext` 修改 `SceneDocument`。Panel 不直接持有 Vulkan Handle。Renderer 使用统一的 `RendererSceneState` 向编辑器提供可选资产、模型矩阵、Primitive 数量和选择状态。
+编辑器通过 `EditorSession` 和 `EditorContext` 修改 `SceneDocument`。Vulkan 资源由宿主管理。Renderer 的 `RendererSceneState` 提供资产与模型矩阵。项目拾取使用各节点的网格、身份与世界变换。
 
 `EditorContext` 将场景节点同步到 ECS，并把每个节点关联的全部点光源同步到 `LightComponent::emitters`。场景文档保存完整的光源列表及其节点关联。
 
@@ -252,7 +263,19 @@ Asset Browser 通过 `last_write_time` 检测变化，但不会启动后台文�
 
 有意改变画面时，用 `--update-baseline` 重写基线，并在提交说明中记录变化原因。新基线的 SHA-256 随清单更新。
 
+## 编辑文档与操作
+
+菜单、快捷键与自动工具使用统一编辑服务。
+操作描述声明参数、版本与事务能力。
+批量失败保持文档与历史，连续拖动支持合并。
+契约见[编辑操作参考](runtime/edit-operations.md)。
+
 ## 导入新资产的检查表
+
+参数化几何与刚体动作经公共生成服务进入资产库。
+来源记录输入、生成器版本、许可与输出哈希。
+生成资产可直接预览、放置和随项目发布。
+制作流程见[生成内容教程](tutorials/procedural-content.md)。
 
 1. 确认许可证和公开范围。
 2. 检查模型单位、坐标、UV、法线、切线和拓扑。
@@ -264,3 +287,21 @@ Asset Browser 通过 `last_write_time` 检测变化，但不会启动后台文�
 8. 使用 Debug Validation 加载。
 9. 生成固定视图与隔离图。
 10. 只有公共资产才进入 CI、安装包和作品集。
+
+## 表情与形态编辑
+
+动画组件版本 4 保存表情与形态覆盖。
+表情预设以骨架指纹校验适配关系。
+编辑器操作支持应用、清除及权重调整。
+撤销、重做、保存重开和运行预览共用组件契约。
+
+接口与证据见[表情验收](acceptance/ev/ev5.md)。
+
+## 场景交换
+
+完整交换包放入项目挂载目录后刷新资产库。
+资源浏览器通过场景导入服务创建可编辑节点。
+共享网格、局部层级、相机和点光保持独立身份。
+来源映射用于重导入冲突校验。
+
+格式与工作流见[场景交换验收](acceptance/ev/ev6.md)。

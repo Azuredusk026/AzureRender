@@ -4,13 +4,17 @@ struct VisibilityComponent {
 };
 }
 #include "EditorContext.hpp"
+#include "EditorRenderResourceState.hpp"
 
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "ecs/Components.hpp"
 #include "ecs/Entity.hpp"
+#include "runtime/ObjectShadowComponentCodec.hpp"
 
 #include <algorithm>
+#include <chrono>
 #include <cstring>
+#include <fstream>
 #include <system_error>
 #include <stdexcept>
 #include <utility>
@@ -25,9 +29,13 @@ EditorContext::EditorContext(
         throw std::invalid_argument("Editor scene path cannot be empty");
     }
     log("Opened scene: " + scene_.sceneId);
+    for(const auto& node:scene_.nodes)if(node.objectShadow)
+        components_[node.id]["azure.object-shadow"]=encodeObjectShadowComponent(node.objectShadow);
+    if(scene_.nodes.empty())selectedNodes_.clear();
     rebuildEntities();
     refreshSelectedTransform();
     updateResourceWriteTimes();
+    checkpointSaved();
 }
 
 RenderSettings& EditorContext::renderSettings() noexcept {
@@ -54,18 +62,21 @@ void EditorContext::detachRenderSettings() noexcept {
 }
 
 SceneNode* EditorContext::selectedNode() noexcept {
-    return scene_.nodes.empty() ? nullptr : &scene_.nodes[selectedNodeIndex_];
+    return selectedNodes_.empty()||selectedNodeIndex_>=scene_.nodes.size() ? nullptr : &scene_.nodes[selectedNodeIndex_];
 }
 
 const SceneNode* EditorContext::selectedNode() const noexcept {
-    return scene_.nodes.empty() ? nullptr : &scene_.nodes[selectedNodeIndex_];
+    return selectedNodes_.empty()||selectedNodeIndex_>=scene_.nodes.size() ? nullptr : &scene_.nodes[selectedNodeIndex_];
 }
 
 void EditorContext::selectNode(const std::size_t index) {
     if (index >= scene_.nodes.size()) {
         throw std::out_of_range("Editor node selection is out of range");
     }
+    if(selectedNodes_!=std::vector<std::size_t>{index}) { ++revision_;closeEditMerge(); }
+    if(index!=selectedNodeIndex_)clearAnimationPreview();
     selectedNodeIndex_ = index;
+    selectedNodes_ = {index};
     refreshSelectedTransform();
     log("Selected node: " + scene_.nodes[index].name);
 }
@@ -76,28 +87,92 @@ void EditorContext::selectNextNode() {
     }
 }
 
+std::filesystem::path EditorContext::recoveryPath() const {
+    const auto directory = project_ ? project_->file.parent_path() : scenePath_.parent_path();
+    std::uint64_t identity = 14695981039346656037ULL;
+    for (const unsigned char byte : std::filesystem::absolute(scenePath_).generic_u8string()) {
+        identity = (identity ^ byte) * 1099511628211ULL;
+    }
+    return directory / ".azure" / "recovery"
+        / std::filesystem::u8path(std::to_string(identity) + "-" + scenePath_.filename().u8string());
+}
+
 void EditorContext::save() {
+    if (std::filesystem::is_regular_file(scenePath_)) {
+        std::ifstream input(scenePath_, std::ios::binary);
+        if (!input) throw std::runtime_error("Cannot read recovery source");
+        const std::string bytes{std::istreambuf_iterator<char>(input), {}};
+        if (input.bad()) throw std::runtime_error("Cannot read complete recovery source");
+        if (assets_ && scenePath_.extension() == ".azurelevel")
+            (void)Level::parse(nlohmann::json::parse(bytes), *assets_);
+        else (void)SceneDocument::load(scenePath_);
+        const auto destination = recoveryPath();
+        std::filesystem::create_directories(destination.parent_path());
+        const auto writeVerified = [](const std::filesystem::path& target, const std::string& content) {
+            const auto temporary = std::filesystem::u8path(target.u8string() + ".tmp."
+                + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
+            try {
+                {
+                    std::ofstream output(temporary, std::ios::binary | std::ios::trunc);
+                    output.write(content.data(), static_cast<std::streamsize>(content.size()));
+                    output.flush();
+                    if (!output) throw std::runtime_error("Cannot write complete recovery document");
+                }
+                std::ifstream verification(temporary, std::ios::binary);
+                const std::string actual{std::istreambuf_iterator<char>(verification), {}};
+                if (verification.bad() || actual != content)
+                    throw std::runtime_error("Recovery document verification failed");
+                verification.close();
+                std::filesystem::rename(temporary, target);
+            } catch (...) {
+                std::error_code ignored;
+                std::filesystem::remove(temporary, ignored);
+                throw;
+            }
+        };
+        writeVerified(destination, bytes);
+        writeVerified(std::filesystem::u8path(destination.u8string() + ".json"), nlohmann::json{
+            {"source", std::filesystem::absolute(scenePath_).generic_u8string()},
+            {"size", bytes.size()}, {"schemaVersion", 1}}.dump(2));
+    }
     if (attachedRenderSettings_ != nullptr) {
         scene_.renderSettings = *attachedRenderSettings_;
     }
-    scene_.save(scenePath_);
-    dirty_ = false;
-    log("Saved scene: " + scenePath_.string());
+    if (assets_ && scenePath_.extension()==".azurelevel") {
+        auto document = levelDocument();
+        auto level = Level::parse(document, *assets_);level.save(scenePath_);
+        sourceLevel_ = std::move(document);assets_->refresh();
+    } else if(assets_){auto portable=scene_;for(auto& resource:portable.resources){
+        auto reference=resourceReferences_.at(resource.path);
+        if(reference.find(":/")==std::string::npos){const auto& record=assets_->records().at(reference);reference=record.virtualPath;}
+        resource.path=std::filesystem::u8path(reference);
+    }portable.save(scenePath_);}else scene_.save(scenePath_);
+    checkpointSaved();
+    ++revision_;closeEditMerge();
+    log("Saved scene: " + scenePath_.u8string());
 }
 
 void EditorContext::reload() {
-    SceneDocument document = SceneDocument::load(scenePath_);
+    SceneDocument document;
+    if (assets_ && scenePath_.extension()==".azurelevel") {
+        assets_->refresh();auto level=Level::load(scenePath_,*assets_);document=level.scene;components_=level.components;
+        std::ifstream file(scenePath_);file>>sourceLevel_;
+        capturePrefabSources();
+    } else document = assets_?project_->loadScene(scenePath_):SceneDocument::load(scenePath_);
     scene_ = std::move(document);
+    clearAnimationPreview();
     if (attachedRenderSettings_ != nullptr) {
         *attachedRenderSettings_ = scene_.renderSettings;
     }
     rebuildEntities();
     selectedNodeIndex_ = 0;
+    selectedNodes_ = scene_.nodes.empty()?std::vector<std::size_t>{}:std::vector<std::size_t>{0};
     refreshSelectedTransform();
     undoStack_.clear();
     redoStack_.clear();
     updateResourceWriteTimes();
-    dirty_ = false;
+    checkpointSaved();
+    ++revision_;closeEditMerge();
     log("Reloaded scene: " + scene_.sceneId);
 }
 
@@ -114,7 +189,11 @@ void EditorContext::syncComponents() {
         if (entity == azurerender::ecs::kInvalidEntity) {
             continue;
         }
-        const SceneNode& node = scene_.nodes[index];
+        SceneNode& node = scene_.nodes[index];
+        const auto components=components_.find(node.id);
+        node.objectShadow=components==components_.end()?std::optional<ecs::ObjectShadowComponent>{}:objectShadowFromComponents(components->second);
+        if(node.objectShadow)ecsWorld_.addComponent(entity,*node.objectShadow);
+        else ecsWorld_.removeComponent<ecs::ObjectShadowComponent>(entity);
         // Name mirrors the scene node for Outliner/ECS bridges.
         ecsWorld_.addComponent(entity, azurerender::ecs::NameComponent{});
         azurerender::ecs::NameComponent* name =
@@ -128,7 +207,7 @@ void EditorContext::syncComponents() {
         // Renderable maps the node to the asset primitive it drives. The
         // public test asset uses primitive 0 for the root node; nodes
         // without a mesh simply stay non-renderable.
-        if (node.resourceId == "asset-0" && index == 0) {
+        if ((assets_ && !node.resourceId.empty()) || (node.resourceId == "asset-0" && index == 0)) {
             ecsWorld_.addComponent(
                 entity, azurerender::ecs::RenderableComponent{0, node.visible});
         } else {
@@ -146,7 +225,7 @@ void EditorContext::syncComponents() {
                     light.color,
                     light.intensity,
                     light.radius,
-                    light.enabled});
+                    light.enabled, light.shape});
             }
         }
         if (!emitters.empty()) {
@@ -200,6 +279,8 @@ void EditorContext::removeNode(const std::size_t index) {
     }
     beginEdit();
     // Remove the node and all descendants (matched by parent chain).
+    std::vector<std::string> selectionIds;
+    for(const auto selected:selectedNodes_)selectionIds.push_back(scene_.nodes.at(selected).id);
     std::vector<std::size_t> removed;
     removed.push_back(index);
     bool grew = true;
@@ -226,6 +307,10 @@ void EditorContext::removeNode(const std::size_t index) {
     }
     std::sort(removed.begin(), removed.end(), std::greater<std::size_t>());
     for (const std::size_t removedIndex : removed) {
+        const auto id=scene_.nodes[removedIndex].id;
+        components_.erase(id);
+        scene_.lights.erase(std::remove_if(scene_.lights.begin(),scene_.lights.end(),
+            [&](const SceneLight& light) { return light.nodeId==id; }),scene_.lights.end());
         scene_.nodes.erase(
             scene_.nodes.begin() + static_cast<std::ptrdiff_t>(removedIndex));
         if (removedIndex < nodeEntities_.size()) {
@@ -238,6 +323,12 @@ void EditorContext::removeNode(const std::size_t index) {
     if (selectedNodeIndex_ >= scene_.nodes.size()) {
         selectedNodeIndex_ = scene_.nodes.empty() ? 0 : scene_.nodes.size() - 1;
     }
+    selectedNodes_.clear();
+    for(std::size_t candidate=0;candidate<scene_.nodes.size();++candidate)
+        if(std::find(selectionIds.begin(),selectionIds.end(),scene_.nodes[candidate].id)!=selectionIds.end())selectedNodes_.push_back(candidate);
+    if(selectedNodes_.empty()&&!selectionIds.empty()&&!scene_.nodes.empty())selectedNodes_.push_back(selectedNodeIndex_);
+    if(!selectedNodes_.empty())selectedNodeIndex_=selectedNodes_.back();
+    clearAnimationPreview();
     refreshSelectedTransform();
     log("Removed node (and descendants)");
 }
@@ -278,6 +369,7 @@ void EditorContext::setSelectedNodeVisible(const bool visible) {
 }
 
 void EditorContext::setSelectedNodePrefab(std::string prefabSource) {
+    if(isProject())throw std::invalid_argument("Prefab provenance is read-only; use prefab placement and authoring operations");
     SceneNode* node = selectedNode();
     if (node == nullptr || node->prefabSource == prefabSource) return;
     beginEdit();
@@ -285,6 +377,7 @@ void EditorContext::setSelectedNodePrefab(std::string prefabSource) {
 }
 
 void EditorContext::setSelectedNodeInstance(std::string instanceOf) {
+    if(isProject())throw std::invalid_argument("Prefab local identity is read-only; use prefab placement and authoring operations");
     SceneNode* node = selectedNode();
     if (node == nullptr || node->instanceOf == instanceOf) return;
     beginEdit();
@@ -292,23 +385,31 @@ void EditorContext::setSelectedNodeInstance(std::string instanceOf) {
 }
 
 EditorContext::Snapshot EditorContext::snapshot() const {
-    Snapshot result{scene_, selectedNodeIndex_};
+    Snapshot result{scene_, selectedNodeIndex_, components_, selectedNodes_, sourceLevel_, resourceReferences_,prefabBaselines_,prefabFingerprints_};
     result.scene.renderSettings = renderSettings();
     return result;
 }
 
 void EditorContext::beginEdit() {
+    auto checkpoint=snapshot();
     constexpr std::size_t kHistoryCapacity = 100;
     if (undoStack_.size() == kHistoryCapacity) {
         undoStack_.erase(undoStack_.begin());
     }
-    undoStack_.push_back(snapshot());
+    undoStack_.push_back(std::move(checkpoint));
     redoStack_.clear();
     dirty_ = true;
+    ++revision_;closeEditMerge();
 }
 
 void EditorContext::restore(Snapshot restored) {
     scene_ = std::move(restored.scene);
+    components_ = std::move(restored.components);
+    sourceLevel_ = std::move(restored.sourceLevel);
+    prefabBaselines_=std::move(restored.prefabBaselines);prefabFingerprints_=std::move(restored.prefabFingerprints);
+    resourceReferences_ = std::move(restored.resourceReferences);
+    clearAnimationPreview();
+    selectedNodes_ = std::move(restored.selectedNodes);
     if (attachedRenderSettings_ != nullptr) {
         *attachedRenderSettings_ = scene_.renderSettings;
     }
@@ -316,13 +417,14 @@ void EditorContext::restore(Snapshot restored) {
         ? 0 : std::min(restored.selectedNodeIndex, scene_.nodes.size() - 1);
     rebuildEntities();
     refreshSelectedTransform();
-    dirty_ = true;
+    refreshDirty();
 }
 
 bool EditorContext::undo() {
     if (undoStack_.empty()) return false;
+    auto restored=undoStack_.back();if(assets_)resolveSceneMaterials(restored.scene,*assets_);
+    ++revision_;closeEditMerge();
     redoStack_.push_back(snapshot());
-    Snapshot restored = std::move(undoStack_.back());
     undoStack_.pop_back();
     restore(std::move(restored));
     log("Undo");
@@ -331,8 +433,9 @@ bool EditorContext::undo() {
 
 bool EditorContext::redo() {
     if (redoStack_.empty()) return false;
+    auto restored=redoStack_.back();if(assets_)resolveSceneMaterials(restored.scene,*assets_);
+    ++revision_;closeEditMerge();
     undoStack_.push_back(snapshot());
-    Snapshot restored = std::move(redoStack_.back());
     redoStack_.pop_back();
     restore(std::move(restored));
     log("Redo");
@@ -368,6 +471,7 @@ void EditorContext::refreshSelectedTransform() {
 std::filesystem::path EditorContext::resolvedResourcePath(
     const SceneResource& resource) const {
     if (resource.path.is_absolute()) return resource.path;
+    if(assets_ && resource.path.generic_u8string().find(":/")!=std::string::npos)return assets_->resolveReference(resource.path.generic_u8string());
     const std::filesystem::path besideScene =
         scenePath_.parent_path() / resource.path;
     if (std::filesystem::exists(besideScene)) return besideScene;
@@ -394,7 +498,9 @@ std::vector<EditorContext::ResourceStatus> EditorContext::resourceStatuses() con
 
 void EditorContext::updateResourceWriteTimes() {
     resourceWriteTimes_.clear();
+    const auto referenced = EditorRenderResourceState::referencedResources(scene_.nodes);
     for (const SceneResource& resource : scene_.resources) {
+        if (referenced.count(resource.id) == 0) continue;
         std::error_code error;
         const auto time = std::filesystem::last_write_time(
             resolvedResourcePath(resource), error);
@@ -404,19 +510,29 @@ void EditorContext::updateResourceWriteTimes() {
 
 std::size_t EditorContext::reloadChangedAssets() {
     std::size_t changed = 0;
+    decltype(resourceWriteTimes_) observedWrites;
+    const auto referenced = EditorRenderResourceState::referencedResources(scene_.nodes);
+    observedWrites.reserve(referenced.size());
     for (const SceneResource& resource : scene_.resources) {
-        std::error_code error;
-        const auto current = std::filesystem::last_write_time(
-            resolvedResourcePath(resource), error);
+        if (referenced.count(resource.id) == 0) continue;
         const auto previous = std::find_if(
             resourceWriteTimes_.begin(), resourceWriteTimes_.end(),
             [&](const auto& item) { return item.first == resource.id; });
+        std::error_code error;
+        const auto current = std::filesystem::last_write_time(
+            resolvedResourcePath(resource), error);
         if (error || previous == resourceWriteTimes_.end()
             || previous->second != current) {
             ++changed;
         }
+        if (!error) {
+            observedWrites.emplace_back(resource.id, current);
+        }
     }
-    updateResourceWriteTimes();
+    resourceWriteTimes_ = std::move(observedWrites);
+    if(changed&&assets_)try { assets_->refresh(); }
+        catch(const std::exception& error) { log("Asset reload rejected: "+std::string(error.what()));return 0; }
+    if(changed)notifyAssetVersionChanged();
     return changed;
 }
 

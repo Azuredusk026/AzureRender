@@ -1,0 +1,807 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-isolated-production-restored-performance-comparison-unqualified",
+  "sourceBase": "4abd900",
+  "productionAdoption": false,
+  "buildAndChecks": {
+    "candidate": {
+      "release": {
+        "build": {
+          "status": "passed",
+          "exitCode": 0,
+          "seconds": 22.46899999998277,
+          "command": [
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+            "-X",
+            "utf8",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+            "build",
+            "--source",
+            "D:\\Projects\\FYP\\Project\\AzureRender",
+            "--build-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+            "--config",
+            "Release",
+            "--test-target",
+            "AzureOpaqueTransparencyScratchTests",
+            "--test-target",
+            "AzureRenderNullRhiPassTests",
+            "--test-target",
+            "AzureNodeOpacityRecordingTests",
+            "--test-target",
+            "AzureMaterialTextureSharingTests",
+            "--test-target",
+            "AzureMotionRecordingTests",
+            "--test-target",
+            "AzureProjectedReflectionSceneTests",
+            "--test-target",
+            "AzureObjectShadowRecordingTests",
+            "--test-target",
+            "AzureOutlineCoverageRecordingTests",
+            "--test-target",
+            "AzureBufferBarrierBatchTests",
+            "--test-target",
+            "AzurePrimitiveOpacityTests",
+            "--test-target",
+            "AzureNodeOpacityTests"
+          ],
+          "buildScope": {
+            "kind": "runtime-and-tests",
+            "targets": [
+              "AzureRender",
+              "AzurePlayer",
+              "AzureMetaGen",
+              "AzureGeometryCompiler",
+              "AzureAssetExchange",
+              "AzureMaterialValidator",
+              "AzureGameLauncher",
+              "AzureEngineContracts",
+              "AzureManagedArtifacts",
+              "AzureShaderModulePrototypes",
+              "AzureOpaqueTransparencyScratchTests",
+              "AzureRenderNullRhiPassTests",
+              "AzureNodeOpacityRecordingTests",
+              "AzureMaterialTextureSharingTests",
+              "AzureMotionRecordingTests",
+              "AzureProjectedReflectionSceneTests",
+              "AzureObjectShadowRecordingTests",
+              "AzureOutlineCoverageRecordingTests",
+              "AzureBufferBarrierBatchTests",
+              "AzurePrimitiveOpacityTests",
+              "AzureNodeOpacityTests"
+            ],
+            "testProducts": {
+              "AzureOpaqueTransparencyScratchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureOpaqueTransparencyScratchTests.exe",
+              "AzureRenderNullRhiPassTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderNullRhiPassTests.exe",
+              "AzureNodeOpacityRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNodeOpacityRecordingTests.exe",
+              "AzureMaterialTextureSharingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMaterialTextureSharingTests.exe",
+              "AzureMotionRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMotionRecordingTests.exe",
+              "AzureProjectedReflectionSceneTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionSceneTests.exe",
+              "AzureObjectShadowRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureObjectShadowRecordingTests.exe",
+              "AzureOutlineCoverageRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureOutlineCoverageRecordingTests.exe",
+              "AzureBufferBarrierBatchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureBufferBarrierBatchTests.exe",
+              "AzurePrimitiveOpacityTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePrimitiveOpacityTests.exe",
+              "AzureNodeOpacityTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNodeOpacityTests.exe"
+            }
+          },
+          "productCount": 611,
+          "productionShaders535ByteIdentical": true,
+          "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+        },
+        "checks": {
+          "exitCode": 0,
+          "seconds": 19.64000000001397,
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+            "-R",
+            "^(AzureRender.OpaqueTransparencyScratch|AzureRender.NullRhiPass|AzureRender.NodeOpacityRecording|AzureRender.MaterialTextureSharing|AzureRender.MotionRecording|AzureRender.ProjectedReflectionScene|AzureRender.ObjectShadowRecording|AzureRender.OutlineCoverageRecording|AzureRender.BufferBarrierBatch|AzureRender.PrimitiveOpacity|AzureRender.NodeOpacity|AzureEngine.BuildProvenance)$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\transparent-world-position\\engine-release-checks.xml"
+          ],
+          "expectedChecks": 12
+        },
+        "actualChecks": [
+          "AzureRender.ProjectedReflectionScene",
+          "AzureRender.PrimitiveOpacity",
+          "AzureRender.NodeOpacityRecording",
+          "AzureRender.OutlineCoverageRecording",
+          "AzureRender.OpaqueTransparencyScratch",
+          "AzureRender.BufferBarrierBatch",
+          "AzureRender.MaterialTextureSharing",
+          "AzureRender.MotionRecording",
+          "AzureRender.ObjectShadowRecording",
+          "AzureRender.NodeOpacity",
+          "AzureEngine.BuildProvenance",
+          "AzureRender.NullRhiPass"
+        ]
+      },
+      "debug": {
+        "build": {
+          "status": "passed",
+          "exitCode": 0,
+          "seconds": 16.28100000001723,
+          "command": [
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+            "-X",
+            "utf8",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+            "build",
+            "--source",
+            "D:\\Projects\\FYP\\Project\\AzureRender",
+            "--build-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+            "--config",
+            "Debug",
+            "--test-target",
+            "AzureOpaqueTransparencyScratchTests",
+            "--test-target",
+            "AzureRenderNullRhiPassTests",
+            "--test-target",
+            "AzureNodeOpacityRecordingTests",
+            "--test-target",
+            "AzureMaterialTextureSharingTests",
+            "--test-target",
+            "AzureMotionRecordingTests",
+            "--test-target",
+            "AzureProjectedReflectionSceneTests",
+            "--test-target",
+            "AzureObjectShadowRecordingTests",
+            "--test-target",
+            "AzureOutlineCoverageRecordingTests",
+            "--test-target",
+            "AzureBufferBarrierBatchTests",
+            "--test-target",
+            "AzurePrimitiveOpacityTests",
+            "--test-target",
+            "AzureNodeOpacityTests"
+          ],
+          "buildScope": {
+            "kind": "runtime-and-tests",
+            "targets": [
+              "AzureRender",
+              "AzurePlayer",
+              "AzureMetaGen",
+              "AzureGeometryCompiler",
+              "AzureAssetExchange",
+              "AzureMaterialValidator",
+              "AzureGameLauncher",
+              "AzureEngineContracts",
+              "AzureManagedArtifacts",
+              "AzureShaderModulePrototypes",
+              "AzureOpaqueTransparencyScratchTests",
+              "AzureRenderNullRhiPassTests",
+              "AzureNodeOpacityRecordingTests",
+              "AzureMaterialTextureSharingTests",
+              "AzureMotionRecordingTests",
+              "AzureProjectedReflectionSceneTests",
+              "AzureObjectShadowRecordingTests",
+              "AzureOutlineCoverageRecordingTests",
+              "AzureBufferBarrierBatchTests",
+              "AzurePrimitiveOpacityTests",
+              "AzureNodeOpacityTests"
+            ],
+            "testProducts": {
+              "AzureOpaqueTransparencyScratchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureOpaqueTransparencyScratchTests.exe",
+              "AzureRenderNullRhiPassTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderNullRhiPassTests.exe",
+              "AzureNodeOpacityRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNodeOpacityRecordingTests.exe",
+              "AzureMaterialTextureSharingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMaterialTextureSharingTests.exe",
+              "AzureMotionRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMotionRecordingTests.exe",
+              "AzureProjectedReflectionSceneTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionSceneTests.exe",
+              "AzureObjectShadowRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureObjectShadowRecordingTests.exe",
+              "AzureOutlineCoverageRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureOutlineCoverageRecordingTests.exe",
+              "AzureBufferBarrierBatchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureBufferBarrierBatchTests.exe",
+              "AzurePrimitiveOpacityTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePrimitiveOpacityTests.exe",
+              "AzureNodeOpacityTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNodeOpacityTests.exe"
+            }
+          },
+          "productCount": 611,
+          "productionShaders535ByteIdentical": true,
+          "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+        },
+        "checks": {
+          "exitCode": 0,
+          "seconds": 40.92199999996228,
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+            "-R",
+            "^(AzureRender.OpaqueTransparencyScratch|AzureRender.NullRhiPass|AzureRender.NodeOpacityRecording|AzureRender.MaterialTextureSharing|AzureRender.MotionRecording|AzureRender.ProjectedReflectionScene|AzureRender.ObjectShadowRecording|AzureRender.OutlineCoverageRecording|AzureRender.BufferBarrierBatch|AzureRender.PrimitiveOpacity|AzureRender.NodeOpacity|AzureEngine.BuildProvenance)$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\transparent-world-position\\engine-debug-checks.xml"
+          ],
+          "expectedChecks": 12
+        },
+        "actualChecks": [
+          "AzureRender.ProjectedReflectionScene",
+          "AzureRender.PrimitiveOpacity",
+          "AzureRender.NodeOpacityRecording",
+          "AzureRender.OutlineCoverageRecording",
+          "AzureRender.OpaqueTransparencyScratch",
+          "AzureRender.BufferBarrierBatch",
+          "AzureRender.MaterialTextureSharing",
+          "AzureRender.MotionRecording",
+          "AzureRender.ObjectShadowRecording",
+          "AzureRender.NodeOpacity",
+          "AzureEngine.BuildProvenance",
+          "AzureRender.NullRhiPass"
+        ]
+      }
+    },
+    "restored": {
+      "release": {
+        "build": {
+          "status": "passed",
+          "exitCode": 0,
+          "seconds": 19.18800000002375,
+          "command": [
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+            "-X",
+            "utf8",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+            "build",
+            "--source",
+            "D:\\Projects\\FYP\\Project\\AzureRender",
+            "--build-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+            "--config",
+            "Release",
+            "--test-target",
+            "AzureOpaqueTransparencyScratchTests",
+            "--test-target",
+            "AzureRenderNullRhiPassTests",
+            "--test-target",
+            "AzureNodeOpacityRecordingTests",
+            "--test-target",
+            "AzureMaterialTextureSharingTests",
+            "--test-target",
+            "AzureMotionRecordingTests",
+            "--test-target",
+            "AzureProjectedReflectionSceneTests",
+            "--test-target",
+            "AzureObjectShadowRecordingTests",
+            "--test-target",
+            "AzureOutlineCoverageRecordingTests",
+            "--test-target",
+            "AzureBufferBarrierBatchTests",
+            "--test-target",
+            "AzurePrimitiveOpacityTests",
+            "--test-target",
+            "AzureNodeOpacityTests"
+          ],
+          "buildScope": {
+            "kind": "runtime-and-tests",
+            "targets": [
+              "AzureRender",
+              "AzurePlayer",
+              "AzureMetaGen",
+              "AzureGeometryCompiler",
+              "AzureAssetExchange",
+              "AzureMaterialValidator",
+              "AzureGameLauncher",
+              "AzureEngineContracts",
+              "AzureManagedArtifacts",
+              "AzureShaderModulePrototypes",
+              "AzureOpaqueTransparencyScratchTests",
+              "AzureRenderNullRhiPassTests",
+              "AzureNodeOpacityRecordingTests",
+              "AzureMaterialTextureSharingTests",
+              "AzureMotionRecordingTests",
+              "AzureProjectedReflectionSceneTests",
+              "AzureObjectShadowRecordingTests",
+              "AzureOutlineCoverageRecordingTests",
+              "AzureBufferBarrierBatchTests",
+              "AzurePrimitiveOpacityTests",
+              "AzureNodeOpacityTests"
+            ],
+            "testProducts": {
+              "AzureOpaqueTransparencyScratchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureOpaqueTransparencyScratchTests.exe",
+              "AzureRenderNullRhiPassTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderNullRhiPassTests.exe",
+              "AzureNodeOpacityRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNodeOpacityRecordingTests.exe",
+              "AzureMaterialTextureSharingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMaterialTextureSharingTests.exe",
+              "AzureMotionRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMotionRecordingTests.exe",
+              "AzureProjectedReflectionSceneTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionSceneTests.exe",
+              "AzureObjectShadowRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureObjectShadowRecordingTests.exe",
+              "AzureOutlineCoverageRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureOutlineCoverageRecordingTests.exe",
+              "AzureBufferBarrierBatchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureBufferBarrierBatchTests.exe",
+              "AzurePrimitiveOpacityTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePrimitiveOpacityTests.exe",
+              "AzureNodeOpacityTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNodeOpacityTests.exe"
+            }
+          },
+          "productCount": 611,
+          "productionShaders535ByteIdentical": true,
+          "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+        },
+        "checks": {
+          "exitCode": 0,
+          "seconds": 16.875,
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+            "-R",
+            "^(AzureRender.OpaqueTransparencyScratch|AzureRender.NullRhiPass|AzureRender.NodeOpacityRecording|AzureRender.MaterialTextureSharing|AzureRender.MotionRecording|AzureRender.ProjectedReflectionScene|AzureRender.ObjectShadowRecording|AzureRender.OutlineCoverageRecording|AzureRender.BufferBarrierBatch|AzureRender.PrimitiveOpacity|AzureRender.NodeOpacity|AzureEngine.BuildProvenance)$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\transparent-world-position\\restored\\engine-release-checks.xml"
+          ],
+          "expectedChecks": 12
+        },
+        "actualChecks": [
+          "AzureRender.ProjectedReflectionScene",
+          "AzureRender.PrimitiveOpacity",
+          "AzureRender.NodeOpacityRecording",
+          "AzureRender.OutlineCoverageRecording",
+          "AzureRender.OpaqueTransparencyScratch",
+          "AzureRender.BufferBarrierBatch",
+          "AzureRender.MaterialTextureSharing",
+          "AzureRender.MotionRecording",
+          "AzureRender.ObjectShadowRecording",
+          "AzureRender.NodeOpacity",
+          "AzureEngine.BuildProvenance",
+          "AzureRender.NullRhiPass"
+        ]
+      },
+      "debug": {
+        "build": {
+          "status": "passed",
+          "exitCode": 0,
+          "seconds": 17.21799999999348,
+          "command": [
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+            "-X",
+            "utf8",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+            "build",
+            "--source",
+            "D:\\Projects\\FYP\\Project\\AzureRender",
+            "--build-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+            "--config",
+            "Debug",
+            "--test-target",
+            "AzureOpaqueTransparencyScratchTests",
+            "--test-target",
+            "AzureRenderNullRhiPassTests",
+            "--test-target",
+            "AzureNodeOpacityRecordingTests",
+            "--test-target",
+            "AzureMaterialTextureSharingTests",
+            "--test-target",
+            "AzureMotionRecordingTests",
+            "--test-target",
+            "AzureProjectedReflectionSceneTests",
+            "--test-target",
+            "AzureObjectShadowRecordingTests",
+            "--test-target",
+            "AzureOutlineCoverageRecordingTests",
+            "--test-target",
+            "AzureBufferBarrierBatchTests",
+            "--test-target",
+            "AzurePrimitiveOpacityTests",
+            "--test-target",
+            "AzureNodeOpacityTests"
+          ],
+          "buildScope": {
+            "kind": "runtime-and-tests",
+            "targets": [
+              "AzureRender",
+              "AzurePlayer",
+              "AzureMetaGen",
+              "AzureGeometryCompiler",
+              "AzureAssetExchange",
+              "AzureMaterialValidator",
+              "AzureGameLauncher",
+              "AzureEngineContracts",
+              "AzureManagedArtifacts",
+              "AzureShaderModulePrototypes",
+              "AzureOpaqueTransparencyScratchTests",
+              "AzureRenderNullRhiPassTests",
+              "AzureNodeOpacityRecordingTests",
+              "AzureMaterialTextureSharingTests",
+              "AzureMotionRecordingTests",
+              "AzureProjectedReflectionSceneTests",
+              "AzureObjectShadowRecordingTests",
+              "AzureOutlineCoverageRecordingTests",
+              "AzureBufferBarrierBatchTests",
+              "AzurePrimitiveOpacityTests",
+              "AzureNodeOpacityTests"
+            ],
+            "testProducts": {
+              "AzureOpaqueTransparencyScratchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureOpaqueTransparencyScratchTests.exe",
+              "AzureRenderNullRhiPassTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderNullRhiPassTests.exe",
+              "AzureNodeOpacityRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNodeOpacityRecordingTests.exe",
+              "AzureMaterialTextureSharingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMaterialTextureSharingTests.exe",
+              "AzureMotionRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMotionRecordingTests.exe",
+              "AzureProjectedReflectionSceneTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionSceneTests.exe",
+              "AzureObjectShadowRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureObjectShadowRecordingTests.exe",
+              "AzureOutlineCoverageRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureOutlineCoverageRecordingTests.exe",
+              "AzureBufferBarrierBatchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureBufferBarrierBatchTests.exe",
+              "AzurePrimitiveOpacityTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePrimitiveOpacityTests.exe",
+              "AzureNodeOpacityTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNodeOpacityTests.exe"
+            }
+          },
+          "productCount": 611,
+          "productionShaders535ByteIdentical": true,
+          "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+        },
+        "checks": {
+          "exitCode": 0,
+          "seconds": 38.45299999997951,
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+            "-R",
+            "^(AzureRender.OpaqueTransparencyScratch|AzureRender.NullRhiPass|AzureRender.NodeOpacityRecording|AzureRender.MaterialTextureSharing|AzureRender.MotionRecording|AzureRender.ProjectedReflectionScene|AzureRender.ObjectShadowRecording|AzureRender.OutlineCoverageRecording|AzureRender.BufferBarrierBatch|AzureRender.PrimitiveOpacity|AzureRender.NodeOpacity|AzureEngine.BuildProvenance)$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\transparent-world-position\\restored\\engine-debug-checks.xml"
+          ],
+          "expectedChecks": 12
+        },
+        "actualChecks": [
+          "AzureRender.ProjectedReflectionScene",
+          "AzureRender.PrimitiveOpacity",
+          "AzureRender.NodeOpacityRecording",
+          "AzureRender.OutlineCoverageRecording",
+          "AzureRender.OpaqueTransparencyScratch",
+          "AzureRender.BufferBarrierBatch",
+          "AzureRender.MaterialTextureSharing",
+          "AzureRender.MotionRecording",
+          "AzureRender.ObjectShadowRecording",
+          "AzureRender.NodeOpacity",
+          "AzureEngine.BuildProvenance",
+          "AzureRender.NullRhiPass"
+        ]
+      }
+    }
+  },
+  "candidateNativeImage": {
+    "status": "passed",
+    "sourceBase": "4abd900",
+    "executableSha256": "052ee0c61cc50d3b04d828d9d0b3c21f7c0a56b44e0171ea6d33e41e3279b1b4",
+    "exitCode": 0,
+    "seconds": 106.25,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Per-instance transparent world-position reuse candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "costStop": {
+    "status": "comparison-unqualified-stopped-after-baseline-environment-failure",
+    "sourceBase": "4abd900",
+    "productionAdoption": false,
+    "completedRows": {
+      "a-before": {
+        "status": "measured",
+        "sourceBase": "4abd900",
+        "visualAcceptance": "failed-user-review",
+        "seconds": 109.90599999995902,
+        "warmup": 300,
+        "samples": 120,
+        "gpu": {
+          "shadowMs": {
+            "mean": 4.563216533333334,
+            "p95": 4.7973536,
+            "p99": 4.9838320000000005
+          },
+          "sceneMs": {
+            "mean": 29.855837866666665,
+            "p95": 31.1830016,
+            "p99": 32.09910272
+          },
+          "postProcessMs": {
+            "mean": 0.30173866666666666,
+            "p95": 0.311296,
+            "p99": 0.315392
+          },
+          "frameMs": {
+            "mean": 34.720793066666666,
+            "p95": 36.306936,
+            "p99": 37.35210912
+          }
+        },
+        "cpu": {
+          "mean": 19.976669166666667,
+          "p95": 22.214684999999918,
+          "p99": 29.941373999999247
+        },
+        "wait": {
+          "mean": 14.52959,
+          "p95": 17.061354999998727,
+          "p99": 17.962953000000727
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "framePacing": {
+          "maximumRate": 60,
+          "presentMode": "FIFO",
+          "vsync": true,
+          "waitFrames": 0,
+          "waitMilliseconds": 0.0
+        },
+        "allocator": {
+          "bufferAllocations": 1997,
+          "imageAllocations": 440,
+          "liveBuffers": 834,
+          "liveImages": 440,
+          "bufferBytes": 2985576984,
+          "imageBytes": 2779192832,
+          "liveBufferBytes": 415610856,
+          "liveImageBytes": 2779192832,
+          "deviceLocalPeakBytes": 3291255520
+        },
+        "peakWorkingSetBytes": 7404838912,
+        "environmentFailures": [
+          "run observation 19: software thermal slowdown is active"
+        ],
+        "zeroAllocator": true,
+        "validationClean": true,
+        "allMountedProjectBytesUnchanged": true,
+        "originalLimitsNumericallyMet": false,
+        "powerProfileStable": true,
+        "environmentPassed": false,
+        "diagnosticOnly": true,
+        "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "productionShaderFilesUnchanged": true,
+        "selectedExecutable": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\transparent-world-position\\baseline\\AzurePlayer.exe",
+        "selectedExecutableSha256": "c3c0d34f341a4ccfe8bfc6e775fd3efc7cad169bef1264ec796feb1380e5f36d",
+        "baselineExecutableUnchanged": true
+      },
+      "b-candidate": {
+        "status": "measured",
+        "sourceBase": "4abd900",
+        "visualAcceptance": "failed-user-review",
+        "seconds": 120.04699999996228,
+        "warmup": 300,
+        "samples": 120,
+        "gpu": {
+          "shadowMs": {
+            "mean": 4.4993608,
+            "p95": 4.674307199999999,
+            "p99": 4.7405936
+          },
+          "sceneMs": {
+            "mean": 29.894741333333332,
+            "p95": 31.158067199999998,
+            "p99": 31.5537408
+          },
+          "postProcessMs": {
+            "mean": 0.2862250666666667,
+            "p95": 0.3001344,
+            "p99": 0.30578688
+          },
+          "frameMs": {
+            "mean": 34.6803272,
+            "p95": 36.129774399999995,
+            "p99": 36.49025984
+          }
+        },
+        "cpu": {
+          "mean": 24.179000000000023,
+          "p95": 30.253240000000176,
+          "p99": 34.53160400000009
+        },
+        "wait": {
+          "mean": 10.187542499999976,
+          "p95": 12.804690000000255,
+          "p99": 13.890590999999805
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "framePacing": {
+          "maximumRate": 60,
+          "presentMode": "FIFO",
+          "vsync": true,
+          "waitFrames": 0,
+          "waitMilliseconds": 0.0
+        },
+        "allocator": {
+          "bufferAllocations": 1997,
+          "imageAllocations": 440,
+          "liveBuffers": 834,
+          "liveImages": 440,
+          "bufferBytes": 2985576984,
+          "imageBytes": 2779192832,
+          "liveBufferBytes": 415610856,
+          "liveImageBytes": 2779192832,
+          "deviceLocalPeakBytes": 3291255520
+        },
+        "peakWorkingSetBytes": 7403851776,
+        "environmentFailures": [
+          "run observation 21: driver relative thermal headroom is insufficient",
+          "run observation 21: software thermal slowdown is active"
+        ],
+        "zeroAllocator": true,
+        "validationClean": true,
+        "allMountedProjectBytesUnchanged": true,
+        "originalLimitsNumericallyMet": false,
+        "powerProfileStable": true,
+        "environmentPassed": false,
+        "diagnosticOnly": true,
+        "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "productionShaderFilesUnchanged": true,
+        "selectedExecutable": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "selectedExecutableSha256": "052ee0c61cc50d3b04d828d9d0b3c21f7c0a56b44e0171ea6d33e41e3279b1b4",
+        "baselineExecutableUnchanged": true
+      }
+    },
+    "reason": "First baseline thermal gate failed; remaining owned comparison processes stopped to bound exploration; partial outputs retained",
+    "imageCompatibility": "Four original frozenRGB frames passed",
+    "userApplicationsTerminated": false,
+    "stoppedController": 20320,
+    "timestampUtc": "2026-11-05T20:28:28.966461+00:00"
+  },
+  "restoredEquivalence": {
+    "sourceInputsByteIdenticalToBaseline": true,
+    "baselineTextSha256": "27032f516731a2e113aa9ea56f405afbe060f021c608975b1ea7833239bef2dc",
+    "restoredTextSha256": "27032f516731a2e113aa9ea56f405afbe060f021c608975b1ea7833239bef2dc",
+    "textByteIdentical": true
+  },
+  "scope": "Candidate4originalRGB references exact;2config x12CPU tests each before and after restore; source raw bytes and restored Player.text match pre-candidate; native restored image not rerun; first2cost cases thermal failed, third control cancelled/partial output retained; no causal regression or gain claim",
+  "fullVisualAcceptance": "failed-user-review",
+  "fullPerformanceAcceptance": "failed",
+  "archiveSha256": "2fe08162840b2abaf703c2f74be7cea6489c8e7b3f19c34f064275b5203b2fbd",
+  "archiveMembers": {
+    "a-after-driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "a-before-driver.log": "06a0dbac9e780160c926731989ee415ae08f5c01e4888c2e821aba0840cc690d",
+    "b-candidate-driver.log": "6ef6f5eea66d41024a4058e6861417f4b1c22ab5cb79785198899cc401850972",
+    "baseline/manifest.json": "5a54ed6ba3701f172ce73f28bef26025c7eb084b2fc273b22e5853dd67bf5a6b",
+    "cost-stop.json": "acb8b58985255b844b88f7109f946af0b668f9456a593ea7b955ac9f2d269a13",
+    "drivers/capture_transparent_world_position.py": "bca437e74f1a6da9835342978e4eed7dc825eafaf73c94411e41aee793e800bc",
+    "drivers/measure_transparent_world_position_one.py": "41c14c8ff1edc0c79b66dcc7782a7b7a518a4767031b6dc3cac875a8fa40619f",
+    "drivers/run_transparent_world_position_aba.py": "8018b886ee4a9743b63e953f281f29069ffe7c6ad342b58973d2877bb62d2465",
+    "drivers/validate_transparent_world_position.py": "cecad80c8b9f41b15934c4dd209905d8649cffaec65219db7b49634e5ef03087",
+    "drivers/validate_transparent_world_position_restore.py": "faf7ddafcb1afbe3bbaecd1748f6805a3274b25335785f5653d190d1c2ccbd3a",
+    "engine-debug-build.json": "33ed472b2fccdc753c1184c14077248a059c172301efe75e7cc80acdf28bae92",
+    "engine-debug-build.log": "82a24403a4c61d7ac397cc2234d8b4977aa8f18034841c738690fd127cba6c1b",
+    "engine-debug-checks-full.log": "4c7b1066dafa7b1786018e361f2cf2bc288e256f13f5f7101189abbb3a1f84de",
+    "engine-debug-checks.json": "9cbcf89782cb5caff64e0eaac2a627a0b78153e6ea2016358434bdf03878c868",
+    "engine-debug-checks.log": "08656adc80fdb6fd4ecf492252fe708e6bdb18050a2d2e786902622bd9d96af8",
+    "engine-debug-checks.xml": "f900b20fe69c7a273f83cc2daf71a2c178612f637fcea45af300764a7e720657",
+    "engine-debug-provenance.json": "e481badd2c36e8670cfd81b1d2a4d80c11e2ff77eb591b58e29c5c121568f2c0",
+    "engine-release-build.json": "f0b1bc81735ea4c388beeeb883aca41e0dd08b3e52e5b8e2c6d0b0ff0aa58ab8",
+    "engine-release-build.log": "9061b4aa2e67cbd307a01ec739cde0d34a7aaf93718acc8ac2031c9bcb88a122",
+    "engine-release-checks-full.log": "169c80c01039e05d9fb93f7a763db19918fbcdf1525afccc8b663be5fa63370a",
+    "engine-release-checks.json": "0a7c6200ff17e08561ddf8734c32b28bf8ac8d8450511e86b88705653b73c05f",
+    "engine-release-checks.log": "2698cc2b309ed486038ee9495ac8d1ee0008150b36d989f3eb2d806cc81fc560",
+    "engine-release-checks.xml": "3fd530f403ed4b7533a8c2f32241045064f3c023bfd27119ae39c15737c29d8a",
+    "engine-release-provenance.json": "bf7ba2f926decd99e1c8647f46ff632d1ac5de6d434a28472c88241ff344dbad",
+    "image/captures/azureplayer.log.jsonl": "d2f375e050c1c9d71a19773d3d59645903aa77c67c4b39cd57995c4606123e2f",
+    "image/command.json": "4da89fecc74079ea0554101c7d49b0fe76dd573657b9e9e6e400223d5d0e9cc0",
+    "image/frozen-inputs.json": "9ff924b4471c27b4d5d63e06163d08bc54105ff605b1fb9e1cd4e1db60a5347f",
+    "image/results.json": "53ed879b129c70cf6ab0a04893fb96cb0e2048603d46e627cbe04020f4b50bdd",
+    "image/runtime.json": "2db44bec77b5ace88358bfe4b5fc651565d1c2756a9bf185e7a3c7fa687a77c4",
+    "image/stderr.log": "170ed08fba4ea372609143a51be5930ad0c27f690a29c9cafe0fa0e39b076a9b",
+    "image/stdout.log": "aabac1b5317127fb686d98120cda283bcb36c7573054ccd8775ea2da565bb6d5",
+    "isolated-candidate/CharacterSceneRenderer.cpp": "222a8ecc80d5cc3b2db8cd2bfe5e1bc99195d04e8ca20348dfccce015ef22b41",
+    "isolated-candidate/source.diff": "60b42441571483566e72abcb53d40fddda62c46e8e8c235d9218a9ef4ac77b7f",
+    "paired-cost-plan.json": "23cce531aa692bd6f17450faf8698976fde384f1243a591719d42a5c899a6c3a",
+    "performance/a-after/environment.json": "21e0ba8c92b4959a577c1ffa5c2a5a1137a52e5d933a7c54a0349a818e36e52d",
+    "performance/a-after/frozen-inputs.json": "3b9ea36bb7853ed6e2b6c5f76cc7058aedb06d677de88d22157cb8feec37b9ce",
+    "performance/a-after/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "performance/a-after/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "performance/a-after/task.json": "0d4e31db3c4608aebcc7136994ce253c9ec29ca17c733a7f64dca71bb3659c2e",
+    "performance/a-before/captures/azureplayer.log.jsonl": "47531d5e7c8c148f0f8fbbaadb3728c947fbde5cbf64d9f3681e71dbb47c8bba",
+    "performance/a-before/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "performance/a-before/environment.json": "34f907ee6458591d9579b5b6abfbccde4b621935c7ead5b50f7ade5a56bbdbcf",
+    "performance/a-before/frozen-inputs.json": "3b9ea36bb7853ed6e2b6c5f76cc7058aedb06d677de88d22157cb8feec37b9ce",
+    "performance/a-before/memory.json": "48b77ec3a6002526d8a635ab488f2af620e6877fde1bc81e1f8254d7e16b83a7",
+    "performance/a-before/results.json": "d6f0d08f0a56ec9cee649361bde97669534d220494be7dd3e2d1ea163f9bc499",
+    "performance/a-before/runtime.json": "3ef83b63ad3aa4b1de35097bd512bef987c8f15a656f7f971aae5d43245de8ff",
+    "performance/a-before/stderr.log": "ab194a3b0bf13920ce82ac408da1e79ab989638d138060586ff17add0f3a8619",
+    "performance/a-before/stdout.log": "2faefd40e1bdf1f11ca0537753089e20c420dfe9ca6fbc9e76b8762d4d26b484",
+    "performance/a-before/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "performance/a-before/task.json": "f8af740e7910edacaea9f13d101c1fd5ad9841d58696c2262c4780ceb8e529f6",
+    "performance/a-before/timing.csv": "1a379e59c4c8df5e0b24e096e26f96466c01bc2b574a4e480788951a40c9fb2d",
+    "performance/a-before/timing.json": "80d248e45fb6685a2cc30ad127addd084ba8869fcf7fce2754c07ffb39e46cd1",
+    "performance/b-candidate/captures/azureplayer.log.jsonl": "45375f6a9d9c8cb62e683954c32412fd9f98623c559cad7be14799b0af3a3ef7",
+    "performance/b-candidate/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "performance/b-candidate/environment.json": "0a9e8298ad35a9b2fc0b82f5e5beec346d3f23cf04f1ce9d1322dbf18b317dbe",
+    "performance/b-candidate/frozen-inputs.json": "3b9ea36bb7853ed6e2b6c5f76cc7058aedb06d677de88d22157cb8feec37b9ce",
+    "performance/b-candidate/memory.json": "d81d6c35bf38a44337d877c792e1b285de0185c3c94b35f8eafa1f8d33a43c6a",
+    "performance/b-candidate/results.json": "77f00a2bb0a7902f2f3966ae99f06131d1cb0b641834b3418ddbb187aa8c2628",
+    "performance/b-candidate/runtime.json": "5cb41a0913e17a797b2f83844c158c4a8e115bcf44f6e7c37b60150dde80c849",
+    "performance/b-candidate/stderr.log": "cc18e6c2a2e5899bd90a3a462d1b6b87801c2fd45ba936d5a80ea7696fadc53d",
+    "performance/b-candidate/stdout.log": "c2550f5d6e05f9e42c951d6ed5837f9aecbedcaafdd3d1485cf1587f1b527d26",
+    "performance/b-candidate/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "performance/b-candidate/task.json": "468f66b90da68b146bb938c6693e536fe0e860d584954be20f474f30f8e3c390",
+    "performance/b-candidate/timing.csv": "acbb9ed4d1de86af28603a3a8c47915abd61598d1c0c9e136fa546769406d6c3",
+    "performance/b-candidate/timing.json": "c6688c3b5258a7ce1c7cbb84c750aa2a31a3f9d806c09cb9a4f0120f82e8ea05",
+    "restored/engine-debug-build.json": "c87c91b891126e5a03cd0fd94105867b6e4c638d659d3d55941ff9933df7233d",
+    "restored/engine-debug-build.log": "c1ec213410caacb67d5aa1a808c6cebe822770b0eedc261dcd47b000507e8373",
+    "restored/engine-debug-checks-full.log": "94d1d3230da18bce0344eda0476fde999721530ae94d2468c34ede2de0f44715",
+    "restored/engine-debug-checks.json": "f6f41e51fe6ee4cb8b6ddc8e55e172157e9c09153140f933995dfeeeb26b2f12",
+    "restored/engine-debug-checks.log": "e4246c2215afb1c30058e534382cb7c51dbce9b205fb5403ae3ec14faa8c8ea9",
+    "restored/engine-debug-checks.xml": "30a2cbcf2ef2329b142f2158fce426c62854ed4270c99414671ed44e065d4769",
+    "restored/engine-debug-provenance.json": "13c81f5d6dfc8c689c073b54a29a230530f85adb5570f7d0230af237e2a1c425",
+    "restored/engine-release-build.json": "a77a80a2ddb34d07654f1abd524a76d68b29813aca41d7a30c8e52dfceb4dfd5",
+    "restored/engine-release-build.log": "d33c7a914dd97456ad68d62147586e4d1edaafce1096267078e86d118df83519",
+    "restored/engine-release-checks-full.log": "ca1be5d010b2ef869d088c2dc3dd2a846b045359986bd4762333e5216152b6cf",
+    "restored/engine-release-checks.json": "8f9e6e1720714814f3096040ae46c804e37eec4a53d49ef0577c1533e90264ca",
+    "restored/engine-release-checks.log": "c7104def88cef4e1dd30b58902c85bc58466c0df75d345a4889636f6e1de23e8",
+    "restored/engine-release-checks.xml": "8821278045cd2a599bbc21b40570388e5628245cc15bfa8d6258053377534f35",
+    "restored/engine-release-provenance.json": "5155cc04e12f737b8a6203438b605314bdc32567d46863750219f35ddf789662",
+    "restored/equivalence.json": "3d973edc9b296109e172706c09f7fb91ba41281ab29a79ec310326e4ab2056c8",
+    "restored/selected.json": "7340cb5cd70d1735b449d655811c3899b99a5ed10f604ded40cbd7e11daae595",
+    "selected.json": "7340cb5cd70d1735b449d655811c3899b99a5ed10f604ded40cbd7e11daae595",
+    "stopped-controller.json": "954879af7fb6a9b0dd2885162a2bd684118f478e77937c4876cc17f910d1657c",
+    "stopped-controller.log": "72d6615f54aac148824cce75fc4f47116dcbc6608cfafcd8d8b4e81007a1fb62"
+  }
+}

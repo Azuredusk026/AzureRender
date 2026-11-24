@@ -1,0 +1,187 @@
+{
+  "stage": "Q1-projected-outline-temporal-coverage",
+  "fullVisualAcceptance": "open",
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "configurations": {
+    "release": {
+      "checks": [
+        "AzureRender.TemporalViewGpu",
+        "AzureRender.MaterialMotionResponseGpu",
+        "AzureRender.BlendCoverageGpu",
+        "AzureRender.BlendFadeCoverageGpu",
+        "AzureRender.BlendFadeCycleGpu",
+        "AzureRender.CompositeCoverageCompatibilityGpu",
+        "AzureRender.TemporalReconstruction",
+        "AzureRender.MotionRecording",
+        "AzureRender.TemporalSettings",
+        "AzureRender.TemporalViewState",
+        "AzureEngine.OutlineProjectionGpu",
+        "AzureRender.ReflectionReprojection",
+        "AzureRender.ReflectionReprojectionGpu",
+        "AzureRender.ProjectedReflectionCameraGpu"
+      ],
+      "logSha256": "14f76b604992689bfec3fd0bcac9a5324cd411f84452db77b2c5a621f60cf9ff",
+      "motionShader": "e6254d24d6a658da3b71ee775a449a56305bfc32e0b1b3a557e7e26a5037cb2e",
+      "resolveShader": "9767410dd76a0146dae693ef8d4ccb004fcb35b05d9a9fbf62aaa77511773c7c"
+    },
+    "debug": {
+      "checks": [
+        "AzureRender.TemporalViewGpu",
+        "AzureRender.MaterialMotionResponseGpu",
+        "AzureRender.BlendCoverageGpu",
+        "AzureRender.BlendFadeCoverageGpu",
+        "AzureRender.BlendFadeCycleGpu",
+        "AzureRender.CompositeCoverageCompatibilityGpu",
+        "AzureRender.TemporalReconstruction",
+        "AzureRender.MotionRecording",
+        "AzureRender.TemporalSettings",
+        "AzureRender.TemporalViewState",
+        "AzureEngine.OutlineProjectionGpu",
+        "AzureRender.ReflectionReprojection",
+        "AzureRender.ReflectionReprojectionGpu",
+        "AzureRender.ProjectedReflectionCameraGpu"
+      ],
+      "logSha256": "dc7760ff89a493d9f2d21c896cbc18505f09a799c3f6a2f0f228a8a7d15d28cc",
+      "motionShader": "e6254d24d6a658da3b71ee775a449a56305bfc32e0b1b3a557e7e26a5037cb2e",
+      "resolveShader": "9767410dd76a0146dae693ef8d4ccb004fcb35b05d9a9fbf62aaa77511773c7c"
+    }
+  },
+  "controlledShaderExperiment": {
+    "minimumSampling": [],
+    "minimumTemporal": [
+      {
+        "name": "minimum-temporal",
+        "referenceMass": 342.41669335720326,
+        "lastEightMassRatios": [
+          0.9890764749992398,
+          0.9857793068412208,
+          0.9905371753741472,
+          0.9890333946842875,
+          0.989048261898922,
+          0.987629534910757,
+          0.9874906797458234,
+          0.9948652422947976
+        ],
+        "meanMassRatio": 0.9891825088436494
+      },
+      {
+        "name": "minimum-temporal-far",
+        "referenceMass": 132.9322418656781,
+        "lastEightMassRatios": [
+          0.9915543257504372,
+          0.9946498739190491,
+          0.9980837893785085,
+          0.9936963531415118,
+          0.999329718232631,
+          0.9937667315221769,
+          0.9945240783043109,
+          0.9957377071199284
+        ],
+        "meanMassRatio": 0.9951678221710691
+      }
+    ]
+  },
+  "flatControl": {
+    "quality": [
+      {
+        "asset": 0,
+        "edgePixels": 1362,
+        "errorRatio": 0.6212179318975436,
+        "flatMaximumByteError": 0.0,
+        "offError": 6.82034691629956,
+        "temporalError": 4.236921806167401
+      },
+      {
+        "asset": 1,
+        "edgePixels": 3636,
+        "errorRatio": 0.6678354113929026,
+        "flatMaximumByteError": 0.0,
+        "offError": 1.45766868353502,
+        "temporalError": 0.973482764943161
+      }
+    ],
+    "resized": {
+      "antiAliasing": 3,
+      "cameraPosition": [
+        2.0799999237060547,
+        1.0,
+        3.0
+      ],
+      "cameraTarget": [
+        0.6000000238418579,
+        0.0,
+        0.0
+      ],
+      "capacity": 3,
+      "colorImage": 660806488293977,
+      "completedSubmission": 12,
+      "displayMaskBytes": 4096,
+      "displayMaskFormat": 9,
+      "extent": [
+        64,
+        64
+      ],
+      "frameExtent": [
+        64,
+        64
+      ],
+      "lastRenderSubmission": 12,
+      "lastUseSubmission": 12,
+      "multisampleAllocatedBytes": 0,
+      "multisampleBytes": 0,
+      "multisampleFallback": "",
+      "multisampleSourceSlots": 0,
+      "outputFormat": "rgba8-linear",
+      "rasterizationSamples": 1,
+      "renderCameraPosition": [
+        2.0799999237060547,
+        1.0,
+        3.0
+      ],
+      "renderCameraTarget": [
+        0.6000000238418579,
+        0.0,
+        0.0
+      ],
+      "renderCount": 11,
+      "renderer": "character",
+      "requested": false,
+      "resolvedImage": 728976209216151,
+      "retired": 0,
+      "sceneAttachmentFormats": [
+        97,
+        126,
+        37
+      ],
+      "sceneExtent": [
+        64,
+        64
+      ],
+      "schemaVersion": 1,
+      "submittedRenderCount": 1,
+      "temporalAvailable": true,
+      "temporalBytes": 245760,
+      "temporalDisplayMaskBytes": 32768,
+      "temporalDisplayMaskFormat": 83,
+      "temporalFallback": "",
+      "temporalHistorySubmission": 12,
+      "worldCoordinates": false
+    }
+  },
+  "rejectedGlobalFootprint": {
+    "test": "AzureRender.TemporalViewGpu",
+    "pixel": [
+      54,
+      21
+    ],
+    "byteError": 3,
+    "maximumAllowed": 1
+  },
+  "sourceFiles": [
+    "src/scenes/CharacterMotionPass.inc",
+    "shaders/motion_vector.frag",
+    "shaders/temporal_resolve.frag",
+    "shaders/projected_reflection_trace.hlsl",
+    "shaders/reflection_reprojection.comp"
+  ]
+}

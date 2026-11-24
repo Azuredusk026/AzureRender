@@ -1,0 +1,29 @@
+{
+  "actualOfflinePlayback": true,
+  "animationExchange": true,
+  "emptyProjects": 2,
+  "losslessImageRoundTrip": true,
+  "manualReview": "P8",
+  "materialSlots": true,
+  "passed": true,
+  "productionOperations": true,
+  "stableReferences": true,
+  "workflow1": {
+    "audio": "4923f402-8539-44a1-8e73-65338bfe1ba6",
+    "image": "1549f5d3-21bb-4272-95b0-f20c52f5802d",
+    "material": "93b90158-f7a3-4859-a93e-a6017d4d2605",
+    "mixedEnergy": 22.62136694977691,
+    "model": "959ea51d-4b50-45d3-84a0-26fdd36cb81e",
+    "project": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p7-first-batch-delivery-2026-10-12\\authoring\\workshop\\project.azureproject",
+    "slot": "name:PublicTestMaterial"
+  },
+  "workflow2": {
+    "audio": "d087249f-3f19-4be1-b1b8-1203e04f4097",
+    "image": "341ccea2-5716-4bb9-be24-9d975361b78e",
+    "material": "1ade8d7e-78ab-4f12-b4aa-9c9c3d075a49",
+    "mixedEnergy": 22.62136694977691,
+    "model": "c86f0474-e2ff-493e-9fa4-fddd3e2c7d5b",
+    "project": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p7-first-batch-delivery-2026-10-12\\authoring\\assembly\\project.azureproject",
+    "slot": "name:PublicTestMaterial"
+  }
+}

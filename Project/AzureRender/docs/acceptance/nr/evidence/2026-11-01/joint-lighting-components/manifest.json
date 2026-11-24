@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "visualAcceptance": "failed-user-review",
+  "files": [
+    {
+      "path": "capture-summary.json",
+      "bytes": 146354,
+      "sha256": "55db9ad358b4a66ef5b87816a5087e72a938960f1361c0702639c08168fffe65"
+    },
+    {
+      "path": "component-comparison.json",
+      "bytes": 21968,
+      "sha256": "fd6379e0e84faf26ad5ca3e3486cc0253b3a297ac0582dda22d1effc1637d38d"
+    },
+    {
+      "path": "joint-ambient/capture_manifest.json",
+      "bytes": 8877,
+      "sha256": "381f74b2513e121185b73c60574237f7490000f3db5dd7f57e25285ef963fdf4"
+    },
+    {
+      "path": "joint-ambient/command.json",
+      "bytes": 919,
+      "sha256": "d258b36327ab46282ab6ba825f057b7fdef90bf73a191bee149bcfa70b74d7a6"
+    },
+    {
+      "path": "joint-ambient/player.log.gz",
+      "bytes": 3286,
+      "sha256": "b4ae2404313772e96096b3b0067a3b922d2a271b8294a8368d9a652449e9335e"
+    },
+    {
+      "path": "joint-ambient/runtime.json",
+      "bytes": 297160,
+      "sha256": "354c04859056b8b709224c1ec5c1f048c55605bab6d22a52911e6811fd2973bb"
+    },
+    {
+      "path": "joint-direct-diffuse/capture_manifest.json",
+      "bytes": 8883,
+      "sha256": "062afa4533adb69d614d9e103fe48329e4d9aff9414848fed402af1d39908535"
+    },
+    {
+      "path": "joint-direct-diffuse/command.json",
+      "bytes": 947,
+      "sha256": "78e997a5bea937d768cb99fb32e431622de51dce6b49df910aca83e686025092"
+    },
+    {
+      "path": "joint-direct-diffuse/player.log.gz",
+      "bytes": 3282,
+      "sha256": "6299fd5c3b8cf5be46f5ff85e9cd3d720cc11a3b6280ee37c03ed336718ee7bd"
+    },
+    {
+      "path": "joint-direct-diffuse/runtime.json",
+      "bytes": 297160,
+      "sha256": "354c04859056b8b709224c1ec5c1f048c55605bab6d22a52911e6811fd2973bb"
+    },
+    {
+      "path": "joint-face-sdf/capture_manifest.json",
+      "bytes": 8877,
+      "sha256": "10c95e7021eb51ef4dd4eb75691308434ee87abe117066e13cf41e5265b6dbd3"
+    },
+    {
+      "path": "joint-face-sdf/command.json",
+      "bytes": 892,
+      "sha256": "f12863111e8d8735f284c5bee9c81a08b4edc265ec24621a6aba201a6325ff58"
+    },
+    {
+      "path": "joint-face-sdf/player.log.gz",
+      "bytes": 3286,
+      "sha256": "dc5bda5398a3b6600b1dcac08c87d8b974676a8e4c808719523d8c359e8644d5"
+    },
+    {
+      "path": "joint-face-sdf/runtime.json",
+      "bytes": 297160,
+      "sha256": "354c04859056b8b709224c1ec5c1f048c55605bab6d22a52911e6811fd2973bb"
+    },
+    {
+      "path": "joint-hair-kk/capture_manifest.json",
+      "bytes": 8877,
+      "sha256": "4371adf0471b1684417989e32baa02a124a076757717f9a03281d4e8d2b631f4"
+    },
+    {
+      "path": "joint-hair-kk/command.json",
+      "bytes": 919,
+      "sha256": "f551f77e74de72659ada767500bce5da2b8b76c4d4a988048bde366c5c7e2d30"
+    },
+    {
+      "path": "joint-hair-kk/player.log.gz",
+      "bytes": 3300,
+      "sha256": "ee69f1f010615d4654a6164a857f32540136b59e228efee6980dfe9b3c656af8"
+    },
+    {
+      "path": "joint-hair-kk/runtime.json",
+      "bytes": 297160,
+      "sha256": "354c04859056b8b709224c1ec5c1f048c55605bab6d22a52911e6811fd2973bb"
+    },
+    {
+      "path": "joint-object-shadow-visibility/capture_manifest.json",
+      "bytes": 8892,
+      "sha256": "ca6c1fe4542f8b9a8c58b754c4ab16b82c9522d82de21e2ea136540f895c5370"
+    },
+    {
+      "path": "joint-object-shadow-visibility/command.json",
+      "bytes": 956,
+      "sha256": "fa122d102d7c0e34b9f4b847eb599d284a7fbc0b23b4399d4ccd50bc50a4b9f6"
+    },
+    {
+      "path": "joint-object-shadow-visibility/player.log.gz",
+      "bytes": 3284,
+      "sha256": "16e7fb663b6ca2ffb9bd2e902eaa142c6943357a22bbdf4e40682bd48fd0f038"
+    },
+    {
+      "path": "joint-object-shadow-visibility/runtime.json",
+      "bytes": 297160,
+      "sha256": "354c04859056b8b709224c1ec5c1f048c55605bab6d22a52911e6811fd2973bb"
+    },
+    {
+      "path": "reference-look-ambient/capture_manifest.json",
+      "bytes": 9005,
+      "sha256": "fceb38e37781720a5b4bce533b1d5a38df741b24aa400e9277d7545e7e63239b"
+    },
+    {
+      "path": "reference-look-ambient/command.json",
+      "bytes": 963,
+      "sha256": "8417930b64fcc89c217042e864b5cae0484d3a9f2adb65a88e91e819db041a14"
+    },
+    {
+      "path": "reference-look-ambient/player.log.gz",
+      "bytes": 3300,
+      "sha256": "9908a9506d0b2bc641d8e10e9176b52533aeb3c319ee0cfc7176b02d0b2a40ba"
+    },
+    {
+      "path": "reference-look-ambient/runtime.json",
+      "bytes": 299077,
+      "sha256": "2aceeb946cccf60d53db007a66f13b23a5ce867a23d2a5cb6c6bb331f8fe450a"
+    },
+    {
+      "path": "reference-look-direct-diffuse/capture_manifest.json",
+      "bytes": 9008,
+      "sha256": "6c86da90352155ed092d60d5ac6c3208f864fb1510af0a0fa99faf59e7e7894f"
+    },
+    {
+      "path": "reference-look-direct-diffuse/command.json",
+      "bytes": 991,
+      "sha256": "3d3843fd97716f97137f904e875da3a97b3f8b5207684f9230eb1fc3cd534c39"
+    },
+    {
+      "path": "reference-look-direct-diffuse/player.log.gz",
+      "bytes": 3304,
+      "sha256": "da70ce30c97a76a7403130ee4bf6376aff2b43e3042c7943f9c6e1d35f02f257"
+    },
+    {
+      "path": "reference-look-direct-diffuse/runtime.json",
+      "bytes": 299077,
+      "sha256": "2aceeb946cccf60d53db007a66f13b23a5ce867a23d2a5cb6c6bb331f8fe450a"
+    },
+    {
+      "path": "reference-look-face-sdf/capture_manifest.json",
+      "bytes": 9003,
+      "sha256": "d72244747c1178624585b5cadf4da66c9975320344b48d7630218556d1d0169d"
+    },
+    {
+      "path": "reference-look-face-sdf/command.json",
+      "bytes": 936,
+      "sha256": "7a6b739f1942a77e244c861ec6db04bd91804aa91c9b1c67eaf1126d4aff6a0e"
+    },
+    {
+      "path": "reference-look-face-sdf/player.log.gz",
+      "bytes": 3287,
+      "sha256": "c542f32265e075385da54be2ea99efdc2a79e72adeed46f47eb1e29e25e9c2cc"
+    },
+    {
+      "path": "reference-look-face-sdf/runtime.json",
+      "bytes": 299077,
+      "sha256": "2aceeb946cccf60d53db007a66f13b23a5ce867a23d2a5cb6c6bb331f8fe450a"
+    },
+    {
+      "path": "reference-look-hair-kk/capture_manifest.json",
+      "bytes": 9005,
+      "sha256": "4efeaed0e128aae14d9e6bf610c419852e9d8b1df4ceb344e93c5c033ddff1b4"
+    },
+    {
+      "path": "reference-look-hair-kk/command.json",
+      "bytes": 963,
+      "sha256": "1adf2b1288779acbdf258f3751d0598c18b731bcd5d4f837e848bf505adf5ca7"
+    },
+    {
+      "path": "reference-look-hair-kk/player.log.gz",
+      "bytes": 3300,
+      "sha256": "8e6133b97198c44d68715b7a323597f151d2ee160f61c35e05f35c3df028ba8c"
+    },
+    {
+      "path": "reference-look-hair-kk/runtime.json",
+      "bytes": 299077,
+      "sha256": "2aceeb946cccf60d53db007a66f13b23a5ce867a23d2a5cb6c6bb331f8fe450a"
+    },
+    {
+      "path": "reference-look-object-shadow-visibility/capture_manifest.json",
+      "bytes": 9019,
+      "sha256": "49789ac4096eef2b15b1924b9d423caaaff2f48d100379fa0dc7f59d76983531"
+    },
+    {
+      "path": "reference-look-object-shadow-visibility/command.json",
+      "bytes": 1000,
+      "sha256": "58041c69d194041e28ce20b3fdc4776d55e8c0200be3950ba1d19cd78f132d5f"
+    },
+    {
+      "path": "reference-look-object-shadow-visibility/player.log.gz",
+      "bytes": 3306,
+      "sha256": "f96ba027f9a2e5cbd0c5c604b0789f6508f4cb49bfb67875d0cab2875f8aa51d"
+    },
+    {
+      "path": "reference-look-object-shadow-visibility/runtime.json",
+      "bytes": 299077,
+      "sha256": "2aceeb946cccf60d53db007a66f13b23a5ce867a23d2a5cb6c6bb331f8fe450a"
+    },
+    {
+      "path": "scripts/analyze_components.py",
+      "bytes": 2627,
+      "sha256": "e66fa2980fcd0a74e9d71d79bbceee7c9c7188b56f46bd26b47ac8f7ea35dec4"
+    },
+    {
+      "path": "scripts/archive.py",
+      "bytes": 4774,
+      "sha256": "b7d506822971fdab0068febef8ac6434ad17effb4772d4fab0b9e234bda1c610"
+    },
+    {
+      "path": "scripts/capture_components.py",
+      "bytes": 3301,
+      "sha256": "c991fedb322a9252487a261d485f342df0356daa1215edd0bb4ca16f7e0b3248"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 462,
+      "sha256": "3dae63c6931fe500d28e2246e770c25a99ef5c9e65b832289fd03381b1f05941"
+    }
+  ]
+}

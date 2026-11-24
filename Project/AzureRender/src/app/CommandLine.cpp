@@ -22,14 +22,15 @@ constexpr const char* kUsage =
     "[--scene <azscene path>] [--create-scene <azscene path>] "
     "[--editor <azscene path>] [--smoke-frames <positive integer>] "
     "[--portfolio] [--width <pixels>] [--height <pixels>] "
-    "[--gpu-timing] [--gpu-timing-output <json path>] "
+    "[--anti-aliasing <off|edge|supersample|temporal|multisample>] "
+    "[--gpu-timing] [--gpu-pass-timing] [--gpu-timing-output <json path>] "
     "[--diagnostic-view <beauty|normal|outline|shadow>] "
     "[--no-stylized] [--no-inner-outline] [--hud] "
     "[--technical-sequence] "
     "[--qa-camera <preset>] [--qa-light <preset>] "
     "[--qa-morph-weights <w0> <w1>] "
     "[--qa-effect <effect> --qa-effect-state <state>] "
-    "[--qa-isolation <view>] [--render-path <traditional|subpasses|dynamic>] "
+    "[--qa-isolation <view>] [--qa-exposure <-8..8 EV>] [--qa-presentation showcase] [--render-path <traditional|subpasses|dynamic>] "
     "[--scene-type <character|blackhole>] "
     "[--blackhole-quality <performance|balanced|cinematic>] "
     "[--blackhole-camera <front|orbit-left|high|close|over-shoulder>] "
@@ -43,14 +44,37 @@ constexpr const char* kHelp =
     "                                      Select the renderer\n"
     "  --asset <gltf/glb>                  Character asset\n"
     "  --scene <azscene>                   Load a saved scene\n"
-    "  --editor <azscene>                  Open the editor\n\n"
+    "  --editor <azscene>                  Open the editor\n"
+    "  --project <azureproject>            Open a project in the editor\n"
+    "  --editor-project <azureproject>     Open a game project\n"
+    "  --create-game <empty-directory>     Create a playable game template\n"
+    "  --editor-close-policy <policy>     ask (default), save, discard\n"
+    "  --editor-actions <json>             Run editor task commands\n"
+    "  --validation-script <json>          Run versioned validation steps\n"
+    "  --validation-report <json>          Write validation step results\n"
+    "  --validation-token-env <name>       Enable control with an environment token\n"
+    "  --validation-endpoint <json>        Write control address and assigned port\n"
+    "  --validation-address <address>      IPv4 loopback address (127.0.0.1)\n"
+    "  --validation-port <port>            Control port; 0 assigns a free port\n"
+    "  --runtime-report <json>             Write gameplay evidence\n\n"
+    "  --game-actions <json>               Replay fixed-route gameplay input\n"
     "Output:\n"
     "  --width <pixels> --height <pixels>  Output size\n"
+    "  --anti-aliasing off|edge|supersample|temporal|multisample  Sampling quality\n"
     "  --capture-dir <empty-dir>           Deterministic PNG output\n"
     "  --capture-frames <N> --capture-fps <1-240>\n"
-    "  --gpu-timing-output <json>          GPU pass timing\n\n"
+    "  --gpu-timing-output <json>          GPU frame timing\n"
+    "  --gpu-pass-timing                  Bounded render-graph pass timing\n\n"
     "Quality and QA:\n"
     "  --qa-camera <preset> --qa-light <preset>\n"
+    "  --qa-camera scene --qa-light scene Preserve authored scene conditions\n"
+    "  --qa-isolation <view>             Includes roughness, metallic, direct-specular, reflection, shaded-normal, object-shadow-visibility\n"
+    "  --qa-exposure <-8..8 EV>          Radiometric isolation exposure; default 0 EV\n"
+    "  --qa-presentation showcase       Authored character display for QA capture\n"
+    "  --qa-light-scan                    Rotate the key light through 120 frames\n"
+    "  --qa-animation                     Play animation with a fixed QA camera\n"
+    "  --qa-isolation brow-mask           Show visible eyebrow regions\n"
+    "  Face cameras: face-front, face-three-quarter-left/right, face-side-left/right\n"
     "  --qa-morph-weights <w0> <w1>      Set Morph target weights\n"
     "  --blackhole-quality performance|balanced|cinematic\n"
     "  --blackhole-camera front|orbit-left|high|close|over-shoulder\n"
@@ -60,11 +84,27 @@ constexpr const char* kHelp =
     "  --disable-culling                 Submit all instances without culling\n"
     "  --disable-compute-skinning        Use vertex-shader skinning and morph\n"
     "  --disable-parallel-recording      Record every pass on the main thread\n"
+    "  --disable-pipeline-inspection     Skip supported pipeline executable queries\n"
+    "  --pipeline-statistics             Capture optional shader compile statistics\n"
     "  --disable-gpu-culling             Use CPU visibility and direct draws\n"
+    "  --visibility-prototype            Emit stable GPU surface identities\n"
+    "  --qa-disable-face-culling         Diagnose winding by rendering both faces\n"
+    "  --qa-disable-surface-radiance    Use complete shading for paired diagnostics\n"
+    "  --qa-disable-depth-test           Diagnose depth by showing submission order\n"
     "  --disable-multi-draw-indirect     Use one indirect command per call\n"
     "  --fixed-frame-step                Use deterministic 1/capture-fps simulation steps\n"
     "  --instances <N>                   Clone the asset entity N times (QA)\n\n"
+    "Settings:\n"
+    "  --set <name=JSON>                  Typed command-line override\n"
+    "  --settings-file <json>             User settings layer\n"
+    "  --default-settings <json>           Default file layer\n"
+    "  --project-settings <json>           Project settings layer\n\n"
+    "  --ai-python <executable>            Optional model tool interpreter\n"
+    "  --ai-config <json>                  Tool-owned provider configuration\n"
+    "  --ai-fixture <json>                 Fixed-response model service\n\n"
     "Utility:\n"
+    "  --shader-reload <json>             Developer shader source configuration\n"
+    "  --preview-views <json>             Independent offscreen view descriptors\n"
     "  --check-resources  Validate the installed resource tree\n"
     "  --smoke-frames <N> Exit after N rendered frames\n"
     "  --version          Print the version\n"
@@ -147,7 +187,17 @@ float parseFiniteFloat(
 }
 
 void validate(const ParsedCommandLine& parsed) {
+    const auto& validation=parsed.options;
+    if(validation.validationAddress!="127.0.0.1")fail(CommandLineErrorCode::InvalidValue,"--validation-address","Control address requires IPv4 loopback");
+    if(validation.validationTokenEnvironment.empty()!=validation.validationEndpoint.empty())
+        fail(CommandLineErrorCode::InvalidCombination,"--validation-token-env","Control channel requires token environment and endpoint output");
+    if(!validation.validationScript.empty()&&validation.validationReport.empty())
+        fail(CommandLineErrorCode::InvalidCombination,"--validation-report","Script requires report output");
     const auto& options = parsed.options;
+    if(!options.aiConfig.empty()&&!options.aiFixture.empty())fail(CommandLineErrorCode::InvalidCombination,"--ai-config/--ai-fixture","Choose provider configuration or fixed responses");
+    if(!options.editorMode&&(!options.aiConfig.empty()||!options.aiFixture.empty()))fail(CommandLineErrorCode::InvalidCombination,"--ai-config","Model tooling requires an editor session");
+    if(!options.editorActionsPath.empty() && !options.editorMode)fail(CommandLineErrorCode::InvalidCombination,"--editor-actions","--editor-actions requires an editor project");
+    if(options.editorMode && !options.projectFile.empty() && (!parsed.scenePath.empty() || !parsed.editorScenePath.empty() || !parsed.createScenePath.empty()))fail(CommandLineErrorCode::InvalidCombination,"--editor-project","Editor project and scene entries are mutually exclusive");
     if (options.width < 64 || options.width > 7680
         || options.height < 64 || options.height > 4320) {
         fail(
@@ -183,8 +233,9 @@ void validate(const ParsedCommandLine& parsed) {
     }
     if (!options.qaCamera.empty()
         && !isOneOf(options.qaCamera, {
-            "full-body-front", "face-front", "face-three-quarter",
-            "back-detail", "lighting-sweep"})) {
+            "scene", "full-body-front", "face-front", "face-three-quarter",
+            "face-three-quarter-left", "face-three-quarter-right",
+            "face-side-left", "face-side-right", "back-detail", "lighting-sweep"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-camera",
              "Unknown --qa-camera: " + options.qaCamera);
     }
@@ -196,7 +247,7 @@ void validate(const ParsedCommandLine& parsed) {
     }
     if (!options.qaLight.empty()
         && !isOneOf(options.qaLight, {
-            "neutral-material", "stylized-key", "specular-rim",
+            "scene", "neutral-material", "stylized-key", "specular-rim",
             "rear-emissive"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-light",
              "Unknown --qa-light: " + options.qaLight);
@@ -220,9 +271,25 @@ void validate(const ParsedCommandLine& parsed) {
             "shadow-visibility", "hair-kk", "rim", "specular", "emissive",
             "outline", "shadow-map", "material-id", "style-mask", "ambient",
             "direct-diffuse", "shadow-tint", "face-sdf", "overlay",
-            "bloom"})) {
+            "bloom", "brow-mask", "roughness", "metallic", "direct-specular",
+            "reflection", "shaded-normal", "shadow-color", "object-shadow-visibility"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-isolation",
              "Unknown --qa-isolation: " + options.qaIsolation);
+    }
+    if (options.qaShowcasePresentation
+        && (options.qaIsolation.empty() || !hasCaptureFrames || options.qaExposureEv
+            || options.editorMode || !options.projectFile.empty() || !parsed.editorScenePath.empty()
+            || options.renderSettings.sceneType != SceneType::Character
+            || options.renderSettings.antiAliasing > 2)) {
+        fail(CommandLineErrorCode::InvalidCombination, "--qa-presentation",
+             "Showcase presentation requires standalone character isolation capture and spatial anti-aliasing");
+    }
+    if(options.qaExposureEv){
+        if(*options.qaExposureEv < -8.F || *options.qaExposureEv > 8.F)
+            fail(CommandLineErrorCode::InvalidValue,"--qa-exposure","Diagnostic exposure requires -8 through 8 EV");
+        if(!isOneOf(options.qaIsolation,{"albedo","hair-kk","rim","specular","emissive","ambient","direct-diffuse","direct-specular","reflection","overlay"})
+            || options.qaEffectState=="isolation")
+            fail(CommandLineErrorCode::InvalidCombination,"--qa-exposure","Diagnostic exposure requires an explicit radiometric --qa-isolation");
     }
     const bool qaRequested = !options.qaCamera.empty()
         || !options.qaLight.empty()
@@ -273,12 +340,64 @@ const char* commandLineHelp() noexcept {
 }
 
 ParsedCommandLine parseCommandLine(
-    const std::vector<std::string>& arguments) {
+    const std::vector<std::string>& arguments, AzureRenderOptions initialOptions) {
     ParsedCommandLine parsed;
+    parsed.options = std::move(initialOptions);
     for (std::size_t index = 0; index < arguments.size(); ++index) {
         const std::string& argument = arguments[index];
         if (argument == "--help") {
             parsed.showHelp = true;
+        } else if (argument == "--create-game") {
+            parsed.createGamePath = requireValue(arguments,index,argument);
+            if(arguments.size()!=2)fail(CommandLineErrorCode::InvalidCombination,argument,"--create-game is a standalone command");
+        } else if (argument == "--editor-project" || argument == "--project") {
+            parsed.options.projectFile = requireValue(arguments,index,argument);parsed.options.editorMode=true;
+        } else if (argument == "--editor-close-policy") {
+            const auto value=requireValue(arguments,index,argument);
+            if(value!="ask"&&value!="save"&&value!="discard")fail(CommandLineErrorCode::InvalidValue,argument,"Expected ask, save or discard");
+            parsed.options.editorClosePolicy=value;
+        } else if (argument == "--editor-actions") {
+            parsed.options.editorActionsPath = requireValue(arguments,index,argument);
+        } else if (argument == "--set") {
+            const auto expression=requireValue(arguments,index,argument);const auto separator=expression.find('=');
+            if(separator==std::string::npos||separator==0)fail(CommandLineErrorCode::InvalidValue,argument,"Use name=JSON for a setting");
+            try {
+                const auto value=nlohmann::json::parse(expression.substr(separator+1));
+                if(!(value.is_boolean()||value.is_string()||value.is_number()))throw std::invalid_argument("Setting must be scalar");
+                parsed.options.settingOverrides[expression.substr(0,separator)]=value;
+            }catch(const std::exception&){fail(CommandLineErrorCode::InvalidValue,argument,"Invalid setting JSON");}
+        } else if (argument == "--settings-file") {
+            parsed.options.settingsFile=requireValue(arguments,index,argument);
+        } else if (argument == "--shader-reload") {
+            parsed.options.shaderReloadConfig=requireValue(arguments,index,argument);
+        } else if (argument == "--preview-views") {
+            parsed.options.previewViews=requireValue(arguments,index,argument);
+        } else if (argument == "--ai-python") {
+            parsed.options.aiPython=requireValue(arguments,index,argument);
+        } else if (argument == "--ai-config") {
+            parsed.options.aiConfig=requireValue(arguments,index,argument);
+        } else if (argument == "--ai-fixture") {
+            parsed.options.aiFixture=requireValue(arguments,index,argument);
+        } else if (argument == "--default-settings") {
+            parsed.options.defaultSettingsFile=requireValue(arguments,index,argument);
+        } else if (argument == "--project-settings") {
+            parsed.options.projectSettingsFile=requireValue(arguments,index,argument);
+        } else if (argument == "--validation-script") {
+            parsed.options.validationScript=requireValue(arguments,index,argument);
+        } else if (argument == "--validation-report") {
+            parsed.options.validationReport=requireValue(arguments,index,argument);
+        } else if (argument == "--validation-token-env") {
+            parsed.options.validationTokenEnvironment=requireValue(arguments,index,argument);
+        } else if (argument == "--validation-endpoint") {
+            parsed.options.validationEndpoint=requireValue(arguments,index,argument);
+        } else if (argument == "--validation-address") {
+            parsed.options.validationAddress=requireValue(arguments,index,argument);
+        } else if (argument == "--validation-port") {
+            const auto port=parseUint32(requireValue(arguments,index,argument),argument);
+            if(port>65535)fail(CommandLineErrorCode::InvalidValue,argument,"Port exceeds 65535");
+            parsed.options.validationPort=static_cast<std::uint16_t>(port);
+        } else if (argument == "--runtime-report") {
+            parsed.options.runtimeReportPath = requireValue(arguments,index,argument);
         } else if (argument == "--smoke-frames") {
             parsed.options.smokeFrameLimit = parseUnsigned(
                 requireValue(arguments, index, argument), argument);
@@ -330,18 +449,33 @@ ParsedCommandLine parseCommandLine(
                 requireValue(arguments, index, argument), argument);
         } else if (argument == "--portfolio") {
             parsed.options.portfolioMode = true;
+        } else if (argument == "--gpu-pass-timing") {
+            parsed.options.gpuPassTimingEnabled = true;
+            parsed.options.gpuTimingEnabled = true;
         } else if (argument == "--gpu-timing") {
             parsed.options.gpuTimingEnabled = true;
         } else if (argument == "--disable-bindless") {
             parsed.options.bindlessDisabled = true;
         } else if (argument == "--disable-culling") {
             parsed.options.cullingDisabled = true;
+        } else if (argument == "--qa-disable-face-culling") {
+            parsed.options.qaDisableFaceCulling = true;
+        } else if (argument == "--qa-disable-surface-radiance") {
+            parsed.options.qaDisableSurfaceRadianceReuse = true;
+        } else if (argument == "--qa-disable-depth-test") {
+            parsed.options.qaDisableDepthTest = true;
         } else if (argument == "--disable-compute-skinning") {
             parsed.options.computeSkinningDisabled = true;
         } else if (argument == "--disable-parallel-recording") {
             parsed.options.parallelRecordingDisabled = true;
+        } else if (argument == "--disable-pipeline-inspection") {
+            parsed.options.pipelineInspectionDisabled = true;
+        } else if (argument == "--pipeline-statistics") {
+            parsed.options.pipelineStatistics = true;
         } else if (argument == "--disable-gpu-culling") {
             parsed.options.gpuCullingDisabled = true;
+        } else if (argument == "--visibility-prototype") {
+            parsed.options.visibilityPrototype = true;
         } else if (argument == "--disable-multi-draw-indirect") {
             parsed.options.multiDrawIndirectDisabled = true;
         } else if (argument == "--fixed-frame-step") {
@@ -377,6 +511,14 @@ ParsedCommandLine parseCommandLine(
             }
         } else if (argument == "--no-stylized") {
             parsed.options.renderSettings.stylizedLightingEnabled = false;
+        } else if (argument == "--anti-aliasing") {
+            const auto& value=requireValue(arguments,index,argument);
+            if(value=="off")parsed.options.renderSettings.antiAliasing=0;
+            else if(value=="edge")parsed.options.renderSettings.antiAliasing=1;
+            else if(value=="supersample")parsed.options.renderSettings.antiAliasing=2;
+            else if(value=="temporal")parsed.options.renderSettings.antiAliasing=3;
+            else if(value=="multisample")parsed.options.renderSettings.antiAliasing=4;
+            else fail(CommandLineErrorCode::InvalidValue,argument,"Expected off, edge, supersample, temporal, or multisample");
         } else if (argument == "--no-inner-outline") {
             parsed.options.renderSettings.innerOutlineEnabled = false;
         } else if (argument == "--hud") {
@@ -395,6 +537,12 @@ ParsedCommandLine parseCommandLine(
             parsed.options.qaCamera = requireValue(arguments, index, argument);
         } else if (argument == "--qa-light") {
             parsed.options.qaLight = requireValue(arguments, index, argument);
+        } else if (argument == "--qa-light-scan") {
+            parsed.options.qaLightScan = true;
+        } else if (argument == "--qa-animation") {
+            parsed.options.qaAnimation = true;
+        } else if (argument == "--game-actions") {
+            parsed.options.gameActionsPath = requireValue(arguments,index,argument);
         } else if (argument == "--qa-effect") {
             parsed.options.qaEffect = requireValue(arguments, index, argument);
         } else if (argument == "--qa-effect-state") {
@@ -453,6 +601,13 @@ ParsedCommandLine parseCommandLine(
             }
         } else if (argument == "--qa-isolation") {
             parsed.options.qaIsolation = requireValue(arguments, index, argument);
+        } else if (argument == "--qa-presentation") {
+            if (requireValue(arguments, index, argument) != "showcase") {
+                fail(CommandLineErrorCode::InvalidValue, argument, "Expected showcase QA presentation");
+            }
+            parsed.options.qaShowcasePresentation = true;
+        } else if (argument == "--qa-exposure") {
+            parsed.options.qaExposureEv=parseFiniteFloat(requireValue(arguments,index,argument),argument);
         } else {
             fail(
                 CommandLineErrorCode::UnknownOption,

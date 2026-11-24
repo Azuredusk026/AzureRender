@@ -1,0 +1,66 @@
+{
+  "status": "measured-clock-controls",
+  "stage": "shutdown",
+  "variants": [
+    {
+      "mode": "captured-control",
+      "bytes": 14745600,
+      "path": "clock-replay/captured-control.bin.gz",
+      "sha256": "e1cc15389b38103ea083f8b80cf72ece3d8c275e7ea389a7a428af768eb9e4ae",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    },
+    {
+      "mode": "original",
+      "bytes": 14745600,
+      "path": "clock-replay/original.bin.gz",
+      "sha256": "e1cc15389b38103ea083f8b80cf72ece3d8c275e7ea389a7a428af768eb9e4ae",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    },
+    {
+      "mode": "tau-minus",
+      "bytes": 14745600,
+      "path": "clock-replay/tau-minus.bin.gz",
+      "sha256": "a4949e141686ec4b573ac8b4d0f3b4cd3cc4e883ed62c4c5782ed9d8c14a7157",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    },
+    {
+      "mode": "tau-plus",
+      "bytes": 14745600,
+      "path": "clock-replay/tau-plus.bin.gz",
+      "sha256": "4452e8f5d31de5966d2844d2200c7bcd6830e31869e253e3d88feca58b336fff",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    },
+    {
+      "mode": "precise-uv",
+      "bytes": 14745600,
+      "path": "clock-replay/precise-uv.bin.gz",
+      "sha256": "da1898e6526792bdc5d6bd7397e78fa84b2ab1c21a2d13abb8276ca4884ce029",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    }
+  ]
+}

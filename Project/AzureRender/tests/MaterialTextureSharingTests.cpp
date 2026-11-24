@@ -1,0 +1,206 @@
+#include "scenes/CharacterSceneRenderer.hpp"
+#include "assets/MaterialPixelStorage.hpp"
+#include "assets/MaterialData.hpp"
+#include "rhi/NullRhi.hpp"
+#include "support/IrradianceClipmapFixture.hpp"
+
+#include <filesystem>
+#include <iostream>
+#include <sstream>
+#include <stdexcept>
+#include <chrono>
+#include <fstream>
+
+using namespace azurerender;
+void require(bool value,const char* reason) {if(!value)throw std::runtime_error(reason);}
+
+void verifyPreparedPixelOwnership() {
+    ImmutableBytePool firstPool,secondPool;AssetMaterial source;
+    source.baseColorWidth=source.baseColorHeight=128;source.baseColorPixels.assign(128*128*4,53);
+    source.normalPixels={1,2,3,255};source.normalWidth=source.normalHeight=1;
+    source.metallicRoughnessPixels={4,5,6,255};source.metallicRoughnessWidth=source.metallicRoughnessHeight=1;
+    source.specularEmissivePixels={7,8,9,255};source.specularEmissiveWidth=source.specularEmissiveHeight=1;
+    source.styleMaskPixels={10,11,12,255};source.styleMaskWidth=source.styleMaskHeight=1;
+    source.matcapPixels={13,14,15,255};source.matcapWidth=source.matcapHeight=1;
+    source.hairDataPixels={16,17,18,255};source.hairDataWidth=source.hairDataHeight=1;
+    source.faceSdf.pixels={19,20,21,255};source.faceSdf.width=source.faceSdf.height=1;
+    source.shadowColorLutPixels={22,23,24,255};
+    source.projectedHairRamp.parameterPixels={25,26,27,255};source.projectedHairRamp.parameterWidth=source.projectedHairRamp.parameterHeight=1;
+    source.projectedHairRamp.line.pixels={28,29,30,255};source.projectedHairRamp.line.width=source.projectedHairRamp.line.height=1;
+    source.outlineSurface.maskPixels={31,32,33,255};source.transmissionPixels={34,35,36,255};
+    const std::array<std::vector<std::uint8_t>,13> expected={source.baseColorPixels,source.normalPixels,source.metallicRoughnessPixels,
+        source.specularEmissivePixels,source.styleMaskPixels,source.matcapPixels,source.hairDataPixels,source.faceSdf.pixels,
+        source.shadowColorLutPixels,source.projectedHairRamp.parameterPixels,source.projectedHairRamp.line.pixels,
+        source.outlineSurface.maskPixels,source.transmissionPixels};
+    prepareMaterialPixels(source,firstPool,0);
+    require(source.baseColorPixels.empty()&&source.preparedPixels[0]&&source.preparedPixels[0]->compressed(),"Large prepared pixels use an immutable compressed backing");
+    auto copy=source;prepareMaterialPixels(copy,secondPool,0);
+    require(copy.preparedPixels[0]==source.preparedPixels[0],"Prepared copies adopt the independent immutable source without decoding");
+    restoreMaterialPixels(copy);
+    for(std::size_t i=0;i<expected.size();++i)require(materialPixelBytes(copy,static_cast<AssetMaterial::PixelKind>(i))==expected[i],"Every material pixel field restores complete bytes");
+    copy.baseColorPixels[0]=54;prepareMaterialPixels(copy,firstPool,0);
+    require(copy.preparedPixels[0]!=source.preparedPixels[0]&&source.preparedPixels[0]->read()==expected[0],"Mutable material copies retain independent source ownership");
+    auto patch=MaterialData::defaults("azure.pbr");patch.parameterOverride=true;
+    patch.parameters={{"baseColor",{.5,.5,.5,1.}}};patch.textures=nlohmann::json::object();
+    auto rawSource=source;restoreMaterialPixels(rawSource);
+    const auto noImages=[](const std::string&)->std::filesystem::path{throw std::runtime_error("Unexpected parameter image load");};
+    const auto preparedResult=patch.interpret(noImages,&source),rawResult=patch.interpret(noImages,&rawSource);
+    for(std::size_t i=0;i<expected.size();++i)
+        require(materialPixelBytes(preparedResult,static_cast<AssetMaterial::PixelKind>(i))==materialPixelBytes(rawResult,static_cast<AssetMaterial::PixelKind>(i)),
+            "Parameter overrides consume complete source bytes without changing their immutable owner");
+    require(source.baseColorPixels.empty()&&source.preparedPixels[0]->read()==expected[0],"Parameter interpretation preserves prepared source identity");
+    const auto retained=source.preparedPixels[0];source={};copy={};
+    require(retained->read()==expected[0],"Cancellation of material holders preserves independent readers");
+}
+
+void requireReleasedPixels(const AssetMaterial& material) {
+    for(const auto* pixels:{&material.baseColorPixels,&material.normalPixels,&material.metallicRoughnessPixels,
+            &material.specularEmissivePixels,&material.styleMaskPixels,&material.matcapPixels,
+            &material.hairDataPixels,&material.shadowColorLutPixels,&material.projectedHairRamp.parameterPixels})
+        require(pixels->empty()&&pixels->capacity()==0,"Uploaded renderer materials must release CPU pixel allocations");
+}
+
+void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prepared=false,const std::filesystem::path& irradiance={},bool packed=false) {
+    rhi::NullRhi rhi;CharacterSceneRenderer renderer;RenderContext context;
+    context.allocator=&rhi.allocator();context.rhi=&rhi;context.bindlessTextures=bindless;
+    context.shaderDirectory=shaderDirectory.string();
+    const auto source=std::filesystem::path(AZURERENDER_TEST_SOURCE_DIR);
+    context.rampAtlasPath=(source/"assets_public/toon_ramp_atlas.ppm").string();
+    RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;
+    context.renderSettings=&settings;
+    if(!irradiance.empty()){context.scene.irradianceVolume.asset=irradiance.u8string();context.scene.irradianceVolume.enabled=true;}
+    auto& limits=context.descriptorLimits;
+    limits.maxPerStageDescriptorSamplers=limits.maxDescriptorSetSamplers=4096;
+    limits.maxPerStageDescriptorSampledImages=limits.maxDescriptorSetSampledImages=4096;
+    limits.maxPerStageResources=4096;
+    for(const auto& letter:{"a","b"}) {
+        const auto id=std::string("resource-")+letter;
+        context.scene.resources.push_back({id,(source/"assets_public/texture_sharing"/(std::string("material-")+letter+".gltf")).string()});
+        scene::SceneNodeDesc node;node.id=std::string("instance-")+letter;node.resourceId=id;
+        context.scene.nodes.push_back(node);
+    }
+    std::map<std::string,std::shared_ptr<const LoadedAsset>> preparedMeshes;
+    std::map<std::string,std::vector<std::uint8_t>> expectedPreparedColors;
+    ImmutableBytePool sourcePool;
+    if(prepared) {
+        for(const auto& resource:context.scene.resources) {
+            auto mesh=loadGltfAsset(resource.path);
+            const auto key=std::filesystem::u8path(resource.path).lexically_normal().generic_u8string();
+            expectedPreparedColors[key]=mesh.materials.front().baseColorPixels;
+            if(packed)for(auto& material:mesh.materials)prepareMaterialPixels(material,sourcePool,0);
+            preparedMeshes.emplace(key,std::make_shared<const LoadedAsset>(std::move(mesh)));
+        }
+        context.preparedMeshes=&preparedMeshes;
+    }
+    for(unsigned load=0;load<2;++load) {
+        while(!renderer.prepareLoad(context,0)){}
+        std::ostringstream fields;fields<<'{';renderer.appendCaptureManifestFields(fields);fields<<"\"end\":0}";
+        const auto report=nlohmann::json::parse(fields.str());
+        require(report.at("irradianceResourceKind")==(!irradiance.empty()?"clipmap":"none"),"Renderer selects the declared irradiance resource family");
+        const auto& stats=report.at("materialTextureCache");
+        require(stats.at("sealed").get<bool>()&&stats.at("retainedPixelBytes")==0
+            &&stats.at("releasedIdentityBytes")==132,
+            "Completed shared-material loads release exact CPU identities while retaining all GPU bindings");
+        // Each imported resource includes its authored material and the loader's
+        // fallback. Six generated 2x2 maps and one 1x1 LUT are common; the two
+        // base colors and the two ORM factor combinations remain distinct.
+        require(stats.at("requests")==32,"Both resources must submit eight texture slots for authored and fallback materials");
+        require(stats.at("hits")==23&&stats.at("uniqueTextures")==9,"Repeated resources and equivalent fallback slots must share exactly equal upload inputs");
+        require(stats.at("requestedBytes")==576&&stats.at("residentBytes")==164,"Logical residency must retain all texels and mips while eliminating repeated uploads");
+        if(!packed) {
+            require(stats.at("copiedPixelBytes")==0&&stats.at("transferredPixelBytes")==132&&stats.at("discardedPixelBytes")==332,
+                "Unique renderer inputs transfer into the cache while redundant allocations are released without copying");
+        }else require(stats.at("copiedPixelBytes")==0&&stats.at("transferredPixelBytes")==0
+            &&stats.at("referencedPixelBytes")==132&&stats.at("discardedPixelBytes")==0,
+            "Prepared sources share their immutable backing while GPU identity and residency stay exact");
+        require(report.at("sceneLoad").at("decodedMaterialPixelBytes")==464
+            &&report.at("sceneLoad").at("remainingMaterialPixelBytes")==0,
+            "Completed material preparation must release every decoded source allocation used by this scene");
+        const auto* state=renderer.sceneState();
+        require(state&&state->asset,"Loaded geometry remains available for selection and animation");
+        for(const auto& material:state->asset->materials)requireReleasedPixels(material);
+        for(const auto& pickable:state->pickables)
+            for(const auto& material:pickable.asset->materials)requireReleasedPixels(material);
+        for(const auto& [path,mesh]:preparedMeshes) {
+            if(!packed)require(!mesh->materials.front().baseColorPixels.empty(),"Borrowed prepared assets retain their decoded source pixels");
+            else require(mesh->materials.front().baseColorPixels.empty()&&mesh->materials.front().preparedPixels[0]
+                &&mesh->materials.front().preparedPixels[0]->read()==expectedPreparedColors.at(path),
+                "Borrowed immutable prepared assets retain exact source bytes through rendering and reload");
+        }
+        require(renderer.reuseScene(context),"Shared material ownership preserves scene reuse");
+        if(!irradiance.empty()){
+            const auto images=rhi.allocator().statistics().liveImages,buffers=rhi.allocator().statistics().liveBuffers;
+            const auto binding=context.scene.irradianceVolume;
+            context.scene.irradianceVolume.enabled=false;context.scene.irradianceVolume.intensity=.25F;
+            context.scene.irradianceVolume.sampling={.25F,.2F,49.99999F};
+            require(renderer.reuseScene(context),"Clipmap enable and intensity retain the loaded resources");
+            std::ostringstream updated;updated<<'{';renderer.appendCaptureManifestFields(updated);updated<<"\"end\":0}";
+            require(nlohmann::json::parse(updated.str()).at("irradianceQuery").at("phase").get<float>()==context.scene.irradianceVolume.sampling.phase,
+                "Query sampling changes must reach the retained scene");
+            require(rhi.allocator().statistics().liveImages==images&&rhi.allocator().statistics().liveBuffers==buffers,
+                "Frame parameter changes preserve immutable clipmap ownership");
+            auto grid=irradiance;grid.replace_extension(".aziv");context.scene.irradianceVolume.asset=grid.u8string();
+            require(!renderer.reuseScene(context),"Grid/clipmap asset changes require a new resource layout");
+            context.scene.irradianceVolume=binding;require(renderer.reuseScene(context),"The retained clipmap remains valid until retirement");
+        }
+        renderer.onUnload(context);
+        require(rhi.allocator().statistics().liveImages==0&&rhi.allocator().statistics().liveBuffers==0,"Renderer unload must free shared materials and independent attachments exactly once");
+    }
+}
+
+void verifyProjectedPixels(bool bindless,const std::filesystem::path& shaders) {
+    rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;
+    const auto source=std::filesystem::path(AZURERENDER_TEST_SOURCE_DIR);
+    const auto path=(source/"assets_public/texture_sharing/material-a.gltf").generic_string();
+    auto prepared=std::make_shared<LoadedAsset>(loadGltfAsset(path));
+    auto& material=prepared->materials.at(0);auto& hair=material.projectedHairRamp;
+    material.materialClass=AssetMaterialClass::Hair;material.materialProfileVersion=2;
+    material.materialFeatures=MaterialFeatureHairProjectedRamp|MaterialFeatureHairAnisotropy;
+    hair.present=true;hair.parameterWidth=hair.parameterHeight=2;
+    const std::vector<std::uint8_t> sourcePixels{13,59,101,197, 23,71,113,211, 37,83,127,223, 47,97,139,239};
+    hair.parameterPixels=sourcePixels;
+    material.textureSettings[5].colorSpace=material.textureSettings[7].colorSpace="linear";
+    std::map<std::string,std::shared_ptr<const LoadedAsset>> meshes{{path,prepared}};
+    context.rhi=&backend;context.allocator=&backend.allocator();context.preparedMeshes=&meshes;
+    context.shaderDirectory=shaders.string();context.bindlessTextures=bindless;
+    context.rampAtlasPath=(source/"assets_public/toon_ramp_atlas.ppm").string();
+    auto& limits=context.descriptorLimits;
+    limits.maxPerStageDescriptorSamplers=limits.maxDescriptorSetSamplers=4096;
+    limits.maxPerStageDescriptorSampledImages=limits.maxDescriptorSetSampledImages=4096;
+    limits.maxPerStageResources=4096;
+    RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;context.renderSettings=&settings;
+    context.scene.resources.push_back({"surface",path});scene::SceneNodeDesc node;node.id="surface";node.resourceId="surface";context.scene.nodes.push_back(node);
+    for(unsigned load=0;load<2;++load) {
+        renderer.onLoad(context);
+        require(hair.parameterPixels==sourcePixels,"Borrowed prepared hair parameters must retain their original allocation and bytes");
+        const auto* state=renderer.sceneState();require(state&&state->asset,"Projected material source must remain queryable");
+        for(const auto& output:state->asset->materials)requireReleasedPixels(output);
+        for(const auto& pickable:state->pickables)for(const auto& output:pickable.asset->materials)requireReleasedPixels(output);
+        std::ostringstream fields;fields<<'{';renderer.appendCaptureManifestFields(fields);fields<<"\"end\":0}";
+        const auto report=nlohmann::json::parse(fields.str());
+        require(report.at("sceneLoad").at("remainingMaterialPixelBytes")==0,
+            "Projected parameter uploads must release every renderer source pixel allocation");
+        renderer.onUnload(context);
+        require(backend.allocator().statistics().liveBuffers==0&&backend.allocator().statistics().liveImages==0,
+            "Projected parameters and immutable material table must release on every unload");
+    }
+}
+
+int main(int argc,char** argv) {try {
+    require(argc==2,"Expected compiled shader directory");
+    verifyPreparedPixelOwnership();
+    verify(false,argv[1]);verify(true,argv[1]);verify(false,argv[1],true);verify(true,argv[1],true);
+    verify(false,argv[1],true,{},true);verify(true,argv[1],true,{},true);
+    verifyProjectedPixels(false,argv[1]);verifyProjectedPixels(true,argv[1]);
+    auto clipmapPath=std::filesystem::temp_directory_path()/("azure-clipmap-sharing-"+
+        std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".azic");
+    auto gridPath=clipmapPath;gridPath.replace_extension(".aziv");
+    auto cleanup=std::unique_ptr<void,std::function<void(void*)>>(&clipmapPath,[&](void*){
+        std::error_code error;std::filesystem::remove(clipmapPath,error);std::filesystem::remove(gridPath,error);
+    });
+    const auto clipmap=test::clipmapFixture().encode();IrradianceVolume grid;grid.cells.resize(1);const auto gridBytes=grid.encode();
+    {std::ofstream out(clipmapPath,std::ios::binary);out.write(reinterpret_cast<const char*>(clipmap.data()),clipmap.size());}
+    {std::ofstream out(gridPath,std::ios::binary);out.write(reinterpret_cast<const char*>(gridBytes.data()),gridBytes.size());}
+    verify(false,argv[1],true,clipmapPath);verify(true,argv[1],true,clipmapPath);
+    std::cout<<"Public multi-resource fixture: fixed/indexed bindings and reload sharing passed\n";
+}catch(const std::exception& error) {std::cerr<<error.what()<<'\n';return 1;}}

@@ -1,0 +1,26 @@
+[
+  {
+    "frame": "frame_000000.png",
+    "identical": false,
+    "changedPixels": 334,
+    "max": 51
+  },
+  {
+    "frame": "frame_000001.png",
+    "identical": false,
+    "changedPixels": 291,
+    "max": 55
+  },
+  {
+    "frame": "frame_000002.png",
+    "identical": false,
+    "changedPixels": 295,
+    "max": 54
+  },
+  {
+    "frame": "frame_000003.png",
+    "identical": false,
+    "changedPixels": 306,
+    "max": 53
+  }
+]

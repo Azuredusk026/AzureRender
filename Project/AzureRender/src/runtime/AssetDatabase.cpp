@@ -1,0 +1,519 @@
+#include "runtime/AssetDatabase.hpp"
+#include "runtime/AssetSourceCache.hpp"
+#include "runtime/Level.hpp"
+#include "assets/TextureImportSettings.hpp"
+#include "assets/Scene2D.hpp"
+#include "assets/AssetFormatRegistry.hpp"
+#include "runtime/AnimationStateMachine.hpp"
+#include <algorithm>
+#include <fstream>
+#include <atomic>
+#include <future>
+#include <iomanip>
+#include <random>
+#include <regex>
+#include <set>
+#include <sstream>
+#include <stdexcept>
+#ifdef _WIN32
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+#endif
+namespace azurerender {
+namespace {
+using Json = nlohmann::json;
+#ifdef _WIN32
+std::wstring nativeFilePath(const std::filesystem::path& path) {
+    const auto value=std::filesystem::absolute(path).lexically_normal().native();
+    if(value.rfind(L"\\\\?\\",0)==0)return value;
+    if(value.rfind(L"\\\\",0)==0)return L"\\\\?\\UNC\\"+value.substr(2);
+    return L"\\\\?\\"+value;
+}
+#endif
+std::string bytes(const std::filesystem::path& path, const std::function<void()>& check={}) {
+    std::ifstream input(path, std::ios::binary|std::ios::ate);
+    if (!input) {
+#ifdef _WIN32
+        const auto nativeError=GetLastError();
+        throw std::runtime_error("Cannot read asset: " + path.u8string()+" (Windows error "+std::to_string(nativeError)+")");
+#else
+        throw std::runtime_error("Cannot read asset: " + path.u8string());
+#endif
+    }
+    const auto size=input.tellg();if(size<0)throw std::runtime_error("Cannot size asset: "+path.u8string());
+    std::string data(static_cast<std::size_t>(size),'\0');input.seekg(0);
+    for(std::size_t offset=0;offset<data.size();){
+        if(check)check();const auto count=std::min<std::size_t>(1024*1024,data.size()-offset);
+        input.read(data.data()+offset,static_cast<std::streamsize>(count));offset+=count;
+    }
+    if (!input) throw std::runtime_error("Asset read failed: " + path.u8string());
+    return data;
+}
+std::string cacheBytes(const std::filesystem::path& path) {
+#ifdef _WIN32
+    const auto fail=[&](const char* message){
+        const auto error=GetLastError();
+        throw std::filesystem::filesystem_error(message,path,
+            std::error_code(static_cast<int>(error),std::system_category()));
+    };
+    const auto input=CreateFileW(path.c_str(),GENERIC_READ,
+        FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,nullptr,OPEN_EXISTING,
+        FILE_ATTRIBUTE_NORMAL|FILE_FLAG_SEQUENTIAL_SCAN,nullptr);
+    if(input==INVALID_HANDLE_VALUE)fail("Cannot read asset cache");
+    struct Guard {HANDLE value;~Guard(){CloseHandle(value);}} guard{input};
+    LARGE_INTEGER size{};
+    if(!GetFileSizeEx(input,&size))fail("Cannot size asset cache");
+    if(size.QuadPart<0 || static_cast<std::uint64_t>(size.QuadPart)>std::string().max_size())
+        throw std::runtime_error("Asset cache size exceeds addressable storage: "+path.u8string());
+    std::string data(static_cast<std::size_t>(size.QuadPart),'\0');
+    for(std::size_t offset=0;offset<data.size();){
+        const auto count=static_cast<DWORD>(std::min<std::size_t>(1024*1024,data.size()-offset));
+        DWORD received=0;
+        if(!ReadFile(input,data.data()+offset,count,&received,nullptr))fail("Asset cache read failed");
+        if(received!=count)throw std::runtime_error("Incomplete asset cache read: "+path.u8string());
+        offset+=received;
+    }
+    return data;
+#else
+    return bytes(path);
+#endif
+}
+std::uint64_t hash(const std::string& data) {
+    std::uint64_t result = 14695981039346656037ULL;
+    for (const unsigned char c : data) { result ^= c; result *= 1099511628211ULL; }
+    return result;
+}
+void write(const std::filesystem::path& path, const std::string& data) {
+    std::filesystem::create_directories(path.parent_path());
+    auto temporary = path;temporary += ".tmp";
+    { std::ofstream output(temporary, std::ios::binary); output << data; output.flush();
+      if (!output) throw std::runtime_error("Cannot write asset file: " + path.u8string()); }
+    std::filesystem::copy_file(temporary, path, std::filesystem::copy_options::overwrite_existing);
+    std::filesystem::remove(temporary);
+}
+std::string uuid() {
+    std::random_device random;
+    std::ostringstream out; out << std::hex << std::setfill('0');
+    for (int i = 0; i < 16; ++i) {
+        if (i == 4 || i == 6 || i == 8 || i == 10) out << '-';
+        unsigned value = random() & 255;
+        if (i == 6) value = (value & 15) | 64;
+        if (i == 8) value = (value & 63) | 128;
+        out << std::setw(2) << value;
+    }
+    return out.str();
+}
+Json createAssetMetadata(const std::filesystem::path& sidecar) {
+    namespace fs = std::filesystem;
+    Json created = {{"schemaVersion", 1}, {"id", uuid()}, {"settings", Json::object()}, {"dependencies", Json::array()}};
+    const auto id = created.at("id").get<std::string>();
+    auto staging = sidecar;
+    staging += "." + id + ".tmp";
+    const auto cleanup = [&] { std::error_code ignored; fs::remove(staging, ignored); };
+    try {
+        std::ofstream output(staging, std::ios::binary | std::ios::trunc);
+        output << created.dump(2);
+        output.close();
+        if (!output) throw std::runtime_error("Cannot write asset metadata: " + sidecar.u8string());
+        std::error_code error;
+#ifdef _WIN32
+        if (!MoveFileExW(nativeFilePath(staging).c_str(), nativeFilePath(sidecar).c_str(), 0))
+            error = {static_cast<int>(GetLastError()), std::system_category()};
+#else
+        fs::create_hard_link(staging, sidecar, error);
+        if (!error) cleanup();
+#endif
+        if (!error) return created;
+        if (fs::is_regular_file(sidecar)) {
+            cleanup();
+            return Json::parse(bytes(sidecar));
+        }
+        throw fs::filesystem_error("Cannot publish asset metadata", staging, sidecar, error);
+    } catch (...) { cleanup(); throw; }
+}
+void writeCache(const std::filesystem::path& path, const std::string& data) {
+    namespace fs=std::filesystem;
+    // Validate the complete immutable payload before reserving staging space.
+    if(fs::is_regular_file(path)&&cacheBytes(path)==data)return;
+    fs::create_directories(path.parent_path());
+    fs::path staging;
+    for(unsigned attempt=0;attempt<8 && staging.empty();++attempt){
+        auto token=uuid();token.erase(std::remove(token.begin(),token.end(),'-'),token.end());
+        const auto candidate=path.parent_path().parent_path()/(token.substr(0,16)+".tmp");
+        if(fs::create_directory(candidate))staging=std::move(candidate);
+    }
+    if(staging.empty())throw std::runtime_error("Cannot reserve asset cache staging: "+path.u8string());
+    const auto payload=staging/"payload";
+    const auto cleanup=[&]{std::error_code ignored;fs::remove(payload,ignored);fs::remove(staging,ignored);};
+    try{
+        {std::ofstream output(payload,std::ios::binary|std::ios::trunc);
+         output.write(data.data(),static_cast<std::streamsize>(data.size()));output.flush();output.close();
+         if(!output)throw std::runtime_error("Cannot write asset cache: "+path.u8string());}
+        std::error_code error;
+#ifdef _WIN32
+        if(!MoveFileExW(nativeFilePath(payload).c_str(),nativeFilePath(path).c_str(),0))
+            error={static_cast<int>(GetLastError()),std::system_category()};
+#else
+        fs::rename(payload,path,error);
+#endif
+        // Preserve a complete immutable winner. Replacing identical files on
+        // Windows can disrupt readers while multiple planners publish.
+        if(error && fs::is_regular_file(path)){
+            if(cacheBytes(path)==data)error.clear();
+#ifdef _WIN32
+            else if(MoveFileExW(nativeFilePath(payload).c_str(),nativeFilePath(path).c_str(),MOVEFILE_REPLACE_EXISTING))
+                error.clear();
+            else error={static_cast<int>(GetLastError()),std::system_category()};
+#endif
+        }
+        if(error)throw fs::filesystem_error("Cannot publish asset cache",payload,path,error);
+        cleanup();
+    }catch(...){cleanup();throw;}
+}
+void cache(const std::filesystem::path& path, const AssetRecord& record) {
+    const auto source = bytes(record.path);
+    if (hash(source) != record.contentHash) throw std::runtime_error("Asset changed during import: " + record.path.u8string());
+    if(std::filesystem::is_regular_file(path)){
+        const auto prior=cacheBytes(path);
+        const bool legacyLarge=prior.substr(0,8)=="AZCACHE1"&&source.size()>=kAssetCacheCompressionMinimum&&source.size()<=kAssetCacheCompressionMaximum
+            &&std::filesystem::hard_link_count(path)==1;
+        if(!legacyLarge&&assetSourceCacheMatches(prior,record.fingerprint,source))return;
+    }
+    writeCache(path,encodeAssetSourceCache(source,record.fingerprint));
+}
+std::vector<std::string> discoverAssetReferences(const Json& document,const std::string& extension,
+    const std::string& virtualPath,const Project& project) {
+    std::vector<std::string> references;
+    const auto relativeReference=[&](const std::string& uri) {
+        const auto slash=virtualPath.find(":/");
+        const auto relative=(std::filesystem::u8path(virtualPath.substr(slash+2)).parent_path()/std::filesystem::u8path(uri)).lexically_normal();
+        const auto reference=virtualPath.substr(0,slash+2)+relative.generic_u8string();
+        static_cast<void>(project.resolve(reference));references.push_back(reference);
+    };
+    if(extension==".azure2d") {
+        for(const auto& item:document.at("items"))if(item.contains("image"))
+            relativeReference(item.at("image").get<std::string>());
+    }
+    if(extension==".azscript") {
+        if(!document.is_object() || !document.at("schemaVersion").is_number_integer() || document.at("schemaVersion")!=1
+            || !document.at("type").is_string() || !std::regex_match(document.at("type").get<std::string>(),std::regex("[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+")))
+            throw std::invalid_argument("Invalid managed script asset schema or type");
+        for(const auto& field:document.items())if(field.key()!="schemaVersion" && field.key()!="type" && field.key()!="assembly")
+            throw std::invalid_argument("Unknown managed script asset field");
+        if(document.contains("assembly")) {
+            const auto reference=document.at("assembly").get<std::string>();
+            if(reference.empty())throw std::invalid_argument("Managed assembly reference is empty");
+            references.push_back(reference);
+        }
+    }
+    if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscene" || extension==".azurematerial") {
+        const auto walk=[&](const Json& value,auto&& self)->void {
+            if(value.is_object())for(const auto& field:value.items()) {
+                if((field.key()=="asset" || field.key()=="prefab")&&field.value().is_string())references.push_back(field.value().get<std::string>());
+                else if(field.key()=="reflectionProbe"&&field.value().is_object())references.push_back(field.value().at("texture").get<std::string>());
+                else if(field.key()=="materialSlots"&&field.value().is_object()){for(const auto& slot:field.value().items())references.push_back(slot.value().get<std::string>());}
+                else self(field.value(),self);
+            }
+            else if(value.is_array())for(const auto& child:value)self(child,self);
+        };
+        walk(document,walk);
+        if(extension==".gltf")for(const auto* key:{"buffers","images"})
+            for(const auto& object:document.value(key,Json::array())) {
+                const auto uri=object.value("uri",std::string());
+                if(uri.empty()||uri.rfind("data:",0)==0)continue;
+                relativeReference(uri);
+            }
+    }
+    return references;
+}
+}
+std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<void()> check) {
+    // Patterns are immutable and shared across scans, including concurrent
+    // project planners. Compiling them per asset scales with directory size.
+    static const std::regex uuidPattern("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}");
+    statistics_={};
+    std::map<std::string, AssetRecord> candidate;
+    std::map<std::string, std::string> paths;
+    std::map<std::filesystem::path,SourceState> sources;
+    struct Entry {
+        std::string virtualPath;
+        std::filesystem::path path, sidecar;
+        std::optional<Json> metadata;
+    };
+    const auto process = [&](Entry& entry) {
+        const auto& virtualPath = entry.virtualPath;
+        const auto& path = entry.path;
+        const auto& sidecar = entry.sidecar;
+        const auto previous=sources_->find(path);
+        const auto time=std::filesystem::last_write_time(path);
+        const auto size=std::filesystem::file_size(path);
+        if(!verifyAll && previous!=sources_->end() && std::filesystem::exists(sidecar)
+            && previous->second.sourceTime==time && previous->second.size==size
+            && previous->second.metadataTime==std::filesystem::last_write_time(sidecar)){
+            const auto& state=previous->second;
+            if(!candidate.emplace(state.id,AssetRecord{state.id,virtualPath,path,state.baseFingerprint,state.contentHash,{}}).second)
+                throw std::runtime_error("Duplicate asset UUID: "+state.id);
+            paths[virtualPath]=state.id;
+            sources[path]=state;++statistics_.filesReused;return;
+        }
+        Json meta;
+        if (entry.metadata) meta = std::move(*entry.metadata);
+        else if (std::filesystem::exists(sidecar)) meta = Json::parse(bytes(sidecar));
+        else meta = createAssetMetadata(sidecar);
+        if (!meta.at("schemaVersion").is_number_integer() || meta.at("schemaVersion") != 1) throw std::runtime_error("Unsupported asset metadata version");
+        const auto id = meta.at("id").get<std::string>();
+        if (!std::regex_match(id, uuidPattern))
+            throw std::runtime_error("Invalid asset UUID: " + sidecar.u8string());
+        if(meta.value("settings",Json::object()).contains("texture")) {
+            const auto settings=TextureImportSettings::parse(meta.at("settings").at("texture"));
+            meta["settings"]["texture"]=settings.describe();
+        }
+        const auto source = bytes(path,check);
+        statistics_.sourceBytesRead+=source.size();++statistics_.filesRead;
+        if (!candidate.emplace(id, AssetRecord{id, virtualPath, path, hash(source + meta.value("settings", Json::object()).dump() + "importer-v1"), hash(source), {}}).second)
+            throw std::runtime_error("Duplicate asset UUID: " + id);
+        const auto extension=assetExtension(path);Json document;
+        if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscript" || extension==".azurematerial" || extension==".azure2d")document=Json::parse(source);
+        if(extension==".azure2d")document=Scene2D::parse(document).encode();
+        if(extension==".azscene") {
+            document={{"resources",Json::array()}};
+            const auto scene=SceneDocument::load(path);
+            if(!scene.reflectionProbe.texture.empty())document["reflectionProbe"]=scene.reflectionProbe;
+            if(!scene.irradianceVolume.asset.empty())document["irradianceVolume"]=scene.irradianceVolume;
+            if(!scene.viewFog.asset.empty())document["viewFog"]=scene.viewFog;
+            if(!scene.renderSettings.grade.lut.asset.empty())document["gradeLut"]={{"asset",scene.renderSettings.grade.lut.asset}};
+            for(const auto& resource:scene.resources)document["resources"].push_back({{"asset",resource.path.generic_u8string()}});
+            document["nodes"]=Json::array();for(const auto& node:scene.nodes)if(!node.materialSlots.empty())document["nodes"].push_back({{"materialSlots",node.materialSlots}});
+        }
+        const auto& record=candidate.at(id);
+        auto references=discoverAssetReferences(document,extension,virtualPath,project_);
+        sources[path]={time,std::filesystem::last_write_time(sidecar),size,id,std::move(meta),std::move(references),record.contentHash,record.fingerprint};
+        paths[virtualPath] = id;
+    };
+    // A cold synchronous scan can publish independent sidecars together.
+    // Cancellable and warm scans continue to process entries as they are read.
+    const bool collect = !check && sources_->empty();
+    std::vector<Entry> entries;
+    for (const auto& mount : project_.mounts) {
+        const auto root = std::filesystem::weakly_canonical(mount.second);
+        const auto prefix = mount.first + ":/";
+        for (const auto& entry : std::filesystem::recursive_directory_iterator(mount.second)) {
+            if(check)check();
+            if (!entry.is_regular_file() || entry.path().extension() == ".azmeta" || entry.path().extension() == ".tmp") continue;
+            const auto relative = entry.path().lexically_relative(mount.second).generic_u8string();
+            const auto virtualPath = prefix + relative;
+            if (relative.empty() || relative.find(':') != std::string::npos)
+                throw std::runtime_error("Invalid virtual path: " + virtualPath);
+            // The mount root is shared by the scan. Resolve each entry, including
+            // links, before checking containment against that root.
+            const auto path = std::filesystem::weakly_canonical(root / std::filesystem::u8path(relative));
+            const auto inside = path.lexically_relative(root);
+            if (inside.empty() || *inside.begin() == "..")
+                throw std::runtime_error("Project path escapes mount: " + virtualPath);
+            auto sidecar = path;sidecar += ".azmeta";
+            Entry pending{virtualPath, path, std::move(sidecar), std::nullopt};
+            if (collect) entries.push_back(std::move(pending));
+            else process(pending);
+        }
+    }
+    if (entries.size() >= 64) {
+        std::atomic<std::size_t> next{0};
+        std::atomic<bool> failed{false};
+        const auto publish = [&] {
+            try {
+                while (!failed.load(std::memory_order_relaxed)) {
+                    const auto index = next.fetch_add(1, std::memory_order_relaxed);
+                    if (index >= entries.size()) return;
+                    auto& entry = entries[index];
+                    if (!std::filesystem::exists(entry.sidecar))
+                        entry.metadata = createAssetMetadata(entry.sidecar);
+                }
+            } catch (...) {
+                failed.store(true, std::memory_order_relaxed);
+                throw;
+            }
+        };
+        std::vector<std::future<void>> publishers;
+        for (unsigned worker = 0; worker < 4; ++worker)
+            publishers.push_back(std::async(std::launch::async, publish));
+        for (auto& publisher : publishers) publisher.get();
+    }
+    for (auto& entry : entries) process(entry);
+    for (auto& entry : candidate) {
+        if(check)check();
+        auto& record = entry.second;
+        const auto& sourceState=sources.at(record.path);
+        const auto& meta=sourceState.metadata;
+        std::set<std::string> dependencies;
+        const auto add = [&](const std::string& reference) {
+            if (reference.empty() || reference.rfind("engine:/", 0) == 0) return;
+            auto id = reference;
+            if (reference.find(":/") != std::string::npos) {
+                const auto found = paths.find(reference);
+                if (found == paths.end()) throw std::runtime_error("Missing virtual asset dependency: " + reference);
+                id = found->second;
+            }
+            if (!candidate.count(id)) throw std::runtime_error("Missing asset dependency: " + id);
+            dependencies.insert(id);
+        };
+        for(const auto& dep:meta.value("dependencies",Json::array()))add(dep.get<std::string>());
+        for(const auto& reference:sourceState.references)add(reference);
+        record.dependencies.assign(dependencies.begin(), dependencies.end());
+        if(meta.contains("importGeneration")) {
+            record.importGeneration=GenerationManifest::fromJson(meta.at("importGeneration"));
+            const auto& imported=*record.importGeneration;
+            if(imported.inputHashes.empty()||imported.outputHashes.empty())throw std::runtime_error("Import provenance requires source and output fingerprints");
+            if(imported.inputHashes!=imported.outputHashes) {
+                bool supported=false;
+                for(const auto& pair:assetFormatRegistry().formats()) {
+                    const auto& format=pair.second;
+                    if(format.transformsSource&&format.canRead&&imported.generatorId=="azure."+format.id+"-import"&&imported.generatorVersion==format.generatorVersion)
+                        supported=true;
+                }
+                if(!supported)throw std::runtime_error("Unsupported asset conversion provenance");
+            }
+            const auto base=std::filesystem::weakly_canonical(record.path.parent_path());
+            for(const auto& output:imported.outputHashes) {
+                if(output.first.find(":/")!=std::string::npos) {
+                    const auto found=paths.find(output.first);
+                    if(found==paths.end()||generationHash(bytes(candidate.at(found->second).path,check))!=output.second)
+                        throw std::runtime_error("Imported output hash is stale: "+output.first);
+                    continue;
+                }
+                const auto relative=std::filesystem::u8path(output.first);
+                const auto resolved=std::filesystem::weakly_canonical(base/relative);const auto inside=resolved.lexically_relative(base);
+                if(relative.is_absolute()||relative.has_root_name()||inside.empty()||*inside.begin()==".."||generationHash(bytes(resolved,check))!=output.second)
+                    throw std::runtime_error("Imported output hash is stale: "+output.first);
+            }
+            record.fingerprint=hash(std::to_string(record.fingerprint)+imported.fingerprint());
+        }
+        if(meta.contains("generation")) {
+            record.generation=GenerationManifest::fromJson(meta.at("generation"));
+            const auto& manifest=*record.generation;
+            if(manifest.outputHashes.size()!=1||!manifest.outputHashes.count(record.virtualPath)||manifest.outputHashes.at(record.virtualPath)!=generationHash(bytes(record.path,check)))
+                throw std::runtime_error("Generated output hash is stale: "+record.virtualPath);
+            const auto verify=[&](const auto& hashes) { for(const auto& input:hashes) {
+                add(input.first);const auto id=paths.count(input.first)?paths.at(input.first):input.first;
+                const auto& source=candidate.at(id);
+                if(generationHash(bytes(source.path,check))!=input.second)throw std::runtime_error("Generation input hash is stale: "+input.first);
+            } };
+            verify(manifest.inputHashes);verify(manifest.dependencyHashes);
+            record.dependencies.assign(dependencies.begin(), dependencies.end());
+            record.fingerprint=hash(std::to_string(record.fingerprint)+manifest.fingerprint());
+        }
+    }
+    std::map<std::string, unsigned> state;
+    const auto fingerprint = [&](const std::string& id, auto&& self) -> std::uint64_t {
+        if (state[id] == 1) throw std::runtime_error("Asset dependency cycle: " + id);
+        auto& record = candidate.at(id);
+        if (state[id] == 2) return record.fingerprint;
+        state[id] = 1;
+        std::string key = std::to_string(record.fingerprint);
+        for (const auto& dependency : record.dependencies) key += ":" + std::to_string(self(dependency, self));
+        record.fingerprint = hash(key); state[id] = 2; return record.fingerprint;
+    };
+    std::vector<std::string> changed;
+    std::vector<std::pair<std::filesystem::path, const AssetRecord*>> snapshots;
+    const auto cacheDirectory = project_.file.parent_path() / ".azure/cache";
+    for (auto& entry : candidate) {
+        fingerprint(entry.first, fingerprint);
+        const auto old = records_.find(entry.first);
+        if (old != records_.end() && old->second.fingerprint == entry.second.fingerprint && old->second.path == entry.second.path) continue;
+        changed.push_back(entry.first);
+        snapshots.emplace_back(cacheDirectory / entry.first / (std::to_string(entry.second.fingerprint) + ".azcache"), &entry.second);
+    }
+    // Cancellation belongs to the caller. Small and cancellable publications
+    // retain the same owner-thread order and checks.
+    if (check || snapshots.size() < 64) {
+        for (const auto& [path, record] : snapshots) {
+            if (check) check();
+            cache(path, *record);
+        }
+    } else {
+        std::atomic<std::size_t> next{0};
+        std::atomic<bool> failed{false};
+        const auto publish = [&] {
+            try {
+                while (!failed.load(std::memory_order_relaxed)) {
+                    const auto index = next.fetch_add(1, std::memory_order_relaxed);
+                    if (index >= snapshots.size()) return;
+                    const auto& [path, record] = snapshots[index];
+                    cache(path, *record);
+                }
+            } catch (...) {
+                failed.store(true, std::memory_order_relaxed);
+                throw;
+            }
+        };
+        std::vector<std::future<void>> publishers;
+        for (unsigned worker = 0; worker < 4; ++worker)
+            publishers.push_back(std::async(std::launch::async, publish));
+        for (auto& publisher : publishers) publisher.get();
+    }
+    for (const auto& old : records_) if (!candidate.count(old.first)) changed.push_back(old.first);
+    if(check)check();
+    records_.swap(candidate);
+    sources_=std::make_shared<const std::map<std::filesystem::path,SourceState>>(std::move(sources));
+    ++version_;
+    return changed;
+}
+std::string AssetDatabase::idForPath(const std::string& path) const {
+    for (const auto& entry : records_) if (entry.second.virtualPath == path) return entry.first;
+    throw std::runtime_error("Unknown asset path: " + path);
+}
+std::filesystem::path AssetDatabase::resolve(const std::string& id) const {
+    const auto found = records_.find(id);
+    if (found == records_.end()) throw std::runtime_error("Unknown asset UUID: " + id);
+    return found->second.path;
+}
+std::filesystem::path AssetDatabase::resolveReference(const std::string& reference) const {
+    const auto result = reference.find(":/") == std::string::npos ? resolve(reference) : project_.resolve(reference);
+    if (!std::filesystem::is_regular_file(result)) throw std::runtime_error("Asset reference missing: " + reference);
+    return result;
+}
+std::filesystem::path AssetDatabase::cacheFile(const std::string& id) const {
+    return project_.file.parent_path() / ".azure/cache" / id / (std::to_string(records_.at(id).fingerprint) + ".azcache");
+}
+std::string AssetDatabase::readSource(const std::string& id) const {
+    const auto& record = records_.at(id);
+    const auto path = cacheFile(id);
+    if (std::filesystem::exists(path)) {
+        const auto data = cacheBytes(path);
+        if(auto decoded=decodeAssetSourceCache(data,record.fingerprint,record.contentHash))return std::move(*decoded);
+    }
+    cache(path, record); return bytes(record.path);
+}
+void AssetDatabase::writePack(const std::filesystem::path& destination) const {
+    if (std::filesystem::exists(destination) && !std::filesystem::is_empty(destination)) throw std::runtime_error("Asset pack destination must be empty");
+    Json entries = Json::array();
+    for (const auto& entry : records_) {
+        const auto& record = entry.second;
+        const auto separator = record.virtualPath.find(":/");
+        const auto relative = record.virtualPath.substr(0, separator) + "/" + record.virtualPath.substr(separator + 2);
+        const auto target=destination/std::filesystem::u8path(relative);
+        write(target, readSource(record.id));
+        auto targetMetadata=target;targetMetadata+=".azmeta";
+        auto sourceMetadata=record.path;sourceMetadata+=".azmeta";
+        write(targetMetadata, bytes(sourceMetadata));
+        entries.push_back({{"id", record.id}, {"path", relative}, {"contentHash", record.contentHash}, {"dependencies", record.dependencies}});
+        if(record.generation)entries.back()["generation"]=record.generation->toJson();
+        if(record.importGeneration)entries.back()["importGeneration"]=record.importGeneration->toJson();
+    }
+    write(destination / "manifest.azurepack", Json{{"schemaVersion", 1}, {"assets", entries}}.dump(2));
+}
+std::filesystem::path AssetDatabase::resolvePack(const std::filesystem::path& directory, const std::string& id) {
+    const auto document = Json::parse(bytes(directory / "manifest.azurepack"));
+    if (!document.at("schemaVersion").is_number_integer() || document.at("schemaVersion") != 1) throw std::runtime_error("Unsupported asset pack version");
+    for (const auto& entry : document.at("assets")) if (entry.at("id") == id) {
+        const auto relative=std::filesystem::u8path(entry.at("path").get<std::string>());
+        const auto base = std::filesystem::weakly_canonical(directory), result = std::filesystem::weakly_canonical(base / relative);
+        const auto inside = result.lexically_relative(base);
+        if (relative.is_absolute() || inside.empty() || *inside.begin() == ".." || hash(bytes(result)) != entry.at("contentHash").get<std::uint64_t>())
+            throw std::runtime_error("Invalid asset pack entry");
+        return result;
+    }
+    throw std::runtime_error("Asset absent from pack: " + id);
+}
+} // namespace azurerender

@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/outline-validation-release
+Test project D:/Projects/FYP/Project/AzureRender/build/outline-validation-release
+    Start 109: AzureRender.CharacterRepair
+1/1 Test #109: AzureRender.CharacterRepair ......***Failed    6.58 sec
+Unknown projectedRamp field: snapshotNormal
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   6.66 sec
+
+The following tests FAILED:
+	109 - AzureRender.CharacterRepair (Failed)
+Errors while running CTest

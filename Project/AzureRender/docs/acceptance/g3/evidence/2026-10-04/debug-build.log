@@ -1,0 +1,35 @@
+[1/35] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorCameraController.cpp.obj
+[2/35] Building CXX object CMakeFiles\AzureProjectTests.dir\tests\ProjectTests.cpp.obj
+[3/35] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorSession.cpp.obj
+[4/35] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\GameRuntime.cpp.obj
+[5/35] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorContext.cpp.obj
+[6/35] Building CXX object CMakeFiles\AzureRuntimeLifecycleTests.dir\tests\RuntimeLifecycleTests.cpp.obj
+[7/35] Building CXX object CMakeFiles\AzurePhysicsInputTests.dir\tests\PhysicsInputTests.cpp.obj
+[8/35] Linking CXX static library AzureRuntime.lib
+[9/35] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[10/35] Linking CXX static library AzureEditor.lib
+[11/35] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[12/35] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[13/35] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[14/35] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[15/35] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderResources.cpp.obj
+[16/35] Building CXX object CMakeFiles\AzureAssetLevelTests.dir\tests\AssetLevelTests.cpp.obj
+[17/35] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderResources.cpp.obj
+[18/35] Building CXX object CMakeFiles\AzureRender.dir\src\main.cpp.obj
+[19/35] Building CXX object CMakeFiles\AzurePlayer.dir\src\player\main.cpp.obj
+[20/35] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSupport.cpp.obj
+[21/35] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSupport.cpp.obj
+[22/35] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderCapture.cpp.obj
+[23/35] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderCapture.cpp.obj
+[24/35] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderApp.cpp.obj
+[25/35] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderApp.cpp.obj
+[26/35] Linking CXX executable AzureProjectTests.exe
+[27/35] Linking CXX executable AzurePhysicsInputTests.exe
+[28/35] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderFrame.cpp.obj
+[29/35] Linking CXX executable AzureRuntimeLifecycleTests.exe
+[30/35] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderFrame.cpp.obj
+[31/35] Linking CXX static library AzurePlayerHost.lib
+[32/35] Linking CXX static library AzureRenderHost.lib
+[33/35] Linking CXX executable AzureAssetLevelTests.exe
+[34/35] Linking CXX executable AzurePlayer.exe
+[35/35] Linking CXX executable AzureRender.exe

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "nvidia-all",
+    "exitCode": 0,
+    "seconds": 86.75
+  },
+  {
+    "name": "intel-binding",
+    "exitCode": 0,
+    "seconds": 7.170999999972992
+  }
+]

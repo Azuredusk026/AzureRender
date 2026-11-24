@@ -1,0 +1,29 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+      Start  31: AzureRender.SceneMultisamplingGpu
+ 1/10 Test  #31: AzureRender.SceneMultisamplingGpu ....   Passed    1.70 sec
+      Start  32: AzureRender.SceneMultisampling
+ 2/10 Test  #32: AzureRender.SceneMultisampling .......   Passed    1.01 sec
+      Start  35: AzureRender.TemporalViewGpu
+ 3/10 Test  #35: AzureRender.TemporalViewGpu ..........   Passed   12.48 sec
+      Start  36: AzureRender.MotionVectorGpu
+ 4/10 Test  #36: AzureRender.MotionVectorGpu ..........   Passed    1.43 sec
+      Start  40: AzureRender.MaterialPipelinePolicy
+ 5/10 Test  #40: AzureRender.MaterialPipelinePolicy ...   Passed    1.18 sec
+      Start 104: AzureRender.SharedMotionGpu
+ 6/10 Test #104: AzureRender.SharedMotionGpu ..........   Passed    1.14 sec
+      Start 250: AzureRender.RenderGraph
+ 7/10 Test #250: AzureRender.RenderGraph ..............   Passed    0.44 sec
+      Start 314: AzureRender.NullRhiPass
+ 8/10 Test #314: AzureRender.NullRhiPass ..............   Passed    1.57 sec
+      Start 346: AzureRender.ScreenReflection
+ 9/10 Test #346: AzureRender.ScreenReflection .........   Passed    0.70 sec
+      Start 347: AzureRender.ReflectionRayGpu
+10/10 Test #347: AzureRender.ReflectionRayGpu .........   Passed    1.57 sec
+
+100% tests passed, 0 tests failed out of 10
+
+Label Time Summary:
+gpu    =  18.33 sec*proc (5 tests)
+
+Total Test time (real) =  23.27 sec

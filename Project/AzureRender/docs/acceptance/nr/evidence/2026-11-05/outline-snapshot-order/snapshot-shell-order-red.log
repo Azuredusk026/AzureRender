@@ -1,0 +1,640 @@
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111448][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111448][info][render][code=0] Scene load CPU preparation: 0.185500 ms, materialPixelBytes=116
+[1793840111454][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111455][info][render][code=0] Scene load shared textures: 6.832700 ms
+[1793840111456][info][render][code=0] Scene load buffers: 0.918600 ms
+[1793840111456][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111456][info][render][code=0] Scene load skinning: 0.012200 ms
+[1793840111457][info][render][code=0] Scene load descriptors: 0.661700 ms
+[1793840111459][info][render][code=0] Scene load pipelines: 2.295100 ms
+[1793840111459][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111459][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+[1793840111460][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111460][info][render][code=0] Scene load CPU preparation: 0.067000 ms, materialPixelBytes=116
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111466][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111467][info][render][code=0] Scene load shared textures: 6.309200 ms
+[1793840111468][info][render][code=0] Scene load buffers: 0.889100 ms
+[1793840111468][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111468][info][render][code=0] Scene load skinning: 0.005200 ms
+[1793840111468][info][render][code=0] Scene load descriptors: 0.577600 ms
+[1793840111470][info][render][code=0] Scene load pipelines: 1.898400 ms
+[1793840111470][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+[1793840111472][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111472][info][render][code=0] Scene load CPU preparation: 0.092900 ms, materialPixelBytes=116
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111478][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111479][info][render][code=0] Scene load shared textures: 6.798600 ms
+[1793840111480][info][render][code=0] Scene load buffers: 0.850500 ms
+[1793840111480][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111480][info][render][code=0] Scene load skinning: 0.006500 ms
+[1793840111480][info][render][code=0] Scene load descriptors: 0.628500 ms
+[1793840111482][info][render][code=0] Scene load pipelines: 1.934000 ms
+[1793840111482][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111482][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+[1793840111483][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111483][info][render][code=0] Scene load CPU preparation: 0.065200 ms, materialPixelBytes=116
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111490][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111490][info][render][code=0] Scene load shared textures: 6.740600 ms
+[1793840111491][info][render][code=0] Scene load buffers: 0.845200 ms
+[1793840111491][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111491][info][render][code=0] Scene load skinning: 0.005300 ms
+[1793840111492][info][render][code=0] Scene load descriptors: 0.562000 ms
+[1793840111494][info][render][code=0] Scene load pipelines: 1.823900 ms
+[1793840111494][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111495][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111495][info][render][code=0] Scene load CPU preparation: 0.078900 ms, materialPixelBytes=116
+[1793840111501][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111502][info][render][code=0] Scene load shared textures: 6.861900 ms
+[1793840111503][info][render][code=0] Scene load buffers: 0.884200 ms
+[1793840111503][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111503][info][render][code=0] Scene load skinning: 0.005600 ms
+[1793840111504][info][render][code=0] Scene load descriptors: 0.792400 ms
+[1793840111505][info][render][code=0] Scene load pipelines: 1.702200 ms
+[1793840111505][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111507][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111507][info][render][code=0] Scene load CPU preparation: 0.065300 ms, materialPixelBytes=116
+[1793840111513][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111514][info][render][code=0] Scene load shared textures: 6.963300 ms
+[1793840111515][info][render][code=0] Scene load buffers: 0.997000 ms
+[1793840111515][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111515][info][render][code=0] Scene load skinning: 0.005900 ms
+[1793840111515][info][render][code=0] Scene load descriptors: 0.646800 ms
+[1793840111517][info][render][code=0] Scene load pipelines: 2.021600 ms
+[1793840111517][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111519][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793840111519][info][render][code=0] Scene load CPU preparation: 0.081800 ms, materialPixelBytes=232
+[1793840111525][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111526][info][render][code=0] Scene load shared textures: 7.066000 ms
+[1793840111526][info][render][code=0] Scene material progress: resource=1, elapsedMs=0.049500, hashMs=0.000500, mipMs=0.021600, uploadMs=0.016700, transferredBytes=100, discardedBytes=132
+[1793840111527][info][render][code=0] Scene load buffers: 0.915400 ms
+[1793840111527][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111527][info][render][code=0] Scene load skinning: 0.005500 ms
+[1793840111528][info][render][code=0] Scene load descriptors: 0.632300 ms
+[1793840111530][info][render][code=0] Scene load pipelines: 1.741700 ms
+[1793840111530][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111530][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111531][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111531][info][render][code=0] Scene load CPU preparation: 0.073300 ms, materialPixelBytes=116
+[1793840111538][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111539][info][render][code=0] Scene load shared textures: 7.312200 ms
+[1793840111540][info][render][code=0] Scene load buffers: 0.899400 ms
+[1793840111540][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111540][info][render][code=0] Scene load skinning: 0.023200 ms
+[1793840111540][info][render][code=0] Scene load descriptors: 0.584900 ms
+[1793840111542][info][render][code=0] Scene load pipelines: 1.799900 ms
+[1793840111542][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111542][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+[1793840111543][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111544][info][render][code=0] Scene load CPU preparation: 0.069200 ms, materialPixelBytes=116
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111550][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111551][info][render][code=0] Scene load shared textures: 7.244200 ms
+[1793840111552][info][render][code=0] Scene load buffers: 0.867600 ms
+[1793840111552][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111552][info][render][code=0] Scene load skinning: 0.005700 ms
+[1793840111552][info][render][code=0] Scene load descriptors: 0.585200 ms
+[1793840111554][info][render][code=0] Scene load pipelines: 1.832900 ms
+[1793840111554][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+[1793840111554][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111556][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111556][info][render][code=0] Scene load CPU preparation: 0.102300 ms, materialPixelBytes=116
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111562][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111563][info][render][code=0] Scene load shared textures: 7.060300 ms
+[1793840111564][info][render][code=0] Scene load buffers: 0.825100 ms
+[1793840111564][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111564][info][render][code=0] Scene load skinning: 0.005400 ms
+[1793840111564][info][render][code=0] Scene load descriptors: 0.551600 ms
+[1793840111566][info][render][code=0] Scene load pipelines: 1.766100 ms
+[1793840111566][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111566][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111567][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111567][info][render][code=0] Scene load CPU preparation: 0.066500 ms, materialPixelBytes=116
+[1793840111574][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111574][info][render][code=0] Scene load shared textures: 6.839600 ms
+[1793840111575][info][render][code=0] Scene load buffers: 0.842300 ms
+[1793840111575][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111575][info][render][code=0] Scene load skinning: 0.005100 ms
+[1793840111576][info][render][code=0] Scene load descriptors: 0.556400 ms
+[1793840111578][info][render][code=0] Scene load pipelines: 1.779900 ms
+[1793840111578][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111578][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+[1793840111579][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+Asset path: coverage-fixture/subject.gltf
+[1793840111579][info][render][code=0] Scene load CPU preparation: 0.084400 ms, materialPixelBytes=232
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+  [1] stone -> generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111585][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111586][info][render][code=0] Scene load shared textures: 7.027600 ms
+[1793840111587][info][render][code=0] Scene load buffers: 0.819000 ms
+[1793840111587][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111587][info][render][code=0] Scene load skinning: 0.005400 ms
+[1793840111587][info][render][code=0] Scene load descriptors: 0.596800 ms
+[1793840111589][info][render][code=0] Scene load pipelines: 1.873200 ms
+[1793840111589][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111591][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111591][info][render][code=0] Scene load CPU preparation: 0.070300 ms, materialPixelBytes=120
+[1793840111597][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111598][info][render][code=0] Scene load shared textures: 7.107100 ms
+[1793840111599][info][render][code=0] Scene load buffers: 0.828300 ms
+[1793840111599][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111599][info][render][code=0] Scene load skinning: 0.005100 ms
+[1793840111599][info][render][code=0] Scene load descriptors: 0.604900 ms
+[1793840111601][info][render][code=0] Scene load pipelines: 1.877900 ms
+[1793840111601][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111602][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111603][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111603][info][render][code=0] Scene load CPU preparation: 0.068600 ms, materialPixelBytes=120
+[1793840111609][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111610][info][render][code=0] Scene load shared textures: 6.963700 ms
+[1793840111611][info][render][code=0] Scene load buffers: 0.869500 ms
+[1793840111611][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111611][info][render][code=0] Scene load skinning: 0.005100 ms
+[1793840111611][info][render][code=0] Scene load descriptors: 0.590300 ms
+[1793840111613][info][render][code=0] Scene load pipelines: 1.782400 ms
+[1793840111613][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111614][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111614][info][render][code=0] Scene load CPU preparation: 0.070400 ms, materialPixelBytes=120
+[1793840111621][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111621][info][render][code=0] Scene load shared textures: 7.035600 ms
+[1793840111622][info][render][code=0] Scene load buffers: 0.878600 ms
+[1793840111622][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111622][info][render][code=0] Scene load skinning: 0.004700 ms
+[1793840111623][info][render][code=0] Scene load descriptors: 0.560200 ms
+[1793840111625][info][render][code=0] Scene load pipelines: 1.659400 ms
+[1793840111625][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+[1793840111625][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111626][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793840111626][info][render][code=0] Scene load CPU preparation: 0.084800 ms, materialPixelBytes=240
+[1793840111632][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111633][info][render][code=0] Scene load shared textures: 6.963600 ms
+[1793840111633][info][render][code=0] Scene material progress: resource=1, elapsedMs=0.044500, hashMs=0.000700, mipMs=0.021700, uploadMs=0.013100, transferredBytes=100, discardedBytes=132
+[1793840111634][info][render][code=0] Scene load buffers: 0.896000 ms
+[1793840111634][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111634][info][render][code=0] Scene load skinning: 0.004500 ms
+[1793840111635][info][render][code=0] Scene load descriptors: 0.584100 ms
+[1793840111637][info][render][code=0] Scene load pipelines: 1.872600 ms
+[1793840111637][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+[1793840111637][info][render][code=0] Outline mask allocated: frame=0, instances=4, bytes=196608
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111638][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111638][info][render][code=0] Scene load CPU preparation: 0.068700 ms, materialPixelBytes=120
+[1793840111645][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111645][info][render][code=0] Scene load shared textures: 7.088700 ms
+[1793840111646][info][render][code=0] Scene load buffers: 0.813600 ms
+[1793840111646][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111646][info][render][code=0] Scene load skinning: 0.004400 ms
+[1793840111647][info][render][code=0] Scene load descriptors: 0.563100 ms
+[1793840111648][info][render][code=0] Scene load pipelines: 1.791500 ms
+[1793840111648][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111649][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 337 vertices, 900 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+  [1] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111650][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793840111650][info][render][code=0] Scene load CPU preparation: 0.128100 ms, materialPixelBytes=236
+[1793840111656][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111657][info][render][code=0] Scene load shared textures: 6.939900 ms
+[1793840111658][info][render][code=0] Scene load buffers: 0.846500 ms
+[1793840111658][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111658][info][render][code=0] Scene load skinning: 0.005000 ms
+[1793840111658][info][render][code=0] Scene load descriptors: 0.572500 ms
+[1793840111660][info][render][code=0] Scene load pipelines: 2.010800 ms
+[1793840111660][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=true
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111661][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111662][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111662][info][render][code=0] Scene load CPU preparation: 0.069300 ms, materialPixelBytes=120
+[1793840111668][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111669][info][render][code=0] Scene load shared textures: 6.785200 ms
+[1793840111669][info][render][code=0] Scene load buffers: 0.808300 ms
+[1793840111669][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111669][info][render][code=0] Scene load skinning: 0.004500 ms
+[1793840111670][info][render][code=0] Scene load descriptors: 0.551200 ms
+[1793840111672][info][render][code=0] Scene load pipelines: 1.752600 ms
+[1793840111672][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+[1793840111673][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111673][info][render][code=0] Scene load CPU preparation: 0.071200 ms, materialPixelBytes=120
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111679][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111680][info][render][code=0] Scene load shared textures: 6.776800 ms
+[1793840111681][info][render][code=0] Scene load buffers: 0.924500 ms
+[1793840111681][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111681][info][render][code=0] Scene load skinning: 0.005000 ms
+[1793840111681][info][render][code=0] Scene load descriptors: 0.530500 ms
+[1793840111683][info][render][code=0] Scene load pipelines: 1.787900 ms
+[1793840111683][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111683][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4420, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111685][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111685][info][render][code=0] Scene load CPU preparation: 0.061300 ms, materialPixelBytes=116
+[1793840111691][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111691][info][render][code=0] Scene load shared textures: 6.687200 ms
+[1793840111692][info][render][code=0] Scene load buffers: 0.836000 ms
+[1793840111692][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111692][info][render][code=0] Scene load skinning: 0.005300 ms
+[1793840111693][info][render][code=0] Scene load descriptors: 0.536000 ms
+[1793840111694][info][render][code=0] Scene load pipelines: 1.654200 ms
+[1793840111694][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111695][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4120, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111696][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111696][info][render][code=0] Scene load CPU preparation: 0.066800 ms, materialPixelBytes=116
+[1793840111702][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111703][info][render][code=0] Scene load shared textures: 6.804300 ms
+[1793840111703][info][render][code=0] Scene load buffers: 0.807400 ms
+[1793840111703][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111703][info][render][code=0] Scene load skinning: 0.005400 ms
+[1793840111704][info][render][code=0] Scene load descriptors: 0.536900 ms
+[1793840111706][info][render][code=0] Scene load pipelines: 1.681700 ms
+[1793840111706][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111706][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+[1793840111707][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+[1793840111707][info][render][code=0] Scene load CPU preparation: 0.079000 ms, materialPixelBytes=120
+  [0] stone -> eye, flags=0x24020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111713][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111714][info][render][code=0] Scene load shared textures: 6.797200 ms
+[1793840111715][info][render][code=0] Scene load buffers: 0.880700 ms
+[1793840111715][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111715][info][render][code=0] Scene load skinning: 0.004900 ms
+[1793840111715][info][render][code=0] Scene load descriptors: 0.590400 ms
+[1793840111717][info][render][code=0] Scene load pipelines: 1.799300 ms
+[1793840111717][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111717][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111718][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111719][info][render][code=0] Scene load CPU preparation: 0.067400 ms, materialPixelBytes=116
+[1793840111725][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111725][info][render][code=0] Scene load shared textures: 6.781600 ms
+[1793840111726][info][render][code=0] Scene load buffers: 0.849500 ms
+[1793840111726][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111726][info][render][code=0] Scene load skinning: 0.005300 ms
+[1793840111727][info][render][code=0] Scene load descriptors: 0.579000 ms
+[1793840111729][info][render][code=0] Scene load pipelines: 1.736000 ms
+[1793840111729][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111729][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111730][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111730][info][render][code=0] Scene load CPU preparation: 0.065100 ms, materialPixelBytes=116
+[1793840111736][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111737][info][render][code=0] Scene load shared textures: 6.711800 ms
+[1793840111738][info][render][code=0] Scene load buffers: 0.801700 ms
+[1793840111738][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111738][info][render][code=0] Scene load skinning: 0.004700 ms
+[1793840111738][info][render][code=0] Scene load descriptors: 0.570700 ms
+[1793840111740][info][render][code=0] Scene load pipelines: 1.647900 ms
+[1793840111740][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111740][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+[1793840111741][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+[1793840111741][info][render][code=0] Scene load CPU preparation: 0.064100 ms, materialPixelBytes=116
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111747][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111748][info][render][code=0] Scene load shared textures: 6.804700 ms
+[1793840111749][info][render][code=0] Scene load buffers: 0.812200 ms
+[1793840111749][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111749][info][render][code=0] Scene load skinning: 0.005500 ms
+[1793840111749][info][render][code=0] Scene load descriptors: 0.568000 ms
+[1793840111751][info][render][code=0] Scene load pipelines: 1.612600 ms
+[1793840111751][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111751][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111752][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111752][info][render][code=0] Scene load CPU preparation: 0.072000 ms, materialPixelBytes=116
+[1793840111758][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111759][info][render][code=0] Scene load shared textures: 6.765300 ms
+[1793840111760][info][render][code=0] Scene load buffers: 0.828100 ms
+[1793840111760][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111760][info][render][code=0] Scene load skinning: 0.005400 ms
+[1793840111761][info][render][code=0] Scene load descriptors: 0.594400 ms
+[1793840111762][info][render][code=0] Scene load pipelines: 1.718800 ms
+[1793840111762][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111763][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111764][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111764][info][render][code=0] Scene load CPU preparation: 0.067300 ms, materialPixelBytes=116
+[1793840111770][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111771][info][render][code=0] Scene load shared textures: 6.756300 ms
+[1793840111771][info][render][code=0] Scene load buffers: 0.871000 ms
+[1793840111771][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111771][info][render][code=0] Scene load skinning: 0.006000 ms
+[1793840111772][info][render][code=0] Scene load descriptors: 0.564600 ms
+[1793840111774][info][render][code=0] Scene load pipelines: 1.746200 ms
+[1793840111774][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111774][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111775][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111775][info][render][code=0] Scene load CPU preparation: 0.068900 ms, materialPixelBytes=116
+[1793840111781][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111782][info][render][code=0] Scene load shared textures: 6.828300 ms
+[1793840111783][info][render][code=0] Scene load buffers: 0.814700 ms
+[1793840111783][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111783][info][render][code=0] Scene load skinning: 0.005700 ms
+[1793840111783][info][render][code=0] Scene load descriptors: 0.566400 ms
+[1793840111785][info][render][code=0] Scene load pipelines: 1.769900 ms
+[1793840111785][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111785][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111787][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111787][info][render][code=0] Scene load CPU preparation: 0.074500 ms, materialPixelBytes=116
+[1793840111793][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111794][info][render][code=0] Scene load shared textures: 7.001500 ms
+[1793840111794][info][render][code=0] Scene load buffers: 0.838900 ms
+[1793840111794][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111794][info][render][code=0] Scene load skinning: 0.005600 ms
+[1793840111795][info][render][code=0] Scene load descriptors: 0.561900 ms
+[1793840111797][info][render][code=0] Scene load pipelines: 1.755000 ms
+[1793840111797][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111797][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0xc020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793840111798][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793840111798][info][render][code=0] Scene load CPU preparation: 0.070000 ms, materialPixelBytes=116
+[1793840111804][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111805][info][render][code=0] Scene load shared textures: 6.779800 ms
+[1793840111806][info][render][code=0] Scene load buffers: 0.829200 ms
+[1793840111806][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111806][info][render][code=0] Scene load skinning: 0.005900 ms
+[1793840111806][info][render][code=0] Scene load descriptors: 0.559200 ms
+[1793840111808][info][render][code=0] Scene load pipelines: 1.665100 ms
+[1793840111808][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+[1793840111808][info][render][code=0] Outline mask allocated: frame=0, instances=2, bytes=98304
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -> generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+Clustered lighting: 0 lights, 0 cluster references
+[1793840111809][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793840111810][info][render][code=0] Scene load CPU preparation: 0.094400 ms, materialPixelBytes=240
+[1793840111816][info][render][code=0] Character IBL: hardware mip fallback path
+[1793840111816][info][render][code=0] Scene load shared textures: 6.804500 ms
+[1793840111816][info][render][code=0] Scene material progress: resource=1, elapsedMs=0.046600, hashMs=0.001100, mipMs=0.021000, uploadMs=0.015300, transferredBytes=100, discardedBytes=132
+[1793840111817][info][render][code=0] Scene load buffers: 0.841900 ms
+[1793840111817][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793840111817][info][render][code=0] Scene load skinning: 0.005000 ms
+[1793840111818][info][render][code=0] Scene load descriptors: 0.577000 ms
+[1793840111820][info][render][code=0] Scene load pipelines: 1.778500 ms
+[1793840111820][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+[1793840111820][info][render][code=0] Outline mask allocated: frame=0, instances=4, bytes=196608
+Snapshot shell order: 0011
+Each snapshot resource must complete its depth shell before later resource colors

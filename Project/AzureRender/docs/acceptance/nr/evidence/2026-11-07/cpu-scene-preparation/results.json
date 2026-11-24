@@ -1,0 +1,548 @@
+{
+  "status": "implementation-and-diagnostic-complete",
+  "sourceBase": "c61ed88",
+  "sourceHashes": {
+    "src/app/AzureRenderApp.cpp": "c7d49ebd415860ee9d4d11a49f80e1b6fbe76b698e066e9eba97e9769b19cb21",
+    "src/app/AzureRenderApp.hpp": "bdaee5f1f0ec83e94d7fe0e134f6e789199a36af0655b5f1b454f4996736797d",
+    "src/ecs/World.hpp": "620f84a65ca51815eeddf6b9ccef2d1e6003cc5695010706bf3253584e3c08d6",
+    "src/runtime/RuntimeLifecycle.hpp": "2804364505c52aab6ca80667f593c0d311f897436cb7468bc4fa13ad62d4ff45",
+    "src/runtime/GameRuntime.cpp": "203da46e3111dd6b93d5f1176fd35b14bf40828615da62264d93b7fcd6f4d8a6",
+    "src/runtime/GameRuntime.hpp": "8098d3789cc4af427e4e7b1488861fb8b32730f3ba08b043f3b98fec585d9cb0",
+    "src/runtime/camera/GameCameraService.cpp": "83103b69b5c95411c66e74d60c1ac3f3ee585e3092abb59920c810bda9bfbda8",
+    "tests/CameraSystemTests.cpp": "35a582911802a423f6214cdf99ab587785840d3d7bbc18f3e954e4541d2302d7",
+    "tests/RuntimeLifecycleTests.cpp": "86a09db406bd1da9dc6a8cdf5763e03427caa49184bb2c1e05882929279a26e6",
+    "tests/EcsTests.cpp": "42c379e9960a9cf23d819e750225536eca125aebf6f22616847813f741026e9b"
+  },
+  "baselinePlayerSha256": "18df101e1dbae01aa1b62b6d6a2d4cc93d15e2851ebdff9d56491a778b55f049",
+  "candidatePlayerSha256": "bb85e7a3d868a8d9d029fcaa1a939fd598968fd055522931a9f55d62873f0d36",
+  "visualAcceptance": "failed-user-review",
+  "formalPerformancePassed": false,
+  "cpuBudgetMs": 8,
+  "gpuBudgetMs": 16.6,
+  "formalSamplesRequired": 1800,
+  "shortSamples": 120,
+  "privateProbe": {
+    "playerSha256": "d91f9320c1a7f7942302fd5c29032cf3e9b593ebce5316610782bc69dc7aecbe",
+    "cpu": {
+      "mean": 17.092490000000016,
+      "p95": 18.724850000000025,
+      "p99": 21.97559799999999
+    },
+    "hostStages": {
+      "collectTimingMs": {
+        "mean": 0.302015,
+        "p95": 0.37492000000000003,
+        "p99": 0.39954399999999995
+      },
+      "framePrepareMs": {
+        "mean": 6.46132,
+        "p95": 6.902725,
+        "p99": 7.0064649999999995
+      },
+      "frameSnapshotMs": {
+        "mean": 0.002185,
+        "p95": 0.0026200000000000004,
+        "p99": 0.0029239999999999995
+      },
+      "hostSyncMs": {
+        "mean": 0.442875,
+        "p95": 0.49756000000000006,
+        "p99": 0.524312
+      },
+      "levelPollMs": {
+        "mean": 0.07991,
+        "p95": 0.0814000000000011,
+        "p99": 1.270039999999998
+      },
+      "lutMs": {
+        "mean": 0.05078,
+        "p95": 0.061705,
+        "p99": 0.063301
+      },
+      "miscBeforeRecordMs": {
+        "mean": 0.030484999999999998,
+        "p95": 0.037,
+        "p99": 0.037
+      },
+      "poolResetMs": {
+        "mean": 0.11554,
+        "p95": 0.15652500000000003,
+        "p99": 0.17970499999999995
+      },
+      "recordMs": {
+        "mean": 4.21209,
+        "p95": 4.84551,
+        "p99": 4.869982
+      },
+      "rendererUpdateMs": {
+        "mean": 6.69001,
+        "p95": 7.268550000000002,
+        "p99": 9.322829999999996
+      }
+    },
+    "sampleFrames": 20,
+    "powerStable": false
+  },
+  "microbenchmark": {
+    "cameraBaselineMs": 0.8022143750000004,
+    "cameraCandidateMs": 0.21566687500000006,
+    "checksum": 544320,
+    "combinedReduction": 0.6601022574563958,
+    "identical": true,
+    "nodes": 1679,
+    "resources": 374,
+    "rounds": 160,
+    "scope": "native-shaped CPU control; document material resolution and Player frame excluded",
+    "snapshotBaselineMs": 1.105103750000001,
+    "snapshotCandidateMs": 0.4326262500000001
+  },
+  "pair": {
+    "baseline": {
+      "mean": 17.33186416666669,
+      "p95": 19.9005950000001,
+      "p99": 21.68792699999996
+    },
+    "candidate": {
+      "mean": 14.6950575,
+      "p95": 16.617325000000406,
+      "p99": 20.124736999999104
+    },
+    "meanSavedMs": 2.63680666666669,
+    "p95SavedMs": 3.2832699999996926,
+    "meanReduction": 0.15213635655753055,
+    "environmentPassed": false,
+    "baselineEnvironment": false,
+    "candidateEnvironment": false,
+    "formalSampleCountSatisfied": false,
+    "visualAcceptance": "failed-user-review",
+    "cpuBudgetPassed": false,
+    "sourceProductsFrozen": true
+  },
+  "nativeBaseline": {
+    "status": "measured",
+    "sourceBase": "c61ed88",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 105.23500000000058,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.4822157333333332,
+        "p95": 2.5106640000000002,
+        "p99": 2.52829632
+      },
+      "sceneMs": {
+        "mean": 21.44442026666667,
+        "p95": 21.7916928,
+        "p99": 21.84860672
+      },
+      "postProcessMs": {
+        "mean": 0.27780266666666664,
+        "p95": 0.282624,
+        "p99": 0.28447743999999997
+      },
+      "frameMs": {
+        "mean": 24.204438666666668,
+        "p95": 24.589271999999998,
+        "p99": 24.64470784
+      }
+    },
+    "cpu": {
+      "mean": 17.33186416666669,
+      "p95": 19.9005950000001,
+      "p99": 21.68792699999996
+    },
+    "wait": {
+      "mean": 6.638437499999975,
+      "p95": 8.325139999999395,
+      "p99": 8.781344000000308
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 1,
+      "waitMilliseconds": 1.3668
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7403659264,
+    "environmentFailures": [],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "diagnosticOnly": true,
+    "formalSampleCountSatisfied": false,
+    "allMountedProjectBytesUnchanged": true,
+    "powerAcceptanceUnchanged": true,
+    "powerDeviationIsFailure": true,
+    "timingBudgetPassed": false,
+    "powerProfileStable": false,
+    "environmentPassed": false,
+    "executableSha256": "18df101e1dbae01aa1b62b6d6a2d4cc93d15e2851ebdff9d56491a778b55f049",
+    "pairRole": "baseline",
+    "instrumented": false
+  },
+  "nativeCandidate": {
+    "status": "measured",
+    "sourceBase": "c61ed88-with-cpu-scene-preparation",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 107.8279999999977,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.4604016,
+        "p95": 2.5005072,
+        "p99": 2.50296896
+      },
+      "sceneMs": {
+        "mean": 21.5868672,
+        "p95": 22.326067199999997,
+        "p99": 22.47914496
+      },
+      "postProcessMs": {
+        "mean": 0.2765994666666667,
+        "p95": 0.278528,
+        "p99": 0.279552
+      },
+      "frameMs": {
+        "mean": 24.32386826666667,
+        "p95": 25.0504304,
+        "p99": 25.24009024
+      }
+    },
+    "cpu": {
+      "mean": 14.6950575,
+      "p95": 16.617325000000406,
+      "p99": 20.124736999999104
+    },
+    "wait": {
+      "mean": 8.695986666666666,
+      "p95": 10.611450000000058,
+      "p99": 11.163711999999268
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 1,
+      "waitMilliseconds": 2.8122
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7402471424,
+    "environmentFailures": [],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "diagnosticOnly": true,
+    "formalSampleCountSatisfied": false,
+    "allMountedProjectBytesUnchanged": true,
+    "powerAcceptanceUnchanged": true,
+    "powerDeviationIsFailure": true,
+    "timingBudgetPassed": false,
+    "powerProfileStable": false,
+    "environmentPassed": false,
+    "executableSha256": "bb85e7a3d868a8d9d029fcaa1a939fd598968fd055522931a9f55d62873f0d36",
+    "pairRole": "candidate",
+    "instrumented": false
+  },
+  "image": {
+    "status": "passed",
+    "sourceBase": "c61ed88-with-cpu-scene-preparation",
+    "executableSha256": "bb85e7a3d868a8d9d029fcaa1a939fd598968fd055522931a9f55d62873f0d36",
+    "exitCode": 0,
+    "seconds": 98.71900000000096,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "CPU scene preparation candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "buildChecks": [
+    {
+      "kind": "build",
+      "exitCode": 0,
+      "seconds": 203.2029999999977,
+      "command": [
+        "cmd",
+        "/d",
+        "/c",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--test-target",
+        "AzureRuntimeLifecycleTests",
+        "--test-target",
+        "AzureCameraSystemTests",
+        "--test-target",
+        "AzureRenderEcsTests",
+        "--test-target",
+        "AzureSceneRenderSnapshotTests"
+      ]
+    },
+    {
+      "kind": "checks",
+      "exitCode": 0,
+      "seconds": 5.75,
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^(AzureEngine.RuntimeLifecycle|AzureRuntime.CameraSystem|AzureRender.Ecs|AzureRuntime.SceneRenderSnapshot)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261106-220323-autonomous-cleanup-performance-70496b\\cpu-batch-checks.xml"
+      ]
+    }
+  ],
+  "assessment": [
+    {
+      "script": "capture_cpu_batch.py",
+      "exitCode": 0,
+      "seconds": 106.01499999999942
+    },
+    {
+      "script": "measure_cpu_baseline.py",
+      "exitCode": 0,
+      "seconds": 122.5470000000023
+    },
+    {
+      "script": "measure_cpu_candidate.py",
+      "exitCode": 0,
+      "seconds": 125.875
+    }
+  ],
+  "logTimestamps": {
+    "cpu-batch-build.log": {
+      "createdUtc": "2026-11-06T16:04:10.370972+00:00",
+      "modifiedUtc": "2026-11-06T16:07:33.580425+00:00",
+      "fileLifetimeSeconds": 203.2094533443451
+    },
+    "cpu-batch-final-build.log": {
+      "createdUtc": "2026-11-06T16:08:16.329965+00:00",
+      "modifiedUtc": "2026-11-06T16:09:13.301385+00:00",
+      "fileLifetimeSeconds": 56.9714195728302
+    },
+    "cpu-batch-final-scoped-build.log": {
+      "createdUtc": "2026-11-06T16:09:49.201527+00:00",
+      "modifiedUtc": "2026-11-06T16:09:57.642053+00:00",
+      "fileLifetimeSeconds": 8.440526008605957
+    },
+    "cpu-scene-benchmark-compile.log": {
+      "createdUtc": "2026-11-06T16:09:59.470964+00:00",
+      "modifiedUtc": "2026-11-06T16:09:59.501843+00:00",
+      "fileLifetimeSeconds": 0.030878782272338867
+    },
+    "cpu-scene-benchmark-link.log": {
+      "createdUtc": "2026-11-06T16:10:03.017996+00:00",
+      "modifiedUtc": "2026-11-06T16:10:03.017996+00:00",
+      "fileLifetimeSeconds": 0.0
+    }
+  },
+  "budget": {
+    "allowed": true,
+    "reasons": [],
+    "totalBytes": 1024208138240,
+    "freeBytes": 128209362944,
+    "usedBytes": 289661052,
+    "plannedBytes": 0,
+    "quotaBytes": 2147483648,
+    "reserveBytes": 102420813824,
+    "diagnostic": false
+  },
+  "archive": {
+    "path": "measurements.zip",
+    "bytes": 1728457,
+    "sha256": "6e29a262ef756f06956c453224b19b3b80203027db89d75cd87fb6f0727a261e",
+    "memberHashes": {
+      "production/build-provenance.json": "9e78957837d54bf800b990a21ec8247bf72b51cf4f6d3460be8698a15ed29676",
+      "task/archive_cpu_evidence.py": "4053a7ff5a535fb03cd818b27125ef48ec8efa5b392ed19bbaa651296b3cf11b",
+      "task/assess_cpu_batch.py": "96f15a27f076e9f152e9cd2235b5707e62c9dc47bb419f1acd311296005d71da",
+      "task/build_cpu_batch.py": "29372f63f226c50dd27eaa1d6ce29df0cfcad3d905c564e53a9932ef1e6a3534",
+      "task/build_cpu_benchmark.py": "7796f3c35bf37da010649f9ee304e5ff44146dc2ae1b8bd6e2c9edc3772f7441",
+      "task/build_cpu_phase_probe.py": "403c8a5b8b68e9cb34a23c540b05dd24f707b4b7521dfd4be0c8acc4885d29be",
+      "task/capture_cpu_batch.py": "71442f7f22a4a31c57d9d382e11303094a686c02bce616ecc129798a5a510652",
+      "task/capture_cpu_batch.py.log": "3a9b9e2b7adf91a960e70b7cfff7bd013ade5d7b7ce939326432ed23ebee8339",
+      "task/cpu-baseline-camera.cpp": "6a3a01a671e42e06c1561d88b0c0c4278be2b7e5bc9cdb59101f6e679f2d2133",
+      "task/cpu-baseline-runtime.hpp": "67e2e3fba85dcb2d7727da0506402cb1f24420d15f7a42aff9f55c71f98041ee",
+      "task/cpu-batch-build-check-results.json": "ceb7dd5a37c28f1ae6312f875a61250c81bef51d51a378d3a4d7a89c72ac7607",
+      "task/cpu-batch-build.log": "11411919a0235d0b65f82b217e467bacf09d79fbd3076def2b0023703836b4cb",
+      "task/cpu-batch-checks.log": "f9e690e870a4cd2ec29d59a0082e7d71c13420af1ae7f192d4fb009de1490a8d",
+      "task/cpu-batch-checks.xml": "f98dc3fc9d125f16ff694204b54db3b8b7615f815fe37347710fd0c87705030a",
+      "task/cpu-batch-final-build.log": "ab1a1c271ee2c5ad5adc9a96e945df28bb3e7ddca33e7c3b75e777bd7872c12c",
+      "task/cpu-batch-final-scoped-build.log": "8af3d6db2ad746ad2740f4fb9c99c986ad3c17c8ee63b993ac38a4f998ca25e4",
+      "task/cpu-batch-wall-times.json": "b826c391de455df21d6f260fbf4bbf825592db9117035a48487cdc4f56a9b2a2",
+      "task/cpu-native-assessment.json": "b2f1089a023fbcb046e80f38068c5b7ef589e3bc3ad2cd8333c2b319e7a42687",
+      "task/cpu-native-baseline/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+      "task/cpu-native-baseline/environment.json": "7ff166aa4b484293439ddb765b00b6575915afcffd3a7f8cad6ba19634ed7f12",
+      "task/cpu-native-baseline/frozen-inputs.json": "dfbe08505e18433b31d9a12aebb304515a7b6d2bcdc917c4545e9c9dbba91a3e",
+      "task/cpu-native-baseline/memory.json": "309ded92f2ae4f2bd57af3ff82910af710467fe9283e716d266b79a2026af10a",
+      "task/cpu-native-baseline/results.json": "68617fe26f6c644098e62f6b07db14ce7dc4a894bef86ee8bcfed3a76bece4e6",
+      "task/cpu-native-baseline/runtime.json": "d191a9b6f1b05b469c227b2f2cabb157bac83777a65635cb6e850bf8c4d09867",
+      "task/cpu-native-baseline/stderr.log": "7505ba53770754123dbb61103ab652f5845d6170b7b340e5caaeff988d1373e5",
+      "task/cpu-native-baseline/stdout.log": "fcacc3afcaabb2877e3c0015329ffc4918edff35940f24023e769b97f742c276",
+      "task/cpu-native-baseline/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "task/cpu-native-baseline/task.json": "a5294710582a01465c82e3b3611d04ce22296e3970a9f0faa80476fcc7fb7a39",
+      "task/cpu-native-baseline/timing.csv": "dcedd0e4f230960f147c014abfb86ef9da14660c422795e7de81701cc4482729",
+      "task/cpu-native-baseline/timing.json": "872403464c8e49963810205c8adc5873d51daa50ebb93f43f905ab081f98d398",
+      "task/cpu-native-candidate/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+      "task/cpu-native-candidate/environment.json": "208726e031b3d08887a6ff68d8a140b706cfb463b03bb1614c1b8126e8c73986",
+      "task/cpu-native-candidate/frozen-inputs.json": "dfbe08505e18433b31d9a12aebb304515a7b6d2bcdc917c4545e9c9dbba91a3e",
+      "task/cpu-native-candidate/memory.json": "f728e536a121b0ebe83c0cfdfe7a08db3721aee67b0d2b4d9f030fd3d67b27bb",
+      "task/cpu-native-candidate/results.json": "3d48f60d345899fbb74cedb440d9ede7072e99b9cc7ba14824f2779e30918067",
+      "task/cpu-native-candidate/runtime.json": "334923cb48b3d4d8d3c0a0de36ca8fb8242d3a00ab40ec7e346b007176c5e12c",
+      "task/cpu-native-candidate/stderr.log": "3210529d049a19a0b6d75eae6676b526daad409682ea3292242ac90659c84348",
+      "task/cpu-native-candidate/stdout.log": "d99bb05f72529e307613a965a669db6e1f15762dddcfd52655c8b5c5d17dbf43",
+      "task/cpu-native-candidate/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "task/cpu-native-candidate/task.json": "034f996f2ec9cd3a425150555db6e742f1094ca2cf39909abbc8ccdbd08a20c3",
+      "task/cpu-native-candidate/timing.csv": "7bf76de36b1bb173557e990cd13ddecf4b8f147fa68df6b08c5e4e2b52ea66c8",
+      "task/cpu-native-candidate/timing.json": "ce44dcb5d6da4e82430e28db5f499ad039d8dc7f412a93b52dab800bcc32401a",
+      "task/cpu-paired-results.json": "3aedaa6c25b5cbf1495b731b95c4b3b827fd703b90bcdf497ea2a02cace6e7db",
+      "task/cpu-phase-probe/AzureRenderFrame.cpp": "1c7210388a2cfed4cbdd31c8b1f2c0990104e47cadd164aedc299a752759ef0f",
+      "task/cpu-phase-probe/build.json": "e7323865dda95192c5152f7eb58daeb6a6cf99f3f50a520782606ba4eaed51b6",
+      "task/cpu-phase-probe/compile.log": "be2ec2e4df3bca30b2fe389d12b223ad783314647ad50e0c862b59abe81e943c",
+      "task/cpu-phase-probe/link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "task/cpu-phase-probe/link.rsp": "cfa9aacc5bd750de2a4c8ce65dcb462d8fe284afe495d3fe2e77bf86387d6927",
+      "task/cpu-phase-probe/native/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+      "task/cpu-phase-probe/native/environment.json": "35b04e551ef836fecd9282586f78ea3cbd1033b8418403abcf844f2c2e92a52e",
+      "task/cpu-phase-probe/native/frozen-inputs.json": "d2c634b44d35dba55d1cd90e9d12eddfe3d7d060b2987841297eacb8ab0dc68d",
+      "task/cpu-phase-probe/native/memory.json": "ef8e6e81a7f56f3dffd4d76a56903e9a73f8a69ddf6dc2ead8e3f5368fbd6987",
+      "task/cpu-phase-probe/native/results.json": "51bff5bb5c581f3faf0cfde98c6b4d46304ced2d8b67526def50c6053152034a",
+      "task/cpu-phase-probe/native/runtime.json": "5f9945b825a88fe271de67d374137801e5f99ed0c10570861e530f1b15f24fe4",
+      "task/cpu-phase-probe/native/stderr.log": "ab02fa00e1748e2500723a13b9cce29c90a9f0db0d74058c710ecd22b64a8c57",
+      "task/cpu-phase-probe/native/stdout.log": "c2abb6a36e24fd5c730cec8e3c3078491c7988ea421e4c2bb49bdbf4f9e112cf",
+      "task/cpu-phase-probe/native/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "task/cpu-phase-probe/native/task.json": "f3b80e752ba67ca239f29cf8aa58726319ac752edc457e5d90e18a34a35bb736",
+      "task/cpu-phase-probe/native/timing.csv": "afab0ee5737e174251999f593a5726f0fa217c82a00cdaaa64255ec195f4d646",
+      "task/cpu-phase-probe/native/timing.json": "7aa70c9f48b7c30d417b1ea0deb4f7ac014102459e0b70f7d441ebaf01c4e56f",
+      "task/cpu-phase-probe/runner.log": "9d1439b643b3f485767220612a0ce836da0250a8e6ade70602282226067ff60f",
+      "task/cpu-scene-benchmark-compile.log": "2ff7e69adfdb81170ba028a3001f11bd76888ef21879c1ee409d38c87c8b4aba",
+      "task/cpu-scene-benchmark-link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "task/cpu-scene-benchmark-link.rsp": "5a5119d42456282dfd9a3f6ebb314db7a4ffc3f4d890fd4819f7538609e0c477",
+      "task/cpu-scene-benchmark-output.log": "431ac2a10d5fef3f7533ba45a2fcaa1615a3ec59aeec3238144e36ae65adf95d",
+      "task/cpu-scene-benchmark.cpp": "09ad31c420326e085fbfac262cef3b667f51eafcca057e1f0cd60a6eda47935d",
+      "task/cpu-scene-benchmark.json": "a471f79dab85e189e813dcb22de8b35d059724a22aad73a45b3ef31b07d7c262",
+      "task/image-cpu-batch/bind-pose-workload.json": "801624fe52377c10ea1fa5ab4a6129d69ddb5c452720fdfc9b747bb7fba19050",
+      "task/image-cpu-batch/command.json": "68f9d718396e23c6457b0c2e1c0dc1ce1c771247089928da30f4e178367fd114",
+      "task/image-cpu-batch/frames/capture_manifest.json": "ca59c060e3a7d9b034028b4c4b1d3fbf2085512076ba77defe45242cbfc52f07",
+      "task/image-cpu-batch/frames/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+      "task/image-cpu-batch/frozen-inputs.json": "836e35600063cc7f958ac3f36aa4eeb134e5a02204c283b16999824a123d2fe1",
+      "task/image-cpu-batch/identity-workload.json": "99835e64bab80baa2120034780f5bbd0e926efc0e5083f09b938e8cf348d2713",
+      "task/image-cpu-batch/results.json": "532d10680e91759c9bbda6a224e57114e8a6dd5fd861a0ec206428a0ee918ea9",
+      "task/image-cpu-batch/runtime.json": "3ab9d2343bfe44f456edd89ef072c2f6de8e9f1f2c772419d38e1a1d8165b8e9",
+      "task/image-cpu-batch/stderr.log": "75e7594d837fdbff7cf4dc81280951f89dff87e171f951ffb2615a43bff3236e",
+      "task/image-cpu-batch/stdout.log": "5fe332bfc0248742ac35b3f1d5cf101c90ef05059f3a77cf078fb0ef713a5711",
+      "task/image-cpu-batch/workload.json": "914510df2c090eb8efc35d59fa5bddb29a5956b573040a1d3e0a90b9b2cbe634",
+      "task/measure_cpu_baseline.py": "b6f5890a2d455a7db8a1c06276ad9808d6edd106ee08d14cd38de13b4dc7aa8b",
+      "task/measure_cpu_baseline.py.log": "3b3e4e6831da8f2c2802335d344e64b48195605d04c26cfc23c872bc5fff41d4",
+      "task/measure_cpu_candidate.py": "0197a4bc7af5ebb85d11a85626bb63527ae4fe16781a728addcc811b351bac9a",
+      "task/measure_cpu_candidate.py.log": "a7ff87562fef41569294e1801ab6550d35d5c01c58dfe3faffa009afee84bf7c",
+      "task/measure_cpu_phase.py": "a6e0f3d54efdfdd489e6ad28e11e7400a40cd6f039183c81aa99b93808fd0134"
+    }
+  },
+  "implementationSeconds": 258.9343008995056,
+  "scopeChecksReusedAfterHostExceptionBoundaryFix": true,
+  "cancelledBuildScope": {
+    "log": "task/cpu-batch-final-build.log",
+    "reason": "Unrelated default targets cancelled; final scoped runtime-and-four-tests build passed. Tests were not rerun for the host-only exception boundary fix."
+  }
+}

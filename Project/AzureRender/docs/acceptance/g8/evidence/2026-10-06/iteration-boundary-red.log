@@ -1,0 +1,33 @@
+......FF
+======================================================================
+FAIL: test_runtime_cannot_include_shared_mechanism (__main__.BoundaryTests.test_runtime_cannot_include_shared_mechanism)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_module_boundaries.py", line 59, in test_runtime_cannot_include_shared_mechanism
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+AssertionError: 0 == 0 : {
+  "status": "passed",
+  "targets": 2,
+  "includes": 1,
+  "violations": []
+}
+
+
+======================================================================
+FAIL: test_runtime_cannot_link_shared_mechanism (__main__.BoundaryTests.test_runtime_cannot_link_shared_mechanism)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_module_boundaries.py", line 64, in test_runtime_cannot_link_shared_mechanism
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+AssertionError: 0 == 0 : {
+  "status": "passed",
+  "targets": 2,
+  "includes": 0,
+  "violations": []
+}
+
+
+----------------------------------------------------------------------
+Ran 8 tests in 2.403s
+
+FAILED (failures=2)

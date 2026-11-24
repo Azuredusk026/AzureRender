@@ -1,0 +1,7 @@
+target create "build/ninja-msvc-release-symbols/AzurePlayer.exe"
+command script import "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\trace_virtual_allocations.py"
+process launch -s -o "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\exploration-return-trace\\stdout.log" -e "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\exploration-return-trace\\stderr.log" -- "--project" "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\formal-source-verified\\exploration\\project.azureproject" "--width" "1920" "--height" "1080" "--fixed-frame-step" "--smoke-frames" "2100" "--game-actions" "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\formal-source-verified\\exploration-1.input.json" "--gpu-timing" "--gpu-timing-output" "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\exploration-trace-timing.json"
+script trace_virtual_allocations.configure(lldb.debugger, 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\exploration-return-trace\\config.json')
+continue
+script trace_virtual_allocations.finish(lldb.debugger)
+quit

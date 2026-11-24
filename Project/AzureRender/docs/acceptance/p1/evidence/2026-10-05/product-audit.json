@@ -1,0 +1,15 @@
+{
+  "sourceInputsMatch": true,
+  "sourceInputCount": 360,
+  "currentProducts": {
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe": "b485b4375b06a3f1c3215e30984f4bd294be5238ca77febd027050aa9fa4570f",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe": "87400e9eca10dca195812da801605662745e147fa713ba4588677b8bd8b4edd0",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMetaGen.exe": "025a32ff47d6695c64c37a384ef161d90e23f8b9d2fee1cc2e02629b6694cd75"
+  },
+  "gamePlayer": "87400e9eca10dca195812da801605662745e147fa713ba4588677b8bd8b4edd0",
+  "builtPlayer": "87400e9eca10dca195812da801605662745e147fa713ba4588677b8bd8b4edd0",
+  "packageUsesCurrentPlayer": true,
+  "f2RuntimeHash": "87400e9eca10dca195812da801605662745e147fa713ba4588677b8bd8b4edd0",
+  "runtimeUnchangedFromF2": true,
+  "preservedF2EngineArchive": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\f2\\engine-release-final.tar.gz"
+}

@@ -1,0 +1,300 @@
+{
+  "status": "exported-transparent-bindings",
+  "capture": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+  "draws": [
+    {
+      "event": 1383,
+      "shader": {
+        "path": "e1383/ps.dxbc",
+        "bytes": 75584,
+        "sha256": "135b25965ed786752775596a86f4069f58942eae340be4d143d291eea9429680"
+      },
+      "textures": [
+        {
+          "slot": 3,
+          "resource": "ResourceId::957",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 4,
+          "resource": "ResourceId::14647",
+          "width": 6144,
+          "height": 4096,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 5,
+          "resource": "ResourceId::158089",
+          "width": 4096,
+          "height": 2048,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 6,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 7,
+          "resource": "ResourceId::957",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 8,
+          "resource": "ResourceId::11293",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 9,
+          "resource": "ResourceId::11296",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 10,
+          "resource": "ResourceId::11299",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 11,
+          "resource": "ResourceId::11302",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 12,
+          "resource": "ResourceId::11305",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 13,
+          "resource": "ResourceId::11308",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 14,
+          "resource": "ResourceId::13537",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "textures/ResourceId-13537.dds",
+            "bytes": 1152,
+            "sha256": "f0d62133557f26fd8e9ae71c1c442c08326188a45cf12b31516e2af91a38c138"
+          }
+        },
+        {
+          "slot": 15,
+          "resource": "ResourceId::6177",
+          "width": 256,
+          "height": 256,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "textures/ResourceId-6177.dds",
+            "bytes": 262272,
+            "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+          }
+        },
+        {
+          "slot": 16,
+          "resource": "ResourceId::688",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 17,
+          "resource": "ResourceId::674",
+          "width": 256,
+          "height": 256,
+          "mips": 9,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 18,
+          "resource": "ResourceId::701",
+          "width": 512,
+          "height": 512,
+          "mips": 10,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 19,
+          "resource": "ResourceId::85388",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "textures/ResourceId-85388.dds",
+            "bytes": 5592580,
+            "sha256": "312f4c792e310dc70040f1f9ea544892a84065b5b1c20147fa4f932c32b1d85c"
+          }
+        },
+        {
+          "slot": 20,
+          "resource": "ResourceId::85393",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "textures/ResourceId-85393.dds",
+            "bytes": 5592580,
+            "sha256": "3411adc70aa616bda10f3227e10981e042f540f1acd0bdf45bd13bb0ee3d464b"
+          }
+        },
+        {
+          "slot": 21,
+          "resource": "ResourceId::85362",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC5_UNORM",
+          "export": {
+            "path": "textures/ResourceId-85362.dds",
+            "bytes": 5592560,
+            "sha256": "ee233da7cb029be0373fabb3d90ff6b33c49c0b5587c796a931c2fd8012deb2b"
+          }
+        },
+        {
+          "slot": 22,
+          "resource": "ResourceId::11467",
+          "width": 128,
+          "height": 128,
+          "mips": 8,
+          "format": "BC6_UFLOAT"
+        },
+        {
+          "slot": 23,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 24,
+          "resource": "ResourceId::345",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        }
+      ],
+      "constantBuffers": [
+        {
+          "index": 0,
+          "name": "cbuffer0",
+          "resource": "ResourceId::611",
+          "offset": 64256,
+          "size": 1536,
+          "path": "e1383/cb0.bin",
+          "bytes": 1536,
+          "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+        },
+        {
+          "index": 1,
+          "name": "cbuffer1",
+          "resource": "ResourceId::611",
+          "offset": 65792,
+          "size": 3328,
+          "path": "e1383/cb1.bin",
+          "bytes": 3328,
+          "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+        },
+        {
+          "index": 2,
+          "name": "cbuffer2",
+          "resource": "ResourceId::611",
+          "offset": 250112,
+          "size": 65536,
+          "path": "e1383/cb2.bin",
+          "bytes": 65536,
+          "sha256": "bdb2c22e17bd3447844f0729101ef790316c5f3d2ae58c06095c22b313606af4"
+        },
+        {
+          "index": 3,
+          "name": "cbuffer3",
+          "resource": "ResourceId::611",
+          "offset": 21504,
+          "size": 33024,
+          "path": "e1383/cb3.bin",
+          "bytes": 33024,
+          "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4"
+        },
+        {
+          "index": 4,
+          "name": "cbuffer4",
+          "resource": "ResourceId::611",
+          "offset": 54528,
+          "size": 256,
+          "path": "e1383/cb4.bin",
+          "bytes": 256,
+          "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434"
+        },
+        {
+          "index": 5,
+          "name": "cbuffer5",
+          "resource": "ResourceId::611",
+          "offset": 136448,
+          "size": 6400,
+          "path": "e1383/cb5.bin",
+          "bytes": 6400,
+          "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f"
+        },
+        {
+          "index": 6,
+          "name": "cbuffer6",
+          "resource": "ResourceId::466",
+          "offset": 3237376,
+          "size": 512,
+          "path": "e1383/cb6.bin",
+          "bytes": 512,
+          "sha256": "115af0699656f84d89d6921ad47e953e77db1d37016678011d1b37511002c3ea"
+        },
+        {
+          "index": 7,
+          "name": "cbuffer7",
+          "resource": "ResourceId::611",
+          "offset": 69120,
+          "size": 2560,
+          "path": "e1383/cb7.bin",
+          "bytes": 2560,
+          "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030"
+        }
+      ]
+    }
+  ],
+  "captureSha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90"
+}

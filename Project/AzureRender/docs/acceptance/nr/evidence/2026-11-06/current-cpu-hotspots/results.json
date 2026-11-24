@@ -1,0 +1,921 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnostic-sampled-and-symbolized",
+  "sourceBase": "2fad7ef",
+  "initial": {
+    "exitCode": 0,
+    "seconds": 119.75,
+    "status": "sampled",
+    "sourceBase": "2fad7ef",
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "scope": "Native sampled600frame diagnostic; no causal timing or formal performance claim",
+    "stacks": 12
+  },
+  "corrected": {
+    "exitCode": 0,
+    "seconds": 118.375,
+    "status": "sampled",
+    "sourceBase": "2fad7ef",
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "scope": "Native sampled600frame diagnostic; no causal timing or formal performance claim",
+    "stacks": 12
+  },
+  "symbols": {
+    "status": "symbolized",
+    "scope": "12 jittered native stack observations, actual module base and byte-identical production.text verified; nearest link-map symbols and offsets are diagnostic, not exclusive timing attribution",
+    "module": {
+      "pid": 12696,
+      "base": "0x7ff7f45e0000",
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+      "sha256": "fc058d5deb71e536b046e90bedf896b6e6b223f0abeaa21546fd8be263bdea3e"
+    },
+    "preferredBase": "0x140000000",
+    "samples": 12,
+    "leaves": {
+      "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64": 6,
+      "private: void __cdecl azurerender::CharacterSceneRenderer::recordComputeSkinningMesh(struct azurerender::RenderContext const & __ptr64,unsigned int,class azurerender::rhi::ICommandRecorder * __ptr64,class std::vector<struct azurerender::CharacterSceneRenderer::SkinningDispatch,class std::allocator<struct azurerender::CharacterSceneRenderer::SkinningDispatch> > const * __ptr64) __ptr64": 1,
+      "public: struct azurerender::scene::SceneDescription __cdecl azurerender::SceneDocument::renderDescription(void)const __ptr64": 1,
+      "__std_fs_get_stats": 1,
+      "public: virtual void __cdecl azurerender::rhi::VulkanCommandRecorder::bufferBarriers(struct azurerender::rhi::BufferBarrierDesc const * __ptr64,unsigned __int64) __ptr64": 1,
+      "public: bool __cdecl std::less<void>::operator()<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64>(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64)const __ptr64": 1,
+      "public: void __cdecl nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void>::json_value::destroy(enum nlohmann::json_abi_v3_12_0::detail::value_t) __ptr64": 1
+    },
+    "stacks": [
+      {
+        "path": "stack-0.log",
+        "header": "pid=12696 thread=39512 cumulativeCpuSeconds=88.6719",
+        "frames": [
+          {
+            "address": "7ff7f4656135",
+            "rva": "0x76135",
+            "offset": 197,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462517e",
+            "rva": "0x4517e",
+            "offset": 494,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::mainLoop(unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462e242",
+            "rva": "0x4e242",
+            "offset": 3938,
+            "symbols": [
+              "public: void __cdecl AzureRenderApp::run(struct AzureRenderOptions const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45f9d47",
+            "rva": "0x19d47",
+            "offset": 8887,
+            "symbols": [
+              "main"
+            ]
+          },
+          {
+            "address": "7ff7f4a653ac",
+            "rva": "0x4853ac",
+            "offset": 268,
+            "symbols": [
+              "int __cdecl __scrt_common_main_seh(void)"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "stack-1.log",
+        "header": "pid=12696 thread=39512 cumulativeCpuSeconds=88.6719",
+        "frames": [
+          {
+            "address": "7ff7f4656135",
+            "rva": "0x76135",
+            "offset": 197,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462517e",
+            "rva": "0x4517e",
+            "offset": 494,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::mainLoop(unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462e242",
+            "rva": "0x4e242",
+            "offset": 3938,
+            "symbols": [
+              "public: void __cdecl AzureRenderApp::run(struct AzureRenderOptions const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45f9d47",
+            "rva": "0x19d47",
+            "offset": 8887,
+            "symbols": [
+              "main"
+            ]
+          },
+          {
+            "address": "7ff7f4a653ac",
+            "rva": "0x4853ac",
+            "offset": 268,
+            "symbols": [
+              "int __cdecl __scrt_common_main_seh(void)"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "stack-10.log",
+        "header": "pid=12696 thread=39512 cumulativeCpuSeconds=89.7031",
+        "frames": [
+          {
+            "address": "7ff7f48e2895",
+            "rva": "0x302895",
+            "offset": 149,
+            "symbols": [
+              "private: void __cdecl azurerender::CharacterSceneRenderer::recordComputeSkinningMesh(struct azurerender::RenderContext const & __ptr64,unsigned int,class azurerender::rhi::ICommandRecorder * __ptr64,class std::vector<struct azurerender::CharacterSceneRenderer::SkinningDispatch,class std::allocator<struct azurerender::CharacterSceneRenderer::SkinningDispatch> > const * __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f48afc88",
+            "rva": "0x2cfc88",
+            "offset": 72,
+            "symbols": [
+              "private: virtual void __cdecl std::_Func_impl_no_alloc<class `public: virtual void __cdecl azurerender::CharacterSceneRenderer::registerPasses(class azurerender::RenderGraph & __ptr64,struct azurerender::SceneGraphResources const & __ptr64,struct azurerender::RenderContext const & __ptr64) __ptr64'::`7'::<lambda_4>,void,class azurerender::rhi::ICommandRecorder & __ptr64>::_Do_call(class azurerender::rhi::ICommandRecorder & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f4654d13",
+            "rva": "0x74d13",
+            "offset": 323,
+            "symbols": [
+              "public: __cdecl `private: void __cdecl AzureRenderApp::recordCommandBuffer(struct VkCommandBuffer_T * __ptr64,unsigned int,struct VkBuffer_T * __ptr64,struct azurerender::SceneFrameData const & __ptr64) __ptr64'::`64'::<lambda_6>::operator()(unsigned __int64)const __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f46210bf",
+            "rva": "0x410bf",
+            "offset": 63,
+            "symbols": [
+              "private: void __cdecl azurerender::RecordingWorkerPool::executeTask(class std::shared_ptr<struct azurerender::RecordingWorkerPool::Batch> const & __ptr64,unsigned __int64,unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f4655e64",
+            "rva": "0x75e64",
+            "offset": 740,
+            "symbols": [
+              "private: void __cdecl azurerender::RecordingWorkerPool::dispatch(class std::vector<class std::function<void __cdecl(unsigned __int64)>,class std::allocator<class std::function<void __cdecl(unsigned __int64)> > >,bool) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f465afb8",
+            "rva": "0x7afb8",
+            "offset": 72,
+            "symbols": [
+              "public: void __cdecl azurerender::RecordingWorkerPool::runWithCaller(class std::vector<class std::function<void __cdecl(unsigned __int64)>,class std::allocator<class std::function<void __cdecl(unsigned __int64)> > >) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f465ad5d",
+            "rva": "0x7ad5d",
+            "offset": 109,
+            "symbols": [
+              "public: void __cdecl azurerender::RecordingWorkerPool::runAdaptive(class std::vector<class std::function<void __cdecl(unsigned __int64)>,class std::allocator<class std::function<void __cdecl(unsigned __int64)> > >) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f465a750",
+            "rva": "0x7a750",
+            "offset": 6576,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::recordCommandBuffer(struct VkCommandBuffer_T * __ptr64,unsigned int,struct VkBuffer_T * __ptr64,struct azurerender::SceneFrameData const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f4656cd7",
+            "rva": "0x76cd7",
+            "offset": 3175,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462517e",
+            "rva": "0x4517e",
+            "offset": 494,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::mainLoop(unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462e242",
+            "rva": "0x4e242",
+            "offset": 3938,
+            "symbols": [
+              "public: void __cdecl AzureRenderApp::run(struct AzureRenderOptions const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45f9d47",
+            "rva": "0x19d47",
+            "offset": 8887,
+            "symbols": [
+              "main"
+            ]
+          },
+          {
+            "address": "7ff7f4a653ac",
+            "rva": "0x4853ac",
+            "offset": 268,
+            "symbols": [
+              "int __cdecl __scrt_common_main_seh(void)"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "stack-11.log",
+        "header": "pid=12696 thread=39512 cumulativeCpuSeconds=89.75",
+        "frames": [
+          {
+            "address": "7ff7f46d9168",
+            "rva": "0xf9168",
+            "offset": 5496,
+            "symbols": [
+              "public: struct azurerender::scene::SceneDescription __cdecl azurerender::SceneDocument::renderDescription(void)const __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f471e829",
+            "rva": "0x13e829",
+            "offset": 233,
+            "symbols": [
+              "struct azurerender::GameCameraSelection __cdecl azurerender::resolveGameCamera(class azurerender::RuntimeLifecycle & __ptr64,struct azurerender::SceneDocument const & __ptr64)"
+            ]
+          },
+          {
+            "address": "7ff7f46d262e",
+            "rva": "0xf262e",
+            "offset": 62,
+            "symbols": [
+              "public: struct azurerender::GameCameraSelection __cdecl azurerender::GameRuntime::renderCamera(struct azurerender::SceneDocument const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f46184e5",
+            "rva": "0x384e5",
+            "offset": 1765,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::buildSceneFrameData(struct azurerender::SceneFrameData & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f4656bab",
+            "rva": "0x76bab",
+            "offset": 2875,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462517e",
+            "rva": "0x4517e",
+            "offset": 494,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::mainLoop(unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462e242",
+            "rva": "0x4e242",
+            "offset": 3938,
+            "symbols": [
+              "public: void __cdecl AzureRenderApp::run(struct AzureRenderOptions const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45f9d47",
+            "rva": "0x19d47",
+            "offset": 8887,
+            "symbols": [
+              "main"
+            ]
+          },
+          {
+            "address": "7ff7f4a653ac",
+            "rva": "0x4853ac",
+            "offset": 268,
+            "symbols": [
+              "int __cdecl __scrt_common_main_seh(void)"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "stack-2.log",
+        "header": "pid=12696 thread=39512 cumulativeCpuSeconds=88.7031",
+        "frames": [
+          {
+            "address": "7ff7f4656135",
+            "rva": "0x76135",
+            "offset": 197,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462517e",
+            "rva": "0x4517e",
+            "offset": 494,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::mainLoop(unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462e242",
+            "rva": "0x4e242",
+            "offset": 3938,
+            "symbols": [
+              "public: void __cdecl AzureRenderApp::run(struct AzureRenderOptions const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45f9d47",
+            "rva": "0x19d47",
+            "offset": 8887,
+            "symbols": [
+              "main"
+            ]
+          },
+          {
+            "address": "7ff7f4a653ac",
+            "rva": "0x4853ac",
+            "offset": 268,
+            "symbols": [
+              "int __cdecl __scrt_common_main_seh(void)"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "stack-3.log",
+        "header": "pid=12696 thread=39512 cumulativeCpuSeconds=88.8281",
+        "frames": [
+          {
+            "address": "7ff7f4656135",
+            "rva": "0x76135",
+            "offset": 197,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462517e",
+            "rva": "0x4517e",
+            "offset": 494,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::mainLoop(unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462e242",
+            "rva": "0x4e242",
+            "offset": 3938,
+            "symbols": [
+              "public: void __cdecl AzureRenderApp::run(struct AzureRenderOptions const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45f9d47",
+            "rva": "0x19d47",
+            "offset": 8887,
+            "symbols": [
+              "main"
+            ]
+          },
+          {
+            "address": "7ff7f4a653ac",
+            "rva": "0x4853ac",
+            "offset": 268,
+            "symbols": [
+              "int __cdecl __scrt_common_main_seh(void)"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "stack-4.log",
+        "header": "pid=12696 thread=39512 cumulativeCpuSeconds=88.9688",
+        "frames": [
+          {
+            "address": "7ff7f4656135",
+            "rva": "0x76135",
+            "offset": 197,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462517e",
+            "rva": "0x4517e",
+            "offset": 494,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::mainLoop(unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462e242",
+            "rva": "0x4e242",
+            "offset": 3938,
+            "symbols": [
+              "public: void __cdecl AzureRenderApp::run(struct AzureRenderOptions const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45f9d47",
+            "rva": "0x19d47",
+            "offset": 8887,
+            "symbols": [
+              "main"
+            ]
+          },
+          {
+            "address": "7ff7f4a653ac",
+            "rva": "0x4853ac",
+            "offset": 268,
+            "symbols": [
+              "int __cdecl __scrt_common_main_seh(void)"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "stack-5.log",
+        "header": "pid=12696 thread=39512 cumulativeCpuSeconds=89.1094",
+        "frames": [
+          {
+            "address": "7ff7f4656135",
+            "rva": "0x76135",
+            "offset": 197,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462517e",
+            "rva": "0x4517e",
+            "offset": 494,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::mainLoop(unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462e242",
+            "rva": "0x4e242",
+            "offset": 3938,
+            "symbols": [
+              "public: void __cdecl AzureRenderApp::run(struct AzureRenderOptions const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45f9d47",
+            "rva": "0x19d47",
+            "offset": 8887,
+            "symbols": [
+              "main"
+            ]
+          },
+          {
+            "address": "7ff7f4a653ac",
+            "rva": "0x4853ac",
+            "offset": 268,
+            "symbols": [
+              "int __cdecl __scrt_common_main_seh(void)"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "stack-6.log",
+        "header": "pid=12696 thread=39512 cumulativeCpuSeconds=89.125",
+        "frames": [
+          {
+            "address": "7ff7f4a6471d",
+            "rva": "0x48471d",
+            "offset": 165,
+            "symbols": [
+              "__std_fs_get_stats"
+            ]
+          },
+          {
+            "address": "7ff7f46141a7",
+            "rva": "0x341a7",
+            "offset": 71,
+            "symbols": [
+              "struct std::filesystem::_File_status_and_error __cdecl std::filesystem::_Get_any_status(class std::filesystem::path const & __ptr64,enum __std_fs_stats_flags)"
+            ]
+          },
+          {
+            "address": "7ff7f462115c",
+            "rva": "0x4115c",
+            "offset": 28,
+            "symbols": [
+              "bool __cdecl std::filesystem::exists(class std::filesystem::path const & __ptr64)"
+            ]
+          },
+          {
+            "address": "7ff7f496f765",
+            "rva": "0x38f765",
+            "offset": 133,
+            "symbols": [
+              "public: class std::filesystem::path __cdecl azurerender::ResourceLocator::resolveAsset(class std::filesystem::path const & __ptr64)const __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462d181",
+            "rva": "0x4d181",
+            "offset": 161,
+            "symbols": [
+              "private: struct azurerender::scene::SceneDescription __cdecl AzureRenderApp::resolveRenderDescription(struct azurerender::SceneDocument const & __ptr64)const __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f4618754",
+            "rva": "0x38754",
+            "offset": 2388,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::buildSceneFrameData(struct azurerender::SceneFrameData & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f4656bab",
+            "rva": "0x76bab",
+            "offset": 2875,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462517e",
+            "rva": "0x4517e",
+            "offset": 494,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::mainLoop(unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462e242",
+            "rva": "0x4e242",
+            "offset": 3938,
+            "symbols": [
+              "public: void __cdecl AzureRenderApp::run(struct AzureRenderOptions const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45f9d47",
+            "rva": "0x19d47",
+            "offset": 8887,
+            "symbols": [
+              "main"
+            ]
+          },
+          {
+            "address": "7ff7f4a653ac",
+            "rva": "0x4853ac",
+            "offset": 268,
+            "symbols": [
+              "int __cdecl __scrt_common_main_seh(void)"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "stack-7.log",
+        "header": "pid=12696 thread=39512 cumulativeCpuSeconds=89.25",
+        "frames": [
+          {
+            "address": "7ff7f47bd765",
+            "rva": "0x1dd765",
+            "offset": 437,
+            "symbols": [
+              "public: virtual void __cdecl azurerender::rhi::VulkanCommandRecorder::bufferBarriers(struct azurerender::rhi::BufferBarrierDesc const * __ptr64,unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f47d53a0",
+            "rva": "0x1f53a0",
+            "offset": 272,
+            "symbols": [
+              "public: void __cdecl azurerender::RenderGraph::execute(class azurerender::rhi::ICommandRecorder * __ptr64,class std::function<bool __cdecl(unsigned int)> const & __ptr64,bool)const __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f465a7dc",
+            "rva": "0x7a7dc",
+            "offset": 6716,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::recordCommandBuffer(struct VkCommandBuffer_T * __ptr64,unsigned int,struct VkBuffer_T * __ptr64,struct azurerender::SceneFrameData const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f4656cd7",
+            "rva": "0x76cd7",
+            "offset": 3175,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462517e",
+            "rva": "0x4517e",
+            "offset": 494,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::mainLoop(unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462e242",
+            "rva": "0x4e242",
+            "offset": 3938,
+            "symbols": [
+              "public: void __cdecl AzureRenderApp::run(struct AzureRenderOptions const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45f9d47",
+            "rva": "0x19d47",
+            "offset": 8887,
+            "symbols": [
+              "main"
+            ]
+          },
+          {
+            "address": "7ff7f4a653ac",
+            "rva": "0x4853ac",
+            "offset": 268,
+            "symbols": [
+              "int __cdecl __scrt_common_main_seh(void)"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "stack-8.log",
+        "header": "pid=12696 thread=39512 cumulativeCpuSeconds=89.3594",
+        "frames": [
+          {
+            "address": "7ff7f45e2821",
+            "rva": "0x2821",
+            "offset": 65,
+            "symbols": [
+              "public: bool __cdecl std::less<void>::operator()<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64>(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64)const __ptr64",
+              "public: bool __cdecl std::less<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > >::operator()(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64)const __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f471e90e",
+            "rva": "0x13e90e",
+            "offset": 462,
+            "symbols": [
+              "struct azurerender::GameCameraSelection __cdecl azurerender::resolveGameCamera(class azurerender::RuntimeLifecycle & __ptr64,struct azurerender::SceneDocument const & __ptr64)"
+            ]
+          },
+          {
+            "address": "7ff7f46d262e",
+            "rva": "0xf262e",
+            "offset": 62,
+            "symbols": [
+              "public: struct azurerender::GameCameraSelection __cdecl azurerender::GameRuntime::renderCamera(struct azurerender::SceneDocument const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f46184e5",
+            "rva": "0x384e5",
+            "offset": 1765,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::buildSceneFrameData(struct azurerender::SceneFrameData & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f4656bab",
+            "rva": "0x76bab",
+            "offset": 2875,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462517e",
+            "rva": "0x4517e",
+            "offset": 494,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::mainLoop(unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462e242",
+            "rva": "0x4e242",
+            "offset": 3938,
+            "symbols": [
+              "public: void __cdecl AzureRenderApp::run(struct AzureRenderOptions const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45f9d47",
+            "rva": "0x19d47",
+            "offset": 8887,
+            "symbols": [
+              "main"
+            ]
+          },
+          {
+            "address": "7ff7f4a653ac",
+            "rva": "0x4853ac",
+            "offset": 268,
+            "symbols": [
+              "int __cdecl __scrt_common_main_seh(void)"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "stack-9.log",
+        "header": "pid=12696 thread=39512 cumulativeCpuSeconds=89.5156",
+        "frames": [
+          {
+            "address": "7ff7f45f4fea",
+            "rva": "0x14fea",
+            "offset": 1386,
+            "symbols": [
+              "public: void __cdecl nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void>::json_value::destroy(enum nlohmann::json_abi_v3_12_0::detail::value_t) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45e5842",
+            "rva": "0x5842",
+            "offset": 82,
+            "symbols": [
+              "public: void __cdecl std::_Tree_val<struct std::_Tree_simple_types<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> > > >::_Erase_tree<class std::allocator<struct std::_Tree_node<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> >,void * __ptr64> > >(class std::allocator<struct std::_Tree_node<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> >,void * __ptr64> > & __ptr64,struct std::_Tree_node<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> >,void * __ptr64> * __ptr64) __ptr64",
+              "public: void __cdecl std::_Tree_val<struct std::_Tree_simple_types<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> > > >::_Erase_tree_and_orphan<class std::allocator<struct std::_Tree_node<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> >,void * __ptr64> > >(class std::allocator<struct std::_Tree_node<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> >,void * __ptr64> > & __ptr64,struct std::_Tree_node<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> >,void * __ptr64> * __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45e582f",
+            "rva": "0x582f",
+            "offset": 63,
+            "symbols": [
+              "public: void __cdecl std::_Tree_val<struct std::_Tree_simple_types<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> > > >::_Erase_tree<class std::allocator<struct std::_Tree_node<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> >,void * __ptr64> > >(class std::allocator<struct std::_Tree_node<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> >,void * __ptr64> > & __ptr64,struct std::_Tree_node<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> >,void * __ptr64> * __ptr64) __ptr64",
+              "public: void __cdecl std::_Tree_val<struct std::_Tree_simple_types<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> > > >::_Erase_tree_and_orphan<class std::allocator<struct std::_Tree_node<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> >,void * __ptr64> > >(class std::allocator<struct std::_Tree_node<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> >,void * __ptr64> > & __ptr64,struct std::_Tree_node<struct std::pair<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const ,class nlohmann::json_abi_v3_12_0::basic_json<class std::map,class std::vector,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool,__int64,unsigned __int64,double,class std::allocator,struct nlohmann::json_abi_v3_12_0::adl_serializer,class std::vector<unsigned char,class std::allocator<unsigned char> >,void> >,void * __ptr64> * __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45eec97",
+            "rva": "0xec97",
+            "offset": 135,
+            "symbols": [
+              "public: __cdecl azurerender::Level::~Level(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f46cd505",
+            "rva": "0xed505",
+            "offset": 2021,
+            "symbols": [
+              "public: bool __cdecl azurerender::LevelSession::poll(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f4656626",
+            "rva": "0x76626",
+            "offset": 1462,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::drawFrame(void) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462517e",
+            "rva": "0x4517e",
+            "offset": 494,
+            "symbols": [
+              "private: void __cdecl AzureRenderApp::mainLoop(unsigned __int64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f462e242",
+            "rva": "0x4e242",
+            "offset": 3938,
+            "symbols": [
+              "public: void __cdecl AzureRenderApp::run(struct AzureRenderOptions const & __ptr64) __ptr64"
+            ]
+          },
+          {
+            "address": "7ff7f45f9d47",
+            "rva": "0x19d47",
+            "offset": 8887,
+            "symbols": [
+              "main"
+            ]
+          },
+          {
+            "address": "7ff7f4a653ac",
+            "rva": "0x4853ac",
+            "offset": 268,
+            "symbols": [
+              "int __cdecl __scrt_common_main_seh(void)"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "privateLink": {
+    "original": {
+      ".text": "9f43f38a4c9d68212554adc46992961c869d87db273b55363d2393f125e992af",
+      ".rdata": "3721f3e21d7e9bdc85b7ba4b701e2b7520dc0ca07da19ede8fc16c0286a28ca9",
+      ".data": "2b7b5c1d4bf7a37a88f2ca17f8b88777a5ec1d26437ffc67b7302eda5d9d822a",
+      ".pdata": "a3a66df53fde7025d40d2181ac326a119b509d1611a5f1edda3ebe31206d893f",
+      ".rsrc": "44b48d6218ae43da9ecb79bccaccbe37822977622cfa43c8d3f7f7cbc4fda9ed",
+      ".reloc": "bd11ada38dfb0308607e9705625cbf7539736e360cd0f04ac2272c44cfa73034"
+    },
+    "private": {
+      ".text": "9f43f38a4c9d68212554adc46992961c869d87db273b55363d2393f125e992af",
+      ".rdata": "eb5a4a8fe5624512a21d3b7aab3394b2582099e37131f4932006968231558d37",
+      ".data": "2b7b5c1d4bf7a37a88f2ca17f8b88777a5ec1d26437ffc67b7302eda5d9d822a",
+      ".pdata": "a3a66df53fde7025d40d2181ac326a119b509d1611a5f1edda3ebe31206d893f",
+      ".rsrc": "44b48d6218ae43da9ecb79bccaccbe37822977622cfa43c8d3f7f7cbc4fda9ed",
+      ".reloc": "bd11ada38dfb0308607e9705625cbf7539736e360cd0f04ac2272c44cfa73034"
+    },
+    "textByteIdentical": true,
+    "productionExeSha256": "fc058d5deb71e536b046e90bedf896b6e6b223f0abeaa21546fd8be263bdea3e"
+  },
+  "scope": "12 actual jittered native observations; nearest link-map symbols only, no exclusive function time attribution; first12 raw address logs retained separately",
+  "next": "Share the already-materialized scene description with camera selection; frame resource-path resolution and LevelSession.poll remain distinct observed paths",
+  "archiveSha256": "2dec714aae4d20fe1a4ef8784dd503552ef93bdc85ed0e457bbd1bb883325d2a",
+  "archiveMembers": {
+    "captures/azureplayer.log.jsonl": "894b90b4b46e8705915b4734d84bee2d5702a0d07cea692ff23c4432d77769ae",
+    "captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "collection-correction.json": "f492ff37c553a5d6a43bab56a6b90aa72fb9529390d9d9bb9722ab97f1b7ddbf",
+    "drivers/profile_current_cpu.py": "d18953ddec5643ed89f626685df3b792ce21551168bdb1b4d3a3135c65e591c0",
+    "drivers/profile_current_cpu_with_module.py": "df3c466cb045ed5d54bd10bf7fb0cbe61ad70139a90b536f3f593ce76511989b",
+    "drivers/sample_native_stack.cpp": "25cfbde9924683068b9e15e078b061089023114e88698907d9dae825b265acea",
+    "drivers/symbolize_current_cpu.py": "e38c7c6aa6a63273c55a48fff8f51d83d7e1946b57db9c642765e05eefc6c05d",
+    "frozen-inputs.json": "6b7378317bb903b8879caa0d092203807c51afa71777c490cee53121568ece0a",
+    "module-corrected/captures/azureplayer.log.jsonl": "be9ceb3ab7181e662418282f4816441199bbd0520a28866684a1b899b2b4ec61",
+    "module-corrected/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "module-corrected/frozen-inputs.json": "6b7378317bb903b8879caa0d092203807c51afa71777c490cee53121568ece0a",
+    "module-corrected/module.json": "e0a8cbdfae0c152cbd793ff4da48562e78b1d5e78742febdfb8557c5080e3c1b",
+    "module-corrected/result.json": "eb33d13d4d8e98daea28ef80f5bc39eb283676286d8fc8c8af5bc45fe875e1c1",
+    "module-corrected/stack-0.log": "a5461cd86c58ced0280ce4bd5df7ded223c2a0d11c76de1a6ce6eb64b89f1d50",
+    "module-corrected/stack-1.log": "a5461cd86c58ced0280ce4bd5df7ded223c2a0d11c76de1a6ce6eb64b89f1d50",
+    "module-corrected/stack-10.log": "9d74a2a90b3659b9075dbbe96e6c358e1b461f326527e6abe56e9b0421efb406",
+    "module-corrected/stack-11.log": "f96b44f49366a5a1dfaae5bb55aec39df4fea417a6e890f7853d147a2de11bec",
+    "module-corrected/stack-2.log": "10287c01427cdb731fc1a16d8d0f3cd2031a6950db429e798f2200ebbc1bc069",
+    "module-corrected/stack-3.log": "9f53fe93b1ed39c124451a7f1b75c47d314885766f474c4706da1e9a1d160604",
+    "module-corrected/stack-4.log": "c8c7f12ebe975a73d273aa10434573319223cdcba7010358b5710a7d9f3de053",
+    "module-corrected/stack-5.log": "b0d4597078762868825ba4e2f7efba41faa48052b90393540ace96f10ca52d1d",
+    "module-corrected/stack-6.log": "05b19f281663d3c044c0bb64b02e8813de18e74a214662b7445f9870fe8f79f8",
+    "module-corrected/stack-7.log": "83efdb6c281ceff01fad9824b18c4596db94dd09a8734b69a7b4e7a21d808b9d",
+    "module-corrected/stack-8.log": "5546885e78b0f112bc4c94b13792fc079bf52c35584208166b29a51e79703dc7",
+    "module-corrected/stack-9.log": "7e3d8ce7a5c86f65cb7973334ea0eab95da43872e55526002308bdaeedc6965f",
+    "module-corrected/stderr.log": "42073a72215fb85456912b58d358b7ca5431e5b70618e63e02466c15b70875b7",
+    "module-corrected/stdout.log": "b2b1b0db6564edadffb304267ed9e231fd32d35cae8ba8ff861a0104c346732e",
+    "module-corrected/symbolized-stacks.json": "864068841f70b21108f428f531f11b2f672936d00a507d058a13969e350f688c",
+    "module-corrected/task.json": "0cd15d6baecfa45060778fc2f7764e4f243a59bea4a0abb389e4f3e067b5846f",
+    "module-corrected/timing.csv": "eded2921a7680d7fab553b3c6969879f9f349d66c42ad1200b9ebf378a26b991",
+    "module-corrected/timing.json": "2c452110cd5f9f380c5794f8fb8f09aa2942303142b7fece6ece8e4fb5df4241",
+    "private-link/AzurePlayer.map": "1668f2f8c9ebce800643dbbe460450de4edc749fb4616c425521a9cf593ea077",
+    "private-link/link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "private-link/link.rsp": "c79cd765ede42543069a20c9294964a724b82cd338ed86d6d57d91cc197eeae2",
+    "private-link/sections.json": "c65c2f4eb1f3d0abf10997f29f9a8bad8ff82cf8d67164f97a640077ff075aac",
+    "result.json": "f1c37e5267d46785691a5845024cccb5d62e2dfc287d66a5253480f24011c6ac",
+    "stack-0.log": "7966ea4661137a8e8180aeb4d93e6200fc9ba6327c3b7730d7569f93a8c1f7ee",
+    "stack-1.log": "6e1245606da8fd282d09754dc7377c2e4e0ee87042ae4ffba4cd382bf66214b8",
+    "stack-10.log": "e4c92c33e49adeb4ec00e1d85add27464dd47e2e77e55e63494e974f6a1c9939",
+    "stack-11.log": "5494ecb18d454ca23762c130aa660ef4fc3b058bd09a6c76720a61e237be092a",
+    "stack-2.log": "600fe0ef0dcd7f484cfd533376b62532416ab53910f31d55a0844e5fb1ecee8a",
+    "stack-3.log": "e07d89e170f53cc8da462ed05cd46be8c55e6b082b55b5cd51eb2e89ef53ed3d",
+    "stack-4.log": "16241c317e6d01b2abd4b4dcbdc069bf4f261cfca51bb5146a2586f81ecab278",
+    "stack-5.log": "06e59051bffcdf075cb2fcb75374fdea5824091b50184997216702ffdc7a8433",
+    "stack-6.log": "a680e6a04c8c5a18fcf092e8e168758bb01ff102584d33584bf3afa9e842de51",
+    "stack-7.log": "b9a8c0cd16901051c6485a175d2aca44659beec58a4caa55c40cfd675e76049c",
+    "stack-8.log": "47b00ac5817e5aab9438f43e987fde9ebd609f7e230e82928ee61150edcd366f",
+    "stack-9.log": "188f13ca716a5c3c797a73ca96a165b3320fd9e370f1c4220ac6b07b9f9e6a4a",
+    "stderr.log": "29690528630b7b26d7b2b75bb7e44368154f46b328cd000b4c7f6450d1d8d947",
+    "stdout.log": "31a39a46a7dba34c933989494a8a9fac2ba7f9626dd69fc238675307fd330387",
+    "task.json": "1b1b57e15670fd58ce67aebcd1743d647d9cbc05d53a80904809b47ff24c0729",
+    "timing.csv": "83e4b7d07cc617288400cc60a2798358419baccd6a56d1c0fdda2fc4bc265cd2",
+    "timing.json": "f7e22732f0b2d6258ca0eca1bb95ee9e92328a3aa52a4b1ea8f2e8530744704d"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "status": "qualified-source-control-attribute-candidates-isolated",
+  "overall": "failed-user-review",
+  "sourceCommit": "3990a03",
+  "observations": [
+    {
+      "device": "nvidia",
+      "channel": 0,
+      "d32ControlExact": true,
+      "planeSha256": "55ca4714083390affbfeae1c8203096df6bfaa34be5b64d29fdcd8ca5743f9de",
+      "route": "hardwareDepth",
+      "pixels": 17017,
+      "hardwareDepthExact": 17017,
+      "nativeDepthExact": 17017,
+      "nativeDepthWithinOneUlp": 17017,
+      "visibilityFailures": 0,
+      "maximumByteError": 0
+    },
+    {
+      "device": "nvidia",
+      "channel": 1,
+      "d32ControlExact": true,
+      "planeSha256": "dc7525e5b6c991a2c4efe48a2814c543902c49ee56074a670149f06bb262d897",
+      "route": "noperspectiveZOverW",
+      "pixels": 17017,
+      "hardwareDepthExact": 9457,
+      "nativeDepthExact": 9457,
+      "nativeDepthWithinOneUlp": 16863,
+      "visibilityFailures": 92,
+      "maximumByteError": 39
+    },
+    {
+      "device": "nvidia",
+      "channel": 2,
+      "d32ControlExact": true,
+      "planeSha256": "ec4547e5e99e75f4bcb6e343782d5695be83e5a47f68dbf4eb935389ee2a3387",
+      "route": "smoothZTimesReciprocalW",
+      "pixels": 17017,
+      "hardwareDepthExact": 5215,
+      "nativeDepthExact": 5215,
+      "nativeDepthWithinOneUlp": 13387,
+      "visibilityFailures": 157,
+      "maximumByteError": 39
+    },
+    {
+      "device": "nvidia",
+      "channel": 3,
+      "d32ControlExact": true,
+      "planeSha256": "3a7e340a62d0c504d015ea2ef31ac97f34c4b2f5d8505ca172b3464098f7d705",
+      "route": "fragmentReciprocalW",
+      "pixels": 17017,
+      "hardwareDepthExact": 0
+    },
+    {
+      "device": "intel",
+      "channel": 0,
+      "d32ControlExact": true,
+      "planeSha256": "21642b299e1d39b3a1351839f2845c76382e13f490b9d961be546ada80258ba3",
+      "route": "hardwareDepth",
+      "pixels": 17017,
+      "hardwareDepthExact": 17017,
+      "nativeDepthExact": 7965,
+      "nativeDepthWithinOneUlp": 15679,
+      "visibilityFailures": 96,
+      "maximumByteError": 25
+    },
+    {
+      "device": "intel",
+      "channel": 1,
+      "d32ControlExact": true,
+      "planeSha256": "e52604c10cd20f0799f7beb79bb648cc3e1a84b64f810a2fa129696897aa8fc5",
+      "route": "noperspectiveZOverW",
+      "pixels": 17017,
+      "hardwareDepthExact": 9924,
+      "nativeDepthExact": 7713,
+      "nativeDepthWithinOneUlp": 15956,
+      "visibilityFailures": 121,
+      "maximumByteError": 39
+    },
+    {
+      "device": "intel",
+      "channel": 2,
+      "d32ControlExact": true,
+      "planeSha256": "5f1392c7cc692f0d003650c705bbf7ef3008f784ad0ab19c8efb956e3e200ade",
+      "route": "smoothZTimesReciprocalW",
+      "pixels": 17017,
+      "hardwareDepthExact": 7752,
+      "nativeDepthExact": 6079,
+      "nativeDepthWithinOneUlp": 14199,
+      "visibilityFailures": 135,
+      "maximumByteError": 39
+    },
+    {
+      "device": "intel",
+      "channel": 3,
+      "d32ControlExact": true,
+      "planeSha256": "f83ec9d19999fd4aaca5e2c28c368bf34f31bccd7cbceb7f65cf80a368f3c99d",
+      "route": "fragmentReciprocalW",
+      "pixels": 17017,
+      "hardwareDepthExact": 0
+    }
+  ],
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 7.4689999999827705,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-213340-depth-interpolant-source-a27b74\\run.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-213340-depth-interpolant-source-a27b74\\tmp"
+  },
+  "publicSourceUnchanged": true,
+  "remainingIntelFailures": 96,
+  "next": "Scene binding and independent native quality units; interpolation retry requires new fixed-function precision evidence",
+  "archive": {
+    "bytes": 1678661,
+    "sha256": "a323c4ad0cfd122ef10a0d3e61d16bfd1c893112754e83a09baa4a22e8035f2e",
+    "members": 88
+  }
+}

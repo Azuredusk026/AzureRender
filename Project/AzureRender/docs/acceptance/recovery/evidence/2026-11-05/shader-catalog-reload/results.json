@@ -1,0 +1,337 @@
+{
+  "status": "passed",
+  "scope": "Shader compilation and dedicated host recovery; full Debug development workflow retains preview-refresh failure",
+  "programs": 535,
+  "workersMaximum": 8,
+  "deadlineMs": 60000,
+  "catalogRedDiagnostic": "Process deadline exceeded\n",
+  "hostCases": [
+    {
+      "configuration": "release",
+      "workflow": "exploration",
+      "status": "passed",
+      "programs": 535,
+      "outputBytesExact": true,
+      "timings": {
+        "Error": 3.547000000020489,
+        "Idle": 27.29700000002049,
+        "Cancelled": 1.172000000020489
+      },
+      "validationLayer": "disabled"
+    },
+    {
+      "configuration": "release",
+      "workflow": "inspector",
+      "status": "passed",
+      "programs": 535,
+      "outputBytesExact": true,
+      "timings": {
+        "Error": 4.329000000027008,
+        "Idle": 41.90599999995902,
+        "Cancelled": 1.3910000000032596
+      },
+      "validationLayer": "disabled"
+    },
+    {
+      "configuration": "debug",
+      "workflow": "exploration",
+      "status": "passed",
+      "programs": 535,
+      "outputBytesExact": true,
+      "timings": {
+        "Error": 9.34299999999348,
+        "Idle": 45.07799999997951,
+        "Cancelled": 1.5940000000409782
+      },
+      "validationLayer": "enabled"
+    },
+    {
+      "configuration": "debug",
+      "workflow": "inspector",
+      "status": "passed",
+      "programs": 535,
+      "outputBytesExact": true,
+      "timings": {
+        "Error": 6.9689999999827705,
+        "Idle": 43.84399999998277,
+        "Cancelled": 2.047000000020489
+      },
+      "validationLayer": "enabled"
+    }
+  ],
+  "registeredHostPassed": true,
+  "fullDebugWorkflow": "failed-asset-thumbnail-refresh-before-shader-checks",
+  "physicalKeyboardMouse": "not performed",
+  "programsUnchanged": true,
+  "hostPrograms": {
+    "release": "ead08286c41722b887e41d0e72e1fc06a6ba0a2ede4360cecfcc8bb9a6581876",
+    "debug": "b8ab8802847ccb074e4d371d33d30d4a0f9da1398a06ab1518c20302ce0e4c7c"
+  },
+  "playerSha256": "642ad4d341fc9652aa41c796cca0b43debc9c3706ea68aa8e4ef5a0193e245fc",
+  "records": [
+    {
+      "path": "release.log",
+      "sha256": "b7ae4612dd838c9c6eca770e04fa3a893ee2b800c76267e9e8320549f4470c61",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\release.log",
+      "sourceSha256": "b7ae4612dd838c9c6eca770e04fa3a893ee2b800c76267e9e8320549f4470c61"
+    },
+    {
+      "path": "release-devtools-serial.log",
+      "sha256": "a664206bd92ca27fd9b492d107a9b097e68b4e8783cdf851d361064895d8ea40",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\release-devtools-serial.log",
+      "sourceSha256": "a664206bd92ca27fd9b492d107a9b097e68b4e8783cdf851d361064895d8ea40"
+    },
+    {
+      "path": "catalog-red.log",
+      "sha256": "a2514758ec83e105879503f128248f124d3d766338063c2c3c906be028b47c88",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\catalog-red.log",
+      "sourceSha256": "a2514758ec83e105879503f128248f124d3d766338063c2c3c906be028b47c88"
+    },
+    {
+      "path": "catalog-green.log",
+      "sha256": "0ed187adf780ba9e5a6054b9dd13011a7b71ac4eba262b15aa86d77e85b3bdb3",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\catalog-green.log",
+      "sourceSha256": "0ed187adf780ba9e5a6054b9dd13011a7b71ac4eba262b15aa86d77e85b3bdb3"
+    },
+    {
+      "path": "long-output-red.log",
+      "sha256": "5ed7414b51757c1b56be0026138655bf927ac6babb7b195b2dfe0e85ef6c2980",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\long-output-red.log",
+      "sourceSha256": "5ed7414b51757c1b56be0026138655bf927ac6babb7b195b2dfe0e85ef6c2980"
+    },
+    {
+      "path": "long-output-green.log",
+      "sha256": "d9bd45ab94bb4d105010358402186c339902c769f8e31d306bfa7cbd77e27d21",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\long-output-green.log",
+      "sourceSha256": "d9bd45ab94bb4d105010358402186c339902c769f8e31d306bfa7cbd77e27d21"
+    },
+    {
+      "path": "devtools-final-release.log",
+      "sha256": "92c75b715c41b3df651cba50d8fbbc4b59c55dfd132b5d137c0305c86aeca1b4",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\devtools-final-release.log",
+      "sourceSha256": "92c75b715c41b3df651cba50d8fbbc4b59c55dfd132b5d137c0305c86aeca1b4"
+    },
+    {
+      "path": "devtools-final-debug.log",
+      "sha256": "f40ff8745cdf7825edcc5fec0d9a389bf604fd9910b53b23284534f57c27bd78",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\devtools-final-debug.log",
+      "sourceSha256": "f40ff8745cdf7825edcc5fec0d9a389bf604fd9910b53b23284534f57c27bd78"
+    },
+    {
+      "path": "shader-host-results.json",
+      "sha256": "aabcde07ff1117bda0233c4f9cc980aad507c35d4fad3079c165a880ee88e91e",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-results.json",
+      "sourceSha256": "aabcde07ff1117bda0233c4f9cc980aad507c35d4fad3079c165a880ee88e91e"
+    },
+    {
+      "path": "registered-host-results.json",
+      "sha256": "70b9128ffc7ea7abe8b67f8f2cf29cba0e848963f2e635b92799d46a177c4de5",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\registered-host-results.json",
+      "sourceSha256": "70b9128ffc7ea7abe8b67f8f2cf29cba0e848963f2e635b92799d46a177c4de5"
+    },
+    {
+      "path": "final-results.json",
+      "sha256": "ca38e06feb72c964f46d92aa6778ac9b2cec67a98783e7f16d4d4345d20d89b2",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\final-results.json",
+      "sourceSha256": "ca38e06feb72c964f46d92aa6778ac9b2cec67a98783e7f16d4d4345d20d89b2"
+    },
+    {
+      "path": "release-final-contracts.log",
+      "sha256": "cac68070e9cb8823ad8e0b57f27f709f004392105e746596bab0d0c94e66d10b",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\release-final-contracts.log",
+      "sourceSha256": "cac68070e9cb8823ad8e0b57f27f709f004392105e746596bab0d0c94e66d10b"
+    },
+    {
+      "path": "release-registration-build.log",
+      "sha256": "2efc1f3ad0229fa8e9b916a46b21baa391fe89e4790a2da616b72e1946051e1b",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\release-registration-build.log",
+      "sourceSha256": "2efc1f3ad0229fa8e9b916a46b21baa391fe89e4790a2da616b72e1946051e1b"
+    },
+    {
+      "path": "release-registered-host.log",
+      "sha256": "02f250777b41cbaf90f964775d68f2f7399f542cce47d8ea668536eb2ebb157f",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\release-registered-host.log",
+      "sourceSha256": "02f250777b41cbaf90f964775d68f2f7399f542cce47d8ea668536eb2ebb157f"
+    },
+    {
+      "path": "shader-host-final-release--results.json",
+      "sha256": "e78c73ddabd73a2648d6f5c135031f1eefa3004aba892af6e652098b2ab3a5f3",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-release\\results.json",
+      "sourceSha256": "e78c73ddabd73a2648d6f5c135031f1eefa3004aba892af6e652098b2ab3a5f3"
+    },
+    {
+      "path": "shader-host-final-release--exploration--stdout.log",
+      "sha256": "bd083a4fb3f7c15c62556d9feb2f72aa8e74de9b83b52da0df5f79a010480127",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-release\\exploration\\stdout.log",
+      "sourceSha256": "bd083a4fb3f7c15c62556d9feb2f72aa8e74de9b83b52da0df5f79a010480127"
+    },
+    {
+      "path": "shader-host-final-release--exploration--stderr.log",
+      "sha256": "eec13f6ae34816e4893e60ac710b9fcf34ef17b7d3e1b2b17ad8471b5503ddbc",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-release\\exploration\\stderr.log",
+      "sourceSha256": "eec13f6ae34816e4893e60ac710b9fcf34ef17b7d3e1b2b17ad8471b5503ddbc"
+    },
+    {
+      "path": "shader-host-final-release--exploration--runtime.json",
+      "sha256": "a4a8c651db45724dc8f0a753489aeabefaf9090bead3c7dcbeae0a2d9f360947",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-release\\exploration\\runtime.json",
+      "sourceSha256": "a4a8c651db45724dc8f0a753489aeabefaf9090bead3c7dcbeae0a2d9f360947"
+    },
+    {
+      "path": "shader-host-final-release--exploration--operations.json",
+      "sha256": "e2f0a4e3c4d3ecee622200b5b8362f7436be65c6c97ebba43df20fb1d7dfb77a",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-release\\exploration\\operations.json",
+      "sourceSha256": "e2f0a4e3c4d3ecee622200b5b8362f7436be65c6c97ebba43df20fb1d7dfb77a"
+    },
+    {
+      "path": "shader-host-final-release--inspector--stdout.log",
+      "sha256": "f7593f09c358ca4eb2aaae395abf5282aa59ecbfd35ee78bdbbf69c7d2814834",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-release\\inspector\\stdout.log",
+      "sourceSha256": "f7593f09c358ca4eb2aaae395abf5282aa59ecbfd35ee78bdbbf69c7d2814834"
+    },
+    {
+      "path": "shader-host-final-release--inspector--stderr.log",
+      "sha256": "30c2be697b6431cd8b3ba8b776afb6294eae8d6629a7312464e94da8ebfa3859",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-release\\inspector\\stderr.log",
+      "sourceSha256": "30c2be697b6431cd8b3ba8b776afb6294eae8d6629a7312464e94da8ebfa3859"
+    },
+    {
+      "path": "shader-host-final-release--inspector--runtime.json",
+      "sha256": "e3cc29f93df8ef032f52e5bdff9c847818feaafc6eda448ac77fa5c7f1d89630",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-release\\inspector\\runtime.json",
+      "sourceSha256": "e3cc29f93df8ef032f52e5bdff9c847818feaafc6eda448ac77fa5c7f1d89630"
+    },
+    {
+      "path": "shader-host-final-release--inspector--operations.json",
+      "sha256": "b6f99da919582a7abac81b15cb34a4fb7e291a287fe4f03afb78acd900751a6b",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-release\\inspector\\operations.json",
+      "sourceSha256": "b6f99da919582a7abac81b15cb34a4fb7e291a287fe4f03afb78acd900751a6b"
+    },
+    {
+      "path": "debug-final-contracts.log",
+      "sha256": "d0047d5923bc9f62d69fbccb093f8bfd9851c6a237b0890e2ed4ef6f9112922c",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\debug-final-contracts.log",
+      "sourceSha256": "d0047d5923bc9f62d69fbccb093f8bfd9851c6a237b0890e2ed4ef6f9112922c"
+    },
+    {
+      "path": "debug-registration-build.log",
+      "sha256": "748e3869c712d75ec15b81df1ea1528457fa94f292a43ded17777b581e044797",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\debug-registration-build.log",
+      "sourceSha256": "748e3869c712d75ec15b81df1ea1528457fa94f292a43ded17777b581e044797"
+    },
+    {
+      "path": "debug-registered-host.log",
+      "sha256": "1c71e62a3959bd4ff17f87469f58763dde6dfa06198309555d90456810b5b344",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\debug-registered-host.log",
+      "sourceSha256": "1c71e62a3959bd4ff17f87469f58763dde6dfa06198309555d90456810b5b344"
+    },
+    {
+      "path": "shader-host-final-debug--results.json",
+      "sha256": "ca540ae522520fdd9ffe52bac9c6a63e467fe46ff8b8cf9930a8758a19cdd946",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\results.json",
+      "sourceSha256": "ca540ae522520fdd9ffe52bac9c6a63e467fe46ff8b8cf9930a8758a19cdd946"
+    },
+    {
+      "path": "shader-host-final-debug--exploration--stdout.log",
+      "sha256": "dac70e31076128c4e2525c367737251ba3b1259f9f72d251cbc357e4ee48a9e8",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\exploration\\stdout.log",
+      "sourceSha256": "dac70e31076128c4e2525c367737251ba3b1259f9f72d251cbc357e4ee48a9e8"
+    },
+    {
+      "path": "shader-host-final-debug--exploration--stderr.log",
+      "sha256": "8871068cdfcf7bb23c16ced764c52f411e0bcfbdcbe114e35810352a1d1cf1c8",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\exploration\\stderr.log",
+      "sourceSha256": "8871068cdfcf7bb23c16ced764c52f411e0bcfbdcbe114e35810352a1d1cf1c8"
+    },
+    {
+      "path": "shader-host-final-debug--exploration--runtime.json",
+      "sha256": "714df23d12cd23dd0151d835f8068fb94c6b2f4bab655ef2a9de871a585f7bbb",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\exploration\\runtime.json",
+      "sourceSha256": "714df23d12cd23dd0151d835f8068fb94c6b2f4bab655ef2a9de871a585f7bbb"
+    },
+    {
+      "path": "shader-host-final-debug--exploration--operations.json",
+      "sha256": "5cb9d8bc306050358dc9c5d1d6a2a165f3f96e4c57a2b1cd57647ca45fa841c7",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\exploration\\operations.json",
+      "sourceSha256": "5cb9d8bc306050358dc9c5d1d6a2a165f3f96e4c57a2b1cd57647ca45fa841c7"
+    },
+    {
+      "path": "shader-host-final-debug--inspector--stdout.log",
+      "sha256": "8311ddcfed95c44ba5bf04423156a10e5074d9b47bd0040e3dcd218367583187",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\inspector\\stdout.log",
+      "sourceSha256": "8311ddcfed95c44ba5bf04423156a10e5074d9b47bd0040e3dcd218367583187"
+    },
+    {
+      "path": "shader-host-final-debug--inspector--stderr.log",
+      "sha256": "c1cd52adf0a7e327985ccabdb2d780802efc8091c165c967bae7658372ea7a71",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\inspector\\stderr.log",
+      "sourceSha256": "c1cd52adf0a7e327985ccabdb2d780802efc8091c165c967bae7658372ea7a71"
+    },
+    {
+      "path": "shader-host-final-debug--inspector--runtime.json",
+      "sha256": "7a0269ff2c7701c279ec02f19a8e41363010b796f00c6cc36500a51ac6485f10",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\inspector\\runtime.json",
+      "sourceSha256": "7a0269ff2c7701c279ec02f19a8e41363010b796f00c6cc36500a51ac6485f10"
+    },
+    {
+      "path": "shader-host-final-debug--inspector--operations.json",
+      "sha256": "b132f0239f8010e658a0b347ba0fcbb54bafe082747b4cb22380dbf2b96560d7",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\inspector\\operations.json",
+      "sourceSha256": "b132f0239f8010e658a0b347ba0fcbb54bafe082747b4cb22380dbf2b96560d7"
+    },
+    {
+      "path": "devtools-exclusive-release--exploration--failure-state.json",
+      "sha256": "dbcf5d4e62edb4f52a46a71395f38b2b1b323b39b014223c2feeccf8fd09382e",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\devtools-exclusive-release\\exploration\\failure-state.json",
+      "sourceSha256": "dbcf5d4e62edb4f52a46a71395f38b2b1b323b39b014223c2feeccf8fd09382e"
+    },
+    {
+      "path": "devtools-exclusive-release.log",
+      "sha256": "ad943de375ed7879dd2a53443d40bd468864f73bfb3c7cb7f2d175577a277b47",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\devtools-exclusive-release.log",
+      "sourceSha256": "ad943de375ed7879dd2a53443d40bd468864f73bfb3c7cb7f2d175577a277b47"
+    },
+    {
+      "path": "long-output-private-control.json",
+      "sha256": "32adb2123367c5e1ad84e804f9917c0c3a395b668b608a27672f12c9b2eeacbc",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\long-compiler-output-path\\results.json",
+      "sourceSha256": "32adb2123367c5e1ad84e804f9917c0c3a395b668b608a27672f12c9b2eeacbc"
+    },
+    {
+      "path": "catalog-red-result.json",
+      "sha256": "ba9e5ed614025de4e3e856be23e25691bdf09e8caf8b348461f7949b3539332b",
+      "source": "build\\runs\\20261105-062300-shader-catalog-25d2db\\summary.json",
+      "sourceSha256": "ba9e5ed614025de4e3e856be23e25691bdf09e8caf8b348461f7949b3539332b"
+    },
+    {
+      "path": "source--CMakeLists.txt",
+      "sha256": "74594fe9892c9e7a42b43069af2b9e2323f87420c74ce196d70246afcc866284",
+      "source": "CMakeLists.txt",
+      "sourceSha256": "74594fe9892c9e7a42b43069af2b9e2323f87420c74ce196d70246afcc866284"
+    },
+    {
+      "path": "source--src--devtools--ShaderCompileJob.cpp",
+      "sha256": "14c178a716f7c1005c9e647fd439b4b9c827d6d3af9044cab139b7416f983864",
+      "source": "src\\devtools\\ShaderCompileJob.cpp",
+      "sourceSha256": "14c178a716f7c1005c9e647fd439b4b9c827d6d3af9044cab139b7416f983864"
+    },
+    {
+      "path": "source--tests--ShaderCompilerContractTests.cpp",
+      "sha256": "8e8ba821f82a611897c69d3a3ad2e58e9c5bbf2182ee360eb3139c83e03127bb",
+      "source": "tests\\ShaderCompilerContractTests.cpp",
+      "sourceSha256": "8e8ba821f82a611897c69d3a3ad2e58e9c5bbf2182ee360eb3139c83e03127bb"
+    },
+    {
+      "path": "source--tools--test_shader_catalog.py",
+      "sha256": "00f80bbac4bb9b50fde0c1196c23a8fa9a1b58e1b508947b846c4292836783d3",
+      "source": "tools\\test_shader_catalog.py",
+      "sourceSha256": "00f80bbac4bb9b50fde0c1196c23a8fa9a1b58e1b508947b846c4292836783d3"
+    },
+    {
+      "path": "source--tools--test_shader_reload_host.py",
+      "sha256": "4cff3d5b752243b9209707df5ce7571048096fcfcebe2a6d5e3252cec2f0d76f",
+      "source": "tools\\test_shader_reload_host.py",
+      "sourceSha256": "4cff3d5b752243b9209707df5ce7571048096fcfcebe2a6d5e3252cec2f0d76f"
+    }
+  ]
+}

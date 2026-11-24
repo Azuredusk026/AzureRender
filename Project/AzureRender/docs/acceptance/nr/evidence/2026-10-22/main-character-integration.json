@@ -1,0 +1,56 @@
+{
+  "status": "main-and-playable-promotion-passed",
+  "sourceCommit": "3793ff5a19f0a55e5ed671d2f36eae6f9d82729a",
+  "playerSha256": "12fbcf265931012b5849241c664a5fe50c9d665b1ae55db3f128da187601ec26",
+  "oldAssetSha256": "8642f0e738024a4eaba33c85099cda5bb7064f17dba25f0c544baf3240a25b7c",
+  "newAssetSha256": "a8a08d008eca0ec50078af5d98121cad5a4f293f5e785cb22fc3ee4a2e081619",
+  "geometryAnimationUnchanged": true,
+  "captures": [
+    {
+      "name": "project-before",
+      "imageSha256": "f71570bbdd9f54b692275ea1978a0ba5dc57abef9372275cac3ae59882b74a63",
+      "projectSha256": "da6121f2f9af86c013d83b96785287c3f19ca51b845f61a1bf01bb3fbece3213",
+      "passed": true
+    },
+    {
+      "name": "playable-safe-before",
+      "imageSha256": "4e9029bd96a0ba8e98013957d7628ddd1dea3677f23bf49f26dddd2997cba828",
+      "projectSha256": "f7b5504f9ea0b975fe133b1eef7d53dc1c1a5c3ea57c3bfd508313f5cc74a07d",
+      "passed": true
+    },
+    {
+      "name": "project-after",
+      "imageSha256": "f693f1e6925ae47301852d0281713b3333c0c9772a007782c3aa083f8f5c4203",
+      "projectSha256": "da6121f2f9af86c013d83b96785287c3f19ca51b845f61a1bf01bb3fbece3213",
+      "passed": true
+    },
+    {
+      "name": "playable-safe-after",
+      "imageSha256": "4e140cfd41293dfee2569ed4bf8d475f29a358ee3bf7eeca923e4d5773952a7d",
+      "projectSha256": "f7b5504f9ea0b975fe133b1eef7d53dc1c1a5c3ea57c3bfd508313f5cc74a07d",
+      "passed": true
+    }
+  ],
+  "levels": [
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\scene.azurelevel",
+      "beforeSha256": "40049e3cb007cfd751cf2c481a75f7b0d4b343febc14bd60fa02aa31564ce5cf",
+      "afterSha256": "680623ed1b7652c09de2db30743cfec11f1290aa93052fa67d70ff797c30f25d"
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\playable-safe.azurelevel",
+      "beforeSha256": "db953530a5f8768a9180b1154032196ec6a803763c0fae5eff852bbe5dc53ede",
+      "afterSha256": "203adf60765316437384f5cdcbb43a3df3795afe6812db0ebaf0887931180970"
+    }
+  ],
+  "comparisons": {
+    "project": {
+      "changedPixels": 75335,
+      "maxByteDifference": 162
+    },
+    "playable-safe": {
+      "changedPixels": 102896,
+      "maxByteDifference": 154
+    }
+  }
+}

@@ -1,0 +1,1934 @@
+{
+  "status": "qualified-reference-depth-stencil-coverage",
+  "overall": "failed-user-review",
+  "sceneRendererApi": 17,
+  "baseCommit": "3896adf96dd8d338f46a0f04449090e64f437e7d",
+  "acceptedMaximumByteError": 1,
+  "fixture": {
+    "files": [
+      {
+        "relative": "assets/captured-rim-policy.azurematerial",
+        "bytes": 146,
+        "sha256": "ce7baa8b50676f0a625656be9658a885864aa008bdc8cf0916fdd368ef322610"
+      },
+      {
+        "relative": "assets/captured-rim-policy.azurematerial.azmeta",
+        "bytes": 102,
+        "sha256": "9713de607cbd28be933ca04d4538b4482da8aa060b27e728748008134fba4963"
+      },
+      {
+        "relative": "assets/hair-coverage.azurelevel",
+        "bytes": 15661,
+        "sha256": "85d82573dca382b236ba1e54f83e22625f703092ca9c6225c3b04fc6705c2c2d"
+      },
+      {
+        "relative": "character/captured-hair-normal.dds",
+        "bytes": 5592580,
+        "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54"
+      },
+      {
+        "relative": "character/captured-hair-normal.dds.azmeta",
+        "bytes": 449,
+        "sha256": "bc0ceb65e52c31e1beec370ab08324c9f78d36da9f74ea0602ffd8485cda00e0"
+      },
+      {
+        "relative": "character/cloth-receiver-normal-authored.dds",
+        "bytes": 5592580,
+        "sha256": "34bbb19e3e85d2477a2c657e6956514b62866424982584b5c92df8d90bbbcf26"
+      },
+      {
+        "relative": "character/cloth-receiver-normal-authored.dds.azmeta",
+        "bytes": 449,
+        "sha256": "3729331732c863451c67cd47c568c7dfdbd8ebf99065214e7340744cffc8134a"
+      },
+      {
+        "relative": "character/hair-base-coverage.dds",
+        "bytes": 22369768,
+        "sha256": "0bf35700e233f4b70351b604ac5e2a187fc5bddcc3a4805e68d105178d387cdf"
+      },
+      {
+        "relative": "character/hair-base-coverage.dds.azmeta",
+        "bytes": 276,
+        "sha256": "89f3a09368493d4152d2cc2e9eb1358bd7aa57c0e47bd178d818c3b02370606a"
+      },
+      {
+        "relative": "character/hair-coverage.glb",
+        "bytes": 118803312,
+        "sha256": "105fc0beabee922af4dcda15de4888784bf4677d3d70fb943e67a200fadde1e7"
+      },
+      {
+        "relative": "character/hair-native-mask.dds",
+        "bytes": 349700,
+        "sha256": "afcc37dc11b59e370e722f99c800702288d6cd0db4f1ee62c4bf9ab6ca0e453e"
+      },
+      {
+        "relative": "character/hair-native-mask.dds.azmeta",
+        "bytes": 284,
+        "sha256": "fda0cd1353d35fc30499bababe7108dc7b55f1953a7d888327cb13e08715dc38"
+      },
+      {
+        "relative": "character/native-captured-body/t12.dds",
+        "bytes": 32916,
+        "sha256": "6cf915c33198d3afd064ab182e0378e96a1daea49e6ab2dd52ffc9f376d68b86"
+      },
+      {
+        "relative": "character/native-captured-body/t12.dds.azmeta",
+        "bytes": 248,
+        "sha256": "c9d6333d1c222df672cc44a3bd2a04f4c3b38a69ea52776e7acc61da82988efc"
+      },
+      {
+        "relative": "character/native-captured-body/t14.dds",
+        "bytes": 1398276,
+        "sha256": "2ac9344b3693fefd3b74ecfc2b4f6212920b1754173b8212a8f35fcea634a068"
+      },
+      {
+        "relative": "character/native-captured-body/t14.dds.azmeta",
+        "bytes": 313,
+        "sha256": "40e77548c2e30bf462b0c73b7682fcdbb809cc36a5a1ccf44ab9b982d9e354af"
+      },
+      {
+        "relative": "character/native-captured-body/t15.dds",
+        "bytes": 1398256,
+        "sha256": "3d16ddcced1a4f482f969250b835c5ea569ce620d8ef16cc465fc19cbb266a9e"
+      },
+      {
+        "relative": "character/native-captured-body/t15.dds.azmeta",
+        "bytes": 315,
+        "sha256": "34d6e6c85fb219367669af101852aa97e69b50aa6f86259c78647fe9fd38667b"
+      },
+      {
+        "relative": "character/native-cloth-04/t11.dds",
+        "bytes": 1152,
+        "sha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653"
+      },
+      {
+        "relative": "character/native-cloth-04/t11.dds.azmeta",
+        "bytes": 308,
+        "sha256": "5e236bb42f260f9d93ebfb96ad00cde286b8c7696a9db54b566d226efccdcf62"
+      },
+      {
+        "relative": "character/native-cloth-04/t12.dds",
+        "bytes": 262272,
+        "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+      },
+      {
+        "relative": "character/native-cloth-04/t12.dds.azmeta",
+        "bytes": 308,
+        "sha256": "5721acbb474adc88f7aced20f4469abe0afdf8a733e44936c063c9fcf780fbea"
+      },
+      {
+        "relative": "character/native-cloth-04/t16.dds",
+        "bytes": 5592580,
+        "sha256": "c7ea4150acd1461cfe37bf7bfacdb197dd05ab7193e1ca245ab445c4e2fb2324"
+      },
+      {
+        "relative": "character/native-cloth-04/t16.dds.azmeta",
+        "bytes": 313,
+        "sha256": "da711fd4600449805a0ecd012d47fb995744e9ce5d83c5d53775a3d24626b17e"
+      },
+      {
+        "relative": "character/native-cloth-04/t17.dds",
+        "bytes": 22369748,
+        "sha256": "38a520d6eca0f00bb8cb852679ddcd2fe1bf9c6cac7fa725c5918a5d8139dedd"
+      },
+      {
+        "relative": "character/native-cloth-04/t17.dds.azmeta",
+        "bytes": 315,
+        "sha256": "3219753dc58632e55ffb6382a03ae121b8f975fee7605179d076c93a953979fd"
+      },
+      {
+        "relative": "character/native-cloth-04/t18.dds",
+        "bytes": 5592560,
+        "sha256": "434c6c5aad9ba8fe14a594e86f331d1d0a0bad72f6fc5b1e7579c12dc1595b2a"
+      },
+      {
+        "relative": "character/native-cloth-04/t18.dds.azmeta",
+        "bytes": 315,
+        "sha256": "cd2b4563b895a54aa2fd7d66b1845f6034ae7c39e2cfb76eb731461af8357da5"
+      },
+      {
+        "relative": "character/native-coverage.dds",
+        "bytes": 349700,
+        "sha256": "a093f699c9c13b33a5943dedb93be626dea9ba5f60b715d44f5f8c54bbd2327a"
+      },
+      {
+        "relative": "character/native-coverage.dds.azmeta",
+        "bytes": 447,
+        "sha256": "049a068f29023607ac692fd6ec1f3c06cd95ce3b5758f544ea298dd898a6300b"
+      },
+      {
+        "relative": "character/native-textures/t12.dds",
+        "bytes": 349700,
+        "sha256": "388813b5465244f3f07a2a383021ca470f60bbd08aa3d4d7daa801a8c09aeaa4"
+      },
+      {
+        "relative": "character/native-textures/t12.dds.azmeta",
+        "bytes": 275,
+        "sha256": "26b33755b6147c0ccd111c34135d2e672f8bcc382a4543b0c7ad7d306aab0feb"
+      },
+      {
+        "relative": "character/native-textures/t13.dds",
+        "bytes": 1152,
+        "sha256": "6f0bdcb7d4da88f997622f690688683380a208bf7bd929ef55522e5edadace05"
+      },
+      {
+        "relative": "character/native-textures/t13.dds.azmeta",
+        "bytes": 275,
+        "sha256": "6685acf498b42fac7a5c835a7d05d825357dae277f9208703f6dd81cc0595878"
+      },
+      {
+        "relative": "character/native-textures/t14.dds",
+        "bytes": 262272,
+        "sha256": "cb0c4a5bf2eb2dcf6b4abc7bec66fe1b7dc6400a79efc49811484b35d17993d4"
+      },
+      {
+        "relative": "character/native-textures/t14.dds.azmeta",
+        "bytes": 275,
+        "sha256": "199e566d2b499f5f0e6e14d62d4bfbde1c0eb38ab117d0ec2bc07d475984bad5"
+      },
+      {
+        "relative": "character/native-textures/t16.dds",
+        "bytes": 5592580,
+        "sha256": "4a382264f75c816ccf8fdf70c5e4bccfcf6dc5b31d74c1fcb92b29a9bd556643"
+      },
+      {
+        "relative": "character/native-textures/t16.dds.azmeta",
+        "bytes": 276,
+        "sha256": "dacb8a62aa4be5365c908e59ad3b2c1986bb989f47a77cbd96334aca8cb5c85a"
+      },
+      {
+        "relative": "character/native-textures/t17.dds",
+        "bytes": 5592580,
+        "sha256": "12df068935abc56ac44d86c08a5b342e748f85f5ef3b6d2048485064d8292995"
+      },
+      {
+        "relative": "character/native-textures/t17.dds.azmeta",
+        "bytes": 276,
+        "sha256": "bac274600e7eb80e83ec42184de60626ca36ed5d8aa2e27d7ca16c14952f55fd"
+      },
+      {
+        "relative": "character/native-textures/t18.dds",
+        "bytes": 5592580,
+        "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54"
+      },
+      {
+        "relative": "character/native-textures/t18.dds.azmeta",
+        "bytes": 276,
+        "sha256": "424080184b3c22c286c90596bc4e843a0beedb5d5801be069539208b84a6a33d"
+      },
+      {
+        "relative": "config/object-visibility-profile-v1.bin",
+        "bytes": 2097152,
+        "sha256": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+      },
+      {
+        "relative": "config/reference-views.json",
+        "bytes": 3691,
+        "sha256": "16835eb74fe5af7cb9a6f0df2f6309016f6d0d945293bc985d146f73639333bb"
+      },
+      {
+        "relative": "hair-coverage.azureproject",
+        "bytes": 312,
+        "sha256": "2fa150253f5641bd67c1da3bb854efb1acd90c7dd90e76232996e63ce043c393"
+      }
+    ],
+    "binarySha256": "b62271e93723e77dc58cee463b5607ee1bfa011b6dd44deb7448c8ca1203fe76",
+    "onlyReferenceStencilPolicyChanged": true,
+    "policies": {
+      "M_actor_laevat_brow_01": {
+        "schemaVersion": 1,
+        "role": "protect"
+      },
+      "M_actor_laevat_iris_01": {
+        "schemaVersion": 1,
+        "role": "protect"
+      },
+      "M_actor_laevat_hair_01": {
+        "schemaVersion": 1,
+        "role": "respect"
+      }
+    },
+    "sameDdsSha256": "34bbb19e3e85d2477a2c657e6956514b62866424982584b5c92df8d90bbbcf26",
+    "sameSamplerSha256": "3729331732c863451c67cd47c568c7dfdbd8ebf99065214e7340744cffc8134a"
+  },
+  "schema": {
+    "schemaSha256": "8a2df38b0f759cf01aa25f3795a6d58bbb66feef3e90f22395f40be1d0f1173a",
+    "scope": "Profile version gate and referenceDepthStencil property",
+    "cases": {
+      "ordinaryVersionOne": true,
+      "ordinaryVersionTwo": true,
+      "protectVersionTwo": true,
+      "respectVersionTwo": true,
+      "protectVersionOne": false,
+      "unknownVersion": false,
+      "unknownRole": false,
+      "unknownField": false,
+      "missingRole": false
+    }
+  },
+  "red": {
+    "configuration": "Release",
+    "mode": "red",
+    "default": {
+      "depth": {
+        "protectedWithRear": 0.021739130839705467,
+        "clearedByFront": 0.021739130839705467,
+        "open": 0.021739130839705467,
+        "clippedProtection": 0.021739130839705467,
+        "maskedProtection": 0.021739130839705467
+      },
+      "normals": {
+        "protectedWithRear": 3221748225,
+        "clearedByFront": 3221748225,
+        "open": 3221748225,
+        "clippedProtection": 3221748225,
+        "maskedProtection": 3221748225
+      },
+      "sha256": {
+        "raster": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+        "hardware": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+        "packedNormals": "30cdf31826497160d464f4cd70e63aab9c0a424fe49954dbef8f229af4e70f3d",
+        "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+      }
+    },
+    "selected": {
+      "exitCode": 1,
+      "diagnostic": "unknown field referenceDepthStencil"
+    },
+    "expected": {
+      "protectedWithRear": 0.02,
+      "clearedByFront": 0.02173913043478261,
+      "open": 0.02173913043478261,
+      "clippedProtection": 0.02173913043478261,
+      "maskedProtection": 0.02
+    },
+    "playerSha256": "8ae5a86910e4c43650e1ea872aaece49396a5d138f1418613f5c18f9af861cec"
+  },
+  "controls": {
+    "release-nvidia": {
+      "configuration": "Release",
+      "mode": "green",
+      "default": {
+        "depth": {
+          "protectedWithRear": 0.021739130839705467,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.021739130839705467
+        },
+        "normals": {
+          "protectedWithRear": 3221748225,
+          "clearedByFront": 3221748225,
+          "open": 3221748225,
+          "clippedProtection": 3221748225,
+          "maskedProtection": 3221748225
+        },
+        "sha256": {
+          "raster": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+          "hardware": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+          "packedNormals": "30cdf31826497160d464f4cd70e63aab9c0a424fe49954dbef8f229af4e70f3d",
+          "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      },
+      "selected": {
+        "depth": {
+          "protectedWithRear": 0.020000001415610313,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.020000001415610313
+        },
+        "normals": {
+          "protectedWithRear": 3222269441,
+          "clearedByFront": 3221748225,
+          "open": 3221748225,
+          "clippedProtection": 3221748225,
+          "maskedProtection": 3222269441
+        },
+        "sha256": {
+          "raster": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+          "hardware": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+          "packedNormals": "bf96fd8067b15fe7cae532f52b85af755b6be94c93b49af46c2e792ce320c631",
+          "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      },
+      "expected": {
+        "protectedWithRear": 0.02,
+        "clearedByFront": 0.02173913043478261,
+        "open": 0.02173913043478261,
+        "clippedProtection": 0.02173913043478261,
+        "maskedProtection": 0.02
+      },
+      "indexed": {
+        "depth": {
+          "protectedWithRear": 0.020000001415610313,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.020000001415610313
+        },
+        "normals": {
+          "protectedWithRear": 3222269441,
+          "clearedByFront": 3221748225,
+          "open": 3221748225,
+          "clippedProtection": 3221748225,
+          "maskedProtection": 3222269441
+        },
+        "sha256": {
+          "raster": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+          "hardware": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+          "packedNormals": "bf96fd8067b15fe7cae532f52b85af755b6be94c93b49af46c2e792ce320c631",
+          "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      },
+      "depthOnly": {
+        "depth": {
+          "protectedWithRear": 0.020000001415610313,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.020000001415610313
+        },
+        "normals": null,
+        "sha256": {
+          "raster": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+          "hardware": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7"
+        }
+      },
+      "invalid": {
+        "exitCode": 1,
+        "diagnostic": "referenceDepthStencil"
+      },
+      "playerSha256": "a3ad2745d042202b51de8abeabc8ce5e1ad768400d7ce2ac6b6fbd4995d851c2"
+    },
+    "release-intel": {
+      "configuration": "Release",
+      "mode": "green",
+      "default": {
+        "depth": {
+          "protectedWithRear": 0.021739130839705467,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.021739130839705467
+        },
+        "normals": {
+          "protectedWithRear": 3221748225,
+          "clearedByFront": 3221748225,
+          "open": 3221748225,
+          "clippedProtection": 3221748225,
+          "maskedProtection": 3221748225
+        },
+        "sha256": {
+          "raster": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+          "hardware": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+          "packedNormals": "30cdf31826497160d464f4cd70e63aab9c0a424fe49954dbef8f229af4e70f3d",
+          "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      },
+      "selected": {
+        "depth": {
+          "protectedWithRear": 0.019999999552965164,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.019999999552965164
+        },
+        "normals": {
+          "protectedWithRear": 3222269441,
+          "clearedByFront": 3221748225,
+          "open": 3221748225,
+          "clippedProtection": 3221748225,
+          "maskedProtection": 3222269441
+        },
+        "sha256": {
+          "raster": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+          "hardware": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+          "packedNormals": "bf96fd8067b15fe7cae532f52b85af755b6be94c93b49af46c2e792ce320c631",
+          "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      },
+      "expected": {
+        "protectedWithRear": 0.02,
+        "clearedByFront": 0.02173913043478261,
+        "open": 0.02173913043478261,
+        "clippedProtection": 0.02173913043478261,
+        "maskedProtection": 0.02
+      },
+      "indexed": {
+        "depth": {
+          "protectedWithRear": 0.019999999552965164,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.019999999552965164
+        },
+        "normals": {
+          "protectedWithRear": 3222269441,
+          "clearedByFront": 3221748225,
+          "open": 3221748225,
+          "clippedProtection": 3221748225,
+          "maskedProtection": 3222269441
+        },
+        "sha256": {
+          "raster": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+          "hardware": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+          "packedNormals": "bf96fd8067b15fe7cae532f52b85af755b6be94c93b49af46c2e792ce320c631",
+          "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      },
+      "depthOnly": {
+        "depth": {
+          "protectedWithRear": 0.019999999552965164,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.019999999552965164
+        },
+        "normals": null,
+        "sha256": {
+          "raster": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+          "hardware": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c"
+        }
+      },
+      "invalid": {
+        "exitCode": 1,
+        "diagnostic": "referenceDepthStencil"
+      },
+      "playerSha256": "a3ad2745d042202b51de8abeabc8ce5e1ad768400d7ce2ac6b6fbd4995d851c2"
+    },
+    "debug-nvidia": {
+      "configuration": "Debug",
+      "mode": "green",
+      "default": {
+        "depth": {
+          "protectedWithRear": 0.021739130839705467,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.021739130839705467
+        },
+        "normals": {
+          "protectedWithRear": 3221748225,
+          "clearedByFront": 3221748225,
+          "open": 3221748225,
+          "clippedProtection": 3221748225,
+          "maskedProtection": 3221748225
+        },
+        "sha256": {
+          "raster": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+          "hardware": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+          "packedNormals": "30cdf31826497160d464f4cd70e63aab9c0a424fe49954dbef8f229af4e70f3d",
+          "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      },
+      "selected": {
+        "depth": {
+          "protectedWithRear": 0.020000001415610313,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.020000001415610313
+        },
+        "normals": {
+          "protectedWithRear": 3222269441,
+          "clearedByFront": 3221748225,
+          "open": 3221748225,
+          "clippedProtection": 3221748225,
+          "maskedProtection": 3222269441
+        },
+        "sha256": {
+          "raster": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+          "hardware": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+          "packedNormals": "bf96fd8067b15fe7cae532f52b85af755b6be94c93b49af46c2e792ce320c631",
+          "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      },
+      "expected": {
+        "protectedWithRear": 0.02,
+        "clearedByFront": 0.02173913043478261,
+        "open": 0.02173913043478261,
+        "clippedProtection": 0.02173913043478261,
+        "maskedProtection": 0.02
+      },
+      "indexed": {
+        "depth": {
+          "protectedWithRear": 0.020000001415610313,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.020000001415610313
+        },
+        "normals": {
+          "protectedWithRear": 3222269441,
+          "clearedByFront": 3221748225,
+          "open": 3221748225,
+          "clippedProtection": 3221748225,
+          "maskedProtection": 3222269441
+        },
+        "sha256": {
+          "raster": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+          "hardware": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+          "packedNormals": "bf96fd8067b15fe7cae532f52b85af755b6be94c93b49af46c2e792ce320c631",
+          "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      },
+      "depthOnly": {
+        "depth": {
+          "protectedWithRear": 0.020000001415610313,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.020000001415610313
+        },
+        "normals": null,
+        "sha256": {
+          "raster": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+          "hardware": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7"
+        }
+      },
+      "invalid": {
+        "exitCode": 1,
+        "diagnostic": "referenceDepthStencil"
+      },
+      "playerSha256": "6964742dc8891d274dd34266bfe17fcd9dfb2dcbdf0024e2b9d4d0ee0592a169"
+    },
+    "debug-intel": {
+      "configuration": "Debug",
+      "mode": "green",
+      "default": {
+        "depth": {
+          "protectedWithRear": 0.021739130839705467,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.021739130839705467
+        },
+        "normals": {
+          "protectedWithRear": 3221748225,
+          "clearedByFront": 3221748225,
+          "open": 3221748225,
+          "clippedProtection": 3221748225,
+          "maskedProtection": 3221748225
+        },
+        "sha256": {
+          "raster": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+          "hardware": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+          "packedNormals": "30cdf31826497160d464f4cd70e63aab9c0a424fe49954dbef8f229af4e70f3d",
+          "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      },
+      "selected": {
+        "depth": {
+          "protectedWithRear": 0.019999999552965164,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.019999999552965164
+        },
+        "normals": {
+          "protectedWithRear": 3222269441,
+          "clearedByFront": 3221748225,
+          "open": 3221748225,
+          "clippedProtection": 3221748225,
+          "maskedProtection": 3222269441
+        },
+        "sha256": {
+          "raster": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+          "hardware": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+          "packedNormals": "bf96fd8067b15fe7cae532f52b85af755b6be94c93b49af46c2e792ce320c631",
+          "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      },
+      "expected": {
+        "protectedWithRear": 0.02,
+        "clearedByFront": 0.02173913043478261,
+        "open": 0.02173913043478261,
+        "clippedProtection": 0.02173913043478261,
+        "maskedProtection": 0.02
+      },
+      "indexed": {
+        "depth": {
+          "protectedWithRear": 0.019999999552965164,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.019999999552965164
+        },
+        "normals": {
+          "protectedWithRear": 3222269441,
+          "clearedByFront": 3221748225,
+          "open": 3221748225,
+          "clippedProtection": 3221748225,
+          "maskedProtection": 3222269441
+        },
+        "sha256": {
+          "raster": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+          "hardware": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+          "packedNormals": "bf96fd8067b15fe7cae532f52b85af755b6be94c93b49af46c2e792ce320c631",
+          "objectIds": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+        }
+      },
+      "depthOnly": {
+        "depth": {
+          "protectedWithRear": 0.019999999552965164,
+          "clearedByFront": 0.021739130839705467,
+          "open": 0.021739130839705467,
+          "clippedProtection": 0.021739130839705467,
+          "maskedProtection": 0.019999999552965164
+        },
+        "normals": null,
+        "sha256": {
+          "raster": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+          "hardware": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c"
+        }
+      },
+      "invalid": {
+        "exitCode": 1,
+        "diagnostic": "referenceDepthStencil"
+      },
+      "playerSha256": "6964742dc8891d274dd34266bfe17fcd9dfb2dcbdf0024e2b9d4d0ee0592a169"
+    }
+  },
+  "builds": {
+    "release": {
+      "configuration": "Release",
+      "shaderCount": 895,
+      "changedShaders": {},
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility|MaterialCoverage)|AzureEngine[.]ProjectReferenceViews|AzureAssets[.]MaterialDocument|AzureEditor[.]ProjectFlow)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\release-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 8,
+      "playerSha256": "a3ad2745d042202b51de8abeabc8ce5e1ad768400d7ce2ac6b6fbd4995d851c2"
+    },
+    "debug": {
+      "configuration": "Debug",
+      "shaderCount": 895,
+      "changedShaders": {},
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility|MaterialCoverage)|AzureEngine[.]ProjectReferenceViews|AzureAssets[.]MaterialDocument)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\debug-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 7,
+      "playerSha256": "6964742dc8891d274dd34266bfe17fcd9dfb2dcbdf0024e2b9d4d0ee0592a169"
+    },
+    "release-nvidia-gpu": {
+      "configuration": "Release",
+      "shaderCount": 895,
+      "changedShaders": {},
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu|SurfaceResponseGpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\release-nvidia-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 5,
+      "playerSha256": "a3ad2745d042202b51de8abeabc8ce5e1ad768400d7ce2ac6b6fbd4995d851c2"
+    },
+    "release-intel-gpu": {
+      "configuration": "Release",
+      "shaderCount": 895,
+      "changedShaders": {},
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu|SurfaceResponseGpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\release-intel-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 5,
+      "playerSha256": "a3ad2745d042202b51de8abeabc8ce5e1ad768400d7ce2ac6b6fbd4995d851c2"
+    },
+    "debug-nvidia-gpu": {
+      "configuration": "Debug",
+      "shaderCount": 895,
+      "changedShaders": {},
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu|SurfaceResponseGpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\debug-nvidia-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 5,
+      "playerSha256": "6964742dc8891d274dd34266bfe17fcd9dfb2dcbdf0024e2b9d4d0ee0592a169"
+    },
+    "debug-intel-gpu": {
+      "configuration": "Debug",
+      "shaderCount": 895,
+      "changedShaders": {},
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu|SurfaceResponseGpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\debug-intel-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "tests": 5,
+      "playerSha256": "6964742dc8891d274dd34266bfe17fcd9dfb2dcbdf0024e2b9d4d0ee0592a169"
+    }
+  },
+  "buildExecution": {
+    "release-build": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 192.875,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+    },
+    "release-cpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 27.81199999997625,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\verify-build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "debug-build": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 98.57799999997951,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\build.py",
+        "Debug"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+    },
+    "debug-cpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 21.625,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\verify-build.py",
+        "Debug"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "release-nvidia-stencil-control": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 43.17200000002049,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\stencil-reference-control.py",
+        "green",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "release-nvidia-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 12.89100000000326,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\verify-build.py",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "release-nvidia-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 28.32799999997951,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\capture.py",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "release-intel-stencil-control": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 51.11000000004424,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\stencil-reference-control.py",
+        "green",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "release-intel-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 2.5160000000032596,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\verify-build.py",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "release-intel-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 27.64100000000326,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\capture.py",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "debug-nvidia-stencil-control": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 31.26600000000326,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\stencil-reference-control.py",
+        "green",
+        "Debug",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "debug-nvidia-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 14.061999999976251,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\verify-build.py",
+        "Debug",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "debug-nvidia-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 64.85899999999674,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\capture.py",
+        "Debug",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "debug-intel-stencil-control": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 28.530999999959022,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\stencil-reference-control.py",
+        "green",
+        "Debug",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "debug-intel-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 2.672000000020489,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\verify-build.py",
+        "Debug",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    },
+    "debug-intel-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 63.89000000001397,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\capture.py",
+        "Debug",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-110307-reference-depth-stencil-coverage-198047\\tmp"
+    }
+  },
+  "captures": {
+    "release-nvidia": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "playerSha256": "a3ad2745d042202b51de8abeabc8ce5e1ad768400d7ce2ac6b6fbd4995d851c2",
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 410,
+        "baselineOverOne": 520,
+        "closed": 110,
+        "introduced": 0,
+        "maximum": 45,
+        "changed": 137
+      },
+      "receiverByOwner": {
+        "296": {
+          "pixels": 496,
+          "overOne": 30,
+          "baselineOverOne": 140,
+          "closed": 110,
+          "introduced": 0,
+          "maximum": 31,
+          "changed": 137
+        },
+        "310": {
+          "pixels": 255,
+          "overOne": 0,
+          "baselineOverOne": 0,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 1,
+          "changed": 0
+        },
+        "328": {
+          "pixels": 9116,
+          "overOne": 46,
+          "baselineOverOne": 46,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 23,
+          "changed": 0
+        },
+        "345": {
+          "pixels": 3825,
+          "overOne": 130,
+          "baselineOverOne": 130,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 45,
+          "changed": 0
+        },
+        "377": {
+          "pixels": 16629,
+          "overOne": 158,
+          "baselineOverOne": 158,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 44,
+          "changed": 0
+        },
+        "422": {
+          "pixels": 19063,
+          "overOne": 46,
+          "baselineOverOne": 46,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 23,
+          "changed": 0
+        }
+      },
+      "referenceDepthSha256": "bc832118865b9ffbe6ce78ae04b668e0f0c751662c2d674ef12bd8976df96fa4",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "normalChangedPixels": 135,
+      "depthChangedPixels": 153,
+      "protectedCrop": {
+        "pixels": 751,
+        "changedDepth": 153,
+        "changedNormals": 135,
+        "changedDepthOutside": 0,
+        "changedNormalsOutside": 0
+      },
+      "nativeOverlap": {
+        "points": 135,
+        "depthWithinOneBefore": 0,
+        "depthWithinOneAfter": 135,
+        "medianDepthErrorBefore": 63671.0,
+        "medianDepthErrorAfter": 0.0
+      },
+      "firstVisibilityChannelExact": true,
+      "hairVisibilityExact": true,
+      "hairColorExact": true,
+      "hairVisibilityOverOne": 0,
+      "hairColorOverOne": 0,
+      "validationClean": true,
+      "allocatorZero": true,
+      "visibilitySha256": "aeb454d861e0ec9406deacdc8ffc316ad08bfdcf28133a2bf24e76d01251423a",
+      "normalsSha256": "a4937165a5c006849c67950c789157d08a7d9bb54f7450a23533bad31f624566",
+      "colorSha256": [
+        "2bc122571923c00fe910a62fa0bbaba717d174794380cc5c94d3f1c0c2f48a16",
+        "2bc122571923c00fe910a62fa0bbaba717d174794380cc5c94d3f1c0c2f48a16",
+        "2bc122571923c00fe910a62fa0bbaba717d174794380cc5c94d3f1c0c2f48a16"
+      ]
+    },
+    "release-intel": {
+      "configuration": "Release",
+      "device": "intel",
+      "playerSha256": "a3ad2745d042202b51de8abeabc8ce5e1ad768400d7ce2ac6b6fbd4995d851c2",
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 742,
+        "baselineOverOne": 851,
+        "closed": 109,
+        "introduced": 0,
+        "maximum": 201,
+        "changed": 137
+      },
+      "receiverByOwner": {
+        "296": {
+          "pixels": 496,
+          "overOne": 30,
+          "baselineOverOne": 139,
+          "closed": 109,
+          "introduced": 0,
+          "maximum": 31,
+          "changed": 137
+        },
+        "310": {
+          "pixels": 255,
+          "overOne": 2,
+          "baselineOverOne": 2,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 6,
+          "changed": 0
+        },
+        "328": {
+          "pixels": 9116,
+          "overOne": 77,
+          "baselineOverOne": 77,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 34,
+          "changed": 0
+        },
+        "345": {
+          "pixels": 3825,
+          "overOne": 135,
+          "baselineOverOne": 135,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 29,
+          "changed": 0
+        },
+        "377": {
+          "pixels": 16629,
+          "overOne": 224,
+          "baselineOverOne": 224,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 201,
+          "changed": 0
+        },
+        "422": {
+          "pixels": 19063,
+          "overOne": 274,
+          "baselineOverOne": 274,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 93,
+          "changed": 0
+        }
+      },
+      "referenceDepthSha256": "1b7784f61a5638fd4c52491f829b46dfdb05fd74decc612c3810a3ea080b83a5",
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "normalChangedPixels": 135,
+      "depthChangedPixels": 153,
+      "protectedCrop": {
+        "pixels": 751,
+        "changedDepth": 153,
+        "changedNormals": 135,
+        "changedDepthOutside": 0,
+        "changedNormalsOutside": 0
+      },
+      "nativeOverlap": {
+        "points": 135,
+        "depthWithinOneBefore": 0,
+        "depthWithinOneAfter": 126,
+        "medianDepthErrorBefore": 63671.0,
+        "medianDepthErrorAfter": 0.0
+      },
+      "firstVisibilityChannelExact": true,
+      "hairVisibilityExact": true,
+      "hairColorExact": true,
+      "hairVisibilityOverOne": 208,
+      "hairColorOverOne": 575,
+      "validationClean": true,
+      "allocatorZero": true,
+      "visibilitySha256": "57940f9469bb7cc59288387b12487f19f2f6b64329f5b5e6bfd6e167cae1669a",
+      "normalsSha256": "79f72c6f5f32c332d7426d7739f7218777c60120aafb9ba25bfa8d0984600b60",
+      "colorSha256": [
+        "0d3149241eec0650000b3e2edd1fd2d46ee51a984b29f2c2d52730b201b0352c",
+        "0d3149241eec0650000b3e2edd1fd2d46ee51a984b29f2c2d52730b201b0352c",
+        "0d3149241eec0650000b3e2edd1fd2d46ee51a984b29f2c2d52730b201b0352c"
+      ]
+    },
+    "debug-nvidia": {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "playerSha256": "6964742dc8891d274dd34266bfe17fcd9dfb2dcbdf0024e2b9d4d0ee0592a169",
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 410,
+        "baselineOverOne": 520,
+        "closed": 110,
+        "introduced": 0,
+        "maximum": 45,
+        "changed": 137
+      },
+      "receiverByOwner": {
+        "296": {
+          "pixels": 496,
+          "overOne": 30,
+          "baselineOverOne": 140,
+          "closed": 110,
+          "introduced": 0,
+          "maximum": 31,
+          "changed": 137
+        },
+        "310": {
+          "pixels": 255,
+          "overOne": 0,
+          "baselineOverOne": 0,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 1,
+          "changed": 0
+        },
+        "328": {
+          "pixels": 9116,
+          "overOne": 46,
+          "baselineOverOne": 46,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 23,
+          "changed": 0
+        },
+        "345": {
+          "pixels": 3825,
+          "overOne": 130,
+          "baselineOverOne": 130,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 45,
+          "changed": 0
+        },
+        "377": {
+          "pixels": 16629,
+          "overOne": 158,
+          "baselineOverOne": 158,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 44,
+          "changed": 0
+        },
+        "422": {
+          "pixels": 19063,
+          "overOne": 46,
+          "baselineOverOne": 46,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 23,
+          "changed": 0
+        }
+      },
+      "referenceDepthSha256": "bc832118865b9ffbe6ce78ae04b668e0f0c751662c2d674ef12bd8976df96fa4",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "normalChangedPixels": 135,
+      "depthChangedPixels": 153,
+      "protectedCrop": {
+        "pixels": 751,
+        "changedDepth": 153,
+        "changedNormals": 135,
+        "changedDepthOutside": 0,
+        "changedNormalsOutside": 0
+      },
+      "nativeOverlap": {
+        "points": 135,
+        "depthWithinOneBefore": 0,
+        "depthWithinOneAfter": 135,
+        "medianDepthErrorBefore": 63671.0,
+        "medianDepthErrorAfter": 0.0
+      },
+      "firstVisibilityChannelExact": true,
+      "hairVisibilityExact": true,
+      "hairColorExact": true,
+      "hairVisibilityOverOne": 0,
+      "hairColorOverOne": 0,
+      "validationClean": true,
+      "allocatorZero": true,
+      "visibilitySha256": "aeb454d861e0ec9406deacdc8ffc316ad08bfdcf28133a2bf24e76d01251423a",
+      "normalsSha256": "a4937165a5c006849c67950c789157d08a7d9bb54f7450a23533bad31f624566",
+      "colorSha256": [
+        "2bc122571923c00fe910a62fa0bbaba717d174794380cc5c94d3f1c0c2f48a16",
+        "2bc122571923c00fe910a62fa0bbaba717d174794380cc5c94d3f1c0c2f48a16",
+        "2bc122571923c00fe910a62fa0bbaba717d174794380cc5c94d3f1c0c2f48a16"
+      ]
+    },
+    "debug-intel": {
+      "configuration": "Debug",
+      "device": "intel",
+      "playerSha256": "6964742dc8891d274dd34266bfe17fcd9dfb2dcbdf0024e2b9d4d0ee0592a169",
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 742,
+        "baselineOverOne": 851,
+        "closed": 109,
+        "introduced": 0,
+        "maximum": 201,
+        "changed": 137
+      },
+      "receiverByOwner": {
+        "296": {
+          "pixels": 496,
+          "overOne": 30,
+          "baselineOverOne": 139,
+          "closed": 109,
+          "introduced": 0,
+          "maximum": 31,
+          "changed": 137
+        },
+        "310": {
+          "pixels": 255,
+          "overOne": 2,
+          "baselineOverOne": 2,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 6,
+          "changed": 0
+        },
+        "328": {
+          "pixels": 9116,
+          "overOne": 77,
+          "baselineOverOne": 77,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 34,
+          "changed": 0
+        },
+        "345": {
+          "pixels": 3825,
+          "overOne": 135,
+          "baselineOverOne": 135,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 29,
+          "changed": 0
+        },
+        "377": {
+          "pixels": 16629,
+          "overOne": 224,
+          "baselineOverOne": 224,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 201,
+          "changed": 0
+        },
+        "422": {
+          "pixels": 19063,
+          "overOne": 274,
+          "baselineOverOne": 274,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 93,
+          "changed": 0
+        }
+      },
+      "referenceDepthSha256": "1b7784f61a5638fd4c52491f829b46dfdb05fd74decc612c3810a3ea080b83a5",
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "normalChangedPixels": 135,
+      "depthChangedPixels": 153,
+      "protectedCrop": {
+        "pixels": 751,
+        "changedDepth": 153,
+        "changedNormals": 135,
+        "changedDepthOutside": 0,
+        "changedNormalsOutside": 0
+      },
+      "nativeOverlap": {
+        "points": 135,
+        "depthWithinOneBefore": 0,
+        "depthWithinOneAfter": 126,
+        "medianDepthErrorBefore": 63671.0,
+        "medianDepthErrorAfter": 0.0
+      },
+      "firstVisibilityChannelExact": true,
+      "hairVisibilityExact": true,
+      "hairColorExact": true,
+      "hairVisibilityOverOne": 208,
+      "hairColorOverOne": 575,
+      "validationClean": true,
+      "allocatorZero": true,
+      "visibilitySha256": "57940f9469bb7cc59288387b12487f19f2f6b64329f5b5e6bfd6e167cae1669a",
+      "normalsSha256": "79f72c6f5f32c332d7426d7739f7218777c60120aafb9ba25bfa8d0984600b60",
+      "colorSha256": [
+        "0d3149241eec0650000b3e2edd1fd2d46ee51a984b29f2c2d52730b201b0352c",
+        "0d3149241eec0650000b3e2edd1fd2d46ee51a984b29f2c2d52730b201b0352c",
+        "0d3149241eec0650000b3e2edd1fd2d46ee51a984b29f2c2d52730b201b0352c"
+      ]
+    }
+  },
+  "overlapDepth": {
+    "nativeNvidiaMinusIntel": {
+      "-7": 1,
+      "-2": 5,
+      "-1": 44,
+      "0": 73,
+      "1": 8,
+      "2": 1,
+      "5": 2,
+      "8": 1
+    },
+    "cases": {
+      "release-nvidia": {
+        "points": 135,
+        "toFrozenNvidia": {
+          "-1": 9,
+          "0": 126
+        },
+        "toNativeOnSameAdapter": {
+          "-1": 9,
+          "0": 126
+        }
+      },
+      "release-intel": {
+        "points": 135,
+        "toFrozenNvidia": {
+          "-8": 1,
+          "-5": 2,
+          "-2": 1,
+          "-1": 12,
+          "0": 75,
+          "1": 39,
+          "2": 4,
+          "7": 1
+        },
+        "toNativeOnSameAdapter": {
+          "-2": 2,
+          "-1": 7,
+          "0": 126
+        }
+      },
+      "debug-nvidia": {
+        "points": 135,
+        "toFrozenNvidia": {
+          "-1": 9,
+          "0": 126
+        },
+        "toNativeOnSameAdapter": {
+          "-1": 9,
+          "0": 126
+        }
+      },
+      "debug-intel": {
+        "points": 135,
+        "toFrozenNvidia": {
+          "-8": 1,
+          "-5": 2,
+          "-2": 1,
+          "-1": 12,
+          "0": 75,
+          "1": 39,
+          "2": 4,
+          "7": 1
+        },
+        "toNativeOnSameAdapter": {
+          "-2": 2,
+          "-1": 7,
+          "0": 126
+        }
+      }
+    }
+  },
+  "crossConfigurationExact": true,
+  "originalFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "depthCaptureAbsent": true,
+    "allExact": true,
+    "playerSha256": "a3ad2745d042202b51de8abeabc8ce5e1ad768400d7ce2ac6b6fbd4995d851c2",
+    "projectSha256": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "taskBytes": 444179340,
+    "taskBudgetBytes": 536870912
+  },
+  "archive": {
+    "bytes": 461709,
+    "sha256": "c226b49efe9d39d27c0adfd2b51b8afbb86c3c775743c7ff71c3c735e3988779",
+    "contents": {
+      "run/analyze-residuals.py": "4e905e41187279d806124b98099e16c58114c522fdb1b2210c2fd287f82f1dbf",
+      "run/archive_debug_symbols.py": "02117e35d91028ad384ffa62766e3a35552e72fe6d6fba7e4b7377a7a7e94863",
+      "run/budget.json": "536e50a5fc549126582aea405c7a7a66386eeda99673d6f9fe65505eaf9f37a2",
+      "run/build.py": "6db582adc15612c4559cd5dbb9bf01b27ef5214481c1c887e3c444ca6e796bde",
+      "run/capture.py": "651509701dbda279509ed8f41312aa61e74007e5888fea68e3e29066f5e6f984",
+      "run/CharacterSceneRenderer-typecheck.log": "54d23819c0081d5ff1a0a31d86acd76392df31c3433f0e3dab220bd0e8d13ab7",
+      "run/claim-inputs.py": "52ba7db9b622433d14ecd2e6255c01d21ae1f61d462bcc3bafe1ab182028ba6b",
+      "run/compact-capture.py": "fef2983594dc535968b6b1dfe29b4510d02901dd2e51110ffe4148a53cdfd6a9",
+      "run/compare-overlap.py": "0a4f030fed44645ea114234593def8f1b49b168491e67aeb785f00cf16fc0bbb",
+      "run/debug-baseline-shaders.json": "750cfcad7706655ee3f21bda80f3ea7f485b8efe876455632af08ccddc0153c7",
+      "run/debug-budget-preparation.json": "98b82d3d4c28e3db69b0708d0386ab30aa94a7d6464980dba7fee950ad51363d",
+      "run/debug-build-commands.json": "b771490ea8085a1afcdc120feacab746805d3ebcb52a91dd14b3cbd9220d2c5d",
+      "run/debug-build-execution.json": "cc438ce69e159d756b6a4e3c564b65861344302863bc3509302712990d3127f8",
+      "run/debug-build-lease-held.json": "9bb04badf4b88ffcfd8a21a34d136f501743f273c904fc884d9ce335b959b4ec",
+      "run/debug-build-lease-released.json": "a76bb3599a72bfbf934099b92e1440c38b3122e21b4fab89b613048211e505ad",
+      "run/debug-build.log": "4e01a40f0e66ccca556c9ea58cd9968704ba67cac35331a8c7332c0090e3cfc2",
+      "run/debug-capture-lease-held.json": "0f3e8872961099c73727711c9f9a80c4a395be9dae7497bf9d886ccd881f53e7",
+      "run/debug-capture-lease-released.json": "eeb33a8feb5757287203225d61dfe65c6425e4ff65b8d1dd49de710132c1ea5b",
+      "run/debug-cpu-tests-execution.json": "be79fc9c969744502ce5f328eafa8b724158fb763733b60dc201693e05b40991",
+      "run/debug-ctest.log": "c1fd03ad320e3bca502fb595eb709ed941dd9e88ceed52ed65b683dc26519e75",
+      "run/debug-ctest.xml": "01837f94059c0ef09af7531442972434229f7b0abe7168565a84bbb7445cceb7",
+      "run/debug-intel-capture-execution.json": "9237d03a971e31c5b3e99fe87a5535a2038c82a67a54b9d7e5d89ebf101829d1",
+      "run/debug-intel-command.json": "345b653d2832fcf98164db90209dda34219b704ff70692273b0ea84126c28272",
+      "run/debug-intel-gpu-ctest.log": "165b17bd051ad212ee29dab4584fa25413a02d833c7b7efa7283d75a9182c4dd",
+      "run/debug-intel-gpu-ctest.xml": "2813294c04bf0dd411f4cda8f30aa5185a67595a6ab3f9bc3175b3289ebf1c87",
+      "run/debug-intel-gpu-tests-execution.json": "abe9bf9348e7f464e5a2fa8e23bb9a80c44ee9b7a3a7ba115dd4132d12911cd9",
+      "run/debug-intel-gpu-verification.json": "1e1850b59890721db0ee9953199d4a9a8a40845437c1b2198042b452c51fb1f9",
+      "run/debug-intel-results.json": "4aa8b58afb4dd2d60135fa29663eb7bae8631a06255c20d4a15999a7bd26dd16",
+      "run/debug-intel-stencil-control-execution.json": "93100aa0a3e4dc87d0f8a76156c4355338f07e0f1cd5ee3c8d31a3461b11cd04",
+      "run/debug-intel.log": "4039f48ecf1fe8efb98254402034d6803df784d408ab67140dd70cbd718540dd",
+      "run/debug-nvidia-capture-execution.json": "b1bc57ae3be4f4c4560830e8c14c3244f11f55071cfca35838b15330cfd7f85f",
+      "run/debug-nvidia-command.json": "84b42872dfa78dc8d0f3c157a32ebe9e935d13e2ad699f25f1d28aa480f81294",
+      "run/debug-nvidia-gpu-ctest.log": "f69a26607a7db8a993e4892fdbcc36ef51c2bbf1675461ab6af552ab93f93cf3",
+      "run/debug-nvidia-gpu-ctest.xml": "d2a3690abea8f3490bb01bd321100ec7e8bcdfdf77255404f2908f5567fd9f0d",
+      "run/debug-nvidia-gpu-tests-execution.json": "3bccb4e5f58fd9dcaf2ebe0619b5ebd0be96f39c1ee263664a0a20d42da9ac57",
+      "run/debug-nvidia-gpu-verification.json": "bf5f68e921e66ddd87d17f481ebfc5a7d32c538d56291653432eb89cb06b9d3f",
+      "run/debug-nvidia-results.json": "8317a6d68290ba1e175123259e64231619f47130decbf795c5c3626ebf3192ea",
+      "run/debug-nvidia-stencil-control-execution.json": "27a6e5ef019078e348bc5d9a5a3b282b6ca16e4027d1da4f2c05d5173bd459f4",
+      "run/debug-nvidia.log": "e644f54b0012b6f036c03ac89c8473a9eb1f8507c2ee7ea9aa6b09df416e9382",
+      "run/debug-prepare-execution.json": "0a971b6b5d4b366221bf4273a784caebc13973f611e3dea51052c199555534a3",
+      "run/debug-symbols.json": "33080155dbab8f82a0c99de9b989df0ebd3d68a3c6ad00d3841b7d02b3423f7e",
+      "run/debug-verification.json": "7eb893253a9ce9302d3b89381fdb3d4abaf4a3af5e622c6e55d0963cab2ed879",
+      "run/default-four-command.json": "c5dcab15f5ddc1a1a41e27ad82b76852c6b00bb70755b3e62bcf821a09065557",
+      "run/default-four-results.json": "bd4be841cab0ff736860c644033cd9c6f09dc53575357a5ba01f1c60d49599bd",
+      "run/default-four.log": "b34276f9add3728dfd0a303b17e5d49bdecd86e98f7e47927618011063adb974",
+      "run/default-four.py": "f3d9d1fcf1d9a36b187f58e83f4f36b30140641c387701fa817ae39547636da9",
+      "run/default-runtime.json": "8a532b46fa97623dbc82cfa452c889bf835aa95089a6ec0fba99a40dbfec5b26",
+      "run/fixture-inputs.json": "4a0a882836332beb0562e0f65b188e0fed1acec80f8bba19e2ccfb529deeb337",
+      "run/GltfLoader-typecheck.log": "822143bb2b6571a6de6d33df959e967be4f284883696dbccca95168b88df1b14",
+      "run/implement.py": "da54cc31b3e18a4eaa42053f9637abf6967a1f5ad65de1dcd6f06ac72fdf562e",
+      "run/implementation-plan.md": "0a1af9a9ffd99173c71ee2a324d3dc9cb9152048b343958bbd0e6bdf4bcd9d14",
+      "run/intel-indexed-capability.log": "4abcc2eeb7edc366adae7a936e2070dd09091416a3e30ada2eccd789e43e19ba",
+      "run/MaterialData-typecheck.log": "92406a6ad454e9135726f84e28ba783e486b62007b36f079823c17570c91c17d",
+      "run/original-four-execution.json": "f89f8f011c5c1784afd58469d72a8e8564d196a45c0a08c47d45597cdceeeae7",
+      "run/original-four-lease-held.json": "1383ff6eee57746f2fcd9ec2f088f4b9746db285a5889b3ec7721dcf63da1478",
+      "run/original-four-lease-released.json": "a18a5e8abdb2a61027358a3f375b24d048a05ddaf31f9b462ed25d75a03f7b83",
+      "run/overlap-depth-release-debug.json": "fdc99d06827ed52b690f84ef0b4b81e81c6fb6b46ad5196d301d005024f2627f",
+      "run/overlap-depth-release.json": "4e181870b37769a88fbd00877c8e9af68585ee7a5236839db9ca43f5e2d98d62",
+      "run/package-evidence.py": "25923d1e6b258b2297118459a2a9171a9720f70faa8cb194f19764b3cf233612",
+      "run/prepare-debug-budget.py": "0b6f34a4139fcabc90815e7bf3eb5981aeac55c78f6f7b437a3b4461bf955b5c",
+      "run/prepare-fixture.py": "d7fdfedb4628ef26f3f9acdad967a9c6e17eaa8efc12b3b44d0dc219b8334a68",
+      "run/process.log": "bd4be841cab0ff736860c644033cd9c6f09dc53575357a5ba01f1c60d49599bd",
+      "run/queued-build.py": "ac3ac2fb6c3b831522690613ab4a1e3c6534cf250dec8b36c0bf862ebc14f8b8",
+      "run/queued-control.py": "51f4bb471aae71722b7a30ff774ba62a4a0cfdc2b23f9ea859f5e759d95b3474",
+      "run/receiver-residual-attribution.json": "94e6da5017a4caadf91d2b39cef1ad36abce88bee0c2997a980e10de5a00d623",
+      "run/red-stencil-control-release-execution.json": "3b3d837561c24ffdebb6bf07e4750d987f5523ec86e08611d2b2419eb4395a5f",
+      "run/red-stencil-control-release-lease-held.json": "3087b197178c06f39f6398ef582a92e7c067f899228c384d72feb94e3bb8d89f",
+      "run/red-stencil-control-release-lease-released.json": "37eec80f4e6a1cfb04be1f8034bfed0d2fd7ae26b28366ab630b1880bcee5d54",
+      "run/reference-consumer.patch": "b5317a85d5fdf61c0465e7c08b73ad516cf6d6d75dabe8af93514059cd414fbc",
+      "run/release-baseline-shaders.json": "750cfcad7706655ee3f21bda80f3ea7f485b8efe876455632af08ccddc0153c7",
+      "run/release-build-commands.json": "cd33053b855f42e298ac1f0c8db397e454e5fc90d949ab0211c5966c9a1a9d09",
+      "run/release-build-execution.json": "97b07e76079fca380a921249dd5a0c908f59a1c05631fe572768ef0ed4842fb6",
+      "run/release-build-lease-held.json": "d8ffc7369326c683da43156412d14ce22f4299da8681657394162570cec98224",
+      "run/release-build-lease-released.json": "1b8c6cf85227f09aa6f051982e134d84dd343d8b66f37a2d01435062d191c36c",
+      "run/release-build.log": "f69eebe9a27749a2dc952239fe8807f878f671ac34581b35aef00d7e1fef1479",
+      "run/release-capture-first-lease-held.json": "9ee5b514f74e694be4900c80c065b94dda9fb7b138ad14ebcb735eac98f8f22f",
+      "run/release-capture-first-lease-released.json": "c995c95d8b9232e62cf847bd624394c6d35563b9d452d6f7d6e689c4b8c37d3e",
+      "run/release-capture-five-materials-lease-held.json": "4a89991f541657e120a1cb3abf820eda54eca38c37a635b81242ff6150e428ae",
+      "run/release-capture-five-materials-lease-released.json": "64d3988657fc4811bac66b7215aeb7dc97dba65b26fc85f8a823846ed46bde2d",
+      "run/release-capture-lease-held.json": "be2136b2464d77d3d0ab5a41393cfa18f2dd2ac8ca0673fba577fee77753ea27",
+      "run/release-capture-lease-released.json": "66791eea832747fc0e36e69278bb0ef7827e955f778c02078a945b13d1691098",
+      "run/release-cpu-tests-execution.json": "0afe4c21cfeeb853d276823c7228e1c35da901c306b62dfe43c3ee611ff7bed3",
+      "run/release-ctest.log": "783e7deddfcbc45311d38024be67da3afdc2f7b002ac2f3f5cfbafb72753b4a2",
+      "run/release-ctest.xml": "4a4053053b0c1dc121a16f0391fa9bebe0283441ce4d25d26c17be336b6ac5b2",
+      "run/release-intel-capture-execution.json": "f2f0ede78eef03ef3d887a727a854522eed9042361410ae468754051055c0979",
+      "run/release-intel-command.json": "f47da894fc9ea55116b4b0dd5643bb8d7fb5a6be9efde7defc7a0acd6865d543",
+      "run/release-intel-gpu-ctest.log": "46f93f95ac5d2365d4dfeb0dca0483daac8531063de940f68fc1f46375cc19ed",
+      "run/release-intel-gpu-ctest.xml": "97fede5949e12fd2500bc79bcb8e5971a6b4599c48ba5914bd8a87821e5f5414",
+      "run/release-intel-gpu-tests-execution.json": "c426b02294e901bd2faa7fc885fed62a1bf142205e1f361131e16505da8f4f81",
+      "run/release-intel-gpu-verification.json": "119c389434de4f4566c7a4b938075d35092f56ab395d6d5a5a55a3c193c48a0c",
+      "run/release-intel-results.json": "ff2db2680222257e1abd9135d014b5e7214bd56b5909ed3d5b3c5edbf0bec881",
+      "run/release-intel-stencil-control-execution.json": "93ba79cc6a240f637cbe6e6b98163d6924bada2e4e50c2c9c262f3236a041390",
+      "run/release-intel-stencil-control-five-materials-execution.json": "b4ecb9d262386059ec903c7473f3050aad5b5098924cee2c42f0575108df2635",
+      "run/release-intel.log": "c2f18f985de44074e257770d8dfeaf77aef5c698e784b010a5ecaf8f67d625b3",
+      "run/release-nvidia-capture-execution.json": "1efab21f1acd8c1b9f8697c0f76bdfa04d75a5f76da9040bc442220d8b16c26d",
+      "run/release-nvidia-capture-first-execution.json": "92da4f239da1c224cb924172e5d6b40b7c8356fb43da40af126a0b34ea491639",
+      "run/release-nvidia-capture-first.log": "272127cdfb21488da597d78a9f4b8569cda1bc3d6baa0d0fcda8a7867ab2cefd",
+      "run/release-nvidia-command.json": "c1f18f54db322f5469c20b8fb69fbeb86212dc2bdf47d84dcc3a2b184d77282d",
+      "run/release-nvidia-gpu-ctest.log": "0731a61c707379e2a529212020758d7d3606ee50e229f9d0bc1cadc6d1cd171d",
+      "run/release-nvidia-gpu-ctest.xml": "4f248e293386f1ddc8f788e7c405d6b7cbce96b114def9daf188dc426f7bffea",
+      "run/release-nvidia-gpu-tests-execution.json": "5e2871ce2cda535e366744f54dc08846e58e1ded519479d1aadc72d8f2800031",
+      "run/release-nvidia-gpu-verification.json": "eef16d160cbc471c36c2c6ba92c3ffad7c7a3a1d92cdc4cbfbc14adbb03ebcb5",
+      "run/release-nvidia-results.json": "eb0a22638d025ff855937618db3ba55e24e7eb9440e87a9f76e6253e94402158",
+      "run/release-nvidia-stencil-control-execution.json": "8cf9fdf8974feb753b5bf5ba18aae660a17a2e0d9952e082d5d05cd74f765428",
+      "run/release-nvidia-stencil-control-five-materials-execution.json": "61b8190a604e86fa85f3e71531458e626eb07a04394d8ce8f9a95e8759792cb8",
+      "run/release-nvidia.log": "9245a6df5337ba2ef022127f0530fca3a3f0f70847ff05a8ba6fcb5ac3a03a04",
+      "run/release-verification.json": "43429fdce437a2462650535288d6f88596bdc0bf65040620b84add879088133f",
+      "run/rhi-contract.patch": "8e4596039942025c0f6c27c486d182089d183567e47f7b14135ef6001e944e74",
+      "run/schema-verification.json": "948610b11b60433948913496a97599299be0751d5087df17555e03d29a3b6c7e",
+      "run/stencil-reference-control.py": "06bd7dbb4759fd26271db1fd051df9358ab4bfa3af2c1fbee366b02eff6893ef",
+      "run/task-card.json": "5e3addcbb887eb2002a9d47222c99e42c11500b631994eb3274d7f3bfd0cdc9e",
+      "run/typecheck.json": "c9255513e4a485d20ddcadbd358e247fb6664d8e9e9e351b9cd171389e06f345",
+      "run/typecheck.py": "5b84c79c020ff707a96172d7e76d161454ea3f3aa88b7f75ee5429e2a9dcee9a",
+      "run/verify-build.py": "2ad53f28c0888f0afccd15b1c28822d1d241c8876314c5d47ac6924a0d034a14",
+      "run/verify-schema.ps1": "d157088bee181d81bfcee71d7797ebd022c6aec4af56205ff0ea91dbb1bf3023",
+      "run/VulkanRhi-typecheck.log": "0ba244e089b8f97a58c937def0351bdec7509f695006f95d98e14980638fc686",
+      "run/release-nvidia-frames/capture_manifest.json": "1676c0d76865b47f933160749bf387fdf2f958f9dc717c0b3a15eb13991dea2d",
+      "run/release-nvidia-frames/gpu_capabilities.json": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54",
+      "run/release-nvidia-frames/reference-planes.json": "a7cb759cf8cd5feb3ad915cddea9c15f080e25839fc34e66a21eb25c52bcd2da",
+      "run/release-intel-frames/capture_manifest.json": "ea5b04d015847bf39b1f74667eaa7baf20e8876a70aa5bff788709a05d8d2e71",
+      "run/release-intel-frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "run/release-intel-frames/reference-planes.json": "ff55f2e88e61407a5236abee94b98955946ccd74db0ae9da2ab1e4592a6137bd",
+      "run/debug-nvidia-frames/capture_manifest.json": "8e9701b5559df2932e90556792af47d87223f5e9cfac6a8383b2690182f31103",
+      "run/debug-nvidia-frames/gpu_capabilities.json": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54",
+      "run/debug-nvidia-frames/reference-planes.json": "a7cb759cf8cd5feb3ad915cddea9c15f080e25839fc34e66a21eb25c52bcd2da",
+      "run/debug-intel-frames/capture_manifest.json": "ab0926036e4b208235afd32380415b784a426ad241acac1d36af6ff14da71ab9",
+      "run/debug-intel-frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "run/debug-intel-frames/reference-planes.json": "ff55f2e88e61407a5236abee94b98955946ccd74db0ae9da2ab1e4592a6137bd",
+      "run/red-stencil-control-release-nvidia/default-fixed/command.json": "98a0b6bb209b8b4c25597c7849c6d0df2b7c876c22c8501dde661af50439f19b",
+      "run/red-stencil-control-release-nvidia/default-fixed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/red-stencil-control-release-nvidia/default-fixed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/red-stencil-control-release-nvidia/default-fixed/frames/capture_manifest.json": "717a7722d832bbd5478f580098f4023f94c1051d6ecb2731fac7c7d898d39490",
+      "run/red-stencil-control-release-nvidia/default-fixed/frames/reference-depth-d32.bin": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+      "run/red-stencil-control-release-nvidia/default-fixed/frames/reference-depth-r32.bin": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+      "run/red-stencil-control-release-nvidia/default-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/red-stencil-control-release-nvidia/default-fixed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/red-stencil-control-release-nvidia/default-fixed/plane.gltf": "fafb0be667c0621814f0dcfa1349beedaef5103fce260e7fa2fdacc5b961885a",
+      "run/red-stencil-control-release-nvidia/default-fixed/player.log": "efafe71a98ab169080f202c5b756bc6696957da0446def5232d1d4c0484dcea1",
+      "run/red-stencil-control-release-nvidia/stencil-fixed/command.json": "dc8c1ac9fbe72d634e99818d7ac4206673ca615dad55d128779dbc9dc74ff34c",
+      "run/red-stencil-control-release-nvidia/stencil-fixed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/red-stencil-control-release-nvidia/stencil-fixed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/red-stencil-control-release-nvidia/stencil-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/red-stencil-control-release-nvidia/stencil-fixed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/red-stencil-control-release-nvidia/stencil-fixed/plane.gltf": "b9fa9f1fbe149f09aa2af6bf03123be2878b4702273182d59dbae87821da8028",
+      "run/red-stencil-control-release-nvidia/stencil-fixed/player.log": "cb1f00464b719486844f97a2dbc59f83f09b3a5fcff2681fd50e2ac5a990ed0c",
+      "run/red-stencil-control-release-nvidia/summary.json": "afa153bb84cc855047b6873e07580f6b1d407be3dcb7ed9efa22d477816194ed",
+      "run/green-stencil-control-release-nvidia/default-fixed/command.json": "8c2288b32f663ac095643cbedd1ba4f2dc93c4c6be499413f74b2f1a61a40374",
+      "run/green-stencil-control-release-nvidia/default-fixed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-release-nvidia/default-fixed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-release-nvidia/default-fixed/frames/capture_manifest.json": "f39af10b6b272255fd42f35689605dd17c833ba84114555ae2fd73958221c776",
+      "run/green-stencil-control-release-nvidia/default-fixed/frames/reference-depth-d32.bin": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+      "run/green-stencil-control-release-nvidia/default-fixed/frames/reference-depth-r32.bin": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+      "run/green-stencil-control-release-nvidia/default-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-release-nvidia/default-fixed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-release-nvidia/default-fixed/plane.gltf": "a00c423bad1e8110f0c5eb64657ec9831582f947e37e5b6280369b1ba3ba4d8b",
+      "run/green-stencil-control-release-nvidia/default-fixed/player.log": "c08453383a0390c4509758719b6b0ff664a70e34e158eb2fb6d70dc53cf1cb68",
+      "run/green-stencil-control-release-nvidia/invalid-role/command.json": "386e383a5a3501ec28d0317bd22d970747d19768f24e8ace0500f24b8c0adbc4",
+      "run/green-stencil-control-release-nvidia/invalid-role/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-release-nvidia/invalid-role/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-release-nvidia/invalid-role/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-release-nvidia/invalid-role/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-release-nvidia/invalid-role/plane.gltf": "cd94eae0c70a7daef5af30b69a9842f669d98b3e874db8237563622195b00251",
+      "run/green-stencil-control-release-nvidia/invalid-role/player.log": "c25285210cdafa2e57da56220c2764ddcf3b1ae1dcd6ae6c1732500397d54299",
+      "run/green-stencil-control-release-nvidia/stencil-depth-only/command.json": "f91d89ee2c5e42975b33aaa164903e855bc6960436ca51c39b27af21661596e3",
+      "run/green-stencil-control-release-nvidia/stencil-depth-only/config/reference-views.json": "5653e87a5d941c818e43fdddd7897a47e34d06598aba1f9054fb71942c9f94f0",
+      "run/green-stencil-control-release-nvidia/stencil-depth-only/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-release-nvidia/stencil-depth-only/frames/capture_manifest.json": "8c94016b143d33b183dc1cc97a21494c0dd31d865bd00926196a89e00fe081cc",
+      "run/green-stencil-control-release-nvidia/stencil-depth-only/frames/reference-depth-d32.bin": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+      "run/green-stencil-control-release-nvidia/stencil-depth-only/frames/reference-depth-r32.bin": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+      "run/green-stencil-control-release-nvidia/stencil-depth-only/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-release-nvidia/stencil-depth-only/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-release-nvidia/stencil-depth-only/plane.gltf": "26fa3e8e49dfa8cce6fa2b7c5a2dbe9d9cbca040622ca1d6a0dbb4e076e5fc7e",
+      "run/green-stencil-control-release-nvidia/stencil-depth-only/player.log": "026b8703d86b31d249f6cf62932721d95928aec92e704f96535b4c42ddde226f",
+      "run/green-stencil-control-release-nvidia/stencil-fixed/command.json": "df123c0f5cffa569286687cb7a5a669b38e5a0d457dd9d4eb9d06a27652409a6",
+      "run/green-stencil-control-release-nvidia/stencil-fixed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-release-nvidia/stencil-fixed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-release-nvidia/stencil-fixed/frames/capture_manifest.json": "1edc0eb098b06438cb8a7d25407758f2386c7d86a4d2d82e5f1acc8fd5a753bf",
+      "run/green-stencil-control-release-nvidia/stencil-fixed/frames/reference-depth-d32.bin": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+      "run/green-stencil-control-release-nvidia/stencil-fixed/frames/reference-depth-r32.bin": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+      "run/green-stencil-control-release-nvidia/stencil-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-release-nvidia/stencil-fixed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-release-nvidia/stencil-fixed/plane.gltf": "26fa3e8e49dfa8cce6fa2b7c5a2dbe9d9cbca040622ca1d6a0dbb4e076e5fc7e",
+      "run/green-stencil-control-release-nvidia/stencil-fixed/player.log": "bab727f714e17a34a495c78f3549e9622122a7db2dc934cb5caba47e653f27bb",
+      "run/green-stencil-control-release-nvidia/stencil-indexed/command.json": "cc76548f7ba54eace2e441a9f5b2dab3e10f5fcd1a327a18d1aa7b0217125ae7",
+      "run/green-stencil-control-release-nvidia/stencil-indexed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-release-nvidia/stencil-indexed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-release-nvidia/stencil-indexed/frames/capture_manifest.json": "b4f53e3ee6e478362a3cf3299fac3d149dee670f085add88e165b13dbea69b18",
+      "run/green-stencil-control-release-nvidia/stencil-indexed/frames/reference-depth-d32.bin": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+      "run/green-stencil-control-release-nvidia/stencil-indexed/frames/reference-depth-r32.bin": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+      "run/green-stencil-control-release-nvidia/stencil-indexed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-release-nvidia/stencil-indexed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-release-nvidia/stencil-indexed/plane.gltf": "26fa3e8e49dfa8cce6fa2b7c5a2dbe9d9cbca040622ca1d6a0dbb4e076e5fc7e",
+      "run/green-stencil-control-release-nvidia/stencil-indexed/player.log": "ac87fb1d8200988f05425ae065f2049712e9cbc2f5883f65fce8ce558d779430",
+      "run/green-stencil-control-release-nvidia/summary.json": "0401912a533407980c76d63a89d268b3827d18b61ea9143be3127ed235f7ef5f",
+      "run/green-stencil-control-release-intel/default-fixed/command.json": "09d170ca072b38782833aed44ee37b62721601957145837959642f5f868b556b",
+      "run/green-stencil-control-release-intel/default-fixed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-release-intel/default-fixed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-release-intel/default-fixed/frames/capture_manifest.json": "bcc491fe9e3d1f1faa443183a119877acbddc2b489aa945ee98530e0953df8b6",
+      "run/green-stencil-control-release-intel/default-fixed/frames/reference-depth-d32.bin": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+      "run/green-stencil-control-release-intel/default-fixed/frames/reference-depth-r32.bin": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+      "run/green-stencil-control-release-intel/default-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-release-intel/default-fixed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-release-intel/default-fixed/plane.gltf": "a00c423bad1e8110f0c5eb64657ec9831582f947e37e5b6280369b1ba3ba4d8b",
+      "run/green-stencil-control-release-intel/default-fixed/player.log": "0b983e1d96990ab49edf56e1a1b793ebb52a12415e55113cc25f26cc51f75c14",
+      "run/green-stencil-control-release-intel/invalid-role/command.json": "8be4f6d4d623f6cfc4c7e61fa845bee24709119db99f92a39122573f23e21e79",
+      "run/green-stencil-control-release-intel/invalid-role/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-release-intel/invalid-role/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-release-intel/invalid-role/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-release-intel/invalid-role/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-release-intel/invalid-role/plane.gltf": "cd94eae0c70a7daef5af30b69a9842f669d98b3e874db8237563622195b00251",
+      "run/green-stencil-control-release-intel/invalid-role/player.log": "2baac99475210373182f867551886f0f403a74d4d86c150736085d7f5d72ce28",
+      "run/green-stencil-control-release-intel/stencil-depth-only/command.json": "036146fb46e207553231c1c11e79330422ec2026b18271d5003bbff2907038d1",
+      "run/green-stencil-control-release-intel/stencil-depth-only/config/reference-views.json": "5653e87a5d941c818e43fdddd7897a47e34d06598aba1f9054fb71942c9f94f0",
+      "run/green-stencil-control-release-intel/stencil-depth-only/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-release-intel/stencil-depth-only/frames/capture_manifest.json": "58280aeeab9a4bf1b7edf6983488c621b4d656849cc7e935955f97a249faa623",
+      "run/green-stencil-control-release-intel/stencil-depth-only/frames/reference-depth-d32.bin": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+      "run/green-stencil-control-release-intel/stencil-depth-only/frames/reference-depth-r32.bin": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+      "run/green-stencil-control-release-intel/stencil-depth-only/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-release-intel/stencil-depth-only/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-release-intel/stencil-depth-only/plane.gltf": "26fa3e8e49dfa8cce6fa2b7c5a2dbe9d9cbca040622ca1d6a0dbb4e076e5fc7e",
+      "run/green-stencil-control-release-intel/stencil-depth-only/player.log": "ce70dc33a9536d296973c14f270254f6df1528082a02a5449ca0f71479ed9ce2",
+      "run/green-stencil-control-release-intel/stencil-fixed/command.json": "4af6f7dcbed48997056774050420debd1283c12c655c63265958356a6146a128",
+      "run/green-stencil-control-release-intel/stencil-fixed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-release-intel/stencil-fixed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-release-intel/stencil-fixed/frames/capture_manifest.json": "c770e04e3d0ccdce5cd45c2d6294ed7afba8add5be0456312696a71eba1fd1a5",
+      "run/green-stencil-control-release-intel/stencil-fixed/frames/reference-depth-d32.bin": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+      "run/green-stencil-control-release-intel/stencil-fixed/frames/reference-depth-r32.bin": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+      "run/green-stencil-control-release-intel/stencil-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-release-intel/stencil-fixed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-release-intel/stencil-fixed/plane.gltf": "26fa3e8e49dfa8cce6fa2b7c5a2dbe9d9cbca040622ca1d6a0dbb4e076e5fc7e",
+      "run/green-stencil-control-release-intel/stencil-fixed/player.log": "d39a2e8b446ff25a3631e421e90a465c57b833b8db530bd697da0329ad780454",
+      "run/green-stencil-control-release-intel/stencil-indexed/command.json": "58b2327fe0c3430abfc75daa07f764566fdaf135bd9394203ec6abbf65d78774",
+      "run/green-stencil-control-release-intel/stencil-indexed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-release-intel/stencil-indexed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-release-intel/stencil-indexed/frames/capture_manifest.json": "77cc100e489aca6afc55452a5ae1ff6df2e35d6e094c62c449f40815df45ce32",
+      "run/green-stencil-control-release-intel/stencil-indexed/frames/reference-depth-d32.bin": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+      "run/green-stencil-control-release-intel/stencil-indexed/frames/reference-depth-r32.bin": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+      "run/green-stencil-control-release-intel/stencil-indexed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-release-intel/stencil-indexed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-release-intel/stencil-indexed/plane.gltf": "26fa3e8e49dfa8cce6fa2b7c5a2dbe9d9cbca040622ca1d6a0dbb4e076e5fc7e",
+      "run/green-stencil-control-release-intel/stencil-indexed/player.log": "30a9009bf1e56ff9c0f985f84c711a06e9b104a415d4645853fc1cbe2dfd560f",
+      "run/green-stencil-control-release-intel/summary.json": "f89499dbb95c78807a5d99ccc326846c4393f5e069b6d99e92d6cb9e7904ba56",
+      "run/green-stencil-control-debug-nvidia/default-fixed/command.json": "4dde36c3b93c86cee8d0c25ab9684b9f378eeb5897234c4fda0a8df433722ddf",
+      "run/green-stencil-control-debug-nvidia/default-fixed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-debug-nvidia/default-fixed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-debug-nvidia/default-fixed/frames/capture_manifest.json": "ea80fe6299ef362cf202c95fc36be2edfe766f3e4813d86de19da84e70400da3",
+      "run/green-stencil-control-debug-nvidia/default-fixed/frames/reference-depth-d32.bin": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+      "run/green-stencil-control-debug-nvidia/default-fixed/frames/reference-depth-r32.bin": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+      "run/green-stencil-control-debug-nvidia/default-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-debug-nvidia/default-fixed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-debug-nvidia/default-fixed/plane.gltf": "a00c423bad1e8110f0c5eb64657ec9831582f947e37e5b6280369b1ba3ba4d8b",
+      "run/green-stencil-control-debug-nvidia/default-fixed/player.log": "0dcb4df1337de948771394396e3522b6da498a7201936414c298e55c18e486df",
+      "run/green-stencil-control-debug-nvidia/invalid-role/command.json": "79a27caed80c1aa8afe38bc73a7da7263265b00fd3c9f15efb0fef13d0e8aa43",
+      "run/green-stencil-control-debug-nvidia/invalid-role/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-debug-nvidia/invalid-role/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-debug-nvidia/invalid-role/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-debug-nvidia/invalid-role/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-debug-nvidia/invalid-role/plane.gltf": "cd94eae0c70a7daef5af30b69a9842f669d98b3e874db8237563622195b00251",
+      "run/green-stencil-control-debug-nvidia/invalid-role/player.log": "27e14b0c395ecf276f9c0e8f6106a44a1b2d7f2ce7776ce961eae35364cdd9d9",
+      "run/green-stencil-control-debug-nvidia/stencil-depth-only/command.json": "4369f957845f16fa33c4d32d6d444be670954eb97cf47822ad3e27920cc5ef6a",
+      "run/green-stencil-control-debug-nvidia/stencil-depth-only/config/reference-views.json": "5653e87a5d941c818e43fdddd7897a47e34d06598aba1f9054fb71942c9f94f0",
+      "run/green-stencil-control-debug-nvidia/stencil-depth-only/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-debug-nvidia/stencil-depth-only/frames/capture_manifest.json": "4e9c5b5ac43d6137ed6f39a8a4ccbd02351836e5b5fd3f596c77e38eb7c649f9",
+      "run/green-stencil-control-debug-nvidia/stencil-depth-only/frames/reference-depth-d32.bin": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+      "run/green-stencil-control-debug-nvidia/stencil-depth-only/frames/reference-depth-r32.bin": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+      "run/green-stencil-control-debug-nvidia/stencil-depth-only/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-debug-nvidia/stencil-depth-only/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-debug-nvidia/stencil-depth-only/plane.gltf": "26fa3e8e49dfa8cce6fa2b7c5a2dbe9d9cbca040622ca1d6a0dbb4e076e5fc7e",
+      "run/green-stencil-control-debug-nvidia/stencil-depth-only/player.log": "f32f6d3e1105f822fd61e85b59eb1802adb1af6350261465fad883afeb48d0a3",
+      "run/green-stencil-control-debug-nvidia/stencil-fixed/command.json": "e209c98313d00357e11cdd2794af68e74e2f29018b6b10c5ca26f063ca2f24a1",
+      "run/green-stencil-control-debug-nvidia/stencil-fixed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-debug-nvidia/stencil-fixed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-debug-nvidia/stencil-fixed/frames/capture_manifest.json": "aa0e1d6b45d3d427695f5920fada60a1cc0fb57736cb58e335b688f197b28c28",
+      "run/green-stencil-control-debug-nvidia/stencil-fixed/frames/reference-depth-d32.bin": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+      "run/green-stencil-control-debug-nvidia/stencil-fixed/frames/reference-depth-r32.bin": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+      "run/green-stencil-control-debug-nvidia/stencil-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-debug-nvidia/stencil-fixed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-debug-nvidia/stencil-fixed/plane.gltf": "26fa3e8e49dfa8cce6fa2b7c5a2dbe9d9cbca040622ca1d6a0dbb4e076e5fc7e",
+      "run/green-stencil-control-debug-nvidia/stencil-fixed/player.log": "d8090cf78fcf5c78cc542f8b874686eb38f3897621591d63d356624804be7e5e",
+      "run/green-stencil-control-debug-nvidia/stencil-indexed/command.json": "ca6c428972133301c76033c14d3314d86b42c29490d80063bbaa89e7222d27e5",
+      "run/green-stencil-control-debug-nvidia/stencil-indexed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-debug-nvidia/stencil-indexed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-debug-nvidia/stencil-indexed/frames/capture_manifest.json": "de673b3256a4089339edc8c8cb195a3adf8800410a04a8318c5ef66e5cc53215",
+      "run/green-stencil-control-debug-nvidia/stencil-indexed/frames/reference-depth-d32.bin": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+      "run/green-stencil-control-debug-nvidia/stencil-indexed/frames/reference-depth-r32.bin": "ffc59582f68f1b20ac47c1f802a94082131d77014fa8305dbec61e257a14bfd7",
+      "run/green-stencil-control-debug-nvidia/stencil-indexed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-debug-nvidia/stencil-indexed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-debug-nvidia/stencil-indexed/plane.gltf": "26fa3e8e49dfa8cce6fa2b7c5a2dbe9d9cbca040622ca1d6a0dbb4e076e5fc7e",
+      "run/green-stencil-control-debug-nvidia/stencil-indexed/player.log": "c177d72b6b4b212642e9cf7a9da648962c963b095578eeea152580a027792f05",
+      "run/green-stencil-control-debug-nvidia/summary.json": "f7d8a96bc111be41086d3e5a6df112678f6e065b117d3b116a73d03031e56f5c",
+      "run/green-stencil-control-debug-intel/default-fixed/command.json": "a9c056689890efe2df1d615f82d1746749d1d6f0a884f376016d951c13f09b45",
+      "run/green-stencil-control-debug-intel/default-fixed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-debug-intel/default-fixed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-debug-intel/default-fixed/frames/capture_manifest.json": "ff29d5526b138ba870fb8162fb12b40ab5f0e6bc9ec897cbe20eb0c32c35fbc0",
+      "run/green-stencil-control-debug-intel/default-fixed/frames/reference-depth-d32.bin": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+      "run/green-stencil-control-debug-intel/default-fixed/frames/reference-depth-r32.bin": "358eed6e89f0ed1e1f89ed4c3cd7ce0d06b6adb60075af2bf4d286abd54dc2de",
+      "run/green-stencil-control-debug-intel/default-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-debug-intel/default-fixed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-debug-intel/default-fixed/plane.gltf": "a00c423bad1e8110f0c5eb64657ec9831582f947e37e5b6280369b1ba3ba4d8b",
+      "run/green-stencil-control-debug-intel/default-fixed/player.log": "2a46f4bf4dfce4244c6188b10563fbf3e695e3994837b6552623d092f1563806",
+      "run/green-stencil-control-debug-intel/invalid-role/command.json": "5b00c1b0694584bac4fa419936ea55853deffc977e33c1c439f1c9e6e1a33b1d",
+      "run/green-stencil-control-debug-intel/invalid-role/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-debug-intel/invalid-role/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-debug-intel/invalid-role/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-debug-intel/invalid-role/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-debug-intel/invalid-role/plane.gltf": "cd94eae0c70a7daef5af30b69a9842f669d98b3e874db8237563622195b00251",
+      "run/green-stencil-control-debug-intel/invalid-role/player.log": "88c7efd7e1c14d3d2bb5fa8f7c70aee97ba1200a3435c7e2fb905881297384b0",
+      "run/green-stencil-control-debug-intel/stencil-depth-only/command.json": "047a9956710068aa126cb4025b9d909c32d50bc7d1bbbc1fad130e7b59d20ec0",
+      "run/green-stencil-control-debug-intel/stencil-depth-only/config/reference-views.json": "5653e87a5d941c818e43fdddd7897a47e34d06598aba1f9054fb71942c9f94f0",
+      "run/green-stencil-control-debug-intel/stencil-depth-only/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-debug-intel/stencil-depth-only/frames/capture_manifest.json": "6ac61f7383c43a1fe2c1468c7609962c9d37e839659ea63b1ca831ec6465e252",
+      "run/green-stencil-control-debug-intel/stencil-depth-only/frames/reference-depth-d32.bin": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+      "run/green-stencil-control-debug-intel/stencil-depth-only/frames/reference-depth-r32.bin": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+      "run/green-stencil-control-debug-intel/stencil-depth-only/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-debug-intel/stencil-depth-only/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-debug-intel/stencil-depth-only/plane.gltf": "26fa3e8e49dfa8cce6fa2b7c5a2dbe9d9cbca040622ca1d6a0dbb4e076e5fc7e",
+      "run/green-stencil-control-debug-intel/stencil-depth-only/player.log": "11627722d62f59069ebc681f01d8d97daf5283edbe47007c898ceca0ea9a31d5",
+      "run/green-stencil-control-debug-intel/stencil-fixed/command.json": "41bc8b4371576f47074103a0d1baef21d94c7e16f5eece3d33c22817487d65ac",
+      "run/green-stencil-control-debug-intel/stencil-fixed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-debug-intel/stencil-fixed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-debug-intel/stencil-fixed/frames/capture_manifest.json": "0acb8a7440dfcab29ae038ee7402d7391a3bce6a24ff3acd2683a6a9593e2be5",
+      "run/green-stencil-control-debug-intel/stencil-fixed/frames/reference-depth-d32.bin": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+      "run/green-stencil-control-debug-intel/stencil-fixed/frames/reference-depth-r32.bin": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+      "run/green-stencil-control-debug-intel/stencil-fixed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-debug-intel/stencil-fixed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-debug-intel/stencil-fixed/plane.gltf": "26fa3e8e49dfa8cce6fa2b7c5a2dbe9d9cbca040622ca1d6a0dbb4e076e5fc7e",
+      "run/green-stencil-control-debug-intel/stencil-fixed/player.log": "2a463d2b20f604b9601cdd26fbd86b7d34cf20d464dd3a6a3a12e2292471f90b",
+      "run/green-stencil-control-debug-intel/stencil-indexed/command.json": "c0ecd18746862a87bba5debd708b6730b9514733de9edab3aee6fdca46ec6144",
+      "run/green-stencil-control-debug-intel/stencil-indexed/config/reference-views.json": "247164f05a024de058bc1370a4a0295f014ba1c602c6f6a1fc56ea38009010a2",
+      "run/green-stencil-control-debug-intel/stencil-indexed/coverage.png": "4972ee8c9e2f5e2c892b2e10a1c6d860bbb2d086ee042c6f49ccb7c3cfd76dff",
+      "run/green-stencil-control-debug-intel/stencil-indexed/frames/capture_manifest.json": "1a8164fd161805ab9470ab327a60f318acb284c148bdca0d5208658cc57ced57",
+      "run/green-stencil-control-debug-intel/stencil-indexed/frames/reference-depth-d32.bin": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+      "run/green-stencil-control-debug-intel/stencil-indexed/frames/reference-depth-r32.bin": "60020085f12373142d22c953db54ca71f4c9fe925f2e0621c5ab4530cb6bc37c",
+      "run/green-stencil-control-debug-intel/stencil-indexed/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/green-stencil-control-debug-intel/stencil-indexed/level.azurelevel": "eda4fca48300e3ae6eea698eb30d5bda5fd4680f6d2157a6a23a77a4497662be",
+      "run/green-stencil-control-debug-intel/stencil-indexed/plane.gltf": "26fa3e8e49dfa8cce6fa2b7c5a2dbe9d9cbca040622ca1d6a0dbb4e076e5fc7e",
+      "run/green-stencil-control-debug-intel/stencil-indexed/player.log": "801e49ca12faf135950390a613ac0d84759f5e5f3cd189e82f891258c9af5b94",
+      "run/green-stencil-control-debug-intel/summary.json": "116a743101fb9a98698ba92965f8f2eb07491a9c385487647e15c01e0bcb5485",
+      "run/green-stencil-control-release-intel-five-materials/stencil-indexed/player.log": "df6721443850b20d5677f2170649d101c305969d5a18f35972a1b2f2ef1dd0d6",
+      "run/green-stencil-control-release-intel-five-materials/stencil-indexed/plane.gltf": "b9fa9f1fbe149f09aa2af6bf03123be2878b4702273182d59dbae87821da8028",
+      "run/default-four-frames/capture_manifest.json": "7fb20f734cf5e98915bc279afd5867a41c4eb9b29e08b976f243a6b03030d2a2"
+    }
+  }
+}

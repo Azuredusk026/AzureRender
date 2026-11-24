@@ -1,0 +1,235 @@
+{
+  "date": "2026-10-16",
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "before": [
+    {
+      "renderer": "character",
+      "projection": "orthographic",
+      "elevation": 2,
+      "blockedPixels": 15376,
+      "blockedChanges": 322,
+      "visibleGridPixels": 7718,
+      "gridInFrontPixels": 0
+    }
+  ],
+  "debug": [
+    {
+      "renderer": "character",
+      "projection": "orthographic",
+      "elevation": 2,
+      "blockedPixels": 15376,
+      "blockedChanges": 0,
+      "visibleGridPixels": 6166,
+      "gridInFrontPixels": 0
+    },
+    {
+      "renderer": "character",
+      "projection": "perspective",
+      "elevation": 2,
+      "blockedPixels": 99856,
+      "blockedChanges": 0,
+      "visibleGridPixels": 2384,
+      "gridInFrontPixels": 0
+    },
+    {
+      "renderer": "character",
+      "projection": "orthographic",
+      "elevation": -2,
+      "blockedPixels": 0,
+      "blockedChanges": 0,
+      "visibleGridPixels": 6190,
+      "gridInFrontPixels": 212
+    },
+    {
+      "renderer": "pathtracing",
+      "projection": "orthographic",
+      "elevation": 2,
+      "blockedPixels": 15376,
+      "blockedChanges": 0,
+      "visibleGridPixels": 6166,
+      "gridInFrontPixels": 0
+    },
+    {
+      "renderer": "pathtracing",
+      "projection": "perspective",
+      "elevation": 2,
+      "blockedPixels": 99856,
+      "blockedChanges": 0,
+      "visibleGridPixels": 2384,
+      "gridInFrontPixels": 0
+    },
+    {
+      "renderer": "pathtracing",
+      "projection": "orthographic",
+      "elevation": -2,
+      "blockedPixels": 0,
+      "blockedChanges": 0,
+      "visibleGridPixels": 6190,
+      "gridInFrontPixels": 212
+    }
+  ],
+  "releaseInstalled": [
+    {
+      "renderer": "character",
+      "projection": "orthographic",
+      "elevation": 2,
+      "blockedPixels": 15376,
+      "blockedChanges": 0,
+      "visibleGridPixels": 6166,
+      "gridInFrontPixels": 0
+    },
+    {
+      "renderer": "character",
+      "projection": "perspective",
+      "elevation": 2,
+      "blockedPixels": 99856,
+      "blockedChanges": 0,
+      "visibleGridPixels": 2384,
+      "gridInFrontPixels": 0
+    },
+    {
+      "renderer": "character",
+      "projection": "orthographic",
+      "elevation": -2,
+      "blockedPixels": 0,
+      "blockedChanges": 0,
+      "visibleGridPixels": 6190,
+      "gridInFrontPixels": 212
+    },
+    {
+      "renderer": "pathtracing",
+      "projection": "orthographic",
+      "elevation": 2,
+      "blockedPixels": 15376,
+      "blockedChanges": 0,
+      "visibleGridPixels": 6166,
+      "gridInFrontPixels": 0
+    },
+    {
+      "renderer": "pathtracing",
+      "projection": "perspective",
+      "elevation": 2,
+      "blockedPixels": 99856,
+      "blockedChanges": 0,
+      "visibleGridPixels": 2384,
+      "gridInFrontPixels": 0
+    },
+    {
+      "renderer": "pathtracing",
+      "projection": "orthographic",
+      "elevation": -2,
+      "blockedPixels": 0,
+      "blockedChanges": 0,
+      "visibleGridPixels": 6190,
+      "gridInFrontPixels": 212
+    }
+  ],
+  "unitTests": {
+    "passed": 4,
+    "names": [
+      "AzureRender.PathTracing",
+      "AzureRender.NullRhi",
+      "AzureRender.NullRhiPass",
+      "AzureEditor.ViewportOverlays"
+    ]
+  },
+  "debugPathTracingLifecycle": {
+    "room": {
+      "samples": {
+        "samples": 12,
+        "target": 12
+      },
+      "actions": 0,
+      "validationEnabled": true,
+      "reportedValidationErrors": 0,
+      "released": true
+    },
+    "outdoor": {
+      "samples": {
+        "samples": 12,
+        "target": 12
+      },
+      "actions": 3,
+      "validationEnabled": true,
+      "reportedValidationErrors": 0,
+      "released": true
+    }
+  },
+  "installedPathTracingLifecycle": {
+    "room": {
+      "samples": {
+        "samples": 12,
+        "target": 12
+      },
+      "actions": 0,
+      "validationEnabled": false,
+      "reportedValidationErrors": 0,
+      "released": true
+    },
+    "outdoor": {
+      "samples": {
+        "samples": 12,
+        "target": 12
+      },
+      "actions": 3,
+      "validationEnabled": false,
+      "reportedValidationErrors": 0,
+      "released": true
+    }
+  },
+  "playerSmoke": {
+    "frames": 8,
+    "exitCode": 0,
+    "liveBuffers": 0,
+    "liveImages": 0
+  },
+  "installedFiles": [
+    {
+      "path": "bin/AzureRender.exe",
+      "size_bytes": 8685056,
+      "sha256": "b36fec39232c634ce73128ae237767afe3c401e449e91a79eb74417f3ac04663"
+    },
+    {
+      "path": "bin/AzurePlayer.exe",
+      "size_bytes": 5217280,
+      "sha256": "093f32b87740df3ce17e3521c8f372212eff524ae9146893ab4b552371bb64a4"
+    },
+    {
+      "path": "share/AzureRender/CHANGELOG.md",
+      "size_bytes": 72447,
+      "sha256": "e838c9485ec5579b7b11694fa3bf88c71ccec136958a96e9451f6351ca0133d3"
+    },
+    {
+      "path": "share/AzureRender/docs/runtime/viewport-navigation.md",
+      "size_bytes": 4057,
+      "sha256": "816a50ce6c7e88d6e3b8f06a5422d8b0c4d74e7e1500a6196cc4a798c85646a0"
+    },
+    {
+      "path": "share/AzureRender/docs/tutorials/world-camera-rendering.md",
+      "size_bytes": 3707,
+      "sha256": "9db116a6b5b3b0f568aa78a60f41e5782e06f90845153703d5aa9dfafa8c00e6"
+    },
+    {
+      "path": "share/AzureRender/shaders/inner_outline.frag.spv",
+      "size_bytes": 26104,
+      "sha256": "592d59102135757f70d48dd357f4997407cadee856104673b636df76229f14eb"
+    },
+    {
+      "path": "share/AzureRender/shaders/pathtracing.frag.spv",
+      "size_bytes": 11540,
+      "sha256": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a"
+    },
+    {
+      "path": "share/AzureRender/shaders/pathtracing.comp.spv",
+      "size_bytes": 71324,
+      "sha256": "bfec4fd60eb36fc727275b2107ba4b752ed4eb65f592839f7b12705d72fbe6db"
+    }
+  ],
+  "scope": {
+    "debugVulkanValidation": true,
+    "releaseVulkanValidation": false,
+    "otherDevices": "not run",
+    "physicalInput": "not run"
+  },
+  "installedManifestChangedEntriesVerified": 8
+}

@@ -1,0 +1,13 @@
+{
+  "status": "red-confirmed",
+  "reason": "The append-only shared log included older Player invocations.",
+  "observerSha256": "9076cdc9f7788aba9562c22d2021ddf3f1f9ad865384cb924762f8704e23046d",
+  "allRecords": 429470,
+  "historicalErrorsAndValidationWarnings": 5996,
+  "currentInvocationRecords": 43,
+  "currentInvocationErrorsAndValidationWarnings": 0,
+  "stdoutTimeRange": [
+    1793516110627,
+    1793516113520
+  ]
+}

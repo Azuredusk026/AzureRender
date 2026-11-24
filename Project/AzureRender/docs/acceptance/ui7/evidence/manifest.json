@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "stage": "UI7",
+  "headAtCollection": "2739e107a6c15467ed5542e0429353ea37c4568f",
+  "sourceOrigin": "working tree with pre-existing user changes",
+  "sources": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "ec73f7ab477482a0f9520c350e47d8b4fce821db3070a167b7d6c0e8dce05cda"
+    },
+    {
+      "path": "src/editor/ImGuiEditorLayer.cpp",
+      "sha256": "80f5b4df9b4b8e471afc92233380220a0058316f1206385e25ba671c393a15a1"
+    },
+    {
+      "path": "src/editor/panels/ViewportPanel.cpp",
+      "sha256": "537af2b4e308ad1a8bdccf8f038f19bf7d8362437db756cba5212546de48f29e"
+    },
+    {
+      "path": "src/editor/EditorWorkspaceUI.cpp",
+      "sha256": "feaab41f913c0093e599c2f1264e7c303714ad809cc04e82c4706c15f174d171"
+    },
+    {
+      "path": "tools/test_editor_viewport_design.py",
+      "sha256": "03b39b4aa85d1b56b52ff0e4717fbfce994bb7fd8a88164d78bc3c1103104c79"
+    }
+  ],
+  "artifact": {
+    "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+    "sha256": "0043f5b342d2e1163315ecece95c5f6828c6e8044e0f64a4a2b449a19400e05e"
+  },
+  "results": {
+    "build": "passed",
+    "cpu": "6/6",
+    "design": "6 combinations passed",
+    "navigation": "passed",
+    "workspace": "8 DPI combinations and all controls passed"
+  },
+  "evidence": [
+    {
+      "path": "release-build.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui7\\release-build.log",
+      "sourceSha256": "db18b4735f0acd2e91d2e47456732ab5a416d39519ae08cf77f3f2e06bd995c1",
+      "sha256": "db18b4735f0acd2e91d2e47456732ab5a416d39519ae08cf77f3f2e06bd995c1",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "cpu-tests.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui7\\cpu-tests.log",
+      "sourceSha256": "26264ba2f2db4f4963d36140e4a85fe17657d047e4270237792ac824acb05dd6",
+      "sha256": "26264ba2f2db4f4963d36140e4a85fe17657d047e4270237792ac824acb05dd6",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "design-red.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui7\\design-red.log",
+      "sourceSha256": "c1899f156df7643104a3ca83a5d15994453327e804d0f69468980b44b98082b7",
+      "sha256": "c1899f156df7643104a3ca83a5d15994453327e804d0f69468980b44b98082b7",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "design-green.json",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui7\\design-green\\summary.json",
+      "sourceSha256": "9d26427561696d444e0ab625a2e46ecdd1b7c46edfc096532f64853f2d096449",
+      "sha256": "9d26427561696d444e0ab625a2e46ecdd1b7c46edfc096532f64853f2d096449",
+      "normalization": "none"
+    },
+    {
+      "path": "navigation-gpu.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui7\\navigation-gpu.log",
+      "sourceSha256": "225c88fda63fdca5fe4beb6cf494e77f41d6840df4430c43fac128db61097c4e",
+      "sha256": "225c88fda63fdca5fe4beb6cf494e77f41d6840df4430c43fac128db61097c4e",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "workspace-gpu.log",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui7\\workspace-gpu.log",
+      "sourceSha256": "0b644519eef09889b4a7f2bf90f890de26e19ff0660de9a7f30a523a5cad5c44",
+      "sha256": "0b644519eef09889b4a7f2bf90f890de26e19ff0660de9a7f30a523a5cad5c44",
+      "normalization": "trailing whitespace stripped"
+    },
+    {
+      "path": "workspace.json",
+      "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui7\\workspace-gpu\\summary.json",
+      "sourceSha256": "2a1a0ed89691859d730578a08116e545d85f9e6c33a7bd9da67ff7e2aedb7123",
+      "sha256": "2a1a0ed89691859d730578a08116e545d85f9e6c33a7bd9da67ff7e2aedb7123",
+      "normalization": "none"
+    }
+  ],
+  "pending": [
+    "physical keyboard, mouse and IME",
+    "Debug ContentDirectoryScale 180s budget",
+    "P8 performance and long run"
+  ]
+}

@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 64: AzureEngine.ManagedWorkflows.coreclr
+1/2 Test #64: AzureEngine.ManagedWorkflows.coreclr .....   Passed    9.86 sec
+    Start 65: AzureEngine.ManagedWorkflows.nativeaot
+2/2 Test #65: AzureEngine.ManagedWorkflows.nativeaot ...   Passed    8.06 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Label Time Summary:
+gpu       =  17.92 sec*proc (2 tests)
+script    =  17.92 sec*proc (2 tests)
+
+Total Test time (real) =  17.95 sec

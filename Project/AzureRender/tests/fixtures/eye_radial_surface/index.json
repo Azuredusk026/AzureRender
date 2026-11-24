@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "kind": "synthetic-eye-radial-fixtures",
+  "license": "CC0-1.0",
+  "nativeEquivalenceClaimed": false,
+  "cases": [
+    {
+      "name": "direct-parallax",
+      "project": "direct-parallax/test.azureproject"
+    },
+    {
+      "name": "direct-no-parallax",
+      "project": "direct-no-parallax/test.azureproject"
+    },
+    {
+      "name": "direct-circle-border",
+      "project": "direct-circle-border/test.azureproject"
+    },
+    {
+      "name": "direct-negative-uv",
+      "project": "direct-negative-uv/test.azureproject"
+    },
+    {
+      "name": "direct-linear-control",
+      "project": "direct-linear-control/test.azureproject"
+    },
+    {
+      "name": "matcap-rgba",
+      "project": "matcap-rgba/test.azureproject"
+    },
+    {
+      "name": "matcap-alpha-only",
+      "project": "matcap-alpha-only/test.azureproject"
+    },
+    {
+      "name": "matcap-rgb-only",
+      "project": "matcap-rgb-only/test.azureproject"
+    },
+    {
+      "name": "matcap-ramp-alpha-low",
+      "project": "matcap-ramp-alpha-low/test.azureproject"
+    },
+    {
+      "name": "matcap-ramp-alpha-high",
+      "project": "matcap-ramp-alpha-high/test.azureproject"
+    },
+    {
+      "name": "matcap-mirror",
+      "project": "matcap-mirror/test.azureproject"
+    },
+    {
+      "name": "matcap-rotated",
+      "project": "matcap-rotated/test.azureproject"
+    },
+    {
+      "name": "all-zero",
+      "project": "all-zero/test.azureproject"
+    }
+  ]
+}

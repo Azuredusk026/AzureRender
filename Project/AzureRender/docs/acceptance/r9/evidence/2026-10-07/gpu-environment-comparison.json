@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "observationSource": "GPU performance counters read during this session",
+  "before": {
+    "steamwebhelper": {
+      "pid": 14916,
+      "gpuUtilizationPercent": 6
+    },
+    "desktopCompositor": {
+      "pid": 2488,
+      "gpuUtilizationPercent": 18
+    }
+  },
+  "intervention": "Steam graceful shutdown; game processes already absent; launcher will be restored after gates",
+  "after": {
+    "scaleReport": "scale-intel/summary.json",
+    "sha256": "4e2ffac62dd9734753f5c0d77b1754391043ae1a85c0069ab28dac58b0d6d548",
+    "status": "passed"
+  },
+  "interpretation": "ambient workload influenced observed timing; report does not attribute all initial budget failures to Steam"
+}

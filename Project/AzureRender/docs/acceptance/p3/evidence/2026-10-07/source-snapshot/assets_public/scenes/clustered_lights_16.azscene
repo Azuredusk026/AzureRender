@@ -1,0 +1,104 @@
+AzureRender Scene v1
+schemaVersion 3
+renderSettingsVersion 7
+sceneId "r2-clustered-lights-16"
+resourceCount 1
+resource "asset-0" "gltf" "assets_public/test_model.gltf"
+nodeCount 17
+node "root" "Public character" "" "asset-0"
+visible true
+transform 0 0 0 0 0 0 1 1 1
+prefab "" ""
+node "light-node-00" "Clustered light 00" "" ""
+visible false
+transform 1.4 1.4 1.1 0 0 0 1 1 1
+prefab "" ""
+node "light-node-01" "Clustered light 01" "" ""
+visible false
+transform -1.4 1.1 0.8 0 0 0 1 1 1
+prefab "" ""
+node "light-node-02" "Clustered light 02" "" ""
+visible false
+transform 0.6 1.8 -1.4 0 0 0 1 1 1
+prefab "" ""
+node "light-node-03" "Clustered light 03" "" ""
+visible false
+transform -0.8 0.3 1.8 0 0 0 1 1 1
+prefab "" ""
+node "light-node-04" "Clustered light 04" "" ""
+visible false
+transform 1.8 0.2 -0.5 0 0 0 1 1 1
+prefab "" ""
+node "light-node-05" "Clustered light 05" "" ""
+visible false
+transform -1.8 0.7 -0.7 0 0 0 1 1 1
+prefab "" ""
+node "light-node-06" "Clustered light 06" "" ""
+visible false
+transform 0.2 -0.2 1.6 0 0 0 1 1 1
+prefab "" ""
+node "light-node-07" "Clustered light 07" "" ""
+visible false
+transform -0.4 1.7 1.0 0 0 0 1 1 1
+prefab "" ""
+node "light-node-08" "Clustered light 08" "" ""
+visible false
+transform 1.0 -0.1 -1.7 0 0 0 1 1 1
+prefab "" ""
+node "light-node-09" "Clustered light 09" "" ""
+visible false
+transform -1.0 1.6 -1.1 0 0 0 1 1 1
+prefab "" ""
+node "light-node-10" "Clustered light 10" "" ""
+visible false
+transform 0.8 0.9 1.7 0 0 0 1 1 1
+prefab "" ""
+node "light-node-11" "Clustered light 11" "" ""
+visible false
+transform -0.9 0.1 1.5 0 0 0 1 1 1
+prefab "" ""
+node "light-node-12" "Clustered light 12" "" ""
+visible false
+transform 1.5 1.0 -1.2 0 0 0 1 1 1
+prefab "" ""
+node "light-node-13" "Clustered light 13" "" ""
+visible false
+transform -1.5 1.3 1.1 0 0 0 1 1 1
+prefab "" ""
+node "light-node-14" "Clustered light 14" "" ""
+visible false
+transform 0.3 1.2 -1.8 0 0 0 1 1 1
+prefab "" ""
+node "light-node-15" "Clustered light 15" "" ""
+visible false
+transform -0.3 1.5 -1.5 0 0 0 1 1 1
+prefab "" ""
+lightCount 16
+light "light-00" "light-node-00" 1.0 0.25 0.12 2.4 4.0 true
+light "light-01" "light-node-01" 0.18 0.38 1.0 2.4 4.0 true
+light "light-02" "light-node-02" 0.28 1.0 0.22 2.0 4.5 true
+light "light-03" "light-node-03" 1.0 0.2 0.58 2.0 3.8 true
+light "light-04" "light-node-04" 0.2 0.82 1.0 2.0 4.0 true
+light "light-05" "light-node-05" 1.0 0.72 0.18 2.2 4.2 true
+light "light-06" "light-node-06" 0.65 0.24 1.0 2.1 4.0 true
+light "light-07" "light-node-07" 0.18 1.0 0.72 1.8 3.8 true
+light "light-08" "light-node-08" 1.0 0.3 0.32 2.2 4.0 true
+light "light-09" "light-node-09" 0.24 0.42 1.0 2.0 4.2 true
+light "light-10" "light-node-10" 0.28 1.0 0.3 1.9 4.0 true
+light "light-11" "light-node-11" 1.0 0.78 0.24 2.1 4.0 true
+light "light-12" "light-node-12" 0.55 0.2 1.0 2.0 4.1 true
+light "light-13" "light-node-13" 0.2 1.0 0.6 1.8 3.8 true
+light "light-14" "light-node-14" 1.0 0.4 0.16 2.0 4.0 true
+light "light-15" "light-node-15" 0.3 0.65 1.0 2.1 4.0 true
+showcasePreset 0
+styleMaskStrength 1
+diffuseBandThreshold 0.4
+shadowMaximumFilterRadiusTexels 8
+innerOutlineEnabled true
+outlineStrength 0.4
+gradeExposureEv 0
+characterBackgroundEnabled true
+characterPlatformEnabled true
+blackholeQuality cinematic
+blackholeCamera front
+sceneRenderer character

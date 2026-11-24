@@ -1,0 +1,866 @@
+{
+  "status": "strict-compatibility-passed-short-efficiency-failed",
+  "sourceBase": "2d6d268",
+  "capture": {
+    "exitCode": 0,
+    "seconds": 225.704000000027,
+    "checks": [
+      {
+        "name": "AzureDepthPrefillRecordingTests",
+        "exitCode": 0,
+        "seconds": 1.6559999999590218
+      },
+      {
+        "name": "AzureMaterialClassEarlyDepthTests",
+        "exitCode": 0,
+        "seconds": 1.25
+      },
+      {
+        "name": "AzureRenderNullRhiPassTests",
+        "exitCode": 0,
+        "seconds": 2.2660000000032596
+      },
+      {
+        "name": "AzureRenderRenderGraphTests",
+        "exitCode": 0,
+        "seconds": 0.0470000000204891
+      }
+    ],
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "pngIdentical": true,
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      },
+      {
+        "frame": "frame_000001.png",
+        "pngIdentical": true,
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      },
+      {
+        "frame": "frame_000002.png",
+        "pngIdentical": true,
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      },
+      {
+        "frame": "frame_000003.png",
+        "pngIdentical": true,
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      }
+    ],
+    "metadata": {
+      "snapshotHistoryPrepared": true,
+      "snapshotHistoryTriangleCapacity": 451697,
+      "shadowHistoryPrepared": false,
+      "shadowHistoryBytes": 0,
+      "shadowHistorySampledRequests": 6968,
+      "shadowHistorySampledEligible": 6715,
+      "shadowHistorySampledHits": 1342,
+      "screenReflectionComputePrepared": true,
+      "screenReflectionAlgorithmRequested": "linear",
+      "screenReflectionAlgorithm": "linear",
+      "screenReflectionProducer": "linear-temporal",
+      "screenReflectionFallback": "",
+      "screenReflectionComputeActive": true,
+      "screenReflectionTemporalPrepared": true,
+      "screenReflectionTemporalActive": true,
+      "screenReflectionTemporalPreparation": "temporal",
+      "screenReflectionHistoryValid": true,
+      "screenReflectionHistorySubmission": 4,
+      "screenReflectionHistoryInputSubmission": 3,
+      "screenReflectionMotionUvOffset": [
+        0.0,
+        0.0
+      ],
+      "screenReflectionOwnsMotion": true,
+      "screenReflectionMotionBytes": 73728000,
+      "screenReflectionReprojectionBytes": 36864000,
+      "screenReflectionPreparation": "compute",
+      "screenReflectionLevels": 7,
+      "screenReflectionWidth": 1280,
+      "screenReflectionHeight": 720,
+      "screenReflectionImageBudgetBytes": 125332800
+    },
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "privateProgramsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "cost": {
+    "rows": [
+      {
+        "label": "before",
+        "seconds": 78.39000000001397,
+        "summary": {
+          "gpu": {
+            "mean": 19.080824533333335,
+            "p95": 19.6072608
+          },
+          "main": {
+            "mean": 16.643003733333334,
+            "p95": 17.1139072
+          },
+          "shadow": {
+            "mean": 2.1577397333333335,
+            "p95": 2.1908160000000003
+          },
+          "post": {
+            "mean": 0.28008106666666666,
+            "p95": 0.2877952
+          },
+          "cpu": {
+            "mean": 5.42132333333332,
+            "p95": 5.778569999999862
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            75.55,
+            75.68,
+            75.88,
+            75.96,
+            76.2,
+            76.71,
+            76.78,
+            77.0,
+            77.27,
+            77.42,
+            77.71,
+            77.76,
+            78.58,
+            78.96,
+            79.04,
+            79.51,
+            79.67,
+            79.89,
+            80.5,
+            80.54,
+            80.61,
+            80.7,
+            80.72,
+            81.18,
+            81.37,
+            81.7,
+            81.93,
+            82.19,
+            83.12,
+            83.46,
+            83.57,
+            83.87
+          ],
+          "thermalSlowdownObserved": false,
+          "temperatureRange": [
+            50.0,
+            65.0
+          ]
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "shadowHistoryPrepared": false,
+          "shadowHistoryBytes": 0,
+          "shadowHistorySampledRequests": 0,
+          "shadowHistorySampledEligible": 0,
+          "shadowHistorySampledHits": 0,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": ""
+        }
+      },
+      {
+        "label": "candidate",
+        "seconds": 76.31300000002375,
+        "summary": {
+          "gpu": {
+            "mean": 18.978634133333333,
+            "p95": 19.1029952
+          },
+          "main": {
+            "mean": 16.568730666666667,
+            "p95": 16.695040000000002
+          },
+          "shadow": {
+            "mean": 2.1353530666666667,
+            "p95": 2.1635488
+          },
+          "post": {
+            "mean": 0.2745504,
+            "p95": 0.27549599999999996
+          },
+          "cpu": {
+            "mean": 5.658923333333333,
+            "p95": 6.455419999999951
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            75.02,
+            75.11,
+            75.19,
+            75.44,
+            75.51,
+            76.24,
+            76.76,
+            77.83,
+            77.95,
+            78.49,
+            78.6,
+            78.65,
+            78.75,
+            78.94,
+            78.96,
+            79.02,
+            79.55,
+            79.78,
+            79.86,
+            80.0,
+            80.11,
+            80.23,
+            80.36,
+            80.57,
+            81.53,
+            81.55,
+            82.05,
+            82.4,
+            82.78,
+            82.83,
+            83.64,
+            84.79
+          ],
+          "thermalSlowdownObserved": false,
+          "temperatureRange": [
+            49.0,
+            81.0
+          ]
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "snapshotHistoryPrepared": true,
+          "snapshotHistoryTriangleCapacity": 451697,
+          "shadowHistoryPrepared": false,
+          "shadowHistoryBytes": 0,
+          "shadowHistorySampledRequests": 232979,
+          "shadowHistorySampledEligible": 226327,
+          "shadowHistorySampledHits": 84412,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": ""
+        }
+      },
+      {
+        "label": "after",
+        "seconds": 81.92200000002049,
+        "summary": {
+          "gpu": {
+            "mean": 18.88644533333333,
+            "p95": 19.0600016
+          },
+          "main": {
+            "mean": 16.4540928,
+            "p95": 16.622745600000002
+          },
+          "shadow": {
+            "mean": 2.154985066666667,
+            "p95": 2.1767423999999997
+          },
+          "post": {
+            "mean": 0.2773674666666666,
+            "p95": 0.2796032
+          },
+          "cpu": {
+            "mean": 5.722046666666674,
+            "p95": 6.512709999999868
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            75.69,
+            76.72,
+            77.64,
+            77.65,
+            78.53,
+            78.6,
+            78.85,
+            78.88,
+            78.91,
+            79.02,
+            79.17,
+            79.21,
+            79.26,
+            79.27,
+            79.54,
+            79.63,
+            79.9,
+            79.99,
+            80.18,
+            80.39,
+            80.42,
+            80.48,
+            80.49,
+            80.75,
+            80.82,
+            80.92,
+            80.96,
+            81.03,
+            81.06,
+            81.28,
+            81.56,
+            81.97,
+            82.87,
+            83.01,
+            83.67
+          ],
+          "thermalSlowdownObserved": false,
+          "temperatureRange": [
+            50.0,
+            80.0
+          ]
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "shadowHistoryPrepared": false,
+          "shadowHistoryBytes": 0,
+          "shadowHistorySampledRequests": 0,
+          "shadowHistorySampledEligible": 0,
+          "shadowHistorySampledHits": 0,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": ""
+        }
+      }
+    ],
+    "referenceMeanMs": 18.983634933333335,
+    "candidateMeanMs": 18.978634133333333,
+    "reductionFraction": 0.0002634268946680729,
+    "referenceDriftFraction": 0.010239303520249097,
+    "affectedRangeReductionFraction": -0.0012195873423321846,
+    "formalPerformancePassed": false,
+    "validEnvironment": true,
+    "sourceAndProgramsUnchanged": true,
+    "projectInputsUnchanged": true,
+    "shortEfficiencyPassed": false
+  },
+  "restore": {
+    "bothConfigurationsVerified": true,
+    "sourceFilesRestored": 6,
+    "programsUnchanged": true,
+    "checks": [
+      {
+        "name": "AzureDepthPrefillRecordingTests",
+        "exitCode": 0
+      },
+      {
+        "name": "AzureMaterialClassEarlyDepthTests",
+        "exitCode": 0
+      },
+      {
+        "name": "AzureRenderNullRhiPassTests",
+        "exitCode": 0
+      },
+      {
+        "name": "AzureRenderRenderGraphTests",
+        "exitCode": 0
+      }
+    ],
+    "baselineTextSha256": "1b2549f6d872204e288c4a6e6721c13e4693cad401cc92eb84eeac16d552cba2",
+    "restoredTextSha256": "1b2549f6d872204e288c4a6e6721c13e4693cad401cc92eb84eeac16d552cba2",
+    "playerTextIdentical": true
+  },
+  "adopted": false,
+  "identityImageBytes1440p": 29491200,
+  "protectedFilesUnchanged": 13,
+  "wholeFrameTimingProcesses": 3,
+  "formalRuns": 0,
+  "overallStatus": "failed-user-review",
+  "archive": {
+    "name": "validation.zip",
+    "bytes": 1568283,
+    "sha256": "6bef9f43faccd9cc36b57032ae7b719da91ca970ea3dc11567456a11f1c3ad64"
+  },
+  "members": [
+    {
+      "name": "active-source/AzureRenderApp.cpp",
+      "bytes": 102302,
+      "sha256": "8d7010573d3b91b05fe9b02732ce5df2901d6b5bc854a37165cf046aff0849c6"
+    },
+    {
+      "name": "active-source/CharacterMaterialSampling.inc",
+      "bytes": 30410,
+      "sha256": "01d4a1ca15fbb44c988313915dac89da67796cd4e4ea57eba744e9b96d77fc6e"
+    },
+    {
+      "name": "active-source/CharacterSceneRenderer.cpp",
+      "bytes": 348222,
+      "sha256": "7368ecc87c9453c586d20f65dd846f739f0e296cfe512ac0d3d3720d1b343b33"
+    },
+    {
+      "name": "active-source/CharacterSceneRenderer.hpp",
+      "bytes": 41860,
+      "sha256": "ba627cc202d6d2b828aa5fbb137b7f48434ce0c3f36da32b71653ab48a3e48c1"
+    },
+    {
+      "name": "active-source/CharacterShadowHistory.inc",
+      "bytes": 9899,
+      "sha256": "0895a5927cc02462556ebaa342949cf402765c619c62a1698a5c3cd3dbc267f0"
+    },
+    {
+      "name": "active-source/CharacterSurfaceOverlays.inc",
+      "bytes": 3037,
+      "sha256": "e2a8ac2960785993d81aad31c728159305f02227ebf5371a35b36d2be000729b"
+    },
+    {
+      "name": "archive.py",
+      "bytes": 3322,
+      "sha256": "3f7951307d80b03c9749b21d2cd5d024ab5a2c48884dc15c8c9e9b37a78dc1ef"
+    },
+    {
+      "name": "AzureDepthPrefillRecordingTests.log",
+      "bytes": 29643,
+      "sha256": "71fb757e0efc785ee5deee9070fd01ad7c2c68a7672dcc7b16b8e9c2dfd09714"
+    },
+    {
+      "name": "AzureMaterialClassEarlyDepthTests.log",
+      "bytes": 26307,
+      "sha256": "f050070844c01129a68484b43d4c4eaff948b6fd977b592a9f029c184bb85973"
+    },
+    {
+      "name": "AzureRenderApp.cpp.baseline",
+      "bytes": 102213,
+      "sha256": "a341fd8b2d495037a191493d4a80e67cc74d957f31b6cb3c61380b96c7b6a2d5"
+    },
+    {
+      "name": "AzureRenderNullRhiPassTests.log",
+      "bytes": 95295,
+      "sha256": "9fa609d2ebab2172e18a86726532982cd90fd42a799b6aa9831bae5006f654ac"
+    },
+    {
+      "name": "AzureRenderRenderGraphTests.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "baseline-build-provenance.json",
+      "bytes": 415010,
+      "sha256": "c1c249d39d0f1167f1832615ba825229b695ad5dfe7e3b84f8158e604f89a5ba"
+    },
+    {
+      "name": "baseline-programs.json",
+      "bytes": 152349,
+      "sha256": "de10086a60c4fcc2ae96cba67ba3c68f39b83e0be44192b00f35bab42c9bd429"
+    },
+    {
+      "name": "baseline-source.json",
+      "bytes": 189339,
+      "sha256": "ba1a85fae3b953c041f1d3085f189058de2099d65bb453e56020a7b728e02772"
+    },
+    {
+      "name": "build.py",
+      "bytes": 2118,
+      "sha256": "361ecae76a77302116af9e7d39b0723b7a1ac08e92c6aee148b6a346537b31f9"
+    },
+    {
+      "name": "candidate-build-provenance.json",
+      "bytes": 413586,
+      "sha256": "bd1e970846d97f173fcc7d6a963c2134ab75a337a0c96627b8f1e01acd9b0694"
+    },
+    {
+      "name": "candidate-build.log",
+      "bytes": 2549,
+      "sha256": "3a1bde85cc201b277e2a31b73379a26bac909d0d1e3bbf762d665905d748b3be"
+    },
+    {
+      "name": "candidate-source/AzureRenderApp.cpp",
+      "bytes": 102302,
+      "sha256": "8d7010573d3b91b05fe9b02732ce5df2901d6b5bc854a37165cf046aff0849c6"
+    },
+    {
+      "name": "candidate-source/CharacterMaterialSampling.inc",
+      "bytes": 30410,
+      "sha256": "01d4a1ca15fbb44c988313915dac89da67796cd4e4ea57eba744e9b96d77fc6e"
+    },
+    {
+      "name": "candidate-source/CharacterSceneRenderer.cpp",
+      "bytes": 348222,
+      "sha256": "7368ecc87c9453c586d20f65dd846f739f0e296cfe512ac0d3d3720d1b343b33"
+    },
+    {
+      "name": "candidate-source/CharacterSceneRenderer.hpp",
+      "bytes": 41860,
+      "sha256": "ba627cc202d6d2b828aa5fbb137b7f48434ce0c3f36da32b71653ab48a3e48c1"
+    },
+    {
+      "name": "candidate-source/CharacterShadowHistory.inc",
+      "bytes": 9899,
+      "sha256": "0895a5927cc02462556ebaa342949cf402765c619c62a1698a5c3cd3dbc267f0"
+    },
+    {
+      "name": "candidate-source/CharacterSurfaceOverlays.inc",
+      "bytes": 3037,
+      "sha256": "e2a8ac2960785993d81aad31c728159305f02227ebf5371a35b36d2be000729b"
+    },
+    {
+      "name": "capture-command.json",
+      "bytes": 196424,
+      "sha256": "b36579c26e413936ab48a533c0d2b5bbac2b0be0ec2fb6fb71a077d4769393d7"
+    },
+    {
+      "name": "capture-manifest.json",
+      "bytes": 17515,
+      "sha256": "037ea979ab92f5e782e6ce9c5d9a18a23066134207c2f318006c4e244736811e"
+    },
+    {
+      "name": "capture-results.json",
+      "bytes": 3009,
+      "sha256": "d2906049389bae4b1eb88a2fde126f96a5fa515a73b381a15933fb842b6f1a0b"
+    },
+    {
+      "name": "capture.log",
+      "bytes": 26781,
+      "sha256": "534e21ab64c1caf608929a230a6051344bab91507c413d17f81ff7962f5e346f"
+    },
+    {
+      "name": "capture.py",
+      "bytes": 4245,
+      "sha256": "64db695c2b3e296604adbb0bd7cfbc64b64c6892869e8a9b61d7c87226cf449a"
+    },
+    {
+      "name": "character_depth.frag",
+      "bytes": 2428,
+      "sha256": "69ddde92bbae56767f3b06f355a628a5ac158523e6796bddded74090cf7dbe53"
+    },
+    {
+      "name": "CharacterMaterialSampling.inc.baseline",
+      "bytes": 29208,
+      "sha256": "04fbf8d95af2a6d0c426742f2b6852e90b1b19019fb6fd184a1115d0d87d1a1d"
+    },
+    {
+      "name": "CharacterSceneRenderer.cpp.baseline",
+      "bytes": 344578,
+      "sha256": "f85f847dff924fc0b4bdee970522edeecb86237e013f6e8bff04da542e8cba27"
+    },
+    {
+      "name": "CharacterSceneRenderer.hpp.baseline",
+      "bytes": 41626,
+      "sha256": "c9f9057a061a5d374dccc9929455ac056a9be302c30eb5c829e8a30525b4a60a"
+    },
+    {
+      "name": "CharacterShadowHistory.inc.baseline",
+      "bytes": 7607,
+      "sha256": "aaf54b8e3b6a16cee15151c7886c660644e441fd24d6e835626c33ba183bf249"
+    },
+    {
+      "name": "CharacterSurfaceOverlays.inc.baseline",
+      "bytes": 2904,
+      "sha256": "65c06fe3e87230b8247637d49d23c70cb36b7f8f080235c7f9b57559ef159877"
+    },
+    {
+      "name": "cost-after/command.json",
+      "bytes": 790,
+      "sha256": "d04deb437f06d35612af9414fb2c1c5638f3f5c588779c6d0d5ac278caf89415"
+    },
+    {
+      "name": "cost-after/environment.json",
+      "bytes": 2704814,
+      "sha256": "3fac4989356e7440d7963088ea867be019dca8ec45a5d7510403ca90f17b66ed"
+    },
+    {
+      "name": "cost-after/process.log",
+      "bytes": 14093,
+      "sha256": "f9d522444d842e2fa770f2b9636c9602173c355c2b47f3994577583d5eefa544"
+    },
+    {
+      "name": "cost-after/timing.csv",
+      "bytes": 6431,
+      "sha256": "30012c7ded29af02197d8dbfe9d7ed2cb30fb382997b067d09e3ec9b90e949cd"
+    },
+    {
+      "name": "cost-after/timing.json",
+      "bytes": 37930,
+      "sha256": "114b9b666408bb2c4038d6d1baf041b549419ca410731d1aa4c218fcccd43fe3"
+    },
+    {
+      "name": "cost-before/command.json",
+      "bytes": 791,
+      "sha256": "721e410cdf2a3e630526646fbe201b92d629bf31dbb662bdff5f6a4897f40135"
+    },
+    {
+      "name": "cost-before/environment.json",
+      "bytes": 2633145,
+      "sha256": "06d8c71c2456e5632966a73185f5a99368bdf0866ca47891d04570754de20137"
+    },
+    {
+      "name": "cost-before/process.log",
+      "bytes": 14093,
+      "sha256": "b3cc52d40466b5212e4bb7be50ffccab0e7ac78aba1db38400f8ced74c5a8ffb"
+    },
+    {
+      "name": "cost-before/timing.csv",
+      "bytes": 6431,
+      "sha256": "0e4b0f91c5d2209b8d8194ba4b46c906912a4a31e3d83ed9fe1307b47122ab8a"
+    },
+    {
+      "name": "cost-before/timing.json",
+      "bytes": 37932,
+      "sha256": "2bf766ab9da4ff23b5ec2590f4abdbfe833c0d080b3103a329325f0836ccafda"
+    },
+    {
+      "name": "cost-candidate/command.json",
+      "bytes": 837,
+      "sha256": "02b1488eca2f978bb0c0fd442f58f6f30df7bbd0ab418b7d4499bd7226c71b69"
+    },
+    {
+      "name": "cost-candidate/environment.json",
+      "bytes": 2562288,
+      "sha256": "681089d51b8f7e2a552ad2574eeeb072c3e0614943d45dcf082014178638cf1b"
+    },
+    {
+      "name": "cost-candidate/process.log",
+      "bytes": 14095,
+      "sha256": "b0d5592f4410a7554b8c35c850488719281f17bcb91b78801819360342655a90"
+    },
+    {
+      "name": "cost-candidate/timing.csv",
+      "bytes": 6430,
+      "sha256": "5cd3da3071f31c0dedec762f43fcb1c831cdbbb5fa387acb3e2be858e09390f1"
+    },
+    {
+      "name": "cost-candidate/timing.json",
+      "bytes": 37984,
+      "sha256": "38ac86f46a86a19e560821ab0ea266bee4e39d47931cda43457fef3717ca0b05"
+    },
+    {
+      "name": "cost-progress.json",
+      "bytes": 8167,
+      "sha256": "e86018201c7ee0664ce3986809ac6d53782ed6303661292abefb81dca8261190"
+    },
+    {
+      "name": "cost-results.json",
+      "bytes": 9315,
+      "sha256": "52c4b9437068b7c88636c9910c4ff2e75273a01985ba227bc5a29f4412987b68"
+    },
+    {
+      "name": "cost.py",
+      "bytes": 5719,
+      "sha256": "05c9e3920f7ae8d0290ed4595c2aafd21888bff9bba31edf22901802fd84fc2f"
+    },
+    {
+      "name": "frozen-project-inputs.json",
+      "bytes": 454954,
+      "sha256": "bf0d040c42daa7d9b12e751d7b0338a9535a8bbfa51b4fa3c264d8d66fe5e13f"
+    },
+    {
+      "name": "mesh.frag",
+      "bytes": 124493,
+      "sha256": "9a3c44e5c6994a56b70b914080166e84154bafc474f89e481023cd6b370fbcfe"
+    },
+    {
+      "name": "outline_depth.frag",
+      "bytes": 556,
+      "sha256": "dc988ce57ecf74d8d6374753f45a3ca25dd1a498b87fecde9f62afbc8e100ab8"
+    },
+    {
+      "name": "prepare.py",
+      "bytes": 5407,
+      "sha256": "a51be445259adb1294379bec2ccd862fa763a75b9685c9a8264ab293894d6dba"
+    },
+    {
+      "name": "private-program-build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "private-programs.json",
+      "bytes": 143818,
+      "sha256": "5140b47cb7248e5ad689dfef380fc90af8b5e3d9fbd8d04ec18626d0108010d7"
+    },
+    {
+      "name": "restore-build-provenance.json",
+      "bytes": 413586,
+      "sha256": "9843d0c56d22c66650d32e43ef5ebe042870a7afae9f0e18ec7f4a3a16d8bce7"
+    },
+    {
+      "name": "restore-build.log",
+      "bytes": 2549,
+      "sha256": "3a1bde85cc201b277e2a31b73379a26bac909d0d1e3bbf762d665905d748b3be"
+    },
+    {
+      "name": "restore-results.json",
+      "bytes": 677,
+      "sha256": "421eaf2000f97920e71185bf23970763fd8101bf3b356087c9a0f8c50b427acc"
+    },
+    {
+      "name": "restored-AzureDepthPrefillRecordingTests.log",
+      "bytes": 29643,
+      "sha256": "1227f16e5e95b5619dd7bbd050825e4d6456dfde844d274a6f24b2c44b352610"
+    },
+    {
+      "name": "restored-AzureMaterialClassEarlyDepthTests.log",
+      "bytes": 26307,
+      "sha256": "a6d62530a32f973d19a021802dc27ee27d5d69f34f73cbfd33ed836f17ac19d7"
+    },
+    {
+      "name": "restored-AzureRenderNullRhiPassTests.log",
+      "bytes": 95295,
+      "sha256": "3adc9ed9bfb544725ab9dae368aa603b974553f93e0aaecece7e60dc4029f2b4"
+    },
+    {
+      "name": "restored-AzureRenderRenderGraphTests.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime.json",
+      "bytes": 317973,
+      "sha256": "31d644bff16bf416f83a230a4a729adc1bec57f459d9b6430f39cc69c99c0898"
+    },
+    {
+      "name": "shaders.py",
+      "bytes": 6490,
+      "sha256": "20a87ce4dcfc38989b783bd95ec2616ee77dfad7e445a49c03dbbf7ceb457a9c"
+    },
+    {
+      "name": "source-change.json",
+      "bytes": 927,
+      "sha256": "c95c1431a71e5e71e0ab5dc62233e49e5ad75cb5a7273ba38a7d63b28fc44196"
+    },
+    {
+      "name": "startup-environment.json",
+      "bytes": 425610,
+      "sha256": "b7fa50265da15d3b8b96229d3838ad2ae5bb32111ead7de443711fa77723aa10"
+    },
+    {
+      "name": "verify-restore.py",
+      "bytes": 1881,
+      "sha256": "3f675f1aec7a0a2e6db17b272b20364d250ae4f0ecc287b67a59030dd11efdbe"
+    }
+  ]
+}

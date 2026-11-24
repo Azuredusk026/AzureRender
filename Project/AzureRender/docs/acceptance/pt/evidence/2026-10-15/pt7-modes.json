@@ -1,0 +1,22 @@
+{
+  "room": {
+    "samples": {
+      "samples": 12,
+      "target": 12
+    },
+    "actions": 0,
+    "validationEnabled": true,
+    "reportedValidationErrors": 0,
+    "released": true
+  },
+  "outdoor": {
+    "samples": {
+      "samples": 12,
+      "target": 12
+    },
+    "actions": 3,
+    "validationEnabled": true,
+    "reportedValidationErrors": 0,
+    "released": true
+  }
+}

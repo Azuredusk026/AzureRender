@@ -1,0 +1,429 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR5-R7 native reflection bindings and NR0 spatial camera inputs",
+  "status": "narrow-checks-passed",
+  "privateRun": "build/runs/20261027-131305-native-reflection-runtime-bindings-d7a2e8",
+  "source": {
+    "tools/endfield_native/camera_projection.py": "50213d75d4f9a8000251d878e1a14fbd4578da23b63273e57805824904ab05f1",
+    "tools/test_native_camera_projection.py": "6fdd8c3b51054f2969446c610493b4434d9d82d998c441deba7f81467fdbe02e",
+    "tests/CameraSystemTests.cpp": "43de0285ff5508515e2c8801b0a929beb5d5775c35ce3f00c2fcc65360601fe0"
+  },
+  "native": {
+    "frame": 3534,
+    "lightingEvent": 8912,
+    "probeCount": 12,
+    "probes": [
+      {
+        "index": 0,
+        "arrayLayer": 16.0,
+        "center": [
+          -40.793731689453125,
+          5.650733470916748,
+          -18.624309539794922
+        ],
+        "halfExtents": [
+          7.506551742553711,
+          4.759266376495361,
+          8.57149600982666
+        ],
+        "intensity": 1.0,
+        "rank": 10.0,
+        "fade": 1.0,
+        "boxProjection": 1.0
+      },
+      {
+        "index": 1,
+        "arrayLayer": 3.0,
+        "center": [
+          -51.67780685424805,
+          4.387665748596191,
+          -8.041084289550781
+        ],
+        "halfExtents": [
+          5.35171365737915,
+          3.643498420715332,
+          5.681460380554199
+        ],
+        "intensity": 0.5,
+        "rank": 9.0,
+        "fade": 1.0,
+        "boxProjection": 1.0
+      },
+      {
+        "index": 2,
+        "arrayLayer": 4.0,
+        "center": [
+          -42.099998474121094,
+          3.0590693950653076,
+          31.286149978637695
+        ],
+        "halfExtents": [
+          5.650000095367432,
+          5.0,
+          26.327844619750977
+        ],
+        "intensity": 1.0,
+        "rank": 7.0,
+        "fade": 1.0,
+        "boxProjection": 1.0
+      },
+      {
+        "index": 3,
+        "arrayLayer": 6.0,
+        "center": [
+          -67.88243103027344,
+          2.5,
+          18.515811920166016
+        ],
+        "halfExtents": [
+          10.24258041381836,
+          5.665032386779785,
+          2.1958131790161133
+        ],
+        "intensity": 1.0,
+        "rank": 6.0,
+        "fade": 1.0,
+        "boxProjection": 1.0
+      },
+      {
+        "index": 4,
+        "arrayLayer": 12.0,
+        "center": [
+          -69.47840881347656,
+          5.042746543884277,
+          -3.223653793334961
+        ],
+        "halfExtents": [
+          13.161684036254883,
+          6.763779163360596,
+          19.54583740234375
+        ],
+        "intensity": 1.0,
+        "rank": 6.0,
+        "fade": 1.0,
+        "boxProjection": 1.0
+      },
+      {
+        "index": 5,
+        "arrayLayer": 7.0,
+        "center": [
+          -67.34242248535156,
+          3.9019999504089355,
+          31.59000015258789
+        ],
+        "halfExtents": [
+          10.24258041381836,
+          5.665032386779785,
+          17.213016510009766
+        ],
+        "intensity": 1.0,
+        "rank": 6.0,
+        "fade": 1.0,
+        "boxProjection": 1.0
+      },
+      {
+        "index": 6,
+        "arrayLayer": 17.0,
+        "center": [
+          -5.960000038146973,
+          14.890000343322754,
+          -103.08049774169922
+        ],
+        "halfExtents": [
+          50.220001220703125,
+          23.149999618530273,
+          78.42435455322266
+        ],
+        "intensity": 1.0,
+        "rank": 5.0,
+        "fade": 1.0,
+        "boxProjection": 1.0
+      },
+      {
+        "index": 7,
+        "arrayLayer": 2.0,
+        "center": [
+          0.5184423923492432,
+          10.359999656677246,
+          -2.9815845489501953
+        ],
+        "halfExtents": [
+          9.65487289428711,
+          9.244999885559082,
+          10.540438652038574
+        ],
+        "intensity": 4.0,
+        "rank": 5.0,
+        "fade": 1.0,
+        "boxProjection": 0.0
+      },
+      {
+        "index": 8,
+        "arrayLayer": 5.0,
+        "center": [
+          -0.4005114734172821,
+          -6.044613361358643,
+          -112.35457611083984
+        ],
+        "halfExtents": [
+          42.68406677246094,
+          13.83580207824707,
+          44.64226531982422
+        ],
+        "intensity": 0.699999988079071,
+        "rank": 4.0,
+        "fade": 1.0,
+        "boxProjection": 1.0
+      },
+      {
+        "index": 9,
+        "arrayLayer": 11.0,
+        "center": [
+          24.458940505981445,
+          7.4398512840271,
+          -9.585809707641602
+        ],
+        "halfExtents": [
+          8.821533203125,
+          25.0,
+          22.812545776367188
+        ],
+        "intensity": 1.0,
+        "rank": 3.0,
+        "fade": 1.0,
+        "boxProjection": 1.0
+      },
+      {
+        "index": 10,
+        "arrayLayer": 1.0,
+        "center": [
+          0.0,
+          11.601508140563965,
+          -7.430000305175781
+        ],
+        "halfExtents": [
+          37.5,
+          25.0,
+          37.5
+        ],
+        "intensity": 0.5,
+        "rank": 2.0,
+        "fade": 1.0,
+        "boxProjection": 1.0
+      },
+      {
+        "index": 11,
+        "arrayLayer": 10.0,
+        "center": [
+          -4.787450790405273,
+          15.995132446289062,
+          -43.93232345581055
+        ],
+        "halfExtents": [
+          58.24382781982422,
+          28.33901596069336,
+          126.6815414428711
+        ],
+        "intensity": 0.5099999904632568,
+        "rank": 1.0,
+        "fade": 1.0,
+        "boxProjection": 1.0
+      }
+    ],
+    "array": {
+      "width": 576,
+      "height": 576,
+      "mips": 10,
+      "slices": 32,
+      "format": "R11G11B10_FLOAT",
+      "sha256": "8cf45ce1435e808bfde10c0940567944fc347dfdc11c6b6509748ce1f3d2abf9",
+      "bytes": 56622336
+    },
+    "arraySubresources": 320,
+    "constantBufferSha256": {
+      "camera": "89e555032b7ff5fef4ea1889d07984f16f5cb631167a2a6baaa9196b87dc72f9",
+      "globals": "c588caf1f324c256cf22285ccb1dc0317f6373219e0af467189648d550114007",
+      "probes": "e95ba4f38f2dfa388a15f6f1071a0cd2b14362a40ff34e4fe649219f2809672b"
+    },
+    "reflectionChain": {
+      "traceEvents": [
+        8702,
+        8713,
+        8723
+      ],
+      "temporalEvent": 8741,
+      "mipEvents": [
+        8751,
+        8761,
+        8771,
+        8781,
+        8791,
+        8801
+      ],
+      "resolveEvent": 8811,
+      "lightingInput": {
+        "slot": 3,
+        "resource": 15925,
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "historyReadOnlyUsages": [
+      {
+        "event": 8741,
+        "usage": "ResourceUsage.CS_Resource"
+      }
+    ],
+    "paddingScale": 0.8888888888888888,
+    "paddingOffset": 0.05555555555555555,
+    "payloadComparisonDiagnostic": {
+      "privateFile": "payload-comparison.json",
+      "sampleDirections": 134,
+      "activeMips": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "orientation": {
+        "permutation": [
+          0,
+          1,
+          2
+        ],
+        "signs": [
+          1,
+          1,
+          1
+        ]
+      },
+      "rmsPerActiveMip": [
+        0.08238206676396662,
+        0.027322538737046848,
+        0.01237011332306256,
+        0.012903372346192307,
+        0.021890927681859698,
+        0.028455755162817686
+      ],
+      "limits": [
+        "CPU ideal bilinear diagnostic; no native hardware equivalence claim"
+      ]
+    }
+  },
+  "tests": {
+    "pythonCases": 6,
+    "ctestsPerConfiguration": 2,
+    "main": {
+      "debug": {
+        "status": "passed",
+        "resourcesReleased": true,
+        "validationErrors": 0,
+        "width": 2560,
+        "height": 1440,
+        "image": "frames/frame_000000.png",
+        "cameraPoseVerified": true,
+        "sourceComponentFarPlane": 10000,
+        "manifestFallbackFarPlane": 1000,
+        "limits": [
+          "Photometric equality and missing scene assets remain pending",
+          "Legacy near/far capture metadata reports fallback settings; source component far plane verified separately"
+        ]
+      },
+      "release": {
+        "status": "passed",
+        "resourcesReleased": true,
+        "validationErrors": 0,
+        "width": 2560,
+        "height": 1440,
+        "image": "frames/frame_000000.png",
+        "cameraPoseVerified": true,
+        "sourceComponentFarPlane": 10000,
+        "manifestFallbackFarPlane": 1000,
+        "limits": [
+          "Photometric equality and missing scene assets remain pending",
+          "Legacy near/far capture metadata reports fallback settings; source component far plane verified separately"
+        ]
+      }
+    },
+    "mainDebugReleaseImageExact": true,
+    "candidate": {
+      "sourceCamera": {
+        "position": [
+          -0.26604312658309937,
+          2.262058973312378,
+          -24.905324935913086
+        ],
+        "target": [
+          -0.2611163812689483,
+          2.321753814816475,
+          -23.9071204662323
+        ],
+        "up": [
+          -0.00029462671955116093,
+          0.9982166290283203,
+          -0.05969411879777908
+        ],
+        "rotationDegrees": [
+          -176.57766118423316,
+          -0.2822828552113573,
+          -179.98311892665737
+        ],
+        "fieldOfView": 57.22092455245762,
+        "aspect": 1.777777790621878,
+        "projectionOffsetX": -0.0002929684706032276,
+        "projectionOffsetY": 7.717559492448345e-05
+      },
+      "worldToEngine": [
+        -1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "rootNodesTransformed": 793,
+      "sourceActorAbsent": true,
+      "cubeMapping": "Swap X faces and reverse every horizontal face axis; exact half-float rearrangement",
+      "sourceIndicesAndMeshDataUnchanged": true,
+      "readonlyHardlinks": 1506,
+      "GITransform": [
+        [
+          -1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ]
+      ],
+      "clipmapSha256": "f57b41da8b1d8baf65834b09de54896b00e7cbe4ce86b7d39a3ceefd90c7107f",
+      "cubeSha256": "937da54194a0ad018da8fcc5f6c972bad41fb0f68b9ce4ff0797b2fb020d7f59"
+    }
+  },
+  "negatives": {
+    "unimplementedDecoder": "camera-red.log",
+    "fallbackClipRange": "captured-camera-release/player.log",
+    "wrongAngleConvention": "accepted-captured-camera-release/frames/frame_000000.png",
+    "interruptedDiagnostic": "accepted-captured-camera-debug/player.log"
+  },
+  "limits": [
+    "Formal NR0 photometric registration and all NR1-NR12 gates remain pending",
+    "Source ordered probe blending, logarithmic LOD and full SSR temporal chain remain pending",
+    "Capture near/far metadata still reports fallback settings; actual camera component validated separately"
+  ]
+}

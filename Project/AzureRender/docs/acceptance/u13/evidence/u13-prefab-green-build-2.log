@@ -1,0 +1,33 @@
+[0/2] Re-checking globbed directories...
+[1/32] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\content\PrefabAuthoringOperations.cpp.obj
+[3/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\DocumentTabs.cpp.obj
+[4/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\PhysicsAuthoringPanel.cpp.obj
+[5/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\MaterialAssetPanel.cpp.obj
+[6/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\ViewportOverlayRegistry.cpp.obj
+[7/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ScriptAuthoringPanel.cpp.obj
+[8/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ProblemsPanel.cpp.obj
+[9/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ContentAssistancePanel.cpp.obj
+[10/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\PhysicsOverlays.cpp.obj
+[11/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\content\AssetCatalog.cpp.obj
+[12/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\ViewportOverlays.cpp.obj
+[13/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\content\ContentDirectoryModel.cpp.obj
+[14/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\content\NodePresetRegistry.cpp.obj
+[15/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorAutomation.cpp.obj
+[16/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorSession.cpp.obj
+[17/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspaceUI.cpp.obj
+[18/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorToolbar.cpp.obj
+[19/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\projects\ProjectOpenService.cpp.obj
+[20/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\ViewportGizmo.cpp.obj
+[21/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[22/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ProjectBrowserPanel.cpp.obj
+[23/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\projects\ProjectCreateJob.cpp.obj
+[24/32] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\EnvironmentPanel.cpp.obj
+[25/32] Building CXX object CMakeFiles\AzureAuthoringWorkflowTests.dir\tests\AuthoringWorkflowTests.cpp.obj
+[26/32] Linking CXX static library AzureEditor.lib
+[27/32] Building CXX object CMakeFiles\AzureDomainAuthoringTests.dir\tests\DomainAuthoringTests.cpp.obj
+[28/32] Linking CXX executable AzureAuthoringWorkflowTests.exe
+[29/32] Building CXX object CMakeFiles\AzurePrefabAuthoringTests.dir\tests\PrefabAuthoringTests.cpp.obj
+[30/32] Linking CXX executable AzureDomainAuthoringTests.exe
+[31/32] Linking CXX executable AzurePrefabAuthoringTests.exe

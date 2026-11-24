@@ -1,0 +1,16 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 124: AzureEditor.GizmoController
+1/1 Test #124: AzureEditor.GizmoController ......***Failed    0.10 sec
+[1791394865367][info][editor][code=0] Opened scene: gizmo
+[1791394865375][info][editor][code=0] Opened scene: gizmo
+[1791394865386][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-gizmo-22448480873300\scene.azscene
+Active drag must isolate tool switching
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.11 sec
+
+The following tests FAILED:
+	124 - AzureEditor.GizmoController (Failed)

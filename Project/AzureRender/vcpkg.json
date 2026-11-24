@@ -3,10 +3,128 @@
   "version-string": "0.1.0",
   "builtin-baseline": "2bc124dac8436f5d8e108273aacf3f68d9824185",
   "dependencies": [
+    {
+      "name": "manifold",
+      "version>=": "3.5.2"
+    },
     "glfw3",
+    "zstd",
     "stb",
     "openexr",
     "tinygltf",
-    "vulkan-memory-allocator"
+    "vulkan-memory-allocator",
+    {
+      "name": "joltphysics",
+      "version>=": "5.6.0"
+    },
+    {
+      "name": "sol2",
+      "version>=": "3.5.0"
+    },
+    "lua",
+    {
+      "name": "rmlui",
+      "version>=": "6.3"
+    },
+    {
+      "name": "miniaudio",
+      "version>=": "0.11.25"
+    },
+    {
+      "name": "assimp",
+      "version>=": "6.0.4"
+    },
+    {
+      "name": "tiff",
+      "version>=": "4.7.2"
+    },
+    {
+      "name": "libwebp",
+      "version>=": "1.6.0"
+    },
+    {
+      "name": "libvorbis",
+      "version>=": "1.3.7"
+    },
+    {
+      "name": "libflac",
+      "version>=": "1.5.0"
+    },
+    {
+      "name": "mp3lame",
+      "version>=": "3.100"
+    },
+    {
+      "name": "directxtex",
+      "default-features": false,
+      "version>=": "2026-05-07"
+    },
+    {
+      "name": "ktx",
+      "version>=": "4.4.2"
+    },
+    {
+      "name": "opus",
+      "version>=": "1.6.1"
+    },
+    {
+      "name": "opusfile",
+      "version>=": "0.12+20221121"
+    }
+  ],
+  "overrides": [
+    {
+      "name": "manifold",
+      "version": "3.5.2"
+    },
+    {
+      "name": "lua",
+      "version": "5.4.8"
+    },
+    {
+      "name": "assimp",
+      "version": "6.0.4",
+      "port-version": 3
+    },
+    {
+      "name": "tiff",
+      "version": "4.7.2"
+    },
+    {
+      "name": "libwebp",
+      "version": "1.6.0",
+      "port-version": 3
+    },
+    {
+      "name": "libvorbis",
+      "version": "1.3.7",
+      "port-version": 4
+    },
+    {
+      "name": "libflac",
+      "version": "1.5.0"
+    },
+    {
+      "name": "mp3lame",
+      "version": "3.100",
+      "port-version": 17
+    },
+    {
+      "name": "directxtex",
+      "version": "2026-05-07"
+    },
+    {
+      "name": "ktx",
+      "version": "4.4.2"
+    },
+    {
+      "name": "opus",
+      "version": "1.6.1"
+    },
+    {
+      "name": "opusfile",
+      "version": "0.12+20221121",
+      "port-version": 1
+    }
   ]
 }

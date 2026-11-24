@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "platform": "Windows x64",
+  "vulkanApi": "1.3",
+  "width": 1920,
+  "height": 1080,
+  "targetHz": 60,
+  "shadowMapSize": 2048,
+  "shadowCascades": 4,
+  "entities": 21,
+  "animatedCharacters": 4,
+  "fullGameUi": true,
+  "materialQuality": "full",
+  "privateCharacter": false
+}

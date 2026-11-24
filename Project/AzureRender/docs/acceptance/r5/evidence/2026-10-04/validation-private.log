@@ -1,0 +1,42 @@
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: enabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+Face SDF: material=M_actor_laevat_face_01, texture=1024x1024, headNode=Bip001_Head
+Face SDF light frame: bind-relative head rotation
+Turntable foot pivot: [0.009323, -0.340284, -0.033144]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\assets_private\laevat_skinned\r5-head-follow.glb
+Loaded asset: 81487 vertices, 284673 indices, 14 primitives, 15 materials
+Material Class v1 inventory:
+  [0] M_actor_laevat_body_01 -> skin, flags=0x1, source=asset-extras
+  [1] M_actor_laevat_body_02 -> skin, flags=0x1, source=asset-extras
+  [2] M_hairshadow_common_01_001 -> overlay, flags=0x10, source=asset-extras
+  [3] M_actor_laevat_cloth_03 -> fabric, flags=0x1, source=asset-extras
+  [4] M_actor_laevat_cloth_04 -> fabric, flags=0x1, source=asset-extras
+  [5] M_actor_laevat_cloth_01 -> fabric, flags=0x9, source=asset-extras
+  [6] M_actor_laevat_cloth_02 -> fabric, flags=0x9, source=asset-extras
+  [7] M_actor_laevat_face_01 -> face, flags=0x5, source=asset-extras
+  [8] M_actor_laevat_brow_01 -> overlay, flags=0x50, source=asset-extras
+  [9] M_actor_laevat_iris_01 -> eye, flags=0x1, source=asset-extras
+  [10] M_eyeshadow_common_01 -> overlay, flags=0x10, source=asset-extras
+  [11] M_actor_laevat_cloth_05 -> fabric, flags=0x1, source=asset-extras
+  [12] M_actor_laevat_hair_01 -> hair, flags=0x3, source=asset-extras
+  [13] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [14] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 468 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "r5-head-follow-probe", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+CQ-0 QA: camera=face-front, light=stylized-key, effect=none, state=enabled, isolation=beauty
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Clustered lighting: 0 lights, 0 cluster references
+Rendered frames: 120
+Capture manifest: D:\Assigment\2609\FYP\Project\AzureRender\build\r5\debug-validation\private\capture_manifest.json
+Captured frames: 120 at 60 fps
+Allocator after unload: buffers=0 images=0
+[1791120230170][info][gpu][code=0] GPU capability report: D:\Assigment\2609\FYP\Project\AzureRender\build\r5\debug-validation\private\gpu_capabilities.json
+[1791120242752][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791120242761][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791120243172][info][capture][code=0] Capture progress: 1 / 120
+[1791120265137][info][capture][code=0] Capture progress: 60 / 120
+[1791120287504][info][capture][code=0] Capture progress: 120 / 120

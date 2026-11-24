@@ -1,0 +1,157 @@
+{
+  "samples": 49384,
+  "byteThreshold": 1,
+  "configurations": {
+    "intel": {
+      "measured-filter": {
+        "exactPixels": 49126,
+        "pixelsOverOneByte": 0,
+        "maximumByteError": 1,
+        "sha256": "4ff102f425ebe84081b5bbd20d51591eef3ba75377d74356285e3f31065b5f31",
+        "deviceLine": "Device: Intel(R) RaptorLake-S Mobile Graphics Controller"
+      },
+      "precise-filter": {
+        "exactPixels": 48987,
+        "pixelsOverOneByte": 120,
+        "maximumByteError": 33,
+        "sha256": "70cb69bf6f0f48cf49a2af8981cde83958bcb3fe36b1ce19460c9407686fd85c",
+        "deviceLine": "Device: Intel(R) RaptorLake-S Mobile Graphics Controller"
+      },
+      "precise-homogeneous": {
+        "exactPixels": 49287,
+        "maximumAbsolutePerComponent": [
+          7.62939453125e-06,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "sha256": "bf059c59f69a6aa2fc7514f4a1652853151f2bfce5f03e921f63ea76f59a9b9d",
+        "deviceLine": "Device: Intel(R) RaptorLake-S Mobile Graphics Controller"
+      }
+    },
+    "nvidia": {
+      "measured-filter": {
+        "exactPixels": 49126,
+        "pixelsOverOneByte": 0,
+        "maximumByteError": 1,
+        "sha256": "45e9e8c59264b426b8e918961b746206a2b65c66d69f335cff16c7dec411b28e",
+        "deviceLine": "Device: NVIDIA GeForce RTX 4060 Laptop GPU"
+      },
+      "precise-filter": {
+        "exactPixels": 49126,
+        "pixelsOverOneByte": 0,
+        "maximumByteError": 1,
+        "sha256": "377a39c1ec50e13fa55a592ce55f7847fc6437710fa6e66f34584d181f5a738d",
+        "deviceLine": "Device: NVIDIA GeForce RTX 4060 Laptop GPU"
+      },
+      "precise-homogeneous": {
+        "exactPixels": 49384,
+        "maximumAbsolutePerComponent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "sha256": "6de26d29b1762b87dd9225d074a47bd9a22c40912bf415ebe5ce234672affc5f",
+        "deviceLine": "Device: NVIDIA GeForce RTX 4060 Laptop GPU"
+      }
+    }
+  },
+  "sourceCommit": "3f9c745",
+  "scope": "native receiver diagnostic; full hair color remains pending",
+  "passed": false,
+  "stageDiagnosis": {
+    "world": {
+      "exactPixels": 42801,
+      "exactAmongFailedPixels": 0,
+      "maxAbsolutePerComponent": [
+        6.103515625e-05,
+        3.0517578125e-05,
+        3.0517578125e-05
+      ]
+    },
+    "normal": {
+      "exactPixels": 6670,
+      "exactAmongFailedPixels": 14,
+      "maxAbsolutePerComponent": [
+        2.384185791015625e-07,
+        3.129243850708008e-07,
+        2.384185791015625e-07
+      ]
+    },
+    "biased": {
+      "exactPixels": 42797,
+      "exactAmongFailedPixels": 0,
+      "maxAbsolutePerComponent": [
+        6.103515625e-05,
+        3.0517578125e-05,
+        3.0517578125e-05
+      ]
+    },
+    "receiver": {
+      "exactPixels": 42824,
+      "exactAmongFailedPixels": 0,
+      "maxAbsolutePerComponent": [
+        1.1444091796875e-05,
+        1.52587890625e-05,
+        1.52587890625e-05
+      ]
+    }
+  },
+  "productionChanged": false,
+  "inputs": {
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\producer-cb0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\producer-cb1.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\producer-cb3.bin": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t0.bin": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t2.bin": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t5.bin": "e931fd14a21ccf9da1c1200a368fc6212211d10f4c87f36d649a6c52ad416270",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t6.bin": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\native-screen-visibility.bin": "ed6b1149357db8d07e9fd5fd247d372890e31f50303879f4e1f8607ac8e8b76e",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-181501-native-producer-gpu-intermediates-de1e3d\\native-filter-queries.bin": "250ace837586bbd59b37c4dff8d62c2abff7c09ae9d0a308a701bbbe30b3f0f9",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-181501-native-producer-gpu-intermediates-de1e3d\\receiver-queries.bin": "7e524b4a3eda5db91dcef38a5c51652734b22abeff374a7c6159cde13128e999",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-181501-native-producer-gpu-intermediates-de1e3d\\expected.u8": "53d12e27df28022de74c0947260104c922421154c971eebf29fe6c3e1addfb55"
+  },
+  "artifacts": {
+    "adapt_depth.py": "2f27850e15f01a9f09f5f8ef1252b973abd8b46435afef68c0766cfd9f894e21",
+    "analyze.py": "98b10ee879d7b6d76a28d439292f183d86d44135823bbc7dca103aecb0a869de",
+    "closeout.py": "b35398deec2801620d2662513829a242ad570cd90c5ca267efe59cde3e06980a",
+    "collector.exe": "3ba9861a49c8b0d1568691be9b39fe1ef34c17aa52a88550badf929421ee8f55",
+    "execute.py": "36de113da4bc2f6a2f1bc65d4a20fd0d1fa4d338d8b2694a33866191940318f5",
+    "intel-measured-filter.bin": "4ff102f425ebe84081b5bbd20d51591eef3ba75377d74356285e3f31065b5f31",
+    "intel-precise-filter.bin": "70cb69bf6f0f48cf49a2af8981cde83958bcb3fe36b1ce19460c9407686fd85c",
+    "intel-precise-homogeneous.bin": "bf059c59f69a6aa2fc7514f4a1652853151f2bfce5f03e921f63ea76f59a9b9d",
+    "intel-stage-biased.bin": "d868aa07b148612729095700d573743108562f808a972d8e09f81bc5b37e253b",
+    "intel-stage-biased.comp": "811b031ae0a0994a90f2ed3dfb0666114a12961ae3ffb64084c634469ed48a2b",
+    "intel-stage-biased.spv": "3dab7f48a4d4c6c8edcd9c98827c82ad24817b358d873f5421133f563cb1cc83",
+    "intel-stage-normal.bin": "e3ab2daf89cd42b7c3aac1fbd80c344bc1fdf0ad8cb496b18df4095c1e465b13",
+    "intel-stage-normal.comp": "64c96dcc8f9e4341f09bccb19396ed7c1e0983bbb17eb962d604c5e76608928b",
+    "intel-stage-normal.spv": "186eee1fa6f2b2eb84b268d57e7a1791109c1de41f07489d6efffc5062da218a",
+    "intel-stage-receiver.bin": "75e6ea6b6dcbfc6116a8f1b07f26954854a1192c020a4ed6148206f255d36536",
+    "intel-stage-receiver.comp": "8bc9af762b3ce0d4860a1f4f6a18c2fc53353d6f89b379ff5159505ad5bf3773",
+    "intel-stage-receiver.spv": "e562f80b952e433cbf7d6be094114f0dbe71db025166c4cc30033540f769d085",
+    "intel-stage-world.bin": "f95d71a3629674868c0ee118cc7a5c4fa039a22d58379e4f44bb01f161201d08",
+    "intel-stage-world.comp": "2770f674b4f700261d68e415e86b1e6396b3485ba6799b0210b323203a87880f",
+    "intel-stage-world.spv": "3a33d2d4fb47ea190fc4ae448dab88248857036b88e8bc6bdaa68d108a770e36",
+    "measured-filter.comp": "2ee855661a098a17828ca1517fd8c81b33c2638fb337f2e20c5fc41da59742f9",
+    "measured-filter.spv": "58c53433c6534a851bd77d8cfe29a6fc3b5429648e7ade1bb92ce6073cf4f7e3",
+    "native_receiver_precise.glsl": "ab61422a64ab87d62e8615977f7a1c5b252f80394d25e94130cde8ba4d0c8b96",
+    "nvidia-measured-filter.bin": "45e9e8c59264b426b8e918961b746206a2b65c66d69f335cff16c7dec411b28e",
+    "nvidia-precise-filter.bin": "377a39c1ec50e13fa55a592ce55f7847fc6437710fa6e66f34584d181f5a738d",
+    "nvidia-precise-homogeneous.bin": "6de26d29b1762b87dd9225d074a47bd9a22c40912bf415ebe5ce234672affc5f",
+    "object_shadow.glsl": "6fd7e87988d0632ba8ad4528f15f4bb4141c81da3ce1fbc843b622a5b77d72e6",
+    "precise-filter.comp": "a1115c7aeaf20a102059cca535c87a04c231fe2fc6f93e6a0b942d3216959cd5",
+    "precise-filter.spv": "b3bbf459f926cba251e8732741ed3d202c3d4450a6ddc8be3bde4901a74f264b",
+    "precise-homogeneous.comp": "8bb08b8ff84052263617aab8c232b2939a97a4a70209a5b3b6b2f5c459e8c8a5",
+    "precise-homogeneous.spv": "03bcd5b4d92eda7296105fb5eb24d5fc9dfa6cb7c86d6a0de86ead2fe88800e0",
+    "prepare.py": "91d16037e9b66c66ce539224d7a9d7536aef9128cd08cf4374018e56075d23da",
+    "stages.py": "4280adb15f0e5a8503b629b12df107073e0587736c847810283857f8f74066c8"
+  },
+  "inputLeaseTokens": [
+    "external-input-bce46794747f4f63a5d5ee16b98a79ff",
+    "external-input-5420014f536f4182b1987571024a3571",
+    "external-input-bca77597245042a989c322e5297fe55a"
+  ],
+  "diagnosticLogLimit": "Stage readback collector returned success and enforces validation errors; standalone stage log files were truncated during offline reanalysis.",
+  "archiveSha256": "8e49af26ec394138349654c6a98938d2be49133a409f0d8a2b1f68c154e2af9f"
+}

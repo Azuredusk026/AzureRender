@@ -1,0 +1,395 @@
+{
+  "status": "isolated-not-adopted-production-restored",
+  "sourceBase": "725dfdd",
+  "candidate": {
+    "status": "isolated-not-adopted",
+    "reason": "Whole-frame benefit not established; GPUmean0.298ms difference and P95 did not improve; candidateCPU window slower",
+    "sourceHashes": {
+      "CMakeLists.txt": "4d4613b32474de548fab7684769556ac19548c0415a9f3c703c684aae84f66a6",
+      "shaders/reflection_probe_field.glsl": "a020e0c5a5618bcb277fc82ea9aa313f713cb79eb34507bc230fe5d98c7b196d",
+      "src/render/ReflectionProbeSpatialGrid.hpp": "87c65e2b594212f5e1fb48a52bc36d3a4bd2870e9e5d8770d9aad742eb339048",
+      "src/scenes/CharacterSceneRenderer.cpp": "08e7aa809007f50761392ef2c7f1802c64d92f23e5caf8cedb4d3187912b493a",
+      "tests/ReflectionProbeFieldTests.cpp": "08f9f5198e39401e13d48144028710242b5586abf1f8730a4ab22b03c2714db2",
+      "tests/ReflectionProbeFieldGpuTests.cpp": "da70e7f046ca2c35fcf6d558e0dbb0e867c8c8c7ab14f430ea856d9fa4213ff3"
+    },
+    "playerSha256": "015b0c80ae1c2ef70248ffaf024eac308b3a2943d44accaa0ea59140d8ae5867"
+  },
+  "estimate": {
+    "probes": 12,
+    "dimensions": [
+      32,
+      16,
+      32
+    ],
+    "cells": 16384,
+    "meanCandidates": 1.92919921875,
+    "p95Candidates": 3.0,
+    "fractionRemoved": 0.8392333984375,
+    "scope": "Uniform field cells with a one-cell halo; predicts volume-test reduction, not frame time",
+    "bounds": [
+      [
+        -82.64009284973145,
+        -19.880415439605713,
+        -181.50485229492188
+      ],
+      [
+        53.456377029418945,
+        44.33414840698242,
+        82.74921798706055
+      ]
+    ]
+  },
+  "build": {
+    "command": [
+      "cmd",
+      "/d",
+      "/c",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+      "build",
+      "--source",
+      "D:\\Projects\\FYP\\Project\\AzureRender",
+      "--build-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+      "--config",
+      "Release",
+      "--test-target",
+      "AzureReflectionProbeFieldTests",
+      "--test-target",
+      "AzureReflectionProbeFieldGpuTests",
+      "--test-target",
+      "AzureRenderReflectionProbeTests"
+    ],
+    "exitCode": 0,
+    "seconds": 90.18800000000192
+  },
+  "checks": [
+    {
+      "scope": "cpu",
+      "devices": [],
+      "filter": null,
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.(ReflectionProbe|ReflectionProbeField)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-005507-probe-field-spatial-candidates-382990\\cpu-checks.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 1.125
+    },
+    {
+      "scope": "nvidia",
+      "devices": [
+        "NVIDIA GeForce RTX 4060 Laptop GPU"
+      ],
+      "filter": "*nv-vk64*",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.ReflectionProbeFieldGpu(\\..+)?$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-005507-probe-field-spatial-candidates-382990\\nvidia-checks.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 3.3439999999973224
+    },
+    {
+      "scope": "intel",
+      "devices": [
+        "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "Intel(R) RaptorLake-S Mobile Graphics Controller"
+      ],
+      "filter": "*igvk64*",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.ReflectionProbeFieldGpu(\\..+)?$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-005507-probe-field-spatial-candidates-382990\\intel-checks.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 1.75
+    }
+  ],
+  "image": {
+    "status": "passed",
+    "sourceBase": "725dfdd-with-probe-spatial-candidates",
+    "executableSha256": "015b0c80ae1c2ef70248ffaf024eac308b3a2943d44accaa0ea59140d8ae5867",
+    "exitCode": 0,
+    "seconds": 292.3590000000004,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "nonFieldProgramBytesUnchanged": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Probe spatial candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "pair": {
+    "sourceBase": "725dfdd",
+    "gpuBaseline": {
+      "shadowMs": {
+        "mean": 2.448098933333333,
+        "p95": 2.5047007999999997,
+        "p99": 2.5254188799999997
+      },
+      "sceneMs": {
+        "mean": 21.677064533333333,
+        "p95": 22.3136768,
+        "p99": 22.47569408
+      },
+      "postProcessMs": {
+        "mean": 0.2769664,
+        "p95": 0.280576,
+        "p99": 0.28530688
+      },
+      "frameMs": {
+        "mean": 24.402129866666666,
+        "p95": 24.916348799999998,
+        "p99": 25.19154112
+      }
+    },
+    "gpuCandidate": {
+      "shadowMs": {
+        "mean": 2.4832077333333333,
+        "p95": 2.5609184,
+        "p99": 2.5723075200000003
+      },
+      "sceneMs": {
+        "mean": 21.341789866666666,
+        "p95": 22.17216,
+        "p99": 22.390036480000003
+      },
+      "postProcessMs": {
+        "mean": 0.278912,
+        "p95": 0.288768,
+        "p99": 0.289792
+      },
+      "frameMs": {
+        "mean": 24.1039096,
+        "p95": 25.0043296,
+        "p99": 25.16319072
+      }
+    },
+    "gpuMeanSavedMs": 0.29822026666666446,
+    "gpuP95SavedMs": -0.08798080000000041,
+    "gpuMeanReduction": 0.012221075303514128,
+    "cpuBaseline": {
+      "mean": 14.68310250000001,
+      "p95": 16.085560000000665,
+      "p99": 19.364273999999494
+    },
+    "cpuCandidate": {
+      "mean": 18.653810833333353,
+      "p95": 21.209939999999992,
+      "p99": 26.148340000000253
+    },
+    "environmentPassed": false,
+    "formalSamplesSatisfied": false,
+    "visualAcceptance": "failed-user-review"
+  },
+  "restoration": {
+    "status": "production-restored",
+    "sourceFilesIdentical": true,
+    "programsByteIdentical": 663,
+    "baselineCodeSha256": "3b6558260a70dd4dfcf6703154e09300907f2d78ec302d6bd45779526b154116",
+    "restoredCodeSha256": "3b6558260a70dd4dfcf6703154e09300907f2d78ec302d6bd45779526b154116",
+    "restoredPlayerSha256": "3182910da6d0e8f4597a3196eeba5b38a5b930d8ab0a10b61089143efa703a79",
+    "candidateNotAdopted": true,
+    "codeSectionIdentical": true
+  },
+  "performanceExecution": [
+    {
+      "role": "baseline",
+      "exitCode": 0,
+      "seconds": 131.65599999999904
+    },
+    {
+      "role": "candidate",
+      "exitCode": 0,
+      "seconds": 136.4220000000023
+    }
+  ],
+  "blockedPreflight": [
+    {
+      "role": "baseline",
+      "exitCode": 1,
+      "seconds": 187.64099999999962
+    }
+  ],
+  "environmentAction": "Observed Slay the Spire2 window and minimized with native Minimize button; process retained; three subsequent GPU observations were0percent",
+  "formalPerformancePassed": false,
+  "visualAcceptance": "failed-user-review",
+  "budget": {
+    "allowed": true,
+    "reasons": [],
+    "totalBytes": 1024208138240,
+    "freeBytes": 127757017088,
+    "usedBytes": 449771527,
+    "plannedBytes": 0,
+    "quotaBytes": 2147483648,
+    "reserveBytes": 102420813824,
+    "diagnostic": false
+  },
+  "archive": {
+    "path": "measurements.zip",
+    "bytes": 1627068,
+    "sha256": "b14be44dfa4d5fdaad8b38971f5b5e7cb796812c61b23ac4561447b3721d3a95",
+    "memberHashes": {
+      "after-game-minimized.json": "f3b487b84977ab1f4fff3e1acc1a02a0a7345075687669322d1e7f89e5218f7a",
+      "archive_evidence.py": "1fefab2d5efe0732bc980587890086514b0eb803e1c355290f0f4d8d6abc5a55",
+      "assess_pair.py": "27f15d0fc59a753b71c12443240974067c6549f7e3b97a8a6419dbb1f0d5af5b",
+      "baseline-products.json": "d6737aaf5c4b6d4d96340925b81343f0ac6c76d2f0ce36b5f0a1f7dfa2672825",
+      "batch-checks.json": "c8b89b6fc7eea2772f0200116390922a615c327a194e4ddaafa5a24f64b9311f",
+      "blocked-preflight-before-minimize/environment.json": "107028d4f3608d5bbcca11b030075c689636159b38d9dc76c9da66b80d26e3bf",
+      "blocked-preflight-before-minimize/frozen-inputs.json": "af9cf8ad5e0da0a30b4718cd67ad3664254bd5cc92ed3163ee84cade29da3ff9",
+      "blocked-preflight-before-minimize/task.json": "c39374dcd6abd853431d6a19680d2330802bb93be1c7141b7da0182458a18fee",
+      "blocked-preflight-execution.json": "d59ce475004013407cb22d659d0450d8a4e1edbb1a043db9b461d136f2203876",
+      "blocked-preflight-runner.log": "1c380abf984578bb4c64288644b95b1f2126e26535ba09de4c46c2e37cac76a7",
+      "budget.json": "e6a120626bcfffa5c2e16c06cd8b1eb910487d9237283c24b33785f0f977f8fe",
+      "build_release.py": "27e0cd99bd5120081f8bfba23192719d977f44724b870235714e9208020c0f55",
+      "candidate-estimate.json": "aee5aaf680d032e83dd5076c5d7d65d8885d2ed442c176ace5598aca9df5582f",
+      "candidate-programs.json": "c008d42069c78901e59cd5ab7f360423af1f9b59c38f3fe289c377aab2f1e701",
+      "candidate-source/CMakeLists.txt": "4d4613b32474de548fab7684769556ac19548c0415a9f3c703c684aae84f66a6",
+      "candidate-source/shaders/reflection_probe_field.glsl": "a020e0c5a5618bcb277fc82ea9aa313f713cb79eb34507bc230fe5d98c7b196d",
+      "candidate-source/src/render/ReflectionProbeSpatialGrid.hpp": "87c65e2b594212f5e1fb48a52bc36d3a4bd2870e9e5d8770d9aad742eb339048",
+      "candidate-source/src/scenes/CharacterSceneRenderer.cpp": "08e7aa809007f50761392ef2c7f1802c64d92f23e5caf8cedb4d3187912b493a",
+      "candidate-source/tests/ReflectionProbeFieldGpuTests.cpp": "da70e7f046ca2c35fcf6d558e0dbb0e867c8c8c7ab14f430ea856d9fa4213ff3",
+      "candidate-source/tests/ReflectionProbeFieldTests.cpp": "08f9f5198e39401e13d48144028710242b5586abf1f8730a4ab22b03c2714db2",
+      "candidate-source.patch": "44a8dcd4c7f94761f2110d48a60e39755ac65dfd6c54576561666c44222e56a9",
+      "capture_candidate.py": "5c1c06a181c5087c0389b1705e8918b02a2b995f27c2e35de4516f9a0d5ad4f7",
+      "check_batch.py": "7f08a08fe8c2794c1dfd99ae16c22432ed05fbc5b2700d75a22fa4b2d9d5f4f0",
+      "cpu-checks.log": "0e33a1814ed1f8b9c9a137a53454fdce2ff2ff2aa98906c118db0c4ef3565355",
+      "cpu-checks.xml": "9104ef4e68a18b4a77feff368e44daeeb5c0037ce2ee2277ce8dd969ffc5d7a2",
+      "image/bind-pose-workload.json": "801624fe52377c10ea1fa5ab4a6129d69ddb5c452720fdfc9b747bb7fba19050",
+      "image/command.json": "4db4d0f990c4aef427c8837396c7edb1fbe11964b1f37c1e1fa3259425e8e829",
+      "image/frames/capture_manifest.json": "b36aa8f8149fba850fc7731d68eabac84cc2f6f7f21ced90ee4ccedf969041f6",
+      "image/frames/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+      "image/frozen-inputs.json": "316fc1e48afda7e330420c57df6679faf83e93ef55c5bc5181acba299bc7a320",
+      "image/identity-workload.json": "99835e64bab80baa2120034780f5bbd0e926efc0e5083f09b938e8cf348d2713",
+      "image/results.json": "6d204978086b2c35682f560a3ab4e0d4c91747c69132c8b0fe0c424c5f9381e6",
+      "image/runtime.json": "aba4c5549b71727b9e430ab4d7116996ae9bdcdde363b130d06aefa401c1d29f",
+      "image/stderr.log": "6c955f753adbdf8f2bf1a0efe256a6c1e82234df3645af2aada58b5a9493eed1",
+      "image/stdout.log": "55c11233493a3a88e98e997a7a451d3dbf4ddafb50fe71d689fd880ce3b5b63e",
+      "image/workload.json": "914510df2c090eb8efc35d59fa5bddb29a5956b573040a1d3e0a90b9b2cbe634",
+      "image-runner.log": "acdefa4b8ff127e3a6e19c4fec2188b4dad6bd527da211c22e98200194b38360",
+      "intel-checks.log": "69d9b58c288e79181cde806d26efe0e526c70f5cdc1047bca9fde8d6de6fb4ec",
+      "intel-checks.xml": "4720a20ae215a9d47d93728709cd66b93c96158c60b236dc105bafe393dbd033",
+      "intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+      "isolation.json": "7bd82e99d21583fbee1345478c14e0f7b9d789ee618ece0a6daf5b495d8c213a",
+      "measure_baseline.py": "8ce1a026b81f6395bab85e0870dbb0f71848a613c86d38a89bdbd1522e5c6ddf",
+      "measure_candidate.py": "07fb5387301406861ce508a1a6559cb2f8579df8e4f0b5e5e9e0832f2db68024",
+      "nvidia-checks.log": "bd02ab3b51a971f18aa2fb8b77c4fc6cc751370ba70d5d2a66b80fc6f6255815",
+      "nvidia-checks.xml": "c42b0ccafe2ccd62e5c31190f18dffe4733c092576e94e414f7302834a0ab2d9",
+      "nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+      "paired-results.json": "969d41f2cd8b39ab3f1a76e8611fd1f3dbe7ee7ebb06b2c35a00bb4903b47492",
+      "performance-baseline/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+      "performance-baseline/environment.json": "2b4964f71ca4a22c7ab372c10a0090b1714ecf17070ec20cd6ee64dbcc284d4e",
+      "performance-baseline/frozen-inputs.json": "af9cf8ad5e0da0a30b4718cd67ad3664254bd5cc92ed3163ee84cade29da3ff9",
+      "performance-baseline/memory.json": "d8672e0654291960dda199d444216e0809788071c416c2be4a3cb04fdcb73d21",
+      "performance-baseline/results.json": "a2258fb1ae64feaeefc181680e44baab414ced2cd591a904eb102267f5de1c17",
+      "performance-baseline/runtime.json": "ba99deaa6477c23488077d2f66a99dbbc68eae2d0b49325026ed68192cd58322",
+      "performance-baseline/stderr.log": "a0b8e2af53f0b129c807065d91d0ad7c68f4ebdbf601809b9032ac5101933190",
+      "performance-baseline/stdout.log": "37ee6e744e7cf0139277287b0464f9d5b28215616a4cad5157f58f16f087c526",
+      "performance-baseline/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "performance-baseline/task.json": "c39374dcd6abd853431d6a19680d2330802bb93be1c7141b7da0182458a18fee",
+      "performance-baseline/timing.csv": "ecf748f33910b8a508dadce995691cd9849564d7a058d9beb506ce6d3700242b",
+      "performance-baseline/timing.json": "fd2ff977e9d838c30459c99ff1bd31650236495ac8a380b09f904e51167d4028",
+      "performance-baseline-runner.log": "1bd7d0818a4e43107d39444598290d3df3b55b3755d416dcf3266fc8c0cd3bd1",
+      "performance-candidate/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+      "performance-candidate/environment.json": "27038d714f41afcd97453736cbb35d0c47b7e9a6567810f8af8d133a040d96ec",
+      "performance-candidate/frozen-inputs.json": "af9cf8ad5e0da0a30b4718cd67ad3664254bd5cc92ed3163ee84cade29da3ff9",
+      "performance-candidate/memory.json": "7afef26a02681b5182538b6fe9f7c7072663160886280cf336b11d49e8f265a6",
+      "performance-candidate/results.json": "859ac0506c1eb82182eabb319947512771f752a6252a16809eb825060515a8b1",
+      "performance-candidate/runtime.json": "7cf8f10536043d8ee93a42337cd1828ae1b6db63a79a74ff59edc6164a087e28",
+      "performance-candidate/stderr.log": "a92c7cc4e968ccb3ba68c06a773cdaa884fb259c8630d456daf979130f80a288",
+      "performance-candidate/stdout.log": "d855bc504d69ddfc5e35337edbca7d89407d8543fa3ba869eb84de7edb4017bb",
+      "performance-candidate/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "performance-candidate/task.json": "8c6cbbe54bb3e006cc6ba5364fcbf7c0f232aae6d125a1d8fe93e70a84c31a75",
+      "performance-candidate/timing.csv": "a7fed5c359e0d98813c893d24278ae2cfb7dbebcf29a2e66de073d0743b9e2d9",
+      "performance-candidate/timing.json": "a9d84de5f671259c381f9187bff4a94f07afd147781693364defdd990f2ec19a",
+      "performance-candidate-runner.log": "eff3cb8fa1537f03eadedf361cd9e68dd2b98f46b6809b56e69fe8ffd9d9608d",
+      "performance-execution.json": "0162f5da00db94ca16401a7901e37d8e462812b542f545ff4806e759af85fce3",
+      "release-build.json": "d4efc836b8e887668086ba79e77d98b11f0da7e2a85bbf79990e7581c88cc959",
+      "release-build.log": "2b03ba53c8f7af5d7d5c254acde81626b8e40864c7484d41218a1557a3859273",
+      "restoration.json": "b03bed5967485889a90adabcce9f1a85e41b6a5a7dcb7cd73fb5f568aa3491ed",
+      "restored-release-build.log": "97cd65592001d9972859d97ce96c21b098e221ddc877149e1274c45658636a72"
+    }
+  }
+}

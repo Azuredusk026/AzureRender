@@ -1,0 +1,82 @@
+{
+  "debug": {
+    "cpu": {
+      "total": 188,
+      "firstPassed": 186,
+      "repairedRetestPassed": 2
+    },
+    "gpu": {
+      "total": 74,
+      "nativeInput": "EnvironmentBlocked",
+      "executedNonNative": 73,
+      "passedNonNative": 73
+    },
+    "commit": "af8de8f4d5e7c3d076fb157103d8c37f23f238cb",
+    "finalCandidateFollowup": {
+      "passed": 3,
+      "names": [
+        "AzureEditor.WorkspaceGpu",
+        "AzureEditor.NodeAdditionGpu",
+        "AzureEditor.GeneralWorkflowGpu"
+      ],
+      "changeScope": [
+        "src/editor/EditorToolbar.cpp",
+        "src/editor/EditorWorkspaceUI.cpp"
+      ],
+      "verifiedInputChanges": [
+        "src/editor/EditorToolbar.cpp",
+        "src/editor/EditorWorkspaceUI.cpp",
+        "tools/run_platformer_long_run.py",
+        "tools/test_platformer_long_run.py"
+      ],
+      "finalCommit": "0dcc91349b90c129152df70d22f873934c6e3309",
+      "playerBinaryUnchanged": true
+    },
+    "controllerRepair": {
+      "passedTests": 2,
+      "unitCases": 55,
+      "allBuildProductsUnchanged": true,
+      "sourceCommit": "0dcc91349b90c129152df70d22f873934c6e3309"
+    }
+  },
+  "release": {
+    "cpu": {
+      "total": 188,
+      "firstPassed": 186,
+      "repairedRetestPassed": 2
+    },
+    "gpu": {
+      "total": 74,
+      "nativeInput": "EnvironmentBlocked",
+      "executedNonNative": 73,
+      "passedNonNative": 73
+    },
+    "commit": "af8de8f4d5e7c3d076fb157103d8c37f23f238cb",
+    "finalCandidateFollowup": {
+      "passed": 3,
+      "names": [
+        "AzureEditor.WorkspaceGpu",
+        "AzureEditor.NodeAdditionGpu",
+        "AzureEditor.GeneralWorkflowGpu"
+      ],
+      "changeScope": [
+        "src/editor/EditorToolbar.cpp",
+        "src/editor/EditorWorkspaceUI.cpp"
+      ],
+      "verifiedInputChanges": [
+        "src/editor/EditorToolbar.cpp",
+        "src/editor/EditorWorkspaceUI.cpp",
+        "tools/run_platformer_long_run.py",
+        "tools/test_platformer_long_run.py"
+      ],
+      "finalCommit": "0dcc91349b90c129152df70d22f873934c6e3309",
+      "playerBinaryUnchanged": true
+    },
+    "controllerRepair": {
+      "passedTests": 2,
+      "unitCases": 55,
+      "allBuildProductsUnchanged": true,
+      "sourceCommit": "0dcc91349b90c129152df70d22f873934c6e3309"
+    }
+  }
+}

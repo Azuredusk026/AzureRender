@@ -1,0 +1,13 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 181: AzureEditor.ContentOperations
+1/1 Test #181: AzureEditor.ContentOperations ....***Failed    0.38 sec
+Dependency copies must target their copied dependencies
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.39 sec
+
+The following tests FAILED:
+	181 - AzureEditor.ContentOperations (Failed)

@@ -1,0 +1,270 @@
+[1/21] Linking CXX executable AzureGameplayPresentationTests.exe
+[2/21] Linking CXX executable AzurePhysicsInputTests.exe
+[3/21] Linking CXX executable AzureGameUiTests.exe
+[4/21] Building CXX object CMakeFiles\AzureRenderCommandLineTests.dir\src\app\CommandLine.cpp.obj
+[5/21] Building CXX object CMakeFiles\AzureRenderCommandLineTests.dir\tests\CommandLineTests.cpp.obj
+[6/21] Linking CXX executable AzureRuntimeLifecycleTests.exe
+[7/21] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\GameBuildJob.cpp.obj
+[8/21] Building CXX object CMakeFiles\AzurePresentationRuntimeTests.dir\tests\PresentationRuntimeTests.cpp.obj
+[9/21] Building CXX object CMakeFiles\AzureRenderEditorSessionTests.dir\tests\EditorSessionTests.cpp.obj
+[10/21] Linking CXX executable AzureRenderCommandLineTests.exe
+[11/21] Building CXX object CMakeFiles\AzureAssetLevelTests.dir\tests\AssetLevelTests.cpp.obj
+[12/21] Building CXX object CMakeFiles\AzureScriptRuntimeTests.dir\tests\ScriptRuntimeTests.cpp.obj
+[13/21] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[14/21] Building CXX object CMakeFiles\AzureEditorWorkflowTests.dir\tests\EditorWorkflowTests.cpp.obj
+[15/21] Linking CXX static library AzureEditor.lib
+[16/21] Linking CXX executable AzurePresentationRuntimeTests.exe
+[17/21] Linking CXX executable AzureAssetLevelTests.exe
+[18/21] Linking CXX executable AzureScriptRuntimeTests.exe
+[19/21] Linking CXX executable AzureEditorWorkflowTests.exe
+[20/21] Linking CXX executable AzureRender.exe
+[21/21] Linking CXX executable AzureRenderEditorSessionTests.exe
+[0/1] Re-running CMake...
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+-- Automatically setting %HTTP(S)_PROXY% environment variables to "127.0.0.1:7897".
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+  * brotli:x64-windows@1.2.0 -- git+https://github.com/microsoft/vcpkg@0fb79bb13588702a9e06057745b4aed95ce5c861
+  * bzip2[core,tool]:x64-windows@1.0.8#6 -- git+https://github.com/microsoft/vcpkg@2d029da682847c5ebdc54e4dbea001331a02207e
+  * freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3 -- git+https://github.com/microsoft/vcpkg@37a2b08e48b987c9b2a45a075fed1bc382e8de03
+    glfw3:x64-windows@3.5.1 -- git+https://github.com/microsoft/vcpkg@983a9c6ea042da294d61cb405600725dd7c22bbd
+  * imath:x64-windows@3.2.2 -- git+https://github.com/microsoft/vcpkg@b167f9479ce8752a2839c39ee8f52c11af4c0266
+  * itlib:x64-windows@1.12.2 -- git+https://github.com/microsoft/vcpkg@8a453b8f5e7fdbda2367527993839428ec50343f
+    joltphysics:x64-windows@5.6.0 -- git+https://github.com/microsoft/vcpkg@2eab0b6e73bfbe491fa0ffb297fd3ffdb6bf4ecf
+  * libdeflate[compression,core,decompression,gzip,zlib]:x64-windows@1.25 -- git+https://github.com/microsoft/vcpkg@ceffc2e1864a1a1da49e655da03c323723a9816d
+  * libpng:x64-windows@1.6.58 -- git+https://github.com/microsoft/vcpkg@909d98e06046a0901fd11300b3d725d6a80d27bf
+    lua:x64-windows@5.4.8 -- git+https://github.com/microsoft/vcpkg@062ae235ae46d4bce8b00be2c74667e0763cc2c1
+    miniaudio:x64-windows@0.11.25 -- git+https://github.com/microsoft/vcpkg@f019711e3ca3673819cc9b8436af74b095dcb580
+  * nlohmann-json:x64-windows@3.12.0#2 -- git+https://github.com/microsoft/vcpkg@ac3b8821cf486e45dd543bef2a4ba1d1ba230258
+    openexr:x64-windows@3.4.13 -- git+https://github.com/microsoft/vcpkg@48521629e41c4a321b28dc3db54695be41c66e2f
+  * openjph:x64-windows@0.31.0 -- git+https://github.com/microsoft/vcpkg@ad25bd553f9d4644ed6a978f8a6fc5d6387a923b
+    rmlui[core,freetype]:x64-windows@6.3 -- git+https://github.com/microsoft/vcpkg@190d18bbd429a7eab3a01d54051362e47538bfb0
+  * robin-hood-hashing:x64-windows@3.11.5#2 -- git+https://github.com/microsoft/vcpkg@1a989171742275cc32060ed37157eeb0efcdc739
+    sol2:x64-windows@3.5.0#1 -- git+https://github.com/microsoft/vcpkg@b3089bcbf6e652b82348192c6289d0ba2d0d9fe7
+    stb:x64-windows@2024-07-29#1 -- git+https://github.com/microsoft/vcpkg@c362152d1d02973e7b1ce777960f8a6876656560
+    tinygltf:x64-windows@3.0.0#1 -- git+https://github.com/microsoft/vcpkg@9c983959bc083131a4f5ca06ea51178a3e5a04b1
+  * vcpkg-cmake:x64-windows@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:x64-windows@2026-07-21 -- git+https://github.com/microsoft/vcpkg@51befcb03097f8d19c1c59f9ec3625e69d85322a
+    vulkan-memory-allocator:x64-windows@3.4.0 -- git+https://github.com/microsoft/vcpkg@a5328a01836eccf4c520e20e58f4d45d36cd1035
+  * zlib:x64-windows@1.3.2#1 -- git+https://github.com/microsoft/vcpkg@f49b05c666425471a7f6dc8b6156e9b3675a3c90
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+miniaudio is header-only and can be used from CMake via:
+
+  find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
+  target_include_directories(main PRIVATE ${MINIAUDIO_INCLUDE_DIRS})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+rmlui provides CMake targets:
+
+    find_package(RmlUi CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE RmlUi::RmlUi)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+All requested installations completed successfully in: 764 us
+-- Running vcpkg install - done
+-- Found Freetype target Freetype::Freetype - Freetype font engine enabled
+CMake Warning at C:/Program Files/CMake/share/cmake-3.20/Modules/InstallRequiredSystemLibraries.cmake:601 (message):
+  system runtime library file does not exist:
+  'MSVC_REDIST_DIR-NOTFOUND/x64/Microsoft.VC142.CRT/msvcp140.dll'
+Call Stack (most recent call first):
+  CMakeLists.txt:895 (include)
+
+
+CMake Warning at C:/Program Files/CMake/share/cmake-3.20/Modules/InstallRequiredSystemLibraries.cmake:601 (message):
+  system runtime library file does not exist:
+  'MSVC_REDIST_DIR-NOTFOUND/x64/Microsoft.VC142.CRT/vcruntime140.dll'
+Call Stack (most recent call first):
+  CMakeLists.txt:895 (include)
+
+
+CMake Warning at C:/Program Files/CMake/share/cmake-3.20/Modules/InstallRequiredSystemLibraries.cmake:601 (message):
+  system runtime library file does not exist:
+  'MSVC_REDIST_DIR-NOTFOUND/x64/Microsoft.VC142.CRT/concrt140.dll'
+Call Stack (most recent call first):
+  CMakeLists.txt:895 (include)
+
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+ninja: no work to do.
+[0/1] Re-running CMake...
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+-- Automatically setting %HTTP(S)_PROXY% environment variables to "127.0.0.1:7897".
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+  * brotli:x64-windows@1.2.0 -- git+https://github.com/microsoft/vcpkg@0fb79bb13588702a9e06057745b4aed95ce5c861
+  * bzip2[core,tool]:x64-windows@1.0.8#6 -- git+https://github.com/microsoft/vcpkg@2d029da682847c5ebdc54e4dbea001331a02207e
+  * freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3 -- git+https://github.com/microsoft/vcpkg@37a2b08e48b987c9b2a45a075fed1bc382e8de03
+    glfw3:x64-windows@3.5.1 -- git+https://github.com/microsoft/vcpkg@983a9c6ea042da294d61cb405600725dd7c22bbd
+  * imath:x64-windows@3.2.2 -- git+https://github.com/microsoft/vcpkg@b167f9479ce8752a2839c39ee8f52c11af4c0266
+  * itlib:x64-windows@1.12.2 -- git+https://github.com/microsoft/vcpkg@8a453b8f5e7fdbda2367527993839428ec50343f
+    joltphysics:x64-windows@5.6.0 -- git+https://github.com/microsoft/vcpkg@2eab0b6e73bfbe491fa0ffb297fd3ffdb6bf4ecf
+  * libdeflate[compression,core,decompression,gzip,zlib]:x64-windows@1.25 -- git+https://github.com/microsoft/vcpkg@ceffc2e1864a1a1da49e655da03c323723a9816d
+  * libpng:x64-windows@1.6.58 -- git+https://github.com/microsoft/vcpkg@909d98e06046a0901fd11300b3d725d6a80d27bf
+    lua:x64-windows@5.4.8 -- git+https://github.com/microsoft/vcpkg@062ae235ae46d4bce8b00be2c74667e0763cc2c1
+    miniaudio:x64-windows@0.11.25 -- git+https://github.com/microsoft/vcpkg@f019711e3ca3673819cc9b8436af74b095dcb580
+  * nlohmann-json:x64-windows@3.12.0#2 -- git+https://github.com/microsoft/vcpkg@ac3b8821cf486e45dd543bef2a4ba1d1ba230258
+    openexr:x64-windows@3.4.13 -- git+https://github.com/microsoft/vcpkg@48521629e41c4a321b28dc3db54695be41c66e2f
+  * openjph:x64-windows@0.31.0 -- git+https://github.com/microsoft/vcpkg@ad25bd553f9d4644ed6a978f8a6fc5d6387a923b
+    rmlui[core,freetype]:x64-windows@6.3 -- git+https://github.com/microsoft/vcpkg@190d18bbd429a7eab3a01d54051362e47538bfb0
+  * robin-hood-hashing:x64-windows@3.11.5#2 -- git+https://github.com/microsoft/vcpkg@1a989171742275cc32060ed37157eeb0efcdc739
+    sol2:x64-windows@3.5.0#1 -- git+https://github.com/microsoft/vcpkg@b3089bcbf6e652b82348192c6289d0ba2d0d9fe7
+    stb:x64-windows@2024-07-29#1 -- git+https://github.com/microsoft/vcpkg@c362152d1d02973e7b1ce777960f8a6876656560
+    tinygltf:x64-windows@3.0.0#1 -- git+https://github.com/microsoft/vcpkg@9c983959bc083131a4f5ca06ea51178a3e5a04b1
+  * vcpkg-cmake:x64-windows@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:x64-windows@2026-07-21 -- git+https://github.com/microsoft/vcpkg@51befcb03097f8d19c1c59f9ec3625e69d85322a
+    vulkan-memory-allocator:x64-windows@3.4.0 -- git+https://github.com/microsoft/vcpkg@a5328a01836eccf4c520e20e58f4d45d36cd1035
+  * zlib:x64-windows@1.3.2#1 -- git+https://github.com/microsoft/vcpkg@f49b05c666425471a7f6dc8b6156e9b3675a3c90
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+miniaudio is header-only and can be used from CMake via:
+
+  find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
+  target_include_directories(main PRIVATE ${MINIAUDIO_INCLUDE_DIRS})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+rmlui provides CMake targets:
+
+    find_package(RmlUi CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE RmlUi::RmlUi)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+All requested installations completed successfully in: 664 us
+-- Running vcpkg install - done
+-- Found Freetype target Freetype::Freetype - Freetype font engine enabled
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+ninja: no work to do.

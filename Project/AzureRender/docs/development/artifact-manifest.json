@@ -1,0 +1,2741 @@
+{
+  "schemaVersion": 1,
+  "managedTaskPolicy": {
+    "root": "build/runs",
+    "retentionDays": 1,
+    "diagnosticRetentionDays": [
+      3,
+      7
+    ],
+    "maximumTaskBytes": 2147483648,
+    "maximumTaskFiles": 10000,
+    "maximumReservedPoolBytes": 17179869184,
+    "evidenceMaximumTaskBytes": 8388608,
+    "evidenceMaximumPoolBytes": 2147483648,
+    "evidenceRetentionDays": 30,
+    "explicitRecoveryRoot": "build/archives/managed",
+    "explicitRecoveryMaximumPoolBytes": 8589934592,
+    "explicitRecoveryRetentionDays": 7,
+    "dailyMaximumCacheBytes": 10737418240,
+    "dailyMaximumModelCopyBytes": 34359738368,
+    "dailyMaximumModelFiles": 512,
+    "modelCatalogMaximumEntries": 50000,
+    "modelCatalogMaximumBytes": 33554432,
+    "dailyMaximumSeconds": 120,
+    "externalProjectStorage": false,
+    "maintenance": "tools/artifact_maintenance.py daily --apply",
+    "maximumBatchItems": 10,
+    "dailyMaximumBatches": 10,
+    "repositorySkill": ".agents/skills/azurerender-artifact-maintenance/SKILL.md",
+    "skillSource": "tools/skills/azurerender-artifact-maintenance/SKILL.md"
+  },
+  "pipelineCachePolicy": {
+    "developmentPath": "build/cache/vulkan",
+    "maximumFileBytes": 134217728,
+    "maximumPoolBytes": 268435456,
+    "maximumEntries": 8,
+    "retentionDays": 7,
+    "maximumWritePeakBytes": 402653184,
+    "dailyInspectionEntryLimit": 64,
+    "maintenance": "tools/artifact_maintenance.py daily --apply"
+  },
+  "storageBudget": {
+    "policy": "artifact-retention.md#空间门禁",
+    "runQuotaBytes": 2147483648,
+    "minimumFreeBytes": 53687091200,
+    "minimumFreeFraction": 0.1,
+    "diagnosticOutputLimitBytes": 67108864,
+    "diagnosticMinimumFreeBytes": 5368709120,
+    "deletionBatchLimit": 10,
+    "deletionApproval": "current-session-authorization",
+    "automaticCleanupMode": "DefaultPreviewThenReviewedRunListsApply"
+  },
+  "current": {
+    "path": "ux-2026-10-14/Engine",
+    "sourceCommit": "2065b6f",
+    "exeSha256": "1c06d440915d60a4ed9674c0232bf964bc9a9ec4418951fc7c3be2dc579904b1"
+  },
+  "milestones": [
+    {
+      "path": "runs/20261115-025120-nr-main-acceptance-fixes-83c2b8",
+      "name": "编辑器与资产主线复验",
+      "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/registered-editor-asset-integration/results.json"
+    },
+    {
+      "path": "runs/20261115-061830-nr-packaging-docs-regression-c61f43",
+      "name": "Windows 发布安装",
+      "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md#windows-发布安装",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/windows-package-install/results.json"
+    },
+    {
+      "path": "runs/20261115-064800-nr-material-cache-regression-4d7a62",
+      "name": "材质视图管线缓存",
+      "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md#材质视图管线缓存",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/material-view-pipeline-cache/results.json"
+    },
+    {
+      "path": "runs/20261115-095836-nr-editor-cold-pipeline-diagnostic-45f30c",
+      "name": "标准构建定向复验与应用管线缓存",
+      "evidence": "docs/acceptance/nr/current-registered-gpu-recoveries.md#标准构建定向复验",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/registered-host-and-storage-recoveries/results.json"
+    },
+    {
+      "path": "runs/20261115-104640-nr-standard-formal-fifteen-0e5774",
+      "name": "正式负载工作集与管线缓存观测",
+      "evidence": "docs/acceptance/nr/registered-working-set-cache.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/registered-formal-working-set-control/results.json"
+    },
+    {
+      "path": "runs/20261115-110843-nr-cache-retention-working-set-352eb9",
+      "name": "缓存保留配对验证",
+      "evidence": "docs/acceptance/nr/registered-working-set-cache.md#缓存保留验证",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/registered-cache-retention-paired/results.json"
+    },
+    {
+      "path": "runs/20261115-113412-nr-standard-cache-retention-qualification-d65701",
+      "name": "缓存保留的标准构建回归与来源复核",
+      "evidence": "docs/acceptance/nr/registered-working-set-cache.md#标准构建复测",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/registered-cache-retention-formal-first/results.json"
+    },
+    {
+      "path": "runs/20261115-115238-nr-standard-formal-cache-retention-repeat-bba226",
+      "name": "缓存保留的十五轮正式验收",
+      "evidence": "docs/acceptance/nr/registered-working-set-cache.md#十五轮正式验收",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/registered-cache-retention-formal-settled/results.json"
+    },
+    {
+      "path": "runs/20261114-141056-nr-ordinary-light-range-work-e70ebf",
+      "name": "联合场景聚光灯范围",
+      "evidence": "docs/acceptance/nr/joint-gpu-pass-budget.md#聚光灯范围与辐照度系数",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-light-and-irradiance/results.json"
+    },
+    {
+      "path": "runs/20261114-141946-nr-irradiance-ordered-layers-5887fd",
+      "name": "联合场景辐照度系数",
+      "evidence": "docs/acceptance/nr/joint-gpu-pass-budget.md#聚光灯范围与辐照度系数",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-light-and-irradiance/results.json"
+    },
+    {
+      "path": "runs/20261115-013428-nr-joint-80w-idle-retest-89f552",
+      "name": "联合场景独显空闲复验",
+      "sourceBase": "01cc6b2",
+      "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-idle-retest/results.json"
+    },
+    {
+      "path": "runs/20261115-080840-nr-joint-fan-control-587b09",
+      "name": "联合场景最高风扇档复验",
+      "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md#最高风扇档复验",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-maximum-fan/results.json"
+    },
+    {
+      "path": "runs/20261115-092507-nr-joint-player-cpu-efficiency-8b5dd2",
+      "name": "联合场景进程级 CPU 节能对照",
+      "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md#进程级-cpu-节能对照",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-player-cpu-efficiency/results.json"
+    },
+    {
+      "path": "runs/20261115-095355-nr-joint-balanced-cpu-energy-preference-ac9774",
+      "name": "联合场景平衡电源计划复验",
+      "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md#平衡电源计划的处理器节能首选项",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-balanced-cpu-energy-preference/results.json"
+    },
+    {
+      "path": "runs/20261115-100552-nr-joint-epp-repeat-02-513bcb",
+      "name": "联合场景平衡电源计划第二轮",
+      "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md#平衡电源计划的处理器节能首选项",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-balanced-cpu-energy-preference-repeats/results.json"
+    },
+    {
+      "path": "runs/20261115-100553-nr-joint-epp-repeat-03-1137fe",
+      "name": "联合场景平衡电源计划第三轮",
+      "evidence": "docs/acceptance/nr/joint-nonlocal-texture-placement.md#平衡电源计划的处理器节能首选项",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/joint-80w-balanced-cpu-energy-preference-repeats/results.json"
+    },
+    {
+      "path": "runs/20261114-173220-nr-shader-host-compiler-concurrency-d140b8",
+      "name": "编辑器加载与目录规模诊断",
+      "evidence": "docs/acceptance/nr/registered-gpu-infrastructure.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-15/registered-editor-diagnostics/results.json"
+    },
+    {
+      "path": "runs/20261114-132114-nr-current-registered-regression-16567f",
+      "name": "主线 GPU 定向复验",
+      "evidence": "docs/acceptance/nr/current-registered-gpu-recoveries.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-14/current-registered-gpu-recoveries/results.json"
+    },
+    {
+      "path": "runs/20261114-132114-nr-current-registered-regression-16567f",
+      "name": "主线 CPU 注册回归",
+      "evidence": "docs/acceptance/nr/current-registered-cpu.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-14/current-registered-cpu/results.json"
+    },
+    {
+      "path": "runs/20261114-125834-nr-joint-texture-hot-placement-4e085e",
+      "name": "联合场景热点纹理分配",
+      "sourceBase": "01cc6b2",
+      "evidence": "docs/acceptance/nr/joint-texture-hot-placement.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-14/joint-texture-hot-placement/results.json"
+    },
+    {
+      "path": "runs/20261113-005205-nr-main-registered-regression-c82feb",
+      "name": "相机投影清单回归",
+      "sourceBase": "1b71afd",
+      "evidence": "docs/acceptance/nr/capture-camera.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-13/camera-projection-layout/results.json"
+    },
+    {
+      "path": "runs/20261113-005205-nr-main-registered-regression-c82feb",
+      "name": "投影头发主线注册用例",
+      "sourceBase": "e972e76",
+      "evidence": "docs/acceptance/nr/projected-hair-viewport-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-13/projected-hair-registration/results.json"
+    },
+    {
+      "path": "runs/20261113-032750-playable-release-30min-85dc35f-886a32",
+      "name": "可玩包三十分钟长跑",
+      "sourceBase": "85dc35f",
+      "evidence": "docs/acceptance/p1/2026-11-13-playable-30min.md",
+      "results": "docs/acceptance/p1/evidence/2026-11-13/playable-30min/results.json"
+    },
+    {
+      "path": "runs/20261113-022822-nr-material-viewquad-main-integration-e65379",
+      "name": "主线材质候选采样",
+      "sourceBase": "01cc6b2",
+      "evidence": "docs/acceptance/nr/material-viewquad-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-13/material-viewquad-integration/results.json"
+    },
+    {
+      "path": "runs/20261113-005205-nr-main-registered-regression-c82feb",
+      "name": "可玩包关卡提交",
+      "sourceBase": "fdeec10",
+      "evidence": "docs/acceptance/p1/2026-11-13-level-commit.md",
+      "results": "docs/acceptance/p1/evidence/2026-11-13/level-commit/results.json"
+    },
+    {
+      "path": "runs/20261113-011746-nr-main-joint-scene-diagnostic-c840ed",
+      "name": "主线联合场景短测",
+      "sourceBase": "a148668",
+      "evidence": "docs/acceptance/nr/performance-bottlenecks.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-13/main-joint-scene-diagnostic/results.json"
+    },
+    {
+      "path": "runs/20261112-213746-nr-projected-hair-integration-b5c673",
+      "name": "三纹理采样与视口选择集成",
+      "sourceBase": "0909e26",
+      "evidence": "docs/acceptance/nr/projected-hair-viewport-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/projected-hair-viewport-integration/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/editor-empty-viewport-green",
+      "name": "空白视口选择",
+      "sourceBase": "b10997b",
+      "evidence": "docs/acceptance/nr/editor-empty-viewport-selection.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/editor-empty-viewport-selection/results.json"
+    },
+    {
+      "path": "runs/20261112-173937-nr-hair-boundary-integration-6ceb4f",
+      "name": "参考头发半层采样集成",
+      "sourceBase": "9d5de3d",
+      "evidence": "docs/acceptance/nr/reference-hair-boundary-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/reference-hair-boundary-integration/results.json"
+    },
+    {
+      "path": "runs/20261112-141547-nr-combination-59f28b",
+      "name": "画质与性能集成",
+      "sourceBase": "b10997b",
+      "evidence": "docs/acceptance/nr/quality-performance-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/quality-performance-integration/results.json"
+    },
+    {
+      "path": "runs/20261112-053111-intel-reference-visibility-sources-5238e2",
+      "name": "Intel 参考可见量来源",
+      "sourceBase": "fa82f57",
+      "evidence": "docs/acceptance/nr/intel-reference-visibility-sources.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/intel-reference-visibility-sources/results.json"
+    },
+    {
+      "path": "runs/20261112-044926-material-reference-object-visibility-344def",
+      "name": "材质参考对象可见量",
+      "sourceBase": "4bf4e7d",
+      "evidence": "docs/acceptance/nr/material-reference-object-visibility.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/material-reference-object-visibility/results.json"
+    },
+    {
+      "path": "runs/20261112-040725-reference-object-shadow-raster-2c9e58",
+      "name": "参考对象图集光栅",
+      "sourceBase": "34d8e9a",
+      "evidence": "docs/acceptance/nr/reference-object-shadow-raster.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/reference-object-shadow-raster/results.json"
+    },
+    {
+      "path": "runs/20261112-032619-native-object-record-calibration-19d2f9",
+      "name": "原生对象记录标定",
+      "sourceBase": "bc12f32",
+      "evidence": "docs/acceptance/nr/native-object-record-calibration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/native-object-record-calibration/results.json"
+    },
+    {
+      "path": "runs/20261112-025941-visibility-projection-depth-c1c792",
+      "name": "对象可见量深度方向",
+      "sourceBase": "b9fb734",
+      "evidence": "docs/acceptance/nr/visibility-projection-depth.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/visibility-projection-depth/results.json"
+    },
+    {
+      "path": "runs/20261112-024632-native-atlas-and-receiver-producers-d5e705",
+      "name": "原生图集与接收输入来源",
+      "sourceBase": "4e4c00c",
+      "evidence": "docs/acceptance/nr/native-atlas-and-receiver-producers.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/native-atlas-and-receiver-producers/results.json"
+    },
+    {
+      "path": "runs/20261112-020715-scene-visibility-reference-calibration-f77af1",
+      "name": "对象可见量逆投影标定",
+      "sourceBase": "87ac510",
+      "evidence": "docs/acceptance/nr/scene-visibility-reference-calibration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/scene-visibility-reference-calibration/results.json"
+    },
+    {
+      "path": "runs/20261112-010418-scene-reference-object-visibility-709f68",
+      "name": "场景参考对象可见量",
+      "sourceBase": "22663a8",
+      "evidence": "docs/acceptance/nr/scene-reference-object-visibility.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/scene-reference-object-visibility/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/depth-split-range-recovery",
+      "name": "主深度颜色附件范围",
+      "sourceBase": "ae2af1a",
+      "evidence": "docs/acceptance/nr/main-depth-attachment-range.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/main-depth-attachment-range/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260",
+      "name": "编辑器视口模型加载",
+      "sourceBase": "05689f3",
+      "evidence": "docs/acceptance/nr/editor-placed-resource-loading.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/editor-placed-resource-loading/results.json"
+    },
+    {
+      "path": "runs/20261111-232828-scene-reference-normal-60ddfa",
+      "name": "场景参考法线与对象身份",
+      "sourceBase": "7044017",
+      "evidence": "docs/acceptance/nr/scene-reference-normal.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/scene-reference-normal/results.json"
+    },
+    {
+      "path": "runs/20261111-213928-scene-reference-depth-728062",
+      "name": "场景参考深度",
+      "sourceBase": "1588c84",
+      "evidence": "docs/acceptance/nr/scene-reference-depth.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-11/scene-reference-depth/results.json"
+    },
+    {
+      "path": "runs/20261111-210839-native-d3d11-depth-devices-9e7a22",
+      "name": "原生深度设备对照",
+      "sourceBase": "698e53d",
+      "evidence": "docs/acceptance/nr/native-d3d11-depth-devices.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-11/native-d3d11-depth-devices/results.json"
+    },
+    {
+      "path": "runs/20261111-072757-material-ellipse-coverage-policy-3e26b6",
+      "name": "独立覆盖椭圆选级",
+      "sourceBase": "dfb1ca3",
+      "evidence": "docs/acceptance/nr/material-ellipse-coverage-policy.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-11/material-ellipse-coverage-policy/results.json"
+    },
+    {
+      "path": "runs/20261109-045502-surface-shadow-reuse-535624",
+      "name": "同帧表面阴影复用",
+      "status": "NoNetGainCandidateIsolated",
+      "sourceBase": "64e7cc3",
+      "evidence": "docs/acceptance/nr/surface-shadow-reuse.md",
+      "checksPassed": 42,
+      "canonicalNativeProcesses": 2,
+      "frameCostProcesses": 5,
+      "reclaimedFiles": 1233,
+      "reclaimedLogicalBytes": 650794034,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261109-044234-shadow-range-index-71ce25",
+      "name": "阴影范围索引",
+      "status": "LocalGatePassedCandidateIsolated",
+      "sourceBase": "a8e6154",
+      "evidence": "docs/acceptance/nr/shadow-range-index.md",
+      "numericCasesPerDevice": 10404,
+      "canonicalNativeProcesses": 0,
+      "frameCostProcesses": 0,
+      "standaloneGpuProcesses": 3,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261109-042301-shadow-disk-classification-a77b55",
+      "name": "阴影圆盘权重分类",
+      "status": "LocalGateNotPassedCandidateIsolated",
+      "sourceBase": "e2c50c9",
+      "evidence": "docs/acceptance/nr/shadow-disk-classification.md",
+      "numericCases": 1048576,
+      "canonicalNativeProcesses": 0,
+      "frameCostProcesses": 0,
+      "standaloneGpuProcesses": 1,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261109-034725-shadow-tile-batching-90fe3c",
+      "name": "阴影分块批处理",
+      "status": "BatchedBoundsIntegratedExactLocalGain",
+      "sourceBase": "32aa23d",
+      "evidence": "docs/acceptance/nr/shadow-tile-batching.md",
+      "checksPassed": 28,
+      "nativeFourFramesExact": true,
+      "frameCostProcesses": 3,
+      "validMicroProcesses": 1,
+      "calibrationMicroProcesses": 1,
+      "gpuSavedMs": 0.1078506666666712,
+      "kernelReductionFraction": 0.43236493906568985,
+      "reclaimedFiles": 679,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261109-030048-bounded-compute-reductions-fec9f6",
+      "name": "计算归约效率门槛",
+      "status": "MicroGateNotPassedCandidateIsolated",
+      "sourceBase": "e0728cf",
+      "evidence": "docs/acceptance/nr/bounded-compute-reductions.md",
+      "checksPassed": 24,
+      "pairedReferenceProcesses": 4,
+      "canonicalNativeProcesses": 0,
+      "frameCostProcesses": 0,
+      "standaloneKernelTimingProcesses": 1,
+      "reclaimedFiles": 687,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261109-023357-compact-skinning-output-1c5f2c",
+      "name": "紧凑蒙皮输出",
+      "status": "CompactOutputIntegratedVisualExactLocalGpuGain",
+      "sourceBase": "3e73e5f",
+      "evidence": "docs/acceptance/nr/compact-skinning-output.md",
+      "checksPassed": 14,
+      "nativeFourFramesExact": true,
+      "validComparisonProcesses": 3,
+      "gpuSavedMs": 0.4278218666666689,
+      "gpuReductionFraction": 0.02044355265796316,
+      "outputSavedLogicalBytes": 131755576,
+      "reclaimedFiles": 679,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261109-022033-gpu-pass-attribution-89c3e2",
+      "name": "GPU 通道成本归因",
+      "status": "PassAttributionCompleted",
+      "sourceBase": "ae4bf23",
+      "evidence": "docs/acceptance/nr/gpu-pass-attribution.md",
+      "checksPassed": 4,
+      "nativeProcesses": 1,
+      "renderedFrames": 32,
+      "capturedFrames": 0,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261109-015039-sparse-consumer-attribution-e39118",
+      "name": "稀疏照明消费归因",
+      "status": "AttributionCompletedDefaultDisabled",
+      "sourceBase": "db55c51",
+      "evidence": "docs/acceptance/nr/sparse-consumer-attribution.md",
+      "checksPassed": 23,
+      "checksSkipped": 2,
+      "nativeProcesses": 1,
+      "renderedFrames": 32,
+      "capturedFrames": 0,
+      "reclaimedFiles": 272,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261109-005752-quad-safe-radiance-consumer-834ce3",
+      "name": "四像素组照明消费",
+      "status": "CompatibilityValidatedNoSignificantNetGainDefaultDisabled",
+      "sourceBase": "b93bdf0",
+      "evidence": "docs/acceptance/nr/quad-safe-radiance-consumer.md",
+      "checksPassed": 22,
+      "checksSkipped": 2,
+      "pairedViewFlowsPassed": 2,
+      "nativeFourFramesExact": true,
+      "validComparisonProcesses": 3,
+      "calibrationProcesses": 1,
+      "gpuSavedMs": -0.0986511999999955,
+      "reclaimedFiles": 206,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-234340-radiance-draw-selection-744d65",
+      "name": "逐绘制照明资格",
+      "status": "MechanismValidatedNativePrecisionPendingDefaultDisabled",
+      "sourceBase": "569a1b6",
+      "evidence": "docs/acceptance/nr/radiance-draw-selection.md",
+      "checksPassed": 33,
+      "checksSkipped": 2,
+      "pairedViewFlowsPassed": 2,
+      "finalTargetedViewFlowsPassed": 2,
+      "nativeLightweightActivationObserved": true,
+      "nativeFourFramesExact": false,
+      "performanceTimingRuns": 0,
+      "reclaimedFiles": 176,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-231330-radiance-depth-replay-626cbb",
+      "name": "照明复用深度重放",
+      "status": "MechanismValidatedNativeFullFallbackDefaultDisabled",
+      "sourceBase": "31f4908",
+      "evidence": "docs/acceptance/nr/radiance-depth-replay.md",
+      "checksPassed": 25,
+      "checksSkipped": 3,
+      "pairedViewFlowsPassed": 2,
+      "nativeFourFramesExact": true,
+      "nativeLightweightActivationPassed": false,
+      "performanceTimingRuns": 0,
+      "reclaimedFiles": 170,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-210615-radiance-validation-path-f6e4f5",
+      "name": "同帧资格核验与照明消费",
+      "status": "MechanismValidatedNativeFullFallbackDefaultDisabled",
+      "sourceBase": "5fdd002",
+      "evidence": "docs/acceptance/nr/radiance-validation-path.md",
+      "checksPassed": 21,
+      "checksSkipped": 3,
+      "pairedViewFlowsPassed": 2,
+      "nativeFourFramesExact": true,
+      "nativeLightweightActivationPassed": false,
+      "performanceTimingRuns": 0,
+      "reclaimedFiles": 170,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-204220-radiance-frame-selection-5dbd15",
+      "name": "GPU 绘制路径选择",
+      "status": "MechanismValidatedSceneIntegrationPending",
+      "sourceBase": "a62b206",
+      "evidence": "docs/acceptance/nr/gpu-predicate-draw-selection.md",
+      "checksPassed": 6,
+      "gpuFlowsPassed": 4,
+      "nativeSceneRuns": 0,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-191723-radiance-consumption-counters-ec40da",
+      "name": "照明复用消费计数",
+      "status": "DiagnosticMechanismValidated",
+      "sourceBase": "157c757",
+      "evidence": "docs/acceptance/nr/radiance-consumption-counters.md",
+      "checksPassed": 11,
+      "checksSkipped": 1,
+      "pairedViewFlowsPassed": 2,
+      "nativeStatus": "measured-consumption",
+      "diagnosticsEnabledByDefault": false,
+      "reclaimedFiles": 87,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-184222-daily-retention-drain-053961",
+      "name": "每日回收与项目技能部署",
+      "status": "ProjectSkillDailyDrainDeployed",
+      "sourceBase": "525a287",
+      "evidence": "docs/acceptance/recovery/daily-retention-drain.md",
+      "checksPassed": 81,
+      "checksSkipped": 1,
+      "maximumBatchItems": 10,
+      "dailyMaximumBatches": 10,
+      "maintenanceSeconds": 120,
+      "projectSkillOnD": true,
+      "legacyCSkillFiles": 0,
+      "isolatedExpiredTasksReleased": 33,
+      "isolatedMaintenanceSeconds": 24.280999999988126,
+      "runtimeAndShaderBytesUnchanged": true
+    },
+    {
+      "path": "runs/20261108-174124-radiance-cache-precision-integration-ad0b15",
+      "name": "照明缓存精度与成本",
+      "status": "ExactMathLocalRegressionDefaultDisabled",
+      "sourceBase": "9a11cf5",
+      "evidence": "docs/acceptance/nr/radiance-cache-precision-integration.md",
+      "checksPassed": 16,
+      "checksSkipped": 2,
+      "pairedViewFlowsPassed": 4,
+      "nativeFourFramesExact": true,
+      "gpuSavedMs": -0.7161322666666727,
+      "defaultReuseEnabled": false,
+      "reclaimedFiles": 127,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-165547-default-isolation-cost-5c0521",
+      "name": "默认隔离策略成本",
+      "status": "InsignificantLocalCostDefaultDisabled",
+      "sourceBase": "8220444",
+      "evidence": "docs/acceptance/nr/default-isolation-cost.md",
+      "checksPassed": 6,
+      "gpuSavedMs": 0.04013493333333784,
+      "significantGainObserved": false,
+      "defaultSpecializationEnabled": false,
+      "reclaimedFiles": 139,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-163603-radiance-precision-boundaries-fda484",
+      "name": "照明组合精度边界",
+      "status": "SharedPrecisionReadyLegacyNativePending",
+      "sourceBase": "b4fff22",
+      "evidence": "docs/acceptance/nr/radiance-precision-boundaries.md",
+      "checksPassed": 4,
+      "existingProgramsUnchangedPerConfiguration": 736,
+      "legacyNativeRepairValidated": false,
+      "newNativeSceneRuns": 0,
+      "newPerformanceMeasurements": 0
+    },
+    {
+      "path": "runs/20261108-162602-fixed-class-isolation-scope-935160",
+      "name": "固定类别隔离范围",
+      "status": "ScopeBelowIndependentAdmission",
+      "sourceBase": "437e0f3",
+      "evidence": "docs/acceptance/nr/fixed-class-isolation-scope.md",
+      "historicalScopeFraction": 0.2266706153983297,
+      "candidateImplemented": false,
+      "newGpuTimingExecuted": false
+    },
+    {
+      "path": "runs/20261108-150504-beauty-shader-specialization-2d2daa",
+      "name": "默认隔离材质管线",
+      "status": "RegisterPressureReducedFrameCostPending",
+      "sourceBase": "ab7121f",
+      "evidence": "docs/acceptance/nr/default-isolation-pipelines.md",
+      "checksPassed": 20,
+      "registerReductionFraction": 0.25,
+      "nativeImagesExact": true,
+      "wholeFrameBenefitMeasured": false,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-143637-snapshot-shared-occlusion-0435de",
+      "name": "多阶段遮挡消费范围",
+      "status": "IncrementalScopeBelowAdmission",
+      "sourceBase": "27d2160",
+      "evidence": "docs/acceptance/nr/snapshot-shared-occlusion.md",
+      "candidateImplemented": false,
+      "incrementalUpperMs": 0.32102399999999975,
+      "newGpuTimingExecuted": false
+    },
+    {
+      "path": "runs/20261108-140934-storage-monitor-cost-e470a0",
+      "name": "前台空间监控开销",
+      "status": "ReadyLowOverheadMonitor",
+      "sourceBase": "794aad1",
+      "evidence": "docs/acceptance/recovery/storage-monitor-cost.md",
+      "testsPassed": 75,
+      "testsSkipped": 1,
+      "monitorCpuReductionFraction": 0.8181818181818181,
+      "runtimeProductsUnchanged": true,
+      "externalProjectStorageUsed": false
+    },
+    {
+      "path": "runs/20261108-124916-main-depth-reuse-2703c1",
+      "name": "主通道深度预填复用",
+      "status": "IntegratedLocalCostImprovedFormalBudgetPending",
+      "sourceBase": "707a593",
+      "evidence": "docs/acceptance/nr/main-depth-reuse.md",
+      "checksPassed": 22,
+      "sceneIntegrated": true,
+      "nativeImagesExact": true,
+      "gpuSavedMs": 0.866255733333336,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-113315-conservative-depth-culling-079a96",
+      "name": "保守层级深度剔除机制",
+      "status": "MechanismReadySceneCandidateWithdrawn",
+      "sourceBase": "a6d16c1",
+      "evidence": "docs/acceptance/nr/gpu-conservative-occlusion.md",
+      "checksPassed": 12,
+      "sceneIntegrated": false,
+      "candidateNativeImagesExact": true,
+      "productionSceneRestored": true,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-111838-gpu-draw-stage-cost-4bb6b2",
+      "name": "GPU 绘制阶段归因",
+      "status": "BoundedCullingProposal",
+      "sourceBase": "0ac1a44",
+      "evidence": "docs/acceptance/nr/gpu-draw-stage-cost.md",
+      "matchedEvents": 1009,
+      "newGpuTimingExecuted": false
+    },
+    {
+      "path": "runs/20261108-101326-gpu-transparent-indices-8ef9c7",
+      "name": "GPU 透明索引准备",
+      "status": "IntegratedExactImagesLocalCpuImproved",
+      "sourceBase": "3b4fa9d",
+      "evidence": "docs/acceptance/nr/gpu-transparent-index-sort.md",
+      "checksPassed": 12,
+      "sceneIntegrated": true,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-094742-transparent-deformation-plan-48ebfd",
+      "name": "GPU 分段稳定排序机制",
+      "status": "MechanismReadyIntegrationPending",
+      "sourceBase": "16f6f18",
+      "evidence": "docs/acceptance/nr/gpu-stable-key-sort.md",
+      "checksPassed": 6,
+      "sceneIntegrated": false
+    },
+    {
+      "path": "runs/20261108-093510-surface-lighting-reuse-3223fa",
+      "name": "零反射完整照明复用提案",
+      "status": "CoverageEvidenceInsufficient",
+      "sourceBase": "17df0c6",
+      "evidence": "docs/acceptance/nr/surface-lighting-reuse.md",
+      "candidateImplemented": false,
+      "newGpuTimingExecuted": false
+    },
+    {
+      "path": "runs/20261108-092305-shadow-cost-scope-ef3182",
+      "name": "阴影成本材质范围",
+      "status": "MaterialCostScopeAttributed",
+      "sourceBase": "ca47eed",
+      "evidence": "docs/acceptance/nr/shadow-cost-scope.md",
+      "newGpuTimingExecuted": false,
+      "candidateAdopted": false
+    },
+    {
+      "path": "runs/20261108-090934-managed-temporary-storage-6b0786",
+      "name": "受管任务临时目录",
+      "status": "TaskLocalTemporaryStorage",
+      "sourceBase": "74b4dfc",
+      "evidence": "docs/acceptance/recovery/managed-temporary-storage.md",
+      "temporaryDirectory": "task/tmp",
+      "retentionDays": 1
+    },
+    {
+      "path": "runs/20261108-084834-receiver-reciprocal-arithmetic-bfcfa0",
+      "name": "接收运算精度核验",
+      "status": "ArithmeticDifferencesAttributed",
+      "sourceBase": "1d47d65",
+      "evidence": "docs/acceptance/nr/receiver-reciprocal-arithmetic.md",
+      "candidateAdopted": false,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-082005-clip-depth-roundtrip-9fcd35",
+      "name": "顶点深度精度核验",
+      "status": "VertexInputPrecisionAttributed",
+      "sourceBase": "e401f51",
+      "evidence": "docs/acceptance/nr/clip-depth-roundtrip.md",
+      "nativeProjectionExactVertices": 11564,
+      "candidateAdopted": false,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-080203-receiver-projection-producer-222952",
+      "name": "接收深度生产投影核验",
+      "status": "ReceiverProducerDepthPrecisionPending",
+      "sourceBase": "d0778a4",
+      "evidence": "docs/acceptance/nr/receiver-projection-producer.md",
+      "mappedVisibilityOverOneByte": 200,
+      "candidateAdopted": false,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-073210-compressed-asset-snapshots-d0bf8d",
+      "name": "资产源文件快照压缩",
+      "status": "CompressedAssetSnapshotsDeployed",
+      "sourceBase": "ae7bc80",
+      "evidence": "docs/acceptance/nr/compressed-asset-snapshots.md",
+      "checksPassed": 8,
+      "actualVolumeFreedBytes": 677437440,
+      "snapshotsVerified": 864,
+      "externalProjectStorageUsed": false,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-070144-cpu-preparation-batch-b386e7",
+      "name": "CPU 准备批次评估",
+      "status": "PreparationBatchBelowGate",
+      "sourceBase": "0a0429c",
+      "evidence": "docs/acceptance/nr/cpu-preparation-batch.md",
+      "updateReductionPercent": 7.459095704800545,
+      "candidateAdopted": false,
+      "nativeImageBatchStarted": false,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-065642-receiver-linear-depth-ecc3b4",
+      "name": "线性接收深度核验",
+      "status": "LinearDepthInputNotQualified",
+      "sourceBase": "4d84626",
+      "evidence": "docs/acceptance/nr/receiver-linear-depth.md",
+      "mappedDepthVisibilityOverOneByte": 216,
+      "candidateAdopted": false,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-064259-visibility-phase-origin-42b3d6",
+      "name": "屏幕可见量相位原点",
+      "status": "PhaseOriginMechanismVerified",
+      "sourceBase": "a6d4e72",
+      "evidence": "docs/acceptance/nr/visibility-phase-origin.md",
+      "scopedChecks": 6,
+      "nvidiaSourcePixelsExact": 17017,
+      "intelSourcePixelsOverOneByte": 175,
+      "sceneIntegrated": false,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-061129-receiver-device-depth-357a94",
+      "name": "屏幕接收设备深度核验",
+      "status": "SourceDepthProductionPrecisionPending",
+      "sourceBase": "2d69a86",
+      "evidence": "docs/acceptance/nr/receiver-device-depth.md",
+      "candidateAdopted": false,
+      "mainSnapshotExactRegionPixels": 17017,
+      "mappedDepthVisibilityOverOneByte": 221,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-055410-cpu-consumed-preparation-023e02",
+      "name": "CPU 准备消费范围核验",
+      "status": "PreparationScopeBelowBatchGate",
+      "sourceBase": "254cd03",
+      "evidence": "docs/acceptance/nr/cpu-consumed-preparation.md",
+      "candidateAdopted": false,
+      "diagnosticFrames": 8,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-051817-daily-asset-copies-d6af88",
+      "name": "每日历史模型副本回收",
+      "status": "DailyModelCopyMaintenanceDeployed",
+      "sourceBase": "a89558b",
+      "evidence": "docs/acceptance/nr/daily-asset-copies.md",
+      "removedModelNames": 313,
+      "removedLogicalBytes": 34359734508,
+      "actualVolumeFreedBytes": 12185612288,
+      "externalProjectStorageUsed": false,
+      "checks": 66,
+      "checksPassed": 65,
+      "checksSkipped": 1
+    },
+    {
+      "path": "runs/20261108-045252-screen-object-visibility-ca2907",
+      "name": "公共屏幕对象可见量",
+      "status": "PublicMechanismVerifiedWithCalibrationPending",
+      "sourceBase": "093410c",
+      "evidence": "docs/acceptance/nr/screen-object-visibility.md",
+      "sceneIntegrated": false,
+      "scopedChecks": 6,
+      "nvidiaSourceVisibilityPixelsExact": 17017,
+      "intelSourcePixelsOverOneByte": 175,
+      "fullHairColorPassed": false,
+      "formalPerformancePassed": false,
+      "overallVisualAcceptance": "failed-user-review"
+    },
+    {
+      "path": "runs/20261108-041637-object-receiver-origin-7a2735",
+      "name": "对象接收输入与真实附件核验",
+      "status": "SourceInputModelVerified",
+      "sourceBase": "18b66cf",
+      "evidence": "docs/acceptance/nr/object-receiver-input-model.md",
+      "candidateAdopted": false,
+      "sourceVisibilityPixelsExact": 17017,
+      "fullHairColorPassed": false,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-034602-shadow-disk-native-bd3a36",
+      "name": "阴影圆盘权重局部成本",
+      "status": "IsolatedKernelSlower",
+      "sourceBase": "b1451cf",
+      "evidence": "docs/acceptance/nr/shadow-disk-kernel.md",
+      "candidateAdopted": false,
+      "localReductionPercent": -11.27491029533536,
+      "nativeBatchExecuted": false,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-033035-radiance-receiver-entry-c43d47",
+      "name": "照明复用接收面入口核对",
+      "status": "IsolatedZeroPixelGateFailed",
+      "sourceBase": "136dd99",
+      "evidence": "docs/acceptance/nr/radiance-receiver-entry.md",
+      "candidateAdopted": false,
+      "nativeFramesIdenticalToOriginalCandidate": 4,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261108-021544-pipeline-cache-workflow-7bb141",
+      "name": "有界管线缓存与每日维护",
+      "status": "AcceptedDevelopmentWorkflow",
+      "sourceBase": "8b6caac",
+      "evidence": "docs/acceptance/nr/pipeline-cache-workflow.md",
+      "candidateAdopted": true,
+      "scopedChecks": 12,
+      "artifactToolChecks": 51,
+      "nativeFramesIdentical": 5,
+      "formalPerformancePassed": false,
+      "overallVisualAcceptance": "failed-user-review"
+    },
+    {
+      "path": "runs/20261107-030141-shadow-visibility-reuse-90fb90",
+      "name": "同帧阴影可见度候选评估",
+      "status": "DiagnosticIsolated",
+      "sourceBase": "8c78732",
+      "evidence": "docs/acceptance/nr/shadow-visibility-reuse.md",
+      "candidateAdopted": false,
+      "restoredProgramsByteIdentical": 663,
+      "restoredPlayerCodeSectionIdentical": true,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261107-024335-current-cpu-hotspots-5b7d2c",
+      "name": "当前 CPU 子阶段定位",
+      "status": "DiagnosticMeasured",
+      "sourceBase": "cb82fcf",
+      "evidence": "docs/acceptance/nr/cpu-substage-update.md",
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261107-013603-static-transparent-preparation-049ee8",
+      "name": "场景变换与透明准备评估",
+      "status": "DiagnosticIsolated",
+      "sourceBase": "95f0f38",
+      "evidence": "docs/acceptance/nr/static-transparent-preparation.md",
+      "candidateAdopted": false,
+      "restoredProgramsByteIdentical": 663,
+      "restoredPlayerCodeSectionIdentical": true,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261107-005507-probe-field-spatial-candidates-382990",
+      "name": "反射探针空间候选评估",
+      "status": "DiagnosticIsolated",
+      "sourceBase": "725dfdd",
+      "evidence": "docs/acceptance/nr/probe-spatial-candidates.md",
+      "candidateAdopted": false,
+      "restoredProgramsByteIdentical": 663,
+      "restoredPlayerCodeSectionIdentical": true,
+      "formalPerformancePassed": false
+    },
+    {
+      "path": "runs/20261106-220323-autonomous-cleanup-performance-70496b",
+      "name": "CPU 场景准备集中评估",
+      "status": "DiagnosticMeasured",
+      "sourceBase": "c61ed88",
+      "exeSha256": "bb85e7a3d868a8d9d029fcaa1a939fd598968fd055522931a9f55d62873f0d36",
+      "evidence": "docs/acceptance/nr/cpu-scene-preparation.md",
+      "visualAcceptance": "failed-user-review",
+      "cpuBudgetPassed": false,
+      "gpuBudgetPassed": false,
+      "environmentPassed": false
+    },
+    {
+      "path": "p8-final-2026-10-14",
+      "name": "P8 集中交付",
+      "status": "Ready",
+      "evidence": "docs/acceptance/p8/2026-10-14.md"
+    },
+    {
+      "path": "runs/20261111-070645-handoff-full-regression-60c706",
+      "name": "材质视图回归矩阵",
+      "sourceBase": "eaf39fd",
+      "evidence": "docs/acceptance/nr/material-view-regression-matrix.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-11/material-view-regression-matrix/results.json"
+    },
+    {
+      "path": "runs/20261111-211029-ellipse-coverage-main-integration-b59590",
+      "name": "椭圆覆盖选级主线验收",
+      "sourceBase": "3810892",
+      "evidence": "docs/acceptance/nr/material-ellipse-coverage-main-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-11/material-ellipse-coverage-main-integration/results.json"
+    },
+    {
+      "path": "runs/20261111-232953-scene-reference-depth-main-integration-20e9e2",
+      "name": "场景参考深度主线验收",
+      "sourceBase": "4940c17",
+      "evidence": "docs/acceptance/nr/scene-reference-depth-main-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-11/scene-reference-depth-main-integration/results.json"
+    },
+    {
+      "path": "runs/20261112-010219-scene-reference-normal-main-integration-19659e",
+      "name": "场景参考法线与对象身份主线验收",
+      "sourceBase": "4979ca5",
+      "evidence": "docs/acceptance/nr/scene-reference-normal-main-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/scene-reference-normal-main-integration/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/layout-contract-evidence",
+      "name": "捕获布局回归",
+      "sourceBase": "9dcae82",
+      "evidence": "docs/acceptance/nr/capture-layout-regression.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/capture-layout-regression/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/sampling-host-evidence",
+      "name": "编辑器采样回归",
+      "sourceBase": "0736944",
+      "evidence": "docs/acceptance/nr/editor-sampling-regression.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/editor-sampling-regression/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/devtools-host-evidence",
+      "name": "编辑器资产刷新",
+      "sourceBase": "6f1e323",
+      "evidence": "docs/acceptance/nr/editor-asset-refresh.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/editor-asset-refresh/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/material-lighting-shard-evidence",
+      "name": "材质光照回归矩阵",
+      "sourceBase": "ce6381e",
+      "evidence": "docs/acceptance/nr/material-lighting-regression.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/material-lighting-regression/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/npr-ramp-shard-evidence",
+      "name": "NPR 渐变组合回归矩阵",
+      "sourceBase": "4a1c933",
+      "evidence": "docs/acceptance/nr/npr-ramp-regression.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/npr-ramp-regression/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/computed-cascade-demand-evidence",
+      "name": "材质组合级联成本",
+      "sourceBase": "bfe700e",
+      "evidence": "docs/acceptance/nr/computed-cascade-demand-comparison.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/computed-cascade-demand-comparison/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/null-rhi-camera-evidence",
+      "name": "NullRhi 录制相机回归",
+      "sourceBase": "953648e",
+      "evidence": "docs/acceptance/nr/null-rhi-camera-regression.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/null-rhi-camera-regression/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/shadow-row-interval-evidence",
+      "name": "阴影圆盘行范围成本",
+      "sourceBase": "a6b1bb6",
+      "evidence": "docs/acceptance/nr/shadow-disk-row-interval.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/shadow-disk-row-interval/results.json"
+    }
+  ],
+  "preservedBuilds": [
+    "ninja-msvc-debug",
+    "ninja-msvc-release"
+  ],
+  "runRetentionDays": 7,
+  "preservedRuns": [
+    {
+      "path": "runs/20261021-172156-native-render-evidence-623c52",
+      "pathBase": "build",
+      "purpose": "原生中庭可玩项目、来源与验收证据保留。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "high-detail-joint/project/playable-safe.azureproject",
+      "videos": [
+        {
+          "path": "native-aa-final-v6/media/scene-aa1.mp4",
+          "bytes": 2836614,
+          "sha256": "4730bc62ae633caa1484db8d484b55756ef0fff385708c13127e2c68902685d4"
+        },
+        {
+          "path": "native-aa-final-v6/media/aa-comparison.mp4",
+          "bytes": 8656036,
+          "sha256": "e76b869653f86e975fadb8839182f642ed023ceeb9267c7ba3e59ce1a84e7db3"
+        },
+        {
+          "path": "joint-acceptance/playable-cli-v7/media/playable-walk.mp4",
+          "bytes": 4030754,
+          "sha256": "9d55ee1f19136d7b8fa5b78572cee0c9d215ea9f060b7b83e393fcc801442c09"
+        },
+        {
+          "path": "native-aa-post-corridor-v1/media/scene-aa1.mp4",
+          "bytes": 1844118,
+          "sha256": "eae08618e504873311af977de2538478a1d708f737214650ee4b86cb9929a581"
+        },
+        {
+          "path": "native-aa-post-corridor-v1/media/aa-comparison.mp4",
+          "bytes": 5626005,
+          "sha256": "9eca8f3b3a57f26fb9e96edbac597902f62316b3cde45dade3601b2a976d5e96"
+        },
+        {
+          "path": "joint-acceptance/post-corridor-v10/media/rear-96-frames-60fps.mp4",
+          "bytes": 189823,
+          "sha256": "f5aec6387f3be1cc7444619bebf59d230f8c7de76af2b23236b9adb057ef3a71"
+        }
+      ],
+      "storage": {
+        "measurementUtc": "2026-10-21T21:05:59.663367+00:00",
+        "unit": "bytes",
+        "files": 23407,
+        "logicalBytes": 32738828142,
+        "deduplicatedFileDataBytes": 22447078730,
+        "uniqueFiles": 20054,
+        "hardlinkedPaths": 4489,
+        "projectLogicalBytes": 4010239456,
+        "projectWithoutGeneratedCacheBytes": 1370346863,
+        "method": "os.stat(path, follow_symlinks=False); sum st_size once per (st_dev, st_ino).",
+        "scope": "任务目录的实时计量快照，排除本收据。",
+        "limits": "去重值表示文件数据量，独立于分配簇和可回收空间。"
+      },
+      "receipt": "rear-corridor-extension/final-retention.json",
+      "evidence": [
+        {
+          "path": "rear-corridor-extension/final-source-snapshot/receipt.json",
+          "bytes": 22976,
+          "sha256": "95674c7cffdcc5e1d0f307c1d3e72736c7d0218dfa005a73da8466c52ab6bff3"
+        },
+        {
+          "path": "rear-corridor-extension/production-world-verification.json",
+          "bytes": 102749,
+          "sha256": "9d43a49600b3b6d653dc4b8917324880a3580b4d405a7a843f7c7162e44645a0"
+        },
+        {
+          "path": "rear-corridor-extension/playable-world-verification.json",
+          "bytes": 101087,
+          "sha256": "80309e0745f0f56822207615a48f5f81366084ed5f3bac6732b0218e7e5d91a0"
+        },
+        {
+          "path": "rear-corridor-extension/clipping-production/receipt.json",
+          "bytes": 2380,
+          "sha256": "3ff96b911884d03d79b13055be7ed01336fa7005b3eaf1152c2cc8dc8de244df"
+        },
+        {
+          "path": "rear-corridor-extension/far100-front-semantic-corroboration.json",
+          "bytes": 1368,
+          "sha256": "3ac5ae88336608e2d944bbad2626ab2e0973a9fe81455e072f5516f421e989fd"
+        },
+        {
+          "path": "rear-corridor-extension/background-refresh-semantics.json",
+          "bytes": 4873,
+          "sha256": "523d7d0092fb1c1f25173294a882aee597838d3caadce5aef9239176cf3a8a0e"
+        },
+        {
+          "path": "rear-corridor-extension/visual-geometry-review.json",
+          "bytes": 15202,
+          "sha256": "44c4ce2ed350548af1e588dd78a7c6b24d4cdecc65a304578395190844c85ddf"
+        },
+        {
+          "path": "joint-acceptance/front-source-occupancy-v1/receipt.json",
+          "bytes": 8069,
+          "sha256": "4e73ab5c527f683a9740a7fc371054c1855348b27d5d1cb780517ba1269736be"
+        },
+        {
+          "path": "joint-acceptance/side-source-occupancy-v1/receipt.json",
+          "bytes": 303493,
+          "sha256": "bdc053fdec93bb48f498909b831ff78bed846d0cbfda4d79d39a8b7fc55ecf25"
+        },
+        {
+          "path": "joint-acceptance/post-corridor-far100-v10/coverage/coverage.json",
+          "bytes": 902,
+          "sha256": "3de8657784f081a2d6c02e6e873896aa536b0eb1f9a4d3030181e54b651793c8"
+        },
+        {
+          "path": "joint-acceptance/post-corridor-v10/media/beauty-four-views-contact-sheet.png",
+          "bytes": 2612748,
+          "sha256": "b84d7d16c09ebf7265b3b4d1174bdb90088bf6616a7215ad3119a431633199d6"
+        },
+        {
+          "path": "joint-acceptance/post-corridor-v10/media/rear-source-comparison.png",
+          "bytes": 1018443,
+          "sha256": "0b7336e7ce9f6677ad3159275f800b2746a1d473e0f37fddd9d6f3082606d8e9"
+        },
+        {
+          "path": "joint-acceptance/post-corridor-v10/media/media.json",
+          "bytes": 47734,
+          "sha256": "a3c1b33427110a98a0785bfd068c81cea056f340435e6923ccbb965237590fc9"
+        },
+        {
+          "path": "joint-acceptance/post-corridor-v10/media/visual-review.json",
+          "bytes": 2727,
+          "sha256": "0fa669555d35fb46f8872c9137a85a074542c2fb9c92d9028a33632023d2ff38"
+        },
+        {
+          "path": "native-aa-post-corridor-v1/summary.json",
+          "bytes": 55744,
+          "sha256": "b3d192ccbdff58ecd1a20767397264964ea04c1464d9673029cae8d59ba6dd25"
+        }
+      ],
+      "historicalReceipt": "retention-receipt.json"
+    },
+    {
+      "path": "runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee",
+      "pathBase": "build",
+      "purpose": "身体材质原点、原生输入及第三版动态主候选。",
+      "retention": "NR12 正式归档后另行清理。",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-26/body-rim-origin.json",
+      "pinMarker": ".keep",
+      "primaryProject": "main-candidate-v3/project.azureproject",
+      "releasePlayer": {
+        "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/frozen-release/AzurePlayer.exe",
+        "bytes": 5772288,
+        "sha256": "d4f8b25cd6d9e29cae7950bcca47233d174a66a7544e591182bc7ef6623ceb6f"
+      }
+    },
+    {
+      "path": "runs/20261026-063405-skinning-path-equivalence-ddcc46",
+      "pathBase": "build",
+      "purpose": "蒙皮仿射位置、动作序列及主场景差异。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-26/skinning-position-consistency.json"
+    },
+    {
+      "path": "runs/20261026-062121-cloth-specular-ramp-capture-0e33fc",
+      "pathBase": "build",
+      "purpose": "服饰二维高光色带、源骨骼绑定及硬件输出边界。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-26/cloth-specular-ramp.json"
+    },
+    {
+      "path": "runs/20261026-090813-cloth-material-native-integration-b73ec2",
+      "pathBase": "build",
+      "purpose": "服饰原生层级、组合照明及第四版动态主候选。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "main-candidate-v4/project.azureproject",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-26/cloth-native-integration.json"
+    },
+    {
+      "path": "runs/20261026-215130-native-hair-depth-validation-1645d9",
+      "pathBase": "build",
+      "purpose": "头发实际投影、原生裁剪输入与第六版动态主候选。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "main-candidate-v6/project.azureproject",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-26/hair-depth-coverage.json"
+    },
+    {
+      "path": "runs/20261027-002548-native-hair-layer-region-closure-61c105",
+      "pathBase": "build",
+      "purpose": "头发角色可见量、独立环境域及第七版动态主候选。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "main-candidate-v7/project.azureproject",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/hair-object-visibility.json"
+    },
+    {
+      "path": "runs/20261027-022702-object-visibility-depth-reconstruction-c7312f",
+      "pathBase": "build",
+      "purpose": "公共精确深度偏置、原生对象图集及第七版主入口回归。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/object-shadow-exact-bias.json"
+    },
+    {
+      "path": "runs/20261027-031252-hair-residual-fragment-diagnosis-13e962",
+      "pathBase": "build",
+      "purpose": "头发实际层级、接收精度与世界原点失败对照。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/hair-sampling-boundary.json"
+    },
+    {
+      "path": "runs/20261027-034117-main-aa-cost-attribution-eb50a7",
+      "pathBase": "build",
+      "purpose": "主场景成本归因、有界管线统计及编译优化基准。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/main-aa-cost-attribution.json"
+    },
+    {
+      "path": "runs/20261027-042606-ordinary-material-specialization-af947b",
+      "pathBase": "build",
+      "purpose": "有界着色器专用化、主颜色管线及快照精度对照。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/ordinary-material-specialization.json"
+    },
+    {
+      "path": "runs/20261027-060450-default-material-feature-specialization-3837ad",
+      "pathBase": "build",
+      "purpose": "通用材质基础功能裁剪、共享头文件依赖及实际热点对照。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/generic-material-feature-folding.json"
+    },
+    {
+      "path": "runs/20261027-072533-reflection-trace-cost-isolation-d9ff39",
+      "pathBase": "build",
+      "purpose": "三维体积上传、官方体积载荷及反射光照成本对照。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/volume-image-upload.json"
+    },
+    {
+      "path": "runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4",
+      "pathBase": "build",
+      "purpose": "三层辐照资源、活动片元浮点位回读及跨后端硬件采样。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/irradiance-clipmap-resource.json"
+    },
+    {
+      "path": "runs/20261027-084907-irradiance-clipmap-scene-integration-af425d",
+      "pathBase": "build",
+      "purpose": "三层辐照主场景、公共材质、角色回放及成本对照。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/irradiance-clipmap-scene.json"
+    },
+    {
+      "path": "runs/20261027-105346-irradiance-receiver-query-contract-212980",
+      "pathBase": "build",
+      "purpose": "辐照接收位置、精确噪声、NPR 查询边界及双配置画面。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/irradiance-query.json"
+    },
+    {
+      "path": "runs/20261027-115657-native-floor-coordinate-capture-362e52",
+      "pathBase": "build",
+      "purpose": "中央地面实际绘制、UV 别名流、颜色上传及双配置主入口。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/floor-runtime-binding.json"
+    },
+    {
+      "path": "runs/20261027-131305-native-reflection-runtime-bindings-d7a2e8",
+      "pathBase": "build",
+      "purpose": "原生活动探针、动态反射生产链及一致空间映射的对照镜头。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/native-reflection-bindings.json"
+    },
+    {
+      "path": "runs/20261027-134641-reflection-roughness-lod-contract-e10415",
+      "pathBase": "build",
+      "purpose": "反射层级公共契约、原生浮点回读、双配置 GPU 及角色主场景对照。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/reflection-lod.json"
+    },
+    {
+      "path": "runs/20261027-143744-capture-camera-provenance-81927a",
+      "pathBase": "build",
+      "purpose": "帧内相机镜头、完整精度指纹、双配置投影及官方对照报告。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/capture-camera.json"
+    },
+    {
+      "path": "runs/20261027-145604-native-probe-array-sampling-52a968",
+      "pathBase": "build",
+      "purpose": "原生八面体数组、完整子资源摘要及双配置跨 API 硬件采样。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/octahedral-environment.json"
+    },
+    {
+      "path": "runs/20261027-153828-ordered-probe-field-contract-f8886a",
+      "pathBase": "build",
+      "purpose": "有序反射探针、原绑定诊断、双配置硬件和实景联合采集。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/reflection-probe-fields.json"
+    },
+    {
+      "path": "runs/20261027-164030-mirrored-two-sided-surface-facing-d6bce5",
+      "pathBase": "build",
+      "purpose": "双面镜像朝向、头发积分及探针联合回归与官方镜头复采。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/surface-facing.json"
+    },
+    {
+      "path": "runs/20261027-172112-native-visible-scene-activation-7813d1",
+      "pathBase": "build",
+      "purpose": "实际截帧资源激活、来源选择、Blender 与双配置 GPU 回归。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/scene-source-selection.json"
+    },
+    {
+      "path": "runs/20261027-185328-native-surface-uv-stream-bindings-b5d7ce",
+      "pathBase": "build",
+      "purpose": "原生 UV1、统一表面、网格烘焙及真实相机与双配置 GPU 回归。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/surface-uv-domain.json"
+    },
+    {
+      "path": "runs/20261027-201756-native-irradiance-pixel-origin-986da8",
+      "pathBase": "build",
+      "purpose": "辐照查询像素原点、场方向、双配置与真实镜头验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/irradiance-query-frame.json"
+    },
+    {
+      "path": "runs/20261027-211548-native-surface-normal-closure-cb9114",
+      "pathBase": "build",
+      "purpose": "Lit 法线精确解码、实际材质烘焙及原生分项镜头验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/lit-normal-decoding.json"
+    },
+    {
+      "path": "runs/20261027-213829-native-faceted-panel-normal-5e8c9e",
+      "pathBase": "build",
+      "purpose": "作者角点法线、来源顶点流、生产入口及真实镜头验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/mesh-corner-normals.json"
+    },
+    {
+      "path": "runs/20261027-221905-native-lighting-component-trace-0061e8",
+      "pathBase": "build",
+      "purpose": "局部灯来源倍率、公共绑定、双配置分项及真实镜头验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/local-light-profile-binding.json"
+    },
+    {
+      "path": "runs/20261027-231300-native-main-light-runtime-binding-975028",
+      "pathBase": "build",
+      "purpose": "活动主光常量、方向核对、双配置分项及真实镜头验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/main-light-runtime-binding.json"
+    },
+    {
+      "path": "runs/20261027-232528-cascade-caster-depth-coverage-9d7b48",
+      "pathBase": "build",
+      "purpose": "级联遮挡深度、实际三角形、双配置滤波及完整镜头验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/cascade-caster-depth.json"
+    },
+    {
+      "path": "runs/20261027-233926-native-local-light-runtime-audit-1b643d",
+      "pathBase": "build",
+      "purpose": "局部灯颜色空间、单精度运算、双配置分项及实际镜头验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/local-light-color-space.json"
+    },
+    {
+      "path": "runs/20261027-235607-native-active-light-and-post-binding-12490c",
+      "pathBase": "build",
+      "purpose": "活动颜色表、实际资源数值、双配置及编辑恢复验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/captured-color-grading-lut.json",
+      "primaryProject": "full-candidate/lut-default.azureproject"
+    },
+    {
+      "path": "runs/20261028-001254-captured-active-light-snapshot-7decb5",
+      "pathBase": "build",
+      "purpose": "活动索引、灯光快照、双配置分项及角色接收回归。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/captured-active-lights.json",
+      "primaryProject": "full-candidate/active-native.azureproject"
+    },
+    {
+      "path": "runs/20261028-003640-static-authored-normal-batch-d5c959",
+      "pathBase": "build",
+      "purpose": "中央作者法线、精确轴置换及双配置真实场景验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/static-authored-normals.json",
+      "primaryProject": "full-candidate/normals-default.azureproject"
+    },
+    {
+      "path": "runs/20261028-010811-native-enclosure-authored-normals-bdab65",
+      "pathBase": "build",
+      "purpose": "上方与后方作者法线、UV 保留及真实镜头验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/enclosure-authored-normals.json",
+      "primaryProject": "full-candidate/enclosure-default.azureproject"
+    },
+    {
+      "path": "runs/20261028-011700-unlit-texture-layers-contract-363bb3",
+      "pathBase": "build",
+      "purpose": "无光照图层公共解析、数值预期及双配置 CPU 验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/unlit-texture-layer-contract.json"
+    },
+    {
+      "path": "runs/20261028-012437-unlit-texture-layers-material-binding-6364c0",
+      "pathBase": "build",
+      "purpose": "公共纹理图层、完整文档绑定、真实暂停及双配置绘制验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/unlit-texture-material.json",
+      "primaryProject": "gpu-release-binding-final/project.azureproject"
+    },
+    {
+      "path": "runs/20261028-021151-native-vfx-layer-conversion-d389a1",
+      "pathBase": "build",
+      "purpose": "原生图层转换、完整文档边界、实际实例输入与双配置绘制验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/captured-vfx-layers.json",
+      "primaryProject": "build/runs/20261028-021151-native-vfx-layer-conversion-d389a1/full-candidate/enclosure-vfx.azureproject"
+    },
+    {
+      "path": "runs/20261028-030807-native-vfx-instance-closure-491cc6",
+      "pathBase": "build",
+      "purpose": "图层层级偏移、覆盖率、逐绘制贡献与十八个实际实例验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/vfx-mip-and-coverage.json",
+      "primaryProject": "build/runs/20261028-030807-native-vfx-instance-closure-491cc6/full-candidate/enclosure-vfx-extended.azureproject"
+    },
+    {
+      "path": "runs/20261028-033440-native-vfx-view-depth-fade-09828e",
+      "pathBase": "build",
+      "purpose": "公共视图深度淡出、完整文档、双配置绘制及十九个实际实例验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/vfx-view-depth-fade.json",
+      "primaryProject": "build/runs/20261028-033440-native-vfx-view-depth-fade-09828e/full-candidate/enclosure-vfx-depth-fade.azureproject"
+    },
+    {
+      "path": "runs/20261028-040334-vertex-color-input-contract-b54529",
+      "pathBase": "build",
+      "purpose": "公共顶点颜色、多流绑定、双配置绘制及二十二个实际实例验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/vertex-color-streams.json",
+      "primaryProject": "build/runs/20261028-040334-vertex-color-input-contract-b54529/full-candidate/enclosure-vfx-vertex-color.azureproject"
+    },
+    {
+      "path": "runs/20261028-045834-native-logistics-activation-15ae9a",
+      "pathBase": "build",
+      "purpose": "公共视角覆盖率、加色合成、双配置及二十四个实际实例验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-dependent-vfx-coverage.json",
+      "primaryProject": "build/runs/20261028-045834-native-logistics-activation-15ae9a/full-candidate/enclosure-vfx-view-coverage.azureproject"
+    },
+    {
+      "path": "runs/20261028-052815-native-logistics-box-bindings-1ef4fa",
+      "pathBase": "build",
+      "purpose": "真实像素定位、二十二个箱体姿态、共享资源及双配置验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/captured-logistics-boxes.json",
+      "primaryProject": "build/runs/20261028-052815-native-logistics-box-bindings-1ef4fa/full-candidate/enclosure-captured-boxes.azureproject"
+    },
+    {
+      "path": "runs/20261028-055131-native-glyph-layer-inputs-f2ec92",
+      "pathBase": "build",
+      "purpose": "独立覆盖率纹理、作者层级及实际字形验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/unlit-coverage-texture.json",
+      "primaryProject": "build/runs/20261028-055131-native-glyph-layer-inputs-f2ec92/full-candidate/enclosure-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-063534-native-remaining-layer-combinations-563a11",
+      "pathBase": "build",
+      "purpose": "三项实际图层组合、作者层级及双配置隔离验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/remaining-vfx-combinations.json",
+      "primaryProject": "build/runs/20261028-063534-native-remaining-layer-combinations-563a11/full-candidate/enclosure-remaining.azureproject"
+    },
+    {
+      "path": "runs/20261028-064046-native-base-uv-distortion-e1de77",
+      "pathBase": "build",
+      "purpose": "基础纹理坐标扰动、作者层级及实际墙面验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/base-uv-distortion.json",
+      "primaryProject": "build/runs/20261028-064046-native-base-uv-distortion-e1de77/full-candidate/enclosure-distortion.azureproject"
+    },
+    {
+      "path": "runs/20261028-065136-native-central-emissive-identity-466ad8",
+      "pathBase": "build",
+      "purpose": "中央字形柱、恒定混合权重及原版像素验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/central-glyph-composition.json",
+      "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-070825-native-view-fog-source-mapping-c98020",
+      "pathBase": "build",
+      "purpose": "雾效传输、版本化体积数据及完整原版载荷验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/fog-transport-data.json",
+      "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-072457-fog-volume-gpu-sampling-8e7be7",
+      "pathBase": "build",
+      "purpose": "三维雾场上传、原版硬件采样及资源释放验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/fog-volume-gpu.json",
+      "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-073457-view-fog-projection-contract-0a6cea",
+      "pathBase": "build",
+      "purpose": "视图雾场坐标、确定性抖动及原版完整采样验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-projection.json",
+      "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-074753-scene-view-fog-resource-3ec2ae",
+      "pathBase": "build",
+      "purpose": "场景视图雾场绑定、资源引用及双配置兼容验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-scene-binding.json",
+      "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-081005-native-fog-surface-inputs-4648ba",
+      "pathBase": "build",
+      "purpose": "预积分视图雾表面、原版片元及双配置实际绘制验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-surfaces.json",
+      "primaryProject": "build/runs/20261028-081005-native-fog-surface-inputs-4648ba/full-candidate/enclosure-view-fog.azureproject"
+    },
+    {
+      "path": "runs/20261028-092102-native-transparent-submission-order-f583ea",
+      "pathBase": "build",
+      "purpose": "中央白色标识的原版身份、实际浮点附件与主场景验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/central-late-glyph.json",
+      "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-095659-native-fog-msaa-coverage-f1b28c",
+      "pathBase": "build",
+      "purpose": "逐采样雾效的解析轮廓、真实主场景回归及计时验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-multisample.json",
+      "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-102818-native-fog-opaque-budget-226558",
+      "pathBase": "build",
+      "purpose": "普通无光照表面的同程序预算、附件一致性及真实场景回归。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/unlit-opaque-budget.json",
+      "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-105914-native-atmosphere-height-mapping-18f8ff",
+      "pathBase": "build",
+      "purpose": "光谱大气、真实远端片元和双配置数值契约验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/analytic-fog.json",
+      "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-115139-native-scene-fog-composition-c2726a",
+      "pathBase": "build",
+      "purpose": "场景解析雾、真实远端片元和双配置表面合成验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/scene-fog.json",
+      "primaryProject": "build/runs/20261028-115139-native-scene-fog-composition-c2726a/full-candidate/enclosure-composed-fog.azureproject"
+    },
+    {
+      "path": "runs/20261028-125459-native-logistics-visible-ring-trace-06c55d",
+      "pathBase": "build",
+      "purpose": "物流彩色环带源实例、硬件采样、完整场景及阶段画面验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/opaque-logistics-rings.json",
+      "primaryProject": "build/runs/20261028-125459-native-logistics-visible-ring-trace-06c55d/full-candidate/enclosure-opaque-rings.azureproject"
+    },
+    {
+      "path": "runs/20261028-141910-gltf-sampler-contract-bb2a59",
+      "pathBase": "build",
+      "purpose": "公共采样器、实际环带、双配置回归及阶段画面。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/gltf-sampler-contract.json",
+      "primaryProject": "build/runs/20261028-141910-gltf-sampler-contract-bb2a59/full-candidate/enclosure-sampler.azureproject"
+    },
+    {
+      "path": "runs/20261028-155222-native-floor-reflection-source-9dcd8c",
+      "pathBase": "build",
+      "purpose": "原版反射过滤输入、计算核重建及全图字节对照。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-filter-source.json"
+    },
+    {
+      "path": "runs/20261028-161930-reflection-spatial-filter-gpu-546198",
+      "pathBase": "build",
+      "purpose": "公共反射过滤资源、原版跨 API 输出及双配置回归。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-spatial-filter.json"
+    },
+    {
+      "path": "runs/20261028-171807-native-reflection-producer-source-10f3f4",
+      "pathBase": "build",
+      "purpose": "原版信号层级来源及公共资源检查",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-pyramid-fixture/receipt.json"
+    },
+    {
+      "path": "runs/20261028-193016-reflection-confidence-consumer-39162f",
+      "pathBase": "build",
+      "purpose": "反射可信度消费与真实遮罩检查",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-confidence-consumer.json"
+    },
+    {
+      "path": "runs/20261028-194027-coherent-surface-msaa-08d494",
+      "pathBase": "build",
+      "purpose": "完整表面样本解析与格式预算检查",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/coherent-surface-msaa.json"
+    },
+    {
+      "path": "runs/20261028-194826-reflection-surface-snapshot-173af6",
+      "pathBase": "build",
+      "purpose": "主场景表面快照及实际图片对照",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-surface-snapshot.json"
+    },
+    {
+      "path": "runs/20261028-202338-reflection-depth-pyramid-710acd",
+      "pathBase": "build",
+      "purpose": "深度层级与原版奇数维度归约",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/depth-pyramid.json"
+    },
+    {
+      "path": "runs/20261028-204514-reflection-ray-producer-942abc",
+      "pathBase": "build",
+      "purpose": "计算反射射线、投影与独立镜面夹具",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-ray.json"
+    },
+    {
+      "path": "runs/20261028-212848-screen-reflection-integration-5a1d9c",
+      "pathBase": "build",
+      "purpose": "主场景计算反射组合、完整画面和短时性能",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/screen-reflection.json"
+    },
+    {
+      "path": "runs/20261028-225752-native-reflection-resolution-72730c",
+      "pathBase": "build",
+      "purpose": "半分辨率反射、真实深度和整数选样验证",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-resolution.json"
+    },
+    {
+      "path": "runs/20261028-235523-native-reflection-temporal-f18aa9",
+      "pathBase": "build",
+      "purpose": "反射颜色与可信度历史的原版重建及公共计算",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-29/reflection-temporal.json"
+    },
+    {
+      "path": "runs/20261031-105539-full-scene-character-composition-b37668",
+      "pathBase": "build",
+      "purpose": "完整环境与动态角色的联合输入基准。",
+      "retention": "对应门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/full-character-visible.azureproject",
+      "evidence": "docs/acceptance/recovery/full-scene-character.md"
+    },
+    {
+      "path": "runs/20261031-135416-character-portrait-recovery-0773ca",
+      "pathBase": "build",
+      "purpose": "用户正面角色参考的完整可复现输入。",
+      "retention": "对应门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "original-reference/project/temporal.azureproject",
+      "evidence": "docs/acceptance/recovery/character-reference.md"
+    },
+    {
+      "path": "runs/20261029-045743-snapshot-shading-budget-8ee0b1",
+      "pathBase": "build",
+      "purpose": "完整物流环境及原固定机位输入。",
+      "retention": "对应门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "full-candidate/enclosure-sampler.azureproject",
+      "evidence": "docs/acceptance/recovery/full-scene-visual.md"
+    },
+    {
+      "path": "runs/20261024-074605-native-material-aa-reference-9eb92d",
+      "pathBase": "build",
+      "purpose": "原始正面角色参考及面积平均生成来源。",
+      "retention": "对应门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "temporal.azureproject",
+      "evidence": "docs/acceptance/recovery/character-reference.md"
+    },
+    {
+      "path": "runs/20261031-122504-projected-footprint-quality-5daf40",
+      "pathBase": "build",
+      "purpose": "地面足迹读回、实际帧及角色分项诊断。",
+      "retention": "对应门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "actor-closeup/closeup.azureproject",
+      "evidence": "docs/acceptance/nr/scene-material-quality-diagnosis.md"
+    },
+    {
+      "path": "runs/20261031-133610-native-character-visibility-92ad44",
+      "pathBase": "build",
+      "purpose": "独立照明诊断候选及未通过检查收据。",
+      "retention": "对应门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/native-visibility-near.azureproject",
+      "evidence": "docs/plans/2026-10-31-native-character-visibility.md"
+    },
+    {
+      "path": "runs/20261031-155126-temporal-reference-quality-a9c045",
+      "pathBase": "build",
+      "purpose": "角色照明、时间采样及雾效接口回归。",
+      "retention": "对应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/character-illumination-integration.md"
+    },
+    {
+      "path": "runs/20261031-164808-character-frontal-lighting-fa3879",
+      "pathBase": "build",
+      "purpose": "完整环境中动态角色的正面及眼部画质诊断。",
+      "retention": "对应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/control.azureproject",
+      "evidence": "docs/acceptance/nr/character-illumination-integration.md"
+    },
+    {
+      "path": "runs/20261031-172112-hair-source-inputs-14d199",
+      "pathBase": "build",
+      "purpose": "头发来源坐标恢复资产、完整场景及动态正面。",
+      "retention": "对应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/full-restored.azureproject",
+      "evidence": "docs/acceptance/nr/hair-source-uv.md"
+    },
+    {
+      "path": "runs/20261031-183314-full-scene-playable-validation-d5257e",
+      "pathBase": "build",
+      "purpose": "完整环境操控验收、重开诊断及匹配调试符号。",
+      "retention": "联合运行及生命周期门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/playable.azureproject",
+      "evidence": "docs/acceptance/recovery/full-scene-playable.md"
+    },
+    {
+      "path": "runs/20261031-201944-full-scene-delivery-validation-dd89c4",
+      "pathBase": "build",
+      "purpose": "完整场景保存、迁移、独立包及发布校验来源。",
+      "retention": "相应交付与正式验收完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "移动后的完整场景/playable.azureproject",
+      "primaryPackage": "独立游戏 中文 空格",
+      "evidence": "docs/acceptance/recovery/full-scene-delivery.md"
+    },
+    {
+      "path": "runs/20261031-222119-combined-visual-isolation-ad6878",
+      "pathBase": "build",
+      "purpose": "联合画质失败诊断、场景照明来源及同输入角色上下文。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/native-scene-near.azureproject",
+      "evidence": "docs/acceptance/nr/joint-visual-input-isolation.md"
+    },
+    {
+      "path": "runs/20261031-231334-receiver-directional-light-911ab7",
+      "pathBase": "build",
+      "purpose": "主光接收范围修复、严格兼容及失败显示实验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/full-control.azureproject",
+      "evidence": "docs/acceptance/nr/receiver-directional-light.md"
+    },
+    {
+      "path": "runs/20261101-005348-native-tbn-audit-6c8dea",
+      "pathBase": "build",
+      "purpose": "角色原生姿态、同条件材质对照及辐照覆盖核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "material-ab/reference.azureproject",
+      "evidence": "docs/acceptance/nr/native-material-input-audit.md"
+    },
+    {
+      "path": "runs/20261101-014745-joint-display-domain-diagnosis-8779a0",
+      "pathBase": "build",
+      "purpose": "同机位角色照明分项、原始帧及来源核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/joint-lighting-components.md"
+    },
+    {
+      "path": "runs/20261101-021345-material-radiance-normalization-1e6231",
+      "pathBase": "build",
+      "purpose": "材质线性输出、双配置独立曝光及原生联合画质核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/full-world-normalized.azureproject",
+      "evidence": "docs/acceptance/nr/material-radiance-normalization.md"
+    },
+    {
+      "path": "runs/20261101-035644-material-display-domain-0ebb85",
+      "pathBase": "build",
+      "purpose": "角色调色单变量、颜色可达边界及显示策略输入核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/near-grade-only.azureproject",
+      "evidence": "docs/acceptance/nr/material-display-domain.md"
+    },
+    {
+      "path": "runs/20261101-043757-material-display-transform-93d6e0",
+      "pathBase": "build",
+      "purpose": "材质显示策略、时间覆盖历史及原生联合画质核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/full-world-linear.azureproject",
+      "evidence": "docs/acceptance/nr/material-display-transform.md"
+    },
+    {
+      "path": "runs/20261101-082926-joint-playable-display-c26c1b",
+      "pathBase": "build",
+      "purpose": "联合可玩场景显示、原生着色响应及生命周期核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/playable.azureproject",
+      "evidence": "docs/acceptance/nr/joint-playable-display.md"
+    },
+    {
+      "path": "runs/20261101-101614-view-fog-reuse-814a54",
+      "pathBase": "build",
+      "purpose": "视图雾完整资源身份、重开复用及原生画面兼容核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/playable.azureproject",
+      "evidence": "docs/acceptance/recovery/view-fog-resource-reuse.md"
+    },
+    {
+      "path": "runs/20261101-113436-full-body-native-comparison-0a653b",
+      "pathBase": "build",
+      "purpose": "全身动态、材质身份及环境照明单变量核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/fullbody-world-aa3.azureproject",
+      "evidence": "docs/acceptance/nr/full-body-native-comparison.md"
+    },
+    {
+      "path": "runs/20261101-143507-native-cloth-variants-d877ef",
+      "pathBase": "build",
+      "purpose": "原生服饰输入、视角色带颜色合成及主工程回归核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/native-cloth-inputs.md",
+      "compositionEvidence": "docs/acceptance/nr/npr-view-ramp-composition.md",
+      "runtimeEvidence": "docs/acceptance/nr/npr-ramp-runtime.md",
+      "portraitEvidence": "docs/acceptance/nr/portrait-input-recovery.md"
+    },
+    {
+      "path": "runs/20261101-120125-character-environment-reception-fa70a7",
+      "pathBase": "build",
+      "purpose": "材质环境来源、主光对象阴影及原生全身兼容核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "candidate-project/playable.azureproject",
+      "evidence": "docs/acceptance/nr/material-lighting-reception.md"
+    },
+    {
+      "path": "runs/20261102-211519-native-hair-coverage-293d4c",
+      "pathBase": "build",
+      "purpose": "独立裁剪图的来源、硬件采样和公共机制核验。",
+      "retention": "所属画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/plans/2026-11-02-independent-coverage.md",
+      "runtimeEvidence": "docs/acceptance/nr/material-coverage.md",
+      "nativeIntegrationEvidence": "docs/acceptance/nr/native-coverage-integration.md"
+    },
+    {
+      "path": "runs/20261103-000151-material-coverage-mips-14fff6",
+      "pathBase": "build",
+      "purpose": "独立裁剪图生成层级与来源层级的硬件回归。",
+      "retention": "所属画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/material-coverage-mips.md"
+    },
+    {
+      "path": "runs/20261103-002134-joint-visual-state-c58ad8",
+      "pathBase": "build",
+      "purpose": "角色展示站位、头发对象阴影与场景反射单变量核验。",
+      "retention": "所属画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/full-world-foreground.azureproject",
+      "evidence": "docs/acceptance/nr/joint-visual-state.md"
+    },
+    {
+      "path": "runs/20261102-022046-user-scene-reference-36dcc3",
+      "pathBase": "build",
+      "purpose": "用户场景参考的画幅、对齐及压缩诊断。",
+      "retention": "所属画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/recovery/full-scene-visual.md"
+    },
+    {
+      "path": "runs/20261103-012115-joint-scene-dynamics-e9e4e1",
+      "pathBase": "build",
+      "purpose": "近侧静态展示、中央物流和角色循环的实际采集。",
+      "retention": "联合动态及画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/joint-dynamic-loop-v2.azureproject",
+      "evidence": "docs/acceptance/nr/joint-dynamics-regression.md",
+      "videos": [
+        {
+          "path": "media/joint-motion-original-idle.mp4",
+          "bytes": 4823661,
+          "sha256": "bc23b111fb21a36554fcd50e19015f9d8ad9608a131e4176234bc8dbe915a34b"
+        },
+        {
+          "path": "media/joint-motion-closed-idle.mp4",
+          "bytes": 4817677,
+          "sha256": "6d1347b55ccaf59e14ce50db3bb79f41ffdbdfb2e7feb68f77dcb4fffd1a217f"
+        }
+      ],
+      "idleEvidence": "docs/acceptance/nr/joint-idle-loop.md",
+      "conveyorEvidence": "docs/acceptance/nr/joint-conveyor-motion.md"
+    },
+    {
+      "path": "runs/20261103-130954-native-material-composition-221ac2",
+      "pathBase": "build",
+      "purpose": "固定原生材质组合、法线方向及近侧动态候选。",
+      "retention": "对应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "joint-current/joint-normal.azureproject",
+      "evidence": "docs/acceptance/nr/joint-normal-orientation.md",
+      "nativeEvidence": "docs/acceptance/nr/native-normal-orientation.md",
+      "videos": [
+        {
+          "path": "media/joint-normal-orientation.mp4",
+          "bytes": 4818526,
+          "sha256": "a77859da077285d108d71290af5a711292b4320b0a72b63a1faec2b7d6fddd33"
+        }
+      ]
+    },
+    {
+      "path": "runs/20261103-151310-material-stage-qualification-cedf81",
+      "pathBase": "build",
+      "purpose": "材质特效、覆盖层深度与原生区域的组合核验。",
+      "retention": "对应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/material-overlay-depth.md",
+      "implementationPlan": "docs/plans/2026-11-03-material-overlay-depth.md",
+      "primaryProject": "joint-materials/joint-materials.azureproject",
+      "contentEvidence": "docs/acceptance/nr/material-overlays.md",
+      "visualAcceptance": "failed-user-review",
+      "strictReopen": "failed",
+      "videos": [
+        {
+          "path": "media/joint-source-materials.mp4",
+          "bytes": 4971253,
+          "sha256": "bffbfb7a51aaeeb046d064c36fc91994a1995dc08c2ff1110a6a3ce6c35d2fb9"
+        }
+      ]
+    },
+    {
+      "path": "runs/20261103-211019-blend-depth-a96c63",
+      "pathBase": "build",
+      "purpose": "受光透明材质的深度配置、遮挡与资源生命周期核验。",
+      "retention": "专项验收归档后按清单管理。",
+      "pinMarker": ".keep",
+      "implementationPlan": "docs/plans/2026-11-03-blend-depth.md",
+      "evidence": "docs/acceptance/nr/blend-depth.md",
+      "publicContractStatus": "passed",
+      "visualAcceptance": "failed-user-review",
+      "diagnosticProject": "pose-depth/qualified.azureproject"
+    },
+    {
+      "path": "runs/20261103-215658-opaque-surface-overlays-d378bd",
+      "pathBase": "build",
+      "purpose": "不透明表面覆盖的提交顺序、反射快照及附件归属核验。",
+      "retention": "专项验收归档后按清单管理。",
+      "pinMarker": ".keep",
+      "implementationPlan": "docs/plans/2026-11-03-opaque-surface-overlays.md",
+      "primaryProject": "joint-overlay/joint-materials.azureproject",
+      "evidence": "docs/acceptance/nr/opaque-surface-overlays.md",
+      "publicContractStatus": "passed",
+      "jointDynamicStatus": "passed",
+      "strictReopen": "passed",
+      "visualAcceptance": "failed-user-review",
+      "videos": [
+        {
+          "path": "media/joint-opaque-surface-overlays.mp4",
+          "bytes": 4968181,
+          "sha256": "a585f8d7e6e8bf30875923b259386796315c7fc98597241abc1cf71f1ad631d7"
+        }
+      ]
+    },
+    {
+      "path": "runs/20261103-234012-character-reference-stages-5abe6c",
+      "pathBase": "build",
+      "purpose": "原生角色绘制阶段、轮廓光及完整区域的来源核验。",
+      "retention": "对应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "implementationPlan": "docs/plans/2026-11-03-character-reference-stages.md",
+      "primaryProject": "qualified-lit-surfaces-joint-v4/joint-materials.azureproject",
+      "outlineTemporalCoverage": "docs/acceptance/nr/evidence/2026-11-04/outline-temporal-coverage/results.json",
+      "fixedFloorControls": "docs/acceptance/nr/evidence/2026-11-04/floor-fixed-controls/results.json",
+      "evidence": "docs/acceptance/nr/evidence/2026-11-04/cloth-emission/results.json",
+      "strictReopen": "passed",
+      "visualAcceptance": "failed-user-review",
+      "videos": [
+        {
+          "path": "media/joint-native-iris.mp4",
+          "bytes": 5063917,
+          "sha256": "fa6e8e798d4bc15983dae4d386f2c3b7587a78edda47f723001b1d8d9ff4a19f"
+        },
+        {
+          "path": "media/joint-native-emission.mp4",
+          "bytes": 5185136,
+          "sha256": "3ccd2af1a7c476d9a1b284b795f0740c49b1bcf15b9c518309b095b7501a9ca5"
+        },
+        {
+          "path": "media/joint-sampled-outline.mp4",
+          "bytes": 5206843,
+          "sha256": "6aa884e02f3b76f3c7251763acd68798f93a5eb20e42c1ce9a1a36ff785ffef6"
+        },
+        {
+          "path": "media/joint-hair-facing.mp4",
+          "bytes": 5237051,
+          "sha256": "2872ae61eae82cb947daefb9bf108b1a7bff158cc38bad2d41918a1b31cf9f11"
+        }
+      ],
+      "sampledOutline": "docs/acceptance/nr/evidence/2026-11-04/sampled-outline/motion.json",
+      "translucentHair": "docs/acceptance/nr/evidence/2026-11-04/translucent-hair/motion.json",
+      "capturedHead": "docs/acceptance/nr/evidence/2026-11-04/captured-head-frame/results.json",
+      "clothReflection": "docs/acceptance/nr/evidence/2026-11-04/cloth-reflection/results.json",
+      "floorIrradiance": "docs/acceptance/nr/evidence/2026-11-04/floor-irradiance/results.json",
+      "playableRoute": "docs/acceptance/nr/evidence/2026-11-04/joint-playable-route/results.json",
+      "playableDelivery": "docs/acceptance/nr/evidence/2026-11-05/lit-surfaces-delivery/results.json",
+      "skinWarmth": "docs/acceptance/nr/evidence/2026-11-04/skin-warmth/results.json",
+      "shaderReloadCapacity": "docs/acceptance/nr/evidence/2026-11-04/shader-reload-capacity/results.json",
+      "projectedSurface": "docs/acceptance/nr/evidence/2026-11-04/projected-surface/results.json",
+      "screenSurfaceNormal": "docs/acceptance/nr/evidence/2026-11-05/screen-normal/results.json",
+      "nprViewMask": "docs/acceptance/nr/evidence/2026-11-05/npr-view-mask/results.json",
+      "screenNormalShadow": "docs/acceptance/nr/evidence/2026-11-05/screen-normal-shadow/results.json",
+      "litSurfaces": "docs/acceptance/nr/evidence/2026-11-05/lit-surfaces/results.json",
+      "litSurfacesStaticProject": "qualified-lit-surfaces-static/qualified.azureproject",
+      "litSurfacesJointCandidate": "qualified-lit-surfaces-joint-v4/joint-materials.azureproject",
+      "litSurfacesJointStatus": "motion-route-and-package-passed",
+      "litSurfacesMotion": "docs/acceptance/nr/evidence/2026-11-05/lit-surfaces-motion/results.json",
+      "litSurfacesPlayableCandidate": "qualified-lit-surfaces-playable/playable.azureproject",
+      "warmPlayableDelivery": "docs/acceptance/nr/evidence/2026-11-04/skin-warm-delivery/results.json",
+      "litSurfacesPackage": "lit-surfaces-delivery/独立游戏 中文 空格/完整联合场景显示验证.exe",
+      "litSurfacesManifestSha256": "a41a2fee04cb51e2b9f3c21e46b1ea1f0688f8c4466706b7100d71526761b3d0",
+      "shaderCatalogReload": "docs/acceptance/recovery/evidence/2026-11-05/shader-catalog-reload/results.json",
+      "shaderReloadHostStatus": "passed-debug-release-two-workflows",
+      "fullDebugEditorStatus": "failed-thumbnail-refresh-before-shader-recovery"
+    },
+    {
+      "path": "runs/20261104-001359-face-masked-rim-ff43bf",
+      "pathBase": "build",
+      "purpose": "脸部遮罩轮廓光的来源、像素响应与联合输入核验。",
+      "retention": "对应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "implementationPlan": "docs/plans/2026-11-04-face-masked-rim.md"
+    },
+    {
+      "path": "runs/20261016-140642-ev0-baseline-891c98",
+      "pathBase": "build",
+      "purpose": "私有来源导入基线及环境证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261016-142829-ev6-scene-exchange-41ac3c",
+      "pathBase": "build",
+      "purpose": "场景交换集成、导出夹具及构建证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261017-000956-endfield-native-3caf73",
+      "pathBase": "build",
+      "purpose": "原生资产调查、动画候选及来源数据库。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261017-141949-dijiang-lighting-video-7d7da0",
+      "pathBase": "build",
+      "purpose": "中庭展示工程、照明来源及原速视频。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261022-051129-character-logistics-restoration-0f2e71",
+      "pathBase": "build",
+      "purpose": "角色与物流还原的工具、候选及来源证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261022-201845-endfield-capture-954719",
+      "pathBase": "build",
+      "purpose": "原生抓帧及官方重放来源证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261022-210028-capture-plan-handoff-2e194d",
+      "pathBase": "build",
+      "purpose": "原生帧核对、会话收据及工作区快照。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261025-160544-main-material-frame-integration-1ad7a0",
+      "pathBase": "build",
+      "purpose": "主材质帧集成、材质槽与描边绑定证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261029-005117-shared-motion-history-a9430e",
+      "pathBase": "build",
+      "purpose": "运动向量与时间历史的共享所有权证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261029-015351-reflection-motion-depth-30af9d",
+      "pathBase": "build",
+      "purpose": "反射、运动及深度边缘的成对控制证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261029-021125-reflection-temporal-composition-f11a86",
+      "pathBase": "build",
+      "purpose": "反射时间合成的双配置构建及 GPU 证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261029-023153-reflection-reprojection-32dd36",
+      "pathBase": "build",
+      "purpose": "反射重投影、失败控制及 GPU 核验证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261029-071130-main-character-joint-budget-2cddc4",
+      "pathBase": "build",
+      "purpose": "主角色联合预算、内存诊断与原生捕获。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261107-061745-current-gpu-cost-2de6bc",
+      "pathBase": "build",
+      "purpose": "当前 GPU 单帧成本定位及后续局部控制输入。",
+      "retention": "性能候选完成且捕获已核验归档后清理。",
+      "pinMarker": ".keep",
+      "capture": {
+        "path": "current_frame320.rdc",
+        "bytes": 2116148716,
+        "sha256": "9079f51daf9e3d39a3de717a64f226080a86e013d379ea2e5a7eedcbf47ee103"
+      }
+    },
+    {
+      "path": "runs/20261107-120731-uniform-texture-index-capture-4c96ea",
+      "pathBase": "build",
+      "purpose": "合法动态纹理索引设备的当前 GPU 捕获与后续成本控制。",
+      "retention": "性能优化完成且捕获已核验归档后清理。",
+      "pinMarker": ".keep",
+      "capture": {
+        "path": "current_frame320.rdc",
+        "bytes": 2115957464,
+        "sha256": "5cbfc0ecf9fa24a7a8d8949ed54c3fc3691b7a1a58075d68f63f257b34ca6942"
+      }
+    }
+  ],
+  "evidenceRetentionManifest": "evidence-retention.json",
+  "archivedRuns": [
+    {
+      "path": "runs/20261021-203307-nr2-base-color-quantization-96ed2f",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 81,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261021-205039-nr6-face-blue-normal-105d10",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1004,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261021-213933-nr0-renderdoc-layout-audit-f831d0",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 49,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261021-223027-nr7-color-lut-review-df0af1",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 4,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261021-231456-nr11-observed-motion-c34afc",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 8,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-071136-character-local-light-response-17b93e",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1641,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-073632-clustered-signed-projection-3dd20e",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 633,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-075015-character-line-light-d58610",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 935,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-082551-ordered-character-color-blend-1a34c0",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2530,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-084651-character-screen-light-modes-0347ad",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2685,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-093843-character-multipixel-input-diagnosis-92843a",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 164,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-135236-c17-positive-primary-validation-65aa55",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 169,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-140322-skin-ramp-capture-validation-4e1751",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1095,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-143654-character-visibility-and-skin-contributions-0bc2c9",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2641,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-161800-body-postvs-light-input-validation-f58330",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1398,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-165425-character-visibility-producer-audit-9c2ea6",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1704,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-173532-object-shadow-contract-91a092",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 65,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-180520-object-shadow-atlas-e0651a",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1395,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-190255-object-shadow-config-0c8cdf",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 31,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-193204-shared-depth-sampling-090d6a",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 632,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-195500-object-shadow-gpu-6d1c49",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1741,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-205700-character-visibility-inputs-01a025",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 159,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-210826-material-local-wrap-89eb2f",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 662,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-211640-captured-caster-geometry-40d999",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1064,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-215043-captured-eye-inputs-05c1e1",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1695,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-232311-captured-hair-ring-closure-a1b608",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 89,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-235559-material-outline-binding-fb611b",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 4380,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-034455-temporal-aa-inputs-77fd31",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 44,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-035347-temporal-motion-contract-066065",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 85,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-042710-temporal-motion-output-de038d",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 202,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-062736-temporal-coverage-quality-eeef75",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 129,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-064930-outline-aa-footprint-923102",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2796,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-081424-projected-hair-pixel-integral-2990a6",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2880,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-101602-native-hair-coverage-motion-90e55c",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 4695,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-123840-alpha-clothing-motion-6cc1c9",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 5910,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-133121-alpha-mip-footprint-008937",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2599,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-142358-blend-fade-motion-7e378a",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2730,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-150621-native-motion-history-f4d899",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 607,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-153235-cutout-temporal-footprint-9c5e55",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2321,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-162103-native-hair-motion-response-580cde",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 476,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-172000-multisample-rhi-contract-d44491",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 71,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-183512-multisample-scene-target-4968f3",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 4,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-184956-multisample-view-quality-6be5b8",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 66,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261025-132646-character-multisample-shading-4083bb",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2816,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261025-134845-multisample-snapshot-outline-8300a8",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 3327,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261025-143316-multisample-joint-quality-budget-472cac",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 5622,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261025-150907-native-camera-motion-quality-17fa15",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1635,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261025-211745-main-npr-joint-quality-budget-e0cdf1",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2607,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-002936-opaque-snapshot-depth-prefill-89dbc6",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2360,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-014328-native-eye-mip-boundary-585769",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 155,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-021403-opaque-main-depth-prefill-157394",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 3823,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-031533-complete-asset-cache-reuse-b836e7",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 19,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-033134-material-frame-instance-producer-4b5fee",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 51,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-233116-repository-structure-audit-18fda4",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 6,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-234733-workspace-cleanup-195b9a",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 9,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-235925-retrieval-implementation-d1130b",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 17059,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261029-025624-main-reflection-history-3693f3",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2616,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261029-044333-reflection-pass-profile-087370",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1538,
+      "previousRegistration": []
+    }
+  ],
+  "recoveryArchives": [
+    {
+      "path": "archives/frozen-public-visual-shader-controls-20261114.zip",
+      "sha256": "7697a93c182185b9c0d38bd3ae54972bbddde785ebed0f87610da431b03d77af",
+      "journal": "archives/frozen-public-visual-shader-controls-20261114.zip.manifest.json",
+      "journalSha256": "06f37e39a05d6d803292ad33632cb67cbccd3f8320dcbeb7642935d709845b24",
+      "scope": "公开角色背景和显示诊断的五组生成着色器，涵盖 4,483 条原路径和 897 份独立内容。",
+      "retention": "历史诊断复现；冻结参考图、正式验收资料和重放程序保留原地址。"
+    },
+    {
+      "path": "archives/generated-cache-recovery-20261106.zip",
+      "sha256": "4d7b22cf9a104a25d23b86c216788a9ee9cb164e02bdc96e9cc17a5a0951eb3d",
+      "journal": "archives/generated-cache-recovery-20261106.zip.manifest.json",
+      "scope": "Inactive generated .azure/cache/*.azcache only; current joint project cache retained",
+      "journalSha256": "fa601e5e0da5ef83810da9529e3f81c78e30be89dfe24ffc8b2316256897a988"
+    },
+    {
+      "path": "archives/shader-baseline-e6c5b3e.zip",
+      "sha256": "874ed133ca5bbf0ed9cc27ab34e78bc8f7848dca38b3c245321755e50a8d6a1c",
+      "journal": "archives/shader-baseline-e6c5b3e.zip.manifest.json",
+      "journalSha256": "3671eb74400c29831e4c52b27211ab8cbe12e304a8aa01b8ab996b3b3027dae1",
+      "scope": "663 immutable production shader products matching e6c5b3e runtime inputs; retained once for verified recovery of generated shader fixtures."
+    },
+    {
+      "path": "archives/q1-debug-generated.tar.zst",
+      "sha256": "b039217690f74dcc423e80ec6fee5b177122618b5575651412d7799ac84827f9",
+      "journal": "archives/q1-debug-generated.tar.zst.manifest.json",
+      "journalSha256": "9a935b78b8d02ce2c798e42ff11ab384bcafafed074f89a903a9c38bd38a3d62",
+      "scope": "历史 q1 工作树的 debug 生成产物；源文件与 Git 工作树完整保留。",
+      "retention": "历史生成构建的短期恢复包，源文件与 Git 工作树保持完整。"
+    },
+    {
+      "path": "archives/q1-release-generated.tar.zst",
+      "sha256": "5e25ec84d3cec85c76f038d7ffd2eda448ebfc258e38970c2e544917cecb1822",
+      "journal": "archives/q1-release-generated.tar.zst.manifest.json",
+      "journalSha256": "c26a9f8614ef4c87b6a450f7910fa52f5552747e51805e0b0fd7fb8893f6cafd",
+      "scope": "历史 q1 工作树的 release 生成产物；源文件与 Git 工作树完整保留。",
+      "retention": "历史生成构建的短期恢复包，源文件与 Git 工作树保持完整。"
+    }
+  ]
+}

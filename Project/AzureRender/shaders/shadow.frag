@@ -1,4 +1,8 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#include "node_opacity.glsl"
+#include "material_primary_uv.glsl"
+#include "shadow_coverage.glsl"
 
 #if defined(AZURE_BINDLESS)
 #extension GL_EXT_nonuniform_qualifier : require
@@ -25,6 +29,7 @@ layout(push_constant) uniform MaterialData {
 #if defined(AZURE_BINDLESS)
     layout(offset = 136) uint textureBase;
 #endif
+    layout(offset = 140) float nodeOpacity;
 } material;
 
 #if defined(AZURE_BINDLESS)
@@ -32,15 +37,36 @@ layout(push_constant) uniform MaterialData {
 #else
 #define AZ_TEX_BASE_COLOR baseColorTexture
 #endif
+#if defined(AZURE_INDEPENDENT_COVERAGE)
+#undef AZ_TEX_BASE_COLOR
+#if defined(AZURE_BINDLESS)
+#define AZ_TEX_BASE_COLOR textureArray[nonuniformEXT(material.textureBase+2u)]
+#else
+layout(binding=3) uniform sampler2D independentCoverage;
+#define AZ_TEX_BASE_COLOR independentCoverage
+#endif
+#endif
 
 layout(location = 0) in vec2 textureCoordinate;
+layout(location = 1) in vec3 opacityCoordinate;
 
 void main() {
-    float alpha = texture(AZ_TEX_BASE_COLOR, textureCoordinate).a;
+    azurePreparePrimaryUv(textureCoordinate);
+    if((material.materialFeatures&2097152u)!=0u) {
+        if(!azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity))discard;
+        return;
+    }
+    if (material.alphaMode != 2 && !azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity)) discard;
+    float alpha = azureSampleCoverageAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,material.materialFeatures);
+    if((material.materialFeatures&4194304u)!=0u) {
+        if(material.nodeOpacity<=0.0||shadowSqrtAlphaCoverage(alpha,material.alphaMode==2?material.nodeOpacity:1.0)
+            <shadowPixelNoise(gl_FragCoord.xy))discard;
+        return;
+    }
     if (material.alphaMode == 1 && alpha < material.alphaCutoff) {
         discard;
     }
-    if (material.alphaMode == 2 && alpha < 0.35) {
+    if (material.alphaMode == 2 && alpha * material.nodeOpacity < 0.35) {
         discard;
     }
 }

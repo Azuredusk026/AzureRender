@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 59: AzureEditor.Workspace
+1/1 Test #59: AzureEditor.Workspace ............***Failed    0.05 sec
+Content browser must reserve a filter row and visible asset rows
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.05 sec
+
+The following tests FAILED:
+	 59 - AzureEditor.Workspace (Failed)
+Errors while running CTest

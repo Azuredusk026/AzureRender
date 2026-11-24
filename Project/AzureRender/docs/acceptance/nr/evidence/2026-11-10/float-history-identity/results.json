@@ -1,0 +1,144 @@
+{
+  "status": "float-identity-local-gpu-contract-passed",
+  "devices": [
+    {
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "scenarios": 57,
+      "checkedPixels": 119537664,
+      "validationMessages": 0,
+      "liveImages": 0,
+      "liveBuffers": 0,
+      "label": "nvidia",
+      "seconds": 11.452999999979511
+    },
+    {
+      "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "scenarios": 57,
+      "checkedPixels": 119537664,
+      "validationMessages": 0,
+      "liveImages": 0,
+      "liveBuffers": 0,
+      "label": "intel",
+      "seconds": 10.625
+    }
+  ],
+  "runtimeSourceUnchanged": true,
+  "programsUnchanged": true,
+  "nativeSceneCaptures": 0,
+  "wholeFrameTimingRuns": 0,
+  "build": {
+    "runtimeSourceUnchanged": true,
+    "programsUnchanged": true,
+    "originalTestSourceRestored": true,
+    "originalTestRebuilt": true,
+    "bothConfigurationsVerified": true,
+    "privateExecutableSha256": "cbae77588d1a2a844ec0428fdd6225e6d0e447a8986f591f55f3d3140f8174ec"
+  },
+  "sourceBase": "25f8f7c",
+  "scope": "R32 float third attachment, alpha/premultiplied/additive primary blend, exact 24-bit keys, invalid overlay and depth rejection",
+  "shaderHashes": {
+    "identity.vert.spv": "a8ecd21fc82caaa69af9658e60b0b40433e405f283de38257a08e1d5d46b7616",
+    "identity.frag.spv": "f9cd30a3123d94a8020bd1bf8974c511ee939650185df623fa5a694ef43f2df9"
+  },
+  "archive": {
+    "bytes": 51645,
+    "sha256": "f9556524b405b04d99016c0c079bc4dcf9e1411766aecf1eb815b9f37a53f498"
+  },
+  "members": [
+    {
+      "name": "baseline-programs.json",
+      "bytes": 152349,
+      "sha256": "de10086a60c4fcc2ae96cba67ba3c68f39b83e0be44192b00f35bab42c9bd429"
+    },
+    {
+      "name": "build-results.json",
+      "bytes": 276,
+      "sha256": "6d816d5c4a1702492316c1a88bb5050d4b7114d4267f97dec9ef0e35478f7fb5"
+    },
+    {
+      "name": "build.py",
+      "bytes": 3246,
+      "sha256": "45a260d9ef20bb9b39337fcd47ec446fa320665e34d926ff84dea15d62aa057d"
+    },
+    {
+      "name": "FloatIdentity.cpp",
+      "bytes": 9101,
+      "sha256": "feca61b6896a69dd1fbb2f1c73fdda069795487edb84355062d2a16ba741301a"
+    },
+    {
+      "name": "FloatIdentityFixture.hpp",
+      "bytes": 11437,
+      "sha256": "97e79663a92f329682dfe33d02fc0c8dd20933f82c16f477b601c95f1d4fad01"
+    },
+    {
+      "name": "identity.frag",
+      "bytes": 611,
+      "sha256": "593e60154b22c5b6c308bd7907d37c47f4a337d70098ba449100d74509649559"
+    },
+    {
+      "name": "identity.frag-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "identity.frag.spv",
+      "bytes": 2516,
+      "sha256": "f9cd30a3123d94a8020bd1bf8974c511ee939650185df623fa5a694ef43f2df9"
+    },
+    {
+      "name": "identity.vert",
+      "bytes": 248,
+      "sha256": "20fd6bd9415b3d2d392080cdb63fd5057064022b0c215b7ace916932cd0d4d26"
+    },
+    {
+      "name": "identity.vert-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "identity.vert.spv",
+      "bytes": 1480,
+      "sha256": "a8ecd21fc82caaa69af9658e60b0b40433e405f283de38257a08e1d5d46b7616"
+    },
+    {
+      "name": "initial-flag-conversion-error.log",
+      "bytes": 1889,
+      "sha256": "577f5e967c7248e1bea984507e02cd92d9bb931cfab223984c8ee2b32464c2e7"
+    },
+    {
+      "name": "intel.log",
+      "bytes": 158,
+      "sha256": "ba9128a79b7f0a233d067bfe7ec952da7fcfd3c6db6dd1123e6e6be6bc9b9636"
+    },
+    {
+      "name": "nvidia.log",
+      "bytes": 144,
+      "sha256": "6a0d23f0e65588b377cbb9734c2b9713a12496f88da52111d5a5eef303a96db3"
+    },
+    {
+      "name": "private-build.log",
+      "bytes": 223,
+      "sha256": "a6140039b758931f9fbb7fa2f9f520132eefcfb8bff8afc18bb9ad38642a36b3"
+    },
+    {
+      "name": "restore-test-build.log",
+      "bytes": 223,
+      "sha256": "a6140039b758931f9fbb7fa2f9f520132eefcfb8bff8afc18bb9ad38642a36b3"
+    },
+    {
+      "name": "results.json",
+      "bytes": 752,
+      "sha256": "dfbea22020b588c1764ed0e13b3cf12965074bdcd76ac80e2c0e38bf12d1d26e"
+    },
+    {
+      "name": "run.py",
+      "bytes": 1595,
+      "sha256": "2a26cc7edbd3da62acaa6477d085d6dd361ba3f6f6a1a5dd615af26e7dfdc4de"
+    },
+    {
+      "name": "ShadowHistoryCacheGpuTests.cpp.baseline",
+      "bytes": 7615,
+      "sha256": "656924f043c7984829a2279b8f1099cf28486aa65a63f5293047a1c907ee7e75"
+    }
+  ]
+}

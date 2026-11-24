@@ -1,0 +1,19 @@
+{
+  "actions": 205,
+  "nodes": 21,
+  "resources": 3,
+  "editStateRestored": true,
+  "scriptRecovery": true,
+  "validationErrors": 0,
+  "built": true,
+  "packagedQuest": {
+    "frames": 940,
+    "actions": 38,
+    "completionSeconds": 221.0,
+    "fixedSteps": 14085,
+    "restarts": 2,
+    "validationErrors": 0,
+    "released": true
+  },
+  "sourceProjectUnavailable": true
+}

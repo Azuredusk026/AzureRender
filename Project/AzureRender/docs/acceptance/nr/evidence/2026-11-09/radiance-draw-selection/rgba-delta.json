@@ -1,0 +1,155 @@
+[
+  {
+    "source": "image-push-layout-fixed",
+    "frame": "frame_000003.png",
+    "referencePath": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000003.png",
+    "referencePngSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+    "capturedPngSha256": "55b2e1ae6e17f6a0e1ed24ff1c13d14a1d8b5f9be7b59809c3ec5c549884a19a",
+    "capturedRgbaSha256": "973bfa1e7215c6f9c1d12a79dace59d37b2f42547cbf6e9516786cb0d86e7369",
+    "width": 2560,
+    "height": 1440,
+    "replacementPixels": [
+      {
+        "x": 926,
+        "y": 0,
+        "rgba": [
+          176,
+          216,
+          224,
+          255
+        ]
+      },
+      {
+        "x": 924,
+        "y": 4,
+        "rgba": [
+          146,
+          199,
+          222,
+          255
+        ]
+      },
+      {
+        "x": 914,
+        "y": 9,
+        "rgba": [
+          200,
+          204,
+          172,
+          255
+        ]
+      },
+      {
+        "x": 915,
+        "y": 10,
+        "rgba": [
+          239,
+          235,
+          140,
+          255
+        ]
+      },
+      {
+        "x": 914,
+        "y": 11,
+        "rgba": [
+          238,
+          235,
+          140,
+          255
+        ]
+      },
+      {
+        "x": 925,
+        "y": 15,
+        "rgba": [
+          239,
+          236,
+          141,
+          255
+        ]
+      },
+      {
+        "x": 945,
+        "y": 634,
+        "rgba": [
+          128,
+          198,
+          220,
+          255
+        ]
+      },
+      {
+        "x": 931,
+        "y": 638,
+        "rgba": [
+          65,
+          141,
+          212,
+          255
+        ]
+      },
+      {
+        "x": 944,
+        "y": 640,
+        "rgba": [
+          126,
+          198,
+          220,
+          255
+        ]
+      },
+      {
+        "x": 922,
+        "y": 641,
+        "rgba": [
+          52,
+          138,
+          212,
+          255
+        ]
+      },
+      {
+        "x": 930,
+        "y": 641,
+        "rgba": [
+          75,
+          153,
+          213,
+          255
+        ]
+      },
+      {
+        "x": 947,
+        "y": 641,
+        "rgba": [
+          68,
+          170,
+          214,
+          255
+        ]
+      },
+      {
+        "x": 945,
+        "y": 650,
+        "rgba": [
+          75,
+          175,
+          215,
+          255
+        ]
+      },
+      {
+        "x": 931,
+        "y": 653,
+        "rgba": [
+          68,
+          80,
+          58,
+          255
+        ]
+      }
+    ],
+    "restorationScope": "Exact decoded RGBA; original PNG encoding is recorded by hash"
+  }
+]

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "scope": "S1-S3 仓库检索、证据归档与语法地图",
+  "toolTests": {
+    "passed": 40,
+    "suites": [
+      "test_code_query",
+      "test_code_symbols",
+      "test_repository_audit",
+      "test_evidence_archive",
+      "test_artifact_cleanup"
+    ],
+    "timeoutMetadataRecheck": 11
+  },
+  "runtimeRegression": {
+    "preset": "msvc-release",
+    "test": "AzureEngine.AssetLevel",
+    "passed": 1
+  },
+  "isolatedProject": "passed with current tool files and copied native dependencies",
+  "archiveRoundTrip": {
+    "verifiedFiles": 322,
+    "hashes": "SHA-256",
+    "sourceRemoved": true
+  },
+  "documentation": {
+    "style": "passed",
+    "localLinks": "passed",
+    "hygiene": "passed",
+    "renderedPages": "passed",
+    "strictSiteBuild": "failed",
+    "warnings": 82,
+    "warningsInNewPages": 0,
+    "warningLog": "build/runs/20261026-235925-retrieval-implementation-d1130b/final-mkdocs.log"
+  },
+  "workflow": "YAML validated locally; remote workflow not executed",
+  "sourceFiles": {
+    "tools/code_query.py": "b15e07029f3fd94ffb41aa04898f701d2e3ee7e99a17ba82448c68b1bb141a35",
+    "tools/code_symbols.py": "cac39cda6f1d2e326d95220e8f546ac27648c1f8f323d20a456b02d1d09f4107",
+    "tools/code_query_scopes.json": "2afbd6cafaf09262abc252a28d8bfa68cbf1a1e1b90712326348ed055941c566",
+    "tools/evidence_archive.py": "ba567f98ee46f06ab3421584f9da03dc3055b62cc40373ab1130709c2b4536b7",
+    "tools/evidence_inventory.py": "7d97b2a37826dc151b0b5810d0cffbaf0e6090103f3f903eacbbd3cedc885b53",
+    "tools/audit_repository.py": "363eaab5fe38b1ddeb313ff282f6a77a13579522f9f44a1a46a00efe43bd6d01",
+    "tools/requirements-code-intelligence.txt": "997801f9b2fb0c4502f3fcf4630c2283728f7f996209a336b2838a03538b2290"
+  },
+  "limitations": [
+    "符号与包含关系属于语法定位，宏预处理与精确引用依赖编译器语义。",
+    "语法恢复与未覆盖语言在响应中标记。",
+    "基线记录字符及耗时，实际 token 使用尚未测量。"
+  ]
+}

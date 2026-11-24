@@ -1,0 +1,326 @@
+{
+  "schemaVersion": 1,
+  "verified": "2026-10-27",
+  "phase": "NR6-C16-C17",
+  "status": "receiver-integrated-native-producer-and-full-region-open",
+  "nativeFrame": 10401,
+  "nativeShadeEvent": 950,
+  "nativeVisibilityResource": "141931",
+  "nativeVisibilityFormat": "R8G8_UNORM",
+  "nativeProducerEvent": 699,
+  "materialLayoutVersion": 10,
+  "materialBytes": 192,
+  "fragmentTextureSlots": 9,
+  "addedRuntimeBindings": 0,
+  "defaultCharacterVisibility": "one",
+  "mainCandidateCharacterVisibility": "object-shadow",
+  "frozenSidePoints": 3,
+  "maximumSidePointByteError": 1,
+  "rimRegressionPoints": 14,
+  "maximumRimRegressionByteError": 1,
+  "debugReleaseWholeImageEqual": true,
+  "debugReleaseFixtureImagesEqual": true,
+  "legacyMainImageByteEqual": true,
+  "cpuTestsPerConfiguration": 12,
+  "gpuFixtureCasesPerConfiguration": 31,
+  "gpuFixtureFramesPerConfiguration": 62,
+  "gpuKernelTestsPerConfiguration": 3,
+  "mainEntryRuns": 3,
+  "playable": {
+    "frames": 16,
+    "animationFrames": 176,
+    "fixedSteps": 112,
+    "expectedDisplacementMetres": 1.1557994237
+  },
+  "regions": [
+    {
+      "name": "crown",
+      "box": [
+        1215,
+        160,
+        1340,
+        242
+      ],
+      "pixels": 7344,
+      "maximumByteError": 5,
+      "p95ByteError": 1.0,
+      "meanAbsoluteByteError": 0.3303376906318083,
+      "pixelsOverOneByte": 30
+    },
+    {
+      "name": "head",
+      "box": [
+        1140,
+        130,
+        1430,
+        440
+      ],
+      "pixels": 17017,
+      "maximumByteError": 7,
+      "p95ByteError": 1.0,
+      "meanAbsoluteByteError": 0.2942939413527649,
+      "pixelsOverOneByte": 104
+    },
+    {
+      "name": "full",
+      "box": [
+        0,
+        0,
+        2560,
+        1440
+      ],
+      "pixels": 17017,
+      "maximumByteError": 7,
+      "p95ByteError": 1.0,
+      "meanAbsoluteByteError": 0.2942939413527649,
+      "pixelsOverOneByte": 104
+    }
+  ],
+  "frozenRelease": {
+    "playerSha256": "d9a65d3267ed25829df9db08612f9d659e321363210eebdbc408e2234cd5b28f",
+    "shaderCount": 113,
+    "shaderHashes": {
+      "background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+      "background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+      "background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+      "background_bindless_samples.frag.spv": "7937f35e40fc9efc0d323b14c69f57088e8319316aad8e4a729cb17f11806ca0",
+      "background_samples.frag.spv": "a73edda9980479f648b8a5d7bf8e90c7f702a85e6c43a985eaac2a690c2a49d3",
+      "blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+      "blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+      "blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+      "blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+      "blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+      "bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+      "bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+      "character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+      "character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+      "character_snapshot.frag.spv": "1b0af8d60eea6f59ab209dc05aecfa04d62159ffb86167201ef5f5ef6ea90bbd",
+      "character_snapshot_bindless.frag.spv": "9c354255c948bbbc33a300ea14f33abbf0291d71a3e701074fc40dc9f4c007ea",
+      "character_snapshot_bindless_samples.frag.spv": "0f172ef54603d6bd4db46e693a6706538ed9f4bdecdc7b968f7364ce5991e6c9",
+      "character_snapshot_depth.frag.spv": "beee6901bfb65d8c04d09ff20df76f49ea80045f5c14816cc1ad76fb55baf8e1",
+      "character_snapshot_depth.vert.spv": "c25cf604b8499b2c0a44f6507f6489b9d125514e53576e673ab1bb36f4915cde",
+      "character_snapshot_depth_bindless.frag.spv": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+      "character_snapshot_depth_bindless_samples.frag.spv": "67ed2047713fe1a1e60816978b6c3464102fa36feae97bf30ec0245ce2adf11c",
+      "character_snapshot_depth_compute.vert.spv": "580b4777a721c1f6646be2d9fe618ed44f6f4c4fdb6fae877aab233462e977d9",
+      "character_snapshot_depth_samples.frag.spv": "83ce6bc8a4e7cb98aef5022dfbb7f88aeeacf75dbdf4f778769c7eebfe92cab3",
+      "character_snapshot_integral.frag.spv": "fc77a9a697483d51ea066e0384de4038cd7512253301491ed9e05e630b1b2bce",
+      "character_snapshot_integral_bindless.frag.spv": "9445f564c81c49382df451d4a37639ee7362351214e8ddcfec1dd15dc8ee69cd",
+      "character_snapshot_integral_object.frag.spv": "9a618d5b3112033683277e3b2b2a06690fa6665de3eafc058865cd620757e34b",
+      "character_snapshot_integral_object_bindless.frag.spv": "fd29e325ed204f81fc83c12c148e2afab6169eeee87e9155b2c3369a12da4deb",
+      "character_snapshot_object.frag.spv": "520620ab3d81b10c80b79e665cf02d8a2aa1efa79859383f1dc761f89efb909a",
+      "character_snapshot_object_bindless.frag.spv": "de91a220047ee740963ef50f93acd6078fdea4f17674dd01fd236a538019d15e",
+      "character_snapshot_object_bindless_samples.frag.spv": "212c60c4834150f56af14babd1120444fcb2df17f9bc0f579ad046779d0d9ccb",
+      "character_snapshot_object_samples.frag.spv": "80813fcbe02ddf61d108a5c7fdc6fa3062f8b5fb31932d05bc411937034a5645",
+      "character_snapshot_samples.frag.spv": "aa877a49f87f450a3849cac8ae1b4411170eaf606124b88c5355ba316a059170",
+      "clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+      "color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+      "cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+      "editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+      "editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+      "game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+      "game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+      "hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+      "hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+      "ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+      "inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+      "inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+      "mesh.frag.spv": "c44bdf5581400b3740ecda2ef79bec5f07f340b5ab5633a661a11aab49278406",
+      "mesh.vert.spv": "c76ca201f9f1fc7c68918bb0e9ab7a9d1f209c9a650dadb54d0328be4ce57c56",
+      "mesh_bindless.frag.spv": "65ea7a681fdfe45896a75b754f524e3531c5ddf6c37517cd777653a30f66dead",
+      "mesh_bindless_samples.frag.spv": "9d3f832174c85512cc20be1290e588b0df0f5d182840e7c5d258937620540e2d",
+      "mesh_compute.vert.spv": "9ae1388c47561532ffff7890f28c7b49fb98d2825d5f9a606daec0fd95370769",
+      "mesh_integral.frag.spv": "7502658b08e6a98ab02cea145bcaaf9d1f971d12f5d72871f64ff2ec69b14289",
+      "mesh_integral_bindless.frag.spv": "0eaf2f9ed1d64af0a21202e67218fcb1d069a035ce684691c79c9efebde08fd4",
+      "mesh_integral_object.frag.spv": "42e810c7bb2e5aaaea856c2c7cc01ff0397ab6e8eadf4feabbf28020d1875b53",
+      "mesh_integral_object_bindless.frag.spv": "0f3f713241fb8d73558cf83174179d09e5e0bc199dc3bd395fb4acf1a4a904b9",
+      "mesh_object.frag.spv": "5b076fb5ca571c93b5c2d5036ff97b84e0a96d34a81e932c4b4698821a28c4ca",
+      "mesh_object.vert.spv": "b9c8863221e3528985d0440ed8516b85eadea7c2e331f7151098e18c3969371f",
+      "mesh_object_bindless.frag.spv": "dfa666250ebedbba51ec764cd699cbe919d70386792db8cc639abf3a3becde82",
+      "mesh_object_bindless_samples.frag.spv": "75b3761278b11e7f600cf0a5f24cfb5c65cb3228d3c87af65e26fee299b9c8cb",
+      "mesh_object_compute.vert.spv": "bf082b55b11b2149f50ead47b6c24a5686038b2741e7aa6f2a432b5d8c226169",
+      "mesh_object_samples.frag.spv": "4e8fac1b231ce7035187bcb7862a101d3b1b6aff0efeba4452729f42093e8069",
+      "mesh_samples.frag.spv": "d469bf20d72694b0d31b5b23ea4739fd1f5e3038bd665aa7022fa5040007aa06",
+      "motion_outline.vert.spv": "20bdc865d9d02cccd775ff18dc645675c32f0f1d17aac37e5867a574cb3d6875",
+      "motion_pose_test.comp.spv": "c657318588f6a94ba16b53a750ad3c59a13d9559012d740bcb0b374b58f3f2ec",
+      "motion_projection_test.comp.spv": "ba985c261cb80b1a0869152fc6b75b8c98f6813aa102b91c239171d7d99821ec",
+      "motion_vector.frag.spv": "41734e1b4299cc052b723d29b0994fe5af468baa04fb0348538cf5fedc2feab8",
+      "motion_vector.vert.spv": "0b7450cba1a1fae84341b764777148c760874f6661a89627fcf47aa5f598e583",
+      "multisample_probe.frag.spv": "8f52538e91940803f1d514b0826b39b5b3c4873318b8f33fe5b92a8f7325a7ec",
+      "multisample_probe.vert.spv": "c926a7e110f846f93f37225b9739c0b92d240988c7dcd9a1ae6a4fadc18031dd",
+      "object_shadow_filter_test.comp.spv": "290a118205df0b2a1efe23685536bce54c7199b46c5fc3acb6d9d46be74c3708",
+      "outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+      "outline.vert.spv": "ab345fb7947c37da4d9154e4c38fc0fd695a0379ddaec4194c3253e207e80894",
+      "outline_compute.vert.spv": "072ccaaaa6c3a8ee3c97a4cfbf1384c2463656ceecbb20def4772a2c0e802ece",
+      "outline_depth.frag.spv": "0e848e0d66ab546443c5ce4f941ef6d5ce18397a11dbdc1a98831aa4a1bd3079",
+      "outline_depth_bindless.frag.spv": "8b658a22dc7145d27864e0555bcfc425ebc4c1b1aa78e16aca51e893ab6a3171",
+      "outline_depth_bindless_samples.frag.spv": "33d7e9187782d0a2163e1dc37805c306505c105b6c318e9c227e9d136db9fd66",
+      "outline_depth_samples.frag.spv": "044d24b1c37c664e161bdd9c9d81939f4bfb573609c780b7c83193336ef27180",
+      "outline_mask.frag.spv": "2b31604545789a8c07a1d2d9b979d5352fdb1a9fbc5e1219fa5d8376bef23b86",
+      "outline_mask.vert.spv": "254ea599605ab1d157f51102e049c089a7f64058f6d486a7776860efcca91e73",
+      "outline_mask_bindless.frag.spv": "4cc56fc9d2ec292ca9eb164ba43c19e871afa9575e6d09b912705a63e3ddcfb3",
+      "outline_mask_bindless_samples.frag.spv": "343b7b2a5deef6c97bbbccfb2557a725311f9d86a5c26db85d7849b80ac1d2be",
+      "outline_mask_compute.vert.spv": "86b117e98b537b5e3a2b96bd77af1a662597bc10c0cb7a4f6ad38def587e6e97",
+      "outline_mask_samples.frag.spv": "5247371d64a4782baf5487e47dd76d0046ddcb0afadafc313ecf43d1e64727c4",
+      "outline_samples.frag.spv": "e15a79625808349bb5137c2c5bd1386f1360fe80f555bbc70afbbbc8d01c003c",
+      "outline_view_scaled.frag.spv": "5e5f39bb2cc36e8801afb8dd0e80915b77dfa01dfa44944063ba39d658c3b321",
+      "outline_view_scaled.vert.spv": "6832ed81cab49e76c25f3ff043c15ea0c62104c5fa92e3150d38132cff63e9f9",
+      "outline_view_scaled_bindless.frag.spv": "0bd2f66eeed847b0fb30d9ed3805cf87366c7f171077fe657c6e5f1f78243db2",
+      "outline_view_scaled_bindless.vert.spv": "785773d452b53ad047d11b2643d3d6e29c562c3ada1fba3e7018d35bc726ba5a",
+      "outline_view_scaled_bindless_samples.frag.spv": "22e56eca66e79089655ae60b8831c95e32fa42067fd16f82436319a0a64761ac",
+      "outline_view_scaled_compute.vert.spv": "8af0169fb7d2cb5ebd92d589af6bcb117553d648dde9eaccbdcb0b34d95abe56",
+      "outline_view_scaled_compute_bindless.vert.spv": "825bfc8694d71362793dc7865701a16aa115aa1417e420aa370f1c91f65469a2",
+      "outline_view_scaled_samples.frag.spv": "f634d82cc5d256d287c17f96db218642c4c1105c56cb109049a52774bd713464",
+      "pathtracing.comp.spv": "6f90a3444d1a07b8ead9eba67d063f70e9c46310058146a496c5e4eea47dfcec",
+      "pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+      "readonly_depth_test.frag.spv": "b7afe007df9e050c21c89832a50e7cdb976e225c6ec6b5376589d1aa021352a9",
+      "readonly_depth_test.vert.spv": "11d36fc78f75992904f31c89130be22737be87dd4dd99b65508d6fcc40fe2ce3",
+      "sampled_upload_test.comp.spv": "a7b9be273214e05f06f7441f6e3a1187e929faa531beedf545eaf0291b3fd582",
+      "scene_instance_layout_test.comp.spv": "36d658cb7a429516ca78d6f99d9f72209dd98542374bb00dbb4fa8e428181984",
+      "scene_multisample_probe.frag.spv": "68590c52468ecf36eb459ac21cf95b5fd1cc0631c2e90d2d2708fd9fdca8d3ef",
+      "scene_multisample_resolve.frag.spv": "c43855a013abf50c1b59604038d9022c3672fa9feb7490b9868e119a57a7a7b9",
+      "shadow.frag.spv": "91ac2f1e32ea6ee107bbb9143c9e96cdffef43e22ae53b9626c3eb7d7a1af245",
+      "shadow.vert.spv": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5",
+      "shadow_bindless.frag.spv": "6d38dc03e16eda0b761a21b00ebea4a223e9046bc73b7ac5d531ff028b34f36f",
+      "shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+      "shadow_compute.vert.spv": "ac557aaeb75d6cf3e75af60d345a25e1cc78ee9b8c90943d05a73e9bfe66bc2e",
+      "shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+      "skin.comp.spv": "a0f5f99f22082c9e6550cc5f6926bb3df82db4f70ef1130f7130b51b204b6fe4",
+      "sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+      "spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+      "specular_ramp_test.comp.spv": "579badc92e94a243bec3335fe5064122d6b65f93d64baf6b6e7fe74b0f2e6da3",
+      "surface_response_test.comp.spv": "afe36fc87f9472aa759275224bfff0b5d0c94bf22a1044de69c774dd2252ee76",
+      "temporal_copy.frag.spv": "b406af1147ab75cf5fdca93cccece032d0dfe1d0cf7fa1bab24e16024db65ce7",
+      "temporal_resolve.frag.spv": "b33ba8e6f0afa045edf2ba2c098c6f0213b5c22c2f5353c2b184a8ce5cdb0531",
+      "view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+      "visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+    },
+    "debugReleaseShaderEqual": true
+  },
+  "remaining": [
+    "Full native hair region has 104 pixels over the frozen one-byte gate.",
+    "Native visibility producer reconstructs the receiver from copied depth and compressed normal; current producer uses surface inputs.",
+    "NR0-NR12 formal delivery and performance gates remain open."
+  ],
+  "artifacts": [
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/frozen-side-points.json",
+      "bytes": 565,
+      "sha256": "90557941f80bbce2b822de3e0c3d2a26299e4a37df1faaff5a3a992f71854fa2"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/red-contract.log",
+      "bytes": 53,
+      "sha256": "59fd60f56614cd095ebf19e00fd5d7cf1c663d013bef4b4a8efa3063285e87ce"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/ambient-domain-red-v2.log",
+      "bytes": 705,
+      "sha256": "b97bb575387dde96104e58ffeb474f17a6e75e8cdcffc5ff2699fb95b53efe57"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/red-side-points.json",
+      "bytes": 790,
+      "sha256": "f1be451deaf15da4871d51ca7da4731c7ae474a2a6564551c1ce71b819c60e88"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/rim-regression-points.json",
+      "bytes": 3393,
+      "sha256": "154689e5cb3c7631582c95b23dd483da9e461ff24031782fea1fa056247dfa44"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/receiver-final-debug/hair-region-metrics.json",
+      "bytes": 1188,
+      "sha256": "2280904176a4945bd77d149e2cf0ffb2d2df8d3202040e2c6fe5f915fe730dcc"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/cpu-final-debug.log",
+      "bytes": 1860,
+      "sha256": "ef1baa3644bc6cb7bd5e450ec47e8fba4ceea8fad648eb4d0d7bc70d72b88b26"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/cpu-final-release.log",
+      "bytes": 1864,
+      "sha256": "92e8f3a11da4fbd7134f6cbb16a4185bdc2a1fbe4b45ac785e044b9998c59a2c"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/gpu-kernels-debug.log",
+      "bytes": 701,
+      "sha256": "2662f4c5b47bd96d5fa781b9805dea44065b9fa3e25a5547fab93d5601e7df4e"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/gpu-kernels-release.log",
+      "bytes": 705,
+      "sha256": "c45ce6b584b4b576946a88a34002567e119b542687c5bac7f27d289d1d3668e1"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/object-full-debug/summary.json",
+      "bytes": 11476,
+      "sha256": "60ccf642c74155235bd3e0405eba7a286e59f4028290a8fbf877d42efb4df81b"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/object-full-release/summary.json",
+      "bytes": 11507,
+      "sha256": "1030bba9d5990e4b69c935bf2aa00eb2c37de30185367fd58d5c805aba168a01"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7.json",
+      "bytes": 975,
+      "sha256": "e68f8c62bafc82af0fc4170a56b17f6d3355bc77576632e1b7e1416d318ae741"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-validation.json",
+      "bytes": 177,
+      "sha256": "cee4268bb7e72a9ccb2b1f1f81787eb338f554366a1764bb9c039dac8a371a4b"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-v7/runtime.json",
+      "bytes": 358820,
+      "sha256": "97a6784138d1217123166215374ed0ad978adb2d9df0fbccdec0be5b6f9d8c92"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/playable-v7/runtime.json",
+      "bytes": 441930,
+      "sha256": "6b2ca1890f16efa24055278d740d62c4a6820a6bdf9bc5d6c0c6fc1f1a06393d"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/default-main-compatibility.json",
+      "bytes": 52,
+      "sha256": "80c41da7ad1a8dbb3e7e232e22d94ae2e5a71e2054c8f717fb14c71899423ed4"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-v7-image-comparison.json",
+      "bytes": 195,
+      "sha256": "4d535bfda924bc9d731c6498b471af4c438d1084e47bf976a5d17efdba14a5cd"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/frozen-release.json",
+      "bytes": 12019,
+      "sha256": "ba16c3d0fdb397adec3d5a9415aea3556fac4a4b54bd9dda74091b26e136f97f"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/visibility-inputs.json",
+      "bytes": 1394,
+      "sha256": "1fa6fee146ace1fbb766f3d048749eb4e3d82ebb751e364b85ba00e00df4071d"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/native-screen-visibility.bin",
+      "bytes": 7372800,
+      "sha256": "ed6b1149357db8d07e9fd5fd247d372890e31f50303879f4e1f8607ac8e8b76e"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/visibility-producer.asm",
+      "bytes": 18168,
+      "sha256": "1e5888ef3eb9c7d83703155c157525e03f9245d585c219fcbffa2d59369ded08"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/visibility-difference-points.json",
+      "bytes": 1462,
+      "sha256": "58fb8573b58d948afc523e71298f4893c33d6ab51812fa1c23e8df86330371d5"
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/material-validation/receipt.json",
+      "bytes": 187,
+      "sha256": "8caaf64b66abbda01acffad1bb60a7133493dc7bc9dd39a76f2db0449a7cbeb0"
+    }
+  ]
+}

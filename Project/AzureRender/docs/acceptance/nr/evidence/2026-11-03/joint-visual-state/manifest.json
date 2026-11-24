@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "status": "qualified-inputs-and-framing",
+  "visualAcceptance": "failed-user-review",
+  "sourceCommit": "62f02a7d8b11c02641ae5b4ffda30521009e5fd6",
+  "programSha256": "e0c47f0f99be428145af067501b2a5b3ace5437e62948043ae8f1f86e5aadce5",
+  "playerProcesses": 6,
+  "capturedFrames": 53,
+  "compiledSourceReceipt": {
+    "path": "docs/acceptance/nr/evidence/2026-11-03/material-coverage-mips/manifest.json",
+    "sha256": "1d261325c7deb78dbb9ef399ca4510977670c00201cb21e26c30ef07de54649e"
+  },
+  "bundles": [
+    {
+      "path": "execution-and-inputs.json.gz",
+      "sha256": "911d0b49635d977dbb65463f3ecb89e9e3dceb0337cf46418e2c91e81c296f1f",
+      "sourceFiles": 82
+    },
+    {
+      "path": "project-entries.json.gz",
+      "sha256": "15aec4f3ef07cfbc84b41ad1f911be6e58d7db6cdf90881d5d0715e878887376",
+      "sourceFiles": 6
+    }
+  ],
+  "directFiles": [
+    {
+      "path": "foreground/frames/frame_000011.png",
+      "sha256": "df211df4c7083f5708acbdb3b39ac3d7a78756dab4db75430dc32ed98c2470f0",
+      "bytes": 5674457
+    },
+    {
+      "path": "visible/frames/frame_000011.png",
+      "sha256": "51d84e2e7183068650749410fe151525d1285368465df90f597661756b153b6c",
+      "bytes": 5614159
+    },
+    {
+      "path": "temporal/frames/frame_000011.png",
+      "sha256": "d6efc6031cb18f4eb3be6fd61d3bf8fc02ceb8849e248d2e75d4fb7daea23d7b",
+      "bytes": 5327368
+    },
+    {
+      "path": "framing-comparison.png",
+      "sha256": "2dca4844b11438f155db810732e7b79642369160f99919e3c810105c08ea3520",
+      "bytes": 767308
+    },
+    {
+      "path": "static-shadow-comparison.png",
+      "sha256": "622b9ecc73cece903497226c56406fae6a0389489dfdc23f08fdb13b27536982",
+      "bytes": 192429
+    },
+    {
+      "path": "visibility-comparison.png",
+      "sha256": "da964c9b59f01320399d7baadf3b8d8a20e124b51ded44153240964f311db038",
+      "bytes": 382271
+    },
+    {
+      "path": "hair-residual.png",
+      "sha256": "1be101ceb37ed4da114c54321cef9a1039fa4bd2ae762059a6b7de3844450cee",
+      "bytes": 193100
+    }
+  ],
+  "retainedCaptures": [
+    {
+      "path": "build/runs/20261103-002134-joint-visual-state-c58ad8/current-hair-capture/hair_frame2.rdc",
+      "sha256": "a5b528c167a08ff1b0ea04bf9d1cf917bfd178447a13da657edd4ae262ff4fc7",
+      "bytes": 250340952
+    },
+    {
+      "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame10401.rdc",
+      "sha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+      "bytes": 345416012
+    }
+  ]
+}

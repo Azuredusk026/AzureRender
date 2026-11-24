@@ -1,0 +1,9 @@
+run 0: 20.482877 ms GPU
+run 1: 20.457240 ms GPU
+run 2: 20.236342 ms GPU
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_blackhole_optimization.py", line 132, in <module>
+    main()
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_blackhole_optimization.py", line 122, in main
+    raise ValueError("Cinematic GPU budget exceeds 20 ms")
+ValueError: Cinematic GPU budget exceeds 20 ms

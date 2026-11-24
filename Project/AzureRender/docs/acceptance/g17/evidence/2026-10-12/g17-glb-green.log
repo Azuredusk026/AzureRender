@@ -1,0 +1,10 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 148: AzureEditor.AssetWorkflow
+1/2 Test #148: AzureEditor.AssetWorkflow ........   Passed    0.33 sec
+    Start 228: AzureAssets.FormatRegistry
+2/2 Test #228: AzureAssets.FormatRegistry .......   Passed    0.28 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.62 sec

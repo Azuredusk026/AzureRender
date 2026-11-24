@@ -1,0 +1,22 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 130: AzureRender.ShaderCompilerContract
+1/1 Test #130: AzureRender.ShaderCompilerContract ...***Failed    1.74 sec
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_shader_compiler_contract.py", line 32, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_shader_compiler_contract.py", line 22, in main
+    assert result.returncode==0,(result.stdout+result.stderr).decode('utf-8',errors='replace')
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: Long GLSL and HLSL output paths must compile
+
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   1.77 sec
+
+The following tests FAILED:
+	130 - AzureRender.ShaderCompilerContract (Failed)
+Errors while running CTest

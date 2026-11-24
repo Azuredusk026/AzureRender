@@ -1,0 +1,3018 @@
+{
+  "status": "qualified-native-receiver-producer-replay",
+  "overall": "failed-user-review",
+  "baseCommit": "9327ca4a66d151ccf54ae75525373e506608febc",
+  "productionChanged": false,
+  "referencePixels": 49384,
+  "acceptedMaximumByteError": 1,
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 6.48399999999674,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-B",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-072016-native-receiver-producer-replay-523058\\native-caster-geometry.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-072016-native-receiver-producer-replay-523058\\tmp"
+  },
+  "source": {
+    "capture": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+    "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-072016-native-receiver-producer-replay-523058\\native-caster-geometry",
+    "captureSha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+    "rasterDepthSha256": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb"
+  },
+  "native": {
+    "status": "qualified",
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "atlasDraws": {
+      "191": {
+        "numIndices": 102882,
+        "vertices": 32021,
+        "vertexStride": 76,
+        "indexStride": 2,
+        "baseVertex": 0,
+        "signature": [
+          {
+            "name": "TEXCOORD",
+            "index": 0,
+            "count": 2,
+            "system": "ShaderBuiltin.Undefined"
+          },
+          {
+            "name": "TEXCOORD",
+            "index": 1,
+            "count": 3,
+            "system": "ShaderBuiltin.Undefined"
+          },
+          {
+            "name": "TEXCOORD",
+            "index": 2,
+            "count": 3,
+            "system": "ShaderBuiltin.Undefined"
+          },
+          {
+            "name": "TEXCOORD",
+            "index": 3,
+            "count": 3,
+            "system": "ShaderBuiltin.Undefined"
+          },
+          {
+            "name": "TEXCOORD",
+            "index": 4,
+            "count": 3,
+            "system": "ShaderBuiltin.Undefined"
+          },
+          {
+            "name": "TEXCOORD",
+            "index": 5,
+            "count": 1,
+            "system": "ShaderBuiltin.Undefined"
+          },
+          {
+            "name": "SV_Position",
+            "index": 0,
+            "count": 4,
+            "system": "ShaderBuiltin.Position"
+          }
+        ],
+        "vertexData": {
+          "path": "191-vertices.zlib",
+          "bytes": 1457378,
+          "sha256": "5486f5f868562bbda1a83ff1f9ad405af09d1e8dd4a18d19ef21b5f0e4b25782",
+          "rawBytes": 2433596,
+          "rawSha256": "76bfdbb2a1efb3d771dc0e777dcbe6b6383c4b5d25d8cb6411f731ef4490de26"
+        },
+        "indexData": {
+          "path": "191-indices.zlib",
+          "bytes": 112486,
+          "sha256": "8b552266f218587145f0438928d4bf4b5826267822e9bc7935b58189a1e1dfdf",
+          "rawBytes": 205764,
+          "rawSha256": "ee9dec6cf9021d71c8c60460c0e95aeccb06fe32a9eb0ae9631b133686c9ebf6"
+        }
+      },
+      "208": {
+        "numIndices": 61935,
+        "vertices": 17538,
+        "vertexStride": 76,
+        "indexStride": 2,
+        "baseVertex": 0,
+        "signature": [
+          {
+            "name": "TEXCOORD",
+            "index": 0,
+            "count": 2,
+            "system": "ShaderBuiltin.Undefined"
+          },
+          {
+            "name": "TEXCOORD",
+            "index": 1,
+            "count": 3,
+            "system": "ShaderBuiltin.Undefined"
+          },
+          {
+            "name": "TEXCOORD",
+            "index": 2,
+            "count": 3,
+            "system": "ShaderBuiltin.Undefined"
+          },
+          {
+            "name": "TEXCOORD",
+            "index": 3,
+            "count": 3,
+            "system": "ShaderBuiltin.Undefined"
+          },
+          {
+            "name": "TEXCOORD",
+            "index": 4,
+            "count": 3,
+            "system": "ShaderBuiltin.Undefined"
+          },
+          {
+            "name": "TEXCOORD",
+            "index": 5,
+            "count": 1,
+            "system": "ShaderBuiltin.Undefined"
+          },
+          {
+            "name": "SV_Position",
+            "index": 0,
+            "count": 4,
+            "system": "ShaderBuiltin.Position"
+          }
+        ],
+        "vertexData": {
+          "path": "208-vertices.zlib",
+          "bytes": 920297,
+          "sha256": "4309b85fe10cec3af9f827e73e7e9fec53171f6f617e334953ea2335f2f75e22",
+          "rawBytes": 1332888,
+          "rawSha256": "b24cfa17c816fcf1beec207d8af9823be7630847b5336e1c80439f1a58ea0a3c"
+        },
+        "indexData": {
+          "path": "208-indices.zlib",
+          "bytes": 67671,
+          "sha256": "971bbb1f917ccf687552e465202a12091416d3450a8b300ae64f863e258e7d97",
+          "rawBytes": 123870,
+          "rawSha256": "9b4554ebc05ac8c9ee9ae4ef4a5e24e3d7be8b7b5735d464160b71a7c4f0ccea"
+        }
+      }
+    },
+    "receiverDraws": {
+      "296": {
+        "vertex": {
+          "program": {
+            "path": "296-0.dxbc",
+            "bytes": 6044,
+            "sha256": "bee21d747a5ee3abea06b5db3535165471eea079222993a339377fe5e28b2a8e",
+            "rawBytes": 6044,
+            "rawSha256": "bee21d747a5ee3abea06b5db3535165471eea079222993a339377fe5e28b2a8e"
+          },
+          "assembly": {
+            "path": "296-0.asm",
+            "bytes": 9264,
+            "sha256": "6f408fb5f575fbc4e5c39fa5c1a03c7242750a7771adedc1f551a797df73fa1a",
+            "rawBytes": 9264,
+            "rawSha256": "6f408fb5f575fbc4e5c39fa5c1a03c7242750a7771adedc1f551a797df73fa1a"
+          },
+          "inputs": {
+            "0": "ResourceId::399"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "296-0-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+              "rawBytes": 1536,
+              "rawSha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "296-0-b1.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 246016,
+              "path": "296-0-b2.bin",
+              "bytes": 65536,
+              "sha256": "c9eb4a586da7e3f538b38a313b9da7367056d7da807f9423afa46b02dfff8820",
+              "rawBytes": 65536,
+              "rawSha256": "c9eb4a586da7e3f538b38a313b9da7367056d7da807f9423afa46b02dfff8820"
+            },
+            "3": {
+              "resource": "ResourceId::466",
+              "offset": 3473152,
+              "path": "296-0-b3.bin",
+              "bytes": 512,
+              "sha256": "2a26cbdb7d8cdccfa906f406f1f245d1e8c38b5605267d7d5d7594801380dc75",
+              "rawBytes": 512,
+              "rawSha256": "2a26cbdb7d8cdccfa906f406f1f245d1e8c38b5605267d7d5d7594801380dc75"
+            }
+          }
+        },
+        "pixel": {
+          "program": {
+            "path": "296-4.dxbc",
+            "bytes": 2316,
+            "sha256": "207e55c4830c804557a1e732cea6f8e5573c0c231ef0f55964f56771f4d09a5f",
+            "rawBytes": 2316,
+            "rawSha256": "207e55c4830c804557a1e732cea6f8e5573c0c231ef0f55964f56771f4d09a5f"
+          },
+          "assembly": {
+            "path": "296-4.asm",
+            "bytes": 2876,
+            "sha256": "6de6795dffe1caaacbd0271c0ee99a2d5ac9fd1c3d3c8f46a4a55e0748ab52d4",
+            "rawBytes": 2876,
+            "rawSha256": "6de6795dffe1caaacbd0271c0ee99a2d5ac9fd1c3d3c8f46a4a55e0748ab52d4"
+          },
+          "inputs": {
+            "0": "ResourceId::139679"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "296-4-b0.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 246016,
+              "path": "296-4-b1.bin",
+              "bytes": 65536,
+              "sha256": "c9eb4a586da7e3f538b38a313b9da7367056d7da807f9423afa46b02dfff8820",
+              "rawBytes": 65536,
+              "rawSha256": "c9eb4a586da7e3f538b38a313b9da7367056d7da807f9423afa46b02dfff8820"
+            },
+            "2": {
+              "resource": "ResourceId::466",
+              "offset": 3473152,
+              "path": "296-4-b2.bin",
+              "bytes": 512,
+              "sha256": "2a26cbdb7d8cdccfa906f406f1f245d1e8c38b5605267d7d5d7594801380dc75",
+              "rawBytes": 512,
+              "rawSha256": "2a26cbdb7d8cdccfa906f406f1f245d1e8c38b5605267d7d5d7594801380dc75"
+            }
+          }
+        },
+        "input": {
+          "indices": 1878,
+          "instances": 1,
+          "textures": {
+            "0": {
+              "resource": "ResourceId::139679",
+              "format": "BC7_SRGB",
+              "extent": [
+                1024,
+                1024
+              ],
+              "mips": 11,
+              "firstMip": 0,
+              "firstSlice": 0
+            }
+          },
+          "samplers": [
+            {
+              "binding": 0,
+              "lod": [
+                0.0,
+                1000.0
+              ],
+              "bias": 0.0,
+              "filter": [
+                "FilterMode.Linear",
+                "FilterMode.Linear",
+                "FilterMode.Point"
+              ]
+            }
+          ]
+        }
+      },
+      "328": {
+        "vertex": {
+          "program": {
+            "path": "328-0.dxbc",
+            "bytes": 7404,
+            "sha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77",
+            "rawBytes": 7404,
+            "rawSha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77"
+          },
+          "assembly": {
+            "path": "328-0.asm",
+            "bytes": 10960,
+            "sha256": "b2c3ba592a6c9b5cbc45f40c7af2ee4340706a8f6fcdd4313d8ce710aa343fb7",
+            "rawBytes": 10960,
+            "rawSha256": "b2c3ba592a6c9b5cbc45f40c7af2ee4340706a8f6fcdd4313d8ce710aa343fb7"
+          },
+          "inputs": {
+            "0": "ResourceId::399"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "328-0-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+              "rawBytes": 1536,
+              "rawSha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "328-0-b1.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 246528,
+              "path": "328-0-b2.bin",
+              "bytes": 65536,
+              "sha256": "f918df77b2b18cda9507c9c14d8423b655acfa3308814c967314b911913145ae",
+              "rawBytes": 65536,
+              "rawSha256": "f918df77b2b18cda9507c9c14d8423b655acfa3308814c967314b911913145ae"
+            },
+            "3": {
+              "resource": "ResourceId::466",
+              "offset": 3491072,
+              "path": "328-0-b3.bin",
+              "bytes": 512,
+              "sha256": "e5bdcaee839f833af13745ed3b9b3a9b9dfa671e173e469b004a3963e3145f9b",
+              "rawBytes": 512,
+              "rawSha256": "e5bdcaee839f833af13745ed3b9b3a9b9dfa671e173e469b004a3963e3145f9b"
+            }
+          }
+        },
+        "pixel": {
+          "program": {
+            "path": "328-4.dxbc",
+            "bytes": 3404,
+            "sha256": "907e0a39de60c6fc742ef86c230eb59ef2034b9a92909ce529df469a1986e1bc",
+            "rawBytes": 3404,
+            "rawSha256": "907e0a39de60c6fc742ef86c230eb59ef2034b9a92909ce529df469a1986e1bc"
+          },
+          "assembly": {
+            "path": "328-4.asm",
+            "bytes": 4290,
+            "sha256": "14c1a2732b8c6a3424042472db7723eb4c45d1c2d57125159c448cfaccb9bcf3",
+            "rawBytes": 4290,
+            "rawSha256": "14c1a2732b8c6a3424042472db7723eb4c45d1c2d57125159c448cfaccb9bcf3"
+          },
+          "inputs": {
+            "0": "ResourceId::85442",
+            "1": "ResourceId::85394"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "328-4-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+              "rawBytes": 1536,
+              "rawSha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "328-4-b1.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 246528,
+              "path": "328-4-b2.bin",
+              "bytes": 65536,
+              "sha256": "f918df77b2b18cda9507c9c14d8423b655acfa3308814c967314b911913145ae",
+              "rawBytes": 65536,
+              "rawSha256": "f918df77b2b18cda9507c9c14d8423b655acfa3308814c967314b911913145ae"
+            },
+            "3": {
+              "resource": "ResourceId::466",
+              "offset": 3491072,
+              "path": "328-4-b3.bin",
+              "bytes": 512,
+              "sha256": "e5bdcaee839f833af13745ed3b9b3a9b9dfa671e173e469b004a3963e3145f9b",
+              "rawBytes": 512,
+              "rawSha256": "e5bdcaee839f833af13745ed3b9b3a9b9dfa671e173e469b004a3963e3145f9b"
+            }
+          }
+        },
+        "input": {
+          "indices": 17037,
+          "instances": 1,
+          "textures": {
+            "0": {
+              "resource": "ResourceId::85442",
+              "format": "BC7_SRGB",
+              "extent": [
+                1024,
+                1024
+              ],
+              "mips": 11,
+              "firstMip": 0,
+              "firstSlice": 0
+            },
+            "1": {
+              "resource": "ResourceId::85394",
+              "format": "BC5_UNORM",
+              "extent": [
+                1024,
+                1024
+              ],
+              "mips": 11,
+              "firstMip": 0,
+              "firstSlice": 0
+            }
+          },
+          "samplers": [
+            {
+              "binding": 0,
+              "lod": [
+                0.0,
+                1000.0
+              ],
+              "bias": 0.0,
+              "filter": [
+                "FilterMode.Linear",
+                "FilterMode.Linear",
+                "FilterMode.Point"
+              ]
+            }
+          ]
+        }
+      },
+      "345": {
+        "vertex": {
+          "program": {
+            "path": "345-0.dxbc",
+            "bytes": 6044,
+            "sha256": "bee21d747a5ee3abea06b5db3535165471eea079222993a339377fe5e28b2a8e",
+            "rawBytes": 6044,
+            "rawSha256": "bee21d747a5ee3abea06b5db3535165471eea079222993a339377fe5e28b2a8e"
+          },
+          "assembly": {
+            "path": "345-0.asm",
+            "bytes": 9264,
+            "sha256": "6f408fb5f575fbc4e5c39fa5c1a03c7242750a7771adedc1f551a797df73fa1a",
+            "rawBytes": 9264,
+            "rawSha256": "6f408fb5f575fbc4e5c39fa5c1a03c7242750a7771adedc1f551a797df73fa1a"
+          },
+          "inputs": {
+            "0": "ResourceId::399"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "345-0-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+              "rawBytes": 1536,
+              "rawSha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "345-0-b1.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 246784,
+              "path": "345-0-b2.bin",
+              "bytes": 65536,
+              "sha256": "c4fb969a16e7c0af944750421f9a28b97fccf7cb8471dd54598e764e6720f4fe",
+              "rawBytes": 65536,
+              "rawSha256": "c4fb969a16e7c0af944750421f9a28b97fccf7cb8471dd54598e764e6720f4fe"
+            },
+            "3": {
+              "resource": "ResourceId::466",
+              "offset": 3396864,
+              "path": "345-0-b3.bin",
+              "bytes": 512,
+              "sha256": "5161833cacc27018f37a8a4aa0aaad430a910c449e0d8863ce51105db08a5f0a",
+              "rawBytes": 512,
+              "rawSha256": "5161833cacc27018f37a8a4aa0aaad430a910c449e0d8863ce51105db08a5f0a"
+            }
+          }
+        },
+        "pixel": {
+          "program": {
+            "path": "345-4.dxbc",
+            "bytes": 2816,
+            "sha256": "4d081d6dc8f5bd141d69ecb4a9c0b33ac48c6fddc1e544bca1af7a7a35370c13",
+            "rawBytes": 2816,
+            "rawSha256": "4d081d6dc8f5bd141d69ecb4a9c0b33ac48c6fddc1e544bca1af7a7a35370c13"
+          },
+          "assembly": {
+            "path": "345-4.asm",
+            "bytes": 3499,
+            "sha256": "fb7dcb21167df5416fbcf5aeff16d607366bfd5a2ce6055758f74cb13b1f6bc0",
+            "rawBytes": 3499,
+            "rawSha256": "fb7dcb21167df5416fbcf5aeff16d607366bfd5a2ce6055758f74cb13b1f6bc0"
+          },
+          "inputs": {
+            "0": "ResourceId::139679"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "345-4-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+              "rawBytes": 1536,
+              "rawSha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "345-4-b1.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 246784,
+              "path": "345-4-b2.bin",
+              "bytes": 65536,
+              "sha256": "c4fb969a16e7c0af944750421f9a28b97fccf7cb8471dd54598e764e6720f4fe",
+              "rawBytes": 65536,
+              "rawSha256": "c4fb969a16e7c0af944750421f9a28b97fccf7cb8471dd54598e764e6720f4fe"
+            },
+            "3": {
+              "resource": "ResourceId::466",
+              "offset": 3396864,
+              "path": "345-4-b3.bin",
+              "bytes": 512,
+              "sha256": "5161833cacc27018f37a8a4aa0aaad430a910c449e0d8863ce51105db08a5f0a",
+              "rawBytes": 512,
+              "rawSha256": "5161833cacc27018f37a8a4aa0aaad430a910c449e0d8863ce51105db08a5f0a"
+            }
+          }
+        },
+        "input": {
+          "indices": 8718,
+          "instances": 1,
+          "textures": {
+            "0": {
+              "resource": "ResourceId::139679",
+              "format": "BC7_SRGB",
+              "extent": [
+                1024,
+                1024
+              ],
+              "mips": 11,
+              "firstMip": 0,
+              "firstSlice": 0
+            }
+          },
+          "samplers": [
+            {
+              "binding": 0,
+              "lod": [
+                0.0,
+                1000.0
+              ],
+              "bias": 0.0,
+              "filter": [
+                "FilterMode.Linear",
+                "FilterMode.Linear",
+                "FilterMode.Point"
+              ]
+            }
+          ]
+        }
+      },
+      "377": {
+        "vertex": {
+          "program": {
+            "path": "377-0.dxbc",
+            "bytes": 7404,
+            "sha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77",
+            "rawBytes": 7404,
+            "rawSha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77"
+          },
+          "assembly": {
+            "path": "377-0.asm",
+            "bytes": 10960,
+            "sha256": "b2c3ba592a6c9b5cbc45f40c7af2ee4340706a8f6fcdd4313d8ce710aa343fb7",
+            "rawBytes": 10960,
+            "rawSha256": "b2c3ba592a6c9b5cbc45f40c7af2ee4340706a8f6fcdd4313d8ce710aa343fb7"
+          },
+          "inputs": {
+            "0": "ResourceId::399"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "377-0-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+              "rawBytes": 1536,
+              "rawSha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "377-0-b1.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 247296,
+              "path": "377-0-b2.bin",
+              "bytes": 65536,
+              "sha256": "015ec4d2e15cee8f642c610eb4c8863673a97aae164e07d46ceaadd8d2f12f00",
+              "rawBytes": 65536,
+              "rawSha256": "015ec4d2e15cee8f642c610eb4c8863673a97aae164e07d46ceaadd8d2f12f00"
+            },
+            "3": {
+              "resource": "ResourceId::466",
+              "offset": 3293440,
+              "path": "377-0-b3.bin",
+              "bytes": 512,
+              "sha256": "c48421ff8e729efe4243c7681f4e3c3302a5e3a0b8ecf1f94faedf1c5084786d",
+              "rawBytes": 512,
+              "rawSha256": "c48421ff8e729efe4243c7681f4e3c3302a5e3a0b8ecf1f94faedf1c5084786d"
+            }
+          }
+        },
+        "pixel": {
+          "program": {
+            "path": "377-4.dxbc",
+            "bytes": 2904,
+            "sha256": "cf35bcfab626ca6ba74fdb95f36f0947b8a5df93eed4adf2f94cedf9951feca0",
+            "rawBytes": 2904,
+            "rawSha256": "cf35bcfab626ca6ba74fdb95f36f0947b8a5df93eed4adf2f94cedf9951feca0"
+          },
+          "assembly": {
+            "path": "377-4.asm",
+            "bytes": 3639,
+            "sha256": "453ebe21a89c05b36315631d95eaa558a7ef52227b85406a7790e3ac9c12e99e",
+            "rawBytes": 3639,
+            "rawSha256": "453ebe21a89c05b36315631d95eaa558a7ef52227b85406a7790e3ac9c12e99e"
+          },
+          "inputs": {
+            "0": "ResourceId::87491",
+            "1": "ResourceId::87521"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "377-4-b0.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 247296,
+              "path": "377-4-b1.bin",
+              "bytes": 65536,
+              "sha256": "015ec4d2e15cee8f642c610eb4c8863673a97aae164e07d46ceaadd8d2f12f00",
+              "rawBytes": 65536,
+              "rawSha256": "015ec4d2e15cee8f642c610eb4c8863673a97aae164e07d46ceaadd8d2f12f00"
+            },
+            "2": {
+              "resource": "ResourceId::466",
+              "offset": 3293440,
+              "path": "377-4-b2.bin",
+              "bytes": 512,
+              "sha256": "c48421ff8e729efe4243c7681f4e3c3302a5e3a0b8ecf1f94faedf1c5084786d",
+              "rawBytes": 512,
+              "rawSha256": "c48421ff8e729efe4243c7681f4e3c3302a5e3a0b8ecf1f94faedf1c5084786d"
+            }
+          }
+        },
+        "input": {
+          "indices": 102882,
+          "instances": 1,
+          "textures": {
+            "0": {
+              "resource": "ResourceId::87491",
+              "format": "BC7_SRGB",
+              "extent": [
+                2048,
+                2048
+              ],
+              "mips": 12,
+              "firstMip": 0,
+              "firstSlice": 0,
+              "baseBytes": 4194304,
+              "baseSha256": "adebc96d50ace7c73cd60de22286fd7ba771fd42fa4dfd525bf5ee7c4205b67d"
+            },
+            "1": {
+              "resource": "ResourceId::87521",
+              "format": "BC5_UNORM",
+              "extent": [
+                2048,
+                2048
+              ],
+              "mips": 12,
+              "firstMip": 0,
+              "firstSlice": 0,
+              "baseBytes": 4194304,
+              "baseSha256": "5a839ca9b920d1ade77fe97a49aac129097838e72710bbbf07228b35eafc8ed9"
+            }
+          },
+          "samplers": [
+            {
+              "binding": 0,
+              "lod": [
+                0.0,
+                1000.0
+              ],
+              "bias": 0.0,
+              "filter": [
+                "FilterMode.Linear",
+                "FilterMode.Linear",
+                "FilterMode.Point"
+              ]
+            }
+          ]
+        }
+      },
+      "404": {
+        "vertex": {
+          "program": {
+            "path": "404-0.dxbc",
+            "bytes": 7404,
+            "sha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77",
+            "rawBytes": 7404,
+            "rawSha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77"
+          },
+          "assembly": {
+            "path": "404-0.asm",
+            "bytes": 10960,
+            "sha256": "b2c3ba592a6c9b5cbc45f40c7af2ee4340706a8f6fcdd4313d8ce710aa343fb7",
+            "rawBytes": 10960,
+            "rawSha256": "b2c3ba592a6c9b5cbc45f40c7af2ee4340706a8f6fcdd4313d8ce710aa343fb7"
+          },
+          "inputs": {
+            "0": "ResourceId::399"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "404-0-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+              "rawBytes": 1536,
+              "rawSha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "404-0-b1.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 247808,
+              "path": "404-0-b2.bin",
+              "bytes": 65536,
+              "sha256": "3f3462a950fe203e2c50b44313a3e8ed877b78cc3e0b4a52a53757d72c6ef8ba",
+              "rawBytes": 65536,
+              "rawSha256": "3f3462a950fe203e2c50b44313a3e8ed877b78cc3e0b4a52a53757d72c6ef8ba"
+            },
+            "3": {
+              "resource": "ResourceId::466",
+              "offset": 3258880,
+              "path": "404-0-b3.bin",
+              "bytes": 512,
+              "sha256": "c48421ff8e729efe4243c7681f4e3c3302a5e3a0b8ecf1f94faedf1c5084786d",
+              "rawBytes": 512,
+              "rawSha256": "c48421ff8e729efe4243c7681f4e3c3302a5e3a0b8ecf1f94faedf1c5084786d"
+            }
+          }
+        },
+        "pixel": {
+          "program": {
+            "path": "404-4.dxbc",
+            "bytes": 2904,
+            "sha256": "cf35bcfab626ca6ba74fdb95f36f0947b8a5df93eed4adf2f94cedf9951feca0",
+            "rawBytes": 2904,
+            "rawSha256": "cf35bcfab626ca6ba74fdb95f36f0947b8a5df93eed4adf2f94cedf9951feca0"
+          },
+          "assembly": {
+            "path": "404-4.asm",
+            "bytes": 3639,
+            "sha256": "453ebe21a89c05b36315631d95eaa558a7ef52227b85406a7790e3ac9c12e99e",
+            "rawBytes": 3639,
+            "rawSha256": "453ebe21a89c05b36315631d95eaa558a7ef52227b85406a7790e3ac9c12e99e"
+          },
+          "inputs": {
+            "0": "ResourceId::85388",
+            "1": "ResourceId::85362"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "404-4-b0.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 247808,
+              "path": "404-4-b1.bin",
+              "bytes": 65536,
+              "sha256": "3f3462a950fe203e2c50b44313a3e8ed877b78cc3e0b4a52a53757d72c6ef8ba",
+              "rawBytes": 65536,
+              "rawSha256": "3f3462a950fe203e2c50b44313a3e8ed877b78cc3e0b4a52a53757d72c6ef8ba"
+            },
+            "2": {
+              "resource": "ResourceId::466",
+              "offset": 3258880,
+              "path": "404-4-b2.bin",
+              "bytes": 512,
+              "sha256": "c48421ff8e729efe4243c7681f4e3c3302a5e3a0b8ecf1f94faedf1c5084786d",
+              "rawBytes": 512,
+              "rawSha256": "c48421ff8e729efe4243c7681f4e3c3302a5e3a0b8ecf1f94faedf1c5084786d"
+            }
+          }
+        },
+        "input": {
+          "indices": 61935,
+          "instances": 1,
+          "textures": {
+            "0": {
+              "resource": "ResourceId::85388",
+              "format": "BC7_SRGB",
+              "extent": [
+                2048,
+                2048
+              ],
+              "mips": 12,
+              "firstMip": 0,
+              "firstSlice": 0
+            },
+            "1": {
+              "resource": "ResourceId::85362",
+              "format": "BC5_UNORM",
+              "extent": [
+                2048,
+                2048
+              ],
+              "mips": 12,
+              "firstMip": 0,
+              "firstSlice": 0
+            }
+          },
+          "samplers": [
+            {
+              "binding": 0,
+              "lod": [
+                0.0,
+                1000.0
+              ],
+              "bias": 0.0,
+              "filter": [
+                "FilterMode.Linear",
+                "FilterMode.Linear",
+                "FilterMode.Point"
+              ]
+            }
+          ]
+        }
+      },
+      "422": {
+        "vertex": {
+          "program": {
+            "path": "422-0.dxbc",
+            "bytes": 7404,
+            "sha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77",
+            "rawBytes": 7404,
+            "rawSha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77"
+          },
+          "assembly": {
+            "path": "422-0.asm",
+            "bytes": 10960,
+            "sha256": "b2c3ba592a6c9b5cbc45f40c7af2ee4340706a8f6fcdd4313d8ce710aa343fb7",
+            "rawBytes": 10960,
+            "rawSha256": "b2c3ba592a6c9b5cbc45f40c7af2ee4340706a8f6fcdd4313d8ce710aa343fb7"
+          },
+          "inputs": {
+            "0": "ResourceId::399"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "422-0-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+              "rawBytes": 1536,
+              "rawSha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "422-0-b1.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 248064,
+              "path": "422-0-b2.bin",
+              "bytes": 65536,
+              "sha256": "7e02a229e29c571725717b4e254b93786f5b0ed16b1780bdc869a399cab21102",
+              "rawBytes": 65536,
+              "rawSha256": "7e02a229e29c571725717b4e254b93786f5b0ed16b1780bdc869a399cab21102"
+            },
+            "3": {
+              "resource": "ResourceId::466",
+              "offset": 3372800,
+              "path": "422-0-b3.bin",
+              "bytes": 512,
+              "sha256": "50eb236fc080a94fb7b4adde9f8ebc8e4aec36d9e4d908f7f084a7a19c5df458",
+              "rawBytes": 512,
+              "rawSha256": "50eb236fc080a94fb7b4adde9f8ebc8e4aec36d9e4d908f7f084a7a19c5df458"
+            }
+          }
+        },
+        "pixel": {
+          "program": {
+            "path": "422-4.dxbc",
+            "bytes": 3024,
+            "sha256": "418e85975308d76a328bac37488ce2ef4c7985818a8eeb9ed8c04637c9eaa0c6",
+            "rawBytes": 3024,
+            "rawSha256": "418e85975308d76a328bac37488ce2ef4c7985818a8eeb9ed8c04637c9eaa0c6"
+          },
+          "assembly": {
+            "path": "422-4.asm",
+            "bytes": 3868,
+            "sha256": "8fef371ff8dfd4f04cb33295abfd1994d809fbbc4fac469f4fad4b26dfeee5be",
+            "rawBytes": 3868,
+            "rawSha256": "8fef371ff8dfd4f04cb33295abfd1994d809fbbc4fac469f4fad4b26dfeee5be"
+          },
+          "inputs": {
+            "0": "ResourceId::139677",
+            "1": "ResourceId::139862",
+            "2": "ResourceId::23880"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "422-4-b0.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 248064,
+              "path": "422-4-b1.bin",
+              "bytes": 65536,
+              "sha256": "7e02a229e29c571725717b4e254b93786f5b0ed16b1780bdc869a399cab21102",
+              "rawBytes": 65536,
+              "rawSha256": "7e02a229e29c571725717b4e254b93786f5b0ed16b1780bdc869a399cab21102"
+            },
+            "2": {
+              "resource": "ResourceId::466",
+              "offset": 3372800,
+              "path": "422-4-b2.bin",
+              "bytes": 512,
+              "sha256": "50eb236fc080a94fb7b4adde9f8ebc8e4aec36d9e4d908f7f084a7a19c5df458",
+              "rawBytes": 512,
+              "rawSha256": "50eb236fc080a94fb7b4adde9f8ebc8e4aec36d9e4d908f7f084a7a19c5df458"
+            }
+          }
+        },
+        "input": {
+          "indices": 43044,
+          "instances": 1,
+          "textures": {
+            "0": {
+              "resource": "ResourceId::139677",
+              "format": "BC7_SRGB",
+              "extent": [
+                2048,
+                2048
+              ],
+              "mips": 12,
+              "firstMip": 0,
+              "firstSlice": 0,
+              "baseBytes": 4194304,
+              "baseSha256": "ebbd239b79539ebbf3fe83a9528bdc057b1f74b0d261e52f28e0baf10c86039c"
+            },
+            "1": {
+              "resource": "ResourceId::139862",
+              "format": "BC7_UNORM",
+              "extent": [
+                2048,
+                2048
+              ],
+              "mips": 12,
+              "firstMip": 0,
+              "firstSlice": 0,
+              "baseBytes": 4194304,
+              "baseSha256": "366f3b5ad330372fb655078cf402af6705dc53b0457d76519eaf006630e7d6dd"
+            },
+            "2": {
+              "resource": "ResourceId::23880",
+              "format": "BC7_UNORM",
+              "extent": [
+                512,
+                512
+              ],
+              "mips": 10,
+              "firstMip": 0,
+              "firstSlice": 0,
+              "baseBytes": 262144,
+              "baseSha256": "cfa842fdb428716ba4f55a36c2ced977617502d410aa2518997ec605f83eb801"
+            }
+          },
+          "samplers": [
+            {
+              "binding": 0,
+              "lod": [
+                0.0,
+                1000.0
+              ],
+              "bias": 0.0,
+              "filter": [
+                "FilterMode.Linear",
+                "FilterMode.Linear",
+                "FilterMode.Point"
+              ]
+            }
+          ]
+        }
+      },
+      "440": {
+        "vertex": {
+          "program": {
+            "path": "440-0.dxbc",
+            "bytes": 9548,
+            "sha256": "4f58c14b26897fb5163ce70705e0b7f3b4e6c292154d56f83ae9e66c829d1061",
+            "rawBytes": 9548,
+            "rawSha256": "4f58c14b26897fb5163ce70705e0b7f3b4e6c292154d56f83ae9e66c829d1061"
+          },
+          "assembly": {
+            "path": "440-0.asm",
+            "bytes": 13489,
+            "sha256": "d027b456d68a5661472586260f1341421247c443d88136c77a6d60a273a698f8",
+            "rawBytes": 13489,
+            "rawSha256": "d027b456d68a5661472586260f1341421247c443d88136c77a6d60a273a698f8"
+          },
+          "inputs": {
+            "0": "ResourceId::399",
+            "1": "ResourceId::23875"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "440-0-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+              "rawBytes": 1536,
+              "rawSha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "440-0-b1.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 257792,
+              "path": "440-0-b2.bin",
+              "bytes": 65536,
+              "sha256": "6d58372b74368512100c06fd1cf4a0aa4525d54eba2e6afcd3f6a6c0b09d8cff",
+              "rawBytes": 65536,
+              "rawSha256": "6d58372b74368512100c06fd1cf4a0aa4525d54eba2e6afcd3f6a6c0b09d8cff"
+            },
+            "3": {
+              "resource": "ResourceId::466",
+              "offset": 3372288,
+              "path": "440-0-b3.bin",
+              "bytes": 512,
+              "sha256": "64ea975ffe165dd45bf756cee99a4031eee3b0e938e371e21268a06f5ee631ad",
+              "rawBytes": 512,
+              "rawSha256": "64ea975ffe165dd45bf756cee99a4031eee3b0e938e371e21268a06f5ee631ad"
+            }
+          }
+        },
+        "pixel": {
+          "program": {
+            "path": "440-4.dxbc",
+            "bytes": 608,
+            "sha256": "7acd3570fbc062198daab7ff297b397c31dae3a03db4c37ecce9f6cf2e1e9ed6",
+            "rawBytes": 608,
+            "rawSha256": "7acd3570fbc062198daab7ff297b397c31dae3a03db4c37ecce9f6cf2e1e9ed6"
+          },
+          "assembly": {
+            "path": "440-4.asm",
+            "bytes": 580,
+            "sha256": "0811bb6157b01172930494104510a604679a742f72d5cfd890f92a32b1b63969",
+            "rawBytes": 580,
+            "rawSha256": "0811bb6157b01172930494104510a604679a742f72d5cfd890f92a32b1b63969"
+          },
+          "inputs": {
+            "0": "ResourceId::23880"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "440-4-b0.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "1": {
+              "resource": "ResourceId::466",
+              "offset": 3372288,
+              "path": "440-4-b1.bin",
+              "bytes": 512,
+              "sha256": "64ea975ffe165dd45bf756cee99a4031eee3b0e938e371e21268a06f5ee631ad",
+              "rawBytes": 512,
+              "rawSha256": "64ea975ffe165dd45bf756cee99a4031eee3b0e938e371e21268a06f5ee631ad"
+            }
+          }
+        },
+        "input": {
+          "indices": 43044,
+          "instances": 1,
+          "textures": {
+            "0": {
+              "resource": "ResourceId::23880",
+              "format": "BC7_UNORM",
+              "extent": [
+                512,
+                512
+              ],
+              "mips": 10,
+              "firstMip": 0,
+              "firstSlice": 0
+            }
+          },
+          "samplers": [
+            {
+              "binding": 0,
+              "lod": [
+                0.0,
+                1000.0
+              ],
+              "bias": 0.0,
+              "filter": [
+                "FilterMode.Linear",
+                "FilterMode.Linear",
+                "FilterMode.Point"
+              ]
+            }
+          ]
+        }
+      },
+      "460": {
+        "vertex": {
+          "program": {
+            "path": "460-0.dxbc",
+            "bytes": 8072,
+            "sha256": "ea49772c611f653b18c70199bb0dfcea284ea1f0af795fd8defc9f4d8e6e2b57",
+            "rawBytes": 8072,
+            "rawSha256": "ea49772c611f653b18c70199bb0dfcea284ea1f0af795fd8defc9f4d8e6e2b57"
+          },
+          "assembly": {
+            "path": "460-0.asm",
+            "bytes": 11712,
+            "sha256": "01654cc7999c432a65c30baf039c910885f7d7094bfbdf4d9ce61fc2edf6b096",
+            "rawBytes": 11712,
+            "rawSha256": "01654cc7999c432a65c30baf039c910885f7d7094bfbdf4d9ce61fc2edf6b096"
+          },
+          "inputs": {
+            "0": "ResourceId::399"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "460-0-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+              "rawBytes": 1536,
+              "rawSha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "460-0-b1.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 245504,
+              "path": "460-0-b2.bin",
+              "bytes": 65536,
+              "sha256": "846e39fa3c2aca4e3a75d2222af4683ce34a2880f14141e2797585ff75b8acf9",
+              "rawBytes": 65536,
+              "rawSha256": "846e39fa3c2aca4e3a75d2222af4683ce34a2880f14141e2797585ff75b8acf9"
+            }
+          }
+        },
+        "pixel": {
+          "program": {
+            "path": "460-4.dxbc",
+            "bytes": 4228,
+            "sha256": "0f4dfe669d4642ddd48c29c571b24da0baf56e1d121f7ccd1c21a77b476f954a",
+            "rawBytes": 4228,
+            "rawSha256": "0f4dfe669d4642ddd48c29c571b24da0baf56e1d121f7ccd1c21a77b476f954a"
+          },
+          "assembly": {
+            "path": "460-4.asm",
+            "bytes": 5209,
+            "sha256": "cce1793e8c6ba32b156715cf9a01948893b1a4d6fe0ec4116732708265c5dba3",
+            "rawBytes": 5209,
+            "rawSha256": "cce1793e8c6ba32b156715cf9a01948893b1a4d6fe0ec4116732708265c5dba3"
+          },
+          "inputs": {
+            "0": "ResourceId::339",
+            "1": "ResourceId::336",
+            "2": "ResourceId::9492"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "460-4-b0.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 245504,
+              "path": "460-4-b1.bin",
+              "bytes": 65536,
+              "sha256": "846e39fa3c2aca4e3a75d2222af4683ce34a2880f14141e2797585ff75b8acf9",
+              "rawBytes": 65536,
+              "rawSha256": "846e39fa3c2aca4e3a75d2222af4683ce34a2880f14141e2797585ff75b8acf9"
+            },
+            "2": {
+              "resource": "ResourceId::20413",
+              "offset": 267776,
+              "path": "460-4-b2.bin",
+              "bytes": 512,
+              "sha256": "85bcf925300d8cb2f656b51ff1b2acc1398ce5201d8f3e5d80f3e1cc115b0a9c",
+              "rawBytes": 512,
+              "rawSha256": "85bcf925300d8cb2f656b51ff1b2acc1398ce5201d8f3e5d80f3e1cc115b0a9c"
+            },
+            "3": {
+              "resource": "ResourceId::391",
+              "offset": 0,
+              "path": "460-4-b3.bin",
+              "bytes": 65536,
+              "sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+              "rawBytes": 65536,
+              "rawSha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+            }
+          }
+        },
+        "input": {
+          "indices": 2304,
+          "instances": 1,
+          "textures": {
+            "0": {
+              "resource": "ResourceId::339",
+              "format": "R8G8B8A8_SRGB",
+              "extent": [
+                4,
+                4
+              ],
+              "mips": 1,
+              "firstMip": 0,
+              "firstSlice": 0
+            },
+            "1": {
+              "resource": "ResourceId::336",
+              "format": "R8G8B8A8_UNORM",
+              "extent": [
+                4,
+                4
+              ],
+              "mips": 1,
+              "firstMip": 0,
+              "firstSlice": 0
+            },
+            "2": {
+              "resource": "ResourceId::9492",
+              "format": "BC1_UNORM",
+              "extent": [
+                4,
+                4
+              ],
+              "mips": 1,
+              "firstMip": 0,
+              "firstSlice": 0
+            }
+          },
+          "samplers": [
+            {
+              "binding": 0,
+              "lod": [
+                0.0,
+                1000.0
+              ],
+              "bias": 0.0,
+              "filter": [
+                "FilterMode.Linear",
+                "FilterMode.Linear",
+                "FilterMode.Point"
+              ]
+            },
+            {
+              "binding": 1,
+              "lod": [
+                0.0,
+                1000.0
+              ],
+              "bias": 0.0,
+              "filter": [
+                "FilterMode.Linear",
+                "FilterMode.Linear",
+                "FilterMode.Point"
+              ]
+            },
+            {
+              "binding": 2,
+              "lod": [
+                0.0,
+                1000.0
+              ],
+              "bias": 0.0,
+              "filter": [
+                "FilterMode.Linear",
+                "FilterMode.Linear",
+                "FilterMode.Point"
+              ]
+            }
+          ]
+        }
+      },
+      "478": {
+        "vertex": {
+          "program": {
+            "path": "478-0.dxbc",
+            "bytes": 1828,
+            "sha256": "db743afbe58fe13bfbd28ba7c6a67fc0516b81629da671fcf5d15cb83c3f09a1",
+            "rawBytes": 1828,
+            "rawSha256": "db743afbe58fe13bfbd28ba7c6a67fc0516b81629da671fcf5d15cb83c3f09a1"
+          },
+          "assembly": {
+            "path": "478-0.asm",
+            "bytes": 2000,
+            "sha256": "058ecd8849ad5e2f0f010f3437318de2d6c8c59489647d362835871114de3ff9",
+            "rawBytes": 2000,
+            "rawSha256": "058ecd8849ad5e2f0f010f3437318de2d6c8c59489647d362835871114de3ff9"
+          },
+          "inputs": {},
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "478-0-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+              "rawBytes": 1536,
+              "rawSha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "478-0-b1.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 245760,
+              "path": "478-0-b2.bin",
+              "bytes": 65536,
+              "sha256": "4433531de77a73a8f3a145ba0d30fe8204511ed381cab6cbc9e6c09cb3f46081",
+              "rawBytes": 65536,
+              "rawSha256": "4433531de77a73a8f3a145ba0d30fe8204511ed381cab6cbc9e6c09cb3f46081"
+            }
+          }
+        },
+        "pixel": {
+          "program": {
+            "path": "478-4.dxbc",
+            "bytes": 2952,
+            "sha256": "20b7caf186a6cfa565f2b6bfdd7505e25ca8960d0c4ea7370ad0bf1c2cad9154",
+            "rawBytes": 2952,
+            "rawSha256": "20b7caf186a6cfa565f2b6bfdd7505e25ca8960d0c4ea7370ad0bf1c2cad9154"
+          },
+          "assembly": {
+            "path": "478-4.asm",
+            "bytes": 3607,
+            "sha256": "6418d10c72f6a939221a1ebe573d3af124c7c3e0664e0ff231e4314bec372232",
+            "rawBytes": 3607,
+            "rawSha256": "6418d10c72f6a939221a1ebe573d3af124c7c3e0664e0ff231e4314bec372232"
+          },
+          "inputs": {
+            "0": "ResourceId::19573",
+            "1": "ResourceId::19513"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "478-4-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+              "rawBytes": 1536,
+              "rawSha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "478-4-b1.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+              "rawBytes": 3328,
+              "rawSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 291072,
+              "path": "478-4-b2.bin",
+              "bytes": 256,
+              "sha256": "c1226c7e6c022bd19e03d9b514090f76605def07fa9cf56851f42f8edc8cb1de",
+              "rawBytes": 256,
+              "rawSha256": "c1226c7e6c022bd19e03d9b514090f76605def07fa9cf56851f42f8edc8cb1de"
+            }
+          }
+        },
+        "input": {
+          "indices": 6,
+          "instances": 1,
+          "textures": {
+            "0": {
+              "resource": "ResourceId::19573",
+              "format": "BC7_UNORM",
+              "extent": [
+                2048,
+                2048
+              ],
+              "mips": 1,
+              "firstMip": 0,
+              "firstSlice": 0
+            },
+            "1": {
+              "resource": "ResourceId::19513",
+              "format": "BC7_UNORM",
+              "extent": [
+                2048,
+                2048
+              ],
+              "mips": 12,
+              "firstMip": 0,
+              "firstSlice": 0
+            }
+          },
+          "samplers": [
+            {
+              "binding": 0,
+              "lod": [
+                0.0,
+                1000.0
+              ],
+              "bias": 0.0,
+              "filter": [
+                "FilterMode.Linear",
+                "FilterMode.Linear",
+                "FilterMode.Point"
+              ]
+            },
+            {
+              "binding": 1,
+              "lod": [
+                0.0,
+                1000.0
+              ],
+              "bias": 0.0,
+              "filter": [
+                "FilterMode.Linear",
+                "FilterMode.Linear",
+                "FilterMode.Point"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "receiverDepth": {
+      "275": {
+        "fullSha256": "defe5059e4a7b5c797a007fa8428d93cf7586359b5d78c6c9c1a4a8586ea7a2a",
+        "crop": {
+          "path": "275-depth.zlib",
+          "bytes": 371,
+          "sha256": "87b69c698bab717e1401a1a6755c5876aa1c16605489db10cd58167601a32ce0",
+          "rawBytes": 359600,
+          "rawSha256": "9d36cb747aea24f68fcb28db078905d59d49106ac76dc97a126e50fc4ee49a5f"
+        }
+      },
+      "296": {
+        "fullSha256": "f4fedc2648190441a00491eb28caa087d5a851fdd284720a57472061931a40f1",
+        "crop": {
+          "path": "296-depth.zlib",
+          "bytes": 2373,
+          "sha256": "803f0abb3d06ea577a50fcaa1ea6200db0fdc30a042213c20eed7d1bb4a1a0c9",
+          "rawBytes": 359600,
+          "rawSha256": "afe8186534890812ea4e18dfe81741490fc662a411d034a9239387828faa0ded"
+        }
+      },
+      "310": {
+        "fullSha256": "db32f3e7028c78d90b62f070bb2864498687f094f3722b2c014eb54384e6f64d",
+        "crop": {
+          "path": "310-depth.zlib",
+          "bytes": 3252,
+          "sha256": "76bc4f360f62a7cdd124e9d40ccb26ebcda90ed489db3cbc63ee140e3625329e",
+          "rawBytes": 359600,
+          "rawSha256": "58e4539a04f54a3f98fe1541e04c0663ce36dbb2b18946d391f60e3b6af7d13e"
+        }
+      },
+      "328": {
+        "fullSha256": "4328eb604acb255150857bc38c18f66071098a30734aacfe44c3a7f8d936ad4a",
+        "crop": {
+          "path": "328-depth.zlib",
+          "bytes": 54585,
+          "sha256": "0202a8d5116fd678148dccbd25caab03735dea0769a8c4da99fde6784dd9d005",
+          "rawBytes": 359600,
+          "rawSha256": "f732d248bd681f3d9851f60b9706906b1322d6ca28b1ab3d9bfd5f65d139b062"
+        }
+      },
+      "345": {
+        "fullSha256": "19ad621ecd86bf6f23fda600a68a120a84aad0be3842f5c844832993dc9ce7ae",
+        "crop": {
+          "path": "345-depth.zlib",
+          "bytes": 86337,
+          "sha256": "f98da82f762b701776800d828b14c289d7cffb7bfa66a9bc2ad179e7cca2485e",
+          "rawBytes": 359600,
+          "rawSha256": "43d55dc7637e8b1c4b7e9abeed606478c20bfbb0b9337c614e69a4a14cd0c727"
+        }
+      },
+      "363": {
+        "fullSha256": "34a71f18783120b3594ac5a6d13369acb3f086c60768068dcc920c6bcf6fac7a",
+        "crop": {
+          "path": "363-depth.zlib",
+          "bytes": 86337,
+          "sha256": "f98da82f762b701776800d828b14c289d7cffb7bfa66a9bc2ad179e7cca2485e",
+          "rawBytes": 359600,
+          "rawSha256": "43d55dc7637e8b1c4b7e9abeed606478c20bfbb0b9337c614e69a4a14cd0c727"
+        }
+      },
+      "377": {
+        "fullSha256": "1825e500279c3bf64c4d9aa2f6532fab14ed856475c8f3285cf905d85c69db4a",
+        "crop": {
+          "path": "377-depth.zlib",
+          "bytes": 120428,
+          "sha256": "42b07e33b273b11a21badc9cb21becffce7d8adebf7230f9934cfe3e60761e65",
+          "rawBytes": 359600,
+          "rawSha256": "811b61eaa2e321239ae50102d7aa31baea5e446ba02546b62b11a3dfb41c4d09"
+        }
+      },
+      "391": {
+        "fullSha256": "81853f1b5de44f1c61ce587b5fa45c7838260cbd9d8adadc2db656b64dbcb820",
+        "crop": {
+          "path": "391-depth.zlib",
+          "bytes": 120428,
+          "sha256": "42b07e33b273b11a21badc9cb21becffce7d8adebf7230f9934cfe3e60761e65",
+          "rawBytes": 359600,
+          "rawSha256": "811b61eaa2e321239ae50102d7aa31baea5e446ba02546b62b11a3dfb41c4d09"
+        }
+      },
+      "404": {
+        "fullSha256": "17a9f32edca99839e2a180e2bdeafd8967c5707773db47a80e09feb2a203d8bb",
+        "crop": {
+          "path": "404-depth.zlib",
+          "bytes": 120428,
+          "sha256": "42b07e33b273b11a21badc9cb21becffce7d8adebf7230f9934cfe3e60761e65",
+          "rawBytes": 359600,
+          "rawSha256": "811b61eaa2e321239ae50102d7aa31baea5e446ba02546b62b11a3dfb41c4d09"
+        }
+      },
+      "421": {
+        "fullSha256": "17a9f32edca99839e2a180e2bdeafd8967c5707773db47a80e09feb2a203d8bb",
+        "crop": {
+          "path": "421-depth.zlib",
+          "bytes": 120428,
+          "sha256": "42b07e33b273b11a21badc9cb21becffce7d8adebf7230f9934cfe3e60761e65",
+          "rawBytes": 359600,
+          "rawSha256": "811b61eaa2e321239ae50102d7aa31baea5e446ba02546b62b11a3dfb41c4d09"
+        }
+      },
+      "422": {
+        "fullSha256": "f466957efa6aaceb93f6fcb231dd89c6571bea23e0c8e6bf1559bbd19bb403ff",
+        "crop": {
+          "path": "422-depth.zlib",
+          "bytes": 154509,
+          "sha256": "e16bcb6c2fbbe18eeb32ffe05794f3fd9125916f572fe5177acba04ccaab83c8",
+          "rawBytes": 359600,
+          "rawSha256": "d70ec1a721c1354938abfa87ceffd87932ef8f285f9caf745d40419e83a0560f"
+        }
+      },
+      "440": {
+        "fullSha256": "903ec3845e225e6fefb7bee96d48dfc1f7cecc80bb236bf4892facd1d7abd1e3",
+        "crop": {
+          "path": "440-depth.zlib",
+          "bytes": 155974,
+          "sha256": "908c68325169b9f993a73701cc6a8b7f0e2d3af66bd2d4b1ef8498d67033952f",
+          "rawBytes": 359600,
+          "rawSha256": "e1f8569051a6e9f289e1606446e4488dde5f12abeacb571ebb3c33c7d3a941b5"
+        }
+      },
+      "460": {
+        "fullSha256": "8eb2a2fbae043d41b2a58a4e5c1b708ac6803ec49c05b187bf8247cd5a6347a4",
+        "crop": {
+          "path": "460-depth.zlib",
+          "bytes": 270156,
+          "sha256": "511a07cfdfb6999d09575290403c0bce5a2752fde796d2099dd1b7d939ca23f8",
+          "rawBytes": 359600,
+          "rawSha256": "82d498977598bd654ad835438c3d5d6e6ff9b174be3c53fd27dfe891fa5b1331"
+        }
+      },
+      "478": {
+        "fullSha256": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+        "crop": {
+          "path": "478-depth.zlib",
+          "bytes": 270156,
+          "sha256": "511a07cfdfb6999d09575290403c0bce5a2752fde796d2099dd1b7d939ca23f8",
+          "rawBytes": 359600,
+          "rawSha256": "82d498977598bd654ad835438c3d5d6e6ff9b174be3c53fd27dfe891fa5b1331"
+        }
+      },
+      "541": {
+        "fullSha256": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+        "crop": {
+          "path": "541-depth.zlib",
+          "bytes": 270156,
+          "sha256": "511a07cfdfb6999d09575290403c0bce5a2752fde796d2099dd1b7d939ca23f8",
+          "rawBytes": 359600,
+          "rawSha256": "82d498977598bd654ad835438c3d5d6e6ff9b174be3c53fd27dfe891fa5b1331"
+        }
+      },
+      "688": {
+        "fullSha256": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+        "crop": {
+          "path": "688-depth.zlib",
+          "bytes": 270156,
+          "sha256": "511a07cfdfb6999d09575290403c0bce5a2752fde796d2099dd1b7d939ca23f8",
+          "rawBytes": 359600,
+          "rawSha256": "82d498977598bd654ad835438c3d5d6e6ff9b174be3c53fd27dfe891fa5b1331"
+        }
+      },
+      "699": {
+        "fullSha256": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+        "crop": {
+          "path": "699-depth.zlib",
+          "bytes": 270156,
+          "sha256": "511a07cfdfb6999d09575290403c0bce5a2752fde796d2099dd1b7d939ca23f8",
+          "rawBytes": 359600,
+          "rawSha256": "82d498977598bd654ad835438c3d5d6e6ff9b174be3c53fd27dfe891fa5b1331"
+        }
+      }
+    },
+    "depthResource": "ResourceId::141967",
+    "depthUsage": [
+      {
+        "event": 296,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 310,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 328,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 345,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 363,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 377,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 391,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 404,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 422,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 440,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 460,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 478,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 507,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 541,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 551,
+        "usage": "ResourceUsage.CS_Resource"
+      },
+      {
+        "event": 601,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 646,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 688,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 699,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      }
+    ],
+    "rasterDepthResource": "ResourceId::141928",
+    "rasterDepthUsage": [
+      {
+        "event": 541,
+        "usage": "ResourceUsage.ColorTarget"
+      },
+      {
+        "event": 625,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 688,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 699,
+        "usage": "ResourceUsage.PS_Resource"
+      }
+    ],
+    "debugMessages": [
+      "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+      "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+    ]
+  },
+  "comparison": {
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "depth": "ResourceId::141967",
+    "r32": "ResourceId::141928",
+    "depthUsage": [
+      {
+        "event": 296,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 310,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 328,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 345,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 363,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 377,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 391,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 404,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 422,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 440,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 460,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 478,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 507,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 541,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 551,
+        "usage": "ResourceUsage.CS_Resource"
+      },
+      {
+        "event": 601,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 646,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 688,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      },
+      {
+        "event": 699,
+        "usage": "ResourceUsage.DepthStencilTarget"
+      }
+    ],
+    "r32Usage": [
+      {
+        "event": 541,
+        "usage": "ResourceUsage.ColorTarget"
+      },
+      {
+        "event": 625,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 688,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 699,
+        "usage": "ResourceUsage.PS_Resource"
+      }
+    ],
+    "profiles": {
+      "377": {
+        "samples": 16629,
+        "profileOverOne": 1399,
+        "depthClosed": 62,
+        "normalClosed": 1253,
+        "depthClosedInitiallyNativeR32": 10,
+        "depthClosedFinallyNativeR32": 62,
+        "depthClosedChangedByProducer": 62,
+        "depthClosedActualMatchesBeforeProducerNativeD32": 0,
+        "depthClosedActualMatchesInitialNativeD32": 13,
+        "depthClosedActualMatchesFinalNativeD32": 0,
+        "depthClosedLastNativeWriteAfter422": {
+          "0": 10,
+          "440": 52
+        }
+      },
+      "422": {
+        "samples": 19063,
+        "profileOverOne": 1089,
+        "depthClosed": 944,
+        "normalClosed": 120,
+        "depthClosedInitiallyNativeR32": 84,
+        "depthClosedFinallyNativeR32": 944,
+        "depthClosedChangedByProducer": 944,
+        "depthClosedActualMatchesBeforeProducerNativeD32": 0,
+        "depthClosedActualMatchesInitialNativeD32": 412,
+        "depthClosedActualMatchesFinalNativeD32": 0,
+        "depthClosedLastNativeWriteAfter422": {
+          "0": 84,
+          "440": 860
+        }
+      }
+    },
+    "geometry": {
+      "296": {
+        "indices": 1878,
+        "candidates": [
+          {
+            "material": "M_actor_laevat_brow_01",
+            "indices": 1878,
+            "offset": 0
+          },
+          {
+            "material": "M_fx_laevat_toppotential_01",
+            "indices": 1776,
+            "offset": -102
+          },
+          {
+            "material": "M_actor_laevat_iris_01",
+            "indices": 948,
+            "offset": -930
+          }
+        ],
+        "exactNativeTextureSources": [],
+        "bindings": {
+          "0": {
+            "resource": "ResourceId::139679",
+            "format": "BC7_SRGB",
+            "extent": [
+              1024,
+              1024
+            ],
+            "mips": 11,
+            "firstMip": 0,
+            "firstSlice": 0
+          }
+        }
+      },
+      "328": {
+        "indices": 17037,
+        "candidates": [
+          {
+            "material": "M_actor_laevat_body_01",
+            "indices": 17037,
+            "offset": 0
+          },
+          {
+            "material": "M_actor_laevat_cloth_05",
+            "indices": 21489,
+            "offset": 4452
+          },
+          {
+            "material": "M_actor_laevat_cloth_03",
+            "indices": 10698,
+            "offset": -6339
+          }
+        ],
+        "exactNativeTextureSources": [],
+        "bindings": {
+          "0": {
+            "resource": "ResourceId::85442",
+            "format": "BC7_SRGB",
+            "extent": [
+              1024,
+              1024
+            ],
+            "mips": 11,
+            "firstMip": 0,
+            "firstSlice": 0
+          },
+          "1": {
+            "resource": "ResourceId::85394",
+            "format": "BC5_UNORM",
+            "extent": [
+              1024,
+              1024
+            ],
+            "mips": 11,
+            "firstMip": 0,
+            "firstSlice": 0
+          }
+        }
+      },
+      "345": {
+        "indices": 8718,
+        "candidates": [
+          {
+            "material": "M_actor_laevat_face_01",
+            "indices": 8718,
+            "offset": 0
+          },
+          {
+            "material": "M_actor_laevat_cloth_04",
+            "indices": 7698,
+            "offset": -1020
+          },
+          {
+            "material": "M_actor_laevat_cloth_03",
+            "indices": 10698,
+            "offset": 1980
+          }
+        ],
+        "exactNativeTextureSources": [],
+        "bindings": {
+          "0": {
+            "resource": "ResourceId::139679",
+            "format": "BC7_SRGB",
+            "extent": [
+              1024,
+              1024
+            ],
+            "mips": 11,
+            "firstMip": 0,
+            "firstSlice": 0
+          }
+        }
+      },
+      "377": {
+        "indices": 102882,
+        "candidates": [
+          {
+            "material": "M_actor_laevat_cloth_01",
+            "indices": 102927,
+            "offset": 45
+          },
+          {
+            "material": "M_actor_laevat_cloth_02",
+            "indices": 61923,
+            "offset": -40959
+          },
+          {
+            "material": "M_actor_laevat_hair_01",
+            "indices": 43044,
+            "offset": -59838
+          }
+        ],
+        "exactNativeTextureSources": [],
+        "bindings": {
+          "0": {
+            "resource": "ResourceId::87491",
+            "format": "BC7_SRGB",
+            "extent": [
+              2048,
+              2048
+            ],
+            "mips": 12,
+            "firstMip": 0,
+            "firstSlice": 0,
+            "baseBytes": 4194304,
+            "baseSha256": "adebc96d50ace7c73cd60de22286fd7ba771fd42fa4dfd525bf5ee7c4205b67d"
+          },
+          "1": {
+            "resource": "ResourceId::87521",
+            "format": "BC5_UNORM",
+            "extent": [
+              2048,
+              2048
+            ],
+            "mips": 12,
+            "firstMip": 0,
+            "firstSlice": 0,
+            "baseBytes": 4194304,
+            "baseSha256": "5a839ca9b920d1ade77fe97a49aac129097838e72710bbbf07228b35eafc8ed9"
+          }
+        }
+      },
+      "404": {
+        "indices": 61935,
+        "candidates": [
+          {
+            "material": "M_actor_laevat_cloth_02",
+            "indices": 61923,
+            "offset": -12
+          },
+          {
+            "material": "M_actor_laevat_hair_01",
+            "indices": 43044,
+            "offset": -18891
+          },
+          {
+            "material": "M_actor_laevat_cloth_05",
+            "indices": 21489,
+            "offset": -40446
+          }
+        ],
+        "exactNativeTextureSources": [],
+        "bindings": {
+          "0": {
+            "resource": "ResourceId::85388",
+            "format": "BC7_SRGB",
+            "extent": [
+              2048,
+              2048
+            ],
+            "mips": 12,
+            "firstMip": 0,
+            "firstSlice": 0
+          },
+          "1": {
+            "resource": "ResourceId::85362",
+            "format": "BC5_UNORM",
+            "extent": [
+              2048,
+              2048
+            ],
+            "mips": 12,
+            "firstMip": 0,
+            "firstSlice": 0
+          }
+        }
+      },
+      "422": {
+        "indices": 43044,
+        "candidates": [
+          {
+            "material": "M_actor_laevat_hair_01",
+            "indices": 43044,
+            "offset": 0
+          },
+          {
+            "material": "M_actor_laevat_cloth_02",
+            "indices": 61923,
+            "offset": 18879
+          },
+          {
+            "material": "M_actor_laevat_cloth_05",
+            "indices": 21489,
+            "offset": -21555
+          }
+        ],
+        "exactNativeTextureSources": [
+          {
+            "binding": 1,
+            "material": "M_actor_laevat_hair_01",
+            "source": "source",
+            "sha256": "366f3b5ad330372fb655078cf402af6705dc53b0457d76519eaf006630e7d6dd"
+          }
+        ],
+        "bindings": {
+          "0": {
+            "resource": "ResourceId::139677",
+            "format": "BC7_SRGB",
+            "extent": [
+              2048,
+              2048
+            ],
+            "mips": 12,
+            "firstMip": 0,
+            "firstSlice": 0,
+            "baseBytes": 4194304,
+            "baseSha256": "ebbd239b79539ebbf3fe83a9528bdc057b1f74b0d261e52f28e0baf10c86039c"
+          },
+          "1": {
+            "resource": "ResourceId::139862",
+            "format": "BC7_UNORM",
+            "extent": [
+              2048,
+              2048
+            ],
+            "mips": 12,
+            "firstMip": 0,
+            "firstSlice": 0,
+            "baseBytes": 4194304,
+            "baseSha256": "366f3b5ad330372fb655078cf402af6705dc53b0457d76519eaf006630e7d6dd"
+          },
+          "2": {
+            "resource": "ResourceId::23880",
+            "format": "BC7_UNORM",
+            "extent": [
+              512,
+              512
+            ],
+            "mips": 10,
+            "firstMip": 0,
+            "firstSlice": 0,
+            "baseBytes": 262144,
+            "baseSha256": "cfa842fdb428716ba4f55a36c2ced977617502d410aa2518997ec605f83eb801"
+          }
+        }
+      },
+      "440": {
+        "indices": 43044,
+        "candidates": [
+          {
+            "material": "M_actor_laevat_hair_01",
+            "indices": 43044,
+            "offset": 0
+          },
+          {
+            "material": "M_actor_laevat_cloth_02",
+            "indices": 61923,
+            "offset": 18879
+          },
+          {
+            "material": "M_actor_laevat_cloth_05",
+            "indices": 21489,
+            "offset": -21555
+          }
+        ],
+        "exactNativeTextureSources": [],
+        "bindings": {
+          "0": {
+            "resource": "ResourceId::23880",
+            "format": "BC7_UNORM",
+            "extent": [
+              512,
+              512
+            ],
+            "mips": 10,
+            "firstMip": 0,
+            "firstSlice": 0
+          }
+        }
+      },
+      "460": {
+        "indices": 2304,
+        "candidates": [
+          {
+            "material": "M_actor_laevat_brow_01",
+            "indices": 1878,
+            "offset": -426
+          },
+          {
+            "material": "M_fx_laevat_toppotential_01",
+            "indices": 1776,
+            "offset": -528
+          },
+          {
+            "material": "M_actor_laevat_iris_01",
+            "indices": 948,
+            "offset": -1356
+          }
+        ],
+        "exactNativeTextureSources": [],
+        "bindings": {
+          "0": {
+            "resource": "ResourceId::339",
+            "format": "R8G8B8A8_SRGB",
+            "extent": [
+              4,
+              4
+            ],
+            "mips": 1,
+            "firstMip": 0,
+            "firstSlice": 0
+          },
+          "1": {
+            "resource": "ResourceId::336",
+            "format": "R8G8B8A8_UNORM",
+            "extent": [
+              4,
+              4
+            ],
+            "mips": 1,
+            "firstMip": 0,
+            "firstSlice": 0
+          },
+          "2": {
+            "resource": "ResourceId::9492",
+            "format": "BC1_UNORM",
+            "extent": [
+              4,
+              4
+            ],
+            "mips": 1,
+            "firstMip": 0,
+            "firstSlice": 0
+          }
+        }
+      },
+      "478": {
+        "indices": 6,
+        "candidates": [
+          {
+            "material": "M_eyewhiteshadow_common_01",
+            "indices": 96,
+            "offset": 90
+          },
+          {
+            "material": "M_hairshadow_common_04",
+            "indices": 444,
+            "offset": 438
+          },
+          {
+            "material": "M_actor_laevat_iris_01",
+            "indices": 948,
+            "offset": 942
+          }
+        ],
+        "exactNativeTextureSources": [],
+        "bindings": {
+          "0": {
+            "resource": "ResourceId::19573",
+            "format": "BC7_UNORM",
+            "extent": [
+              2048,
+              2048
+            ],
+            "mips": 1,
+            "firstMip": 0,
+            "firstSlice": 0
+          },
+          "1": {
+            "resource": "ResourceId::19513",
+            "format": "BC7_UNORM",
+            "extent": [
+              2048,
+              2048
+            ],
+            "mips": 12,
+            "firstMip": 0,
+            "firstSlice": 0
+          }
+        }
+      }
+    },
+    "depthHistory": {
+      "275": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        },
+        "422": {
+          "changed": 0,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        }
+      },
+      "296": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        },
+        "422": {
+          "changed": 1,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        }
+      },
+      "310": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        },
+        "422": {
+          "changed": 0,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        }
+      },
+      "328": {
+        "377": {
+          "changed": 6872,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        },
+        "422": {
+          "changed": 340,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        }
+      },
+      "345": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        },
+        "422": {
+          "changed": 6886,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        }
+      },
+      "363": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        },
+        "422": {
+          "changed": 0,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        }
+      },
+      "377": {
+        "377": {
+          "changed": 16629,
+          "equalsR32": 16500,
+          "equalsR32InDepthClosed": 10
+        },
+        "422": {
+          "changed": 1366,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        }
+      },
+      "391": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 16500,
+          "equalsR32InDepthClosed": 10
+        },
+        "422": {
+          "changed": 0,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        }
+      },
+      "404": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 16500,
+          "equalsR32InDepthClosed": 10
+        },
+        "422": {
+          "changed": 0,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        }
+      },
+      "421": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 16500,
+          "equalsR32InDepthClosed": 10
+        },
+        "422": {
+          "changed": 0,
+          "equalsR32": 0,
+          "equalsR32InDepthClosed": 0
+        }
+      },
+      "422": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 16500,
+          "equalsR32InDepthClosed": 10
+        },
+        "422": {
+          "changed": 19063,
+          "equalsR32": 17017,
+          "equalsR32InDepthClosed": 84
+        }
+      },
+      "440": {
+        "377": {
+          "changed": 129,
+          "equalsR32": 16629,
+          "equalsR32InDepthClosed": 62
+        },
+        "422": {
+          "changed": 2046,
+          "equalsR32": 19063,
+          "equalsR32InDepthClosed": 944
+        }
+      },
+      "460": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 16629,
+          "equalsR32InDepthClosed": 62
+        },
+        "422": {
+          "changed": 0,
+          "equalsR32": 19063,
+          "equalsR32InDepthClosed": 944
+        }
+      },
+      "478": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 16629,
+          "equalsR32InDepthClosed": 62
+        },
+        "422": {
+          "changed": 0,
+          "equalsR32": 19063,
+          "equalsR32InDepthClosed": 944
+        }
+      },
+      "541": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 16629,
+          "equalsR32InDepthClosed": 62
+        },
+        "422": {
+          "changed": 0,
+          "equalsR32": 19063,
+          "equalsR32InDepthClosed": 944
+        }
+      },
+      "688": {
+        "377": {
+          "changed": 0,
+          "equalsR32": 16629,
+          "equalsR32InDepthClosed": 62
+        },
+        "422": {
+          "changed": 0,
+          "equalsR32": 19063,
+          "equalsR32InDepthClosed": 944
+        }
+      }
+    },
+    "constants": {
+      "clothNormalScale": 1.0,
+      "clothSampleBias": -1.0,
+      "hairCutoff": 0.5,
+      "shellCutoff": 0.5,
+      "hairSampleBias": -1.0,
+      "shellSampleBias": -1.0,
+      "shellWidth": 0.5
+    },
+    "counterMessages": [
+      "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+      "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+    ]
+  },
+  "playerAssets": {
+    "assetSha256": "849282e0b6a7a7681aba32b336b546a588044b1f19ca889100015a7379ed5169",
+    "sceneSha256": "85d82573dca382b236ba1e54f83e22625f703092ca9c6225c3b04fc6705c2c2d",
+    "meshes": [
+      {
+        "mesh": "S_actor_laevat_body_01_lod0",
+        "material": "M_actor_laevat_body_01",
+        "indices": 17037,
+        "vertices": 3289,
+        "alphaMode": "OPAQUE",
+        "alphaCutoff": 0.5,
+        "doubleSided": true,
+        "normal": {
+          "texture": 58,
+          "sampler": 1,
+          "images": {
+            "source": {
+              "index": 55,
+              "name": null,
+              "mime": null,
+              "uri": "native-captured-body/t15.dds",
+              "bytes": 1398256,
+              "sha256": "3d16ddcced1a4f482f969250b835c5ea569ce620d8ef16cc465fc19cbb266a9e",
+              "magic": "444453207c00000007100a00",
+              "fourCC": "ATI2",
+              "extent": [
+                1024,
+                1024
+              ],
+              "baseBytes": 1048576,
+              "baseSha256": "6d02cb20c652f35689604b6ec871593f8fdeb82e023a6beb7867814e40435c4f"
+            }
+          }
+        },
+        "normalScale": 1.0,
+        "sceneMaterial": {
+          "path": "assets/captured-rim-policy.azurematerial",
+          "sha256": "ce7baa8b50676f0a625656be9658a885864aa008bdc8cf0916fdd368ef322610",
+          "material": {
+            "schemaVersion": 2,
+            "mode": "parameters",
+            "typeId": "azure.stylized",
+            "parameters": {
+              "rimAmount": 0
+            },
+            "textures": {}
+          }
+        }
+      },
+      {
+        "mesh": "S_actor_laevat_cloth_01_lod0",
+        "material": "M_actor_laevat_cloth_01",
+        "indices": 102927,
+        "vertices": 32031,
+        "alphaMode": "OPAQUE",
+        "alphaCutoff": 0.5,
+        "doubleSided": true,
+        "normal": {
+          "texture": 13,
+          "sampler": null,
+          "images": {
+            "source": {
+              "index": 10,
+              "name": "T_actor_laevat_cloth_01_N-normal",
+              "mime": null,
+              "dataUriType": "image/png",
+              "bytes": 7373862,
+              "sha256": "c65df30156c698f809c824ef7e28fcfabc1c7a0b03ed616a13a34b5ef2ac3a90",
+              "magic": "89504e470d0a1a0a0000000d"
+            }
+          }
+        },
+        "normalScale": 1.0,
+        "sceneMaterial": null
+      },
+      {
+        "mesh": "S_actor_laevat_cloth_02_lod0",
+        "material": "M_actor_laevat_cloth_02",
+        "indices": 61923,
+        "vertices": 17541,
+        "alphaMode": "OPAQUE",
+        "alphaCutoff": 0.5,
+        "doubleSided": true,
+        "normal": {
+          "texture": 16,
+          "sampler": null,
+          "images": {
+            "source": {
+              "index": 13,
+              "name": "T_actor_laevat_cloth_02_N-normal",
+              "mime": null,
+              "dataUriType": "image/png",
+              "bytes": 8322532,
+              "sha256": "af6d4a18489b452387e3696920a41fb3994bd912933233c21e5b73c8304feca2",
+              "magic": "89504e470d0a1a0a0000000d"
+            }
+          }
+        },
+        "normalScale": 1.0,
+        "sceneMaterial": null
+      },
+      {
+        "mesh": "S_actor_laevat_cloth_03_lod0",
+        "material": "M_actor_laevat_cloth_03",
+        "indices": 10698,
+        "vertices": 2122,
+        "alphaMode": "BLEND",
+        "alphaCutoff": 0.5,
+        "doubleSided": true,
+        "normal": {
+          "texture": 16,
+          "sampler": null,
+          "images": {
+            "source": {
+              "index": 13,
+              "name": "T_actor_laevat_cloth_02_N-normal",
+              "mime": null,
+              "dataUriType": "image/png",
+              "bytes": 8322532,
+              "sha256": "af6d4a18489b452387e3696920a41fb3994bd912933233c21e5b73c8304feca2",
+              "magic": "89504e470d0a1a0a0000000d"
+            }
+          }
+        },
+        "normalScale": 1.0,
+        "sceneMaterial": null
+      },
+      {
+        "mesh": "S_actor_laevat_cloth_04_lod0",
+        "material": "M_actor_laevat_cloth_04",
+        "indices": 7698,
+        "vertices": 2820,
+        "alphaMode": "OPAQUE",
+        "alphaCutoff": 0.5,
+        "doubleSided": true,
+        "normal": {
+          "texture": 64,
+          "sampler": null,
+          "images": {
+            "source": {
+              "index": 61,
+              "name": null,
+              "mime": null,
+              "uri": "native-cloth-04/t18.dds",
+              "bytes": 5592560,
+              "sha256": "434c6c5aad9ba8fe14a594e86f331d1d0a0bad72f6fc5b1e7579c12dc1595b2a",
+              "magic": "444453207c00000007100a00",
+              "fourCC": "ATI2",
+              "extent": [
+                2048,
+                2048
+              ],
+              "baseBytes": 4194304,
+              "baseSha256": "c4fbaa7af12052338c379bad6ca582c7852d6a27fa068d0dced70e61b00a8dd7"
+            }
+          }
+        },
+        "normalScale": 1.0,
+        "sceneMaterial": null
+      },
+      {
+        "mesh": "S_actor_laevat_cloth_05_lod0",
+        "material": "M_actor_laevat_cloth_05",
+        "indices": 21489,
+        "vertices": 5108,
+        "alphaMode": "OPAQUE",
+        "alphaCutoff": 0.5,
+        "doubleSided": true,
+        "normal": {
+          "texture": 16,
+          "sampler": null,
+          "images": {
+            "source": {
+              "index": 13,
+              "name": "T_actor_laevat_cloth_02_N-normal",
+              "mime": null,
+              "dataUriType": "image/png",
+              "bytes": 8322532,
+              "sha256": "af6d4a18489b452387e3696920a41fb3994bd912933233c21e5b73c8304feca2",
+              "magic": "89504e470d0a1a0a0000000d"
+            }
+          }
+        },
+        "normalScale": 1.0,
+        "sceneMaterial": null
+      },
+      {
+        "mesh": "S_actor_laevat_eyebrow_01_lod0",
+        "material": "M_actor_laevat_brow_01",
+        "indices": 1878,
+        "vertices": 578,
+        "alphaMode": "OPAQUE",
+        "alphaCutoff": 0.5,
+        "doubleSided": true,
+        "normal": null,
+        "normalScale": null,
+        "sceneMaterial": null
+      },
+      {
+        "mesh": "S_actor_laevat_eyeshadow_01_lod0",
+        "material": "M_eyewhiteshadow_common_01",
+        "indices": 96,
+        "vertices": 36,
+        "alphaMode": "BLEND",
+        "alphaCutoff": 0.5,
+        "doubleSided": false,
+        "normal": null,
+        "normalScale": null,
+        "sceneMaterial": null
+      },
+      {
+        "mesh": "S_actor_laevat_face_01_lod0",
+        "material": "M_actor_laevat_face_01",
+        "indices": 8718,
+        "vertices": 1792,
+        "alphaMode": "OPAQUE",
+        "alphaCutoff": 0.5,
+        "doubleSided": true,
+        "normal": null,
+        "normalScale": null,
+        "sceneMaterial": {
+          "path": "assets/captured-rim-policy.azurematerial",
+          "sha256": "ce7baa8b50676f0a625656be9658a885864aa008bdc8cf0916fdd368ef322610",
+          "material": {
+            "schemaVersion": 2,
+            "mode": "parameters",
+            "typeId": "azure.stylized",
+            "parameters": {
+              "rimAmount": 0
+            },
+            "textures": {}
+          }
+        }
+      },
+      {
+        "mesh": "S_actor_laevat_hair_01_lod0",
+        "material": "M_actor_laevat_hair_01",
+        "indices": 43044,
+        "vertices": 11564,
+        "alphaMode": "MASK",
+        "alphaCutoff": 0.5,
+        "doubleSided": false,
+        "normal": {
+          "texture": 68,
+          "sampler": null,
+          "images": {
+            "source": {
+              "index": 65,
+              "name": null,
+              "mime": null,
+              "uri": "captured-hair-normal.dds",
+              "bytes": 5592580,
+              "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54",
+              "magic": "444453207c00000007100a00",
+              "dxgi": 98,
+              "extent": [
+                2048,
+                2048
+              ],
+              "baseBytes": 4194304,
+              "baseSha256": "366f3b5ad330372fb655078cf402af6705dc53b0457d76519eaf006630e7d6dd"
+            }
+          }
+        },
+        "normalScale": 1.0,
+        "sceneMaterial": {
+          "path": "assets/captured-rim-policy.azurematerial",
+          "sha256": "ce7baa8b50676f0a625656be9658a885864aa008bdc8cf0916fdd368ef322610",
+          "material": {
+            "schemaVersion": 2,
+            "mode": "parameters",
+            "typeId": "azure.stylized",
+            "parameters": {
+              "rimAmount": 0
+            },
+            "textures": {}
+          }
+        }
+      },
+      {
+        "mesh": "S_actor_laevat_hairshadow_01_lod0",
+        "material": "M_hairshadow_common_04",
+        "indices": 444,
+        "vertices": 156,
+        "alphaMode": "BLEND",
+        "alphaCutoff": 0.5,
+        "doubleSided": false,
+        "normal": null,
+        "normalScale": null,
+        "sceneMaterial": null
+      },
+      {
+        "mesh": "S_actor_laevat_iris_01_lod0",
+        "material": "M_actor_laevat_iris_01",
+        "indices": 948,
+        "vertices": 210,
+        "alphaMode": "OPAQUE",
+        "alphaCutoff": 0.5,
+        "doubleSided": true,
+        "normal": null,
+        "normalScale": null,
+        "sceneMaterial": null
+      },
+      {
+        "mesh": "S_actor_laevat_vfxpart_01_lod0",
+        "material": "M_fx_laevat_toppotential_01",
+        "indices": 1776,
+        "vertices": 498,
+        "alphaMode": "OPAQUE",
+        "alphaCutoff": 0.5,
+        "doubleSided": true,
+        "normal": null,
+        "normalScale": null,
+        "sceneMaterial": null
+      }
+    ]
+  },
+  "originalFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "depthCaptureAbsent": true,
+    "allExact": true,
+    "playerSha256": "e33361ab31402f679b70a561ee7ecec53bb3d12b65eeb78955e01e14c487aff2",
+    "projectSha256": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "taskBytes": 520614698,
+    "taskBudgetBytes": 536870912
+  },
+  "archive": {
+    "bytes": 2415951,
+    "sha256": "39971851e005b6613cb7889f4ae03d2792872df1585a7d1e179ab048f6c89810",
+    "files": 67,
+    "contents": {
+      "run/budget.json": "aabaf53884f157fd8e7fef13c365233f7123f3de699c083825f862a5b343e742",
+      "run/claim-inputs.py": "2cab82a4ae83e8f2a170ae7b640a354082291c9dd9f97e6115a718f0cbe4339e",
+      "run/compare-native-receivers.py": "21cb1b882c04aa057762dc09e06bd34ca07cd293af03c37fd53a722a03bc1dfa",
+      "run/comparison-perf-sdk.log": "d954bd3637105d982e0f9e2e074e061d025ae2c4bcc5ec78b9eb98b3ef49dcd6",
+      "run/comparison.log": "7be1d8e0a8d760e14c724aa3cf5b4bc479953632c221e404db515b87b454ca4b",
+      "run/inspect-player-assets.py": "2a769c8b68b2743bb7749e4ffc2d09a02e7a6532fb1e6f410eec31c335680bca",
+      "run/native-caster-geometry-execution.json": "f3c1a0e86d5e7572682d9da4d5c6595c3e29a116ce5ff78ec874e6747dab9750",
+      "run/native-caster-geometry-worker.py": "fdfd5e932b5e4359427de7568f3a5530cda54fe28d95810d522d090fcc01d37b",
+      "run/native-caster-geometry.py": "b3a384f071f24f9c52abb9b7c82157594db67237f6044a65ca20d4306d448484",
+      "run/native-receiver-producer-comparison.json": "58f384a82b4604cf51bb43ecd191379011bffad3b4ff23b5913fd8aa7f3028e5",
+      "run/package-evidence.py": "3b00c71b735fb92b7c7a0d216f81bc45231fa1473392521b3b21b9886ced4eed",
+      "run/player-reference-asset-inputs.json": "c648b99fd6997f9e807fe4be3772e0161b61fea90de4d3883fbf6eafa42e18f9",
+      "run/process.log": "2ba5513d878cb0355faf7f4e8cc60b5edc3f768308cf5255f8309ea9533a898e",
+      "run/queued-native.py": "0192d21f846b0665606d2e9c0186bd9a86ab5cf6766571640a5e48e8302eadf1",
+      "run/task-card.json": "36cf46842b1e8f60db8a29239b07e1721216eb618559cec7a29d3317a4f291e7",
+      "run/native-caster-geometry/275-depth.zlib": "87b69c698bab717e1401a1a6755c5876aa1c16605489db10cd58167601a32ce0",
+      "run/native-caster-geometry/296-depth.zlib": "803f0abb3d06ea577a50fcaa1ea6200db0fdc30a042213c20eed7d1bb4a1a0c9",
+      "run/native-caster-geometry/310-depth.zlib": "76bc4f360f62a7cdd124e9d40ccb26ebcda90ed489db3cbc63ee140e3625329e",
+      "run/native-caster-geometry/328-depth.zlib": "0202a8d5116fd678148dccbd25caab03735dea0769a8c4da99fde6784dd9d005",
+      "run/native-caster-geometry/345-depth.zlib": "f98da82f762b701776800d828b14c289d7cffb7bfa66a9bc2ad179e7cca2485e",
+      "run/native-caster-geometry/363-depth.zlib": "f98da82f762b701776800d828b14c289d7cffb7bfa66a9bc2ad179e7cca2485e",
+      "run/native-caster-geometry/377-0-b0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+      "run/native-caster-geometry/377-0-b1.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+      "run/native-caster-geometry/377-0-b2.bin": "015ec4d2e15cee8f642c610eb4c8863673a97aae164e07d46ceaadd8d2f12f00",
+      "run/native-caster-geometry/377-0-b3.bin": "c48421ff8e729efe4243c7681f4e3c3302a5e3a0b8ecf1f94faedf1c5084786d",
+      "run/native-caster-geometry/377-0.asm": "b2c3ba592a6c9b5cbc45f40c7af2ee4340706a8f6fcdd4313d8ce710aa343fb7",
+      "run/native-caster-geometry/377-0.dxbc": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77",
+      "run/native-caster-geometry/377-4-b0.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+      "run/native-caster-geometry/377-4-b1.bin": "015ec4d2e15cee8f642c610eb4c8863673a97aae164e07d46ceaadd8d2f12f00",
+      "run/native-caster-geometry/377-4-b2.bin": "c48421ff8e729efe4243c7681f4e3c3302a5e3a0b8ecf1f94faedf1c5084786d",
+      "run/native-caster-geometry/377-4.asm": "453ebe21a89c05b36315631d95eaa558a7ef52227b85406a7790e3ac9c12e99e",
+      "run/native-caster-geometry/377-4.dxbc": "cf35bcfab626ca6ba74fdb95f36f0947b8a5df93eed4adf2f94cedf9951feca0",
+      "run/native-caster-geometry/377-depth.zlib": "42b07e33b273b11a21badc9cb21becffce7d8adebf7230f9934cfe3e60761e65",
+      "run/native-caster-geometry/391-depth.zlib": "42b07e33b273b11a21badc9cb21becffce7d8adebf7230f9934cfe3e60761e65",
+      "run/native-caster-geometry/404-depth.zlib": "42b07e33b273b11a21badc9cb21becffce7d8adebf7230f9934cfe3e60761e65",
+      "run/native-caster-geometry/421-depth.zlib": "42b07e33b273b11a21badc9cb21becffce7d8adebf7230f9934cfe3e60761e65",
+      "run/native-caster-geometry/422-0-b0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+      "run/native-caster-geometry/422-0-b1.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+      "run/native-caster-geometry/422-0-b2.bin": "7e02a229e29c571725717b4e254b93786f5b0ed16b1780bdc869a399cab21102",
+      "run/native-caster-geometry/422-0-b3.bin": "50eb236fc080a94fb7b4adde9f8ebc8e4aec36d9e4d908f7f084a7a19c5df458",
+      "run/native-caster-geometry/422-0.asm": "b2c3ba592a6c9b5cbc45f40c7af2ee4340706a8f6fcdd4313d8ce710aa343fb7",
+      "run/native-caster-geometry/422-0.dxbc": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77",
+      "run/native-caster-geometry/422-4-b0.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+      "run/native-caster-geometry/422-4-b1.bin": "7e02a229e29c571725717b4e254b93786f5b0ed16b1780bdc869a399cab21102",
+      "run/native-caster-geometry/422-4-b2.bin": "50eb236fc080a94fb7b4adde9f8ebc8e4aec36d9e4d908f7f084a7a19c5df458",
+      "run/native-caster-geometry/422-4.asm": "8fef371ff8dfd4f04cb33295abfd1994d809fbbc4fac469f4fad4b26dfeee5be",
+      "run/native-caster-geometry/422-4.dxbc": "418e85975308d76a328bac37488ce2ef4c7985818a8eeb9ed8c04637c9eaa0c6",
+      "run/native-caster-geometry/422-depth.zlib": "e16bcb6c2fbbe18eeb32ffe05794f3fd9125916f572fe5177acba04ccaab83c8",
+      "run/native-caster-geometry/440-0-b0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+      "run/native-caster-geometry/440-0-b1.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+      "run/native-caster-geometry/440-0-b2.bin": "6d58372b74368512100c06fd1cf4a0aa4525d54eba2e6afcd3f6a6c0b09d8cff",
+      "run/native-caster-geometry/440-0-b3.bin": "64ea975ffe165dd45bf756cee99a4031eee3b0e938e371e21268a06f5ee631ad",
+      "run/native-caster-geometry/440-0.asm": "d027b456d68a5661472586260f1341421247c443d88136c77a6d60a273a698f8",
+      "run/native-caster-geometry/440-0.dxbc": "4f58c14b26897fb5163ce70705e0b7f3b4e6c292154d56f83ae9e66c829d1061",
+      "run/native-caster-geometry/440-4-b0.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+      "run/native-caster-geometry/440-4-b1.bin": "64ea975ffe165dd45bf756cee99a4031eee3b0e938e371e21268a06f5ee631ad",
+      "run/native-caster-geometry/440-4.asm": "0811bb6157b01172930494104510a604679a742f72d5cfd890f92a32b1b63969",
+      "run/native-caster-geometry/440-4.dxbc": "7acd3570fbc062198daab7ff297b397c31dae3a03db4c37ecce9f6cf2e1e9ed6",
+      "run/native-caster-geometry/440-depth.zlib": "908c68325169b9f993a73701cc6a8b7f0e2d3af66bd2d4b1ef8498d67033952f",
+      "run/native-caster-geometry/460-depth.zlib": "511a07cfdfb6999d09575290403c0bce5a2752fde796d2099dd1b7d939ca23f8",
+      "run/native-caster-geometry/478-depth.zlib": "511a07cfdfb6999d09575290403c0bce5a2752fde796d2099dd1b7d939ca23f8",
+      "run/native-caster-geometry/541-depth.zlib": "511a07cfdfb6999d09575290403c0bce5a2752fde796d2099dd1b7d939ca23f8",
+      "run/native-caster-geometry/688-depth.zlib": "511a07cfdfb6999d09575290403c0bce5a2752fde796d2099dd1b7d939ca23f8",
+      "run/native-caster-geometry/699-depth.zlib": "511a07cfdfb6999d09575290403c0bce5a2752fde796d2099dd1b7d939ca23f8",
+      "run/native-caster-geometry/native-caster-geometry.json": "208128f78bc163bb56038e864e31fccb18dd124766237e7d9cb886bf2099d646",
+      "run/native-caster-geometry/process.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run/native-caster-geometry/request.json": "c06ad0497add9d1e57bfb45ba85201ad022b41b8e2e2abd4af489004d1141e3d"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "distribution": "local-user-provided",
+  "sources": {
+    "asset": {
+      "filename": "laevat_skinned_material_face_sdf.glb",
+      "sha256": "ab5da4c7577d9385f37b1bfc742097725f4290520bb92a0da068b1211cfe8549",
+      "format": "glTF2",
+      "skeletonFingerprint": "422ba972ed8d0ba98c820734d2b1795943f39ff60cc15a73e94dacf422cb385c",
+      "jointCount": 468,
+      "vertices": 81198,
+      "triangles": 94603,
+      "animations": [],
+      "status": "audited"
+    },
+    "idle": {
+      "filename": "Idle.fbx",
+      "sha256": "cbad9b7b3652f97aa26539a5359a83d18f1e702f1a501e25a7d7909f0a1ab3e3",
+      "format": "FBX",
+      "skeletonFingerprint": "693961c7833ae38b7afc9a7a91da43f95a8c77045d03bc01f6daa5dfe968b3d9",
+      "jointCount": 65,
+      "vertices": null,
+      "triangles": null,
+      "animations": [
+        {
+          "name": "mixamo.com",
+          "duration": 8.333333333,
+          "sampleRate": 30,
+          "samples": 251
+        }
+      ],
+      "status": "audited"
+    },
+    "walk": {
+      "filename": "Walking.fbx",
+      "sha256": "4fcd9e6ae62fd172c181035890ffc7777ba1a882ecc7c65890fe216d57154c04",
+      "format": "FBX",
+      "skeletonFingerprint": "693961c7833ae38b7afc9a7a91da43f95a8c77045d03bc01f6daa5dfe968b3d9",
+      "jointCount": 65,
+      "vertices": null,
+      "triangles": null,
+      "animations": [
+        {
+          "name": "mixamo.com",
+          "duration": 0.9666666667,
+          "sampleRate": 30,
+          "samples": 30
+        }
+      ],
+      "status": "audited"
+    }
+  },
+  "retargetRequired": true
+}

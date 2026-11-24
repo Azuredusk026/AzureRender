@@ -1,0 +1,412 @@
+{
+  "status": "current-source-replay-cost-profiled",
+  "sourceHead": "274615b",
+  "capture": {
+    "status": "captured",
+    "seconds": 122.56199999997625,
+    "sourceBase": "274615b",
+    "diagnosticExtent": [
+      1280,
+      720
+    ],
+    "formalAcceptance": false,
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "mountedInputsUnchanged": true,
+    "usedBytes": 2100267386,
+    "capture": {
+      "status": "captured",
+      "sourceBase": "274615b",
+      "scope": "Actual current capture and replay event diagnosis; independent of native performance acceptance",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "1280",
+        "--height",
+        "720",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--fixed-frame-step",
+        "--smoke-frames",
+        "325",
+        "--gpu-timing",
+        "--gpu-timing-output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-135028-compact-texture-gpu-cost-25d5da\\runtime-timing.json"
+      ],
+      "executableSha256": "91500b8f1a7f9368a73c6705593461111f75aa3d374681f60464feaecbad0aa1",
+      "captureFrame": 320,
+      "renderdocVersion": "1.46",
+      "pid": 45804,
+      "capture": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-135028-compact-texture-gpu-cost-25d5da\\current_frame320.rdc",
+      "bytes": 2098906587,
+      "captureSha256": "1501478563070580ee39083fe766660c868e31c8820675a0099a4da559db5994"
+    }
+  },
+  "profile": {
+    "events": 3453,
+    "sumEventMs": 14.672224000000037,
+    "leafPS": 15665655,
+    "leafSamplesPassed": 51266467,
+    "groups": [
+      {
+        "kind": "draw",
+        "shader": "uninspected",
+        "events": 3276,
+        "milliseconds": 4.508672000000036,
+        "programFiles": []
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::10338",
+        "events": 48,
+        "milliseconds": 2.698912000000001,
+        "programFiles": [
+          "mesh_object_bindless_clipmap_field_early.frag.spv"
+        ]
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::10339",
+        "events": 17,
+        "milliseconds": 1.59744,
+        "programFiles": [
+          "character_snapshot_object_bindless_clipmap_field_early.frag.spv"
+        ]
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::10311",
+        "events": 27,
+        "milliseconds": 1.441536,
+        "programFiles": [
+          "mesh_object_bindless_clipmap_field.frag.spv"
+        ]
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::10399",
+        "events": 4,
+        "milliseconds": 0.876544,
+        "programFiles": [
+          "mesh_object_bindless_clipmap_field_lighting.frag.spv"
+        ]
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::10417",
+        "events": 4,
+        "milliseconds": 0.534528,
+        "programFiles": [
+          "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv"
+        ]
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::10405",
+        "events": 5,
+        "milliseconds": 0.526336,
+        "programFiles": [
+          "mesh_object_bindless_clipmap_field_early_lighting.frag.spv"
+        ]
+      },
+      {
+        "kind": "dispatch",
+        "shader": "ResourceId::10242",
+        "events": 1,
+        "milliseconds": 0.49952,
+        "programFiles": [
+          "reflection_trace_packed.comp.spv"
+        ]
+      },
+      {
+        "kind": "dispatch",
+        "shader": "uninspected",
+        "events": 49,
+        "milliseconds": 0.27443200000000006,
+        "programFiles": []
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::10328",
+        "events": 5,
+        "milliseconds": 0.23859199999999997,
+        "programFiles": [
+          "character_snapshot_object_bindless_clipmap_field.frag.spv"
+        ]
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::10320",
+        "events": 1,
+        "milliseconds": 0.18636799999999998,
+        "programFiles": [
+          "mesh_object_bindless_clipmap_field_coverage.frag.spv"
+        ]
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::10402",
+        "events": 1,
+        "milliseconds": 0.18431999999999998,
+        "programFiles": [
+          "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv"
+        ]
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::10330",
+        "events": 1,
+        "milliseconds": 0.175104,
+        "programFiles": [
+          "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv"
+        ]
+      },
+      {
+        "kind": "dispatch",
+        "shader": "ResourceId::10052",
+        "events": 1,
+        "milliseconds": 0.171008,
+        "programFiles": [
+          "skin.comp.spv"
+        ]
+      },
+      {
+        "kind": "dispatch",
+        "shader": "ResourceId::10297",
+        "events": 1,
+        "milliseconds": 0.13088,
+        "programFiles": [
+          "shadow_bounds_batch.comp.spv"
+        ]
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::10790",
+        "events": 2,
+        "milliseconds": 0.12288,
+        "programFiles": [
+          "view_fog_surface.frag.spv"
+        ]
+      },
+      {
+        "kind": "dispatch",
+        "shader": "ResourceId::10253",
+        "events": 1,
+        "milliseconds": 0.101376,
+        "programFiles": [
+          "reflection_spatial_filter.comp.spv"
+        ]
+      },
+      {
+        "kind": "dispatch",
+        "shader": "ResourceId::10106",
+        "events": 1,
+        "milliseconds": 0.084768,
+        "programFiles": [
+          "reflection_reprojection.comp.spv"
+        ]
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::252",
+        "events": 1,
+        "milliseconds": 0.077824,
+        "programFiles": [
+          "inner_outline.frag.spv"
+        ]
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::236",
+        "events": 1,
+        "milliseconds": 0.061439999999999995,
+        "programFiles": [
+          "spatial_antialiasing.frag.spv"
+        ]
+      },
+      {
+        "kind": "draw",
+        "shader": "ResourceId::10317",
+        "events": 1,
+        "milliseconds": 0.044032,
+        "programFiles": [
+          "shadow_bindless.frag.spv"
+        ]
+      },
+      {
+        "kind": "dispatch",
+        "shader": "ResourceId::10136",
+        "events": 1,
+        "milliseconds": 0.042944,
+        "programFiles": [
+          "depth_pyramid.comp.spv"
+        ]
+      },
+      {
+        "kind": "dispatch",
+        "shader": "ResourceId::10287",
+        "events": 1,
+        "milliseconds": 0.029632,
+        "programFiles": [
+          "reflection_temporal_packed.comp.spv"
+        ]
+      },
+      {
+        "kind": "dispatch",
+        "shader": "ResourceId::12507",
+        "events": 1,
+        "milliseconds": 0.02224,
+        "programFiles": [
+          "depth_pyramid.comp.spv"
+        ]
+      },
+      {
+        "kind": "dispatch",
+        "shader": "ResourceId::12467",
+        "events": 1,
+        "milliseconds": 0.02144,
+        "programFiles": [
+          "transparent_deform.comp.spv"
+        ]
+      },
+      {
+        "kind": "dispatch",
+        "shader": "ResourceId::10173",
+        "events": 1,
+        "milliseconds": 0.019456,
+        "programFiles": [
+          "reflection_signal_pyramid_packed.comp.spv"
+        ]
+      }
+    ],
+    "inspectedMaterialMilliseconds": 8.459679999999999,
+    "inspectedMaterialFraction": 0.5765778930310754
+  },
+  "protectedFilesUnchanged": 13,
+  "productionSourceChanged": false,
+  "nativeOptimizationAdmitted": false,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "nextLocalControl": "Compile observed shadow filter radius as a constant; establish actual reduction and output equivalence before native admission",
+  "archive": {
+    "file": "validation.zip",
+    "bytes": 339045,
+    "sha256": "359d460c3e9f525987c2fed42ea68b27900024e63062601d0c47c1ed544011c9"
+  },
+  "members": [
+    {
+      "path": "budget.json",
+      "bytes": 438,
+      "sha256": "a584810f6a79363eb203696c6eb8d13142465146ea983ef16cdc6eba585c1989"
+    },
+    {
+      "path": "capture-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "capture-result.json",
+      "bytes": 1624,
+      "sha256": "c357bc61215de7f56a1400ad71dcb8d852ff345b3bfa32989b77e08d888bd31d"
+    },
+    {
+      "path": "capture_current.py",
+      "bytes": 2821,
+      "sha256": "92a0581c5ba1074e438ac07bb870d9ccc40a162ea1a27da496d6f85161a28af9"
+    },
+    {
+      "path": "frozen-inputs.json",
+      "bytes": 827025,
+      "sha256": "b5d7efe1f3239d52ba459cf6da5ae15cbddef148be062b1a0a6f15b7ee846d1c"
+    },
+    {
+      "path": "process.log",
+      "bytes": 1200,
+      "sha256": "0efe6aa34f1472c092da09881770cf2a21251c946779db44b1aa2c1a205a2e3d"
+    },
+    {
+      "path": "profile-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "profile-result.json",
+      "bytes": 3697,
+      "sha256": "c6707573bfe27324edbe73f40e528f3b5bd808c732be4a6e43b418fd2eca817f"
+    },
+    {
+      "path": "profile-state.json",
+      "bytes": 882865,
+      "sha256": "86bc5d429fde4f1df9e80970a9ba23a9a7dff69107f0aeecea6ec4b6e297f822"
+    },
+    {
+      "path": "profile_current.py",
+      "bytes": 4147,
+      "sha256": "23a6021167edfccb73064b1c59d3be3d83f42500e77b45a5ec4b70f15be6e3ca"
+    },
+    {
+      "path": "runtime-timing.csv",
+      "bytes": 17505,
+      "sha256": "93782b91616b51c65a5755564282e3b37e8e81b134a1ae1cf21ee13271f00bf9"
+    },
+    {
+      "path": "runtime-timing.json",
+      "bytes": 48106,
+      "sha256": "033145b55749aabaee62ae075da1a960f8fb816b60b6254528762b972b940522"
+    },
+    {
+      "path": "run_capture.py",
+      "bytes": 2581,
+      "sha256": "7b53fb13a713a4d7a9a4a6f388a560d8d91442dd2f9b41c9e14402cab7dd4f57"
+    },
+    {
+      "path": "run_profile.py",
+      "bytes": 1926,
+      "sha256": "210d850829fa7e1145078c97fb55bcef18bfbc20c8a55db8f9d8fbfd6383d945"
+    },
+    {
+      "path": "startup-environment.json",
+      "bytes": 425588,
+      "sha256": "dd09a21c28d428daa574767126dc37947163edaea1a2dd529a8de6d679668874"
+    },
+    {
+      "path": "state.json",
+      "bytes": 1256,
+      "sha256": "29147100b0e0d66ab8241b4452bb9d1fc2ecdb31fd602abbd40c2a56bd20194d"
+    },
+    {
+      "path": "captures/gpu_capabilities.json",
+      "bytes": 8589,
+      "sha256": "48ca0deb3d9ad1f925d18a7594607fdc43c9cbd2a37696fa46e107c9f9bd9656"
+    },
+    {
+      "path": "events/counter-events.json",
+      "bytes": 499603,
+      "sha256": "a62228aebeff40e545ba89573964110945d8a9c3f2db19f253c10670266f2f9f"
+    },
+    {
+      "path": "events/profile.json",
+      "bytes": 560796,
+      "sha256": "591d16e1862435fa72491a2e6b292214713267c0a2099358b99ccf195541ae44"
+    },
+    {
+      "path": "protected-files.json",
+      "bytes": 1518,
+      "sha256": "b2754b86d468b2594c906810b5681f8abbe6132d4f36f3872c3523443159f876"
+    },
+    {
+      "path": "sources/shaders/mesh.frag",
+      "bytes": 121898,
+      "sha256": "2f0716e09877025b80259ee64f74ffb7a5791e07fa0e482ca87e37d371d31a4d"
+    },
+    {
+      "path": "sources/shaders/shadow_compare.glsl",
+      "bytes": 3585,
+      "sha256": "a4eb1f408a4d9d2efa11b88cd88bad87119cbc14b41bbcca03606ef8a8a4d89e"
+    }
+  ]
+}

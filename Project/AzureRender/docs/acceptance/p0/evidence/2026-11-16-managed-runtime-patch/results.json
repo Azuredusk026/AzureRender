@@ -1,0 +1,76 @@
+{
+  "sdk": "9.0.320",
+  "runtime": "9.0.22",
+  "officialArchiveSha512": "78b8dde4e75e1f0d084f5d80210772fd824c7b197387bcdbbac070767368e433e42e0a57c2c95e8f3b980ca1d1bba8c38b110b6d59bfec7ca60d562f88cc4091",
+  "advisory": "https://github.com/dotnet/runtime/security/advisories/GHSA-p3jp-9v83-76w9",
+  "source": {
+    "managed/EngineBindings/AzureEngineBindings.csproj": "4b087bf1ae3ff06d2aa9719d8ecf213b6302e64c28d474e8668288df5fa53b3f",
+    "tools/build_managed_scripts.py": "9d9f8e5d3a41182715f4476df71f218a4f649fd2f55c3738cd409b9bf5468475"
+  },
+  "configurations": {
+    "release": {
+      "job": 1351,
+      "buildSwitches": {
+        "AZURE_ENABLE_BATCHED_SHADOW_BOUNDS": "ON",
+        "AZURE_ENABLE_COMPUTED_MATERIAL_VIEW": "OFF",
+        "AZURE_ENABLE_DEFAULT_ISOLATION_SPECIALIZATION": "OFF",
+        "AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE": "ON",
+        "AZURE_ENABLE_SHADER_MODULE_PROTOTYPE": "ON",
+        "AZURE_ENABLE_SHADOW_HISTORY": "OFF",
+        "AZURE_ENABLE_SURFACE_RADIANCE_DIAGNOSTICS": "OFF",
+        "AZURE_ENABLE_SURFACE_RADIANCE_FRAME_SELECTION": "OFF",
+        "AZURE_ENABLE_SURFACE_RADIANCE_REUSE": "OFF"
+      },
+      "playerSha256": "7a9769f9aee8d709583f51f17ea67f74320e8f83686359a25ad73dfbe8473e95",
+      "cases": {
+        "AzureEngine.ManagedModule.coreclr": 0.145324,
+        "AzureEngine.ManagedModule.nativeaot": 0.0187886,
+        "AzureEngine.ManagedRuntime.coreclr": 0.25153,
+        "AzureEngine.ManagedRuntime.nativeaot": 0.188108,
+        "AzureEngine.ScriptBackendParity.lua": 0.112359,
+        "AzureEngine.ManagedWorkflows.coreclr": 149.75,
+        "AzureEngine.ManagedWorkflows.nativeaot": 74.653,
+        "AzureEditor.ManagedAuthoring": 2.17384
+      },
+      "evidence": {
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-registered-player-complete-install.xml": "6aa37318c684b22bd200e8efd1abb5340c9dee7bd7238ca938ab1baf7e74d6e6",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-build-manifest.json": "ccc49e8838e118fd72900bcd294a36ea67b9c59a6f02068c9bc581bc03bf4bb8",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/qualification.json": "a28ebbcdaa1b600f9926f34e3be2affd68f4cc32b04dcf32fccdb7b08e415810",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-coreclr-workflow-summary.json": "cda21ff3be4c7ad9c1d993c4deb706fda83a664aabececc652ac327ea55ee586",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/release/managed-nativeaot-workflow-summary.json": "a7e754dd20a4a5eaa5cf1fb3d0d71ea80bbb400a1abf238b84456d0cc8b2ca06"
+      }
+    },
+    "debug": {
+      "job": 1346,
+      "buildSwitches": {
+        "AZURE_ENABLE_BATCHED_SHADOW_BOUNDS": "ON",
+        "AZURE_ENABLE_COMPUTED_MATERIAL_VIEW": "OFF",
+        "AZURE_ENABLE_DEFAULT_ISOLATION_SPECIALIZATION": "OFF",
+        "AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE": "ON",
+        "AZURE_ENABLE_SHADER_MODULE_PROTOTYPE": "ON",
+        "AZURE_ENABLE_SHADOW_HISTORY": "OFF",
+        "AZURE_ENABLE_SURFACE_RADIANCE_DIAGNOSTICS": "OFF",
+        "AZURE_ENABLE_SURFACE_RADIANCE_FRAME_SELECTION": "OFF",
+        "AZURE_ENABLE_SURFACE_RADIANCE_REUSE": "OFF"
+      },
+      "playerSha256": "435b2b99ca774fa871871ebb6f8e80a22d20b79963f9ea23942a2467683283f3",
+      "cases": {
+        "AzureEngine.ManagedModule.coreclr": 0.27861,
+        "AzureEngine.ManagedModule.nativeaot": 0.140548,
+        "AzureEngine.ManagedRuntime.coreclr": 0.52151,
+        "AzureEngine.ManagedRuntime.nativeaot": 0.963043,
+        "AzureEngine.ScriptBackendParity.lua": 0.244882,
+        "AzureEngine.ManagedWorkflows.coreclr": 25.9291,
+        "AzureEngine.ManagedWorkflows.nativeaot": 21.2708,
+        "AzureEditor.ManagedAuthoring": 2.33968
+      },
+      "evidence": {
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/managed-registered-player.xml": "31a04ed2618f663704337a3dabae082c3daf6d91cdab7e5925d41a1f1ed33ed1",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/managed-build-manifest.json": "3aa1f4f6e335b361daae5635536e9c8d0fd524bb0213e12048b065d03b3fe1a4",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/qualification.json": "fb570e90ed5ae959d1328f32a9dcc2c95666c70b0913687e956548be2d350621",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/managed-coreclr-workflow-summary.json": "23db232b697f214770091c92f996dd5774bc5fc5fbdc2ceace7ea4d954b82e93",
+        "build/runs/20261116-034957-nr-r3-original-registered-ab0dde/debug/managed-nativeaot-workflow-summary.json": "b2d4abd421efbbcfac70278d3ac6a35a2ff586b1aff54a012f34f93a7bc83bdf"
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 191: AzureGame.ExplorationDesign
+1/1 Test #191: AzureGame.ExplorationDesign ......***Failed    0.36 sec
+Walkable rendered meshes are horizontal Y-up surfaces matching collision geometry
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.39 sec
+
+The following tests FAILED:
+	191 - AzureGame.ExplorationDesign (Failed)
+Errors while running CTest

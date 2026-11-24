@@ -1,0 +1,9 @@
+Project loaded: Azure Exploration (7f971748-131f-4764-9aac-221848014a37)
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+Scene renderer: sample (sceneType=sample)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Rendered frames: 80
+Allocator after unload: buffers=0 images=0

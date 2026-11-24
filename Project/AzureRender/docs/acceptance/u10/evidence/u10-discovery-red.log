@@ -1,0 +1,19 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 186: AzureEditor.ContentNavigation
+1/1 Test #186: AzureEditor.ContentNavigation ....***Failed    0.15 sec
+[1791572389158][info][editor][code=0] Opened scene: startup
+[1791572389213][info][editor][code=0] ERROR [content.directory]: Directory escapes its mount
+[1791572389216][info][editor][code=0] ERROR [content.directory]: Unknown content mount
+[1791572389218][info][editor][code=0] ERROR [asset.open]: Unknown asset
+[1791572389230][info][editor][code=0] ERROR [asset.inspect]: invalid map<K, T> key
+asset.inspect: [{"code":"OperationFailed","message":"invalid map<K, T> key"}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.17 sec
+
+The following tests FAILED:
+	186 - AzureEditor.ContentNavigation (Failed)
+Errors while running CTest

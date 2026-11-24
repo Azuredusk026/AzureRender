@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "diagnosticOnly": true,
+  "acceptedForCompleteLedger": false,
+  "expectedCalls": 40,
+  "matchedCalls": 39,
+  "missingCalls": [
+    [
+      30688,
+      "NtAllocateVirtualMemory",
+      "allocate",
+      0,
+      0,
+      3221225485,
+      12288
+    ]
+  ],
+  "files": {
+    "serialized-trace-candidate/trace_virtual_allocations.py": {
+      "bytes": 12037,
+      "sha256": "d61862a3356370cffd106cbc4a43b567d60dcea2ffbc39d7c489349110c96c16",
+      "originalSha256": "d61862a3356370cffd106cbc4a43b567d60dcea2ffbc39d7c489349110c96c16"
+    },
+    "threaded_probe.py": {
+      "bytes": 1883,
+      "sha256": "37624f9493d1b19fb9ebd5fc225d13328f5dcab2a70232d90cc2273492a36d03",
+      "originalSha256": "37624f9493d1b19fb9ebd5fc225d13328f5dcab2a70232d90cc2273492a36d03"
+    },
+    "serialized-trace-probe/commands.lldb": {
+      "bytes": 863,
+      "sha256": "eeb1aa94c57d9b08f7589b6245fb217974b821b33da9ad6abce63521346ecbf2",
+      "originalSha256": "eeb1aa94c57d9b08f7589b6245fb217974b821b33da9ad6abce63521346ecbf2"
+    },
+    "serialized-trace-probe/config.json": {
+      "bytes": 887,
+      "sha256": "884eee3bab138aec56393628f743cd98a78bb8937bec4625f45c59764e3572a9",
+      "originalSha256": "884eee3bab138aec56393628f743cd98a78bb8937bec4625f45c59764e3572a9"
+    },
+    "serialized-trace-probe/events.jsonl.gz": {
+      "bytes": 34555,
+      "sha256": "7ded29d58c38ee4a5394b621c30a5beaca52265c5b7c4dc54d0f3f2366a7057c",
+      "originalSha256": "0ba31b86eef480f2efc5aab26c61492b4d486945b8462a9ead2ce5262f71f4c1"
+    },
+    "serialized-trace-probe/lldb.log": {
+      "bytes": 1470,
+      "sha256": "d370cb6e76786356ad7c94376727fb11f1a9628292471c474772f16832175d07",
+      "originalSha256": "d370cb6e76786356ad7c94376727fb11f1a9628292471c474772f16832175d07"
+    },
+    "serialized-trace-probe/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "serialized-trace-probe/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "serialized-trace-probe/summary.json": {
+      "bytes": 1677,
+      "sha256": "9df7f8db82e38cde710facff53dbd20d699a95f64a019a6ec7da323cc93b38a8",
+      "originalSha256": "9df7f8db82e38cde710facff53dbd20d699a95f64a019a6ec7da323cc93b38a8"
+    },
+    "serialized-proofs/threads.json": {
+      "bytes": 8956,
+      "sha256": "52c833dab32ef381bc1b1a72cc1c8db94878f4915578b6b1fe35eb55be1fb564",
+      "originalSha256": "52c833dab32ef381bc1b1a72cc1c8db94878f4915578b6b1fe35eb55be1fb564"
+    }
+  }
+}

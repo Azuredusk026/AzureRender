@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "configuration": "release",
+  "checks": [
+    {
+      "name": "display-views",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMaterialDisplayViewGpuTests.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\display-views-release-final"
+      ],
+      "exitCode": 0,
+      "seconds": 189.6759183999966,
+      "programSha256": "0871b3533357ea26566d5314faf23aeb12a21dec606771279699fd376ce2177c"
+    },
+    {
+      "name": "scene-resolve",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureSceneMultisamplingGpuTests.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+      ],
+      "exitCode": 0,
+      "seconds": 1.4740116000029957,
+      "programSha256": "9312cd18e5fc67b25aef401f6e0f1d1b8284e13b9f0e313a3505aa2fd3c5e738"
+    },
+    {
+      "name": "multisample-views",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMultisampleViewGpuTests.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+      ],
+      "exitCode": 0,
+      "seconds": 1.4083428000012645,
+      "programSha256": "88d91991654f3a1ed3ade3c8e0fb5b9dddc22f574292d1e706d776fc914cbd08"
+    },
+    {
+      "name": "temporal-views",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureTemporalViewGpuTests.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\temporal-views-release-final"
+      ],
+      "exitCode": 0,
+      "seconds": 54.89046399999643,
+      "programSha256": "666efd4f724ff9e7fdfc7e7f49a59711007eb307be5bfaa19b1055277f2715b9"
+    }
+  ]
+}

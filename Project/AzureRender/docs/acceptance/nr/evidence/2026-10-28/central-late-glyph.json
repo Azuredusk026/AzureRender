@@ -1,0 +1,823 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR7-L4L",
+  "status": "captured_static_glyph_passed_dynamic_scene_pending",
+  "baseCommit": "e4ef3b7",
+  "run": "build/runs/20261028-092102-native-transparent-submission-order-f583ea",
+  "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject",
+  "sourceEvent": 10975,
+  "geometry": {
+    "status": "prepared",
+    "event": 10975,
+    "vertices": 48,
+    "indices": 72,
+    "uvMaximumError": 0.0,
+    "ndcMaximumError": 1.167212673180984e-07,
+    "sourceTime": 73.48992156982422,
+    "snapshotClock": true,
+    "profile": {
+      "schemaVersion": 2,
+      "lighting": "unlit",
+      "fogMode": "scene",
+      "layers": [
+        {
+          "role": "base",
+          "texture": 0,
+          "sampleMode": "red-as-alpha",
+          "uv": {
+            "set": 0,
+            "scaleOffset": [
+              1.0,
+              8.0,
+              0.0,
+              0.0
+            ],
+            "rotation": [
+              0.9998477101325989,
+              -0.017452405765652657,
+              0.017452405765652657,
+              0.9998477101325989
+            ],
+            "speed": [
+              1.0,
+              0.0
+            ]
+          }
+        }
+      ],
+      "tint": [
+        1.5,
+        1.5,
+        1.5,
+        1.0
+      ],
+      "blendTint": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "clock": {
+        "rate": 0,
+        "offsetSeconds": 73.48992156982422
+      },
+      "softIntersection": {
+        "enabled": false,
+        "distance": 1,
+        "bias": 0
+      },
+      "highlightExpansion": {
+        "threshold": 1.0,
+        "gain": 1.0
+      },
+      "postExposureWeight": 1.0,
+      "globalColorWeight": 1.0
+    },
+    "texture": {
+      "resource": "ResourceId::11874",
+      "mips": 7,
+      "sha256": "b028305db4e1233bbb6412a91e2ece434a3170c5f3a0f5460796c4791747d460"
+    },
+    "inactiveDistortion": true,
+    "whiteMaskReduction": true,
+    "contributingPixels": 5472
+  },
+  "gpu": {
+    "status": "passed",
+    "budget": 0.008,
+    "maximumLinearError": 0.0007550716400146484,
+    "configurationAndDescriptorHdrExact": true,
+    "configurationAndDescriptorPngExact": true,
+    "cases": [
+      {
+        "label": "debug-indexed",
+        "samples": [
+          {
+            "x": 1300,
+            "y": 33,
+            "actual": [
+              1.982421875,
+              1.9873046875,
+              1.9912109375
+            ],
+            "source": [
+              1.9831769466400146,
+              1.987200379371643,
+              1.9918723106384277
+            ],
+            "maximumLinearError": 0.0007550716400146484
+          },
+          {
+            "x": 1302,
+            "y": 90,
+            "actual": [
+              1.982421875,
+              1.986328125,
+              1.9912109375
+            ],
+            "source": [
+              1.983104944229126,
+              1.9870545864105225,
+              1.991624355316162
+            ],
+            "maximumLinearError": 0.0007264614105224609
+          },
+          {
+            "x": 1240,
+            "y": 149,
+            "actual": [
+              1.9833984375,
+              1.9873046875,
+              1.9921875
+            ],
+            "source": [
+              1.984013557434082,
+              1.9878913164138794,
+              1.9923813343048096
+            ],
+            "maximumLinearError": 0.0006151199340820312
+          },
+          {
+            "x": 1240,
+            "y": 211,
+            "actual": [
+              1.9833984375,
+              1.9873046875,
+              1.9921875
+            ],
+            "source": [
+              1.983945369720459,
+              1.9877488613128662,
+              1.9921483993530273
+            ],
+            "maximumLinearError": 0.0005469322204589844
+          },
+          {
+            "x": 1286,
+            "y": 256,
+            "actual": [
+              1.982421875,
+              1.9873046875,
+              1.9912109375
+            ],
+            "source": [
+              1.9831522703170776,
+              1.9871524572372437,
+              1.9917926788330078
+            ],
+            "maximumLinearError": 0.0007303953170776367
+          }
+        ],
+        "hdrSha256": "2c50b617b513f7d38afa5bca5c7d6baed84d053afe498af433c04ac9b927c180"
+      },
+      {
+        "label": "debug-fixed",
+        "samples": [
+          {
+            "x": 1300,
+            "y": 33,
+            "actual": [
+              1.982421875,
+              1.9873046875,
+              1.9912109375
+            ],
+            "source": [
+              1.9831769466400146,
+              1.987200379371643,
+              1.9918723106384277
+            ],
+            "maximumLinearError": 0.0007550716400146484
+          },
+          {
+            "x": 1302,
+            "y": 90,
+            "actual": [
+              1.982421875,
+              1.986328125,
+              1.9912109375
+            ],
+            "source": [
+              1.983104944229126,
+              1.9870545864105225,
+              1.991624355316162
+            ],
+            "maximumLinearError": 0.0007264614105224609
+          },
+          {
+            "x": 1240,
+            "y": 149,
+            "actual": [
+              1.9833984375,
+              1.9873046875,
+              1.9921875
+            ],
+            "source": [
+              1.984013557434082,
+              1.9878913164138794,
+              1.9923813343048096
+            ],
+            "maximumLinearError": 0.0006151199340820312
+          },
+          {
+            "x": 1240,
+            "y": 211,
+            "actual": [
+              1.9833984375,
+              1.9873046875,
+              1.9921875
+            ],
+            "source": [
+              1.983945369720459,
+              1.9877488613128662,
+              1.9921483993530273
+            ],
+            "maximumLinearError": 0.0005469322204589844
+          },
+          {
+            "x": 1286,
+            "y": 256,
+            "actual": [
+              1.982421875,
+              1.9873046875,
+              1.9912109375
+            ],
+            "source": [
+              1.9831522703170776,
+              1.9871524572372437,
+              1.9917926788330078
+            ],
+            "maximumLinearError": 0.0007303953170776367
+          }
+        ],
+        "hdrSha256": "2c50b617b513f7d38afa5bca5c7d6baed84d053afe498af433c04ac9b927c180"
+      },
+      {
+        "label": "release-indexed",
+        "samples": [
+          {
+            "x": 1300,
+            "y": 33,
+            "actual": [
+              1.982421875,
+              1.9873046875,
+              1.9912109375
+            ],
+            "source": [
+              1.9831769466400146,
+              1.987200379371643,
+              1.9918723106384277
+            ],
+            "maximumLinearError": 0.0007550716400146484
+          },
+          {
+            "x": 1302,
+            "y": 90,
+            "actual": [
+              1.982421875,
+              1.986328125,
+              1.9912109375
+            ],
+            "source": [
+              1.983104944229126,
+              1.9870545864105225,
+              1.991624355316162
+            ],
+            "maximumLinearError": 0.0007264614105224609
+          },
+          {
+            "x": 1240,
+            "y": 149,
+            "actual": [
+              1.9833984375,
+              1.9873046875,
+              1.9921875
+            ],
+            "source": [
+              1.984013557434082,
+              1.9878913164138794,
+              1.9923813343048096
+            ],
+            "maximumLinearError": 0.0006151199340820312
+          },
+          {
+            "x": 1240,
+            "y": 211,
+            "actual": [
+              1.9833984375,
+              1.9873046875,
+              1.9921875
+            ],
+            "source": [
+              1.983945369720459,
+              1.9877488613128662,
+              1.9921483993530273
+            ],
+            "maximumLinearError": 0.0005469322204589844
+          },
+          {
+            "x": 1286,
+            "y": 256,
+            "actual": [
+              1.982421875,
+              1.9873046875,
+              1.9912109375
+            ],
+            "source": [
+              1.9831522703170776,
+              1.9871524572372437,
+              1.9917926788330078
+            ],
+            "maximumLinearError": 0.0007303953170776367
+          }
+        ],
+        "hdrSha256": "2c50b617b513f7d38afa5bca5c7d6baed84d053afe498af433c04ac9b927c180"
+      },
+      {
+        "label": "release-fixed",
+        "samples": [
+          {
+            "x": 1300,
+            "y": 33,
+            "actual": [
+              1.982421875,
+              1.9873046875,
+              1.9912109375
+            ],
+            "source": [
+              1.9831769466400146,
+              1.987200379371643,
+              1.9918723106384277
+            ],
+            "maximumLinearError": 0.0007550716400146484
+          },
+          {
+            "x": 1302,
+            "y": 90,
+            "actual": [
+              1.982421875,
+              1.986328125,
+              1.9912109375
+            ],
+            "source": [
+              1.983104944229126,
+              1.9870545864105225,
+              1.991624355316162
+            ],
+            "maximumLinearError": 0.0007264614105224609
+          },
+          {
+            "x": 1240,
+            "y": 149,
+            "actual": [
+              1.9833984375,
+              1.9873046875,
+              1.9921875
+            ],
+            "source": [
+              1.984013557434082,
+              1.9878913164138794,
+              1.9923813343048096
+            ],
+            "maximumLinearError": 0.0006151199340820312
+          },
+          {
+            "x": 1240,
+            "y": 211,
+            "actual": [
+              1.9833984375,
+              1.9873046875,
+              1.9921875
+            ],
+            "source": [
+              1.983945369720459,
+              1.9877488613128662,
+              1.9921483993530273
+            ],
+            "maximumLinearError": 0.0005469322204589844
+          },
+          {
+            "x": 1286,
+            "y": 256,
+            "actual": [
+              1.982421875,
+              1.9873046875,
+              1.9912109375
+            ],
+            "source": [
+              1.9831522703170776,
+              1.9871524572372437,
+              1.9917926788330078
+            ],
+            "maximumLinearError": 0.0007303953170776367
+          }
+        ],
+        "hdrSha256": "2c50b617b513f7d38afa5bca5c7d6baed84d053afe498af433c04ac9b927c180"
+      }
+    ],
+    "diagnostic": {
+      "pngDecodedMaximumError": 0.009668116410768146,
+      "cause": "8-bit presentation quantization; raw RGBA16F target used for strict linear check"
+    },
+    "snapshotClock": true
+  },
+  "runtime": {
+    "status": "passed",
+    "cases": [
+      "debug-indexed",
+      "debug-fixed",
+      "release-indexed",
+      "release-fixed"
+    ],
+    "configurationAndDescriptorPngExact": true,
+    "renderdocAndNormalRuntimeExact": true,
+    "liveBuffers": 0,
+    "liveImages": 0,
+    "validationClean": true
+  },
+  "main": {
+    "status": "captured",
+    "priorMeanAbsoluteByteError": 13.30292679398148,
+    "candidateMeanAbsoluteByteError": 13.211135073061342,
+    "changedPixels": 26317,
+    "regions": [
+      {
+        "event": 9160,
+        "pixels": 30531,
+        "priorError": 23.812682191870557,
+        "candidateError": 12.819211075082157
+      },
+      {
+        "event": 10480,
+        "pixels": 41656,
+        "priorError": 27.016916330580628,
+        "candidateError": 22.09047916266564
+      },
+      {
+        "event": 10875,
+        "pixels": 30428,
+        "priorError": 23.839763814030935,
+        "candidateError": 12.808608299373384
+      }
+    ]
+  },
+  "region": {
+    "pixels": 5472,
+    "before": 57.76985867446394,
+    "after": 8.430129142300196,
+    "sourcePixelCoordinates": [
+      {
+        "x": 1300,
+        "y": 33,
+        "candidate": [
+          255,
+          255,
+          255
+        ],
+        "native": [
+          252,
+          252,
+          252
+        ]
+      },
+      {
+        "x": 1302,
+        "y": 90,
+        "candidate": [
+          255,
+          255,
+          255
+        ],
+        "native": [
+          252,
+          252,
+          252
+        ]
+      },
+      {
+        "x": 1240,
+        "y": 149,
+        "candidate": [
+          255,
+          255,
+          255
+        ],
+        "native": [
+          252,
+          252,
+          251
+        ]
+      },
+      {
+        "x": 1240,
+        "y": 211,
+        "candidate": [
+          255,
+          255,
+          255
+        ],
+        "native": [
+          252,
+          252,
+          252
+        ]
+      },
+      {
+        "x": 1286,
+        "y": 256,
+        "candidate": [
+          255,
+          254,
+          254
+        ],
+        "native": [
+          252,
+          252,
+          251
+        ]
+      }
+    ]
+  },
+  "unchangedEngine": {
+    "status": "passed",
+    "baseCommit": "e4ef3b7",
+    "source": {
+      "CMakeLists.txt": "c3c4f58aa5256cf864bd010167ca75034e78f4eeb05bbcf9cbb7f9f90f822519",
+      "src/render/ViewFogGpu.hpp": "08f62e569dd5f63c141fd6be0566217f1f9fff5a2d5393172e724f1927ab8c7e",
+      "src/render/ViewFogGpu.cpp": "fc3759621e3c7776c2094fb10f2dda7d4981b7281eb7aebca7731348d1a04dea",
+      "src/assets/UnlitTextureLayers.hpp": "84e4b93847d677aa72cdde488b2fb132829fd91fd0991cd770323e32e4696419",
+      "src/assets/UnlitTextureLayers.cpp": "08d6f0fca06812b3012b7c92c86dcb142592847aac865bd281a06fefd4e673c4",
+      "src/assets/MaterialSurfaceProfile.hpp": "d0a7a351eff143bf06deeed25ecf31e7f6a956a5a50f420bf4d9708c1b55eb3e",
+      "src/scenes/CharacterSceneRenderer.hpp": "3656a05d75c8c2add4bb4bc6dc01a86f7756edefbead69634c9cb78e034212e2",
+      "src/scenes/CharacterSceneRenderer.cpp": "923bf6646c201adf1da0e601fee3376a36590d30952d64cb57777db57a5bca42",
+      "src/scenes/CharacterViewFog.inc": "8367fdf921b1efe296017ab6d7dd7b96249373b1f17f8c9fd14d334d6d481f93",
+      "shaders/mesh.frag": "0149574ee2add6f464880cc4e224d3b7c83b1e1cab11d77c335a2d3136b66eec",
+      "shaders/view_fog.glsl": "a049575477f8f13a6c6ee518de787e8e26812bbc90a51f9d95c69b42c383920d",
+      "shaders/view_fog_surface.frag": "07366c255ee475e9607d4a9f2296d4c07050b55d9d4c575ecaef4c18dca8fe98",
+      "shaders/view_fog_material.glsl": "535c30542ca829f36cd0484690d1fac811b709ec06f38525182beb768c855234",
+      "shaders/unlit_surface_sample.glsl": "e0558240b66b72fce1fe1b20f26e1d55beaa16f385786a8c7d8bee5802a066dc",
+      "schemas/unlit_texture_layers.schema.json": "5e3ee0d0665478faa5e445f5b644270cdf258ced819fd031faed1c3c6cfc5487",
+      "tests/ViewFogGpuTests.cpp": "888141df37a743648062cba8ad9b58f1633c7b5962d2f339ea237134da91738b",
+      "tests/UnlitTextureLayersTests.cpp": "4b0fe549cc12ab9039a59338020d7630eb2c15ab5fcd0f4f06168dd3497b6f2a",
+      "tests/UnlitTextureMaterialTests.cpp": "6e4fe97250c8de657ce60fd390b1b14505a38240c68462a925c1d3a699e71b5b",
+      "tools/test_view_fog_gpu.py": "45a38e80994c7f8815e32cc0f64bccd7a93216d0f790cae4bed883a9e180d271",
+      "tools/check_view_fog_shader_contract.py": "829bbdd52a79881c0287d7a6d44cf140ac218503a828009691fe08b256fdd65f",
+      "tools/test_character_screen_rim_gpu.py": "34bb47869ce956d683e9e7835a5c99d37f144bb262c682735823291d0700d739",
+      "tools/test_eye_npr_gpu.py": "9504608d1cc00b8d21dd8be148c2337aa13b65a64c25bb1e6d288304cb22d286",
+      "tools/test_npr_illumination_gpu.py": "b0017a65e017ed348c562e3e136cbc04a85b31b42c0de88ea10d3b0c994a73de",
+      "tools/test_object_shadow_gpu.py": "bb3739dd5d0f01d889fcf07cf8b327fa7cfcb8032de05daa825cc80b4903bf21",
+      "tools/test_unlit_texture_layers_gpu.py": "a1e6d90ce5cc9d3664f9f36f3299fb7700999de463a5d9cab30f41bdc1f11371",
+      "tools/test_vertex_color_gpu.py": "58528aaf14daa9883001fd2044f3f871ac91e4c31ce5478c060a9f8c6c5cf4ef",
+      "src/render/ViewFogBinding.hpp": "db95634add6e5c7dcffb9111ea123ca5948407640982a839c6376ea4441d23ea",
+      "src/render/ViewFogBinding.cpp": "7c278d405493856004c5351d49e9eeb7e1c79b7668ffa98a1709358f7d8fbc37",
+      "src/render/FogVolumeGpu.hpp": "d090c9e61e47f43679c1e4dba491729a18625cd2fabfafbb7bb0a72d9dd77ae0",
+      "src/render/FogVolumeData.cpp": "5cd7de9a712dab43024ed67437c2ff6e972acc58e1f649cb5be281fa7cf9ede5",
+      "src/render/FogViewProjection.cpp": "bc17dc9cad54de08d49b11a0d001ac4ea752217a7e86c52e39afcc530726d398",
+      "shaders/fog_view_projection.glsl": "1e6b17dece86f57565fce31cfe6dc9b31d8d6d4f2d891667d6e30ea239254fef",
+      "shaders/fog_transport.glsl": "ba9c7267a55b9d687573e313d277686d3795ed93cd917bee4447703db748f97f"
+    },
+    "binaries": {
+      "debug-AzurePlayer": "7e4ae1fa1f720f8468e16348ad75bd4f378664e34f99567e213fa7a14d7a2bec",
+      "debug-AzureRender": "51e83adb08ec9fe2b4efc4bd640686547b2d1afe95084c2b614ae45d2f563082",
+      "debug-AzureMaterialValidator": "f17df4890824858106a7a247e9c54676f998653cd87f9b9432c8b403552cb96c",
+      "debug-AzureViewFogGpuTests": "039ef6c88ec2aa7055a87edc286ad0dcf8905e7301e81600f2ec5c1581ed874d",
+      "release-AzurePlayer": "85ea1486b0abb4ad3e0df7d000b7586c6fa7b8cb12481fd7433d82735f6c7289",
+      "release-AzureRender": "dfa497e81ebab6aa32522d594aaca4f9f0edf488132e915c00f97c5c6156b15e",
+      "release-AzureMaterialValidator": "eba48f059405e68fd5b4bdad045a6afa325c69713ba6d4fe04a5e9e328954861",
+      "release-AzureViewFogGpuTests": "157c99dfb195e5b6c750e87278c0b2cb077e4dc595d48dfe493e102fc8aa70bb"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "actual-fragments-debug-indexed-10975.log",
+      "sha256": "13bb78516623d30a1251997c75ab5a49f42bae6cb2a47f4b53a415b0e59dfcca"
+    },
+    {
+      "path": "capture_glyph_inputs.py",
+      "sha256": "730491b9471763a52fc52d2fd0d24296726dd79648a3bc55978f49b66b17f937"
+    },
+    {
+      "path": "capture_glyph_oracle.py",
+      "sha256": "21b3ebc48e3e1f7511cf7fa55312351ebb02e6ae22e383b77f84092d526da66d"
+    },
+    {
+      "path": "capture_hdr_debug-fixed.py",
+      "sha256": "3282a7a4f9f34ef88fcb65a619462d467b8df40725b45c6f7ca01cb9fd2f4b47"
+    },
+    {
+      "path": "capture_hdr_release-fixed.py",
+      "sha256": "6f31e5d33ea8cae341b2897d6aa31761958f04b5717a4c3ab3cdbf7b280f5d43"
+    },
+    {
+      "path": "capture_hdr_release-indexed.py",
+      "sha256": "e377fa0e6bf4a156af4869e705e842bb8f56cb53a5ac906f4b0e699fe7b7ce50"
+    },
+    {
+      "path": "capture_late_glyph.py",
+      "sha256": "e59ae61e6c6377921006f04dc9b079b2bc2fb0354386af3b9a5145df74b7aaf6"
+    },
+    {
+      "path": "capture_order.py",
+      "sha256": "e359c75737c0fa50846e9d4a674304b13243b8b3163d949fd76ba2e5b272d5d1"
+    },
+    {
+      "path": "capture_own_hdr.py",
+      "sha256": "f08ed760eeb87104357de09c13f0da2283eb2ef77261824104d0b3ae20b61053"
+    },
+    {
+      "path": "central-order-comparison.png",
+      "sha256": "ea32a352876cc0e76c99fe790855f4a9e51181bc641f4680eb8b62f7072ee340"
+    },
+    {
+      "path": "check_actual_glyph.py",
+      "sha256": "121febec84be0ca657bf5ca29d356211345b06107823daf8a450f1654a4d6b14"
+    },
+    {
+      "path": "check_glyph_runtime.py",
+      "sha256": "3ae5eb9d3cf11d76c10034da183440bc1f593e0849011d98262dedc21a46e2a7"
+    },
+    {
+      "path": "debug-clear.log",
+      "sha256": "aa35323d49941240b478dcbfffc0013ceff304f1885b65dd54f24176f930c850"
+    },
+    {
+      "path": "glyph-gpu-results.json",
+      "sha256": "253d6c56378d871ff92272d56ec2152d76aaa1f5689c65302abd057d4e748191"
+    },
+    {
+      "path": "glyph-probe-points.json",
+      "sha256": "32f5c61a49ad3fd7dbe806b32d0e8978077bb3330ec95ae802abf46c048660b3"
+    },
+    {
+      "path": "glyph-region-comparison.json",
+      "sha256": "a912d9c3bed74259fc77201b8d298981314f5050ce7ac3970d208486f0d0bd5d"
+    },
+    {
+      "path": "glyph-runtime-results.json",
+      "sha256": "3f6cc8e268dc2abce7d392684161b64f291ae0ca5a0946aabb9017b6acae43d9"
+    },
+    {
+      "path": "inspect_hdr_debug-fixed.py",
+      "sha256": "a6dcd9c9d187ddd120ffbf370c54a064c39d0db5f4f2e50a5c346a1f9352f51c"
+    },
+    {
+      "path": "inspect_hdr_release-fixed.py",
+      "sha256": "dec69e439058e2fe24a3252efe87f69c9bd802c84f702aea3e997bff4a6a15d5"
+    },
+    {
+      "path": "inspect_hdr_release-indexed.py",
+      "sha256": "4e35f3847f30fb41006699df67dba760d51db97a3159f820bf3441b2a8d9b35e"
+    },
+    {
+      "path": "inspect_own_hdr.py",
+      "sha256": "f919daa4a7cbba9bec9aa612a6c1ab1af5b4d9899d3004163881bfd1e588e733"
+    },
+    {
+      "path": "late-glyph-receipt.json",
+      "sha256": "c2852cbb65ceb9d62ad6d657fcfa1465922cbd750799c86c1ea5c5b8fdae2041"
+    },
+    {
+      "path": "late-glyph-visual-comparison.png",
+      "sha256": "84820765eb9f75427dacc7ca5ec20d30289ffeb5108b8bef78085171e911598b"
+    },
+    {
+      "path": "main-late-glyph-comparison.json",
+      "sha256": "d27ef2b4a2d3e406f174ea542e5c8c3bddaed84af60455c4ccdfb36918703a0d"
+    },
+    {
+      "path": "main-late-glyph-release.log",
+      "sha256": "8b1f5325cb3be7b9cbdec5796cc697ececd3ea12bc6be61bd5d8a83e4f873d35"
+    },
+    {
+      "path": "main-layer-order-release.log",
+      "sha256": "43cf5245ee48c9bc62031a6cae1741e14cc0889cd9f8ebbcd47429861b11e405"
+    },
+    {
+      "path": "main-order-check.log",
+      "sha256": "4ae139247d4a3c40224a851aa223d64b46bae6a33c6d383a676c83f92fff5a38"
+    },
+    {
+      "path": "main-order-comparison.json",
+      "sha256": "d360c33f3b8adc8d27bcd2ce6bd5b5cc51aacbcf7c7b31a1657e1c9bbb97e2b7"
+    },
+    {
+      "path": "native-glyph-history-initial-coordinate-audit.json",
+      "sha256": "c8577c3edddcf7aa6b2a32cbc6b985715446af8d5ecc0102190cb1d3b1f8065c"
+    },
+    {
+      "path": "native-glyph-history.json",
+      "sha256": "d2a5366180e77230ee6d7367f1c46c32fa321c3b9ac235b1f0936322e44bba6b"
+    },
+    {
+      "path": "native-glyph-oracle.json",
+      "sha256": "9ea88a6a6f19dc24923eea87c7c592869fdc1d830e91bd407349e9fdd6c76997"
+    },
+    {
+      "path": "own-hdr-capture.json",
+      "sha256": "1771a346c0e73be65a6daa58cdc18e73113ac56cb0a6aa56274195d4d8aff62a"
+    },
+    {
+      "path": "own-hdr-comparison.json",
+      "sha256": "b1e1ccf91979cdb884171a715660b8fd313b1f27d4ac0b78b54d0776397c8976"
+    },
+    {
+      "path": "own-hdr-debug-fixed-capture.json",
+      "sha256": "111e51d06132bbb8ece42c130909fe0052405c687cc5120fc04c189d38979463"
+    },
+    {
+      "path": "own-hdr-debug-fixed-draws.json",
+      "sha256": "88cd5e5758dc471e670b4851cb2cd0827a5be7e2ef6ec92893631213ae1a105c"
+    },
+    {
+      "path": "own-hdr-draws.json",
+      "sha256": "5f03509d5654516aa38b687d41622fbbe1c529107a3d7fb807432b36edf30850"
+    },
+    {
+      "path": "own-hdr-release-fixed-capture.json",
+      "sha256": "33ae0c8fd432e76ce117a4c1798ef22494f357daaa202cd0be42bfd87d282669"
+    },
+    {
+      "path": "own-hdr-release-fixed-draws.json",
+      "sha256": "88cd5e5758dc471e670b4851cb2cd0827a5be7e2ef6ec92893631213ae1a105c"
+    },
+    {
+      "path": "own-hdr-release-indexed-capture.json",
+      "sha256": "4724995b248814d479295b99fd0ec0e758945c507b3f9b61d1afa89214c0382d"
+    },
+    {
+      "path": "own-hdr-release-indexed-draws.json",
+      "sha256": "5f03509d5654516aa38b687d41622fbbe1c529107a3d7fb807432b36edf30850"
+    },
+    {
+      "path": "prepare_late_glyph.py",
+      "sha256": "1c52d7f943c2fef5b9188a8b6861c73bd6306fbb9da2735ff3f7db007b6f2ea7"
+    },
+    {
+      "path": "prepare_order.py",
+      "sha256": "3c62f185ec7d2250797344ff4e19b788e2c185661cf9eac56f82990c047deac2"
+    },
+    {
+      "path": "probe_glyph_history.py",
+      "sha256": "e895bf00ba24056e9bb21e7d1484c27edd31754ad510aada1189affe3b75a1a9"
+    },
+    {
+      "path": "runtime-debug-fixed.log",
+      "sha256": "d680e5e7e81206af8c198a897c5640cdf4c0d96630fefb55725f86c4a56e8cec"
+    },
+    {
+      "path": "runtime-debug-indexed.log",
+      "sha256": "5506ce00fb523235723aac71430b7571691391d4dab7cf73379a65b4442b85f5"
+    },
+    {
+      "path": "runtime-inputs.json",
+      "sha256": "f4682ed56bb6217db51e0949d8fd7db642654729c516be6d749e0802144c5ff3"
+    },
+    {
+      "path": "runtime-release-fixed.log",
+      "sha256": "c977350d18c0d8d5e275d2b593416417991a4a5e8eb94160180b032198c208df"
+    },
+    {
+      "path": "runtime-release-indexed.log",
+      "sha256": "f1ca6961670d2f73903b6ee223c1453077329da8ba6f7b0203fb1c96af9c4ef1"
+    },
+    {
+      "path": "submission-order-receipt.json",
+      "sha256": "c2b924b51bc733b1afc251ffb26708dcdf9f49e460fd820a25adac0e763ac406"
+    },
+    {
+      "path": "unchanged-engine-receipt.json",
+      "sha256": "0f6eda75533a81d5a9665b3f8953691a5ab76db7f38504c4f963419b5ddb7fc0"
+    }
+  ],
+  "assets": [
+    {
+      "path": "full-candidate/captured-late-glyph/10975.dds",
+      "sha256": "b028305db4e1233bbb6412a91e2ece434a3170c5f3a0f5460796c4791747d460"
+    },
+    {
+      "path": "full-candidate/captured-late-glyph/10975.dds.azmeta",
+      "sha256": "8f79eb53738b6a4fc35b51e2ff5a367920da5a8659923cf57e2f4a8bb3efc946"
+    },
+    {
+      "path": "full-candidate/captured-late-glyph/event-10975.gltf",
+      "sha256": "f5b59cae90fc54b01b5b20bba492441b44cf0dc856809028adf552abb57e665b"
+    },
+    {
+      "path": "full-candidate/captured-late-glyph/event-10975.gltf.azmeta",
+      "sha256": "17e845d93b07f5ab8bf957be045dac1f48dea533ebd11ed7e97da9aeef536542"
+    },
+    {
+      "path": "full-candidate/enclosure-late-glyph.azureproject",
+      "sha256": "9a47fb0464ea72c2fa74582304d84a4cc2057eb1934f3f58f2494a6772092385"
+    },
+    {
+      "path": "full-candidate/native-gi/enclosure-late-glyph.azurelevel",
+      "sha256": "0aa574865abdef6b88c26f97ccd4c5bdfd37c638b1397a446d815f6fd6d1365f"
+    }
+  ],
+  "limitations": [
+    "Fixed captured clock validates static source frame; authored animation timing remains pending.",
+    "Candidate resource order is a data diagnostic; general transparent draw ordering remains pending.",
+    "Spectral atmosphere, distant height fog, moving-view generation and per-sample MSAA edge fog remain open.",
+    "NR0 through NR12 full image, AA and sustained performance gates remain active."
+  ]
+}

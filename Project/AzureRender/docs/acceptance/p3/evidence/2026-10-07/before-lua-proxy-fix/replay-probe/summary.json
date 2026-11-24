@@ -1,0 +1,175 @@
+{
+  "status": "probe",
+  "actualSeconds": 90.18799999999464,
+  "realTime": true,
+  "exitCode": 0,
+  "frames": 39994,
+  "switches": 13,
+  "restarts": 14,
+  "commits": 27,
+  "validationErrors": 0,
+  "released": true,
+  "scriptErrors": [],
+  "presentationErrors": [],
+  "loadErrors": [],
+  "windowChecks": {
+    "minimized": true,
+    "restored": true,
+    "resized": true,
+    "finalExtent": [
+      1920,
+      1080
+    ]
+  },
+  "windowEvents": [
+    {
+      "seconds": 3.5,
+      "event": "minimize",
+      "passed": true
+    },
+    {
+      "seconds": 5.046999999998661,
+      "event": "restore",
+      "passed": true
+    },
+    {
+      "seconds": 7.546999999998661,
+      "event": "resize",
+      "extent": [
+        960,
+        540
+      ],
+      "passed": true
+    },
+    {
+      "seconds": 9.406999999999243,
+      "event": "resize",
+      "extent": [
+        1920,
+        1080
+      ],
+      "passed": true
+    }
+  ],
+  "gpu": {
+    "mean": 2.092655247039855,
+    "p95": 2.579072,
+    "p99": 2.65872
+  },
+  "cpu": {
+    "mean": 1.4977483886718599,
+    "p95": 1.9886149999973843,
+    "p99": 2.6441450000005546
+  },
+  "physics": {
+    "mean": 0.280242091152815,
+    "p95": 0.42342999999999875,
+    "p99": 1.6041519999999918
+  },
+  "gpuWindows": [
+    {
+      "endSeconds": 60.36000000000058,
+      "frames": 27004,
+      "mean": 2.025083444822989,
+      "p95": 2.5475152,
+      "p99": 2.65570816
+    },
+    {
+      "endSeconds": 90.18799999999464,
+      "frames": 12986,
+      "mean": 2.230008883412906,
+      "p95": 2.59804,
+      "p99": 2.6581007999999997
+    }
+  ],
+  "residencyGrowth": {
+    "buffers": 0.04081632653061229,
+    "images": 0.0,
+    "bufferBytes": 0.00011137658243098869,
+    "imageBytes": 0.0
+  },
+  "firstResidency": {
+    "bufferBytes": 7470152,
+    "buffers": 49,
+    "cachedCandidates": 2,
+    "commitMs": 0.9842,
+    "committed": false,
+    "frame": 13440,
+    "imageBytes": 124575232,
+    "images": 71,
+    "loadError": "",
+    "loading": false,
+    "physicsMaxMs": 0.0,
+    "requestGeneration": 11,
+    "revision": 11,
+    "waitMs": 0.6562000000003536,
+    "workMs": 1.6099999999996464
+  },
+  "lastResidency": {
+    "bufferBytes": 7470152,
+    "buffers": 49,
+    "cachedCandidates": 2,
+    "commitMs": 0.9305,
+    "committed": false,
+    "frame": 39840,
+    "imageBytes": 124575232,
+    "images": 71,
+    "loadError": "",
+    "loading": false,
+    "physicsMaxMs": 0.239,
+    "requestGeneration": 29,
+    "revision": 29,
+    "waitMs": 0.853899999998248,
+    "workMs": 1.8909000000017522
+  },
+  "workingSetGrowth": 0.029434399029729885,
+  "workingSetBaselineBytes": 332654592.0,
+  "workingSetFinalBytes": 342446080.0,
+  "peakWorkingSetBytes": 342712320,
+  "deviceLocalPeakBytes": 156499968,
+  "isolatedPath": "C:\\WINDOWS\\System32",
+  "packageManifestHash": "a32c3c044ef51b1a9c4a1754a30edcfba3bcc41e04134d9223f8e545422f7946",
+  "sourceHash": "e4c3c689235b0d4d0d8f10d75b9ce9239cf73c8440bfa8d9a2e0f545ce06464d",
+  "quality": {
+    "schemaVersion": 1,
+    "platform": "Windows x64",
+    "vulkanApi": "1.3",
+    "width": 1920,
+    "height": 1080,
+    "targetHz": 60,
+    "shadowMapSize": 2048,
+    "shadowCascades": 4,
+    "entities": 100,
+    "animatedCharacters": 4,
+    "fullGameUi": true,
+    "materialQuality": "full",
+    "privateCharacter": false,
+    "pointLights": 8
+  },
+  "cpuRetainedFrames": 8192,
+  "cpuSampleOffset": 31802,
+  "warmupSeconds": 30.0,
+  "warmupFrame": 13088,
+  "runtimeHash": "ea59c97b9ff69cda41ae33889aff5dd1c0df70b4f00c5b9135135ced5854d3ef",
+  "periodicSampleCount": 111,
+  "periodicCpu": {
+    "mean": 1.468054954954944,
+    "p95": 1.9031999999988591,
+    "p99": 2.045569999999999
+  },
+  "periodicPhysics": {
+    "mean": 0.03493513513513513,
+    "p95": 0.22060000000000002,
+    "p99": 0.39967000000000097
+  },
+  "commitExtra": {
+    "mean": 1.0409444444444444,
+    "p95": 1.19036,
+    "p99": 1.3010899999999999
+  },
+  "commitFrame": {
+    "mean": 5.17794074074074,
+    "p95": 6.53424,
+    "p99": 8.370297999999996
+  }
+}

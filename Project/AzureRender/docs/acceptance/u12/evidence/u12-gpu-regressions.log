@@ -1,0 +1,40 @@
+[OUTPUT]
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+[HANDLER_OUTPUT]
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+    Start  38: AzureEditor.GizmoGpu
+1/5 Test  #38: AzureEditor.GizmoGpu ...............   Passed   36.47 sec
+    Start 105: AzureEditor.WorkspaceGpu
+2/5 Test #105: AzureEditor.WorkspaceGpu ...........   Passed  131.90 sec
+    Start 145: AzureEditor.NativeInputGpu
+3/5 Test #145: AzureEditor.NativeInputGpu .........***Failed    4.52 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_input.py", line 191, in <module>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_input.py", line 191, in <listcomp>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_input.py", line 138, in run
+    assert sum(a*b for a,b in zip(direction,right))>0 and sum(a*b for a,b in zip(direction,up))>0
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+    Start 146: AzureEditor.UsabilityGpu
+4/5 Test #146: AzureEditor.UsabilityGpu ...........   Passed   31.02 sec
+    Start 173: AzureRender.ClusteredLightingGpu
+5/5 Test #173: AzureRender.ClusteredLightingGpu ...   Passed    5.28 sec
+
+80% tests passed, 1 tests failed out of 5
+
+Label Time Summary:
+gpu    = 209.19 sec*proc (5 tests)
+
+Total Test time (real) = 209.21 sec
+
+The following tests FAILED:
+	145 - AzureEditor.NativeInputGpu (Failed)
+[ERROR_MESSAGE]
+Errors while running CTest

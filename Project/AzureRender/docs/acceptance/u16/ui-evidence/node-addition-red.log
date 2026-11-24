@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_node_addition.py", line 49, in <module>
+    p.add_argument('--output',type=Path,required=True);a=p.parse_args();run(a.executable.resolve(),a.output.resolve())
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_node_addition.py", line 18, in run
+    disabled=launch(executable,case,'disabled',(1280,720),dpi,[
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workspace.py", line 36, in launch
+    assert data['uiErrors']==[],data['uiErrors']
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: [{'action': {'action': 'click', 'frame': 25, 'target': 'outliner.actions'}, 'error': "[json.exception.out_of_range.403] key 'outliner.actions' not found", 'frame': 25}, {'action': {'action': 'click', 'frame': 30, 'target': 'outliner.delete'}, 'error': "[json.exception.out_of_range.403] key 'outliner.delete' not found", 'frame': 30}, {'action': {'action': 'click', 'frame': 35, 'target': 'outliner.duplicate'}, 'error': "[json.exception.out_of_range.403] key 'outliner.duplicate' not found", 'frame': 35}]

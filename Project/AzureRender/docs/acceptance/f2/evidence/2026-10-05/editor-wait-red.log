@@ -1,0 +1,160 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 29: AzureEngine.EditorHost
+1/1 Test #29: AzureEngine.EditorHost ...........***Failed    3.37 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workflow.py", line 73, in <module>
+    main()
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workflow.py", line 54, in main
+    raise AssertionError(process.stdout + process.stderr)
+AssertionError: Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: enabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+Editor viewport render extent: 1280x720
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: C:\Users\23587\AppData\Local\Temp\azure_editor_okqxba80\game\assets\hero.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "MorphJointPulse", 0.250000 s loop)
+Scene renderer: character (sceneType=character)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: C:\Users\23587\AppData\Local\Temp\azure_editor_okqxba80\game\assets\hero.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "MorphJointPulse", 0.250000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+ECS visible renderables: 2
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: C:\Users\23587\AppData\Local\Temp\azure_editor_okqxba80\game\assets\hero.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "MorphJointPulse", 0.250000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: C:\Users\23587\AppData\Local\Temp\azure_editor_okqxba80\game\assets\hero.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "MorphJointPulse", 0.250000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: C:\Users\23587\AppData\Local\Temp\azure_editor_okqxba80\game\assets\hero.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "MorphJointPulse", 0.250000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Editor viewport resources rebuilt: 759x462
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: C:\Users\23587\AppData\Local\Temp\azure_editor_okqxba80\game\assets\hero.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "MorphJointPulse", 0.250000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: C:\Users\23587\AppData\Local\Temp\azure_editor_okqxba80\game\assets\hero.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "MorphJointPulse", 0.250000 s loop)
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+Allocator after unload: buffers=0 images=0
+[1791140181196][info][editor][code=0] Opened scene: courtyard
+[1791140181494][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791140181893][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791140181907][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791140181954][info][editor][code=0] Imported asset: test_model.gltf (48 vertices)
+[1791140181955][info][editor][code=0] Asset reload requested; changed files: 1
+[1791140181998][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791140182022][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791140182026][info][editor][code=0] Renderer resources reloaded
+[1791140182036][info][editor][code=0] Selected node: Placed Object
+[1791140182036][info][editor][code=0] Asset reload requested; changed files: 0
+[1791140182081][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791140182109][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791140182113][info][editor][code=0] Renderer resources reloaded
+[1791140182127][info][editor][code=0] Asset reload requested; changed files: 0
+[1791140182168][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791140182191][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791140182195][info][editor][code=0] Renderer resources reloaded
+[1791140182209][info][editor][code=0] Asset reload requested; changed files: 0
+[1791140182255][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791140182278][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791140182282][info][editor][code=0] Renderer resources reloaded
+[1791140182291][info][editor][code=0] Undo
+[1791140182292][info][editor][code=0] Asset reload requested; changed files: 0
+[1791140182333][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791140182355][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791140182358][info][editor][code=0] Renderer resources reloaded
+[1791140182389][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure_editor_okqxba80\game\assets\courtyard.azurelevel
+[1791140182437][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure_editor_okqxba80\game\assets\courtyard.azurelevel
+[1791140182450][info][editor][code=0] Reloaded scene: courtyard
+[1791140183654][info][editor][code=0] Play started
+[1791140183705][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791140183729][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791140183805][warning][script][code=0] assets:/player.lua: .../Local/Temp/azure_editor_okqxba80/game/assets/player.lua:1: workflow script fault
+stack traceback:
+	[C]: in function 'base.error'
+	.../Local/Temp/azure_editor_okqxba80/game/assets/player.lua:1: in function <.../Local/Temp/azure_editor_okqxba80/game/assets/player.lua:1>
+[1791140183934][info][editor][code=0] Play stopped; edit state restored
+[1791140184023][error][main][code=5] Editor automation failed: wait-level: Unknown editor action: wait-level
+
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+gpu    =   3.37 sec*proc (1 test)
+
+Total Test time (real) =   3.38 sec
+
+The following tests FAILED:
+	 29 - AzureEngine.EditorHost (Failed)
+Errors while running CTest

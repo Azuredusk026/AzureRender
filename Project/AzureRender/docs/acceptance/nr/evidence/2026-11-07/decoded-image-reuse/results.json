@@ -1,0 +1,233 @@
+{
+  "status": "isolated-production-restored",
+  "sourceBase": "e6c5b3e",
+  "currentInputsEqualAll1615AcceptedInputs": true,
+  "first": {
+    "status": "insufficient",
+    "requests": 1568,
+    "allDecodedBytesMipsAndMetadataEqual": true,
+    "disabledMs": 26799.278599999987,
+    "boundedMs": 19082.341500000006,
+    "reduction": 0.28795316527661996,
+    "boundedStatistics": {
+      "decodeMs": 14883.939200000004,
+      "hits": 736,
+      "misses": 832,
+      "peakRetainedBytes": 134203097,
+      "requests": 1568,
+      "retainedBytes": 119252583
+    },
+    "sourceAndProductsUnchanged": true,
+    "scope": "One same-binary CPU workload pair in recorded resource order; input read and signature hashing excluded from acquire timing; no frame benefit claim"
+  },
+  "corrected": {
+    "status": "insufficient",
+    "requests": 1568,
+    "allDecodedBytesMipsAndMetadataEqual": true,
+    "disabledMs": 90986.46590000005,
+    "boundedMs": 75262.52420000003,
+    "reduction": 0.17281627046907877,
+    "boundedStatistics": {
+      "decodeMs": 69370.0429,
+      "hits": 736,
+      "misses": 832,
+      "peakRetainedBytes": 134203097,
+      "requests": 1568,
+      "retainedBytes": 119252583
+    },
+    "sourceAndProductsUnchanged": true,
+    "scope": "One same-binary CPU workload pair in recorded resource order; input read and signature hashing excluded from acquire timing; no frame benefit claim"
+  },
+  "png": {
+    "status": "insufficient-local-benefit",
+    "images": 8,
+    "allBytesAndMetadataEqual": true,
+    "baselineMedianSumMs": 1239.9405,
+    "candidateMedianSumMs": 1033.9938,
+    "reduction": 0.16609401822103553,
+    "inputHashes": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\restored-images\\image-13.png": "b21b547f11ca1387b4297b8abda169441b0e2eca3d90e74a98c182e7881a4dc4",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\restored-images\\image-10.png": "526970f669436bbe79932dd56588ba21baaa47380013dbd4f06845306d082e0a",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\restored-images\\image-44.png": "47cf91b2ad160a139838ff985d12bbdb7fd1f8e86de96d1b995ebf3cd0d0a54c",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\restored-images\\image-43.png": "dc10d936a5f4e5ce2c329dd8229f4241f8d525ae89a6530b4ebdb974e81acc37",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\restored-images\\image-1.png": "f1df8a774ebffc91a4c945958753547691f6a26deb045cbcc3e3f32135c883e5",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\restored-images\\image-2.png": "868fc8ba103737fbebd7950e5c36bb581a39ccd317189da244fa1b709c3dc59e",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\restored-images\\image-22.png": "f92de330ab065af58d4e805b1571aa7b3702c5babd4009abe56bca22b675a4d4",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\restored-images\\image-36.png": "13175ff9a8ecd9beefc65ea04198ce89760354cce138b202ba4311d3a488b325"
+    },
+    "sourceAndInputsUnchanged": true,
+    "scope": "Eight native PNG inputs, three alternating pairs per image, existing libpng 1.6.58; no frame benefit claim"
+  },
+  "inventory": {
+    "status": "inventoried",
+    "seconds": 4.5310000000026776,
+    "resources": 374,
+    "requests": 1568,
+    "estimatedRequests": 1568,
+    "formats": {
+      "PNG": 1452,
+      "DDS": 116
+    },
+    "simulations": [
+      {
+        "budgetBytes": 0,
+        "hits": 0,
+        "retainedPeakBytes": 0,
+        "savedDecodedBytes": 0,
+        "missDecodedBytes": 7252178216,
+        "decodedWorkReduction": 0.0
+      },
+      {
+        "budgetBytes": 33554432,
+        "hits": 389,
+        "retainedPeakBytes": 33553079,
+        "savedDecodedBytes": 1456997804,
+        "missDecodedBytes": 5795180412,
+        "decodedWorkReduction": 0.20090485377007453
+      },
+      {
+        "budgetBytes": 67108864,
+        "hits": 577,
+        "retainedPeakBytes": 67107579,
+        "savedDecodedBytes": 2253918640,
+        "missDecodedBytes": 4998259576,
+        "decodedWorkReduction": 0.31079195420588657
+      },
+      {
+        "budgetBytes": 134217728,
+        "hits": 736,
+        "retainedPeakBytes": 134203047,
+        "savedDecodedBytes": 3026502744,
+        "missDecodedBytes": 4225675472,
+        "decodedWorkReduction": 0.41732327224430693
+      },
+      {
+        "budgetBytes": 268435456,
+        "hits": 872,
+        "retainedPeakBytes": 268427766,
+        "savedDecodedBytes": 3687283452,
+        "missDecodedBytes": 3564894764,
+        "decodedWorkReduction": 0.508438064010202
+      }
+    ],
+    "scope": "Read-only recorded resource order plus explicit material bindings; SHA256 equality approximates encoded-byte identity; decoded byte work is not elapsed decode time"
+  },
+  "candidateChecks": [
+    {
+      "configuration": "release",
+      "tests": 11,
+      "sha256": "55a71d390d0abc6de8710c8dae1bab3c955a694b291df9b83855916f21f9c78e"
+    },
+    {
+      "configuration": "debug",
+      "tests": 11,
+      "sha256": "f946250877503f93ea15de29c6691c31971beaf1c8dd30c263308bf4ca662763"
+    }
+  ],
+  "restorationChecks": [
+    {
+      "configuration": "release",
+      "tests": 9,
+      "sha256": "47bff1bfdb60c589b9c2be7a36d3f7439a07647a90f38d43bb93d074d0f43b96"
+    },
+    {
+      "configuration": "debug",
+      "tests": 9,
+      "sha256": "0ce31398914cfc386eb0ecc450d42027941ca3dde58c47fad231e60a57812390"
+    }
+  ],
+  "interpretation": "Neither local workload pair met the declared 30% threshold. Second decoder durations drifted; cause unverified. No cache or libpng prototype is enabled in production.",
+  "productionPlayers": {
+    "release": "4bf2a6aa91164bf2e1c7b71c56c2bc9db2135df65f5c746eed776e675314c7dd",
+    "debug": "99f2fd6bfe8f726cfc03da66a421425e24ad99d4f0cba67308412bab3e81ee57"
+  },
+  "archive": {
+    "path": "validation.zip",
+    "bytes": 419878,
+    "sha256": "e6575dbebd8154c7d77caefd2b2e355f18c5027f9396d65866530eca60a92e19",
+    "members": {
+      "cache/archive.py": "d6e9c8c02eca693149b73e063a0d8484d959377c8c3e5628846289c9edcbf667",
+      "cache/bounded-command.json": "51ab0d0489d5b3766b476157c7c01617b077299e52f71906d8c6f5d9cfd5649c",
+      "cache/bounded-driver.log": "989b61cb452976db3df1cb86041dfa43ccf03afea11f7f3af4bfdfd2939b982c",
+      "cache/bounded.json": "86ff1140d78bf5edbfa951a2ba53836a00bd546efe5d82b39ee5ffaa4a478fb5",
+      "cache/budget.json": "f8e52eb7ff95ca2210ed30ca88e1ca02fd1a9ee87e402e40be286e5c31490fb1",
+      "cache/check.py": "2946e20b08ac1da5931480541095b508af4d02065b93bcbc46b5def13c4b86f7",
+      "cache/checks.json": "d28f6f66f10f5925ae5f83a222570fb05cea647548b0facf8ea2f435f5dcda7b",
+      "cache/check_second.py": "64530bc6a0526ebdc496fb7fd8fc4b0a614fc2e43d9aae41652e8c1dc743bd34",
+      "cache/debug-build.log": "4880cde1d037669a91f95eae78449e0edc045f2386af3a2c587fafc062698dec",
+      "cache/debug-checks.log": "21deaf1d3348937220bd2295e759cf2c1545081234ce6ee125851a6630e8eb24",
+      "cache/debug-checks.xml": "126bf12975ccee1ae3beb24c6d193c16a828e6f89e632591e357fcefe5eab031",
+      "cache/debug-configure.log": "b29be9e6e396eec0dc1c2fcc6d813b07ffac2e96dc258ccedf7580ee31aebf12",
+      "cache/disabled-command.json": "8204848bde75e2639ac946ba48dad307f0d7df45088223673388102aa3ff1880",
+      "cache/disabled-driver.log": "989b61cb452976db3df1cb86041dfa43ccf03afea11f7f3af4bfdfd2939b982c",
+      "cache/disabled.json": "3d25a93a06cbc71b4e1476e6f336137775af00da234579eef682895020bfdde4",
+      "cache/first-bounded-driver.log": "989b61cb452976db3df1cb86041dfa43ccf03afea11f7f3af4bfdfd2939b982c",
+      "cache/first-bounded.json": "9ba6a94aaa9f3362bade1e909c7ca9cc65d45006cc081f3e2c20f73a78adc7d1",
+      "cache/first-disabled-driver.log": "989b61cb452976db3df1cb86041dfa43ccf03afea11f7f3af4bfdfd2939b982c",
+      "cache/first-disabled.json": "df0fbca6960b577185476cffd9242448914182c31bdcd6d4f47e89c6c5364547",
+      "cache/first-workload-product.json": "2e09919615b65eb8dcc1c612e19f6ed97b0dd2384e38d84e1eeb3f4365ffbaaf",
+      "cache/first-workload-result.json": "cb75c37df1db79588e4d82f7d583a60fbcf75a9ff51e95fe3aef805fbb2ec959",
+      "cache/inventory.py": "633108e85a1d00f000177c283373e399430b094d1f18037caa4be620a89036af",
+      "cache/isolation.json": "c74f19bf817034100137927e3888d3225fcae3c3e0bf535917ee879b6555e23f",
+      "cache/native-control.cpp": "e88c38b3c8e8323c06572b3800dace4aad1dfc538aeea80a53a85602825d5917",
+      "cache/native-targets.json": "49a95508f220a43dffddfa0349264ed95887ef9f321a8d813149e468b51db7fa",
+      "cache/prepare_native_control.py": "aeab759a4a24f301381db9a4d2bef9677060ced06ad8b3f9b873f77f7d5aa2f0",
+      "cache/release-build.log": "68eb806abbef99cf6d74d73a7adfd4497ce8f21a77aa3386d5baa3e273b5ffa9",
+      "cache/release-checks.log": "7aff46c86dbf3f608ece73ec47422a573fbe43c76283767debf3cf30d7289907",
+      "cache/release-checks.xml": "fa0ed697eab57d2d314fbc452335248551e4bcd7032d64f539d256230b0bf8b3",
+      "cache/release-configure.log": "3b8754b88ffdfd8b1177bf49d251ae5b7a89a081db6aa60c2cb17e17071b8515",
+      "cache/requests.json": "8c42f790f80a8d61845b704f49d1316c2a9f9027bc48ac66ff5622c76884605f",
+      "cache/restore-checks.json": "383d9fed8d32a26053f7b83d59afc96cbae151d1a20fedbf9e78a5bf1913b28b",
+      "cache/restore-debug-build.log": "d30a53beccf8c98d433a1a0d0a8e625c2c6dbee1f2b004ebbfb94e60e4a17be9",
+      "cache/restore-debug-checks.log": "b4c779f8a2e4698cbc2adbc858d413631a24bcec9f27abf13ffafffe825aa698",
+      "cache/restore-debug-checks.xml": "0ce31398914cfc386eb0ecc450d42027941ca3dde58c47fad231e60a57812390",
+      "cache/restore-debug-configure.log": "7895fc15d366cc00d44455cac05a7d9386e0f8d2d48597332af03535889c9211",
+      "cache/restore-release-build.log": "051e55baecb0be1ef4f1e2910fd833d2fd764a4c9331604953c929790322b3f3",
+      "cache/restore-release-checks.log": "5ffb1c788f0938e66064e96dbb9ea05a86c2cdb3cce44df2646f3114ab7c252e",
+      "cache/restore-release-checks.xml": "47bff1bfdb60c589b9c2be7a36d3f7439a07647a90f38d43bb93d074d0f43b96",
+      "cache/restore-release-configure.log": "b47488a1ac3a37681656f35a27ea50d953ab5a6b205fc109b8db2b08bf702038",
+      "cache/restore.py": "31da221791be02d94bb88e9549b88857aa806ff249475feb5f8f831e599fe226",
+      "cache/result.json": "6faf84ef9b094324e7cb7a5d05eac67e19a6b9264b9a67e76a9f757b89c6f863",
+      "cache/run_native_control.py": "54e128a9ed0dda8e5502e74fd52e3f33798f1bfa99265c83dc158f769e7e116b",
+      "cache/run_workload.py": "29479642e2c8623038e66cc3d2fa01e4cf871c85c7d2c6cd699f2a2fa010a60f",
+      "cache/second-debug-build.log": "76755ef3ffed9fb59e57cee84b9374fe2f6ec7b1150cf0151e64be6f5da82fff",
+      "cache/second-debug-checks.log": "770299168d796946275f6ab2a821e38dcf0578fa202f6e1265f01fd3e737b2f7",
+      "cache/second-debug-checks.xml": "f946250877503f93ea15de29c6691c31971beaf1c8dd30c263308bf4ca662763",
+      "cache/second-release-build.log": "dc486c9a8bce435cafa2b4211781da39c2ad6758277af64c172f012219e5deb6",
+      "cache/second-release-checks.log": "619b4174eb2466dbe36f0fd45949ca7d667cd0e3339dfc79c945fb0ed51e0ed5",
+      "cache/second-release-checks.xml": "55a71d390d0abc6de8710c8dae1bab3c955a694b291df9b83855916f21f9c78e",
+      "cache/source-hashes.json": "0bbefa09d825513dfc5ff2cc49995dcdd0a326a622237a9e0b51d15f6aad53b5",
+      "cache/workload-compile.log": "8ef5938098526159d1cdd9f63dab2e82fad8271b5ead0f062df21e6ede6d11c1",
+      "cache/workload-link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cache/workload-link.rsp": "564b354d433cad6b2c00a08a7626751f9b12f251a311c49b553e617dc21e318f",
+      "cache/workload-result.json": "875c6e44298a307fd180afddedfc44aa664db8efd7529713cf80dd594c3d45cf",
+      "cache/workload.cpp": "42b21ef40f58d758ac7d9692d417c5c504a41f094122bca3505b5c3f0eda9dce",
+      "cache/candidate-source/API.md": "a7be260629e76a10f389eaff0945c6beae745c6b9492f961a21280070cbfb456",
+      "cache/candidate-source/CMakeLists.txt": "c57947e1965e4f90d3df7e234973f4ae2f7ee8498ef6cf9da22fe9f0ff1e4c5a",
+      "cache/candidate-source/src/assets/AssetLoadCache.hpp": "cb5d20c25349963db19ffc2fe82e0e7665794784d32b9d86ea3b6b8249abae8f",
+      "cache/candidate-source/src/assets/GltfLoader.cpp": "fe45f93a93466bc1175b4cdef42ff2f292058397a8020436ee320b538c701206",
+      "cache/candidate-source/src/assets/MaterialData.cpp": "a0737cb75cab1619f04cbf8788aa4b23515777c797613b9906ca4f127ccc6248",
+      "cache/candidate-source/src/assets/image/ImageDecodeCache.cpp": "c5b128d8be46f8d1db20e065684d864d44475ab1940bf3fd7527cb5bd3666b14",
+      "cache/candidate-source/src/assets/image/ImageDecodeCache.hpp": "7b174aa523b3b37cddabf07d00d248cbd29a78dcf039df0bd2adadff7fa17bb6",
+      "cache/candidate-source/src/foundation/ByteContentBucket.hpp": "d345498dd871704472e034d48dbe07235398d8eb9ddfaaf24339b15c5c0168af",
+      "cache/candidate-source/src/render/SampledTextureCache.cpp": "2bfa04ca2c00117707156faeebded4e6452dc66e591f317406794fa49a97e6b9",
+      "cache/candidate-source/src/scenes/CharacterSceneRenderer.cpp": "26239efc05479ce10908a74a16e86bdc8408a45e5b07f35b3346bdd4a1ab6482",
+      "cache/candidate-source/tests/ImageDecodeCacheTests.cpp": "2b39eff8b1967c5d8932c1a85cc9c6d943b175f35ebb10934048b153539ef8ba",
+      "cache/first-source/ImageDecodeCache.cpp": "63ac67868bf0dfebe31177d45c79ba2bc7a5324c35453b9b1c5ea6bee05c3170",
+      "cache/first-source/SampledTextureCache.cpp": "8647786bb1cbbd6b3d4a393d34c7d56a062ca043d74066b95ae76aa2eca194bb",
+      "png-prototype/budget.json": "66df0542b88be4b587192bbada7b9722b6be9eb3ce4043c612a8df4df44b03e7",
+      "png-prototype/corpus.json": "94c7e708590cd19027be305c4082f25ebe08e6399e04a245188ec58c36ab2a7b",
+      "png-prototype/driver.log": "be9113fb33085975ca9af661b354874ed4aaf3a372ef29cd5b8193e6477438d1",
+      "png-prototype/link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "png-prototype/link.rsp": "9996f9908108c19bfb4618002f7038c38b5e9ee58eeeca5459c771bf08df9dcc",
+      "png-prototype/measure-compile.log": "33755f6ec8be2944edf1e6556e32b34f169b5c69313d2425aaaf1cc4119862d8",
+      "png-prototype/measure.cpp": "3ebf1f492648689004084b2d2ffd27e52cfee9638431965d3eb70baeed2cd409",
+      "png-prototype/measurements.json": "47c1a7c0a1d406454c8a0af2d7368b3f3376740dde13bb60a4d1345aa3792706",
+      "png-prototype/plan.md": "d398fa7b421330c069a8a8faacab5cf4a8621f62b18ae297284c1c2ebb5505b5",
+      "png-prototype/png-compile.log": "dbb911789a10dce131646e5c83fad3752acb27aa8f7e6ff337638c031ffb57d3",
+      "png-prototype/png.cpp": "5dc1827d52add755c47db1a37c90eaf58da038a5e08616d618263209469d7299",
+      "png-prototype/result.json": "6055f06a9c7c17cb0a4ef25d42c5a3e7c5cc17fa9b5b3977a524c59687ef8fd8",
+      "png-prototype/run.py": "2963a22c82295e2ebf3fe7f77fbe330ac5183ae0adb0658b471a22eca168f845"
+    }
+  }
+}

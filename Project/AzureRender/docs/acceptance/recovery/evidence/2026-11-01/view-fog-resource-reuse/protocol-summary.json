@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "configuration": "release",
+      "status": "passed",
+      "probeSha256": "e21694350a5a1bc4e305c9feb29ccd7ab92c0a422ce98e9c3a92a0bc06b2eef0"
+    },
+    {
+      "configuration": "debug",
+      "status": "passed",
+      "probeSha256": "db4a120285c8e9e1e538eb1beebafba7ef8cd67994ddcf9465bc776c8e7b6bdc"
+    }
+  ]
+}

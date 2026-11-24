@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 206, in <module>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 206, in <listcomp>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 115, in run
+    edit('preview.release', passed=False, handle=thumb['handle'])
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 76, in edit
+    result = call('edit', passed=passed, requestId='devtools-' + str(len(evidence)),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_devtools_host.py", line 72, in call
+    assert response['passed'] == passed, response
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'elapsedMs': 69.9969, 'passed': True, 'schemaVersion': 1, 'value': {'diff': [], 'value': True, 'version': {'contentHash': 'fnv1a64:faacd9b331343723', 'documentId': '17913033334878207-1', 'revision': 2}}}

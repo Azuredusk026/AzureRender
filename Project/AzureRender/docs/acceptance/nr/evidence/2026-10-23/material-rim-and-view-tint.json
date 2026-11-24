@@ -1,0 +1,979 @@
+{
+  "schemaVersion": 1,
+  "status": "material-response-and-tangent-contracts-verified-full-skin-appearance-pending",
+  "run": "build\\runs\\20261023-143654-character-visibility-and-skin-contributions-0bc2c9",
+  "baseCommit": "f7e77b5",
+  "layout": {
+    "lightVersion": 3,
+    "lightBytes": 144,
+    "materialVersion": 4,
+    "materialBytes": 192,
+    "materialTextures": 9
+  },
+  "cpu": [
+    {
+      "config": "release",
+      "tests": 11,
+      "gpuNumericProbes": 240,
+      "passed": true
+    },
+    {
+      "config": "debug",
+      "tests": 11,
+      "gpuNumericProbes": 240,
+      "passed": true
+    }
+  ],
+  "gpuSummaries": [
+    {
+      "suite": "rim",
+      "config": "release",
+      "captures": 25,
+      "maximumLinearError": 0.001100114663983881,
+      "path": "build\\runs\\20261023-143654-character-visibility-and-skin-contributions-0bc2c9\\rim-gpu-release-tangent\\summary.json",
+      "sha256": "00265d67b37adbe9bed194a6f632ed948e854ee1bdaf3414bb348ec3f7d8e79d"
+    },
+    {
+      "suite": "npr",
+      "config": "release",
+      "captures": 10,
+      "maximumLinearError": 0.001010887882328615,
+      "path": "build\\runs\\20261023-143654-character-visibility-and-skin-contributions-0bc2c9\\npr-gpu-release-tangent\\summary.json",
+      "sha256": "bce9434fd2ad69c5124bfc6e08ceca60eb93ca1dac2e350ea0ecb637984454bd"
+    },
+    {
+      "suite": "hair",
+      "config": "release",
+      "captures": 4,
+      "maximumLinearError": 0.0012530151755288377,
+      "path": "build\\runs\\20261023-143654-character-visibility-and-skin-contributions-0bc2c9\\hair-gpu-release-tangent\\summary.json",
+      "sha256": "1cb9c09bc7c8ffb179d9ed1349ed8299993d244973bfe96b0e9400807f62f4e4"
+    },
+    {
+      "suite": "rim",
+      "config": "debug",
+      "captures": 25,
+      "maximumLinearError": 0.001100114663983881,
+      "path": "build\\runs\\20261023-143654-character-visibility-and-skin-contributions-0bc2c9\\rim-gpu-debug-tangent\\summary.json",
+      "sha256": "1f415b217df6c39023e75311cf8200518fe4f38f8f9cf17e59ba09de25220361"
+    },
+    {
+      "suite": "npr",
+      "config": "debug",
+      "captures": 10,
+      "maximumLinearError": 0.001010887882328615,
+      "path": "build\\runs\\20261023-143654-character-visibility-and-skin-contributions-0bc2c9\\npr-gpu-debug-tangent\\summary.json",
+      "sha256": "5b833456b6f54ea49552c459d264a4648e61d1ff2420da147f51350c0e4aca7e"
+    },
+    {
+      "suite": "hair",
+      "config": "debug",
+      "captures": 4,
+      "maximumLinearError": 0.0012530151755288377,
+      "path": "build\\runs\\20261023-143654-character-visibility-and-skin-contributions-0bc2c9\\hair-gpu-debug-tangent\\summary.json",
+      "sha256": "4807801ad6e46e8c99ab9d76dc42c7f6a3d60255b9ec8d1926d350937ee3ad33"
+    }
+  ],
+  "actualCaptures": [
+    {
+      "name": "baseline",
+      "config": "release",
+      "passed": true,
+      "playerSha256": "eccb2ec96eb528eac8fab9b5931addae586b2f767f65f988998cb714322b3e67",
+      "imageSha256": "e9db2b17008b16a90d6853b79da84af69208ae51e0f6b7991fe6864481920a47",
+      "textureCache": {
+        "requests": 122,
+        "hits": 77,
+        "uniqueTextures": 45,
+        "requestedBytes": 449861588,
+        "residentBytes": 304190700,
+        "retainedPixelBytes": 246516260,
+        "hashedPixelBytes": 355836312,
+        "copiedPixelBytes": 0,
+        "transferredPixelBytes": 246516260,
+        "discardedPixelBytes": 109320052,
+        "hashMs": 384.267,
+        "matchMs": 13.7649,
+        "mipMs": 963.389,
+        "uploadMs": 320.201
+      },
+      "maximumByteDifference": 0
+    },
+    {
+      "name": "material-rim-depth",
+      "config": "release",
+      "passed": true,
+      "playerSha256": "eccb2ec96eb528eac8fab9b5931addae586b2f767f65f988998cb714322b3e67",
+      "imageSha256": "e9db2b17008b16a90d6853b79da84af69208ae51e0f6b7991fe6864481920a47",
+      "textureCache": {
+        "requests": 122,
+        "hits": 77,
+        "uniqueTextures": 45,
+        "requestedBytes": 449861588,
+        "residentBytes": 304190700,
+        "retainedPixelBytes": 246516260,
+        "hashedPixelBytes": 355836312,
+        "copiedPixelBytes": 0,
+        "transferredPixelBytes": 246516260,
+        "discardedPixelBytes": 109320052,
+        "hashMs": 380.957,
+        "matchMs": 14.182,
+        "mipMs": 994.286,
+        "uploadMs": 333.508
+      },
+      "maximumByteDifference": 0
+    },
+    {
+      "name": "body-facing",
+      "config": "release",
+      "passed": true,
+      "playerSha256": "eccb2ec96eb528eac8fab9b5931addae586b2f767f65f988998cb714322b3e67",
+      "imageSha256": "e8f1ca7de7134f38fbbfded8b3666dc91eb3402755f54fbf43e8bbd7d02e1298",
+      "textureCache": {
+        "requests": 122,
+        "hits": 77,
+        "uniqueTextures": 45,
+        "requestedBytes": 449861588,
+        "residentBytes": 304190700,
+        "retainedPixelBytes": 246516260,
+        "hashedPixelBytes": 355836312,
+        "copiedPixelBytes": 0,
+        "transferredPixelBytes": 246516260,
+        "discardedPixelBytes": 109320052,
+        "hashMs": 394.295,
+        "matchMs": 14.4737,
+        "mipMs": 992.026,
+        "uploadMs": 319.723
+      }
+    },
+    {
+      "name": "body-facing-tint",
+      "config": "release",
+      "passed": true,
+      "playerSha256": "eccb2ec96eb528eac8fab9b5931addae586b2f767f65f988998cb714322b3e67",
+      "imageSha256": "832c4b88a1cb738960d3864fe1e4ab0e2f6dfb70c3ebed3b56244966ff5ecb83",
+      "textureCache": {
+        "requests": 122,
+        "hits": 77,
+        "uniqueTextures": 45,
+        "requestedBytes": 449861588,
+        "residentBytes": 304190700,
+        "retainedPixelBytes": 246516260,
+        "hashedPixelBytes": 355836312,
+        "copiedPixelBytes": 0,
+        "transferredPixelBytes": 246516260,
+        "discardedPixelBytes": 109320052,
+        "hashMs": 392.237,
+        "matchMs": 14.0731,
+        "mipMs": 965.927,
+        "uploadMs": 328.844
+      }
+    },
+    {
+      "name": "fixed",
+      "config": "debug",
+      "passed": true,
+      "playerSha256": "6cdf60d5af34749bdc714d170e6fe9fbd6704ec7c70f009ab85c61b0482cf4b5",
+      "imageSha256": "832c4b88a1cb738960d3864fe1e4ab0e2f6dfb70c3ebed3b56244966ff5ecb83",
+      "textureCache": {
+        "requests": 122,
+        "hits": 77,
+        "uniqueTextures": 45,
+        "requestedBytes": 449861588,
+        "residentBytes": 304190700,
+        "retainedPixelBytes": 246516260,
+        "hashedPixelBytes": 355836312,
+        "copiedPixelBytes": 0,
+        "transferredPixelBytes": 246516260,
+        "discardedPixelBytes": 109320052,
+        "hashMs": 426.785,
+        "matchMs": 21.5782,
+        "mipMs": 3071.4,
+        "uploadMs": 225.484
+      },
+      "maximumByteDifference": 0
+    },
+    {
+      "name": "main",
+      "config": "release",
+      "passed": true,
+      "playerSha256": "eccb2ec96eb528eac8fab9b5931addae586b2f767f65f988998cb714322b3e67",
+      "imageSha256": "c226beac7b389f90447785ea4c1d3ccf45fc052a5e3bc40210462d7d88841919",
+      "textureCache": {
+        "requests": 6394,
+        "hits": 5984,
+        "uniqueTextures": 410,
+        "requestedBytes": 9374021700,
+        "residentBytes": 2383166896,
+        "retainedPixelBytes": 1788622036,
+        "hashedPixelBytes": 7031835932,
+        "copiedPixelBytes": 0,
+        "transferredPixelBytes": 1788622036,
+        "discardedPixelBytes": 5243213896,
+        "hashMs": 7418.18,
+        "matchMs": 886.506,
+        "mipMs": 10589.8,
+        "uploadMs": 2513.53
+      },
+      "maximumByteDifference": 0
+    }
+  ],
+  "nativeRim": [
+    {
+      "pixel": [
+        1251,
+        919
+      ],
+      "sourceIndex": 5,
+      "width": 0.30000001192092896,
+      "tint": 0.1940000057220459,
+      "normal": [
+        -0.9425703883171082,
+        0.05772292613983154,
+        0.32898181676864624
+      ],
+      "view": [
+        -0.012541759759187698,
+        0.07438427209854126,
+        0.9971507787704468
+      ],
+      "light": [
+        -0.9363647103309631,
+        -0.30933165550231934,
+        0.1659364551305771
+      ],
+      "cameraAxis": [
+        5.376566414305728e-10,
+        -0.012610917910933495,
+        0.9999203681945801
+      ],
+      "base": [
+        0.4296633104483287,
+        0.23663553098837536,
+        0.18798867240548134
+      ],
+      "radial": [
+        -0.18086642026901245,
+        0.0014527423772960901,
+        -0.9835065603256226
+      ],
+      "nativeRadialVisibility": 1.0,
+      "attenuation": 0.1345396637916565,
+      "radiance": [
+        4.246540069580078,
+        5.253490447998047,
+        6.0
+      ],
+      "band": 0.12805151568213463,
+      "nativeEdge": 0.6558403968811035,
+      "nativeBand": 0.12805176078692151,
+      "facing": 0.8763122475936886,
+      "oppositeFacing": 0,
+      "nativeFacing": 0.876312255859375,
+      "nativePlanar": [
+        0.9501665830612183,
+        0.3117179572582245,
+        0.003931362181901932
+      ],
+      "projectedPlanar": [
+        -0.9501665491161679,
+        -0.3117179392258089,
+        -0.0039313236305157425
+      ],
+      "predictedContribution": [
+        0.03096668579219358,
+        0.03545833911860414,
+        0.0396762135519424
+      ],
+      "nativeContribution": [
+        0.0309667456895113,
+        0.035458412021398544,
+        0.03967629000544548
+      ],
+      "maximumError": 7.645350307700083e-08
+    },
+    {
+      "pixel": [
+        1368,
+        380
+      ],
+      "sourceIndex": 1,
+      "width": 0.36800000071525574,
+      "tint": 0.1940000057220459,
+      "normal": [
+        -0.8271552324295044,
+        0.20668473839759827,
+        0.5225856900215149
+      ],
+      "view": [
+        0.03819742426276207,
+        -0.15947219729423523,
+        0.9864632487297058
+      ],
+      "light": [
+        -0.9452667236328125,
+        -0.1140781119465828,
+        0.30570730566978455
+      ],
+      "cameraAxis": [
+        5.376566414305728e-10,
+        -0.012610917910933495,
+        0.9999203681945801
+      ],
+      "base": [
+        0.4862147383391857,
+        0.3430928414066633,
+        0.2961177999774615
+      ],
+      "radial": [
+        -0.9698598980903625,
+        0.00034222297836095095,
+        0.2436627596616745
+      ],
+      "nativeRadialVisibility": 1.0,
+      "attenuation": 0.09432122856378555,
+      "radiance": [
+        5.662053108215332,
+        7.0046539306640625,
+        8.0
+      ],
+      "band": 0.0,
+      "nativeEdge": 0.549044132232666,
+      "nativeBand": 0.0,
+      "facing": 0.7968919040414937,
+      "oppositeFacing": 0,
+      "nativeFacing": 0.7968918085098267,
+      "nativePlanar": [
+        0.9932712316513062,
+        0.11580169200897217,
+        0.001460481435060501
+      ],
+      "projectedPlanar": [
+        -0.9932712795878652,
+        -0.11580169406874316,
+        -0.0014604097692187403
+      ],
+      "predictedContribution": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "nativeContribution": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "maximumError": 0.0
+    },
+    {
+      "pixel": [
+        1368,
+        380
+      ],
+      "sourceIndex": 3,
+      "width": 0.4000000059604645,
+      "tint": 0.800000011920929,
+      "normal": [
+        -0.8271552324295044,
+        0.20668473839759827,
+        0.5225856900215149
+      ],
+      "view": [
+        0.03819742426276207,
+        -0.15947219729423523,
+        0.9864632487297058
+      ],
+      "light": [
+        -0.62410569190979,
+        0.7220691442489624,
+        0.2985100746154785
+      ],
+      "cameraAxis": [
+        5.376566414305728e-10,
+        -0.012610917910933495,
+        0.9999203681945801
+      ],
+      "base": [
+        0.4862147383391857,
+        0.3430928414066633,
+        0.2961177999774615
+      ],
+      "radial": [
+        -0.9698598980903625,
+        0.00034222297836095095,
+        0.2436627596616745
+      ],
+      "nativeRadialVisibility": 1.0,
+      "attenuation": 0.23321545124053955,
+      "radiance": [
+        16.1299991607666,
+        12.178779602050781,
+        9.52668285369873
+      ],
+      "band": 0.0,
+      "nativeEdge": 0.549044132232666,
+      "nativeBand": 0.0,
+      "facing": 0.7010033211125483,
+      "oppositeFacing": 0,
+      "nativeFacing": 0.70100337266922,
+      "nativePlanar": [
+        0.6520021557807922,
+        -0.7581568956375122,
+        -0.009561816230416298
+      ],
+      "projectedPlanar": [
+        -0.6520021249502448,
+        0.7581568435760249,
+        0.009561882618202915
+      ],
+      "predictedContribution": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "nativeContribution": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "maximumError": 0.0
+    }
+  ],
+  "nativeBodyContributions": [
+    {
+      "pixel": [
+        1251,
+        919
+      ],
+      "mainDiffuse": [
+        0.3591968676438313,
+        0.14955393444882326,
+        0.10203077770825075
+      ],
+      "mainSpecular": [
+        0.001356832217425108,
+        0.0013033917639404535,
+        0.0012776035582646728
+      ],
+      "beforeLocal": [
+        0.36055371165275574,
+        0.1508573293685913,
+        0.10330837965011597
+      ],
+      "afterLocal": [
+        0.3650357127189636,
+        0.17765745520591736,
+        0.13960938155651093
+      ],
+      "locals": [
+        {
+          "sourceIndex": 5,
+          "specular": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "combined": [
+            0.0309667456895113,
+            0.035458412021398544,
+            0.03967629000544548
+          ]
+        }
+      ]
+    },
+    {
+      "pixel": [
+        1368,
+        380
+      ],
+      "mainDiffuse": [
+        0.8290048199279063,
+        0.5190916407979351,
+        0.41371794051425326
+      ],
+      "mainSpecular": [
+        0.0045282915234565735,
+        0.004222051240503788,
+        0.003985524643212557
+      ],
+      "beforeLocal": [
+        0.8335331082344055,
+        0.5233137011528015,
+        0.4177034795284271
+      ],
+      "afterLocal": [
+        1.1466652154922485,
+        0.6806761026382446,
+        0.515252947807312
+      ],
+      "locals": [
+        {
+          "sourceIndex": 0,
+          "specular": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "combined": [
+            0.06542560458183289,
+            0.039776094257831573,
+            0.029210980981588364
+          ]
+        },
+        {
+          "sourceIndex": 1,
+          "specular": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "combined": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "sourceIndex": 3,
+          "specular": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "combined": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "sourceIndex": 6,
+          "specular": [
+            0.0023714390117675066,
+            0.0017362115904688835,
+            0.0012496093986555934
+          ],
+          "combined": [
+            0.2978796362876892,
+            0.14703369140625,
+            0.08954297751188278
+          ]
+        }
+      ]
+    }
+  ],
+  "candidateInputs": {
+    "schemaVersion": 1,
+    "sourceModelSha256": "e4dc9ca40b0b60c0349f9af7a97f6da82471fb7a3c439274a9172a97e36e9725",
+    "rimResponses": {
+      "captured-local-1": {
+        "schemaVersion": 5,
+        "composition": "material-rim",
+        "width": 0.36800000071525574,
+        "surfaceTint": 0.1940000057220459
+      },
+      "captured-local-3": {
+        "schemaVersion": 5,
+        "composition": "material-rim",
+        "width": 0.4000000059604645,
+        "surfaceTint": 0.800000011920929
+      },
+      "captured-local-5": {
+        "schemaVersion": 5,
+        "composition": "material-rim",
+        "width": 0.30000001192092896,
+        "surfaceTint": 0.1940000057220459
+      }
+    },
+    "bodyViewTint": {
+      "schemaVersion": 1,
+      "scale": 0.5949999898672104,
+      "color": [
+        0.3813261091709137,
+        0.1247718408703804,
+        0.1384316235780716
+      ]
+    },
+    "sourceRows": {
+      "scale": [
+        12,
+        0
+      ],
+      "color": 13,
+      "slope": 0.85
+    },
+    "stages": [
+      "baseline",
+      "material-rim-depth",
+      "body-facing",
+      "body-facing-tint"
+    ]
+  },
+  "pixelObservations": [
+    {
+      "stage": "baseline",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "expected": [
+            85,
+            59,
+            52
+          ],
+          "measured": [
+            81,
+            57,
+            51
+          ],
+          "maximumByteError": 4
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "expected": [
+            146,
+            115,
+            101
+          ],
+          "measured": [
+            212,
+            176,
+            157
+          ],
+          "maximumByteError": 66
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "expected": [
+            157,
+            130,
+            115
+          ],
+          "measured": [
+            156,
+            131,
+            118
+          ],
+          "maximumByteError": 3
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "expected": [
+            161,
+            136,
+            122
+          ],
+          "measured": [
+            161,
+            138,
+            125
+          ],
+          "maximumByteError": 3
+        }
+      ]
+    },
+    {
+      "stage": "material-rim-depth",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "expected": [
+            85,
+            59,
+            52
+          ],
+          "measured": [
+            81,
+            57,
+            51
+          ],
+          "maximumByteError": 4
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "expected": [
+            146,
+            115,
+            101
+          ],
+          "measured": [
+            212,
+            176,
+            157
+          ],
+          "maximumByteError": 66
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "expected": [
+            157,
+            130,
+            115
+          ],
+          "measured": [
+            156,
+            131,
+            118
+          ],
+          "maximumByteError": 3
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "expected": [
+            161,
+            136,
+            122
+          ],
+          "measured": [
+            161,
+            138,
+            125
+          ],
+          "maximumByteError": 3
+        }
+      ]
+    },
+    {
+      "stage": "body-facing",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "expected": [
+            85,
+            59,
+            52
+          ],
+          "measured": [
+            81,
+            57,
+            52
+          ],
+          "maximumByteError": 4
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "expected": [
+            146,
+            115,
+            101
+          ],
+          "measured": [
+            135,
+            108,
+            93
+          ],
+          "maximumByteError": 11
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "expected": [
+            157,
+            130,
+            115
+          ],
+          "measured": [
+            156,
+            131,
+            118
+          ],
+          "maximumByteError": 3
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "expected": [
+            161,
+            136,
+            122
+          ],
+          "measured": [
+            161,
+            138,
+            125
+          ],
+          "maximumByteError": 3
+        }
+      ]
+    },
+    {
+      "stage": "body-facing-tint",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "expected": [
+            85,
+            59,
+            52
+          ],
+          "measured": [
+            81,
+            57,
+            52
+          ],
+          "maximumByteError": 4
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "expected": [
+            146,
+            115,
+            101
+          ],
+          "measured": [
+            126,
+            97,
+            84
+          ],
+          "maximumByteError": 20
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "expected": [
+            157,
+            130,
+            115
+          ],
+          "measured": [
+            156,
+            131,
+            118
+          ],
+          "maximumByteError": 3
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "expected": [
+            161,
+            136,
+            122
+          ],
+          "measured": [
+            161,
+            138,
+            125
+          ],
+          "maximumByteError": 3
+        }
+      ]
+    }
+  ],
+  "pixelBudget": 1,
+  "fullAppearanceGatePassed": false,
+  "tangentRecovery": {
+    "beforeShadedNormal": [
+      0,
+      0,
+      0
+    ],
+    "afterShadedNormal": [
+      255,
+      188,
+      188
+    ],
+    "unchangedNormal": [
+      1,
+      0,
+      0
+    ],
+    "unchangedLinearBudget": 0.008,
+    "retest": {
+      "schemaVersion": 1,
+      "status": "passed",
+      "playerSha256": "eccb2ec96eb528eac8fab9b5931addae586b2f767f65f988998cb714322b3e67",
+      "linearErrorBudget": 0.008,
+      "captures": [
+        {
+          "name": "material-colors-view-tint",
+          "maximumLinearError": 0.0006989203938886288,
+          "validationEnabled": false,
+          "imageSha256": "887a6d2d089c99907c5ab8546637920b11d637c4333bfc61ba310500f5143d31",
+          "measured": [
+            0.05448027644244237,
+            0.03688945040110004,
+            0.03189603307301153
+          ],
+          "expected": [
+            0.05378135604855374,
+            0.036718354483061065,
+            0.03151101473462132
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        }
+      ]
+    }
+  },
+  "legacyDiagnosis": {
+    "path": "build\\runs\\20261023-143654-character-visibility-and-skin-contributions-0bc2c9\\contributions.json",
+    "sha256": "36200dad7868f2fb09787df8f2640e10507f1f386524c470a6e1871a66eeeb03",
+    "captureCommit": "f7e77b5",
+    "scope": "Equivalent baseline pixels; component isolations retain their documented display multipliers"
+  },
+  "remaining": [
+    "body executed vertices and actual local-light distance",
+    "per-material default-light wrap and color consumption",
+    "independent character visibility versus scene visibility",
+    "source dielectric specular and full skin image gates",
+    "NR8-V2 production promotion and dynamics"
+  ],
+  "sourceHashes": {
+    "src/assets/GltfLoader.cpp": "06b578ed5de4654549ef06e57a1f20b56220bc6030a23bcbb398dcdaf70af07e",
+    "src/assets/GltfLoader.hpp": "4c5d0c1eb04ece082e8aa0bf4244169d9233dbaf06446869bad2cf36392c5ba4",
+    "src/assets/MaterialSurfaceProfile.hpp": "1fbc952b3aed513046056acf1f427ff752ab86f48b0f39d0fd3fb10c8efcc522",
+    "src/ecs/LightShape.hpp": "e25f4b148b937954e80d733d54c00de8963cb0984c88e6e0dc105a754a35705f",
+    "src/render/LightShapeJson.hpp": "7654bdc465b8636b88e31fb4f55dec4cf8d43c6eb5217856c76f0786ab074f78",
+    "src/render/LightBuffer.hpp": "b5c673ac296995eacd39cc903ee617ee3f69e8e1853b9b6a2875523ff602b8b5",
+    "shaders/character_diffuse.glsl": "4e8fd592d22b4e56a2e0350099cfec97f8ab66ec18c8061260a322cab01833f1",
+    "shaders/light_attenuation.glsl": "a6147888da62c966ac98dac049fd7098ae9246350226a54ad0760f6f88e8797b",
+    "shaders/mesh.frag": "456b598dacc38f78ebfed2e29746c0e819bc2322621e4d3b34001d13f0b1036d",
+    "shaders/surface_response_test.comp": "cbac379c8bfc1a0941afa5e92eca72f39d1ed661685c7586e0d78abff36435ad"
+  }
+}

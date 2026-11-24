@@ -1,0 +1,68 @@
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+Ewarning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.
+======================================================================
+ERROR: test_exact_mixed_line_ending_recipe_preserves_historical_hash (__main__.CoverageTests.test_exact_mixed_line_ending_recipe_preserves_historical_hash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\p3\test_evolution_coverage.py", line 88, in test_exact_mixed_line_ending_recipe_preserves_historical_hash
+    self.mixed_fixture();self.assertEqual(self.check()['coveredItems'],18)
+                                          ^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\p3\test_evolution_coverage.py", line 43, in check
+    def check(self):return verify(self.source,self.manifest,self.discovery)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\p3\verify_evolution_coverage.py", line 80, in verify
+    phase=phase_evidence(phase_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\p3\verify_evolution_coverage.py", line 67, in phase_evidence
+    require(matches_source(data,expected,name),'Historical implementation hash mismatch: '+name)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\p3\verify_evolution_coverage.py", line 13, in require
+    if not condition:raise ValueError(message)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Historical implementation hash mismatch: Project/Engine/src/Contract.hpp
+
+----------------------------------------------------------------------
+Ran 13 tests in 8.711s
+
+FAILED (errors=1)

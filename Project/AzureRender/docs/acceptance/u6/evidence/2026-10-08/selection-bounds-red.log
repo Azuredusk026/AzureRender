@@ -1,0 +1,22 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 125: AzureEditor.SelectionBounds
+1/5 Test #125: AzureEditor.SelectionBounds ......***Failed    0.04 sec
+Invalid asset bounds must remain unavailable
+
+    Start 126: AzureEditor.TransformEditing
+2/5 Test #126: AzureEditor.TransformEditing .....   Passed    0.03 sec
+    Start 127: AzureRender.AssetDeformation
+3/5 Test #127: AzureRender.AssetDeformation .....   Passed    0.03 sec
+    Start 128: AzureEditor.GizmoController
+4/5 Test #128: AzureEditor.GizmoController ......   Passed    0.04 sec
+    Start 129: AzureEditor.SelectionService
+5/5 Test #129: AzureEditor.SelectionService .....   Passed    0.04 sec
+
+80% tests passed, 1 tests failed out of 5
+
+Total Test time (real) =   0.20 sec
+
+The following tests FAILED:
+	125 - AzureEditor.SelectionBounds (Failed)
+Errors while running CTest

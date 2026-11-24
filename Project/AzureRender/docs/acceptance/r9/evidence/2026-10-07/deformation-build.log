@@ -1,0 +1,10 @@
+[0/2] Re-checking globbed directories...
+[1/10] Building CXX object CMakeFiles\AzureViewBatchingTests.dir\tests\ViewBatchingTests.cpp.obj
+[2/10] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\BuiltinRendererCatalog.cpp.obj
+[3/10] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\tests\NullRhiPassTests.cpp.obj
+[4/10] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[5/10] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[6/10] Linking CXX static library AzureRenderCore.lib
+[7/10] Linking CXX executable AzureRenderNullRhiPassTests.exe
+[8/10] Linking CXX executable AzureSkinningBatchTests.exe
+[9/10] Linking CXX executable AzureViewBatchingTests.exe

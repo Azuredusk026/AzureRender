@@ -1,0 +1,28 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  1: AzureEngine.SystemComposition
+1/8 Test  #1: AzureEngine.SystemComposition ....***Failed    0.10 sec
+Deferred scene change must notify systems before stepping the new world
+
+    Start 15: AzureEngine.ScriptRuntime
+2/8 Test #15: AzureEngine.ScriptRuntime ........   Passed    0.73 sec
+    Start 16: AzureEngine.ThirdPerson
+3/8 Test #16: AzureEngine.ThirdPerson ..........   Passed    0.27 sec
+    Start 17: AzureEngine.Locomotion
+4/8 Test #17: AzureEngine.Locomotion ...........   Passed    0.23 sec
+    Start 18: AzureEngine.Interaction
+5/8 Test #18: AzureEngine.Interaction ..........   Passed    0.11 sec
+    Start 19: AzureEngine.ScriptEntities
+6/8 Test #19: AzureEngine.ScriptEntities .......   Passed    0.12 sec
+    Start 20: AzureEngine.PlayableQuest
+7/8 Test #20: AzureEngine.PlayableQuest ........   Passed    0.31 sec
+    Start 23: AzureEngine.PhysicsInput
+8/8 Test #23: AzureEngine.PhysicsInput .........   Passed    0.15 sec
+
+88% tests passed, 1 tests failed out of 8
+
+Total Test time (real) =   2.03 sec
+
+The following tests FAILED:
+	  1 - AzureEngine.SystemComposition (Failed)
+Errors while running CTest

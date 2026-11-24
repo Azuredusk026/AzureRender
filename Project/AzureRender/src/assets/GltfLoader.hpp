@@ -1,10 +1,25 @@
 #pragma once
 
+#include "assets/TextureImportSettings.hpp"
+#include "assets/UnlitTextureLayers.hpp"
+#include "assets/MorphTargetData.hpp"
+#include "assets/MaterialRadiance.hpp"
+#include "assets/MaterialDisplayTransform.hpp"
+#include "assets/MaterialLighting.hpp"
+#include "assets/MaterialCoverage.hpp"
+#include "animation/AnimationCurve.hpp"
+#include "animation/AnimationClipSample.hpp"
+#include "assets/image/ImageCodec.hpp"
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <limits>
+#include <memory>
+#include <optional>
 #include <string>
 #include <vector>
+
+namespace azurerender {class ImmutableBytes;}
 
 struct AssetVertex {
     std::array<float, 3> position{};
@@ -15,6 +30,7 @@ struct AssetVertex {
     std::array<float, 4> weights{1.0F, 0.0F, 0.0F, 0.0F};
     std::array<float, 3> morph0{};
     std::array<float, 3> morph1{};
+    float browMask = 0.0F;
 };
 
 enum class AssetAlphaMode : std::uint32_t {
@@ -44,6 +60,29 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureOverlay = 1U << 4U,
     MaterialFeatureNeutralFallback = 1U << 5U,
     MaterialFeatureBrowOverlay = 1U << 6U,
+    MaterialFeatureSurfaceAo = 1U << 7U,
+    MaterialFeatureSceneTint = 1U << 8U,
+    MaterialFeatureHairRamp = 1U << 9U,
+    MaterialFeatureSceneRefraction = 1U << 10U,
+    MaterialFeatureDualFaceSdf = 1U << 11U,
+    MaterialFeatureShadowColorLut = 1U << 12U,
+    MaterialFeatureDiffuseRamp = 1U << 13U,
+    MaterialFeatureSilhouetteOutline = 1U << 14U,
+    MaterialFeatureMultiplyComposite = 1U << 15U,
+    MaterialFeatureHairProjectedRamp = 1U << 16U,
+    MaterialFeatureEyeRadialSurface = 1U << 17U,
+    MaterialFeatureUnlitSurface = 1U << 18U,
+    MaterialFeatureNprDiffuse = 1U << 19U,
+    MaterialFeatureExplicitHairFrame = 1U << 20U,
+    MaterialFeatureGeometryShadow = 1U << 21U,
+    MaterialFeatureSqrtAlphaShadow = 1U << 22U,
+    MaterialFeatureHairPixelIntegral = 1U << 23U,
+    MaterialFeatureUnlitTextureLayers = 1U << 24U,
+    MaterialFeatureIndependentCoverage = 1U << 25U,
+    MaterialFeatureR11G11B10Output = 1U << 26U,
+    MaterialFeatureMirroredCoarseUv = 1U << 27U,
+    MaterialFeatureEllipseMajorCoverage = 1U << 28U,
+    MaterialFeatureShadowCoverageMask = MaterialFeatureGeometryShadow|MaterialFeatureSqrtAlphaShadow,
 };
 
 enum class AssetFaceSdfChannel : std::uint32_t {
@@ -57,6 +96,8 @@ struct AssetFaceSdfProfile {
     static constexpr std::uint32_t kSchemaVersion = 1;
 
     bool present = false;
+    std::uint32_t schemaVersion = kSchemaVersion;
+    std::array<float,9> headBasis{1,0,0,0,1,0,0,0,1};
     std::vector<std::uint8_t> pixels;
     std::uint32_t width = 0;
     std::uint32_t height = 0;
@@ -68,12 +109,51 @@ struct AssetFaceSdfProfile {
     std::string headNodeName;
 };
 
+struct AssetMaterialFrame {
+    bool present=false;
+    std::uint32_t node=0;
+    std::string nodeName;
+    std::array<float,9> basis{1,0,0,0,1,0,0,0,1};
+};
+
 struct AssetMaterial {
+    enum class PixelKind : std::size_t {
+        BaseColor,Normal,MetallicRoughness,SpecularEmissive,StyleMask,Matcap,HairData,
+        FaceSdf,ShadowColorLut,ProjectedParameters,ProjectedLine,OutlineMask,Transmission,Count
+    };
+    struct BlendDepth {
+        enum class Compare : std::uint8_t { Less,LessOrEqual };
+        bool present=false,write=false;
+        Compare compare=Compare::Less;
+    } blendDepth;
+    azurerender::UnlitTextureLayers unlitTextureLayers;
+    enum class CharacterVisibility : std::uint8_t { SceneVisibility,MainLightShadow,ObjectShadow,One };
+    std::array<unsigned,9> authoredMipLevels{};
+    std::array<azurerender::TextureImportSettings,9> textureSettings=[] {
+        std::array<azurerender::TextureImportSettings,9> result;
+        const char* usage[]={"albedo","normal","roughness","emissive","mask","albedo","packed-normal","linear","albedo"};
+        for(std::size_t slot=0;slot<result.size();++slot) {
+            result[slot].usage=usage[slot];
+            result[slot].colorSpace=slot==0||slot==3||slot==5||slot==8?"srgb":"linear";
+        }
+        result[8].mipPolicy="none";result[8].wrapU=result[8].wrapV="clamp";result[8].anisotropy=1;
+        return result;
+    }();
     std::string name = "FallbackMaterial";
+    std::string slotId;
     AssetMaterialClass materialClass = AssetMaterialClass::Generic;
     std::uint32_t materialFeatures = MaterialFeatureNeutralFallback;
     std::uint32_t materialProfileVersion = 1;
     bool materialProfileExplicit = false;
+    float radianceScale = 1.0F;
+    azurerender::MaterialDisplayTransform displayTransform=azurerender::MaterialDisplayTransform::Scene;
+    azurerender::MaterialEnvironmentLighting environmentLighting;
+    azurerender::MaterialMainLightShadow mainLightShadow=azurerender::MaterialMainLightShadow::Scene;
+    using CoverageTexture=azurerender::MaterialCoverageTexture;
+    CoverageTexture coverageTexture;
+    bool sampledReferenceNormal=false;
+    enum class ReferenceDepthStencil { Ordinary, Protect, Respect };
+    ReferenceDepthStencil referenceDepthStencil = ReferenceDepthStencil::Ordinary;
     std::vector<std::uint8_t> baseColorPixels;
     std::uint32_t baseColorWidth = 0;
     std::uint32_t baseColorHeight = 0;
@@ -95,11 +175,124 @@ struct AssetMaterial {
     std::vector<std::uint8_t> hairDataPixels;
     std::uint32_t hairDataWidth = 0;
     std::uint32_t hairDataHeight = 0;
+    // Horizontal blue-slice strip: width = height squared, sRGB encoded.
+    std::vector<std::uint8_t> shadowColorLutPixels{255,255,255,255};
+    std::uint32_t shadowColorLutWidth=1,shadowColorLutHeight=1;
+    float transmission=0,ior=1.5F,thickness=0,attenuationDistance=0;
+    std::array<float,3> attenuationColor{1,1,1};
+    std::vector<std::uint8_t> transmissionPixels{255,255,255,255};
+    std::uint32_t transmissionWidth=1,transmissionHeight=1;
     float emissiveStrength = 0.0F;
     std::array<float, 4> aoColor{1.0F, 1.0F, 1.0F, 0.0F};
     std::array<float, 4> lamShadowColor{1.0F, 1.0F, 1.0F, 0.0F};
     std::array<float, 4> matcapColor{1.0F, 1.0F, 1.0F, 0.0F};
     std::array<float, 4> hairParameters{64.0F, 0.15F, 4.0F, 0.0F};
+    std::array<float,4> hairViewParameters{0,0,0,1};
+    struct ProjectedHairRamp {
+        enum class SurfaceResponse : std::uint8_t { Layered, StrandDiffuse };
+        bool present=false;
+        AssetMaterialFrame frame;
+        bool virtualLight=false;
+        float virtualBlend=1,objectGain=1;
+        struct SpecularLine {
+            bool present=false;
+            bool mainDiffuse=false;
+            float frequency=1,strandShift=0,range=1,depth=0,alternation=1,saturation=1;
+            std::array<float,4> uvTransform{1,1,0,0};
+            std::vector<std::uint8_t> pixels;
+            std::uint32_t width=0,height=0;
+        } line;
+        float primaryShift=0,secondaryShift=0,intensity=1,secondaryRange=.5F;
+        float edgeFade=1,specularNormalScale=1,directionX=0,surfaceNormalScale=1;
+        std::array<float,3> secondaryColor{1,1,1};
+        SurfaceResponse surfaceResponse=SurfaceResponse::Layered;
+        float diffuseScale=1;
+        float tangentSign=1;
+        bool materialSnapshotNormal=false;
+        bool axisDiagonalPrimaryTextureFootprint=false;
+        struct Lighting {
+            bool present=false,transparentHighlights=false,mainBrightnessSaturation=false;
+            float shadowBrightness=1,shadowSaturation=1,shadowScale=1;
+            std::array<float,3> ambientColor{1,1,1},mainColor{1,1,1};
+            CharacterVisibility characterVisibility=CharacterVisibility::One;
+        } lighting;
+        // Column-major source object axes expressed in the asset frame.
+        std::array<float,9> objectBasis{1,0,0,0,1,0,0,0,1};
+        std::vector<std::uint8_t> parameterPixels;
+        std::uint32_t parameterWidth=0,parameterHeight=0;
+    } projectedHairRamp;
+    struct OutlineSurface {
+        enum class NormalSource : std::uint8_t { Geometry,TangentUv1,TangentOctahedralUv1 };
+        bool present=false,depthPrepass=false;
+        bool projectSurface=false;
+        bool maskInstanceInterior=true;
+        NormalSource normalSource=NormalSource::Geometry;
+        float width=.5F,minimumPixels=.5F,depthOffset=0;
+        std::optional<float> baseColorSaturation;
+        std::array<float,4> uvScaleOffset{1,1,0,0};
+        std::array<float,3> color{.018F,.028F,.042F};
+        std::vector<std::uint8_t> maskPixels{255,0,0,255};
+        std::uint32_t maskWidth=1,maskHeight=1;
+    } outlineSurface;
+    struct EyeSurface {
+        bool present=false;
+        bool nprLighting=false;
+        float shadowScale=1;
+        std::array<float,3> ambientColor{1,1,1},mainColor{1,1,1};
+        float parallaxScale=0,matcapNormalScale=0,alphaPremultiply=0,matcapShadowFloor=0;
+        std::array<float,3> highlightColor{},scatteringColor{},directWeights{};
+        std::array<float,4> matcapColor{},uvScaleOffset{1,1,0,0};
+        // Lighting uses either authored Lambert lights or the shared NPR frame.
+    } eyeSurface;
+    struct NprDiffuse {
+        enum class IndirectNormal : std::uint8_t { Surface, WorldHorizontal, FaceFrameRadialHorizontal };
+        bool present=false;
+        float shadowScale=1;
+        enum class ShadowMask : std::uint8_t { None,StyleMaskGb,One };
+        ShadowMask shadowMask=ShadowMask::None;
+        enum class BaseAo : std::uint8_t { One,AlbedoAlpha,MetallicRoughnessRed };
+        BaseAo baseAo=BaseAo::One;
+        IndirectNormal indirectNormal=IndirectNormal::Surface;
+        bool radialLightingNormal=false;
+        bool screenLightingNormal=false;
+        bool transparentHighlights=false;
+        struct Lighting {
+            bool present=false;
+            std::array<float,3> ambientColor{1,1,1},mainColor{1,1,1};
+        } lighting;
+        enum class RimResponse : std::uint8_t { ScreenDepth,ViewFacing,FaceMasked };
+        RimResponse rimResponse=RimResponse::ScreenDepth;
+        struct RimOrigin {
+            bool present=false;
+            std::uint32_t node=0;
+            std::string nodeName;
+        } rimOrigin;
+        struct ViewTint {
+            bool present=false;
+            float scale=0;
+            std::array<float,3> color{1,1,1};
+        } viewTint;
+        struct MainRamp {
+            bool present=false;
+            float bias=0;
+        } mainRamp;
+        using CharacterVisibility=AssetMaterial::CharacterVisibility;
+        CharacterVisibility characterVisibility=CharacterVisibility::SceneVisibility;
+        float localDiffuseFloorScale=1;
+        using RampComposition=azurerender::NprRampComposition;
+        RampComposition rampComposition=RampComposition::MaskVisibility;
+        float shadowSaturation=1;
+    } nprDiffuse;
+    struct SpecularInput {
+        enum class Source : std::uint8_t { EmissiveAlpha, MetallicRoughnessAlpha };
+        bool present=false;
+        Source source=Source::EmissiveAlpha;
+        float scale=1;
+    } specularInput;
+    struct SpecularRamp {
+        bool present=false,flipV=false;
+        float iridescence=0;
+    } specularRamp;
     // toon, shadow tint, specular, rim
     std::array<float, 4> styleParameters{1.0F, 1.0F, 1.0F, 1.0F};
     // outline, hair highlight, emissive, face overlay
@@ -109,13 +302,76 @@ struct AssetMaterial {
     AssetAlphaMode alphaMode = AssetAlphaMode::Opaque;
     float alphaCutoff = 0.5F;
     bool doubleSided = false;
+    bool geometricReferenceNormal = false;
+    bool hairPointMipReferenceNormal = false;
+    std::array<std::shared_ptr<const azurerender::ImmutableBytes>,static_cast<std::size_t>(PixelKind::Count)> preparedPixels{};
 };
+
+inline bool usesLinearPointMipSampling(const azurerender::TextureImportSettings& settings) {
+    using Settings = azurerender::TextureImportSettings;
+    return settings.filter == "linear" && (settings.magFilter == Settings::MagFilter::Linear
+        || settings.magFilter == Settings::MagFilter::MatchFilter)
+        && settings.mipFilter == Settings::MipFilter::Nearest && settings.anisotropy == 1.F
+        && settings.mipPolicy != "none";
+}
+
+inline void validateProjectedHairPrimaryTextureFootprint(const AssetMaterial& material) {
+    const auto& hair = material.projectedHairRamp;
+    if (!hair.axisDiagonalPrimaryTextureFootprint) return;
+    if (!hair.present || material.materialClass != AssetMaterialClass::Hair || material.materialProfileVersion != 2
+        || (material.materialFeatures & MaterialFeatureMirroredCoarseUv) == 0
+        || material.alphaMode == AssetAlphaMode::Blend)
+        throw std::invalid_argument("projectedRamp.primaryTextureFootprint requires version two hair with mirrored-coarse-uv");
+    for (const unsigned slot : {0U, 6U, 7U}) {
+        if (!usesLinearPointMipSampling(material.textureSettings[slot]))
+            throw std::invalid_argument("projectedRamp.primaryTextureFootprint requires linear filtering, nearest mip and anisotropy one");
+    }
+}
+
+inline void validateHairPointMipReferenceNormal(const AssetMaterial& material) {
+    if (!material.hairPointMipReferenceNormal) return;
+    if (material.materialProfileVersion != 2 || material.materialClass != AssetMaterialClass::Hair
+        || !material.projectedHairRamp.present || !material.projectedHairRamp.materialSnapshotNormal
+        || material.alphaMode == AssetAlphaMode::Blend)
+        throw std::invalid_argument("hair-point-mip referenceNormal requires a version two hair receiver with material-normal-rg");
+    if (!usesLinearPointMipSampling(material.textureSettings[1]))
+        throw std::invalid_argument("hair-point-mip referenceNormal requires linear filtering, nearest mip and anisotropy one");
+}
+
+inline void validateMaterialCoverage(const AssetMaterial& material) {
+    azurerender::validateMaterialCoverageTexture(material.coverageTexture,material.materialProfileVersion,material.alphaMode==AssetAlphaMode::Mask,
+        material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Fabric||material.materialClass==AssetMaterialClass::Hair,
+        material.unlitTextureLayers.present||material.eyeSurface.present||material.faceSdf.present
+        ||material.specularInput.source==AssetMaterial::SpecularInput::Source::MetallicRoughnessAlpha
+        ||material.nprDiffuse.baseAo==AssetMaterial::NprDiffuse::BaseAo::MetallicRoughnessRed);
+    if(material.coverageTexture.present!=((material.materialFeatures&MaterialFeatureIndependentCoverage)!=0))
+        throw std::invalid_argument("coverageTexture feature ownership is inconsistent");
+    if(material.coverageTexture.present&&(!material.metallicRoughnessWidth||!material.metallicRoughnessHeight
+        ||material.textureSettings[2].colorSpace!="linear"))
+        throw std::invalid_argument("coverageTexture requires a complete linear image");
+    const bool ellipse=material.coverageTexture.lodPolicy==AssetMaterial::CoverageTexture::LodPolicy::EllipseMajor;
+    if(ellipse!=((material.materialFeatures&MaterialFeatureEllipseMajorCoverage)!=0))
+        throw std::invalid_argument("coverageTexture LOD policy ownership is inconsistent");
+    if(ellipse){
+        const auto& sampler=material.textureSettings[2];
+        using Settings=azurerender::TextureImportSettings;
+        if((material.materialFeatures&MaterialFeatureMirroredCoarseUv)==0)
+            throw std::invalid_argument("coverageTexture ellipse-major requires mirrored-coarse-uv");
+        if(sampler.filter!="linear"||(sampler.magFilter!=Settings::MagFilter::Linear
+            &&sampler.magFilter!=Settings::MagFilter::MatchFilter)
+            ||sampler.mipFilter!=Settings::MipFilter::Nearest||sampler.anisotropy!=1.0F
+            ||sampler.mipPolicy!="generate")
+            throw std::invalid_argument("coverageTexture ellipse-major requires linear filtering, nearest mip, anisotropy one and a mip chain");
+    }
+}
 
 struct AssetPrimitive {
     std::uint32_t firstIndex = 0;
     std::uint32_t indexCount = 0;
     std::uint32_t materialIndex = 0;
     std::array<float, 3> center{};
+    std::uint32_t nodeIndex = std::numeric_limits<std::uint32_t>::max();
+    bool hasTexcoord1=false;
 };
 
 struct AssetNode {
@@ -126,17 +382,21 @@ struct AssetNode {
     std::array<float, 3> scale{1.0F, 1.0F, 1.0F};
     std::array<float, 16> localMatrix{};
     bool usesMatrix = false;
+    float opacity = 1.0F;
 };
 
 enum class AssetAnimationPath : std::uint32_t {
     Translation,
     Rotation,
     Scale,
+    Weights,
+    Opacity,
 };
 
 enum class AssetAnimationInterpolation : std::uint32_t {
     Step,
     Linear,
+    CubicSpline,
 };
 
 struct AssetAnimationSampler {
@@ -144,6 +404,7 @@ struct AssetAnimationSampler {
     std::vector<std::array<float, 4>> outputValues;
     AssetAnimationInterpolation interpolation =
         AssetAnimationInterpolation::Linear;
+    AnimationCurve curve;
 };
 
 struct AssetAnimationChannel {
@@ -175,12 +436,59 @@ struct LoadedAsset {
     std::vector<std::array<float, 16>> nodeWorldMatrices;
     bool hasSkin = false;
     std::uint32_t morphTargetCount = 0;
+    std::vector<MorphTargetRange> morphRanges;
+    std::vector<MorphWeightState> defaultMorphWeights;
+    // Optional standard UV1 stream, indexed like vertices. Consumers declare
+    // their interpretation; the base vertex/skinning ABI remains unchanged.
+    std::vector<std::array<float,2>> texcoord1;
+    // Optional linear RGBA, indexed like vertices; absent primitives use white.
+    std::vector<std::array<float,4>> vertexColors;
 };
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);
+void validateOutlineMaterialInputs(const LoadedAsset& asset);
+struct AssetImage {std::vector<std::uint8_t> pixels;std::uint32_t width=0,height=0;std::vector<std::string> losses;std::vector<azurerender::ImageMipLevel> mipLevels;std::string sourceCompression;};
+[[nodiscard]] AssetImage loadAssetImage(const std::string& path);
+// Candidate validation consumes embedded data without filesystem access.
+[[nodiscard]] LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary=false);
+// Material-only documents share the glTF decoder and embedded-resource boundary.
+// Optional raw import settings are indexed by source image; null entries use role defaults.
+[[nodiscard]] std::vector<AssetMaterial> loadEmbeddedGltfMaterials(const std::string& bytes,bool binary=false,
+    const std::vector<nlohmann::json>& imageSettings={});
 [[nodiscard]] const char* assetMaterialClassName(AssetMaterialClass value);
+struct AssetNodePose {
+    std::array<float, 3> translation{};
+    std::array<float, 4> rotation{0, 0, 0, 1};
+    std::array<float, 3> scale{1, 1, 1};
+    float opacity = 1.0F;
+};
+struct AssetPose {
+    std::vector<AssetNodePose> local;
+    std::vector<std::array<float, 16>> nodeWorldMatrices;
+    std::vector<std::array<float, 16>> jointMatrices;
+    std::vector<MorphWeightState> morphWeights;
+    std::vector<float> nodeWorldOpacities;
+};
+// Immutable clip snapshot, bound to one loaded resource. Rebuild on reload.
+class PreparedAssetAnimations {
+public:
+    explicit PreparedAssetAnimations(const LoadedAsset& asset);
+private:
+    const LoadedAsset* source_;
+    std::vector<AssetAnimation> animations_;
+    std::vector<std::vector<std::optional<PreparedAnimationCurve>>> curves_;
+    const AssetAnimation& animation(const LoadedAsset& asset,std::size_t index) const;
+    friend AssetPose sampleAnimationPose(const LoadedAsset&,std::size_t,float,bool,const PreparedAssetAnimations*);
+    friend AssetPose sampleAnimationBlend(const LoadedAsset&,const std::vector<azurerender::AnimationClipSample>&,const PreparedAssetAnimations*);
+};
+[[nodiscard]] AssetPose bindAnimationPose(const LoadedAsset& asset);
+void resolveAssetPose(const LoadedAsset& asset,AssetPose& pose);
+[[nodiscard]] AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationIndex, float time, bool loop = true, const PreparedAssetAnimations* prepared = nullptr);
+[[nodiscard]] AssetPose blendAnimationPoses(const LoadedAsset& asset, const AssetPose& from, const AssetPose& to, float weight);
+[[nodiscard]] AssetPose sampleAnimationBlend(const LoadedAsset& asset,
+    const std::vector<azurerender::AnimationClipSample>& samples, const PreparedAssetAnimations* prepared = nullptr);
 void sampleAnimation(
-    LoadedAsset& asset,
+    const LoadedAsset& asset,
     std::size_t animationIndex,
     float time,
     std::vector<std::array<float, 16>>& jointMatrices);

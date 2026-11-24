@@ -1,0 +1,29 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v6.0.0)
+
+newmtl PublicTestMaterial
+Kd 1 1 1
+Ke 0 0 0
+d 1
+Ns 39.9999962
+illum 2
+map_Kd texture-0.png
+bump texture-1.png
+map_bump texture-1.png
+
+newmtl PublicTestMaterialB
+Kd 1 1 1
+Ke 0 0 0
+d 1
+Ns 39.9999962
+illum 2
+map_Kd texture-2.png
+bump texture-1.png
+map_bump texture-1.png
+
+newmtl $Material_2
+Kd 1 1 1
+Ke 0 0 0
+d 1
+illum 1
+

@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "baseColor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+    ],
+    "doubleSided": false,
+    "emissiveStrength": 0.0,
+    "metallic": 0.0,
+    "rimAmount": 1.0,
+    "roughness": 0.4,
+    "specularAmount": 1.0,
+    "toonAmount": 1.0
+  },
+  "schemaVersion": 1,
+  "textures": {},
+  "typeId": "azure.stylized"
+}

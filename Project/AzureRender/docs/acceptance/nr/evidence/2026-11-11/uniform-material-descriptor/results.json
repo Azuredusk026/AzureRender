@@ -1,0 +1,54 @@
+{
+  "status": "isolated-below-native-admission",
+  "candidate": "draw-uniform-material-descriptors",
+  "sourceBase": "efd7efd",
+  "allSixAttachmentsExact": true,
+  "materials": 1006,
+  "totalEvents": 3453,
+  "scope": {
+    "allEventMs": {
+      "referenceMs": 13.366399999999919,
+      "candidateMs": 13.51935999999992,
+      "savedMs": -0.15296000000000198,
+      "reduction": -0.011443619822839576,
+      "share": 1.0,
+      "referenceDrift": 0.006923629399090046
+    },
+    "matchedEventMs": {
+      "referenceMs": 9.865295999999951,
+      "candidateMs": 9.913071999999955,
+      "savedMs": -0.04777600000000426,
+      "reduction": -0.004842834923554701,
+      "share": 0.7380667943500128,
+      "referenceDrift": 0.0029679798761229836
+    },
+    "mainEventMs": {
+      "referenceMs": 7.07643200000002,
+      "candidateMs": 7.106800000000017,
+      "savedMs": -0.03036799999999662,
+      "reduction": -0.004291428222583999,
+      "share": 0.5294194397893272,
+      "referenceDrift": 0.0028353271818352048
+    },
+    "ordinaryMainEventMs": {
+      "referenceMs": 3.6095360000000136,
+      "candidateMs": 3.6361760000000123,
+      "savedMs": -0.026639999999998665,
+      "reduction": -0.007380450007978467,
+      "share": 0.2700454871917671,
+      "referenceDrift": 0.004024894058404133
+    },
+    "snapshotEventMs": {
+      "referenceMs": 2.7888639999999976,
+      "candidateMs": 2.806271999999999,
+      "savedMs": -0.017408000000001422,
+      "reduction": -0.006241968055811053,
+      "share": 0.20864735456069058,
+      "referenceDrift": 0.0033045713236646845
+    }
+  },
+  "qualified": false,
+  "protectedFilesExact": 13,
+  "sourceUnchanged": true,
+  "formalPerformanceAccepted": false
+}

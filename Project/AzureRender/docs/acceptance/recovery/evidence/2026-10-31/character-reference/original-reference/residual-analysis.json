@@ -1,0 +1,30 @@
+{
+  "scope": "Descriptive diagnostics; existing native full-region and strict PNG gates are not changed.",
+  "headRegionXYXY": [
+    570,
+    65,
+    715,
+    220
+  ],
+  "headPixelsOverOneByte": 2395,
+  "headPixels": 22475,
+  "wholePixelsOverOneByte": 8458,
+  "maxErrorLocationsXY": [
+    [
+      632,
+      667
+    ]
+  ],
+  "head": {
+    "meanAbsoluteByteError": 0.5725324434556915,
+    "maximumByteError": 116.0
+  },
+  "leftEye": {
+    "meanAbsoluteByteError": 0.9029239766081871,
+    "maximumByteError": 15.0
+  },
+  "rightEye": {
+    "meanAbsoluteByteError": 1.2486772486772486,
+    "maximumByteError": 28.0
+  }
+}

@@ -1,0 +1,20 @@
+[1791649279143][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791649279502][info][render][code=0] Character texture access: indexed, requested slots=195, stage sampler limit=1048576
+[1791649279529][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791649279656][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791649290784][info][render][code=0] Character texture access: indexed, requested slots=147, stage sampler limit=1048576
+[1791649291099][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791649292674][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791649292735][info][runtime][code=0] Level committed: platformer
+[1791649315270][info][runtime][code=0] Level committed: platformer
+[1791649315556][info][runtime][code=0] Level committed: exploration
+[1791649316138][info][runtime][code=0] Level committed: platformer
+[1791649338021][info][runtime][code=0] Level committed: platformer
+[1791649338158][info][runtime][code=0] Level committed: exploration
+[1791649338413][info][runtime][code=0] Level committed: platformer
+[1791649360080][info][runtime][code=0] Level committed: platformer
+[1791649360184][info][runtime][code=0] Level committed: exploration
+[1791649360343][info][runtime][code=0] Level committed: platformer
+[1791649381788][info][runtime][code=0] Level committed: platformer
+[1791649381882][info][runtime][code=0] Level committed: exploration
+[1791649382111][info][runtime][code=0] Level committed: platformer

@@ -1,0 +1,43 @@
+{
+  "status": "camera-candidate-prepared",
+  "baseCommit": "06d701c",
+  "sourceAsset": "build\\runs\\20261031-105539-full-scene-character-composition-b37668\\project\\content-character\\hero-restored-inputs-v7.glb",
+  "sourceAssetSha256": "af8ebb6d417899a6b74c97056ebbf636dd910ec9b1367045f65fc5f0ea7c2dfb",
+  "animation": "a_actor_laevat_uiteam_idle_01",
+  "cameraSamplingSeconds": 0.016666666666666666,
+  "irisVertices": 210,
+  "worldIrisCenter": [
+    -1.3621028998690794,
+    2.59239120530783,
+    -16.03453967107907
+  ],
+  "meanWorldIrisNormal": [
+    0.7039137740344448,
+    -0.13774902902751007,
+    -0.6968002609977717
+  ],
+  "cameraPosition": [
+    -0.7637761919398014,
+    2.4753045306344466,
+    -16.626819892927177
+  ],
+  "cameraRotationDegrees": [
+    -168.81749855758784,
+    44.74185617466877,
+    172.07786332947916
+  ],
+  "fieldOfView": 32,
+  "cases": [
+    {
+      "name": "control",
+      "project": "build\\runs\\20261031-164808-character-frontal-lighting-fa3879\\project\\control.azureproject",
+      "levelSha256": "3f8637b7301d9e8db6aff93a0b243802d4ea63da59309aa33b7ac649fe647840"
+    },
+    {
+      "name": "candidate",
+      "project": "build\\runs\\20261031-164808-character-frontal-lighting-fa3879\\project\\candidate.azureproject",
+      "levelSha256": "ea30ad1797efd61276e02eccdaff8e0b1908c82eaee98fcfac46b2a582acbc52"
+    }
+  ],
+  "scope": "CPU pose only frames the diagnostic camera. Existing Player animation and rendering remain authoritative; no mesh, material, light, grade or shadow changes."
+}

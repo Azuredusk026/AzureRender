@@ -1,0 +1,6609 @@
+{
+  "status": "passed",
+  "events": [
+    {
+      "event": 15175,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-44
+              ],
+              "uint32": [
+                10
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                6.58610278232664e-44
+              ],
+              "uint32": [
+                47
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15185,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                2.5223372357846707e-44
+              ],
+              "uint32": [
+                18
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.1630777253895982e-43
+              ],
+              "uint32": [
+                83
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15195,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                3.6433760072445244e-44
+              ],
+              "uint32": [
+                26
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.6675451725465323e-43
+              ],
+              "uint32": [
+                119
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15207,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.324934164434305e-44
+              ],
+              "uint32": [
+                38
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                2.4242463432819335e-43
+              ],
+              "uint32": [
+                173
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15269,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.6499999761581421
+              ],
+              "uint32": [
+                1059481190
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0930128021733573e-43
+              ],
+              "uint32": [
+                78
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                4.946583579066604e-43
+              ],
+              "uint32": [
+                353
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15274,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.6499999761581421
+              ],
+              "uint32": [
+                1059481190
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0930128021733573e-43
+              ],
+              "uint32": [
+                78
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                4.946583579066604e-43
+              ],
+              "uint32": [
+                353
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15284,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.2051166793193427e-43
+              ],
+              "uint32": [
+                86
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.4510510262235384e-43
+              ],
+              "uint32": [
+                389
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15289,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.2611686178923354e-43
+              ],
+              "uint32": [
+                90
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.7032847498020055e-43
+              ],
+              "uint32": [
+                407
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15299,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.3732724950383207e-43
+              ],
+              "uint32": [
+                98
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                6.20775219695894e-43
+              ],
+              "uint32": [
+                443
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15304,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.4293244336113134e-43
+              ],
+              "uint32": [
+                102
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                6.459985920537407e-43
+              ],
+              "uint32": [
+                461
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15344,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.877739942195255e-43
+              ],
+              "uint32": [
+                134
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                8.477855709165143e-43
+              ],
+              "uint32": [
+                605
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15349,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.9337918807682476e-43
+              ],
+              "uint32": [
+                138
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                8.73008943274361e-43
+              ],
+              "uint32": [
+                623
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15354,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.9898438193412402e-43
+              ],
+              "uint32": [
+                142
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                8.982323156322077e-43
+              ],
+              "uint32": [
+                641
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15374,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                2.2701035122062037e-43
+              ],
+              "uint32": [
+                162
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0243491774214413e-42
+              ],
+              "uint32": [
+                731
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15386,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.7310000061988831
+              ],
+              "uint32": [
+                1060840145
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                2.4382593279251817e-43
+              ],
+              "uint32": [
+                174
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.1000192944949814e-42
+              ],
+              "uint32": [
+                785
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15431,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                17.177616119384766
+              ],
+              "uint32": [
+                1099525058
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                2.9987787136551085e-43
+              ],
+              "uint32": [
+                214
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.3522530180734485e-42
+              ],
+              "uint32": [
+                965
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15441,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                3.110882590801094e-43
+              ],
+              "uint32": [
+                222
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.4026997627891419e-42
+              ],
+              "uint32": [
+                1001
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15446,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                3.1669345293740866e-43
+              ],
+              "uint32": [
+                226
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.4279231351469886e-42
+              ],
+              "uint32": [
+                1019
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15451,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                3.2229864679470793e-43
+              ],
+              "uint32": [
+                230
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.4531465075048353e-42
+              ],
+              "uint32": [
+                1037
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15466,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                3.3911422836660573e-43
+              ],
+              "uint32": [
+                242
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.5288166245783754e-42
+              ],
+              "uint32": [
+                1091
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15716,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                6.305843089461677e-43
+              ],
+              "uint32": [
+                450
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                2.8404319871864042e-42
+              ],
+              "uint32": [
+                2027
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15721,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                6.3618950280346695e-43
+              ],
+              "uint32": [
+                454
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                2.865655359544251e-42
+              ],
+              "uint32": [
+                2045
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15766,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                9.332647772403282e-43
+              ],
+              "uint32": [
+                666
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                4.2024940945101264e-42
+              ],
+              "uint32": [
+                2999
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15781,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                9.50080358812226e-43
+              ],
+              "uint32": [
+                678
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                4.2781642115836665e-42
+              ],
+              "uint32": [
+                3053
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 15906,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.1126309806739048e-42
+              ],
+              "uint32": [
+                794
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.009642009961221e-42
+              ],
+              "uint32": [
+                3575
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 16296,
+      "blocks": [
+        {
+          "name": "material",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.6499999761581421
+              ],
+              "uint32": [
+                1059481190
+              ],
+              "members": []
+            },
+            {
+              "name": "alphaMode",
+              "type": "VarType.SInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "emissiveStrength",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "showcasePlatform",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "aoColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "lamShadowColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "matcapColor",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "hairParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                64.0,
+                0.15000000596046448,
+                4.0,
+                0.0
+              ],
+              "uint32": [
+                1115684864,
+                1041865114,
+                1082130432,
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "styleParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "featureParameters",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                1065353216,
+                1065353216,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "materialClass",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "materialFeatures",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                5.605193857299268e-44
+              ],
+              "uint32": [
+                40
+              ],
+              "members": []
+            },
+            {
+              "name": "materialProfileVersion",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "materialPadding",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.678755560261131e-42
+              ],
+              "uint32": [
+                1198
+              ],
+              "members": []
+            },
+            {
+              "name": "textureBase",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                7.557202618103738e-42
+              ],
+              "uint32": [
+                5393
+              ],
+              "members": []
+            },
+            {
+              "name": "nodeOpacity",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.0
+              ],
+              "uint32": [
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

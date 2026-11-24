@@ -1,0 +1,971 @@
+{
+  "status": "passed",
+  "draws": [
+    {
+      "event": 219,
+      "vertex": "motion_vector.vert.spv",
+      "blocks": [
+        {
+          "stage": "ShaderStage.Vertex",
+          "name": "motion",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "flags",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "material",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "primitive",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "gizmo",
+              "type": "VarType.Float",
+              "rows": 4,
+              "columns": 4,
+              "float32": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "camera",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                0.0,
+                0.0,
+                3.0,
+                "nan"
+              ],
+              "uint32": [
+                0,
+                0,
+                1077936128,
+                4294967295
+              ],
+              "members": []
+            },
+            {
+              "name": "detail",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                -4.484155085839415e-44,
+                0.0008544921875,
+                -0.0026041667442768812
+              ],
+              "uint32": [
+                1065353216,
+                2147483680,
+                979369984,
+                3140135595
+              ],
+              "members": []
+            },
+            {
+              "name": "outline",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                0.800000011920929,
+                128.0,
+                128.0,
+                1.0
+              ],
+              "uint32": [
+                1061997773,
+                1124073472,
+                1124073472,
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        },
+        {
+          "stage": "ShaderStage.Pixel",
+          "name": "motion",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "flags",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "material",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "primitive",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "gizmo",
+              "type": "VarType.Float",
+              "rows": 4,
+              "columns": 4,
+              "float32": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "camera",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                0.0,
+                0.0,
+                3.0,
+                "nan"
+              ],
+              "uint32": [
+                0,
+                0,
+                1077936128,
+                4294967295
+              ],
+              "members": []
+            },
+            {
+              "name": "detail",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                -4.484155085839415e-44,
+                0.0008544921875,
+                -0.0026041667442768812
+              ],
+              "uint32": [
+                1065353216,
+                2147483680,
+                979369984,
+                3140135595
+              ],
+              "members": []
+            },
+            {
+              "name": "outline",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                0.800000011920929,
+                128.0,
+                128.0,
+                1.0
+              ],
+              "uint32": [
+                1061997773,
+                1124073472,
+                1124073472,
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 225,
+      "vertex": "motion_vector.vert.spv",
+      "blocks": [
+        {
+          "stage": "ShaderStage.Vertex",
+          "name": "motion",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "flags",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "material",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "primitive",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "gizmo",
+              "type": "VarType.Float",
+              "rows": 4,
+              "columns": 4,
+              "float32": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "camera",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                0.0,
+                0.0,
+                3.0,
+                "nan"
+              ],
+              "uint32": [
+                0,
+                0,
+                1077936128,
+                4294967295
+              ],
+              "members": []
+            },
+            {
+              "name": "detail",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                -4.484155085839415e-44,
+                0.0008544921875,
+                -0.0026041667442768812
+              ],
+              "uint32": [
+                1065353216,
+                2147483680,
+                979369984,
+                3140135595
+              ],
+              "members": []
+            },
+            {
+              "name": "outline",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                0.800000011920929,
+                128.0,
+                128.0,
+                1.0
+              ],
+              "uint32": [
+                1061997773,
+                1124073472,
+                1124073472,
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        },
+        {
+          "stage": "ShaderStage.Pixel",
+          "name": "motion",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "flags",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "material",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "primitive",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                1.401298464324817e-45
+              ],
+              "uint32": [
+                1
+              ],
+              "members": []
+            },
+            {
+              "name": "gizmo",
+              "type": "VarType.Float",
+              "rows": 4,
+              "columns": 4,
+              "float32": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "camera",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                0.0,
+                0.0,
+                3.0,
+                "nan"
+              ],
+              "uint32": [
+                0,
+                0,
+                1077936128,
+                4294967295
+              ],
+              "members": []
+            },
+            {
+              "name": "detail",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                -4.484155085839415e-44,
+                0.0008544921875,
+                -0.0026041667442768812
+              ],
+              "uint32": [
+                1065353216,
+                2147483680,
+                979369984,
+                3140135595
+              ],
+              "members": []
+            },
+            {
+              "name": "outline",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                0.800000011920929,
+                128.0,
+                128.0,
+                1.0
+              ],
+              "uint32": [
+                1061997773,
+                1124073472,
+                1124073472,
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": 231,
+      "vertex": "motion_vector.vert.spv",
+      "blocks": [
+        {
+          "stage": "ShaderStage.Vertex",
+          "name": "motion",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "flags",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "material",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                4.203895392974451e-45
+              ],
+              "uint32": [
+                3
+              ],
+              "members": []
+            },
+            {
+              "name": "primitive",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                2.802596928649634e-45
+              ],
+              "uint32": [
+                2
+              ],
+              "members": []
+            },
+            {
+              "name": "gizmo",
+              "type": "VarType.Float",
+              "rows": 4,
+              "columns": 4,
+              "float32": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "camera",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                0.0,
+                0.0,
+                3.0,
+                "nan"
+              ],
+              "uint32": [
+                0,
+                0,
+                1077936128,
+                4294967295
+              ],
+              "members": []
+            },
+            {
+              "name": "detail",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                -0.0,
+                0.0008544921875,
+                -0.0026041667442768812
+              ],
+              "uint32": [
+                1065353216,
+                2147483648,
+                979369984,
+                3140135595
+              ],
+              "members": []
+            },
+            {
+              "name": "outline",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                0.800000011920929,
+                128.0,
+                128.0,
+                1.0
+              ],
+              "uint32": [
+                1061997773,
+                1124073472,
+                1124073472,
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        },
+        {
+          "stage": "ShaderStage.Pixel",
+          "name": "motion",
+          "variables": [
+            {
+              "name": "alphaCutoff",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.5
+              ],
+              "uint32": [
+                1056964608
+              ],
+              "members": []
+            },
+            {
+              "name": "flags",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                0.0
+              ],
+              "uint32": [
+                0
+              ],
+              "members": []
+            },
+            {
+              "name": "material",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                4.203895392974451e-45
+              ],
+              "uint32": [
+                3
+              ],
+              "members": []
+            },
+            {
+              "name": "primitive",
+              "type": "VarType.UInt",
+              "rows": 1,
+              "columns": 1,
+              "float32": [
+                2.802596928649634e-45
+              ],
+              "uint32": [
+                2
+              ],
+              "members": []
+            },
+            {
+              "name": "gizmo",
+              "type": "VarType.Float",
+              "rows": 4,
+              "columns": 4,
+              "float32": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "uint32": [
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                1065353216
+              ],
+              "members": []
+            },
+            {
+              "name": "camera",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                0.0,
+                0.0,
+                3.0,
+                "nan"
+              ],
+              "uint32": [
+                0,
+                0,
+                1077936128,
+                4294967295
+              ],
+              "members": []
+            },
+            {
+              "name": "detail",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                1.0,
+                -0.0,
+                0.0008544921875,
+                -0.0026041667442768812
+              ],
+              "uint32": [
+                1065353216,
+                2147483648,
+                979369984,
+                3140135595
+              ],
+              "members": []
+            },
+            {
+              "name": "outline",
+              "type": "VarType.Float",
+              "rows": 1,
+              "columns": 4,
+              "float32": [
+                0.800000011920929,
+                128.0,
+                128.0,
+                1.0
+              ],
+              "uint32": [
+                1061997773,
+                1124073472,
+                1124073472,
+                1065353216
+              ],
+              "members": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

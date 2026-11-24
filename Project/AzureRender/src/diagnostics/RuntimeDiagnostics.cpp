@@ -29,6 +29,7 @@ RuntimeDiagnostics& RuntimeDiagnostics::instance() noexcept {
 }
 
 void RuntimeDiagnostics::configure(const std::filesystem::path& logPath) {
+    const std::lock_guard<std::mutex> lock(mutex_);
     logPath_ = logPath;
     fileWritable_ = false;
     if (!logPath_.empty()) {
@@ -55,6 +56,7 @@ void RuntimeDiagnostics::log(
     std::string subsystem,
     const DiagnosticCode code,
     std::string message) {
+    const std::lock_guard<std::mutex> lock(mutex_);
     const auto now = std::chrono::system_clock::now().time_since_epoch();
     const auto milliseconds = std::chrono::duration_cast<
         std::chrono::milliseconds>(now).count();
@@ -86,6 +88,7 @@ void RuntimeDiagnostics::log(
 void RuntimeDiagnostics::print(
     std::string subsystem,
     std::string message) {
+    const std::lock_guard<std::mutex> lock(mutex_);
     const auto now = std::chrono::system_clock::now().time_since_epoch();
     const auto milliseconds = std::chrono::duration_cast<
         std::chrono::milliseconds>(now).count();
@@ -95,7 +98,8 @@ void RuntimeDiagnostics::print(
         messages_.erase(messages_.begin());
     }
     messages_.push_back(line);
-    std::cout << line << '\n';
+    // Commit lifecycle output before returning to resource and device teardown.
+    std::cout << line << std::endl;
     if (fileWritable_) {
         std::ofstream output(logPath_, std::ios::app);
         if (output) {

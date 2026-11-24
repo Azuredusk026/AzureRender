@@ -1,0 +1,652 @@
+{
+  "schemaVersion": 1,
+  "sourceHash": "41804e80288acf248965027b991f4af357ff57b757d100c77dcf2f1e31ca70f4",
+  "files": [
+    {
+      "path": "debug-provenance.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-provenance.json",
+      "originalSha256": "6147bc9def3b74a3194d91d0d737bd6a47083209bd2d217d27f68a59b452a8d6",
+      "archivedContentSha256": "6147bc9def3b74a3194d91d0d737bd6a47083209bd2d217d27f68a59b452a8d6",
+      "compressedSha256": "d7e4207db99d68d79a19188ace352771b27ef0356287e68db559bc227d39b467",
+      "archivedBytes": 150341,
+      "originalBytes": 150341,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "release-provenance.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-provenance.json",
+      "originalSha256": "30a54bd2e52710480073ecd865a3bf46df55dc720c257935ffe9b03df8242969",
+      "archivedContentSha256": "30a54bd2e52710480073ecd865a3bf46df55dc720c257935ffe9b03df8242969",
+      "compressedSha256": "14576a9c7a9de6ab8b8ae3199da102200197ffdbc6f50674b3f54d4462753bc7",
+      "archivedBytes": 147443,
+      "originalBytes": 147443,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "post-measurement-diagnostics.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\post-measurement-diagnostics.json",
+      "originalSha256": "43026219d8751759ef5800ccbe4afc7589b56397657b3af2345821dd81d454b2",
+      "archivedContentSha256": "43026219d8751759ef5800ccbe4afc7589b56397657b3af2345821dd81d454b2",
+      "compressedSha256": "bef356598e25ea7c41a2d16192f973cb4772d5f60b119650165dd8ba6c84d72e",
+      "archivedBytes": 1023,
+      "originalBytes": 1023,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-analysis-summary.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-analysis-summary.json",
+      "originalSha256": "84d8cda94510a8015ab6bae7e9f04d1e9deebd6eb2a3cbd6fc9645f9a9f5071a",
+      "archivedContentSha256": "84d8cda94510a8015ab6bae7e9f04d1e9deebd6eb2a3cbd6fc9645f9a9f5071a",
+      "compressedSha256": "824adfbc8da8302af26598cb1fd0111f2f9c8f60a53cd90094ae8dfe527b2056",
+      "archivedBytes": 1786,
+      "originalBytes": 1786,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-export-v2-completion.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-export-v2-completion.json",
+      "originalSha256": "c25c3da6a0261ab998dc9253a7abd43c8a2b586c679e37252aebe5919b17c9b6",
+      "archivedContentSha256": "c25c3da6a0261ab998dc9253a7abd43c8a2b586c679e37252aebe5919b17c9b6",
+      "compressedSha256": "4a834eac44d7787f8f09e01951235fa87a033f78bfe0679d94dccb4c3fd33015",
+      "archivedBytes": 702,
+      "originalBytes": 702,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-export.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-export.log",
+      "originalSha256": "95a343cfb3072b71822985a1b109c859dbf2d7c8b1282eb133f468a322b5da29",
+      "archivedContentSha256": "95a343cfb3072b71822985a1b109c859dbf2d7c8b1282eb133f468a322b5da29",
+      "compressedSha256": "118074d7213ec7c021d7b3c73385e0827cc9a11567ff16205783273d7f08cc63",
+      "archivedBytes": 584,
+      "originalBytes": 584,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "run-post-measurement-diagnostics.py.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\run-post-measurement-diagnostics.py",
+      "originalSha256": "ca6cd7028aae1e13a39936fd66a6e7e0c4b66fc41dfd253abe92c97c55f3a2c3",
+      "archivedContentSha256": "ca6cd7028aae1e13a39936fd66a6e7e0c4b66fc41dfd253abe92c97c55f3a2c3",
+      "compressedSha256": "3ece82c4452d26041e588f4eeb56a246230cea45f51f41cf7aab21bc08c0bda4",
+      "archivedBytes": 5633,
+      "originalBytes": 5633,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "export-pagefault-evidence-v2.py.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\export-pagefault-evidence-v2.py",
+      "originalSha256": "3c01900c291a23d443f8c5db88ea57db3d64ea7dc64c0bf702dfa591e0866c36",
+      "archivedContentSha256": "3c01900c291a23d443f8c5db88ea57db3d64ea7dc64c0bf702dfa591e0866c36",
+      "compressedSha256": "1a73945dde4ac4c299d42afb21d09621a88396fa5379236c7762802416198bd3",
+      "archivedBytes": 2407,
+      "originalBytes": 2407,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "analyze-pagefault-evidence.py.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\analyze-pagefault-evidence.py",
+      "originalSha256": "9925d848ed023556198afc0274e9d5804b29c88164659adb38b74907c32875f4",
+      "archivedContentSha256": "9925d848ed023556198afc0274e9d5804b29c88164659adb38b74907c32875f4",
+      "compressedSha256": "e64f088b6e3008ac0c8e6cc89bf9aae0adbe4342b769924862f69becbb7cdb09",
+      "archivedBytes": 6312,
+      "originalBytes": 6312,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "original-target-retest-summary.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\original-target-retest\\summary.json",
+      "originalSha256": "bc1b9b107b4c2fd3c359d69495c78bf17e462d799e567ce07af189d1a1593157",
+      "archivedContentSha256": "bc1b9b107b4c2fd3c359d69495c78bf17e462d799e567ce07af189d1a1593157",
+      "compressedSha256": "1e6062b1daf46c0423721eeca56f8dba7d80d9be4c54414f56c13637cc3a1ba1",
+      "archivedBytes": 2135,
+      "originalBytes": 2135,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "original-target-retest.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\original-target-retest.log",
+      "originalSha256": "5be8c2ffe0b76f866ac752a3bb6ac036837018160ed81980b2b847acc82fe48e",
+      "archivedContentSha256": "5be8c2ffe0b76f866ac752a3bb6ac036837018160ed81980b2b847acc82fe48e",
+      "compressedSha256": "04b2f587367a09fc2b5ef0e302e4665f6f264abb1190c98cba67ed4d10602cac",
+      "archivedBytes": 892,
+      "originalBytes": 892,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-performance-frozen-inputs.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\formal-performance\\frozen-inputs.json",
+      "originalSha256": "82cca255c5becd23c6504b5354f560659a4abbc070059812aff051db8464d1af",
+      "archivedContentSha256": "82cca255c5becd23c6504b5354f560659a4abbc070059812aff051db8464d1af",
+      "compressedSha256": "5109bed0fcaa4f7f9206e468099cd203f4ed4135f1e9170e8cca642f7384f43e",
+      "archivedBytes": 128504,
+      "originalBytes": 128504,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "formal-performance-summary.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\formal-performance\\summary.json",
+      "originalSha256": "940f35514cb7ff3c0412ceec686b51d0dc988b8cb38f2018a79e3e093b1b4d97",
+      "archivedContentSha256": "480465334a9c7a87d64793c84bf172f986d2e072506554dbf240777baf40dbb5",
+      "compressedSha256": "f53cc4e45c715b5ab974c63b82ea368350358a4793a8879becb901711e4b8c7d",
+      "archivedBytes": 310236,
+      "originalBytes": 10381055,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "standard-longrun-summary.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\standard-longrun\\summary.json",
+      "originalSha256": "1ca913588a2e629857f14d3ff80ca3098b7d30764052e4cad5797412ecd024e0",
+      "archivedContentSha256": "a5405af2983bdd0b4b56e54a7a4e619938a5865f44a3e1ded30662983f3ff9fa",
+      "compressedSha256": "d0c7c0d7d931cb21a271a6b5ed545a9880ff3687f90748117d749abb2fdb474b",
+      "archivedBytes": 13990,
+      "originalBytes": 610694,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "pagefault-standard-1-result.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\result.json",
+      "originalSha256": "b7b54d86b5e2b1584a14b98e27f05c632986389eebafd32211019a5690b98b74",
+      "archivedContentSha256": "5ac593913f934619cf1e43eebfca60cef508bcc1a6b060ecd3cbbffc80e9431b",
+      "compressedSha256": "323943da3ddaff7f8ccf939acf01e3055ee786e9ca7c482ace1588b8c6b29afa",
+      "archivedBytes": 13381,
+      "originalBytes": 610184,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "pagefault-standard-1-measurement.memory.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\measurement.memory.json",
+      "originalSha256": "26644389d8a59005c1816152438253cc85ede8fa84542a78aabf811c0287a77b",
+      "archivedContentSha256": "26644389d8a59005c1816152438253cc85ede8fa84542a78aabf811c0287a77b",
+      "compressedSha256": "49a145d301fc6a52ca378fda0ee9f42ae191975602c99c7057f45f575efd5963",
+      "archivedBytes": 50301,
+      "originalBytes": 50301,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-1-measurement.input.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\measurement.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "archivedBytes": 1687,
+      "originalBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-1-measurement.csv.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\measurement.csv",
+      "originalSha256": "3afe75da0da50cb3967eee8e9c3834889773ba131e0c607169ac09ad60759dac",
+      "archivedContentSha256": "3afe75da0da50cb3967eee8e9c3834889773ba131e0c607169ac09ad60759dac",
+      "compressedSha256": "9ca1ca919356f6aa63c650b2eb3e3b097448a965078af57328dde08fa6d06017",
+      "archivedBytes": 110250,
+      "originalBytes": 110250,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-1-measurement.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\measurement.json",
+      "originalSha256": "050635427a0e8b51b4db35df70000ed20b1ee3ab6c1a7361674d51573b3e9f75",
+      "archivedContentSha256": "050635427a0e8b51b4db35df70000ed20b1ee3ab6c1a7361674d51573b3e9f75",
+      "compressedSha256": "68df40c4909339ebad33c9537640858c5d19e573487a9e89ff3b394c94adbcb0",
+      "archivedBytes": 118523,
+      "originalBytes": 118523,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-1-known-probe.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\known-probe.json",
+      "originalSha256": "31919280432a63be7b27dff2b05493f2cea25f677020f1f3b01455394a14d946",
+      "archivedContentSha256": "31919280432a63be7b27dff2b05493f2cea25f677020f1f3b01455394a14d946",
+      "compressedSha256": "3aed47601697a94ca21492f29d276bfd7197be2806580f5fcca859cd24a9a1d6",
+      "archivedBytes": 9362,
+      "originalBytes": 9362,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-1-known-probe-analysis.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\known-probe-analysis.json",
+      "originalSha256": "f45ebe97358c1b160f284a6d33296cb1794d3466a25cbbe5b1af22ae5aeb9ec7",
+      "archivedContentSha256": "f45ebe97358c1b160f284a6d33296cb1794d3466a25cbbe5b1af22ae5aeb9ec7",
+      "compressedSha256": "668823a7a44890aa998b054de954a91efe1c2006d392f0a327c0cd0a98ab78f3",
+      "archivedBytes": 16270,
+      "originalBytes": 16270,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-1-trace-timespan.txt.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\trace-timespan.txt",
+      "originalSha256": "849d474fc72178d53aa3b5e78f8853a161eac1b100be7c22b6558ccc4fa57da3",
+      "archivedContentSha256": "849d474fc72178d53aa3b5e78f8853a161eac1b100be7c22b6558ccc4fa57da3",
+      "compressedSha256": "da64978cd239a301cefaf981aed5033a4a180dc2f0dff598ec237fdaf4c92c45",
+      "archivedBytes": 999,
+      "originalBytes": 999,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-1-trace-statistics.txt.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\trace-statistics.txt",
+      "originalSha256": "664a678a5e15022f83f07524f544500a4e232a7909702afc30104b965a305c6a",
+      "archivedContentSha256": "664a678a5e15022f83f07524f544500a4e232a7909702afc30104b965a305c6a",
+      "compressedSha256": "5d252f5b7a15ab41569ad2d76d1529182e5278bda28748ff5b33438099f1bfe2",
+      "archivedBytes": 13409,
+      "originalBytes": 13409,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-1-control-completion.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\control-completion.json",
+      "originalSha256": "d847b63fe760d4b6f8cf5f5590139d711f427d8a9b8df3c8dd55a9c8f8ab6e79",
+      "archivedContentSha256": "d847b63fe760d4b6f8cf5f5590139d711f427d8a9b8df3c8dd55a9c8f8ab6e79",
+      "compressedSha256": "661f4c11b2893c3ffd8b968795176ebe3d89371dffc020b7ee6d4f470f633ffd",
+      "archivedBytes": 139,
+      "originalBytes": 139,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-1-ready.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\ready.json",
+      "originalSha256": "a3547dbfc121e12af313659642056d73b069bd95178ad445308a50f0c940cae9",
+      "archivedContentSha256": "a3547dbfc121e12af313659642056d73b069bd95178ad445308a50f0c940cae9",
+      "compressedSha256": "40699b41e9fee30f57573923a8981f0355b46916f86df93fe698f46e1b7b68d2",
+      "archivedBytes": 149,
+      "originalBytes": 149,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-1-v2-lifetimes.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\v2-lifetimes.log",
+      "originalSha256": "5d599f292c2c2805cf062192487ba408e9b55deedc8c7187ebba53a4d7b6ae84",
+      "archivedContentSha256": "5d599f292c2c2805cf062192487ba408e9b55deedc8c7187ebba53a4d7b6ae84",
+      "compressedSha256": "5b9c3fb3106fabb03570fa5bf905261787611943ff675ec66f203860b3ed7f09",
+      "archivedBytes": 29349,
+      "originalBytes": 29349,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-1-player-memory-events.csv.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\player-memory-events.csv",
+      "originalSha256": "06ea9dd5e40900d141e285ed9e2f01e9fee6c683a9ebd73854238ef410db52dd",
+      "archivedContentSha256": "06ea9dd5e40900d141e285ed9e2f01e9fee6c683a9ebd73854238ef410db52dd",
+      "compressedSha256": "af066e090b8ccc486b8d88381a580862d407c4954809ae3173fd0244a4a33444",
+      "archivedBytes": 6576473,
+      "originalBytes": 6576473,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "pagefault-standard-1-player-commit-lifetimes.csv.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\player-commit-lifetimes.csv",
+      "originalSha256": "2a8a2feeefedfd6974267215bce570bd6b25e4ead2fd66a68c776cfeca7ddfd9",
+      "archivedContentSha256": "2a8a2feeefedfd6974267215bce570bd6b25e4ead2fd66a68c776cfeca7ddfd9",
+      "compressedSha256": "c9d9b1731a2f5fa2e4c92a4577ab3f29e57a6aad70f40203c380a143e0210e64",
+      "archivedBytes": 6856232,
+      "originalBytes": 6856232,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "pagefault-standard-1-player-pagefault-analysis.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\player-pagefault-analysis.json",
+      "originalSha256": "493e0ff2327148638abfdea8aeebe1cb22a3d3927da71e9f127ea4f10e1ef10f",
+      "archivedContentSha256": "493e0ff2327148638abfdea8aeebe1cb22a3d3927da71e9f127ea4f10e1ef10f",
+      "compressedSha256": "23d96b4345194a694f6603aa149f662d20193be12666055514e319a006b4ada2",
+      "archivedBytes": 35989,
+      "originalBytes": 35989,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "pagefault-standard-1-player-fault-stacks-v2.html.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\player-fault-stacks-v2.html",
+      "originalSha256": "ac48b8db1c397325cb40ac8c6f8c9e6465647a056321513e0e04602519e3d442",
+      "archivedContentSha256": "ac48b8db1c397325cb40ac8c6f8c9e6465647a056321513e0e04602519e3d442",
+      "compressedSha256": "3dd9364548b2d3067670f4e3c8d9a0e4baeb9c89733c188a797c559c375bcc10",
+      "archivedBytes": 486108,
+      "originalBytes": 486108,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "pagefault-standard-2-result.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\result.json",
+      "originalSha256": "997e14f1511134446d531d5650130fc2366d9a4b8a2507704a2e7b2cf7824e50",
+      "archivedContentSha256": "acd694ecc677e8adc3db201008e02419a856d02b899d4139ba049cd4ff26d137",
+      "compressedSha256": "d3b2c6c5e8f26a6524384313585ff8d4b19e78592ee94fa9d0e165f27a6018ee",
+      "archivedBytes": 13362,
+      "originalBytes": 610157,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "pagefault-standard-2-measurement.memory.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\measurement.memory.json",
+      "originalSha256": "a64408e995772b793fe7741c374c0795d8130a99bb3ddcd53a60b60cb4ad287d",
+      "archivedContentSha256": "a64408e995772b793fe7741c374c0795d8130a99bb3ddcd53a60b60cb4ad287d",
+      "compressedSha256": "a609fda2e59c6dcb19705fde0727c9f0dd447f91abb96370dd5c4e100d370d2e",
+      "archivedBytes": 49319,
+      "originalBytes": 49319,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-2-measurement.input.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\measurement.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "archivedBytes": 1687,
+      "originalBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-2-measurement.csv.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\measurement.csv",
+      "originalSha256": "f284de27d5945f78e36721aa1720337c6b338af58f1659e93be604f6889208d6",
+      "archivedContentSha256": "f284de27d5945f78e36721aa1720337c6b338af58f1659e93be604f6889208d6",
+      "compressedSha256": "1d56d09a389178d4f1abf4d3f04168e4e84896aefd79998948f863cf6a359dad",
+      "archivedBytes": 110255,
+      "originalBytes": 110255,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-2-measurement.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\measurement.json",
+      "originalSha256": "07667f307344df5b8581ff64ce9746eaf6dd96abae5f0a4ac2e88ad654b417e2",
+      "archivedContentSha256": "07667f307344df5b8581ff64ce9746eaf6dd96abae5f0a4ac2e88ad654b417e2",
+      "compressedSha256": "9d917b3d46fe412cedb735bd694b649aab88cb79c2f3dee48b1d91efa5a2577b",
+      "archivedBytes": 118701,
+      "originalBytes": 118701,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-2-known-probe.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\known-probe.json",
+      "originalSha256": "a4a49402853d4986d8087d700d9755b918099c71ddc30a4742ab29cd909e06f6",
+      "archivedContentSha256": "a4a49402853d4986d8087d700d9755b918099c71ddc30a4742ab29cd909e06f6",
+      "compressedSha256": "a0c8fe3224b1d9eb2f7a2273b1f3d45b01bbc0294e7d4df712295b401850af5b",
+      "archivedBytes": 9362,
+      "originalBytes": 9362,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-2-known-probe-analysis.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\known-probe-analysis.json",
+      "originalSha256": "cce16d5e49e4921420f69bb40d6ef44b51b26daed003e6a52b1b64cca1ed7d50",
+      "archivedContentSha256": "cce16d5e49e4921420f69bb40d6ef44b51b26daed003e6a52b1b64cca1ed7d50",
+      "compressedSha256": "ce65692bc4ae97e887636538d65daa160a5dbee0eca4ae91e65bea21b9dbef75",
+      "archivedBytes": 16639,
+      "originalBytes": 16639,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-2-trace-timespan.txt.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\trace-timespan.txt",
+      "originalSha256": "ca33f052136822a9e6ac57dc56e245490293d8d6a1b634c470bca5a24fb1f682",
+      "archivedContentSha256": "ca33f052136822a9e6ac57dc56e245490293d8d6a1b634c470bca5a24fb1f682",
+      "compressedSha256": "ab34137c98caeaba12923d70607299af1746c99936b20ef02d08ca93b6afe0d9",
+      "archivedBytes": 999,
+      "originalBytes": 999,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-2-trace-statistics.txt.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\trace-statistics.txt",
+      "originalSha256": "0150d0da2ced7178b040607d8c56d446ba5af9cfb82ae06ba6c98e551e418edf",
+      "archivedContentSha256": "0150d0da2ced7178b040607d8c56d446ba5af9cfb82ae06ba6c98e551e418edf",
+      "compressedSha256": "3fba4631a530a1c8b3b24084508e327bc12b51e7e960489b2a3de14bb214c0e5",
+      "archivedBytes": 13409,
+      "originalBytes": 13409,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-2-control-completion.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\control-completion.json",
+      "originalSha256": "131bd82f5359718ff7118215d9aa2e28aa8d3780a75d33129f64d3e137846b3d",
+      "archivedContentSha256": "131bd82f5359718ff7118215d9aa2e28aa8d3780a75d33129f64d3e137846b3d",
+      "compressedSha256": "3f10aee471406713b9ee5170d0dca2f4b4f7241fe4cde90a6aaeaefda7b2ea64",
+      "archivedBytes": 139,
+      "originalBytes": 139,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-2-ready.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\ready.json",
+      "originalSha256": "05da9600c310de48ec9140d3579d603b0923a16bd8e2e8fa0dcb093b4ffb38ef",
+      "archivedContentSha256": "05da9600c310de48ec9140d3579d603b0923a16bd8e2e8fa0dcb093b4ffb38ef",
+      "compressedSha256": "eb72e93f44509027831fa2709bb005d5f28f84839735caa4c7a831c8fc02de25",
+      "archivedBytes": 149,
+      "originalBytes": 149,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-2-v2-lifetimes.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\v2-lifetimes.log",
+      "originalSha256": "a418be80601bd0c3c80354f592775f4998de803d64d10d618a5c11136a4181b1",
+      "archivedContentSha256": "a418be80601bd0c3c80354f592775f4998de803d64d10d618a5c11136a4181b1",
+      "compressedSha256": "db6e634a756a02997b5ae286406b39126fe698aaf270800036fd831331031a5e",
+      "archivedBytes": 29349,
+      "originalBytes": 29349,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-2-player-memory-events.csv.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\player-memory-events.csv",
+      "originalSha256": "324acdbf0c2c446d03365d5540bab76fe87b8fbb24381dbc4bea00b34f2b376f",
+      "archivedContentSha256": "324acdbf0c2c446d03365d5540bab76fe87b8fbb24381dbc4bea00b34f2b376f",
+      "compressedSha256": "4c215d9ee321faf72916370da450bfd85e9c9d1fab7bded547abf051a6243b07",
+      "archivedBytes": 7213401,
+      "originalBytes": 7213401,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "pagefault-standard-2-player-commit-lifetimes.csv.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\player-commit-lifetimes.csv",
+      "originalSha256": "6026c7fb336fa34826f3feab0f14f1bbdd2e1ff968dac2dfdcb609eb7bcd352c",
+      "archivedContentSha256": "6026c7fb336fa34826f3feab0f14f1bbdd2e1ff968dac2dfdcb609eb7bcd352c",
+      "compressedSha256": "247b1232ec7124fe2c4b74ca5705f3743d2dad21d4b7b4ebcef37ed0cf660d40",
+      "archivedBytes": 6646123,
+      "originalBytes": 6646123,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "pagefault-standard-2-player-pagefault-analysis.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\player-pagefault-analysis.json",
+      "originalSha256": "44880c1b4cd4881acc6979d28f112502ae79fed5f306ef978ee8eeabd77fc208",
+      "archivedContentSha256": "44880c1b4cd4881acc6979d28f112502ae79fed5f306ef978ee8eeabd77fc208",
+      "compressedSha256": "7bc8dbbf30196d27250cd683f8ae3ee2f5c38a2cb8d81cb3c224704bba53205c",
+      "archivedBytes": 36049,
+      "originalBytes": 36049,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "pagefault-standard-2-player-fault-stacks-v2.html.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\player-fault-stacks-v2.html",
+      "originalSha256": "9da707dd05102460c487a6d86cfcc2237c02a358d4bd3b312d80807e505ea4ef",
+      "archivedContentSha256": "9da707dd05102460c487a6d86cfcc2237c02a358d4bd3b312d80807e505ea4ef",
+      "compressedSha256": "a9057fe772a83437d392a06e925e07918533d99b2d6fa9c59a4a0d9c1fcaff08",
+      "archivedBytes": 485011,
+      "originalBytes": 485011,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "pagefault-standard-3-result.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\result.json",
+      "originalSha256": "f479662b54c49ded7caa0e7125fe6dfb557b4bcb9bcd548ea57f4f4d024fe05e",
+      "archivedContentSha256": "ebe1b3df4a5398349d9bfcafb0664064c974392c03dada1a830985cc066ec82d",
+      "compressedSha256": "d3f333f26ef4f8f49a7de28225c35d422234dd161f2422f5b7d19366d960a7bd",
+      "archivedBytes": 13287,
+      "originalBytes": 610075,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "pagefault-standard-3-measurement.memory.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\measurement.memory.json",
+      "originalSha256": "72e53bb1f142acdc1133092a53b7a48c9b02dc113857a1dc614572ff72c5f029",
+      "archivedContentSha256": "72e53bb1f142acdc1133092a53b7a48c9b02dc113857a1dc614572ff72c5f029",
+      "compressedSha256": "e4461e10930b52e30ef488c082c73aecd2a4b6070afce749f5e32ec1b9d329be",
+      "archivedBytes": 48605,
+      "originalBytes": 48605,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-3-measurement.input.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\measurement.input.json",
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "archivedContentSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "archivedBytes": 1687,
+      "originalBytes": 1687,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-3-measurement.csv.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\measurement.csv",
+      "originalSha256": "8765e1cf1bdaf07f79b9a46c75a5549492c9a3cc800ecff3a8f081b394efc5f3",
+      "archivedContentSha256": "8765e1cf1bdaf07f79b9a46c75a5549492c9a3cc800ecff3a8f081b394efc5f3",
+      "compressedSha256": "2238be3c0a3c96a07bd41dba7ff2a3e814ba19780fc77d729604b9cc6b323373",
+      "archivedBytes": 110254,
+      "originalBytes": 110254,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-3-measurement.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\measurement.json",
+      "originalSha256": "8cc5587d4c5e9c8569a82c90471d39d7a54f2951c7fcfa25301aa7ae9566a30b",
+      "archivedContentSha256": "8cc5587d4c5e9c8569a82c90471d39d7a54f2951c7fcfa25301aa7ae9566a30b",
+      "compressedSha256": "72089e663c64a24c77843ff51c0a291d48c294f493da7bb33c4f975007d182a9",
+      "archivedBytes": 118654,
+      "originalBytes": 118654,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-3-known-probe.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\known-probe.json",
+      "originalSha256": "1078adc058c85acc89ea48ede338a81f8dbf3848c1d83f6642e294bb068f565e",
+      "archivedContentSha256": "1078adc058c85acc89ea48ede338a81f8dbf3848c1d83f6642e294bb068f565e",
+      "compressedSha256": "a7a23e5c60afed9bbef2be9759e79a37669e8f152f4a667b76e4f68329c45bc1",
+      "archivedBytes": 9362,
+      "originalBytes": 9362,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-3-known-probe-analysis.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\known-probe-analysis.json",
+      "originalSha256": "75d3244315863a8e8c65be7c1767c429e378b23425bb5b954469c521df668d68",
+      "archivedContentSha256": "75d3244315863a8e8c65be7c1767c429e378b23425bb5b954469c521df668d68",
+      "compressedSha256": "ac79772448a3e58011f5e9ceaccc3d9a086e252984bd5bbf4182acff6f086d81",
+      "archivedBytes": 15882,
+      "originalBytes": 15882,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-3-trace-timespan.txt.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\trace-timespan.txt",
+      "originalSha256": "04372e75580da287e23dc16e94f81cacf24fb9237861770fbb5a377c50504f5a",
+      "archivedContentSha256": "04372e75580da287e23dc16e94f81cacf24fb9237861770fbb5a377c50504f5a",
+      "compressedSha256": "696c4851f17ac372f75280287f8fa32b0084b9c48622843f590aeb71fd0d805d",
+      "archivedBytes": 999,
+      "originalBytes": 999,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-3-trace-statistics.txt.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\trace-statistics.txt",
+      "originalSha256": "b9e550ff7655a135add9eca0e405a8d03b95ecfeb956cf8bfcaa634a910a356e",
+      "archivedContentSha256": "b9e550ff7655a135add9eca0e405a8d03b95ecfeb956cf8bfcaa634a910a356e",
+      "compressedSha256": "be66461034836bac41d4d5975eb95f37ecf88a7b1285fccf019db1dad165e521",
+      "archivedBytes": 13409,
+      "originalBytes": 13409,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-3-control-completion.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\control-completion.json",
+      "originalSha256": "7db13a02b5070ca9a4704bfc83474d30eefe810fa911f9607f6b915625a606f8",
+      "archivedContentSha256": "7db13a02b5070ca9a4704bfc83474d30eefe810fa911f9607f6b915625a606f8",
+      "compressedSha256": "3cf834c66d426a813b60caac2b758b0e35113596b8dfee1f3df97f0efdb1de60",
+      "archivedBytes": 139,
+      "originalBytes": 139,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-3-ready.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\ready.json",
+      "originalSha256": "915424427e472731ee900917f29c515d533fcaa0fb97a403de0b47d14dc76422",
+      "archivedContentSha256": "915424427e472731ee900917f29c515d533fcaa0fb97a403de0b47d14dc76422",
+      "compressedSha256": "be46ca7604887607fd18275d69c971d772c6b2d195e0fb802b4c7034d5b1d0e4",
+      "archivedBytes": 149,
+      "originalBytes": 149,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-3-v2-lifetimes.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\v2-lifetimes.log",
+      "originalSha256": "eef1ed9ac4c63c2458beec089c32c46c94f268e058dfbc6a5a46b280a7fc4e3c",
+      "archivedContentSha256": "eef1ed9ac4c63c2458beec089c32c46c94f268e058dfbc6a5a46b280a7fc4e3c",
+      "compressedSha256": "19d2f3bf7700f80616578e1653aba6e4655b69e3a57263af4b94ab8b55697bc9",
+      "archivedBytes": 29349,
+      "originalBytes": 29349,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "pagefault-standard-3-player-memory-events.csv.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\player-memory-events.csv",
+      "originalSha256": "0ea23cde7eec611a9fc8687a66d33678288c81e0a3af992c92a4d755dd82fcf1",
+      "archivedContentSha256": "0ea23cde7eec611a9fc8687a66d33678288c81e0a3af992c92a4d755dd82fcf1",
+      "compressedSha256": "9bc1c65d529ab5b4a9a9d6858320349bbc7ee754f934dd14537cab7e0520889d",
+      "archivedBytes": 6556522,
+      "originalBytes": 6556522,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "pagefault-standard-3-player-commit-lifetimes.csv.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\player-commit-lifetimes.csv",
+      "originalSha256": "d0fa9cbffc23ae7ca287a2fba73fa2d01a1a3f9ab60e0284b69d06c7614f9f10",
+      "archivedContentSha256": "d0fa9cbffc23ae7ca287a2fba73fa2d01a1a3f9ab60e0284b69d06c7614f9f10",
+      "compressedSha256": "cf553efa0ed4fb0cb2f40f8ec89ebe9bdf47ff3803a67e75252c0edee8056e08",
+      "archivedBytes": 6574226,
+      "originalBytes": 6574226,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "pagefault-standard-3-player-pagefault-analysis.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\player-pagefault-analysis.json",
+      "originalSha256": "afa72b3c9f94032dd8db7fdf7c35ec62459a1e7d39195ab43d1f0c706c9d518c",
+      "archivedContentSha256": "afa72b3c9f94032dd8db7fdf7c35ec62459a1e7d39195ab43d1f0c706c9d518c",
+      "compressedSha256": "9b125600e70725ee0a183c9d5a5d27eec832792c325924f3849f57042d7567b2",
+      "archivedBytes": 36186,
+      "originalBytes": 36186,
+      "kind": "DerivedTargetProcessOnly"
+    },
+    {
+      "path": "pagefault-standard-3-player-fault-stacks-v2.html.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\player-fault-stacks-v2.html",
+      "originalSha256": "5d10122c22e0e1ddab66ba333835f8df8c5793559cc5924b911b36ececa7cd59",
+      "archivedContentSha256": "5d10122c22e0e1ddab66ba333835f8df8c5793559cc5924b911b36ececa7cd59",
+      "compressedSha256": "5ddcb88fe4cf59e86e680b9afddb18d0cc911f4437db06bea4f705d24254f865",
+      "archivedBytes": 484989,
+      "originalBytes": 484989,
+      "kind": "DerivedTargetProcessOnly"
+    }
+  ],
+  "rawSystemTraces": [
+    {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-1\\memory.etl",
+      "sha256": "7c8ccf407f1dfc1ca72c94db5e27a9fa6c3b0914683a6417e63331d3eed85187",
+      "bytes": 218103808,
+      "retainedLocally": true
+    },
+    {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-2\\memory.etl",
+      "sha256": "87356a8aa7c1caf3e327de371dba8d37fabd027b70a1b70b050885f28653571c",
+      "bytes": 191889408,
+      "retainedLocally": true
+    },
+    {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\pagefault-standard-3\\memory.etl",
+      "sha256": "2a1a3d6e88b3a16bc247b62d71b9eea79a11293574f99588b75a6e165a77436e",
+      "bytes": 168820736,
+      "retainedLocally": true
+    }
+  ],
+  "formalPerformancePassedRounds": 8,
+  "formalPerformanceRounds": 15,
+  "standardLongRunPassed": true,
+  "fullRootCauseResolved": false,
+  "originalProjectTargetPassed": true,
+  "originalProjectFailureCauseIdentified": false
+}

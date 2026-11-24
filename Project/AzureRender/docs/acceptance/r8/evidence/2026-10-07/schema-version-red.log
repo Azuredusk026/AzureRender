@@ -1,0 +1,21 @@
+FF
+======================================================================
+FAIL: test_contract_versions_require_exact_integer_types (__main__.ShaderModuleTests.test_contract_versions_require_exact_integer_types) (version=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_shader_module.py", line 128, in test_contract_versions_require_exact_integer_types
+    self.assertNotEqual(self.compile().returncode,0,'Request version must be the integer 1')
+AssertionError: 0 == 0 : Request version must be the integer 1
+
+======================================================================
+FAIL: test_contract_versions_require_exact_integer_types (__main__.ShaderModuleTests.test_contract_versions_require_exact_integer_types) (version=1.0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_shader_module.py", line 128, in test_contract_versions_require_exact_integer_types
+    self.assertNotEqual(self.compile().returncode,0,'Request version must be the integer 1')
+AssertionError: 0 == 0 : Request version must be the integer 1
+
+----------------------------------------------------------------------
+Ran 1 test in 2.203s
+
+FAILED (failures=2)

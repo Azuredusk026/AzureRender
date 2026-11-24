@@ -1,0 +1,148 @@
+#include "runtime/LevelSession.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
+#include "assets/GltfLoader.hpp"
+#include "assets/MaterialPixelStorage.hpp"
+#include "render/ViewFogBindingJson.hpp"
+#include <nlohmann/json.hpp>
+#include <set>
+namespace azurerender {
+namespace {
+void assignLegacyResourceKey(Level& level,const AssetDatabase& assets){
+    if(!level.resourceKey.empty())return;
+    if(level.scene.viewFog.analytic)level.resourceKey+="fogAnalytic:"+nlohmann::json(level.scene.viewFog).dump();
+    for(const auto& resource:level.scene.resources){
+        level.resourceKey+=resource.path.lexically_normal().generic_u8string()+":";
+        for(const auto& record:assets.records())if(record.second.path==resource.path)level.resourceKey+=std::to_string(record.second.fingerprint);
+    }
+    if(!level.scene.viewFog.asset.empty()){
+        level.resourceKey+="viewFog:"+level.scene.viewFog.asset;
+        for(const auto& record:assets.records())if(record.second.path==std::filesystem::u8path(level.scene.viewFog.asset))
+            level.resourceKey+=":"+std::to_string(record.second.fingerprint);
+    }
+}
+Level loadProjectLevel(const Project& project, const AssetDatabase& assets, const std::string& reference) {
+    const auto path=assets.resolveReference(reference);
+    if(path.extension()==".azurelevel") return Level::load(path, assets);
+    Level level;
+    level.scene=project.loadScene(path, assets);
+    assignLegacyResourceKey(level, assets);
+    return level;
+}
+}
+
+ProjectStartup::ProjectStartup(Project project)
+    : project_(std::move(project)), assets_(project_) {
+    assets_.refresh();
+    level_=loadProjectLevel(project_, assets_, project_.startupScene);
+}
+LevelSession::LevelSession(Project project, RuntimeLifecycle& runtime)
+    : LevelSession(ProjectStartup(std::move(project)), runtime) {}
+LevelSession::LevelSession(const ProjectStartup& startup, RuntimeLifecycle& runtime)
+    : project_(startup.project()), runtime_(runtime), assets_(startup.assets()) {
+    commit(startup.level(), project_.startupScene);
+    nextPoll_ = std::chrono::steady_clock::now() + std::chrono::milliseconds(500);
+}
+LevelSession::~LevelSession(){if(cancelled_)*cancelled_=true;if(work_.valid())work_.wait();}
+void LevelSession::request(std::string reference){
+    ++generation_;if(cancelled_)*cancelled_=true;pending_=std::move(reference);preload_.reset();preparing_.reset();error_.clear();
+}
+void LevelSession::preload(const std::string& reference){
+    if(preloaded(reference))return;
+    prepared_.erase(reference);
+    ++generation_;if(cancelled_)*cancelled_=true;preparing_.reset();preload_=reference;error_.clear();
+}
+void LevelSession::cancelPending(){++generation_;if(cancelled_)*cancelled_=true;pending_.reset();preload_.reset();preparing_.reset();}
+void LevelSession::startWork(const std::string& reference,bool refresh){
+    auto database=assets_;const auto project=project_;const auto generation=generation_;
+    auto retired=std::move(retiredRefresh_);retiredRefresh_.reset();
+    cancelled_=std::make_shared<std::atomic<bool>>(false);auto cancelled=cancelled_;const auto activeKey=level_.resourceKey;const auto meshes=level_.preparedMeshes;
+    work_=std::async(std::launch::async,[database=std::move(database),project,reference,generation,refresh,cancelled,activeKey,meshes,retired=std::move(retired)]()mutable{
+        // Explicit reset keeps large destruction on the worker even when the
+        // async callable's shared state is later released by main-thread get().
+        retired.reset();
+        auto check=[&]{if(*cancelled)throw std::runtime_error("Level preparation cancelled");};
+        check();database.refresh(false,check);check();
+        auto level=loadProjectLevel(project,database,reference);
+        if(level.resourceKey==activeKey)level.preparedMeshes=meshes;
+        ImmutableBytePool pixelPool;
+        for(const auto& resource:level.scene.resources){
+            if((!refresh || level.resourceKey!=activeKey) && !level.preparedMeshes.count(resource.path.lexically_normal().generic_u8string())){
+                check();auto mesh=loadGltfAsset(resource.path.u8string());
+                for(auto& material:mesh.materials){check();prepareMaterialPixels(material,pixelPool);}
+                check();level.preparedMeshes.emplace(resource.path.lexically_normal().generic_u8string(),std::make_shared<const LoadedAsset>(std::move(mesh)));
+            }
+        }
+        check();return Candidate{std::move(database),std::move(level),reference,generation,refresh};
+    });
+}
+bool LevelSession::accept(Candidate candidate){
+    // The renderer prepares against the candidate without publishing its database.
+    commit(std::move(candidate.level),candidate.reference);assets_=std::move(candidate.assets);error_.clear();return true;
+}
+void LevelSession::commit(Level candidate, const std::string& reference) {
+    const auto start=std::chrono::steady_clock::now();
+    runtime_.replaceScene(candidate.scene, [&](auto& runtime) {
+        for (const auto& node : candidate.components) installComponents(runtime.world(), runtime.entity(node.first), node.second);
+        if (prepare_) prepare_(candidate);
+    });
+    level_ = std::move(candidate); reference_ = reference; ++revision_;
+    commitMilliseconds_=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();
+}
+bool LevelSession::poll() {
+    try {
+        if(runtime_.state()==RuntimeLifecycle::State::Stopped){cancelPending();return false;}
+        if(work_.valid()){
+            if(work_.wait_for(std::chrono::seconds(0))==std::future_status::ready){
+                try{
+                    auto candidate=work_.get();
+                    if(candidate.generation==generation_){
+                        if(candidate.refresh){
+                            if(candidate.level.reloadKey()!=level_.reloadKey()){prepared_.clear();preparing_=std::move(candidate);}
+                            else{
+                                std::swap(assets_,candidate.assets);
+                                retiredRefresh_=std::move(candidate);
+                                error_.clear();
+                            }
+                        }else{
+                            preparing_=std::move(candidate);
+                        }
+                    }
+                }catch(const std::exception&){if(cancelled_ && !*cancelled_)throw;}
+                nextPoll_=std::chrono::steady_clock::now()+std::chrono::milliseconds(500);
+            }
+        }
+        if(preparing_){
+            if(!upload_ || upload_(preparing_->level)){
+                if(preparing_->refresh){auto candidate=std::move(*preparing_);preparing_.reset();return accept(std::move(candidate));}
+                // A freshly scanned request owns the current database snapshot.
+                // Comparing it with the active snapshot would reject legitimate
+                // edits made before switching and restart preparation forever.
+                if(pending_ && *pending_==preparing_->reference
+                    && (!ready_ || ready_(preparing_->level))){
+                    auto candidate=std::move(*preparing_);preparing_.reset();
+                    pending_.reset();return accept(std::move(candidate));
+                }
+                if(prepared_.size()>=2)prepared_.erase(prepared_.begin());
+                const auto reference=preparing_->reference;
+                prepared_.insert_or_assign(reference,std::move(*preparing_));preparing_.reset();
+            }else return false;
+        }
+        if(pending_){
+            const auto reference=*pending_;
+            if(reference==reference_){pending_.reset();commit(level_,reference);error_.clear();return true;}
+            if(auto found=prepared_.find(reference);found!=prepared_.end() && preloaded(reference)){
+                auto candidate=found->second;pending_.reset();return accept(std::move(candidate));
+            }
+            prepared_.erase(reference);
+            if(!work_.valid())startWork(reference,false);
+        }else if(preload_){if(!work_.valid()){const auto reference=*preload_;preload_.reset();startWork(reference,false);}}
+        else if(!work_.valid() && std::chrono::steady_clock::now()>=nextPoll_){startWork(reference_,true);}
+    } catch (const std::exception& error) {
+        pending_.reset();
+        preload_.reset();preparing_.reset();
+        if (error_ != error.what()) RuntimeDiagnostics::instance().warning("runtime", error.what());
+        error_ = error.what();
+    }
+    return false;
+}
+} // namespace azurerender

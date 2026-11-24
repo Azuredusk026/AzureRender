@@ -1,0 +1,9 @@
+[0/2] Re-checking globbed directories...
+[1/9] Building CXX object CMakeFiles\AzureRuntime.dir\src\scripting\BindingDescriptor.cpp.obj
+[2/9] Building CXX object CMakeFiles\AzureScriptEntityTests.dir\tests\ScriptEntityTests.cpp.obj
+[3/9] Building CXX object CMakeFiles\AzureScriptRuntimeTests.dir\tests\ScriptRuntimeTests.cpp.obj
+[4/9] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ScriptRuntime.cpp.obj
+[5/9] Linking CXX static library AzureRuntime.lib
+[6/9] Linking CXX executable AzureScriptBackendContractTests.exe
+[7/9] Linking CXX executable AzureScriptEntityTests.exe
+[8/9] Linking CXX executable AzureScriptRuntimeTests.exe

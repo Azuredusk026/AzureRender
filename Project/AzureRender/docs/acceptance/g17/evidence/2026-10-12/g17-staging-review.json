@@ -1,0 +1,31 @@
+{
+  "selectedFiles": [
+    "Project/AzureRender/CMakeLists.txt",
+    "Project/AzureRender/docs/runtime/asset-formats.md",
+    "Project/AzureRender/src/assets/AssetFormatRegistry.cpp",
+    "Project/AzureRender/src/assets/AssetFormatRegistry.hpp",
+    "Project/AzureRender/src/assets/AssetTransfer.cpp",
+    "Project/AzureRender/src/assets/AssetTransfer.hpp",
+    "Project/AzureRender/src/assets/GltfLoader.cpp",
+    "Project/AzureRender/src/editor/AssetImportJob.cpp",
+    "Project/AzureRender/src/editor/AssetImportJob.hpp",
+    "Project/AzureRender/src/editor/EditorProjectEditing.cpp",
+    "Project/AzureRender/src/editor/commands/EditTransaction.cpp",
+    "Project/AzureRender/src/editor/commands/EditorOperations.cpp",
+    "Project/AzureRender/src/editor/panels/AssetBrowserPanel.cpp",
+    "Project/AzureRender/src/extensions/IAssetImporter.hpp",
+    "Project/AzureRender/src/runtime/AssetDatabase.cpp",
+    "Project/AzureRender/src/runtime/AssetTypeRegistry.hpp",
+    "Project/AzureRender/src/runtime/Project.cpp",
+    "Project/AzureRender/src/runtime/SceneDocument.cpp",
+    "Project/AzureRender/tests/AssetFormatRegistryTests.cpp",
+    "Project/AzureRender/tests/EditorAssetWorkflowTests.cpp"
+  ],
+  "excludedInitialUserChanges": true,
+  "tests": {
+    "debugCpu": "g17-frozen-debug-cpu.log",
+    "releaseCpu": "g17-frozen-release-cpu.log",
+    "debugGpu": "g17-frozen-debug-gpu.log",
+    "releaseGpu": "g17-frozen-release-gpu.log"
+  }
+}

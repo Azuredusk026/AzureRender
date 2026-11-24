@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workspace.py", line 154, in <module>
+    main(args.executable.resolve(),args.output.resolve() if args.output else Path(temporary))
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workspace.py", line 49, in main
+    first=results[name]['visibleAssets'][0]['id']
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range

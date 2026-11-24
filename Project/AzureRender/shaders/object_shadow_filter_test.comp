@@ -1,0 +1,39 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+layout(local_size_x=1) in;
+layout(set=0,binding=0,std430) buffer Output { vec4 results[]; } outputData;
+layout(set=0,binding=20,std430) readonly buffer Records { vec2 values[]; } records;
+layout(set=0,binding=1,std430) readonly buffer Queries { vec4 values[]; } queries;
+layout(set=0,binding=9) uniform texture2D clearDepth;
+layout(set=0,binding=29) uniform texture2D objectDepth;
+layout(set=0,binding=28) uniform sampler sharedSampler;
+#include "object_shadow.glsl"
+vec2 objectShadowRecordPair(uint index) { return records.values[index]; }
+void main(){
+    uint i=gl_GlobalInvocationID.x;
+    if(i<4u){
+        ObjectShadowRecord r;
+        bool valid=objectShadowLoadRecord(3u,i,r);
+        outputData.results[i]=valid?vec4(r.worldToUnit[3].x,r.biasAndFilter.x,r.atlasRect.z,1):vec4(0);
+    }else if(i==4u){
+        ObjectShadowRecord r;objectShadowLoadRecord(3u,1u,r);
+        outputData.results[i]=vec4(objectShadowReceiver(r,vec3(.5),vec3(0,0,1)).z,
+            objectShadowReceiver(r,vec3(.5),vec3(0,0,-1)).z,
+            objectShadowDistribution(61,11.3707466,.4809036),objectShadowUnorm8(.0184217683));
+    }else if(i==5u){
+        ObjectShadowRecord r;objectShadowLoadRecord(3u,2u,r);outputData.results[i]=r.receiverSampling;
+    }else if(i<11u){
+        mat4 projection=mat4(2,0,0,0,0,-4,0,0,0,0,1,-1,0,0,0,0);
+        vec3 position=vec3(.5,.25,-2),right=vec3(1,0,0),up=vec3(0,1,0);
+        if(i==7u){projection[2].xy=vec2(.2,-.3);} // Off-axis perspective.
+        if(i==8u){projection[2].w=0;projection[3].w=1;} // Orthographic.
+        if(i==9u){projection=mat4(0,0,1,1,0,-4,0,0,-2,0,0,0,0,0,0,0);position=vec3(2,.25,-.5);right=vec3(0,0,-1);}
+        if(i==10u){projection=mat4(0);}
+        outputData.results[i]=vec4(objectShadowReceiverPosition(position,vec2(-.5,.5),projection,right,up,vec2(200,100)),1);
+    }else{
+        uint j=(i-11u)*3u;vec4 a=queries.values[j],b=queries.values[j+1u],c=queries.values[j+2u];
+        vec2 filtered=objectShadowFilter(objectDepth,sharedSampler,a.xy,a.z,ivec2(b.xy),c,b.zw);
+        vec2 clear=objectShadowFilter(clearDepth,sharedSampler,vec2(.5),a.z,ivec2(0),vec4(0,0,1,1),vec2(0));
+        outputData.results[i]=vec4(filtered,objectShadowUnorm8(filtered.x),clear.x);
+    }
+}

@@ -1,0 +1,339 @@
+Preset CMake variables:
+
+  CMAKE_BUILD_TYPE="Debug"
+  CMAKE_TOOLCHAIN_FILE="C:\Users\23587\Tools\vcpkg/scripts/buildsystems/vcpkg.cmake"
+  VCPKG_TARGET_TRIPLET="x64-windows"
+
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+  * brotli:x64-windows@1.2.0
+  * bzip2[core,tool]:x64-windows@1.0.8#6
+  * freetype[core,zlib,png,bzip2,brotli]:x64-windows@2.14.3
+    glfw3:x64-windows@3.5.1
+  * imath:x64-windows@3.2.2
+  * itlib:x64-windows@1.12.2
+    joltphysics:x64-windows@5.6.0
+  * libdeflate[core,zlib,gzip,decompression,compression]:x64-windows@1.25
+  * libpng:x64-windows@1.6.58
+    lua:x64-windows@5.4.8
+    miniaudio:x64-windows@0.11.25
+  * nlohmann-json:x64-windows@3.12.0#2
+    openexr:x64-windows@3.4.13
+  * openjph:x64-windows@0.31.0
+    rmlui[core,freetype]:x64-windows@6.3
+  * robin-hood-hashing:x64-windows@3.11.5#2
+    sol2:x64-windows@3.5.0#1
+    stb:x64-windows@2024-07-29#1
+    tinygltf:x64-windows@3.0.0#1
+  * vcpkg-cmake:x64-windows@2024-04-23
+  * vcpkg-cmake-config:x64-windows@2026-07-21
+    vulkan-memory-allocator:x64-windows@3.4.0
+  * zlib:x64-windows@1.3.2#1
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+miniaudio is header-only and can be used from CMake via:
+
+  find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
+  target_include_directories(main PRIVATE ${MINIAUDIO_INCLUDE_DIRS})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+rmlui provides CMake targets:
+
+    find_package(RmlUi CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE RmlUi::RmlUi)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+All requested installations completed successfully in: 2.08 ms
+-- Running vcpkg install - done
+-- Found Freetype target Freetype::Freetype - Freetype font engine enabled
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+ninja: no work to do.
+{"status": "passed", "manifest": "build\\ninja-msvc-debug\\build-provenance.json"}
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/AzureRender.exe
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/AzurePlayer.exe
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/AzureMetaGen.exe
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/concrt140.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/msvcp140.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/msvcp140_1.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/msvcp140_2.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/msvcp140_atomic_wait.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/msvcp140_codecvt_ids.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/vccorlib140.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/vcruntime140.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/vcruntime140_1.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/vcruntime140_threads.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/background.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/background.vert.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/background_bindless.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/blackhole.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/blackhole.vert.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/blackhole_composite.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/blackhole_taa.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/blackhole_taa_compute.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/bloom_composite.comp.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/bloom_downsample.comp.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/clear.comp.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/cull_indirect.comp.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/game-ui.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/game-ui.vert.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/hud.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/hud.vert.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/ibl_prefilter.comp.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/inner_outline.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/inner_outline.vert.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/mesh.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/mesh.vert.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/mesh_bindless.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/mesh_compute.vert.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/outline.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/outline.vert.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/outline_compute.vert.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/shadow.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/shadow.vert.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/shadow_bindless.frag.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/shadow_compute.vert.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/shaders/skin.comp.spv
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/baselines
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/baselines/character
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/baselines/character/character_albedo_fullbody.png
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/baselines/character/character_beauty_fullbody.png
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/baselines/character/character_direct_diffuse_fullbody.png
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/baselines/character/character_face_sdf_closeup.png
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/baselines/character/character_material_id_fullbody.png
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/baselines/character/character_outline_fullbody.png
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/baselines/character/character_world_normal_fullbody.png
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/face_sdf_v1.png
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/fonts
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/fonts/.gitattributes
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/fonts/LatoLatin-Regular.ttf
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/fonts/RmlUi-Sample-Fonts-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/courtyard.azurelevel
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/courtyard.azurelevel.azmeta
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/destination.azurelevel
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/destination.azurelevel.azmeta
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/hero.gltf
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/hero.gltf.azmeta
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/hud.rml
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/hud.rml.azmeta
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/motion.json
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/motion.json.azmeta
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/player.lua
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/player.lua.azmeta
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/portal.gltf
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/portal.gltf.azmeta
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/portal.lua
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/portal.lua.azmeta
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/portal.wav
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/assets/portal.wav.azmeta
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/gameplay/project.azureproject
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/level.schema.json
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/project.schema.json
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/README.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/scenes
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/scenes/clustered_lights_16.azscene
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/scenes/clustered_lights_empty.azscene
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/scenes/r4_stress.azscene
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/showcase_looks.json
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/test_env.hdr
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/test_env_strong.hdr
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/test_model.gltf
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/toon_ramp_atlas.ppm
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets_public/toon_ramp_profiles.json
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/README.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/CHANGELOG.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/THIRD_PARTY_NOTICES.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/index.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/getting-started.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/architecture.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/character-rendering.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/blackhole-rendering.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets-and-editor.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/development-and-release.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/reference.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/documentation-standard.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/azure-engine-plan.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/render-core-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/compute-passes.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/environment-assets.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/clustered-lighting.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/render-graph.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/rhi-synchronization.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/scene-data.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/parallel-submission.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/windows-acceptance.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/engine-foundation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/g0-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/g1-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/g2-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/g3-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/g4-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/reflection.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/assets-levels.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/physics-input.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/scripts-gameplay.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/index.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/getting-started.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/architecture.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/character-rendering.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/blackhole-rendering.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/assets-and-editor.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/development-and-release.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/reference.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/documentation-standard.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/plans/azure-engine-plan.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/plans/render-core-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/compute-passes.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/environment-assets.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/clustered-lighting.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/render-graph.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/rhi-synchronization.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/scene-data.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/parallel-submission.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/windows-acceptance.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/engine-foundation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/plans/g0-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/plans/g1-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/plans/g2-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/plans/g3-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/plans/g4-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/reflection.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/assets-levels.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/physics-input.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/scripts-gameplay.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/acceptance/r1/2026-09-26.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/acceptance/r2/2026-09-26.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/acceptance/r3/2026-10-03.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/acceptance/r4/2026-10-03.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/blackhole-performance.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/plans/2026-10-03-blackhole-optimization.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/acceptance/g0/2026-10-03.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/acceptance/blackhole/2026-10-03.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/imgui-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/glfw3-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/tinygltf-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/stb-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/openexr-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/imath-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/libdeflate-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/openjph-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/nlohmann-json-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/joltphysics-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/lua-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/sol2-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/rmlui-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/miniaudio-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/freetype-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/libpng-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/zlib-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/bzip2-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/brotli-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/glfw3.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/Iex-3_4.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/IlmThread-3_4.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/Imath-3_2.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/OpenEXR-3_4.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/OpenEXRCore-3_4.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/OpenEXRUtil-3_4.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/brotlicommon.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/brotlidec.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/brotlienc.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/bz2.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/deflate.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/freetype.dll
+-- Up-to-date: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/glfw3.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/libpng16.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/lua.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/openjph.0.31.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/rmlui.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/rmlui_debugger.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/bin/z.dll
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/runtime-build.json
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/tools/build_game.py
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/acceptance/g1/2026-10-03.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/acceptance/g2/2026-10-04.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/acceptance/g3/2026-10-04.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/acceptance/g4/2026-10-04.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/acceptance/u0/2026-10-04.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/acceptance/p0/2026-10-04.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/licenses/LatoLatin-LICENSE.txt
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/editor-game-ui.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/game-publishing.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/runtime/build-reproducibility.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/plans/u0-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/plans/p0-implementation.md
+-- Installing: D:/Assigment/2609/FYP/Project/AzureRender/build/f1/install-debug/share/AzureRender/docs/plans/third-person-playable-plan.md
+-- Install manifest: D:\Assigment\2609\FYP\Project\AzureRender\build\f1\install-debug\install_manifest.json (208 files, 20 licenses)
+-- Install manifest: D:/Assigment/2609/FYP/Project/AzureRender/verify-install-manifest/manifest.regenerated (208 files, 20 licenses)
+-- Install tree verified against manifest

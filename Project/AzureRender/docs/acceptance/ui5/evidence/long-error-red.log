@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content.py", line 131, in <module>
+    summaries = [run(args.executable.resolve(), root / workflow, workflow) for workflow in ('exploration', 'inspector')]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content.py", line 131, in <listcomp>
+    summaries = [run(args.executable.resolve(), root / workflow, workflow) for workflow in ('exploration', 'inspector')]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content.py", line 108, in run
+    assert not dismissed['feedback'], 'Console dismissal must close only the selected error record'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Console dismissal must close only the selected error record

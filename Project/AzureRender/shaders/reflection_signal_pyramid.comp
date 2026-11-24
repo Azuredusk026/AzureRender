@@ -1,0 +1,45 @@
+#version 450
+layout(local_size_x=8,local_size_y=8) in;
+#if defined(AZURE_REFLECTION_PACKED)
+layout(r11f_g11f_b10f,binding=0) uniform readonly image2D sourceColor;
+layout(r11f_g11f_b10f,binding=1) uniform writeonly image2D targetColor;
+layout(r8,binding=2) uniform readonly image2D sourceConfidence;
+layout(r8,binding=3) uniform writeonly image2D targetConfidence;
+#else
+layout(rgba32f,binding=0) uniform readonly image2D sourceColor;
+layout(rgba32f,binding=1) uniform writeonly image2D targetColor;
+layout(r32f,binding=2) uniform readonly image2D sourceConfidence;
+layout(r32f,binding=3) uniform writeonly image2D targetConfidence;
+#endif
+layout(binding=4) uniform sampler2D depthPyramid;
+layout(std140,binding=5) uniform Parameters {vec4 rows[3];} parameters;
+float linearDepth(float value){
+    precise float z=fma(parameters.rows[2].x,value,parameters.rows[2].y);
+    return parameters.rows[2].z>.5?1.0/max(z,1e-8):z;
+}
+void main(){
+    ivec2 pixel=ivec2(gl_GlobalInvocationID.xy);
+    if(any(greaterThanEqual(pixel,imageSize(targetColor))))return;
+    float lod=parameters.rows[0].z;
+    precise vec2 centerUv=(vec2(pixel)+.5)*parameters.rows[1].xy;
+    precise float centerDepth=linearDepth(textureLod(depthPyramid,centerUv,lod).r);
+    const float kernel[4]=float[4](1,3,3,1);
+    ivec2 base=pixel*2;vec3 sum=vec3(0);float confidence=0,weights=0;
+    for(int i=-1;i<=2;++i)for(int j=-1;j<=2;++j){
+        ivec2 q=base+ivec2(i,j);
+        precise vec2 uv=(vec2(q)+.5)*parameters.rows[0].xy;
+        precise float depth=linearDepth(textureLod(depthPyramid,uv,lod-1).r);
+        precise float distanceWeight=exp2(-parameters.rows[1].z*1.4426950408889634*abs(depth-centerDepth));
+        float spatialWeight=kernel[i+1]*kernel[j+1]/64.0;
+        float weight=distanceWeight*spatialWeight;
+        weights=fma(spatialWeight,distanceWeight,weights);
+        // Typed UAV reads outside the source extent contribute zero signal energy.
+        bool valid=all(greaterThanEqual(q,ivec2(0)))&&all(lessThan(q,imageSize(sourceColor)));
+        vec3 color=vec3(0);float mask=0;
+        if(valid){color=imageLoad(sourceColor,q).rgb;mask=imageLoad(sourceConfidence,q).r;}
+        confidence=fma(mask,weight,confidence);sum=fma(color,vec3(weight),sum);
+    }
+    float normalization=max(weights,parameters.rows[0].w);
+    imageStore(targetColor,pixel,vec4(sum/normalization,1));
+    imageStore(targetConfidence,pixel,vec4(confidence/normalization));
+}

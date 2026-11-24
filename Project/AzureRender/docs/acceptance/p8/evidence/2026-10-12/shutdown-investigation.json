@@ -1,0 +1,12 @@
+{
+  "status": "NormalShutdownTimedOut",
+  "elapsedSeconds": 1800,
+  "mainThread": "Wait in MMDevApi critical section during audio shutdown",
+  "runnerThread": "Blocked in synchronous NtUserShowWindow during failure cleanup",
+  "evidence": [
+    "player-shutdown-stacks.log",
+    "runner-shutdown-stacks.log"
+  ],
+  "ownedPlayerPid": 14424,
+  "action": "Terminate only owned hung test process after preserving diagnostics"
+}

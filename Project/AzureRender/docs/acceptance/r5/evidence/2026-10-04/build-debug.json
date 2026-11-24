@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "commit": "9ce99e6875a703ceda5e811463a66bc962ae219a",
+  "workingTreeDirty": true,
+  "products": {
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRender.exe": "c569e41c3fa81a1057d41f89897d29a7d4c4060f8ffd5e0210592351213e454b",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe": "480d89f6cfa40f1939c204f6321380fce6a372c81cc49bb4b1cad47badb79fc8",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMetaGen.exe": "cb2796985262eff2df898d459cbb063f44376a81ef08dca776a7a67219df0c39"
+  },
+  "configuration": "Debug"
+}

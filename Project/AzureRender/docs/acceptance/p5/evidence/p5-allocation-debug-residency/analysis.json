@@ -1,0 +1,3650 @@
+{
+  "diagnosticOnly": true,
+  "requestCount": 5202,
+  "byFirstNonSystemCaller": {
+    "unattributed": {
+      "requests": 75,
+      "requestedBytes": 8048640,
+      "maxRequestBytes": 4194304,
+      "examples": [
+        {
+          "size": 8192,
+          "requestedAddress": 2539925028864,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 20480,
+          "requestedAddress": 2539925037056,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 12288,
+          "requestedAddress": 2539925057536,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "msvcrt.dll": {
+      "requests": 12,
+      "requestedBytes": 2068480,
+      "maxRequestBytes": 1048576,
+      "examples": [
+        {
+          "size": 917504,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "msvcrt.dll",
+            "msvcrt.dll",
+            "msvcrt.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 8192,
+          "requestedAddress": 2539929337856,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "msvcrt.dll",
+            "msvcrt.dll",
+            "msvcrt.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 20480,
+          "requestedAddress": 2539925069824,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "msvcrt.dll",
+            "msvcrt.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "vulkan-1.dll": {
+      "requests": 130,
+      "requestedBytes": 1040384,
+      "maxRequestBytes": 135168,
+      "examples": [
+        {
+          "size": 12288,
+          "requestedAddress": 2539925090304,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2539957436416,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll"
+          ]
+        },
+        {
+          "size": 28672,
+          "requestedAddress": 2539982131200,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll"
+          ]
+        }
+      ]
+    },
+    "gdi32full.dll": {
+      "requests": 2,
+      "requestedBytes": 1908736,
+      "maxRequestBytes": 1900544,
+      "examples": [
+        {
+          "size": 1900544,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "gdi32full.dll",
+            "gdi32full.dll",
+            "user32.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 8192,
+          "requestedAddress": 2539933335552,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "gdi32full.dll",
+            "gdi32full.dll",
+            "user32.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "shell32.dll": {
+      "requests": 1,
+      "requestedBytes": 4096,
+      "maxRequestBytes": 4096,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2539925106688,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "shell32.dll",
+            "shell32.dll",
+            "shell32.dll",
+            "shell32.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "msvcp140.dll": {
+      "requests": 1,
+      "requestedBytes": 4096,
+      "maxRequestBytes": 4096,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2539925110784,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "msvcp140.dll",
+            "ucrtbase.dll",
+            "msvcp140.dll"
+          ]
+        }
+      ]
+    },
+    "OpenEXR-3_4.dll": {
+      "requests": 1,
+      "requestedBytes": 4096,
+      "maxRequestBytes": 4096,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2539925118976,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "OpenEXR-3_4.dll",
+            "OpenEXR-3_4.dll",
+            "ucrtbase.dll",
+            "OpenEXR-3_4.dll",
+            "OpenEXR-3_4.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "AzureRender.exe": {
+      "requests": 3217,
+      "requestedBytes": 96171016,
+      "maxRequestBytes": 16834664,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2539925127168,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2539925131264,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2539925135360,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe"
+          ]
+        }
+      ]
+    },
+    "CoreMessaging.dll": {
+      "requests": 5,
+      "requestedBytes": 8409088,
+      "maxRequestBytes": 8388608,
+      "examples": [
+        {
+          "size": 8388608,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "KernelBase.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "KernelBase.dll",
+            "dinput8.dll",
+            "dinput8.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2539958829056,
+          "frames": [
+            "ntdll.dll",
+            "KernelBase.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "InputHost.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2539958833152,
+          "frames": [
+            "ntdll.dll",
+            "KernelBase.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "InputHost.dll",
+            "InputHost.dll",
+            "CoreMessaging.dll",
+            "InputHost.dll",
+            "InputHost.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll",
+            "CoreMessaging.dll"
+          ]
+        }
+      ]
+    },
+    "uxtheme.dll": {
+      "requests": 5,
+      "requestedBytes": 806912,
+      "maxRequestBytes": 786432,
+      "examples": [
+        {
+          "size": 786432,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "uxtheme.dll",
+            "uxtheme.dll",
+            "uxtheme.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll"
+          ]
+        },
+        {
+          "size": 8192,
+          "requestedAddress": 2539967938560,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "uxtheme.dll",
+            "uxtheme.dll",
+            "uxtheme.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2539967946752,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "uxtheme.dll"
+          ]
+        }
+      ]
+    },
+    "imm32.dll": {
+      "requests": 2,
+      "requestedBytes": 1052656,
+      "maxRequestBytes": 1048560,
+      "examples": [
+        {
+          "size": 1048560,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "imm32.dll",
+            "imm32.dll",
+            "user32.dll",
+            "user32.dll",
+            "user32.dll",
+            "user32.dll",
+            "user32.dll",
+            "user32.dll",
+            "user32.dll",
+            "ntdll.dll",
+            "win32u.dll",
+            "user32.dll",
+            "user32.dll",
+            "glfw3.dll",
+            "user32.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2539969183744,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "imm32.dll",
+            "imm32.dll",
+            "user32.dll",
+            "user32.dll",
+            "user32.dll",
+            "user32.dll",
+            "user32.dll",
+            "user32.dll",
+            "user32.dll",
+            "ntdll.dll",
+            "win32u.dll",
+            "user32.dll",
+            "user32.dll",
+            "glfw3.dll",
+            "user32.dll"
+          ]
+        }
+      ]
+    },
+    "opengl32.dll": {
+      "requests": 18,
+      "requestedBytes": 861696,
+      "maxRequestBytes": 652800,
+      "examples": [
+        {
+          "size": 652800,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "KernelBase.dll",
+            "opengl32.dll",
+            "opengl32.dll",
+            "opengl32.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "KernelBase.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll"
+          ]
+        },
+        {
+          "size": 12288,
+          "requestedAddress": 2539984408576,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "opengl32.dll",
+            "opengl32.dll",
+            "opengl32.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 12288,
+          "requestedAddress": 2540026871808,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "opengl32.dll",
+            "opengl32.dll",
+            "opengl32.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "igdgmm64.dll": {
+      "requests": 20,
+      "requestedBytes": 4510360,
+      "maxRequestBytes": 4235928,
+      "examples": [
+        {
+          "size": 4235928,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igdgmm64.dll",
+            "igdgmm64.dll",
+            "igdgmm64.dll",
+            "igdgmm64.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540026474496,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igdgmm64.dll",
+            "igdgmm64.dll",
+            "igdgmm64.dll",
+            "igdgmm64.dll",
+            "igdgmm64.dll",
+            "igdgmm64.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540074053632,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igdgmm64.dll",
+            "igdgmm64.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll"
+          ]
+        }
+      ]
+    },
+    "igc64.dll": {
+      "requests": 74,
+      "requestedBytes": 368640,
+      "maxRequestBytes": 28672,
+      "examples": [
+        {
+          "size": 16384,
+          "requestedAddress": 2539957092352,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igc64.dll",
+            "igc64.dll",
+            "igc64.dll",
+            "igc64.dll",
+            "igc64.dll",
+            "igc64.dll",
+            "igc64.dll",
+            "igc64.dll"
+          ]
+        },
+        {
+          "size": 12288,
+          "requestedAddress": 2539957108736,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igc64.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2539957121024,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igc64.dll",
+            "igc64.dll",
+            "igc64.dll",
+            "igc64.dll",
+            "igc64.dll",
+            "igc64.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "igvk64.dll": {
+      "requests": 20,
+      "requestedBytes": 1474560,
+      "maxRequestBytes": 425984,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2539957432320,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll"
+          ]
+        },
+        {
+          "size": 425984,
+          "requestedAddress": 2539982794752,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll"
+          ]
+        },
+        {
+          "size": 57344,
+          "requestedAddress": 2539983220736,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll",
+            "igvk64.dll"
+          ]
+        }
+      ]
+    },
+    "kernel32.dll": {
+      "requests": 2,
+      "requestedBytes": 8192,
+      "maxRequestBytes": 4096,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2539957440512,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "kernel32.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2541683539968,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "kernel32.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "setupapi.dll": {
+      "requests": 1,
+      "requestedBytes": 4096,
+      "maxRequestBytes": 4096,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2539957444608,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "setupapi.dll",
+            "setupapi.dll",
+            "setupapi.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "crypt32.dll": {
+      "requests": 26,
+      "requestedBytes": 12687912,
+      "maxRequestBytes": 1370632,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2539957448704,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 1250728,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll"
+          ]
+        },
+        {
+          "size": 1275736,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "nvoglv64.dll"
+          ]
+        }
+      ]
+    },
+    "nvoglv64.dll": {
+      "requests": 241,
+      "requestedBytes": 1143833960,
+      "maxRequestBytes": 1073741824,
+      "examples": [
+        {
+          "size": 8192,
+          "requestedAddress": 2539957452800,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 8192,
+          "requestedAddress": 2539957460992,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "KernelBase.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 2359296,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "KernelBase.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "cfgmgr32.dll": {
+      "requests": 2,
+      "requestedBytes": 73728,
+      "maxRequestBytes": 36864,
+      "examples": [
+        {
+          "size": 36864,
+          "requestedAddress": 2539980525568,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "cfgmgr32.dll",
+            "cfgmgr32.dll",
+            "cfgmgr32.dll",
+            "devobj.dll",
+            "setupapi.dll",
+            "setupapi.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll"
+          ]
+        },
+        {
+          "size": 36864,
+          "requestedAddress": 2540073226240,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "cfgmgr32.dll",
+            "cfgmgr32.dll",
+            "cfgmgr32.dll",
+            "devobj.dll",
+            "setupapi.dll",
+            "setupapi.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll"
+          ]
+        }
+      ]
+    },
+    "devobj.dll": {
+      "requests": 2,
+      "requestedBytes": 73728,
+      "maxRequestBytes": 36864,
+      "examples": [
+        {
+          "size": 36864,
+          "requestedAddress": 2539980562432,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "devobj.dll",
+            "setupapi.dll",
+            "setupapi.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll"
+          ]
+        },
+        {
+          "size": 36864,
+          "requestedAddress": 2540073189376,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "devobj.dll",
+            "setupapi.dll",
+            "setupapi.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll"
+          ]
+        }
+      ]
+    },
+    "msasn1.dll": {
+      "requests": 13,
+      "requestedBytes": 7536640,
+      "maxRequestBytes": 778240,
+      "examples": [
+        {
+          "size": 495616,
+          "requestedAddress": 2539981578240,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "msasn1.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "msasn1.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll"
+          ]
+        },
+        {
+          "size": 737280,
+          "requestedAddress": 2539982073856,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "msasn1.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "msasn1.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll"
+          ]
+        },
+        {
+          "size": 495616,
+          "requestedAddress": 2539981578240,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "msasn1.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "msasn1.dll",
+            "crypt32.dll",
+            "crypt32.dll",
+            "crypt32.dll"
+          ]
+        }
+      ]
+    },
+    "nvgpucomp64.dll": {
+      "requests": 188,
+      "requestedBytes": 1478656,
+      "maxRequestBytes": 65536,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2539981578240,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 8192,
+          "requestedAddress": 2539981582336,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll",
+            "nvgpucomp64.dll"
+          ]
+        },
+        {
+          "size": 8192,
+          "requestedAddress": 2539981590528,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvgpucomp64.dll"
+          ]
+        }
+      ]
+    },
+    "dxgi.dll": {
+      "requests": 4,
+      "requestedBytes": 28672,
+      "maxRequestBytes": 16384,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2539982106624,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2539982110720,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540072173568,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll",
+            "dxgi.dll"
+          ]
+        }
+      ]
+    },
+    "rometadata.dll": {
+      "requests": 2,
+      "requestedBytes": 12288,
+      "maxRequestBytes": 8192,
+      "examples": [
+        {
+          "size": 8192,
+          "requestedAddress": 2539982114816,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "rometadata.dll",
+            "rometadata.dll",
+            "rometadata.dll",
+            "WinTypes.dll",
+            "WinTypes.dll",
+            "WinTypes.dll",
+            "WinTypes.dll",
+            "WinTypes.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540070408192,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "rometadata.dll",
+            "rometadata.dll",
+            "rometadata.dll",
+            "rometadata.dll",
+            "rometadata.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "advapi32.dll": {
+      "requests": 2,
+      "requestedBytes": 12288,
+      "maxRequestBytes": 8192,
+      "examples": [
+        {
+          "size": 8192,
+          "requestedAddress": 2539982123008,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "KernelBase.dll",
+            "advapi32.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll",
+            "vulkan-1.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540075479040,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "advapi32.dll",
+            "advapi32.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll"
+          ]
+        }
+      ]
+    },
+    "nvspcap64.dll": {
+      "requests": 5,
+      "requestedBytes": 20480,
+      "maxRequestBytes": 4096,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2539984261120,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540026482688,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540027662336,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "nvspcap64.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "nvapi64.dll": {
+      "requests": 32,
+      "requestedBytes": 1736704,
+      "maxRequestBytes": 200704,
+      "examples": [
+        {
+          "size": 200704,
+          "requestedAddress": 2540022722560,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvapi64.dll",
+            "nvapi64.dll",
+            "nvapi64.dll",
+            "nvapi64.dll",
+            "nvapi64.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 200704,
+          "requestedAddress": 2540022923264,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvapi64.dll",
+            "nvapi64.dll",
+            "nvapi64.dll",
+            "nvapi64.dll",
+            "nvapi64.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 200704,
+          "requestedAddress": 2540023123968,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvapi64.dll",
+            "nvapi64.dll",
+            "nvapi64.dll",
+            "nvapi64.dll",
+            "nvapi64.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "nvrtum64.dll": {
+      "requests": 48,
+      "requestedBytes": 2326712,
+      "maxRequestBytes": 1097912,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2540024623104,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540024627200,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll",
+            "nvrtum64.dll"
+          ]
+        },
+        {
+          "size": 20480,
+          "requestedAddress": 2540024631296,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvrtum64.dll"
+          ]
+        }
+      ]
+    },
+    "graphics-hook64.dll": {
+      "requests": 6,
+      "requestedBytes": 24576,
+      "maxRequestBytes": 4096,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2540026888192,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540027703296,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540074078208,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "graphics-hook64.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "nvldumdx.dll": {
+      "requests": 5,
+      "requestedBytes": 2680480,
+      "maxRequestBytes": 1342856,
+      "examples": [
+        {
+          "size": 20480,
+          "requestedAddress": 2540064256000,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 20480,
+          "requestedAddress": 2540064276480,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll"
+          ]
+        },
+        {
+          "size": 20480,
+          "requestedAddress": 2540064296960,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll",
+            "nvldumdx.dll"
+          ]
+        }
+      ]
+    },
+    "nvwgf2umx.dll": {
+      "requests": 679,
+      "requestedBytes": 1084762544,
+      "maxRequestBytes": 1073741824,
+      "examples": [
+        {
+          "size": 2359296,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "KernelBase.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 65536,
+          "requestedAddress": 2540181520384,
+          "frames": [
+            "ntdll.dll",
+            "KernelBase.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "nvldumdx.dll"
+          ]
+        },
+        {
+          "size": 32768,
+          "requestedAddress": 2540179423232,
+          "frames": [
+            "ntdll.dll",
+            "KernelBase.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "nvldumdx.dll"
+          ]
+        }
+      ]
+    },
+    "D3D12.dll": {
+      "requests": 5,
+      "requestedBytes": 45056,
+      "maxRequestBytes": 16384,
+      "examples": [
+        {
+          "size": 16384,
+          "requestedAddress": 2540065533952,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "D3D12.dll",
+            "D3D12.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll"
+          ]
+        },
+        {
+          "size": 16384,
+          "requestedAddress": 2540069638144,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "D3D12.dll",
+            "D3D12.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540075778048,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "D3D12.dll",
+            "D3D12.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll"
+          ]
+        }
+      ]
+    },
+    "D3D12Core.dll": {
+      "requests": 12,
+      "requestedBytes": 57344,
+      "maxRequestBytes": 12288,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2540065550336,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540065554432,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll"
+          ]
+        },
+        {
+          "size": 12288,
+          "requestedAddress": 2540065558528,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll",
+            "D3D12Core.dll"
+          ]
+        }
+      ]
+    },
+    "NvMemMapStoragex.dll": {
+      "requests": 19,
+      "requestedBytes": 98304,
+      "maxRequestBytes": 20480,
+      "examples": [
+        {
+          "size": 20480,
+          "requestedAddress": 2540067450880,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll",
+            "nvwgf2umx.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540067471360,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540067475456,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll",
+            "NvMemMapStoragex.dll"
+          ]
+        }
+      ]
+    },
+    "D3DSCache.dll": {
+      "requests": 2,
+      "requestedBytes": 73728,
+      "maxRequestBytes": 36864,
+      "examples": [
+        {
+          "size": 36864,
+          "requestedAddress": 2540069552128,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll"
+          ]
+        },
+        {
+          "size": 36864,
+          "requestedAddress": 2540069588992,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll",
+            "D3DSCache.dll"
+          ]
+        }
+      ]
+    },
+    "rpcrt4.dll": {
+      "requests": 2,
+      "requestedBytes": 12288,
+      "maxRequestBytes": 8192,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2540069625856,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll"
+          ]
+        },
+        {
+          "size": 8192,
+          "requestedAddress": 2540069629952,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll",
+            "rpcrt4.dll"
+          ]
+        }
+      ]
+    },
+    "nvppex.dll": {
+      "requests": 5,
+      "requestedBytes": 20480,
+      "maxRequestBytes": 4096,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2540070465536,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540074102784,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2540075769856,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "nvppex.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "dcomp.dll": {
+      "requests": 3,
+      "requestedBytes": 143360,
+      "maxRequestBytes": 69632,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2540070510592,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "dcomp.dll",
+            "dcomp.dll",
+            "dcomp.dll",
+            "dcomp.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll"
+          ]
+        },
+        {
+          "size": 69632,
+          "requestedAddress": 2540070514688,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "ucrtbase.dll",
+            "dcomp.dll",
+            "dcomp.dll",
+            "dcomp.dll",
+            "dcomp.dll",
+            "dcomp.dll",
+            "nvoglv64.dll"
+          ]
+        },
+        {
+          "size": 69632,
+          "requestedAddress": 2540070584320,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "dcomp.dll",
+            "dcomp.dll",
+            "dcomp.dll",
+            "dcomp.dll",
+            "dcomp.dll",
+            "nvoglv64.dll",
+            "nvoglv64.dll"
+          ]
+        }
+      ]
+    },
+    "directxdatabasehelper.dll": {
+      "requests": 1,
+      "requestedBytes": 20480,
+      "maxRequestBytes": 20480,
+      "examples": [
+        {
+          "size": 20480,
+          "requestedAddress": 2540072194048,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "directxdatabasehelper.dll",
+            "directxdatabasehelper.dll",
+            "directxdatabasehelper.dll",
+            "directxdatabasehelper.dll",
+            "directxdatabasehelper.dll",
+            "directxdatabasehelper.dll",
+            "d3d11.dll"
+          ]
+        }
+      ]
+    },
+    "apphelp.dll": {
+      "requests": 1,
+      "requestedBytes": 20480,
+      "maxRequestBytes": 20480,
+      "examples": [
+        {
+          "size": 20480,
+          "requestedAddress": 2540072214528,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "apphelp.dll",
+            "apphelp.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "igd10iumd64.dll": {
+      "requests": 6,
+      "requestedBytes": 229376,
+      "maxRequestBytes": 61440,
+      "examples": [
+        {
+          "size": 12288,
+          "requestedAddress": 2540072235008,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 45056,
+          "requestedAddress": 2540072247296,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 61440,
+          "requestedAddress": 2540072292352,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "igd10iumd64.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "igd10um64xe.dll": {
+      "requests": 292,
+      "requestedBytes": 122538432,
+      "maxRequestBytes": 33619968,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2540072464384,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 8192,
+          "requestedAddress": 2540072468480,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll"
+          ]
+        },
+        {
+          "size": 20480,
+          "requestedAddress": 2540072476672,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "igd10um64xe.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "IntelControlLib.dll": {
+      "requests": 5,
+      "requestedBytes": 53248,
+      "maxRequestBytes": 20480,
+      "examples": [
+        {
+          "size": 8192,
+          "requestedAddress": 2540073140224,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll"
+          ]
+        },
+        {
+          "size": 8192,
+          "requestedAddress": 2540073148416,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        },
+        {
+          "size": 20480,
+          "requestedAddress": 2540073156608,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "IntelControlLib.dll",
+            "ntdll.dll",
+            "ntdll.dll"
+          ]
+        }
+      ]
+    },
+    "d3d11.dll": {
+      "requests": 1,
+      "requestedBytes": 73728,
+      "maxRequestBytes": 73728,
+      "examples": [
+        {
+          "size": 73728,
+          "requestedAddress": 2540073263104,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "d3d11.dll",
+            "d3d11.dll",
+            "d3d11.dll",
+            "d3d11.dll",
+            "d3d11.dll",
+            "d3d11.dll",
+            "d3d11.dll",
+            "d3d11.dll"
+          ]
+        }
+      ]
+    },
+    "AudioSes.dll": {
+      "requests": 3,
+      "requestedBytes": 61440,
+      "maxRequestBytes": 40960,
+      "examples": [
+        {
+          "size": 8192,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AzureRender.exe",
+            "AzureRender.exe"
+          ]
+        },
+        {
+          "size": 40960,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "ntdll.dll",
+            "KernelBase.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AzureRender.exe",
+            "AzureRender.exe"
+          ]
+        },
+        {
+          "size": 12288,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AudioSes.dll",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe"
+          ]
+        }
+      ]
+    },
+    "MMDevAPI.dll": {
+      "requests": 1,
+      "requestedBytes": 72,
+      "maxRequestBytes": 72,
+      "examples": [
+        {
+          "size": 72,
+          "requestedAddress": 0,
+          "frames": [
+            "ntdll.dll",
+            "KernelBase.dll",
+            "KernelBase.dll",
+            "MMDevAPI.dll",
+            "MMDevAPI.dll",
+            "MMDevAPI.dll",
+            "MMDevAPI.dll",
+            "MMDevAPI.dll",
+            "MMDevAPI.dll",
+            "MMDevAPI.dll",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe",
+            "AzureRender.exe"
+          ]
+        }
+      ]
+    },
+    "rmlui.dll": {
+      "requests": 2,
+      "requestedBytes": 139264,
+      "maxRequestBytes": 135168,
+      "examples": [
+        {
+          "size": 135168,
+          "requestedAddress": 2541692645376,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "rmlui.dll",
+            "rmlui.dll",
+            "rmlui.dll",
+            "rmlui.dll",
+            "rmlui.dll",
+            "rmlui.dll",
+            "rmlui.dll"
+          ]
+        },
+        {
+          "size": 4096,
+          "requestedAddress": 2541694824448,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "rmlui.dll",
+            "rmlui.dll",
+            "rmlui.dll",
+            "rmlui.dll",
+            "rmlui.dll",
+            "rmlui.dll",
+            "rmlui.dll"
+          ]
+        }
+      ]
+    },
+    "lua.dll": {
+      "requests": 1,
+      "requestedBytes": 4096,
+      "maxRequestBytes": 4096,
+      "examples": [
+        {
+          "size": 4096,
+          "requestedAddress": 2541695643648,
+          "frames": [
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ntdll.dll",
+            "ucrtbase.dll",
+            "lua.dll",
+            "lua.dll",
+            "lua.dll",
+            "lua.dll",
+            "lua.dll",
+            "lua.dll",
+            "lua.dll"
+          ]
+        }
+      ]
+    }
+  },
+  "sampledWorkingSetGrowth": 0.10488102006009914,
+  "sampledPrivateGrowth": 0.06390741145605605,
+  "memoryObservations": 720,
+  "completion": {
+    "diagnosticOnly": true,
+    "elapsedSeconds": 80.39100000000008,
+    "debugger": "C:\\Program Files\\LLVM\\bin\\lldb.exe",
+    "debuggerSha256": "414b5463e2d2be0a72dd6e219a6f36925857e38b2712109162ccbebc1027d669",
+    "executableSha256": "3716af4670aeb0469a0760b524ebe893f06c9294b82bd2f027c6111d60aacad5",
+    "debuggerExitCode": 0,
+    "completed": true,
+    "unchangedBudgets": true,
+    "covers": "NtAllocateVirtualMemory requests; not all heap allocations"
+  },
+  "limitations": [
+    "Requests do not prove successful allocations, current residency, or leaks.",
+    "Debugger timing and heaps differ from formal runs.",
+    "NtAllocateVirtualMemoryEx and allocation reuse are outside coverage.",
+    "Release binary provides module and address evidence, not source symbols.",
+    "Formal working-set failures remain unresolved."
+  ],
+  "residentGrowth": {
+    "baselineSeconds": 40.016000000000076,
+    "peakSeconds": 79.25,
+    "positiveRegions": [
+      {
+        "allocation": 2541682425856,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 16416768,
+        "regionBytes": 16424960,
+        "increaseBytes": 8359936,
+        "baselineResidentBytes": 8056832
+      },
+      {
+        "allocation": 2540028624896,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 29528064,
+        "regionBytes": 29753344,
+        "increaseBytes": 5615616,
+        "baselineResidentBytes": 23912448
+      },
+      {
+        "allocation": 2541647036416,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 2228224,
+        "regionBytes": 2228224,
+        "increaseBytes": 2228224,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541560987648,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 2097152,
+        "regionBytes": 2097152,
+        "increaseBytes": 2097152,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541699006464,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 1536000,
+        "regionBytes": 2695168,
+        "increaseBytes": 1536000,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541569900544,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 1384448,
+        "regionBytes": 1392640,
+        "increaseBytes": 1384448,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 140697480396800,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+        "residentBytes": 4866048,
+        "regionBytes": 7688192,
+        "increaseBytes": 1056768,
+        "baselineResidentBytes": 3809280
+      },
+      {
+        "allocation": 140734568529920,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\rmlui.dll",
+        "residentBytes": 1134592,
+        "regionBytes": 1699840,
+        "increaseBytes": 946176,
+        "baselineResidentBytes": 188416
+      },
+      {
+        "allocation": 2539986354176,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 16011264,
+        "regionBytes": 33488896,
+        "increaseBytes": 827392,
+        "baselineResidentBytes": 15183872
+      },
+      {
+        "allocation": 2541518585856,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 491520,
+        "regionBytes": 491520,
+        "increaseBytes": 491520,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 140704386842624,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvwgf2umx.dll",
+        "residentBytes": 9879552,
+        "regionBytes": 78483456,
+        "increaseBytes": 401408,
+        "baselineResidentBytes": 9478144
+      },
+      {
+        "allocation": 140735308693504,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\freetype.dll",
+        "residentBytes": 303104,
+        "regionBytes": 684032,
+        "increaseBytes": 258048,
+        "baselineResidentBytes": 45056
+      },
+      {
+        "allocation": 140705836498944,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll",
+        "residentBytes": 2936832,
+        "regionBytes": 25550848,
+        "increaseBytes": 176128,
+        "baselineResidentBytes": 2760704
+      },
+      {
+        "allocation": 140734504370176,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+        "residentBytes": 6017024,
+        "regionBytes": 45531136,
+        "increaseBytes": 163840,
+        "baselineResidentBytes": 5853184
+      },
+      {
+        "allocation": 702816452608,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 110592,
+        "regionBytes": 110592,
+        "increaseBytes": 98304,
+        "baselineResidentBytes": 12288
+      },
+      {
+        "allocation": 702843715584,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 110592,
+        "regionBytes": 110592,
+        "increaseBytes": 98304,
+        "baselineResidentBytes": 12288
+      },
+      {
+        "allocation": 140706007285760,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dxgi.dll",
+        "residentBytes": 770048,
+        "regionBytes": 1277952,
+        "increaseBytes": 81920,
+        "baselineResidentBytes": 688128
+      },
+      {
+        "allocation": 702838472704,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 73728,
+        "regionBytes": 73728,
+        "increaseBytes": 61440,
+        "baselineResidentBytes": 12288
+      },
+      {
+        "allocation": 140705881391104,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\CoreUIComponents.dll",
+        "residentBytes": 757760,
+        "regionBytes": 2871296,
+        "increaseBytes": 49152,
+        "baselineResidentBytes": 708608
+      },
+      {
+        "allocation": 140705515765760,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\TextInputFramework.dll",
+        "residentBytes": 868352,
+        "regionBytes": 1290240,
+        "increaseBytes": 40960,
+        "baselineResidentBytes": 827392
+      },
+      {
+        "allocation": 702805966848,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 331776,
+        "regionBytes": 331776,
+        "increaseBytes": 32768,
+        "baselineResidentBytes": 299008
+      },
+      {
+        "allocation": 140704839172096,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\D3D12Core.dll",
+        "residentBytes": 1400832,
+        "regionBytes": 2531328,
+        "increaseBytes": 32768,
+        "baselineResidentBytes": 1368064
+      },
+      {
+        "allocation": 140706053226496,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+        "residentBytes": 745472,
+        "regionBytes": 1302528,
+        "increaseBytes": 32768,
+        "baselineResidentBytes": 712704
+      },
+      {
+        "allocation": 140706004598784,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\d3d11.dll",
+        "residentBytes": 880640,
+        "regionBytes": 2404352,
+        "increaseBytes": 24576,
+        "baselineResidentBytes": 856064
+      },
+      {
+        "allocation": 140706054602752,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+        "residentBytes": 1241088,
+        "regionBytes": 4108288,
+        "increaseBytes": 24576,
+        "baselineResidentBytes": 1216512
+      },
+      {
+        "allocation": 2538325671936,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 352256,
+        "regionBytes": 2424832,
+        "increaseBytes": 20480,
+        "baselineResidentBytes": 331776
+      },
+      {
+        "allocation": 140705321910272,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\vcruntime140.dll",
+        "residentBytes": 86016,
+        "regionBytes": 180224,
+        "increaseBytes": 20480,
+        "baselineResidentBytes": 65536
+      },
+      {
+        "allocation": 140705904197632,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\nvspcap64.dll",
+        "residentBytes": 786432,
+        "regionBytes": 1384448,
+        "increaseBytes": 20480,
+        "baselineResidentBytes": 765952
+      },
+      {
+        "allocation": 2541664731136,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 16384,
+        "regionBytes": 16781312,
+        "increaseBytes": 16384,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 702805835776,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 12288,
+        "regionBytes": 12288,
+        "increaseBytes": 12288,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 702844764160,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 12288,
+        "regionBytes": 12288,
+        "increaseBytes": 12288,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 702845812736,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 12288,
+        "regionBytes": 12288,
+        "increaseBytes": 12288,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 702846861312,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 12288,
+        "regionBytes": 12288,
+        "increaseBytes": 12288,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 140705359265792,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\vcruntime140_1.dll",
+        "residentBytes": 45056,
+        "regionBytes": 49152,
+        "increaseBytes": 12288,
+        "baselineResidentBytes": 32768
+      },
+      {
+        "allocation": 140737017741312,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\lua.dll",
+        "residentBytes": 204800,
+        "regionBytes": 245760,
+        "increaseBytes": 12288,
+        "baselineResidentBytes": 192512
+      },
+      {
+        "allocation": 2541430046720,
+        "kind": 262144,
+        "path": "",
+        "residentBytes": 4096,
+        "regionBytes": 4096,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541637730304,
+        "kind": 131072,
+        "path": "",
+        "residentBytes": 4096,
+        "regionBytes": 4096,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541637795840,
+        "kind": 262144,
+        "path": "",
+        "residentBytes": 4096,
+        "regionBytes": 45056,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541637861376,
+        "kind": 262144,
+        "path": "",
+        "residentBytes": 4096,
+        "regionBytes": 4096,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 2541638189056,
+        "kind": 262144,
+        "path": "",
+        "residentBytes": 4096,
+        "regionBytes": 524288,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 0
+      },
+      {
+        "allocation": 140705824047104,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igdgmm64.dll",
+        "residentBytes": 1261568,
+        "regionBytes": 4268032,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 1257472
+      },
+      {
+        "allocation": 140705892204544,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\winmm.dll",
+        "residentBytes": 94208,
+        "regionBytes": 212992,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 90112
+      },
+      {
+        "allocation": 140706044379136,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\cfgmgr32.dll",
+        "residentBytes": 192512,
+        "regionBytes": 348160,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 188416
+      },
+      {
+        "allocation": 140706053029888,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\win32u.dll",
+        "residentBytes": 126976,
+        "regionBytes": 139264,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 122880
+      },
+      {
+        "allocation": 140706070724608,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msctf.dll",
+        "residentBytes": 790528,
+        "regionBytes": 1347584,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 786432
+      },
+      {
+        "allocation": 140706074984448,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\imm32.dll",
+        "residentBytes": 98304,
+        "regionBytes": 184320,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 94208
+      },
+      {
+        "allocation": 140706093268992,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\sechost.dll",
+        "residentBytes": 212992,
+        "regionBytes": 663552,
+        "increaseBytes": 4096,
+        "baselineResidentBytes": 208896
+      }
+    ]
+  }
+}

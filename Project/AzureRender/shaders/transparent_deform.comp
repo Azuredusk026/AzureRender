@@ -1,0 +1,47 @@
+#version 450
+layout(local_size_x=128) in;
+layout(std430,binding=0) readonly buffer InputWords {uint words[];} source;
+layout(std430,binding=1) readonly buffer JointMatrices {mat4 values[];} joints;
+layout(std430,binding=2) writeonly buffer WorldPositions {vec4 values[];} outputPositions;
+float value(uint at){return uintBitsToFloat(source.words[at]);}
+vec3 vectorAt(uint at){return vec3(value(at),value(at+1),value(at+2));}
+vec3 transformPoint(mat4 matrix,vec3 point){
+    precise vec3 a=matrix[0].xyz*point.x;
+    precise vec3 b=matrix[1].xyz*point.y;
+    precise vec3 c=matrix[2].xyz*point.z;
+    precise vec3 result=((a+b)+c)+matrix[3].xyz;
+    return result;
+}
+void main(){
+    uint index=gl_GlobalInvocationID.x;if(index>=source.words[2])return;
+    uint job=source.words[0]+index*2,meta=source.words[job],vertex=source.words[job+1];
+    precise vec3 position=vectorAt(vertex);
+    if(source.words[vertex+15]==0){
+        precise vec3 a=vectorAt(vertex+12)*value(meta+18);
+        precise vec3 b=vectorAt(vertex+16)*value(meta+19);
+        position+=(a+b);
+    }else{
+        uint count=source.words[vertex+21],delta=source.words[vertex+19];
+        uint weight=source.words[meta+20]+source.words[vertex+20];
+        for(uint target=0;target<count;++target){
+            uint at=delta+target*4;
+            if(source.words[at+3]!=0){
+                precise vec3 change=vectorAt(at)*value(weight+target);
+                position+=change;
+            }
+        }
+    }
+    if(source.words[meta+17]!=0){
+        precise vec3 skinned=vec3(0);
+        for(uint bone=0;bone<4;++bone){
+            float weight=value(vertex+8+bone);if(weight==0.0)continue;
+            uint joint=source.words[meta+16]+source.words[vertex+4+bone];
+            precise vec3 transformed=transformPoint(joints.values[joint],position);
+            precise vec3 weighted=transformed*weight;skinned+=weighted;
+        }
+        position=skinned;
+    }
+    mat4 model=mat4(vec4(vectorAt(meta),value(meta+3)),vec4(vectorAt(meta+4),value(meta+7)),
+        vec4(vectorAt(meta+8),value(meta+11)),vec4(vectorAt(meta+12),value(meta+15)));
+    precise vec3 world=transformPoint(model,position);outputPositions.values[index]=vec4(world,1);
+}

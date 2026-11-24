@@ -1,0 +1,13 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 31: AzureEditor.GizmoGpu
+1/2 Test #31: AzureEditor.GizmoGpu .............   Passed   18.81 sec
+    Start 98: AzureEditor.WorkspaceGpu
+2/2 Test #98: AzureEditor.WorkspaceGpu .........   Passed   54.14 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Label Time Summary:
+gpu    =  72.95 sec*proc (2 tests)
+
+Total Test time (real) =  72.95 sec

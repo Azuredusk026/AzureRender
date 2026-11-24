@@ -1,0 +1,11 @@
+nvidia exploration complete and released
+nvidia platformer complete and released
+nvidia scene_inspector complete and released
+nvidia authored-exploration complete and released
+nvidia authored-inspection complete and released
+intel exploration complete and released
+intel platformer complete and released
+intel scene_inspector complete and released
+intel authored-exploration complete and released
+intel authored-inspection complete and released
+{"passed": true, "packages": [{"kind": "engine", "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\packages\\Azure-P8-final-engine.zip", "sha256": "43f2126a94577170e59c82e9e6da567dca52b842534247015b21b5d4eabce4e7", "bytes": 234203499, "files": 8078}, {"kind": "exploration", "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\packages\\Azure-P8-final-exploration.zip", "sha256": "8c7267cdbc4e2fd3fffe304ae8c267576702b147db952e01f719270d0f55af19", "bytes": 37671010, "files": 604}, {"kind": "platformer", "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\packages\\Azure-P8-final-platformer.zip", "sha256": "6059cbef82dcd171263c6265d7c06a10f14b8a114364ca89d6bfc870dfbaacad", "bytes": 34380315, "files": 526}, {"kind": "scene_inspector", "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\packages\\Azure-P8-final-scene_inspector.zip", "sha256": "185f3650f04a5c04bc93d03514448ea199c2d0fc3ad566614de7dbb25082ced9", "bytes": 33226444, "files": 480}, {"kind": "authored-exploration", "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\packages\\Azure-P8-final-authored-exploration.zip", "sha256": "20e98e7a69c42ebf722f57edbfc81f3d36d62a9f716fe5fde93129ff1e139309", "bytes": 33270170, "files": 506}, {"kind": "authored-inspection", "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-format-closure-2026-10-12\\arena-delivery\\packages\\Azure-P8-final-authored-inspection.zip", "sha256": "5d822abc4a064ff4e10b9277168aa2cfaa7fa2483e1f7cd3a699acb9e869ef1d", "bytes": 33237875, "files": 490}]}

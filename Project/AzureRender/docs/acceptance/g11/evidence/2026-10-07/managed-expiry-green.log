@@ -1,0 +1,16 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 59: AzureEngine.ManagedModule.coreclr
+1/5 Test #59: AzureEngine.ManagedModule.coreclr ......   Passed    0.15 sec
+    Start 60: AzureEngine.ManagedModule.nativeaot
+2/5 Test #60: AzureEngine.ManagedModule.nativeaot ....   Passed    0.03 sec
+    Start 61: AzureEngine.ManagedRuntime.coreclr
+3/5 Test #61: AzureEngine.ManagedRuntime.coreclr .....   Passed    0.41 sec
+    Start 62: AzureEngine.ManagedRuntime.nativeaot
+4/5 Test #62: AzureEngine.ManagedRuntime.nativeaot ...   Passed    0.32 sec
+    Start 63: AzureEngine.ScriptBackendParity.lua
+5/5 Test #63: AzureEngine.ScriptBackendParity.lua ....   Passed    0.19 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Total Test time (real) =   1.11 sec

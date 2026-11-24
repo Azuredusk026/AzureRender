@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "scope": "all installed regular files: inventory, size and SHA-256",
+  "files": 9345,
+  "licenses": [
+    "NotoSansCJK-LICENSE.txt",
+    "imgui-LICENSE.txt",
+    "glfw3-LICENSE.txt",
+    "tinygltf-LICENSE.txt",
+    "openexr-LICENSE.txt",
+    "imath-LICENSE.txt",
+    "libdeflate-LICENSE.txt",
+    "openjph-LICENSE.txt",
+    "stb-LICENSE.txt",
+    "nlohmann-json-LICENSE.txt",
+    "joltphysics-LICENSE.txt",
+    "lua-LICENSE.txt",
+    "sol2-LICENSE.txt",
+    "rmlui-LICENSE.txt",
+    "miniaudio-LICENSE.txt",
+    "freetype-LICENSE.txt",
+    "libpng-LICENSE.txt",
+    "zlib-LICENSE.txt",
+    "bzip2-LICENSE.txt",
+    "brotli-LICENSE.txt",
+    "LatoLatin-LICENSE.txt"
+  ],
+  "updated": [
+    "bin/AzureRender.exe"
+  ],
+  "executableSha256": "0043f5b342d2e1163315ecece95c5f6828c6e8044e0f64a4a2b449a19400e05e",
+  "seconds": 1.64
+}

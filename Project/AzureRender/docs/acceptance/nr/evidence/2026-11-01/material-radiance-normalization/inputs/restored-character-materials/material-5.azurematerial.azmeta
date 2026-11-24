@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "26f11883-d2e4-538d-87ad-45998cd78bfa",
+  "settings": {},
+  "dependencies": [
+    "e8d34529-bcca-5d80-9481-29d5d38c2b96",
+    "9d900625-21de-5c96-a093-a879ea71cf5d",
+    "14a1f231-b0f2-5710-8a18-3a445779f601",
+    "7ae5948e-66b9-5b10-b5c6-c37a9a35c071",
+    "2c90934a-e3dc-5d7d-a2c4-b2bfbb4e0a80"
+  ]
+}

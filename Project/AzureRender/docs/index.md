@@ -1,102 +1,54 @@
-# AzureRender
+# AzureRender 文档
 
-AzureRender 是一个原生 Vulkan 实时渲染器。它不是单个 Shader Demo 的包装。项目提供一个公共宿主，让不同场景和不同 Shader 组合可以共用底层渲染资源。
+公开模型演示见[打开、编辑与发布光追演示](tutorials/public-pathtracing-demos.md)。
+三个独立工程覆盖金属头盔、完整棋盘和粗糙玻璃。
 
-项目目前有两个主要场景。Character 使用传统光栅路径，包含网格、材质、透明层和阴影。Blackhole 使用全屏数值积分、时间累积和 HDR 合成。
+ED0 至 ED7 开发交付完成，P8 状态为 Ready。
+开发任务见[编辑器实施计划](plans/2026-10-14-editor-generalization.md)。
+本轮机器批次已收尾，实体与历史条件待满足。
 
-两个场景共用窗口、设备、Swapchain 和公共 Attachment，也共用最终合成、Capture、GPU Timing 和编辑器。各场景单独管理自己的 Pipeline、Descriptor 和算法状态。
+阶段代号与状态见[统一状态表](plans/current-stage-status.md)。
+下一步验收操作见[收尾流程](acceptance/phase-closure.md)。
 
-![AzureRender 黑洞场景](https://raw.githubusercontent.com/Azuredusk026/AzureRender/main/Project/AzureRender/portfolio/images/blackhole/blackhole_temporal_beauty_v1_1280x720.png)
+当前工作区检查与待项见[交付结果](acceptance/ui8/2026-10-12.md)。
 
-## 能力总览
+安装版项目制作见[项目中心指南](tutorials/project-center.md)。
+入口、UI 与独立发布范围见[产品化状态](ui-productization-status.md)。
+本轮证据和剩余限制见[交付验证](acceptance/ui4/2026-10-12.md)。
 
-| 层级 | 当前实现 |
+资源查找、日志筛选和任务处理见[资源与日志操作](tutorials/browser-console.md)。
+
+AzureRender 提供 Windows 编辑器、原生 Vulkan 渲染核心与独立 Player。文档按了解现状、开始制作、参与开发和查询证据组织。
+
+## 了解项目
+
+先读[项目现状](project-status.md)，了解可用能力、限制与检查结果。再读[开发总计划](plans/azure-engine-plan.md)，查看下一批工作的顺序。自动执行和验收安排见[协作与验收](development-workflow.md)。
+
+## 开始制作
+
+| 任务 | 入口 |
 | --- | --- |
-| Vulkan 宿主 | Instance、Validation、设备与 Queue、Swapchain、Render Pass、Pipeline、Descriptor、同步、查询池、资源销毁 |
-| 场景扩展 | `ISceneRenderer` 生命周期、能力声明、Registry、Shader Feature Catalog |
-| 公共图像管线 | HDR Scene Color、Depth、Normal、阴影贴图、Bloom、描边、Tone Mapping、最终 Present |
-| Character | glTF、蒙皮动画、材质分类、Toon Ramp、Face SDF、Hair KK/AO、PCSS、眉毛 Overlay |
-| Blackhole | 光线积分、吸积盘噪声、多普勒、Beaming、引力红移、双 History TAA |
-| 工具 | 编辑器、命令行 QA、确定性 PNG、GPU Timing JSON、图像比较、发布门禁 |
+| 构建和启动 | [构建与使用](getting-started.md) |
+| 完成第一份游戏项目 | [从空关卡制作并发布](tutorials/editor-first-game.md) |
+| 选择、变换和编辑内容 | [编辑器交互](tutorials/editor-interaction.md) |
+| 制作材质 | [材质制作](runtime/material-authoring.md) |
+| 接入二维内容 | [二维内容与投影标签](runtime/scene-2d.md) |
+| 交换资产 | [资产交换](runtime/asset-exchange.md)、[扩展格式](assets/extended-formats.md) |
+| 发布独立游戏 | [Windows 游戏发布](runtime/game-publishing.md) |
 
-## 原生 Vulkan 的边界
+![编辑器工作区与公开探索关卡](media/editor-workspace.png)
 
-AzureRender 直接调用 Vulkan API 来管理资源和每一帧的执行。项目不依赖 Unreal、Unity、bgfx 或其他渲染框架。GLFW 只创建窗口和 Surface。Dear ImGui 提供编辑器控件。
+图中为公开探索项目的编辑工作区。示例玩法见[探索关卡](runtime/exploration-gameplay.md)和[平台关卡](runtime/platformer-gameplay.md)。
 
-tinygltf 和 stb 解析资产，nlohmann/json 读取数据文件。Shader 使用 GLSL 编写，再由 Vulkan SDK 的 `glslc` 编译为 SPIR-V。
+## 参与开发
 
-因此，“原生 Vulkan 自研”描述的是渲染后端、场景架构和算法实现，而不是声称项目没有任何第三方依赖。
+代码定位见[源码导航](development/source-navigation.md)。
+目录规模与后续工具见[结构与检索优化计划](plans/2026-10-26-repository-structure-and-retrieval.md)。
 
-## 系统概览
+模块职责见[引擎基础](runtime/engine-foundation.md)和[渲染器架构](architecture.md)。生产操作见[编辑服务](runtime/edit-operations.md)，命令入口见[开发命令参考](reference/developer-cli.md)。具体后续任务见[后续开发路线](plans/2026-10-11-next-development.md)。
 
-```mermaid
-flowchart TB
-    CLI[CLI / .azscene / Editor] --> App[AzureRenderApp]
-    App --> Host[Vulkan Host]
-    Host --> Registry[Renderer Registry]
-    Registry --> Character[Character Renderer]
-    Registry --> Blackhole[Blackhole Renderer]
-    Registry --> Sample[Sample Renderer]
-    Character --> HDR[HDR Scene Color + Depth + Normal]
-    Blackhole --> HDR
-    Sample --> HDR
-    HDR --> Composite[Outline / Bloom / Grade / Tone Mapping]
-    Composite --> Swapchain[Swapchain / Capture / Present]
-    App --> QA[QA + GPU Timing + Manifest]
-```
+## 查询验收依据
 
-宿主一次只运行一个 Scene Renderer。新场景通过 Registry 注册，不需要修改主帧循环。场景从只读 `RenderContext` 取得宿主提供的 Vulkan 对象。它只释放自己创建的资源。
+内容扩展与修复见[P9 验收](acceptance/p9/2026-10-12.md)。正式性能、长跑与人工待项见[P8 验收](acceptance/p8/2026-10-12.md)和[集中复核表](acceptance/p8/manual-review.md)。历史诊断按候选来源查询，[计划快照](history/2026-10-12-planning/azure-engine-plan.md)保留整理前的证据索引。
 
-## 两个场景
-
-### 风格化角色
-
-角色路径不直接套用统一的 PBR 材质。材质分类决定 Ramp、AO、镜面和轮廓。Face SDF 控制脸部阴影形状。
-
-Hair HN/P 提供发束法线和双层 Kajiya-Kay 高光。2048 阴影贴图配合 PCSS 生成软阴影。
-
-[阅读角色渲染原理](character-rendering.md)
-
-### 黑洞模拟
-
-黑洞路径在 Fragment Shader 中积分光线路径。射线会采样程序化吸积盘和环境背景。吸积盘包含旋转体密度、周期噪声和稀疏结构。
-
-多普勒频移、相对论增亮和引力红移让盘面两侧呈现明显差异。双 History 时间累积负责稳定采样噪声。
-
-[阅读黑洞模拟原理](blackhole-rendering.md)
-
-## 阅读路线
-
-引擎化开发：
-
-1. [Azure Engine 开发总计划](plans/azure-engine-plan.md)
-2. [开发与运行时文档规范](documentation-standard.md)
-3. [运行时渲染图](runtime/render-graph.md)
-
-第一次运行项目：
-
-1. [构建与使用](getting-started.md)
-2. [资产、场景与编辑器](assets-and-editor.md)
-3. [参数与接口参考](reference.md)
-
-理解实现：
-
-1. [渲染器架构与 Vulkan 实现](architecture.md)
-2. [风格化角色渲染](character-rendering.md)
-3. [黑洞模拟](blackhole-rendering.md)
-
-继续开发或准备发布：
-
-1. [开发、测试与发布](development-and-release.md)
-2. [参数与接口参考](reference.md)
-
-## 当前状态与边界
-
-- Character 和 Blackhole 均可通过同一可执行文件运行，并支持确定性捕获。
-- Renderer SDK 当前是进程内 C++ 接口，不承诺跨 DLL 的二进制 ABI。
-- `.azscene` 当前 Schema 为 v2，`RenderSettings` 当前 Schema 为 v7。
-- 黑洞是视觉导向的 Schwarzschild 近似模拟，不是科研级广义相对论求解器。
-- 私有角色用于本机美术验收，公共 CI 和作品集必须使用可再分发资产。
-- Android、动态插件 ABI 和完整资产生产管线不属于 `0.1.0-rc1` 的发布承诺。
-
-文档只描述当前可验证实现。历史阶段计划、旧验收记录和源 DOCX 保留在仓库归档或 Git 历史中，不作为当前接口依据。
+本批候选、检查结果与待项见[P8 执行记录](acceptance/p8/2026-10-14.md)。

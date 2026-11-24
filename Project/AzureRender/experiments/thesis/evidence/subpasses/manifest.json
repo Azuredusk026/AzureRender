@@ -1,0 +1,12 @@
+{
+  "base": "e093262",
+  "binarySha256": "c9865360ee2acce3282c619100d5fd2e40767bf3e2881c955c919c70d8173ada",
+  "sources": {
+    "experiments\\thesis\\src\\benchmark.cpp": "8d62b07f6735e1fa8540a571d510917fd1b6dc7492f2a2cbf0427d370a24768a",
+    "experiments\\thesis\\src\\Benchmark.hpp": "ab47673fee48fcfa21befbe06b7b60b468e4f77daf866d07679625a67f69321d",
+    "experiments\\thesis\\src\\Subpasses.cpp": "0f636b0167ac1979abd5c1910ed282c4b36dc985fa03d3e0a2ebf8126d24d43e",
+    "experiments\\thesis\\src\\Workload.hpp": "42c7a49cfd0fb08ee1bfd31736b263f9d6eed1288004f94a21746d7e53a80562"
+  },
+  "imageEqualBytes": 65536,
+  "traditionalRegression": true
+}

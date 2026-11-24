@@ -1,0 +1,23 @@
+[
+  {
+    "camera": "face-front",
+    "minimumBrowPixels": 303,
+    "headFollowDisplacementPixels": 0.5454065882536838,
+    "maximumChangedBrowPixels": 537,
+    "maximumCpuComputeMeanDelta": 0.0
+  },
+  {
+    "camera": "face-three-quarter-left",
+    "minimumBrowPixels": 191,
+    "headFollowDisplacementPixels": 1.2576402915605627,
+    "maximumChangedBrowPixels": 368,
+    "maximumCpuComputeMeanDelta": 0.00013491030092592594
+  },
+  {
+    "camera": "face-three-quarter-right",
+    "minimumBrowPixels": 279,
+    "headFollowDisplacementPixels": 1.0177499258041962,
+    "maximumChangedBrowPixels": 484,
+    "maximumCpuComputeMeanDelta": 0.0002517361111111111
+  }
+]

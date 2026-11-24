@@ -1,0 +1,145 @@
+{
+  "release": {
+    "AzureEngine.LocomotionBlendGpu": {
+      "outcome": "passed",
+      "seconds": 38.829
+    },
+    "AzureEngine.MaterialRadianceGpu": {
+      "outcome": "passed",
+      "seconds": 119.07
+    },
+    "AzureEngine.MaterialLightingGpu": {
+      "outcome": "passed",
+      "seconds": 83.2128
+    },
+    "AzureEngine.MaterialLightingGpu.Fabric": {
+      "outcome": "passed",
+      "seconds": 80.0012
+    },
+    "AzureEngine.MaterialLightingGpu.ObjectShadow": {
+      "outcome": "passed",
+      "seconds": 72.4046
+    },
+    "AzureEngine.NprRampCompositionGpu": {
+      "outcome": "passed",
+      "seconds": 167.13
+    },
+    "AzureEngine.NprRampCompositionGpu.Fabric": {
+      "outcome": "passed",
+      "seconds": 200.804
+    },
+    "AzureEngine.MaterialDisplayGpu": {
+      "outcome": "passed",
+      "seconds": 178.599
+    },
+    "AzureEngine.ProjectedScreenReflectionGpu": {
+      "outcome": "passed",
+      "seconds": 95.0795
+    }
+  },
+  "debug": {
+    "AzureEngine.LocomotionBlendGpu": {
+      "outcome": "passed",
+      "seconds": 131.493
+    },
+    "AzureEngine.MaterialRadianceGpu": {
+      "outcome": "timeout",
+      "seconds": 600.174
+    },
+    "AzureEngine.MaterialLightingGpu": {
+      "outcome": "passed",
+      "seconds": 471.299
+    },
+    "AzureEngine.MaterialLightingGpu.Fabric": {
+      "outcome": "passed",
+      "seconds": 594.04
+    },
+    "AzureEngine.MaterialLightingGpu.ObjectShadow": {
+      "outcome": "passed",
+      "seconds": 507.682
+    },
+    "AzureEngine.NprRampCompositionGpu": {
+      "outcome": "passed",
+      "seconds": 455.682
+    },
+    "AzureEngine.NprRampCompositionGpu.Fabric": {
+      "outcome": "passed",
+      "seconds": 471.004
+    },
+    "AzureEngine.MaterialDisplayGpu": {
+      "outcome": "timeout",
+      "seconds": 600.164
+    },
+    "AzureEngine.ProjectedScreenReflectionGpu": {
+      "outcome": "passed",
+      "seconds": 282.94
+    }
+  },
+  "materialDisplaySameInputFrames": 36,
+  "materialRadianceSameInputPhases": {
+    "CPU preparation": {
+      "candidateMedianMs": 11.31305,
+      "registeredMedianMs": 11.844000000000001,
+      "medianPairRatio": 1.0893977530220518
+    },
+    "shared textures": {
+      "candidateMedianMs": 34.72535,
+      "registeredMedianMs": 35.18845,
+      "medianPairRatio": 1.0052660975162537
+    },
+    "buffers": {
+      "candidateMedianMs": 0.31785,
+      "registeredMedianMs": 0.3308,
+      "medianPairRatio": 1.0162427810537251
+    },
+    "skinning": {
+      "candidateMedianMs": 1.31535,
+      "registeredMedianMs": 1.36055,
+      "medianPairRatio": 1.019978604249967
+    },
+    "descriptors": {
+      "candidateMedianMs": 3.3558000000000003,
+      "registeredMedianMs": 3.50765,
+      "medianPairRatio": 1.025265134004088
+    },
+    "pipelines": {
+      "candidateMedianMs": 3424.7076500000003,
+      "registeredMedianMs": 13752.7932,
+      "medianPairRatio": 4.005556719287176
+    }
+  },
+  "materialRadianceValidationCacheControl": {
+    "driverCacheSha256": "034271a9f8941a5368ad01a1d97f7178e1b56f5f0c10c1a47ce33df95ef7f049",
+    "sameFrameSha256": "c31600a193f928282ed2afa30773c90dc0f80bbdae0359b2de59ba3b5c4065cc",
+    "milliseconds": {
+      "cold": [
+        11946.7206,
+        12375.6457
+      ],
+      "warm": [
+        12190.7966,
+        12770.3533
+      ]
+    },
+    "warmToColdMeanRatio": 1.0262632176541144
+  },
+  "archiveMembers": {
+    "release-gpu-94.json": "0c15892f88f4c7cacd979df2dc746dda283a84596faf7ca3e694ea34ef71498a",
+    "release-gpu-94.xml": "408a5fceeda4c815dcbddfefd2218a5351bbf57d84c4916a8acd0ed457afe390",
+    "release-gpu-94.txt": "828216aa9bf57fe8f3564f0fb865ffa7fa0134319c9956916454c1b135fd4bec",
+    "release-gpu-94.log": "8074b59f5641814d5d54d0bf848e1fa90995ee9a9196ea2eec4794cdb8946e4b",
+    "release-gpu-94-queue.log": "9571ae3592183d252ebbccfa4c3da38f19c80e376ef15e485f545abb229f14b9",
+    "debug-gpu-94.json": "1c6856eb1df79e47f02de3e05312b0e4a0124cef47e43ec3bc8d2dd156c927aa",
+    "debug-gpu-94.xml": "c849c5200a334ecd680f77d098f4c6c914b7c84bae8c710baeb8f9f7cdfd48b4",
+    "debug-gpu-94.txt": "828216aa9bf57fe8f3564f0fb865ffa7fa0134319c9956916454c1b135fd4bec",
+    "debug-gpu-94.log": "f87d63bb560a93e93efe6ea866f423a06da7778187069e15b053fdf9b1a38a0d",
+    "debug-gpu-94-queue.log": "84c5d4e02c833c3df4ef7845500e452161dc26fa3c5f66081cc2c6d712311c47",
+    "source-activation.json": "85ccb6e4cf906f7c1e3cbd5e449344844a4cf57243f433757bb2dafd2ad513ba",
+    "material-display-main-timeout-comparison.json": "ad4603d65a03cb59931da17270a4f69c08842386242d6c7e27bc27597aa73879",
+    "material-radiance-phase-comparison.json": "9e9fde016c1ecdeb6330afba3a0b1d5968d1c378e8c31026a5d4d536bbd4e0f8",
+    "summarize_display_timeout.py": "735fe8dc4e6fe985936ad49f4dcd85d3dfb64c7a0421376b89802136f81b4892",
+    "summarize_capture_phases.py": "27439829f326ab17251d93f11e6efc0dad0667bbec27ad98a59782331c112999",
+    "replay_pipeline_environment.py": "57181bcfa0866259ae7045b35ce5d326a47dd171828e5d50d2fd11cdb316e729",
+    "validation-cache-control.json": "73146a4e3eef4e5c62648bf4ebd7d699e6b0546053722a3782faab5b66ab628f"
+  }
+}

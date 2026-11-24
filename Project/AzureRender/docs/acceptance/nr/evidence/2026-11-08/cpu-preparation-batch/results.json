@@ -1,0 +1,815 @@
+{
+  "schemaVersion": 1,
+  "status": "preparation-batch-below-gate",
+  "sourceBase": "0a0429c",
+  "diagnosticFramesPerVariant": 40,
+  "selectedFramesPerVariant": 36,
+  "coarse": {
+    "baseline": {
+      "bufferWrites": 166320,
+      "frames": 40,
+      "imageWrites": 83160,
+      "selectedFrames": 36,
+      "stages": {
+        "bindings": 0.19839722222222222,
+        "instances": 1.2011111111111112,
+        "motion": 0.5756805555555555,
+        "transparent": 1.033825,
+        "update": 3.547075
+      },
+      "updateSamplesMs": [
+        3.1866,
+        3.4702,
+        3.6709,
+        3.7941,
+        3.3309,
+        3.5955,
+        3.086,
+        3.0783,
+        3.6078,
+        3.3428,
+        3.3109,
+        3.3446,
+        3.6936,
+        3.1054,
+        3.6453,
+        3.5024,
+        3.5493,
+        3.7566,
+        3.7309,
+        3.3737,
+        3.4835,
+        3.2337,
+        3.5766,
+        3.4793,
+        3.7943,
+        3.5542,
+        3.5648,
+        3.7161,
+        3.9556,
+        3.8256,
+        3.7517,
+        3.6988,
+        3.6952,
+        3.6708,
+        3.8615,
+        3.6572
+      ]
+    },
+    "candidate": {
+      "bufferWrites": 0,
+      "frames": 40,
+      "imageWrites": 0,
+      "selectedFrames": 36,
+      "stages": {
+        "bindings": 0.03823055555555556,
+        "instances": 1.1941722222222222,
+        "motion": 0.41349444444444444,
+        "transparent": 1.3374944444444443,
+        "update": 3.6353777777777783
+      },
+      "updateSamplesMs": [
+        3.6896,
+        3.8036,
+        4.114,
+        3.3264,
+        3.7444,
+        3.6584,
+        3.3667,
+        3.59,
+        3.8357,
+        3.6689,
+        3.9059,
+        3.4624,
+        3.2818,
+        3.4296,
+        3.5533,
+        3.2471,
+        3.3004,
+        3.3663,
+        3.6683,
+        3.6613,
+        3.5561,
+        3.5896,
+        3.805,
+        3.6324,
+        3.7285,
+        3.5692,
+        3.7256,
+        4.1764,
+        4.0166,
+        3.6509,
+        3.8956,
+        3.5386,
+        3.6406,
+        3.6583,
+        3.5155,
+        3.5006
+      ]
+    },
+    "updateReductionPercent": -2.489453360241267,
+    "sourceAndProductsUnchanged": true,
+    "frozenProjectInputsVerified": 1729,
+    "formalPerformancePassed": false
+  },
+  "balanced": {
+    "baseline": {
+      "bufferWrites": 166320,
+      "frames": 40,
+      "imageWrites": 83160,
+      "selectedFrames": 36,
+      "stages": {
+        "bindings": 0.19944444444444442,
+        "instances": 1.1516,
+        "motion": 0.5651666666666667,
+        "transparent": 1.0608666666666666,
+        "update": 3.4937583333333335
+      },
+      "updateSamplesMs": [
+        3.5735,
+        3.513,
+        3.4479,
+        3.6602,
+        2.9154,
+        3.6081,
+        3.3823,
+        3.486,
+        3.3376,
+        3.401,
+        3.4674,
+        3.5184,
+        3.7429,
+        3.763,
+        3.6939,
+        3.7377,
+        3.6377,
+        3.4219,
+        3.5881,
+        3.7038,
+        3.6517,
+        3.5101,
+        3.5457,
+        3.38,
+        3.2693,
+        3.6026,
+        3.5431,
+        3.7505,
+        3.2883,
+        3.2848,
+        3.4681,
+        3.2424,
+        3.2405,
+        3.3755,
+        3.4875,
+        3.5354
+      ]
+    },
+    "candidate": {
+      "bufferWrites": 0,
+      "frames": 40,
+      "imageWrites": 0,
+      "selectedFrames": 36,
+      "stages": {
+        "bindings": 0.041475000000000005,
+        "instances": 1.2544722222222222,
+        "motion": 0.4321888888888889,
+        "transparent": 0.7783194444444445,
+        "update": 3.233155555555556
+      },
+      "updateSamplesMs": [
+        2.9275,
+        2.8917,
+        2.7848,
+        3.0414,
+        3.0716,
+        2.9406,
+        2.8778,
+        2.9467,
+        3.047,
+        2.9814,
+        3.0998,
+        2.8674,
+        3.4554,
+        2.8211,
+        3.0045,
+        2.804,
+        3.0869,
+        3.7662,
+        3.4526,
+        3.3322,
+        3.9575,
+        3.6681,
+        3.5851,
+        3.4793,
+        3.435,
+        3.5425,
+        3.2892,
+        3.4479,
+        3.1944,
+        3.0456,
+        3.5452,
+        3.793,
+        3.3116,
+        3.3897,
+        3.2743,
+        3.2346
+      ]
+    },
+    "updateReductionPercent": 7.459095704800545,
+    "sourceAndProductsUnchanged": true,
+    "frozenProjectInputsVerified": 1729,
+    "formalPerformancePassed": false
+  },
+  "expectedUpdateReductionGatePercent": 20,
+  "candidateAdopted": false,
+  "nativeImageBatchStarted": false,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "productionSourceRestored": true,
+  "restoredChecks": 6,
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "provenanceSha256": "f9780ebc4225e4f3f7962d5e3c5c2d0eee501ab74b2876fabcad5074f183ce2c"
+    },
+    {
+      "configuration": "debug",
+      "provenanceSha256": "1821d316fa678695ec6bc71eacfb70d26f9e08cef3ca9565baaf25a4936a3215"
+    }
+  ],
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "evidenceBytes": 798153,
+  "evidenceSha256": "1830fc3ef73142f6f221da9b0e9114918edf8462649de791c2d9366566898ec2",
+  "members": [
+    {
+      "path": "CharacterSceneRenderer-command.txt",
+      "bytes": 1399,
+      "sha256": "06d6d54c9a9ec001b67c3a66c9cd9aaa36984b1ce721c7fbf8259679a04558ed"
+    },
+    {
+      "path": "CpuPreparationProbe.hpp",
+      "bytes": 1768,
+      "sha256": "e4372ff9c94418072f599f07f9e7f27d0abd981271815832f34513b45917c530"
+    },
+    {
+      "path": "MotionVectorPass-command.txt",
+      "bytes": 1387,
+      "sha256": "9107209c038289c056d6e109eae5a33e3a07ab223a13ec6859d289a44cf62725"
+    },
+    {
+      "path": "balanced/CharacterSceneRenderer-command.txt",
+      "bytes": 1399,
+      "sha256": "06d6d54c9a9ec001b67c3a66c9cd9aaa36984b1ce721c7fbf8259679a04558ed"
+    },
+    {
+      "path": "balanced/CpuPreparationProbe.hpp",
+      "bytes": 1768,
+      "sha256": "e4372ff9c94418072f599f07f9e7f27d0abd981271815832f34513b45917c530"
+    },
+    {
+      "path": "balanced/MotionVectorPass-command.txt",
+      "bytes": 1387,
+      "sha256": "9107209c038289c056d6e109eae5a33e3a07ab223a13ec6859d289a44cf62725"
+    },
+    {
+      "path": "balanced/baseline/CharacterMotionPass.inc",
+      "bytes": 11867,
+      "sha256": "14fcad7e800ea0fe5225381b4f43491273d3c2258fb7f47c4fd5926995ccae2b"
+    },
+    {
+      "path": "balanced/baseline/CharacterSceneRenderer-compile.log",
+      "bytes": 28,
+      "sha256": "54d23819c0081d5ff1a0a31d86acd76392df31c3433f0e3dab220bd0e8d13ab7"
+    },
+    {
+      "path": "balanced/baseline/CharacterSceneRenderer.cpp",
+      "bytes": 306397,
+      "sha256": "37a881b1f4dc30c56e04d7be863bec7a0cef7477721a83ef2b5065dee2d8b6cf"
+    },
+    {
+      "path": "balanced/baseline/MotionVectorPass-compile.log",
+      "bytes": 22,
+      "sha256": "1c1b8ebe18526baa649e8608c923a76a113a4e61a79c98a8e36140c52b2d0f5f"
+    },
+    {
+      "path": "balanced/baseline/MotionVectorPass.cpp",
+      "bytes": 8888,
+      "sha256": "f0a02af935ff2e15a084ec79dfda5aa56743bb7293f51801cf30c8088fe3778b"
+    },
+    {
+      "path": "balanced/baseline/command.json",
+      "bytes": 1247,
+      "sha256": "0b3a893ad98b15586fd177c2e8589c08f04bc1f0f9092e0486b07696e8e42885"
+    },
+    {
+      "path": "balanced/baseline/cpu-work.json",
+      "bytes": 784,
+      "sha256": "83948f8544510eced03f0bc4ef2d6c3573c0ca5d65f509af2dbfda62e4533f6b"
+    },
+    {
+      "path": "balanced/baseline/execution.json",
+      "bytes": 1262,
+      "sha256": "1612050a22a8497a39c5661f625eab98f0b85871331a414b3da4ceba19e1b800"
+    },
+    {
+      "path": "balanced/baseline/link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "balanced/baseline/process.log",
+      "bytes": 13991,
+      "sha256": "2b50216eee8f922d29f6ecaed85b41952244b433ac4fcec5f0c040d11aa7d72c"
+    },
+    {
+      "path": "balanced/baseline/runtime.json",
+      "bytes": 317942,
+      "sha256": "ff41363353741e612a3af6ee5e2fea852cb331e6ea43fc9171393d9595d9d991"
+    },
+    {
+      "path": "balanced/baseline/timing.json",
+      "bytes": 30944,
+      "sha256": "84518fdfe1a502f50bbd88ba0d975d0f227b3f5f1d20d153158ecdaa556a0dea"
+    },
+    {
+      "path": "balanced/build_profiles.py",
+      "bytes": 2715,
+      "sha256": "5e45a299cd0033efee1981583b76f383231308b9e0f71098d48c84713167b9b7"
+    },
+    {
+      "path": "balanced/candidate/CharacterMotionPass.inc",
+      "bytes": 11867,
+      "sha256": "14fcad7e800ea0fe5225381b4f43491273d3c2258fb7f47c4fd5926995ccae2b"
+    },
+    {
+      "path": "balanced/candidate/CharacterSceneRenderer-compile.log",
+      "bytes": 28,
+      "sha256": "54d23819c0081d5ff1a0a31d86acd76392df31c3433f0e3dab220bd0e8d13ab7"
+    },
+    {
+      "path": "balanced/candidate/CharacterSceneRenderer.cpp",
+      "bytes": 307229,
+      "sha256": "181787b7e6906605a75ccb0b4184d3197c6431d47c5abe82b92a5e088dac8d57"
+    },
+    {
+      "path": "balanced/candidate/MotionVectorPass-compile.log",
+      "bytes": 22,
+      "sha256": "1c1b8ebe18526baa649e8608c923a76a113a4e61a79c98a8e36140c52b2d0f5f"
+    },
+    {
+      "path": "balanced/candidate/MotionVectorPass.cpp",
+      "bytes": 10157,
+      "sha256": "1f086ef163303703020468741a775e68b16ce35f71052ead02a6f06b990f51bb"
+    },
+    {
+      "path": "balanced/candidate/command.json",
+      "bytes": 1250,
+      "sha256": "9cb34570fb6deaac35276e27ee38511250a2064f9d778541f2630fa60df5ed3e"
+    },
+    {
+      "path": "balanced/candidate/cpu-work.json",
+      "bytes": 789,
+      "sha256": "adde6e15c303373f3af27a3252a55e50c4638ae0be67d03a8fe6ba5fad903446"
+    },
+    {
+      "path": "balanced/candidate/execution.json",
+      "bytes": 1266,
+      "sha256": "a087810b4e9cd6209b659e8f48f5ec65f9fdb5e1695377ab0eca61aae1f981c7"
+    },
+    {
+      "path": "balanced/candidate/link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "balanced/candidate/process.log",
+      "bytes": 13992,
+      "sha256": "80cc9f8981a4883b3149c8bf692dfbaee4d8cf971b046f9ef2ae9a458f1bdaef"
+    },
+    {
+      "path": "balanced/candidate/runtime.json",
+      "bytes": 317952,
+      "sha256": "1158a7e05970dc77c25268262505f771b3e9f89ca376d7862cbb8c0928746a2d"
+    },
+    {
+      "path": "balanced/candidate/timing.json",
+      "bytes": 30920,
+      "sha256": "61137c62deb922a4a1c84f6cdaf5e63c468035248d7abf8d77e054e5f9a64b57"
+    },
+    {
+      "path": "balanced/comparison.json",
+      "bytes": 1971,
+      "sha256": "3c66307574d26a52d847cc75596fc6ee08e42623ee47f85d5052711e008bfab3"
+    },
+    {
+      "path": "balanced/evaluate.py",
+      "bytes": 3099,
+      "sha256": "30bf5d939b1dea2eaf451a5c14d914a2078609a0d1edae09d4ae2220689d42ec"
+    },
+    {
+      "path": "balanced/link-command.txt",
+      "bytes": 4188,
+      "sha256": "cf0aaeb60eaac53367a0e623d1e0239d9a42e4d9d09a0f5ea34dc40d2801c240"
+    },
+    {
+      "path": "balanced/prepare_profiles.py",
+      "bytes": 5076,
+      "sha256": "475a106283bc32a3964bcc481a99217a5a6b2807a58c558521726ec9e62ddda5"
+    },
+    {
+      "path": "balanced/profile-build.json",
+      "bytes": 20436,
+      "sha256": "b0cf7db42e52ab4bd5a7f78e559d2f0e55789802b221e37a73739a00b8d58da5"
+    },
+    {
+      "path": "balanced/unit-tests.log",
+      "bytes": 671,
+      "sha256": "0525af74ad671b4113268ee820a015e4499a58c69bd5d179f8e71c073be0d185"
+    },
+    {
+      "path": "baseline-source/src/render/MotionVectorPass.cpp",
+      "bytes": 8594,
+      "sha256": "6bbb99af1d1c08acd4917a157f56d873015ab25d975f4828760fc498348f048a"
+    },
+    {
+      "path": "baseline-source/src/render/MotionVectorPass.hpp",
+      "bytes": 2615,
+      "sha256": "afdc4c3b0c886c4850578457ba50a8ef231c92d09a8fa2dd5e074405ade103b6"
+    },
+    {
+      "path": "baseline-source/src/render/TransparentTopology.hpp",
+      "bytes": 5119,
+      "sha256": "2339b84f9bbe8ed28631f4606a69e1849d24d9e7bae79e852ba7f650e24c44a1"
+    },
+    {
+      "path": "baseline-source/src/scenes/CharacterSceneRenderer.cpp",
+      "bytes": 300946,
+      "sha256": "72fa64343dc4d913a422b3691781f39153404d85b11e9ceb8487968ad20e577b"
+    },
+    {
+      "path": "baseline-source/src/scenes/CharacterSceneRenderer.hpp",
+      "bytes": 36023,
+      "sha256": "313ba7945ffb38367ba9d6cd32914740e0b6c098d94c053e28b56b073f9f90b0"
+    },
+    {
+      "path": "baseline-source/tests/MotionRecordingTests.cpp",
+      "bytes": 12436,
+      "sha256": "22ca8942a62252c99007da238d46266b2b3f75821d995f3ea15b2125543cfefb"
+    },
+    {
+      "path": "baseline-source/tests/TransparentTopologyTests.cpp",
+      "bytes": 3671,
+      "sha256": "9bebcf1dee5296e2b140ea1648c0fcffd2a53cbc88d69a94755347fb59175239"
+    },
+    {
+      "path": "baseline.json",
+      "bytes": 187128,
+      "sha256": "7fc26abcf5c8f3e0d5a24f7b0170219c85266265aaa00aa4d9b1bae1f84f3812"
+    },
+    {
+      "path": "baseline/CharacterMotionPass.inc",
+      "bytes": 11867,
+      "sha256": "14fcad7e800ea0fe5225381b4f43491273d3c2258fb7f47c4fd5926995ccae2b"
+    },
+    {
+      "path": "baseline/CharacterSceneRenderer-compile.log",
+      "bytes": 28,
+      "sha256": "54d23819c0081d5ff1a0a31d86acd76392df31c3433f0e3dab220bd0e8d13ab7"
+    },
+    {
+      "path": "baseline/CharacterSceneRenderer.cpp",
+      "bytes": 306379,
+      "sha256": "61249ce870d926a015cc22a6034eecacc6a11c14d353fd3537c05100ae094b95"
+    },
+    {
+      "path": "baseline/MotionVectorPass-compile.log",
+      "bytes": 22,
+      "sha256": "1c1b8ebe18526baa649e8608c923a76a113a4e61a79c98a8e36140c52b2d0f5f"
+    },
+    {
+      "path": "baseline/MotionVectorPass.cpp",
+      "bytes": 8879,
+      "sha256": "2232fc980701d55d523fa3116c4ceaa799cc67f8840f8d6637c98bdfeaf3c66a"
+    },
+    {
+      "path": "baseline/command.json",
+      "bytes": 1217,
+      "sha256": "974ada52312925e4f874f99dbecbc4dc6e71877fe83703c69ac4cf862422a971"
+    },
+    {
+      "path": "baseline/cpu-work.json",
+      "bytes": 781,
+      "sha256": "a23085febe6bd7a33c9e11f0832f9ca0ef0f4fbfc491fa7f6b065d6931e5f8cc"
+    },
+    {
+      "path": "baseline/execution.json",
+      "bytes": 1233,
+      "sha256": "81f600b27bc210c45d646966712dead32e9112d5b1826c5aae817f3c363cfba1"
+    },
+    {
+      "path": "baseline/link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "baseline/process.log",
+      "bytes": 13984,
+      "sha256": "f55d488bb0a47aaa997422e6374de2c00ffd9e9ead7812d1d88433a6cee4738a"
+    },
+    {
+      "path": "baseline/runtime.json",
+      "bytes": 317941,
+      "sha256": "69a8a3d99707fa8b62be7aa2a1e2d1e1afaa953d4d50584c857e3d86135839eb"
+    },
+    {
+      "path": "baseline/timing.json",
+      "bytes": 30914,
+      "sha256": "686ceba8bfe7bd839a94db98768f3831b2c44d9c93eebf1ecb86d9c6eb256883"
+    },
+    {
+      "path": "batch-build.json",
+      "bytes": 362,
+      "sha256": "641dc9f9bdff1223be10675946320352eae7ba1e8a0b68828f8ff84e4ea7790c"
+    },
+    {
+      "path": "batch-build.log",
+      "bytes": 1097,
+      "sha256": "0647771eb4c7f77ef77042feeb946400e2d72c40d1aa8691264d981a45de90d4"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 435,
+      "sha256": "8986ae64095d4e7997e6434236d5d44b98aac7459f7c5cfe33c9f438af13732b"
+    },
+    {
+      "path": "build.py",
+      "bytes": 1832,
+      "sha256": "8d35ba9fb0be19097e9c65750c4d099239e9e013ab2eb95c82012c4f98dc8906"
+    },
+    {
+      "path": "build_profiles.py",
+      "bytes": 2715,
+      "sha256": "5e45a299cd0033efee1981583b76f383231308b9e0f71098d48c84713167b9b7"
+    },
+    {
+      "path": "candidate/CharacterMotionPass.inc",
+      "bytes": 11867,
+      "sha256": "14fcad7e800ea0fe5225381b4f43491273d3c2258fb7f47c4fd5926995ccae2b"
+    },
+    {
+      "path": "candidate/CharacterSceneRenderer-compile.log",
+      "bytes": 28,
+      "sha256": "54d23819c0081d5ff1a0a31d86acd76392df31c3433f0e3dab220bd0e8d13ab7"
+    },
+    {
+      "path": "candidate/CharacterSceneRenderer.cpp",
+      "bytes": 307211,
+      "sha256": "a392672c218790af0397402abb9a4b592ab31b97b9332001f5c310ff00895964"
+    },
+    {
+      "path": "candidate/MotionVectorPass-compile.log",
+      "bytes": 22,
+      "sha256": "1c1b8ebe18526baa649e8608c923a76a113a4e61a79c98a8e36140c52b2d0f5f"
+    },
+    {
+      "path": "candidate/MotionVectorPass.cpp",
+      "bytes": 10148,
+      "sha256": "81a060a66b5915120ce5515093592a625a843a68ce289222516bb077e2a6c01d"
+    },
+    {
+      "path": "candidate/command.json",
+      "bytes": 1220,
+      "sha256": "40974d3ddd6399776146b813c66722f82e770bcc9fcc5d5c5572b8ab5482c590"
+    },
+    {
+      "path": "candidate/cpu-work.json",
+      "bytes": 790,
+      "sha256": "b6b1b631821bc79d4eed8a5d4fdb4a3292083ee75fffcfe31ab685b67c08aa7b"
+    },
+    {
+      "path": "candidate/execution.json",
+      "bytes": 1236,
+      "sha256": "723db2bfc70eccadb1ef0ae159469aaf21c37fb798bfc4e9e28620314c093379"
+    },
+    {
+      "path": "candidate/link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "candidate/process.log",
+      "bytes": 13982,
+      "sha256": "bb886791d31bdd247f86ea37bdc93fc4320ada0e137f108ab556fc482ad14311"
+    },
+    {
+      "path": "candidate/runtime.json",
+      "bytes": 317952,
+      "sha256": "7ada8ac775cf7c0c7bf542c1b1b5edb764a214cad9696760de3ffb5def85cbeb"
+    },
+    {
+      "path": "candidate/timing.json",
+      "bytes": 30891,
+      "sha256": "3f5c1252f9e890a1f7889e3e3c1d36416bfe8f5d8bd2225a29daea0a2a8bcb7d"
+    },
+    {
+      "path": "capture.py",
+      "bytes": 3199,
+      "sha256": "4517fe4ba4e7f77e1a8a4e0e6beb7bffe5e1abc2d2d4380ff6a8451eb070c9f5"
+    },
+    {
+      "path": "check.py",
+      "bytes": 1505,
+      "sha256": "ad58013f55b0ec9deea6845fcde9e5023f4a368e46de004d17d9936406711c82"
+    },
+    {
+      "path": "coarse-source/src/render/MotionVectorPass.cpp",
+      "bytes": 9847,
+      "sha256": "f28a4bd1ecc3d1b0736fe7dfa82cbad7c2b5c5ddb59eee80bef41f65aad2fb2e"
+    },
+    {
+      "path": "coarse-source/src/render/MotionVectorPass.hpp",
+      "bytes": 3137,
+      "sha256": "4fcf4ff961f6da8bc7cbe9ef37edbe19bccf8eee3318cdf71c4cbc9e74a70f26"
+    },
+    {
+      "path": "coarse-source/src/render/TransparentTopology.hpp",
+      "bytes": 7101,
+      "sha256": "bc69057e1d17e8450fd94efbe4d1a3fcfb36b2f8429fe1a495f796e5c70aa11b"
+    },
+    {
+      "path": "coarse-source/src/scenes/CharacterSceneRenderer.cpp",
+      "bytes": 306794,
+      "sha256": "0898a641fe692ca4a66d98f1d785423adb21d463364cc3fd0b6b350bd14b3641"
+    },
+    {
+      "path": "coarse-source/src/scenes/CharacterSceneRenderer.hpp",
+      "bytes": 36065,
+      "sha256": "3ddfed891ead184e1e9ccd4df26c5a2ddadbc16b0336eae9f54ab54649782e9c"
+    },
+    {
+      "path": "coarse-source/tests/MotionRecordingTests.cpp",
+      "bytes": 15549,
+      "sha256": "bf71b283e29ea8510a3aecdac083d582bbaaa40b9ff494d983999a9e98bf8b42"
+    },
+    {
+      "path": "coarse-source/tests/TransparentTopologyTests.cpp",
+      "bytes": 5502,
+      "sha256": "ffc6f238411623fa1ee06dd8bc2c5432313dd92496165d02ac37fcae64a30b90"
+    },
+    {
+      "path": "comparison.json",
+      "bytes": 1970,
+      "sha256": "a4ce58c7006565cb527b70230325bb334ffe805c49a17509433496991e59d318"
+    },
+    {
+      "path": "debug-refresh.json",
+      "bytes": 789,
+      "sha256": "1563fb2c1c6a575bfca0e7c8cb9f0dd280a9a412cc98c21437d7cdb6d78f0c8f"
+    },
+    {
+      "path": "debug-refresh.log",
+      "bytes": 2433,
+      "sha256": "4042aa68e570c05a1194527d01e8b33112e4105410d79ffd8702479bdb361067"
+    },
+    {
+      "path": "evaluate.py",
+      "bytes": 3058,
+      "sha256": "05e1de34bb3548470c6b37fe2d55daed147ff9bfdd07aa6b5ba4c7b7317af6f9"
+    },
+    {
+      "path": "final-source/cpu-preparation.md",
+      "bytes": 2278,
+      "sha256": "10901ebb0cc16402347a38c21fe1b58249f64619597db30bd44b964acc592a94"
+    },
+    {
+      "path": "final-source/src/render/MotionVectorPass.cpp",
+      "bytes": 9847,
+      "sha256": "f28a4bd1ecc3d1b0736fe7dfa82cbad7c2b5c5ddb59eee80bef41f65aad2fb2e"
+    },
+    {
+      "path": "final-source/src/render/MotionVectorPass.hpp",
+      "bytes": 3137,
+      "sha256": "4fcf4ff961f6da8bc7cbe9ef37edbe19bccf8eee3318cdf71c4cbc9e74a70f26"
+    },
+    {
+      "path": "final-source/src/render/TransparentTopology.hpp",
+      "bytes": 8983,
+      "sha256": "8a40f6644c2f65290cef786a107b127366ca4e8b953600e3743bb5300407efbd"
+    },
+    {
+      "path": "final-source/src/scenes/CharacterSceneRenderer.cpp",
+      "bytes": 306794,
+      "sha256": "0898a641fe692ca4a66d98f1d785423adb21d463364cc3fd0b6b350bd14b3641"
+    },
+    {
+      "path": "final-source/src/scenes/CharacterSceneRenderer.hpp",
+      "bytes": 36065,
+      "sha256": "3ddfed891ead184e1e9ccd4df26c5a2ddadbc16b0336eae9f54ab54649782e9c"
+    },
+    {
+      "path": "final-source/tests/MotionRecordingTests.cpp",
+      "bytes": 15549,
+      "sha256": "bf71b283e29ea8510a3aecdac083d582bbaaa40b9ff494d983999a9e98bf8b42"
+    },
+    {
+      "path": "final-source/tests/TransparentTopologyTests.cpp",
+      "bytes": 6378,
+      "sha256": "48b4774ad48a47828db37f9e1d074964f2a9209c999564c7d6b6d3a7d33992a3"
+    },
+    {
+      "path": "link-command.txt",
+      "bytes": 4188,
+      "sha256": "cf0aaeb60eaac53367a0e623d1e0239d9a42e4d9d09a0f5ea34dc40d2801c240"
+    },
+    {
+      "path": "package.py",
+      "bytes": 5174,
+      "sha256": "6d7943ec738afcdfb6bf396a8ce0b974a70712a140434a32f4fcfddadcac5d05"
+    },
+    {
+      "path": "prepare_balanced.py",
+      "bytes": 497,
+      "sha256": "ca0b85c63fb8e328186c9033a167bdc063c5161d9c5e5ff602b7c8cf49a65aa7"
+    },
+    {
+      "path": "prepare_profiles.py",
+      "bytes": 5003,
+      "sha256": "f65cd52b0aa744e49cd8b44671f4be712c844ea8184689d1d7dbe14dbe2099af"
+    },
+    {
+      "path": "process.log",
+      "bytes": 13992,
+      "sha256": "80cc9f8981a4883b3149c8bf692dfbaee4d8cf971b046f9ef2ae9a458f1bdaef"
+    },
+    {
+      "path": "profile-build.json",
+      "bytes": 20229,
+      "sha256": "b3c3bd019cabc0f5112504078e1730d9e787d6dcc29edd8f440a2b2ee5b304c0"
+    },
+    {
+      "path": "red-build.json",
+      "bytes": 304,
+      "sha256": "5bb95954888f22cbcea0ff730879bc6a2414c9c9abea0200df2e9dcfba42945b"
+    },
+    {
+      "path": "red-build.log",
+      "bytes": 205,
+      "sha256": "66971d6efac74be2ed66b292699efd26b179c9c982a5bf478bedc0cf577ecda0"
+    },
+    {
+      "path": "red-test.json",
+      "bytes": 232,
+      "sha256": "773d6fdd072261f9a9521f9664cb294a51e31704d87f1109733cb8a9db8e27e3"
+    },
+    {
+      "path": "red-test.log",
+      "bytes": 57,
+      "sha256": "fd61b2b602a1ced6d2295807047c41c378265c639b2f2b541d6ba57a4faf2ddb"
+    },
+    {
+      "path": "refresh.py",
+      "bytes": 1328,
+      "sha256": "9ce10094d03f93d69b25f9ebcda7fcf106fc6b0801858d41d34523211e884f21"
+    },
+    {
+      "path": "release-refresh.json",
+      "bytes": 793,
+      "sha256": "c0fa09468c5ac8a0cdaf47f807ea547721f240b59901e579cf403669153483c3"
+    },
+    {
+      "path": "release-refresh.log",
+      "bytes": 2439,
+      "sha256": "f3fc1f8dcc176d873ea531e44a440b91bb23f53760dc12cf43fd65325cea2a6e"
+    },
+    {
+      "path": "restoration.json",
+      "bytes": 1851,
+      "sha256": "20efb021d9ba92bb5fa4efc4b939d041c63346d719975199ddd481af05e85743"
+    },
+    {
+      "path": "restore.py",
+      "bytes": 1545,
+      "sha256": "dff41c2e8e571ac447adeca99b6c307e634f8fa111991b97390480bb6574bce9"
+    },
+    {
+      "path": "restored-debug-tests.log",
+      "bytes": 667,
+      "sha256": "9c0775464f01f2ca69002ec18417e6ed614e4d68366f6d15df94924dabf5212e"
+    },
+    {
+      "path": "restored-release-tests.log",
+      "bytes": 671,
+      "sha256": "651c2e6fbc7364eb47deea2756d9d1a0a338dcfbb0af57224d0e798aa73640df"
+    },
+    {
+      "path": "start.py",
+      "bytes": 1219,
+      "sha256": "4152f6102b07696dbee504aff369cb15cad12f702e45175b5694627103f1d972"
+    },
+    {
+      "path": "unit-tests.log",
+      "bytes": 534,
+      "sha256": "dd64a077921b9033d37b426b843ec6fe6ae485c93fc49c41dd902e7dcc8f4569"
+    }
+  ]
+}

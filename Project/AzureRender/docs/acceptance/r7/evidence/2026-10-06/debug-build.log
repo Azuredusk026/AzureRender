@@ -1,0 +1,5 @@
+[1/4] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDevtools.cpp.obj
+[2/4] Linking CXX static library AzurePlayerHost.lib
+[3/4] Linking CXX executable AzureRegisteredComponentHost.exe
+[4/4] Linking CXX executable AzurePlayer.exe
+{"status": "passed", "manifest": "build\\ninja-msvc-debug\\build-provenance.json"}

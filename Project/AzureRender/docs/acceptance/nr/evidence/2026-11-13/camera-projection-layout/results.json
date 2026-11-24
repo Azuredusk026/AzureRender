@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "sourceBase": "1b71afd91ab084735b85dd765f4533caa1b8290d",
+  "reuse": {
+    "release": {
+      "unchangedProducts": 1294,
+      "changedInputs": {
+        "tools/render_capture_layout.py": "70d0c83231d534cd23fae79a8ace5277bc08498cc00517dd92c4a868fca46a50",
+        "tools/test_camera_projection_gpu.py": "1b05749523e63a6cf33b160527052d783c5b3dfaab1b006c178da3d21a5a42dd",
+        "tools/test_capture_camera_gpu.py": "7fcda16fcfced27a0ca627d7b45af02448f5094231636983d5619da99e0db4b8"
+      },
+      "productReceiptSha256": "6e4135c33e14fe6c9684c751e8f02e79e7358e1212817826eb0b72806d2951fa"
+    },
+    "debug": {
+      "unchangedProducts": 1287,
+      "changedInputs": {
+        "tools/render_capture_layout.py": "70d0c83231d534cd23fae79a8ace5277bc08498cc00517dd92c4a868fca46a50",
+        "tools/test_camera_projection_gpu.py": "1b05749523e63a6cf33b160527052d783c5b3dfaab1b006c178da3d21a5a42dd",
+        "tools/test_capture_camera_gpu.py": "7fcda16fcfced27a0ca627d7b45af02448f5094231636983d5619da99e0db4b8"
+      },
+      "productReceiptSha256": "3d6fd1f16de9e119e3c94b2a889d91d7948316662fa29e8abfe147f9f0192115"
+    }
+  },
+  "reports": {
+    "release-camera-layout-gpu": {
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 78.875,
+      "tests": 2,
+      "selectedTests": 2,
+      "automaticFixtureTests": [],
+      "failed": [],
+      "skipped": []
+    },
+    "release-camera-layout-source": {
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 29.030999999959022,
+      "tests": 3,
+      "selectedTests": 3,
+      "automaticFixtureTests": [],
+      "failed": [],
+      "skipped": []
+    },
+    "debug-camera-layout-gpu": {
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 136.70300000009593,
+      "tests": 2,
+      "selectedTests": 2,
+      "automaticFixtureTests": [],
+      "failed": [],
+      "skipped": []
+    },
+    "debug-camera-layout-source": {
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 27.688000000081956,
+      "tests": 3,
+      "selectedTests": 3,
+      "automaticFixtureTests": [],
+      "failed": [],
+      "skipped": []
+    }
+  },
+  "cameraProjectionLayoutVersion": 3,
+  "archive": {
+    "members": 39,
+    "bytes": 601341,
+    "sha256": "ce2743ef2840c2f7f2d949d3470b695d2836a81c23142848f295594ca25cfdd0"
+  }
+}

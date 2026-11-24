@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "realTime": true,
+  "readOnlyObservation": true,
+  "inputReplayed": true,
+  "restart": true,
+  "retainedRuntimeTraceFrames": 0
+}

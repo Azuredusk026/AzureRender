@@ -1,0 +1,15 @@
+{
+  "stage": "U11",
+  "passed": true,
+  "types": [
+    "azure.pbr",
+    "azure.stylized"
+  ],
+  "actualSubmeshSlots": 2,
+  "viewportMeanDifference": 0.8287588060495054,
+  "playerRuns": 2,
+  "parameterOverrideUi": true,
+  "completeProfileUi": true,
+  "physicalKeyboardMouse": "not performed",
+  "releasePackaging": "separate acceptance receipt"
+}

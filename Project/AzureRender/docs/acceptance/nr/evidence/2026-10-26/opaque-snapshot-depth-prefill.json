@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "baseCommit": "321d788db2be2c033fcf3bf01c35e96d72f37354",
+  "status": "snapshot-prefill-public-and-main-parity-passed",
+  "scope": "Opaque color-snapshot prefill; main-pass shading and final 60fps joint quality remain gated",
+  "run": "build\\runs\\20261026-002936-opaque-snapshot-depth-prefill-89dbc6",
+  "sources": {
+    "CMakeLists.txt": "6c318420ca4f1ae26526a699f65847fb6de4dd5bcaef42bd363da8b6421cecc2",
+    "src/rhi/NullRhi.cpp": "661807c981481a188d396b6ee6f6e7a0a56ddc6c2fdbc35741c66e13c41e9c7f",
+    "src/scenes/CharacterSceneRenderer.cpp": "58d2a053b3fd5c002d2b356afb2d01fc3f11aed6a2205c34073dc407408e4c08",
+    "src/scenes/CharacterSceneRenderer.hpp": "d8b92dbaae0237e9bd9b163b1d665efcaca4817b62853f8a9d122c2fce171b38",
+    "tests/NullRhiPassTests.cpp": "c85832442ad34663d298d5aa5317e1525e8ea73a38d78c15a486ade5e2f4b844",
+    "tests/OutlineCoverageRecordingTests.cpp": "951e7ae4debcd099b7be426630848d4ee671773a61d772dbbed3484a9e602bce",
+    "tools/test_scene_refraction_gpu.py": "b9f15085ea79e1e6a053b2a121310013e557ee84711be06dc8bc9a3c991988ac"
+  },
+  "checks": {
+    "cpu-debug": {
+      "status": "passed",
+      "tests": 10,
+      "logSha256": "733c6965dfd79f1ee1b3ad454eef1a7ccaf73ac8e27e11265b3abe2603be0080"
+    },
+    "coplanar-final-debug": {
+      "summarySha256": "92a1b87c4a5e5d0e3fdd50e1f8da04d980567a9e7918d9d9113ffd87425a152c",
+      "captures": 4,
+      "logSha256": "d65d2c833df520cee2e785061fa2de6c7f292e451e50abd370e6225021c687b9"
+    },
+    "coplanar-msaa-final-debug": {
+      "summarySha256": "486f9a6909d6be46e867cabea591cd9fc8e17380524c6b5b81f4a67bf8d54ab8",
+      "captures": 4,
+      "logSha256": "522a149a15d29078d942d13a04c739757a337a5526f399a9509ee04125c0f217"
+    },
+    "ssr-final-debug": {
+      "summarySha256": "34ebe251118d7adfcb3cd6ab96cece268348a62e3a277575aeba07e42c679dca",
+      "captures": 44,
+      "logSha256": "3f003a8f6bb5e1954d64e3a9bd268ae7cadf1eb4e618e4fabf78a0fa88aeeff9"
+    },
+    "opacity-final-debug": {
+      "summarySha256": "4234379f9f837bcbeffda85b47e4d9feaa49501405617ac35ed88ffe8c010d94",
+      "captures": 24,
+      "logSha256": "970e50a9e2be31a47e041a4b2e04c8751ead8ed20e81023fb9bff99bae102c7c"
+    },
+    "cpu-release": {
+      "status": "passed",
+      "tests": 10,
+      "logSha256": "4d4b1b9830ef8f8ed994b0f211cfd6b82b85aa4895fb07c7ebc04d1047ad4679"
+    },
+    "coplanar-final-release": {
+      "summarySha256": "0ca6bce7ac4684a26963f2b481ae313586bd21a445bbeca88c9925a296e3df71",
+      "captures": 4,
+      "logSha256": "36936189830ccf10ff8acd642c216ac54694964e4a1f16b6010a599a31c5b419"
+    },
+    "coplanar-msaa-final-release": {
+      "summarySha256": "fb56c3651df996309fa9d189160f943ed21279685a78baad3b853f6545f8f1f9",
+      "captures": 4,
+      "logSha256": "e8adbe8786cb828cf762f9844cda577bab2421a6cc3fb5c71ac3198e3974ec42"
+    },
+    "ssr-final-release": {
+      "summarySha256": "c4c93d2e959995552e4e462761acdc56e3cd3d022c61fe5db26d2b035b1ff28f",
+      "captures": 44,
+      "logSha256": "3f003a8f6bb5e1954d64e3a9bd268ae7cadf1eb4e618e4fabf78a0fa88aeeff9"
+    },
+    "opacity-final-release": {
+      "summarySha256": "0fc88491f337dfb87b4d32818d388567de680b399c53d0db4fe5e863c8587020",
+      "captures": 24,
+      "logSha256": "187e239eb627e41de7c39fd2b74d42b8c5d431e0a6cae0359322e4179a9e7648"
+    }
+  },
+  "recordingCombinations": 224,
+  "gpuCaptures": 152,
+  "realInputImageParity": {
+    "main": {
+      "status": "passed",
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "meanByteError": 0.0,
+      "imageSha256": "b2108cfa08cdd69c5f930422196f3f37b6766c7d78104bdedfe500d38853301a",
+      "playerSha256": "f667ed0b0b4d6bf87db6fac16e5f908c1fdc835f1448348b9c3b906d278e2ee1"
+    },
+    "playable": {
+      "status": "passed",
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "meanByteError": 0.0,
+      "imageSha256": "9481244cf8488a99facc45e334d3769beab016a7f67fd407201eff280c701085",
+      "playerSha256": "f667ed0b0b4d6bf87db6fac16e5f908c1fdc835f1448348b9c3b906d278e2ee1"
+    },
+    "head-msaa": {
+      "status": "passed",
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "meanByteError": 0.0,
+      "imageSha256": "0ca086c1f4d62edf4c667b22f93d90b8eb78b61b04e803efc27f66a615839c8c",
+      "playerSha256": "f667ed0b0b4d6bf87db6fac16e5f908c1fdc835f1448348b9c3b906d278e2ee1"
+    }
+  },
+  "shaderFreeze": {
+    "debug": {
+      "programs": 112,
+      "same": true
+    },
+    "release": {
+      "programs": 112,
+      "same": true
+    }
+  },
+  "performance": {
+    "1": {
+      "schemaVersion": 1,
+      "mode": 1,
+      "playerSha256": "f667ed0b0b4d6bf87db6fac16e5f908c1fdc835f1448348b9c3b906d278e2ee1",
+      "frames": 96,
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "allocator": {
+        "bufferAllocations": 2027,
+        "imageAllocations": 439,
+        "liveBuffers": 820,
+        "liveImages": 439,
+        "bufferBytes": 2672395808,
+        "imageBytes": 2685131264,
+        "liveBufferBytes": 250791792,
+        "liveImageBytes": 2685131264,
+        "deviceLocalPeakBytes": 3145782400
+      },
+      "snapshotMultisampleAllocatedBytes": 0,
+      "shadowMs": {
+        "mean": 4.0424776,
+        "p50": 4.1501280000000005,
+        "p95": 4.3385472,
+        "maximum": 5.566912
+      },
+      "sceneMs": {
+        "mean": 80.7286144,
+        "p50": 80.037376,
+        "p95": 80.7751168,
+        "maximum": 113.385472
+      },
+      "postProcessMs": {
+        "mean": 0.2097024,
+        "p50": 0.206848,
+        "p95": 0.2171904,
+        "maximum": 0.282624
+      },
+      "frameMs": {
+        "mean": 84.98079440000001,
+        "p50": 84.29984,
+        "p95": 84.96023840000001,
+        "maximum": 119.23296
+      },
+      "passes60FpsGpuBudget": false
+    },
+    "4": {
+      "schemaVersion": 1,
+      "mode": 4,
+      "playerSha256": "f667ed0b0b4d6bf87db6fac16e5f908c1fdc835f1448348b9c3b906d278e2ee1",
+      "frames": 96,
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "allocator": {
+        "bufferAllocations": 2027,
+        "imageAllocations": 451,
+        "liveBuffers": 820,
+        "liveImages": 451,
+        "bufferBytes": 2672395808,
+        "imageBytes": 3232193024,
+        "liveBufferBytes": 250791792,
+        "liveImageBytes": 3232193024,
+        "deviceLocalPeakBytes": 3692844160
+      },
+      "snapshotMultisampleAllocatedBytes": 267386880,
+      "shadowMs": {
+        "mean": 4.5174959999999995,
+        "p50": 4.228784,
+        "p95": 4.4964224,
+        "maximum": 25.43792
+      },
+      "sceneMs": {
+        "mean": 309.1437568,
+        "p50": 303.421952,
+        "p95": 316.2230272,
+        "maximum": 546.9184
+      },
+      "postProcessMs": {
+        "mean": 0.4276736,
+        "p50": 0.420864,
+        "p95": 0.4710912,
+        "maximum": 0.61952
+      },
+      "frameMs": {
+        "mean": 314.0889264,
+        "p50": 308.068976,
+        "p95": 320.88686079999997,
+        "maximum": 572.912352
+      },
+      "passes60FpsGpuBudget": false
+    }
+  },
+  "configuration": {
+    "prefillPipelines": 3,
+    "additionalImages": 0,
+    "additionalShaderPrograms": 0,
+    "colorWriteMasks": [
+      0,
+      0
+    ],
+    "depthBiasConstant": 1,
+    "depthBiasSlope": 0,
+    "colorDepthCompare": "LESS",
+    "opaqueOnly": true,
+    "depthTestRequired": true
+  },
+  "reports": {
+    "baseline.json": "c38dcea7f9f7c942b485f432124d9c6dc882786162603d7f71a27b2688330452",
+    "final-shader-freeze.json": "25a6bba04d4efaaeb0f05d246a9d13d3c7b3d16c6a116d8c9ebe3668e8b47e85",
+    "initial-image-deltas.json": "0f6f963a7b5a1c7f40b75e028caae10ee9db21fd71e3c7cbddca9c93156b7950",
+    "legacy-vertex-isolation.json": "3e2cad2281141a086b141dbd6c469d1b4ed59bda04b286d8e87d2cb48c46c11d",
+    "legacy-vertex-parity.json": "18e1c452bf64448293fbbef5d3d3c0911d6e690869aa8b039b9b545ec0ca81ab",
+    "real-input-parity-final.json": "623fc4845c1450694ac934692b8627b3f81d38f01c1e86f7647a35019df11088",
+    "gpu-regression.json": "25dbc614cd5cea3ff6ba642a211db022350898a8a24e7ebbd4374d3f40e499f5",
+    "cache-write-diagnosis.json": "b540e3709de3d9faacc40cdf455e405632c8d35756012e63206d89f04d90f4a7",
+    "build-final4-debug.log": "c1113742f75ddb7772251e5f9f1315aa022c524ee7ba629a9423e1bbdc6959b7",
+    "build-final4-release.log": "f04758dd7a1d84588b215e29a7ec8044e7f33ab1e6d5365fd1047e9473267ba2"
+  },
+  "failedExperiments": {
+    "vertexInvariant": {
+      "result": "build\\runs\\20261026-002936-opaque-snapshot-depth-prefill-89dbc6\\real-input-parity.json",
+      "sha256": "317e2ee7e636ba43ee67027802820ff93c01531d03bffb774b8ca6f98a77c13d",
+      "maximumByteError": 140,
+      "changedPixels": 9406,
+      "isolatedRestoredVertexImagePassed": true
+    },
+    "cacheWrite": {
+      "log": "build\\runs\\20261026-002936-opaque-snapshot-depth-prefill-89dbc6\\prefill-1080p-aa1\\player.log",
+      "sha256": "00544e8621da3761809303c76668aefae05f827a9c19eff3f7c2a31b9245a2b0",
+      "rootCause": "undetermined",
+      "successfulFollowup": "prefill-v2-1080p-aa1 and aa4; existing complete cache retained"
+    },
+    "cacheCleanup": {
+      "requested": "Remove regenerable first-candidate cache after resolving its exact owned path",
+      "result": "exec_command automatic review rejected: blocked by policy",
+      "performed": false
+    }
+  },
+  "limitations": [
+    "Full-scene 1080p 60fps GPU budget remains failed",
+    "Native full appearance and continuous high-frequency quality remain gated",
+    "Additional hardware and full release gates remain pending",
+    "Asset cache write diagnostics remain under NR0-A1"
+  ]
+}

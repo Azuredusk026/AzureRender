@@ -1,0 +1,36 @@
+{
+  "status": "characterized",
+  "hairPixels": 6581,
+  "mask": "Albedo red selection within [530,480,680,660], eroded 3x3. Diagnostic only; not a native region acceptance.",
+  "fullVsLab": {
+    "meanAbsoluteByteError": 40.50149420047612,
+    "maximumByteError": 147,
+    "samePixelFraction": 0.04437015651116852,
+    "meanLeftRgb": [
+      138.24312414526668,
+      23.64671022640936,
+      36.623461480018236
+    ],
+    "meanRightRgb": [
+      187.01686673757789,
+      61.51755052423644,
+      71.31894848807173
+    ]
+  },
+  "labObjectShadowToggle": {
+    "meanAbsoluteByteError": 4.9124246568403995,
+    "maximumByteError": 105,
+    "samePixelFraction": 0.6862179000151952,
+    "meanLeftRgb": [
+      187.01686673757789,
+      61.51755052423644,
+      71.31894848807173
+    ],
+    "meanRightRgb": [
+      195.6570430025832,
+      64.02750341893329,
+      74.36362254976447
+    ]
+  },
+  "scope": "Environment geometry and SSR are absent in the lighting lab. Full scene differs substantially, so lab on/off result cannot attribute the full-scene hair appearance."
+}

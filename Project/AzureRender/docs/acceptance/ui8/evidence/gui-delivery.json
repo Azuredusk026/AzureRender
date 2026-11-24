@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "install": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎",
+  "root": "C:\\Users\\23587\\AppData\\Local\\Temp\\Azure GUI 中文 zzj49joj",
+  "package": "C:\\Users\\23587\\AppData\\Local\\Temp\\Azure GUI 中文 zzj49joj\\移动后的 GUI 发布",
+  "guiCreate": true,
+  "guiReopen": true,
+  "guiEditSave": true,
+  "unsavedCloseCancel": true,
+  "guiPublish": true,
+  "movedNativeEntry": true,
+  "sourceProjectUnavailable": true,
+  "input": "production Dear ImGui replay",
+  "physicalInput": "not performed"
+}

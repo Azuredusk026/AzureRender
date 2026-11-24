@@ -1,9 +1,10 @@
 #pragma once
+#include "ExtensionDescriptor.hpp"
 
 #include "IAssetImporter.hpp"
 #include "IRenderFeature.hpp"
 #include "ISceneRenderer.hpp"
-#include "editor/IEditorPanel.hpp"
+#include "extensions/IEditorPanel.hpp"
 
 #include <cstdint>
 #include <functional>
@@ -16,14 +17,7 @@
 
 namespace azurerender {
 
-struct ExtensionDescriptor {
-    std::string id;
-    std::uint32_t apiVersion = 1;
-    std::vector<std::string> capabilities;
-    std::vector<std::string> dependencies;
-};
-
-template <typename Interface>
+template <typename Interface,std::uint32_t ApiVersion=1>
 class ExtensionRegistry final {
 public:
     using Factory = std::function<std::unique_ptr<Interface>()>;
@@ -93,7 +87,7 @@ public:
         return result;
     }
 
-    static constexpr std::uint32_t kApiVersion = 1;
+    static constexpr std::uint32_t kApiVersion = ApiVersion;
 
 private:
     struct Entry {
@@ -107,6 +101,6 @@ private:
 using RenderFeatureRegistry = ExtensionRegistry<IRenderFeature>;
 using AssetImporterRegistry = ExtensionRegistry<IAssetImporter>;
 using EditorPanelRegistry = ExtensionRegistry<IEditorPanel>;
-using SceneRendererRegistry = ExtensionRegistry<ISceneRenderer>;
+using SceneRendererRegistry = ExtensionRegistry<ISceneRenderer,SceneRendererCapabilities::kApiVersion>;
 
 }  // namespace azurerender

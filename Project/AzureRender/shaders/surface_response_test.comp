@@ -1,0 +1,254 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "surface_response.glsl"
+#include "character_diffuse.glsl"
+#include "light_attenuation.glsl"
+#include "shadow_coverage.glsl"
+#include "outline_projection.glsl"
+layout(local_size_x=1) in;
+layout(binding=0,std430) buffer Results { float values[]; } result;
+layout(push_constant) uniform Parameters { float contrast; } parameters;
+void main(){
+    uint i=gl_GlobalInvocationID.x;
+    if(i>=305u) {
+        if(i<311u) {
+            float gray[6]=float[](-1.0,0.0,.5,.75,1.0,4.0);
+            result.values[i]=characterMainBrightnessSaturation(vec3(gray[i-305u]));
+        } else {
+            vec3 mainColor=i<314u?vec3(1.5366795063018799,.6271945238113403,.6465147733688354):vec3(.8,.6,.4);
+            vec3 adjusted=characterDiffuseSaturation(mainColor,characterMainBrightnessSaturation(mainColor));
+            if(i>=314u)adjusted+=vec3(.25,.5,.75);
+            result.values[i]=adjusted[(i-311u)%3u];
+        }
+        return;
+    }
+    if(i>=287u) {
+#ifdef AZURE_OUTLINE_DIRECTION_ENCODING
+        vec2 inputUv[6]=vec2[](vec2(.5,.5),vec2(0),vec2(1),vec2(.5),vec2(-.25,.5),vec2(-.75,.75));
+        uint probe=(i-287u)/3u;
+        result.values[i]=outlineTangentDirection(inputUv[probe],probe==0u?1u:2u)[(i-287u)%3u];
+#else
+        result.values[i]=-99;
+#endif
+        return;
+    }
+    if(i>=280u) {
+#ifdef AZURE_OUTLINE_DEPTH_PROJECTION
+        vec4 clips[7]=vec4[](vec4(0,0,2.902902902902903,3),vec4(0,0,.9009009009009009,1),
+            vec4(0,0,.04904904904904905,1),vec4(0,0,.0999692202129364,3.21),
+            vec4(0,0,0,.1),vec4(0,0,0,.1),vec4(0,0,1,0));
+        vec2 slopes[7]=vec2[](vec2(1.001001001001001,1),vec2(1.001001001001001,1),
+            vec2(.01001001001001001,0),vec2(-9.894371032714844e-6,1),
+            vec2(1.001001001001001,1),vec2(1.001001001001001,1),vec2(1,1));
+        float shifts[7]=float[](.1,0,.1,.1,-.2,-.1,.1);
+        result.values[i]=outlineShiftedClipDepth(clips[i-280u],slopes[i-280u],shifts[i-280u]);
+#else
+        result.values[i]=-99;
+#endif
+        return;
+    }
+    if(i>=260u) {
+#ifdef AZURE_OUTLINE_PROJECTION
+        if(i<272u) {
+            vec4 clips[6]=vec4[](
+                vec4(-.07965397089719772,-2.37831449508667,.09996864199638367,3.2500927448272705),
+                vec4(-.06249742954969406,-1.677281141281128,.09996748715639114,3.366089344024658),
+                vec4(.03402160108089447,-1.1646257638931274,.09996692836284637,3.4220051765441895),
+                vec4(-.22130997478961945,-1.9103193283081055,.09996800869703293,3.3134255409240723),
+                vec4(-.12344367802143097,-1.9349374771118164,.09996731579303741,3.382972240447998),
+                vec4(-.1267758458852768,-1.9493024349212646,.09996730834245682,3.3842356204986572));
+            vec3 inputs[6]=vec3[](
+                vec3(.21705256047176152,.9225526557565397,.6583698347503064),
+                vec3(-.31153674486119964,-.8326210532974729,.7735465255438113),
+                vec3(-.07812791744235291,.9903072431341883,.6136463838465074),
+                vec3(.06160465257314935,.9939846602886677,.20188227634803924),
+                vec3(-.5622797136529165,.027983691300934945,.36390356924019607),
+                vec3(-.5577261878641394,.13000588015461575,.6349010991115196));
+            uint index=(i-260u)/2u,channel=(i-260u)%2u;
+            vec2 delta=outlineViewScaledOffset(clips[index].w,inputs[index].xy/vec2(.5625,1),
+                vec2(2560,1440),-3.1715948581695557,.5,.5,inputs[index].z);
+            result.values[i]=(clips[index].xy+delta)[channel];
+        } else {
+            uint index=i-272u;
+            float depth=index==3u?-1.0:index==5u?.01:3.0;
+            vec2 normal=index==2u?vec2(0):vec2(1,0);
+            vec2 extent=index==4u?vec2(5120,2880):vec2(2560,1440);
+            vec2 delta=outlineViewScaledOffset(depth,normal,extent,-3.1715948581695557,
+                index==6u?0.0:.0001,.5,index==1u?0.0:1.0);
+            result.values[i]=index==7u?delta.y:delta.x;
+        }
+#else
+        result.values[i]=-99.0;
+#endif
+        return;
+    }
+    if(i>=248u) {
+        if(i<252u)result.values[i]=shadowSqrtAlphaCoverage(i==248u?0.0:i==249u?.25:1.0,i==250u?.5:i==251u?0.0:1.0);
+        else if(i<256u) {
+            vec2 positions[4]=vec2[](vec2(2444.5,1431.5),vec2(2431.5,1439.5),vec2(2576.5,1449.5),vec2(2587.5,1454.5));
+            result.values[i]=shadowPixelNoise(positions[i-252u]);
+        } else {
+            float alpha[4]=float[](.8692454695701599,.8876325488090515,.8100098967552185,.8371404409408569);
+            result.values[i]=shadowSqrtAlphaCoverage(alpha[i-256u],1.0);
+        }
+        return;
+    }
+    if(i>=240u) {
+        if(i==247u)result.values[i]=characterMainRampCoordinate(vec3(-.8271552324,.2066847384,.5225856900),
+            vec3(.1472620368,.5299192667,.8351643085),0);
+        else result.values[i]=characterMainRampCoordinate(i==240u?vec3(0,0,-1):i==242u?vec3(0,0,1):vec3(1,0,0),
+            vec3(0,0,1),i==243u?.25:i==244u?-1:i==245u?1:i==246u?-.25:0);
+        return;
+    }
+    if(i>=212u) {
+#ifdef AZURE_CHARACTER_FACING_RIM
+        uint probe=(i-212u)/4u,channel=(i-212u)%4u;vec3 response;
+        vec3 nativeNormal=vec3(-.9425703883,.0577229261,.3289818168);
+        vec3 nativeView=vec3(-.0125417598,.0743842721,.9971507788);
+        if(probe==0u)response=characterFacingRimResponse(vec3(.4296633303,.2366355211,.1879886836),.194,.3,
+            nativeNormal,nativeView,vec3(-.9363647103,-.3093316555,.1659364551),
+            vec3(.0000000005376566,-.0126109179,.9999203682),vec3(-.1808664203,.0014527424,-.9835065603));
+        else if(probe==5u)response=characterDiffuseViewTint(vec3(.56640625,.359375,.283203125),nativeNormal,nativeView,
+            vec4(.3813261092,.1247718409,.1384316236,.595));
+        else if(probe==6u)response=characterDiffuseViewTint(vec3(.3,.1,.05),vec3(1,0,0),vec3(0,0,1),vec4(0));
+        else response=characterFacingRimResponse(vec3(.3,.1,.05),.8,probe==1u?.4:1.0,
+            probe==1u?vec3(0,0,1):vec3(1,0,0),vec3(0,0,1),
+            probe==3u?vec3(0,0,1):probe==4u?vec3(1,0,0):vec3(.8,0,.6),
+            vec3(0,0,1),probe==4u?vec3(-1,0,0):vec3(1,0,0));
+        result.values[i]=channel==3u?1.0:response[channel];
+#else
+        result.values[i]=-99.0;
+#endif
+        return;
+    }
+    if(i>=192u) {
+#ifdef AZURE_CHARACTER_SCREEN_RIM
+        uint probe=(i-192u)/4u,channel=(i-192u)%4u;
+        vec3 light=probe==3u?vec3(0,0,1):vec3(.8,0,.6);
+        vec3 radial=probe==4u?vec3(-1,0,0):vec3(1,0,0);
+        float depth=probe==1u?3.15:probe==2u?3.05:4.0;
+        vec3 response=characterScreenRimResponse(vec3(.3,.1,.05),.8,vec3(1,0,0),light,vec3(0,0,1),radial,depth,3.0);
+        result.values[i]=channel==3u?1.0:response[channel];
+#else
+        result.values[i]=-99.0;
+#endif
+        return;
+    }
+    if(i>=172u) {
+#ifdef AZURE_LINE_LIGHT_GEOMETRY
+        uint probe=(i-172u)/4u,channel=(i-172u)%4u;
+        vec3 incoming=probe==1u?vec3(-.00103759765625,-.095458984375,.049530029296875)
+            :probe==2u?vec3(2,0,0):probe==3u?vec3(0):vec3(0,0,2);
+        vec3 axis=probe==1u?vec3(-.8333109617233276,.20295734703540802,.5141994953155518):vec3(1,0,0);
+        LineLightGeometry geometry=lineLightGeometry(incoming,axis,probe==1u?1.0:probe==4u?0.0:2.0);
+        result.values[i]=channel==3u?geometry.factor:geometry.direction[channel];
+#else
+        result.values[i]=-99.0;
+#endif
+        return;
+    }
+    if(i>=163u) {
+#ifdef AZURE_CHARACTER_WEIGHTED_DIFFUSE
+        // Captured visible primitive 1017: explicit material and host weights.
+        CharacterDiffuseResponse response=characterDiffuseWeightedResponse(
+            vec3(.56787109375,.1014404296875,.10821533203125),
+            vec3(.33250007033348083,.050309497863054276,.05440831184387207),
+            0.0,.550000011920929,vec4(1,1,1,.9588921666145325),
+            .8828107118606567,.8828107118606567,1.0,1.0);
+        CharacterDiffuseIllumination light=characterDiffuseIllumination(
+            vec3(-.09024213999509811,.37075215578079224,.9243371486663818),
+            vec3(.8783068656921387,.9302293062210083,1.1216931343078613),
+            vec4(1,1,1,1.6243867874145508),vec4(0,1,4.371138828673793e-8,.15000000596046448),
+            vec4(1.5,.5,0,0),vec4(1.0499999523162842,.800000011920929,1,1),
+            0.0,.28772246837615967,response.litMask,1.0);
+        vec3 illumination=light.ambient+light.direct;
+        uint probe=(i-163u)/3u,channel=(i-163u)%3u;
+        result.values[i]=(probe==0u?response.color:probe==1u?illumination:response.color*illumination)[channel];
+#else
+        result.values[i]=-99.0;
+#endif
+        return;
+    }
+    if(i>=145u) {
+        uint probe=(i-145u)/3u;
+        vec3 position=probe==4u?vec3(0):probe==5u?vec3(0,0,1e6):vec3(1,0,0);
+        vec3 origin=probe==3u?vec3(2,0,0):vec3(0);
+        vec3 geometry=probe==5u?vec3(0,0,-1e6):vec3(0,.8,.6);
+        float mask=probe==1u?1.0:probe==2u||probe==5u?.5:0.0;
+        result.values[i]=faceFrameRadialHorizontalDiffuseNormal(position,origin,geometry,mask)[(i-145u)%3u];
+        return;
+    }
+    if(i>=127u) {
+        const vec3 normals[6]=vec3[6](vec3(0,.8,.6),vec3(.6,.8,0),vec3(-.6,.8,-.8),
+            vec3(0,1,0),vec3(0,-1,0),vec3(0));
+        result.values[i]=worldHorizontalDiffuseNormal(normals[(i-127u)/3u])[(i-127u)%3u];
+        return;
+    }
+    if(i>=87u) {
+#ifdef AZURE_CHARACTER_DIFFUSE
+        uint p=(i-87u)/5u,channel=(i-87u)%5u;
+        vec4 ramp=vec4(.82,.71,.79,p==1u||p==4u?0.0:p==3u?.4:1.0);
+        CharacterDiffuseResponse value=characterDiffuseResponse(vec3(.8,.5,.3),vec3(.4,.2,.1),
+            p==7u?1.0:0.0,.7,ramp,p==2u?0.0:p==3u?.8:1.0,
+            p==6u?vec2(0,1):vec2(1,0),p==6u?.5:1.0,
+            p==3u||p==6u?.25:p==1u?0.0:1.0,p==2u?0.0:1.0);
+        result.values[i]=channel<3u?value.color[channel]:channel==3u?value.litMask:value.aoMask;
+#else
+        result.values[i]=-99.0;
+#endif
+        return;
+    }
+    if(i>=60u) {
+#ifdef AZURE_FACE_SDF_WORLD_NORMAL
+        uint probe=(i-60u)/3u;
+        mat3 frame=probe==2u?mat3(0,0,-1,0,1,0,1,0,0)
+            :probe==5u?mat3(2,0,0,0,1,0,0,0,1):mat3(1);
+        float blue=probe==6u||probe==8u?.5:probe==7u?1.0:.75;
+        float side=probe==1u||probe==7u?-1.0:1.0;
+        float mask=probe==3u||probe==5u||probe==8u?.5:probe==4u?1.0:0.0;
+        vec3 geometry=probe==8u?-normalize(vec3(0,6.103515625e-5,1)):vec3(0,0,1);
+        result.values[i]=faceSdfWorldNormal(vec4(.2,.8,blue,.3),side,frame,geometry,mask)[(i-60u)%3u];
+#else
+        result.values[i]=-99.0;
+#endif
+        return;
+    }
+    if(i>=52u) {
+        const float distancesSquared[4]=float[4](0,1,25,100);
+        result.values[i]=localLightDistanceWeight(distancesSquared[(i-52u)%4u],10,
+            i<56u?1.0:2.0,3.5);
+        return;
+    }
+    if(i==0u)result.values[i]=max((0.0-.5)*parameters.contrast+.5,0.0);
+    else if(i==1u)result.values[i]=dielectricF0(.5);
+    else if(i==2u)result.values[i]=directSurfaceSpecular(vec3(.04),.2,1,1,1,1).r;
+    else if(i==3u)result.values[i]=directSurfaceSpecular(vec3(.04),.8,1,1,1,1).r;
+    else if(i==4u)result.values[i]=directSurfaceSpecular(vec3(.04),.2,0,1,1,1).r;
+    else if(i==5u) result.values[i]=directSurfaceSpecular(vec3(.04),.2,1,0,1,1).r;
+    else if(i<24u) {
+        uint probe=(i-6u)/3u;uint channel=(i-6u)%3u;
+        uint materialClass=probe==1u ? 2u : (probe==2u ? 4u : 1u);
+        float toonWeight=probe==3u ? 0.0 : 1.0;
+        vec3 ramp=probe==4u ? vec3(0) : (probe==5u ? vec3(.8) : vec3(.8,.6,.5));
+        result.values[i]=toonIndirectChroma(ramp,toonWeight,materialClass)[channel];
+    }
+    else if(i<28u)result.values[i]=sceneRefractionWeight(i==24u?1.0:i==25u?.8:i==26u?.9:.999,i==27u?1.0:.8);
+    else if(i<31u)result.values[i]=sceneRefractionSurface(vec3(.2),vec3(.3),vec3(.8),i==28u?.9:i==29u?1.0:.8,.8).r;
+    else if(i<34u)result.values[i]=sceneRefractionUv(vec2(.5),vec2(.2),i==31u?6.0:4.0,i==33u?4.0:6.0,5.0).x;
+    else if(i<36u)result.values[i]=sceneRefractionMirrorUv(vec2(i==34u?1.1:-.1)).x;
+    else if(i<38u)result.values[i]=sceneRefractionOffset(vec2(.25,.75),.008)[i-36u];
+    else {
+#ifdef AZURE_FACE_SDF_V2
+        if(i<45u) {
+            vec3 light=i==38u?vec3(0,0,1):i==39u?vec3(0,0,-1):i==41u?vec3(-1,0,0):vec3(1,0,0);
+            vec4 sampleValue=i==42u?vec4(.2,.8,.75,.3):i==43u?vec4(.1):i==44u?vec4(.5):vec4(.25);
+            float geometryMix=i==43u?1.0:i==44u?.25:0.0;
+            result.values[i]=faceSdfRampCoordinate(sampleValue,geometryMix,light,vec3(0,0,1),i==44u?-.2:.6,vec3(0));
+        } else if(i<48u)result.values[i]=faceSdfSampleUv(vec2(.2,.3),i==45u?1.0:i==46u?-1.0:0.0).x;
+        else if(i<51u)result.values[i]=faceSdfNormal(vec4(.2,.8,.75,.3),1.0)[i-48u];
+        else result.values[i]=faceSdfRampCoordinate(vec4(.2,.8,.75,.3),0,vec3(0,1,0),vec3(0,1,0),0,vec3(0));
+#else
+        result.values[i]=-99.0;
+#endif
+    }
+}

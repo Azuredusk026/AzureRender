@@ -1,0 +1,21 @@
+{
+  "command": [
+    "xperf",
+    "-start",
+    "AzureP5Heap",
+    "-heap",
+    "-pids",
+    "17280",
+    "-stackwalk",
+    "HeapAlloc+HeapRealloc",
+    "-f",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-heap-diagnose\\heap.etl",
+    "-MaxFile",
+    "256",
+    "-FileMode",
+    "Circular"
+  ],
+  "exitCode": 2147942405,
+  "stdout": "",
+  "stderr": "xperf: error: AzureP5Heap: \u62d2\u7edd\u8bbf\u95ee\u3002 (0x5).\n"
+}

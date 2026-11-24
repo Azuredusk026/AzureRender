@@ -1,0 +1,96 @@
+{
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "projectSha256": "f8409a3c705bb0e0896a7cf92b4a735bbb836fb90a8c3d71bddb78680363d77a",
+  "levelSha256": "f44e24a1cf4e3780c1a24b661656cc409ab77bf71ccf3d01b2234e4016dbfe41",
+  "configurations": {
+    "release": {
+      "playerSha256": "78e3b125c7fed0cab5c2a255f4adc04f962f80a6400eb3d2b76bd5bacc7fa8c0",
+      "actions": {
+        "status": "passed",
+        "frames": 540,
+        "actions": 13,
+        "walkSpeed": 1.1999988555908203,
+        "sprintSpeed": 3.000011444091797,
+        "walkClip": 7,
+        "sprintClip": 8,
+        "focusReleased": true,
+        "revisionTransitions": [
+          [
+            451,
+            2,
+            3
+          ]
+        ],
+        "finalIdleGrounded": true,
+        "obstructedFrames": 136,
+        "cameraDistanceRange": [
+          1.0000006646093962,
+          1.0000006646093962
+        ],
+        "cameraRelativeForwardCosine": 0.9999999998540834,
+        "rawLensForwardCosine": -0.3872228649121946,
+        "cameraYawDegrees": -67.5,
+        "cameraSensitivitySource": "src/ecs/GameComponents.hpp: default .15 degrees per input unit",
+        "minimumCharacterHeight": 1.0317745208740234,
+        "scope": "Production fixed-step input, actual displacement, animation samples, focus, camera collision and script restart. Planter traversal is not a wall-blocking or native-collision-equivalence result."
+      },
+      "routeReportSha256": "4a00ec2171994b011ec39ae10988aa21d41f901c565495d32abe696420bc8e1f",
+      "levelRevisions": [
+        [
+          451,
+          2,
+          3
+        ]
+      ],
+      "animationsPerFrame": 11,
+      "finalIdleClip": 9
+    },
+    "debug": {
+      "playerSha256": "c4f3908aa1f8c2cf79680ebc4332a8f075139b0da13ad3f307f9cc45cc4049bb",
+      "actions": {
+        "status": "passed",
+        "frames": 540,
+        "actions": 13,
+        "walkSpeed": 1.1999988555908203,
+        "sprintSpeed": 3.000011444091797,
+        "walkClip": 7,
+        "sprintClip": 8,
+        "focusReleased": true,
+        "revisionTransitions": [
+          [
+            451,
+            2,
+            3
+          ]
+        ],
+        "finalIdleGrounded": true,
+        "obstructedFrames": 136,
+        "cameraDistanceRange": [
+          1.0000006646093962,
+          1.0000006646093962
+        ],
+        "cameraRelativeForwardCosine": 0.9999999998540834,
+        "rawLensForwardCosine": -0.3872228649121946,
+        "cameraYawDegrees": -67.5,
+        "cameraSensitivitySource": "src/ecs/GameComponents.hpp: default .15 degrees per input unit",
+        "minimumCharacterHeight": 1.0317745208740234,
+        "scope": "Production fixed-step input, actual displacement, animation samples, focus, camera collision and script restart. Planter traversal is not a wall-blocking or native-collision-equivalence result."
+      },
+      "routeReportSha256": "63c55a13a673e5d887951dd86b8a1caff5a7960352ec04fcdea90cc72a9bc54c",
+      "levelRevisions": [
+        [
+          451,
+          2,
+          3
+        ]
+      ],
+      "animationsPerFrame": 11,
+      "finalIdleClip": 9
+    }
+  },
+  "framesCompared": 540,
+  "identicalFrames": 540,
+  "changedPixelSum": 0,
+  "maximumByteError": 0,
+  "firstDifferingFrame": null
+}

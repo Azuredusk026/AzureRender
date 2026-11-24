@@ -1,0 +1,65 @@
+{
+  "executableSha256": "bff1a6a3695e756a6d4a34dadfdc13797588048c49295393614219e170428a65",
+  "warmupFrames": 300,
+  "samples": 3600,
+  "elapsedSeconds": 85.6869999999999,
+  "gpu": {
+    "mean": 15.924565582222222,
+    "p95": 23.90082719999999,
+    "p99": 32.10184767999984
+  },
+  "cpu": {
+    "mean": 1.9364725000000103,
+    "p95": 2.8403800000026243,
+    "p99": 3.667645000002958
+  },
+  "peakWorkingSetBytes": 1105338368,
+  "allocator": {
+    "bufferAllocations": 158,
+    "imageAllocations": 138,
+    "liveBuffers": 32,
+    "liveImages": 138,
+    "bufferBytes": 637485232,
+    "imageBytes": 736269824,
+    "liveBufferBytes": 37534160,
+    "liveImageBytes": 736269824,
+    "deviceLocalPeakBytes": 917504000
+  },
+  "framePacing": {
+    "maximumRate": 60,
+    "presentMode": "FIFO",
+    "vsync": true,
+    "waitFrames": 2705,
+    "waitMilliseconds": 40144.11230000001
+  },
+  "environmentErrors": [
+    "software thermal slowdown is active",
+    "run observation 1: software thermal slowdown is active",
+    "run observation 2: software thermal slowdown is active",
+    "run observation 3: software thermal slowdown is active",
+    "run observation 4: software thermal slowdown is active",
+    "run observation 5: software thermal slowdown is active",
+    "run observation 6: software thermal slowdown is active",
+    "run observation 7: software thermal slowdown is active",
+    "run observation 8: software thermal slowdown is active",
+    "run observation 9: software thermal slowdown is active",
+    "run observation 10: software thermal slowdown is active",
+    "run observation 11: software thermal slowdown is active",
+    "run observation 12: software thermal slowdown is active",
+    "run observation 13: software thermal slowdown is active",
+    "run observation 14: software thermal slowdown is active",
+    "run observation 15: software thermal slowdown is active",
+    "run observation 16: software thermal slowdown is active",
+    "run observation 17: software thermal slowdown is active"
+  ],
+  "presentationErrors": [],
+  "formalP8": false,
+  "budgetFailures": [
+    {
+      "metric": "gpu",
+      "value": 23.90082719999999,
+      "limit": 16.6
+    }
+  ],
+  "passed": false
+}

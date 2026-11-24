@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "phase": "U5",
+  "baseCommit": "5de3dcc",
+  "debug": {
+    "covered": 156,
+    "firstRunPassed": 155,
+    "firstRunFailed": [
+      "AzureEditor.DevtoolsHost"
+    ],
+    "retestPassed": true
+  },
+  "release": {
+    "covered": 156,
+    "cpuPassed": 115,
+    "gpuFirstRunPassed": 40,
+    "gpuFirstRunFailed": [
+      "AzureEditor.DocumentGuardGpu"
+    ],
+    "retestPassed": true
+  },
+  "workspaceBudgetFix": {
+    "debugAffectedTestsPassed": 2,
+    "releaseAffectedTestsPassed": 1,
+    "waitFrames": 180,
+    "textBudgetBytes": 65536
+  },
+  "physicalKeyboardMouse": "NotExecuted",
+  "builds": {
+    "debug": {
+      "path": "build/ninja-msvc-debug/AzureRender.exe",
+      "sha256": "fc5888f43db7e7ea55bcc347a8d48db7e4029a1654a15802289d448a7e519c0a"
+    },
+    "release": {
+      "path": "build/ninja-msvc-release/AzureRender.exe",
+      "sha256": "bf629f7983acef982e19ee6563391344888d8c8faf5a7ab8a5bafb8c74d8c1f0"
+    }
+  },
+  "logs": {
+    "backup-project.txt": "8e3113a154bf0b3336dcfd96cac2606727b9352f2d785f9a91a2bfa58ca7da63",
+    "debug-final-ctest.txt": "aa7049169a8f0dcff35b67a6f3c165fe5a27daa124632e384818e8b21aabdfdb",
+    "devtools-retest.txt": "4231efc9cb256e2d634780666684cc035863b8ab8eb9250418c8a11747e93bf3",
+    "level-save-red.txt": "a6be0462c00215ea551e745e1936fe778fd1c2b699d1568e5e1924f40d2cf5ac",
+    "release-cpu-ctest.txt": "bf9fd4182fcc9e06715c2ce350c0df3e0523ba61539df212505b28a2c29b85b1",
+    "release-gpu-ctest.txt": "91fc0290bc88d83b7e17f99a37b4c4464295516f760788ae406c416dfc64ea9d",
+    "workspace-budget-green-debug.txt": "fdfaee246bbfdbf8a823c3f96400f4436480d9e110fe3523859d7fa6e9c0e451",
+    "workspace-budget-green-release.txt": "5bde22ab18c34da592f51f67e6243df74971fe748ec8d94e884dd3492e540249",
+    "workspace-budget-red.txt": "0623afe235214c46a814be8d2abc7ecf2c7c192a19535ebbcae7d097a27ba65d"
+  }
+}

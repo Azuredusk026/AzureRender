@@ -1,0 +1,1163 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "coveredItems": 18,
+  "referenceCommit": "4ba5b7cd106c282e7ed166ff853aeea87b392680",
+  "phases": [
+    {
+      "phase": "F4",
+      "commit": "c22c47a816a698cd96b63bfbdb4c710be796a617",
+      "evidence": "docs/acceptance/f4/evidence/2026-10-06/manifest.json",
+      "evidenceFiles": 38,
+      "implementationInputs": 43,
+      "tests": {
+        "Debug": 91,
+        "Release": 93
+      },
+      "sourceItems": [
+        "A1",
+        "A2"
+      ]
+    },
+    {
+      "phase": "G8",
+      "commit": "7a5c521d888e964a979383f7b4ccf0809accd0f4",
+      "evidence": "docs/acceptance/g8/evidence/2026-10-06/manifest.json",
+      "evidenceFiles": 49,
+      "implementationInputs": 45,
+      "tests": {
+        "Debug": 93,
+        "Release": 95
+      },
+      "sourceItems": [
+        "A1",
+        "B8"
+      ]
+    },
+    {
+      "phase": "U3",
+      "commit": "989a429e427e0c7fdcf65d8f63b1a022bbfbff3b",
+      "evidence": "docs/acceptance/u3/evidence/2026-10-06/manifest.json",
+      "evidenceFiles": 45,
+      "implementationInputs": 24,
+      "tests": {
+        "Debug": 95,
+        "Release": 97
+      },
+      "sourceItems": [
+        "A3",
+        "A6"
+      ]
+    },
+    {
+      "phase": "F5",
+      "commit": "87ea8f0e8bfc9baa3427bba8e384b7adf270fe5f",
+      "evidence": "docs/acceptance/f5/evidence/2026-10-06/manifest.json",
+      "evidenceFiles": 56,
+      "implementationInputs": 42,
+      "tests": {
+        "Debug": 101,
+        "Release": 103
+      },
+      "sourceItems": [
+        "A4",
+        "A5",
+        "B5"
+      ]
+    },
+    {
+      "phase": "G9",
+      "commit": "2bfe82be7cb2fc1ec7efd8d17fb18bcfad86c188",
+      "evidence": "docs/acceptance/g9/evidence/2026-10-06/manifest.json",
+      "evidenceFiles": 83,
+      "implementationInputs": 37,
+      "tests": {
+        "Debug": 111,
+        "Release": 113
+      },
+      "sourceItems": [
+        "A6",
+        "B4"
+      ]
+    },
+    {
+      "phase": "U4",
+      "commit": "3451c5c7c44ec227d09033e35b079ec43151384a",
+      "evidence": "docs/acceptance/u4/evidence/2026-10-06/manifest.json",
+      "evidenceFiles": 58,
+      "implementationInputs": 56,
+      "tests": {
+        "Debug": 106,
+        "Release": 108
+      },
+      "sourceItems": [
+        "B1",
+        "B2",
+        "B3"
+      ]
+    },
+    {
+      "phase": "R7",
+      "commit": "56fc957c5898885784c98963f4227e1e5710fd31",
+      "evidence": "docs/acceptance/r7/evidence/2026-10-06/manifest.json",
+      "evidenceFiles": 139,
+      "implementationInputs": 55,
+      "tests": {
+        "Debug": 117,
+        "Release": 119
+      },
+      "sourceItems": [
+        "B6",
+        "B7"
+      ]
+    },
+    {
+      "phase": "G10",
+      "commit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+      "evidence": "docs/acceptance/g10/evidence/2026-10-07/manifest.json",
+      "evidenceFiles": 188,
+      "implementationInputs": 37,
+      "tests": {
+        "Debug": 122,
+        "Release": 124
+      },
+      "sourceItems": [
+        "C1"
+      ]
+    },
+    {
+      "phase": "R8",
+      "commit": "c997d78c72a2fdbf5b9e18a7469c2ea4f1807514",
+      "evidence": "docs/acceptance/r8/evidence/2026-10-07/manifest.json",
+      "evidenceFiles": 204,
+      "implementationInputs": 21,
+      "tests": {
+        "Debug": 127,
+        "Release": 129
+      },
+      "sourceItems": [
+        "C2"
+      ]
+    },
+    {
+      "phase": "R9",
+      "commit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+      "evidence": "docs/acceptance/r9/evidence/2026-10-07/manifest.json",
+      "evidenceFiles": 1220,
+      "implementationInputs": 33,
+      "tests": {
+        "Debug": 134,
+        "Release": 136
+      },
+      "sourceItems": [
+        "C3"
+      ]
+    },
+    {
+      "phase": "G11",
+      "commit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+      "evidence": "docs/acceptance/g11/evidence/2026-10-07/manifest.json",
+      "evidenceFiles": 542,
+      "implementationInputs": 69,
+      "tests": {
+        "Debug": 145,
+        "Release": 147
+      },
+      "sourceItems": [
+        "C4"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "A1",
+      "interfaces": [
+        "ModuleAssembly",
+        "SystemRegistry"
+      ],
+      "interfaceFiles": [
+        "src/runtime/ModuleAssembly.hpp",
+        "src/runtime/SystemRegistry.hpp"
+      ],
+      "tasks": [
+        "F4.1",
+        "G8.1"
+      ],
+      "tests": [
+        "AzureEngine.ModuleAssembly",
+        "AzureEngine.SystemComposition",
+        "AzureEngine.ModuleBoundaries"
+      ],
+      "phases": [
+        "F4",
+        "G8"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "进程内模块装配与单向依赖采用。模块声明所有权、线程和关闭顺序。",
+      "riskResolution": {
+        "tests": [
+          "AzureEngine.ModuleAssembly",
+          "AzureEngine.SystemComposition",
+          "AzureEngine.ModuleBoundaries"
+        ],
+        "limits": [
+          "Windows 进程内装配，通用动态插件属于专项范围。"
+        ]
+      }
+    },
+    {
+      "id": "A2",
+      "interfaces": [
+        "ComponentRegistry",
+        "Property"
+      ],
+      "interfaceFiles": [
+        "src/runtime/ComponentRegistry.hpp",
+        "src/reflection/Registry.hpp"
+      ],
+      "tasks": [
+        "F4.2"
+      ],
+      "tests": [
+        "AzureEngine.ComponentRegistry",
+        "AzureEngine.MetadataGeneration",
+        "AzureEngine.RegisteredComponentHost"
+      ],
+      "phases": [
+        "F4"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "稳定类型与属性元数据采用。编辑、工具和脚本共用校验规则。",
+      "riskResolution": {
+        "tests": [
+          "AzureEngine.ComponentRegistry",
+          "AzureEngine.MetadataGeneration",
+          "AzureEngine.RegisteredComponentHost"
+        ],
+        "limits": [
+          "新增类型须注册版本和组件能力。"
+        ]
+      }
+    },
+    {
+      "id": "A3",
+      "interfaces": [
+        "EditService",
+        "EditTransaction"
+      ],
+      "interfaceFiles": [
+        "src/editor/commands/EditService.hpp",
+        "src/editor/commands/EditTransaction.hpp"
+      ],
+      "tasks": [
+        "U3.1",
+        "U3.2"
+      ],
+      "tests": [
+        "AzureEditor.EditService",
+        "AzureEditor.EditTransaction",
+        "AzureEngine.EditorHost"
+      ],
+      "phases": [
+        "U3"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "统一编辑操作与文档事务采用。批量恢复与版本拒绝由公共入口执行。",
+      "riskResolution": {
+        "tests": [
+          "AzureEditor.EditService",
+          "AzureEditor.EditTransaction",
+          "AzureEngine.EditorHost"
+        ],
+        "limits": [
+          "文档事务覆盖受控编辑操作，应用外部效果有独立恢复规则。"
+        ]
+      }
+    },
+    {
+      "id": "A4",
+      "interfaces": [
+        "ObservationRegistry"
+      ],
+      "interfaceFiles": [
+        "src/runtime/ObservationRegistry.hpp"
+      ],
+      "tasks": [
+        "F5.1"
+      ],
+      "tests": [
+        "AzureEngine.Observation",
+        "AzureEditor.ObservationHost",
+        "AzureTools.ValidationProtocol",
+        "AzureEngine.ResourceFrameTrace"
+      ],
+      "phases": [
+        "F5"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "注册查询与条件等待采用。生产状态在宿主线程读取。",
+      "riskResolution": {
+        "tests": [
+          "AzureEngine.Observation",
+          "AzureEditor.ObservationHost",
+          "AzureTools.ValidationProtocol",
+          "AzureEngine.ResourceFrameTrace"
+        ],
+        "limits": [
+          "本机控制通道使用回环地址与会话令牌。"
+        ]
+      }
+    },
+    {
+      "id": "A5",
+      "interfaces": [
+        "GeneratorRegistry",
+        "GenerationManifest"
+      ],
+      "interfaceFiles": [
+        "src/assets/GeneratorRegistry.hpp",
+        "src/assets/GenerationManifest.hpp"
+      ],
+      "tasks": [
+        "F5.2"
+      ],
+      "tests": [
+        "AzureAssets.GenerationManifest",
+        "AzureAssets.ProceduralHost"
+      ],
+      "phases": [
+        "F5"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "文本生成与来源清单采用。输入、版本、输出和许可形成可核对记录。",
+      "riskResolution": {
+        "tests": [
+          "AzureAssets.GenerationManifest",
+          "AzureAssets.ProceduralHost"
+        ],
+        "limits": [
+          "生成器明确支持语义、输入规模和期限。"
+        ]
+      }
+    },
+    {
+      "id": "A6",
+      "interfaces": [
+        "ProposalController",
+        "IProposalAdapter",
+        "EditTransaction"
+      ],
+      "interfaceFiles": [
+        "src/editor/ai/ProposalController.hpp",
+        "src/editor/ai/ProposalContracts.hpp",
+        "src/editor/commands/EditTransaction.hpp"
+      ],
+      "tasks": [
+        "U3.2",
+        "G9.2"
+      ],
+      "tests": [
+        "AzureEditor.ProposalController",
+        "AzureEditor.ProposalAdapter",
+        "AzureEditor.ProposalHost",
+        "AzureEditor.EditTransaction"
+      ],
+      "phases": [
+        "U3",
+        "G9"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "有界提案与领域校验采用。候选关联基础版本，经授权操作和事务应用。",
+      "riskResolution": {
+        "tests": [
+          "AzureEditor.ProposalController",
+          "AzureEditor.ProposalAdapter",
+          "AzureEditor.ProposalHost",
+          "AzureEditor.EditTransaction"
+        ],
+        "limits": [
+          "候选通过领域校验，实体键鼠复核按实际执行报告。"
+        ]
+      }
+    },
+    {
+      "id": "B1",
+      "interfaces": [
+        "ThemeTokens",
+        "UiMetrics"
+      ],
+      "interfaceFiles": [
+        "src/editor/ui/ThemeTokens.hpp",
+        "src/editor/ui/UiMetrics.hpp"
+      ],
+      "tasks": [
+        "U4.1"
+      ],
+      "tests": [
+        "AzureEditor.UiFoundation",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "phases": [
+        "U4"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "语义样式、尺度与公共控件采用。字体和 DPI 验证来自生产工作区。",
+      "riskResolution": {
+        "tests": [
+          "AzureEditor.UiFoundation",
+          "AzureEditor.WorkspaceGpu"
+        ],
+        "limits": [
+          "Windows 编辑器与 Dear ImGui 范围。"
+        ]
+      }
+    },
+    {
+      "id": "B2",
+      "interfaces": [
+        "PanelContext",
+        "SelectionService"
+      ],
+      "interfaceFiles": [
+        "src/editor/PanelContext.hpp",
+        "src/editor/SelectionService.hpp"
+      ],
+      "tasks": [
+        "U4.2"
+      ],
+      "tests": [
+        "AzureEditor.PanelContext",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "phases": [
+        "U4"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "面板上下文与选择服务采用。文档修改消费同一编辑服务。",
+      "riskResolution": {
+        "tests": [
+          "AzureEditor.PanelContext",
+          "AzureEditor.WorkspaceGpu"
+        ],
+        "limits": [
+          "面板消费受限文档视图和规定操作。"
+        ]
+      }
+    },
+    {
+      "id": "B3",
+      "interfaces": [
+        "SettingRegistry",
+        "SettingSource"
+      ],
+      "interfaceFiles": [
+        "src/foundation/SettingRegistry.hpp"
+      ],
+      "tasks": [
+        "U4.3"
+      ],
+      "tests": [
+        "AzureEngine.SettingRegistry",
+        "AzureEngine.SettingsOverlay",
+        "AzureEditor.SettingsHost"
+      ],
+      "phases": [
+        "U4"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "类型化设置与来源优先级采用。持久化偏好和帧边界应用各有归属。",
+      "riskResolution": {
+        "tests": [
+          "AzureEngine.SettingRegistry",
+          "AzureEngine.SettingsOverlay",
+          "AzureEditor.SettingsHost"
+        ],
+        "limits": [
+          "启动专用设置需重新启动生效。"
+        ]
+      }
+    },
+    {
+      "id": "B4",
+      "interfaces": [
+        "IModelTransport",
+        "ModelClient",
+        "IProposalAdapter"
+      ],
+      "interfaceFiles": [
+        "src/ai/ModelClient.hpp",
+        "src/editor/ai/ProposalContracts.hpp"
+      ],
+      "tasks": [
+        "G9.1",
+        "G9.2"
+      ],
+      "tests": [
+        "AzureAI.ModelProtocol",
+        "AzureAI.Bridge",
+        "AzureEditor.ProposalController"
+      ],
+      "phases": [
+        "G9"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "独立模型进程与版本化协议采用。可选服务使用固定响应完成自动验收。",
+      "riskResolution": {
+        "tests": [
+          "AzureAI.ModelProtocol",
+          "AzureAI.Bridge",
+          "AzureEditor.ProposalController"
+        ],
+        "limits": [
+          "实际云模型输出质量未作为自动验收依据。"
+        ]
+      }
+    },
+    {
+      "id": "B5",
+      "interfaces": [
+        "runtime_command",
+        "control"
+      ],
+      "interfaceFiles": [
+        "tools/azure.py"
+      ],
+      "tasks": [
+        "F5.3"
+      ],
+      "tests": [
+        "AzureTools.Cli",
+        "AzureTools.ValidationProtocol"
+      ],
+      "phases": [
+        "F5"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "薄命令入口采用。构建、查询、编辑与验证经生产命令执行。",
+      "riskResolution": {
+        "tests": [
+          "AzureTools.Cli",
+          "AzureTools.ValidationProtocol"
+        ],
+        "limits": [
+          "本机命令工具，模型凭据归接入服务。"
+        ]
+      }
+    },
+    {
+      "id": "B6",
+      "interfaces": [
+        "IShaderHotReloader",
+        "ShaderHotReloader"
+      ],
+      "interfaceFiles": [
+        "src/render/IShaderHotReloader.hpp",
+        "src/devtools/ShaderHotReloader.hpp"
+      ],
+      "tasks": [
+        "R7.1"
+      ],
+      "tests": [
+        "AzureRender.HotReload",
+        "AzurePlatform.ProcessRunner",
+        "AzureEditor.DevtoolsHost"
+      ],
+      "phases": [
+        "R7"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "重载契约与开发期模块边界采用。成功候选在安全边界替换资源。",
+      "riskResolution": {
+        "tests": [
+          "AzureRender.HotReload",
+          "AzurePlatform.ProcessRunner",
+          "AzureEditor.DevtoolsHost"
+        ],
+        "limits": [
+          "开发期着色重载；通用代码热替换属于专项范围。"
+        ]
+      }
+    },
+    {
+      "id": "B7",
+      "interfaces": [
+        "RenderViewService",
+        "AssetThumbnailService"
+      ],
+      "interfaceFiles": [
+        "src/render/RenderViewService.hpp",
+        "src/editor/preview/AssetThumbnailService.hpp"
+      ],
+      "tasks": [
+        "R7.2"
+      ],
+      "tests": [
+        "AzureRender.RenderView",
+        "AzureEditor.Thumbnail",
+        "AzureRender.PreviewHost"
+      ],
+      "phases": [
+        "R7"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "独立视图和有界缩略图缓存采用。视口、预览与缓存具有独立生命周期。",
+      "riskResolution": {
+        "tests": [
+          "AzureRender.RenderView",
+          "AzureEditor.Thumbnail",
+          "AzureRender.PreviewHost"
+        ],
+        "limits": [
+          "容量、色彩传递与完成后释放遵守视图契约。"
+        ]
+      }
+    },
+    {
+      "id": "B8",
+      "interfaces": [
+        "SystemRegistry",
+        "InteractionPolicy"
+      ],
+      "interfaceFiles": [
+        "src/runtime/SystemRegistry.hpp",
+        "src/runtime/InteractionRuntime.hpp"
+      ],
+      "tasks": [
+        "G8.1",
+        "G8.2"
+      ],
+      "tests": [
+        "AzureEngine.SystemComposition",
+        "AzureEngine.SceneInspectorHost",
+        "AzureEngine.PlayablePlayer"
+      ],
+      "phases": [
+        "G8"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "共享机制与应用规则分层采用。探索与检视项目以配置组合各自行为。",
+      "riskResolution": {
+        "tests": [
+          "AzureEngine.SystemComposition",
+          "AzureEngine.SceneInspectorHost",
+          "AzureEngine.PlayablePlayer"
+        ],
+        "limits": [
+          "具体任务规则归应用脚本，核心调度通过配置装配。"
+        ]
+      }
+    },
+    {
+      "id": "C1",
+      "interfaces": [
+        "ProceduralGeometryRequest",
+        "RigTextRequest",
+        "IGeometryCompiler"
+      ],
+      "interfaceFiles": [
+        "src/assets/generators/ProceduralContracts.hpp",
+        "src/assets/generators/RigTextContracts.hpp"
+      ],
+      "tasks": [
+        "G10.1",
+        "G10.2"
+      ],
+      "tests": [
+        "AzureAssets.ProceduralGeometry",
+        "AzureAssets.RigText",
+        "AzureAssets.ProceduralProcess",
+        "AzureAssets.ProceduralHost",
+        "AzureEditor.ProposalAdapter"
+      ],
+      "phases": [
+        "G10"
+      ],
+      "adoption": "adapted-adoption",
+      "scope": "versioned bounded JSON geometry, closed-solid booleans and rigid animation; standard glTF outputs",
+      "riskResolution": {
+        "tests": [
+          "AzureAssets.ProceduralGeometry",
+          "AzureAssets.RigText",
+          "AzureAssets.ProceduralProcess",
+          "AzureAssets.ProceduralHost",
+          "AzureEditor.ProposalAdapter"
+        ],
+        "limits": [
+          "受限几何与刚体动画，完整 SCAD 语义属于专项范围。"
+        ]
+      }
+    },
+    {
+      "id": "C2",
+      "interfaces": [
+        "ShaderCompileRequest",
+        "ShaderCompileResult",
+        "BloomParameters",
+        "IBlockSamples"
+      ],
+      "interfaceFiles": [
+        "tools/compile_shader_module.py",
+        "src/render/ShaderSharedTypes.hpp",
+        "shaders/modules/interfaces/BlockSamples.slang"
+      ],
+      "tasks": [
+        "R8.1",
+        "R8.2"
+      ],
+      "tests": [
+        "AzureRender.ShaderModule",
+        "AzureRender.ShaderComposition",
+        "AzureTools.ShaderModule",
+        "AzureTools.ShaderTypes",
+        "AzureTools.ShaderComposition"
+      ],
+      "phases": [
+        "R8"
+      ],
+      "adoption": "verified-prototype-retained",
+      "scope": "checked shared scalar types; optional two-strategy Bloom Slang module; default GLSL renderer",
+      "riskResolution": {
+        "tests": [
+          "AzureRender.ShaderModule",
+          "AzureRender.ShaderComposition",
+          "AzureTools.ShaderModule",
+          "AzureTools.ShaderTypes",
+          "AzureTools.ShaderComposition"
+        ],
+        "limits": [
+          "可选两策略 Bloom 原型，默认 GLSL 渲染。"
+        ]
+      }
+    },
+    {
+      "id": "C3",
+      "interfaces": [
+        "DeviceCapabilities",
+        "ResourceAccessProfile",
+        "ResourceIndexTable",
+        "VisibilityPrototype",
+        "GpuSurfaceIdentity",
+        "SkinningBatch",
+        "visibleInstanceSpans"
+      ],
+      "interfaceFiles": [
+        "src/render/ResourceAccessProfile.hpp",
+        "src/render/ResourceIndexTable.hpp",
+        "src/render/VisibilityPrototype.hpp",
+        "src/render/SkinningBatch.hpp",
+        "src/scene/RenderBatching.hpp"
+      ],
+      "tasks": [
+        "R9.1",
+        "R9.2"
+      ],
+      "tests": [
+        "AzureRender.ResourceAccessProfile",
+        "AzureRender.VisibilityPrototype",
+        "AzureRender.VisibilityGpu",
+        "AzureTools.VisibilityBenchmark",
+        "AzureRender.GpuCapabilityReport",
+        "AzureRender.NullRhiPass",
+        "AzureRender.SkinningBatch",
+        "AzureRender.SkinningGpu",
+        "AzureRender.ViewBatching"
+      ],
+      "phases": [
+        "R9"
+      ],
+      "adoption": "verified-prototype-retained",
+      "scope": "queried resource capacity and fence generations adopted; optional frustum/surface prototype; CPU filtering retained; view-owned shadow spans and independent deformation batches; Hi-Z candidate",
+      "riskResolution": {
+        "tests": [
+          "AzureRender.ResourceAccessProfile",
+          "AzureRender.VisibilityPrototype",
+          "AzureRender.VisibilityGpu",
+          "AzureTools.VisibilityBenchmark",
+          "AzureRender.GpuCapabilityReport",
+          "AzureRender.NullRhiPass",
+          "AzureRender.SkinningBatch",
+          "AzureRender.SkinningGpu",
+          "AzureRender.ViewBatching"
+        ],
+        "limits": [
+          "资源契约采用，可见性原型保留；CPU 筛选参与正式提交。"
+        ]
+      }
+    },
+    {
+      "id": "C4",
+      "interfaces": [
+        "IScriptRuntime",
+        "ScriptRuntimeRegistry",
+        "ScriptBindingHost",
+        "ScriptHostApi",
+        "ScriptHostSession",
+        "ManagedScriptRuntime"
+      ],
+      "interfaceFiles": [
+        "src/runtime/IScriptRuntime.hpp",
+        "src/runtime/ScriptRuntimeRegistry.hpp",
+        "src/scripting/ScriptBindingHost.hpp",
+        "src/scripting/ScriptInterop.hpp",
+        "src/scripting/ScriptHostSession.hpp",
+        "src/scripting/dotnet/ManagedScriptRuntime.hpp"
+      ],
+      "tasks": [
+        "G11.1",
+        "G11.2"
+      ],
+      "tests": [
+        "AzureTools.ScriptBindings",
+        "AzureEngine.ScriptBackendContract",
+        "AzureEngine.ScriptInterop",
+        "AzureEngine.ScriptRuntime",
+        "AzureEngine.ManagedModule.coreclr",
+        "AzureEngine.ManagedModule.nativeaot",
+        "AzureEngine.ManagedRuntime.coreclr",
+        "AzureEngine.ManagedRuntime.nativeaot",
+        "AzureEngine.ScriptBackendParity.lua",
+        "AzureEngine.ManagedWorkflows.coreclr",
+        "AzureEngine.ManagedWorkflows.nativeaot"
+      ],
+      "phases": [
+        "G11"
+      ],
+      "adoption": "verified-prototype-retained",
+      "scope": "shared service and generated description adopted; optional trusted CoreCLR and NativeAOT prototypes; Lua default",
+      "riskResolution": {
+        "tests": [
+          "AzureTools.ScriptBindings",
+          "AzureEngine.ScriptBackendContract",
+          "AzureEngine.ScriptInterop",
+          "AzureEngine.ScriptRuntime",
+          "AzureEngine.ManagedModule.coreclr",
+          "AzureEngine.ManagedModule.nativeaot",
+          "AzureEngine.ManagedRuntime.coreclr",
+          "AzureEngine.ManagedRuntime.nativeaot",
+          "AzureEngine.ScriptBackendParity.lua",
+          "AzureEngine.ManagedWorkflows.coreclr",
+          "AzureEngine.ManagedWorkflows.nativeaot"
+        ],
+        "limits": [
+          "默认 Lua；托管内容受信任；CoreCLR 依赖外部运行库。"
+        ]
+      }
+    }
+  ],
+  "historicalSourcePolicy": "committed-content",
+  "historicalByteAudit": {
+    "status": "incomplete",
+    "exactInputs": 438,
+    "unverified": [
+      {
+        "phase": "F4",
+        "path": "Project/AzureRender/src/editor/EditorSession.cpp",
+        "gitCommit": "c22c47a816a698cd96b63bfbdb4c710be796a617",
+        "recordedRawSha256": "d8c876dc3f802c654446b4b8baeefe344f44347b2f150ea53875abdf0a196157",
+        "committedNormalizedSha256": "4b034b4394504191c96eb869996ad9cc5d9ed79862205bd282a7e09a9efc1d7c",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "F4",
+        "path": "Project/AzureRender/src/editor/ImGuiEditorLayer.cpp",
+        "gitCommit": "c22c47a816a698cd96b63bfbdb4c710be796a617",
+        "recordedRawSha256": "dca439482ed0bf2f12e1ee94c5b71b3d63e4862e1982e9e43c4270be44c9bd3e",
+        "committedNormalizedSha256": "c450ea93dfd6129df6d1213846ca373c882f087ce689e1d0274505c4d228d4f8",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "G8",
+        "path": "Project/AzureRender/src/editor/EditorSession.cpp",
+        "gitCommit": "7a5c521d888e964a979383f7b4ccf0809accd0f4",
+        "recordedRawSha256": "7e3c7d955742c82425cfb4deb673b2eec366eb3286dd42a167de98fc1aa87b7d",
+        "committedNormalizedSha256": "ad22a87dab2d8bf1078c319d46fcd52fdb2f603ef2497fa88582117fa7b276d2",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "U3",
+        "path": "Project/AzureRender/src/editor/EditorSession.cpp",
+        "gitCommit": "989a429e427e0c7fdcf65d8f63b1a022bbfbff3b",
+        "recordedRawSha256": "c02450adfd20dcd359da79aaadfd320669d902098ebc13ffc04f52dd11976bcc",
+        "committedNormalizedSha256": "6ae046d2b5eb9ed58fd11dee7da4a63fe18d0afe1d48920d467be150d05d2376",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "U3",
+        "path": "Project/AzureRender/src/editor/EditorSession.hpp",
+        "gitCommit": "989a429e427e0c7fdcf65d8f63b1a022bbfbff3b",
+        "recordedRawSha256": "7a38bb58befa2fe8ab5ade7f465b49ab3a812d4c2081d3039e5ec58c34999c0a",
+        "committedNormalizedSha256": "1d766f9818825e2420a698d7ac2f3861cbf818afa16d0971c9fee3f4ca1305a0",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "F5",
+        "path": "Project/AzureRender/src/app/CommandLine.cpp",
+        "gitCommit": "87ea8f0e8bfc9baa3427bba8e384b7adf270fe5f",
+        "recordedRawSha256": "ed9352fef3235f73eb1008dd04c0423cfdc89dc851b5de1ecc03ee68e511abe7",
+        "committedNormalizedSha256": "69a683368f3e34c0a369d578839201f5facc8ffe4e2e84d80a5a38ba71e4109e",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "F5",
+        "path": "Project/AzureRender/src/editor/EditorSession.hpp",
+        "gitCommit": "87ea8f0e8bfc9baa3427bba8e384b7adf270fe5f",
+        "recordedRawSha256": "c9329af5de0f32956fd9b47b0f0e02dfb934f3e0799df46332d5cbfb8866a26e",
+        "committedNormalizedSha256": "4e064432c1c90e9ec01a9f1e14148839b92907c25964424af9bd5d377451afbe",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "G9",
+        "path": "Project/AzureRender/CMakeLists.txt",
+        "gitCommit": "2bfe82be7cb2fc1ec7efd8d17fb18bcfad86c188",
+        "recordedRawSha256": "8c23e15b015edd6119a487510ad03de81df49ff7c3a966c9aa4287758569eb7b",
+        "committedNormalizedSha256": "2fb20be051cb7f7142f487dfae0c916c6e966e0b310a1c744daf24b7bb27f44e",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "R7",
+        "path": "Project/AzureRender/CMakeLists.txt",
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "recordedRawSha256": "0479805811bfd5cce0a78a04093b2b6da87ff9e9bd2952489bc14c6d0a4731a2",
+        "committedNormalizedSha256": "f0da92fb39fa91735b9071bb55aec2a7fbff0f36b2d308d608d51479e179a310",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "R7",
+        "path": "Project/AzureRender/src/app/AzureRenderApp.cpp",
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "recordedRawSha256": "1e7d50b914bb58b3ad2eec3f6680f6fac409febddd310b5132a857f64a5a0a7d",
+        "committedNormalizedSha256": "d1d26410617d55c8fcc88f4db0592069a6c8ef2d51a68a63ccdc8abb7a1244c7",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "R7",
+        "path": "Project/AzureRender/src/app/CommandLine.cpp",
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "recordedRawSha256": "c8a285c87c7d457db1c6888d3332803d4eb44d3b46d76cdd380a412b7578bec1",
+        "committedNormalizedSha256": "e34dabe489bf935e5e8961f9cd51b8e374887f719973d0630360e9e33783070b",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "R7",
+        "path": "Project/AzureRender/src/render/RenderContext.hpp",
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "recordedRawSha256": "b8bf13f7da1f06179bfa3846f4cee1868f8b6f542edf8a5d1b7e77b75fe9cf2d",
+        "committedNormalizedSha256": "7dda22c993826ef7eb9d904e3b12c66076043a429b73e3b147e3838ab9500aa5",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "G10",
+        "path": "Project/AzureRender/CMakeLists.txt",
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "recordedRawSha256": "ca83f78015d78f8f86756485011c24200a6177af843c308d504bbb85fe7966dc",
+        "committedNormalizedSha256": "697810d38406b9f6ae095c594a315daa601a7582f275223a1676484da952e487",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "G10",
+        "path": "Project/AzureRender/src/app/AzureRenderApp.cpp",
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "recordedRawSha256": "29d8fbba8cc72b1255b22d346d3fc4c8daa1ea794d4dd05035e352b0b7e751bd",
+        "committedNormalizedSha256": "91ec2df87dcb727560c1ec1f4e6c6781bf4e88e83fc5a13759a1d6b19173a37a",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "G10",
+        "path": "Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp",
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "recordedRawSha256": "c13fbc41b2819337a41230ad90717e33b606e261e3f5a62703f182ca34152556",
+        "committedNormalizedSha256": "a2666fd0cdcd6f30d4121e54817631996352d486cd018267c7d71dedb59783e1",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "G10",
+        "path": "Project/AzureRender/tests/NullRhiPassTests.cpp",
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "recordedRawSha256": "18a0509d44d397bd2a1d1e9422ab6f7f9b2889713f8a1ed02c9597a556638d90",
+        "committedNormalizedSha256": "c774eb694084ce6b42a6babb488e9cc258fa45c58aeaf29d1665740971cdf5b0",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": []
+      },
+      {
+        "phase": "R8",
+        "path": "Project/AzureRender/CMakeLists.txt",
+        "gitCommit": "c997d78c72a2fdbf5b9e18a7469c2ea4f1807514",
+        "recordedRawSha256": "55aa34fb9bcf1e9ad3e6cabdcce3ed621abb53a5a54c75a4616a16803b53b1e4",
+        "committedNormalizedSha256": "70616c9bbaffee62c0c2c689c668a5bb243899e8e2b6f66afe0cf66b372c2b85",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "R9",
+        "path": "Project/AzureRender/CMakeLists.txt",
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "recordedRawSha256": "19ffd204b62cb39b962b426339044f2ad285b13d1adecef70188e8a57e1a41b2",
+        "committedNormalizedSha256": "46176b9dfe74a263a7985e66394fd96efd179f6387735ac8c383500af23ec2c2",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "G11",
+        "path": "Project/AzureRender/src/app/AzureRenderCapture.cpp",
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "recordedRawSha256": "aa7e4cc0d79511599a59172c2ccdeac4da1c03f57d2767a1c974f192f48b5f5c",
+        "committedNormalizedSha256": "7b88234bfb99a3f09b009c9134e31220519e1685ac4599e3a9290b129bc1d5f2",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json"
+        ]
+      },
+      {
+        "phase": "G11",
+        "path": "Project/AzureRender/src/player/main.cpp",
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "recordedRawSha256": "66c6a4b0e852b80359293ad8c0d852c8337cae3b84b416f5c94f39da04589c6a",
+        "committedNormalizedSha256": "e6bb49b1a9ce4eacecbf4398c837cd2047378afbbdffc8b5c85a1695c11fc48f",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json",
+          "before-runtime-trace-fix/debug-provenance.json",
+          "before-runtime-trace-fix/release-provenance.json"
+        ]
+      },
+      {
+        "phase": "G11",
+        "path": "Project/AzureRender/src/scripting/lua/ScriptRuntime.cpp",
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "recordedRawSha256": "477c8f4a864c41b63ede639e82aa813b35ecd881d2c6433db5d145b110a7eae4",
+        "committedNormalizedSha256": "569ae110be128bc14ff277e78970f71c155689f66c647f703b332bcc2a814b81",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json",
+          "before-runtime-trace-fix/debug-provenance.json",
+          "before-runtime-trace-fix/release-provenance.json"
+        ]
+      },
+      {
+        "phase": "G11",
+        "path": "Project/AzureRender/tests/AssetLevelTests.cpp",
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "recordedRawSha256": "27af02bce60aa408c67360eda2ec55aa3b66e3df5035b3f65a2127a2da615fcb",
+        "committedNormalizedSha256": "9379361125ef354f786d919fbd8423f4317388a464084c61ddcae9dcc063a33c",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": []
+      },
+      {
+        "phase": "G11",
+        "path": "Project/AzureRender/tests/ProjectTests.cpp",
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "recordedRawSha256": "4f562b0da23fcaac4d0138b0d1c68805878ba723ac96d68cbaeec59a1052876c",
+        "committedNormalizedSha256": "493423ee38bbb2c8cea63bff81ba07d0f0921230cb4a8f1281261e9537885b68",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": []
+      },
+      {
+        "phase": "G11",
+        "path": "Project/AzureRender/tools/test_player_cli.py",
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "recordedRawSha256": "123e5777da926119c56c5d0da06cbba96db6bd52a253416f271a064f32abad33",
+        "committedNormalizedSha256": "87633739719f4befdc9bd9fafbe9ffcc16b6230f53e785f05d74857a2be232cd",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed.",
+        "originalBytesVerified": false,
+        "archivedHashWitnesses": [
+          "debug-provenance.json",
+          "release-provenance.json",
+          "before-runtime-trace-fix/debug-provenance.json",
+          "before-runtime-trace-fix/release-provenance.json"
+        ]
+      }
+    ]
+  }
+}

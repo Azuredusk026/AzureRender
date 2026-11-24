@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "contrastRatios": {
+    "body/panel": 12.944935234991844,
+    "body/workspace": 14.754332311382585,
+    "body/input": 14.892356692568399,
+    "auxiliary/panel": 7.19817769348015,
+    "auxiliary/workspace": 8.204313408915597,
+    "auxiliary/input": 8.28106342765053
+  },
+  "bodyLogicalPixels": 14,
+  "sectionTitleLogicalPixels": 16,
+  "images": {
+    "animation.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "37f47f77dad22a85a15329c6cdd2703836b5c4a394e1ea2c02afb8bbe256f297"
+    },
+    "assets.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "276e4964c10eae50aa605446cfbbb9a56acdbaa099dfcdaf9b7c33314f4465f4"
+    },
+    "build.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "92459a43ed84a5a3eee4667ef76f39412e534ef2fcdd837fddd1207cdb4c7e20"
+    },
+    "workspace.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "a14f5557e1719086d2a13c35862f65f7c5e9ec0f24a86725f26a4b0b1fb3d5a4"
+    }
+  },
+  "review": [
+    "Default workspace, asset list, animation and build tabs inspected",
+    "No floating tool overlap",
+    "Visible transform units and status bar"
+  ]
+}

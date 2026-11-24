@@ -1,0 +1,118 @@
+{
+  "sourceCaptureSha256": "35077c571bcb70bc99688bfb97eec1b291bd6567df7482746fd3f5db49f339b3",
+  "source": "73300ab",
+  "frame": 320,
+  "staticPrimitiveSlots": {
+    "materialSlots": 395,
+    "unusedMaterialSlots": 0,
+    "assets": 374,
+    "sceneResourcePaths": 374
+  },
+  "descriptorEvents": 3453,
+  "descriptorImageCount": 252,
+  "staticMissesWithDescriptorFeedback": 159,
+  "noMatchingDescriptorImages": 112,
+  "noMatchingDescriptorImageBytes": 472807424,
+  "sparseLayout": {
+    "scope": "hypothetical sparse image layout of historical captured 2D formats and extents",
+    "inventoryArchiveSha256": "c8d69b1574ae9c676f318735618ac7c0c196a1f5ac853d9376bea5e49c9400b5",
+    "shapes": 22,
+    "images": 364,
+    "devices": {
+      "nvidia": {
+        "tailBytes": 24444928,
+        "estimatedAllBoundBytes": 1856765952,
+        "virtualBytes": 1856765952,
+        "firstMipPageBytes": 1381171200,
+        "tailPlusFirstMipPageBytes": 1405616128,
+        "allInMipTail": 26,
+        "pageDimensions": {
+          "43": {
+            "width": 128,
+            "height": 128,
+            "bytes": 65536
+          },
+          "37": {
+            "width": 128,
+            "height": 128,
+            "bytes": 65536
+          },
+          "16": {
+            "width": 256,
+            "height": 128,
+            "bytes": 65536
+          },
+          "9": {
+            "width": 256,
+            "height": 256,
+            "bytes": 65536
+          }
+        },
+        "shapes": 22
+      },
+      "intel": {
+        "tailBytes": 23855104,
+        "estimatedAllBoundBytes": 1858600960,
+        "virtualBytes": 2077556736,
+        "firstMipPageBytes": 1382350848,
+        "tailPlusFirstMipPageBytes": 1406205952,
+        "allInMipTail": 23,
+        "pageDimensions": {
+          "43": {
+            "width": 128,
+            "height": 128,
+            "bytes": 65536
+          },
+          "37": {
+            "width": 128,
+            "height": 128,
+            "bytes": 65536
+          },
+          "16": {
+            "width": 256,
+            "height": 128,
+            "bytes": 65536
+          },
+          "9": {
+            "width": 256,
+            "height": 256,
+            "bytes": 65536
+          }
+        },
+        "shapes": 22
+      }
+    },
+    "allocatedOrReadSparsePages": false,
+    "preservedSamplingProven": false
+  },
+  "duplicatePageScan": {
+    "status": "complete",
+    "sourceCaptureSha256": "35077c571bcb70bc99688bfb97eec1b291bd6567df7482746fd3f5db49f339b3",
+    "tileScope": "complete 64 KiB color pages, same exact format, outside both mip tails",
+    "completedImages": 364,
+    "examinedPages": {
+      "R8G8B8A8_SRGB": 14091,
+      "R8G8B8A8_UNORM": 10211,
+      "R8G8_UNORM": 3194,
+      "R8_UNORM": 455
+    },
+    "rawBytesRead": 1831995392,
+    "duplicatePages": {
+      "R8G8B8A8_SRGB": 1677,
+      "R8G8B8A8_UNORM": 1414,
+      "R8_UNORM": 196,
+      "R8G8_UNORM": 145
+    },
+    "allZeroPages": {
+      "R8G8B8A8_SRGB": 28
+    },
+    "examinedPageBytes": 1831796736,
+    "potentialDuplicatePageBytes": 224919552,
+    "seconds": 21.45300000000134
+  },
+  "deviceLocalAllocationGapBytes": 1174068032,
+  "illustrativeCombinedBytes": 697726976,
+  "remainingIllustrativeGapBytes": 476341056,
+  "scope": "One captured frame and historical byte inventory. Combined figure assumes independent full savings and compares logical image bytes against an allocation gap. Actual future texture reads and sparse aliasing remain unverified.",
+  "archiveSha256": "e1b19196884cc56bd5bcf891a9e13f334cfa6abf06e5ea8878f5ee9b8a6b4734"
+}

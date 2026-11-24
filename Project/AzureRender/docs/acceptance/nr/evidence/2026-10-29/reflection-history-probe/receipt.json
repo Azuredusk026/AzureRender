@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "messages": [
+    "TargetControlMessageType.Noop",
+    "TargetControlMessageType.CapturableWindowCount",
+    "TargetControlMessageType.RegisterAPI",
+    "TargetControlMessageType.CaptureProgress",
+    "TargetControlMessageType.NewCapture",
+    "TargetControlMessageType.Disconnected"
+  ],
+  "outputs": [
+    {
+      "event": 309,
+      "resource": "ResourceId::677",
+      "width": 160,
+      "height": 120,
+      "positivePixels": 12492,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "centralFloorAcceptedRatio": 1.0,
+      "sha256": "5514ebe4f93935dca50c07143a905ee4a223e0dc512b81c4c1471952174d662b"
+    }
+  ],
+  "pid": 9888,
+  "triggered": true,
+  "capture": {
+    "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261029-025624-main-reflection-history-3693f3\\engine-probe\\capture_frame12.rdc",
+    "bytes": 24499072,
+    "sha256": "ad9439bda88d2c88c07fdf623818be94cf03ebb4f963b96ba683ef5e8804411d"
+  }
+}

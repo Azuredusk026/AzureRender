@@ -1,0 +1,105 @@
+#include "render/RenderViewService.hpp"
+#include "rhi/NullRhi.hpp"
+#include "scenes/SampleSceneRenderer.hpp"
+#include "render/ColorGradingLut.hpp"
+#include "render/SpatialAntiAliasing.hpp"
+#include <chrono>
+#include <iostream>
+#include <stdexcept>
+using namespace azurerender;
+void require(bool ok,const char* reason){if(!ok)throw std::runtime_error(reason);}
+template<class F>void reject(F f){bool failed=false;try{f();}catch(const std::exception&){failed=true;}require(failed,"Invalid view use must be rejected");}
+int main(int argc,char** argv){try{
+    require(argc==2,"Expected compiled shader directory");
+    rhi::NullRhi rhi;rhi::NullCommandRecorder commands;RenderContext base;
+    base.rhi=&rhi;base.allocator=&rhi.allocator();base.device=reinterpret_cast<VkDevice>(1);
+    base.sceneColorFormat=VK_FORMAT_R16G16B16A16_SFLOAT;base.depthFormat=VK_FORMAT_D32_SFLOAT;
+    base.normalFormat=VK_FORMAT_R8G8B8A8_UNORM;base.shadowFormat=VK_FORMAT_D32_SFLOAT;
+    base.commands=&commands;
+    base.shaderDirectory=argv[1];
+    RenderViewService service(base,[](const std::string&){return std::make_unique<SampleSceneRenderer>();},[]{});
+    RenderViewDescriptor descriptor;descriptor.rendererId="sample";descriptor.extent={256,128};
+    descriptor.cameraPosition={2,1,3};const auto a=service.create(descriptor);
+    const auto lutPath=std::filesystem::temp_directory_path()/("azure-view-lut-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".azlut");
+    saveColorGradingLut(lutPath,makeIdentityColorGradingLut(4,ColorGradingInputDomain::LogC3FullLog));
+    const auto removeLut=std::unique_ptr<void,std::function<void(void*)>>(reinterpret_cast<void*>(1),[&](void*){std::filesystem::remove(lutPath);});
+    descriptor.settings.grade.lut.asset=lutPath.generic_u8string();
+    descriptor.extent={128,256};descriptor.cameraPosition={-2,2,1};const auto b=service.create(descriptor);
+    descriptor.settings.antiAliasing=2;
+    const auto c=service.create(descriptor);reject([&]{service.create(descriptor);});
+    require(service.describe(c).at("sceneExtent")==nlohmann::json({256,512}),"Supersampling scales the auxiliary scene extent while preserving its output extent");
+    require(service.describe(c).at("extent")==nlohmann::json({128,256}),"Supersampling keeps the requested auxiliary output size");
+    require(service.describe(c).at("antiAliasing")==2,"Auxiliary diagnostics report the consumed AA mode");
+    descriptor.settings.antiAliasing=1;
+    require(service.describe(a).at("cameraPosition")==nlohmann::json({2,1,3}),"Each view preserves its camera");
+    require(service.describe(b).at("extent")==nlohmann::json({128,256}),"Each view preserves its extent");
+    service.request(a);service.request(a);service.request(b);
+    RenderGraph graph;SceneFrameData frame;service.schedule(graph,frame,base,1);
+    require(service.describe(a).at("renderCameraPosition")==nlohmann::json({2,1,3}),"Renderer snapshot uses the independent preview camera");
+    require(service.describe(b).at("renderCameraPosition")==nlohmann::json({-2,2,1}),"Preview cameras remain independent");
+    std::string error;require(graph.compile(error),"Independent views must form a valid graph");graph.execute(&commands);
+    require(service.submitted(1),"Recorded auxiliary views receive the successful submission");
+    require(service.describe(a).at("renderCount")==1,"Repeated requests coalesce within one frame");
+    require(service.describe(c).at("renderCount")==0,"A dormant view remains unscheduled");
+    require(service.describe(a).at("colorImage")!=service.describe(b).at("colorImage"),"Independent views own different attachments");
+    reject([&]{service.readPixels(a);});
+    service.complete(1);
+    require(service.readPixels(a).size()==131072,"A 256 by 128 view exposes tightly packed RGBA pixels after completion");
+    require(service.describe(a).at("outputFormat")=="rgba8-linear","UI samples a resolved linear LDR output");
+    require(service.describe(a).at("resolvedImage")!=service.describe(a).at("colorImage"),"HDR rendering and UI output have independent images");
+    reject([&]{service.sample(c,2);});
+    RenderGraph idle;service.schedule(idle,frame,base,2);require(idle.passes().empty(),"A completed static result causes no new render work");
+    require(service.submitted(2),"A static result consumes no new history");
+    service.sample(a,2);const auto live=rhi.allocator().statistics().liveImages;
+    service.release(a);reject([&]{service.request(a);});service.complete(1);
+    require(rhi.allocator().statistics().liveImages==live,"A sampled cached view survives until its use completes");
+    service.complete(2);require(rhi.allocator().statistics().liveImages<live,"Completed sampling permits retirement");
+    const auto replacement=service.create(descriptor);require(replacement!=a,"Reused slots carry a new generation");
+    reject([&]{service.resize(b,{0,128});});service.resize(b,{320,180});service.request(b);
+    RenderGraph resized;service.schedule(resized,frame,base,3);require(resized.compile(error),"Resized view graph is valid");resized.execute(&commands);
+    require(service.submitted(3),"Resized rendering commits after recording");
+    service.complete(3);require(service.describe(b).at("extent")==nlohmann::json({320,180}),"Only the requested view is resized");
+    service.sample(b,4);service.resize(b,{400,200});
+    require(service.sample(b,5)==VK_NULL_HANDLE,"Pending resize suspends sampling so old GPU uses can retire");
+    RenderGraph pending;service.schedule(pending,frame,base,4);require(pending.passes().empty(),"In-flight resize preserves the current resources");
+    require(service.submitted(4),"Pending resize does not submit a new rendered view");
+    service.complete(4);RenderGraph finished;service.schedule(finished,frame,base,5);
+    require(finished.compile(error),"Completed resize builds a valid graph");finished.execute(&commands);require(service.submitted(5),"Finished resize commits");service.complete(5);
+    require(service.describe(b).at("extent")==nlohmann::json({400,200}),"Suspended sampling allows a requested resize to finish");
+    service.release(b);service.release(c);service.release(replacement);service.complete(5);
+    require(rhi.allocator().statistics().liveImages==0,"Released views leave no image allocations");
+    RenderViewService another(base,[](const std::string&){return std::make_unique<SampleSceneRenderer>();},[]{});
+    const auto fresh=another.create(descriptor);
+    require(fresh!=a && fresh!=replacement,"Service replacement must preserve global handle invalidation");
+    reject([&]{another.describe(a);});another.release(fresh);
+    const auto beforeFailure=rhi.allocator().statistics().liveImages;
+    RenderViewService broken(base,[](const std::string&)->std::unique_ptr<ISceneRenderer>{throw std::runtime_error("Renderer load failure");},[]{});
+    reject([&]{broken.create(descriptor);});
+    require(rhi.allocator().statistics().liveImages==beforeFailure,"Partial renderer creation releases every attachment");
+    rhi.unavailableSampledFormats.insert(SpatialAntiAliasing::kLinearFormat);
+    reject([&]{another.create(descriptor);});
+    require(rhi.allocator().statistics().liveImages==beforeFailure,"Unsupported spatial AA format releases partially created view outputs");
+    rhi.unavailableSampledFormats.clear();const auto recovered=another.create(descriptor);another.release(recovered);
+    require(rhi.allocator().statistics().liveImages==beforeFailure,"A failed AA allocation leaves the view service reusable");
+    auto temporalFallback=descriptor;temporalFallback.settings.antiAliasing=3;
+    const auto unsupported=another.create(temporalFallback);
+    require(another.describe(unsupported).at("temporalAvailable")==false,"A renderer without motion uses the observable spatial fallback");
+    require(another.describe(unsupported).at("temporalFallback")=="Renderer does not provide motion vectors","Missing motion capability has a precise diagnostic");
+    another.request(unsupported);RenderGraph fallbackGraph;another.schedule(fallbackGraph,frame,base,1);
+    require(fallbackGraph.compile(error),"Unsupported temporal output forms a valid spatial graph");fallbackGraph.execute(&commands);
+    require(another.submitted(1),"Fallback output participates in actual view submission");another.release(unsupported);another.complete(1);
+    require(rhi.allocator().statistics().liveImages==beforeFailure,"Unsupported temporal output releases all view allocations");
+    auto limitedBase=base;limitedBase.descriptorLimits.maxImageDimension2D=4096;
+    RenderViewService limited(limitedBase,[](const std::string&){return std::make_unique<SampleSceneRenderer>();},[]{});
+    auto large=descriptor;large.settings.antiAliasing=2;large.extent={3000,3000};
+    reject([&]{limited.create(large);});
+    require(rhi.allocator().statistics().liveImages==beforeFailure,"Oversized AA scene extents fail before allocating attachments");
+    large.extent={2048,2048};const auto maximum=limited.create(large);limited.request(maximum);
+    RenderGraph extentGraph;limited.schedule(extentGraph,frame,base,1);
+    require(extentGraph.compile(error),"Physical supersampling dimensions form a valid graph");extentGraph.execute(&commands);
+    require(limited.submitted(1),"Device-limit rendering receives its successful submission");
+    require(limited.describe(maximum).at("frameExtent")==nlohmann::json({4096,4096}),"Renderers consume the physical AA scene dimensions in their per-frame uniforms");
+    limited.release(maximum);limited.complete(1);
+    require(rhi.allocator().statistics().liveImages==beforeFailure,"The device-limit boundary remains usable after an oversized AA request");
+    std::cout<<"View isolation, demand scheduling, generation and sampled-resource retirement passed\n";
+}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

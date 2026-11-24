@@ -1,0 +1,13 @@
+[1791652715510][info][editor][code=0] Opened scene: inspection
+[1791652715885][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791652716229][info][render][code=0] Character texture access: indexed, requested slots=27, stage sampler limit=1048576
+[1791652716245][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791652716247][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791652716265][info][editor][code=0] Asset reload requested; changed files: 0
+[1791652716269][info][render][code=0] Character texture access: indexed, requested slots=27, stage sampler limit=1048576
+[1791652716285][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791652716286][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791652716291][info][editor][code=0] Renderer resources reloaded
+[1791652716387][info][editor][code=0] Opened scene: startup
+[1791652716404][info][editor][code=0] Opened scene: startup
+[1791652716408][info][editor][code=0] ERROR [project.create]: rename: Access is denied.: "D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\scene-geometry\run-30d7864d\.azure-project-17916527163654937-4", "D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\scene-geometry\run-30d7864d\.azure-task-17916527163654248-3"

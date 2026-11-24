@@ -1,0 +1,38 @@
+[0/2] Re-checking globbed directories...
+[1/36] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/36] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_shader_types.py --description D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/shared-layout.json --cpp D:/Assigment/2609/FYP/Project/AzureRender/src/render/ShaderSharedTypes.hpp --slang D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/SharedTypes.slang --check"
+[3/36] Generating verified engine interface snapshots and schemas
+{"status": "passed", "coveredItems": 18, "files": 42}
+[4/36] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\content\ContentOperationService.cpp.obj
+[5/36] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\TextureAssetPanel.cpp.obj
+[6/36] Linking CXX static library AzureEditor.lib
+[7/36] Linking CXX executable AzureDocumentBackupTests.exe
+[8/36] Linking CXX executable AzureSelectionServiceTests.exe
+[9/36] Linking CXX executable AzureUiFoundationTests.exe
+[10/36] Linking CXX executable AzureRegisteredComponentHost.exe
+[11/36] Linking CXX executable AzureRender.exe
+[12/36] Linking CXX executable AzurePanelContextTests.exe
+[13/36] Linking CXX executable AzureThumbnailTests.exe
+[14/36] Linking CXX executable AzureProposalControllerTests.exe
+[15/36] Linking CXX executable AzureProposalAdapterTests.exe
+[16/36] Linking CXX executable AzureEditServiceTests.exe
+[17/36] Linking CXX executable AzureEditorObservationTests.exe
+[18/36] Linking CXX executable AzureEditorWorkspaceTests.exe
+[19/36] Linking CXX executable AzureEditTransactionTests.exe
+[20/36] Linking CXX executable AzureContentEditingWorkflowTests.exe
+[21/36] Linking CXX executable AzureRegisteredComponentWorkflowTests.exe
+[22/36] Linking CXX executable AzureSelectionBoundsTests.exe
+[23/36] Linking CXX executable AzureTransformEditingTests.exe
+[24/36] Linking CXX executable AzureEditorWorkflowTests.exe
+[25/36] Linking CXX executable AzureGizmoControllerTests.exe
+[26/36] Linking CXX executable AzureEditorContentWorkflowTests.exe
+[27/36] Linking CXX executable AzureEditorTaskServiceTests.exe
+[28/36] Linking CXX executable AzureEditorCameraServiceTests.exe
+[29/36] Linking CXX executable AzureEditorAssetWorkflowTests.exe
+[30/36] Linking CXX executable AzureDocumentActionGuardTests.exe
+[31/36] Linking CXX executable AzureRenderEditorSessionTests.exe
+[32/36] Linking CXX executable AzurePropertyEditingTests.exe
+[33/36] Linking CXX executable AzureEditorProjectFlowTests.exe
+[34/36] Linking CXX executable AzureReferencePickerTests.exe
+[35/36] Linking CXX executable AzureContentOperationTests.exe

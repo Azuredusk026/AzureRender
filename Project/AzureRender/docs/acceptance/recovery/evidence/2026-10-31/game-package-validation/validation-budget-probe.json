@@ -1,0 +1,17 @@
+{
+  "status": "observed-default-budget-timeout",
+  "toolSha256": "63c82d9601d72eb0c78f906be3b4229dc93844b96a942bf0c63bab9078f66ead",
+  "programSha256": "2b28e97fbdce571087760f373fa693cc2c6a3bf1fd7d54deb5347b9e719ac3ab",
+  "projectSha256": "40674c80b7f3acb531bbf550d3bd9e0c0ec7ab194cc3221a65895765471e57e3",
+  "levelSha256": "d9fedfffa93fc4b4092a9cdaf2ac75a67043bed76d222327d37fed003e965b0a",
+  "defaultTimeoutSeconds": 60,
+  "scope": "Actual unmodified build_game.validate_project on a separate copy of the closed project; no package publication",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\validation-probe-project\\playable.azureproject",
+    "--check-project"
+  ],
+  "timeoutSeconds": 60,
+  "elapsedSeconds": 60.04336690000491
+}

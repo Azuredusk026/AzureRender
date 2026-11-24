@@ -1,0 +1,6 @@
+{
+  "log": "strict-history.log",
+  "exitCode": 1,
+  "status": "failed",
+  "expectedRestriction": "24 historical input byte sequences cannot be reconstructed from committed content"
+}

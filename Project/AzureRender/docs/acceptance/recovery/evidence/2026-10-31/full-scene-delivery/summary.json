@@ -1,0 +1,29 @@
+{
+  "status": "independent-delivery-validation-passed",
+  "sourceBase": "f272a83",
+  "project": "build/runs/20261031-201944-full-scene-delivery-validation-dd89c4/移动后的完整场景/playable.azureproject",
+  "package": "build/runs/20261031-201944-full-scene-delivery-validation-dd89c4/独立游戏 中文 空格",
+  "entry": "完整原生场景操控验证.exe",
+  "files": 2200,
+  "packageBytes": 3320009255,
+  "manifestSha256": "4a15452e44af32c95db095d64c85c9ba0376eea6e900ed99764998a042bc6337",
+  "playerSha256": "2b28e97fbdce571087760f373fa693cc2c6a3bf1fd7d54deb5347b9e719ac3ab",
+  "sourceUnavailableDuringNativeRuns": true,
+  "installUnavailableDuringNativeRuns": true,
+  "isolatedPath": "C:/WINDOWS/System32",
+  "pixelExactAfterSaveAndMoveFrames": 3,
+  "pixelExactNativeDefaultFrames": 3,
+  "nativeDefaultQaFlags": false,
+  "nativeRouteFrames": 540,
+  "nativeRouteResolution": [
+    1920,
+    1080
+  ],
+  "gltfModelsAudited": 558,
+  "relativeModelDependenciesInsidePackage": 795,
+  "immutableHashesVerified": true,
+  "tamperRejected": true,
+  "physicalInput": false,
+  "formalQualityAndPerformance": "Pending under Q1/Q4 and P8",
+  "scope": "Production Editor save, project relocation, real publishing, package relocation and native execution; no claim of native appearance or sustained performance acceptance"
+}

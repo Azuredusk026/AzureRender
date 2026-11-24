@@ -1,0 +1,11 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 42: AzureEditor.ProposalHost
+1/1 Test #42: AzureEditor.ProposalHost .........   Passed   24.50 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Label Time Summary:
+gpu    =  24.50 sec*proc (1 test)
+
+Total Test time (real) =  24.52 sec

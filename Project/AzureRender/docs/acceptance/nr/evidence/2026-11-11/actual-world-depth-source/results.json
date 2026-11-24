@@ -1,0 +1,1077 @@
+{
+  "status": "diagnostic-no-production-adoption",
+  "overall": "failed-user-review",
+  "devices": [
+    {
+      "device": "nvidia",
+      "visibilityExitCode": 0,
+      "result": {
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "exactPixels": 17017,
+        "maximumByteError": 0,
+        "mismatches": [],
+        "pixels": 17017,
+        "validationErrors": 0,
+        "withinOnePixels": 17017,
+        "zeroAllocator": true
+      },
+      "failures": 0,
+      "baselineFailures": 0,
+      "newFailures": 0,
+      "closedFailures": 0,
+      "r32D32Exact": true,
+      "changedVisibilityPixels": 0,
+      "failurePixels": [],
+      "depthEqualToNativeGeometry": 17017,
+      "depthWithinOneUlpOfNativeGeometry": 17017,
+      "maximumDepthUlpFromNativeGeometry": 0
+    },
+    {
+      "device": "intel",
+      "visibilityExitCode": 1,
+      "result": {
+        "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "exactPixels": 16799,
+        "maximumByteError": 25,
+        "mismatches": [
+          [
+            1304,
+            1284,
+            208,
+            219
+          ],
+          [
+            1296,
+            1274,
+            68,
+            69
+          ],
+          [
+            1299,
+            1273,
+            3,
+            2
+          ],
+          [
+            1278,
+            1272,
+            213,
+            214
+          ],
+          [
+            1302,
+            1271,
+            1,
+            2
+          ],
+          [
+            1292,
+            1270,
+            232,
+            239
+          ],
+          [
+            1272,
+            1269,
+            0,
+            1
+          ],
+          [
+            1291,
+            1269,
+            207,
+            208
+          ],
+          [
+            1293,
+            1269,
+            244,
+            242
+          ],
+          [
+            1297,
+            1268,
+            19,
+            27
+          ],
+          [
+            1275,
+            1267,
+            1,
+            0
+          ],
+          [
+            1277,
+            1267,
+            1,
+            2
+          ],
+          [
+            1297,
+            1267,
+            19,
+            20
+          ],
+          [
+            1298,
+            1267,
+            27,
+            36
+          ],
+          [
+            1298,
+            1266,
+            36,
+            42
+          ],
+          [
+            1279,
+            1265,
+            0,
+            1
+          ]
+        ],
+        "pixels": 17017,
+        "validationErrors": 0,
+        "withinOnePixels": 16921,
+        "zeroAllocator": true
+      },
+      "failures": 96,
+      "baselineFailures": 96,
+      "newFailures": 0,
+      "closedFailures": 0,
+      "r32D32Exact": true,
+      "changedVisibilityPixels": 0,
+      "failurePixels": [
+        {
+          "uiPixel": [
+            1304,
+            155
+          ],
+          "actual": 219,
+          "expected": 208
+        },
+        {
+          "uiPixel": [
+            1292,
+            169
+          ],
+          "actual": 239,
+          "expected": 232
+        },
+        {
+          "uiPixel": [
+            1293,
+            170
+          ],
+          "actual": 242,
+          "expected": 244
+        },
+        {
+          "uiPixel": [
+            1297,
+            171
+          ],
+          "actual": 27,
+          "expected": 19
+        },
+        {
+          "uiPixel": [
+            1298,
+            172
+          ],
+          "actual": 36,
+          "expected": 27
+        },
+        {
+          "uiPixel": [
+            1298,
+            173
+          ],
+          "actual": 42,
+          "expected": 36
+        },
+        {
+          "uiPixel": [
+            1278,
+            175
+          ],
+          "actual": 150,
+          "expected": 139
+        },
+        {
+          "uiPixel": [
+            1296,
+            175
+          ],
+          "actual": 14,
+          "expected": 16
+        },
+        {
+          "uiPixel": [
+            1295,
+            177
+          ],
+          "actual": 208,
+          "expected": 201
+        },
+        {
+          "uiPixel": [
+            1297,
+            178
+          ],
+          "actual": 244,
+          "expected": 246
+        },
+        {
+          "uiPixel": [
+            1266,
+            179
+          ],
+          "actual": 19,
+          "expected": 13
+        },
+        {
+          "uiPixel": [
+            1296,
+            179
+          ],
+          "actual": 246,
+          "expected": 244
+        },
+        {
+          "uiPixel": [
+            1260,
+            180
+          ],
+          "actual": 19,
+          "expected": 13
+        },
+        {
+          "uiPixel": [
+            1265,
+            181
+          ],
+          "actual": 178,
+          "expected": 187
+        },
+        {
+          "uiPixel": [
+            1303,
+            182
+          ],
+          "actual": 219,
+          "expected": 224
+        },
+        {
+          "uiPixel": [
+            1304,
+            182
+          ],
+          "actual": 239,
+          "expected": 244
+        },
+        {
+          "uiPixel": [
+            1262,
+            183
+          ],
+          "actual": 236,
+          "expected": 232
+        },
+        {
+          "uiPixel": [
+            1251,
+            186
+          ],
+          "actual": 47,
+          "expected": 54
+        },
+        {
+          "uiPixel": [
+            1234,
+            239
+          ],
+          "actual": 239,
+          "expected": 242
+        },
+        {
+          "uiPixel": [
+            1218,
+            246
+          ],
+          "actual": 16,
+          "expected": 19
+        },
+        {
+          "uiPixel": [
+            1290,
+            254
+          ],
+          "actual": 224,
+          "expected": 232
+        },
+        {
+          "uiPixel": [
+            1292,
+            255
+          ],
+          "actual": 236,
+          "expected": 239
+        },
+        {
+          "uiPixel": [
+            1288,
+            258
+          ],
+          "actual": 252,
+          "expected": 254
+        },
+        {
+          "uiPixel": [
+            1351,
+            258
+          ],
+          "actual": 36,
+          "expected": 27
+        },
+        {
+          "uiPixel": [
+            1353,
+            258
+          ],
+          "actual": 69,
+          "expected": 85
+        },
+        {
+          "uiPixel": [
+            1207,
+            262
+          ],
+          "actual": 128,
+          "expected": 116
+        },
+        {
+          "uiPixel": [
+            1212,
+            262
+          ],
+          "actual": 186,
+          "expected": 194
+        },
+        {
+          "uiPixel": [
+            1217,
+            262
+          ],
+          "actual": 239,
+          "expected": 242
+        },
+        {
+          "uiPixel": [
+            1322,
+            265
+          ],
+          "actual": 194,
+          "expected": 169
+        },
+        {
+          "uiPixel": [
+            1205,
+            266
+          ],
+          "actual": 54,
+          "expected": 48
+        },
+        {
+          "uiPixel": [
+            1350,
+            266
+          ],
+          "actual": 128,
+          "expected": 150
+        },
+        {
+          "uiPixel": [
+            1358,
+            267
+          ],
+          "actual": 169,
+          "expected": 178
+        },
+        {
+          "uiPixel": [
+            1348,
+            269
+          ],
+          "actual": 201,
+          "expected": 186
+        },
+        {
+          "uiPixel": [
+            1353,
+            269
+          ],
+          "actual": 232,
+          "expected": 228
+        },
+        {
+          "uiPixel": [
+            1348,
+            270
+          ],
+          "actual": 219,
+          "expected": 207
+        },
+        {
+          "uiPixel": [
+            1360,
+            270
+          ],
+          "actual": 219,
+          "expected": 213
+        },
+        {
+          "uiPixel": [
+            1348,
+            272
+          ],
+          "actual": 194,
+          "expected": 186
+        },
+        {
+          "uiPixel": [
+            1349,
+            273
+          ],
+          "actual": 223,
+          "expected": 218
+        },
+        {
+          "uiPixel": [
+            1198,
+            274
+          ],
+          "actual": 228,
+          "expected": 232
+        },
+        {
+          "uiPixel": [
+            1217,
+            274
+          ],
+          "actual": 254,
+          "expected": 252
+        },
+        {
+          "uiPixel": [
+            1361,
+            275
+          ],
+          "actual": 228,
+          "expected": 236
+        },
+        {
+          "uiPixel": [
+            1332,
+            277
+          ],
+          "actual": 23,
+          "expected": 20
+        },
+        {
+          "uiPixel": [
+            1231,
+            278
+          ],
+          "actual": 169,
+          "expected": 160
+        },
+        {
+          "uiPixel": [
+            1196,
+            279
+          ],
+          "actual": 219,
+          "expected": 224
+        },
+        {
+          "uiPixel": [
+            1232,
+            279
+          ],
+          "actual": 232,
+          "expected": 235
+        },
+        {
+          "uiPixel": [
+            1221,
+            280
+          ],
+          "actual": 27,
+          "expected": 37
+        },
+        {
+          "uiPixel": [
+            1234,
+            280
+          ],
+          "actual": 224,
+          "expected": 219
+        },
+        {
+          "uiPixel": [
+            1236,
+            280
+          ],
+          "actual": 207,
+          "expected": 194
+        },
+        {
+          "uiPixel": [
+            1195,
+            281
+          ],
+          "actual": 242,
+          "expected": 246
+        },
+        {
+          "uiPixel": [
+            1220,
+            281
+          ],
+          "actual": 54,
+          "expected": 61
+        },
+        {
+          "uiPixel": [
+            1233,
+            283
+          ],
+          "actual": 251,
+          "expected": 254
+        },
+        {
+          "uiPixel": [
+            1353,
+            283
+          ],
+          "actual": 251,
+          "expected": 249
+        },
+        {
+          "uiPixel": [
+            1368,
+            284
+          ],
+          "actual": 213,
+          "expected": 201
+        },
+        {
+          "uiPixel": [
+            1224,
+            285
+          ],
+          "actual": 15,
+          "expected": 12
+        },
+        {
+          "uiPixel": [
+            1331,
+            285
+          ],
+          "actual": 95,
+          "expected": 77
+        },
+        {
+          "uiPixel": [
+            1216,
+            286
+          ],
+          "actual": 160,
+          "expected": 150
+        },
+        {
+          "uiPixel": [
+            1236,
+            286
+          ],
+          "actual": 244,
+          "expected": 248
+        },
+        {
+          "uiPixel": [
+            1222,
+            287
+          ],
+          "actual": 86,
+          "expected": 69
+        },
+        {
+          "uiPixel": [
+            1223,
+            287
+          ],
+          "actual": 43,
+          "expected": 55
+        },
+        {
+          "uiPixel": [
+            1327,
+            287
+          ],
+          "actual": 128,
+          "expected": 105
+        },
+        {
+          "uiPixel": [
+            1238,
+            288
+          ],
+          "actual": 244,
+          "expected": 241
+        },
+        {
+          "uiPixel": [
+            1324,
+            288
+          ],
+          "actual": 105,
+          "expected": 95
+        },
+        {
+          "uiPixel": [
+            1373,
+            288
+          ],
+          "actual": 128,
+          "expected": 139
+        },
+        {
+          "uiPixel": [
+            1217,
+            289
+          ],
+          "actual": 105,
+          "expected": 95
+        },
+        {
+          "uiPixel": [
+            1240,
+            289
+          ],
+          "actual": 249,
+          "expected": 251
+        },
+        {
+          "uiPixel": [
+            1326,
+            290
+          ],
+          "actual": 105,
+          "expected": 116
+        },
+        {
+          "uiPixel": [
+            1239,
+            291
+          ],
+          "actual": 235,
+          "expected": 238
+        },
+        {
+          "uiPixel": [
+            1318,
+            291
+          ],
+          "actual": 6,
+          "expected": 9
+        },
+        {
+          "uiPixel": [
+            1229,
+            292
+          ],
+          "actual": 32,
+          "expected": 37
+        },
+        {
+          "uiPixel": [
+            1216,
+            293
+          ],
+          "actual": 186,
+          "expected": 194
+        },
+        {
+          "uiPixel": [
+            1217,
+            293
+          ],
+          "actual": 116,
+          "expected": 127
+        },
+        {
+          "uiPixel": [
+            1241,
+            296
+          ],
+          "actual": 218,
+          "expected": 228
+        },
+        {
+          "uiPixel": [
+            1322,
+            296
+          ],
+          "actual": 186,
+          "expected": 178
+        },
+        {
+          "uiPixel": [
+            1217,
+            297
+          ],
+          "actual": 150,
+          "expected": 139
+        },
+        {
+          "uiPixel": [
+            1218,
+            297
+          ],
+          "actual": 219,
+          "expected": 213
+        },
+        {
+          "uiPixel": [
+            1331,
+            297
+          ],
+          "actual": 96,
+          "expected": 78
+        },
+        {
+          "uiPixel": [
+            1319,
+            298
+          ],
+          "actual": 150,
+          "expected": 160
+        },
+        {
+          "uiPixel": [
+            1219,
+            303
+          ],
+          "actual": 224,
+          "expected": 228
+        },
+        {
+          "uiPixel": [
+            1317,
+            303
+          ],
+          "actual": 194,
+          "expected": 201
+        },
+        {
+          "uiPixel": [
+            1323,
+            319
+          ],
+          "actual": 239,
+          "expected": 244
+        },
+        {
+          "uiPixel": [
+            1314,
+            324
+          ],
+          "actual": 250,
+          "expected": 246
+        },
+        {
+          "uiPixel": [
+            1238,
+            327
+          ],
+          "actual": 116,
+          "expected": 105
+        },
+        {
+          "uiPixel": [
+            1242,
+            327
+          ],
+          "actual": 27,
+          "expected": 37
+        },
+        {
+          "uiPixel": [
+            1234,
+            331
+          ],
+          "actual": 245,
+          "expected": 249
+        },
+        {
+          "uiPixel": [
+            1255,
+            332
+          ],
+          "actual": 15,
+          "expected": 13
+        },
+        {
+          "uiPixel": [
+            1255,
+            334
+          ],
+          "actual": 50,
+          "expected": 39
+        },
+        {
+          "uiPixel": [
+            1314,
+            336
+          ],
+          "actual": 246,
+          "expected": 244
+        },
+        {
+          "uiPixel": [
+            1241,
+            339
+          ],
+          "actual": 8,
+          "expected": 10
+        },
+        {
+          "uiPixel": [
+            1238,
+            345
+          ],
+          "actual": 234,
+          "expected": 237
+        },
+        {
+          "uiPixel": [
+            1235,
+            346
+          ],
+          "actual": 234,
+          "expected": 237
+        },
+        {
+          "uiPixel": [
+            1312,
+            350
+          ],
+          "actual": 246,
+          "expected": 244
+        },
+        {
+          "uiPixel": [
+            1312,
+            351
+          ],
+          "actual": 150,
+          "expected": 160
+        },
+        {
+          "uiPixel": [
+            1226,
+            353
+          ],
+          "actual": 159,
+          "expected": 149
+        },
+        {
+          "uiPixel": [
+            1316,
+            354
+          ],
+          "actual": 201,
+          "expected": 207
+        },
+        {
+          "uiPixel": [
+            1323,
+            356
+          ],
+          "actual": 219,
+          "expected": 207
+        },
+        {
+          "uiPixel": [
+            1227,
+            364
+          ],
+          "actual": 248,
+          "expected": 246
+        }
+      ],
+      "depthEqualToNativeGeometry": 17015,
+      "depthWithinOneUlpOfNativeGeometry": 17015,
+      "maximumDepthUlpFromNativeGeometry": 9
+    }
+  ],
+  "sourceCommit": "529f603",
+  "documentationCommit": "2f1d390",
+  "productionChanged": false,
+  "acceptanceMaximumByteError": 1,
+  "geometrySource": "Actual Vulkan VSOut world positions, explicit source-frame mapping; native alpha UV held constant",
+  "cpuReview": {
+    "scope": "CPU source review only; actual GPU outputs retain acceptance authority",
+    "nativeProjectionControlExactComponents": 46256,
+    "mappedProjectionExactComponents": [
+      11564,
+      11429,
+      11564,
+      11562
+    ],
+    "clipMaximumAbsoluteDifference": [
+      0.0,
+      4.76837158203125e-07,
+      0.0,
+      2.384185791015625e-07
+    ],
+    "changedEightBitSnappedVertices": 6,
+    "restoredExpectedMatchesQualifiedNvidiaVisibility": 17017,
+    "sourceProfileSha256": "1f284101bc5e6e56cdc7d44e47032b666fb62d592ace457baa9b4a52e52ab181"
+  },
+  "inputRecovery": {
+    "sourceCommit": "529f603",
+    "archive": "Project/AzureRender/docs/acceptance/nr/evidence/2026-11-08/screen-object-visibility/validation.zip",
+    "archiveSha256": "91bf96d6faa910fcd71ad507730f9b80245eff0298bf9ddce761fd488e2c5055",
+    "restored": {
+      "queries.bin": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+      "expected.bin": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50"
+    },
+    "originalMainRunReleased": true
+  },
+  "inputs": {
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-235205-actual-world-depth-source-bcce93\\actual-world-mapped-positions.bin": {
+      "bytes": 185024,
+      "sha256": "b75c36aab86c211816aeb394e815725aa5be06641a27cc66ccd30daed1b87389"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-indices.bin": {
+      "bytes": 172176,
+      "sha256": "27cbd90657dfb5f31f204147a83aaa86a8414da3c78ac432e36a82c6f8833eea"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin": {
+      "bytes": 80,
+      "sha256": "1f284101bc5e6e56cdc7d44e47032b666fb62d592ace457baa9b4a52e52ab181"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\native-uv.bin": {
+      "bytes": 92512,
+      "sha256": "305a418317cdb790043fb8364558c07e5ff9d5460b94f608a443757849ba0f39"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-235205-actual-world-depth-source-bcce93\\queries.bin": {
+      "bytes": 272272,
+      "sha256": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip0.bin": {
+      "bytes": 262144,
+      "sha256": "cfa842fdb428716ba4f55a36c2ced977617502d410aa2518997ec605f83eb801"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip1.bin": {
+      "bytes": 65536,
+      "sha256": "d3c5c6f7a75c9cbe7eadcd5ac02d509d41066d04643c29abd2a7328f035b7f9c"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip2.bin": {
+      "bytes": 16384,
+      "sha256": "4d754a0464f2be86a82c341d4d24f1d8449052397874d246743c06cfb97512fb"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip3.bin": {
+      "bytes": 4096,
+      "sha256": "3aaafc6a522adac5db50ac369abe72517b467221dbe30432287ddd7d21fabca1"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip4.bin": {
+      "bytes": 1024,
+      "sha256": "e03eb4a4d0b3ef67242eda43389a2eca87ccbd1b4c1c5ca93ae0544f2f50af14"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip5.bin": {
+      "bytes": 256,
+      "sha256": "b15279a45248926fa5e0124f4a5fbc5d6652059e5ab0ee9b37fa62132a2688d8"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip6.bin": {
+      "bytes": 64,
+      "sha256": "a7e7fc2b7a5eef214e0c2ce0d05c40f43f6458e39a9fe47d514f6a31444fbf7c"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip7.bin": {
+      "bytes": 16,
+      "sha256": "76dcc50525905bc8a5847bb27c75d7295218f4176fc73c15d0f3e410ae64d62b"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip8.bin": {
+      "bytes": 16,
+      "sha256": "2aacdf9c2084c38363745f7a45c15d100f6ff11f52812e52a5e2d3e6c76cb607"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip9.bin": {
+      "bytes": 16,
+      "sha256": "5a08386397f52a992c4c78786af17c7808ae2881922a55ac12974f704c233ba1"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-235205-actual-world-depth-source-bcce93\\expected.bin": {
+      "bytes": 68068,
+      "sha256": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-211719-alpha-ellipse-lod-5c69d6\\native-coverage.exe": {
+      "bytes": 291328,
+      "sha256": "c4e97cff28aaf8b295633f27cb2382dc2be3466efd00fe220f3fd899188a564f"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-003435-visibility-numeric-contract-4f95e7\\calibration.exe": {
+      "bytes": 300544,
+      "sha256": "3b6c55b4f7c8a2beede1d3e67b9afc9efa452130d09cafb3c5bc0f2e6aef3a47"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-003435-visibility-numeric-contract-4f95e7\\oracle.spv": {
+      "bytes": 29684,
+      "sha256": "375d1baaff0fbc33baf5a461cfdacee452b7471e7f16af1992ce391a9a1a9ea2"
+    },
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t6.bin": {
+      "bytes": 14745600,
+      "sha256": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095"
+    },
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t2.bin": {
+      "bytes": 16777216,
+      "sha256": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-003031-reciprocal-compact-profile-4e7929\\correction.bin": {
+      "bytes": 2097152,
+      "sha256": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\reference_depth.vert.spv": {
+      "bytes": 3492,
+      "sha256": "a8e0f700200b1a0f006070f1f6301c46e39955f80bccd1bd6e8ba211230726d9"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\reference_depth.frag.spv": {
+      "bytes": 528,
+      "sha256": "3ead88237f261f37cff1904f671518d0ce8831742bbecc3a9292e7296ecc77d6"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\reference_depth_masked.vert.spv": {
+      "bytes": 3664,
+      "sha256": "7bcc642385515345587419e724aa8293f507b7cd763d43768a66079aab56cc57"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\reference_depth_masked.frag.spv": {
+      "bytes": 1480,
+      "sha256": "ccd1c94e6e0a4f16d90f51ef754d51e52e817efd03ddef0cc0f23d5f2127be40"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\reference_depth_ellipse.frag.spv": {
+      "bytes": 4656,
+      "sha256": "b14e7955b56975f2a4d2c247580b745c6b7a1d238c22cb4213f76288bff7c3a0"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-211719-alpha-ellipse-lod-5c69d6\\nvidia-public-rg8.bin": {
+      "bytes": 34034,
+      "sha256": "ec4fb9b7f81ea0d010b36c37c4b8d03325768fa19f8bd5d03d511f3f132f1a0e"
+    },
+    "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-211719-alpha-ellipse-lod-5c69d6\\intel-public-rg8.bin": {
+      "bytes": 34034,
+      "sha256": "da133931d95d3f6905f3c64bb921ec828efe01c41705ac3c139b6ae6e0e30173"
+    }
+  },
+  "archive": {
+    "bytes": 3245408,
+    "sha256": "b64b47890fba3420c1914fbfe008f1fcc4a840824161edd44698ac134c36d144",
+    "members": 57
+  }
+}

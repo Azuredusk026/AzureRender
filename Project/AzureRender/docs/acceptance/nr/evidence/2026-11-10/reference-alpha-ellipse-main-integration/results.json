@@ -1,0 +1,214 @@
+{
+  "status": "qualified-public-ellipse-main-integration",
+  "baselineCommit": "62fc79c",
+  "sourceHead": "47d071c",
+  "checks": [
+    {
+      "config": "Release",
+      "tests": 8,
+      "skips": 0,
+      "seconds": 98.63999999995576
+    },
+    {
+      "config": "Debug",
+      "tests": 8,
+      "skips": 0,
+      "seconds": 99.79700000002049
+    }
+  ],
+  "projectionComponents": 316096,
+  "depthAndCoverageValues": 337664,
+  "coverageValuesPerDeviceConfiguration": 10496,
+  "coverageRejectsPerBatch": 25,
+  "activePrograms": 688,
+  "oldProgramIdentitiesPerConfiguration": 687,
+  "newProgramSha256": "b14e7955b56975f2a4d2c247580b745c6b7a1d238c22cb4213f76288bff7c3a0",
+  "executableComparisons": [
+    {
+      "configuration": "release",
+      "executable": "AzureRender.exe",
+      "wholeFileEqual": false,
+      "textEqual": true,
+      "rdataEqual": false
+    },
+    {
+      "configuration": "release",
+      "executable": "AzurePlayer.exe",
+      "wholeFileEqual": false,
+      "textEqual": true,
+      "rdataEqual": false
+    },
+    {
+      "configuration": "release",
+      "executable": "AzureMaterialViewDeterminismGpuTests.exe",
+      "wholeFileEqual": true,
+      "textEqual": true,
+      "rdataEqual": true
+    },
+    {
+      "configuration": "release",
+      "executable": "AzureTemporalViewGpuTests.exe",
+      "wholeFileEqual": true,
+      "textEqual": true,
+      "rdataEqual": true
+    },
+    {
+      "configuration": "release",
+      "executable": "AzureMaterialDisplayViewGpuTests.exe",
+      "wholeFileEqual": true,
+      "textEqual": true,
+      "rdataEqual": true
+    },
+    {
+      "configuration": "debug",
+      "executable": "AzureRender.exe",
+      "wholeFileEqual": false,
+      "textEqual": true,
+      "rdataEqual": false
+    },
+    {
+      "configuration": "debug",
+      "executable": "AzurePlayer.exe",
+      "wholeFileEqual": false,
+      "textEqual": true,
+      "rdataEqual": false
+    },
+    {
+      "configuration": "debug",
+      "executable": "AzureMaterialViewDeterminismGpuTests.exe",
+      "wholeFileEqual": true,
+      "textEqual": true,
+      "rdataEqual": true
+    },
+    {
+      "configuration": "debug",
+      "executable": "AzureTemporalViewGpuTests.exe",
+      "wholeFileEqual": true,
+      "textEqual": true,
+      "rdataEqual": true
+    },
+    {
+      "configuration": "debug",
+      "executable": "AzureMaterialDisplayViewGpuTests.exe",
+      "wholeFileEqual": true,
+      "textEqual": true,
+      "rdataEqual": true
+    }
+  ],
+  "native": {
+    "exitCode": 0,
+    "seconds": 130.60899999999674,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "programsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "inputLockSource": {
+    "sourceArchive": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\maintenance\\evidence\\20261108-101326-gpu-transparent-indices-8ef9c7-51159624029e26d5.zip",
+    "sourceArchiveSha256": "f23818b3c77164bbbd66d3beb1ce950739d6399b0a5ca4135a8027b6793e8e76",
+    "member": "files/frozen-project-inputs.json",
+    "bytes": 454954,
+    "sha256": "bf0d040c42daa7d9b12e751d7b0338a9535a8bbfa51b4fa3c264d8d66fe5e13f",
+    "mountedInputsVerified": 1729
+  },
+  "childArchives": [
+    {
+      "sourceCommit": "3990a03",
+      "rootCommit": "6ca42e2f9f8307c80fcb61a11974586054bc336b",
+      "archives": [
+        {
+          "path": "Project/AzureRender/docs/acceptance/nr/evidence/2026-11-10/reference-alpha-ellipse/validation.zip",
+          "bytes": 1166269,
+          "sha256": "253a8d206670fff899dd7ca6ec5c04118a31fe89da687c628b9f7e4518cf521a",
+          "members": 130
+        }
+      ]
+    },
+    {
+      "sourceCommit": "9a78b73",
+      "rootCommit": "47d071cbbe475a3e38b18f3e8ed9c32075d2d4e9",
+      "archives": [
+        {
+          "path": "Project/AzureRender/docs/acceptance/nr/evidence/2026-11-10/depth-interpolant-source/validation.zip",
+          "bytes": 1678661,
+          "sha256": "a323c4ad0cfd122ef10a0d3e61d16bfd1c893112754e83a09baa4a22e8035f2e",
+          "members": 88
+        }
+      ]
+    }
+  ],
+  "defaultViewGpuEvidenceReused": {
+    "commit": "62fc79c",
+    "processes": 16,
+    "reason": "All six corresponding GPU view executables and all 687 used programs byte-identical"
+  },
+  "protectedFilesVerified": 13,
+  "nativeQualityRemainingFailures": 96,
+  "overall": "failed-user-review",
+  "archive": {
+    "members": 59,
+    "bytes": 899106,
+    "sha256": "77418bfaed9e5b5ccb874ad84457b5b8ff7275b35c6ffd2a9601c895f97d3afb"
+  },
+  "identicalFrameCleanup": {
+    "status": "reclaimed-exact-duplicates",
+    "files": [
+      {
+        "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-225052-reference-alpha-ellipse-four-00f301\\frames\\frame_000000.png",
+        "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000000.png",
+        "bytes": 5714675,
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387"
+      },
+      {
+        "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-225052-reference-alpha-ellipse-four-00f301\\frames\\frame_000001.png",
+        "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000001.png",
+        "bytes": 5713820,
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab"
+      },
+      {
+        "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-225052-reference-alpha-ellipse-four-00f301\\frames\\frame_000002.png",
+        "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000002.png",
+        "bytes": 5713834,
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79"
+      },
+      {
+        "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-225052-reference-alpha-ellipse-four-00f301\\frames\\frame_000003.png",
+        "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000003.png",
+        "bytes": 5714218,
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574"
+      }
+    ],
+    "reclaimedBytes": 22856547
+  }
+}

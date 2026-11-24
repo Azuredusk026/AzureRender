@@ -1,0 +1,11 @@
+[0/2] Re-checking globbed directories...
+[1/11] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\render\ResourceAccessProfile.cpp.obj
+[2/11] Building CXX object CMakeFiles\AzureRenderGpuCapabilityReportTests.dir\tests\GpuCapabilityReportTests.cpp.obj
+[3/11] Building CXX object CMakeFiles\AzureRenderGpuCapabilityReportTests.dir\src\diagnostics\GpuCapabilityReport.cpp.obj
+[4/11] Building CXX object CMakeFiles\AzureRenderCore.dir\src\diagnostics\GpuCapabilityReport.cpp.obj
+[5/11] Linking CXX executable AzureRenderGpuCapabilityReportTests.exe
+[6/11] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[7/11] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[8/11] Linking CXX static library AzureRenderCore.lib
+[9/11] Linking CXX executable AzureResourceAccessProfileTests.exe
+[10/11] Linking CXX executable AzureRenderNullRhiPassTests.exe

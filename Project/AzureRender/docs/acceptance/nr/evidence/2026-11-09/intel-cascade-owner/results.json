@@ -1,0 +1,22 @@
+{
+  "status": "resolved",
+  "cause": "Scene cascade visibility consumed without an explicit surface directional owner in scene-lighting mode.",
+  "control": "Disabling the unowned cascade makes the binding pair and static first-frame sequence byte-exact.",
+  "fix": "Gate scene cascades by the existing mainLightDirection.w owner flag; retain legacy and explicit QA providers.",
+  "firstFrameWitness": {
+    "file": "initial_frame0.rdc",
+    "sha256": "d0b77ba44804b621fa5e1770bd1c0e7b98b671bba0cd2c7d7e333aadac7560f7",
+    "bytes": 6803879
+  },
+  "finalGpuCases": 34,
+  "firstFrameTolerance": 0,
+  "originalFourFrameTolerance": 0,
+  "formalPerformancePassed": false,
+  "package": {
+    "path": "docs\\acceptance\\nr\\evidence\\2026-11-09\\intel-cascade-owner\\validation.zip",
+    "sha256": "a2dcc8eff4f17704413c491b251c8c3e8181ecc97ded542aeadf5cd07243bc75",
+    "bytes": 4228279,
+    "files": 157
+  },
+  "run": "20261109-092602-intel-first-frame-stability-fce74b"
+}

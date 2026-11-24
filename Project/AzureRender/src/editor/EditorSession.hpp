@@ -1,9 +1,42 @@
 #pragma once
 
 #include "EditorContext.hpp"
+#include "content/ContentOperationService.hpp"
+#include "content/ContentDirectoryModel.hpp"
+#include "content/AssetEditorRegistry.hpp"
+#include "content/AssetExportService.hpp"
+#include "content/NodePresetRegistry.hpp"
+#include "content/PrefabAuthoringService.hpp"
+#include "material/MaterialEditingService.hpp"
+#include "properties/ReferencePickerService.hpp"
+#include "projects/ProjectOpenService.hpp"
+#include "documents/DocumentActionGuard.hpp"
+#include "documents/EditorDocumentManager.hpp"
+#include "scripts/ScriptAuthoringRegistry.hpp"
+#include "diagnostics/StructuredDiagnostic.hpp"
+#include "documents/EditorFeedback.hpp"
+#include "documents/EditorTaskService.hpp"
+#include "platform/PathSelection.hpp"
+#include "viewport/GizmoController.hpp"
+#include "viewport/EditorViewDescriptor.hpp"
+#include "viewport/ViewportOverlayRegistry.hpp"
+#include "editor/GameBuildJob.hpp"
+#include "runtime/GameRuntime.hpp"
+#include "runtime/LevelSession.hpp"
+#include "runtime/ProjectReferenceViews.hpp"
+#include "runtime/IScriptRuntime.hpp"
+#include "runtime/PresentationRuntime.hpp"
+#include "editor/commands/EditService.hpp"
+#include "editor/PanelContext.hpp"
+#include "foundation/SettingRegistry.hpp"
+#include "extensions/ExtensionRegistry.hpp"
+#include "editor/ai/ProposalController.hpp"
+#include "editor/preview/DeveloperServices.hpp"
 
 #include <memory>
+#include <optional>
 #include <string>
+#include <vector>
 
 namespace azurerender {
 
@@ -15,17 +48,126 @@ enum class EditorCommand {
     Redo,
     ReloadAssets,
     Capture,
+    Play,
+    Simulate,
+    Pause,
+    Resume,
+    Step,
+    Stop,
 };
 
 class EditorSession final {
 public:
     explicit EditorSession(std::shared_ptr<EditorContext> context);
+    ~EditorSession();
+    bool playing() const noexcept;
+    bool simulating() const noexcept;
+    bool editCameraActive() const noexcept {return !playing()||simulating();}
+    std::string previewMode() const {return simulating()?"simulate":playing()?"play":"edit";}
+    bool debugOverlay = false;
+    ViewportOverlayRegistry& viewportOverlays(){return viewportOverlays_;}
+    std::map<std::string,std::string>& viewportOverlayPolicies(){return viewportOverlayPolicies_;}
+    EditorViewDescriptor& viewportView(){return viewportView_;}
+    const EditorViewDescriptor& viewportView() const{return viewportView_;}
+    const std::vector<std::string>& viewportDiagnosticModes() const noexcept{return viewportDiagnosticModes_;}
+    std::optional<unsigned> viewportDiagnosticMode() const noexcept{return viewportDiagnosticMode_;}
+    void setViewportDiagnosticModes(std::vector<std::string> modes);
+    void synchronizeViewportCamera(std::array<float,3> position,std::array<float,3> target){if(!viewportViewChanged_){viewportView_.position=position;viewportView_.target=target;}}
+    bool consumeViewportViewChange(){const bool changed=viewportViewChanged_;viewportViewChanged_=false;return changed;}
+    GameRuntime* game() noexcept;
+    RuntimeLifecycle* runtime() noexcept;
+    LevelSession* levels() noexcept;
+    IScriptRuntime* scripts() noexcept;
+    PresentationRuntime* presentation() noexcept;
+    double advance(double delta);
+    SceneDocument viewScene();
+    const ProjectReferenceViews& referenceViews() const noexcept {return referenceViews_;}
+    bool consumeRuntimeReset() noexcept;
+    bool startBuild(const std::filesystem::path& install, const std::filesystem::path& output, bool replace = false) noexcept;
+    void pollBuild();
+    void pollTasks();
+    ContentOperationService& content();
+    ContentDirectoryModel& contentDirectories(){return contentDirectories_;}
+    AssetEditorRegistry& assetEditors(){return assetEditors_;}
+    NodePresetRegistry& nodePresets(){return nodePresets_;}
+    MaterialEditingService& materials(){return materials_;}
+    PrefabAuthoringService& prefabs(){return prefabs_;}
+    nlohmann::json applyContent(const std::string& planId);
+    void undoContent();
+    void redoContent();
+    std::string startReimport(const nlohmann::json& request);
+    nlohmann::json planExport(const nlohmann::json& request);
+    std::string startExport(const std::string& plan,bool replaceExisting=false);
+    bool reimporting() const noexcept {return reimporting_;}
+    ProjectOpenService& projects() {return *projects_;}
+    void setRecentProjectsPath(std::filesystem::path file) {projects_=std::make_unique<ProjectOpenService>(std::move(file));}
+    std::string startProjectCreation(const std::string& templateId,const std::filesystem::path& destination,const std::string& name);
+    void requestProject(std::shared_ptr<EditorContext> candidate);
+    EditorDocumentManager& documents(){return documents_;}
+    const EditorDocumentManager& documents() const{return documents_;}
+    AnimationPreviewService& animations(){return documents_.at(context_->documentId()).animations;}
+    ScriptAuthoringRegistry& scriptAuthoring(){return scriptAuthoring_;}
+    DiagnosticStore& diagnostics(){return diagnostics_;}
+    const DiagnosticStore& diagnostics() const{return diagnostics_;}
+    void revealDiagnostic(const std::string& id);
+    void collectDiagnostics();
+    std::vector<NodeAnimationFrame> animationFrames() const;
+    std::string openDocument(const std::string& path);
+    void requestDocumentActivation(const std::string& id);
+    void requestDocumentClose(const std::string& id,const std::string& decision);
+    std::string consumeWorkspacePreset() {auto result=workspacePreset_;workspacePreset_.clear();return result;}
+
+    void startImportTask(const std::filesystem::path& path);
+    std::string startDropImport(const nlohmann::json& request);
+    bool dropImporting() const;
+    void cancelImportTask();
+    const EditorTaskService& tasks() const{return *tasks_;}
+    const EditorFeedback& feedback() const{return feedback_;}
+    PathHistory& pathHistory(){return paths_;}
+    void setPathHistoryFile(std::filesystem::path file){pathHistoryFile_=std::move(file);paths_.load(pathHistoryFile_);}
+    void savePathHistory(){if(!pathHistoryFile_.empty())paths_.save(pathHistoryFile_);}
+    using PlacementRaycast=std::function<std::optional<std::array<float,3>>(const std::array<float,3>&,const std::array<float,3>&)>;
+    void setPlacementRaycast(PlacementRaycast query){placementRaycast_=std::move(query);}
+    std::array<float,3> placementPosition(const nlohmann::json& parameters) const;
+    bool building() const noexcept { return build_ != nullptr; }
+    std::string buildProgress() const { return build_ ? build_->progress() : std::string{}; }
+    const GameBuildResult& buildResult() const noexcept { return buildResult_; }
 
     [[nodiscard]] EditorContext& context() noexcept { return *context_; }
     [[nodiscard]] const EditorContext& context() const noexcept {
         return *context_;
     }
     [[nodiscard]] bool execute(EditorCommand command) noexcept;
+    EditService& edits() noexcept { return *edits_; }
+    PanelContext panelContext() { return {*context_,*selection_,*edits_}; }
+    void log(std::string message) { context_->log(std::move(message)); }
+    void setUserSettingsPath(std::filesystem::path path) { userSettingsPath_=std::move(path); }
+    const std::filesystem::path& userSettingsPath() const {return userSettingsPath_;}
+    SettingRegistry& settings() noexcept { return settings_; }
+    EditorPanelRegistry& panelRegistry() noexcept { return panelRegistry_; }
+    bool assetRevealPending() const noexcept {return !assetReveal_.empty();}
+    std::string consumeAssetReveal(){auto result=assetReveal_;assetReveal_.clear();return result;}
+    ReferencePickerService& references() noexcept {return references_;}
+    SelectionService& selection() noexcept { return *selection_; }
+    GeneratorRegistry& generators() noexcept { return generators_; }
+    void setDeveloperServices(DeveloperServices services){developerServices_=std::move(services);}
+    const DeveloperServices& developerServices() const{return developerServices_;}
+    void configureModel(std::shared_ptr<IModelTransport> transport);
+    bool modelAvailable() const noexcept {return model_&&model_->available();}
+    void pollModel();
+    nlohmann::json proposalReport() const;
+    ProposalController& proposals();
+    EditResult edit(const std::string& command,nlohmann::json parameters=nlohmann::json::object(),std::string mergeKey={});
+    EditResult editRequest(const EditRequest& request);
+    void setClosePolicy(std::string policy){closePolicy_=std::move(policy);}
+    DocumentActionGuard& documentGuard(){return *documentGuard_;}
+    GizmoController& gizmo(){return *gizmo_;}
+    bool requestDocumentAction(DocumentAction action);
+    bool requestWindowClose();
+    bool windowClosePending() const noexcept { return windowClosePending_; }
+    bool resolveDocumentAction(DocumentDecision decision);
+    bool closeReady() const {return documentGuard_->state()==DocumentActionState::Ready && documentGuard_->action()==DocumentAction::Close;}
+    bool consumeFrameSelection(){const bool result=frameSelectionRequested_;frameSelectionRequested_=false;return result;}
     [[nodiscard]] bool saveOnClose() noexcept;
     [[nodiscard]] bool consumeLayoutResetRequest() noexcept;
     [[nodiscard]] bool consumeAssetReloadRequest() noexcept;
@@ -35,16 +177,83 @@ public:
         return captureLabel_;
     }
     [[nodiscard]] const std::string& lastError() const noexcept {
-        return lastError_;
+        return feedback_.latestError();
     }
 
 private:
+    EditorDocumentManager documents_;
+    ScriptAuthoringRegistry scriptAuthoring_=ScriptAuthoringRegistry::builtins();
+    DiagnosticStore diagnostics_;
+    std::string diagnosticNode_;
+    std::string pendingDocument_,closingDocument_;
+    void activateDocument(const std::string& id);
+    void pollDocuments();
+    void retainDocument();
+    EditorViewDescriptor viewportView_;
+    bool viewportViewChanged_=false;
+    std::vector<std::string> viewportDiagnosticModes_={"Beauty"};
+    std::optional<unsigned> viewportDiagnosticMode_;
+    ViewportOverlayRegistry viewportOverlays_=ViewportOverlayRegistry::builtins();
+    std::map<std::string,std::string> viewportOverlayPolicies_{{"grid","all"},{"light","selected"},{"camera","selected"},{"collision","selected"},{"hinge","selected"}};
+    MaterialEditingService materials_;
+    friend EditRegistry editorOperations(EditorSession&);
+    bool executeInternal(EditorCommand command) noexcept;
+    bool startBuildInternal(const std::filesystem::path& install,const std::filesystem::path& output,bool replace) noexcept;
+    void activatePendingProject();
+    bool editEnabled(const EditDescriptor& descriptor) const;
     std::shared_ptr<EditorContext> context_;
+    ProjectReferenceViews referenceViews_;
+    std::shared_ptr<EditorContext> pendingProject_;
+    std::unique_ptr<ProjectOpenService> projects_;
+    std::unique_ptr<ContentOperationService> content_;
+    const AssetDatabase* contentDatabase_=nullptr;
+    std::uint64_t contentDatabaseVersion_=0;
+    ContentDirectoryModel contentDirectories_;
+    AssetEditorRegistry assetEditors_=AssetEditorRegistry::builtins();
+    AssetExportService exports_;
+    NodePresetRegistry nodePresets_=NodePresetRegistry::builtins();
+    std::string workspacePreset_;
+    bool creatingProject_=false;
+
+    GeneratorRegistry generators_=GeneratorRegistry::builtins();
+    PrefabAuthoringService prefabs_;
+    DeveloperServices developerServices_;
+    std::shared_ptr<EditService> edits_;
+    std::shared_ptr<SelectionService> selection_;
+    std::shared_ptr<GizmoController> gizmo_;
+    SettingRegistry settings_;
+    ReferencePickerService references_;
+    std::string assetReveal_;
+    std::unique_ptr<ModelClient> model_;
+    std::unique_ptr<ProposalController> proposals_;
+    EditorPanelRegistry panelRegistry_;
+    std::filesystem::path userSettingsPath_;
+    std::unique_ptr<DocumentActionGuard> documentGuard_;
+    std::string closePolicy_="ask";
+    bool windowClosePending_=false;
+    bool pollWindowClose();
+    bool frameSelectionRequested_=false;
     std::string lastError_;
+    EditorFeedback feedback_;
+    friend class SceneImportService;
+    std::unique_ptr<EditorTaskService> tasks_;
+    std::string importTask_;
+    bool reimporting_=false;
+    PathHistory paths_;
+    std::filesystem::path pathHistoryFile_;
+    PlacementRaycast placementRaycast_;
+    void recordError(const std::string& source,const std::string& message,const nlohmann::json& parameters=nlohmann::json::object());
+    std::set<std::string> runtimeDiagnosticIds_;
+    std::string shaderDiagnostic_;
     bool layoutResetRequested_ = false;
     bool assetReloadRequested_ = false;
     bool captureRequested_ = false;
     std::string captureLabel_ = "editor_capture";
+    struct PlayState;
+    std::unique_ptr<PlayState> play_;
+    bool runtimeReset_ = false;
+    std::unique_ptr<GameBuildJob> build_;
+    GameBuildResult buildResult_;
 };
 
 }  // namespace azurerender

@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  1: AzureEditor.EditService
+1/4 Test  #1: AzureEditor.EditService ..........   Passed    0.17 sec
+    Start  2: AzureEditor.EditTransaction
+2/4 Test  #2: AzureEditor.EditTransaction ......   Passed    0.28 sec
+    Start 15: AzureEngine.EditorWorkflow
+3/4 Test #15: AzureEngine.EditorWorkflow .......   Passed    1.50 sec
+    Start 68: AzureRender.EditorSession
+4/4 Test #68: AzureRender.EditorSession ........   Passed    0.15 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   2.12 sec

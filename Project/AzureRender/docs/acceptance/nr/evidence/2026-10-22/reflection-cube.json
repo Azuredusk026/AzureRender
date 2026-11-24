@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "status": "public_contract_and_native_technical_capture_passed_parity_pending",
+  "phase": "NR5-R2",
+  "runRoot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-cube",
+  "measurement": {
+    "model": "sRGB8-quantization-preimage-linear-distance/1",
+    "linearBudget": 0.004,
+    "formula": "max(lowerLinear - expectedLinear, expectedLinear - upperLinear, 0)",
+    "byteInterval": "[max(0,q-0.5),min(255,q+0.5)]/255, decoded with sRGB transfer",
+    "decodedCenterIsDiagnostic": true
+  },
+  "gpu": {
+    "debug": {
+      "summary": "gpu-debug-final/summary.json",
+      "summarySha256": "97ffbfbced70cfac69a20172192c16aaf33ed3506bd3c7ec42b7ed2da8097c77",
+      "status": "passed",
+      "captures": 56,
+      "constantFaceAndProjectionCaptures": 42,
+      "gradientAndRotationCaptures": 14,
+      "playerSha256": "a57b8620b791298b3d7b316753875360e4ba15b05431f54d239692567c5dda13",
+      "scriptSha256": "a752ebd54edbf14913a4308f0699e59ab5ffc953fed2d51570572bc7c73b399b",
+      "shaderCount": 51,
+      "shaderSetSha256": "13c650274ed52cb532d5949a9575216dd2b13a8de668c79c8ad8466f25a8086d",
+      "maximumQuantizationIntervalLinearError": 0.0018580631724729457,
+      "maximumDecodedCenterLinearError": 0.005766047695591636,
+      "maximumOutputByteDelta": 1,
+      "backendMaximumByteDelta": 0,
+      "validationEnabled": true,
+      "currentPlayerAndShadersMatch": true
+    },
+    "release": {
+      "summary": "gpu-release-final/summary.json",
+      "summarySha256": "1a6895a4c4311ed9a8c2800f7cd7688f738beb6ad8a3b3969d738640a4e3bfce",
+      "status": "passed",
+      "captures": 56,
+      "constantFaceAndProjectionCaptures": 42,
+      "gradientAndRotationCaptures": 14,
+      "playerSha256": "bf7499eb39a925a23c43c2141866bd05e8f3e24eec7261cec41ae12a4198c7b8",
+      "scriptSha256": "a752ebd54edbf14913a4308f0699e59ab5ffc953fed2d51570572bc7c73b399b",
+      "shaderCount": 51,
+      "shaderSetSha256": "13c650274ed52cb532d5949a9575216dd2b13a8de668c79c8ad8466f25a8086d",
+      "maximumQuantizationIntervalLinearError": 0.0018580631724729457,
+      "maximumDecodedCenterLinearError": 0.005766047695591636,
+      "maximumOutputByteDelta": 1,
+      "backendMaximumByteDelta": 0,
+      "validationEnabled": false,
+      "currentPlayerAndShadersMatch": true
+    }
+  },
+  "verification": {
+    "performedAtUtc": "2026-10-22T04:45:58.789798+00:00",
+    "gpuExecuted": false,
+    "ninjaExecuted": false,
+    "savedPixelMetricsRecomputed": true,
+    "inputExpectedImageHashesMatched": true,
+    "runtimeAndCaptureManifestsChecked": true,
+    "allUnloadCountsZero": true
+  },
+  "limitations": [
+    "Public storage and sampling verification; native roughness, DFG, GI compensation and full visual parity have separate acceptance.",
+    "Native candidate technical capture passed; matching-view original-game visual equivalence remains pending."
+  ],
+  "nativeCandidate": {
+    "status": "upgraded_technical_capture_passed",
+    "conversionReceipt": "current-white-yellow-cube.azenv.json",
+    "conversionReceiptSha256": "9490e0935a7da528cc69329f538fd8ae18a5c69cc1d1dcf0b55fb2c3e9f18d4f",
+    "cubeSha256": "eba548f98b34f51072e9dbc3f41c4b6c105f370f92df8fdfae41deb085108d14",
+    "faceSize": 128,
+    "mipLevels": 8,
+    "verifiedSourceFaces": 48,
+    "halfFloatPayloadMatchesDecodedSource": true,
+    "upgradeReceipt": "candidate-upgrade/receipt.json",
+    "upgradeReceiptSha256": "e223b80843ac18516dc84d749b2778273cf6447ec40b1cb69cfa3342dba83037",
+    "verifiedLevels": 8,
+    "levelNames": [
+      "diagnostic-front-far500.azurelevel",
+      "playable-safe.azurelevel",
+      "playable.azurelevel",
+      "scene.azurelevel",
+      "view-face.azurelevel",
+      "view-fullbody.azurelevel",
+      "view-logistics.azurelevel",
+      "view-wide.azurelevel"
+    ],
+    "allBeforeAndAfterHashesMatched": true,
+    "projectionOrigin": "volume-center-from-static-source-matrix",
+    "runtimeProjectionOriginVerified": false,
+    "probeIntensity": 0.5,
+    "captureFolder": "joint-face-release-memory-recovered",
+    "captureStatus": "technical-capture-passed",
+    "nativePixelEquivalenceVerified": false,
+    "technicalCapture": {
+      "receipt": "joint-face-release-memory-recovered/receipt.json",
+      "receiptSha256": "d7d5d0d78b062ab1c8c4074dab3e508f75bd17ccff00f3adc6edacb37f56bf21",
+      "sourceIndex": "joint-face-release-memory-recovered/source-index.json",
+      "sourceIndexSha256": "78498f614643308209e3ad9e7908232db02d29f60d73f05cba667b172afcec12",
+      "sourceCount": 897,
+      "currentCriticalSourceHashesRechecked": 56,
+      "allIndexedSourcePathsExist": true,
+      "captureScriptChecksAllInputsBeforeAndAfter": true,
+      "image": "joint-face-release-memory-recovered/frames/frame_000000.png",
+      "imageSha256": "a0f023d7b05962bba2c2262f11b5f97df9ccaa1eb4b81eb827c1e07ad00207fe",
+      "width": 1920,
+      "height": 1080,
+      "frames": 1,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "runtimeErrors": 0,
+      "loadedSixFaceResource": true,
+      "visualReview": "root-agent inspected the actual retained image",
+      "remainingVisualIssues": [
+        "Hair is too bright.",
+        "Mouth shadow differs from the native reference.",
+        "Scene reflection appearance remains inaccurate."
+      ],
+      "nativePixelEquivalenceVerified": false
+    }
+  },
+  "cpu": {
+    "debugPriorAffectedTests": {
+      "log": "cpu-debug-joint.log",
+      "sha256": "5600b7a178ab1e301fd82116df48f6f6128968573c637910f49e88e89215f493",
+      "passed": 7,
+      "failed": 0,
+      "scope": "Before assertion compile guards; Debug assertions were active."
+    },
+    "releasePriorLog": {
+      "log": "cpu-release-joint.log",
+      "sha256": "8cf531a9385b3aa01749534eac8c8bf161c904d908bcb07cf9fc90ec9ea1eeaf",
+      "usableForProjectionRejectionClaims": false
+    },
+    "assertionBuildContract": {
+      "redLog": "assertions-red-release.log",
+      "redLogSha256": "fb2d2549003e94e2abf9e85823834aa2a8dc7b288be54c94497492397521692e",
+      "redFailure": "NDEBUG compile guard",
+      "greenLog": "assertions-green-release.log",
+      "greenLogSha256": "e31a92ae0ad292e40bbf7c59f31c974a59bef40971dc251a7ffaa7c9ac3fdc9d",
+      "releaseBuildPassed": true,
+      "releaseFlagsIncludeUNDEBUG": true,
+      "guardedTests": [
+        "ReflectionProbe",
+        "NullRhi"
+      ]
+    },
+    "releaseAssertionsActiveRetest": {
+      "status": "passed",
+      "log": "cpu-release-assertions-active.log",
+      "sha256": "d4fb488d68ecfa1c21f2a175c8151a9a5135d9e433c1f0deff238e2d06e271ff",
+      "passed": 6,
+      "failed": 0
+    },
+    "debugGuardRebuild": {
+      "status": "passed",
+      "log": "assertions-green-debug.log",
+      "sha256": "ae11b2e23aab663373f0922914a84853c9043944d4fac703f2b389baecfd289b"
+    },
+    "debugAssertionsActiveRetest": {
+      "status": "passed",
+      "log": "cpu-debug-assertions-active.log",
+      "sha256": "368e13e91fab31cea88c2e0327cdc3143c4678cad8d66b382e3b80b739b17f4d",
+      "passed": 6,
+      "failed": 0
+    }
+  },
+  "history": [
+    {
+      "path": "environment-loader-red.log",
+      "sha256": "8d5b42093669203597b98211146006879a34f27906d07b961e62d4fcc08387c5",
+      "classification": "unsupported-six-face-format"
+    },
+    {
+      "path": "rhi-red/test.log",
+      "sha256": "620b31f88bd785fad13b807747fa709431fae5f7bbc02a569c63ff2d5645e496",
+      "classification": "six-layer-accounting-failure"
+    },
+    {
+      "path": "gpu-red/summary.json",
+      "sha256": "9078098b629bc8efcfc57c3b6fc620359861f073b30965743c494c5a8eb1465e",
+      "classification": "player-failure-before-cube-support"
+    },
+    {
+      "path": "gpu-debug/summary.json",
+      "sha256": "aaa4d4484ba4e60597550deb04560c0464f750d034814016121d6f2eac21d757",
+      "classification": "historical-reference-failure"
+    },
+    {
+      "path": "gpu-debug-corrected/summary.json",
+      "sha256": "7e94fce3e2fd83c4686262d003441fcd66d61bd41960eebf4196ebfaf47f6986",
+      "classification": "decoded-center-measurement-failure"
+    },
+    {
+      "path": "joint-face-release/player.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "incomplete-capture"
+    },
+    {
+      "path": "joint-face-release-resumed/player.log",
+      "sha256": "25310ea3f85e595e99a29ddf5c403bf2b198e5c06f330c63af8b38801f78a519",
+      "classification": "allocation-failure"
+    },
+    {
+      "path": "readonly-quantization/saved-images-observation-receipt.json",
+      "sha256": "fcb28bd092c862eab4337d81f40e3ed370ea19edd5cd17a1a20006efbf7193a2",
+      "classification": "read-only-remeasurement; separate from formal 56-case batches",
+      "historicalFailedCenterCases": 10
+    }
+  ],
+  "sourceSha256": {
+    "src/render/EnvironmentAsset.cpp": "e11d237e50d1fe7f20fcfd5b3debad44608392f56662c0db0182987dc3c659ec",
+    "src/render/EnvironmentCubeTexture.cpp": "310f233205bff955612392cc5ef969c6027d3471919716594a1a88eec9931827",
+    "src/render/EnvironmentCubeTexture.hpp": "cb8570c6d8b44f34606dedab0a23c5fac09cb6e118e4e2d19048588b5a0ef69b",
+    "src/render/ReflectionProbe.hpp": "37177e64e75de1af6f9fe06f44f6c55069f0b0af051aa84056c53853d6ffdf29",
+    "src/render/ReflectionProbeJson.hpp": "ba08001882371439370f2ca7dc979da7c65503dc561a7e9077f3871ecdcab081",
+    "src/rhi/VulkanRhi.cpp": "5ea41ddf05455f1698fb8fa34a8752f4f4cb1ef18502223f3cea08f9a1764e55",
+    "src/rhi/IGpuAllocator.hpp": "a540c81d88a62c047921cf57909b6c64b5bf3dacba2bcb36381d0fa7bfbfd879",
+    "src/rhi/GpuAllocator.cpp": "9f51d9d5a080751f2202dc66209461e6cdb22ef7f60863c43a118e88469f8929",
+    "src/scenes/CharacterSceneRenderer.cpp": "4c7cf49a414de9f7ec1a12cfc5699d2220ec3ed5035ec0ffe22720505ba1bb38",
+    "shaders/mesh.frag": "4f3470bdc6796e4ab58fb2c2ad4c09a11ffb8a35eebedc7ae44aed9ad2920fcd",
+    "tools/test_cube_probe_gpu.py": "a752ebd54edbf14913a4308f0699e59ab5ffc953fed2d51570572bc7c73b399b",
+    "tests/ReflectionProbeTests.cpp": "8d399e8a88d45f45556d411bcf73d6ba065566fd91cf0150787c7cd84ac31937",
+    "tests/NullRhiTests.cpp": "84400b62c21c1f612edd7c53876df74a7470cff9c4a53419eb0b08452a9853a8",
+    "CMakeLists.txt": "0bc6a40f10bd85ea2fda2a5c4532a98010ca221841c71e9d82d311c649f36e89"
+  }
+}

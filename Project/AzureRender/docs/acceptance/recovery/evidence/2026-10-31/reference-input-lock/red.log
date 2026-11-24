@@ -1,0 +1,165 @@
+......FFFFFFFFFFFFFFFFFFFF.......
+======================================================================
+FAIL: test_engine_input_lock_accepts_intact_inputs_and_rejects_material_drift (test_native_render_reference.ReferenceTests.test_engine_input_lock_accepts_intact_inputs_and_rejects_material_drift)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 132, in test_engine_input_lock_accepts_intact_inputs_and_rejects_material_drift
+    with self.assertRaisesRegex(ValueError, 'reproduction.*material'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_command_using_another_program (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_command_using_another_program)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 157, in test_engine_input_lock_rejects_command_using_another_program
+    with self.assertRaisesRegex(ValueError, 'reproduction.*command.*program'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_command_using_another_project (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_command_using_another_project)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 150, in test_engine_input_lock_rejects_command_using_another_project
+    with self.assertRaisesRegex(ValueError, 'reproduction.*command.*project'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (missing='schemaVersion')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 186, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (missing='workingDirectory')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 186, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (missing='program')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 186, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (missing='project')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 186, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (missing='inputs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 186, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (missing='command')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 186, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (field='schemaVersion', value=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 197, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (field='schemaVersion', value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 197, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (field='workingDirectory', value='missing')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 197, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (field='inputs', value=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 197, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (field='command', value='player.exe --project project.azureproject')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 197, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (field='command', value=['player.exe', '--project'])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 197, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_incomplete_or_invalid_recipe (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_incomplete_or_invalid_recipe) (field='command', value=['player.exe', '--project', 'project.azureproject', '--project', 'project.azureproject'])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 197, in test_engine_input_lock_rejects_incomplete_or_invalid_recipe
+    with self.assertRaisesRegex(ValueError, 'reproduction'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_missing_input_and_duplicate_alias (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_missing_input_and_duplicate_alias)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 171, in test_engine_input_lock_rejects_missing_input_and_duplicate_alias
+    with self.assertRaisesRegex(ValueError, 'reproduction.*material'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_program_and_project_drift (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_program_and_project_drift) (role='program')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 142, in test_engine_input_lock_rejects_program_and_project_drift
+    with self.assertRaisesRegex(ValueError, 'reproduction.*' + role):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_program_and_project_drift (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_program_and_project_drift) (role='project')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 142, in test_engine_input_lock_rejects_program_and_project_drift
+    with self.assertRaisesRegex(ValueError, 'reproduction.*' + role):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_engine_input_lock_rejects_wrong_declared_size_and_non_engine_role (test_native_render_reference.ReferenceTests.test_engine_input_lock_rejects_wrong_declared_size_and_non_engine_role)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_native_render_reference.py", line 203, in test_engine_input_lock_rejects_wrong_declared_size_and_non_engine_role
+    with self.assertRaisesRegex(ValueError, 'reproduction.*program'):
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.974s
+
+FAILED (failures=20)

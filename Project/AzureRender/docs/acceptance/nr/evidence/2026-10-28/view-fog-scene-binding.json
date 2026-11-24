@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR3-F1D",
+  "status": "scene_resource_binding_passed_surface_pending",
+  "baseCommit": "8e5cee4",
+  "run": "build/runs/20261028-074753-scene-view-fog-resource-3ec2ae",
+  "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject",
+  "changedSource": [
+    "CMakeLists.txt",
+    "src/render/ViewFogBinding.hpp",
+    "src/render/ViewFogBinding.cpp",
+    "src/render/ViewFogBindingJson.hpp",
+    "src/render/ViewFogBindingJson.cpp",
+    "src/runtime/SceneDocument.hpp",
+    "src/runtime/SceneDocument.cpp",
+    "src/runtime/SceneRenderSnapshot.cpp",
+    "src/runtime/Level.cpp",
+    "src/runtime/Project.cpp",
+    "src/runtime/LevelSession.cpp",
+    "src/runtime/AssetDatabase.cpp",
+    "src/scene/SceneDescription.hpp",
+    "tests/ViewFogBindingTests.cpp",
+    "tests/AssetLevelTests.cpp",
+    "tests/SceneModelTests.cpp",
+    "tests/ObjectShadowDocumentTests.cpp"
+  ],
+  "source": {
+    "CMakeLists.txt": "6df9ca5dfc2b925d30f22e07697d98821be7f06170defa676f558523fe39013a",
+    "src/render/ViewFogBinding.hpp": "db95634add6e5c7dcffb9111ea123ca5948407640982a839c6376ea4441d23ea",
+    "src/render/ViewFogBinding.cpp": "7c278d405493856004c5351d49e9eeb7e1c79b7668ffa98a1709358f7d8fbc37",
+    "src/render/ViewFogBindingJson.hpp": "24e6269dd3f9647f6ff4a9dbdda5e0f49e3ebfd0b7bcb2b5bca8ea67bfad68f3",
+    "src/render/ViewFogBindingJson.cpp": "dce2cea78f1525473ea1e45059688553ba79ed8faccc2c0cce27d0a6761a71ea",
+    "src/runtime/SceneDocument.hpp": "785afa2ae19e0f017d2fb4b2acf6730ceb7a3a13f521947b962968d1feab718e",
+    "src/runtime/SceneDocument.cpp": "b98d8527a742bb835da5941cfa3536d37e416adb1917d4e46b14e2e061be9ed8",
+    "src/runtime/SceneRenderSnapshot.cpp": "dd7d55b4fda30ea64b82ff9af57ae5d687a967517131423a5443da886b352bea",
+    "src/runtime/Level.cpp": "b41a52478b02b5268d2ab73687ea1548c42f41bd1e2512c49e26fa247cd5d456",
+    "src/runtime/Project.cpp": "773695586919aa4b3b84f2b529ece3005cb46f596e680a789beea57a75951b1e",
+    "src/runtime/LevelSession.cpp": "0341fb38eb9550d8d6298bbd0d66627afc0daae3839206f7ac74d67cf1a73498",
+    "src/runtime/AssetDatabase.cpp": "625b2985899a6c4ebdb0eb4c13f6041dee5899e4c4ca4f8e576ad33273d180d9",
+    "src/scene/SceneDescription.hpp": "da2b05423c3dd3056eed140b00c58dbdabfeaa9ace3115427931df8beeca6563",
+    "tests/ViewFogBindingTests.cpp": "605d4a2f53a3a15078fce7edb26a0ee6b8a6f46237135e710279e1767261b667",
+    "tests/AssetLevelTests.cpp": "8437c2e00fe063480bb7889498664a7ace0d3233a5a10a93cf5092cb8ff8996a",
+    "tests/SceneModelTests.cpp": "a0c949792f60b9566195732cd58bd5cd28a110bbecdc7cd3a3c26dc07da83571",
+    "tests/ObjectShadowDocumentTests.cpp": "1c58c774bc6e1d144ae1f49cea805de4c198eccfa57b73466e711da8ebce7886"
+  },
+  "artifacts": [
+    {
+      "path": "check_default_component.py",
+      "sha256": "481c34c0133eac9f5895dbcaa94db3ee3dce5a136cee8095062ef17aae1b0448"
+    },
+    {
+      "path": "check_default_main.py",
+      "sha256": "3f1f2a02b01d7bb166b5826b25b6af31248ef1863c6171dd761b5b6dabd60dfc"
+    },
+    {
+      "path": "debug-binding-build.log",
+      "sha256": "d711e8c842eb317e894bbaee6176872816edc4be6c564fe21247e2502490876c"
+    },
+    {
+      "path": "debug-binding-final-build.log",
+      "sha256": "f39bd0765a3f0afad38853cb58c7544a0e967e201f53de5e10aad0b22d2ce22f"
+    },
+    {
+      "path": "debug-binding-tests.log",
+      "sha256": "08bcda66b5b7b1075169d7361451a0139c8f1ef596f53979f13453a5ec27f4b6"
+    },
+    {
+      "path": "debug-build.log",
+      "sha256": "379cc003a9751a7254c5f064a0782380561841a673fec9eb540e1fb49b549828"
+    },
+    {
+      "path": "debug-component-check.log",
+      "sha256": "72d2f455e08cfccc3e260fe71ad04d6be24b00562983c45edb6c888e6e94b9f0"
+    },
+    {
+      "path": "debug-main-check.log",
+      "sha256": "c80f60c57a4a122b40f8afd3a32655b7c93359ed18bfe63e4cade4f8532088ea"
+    },
+    {
+      "path": "debug-scene-red-build.log",
+      "sha256": "9baabbd54b58d1d024484414a26058e73d518ca498403d28b8b06f5ad9e935a5"
+    },
+    {
+      "path": "debug-scene-red.log",
+      "sha256": "dab82d17f612b3b64222b3c5b6e980b0ead02cb7016e81c588bbf5c8a57408e2"
+    },
+    {
+      "path": "debug-tests.log",
+      "sha256": "80988a54b441f5a2144731e63550d5abd21ed105724740eadba759220366a604"
+    },
+    {
+      "path": "default-component-debug-gpu.json",
+      "sha256": "f4c1709bb901dd4d9929dc850fe52cea8c444c6375ff8962a450b04fabf891b2"
+    },
+    {
+      "path": "default-component-debug.log",
+      "sha256": "5cf069d0b12ccb9ee60cb2e77c323fea4760c108f88539b8544ed9839796401e"
+    },
+    {
+      "path": "default-main-debug.log",
+      "sha256": "372d607cb662752ac95577fa39495dea6ed13c84331a453cca3c91b885d1cee9"
+    },
+    {
+      "path": "default-main-release-gpu.json",
+      "sha256": "a05afe0846b3622d31f9e969b3c109edb177dac9fb4b992b1a53587ab25f06f9"
+    },
+    {
+      "path": "default-main-release.log",
+      "sha256": "02b65f6a4319af7d9d48f50dd6a66f94371292a14ed08647a62fced31e0d617b"
+    },
+    {
+      "path": "plan.md",
+      "sha256": "b894eb2f931a6920e734108165349e97acc830ddec7ed7260e4f5bafaf8528d6"
+    },
+    {
+      "path": "red-build.log",
+      "sha256": "af3902d1d682e2f89bc04541e3b05a17219502ddf6013412dc3784583e948e9e"
+    },
+    {
+      "path": "red.log",
+      "sha256": "2e0bfe22351fb9627cc0913a434820c26cefec5dade08de69e1b0af44996afc0"
+    },
+    {
+      "path": "release-build.log",
+      "sha256": "d1c101ceaf7b7aba648aa27c56670584e98f3c4b84bfb22032fd2518ba2ad496"
+    },
+    {
+      "path": "release-main-check.log",
+      "sha256": "a180bcf45eaae4cdf837b2334f675ce3819e670c3d9892f1d71eb3320a286bf6"
+    },
+    {
+      "path": "release-tests.log",
+      "sha256": "d858ee0760046653ec1aa1868256a087a11def742d0768e1c11085bc73d63ea2"
+    }
+  ],
+  "binaries": {
+    "debug-AzurePlayer": "861fe5b00d46125859deca6072458d1fece97787d135ab612ee560428bec03eb",
+    "debug-AzureRender": "9c22f14c0472251a6132a0e85bfa24f027d7213999e51e685d8360b3014450d7",
+    "debug-AzureAssetLevelTests": "e2d5ba6f2fb2fc978e615e8814e24afa3d8a8fb18c1060f601d64c6dda010ece",
+    "debug-AzureViewFogBindingTests": "c7337caa2f7fbe5ed40f703000e1a93f008c2d88179605dd7731bc9a2c62b5f8",
+    "release-AzurePlayer": "1337f123f4e3cccc5b5d11422fbdd9ee880aac1b93329c06b15c660c394d1938",
+    "release-AzureRender": "ebfbb49bed784b6f31980382fd849bf1fb941f7cf260df458d14328af27170e1",
+    "release-AzureAssetLevelTests": "19201b7f2b0d25658cc05182e8ab05a7768d6ae2239700defafafc75ae0e3a0a",
+    "release-AzureViewFogBindingTests": "91f6a908d397d644b41068decab453a48e6c83421e2cc50094c30c1ed18e93e1"
+  },
+  "tests": {
+    "checksPerConfiguration": 8,
+    "defaultMainCaptures": 1,
+    "defaultComponentCaptures": 1,
+    "changedDefaultPixels": 0,
+    "liveBuffers": 0,
+    "liveImages": 0
+  },
+  "baseline": {
+    "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-projection.json",
+    "sha256": "bddd30582d9926d0116495449ba983d384fa9c6a372dfd2aaab002bf0300beb2"
+  },
+  "limitations": [
+    "Actual scene GPU resource lifetime and surface composition remain open.",
+    "Full Debug scene diagnostic was cancelled during prolonged startup; Debug actual component and Release full scene are the completed GPU checks.",
+    "Full NR0 through NR12 image and performance gates remain active."
+  ]
+}

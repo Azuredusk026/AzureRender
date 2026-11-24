@@ -1,0 +1,74 @@
+[
+  {
+    "allocation": "0x24fc8140000",
+    "increaseBytes": 8359936,
+    "matchingRequests": 2738,
+    "callers": {
+      "nvoglv64.dll": 14,
+      "AzureRender.exe": 2538,
+      "unknown": 17,
+      "opengl32.dll": 4,
+      "graphics-hook64.dll": 3,
+      "nvapi64.dll": 8,
+      "kernel32.dll": 1,
+      "igc64.dll": 1,
+      "nvwgf2umx.dll": 142,
+      "nvppex.dll": 2,
+      "rmlui.dll": 2,
+      "CoreMessaging.dll": 1,
+      "D3D12Core.dll": 3,
+      "IntelControlLib.dll": 1,
+      "lua.dll": 1
+    },
+    "limitations": "Requested address inside observed aggregate region extent; not proof of ownership of every resident page"
+  },
+  {
+    "allocation": "0x24f65810000",
+    "increaseBytes": 5615616,
+    "matchingRequests": 0,
+    "callers": {},
+    "limitations": "Requested address inside observed aggregate region extent; not proof of ownership of every resident page"
+  },
+  {
+    "allocation": "0x24fc5f80000",
+    "increaseBytes": 2228224,
+    "matchingRequests": 0,
+    "callers": {},
+    "limitations": "Requested address inside observed aggregate region extent; not proof of ownership of every resident page"
+  },
+  {
+    "allocation": "0x24fc0d70000",
+    "increaseBytes": 2097152,
+    "matchingRequests": 0,
+    "callers": {},
+    "limitations": "Requested address inside observed aggregate region extent; not proof of ownership of every resident page"
+  },
+  {
+    "allocation": "0x24fc9110000",
+    "increaseBytes": 1536000,
+    "matchingRequests": 0,
+    "callers": {},
+    "limitations": "Requested address inside observed aggregate region extent; not proof of ownership of every resident page"
+  },
+  {
+    "allocation": "0x24fc15f0000",
+    "increaseBytes": 1384448,
+    "matchingRequests": 0,
+    "callers": {},
+    "limitations": "Requested address inside observed aggregate region extent; not proof of ownership of every resident page"
+  },
+  {
+    "allocation": "0x7ff6af570000",
+    "increaseBytes": 1056768,
+    "matchingRequests": 0,
+    "callers": {},
+    "limitations": "Requested address inside observed aggregate region extent; not proof of ownership of every resident page"
+  },
+  {
+    "allocation": "0x7fff51f70000",
+    "increaseBytes": 946176,
+    "matchingRequests": 0,
+    "callers": {},
+    "limitations": "Requested address inside observed aggregate region extent; not proof of ownership of every resident page"
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "activeScripts": 1,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 0,
+  "fixedSteps": 19,
+  "levelRevision": 1,
+  "nodes": [
+    {
+      "id": "hero",
+      "translation": [
+        4.0,
+        5.0,
+        6.0
+      ],
+      "visible": true
+    }
+  ],
+  "presentationErrors": [],
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "managed-annotation",
+  "scriptErrors": [],
+  "simulationMilliseconds": 24.398200000000013,
+  "uiDrawCalls": 0
+}

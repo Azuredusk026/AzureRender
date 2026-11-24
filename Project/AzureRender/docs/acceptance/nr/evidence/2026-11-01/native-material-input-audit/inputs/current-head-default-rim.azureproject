@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "current-head-default-rim",
+  "name": "current-head",
+  "mounts": [
+    {
+      "name": "assets",
+      "path": "native-assets"
+    },
+    {
+      "name": "character",
+      "path": "native-character"
+    },
+    {
+      "name": "reference",
+      "path": "high"
+    },
+    {
+      "name": "profiles",
+      "path": "profiles"
+    },
+    {
+      "name": "textures",
+      "path": "textures"
+    },
+    {
+      "name": "levels",
+      "path": "levels"
+    }
+  ],
+  "startupScene": "levels:/current-head-default-rim.azurelevel"
+}

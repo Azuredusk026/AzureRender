@@ -1,0 +1,378 @@
+[
+  {
+    "threadId": 34528,
+    "proof": {
+      "events": [
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328618074112,
+          "size": 4194304,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328618074112,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328614928384,
+          "size": 1048576,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328614928384,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 0,
+          "size": 0,
+          "status": 3221225485,
+          "flags": 12288
+        }
+      ]
+    }
+  },
+  {
+    "threadId": 34204,
+    "proof": {
+      "events": [
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328634851328,
+          "size": 4194304,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328634851328,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328614928384,
+          "size": 1048576,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328614928384,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 0,
+          "size": 0,
+          "status": 3221225485,
+          "flags": 12288
+        }
+      ]
+    }
+  },
+  {
+    "threadId": 32612,
+    "proof": {
+      "events": [
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328639045632,
+          "size": 4194304,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328639045632,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328613879808,
+          "size": 1048576,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328613879808,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 0,
+          "size": 0,
+          "status": 3221225485,
+          "flags": 12288
+        }
+      ]
+    }
+  },
+  {
+    "threadId": 33328,
+    "proof": {
+      "events": [
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328622268416,
+          "size": 4194304,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328622268416,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328617025536,
+          "size": 1048576,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328617025536,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 0,
+          "size": 0,
+          "status": 3221225485,
+          "flags": 12288
+        }
+      ]
+    }
+  },
+  {
+    "threadId": 34756,
+    "proof": {
+      "events": [
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328626462720,
+          "size": 4194304,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328626462720,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328615976960,
+          "size": 1048576,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328615976960,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 0,
+          "size": 0,
+          "status": 3221225485,
+          "flags": 12288
+        }
+      ]
+    }
+  },
+  {
+    "threadId": 33892,
+    "proof": {
+      "events": [
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328630657024,
+          "size": 4194304,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328630657024,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328618074112,
+          "size": 1048576,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328618074112,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 0,
+          "size": 0,
+          "status": 3221225485,
+          "flags": 12288
+        }
+      ]
+    }
+  },
+  {
+    "threadId": 27088,
+    "proof": {
+      "events": [
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328643239936,
+          "size": 4194304,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328643239936,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328619122688,
+          "size": 1048576,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328619122688,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 0,
+          "size": 0,
+          "status": 3221225485,
+          "flags": 12288
+        }
+      ]
+    }
+  },
+  {
+    "threadId": 30156,
+    "proof": {
+      "events": [
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328613879808,
+          "size": 4194304,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328613879808,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 2328613879808,
+          "size": 1048576,
+          "status": 0,
+          "flags": 12288
+        },
+        {
+          "api": "NtFreeVirtualMemory",
+          "action": "release",
+          "base": 2328613879808,
+          "size": 0,
+          "status": 0,
+          "flags": 32768
+        },
+        {
+          "api": "NtAllocateVirtualMemory",
+          "action": "allocate",
+          "base": 0,
+          "size": 0,
+          "status": 3221225485,
+          "flags": 12288
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,353 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "referenceCoverage": "Tracked and untracked nonignored text up to 8 MiB per file; explicit links and literal paths only. Dynamic paths require review.",
+  "retained": [
+    {
+      "path": "Project/AzureRender/docs/acceptance/p3",
+      "files": 5027,
+      "logicalBytes": 254324899,
+      "uniqueFileDataBytes": 254324899,
+      "newestMtimeNs": 1791346351480187300,
+      "referenceCount": 24669,
+      "references": [
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/2026-10-07.md",
+          "target": "Project/AzureRender/docs/acceptance/p3/docs/acceptance/p3/evidence/2026-10-07/manifest.json",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/) end/n    if checkpoint and checkpoint:get(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/) end/n    if position[3] < -325 and self:get(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/) end/n    if self:get(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/) end/nend/n",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/) then/n        self:ui_text(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/)/n    else self:ui_text(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/)/n    else/n        self:ui_text(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/)/n    elseif position[3] > -127 then self:ui_text(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/)/n    elseif position[3] > -207 then self:ui_text(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/)/n    elseif self:get(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/)/n    end/n    self:ui_text(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/)/n    if position[3] > -47 then self:ui_text(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/)/n    local checkpoint=self:find(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/)/n    local id=self:interaction_target()/n    local target=id~=",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/)/n    local position=self:get(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/and self:find(id) or nil/n    self:ui_text(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/function update(dt)/n    if self:pressed(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/editor-runtime.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/,",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/editor-runtime.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/:",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/editor-runtime.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/: 237}/n",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/editor-runtime.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/Asset reference missing: assets:/absent.lua",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/editor-runtime.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/authoring/{",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/) end/n    if checkpoint and checkpoint:get(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/) end/n    if position[3] < -325 and self:get(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/) end/n    if self:get(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/) end/nend/n",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/) then/n        self:ui_text(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/)/n    else self:ui_text(",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/actions.json",
+          "target": "Project/AzureRender/docs/acceptance/p3/evidence/2026-10-07/before-lua-proxy-fix/authoring/)/n    else/n        self:ui_text(",
+          "kind": "literal"
+        }
+      ],
+      "referencesTruncated": true,
+      "decision": "retain",
+      "purpose": "正式验收、历史字节与来源审计；压缩证据按既有清单核对。",
+      "recovery": "保留工作树原始证据；源快照的原始字节以其 manifest 为准。"
+    },
+    {
+      "path": "Project/AzureRender/docs/acceptance/p5",
+      "files": 5198,
+      "logicalBytes": 222946621,
+      "uniqueFileDataBytes": 222946621,
+      "newestMtimeNs": 1791734406060920200,
+      "referenceCount": 21609,
+      "references": [
+        {
+          "document": "Project/AzureRender/CHANGELOG.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/2026-10-10.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/CHANGELOG.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/CHANGELOG.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/device-environment.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/CHANGELOG.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/frame-pacing.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/CHANGELOG.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/obs-layer-control.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/CHANGELOG.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/observation-control.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/CHANGELOG.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/p5-a.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/CHANGELOG.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/p5-b.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/CHANGELOG.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/pagefault-trace-results.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/CHANGELOG.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/system-trace-results.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/CHANGELOG.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/ui-residency.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/2026-10-10.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/build/implementation-2026-10-10/p5-delivery/packages",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/2026-10-10.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/software-candidate-2026-10-11.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/2026-10-10.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/ui-residency.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/2026-10-10.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/evidence/manifest.json",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/2026-10-10.md",
+          "target": "Project/AzureRender/docs/acceptance/p5/physical-input.md",
+          "kind": "link"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/baseline-verification.json",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/cpu-summary.json",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/current-package-verification.json",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/debug-cpu.log",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/docs-build.log",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/document-transformations.json",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/environment-probe.json",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/environment-summary.json",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/final-style.log",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/final-verification.json",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/formal-verification.json",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/idle-after-user-pause.json",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/previous-evidence-verification.json",
+          "kind": "literal"
+        },
+        {
+          "document": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
+          "target": "Project/AzureRender/docs/acceptance/p5/closure/automatic-resume-evidence/build/automatic-resume-2026-10-11/release-cpu.log",
+          "kind": "literal"
+        }
+      ],
+      "referencesTruncated": true,
+      "decision": "retain",
+      "purpose": "正式验收、历史字节与来源审计；压缩证据按既有清单核对。",
+      "recovery": "保留工作树原始证据；源快照的原始字节以其 manifest 为准。"
+    }
+  ],
+  "archives": [
+    {
+      "status": "passed",
+      "archive": "docs/acceptance/retrieval/archives/c16-memory-recovery.zip",
+      "files": 322,
+      "logicalBytes": 7362770,
+      "archiveBytes": 6021669,
+      "sha256": "3371f75955514c7b8ab9dd31bac96ad3b4017fac24d780e8d1a06cfe5b957f8b",
+      "removedSource": true,
+      "sourceCommit": "108df870a2c11b28ae7a5ffd697a4aa621d1ad5d",
+      "source": "build/runs/20261023-133709-c16-memory-recovery-validation-e2b10e",
+      "purpose": "已完成的诊断中间产物；正式测量摘要位于 character-composite-diagnosis.json。",
+      "references": [
+        "docs/acceptance/nr/evidence/2026-10-23/character-composite-diagnosis.json"
+      ],
+      "restore": "python tools/evidence_archive.py restore --archive docs/acceptance/retrieval/archives/c16-memory-recovery.zip --output build/runs/c16-restored"
+    }
+  ]
+}

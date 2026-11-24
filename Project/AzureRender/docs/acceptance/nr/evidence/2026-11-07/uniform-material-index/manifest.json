@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "sourceBase": "80f74e6",
+  "status": "isolated-insufficient-benefit",
+  "sourceOverlay": {
+    "original": "src/app/AzureRenderApp.cpp",
+    "originalSha256": "8808c91b7638f539b148fe3e57ec890b831c2e3e8433fbeab7ee8f326200ffa8",
+    "privateSha256": "73a75d078e0cf0801ed0245bbff704deeac71bef84ff0e414a9bc82b322d2e00"
+  },
+  "privatePlayerSha256": "8535425d637c8b9a713dc3e758899aad279088195d957ae0ed8be824aefaef03",
+  "capture": {
+    "path": "current_frame320.rdc",
+    "bytes": 2115957464,
+    "sha256": "5cbfc0ecf9fa24a7a8d8949ed54c3fc3691b7a1a58075d68f63f257b34ca6942"
+  },
+  "archive": {
+    "file": "controls.zip",
+    "bytes": 475182,
+    "sha256": "a53098ffcf79faa3c414818a08a339d14ede0d2f94057e6d517140c336290fae"
+  },
+  "resultsSha256": "28a9f30400de3da7c3a322f4cfe3c09a72221f7214c51914ab2984051eeb4865"
+}

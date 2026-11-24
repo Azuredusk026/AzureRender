@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "implementation": "feat(u1): 完成关卡制作与调试工作流验收",
+  "debugTests": 75,
+  "releaseTests": 76,
+  "evidenceNormalization": "文本副本去除行尾空白，原始输出保留在 build/u1。",
+  "files": {
+    "debug-authoring.json": "08bf116ba8462ea8df3252413eb7ecf5fd4f8d53cda8e882fa2000efa7dcfe48",
+    "debug-ctest.log": "58ca11674f2487f55d2656c4246a71533e56ac3b9bd0f82f92f8cbd50be423d3",
+    "docs-check.log": "c9b6e053491a9cbdf25871928871d2d6fe4024b6ba42f9e76df50ad050b97028",
+    "editor-final.log": "ed23d962e8b7f6d8ca106ee6b4a6e899a9f7f66f1ba9c04652b6f513432635ef",
+    "install-verify.log": "31fade49c245e88f8f0bcff7031125898d400375626a1a1623963e0e2e48352b",
+    "mkdocs.log": "acae0a3a61317d1066810d71e934b8c683794fc097bfd8559e894d23d81f8644",
+    "overlay-red.log": "528d0be8c53a4900f165c4fa74c49898bcd24332415af978649d8ffbc6cd5ae5",
+    "player-route.json": "58b76e6ee996eb49d75ede41c825f5a17ad0da411e76a1ba0e8f3544b4cece3a",
+    "preview-red.json": "589c000d512ef9f3f40e10e25e59d7f0ac15d70bec1d2e0b85dc76bb92f411e8",
+    "provenance-debug.log": "55b38ee017c89afb4376cc26d3ac192a2eb528614c6f82c5ba629628e6849bab",
+    "provenance-release.log": "555729c9b5b8221db4cd96e60e1533ab73a498a7b9d75d79867588f967adf594",
+    "release-authoring.json": "d8b8b9f2e5167c5aa1d7812104a43018ac052d97c23c83125ce55f204b3cf0b7",
+    "release-ctest.log": "1c37f7bf5f495b47c5cf08dba545b84c655d06f38dc984a6fb6696a0a2d07468",
+    "release-editor.json": "e5b95f643bc51fcc5619c9eb1f0fdbfd4c5cea777a189aafe973ed7dac432fb7",
+    "release-gate.json": "1b84b29e276e1cdf4cdd7fb3a817b972822f604fea2660b5e2177bf586208ce2"
+  },
+  "localProducts": {
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\u1\\authoring-final-release\\package\\game_manifest.json": "2f86567dd59b0e308bd15936b98a8b11245b2896c5e3cac4b29285a0f66ac161",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\u1\\authoring-final-release\\actions.json": "352b82c316954e63ad2409475575ad57d8c243abf8896ef81838c502ecefdaee",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\u1\\authored-player-route\\input.json": "1a370f6114ff35be8488119b78f3edac1cb242e3c2e5380f77721d203677b609",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\u1\\authored-player-route\\runtime.json": "f1436fc92fe9532f0dad1b6d133be8bf318aa6e6f180e8e33b986be2366fae34",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\build-provenance.json": "5bd5f487bb117682aa58b70a21f238178177ccbae60edf9d3d40b14474070e40",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\build-provenance.json": "96a86b0025044bb2d0cd33f54fe36b35f3faea8db803cd9020f9463f39b87d70"
+  }
+}

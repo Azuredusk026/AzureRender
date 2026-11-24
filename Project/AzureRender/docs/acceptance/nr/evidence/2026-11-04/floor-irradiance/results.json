@@ -1,0 +1,1878 @@
+{
+  "regions": {
+    "ceiling": [
+      0,
+      0,
+      2560,
+      210
+    ],
+    "leftDoor": [
+      70,
+      300,
+      720,
+      690
+    ],
+    "rightWall": [
+      1920,
+      390,
+      2480,
+      620
+    ],
+    "centerFloor": [
+      1010,
+      990,
+      1550,
+      1170
+    ],
+    "cyanRing": [
+      1040,
+      1060,
+      1270,
+      1180
+    ],
+    "leftFloor": [
+      60,
+      950,
+      545,
+      1090
+    ]
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "visibility": "visible",
+      "sha256": [
+        "d3d8b40d89a66a050a9889659096863d8ecf43e3f683a273a91bcb7c6074e214",
+        "354b5e4b22d50b9a0b531e6ce0cea812c6f6332340614857a8d1afd1ef48b04d"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510540,
+          "meanAbsolute": 139.23522569444444,
+          "meanSignedRgb": [
+            145.74524739583333,
+            136.29513392857143,
+            135.4480933779762
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253349,
+          "meanAbsolute": 116.7240657462196,
+          "meanSignedRgb": [
+            129.25862721893492,
+            113.1723865877712,
+            107.5803865877712
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50314440993789,
+          "meanSignedRgb": [
+            73.99069875776398,
+            63.09764751552795,
+            56.42108695652174
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 83807,
+          "meanAbsolute": 38.217736625514405,
+          "meanSignedRgb": [
+            43.61484567901235,
+            38.33451646090535,
+            32.66203703703704
+          ],
+          "maximum": 175
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.0220652173913,
+          "meanSignedRgb": [
+            46.76876811594203,
+            37.36,
+            32.93742753623189
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.80008345606284,
+          "meanSignedRgb": [
+            80.43064801178203,
+            72.0277761413844,
+            68.94182621502209
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 1,
+      "visibility": "visible",
+      "sha256": [
+        "87188ab4147dcdf52904b8cc31ab35099cf2320097935a19a93c065ff77c4d80",
+        "b50af66b78cb9ec6e4989191f30e62b5b77dc90b14d4816cde34cb411ea8ff01"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510540,
+          "meanAbsolute": 139.23186693948412,
+          "meanSignedRgb": [
+            145.74057663690476,
+            136.29156436011905,
+            135.4460900297619
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253349,
+          "meanAbsolute": 116.72402761341223,
+          "meanSignedRgb": [
+            129.25869033530572,
+            113.17231558185405,
+            107.58031163708087
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50324016563147,
+          "meanSignedRgb": [
+            73.9908850931677,
+            63.09794254658385,
+            56.42089285714286
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 83797,
+          "meanAbsolute": 38.21396090534979,
+          "meanSignedRgb": [
+            43.61368312757202,
+            38.338055555555556,
+            32.65738683127572
+          ],
+          "maximum": 175
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.02136473429952,
+          "meanSignedRgb": [
+            46.76942028985507,
+            37.362826086956524,
+            32.93184782608696
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79934216985764,
+          "meanSignedRgb": [
+            80.43030927835052,
+            72.02729013254786,
+            68.94042709867452
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 2,
+      "visibility": "visible",
+      "sha256": [
+        "42db8fb88c22a37d6dce2e40fadc573a33b7aa6637154499acdd0042f6416970",
+        "2c92189411b1c8b42eba47e9ec5f837b62aab37c891e9613a700bcc60e076699"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510566,
+          "meanAbsolute": 139.2292962549603,
+          "meanSignedRgb": [
+            145.73593191964287,
+            136.28810453869048,
+            135.44734561011904
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253349,
+          "meanAbsolute": 116.72344904667982,
+          "meanSignedRgb": [
+            129.25801183431952,
+            113.17155818540434,
+            107.57998027613412
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50350414078675,
+          "meanSignedRgb": [
+            73.99121894409937,
+            63.097725155279505,
+            56.421568322981365
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 83807,
+          "meanAbsolute": 38.206279149519894,
+          "meanSignedRgb": [
+            43.600751028806584,
+            38.329022633744856,
+            32.64694444444444
+          ],
+          "maximum": 175
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.02239130434783,
+          "meanSignedRgb": [
+            46.76869565217391,
+            37.36326086956522,
+            32.93521739130435
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79807560137456,
+          "meanSignedRgb": [
+            80.42870397643594,
+            72.02617083946981,
+            68.93935198821796
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 3,
+      "visibility": "visible",
+      "sha256": [
+        "0103195cc1353964f50f4c8922459501568edb20f012a582a4544b062052ddb8",
+        "6341d05170ace67e5173969d30672fb285276521df45c1ede8587d00ba9d1a8a"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510553,
+          "meanAbsolute": 139.22616071428573,
+          "meanSignedRgb": [
+            145.73155319940477,
+            136.2835230654762,
+            135.4470070684524
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253349,
+          "meanAbsolute": 116.72334779750165,
+          "meanSignedRgb": [
+            129.25785798816568,
+            113.17147140039448,
+            107.57989349112427
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50365683229813,
+          "meanSignedRgb": [
+            73.99124223602485,
+            63.09799689440994,
+            56.421731366459625
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 83783,
+          "meanAbsolute": 38.199626200274345,
+          "meanSignedRgb": [
+            43.58746913580247,
+            38.32429012345679,
+            32.64041152263375
+          ],
+          "maximum": 175
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.022910628019325,
+          "meanSignedRgb": [
+            46.770072463768116,
+            37.3625,
+            32.936159420289854
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79752577319587,
+          "meanSignedRgb": [
+            80.42815905743741,
+            72.02540500736377,
+            68.93901325478645
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 4,
+      "visibility": "visible",
+      "sha256": [
+        "d351afae1d37e6396d11d9e1323fbc1385155a7a5f9c082e9ab81910adfcd54d",
+        "8056457d5c3c241f1eb08f3d3de2ee94257bf06bd7314537d2747f60bfa043fb"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510540,
+          "meanAbsolute": 139.22684709821428,
+          "meanSignedRgb": [
+            145.73189546130953,
+            136.28319010416666,
+            135.44771391369048
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72329651545036,
+          "meanSignedRgb": [
+            129.25779487179489,
+            113.17143984220907,
+            107.57983431952663
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.5037370600414,
+          "meanSignedRgb": [
+            73.99136645962733,
+            63.09794254658385,
+            56.42190217391305
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 83807,
+          "meanAbsolute": 38.18967078189301,
+          "meanSignedRgb": [
+            43.580925925925925,
+            38.31587448559671,
+            32.63342592592593
+          ],
+          "maximum": 175
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.023140096618356,
+          "meanSignedRgb": [
+            46.772282608695654,
+            37.36257246376812,
+            32.9345652173913
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79758959253805,
+          "meanSignedRgb": [
+            80.42824742268041,
+            72.02524300441826,
+            68.93927835051547
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 5,
+      "visibility": "visible",
+      "sha256": [
+        "95f0609d78550830b975248229b7a19899ce2c7a8e80bb516eacce125bd697a5",
+        "2a0275260f50080bdf5a4aad43b35e8f08e61ab8ad916e6c3903fda0fe390224"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510520,
+          "meanAbsolute": 139.23117435515874,
+          "meanSignedRgb": [
+            145.73775855654762,
+            136.28808407738094,
+            135.4502734375
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72329914529915,
+          "meanSignedRgb": [
+            129.25782642998027,
+            113.17142406311638,
+            107.57984220907298
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.5032738095238,
+          "meanSignedRgb": [
+            73.99069099378882,
+            63.09776397515528,
+            56.42136645962733
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 83780,
+          "meanAbsolute": 38.1861316872428,
+          "meanSignedRgb": [
+            43.57167695473251,
+            38.31360082304527,
+            32.6325
+          ],
+          "maximum": 175
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.02280193236715,
+          "meanSignedRgb": [
+            46.7731884057971,
+            37.36148550724638,
+            32.93373188405797
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79757486499754,
+          "meanSignedRgb": [
+            80.42835051546392,
+            72.02513991163475,
+            68.93923416789396
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 6,
+      "visibility": "visible",
+      "sha256": [
+        "1dcf7537f2029e97695bd88b88475f4839eec21c5d5c320222e36c345c75fd18",
+        "148000cb3f6b5969a0ebfb1b3cd19924bf2908a5c5deddee082b7f39b6a15583"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510530,
+          "meanAbsolute": 139.23921875,
+          "meanSignedRgb": [
+            145.74851004464287,
+            136.29791294642857,
+            135.4535695684524
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72329783037475,
+          "meanSignedRgb": [
+            129.25782642998027,
+            113.17142011834319,
+            107.57984220907298
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.5027251552795,
+          "meanSignedRgb": [
+            73.99012422360248,
+            63.097065217391304,
+            56.42098602484472
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 83783,
+          "meanAbsolute": 38.17761659807956,
+          "meanSignedRgb": [
+            43.564331275720164,
+            38.29845679012346,
+            32.62438271604938
+          ],
+          "maximum": 175
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.02342995169082,
+          "meanSignedRgb": [
+            46.77514492753623,
+            37.36155797101449,
+            32.93358695652174
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79766813942072,
+          "meanSignedRgb": [
+            80.42839469808543,
+            72.02518409425626,
+            68.93942562592048
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 7,
+      "visibility": "visible",
+      "sha256": [
+        "67a636fe13bb674103ceda358d83a3c8f1fbffc014827346747aa855864fcf1b",
+        "b4c482ade84e5de34c3b904530c9e142c18e39614b3b8d8b04ecf7bff86dcb10"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510513,
+          "meanAbsolute": 139.24970300099207,
+          "meanSignedRgb": [
+            145.76318080357143,
+            136.30965401785716,
+            135.45741257440477
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72328994082841,
+          "meanSignedRgb": [
+            129.2578224852071,
+            113.17142011834319,
+            107.5798224852071
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50110248447206,
+          "meanSignedRgb": [
+            73.98875,
+            63.09519409937888,
+            56.419363354037266
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 83813,
+          "meanAbsolute": 38.18644032921811,
+          "meanSignedRgb": [
+            43.57578189300411,
+            38.30276748971193,
+            32.63050411522634
+          ],
+          "maximum": 175
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.02375603864734,
+          "meanSignedRgb": [
+            46.77619565217391,
+            37.361376811594205,
+            32.93369565217391
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79771723122239,
+          "meanSignedRgb": [
+            80.42849779086893,
+            72.02524300441826,
+            68.93941089837998
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 8,
+      "visibility": "visible",
+      "sha256": [
+        "43b44d79a732039fdaab0bb3a285b89f3a926acfc9832468b4af7a4838f7f585",
+        "81d968761ca267ccce8ed4dc8699cf2f7e1a6ec4a60725ba5553c9ad86caeba2"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510487,
+          "meanAbsolute": 139.26201760912699,
+          "meanSignedRgb": [
+            145.78162202380952,
+            136.32399739583335,
+            135.46289992559525
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72328599605522,
+          "meanSignedRgb": [
+            129.25781854043393,
+            113.17141617357002,
+            107.57981854043392
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50102743271222,
+          "meanSignedRgb": [
+            73.98843944099379,
+            63.095007763975154,
+            56.4196350931677
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 83824,
+          "meanAbsolute": 38.18173182441701,
+          "meanSignedRgb": [
+            43.57190329218107,
+            38.29858024691358,
+            32.62524691358025
+          ],
+          "maximum": 175
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.02375603864734,
+          "meanSignedRgb": [
+            46.77644927536232,
+            37.36123188405797,
+            32.93358695652174
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79775650466372,
+          "meanSignedRgb": [
+            80.42854197349043,
+            72.02528718703977,
+            68.93944035346097
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 9,
+      "visibility": "visible",
+      "sha256": [
+        "2753f9bcaa573b9e749f0577c3ed7cae2d22e1b9d45ae358f09670c871c3f3b3",
+        "3ceaf4792717b6806eb7d001630bcafeec7e065e21a6738bd6a3789d764e2a4e"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510529,
+          "meanAbsolute": 139.2708841765873,
+          "meanSignedRgb": [
+            145.79486421130952,
+            136.33505580357144,
+            135.4669810267857
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72324917817225,
+          "meanSignedRgb": [
+            129.25777909270218,
+            113.17137672583826,
+            107.57978698224852
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.5004632505176,
+          "meanSignedRgb": [
+            73.98760093167702,
+            63.09455745341615,
+            56.41923136645963
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 83796,
+          "meanAbsolute": 38.17491769547325,
+          "meanSignedRgb": [
+            43.56094650205761,
+            38.29335390946502,
+            32.62094650205761
+          ],
+          "maximum": 175
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.02381642512077,
+          "meanSignedRgb": [
+            46.77659420289855,
+            37.36123188405797,
+            32.9336231884058
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79776141384389,
+          "meanSignedRgb": [
+            80.42854197349043,
+            72.02533136966127,
+            68.93941089837998
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 10,
+      "visibility": "visible",
+      "sha256": [
+        "6158809431c2bed2a025fade54bf990fdb686c76bac22c782b465c79db0bdbe9",
+        "814d6c429f46c59de849bed09826c012419379166a35432ec01f8c0bb5b724c5"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510511,
+          "meanAbsolute": 139.27732142857144,
+          "meanSignedRgb": [
+            145.80409226190477,
+            136.34281808035715,
+            135.46821986607142
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72328599605522,
+          "meanSignedRgb": [
+            129.25781854043393,
+            113.17140828402367,
+            107.57981854043392
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.49959109730848,
+          "meanSignedRgb": [
+            73.98641304347827,
+            63.094099378881985,
+            56.418260869565216
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 83800,
+          "meanAbsolute": 38.177606310013715,
+          "meanSignedRgb": [
+            43.5665329218107,
+            38.29510288065843,
+            32.61747942386831
+          ],
+          "maximum": 175
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.0237922705314,
+          "meanSignedRgb": [
+            46.77652173913044,
+            37.36126811594203,
+            32.93358695652174
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.7978203240059,
+          "meanSignedRgb": [
+            80.42857142857143,
+            72.02539027982327,
+            68.93949926362298
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 11,
+      "visibility": "visible",
+      "sha256": [
+        "72213166bd89049cff0b81b307e456a3bd3d743aad0069cbd74490ba13acecd9",
+        "2dc43c18a4cad6de924b68a72258e5ab23b77cb012e5b8931112dc5cbaa6f9ba"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510508,
+          "meanAbsolute": 139.28259548611112,
+          "meanSignedRgb": [
+            145.81228980654762,
+            136.34877976190475,
+            135.47109188988094
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72328731097961,
+          "meanSignedRgb": [
+            129.25781854043393,
+            113.17141617357002,
+            107.57981459566075
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.49937629399587,
+          "meanSignedRgb": [
+            73.98624223602485,
+            63.0938198757764,
+            56.418066770186336
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 83804,
+          "meanAbsolute": 38.179043209876546,
+          "meanSignedRgb": [
+            43.5670987654321,
+            38.2973353909465,
+            32.620534979423866
+          ],
+          "maximum": 175
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.023840579710146,
+          "meanSignedRgb": [
+            46.77655797101449,
+            37.36123188405797,
+            32.93373188405797
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79780068728522,
+          "meanSignedRgb": [
+            80.42857142857143,
+            72.02536082474226,
+            68.93946980854197
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 0,
+      "visibility": "hidden",
+      "sha256": [
+        "0fda0452feef2f4df5b9bc8c51aa47df8354834d04e4a19e62998f3a2d78e7d4",
+        "19e61dc6d1098d5c2dc5019da08b8b426c3db4607ca30de61e704dc60548594c"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510538,
+          "meanAbsolute": 139.23118737599205,
+          "meanSignedRgb": [
+            145.7418991815476,
+            136.29135788690476,
+            135.44331473214285
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253349,
+          "meanAbsolute": 116.72385798816568,
+          "meanSignedRgb": [
+            129.25839447731755,
+            113.17217751479289,
+            107.58022879684418
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50314440993789,
+          "meanSignedRgb": [
+            73.99069875776398,
+            63.09764751552795,
+            56.42108695652174
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 97200,
+          "meanAbsolute": 46.368816872427985,
+          "meanSignedRgb": [
+            52.78756172839506,
+            46.54396090534979,
+            39.774927983539094
+          ],
+          "maximum": 179
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.01757246376812,
+          "meanSignedRgb": [
+            46.76449275362319,
+            37.354528985507244,
+            32.93369565217391
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.80008345606284,
+          "meanSignedRgb": [
+            80.43064801178203,
+            72.0277761413844,
+            68.94182621502209
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 1,
+      "visibility": "hidden",
+      "sha256": [
+        "5532c8d1176f00adf257a628b03fb72d0195659e3354639949bb4ef14c960c19",
+        "3fca2ecebf7267bcaff540f1890d183d967a3661ef8c163f799990b4c6677704"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510541,
+          "meanAbsolute": 139.22775421626983,
+          "meanSignedRgb": [
+            145.73717819940475,
+            136.2877027529762,
+            135.4413169642857
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253349,
+          "meanAbsolute": 116.72382642998028,
+          "meanSignedRgb": [
+            129.25846942800788,
+            113.17208678500987,
+            107.58014990138066
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50324016563147,
+          "meanSignedRgb": [
+            73.9908850931677,
+            63.09794254658385,
+            56.42089285714286
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 97200,
+          "meanAbsolute": 46.367884087791495,
+          "meanSignedRgb": [
+            52.78704732510288,
+            46.54394032921811,
+            39.7726646090535
+          ],
+          "maximum": 179
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.01693236714976,
+          "meanSignedRgb": [
+            46.765108695652174,
+            37.35731884057971,
+            32.928369565217395
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79934216985764,
+          "meanSignedRgb": [
+            80.43030927835052,
+            72.02729013254786,
+            68.94042709867452
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 2,
+      "visibility": "hidden",
+      "sha256": [
+        "91cc7197980d975bb177754f95ed004330b8ced920b9ab59d745eb2573c4e216",
+        "25123ede340341bb66c596b6a6afa955944a505cd86f4307c9fb0e3ec2eabf0c"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510565,
+          "meanAbsolute": 139.22494171626985,
+          "meanSignedRgb": [
+            145.73232700892856,
+            136.28400855654763,
+            135.44229910714284
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253349,
+          "meanAbsolute": 116.72326232741618,
+          "meanSignedRgb": [
+            129.25776725838264,
+            113.17136883629192,
+            107.57983826429981
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50350414078675,
+          "meanSignedRgb": [
+            73.99121894409937,
+            63.097725155279505,
+            56.421568322981365
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 97200,
+          "meanAbsolute": 46.36934842249657,
+          "meanSignedRgb": [
+            52.78798353909465,
+            46.54520576131687,
+            39.77485596707819
+          ],
+          "maximum": 179
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.01770531400966,
+          "meanSignedRgb": [
+            46.764384057971014,
+            37.35742753623188,
+            32.931304347826085
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79807560137456,
+          "meanSignedRgb": [
+            80.42870397643594,
+            72.02617083946981,
+            68.93935198821796
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 3,
+      "visibility": "hidden",
+      "sha256": [
+        "9b77c2e35db0d4cd1d9cef7d85bfd4c9b13b94ea595df70deac0c61562c2549b",
+        "bf30a8aa8975f4aa4636ef2608694cbaf643c9b77d83da6b11b223c6ab101356"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510554,
+          "meanAbsolute": 139.2218607390873,
+          "meanSignedRgb": [
+            145.72798921130953,
+            136.27946428571428,
+            135.44204613095238
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253349,
+          "meanAbsolute": 116.72316107823801,
+          "meanSignedRgb": [
+            129.25762524654832,
+            113.17125443786982,
+            107.579775147929
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50365683229813,
+          "meanSignedRgb": [
+            73.99124223602485,
+            63.09799689440994,
+            56.421731366459625
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 97200,
+          "meanAbsolute": 46.36974279835391,
+          "meanSignedRgb": [
+            52.788395061728394,
+            46.545318930041155,
+            39.77551440329218
+          ],
+          "maximum": 179
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.0182729468599,
+          "meanSignedRgb": [
+            46.76565217391305,
+            37.356847826086955,
+            32.93231884057971
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79752577319587,
+          "meanSignedRgb": [
+            80.42815905743741,
+            72.02540500736377,
+            68.93901325478645
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 4,
+      "visibility": "hidden",
+      "sha256": [
+        "8c18aa7ed46e72a7e76a1729a07b5a35b9185b9ad3c1ae3ff172be80c7f5540b",
+        "761fa009e228074e8104b87d66acf77aa6b38c6e2d669762c76b65788642335d"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510538,
+          "meanAbsolute": 139.22260168650794,
+          "meanSignedRgb": [
+            145.72837797619047,
+            136.27919270833334,
+            135.44279017857144
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72311374095989,
+          "meanSignedRgb": [
+            129.2575660749507,
+            113.17122682445759,
+            107.57971203155819
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.5037370600414,
+          "meanSignedRgb": [
+            73.99136645962733,
+            63.09794254658385,
+            56.42190217391305
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 97200,
+          "meanAbsolute": 46.36965706447188,
+          "meanSignedRgb": [
+            52.78869341563786,
+            46.545236625514406,
+            39.77504115226338
+          ],
+          "maximum": 179
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.01863526570048,
+          "meanSignedRgb": [
+            46.76797101449275,
+            37.35713768115942,
+            32.93079710144927
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79758959253805,
+          "meanSignedRgb": [
+            80.42824742268041,
+            72.02524300441826,
+            68.93927835051547
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 5,
+      "visibility": "hidden",
+      "sha256": [
+        "28f7a1aacb77315b4195d1a2aaed6414501876bd9322dcce91e5b8143f8781b6",
+        "4dca07cfe103ed245755186dc55473827a249bcab0abde57f6b62d6e6665698b"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510520,
+          "meanAbsolute": 139.22696676587302,
+          "meanSignedRgb": [
+            145.7343154761905,
+            136.2841201636905,
+            135.4453552827381
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72312031558185,
+          "meanSignedRgb": [
+            129.25760157790927,
+            113.17120710059172,
+            107.57971597633136
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.5032738095238,
+          "meanSignedRgb": [
+            73.99069099378882,
+            63.09776397515528,
+            56.42136645962733
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 97200,
+          "meanAbsolute": 46.36968106995885,
+          "meanSignedRgb": [
+            52.78917695473251,
+            46.54496913580247,
+            39.77489711934157
+          ],
+          "maximum": 179
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.01812801932367,
+          "meanSignedRgb": [
+            46.76905797101449,
+            37.35561594202898,
+            32.92971014492753
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79757486499754,
+          "meanSignedRgb": [
+            80.42835051546392,
+            72.02513991163475,
+            68.93923416789396
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 6,
+      "visibility": "hidden",
+      "sha256": [
+        "85a2a0b7c53dd55f38efecf5573cb7117b1d2afb6700bd9296004f38d1b6fa9d",
+        "c9c36b9d1fc9f1fe300e998c8eea66f1df6a83f049916c2f741ac980279b021e"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510532,
+          "meanAbsolute": 139.2349324156746,
+          "meanSignedRgb": [
+            145.7449609375,
+            136.2939099702381,
+            135.44857142857143
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72312031558185,
+          "meanSignedRgb": [
+            129.25760157790927,
+            113.17120710059172,
+            107.57971597633136
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.5027096273292,
+          "meanSignedRgb": [
+            73.99010869565217,
+            63.09704968944099,
+            56.42097049689441
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 97200,
+          "meanAbsolute": 46.369931412894374,
+          "meanSignedRgb": [
+            52.78995884773663,
+            46.54503086419753,
+            39.77480452674897
+          ],
+          "maximum": 179
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.01863526570048,
+          "meanSignedRgb": [
+            46.77126811594203,
+            37.35547101449276,
+            32.92916666666667
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79766813942072,
+          "meanSignedRgb": [
+            80.42839469808543,
+            72.02518409425626,
+            68.93942562592048
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 7,
+      "visibility": "hidden",
+      "sha256": [
+        "20151f1cf58155198593b3d482987b38e36f1896cdedec65ffbc414b78bb4d9d",
+        "7b8bcdac2d29c4efb8f8db44c57ab2ee9ca6d51ed9010f2cc295bdec2d09ca6a"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510512,
+          "meanAbsolute": 139.24553013392858,
+          "meanSignedRgb": [
+            145.75974144345238,
+            136.30577008928572,
+            135.45253348214285
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72311505588429,
+          "meanSignedRgb": [
+            129.25760157790927,
+            113.17120710059172,
+            107.57970019723867
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50110248447206,
+          "meanSignedRgb": [
+            73.98875,
+            63.09519409937888,
+            56.419363354037266
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 97200,
+          "meanAbsolute": 46.37017489711934,
+          "meanSignedRgb": [
+            52.79033950617284,
+            46.54518518518518,
+            39.775
+          ],
+          "maximum": 179
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.01890096618357,
+          "meanSignedRgb": [
+            46.77217391304348,
+            37.35507246376812,
+            32.929456521739134
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79771723122239,
+          "meanSignedRgb": [
+            80.42849779086893,
+            72.02524300441826,
+            68.93941089837998
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 8,
+      "visibility": "hidden",
+      "sha256": [
+        "34b39e70c53dfc3f68b81c157f8410821a6bfa475a5f340a0dcf586b21d4dc89",
+        "e335cae77e2ad2d08d49a7e6d0333fbe4b9019fd4949eb0e60f586a11916aebe"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510485,
+          "meanAbsolute": 139.25778583829364,
+          "meanSignedRgb": [
+            145.77814360119046,
+            136.3200706845238,
+            135.4579259672619
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72311111111111,
+          "meanSignedRgb": [
+            129.25760157790927,
+            113.17120315581855,
+            107.57969230769231
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50102743271222,
+          "meanSignedRgb": [
+            73.98843944099379,
+            63.095007763975154,
+            56.4196350931677
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 97200,
+          "meanAbsolute": 46.37013031550069,
+          "meanSignedRgb": [
+            52.79038065843621,
+            46.54507201646091,
+            39.77493827160494
+          ],
+          "maximum": 179
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.01888888888889,
+          "meanSignedRgb": [
+            46.77239130434783,
+            37.355,
+            32.92927536231884
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79775650466372,
+          "meanSignedRgb": [
+            80.42854197349043,
+            72.02528718703977,
+            68.93944035346097
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 9,
+      "visibility": "hidden",
+      "sha256": [
+        "6eb6bccc3aefaa63efce32fb534e6c6bcc353aa94d709719616c217e0826975e",
+        "08636aca2853b71d511041696930ddf7b4c843d28d7b65268ba83382d4f4ee88"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510531,
+          "meanAbsolute": 139.26665302579366,
+          "meanSignedRgb": [
+            145.79139694940477,
+            136.33111049107143,
+            135.46201264880952
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72307429322814,
+          "meanSignedRgb": [
+            129.25756213017752,
+            113.17116370808678,
+            107.5796607495069
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.50044772256729,
+          "meanSignedRgb": [
+            73.98758540372671,
+            63.09454192546584,
+            56.41921583850932
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 97200,
+          "meanAbsolute": 46.370065157750346,
+          "meanSignedRgb": [
+            52.79030864197531,
+            46.545,
+            39.77488683127572
+          ],
+          "maximum": 179
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.01893719806763,
+          "meanSignedRgb": [
+            46.77253623188406,
+            37.354927536231884,
+            32.92934782608695
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79776141384389,
+          "meanSignedRgb": [
+            80.42854197349043,
+            72.02533136966127,
+            68.93941089837998
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 10,
+      "visibility": "hidden",
+      "sha256": [
+        "168769447af1ca56aa8ec4c2a5bf32828cfa79ec90e4bf39fc9ba0149ee5a1ed",
+        "433c0d39a048bf6e6a97a7caefc19d7a5ee28787e6dcfeeda8b6d5771bbe9a11"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510512,
+          "meanAbsolute": 139.27314298115078,
+          "meanSignedRgb": [
+            145.80066220238095,
+            136.33890811011904,
+            135.46334449404762
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72310979618672,
+          "meanSignedRgb": [
+            129.25759368836293,
+            113.17119526627219,
+            107.57969625246548
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.49957556935817,
+          "meanSignedRgb": [
+            73.98639751552795,
+            63.094083850931675,
+            56.418245341614906
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 97200,
+          "meanAbsolute": 46.37014403292181,
+          "meanSignedRgb": [
+            52.79043209876543,
+            46.54507201646091,
+            39.774927983539094
+          ],
+          "maximum": 179
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.01892512077295,
+          "meanSignedRgb": [
+            46.77246376811594,
+            37.35503623188406,
+            32.92927536231884
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.7978203240059,
+          "meanSignedRgb": [
+            80.42857142857143,
+            72.02539027982327,
+            68.93949926362298
+          ],
+          "maximum": 136
+        }
+      }
+    },
+    {
+      "frame": 11,
+      "visibility": "hidden",
+      "sha256": [
+        "fcd8ffeed8fe9eede0cbe4b80b15adbb7f360bf3c530db82bb75ff7dcbc4a854",
+        "256b180910853830b68f79b4e7568d6cdfe7f74c8959ea3bfe60bff321694c3a"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "changed": 510509,
+          "meanAbsolute": 139.27832899305557,
+          "meanSignedRgb": [
+            145.80879650297618,
+            136.3447730654762,
+            135.4661086309524
+          ],
+          "maximum": 243
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "changed": 253348,
+          "meanAbsolute": 116.72311374095989,
+          "meanSignedRgb": [
+            129.2575976331361,
+            113.17120315581855,
+            107.57969625246548
+          ],
+          "maximum": 232
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "changed": 128800,
+          "meanAbsolute": 64.49936076604556,
+          "meanSignedRgb": [
+            73.98622670807454,
+            63.09380434782609,
+            56.418051242236025
+          ],
+          "maximum": 207
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "changed": 97200,
+          "meanAbsolute": 46.37017489711934,
+          "meanSignedRgb": [
+            52.79039094650206,
+            46.54512345679012,
+            39.77501028806584
+          ],
+          "maximum": 179
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "changed": 27600,
+          "meanAbsolute": 39.01897342995169,
+          "meanSignedRgb": [
+            46.77253623188406,
+            37.354927536231884,
+            32.929456521739134
+          ],
+          "maximum": 91
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "changed": 67900,
+          "meanAbsolute": 73.79780068728522,
+          "meanSignedRgb": [
+            80.42857142857143,
+            72.02536082474226,
+            68.93946980854197
+          ],
+          "maximum": 136
+        }
+      }
+    }
+  ],
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "irradianceSha256": "f57b41da8b1d8baf65834b09de54896b00e7cbe4ce86b7d39a3ceefd90c7107f",
+  "fixedStepFps": 60,
+  "dimensions": [
+    2560,
+    1440
+  ],
+  "difference": "GI enabled minus disabled; output RGB bytes",
+  "sourceHashOrder": [
+    "enabled",
+    "disabled"
+  ]
+}

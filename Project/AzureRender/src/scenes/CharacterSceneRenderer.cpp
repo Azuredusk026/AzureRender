@@ -1,12 +1,58 @@
+#include "assets/MaterialPixelStorage.hpp"
+#if defined(AZURE_BATCHED_SHADOW_BOUNDS)
+static constexpr unsigned kShadowBoundsTilesPerGroup=8;
+#else
+static constexpr unsigned kShadowBoundsTilesPerGroup=1;
+#endif
+#include "render/SkinnedVertex.hpp"
+#include "render/RecordingWorkerPool.hpp"
+#include "rhi/VulkanRhi.hpp"
+#if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
+static constexpr bool kSurfaceRadianceDiagnostics=true;
+#else
+static constexpr bool kSurfaceRadianceDiagnostics=false;
+#endif
+#if defined(AZURE_SURFACE_RADIANCE_FRAME_SELECTION)
+static constexpr bool kSurfaceRadianceFrameSelection=true;
+#else
+static constexpr bool kSurfaceRadianceFrameSelection=false;
+#endif
+#include "animation/PresentedPose.hpp"
+#include "assets/AssetDeformation.hpp"
+#include "render/StableDepthOrder.hpp"
+#include "animation/ExpressionPose.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
+#include <string_view>
+#include "render/MaterialSampling.hpp"
+#include "render/MaterialUvGradients.hpp"
+#include "render/MaterialPipelinePolicy.hpp"
+#include "render/IrradianceClipmapGpu.hpp"
+#include "render/IrradianceResource.hpp"
+#include "render/ViewFogGpu.hpp"
+#include "render/ViewFogBindingJson.hpp"
+#include "render/FogVolumeData.hpp"
+#include "scene/DirectionalLightSelection.hpp"
+#include "scene/SceneNodeGrouping.hpp"
+#include "assets/MaterialData.hpp"
+#include "assets/MaterialSurfaceProfile.hpp"
+#include "assets/MaterialFrame.hpp"
+#include "render/ResourceAccessProfile.hpp"
+#include "render/ResourceIndexTable.hpp"
+#include "render/PrimitiveOpacity.hpp"
+#include "render/OutlineMaskLayout.hpp"
 
-#include "app/AzureRenderInternal.hpp"
-#include "platform/BinaryFile.hpp"
+#include "render/RenderMath.hpp"
+#include "resources/BinaryFile.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/EnvironmentAsset.hpp"
 #include "render/ComputePass.hpp"
 #include "render/CascadedShadow.hpp"
+#include "scene/TransformParity.hpp"
+#include "render/CameraProjection.hpp"
+#include "render/ReferenceFmaShader.hpp"
+#include "render/StrictFragmentShader.hpp"
+#include "render/SceneReferenceObjectVisibility.hpp"
 
 #include <GLFW/glfw3.h>
 #include <stb_image.h>
@@ -16,6 +62,7 @@
 #include <cmath>
 #include <cstddef>
 #include <cstring>
+#include <cstdlib>
 #include <fstream>
 #include <iomanip>
 #include <limits>
@@ -23,14 +70,63 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 using namespace azurerender::internal;
 
 namespace azurerender {
+#include "CharacterViewFog.inc"
+#include "CharacterMaterialUv.inc"
+#include "CharacterComputedMaterialView.inc"
+#include "CharacterReferenceSceneDepth.inc"
+CharacterSceneRenderer::CharacterSceneRenderer() = default;
+CharacterSceneRenderer::~CharacterSceneRenderer() = default;
 
 namespace {
 
-static_assert(sizeof(AssetVertex) == 26 * sizeof(std::uint32_t));
+std::vector<std::uint32_t> materialOriginNodes(const LoadedAsset& mesh) {
+    std::vector<std::uint32_t> result;
+    for(const auto& material:mesh.materials)if(material.nprDiffuse.rimOrigin.present) {
+        const auto node=material.nprDiffuse.rimOrigin.node;
+        if(node>=mesh.nodes.size())throw std::invalid_argument("Material rim origin node is outside the model");
+        result.push_back(node);
+    }
+    std::sort(result.begin(),result.end());result.erase(std::unique(result.begin(),result.end()),result.end());
+    return result;
+}
+
+std::uint64_t stableSceneLightId(std::string_view id){
+    std::uint64_t result=1469598103934665603ULL;
+    for(const unsigned char value:id){result^=value;result*=1099511628211ULL;}
+    return result;
+}
+
+static_assert(sizeof(AssetVertex) == 27 * sizeof(std::uint32_t));
+
+Matrix4 primitiveGizmoTransform(const RecordingGizmoState& state,std::size_t primitive) {
+    if(!state.active||state.selectedPrimitive!=static_cast<std::int32_t>(primitive))
+        return scale(1.F,1.F,1.F);
+    constexpr float radians=3.14159265358979323846F/180.F;
+    return multiply(translation(state.translation[0],state.translation[1],state.translation[2]),
+        multiply(multiply(rotationX(state.rotation[0]*radians),rotationY(state.rotation[1]*radians)),
+            multiply(rotationZ(state.rotation[2]*radians),scale(state.scale[0],state.scale[1],state.scale[2]))));
+}
+
+bool primitiveMirroredTransform(const Matrix4& model,const RecordingGizmoState& gizmo,std::size_t primitive) {
+    const bool gizmoMirrored=gizmo.active&&gizmo.selectedPrimitive==static_cast<std::int32_t>(primitive)
+        &&gizmo.scale[0]*gizmo.scale[1]*gizmo.scale[2]<0;
+    return scene::mirroredTransform(model)!=gizmoMirrored;
+}
+
+std::uint64_t materialSourcePixelBytes(const LoadedAsset& asset) {
+    std::uint64_t bytes=0;
+    for(const auto& material:asset.materials) {
+        for(std::size_t i=0;i<static_cast<std::size_t>(AssetMaterial::PixelKind::OutlineMask);++i)
+            bytes+=materialPixelLogicalBytes(material,static_cast<AssetMaterial::PixelKind>(i));
+        if(material.outlineSurface.present)bytes+=materialPixelLogicalBytes(material,AssetMaterial::PixelKind::OutlineMask);
+    }
+    return bytes;
+}
 
 Vector3 estimateFootPivot(const LoadedAsset& asset) {
     const float height = asset.boundsMax[1] - asset.boundsMin[1];
@@ -194,6 +290,8 @@ void appendShowcasePlatform(LoadedAsset& asset, const Vector3& footPivot) {
             {top, nextTop, bottom, bottom, nextTop, nextBottom});
     }
 
+    if(!asset.texcoord1.empty())asset.texcoord1.resize(asset.vertices.size(),{0,0});
+    if(!asset.vertexColors.empty())asset.vertexColors.resize(asset.vertices.size(),{1,1,1,1});
     asset.primitives.push_back({
         firstIndex,
         static_cast<std::uint32_t>(asset.indices.size()) - firstIndex,
@@ -213,6 +311,14 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
     SceneRendererCapabilities caps;
     caps.requiresSceneDepth = true;
     caps.requiresSceneNormal = true;
+    caps.supportsProjectionOffset=true;
+    caps.supportsMotionVectors=true;
+    caps.supportsMultisampleShading=true;
+    caps.supportsMaterialDisplayTransform=true;
+    caps.supportsMaterialLightingReception=true;
+    caps.supportsNprRampComposition=true;
+    caps.supportsMaterialCoverage=true;
+    caps.supportsReferenceCamera=true;
     caps.diagnosticViewNames = {
         "Beauty",
         "World Normal",
@@ -223,7 +329,11 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
     return caps;
 }
 
-void CharacterSceneRenderer::onLoad(const RenderContext& context) {
+void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
+    sceneTransforms_.clear();
+    const auto prepareStart=std::chrono::steady_clock::now();
+    loadTimings_={};decodedMaterialPixelBytes_=0;
+    shadowCascadeResolution_=context.shadowMapSize/2;
     allocator_ = context.allocator;
     if (allocator_ == nullptr) {
         throw std::runtime_error(
@@ -233,6 +343,8 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
     if (rhi_ == nullptr) {
         throw std::runtime_error("RenderContext must carry the engine RHI");
     }
+    materialTextureCache_=std::make_unique<SampledTextureCache>(*allocator_,*rhi_);
+    materialPixelPool_=std::make_unique<ImmutableBytePool>();
     bindlessTextures_ = context.bindlessTextures;
     cullingEnabled_ = context.cullingEnabled;
     computeIblEnabled_ = context.rgba16fStorageImage;
@@ -240,7 +352,13 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
     shaderDirectory_ = context.shaderDirectory;
     qaInstanceCount_ = std::max(context.qaInstanceCount, 1U);
     renderSettings_ = context.renderSettings;
+    referenceCameraPrepared_=context.referenceCameraPrograms||context.referenceSceneDepthPrograms||context.referenceSceneVisibilityPrograms
+        ||context.referenceSceneObjectVisibilityPrograms
+        ||(renderSettings_->cameraView&&renderSettings_->cameraView->referenceCalibration.has_value());
+    faceSdfPrepared_=renderSettings_->faceSdfFeature;platformPrepared_=renderSettings_->showcasePlatformFeature;
+    faceSdfTextureCount_=0;
     gpuCullingEnabled_ = context.gpuCulling;
+    visibilityPrototype_ = context.visibilityPrototype && context.gpuCulling;
     multiDrawIndirect_ = context.multiDrawIndirect;
     maxDrawIndirectCount_ = std::max(1U, context.maxDrawIndirectCount);
     rampAtlasPath_ = context.rampAtlasPath;
@@ -253,10 +371,12 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
         throw std::runtime_error("Scene must reference at least one asset");
     }
     scene_ = context.scene;
+    sceneWorldCoordinates_ = context.sceneWorldCoordinates;
     const std::string resolvedAssetPath = context.scene.resources[0].path;
-    asset_ = loadGltfAsset(resolvedAssetPath);
+    asset_ = context.preparedMeshes && context.preparedMeshes->count(std::filesystem::u8path(resolvedAssetPath).lexically_normal().generic_u8string())
+        ? *context.preparedMeshes->at(std::filesystem::u8path(resolvedAssetPath).lexically_normal().generic_u8string()) : loadGltfAsset(resolvedAssetPath);
     for (const AssetMaterial& material : asset_.materials) {
-        if (!material.faceSdf.present) {
+        if (!faceSdfPrepared_||!material.faceSdf.present) {
             continue;
         }
         if (faceSdfHeadNode_.has_value()
@@ -270,7 +390,8 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
             "Face SDF: material=" + material.name
                 + ", texture=" + std::to_string(material.faceSdf.width) + 'x'
                 + std::to_string(material.faceSdf.height)
-                + ", headNode=" + material.faceSdf.headNodeName);
+                + ", headNode=" + material.faceSdf.headNodeName
+                + ", schemaVersion=" + std::to_string(material.faceSdf.schemaVersion));
     }
     if (faceSdfHeadNode_.has_value()
         && *faceSdfHeadNode_ < asset_.nodeWorldMatrices.size()) {
@@ -284,10 +405,10 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
             bindZ[0], bindZ[1], bindZ[2],
         };
         azurerender::RuntimeDiagnostics::instance().print(
-            "asset", "Face SDF light frame: bind-relative head rotation");
+            "asset", "Face SDF light frame: evaluated per instance");
     }
     footPivot_ = estimateFootPivot(asset_);
-    appendShowcasePlatform(asset_, footPivot_);
+    if(platformPrepared_)appendShowcasePlatform(asset_, footPivot_);
     azurerender::RuntimeDiagnostics::instance().print(
         "asset",
         "Turntable foot pivot: [" + std::to_string(footPivot_[0]) + ", "
@@ -342,39 +463,260 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
     animationTime_ = 0.0F;
     animationPlaying_ = true;
 
-    // GPU resources (mirrors the former application init order).
-    createVertexBuffer();
-    createIndexBuffer();
-    createTexture();
-    createAdditionalResources();
-    createUniformBuffers();
-    createJointBuffers();
-    createComputeSkinningResources();
-    createOitIndexBuffers();
-    createDescriptorSetLayout();
-    createDescriptorPool();
-    createDescriptorSets();
-    createGraphicsPipeline(context);
+    const scene::ResourceLayout layout(scene_);
+    loadedResourceMeshKeys_=layout.identities;
+    applyMaterialBindings(asset_,layout.materials.at(0));
+    jointBounds_.clear();jointBounds_.push_back(JointBounds::build(asset_));
+    const auto enqueue=[this](std::string label,double& elapsed,std::function<void()> action,bool alwaysReport=false) {
+        loadJobs_.push_back([label=std::move(label),&elapsed,action=std::move(action),alwaysReport] {
+            const auto start=std::chrono::steady_clock::now();action();
+            const auto ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();
+            elapsed+=ms;
+            if(alwaysReport||ms>=1000)RuntimeDiagnostics::instance().info("render","Scene load "+label+": "+std::to_string(ms)+" ms");
+        });
+    };
+    enqueue("mesh 0",loadTimings_.meshUploadMs,[this]{createVertexBuffer();});
+    const auto materials=[this,&enqueue](LoadedAsset& mesh,std::vector<GpuMaterial>& gpu,std::size_t key){
+        gpu.resize(mesh.materials.size());
+        for(auto& material:mesh.materials)prepareMaterialPixels(material,*materialPixelPool_);
+        for(std::size_t index=0;index<mesh.materials.size();++index)for(unsigned slot=0;slot<kMaterialTextureSlots;++slot)
+            enqueue("material resource="+std::to_string(key)+" material="+std::to_string(index)+" slot="+std::to_string(slot),
+                loadTimings_.materialUploadMs,[this,&mesh,&gpu,index,slot]{uploadMaterialTexture(mesh,gpu,index,slot);});
+    };
+    materials(asset_,gpuMaterials_,0);
+    decodedMaterialPixelBytes_=materialSourcePixelBytes(asset_);
+    enqueue("shared textures",loadTimings_.sharedTexturesMs,[this]{createTexture(false);},true);
+    std::uint32_t textureBase=kSharedTextureSlots+kMaterialTextureSlots*static_cast<std::uint32_t>(asset_.materials.size());
+    std::size_t materialBase=asset_.materials.size();
+    for(std::size_t key=1;key<layout.paths.size();++key){
+        auto resource=std::make_unique<AdditionalResource>();resource->path=layout.paths[key];
+        resource->asset=context.preparedMeshes && context.preparedMeshes->count(resource->path)
+            ? *context.preparedMeshes->at(resource->path):loadGltfAsset(resource->path);
+        applyMaterialBindings(resource->asset,layout.materials.at(key));
+        resource->textureBase=textureBase;resource->globalMaterialBase=materialBase;
+        textureBase+=kMaterialTextureSlots*static_cast<std::uint32_t>(resource->asset.materials.size());materialBase+=resource->asset.materials.size();
+        auto* item=resource.get();jointBounds_.push_back(JointBounds::build(item->asset));
+        decodedMaterialPixelBytes_+=materialSourcePixelBytes(item->asset);
+        enqueue("mesh "+std::to_string(key),loadTimings_.meshUploadMs,[this,item]{createMeshBuffers(item->asset,item->vertexBuffer,item->indexBuffer,item->vertexColorBuffer);});
+        materials(item->asset,item->gpuMaterials,key);additionalResources_.push_back(std::move(resource));
+        if(key%16==0||key+1==layout.paths.size())loadJobs_.push_back([this,key] {
+            const auto& stats=materialTextureCache_->statistics();
+            RuntimeDiagnostics::instance().info("render","Scene material progress: resource="+std::to_string(key)
+                +", elapsedMs="+std::to_string(loadTimings_.materialUploadMs)+", hashMs="+std::to_string(stats.hashMs)
+                +", mipMs="+std::to_string(stats.mipMs)+", uploadMs="+std::to_string(stats.uploadMs)
+                +", transferredBytes="+std::to_string(stats.transferredPixelBytes)+", discardedBytes="+std::to_string(stats.discardedPixelBytes));
+        });
+    }
+    const auto hasProjection=[](const LoadedAsset& mesh) {
+        return std::any_of(mesh.materials.begin(),mesh.materials.end(),[](const AssetMaterial& material){return material.outlineSurface.present;});
+    };
+    outlineProjectionEnabled_=hasProjection(asset_);
+    for(const auto& resource:additionalResources_)outlineProjectionEnabled_|=hasProjection(resource->asset);
+    if(outlineProjectionEnabled_)enqueue("outline projection",loadTimings_.materialUploadMs,[this,context] {
+        std::vector<LoadedAsset*> meshes{&asset_};
+        for(auto& resource:additionalResources_)meshes.push_back(&resource->asset);
+        for(auto* mesh:meshes)for(auto& material:mesh->materials)if(material.outlineSurface.present)
+            restoreMaterialPixel(material,AssetMaterial::PixelKind::OutlineMask);
+        const auto data=buildOutlineProjectionData(meshes,context.descriptorLimits.maxStorageBufferRange);
+        outlineProjection_=std::make_unique<OutlineProjectionResources>(*allocator_,context.descriptorLimits.maxStorageBufferRange);
+        outlineProjection_->initialize(data,*materialTextureCache_);
+    });
+    // The full material inventory must fit an ordinary descriptor layout.
+    // Combined image samplers consume both sampler and sampled-image limits;
+    // The fragment stage also carries one uniform and six storage buffers.
+    const std::uint64_t indexedSlots = kSharedTextureSlots
+        + std::uint64_t{kMaterialTextureSlots} * totalMaterialCount();
+    probeFieldActive_=scene_.reflectionProbe.field.has_value()&&!scene_.reflectionProbe.texture.empty();
+    scene_.viewFog.validate();
+    const std::uint32_t fogSlots=scene_.viewFog.enabled?1U:0U;
+    if(fogSlots&&!rhi_->supportsSampledImage(VK_FORMAT_R16G16B16A16_SFLOAT,true))
+        throw std::runtime_error("View fog requires linear RGBA16F sampling");
+    const auto& limits = context.descriptorLimits;
+    if((limits.maxPerStageDescriptorStorageBuffers&&limits.maxPerStageDescriptorStorageBuffers<(probeFieldActive_?7U:6U)+fogSlots)
+        ||(limits.maxDescriptorSetStorageBuffers&&limits.maxDescriptorSetStorageBuffers<(outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+fogSlots))
+        throw std::runtime_error("Scene storage buffers cannot fit the selected material layout");
+    irradianceBufferBudget_=limits.maxStorageBufferRange;
+    DeviceCapabilities capabilities;
+    capabilities.descriptorIndexingSupported=context.bindlessTextures;
+    capabilities.descriptorIndexingEnabled=context.bindlessTextures;
+    capabilities.limits=limits;
+    irradianceClipmapActive_=!scene_.irradianceVolume.asset.empty()
+        &&readIrradianceResourceKind(std::filesystem::u8path(scene_.irradianceVolume.asset))==IrradianceResourceKind::Clipmap;
+    const std::uint32_t irradianceSlots=irradianceClipmapActive_?6U:0U;
+    ResourceAccessRequirements requirements{indexedSlots+5+irradianceSlots+2*fogSlots,16+irradianceSlots+2*fogSlots,7+(probeFieldActive_?1U:0U)+fogSlots};
+    requirements.separateImageSlots=requirements.fixedSeparateImageSlots=1;
+    requirements.separateSamplerSlots=requirements.fixedSeparateSamplerSlots=1;
+    requirements.fragmentColorAttachments=sceneColorAttachmentCount(context);
+    requirements.vertexCombinedImageSamplers=outlineProjectionEnabled_?totalMaterialCount():0;
+    requirements.fixedVertexCombinedImageSamplers=outlineProjectionEnabled_?1:0;
+    requirements.vertexBuffers=outlineProjectionEnabled_?7:6;
+    requirements.descriptorSetBuffers=(outlineProjectionEnabled_?13U:12U)+(probeFieldActive_?1U:0U)+fogSlots;
+    auto access=ResourceAccessProfile::select(capabilities,requirements);
+    auto objectRequirements=requirements;
+    objectRequirements.sampledImageSlots+=3;objectRequirements.fixedSampledImageSlots+=3;
+    objectRequirements.separateImageSlots+=3;objectRequirements.fixedSeparateImageSlots+=3;
+    const auto objectAccess=ResourceAccessProfile::select(capabilities,objectRequirements);
+    const bool objectRequested=std::any_of(scene_.nodes.begin(),scene_.nodes.end(),[](const auto& node){return node.objectShadow&&node.objectShadow->enabled;});
+    objectShadowMaxDimension_=limits.maxImageDimension2D;
+    const bool objectFormat=rhi_->supportsSampledImage(VK_FORMAT_D16_UNORM,true)
+        &&(!objectShadowMaxDimension_||objectShadowMaxDimension_>=ObjectShadowAtlas::kWidth);
+    if(objectRequested){
+        if(!objectFormat||objectAccess.mode==ResourceAccessMode::Unsupported)
+            throw std::runtime_error("Object shadows require sampled D16, a 4096 atlas and three additional sampled-image slots: "+objectAccess.diagnostic);
+        access=objectAccess;
+    }
+    objectShadowPrepared_=objectFormat&&objectAccess.mode!=ResourceAccessMode::Unsupported&&objectAccess.mode==access.mode;
+    if(access.mode==ResourceAccessMode::Unsupported) throw std::runtime_error(access.diagnostic);
+#if defined(AZURE_SURFACE_RADIANCE_PROGRAMS)
+    auto radianceRequirements=objectShadowPrepared_?objectRequirements:requirements;
+    if(kSurfaceRadianceDiagnostics){++radianceRequirements.fragmentBuffers;++radianceRequirements.descriptorSetBuffers;}
+    if(kSurfaceRadianceFrameSelection){++radianceRequirements.fragmentBuffers;++radianceRequirements.descriptorSetBuffers;
+        ++radianceRequirements.sampledImageSlots;++radianceRequirements.fixedSampledImageSlots;}
+    radianceRequirements.sampledImageSlots+=4;radianceRequirements.fixedSampledImageSlots+=4;
+    radianceRequirements.fragmentColorAttachments=std::max<std::uint64_t>(6,radianceRequirements.fragmentColorAttachments);
+    const auto plainOrdinary=[](const LoadedAsset& mesh){return std::any_of(mesh.primitives.begin(),mesh.primitives.end(),[&](const AssetPrimitive& primitive){
+        if(!primitive.indexCount||primitive.materialIndex>=mesh.materials.size())return false;
+        const auto& material=mesh.materials[primitive.materialIndex];
+        return ordinaryOpaqueMaterial(material)&&!extendedMaterialLighting(material)&&!material.coverageTexture.present;});};
+    bool hasRadianceMaterial=plainOrdinary(asset_);for(const auto& resource:additionalResources_)hasRadianceMaterial|=plainOrdinary(resource->asset);
+    surfaceRadianceCapable_=hasRadianceMaterial&&context.fragmentPrimitiveIdentity&&context.fragmentQuadControl&&limits.maxColorAttachments>=6
+        &&context.renderSettings&&context.renderSettings->sceneLightingEnabled
+        &&ResourceAccessProfile::select(capabilities,radianceRequirements).mode==access.mode
+        &&SurfaceRadianceCache::supported(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight));
+#else
+    surfaceRadianceCapable_=false;
+#endif
+    shadowHistoryCapable_=false;
+#if defined(AZURE_SHADOW_HISTORY_PROGRAMS)
+    auto historyRequirements=objectShadowPrepared_?objectRequirements:requirements;
+    historyRequirements.fragmentBuffers+=3;historyRequirements.descriptorSetBuffers+=3;
+    shadowHistoryCapable_=!surfaceRadianceCapable_&&context.fragmentPrimitiveIdentity&&context.fragmentStorageAtomics
+        &&context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT
+        &&limits.maxPerStageDescriptorStorageBuffers>=historyRequirements.fragmentBuffers
+        &&limits.maxDescriptorSetStorageBuffers>=historyRequirements.descriptorSetBuffers
+        &&std::uint64_t(context.renderExtent.width)*context.renderExtent.height*8<=limits.maxStorageBufferRange
+        &&96+8*std::max<std::uint64_t>(qaInstanceCount_,scene_.nodes.size())<=limits.maxStorageBufferRange
+        &&ResourceAccessProfile::select(capabilities,historyRequirements).mode==access.mode
+        &&ShadowHistoryCache::fits(context.renderExtent,2,1);
+#endif
+    bindlessTextures_ = access.mode==ResourceAccessMode::Indexed;
+    azurerender::RuntimeDiagnostics::instance().info(
+        "render", "Character texture access: "
+            + std::string(bindlessTextures_ ? "indexed" : "fixed")
+            + ", requested slots=" + std::to_string(indexedSlots)
+            + ", stage sampler limit="
+            + std::to_string(limits.maxPerStageDescriptorSamplers));
+    const bool referenceObjectRaster=referenceObjectVisibilityRequested(context);
+    enqueue("buffers",loadTimings_.buffersMs,[this,referenceObjectRaster,maximumSamplerLodBias=limits.maxSamplerLodBias]{
+        loadedBindPoses_.clear();loadedBindPoses_.reserve(additionalResources_.size()+1);
+        loadedBindPoses_.push_back(std::make_shared<const AssetPose>(bindAnimationPose(asset_)));
+        for(const auto& resource:additionalResources_)loadedBindPoses_.push_back(std::make_shared<const AssetPose>(bindAnimationPose(resource->asset)));
+        loadedAnimations_.clear();loadedAnimations_.reserve(additionalResources_.size()+1);
+        loadedAnimations_.emplace_back(asset_);
+        for(const auto& resource:additionalResources_)loadedAnimations_.emplace_back(resource->asset);
+        createUniformBuffers(referenceObjectRaster,maximumSamplerLodBias);createJointBuffers();
+        if(scene_.viewFog.enabled)viewFog_=std::make_unique<ViewFogState>(*rhi_,scene_.viewFog,static_cast<unsigned>(kMaxFramesInFlight));
+    },true);
+    enqueue("skinning",loadTimings_.skinningMs,[this]{createComputeSkinningResources();createOitIndexBuffers();},true);
+    enqueue("descriptors",loadTimings_.descriptorsMs,[this,context]{createOverlayDepth(context);if(objectShadowPrepared_){objectShadowAtlas_=std::make_unique<ObjectShadowAtlas>(*rhi_);objectShadowAtlas_->initialize();}for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+(kShadowBoundsTilesPerGroup==8?"/shadow_bounds_batch.comp.spv":"/shadow_bounds.comp.spv")),shadowImageView_,shadowSampler_,context.shadowMapSize,objectShadowPrepared_?kObjectShadowCapacity:0,kShadowBoundsTilesPerGroup);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();},true);
+    if (context.backgroundPipelinePreparation) {
+        graphicsPreparationContext_ = context;
+    } else {
+        enqueue("pipelines",loadTimings_.pipelinesMs,[this,context]{createGraphicsPipeline(context);initializeMotion(context);buildSceneState();},true);
+    }
+    loadTimings_.cpuPrepareMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-prepareStart).count();
+    RuntimeDiagnostics::instance().info("render","Scene load CPU preparation: "+std::to_string(loadTimings_.cpuPrepareMs)
+        +" ms, materialPixelBytes="+std::to_string(decodedMaterialPixelBytes_));
+}
 
+void CharacterSceneRenderer::onLoad(const RenderContext& context){
+    while(!prepareLoad(context,std::numeric_limits<double>::max())){}
+    RuntimeDiagnostics::instance().info("render","Optional resources: faceSdfTextures="+std::to_string(faceSdfTextureCount_)+", showcasePlatform="+(platformPrepared_?"true":"false"));
+}
+bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double budgetMs){
+    const auto start=std::chrono::steady_clock::now();
+    if(!loadInitialized_){loadInitialized_=true;preparationWorkers_=context.preparationWorkers;initializeLoad(context);}
+    do{
+        if(loadJobs_.empty())break;
+        auto job=std::move(loadJobs_.front());loadJobs_.pop_front();job();
+    }while(std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count()<budgetMs);
+    if (!loadJobs_.empty() || !finishPreparedGraphics())return false;
+    materialTextureCache_->seal();
+    return true;
+}
+bool CharacterSceneRenderer::finishPreparedGraphics() {
+    if (!graphicsPreparationContext_)return true;
+    if (!graphicsPreparation_.valid()) {
+        graphicsPreparation_ = std::async(std::launch::async, [this, context=*graphicsPreparationContext_] {
+            const auto start=std::chrono::steady_clock::now();
+            createGraphicsPipeline(context);
+            loadTimings_.pipelinesMs=std::chrono::duration<double,std::milli>(
+                std::chrono::steady_clock::now()-start).count();
+        });
+    }
+    if (graphicsPreparation_.wait_for(std::chrono::milliseconds(0)) != std::future_status::ready)
+        return false;
+    graphicsPreparation_.get();
+    initializeMotion(*graphicsPreparationContext_);
     buildSceneState();
-
+    frameRenderSettings_=*graphicsPreparationContext_->renderSettings;
+    renderSettings_=&frameRenderSettings_;
+    graphicsPreparationContext_.reset();
+    return true;
+}
+bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
+    if(referenceDepthRequested(context)!=static_cast<bool>(referenceSceneDepth_))return false;
+    if(referenceSceneDepth_&&referenceSceneDepth_->visibilityInputs()!=referenceVisibilityRequested(context))return false;
+    if(referenceObjectVisibilityRequested(context)!=static_cast<bool>(referenceObjectVisibility_))return false;
+    if(referenceObjectVisibility_&&referenceObjectVisibilityNumerics_!=context.referenceObjectVisibilityNumerics)return false;
+    if(!objectShadowPrepared_&&std::any_of(context.scene.nodes.begin(),context.scene.nodes.end(),
+        [](const auto& node){return node.objectShadow&&node.objectShadow->enabled;}))return false;
+    if(scene_.reflectionProbe.texture!=context.scene.reflectionProbe.texture)return false;
+    if(scene_.reflectionProbe.field.has_value()!=context.scene.reflectionProbe.field.has_value())return false;
+    if(scene_.reflectionProbe.field&&scene_.reflectionProbe.field->gpuRows({1,1,0,0},false)!=context.scene.reflectionProbe.field->gpuRows({1,1,0,0},false))return false;
+    if(scene_.irradianceVolume.asset!=context.scene.irradianceVolume.asset)return false;
+    if(nlohmann::json(scene_.viewFog)!=nlohmann::json(context.scene.viewFog))return false;
+    if(context.renderSettings->faceSdfFeature!=faceSdfPrepared_||context.renderSettings->showcasePlatformFeature!=platformPrepared_)return false;
+    const scene::ResourceLayout layout(context.scene);
+    if(scene::ResourceLayout(scene_).keys!=layout.keys)return false;
+    auto identities=layout.identities;
+    scene_=context.scene;loadedResourceMeshKeys_=std::move(identities);
+    animationIndex_=0;animationTime_=0;++temporalSceneGeneration_;temporalView_.clear();motionPoses_.clear();return true;
 }
 
 void CharacterSceneRenderer::onSwapchainRecreate(
     const RenderContext& context) {
+    temporalView_.clear();
+    motionPoses_.clear();motionPass_.reset();
+    gpuTransparentSort_.reset();gpuTransparentTickets_={};gpuTransparentAttempted_=false;gpuTransparentFallback_.clear();
     renderSettings_ = context.renderSettings;
     // The scene render pass is recreated by the engine; the character
     // pipelines reference it and must be rebuilt.
     destroyGraphicsPipelinesForRecreate();
+    destroyOverlayDepth();createOverlayDepth(context);
+    if(descriptorPool_!=VK_NULL_HANDLE)rhi_->destroyDescriptorPool(descriptorPool_);
+    createDescriptorPool();createDescriptorSets();
     createGraphicsPipeline(context);
+    initializeMotion(context);
 }
 
 void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
+    if (frame.sceneSnapshot != nullptr) {
+        // GPU resources retain their load-time ordering; runtime nodes and
+        // lights are refreshed before uniforms, culling and draw snapshots.
+        scene_.nodes = frame.sceneSnapshot->nodes;
+        scene_.lights = frame.sceneSnapshot->lights;
+        scene_.reflectionProbe = frame.sceneSnapshot->reflectionProbe;
+        scene_.irradianceVolume = frame.sceneSnapshot->irradianceVolume;
+    }
     if (frame.renderSettings != nullptr) {
         frameRenderSettings_ = *frame.renderSettings;
         renderSettings_ = &frameRenderSettings_;
     }
+    if(ellipseCoverageNeeded_&&renderSettings_&&(renderSettings_->antiAliasing==3||renderSettings_->antiAliasing==4))
+        throw std::invalid_argument("coverageTexture ellipse-major requires single-sample spatial rendering");
     currentFrame_ = frame.currentFrame;
+    if(surfaceRadiance_)surfaceRadiance_->beginStatisticsFrame(static_cast<unsigned>(currentFrame_));
     cameraPosition_ = {frame.cameraPosition[0], frame.cameraPosition[1], frame.cameraPosition[2]};
     cameraTarget_ = {frame.cameraTarget[0], frame.cameraTarget[1], frame.cameraTarget[2]};
     rotationAngle_ = frame.rotationAngle;
@@ -388,25 +730,25 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     qaEffectEnabled_ = frame.qaEffectEnabled;
     qaHarnessEnabled_ = frame.qaHarnessEnabled;
     updateUniformBuffer(frame);
+    if(screenReflectionPrepared())publishScreenReflectionOutput(static_cast<unsigned>(currentFrame_));
     rebuildSceneInstances();
+    prepareShadowHistory();
     prepareTransparentIndices();
-    opaqueRecordingSpans_.clear();
-    if (gpuCullingFrames_[currentFrame_]) {
-        for (const auto& instance : sceneInstances_) {
-            if (!opaqueRecordingSpans_.empty()
-                && opaqueRecordingSpans_.back()[0] == instance.meshKey
-                && opaqueRecordingSpans_.back()[1] + opaqueRecordingSpans_.back()[2] == instance.sourceIndex)
-                ++opaqueRecordingSpans_.back()[2];
-            else opaqueRecordingSpans_.push_back({instance.meshKey, instance.sourceIndex, 1});
-        }
-    } else {
-        opaqueRecordingSpans_ = visibleSpansByMeshKey_;
-    }
+    prepareConservativeOcclusion();
+    prepareRadianceSelection();
+    // CPU visibility already participates in this renderer. Preserve stable
+    // GPU command slots while omitting known-empty runs from main submission.
+    opaqueRecordingSpans_ = visibleSpansByMeshKey_;
     buildSceneState();
     std::vector<std::uint32_t> visibleIndices;
     visibleIndices.reserve(visibleInstances_.size());
     for (const auto* instance : visibleInstances_) visibleIndices.push_back(instance->sourceIndex);
     RecordingBufferSet recordingBuffers;
+    if(const auto& occlusion=conservativeFrames_[currentFrame_];occlusion.ticket){
+        recordingBuffers.conservativeIndirect=occlusion.commands->output(0).buffer;
+        if(occlusion.selectionTicket){recordingBuffers.radianceSelectionIndirect=occlusion.selection->output(0).buffer;recordingBuffers.radianceFastOffset=occlusion.selection->fastOffset();}
+        recordingBuffers.conservativeOffsets=std::move(conservativeOffsets_);recordingBuffers.conservativeSlots=std::move(conservativeSlots_);
+    }
     recordingBuffers.vertices.reserve(meshResourceCount_);
     recordingBuffers.indices.reserve(meshResourceCount_);
     recordingBuffers.multiDrawIndirect = multiDrawIndirect_;
@@ -420,21 +762,205 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     for (std::uint32_t key = 0; key < meshResourceCount_; ++key) {
         recordingBuffers.vertices.push_back(renderVertexBuffer(key, static_cast<std::uint32_t>(currentFrame_)).buffer);
         recordingBuffers.indices.push_back(renderIndexBuffer(key).buffer);
+        const auto color=key==0?vertexColorBuffer_.buffer:additionalResources_[key-1]->vertexColorBuffer.buffer;
+        recordingBuffers.vertexColors.push_back(color?color:whiteVertexColorBuffer_.buffer);
     }
-    if (!oitIndexBuffers_.empty()) recordingBuffers.transparentIndices = oitIndexBuffers_[currentFrame_].buffer;
+    if(gpuTransparentTickets_[currentFrame_])recordingBuffers.transparentIndices=gpuTransparentSort_->indices(static_cast<unsigned>(currentFrame_)).buffer;
+    else if (!oitIndexBuffers_.empty()) recordingBuffers.transparentIndices = oitIndexBuffers_[currentFrame_].buffer;
+    std::vector<std::vector<std::array<std::uint32_t,3>>> shadowViews;
+    for(const auto& frustum:shadowCascadeFrusta_)
+        shadowViews.push_back(scene::visibleInstanceSpans(sceneInstances_,frustum,cullingEnabled_));
+    std::vector<std::vector<float>> nodeOpacities;
+    nodeOpacities.reserve(sceneInstances_.size());
+    for (const auto& instance : sceneInstances_)
+        nodeOpacities.push_back(instancePoses_.at(instance.sourceIndex).pose->nodeWorldOpacities);
+    prepareOutlineMaskResources(nodeOpacities,recordingBuffers);
     instanceSnapshot_ = std::make_shared<const SceneInstanceSnapshot>(
         std::move(sceneInstances_), std::move(visibleIndices), std::move(opaqueRecordingSpans_),
         std::move(visibleShadowSpansByMeshKey_), std::move(indirectInstanceOffsets_), std::move(transparentIndexOffsets_), std::move(visibleSpansByMeshKey_), *renderSettings_,
         gpuCullingFrames_[currentFrame_] ? gpuCullingFrames_[currentFrame_]->output().buffer : VK_NULL_HANDLE, static_cast<std::uint32_t>(currentFrame_),
-        RecordingGizmoState{selectedPrimitiveIndex_, gizmoActive_, gizmoTranslation_, gizmoRotation_, gizmoScale_}, std::move(recordingBuffers));
+        RecordingGizmoState{selectedPrimitiveIndex_, gizmoActive_, gizmoTranslation_, gizmoRotation_, gizmoScale_}, std::move(recordingBuffers),std::move(shadowViews),std::move(nodeOpacities),std::move(objectShadowPages_),materialOriginInstances_);
     visibleInstances_.clear();
+    prepareMotion();
+}
+
+void CharacterSceneRenderer::ensureInstanceCapacity() {
+    // The host has retired this frame slot's fence before updateFrame.
+    // Grow only its storage; the other slots keep their in-flight buffers.
+    VkDeviceSize joints=0,vertices=0,morphBytes=0;
+    for(const auto& instance:sceneInstances_){
+        const auto& mesh=instance.meshKey==0?asset_:additionalResources_[instance.meshKey-1]->asset;
+        joints+=mesh.jointMatrices.size()*sizeof(std::array<float,16>);
+        vertices+=mesh.vertices.size()*sizeof(GpuSkinnedVertex);
+        morphBytes+=morphGpuMeshes_.at(instance.meshKey).weightCount*sizeof(float);
+    }
+    if(morphBytes>kMorphGpuBudgetBytes)throw std::runtime_error("Instance morph weights exceed 128 MiB frame budget");
+    const std::array<VkDeviceSize,4> required{joints,vertices,sceneInstances_.size()*sizeof(InstanceGpuData),morphBytes};
+    const std::array<rhi::GpuBuffer*,4> slots{&jointBuffers_[currentFrame_],
+        computeSkinningEnabled_?&skinnedVertexBuffers_[currentFrame_]:nullptr,&instanceBuffers_[currentFrame_],&morphWeightBuffers_[currentFrame_]};
+    std::array<rhi::GpuBuffer,4> candidates{};
+    try{
+        for(unsigned i=0;i<slots.size();++i)if(slots[i]&&required[i]>slots[i]->size){
+            const auto growth=std::max(required[i],slots[i]->size+slots[i]->size/2);
+            const auto bytes=i==3?std::min<VkDeviceSize>(growth,kMorphGpuBudgetBytes):growth;
+            candidates[i]=allocator_->createBuffer(bytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT
+                |(i==1?VK_BUFFER_USAGE_VERTEX_BUFFER_BIT:0),i!=1);
+        }
+    }catch(...){for(auto& candidate:candidates)allocator_->destroyBuffer(candidate);throw;}
+    bool changed=false;
+    for(unsigned i=0;i<slots.size();++i)if(candidates[i].buffer){
+        allocator_->destroyBuffer(*slots[i]);*slots[i]=candidates[i];changed=true;
+        if(i==1)staticSkinningOutputs_.at(currentFrame_).invalidate();
+    }
+    if(!changed)return;
+    if(motionPass_)motionPass_->invalidateBindings(static_cast<std::uint32_t>(currentFrame_));
+    const auto count=bindlessTextures_?1:totalMaterialCount();
+    for(std::size_t material=0;material<count;++material){
+        const auto set=descriptorSets_[currentFrame_*count+material];
+        rhi_->writeDescriptorBuffer({set,10,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,jointBuffers_[currentFrame_].buffer,jointBuffers_[currentFrame_].size});
+        rhi_->writeDescriptorBuffer({set,13,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,instanceBuffers_[currentFrame_].buffer,instanceBuffers_[currentFrame_].size});
+        rhi_->writeDescriptorBuffer({set,22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphWeightBuffers_[currentFrame_].buffer,morphWeightBuffers_[currentFrame_].size});
+        if(computeSkinningEnabled_)rhi_->writeDescriptorBuffer({set,17,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            skinnedVertexBuffers_[currentFrame_].buffer,skinnedVertexBuffers_[currentFrame_].size});
+    }
+    if(computeSkinningEnabled_)for(std::uint32_t key=0;key<meshResourceCount_;++key){
+        const auto set=skinningDescriptorSets_[currentFrame_*meshResourceCount_+key];
+        rhi_->writeDescriptorBuffer({set,1,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,jointBuffers_[currentFrame_].buffer,jointBuffers_[currentFrame_].size});
+        rhi_->writeDescriptorBuffer({set,2,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,skinnedVertexBuffers_[currentFrame_].buffer,skinnedVertexBuffers_[currentFrame_].size});
+        rhi_->writeDescriptorBuffer({set,4,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphWeightBuffers_[currentFrame_].buffer,morphWeightBuffers_[currentFrame_].size});
+    }
+}
+void CharacterSceneRenderer::prepareInstancePoses() {
+    ensureInstanceCapacity();
+    constexpr float kPi = 3.14159265358979323846F;
+    instancePoses_.clear();
+    bindPoseCachedCopies_=0;bindPoseSharedInstances_=0;
+    skinningDispatches_.clear();
+    if(computeSkinningEnabled_){
+        auto& cache=staticSkinningOutputs_.at(currentFrame_);cache.begin(sceneInstances_.size());
+        skinningOutputTicket_={static_cast<std::uint32_t>(currentFrame_),cache.generation()};
+    }
+    std::uint32_t jointBase = 0, vertexBase = 0, morphWeightBase=0;
+    for (auto& instance : sceneInstances_) {
+        const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey-1]->asset;
+        const auto animation = std::find_if(animationFrames_.begin(), animationFrames_.end(),
+            [&](const auto& value) { return value.node == instance.nodeId; });
+        AssetPose writablePose;
+        std::shared_ptr<const AssetPose> preparedPose;
+        auto morph = renderSettings_->morphWeights;
+        if (animation != animationFrames_.end()) {
+            writablePose = samplePresentedAnimationPose(mesh,*animation,&loadedAnimations_.at(instance.meshKey));
+            morph = animation->morph;
+            if (instance.meshKey == 0) { animationIndex_ = animation->clip; }
+        } else if (!mesh.animations.empty()) {
+            writablePose = sampleAnimationPose(mesh, instance.meshKey == 0 ? animationIndex_ : 0,
+                animationTime_,true,&loadedAnimations_.at(instance.meshKey));
+        } else {
+            if(mesh.morphRanges.empty()||(morph[0]==0.F&&morph[1]==0.F)){
+                preparedPose=loadedBindPoses_.at(instance.meshKey);
+                ++bindPoseSharedInstances_;
+            }else{
+                writablePose=*loadedBindPoses_.at(instance.meshKey);
+                ++bindPoseCachedCopies_;
+            }
+        }
+        if(!preparedPose){
+            if(animation!=animationFrames_.end()&&animation->expression)
+                writablePose=applyExpressionPose(mesh,writablePose,*animation->expression,animation->expressionWeight);
+            if(!mesh.morphRanges.empty()){
+                for(auto& values:writablePose.morphWeights)for(unsigned index=0;index<std::min<std::size_t>(2,values.size());++index)
+                    if(morph[index]!=0)values[index]=morph[index];
+                if(animation!=animationFrames_.end())applyMorphOverrides(mesh,writablePose,animation->morphOverrides);
+            }
+            preparedPose=std::make_shared<const AssetPose>(std::move(writablePose));
+        }
+        const auto& pose=*preparedPose;
+        const auto weights=flattenMorphGpuWeights(mesh,pose);
+        if(!weights.empty())std::memcpy(static_cast<float*>(morphWeightBuffers_[currentFrame_].mapped)+morphWeightBase,weights.data(),weights.size()*sizeof(float));
+        std::memcpy(static_cast<std::array<float,16>*>(jointBuffers_[currentFrame_].mapped) + jointBase,
+            pose.jointMatrices.data(), pose.jointMatrices.size()*sizeof(std::array<float,16>));
+        auto bounds = jointBounds_.at(instance.meshKey).evaluate(mesh, morph, pose.jointMatrices,&pose);
+        bounds = expandBounds(bounds, materialDisplacementMargin(mesh));
+        if (gizmoActive_) {
+            const auto gizmo = multiply(translation(gizmoTranslation_[0],gizmoTranslation_[1],gizmoTranslation_[2]),
+                multiply(multiply(rotationX(gizmoRotation_[0]*kPi/180),rotationY(gizmoRotation_[1]*kPi/180)),
+                    multiply(rotationZ(gizmoRotation_[2]*kPi/180),scale(gizmoScale_[0],gizmoScale_[1],gizmoScale_[2]))));
+            bounds = includeTransformedBounds(bounds, gizmo);
+        }
+        instance.worldBounds = scene::transformBounds(bounds, instance.model);
+        instancePoses_.push_back({std::move(preparedPose), instance.meshKey, jointBase, vertexBase, morph,morphWeightBase});
+        // Preserve stable pose slices for every instance. Only views that
+        // consume deformed geometry require writing the GPU vertex slice.
+        const auto& worldBounds = instance.worldBounds;
+        const bool requiredByMain = scene::boundsInsideFrustum(viewFrustum_,
+            worldBounds.minimum, worldBounds.maximum);
+        const bool requiredByShadow = std::any_of(shadowCascadeFrusta_.begin(),
+            shadowCascadeFrusta_.end(), [&](const scene::FrustumPlanes& frustum) {
+                return scene::boundsInsideFrustum(frustum, worldBounds.minimum, worldBounds.maximum);
+            });
+        const bool consumed=!cullingEnabled_||requiredByMain||requiredByShadow;
+        const bool reusable=!mesh.hasSkin&&mesh.animations.empty()&&mesh.morphRanges.empty()
+            &&animation==animationFrames_.end()&&morph[0]==0.F&&morph[1]==0.F
+            &&!std::signbit(morph[0])&&!std::signbit(morph[1]);
+        const bool produce=computeSkinningEnabled_
+            ?staticSkinningOutputs_.at(currentFrame_).prepareRange(instance.sourceIndex,
+                {instance.meshKey,vertexBase,static_cast<std::uint32_t>(mesh.vertices.size())},reusable,consumed)
+            :consumed;
+        if (produce) {
+            const SkinningBatch slice{static_cast<std::uint32_t>(mesh.vertices.size()),jointBase,morph,
+                vertexBase,static_cast<std::uint32_t>(instancePoses_.back().pose->jointMatrices.size()),1,
+                morphGpuMeshes_.at(instance.meshKey).tableBase,morphWeightBase,morphGpuMeshes_.at(instance.meshKey).weightCount};
+            if (skinningDispatches_.empty() || skinningDispatches_.back().meshKey!=instance.meshKey
+                || !appendSkinningSlice(skinningDispatches_.back().parameters,slice))
+                skinningDispatches_.push_back({instance.meshKey,slice});
+        }
+        jointBase += static_cast<std::uint32_t>(instancePoses_.back().pose->jointMatrices.size());
+        vertexBase += static_cast<std::uint32_t>(mesh.vertices.size());
+        morphWeightBase+=static_cast<std::uint32_t>(weights.size());
+    }
+    allocator_->flush(jointBuffers_[currentFrame_],0,jointBuffers_[currentFrame_].size);
+    allocator_->flush(morphWeightBuffers_[currentFrame_],0,morphWeightBuffers_[currentFrame_].size);
+}
+std::array<float,4> CharacterSceneRenderer::instanceFaceLight(
+    const LoadedAsset& mesh, const AssetPose& pose, const Matrix4& model) const {
+    const AssetFaceSdfProfile* profile = nullptr;
+    if(!faceSdfPrepared_)return {0,0,-1,0};
+    for (const auto& material : mesh.materials) if (material.faceSdf.present) { profile = &material.faceSdf; break; }
+    if (!profile || profile->headNode >= pose.nodeWorldMatrices.size()) return {0,0,-1,0};
+    const auto head = multiply(model, pose.nodeWorldMatrices[profile->headNode]);
+    const auto& bind = mesh.nodeWorldMatrices.at(profile->headNode);
+    const Vector3 local{dot(frameCharacterLight_,normalize({head[0],head[1],head[2]})),
+        dot(frameCharacterLight_,normalize({head[4],head[5],head[6]})), dot(frameCharacterLight_,normalize({head[8],head[9],head[10]}))};
+    const auto x = normalize({bind[0],bind[1],bind[2]});
+    const auto y = normalize({bind[4],bind[5],bind[6]});
+    const auto z = normalize({bind[8],bind[9],bind[10]});
+    const auto light = normalize({x[0]*local[0]+y[0]*local[1]+z[0]*local[2],
+        x[1]*local[0]+y[1]*local[1]+z[1]*local[2], x[2]*local[0]+y[2]*local[1]+z[2]*local[2]});
+    return {light[0],light[1],light[2],1};
+}
+
+Matrix4 CharacterSceneRenderer::instanceFaceFrame(const LoadedAsset& mesh,const AssetPose& pose,const Matrix4& model) const {
+    Matrix4 result=scale(1,1,1);
+    if(const auto frame=resolveMaterialFrame(mesh)) {
+        const auto& profile=*frame;
+        const auto head=multiply(model,pose.nodeWorldMatrices.at(profile.node));
+        Matrix4 basis=scale(1,1,1);
+        for(unsigned a=0;a<3;++a)for(unsigned c=0;c<3;++c)basis[a*4+c]=profile.basis[a*3+c];
+        result=multiply(head,basis);
+        for(unsigned a=0;a<3;++a) {
+            const auto axis=normalize({result[a*4],result[a*4+1],result[a*4+2]});
+            for(unsigned c=0;c<3;++c)result[a*4+c]=axis[c];
+        }
+        return result;
+    }
+    return result;
 }
 
 void CharacterSceneRenderer::rebuildSceneInstances() {
-    const auto primaryBounds = morphBounds(asset_, renderSettings_->morphWeights);
+    const auto primaryBounds = jointBounds_.at(0).evaluate(asset_, renderSettings_->morphWeights, asset_.jointMatrices);
     std::vector<scene::AxisAlignedBounds> meshBounds{primaryBounds};
     for (const auto& resource : additionalResources_)
-        meshBounds.push_back(morphBounds(resource->asset, renderSettings_->morphWeights));
+        meshBounds.push_back(jointBounds_.at(meshBounds.size()).evaluate(resource->asset, renderSettings_->morphWeights, resource->asset.jointMatrices));
     for (std::size_t meshKey = 0; meshKey < meshBounds.size(); ++meshKey) {
         const auto& mesh = meshKey == 0 ? asset_ : additionalResources_[meshKey - 1]->asset;
         meshBounds[meshKey] = expandBounds(meshBounds[meshKey], materialDisplacementMargin(mesh));
@@ -458,7 +984,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
     // single-node scene onto a grid to prove draw counts stay flat as
     // instances grow.
     sceneInstances_.clear();
-    if (scene_.nodes.size() <= 1 && qaInstanceCount_ > 1) {
+    if (scene_.nodes.size() == 1 && scene_.nodes.front().visible && qaInstanceCount_ > 1) {
         sceneInstances_.reserve(qaInstanceCount_);
         const std::uint32_t gridSide = static_cast<std::uint32_t>(
             std::ceil(std::sqrt(static_cast<double>(qaInstanceCount_))));
@@ -474,55 +1000,62 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
             instance.worldBounds = scene::transformBounds(
                 meshBounds.front(), instance.model);
             instance.sourceIndex = index;
+            instance.nodeId = scene_.nodes.front().id;
             instance.meshKey = 0;
             sceneInstances_.push_back(instance);
         }
     } else {
-        const std::vector<Matrix4> nodeWorldTransforms =
-            scene::resolveNodeWorldTransforms(scene_);
-        const auto meshKeyOf = [this](const scene::SceneNodeDesc& node) {
-            for (std::size_t resourceIndex = 0;
-                 resourceIndex < scene_.resources.size();
-                 ++resourceIndex) {
-                if (scene_.resources[resourceIndex].id == node.resourceId) {
-                    return resourceIndex;
-                }
-            }
-            return std::size_t{0};
-        };
+        const auto& nodeWorldTransforms = sceneTransforms_.resolve(scene_);
+        std::vector<std::size_t> nodeMeshKeys;
+        nodeMeshKeys.reserve(scene_.nodes.size());
+        for (const auto& node : scene_.nodes) {
+            const auto found=node.visible?loadedResourceMeshKeys_.find(node.resourceId):loadedResourceMeshKeys_.end();
+            nodeMeshKeys.push_back(found==loadedResourceMeshKeys_.end()?meshBounds.size():found->second);
+        }
         // Instances are grouped by resource so each draw section gets one
         // contiguous span in the instance buffer.
-        for (std::size_t meshKey = 0; meshKey < scene_.resources.size();
-             ++meshKey) {
-            for (std::size_t nodeIndex = 0; nodeIndex < scene_.nodes.size();
-                 ++nodeIndex) {
-                const scene::SceneNodeDesc& node = scene_.nodes[nodeIndex];
-                if (!node.visible || meshKeyOf(node) != meshKey) {
-                    continue;
-                }
-                const scene::AxisAlignedBounds& localBounds = meshBounds.at(meshKey);
-                const Matrix4 nodeTransform = nodeIndex
-                    < nodeWorldTransforms.size()
-                    ? nodeWorldTransforms[nodeIndex]
-                    : scene::composeTrs(
-                        node.translation, node.rotation, node.scale);
-                scene::SceneInstance instance{};
-                instance.model = meshKey == 0
-                    ? multiply(nodeTransform, currentModel_)
-                    : nodeTransform;
-                instance.worldBounds =
-                    scene::transformBounds(localBounds, instance.model);
-                instance.sourceIndex =
-                    static_cast<std::uint32_t>(sceneInstances_.size());
-                instance.meshKey = static_cast<std::uint32_t>(meshKey);
-                sceneInstances_.push_back(instance);
-            }
+        const auto nodeOrder = scene::stableMeshNodeOrder(nodeMeshKeys,meshBounds.size());
+        sceneInstances_.reserve(nodeOrder.size());
+        for (const auto nodeIndex : nodeOrder) {
+            const auto meshKey = nodeMeshKeys[nodeIndex];
+            const scene::SceneNodeDesc& node = scene_.nodes[nodeIndex];
+            const scene::AxisAlignedBounds& localBounds = meshBounds.at(meshKey);
+            const Matrix4 nodeTransform = nodeIndex
+                < nodeWorldTransforms.size()
+                ? nodeWorldTransforms[nodeIndex]
+                : scene::composeTrs(
+                    node.translation, node.rotation, node.scale);
+            scene::SceneInstance instance{};
+            instance.model = meshKey == 0
+                ? multiply(nodeTransform, currentModel_)
+                : nodeTransform;
+            instance.worldBounds =
+                scene::transformBounds(localBounds, instance.model);
+            instance.sourceIndex =
+                static_cast<std::uint32_t>(sceneInstances_.size());
+            instance.meshKey = static_cast<std::uint32_t>(meshKey);
+            instance.nodeId = node.id;
+            sceneInstances_.push_back(instance);
         }
     }
 
+    if(referenceCamera_&&!sceneInstances_.empty()){
+        std::array<float,3> lo=sceneInstances_.front().worldBounds.minimum,hi=sceneInstances_.front().worldBounds.maximum;
+        for(const auto& instance:sceneInstances_)for(unsigned a=0;a<3;++a){lo[a]=std::min(lo[a],instance.worldBounds.minimum[a]);hi[a]=std::max(hi[a],instance.worldBounds.maximum[a]);}
+        ReferenceCameraView device;device.extent=referenceCamera_->descriptor().extent;device.depthConvention=ReferenceDepthConvention::Forward;
+        const auto matrix=multiply(projectionMatrix_,viewMatrix_);for(unsigned c=0;c<4;++c)for(unsigned r=0;r<4;++r)device.projection.parameters.columns[c][r]=matrix[c*4+r];
+        viewFrustum_=prepareReferenceRasterFrustum(*referenceCamera_,PreparedReferenceCameraView(device),lo,hi,false).planes();
+        if(referenceProjectedSurface_||renderSettings_->outline.silhouetteWidthPixels>0){viewFrustum_={};viewFrustum_.conservativeMargin=0;viewFrustum_.referenceWPlane={0,0,0,0};}
+    }
+    materialOriginInstances_=materialOriginNodes_.empty()?nullptr:
+        std::make_shared<const MaterialOriginInstances>(sceneInstances_,materialOriginNodes_);
+    if(materialOriginInstances_&&materialOriginInstances_->gpuCount()>instanceCapacity_)
+        throw std::length_error("Material origin instances exceed the allocated frame buffer");
+    prepareInstancePoses();
     if (gpuCullingEnabled_ && !sceneInstances_.empty()) {
         std::vector<GpuCullBounds> bounds;
         std::vector<VkDrawIndexedIndirectCommand> commands;
+        std::vector<GpuSurfaceIdentity> surfaces;
         indirectInstanceOffsets_.clear();
         for (const auto& instance : sceneInstances_) {
             indirectInstanceOffsets_.push_back(commands.size());
@@ -530,18 +1063,28 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
                 {instance.worldBounds.minimum[0], instance.worldBounds.minimum[1], instance.worldBounds.minimum[2], 0},
                 {instance.worldBounds.maximum[0], instance.worldBounds.maximum[1], instance.worldBounds.maximum[2], 0}});
             const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
-            for (const auto& primitive : mesh.primitives)
+            std::uint32_t primitiveIndex=0;
+            const auto materialBase=instance.meshKey==0?0U:
+                static_cast<std::uint32_t>(additionalResources_[instance.meshKey-1]->globalMaterialBase);
+            for (const auto& primitive : mesh.primitives) {
                 commands.push_back({primitive.indexCount, 1, primitive.firstIndex, 0, instance.sourceIndex});
+                if(visibilityPrototype_)surfaces.push_back({instance.sourceIndex,primitiveIndex,materialBase+primitive.materialIndex,0});
+                ++primitiveIndex;
+            }
         }
         const auto capacity = std::max(bounds.size(), commands.size());
         if (gpuCullingCapacities_[currentFrame_] < capacity) {
             auto resources = std::make_unique<GpuCullingResources>(*rhi_);
-            resources->initialize(azurerender::readBinaryFile(shaderDirectory_ + "/cull_indirect.comp.spv"),
-                                  static_cast<std::uint32_t>(capacity));
+            resources->initialize(azurerender::readBinaryFile(shaderDirectory_ +
+                                  (visibilityPrototype_?"/visibility_prototype.comp.spv":"/cull_indirect.comp.spv")),
+                                  static_cast<std::uint32_t>(capacity),visibilityPrototype_,referenceCameraPrepared_);
             gpuCullingFrames_[currentFrame_] = std::move(resources);
             gpuCullingCapacities_[currentFrame_] = capacity;
         }
-        gpuCullingFrames_[currentFrame_]->upload(bounds, commands);
+        if(visibilityPrototype_) {
+            VisibilityPrototype::validateSources(bounds,commands,surfaces);
+            gpuCullingFrames_[currentFrame_]->upload(bounds,commands,surfaces);
+        } else gpuCullingFrames_[currentFrame_]->upload(bounds, commands);
     }
     visibleInstances_.clear();
     if (cullingEnabled_) {
@@ -560,6 +1103,8 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
             visibleInstances_[slot]->sourceIndex;
         if (!visibleSpansByMeshKey_.empty()
             && visibleSpansByMeshKey_.back()[0] == meshKey
+            && scene::mirroredTransform(sceneInstances_[visibleSpansByMeshKey_.back()[1]].model)
+                == scene::mirroredTransform(visibleInstances_[slot]->model)
             && visibleSpansByMeshKey_.back()[1]
                     + visibleSpansByMeshKey_.back()[2]
                 == sourceIndex) {
@@ -597,6 +1142,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         }
     }
 
+    prepareObjectShadows();
     if (sceneInstances_.empty() || instanceBuffers_.empty()) {
         return;
     }
@@ -607,18 +1153,20 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         const Matrix4& model = sceneInstances_[slot].model;
         destination[slot].model = model;
         const std::uint32_t meshKey = sceneInstances_[slot].meshKey;
-        destination[slot].meta = {
-            meshKey == 0
-                ? 0U
-                : additionalResources_[meshKey - 1]->jointBase,
-            0U,
-            0U,
-            0U,
-        };
+        const auto& pose = instancePoses_.at(slot);
+        const auto& mesh = meshKey == 0 ? asset_ : additionalResources_[meshKey-1]->asset;
+        destination[slot].meta = {pose.jointBase, pose.vertexBase, morphGpuMeshes_.at(meshKey).tableBase, pose.morphWeightBase};
+        destination[slot].faceLight = instanceFaceLight(mesh, *pose.pose, model);
+        destination[slot].morph = {pose.morph[0], pose.morph[1]};
+        destination[slot].objectShadowIndex=0;
+        destination[slot].instanceFlags=0;
+        destination[slot].faceFrame = instanceFaceFrame(mesh,*pose.pose,model);
         // The same association as the per-frame uniform path so a single
         // instance reproduces the original values exactly.
-        destination[slot].modelViewProjection =
-            multiply(projectionMatrix_, multiply(viewMatrix_, model));
+        const auto clip=multiply(samplingProjectionMatrix_, multiply(viewMatrix_, model));
+        destination[slot].modelViewProjection=clip;
+        if(conservativeClipMatrices_.size()<sceneInstances_.size())conservativeClipMatrices_.resize(sceneInstances_.size());
+        conservativeClipMatrices_[slot]=clip;
         for (std::size_t cascade = 0;
              cascade < kShadowCascadeCount;
              ++cascade) {
@@ -626,19 +1174,82 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
                 multiply(cascadeLightViewProjections_[cascade], model);
         }
     }
+    for(std::size_t index=0;index<objectShadowPages_.size();++index)
+        destination[objectShadowPages_[index].instanceIndex].objectShadowIndex=static_cast<std::uint32_t>(index+1);
+    if(materialOriginInstances_)for(const auto& copy:materialOriginInstances_->copies()) {
+        const auto& instance=sceneInstances_.at(copy.sourceIndex);
+        const auto& pose=instancePoses_.at(copy.sourceIndex).pose;
+        const auto origin=multiply(instance.model,pose->nodeWorldMatrices.at(copy.node));
+        auto& alias=destination[copy.gpuIndex];alias=destination[copy.sourceIndex];
+        for(unsigned axis=0;axis<3;++axis)alias.faceFrame[12+axis]=origin[12+axis];
+        alias.instanceFlags|=InstanceGpuData::kMaterialRimOrigin;
+    }
+    allocator_->flush(instanceBuffers_[currentFrame_],0,instanceBuffers_[currentFrame_].size);
+}
+
+std::uint32_t CharacterSceneRenderer::materialOriginFirstInstance(const AssetMaterial& material,
+    const SceneInstanceSnapshot* snapshot,std::uint32_t first,std::uint32_t count) const {
+    const auto& origin=material.nprDiffuse.rimOrigin;
+    if(!origin.present)return first;
+    const auto& plan=snapshot?snapshot->materialOrigins:materialOriginInstances_;
+    if(!plan)throw std::logic_error("Material rim origin instance plan is unavailable");
+    return plan->firstInstance(origin.node,first,count);
+}
+
+void CharacterSceneRenderer::prepareObjectShadows(){
+    std::unordered_map<std::string,const ecs::ObjectShadowComponent*> settings;
+    for(const auto& node:scene_.nodes)if(node.objectShadow&&node.objectShadow->enabled)settings.emplace(node.id,&*node.objectShadow);
+    std::vector<ObjectShadowInput> inputs;
+    for(const auto& instance:sceneInstances_){
+        const auto found=settings.find(instance.nodeId);
+        if(found!=settings.end())inputs.push_back({*found->second,instance.model,instance.sourceIndex});
+    }
+    if(!inputs.empty()&&!objectShadowPrepared_)throw std::runtime_error("Object shadow layout is unavailable; reload the scene with a supported resource profile");
+    objectShadowPages_=buildObjectShadowFrame(inputs,internal::scaleVector(frameCharacterLight_,-1.F)).pages;
+    if(!objectShadowPrepared_)return;
+    const std::size_t count=bindlessTextures_?1:totalMaterialCount();
+    const bool materialVisibility=referenceObjectVisibilityActive();
+    if(referenceMaterialVisibilityBound_[currentFrame_]!=materialVisibility){
+        for(std::size_t index=0;index<count;++index)
+            writeReferenceMaterialVisibilityDescriptors(descriptorSets_.at(currentFrame_*count+index),
+                static_cast<unsigned>(currentFrame_),materialVisibility);
+        referenceMaterialVisibilityBound_[currentFrame_]=materialVisibility;
+    }
+    if(referenceObjectVisibilityActive()&&!objectShadowPages_.empty()){
+        SceneReferenceObjectShadowRasterArray raster{};
+        bool active=false;
+        for(auto& page:objectShadowPages_){
+            if(const auto parameters=sceneReferenceObjectShadowRaster(*referenceCamera_,page)){
+                raster[page.page]=*parameters;
+                page.referenceRaster=true;
+                active=true;
+            }
+        }
+        if(active){
+            auto& uniform=uniformBuffers_[currentFrame_];
+            constexpr auto offset=sizeof(UniformBufferObject);
+            if(uniform.size<offset+sizeof(raster))throw std::logic_error("Reference object raster uniforms were not prepared");
+            std::memcpy(static_cast<char*>(uniform.mapped)+offset,raster.data(),sizeof(raster));
+            allocator_->flush(uniform,offset,sizeof(raster));
+        }
+    }
+    std::vector<ObjectShadowGpuRecord> records;
+    for(const auto& page:objectShadowPages_)records.push_back(page.gpu);
+    shadowBounds_[currentFrame_]->writeObjectRecords(records);
+    if(!objectShadowPages_.empty())objectShadowAtlas_->ensureImage(objectShadowMaxDimension_);
+    const auto view=objectShadowAtlas_->view()?objectShadowAtlas_->view():shadowImageView_;
+    if(objectShadowBoundViews_[currentFrame_]==view)return;
+    for(std::size_t index=0;index<count;++index)
+        rhi_->writeDescriptorImage({descriptorSets_.at(currentFrame_*count+index),29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            view,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL});
+    objectShadowBoundViews_[currentFrame_]=view;
 }
 
 const rhi::GpuBuffer& CharacterSceneRenderer::renderVertexBuffer(
     const std::uint32_t meshKey,
     const std::uint32_t frameIndex) const {
-    if (!computeSkinningEnabled_) {
-        return meshKey == 0
-            ? vertexBuffer_
-            : additionalResources_[meshKey - 1]->vertexBuffer;
-    }
-    return meshKey == 0
-        ? skinnedVertexBuffers_[frameIndex]
-        : additionalResources_[meshKey - 1]->skinnedVertexBuffers[frameIndex];
+    (void)frameIndex;
+    return meshKey == 0 ? vertexBuffer_ : additionalResources_[meshKey - 1]->vertexBuffer;
 }
 
 const rhi::GpuBuffer& CharacterSceneRenderer::renderIndexBuffer(
@@ -660,15 +1271,6 @@ void CharacterSceneRenderer::registerPasses(
         return meshKey == 0
             ? vertexBuffer_
             : additionalResources_[meshKey - 1]->vertexBuffer;
-    };
-    const auto drawVertexBuffer = [this, &sourceVertexBuffer, &context](
-        const std::uint32_t meshKey) -> const rhi::GpuBuffer& {
-        return computeSkinningEnabled_
-            ? (meshKey == 0
-                ? skinnedVertexBuffers_[context.currentFrame]
-                : additionalResources_[meshKey - 1]
-                      ->skinnedVertexBuffers[context.currentFrame])
-            : sourceVertexBuffer(meshKey);
     };
     const auto meshIndexBuffer = [this](const std::uint32_t meshKey)
         -> const rhi::GpuBuffer& {
@@ -696,6 +1298,11 @@ void CharacterSceneRenderer::registerPasses(
     };
     const auto lightResource = importHostStorage(
         "character-lights", lightBuffers_[context.currentFrame]);
+    const auto morphTargetResource=importHostStorage("character-morph-targets-v1",morphTargetBuffer_);
+    const auto morphWeightResource=importHostStorage("character-morph-weights",morphWeightBuffers_[context.currentFrame]);
+    const auto instanceResource=importHostStorage("character-instances-v2",instanceBuffers_[context.currentFrame]);
+    std::optional<RenderGraph::ResourceId> fogResource;
+    if(viewFog_)fogResource=importHostStorage("character-view-fog-v1",viewFog_->gpu.parameters(context.currentFrame));
     const auto clusterHeaderResource = importHostStorage(
         "character-cluster-headers",
         clusterHeaderBuffers_[context.currentFrame]);
@@ -703,15 +1310,39 @@ void CharacterSceneRenderer::registerPasses(
         "character-cluster-indices",
         clusterIndexBuffers_[context.currentFrame]);
 
+    std::optional<RenderGraph::ResourceId> gpuTransparentResource;
+    if(const auto ticket=gpuTransparentTickets_[context.currentFrame]){
+        auto* owner=gpuTransparentSort_.get();const auto& buffer=owner->indices(context.currentFrame);
+        rhi::BufferBarrierDesc initial{};initial.buffer=buffer.buffer;initial.size=buffer.size;
+        initial.dstStageMask=VK_PIPELINE_STAGE_VERTEX_INPUT_BIT;initial.dstAccessMask=VK_ACCESS_INDEX_READ_BIT;
+        gpuTransparentResource=graph.importBuffer("transparent-sorted-indices",initial);
+        const auto pass=graph.addCommandPass("character-transparent-prepare",[owner,ticket](rhi::ICommandRecorder& commands){owner->record(commands,*ticket);});
+        graph.use(pass,jointResource,RenderGraphUsage::Storage,false);
+        graph.use(pass,*gpuTransparentResource,RenderGraphUsage::Storage,true);
+    }
     std::optional<RenderGraph::PassId> skinningPass;
     if (computeSkinningEnabled_) {
         skinningPass = graph.addCommandPass("character-skinning",
-            [this, frozenContext, weights = instanceSnapshot_->settings.morphWeights,
+            [this, frozenContext, dispatches = skinningDispatches_,ticket=skinningOutputTicket_,
              meshCount = meshResourceCount_](rhi::ICommandRecorder& commands) {
                 for (std::uint32_t meshKey = 0; meshKey < meshCount; ++meshKey)
-                    recordComputeSkinningMesh(*frozenContext, meshKey, &commands, &weights);
+                    recordComputeSkinningMesh(*frozenContext, meshKey, &commands, &dispatches);
+                noteSkinningOutputRecorded(ticket);
             }, true);
         graph.use(*skinningPass, jointResource, RenderGraphUsage::Storage, false);
+        graph.use(*skinningPass,morphTargetResource,RenderGraphUsage::Storage,false);
+        graph.use(*skinningPass,morphWeightResource,RenderGraphUsage::Storage,false);
+    }
+
+    std::optional<RenderGraph::ResourceId> skinnedResource;
+    if (skinningPass) {
+        rhi::BufferBarrierDesc initial{};
+        initial.buffer = skinnedVertexBuffers_[context.currentFrame].buffer;
+        initial.size = skinnedVertexBuffers_[context.currentFrame].size;
+        initial.dstStageMask = VK_PIPELINE_STAGE_VERTEX_SHADER_BIT;
+        initial.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+        skinnedResource = graph.importBuffer("character-instance-skinned", initial);
+        graph.use(*skinningPass, *skinnedResource, RenderGraphUsage::Storage, true);
     }
 
     for (std::uint32_t meshKey = 0; meshKey < meshResourceCount_; ++meshKey) {
@@ -725,15 +1356,7 @@ void CharacterSceneRenderer::registerPasses(
             "character-vertex-source-" + std::to_string(meshKey),
             vertexInitial);
 
-        const rhi::GpuBuffer& output = drawVertexBuffer(meshKey);
-        rhi::BufferBarrierDesc outputInitial{};
-        outputInitial.buffer = output.buffer;
-        outputInitial.size = output.size;
-        outputInitial.dstStageMask = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT;
-        outputInitial.dstAccessMask = VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT;
-        vertexResources[meshKey] = graph.importBuffer(
-            "character-vertex-output-" + std::to_string(meshKey),
-            outputInitial);
+        vertexResources[meshKey] = inputResource;
 
         const rhi::GpuBuffer& indices = meshIndexBuffer(meshKey);
         rhi::BufferBarrierDesc indexInitial{};
@@ -746,7 +1369,6 @@ void CharacterSceneRenderer::registerPasses(
 
         if (skinningPass) {
             graph.use(*skinningPass, inputResource, RenderGraphUsage::Storage, false);
-            graph.use(*skinningPass, vertexResources[meshKey], RenderGraphUsage::Storage, true);
         }
     }
 
@@ -781,8 +1403,40 @@ void CharacterSceneRenderer::registerPasses(
         graph.use(shadow, indexResources[meshKey], RenderGraphUsage::IndexBuffer, false);
     }
     graph.use(shadow, jointResource, RenderGraphUsage::VertexStorage, false);
+    graph.use(shadow,instanceResource,RenderGraphUsage::VertexStorage,false);
+    graph.use(shadow,morphTargetResource,RenderGraphUsage::VertexStorage,false);
+    graph.use(shadow,morphWeightResource,RenderGraphUsage::VertexStorage,false);
+    if (skinnedResource) graph.use(shadow, *skinnedResource, RenderGraphUsage::VertexStorage, false);
     graph.attachment(shadow, resources.shadow, RenderGraphUsage::DepthAttachment,
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+    auto* bounds=shadowBounds_[context.currentFrame].get();
+    rhi::BufferBarrierDesc boundsInitial{};boundsInitial.buffer=bounds->buffer().buffer;boundsInitial.size=bounds->depthBoundsBytes();
+    boundsInitial.dstStageMask=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;boundsInitial.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;
+    const auto boundsResource=graph.importBuffer("shadow-tile-bounds",boundsInitial);
+    const auto boundsPass=graph.addCommandPass("shadow-tile-bounds",[this,bounds,slot=static_cast<unsigned>(context.currentFrame)](rhi::ICommandRecorder& commands){recordShadowHistoryReady(commands,slot);bounds->record(commands);});
+    graph.use(boundsPass,resources.shadow,RenderGraphUsage::ComputeSampled,false);
+    graph.use(boundsPass,boundsResource,RenderGraphUsage::Storage,true);
+    std::optional<RenderGraph::ResourceId> objectRecordsResource,objectAtlasResource;
+    if(objectShadowPrepared_){
+        auto initial=boundsInitial;initial.offset=bounds->objectRecordsOffset();initial.size=bounds->buffer().size-initial.offset;
+        initial.dstStageMask=VK_PIPELINE_STAGE_HOST_BIT;initial.dstAccessMask=VK_ACCESS_HOST_WRITE_BIT;
+        objectRecordsResource=graph.importBuffer("object-shadow-records-v1",initial);
+    }
+    if(!frozenInstances->objectShadowPages.empty()){
+        rhi::ImageBarrierDesc initial{};initial.image=objectShadowAtlas_->image().image;
+        initial.newLayout=VK_IMAGE_LAYOUT_UNDEFINED;initial.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
+        objectAtlasResource=graph.importImage("object-shadow-atlas",initial);
+        const auto objectPass=graph.addGraphicsPass("object-shadow-atlas",objectShadowAtlas_->beginDescription(),
+            [this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){recordObjectShadows(*frozenContext,*frozenInstances,commands);});
+        for(std::uint32_t key=0;key<meshResourceCount_;++key){
+            graph.use(objectPass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);
+            graph.use(objectPass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
+        }
+        for(const auto resource:{jointResource,instanceResource,morphTargetResource,morphWeightResource})
+            graph.use(objectPass,resource,RenderGraphUsage::VertexStorage,false);
+        if(skinnedResource)graph.use(objectPass,*skinnedResource,RenderGraphUsage::VertexStorage,false);
+        graph.attachment(objectPass,*objectAtlasResource,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+    }
     const auto mainCounters = std::make_shared<SceneSubmissionCounters>();
     mainCounters->instances = frozenInstances->instances.size();
     mainCounters->visibleInstances = frozenInstances->visibleIndices.size();
@@ -809,17 +1463,270 @@ void CharacterSceneRenderer::registerPasses(
         outputInitial.dstAccessMask = VK_ACCESS_INDIRECT_COMMAND_READ_BIT;
         indirectResource = graph.importBuffer("cull-output", outputInitial);
         GpuCullParameters parameters{viewFrustum_.planes, 0, cullingEnabled_ ? 1U : 0U};
+        parameters.conservativeMargin=viewFrustum_.conservativeMargin;parameters.referenceWPlane=viewFrustum_.referenceWPlane;
         const auto cull = graph.addCommandPass("character-gpu-culling",
             [culling, parameters](rhi::ICommandRecorder& commands) { culling->record(commands, parameters); }, true);
         graph.use(cull, bounds, RenderGraphUsage::Storage, false);
         graph.use(cull, source, RenderGraphUsage::Storage, false);
         graph.use(cull, *indirectResource, RenderGraphUsage::Storage, true);
+        if(visibilityPrototype_) {
+            const auto identities=importHostBuffer("visibility-surface-source",culling->surfaceSource());
+            rhi::BufferBarrierDesc initial{};
+            initial.buffer=culling->surfaceOutput().buffer;initial.size=culling->surfaceOutput().size;
+            initial.dstStageMask=VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
+            initial.dstAccessMask=VK_ACCESS_SHADER_WRITE_BIT;
+            const auto output=graph.importBuffer("visibility-surface-output",initial);
+            graph.use(cull,identities,RenderGraphUsage::Storage,false);
+            graph.use(cull,output,RenderGraphUsage::Storage,true);
+        }
+    }
+    std::optional<RenderGraph::ResourceId> referenceMaterialIds;
+    std::optional<RenderGraph::PassId> referenceVisibilityPass;
+    if(referenceDepthActive()){
+        const auto slot=context.currentFrame;
+        const bool objectVisibility=referenceObjectVisibilityActive();
+        const auto pass=graph.addGraphicsPass("character-reference-depth",referenceSceneDepth_->begin(slot),
+            [this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
+                recordDepthCoverage(*frozenContext,*frozenInstances,commands,DepthCoverageMode::ReferenceDepth);
+            });
+        rhi::ImageBarrierDesc raster{};raster.image=referenceSceneDepth_->rasterImage(slot);
+        rhi::ImageBarrierDesc hardware{};hardware.image=referenceSceneDepth_->hardwareImage(slot);
+        hardware.aspectMask=referenceSceneDepth_->hardwareAspects();
+        const auto rasterResource=graph.importImage("character-reference-r32",raster);
+        graph.attachment(pass,rasterResource,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        graph.attachment(pass,graph.importImage("character-reference-d32",hardware),RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+        if(referenceSceneDepth_->visibilityInputs()){
+            rhi::ImageBarrierDesc normal{};normal.image=referenceSceneDepth_->packedNormalImage(slot);
+            rhi::ImageBarrierDesc identity{};identity.image=referenceSceneDepth_->objectIdImage(slot);
+            const auto normalResource=graph.importImage("character-reference-normal",normal);
+            const auto identityResource=graph.importImage("character-reference-object-id",identity);
+            graph.attachment(pass,normalResource,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            graph.attachment(pass,identityResource,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            if(objectVisibility){
+                referenceMaterialIds=identityResource;
+                const auto output=graph.addCommandPass("character-reference-object-visibility",
+                    [this,slot,frozenInstances](rhi::ICommandRecorder& commands){recordReferenceObjectVisibility(commands,slot,*frozenInstances);});
+                referenceVisibilityPass=output;
+                if(objectAtlasResource){
+                    for(const auto input:{rasterResource,normalResource,identityResource,*objectAtlasResource})
+                        graph.use(output,input,RenderGraphUsage::Sampled,false);
+                }else graph.dependsOn(output,pass);
+            }
+        }
+        for(const auto input:{jointResource,morphTargetResource,morphWeightResource,instanceResource})
+            graph.use(pass,input,RenderGraphUsage::VertexStorage,false);
+        if(skinnedResource)graph.use(pass,*skinnedResource,RenderGraphUsage::VertexStorage,false);
+        for(std::uint32_t key=0;key<meshResourceCount_;++key){
+            graph.use(pass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);
+            graph.use(pass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
+        }
+        pendingReferenceDepth_=ReferenceDepthSubmission{slot,referenceVisibilityActive(),objectVisibility,0};
+    }
+    const auto useReferenceVisibility=[&](RenderGraph::PassId pass){
+        if(!referenceVisibilityPass||!objectShadowPrepared_)return;
+        // The visibility owner transitions its RG8 output within the command pass.
+        graph.dependsOn(pass,*referenceVisibilityPass);
+        graph.use(pass,*referenceMaterialIds,RenderGraphUsage::Sampled,false);
+    };
+    rhi::ImageBarrierDesc overlayInitial{};overlayInitial.image=overlaySceneDepth_[context.currentFrame].image.image;
+    overlayInitial.newLayout=VK_IMAGE_LAYOUT_UNDEFINED;
+    const auto overlayDepth=graph.importImage("character-overlay-depth",overlayInitial);
+    rhi::RenderPassBeginDesc overlayBegin{};overlayBegin.renderPass=snapshotPass();
+    overlayBegin.framebuffer=snapshotFramebuffer(context.currentFrame);overlayBegin.extent=context.renderExtent;
+    VkClearValue linearClear{};linearClear.color.float32[0]=100000;VkClearValue depthClear{};depthClear.depthStencil={1,0};
+    VkClearValue colorClear{};overlayBegin.clearValues=snapshotMultisampling_?std::vector<VkClearValue>{colorClear,depthClear,linearClear}:std::vector<VkClearValue>{colorClear,linearClear,depthClear};
+    std::array<RenderGraph::ResourceId,3> snapshotSources{};
+    if(snapshotMultisampling_)snapshotSources=snapshotMultisampling_->importSources(graph,context.currentFrame,"character-opaque-source");
+    if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)overlayBegin.clearValues.push_back(SurfaceRadianceCache::clearValue(kind));
+    rhi::ImageBarrierDesc snapshotState{};snapshotState.image=opaqueSceneColor_[context.currentFrame].image.image;
+    const auto snapshotColor=graph.importImage("character-opaque-color",snapshotState);
+    rhi::ImageBarrierDesc depthState{};depthState.image=overlayDepthAttachments_[context.currentFrame].image;depthState.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
+    const auto snapshotDepth=graph.importImage("character-opaque-hardware-depth",depthState);
+    const auto prepass=graph.addGraphicsPass("character-opaque-depth",overlayBegin,[this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
+        recordOverlayDepth(*frozenContext,*frozenInstances,commands);
+    });
+    useReferenceVisibility(prepass);
+
+    if(snapshotMultisampling_){
+        for(unsigned i=0;i<3;++i)graph.attachment(prepass,snapshotSources[i],i==1?RenderGraphUsage::DepthAttachment:RenderGraphUsage::ColorAttachment,
+            i==1?VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        snapshotMultisampling_->schedule(graph,context.currentFrame,context.currentFrame,snapshotSources,{snapshotColor,snapshotDepth,overlayDepth},"character-opaque-resolve");
+    }else{
+        graph.attachment(prepass,overlayDepth,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        graph.attachment(prepass,snapshotColor,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        graph.attachment(prepass,snapshotDepth,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+    }
+    std::optional<RenderGraph::ResourceId> radianceStatisticsResource;
+    if(surfaceRadiance_&&surfaceRadiance_->statisticsEnabled()){
+        const auto& buffer=surfaceRadiance_->statisticsBuffer(context.currentFrame);rhi::BufferBarrierDesc initial{};
+        initial.buffer=buffer.buffer;initial.size=buffer.size;initial.dstStageMask=VK_PIPELINE_STAGE_HOST_BIT;initial.dstAccessMask=VK_ACCESS_HOST_WRITE_BIT;
+        radianceStatisticsResource=graph.importBuffer("character-radiance-statistics",initial);
+        graph.use(prepass,*radianceStatisticsResource,RenderGraphUsage::FragmentStorage,true);
+    }
+    std::array<RenderGraph::ResourceId,SurfaceRadianceCache::kAttachments> radianceResources{};
+    if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind){
+        rhi::ImageBarrierDesc initial;initial.image=surfaceRadiance_->texture(context.currentFrame,kind).image.image;
+        radianceResources[kind]=graph.importImage("character-surface-radiance-"+std::to_string(kind),initial);
+        graph.attachment(prepass,radianceResources[kind],RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    }
+    graph.use(prepass,resources.shadow,RenderGraphUsage::Sampled,false);
+    graph.use(prepass,jointResource,RenderGraphUsage::VertexStorage,false);
+    graph.use(prepass,morphTargetResource,RenderGraphUsage::VertexStorage,false);
+    graph.use(prepass,morphWeightResource,RenderGraphUsage::VertexStorage,false);
+    graph.use(prepass,boundsResource,RenderGraphUsage::FragmentStorage,false);
+    graph.use(prepass,instanceResource,RenderGraphUsage::VertexStorage,false);
+    if(objectRecordsResource)graph.use(prepass,*objectRecordsResource,RenderGraphUsage::FragmentStorage,false);
+    if(objectAtlasResource)graph.use(prepass,*objectAtlasResource,RenderGraphUsage::Sampled,false);
+    graph.use(prepass,lightResource,RenderGraphUsage::FragmentStorage,false);
+    graph.use(prepass,clusterHeaderResource,RenderGraphUsage::FragmentStorage,false);
+    graph.use(prepass,clusterIndexResource,RenderGraphUsage::FragmentStorage,false);
+    if(skinnedResource)graph.use(prepass,*skinnedResource,RenderGraphUsage::VertexStorage,false);
+    for(std::uint32_t key=0;key<meshResourceCount_;++key){graph.use(prepass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);graph.use(prepass,indexResources[key],RenderGraphUsage::IndexBuffer,false);}
+    std::optional<RenderGraph::ResourceId> outlineMaskResource;
+    if(frozenInstances->buffers.outlineMaskImage){
+        rhi::ImageBarrierDesc maskInitial{};maskInitial.image=frozenInstances->buffers.outlineMaskImage;
+        outlineMaskResource=graph.importImage("character-outline-mask",maskInitial);
+        rhi::RenderPassBeginDesc maskBegin{};maskBegin.renderPass=outlineMaskPass_;
+        maskBegin.framebuffer=frozenInstances->buffers.outlineMaskFramebuffer;maskBegin.extent=frozenInstances->buffers.outlineMaskExtent;
+        maskBegin.clearValues={VkClearValue{}};
+        const auto maskPass=graph.addGraphicsPass("character-outline-mask",maskBegin,[this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
+            recordOutlineMask(*frozenContext,*frozenInstances,commands);
+        });
+        graph.attachment(maskPass,*outlineMaskResource,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        graph.use(maskPass,jointResource,RenderGraphUsage::VertexStorage,false);
+        graph.use(maskPass,morphTargetResource,RenderGraphUsage::VertexStorage,false);
+        graph.use(maskPass,morphWeightResource,RenderGraphUsage::VertexStorage,false);
+        if(skinnedResource)graph.use(maskPass,*skinnedResource,RenderGraphUsage::VertexStorage,false);
+        for(std::uint32_t key=0;key<meshResourceCount_;++key){
+            graph.use(maskPass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);
+            graph.use(maskPass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
+        }
+    }
+    const auto addMotionUses=[&](auto pass){
+        graph.use(pass,instanceResource,RenderGraphUsage::VertexStorage,false);
+        graph.use(pass,jointResource,RenderGraphUsage::VertexStorage,false);
+        graph.use(pass,morphTargetResource,RenderGraphUsage::VertexStorage,false);
+        graph.use(pass,morphWeightResource,RenderGraphUsage::VertexStorage,false);
+        if(outlineMaskResource)graph.use(pass,*outlineMaskResource,RenderGraphUsage::Sampled,false);
+        if(outlineProjectionEnabled_)graph.use(pass,importHostStorage("character-motion-outline",outlineProjection_->buffer()),RenderGraphUsage::VertexStorage,false);
+        graph.use(pass,importHostStorage("character-previous-poses",motionPass_->previous(context.currentFrame)),RenderGraphUsage::VertexStorage,false);
+        for(std::uint32_t key=0;key<meshResourceCount_;++key){
+            graph.use(pass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
+            if(!computeSkinningEnabled_)graph.use(pass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);
+            else {rhi::BufferBarrierDesc initial;const auto& source=sourceVertexBuffer(key);initial.buffer=source.buffer;initial.size=source.size;
+                initial.dstStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;initial.dstAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;
+                graph.use(pass,graph.importBuffer("character-motion-base-"+std::to_string(key),initial),RenderGraphUsage::VertexBuffer,false);}
+        }
+    };
+    std::array<RenderGraph::ResourceId,2> reflectionMotionResources{};
+    if(screenReflectionTemporalPrepared()&&reflectionActive_[context.currentFrame]){
+        if(context.motionOutput){
+            if(resources.motion==UINT32_MAX||resources.motionSurfaceDepth==UINT32_MAX)throw std::invalid_argument("Shared reflection motion requires imported view outputs");
+            reflectionMotionResources={resources.motion,resources.motionSurfaceDepth};
+        }else{
+            rhi::ImageBarrierDesc initial;initial.image=motionTarget_->image().image;
+            reflectionMotionResources[0]=graph.importImage("character-reflection-motion",initial);
+            initial.image=motionTarget_->surfaceDepthImage().image;reflectionMotionResources[1]=graph.importImage("character-reflection-surface-depth",initial);
+        }
+        const auto motion=graph.addCommandPass("character-reflection-motion",[this,frozenContext,draws=reflectionMotionDraws_](rhi::ICommandRecorder& commands){
+            motionPass_->recordToFramebuffer(commands,frozenContext->currentFrame,reflectionMotionFramebuffer(frozenContext->currentFrame),frozenContext->renderExtent,draws);
+        });
+        addMotionUses(motion);
+        graph.attachment(motion,snapshotDepth,RenderGraphUsage::DepthReadAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+        for(auto resource:reflectionMotionResources)graph.attachment(motion,resource,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    }
+    std::optional<RenderGraph::ResourceId> reflectionResource;
+    if(screenReflectionPrepared()&&reflectionActive_[context.currentFrame]){
+        const auto slot=context.currentFrame;publishScreenReflectionOutput(slot);
+        const auto output=screenReflectionOutput(slot);rhi::ImageBarrierDesc initial{};initial.image=output.image;
+        reflectionResource=graph.importImage("character-filtered-reflection",initial);
+        const auto view=reflectionViews_[slot];const auto settings=reflectionSettings_[slot];
+        const ReflectionTraceInputs inputs{overlaySceneDepth_[slot].view,opaqueSceneColor_[slot].view,context.renderExtent.width,context.renderExtent.height};
+        const auto producer=graph.addCommandPass("character-compute-reflection",[this,slot,view,settings,inputs](rhi::ICommandRecorder& commands){
+            recordScreenReflection(commands,slot,inputs,view,settings);
+        },true);
+        graph.use(producer,overlayDepth,RenderGraphUsage::ComputeSampled,false);graph.use(producer,snapshotColor,RenderGraphUsage::ComputeSampled,false);
+        if(screenReflectionTemporalPrepared())graph.use(producer,reflectionMotionResources[0],RenderGraphUsage::ComputeSampled,false);
+        if(projectedReflectionHistoryPrepared_&&reflectionHistoryAvailable(slot)){
+            rhi::ImageBarrierDesc previous;previous.image=opaqueSceneColor_[reflectionHistorySlot_].image.image;
+            previous.newLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;previous.dstStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+            previous.dstAccessMask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+            graph.use(producer,graph.importImage("character-reflection-previous-color",previous),RenderGraphUsage::ComputeSampled,false);
+        }
+        graph.write(producer,*reflectionResource);
+    }
+    std::optional<RenderGraph::ResourceId> conservativeIndirectResource,conservativeReady;
+    if(mainDepthSplitActive(context)){
+        mainDepthSplitRecorded_[context.currentFrame]=true;
+        const auto slot=context.currentFrame;auto& frame=conservativeFrames_[slot];const auto ticket=frame.ticket;
+        const auto prepare=graph.addGraphicsPass("character-main-depth",conservativeDepthPass(context),
+            [this,frozenContext,frozenInstances,mainCounters](rhi::ICommandRecorder& commands){
+                recordDepthCoverage(*frozenContext,*frozenInstances,commands,DepthCoverageMode::MainPrefill,
+                    frozenContext->submissionCounters?mainCounters.get():nullptr);
+            });
+        graph.attachment(prepare,resources.color,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+        graph.attachment(prepare,resources.normal,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+        if(context.displayMaskEnabled)graph.attachment(prepare,resources.displayMask,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+        graph.attachment(prepare,resources.depth,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+        for(const auto resource:{jointResource,morphTargetResource,morphWeightResource,instanceResource})graph.use(prepare,resource,RenderGraphUsage::VertexStorage,false);
+        if(skinnedResource)graph.use(prepare,*skinnedResource,RenderGraphUsage::VertexStorage,false);
+        for(std::uint32_t key=0;key<meshResourceCount_;++key){graph.use(prepare,vertexResources[key],RenderGraphUsage::VertexBuffer,false);graph.use(prepare,indexResources[key],RenderGraphUsage::IndexBuffer,false);}
+        const auto hierarchy=graph.addResource("character-conservative-hierarchy");
+        const auto reduce=graph.addCommandPass("character-depth-hierarchy",[this,frozenContext](rhi::ICommandRecorder& commands){recordConservativeHierarchy(commands,*frozenContext);});
+        graph.use(reduce,resources.depth,RenderGraphUsage::ComputeSampled,false);graph.write(reduce,hierarchy);
+        const auto input=importHostStorage("character-occlusion-source",frame.source);
+        const auto& output=frame.commands->output(0);rhi::BufferBarrierDesc result{};result.buffer=output.buffer;result.size=output.size;
+        result.dstStageMask=VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT;result.dstAccessMask=VK_ACCESS_INDIRECT_COMMAND_READ_BIT;
+        conservativeIndirectResource=graph.importBuffer("character-occlusion-output",result);
+        auto* owner=frame.commands.get();const auto cull=graph.addCommandPass("character-occlusion",[owner,ticket](rhi::ICommandRecorder& commands){owner->record(commands,*ticket);});
+        graph.read(cull,hierarchy);graph.use(cull,input,RenderGraphUsage::Storage,false);graph.use(cull,*conservativeIndirectResource,RenderGraphUsage::Storage,true);
+        // The split owner publishes sampling-to-depth-loading and color WAW.
+        // Logical reads order this explicit transition before the color pass.
+        const auto resume=graph.addCommandPass("character-main-depth-resume",[this,frozenContext](rhi::ICommandRecorder& commands){
+            const auto& context = *frozenContext;
+            const auto colorCount = mainPassDescription_->attachments.size() - 1;
+            const std::vector<VkImage> colors(context.sceneColorImages.begin(),
+                context.sceneColorImages.begin() + colorCount);
+            mainDepthSplit_->beforeColor(commands,context.sceneDepthImage,colors);
+        });
+        graph.read(resume,hierarchy);graph.read(resume,*conservativeIndirectResource);graph.read(resume,resources.depth);
+        conservativeReady=graph.addResource("character-main-depth-ready");graph.write(resume,*conservativeReady);
+    }
+    std::optional<RenderGraph::ResourceId> radianceSelectedResource;
+    if(radianceSelectionActive(context)){
+        const auto& predicate=surfaceRadiance_->selectionBuffer(static_cast<unsigned>(context.currentFrame));
+        const auto flag=importHostStorage("character-radiance-predicate",predicate);
+        (void)radianceValidationDescription(context);
+        rhi::ImageBarrierDesc depthInitial{};depthInitial.image=radianceValidationDepth_.at(context.currentFrame).image.image;
+        depthInitial.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
+        const auto depthReplay=graph.importImage("character-radiance-depth-replay",depthInitial);
+        const auto copy=graph.addCommandPass("character-radiance-depth-copy",[this,frozenContext](rhi::ICommandRecorder& commands){recordRadianceDepthCopy(commands,*frozenContext);});
+        graph.read(copy,*conservativeReady);graph.read(copy,resources.depth);
+        graph.attachment(copy,depthReplay,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
+        graph.use(copy,flag,RenderGraphUsage::FragmentStorage,true);
+        const auto validate=graph.addGraphicsPass("character-radiance-validation",radianceValidationDescription(context),
+            [this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
+                recordDepthCoverage(*frozenContext,*frozenInstances,commands,DepthCoverageMode::RadianceValidation);
+            });
+        graph.read(validate,*conservativeReady);graph.use(validate,*conservativeIndirectResource,RenderGraphUsage::IndirectBuffer,false);
+        graph.attachment(validate,depthReplay,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
+        graph.use(validate,flag,RenderGraphUsage::FragmentStorage,true);
+        graph.use(validate,radianceResources[3],RenderGraphUsage::Sampled,false);
+        for(auto resource:{jointResource,morphTargetResource,morphWeightResource,instanceResource})graph.use(validate,resource,RenderGraphUsage::VertexStorage,false);
+        if(skinnedResource)graph.use(validate,*skinnedResource,RenderGraphUsage::VertexStorage,false);
+        for(std::uint32_t key=0;key<meshResourceCount_;++key){graph.use(validate,vertexResources[key],RenderGraphUsage::VertexBuffer,false);graph.use(validate,indexResources[key],RenderGraphUsage::IndexBuffer,false);}
+        auto& frame=conservativeFrames_[context.currentFrame];const auto& output=frame.selection->output(0);
+        rhi::BufferBarrierDesc initial{};initial.buffer=output.buffer;initial.size=output.size;initial.dstStageMask=VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT;initial.dstAccessMask=VK_ACCESS_INDIRECT_COMMAND_READ_BIT;
+        radianceSelectedResource=graph.importBuffer("character-radiance-selected-commands",initial);
+        const auto choose=graph.addCommandPass("character-radiance-selection",[this,frozenContext](rhi::ICommandRecorder& commands){recordRadianceSelection(commands,*frozenContext);});
+        graph.use(choose,flag,RenderGraphUsage::Storage,true);graph.use(choose,*conservativeIndirectResource,RenderGraphUsage::Storage,false);
+        graph.use(choose,*radianceSelectedResource,RenderGraphUsage::Storage,true);
     }
     const auto main = graph.addGraphicsPass("character-main", mainPassDescription(context), [this, frozenContext, mainCounters, frozenInstances](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
         recordMainDraws(context, 0, frozenInstances.get(), 0, static_cast<std::size_t>(-1),
             &commands, context.submissionCounters != nullptr ? mainCounters.get() : nullptr);
-    }, [frozenContext, mainCounters, stageCounters](rhi::ICommandRecorder& commands) {
+    }, [this,frozenContext, mainCounters, stageCounters](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
         for (const auto& counters : *stageCounters) {
             mainCounters->drawCalls += counters.drawCalls;
@@ -837,6 +1744,8 @@ void CharacterSceneRenderer::registerPasses(
             context.submissionCounters->pipelineBinds += mainCounters->pipelineBinds;
             context.submissionCounters->pushConstantUpdates += mainCounters->pushConstantUpdates;
         }
+        if(surfaceRadiance_)surfaceRadiance_->recordStatisticsReady(commands,static_cast<unsigned>(context.currentFrame));
+        recordShadowHistoryReadback(commands,static_cast<unsigned>(context.currentFrame));
         if (context.gpuTimingEnabled)
             commands.writeTimestamp(context.timestampQueryPool, 2, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     });
@@ -851,8 +1760,20 @@ void CharacterSceneRenderer::registerPasses(
         });
     }
     graph.setRecordingChunks(main, std::move(mainChunks));
+    useReferenceVisibility(main);
+    graph.use(main, overlayDepth,RenderGraphUsage::Sampled,false);
+    graph.use(main,snapshotColor,RenderGraphUsage::Sampled,false);
+    if(radianceStatisticsResource)graph.use(main,*radianceStatisticsResource,RenderGraphUsage::FragmentStorage,true);
+    if(surfaceRadiance_)for(auto resource:radianceResources)graph.use(main,resource,RenderGraphUsage::Sampled,false);
+    if(reflectionResource)graph.read(main,*reflectionResource);
+    if(fogResource){
+        graph.use(main,*fogResource,RenderGraphUsage::FragmentStorage,false);
+        if(snapshotMultisampling_)graph.use(main,snapshotSources[2],RenderGraphUsage::Sampled,false);
+    }
+    if(outlineMaskResource)graph.use(main,*outlineMaskResource,RenderGraphUsage::Sampled,false);
     graph.use(main, resources.shadow, RenderGraphUsage::Sampled, false);
-    if (!oitIndexBuffers_.empty() && oitIndexBuffers_[context.currentFrame].buffer != VK_NULL_HANDLE) {
+    if(gpuTransparentResource)graph.use(main,*gpuTransparentResource,RenderGraphUsage::IndexBuffer,false);
+    else if (!oitIndexBuffers_.empty() && oitIndexBuffers_[context.currentFrame].buffer != VK_NULL_HANDLE) {
         const auto& buffer = oitIndexBuffers_[context.currentFrame];
         rhi::BufferBarrierDesc initial{};
         initial.buffer = buffer.buffer;
@@ -863,6 +1784,13 @@ void CharacterSceneRenderer::registerPasses(
         graph.use(main, transparentIndices, RenderGraphUsage::IndexBuffer, false);
     }
     if (indirectResource) graph.use(main, *indirectResource, RenderGraphUsage::IndirectBuffer, false);
+    if(conservativeIndirectResource)graph.use(main,*conservativeIndirectResource,RenderGraphUsage::IndirectBuffer,false);
+    if(conservativeReady)graph.read(main,*conservativeReady);
+    if(radianceSelectedResource)graph.use(main,*radianceSelectedResource,RenderGraphUsage::IndirectBuffer,false);
+    graph.use(main, boundsResource, RenderGraphUsage::FragmentStorage, false);
+    graph.use(main,instanceResource,RenderGraphUsage::VertexStorage,false);
+    if(objectRecordsResource)graph.use(main,*objectRecordsResource,RenderGraphUsage::FragmentStorage,false);
+    if(objectAtlasResource)graph.use(main,*objectAtlasResource,RenderGraphUsage::Sampled,false);
     graph.use(main, lightResource, RenderGraphUsage::FragmentStorage, false);
     graph.use(main, clusterHeaderResource, RenderGraphUsage::FragmentStorage, false);
     graph.use(main, clusterIndexResource, RenderGraphUsage::FragmentStorage, false);
@@ -871,25 +1799,143 @@ void CharacterSceneRenderer::registerPasses(
         graph.use(main, indexResources[meshKey], RenderGraphUsage::IndexBuffer, false);
     }
     graph.use(main, jointResource, RenderGraphUsage::VertexStorage, false);
+    graph.use(main,morphTargetResource,RenderGraphUsage::VertexStorage,false);
+    graph.use(main,morphWeightResource,RenderGraphUsage::VertexStorage,false);
+    if (skinnedResource) graph.use(main, *skinnedResource, RenderGraphUsage::VertexStorage, false);
     graph.attachment(main, resources.color, RenderGraphUsage::ColorAttachment,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     graph.attachment(main, resources.depth, RenderGraphUsage::DepthAttachment,
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
     graph.attachment(main, resources.normal, RenderGraphUsage::ColorAttachment,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    if(context.displayMaskEnabled){
+        if(resources.displayMask==UINT32_MAX)throw std::invalid_argument("Display transform requires an imported view mask");
+        graph.attachment(main,resources.displayMask,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    }
+    if(motionPass_&&context.motionOutput){
+        if(resources.motion==UINT32_MAX||resources.motionSurfaceDepth==UINT32_MAX)
+            throw std::invalid_argument("Motion-enabled renderer requires imported view outputs");
+        const auto pass=graph.addCommandPass("character-motion",[this,frozenContext,draws=motionDraws_](rhi::ICommandRecorder& commands){
+            motionPass_->record(commands,frozenContext->currentFrame,frozenContext->imageIndex,frozenContext->renderExtent,draws);
+        });
+        addMotionUses(pass);
+        graph.attachment(pass,resources.depth,RenderGraphUsage::DepthReadAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+        graph.attachment(pass,resources.motion,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        graph.attachment(pass,resources.motionSurfaceDepth,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    }
 }
 
 void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     if (!instanceSnapshot_) throw std::logic_error("Direct recording requires a prepared snapshot");
     instanceSnapshot_->validateForRecording();
+    if(surfaceRadiance_&&surfaceRadiance_->statisticsEnabled()){const auto& buffer=surfaceRadiance_->statisticsBuffer(context.currentFrame);
+        context.commands->bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+            VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});}
+    for(const auto* buffer:{&morphTargetBuffer_,&morphWeightBuffers_[context.currentFrame],&jointBuffers_[context.currentFrame],&instanceBuffers_[context.currentFrame]})
+        context.commands->bufferBarrier({buffer->buffer,0,buffer->size,VK_PIPELINE_STAGE_HOST_BIT,
+            VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+    if(const auto ticket=gpuTransparentTickets_[context.currentFrame]){
+        gpuTransparentSort_->record(*context.commands,*ticket);const auto& buffer=gpuTransparentSort_->indices(context.currentFrame);
+        context.commands->bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+            VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_INDEX_READ_BIT});
+    }
     recordComputeSkinning(context);
+    if(referenceDepthActive()){
+        context.commands->beginRenderPass(referenceSceneDepth_->begin(context.currentFrame));
+        recordDepthCoverage(context,*instanceSnapshot_,*context.commands,DepthCoverageMode::ReferenceDepth);
+        context.commands->endRenderPass();
+        pendingReferenceDepth_=ReferenceDepthSubmission{context.currentFrame,referenceVisibilityActive(),referenceObjectVisibilityActive(),0};
+    }
     recordShadowPass(context);
+    if(!instanceSnapshot_->objectShadowPages.empty()){
+        context.commands->beginRenderPass(objectShadowAtlas_->beginDescription());
+        recordObjectShadows(context,*instanceSnapshot_,*context.commands);
+        context.commands->endRenderPass();
+        context.commands->imageBarrier({objectShadowAtlas_->image().image,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,
+            VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+            VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
+    }
+    if(referenceObjectVisibilityActive()){
+        const auto slot=context.currentFrame;
+        if(!instanceSnapshot_->objectShadowPages.empty())
+            for(const auto image:{referenceSceneDepth_->rasterImage(slot),referenceSceneDepth_->packedNormalImage(slot),referenceSceneDepth_->objectIdImage(slot)})
+                context.commands->imageBarrier({image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
+                    VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+        recordReferenceObjectVisibility(*context.commands,slot,*instanceSnapshot_);
+    }
+    context.commands->imageBarrier({context.shadowImage,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
+    const auto& bounds=shadowBounds_[context.currentFrame];
+    context.commands->bufferBarrier({bounds->buffer().buffer,0,bounds->depthBoundsBytes(),VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_SHADER_READ_BIT,VK_ACCESS_SHADER_WRITE_BIT});
+    bounds->record(*context.commands);
+    recordShadowHistoryReady(*context.commands,static_cast<unsigned>(context.currentFrame));
+    context.commands->bufferBarrier({bounds->buffer().buffer,0,bounds->depthBoundsBytes(),VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+    if(objectShadowPrepared_)context.commands->bufferBarrier({bounds->buffer().buffer,bounds->objectRecordsOffset(),bounds->buffer().size-bounds->objectRecordsOffset(),
+        VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+    rhi::RenderPassBeginDesc begin{};begin.renderPass=snapshotPass();begin.framebuffer=snapshotFramebuffer(context.currentFrame);begin.extent=context.renderExtent;
+    VkClearValue color{};VkClearValue linear{};linear.color.float32[0]=100000;VkClearValue depth{};depth.depthStencil={1,0};begin.clearValues=snapshotMultisampling_?std::vector<VkClearValue>{color,depth,linear}:std::vector<VkClearValue>{color,linear,depth};
+    if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)begin.clearValues.push_back(SurfaceRadianceCache::clearValue(kind));
+    context.commands->beginRenderPass(begin);recordOverlayDepth(context,*instanceSnapshot_,*context.commands);context.commands->endRenderPass();
+    if(snapshotMultisampling_)snapshotMultisampling_->recordResolve(*context.commands,context.currentFrame,context.currentFrame);
+    if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
+        context.commands->imageBarrier({surfaceRadiance_->texture(context.currentFrame,kind).image.image,
+            VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
+            VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+
+    if(surfaceRadiance_&&surfaceRadiance_->statisticsEnabled()){const auto& buffer=surfaceRadiance_->statisticsBuffer(context.currentFrame);
+        context.commands->bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+            VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});}
+    if(screenReflectionPrepared()&&reflectionActive_[context.currentFrame]){
+        const auto slot=context.currentFrame;
+        if(screenReflectionTemporalPrepared()){
+            context.commands->imageBarrier({overlayDepthAttachments_[slot].image,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,
+                VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
+            motionPass_->recordToFramebuffer(*context.commands,slot,reflectionMotionFramebuffer(slot),context.renderExtent,reflectionMotionDraws_);
+            context.commands->imageBarrier({motionTarget_->image().image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
+                VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+        }
+        for(const auto image:{overlaySceneDepth_[slot].image.image,opaqueSceneColor_[slot].image.image})context.commands->imageBarrier({image,
+            VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+            VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+        if(projectedReflectionHistoryPrepared_&&reflectionHistoryAvailable(slot))context.commands->imageBarrier({opaqueSceneColor_[reflectionHistorySlot_].image.image,
+            VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+            VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+        recordScreenReflection(*context.commands,slot,{overlaySceneDepth_[slot].view,opaqueSceneColor_[slot].view,context.renderExtent.width,context.renderExtent.height},
+            reflectionViews_[slot],reflectionSettings_[slot]);
+    }
+
+    if(instanceSnapshot_->buffers.outlineMaskImage){
+        rhi::RenderPassBeginDesc mask{};mask.renderPass=outlineMaskPass_;
+        mask.framebuffer=instanceSnapshot_->buffers.outlineMaskFramebuffer;mask.extent=instanceSnapshot_->buffers.outlineMaskExtent;
+        mask.clearValues={VkClearValue{}};
+        context.commands->beginRenderPass(mask);recordOutlineMask(context,*instanceSnapshot_,*context.commands);context.commands->endRenderPass();
+    }
+    recordConservativeOcclusion(context,*instanceSnapshot_);
+    if(radianceSelectionActive(context)){
+        const auto& predicate=surfaceRadiance_->selectionBuffer(static_cast<unsigned>(context.currentFrame));
+        context.commands->bufferBarrier({predicate.buffer,0,predicate.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+            VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});
+        recordRadianceDepthCopy(*context.commands,context);
+        context.commands->beginRenderPass(radianceValidationDescription(context));
+        recordDepthCoverage(context,*instanceSnapshot_,*context.commands,DepthCoverageMode::RadianceValidation);
+        context.commands->endRenderPass();recordRadianceSelection(*context.commands,context);
+    }
+
     recordMainPass(context);
 }
 
 void CharacterSceneRenderer::onUnload(const RenderContext& context) {
+    if (graphicsPreparation_.valid()) {
+        try { graphicsPreparation_.get(); }
+        catch (...) { /* A discarded renderer still owns partial resources. */ }
+    }
+    graphicsPreparationContext_.reset();
+    temporalView_.clear();
+    motionPoses_.clear();motionPoseScratch_.clear();state_.temporalFrame=nullptr;
     (void)context;
-    destroyResources();
+    loadJobs_.clear();loadInitialized_=false;destroyResources();
+    transparencyScratch_={};transparentTopologies_.clear();preparationWorkers_=nullptr;
+    clusteredLightGrid_.reset();
+    faceSdfHeadNode_.reset();faceSdfTextureCount_=0;
 }
 
 void CharacterSceneRenderer::appendHudText(std::ostringstream& text) const {
@@ -961,9 +2007,279 @@ void CharacterSceneRenderer::setPlaybackPlaying(const bool playing) {
 
 void CharacterSceneRenderer::appendCaptureManifestFields(
     std::ostream& json) const {
+    const auto reportPrecision=json.precision();
     const std::string animationName = asset_.animations.empty()
         ? std::string()
         : asset_.animations[animationIndex_].name;
+    std::size_t triangles=0,skinned=0,transparent=0;
+    std::uint64_t preparedSkinningVertices=0,skinningOutputBytes=0;
+    if(computeSkinningEnabled_)for(const auto& buffer:skinnedVertexBuffers_)skinningOutputBytes+=buffer.size;
+    if(computeSkinningEnabled_)for(const auto& dispatch:skinningDispatches_)
+        preparedSkinningVertices+=std::uint64_t(dispatch.parameters.vertexCount)*dispatch.parameters.instanceCount;
+    const auto& instances=instanceSnapshot_?instanceSnapshot_->instances:sceneInstances_;
+    for(const auto& instance:instances){
+        const auto& mesh=instance.meshKey==0?asset_:additionalResources_[instance.meshKey-1]->asset;
+        triangles+=mesh.indices.size()/3;if(mesh.hasSkin)skinned+=mesh.vertices.size();
+        for(const auto& primitive:mesh.primitives)if(mesh.materials[primitive.materialIndex].alphaMode==AssetAlphaMode::Blend
+            &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex]))transparent+=primitive.indexCount/3;
+    }
+    const auto selected=surfaceRadiance_?surfaceRadiance_->selectionStatistics():SurfaceRadianceCache::SelectionStatistics{};
+    json << "  \"surfaceRadianceSelection\": {\"enabled\": " << (surfaceRadiance_&&surfaceRadiance_->selectionEnabled()?"true":"false")
+         << ", \"prepared\": " << (conservativeFrames_[currentFrame_].selectionTicket?"true":"false")
+         << ", \"frames\": " << selected.frames << ", \"fastFrames\": " << selected.fastFrames << ", \"fullFrames\": " << selected.fullFrames
+         << ", \"fastDraws\": " << selected.fastDraws << ", \"fullDraws\": " << selected.fullDraws
+         << ", \"lastFastDraws\": " << selected.lastFastDraws << ", \"lastFullDraws\": " << selected.lastFullDraws
+         << ", \"fastWitnesses\": " << selected.fastWitnesses << ", \"fullWitnesses\": " << selected.fullWitnesses
+         << ", \"lastFastWitnesses\": " << selected.lastFastWitnesses << ", \"lastFullWitnesses\": " << selected.lastFullWitnesses
+         << ", \"lastGlobalReasons\": " << selected.lastGlobalReasons
+         << ", \"lastFallback\": " << (selected.lastFallback?"true":"false") << ", \"fallback\": " << std::quoted(radianceSelectionFallback_) << "},\n";
+    const auto statistics=surfaceRadiance_?surfaceRadiance_->statistics():SurfaceRadianceCache::Statistics{};
+    json << "  \"surfaceRadianceStatistics\": {\"enabled\": " << (surfaceRadiance_&&surfaceRadiance_->statisticsEnabled()?"true":"false")
+         << ", \"bytes\": " << (surfaceRadiance_?surfaceRadiance_->statisticsBytes():0)
+         << ", \"frames\": " << statistics.frames << ", \"producerStores\": " << statistics.producerStores
+         << ", \"consumerVisits\": " << statistics.consumerVisits << ", \"eligibleRequests\": " << statistics.eligibleRequests
+         << ", \"pixelMatches\": " << statistics.pixelMatches << ", \"quadMatches\": " << statistics.quadMatches
+         << ", \"sampleSpacing\": " << ((kSurfaceRadianceFrameSelection&&kSurfaceRadianceDiagnostics)?32:1)
+         << ", \"failureAttempts\": " << (surfaceRadiance_?surfaceRadiance_->lastDiagnosticAttempts():0)
+         << ", \"failureCapacity\": " << (surfaceRadiance_?surfaceRadiance_->diagnosticRecordCapacity():0)
+         << ", \"failureSamples\": [";
+    if(surfaceRadiance_){bool first=true;for(const auto& record:surfaceRadiance_->diagnosticRecords()){
+        if(!first)json << ',';first=false;json << '[';for(unsigned i=0;i<record.size();++i){if(i)json << ',';json << record[i];}json << ']';}}
+    json << "]" << ", \"overflow\": " << (statistics.overflow?"true":"false") << "},\n";
+    json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
+         << "  \"surfaceRadiancePrepared\": " << (surfaceRadiance_?"true":"false") << ",\n"
+         << "  \"surfaceRadianceBytes\": " << (surfaceRadiance_?surfaceRadiance_->bytes():0) << ",\n"
+         << "  \"surfaceRadianceIdentityVersion\": 1,\n"
+         << "  \"shadowHistoryPrepared\": " << (shadowHistory_?"true":"false") << ",\n"
+         << "  \"shadowHistoryBytes\": " << (shadowHistory_?shadowHistory_->bytes():0) << ",\n"
+         << "  \"shadowHistorySampledRequests\": " << shadowHistoryRequests_ << ",\n"
+         << "  \"shadowHistorySampledEligible\": " << shadowHistoryEligible_ << ",\n"
+         << "  \"shadowHistorySampledHits\": " << shadowHistoryHits_ << ",\n"
+         << "  \"loadedResourceIdentityEntries\": " << loadedResourceMeshKeys_.size() << ",\n"
+         << "  \"sceneTransformCachedNodes\": " << sceneTransforms_.statistics().nodes << ",\n"
+         << "  \"sceneTransformReusedWorld\": " << sceneTransforms_.statistics().reusedWorld << ",\n"
+         << "  \"sceneTransformLocalEvaluations\": " << sceneTransforms_.statistics().localEvaluations << ",\n"
+         << "  \"sceneTransformFallback\": " << (sceneTransforms_.statistics().legacyFallback?"true":"false") << ",\n"
+         << "  \"bindPoseCacheEntries\": " << loadedBindPoses_.size() << ",\n"
+         << "  \"bindPoseCachedCopies\": " << bindPoseCachedCopies_ << ",\n"
+         << "  \"bindPoseSharedInstances\": " << bindPoseSharedInstances_ << ",\n"
+         << "  \"computeSkinningPreparedDispatches\": " << (computeSkinningEnabled_?skinningDispatches_.size():0) << ",\n"
+         << "  \"computeSkinningPreparedVertices\": " << preparedSkinningVertices << ",\n"
+         << "  \"computeSkinningVertexWords\": " << GpuSkinnedVertex::wordCount << ",\n"
+         << "  \"shadowBoundsTilesPerGroup\": " << (shadowBounds_.at(currentFrame_)?shadowBounds_.at(currentFrame_)->tilesPerGroup():0) << ",\n"
+         << "  \"computeSkinningOutputBytes\": " << skinningOutputBytes << ",\n"
+         << "  \"gpuTransparentSortingPrepared\": " << (gpuTransparentTickets_[currentFrame_]?"true":"false") << ",\n"
+         << "  \"gpuTransparentSortingBytes\": " << (gpuTransparentSort_?gpuTransparentSort_->bytes():0) << ",\n"
+         << "  \"gpuTransparentSortingVertices\": " << (gpuTransparentTickets_[currentFrame_]?gpuTransparentTickets_[currentFrame_]->vertexCount:0) << ",\n"
+         << "  \"gpuTransparentSortingFallback\": " << std::quoted(gpuTransparentFallback_) << ",\n"
+         << "  \"defaultIsolationPipelines\": " << defaultIsolationPipelines_.size() << ",\n"
+         << "  \"defaultIsolationSelected\": " << (qaIsolationMode_==0&&!defaultIsolationPipelines_.empty()?"true":"false") << ",\n"
+         << "  \"defaultIsolationFallback\": " << std::quoted(defaultIsolationFallback_) << ",\n"
+         << "  \"computedMaterialViewPipelines\": " << computedMaterialViewPipelines_.size() << ",\n"
+         << "  \"computedMaterialViewFrameEligible\": " << (computedMaterialViewFrame_.at(currentFrame_)?"true":"false") << ",\n"
+         << "  \"computedMaterialViewRequestsTotal\": " << computedMaterialViewRequests_.load(std::memory_order_relaxed) << ",\n"
+         << "  \"computedMaterialViewSelectionsTotal\": " << computedMaterialViewSelections_.load(std::memory_order_relaxed) << ",\n"
+         << "  \"computedMaterialViewFallback\": " << std::quoted(computedMaterialViewFallback_) << ",\n"
+         << "  \"conservativeOcclusionPrepared\": " << (conservativeFrames_[currentFrame_].ticket?"true":"false") << ",\n"
+         << "  \"mainDepthSplitRecorded\": " << (mainDepthSplitRecorded_[currentFrame_]?"true":"false") << ",\n"
+         << "  \"conservativeOcclusionCommands\": " << (conservativeFrames_[currentFrame_].ticket?conservativeFrames_[currentFrame_].ticket->count:0) << ",\n"
+         << "  \"conservativeOcclusionLastZeroCommands\": " << conservativeFrames_[currentFrame_].lastZeroCommands << ",\n"
+         << "  \"conservativeOcclusionFallback\": " << std::quoted(conservativeFallback_) << ",\n"
+         << "  \"staticSkinningReusedInstances\": " << (computeSkinningEnabled_?staticSkinningOutputs_.at(currentFrame_).reusedCount():0) << ",\n"
+         << "  \"staticSkinningReusedVertices\": " << (computeSkinningEnabled_?staticSkinningOutputs_.at(currentFrame_).reusedVertexCount():0) << ",\n"
+         << "  \"motionPreviousValidObjects\": " << motionPreviousValidObjects_ << ",\n"
+         << "  \"motionOutputActive\": " << (motionPass_?"true":"false") << ",\n"
+         << "  \"motionDescriptorWrites\": " << (motionPass_?motionPass_->descriptorWriteCount():0) << ",\n"
+         << "  \"motionDescriptorReuses\": " << (motionPass_?motionPass_->descriptorReuseCount():0) << ",\n"
+         << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
+         << "  \"reflectionSurfaceSnapshot\": " << (reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?"true":"false") << ",\n"
+         << "  \"screenReflectionComputePrepared\": " << (screenReflectionPrepared()?"true":"false") << ",\n"
+         << "  \"screenReflectionAlgorithmRequested\": " << std::quoted(screenSpaceReflectionAlgorithmName(reflectionSettings_[currentFrame_].algorithm)) << ",\n"
+         << "  \"screenReflectionAlgorithm\": " << std::quoted(reflectionShadingActive_[currentFrame_]?(reflectionActive_[currentFrame_]&&projectedReflections_?"projected":"linear"):"disabled") << ",\n"
+         << "  \"screenReflectionProducer\": " << std::quoted(screenReflectionProducer(static_cast<unsigned>(currentFrame_))) << ",\n"
+         << "  \"screenReflectionFallback\": " << nlohmann::json(screenReflectionFallback(static_cast<unsigned>(currentFrame_))).dump() << ",\n"
+         << "  \"screenReflectionComputeActive\": " << (reflectionActive_[currentFrame_]?"true":"false") << ",\n"
+         << "  \"screenReflectionTemporalPrepared\": " << (screenReflectionTemporalPrepared()?"true":"false") << ",\n"
+         << "  \"screenReflectionTemporalActive\": " << (screenReflectionTemporalPrepared()&&reflectionActive_[currentFrame_]?"true":"false") << ",\n"
+         << "  \"screenReflectionTemporalPreparation\": " << std::quoted(reflectionHistoryPreparation_) << ",\n"
+         << "  \"screenReflectionHistoryValid\": " << (reflectionHistoryValid_[currentFrame_]?"true":"false") << ",\n"
+         << "  \"screenReflectionHistorySubmission\": " << reflectionHistorySubmission_ << ",\n"
+         << "  \"screenReflectionHistoryInputSubmission\": " << reflectionInputSubmissions_[currentFrame_] << ",\n"
+         << "  \"screenReflectionMotionUvOffset\": " << nlohmann::json(reflectionMotionUvOffsets_[currentFrame_]).dump() << ",\n"
+         << "  \"screenReflectionOwnsMotion\": " << (reflectionOwnedMotion_?"true":"false") << ",\n"
+         << "  \"screenReflectionMotionBytes\": " << (screenReflectionTemporalPrepared()&&motionTarget_?motionTarget_->byteSize():0) << ",\n"
+         << "  \"screenReflectionReprojectionBytes\": " << (reflectionReprojection_?reflectionReprojection_->byteSize():0) << ",\n"
+         << "  \"screenReflectionPreparation\": " << std::quoted(reflectionPreparation_) << ",\n"
+         << "  \"screenReflectionLevels\": " << (projectedReflections_?projectedReflections_->levels():screenReflections_?screenReflections_->levels():0) << ",\n"
+         << "  \"screenReflectionWidth\": " << (screenReflectionPrepared()?screenReflectionOutput(0).extent.width:0) << ",\n"
+         << "  \"screenReflectionHeight\": " << (screenReflectionPrepared()?screenReflectionOutput(0).extent.height:0) << ",\n"
+         << "  \"screenReflectionImageBudgetBytes\": " << (projectedReflections_?projectedReflections_->imageByteBudget():screenReflections_?screenReflections_->imageByteBudget():0) << ",\n"
+         << "  \"ordinaryOpaquePipelineCount\": " << std::count_if(ordinaryOpaquePipelines_.begin(),ordinaryOpaquePipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
+         << "  \"materialClassPipelineCount\": " << [&]{unsigned count=0;for(const auto& variants:materialClassPipelines_)for(auto p:variants)count+=p!=VK_NULL_HANDLE;return count;}() << ",\n"
+         << "  \"materialClassFeatureSpecializations\": " << [&]{
+             auto policies=nlohmann::json::array();
+             for(unsigned index=0;index<materialClassPipelines_.size();++index)
+                 if(std::any_of(materialClassPipelines_[index].begin(),materialClassPipelines_[index].end(),[](auto p){return p!=VK_NULL_HANDLE;})){
+                     const auto& policy=materialClassFeatureSpecializations_[index];
+                     policies.push_back({{"class",index},{"fixedMask",policy.fixedMask},{"fixedValue",policy.fixedValue}});
+                 }
+             return policies.dump();
+         }() << ",\n"
+         << "  \"ordinaryOpaqueSnapshotPipelineCount\": " << std::count_if(ordinaryOpaqueSnapshotPipelines_.begin(),ordinaryOpaqueSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
+         << "  \"irradianceResourceKind\": " << std::quoted(irradianceClipmapActive_?"clipmap":irradianceVolume_.cells.empty()?"none":"grid") << ",\n"
+         << "  \"irradianceQueryScope\": \"physical-surface\",\n"
+         << "  \"irradianceQuery\": {\"normalOffset\":" << std::setprecision(std::numeric_limits<float>::max_digits10) << scene_.irradianceVolume.sampling.normalOffset
+         << ",\"jitterAmplitude\":" << scene_.irradianceVolume.sampling.jitterAmplitude
+         << ",\"phase\":" << scene_.irradianceVolume.sampling.phase
+         << ",\"pixelOrigin\":" << std::quoted(scene_.irradianceVolume.sampling.pixelOrigin==IrradianceQueryParameters::PixelOrigin::TopLeft?"top-left":"bottom-left")
+         << ",\"jitterSpace\":" << std::quoted(scene_.irradianceVolume.sampling.jitterSpace==IrradianceQueryParameters::JitterSpace::World?"world":"field")
+         << "},\n" << std::setprecision(reportPrecision)
+         << "  \"pixelIntegralPipelineCount\": " << (std::count_if(hairIntegralPipelines_.begin(),hairIntegralPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})+std::count_if(hairIntegralSnapshotPipelines_.begin(),hairIntegralSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})) << ",\n"
+         << "  \"temporalSamplingPattern\": " << std::quoted(kTemporalSamplingPattern) << ",\n"
+         << "  \"motionResponseEncoding\": \"coverage-reactivity-v3\",\n"
+         << "  \"temporalViewSubmission\": " << temporalView_.lastSubmission() << ",\n"
+         << "  \"temporalCameraStateValid\": " << (temporalView_.committed()?"true":"false") << ",\n"
+         << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"
+         << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
+         << "  \"materialCoverageSources\": " << [&] {
+             nlohmann::json values=nlohmann::json::array();
+             const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
+                 for(std::size_t index=0;index<mesh.materials.size();++index) {
+                     const auto& material=mesh.materials[index];if(!material.coverageTexture.present)continue;
+                     values.push_back({{"materialIndex",base+index},{"name",material.name},
+                         {"channel",material.coverageTexture.channel==AssetMaterial::CoverageTexture::Channel::Red?"red":"alpha"},
+                         {"lodPolicy",material.coverageTexture.lodPolicy==AssetMaterial::CoverageTexture::LodPolicy::EllipseMajor?"ellipse-major":"device"},
+                         {"width",material.metallicRoughnessWidth},{"height",material.metallicRoughnessHeight},
+                         {"authoredMipLevels",material.authoredMipLevels[2]},{"sampler",material.textureSettings[2].describe()}});
+                 }
+             };
+             append(asset_,0);for(const auto& resource:additionalResources_)append(resource->asset,resource->globalMaterialBase);
+             return values.dump();
+         }() << ",\n"
+         << "  \"nprRampCompositions\": " << [&] {
+             nlohmann::json values=nlohmann::json::array();
+             const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
+                 for(std::size_t index=0;index<mesh.materials.size();++index) {
+                     const auto& material=mesh.materials[index];
+                     if(!material.nprDiffuse.present||material.nprDiffuse.rampComposition==NprRampComposition::MaskVisibility)continue;
+                     values.push_back({{"materialIndex",base+index},{"name",material.name},{"rampComposition",
+                         material.nprDiffuse.rampComposition==NprRampComposition::ViewFacingMask?"view-facing-mask":"view-ramp-alpha"}});
+                 }
+             };
+             append(asset_,0);for(const auto& resource:additionalResources_)append(resource->asset,resource->globalMaterialBase);
+             return values.dump();
+         }() << ",\n"
+         << "  \"materialLightingReceivers\": " << [&] {
+             nlohmann::json values=nlohmann::json::array();
+             const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
+                 for(std::size_t index=0;index<mesh.materials.size();++index) {
+                     const auto& material=mesh.materials[index];
+                     const auto flags=materialEnvironmentFlags(material.environmentLighting);
+                     if(flags==0&&material.mainLightShadow==MaterialMainLightShadow::Scene)continue;
+                     nlohmann::json value={{"materialIndex",base+index},{"name",material.name},
+                         {"diffuse",flags&1?"global-environment":"scene"},
+                         {"reflection",flags&2?"global-environment":"scene"},
+                         {"specularModel",material.environmentLighting.fittedSpecular?"ggx-multiscatter-fit":"scene"},
+                         {"mainLightShadow",material.mainLightShadow==MaterialMainLightShadow::ObjectShadow?"object-shadow":"scene"},
+                         {"globalIntensity",nullptr}};
+                     if(material.environmentLighting.reflectionLayer)value["reflectionLayer"]=*material.environmentLighting.reflectionLayer;
+                     if(material.environmentLighting.globalIntensity)value["globalIntensity"]=*material.environmentLighting.globalIntensity;
+                     values.push_back(std::move(value));
+                 }
+             };
+             append(asset_,0);for(const auto& resource:additionalResources_)append(resource->asset,resource->globalMaterialBase);
+             return values.dump();
+         }() << ",\n"
+         << "  \"materialDisplayTransforms\": " << [&] {
+             nlohmann::json values=nlohmann::json::array();
+             const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
+                 for(std::size_t index=0;index<mesh.materials.size();++index) {
+                     const auto& material=mesh.materials[index];
+                     if(material.displayTransform!=MaterialDisplayTransform::Scene)
+                         values.push_back({{"materialIndex",base+index},{"name",material.name},
+                             {"displayTransform",materialDisplayTransformName(material.displayTransform)}});
+                 }
+             };
+             append(asset_,0);for(const auto& resource:additionalResources_)append(resource->asset,resource->globalMaterialBase);
+             return values.dump();
+         }() << ",\n"
+         << "  \"materialRadianceScales\": " << [&] {
+             nlohmann::json values=nlohmann::json::array();
+             const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
+                 for(std::size_t index=0;index<mesh.materials.size();++index) {
+                     const auto& material=mesh.materials[index];
+                     if(material.radianceScale!=1)
+                         values.push_back({{"materialIndex",base+index},{"name",material.name},{"radianceScale",material.radianceScale}});
+                 }
+             };
+             append(asset_,0);
+             for(const auto& resource:additionalResources_)append(resource->asset,resource->globalMaterialBase);
+             return values.dump();
+         }() << ",\n"
+         << "  \"outlineProjectionLayoutVersion\": " << PackedOutlineProjectionRecord::kLayoutVersion << ",\n"
+         << "  \"snapshotRasterizationSamples\": " << (snapshotMultisampling_?4:1) << ",\n"
+         << "  \"snapshotMultisampleBytes\": " << (snapshotMultisampling_?snapshotMultisampling_->byteSize():0) << ",\n"
+         << "  \"snapshotMultisampleAllocatedBytes\": " << (snapshotMultisampling_?snapshotMultisampling_->allocatedByteSize():0) << ",\n"
+         << "  \"outlineMaskSamples\": " << rasterizationSamples_ << ",\n"
+         << "  \"outlineProjectionBytes\": " << (outlineProjection_?outlineProjection_->buffer().size:0) << ",\n"
+         << "  \"outlineProjectionMaterials\": " << (outlineProjection_?outlineProjection_->recordCount():0) << ",\n"
+         << "  \"outlineProjectionCoordinates\": " << (outlineProjection_?outlineProjection_->coordinateCount():0) << ",\n"
+         << "  \"instanceDataLayoutVersion\": " << SceneInstanceGpuData::kLayoutVersion << ",\n"
+         << "  \"cascadeProjectionLayoutVersion\": 2,\n"
+         << "  \"cascadeCasterDistance\": " << renderSettings_->shadowDistance << ",\n"
+         << "  \"cameraUniformBytes\": " << sizeof(UniformBufferObject) << ",\n"
+         << "  \"referenceCameraPrograms\": " << (referenceCameraPrepared_?"true":"false") << ",\n"
+         << "  \"referenceCameraEnabled\": " << (referenceCamera_?"true":"false") << ",\n"
+         << "  \"referenceCameraLayoutVersion\": 1,\n"
+         << "  \"referenceCameraConservativeRetention\": " << (referenceCamera_&&(referenceProjectedSurface_||renderSettings_->outline.silhouetteWidthPixels>0)?"true":"false") << ",\n"
+         << "  \"unlitFrameLayoutVersion\": 1,\n"
+         << "  \"viewFogEnabled\": " << (viewFog_?"true":"false") << ",\n"
+         << "  \"viewFogAnalyticEnabled\": " << (viewFog_&&scene_.viewFog.analytic?"true":"false") << ",\n"
+         << "  \"viewFogFrameBytes\": " << sizeof(PackedViewFogFrame) << ",\n"
+         << "  \"viewFogMatch\": \"" << fogViewMatchName(viewFog_?viewFog_->match:FogViewMatch::Disabled) << "\",\n"
+         << "  \"viewFogFrameLayoutVersion\": " << PackedViewFogFrame::layoutVersion << ",\n"
+         << "  \"objectShadowLayoutVersion\": " << ObjectShadowGpuHeader::kLayoutVersion << ",\n"
+         << "  \"objectShadowPrepared\": " << (objectShadowPrepared_?"true":"false") << ",\n"
+         << "  \"objectShadowExactDepthBias\": " << (objectShadowPrepared_&&rhi_->supportsExactDepthBias()?"true":"false") << ",\n"
+         << "  \"objectShadowPages\": " << (instanceSnapshot_?instanceSnapshot_->objectShadowPages.size():0) << ",\n"
+         << "  \"objectShadowDepthBytes\": " << (objectShadowAtlas_&&objectShadowAtlas_->image().image?ObjectShadowAtlas::kDepthBytes:0) << ",\n"
+         << "  \"materialTextureBindingLayoutVersion\": " << kTextureBindingLayoutVersion << ",\n"
+         << "  \"sharedMaterialTextureSlots\": " << kSharedTextureSlots << ",\n"
+         << "  \"lightBufferLayoutVersion\": " << RenderLightGpu::kLayoutVersion << ",\n"
+         << "  \"faceSdfTextures\": " << faceSdfTextureCount_ << ",\n"
+         << "  \"showcasePlatformPrepared\": " << (platformPrepared_?"true":"false") << ",\n"
+         << "  \"sceneTriangles\": " << triangles << ",\n"
+         << "  \"skinnedVertices\": " << skinned << ",\n"
+         << "  \"transparentTriangles\": " << transparent << ",\n"
+         << "  \"jointCapacity\": " << jointCapacity_ << ",\n"
+         << "  \"vertexCapacity\": " << vertexCapacity_ << ",\n";
+    const auto textureStats=materialTextureCache_?materialTextureCache_->statistics():SampledTextureCacheStatistics{};
+    const auto payloadStats=materialPixelPool_?materialPixelPool_->statistics():ImmutableBytePoolStatistics{};
+    json << "  \"materialPixelPayloads\": {\"livePayloads\": " << payloadStats.livePayloads
+         << ", \"decodedBytes\": " << payloadStats.decodedBytes << ", \"storedBytes\": " << payloadStats.storedBytes << "},\n";
+    auto sourcePixelBytes=materialSourcePixelBytes(asset_);
+    for(const auto& resource:additionalResources_)sourcePixelBytes+=materialSourcePixelBytes(resource->asset);
+    json << "  \"materialTextureCache\": {\"requests\": " << textureStats.requests
+         << ", \"hits\": " << textureStats.hits << ", \"uniqueTextures\": " << textureStats.uniqueTextures
+         << ", \"requestedBytes\": " << textureStats.requestedBytes << ", \"residentBytes\": " << textureStats.residentBytes
+         << ", \"retainedPixelBytes\": " << textureStats.retainedPixelBytes
+         << ", \"releasedIdentityBytes\": " << textureStats.releasedIdentityBytes
+         << ", \"referencedPixelBytes\": " << textureStats.referencedPixelBytes
+         << ", \"retainedIdentityStorageBytes\": " << textureStats.retainedIdentityStorageBytes
+         << ", \"releasedIdentityStorageBytes\": " << textureStats.releasedIdentityStorageBytes
+         << ", \"channelSavedBytes\": " << textureStats.channelSavedBytes
+         << ", \"compactedTextures\": " << textureStats.compactedTextures
+         << ", \"sealed\": " << (materialTextureCache_&&materialTextureCache_->sealed()?"true":"false")
+         << ", \"hashedPixelBytes\": " << textureStats.hashedPixelBytes << ", \"copiedPixelBytes\": " << textureStats.copiedPixelBytes
+         << ", \"transferredPixelBytes\": " << textureStats.transferredPixelBytes << ", \"discardedPixelBytes\": " << textureStats.discardedPixelBytes
+         << ", \"hashMs\": " << textureStats.hashMs << ", \"matchMs\": " << textureStats.matchMs
+         << ", \"mipMs\": " << textureStats.mipMs << ", \"uploadMs\": " << textureStats.uploadMs << "},\n";
+    json << "  \"sceneLoad\": {\"cpuPrepareMs\": " << loadTimings_.cpuPrepareMs
+         << ", \"meshUploadMs\": " << loadTimings_.meshUploadMs << ", \"materialUploadMs\": " << loadTimings_.materialUploadMs
+         << ", \"sharedTexturesMs\": " << loadTimings_.sharedTexturesMs << ", \"buffersMs\": " << loadTimings_.buffersMs
+         << ", \"skinningMs\": " << loadTimings_.skinningMs << ", \"descriptorsMs\": " << loadTimings_.descriptorsMs
+         << ", \"pipelinesMs\": " << loadTimings_.pipelinesMs << ", \"decodedMaterialPixelBytes\": " << decodedMaterialPixelBytes_
+         << ", \"remainingMaterialPixelBytes\": " << sourcePixelBytes << "},\n";
     json << "  \"animationIndex\": " << animationIndex_ << ",\n"
          << "  \"animation\": " << std::quoted(animationName) << ",\n";
 }
@@ -1008,45 +2324,34 @@ void CharacterSceneRenderer::onAnimationKey(
 void CharacterSceneRenderer::createMeshBuffers(
     LoadedAsset& asset,
     rhi::GpuBuffer& vertexBuffer,
-    rhi::GpuBuffer& indexBuffer) {
-    const VkDeviceSize vertexSize =
-        sizeof(AssetVertex) * asset.vertices.size();
-    rhi::GpuBuffer vertexStaging = allocator_->createBuffer(
-        vertexSize,
-        VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-        true);
-    std::memcpy(
-        vertexStaging.mapped,
-        asset.vertices.data(),
-        static_cast<std::size_t>(vertexSize));
-    vertexBuffer = allocator_->createBuffer(
-        vertexSize,
-        VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT
-            | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-        false);
-    rhi_->copyBuffer(vertexStaging, vertexBuffer, vertexSize);
-    allocator_->destroyBuffer(vertexStaging);
-
-    const VkDeviceSize indexSize =
-        sizeof(std::uint32_t) * asset.indices.size();
-    rhi::GpuBuffer indexStaging = allocator_->createBuffer(
-        indexSize,
-        VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-        true);
-    std::memcpy(
-        indexStaging.mapped,
-        asset.indices.data(),
-        static_cast<std::size_t>(indexSize));
-    indexBuffer = allocator_->createBuffer(
-        indexSize,
-        VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
-        false);
-    rhi_->copyBuffer(indexStaging, indexBuffer, indexSize);
-    allocator_->destroyBuffer(indexStaging);
+    rhi::GpuBuffer& indexBuffer,rhi::GpuBuffer& vertexColorBuffer) {
+    if(vertexBuffer.buffer||indexBuffer.buffer||vertexColorBuffer.buffer)
+        throw std::logic_error("Retire mesh buffers before creating their replacement");
+    if(!asset.vertexColors.empty()&&asset.vertexColors.size()!=asset.vertices.size())
+        throw std::invalid_argument("Vertex color stream must match the mesh vertex count");
+    const auto upload=[&](const void* data,VkDeviceSize size,VkBufferUsageFlags usage){
+        rhi::GpuBuffer staging{},target{};
+        try {
+            staging=allocator_->createBuffer(size,VK_BUFFER_USAGE_TRANSFER_SRC_BIT,true);
+            if(!staging.mapped)throw std::runtime_error("Vertex upload requires mapped staging memory");
+            std::memcpy(staging.mapped,data,static_cast<std::size_t>(size));
+            target=allocator_->createBuffer(size,VK_BUFFER_USAGE_TRANSFER_DST_BIT|usage,false);
+            rhi_->copyBuffer(staging,target,size);allocator_->destroyBuffer(staging);return target;
+        }catch(...){allocator_->destroyBuffer(staging);allocator_->destroyBuffer(target);throw;}
+    };
+    if(!whiteVertexColorBuffer_.buffer){const std::array<float,4> white{1,1,1,1};
+        whiteVertexColorBuffer_=upload(white.data(),sizeof(white),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);}
+    try {
+        vertexBuffer=upload(asset.vertices.data(),sizeof(AssetVertex)*asset.vertices.size(),
+            VK_BUFFER_USAGE_VERTEX_BUFFER_BIT|VK_BUFFER_USAGE_STORAGE_BUFFER_BIT);
+        indexBuffer=upload(asset.indices.data(),sizeof(std::uint32_t)*asset.indices.size(),VK_BUFFER_USAGE_INDEX_BUFFER_BIT);
+        if(!asset.vertexColors.empty())vertexColorBuffer=upload(asset.vertexColors.data(),
+            sizeof(std::array<float,4>)*asset.vertexColors.size(),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);
+    }catch(...){allocator_->destroyBuffer(vertexBuffer);allocator_->destroyBuffer(indexBuffer);allocator_->destroyBuffer(vertexColorBuffer);throw;}
 }
 
 void CharacterSceneRenderer::createVertexBuffer() {
-    createMeshBuffers(asset_, vertexBuffer_, indexBuffer_);
+    createMeshBuffers(asset_, vertexBuffer_, indexBuffer_,vertexColorBuffer_);
 }
 
 void CharacterSceneRenderer::createIndexBuffer() {
@@ -1060,15 +2365,36 @@ void CharacterSceneRenderer::uploadTextureData(
     const VkFormat format,
     const bool clampVertical,
     GpuTexture& texture,
-    const std::uint32_t mipLevels) {
-    const VkDeviceSize size = static_cast<VkDeviceSize>(pixels.size())
+    const std::uint32_t requestedMipLevels,TextureFilterSemantic semantic,float alphaCutoff,const TextureImportSettings* importSettings) {
+    std::vector<std::uint8_t> filtered;unsigned mipLevels=requestedMipLevels;
+    if(!rhi_->supportsSampledImage(format,!importSettings||importSettings->filter=="linear"))throw std::runtime_error("Device does not support the decoded texture sampling format");
+    if constexpr(sizeof(typename std::decay_t<Pixels>::value_type)==1){
+        const auto baseBytes=std::size_t(width)*height*4;
+        if(requestedMipLevels>1&&pixels.size()>baseBytes){
+            std::size_t expected=0;unsigned w=width,h=height;for(unsigned level=0;level<requestedMipLevels;++level){expected+=std::size_t(w)*h*4;w=std::max(w/2,1U);h=std::max(h/2,1U);}
+            if(pixels.size()!=expected)throw std::invalid_argument("Authored texture mip storage is invalid");filtered.assign(pixels.begin(),pixels.end());
+        }else if(requestedMipLevels==1&&pixels.size()>baseBytes)filtered.assign(pixels.begin(),pixels.begin()+baseBytes);
+        else if(requestedMipLevels==0){auto chain=buildTextureMipChain(pixels,width,height,semantic,alphaCutoff,!importSettings||importSettings->filter=="linear");filtered=std::move(chain.pixels);mipLevels=chain.levels;}
+    }
+    bool authoredHalfMips=false;
+    if constexpr(sizeof(typename std::decay_t<Pixels>::value_type)==2) {
+        if(requestedMipLevels>1&&pixels.size()>std::size_t(width)*height*4) {
+            std::size_t expected=0;unsigned w=width,h=height;
+            for(unsigned level=0;level<requestedMipLevels;++level){expected+=std::size_t(w)*h*4;w=std::max(w/2,1U);h=std::max(h/2,1U);}
+            if(pixels.size()!=expected)throw std::invalid_argument("Authored HDR mip storage is invalid");
+            authoredHalfMips=true;
+        }
+    }
+    const bool cpuMips=!filtered.empty();
+    const bool suppliedMips=cpuMips||authoredHalfMips;
+    const VkDeviceSize size = static_cast<VkDeviceSize>(cpuMips?filtered.size():pixels.size())
         * sizeof(typename std::decay_t<Pixels>::value_type);
     rhi::GpuBuffer staging = allocator_->createBuffer(
         size,
         VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
         true);
     std::memcpy(
-        staging.mapped, pixels.data(), static_cast<std::size_t>(size));
+        staging.mapped, cpuMips?static_cast<const void*>(filtered.data()):static_cast<const void*>(pixels.data()), static_cast<std::size_t>(size));
     texture.image = allocator_->createImage2D(
         width,
         height,
@@ -1086,8 +2412,8 @@ void CharacterSceneRenderer::uploadTextureData(
         VK_IMAGE_LAYOUT_UNDEFINED,
         VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
         mipLevels);
-    rhi_->copyBufferToImage(staging, texture.image, width, height);
-    if (mipLevels > 1) {
+    rhi_->copyBufferToImage(staging, texture.image, width, height,suppliedMips?mipLevels:1,4*sizeof(typename std::decay_t<Pixels>::value_type));
+    if (mipLevels > 1 && !suppliedMips) {
         rhi_->generateMipmaps(texture.image, format, width, height, mipLevels);
     } else {
         rhi_->transitionImageLayout(
@@ -1106,86 +2432,57 @@ void CharacterSceneRenderer::uploadTextureData(
         : VK_SAMPLER_ADDRESS_MODE_REPEAT;
     samplerDesc.addressW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
     samplerDesc.maxLod = static_cast<float>(mipLevels - 1);
+    samplerDesc.maxAnisotropy = clampVertical?1.0F:8.0F;
+    if(importSettings)samplerDesc=importSettings->sampler(mipLevels,16);
     texture.sampler = rhi_->createSampler(samplerDesc);
 }
 
-void CharacterSceneRenderer::uploadMaterialTextures(
-    const LoadedAsset& asset,
-    std::vector<GpuMaterial>& gpuMaterials) {
+void CharacterSceneRenderer::uploadMaterialTextures(LoadedAsset& asset,std::vector<GpuMaterial>& gpuMaterials){
     gpuMaterials.resize(asset.materials.size());
-    for (std::size_t index = 0; index < asset.materials.size(); ++index) {
-        const AssetMaterial& material = asset.materials[index];
-        GpuMaterial& gpuMaterial = gpuMaterials[index];
-        uploadTextureData(
-            material.baseColorPixels,
-            material.baseColorWidth,
-            material.baseColorHeight,
-            VK_FORMAT_R8G8B8A8_SRGB,
-            false,
-            gpuMaterial.baseColor);
-        uploadTextureData(
-            material.normalPixels,
-            material.normalWidth,
-            material.normalHeight,
-            VK_FORMAT_R8G8B8A8_UNORM,
-            false,
-            gpuMaterial.normal);
-        uploadTextureData(
-            material.metallicRoughnessPixels,
-            material.metallicRoughnessWidth,
-            material.metallicRoughnessHeight,
-            VK_FORMAT_R8G8B8A8_UNORM,
-            false,
-            gpuMaterial.metallicRoughness);
-        uploadTextureData(
-            material.specularEmissivePixels,
-            material.specularEmissiveWidth,
-            material.specularEmissiveHeight,
-            VK_FORMAT_R8G8B8A8_SRGB,
-            false,
-            gpuMaterial.specularEmissive);
-        uploadTextureData(
-            material.styleMaskPixels,
-            material.styleMaskWidth,
-            material.styleMaskHeight,
-            VK_FORMAT_R8G8B8A8_UNORM,
-            false,
-            gpuMaterial.styleMask);
-        uploadTextureData(
-            material.matcapPixels,
-            material.matcapWidth,
-            material.matcapHeight,
-            VK_FORMAT_R8G8B8A8_SRGB,
-            false,
-            gpuMaterial.matcap);
-        uploadTextureData(
-            material.hairDataPixels,
-            material.hairDataWidth,
-            material.hairDataHeight,
-            VK_FORMAT_R8G8B8A8_UNORM,
-            false,
-            gpuMaterial.hairData);
-        const std::vector<std::uint8_t> faceSdfPixels =
-            material.faceSdf.present
-            ? material.faceSdf.pixels
-            : std::vector<std::uint8_t>{
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-            };
-        uploadTextureData(
-            faceSdfPixels,
-            material.faceSdf.present ? material.faceSdf.width : 2,
-            material.faceSdf.present ? material.faceSdf.height : 2,
-            VK_FORMAT_R8G8B8A8_UNORM,
-            false,
-            gpuMaterial.faceSdf);
+    for(std::size_t index=0;index<asset.materials.size();++index)for(unsigned slot=0;slot<kMaterialTextureSlots;++slot)uploadMaterialTexture(asset,gpuMaterials,index,slot);
+}
+void CharacterSceneRenderer::uploadMaterialTexture(LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot){
+    auto& m=asset.materials.at(index);auto& g=materials.at(index);
+    const auto& settings=m.textureSettings.at(slot);
+    const auto mipLevels=settings.mipPolicy=="none"?1U:m.authoredMipLevels.at(slot);
+    const auto colorFormat=settings.colorSpace=="srgb"?VK_FORMAT_R8G8B8A8_SRGB:VK_FORMAT_R8G8B8A8_UNORM;
+    using PixelKind=AssetMaterial::PixelKind;
+    const auto upload=[&](PixelKind kind,unsigned width,unsigned height,
+                         SampledTextureBinding& binding,unsigned levels,float cutoff=0) {
+        auto& pixels=materialPixelBytes(m,kind);auto& prepared=m.preparedPixels.at(static_cast<std::size_t>(kind));
+        if(!materialTextureCache_)throw std::logic_error("Material texture cache is not initialized");
+        SampledTextureUpload request;request.width=width;request.height=height;request.format=colorFormat;
+        request.mipLevels=levels;request.semantic=settings.semantic();request.alphaCutoff=cutoff;
+        request.sampler=settings.sampler(1,16);request.sampler.maxLod=VK_LOD_CLAMP_NONE;
+        const auto bytes=materialPixelLogicalBytes(m,kind);
+        if(bytes>=16U*1024U*1024U)RuntimeDiagnostics::instance().info("render",
+            "Scene material texture begin: "+m.name+", slot="+std::to_string(slot)+", bytes="+std::to_string(bytes));
+        if(prepared){binding=materialTextureCache_->acquirePrepared(prepared,request);prepared.reset();}
+        else binding=materialTextureCache_->acquire(std::move(pixels),request);
+    };
+    switch(slot){
+    case 0:upload(PixelKind::BaseColor,m.baseColorWidth,m.baseColorHeight,g.baseColor,mipLevels,
+        m.alphaMode==AssetAlphaMode::Mask&&!m.coverageTexture.present?m.alphaCutoff:0);break;
+    case 1:upload(PixelKind::Normal,m.normalWidth,m.normalHeight,g.normal,mipLevels);break;
+    case 2:upload(PixelKind::MetallicRoughness,m.metallicRoughnessWidth,m.metallicRoughnessHeight,g.metallicRoughness,mipLevels,
+        m.coverageTexture.present?m.alphaCutoff:0);break;
+    case 3:upload(PixelKind::SpecularEmissive,m.specularEmissiveWidth,m.specularEmissiveHeight,g.specularEmissive,mipLevels);break;
+    case 4:upload(PixelKind::StyleMask,m.styleMaskWidth,m.styleMaskHeight,g.styleMask,mipLevels);break;
+    case 5:upload(PixelKind::Matcap,m.matcapWidth,m.matcapHeight,g.matcap,mipLevels);break;
+    case 6:upload(PixelKind::HairData,m.hairDataWidth,m.hairDataHeight,g.hairData,mipLevels);break;
+    case 7:{if(m.projectedHairRamp.present){auto& h=m.projectedHairRamp;upload(PixelKind::ProjectedParameters,h.parameterWidth,h.parameterHeight,g.faceSdf,mipLevels);}
+        else if(faceSdfPrepared_&&m.faceSdf.present){upload(PixelKind::FaceSdf,m.faceSdf.width,m.faceSdf.height,g.faceSdf,mipLevels);++faceSdfTextureCount_;}break;}
+    case 8:if(m.projectedHairRamp.line.present){auto& line=m.projectedHairRamp.line;upload(PixelKind::ProjectedLine,line.width,line.height,g.shadowColorLut,mipLevels);}
+        else upload(PixelKind::ShadowColorLut,m.shadowColorLutWidth,m.shadowColorLutHeight,g.shadowColorLut,
+            m.unlitTextureLayers.coverageLayer.present?mipLevels:1);break;
+    default:throw std::runtime_error("Invalid material upload slot");
     }
 }
 
-void CharacterSceneRenderer::createTexture() {
+void CharacterSceneRenderer::createTexture(bool uploadMaterials) {
 
     const auto loadPpmTexture = [](const std::string& path) {
-        std::ifstream stream(path);
+        std::ifstream stream(std::filesystem::u8path(path));
         if (!stream) {
             throw std::runtime_error("Could not open toon-ramp atlas: " + path);
         }
@@ -1224,7 +2521,7 @@ void CharacterSceneRenderer::createTexture() {
         return LoadedPpm{std::move(pixels), width, height};
     };
 
-    uploadMaterialTextures(asset_, gpuMaterials_);
+    if(uploadMaterials)uploadMaterialTextures(asset_, gpuMaterials_);
 
     constexpr std::uint32_t kEnvironmentWidth = 512;
     constexpr std::uint32_t kEnvironmentHeight = 256;
@@ -1232,12 +2529,16 @@ void CharacterSceneRenderer::createTexture() {
     std::vector<std::uint16_t> environmentPixels;
     std::uint32_t environmentWidth = kEnvironmentWidth;
     std::uint32_t environmentHeight = kEnvironmentHeight;
+    std::uint32_t authoredEnvironmentMips = 0;
     if (!environmentSource_.path.empty()) {
         const EnvironmentImage environment =
             loadEnvironmentImage(environmentSource_);
+        if(environment.projection==EnvironmentProjection::CubeFaces)
+            throw std::invalid_argument("Global environment requires an equirectangular source");
         environmentPixels = environment.rgba16f;
         environmentWidth = environment.width;
         environmentHeight = environment.height;
+        authoredEnvironmentMips = environment.authoredMipLevels;
         azurerender::RuntimeDiagnostics::instance().print(
             "asset",
             "Environment: " + environment.description + " ("
@@ -1307,14 +2608,69 @@ void CharacterSceneRenderer::createTexture() {
         VK_FORMAT_R16G16B16A16_SFLOAT,
         true,
         environmentTexture_,
-        kEnvironmentMipLevels);
-    if (computeIblEnabled_) {
+        authoredEnvironmentMips ? authoredEnvironmentMips : kEnvironmentMipLevels);
+    if (authoredEnvironmentMips) {
+        azurerender::RuntimeDiagnostics::instance().info("render", "Environment: preserved authored HDR mip chain; runtime prefilter skipped");
+    } else if (computeIblEnabled_) {
         createEnvironmentPrefilter();
     } else {
         azurerender::RuntimeDiagnostics::instance().info(
             "render", "Character IBL: hardware mip fallback path");
     }
 
+    scene_.reflectionProbe.validate();
+    if(probeFieldActive_){
+        const auto fieldAsset=OctahedralEnvironment::load(std::filesystem::u8path(scene_.reflectionProbe.texture));
+        const auto& field=*scene_.reflectionProbe.field;field.validate(fieldAsset.layers);
+        const auto rows=field.gpuRows(fieldAsset.uvScaleOffset,fieldAsset.foldZeroSign==OctahedralEnvironment::FoldZeroSign::Positive);
+        const auto bytes=VkDeviceSize(rows.size()*sizeof(ReflectionProbeField::Row));
+        if(irradianceBufferBudget_&&bytes>irradianceBufferBudget_)throw std::runtime_error("Reflection field parameters exceed device storage range");
+        probeFieldTexture_=std::make_unique<OctahedralEnvironmentGpu>(*rhi_,fieldAsset);
+        probeFieldBuffer_=allocator_->createBuffer(bytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+        std::memcpy(probeFieldBuffer_.mapped,rows.data(),std::size_t(bytes));allocator_->flush(probeFieldBuffer_,0,bytes);
+        RuntimeDiagnostics::instance().info("render","Reflection field: "+std::to_string(field.probes.size())+" local probes");
+    }else {
+        EnvironmentImage probeImage;
+        if(!scene_.reflectionProbe.texture.empty()) {
+            probeImage=loadEnvironmentImage({scene_.reflectionProbe.texture,EnvironmentProjection::Auto});
+            RuntimeDiagnostics::instance().info("render","Local reflection probe: "+probeImage.description);
+        } else {
+            probeImage.width=probeImage.height=1;probeImage.authoredMipLevels=1;
+            probeImage.projection=EnvironmentProjection::CubeFaces;probeImage.rgba16f.resize(24);
+            for(unsigned face=0;face<6;++face)probeImage.rgba16f[face*4+3]=0x3c00;
+        }
+        reflectionProbeTexture_=std::make_unique<EnvironmentCubeTexture>(*rhi_,std::move(probeImage));
+    }
+    scene_.irradianceVolume.validate();
+    irradianceVolume_={};
+    irradianceClipmap_.reset();irradianceClipmapDimensions_={1,1,1};
+    std::vector<std::array<float,4>> irradianceWords(4);
+    if(irradianceClipmapActive_){
+        auto field=IrradianceClipmap::load(std::filesystem::u8path(scene_.irradianceVolume.asset));
+        const auto bytes=sizeof(field.shaderParameters());
+        if(irradianceBufferBudget_&&bytes>irradianceBufferBudget_)
+            throw std::runtime_error("Irradiance clipmap parameters exceed device storage buffer range");
+        irradianceClipmapDimensions_=field.dimensions;
+        irradianceClipmap_=std::make_unique<IrradianceClipmapGpu>(*rhi_,field);
+        RuntimeDiagnostics::instance().info("render","Irradiance clipmap: 3 layers, 6 volume textures");
+    }else if(!scene_.irradianceVolume.asset.empty()){
+        irradianceVolume_=IrradianceVolume::load(std::filesystem::u8path(scene_.irradianceVolume.asset));
+        irradianceWords.resize(irradianceVolume_.cells.size()*4);
+        for(std::size_t i=0;i<irradianceVolume_.cells.size();++i){
+            const auto& cell=irradianceVolume_.cells[i];
+            for(unsigned c=0;c<3;++c)irradianceWords[4*i+c]=cell.coefficients[c];
+            irradianceWords[4*i+3]={cell.weight,0,0,0};
+        }
+        RuntimeDiagnostics::instance().info("render","Irradiance volume: "+std::to_string(irradianceVolume_.cells.size())+" samples");
+    }
+    if(!irradianceClipmapActive_){
+    const auto irradianceBytes=irradianceWords.size()*sizeof(irradianceWords[0]);
+    if(irradianceBufferBudget_&&irradianceBytes>irradianceBufferBudget_)
+        throw std::runtime_error("Irradiance volume exceeds device storage buffer range");
+    irradianceBuffer_=allocator_->createBuffer(irradianceBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    std::memcpy(irradianceBuffer_.mapped,irradianceWords.data(),irradianceBytes);
+    allocator_->flush(irradianceBuffer_,0,irradianceBytes);
+    }
     const auto toonRamp = loadPpmTexture(rampAtlasPath_);
     uploadTextureData(
         toonRamp.pixels,
@@ -1393,7 +2749,7 @@ void CharacterSceneRenderer::createEnvironmentPrefilter() {
         rhi_->createPipelineLayout(iblPrefilterSetLayout_, &pushRange);
     iblPrefilterPipeline_ = rhi_->createComputePipeline(
         {shader, iblPrefilterPipelineLayout_});
-    rhi_->destroyShaderModule(shader);
+    destroyUvShaderModule(shader);
 
     rhi_->executeOneShot([this](rhi::ICommandRecorder& commands) {
         for (std::uint32_t level = 1;
@@ -1454,7 +2810,8 @@ void CharacterSceneRenderer::createEnvironmentPrefilter() {
 }
 
 void CharacterSceneRenderer::createAdditionalResources() {
-    if (scene_.resources.size() <= 1) {
+    const scene::ResourceLayout layout(scene_);
+    if (layout.paths.size() <= 1) {
         return;
     }
     std::uint32_t jointBase =
@@ -1464,12 +2821,13 @@ void CharacterSceneRenderer::createAdditionalResources() {
         + kMaterialTextureSlots
             * static_cast<std::uint32_t>(asset_.materials.size());
     std::size_t globalMaterialBase = asset_.materials.size();
-    for (std::size_t index = 1; index < scene_.resources.size(); ++index) {
+    for (std::size_t index = 1; index < layout.paths.size(); ++index) {
         auto resource = std::make_unique<AdditionalResource>();
-        resource->path = scene_.resources[index].path;
+        resource->path = layout.paths[index];
         resource->asset = loadGltfAsset(resource->path);
+        applyMaterialBindings(resource->asset,layout.materials.at(index));
         createMeshBuffers(
-            resource->asset, resource->vertexBuffer, resource->indexBuffer);
+            resource->asset, resource->vertexBuffer, resource->indexBuffer,resource->vertexColorBuffer);
         uploadMaterialTextures(resource->asset, resource->gpuMaterials);
         resource->jointBase = jointBase;
         resource->textureBase = textureBase;
@@ -1491,6 +2849,15 @@ void CharacterSceneRenderer::createAdditionalResources() {
 void CharacterSceneRenderer::createComputeSkinningResources() {
     meshResourceCount_ =
         static_cast<std::uint32_t>(additionalResources_.size() + 1);
+    std::vector<std::uint32_t> morphWords{0,0,0};
+    morphGpuMeshes_.clear();
+    for(std::uint32_t key=0;key<meshResourceCount_;++key)
+        morphGpuMeshes_.push_back(appendMorphGpuMesh(morphWords,key==0?asset_:additionalResources_[key-1]->asset));
+    morphTargetBuffer_=allocator_->createBuffer(morphWords.size()*sizeof(std::uint32_t),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    std::memcpy(morphTargetBuffer_.mapped,morphWords.data(),morphWords.size()*sizeof(std::uint32_t));
+    allocator_->flush(morphTargetBuffer_,0,morphTargetBuffer_.size);
+    for(auto& buffer:morphWeightBuffers_){buffer=allocator_->createBuffer(sizeof(float),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+        std::memset(buffer.mapped,0,sizeof(float));allocator_->flush(buffer,0,buffer.size);}
     if (!computeSkinningEnabled_) {
         azurerender::RuntimeDiagnostics::instance().info(
             "render", "Character skinning and morph: vertex-shader fallback path");
@@ -1508,23 +2875,22 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
                 false);
         }
     };
-    createOutputBuffers(vertexBuffer_.size, skinnedVertexBuffers_);
-    for (auto& resource : additionalResources_) {
-        createOutputBuffers(
-            resource->vertexBuffer.size, resource->skinnedVertexBuffers);
-    }
+    for(auto& cache:staticSkinningOutputs_)cache.reset();
+    createOutputBuffers(static_cast<VkDeviceSize>(vertexCapacity_) * sizeof(GpuSkinnedVertex), skinnedVertexBuffers_);
 
     skinningDescriptorSetLayout_ = rhi_->createDescriptorSetLayout({
         {0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
         {1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
         {2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
+        {3, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
+        {4, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
     });
     const std::uint32_t descriptorSetCount =
         static_cast<std::uint32_t>(kMaxFramesInFlight) * meshResourceCount_;
     rhi::DescriptorPoolDesc descriptorPool{};
     descriptorPool.sizes = {{
         VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-        descriptorSetCount * 3,
+        descriptorSetCount * 5,
     }};
     descriptorPool.maxSets = descriptorSetCount;
     skinningDescriptorPool_ = rhi_->createDescriptorPool(descriptorPool);
@@ -1542,7 +2908,7 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
         rhi_->createPipelineLayout(skinningDescriptorSetLayout_, &pushRange);
     skinningPipeline_ = rhi_->createComputePipeline(
         {shader, skinningPipelineLayout_});
-    rhi_->destroyShaderModule(shader);
+    destroyUvShaderModule(shader);
 
     const auto writeSet = [this](const std::size_t frame,
         const std::uint32_t meshKey,
@@ -1551,13 +2917,15 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
         const std::size_t setIndex =
             frame * meshResourceCount_ + meshKey;
         const VkDescriptorSet set = skinningDescriptorSets_[setIndex];
-        const std::array<rhi::DescriptorBufferWrite, 3> writes = {{
+        const std::array<rhi::DescriptorBufferWrite, 5> writes = {{
             {set, 0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
              source.buffer, source.size},
             {set, 1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
              jointBuffers_[frame].buffer, jointBuffers_[frame].size},
             {set, 2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
              destination.buffer, destination.size},
+            {set,3,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphTargetBuffer_.buffer,morphTargetBuffer_.size},
+            {set,4,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphWeightBuffers_[frame].buffer,morphWeightBuffers_[frame].size},
         }};
         for (const rhi::DescriptorBufferWrite& write : writes) {
             rhi_->writeDescriptorBuffer(write);
@@ -1571,7 +2939,7 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
                 frame,
                 static_cast<std::uint32_t>(index + 1),
                 resource.vertexBuffer,
-                resource.skinnedVertexBuffers[frame]);
+                skinnedVertexBuffers_[frame]);
         }
     }
     azurerender::RuntimeDiagnostics::instance().info(
@@ -1581,40 +2949,20 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
 void CharacterSceneRenderer::recordComputeSkinningMesh(
     const RenderContext& context,
     const std::uint32_t meshKey, rhi::ICommandRecorder* recorder,
-    const std::array<float, 2>* morphWeights) {
+    const std::vector<SkinningDispatch>* dispatches) {
     auto& commands = recorder != nullptr ? *recorder : *context.commands;
     const LoadedAsset& mesh = meshKey == 0
         ? asset_
         : additionalResources_[meshKey - 1]->asset;
-    const std::uint32_t jointBase = meshKey == 0
-        ? 0
-        : additionalResources_[meshKey - 1]->jointBase;
-    const std::size_t setIndex =
-        context.currentFrame * meshResourceCount_ + meshKey;
-    const SkinningPushConstants parameters{
-        static_cast<std::uint32_t>(mesh.vertices.size()),
-        jointBase,
-        morphWeights != nullptr ? *morphWeights : renderSettings_->morphWeights,
-    };
-    commands.pushConstants(
-        skinningPipelineLayout_,
-        VK_SHADER_STAGE_COMPUTE_BIT,
-        0,
-        &parameters,
-        sizeof(parameters));
-    ComputePass dispatch({
-        static_cast<std::uint32_t>(mesh.vertices.size()),
-        1,
-        64,
-        1,
-        1,
-        true,
-    });
-    dispatch.record(
-        commands,
-        skinningPipeline_,
-        skinningPipelineLayout_,
-        skinningDescriptorSets_[setIndex]);
+    const std::size_t setIndex = context.currentFrame * meshResourceCount_ + meshKey;
+    for (const auto& dispatchItem : dispatches ? *dispatches : skinningDispatches_) {
+        if (dispatchItem.meshKey != meshKey) continue;
+        const auto& parameters=dispatchItem.parameters;
+        commands.pushConstants(skinningPipelineLayout_, VK_SHADER_STAGE_COMPUTE_BIT, 0, &parameters, sizeof(parameters));
+        ComputePass dispatch({static_cast<std::uint32_t>(mesh.vertices.size()), parameters.instanceCount, 64, 1, 1, true});
+        dispatch.record(commands, skinningPipeline_, skinningPipelineLayout_, skinningDescriptorSets_[setIndex]);
+    }
+
 }
 
 void CharacterSceneRenderer::recordComputeSkinning(
@@ -1625,10 +2973,37 @@ void CharacterSceneRenderer::recordComputeSkinning(
     for (std::uint32_t meshKey = 0; meshKey < meshResourceCount_; ++meshKey) {
         recordComputeSkinningMesh(context, meshKey);
     }
+    const auto& output=skinnedVertexBuffers_[context.currentFrame];
+    context.commands->bufferBarrier({output.buffer,0,output.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+        VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+    noteSkinningOutputRecorded(skinningOutputTicket_);
 }
 
-void CharacterSceneRenderer::createUniformBuffers() {
-    const VkDeviceSize size = sizeof(UniformBufferObject);
+void CharacterSceneRenderer::createUniformBuffers(bool referenceObjectRaster,float maximumSamplerLodBias) {
+    // One typed, immutable record per stable asset material index.
+    std::vector<PackedMaterialSurfaceProfile> profiles;
+    const auto appendProfiles=[&](const LoadedAsset& mesh) {
+        for(const auto& material:mesh.materials){
+            const auto layer=material.environmentLighting.reflectionLayer;
+            if(layer&&(!probeFieldTexture_||*layer>=probeFieldTexture_->image().arrayLayers))
+                throw std::runtime_error("Material "+material.name+" reflectionLayer exceeds the scene reflection field");
+            auto profile = packMaterialSurfaceProfile(material);
+            if (material.projectedHairRamp.axisDiagonalPrimaryTextureFootprint) {
+                for (float& bias : profile.rows[12])
+                    bias = std::clamp(bias, -maximumSamplerLodBias, maximumSamplerLodBias);
+            }
+            profiles.push_back(profile);
+        }
+    };
+    appendProfiles(asset_);for(const auto& resource:additionalResources_)appendProfiles(resource->asset);
+    const auto profileBytes=sizeof(PackedMaterialSurfaceProfile)*profiles.size();
+    if(profiles.empty()||profiles.size()>std::numeric_limits<std::uint32_t>::max()/2
+        ||(irradianceBufferBudget_&&profileBytes>irradianceBufferBudget_))
+        throw std::runtime_error("Material surface table exceeds the device storage budget");
+    materialSurfaceProfiles_=allocator_->createBuffer(profileBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    std::memcpy(materialSurfaceProfiles_.mapped,profiles.data(),profileBytes);
+    allocator_->flush(materialSurfaceProfiles_,0,profileBytes);
+    const VkDeviceSize size=sizeof(UniformBufferObject)+(referenceObjectRaster?sizeof(SceneReferenceObjectShadowRasterArray):0);
     uniformBuffers_.resize(kMaxFramesInFlight);
     for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
         uniformBuffers_[index] = allocator_->createBuffer(
@@ -1640,7 +3015,7 @@ void CharacterSceneRenderer::createUniformBuffers() {
         sizeof(RenderLightGpu) * kMaxSceneLights;
     const VkDeviceSize clusterHeaderBytes =
         sizeof(std::array<std::uint32_t, 2>)
-        * kClusterGridX * kClusterGridY * kClusterGridZ;
+        * kClusterGridX * kClusterGridY * kClusterGridZ * ClusteredLightGrid::kReceiverRangeCount;
     const VkDeviceSize clusterIndexBytes =
         sizeof(std::uint32_t) * kMaxClusterLightIndices;
     lightBuffers_.resize(kMaxFramesInFlight);
@@ -1654,8 +3029,24 @@ void CharacterSceneRenderer::createUniformBuffers() {
         clusterIndexBuffers_[index] = allocator_->createBuffer(
             clusterIndexBytes, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT, true);
     }
-    instanceCapacity_ = static_cast<std::uint32_t>(
-        std::max<std::size_t>(qaInstanceCount_, scene_.nodes.size()));
+    materialOriginNodes_.clear();
+    materialOriginNodes_.push_back(materialOriginNodes(asset_));
+    for(const auto& resource:additionalResources_)materialOriginNodes_.push_back(materialOriginNodes(resource->asset));
+    std::uint64_t originRecords=0;
+    if(std::any_of(materialOriginNodes_.begin(),materialOriginNodes_.end(),[](const auto& nodes){return !nodes.empty();})) {
+        const scene::ResourceLayout layout(scene_);
+        for(const auto& node:scene_.nodes) {
+            const auto key=layout.meshKey(node.resourceId);
+            if(key<materialOriginNodes_.size())originRecords+=materialOriginNodes_[key].size()
+                *(scene_.nodes.size()==1?std::uint64_t(qaInstanceCount_):1U);
+        }
+    } else materialOriginNodes_.clear();
+    const auto capacity=std::max<std::size_t>(qaInstanceCount_,scene_.nodes.size())+originRecords;
+    if(capacity>std::numeric_limits<std::uint32_t>::max())
+        throw std::length_error("Material origin frame buffer exceeds GPU indexing");
+    if(originRecords&&irradianceBufferBudget_&&capacity*sizeof(InstanceGpuData)>irradianceBufferBudget_)
+        throw std::length_error("Material origin instances exceed the device storage range");
+    instanceCapacity_=static_cast<std::uint32_t>(capacity);
     instanceBuffers_.resize(kMaxFramesInFlight);
     for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
         instanceBuffers_[index] = allocator_->createBuffer(
@@ -1670,43 +3061,34 @@ void CharacterSceneRenderer::createJointBuffers() {
     if (asset_.jointMatrices.empty()) {
         throw std::runtime_error("Asset has no joint-matrix fallback");
     }
-    std::size_t totalJoints = asset_.jointMatrices.size();
-    for (const auto& resource : additionalResources_) {
-        totalJoints += resource->asset.jointMatrices.size();
-    }
-    const VkDeviceSize size = sizeof(asset_.jointMatrices.front()) * totalJoints;
-    jointBuffers_.resize(kMaxFramesInFlight);
-    for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
-        jointBuffers_[index] = allocator_->createBuffer(
-            size,
-            VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-            true);
-        std::byte* destination =
-            static_cast<std::byte*>(jointBuffers_[index].mapped);
-        const VkDeviceSize heroBytes =
-            sizeof(asset_.jointMatrices.front()) * asset_.jointMatrices.size();
-        std::memcpy(
-            destination,
-            asset_.jointMatrices.data(),
-            static_cast<std::size_t>(heroBytes));
-        for (const auto& resource : additionalResources_) {
-            const VkDeviceSize resourceBytes =
-                sizeof(asset_.jointMatrices.front())
-                * resource->asset.jointMatrices.size();
-            std::memcpy(
-                destination + resource->jointBase
-                    * sizeof(asset_.jointMatrices.front()),
-                resource->asset.jointMatrices.data(),
-                static_cast<std::size_t>(resourceBytes));
+    jointCapacity_ = 0;
+    vertexCapacity_ = 0;
+    std::vector<std::uint32_t> instanceCounts(additionalResources_.size() + 1,
+        scene_.nodes.size() == 1 ? qaInstanceCount_ : 0U);
+    if (scene_.nodes.size() != 1) {
+        const scene::ResourceLayout layout(scene_);
+        for (const auto& node : scene_.nodes) {
+            const auto key = layout.meshKey(node.resourceId);
+            if (key < instanceCounts.size()) ++instanceCounts[key];
         }
     }
+    for (std::size_t key = 0; key <= additionalResources_.size(); ++key) {
+        const auto& mesh = key == 0 ? asset_ : additionalResources_[key-1]->asset;
+        const auto count = instanceCounts[key];
+        jointCapacity_ += static_cast<std::uint32_t>(mesh.jointMatrices.size()) * std::max(count, 1U);
+        vertexCapacity_ += static_cast<std::uint32_t>(mesh.vertices.size()) * std::max(count, 1U);
+    }
+    jointBuffers_.resize(kMaxFramesInFlight);
+    for (auto& buffer : jointBuffers_) buffer = allocator_->createBuffer(
+        sizeof(std::array<float,16>) * static_cast<VkDeviceSize>(jointCapacity_), VK_BUFFER_USAGE_STORAGE_BUFFER_BIT, true);
+
 }
 
 void CharacterSceneRenderer::createOitIndexBuffers() {
     std::size_t totalIndices = 0;
     for (const AssetPrimitive& primitive : asset_.primitives) {
         if (asset_.materials[primitive.materialIndex].alphaMode
-            == AssetAlphaMode::Blend) {
+            == AssetAlphaMode::Blend&&!opaqueSurfaceOverlay(asset_.materials[primitive.materialIndex])) {
             totalIndices += primitive.indexCount;
         }
     }
@@ -1723,6 +3105,437 @@ void CharacterSceneRenderer::createOitIndexBuffers() {
     }
 }
 
+void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
+    conservativeExtent_=context.renderExtent;mainPassDescription_=context.scenePassDescription;
+    std::uint64_t pyramidPixels=0;for(unsigned w=context.renderExtent.width,h=context.renderExtent.height;;w=std::max(1U,w/2),h=std::max(1U,h/2)){
+        pyramidPixels+=std::uint64_t(w)*h;if(w<=1&&h<=1)break;}
+    conservativeAllowed_=bool(mainPassDescription_)&&context.computeShaders&&context.gpuCulling
+        &&context.depthTestEnabled&&context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT
+        &&context.renderExtent.width&&context.renderExtent.height&&context.renderExtent.width<=8192&&context.renderExtent.height<=8192
+        &&pyramidPixels*4*kMaxFramesInFlight<=96ULL*1024*1024
+        &&rhi_->supportsSampledImage(context.depthFormat,false);
+    rasterizationSamples_=context.rasterizationSamples;
+    const auto surfaceUsage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT;
+    const auto needsScreenNormal=[](const LoadedAsset& mesh) {
+        return std::any_of(mesh.materials.begin(),mesh.materials.end(),[](const AssetMaterial& material) {
+            return material.nprDiffuse.screenLightingNormal;
+        });
+    };
+    bool screenNormals=needsScreenNormal(asset_);
+    for(const auto& resource:additionalResources_)screenNormals|=needsScreenNormal(resource->asset);
+    const bool requested=screenNormals||(context.renderSettings&&context.renderSettings->screenSpaceReflection.enabled);
+    const bool multisample=context.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT;
+    const bool fits=!multisample||std::uint64_t(context.renderExtent.width)*context.renderExtent.height*112*kMaxFramesInFlight<=SceneMultisampling::kMaximumBytes;
+    const auto supported=rhi_->imageSampleCounts(VK_FORMAT_R32G32B32A32_SFLOAT,surfaceUsage);
+    reflectionSurfaceFormat_=requested&&fits&&(supported&context.rasterizationSamples)
+        &&rhi_->supportsSampledImage(VK_FORMAT_R32G32B32A32_SFLOAT,false)?VK_FORMAT_R32G32B32A32_SFLOAT:VK_FORMAT_R32_SFLOAT;
+    if(screenNormals&&reflectionSurfaceFormat_!=VK_FORMAT_R32G32B32A32_SFLOAT)
+        throw std::runtime_error("Screen surface normal snapshot exceeds format, sample or memory capabilities");
+    outlineMaskViewExtent_=context.renderExtent;
+    outlineMaskMaxDimension_=context.descriptorLimits.maxImageDimension2D;
+    rhi::RenderPassDesc maskPass;
+    maskPass.attachments={{VK_FORMAT_R8_UNORM,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false}};
+    maskPass.attachments[0].samples=context.rasterizationSamples;
+    maskPass.externalReadDependency=true;
+    outlineMaskPass_=rhi_->createRenderPass(maskPass);
+    initializeShadowHistory(context);
+    if(surfaceRadianceCapable_&&context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT
+        &&SurfaceRadianceCache::supported(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight)))
+        try{surfaceRadiance_=std::make_unique<SurfaceRadianceCache>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),SurfaceRadianceCache::kMaximumBytes,kSurfaceRadianceDiagnostics,kSurfaceRadianceFrameSelection,kSurfaceRadianceFrameSelection?65536U:0U,(kSurfaceRadianceFrameSelection&&kSurfaceRadianceDiagnostics)?16U:0U);}
+        catch(const std::exception& error){RuntimeDiagnostics::instance().info("render",std::string("Surface radiance allocation fallback: ")+error.what());}
+    rhi::RenderPassDesc pass;pass.attachments={{context.sceneColorFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
+        {reflectionSurfaceFormat_,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
+        {context.depthFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,true,true,true}};
+    if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
+        pass.attachments.push_back({SurfaceRadianceCache::format(kind),VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false});
+    pass.depthAttachment=2;pass.externalReadDependency=true;overlayDepthPass_=rhi_->createRenderPass(pass);
+    for(std::size_t frame=0;frame<kMaxFramesInFlight;++frame){
+        auto& color=opaqueSceneColor_[frame];
+        color.image=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,context.sceneColorFormat,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT);
+        color.view=rhi_->createImageView(color.image.image,context.sceneColorFormat,VK_IMAGE_ASPECT_COLOR_BIT,1);
+        auto& target=overlaySceneDepth_[frame];
+        target.image=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,reflectionSurfaceFormat_,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT);
+        target.view=rhi_->createImageView(target.image.image,reflectionSurfaceFormat_,VK_IMAGE_ASPECT_COLOR_BIT,1);
+        rhi::SamplerDesc sampler;sampler.filter=VK_FILTER_NEAREST;sampler.addressU=sampler.addressV=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+        target.sampler=rhi_->createSampler(sampler);
+        auto& depth=overlayDepthAttachments_[frame];depth=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,context.depthFormat,VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
+        overlayDepthViews_[frame]=rhi_->createImageView(depth.image,context.depthFormat,VK_IMAGE_ASPECT_DEPTH_BIT,1);
+        std::vector<VkImageView> attachments{color.view,target.view,overlayDepthViews_[frame]};
+        if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)attachments.push_back(surfaceRadiance_->texture(static_cast<unsigned>(frame),kind).view);
+        overlayDepthFramebuffers_[frame]=rhi_->createFramebuffer({overlayDepthPass_,attachments,context.renderExtent.width,context.renderExtent.height});
+    }
+    if(context.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT){
+        std::vector<SceneMultisampleDestination> destinations;
+        for(unsigned frame=0;frame<kMaxFramesInFlight;++frame)
+            destinations.push_back({{opaqueSceneColor_[frame].image.image,overlayDepthAttachments_[frame].image,overlaySceneDepth_[frame].image.image},
+                {opaqueSceneColor_[frame].view,overlayDepthViews_[frame],overlaySceneDepth_[frame].view}});
+        snapshotMultisampling_=std::make_unique<SceneMultisampling>(*rhi_,*allocator_,context.renderExtent,context.depthFormat,reflectionSurfaceFormat_,
+            reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?SceneSecondaryResolve::MinimumDepthSample:SceneSecondaryResolve::Minimum,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),shaderDirectory_);
+    }
+    if(surfaceRadiance_&&kSurfaceRadianceFrameSelection&&context.depthFormat==VK_FORMAT_D32_SFLOAT
+        &&std::uint64_t(context.renderExtent.width)*context.renderExtent.height*4*kMaxFramesInFlight<=64ULL*1024*1024
+        &&context.scenePassDescription&&context.scenePassDescription->depthAttachment>=0){
+        auto depth=context.scenePassDescription->attachments.at(context.scenePassDescription->depthAttachment);
+        depth.clear=false;depth.load=true;depth.store=true;depth.initialLayout=depth.finalLayout=VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+        rhi::RenderPassDesc validation;validation.attachments={depth};validation.depthAttachment=0;
+        radianceValidationPass_=rhi_->createRenderPass(validation);
+        validation.attachments[0].clear=true;validation.attachments[0].load=false;
+        validation.attachments[0].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;
+        radianceDepthCopyPass_=rhi_->createRenderPass(validation);
+        for(unsigned slot=0;slot<kMaxFramesInFlight;++slot){
+            auto& target=radianceValidationDepth_[slot];
+            target.image=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,VK_FORMAT_D32_SFLOAT,VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
+            target.view=rhi_->createImageView(target.image.image,VK_FORMAT_D32_SFLOAT,VK_IMAGE_ASPECT_DEPTH_BIT,1);
+            radianceValidationFrames_[slot]=rhi_->createFramebuffer({radianceValidationPass_,{target.view},context.renderExtent.width,context.renderExtent.height});
+        }
+    }
+    createScreenReflectionResources(context);
+    if(objectShadowPrepared_){
+        constexpr auto format=VK_FORMAT_R32_UINT;
+        referenceObjectIdFallback_=allocator_->createImage2D(1,1,format,VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_TRANSFER_DST_BIT);
+        referenceObjectIdFallbackView_=rhi_->createImageView(referenceObjectIdFallback_.image,format,VK_IMAGE_ASPECT_COLOR_BIT,1);
+        rhi_->executeOneShot([image=referenceObjectIdFallback_.image](rhi::ICommandRecorder& commands){
+            commands.imageBarrier({image,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,1,
+                VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,0,VK_ACCESS_TRANSFER_WRITE_BIT});
+            commands.clearColorImage(image,VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,{});
+            commands.imageBarrier({image,VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
+                VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+        });
+    }
+    if (referenceDepthRequested(context)) {
+        const auto usesStencil = [](const LoadedAsset& asset) {
+            return std::any_of(asset.primitives.begin(), asset.primitives.end(), [&](const AssetPrimitive& primitive) {
+                return primitive.indexCount && asset.materials[primitive.materialIndex].referenceDepthStencil
+                    != AssetMaterial::ReferenceDepthStencil::Ordinary;
+            });
+        };
+        const bool stencilEnabled = usesStencil(asset_) || std::any_of(additionalResources_.begin(), additionalResources_.end(),
+            [&](const auto& resource) { return usesStencil(resource->asset); });
+        referenceSceneDepth_=std::make_unique<SceneReferenceDepthTargets>(*rhi_,context.renderExtent,
+            static_cast<unsigned>(kMaxFramesInFlight),referenceVisibilityRequested(context),stencilEnabled);
+    }
+    if(referenceObjectVisibilityRequested(context)){
+        const ScreenObjectVisibilityNumerics deviceNumerics;
+        const auto& numerics=context.referenceObjectVisibilityNumerics?*context.referenceObjectVisibilityNumerics:deviceNumerics;
+        referenceObjectVisibility_=std::make_unique<ScreenObjectVisibilityGpu>(*rhi_,context.renderExtent,
+            static_cast<unsigned>(kMaxFramesInFlight),ScreenObjectVisibilityShaders::load(shaderDirectory_),numerics);
+        referenceObjectVisibilityNumerics_=context.referenceObjectVisibilityNumerics;
+    }
+}
+void CharacterSceneRenderer::destroyOverlayDepth(){
+    destroyShadowHistory();
+    const auto releasePipelines = [&](auto& groups) {
+        for (auto& group : groups) {
+            for (auto& pipeline : group) {
+                if (pipeline) rhi_->destroyPipeline(pipeline);
+                pipeline = VK_NULL_HANDLE;
+            }
+        }
+    };
+    releasePipelines(referenceSceneDepthPipelines_);
+    releasePipelines(referenceSceneVisibilityPipelines_);
+    releasePipelines(referenceSceneOutlineDepthPipelines_);
+    pendingReferenceDepth_.reset();
+    submittedReferenceDepth_.reset();
+    referenceObjectVisibility_.reset();
+    referenceObjectVisibilityNumerics_.reset();
+    referenceSceneDepth_.reset();
+    if(referenceObjectIdFallbackView_)rhi_->destroyImageView(referenceObjectIdFallbackView_);
+    referenceObjectIdFallbackView_=VK_NULL_HANDLE;
+    allocator_->destroyImage(referenceObjectIdFallback_);
+    destroyConservativeOcclusion();
+    destroyScreenReflectionResources();
+    snapshotMultisampling_.reset();
+    for(std::size_t i=0;i<kMaxFramesInFlight;++i){
+        if(outlineMaskFramebuffers_[i])rhi_->destroyFramebuffer(outlineMaskFramebuffers_[i]);outlineMaskFramebuffers_[i]=VK_NULL_HANDLE;
+        auto& mask=outlineMasks_[i];if(mask.view)rhi_->destroyImageView(mask.view);allocator_->destroyImage(mask.image);mask={};
+        if(overlayDepthFramebuffers_[i])rhi_->destroyFramebuffer(overlayDepthFramebuffers_[i]);overlayDepthFramebuffers_[i]=VK_NULL_HANDLE;
+        if(overlayDepthViews_[i])rhi_->destroyImageView(overlayDepthViews_[i]);overlayDepthViews_[i]=VK_NULL_HANDLE;
+        allocator_->destroyImage(overlayDepthAttachments_[i]);
+        auto& color=opaqueSceneColor_[i];if(color.view)rhi_->destroyImageView(color.view);allocator_->destroyImage(color.image);color={};
+        auto& t=overlaySceneDepth_[i];if(t.view)rhi_->destroyImageView(t.view);if(t.sampler)rhi_->destroySampler(t.sampler);allocator_->destroyImage(t.image);t={};
+    }
+    surfaceRadiance_.reset();
+    if(overlayDepthPass_)rhi_->destroyRenderPass(overlayDepthPass_);overlayDepthPass_=VK_NULL_HANDLE;
+    if(outlineMaskPass_)rhi_->destroyRenderPass(outlineMaskPass_);outlineMaskPass_=VK_NULL_HANDLE;
+}
+void CharacterSceneRenderer::prepareOutlineMaskResources(const std::vector<std::vector<float>>& opacities,RecordingBufferSet& buffers) {
+    std::vector<std::uint32_t> masked;
+    std::vector<bool> visible(sceneInstances_.size(),false);
+    for(const auto& span:visibleSpansByMeshKey_)
+        for(std::uint32_t index=span[1];index<span[1]+span[2];++index)visible[index]=true;
+    for(const auto& instance:sceneInstances_){
+        if(!visible[instance.sourceIndex])continue;
+        const auto& mesh=instance.meshKey==0?asset_:additionalResources_[instance.meshKey-1]->asset;
+        bool needed=false;
+        for(const auto& primitive:mesh.primitives){
+            const auto& material=mesh.materials[primitive.materialIndex];
+            if(material.alphaMode==AssetAlphaMode::Blend||material.materialClass==AssetMaterialClass::Overlay||material.showcasePlatform>.5F)continue;
+            if(!material.outlineSurface.maskInstanceInterior)continue;
+            const bool explicitOutline=(material.materialFeatures&MaterialFeatureSilhouetteOutline)!=0;
+            if((renderSettings_->sceneLightingEnabled||!renderSettings_->silhouetteOutlineEnabled)
+                &&!explicitOutline)continue;
+            forEachPrimitiveOpacityRun(opacities,primitive.nodeIndex,instance.sourceIndex,1,[&](const PrimitiveOpacityRun& run){
+                needed|=run.opacity>0&&(explicitOutline||run.opacity<1);
+            });
+        }
+        if(needed)masked.push_back(instance.sourceIndex);
+    }
+    auto layout=makeOutlineMaskLayout(sceneInstances_.size(),masked,
+        outlineMaskViewExtent_.width,outlineMaskViewExtent_.height,outlineMaskMaxDimension_,128ULL*1024*1024/rasterizationSamples_);
+    // Multisample shader descriptors always receive a matching image type.
+    if(!layout.width&&rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT)layout.width=layout.height=1;
+    auto& mask=outlineMasks_[currentFrame_];
+    if(mask.image.width!=layout.width||mask.image.height!=layout.height){
+        // updateFrame runs only after this frame slot's fence has retired.
+        if(motionPass_)motionPass_->invalidateBindings(static_cast<std::uint32_t>(currentFrame_));
+        if(outlineMaskFramebuffers_[currentFrame_])rhi_->destroyFramebuffer(outlineMaskFramebuffers_[currentFrame_]);
+        outlineMaskFramebuffers_[currentFrame_]=VK_NULL_HANDLE;
+        if(mask.view)rhi_->destroyImageView(mask.view);
+        allocator_->destroyImage(mask.image);mask={};
+        if(layout.width){
+            VkImageCreateInfo image{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};image.imageType=VK_IMAGE_TYPE_2D;
+            image.extent={layout.width,layout.height,1};image.format=VK_FORMAT_R8_UNORM;image.mipLevels=image.arrayLayers=1;
+            image.samples=rasterizationSamples_;image.tiling=VK_IMAGE_TILING_OPTIMAL;
+            image.usage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT;
+            mask.image=allocator_->createImage(image,false);
+            mask.view=rhi_->createImageView(mask.image.image,VK_FORMAT_R8_UNORM,VK_IMAGE_ASPECT_COLOR_BIT,1);
+            outlineMaskFramebuffers_[currentFrame_]=rhi_->createFramebuffer({outlineMaskPass_,{mask.view},layout.width,layout.height});
+            RuntimeDiagnostics::instance().info("render","Outline mask allocated: frame="+std::to_string(currentFrame_)
+                +", instances="+std::to_string(masked.size())+", bytes="+std::to_string(std::uint64_t{layout.width}*layout.height*rasterizationSamples_));
+        }
+    }
+    const auto& fallback=gpuMaterials_[0].baseColor;
+    const auto view=mask.view?mask.view:fallback.view;
+    const auto sampler=mask.view?overlaySceneDepth_[currentFrame_].sampler:fallback.sampler;
+    const auto first=bindlessTextures_?currentFrame_:currentFrame_*totalMaterialCount();
+    const auto count=bindlessTextures_?1:totalMaterialCount();
+    for(std::size_t index=0;index<count;++index)
+        rhi_->writeDescriptorImage({descriptorSets_[first+index],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,view,sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+    buffers.outlineMaskImage=mask.image.image;
+    buffers.outlineMaskFramebuffer=outlineMaskFramebuffers_[currentFrame_];
+    buffers.outlineMaskExtent={layout.width,layout.height};
+    buffers.outlineMaskTiles=layout.instanceTiles;
+}
+
+void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands) {
+    if(bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame]);
+    const auto columns=snapshot.buffers.outlineMaskExtent.width/context.renderExtent.width;
+    for(const auto& span:snapshot.visibleSpans){
+        const auto key=span[0];
+        const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
+        const auto textureBase=key==0?kSharedTextureSlots:additionalResources_[key-1]->textureBase;
+        const auto materialBase=key==0?0:additionalResources_[key-1]->globalMaterialBase;
+        commands.bindVertexBuffer(snapshot.buffers.vertices.at(key),0);commands.bindIndexBuffer(snapshot.buffers.indices.at(key),0);
+        for(std::uint32_t instance=span[1];instance<span[1]+span[2];++instance){
+            const auto tile=snapshot.buffers.outlineMaskTiles.at(instance);
+            if(tile==std::numeric_limits<std::uint32_t>::max())continue;
+            const VkOffset2D offset{static_cast<std::int32_t>((tile%columns)*context.renderExtent.width),static_cast<std::int32_t>((tile/columns)*context.renderExtent.height)};
+            commands.setViewport(static_cast<float>(context.renderExtent.width),static_cast<float>(context.renderExtent.height),static_cast<float>(offset.x),static_cast<float>(offset.y));
+            commands.setScissor(context.renderExtent,offset);
+            for(const auto& primitive:mesh.primitives){
+                const auto& m=mesh.materials[primitive.materialIndex];
+                if(m.alphaMode==AssetAlphaMode::Blend||m.materialClass==AssetMaterialClass::Overlay||m.showcasePlatform>.5F)continue;
+                forEachPrimitiveOpacityRun(snapshot.nodeWorldOpacities,primitive.nodeIndex,instance,1,[&](const PrimitiveOpacityRun& run){
+                    if(run.opacity==0)return;
+                    const bool mirrored=primitiveMirroredTransform(snapshot.instances.at(instance).model,
+                        snapshot.gizmo,&primitive-mesh.primitives.data());
+                    commands.bindPipeline(materialUvPipeline(m,m.coverageTexture.present?outlineMaskCoveragePipelines_[m.doubleSided?2:mirrored?1:0]
+                        :m.doubleSided?outlineMaskDoubleSidedPipeline_
+                        :mirrored?outlineMaskMirroredPipeline_:outlineMaskPipeline_));
+                    const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
+                    if(!bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
+                    MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
+                        m.aoColor,m.lamShadowColor,m.materialClass==AssetMaterialClass::Hair?m.hairViewParameters:m.matcapColor,
+                        m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),materialFeaturesForFrame(m),m.materialProfileVersion,
+                        static_cast<std::uint32_t>((materialBase+primitive.materialIndex)<<1U)};
+                    MorphPushConstants morph{};morph.weights=snapshot.settings.morphWeights;
+                    morph.gizmoTransform=primitiveGizmoTransform(snapshot.gizmo,&primitive-mesh.primitives.data());
+                    morph.textureBaseIndex=textureBase+primitive.materialIndex*kMaterialTextureSlots;
+                    commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&material,sizeof(material));
+                    commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(material),&morph,sizeof(morph));
+                    commands.drawIndexed(primitive.indexCount,primitive.firstIndex,1,instance);
+                });
+            }
+        }
+    }
+}
+
+void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
+    bool depthShell=false;
+    bool colorRequired=screenSpaceReflectionActive(snapshot.settings.screenSpaceReflection,
+        snapshot.settings.sceneLightingEnabled,qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
+    bool sampled=colorRequired||viewFog_!=nullptr;
+    if(snapshot.settings.sceneLightingEnabled&&snapshot.settings.nprLighting.enabled&&!(qaEffectMode_==4&&!qaEffectEnabled_)) {
+        const auto& lights=frameLights_.lights();
+        sampled|=std::any_of(lights.begin(),lights.end(),[](const RenderLight& light){
+            const auto& response=light.shape.characterResponse;
+            return response.present&&(response.specialMode==LightShape::CharacterResponse::SpecialMode::ScreenRim
+                ||response.specialMode==LightShape::CharacterResponse::SpecialMode::MaterialRim)
+                &&light.shape.receivers.characters&&light.intensity>0;
+        });
+    }
+    for(const auto& span:snapshot.visibleSpans){
+        const auto& mesh=span[0]==0?asset_:additionalResources_[span[0]-1]->asset;
+        for(const auto& material:mesh.materials) {
+            sampled|=material.nprDiffuse.screenLightingNormal;
+            colorRequired|=material.nprDiffuse.screenLightingNormal;
+            sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint|MaterialFeatureSceneRefraction|MaterialFeatureUnlitTextureLayers))!=0;
+            colorRequired|=(material.materialFeatures&(MaterialFeatureSceneRefraction|MaterialFeatureSceneTint))!=0||opaqueSurfaceOverlay(material);
+            depthShell|=material.outlineSurface.present&&material.outlineSurface.depthPrepass;
+        }
+    }
+    if(!sampled&&!depthShell)return;
+    if(colorRequired&&context.depthTestEnabled)
+        recordDepthCoverage(context,snapshot,commands,DepthCoverageMode::SnapshotPrefill);
+    recordDepthCoverage(context,snapshot,commands,colorRequired?DepthCoverageMode::SnapshotColor:DepthCoverageMode::SnapshotDepth);
+    if(colorRequired)recordSurfaceOverlays(context,snapshot,commands,true);
+    if(depthShell&&!colorRequired)recordOutlineShells(context,snapshot,commands,snapshot.visibleSpans,OutlineShellPass::SnapshotDepth);
+}
+
+void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
+    rhi::ICommandRecorder& commands,DepthCoverageMode mode,SceneSubmissionCounters* counters){
+    const bool validation=mode==DepthCoverageMode::RadianceValidation;
+    const bool referenceDepth=mode==DepthCoverageMode::ReferenceDepth;
+    const bool visibilityInputs=referenceDepth&&referenceVisibilityActive();
+    const float normalAxes=visibilityInputs?static_cast<float>(referencePositionFrameCode(referenceCamera_->descriptor().frame)):0.F;
+    const bool mainPrefill=mode==DepthCoverageMode::MainPrefill;
+    const bool prefill=mainPrefill||mode==DepthCoverageMode::SnapshotPrefill;
+    const bool colorRequired=mode==DepthCoverageMode::SnapshotColor;
+    commands.bindVertexStream(1,whiteVertexColorBuffer_.buffer,0);
+    const auto& prefillPipelines=mainPrefill?mainPrefillPipelines_:snapshotPrefillPipelines_;
+    const auto& coveredPrefillPipelines=mainPrefill?mainCoveredPrefillPipelines_:snapshotCoveredPrefillPipelines_;
+    commands.setViewport(static_cast<float>(context.renderExtent.width),static_cast<float>(context.renderExtent.height));commands.setScissor(context.renderExtent);
+    if(bindlessTextures_){
+        commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame]);
+        if(counters)++counters->descriptorSetBinds;
+    }
+    // The reference depth clip interval is independent of the main camera's device depth.
+    std::vector<std::array<std::uint32_t,3>> referenceSpans;
+    if(referenceDepth)referenceSpans=referenceDepthSpans(snapshot.instances);
+    const auto& spans=referenceDepth?referenceSpans:snapshot.visibleSpans;
+    const bool stencilEnabled = referenceDepth && referenceSceneDepth_->stencilEnabled();
+    const auto recordSpan = [&](std::size_t spanIndex, bool respectStencil) {
+        const auto& span=spans[spanIndex];
+        const auto key=span[0],first=span[1],count=span[2];const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
+        const auto textureBase=key==0?kSharedTextureSlots:additionalResources_[key-1]->textureBase;
+        const auto materialBase=key==0?0:additionalResources_[key-1]->globalMaterialBase;
+        commands.bindVertexBuffer(snapshot.buffers.vertices.at(key),0);commands.bindIndexBuffer(snapshot.buffers.indices.at(key),0);
+        for(const auto& primitive:mesh.primitives){
+            const auto& m=mesh.materials[primitive.materialIndex];if(m.alphaMode==AssetAlphaMode::Blend||m.materialClass==AssetMaterialClass::Overlay)continue;
+            if (stencilEnabled && (m.referenceDepthStencil == AssetMaterial::ReferenceDepthStencil::Respect) != respectStencil)
+                continue;
+            if(referenceDepth&&m.alphaMode==AssetAlphaMode::Mask&&(m.materialFeatures&MaterialFeatureEyeRadialSurface)!=0)
+                throw std::invalid_argument("Scene reference depth requires an authored coverage texture coordinate");
+            if(validation){
+                if(!radianceSelectionMaterial(m))continue;bool complete=true;
+                const auto pi=static_cast<std::size_t>(&primitive-mesh.primitives.data());
+                for(std::uint32_t i=0;i<count;++i)complete&=snapshot.buffers.conservativeSlots.at(snapshot.buffers.conservativeOffsets.at(first+i)+pi)!=UINT32_MAX;
+                if(!complete)continue;
+            }
+
+            if(!mainPrefill&&!referenceDepth&&m.nprDiffuse.screenLightingNormal)continue;
+            if(prefill&&m.alphaMode!=AssetAlphaMode::Opaque)continue;
+            if(mainPrefill&&(m.materialFeatures&(MaterialFeatureSceneTint|MaterialFeatureMultiplyComposite))!=0)continue;
+            if(m.showcasePlatform>.5F&&!snapshot.settings.characterPresentation.platformEnabled)continue;
+            const bool mirrored=primitiveMirroredTransform(snapshot.instances.at(first).model,
+                snapshot.gizmo,&primitive-mesh.primitives.data());
+            // Radial eyes can transform the alpha-test UV before coverage.
+            const bool simpleDepth=!colorRequired&&!(m.alphaMode==AssetAlphaMode::Mask
+                &&(m.materialFeatures&MaterialFeatureEyeRadialSurface)!=0);
+            const bool ordinaryColor=colorRequired&&ordinaryOpaqueMaterial(m)&&rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT;
+            const auto classPipeline=materialClassPipeline(m,mirrored,true);
+            const bool classColor=colorRequired&&!ordinaryOpaqueMaterial(m)&&fullyCoveredClassMaterial(m,1.F)
+                &&rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT&&classPipeline!=VK_NULL_HANDLE;
+            const auto depthPipeline=prefill?prefillPipelines[m.doubleSided?2:mirrored?1:0]
+                :simpleDepth?(m.coverageTexture.present?snapshotCoveragePipelines_:snapshotDepthOnlyPipelines_)[m.doubleSided?2:mirrored?1:0]
+                :ordinaryOpaqueMaterial(m)?ordinaryOpaqueSnapshotPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]
+                :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
+                :classPipeline?classPipeline
+                :overlayDepthPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)];
+            if(referenceDepth){
+                const auto& pipelines=visibilityInputs?referenceSceneVisibilityPipelines_:referenceSceneDepthPipelines_;
+                const auto stencilRole = stencilEnabled ? static_cast<std::size_t>(m.referenceDepthStencil) : 0;
+                commands.bindPipeline(pipelines[stencilRole][m.doubleSided?2:mirrored?1:0]);
+            }
+            else if(!prefill&&!ordinaryColor&&!classColor)commands.bindPipeline(materialUvPipeline(m,validation?ordinaryRadianceValidationPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]:(simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline))));
+            const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
+            if(!bindlessTextures_){commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);if(counters)++counters->descriptorSetBinds;}
+            if(counters&&!prefill&&!ordinaryColor&&!classColor)++counters->pipelineBinds;
+            MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
+                m.aoColor,m.lamShadowColor,m.materialClass==AssetMaterialClass::Hair?m.hairViewParameters:m.matcapColor,
+                m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),materialFeaturesForFrame(m),m.materialProfileVersion,
+                static_cast<std::uint32_t>((materialBase+primitive.materialIndex)<<1U)};
+            if(visibilityInputs){
+                const auto& hair=m.projectedHairRamp;
+                float normalMode=hair.present?(hair.materialSnapshotNormal?2.F:1.F):0.F;
+                if (m.sampledReferenceNormal) normalMode = 3.F;
+                if (m.geometricReferenceNormal) normalMode = 4.F;
+                if (m.hairPointMipReferenceNormal) {
+                    normalMode = 5.F;
+                    const float maximumBias = context.descriptorLimits.maxSamplerLodBias;
+                    // The reference visibility shader consumes the first style lane as the sampler bias.
+                    material.styleParameters[0] = std::clamp(m.textureSettings[1].mipBias, -maximumBias, maximumBias);
+                }
+                material.hairParameters={normalMode,hair.surfaceNormalScale,hair.tangentSign,normalAxes};
+            }
+            commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&material,sizeof(material));
+            if(counters)++counters->pushConstantUpdates;
+            MorphPushConstants morph{};morph.weights=snapshot.settings.morphWeights;morph.textureBaseIndex=textureBase+primitive.materialIndex*kMaterialTextureSlots;
+            if(m.outlineSurface.projectSurface)morph.weights[1]=snapshot.settings.antiAliasing==2?2.F:1.F;
+            morph.gizmoTransform=primitiveGizmoTransform(snapshot.gizmo,&primitive-mesh.primitives.data());
+            VkPipeline boundPrefill=VK_NULL_HANDLE;
+            forEachPrimitiveOpacityRun(snapshot.nodeWorldOpacities,primitive.nodeIndex,first,count,[&](const PrimitiveOpacityRun& run) {
+                if (run.opacity == 0 || (validation&&run.opacity!=1.F)) return;
+                if(prefill){
+                    const auto facing=m.doubleSided?2:mirrored?1:0;
+                    const auto selected=rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT&&fullyCoveredPrefill(m,run.opacity)
+                        ?coveredPrefillPipelines[facing]:depthPipeline;
+                    if(selected!=boundPrefill){commands.bindPipeline(selected);boundPrefill=selected;if(counters)++counters->pipelineBinds;}
+                }else if(ordinaryColor){
+                    const auto selected=materialLightingPipeline(m,ordinaryOpaquePipeline(m,mirrored,true,run.opacity));
+                    if(selected!=boundPrefill){commands.bindPipeline(selected);boundPrefill=selected;if(counters)++counters->pipelineBinds;}
+                }else if(classColor){
+                    const auto selected=materialLightingPipeline(m,materialClassPipeline(m,mirrored,true,run.opacity));
+                    if(selected!=boundPrefill){commands.bindPipeline(selected);boundPrefill=selected;if(counters)++counters->pipelineBinds;}
+                }
+                if(surfaceRadiance_&&!referenceDepth){const auto first=primitive.firstIndex<=UINT32_MAX&&primitive.indexCount<=UINT32_MAX-primitive.firstIndex
+                    ?static_cast<std::uint32_t>(primitive.firstIndex):UINT32_MAX;std::memcpy(&morph.weights[0],&first,4);}
+                morph.nodeOpacity=run.opacity;
+                commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(material),&morph,sizeof(morph));
+                if(validation){
+                    const auto pi=static_cast<std::size_t>(&primitive-mesh.primitives.data());
+                    for(std::uint32_t i=0;i<run.instanceCount;++i){const auto slot=snapshot.buffers.conservativeSlots.at(snapshot.buffers.conservativeOffsets.at(run.firstInstance+i)+pi);
+                        commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,136,&slot,4);
+                        commands.drawIndexedIndirect(snapshot.buffers.conservativeIndirect,VkDeviceSize(slot)*20,1,20);}
+                }else commands.drawIndexed(primitive.indexCount,primitive.firstIndex,run.instanceCount,
+                    materialOriginFirstInstance(m,&snapshot,run.firstInstance,run.instanceCount));
+                if(counters){++counters->pushConstantUpdates;++counters->drawCalls;}
+            });
+        }
+        // Finish this resource's depth footprint before a later resource can
+        // contribute background colors or normals behind the expanded shell.
+        if(colorRequired)recordOutlineShells(context,snapshot,commands,spans,OutlineShellPass::SnapshotDepth,counters,spanIndex);
+    };
+    for (std::size_t spanIndex = 0; spanIndex < spans.size(); ++spanIndex)
+        recordSpan(spanIndex, false);
+    // Resolve the nearest ordinary or protected surface before any respecting draw.
+    if (stencilEnabled)
+        for (std::size_t spanIndex = 0; spanIndex < spans.size(); ++spanIndex)
+            recordSpan(spanIndex, true);
+    if(referenceDepth)recordOutlineShells(context,snapshot,commands,spans,OutlineShellPass::ReferenceDepth);
+}
+
+#include "CharacterOutlinePass.inc"
+#include "CharacterSkinningCache.inc"
+#include "CharacterMotionPass.inc"
+#include "CharacterOcclusionPass.inc"
+#include "CharacterRadianceSelection.inc"
+#include "CharacterShadowHistory.inc"
+#include "CharacterMaterialSampling.inc"
+#include "CharacterSurfaceOverlays.inc"
+#include "CharacterScreenReflection.inc"
+
 void CharacterSceneRenderer::createDescriptorPool() {
     rhi::DescriptorPoolDesc poolDesc{};
     if (bindlessTextures_) {
@@ -1735,9 +3548,12 @@ void CharacterSceneRenderer::createDescriptorPool() {
         poolDesc.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-             frameCount * textureSlots},
-            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 5},
+             frameCount * (textureSlots + 4 + (surfaceRadianceCapable_?(kSurfaceRadianceFrameSelection?5U:4U):0U) + (irradianceClipmapActive_?6U:0U) + (viewFog_?2U:0U) + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
+            {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, frameCount*(objectShadowPrepared_?4U:1U)},
+            {VK_DESCRIPTOR_TYPE_SAMPLER, frameCount},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection?1U:0U)+(shadowHistory_?3U:0U))},
         };
+        poolDesc.sizes.push_back({VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,frameCount});
         poolDesc.maxSets = frameCount;
         descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
         return;
@@ -1746,9 +3562,12 @@ void CharacterSceneRenderer::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * totalMaterialCount());
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 11},
-        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 5},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * ((outlineProjectionEnabled_?16U:15U)+(surfaceRadianceCapable_?(kSurfaceRadianceFrameSelection?5U:4U):0U)+(irradianceClipmapActive_?6U:0U)+(viewFog_?2U:0U))},
+        {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, descriptorCount*(objectShadowPrepared_?4U:1U)},
+        {VK_DESCRIPTOR_TYPE_SAMPLER, descriptorCount},
+        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection?1U:0U)+(shadowHistory_?3U:0U))},
     };
+    poolDesc.sizes.push_back({VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,descriptorCount});
     poolDesc.maxSets = descriptorCount;
     descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
 }
@@ -1759,7 +3578,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             kSharedTextureSlots
             + kMaterialTextureSlots
                 * static_cast<std::uint32_t>(totalMaterialCount());
-        descriptorSetLayout_ = rhi_->createDescriptorSetLayout({
+        std::vector<rhi::DescriptorBindingDesc> bindings={
             {0,
              VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
              1,
@@ -1768,6 +3587,8 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
              VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              textureSlots,
              VK_SHADER_STAGE_FRAGMENT_BIT},
+            {9,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT},
+            {28,VK_DESCRIPTOR_TYPE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
             {10,
              VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
              1,
@@ -1788,11 +3609,39 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
              VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
              1,
              VK_SHADER_STAGE_FRAGMENT_BIT},
-        });
+            {17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
+            {18, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT},
+            {19, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT},
+            {20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
+            {21,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
+            {22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
+            {23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
+            {24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
+            {26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
+            {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
+        };
+        if(probeFieldActive_)bindings.push_back({33,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(viewFog_){bindings.push_back({34,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});bindings.push_back({35,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});bindings.push_back({36,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});}
+        if(irradianceClipmapActive_)bindings.push_back({32,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,6,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(objectShadowPrepared_)for(const auto binding:{29U,50U,51U})
+            bindings.push_back({binding,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(outlineProjectionEnabled_) {
+            bindings.push_back({30,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT});
+            bindings.push_back({31,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,static_cast<std::uint32_t>(totalMaterialCount()),VK_SHADER_STAGE_VERTEX_BIT});
+        }
+        bindings.push_back({37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(surfaceRadianceCapable_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
+            bindings.push_back({38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics)bindings.push_back({42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection){
+            bindings.push_back({43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT});
+            bindings.push_back({44,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});}
+        if(shadowHistory_)for(unsigned binding:{45U,46U,49U})bindings.push_back({binding,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
         return;
     }
     constexpr VkShaderStageFlags kFragment = VK_SHADER_STAGE_FRAGMENT_BIT;
-    descriptorSetLayout_ = rhi_->createDescriptorSetLayout({
+    std::vector<rhi::DescriptorBindingDesc> bindings={
         {0,
          VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
          1,
@@ -1805,7 +3654,8 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {6, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
         {7, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
         {8, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
-        {9, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {9, VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, 1, kFragment},
+        {28, VK_DESCRIPTOR_TYPE_SAMPLER, 1, kFragment},
         {10, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
         {11, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
         {12, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
@@ -1813,10 +3663,78 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {14, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, kFragment},
         {15, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, kFragment},
         {16, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, kFragment},
-    });
+        {17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
+        {18, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {19, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
+        {21,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
+        {22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
+        {23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment},
+        {24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
+        {25,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment},
+        {26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment},
+        {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
+    };
+    if(probeFieldActive_)bindings.push_back({33,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment});
+    if(viewFog_){bindings.push_back({34,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment});bindings.push_back({35,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment});bindings.push_back({36,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment});}
+    if(irradianceClipmapActive_)bindings.push_back({32,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,6,kFragment});
+    if(objectShadowPrepared_)for(const auto binding:{29U,50U,51U})
+        bindings.push_back({binding,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,kFragment});
+    if(outlineProjectionEnabled_) {
+        bindings.push_back({30,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT});
+        bindings.push_back({31,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_VERTEX_BIT});
+    }
+    bindings.push_back({37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(surfaceRadianceCapable_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
+            bindings.push_back({38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics)bindings.push_back({42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection){
+            bindings.push_back({43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT});
+            bindings.push_back({44,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});}
+        if(shadowHistory_)for(unsigned binding:{45U,46U,49U})bindings.push_back({binding,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
 }
 
 void CharacterSceneRenderer::createDescriptorSets() {
+    reflectionDescriptorPublished_.fill(false);
+    referenceMaterialVisibilityBound_.fill(false);
+    objectShadowBoundViews_.fill(objectShadowPrepared_&&objectShadowAtlas_->view()?objectShadowAtlas_->view():shadowImageView_);
+    const auto writeProjection=[this](VkDescriptorSet set,std::size_t material) {
+        if(!outlineProjectionEnabled_)return;
+        const auto& buffer=outlineProjection_->buffer();
+        rhi_->writeDescriptorBuffer({set,30,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffer.buffer,buffer.size});
+        const auto& masks=outlineProjection_->masks();
+        if(bindlessTextures_) {
+            rhi::DescriptorImageArrayWrite write{};write.set=set;write.binding=31;
+            for(const auto& mask:masks)write.elements.push_back({mask.sampler,mask.view,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            rhi_->writeDescriptorImageArray(write);
+        }else {
+            const auto& mask=masks.at(material);
+            rhi_->writeDescriptorImage({set,31,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,mask.view,mask.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+        }
+    };
+    const auto& irradianceData=irradianceClipmap_?irradianceClipmap_->parameters():irradianceBuffer_;
+    const auto writeRadiance=[&](VkDescriptorSet set,unsigned frame){writeShadowHistoryDescriptors(set,frame);if(!surfaceRadiance_)return;
+        for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
+            rhi_->writeDescriptorImage({set,38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,surfaceRadiance_->texture(frame,kind).view,surfaceRadiance_->sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+        if(surfaceRadiance_->statisticsEnabled()){const auto& buffer=surfaceRadiance_->statisticsBuffer(frame);
+            rhi_->writeDescriptorBuffer({set,42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffer.buffer,buffer.size});}
+        if(surfaceRadiance_->selectionEnabled()){const auto& buffer=surfaceRadiance_->selectionBuffer(frame);rhi_->writeDescriptorBuffer({set,43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffer.buffer,buffer.size});}
+    };
+    const auto writeSceneImages=[this](VkDescriptorSet set,unsigned slot){
+        rhi_->writeDescriptorImage({set,37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,reflectionFallbackView_,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_GENERAL});
+        if(probeFieldTexture_){probeFieldTexture_->writeTexture(set,23);
+            rhi_->writeDescriptorBuffer({set,33,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,probeFieldBuffer_.buffer,probeFieldBuffer_.size});}
+        else rhi_->writeDescriptorImage({set,23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,reflectionProbeTexture_->view(),reflectionProbeTexture_->sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+        if(irradianceClipmap_)irradianceClipmap_->writeTextures(set,32);
+        rhi_->writeDescriptorImage({set,9,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,shadowImageView_,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL});
+        rhi_->writeDescriptorImage({set,28,VK_DESCRIPTOR_TYPE_SAMPLER,VK_NULL_HANDLE,shadowSampler_,VK_IMAGE_LAYOUT_UNDEFINED});
+        if(objectShadowPrepared_){
+            rhi_->writeDescriptorImage({set,29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+                objectShadowAtlas_->view()?objectShadowAtlas_->view():shadowImageView_,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL});
+            writeReferenceMaterialVisibilityDescriptors(set,slot,false);
+        }
+    };
     if (bindlessTextures_) {
         descriptorSets_ = rhi_->allocateDescriptorSets(
             descriptorPool_,
@@ -1826,25 +3744,24 @@ void CharacterSceneRenderer::createDescriptorSets() {
         // One array write per frame set: shared slots first, then the
         // per-material blocks in shader-visible order.
         std::vector<VkDescriptorImageInfo> images;
-        images.reserve(
-            kSharedTextureSlots
-            + kMaterialTextureSlots * asset_.materials.size());
-        const auto appendTexture = [&images](const GpuTexture& texture) {
+        const auto slots=static_cast<std::uint32_t>(kSharedTextureSlots + kMaterialTextureSlots * totalMaterialCount());
+        images.reserve(slots);
+        // Own descriptor values; the renderer retains native texture owners
+        // until its host has retired all frame fences.
+        ResourceIndexTable<VkDescriptorImageInfo> bindings(slots);
+        const auto appendInfo = [&images,&bindings](VkDescriptorImageInfo info) {
+            const auto handle=bindings.insert(std::make_shared<const VkDescriptorImageInfo>(info));
+            if(handle.slot!=images.size()) throw std::logic_error("Texture block slot order changed");
+            images.push_back(*bindings.acquire(handle,0).resource);
+        };
+        const auto appendTexture = [&appendInfo](const auto& texture) {
             VkDescriptorImageInfo info{};
             info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
             info.imageView = texture.view;
             info.sampler = texture.sampler;
-            images.push_back(info);
+            appendInfo(info);
         };
         appendTexture(environmentTexture_);
-        {
-            VkDescriptorImageInfo shadowInfo{};
-            shadowInfo.imageLayout =
-                VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
-            shadowInfo.imageView = shadowImageView_;
-            shadowInfo.sampler = shadowSampler_;
-            images.push_back(shadowInfo);
-        }
         appendTexture(toonRampTexture_);
         for (const GpuMaterial& material : gpuMaterials_) {
             appendTexture(material.baseColor);
@@ -1854,7 +3771,8 @@ void CharacterSceneRenderer::createDescriptorSets() {
             appendTexture(material.styleMask);
             appendTexture(material.matcap);
             appendTexture(material.hairData);
-            appendTexture(material.faceSdf);
+            appendTexture(material.faceSdf.view!=VK_NULL_HANDLE?material.faceSdf:material.normal);
+            appendTexture(material.shadowColorLut);
         }
         for (const auto& resource : additionalResources_) {
             for (const GpuMaterial& material : resource->gpuMaterials) {
@@ -1865,17 +3783,32 @@ void CharacterSceneRenderer::createDescriptorSets() {
                 appendTexture(material.styleMask);
                 appendTexture(material.matcap);
                 appendTexture(material.hairData);
-                appendTexture(material.faceSdf);
+                appendTexture(material.faceSdf.view!=VK_NULL_HANDLE?material.faceSdf:material.normal);
+                appendTexture(material.shadowColorLut);
             }
         }
 
         for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
+            writeSceneImages(uniformWrite.set,static_cast<unsigned>(frame));writeRadiance(uniformWrite.set,static_cast<unsigned>(frame));
+            if(viewFog_){
+                viewFog_->gpu.writeDescriptors(uniformWrite.set,static_cast<unsigned>(frame),34,35);
+                rhi_->writeDescriptorImage({uniformWrite.set,36,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+                    snapshotMultisampling_?snapshotMultisampling_->sourceView(static_cast<unsigned>(frame),2):overlaySceneDepth_[frame].view,
+                    overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            }
+            writeProjection(uniformWrite.set,0);
+            rhi_->writeDescriptorBuffer({descriptorSets_[frame],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
+            rhi_->writeDescriptorImage({descriptorSets_[frame],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            rhi_->writeDescriptorBuffer({descriptorSets_[frame],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceData.buffer,irradianceData.size});
+            rhi_->writeDescriptorImage({descriptorSets_[frame],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            rhi_->writeDescriptorImage({descriptorSets_[frame],19,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,opaqueSceneColor_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            rhi_->writeDescriptorBuffer({descriptorSets_[frame],20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,shadowBounds_[frame]->buffer().buffer,shadowBounds_[frame]->buffer().size});
             uniformWrite.binding = 0;
             uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
             uniformWrite.buffer = uniformBuffers_[frame].buffer;
-            uniformWrite.range = sizeof(UniformBufferObject);
+            uniformWrite.range = uniformBuffers_[frame].size;
             rhi_->writeDescriptorBuffer(uniformWrite);
 
             rhi::DescriptorImageArrayWrite arrayWrite{};
@@ -1891,6 +3824,10 @@ void CharacterSceneRenderer::createDescriptorSets() {
             jointWrite.buffer = jointBuffers_[frame].buffer;
             jointWrite.range = jointBuffers_[frame].size;
             rhi_->writeDescriptorBuffer(jointWrite);
+            const auto& output = computeSkinningEnabled_ ? skinnedVertexBuffers_[frame] : vertexBuffer_;
+            rhi_->writeDescriptorBuffer({jointWrite.set, 17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, output.buffer, output.size});
+            rhi_->writeDescriptorBuffer({jointWrite.set,21,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphTargetBuffer_.buffer,morphTargetBuffer_.size});
+            rhi_->writeDescriptorBuffer({jointWrite.set,22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphWeightBuffers_[frame].buffer,morphWeightBuffers_[frame].size});
 
             rhi::DescriptorBufferWrite instanceWrite{};
             instanceWrite.set = descriptorSets_[frame];
@@ -1921,7 +3858,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
         return;
     }
     const std::size_t descriptorCount =
-        kMaxFramesInFlight * asset_.materials.size();
+        kMaxFramesInFlight * totalMaterialCount();
     descriptorSets_ = rhi_->allocateDescriptorSets(
         descriptorPool_,
         descriptorSetLayout_,
@@ -1950,10 +3887,24 @@ void CharacterSceneRenderer::createDescriptorSets() {
 
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
+            writeSceneImages(uniformWrite.set,static_cast<unsigned>(frame));writeRadiance(uniformWrite.set,static_cast<unsigned>(frame));
+            if(viewFog_){
+                viewFog_->gpu.writeDescriptors(uniformWrite.set,static_cast<unsigned>(frame),34,35);
+                rhi_->writeDescriptorImage({uniformWrite.set,36,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+                    snapshotMultisampling_?snapshotMultisampling_->sourceView(static_cast<unsigned>(frame),2):overlaySceneDepth_[frame].view,
+                    overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            }
+            writeProjection(uniformWrite.set,globalMaterial-1);
+            rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
+            rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceData.buffer,irradianceData.size});
+            rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],19,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,opaqueSceneColor_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,shadowBounds_[frame]->buffer().buffer,shadowBounds_[frame]->buffer().size});
             uniformWrite.binding = 0;
             uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
             uniformWrite.buffer = uniformBuffers_[frame].buffer;
-            uniformWrite.range = sizeof(UniformBufferObject);
+            uniformWrite.range = uniformBuffers_[frame].size;
             rhi_->writeDescriptorBuffer(uniformWrite);
 
             writeImage(
@@ -2006,12 +3957,6 @@ void CharacterSceneRenderer::createDescriptorSets() {
                 VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
             writeImage(
                 descriptorIndex,
-                9,
-                shadowImageView_,
-                shadowSampler_,
-                VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
-            writeImage(
-                descriptorIndex,
                 11,
                 toonRampTexture_.view,
                 toonRampTexture_.sampler,
@@ -2019,9 +3964,11 @@ void CharacterSceneRenderer::createDescriptorSets() {
             writeImage(
                 descriptorIndex,
                 12,
-                gpuMaterial.faceSdf.view,
-                gpuMaterial.faceSdf.sampler,
+                gpuMaterial.faceSdf.view!=VK_NULL_HANDLE?gpuMaterial.faceSdf.view:gpuMaterial.normal.view,
+                gpuMaterial.faceSdf.view!=VK_NULL_HANDLE?gpuMaterial.faceSdf.sampler:gpuMaterial.normal.sampler,
                 VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+
+            writeImage(descriptorIndex,25,gpuMaterial.shadowColorLut.view,gpuMaterial.shadowColorLut.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
             rhi::DescriptorBufferWrite jointWrite{};
             jointWrite.set = descriptorSets_[descriptorIndex];
@@ -2030,6 +3977,10 @@ void CharacterSceneRenderer::createDescriptorSets() {
             jointWrite.buffer = jointBuffers_[frame].buffer;
             jointWrite.range = jointBuffers_[frame].size;
             rhi_->writeDescriptorBuffer(jointWrite);
+            const auto& output = computeSkinningEnabled_ ? skinnedVertexBuffers_[frame] : vertexBuffer_;
+            rhi_->writeDescriptorBuffer({jointWrite.set, 17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, output.buffer, output.size});
+            rhi_->writeDescriptorBuffer({jointWrite.set,21,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphTargetBuffer_.buffer,morphTargetBuffer_.size});
+            rhi_->writeDescriptorBuffer({jointWrite.set,22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphWeightBuffers_[frame].buffer,morphWeightBuffers_[frame].size});
 
             rhi::DescriptorBufferWrite instanceWrite{};
             instanceWrite.set = descriptorSets_[descriptorIndex];
@@ -2071,42 +4022,64 @@ void CharacterSceneRenderer::createDescriptorSets() {
 
 void CharacterSceneRenderer::createGraphicsPipeline(
     const RenderContext& context) {
+    if(!context.displayMaskEnabled){
+        const auto requireScene=[](const LoadedAsset& asset){for(const auto& material:asset.materials)
+            if(material.displayTransform!=MaterialDisplayTransform::Scene)
+                throw std::invalid_argument("displayTransform linear requires a view display-mask attachment");};
+        requireScene(asset_);for(const auto& resource:additionalResources_)requireScene(resource->asset);
+    }
     const std::string shaderDirectory = context.shaderDirectory;
-    const auto vertexCode =
-        azurerender::readBinaryFile(shaderDirectory + (computeSkinningEnabled_
-            ? "/mesh_compute.vert.spv"
-            : "/mesh.vert.spv"));
-    const auto fragmentCode =
-        azurerender::readBinaryFile(shaderDirectory + (bindlessTextures_
-            ? "/mesh_bindless.frag.spv"
-            : "/mesh.frag.spv"));
+    defaultIsolationRenderPass_=context.sceneRenderPass;
+    rasterizationSamples_=context.rasterizationSamples;
+    prepareMaterialLightingPipelines();
+    if(ellipseCoverageNeeded_&&(rasterizationSamples_!=VK_SAMPLE_COUNT_1_BIT
+        ||(renderSettings_&&(renderSettings_->antiAliasing==3||renderSettings_->antiAliasing==4))))
+        throw std::invalid_argument("coverageTexture ellipse-major requires single-sample spatial rendering");
+    if(materialUvNeeded_)validateMaterialUvGradientPolicy(MaterialUvGradientPolicy::MirroredCoarseY,queryMaterialUvGradientSupport(context.physicalDevice));
+    initializeComputedMaterialView(context);
+    const auto mainFragmentPath=[&](std::string file,bool material=false){
+        return shaderDirectory+sceneFragmentVariant(std::move(file),
+            rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,material&&irradianceClipmapActive_,material&&probeFieldActive_);
+    };
+    const auto mainFragment=[&](std::string file,bool material=false){return azurerender::readBinaryFile(mainFragmentPath(std::move(file),material));};
+    const auto hasProjectedSurface=[](const LoadedAsset& mesh) {
+        return std::any_of(mesh.materials.begin(),mesh.materials.end(),[](const AssetMaterial& material) {
+            return material.outlineSurface.present&&material.outlineSurface.projectSurface;
+        });
+    };
+    bool projectedSurface=hasProjectedSurface(asset_);
+    for(const auto& resource:additionalResources_)projectedSurface|=hasProjectedSurface(resource->asset);
+    referenceProjectedSurface_=projectedSurface;
+    const auto meshVertexPath=[&](std::string base) {
+        if(projectedSurface)base+=bindlessTextures_?"_projected_bindless":"_projected";
+        if(computeSkinningEnabled_)base+="_compute";
+        return shaderDirectory+"/"+base+".vert.spv";
+    };
+    const auto vertexCode=readReferenceVertexProgram(meshVertexPath(objectShadowPrepared_?"mesh_object":"mesh"));
+    const auto materialFragmentPath=shaderDirectory+sceneFragmentVariant((objectShadowPrepared_
+            ? (bindlessTextures_?"/mesh_object_bindless.frag.spv":"/mesh_object.frag.spv")
+            : (bindlessTextures_?"/mesh_bindless.frag.spv":"/mesh.frag.spv")),rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,irradianceClipmapActive_,probeFieldActive_);
     const auto outlineVertexCode =
-        azurerender::readBinaryFile(shaderDirectory + (computeSkinningEnabled_
-            ? "/outline_compute.vert.spv"
-            : "/outline.vert.spv"));
-    const auto outlineFragmentCode =
-        azurerender::readBinaryFile(shaderDirectory + "/outline.frag.spv");
+        readReferenceVertexProgram(shaderDirectory + (outlineProjectionEnabled_
+            ? (computeSkinningEnabled_?(bindlessTextures_?"/outline_view_scaled_compute_bindless.vert.spv":"/outline_view_scaled_compute.vert.spv")
+                :(bindlessTextures_?"/outline_view_scaled_bindless.vert.spv":"/outline_view_scaled.vert.spv"))
+            : (computeSkinningEnabled_?"/outline_compute.vert.spv":"/outline.vert.spv")));
     const auto backgroundVertexCode =
         azurerender::readBinaryFile(shaderDirectory + "/background.vert.spv");
     const auto backgroundFragmentCode =
-        azurerender::readBinaryFile(shaderDirectory + (bindlessTextures_
+        mainFragment((bindlessTextures_
             ? "/background_bindless.frag.spv"
             : "/background.frag.spv"));
     const auto shadowVertexCode =
         azurerender::readBinaryFile(shaderDirectory + (computeSkinningEnabled_
             ? "/shadow_compute.vert.spv"
             : "/shadow.vert.spv"));
-    const auto shadowFragmentCode =
-        azurerender::readBinaryFile(shaderDirectory + (bindlessTextures_
-            ? "/shadow_bindless.frag.spv"
-            : "/shadow.frag.spv"));
     const VkShaderModule vertexModule = rhi_->createShaderModule(vertexCode);
-    const VkShaderModule fragmentModule =
-        rhi_->createShaderModule(fragmentCode);
+    const VkShaderModule fragmentModule = createMaterialShaderModule(materialFragmentPath);
     const VkShaderModule outlineVertexModule =
         rhi_->createShaderModule(outlineVertexCode);
     const VkShaderModule outlineFragmentModule =
-        rhi_->createShaderModule(outlineFragmentCode);
+        createUvShaderModule(mainFragmentPath(outlineProjectionEnabled_?(bindlessTextures_?"/outline_view_scaled_bindless.frag.spv":"/outline_view_scaled.frag.spv"):"/outline.frag.spv"));
     const VkShaderModule backgroundVertexModule =
         rhi_->createShaderModule(backgroundVertexCode);
     const VkShaderModule backgroundFragmentModule =
@@ -2114,7 +4087,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     const VkShaderModule shadowVertexModule =
         rhi_->createShaderModule(shadowVertexCode);
     const VkShaderModule shadowFragmentModule =
-        rhi_->createShaderModule(shadowFragmentCode);
+        createUvShaderModule(shaderDirectory+(bindlessTextures_?"/shadow_bindless.frag.spv":"/shadow.frag.spv"));
 
     try {
         const rhi::PushConstantRangeDesc pushConstants{
@@ -2151,6 +4124,9 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             {7,
              VK_FORMAT_R32G32B32_SFLOAT,
              static_cast<std::uint32_t>(offsetof(AssetVertex, morph1))},
+            {8, VK_FORMAT_R32_SFLOAT,
+             static_cast<std::uint32_t>(offsetof(AssetVertex, browMask))},
+            {9,VK_FORMAT_R32G32B32A32_SFLOAT,0,1},
         };
         const std::vector<rhi::VertexAttributeDesc> shadowAttributes = {
             materialAttributes[0],
@@ -2160,7 +4136,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             materialAttributes[6],
             materialAttributes[7],
         };
-        const std::vector<rhi::VertexAttributeDesc> outlineAttributes = {
+        std::vector<rhi::VertexAttributeDesc> outlineAttributes = {
             materialAttributes[0],
             materialAttributes[1],
             materialAttributes[4],
@@ -2169,28 +4145,206 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             materialAttributes[7],
         };
 
+        if(outlineProjectionEnabled_) {
+            outlineAttributes.push_back(materialAttributes[2]);outlineAttributes.push_back(materialAttributes[3]);
+        }
         rhi::GraphicsPipelineDesc materialDesc{};
         materialDesc.vertexShader = vertexModule;
         materialDesc.fragmentShader = fragmentModule;
-        materialDesc.vertexStride =
-            static_cast<std::uint32_t>(sizeof(AssetVertex));
+        materialDesc.vertexBindings={{0,static_cast<std::uint32_t>(sizeof(AssetVertex)),VK_VERTEX_INPUT_RATE_VERTEX},
+            {1,0,VK_VERTEX_INPUT_RATE_VERTEX}};
         materialDesc.vertexAttributes = materialAttributes;
-        materialDesc.colorAttachmentCount = 2;
+        materialDesc.colorAttachmentCount = sceneColorAttachmentCount(context);
+        materialDesc.colorWriteMasks.assign(materialDesc.colorAttachmentCount,0xf);
+        if(context.displayMaskEnabled)materialDesc.colorWriteMasks[2]=VK_COLOR_COMPONENT_R_BIT;
         materialDesc.renderPass = context.sceneRenderPass;
+        materialDesc.rasterizationSamples=context.rasterizationSamples;materialDesc.minSampleShading=context.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT?1.F:0.F;
         materialDesc.layout = pipelineLayout_;
+        // The Vulkan lens flips Y and uses a positive-height viewport.
+        // glTF outward CCW faces remain CCW in framebuffer coordinates.
+        materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+        materialDesc.depthTest = context.depthTestEnabled;
 
-        materialDesc.cullMode = VK_CULL_MODE_BACK_BIT;
+        materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
         materialDesc.alphaBlend = false;
         materialDesc.depthWrite = true;
-        opaquePipeline_ = rhi_->createGraphicsPipeline(materialDesc);
-        materialDesc.cullMode = VK_CULL_MODE_NONE;
-        opaqueDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
-        materialDesc.cullMode = VK_CULL_MODE_BACK_BIT;
+        const auto createFacingPipelines = [&](std::array<VkPipeline,4>& pipelines, const rhi::GraphicsPipelineDesc& base) {
+            const auto facingDescription = [&](unsigned facing) {
+                auto desc = base;
+                desc.frontFace = (facing & 1U) ? VK_FRONT_FACE_CLOCKWISE : VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                desc.cullMode = facing >= 2 || !context.faceCullingEnabled ? VK_CULL_MODE_NONE : VK_CULL_MODE_BACK_BIT;
+                return desc;
+            };
+#if !defined(AZURE_COMPUTED_MATERIAL_VIEW_PROGRAMS) && !defined(AZURE_DEFAULT_ISOLATION_VARIANTS)
+            // With no additional variants, each creation only consumes this immutable descriptor.
+            if (!context.backgroundPipelinePreparation && preparationWorkers_
+                && dynamic_cast<rhi::VulkanRhi*>(rhi_) && !materialUvNeeded_
+                && !independentCoverageNeeded_ && !lightingBlendNeeded_ && !lightingFallbackNeeded_
+                && !materialDepthPoliciesNeeded_[1] && !materialDepthPoliciesNeeded_[2] && !materialDepthPoliciesNeeded_[3]) {
+                std::vector<RecordingWorkerPool::Task> tasks;
+                tasks.reserve(pipelines.size());
+                for (unsigned facing = 0; facing < pipelines.size(); ++facing) {
+                    tasks.emplace_back([&, facing](std::size_t) {
+                        pipelines[facing] = rhi_->createGraphicsPipeline(facingDescription(facing));
+                    });
+                }
+                preparationWorkers_->runWithCaller(std::move(tasks));
+                return;
+            }
+#endif
+            for (unsigned facing = 0; facing < pipelines.size(); ++facing)
+                pipelines[facing] = createMaterialGraphicsPipeline(facingDescription(facing));
+        };
+        const auto integralBase=materialDesc;
+        createFacingPipelines(opaquePipelines_,materialDesc);
+        auto depthModule=createMaterialShaderModule(shaderDirectory+sceneFragmentVariant((objectShadowPrepared_?(bindlessTextures_?"/character_snapshot_object_bindless.frag.spv":"/character_snapshot_object.frag.spv"):(bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv")),rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,irradianceClipmapActive_,probeFieldActive_));
+        auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=snapshotPass();
+        depthDesc.colorAttachmentCount=surfaceRadiance_?6U:2U;
+        depthDesc.colorWriteMasks.assign(depthDesc.colorAttachmentCount,0);depthDesc.colorWriteMasks[0]=0xf;depthDesc.colorWriteMasks[1]=0xf;
+        createFacingPipelines(overlayDepthPipelines_,depthDesc);
+        try{initializeMaterialClassPipelines(context,integralBase,depthDesc,meshVertexPath(objectShadowPrepared_?"mesh_object":"mesh"));initializeSurfaceOverlayPipelines(integralBase,depthDesc);}
+        catch(...){destroyMaterialShaderModule(depthModule);throw;}
+        destroyMaterialShaderModule(depthModule);
+        const auto simpleDepthModule=createUvShaderModule(mainFragmentPath(bindlessTextures_
+            ?"/character_snapshot_depth_bindless.frag.spv":"/character_snapshot_depth.frag.spv"));
+        VkShaderModule simpleDepthVertex=VK_NULL_HANDLE;
+        try{
+            simpleDepthVertex=rhi_->createShaderModule(readReferenceVertexProgram(meshVertexPath("character_snapshot_depth")));
+            auto desc=depthDesc;desc.vertexShader=simpleDepthVertex;desc.fragmentShader=simpleDepthModule;desc.colorWriteMasks.assign(desc.colorAttachmentCount,0);desc.colorWriteMasks[1]=VK_COLOR_COMPONENT_R_BIT;
+            // Snapshot-depth vertices consume the mesh stream without vertex colors.
+            desc.vertexAttributes.pop_back();desc.vertexBindings.resize(1);
+            if(referenceSceneDepth_){
+                createReferenceDepthPipelines(desc,context,false);
+                if(referenceSceneDepth_->visibilityInputs())createReferenceDepthPipelines(desc,context,true);
+            }
+            for(unsigned facing=0;facing<3;++facing){
+                desc.frontFace=facing==1?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                desc.cullMode=facing==2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
+                snapshotDepthOnlyPipelines_[facing]=createMaterialUvGraphicsPipeline(desc);
+                if(independentCoverageNeeded_)snapshotCoveragePipelines_[facing]=createCoverageGraphicsPipeline(desc,
+                    shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/character_snapshot_depth_bindless.frag.spv":"/character_snapshot_depth.frag.spv",
+                        rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false));
+                // Only prefill is biased; strict LESS color keeps coplanar draw order.
+                auto prefill=desc;prefill.colorWriteMasks.assign(prefill.colorAttachmentCount,0);prefill.depthBias=true;
+                prefill.depthBiasConstant=1.F;prefill.depthBiasSlope=0.F;
+                snapshotPrefillPipelines_[facing]=createMaterialUvGraphicsPipeline(prefill);
+                if(rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT){auto covered=prefill;covered.fragmentShader=VK_NULL_HANDLE;
+                    snapshotCoveredPrefillPipelines_[facing]=createMaterialUvGraphicsPipeline(covered);}
+                prefill.renderPass=context.sceneRenderPass;
+                prefill.colorAttachmentCount=sceneColorAttachmentCount(context);
+                prefill.colorWriteMasks.assign(prefill.colorAttachmentCount,0);
+                mainPrefillPipelines_[facing]=createMaterialUvGraphicsPipeline(prefill);
+                if(rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT){auto covered=prefill;covered.fragmentShader=VK_NULL_HANDLE;
+                    mainCoveredPrefillPipelines_[facing]=createMaterialUvGraphicsPipeline(covered);}
+            }
+        }catch(...){if(simpleDepthVertex)destroyUvShaderModule(simpleDepthVertex);destroyUvShaderModule(simpleDepthModule);throw;}
+        destroyUvShaderModule(simpleDepthVertex);destroyUvShaderModule(simpleDepthModule);
+
+        materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
         materialDesc.alphaBlend = true;
         materialDesc.depthWrite = false;
-        blendPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
-        materialDesc.cullMode = VK_CULL_MODE_NONE;
-        blendDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+        bool needsBlend = false;
+        bool needsVertexColorBlend = false;
+        bool additive = false;
+        bool coloredAdditive = false;
+        const auto inspectTransparency = [&](const LoadedAsset& mesh) {
+            for (const auto& material : mesh.materials) {
+                const auto& layers = material.unlitTextureLayers;
+                const bool vertexColor = layers.useVertexColor && !mesh.vertexColors.empty();
+                const bool materialAdditive = layers.present && layers.composite == UnlitTextureLayers::Composite::Additive;
+                additive |= materialAdditive;
+                coloredAdditive |= materialAdditive && vertexColor;
+                if (material.alphaMode != AssetAlphaMode::Blend) continue;
+                // Hair integral uses the plain blend family as its multisample fallback.
+                needsBlend |= !vertexColor || (material.materialFeatures & MaterialFeatureHairPixelIntegral) != 0;
+                needsVertexColorBlend |= vertexColor;
+            }
+        };
+        inspectTransparency(asset_);
+        for (const auto& resource : additionalResources_) inspectTransparency(resource->asset);
+        auto blendDesc = materialDesc;
+        const auto* vulkan = dynamic_cast<const rhi::VulkanRhi*>(rhi_);
+        VkShaderModule strictBlendModule = VK_NULL_HANDLE;
+        if ((needsBlend || needsVertexColorBlend) && vulkan && vulkan->supportsShaderFloatControls2()
+            && !lightingBlendNeeded_ && !independentCoverageNeeded_ && !materialUvNeeded_) {
+            // The ordinary alpha blend path must use the same 32-bit arithmetic
+            // across pipeline variants and independently warmed driver caches.
+            const auto code = prepareStrictFragmentShader(readBinaryFile(materialFragmentPath));
+            strictBlendModule = rhi_->createShaderModule(code);
+            blendDesc.fragmentShader = strictBlendModule;
+            RuntimeDiagnostics::instance().info("render", "Ordinary alpha blend: strict float32 arithmetic");
+        }
+        try {
+            if (needsBlend) createFacingPipelines(blendPipelines_, blendDesc);
+            if (needsVertexColorBlend) {
+                auto colored = blendDesc;
+                colored.vertexBindings[1].stride = sizeof(std::array<float,4>);
+                createFacingPipelines(vertexColorBlendPipelines_, colored);
+            }
+        } catch (...) {
+            if (strictBlendModule) rhi_->destroyShaderModule(strictBlendModule);
+            throw;
+        }
+        if (strictBlendModule) rhi_->destroyShaderModule(strictBlendModule);
+        if(additive){auto composed=materialDesc;composed.primaryColorBlend=rhi::PrimaryColorBlend::Additive;
+            if(context.displayMaskEnabled){composed.colorWriteMasks.assign(composed.colorAttachmentCount,0xf);composed.colorWriteMasks[2]=0;}
+            createFacingPipelines(additiveBlendPipelines_,composed);
+            if(coloredAdditive){composed.vertexBindings[1].stride=sizeof(std::array<float,4>);
+                createFacingPipelines(vertexColorAdditiveBlendPipelines_,composed);}}
+        if(viewFog_)viewFog_->initializePipelines(*this,context,materialDesc,bindlessTextures_,computeSkinningEnabled_,asset_,additionalResources_);
+        materialDesc.cullMode=VK_CULL_MODE_NONE;
+        initializeHairIntegralPipelines(context,integralBase);
+        bool needsMultiply = false;
+        bool needsSceneTint = false;
+        const auto inspectComposites = [&](const LoadedAsset& asset) {
+            for (const auto& material : asset.materials) {
+                needsMultiply |= (material.materialFeatures & MaterialFeatureMultiplyComposite) != 0;
+                needsSceneTint |= (material.materialFeatures & MaterialFeatureSceneTint) != 0;
+            }
+        };
+        inspectComposites(asset_);
+        for (const auto& resource : additionalResources_) inspectComposites(resource->asset);
+        if (needsMultiply) {
+            auto multiplyDesc = materialDesc;
+            multiplyDesc.primaryColorBlend = rhi::PrimaryColorBlend::Multiply;
+            multiplyDesc.depthCompare = VK_COMPARE_OP_LESS_OR_EQUAL;
+            multiplyDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
+            createFacingPipelines(multiplyPipelines_, multiplyDesc);
+        }
+        if (needsSceneTint) {
+            auto tintDesc = materialDesc;
+            for (unsigned mirrored = 0; mirrored < 2; ++mirrored) {
+                tintDesc.frontFace = mirrored ? VK_FRONT_FACE_CLOCKWISE : VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                sceneTintPipelines_[mirrored] = createMaterialGraphicsPipeline(tintDesc);
+            }
+        }
+
+        const auto maskModule=createUvShaderModule(mainFragmentPath((bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv")));
+        VkShaderModule maskVertex=VK_NULL_HANDLE;
+        try {
+            maskVertex=createUvShaderModule(shaderDirectory_+(computeSkinningEnabled_?"/outline_mask_compute.vert.spv":"/outline_mask.vert.spv"));
+            auto maskDesc=materialDesc;maskDesc.fragmentShader=maskModule;maskDesc.renderPass=outlineMaskPass_;
+            maskDesc.vertexShader=maskVertex;
+            maskDesc.vertexAttributes.pop_back();maskDesc.vertexBindings.resize(1);
+            maskDesc.colorAttachmentCount=1;maskDesc.depthTest=false;maskDesc.depthWrite=false;maskDesc.alphaBlend=false;
+            maskDesc.colorWriteMasks.assign(1,0xf);
+            maskDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
+            maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
+            outlineMaskPipeline_=createMaterialUvGraphicsPipeline(maskDesc);
+            const auto coverageMaskPath=shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv",rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false);
+            if(independentCoverageNeeded_)outlineMaskCoveragePipelines_[0]=createCoverageGraphicsPipeline(maskDesc,coverageMaskPath);
+            maskDesc.frontFace=VK_FRONT_FACE_CLOCKWISE;
+            outlineMaskMirroredPipeline_=createMaterialUvGraphicsPipeline(maskDesc);
+            if(independentCoverageNeeded_)outlineMaskCoveragePipelines_[1]=createCoverageGraphicsPipeline(maskDesc,coverageMaskPath);
+            maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;maskDesc.cullMode=VK_CULL_MODE_NONE;
+            outlineMaskDoubleSidedPipeline_=createMaterialUvGraphicsPipeline(maskDesc);
+            if(independentCoverageNeeded_)outlineMaskCoveragePipelines_[2]=createCoverageGraphicsPipeline(maskDesc,coverageMaskPath);
+        } catch (...) {
+            if(maskVertex)destroyUvShaderModule(maskVertex);
+            destroyUvShaderModule(maskModule);
+            throw;
+        }
+        destroyUvShaderModule(maskModule);destroyUvShaderModule(maskVertex);
 
         rhi::GraphicsPipelineDesc outlineDesc = materialDesc;
         outlineDesc.vertexShader = outlineVertexModule;
@@ -2199,19 +4353,45 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         outlineDesc.cullMode = VK_CULL_MODE_FRONT_BIT;
         outlineDesc.alphaBlend = false;
         outlineDesc.depthWrite = false;
-        outlinePipeline_ = rhi_->createGraphicsPipeline(outlineDesc);
+        outlinePipeline_ = createMaterialUvGraphicsPipeline(outlineDesc);
+        const auto coverageOutlinePath=shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/outline_view_scaled_bindless.frag.spv":"/outline_view_scaled.frag.spv",rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false);
+        if(independentCoverageNeeded_&&outlineProjectionEnabled_)outlineCoveragePipelines_[0]=createCoverageGraphicsPipeline(outlineDesc,coverageOutlinePath);
+        outlineDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
+        outlineMirroredPipeline_ = createMaterialUvGraphicsPipeline(outlineDesc);
+        if(independentCoverageNeeded_&&outlineProjectionEnabled_)outlineCoveragePipelines_[1]=createCoverageGraphicsPipeline(outlineDesc,coverageOutlinePath);
+        if(outlineProjectionEnabled_) {
+            if(referenceSceneDepth_)createReferenceOutlineDepthPipelines(outlineDesc,context);
+            const auto depthModule=createUvShaderModule(mainFragmentPath(
+                (bindlessTextures_?"/outline_depth_bindless.frag.spv":"/outline_depth.frag.spv")));
+            try {
+                auto shell=outlineDesc;shell.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                shell.fragmentShader=depthModule;shell.renderPass=snapshotPass();
+                shell.colorAttachmentCount=surfaceRadiance_?6U:2U;
+                shell.depthTest=true;shell.depthWrite=true;shell.depthCompare=VK_COMPARE_OP_LESS;
+                shell.colorWriteMasks.assign(shell.colorAttachmentCount,0);shell.colorWriteMasks[1]=VK_COLOR_COMPONENT_R_BIT;
+                outlineDepthPipeline_=createMaterialUvGraphicsPipeline(shell);
+                const auto coverageDepthPath=shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/outline_depth_bindless.frag.spv":"/outline_depth.frag.spv",rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false);
+                if(independentCoverageNeeded_)outlineDepthCoveragePipelines_[0]=createCoverageGraphicsPipeline(shell,coverageDepthPath);
+                shell.frontFace=VK_FRONT_FACE_CLOCKWISE;
+                outlineDepthMirroredPipeline_=createMaterialUvGraphicsPipeline(shell);
+                if(independentCoverageNeeded_)outlineDepthCoveragePipelines_[1]=createCoverageGraphicsPipeline(shell,coverageDepthPath);
+            }catch(...){destroyUvShaderModule(depthModule);throw;}
+            destroyUvShaderModule(depthModule);
+        }
 
         rhi::GraphicsPipelineDesc backgroundDesc = materialDesc;
         backgroundDesc.vertexShader = backgroundVertexModule;
         backgroundDesc.fragmentShader = backgroundFragmentModule;
         backgroundDesc.vertexStride = 0;
+        backgroundDesc.vertexBindings.clear();
         backgroundDesc.vertexAttributes.clear();
         backgroundDesc.cullMode = VK_CULL_MODE_NONE;
         backgroundDesc.depthTest = false;
         backgroundDesc.depthWrite = false;
-        backgroundPipeline_ = rhi_->createGraphicsPipeline(backgroundDesc);
+        backgroundPipeline_ = createMaterialUvGraphicsPipeline(backgroundDesc);
 
         rhi::GraphicsPipelineDesc shadowDesc = materialDesc;
+        shadowDesc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;shadowDesc.minSampleShading=0;
         shadowDesc.vertexShader = shadowVertexModule;
         shadowDesc.fragmentShader = shadowFragmentModule;
         shadowDesc.vertexAttributes = shadowAttributes;
@@ -2223,44 +4403,96 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         shadowDesc.depthWrite = true;
         shadowDesc.alphaBlend = false;
         shadowDesc.colorAttachmentCount = 0;
+        shadowDesc.colorWriteMasks.clear();
         shadowDesc.renderPass = context.shadowRenderPass;
-        shadowPipeline_ = rhi_->createGraphicsPipeline(shadowDesc);
+        shadowPipeline_ = createMaterialUvGraphicsPipeline(shadowDesc);
+        auto depthOnlyDesc=shadowDesc;depthOnlyDesc.fragmentShader=VK_NULL_HANDLE;
+        shadowDepthOnlyPipeline_=createMaterialUvGraphicsPipeline(depthOnlyDesc);
+        if(independentCoverageNeeded_)shadowCoveragePipeline_=createCoverageGraphicsPipeline(shadowDesc,
+            shaderDirectory+(bindlessTextures_?"/shadow_bindless.frag.spv":"/shadow.frag.spv"));
+        if(objectShadowPrepared_){
+            shadowDesc.renderPass=objectShadowAtlas_->renderPass();
+            shadowDesc.depthBiasConstant=8.F;shadowDesc.depthBiasSlope=0.F;
+            shadowDesc.depthBiasExact=rhi_->supportsExactDepthBias();
+            if(referenceObjectVisibilityRequested(context))shadowDesc.vertexSpecialization.push_back({8,VK_TRUE});
+            objectShadowPipeline_=createMaterialUvGraphicsPipeline(shadowDesc);
+            depthOnlyDesc=shadowDesc;depthOnlyDesc.fragmentShader=VK_NULL_HANDLE;
+            objectShadowDepthOnlyPipeline_=createMaterialUvGraphicsPipeline(depthOnlyDesc);
+            if(independentCoverageNeeded_)objectShadowCoveragePipeline_=createCoverageGraphicsPipeline(shadowDesc,
+                shaderDirectory+(bindlessTextures_?"/shadow_bindless.frag.spv":"/shadow.frag.spv"));
+        }
     } catch (...) {
-        rhi_->destroyShaderModule(shadowFragmentModule);
-        rhi_->destroyShaderModule(shadowVertexModule);
-        rhi_->destroyShaderModule(backgroundFragmentModule);
-        rhi_->destroyShaderModule(backgroundVertexModule);
-        rhi_->destroyShaderModule(outlineFragmentModule);
-        rhi_->destroyShaderModule(outlineVertexModule);
-        rhi_->destroyShaderModule(fragmentModule);
-        rhi_->destroyShaderModule(vertexModule);
+        destroyUvShaderModule(shadowFragmentModule);
+        destroyUvShaderModule(shadowVertexModule);
+        destroyUvShaderModule(backgroundFragmentModule);
+        destroyUvShaderModule(backgroundVertexModule);
+        destroyUvShaderModule(outlineFragmentModule);
+        destroyUvShaderModule(outlineVertexModule);
+        destroyMaterialShaderModule(fragmentModule);
+        destroyUvShaderModule(vertexModule);
         throw;
     }
-    rhi_->destroyShaderModule(shadowFragmentModule);
-    rhi_->destroyShaderModule(shadowVertexModule);
-    rhi_->destroyShaderModule(backgroundFragmentModule);
-    rhi_->destroyShaderModule(backgroundVertexModule);
-    rhi_->destroyShaderModule(outlineFragmentModule);
-    rhi_->destroyShaderModule(outlineVertexModule);
-    rhi_->destroyShaderModule(fragmentModule);
-    rhi_->destroyShaderModule(vertexModule);
+    destroyUvShaderModule(shadowFragmentModule);
+    destroyUvShaderModule(shadowVertexModule);
+    destroyUvShaderModule(backgroundFragmentModule);
+    destroyUvShaderModule(backgroundVertexModule);
+    destroyUvShaderModule(outlineFragmentModule);
+    destroyUvShaderModule(outlineVertexModule);
+    destroyMaterialShaderModule(fragmentModule);
+    destroyUvShaderModule(vertexModule);
 }
 
 
+void CharacterSceneRenderer::destroyCoveredPrefillPipelines() {
+    if(!rhi_)return;
+    for(auto* pipelines:{&snapshotCoveredPrefillPipelines_,&mainCoveredPrefillPipelines_})
+        for(auto& pipeline:*pipelines)if(pipeline){rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;}
+}
+
 void CharacterSceneRenderer::destroyResources() {
+    sceneTransforms_.clear();
+    destroyCoveredPrefillPipelines();
+    loadedResourceMeshKeys_.clear();
+    loadedAnimations_.clear();
+    loadedBindPoses_.clear();bindPoseCachedCopies_=0;bindPoseSharedInstances_=0;
+    viewFog_.reset();
+    destroyMaterialLightingPipelines();
+    destroyMaterialClassPipelines();
+    destroyHairIntegralPipelines();
+    motionPass_.reset();motionTarget_=nullptr;motionDraws_.clear();reflectionMotionDraws_.clear();motionPreviousValidObjects_=0;
+    destroyOverlayDepth();
     for (auto& resources : gpuCullingFrames_) resources.reset();
     gpuCullingCapacities_.fill(0);
     if (rhi_ == nullptr) {
         return;
     }
     for (VkPipeline* pipeline : {
-             &opaquePipeline_,
-             &opaqueDoubleSidedPipeline_,
-             &blendPipeline_,
-             &blendDoubleSidedPipeline_,
-             &outlinePipeline_,
+             &opaquePipelines_[0],
+             &opaquePipelines_[1],
+             &opaquePipelines_[2],&opaquePipelines_[3],
+             &blendPipelines_[0],
+             &blendPipelines_[1],
+             &blendPipelines_[2],&blendPipelines_[3],
+             &vertexColorBlendPipelines_[0],&vertexColorBlendPipelines_[1],
+             &vertexColorBlendPipelines_[2],&vertexColorBlendPipelines_[3],
+             &additiveBlendPipelines_[0],&additiveBlendPipelines_[1],&additiveBlendPipelines_[2],&additiveBlendPipelines_[3],
+             &vertexColorAdditiveBlendPipelines_[0],&vertexColorAdditiveBlendPipelines_[1],&vertexColorAdditiveBlendPipelines_[2],&vertexColorAdditiveBlendPipelines_[3],
+             &multiplyPipelines_[0],
+             &multiplyPipelines_[1],
+             &multiplyPipelines_[2],&multiplyPipelines_[3],
+             &sceneTintPipelines_[0],&sceneTintPipelines_[1],
+             &outlinePipeline_,&outlineDepthPipeline_,&outlineDepthMirroredPipeline_,
+             &outlineMirroredPipeline_,
              &backgroundPipeline_,
-             &shadowPipeline_}) {
+             &shadowPipeline_,
+             &objectShadowPipeline_,
+             &shadowDepthOnlyPipeline_,&objectShadowDepthOnlyPipeline_,
+             &shadowCoveragePipeline_,&objectShadowCoveragePipeline_,
+             &outlineMaskCoveragePipelines_[0],&outlineMaskCoveragePipelines_[1],&outlineMaskCoveragePipelines_[2],
+             &outlineCoveragePipelines_[0],&outlineCoveragePipelines_[1],&outlineDepthCoveragePipelines_[0],&outlineDepthCoveragePipelines_[1],
+             &snapshotCoveragePipelines_[0],&snapshotCoveragePipelines_[1],&snapshotCoveragePipelines_[2],
+             &overlayDepthPipelines_[0],&overlayDepthPipelines_[1],&overlayDepthPipelines_[2],&overlayDepthPipelines_[3],&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&snapshotPrefillPipelines_[0],&snapshotPrefillPipelines_[1],&snapshotPrefillPipelines_[2],&mainPrefillPipelines_[0],&mainPrefillPipelines_[1],&mainPrefillPipelines_[2],&outlineMaskPipeline_,
+             &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
             *pipeline = VK_NULL_HANDLE;
@@ -2270,6 +4502,8 @@ void CharacterSceneRenderer::destroyResources() {
         rhi_->destroyPipelineLayout(pipelineLayout_);
         pipelineLayout_ = VK_NULL_HANDLE;
     }
+    for(auto& bounds:shadowBounds_)bounds.reset();
+    objectShadowAtlas_.reset();objectShadowPages_.clear();objectShadowPrepared_=false;objectShadowBoundViews_.fill(VK_NULL_HANDLE);
     if (descriptorPool_ != VK_NULL_HANDLE) {
         rhi_->destroyDescriptorPool(descriptorPool_);
         descriptorPool_ = VK_NULL_HANDLE;
@@ -2299,10 +4533,15 @@ void CharacterSceneRenderer::destroyResources() {
         allocator_->destroyBuffer(buffer);
     }
     uniformBuffers_.clear();
+    allocator_->destroyBuffer(materialSurfaceProfiles_);
+    gpuTransparentSort_.reset();gpuTransparentTickets_={};gpuTransparentInstances_.clear();gpuTransparentAttempted_=false;gpuTransparentFallback_.clear();
     for (auto& buffer : jointBuffers_) {
         allocator_->destroyBuffer(buffer);
     }
     jointBuffers_.clear();
+    allocator_->destroyBuffer(morphTargetBuffer_);
+    for(auto& buffer:morphWeightBuffers_)allocator_->destroyBuffer(buffer);
+    morphGpuMeshes_.clear();
     for (auto& buffer : oitIndexBuffers_) {
         allocator_->destroyBuffer(buffer);
     }
@@ -2311,6 +4550,7 @@ void CharacterSceneRenderer::destroyResources() {
         allocator_->destroyBuffer(buffer);
     }
     instanceBuffers_.clear();
+    materialOriginInstances_.reset();materialOriginNodes_.clear();
     for (auto& buffer : lightBuffers_) {
         allocator_->destroyBuffer(buffer);
     }
@@ -2327,49 +4567,26 @@ void CharacterSceneRenderer::destroyResources() {
         allocator_->destroyBuffer(buffer);
     }
     skinnedVertexBuffers_.clear();
+    abandonSkinningOutputs();for(auto& cache:staticSkinningOutputs_)cache.reset();
     allocator_->destroyBuffer(indexBuffer_);
     allocator_->destroyBuffer(vertexBuffer_);
-    for (auto& material : gpuMaterials_) {
-        for (GpuTexture* texture : {
-                 &material.baseColor,
-                 &material.normal,
-                 &material.metallicRoughness,
-                 &material.specularEmissive,
-                 &material.styleMask,
-                 &material.matcap,
-                 &material.hairData,
-            &material.faceSdf}) {
-            rhi_->destroySampler(texture->sampler);
-            rhi_->destroyImageView(texture->view);
-            allocator_->destroyImage(texture->image);
-        }
-    }
+    allocator_->destroyBuffer(vertexColorBuffer_);allocator_->destroyBuffer(whiteVertexColorBuffer_);
     gpuMaterials_.clear();
     for (auto& resource : additionalResources_) {
         allocator_->destroyBuffer(resource->indexBuffer);
         allocator_->destroyBuffer(resource->vertexBuffer);
+        allocator_->destroyBuffer(resource->vertexColorBuffer);
         for (auto& buffer : resource->skinnedVertexBuffers) {
             allocator_->destroyBuffer(buffer);
         }
         resource->skinnedVertexBuffers.clear();
-        for (auto& material : resource->gpuMaterials) {
-            for (GpuTexture* texture : {
-                     &material.baseColor,
-                     &material.normal,
-                     &material.metallicRoughness,
-                     &material.specularEmissive,
-                     &material.styleMask,
-                     &material.matcap,
-                     &material.hairData,
-                     &material.faceSdf}) {
-                rhi_->destroySampler(texture->sampler);
-                rhi_->destroyImageView(texture->view);
-                allocator_->destroyImage(texture->image);
-            }
-        }
         resource->gpuMaterials.clear();
     }
     additionalResources_.clear();
+    outlineProjection_.reset();outlineProjectionEnabled_=false;
+    materialTextureCache_.reset();
+    for(auto& material:asset_.materials)for(auto& prepared:material.preparedPixels)prepared.reset();
+    materialPixelPool_.reset();
     if (iblPrefilterPipeline_ != VK_NULL_HANDLE) {
         rhi_->destroyPipeline(iblPrefilterPipeline_);
         iblPrefilterPipeline_ = VK_NULL_HANDLE;
@@ -2395,6 +4612,10 @@ void CharacterSceneRenderer::destroyResources() {
         environmentBaseMipView_ = VK_NULL_HANDLE;
     }
     rhi_->destroySampler(environmentTexture_.sampler);
+    reflectionProbeTexture_.reset();probeFieldTexture_.reset();probeFieldActive_=false;
+    allocator_->destroyBuffer(probeFieldBuffer_);probeFieldBuffer_={};
+    irradianceClipmap_.reset();irradianceClipmapActive_=false;irradianceClipmapDimensions_={1,1,1};
+    allocator_->destroyBuffer(irradianceBuffer_);irradianceBuffer_={};irradianceVolume_={};
     rhi_->destroyImageView(environmentTexture_.view);
     allocator_->destroyImage(environmentTexture_.image);
     rhi_->destroySampler(toonRampTexture_.sampler);
@@ -2403,14 +4624,38 @@ void CharacterSceneRenderer::destroyResources() {
 }
 
 void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
+    destroyCoveredPrefillPipelines();
+    if(viewFog_)viewFog_->releasePipelines();
+    destroyMaterialLightingPipelines();
+    destroyMaterialClassPipelines();
+    destroyHairIntegralPipelines();
     for (VkPipeline* pipeline : {
-             &opaquePipeline_,
-             &opaqueDoubleSidedPipeline_,
-             &blendPipeline_,
-             &blendDoubleSidedPipeline_,
-             &outlinePipeline_,
+             &opaquePipelines_[0],
+             &opaquePipelines_[1],
+             &opaquePipelines_[2],&opaquePipelines_[3],
+             &blendPipelines_[0],
+             &blendPipelines_[1],
+             &blendPipelines_[2],&blendPipelines_[3],
+             &vertexColorBlendPipelines_[0],&vertexColorBlendPipelines_[1],
+             &vertexColorBlendPipelines_[2],&vertexColorBlendPipelines_[3],
+             &additiveBlendPipelines_[0],&additiveBlendPipelines_[1],&additiveBlendPipelines_[2],&additiveBlendPipelines_[3],
+             &vertexColorAdditiveBlendPipelines_[0],&vertexColorAdditiveBlendPipelines_[1],&vertexColorAdditiveBlendPipelines_[2],&vertexColorAdditiveBlendPipelines_[3],
+             &multiplyPipelines_[0],
+             &multiplyPipelines_[1],
+             &multiplyPipelines_[2],&multiplyPipelines_[3],
+             &sceneTintPipelines_[0],&sceneTintPipelines_[1],
+             &outlinePipeline_,&outlineDepthPipeline_,&outlineDepthMirroredPipeline_,
+             &outlineMirroredPipeline_,
              &backgroundPipeline_,
-             &shadowPipeline_}) {
+             &shadowPipeline_,
+             &objectShadowPipeline_,
+             &shadowDepthOnlyPipeline_,&objectShadowDepthOnlyPipeline_,
+             &shadowCoveragePipeline_,&objectShadowCoveragePipeline_,
+             &outlineMaskCoveragePipelines_[0],&outlineMaskCoveragePipelines_[1],&outlineMaskCoveragePipelines_[2],
+             &outlineCoveragePipelines_[0],&outlineCoveragePipelines_[1],&outlineDepthCoveragePipelines_[0],&outlineDepthCoveragePipelines_[1],
+             &snapshotCoveragePipelines_[0],&snapshotCoveragePipelines_[1],&snapshotCoveragePipelines_[2],
+             &overlayDepthPipelines_[0],&overlayDepthPipelines_[1],&overlayDepthPipelines_[2],&overlayDepthPipelines_[3],&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&snapshotPrefillPipelines_[0],&snapshotPrefillPipelines_[1],&snapshotPrefillPipelines_[2],&mainPrefillPipelines_[0],&mainPrefillPipelines_[1],&mainPrefillPipelines_[2],&outlineMaskPipeline_,
+             &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
             *pipeline = VK_NULL_HANDLE;
@@ -2429,23 +4674,8 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
 void CharacterSceneRenderer::updateUniformBuffer(
     const SceneFrameData& frame) {
     const float deltaSeconds = frame.deltaSeconds;
-    if (!asset_.animations.empty()) {
-        if (animationPlaying_) {
-            animationTime_ += deltaSeconds;
-        }
-        sampleAnimation(
-            asset_,
-            animationIndex_,
-            animationTime_,
-            asset_.jointMatrices);
-        const std::size_t jointBytes =
-            sizeof(asset_.jointMatrices.front())
-            * asset_.jointMatrices.size();
-        std::memcpy(
-            jointBuffers_[currentFrame_].mapped,
-            asset_.jointMatrices.data(),
-            jointBytes);
-    }
+    animationFrames_ = frame.animations;
+    if (animationPlaying_) animationTime_ += deltaSeconds;
 
     const Vector3 center = {
         footPivot_[0],
@@ -2463,18 +4693,22 @@ void CharacterSceneRenderer::updateUniformBuffer(
         multiply(
             uniformScale(fitScale),
             translation(-center[0], -center[1], -center[2])));
-    currentModel_ = model;
-    const Matrix4 view = lookAt(
-        cameraPosition_,
-        cameraTarget_,
-        {0.0F, 1.0F, 0.0F});
+    currentModel_ = sceneWorldCoordinates_ ? scene::identityMatrix() : model;
+    const Matrix4 view = characterView(*renderSettings_,cameraPosition_,cameraTarget_);
     viewMatrix_ = view;
     const float aspect =
         static_cast<float>(frame.swapchainWidth)
         / static_cast<float>(std::max(frame.swapchainHeight, 1U));
     constexpr float kPi = 3.14159265358979323846F;
-    const Matrix4 projection = perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
+    Matrix4 projection = characterProjection(*renderSettings_,aspect);
     projectionMatrix_ = projection;
+    if(viewFog_){
+        auto camera=renderSettings_->cameraView.value_or(CameraViewDescriptor{});
+        if(!renderSettings_->cameraView){camera.position=cameraPosition_;camera.target=cameraTarget_;
+            camera.fov=2.F*std::atan(1.F/std::abs(projection[5]));camera.nearPlane=renderSettings_->cameraNear;camera.farPlane=renderSettings_->cameraFar;}
+        viewFog_->update(frame.currentFrame,camera,{frame.swapchainWidth,frame.swapchainHeight});
+    }
+    prepareTemporalFrame(frame);
     updateClusteredLighting(
         view,
         projection,
@@ -2483,20 +4717,33 @@ void CharacterSceneRenderer::updateUniformBuffer(
     viewFrustum_ =
         scene::extractFrustumPlanes(multiply(projection, view));
     const RenderSettings& settings = *renderSettings_;
-    const Vector3 lightDirection = settings.showcasePreset == 1
+    Vector3 lightDirection = settings.showcasePreset == 1
         ? normalize({0.62F, 0.68F, 0.38F})
         : normalize({0.48F, 0.82F, 0.32F});
+    const auto* mainSceneLight=settings.sceneLightingEnabled
+        ?scene::primaryDirectionalLight(scene_.lights,scene::DirectionalLightReceiver::Surfaces):nullptr;
+    const auto* mainCharacterLight=settings.sceneLightingEnabled
+        ?scene::primaryDirectionalLight(scene_.lights,scene::DirectionalLightReceiver::Characters):nullptr;
+    if(mainSceneLight)lightDirection=scaleVector(mainSceneLight->shape.direction,-1.F);
+    if (frame.qaLightScan&&!mainSceneLight) {
+        const float angle = 2.0F * kPi * static_cast<float>(frame.capturedFrames % 120) / 119.0F;
+        const auto initial = lightDirection;
+        lightDirection = {std::cos(angle) * initial[0] - std::sin(angle) * initial[2],
+            initial[1], std::sin(angle) * initial[0] + std::cos(angle) * initial[2]};
+    }
     cascadeSplits_ = {};
     const std::vector<float> splits = computeCascadeSplits(
-        0.1F, 100.0F, kShadowCascadeCount, 0.65F);
+        settings.cameraNear, settings.shadowDistance, kShadowCascadeCount, 0.65F);
     std::copy(splits.begin(), splits.end(), cascadeSplits_.begin());
     const Vector3 cameraForward = normalize(
         subtract(cameraTarget_, cameraPosition_));
-    const Vector3 worldUp = {0.0F, 1.0F, 0.0F};
+    const Vector3 worldUp = settings.cameraView?settings.cameraView->up:Vector3{0.0F, 1.0F, 0.0F};
     const Vector3 cameraRight = normalize(cross(cameraForward, worldUp));
     const Vector3 cameraUp = normalize(cross(cameraRight, cameraForward));
-    const float halfFovTangent = std::tan(kPi / 6.0F);
-    float cascadeNear = 0.1F;
+    // Keep conservative shadow coverage around the shared geometry projection.
+    const float halfFovTangent = 1.0F / std::abs(projection[5]);
+    std::array<float,4> cascadeDepthRanges{},cascadeWorldDiameters{};
+    float cascadeNear = settings.cameraNear;
     for (std::size_t cascade = 0;
          cascade < kShadowCascadeCount;
          ++cascade) {
@@ -2505,14 +4752,15 @@ void CharacterSceneRenderer::updateUniformBuffer(
         std::size_t cornerIndex = 0;
         Vector3 center{};
         for (const float depth : {cascadeNear, cascadeFar}) {
-            const float halfHeight = depth * halfFovTangent;
+            const float halfHeight = settings.cameraView&&settings.cameraView->projection==CameraProjectionKind::Orthographic?settings.cameraView->orthoHeight*.5F:depth * halfFovTangent;
             const float halfWidth = halfHeight * aspect;
             const Vector3 sliceCenter = addVectors(
                 cameraPosition_, scaleVector(cameraForward, depth));
+            const auto projectionShift=settings.cameraView?cameraProjectionRayOffset(*settings.cameraView,cameraRight,cameraUp,halfWidth,halfHeight):Vector3{};
             for (const float vertical : {-1.0F, 1.0F}) {
                 for (const float horizontal : {-1.0F, 1.0F}) {
                     const Vector3 corner = addVectors(
-                        sliceCenter,
+                        addVectors(sliceCenter,projectionShift),
                         addVectors(
                             scaleVector(cameraRight, horizontal * halfWidth),
                             scaleVector(cameraUp, vertical * halfHeight)));
@@ -2529,14 +4777,26 @@ void CharacterSceneRenderer::updateUniformBuffer(
                 radius, vectorLength(subtract(corner, center)));
         }
         radius = std::max(std::ceil(radius * 16.0F) / 16.0F, 0.25F);
+        const auto depthFit = settings.characterPresentation.showcaseBackdrop
+            ? CascadeDepthFit{radius * 2.0F + 0.1F, 0.1F, radius * 4.1F}
+            : computeCascadeDepthFit(radius,settings.shadowDistance);
+        cascadeDepthRanges[cascade]=depthFit.farPlane-depthFit.nearPlane;
+        cascadeWorldDiameters[cascade]=radius*2.F;
+        const Vector3 snapUp=std::abs(dot(lightDirection,worldUp))>.97F?Vector3{0,0,1}:worldUp;
+        const Vector3 snapRight=normalize(cross(snapUp,lightDirection));
+        const Vector3 snapVertical=normalize(cross(lightDirection,snapRight));
+        const float worldTexel=2*radius/static_cast<float>(shadowCascadeResolution_);
+        const float dx=std::round(dot(center,snapRight)/worldTexel)*worldTexel-dot(center,snapRight);
+        const float dy=std::round(dot(center,snapVertical)/worldTexel)*worldTexel-dot(center,snapVertical);
+        center=addVectors(center,addVectors(scaleVector(snapRight,dx),scaleVector(snapVertical,dy)));
         const Vector3 lightEye = addVectors(
-            center, scaleVector(lightDirection, radius * 2.0F + 0.1F));
+            center, scaleVector(lightDirection, depthFit.eyeDistance));
         const Vector3 lightUp = std::abs(dot(lightDirection, worldUp)) > 0.97F
             ? Vector3{0.0F, 0.0F, 1.0F}
             : worldUp;
         const Matrix4 lightView = lookAt(lightEye, center, lightUp);
         const Matrix4 lightProjection = orthographic(
-            -radius, radius, -radius, radius, 0.1F, radius * 4.1F);
+            -radius, radius, -radius, radius, depthFit.nearPlane, depthFit.farPlane);
         cascadeLightViewProjections_[cascade] =
             multiply(lightProjection, lightView);
         shadowCascadeFrusta_[cascade] = scene::extractFrustumPlanes(
@@ -2545,12 +4805,60 @@ void CharacterSceneRenderer::updateUniformBuffer(
     }
 
     UniformBufferObject uniform{};
+    referenceCamera_=settings.cameraView?resolveReferenceCamera(*settings.cameraView):std::nullopt;
+    uniform.referenceCamera.control[2]=0;
+    if(referenceCamera_){
+        if(!referenceCameraPrepared_)throw std::invalid_argument("Reference camera requires project reference programs prepared before scene loading");
+        if(settings.antiAliasing==3)throw std::invalid_argument("Reference camera requires a spatial anti-aliasing mode; temporal reference motion is not prepared");
+        if(settings.screenSpaceReflection.enabled||viewFog_)throw std::invalid_argument("Reference camera screen-space reflection and view-fog projection require separate qualification");
+        if(referenceDepthActive()&&(!referenceSceneDepth_||rasterizationSamples_!=VK_SAMPLE_COUNT_1_BIT||settings.antiAliasing==4))
+            throw std::invalid_argument("Scene reference depth requires prepared single-sample spatial attachments");
+        if(referenceVisibilityActive()&&!referenceSceneDepth_->visibilityInputs())
+            throw std::invalid_argument("Scene reference visibility inputs must be prepared before scene loading");
+        if(referenceObjectVisibilityActive()&&!referenceObjectVisibility_)
+            throw std::invalid_argument("Scene reference object visibility must be prepared before scene loading");
+        uniform.referenceCamera=referenceRasterProjectionParameters(*referenceCamera_);
+        uniform.referenceCamera.control[3]=referenceObjectVisibilityActive()?1U:0U;
+    }
+    // The actual view rotation is independent of sky projection scale.
+    uniform.cameraRight={viewMatrix_[0],viewMatrix_[4],viewMatrix_[8],samplingJitter_[0]};
+    uniform.cameraUp={viewMatrix_[1],viewMatrix_[5],viewMatrix_[9],samplingJitter_[1]};
+    const auto& reflection=settings.screenSpaceReflection;
+    const bool reflectionActive=screenSpaceReflectionActive(reflection,settings.sceneLightingEnabled,
+        qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
+    const bool reflectionComputed=screenReflectionPrepared()&&reflection.algorithm==reflectionAlgorithmRequest_
+        &&(!projectedReflections_||(samplingProjectionMatrix_[11]==-1&&samplingProjectionMatrix_[15]==0&&samplingProjectionMatrix_[10]<-1&&samplingProjectionMatrix_[14]<0));
+    uniform.screenReflectionWorldToClip=multiply(samplingProjectionMatrix_,viewMatrix_);
+    uniform.screenReflectionTrace={reflectionActive?(reflectionComputed?2.F:1.F):0.F,reflection.maxDistance,reflection.thickness,reflection.normalBias};
+    uniform.screenReflectionQuality={float(reflection.maxSteps),reflection.maxRoughness,reflection.edgeFade,reflection.strength};
+    uniform.cascadeDepthRanges=cascadeDepthRanges;
+    uniform.cascadeWorldDiameters=cascadeWorldDiameters;
+    if(!std::isfinite(frame.timeSeconds)||std::abs(frame.timeSeconds)>std::numeric_limits<float>::max())
+        throw std::invalid_argument("Invalid unlit presentation time");
+    validateUnlitEffectFrame(settings.unlitEffects);
+    uniform.unlitTimeExposure={static_cast<float>(frame.timeSeconds),settings.unlitEffects.exposureGain,settings.unlitEffects.saturation,0};
+    uniform.unlitColorGain={settings.unlitEffects.colorGain[0],settings.unlitEffects.colorGain[1],settings.unlitEffects.colorGain[2],0};
+    const float skyScale=settings.cameraView&&settings.cameraView->projection==CameraProjectionKind::Orthographic?0.F:halfFovTangent;
+    uniform.skyRight={cameraRight[0]*skyScale*aspect,cameraRight[1]*skyScale*aspect,cameraRight[2]*skyScale*aspect,0};
+    uniform.skyUp={cameraUp[0]*skyScale,cameraUp[1]*skyScale,cameraUp[2]*skyScale,0};
+    uniform.skyForward={cameraForward[0],cameraForward[1],cameraForward[2],0};
+    if(settings.cameraView){const auto shift=cameraProjectionRayOffset(*settings.cameraView,cameraRight,cameraUp,skyScale*aspect,skyScale);
+        for(unsigned axis=0;axis<3;++axis)uniform.skyForward[axis]+=shift[axis];}
+    uniform.skyColor={settings.sky.color[0],settings.sky.color[1],settings.sky.color[2],1};
+    uniform.skyParameters={static_cast<float>(settings.sky.mode),settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,
+        settings.characterPresentation.showcaseBackdrop ? 1.F : 0.F};
+    uniform.clusterLighting={settings.sceneLightingEnabled?1.F:0.F,settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,float(settings.environmentSpecularModel)};
     uniform.cameraPosition = {
         cameraPosition_[0], cameraPosition_[1], cameraPosition_[2], 1.0F,
     };
     uniform.cameraForward = {
         cameraForward[0], cameraForward[1], cameraForward[2], 0.0F,
     };
+    reflectionShadingActive_[currentFrame_]=reflectionActive;reflectionActive_[currentFrame_]=reflectionActive&&reflectionComputed;
+    reflectionSettings_[currentFrame_]=reflection;
+    auto& traceView=reflectionViews_[currentFrame_];traceView.projection=samplingProjectionMatrix_;traceView.worldToClip=uniform.screenReflectionWorldToClip;
+    for(unsigned axis=0;axis<3;++axis){traceView.position[axis]=uniform.cameraPosition[axis];traceView.right[axis]=uniform.cameraRight[axis];
+        traceView.up[axis]=uniform.cameraUp[axis];traceView.forward[axis]=uniform.cameraForward[axis];}
     uniform.clusterGrid = {
         static_cast<float>(kClusterGridX),
         static_cast<float>(kClusterGridY),
@@ -2558,8 +4866,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
         static_cast<float>(frameLights_.lights().size()),
     };
     uniform.clusterDepth = {
-        0.1F,
-        100.0F,
+        settings.cameraNear,
+        settings.cameraFar,
         static_cast<float>(std::max(frame.swapchainWidth, 1U)),
         static_cast<float>(std::max(frame.swapchainHeight, 1U)),
     };
@@ -2570,7 +4878,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
         cascadeSplits_[3],
     };
     uniform.renderingParameters = {
-        largestExtent * 0.004F,
+        settings.outline.silhouetteWidthPixels*(settings.antiAliasing==2?2.F:1.F),
         settings.stylizedLightingEnabled
             ? settings.styleMaskStrength
             : 0.0F,
@@ -2581,7 +4889,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     };
     constexpr std::array<std::array<float, 4>, 5> kShowcasePresets = {{
         {0.0F, 1.08F, 0.24F, 0.18F},
-        {1.0F, 1.52F, 0.06F, 0.24F},
+        {1.0F, 1.08F, 0.26F, 0.10F},
         {2.0F, 0.95F, 0.08F, 0.05F},
         {3.0F, 0.48F, 0.04F, 0.85F},
         {4.0F, 0.18F, 0.02F, 0.08F},
@@ -2596,64 +4904,51 @@ void CharacterSceneRenderer::updateUniformBuffer(
         qaEffectEnabled_ ? 1.0F : 0.0F,
         qaHarnessEnabled_ ? 1.0F : 0.0F,
     };
-    Vector3 faceLight = {0.0F, 0.0F, -1.0F};
-    bool hasFaceSdf = false;
-    if (faceSdfHeadNode_.has_value()
-        && *faceSdfHeadNode_ < asset_.nodeWorldMatrices.size()) {
-        const float cosine = std::cos(rotationAngle_);
-        const float sine = std::sin(rotationAngle_);
-        const Vector3 objectLight = normalize({
-            cosine * lightDirection[0] - sine * lightDirection[2],
-            lightDirection[1],
-            sine * lightDirection[0] + cosine * lightDirection[2],
-        });
-        const auto& head = asset_.nodeWorldMatrices[*faceSdfHeadNode_];
-        const Vector3 currentX = normalize({head[0], head[1], head[2]});
-        const Vector3 currentY = normalize({head[4], head[5], head[6]});
-        const Vector3 currentZ = normalize({head[8], head[9], head[10]});
-        const Vector3 jointLocalLight = {
-            dot(objectLight, currentX),
-            dot(objectLight, currentY),
-            dot(objectLight, currentZ),
-        };
-        const Vector3 bindX = {
-            faceSdfBindBasis_[0],
-            faceSdfBindBasis_[1],
-            faceSdfBindBasis_[2],
-        };
-        const Vector3 bindY = {
-            faceSdfBindBasis_[3],
-            faceSdfBindBasis_[4],
-            faceSdfBindBasis_[5],
-        };
-        const Vector3 bindZ = {
-            faceSdfBindBasis_[6],
-            faceSdfBindBasis_[7],
-            faceSdfBindBasis_[8],
-        };
-        faceLight = normalize({
-            bindX[0] * jointLocalLight[0]
-                + bindY[0] * jointLocalLight[1]
-                + bindZ[0] * jointLocalLight[2],
-            bindX[1] * jointLocalLight[0]
-                + bindY[1] * jointLocalLight[1]
-                + bindZ[1] * jointLocalLight[2],
-            bindX[2] * jointLocalLight[0]
-                + bindY[2] * jointLocalLight[1]
-                + bindZ[2] * jointLocalLight[2],
-        });
-        hasFaceSdf = true;
-    }
-    uniform.faceLightDirection = {
-        faceLight[0], faceLight[1], faceLight[2], hasFaceSdf ? 1.0F : 0.0F,
-    };
+    frameCharacterLight_ = mainCharacterLight&&mainCharacterLight!=mainSceneLight
+        ?scaleVector(mainCharacterLight->shape.direction,-1.F):lightDirection;
+    uniform.faceLightDirection = {0, 0, -1, 0};
     uniform.faceSdfParameters = {
-        settings.faceSdf.enabled ? 1.0F : 0.0F,
+        faceSdfPrepared_&&settings.faceSdf.enabled ? 1.0F : 0.0F,
         settings.faceSdf.threshold,
         settings.faceSdf.softness,
         settings.faceSdf.mirrorHorizontal ? 1.0F : 0.0F,
     };
     uniform.faceSdfShadowColor = settings.faceSdf.shadowColor;
+    uniform.mainLightDirection = {lightDirection[0], lightDirection[1], lightDirection[2], (frame.qaLightScan||mainSceneLight) ? 1.0F : 0.0F};
+    const auto& npr=settings.nprLighting;
+    uniform.nprDirectionBias={npr.ambientDirection[0],npr.ambientDirection[1],npr.ambientDirection[2],npr.directionBias};
+    uniform.nprGainFloor={npr.directionGain,npr.directionFloor,npr.shadowOverride,npr.useSceneIrradiance?1.F:0.F};
+    uniform.nprAmbientColor={npr.ambientColor[0],npr.ambientColor[1],npr.ambientColor[2],npr.indoorMix};
+    uniform.nprComposition={npr.outdoorGain,npr.shadowAmbientGain,npr.litAmbientMix,npr.mainColorMix};
+    uniform.nprMainRadiance={1,1,1,0};uniform.nprLightingParameters={npr.enabled&&settings.sceneLightingEnabled?1.F:0.F,-1,npr.ambientWeight,npr.specularFloor};
+    if(mainCharacterLight){
+        const auto id=stableSceneLightId(mainCharacterLight->id);const auto& lights=frameLights_.lights();
+        for(std::size_t index=0;index<lights.size();++index)if(lights[index].stableId==id){
+            uniform.nprLightingParameters[1]=static_cast<float>(index);
+            if(lights[index].shape.receivers.characters)
+                uniform.nprMainRadiance={lights[index].color[0],lights[index].color[1],lights[index].color[2],lights[index].intensity};
+            break;
+        }
+    }
+    const auto& probe=scene_.reflectionProbe;
+    const auto probeLod=probe.lodMapping?probe.lodMapping->shaderParameters():std::array<float,3>{};
+    uniform.probeCenter={probe.center[0],probe.center[1],probe.center[2],probeLod[0]};
+    uniform.probeHalfExtents={probe.halfExtents[0],probe.halfExtents[1],probe.halfExtents[2],probeLod[1]};
+    const auto projectionOrigin=probe.projectionOrigin.value_or(probe.capturePosition);
+    uniform.probeCapture={projectionOrigin[0],projectionOrigin[1],projectionOrigin[2],probeLod[2]};
+    uniform.probeParameters={!probe.texture.empty()?1.F:0.F,probe.intensity,probe.blendDistance,probe.boxProjection?1.F:0.F};
+    const auto& gi=scene_.irradianceVolume;
+    uniform.irradianceOriginSpacing={irradianceVolume_.origin[0],irradianceVolume_.origin[1],irradianceVolume_.origin[2],irradianceVolume_.spacing};
+    const auto& irradianceDimensions=irradianceClipmapActive_?irradianceClipmapDimensions_:irradianceVolume_.dimensions;
+    uniform.irradianceDimensionsEnabled={float(irradianceDimensions[0]),float(irradianceDimensions[1]),float(irradianceDimensions[2]),
+        float(gi.sampling.enabledFlags(gi.enabled&&(irradianceClipmap_||!irradianceVolume_.cells.empty())))};
+    uniform.irradianceParameters={gi.intensity,gi.sampling.normalOffset,gi.sampling.jitterAmplitude,gi.sampling.phase};
+    auto viewCapabilities=computedMaterialViewCapabilities_;
+    const auto& depthSource=overlaySceneDepth_.at(currentFrame_);
+    viewCapabilities.depthAvailable=reflectionActive&&reflectionComputed&&depthSource.view!=VK_NULL_HANDLE
+        &&depthSource.image.width==frame.swapchainWidth&&depthSource.image.height==frame.swapchainHeight;
+    computedMaterialViewFrame_.at(currentFrame_)=computedMaterialViewEligible(viewCapabilities,
+        {uniform.clusterLighting[0],uniform.qaParameters[0],uniform.qaParameters[1],uniform.qaParameters[2],uniform.screenReflectionTrace[0]});
     std::memcpy(
         uniformBuffers_[currentFrame_].mapped,
         &uniform,
@@ -2669,13 +4964,16 @@ void CharacterSceneRenderer::updateClusteredLighting(
     (void)height;
     std::vector<RenderLight> lights;
     lights.reserve(scene_.lights.size());
+    const auto* mainSceneLight=renderSettings_->sceneLightingEnabled
+        ?scene::primaryDirectionalLight(scene_.lights,scene::DirectionalLightReceiver::Surfaces):nullptr;
     for (const scene::SceneLightDesc& source : scene_.lights) {
         if (!source.enabled) {
             continue;
         }
         const Vector3 viewPosition = transformPosition(view, source.position);
         const float depth = -viewPosition[2];
-        if (!(depth > 0.0F) || source.radius <= 0.0F) {
+        if (source.shape.type!=LightKind::Directional&&!source.shape.characterResponse.isProjectedColorBlend()
+            && (depth + source.radius < renderSettings_->cameraNear || source.radius <= 0.0F)) {
             continue;
         }
         const float clipX = projection[0] * viewPosition[0]
@@ -2687,50 +4985,54 @@ void CharacterSceneRenderer::updateClusteredLighting(
         const float clipW = projection[3] * viewPosition[0]
             + projection[7] * viewPosition[1]
             + projection[11] * viewPosition[2] + projection[15];
-        if (!(std::abs(clipW) > 1.0e-6F)) {
-            continue;
-        }
         RenderLight light{};
-        std::uint64_t stableId = 1469598103934665603ULL;
-        for (const unsigned char value : source.id) {
-            stableId ^= value;
-            stableId *= 1099511628211ULL;
-        }
-        light.stableId = stableId;
+        light.stableId = stableSceneLightId(source.id);
         light.position[0] = source.position[0];
         light.position[1] = source.position[1];
         light.position[2] = source.position[2];
-        light.clusterPosition[0] = clipX / clipW;
-        light.clusterPosition[1] = clipY / clipW;
+        light.clusterPosition[0] = std::abs(clipW)>1e-6F ? clipX / clipW : 0;
+        light.clusterPosition[1] = std::abs(clipW)>1e-6F ? clipY / clipW : 0;
         light.clusterPosition[2] = depth;
+        light.viewSpaceBounds = true;
+        light.viewPosition = {viewPosition[0],viewPosition[1],depth};
         for (std::size_t channel = 0; channel < 3; ++channel) {
             light.color[channel] = source.color[channel];
         }
         light.intensity = source.intensity;
         light.radius = source.radius;
+        light.shape = source.shape;
+        if(source.shape.receivers.surfaces && !source.shape.receivers.characters)
+            light.clusterBox=clusterInfluenceBox(source.shape.influenceBox,view);
+        light.rasterShadowCaster=mainSceneLight==&source;
         lights.push_back(light);
     }
     frameLights_.setLights(std::move(lights), kMaxSceneLights);
-    ClusteredLightGrid grid({
+    const ClusterGridDesc gridDesc{
         kClusterGridX,
         kClusterGridY,
         kClusterGridZ,
-        0.1F,
-        100.0F,
-        std::abs(projection[0]),
-        std::abs(projection[5]),
-    });
+        renderSettings_->cameraNear,
+        renderSettings_->cameraFar,
+        projection[0],
+        projection[5],
+        renderSettings_->cameraView && renderSettings_->cameraView->projection
+            == CameraProjectionKind::Orthographic,
+        renderSettings_->cameraView&&renderSettings_->cameraView->projection==CameraProjectionKind::Orthographic?projection[12]:-projection[8],
+        renderSettings_->cameraView&&renderSettings_->cameraView->projection==CameraProjectionKind::Orthographic?projection[13]:-projection[9],
+    };
+    if(!clusteredLightGrid_)clusteredLightGrid_=std::make_unique<ClusteredLightGrid>(gridDesc);
+    else if(clusteredLightGrid_->desc()!=gridDesc)clusteredLightGrid_->configure(gridDesc);
+    auto& grid=*clusteredLightGrid_;
     grid.assign(frameLights_.lights());
     packedLights_ = frameLights_.gpuData();
-    packedClusterHeaders_ = grid.gpuHeaderData();
-    packedClusterIndices_ = grid.gpuIndexData();
+    grid.gpuReceiverData(packedClusterHeaders_,packedClusterIndices_);
     if (!clusteredLightingReported_) {
         azurerender::RuntimeDiagnostics::instance().print(
             "render",
             "Clustered lighting: "
                 + std::to_string(frameLights_.lights().size()) + " lights, "
-                + std::to_string(packedClusterIndices_.size())
-                + " cluster references");
+                + std::to_string(grid.gpuIndexData().size())
+                + " cluster references, "+std::to_string(packedClusterIndices_.size())+" receiver references");
         clusteredLightingReported_ = true;
     }
 
@@ -2750,8 +5052,6 @@ void CharacterSceneRenderer::updateClusteredLighting(
         packedClusterHeaders_.size()
             * sizeof(std::array<std::uint32_t, 2>));
     rhi::GpuBuffer& indexBuffer = clusterIndexBuffers_[currentFrame_];
-    std::memset(
-        indexBuffer.mapped, 0, static_cast<std::size_t>(indexBuffer.size));
     if (!packedClusterIndices_.empty()) {
         if (packedClusterIndices_.size()
             > indexBuffer.size / sizeof(std::uint32_t)) {
@@ -2763,6 +5063,10 @@ void CharacterSceneRenderer::updateClusteredLighting(
             packedClusterIndices_.data(),
             packedClusterIndices_.size() * sizeof(std::uint32_t));
     }
+}
+
+void CharacterSceneRenderer::recordObjectShadows(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
+    for(const auto& page:snapshot.objectShadowPages)recordShadowDraws(context,4,1,&snapshot,&commands,&page);
 }
 
 void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
@@ -2784,12 +5088,13 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
 
 void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
     std::uint32_t firstCascade, std::uint32_t cascadeCount,
-    const SceneInstanceSnapshot* snapshot, rhi::ICommandRecorder* recordingCommands) {
+    const SceneInstanceSnapshot* snapshot, rhi::ICommandRecorder* recordingCommands,const ObjectShadowPage* objectPage) {
     if (snapshot == nullptr) throw std::logic_error("Shadow recording requires an instance snapshot");
     rhi::ICommandRecorder& commands = recordingCommands != nullptr ? *recordingCommands : *context.commands;
 
-    const std::uint32_t cascadeResolution = context.shadowMapSize / 2;
-    commands.bindPipeline(shadowPipeline_);
+    const std::uint32_t cascadeResolution = objectPage?kObjectShadowTileSize:context.shadowMapSize/2;
+    VkPipeline boundPipeline=objectPage?objectShadowPipeline_:shadowPipeline_;
+    commands.bindPipeline(boundPipeline);
     if (context.submissionCounters != nullptr) {
         ++context.submissionCounters->pipelineBinds;
     }
@@ -2804,27 +5109,31 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
          cascade < firstCascade + cascadeCount;
          ++cascade) {
         const VkOffset2D cascadeOffset{
-            static_cast<std::int32_t>((cascade % 2) * cascadeResolution),
-            static_cast<std::int32_t>((cascade / 2) * cascadeResolution),
+            static_cast<std::int32_t>((objectPage?objectPage->page%kObjectShadowColumns:cascade%2)*cascadeResolution),
+            static_cast<std::int32_t>((objectPage?objectPage->page/kObjectShadowColumns:cascade/2)*cascadeResolution),
         };
         const float resolution = static_cast<float>(cascadeResolution);
         commands.setViewport(
             resolution, resolution,
             static_cast<float>(cascadeOffset.x),
             static_cast<float>(cascadeOffset.y));
-        commands.setScissor(
-            {cascadeResolution, cascadeResolution}, cascadeOffset);
+        if(objectPage)commands.setScissor({cascadeResolution-2,cascadeResolution-2},{cascadeOffset.x+1,cascadeOffset.y+1});
+        else commands.setScissor({cascadeResolution,cascadeResolution},cascadeOffset);
+        const std::uint32_t shadowLayer=objectPage&&objectPage->referenceRaster?5+objectPage->page:cascade;
         commands.pushConstants(
             pipelineLayout_,
             VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
             sizeof(MaterialPushConstants) + sizeof(MorphPushConstants),
-            &cascade,
-            sizeof(cascade));
+            &shadowLayer,
+            sizeof(shadowLayer));
         if (context.submissionCounters != nullptr) {
             ++context.submissionCounters->pushConstantUpdates;
         }
-        for (const std::array<std::uint32_t, 3>& span :
-             snapshot->shadowSpans) {
+        std::vector<std::array<std::uint32_t,3>> objectSpans;
+        if(objectPage)objectSpans.push_back({snapshot->instances.at(objectPage->instanceIndex).meshKey,objectPage->instanceIndex,1});
+        const auto& cascadeSpans=objectPage?objectSpans:snapshot->shadowViewSpans.empty()
+            ? snapshot->shadowSpans : snapshot->shadowViewSpans.at(cascade);
+        for (const std::array<std::uint32_t, 3>& span : cascadeSpans) {
         const std::uint32_t meshKey = span[0];
         const std::uint32_t firstInstance = span[1];
         const std::uint32_t instanceCount = span[2];
@@ -2835,8 +5144,11 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
             for (const AssetPrimitive& primitive : mesh.primitives) {
                 const AssetMaterial& material =
                     mesh.materials[primitive.materialIndex];
+                if(opaqueSurfaceOverlay(material))continue;
+                const bool explicitCoverage=(material.materialFeatures&MaterialFeatureShadowCoverageMask)!=0;
                 if (material.showcasePlatform > 0.5F
-                    || material.materialClass == AssetMaterialClass::Overlay) {
+                    || (!explicitCoverage&&(material.materialClass == AssetMaterialClass::Overlay
+                        || (material.materialFeatures&MaterialFeatureMultiplyComposite)))) {
                     continue;
                 }
                 if (!bindlessTextures_) {
@@ -2856,14 +5168,14 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
                     material.showcasePlatform,
                     material.aoColor,
                     material.lamShadowColor,
-                    material.matcapColor,
+                    material.materialClass==AssetMaterialClass::Hair?material.hairViewParameters:material.matcapColor,
                     material.hairParameters,
                     material.styleParameters,
                     material.featureParameters,
                     static_cast<std::uint32_t>(material.materialClass),
                     material.materialFeatures,
                     material.materialProfileVersion,
-                    0,
+                    static_cast<std::uint32_t>((globalMaterialBase+primitive.materialIndex)<<1U),
                 };
                 commands.pushConstants(
                     pipelineLayout_,
@@ -2873,11 +5185,27 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
                     sizeof(materialConstants));
                 MorphPushConstants morphConstants{};
                 morphConstants.weights = snapshot->settings.morphWeights;
+                morphConstants.gizmoTransform=primitiveGizmoTransform(snapshot->gizmo,&primitive-mesh.primitives.data());
+                if(objectPage){
+                    const auto world=internal::multiply(snapshot->instances.at(objectPage->instanceIndex).model,morphConstants.gizmoTransform);
+                    morphConstants.gizmoTransform=objectPage->referenceRaster?world:internal::multiply(objectPage->worldToClip,world);
+                }
                 if (bindlessTextures_) {
                     morphConstants.textureBaseIndex =
                         textureBase
                         + primitive.materialIndex * kMaterialTextureSlots;
                 }
+                forEachPrimitiveOpacityRun(snapshot->nodeWorldOpacities,primitive.nodeIndex,firstInstance,instanceCount,[&](const PrimitiveOpacityRun& run) {
+                if (run.opacity == 0) return;
+                const VkPipeline pipeline=materialUvPipeline(material,fullyCoveredShadow(material,run.opacity)
+                    ?(objectPage?objectShadowDepthOnlyPipeline_:shadowDepthOnlyPipeline_)
+                    :independentCoverageNeeded_&&material.coverageTexture.present
+                        ?(objectPage?objectShadowCoveragePipeline_:shadowCoveragePipeline_)
+                        :(objectPage?objectShadowPipeline_:shadowPipeline_));
+                if(pipeline!=boundPipeline){commands.bindPipeline(pipeline);boundPipeline=pipeline;
+                    if(context.submissionCounters)++context.submissionCounters->pipelineBinds;
+                }
+                morphConstants.nodeOpacity=run.opacity;
                 commands.pushConstants(
                     pipelineLayout_,
                     VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
@@ -2887,12 +5215,13 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
                 commands.drawIndexed(
                     primitive.indexCount,
                     primitive.firstIndex,
-                    instanceCount,
-                    firstInstance);
+                    run.instanceCount,
+                    run.firstInstance);
                 if (context.submissionCounters != nullptr) {
                     ++context.submissionCounters->drawCalls;
                     context.submissionCounters->pushConstantUpdates += 2;
                 }
+                });
             }
         };
         if (meshKey == 0) {
@@ -2920,6 +5249,8 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     commands.beginRenderPass(mainPassDescription(context));
     recordMainDraws(context, 0, instanceSnapshot_.get());
     commands.endRenderPass();
+    if(surfaceRadiance_)surfaceRadiance_->recordStatisticsReady(commands,static_cast<unsigned>(context.currentFrame));
+    recordShadowHistoryReadback(commands,static_cast<unsigned>(context.currentFrame));
     if (context.gpuTimingEnabled) {
         commands.writeTimestamp(context.timestampQueryPool, 2, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     }
@@ -2937,21 +5268,80 @@ rhi::RenderPassBeginDesc CharacterSceneRenderer::mainPassDescription(const Rende
     clearValues[2].color.float32[2] = 1.0F;
     clearValues[2].color.float32[3] = 0.0F;
     rhi::RenderPassBeginDesc renderPassInfo{};
-    renderPassInfo.renderPass = context.sceneRenderPass;
+    renderPassInfo.renderPass = mainDepthSplitActive(context)?mainDepthSplit_->colorPass():context.sceneRenderPass;
     renderPassInfo.framebuffer = context.sceneFramebuffer;
     renderPassInfo.extent = context.renderExtent;
     renderPassInfo.clearValues.assign(
         clearValues.begin(), clearValues.end());
+    if(context.displayMaskEnabled){VkClearValue mask{};mask.color.float32[0]=1;renderPassInfo.clearValues.push_back(mask);}
     return renderPassInfo;
 }
 
+bool CharacterSceneRenderer::prepareGpuTransparentIndices(std::size_t total,const Vector3& forward){
+    gpuTransparentInstances_.clear();std::uint64_t vertices=0;
+    for(const auto& instance:sceneInstances_){
+        const auto& topology=transparentTopologies_[instance.meshKey];if(topology.vertices.empty())continue;
+        const auto& pose=instancePoses_.at(instance.sourceIndex);
+        vertices+=topology.vertices.size();
+        gpuTransparentInstances_.push_back({instance.meshKey,instance.model,pose.pose.get(),pose.jointBase,pose.morph});
+    }
+    if(vertices<16384||total/3<4096){gpuTransparentFallback_="below-gpu-work-threshold";return false;}
+    const auto fail=[&](const std::string& reason){
+        if(gpuTransparentFallback_!=reason)RuntimeDiagnostics::instance().print("render","GPU transparent preparation fallback: "+reason);
+        gpuTransparentFallback_=reason;return false;};
+    if(!gpuTransparentSort_&&!gpuTransparentAttempted_){
+        gpuTransparentAttempted_=true;
+        try{
+            const auto capacity=[](std::uint64_t value,std::uint32_t maximum){
+                if(value>maximum)throw std::length_error("Transparent workload exceeds GPU capacity");
+                const auto requested=std::min<std::uint64_t>(maximum,value*2);std::uint32_t result=1;
+                while(result<requested)result*=2;return result;};
+            GpuTransparentSortLimits limits;limits.vertices=capacity(vertices,1048576);
+            limits.triangles=capacity(total/3,1048576);limits.instances=capacity(gpuTransparentInstances_.size(),65536);
+            limits.slots=static_cast<unsigned>(kMaxFramesInFlight);
+            GpuTransparentSortShaders shaders{readBinaryFile(shaderDirectory_+"/transparent_deform.comp.spv"),
+                readBinaryFile(shaderDirectory_+"/transparent_depth_keys.comp.spv"),readBinaryFile(shaderDirectory_+"/transparent_index_scatter.comp.spv"),
+                readBinaryFile(shaderDirectory_+"/stable_key_sort.comp.spv")};
+            std::vector<GpuTransparentSortGeometry> sources;sources.reserve(transparentTopologies_.size());
+            for(std::size_t key=0;key<transparentTopologies_.size();++key){
+                const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;sources.push_back({&mesh,&transparentTopologies_[key]});}
+            gpuTransparentSort_=std::make_unique<GpuTransparentIndexSort>(*rhi_,sources,limits,shaders);
+            RuntimeDiagnostics::instance().print("render","GPU transparent preparation initialized: bytes="+std::to_string(gpuTransparentSort_->bytes()));
+        }catch(const std::exception& error){return fail(error.what());}
+    }
+    if(!gpuTransparentSort_)return false;
+    for(std::size_t key=0;key<transparentTopologies_.size();++key){
+        const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
+        if(!gpuTransparentSort_->matchesGeometry(static_cast<unsigned>(key),mesh,transparentTopologies_[key]))return fail("Transparent topology requires a source reload");
+    }
+    try{
+        gpuTransparentTickets_[currentFrame_]=gpuTransparentSort_->prepare(static_cast<unsigned>(currentFrame_),jointBuffers_[currentFrame_],
+            gpuTransparentInstances_,cameraPosition_,forward);gpuTransparentFallback_.clear();return true;
+    }catch(const std::exception& error){return fail(error.what());}
+}
 void CharacterSceneRenderer::prepareTransparentIndices() {
+    gpuTransparentTickets_[currentFrame_].reset();
     transparentPrimitivesByMesh_.assign(additionalResources_.size() + 1, {});
     for (std::size_t key = 0; key < transparentPrimitivesByMesh_.size(); ++key) {
         const auto& mesh = key == 0 ? asset_ : additionalResources_[key - 1]->asset;
         for (const auto& primitive : mesh.primitives)
-            if (mesh.materials[primitive.materialIndex].alphaMode == AssetAlphaMode::Blend)
+            if (mesh.materials[primitive.materialIndex].alphaMode == AssetAlphaMode::Blend
+                &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex]))
                 transparentPrimitivesByMesh_[key].push_back(&primitive);
+    }
+    transparentTopologies_.resize(transparentPrimitivesByMesh_.size());
+    for(std::size_t key=0;key<transparentTopologies_.size();++key){
+        const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
+        const auto& primitives=transparentPrimitivesByMesh_[key];auto& topology=transparentTopologies_[key];
+        bool matches=topology.prepared&&topology.sourceIndices==mesh.indices.data()
+            &&topology.sourceIndexCount==mesh.indices.size()&&topology.sourceVertexCount==mesh.vertices.size()
+            &&topology.primitives.size()==primitives.size();
+        for(std::size_t i=0;matches&&i<primitives.size();++i)
+            matches=topology.primitives[i].range.firstIndex==primitives[i]->firstIndex
+                &&topology.primitives[i].range.indexCount==primitives[i]->indexCount;
+        if(!matches){std::vector<TransparentPrimitiveRange> ranges;ranges.reserve(primitives.size());
+            for(const auto* primitive:primitives)ranges.push_back({primitive->firstIndex,primitive->indexCount});
+            topology=prepareTransparentTopology(mesh.indices,mesh.vertices.size(),ranges);}
     }
     transparentIndexOffsets_.assign(sceneInstances_.size(), 0);
     std::size_t total = 0;
@@ -2959,73 +5349,29 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
         transparentIndexOffsets_[instance.sourceIndex] = total;
         const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
         for (const auto& primitive : mesh.primitives)
-            if (mesh.materials[primitive.materialIndex].alphaMode == AssetAlphaMode::Blend) total += primitive.indexCount;
+            if (mesh.materials[primitive.materialIndex].alphaMode == AssetAlphaMode::Blend
+                &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex])) total += primitive.indexCount;
     }
     transparentDrawsPrepared_ = total != 0;
-    if (total == 0) return;
+    if (total == 0){gpuTransparentFallback_="no-transparent-work";return;}
+    const Vector3 cameraForward = normalize(subtract(cameraTarget_, cameraPosition_));
+    if(prepareGpuTransparentIndices(total,cameraForward))return;
     oitIndexBuffers_.resize(kMaxFramesInFlight);
     auto& buffer = oitIndexBuffers_[currentFrame_];
     if (buffer.size < total * sizeof(std::uint32_t)) {
         allocator_->destroyBuffer(buffer);
         buffer = allocator_->createBuffer(total * sizeof(std::uint32_t), VK_BUFFER_USAGE_INDEX_BUFFER_BIT, true);
     }
-    const Vector3 cameraForward = normalize({-cameraPosition_[0], -cameraPosition_[1], -cameraPosition_[2]});
     for (const auto& instance : sceneInstances_) {
         const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
         const auto& transparentPrimitives = transparentPrimitivesByMesh_[instance.meshKey];
-        std::size_t oitWriteIndex = transparentIndexOffsets_[instance.sourceIndex];
-        if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {
-            std::uint32_t* oitMapped = static_cast<std::uint32_t*>(
-                oitIndexBuffers_[currentFrame_].mapped);
-            for (const AssetPrimitive* primitive : transparentPrimitives) {
-                const std::uint32_t triangleCount = primitive->indexCount / 3;
-                std::vector<std::uint32_t> triangleOrder(triangleCount);
-                std::vector<float> triangleDepth(triangleCount);
-                for (std::uint32_t triangle = 0; triangle < triangleCount;
-                     ++triangle) {
-                    triangleOrder[triangle] = triangle;
-                    const std::uint32_t base =
-                        primitive->firstIndex + triangle * 3;
-                    const std::uint32_t i0 = mesh.indices[base];
-                    const std::uint32_t i1 = mesh.indices[base + 1];
-                    const std::uint32_t i2 = mesh.indices[base + 2];
-                    const Vector3 v0 = transformPosition(
-                        instance.model, mesh.vertices[i0].position);
-                    const Vector3 v1 = transformPosition(
-                        instance.model, mesh.vertices[i1].position);
-                    const Vector3 v2 = transformPosition(
-                        instance.model, mesh.vertices[i2].position);
-                    const Vector3 centroid = {
-                        (v0[0] + v1[0] + v2[0]) * (1.0F / 3.0F),
-                        (v0[1] + v1[1] + v2[1]) * (1.0F / 3.0F),
-                        (v0[2] + v1[2] + v2[2]) * (1.0F / 3.0F),
-                    };
-                    const Vector3 cameraOffset =
-                        subtract(centroid, cameraPosition_);
-                    triangleDepth[triangle] =
-                        dot(cameraOffset, cameraForward);
-                }
-                std::stable_sort(
-                    triangleOrder.begin(),
-                    triangleOrder.end(),
-                    [&](const std::uint32_t left, const std::uint32_t right) {
-                        return triangleDepth[left] > triangleDepth[right];
-                    });
-                for (std::uint32_t triangle = 0; triangle < triangleCount;
-                     ++triangle) {
-                    const std::uint32_t ordered = triangleOrder[triangle];
-                    const std::uint32_t base =
-                        primitive->firstIndex + ordered * 3;
-                    oitMapped[oitWriteIndex + triangle * 3] =
-                        mesh.indices[base];
-                    oitMapped[oitWriteIndex + triangle * 3 + 1] =
-                        mesh.indices[base + 1];
-                    oitMapped[oitWriteIndex + triangle * 3 + 2] =
-                        mesh.indices[base + 2];
-                }
-                oitWriteIndex += primitive->indexCount;
-            }
-        }
+        if (transparentPrimitives.empty()) continue;
+        const auto& pose = instancePoses_.at(instance.sourceIndex);
+        auto* output=static_cast<std::uint32_t*>(oitIndexBuffers_[currentFrame_].mapped)
+            +transparentIndexOffsets_[instance.sourceIndex];
+        writeSortedTransparentIndices(transparentTopologies_[instance.meshKey],[&](std::uint32_t index){
+            return transformPosition(instance.model,deformedVertexPosition(mesh,index,pose.pose.get(),pose.morph));
+        },cameraPosition_,cameraForward,output,transparencyScratch_,preparationWorkers_);
     }
 }
 
@@ -3058,9 +5404,10 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
     if (stage == 0 || stage == 1 || stage == 4) {
     if (settings.characterPresentation.backgroundEnabled) {
         commands.bindPipeline(backgroundPipeline_);
+        if(counters)++counters->pipelineBinds;
         if (!bindlessTextures_) {
             const std::size_t backgroundDescriptorIndex =
-                context.currentFrame * asset_.materials.size();
+                context.currentFrame * totalMaterialCount();
             commands.bindDescriptorSet(
                 pipelineLayout_, descriptorSets_[backgroundDescriptorIndex]);
             if (counters != nullptr) {
@@ -3068,86 +5415,13 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
             }
         }
         commands.draw(3);
+        if(counters)++counters->drawCalls;
     }
 
-    commands.bindVertexBuffer(
-        (snapshot != nullptr ? snapshot->buffers.vertices.at(0) : renderVertexBuffer(0, context.currentFrame).buffer), 0);
-    commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(0) : renderIndexBuffer(0).buffer), 0);
-    if (settings.silhouetteOutlineEnabled) {
-        commands.bindPipeline(outlinePipeline_);
-        MorphPushConstants outlineMorphConstants{};
-        outlineMorphConstants.weights = settings.morphWeights;
-        commands.pushConstants(
-            pipelineLayout_,
-            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
-            sizeof(MaterialPushConstants),
-            &outlineMorphConstants,
-            sizeof(outlineMorphConstants));
-        if (counters != nullptr) {
-            ++counters->pushConstantUpdates;
-        }
-        for (const std::array<std::uint32_t, 3>& span :
-             snapshot->visibleSpans) {
-            const std::uint32_t meshKey = span[0];
-            const std::uint32_t firstInstance = span[1];
-            const std::uint32_t instanceCount = span[2];
-            const auto recordOutlinePrimitives = [&](
-                const LoadedAsset& mesh,
-                const std::size_t globalMaterialBase) {
-                for (const AssetPrimitive& primitive : mesh.primitives) {
-                    const AssetMaterial& outlineMaterial =
-                        mesh.materials[primitive.materialIndex];
-                    if (!settings.characterPresentation.platformEnabled
-                        && outlineMaterial.showcasePlatform > 0.5F) {
-                        continue;
-                    }
-                    // The turntable is a receiver, not character silhouette
-                    // geometry; overlay cards likewise produce oversized
-                    // black shells.
-                    if (outlineMaterial.showcasePlatform > 0.5F
-                        || outlineMaterial.materialClass
-                            == AssetMaterialClass::Overlay
-                        || outlineMaterial.alphaMode == AssetAlphaMode::Blend) {
-                        continue;
-                    }
-                    if (!bindlessTextures_) {
-                        const std::size_t descriptorIndex =
-                            context.currentFrame * totalMaterialCount()
-                            + globalMaterialBase + primitive.materialIndex;
-                        commands.bindDescriptorSet(
-                            pipelineLayout_, descriptorSets_[descriptorIndex]);
-                        if (counters != nullptr) {
-                            ++counters->descriptorSetBinds;
-                        }
-                    }
-                    commands.drawIndexed(
-                        primitive.indexCount,
-                        primitive.firstIndex,
-                        instanceCount,
-                        firstInstance);
-                    if (counters != nullptr) {
-                        ++counters->drawCalls;
-                    }
-                }
-            };
-            if (meshKey == 0) {
-                commands.bindVertexBuffer(
-                    (snapshot != nullptr ? snapshot->buffers.vertices.at(meshKey) : renderVertexBuffer(meshKey, context.currentFrame).buffer), 0);
-                commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(meshKey) : renderIndexBuffer(meshKey).buffer), 0);
-                recordOutlinePrimitives(asset_, 0);
-            } else {
-                const AdditionalResource& resource =
-                    *additionalResources_[meshKey - 1];
-                commands.bindVertexBuffer(
-                    (snapshot != nullptr ? snapshot->buffers.vertices.at(meshKey) : renderVertexBuffer(meshKey, context.currentFrame).buffer), 0);
-                commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(meshKey) : renderIndexBuffer(meshKey).buffer), 0);
-                recordOutlinePrimitives(
-                    resource.asset, resource.globalMaterialBase);
-            }
-        }
-    }
     }
     if (stage == 0 || stage == 2 || stage == 4) {
+    if(settings.sceneLightingEnabled&&context.depthTestEnabled&&!mainDepthSplitActive(context))
+        recordDepthCoverage(context,*snapshot,commands,DepthCoverageMode::MainPrefill,counters);
     for (const std::array<std::uint32_t, 3>& span : snapshot->opaqueSpans) {
         const std::uint32_t meshKey = span[0];
         const std::uint32_t firstInstance = span[1];
@@ -3167,7 +5441,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                         instanceCount,
                         firstInstance,
                         textureBase,
-                        globalMaterialBase, counters, snapshot);
+                        globalMaterialBase, counters, snapshot,false,mainDepthSplitActive(context));
                 }
             }
         };
@@ -3188,6 +5462,12 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                 resource.globalMaterialBase);
         }
     }
+    }
+    if(stage==0||stage==2||stage==4)recordSurfaceOverlays(context,*snapshot,commands,false,counters);
+    if(stage==0||stage==1||stage==4)recordOutlineShells(context,*snapshot,commands,snapshot->visibleSpans,OutlineShellPass::Color,counters);
+    if((stage==0||stage==4)&&viewFog_){
+        const auto descriptor=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount();
+        viewFog_->record(commands,pipelineLayout_,descriptorSets_[descriptor],counters);
     }
     if (stage == 0 || stage == 3) {
     for (std::size_t slot = firstTransparent; slot < transparentEnd; ++slot) {
@@ -3219,12 +5499,12 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
             const auto* primitive = snapshot != nullptr
                 ? &mesh.primitives.at(snapshot->buffers.transparentPrimitives[meshKey][primitiveSlot])
                 : transparentPrimitivesByMesh_[meshKey][primitiveSlot];
-            if (!oitIndexBuffers_.empty()) {
+            if (snapshot->buffers.transparentIndices != VK_NULL_HANDLE) {
                 const VkDeviceSize offsetBytes =
                     static_cast<VkDeviceSize>(oitReadIndex)
                     * sizeof(std::uint32_t);
                 commands.bindIndexBuffer(
-                    (snapshot != nullptr ? snapshot->buffers.transparentIndices : oitIndexBuffers_[context.currentFrame].buffer),
+                    snapshot->buffers.transparentIndices,
                     offsetBytes);
             }
             drawPrimitive(
@@ -3251,7 +5531,11 @@ void CharacterSceneRenderer::drawPrimitive(
     const std::uint32_t firstInstance,
     const std::uint32_t textureBase,
     const std::size_t globalMaterialBase,
-    SceneSubmissionCounters* counters, const SceneInstanceSnapshot* snapshot) {
+    SceneSubmissionCounters* counters, const SceneInstanceSnapshot* snapshot,bool snapshotSurfaceOverlay,bool allowConservative) {
+    const auto recordRun = [&](const PrimitiveOpacityRun& run) {
+    if (run.opacity == 0) return;
+    const auto firstInstance=run.firstInstance;
+    const auto instanceCount=run.instanceCount;
     const auto frameIndex = snapshot != nullptr ? snapshot->frameIndex : currentFrame_;
     const auto indirectBuffer = snapshot != nullptr ? snapshot->indirectBuffer
         : (gpuCullingFrames_[currentFrame_] ? gpuCullingFrames_[currentFrame_]->output().buffer : VK_NULL_HANDLE);
@@ -3261,10 +5545,42 @@ void CharacterSceneRenderer::drawPrimitive(
         return;
     }
     const bool blend = material.alphaMode == AssetAlphaMode::Blend;
-    const VkPipeline pipeline = blend
-        ? (material.doubleSided ? blendDoubleSidedPipeline_ : blendPipeline_)
-        : (material.doubleSided ? opaqueDoubleSidedPipeline_ : opaquePipeline_);
-    commands.bindPipeline(pipeline);
+    const auto& model = snapshot ? snapshot->instances.at(firstInstance).model : sceneInstances_.at(firstInstance).model;
+    const RecordingGizmoState gizmo=snapshot? snapshot->gizmo
+        :RecordingGizmoState{selectedPrimitiveIndex_,gizmoActive_,gizmoTranslation_,gizmoRotation_,gizmoScale_};
+    const bool mirrored=primitiveMirroredTransform(model,gizmo,&primitive-mesh.primitives.data());
+    const bool multiplyComposite=(material.materialFeatures&MaterialFeatureMultiplyComposite)!=0;
+    const bool vertexColor=material.unlitTextureLayers.useVertexColor&&!mesh.vertexColors.empty();
+    const bool additive=material.unlitTextureLayers.present&&material.unlitTextureLayers.composite==UnlitTextureLayers::Composite::Additive;
+    const auto& transparentPipelines=additive?(vertexColor?vertexColorAdditiveBlendPipelines_:additiveBlendPipelines_)
+        :(vertexColor?vertexColorBlendPipelines_:blendPipelines_);
+    const auto fogPipeline=viewFog_&&blend&&material.unlitTextureLayers.fogMode==UnlitTextureLayers::FogMode::Scene
+        ?viewFog_->materialPipeline(additive,vertexColor,surfaceFacingIndex(material.doubleSided,mirrored)):VK_NULL_HANDLE;
+    const auto classPipeline=materialClassPipeline(material,mirrored,false,run.opacity);
+    const bool surfaceOverlay=opaqueSurfaceOverlay(material);
+    const auto& surfacePipelines=snapshotSurfaceOverlay?surfaceOverlaySnapshotPipelines_:surfaceOverlayPipelines_;
+    const VkPipeline pipeline = surfaceOverlay?surfacePipelines[vertexColor][surfaceFacingIndex(material.doubleSided,mirrored)]:fogPipeline?fogPipeline:(material.materialFeatures&MaterialFeatureHairPixelIntegral)
+        ?hairIntegralPipeline(material,mirrored,false):multiplyComposite
+        ? (multiplyPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)])
+        : (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipelines_[mirrored?1:0] : blend
+        ? transparentPipelines[surfaceFacingIndex(material.doubleSided,mirrored)]
+        : ordinaryOpaqueMaterial(material)?ordinaryOpaquePipeline(material,mirrored,false,run.opacity)
+        :classPipeline?classPipeline
+        : (opaquePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]);
+    const auto colorBuffer=snapshot&&!snapshot->buffers.vertexColors.empty()
+        ?snapshot->buffers.vertexColors.at(snapshot->instances.at(firstInstance).meshKey):whiteVertexColorBuffer_.buffer;
+    if(!snapshot&&!mesh.vertexColors.empty())throw std::logic_error("Vertex colors require immutable recording buffers");
+    commands.bindVertexStream(1,colorBuffer,0);
+    const auto fullPipeline=materialUvPipeline(material,surfaceOverlay?pipeline:materialLightingPipeline(material,pipeline));
+    const auto primitiveIndex=static_cast<std::size_t>(&primitive-mesh.primitives.data());
+    bool useConservative=snapshot&&allowConservative&&run.opacity==1.F&&ordinaryOpaqueMaterial(material)
+        &&firstIndexOffset==primitive.firstIndex&&snapshot->buffers.conservativeIndirect!=VK_NULL_HANDLE;
+    if(useConservative)for(std::uint32_t i=0;i<instanceCount;++i){
+        const auto at=snapshot->buffers.conservativeOffsets.at(firstInstance+i)+primitiveIndex;
+        if(snapshot->buffers.conservativeSlots.at(at)==UINT32_MAX){useConservative=false;break;}
+    }
+    const bool selectRadiance=useConservative&&snapshot->buffers.radianceSelectionIndirect!=VK_NULL_HANDLE&&radianceSelectionMaterial(material);
+    commands.bindPipeline(selectRadiance?ordinaryRadiancePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]:fullPipeline);
     if (!bindlessTextures_) {
         const std::size_t descriptorIndex =
             frameIndex * totalMaterialCount()
@@ -3282,18 +5598,19 @@ void CharacterSceneRenderer::drawPrimitive(
         material.showcasePlatform,
         material.aoColor,
         material.lamShadowColor,
-        material.matcapColor,
+        material.materialClass==AssetMaterialClass::Hair?material.hairViewParameters:material.matcapColor,
         material.hairParameters,
         material.styleParameters,
         material.featureParameters,
             static_cast<std::uint32_t>(material.materialClass),
-            material.materialFeatures,
+            materialFeaturesForFrame(material),
             material.materialProfileVersion,
-            (snapshot != nullptr ? snapshot->gizmo.selectedPrimitive : selectedPrimitiveIndex_)
+            static_cast<std::uint32_t>((globalMaterialBase+primitive.materialIndex)<<1U) |
+            ((snapshot != nullptr ? snapshot->gizmo.selectedPrimitive : selectedPrimitiveIndex_)
                 == static_cast<std::int32_t>(
                        &primitive - mesh.primitives.data())
             ? 1U
-            : 0U,
+            : 0U),
     };
     commands.pushConstants(
         pipelineLayout_,
@@ -3302,57 +5619,19 @@ void CharacterSceneRenderer::drawPrimitive(
         &materialConstants,
         sizeof(materialConstants));
     MorphPushConstants morphConstants{};
-    morphConstants.weights = (snapshot != nullptr ? snapshot->settings : *renderSettings_).morphWeights;
+    morphConstants.nodeOpacity=run.opacity;
+    const auto& drawSettings=snapshot != nullptr ? snapshot->settings : *renderSettings_;
+    morphConstants.weights = drawSettings.morphWeights;
+    if(material.outlineSurface.projectSurface)morphConstants.weights[1]=drawSettings.antiAliasing==2?2.F:1.F;
     if (bindlessTextures_) {
         morphConstants.textureBaseIndex =
             textureBase
             + primitive.materialIndex * kMaterialTextureSlots;
     }
-    morphConstants.gizmoTransform =
-        [&]() -> std::array<float, 16> {
-            if ((snapshot != nullptr ? snapshot->gizmo.selectedPrimitive : selectedPrimitiveIndex_)
-                != static_cast<std::int32_t>(
-                       &primitive - mesh.primitives.data())) {
-                return {1.0F, 0.0F, 0.0F, 0.0F,
-                        0.0F, 1.0F, 0.0F, 0.0F,
-                        0.0F, 0.0F, 1.0F, 0.0F,
-                        0.0F, 0.0F, 0.0F, 1.0F};
-            }
-            constexpr float kPi = 3.14159265358979323846F;
-            std::array<float, 3> gizmoTranslation{0.0F, 0.0F, 0.0F};
-            std::array<float, 3> gizmoRotation{0.0F, 0.0F, 0.0F};
-            std::array<float, 3> gizmoScale{1.0F, 1.0F, 1.0F};
-            if (snapshot != nullptr ? snapshot->gizmo.active : gizmoActive_) {
-                gizmoTranslation = snapshot != nullptr ? snapshot->gizmo.translation : gizmoTranslation_;
-                gizmoRotation = snapshot != nullptr ? snapshot->gizmo.rotation : gizmoRotation_;
-                gizmoScale = snapshot != nullptr ? snapshot->gizmo.scale : gizmoScale_;
-            }
-            const Matrix4 gizmoTransform = multiply(
-                translation(
-                    gizmoTranslation[0],
-                    gizmoTranslation[1],
-                    gizmoTranslation[2]),
-                multiply(
-                    multiply(
-                        rotationX(gizmoRotation[0] * kPi / 180.0F),
-                        rotationY(gizmoRotation[1] * kPi / 180.0F)),
-                    multiply(
-                        rotationZ(gizmoRotation[2] * kPi / 180.0F),
-                        scale(
-                            gizmoScale[0],
-                            gizmoScale[1],
-                            gizmoScale[2]))));
-            return {
-                gizmoTransform[0], gizmoTransform[1],
-                gizmoTransform[2], gizmoTransform[3],
-                gizmoTransform[4], gizmoTransform[5],
-                gizmoTransform[6], gizmoTransform[7],
-                gizmoTransform[8], gizmoTransform[9],
-                gizmoTransform[10], gizmoTransform[11],
-                gizmoTransform[12], gizmoTransform[13],
-                gizmoTransform[14], gizmoTransform[15],
-            };
-        }();
+    morphConstants.gizmoTransform=primitiveGizmoTransform(gizmo,&primitive-mesh.primitives.data());
+    if(surfaceRadiance_||shadowHistory_){const auto first=primitive.firstIndex<=UINT32_MAX&&primitive.indexCount<=UINT32_MAX-primitive.firstIndex
+        ?static_cast<std::uint32_t>(primitive.firstIndex):UINT32_MAX;std::memcpy(&morphConstants.weights[0],&first,4);}
+
     commands.pushConstants(
         pipelineLayout_,
         VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
@@ -3360,9 +5639,24 @@ void CharacterSceneRenderer::drawPrimitive(
         &morphConstants,
         sizeof(morphConstants));
     std::uint32_t recordedDrawCalls = 0;
-    if (!blend && indirectBuffer != VK_NULL_HANDLE
-        && firstIndexOffset == primitive.firstIndex) {
-        const auto primitiveIndex = static_cast<std::size_t>(&primitive - mesh.primitives.data());
+    const bool useIndirect=!blend&&indirectBuffer!=VK_NULL_HANDLE
+        &&firstIndexOffset==primitive.firstIndex&&!material.nprDiffuse.rimOrigin.present;
+    if(useConservative){
+        const auto& buffers=snapshot->buffers;
+
+        const auto slot=[&](std::uint32_t i){return buffers.conservativeSlots.at(buffers.conservativeOffsets.at(firstInstance+i)+primitiveIndex);};
+        const auto first=slot(0),stride=instanceCount>1?slot(1)-first:1U;bool regular=stride>0;
+        for(std::uint32_t i=1;regular&&i<instanceCount;++i)regular=slot(i)==std::uint64_t(first)+std::uint64_t(i)*stride;
+        const auto drawRegion=[&](VkBuffer commandBuffer,VkDeviceSize base){
+        if(regular&&buffers.multiDrawIndirect){
+            for(std::uint32_t i=0;i<instanceCount;){const auto count=std::min(buffers.maxDrawIndirectCount,instanceCount-i);
+                commands.drawIndexedIndirect(commandBuffer,base+VkDeviceSize(slot(i))*20,count,stride*20);i+=count;++recordedDrawCalls;}
+        }else for(std::uint32_t i=0;i<instanceCount;++i){commands.drawIndexedIndirect(commandBuffer,base+VkDeviceSize(slot(i))*20,1,20);++recordedDrawCalls;}
+        };
+        if(selectRadiance){drawRegion(buffers.radianceSelectionIndirect,buffers.radianceFastOffset);commands.bindPipeline(fullPipeline);
+            if(counters)++counters->pipelineBinds;}
+        drawRegion(buffers.conservativeIndirect,0);
+    }else if (useIndirect) {
         if (snapshot != nullptr ? snapshot->buffers.multiDrawIndirect : multiDrawIndirect_) {
             for (std::uint32_t i = 0; i < instanceCount;) {
                 const auto count = std::min(snapshot != nullptr ? snapshot->buffers.maxDrawIndirectCount : maxDrawIndirectCount_, instanceCount - i);
@@ -3382,20 +5676,30 @@ void CharacterSceneRenderer::drawPrimitive(
         }
     } else {
         commands.drawIndexed(
-            primitive.indexCount, firstIndexOffset, instanceCount, firstInstance);
+            primitive.indexCount, firstIndexOffset, instanceCount,
+            materialOriginFirstInstance(material,snapshot,firstInstance,instanceCount));
         ++recordedDrawCalls;
     }
     if (counters != nullptr) {
         counters->drawCalls += recordedDrawCalls;
-        if (!blend && indirectBuffer != VK_NULL_HANDLE
-            && firstIndexOffset == primitive.firstIndex)
+        if (useIndirect||useConservative)
             counters->indirectDrawCalls += recordedDrawCalls;
         ++counters->pipelineBinds;
         counters->pushConstantUpdates += 2;
     }
+    };
+    if (snapshot != nullptr)
+        forEachPrimitiveOpacityRun(snapshot->nodeWorldOpacities,primitive.nodeIndex,firstInstance,instanceCount,recordRun);
+    else recordRun(PrimitiveOpacityRun{firstInstance,instanceCount,1.0F});
 }
 
 void CharacterSceneRenderer::buildSceneState() {
+    state_.pickables.clear();
+    for(const auto& instance:sceneInstances_) {
+        const auto* mesh=instance.meshKey==0?&asset_:&additionalResources_[instance.meshKey-1]->asset;
+        const auto* pose=instance.sourceIndex<instancePoses_.size()?&instancePoses_[instance.sourceIndex]:nullptr;
+        state_.pickables.push_back({instance.nodeId,mesh,instance.model,pose?pose->pose.get():nullptr,pose?pose->morph:std::array<float,2>{}});
+    }
     state_.asset = &asset_;
     state_.modelMatrix = currentModel_.data();
     state_.selectedPrimitiveIndex = selectedPrimitiveIndex_;

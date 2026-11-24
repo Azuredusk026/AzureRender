@@ -1,0 +1,641 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "phase": "NR6-C16",
+  "scope": "material-frame-instance-source",
+  "status": "captured-instance-and-stage-bindings-verified",
+  "sourceCommit": "0d3f99e",
+  "draws": [
+    {
+      "frame": 10401,
+      "event": 804,
+      "kind": "face",
+      "indices": 8718,
+      "referencedVertices": 1792,
+      "instanceSemantic": "TEXCOORD8",
+      "instanceOutputRegister": 9,
+      "instanceIndices": [
+        0
+      ],
+      "stageInputs": {
+        "vertex": {
+          "flags": 52,
+          "paletteRow": 25075,
+          "instanceBinding": {
+            "resource": "ResourceId::611",
+            "viewByteOffset": 253952,
+            "recordByteOffset": 253952
+          },
+          "paletteBinding": {
+            "slot": 0,
+            "resource": "ResourceId::399",
+            "viewByteOffset": 0,
+            "reservedByteOffset": 401200
+          },
+          "reservedRows": [
+            [
+              0.9970895648002625,
+              -0.036747194826602936,
+              0.06679967045783997,
+              -300.00433349609375
+            ],
+            [
+              0.04144105315208435,
+              0.9966651201248169,
+              -0.07029593735933304,
+              301.53741455078125
+            ],
+            [
+              -0.0639936700463295,
+              0.07285947352647781,
+              0.9952871203422546,
+              -299.9794921875
+            ]
+          ]
+        },
+        "pixel": {
+          "flags": 52,
+          "paletteRow": 25075,
+          "instanceBinding": {
+            "resource": "ResourceId::611",
+            "viewByteOffset": 253952,
+            "recordByteOffset": 253952
+          },
+          "paletteBinding": {
+            "slot": 1,
+            "resource": "ResourceId::399",
+            "viewByteOffset": 0,
+            "reservedByteOffset": 401200
+          },
+          "reservedRows": [
+            [
+              0.9970895648002625,
+              -0.036747194826602936,
+              0.06679967045783997,
+              -300.00433349609375
+            ],
+            [
+              0.04144105315208435,
+              0.9966651201248169,
+              -0.07029593735933304,
+              301.53741455078125
+            ],
+            [
+              -0.0639936700463295,
+              0.07285947352647781,
+              0.9952871203422546,
+              -299.9794921875
+            ]
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e804\\manifest.json",
+          "bytes": 3190,
+          "sha256": "dff18bf59a17a524242d7da15f15b752014b7b4e8f190d6097dc0f019d9bff6b"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e804\\vertices.bin",
+          "bytes": 207872,
+          "sha256": "1e248bf04bdabf5247c51529659c4daf4321124f47fa52129a37f0f2d5f53310"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e804\\indices.bin",
+          "bytes": 17436,
+          "sha256": "9efd0722771e8c3cf544bc276cabd27842b8531af6cf19b6cea5249373db973c"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e804\\instance-vertex.bin",
+          "bytes": 256,
+          "sha256": "f75cf3596ffe070d35f4b815ff6307ce67964a683482e02d295a52cf9e2b4fd2"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e804\\instance-pixel.bin",
+          "bytes": 256,
+          "sha256": "f75cf3596ffe070d35f4b815ff6307ce67964a683482e02d295a52cf9e2b4fd2"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e804\\reserved-vertex.bin",
+          "bytes": 48,
+          "sha256": "4010187f43085771f61ff0ebff6323636370a60f951735828d7096e78bd14e72"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e804\\reserved-pixel.bin",
+          "bytes": 48,
+          "sha256": "4010187f43085771f61ff0ebff6323636370a60f951735828d7096e78bd14e72"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e804\\vertex.asm",
+          "bytes": 12308,
+          "sha256": "252213b7525638a4504c1e5d61ecdb8efce452676376738ad332d08264da471c"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e804\\vertex.dxbc",
+          "bytes": 8296,
+          "sha256": "bb0f73f04f0878aa1b144a54d5c595d47ad5af23c5eb8d7a0da0b5a8b7011c9f"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e804\\pixel.asm",
+          "bytes": 78171,
+          "sha256": "ea0a2e244a7cb09fd02dbc26e8e0c6638725e6753ad0a5fe763cfc3644bc0701"
+        }
+      ],
+      "source": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+        "bytes": 345416012,
+        "sha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90"
+      },
+      "stageMatrixMaximumError": 0.0
+    },
+    {
+      "frame": 10401,
+      "event": 950,
+      "kind": "hair",
+      "indices": 43044,
+      "referencedVertices": 11564,
+      "instanceSemantic": "TEXCOORD9",
+      "instanceOutputRegister": 10,
+      "instanceIndices": [
+        0
+      ],
+      "stageInputs": {
+        "vertex": {
+          "flags": 52,
+          "paletteRow": 25264,
+          "instanceBinding": {
+            "resource": "ResourceId::611",
+            "viewByteOffset": 255744,
+            "recordByteOffset": 255744
+          },
+          "paletteBinding": {
+            "slot": 0,
+            "resource": "ResourceId::399",
+            "viewByteOffset": 0,
+            "reservedByteOffset": 404224
+          },
+          "reservedRows": [
+            [
+              0.9970895648002625,
+              -0.036747194826602936,
+              0.06679967045783997,
+              -300.00433349609375
+            ],
+            [
+              0.04144105315208435,
+              0.9966651201248169,
+              -0.07029593735933304,
+              301.53741455078125
+            ],
+            [
+              -0.0639936700463295,
+              0.07285947352647781,
+              0.9952871203422546,
+              -299.9794921875
+            ]
+          ]
+        },
+        "pixel": {
+          "flags": 52,
+          "paletteRow": 25264,
+          "instanceBinding": {
+            "resource": "ResourceId::611",
+            "viewByteOffset": 255744,
+            "recordByteOffset": 255744
+          },
+          "paletteBinding": {
+            "slot": 1,
+            "resource": "ResourceId::399",
+            "viewByteOffset": 0,
+            "reservedByteOffset": 404224
+          },
+          "reservedRows": [
+            [
+              0.9970895648002625,
+              -0.036747194826602936,
+              0.06679967045783997,
+              -300.00433349609375
+            ],
+            [
+              0.04144105315208435,
+              0.9966651201248169,
+              -0.07029593735933304,
+              301.53741455078125
+            ],
+            [
+              -0.0639936700463295,
+              0.07285947352647781,
+              0.9952871203422546,
+              -299.9794921875
+            ]
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e950\\manifest.json",
+          "bytes": 3366,
+          "sha256": "2b10ad173f791ffef19cb6e0eba7e8b0974b0e515b8fd1e9fe9492d004385cd3"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e950\\vertices.bin",
+          "bytes": 1526448,
+          "sha256": "49df748f07528ec2b1ee5a558adaa2d7c5e51f37ce38372f97d2145675afbbeb"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e950\\indices.bin",
+          "bytes": 86088,
+          "sha256": "2ab42c277510cad0ff47249acdc60d164c254f3264142ace510008dea8e9a14f"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e950\\instance-vertex.bin",
+          "bytes": 256,
+          "sha256": "dcb22ff9c3bba2026bad652df1a60dcc314be941fb41258dd76d5d09892c48bb"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e950\\instance-pixel.bin",
+          "bytes": 256,
+          "sha256": "dcb22ff9c3bba2026bad652df1a60dcc314be941fb41258dd76d5d09892c48bb"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e950\\reserved-vertex.bin",
+          "bytes": 48,
+          "sha256": "4010187f43085771f61ff0ebff6323636370a60f951735828d7096e78bd14e72"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e950\\reserved-pixel.bin",
+          "bytes": 48,
+          "sha256": "4010187f43085771f61ff0ebff6323636370a60f951735828d7096e78bd14e72"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e950\\vertex.asm",
+          "bytes": 13731,
+          "sha256": "836a954b50280a6bd693e230a7e9fadbf2517996e54d9499aef25b994db72d67"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e950\\vertex.dxbc",
+          "bytes": 9380,
+          "sha256": "4375f5834448e05f55cb9bea6c391b5d03315e0854c174e95b60427ccd4e8bd1"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame10401-e950\\pixel.asm",
+          "bytes": 100671,
+          "sha256": "7d414bcb3c7d663d4b56012d3b57bc37a1e3ab3d5837726f7d9e9f9f7568f15d"
+        }
+      ],
+      "source": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+        "bytes": 345416012,
+        "sha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90"
+      },
+      "stageMatrixMaximumError": 0.0
+    },
+    {
+      "frame": 6834,
+      "event": 789,
+      "kind": "face",
+      "indices": 8718,
+      "referencedVertices": 1792,
+      "instanceSemantic": "TEXCOORD8",
+      "instanceOutputRegister": 9,
+      "instanceIndices": [
+        0
+      ],
+      "stageInputs": {
+        "vertex": {
+          "flags": 52,
+          "paletteRow": 39835,
+          "instanceBinding": {
+            "resource": "ResourceId::405",
+            "viewByteOffset": 243968,
+            "recordByteOffset": 243968
+          },
+          "paletteBinding": {
+            "slot": 0,
+            "resource": "ResourceId::399",
+            "viewByteOffset": 0,
+            "reservedByteOffset": 637360
+          },
+          "reservedRows": [
+            [
+              0.9695114493370056,
+              0.09203073382377625,
+              0.2271077185869217,
+              -199.0074005126953
+            ],
+            [
+              -0.07072694599628448,
+              0.9924463629722595,
+              -0.10023871809244156,
+              301.5189208984375
+            ],
+            [
+              -0.23461724817752838,
+              0.08111990243196487,
+              0.9686971306800842,
+              -201.167724609375
+            ]
+          ]
+        },
+        "pixel": {
+          "flags": 52,
+          "paletteRow": 39835,
+          "instanceBinding": {
+            "resource": "ResourceId::405",
+            "viewByteOffset": 243968,
+            "recordByteOffset": 243968
+          },
+          "paletteBinding": {
+            "slot": 1,
+            "resource": "ResourceId::399",
+            "viewByteOffset": 0,
+            "reservedByteOffset": 637360
+          },
+          "reservedRows": [
+            [
+              0.9695114493370056,
+              0.09203073382377625,
+              0.2271077185869217,
+              -199.0074005126953
+            ],
+            [
+              -0.07072694599628448,
+              0.9924463629722595,
+              -0.10023871809244156,
+              301.5189208984375
+            ],
+            [
+              -0.23461724817752838,
+              0.08111990243196487,
+              0.9686971306800842,
+              -201.167724609375
+            ]
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e789\\manifest.json",
+          "bytes": 3189,
+          "sha256": "8c996bb1054976fb04cef64622f1abdac3a390771e6c0121fb7ea983efa420b9"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e789\\vertices.bin",
+          "bytes": 207872,
+          "sha256": "631848b7bea26d72296d7bf82bbe98fce5436d4b7c0d67e5197f9ca16a0593d3"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e789\\indices.bin",
+          "bytes": 17436,
+          "sha256": "9efd0722771e8c3cf544bc276cabd27842b8531af6cf19b6cea5249373db973c"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e789\\instance-vertex.bin",
+          "bytes": 256,
+          "sha256": "42d83efe75b2d488190a4bf0371997da66212f97172210f8b3fc575e6b1493ff"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e789\\instance-pixel.bin",
+          "bytes": 256,
+          "sha256": "42d83efe75b2d488190a4bf0371997da66212f97172210f8b3fc575e6b1493ff"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e789\\reserved-vertex.bin",
+          "bytes": 48,
+          "sha256": "5ad58a602d1ea881c17d45529feba42cdf6838916076315d24b56b0b12676ece"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e789\\reserved-pixel.bin",
+          "bytes": 48,
+          "sha256": "5ad58a602d1ea881c17d45529feba42cdf6838916076315d24b56b0b12676ece"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e789\\vertex.asm",
+          "bytes": 12308,
+          "sha256": "252213b7525638a4504c1e5d61ecdb8efce452676376738ad332d08264da471c"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e789\\vertex.dxbc",
+          "bytes": 8296,
+          "sha256": "bb0f73f04f0878aa1b144a54d5c595d47ad5af23c5eb8d7a0da0b5a8b7011c9f"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e789\\pixel.asm",
+          "bytes": 78171,
+          "sha256": "ea0a2e244a7cb09fd02dbc26e8e0c6638725e6753ad0a5fe763cfc3644bc0701"
+        }
+      ],
+      "source": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame6834.rdc",
+        "bytes": 373597799,
+        "sha256": "a071b34f5bf35705e2614bb9eb97f540f0be62fc33798b7b8a8c64882659f2fb"
+      },
+      "stageMatrixMaximumError": 0.0
+    },
+    {
+      "frame": 6834,
+      "event": 935,
+      "kind": "hair",
+      "indices": 43044,
+      "referencedVertices": 11564,
+      "instanceSemantic": "TEXCOORD9",
+      "instanceOutputRegister": 10,
+      "instanceIndices": [
+        0
+      ],
+      "stageInputs": {
+        "vertex": {
+          "flags": 52,
+          "paletteRow": 40075,
+          "instanceBinding": {
+            "resource": "ResourceId::405",
+            "viewByteOffset": 245760,
+            "recordByteOffset": 245760
+          },
+          "paletteBinding": {
+            "slot": 0,
+            "resource": "ResourceId::399",
+            "viewByteOffset": 0,
+            "reservedByteOffset": 641200
+          },
+          "reservedRows": [
+            [
+              0.9695114493370056,
+              0.09203073382377625,
+              0.2271077185869217,
+              -199.0074005126953
+            ],
+            [
+              -0.07072694599628448,
+              0.9924463629722595,
+              -0.10023871809244156,
+              301.5189208984375
+            ],
+            [
+              -0.23461724817752838,
+              0.08111990243196487,
+              0.9686971306800842,
+              -201.167724609375
+            ]
+          ]
+        },
+        "pixel": {
+          "flags": 52,
+          "paletteRow": 40075,
+          "instanceBinding": {
+            "resource": "ResourceId::405",
+            "viewByteOffset": 245760,
+            "recordByteOffset": 245760
+          },
+          "paletteBinding": {
+            "slot": 1,
+            "resource": "ResourceId::399",
+            "viewByteOffset": 0,
+            "reservedByteOffset": 641200
+          },
+          "reservedRows": [
+            [
+              0.9695114493370056,
+              0.09203073382377625,
+              0.2271077185869217,
+              -199.0074005126953
+            ],
+            [
+              -0.07072694599628448,
+              0.9924463629722595,
+              -0.10023871809244156,
+              301.5189208984375
+            ],
+            [
+              -0.23461724817752838,
+              0.08111990243196487,
+              0.9686971306800842,
+              -201.167724609375
+            ]
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e935\\manifest.json",
+          "bytes": 3365,
+          "sha256": "e6d21c1c9ad3a0595d85f9eb66405bebe7946d916a1fa621da0f8266d631e80a"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e935\\vertices.bin",
+          "bytes": 1526448,
+          "sha256": "e95ebf5cc7c556d9a61cb38a06cbb5c33874b0e8082ce429a9691304d1d88783"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e935\\indices.bin",
+          "bytes": 86088,
+          "sha256": "2ab42c277510cad0ff47249acdc60d164c254f3264142ace510008dea8e9a14f"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e935\\instance-vertex.bin",
+          "bytes": 256,
+          "sha256": "2381621c34cfab35328f113b039635f25e3e203b0fd45a513b6f2a9068445bee"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e935\\instance-pixel.bin",
+          "bytes": 256,
+          "sha256": "2381621c34cfab35328f113b039635f25e3e203b0fd45a513b6f2a9068445bee"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e935\\reserved-vertex.bin",
+          "bytes": 48,
+          "sha256": "5ad58a602d1ea881c17d45529feba42cdf6838916076315d24b56b0b12676ece"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e935\\reserved-pixel.bin",
+          "bytes": 48,
+          "sha256": "5ad58a602d1ea881c17d45529feba42cdf6838916076315d24b56b0b12676ece"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e935\\vertex.asm",
+          "bytes": 13731,
+          "sha256": "836a954b50280a6bd693e230a7e9fadbf2517996e54d9499aef25b994db72d67"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e935\\vertex.dxbc",
+          "bytes": 9380,
+          "sha256": "4375f5834448e05f55cb9bea6c391b5d03315e0854c174e95b60427ccd4e8bd1"
+        },
+        {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\attempt2\\frame6834-e935\\pixel.asm",
+          "bytes": 100671,
+          "sha256": "7d414bcb3c7d663d4b56012d3b57bc37a1e3ab3d5837726f7d9e9f9f7568f15d"
+        }
+      ],
+      "source": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame6834.rdc",
+        "bytes": 373597799,
+        "sha256": "a071b34f5bf35705e2614bb9eb97f540f0be62fc33798b7b8a8c64882659f2fb"
+      },
+      "stageMatrixMaximumError": 0.0
+    }
+  ],
+  "sharedFrames": {
+    "10401": {
+      "faceEvent": 804,
+      "hairEvent": 950,
+      "maximumMatrixError": 0.0
+    },
+    "6834": {
+      "faceEvent": 789,
+      "hairEvent": 935,
+      "maximumMatrixError": 0.0
+    }
+  },
+  "recordStrideBytes": 256,
+  "heldoutCalibration": {
+    "headSourcePath": "chr_0016_laevat_postmodel/Root/Bip001/Bip001_Pelvis/Bip001_Spine/Bip001_Spine1/Bip001_Spine2/Bip001_Neck/Bip001_Head",
+    "headBoneIndex": 11,
+    "localBasisMaximumError": 2.770541668297657e-06,
+    "positionResidualMetres": 0.0003915607545535608,
+    "convention": "Column-major basis; reflect directions in world X; keep semantic frame axes",
+    "exactInstanceRecord": true,
+    "exactReservedRows": true
+  },
+  "priorCalibration": [
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261025-160544-main-material-frame-integration-1ad7a0\\head-bind-inputs.json",
+      "bytes": 33540,
+      "sha256": "745faf402c3818bcce1a2b8d6a604b80571a9233c479cf922287ae4c4fcb9b3e"
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261025-160544-main-material-frame-integration-1ad7a0\\source-frame-axis-comparison.json",
+      "bytes": 1093,
+      "sha256": "3d7e4a7721edad7a407a6bc2054ccee2c54acd9f62880d09e8e39dd900518597"
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261025-160544-main-material-frame-integration-1ad7a0\\heldout-6834-cb2-first-instance.json",
+      "bytes": 1412,
+      "sha256": "180f8847fa2805c356af2ad5a4095ead3da6b3d62c9a4d58edb85a0d33e1489f"
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261025-160544-main-material-frame-integration-1ad7a0\\heldout-6834-skin-window.json",
+      "bytes": 4685,
+      "sha256": "d5edfc3b65de89817966af44102b4501af15ed7bfa1c497193c459d890ae287f"
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261025-160544-main-material-frame-integration-1ad7a0\\heldout-6834-corrected-frame-comparison.json",
+      "bytes": 52903,
+      "sha256": "13c95330b6a6ff5285491beea797b9518ecf0dadcb3865fedc5e7f680555f248"
+    }
+  ],
+  "failedAttempt": {
+    "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\producer-export.json",
+    "bytes": 699,
+    "sha256": "1ebfdd7da14de4acba4931df66194739518c60b0b8f5be2a9ee0c392a2d41a29"
+  },
+  "recipe": {
+    "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee\\export_frame_producers.py",
+    "bytes": 6755,
+    "sha256": "84d793943de31820090632981a8d51093a8ae7702e6eae7d0df018d005d92a32"
+  },
+  "limitations": [
+    "Instance and palette provenance only; complete appearance retains C16/C17 gates",
+    "The native reserved frame and reconstructed bone retain the measured position residual"
+  ]
+}

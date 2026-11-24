@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "scope": "Input reconstruction, four production static-material captures and actual clipmap queries; combined visual acceptance remains failed.",
+  "verifiedFrames": 128,
+  "nativeVertices": 13356,
+  "nativeBones": 97,
+  "giQueries": 7,
+  "protectedUserFiles": 4,
+  "linksChecked": 600,
+  "evidenceFiles": 86
+}

@@ -1,0 +1,38 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 8: AzureEditor.ProposalController
+1/1 Test #8: AzureEditor.ProposalController ...***Failed    0.33 sec
+[1791250542526][info][editor][code=0] Opened scene: test
+[1791250542541][info][editor][code=0] Opened scene: test
+[1791250542544][info][editor][code=0] Opened scene: test
+[1791250542545][info][editor][code=0] Selected node: generated
+[1791250542555][info][editor][code=0] Opened scene: test
+[1791250542560][info][editor][code=0] Opened scene: test
+[1791250542561][info][editor][code=0] Selected node: generated
+[1791250542570][info][editor][code=0] Opened scene: test
+[1791250542571][info][editor][code=0] Selected node: generated
+[1791250542582][info][editor][code=0] Undo
+[1791250542608][info][editor][code=0] Opened scene: test
+[1791250542613][info][editor][code=0] Opened scene: test
+[1791250542614][info][editor][code=0] Selected node: after-repair
+[1791250542657][info][editor][code=0] Opened scene: test
+[1791250542661][info][editor][code=0] Opened scene: test
+[1791250542662][info][editor][code=0] Selected node: stale
+[1791250542672][info][editor][code=0] Opened scene: test
+[1791250542673][info][editor][code=0] Selected node: manual
+[1791250542733][info][editor][code=0] Opened scene: test
+[1791250542737][info][editor][code=0] Opened scene: test
+[1791250542738][info][editor][code=0] Selected node: stale
+[1791250542749][info][editor][code=0] Undo
+[1791250542771][info][editor][code=0] Opened scene: test
+[1791250542773][info][editor][code=0] Selected node: without-ai
+[json.exception.out_of_range.403] key 'domains' not found
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.34 sec
+
+The following tests FAILED:
+	  8 - AzureEditor.ProposalController (Failed)
+Errors while running CTest

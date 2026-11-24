@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\verify_evolution_coverage.py", line 155, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\verify_evolution_coverage.py", line 149, in main
+    report=verify(args.source,json.loads(args.manifest.read_text(encoding='utf-8-sig')),json.loads(discovery.read_text(encoding='utf-8-sig')),args.historical_policy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\verify_evolution_coverage.py", line 111, in verify
+    phase=phase_evidence(phase_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\verify_evolution_coverage.py", line 85, in phase_evidence
+    require(historical_policy=='committed-content' and limit.get('gitCommit')==commit
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\verify_evolution_coverage.py", line 14, in require
+    if not condition:raise ValueError(message)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Historical implementation hash mismatch: Project/AzureRender/src/editor/EditorSession.cpp

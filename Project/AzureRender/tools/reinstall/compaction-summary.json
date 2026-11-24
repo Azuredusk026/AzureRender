@@ -1,0 +1,13 @@
+{
+  "status": "verified-and-compacted",
+  "beforeLogicalBytes": 354028379375,
+  "afterLogicalBytes": 69589141766,
+  "afterUniqueFileBytes": 69589091766,
+  "logicalReductionPercent": 80.34362615537988,
+  "archiveBytes": 62901352215,
+  "archivedFilePaths": 607318,
+  "rdcPreserved": 42,
+  "activeMaterialHashesVerified": 16,
+  "sourceCandidateCommit": "8eca1e9",
+  "reparsePointsRemaining": 0
+}

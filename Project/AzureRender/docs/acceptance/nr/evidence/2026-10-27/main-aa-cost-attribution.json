@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "verified": "2026-10-27",
+  "phase": "NR7-AA5",
+  "status": "bounded-compile-statistics-integrated-performance-gate-open",
+  "baseCommit": "0168a57aec28780f6958ea407810d1bb76c1628a",
+  "diagnosticFramesPerCase": 24,
+  "actualExtent": [
+    1920,
+    1080
+  ],
+  "qualityMode": 1,
+  "formalPerformanceAcceptance": false,
+  "costAttribution": [
+    {
+      "name": "baseline",
+      "shadowMeanMs": 7.332045,
+      "sceneMeanMs": 73.683883,
+      "totalMeanMs": 81.243853,
+      "totalP50Ms": 72.581776,
+      "totalP95Ms": 83.404518,
+      "imageBytes": 2685532672,
+      "requestedSamples": 24
+    },
+    {
+      "name": "no-ssr",
+      "shadowMeanMs": 6.762521,
+      "sceneMeanMs": 47.220053,
+      "totalMeanMs": 54.189593,
+      "totalP50Ms": 46.998112,
+      "totalP95Ms": 56.061128,
+      "imageBytes": 2685532672,
+      "requestedSamples": 24
+    },
+    {
+      "name": "no-locals",
+      "shadowMeanMs": 7.068107,
+      "sceneMeanMs": 65.578197,
+      "totalMeanMs": 72.852981,
+      "totalP50Ms": 62.50272,
+      "totalP95Ms": 70.511794,
+      "imageBytes": 2685532672,
+      "requestedSamples": 24
+    }
+  ],
+  "statisticsOptIn": true,
+  "statisticsPerExecutableLimit": 16,
+  "statisticsPerPipelineLimit": 64,
+  "pipelineRecordLimit": 64,
+  "metadataExecutableLimit": 32,
+  "statisticEnumerationCallLimit": 2,
+  "metadataEnumerationAttemptLimit": 2,
+  "typedFormats": [
+    "bool32",
+    "int64",
+    "uint64",
+    "float64"
+  ],
+  "cpuTestsPerConfiguration": 2,
+  "gpuKernelTestsPerConfiguration": 2,
+  "capturedCharacterImages": 4,
+  "statisticsPerEnabledCharacterCase": 464,
+  "characterImagesByteEqualToFrozen": true,
+  "mainImageByteEqualToFrozen": true,
+  "mainStatistics": {
+    "status": "passed",
+    "mainImageByteEqual": true,
+    "pipelines": 42,
+    "statisticCount": 469
+  },
+  "maximumObservedFragmentRegisters": 255,
+  "largeFragmentBinaryBytes": [
+    228224,
+    248832
+  ],
+  "materialDeclarations": 512,
+  "defaultGenericOpaqueDeclarations": 357,
+  "materialLayoutVersion": 10,
+  "materialBytes": 192,
+  "fragmentTextureSlots": 9,
+  "addedRenderPasses": 0,
+  "addedGpuImages": 0,
+  "addedGpuBuffers": 0,
+  "frozenPlayerSha256": "751f6ad31e2c2206a4fb6212a86c7566fbb2f72930573eadcb733745fd8b6119",
+  "shaderCount": 114,
+  "remaining": [
+    "Formal 1080p60 performance remains open.",
+    "Selective ordinary material specialization needs independent implementation and parity validation.",
+    "Full native hair region remains open at 73 pixels over one-byte error.",
+    "Compiler statistics and allocator memory use are independently interpreted."
+  ],
+  "sourceFingerprints": [
+    {
+      "path": "src/rhi/PipelineInspection.hpp",
+      "sha256": "7db03c603b3db3561ffa09074574169a9ba88036e0350ac29d39f7f4549e02fb"
+    },
+    {
+      "path": "src/rhi/PipelineInspection.cpp",
+      "sha256": "c8d4c09fbab8f7205b3fdf21f9b368ba03e118bedc5f059265ab79d1ac455424"
+    },
+    {
+      "path": "src/rhi/VulkanRhi.cpp",
+      "sha256": "1ac7e761747cc08818d5af2bdaafdb25db14d0590d7e35417f691042e914edc9"
+    },
+    {
+      "path": "src/app/AzureRenderOptions.hpp",
+      "sha256": "7b0fec4f9abf22f57dc1fb75d6a462b76874e4734ee3adae4cb011c044906b56"
+    },
+    {
+      "path": "src/app/AzureRenderApp.cpp",
+      "sha256": "e2e47c3438a2547ea6159ed88445a6dd42ae9e93fb45cf13070b2d0d0c539d44"
+    },
+    {
+      "path": "src/app/AzureRenderPipeline.cpp",
+      "sha256": "446a7497cf2da83e107f0f201cc431197e455143b9a298232e06760f832dc0de"
+    },
+    {
+      "path": "src/app/CommandLine.cpp",
+      "sha256": "55df83950f8a308db89379938d54b53edb8a18107de0cc7a3c7f2b042f0f1105"
+    },
+    {
+      "path": "tests/PipelineInspectionTests.cpp",
+      "sha256": "31fb9ecd2f2aed332ecaa73f87f2f09dcdc567e603044adfda5a5373c1710a74"
+    },
+    {
+      "path": "tests/CommandLineTests.cpp",
+      "sha256": "a8898d497cc2d7f4b31be79ac1af668c9992d18dca4fcb141cf88d860ed33818"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/source.json",
+      "bytes": 796,
+      "sha256": "c38103334f963ca080bfbd849b43b1238bf09a52bbf3e9bef22263d5f134ccd8"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/attribution.json",
+      "bytes": 745,
+      "sha256": "48362233a5af2a0105df0293c249442cbb93a319f7f9602d53d116a665cb86fd"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/material-class-distribution.json",
+      "bytes": 3073,
+      "sha256": "f561ac454d3fd730a23daf70bad3f2c6ef675f27f1731099a6ea01cd1c560a08"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/statistics-debug.json",
+      "bytes": 103173,
+      "sha256": "118bdc103e64f78a41ec4d3efd0348371304ae4317ec8b506deba3418af8f59e"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/statistics-release.json",
+      "bytes": 103177,
+      "sha256": "86fd77f23f5316955c90bd1784dd758148df83c6368624e84d0098ebe03ab0df"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/statistics-red-build.log",
+      "bytes": 3099,
+      "sha256": "4ef5fb532c0787155f6732414238ad1f612ac3735f0b0045cbccd2dca36a57bd"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/cpu-debug.log",
+      "bytes": 501,
+      "sha256": "dd54725c56e7ad42a2989a39c9d0f21d7415ccea851e04aa44a26498d0868320"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/cpu-release.log",
+      "bytes": 505,
+      "sha256": "bfcc16cc22f99d4856b086b1396f9f89e87659a54c213ca222bfa68db1f69b54"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/value-initialization-debug.log",
+      "bytes": 387,
+      "sha256": "86c459056b5a5a4c47ee84dc47828213e44b255262d2a148ea8bf43c987eccd4"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/value-initialization-release.log",
+      "bytes": 391,
+      "sha256": "a2dde074c99ff64bf30650eff8b53714a046ccaaaa16d9fa8f7608079011ed09"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/gpu-kernels-debug.log",
+      "bytes": 562,
+      "sha256": "f0c550e80f85101a7b2717641d70ae94f2851b72432580c4462ea0c335357967"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/gpu-kernels-release.log",
+      "bytes": 566,
+      "sha256": "67bfc9b68939dbfb9c2cfe4f2e7610d22501f2c07d8a794fd8465fcce79d25f8"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/main-statistics-v2/receipt.json",
+      "bytes": 103,
+      "sha256": "c98e22b19ffa601624ad1c36fd2ae2ada84a2a3c6edd44f46dfb7d80ebc412b4"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/main-statistics-v2/gpu.json",
+      "bytes": 71478,
+      "sha256": "db2c0fa37d66c90aa404af45c3cd2733f02bf85def57250cb79702f018c20353"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/main-statistics-v2/runtime.json",
+      "bytes": 358820,
+      "sha256": "97a6784138d1217123166215374ed0ad978adb2d9df0fbccdec0be5b6f9d8c92"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/main-statistics-v2/command.json",
+      "bytes": 1014,
+      "sha256": "aaddb83bc9987fa269e4daf372a9a46a1c2d0460fae34163c625f101a8b4dda6"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/editor-build-debug.log",
+      "bytes": 1695,
+      "sha256": "a7e4cc5c2f8cd54c5170941e3cb3c1a30c7f2220c7b908931ff335fc6ceed0b7"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/editor-build-release.log",
+      "bytes": 1697,
+      "sha256": "005a8706cf5316d3ec3837fe32d02d424c309fb0dc7d29d72f812c748a0237ad"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/frozen-release.json",
+      "bytes": 16684,
+      "sha256": "13d7f85c8b3f1162e7536ac6ba8e6f75c178a7b30a6f4feb4fec91f3cbe97373"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/baseline/gpu.json",
+      "bytes": 12623,
+      "sha256": "9471f5bc4a3f40fac81e391ea662935c98f44bf8a9cb3b8c82ff7ca7f3e50750"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/no-ssr/gpu.json",
+      "bytes": 12606,
+      "sha256": "18a2eeda8ac0536d038d1694afefc88a9b9e2a0b5e48b9f05dcbf106d7b879db"
+    },
+    {
+      "path": "build/runs/20261027-034117-main-aa-cost-attribution-eb50a7/no-locals/gpu.json",
+      "bytes": 12702,
+      "sha256": "4390df43058ee53befdfbf20f28fae6e773caf444666fbd6a9fbb083dd6f0c76"
+    }
+  ]
+}

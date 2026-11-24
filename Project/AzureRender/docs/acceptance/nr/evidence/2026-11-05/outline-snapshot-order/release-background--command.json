@@ -1,0 +1,23 @@
+[
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+  "--project",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-background-geometry-static\\qualified.azureproject",
+  "--width",
+  "2560",
+  "--height",
+  "1440",
+  "--capture-frames",
+  "1",
+  "--capture-fps",
+  "24",
+  "--fixed-frame-step",
+  "--qa-camera",
+  "scene",
+  "--qa-light",
+  "scene",
+  "--disable-bindless",
+  "--disable-compute-skinning",
+  "--disable-parallel-recording",
+  "--capture-dir",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-background\\frames"
+]

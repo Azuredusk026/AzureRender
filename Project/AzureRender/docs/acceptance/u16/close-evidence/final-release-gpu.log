@@ -1,0 +1,171 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+      Start  13: AzureRender.VisibilityGpu
+ 1/66 Test  #13: AzureRender.VisibilityGpu .......................   Passed    0.53 sec
+      Start  17: AzureRender.SkinningGpu
+ 2/66 Test  #17: AzureRender.SkinningGpu .........................   Passed    0.40 sec
+      Start  18: AzureRender.ShadowTileBoundsGpu
+ 3/66 Test  #18: AzureRender.ShadowTileBoundsGpu .................   Passed    0.51 sec
+      Start  19: AzureRender.ShadowFilteringGpu
+ 4/66 Test  #19: AzureRender.ShadowFilteringGpu ..................   Passed    0.40 sec
+      Start  20: AzureRender.SurfaceResponseGpu
+ 5/66 Test  #20: AzureRender.SurfaceResponseGpu ..................   Passed    0.44 sec
+      Start  22: AzureRender.ShaderComposition
+ 6/66 Test  #22: AzureRender.ShaderComposition ...................   Passed    0.70 sec
+      Start  30: AzureRender.SamplingGpu
+ 7/66 Test  #30: AzureRender.SamplingGpu .........................   Passed    4.38 sec
+      Start  31: AzureRender.SamplingHostGpu
+ 8/66 Test  #31: AzureRender.SamplingHostGpu .....................   Passed    5.91 sec
+      Start  42: AzureRender.PreviewHost
+ 9/66 Test  #42: AzureRender.PreviewHost .........................   Passed    3.69 sec
+      Start  43: AzureEditor.SelectionGpu
+10/66 Test  #43: AzureEditor.SelectionGpu ........................   Passed   10.68 sec
+      Start  44: AzureEditor.GizmoGpu
+11/66 Test  #44: AzureEditor.GizmoGpu ............................   Passed   29.11 sec
+      Start  45: AzureEditor.DevtoolsHost
+12/66 Test  #45: AzureEditor.DevtoolsHost ........................   Passed   30.91 sec
+      Start  48: AzureEditor.ProposalHost
+13/66 Test  #48: AzureEditor.ProposalHost ........................   Passed   16.91 sec
+      Start  53: AzureAssets.ProceduralHost
+14/66 Test  #53: AzureAssets.ProceduralHost ......................   Passed   15.45 sec
+      Start  54: AzureEditor.SettingsHost
+15/66 Test  #54: AzureEditor.SettingsHost ........................   Passed   12.46 sec
+      Start  55: AzureEditor.ObservationHost
+16/66 Test  #55: AzureEditor.ObservationHost .....................   Passed   10.67 sec
+      Start  62: AzureEngine.SceneInspectorHost
+17/66 Test  #62: AzureEngine.SceneInspectorHost ..................   Passed    3.07 sec
+      Start  67: AzureEngine.RegisteredComponentHost
+18/66 Test  #67: AzureEngine.RegisteredComponentHost .............   Passed    2.42 sec
+      Start  84: AzureEngine.ManagedWorkflows.coreclr
+19/66 Test  #84: AzureEngine.ManagedWorkflows.coreclr ............   Passed   26.41 sec
+      Start  85: AzureEngine.ManagedWorkflows.nativeaot
+20/66 Test  #85: AzureEngine.ManagedWorkflows.nativeaot ..........   Passed   22.30 sec
+      Start  99: AzureRender.SceneVisibilityGpu
+21/66 Test  #99: AzureRender.SceneVisibilityGpu ..................   Passed   33.75 sec
+      Start 101: AzureEngine.LocomotionPlayer
+22/66 Test #101: AzureEngine.LocomotionPlayer ....................   Passed   29.47 sec
+      Start 106: AzureEngine.GamePackage
+23/66 Test #106: AzureEngine.GamePackage .........................   Passed   26.19 sec
+      Start 107: AzureEngine.PlayablePackage
+24/66 Test #107: AzureEngine.PlayablePackage .....................   Passed   81.39 sec
+      Start 113: AzureEditor.WorkspaceGpu
+25/66 Test #113: AzureEditor.WorkspaceGpu ........................   Passed   67.75 sec
+      Start 114: AzureEngine.MaterialFixtureGpu
+26/66 Test #114: AzureEngine.MaterialFixtureGpu ..................   Passed   11.83 sec
+      Start 115: AzureEngine.IndependentAnimationGpu
+27/66 Test #115: AzureEngine.IndependentAnimationGpu .............   Passed    6.90 sec
+      Start 116: AzureEngine.ThirdPersonPlayer
+28/66 Test #116: AzureEngine.ThirdPersonPlayer ...................   Passed    3.53 sec
+      Start 117: AzureEngine.PlayablePlayer
+29/66 Test #117: AzureEngine.PlayablePlayer ......................   Passed    5.18 sec
+      Start 118: AzureEngine.OptionalRuntimeTrace
+30/66 Test #118: AzureEngine.OptionalRuntimeTrace ................   Passed    5.08 sec
+      Start 119: AzureEngine.RuntimeSpawnGpu
+31/66 Test #119: AzureEngine.RuntimeSpawnGpu .....................   Passed    3.84 sec
+      Start 120: AzureEngine.PresentationGpu
+32/66 Test #120: AzureEngine.PresentationGpu .....................   Passed    5.37 sec
+      Start 121: AzureEngine.EditorHost
+33/66 Test #121: AzureEngine.EditorHost ..........................   Passed    3.91 sec
+      Start 122: AzureEngine.EditorPlayable
+34/66 Test #122: AzureEngine.EditorPlayable ......................   Passed   12.93 sec
+      Start 124: AzureEngine.LevelPlayer
+35/66 Test #124: AzureEngine.LevelPlayer .........................   Passed    9.31 sec
+      Start 125: AzureEngine.PhysicsPlayer
+36/66 Test #125: AzureEngine.PhysicsPlayer .......................   Passed    2.12 sec
+      Start 126: AzureEngine.ScriptPlayer
+37/66 Test #126: AzureEngine.ScriptPlayer ........................   Passed    2.28 sec
+      Start 153: AzureEditor.ContentGpu
+38/66 Test #153: AzureEditor.ContentGpu ..........................   Passed   34.82 sec
+      Start 154: AzureEditor.NativeInputGpu
+39/66 Test #154: AzureEditor.NativeInputGpu ......................***Failed    3.49 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 221, in <module>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 221, in <listcomp>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 156, in run
+    assert state()['camera']!=before_click,'Outliner double click must frame the object'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Outliner double click must frame the object
+
+      Start 155: AzureEditor.UsabilityGpu
+40/66 Test #155: AzureEditor.UsabilityGpu ........................   Passed   24.76 sec
+      Start 156: AzureEditor.DocumentGuardGpu
+41/66 Test #156: AzureEditor.DocumentGuardGpu ....................   Passed   13.61 sec
+      Start 169: AzureRender.VisualRegression
+42/66 Test #169: AzureRender.VisualRegression ....................   Passed   15.43 sec
+      Start 170: AzureRender.VisualRegressionLegacyDescriptors
+43/66 Test #170: AzureRender.VisualRegressionLegacyDescriptors ...   Passed   11.87 sec
+      Start 171: AzureRender.BlackholeComputeGpu
+44/66 Test #171: AzureRender.BlackholeComputeGpu .................   Passed    2.47 sec
+      Start 172: AzureRender.CharacterIblComputeGpu
+45/66 Test #172: AzureRender.CharacterIblComputeGpu ..............   Passed    2.37 sec
+      Start 173: AzureRender.CharacterSkinningComputeGpu
+46/66 Test #173: AzureRender.CharacterSkinningComputeGpu .........   Passed    2.34 sec
+      Start 177: AzureRender.R3Comparison
+47/66 Test #177: AzureRender.R3Comparison ........................   Passed    9.20 sec
+      Start 178: AzureRender.R3TransparentComparison
+48/66 Test #178: AzureRender.R3TransparentComparison .............   Passed   11.06 sec
+      Start 179: AzureRender.AuditRegressions
+49/66 Test #179: AzureRender.AuditRegressions ....................   Passed    2.43 sec
+      Start 180: AzureRender.VisualRegressionLegacySkinning
+50/66 Test #180: AzureRender.VisualRegressionLegacySkinning ......   Passed   15.05 sec
+      Start 181: AzureRender.CharacterMorphComputeGpu
+51/66 Test #181: AzureRender.CharacterMorphComputeGpu ............   Passed   10.53 sec
+      Start 182: AzureRender.ClusteredLightingGpu
+52/66 Test #182: AzureRender.ClusteredLightingGpu ................   Passed    5.48 sec
+      Start 186: AzureEditor.ProductizationGpu
+53/66 Test #186: AzureEditor.ProductizationGpu ...................   Passed   34.43 sec
+      Start 189: AzureEditor.PropertiesGpu
+54/66 Test #189: AzureEditor.PropertiesGpu .......................   Passed   16.84 sec
+      Start 194: AzureEditor.ContentTransactionsGpu
+55/66 Test #194: AzureEditor.ContentTransactionsGpu ..............   Passed   35.71 sec
+      Start 199: AzureEditor.ContentNavigationGpu
+56/66 Test #199: AzureEditor.ContentNavigationGpu ................   Passed   26.67 sec
+      Start 204: AzureGame.PlatformerCompletion
+57/66 Test #204: AzureGame.PlatformerCompletion ..................   Passed    4.49 sec
+      Start 205: AzureEngine.LiveGameState
+58/66 Test #205: AzureEngine.LiveGameState .......................   Passed    3.29 sec
+      Start 206: AzureEditor.NodeAdditionGpu
+59/66 Test #206: AzureEditor.NodeAdditionGpu .....................   Passed   24.55 sec
+      Start 207: AzureGame.GameSequence
+60/66 Test #207: AzureGame.GameSequence ..........................   Passed   17.63 sec
+      Start 209: AzureGame.ExplorationCompletion
+61/66 Test #209: AzureGame.ExplorationCompletion .................   Passed    4.84 sec
+      Start 218: AzureEditor.AuthoringGpu
+62/66 Test #218: AzureEditor.AuthoringGpu ........................   Passed   32.15 sec
+      Start 221: AzureEditor.SimulationGpu
+63/66 Test #221: AzureEditor.SimulationGpu .......................   Passed   38.67 sec
+      Start 224: AzureEditor.ViewportNavigationGpu
+64/66 Test #224: AzureEditor.ViewportNavigationGpu ...............   Passed   55.22 sec
+      Start 225: AzureEditor.SceneGeometryGpu
+65/66 Test #225: AzureEditor.SceneGeometryGpu ....................***Failed   61.90 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_scene_geometry.py", line 33, in <module>
+    a=p.parse_args();run(a.editor.resolve(),a.output.resolve())
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_scene_geometry.py", line 12, in run
+    with EditorHost(editor,seed/'project.azureproject',out/'create') as host:
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\editor_test_host.py", line 46, in __exit__
+    assert self.process.returncode==0,self.process.returncode
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1
+
+      Start 226: AzureEngine.RendererResidency
+66/66 Test #226: AzureEngine.RendererResidency ...................   Passed    6.53 sec
+
+97% tests passed, 2 tests failed out of 66
+
+Label Time Summary:
+gpu        = 1036.00 sec*proc (66 tests)
+release    = 107.58 sec*proc (2 tests)
+script     =  48.71 sec*proc (2 tests)
+
+Total Test time (real) = 1036.08 sec
+
+The following tests FAILED:
+	154 - AzureEditor.NativeInputGpu (Failed)
+	225 - AzureEditor.SceneGeometryGpu (Failed)
+Errors while running CTest

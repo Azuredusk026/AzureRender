@@ -1,0 +1,46 @@
+{
+  "status": "blocked-device-control-not-supported",
+  "sourceHead": "836071b",
+  "requestCommand": [
+    "nvidia-smi",
+    "-i",
+    "0",
+    "-pl",
+    "80"
+  ],
+  "requestExitCode": 4,
+  "reason": "Administrator power-limit command reports not supported",
+  "nativeRuns": 0,
+  "settingsChanged": false,
+  "archive": {
+    "members": 10,
+    "bytes": 5072,
+    "sha256": "5ffa78836e891bd3c8a492876c5327c95fdca5e1dc76142998130939cf6cbcd6"
+  },
+  "initialReason": "Insufficient Permissions",
+  "administratorProbe": {
+    "source": "user-provided-administrator-PowerShell-output",
+    "command": "nvidia-smi -i 0 -pl 80",
+    "output": "Changing power management limit is not supported for GPU: 00000000:01:00.0.\nTreating as warning and moving on.\nAll done.",
+    "exitCode": null,
+    "status": "not-supported"
+  },
+  "vendorControlProbe": {
+    "date": "2026-11-12",
+    "system": "HP OMEN 16-wf0xxx",
+    "application": "OMEN Gaming Hub",
+    "applicationVersion": "1101.2609.11.0",
+    "status": "performance-controls-blocked-by-required-update",
+    "observations": [
+      "The app reported an expired version and required an update.",
+      "Deferring the update left an update failure dialog with Retry as the only action.",
+      "The device settings page remained inaccessible."
+    ],
+    "driverVersion": "592.82",
+    "requestedPowerLimitWatts": null,
+    "enforcedPowerLimitWattsAtRead": 79.83,
+    "defaultPowerLimitWatts": 80.0,
+    "settingsChanged": false,
+    "nativeRuns": 0
+  }
+}

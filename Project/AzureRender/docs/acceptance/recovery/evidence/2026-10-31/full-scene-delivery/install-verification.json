@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "normalizedPythonInstallPath": true,
+  "files": [
+    {
+      "path": "bin/AzurePlayer.exe",
+      "sha256": "2b28e97fbdce571087760f373fa693cc2c6a3bf1fd7d54deb5347b9e719ac3ab"
+    },
+    {
+      "path": "bin/AzureRender.exe",
+      "sha256": "d4d911ba75e59f5c7fde78f6a00c253cdf1d42903cd7deeb4b7b5362992e08b8"
+    },
+    {
+      "path": "bin/AzureGameLauncher.exe",
+      "sha256": "a0f1002cb3860e84f3fcecba53ef23cc930a2aee77af6d529f82963b91350809"
+    },
+    {
+      "path": "share/AzureRender/tools/build_game.py",
+      "sha256": "ac2f67a2d9aaf5f07202fc3d2a058e6044c84df02b213ca80d4e34096080cc9b"
+    }
+  ],
+  "python": {
+    "version": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\engine\\share\\AzureRender\\tools\\python\\python.exe",
+    "paths": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\engine\\share\\AzureRender\\tools\\python\\python311.zip",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\engine\\share\\AzureRender\\tools\\python\\Lib",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\engine\\share\\AzureRender\\tools\\python\\DLLs",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\engine\\share\\AzureRender\\tools\\python"
+    ],
+    "isolated": 1
+  },
+  "isolatedPath": "C:\\WINDOWS\\System32;C:\\WINDOWS"
+}

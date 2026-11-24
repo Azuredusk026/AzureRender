@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-scoped-idle-loop",
+  "visualAcceptance": "failed-user-review",
+  "sourceCommit": "d55acc4d12099ac01128894c5339a2cee4a90ba1",
+  "programSha256": "e0c47f0f99be428145af067501b2a5b3ace5437e62948043ae8f1f86e5aadce5",
+  "playerProcesses": 1,
+  "rejectedInvalidImportProcesses": 1,
+  "capturedFrames": 192,
+  "bundles": [
+    {
+      "path": "execution.json.gz",
+      "sha256": "5728658dd34917496b624d7c116ef4efda1e63a251594dbb141dd2f1f2dcc6c9",
+      "sourceFiles": 38
+    }
+  ],
+  "directFiles": [
+    {
+      "path": "joint-motion-loop-v2/frames/frame_000120.png",
+      "bytes": 5691431,
+      "sha256": "a814b01744c1ae055070564bd222797b62c213d4dd63f916debed8e51640dc3c"
+    },
+    {
+      "path": "media/joint-motion-closed-idle.mp4",
+      "bytes": 4817677,
+      "sha256": "6d1347b55ccaf59e14ce50db3bb79f41ffdbdfb2e7feb68f77dcb4fffd1a217f"
+    },
+    {
+      "path": "media/joint-motion-closed-idle.json",
+      "bytes": 1333,
+      "sha256": "f9fcc11f3abff5aea6df46056bfcf11aa1e7b39f60ded31ae90c1f58b03b32dc"
+    }
+  ],
+  "compiledSourceReceipt": {
+    "path": "docs/acceptance/nr/evidence/2026-11-03/material-coverage-mips/manifest.json",
+    "sha256": "1d261325c7deb78dbb9ef399ca4510977670c00201cb21e26c30ef07de54649e"
+  },
+  "retainedProject": "build/runs/20261103-012115-joint-scene-dynamics-e9e4e1/project/joint-dynamic-loop-v2.azureproject",
+  "retainedAssets": [
+    {
+      "path": "build/runs/20261103-012115-joint-scene-dynamics-e9e4e1/project/content-character/hero-restored-inputs-v8.glb",
+      "sha256": "f188722c428358787a12be615d944f4a07185e9a8eaab72b9aa21105f3b7f997",
+      "bytes": 28376240
+    },
+    {
+      "path": "build/runs/20261103-012115-joint-scene-dynamics-e9e4e1/project/content-character/hero-idle-loop-v2.glb",
+      "sha256": "b1f9d78053c0e36c966502847c0a90688307a3d98808db93ff8465a620e6e883",
+      "bytes": 29099516
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 132: AzureEditor.AssetWorkflow
+1/1 Test #132: AzureEditor.AssetWorkflow ........***Failed    0.32 sec
+[1791401214580][info][editor][code=0] Opened scene: startup
+[1791401214595][info][editor][code=0] Opened scene: startup
+[1791401214599][info][editor][code=0] Selected node: Placed Object
+[1791401214610][info][editor][code=0] Undo
+[1791401214615][info][editor][code=0] Opened scene: startup
+[1791401214618][info][editor][code=0] Selected node: Placed Object
+[1791401214631][info][editor][code=0] Opened scene: startup
+[1791401214635][info][editor][code=0] ERROR [asset.place]: Placement requires a nonzero ray direction
+[1791401214712][info][editor][code=0] Opened scene: save
+[1791401214722][info][editor][code=0] Opened scene: save
+[1791401214787][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-assets-28797654398300\save-project\assets\save.azurelevel
+Saving a new hierarchy must preserve the authored document fingerprint
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.32 sec
+
+The following tests FAILED:
+	132 - AzureEditor.AssetWorkflow (Failed)
+Errors while running CTest

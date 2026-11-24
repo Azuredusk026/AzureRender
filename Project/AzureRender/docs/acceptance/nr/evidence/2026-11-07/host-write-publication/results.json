@@ -1,0 +1,56 @@
+{
+  "status": "failure-not-reproduced-no-publication-candidate-run",
+  "control": {
+    "mode": "unfenced",
+    "hostWritePublication": "0",
+    "deviceUsageMask": "0x1fc",
+    "seconds": 162.17199999999139,
+    "executableSha256": "404aff92e1926b0ec5700a69232d14385c61cc3397fc69dc62243d711410fbfb",
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maxByte": 0
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maxByte": 0
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maxByte": 0
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maxByte": 0
+      }
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "uploadFiles": 0
+  },
+  "mappedTypedAllocations": 74,
+  "allActualProperties": 7,
+  "explicitPublicationEnabled": false,
+  "uploadDataReadingEnabled": false,
+  "rootCauseQualified": false,
+  "productionChanged": false,
+  "invariants": {
+    "sourceAndProductsUnchanged": true,
+    "allMountedBytesUnchanged": true,
+    "oneExecutable": true,
+    "gpuTimingEnabled": false
+  },
+  "archive": {
+    "file": "control.zip",
+    "bytes": 331474,
+    "sha256": "b97ee901c6171424e70ad6c71f83ae2ebe1e0904303c44579b283d989947502f"
+  }
+}

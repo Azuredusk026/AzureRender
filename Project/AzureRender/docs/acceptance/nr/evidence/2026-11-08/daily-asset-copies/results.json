@@ -1,0 +1,341 @@
+{
+  "schemaVersion": 1,
+  "status": "daily-model-copy-maintenance-deployed",
+  "sourceBase": "a89558b",
+  "cleanup": {
+    "status": "verified",
+    "files": 313,
+    "logicalBytes": 34359734508,
+    "volumeFreedBytes": 12185612288,
+    "uniqueDeletedFileIdentities": 123,
+    "multipleDeletedNamesForSameFile": 190,
+    "copyIdentityEqualCanonical": 112,
+    "canonicalSourcesVerified": 12,
+    "productionProductsUnchanged": true,
+    "sourceInputsUnchanged": true,
+    "userDiffPreserved": true,
+    "cProjectArchiveFiles": 0,
+    "cProjectArchiveBytes": 0,
+    "currentVolumeFreeBytes": 141761388544
+  },
+  "artifactChecks": {
+    "total": 66,
+    "passed": 65,
+    "skipped": 1,
+    "skipReason": "Host does not permit symbolic-link creation; real hard-link fixture passed"
+  },
+  "trackingCost": {
+    "beforeSeconds": 9.936999999990803,
+    "after": {
+      "entries": 61606,
+      "seconds": 0.8909999999887077
+    }
+  },
+  "dailyExecution": {
+    "managed": {
+      "applied": true,
+      "candidates": [],
+      "expiredRecoveryTasks": [],
+      "expiredEvidenceTasks": [],
+      "expiredUnreferencedEvidence": [],
+      "items": [],
+      "status": "idle"
+    },
+    "caches": {
+      "status": "daily-budget-used",
+      "logicalBytes": 0,
+      "externalStorageUsed": false,
+      "files": 0
+    },
+    "pipelineCaches": {
+      "status": "ready",
+      "files": 0,
+      "bytes": 0,
+      "applied": true,
+      "paths": [],
+      "remainingBytes": 27268298,
+      "remainingEntries": 1,
+      "seconds": 0.09399999999732245
+    },
+    "assetCopies": {
+      "status": "completed",
+      "applied": true,
+      "logicalBytes": 34359734508,
+      "volumeFreedBytes": 12185612288,
+      "unmatched": 0,
+      "skippedForRemainingBudget": 13355,
+      "canonicalSourcesVerified": 12,
+      "catalog": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\maintenance\\20261108-large-run-model-copies.json",
+      "sourceLock": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-171836-consolidated-preparation-images-374280\\image\\frozen-inputs.json",
+      "sourceMap": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\maintenance\\20261108-large-run-model-copies-source-map.json",
+      "externalStorageUsed": false,
+      "wholeRunBackupCreated": false,
+      "seconds": 52.655999999988126,
+      "files": 313
+    },
+    "externalStorageUsed": false,
+    "seconds": 53.48500000000058
+  },
+  "productionBuilds": [
+    {
+      "configuration": "Release",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--runtime-only"
+      ],
+      "exitCode": 0,
+      "seconds": 7.187000000005355
+    },
+    {
+      "configuration": "Debug",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "--config",
+        "Debug",
+        "--runtime-only"
+      ],
+      "exitCode": 0,
+      "seconds": 7.327999999994063
+    }
+  ],
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "status": "passed",
+      "sha256": "054705038a262ff419e915e70865dea6a0c547dccd9467b636711a61c2672e09"
+    },
+    {
+      "configuration": "debug",
+      "status": "passed",
+      "sha256": "3f2761362c219d7cd9915e9389403ef0634182ef5c773b9b91cd117cbf0e4057"
+    }
+  ],
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "skillFiles": [
+    {
+      "path": "SKILL.md",
+      "sha256": "dba573f21a16227cc3b66784d2c5e7c696987dd666e1414eed3bf87ac7bc0855",
+      "bytes": 5399
+    },
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "1c94f9997499c4c4e59f19bfb026e91454486fced9259d561b44b95ab7c8b56a",
+      "bytes": 259
+    },
+    {
+      "path": "scripts/maintain.py",
+      "sha256": "3b1649fcdfdf58aeb1c1b713b02a83d5ed842b9aa01ec11dfa9ed0677de63b9f",
+      "bytes": 1346
+    },
+    {
+      "path": "references/legacy-recovery.md",
+      "sha256": "05ae3685952e4e299ea282606a69709906b2e4e0547088c007335710053ed2e3",
+      "bytes": 2746
+    }
+  ],
+  "policy": {
+    "catalog": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\maintenance\\20261108-large-run-model-copies.json",
+    "lock": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-171836-consolidated-preparation-images-374280\\image\\frozen-inputs.json",
+    "maximumBytes": 34359738368,
+    "maximumFiles": 512,
+    "scope": "在声明历史任务内回收与存活原件完整摘要一致的模型副本；当前输入锁及原始采集持续保留。"
+  },
+  "projectDataVolume": "D:",
+  "overallVisualAcceptance": "failed-user-review",
+  "formalPerformancePassed": false,
+  "evidenceBytes": 559408,
+  "evidenceSha256": "4563b8d1c3c5770ae4632bde7541736a8fbf1ea1c4b63b5f7ba1a09b5783f530",
+  "members": [
+    {
+      "path": "all-artifact-tests.log",
+      "bytes": 11930,
+      "sha256": "acaf367618b0974d3354afca26651a24d54de4ff7ec8b07489bfcbe0c664352b"
+    },
+    {
+      "path": "applied-model-batch.json",
+      "bytes": 263287,
+      "sha256": "49e80db689844423e6867dd171eabae0352733c78d88d19c9a25563eb2c196b7"
+    },
+    {
+      "path": "apply-baseline.json",
+      "bytes": 476280,
+      "sha256": "222acdf73c83f0b844af194269ba66fe29329a19963955b7c7814c6e7f43987b"
+    },
+    {
+      "path": "asset-tests.log",
+      "bytes": 1510,
+      "sha256": "7906d1cfcf76e8710e68bb2bdab6868f972c7b26d9dff96b830af7892b26b970"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 433,
+      "sha256": "c77786a0be7e2d5a1a8b62c93f4bbf842b2b1dec055448a09508a5cb92fa7165"
+    },
+    {
+      "path": "cleanup-baseline.json",
+      "bytes": 475737,
+      "sha256": "6946319654cff7134eeba0f908ed59d475fc70aedcf4c7a1c9f51794626666de"
+    },
+    {
+      "path": "daily-execution.log",
+      "bytes": 1418,
+      "sha256": "2cadd3cd556e50bf262a2aadcccda3a3219810e12facada1b8f874be9d5769e1"
+    },
+    {
+      "path": "daily-red.log",
+      "bytes": 984,
+      "sha256": "ac590e4f320a25b1a0bbf6dc9986651dbf449c70cb436f606af80c77d4c64bd5"
+    },
+    {
+      "path": "daily-report.json",
+      "bytes": 1418,
+      "sha256": "2cadd3cd556e50bf262a2aadcccda3a3219810e12facada1b8f874be9d5769e1"
+    },
+    {
+      "path": "debug-build.log",
+      "bytes": 1108,
+      "sha256": "9519b4a84f69b0f6b9278a3e96688b5bd9e245134887311ed08e970213709e7d"
+    },
+    {
+      "path": "identity-red.log",
+      "bytes": 921,
+      "sha256": "af2b77e341f3fa22de11e073ca45904a15ac01734f1e641f250bfe820696b504"
+    },
+    {
+      "path": "inventory-result.log",
+      "bytes": 313,
+      "sha256": "4551346ed9617b92ec0857f3cddb1b40e2af00bec4aa92e2c11a341238b87697"
+    },
+    {
+      "path": "maintenance/20261108-large-run-model-copies-source-map.json",
+      "bytes": 170178,
+      "sha256": "da3501f8c472b39b9122788ea5a4decb4a2befe564c028fe44f818f77491459d"
+    },
+    {
+      "path": "maintenance/20261108-large-run-model-copies.json",
+      "bytes": 3355691,
+      "sha256": "77b74f3ddc3501fa5f8dd9d09c5795441ad79a09ac9eaf0869b3444398bfd423"
+    },
+    {
+      "path": "maintenance/asset-copy-cleanup-daily-budget.json",
+      "bytes": 144,
+      "sha256": "141ca6200070eed11bdb1878c040de271fe5f2a1699d2efe94633f970c6e9b03"
+    },
+    {
+      "path": "maintenance/asset-copy-cleanup-policy.json",
+      "bytes": 468,
+      "sha256": "a1771ec6c1f684896de691da7a11b6446a6e4ece8abea3871210dc8b826414fd"
+    },
+    {
+      "path": "package.py",
+      "bytes": 4741,
+      "sha256": "251baf56306f765fdd2f12cd0b9fa50cfb6306b0e5465cabbe226d5ffa124f37"
+    },
+    {
+      "path": "post-cleanup-verification.json",
+      "bytes": 475,
+      "sha256": "90f62eb4f2f279f8317d58a46dc3edd6e8b0b91e27fa93f2700ff5996e78826d"
+    },
+    {
+      "path": "preview-batch.json",
+      "bytes": 9101,
+      "sha256": "aa1ab538ae290e142c6da1aa3774a2e5b954900981fd55bda1c9f3a0997ee7ec"
+    },
+    {
+      "path": "preview.log",
+      "bytes": 717,
+      "sha256": "e3b5d1e33f626c0744f0c910f43801f6c58c7dd6fc9eb45dc5695b54e31a51f4"
+    },
+    {
+      "path": "production-builds.json",
+      "bytes": 1165,
+      "sha256": "1e3d17855961efe5bd9ec006099fe03565a2ea2d2854713fa1e64855dbccf977"
+    },
+    {
+      "path": "quota-red.log",
+      "bytes": 2050,
+      "sha256": "ddd72cf203345a0c25f2d6d8bebfaa789f7bce1c690c5a3ece4eed79dfb137d1"
+    },
+    {
+      "path": "red.log",
+      "bytes": 1047,
+      "sha256": "69430ec64c1b65201e9c7e657d2b3c1148a79b837a8a6b96e3498f8a9001b2ce"
+    },
+    {
+      "path": "refresh_builds.py",
+      "bytes": 1164,
+      "sha256": "479c0122b78c0714910fc086c8ea6f0bef84c80070d2eada565dc58e4cbdb060"
+    },
+    {
+      "path": "release-build.log",
+      "bytes": 1114,
+      "sha256": "aa1e59b53085112c278f8106278baf20e35bb8eef7256397e51c96004946e325"
+    },
+    {
+      "path": "skill/SKILL.md",
+      "bytes": 5399,
+      "sha256": "dba573f21a16227cc3b66784d2c5e7c696987dd666e1414eed3bf87ac7bc0855"
+    },
+    {
+      "path": "skill/agents/openai.yaml",
+      "bytes": 259,
+      "sha256": "1c94f9997499c4c4e59f19bfb026e91454486fced9259d561b44b95ab7c8b56a"
+    },
+    {
+      "path": "skill/references/legacy-recovery.md",
+      "bytes": 2746,
+      "sha256": "05ae3685952e4e299ea282606a69709906b2e4e0547088c007335710053ed2e3"
+    },
+    {
+      "path": "skill/scripts/maintain.py",
+      "bytes": 1346,
+      "sha256": "3b1649fcdfdf58aeb1c1b713b02a83d5ed842b9aa01ec11dfa9ed0677de63b9f"
+    },
+    {
+      "path": "source/artifact_asset_cleanup.py",
+      "bytes": 14668,
+      "sha256": "3648e86a99c010c60d79cb03d0bb9ccd849502cae903385822af81b1f71d1ac9"
+    },
+    {
+      "path": "source/artifact_maintenance.py",
+      "bytes": 42381,
+      "sha256": "89f6c2e57807dceba79a704ac69a7e47d668c2e045664942b89c28b735a14284"
+    },
+    {
+      "path": "source/test_artifact_asset_cleanup.py",
+      "bytes": 8919,
+      "sha256": "9f13588da8697138845e06ffacb50d564b86e46c86e013c3ecea3237d3fb3c9e"
+    },
+    {
+      "path": "source/test_artifact_maintenance.py",
+      "bytes": 16551,
+      "sha256": "0fa8865c39c796ded78864b8b0bdc8607386231acd9507dec2b2bbc0e7bd8ae5"
+    },
+    {
+      "path": "tracking-cost.json",
+      "bytes": 120,
+      "sha256": "05298a1cbc2d3986f4860ee49d22c9ced1d759628463500d1beefa78f1978fd8"
+    },
+    {
+      "path": "tracking-red.log",
+      "bytes": 1060,
+      "sha256": "c2be92e2b8c8cc5f0ff14d94dcc87ad49fbdec4fb468a1b665e67e60749cf204"
+    }
+  ]
+}

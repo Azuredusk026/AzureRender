@@ -1,0 +1,580 @@
+{
+  "schemaVersion": 1,
+  "status": "visual-composition-verified-strict-environment-png-gate-pending",
+  "implementationCommit": "24a8291dafb516737523420735885474a1b1d97f",
+  "scope": "Data-only independent full environment and fixed actor placement. No C++, shader, original source or playable-controller change.",
+  "candidate": {
+    "sourceProjectSha256": "7844d0921ac0b2df10f8d247b6e6b4b74971b3e9e33fff91f283a100a72f96c5",
+    "sourceLevelSha256": "def6f52a0bccc9aca7aa270d5787b584a8b8b6e29cee39f487297ac135e4e14e",
+    "files": 1518,
+    "linkedBinaryBytes": 3077590484,
+    "copiedTextBytes": 178942137,
+    "sharedActorInputs": [
+      {
+        "file": "content-character/hero-restored-inputs-v7.glb",
+        "sha256": "af8ebb6d417899a6b74c97056ebbf636dd910ec9b1367045f65fc5f0ea7c2dfb"
+      },
+      {
+        "file": "content-assets/locomotion.json",
+        "sha256": "95ec0cbbfb79b488c73deb3cfd20e95319db9bf1069838c0fd50f20a41a2fbf1"
+      },
+      {
+        "file": "assets/restored-character-materials/material-0.azurematerial",
+        "sha256": "b959f3c38e6be013641ad68221bdbeb1ea1b58ebf74892a290a991893022fad7"
+      },
+      {
+        "file": "assets/restored-character-materials/material-1.azurematerial",
+        "sha256": "7b05827ef427a5137ff194a0b271ca2796c857d0a81b187c7897f835e140986d"
+      },
+      {
+        "file": "assets/restored-character-materials/material-2.azurematerial",
+        "sha256": "63465376ec9a222028f8e0400ca015b9054523d37eff2ef360d1033685a2d539"
+      },
+      {
+        "file": "assets/restored-character-materials/material-3.azurematerial",
+        "sha256": "55e4b31fff80d95b5e14685efc08c512444a70015aa0433aacc7485e6050221b"
+      },
+      {
+        "file": "assets/restored-character-materials/material-4.azurematerial",
+        "sha256": "76ea758de67f868299b0dc6120c8ed7356a3076242da605345d82821b85a15e5"
+      },
+      {
+        "file": "assets/restored-character-materials/material-5.azurematerial",
+        "sha256": "6216895e3fbf40146d4c09250c9111ccb7b35db91989624cbe4f0d3ff103a133"
+      },
+      {
+        "file": "assets/restored-character-materials/material-6.azurematerial",
+        "sha256": "950d7bc898265fda9d0a50656ebb5302750779fd51d67dfaba326bec71d6b189"
+      },
+      {
+        "file": "assets/restored-character-materials/material-7.azurematerial",
+        "sha256": "988af44d222563ff63279726c5417d99ba241cdba3c6dde6d0e9fb1b74d07914"
+      },
+      {
+        "file": "assets/restored-character-materials/material-8.azurematerial",
+        "sha256": "02ecdceafa9a95cc9fcd4abb8971f68e628839aed8a3e877b07fee0c4eb81959"
+      },
+      {
+        "file": "assets/restored-character-materials/material-9.azurematerial",
+        "sha256": "4325859f1a6f7414ffe5d2eac331fbc26375c211782b92dae8cefb5322e81663"
+      },
+      {
+        "file": "assets/restored-character-materials/material-10.azurematerial",
+        "sha256": "1207dd33c57674142f54985a991a73475a2929c397a81f356ed8a7e448843348"
+      },
+      {
+        "file": "assets/restored-character-materials/material-11.azurematerial",
+        "sha256": "501827cef6d5b914db31794f61b8858015167ec6552c8c8a9015b05ff42c4665"
+      },
+      {
+        "file": "assets/restored-character-materials/material-12.azurematerial",
+        "sha256": "cefbf58df2ac625fbbbaf96be68a89d0beea7b11bec33cc6a93598f168979682"
+      }
+    ],
+    "hidden": {
+      "project": "build/runs/20261031-105539-full-scene-character-composition-b37668/project/full-character-hidden.azureproject",
+      "levelSha256": "7ff5e644a50afedec28cb432a493b685897cf025adc799afb74b965cfd41861e"
+    },
+    "visible": {
+      "project": "build/runs/20261031-105539-full-scene-character-composition-b37668/project/full-character-visible.azureproject",
+      "levelSha256": "237bf62abd7f22bce23a6846807023a470968be723f9b8e493e000c2cd1cd5ab"
+    },
+    "actorPlacement": {
+      "translation": [
+        -1.5,
+        1.034915525391084,
+        -16.0
+      ],
+      "rotationDegrees": [
+        0,
+        172.1110815753877,
+        0
+      ],
+      "groundHeight": 1.032415525391084,
+      "footClearance": 0.0025,
+      "scope": "fixed world placement and original animation graph; playable controller remains in original character project"
+    },
+    "environmentSettingsAndNodesPreserved": true,
+    "caseDifference": "hero renderable visibility only",
+    "resources": 365,
+    "nodes": 1660
+  },
+  "ground": {
+    "pointXZ": [
+      -1.5,
+      -16.0
+    ],
+    "selectedHeight": 1.032415525391084,
+    "testedTriangles": 447384,
+    "hits": [
+      {
+        "node": "exchange-node-17925932836137211-138",
+        "name": "native-17853416-draw-1",
+        "height": 1.032415525391084
+      }
+    ]
+  },
+  "run": {
+    "path": "build/runs/20261031-105539-full-scene-character-composition-b37668",
+    "retained": true
+  },
+  "image": {
+    "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/full-scene-character.png",
+    "sha256": "40b652741f0a37898091b3d2f9403647d7ae5257fcc1ba0b7fbd172b809692a5"
+  },
+  "hiddenControl": {
+    "status": "strict-gate-failed",
+    "comparisons": [
+      {
+        "frame": "frame_000000.png",
+        "pngBytesExact": true,
+        "differentPixels": 0,
+        "maximumChannelError": 0,
+        "meanAbsoluteByteError": 0.0,
+        "sha256": "0fda0452feef2f4df5b9bc8c51aa47df8354834d04e4a19e62998f3a2d78e7d4"
+      },
+      {
+        "frame": "frame_000001.png",
+        "pngBytesExact": true,
+        "differentPixels": 0,
+        "maximumChannelError": 0,
+        "meanAbsoluteByteError": 0.0,
+        "sha256": "5532c8d1176f00adf257a628b03fb72d0195659e3354639949bb4ef14c960c19"
+      },
+      {
+        "frame": "frame_000002.png",
+        "pngBytesExact": true,
+        "differentPixels": 0,
+        "maximumChannelError": 0,
+        "meanAbsoluteByteError": 0.0,
+        "sha256": "91cc7197980d975bb177754f95ed004330b8ced920b9ab59d745eb2573c4e216"
+      },
+      {
+        "frame": "frame_000003.png",
+        "pngBytesExact": true,
+        "differentPixels": 0,
+        "maximumChannelError": 0,
+        "meanAbsoluteByteError": 0.0,
+        "sha256": "9b77c2e35db0d4cd1d9cef7d85bfd4c9b13b94ea595df70deac0c61562c2549b"
+      },
+      {
+        "frame": "frame_000004.png",
+        "pngBytesExact": false,
+        "differentPixels": 15,
+        "maximumChannelError": 1,
+        "meanAbsoluteByteError": 1.3563368055555556e-06,
+        "sha256": "8c18aa7ed46e72a7e76a1729a07b5a35b9185b9ad3c1ae3ff172be80c7f5540b"
+      },
+      {
+        "frame": "frame_000005.png",
+        "pngBytesExact": false,
+        "differentPixels": 14,
+        "maximumChannelError": 1,
+        "meanAbsoluteByteError": 1.2659143518518518e-06,
+        "sha256": "28f7a1aacb77315b4195d1a2aaed6414501876bd9322dcce91e5b8143f8781b6"
+      },
+      {
+        "frame": "frame_000006.png",
+        "pngBytesExact": false,
+        "differentPixels": 14,
+        "maximumChannelError": 1,
+        "meanAbsoluteByteError": 1.2659143518518518e-06,
+        "sha256": "85a2a0b7c53dd55f38efecf5573cb7117b1d2afb6700bd9296004f38d1b6fa9d"
+      },
+      {
+        "frame": "frame_000007.png",
+        "pngBytesExact": false,
+        "differentPixels": 13,
+        "maximumChannelError": 1,
+        "meanAbsoluteByteError": 1.1754918981481482e-06,
+        "sha256": "20151f1cf58155198593b3d482987b38e36f1896cdedec65ffbc414b78bb4d9d"
+      },
+      {
+        "frame": "frame_000008.png",
+        "pngBytesExact": false,
+        "differentPixels": 9,
+        "maximumChannelError": 1,
+        "meanAbsoluteByteError": 8.138020833333334e-07,
+        "sha256": "34b39e70c53dfc3f68b81c157f8410821a6bfa475a5f340a0dcf586b21d4dc89"
+      },
+      {
+        "frame": "frame_000009.png",
+        "pngBytesExact": false,
+        "differentPixels": 13,
+        "maximumChannelError": 5,
+        "meanAbsoluteByteError": 1.8988715277777777e-06,
+        "sha256": "6eb6bccc3aefaa63efce32fb534e6c6bcc353aa94d709719616c217e0826975e"
+      },
+      {
+        "frame": "frame_000010.png",
+        "pngBytesExact": false,
+        "differentPixels": 13,
+        "maximumChannelError": 1,
+        "meanAbsoluteByteError": 1.1754918981481482e-06,
+        "sha256": "168769447af1ca56aa8ec4c2a5bf32828cfa79ec90e4bf39fc9ba0149ee5a1ed"
+      },
+      {
+        "frame": "frame_000011.png",
+        "pngBytesExact": true,
+        "differentPixels": 0,
+        "maximumChannelError": 0,
+        "meanAbsoluteByteError": 0.0,
+        "sha256": "fcd8ffeed8fe9eede0cbe4b80b15adbb7f360bf3c530db82bb75ff7dcbc4a854"
+      }
+    ],
+    "pngBytesExactPairs": 5,
+    "maximumDifferentPixels": 15,
+    "minimumExactPixelFraction": 0.9999959309895833,
+    "maximumChannelError": 5
+  },
+  "repeatDiagnostic": {
+    "status": "all-twelve-repeat-pngs-byte-identical",
+    "comparison": {
+      "frame_000000.png": true,
+      "frame_000001.png": true,
+      "frame_000002.png": true,
+      "frame_000003.png": true,
+      "frame_000004.png": true,
+      "frame_000005.png": true,
+      "frame_000006.png": true,
+      "frame_000007.png": true,
+      "frame_000008.png": true,
+      "frame_000009.png": true,
+      "frame_000010.png": true,
+      "frame_000011.png": true
+    },
+    "conclusion": "Difference is reproducible for these inputs. Shared Hair class specialization changed; causality remains unproven, no rendering patch or acceptance-threshold change applied."
+  },
+  "visibleCapture": {
+    "status": "passed",
+    "configuration": "Release",
+    "validationEnabled": false,
+    "frames": 12,
+    "dimensions": [
+      2560,
+      1440
+    ],
+    "actorAnimation": {
+      "blend": 1.0,
+      "clip": 0,
+      "morph": [
+        0.0,
+        0.0
+      ],
+      "node": "hero",
+      "previousClip": 0,
+      "samples": [],
+      "time": 0.18333333333333332
+    },
+    "comparisons": [
+      {
+        "frame": "frame_000000.png",
+        "differentPixels": 85708,
+        "maximumChannelError": 247,
+        "meanAbsoluteByteError": 0.30211027922453704
+      },
+      {
+        "frame": "frame_000001.png",
+        "differentPixels": 85845,
+        "maximumChannelError": 250,
+        "meanAbsoluteByteError": 0.3019820601851852
+      },
+      {
+        "frame": "frame_000002.png",
+        "differentPixels": 85722,
+        "maximumChannelError": 252,
+        "meanAbsoluteByteError": 0.30295021339699074
+      },
+      {
+        "frame": "frame_000003.png",
+        "differentPixels": 85698,
+        "maximumChannelError": 253,
+        "meanAbsoluteByteError": 0.303468334056713
+      },
+      {
+        "frame": "frame_000004.png",
+        "differentPixels": 85694,
+        "maximumChannelError": 252,
+        "meanAbsoluteByteError": 0.3040605107060185
+      },
+      {
+        "frame": "frame_000005.png",
+        "differentPixels": 85515,
+        "maximumChannelError": 250,
+        "meanAbsoluteByteError": 0.3036266637731482
+      },
+      {
+        "frame": "frame_000006.png",
+        "differentPixels": 85555,
+        "maximumChannelError": 247,
+        "meanAbsoluteByteError": 0.3039483868634259
+      },
+      {
+        "frame": "frame_000007.png",
+        "differentPixels": 85605,
+        "maximumChannelError": 243,
+        "meanAbsoluteByteError": 0.3039104998553241
+      },
+      {
+        "frame": "frame_000008.png",
+        "differentPixels": 85599,
+        "maximumChannelError": 239,
+        "meanAbsoluteByteError": 0.30334300853587964
+      },
+      {
+        "frame": "frame_000009.png",
+        "differentPixels": 85661,
+        "maximumChannelError": 235,
+        "meanAbsoluteByteError": 0.30386284722222223
+      },
+      {
+        "frame": "frame_000010.png",
+        "differentPixels": 85751,
+        "maximumChannelError": 230,
+        "meanAbsoluteByteError": 0.3038375289351852
+      },
+      {
+        "frame": "frame_000011.png",
+        "differentPixels": 85710,
+        "maximumChannelError": 234,
+        "meanAbsoluteByteError": 0.3035061306423611
+      }
+    ],
+    "elapsedSeconds": 212.25508630000695,
+    "exitCode": 0,
+    "unloadZero": true
+  },
+  "logs": [
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/hidden-summary.json.gz",
+      "bytes": 14331,
+      "sha256": "b2419e841a581f9ccede8ed21129e52c8b0fa09e5db95849ac4ad14d3f9a22b1",
+      "rawSha256": "7404363e831d060ba27ea60efd86eaa8cb15103c2c4348b0812faf45e81586d7"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/hidden-player.log.gz",
+      "bytes": 3227,
+      "sha256": "d3d7a73bbcffcf0bcd861040b7526cdaf017e3d07ed2efc41747eb43dbe1c337",
+      "rawSha256": "1f8001241fdb1dca56717066a719a684834348f9b93cc1552c9712781c444562"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/hidden-runtime.json.gz",
+      "bytes": 30600,
+      "sha256": "96948c5faab9e8f9016640a1a9d5c642bc29d1110fd2b0530a396c639d5b6ed5",
+      "rawSha256": "2681a4c3769a8899a164bc3a1fee7441b9f57b57170e824d034fe9e2fd71d841"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/hidden-command.json.gz",
+      "bytes": 299,
+      "sha256": "6eb82b6a82d02e6a3daddc02a6f9003cebbcad527facf59db9520bf8b0ea4eff",
+      "rawSha256": "6bfec4f893bb23c8313f8956c9dc786e5d43d7f8a160e19b123d68eae46398d9"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/hidden-repeat-summary.json.gz",
+      "bytes": 14383,
+      "sha256": "3e542ad22ca83a5f340c15c83f308c48b3de1f58109978d31d4d7eb8498ba1e0",
+      "rawSha256": "21fbfbe54a776332a6f7c7ada8a0cda987b8b92cd3d606c736395ed788b4aed9"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/hidden-repeat-player.log.gz",
+      "bytes": 3237,
+      "sha256": "cd8a1cdf9ba673cd9138f09ea338becb7f4ce92300d71734e8cfc70565b67336",
+      "rawSha256": "f8791539ccfcd3a09672dd76976e0e347b925b20082cb0b4b4bfce54f60f1d95"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/hidden-repeat-runtime.json.gz",
+      "bytes": 30600,
+      "sha256": "c0aa81cdbb8829c7463a07a0c89559bd5142b9f8f031a017f751661a271253fb",
+      "rawSha256": "9162bfe49c4143f9b261f723b33a053bb112a1f924d0eb0e4a0222c11d047878"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/hidden-repeat-command.json.gz",
+      "bytes": 304,
+      "sha256": "153eba8ba31206e0e728f9f082f138754efb7a446b2824a16f1cbb9c2ef75cf9",
+      "rawSha256": "b590878534cf022730873e1cd00f09f8f5e486316ec76e5540ff4c3c08c42b0a"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/visible-summary.json.gz",
+      "bytes": 14434,
+      "sha256": "e5ff91a9d35c50d3f8cfc7e6d6482b4355c9d5ee483df8467856a157f453746d",
+      "rawSha256": "16b7ab049a6f3e55b94ff8bf3ee5aae1a41ddfddcb5e1af758818d3c515e77b0"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/visible-player.log.gz",
+      "bytes": 3258,
+      "sha256": "b8cea92fd7eceb5ac48f152af92f2785003ca790e1dabd1c70a324b176c6c958",
+      "rawSha256": "e90a88d406f009a69351040612dbc41c0b2acc6d4296a2a1fef702502877e294"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/visible-runtime.json.gz",
+      "bytes": 30602,
+      "sha256": "cad864f3faad5ae203e02403bc117cb19a33efb253888cb8aa6fb871304d2204",
+      "rawSha256": "7d480157f07b80097fcf0ea41ef1b481fbd63c02f447be72aadc57e439465cca"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/visible-command.json.gz",
+      "bytes": 300,
+      "sha256": "c235a5935a75388cec76b7cb223324168038b3b1134fe940ecca053aa57ad046",
+      "rawSha256": "7fd65f189b4d1a8aeaa6b38ef65aba6a71273e278569a09613c3b0374fc4f766"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/capture_case.py.gz",
+      "bytes": 2086,
+      "sha256": "ff05c393b39226454fa3b6b5011a3b25663e807050b7f002f09e41921a5e01f0",
+      "rawSha256": "e17c34e7e703d5e5c0cbef66403ab02d694c1880194641227776dca164566369"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/repeat_hidden.py.gz",
+      "bytes": 2135,
+      "sha256": "923975030048ead644e43e4d2dbdae3a3fb07e62f1b4b0a471fc515bf2cf6561",
+      "rawSha256": "3fa1dfb38f3a61d3cadd648977a5d367396264789f1cca738bce55a99c15e434"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/prepare_candidate.py.gz",
+      "bytes": 1966,
+      "sha256": "bdf0ba439df1983eaa2e0c091a8b50c7e273f531f9509ae40ac4740ee24cb6bd",
+      "rawSha256": "62f1e9e8b4d9ba8b0a2dfbccde2f42bce80d9f1943a635fc76a6234e1bfd4277"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/query_ground.py.gz",
+      "bytes": 2543,
+      "sha256": "00c73c785770094153b6021a2cb766a95e486dd9220651cadc55980ef238e366",
+      "rawSha256": "e1352bc0844d3d06730296034ecc2b67d52a7c291cdfa012c89f166d591bd95b"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/ground-query.json.gz",
+      "bytes": 195,
+      "sha256": "53723c24ef8f10b286a3986cf50f8a82b242f005c4050a302eb9285d58bbbfcc",
+      "rawSha256": "73f70e27129f7b59f0f80ff03243d44fa12cad1039165a9d1905aba54c8679f5"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/candidate-manifest.json.gz",
+      "bytes": 1457,
+      "sha256": "2bc7744e57b784ac3d2bcb39d4ed42ea93adf04738abea3ea16d642ace257ddf",
+      "rawSha256": "8d52aae9a4bcb692cd2d8b1858794ba528ccabdedbd2f0fb07ff1f9ead157224"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/shared-actor-inputs.json.gz",
+      "bytes": 214,
+      "sha256": "1e7fcb21c60231a8deebce2e8991e7ee8650505c08448180e94263bc960cc85a",
+      "rawSha256": "1123798be0f71124700de328d2c6827df5896c1cfd370f630bd92dad2abcaf44"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/hidden-difference-pixels.json.gz",
+      "bytes": 485,
+      "sha256": "cfc978a6f3ed34f3e1fb50d2d7214a8833304b0492a2cc2e487d6f1d1c4e4c0c",
+      "rawSha256": "551924df60da2455d81ac1cb66c79d823e7917c2e1292d785ed0bbff093219c8"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/diagnostic-intent.txt.gz",
+      "bytes": 251,
+      "sha256": "3eb52e5e18c0cca99814f488176d43b00acde5ff51dbece98fd051d3028221c8",
+      "rawSha256": "a65ce03c40260b35768d705fc27028b5a0b4825616f27efe9545c06e4b8e0261"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/full-character-hidden.azureproject.gz",
+      "bytes": 433,
+      "sha256": "44ac2491571514b85b6f8400302ca9b3e448e622c115ee07664b7ae873f55618",
+      "rawSha256": "becd716861a8940c55ef2c08f116c186cff206c37485e61bd74ae11110eeda82"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/full-character-hidden.azurelevel.gz",
+      "bytes": 217681,
+      "sha256": "987755253d3ed1f2085d82a6c09f0d2479f9b7aa788bbc49a12d2263396656e1",
+      "rawSha256": "7ff5e644a50afedec28cb432a493b685897cf025adc799afb74b965cfd41861e"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/full-character-visible.azureproject.gz",
+      "bytes": 434,
+      "sha256": "b18f8e3afd538e43b5fb52b49e992474c36796bd45073e738162718d92fd04f6",
+      "rawSha256": "cb90e6f168a293d027414af0f7b2c93aadd4c6242433950c977e049bde8c4b24"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/full-character-visible.azurelevel.gz",
+      "bytes": 217681,
+      "sha256": "24042b7747f7fdcd76dfece287237409bcea88076b7dc76eef4592f85e472d17",
+      "rawSha256": "237bf62abd7f22bce23a6846807023a470968be723f9b8e493e000c2cd1cd5ab"
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/mkdocs.log.gz",
+      "sha256": "b4fe409e5616904300f3569beeef2b20e6176978ab270ab6fd0534c42efa8edc",
+      "rawSha256": "a7a01f277eaaea428a26b008329a879c51904262c9250989e34870f08831c152",
+      "bytes": 6350
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/doc-links.log.gz",
+      "sha256": "88fba8b2ff6e5699fa02887558e5096bea8881ed09cbc29df527df2321a5c734",
+      "rawSha256": "ec35ea0210f020f24827bd268e4b6ab7da8b3695a4e8dd704c145fed17b9d8d3",
+      "bytes": 79
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/verify_documents.py.gz",
+      "sha256": "b81d3be91241cd73bfb7eef101ab400394c40b3710de62203ca622535aaacddb",
+      "rawSha256": "a3c6f4018f78f7fd384855c43a0b8cc21a35aec050c202f78da9faf13144a88e",
+      "bytes": 1529
+    },
+    {
+      "file": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/archive_composition.py.gz",
+      "sha256": "32dd7529c994dc548955fc78ca018073122e218255f67698c85772490d91d0b2",
+      "rawSha256": "12d3d44d36da63fa2f456eb7e3851b1a61652039f6ecd09bd7cdd2b5ab252c1a",
+      "bytes": 2422
+    }
+  ],
+  "preservedUserFiles": {
+    "docs\\acceptance\\p5\\closure\\source-evidence\\interruption.json": "4bd07a5e3af10be9aceac2b0ddaa0e5e80c850bc704cc3eae4dfed332e04e979",
+    "docs\\acceptance\\p5\\closure\\source-evidence\\manifest.json": "11f99d3171d7609a1200aa86920c7fb1251fae4e96e6ecebb76a391359488c43",
+    "docs\\acceptance\\p5\\closure\\source-evidence\\performance-provenance-green.log": "b0d7a3991dec0248b49e57e2d9cbdede8e7f286838add2f0723593d8598ee0e7",
+    "docs\\acceptance\\p5\\closure\\source-evidence\\performance-provenance-red.log": "f7c1533fc970cbb4665bfbf9267a17ee044e5e01bb22d3d0b74aafc2217c98c4"
+  },
+  "limitations": [
+    "Strict hidden-control gate remains failed: five of twelve baseline PNG pairs byte-identical, including the final frame.",
+    "Tiny stable differences in shared environment shading require a relevant rendering correction before re-running the strict gate.",
+    "Actor placement and idle playback only; playable movement, full animation cycle, sustained performance, dual-device and formal SSIM remain separate gates."
+  ],
+  "documentation": {
+    "files": [
+      {
+        "file": "README.md",
+        "sha256": "27b5c76d65ca85e45055b82fb3d239767fb7c04966937546e84b596ca693a9e7"
+      },
+      {
+        "file": "CHANGELOG.md",
+        "sha256": "2ec1ac999e8657248c03b4098f7e8f4f70c0e15a2de4df0d9855addabcea77ba"
+      },
+      {
+        "file": "docs/plans/azure-engine-plan.md",
+        "sha256": "81527f889aa8a0833a69f25cb87427146ddef5503cb97ac98a5ffe1e47a944a2"
+      },
+      {
+        "file": "docs/plans/2026-10-30-development-recovery.md",
+        "sha256": "6a072baba6366ba9e5209dd465a4553f74027cb0e2eb6756dbc0ffbd9a21dfa0"
+      },
+      {
+        "file": "docs/plans/2026-10-31-full-scene-character-composition.md",
+        "sha256": "9072824e0762260a0ebe20fe1be1897703cafc07c308a6a5aa2cbd8b4a497fc7"
+      },
+      {
+        "file": "docs/acceptance/p8/2026-10-31-environment.md",
+        "sha256": "695634672ac928612713ec58130f5f2104261d2a56b083e22bed5e76cf84f560"
+      },
+      {
+        "file": "docs/acceptance/recovery/full-scene-visual.md",
+        "sha256": "02d41249a3ff7256afa9e6ddc0e8718171ac1851ce0435e252bea5b63df07d4c"
+      },
+      {
+        "file": "docs/acceptance/recovery/full-scene-character.md",
+        "sha256": "f44e1f53256dda1daff70dc64cf0b95ec059da2706723f989ad5334814d4d3b0"
+      },
+      {
+        "file": "docs/tutorials/restored-native-scene.md",
+        "sha256": "ba57d3d0e251525726d2ded49b8abe88ed183a05221e8bb4bce4c43ea047b0fa"
+      }
+    ],
+    "linksChecked": 621,
+    "paragraphAudit": "passed",
+    "siteBuild": "passed",
+    "newWarnings": 0,
+    "newInvalidAnchors": 0,
+    "strictSiteAcceptance": "pending"
+  }
+}

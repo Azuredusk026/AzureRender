@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "sourceBaseCommit": "108306b",
+  "scope": "Explicit virtual half-vector adapter and independent line texture; native image equivalence pending.",
+  "run": "build/runs/20261023-013925-virtual-main-hair-c4fea8",
+  "checks": {
+    "ramp-regression-release": {
+      "status": "passed",
+      "caseCount": 20,
+      "playerSha256": "f55621bd72f84b19e2f8f88758d5616089e3bb3347cca81eb18d3cbc7ff78dc6",
+      "summarySha256": "f17b9966b215a235356eaf875e9496597838d8de0d72e529a03a96cc36f8223b",
+      "maximumLinearError": 0.002741651722259708,
+      "validationEnabled": false
+    },
+    "ramp-regression-debug": {
+      "status": "passed",
+      "caseCount": 20,
+      "playerSha256": "98b3b17ac6cfa4c70afb014e21bc406a6007e70c03b5b1bb845768753607b473",
+      "summarySha256": "a8699fdc29d9f7b0c4c83f1b953fdecd88c3743a60888ad4098d9be0860c8f29",
+      "maximumLinearError": 0.002741651722259708,
+      "validationEnabled": true
+    },
+    "line-gpu-debug-v2": {
+      "status": "passed",
+      "caseCount": 15,
+      "playerSha256": "98b3b17ac6cfa4c70afb014e21bc406a6007e70c03b5b1bb845768753607b473",
+      "summarySha256": "e3e633bed2e7224b743fac432a89a075d15caad20a89e1994f1d0b1e1ec14c42",
+      "maximumLinearError": 0.0016617199790341652,
+      "validationEnabled": true
+    },
+    "surface-regression-debug": {
+      "status": "passed",
+      "caseCount": 10,
+      "playerSha256": "98b3b17ac6cfa4c70afb014e21bc406a6007e70c03b5b1bb845768753607b473",
+      "summarySha256": "4381ae133ec7d89fd4c63c6a313f5eab8025c7fd106ca13ee032d9e7970d4cc8",
+      "maximumLinearError": 0.0013252993818627934,
+      "validationEnabled": true
+    }
+  },
+  "real-virtual-main": {
+    "status": "actual-model-virtual-main-consumption-recorded",
+    "sourceSha256": "a8a08d008eca0ec50078af5d98121cad5a4f293f5e785cb22fc3ee4a2e081619",
+    "candidateSha256": "605c0767596653d6e374fc66c5a0ccbf6c1d62facd1020cabbfa01b2914e29e5",
+    "playerSha256": "42f11534f4eefd603a95aa75893fb0983ef628157ed771cd619b2add3a32461f",
+    "headNode": "Bip001_Head",
+    "headBasis": [
+      -1.2556207821560323e-06,
+      2.7855764703915194e-06,
+      -0.9999999999953323,
+      0.999999999999211,
+      -4.4843204444759344e-08,
+      -1.2556209066996796e-06,
+      4.484670207260324e-08,
+      0.9999999999961199,
+      2.7855764142771456e-06
+    ],
+    "changedMaterials": 1,
+    "geometryAnimationUnchanged": true,
+    "captures": [
+      {
+        "mode": "source",
+        "imageSha256": "5292f14c13cdf3fc1c47cbff5f3c34a0731a12d9dcad3b7b2bf236454cc3f37c",
+        "levelSha256": "553c4d1fd57dbfccd8dd065ca6616630a4c0d8caaa7a96ff07d13b90752f5ee8"
+      },
+      {
+        "mode": "explicit",
+        "imageSha256": "8896c408d053477a0ff7aaaa482854de05e219c55ae64c8ed7a85821f20a9d57",
+        "levelSha256": "43ceabbf2ce26c259bb3c09a63ca7db71d7c9914e097023ef8cce8c874f8de18"
+      }
+    ],
+    "changedPixels": 48414,
+    "maximumByteDifference": 193
+  },
+  "real-strand-line": {
+    "status": "actual-model-strand-line-consumption-recorded",
+    "sourceSha256": "605c0767596653d6e374fc66c5a0ccbf6c1d62facd1020cabbfa01b2914e29e5",
+    "candidateSha256": "f91eb2c9cce2009d5c8753170e465b2c6151ddb5368859fa784fb0a8b7ee11f8",
+    "playerSha256": "f55621bd72f84b19e2f8f88758d5616089e3bb3347cca81eb18d3cbc7ff78dc6",
+    "lineTextureSha256": "a61a6e8e41dc3502859cc1a13094a80db98828f21c7b09078ec07fb6067913a7",
+    "lineSourceEvent": 950,
+    "lineSourceResource": "20170",
+    "lineProfile": {
+      "schemaVersion": 1,
+      "texture": 49,
+      "frequency": 300,
+      "strandShift": 0.4,
+      "range": 0.95,
+      "depth": 0.22,
+      "alternation": 1,
+      "saturation": 1.5,
+      "uvTransform": [
+        9.3,
+        1,
+        -0.32,
+        0
+      ]
+    },
+    "changedMaterials": 1,
+    "geometryAnimationUnchanged": true,
+    "captures": [
+      {
+        "mode": "source",
+        "imageSha256": "8896c408d053477a0ff7aaaa482854de05e219c55ae64c8ed7a85821f20a9d57",
+        "levelSha256": "43ceabbf2ce26c259bb3c09a63ca7db71d7c9914e097023ef8cce8c874f8de18"
+      },
+      {
+        "mode": "explicit",
+        "imageSha256": "b33fe672abde56bb4cb9cd1804cc34c9769d5fe7afc99ca10d135275c86e0342",
+        "levelSha256": "9cbdce6f739fc1a2bfb0168bb014858583a95f5ee01bc82c3ec8ad33a577567e"
+      }
+    ],
+    "changedPixels": 30420,
+    "maximumByteDifference": 24
+  },
+  "cpuChecks": {
+    "characterRepairRelease": "passed",
+    "characterRepairDebug": "passed",
+    "materialDocument": "passed",
+    "materialGraph": "passed",
+    "moduleBoundaryFixtures": "passed",
+    "moduleBoundaries": "passed",
+    "reflection": "passed",
+    "lightBuffer": "passed",
+    "projectedHairMath": {
+      "passed": 8
+    },
+    "characterProfiles": {
+      "passed": 11
+    },
+    "documentStyleAndLinks": "passed"
+  }
+}

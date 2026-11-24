@@ -1,0 +1,19 @@
+Project loaded: P5 inspection (623c9162-415d-4444-874e-c313f26d887e)
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+GPU timing: enabled, timestamp period 1.000000 ns, 64 valid bits
+Scene renderer: sample (sceneType=sample)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+GPU timing samples: 30
+  Shadow: 0.015 ms (11.561%)
+  Main scene: 0.008 ms (6.540%)
+  Internal outline: 0.106 ms (81.899%)
+  Total render: 0.130 ms avg, 0.127 ms min, 0.137 ms max
+  Percentiles: p50 0.129 ms, p95 0.136 ms, p99 0.137 ms
+  Submission per frame: 0.000 draws, 0.000 descriptor binds
+  CPU recording: 0.350 ms per frame, worker passes: 0
+GPU timing report: D:\Assigment\2609\FYP\Project\AzureRender\build\implementation-2026-10-10\p5-delivery\nvidia-authored-inspection\timing.json
+Rendered frames: 30
+Allocator after unload: buffers=0 images=0

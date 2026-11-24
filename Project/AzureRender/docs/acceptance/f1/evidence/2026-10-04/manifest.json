@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "implementation": "feat(f1): 完成构建复现与角色素材准入",
+  "debugTests": 60,
+  "releaseTests": 61,
+  "files": {
+    "build-debug.json": "16268f761c8182fc004a5872fe1b639c8ba12880d002fb641cdbaa57bbc705b1",
+    "build-release.json": "a9ba931010aebb9ec6d4fdbcdaff935245fa315f685f9a4d504069bdd135c2c6",
+    "ctest-debug.log": "1415147df6bcc421fa7ea077afb58deab6a8f28fab18f14ea124d7b0a4a7a48f",
+    "ctest-release.log": "00b3d5cc5aaa2517e9e12623fafb9d7148f1159b80b118cc310e70c9955665aa",
+    "delivery.json": "2a6dc64b662c2a9c282b35cedcf66dee07291328307a4591516a2c0c60e672ee",
+    "documentation.log": "09c2717a13248105a5589c4b3ebcf0006db4fb2a827920719174b000dfefa4b5",
+    "final-debug-install.log": "0a625c8bc525d6a5045b8ea5c8a5210f41cf325d0fcce83bce6917dec92cd607",
+    "final-release-install.log": "6576daeab6ee7d016c658b8df282799279f18049613f4c2e0d087fd27fff25e5",
+    "intake-summary.json": "78318c2579aa1006a1b1907b787b423d8e474d58c084ccf77643983cfec2415f",
+    "visual-studio-configure.log": "9abaf9ac766c47a37e6be76b89e9a6f780a9b0bc888aec4d2b081d2d7d5b30d7",
+    "visual-studio-debug-tests.json": "ba21268a3db56da4220d63d1d3a124a2e4baec2087da60d7bf14385c84f360a8",
+    "visual-studio-release-tests.json": "572cc66a1eef3d78905c85a5d6683cdd8d8abff7f0681e18e52af9d50fa82ed1"
+  }
+}

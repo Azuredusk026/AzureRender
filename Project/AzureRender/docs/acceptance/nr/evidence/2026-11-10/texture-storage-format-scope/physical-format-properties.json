@@ -1,0 +1,194 @@
+[
+  {
+    "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+    "vendorId": 32902,
+    "deviceId": 42888,
+    "driverVersion": 1661340,
+    "formats": [
+      {
+        "format": 9,
+        "name": "R8_UNORM",
+        "optimalTilingFeatures": 2147605891,
+        "sampled": true,
+        "linearFilter": true
+      },
+      {
+        "format": 15,
+        "name": "R8_SRGB",
+        "optimalTilingFeatures": 0,
+        "sampled": false,
+        "linearFilter": false
+      },
+      {
+        "format": 16,
+        "name": "R8G8_UNORM",
+        "optimalTilingFeatures": 2147605891,
+        "sampled": true,
+        "linearFilter": true
+      },
+      {
+        "format": 22,
+        "name": "R8G8_SRGB",
+        "optimalTilingFeatures": 0,
+        "sampled": false,
+        "linearFilter": false
+      },
+      {
+        "format": 23,
+        "name": "R8G8B8_UNORM",
+        "optimalTilingFeatures": 119809,
+        "sampled": true,
+        "linearFilter": true
+      },
+      {
+        "format": 29,
+        "name": "R8G8B8_SRGB",
+        "optimalTilingFeatures": 49153,
+        "sampled": true,
+        "linearFilter": false
+      },
+      {
+        "format": 37,
+        "name": "R8G8B8A8_UNORM",
+        "optimalTilingFeatures": 2147605891,
+        "sampled": true,
+        "linearFilter": true
+      },
+      {
+        "format": 43,
+        "name": "R8G8B8A8_SRGB",
+        "optimalTilingFeatures": 122241,
+        "sampled": true,
+        "linearFilter": true
+      }
+    ]
+  },
+  {
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "vendorId": 4318,
+    "deviceId": 10464,
+    "driverVersion": 2484371456,
+    "formats": [
+      {
+        "format": 9,
+        "name": "R8_UNORM",
+        "optimalTilingFeatures": 122243,
+        "sampled": true,
+        "linearFilter": true
+      },
+      {
+        "format": 15,
+        "name": "R8_SRGB",
+        "optimalTilingFeatures": 119809,
+        "sampled": true,
+        "linearFilter": true
+      },
+      {
+        "format": 16,
+        "name": "R8G8_UNORM",
+        "optimalTilingFeatures": 122243,
+        "sampled": true,
+        "linearFilter": true
+      },
+      {
+        "format": 22,
+        "name": "R8G8_SRGB",
+        "optimalTilingFeatures": 0,
+        "sampled": false,
+        "linearFilter": false
+      },
+      {
+        "format": 23,
+        "name": "R8G8B8_UNORM",
+        "optimalTilingFeatures": 0,
+        "sampled": false,
+        "linearFilter": false
+      },
+      {
+        "format": 29,
+        "name": "R8G8B8_SRGB",
+        "optimalTilingFeatures": 0,
+        "sampled": false,
+        "linearFilter": false
+      },
+      {
+        "format": 37,
+        "name": "R8G8B8A8_UNORM",
+        "optimalTilingFeatures": 122243,
+        "sampled": true,
+        "linearFilter": true
+      },
+      {
+        "format": 43,
+        "name": "R8G8B8A8_SRGB",
+        "optimalTilingFeatures": 122241,
+        "sampled": true,
+        "linearFilter": true
+      }
+    ]
+  },
+  {
+    "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+    "vendorId": 32902,
+    "deviceId": 42888,
+    "driverVersion": 1661340,
+    "formats": [
+      {
+        "format": 9,
+        "name": "R8_UNORM",
+        "optimalTilingFeatures": 2147605891,
+        "sampled": true,
+        "linearFilter": true
+      },
+      {
+        "format": 15,
+        "name": "R8_SRGB",
+        "optimalTilingFeatures": 0,
+        "sampled": false,
+        "linearFilter": false
+      },
+      {
+        "format": 16,
+        "name": "R8G8_UNORM",
+        "optimalTilingFeatures": 2147605891,
+        "sampled": true,
+        "linearFilter": true
+      },
+      {
+        "format": 22,
+        "name": "R8G8_SRGB",
+        "optimalTilingFeatures": 0,
+        "sampled": false,
+        "linearFilter": false
+      },
+      {
+        "format": 23,
+        "name": "R8G8B8_UNORM",
+        "optimalTilingFeatures": 119809,
+        "sampled": true,
+        "linearFilter": true
+      },
+      {
+        "format": 29,
+        "name": "R8G8B8_SRGB",
+        "optimalTilingFeatures": 49153,
+        "sampled": true,
+        "linearFilter": false
+      },
+      {
+        "format": 37,
+        "name": "R8G8B8A8_UNORM",
+        "optimalTilingFeatures": 2147605891,
+        "sampled": true,
+        "linearFilter": true
+      },
+      {
+        "format": 43,
+        "name": "R8G8B8A8_SRGB",
+        "optimalTilingFeatures": 122241,
+        "sampled": true,
+        "linearFilter": true
+      }
+    ]
+  }
+]

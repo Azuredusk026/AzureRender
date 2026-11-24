@@ -1,0 +1,10 @@
+import json,os,re,subprocess
+from pathlib import Path
+root=Path.cwd();run=Path(__file__).resolve().parent;cmake=Path('D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe');target=re.search(r'add_executable\(\s*(\w+)\s+tests/MaterialDocumentTests\.cpp',(root/'CMakeLists.txt').read_text()).group(1);env=os.environ.copy();env.update(VCPKG_ROOT='D:/Tools/vcpkg',VULKAN_SDK='D:/Tools/VulkanSDK/1.4.350.0',DOTNET_ROOT='D:/Tools/dotnet9',DOTNET_CLI_HOME='D:/Tools/dotnet-home',NUGET_PACKAGES='D:/Tools/nuget-packages',DOTNET_PROCESSOR_COUNT='1',PYTHONUTF8='1');env['PATH']=str(root/'build/reinstall-environment/venv/Scripts')+';D:/Tools/Python311;D:/Tools/dotnet9;D:/Tools/VulkanSDK/1.4.350.0/Bin;'+env['PATH'];directory=root/'build/ninja-msvc-release'
+with (run/'red-cpu-build.log').open('wb') as log:subprocess.run([str(root/'tools/msvc_env.bat'),str(cmake),'--build',str(directory),'--target',target,'--parallel','2'],env=env,stdout=log,stderr=log,check=True)
+ctest=str(cmake.with_name('ctest.exe'));listing=json.loads(subprocess.check_output([ctest,'--test-dir',str(directory),'--show-only=json-v1'],env=env));selected=[row['name'] for row in listing['tests'] if Path(row['command'][0]).stem==target];assert len(selected)==1;test=selected[0]
+old=run/'red-cpu-test.log'
+if old.exists():
+ previous=run/'red-cpu-rejected-empty-selection.log';assert not previous.exists();old.rename(previous)
+with (run/'red-cpu-test.log').open('wb') as log:result=subprocess.run([ctest,'--test-dir',str(directory),'-R','^'+re.escape(test)+'$','--no-tests=error','--output-on-failure'],env=env,stdout=log,stderr=log)
+text=(run/'red-cpu-test.log').read_text();assert result.returncode!=0 and 'environmentLighting' in text and 'unknown field' in text and '1/1 Test' in text;record=dict(status='red-confirmed',target=target,test=test,reason='Complete material import rejects the missing environmentLighting contract.',exitCode=result.returncode);(run/'red-cpu.json').write_bytes((json.dumps(record,indent=2)+'\n').encode());print(json.dumps(record))

@@ -2,9 +2,11 @@
 #include "scene/Frustum.hpp"
 #include "scene/TransformSystem.hpp"
 #include "scene/SceneDescription.hpp"
+#include "scene/DirectionalLightSelection.hpp"
 
 #include <cassert>
 #include <cmath>
+#include <stdexcept>
 
 #ifdef _WIN32
 #include <crtdbg.h>
@@ -151,5 +153,36 @@ int main() {
     static_cast<void>(azurerender::scene::resolveNodeWorldTransforms(
         description, &sceneCycles));
     assert(sceneCycles > 0);
+    azurerender::scene::SceneLightDesc sun;
+    sun.id="b";sun.shape.type=azurerender::LightKind::Directional;sun.intensity=2;
+    std::vector<azurerender::scene::SceneLightDesc> suns{sun};
+    sun.id="a";suns.push_back(sun);
+    assert(azurerender::scene::primaryDirectionalLight(suns)->id=="a");
+    suns[0].intensity=3;
+    assert(azurerender::scene::primaryDirectionalLight(suns)->id=="b");
+    suns[0].enabled=false;suns[1].intensity=0;
+    assert(!azurerender::scene::primaryDirectionalLight(suns));
+    using Receiver=azurerender::scene::DirectionalLightReceiver;
+    const auto requireDirectional=[](bool valid){if(!valid)throw std::runtime_error("Directional receiver selection mismatch");};
+    auto environmentSun=sun;environmentSun.id="environment";environmentSun.intensity=4;
+    environmentSun.shape.receivers.surfaces=true;environmentSun.shape.receivers.characters=false;
+    auto characterSun=sun;characterSun.id="character";characterSun.intensity=1;
+    characterSun.shape.receivers.surfaces=false;characterSun.shape.receivers.characters=true;
+    std::vector<azurerender::scene::SceneLightDesc> receiverSuns{environmentSun,characterSun};
+    requireDirectional(azurerender::scene::primaryDirectionalLight(receiverSuns)->id=="environment");
+    requireDirectional(azurerender::scene::primaryDirectionalLight(receiverSuns,Receiver::Surfaces)->id=="environment");
+    requireDirectional(azurerender::scene::primaryDirectionalLight(receiverSuns,Receiver::Characters)->id=="character");
+    receiverSuns[1].intensity=8;
+    requireDirectional(azurerender::scene::primaryDirectionalLight(receiverSuns,Receiver::Surfaces)->id=="environment");
+    receiverSuns[1].enabled=false;
+    requireDirectional(!azurerender::scene::primaryDirectionalLight(receiverSuns,Receiver::Characters));
+    receiverSuns[0].shape.receivers.surfaces=false;
+    requireDirectional(!azurerender::scene::primaryDirectionalLight(receiverSuns,Receiver::Surfaces));
+    bool rejectedReceiver=false;
+    try{azurerender::scene::primaryDirectionalLight(receiverSuns,static_cast<Receiver>(99));}
+    catch(const std::invalid_argument&){rejectedReceiver=true;}
+    requireDirectional(rejectedReceiver);
+    suns[0].enabled=true;suns[0].shape.type=azurerender::LightKind::Point;
+    assert(!azurerender::scene::primaryDirectionalLight(suns));
     return 0;
 }

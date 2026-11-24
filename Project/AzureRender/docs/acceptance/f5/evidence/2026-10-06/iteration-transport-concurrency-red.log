@@ -1,0 +1,4 @@
+{"queryElapsedSeconds": 0.9369999999980791, "value": "running"}
+Traceback (most recent call last):
+  File "<stdin>", line 19, in <module>
+AssertionError: Pending condition wait blocks independent control query

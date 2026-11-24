@@ -2,8 +2,12 @@
 
 #include "rhi/GpuAllocator.hpp"
 #include "rhi/Rhi.hpp"
+#include "rhi/PipelineInspection.hpp"
 
 #include <functional>
+#include <unordered_map>
+#include <mutex>
+#include <atomic>
 
 namespace azurerender::rhi {
 
@@ -11,19 +15,41 @@ namespace azurerender::rhi {
 // callers destroy through the matching destroy methods.
 class VulkanRhi final : public IRhi {
 public:
+    struct CacheUsage {std::uint64_t requests=0,hits=0,feedback=0;};
+    CacheUsage pipelineCacheUsage()const noexcept{return {cacheRequests_.load(),cacheHits_.load(),cacheFeedback_.load()};}
     VulkanRhi(
         VkDevice device,
         VkPhysicalDevice physicalDevice,
         VkQueue graphicsQueue,
         VkCommandPool commandPool,
-        GpuAllocator& allocator)
+        GpuAllocator& allocator, bool samplerAnisotropyEnabled=false,
+        PipelineInspection* pipelineInspection=nullptr,bool sampleShadingEnabled=false,bool exactDepthBiasEnabled=false,
+        VkPipelineCache pipelineCache=VK_NULL_HANDLE, bool shaderFloatControls2Enabled=false)
         : device_(device),
           physicalDevice_(physicalDevice),
           graphicsQueue_(graphicsQueue),
           commandPool_(commandPool),
-          allocator_(&allocator) {}
+          samplerAnisotropyEnabled_(samplerAnisotropyEnabled),allocator_(&allocator),
+          pipelineInspection_(pipelineInspection),sampleShadingEnabled_(sampleShadingEnabled),exactDepthBiasEnabled_(exactDepthBiasEnabled),pipelineCache_(pipelineCache),
+          shaderFloatControls2Enabled_(shaderFloatControls2Enabled) {
+        if(pipelineCache_&&physicalDevice_){VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);cacheFeedbackEnabled_=properties.apiVersion>=VK_API_VERSION_1_3;}
+    }
 
     GpuAllocator& allocator() override { return *allocator_; }
+    bool supportsSampledImage(VkFormat format,bool linearFilter) const override;
+    bool supportsStorageImage(VkFormat format) const override;
+    bool supportsFragmentStorageBuffers(VkDeviceSize bytes,std::uint32_t count=1) const override {
+        if(!physicalDevice_||!bytes||!count)return false;
+        VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);
+        return bytes<=properties.limits.maxStorageBufferRange&&count<=properties.limits.maxPerStageDescriptorStorageBuffers
+            &&count<=properties.limits.maxDescriptorSetStorageBuffers;
+    }
+    VkSampleCountFlags imageSampleCounts(VkFormat,VkImageUsageFlags) const override;
+    bool supportsShaderFloatControls2() const noexcept { return shaderFloatControls2Enabled_; }
+    bool supportsSampleShading() const noexcept override {return sampleShadingEnabled_;}
+    bool supportsExactDepthBias() const noexcept override {return exactDepthBiasEnabled_;}
+    bool supportsSampledImageViewMapping() const noexcept override {return true;}
+    VkImageView createMappedSampledImageView(VkImage,VkFormat,std::uint32_t,const VkComponentMapping&) override;
 
     void copyBuffer(
         const GpuBuffer& source,
@@ -38,7 +64,8 @@ public:
         const GpuBuffer& source,
         const GpuImage& destination,
         std::uint32_t width,
-        std::uint32_t height) override;
+        std::uint32_t height,
+        std::uint32_t mipLevels = 1, std::uint32_t bytesPerTexel = 4) override;
     void clearImage(const GpuImage& image) override;
     void generateMipmaps(
         const GpuImage& image,
@@ -52,7 +79,9 @@ public:
         VkFormat format,
         VkImageAspectFlags aspect,
         std::uint32_t mipLevels,
-        std::uint32_t baseMipLevel = 0) override;
+        std::uint32_t baseMipLevel = 0,
+        VkImageViewType viewType = VK_IMAGE_VIEW_TYPE_2D,
+        std::uint32_t arrayLayers = 1) override;
     void destroyImageView(VkImageView view) override;
     VkSampler createSampler(const SamplerDesc& desc) override;
     void destroySampler(VkSampler sampler) override;
@@ -101,7 +130,23 @@ private:
     VkPhysicalDevice physicalDevice_ = VK_NULL_HANDLE;
     VkQueue graphicsQueue_ = VK_NULL_HANDLE;
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
+    bool samplerAnisotropyEnabled_ = false;
     GpuAllocator* allocator_ = nullptr;
+    PipelineInspection* pipelineInspection_ = nullptr;
+    bool sampleShadingEnabled_=false;
+    bool exactDepthBiasEnabled_=false;
+    std::unordered_map<VkRenderPass,VkSampleCountFlagBits> renderPassSamples_;
+    std::mutex renderPassMutex_;
+    VkPipelineCache pipelineCache_=VK_NULL_HANDLE;
+    bool cacheFeedbackEnabled_=false;
+    bool shaderFloatControls2Enabled_ = false;
+    std::atomic<std::uint64_t> cacheRequests_{0},cacheHits_{0},cacheFeedback_{0};
+    void notePipelineCache(const VkPipelineCreationFeedback& feedback)noexcept{
+        if(!pipelineCache_)return;
+        cacheRequests_.fetch_add(1,std::memory_order_relaxed);
+        if(feedback.flags&VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT){cacheFeedback_.fetch_add(1,std::memory_order_relaxed);
+            if(feedback.flags&VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT)cacheHits_.fetch_add(1,std::memory_order_relaxed);}
+    }
 };
 
 // Records onto a live VkCommandBuffer. Created per frame by the engine.
@@ -136,6 +181,7 @@ public:
         const void* data,
         std::uint32_t size) override;
     void bindVertexBuffer(VkBuffer buffer, VkDeviceSize offset) override;
+    void bindVertexStream(std::uint32_t binding,VkBuffer buffer,VkDeviceSize offset) override;
     void bindIndexBuffer(VkBuffer buffer, VkDeviceSize offset) override;
     void draw(std::uint32_t vertexCount) override;
     void drawIndexed(
@@ -151,6 +197,7 @@ public:
         std::uint32_t groupCountZ) override;
     void imageBarrier(const ImageBarrierDesc& barrier) override;
     void bufferBarrier(const BufferBarrierDesc& barrier) override;
+    void bufferBarriers(const BufferBarrierDesc* barriers, std::size_t count) override;
     void clearColorImage(
         VkImage image,
         VkImageLayout layout,
@@ -159,6 +206,7 @@ public:
         VkImage image,
         VkBuffer buffer,
         VkExtent2D extent) override;
+    void copyDepthImageToBuffer(VkImage image,VkBuffer buffer,VkExtent2D extent) override;
     void writeTimestamp(
         VkQueryPool pool,
         std::uint32_t query,

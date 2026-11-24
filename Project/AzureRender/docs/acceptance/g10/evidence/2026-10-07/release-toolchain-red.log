@@ -1,0 +1,62 @@
+[0/1] Re-running CMake...
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+  * brotli:x64-windows@1.2.0 -- git+https://github.com/microsoft/vcpkg@0fb79bb13588702a9e06057745b4aed95ce5c861
+  * bzip2[core,tool]:x64-windows@1.0.8#6 -- git+https://github.com/microsoft/vcpkg@2d029da682847c5ebdc54e4dbea001331a02207e
+  * freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3 -- git+https://github.com/microsoft/vcpkg@37a2b08e48b987c9b2a45a075fed1bc382e8de03
+    glfw3:x64-windows@3.5.1 -- git+https://github.com/microsoft/vcpkg@983a9c6ea042da294d61cb405600725dd7c22bbd
+  * imath:x64-windows@3.2.2 -- git+https://github.com/microsoft/vcpkg@b167f9479ce8752a2839c39ee8f52c11af4c0266
+  * itlib:x64-windows@1.12.2 -- git+https://github.com/microsoft/vcpkg@8a453b8f5e7fdbda2367527993839428ec50343f
+    joltphysics:x64-windows@5.6.0 -- git+https://github.com/microsoft/vcpkg@2eab0b6e73bfbe491fa0ffb297fd3ffdb6bf4ecf
+  * libdeflate[compression,core,decompression,gzip,zlib]:x64-windows@1.25 -- git+https://github.com/microsoft/vcpkg@ceffc2e1864a1a1da49e655da03c323723a9816d
+  * libpng:x64-windows@1.6.58 -- git+https://github.com/microsoft/vcpkg@909d98e06046a0901fd11300b3d725d6a80d27bf
+    lua:x64-windows@5.4.8 -- git+https://github.com/microsoft/vcpkg@062ae235ae46d4bce8b00be2c74667e0763cc2c1
+    miniaudio:x64-windows@0.11.25 -- git+https://github.com/microsoft/vcpkg@f019711e3ca3673819cc9b8436af74b095dcb580
+  * nlohmann-json:x64-windows@3.12.0#2 -- git+https://github.com/microsoft/vcpkg@ac3b8821cf486e45dd543bef2a4ba1d1ba230258
+    openexr:x64-windows@3.4.13 -- git+https://github.com/microsoft/vcpkg@48521629e41c4a321b28dc3db54695be41c66e2f
+  * openjph:x64-windows@0.31.0 -- git+https://github.com/microsoft/vcpkg@ad25bd553f9d4644ed6a978f8a6fc5d6387a923b
+    rmlui[core,freetype]:x64-windows@6.3 -- git+https://github.com/microsoft/vcpkg@190d18bbd429a7eab3a01d54051362e47538bfb0
+  * robin-hood-hashing:x64-windows@3.11.5#2 -- git+https://github.com/microsoft/vcpkg@1a989171742275cc32060ed37157eeb0efcdc739
+    sol2:x64-windows@3.5.0#1 -- git+https://github.com/microsoft/vcpkg@b3089bcbf6e652b82348192c6289d0ba2d0d9fe7
+    stb:x64-windows@2024-07-29#1 -- git+https://github.com/microsoft/vcpkg@c362152d1d02973e7b1ce777960f8a6876656560
+    tinygltf:x64-windows@3.0.0#1 -- git+https://github.com/microsoft/vcpkg@9c983959bc083131a4f5ca06ea51178a3e5a04b1
+  * vcpkg-cmake:x64-windows@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:x64-windows@2026-07-21 -- git+https://github.com/microsoft/vcpkg@51befcb03097f8d19c1c59f9ec3625e69d85322a
+    vulkan-memory-allocator:x64-windows@3.4.0 -- git+https://github.com/microsoft/vcpkg@a5328a01836eccf4c520e20e58f4d45d36cd1035
+  * zlib:x64-windows@1.3.2#1 -- git+https://github.com/microsoft/vcpkg@f49b05c666425471a7f6dc8b6156e9b3675a3c90
+The following packages will be built and installed:
+  * clipper2:x64-windows@2.0.1 -- git+https://github.com/microsoft/vcpkg@e9126ece39a7ed941015a59e631a41767189d703
+  * hwloc:x64-windows@2.11.2 -- git+https://github.com/microsoft/vcpkg@4b14fa65f32abe3d816a08d5d37aaf183372338c
+    manifold:x64-windows@3.5.2 -- git+https://github.com/microsoft/vcpkg@5258540ea23ad2f4477e4bb235cb73d2fab7b7c0
+  * tbb[core,hwloc]:x64-windows@2023.1.0 -- git+https://github.com/microsoft/vcpkg@afe9558eca7dfd8b444515866b4c74733d20c8b9
+Additional packages (*) will be modified to complete this operation.
+Restored 0 package(s) from C:\Users\23587\AppData\Local\vcpkg\archives in 1.14 ms. Use --debug to see more details.
+Installing 1/4 hwloc:x64-windows@2.11.2...
+Building hwloc:x64-windows@2.11.2...
+C:\Users\23587\AppData\Local\vcpkg\registries\git-trees\4b14fa65f32abe3d816a08d5d37aaf183372338c: info: installing from git registry git+https://github.com/microsoft/vcpkg@4b14fa65f32abe3d816a08d5d37aaf183372338c
+Downloading https://github.com/open-mpi/hwloc/archive/hwloc-2.11.2.tar.gz -> open-mpi-hwloc-hwloc-2.11.2.tar.gz
+warning: Download https://github.com/open-mpi/hwloc/archive/hwloc-2.11.2.tar.gz failed -- retrying after 1000ms
+warning: Download https://github.com/open-mpi/hwloc/archive/hwloc-2.11.2.tar.gz failed -- retrying after 2000ms
+warning: Download https://github.com/open-mpi/hwloc/archive/hwloc-2.11.2.tar.gz failed -- retrying after 4000ms
+Successfully downloaded open-mpi-hwloc-hwloc-2.11.2.tar.gz
+-- Extracting source C:/Users/23587/AppData/Local/vcpkg/downloads/open-mpi-hwloc-hwloc-2.11.2.tar.gz
+-- Applying patch fix_shared_win_build.patch
+-- Applying patch stdout_fileno.patch
+-- Using source at D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/vcpkg_installed/vcpkg/blds/hwloc/src/loc-2.11.2-a8fd08dd1a.clean
+-- Getting CMake variables for x64-windows
+Downloading msys2-autoconf-wrapper-20240607-1-any.pkg.tar.zst, trying https://mirror.msys2.org/msys/x86_64/autoconf-wrapper-20240607-1-any.pkg.tar.zst
+Successfully downloaded msys2-autoconf-wrapper-20240607-1-any.pkg.tar.zst
+Downloading msys2-automake-wrapper-20240607-1-any.pkg.tar.zst, trying https://mirror.msys2.org/msys/x86_64/automake-wrapper-20240607-1-any.pkg.tar.zst
+ninja: error: rebuilding 'build.ninja': subcommand failed
+FAILED: [code=1] build.ninja 
+"C:\Program Files\CMake\bin\cmake.exe" --regenerate-during-build -SD:\Assigment\2609\FYP\Project\AzureRender -BD:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\build_provenance.py", line 70, in <module>
+    main()
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\build_provenance.py", line 58, in main
+    subprocess.run(["cmake", "--build", str(args.build_dir), "--config", args.config], check=True)
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['cmake', '--build', 'build\\ninja-msvc-release', '--config', 'Release']' returned non-zero exit status 1.

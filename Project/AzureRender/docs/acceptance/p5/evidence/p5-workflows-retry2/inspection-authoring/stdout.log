@@ -1,0 +1,41 @@
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+Editor viewport render extent: 1920x1080
+Scene renderer: sample (sceneType=sample)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Scene renderer: sample (sceneType=sample)
+ECS visible renderables: 1
+Editor viewport resources rebuilt: 1362x680
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Scene renderer: sample (sceneType=sample)
+Rendered frames: 1429
+Allocator after unload: buffers=0 images=0

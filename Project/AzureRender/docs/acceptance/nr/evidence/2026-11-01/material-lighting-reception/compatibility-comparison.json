@@ -1,0 +1,90 @@
+{
+  "status": "measured",
+  "visualAcceptance": "failed-user-review",
+  "checks": [
+    {
+      "name": "full-world-hidden",
+      "frames": 12,
+      "exactFrames": 5,
+      "differentFrames": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "near-default-compatibility",
+      "frames": 1,
+      "exactFrames": 1,
+      "differentFrames": []
+    }
+  ],
+  "headRegions": [
+    {
+      "region": "hair-crown",
+      "bounds": [
+        710,
+        400,
+        820,
+        550
+      ],
+      "ssim": 0.9998376369476318,
+      "medianLuminanceRelativeError": 0.0,
+      "passed": true
+    },
+    {
+      "region": "hair-fringe",
+      "bounds": [
+        700,
+        570,
+        800,
+        650
+      ],
+      "ssim": 0.999843418598175,
+      "medianLuminanceRelativeError": 0.00044631264379278767,
+      "passed": true
+    },
+    {
+      "region": "face-cheek",
+      "bounds": [
+        705,
+        852,
+        795,
+        885
+      ],
+      "ssim": 0.9997974038124084,
+      "medianLuminanceRelativeError": 0.0,
+      "passed": true
+    },
+    {
+      "region": "face-chin",
+      "bounds": [
+        770,
+        960,
+        810,
+        985
+      ],
+      "ssim": 0.9997776746749878,
+      "medianLuminanceRelativeError": 0.0,
+      "passed": true
+    },
+    {
+      "region": "eye-left",
+      "bounds": [
+        625,
+        784,
+        683,
+        814
+      ],
+      "ssim": 0.9986740946769714,
+      "medianLuminanceRelativeError": 0.01735443050793874,
+      "passed": true
+    }
+  ],
+  "headCriteriaPassed": true,
+  "strictCompatibilityPassed": false
+}

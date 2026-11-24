@@ -1,0 +1,108 @@
+{
+  "editor": "4d85afc36d2fb7b5df9aabe2a75ee5c930bf4ec6",
+  "transparency": "4ee0af366ef3e2f89a437c1792e1a5d7dd6dde76",
+  "preIntegrationTree": "8e5ce36879703b08b1ff16675d35947439bf7489",
+  "checkedProductionExecutable": "64edb3d40b4529b8063e9cfc5663ec84dfa444feda6df599a329b71e72c544c9",
+  "checkedPlayer": "50bbae05ede60c6aebc301b388d2f8a75914eb7391ab1f459ea766f653d82e39",
+  "driver": "595.79",
+  "managedRuntimeCommit": "9ac4fb4a29e458d960bffc7d541dd29707b13837",
+  "runtimeVersion": "9.0.22",
+  "controlledSourceCompositionSha256": "3602fef488f4be0f372983dcfb4ca2a0d64bed95c108a88eeb912e606aca446d",
+  "registeredChecks": [
+    "AzureAssets.ProceduralHost",
+    "AzureEditor.DevtoolsHost",
+    "AzureEngine.EditorHost",
+    "AzureEngine.EditorPlayable",
+    "AzureEngine.ManagedWorkflows.coreclr",
+    "AzureEngine.ManagedWorkflows.nativeaot",
+    "AzureRender.R3Comparison",
+    "AzureRender.R3TransparentComparison",
+    "AzureRender.VisualRegression",
+    "AzureRender.VisualRegressionLegacyDescriptors",
+    "AzureRender.VisualRegressionLegacySkinning"
+  ],
+  "frozenReferences": {
+    "character_albedo_fullbody.png": "93756f932fbf0f8750095172c8e1c1aaf6a41952cd59db73c856d1e97bc82373",
+    "character_beauty_fullbody.png": "c23d4620ed136cc8367fe21e97d800bb6aeccac80c5bc06ee3851d7be824631e",
+    "character_direct_diffuse_fullbody.png": "310f136e2b62a9606a067719e29aa48ee4224edf863d9cfa206c9af29bb714f4",
+    "character_face_sdf_closeup.png": "2b482d6c4bb8c2250ddc98b1a74621350a643b50e4b20f76fc02602b36df4f6c",
+    "character_material_id_fullbody.png": "4d4e341319d327eacfcd7077931db12666fd2c67ee517e13d9b5cf1dacd99d95",
+    "character_outline_fullbody.png": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+    "character_world_normal_fullbody.png": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+  },
+  "graphicsReports": {
+    "r3-comparison.json": "daa726d4e93675d71d286c9f07193be79441b3782bee227ec6548c72497a4308",
+    "r3-transparent-comparison.json": "4200ed60f1487d17e53a0b07e99654df67fc2a10bb658e5566e4ad3c8fa3f31e",
+    "visual-regression-summary.json": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52",
+    "visual-regression-legacy-summary.json": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52",
+    "visual-regression-legacy-skinning-summary.json": "23959ae31537dcd58b669eaea848b7c15656f4f2525f47f32e8efabce7664f52"
+  },
+  "managedWorkflows": {
+    "managed-coreclr-workflow-summary.json": "d5772f234508c6697025a81ccb4486db5b248277300965506051aad09d44038e",
+    "managed-nativeaot-workflow-summary.json": "db87cd11414b7ee9c1306f70925c89e7000a57b2a72f060d78db2e5a093c34d2"
+  },
+  "nativeReplays": [
+    {
+      "workflow": "exploration",
+      "passed": true,
+      "inputSource": "Windows PostMessage + SetCursorPos + relative and dialog-click SendInput -> GLFW callbacks",
+      "physicalKeyboardMouse": "NotExecuted",
+      "dialogOpenSources": [
+        "Native Browse button (cancel)",
+        "Registered path.choose operation (file/directory selection and cancel)"
+      ],
+      "nativeFileChoose": true,
+      "nativeDirectoryChoose": true,
+      "nativeCancel": true,
+      "utf8Path": true,
+      "contentPreserved": true,
+      "gameCaptureRecovery": true,
+      "nativeImportDrop": null,
+      "tools": true,
+      "singleOnlySelects": true,
+      "doubleFrames": true,
+      "fFrames": true,
+      "rightLook": true,
+      "flight": true,
+      "flightRelease": true,
+      "outsideRelease": true,
+      "focusRelease": true,
+      "resize": true,
+      "rawMouse": true
+    },
+    {
+      "workflow": "inspector",
+      "passed": true,
+      "inputSource": "Windows PostMessage + SetCursorPos + relative and dialog-click SendInput -> GLFW callbacks",
+      "physicalKeyboardMouse": "NotExecuted",
+      "dialogOpenSources": [
+        "Native Browse button (cancel)",
+        "Registered path.choose operation (file/directory selection and cancel)"
+      ],
+      "nativeFileChoose": true,
+      "nativeDirectoryChoose": true,
+      "nativeCancel": true,
+      "utf8Path": true,
+      "contentPreserved": true,
+      "gameCaptureRecovery": null,
+      "nativeImportDrop": true,
+      "tools": true,
+      "singleOnlySelects": true,
+      "doubleFrames": true,
+      "fFrames": true,
+      "rightLook": true,
+      "flight": true,
+      "flightRelease": true,
+      "outsideRelease": true,
+      "focusRelease": true,
+      "resize": true,
+      "rawMouse": false
+    }
+  ],
+  "evidence": {
+    "build/runs/20261116-053155-nr-composed-production-long-path-2d8c57/qualification.json": "59ca67bca7c0de3c960efaed14d27c218c3d9ddc0f7730ae6ecb209f55adc3f9",
+    "build/runs/20261116-053155-nr-composed-production-long-path-2d8c57/build.json": "05bdf5480c171492736cdaeaecb567023f6faa339fff6db1f920cb29a37064f0",
+    "build/runs/20261116-053155-nr-composed-production-long-path-2d8c57/registered.xml": "fb9319eea371ef680e48d234910fc15eaf846002afa440560dc11c098bda6618",
+    "build/runs/20261116-053155-nr-composed-production-long-path-2d8c57/registry.json": "6b32be73a8d45565c06f8a0a08ade0d05f487d357b1b78bb155035d47f1431e9"
+  }
+}

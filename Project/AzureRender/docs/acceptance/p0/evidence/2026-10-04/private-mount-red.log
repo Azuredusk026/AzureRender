@@ -1,0 +1,13 @@
+...F..
+======================================================================
+FAIL: test_private_mount_name_is_rejected (__main__.GamePackageRules.test_private_mount_name_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 110, in test_private_mount_name_is_rejected
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.692s
+
+FAILED (failures=1)

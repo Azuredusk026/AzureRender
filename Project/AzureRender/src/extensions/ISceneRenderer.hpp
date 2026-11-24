@@ -4,17 +4,33 @@
 #include "render/RenderGraph.hpp"
 
 #include <ostream>
+#include <optional>
 #include <sstream>
 #include <string>
 #include <string_view>
 
 namespace azurerender {
 
+struct SceneReferenceDepthCapture {
+    VkExtent2D extent{};
+    std::uint64_t submission=0;
+    // IEEE 754 binary32 bit patterns in scene row order from bottom to top.
+    std::vector<std::uint32_t> rasterDepth;
+    std::vector<std::uint32_t> hardwareDepth;
+    // Y-pole octahedral normals use the signed axes of the selected reference frame.
+    std::vector<std::uint32_t> packedNormals;
+    std::vector<std::uint8_t> objectIds;
+    std::vector<std::uint16_t> objectVisibility;
+};
+
 struct SceneGraphResources {
     RenderGraph::ResourceId color;
     RenderGraph::ResourceId depth;
     RenderGraph::ResourceId normal;
     RenderGraph::ResourceId shadow;
+    RenderGraph::ResourceId motion=UINT32_MAX;
+    RenderGraph::ResourceId motionSurfaceDepth=UINT32_MAX;
+    RenderGraph::ResourceId displayMask=UINT32_MAX;
 };
 
 // A pluggable scene renderer: the unit that draws a scene into the engine's
@@ -40,6 +56,10 @@ public:
     // device/extents/formats/render passes are valid from this call until
     // onUnload.
     virtual void onLoad(const RenderContext& context) = 0;
+    virtual bool prepareLoad(const RenderContext& context,double budgetMs) {
+        (void)budgetMs;onLoad(context);return true;
+    }
+    virtual bool reuseScene(const RenderContext& context) { (void)context;return false; }
 
     // Rebuilds swapchain-dependent resources after a swapchain recreate.
     virtual void onSwapchainRecreate(const RenderContext& context) = 0;
@@ -49,6 +69,12 @@ public:
     // unload or recreation may overlap graph recording or execution. Frame
     // inputs copied into renderer storage remain frozen until workers join.
     virtual void updateFrame(const SceneFrameData& frame) = 0;
+
+    // Owner-thread notifications after recording workers join. Only successful
+    // queue submissions publish previous-frame state; abandoned recordings do
+    // not advance history. Neither callback may throw after queue acceptance.
+    virtual void onFrameSubmitted(std::uint64_t submission) noexcept {(void)submission;}
+    virtual void onFrameAbandoned() noexcept {}
 
     // Records the scene passes into context.commandBuffer, writing the engine
     // Scene Color / depth / normal attachments through context.sceneFramebuffer.
@@ -69,6 +95,8 @@ public:
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
         graph.attachment(pass, resources.normal, RenderGraphUsage::ColorAttachment,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        if(resources.displayMask!=UINT32_MAX)
+            graph.attachment(pass,resources.displayMask,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     }
 
     // Destroys every resource created in onLoad. The context remains valid.
@@ -105,6 +133,11 @@ public:
     // is open; the renderer writes complete `"key": value,` lines.
     virtual void appendCaptureManifestFields(std::ostream& json) const {
         (void)json;
+    }
+
+    // The host calls this after the last capture submission has completed.
+    virtual std::optional<SceneReferenceDepthCapture> readReferenceSceneDepth() const {
+        return std::nullopt;
     }
 
     // Optional hook: maps a renderer-local diagnostic index to a display name.

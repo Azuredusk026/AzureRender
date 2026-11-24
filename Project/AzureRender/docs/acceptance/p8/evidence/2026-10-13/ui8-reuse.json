@@ -1,0 +1,43 @@
+{
+  "reference": "docs/acceptance/ui8/evidence/manifest.json",
+  "artifacts": [
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+      "expected": "0043f5b342d2e1163315ecece95c5f6828c6e8044e0f64a4a2b449a19400e05e",
+      "actual": "0043f5b342d2e1163315ecece95c5f6828c6e8044e0f64a4a2b449a19400e05e",
+      "matched": true
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRender.exe",
+      "expected": "45c79c4e05da2a1317c0ae0e4a4ce8f9083a903c8e8cff2a9bdc9ee3bc8cd701",
+      "actual": "45c79c4e05da2a1317c0ae0e4a4ce8f9083a903c8e8cff2a9bdc9ee3bc8cd701",
+      "matched": true
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\\u5b89\u88c5\u7248\u5f15\u64ce\\bin\\AzureRender.exe",
+      "expected": "0043f5b342d2e1163315ecece95c5f6828c6e8044e0f64a4a2b449a19400e05e",
+      "actual": "0043f5b342d2e1163315ecece95c5f6828c6e8044e0f64a4a2b449a19400e05e",
+      "matched": true
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\\u5b89\u88c5\u7248\u5f15\u64ce\\bin\\AzurePlayer.exe",
+      "expected": "9f9cb18c46f8db31d1cb89a8a3b90a5f3608f73e1a080a091a5d85b3eed04fd9",
+      "actual": "9f9cb18c46f8db31d1cb89a8a3b90a5f3608f73e1a080a091a5d85b3eed04fd9",
+      "matched": true
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\\u5b89\u88c5\u7248\u5f15\u64ce\\bin\\AzureGameLauncher.exe",
+      "expected": "f50166d03e0d776ebda7f9e28a79bcd451106c8a533f45cb47a694664298569f",
+      "actual": "f50166d03e0d776ebda7f9e28a79bcd451106c8a533f45cb47a694664298569f",
+      "matched": true
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\\u5b89\u88c5\u7248\u5f15\u64ce\\install_manifest.json",
+      "expected": "63d6c406622eeb8f6258edc4a21223b1c16fb81c12651423f84f6e03ecf51810",
+      "actual": "63d6c406622eeb8f6258edc4a21223b1c16fb81c12651423f84f6e03ecf51810",
+      "matched": true
+    }
+  ],
+  "reusable": true,
+  "scope": "GUI Monica workflow, project recovery, content authoring and panel regressions; current delivery separately reverified."
+}

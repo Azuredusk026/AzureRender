@@ -1,0 +1,26 @@
+{
+  "name": "near-world-normalized",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\near-world-normalized.azureproject",
+    "--width",
+    "1536",
+    "--height",
+    "1536",
+    "--capture-frames",
+    "1",
+    "--fixed-frame-step",
+    "--capture-fps",
+    "60",
+    "--capture-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\native-captures\\near-world-normalized\\frames",
+    "--qa-camera",
+    "scene",
+    "--qa-light",
+    "scene",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\native-captures\\near-world-normalized\\runtime.json"
+  ],
+  "status": "running"
+}

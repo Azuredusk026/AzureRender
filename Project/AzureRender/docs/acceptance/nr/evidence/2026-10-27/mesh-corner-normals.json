@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "phase": "NR1-S4",
+  "status": "authored_corner_normals_passed_full_geometry_and_lighting_pending",
+  "source": {
+    "tools/endfield_native/mesh_corners.py": "99173ab1f0a3048407f25d69280db26ee891e89165bc5c791f8f30c7fd80001c",
+    "tools/endfield_native/mesh_uvs.py": "d02b40ea5a3c222ffa4106c290ed8a7214f46512b82439d0584ff85ff2e3eff5",
+    "tools/test_native_mesh_uvs.py": "dc07eb26e6e3ec7af0844b67d1f38a8f6e6acd8114c57c570b4bb2a8317a7e24",
+    "tools/blender/native_mesh_frames.py": "d5bd9a36e8adabbd45f29e99ec5b3d2258a6f2413295cac2c84212fe57cc8752",
+    "tools/blender/test_native_mesh_frames.py": "d872936a7af252e97c7d0d4b898527faaa22a71d84805d8210c994b6b06caec0",
+    "tools/endfield_native/build_scene_preview.py": "95c1b1541586293ac066adce556056473197ee1de14c0607c2ae5a346b982106",
+    "tools/blender/build_native_spline_clips.py": "78090b5671425ecfadcad12bc26cc67dbe00920ec223a59d9b1f9eb8fe0ea9af"
+  },
+  "tests": {
+    "cornerAndUv": 10,
+    "sourceSelectionAndBinding": 25,
+    "sceneExchange": 2,
+    "splineData": 8,
+    "blenderFrameMeshes": 2,
+    "invalidInputs": 5,
+    "generatedAndUvFreeNormals": true,
+    "blenderStorageControlMaximumError": 0.0,
+    "blenderStorageQuantizationMaximumError": 4.220656904196929e-05,
+    "blenderStorageControlBudget": 2e-05,
+    "gpuCapturesPerConfiguration": 4,
+    "configurationAndDescriptorImagesExact": true,
+    "fullCameraNormalPixelsExact": true
+  },
+  "native": {
+    "frame": 3534,
+    "events": [
+      5134,
+      5147
+    ],
+    "indicesPerDraw": 663,
+    "sourceGpuVertices": 408,
+    "sourceObjVertices": 406,
+    "positionsMaximumDelta": 5.960464477539063e-08,
+    "uvMaximumDelta": 0.0,
+    "maximumNormalDegreesBefore": 95.120112867099,
+    "maximumNormalDegreesAfter": 0.15822591378411469
+  },
+  "normalImages": [
+    {
+      "pixel": [
+        400,
+        950
+      ],
+      "beforeDegrees": 9.083289123366976,
+      "afterDegrees": 0.6295886607088075
+    },
+    {
+      "pixel": [
+        2100,
+        950
+      ],
+      "beforeDegrees": 8.628221925454707,
+      "afterDegrees": 0.5222989905337211
+    }
+  ],
+  "beauty": {
+    "changedPixels": 187667,
+    "maximumDelta": 184,
+    "meanDelta": 0.7695981626157408,
+    "nativeMeanAbsoluteErrorBefore": 28.6567736364294,
+    "nativeMeanAbsoluteErrorAfter": 28.858739601417824
+  },
+  "productionBuilder": {
+    "entities": 2,
+    "resources": 6,
+    "authoredNormalStreams": 6,
+    "finalGeometryBytesExact": true,
+    "materialAndImageBytesUnchanged": true
+  },
+  "architecture": {
+    "runtimeLayoutChanged": false,
+    "additionalShaderVariants": 0,
+    "sharedCornerMatcher": true,
+    "consumers": [
+      "static scene builder",
+      "native spline builder"
+    ]
+  },
+  "visualPromotion": {
+    "promoted": false,
+    "acceptedReference": "build/runs/20261027-211548-native-surface-normal-closure-cb9114/camera-candidate/fixed-beauty.azureproject",
+    "diagnosticCandidate": "build/runs/20261027-213829-native-faceted-panel-normal-5e8c9e/camera-candidate/fixed-beauty.azureproject"
+  },
+  "run": "build/runs/20261027-213829-native-faceted-panel-normal-5e8c9e",
+  "artifacts": {
+    "native-panel-history.json": "dbe17bea8135d1a55df70cd7f1018cf9fd0f61cf7e8f147d7d95973f473a1ce8",
+    "panel-streams.json": "d498449fc4574c7f42106e9419894f4535c1f29e8b7736639b29984e2d0f5c44",
+    "panel-vertex-comparison.json": "bd91254d8859e5b2fa1606a4331ec5a7977e1abb906871b9854dfbffa7de1aec",
+    "panel-vertex-corrected.json": "0dc7e1f3c755d7e9623699c38167e4c4fe83024e480d59db29550e2f26c95dda",
+    "panel-normal-image-comparison.json": "7907e8607c25bfe39bc8e0ea43dd80647e73440a04122c4e41044365919d83fa",
+    "beauty-comparison.json": "a7386a1d28ca92e5a6d44b986871d655e31104944003901a222c72da23889afb",
+    "frame-storage-control-red/summary.json": "76ff002d6fdb83d5dc4397ac4b7ea1bb28c976feaa8da08cc75df1cc560f63ee",
+    "frame-final/summary.json": "74bef40e03ce4163f245329e0e2a7b43c205b24572d91943accd811f91493164",
+    "corner-final.log": "2b1c5709246b3f086b16731564df35e110f2b5a1535eeb8759bce2cb622bbcf5",
+    "source-regression-all.log": "1198a2df7813cd75a4f1a013f9699c7e7354877bad60ec6c6ecf4f26685c8997",
+    "exchange-regression.log": "1b78563076dd035d5ba38de82df59ca1c1d0832796babdb2d1717066b0a5e041",
+    "spline-regression.log": "d7811b4bfe25d7e0c1be763690d30768631820097fc32400a15d62571fa7846d",
+    "panel-builder-final/audit.json": "a279abd324565bb0cf743907962e40b022a6ca289ae7c6389498fc3a0b4a5787",
+    "candidate-inputs.json": "fc680a13ae853594a9c82a313b250e902cbbf6c4939cd0c78cf74b26f1bd79d5",
+    "shaded-normal-release.log": "6f2d6d7fbb7b542f9214f367d0a5e30bf4e8157adb6bd5eff5b3e93bb7f162e9",
+    "shaded-normal-release/frames/frame_000000.png": "216867a46211aa358ef87389a0d2c7fdfdcc1ddb7e10723d49fff5c8df438454",
+    "shaded-normal-release/frames/capture_manifest.json": "c85f1101ef5fc3b76513f29b9ac9f9520476d1fee9195abd010b3be4a0c9955d",
+    "beauty-release.log": "857f6ff81c4ec7ef7c30d2cc6a7159a2a5b4d77a2e91b25d005632fbb44c0f30",
+    "beauty-release/frames/frame_000000.png": "62ad32704a93792862ee958a25711a75ce73de3d5392a52d98bbacd0e18e1070",
+    "beauty-release/frames/capture_manifest.json": "e727896d732983f013ac5ff34ab23cb710608af723217b283944360b966943e0",
+    "mini-v3-debug-indexed-shaded-normal.log": "715873dd107ca4c298320e93d44f598ec69ebdaf373abb9ce0bf11a8387670df",
+    "mini-v3-debug-indexed-shaded-normal/frames/frame_000000.png": "a72bb90aa9ff3570c8cd65451a25df09f4899f9f29d3b6ae943d45b5b7b3c7a5",
+    "mini-v3-debug-indexed-albedo.log": "af52c972e5b502f39bb55cf22ce5dca2ae240c805530cb90833138ff9072a753",
+    "mini-v3-debug-indexed-albedo/frames/frame_000000.png": "aac2fd3645a6656f7e32dad8c0a9750286c30e9cc44dad9c7807be5b7af2c1d5",
+    "mini-v3-debug-fixed-shaded-normal.log": "fb04bcbb49deb95e2e3073f83d8920a64a9dcb88bbb309eece560b4cafd28c84",
+    "mini-v3-debug-fixed-shaded-normal/frames/frame_000000.png": "a72bb90aa9ff3570c8cd65451a25df09f4899f9f29d3b6ae943d45b5b7b3c7a5",
+    "mini-v3-debug-fixed-albedo.log": "b107afaf0e089378b32875bdc2094039160f3c063ea18ad2a541aa8d32cda193",
+    "mini-v3-debug-fixed-albedo/frames/frame_000000.png": "aac2fd3645a6656f7e32dad8c0a9750286c30e9cc44dad9c7807be5b7af2c1d5",
+    "mini-v3-release-indexed-shaded-normal.log": "8567d76b6d7609b9b98b28c2472afab5ab9618f84c9f7ebc452b1a3a06e93dbf",
+    "mini-v3-release-indexed-shaded-normal/frames/frame_000000.png": "a72bb90aa9ff3570c8cd65451a25df09f4899f9f29d3b6ae943d45b5b7b3c7a5",
+    "mini-v3-release-indexed-albedo.log": "0970808fa623bf93ba5bcd3a5b930f47b9d4c4319fcbeb5734b13f488c710273",
+    "mini-v3-release-indexed-albedo/frames/frame_000000.png": "aac2fd3645a6656f7e32dad8c0a9750286c30e9cc44dad9c7807be5b7af2c1d5",
+    "mini-v3-release-fixed-shaded-normal.log": "b226be294a7583a5875bdb1e80876af2d84814225917799c8903e86cd99ea41b",
+    "mini-v3-release-fixed-shaded-normal/frames/frame_000000.png": "a72bb90aa9ff3570c8cd65451a25df09f4899f9f29d3b6ae943d45b5b7b3c7a5",
+    "mini-v3-release-fixed-albedo.log": "c79967b396ce81b184e98d62c493d3ff61e0489192346774ce60349f99626d60",
+    "mini-v3-release-fixed-albedo/frames/frame_000000.png": "aac2fd3645a6656f7e32dad8c0a9750286c30e9cc44dad9c7807be5b7af2c1d5",
+    "5134/indices.bin": "ad7a96493ec8e51ed252f6af03e2f9f231222ac9db91e916a867c39d5e8ac3bc",
+    "5134/input-0.bin": "5e61ca25b11d47cdac50daaf7fb04d0d278e7af54754063dea6d31892760f0c4",
+    "5134/input-1.bin": "82abf38770dabbd57ce85f23d582a01dd39ef20bc6678b66e74a92cd698a46a1",
+    "5134/pixel-cb0.bin": "c588caf1f324c256cf22285ccb1dc0317f6373219e0af467189648d550114007",
+    "5134/pixel-cb1.bin": "54f67c581371c5cac9ea88cd78b64c79d0153b1ad9038ddd77a5186f062f4dc1",
+    "5134/pixel-cb2.bin": "85bcf925300d8cb2f656b51ff1b2acc1398ce5201d8f3e5d80f3e1cc115b0a9c",
+    "5134/pixel-cb3.bin": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+    "5134/pixel.asm": "cb644c4532a6329f6be5c283317608c250d64eda952eb7e221ad1ab0be6eadd4",
+    "5134/pixel.dxbc": "0f4dfe669d4642ddd48c29c571b24da0baf56e1d121f7ccd1c21a77b476f954a",
+    "5134/post-indices.bin": "5f84447cc50e6a1aaf4c6d00e680887f6528354cf93dae4c15421b0eeff24bea",
+    "5134/post.bin": "0eb88517e3cd07a067b4e347800bd447ad768eb1fe91162735b93b22885a1f0e",
+    "5134/vertex-cb0.bin": "89e555032b7ff5fef4ea1889d07984f16f5cb631167a2a6baaa9196b87dc72f9",
+    "5134/vertex-cb1.bin": "c588caf1f324c256cf22285ccb1dc0317f6373219e0af467189648d550114007",
+    "5134/vertex-cb2.bin": "54f67c581371c5cac9ea88cd78b64c79d0153b1ad9038ddd77a5186f062f4dc1",
+    "5134/vertex.asm": "2054a7321af20e0ca6d2546ad87d9fb5f52274add5b2f4adb80264a603b6f688",
+    "5134/vertex.dxbc": "ea49772c611f653b18c70199bb0dfcea284ea1f0af795fd8defc9f4d8e6e2b57",
+    "5147/indices.bin": "707d321e52054eb304083a52b51718d0d0715e95da44d25a05b0ebd773b26ef0",
+    "5147/input-0.bin": "d950fee1b967328ce82a8e6aabe845f2097e9730e74b4ff79c3a59c10ac974cc",
+    "5147/input-1.bin": "595bd5b28aecf52ed113e23b013e03108867d747deff0589f064065a209d18b5",
+    "5147/pixel-cb0.bin": "c588caf1f324c256cf22285ccb1dc0317f6373219e0af467189648d550114007",
+    "5147/pixel-cb1.bin": "f5e4d570fc3bb46d0755f2d79ed00420246dacd055989e97d6faed5be39c4cd2",
+    "5147/pixel-cb2.bin": "85bcf925300d8cb2f656b51ff1b2acc1398ce5201d8f3e5d80f3e1cc115b0a9c",
+    "5147/pixel-cb3.bin": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+    "5147/pixel.asm": "cb644c4532a6329f6be5c283317608c250d64eda952eb7e221ad1ab0be6eadd4",
+    "5147/pixel.dxbc": "0f4dfe669d4642ddd48c29c571b24da0baf56e1d121f7ccd1c21a77b476f954a",
+    "5147/post-indices.bin": "834c612296c5e495fd28fdc8cc4b39929d859de759a8f5ef8ab0455cc863f591",
+    "5147/post.bin": "c21256af06fc602ecfc38468eee83f37be127da6ecbc175c01cea4f05621bdac",
+    "5147/vertex-cb0.bin": "89e555032b7ff5fef4ea1889d07984f16f5cb631167a2a6baaa9196b87dc72f9",
+    "5147/vertex-cb1.bin": "c588caf1f324c256cf22285ccb1dc0317f6373219e0af467189648d550114007",
+    "5147/vertex-cb2.bin": "f5e4d570fc3bb46d0755f2d79ed00420246dacd055989e97d6faed5be39c4cd2",
+    "5147/vertex.asm": "2054a7321af20e0ca6d2546ad87d9fb5f52274add5b2f4adb80264a603b6f688",
+    "5147/vertex.dxbc": "ea49772c611f653b18c70199bb0dfcea284ea1f0af795fd8defc9f4d8e6e2b57",
+    "panel-builder-final/exchange/mesh-00b1dd9cdf959b8e.glb": "f789e2927b61fcb70c89a0540e90131c1ffe406a31b400f855ae4d202f2240a7",
+    "panel-builder-final/exchange/mesh-10cf33e33f82c522.glb": "812831e125b760db9d11439bd4784b0eb00a37777a221fd0fccad29e5fc5e2db",
+    "panel-builder-final/exchange/mesh-45f0d8f79eda5688.glb": "3fd265f1ff73408b70178d5f76c99e421dc6c5a56cc087aa5d86d2126470ba64",
+    "panel-builder-final/exchange/mesh-4ecd8ca74d051137.glb": "d424b578552061fc64ce46b50b1c80b80295228ed8b8947b7d3f034804525883",
+    "panel-builder-final/exchange/mesh-68a54b1c252d294d.glb": "9d8e6629588f5031984c0d9df6195ac5f2f5bd20481c8b0b7106b1c9374a19d3",
+    "panel-builder-final/exchange/mesh-d4edcafbfc645791.glb": "796d1088d068f8050dd0871d1f3f5d986f2cab808ff3255daf46164866e9a302"
+  },
+  "remaining": [
+    "remaining static geometry rebuild",
+    "full lighting and reflection composition",
+    "native GI phase and character environment",
+    "central logistics and formal NR0–NR12 gates"
+  ]
+}

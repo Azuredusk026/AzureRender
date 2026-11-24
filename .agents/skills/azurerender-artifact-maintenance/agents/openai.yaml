@@ -1,0 +1,4 @@
+interface:
+  display_name: "AzureRender 目录维护"
+  short_description: "按天回收，以累计预算及轻量巡检管理 AzureRender 开发产物"
+  default_prompt: "使用 $azurerender-artifact-maintenance 检查并维护 AzureRender 产物目录。"

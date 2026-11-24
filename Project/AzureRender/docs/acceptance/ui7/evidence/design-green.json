@@ -1,0 +1,73 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "workflow": "scene_inspector",
+      "size": [
+        1920,
+        1080
+      ],
+      "dpi": 1,
+      "projectionSwitch": true,
+      "imageBounds": true,
+      "toolbarBounds": true
+    },
+    {
+      "workflow": "scene_inspector",
+      "size": [
+        1120,
+        720
+      ],
+      "dpi": 1,
+      "projectionSwitch": true,
+      "imageBounds": true,
+      "toolbarBounds": true
+    },
+    {
+      "workflow": "scene_inspector",
+      "size": [
+        1920,
+        1080
+      ],
+      "dpi": 1.5,
+      "projectionSwitch": true,
+      "imageBounds": true,
+      "toolbarBounds": true
+    },
+    {
+      "workflow": "exploration",
+      "size": [
+        1920,
+        1080
+      ],
+      "dpi": 1,
+      "projectionSwitch": true,
+      "imageBounds": true,
+      "toolbarBounds": true
+    },
+    {
+      "workflow": "exploration",
+      "size": [
+        1120,
+        720
+      ],
+      "dpi": 1,
+      "projectionSwitch": true,
+      "imageBounds": true,
+      "toolbarBounds": true
+    },
+    {
+      "workflow": "exploration",
+      "size": [
+        1920,
+        1080
+      ],
+      "dpi": 1.5,
+      "projectionSwitch": true,
+      "imageBounds": true,
+      "toolbarBounds": true
+    }
+  ],
+  "input": "production ImGui replay",
+  "physicalInput": "not performed"
+}

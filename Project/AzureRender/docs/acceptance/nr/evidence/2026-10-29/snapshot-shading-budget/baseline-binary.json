@@ -1,0 +1,982 @@
+{
+  "AzurePlayer.exe": {
+    "bytes": 6018560,
+    "sha256": "0d21397d0f39b1e6142f33fa36f07bbae4366722216715166d78e5e220014f42"
+  },
+  "assimp-vc143-mt.dll": {
+    "bytes": 4524544,
+    "sha256": "f853900fe16d855e725d2bde39ed147d9a3aa75ea8c07c00880f5bbae41d3ed9"
+  },
+  "brotlicommon.dll": {
+    "bytes": 137728,
+    "sha256": "96cb02cab84e18a9b49817bc1c06765238cf632d87ca17f2bd4d1d0ca042b400"
+  },
+  "brotlidec.dll": {
+    "bytes": 51712,
+    "sha256": "ea71412732111421c665ace9d28eef8f2315e6797f96c086d55e6d0a4af125f5"
+  },
+  "bz2.dll": {
+    "bytes": 76800,
+    "sha256": "e9a76d9f7a37ad7448d4933183f9be437fc9acb2168f902b235d43383b53cbda"
+  },
+  "deflate.dll": {
+    "bytes": 84992,
+    "sha256": "14ff8f7bc4afa85d0a82bb067f512e9df7545441899f9923e4574b902a0725e9"
+  },
+  "DirectXTex.dll": {
+    "bytes": 380416,
+    "sha256": "be2540f154ec779ae794e4459bba679d43045cff9693ab8fe4ec7adb1ce6a49d"
+  },
+  "FLAC.dll": {
+    "bytes": 262144,
+    "sha256": "f04fe00d836a558ab61206716d187809336c9a80ec201763b241bdc3e8699614"
+  },
+  "freetype.dll": {
+    "bytes": 701440,
+    "sha256": "b2cac200a5132b25a44b9b9101d4fad158b83b5453157d167a859204a6ce7474"
+  },
+  "glfw3.dll": {
+    "bytes": 235008,
+    "sha256": "dc77d25c48516de243d21ca7115173d9e62878731aa69ed5de4a16b857054b9b"
+  },
+  "Iex-3_4.dll": {
+    "bytes": 292864,
+    "sha256": "d29280b7356b7442c1ffe3f225a81bdaa3792800e848c26a45f9c3d691395cfd"
+  },
+  "IlmThread-3_4.dll": {
+    "bytes": 45568,
+    "sha256": "0535aebe6be70f4d8097f2306786ae35129927e29576ceac103ec6afa4dfd27b"
+  },
+  "Imath-3_2.dll": {
+    "bytes": 338944,
+    "sha256": "2d3005c21b2f2fda5b5251036b136ac2f43361c84330be7c6db74f31ea51a3af"
+  },
+  "jpeg62.dll": {
+    "bytes": 694272,
+    "sha256": "7a8e45b3c8e4a0c14d264b1bc30464dafe688cbe4d3764460ecaf50846ce5215"
+  },
+  "ktx.dll": {
+    "bytes": 1620992,
+    "sha256": "8fc5cc39d94b3595e5046458fe22e48639bfdf6ddf2ff6408b4ddbe78ccec371"
+  },
+  "kubazip.dll": {
+    "bytes": 80384,
+    "sha256": "5029a3963c25d722f8d03838191bb4fd2e10430871b9e08a897dd2bff2e5c660"
+  },
+  "liblzma.dll": {
+    "bytes": 188928,
+    "sha256": "e07c403e79748d60ea87c48d9480c28348ad1c3d450b4c2519b1fb5e1ef25b39"
+  },
+  "libmp3lame.DLL": {
+    "bytes": 371200,
+    "sha256": "86a280719ee7aa65ac3247f983b3e7df25c0ad5f46a8082aa43ead8db8636b41"
+  },
+  "libpng16.dll": {
+    "bytes": 198656,
+    "sha256": "aed14d620c5696c92d28d9f4dba9a830d857a4d8762c8c20a97dc7e45db4dc21"
+  },
+  "libsharpyuv.dll": {
+    "bytes": 25600,
+    "sha256": "e6d1601d89243e3636a283631d47bbfa15e7b0b337101feb43ff2921da047c0d"
+  },
+  "libwebp.dll": {
+    "bytes": 372736,
+    "sha256": "c4d2af9cf0616b4a3ef759f6628d934293b4019c421cbf41e16fee4357451fba"
+  },
+  "lua.dll": {
+    "bytes": 240640,
+    "sha256": "e433e0989936447e3a792df9a4e510df0736f34d5f54bce1a35a875863066a04"
+  },
+  "manifold.dll": {
+    "bytes": 2380800,
+    "sha256": "b871d619a3b56724d321313e5269efd56575192279e25df3ac8c6afd5cd2dcfa"
+  },
+  "minizip.dll": {
+    "bytes": 50176,
+    "sha256": "4ecff600748a885b60503e9d7490a71d649cc7c96ad27fac5173e4d08e345a61"
+  },
+  "ogg.dll": {
+    "bytes": 31232,
+    "sha256": "b693663624af9060821a574ce8315a8eec60f0a23ba5505f7536e22c39be1c83"
+  },
+  "OpenEXR-3_4.dll": {
+    "bytes": 850944,
+    "sha256": "554bf61472f3be1f756ed476187a1a4c6cc0b6fb01cdbb3b8ffa98f5dc54b7c1"
+  },
+  "OpenEXRCore-3_4.dll": {
+    "bytes": 312320,
+    "sha256": "f49f54723ae691ae3d6b6d41f341cb5ed8af947382c15e16ef58faa9de8df66a"
+  },
+  "openjph.0.31.dll": {
+    "bytes": 356864,
+    "sha256": "6b0b386bf8bdb4f414173280d7447bd474f8650913c98fbc0f252b965670ee8f"
+  },
+  "opus.dll": {
+    "bytes": 462336,
+    "sha256": "3f28e9b767098bd05c5cf6cf84040e43ee4ca1395ddb1d5b77313f3c50c248bd"
+  },
+  "pugixml.dll": {
+    "bytes": 204288,
+    "sha256": "6660b788632f7babd09e9723687e6e9073e9fd974ccfbd23e90220efea714a35"
+  },
+  "rmlui.dll": {
+    "bytes": 1755648,
+    "sha256": "f3d6699022e71109125adef33c851e734f9919efd239adf54d6b3ba7eea96636"
+  },
+  "tiff.dll": {
+    "bytes": 489984,
+    "sha256": "ff776f78cc8eb9aa87479777aee8343c90a0064ede41c196e02874b6fb23ab74"
+  },
+  "vorbis.dll": {
+    "bytes": 721920,
+    "sha256": "c55f6f56c4cbe81a62aaccb984dd7b975f50fb1360cb7a172b4d55c016d48b25"
+  },
+  "vorbisenc.dll": {
+    "bytes": 565248,
+    "sha256": "a520acdaf0acbeec93777b7c3b2182232aa7abc153d9af6d8c02ba537ce6c725"
+  },
+  "z.dll": {
+    "bytes": 91136,
+    "sha256": "cb2f8af6ba93d2b43bc99cc2849670eb1595625bb637a96c745e0f60079d9252"
+  },
+  "zstd.dll": {
+    "bytes": 658944,
+    "sha256": "4b66f6d3930f3e7a94a04eb81e13635fea73c0e7f835563d45780e4360ba907b"
+  },
+  "shaders/background.frag.spv": {
+    "bytes": 6396,
+    "sha256": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8"
+  },
+  "shaders/background.vert.spv": {
+    "bytes": 1316,
+    "sha256": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6"
+  },
+  "shaders/background_bindless.frag.spv": {
+    "bytes": 6460,
+    "sha256": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116"
+  },
+  "shaders/background_bindless_samples.frag.spv": {
+    "bytes": 6480,
+    "sha256": "7937f35e40fc9efc0d323b14c69f57088e8319316aad8e4a729cb17f11806ca0"
+  },
+  "shaders/background_samples.frag.spv": {
+    "bytes": 6416,
+    "sha256": "a73edda9980479f648b8a5d7bf8e90c7f702a85e6c43a985eaac2a690c2a49d3"
+  },
+  "shaders/blackhole.frag.spv": {
+    "bytes": 36488,
+    "sha256": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5"
+  },
+  "shaders/blackhole.vert.spv": {
+    "bytes": 1316,
+    "sha256": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f"
+  },
+  "shaders/blackhole_composite.frag.spv": {
+    "bytes": 928,
+    "sha256": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db"
+  },
+  "shaders/blackhole_taa.frag.spv": {
+    "bytes": 8096,
+    "sha256": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf"
+  },
+  "shaders/blackhole_taa_compute.frag.spv": {
+    "bytes": 3840,
+    "sha256": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2"
+  },
+  "shaders/bloom_composite.comp.spv": {
+    "bytes": 2384,
+    "sha256": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42"
+  },
+  "shaders/bloom_downsample.comp.spv": {
+    "bytes": 3112,
+    "sha256": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26"
+  },
+  "shaders/character_depth.frag.spv": {
+    "bytes": 3468,
+    "sha256": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e"
+  },
+  "shaders/character_depth_bindless.frag.spv": {
+    "bytes": 3772,
+    "sha256": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6"
+  },
+  "shaders/character_snapshot.frag.spv": {
+    "bytes": 321788,
+    "sha256": "9ca194bfebd37f5eb3a14cb3a8d14b06ca41082c4bc701281df931ba754ad2eb"
+  },
+  "shaders/character_snapshot_bindless.frag.spv": {
+    "bytes": 329864,
+    "sha256": "d324fe7d04d7f55b094317988b12f123e93568b101f44ea29fd6244f0ef48c30"
+  },
+  "shaders/character_snapshot_bindless_clipmap.frag.spv": {
+    "bytes": 337404,
+    "sha256": "5f91ecacd4cb36f24b0c4e9af694896b7038a5a0514cd2160f9bf3ba23c591ff"
+  },
+  "shaders/character_snapshot_bindless_clipmap_field.frag.spv": {
+    "bytes": 346876,
+    "sha256": "23cb7f32673df8cab0b1019c981a4a1b5f1f95e54b955afe8924e45042d0d633"
+  },
+  "shaders/character_snapshot_bindless_field.frag.spv": {
+    "bytes": 339336,
+    "sha256": "887a796ce2af1c96a229772be819cbce406ccb8c1143f001ca52e77a01e6de40"
+  },
+  "shaders/character_snapshot_bindless_samples.frag.spv": {
+    "bytes": 326432,
+    "sha256": "a6a76be8ba3bea78deb0433fa53d4bc2c1f5ac910d627899b078665ab04d1498"
+  },
+  "shaders/character_snapshot_bindless_samples_clipmap.frag.spv": {
+    "bytes": 333972,
+    "sha256": "6200d5f0769ce676f8c1129555740f0d5f059df69bc1207614a233670b74a425"
+  },
+  "shaders/character_snapshot_bindless_samples_clipmap_field.frag.spv": {
+    "bytes": 343444,
+    "sha256": "1a54fd897d28801044e137528b67fda47b2ac8e603457d61f31abd46ac6d66bb"
+  },
+  "shaders/character_snapshot_bindless_samples_field.frag.spv": {
+    "bytes": 335904,
+    "sha256": "f8bfa8d2480bc2acf17f5fb9123f65e97a93746dcb2a54794d6113aefaab476a"
+  },
+  "shaders/character_snapshot_clipmap.frag.spv": {
+    "bytes": 329328,
+    "sha256": "b365ce6dcff4b4f92a5f58eba57a9ed84953bccf3b1161f4c26a41955eee0400"
+  },
+  "shaders/character_snapshot_clipmap_field.frag.spv": {
+    "bytes": 338760,
+    "sha256": "98f1b7a6a012851235c34d2d392200a328bb30527e28c0ce95edea194e777e08"
+  },
+  "shaders/character_snapshot_depth.frag.spv": {
+    "bytes": 4460,
+    "sha256": "beee6901bfb65d8c04d09ff20df76f49ea80045f5c14816cc1ad76fb55baf8e1"
+  },
+  "shaders/character_snapshot_depth.vert.spv": {
+    "bytes": 17796,
+    "sha256": "c25cf604b8499b2c0a44f6507f6489b9d125514e53576e673ab1bb36f4915cde"
+  },
+  "shaders/character_snapshot_depth_bindless.frag.spv": {
+    "bytes": 4832,
+    "sha256": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d"
+  },
+  "shaders/character_snapshot_depth_bindless_samples.frag.spv": {
+    "bytes": 4464,
+    "sha256": "67ed2047713fe1a1e60816978b6c3464102fa36feae97bf30ec0245ce2adf11c"
+  },
+  "shaders/character_snapshot_depth_compute.vert.spv": {
+    "bytes": 12748,
+    "sha256": "580b4777a721c1f6646be2d9fe618ed44f6f4c4fdb6fae877aab233462e977d9"
+  },
+  "shaders/character_snapshot_depth_samples.frag.spv": {
+    "bytes": 4184,
+    "sha256": "83ce6bc8a4e7cb98aef5022dfbb7f88aeeacf75dbdf4f778769c7eebfe92cab3"
+  },
+  "shaders/character_snapshot_field.frag.spv": {
+    "bytes": 331220,
+    "sha256": "8b9ee3415bdcecc684ec609c24ea19131507ff80b5d202139039f43ba8e415e7"
+  },
+  "shaders/character_snapshot_integral.frag.spv": {
+    "bytes": 321788,
+    "sha256": "7c423ac7ac06644d950d2612b27379dcf903cd5ec7093566f8bf3f6910829f0e"
+  },
+  "shaders/character_snapshot_integral_bindless.frag.spv": {
+    "bytes": 329864,
+    "sha256": "34120f341d4b0c94a0bd6bde3e2cc61d58d168800d56ad54268f1494354adf2f"
+  },
+  "shaders/character_snapshot_integral_bindless_clipmap.frag.spv": {
+    "bytes": 337404,
+    "sha256": "9884e884f8fa6bd2e6e1f6f2857cd3e131928f86159f5e99a9dbaf07d463f61c"
+  },
+  "shaders/character_snapshot_integral_bindless_clipmap_field.frag.spv": {
+    "bytes": 346876,
+    "sha256": "56deeb858386c0d183e6964e4f284c32649b416ff6690dfdd3f39b3954a9d5cc"
+  },
+  "shaders/character_snapshot_integral_bindless_field.frag.spv": {
+    "bytes": 339336,
+    "sha256": "a05b80ea8bbe8c8d78c4603b788e6b05912f2a7b008db8060e798a20205a5779"
+  },
+  "shaders/character_snapshot_integral_clipmap.frag.spv": {
+    "bytes": 329328,
+    "sha256": "75d9ef9191b6efab41253fba6e4895018bccb307e4e2e0b04d9c22b2d780a60c"
+  },
+  "shaders/character_snapshot_integral_clipmap_field.frag.spv": {
+    "bytes": 338760,
+    "sha256": "d4ee6d5e7443ffc0f09f89c116a6aeab8320735cc9f84e3aeccca5417415b5f9"
+  },
+  "shaders/character_snapshot_integral_field.frag.spv": {
+    "bytes": 331220,
+    "sha256": "d1f6d951f118081715e2ac1ff69d5b927817e13ec601e9c7f7752078309fc09d"
+  },
+  "shaders/character_snapshot_integral_object.frag.spv": {
+    "bytes": 341192,
+    "sha256": "b41df61d1f307ae7ec3eba2fb9d6894d59c71f79f9ee4372b28a948ef8452ed3"
+  },
+  "shaders/character_snapshot_integral_object_bindless.frag.spv": {
+    "bytes": 349268,
+    "sha256": "9bfb3eeceb946106b4252960d3c0bfdeb5bb228feadc0fbc9acb2c59c89e72ca"
+  },
+  "shaders/character_snapshot_integral_object_bindless_clipmap.frag.spv": {
+    "bytes": 356808,
+    "sha256": "2342c1ef37a8ead5fa49a1144a1076ed4978aca2b0ca03390e92f9524377a0f3"
+  },
+  "shaders/character_snapshot_integral_object_bindless_clipmap_field.frag.spv": {
+    "bytes": 366280,
+    "sha256": "b96f67396cf19bd934318d2a6c6959e20158019c67ea8d117b699366593231cd"
+  },
+  "shaders/character_snapshot_integral_object_bindless_field.frag.spv": {
+    "bytes": 358740,
+    "sha256": "35d2d14af3e5bfb5c6684805560a3b1c0f65f016b9b7e38b2e9a8b74486aad69"
+  },
+  "shaders/character_snapshot_integral_object_clipmap.frag.spv": {
+    "bytes": 348732,
+    "sha256": "9baabd647e454c95b2b4e299124d6023b1c44c514c161236cb5123e254f49166"
+  },
+  "shaders/character_snapshot_integral_object_clipmap_field.frag.spv": {
+    "bytes": 358164,
+    "sha256": "36c0ec222abd38267c810c26153d406e58b7f866fd221a63b7548a82699c114a"
+  },
+  "shaders/character_snapshot_integral_object_field.frag.spv": {
+    "bytes": 350624,
+    "sha256": "8d45f35352f10836e0105c5d1cf30acf7028f5ef7933aab61f053e134675d3f1"
+  },
+  "shaders/character_snapshot_object.frag.spv": {
+    "bytes": 341192,
+    "sha256": "1b32331e877f1d1779a55325d0af3dc4ca722465e7ce8b6bbf28d91243c8c72b"
+  },
+  "shaders/character_snapshot_object_bindless.frag.spv": {
+    "bytes": 349268,
+    "sha256": "538dc01706620cd64614e7f14ee560a3a27e0dc06789d99fe8344133c7ffe197"
+  },
+  "shaders/character_snapshot_object_bindless_clipmap.frag.spv": {
+    "bytes": 356808,
+    "sha256": "9cbf84048c250b1c7b96ba790d8e1a65d10e5fddf3b7761b706a66a4542a0b7b"
+  },
+  "shaders/character_snapshot_object_bindless_clipmap_field.frag.spv": {
+    "bytes": 366280,
+    "sha256": "a071b3f3d0702e223219887a3018637dc9876333e6ee328056bba3b1f6e4c692"
+  },
+  "shaders/character_snapshot_object_bindless_field.frag.spv": {
+    "bytes": 358740,
+    "sha256": "28e419af526719c3f840e474dc167ee41a505e2cf97ca4a667f238fc21b1f6eb"
+  },
+  "shaders/character_snapshot_object_bindless_samples.frag.spv": {
+    "bytes": 346316,
+    "sha256": "55f8776b56d0ac0fcd6075134055526fd60ca30992de3e3744ff9e21c4972c7b"
+  },
+  "shaders/character_snapshot_object_bindless_samples_clipmap.frag.spv": {
+    "bytes": 353856,
+    "sha256": "75163d18927e3cc4ffe99f18624b066ceeae1273ba06455893541dc4a23f9357"
+  },
+  "shaders/character_snapshot_object_bindless_samples_clipmap_field.frag.spv": {
+    "bytes": 363328,
+    "sha256": "a60b9fef88780aeaaf63fef009a2072684bde9abd7b314134c462a6fdb182dda"
+  },
+  "shaders/character_snapshot_object_bindless_samples_field.frag.spv": {
+    "bytes": 355788,
+    "sha256": "b2c9bfd9100a07b2430106c3291a1b05f2b785c160cacb0d8a2067bce9ba622a"
+  },
+  "shaders/character_snapshot_object_clipmap.frag.spv": {
+    "bytes": 348732,
+    "sha256": "40fb741596255af6a1300cdb245f59219258c65263dc9bbe1cea8a25d94a21ef"
+  },
+  "shaders/character_snapshot_object_clipmap_field.frag.spv": {
+    "bytes": 358164,
+    "sha256": "d853c6af5d1bc75f0a4c5f0acd0153890294f97d409e5812bf799a3ec2bd7605"
+  },
+  "shaders/character_snapshot_object_field.frag.spv": {
+    "bytes": 350624,
+    "sha256": "44297276557fb2d9b384bc70a72061720ca88a25462463acda6bf12e0569c4db"
+  },
+  "shaders/character_snapshot_object_samples.frag.spv": {
+    "bytes": 338240,
+    "sha256": "5ac07ce30b202b31f1e7a9c5c95f6a7cb9dab8b77e54dc2093264faa7d886026"
+  },
+  "shaders/character_snapshot_object_samples_clipmap.frag.spv": {
+    "bytes": 345780,
+    "sha256": "6779dbd8e5eb7ac530c826c03ac15057a0856141a088123df0378a819b3f2011"
+  },
+  "shaders/character_snapshot_object_samples_clipmap_field.frag.spv": {
+    "bytes": 355212,
+    "sha256": "8b1aa0deec7ad4608d2daf444aaa3e940f0d422ad25954680e821652f1648b1d"
+  },
+  "shaders/character_snapshot_object_samples_field.frag.spv": {
+    "bytes": 347672,
+    "sha256": "10d3a2a30ca12d62acdda26d52392d9e8efb10c9f62eae021690d2a1f58672c4"
+  },
+  "shaders/character_snapshot_samples.frag.spv": {
+    "bytes": 318356,
+    "sha256": "f99fd785a4056e5912f71d3fa2579445bbb84a7d066b44326adabe75e7a928e8"
+  },
+  "shaders/character_snapshot_samples_clipmap.frag.spv": {
+    "bytes": 325896,
+    "sha256": "b5748c81bd260fad191efa22d3c12874fa3601e629c107c5941885169b5ac10a"
+  },
+  "shaders/character_snapshot_samples_clipmap_field.frag.spv": {
+    "bytes": 335328,
+    "sha256": "af7a800ed4443802cebafdf78bebc6bb23aab69fdf427485c4fda7a95d4bf3d3"
+  },
+  "shaders/character_snapshot_samples_field.frag.spv": {
+    "bytes": 327788,
+    "sha256": "c11466771a44359ac2e31ca9ed1a4b26fedb25a44ce62e4829957c6182ae0877"
+  },
+  "shaders/clear.comp.spv": {
+    "bytes": 784,
+    "sha256": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3"
+  },
+  "shaders/color_grading_lut_test.comp.spv": {
+    "bytes": 9608,
+    "sha256": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447"
+  },
+  "shaders/cull_indirect.comp.spv": {
+    "bytes": 4904,
+    "sha256": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a"
+  },
+  "shaders/depth_bias_test.frag.spv": {
+    "bytes": 252,
+    "sha256": "d3a2d3f4239115d2744fc926736df58c11ab517e1522946d23e28408a821ccd9"
+  },
+  "shaders/depth_pyramid.comp.spv": {
+    "bytes": 3424,
+    "sha256": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0"
+  },
+  "shaders/editor_ui.frag.spv": {
+    "bytes": 1056,
+    "sha256": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550"
+  },
+  "shaders/editor_ui_srgb.frag.spv": {
+    "bytes": 1952,
+    "sha256": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b"
+  },
+  "shaders/game-ui.frag.spv": {
+    "bytes": 1568,
+    "sha256": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e"
+  },
+  "shaders/game-ui.vert.spv": {
+    "bytes": 1948,
+    "sha256": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2"
+  },
+  "shaders/hud.frag.spv": {
+    "bytes": 452,
+    "sha256": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73"
+  },
+  "shaders/hud.vert.spv": {
+    "bytes": 1048,
+    "sha256": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789"
+  },
+  "shaders/ibl_prefilter.comp.spv": {
+    "bytes": 6308,
+    "sha256": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510"
+  },
+  "shaders/inner_outline.frag.spv": {
+    "bytes": 22924,
+    "sha256": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76"
+  },
+  "shaders/inner_outline.vert.spv": {
+    "bytes": 1316,
+    "sha256": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f"
+  },
+  "shaders/irradiance_clipmap_test.comp.spv": {
+    "bytes": 14448,
+    "sha256": "18327769bd6bfc0fc9ce5274060e267fab85edea147a7d7076642b910bc926d5"
+  },
+  "shaders/irradiance_query_test.comp.spv": {
+    "bytes": 6284,
+    "sha256": "bd2ceb9f86c3a14a99b71945b8b7394a34a93239246310a16df997d392655553"
+  },
+  "shaders/mesh.frag.spv": {
+    "bytes": 366324,
+    "sha256": "d4e2772741cbcd98d4834beb8a36a8960ce80b3447fa18512183cf727de71805"
+  },
+  "shaders/mesh.vert.spv": {
+    "bytes": 18228,
+    "sha256": "813283b39cb948a389b3fa674396df792bb88ed5cd481002bb6bd5a18d7bb84a"
+  },
+  "shaders/mesh_bindless.frag.spv": {
+    "bytes": 374528,
+    "sha256": "73dd598f3d279252dfcd6cd796696c6f2acaa3805b64ceb1a39cbf277d4511a4"
+  },
+  "shaders/mesh_bindless_clipmap.frag.spv": {
+    "bytes": 382036,
+    "sha256": "b3223ff883f7d5583c34cd42a94de339abdbe13010a553136188c5fa8da982ec"
+  },
+  "shaders/mesh_bindless_clipmap_field.frag.spv": {
+    "bytes": 391528,
+    "sha256": "c69667a4f8bcb6cce54ed0076b9d3838b5eee541481c7ae39c3526e10f903170"
+  },
+  "shaders/mesh_bindless_field.frag.spv": {
+    "bytes": 384020,
+    "sha256": "6525c211e9d416e41c4d6fa8c692417d977e41985e985e74a9efe9c29483032d"
+  },
+  "shaders/mesh_bindless_samples.frag.spv": {
+    "bytes": 372536,
+    "sha256": "d57b330ed8583a32f74f54e4133c3f89f6882a0b7b47e348db634358fcf523a3"
+  },
+  "shaders/mesh_bindless_samples_clipmap.frag.spv": {
+    "bytes": 380044,
+    "sha256": "52436c920e1054489bade210764ca41304265ad0c14c9fbc0c5311652df98614"
+  },
+  "shaders/mesh_bindless_samples_clipmap_field.frag.spv": {
+    "bytes": 389536,
+    "sha256": "dcf64f232954cd9767c6b7bdfece118827922a5bd1b66e4adbceba3b08e8179f"
+  },
+  "shaders/mesh_bindless_samples_field.frag.spv": {
+    "bytes": 382028,
+    "sha256": "48dc2dfa4f7312ba9d4e5184565f52ef38b0ba296af5034b27442472612b080b"
+  },
+  "shaders/mesh_clipmap.frag.spv": {
+    "bytes": 373832,
+    "sha256": "412be6749133e66e1592ca6b41f29e261dc059be53f9c02e26e6ec279bf2179b"
+  },
+  "shaders/mesh_clipmap_field.frag.spv": {
+    "bytes": 383284,
+    "sha256": "78fe634e806c771075b710624f57aa3f0a4a48a6f344bfbe3dc5283fde47d773"
+  },
+  "shaders/mesh_compute.vert.spv": {
+    "bytes": 13180,
+    "sha256": "bb6f4d819030f26b041375782b49fe3142e1ed92acf02bda6805b0984533a550"
+  },
+  "shaders/mesh_field.frag.spv": {
+    "bytes": 375776,
+    "sha256": "0ce52f0d3b33fa6cc26d5482bfddae1bc6942f154c71dfa425050691c4896040"
+  },
+  "shaders/mesh_fog.frag.spv": {
+    "bytes": 56884,
+    "sha256": "537b339d7f7a4d13ff6f918c235c481d2224a0420cc7e921544a954b1da26c05"
+  },
+  "shaders/mesh_fog_bindless.frag.spv": {
+    "bytes": 56928,
+    "sha256": "9dfb55a2b1afe09b8adb92d425a8e9a8ecbe5cd57dd04628013ce6f777fd8d72"
+  },
+  "shaders/mesh_fog_bindless_samples.frag.spv": {
+    "bytes": 57588,
+    "sha256": "bee6da02a8725a9d845dc141bdfed74254804c2759bf80eb8a5b6866948c94f1"
+  },
+  "shaders/mesh_fog_samples.frag.spv": {
+    "bytes": 57544,
+    "sha256": "0d05197715b4a6c4c8ec97d252589d3ba428cf6f176f3278340858eff2e4b187"
+  },
+  "shaders/mesh_integral.frag.spv": {
+    "bytes": 366324,
+    "sha256": "874818f91dc4a37995d4ae612a016bbab183249fe235a06a631cc52e27ac3d1f"
+  },
+  "shaders/mesh_integral_bindless.frag.spv": {
+    "bytes": 374528,
+    "sha256": "e6bb1d133a84b9be0614673ba65bab4d0c50bbe24bf42a9edb6b3d7a83dd1533"
+  },
+  "shaders/mesh_integral_bindless_clipmap.frag.spv": {
+    "bytes": 382036,
+    "sha256": "bce8923ddf3d7cf91ee35266e4800cab91e2c27c66fc87c765d1fa222c40fb4c"
+  },
+  "shaders/mesh_integral_bindless_clipmap_field.frag.spv": {
+    "bytes": 391528,
+    "sha256": "370e230ded85f241f2d0bdc5f0730d480c80696ab00599bc9f815de115b6c089"
+  },
+  "shaders/mesh_integral_bindless_field.frag.spv": {
+    "bytes": 384020,
+    "sha256": "8b436790378f62088faff391ea9b394bf788c7bc76499a4bd799a0200abf0fe9"
+  },
+  "shaders/mesh_integral_clipmap.frag.spv": {
+    "bytes": 373832,
+    "sha256": "148758e26cc0675573dd568f5046c135f152abef775bbc2f765bfcd5c3660df3"
+  },
+  "shaders/mesh_integral_clipmap_field.frag.spv": {
+    "bytes": 383284,
+    "sha256": "a5af0a6595f8149c7f6c1feb708acb652f223b90021dacb180c0e6b478176155"
+  },
+  "shaders/mesh_integral_field.frag.spv": {
+    "bytes": 375776,
+    "sha256": "ead822ac1f976ade1d910a69fb8c2f14d29d88f4155fa3f92defc938ee82b2f8"
+  },
+  "shaders/mesh_integral_object.frag.spv": {
+    "bytes": 385672,
+    "sha256": "b5952976a901fe5173591eafab4ec1a32105fee190ef8514d99d6030d76b5566"
+  },
+  "shaders/mesh_integral_object_bindless.frag.spv": {
+    "bytes": 393876,
+    "sha256": "95d69c41529a7a500e1d35ba04a94e4b29e5b5f5ec43eafa188eb6e03d31d7b9"
+  },
+  "shaders/mesh_integral_object_bindless_clipmap.frag.spv": {
+    "bytes": 401384,
+    "sha256": "7f3d6deda95d5ea6c9d73355351f85f3ef1295786c9147872042937693397df8"
+  },
+  "shaders/mesh_integral_object_bindless_clipmap_field.frag.spv": {
+    "bytes": 410876,
+    "sha256": "7487f43cbfe1a6afc0e54c95e7b99bd6dfdd55dc688fb89040860b5ae67654bd"
+  },
+  "shaders/mesh_integral_object_bindless_field.frag.spv": {
+    "bytes": 403368,
+    "sha256": "50bfdf4fcd2a85949bdd35b368687fbdb07fba19034af142e992982b40097dc6"
+  },
+  "shaders/mesh_integral_object_clipmap.frag.spv": {
+    "bytes": 393180,
+    "sha256": "968ca613617bedbc33e50c4d3257dbc6244a951519f79f5256d40c89dfa30cae"
+  },
+  "shaders/mesh_integral_object_clipmap_field.frag.spv": {
+    "bytes": 402632,
+    "sha256": "72b2ec995ed3c89ddc92f4e4f51984c9171613ef5a98b2937a32c41477c9e9a1"
+  },
+  "shaders/mesh_integral_object_field.frag.spv": {
+    "bytes": 395124,
+    "sha256": "0c8225cd0d35030cbbcd2775dbe83aede8be7d44f6c06354e4c981a4fc3cc952"
+  },
+  "shaders/mesh_object.frag.spv": {
+    "bytes": 385672,
+    "sha256": "8f0c8b212b5c8bb51b11c01ccb3482398a6658ea1dbdb909ac26315c341059c8"
+  },
+  "shaders/mesh_object.vert.spv": {
+    "bytes": 18412,
+    "sha256": "cdb4e6f952a66fe9d7007271078ac2a4e7e1de86e5998291973ab93638841d54"
+  },
+  "shaders/mesh_object_bindless.frag.spv": {
+    "bytes": 393876,
+    "sha256": "8b8924cf58ec8695066d703937feeb4dc7b5f04bd30ac18be0a4270dddc44f1a"
+  },
+  "shaders/mesh_object_bindless_clipmap.frag.spv": {
+    "bytes": 401384,
+    "sha256": "0a4088a321a2c88ab06ad4336e99ca815b32586e86be14658419ca1d62c34851"
+  },
+  "shaders/mesh_object_bindless_clipmap_field.frag.spv": {
+    "bytes": 410876,
+    "sha256": "e98c375383796066da3a545167e1e5fca5be0e3b0b3ae6c768d22835568665d1"
+  },
+  "shaders/mesh_object_bindless_field.frag.spv": {
+    "bytes": 403368,
+    "sha256": "647232b6ca433e51d8b832c1a1d528a57291e7056f3f9f4dae7ec50f5694f2a6"
+  },
+  "shaders/mesh_object_bindless_samples.frag.spv": {
+    "bytes": 392364,
+    "sha256": "d75c7b03e677b48657da5bc35ae2ef5edc3b6ed3d02b3f2ef32714af18c47a60"
+  },
+  "shaders/mesh_object_bindless_samples_clipmap.frag.spv": {
+    "bytes": 399872,
+    "sha256": "a78d6c56da342bb81501479dc470a7f1c3ee5e5846f8c6a2f3bc2ccdb3b87b1b"
+  },
+  "shaders/mesh_object_bindless_samples_clipmap_field.frag.spv": {
+    "bytes": 409364,
+    "sha256": "7625953b180ef164afb86267da9b6d4a198a5978e3cb8973f4cb3d92a5d954a1"
+  },
+  "shaders/mesh_object_bindless_samples_field.frag.spv": {
+    "bytes": 401856,
+    "sha256": "e620b97c0445636c2012add9916069f5f88abc95527729d06d0af8854ad473f6"
+  },
+  "shaders/mesh_object_clipmap.frag.spv": {
+    "bytes": 393180,
+    "sha256": "f2a7d46771f6a7a189b71f742218d4f479d9615ec5a6317e67b033901ffea490"
+  },
+  "shaders/mesh_object_clipmap_field.frag.spv": {
+    "bytes": 402632,
+    "sha256": "5e127e7ccebbbfead6ca2fb92fe556d906861e5045e82ad1e08acfd719233012"
+  },
+  "shaders/mesh_object_compute.vert.spv": {
+    "bytes": 13364,
+    "sha256": "edaa575d1dd7a1401110c0f1b0fe30abfca33ffdbf49ef710bed412bcc246a4c"
+  },
+  "shaders/mesh_object_field.frag.spv": {
+    "bytes": 395124,
+    "sha256": "ab4376c05fa1e8d545cbdeaeb57e89e5029e020e52cf267537cb79dc145fdfda"
+  },
+  "shaders/mesh_object_samples.frag.spv": {
+    "bytes": 384160,
+    "sha256": "11f294ba04dee8a086d79ca20297388a8de641137c45603a325128513489f2d1"
+  },
+  "shaders/mesh_object_samples_clipmap.frag.spv": {
+    "bytes": 391668,
+    "sha256": "65fa0adb16129d0e5d72fcafe45db0874fd27ada284495763fb7cdc81bedb6c6"
+  },
+  "shaders/mesh_object_samples_clipmap_field.frag.spv": {
+    "bytes": 401120,
+    "sha256": "cba6a10ba5411f854174ecc038c71ec6aab0294d981aa7dc86dbc8e3920d2a71"
+  },
+  "shaders/mesh_object_samples_field.frag.spv": {
+    "bytes": 393612,
+    "sha256": "7840495ec700f9d36ee13596c4dc1ea58ebe6a55d98151b7301401998a9721eb"
+  },
+  "shaders/mesh_samples.frag.spv": {
+    "bytes": 364332,
+    "sha256": "6c70276c2ad4d1472105cd1e47a0de053e58d4fea6ea366aa1c152da52268015"
+  },
+  "shaders/mesh_samples_clipmap.frag.spv": {
+    "bytes": 371840,
+    "sha256": "c4a0320b614f7899599dfa58f498318ea9e07239692e2296048c4972961a545c"
+  },
+  "shaders/mesh_samples_clipmap_field.frag.spv": {
+    "bytes": 381292,
+    "sha256": "9abf33d23eb805504f3971453e6f6e55d16ac677337888bea291b846aeb6d51d"
+  },
+  "shaders/mesh_samples_field.frag.spv": {
+    "bytes": 373784,
+    "sha256": "a7e42b52c251b6f1dd5281c9ae7d92a54395683e98dee5618881e998e465112b"
+  },
+  "shaders/motion_outline.vert.spv": {
+    "bytes": 61620,
+    "sha256": "20bdc865d9d02cccd775ff18dc645675c32f0f1d17aac37e5867a574cb3d6875"
+  },
+  "shaders/motion_pose_test.comp.spv": {
+    "bytes": 49652,
+    "sha256": "c657318588f6a94ba16b53a750ad3c59a13d9559012d740bcb0b374b58f3f2ec"
+  },
+  "shaders/motion_projection_test.comp.spv": {
+    "bytes": 4968,
+    "sha256": "ba985c261cb80b1a0869152fc6b75b8c98f6813aa102b91c239171d7d99821ec"
+  },
+  "shaders/motion_vector.frag.spv": {
+    "bytes": 14708,
+    "sha256": "41734e1b4299cc052b723d29b0994fe5af468baa04fb0348538cf5fedc2feab8"
+  },
+  "shaders/motion_vector.vert.spv": {
+    "bytes": 33908,
+    "sha256": "0b7450cba1a1fae84341b764777148c760874f6661a89627fcf47aa5f598e583"
+  },
+  "shaders/multisample_probe.frag.spv": {
+    "bytes": 1528,
+    "sha256": "8f52538e91940803f1d514b0826b39b5b3c4873318b8f33fe5b92a8f7325a7ec"
+  },
+  "shaders/multisample_probe.vert.spv": {
+    "bytes": 1388,
+    "sha256": "c926a7e110f846f93f37225b9739c0b92d240988c7dcd9a1ae6a4fadc18031dd"
+  },
+  "shaders/object_shadow_filter_test.comp.spv": {
+    "bytes": 23468,
+    "sha256": "290a118205df0b2a1efe23685536bce54c7199b46c5fc3acb6d9d46be74c3708"
+  },
+  "shaders/octahedral_environment_test.comp.spv": {
+    "bytes": 4900,
+    "sha256": "1fc426b94f46af33bba7fb12fa06a5e55494e42252cda392ad9279725b46f630"
+  },
+  "shaders/outline.frag.spv": {
+    "bytes": 4124,
+    "sha256": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134"
+  },
+  "shaders/outline.vert.spv": {
+    "bytes": 12888,
+    "sha256": "ab345fb7947c37da4d9154e4c38fc0fd695a0379ddaec4194c3253e207e80894"
+  },
+  "shaders/outline_compute.vert.spv": {
+    "bytes": 7896,
+    "sha256": "072ccaaaa6c3a8ee3c97a4cfbf1384c2463656ceecbb20def4772a2c0e802ece"
+  },
+  "shaders/outline_depth.frag.spv": {
+    "bytes": 5224,
+    "sha256": "0e848e0d66ab546443c5ce4f941ef6d5ce18397a11dbdc1a98831aa4a1bd3079"
+  },
+  "shaders/outline_depth_bindless.frag.spv": {
+    "bytes": 5548,
+    "sha256": "8b658a22dc7145d27864e0555bcfc425ebc4c1b1aa78e16aca51e893ab6a3171"
+  },
+  "shaders/outline_depth_bindless_samples.frag.spv": {
+    "bytes": 5580,
+    "sha256": "33d7e9187782d0a2163e1dc37805c306505c105b6c318e9c227e9d136db9fd66"
+  },
+  "shaders/outline_depth_samples.frag.spv": {
+    "bytes": 5256,
+    "sha256": "044d24b1c37c664e161bdd9c9d81939f4bfb573609c780b7c83193336ef27180"
+  },
+  "shaders/outline_mask.frag.spv": {
+    "bytes": 2248,
+    "sha256": "2b31604545789a8c07a1d2d9b979d5352fdb1a9fbc5e1219fa5d8376bef23b86"
+  },
+  "shaders/outline_mask.vert.spv": {
+    "bytes": 17740,
+    "sha256": "254ea599605ab1d157f51102e049c089a7f64058f6d486a7776860efcca91e73"
+  },
+  "shaders/outline_mask_bindless.frag.spv": {
+    "bytes": 2620,
+    "sha256": "4cc56fc9d2ec292ca9eb164ba43c19e871afa9575e6d09b912705a63e3ddcfb3"
+  },
+  "shaders/outline_mask_bindless_samples.frag.spv": {
+    "bytes": 2640,
+    "sha256": "343b7b2a5deef6c97bbbccfb2557a725311f9d86a5c26db85d7849b80ac1d2be"
+  },
+  "shaders/outline_mask_compute.vert.spv": {
+    "bytes": 12692,
+    "sha256": "86b117e98b537b5e3a2b96bd77af1a662597bc10c0cb7a4f6ad38def587e6e97"
+  },
+  "shaders/outline_mask_samples.frag.spv": {
+    "bytes": 2268,
+    "sha256": "5247371d64a4782baf5487e47dd76d0046ddcb0afadafc313ecf43d1e64727c4"
+  },
+  "shaders/outline_samples.frag.spv": {
+    "bytes": 4560,
+    "sha256": "e15a79625808349bb5137c2c5bd1386f1360fe80f555bbc70afbbbc8d01c003c"
+  },
+  "shaders/outline_view_scaled.frag.spv": {
+    "bytes": 6052,
+    "sha256": "5e5f39bb2cc36e8801afb8dd0e80915b77dfa01dfa44944063ba39d658c3b321"
+  },
+  "shaders/outline_view_scaled.vert.spv": {
+    "bytes": 28236,
+    "sha256": "6832ed81cab49e76c25f3ff043c15ea0c62104c5fa92e3150d38132cff63e9f9"
+  },
+  "shaders/outline_view_scaled_bindless.frag.spv": {
+    "bytes": 6360,
+    "sha256": "0bd2f66eeed847b0fb30d9ed3805cf87366c7f171077fe657c6e5f1f78243db2"
+  },
+  "shaders/outline_view_scaled_bindless.vert.spv": {
+    "bytes": 28460,
+    "sha256": "785773d452b53ad047d11b2643d3d6e29c562c3ada1fba3e7018d35bc726ba5a"
+  },
+  "shaders/outline_view_scaled_bindless_samples.frag.spv": {
+    "bytes": 6856,
+    "sha256": "22e56eca66e79089655ae60b8831c95e32fa42067fd16f82436319a0a64761ac"
+  },
+  "shaders/outline_view_scaled_compute.vert.spv": {
+    "bytes": 23168,
+    "sha256": "8af0169fb7d2cb5ebd92d589af6bcb117553d648dde9eaccbdcb0b34d95abe56"
+  },
+  "shaders/outline_view_scaled_compute_bindless.vert.spv": {
+    "bytes": 23392,
+    "sha256": "825bfc8694d71362793dc7865701a16aa115aa1417e420aa370f1c91f65469a2"
+  },
+  "shaders/outline_view_scaled_samples.frag.spv": {
+    "bytes": 6548,
+    "sha256": "f634d82cc5d256d287c17f96db218642c4c1105c56cb109049a52774bd713464"
+  },
+  "shaders/pathtracing.comp.spv": {
+    "bytes": 79476,
+    "sha256": "6f90a3444d1a07b8ead9eba67d063f70e9c46310058146a496c5e4eea47dfcec"
+  },
+  "shaders/pathtracing.frag.spv": {
+    "bytes": 11540,
+    "sha256": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a"
+  },
+  "shaders/readonly_depth_test.frag.spv": {
+    "bytes": 780,
+    "sha256": "b7afe007df9e050c21c89832a50e7cdb976e225c6ec6b5376589d1aa021352a9"
+  },
+  "shaders/readonly_depth_test.vert.spv": {
+    "bytes": 1332,
+    "sha256": "11d36fc78f75992904f31c89130be22737be87dd4dd99b65508d6fcc40fe2ce3"
+  },
+  "shaders/reflection_probe_field_test.comp.spv": {
+    "bytes": 14492,
+    "sha256": "94135d202f7410504e29b1e9562421d1161c5f77c6e341a432eeb985164f5a1e"
+  },
+  "shaders/reflection_reprojection.comp.spv": {
+    "bytes": 8940,
+    "sha256": "b54cc4ccbcf1dc7fdf7ede3815ce51afccfdac2e853daa0e024f02f24d472158"
+  },
+  "shaders/reflection_signal_pyramid_float.comp.spv": {
+    "bytes": 6544,
+    "sha256": "5017c38801528ef1c47e3fabbd4d1d8417e5cfa729788fe54e13aeab9706d6c7"
+  },
+  "shaders/reflection_signal_pyramid_packed.comp.spv": {
+    "bytes": 6552,
+    "sha256": "9d9fc987c83a72728ac0296cdbf85596c658e1535a0ef72edc25aab44792926f"
+  },
+  "shaders/reflection_spatial_filter.comp.spv": {
+    "bytes": 9204,
+    "sha256": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc"
+  },
+  "shaders/reflection_surface_test.comp.spv": {
+    "bytes": 4648,
+    "sha256": "d959c5051a98ef66fd9e46278dee1baaa248f30fbe536e39e869619f7a2552e1"
+  },
+  "shaders/reflection_temporal_float.comp.spv": {
+    "bytes": 14376,
+    "sha256": "66c44b623b83f9e6176e7c44f7039992ada997ac29933d4224cac71c7bc00020"
+  },
+  "shaders/reflection_temporal_packed.comp.spv": {
+    "bytes": 14384,
+    "sha256": "3cf689766f41dfa0d0422942943cdd48702e2405c13b8f6d2ba4fd37b8ded9d3"
+  },
+  "shaders/reflection_trace_float.comp.spv": {
+    "bytes": 20324,
+    "sha256": "4e89f2e77717f918f86538b504a38d3469609848c4c59b8990d6c24625ee4351"
+  },
+  "shaders/reflection_trace_packed.comp.spv": {
+    "bytes": 20332,
+    "sha256": "7e23f88e362db04579bd8b8e57094009325d7a246d4809d487b03b0d9b5a0de0"
+  },
+  "shaders/sampled_upload_test.comp.spv": {
+    "bytes": 1236,
+    "sha256": "a7b9be273214e05f06f7441f6e3a1187e929faa531beedf545eaf0291b3fd582"
+  },
+  "shaders/scene_instance_layout_test.comp.spv": {
+    "bytes": 5736,
+    "sha256": "36d658cb7a429516ca78d6f99d9f72209dd98542374bb00dbb4fa8e428181984"
+  },
+  "shaders/scene_multisample_probe.frag.spv": {
+    "bytes": 2648,
+    "sha256": "b01b9af31ae9f4e53d16ec248c0ff6cba9dd320abd55e92d83eb1f68c4ad9dfb"
+  },
+  "shaders/scene_multisample_resolve.frag.spv": {
+    "bytes": 3180,
+    "sha256": "442a2b06917d60cb1c9006a45ff95afdd919ce96d5648491a9eedefbee64118c"
+  },
+  "shaders/shadow.frag.spv": {
+    "bytes": 6388,
+    "sha256": "91ac2f1e32ea6ee107bbb9143c9e96cdffef43e22ae53b9626c3eb7d7a1af245"
+  },
+  "shaders/shadow.vert.spv": {
+    "bytes": 10852,
+    "sha256": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5"
+  },
+  "shaders/shadow_bindless.frag.spv": {
+    "bytes": 6692,
+    "sha256": "6d38dc03e16eda0b761a21b00ebea4a223e9046bc73b7ac5d531ff028b34f36f"
+  },
+  "shaders/shadow_bounds.comp.spv": {
+    "bytes": 3680,
+    "sha256": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77"
+  },
+  "shaders/shadow_compute.vert.spv": {
+    "bytes": 6084,
+    "sha256": "ac557aaeb75d6cf3e75af60d345a25e1cc78ee9b8c90943d05a73e9bfe66bc2e"
+  },
+  "shaders/shadow_filter_test.comp.spv": {
+    "bytes": 22120,
+    "sha256": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5"
+  },
+  "shaders/skin.comp.spv": {
+    "bytes": 15200,
+    "sha256": "a0f5f99f22082c9e6550cc5f6926bb3df82db4f70ef1130f7130b51b204b6fe4"
+  },
+  "shaders/sky.frag.spv": {
+    "bytes": 5616,
+    "sha256": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16"
+  },
+  "shaders/spatial_antialiasing.frag.spv": {
+    "bytes": 15292,
+    "sha256": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1"
+  },
+  "shaders/specialization_test.comp.spv": {
+    "bytes": 2036,
+    "sha256": "b38e220726a262bbd12a1893fae88b010832f88f2381402e36a3d783f766ea96"
+  },
+  "shaders/specialization_test.frag.spv": {
+    "bytes": 772,
+    "sha256": "c3f301bbf5bdbe5c7279f138fc158f51bde7502a9e3a5042cfe5c264e22c44a8"
+  },
+  "shaders/specialization_test.vert.spv": {
+    "bytes": 1304,
+    "sha256": "cd32916b0e5871e6206493e6fc9f4e9ddc9fd467f77126a3aa4ecdebdb435e41"
+  },
+  "shaders/specular_ramp_test.comp.spv": {
+    "bytes": 18892,
+    "sha256": "579badc92e94a243bec3335fe5064122d6b65f93d64baf6b6e7fe74b0f2e6da3"
+  },
+  "shaders/surface_response_test.comp.spv": {
+    "bytes": 73572,
+    "sha256": "afe36fc87f9472aa759275224bfff0b5d0c94bf22a1044de69c774dd2252ee76"
+  },
+  "shaders/temporal_copy.frag.spv": {
+    "bytes": 756,
+    "sha256": "b406af1147ab75cf5fdca93cccece032d0dfe1d0cf7fa1bab24e16024db65ce7"
+  },
+  "shaders/temporal_resolve.frag.spv": {
+    "bytes": 20668,
+    "sha256": "61a6f60fb4d5bf6fbae75a84af93e8225726a266d974c6ea93cb764da6337c11"
+  },
+  "shaders/view_fog_surface.frag.spv": {
+    "bytes": 26820,
+    "sha256": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0"
+  },
+  "shaders/view_fog_surface_samples.frag.spv": {
+    "bytes": 26900,
+    "sha256": "4f9f518a961e886c094b92c70d4232b5e3ca70ece4721182dd4429f5b8673ef1"
+  },
+  "shaders/view_resolve.frag.spv": {
+    "bytes": 6180,
+    "sha256": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9"
+  },
+  "shaders/visibility_prototype.comp.spv": {
+    "bytes": 6360,
+    "sha256": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+  }
+}

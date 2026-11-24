@@ -1,4 +1,7 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#include "morph_data.glsl"
+#include "skin_position.glsl"
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
@@ -13,18 +16,19 @@ layout(binding = 0) uniform CameraData {
     vec4 faceLightDirection;
     vec4 faceSdfParameters;
     vec4 faceSdfShadowColor;
+#if defined(AZURE_REFERENCE_CAMERA)
+#include "reference_camera_fields.glsl"
+#endif
 } camera;
+#if defined(AZURE_REFERENCE_CAMERA)
+#include "reference_camera_vertex.glsl"
+#endif
 
 layout(std430, binding = 10) readonly buffer JointData {
     mat4 matrices[];
 } jointData;
 
-struct InstanceTransforms {
-    mat4 model;
-    mat4 modelViewProjection;
-    mat4 cascadeLightModelViewProjection[4];
-    uvec4 meta;
-};
+#include "instance_data.glsl"
 layout(std430, binding = 13) readonly buffer InstanceData {
     InstanceTransforms instances[];
 } instanceData;
@@ -35,34 +39,67 @@ layout(location = 4) in uvec4 jointIndices;
 layout(location = 5) in vec4 jointWeights;
 layout(location = 6) in vec3 morph0;
 layout(location = 7) in vec3 morph1;
+#if defined(AZURE_REFERENCE_SCENE_OUTLINE_DEPTH)
+layout(location = 14) out vec3 opacityCoordinate;
+#else
+layout(location = 0) out vec3 opacityCoordinate;
+#endif
 
 layout(push_constant) uniform MorphWeights {
+#if defined(AZURE_VIEW_SCALED_OUTLINE)
+    layout(offset = 124) uint materialIndex;
+    layout(offset = 128) float samplingScale;
+#else
     layout(offset = 128) vec2 weights;
+#endif
+    layout(offset = 144) mat4 gizmoTransform;
 } morphWeights;
 
-void main() {
 #if defined(AZURE_COMPUTE_SKINNING)
-    vec3 skinnedPosition = position;
-    vec3 skinnedNormal = normalize(normal);
+#include "skinned_vertex_layout.glsl"
+layout(std430, binding = 17) readonly buffer InstanceSkinnedVertices { uint words[]; } computed;
+float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceData.instances[gl_InstanceIndex].meta.y + uint(gl_VertexIndex))*azureSkinnedVertexWordCount+offset]); }
+vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset+1u),posedFloat(offset+2u)); }
+#endif
+#if defined(AZURE_VIEW_SCALED_OUTLINE)
+#include "outline_view_scaled.glsl"
+#else
+void main() {
+    opacityCoordinate=position;
+#if defined(AZURE_COMPUTE_SKINNING)
+    vec3 skinnedPosition = posedVector(0u);
+    vec3 skinnedNormal = normalize(posedVector(3u));
 #else
     const uint jointBase = instanceData.instances[gl_InstanceIndex].meta.x;
-    vec3 morphedPosition = position
-        + morph0 * morphWeights.weights.x
-        + morph1 * morphWeights.weights.y;
+    vec3 morphedPosition=position,morphedNormal=normal,unusedTangent=vec3(0);
+    if(!applyAssetMorph(instanceData.instances[gl_InstanceIndex].meta.z,uint(gl_VertexIndex),
+        instanceData.instances[gl_InstanceIndex].meta.w,morphedPosition,morphedNormal,unusedTangent))
+        morphedPosition+=morph0*instanceData.instances[gl_InstanceIndex].morph.x+morph1*instanceData.instances[gl_InstanceIndex].morph.y;
     mat4 skinMatrix =
         jointWeights.x * jointData.matrices[jointBase + jointIndices.x]
         + jointWeights.y * jointData.matrices[jointBase + jointIndices.y]
         + jointWeights.z * jointData.matrices[jointBase + jointIndices.z]
         + jointWeights.w * jointData.matrices[jointBase + jointIndices.w];
     vec3 skinnedPosition =
-        (skinMatrix * vec4(morphedPosition, 1.0)).xyz;
+        azureSkinPosition(skinMatrix,morphedPosition).xyz;
     vec3 skinnedNormal =
-        normalize(mat3(skinMatrix) * normal);
+        normalize(mat3(skinMatrix) * morphedNormal);
 #endif
-    vec3 expandedPosition =
-        skinnedPosition
-        + skinnedNormal * camera.renderingParameters.x * 0.58;
-    gl_Position =
-        instanceData.instances[gl_InstanceIndex].modelViewProjection
-        * vec4(expandedPosition, 1.0);
+    skinnedPosition=(morphWeights.gizmoTransform*vec4(skinnedPosition,1)).xyz;
+    skinnedNormal=normalize(transpose(inverse(mat3(morphWeights.gizmoTransform)))*skinnedNormal);
+    mat4 mvp=instanceData.instances[gl_InstanceIndex].modelViewProjection;
+    vec4 clip=mvp*vec4(skinnedPosition,1);
+#if defined(AZURE_REFERENCE_CAMERA)
+    vec4 referenceDeviceBase=clip;
+#endif
+    vec4 shifted=mvp*vec4(skinnedPosition+skinnedNormal*.001,1);
+    vec2 projected=shifted.xy/max(shifted.w,.0001)-clip.xy/max(clip.w,.0001);
+    vec2 pixelDirection=projected*camera.clusterDepth.zw;
+    float magnitude=length(pixelDirection);
+    if(magnitude>.00001)clip.xy+=pixelDirection/magnitude * camera.renderingParameters.x*2.0/camera.clusterDepth.zw*clip.w;
+    gl_Position=clip;
+#if defined(AZURE_REFERENCE_CAMERA)
+    gl_Position=azureCameraRasterPosition((instanceData.instances[gl_InstanceIndex].model*vec4(skinnedPosition,1)).xyz,referenceDeviceBase,clip);
+#endif
 }
+#endif

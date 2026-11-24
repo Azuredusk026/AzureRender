@@ -3,16 +3,24 @@
 #include "SceneModel.hpp"
 #include "ecs/Components.hpp"
 #include "ecs/World.hpp"
+#include "runtime/AssetDatabase.hpp"
+#include "runtime/MaterialDocument.hpp"
+#include "runtime/Level.hpp"
+#include "runtime/PresentationRuntime.hpp"
+#include "editor/commands/DocumentVersion.hpp"
+#include <memory>
 #include <vector>
 
 #include <array>
 #include <cstddef>
 #include <filesystem>
 #include <optional>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
 namespace azurerender {
+class AssetImportJob;
 
 class EditorContext final {
 public:
@@ -24,6 +32,41 @@ public:
         std::size_t dependentNodeCount = 0;
     };
     EditorContext(SceneDocument document, std::filesystem::path scenePath);
+    static std::shared_ptr<EditorContext> openProject(const std::filesystem::path& path,const std::filesystem::path& documentPath={});
+    bool isProject() const noexcept { return assets_ != nullptr; }
+    const Project& project() const { return *project_; }
+    AssetDatabase& assets() { if(!assets_)throw std::logic_error("Asset access requires a project");return *assets_; }
+    const AssetDatabase& assets() const { if(!assets_)throw std::logic_error("Asset access requires a project");return *assets_; }
+    std::string importAsset(const std::filesystem::path& path);
+    const nlohmann::json& importSummary() const noexcept { return importSummary_; }
+    void startImport(const std::filesystem::path& path);
+    void cancelImport();
+    bool importing() const noexcept { return importJob_!=nullptr; }
+    bool importReady() const;
+    float importProgress() const;
+    std::optional<std::string> pollImport();
+    void placeResource(const std::string& resource, const std::string& nodeId = {});
+    void placeAssetAt(const std::string& asset,const std::array<float,3>& position);
+    void createNode(const std::string& nodeId,const std::string& parentId={});
+    void placePrefab(const std::string& asset, const std::string& instance);
+    void previewAnimation(const std::string& state, double time, const std::string& previous = {}, double crossfade = 0);
+    NodeAnimationFrame animationPose(const std::string& node,const std::string& state,double time,const std::string& previous={},double crossfade=0) const;
+    void clearAnimationPreview() noexcept { animationPreview_.reset(); }
+    const std::optional<NodeAnimationFrame>& animationPreview() const noexcept { return animationPreview_; }
+    void selectNodes(std::vector<std::size_t> indices);
+    const std::vector<std::size_t>& selectedNodes() const noexcept { return selectedNodes_; }
+    void duplicateSelection();
+    void reparentNode(const std::string& id,const std::string& parent);
+    void moveNodes(const std::vector<std::string>& ids,const std::string& parent,const std::string& before={});
+    void removeGameplayComponent(const std::string& type);
+    void resetComponentField(const std::string& type,const std::string& field);
+    void deleteSelection();
+    nlohmann::json componentData(const std::string& node, const std::string& type) const;
+    void setComponentField(const std::string& type, const std::string& field, const nlohmann::json& value);
+    void setComponentFields(const std::string& type,const nlohmann::json& values);
+    void addGameplayComponent(const std::string& type);
+    std::map<std::string,nlohmann::json> runtimeComponents() const;
+    nlohmann::json levelDocument() const;
 
     [[nodiscard]] SceneDocument& scene() noexcept { return scene_; }
     [[nodiscard]] const SceneDocument& scene() const noexcept { return scene_; }
@@ -57,10 +100,13 @@ public:
     void setGizmoRotation(std::array<float, 3> value);
     void setGizmoScale(std::array<float, 3> value);
 
-    void markDirty() noexcept { dirty_ = true; }
+    void markDirty() noexcept { dirty_ = true; ++revision_; closeEditMerge(); }
     [[nodiscard]] bool dirty() const noexcept { return dirty_; }
+    [[nodiscard]] std::uint64_t revision() const noexcept { return revision_; }
+    std::filesystem::path recoveryPath() const;
     void save();
     void reload();
+    void reloadProjectContent();
     void addChildNode(std::size_t parentIndex);
     void removeNode(std::size_t index);
     void setSelectedNodeName(std::string name);
@@ -73,10 +119,26 @@ public:
     [[nodiscard]] bool canRedo() const noexcept { return !redoStack_.empty(); }
     bool undo();
     bool redo();
+    nlohmann::json documentContent() const;
+    DocumentVersion documentVersion() const;
+    const std::string& documentId() const noexcept{return documentId_;}
+    std::size_t undoCount() const noexcept { return undoStack_.size(); }
+    std::size_t redoCount() const noexcept { return redoStack_.size(); }
+    void closeEditMerge() noexcept { mergeKey_.clear(); }
+    void notifyAssetVersionChanged() { ++revision_;closeEditMerge();clearAnimationPreview(); }
+    std::string publishPreparedImport(AssetImportJob& job);
+    void refreshMaterialBindings(){resolveSceneMaterials(scene_,assets());}
     [[nodiscard]] std::vector<ResourceStatus> resourceStatuses() const;
     std::size_t reloadChangedAssets();
 
-    enum class GizmoMode { Translate, Rotate, Scale };
+    enum class GizmoMode { Translate, Rotate, Scale, Select };
+    enum class GizmoSpace { World, Local };
+    enum class GizmoPivot { Active, Bounds };
+    GizmoSpace gizmoSpace() const noexcept{return gizmoSpace_;}
+    GizmoPivot gizmoPivot() const noexcept{return gizmoPivot_;}
+    void setGizmoSpace(GizmoSpace value) noexcept{gizmoSpace_=value;}
+    void setGizmoPivot(GizmoPivot value) noexcept{gizmoPivot_=value;}
+    void setSelectionAssetBounds(std::map<std::string,scene::AxisAlignedBounds> bounds){selectionAssetBounds_=std::move(bounds);}
 
     struct GizmoScreenData {
         bool valid = false;
@@ -96,6 +158,18 @@ public:
     void setGizmoScreen(const GizmoScreenData& value) {
         gizmoScreen_ = value;
     }
+    void setViewportCameraMatrices(std::array<float,16> view,std::array<float,16> projection){viewportView_=view;viewportProjection_=projection;}
+    const std::array<float,16>& viewportView() const{return viewportView_;}
+    const std::array<float,16>& viewportProjection() const{return viewportProjection_;}
+    void setDebugProjection(std::array<float,16> value) { debugProjection_=value; }
+    void setPickTargets(std::map<std::string,std::array<float,3>> targets) { pickTargets_=std::move(targets); }
+    const std::map<std::string,std::array<float,3>>& pickTargets() const { return pickTargets_; }
+    std::optional<std::array<float,2>> projectDebugPoint(const std::array<float,3>& point) const {
+        const auto& m=debugProjection_;const float w=m[3]*point[0]+m[7]*point[1]+m[11]*point[2]+m[15];
+        if(w<=.001F)return {};
+        return std::array<float,2>{(.5F*(m[0]*point[0]+m[4]*point[1]+m[8]*point[2]+m[12])/w)+.5F,
+            (.5F*(m[1]*point[0]+m[5]*point[1]+m[9]*point[2]+m[13])/w)+.5F};
+    }
     [[nodiscard]] azurerender::ecs::World& ecs() noexcept { return ecsWorld_; }
     [[nodiscard]] const azurerender::ecs::World& ecs() const noexcept { return ecsWorld_; }
     [[nodiscard]] azurerender::ecs::Entity entityForNode(std::size_t index) const noexcept;
@@ -112,9 +186,24 @@ public:
     }
 
 private:
+    friend class GizmoController;
+    friend class EditTransaction;
+    friend class EditService;
+    friend class PrefabAuthoringService;
+    friend class SceneImportService;
+    friend class DocumentBatchTransaction;
+    std::string documentId_=newDocumentIdentity();
+    std::uint64_t revision_=1,mergeRevision_=0;
+    std::string mergeKey_;
+    std::vector<std::size_t> mergeSelection_;
     struct Snapshot {
         SceneDocument scene;
         std::size_t selectedNodeIndex = 0;
+        std::map<std::string,nlohmann::json> components;
+        std::vector<std::size_t> selectedNodes;
+        nlohmann::json sourceLevel;
+        std::map<std::filesystem::path,std::string> resourceReferences;
+        nlohmann::json prefabBaselines,prefabFingerprints;
     };
     [[nodiscard]] Snapshot snapshot() const;
     void restore(Snapshot snapshot);
@@ -133,11 +222,33 @@ private:
     std::array<float, 3> gizmoRotation_{0.0F, 0.0F, 0.0F};
     std::array<float, 3> gizmoScale_{1.0F, 1.0F, 1.0F};
     GizmoMode gizmoMode_ = GizmoMode::Translate;
+    GizmoSpace gizmoSpace_=GizmoSpace::World;
+    GizmoPivot gizmoPivot_=GizmoPivot::Active;
+    std::map<std::string,scene::AxisAlignedBounds> selectionAssetBounds_;
     GizmoScreenData gizmoScreen_;
+    std::array<float,16> debugProjection_{},viewportView_{},viewportProjection_{};
+    std::map<std::string,std::array<float,3>> pickTargets_;
     bool dirty_ = false;
+    std::string savedFingerprint_;
+    void checkpointSaved();
+    void refreshDirty();
     std::vector<std::string> consoleMessages_;
     std::vector<Snapshot> undoStack_;
     std::vector<Snapshot> redoStack_;
+    std::vector<std::size_t> selectedNodes_{0};
+    std::unique_ptr<Project> project_;
+    std::unique_ptr<AssetDatabase> assets_;
+    nlohmann::json sourceLevel_;
+    nlohmann::json prefabBaselines_=nlohmann::json::object(),prefabFingerprints_=nlohmann::json::object();
+    void capturePrefabSources(const std::map<std::string,nlohmann::json>& sources={});
+    std::map<std::filesystem::path,std::string> resourceReferences_;
+    std::shared_ptr<AssetImportJob> importJob_;
+    std::string commitImport(AssetImportJob& job);
+    std::map<std::string,nlohmann::json> components_;
+    std::optional<NodeAnimationFrame> animationPreview_;
+    nlohmann::json importSummary_=nlohmann::json::object();
+    void validateComponentReferences(const SceneNode& node, const nlohmann::json& data,
+        const SceneDocument& scene) const;
     std::vector<std::pair<std::string, std::filesystem::file_time_type>>
         resourceWriteTimes_;
 };

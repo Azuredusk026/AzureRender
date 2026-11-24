@@ -1,0 +1,61 @@
+{
+  "status": "passed",
+  "package": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\独立游戏 中文 空格",
+  "entry": "完整联合场景显示验证.exe",
+  "sourceUnavailable": true,
+  "engineUnavailable": true,
+  "isolatedPath": "C:\\WINDOWS\\System32",
+  "cases": [
+    {
+      "name": "native-default",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\独立游戏 中文 空格\\完整联合场景显示验证.exe",
+        "--no-error-dialog",
+        "--width",
+        "960",
+        "--height",
+        "540",
+        "--capture-frames",
+        "3",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\native-default\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\native-default\\runtime.json"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 175.8507638000301
+    },
+    {
+      "name": "native-route",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\独立游戏 中文 空格\\完整联合场景显示验证.exe",
+        "--no-error-dialog",
+        "--capture-frames",
+        "540",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\native-route\\frames",
+        "--game-actions",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\package-actions.json",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\native-route\\runtime.json"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 618.7891161000007
+    }
+  ],
+  "immutableHashesPassed": true,
+  "tamperRejected": true,
+  "referencePixelFrames": 3,
+  "routeFrames": 540,
+  "defaultResolution": [
+    1920,
+    1080
+  ],
+  "manifestSha256": "a41a2fee04cb51e2b9f3c21e46b1ea1f0688f8c4466706b7100d71526761b3d0"
+}

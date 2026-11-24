@@ -1,0 +1,10 @@
+[1/2] Building CXX object CMakeFiles\AzureProjectTests.dir\tests\ProjectTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzureProjectTests.dir/tests/ProjectTests.cpp.obj
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_ENABLE_VALIDATION=1 -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DJPH_FLOATING_POINT_EXCEPTIONS_ENABLED -DJPH_OBJECT_STREAM -DJPH_USE_CPU_COMPUTE -DOPENEXR_DLL -I..\..\src -Igenerated -IC:\VulkanSDK\1.4.350.0\include -Ivcpkg_installed\x64-windows\include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath -MDd /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzureProjectTests.dir\tests\ProjectTests.cpp.obj /FdCMakeFiles\AzureProjectTests.dir\ /FS -c ..\..\tests\ProjectTests.cpp
+..\..\tests\ProjectTests.cpp(61): error C2039: "createGame": 不是 "azurerender::Project" 的成员
+..\..\src\runtime/Project.hpp(8): note: 参见“azurerender::Project”的声明
+..\..\tests\ProjectTests.cpp(61): error C3861: “createGame”: 找不到标识符
+..\..\tests\ProjectTests.cpp(64): error C2039: "createGame": 不是 "azurerender::Project" 的成员
+..\..\src\runtime/Project.hpp(8): note: 参见“azurerender::Project”的声明
+..\..\tests\ProjectTests.cpp(64): error C3861: “createGame”: 找不到标识符
+ninja: build stopped: subcommand failed.

@@ -1,0 +1,142 @@
+[
+  {
+    "path": "asset-copy.json.gz",
+    "bytes": 12741,
+    "sha256": "7e9e44a6ec59db633ba1148af890a2a420c64122f3d06fc53d02b53f23f4a3e6"
+  },
+  {
+    "path": "camera-candidate.json",
+    "bytes": 1530,
+    "sha256": "5164953f937ebd263150c8da2e799962c661571be1da24130e161b89f806c38f"
+  },
+  {
+    "path": "candidate-beauty/capture-manifest.json",
+    "bytes": 9045,
+    "sha256": "9a270292de84a6b2b1248791d69f9dec6efd29ed7cc7282da91380c063e0fb5b"
+  },
+  {
+    "path": "candidate-beauty/frame.png",
+    "bytes": 3696028,
+    "sha256": "b3659c0f7bc24592b1df31a36abdf6b0622d656df24778c6dad26c230b66e450"
+  },
+  {
+    "path": "candidate-beauty/player.log.gz",
+    "bytes": 3264,
+    "sha256": "32bf629b5be0edc67786a7be3609de22213a254f5e02e938d5a99c2dcab9e824"
+  },
+  {
+    "path": "candidate-beauty/runtime.json.gz",
+    "bytes": 30587,
+    "sha256": "fad491b0b5c15f2a666c407bf3d08d4980d11c4f1fd2231aed010c8c07819620"
+  },
+  {
+    "path": "capture.py",
+    "bytes": 2391,
+    "sha256": "a336fd59839f094bab6add40dfba62cac3fa57f83ddad0152061b3d41760c1f7"
+  },
+  {
+    "path": "contain-inputs.py",
+    "bytes": 1926,
+    "sha256": "0a8702ac8daa767ab8c895de018043f7a6dc32f08b567cd4471b13109aa96a57"
+  },
+  {
+    "path": "control-albedo/capture-manifest.json",
+    "bytes": 8876,
+    "sha256": "18e9b1907560df3f834085f1f085e3d1b819327a10970c833122072854c59826"
+  },
+  {
+    "path": "control-albedo/frame.png",
+    "bytes": 2526256,
+    "sha256": "b0969eda2f92f97e99abf7bcecd2075ff4b2ac588f95d5e2f0fe4444bbd19806"
+  },
+  {
+    "path": "control-albedo/player.log.gz",
+    "bytes": 3257,
+    "sha256": "33e17270c9e6bd9aff6e64eea1dc34a9dbeeea397cd9920d53973438e0cfc7b8"
+  },
+  {
+    "path": "control-albedo/runtime.json.gz",
+    "bytes": 30587,
+    "sha256": "fad491b0b5c15f2a666c407bf3d08d4980d11c4f1fd2231aed010c8c07819620"
+  },
+  {
+    "path": "control-beauty/capture-manifest.json",
+    "bytes": 8924,
+    "sha256": "2142f8886eb7c3037e87dcfeb6e6afb7ff1977d842ec29829eb8b11d70926b61"
+  },
+  {
+    "path": "control-beauty/frame.png",
+    "bytes": 3632726,
+    "sha256": "c46f4e5ea1935a667604bb85fea72e8049602742492471d4bab0217933b69231"
+  },
+  {
+    "path": "control-beauty/player.log.gz",
+    "bytes": 3258,
+    "sha256": "e818397703f718269a535524f25af109d2a25adf15ad159dcbcc9d260869c678"
+  },
+  {
+    "path": "control-beauty/runtime.json.gz",
+    "bytes": 30587,
+    "sha256": "fad491b0b5c15f2a666c407bf3d08d4980d11c4f1fd2231aed010c8c07819620"
+  },
+  {
+    "path": "failed-external-mount/capture.log.gz",
+    "bytes": 646,
+    "sha256": "0596c2345698765787be3e244ae532c10c9fca2e2a2aed9593e1bbf1a850008c"
+  },
+  {
+    "path": "failed-external-mount/player.log.gz",
+    "bytes": 208,
+    "sha256": "54ec7550c7899d8d7542aa85e1fa85227fc5fd8f816c9212cd3bb17605e14f8d"
+  },
+  {
+    "path": "failed-external-mount/summary.json.gz",
+    "bytes": 504,
+    "sha256": "6d7e940e7bddc16ce1df1e7ea7cac3064de29242abcbcfcf28f8151ea204516c"
+  },
+  {
+    "path": "input-verification.json.gz",
+    "bytes": 71140,
+    "sha256": "33526a22ac8b6695f37f2ee11bc674be19988226e6bbc2595874646c4cdd87e4"
+  },
+  {
+    "path": "iris-pixel-footprint.json",
+    "bytes": 1691,
+    "sha256": "04f2d0a49f9ab0aace0978bda7568e6ffb444e8388d0f91d81088be5c4b1631c"
+  },
+  {
+    "path": "postcapture-input-verification.json",
+    "bytes": 83,
+    "sha256": "df01e3295d1ce19ac1531408f6feb9da0cb39a07fbe0aba921b5230215ceebfb"
+  },
+  {
+    "path": "prepare-camera.py",
+    "bytes": 8335,
+    "sha256": "f26be247d5d3ad992e44bbe75c474558060a2d2c3c4d5b2a573db9876040c04b"
+  },
+  {
+    "path": "result.json",
+    "bytes": 692,
+    "sha256": "ba55361e4660e91a8df3e8d09110317eadd69aeaf92865dc8b7f2b36949190f2"
+  },
+  {
+    "path": "summary.json",
+    "bytes": 41669,
+    "sha256": "dc0a959aa6f9ef087012e2238be2bdac91256c40ebdccbd214c15b9632fdb64b"
+  },
+  {
+    "path": "verify-inputs.py",
+    "bytes": 2575,
+    "sha256": "b17aa3af6e274aa7cf84914c2443cedfc6d914e8e37139945068f930bbe52753"
+  },
+  {
+    "path": "verify-visual.py",
+    "bytes": 3532,
+    "sha256": "4f90ddb82ea3b0341bd447a0062b284a819ac8c96184e28516b01e8a09cea919"
+  },
+  {
+    "path": "visual-verification.json",
+    "bytes": 3424,
+    "sha256": "19ed40b6d8c7491ba858cef4b03f3f8ead10bb645bebfb24e44cf193ef3699c5"
+  }
+]

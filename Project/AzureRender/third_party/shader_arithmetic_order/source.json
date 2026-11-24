@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "scope": "Offline DXBC arithmetic-order tooling",
+  "format": {
+    "project": "Microsoft DirectX-Headers",
+    "commit": "c526f205c5f96cd2884bf0834c14c7e61bb726c8",
+    "source": "https://github.com/microsoft/DirectX-Headers/blob/c526f205c5f96cd2884bf0834c14c7e61bb726c8/include/directx/D3D12TokenizedProgramFormat.hpp",
+    "license": "MIT",
+    "adaptation": "Token field interpretation and opcode constants; Python operand and instruction processing",
+    "downloadedHeaderSha256": "5862ef7c8b819f0d02ba73563a9df4dc0e89f11fe59d8f598def39122273c626"
+  },
+  "hashing": {
+    "project": "Microsoft DirectXShaderCompiler",
+    "commit": "84f68ed1a40db3f3444a306162cab6ac0adfe842",
+    "source": "https://github.com/microsoft/DirectXShaderCompiler/blob/84f68ed1a40db3f3444a306162cab6ac0adfe842/lib/DxilHash/DxilHash.cpp",
+    "license": "University of Illinois/NCSA",
+    "adaptation": "Retail DXBC hash padding expressed in Python with standard MD5 compression rounds",
+    "upstreamSourceSha256": "d66b631ea28d4c90a8217fac004f9290eaac07f79115451e0c4e954c0b0c94af"
+  },
+  "licenses": {
+    "LICENSE-DirectX-Headers.txt": "903df5512f7d02609fed0c780a9b704f5a3eeb6e4d84ebe42a29845c81899a3c",
+    "LICENSE-DXC.txt": "27a49e35d1da96eba18fba54bc882667ff0ff8c0254f16f2b6e165d605ba7df8"
+  }
+}

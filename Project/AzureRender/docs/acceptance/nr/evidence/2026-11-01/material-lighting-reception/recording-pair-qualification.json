@@ -1,0 +1,8 @@
+{
+  "status": "qualified-frame-mapping",
+  "captureFrame": 10,
+  "matchedScreenshot": "frame_000010.png",
+  "qualification": "Both complete replay outputs match original frame_000010 exactly. The selected differing screenshots were frame_000009. Input and post-processing equality is established only for captured frame 10 and cannot exclude the frame 9 defect.",
+  "mappingEvidence": "replay-original-frame-comparison.json",
+  "visualAcceptance": "failed-user-review"
+}

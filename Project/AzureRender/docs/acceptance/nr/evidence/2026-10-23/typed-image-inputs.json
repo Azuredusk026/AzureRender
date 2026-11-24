@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "status": "typed-image-import-and-native-input-validation-passed",
+  "scope": "C16 selected-image metadata, encoded sRGB bytes, native all-mip inputs, full material documents",
+  "nativeTrace": {
+    "event": 950,
+    "pixel": [
+      1280,
+      1244
+    ],
+    "primitive": 1017,
+    "sha256": "80a1615d2e443a774626ea1b76833f9705292460bd998fcbb060dcf1ec7d781f",
+    "rgb": [
+      1.1794253587722778,
+      0.20474468171596527,
+      0.21604283154010773
+    ],
+    "hardwareMaximumError": 1.4901161193847656e-08,
+    "detailTexture15Executed": false
+  },
+  "textures": [
+    {
+      "sourceTexture": 12,
+      "sha256": "388813b5465244f3f07a2a383021ca470f60bbd08aa3d4d7daa801a8c09aeaa4",
+      "width": 512,
+      "height": 512,
+      "mipLevels": 10,
+      "bytes": 349700
+    },
+    {
+      "sourceTexture": 13,
+      "sha256": "6f0bdcb7d4da88f997622f690688683380a208bf7bd929ef55522e5edadace05",
+      "width": 256,
+      "height": 1,
+      "mipLevels": 1,
+      "bytes": 1152
+    },
+    {
+      "sourceTexture": 14,
+      "sha256": "cb0c4a5bf2eb2dcf6b4abc7bec66fe1b7dc6400a79efc49811484b35d17993d4",
+      "width": 256,
+      "height": 256,
+      "mipLevels": 1,
+      "bytes": 262272
+    },
+    {
+      "sourceTexture": 16,
+      "sha256": "4a382264f75c816ccf8fdf70c5e4bccfcf6dc5b31d74c1fcb92b29a9bd556643",
+      "width": 2048,
+      "height": 2048,
+      "mipLevels": 12,
+      "bytes": 5592580
+    },
+    {
+      "sourceTexture": 17,
+      "sha256": "12df068935abc56ac44d86c08a5b342e748f85f5ef3b6d2048485064d8292995",
+      "width": 2048,
+      "height": 2048,
+      "mipLevels": 12,
+      "bytes": 5592580
+    },
+    {
+      "sourceTexture": 18,
+      "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54",
+      "width": 2048,
+      "height": 2048,
+      "mipLevels": 12,
+      "bytes": 5592580
+    }
+  ],
+  "srgbMidtone": {
+    "encoded": [
+      128,
+      64,
+      32,
+      200
+    ],
+    "redDecoded": [
+      55,
+      13,
+      4,
+      200
+    ],
+    "greenDecoded": [
+      128,
+      64,
+      32,
+      200
+    ]
+  },
+  "tests": {
+    "release": {
+      "passed": 9,
+      "logSha256": "db91042e5b612e49c1d2aa99877de381d46ee105f460ab6a9cc7bd4ecaf41808"
+    },
+    "debug": {
+      "passed": 9,
+      "logSha256": "9126aaa6bd07ed50d843a780a4e4a161d21be4436ea52c11da14e6e60d04b698"
+    }
+  },
+  "captures": [
+    {
+      "name": "native-dds-beauty-release",
+      "imageSha256": "00a4282f674982d8881bd591902edda79fe55eac62e6b8d6d5f8cb0ad384289f",
+      "playerSha256": "25165311421bada6988ceea934735e562d9f6acde060e1e1ed5535d5c1b6ceee",
+      "validationEnabled": false
+    },
+    {
+      "name": "native-dds-kk-release",
+      "imageSha256": "e0a12a282e6cae77b3f36c929565ec1960d4d7b0fdb100c3456f2824726a536c",
+      "playerSha256": "25165311421bada6988ceea934735e562d9f6acde060e1e1ed5535d5c1b6ceee",
+      "validationEnabled": false
+    },
+    {
+      "name": "native-dds-kk-debug",
+      "imageSha256": "e0a12a282e6cae77b3f36c929565ec1960d4d7b0fdb100c3456f2824726a536c",
+      "playerSha256": "fc46f2f961a52f6b2e86d90e7f925b98aaaa14eed7ce8509816356dabe07b42c",
+      "validationEnabled": true
+    },
+    {
+      "name": "native-docs-beauty-release",
+      "imageSha256": "00a4282f674982d8881bd591902edda79fe55eac62e6b8d6d5f8cb0ad384289f",
+      "playerSha256": "25165311421bada6988ceea934735e562d9f6acde060e1e1ed5535d5c1b6ceee",
+      "validationEnabled": false
+    },
+    {
+      "name": "native-docs-kk-debug",
+      "imageSha256": "e0a12a282e6cae77b3f36c929565ec1960d4d7b0fdb100c3456f2824726a536c",
+      "playerSha256": "fc46f2f961a52f6b2e86d90e7f925b98aaaa14eed7ce8509816356dabe07b42c",
+      "validationEnabled": true
+    }
+  ],
+  "comparisons": [
+    {
+      "name": "fixed-indexed-kk",
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "leftSha256": "e0a12a282e6cae77b3f36c929565ec1960d4d7b0fdb100c3456f2824726a536c",
+      "rightSha256": "e0a12a282e6cae77b3f36c929565ec1960d4d7b0fdb100c3456f2824726a536c"
+    },
+    {
+      "name": "full-document-beauty",
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "leftSha256": "00a4282f674982d8881bd591902edda79fe55eac62e6b8d6d5f8cb0ad384289f",
+      "rightSha256": "00a4282f674982d8881bd591902edda79fe55eac62e6b8d6d5f8cb0ad384289f"
+    },
+    {
+      "name": "full-document-fixed-kk",
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "leftSha256": "e0a12a282e6cae77b3f36c929565ec1960d4d7b0fdb100c3456f2824726a536c",
+      "rightSha256": "e0a12a282e6cae77b3f36c929565ec1960d4d7b0fdb100c3456f2824726a536c"
+    }
+  ],
+  "resourceChecks": {
+    "validationErrors": 0,
+    "buffersAfterUnload": 0,
+    "imagesAfterUnload": 0
+  },
+  "sourceFiles": {
+    "src/assets/GltfLoader.cpp": "dd7bed2e44c524aad53303283fcd82032f552b7afa68392dbd82cadcf9250fff",
+    "src/assets/GltfLoader.hpp": "a2003c290bfa726e30d274d4cb34fe431f6888d33f75fdb0f9e0085025faa434",
+    "src/assets/MaterialData.cpp": "67424246aa86a33befe0c668c6b86bd8d6aee8b6d0e063792ff6b0882b7182a0",
+    "src/assets/image/TextureContainerAdapter.cpp": "b1131e70cc81f48daa64e770460fd46b58b5224fd77803a37fbca8a047177135"
+  },
+  "run": "build/runs/20261023-043809-visible-hair-material-inputs-161464",
+  "contractRun": "build/runs/20261023-045959-typed-image-sampler-contract-fc8abd",
+  "remaining": [
+    "Complete native hair illumination and color response",
+    "Overlay stencil and blending",
+    "Moving head, front-side-back views",
+    "Main project promotion",
+    "C16 multi-view resource and peak measurements"
+  ]
+}

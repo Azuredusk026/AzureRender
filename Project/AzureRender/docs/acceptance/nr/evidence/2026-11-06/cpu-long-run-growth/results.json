@@ -1,0 +1,864 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnosis-recorded-candidate-not-adopted",
+  "sourceBase": "a295e09",
+  "productionChanged": false,
+  "results": {
+    "native": {
+      "native": {
+        "status": "measured",
+        "sourceBase": "a295e09",
+        "visualAcceptance": "failed-user-review",
+        "seconds": 209.0470000000205,
+        "warmup": 300,
+        "samples": 1800,
+        "gpu": {
+          "shadowMs": {
+            "mean": 2.6716659733333334,
+            "p95": 2.8522192,
+            "p99": 2.89037408
+          },
+          "sceneMs": {
+            "mean": 28.244672284444444,
+            "p95": 30.1415936,
+            "p99": 30.28893696
+          },
+          "postProcessMs": {
+            "mean": 0.3371684977777778,
+            "p95": 0.351232,
+            "p99": 0.351232
+          },
+          "frameMs": {
+            "mean": 31.253506755555556,
+            "p95": 33.2134992,
+            "p99": 33.46839648
+          }
+        },
+        "cpu": {
+          "mean": 27.635681777777787,
+          "p95": 45.346624999999584,
+          "p99": 52.281172000002684
+        },
+        "wait": {
+          "mean": 5.690626888888881,
+          "p95": 12.026505000003544,
+          "p99": 13.121129999999583
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "framePacing": {
+          "maximumRate": 60,
+          "presentMode": "FIFO",
+          "vsync": true,
+          "waitFrames": 0,
+          "waitMilliseconds": 0.0
+        },
+        "allocator": {
+          "bufferAllocations": 1997,
+          "imageAllocations": 440,
+          "liveBuffers": 834,
+          "liveImages": 440,
+          "bufferBytes": 2985576984,
+          "imageBytes": 2779192832,
+          "liveBufferBytes": 415610856,
+          "liveImageBytes": 2779192832,
+          "deviceLocalPeakBytes": 3291255520
+        },
+        "peakWorkingSetBytes": 7403859968,
+        "environmentFailures": [
+          "run observation 26: software thermal slowdown is active",
+          "run observation 27: software thermal slowdown is active",
+          "run observation 28: driver relative thermal headroom is insufficient",
+          "run observation 28: software thermal slowdown is active",
+          "run observation 29: software thermal slowdown is active",
+          "run observation 30: software thermal slowdown is active",
+          "run observation 31: driver relative thermal headroom is insufficient",
+          "run observation 31: software thermal slowdown is active",
+          "run observation 32: driver relative thermal headroom is insufficient",
+          "run observation 32: software thermal slowdown is active",
+          "run observation 33: driver relative thermal headroom is insufficient",
+          "run observation 33: software thermal slowdown is active",
+          "run observation 34: driver relative thermal headroom is insufficient",
+          "run observation 34: software thermal slowdown is active",
+          "run observation 35: driver relative thermal headroom is insufficient",
+          "run observation 35: software thermal slowdown is active",
+          "run observation 36: driver relative thermal headroom is insufficient",
+          "run observation 36: software thermal slowdown is active",
+          "run observation 37: software thermal slowdown is active",
+          "run observation 38: software thermal slowdown is active"
+        ],
+        "zeroAllocator": true,
+        "validationClean": true,
+        "allMountedProjectBytesUnchanged": true,
+        "originalLimitsNumericallyMet": false,
+        "powerProfileStable": true,
+        "environmentPassed": false,
+        "diagnosticOnly": true,
+        "instrumented": true,
+        "privateFilesUnchanged": true,
+        "privateFiles": {
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\cpu-long-run-growth\\source\\AzureRenderApp.cpp": "edc82254bbd8ef5cac11c11d2eebf8300de53a8658c8ae8b7b19ed47bc35e411",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\cpu-long-run-growth\\source\\AzureRenderCapture.cpp": "b9e1bace331f20260cc8dc01da513782ecaa2f6f469c7b2891a11d52b7dc4146",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\cpu-long-run-growth\\source\\AzureRenderFrame.cpp": "1c7210388a2cfed4cbdd31c8b1f2c0990104e47cadd164aedc299a752759ef0f",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\cpu-long-run-growth\\private-link\\AzurePlayer.exe": "9972e6cc808df847657be3356d2d0083764eafaf56910a859eaa9d7685bd3cb0"
+        },
+        "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "productionShaderFilesUnchanged": true
+      },
+      "stageMeans": [
+        {
+          "kind": "host-frame",
+          "band": 1,
+          "samples": 20,
+          "means": {
+            "collectTimingMs": 0.592495,
+            "framePrepareMs": 9.02343,
+            "frameSnapshotMs": 0.002965,
+            "hostSyncMs": 0.660425,
+            "levelPollMs": 0.090335,
+            "lutMs": 0.027435,
+            "miscBeforeRecordMs": 0.032565,
+            "poolResetMs": 0.039005,
+            "recordMs": 3.966825,
+            "rendererUpdateMs": 9.16871
+          }
+        },
+        {
+          "kind": "host-frame",
+          "band": 3,
+          "samples": 20,
+          "means": {
+            "collectTimingMs": 0.528445,
+            "framePrepareMs": 8.66238,
+            "frameSnapshotMs": 0.002365,
+            "hostSyncMs": 0.641155,
+            "levelPollMs": 0.089405,
+            "lutMs": 0.022789999999999998,
+            "miscBeforeRecordMs": 0.03364,
+            "poolResetMs": 0.07615,
+            "recordMs": 4.001155,
+            "rendererUpdateMs": 8.45848
+          }
+        },
+        {
+          "kind": "host-frame",
+          "band": 5,
+          "samples": 20,
+          "means": {
+            "collectTimingMs": 0.60501,
+            "framePrepareMs": 12.27637,
+            "frameSnapshotMs": 0.003165,
+            "hostSyncMs": 0.69404,
+            "levelPollMs": 0.097095,
+            "lutMs": 0.03281,
+            "miscBeforeRecordMs": 0.03614,
+            "poolResetMs": 0.068785,
+            "recordMs": 5.688345,
+            "rendererUpdateMs": 13.052965
+          }
+        },
+        {
+          "kind": "host-frame",
+          "band": 6,
+          "samples": 20,
+          "means": {
+            "collectTimingMs": 0.92603,
+            "framePrepareMs": 18.51743,
+            "frameSnapshotMs": 0.0065899999999999995,
+            "hostSyncMs": 1.004855,
+            "levelPollMs": 0.151175,
+            "lutMs": 0.05008,
+            "miscBeforeRecordMs": 0.03828,
+            "poolResetMs": 0.04835,
+            "recordMs": 8.365885,
+            "rendererUpdateMs": 20.10091
+          }
+        },
+        {
+          "kind": "scene-preparation",
+          "band": 1,
+          "samples": 20,
+          "means": {
+            "cameraMs": 1.24673,
+            "materializeAndResourcesMs": 3.72642,
+            "nodes": 1679,
+            "remainingPrepareMs": 0.384225,
+            "resources": 374,
+            "sceneSnapshotMs": 2.14626,
+            "simulationAndInputMs": 1.182655
+          }
+        },
+        {
+          "kind": "scene-preparation",
+          "band": 3,
+          "samples": 20,
+          "means": {
+            "cameraMs": 1.18653,
+            "materializeAndResourcesMs": 3.52519,
+            "nodes": 1679,
+            "remainingPrepareMs": 0.40727,
+            "resources": 374,
+            "sceneSnapshotMs": 2.049315,
+            "simulationAndInputMs": 1.16536
+          }
+        },
+        {
+          "kind": "scene-preparation",
+          "band": 5,
+          "samples": 20,
+          "means": {
+            "cameraMs": 1.77558,
+            "materializeAndResourcesMs": 5.16714,
+            "nodes": 1679,
+            "remainingPrepareMs": 0.437865,
+            "resources": 374,
+            "sceneSnapshotMs": 2.859245,
+            "simulationAndInputMs": 1.607865
+          }
+        },
+        {
+          "kind": "scene-preparation",
+          "band": 6,
+          "samples": 20,
+          "means": {
+            "cameraMs": 2.77981,
+            "materializeAndResourcesMs": 7.790605,
+            "nodes": 1679,
+            "remainingPrepareMs": 0.6345500000000001,
+            "resources": 374,
+            "sceneSnapshotMs": 4.254845,
+            "simulationAndInputMs": 2.38054
+          }
+        },
+        {
+          "kind": "timing-csv",
+          "band": 1,
+          "samples": 20,
+          "means": {
+            "csvMs": 0.312005
+          }
+        },
+        {
+          "kind": "timing-csv",
+          "band": 3,
+          "samples": 20,
+          "means": {
+            "csvMs": 0.30093
+          }
+        },
+        {
+          "kind": "timing-csv",
+          "band": 5,
+          "samples": 20,
+          "means": {
+            "csvMs": 0.33120499999999997
+          }
+        },
+        {
+          "kind": "timing-csv",
+          "band": 6,
+          "samples": 20,
+          "means": {
+            "csvMs": 0.478645
+          }
+        }
+      ],
+      "system20SecondBands": [
+        {
+          "seconds": [
+            0,
+            20
+          ],
+          "samples": 3,
+          "means": {
+            "processorPerformance": 123.15730075155884,
+            "processorFrequencyMHz": 1900.3333333333333,
+            "processorUtilization": 20.13713934149784,
+            "processorQueue": 2.3333333333333335
+          }
+        },
+        {
+          "seconds": [
+            20,
+            40
+          ],
+          "samples": 20,
+          "means": {
+            "processorPerformance": 124.79368846601822,
+            "processorFrequencyMHz": 1845.45,
+            "processorUtilization": 15.67505245540779,
+            "processorQueue": 0.4
+          }
+        },
+        {
+          "seconds": [
+            40,
+            60
+          ],
+          "samples": 20,
+          "means": {
+            "processorPerformance": 120.49093026291193,
+            "processorFrequencyMHz": 1985.35,
+            "processorUtilization": 31.991820991325053,
+            "processorQueue": 0.55
+          }
+        },
+        {
+          "seconds": [
+            60,
+            80
+          ],
+          "samples": 19,
+          "means": {
+            "processorPerformance": 121.59323334421553,
+            "processorFrequencyMHz": 1818.8947368421052,
+            "processorUtilization": 15.661899774380933,
+            "processorQueue": 2.210526315789474
+          }
+        },
+        {
+          "seconds": [
+            80,
+            100
+          ],
+          "samples": 20,
+          "means": {
+            "processorPerformance": 118.14944796004772,
+            "processorFrequencyMHz": 1758.5,
+            "processorUtilization": 9.924744035191754,
+            "processorQueue": 1.65
+          }
+        },
+        {
+          "seconds": [
+            100,
+            120
+          ],
+          "samples": 20,
+          "means": {
+            "processorPerformance": 111.78400377001876,
+            "processorFrequencyMHz": 1725.4,
+            "processorUtilization": 9.833518757596678,
+            "processorQueue": 2.25
+          }
+        },
+        {
+          "seconds": [
+            120,
+            140
+          ],
+          "samples": 19,
+          "means": {
+            "processorPerformance": 114.93999163867738,
+            "processorFrequencyMHz": 1779.6315789473683,
+            "processorUtilization": 12.24833429300913,
+            "processorQueue": 0.7894736842105263
+          }
+        },
+        {
+          "seconds": [
+            140,
+            160
+          ],
+          "samples": 20,
+          "means": {
+            "processorPerformance": 114.37213069015921,
+            "processorFrequencyMHz": 1793.6,
+            "processorUtilization": 16.217598340472755,
+            "processorQueue": 0.45
+          }
+        },
+        {
+          "seconds": [
+            160,
+            180
+          ],
+          "samples": 20,
+          "means": {
+            "processorPerformance": 99.11933125202384,
+            "processorFrequencyMHz": 1811.05,
+            "processorUtilization": 16.310916737754855,
+            "processorQueue": 0.35
+          }
+        },
+        {
+          "seconds": [
+            180,
+            200
+          ],
+          "samples": 19,
+          "means": {
+            "processorPerformance": 71.48696500032835,
+            "processorFrequencyMHz": 1880.6842105263158,
+            "processorUtilization": 18.584143876806415,
+            "processorQueue": 0.42105263157894735
+          }
+        },
+        {
+          "seconds": [
+            200,
+            220
+          ],
+          "samples": 1,
+          "means": {
+            "processorPerformance": 63.26442169961195,
+            "processorFrequencyMHz": 1874.0,
+            "processorUtilization": 20.64256978509874,
+            "processorQueue": 1.0
+          }
+        }
+      ]
+    },
+    "high-qos-native": {
+      "native": {
+        "status": "measured",
+        "sourceBase": "a295e09",
+        "visualAcceptance": "failed-user-review",
+        "seconds": 187.60999999998603,
+        "warmup": 300,
+        "samples": 1800,
+        "gpu": {
+          "shadowMs": {
+            "mean": 2.7249060444444444,
+            "p95": 2.8740688000000003,
+            "p99": 2.98395296
+          },
+          "sceneMs": {
+            "mean": 28.43194311111111,
+            "p95": 30.18752,
+            "p99": 31.3444864
+          },
+          "postProcessMs": {
+            "mean": 0.33744099555555557,
+            "p95": 0.351232,
+            "p99": 0.36150272
+          },
+          "frameMs": {
+            "mean": 31.494290151111112,
+            "p95": 33.3558912,
+            "p99": 34.1931872
+          }
+        },
+        "cpu": {
+          "mean": 25.316878555555572,
+          "p95": 37.764499999999444,
+          "p99": 49.35571600000423
+        },
+        "wait": {
+          "mean": 7.1710571666666505,
+          "p95": 13.69358500000112,
+          "p99": 14.974302999999436
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "framePacing": {
+          "maximumRate": 60,
+          "presentMode": "FIFO",
+          "vsync": true,
+          "waitFrames": 0,
+          "waitMilliseconds": 0.0
+        },
+        "allocator": {
+          "bufferAllocations": 1997,
+          "imageAllocations": 440,
+          "liveBuffers": 834,
+          "liveImages": 440,
+          "bufferBytes": 2985576984,
+          "imageBytes": 2779192832,
+          "liveBufferBytes": 415610856,
+          "liveImageBytes": 2779192832,
+          "deviceLocalPeakBytes": 3291255520
+        },
+        "peakWorkingSetBytes": 7405359104,
+        "environmentFailures": [
+          "run observation 22: driver relative thermal headroom is insufficient",
+          "run observation 22: software thermal slowdown is active",
+          "run observation 23: driver relative thermal headroom is insufficient",
+          "run observation 23: software thermal slowdown is active",
+          "run observation 24: driver relative thermal headroom is insufficient",
+          "run observation 24: software thermal slowdown is active",
+          "run observation 25: software thermal slowdown is active",
+          "run observation 26: software thermal slowdown is active",
+          "run observation 27: driver relative thermal headroom is insufficient",
+          "run observation 27: software thermal slowdown is active",
+          "run observation 28: driver relative thermal headroom is insufficient",
+          "run observation 28: software thermal slowdown is active",
+          "run observation 29: driver relative thermal headroom is insufficient",
+          "run observation 29: software thermal slowdown is active",
+          "run observation 30: driver relative thermal headroom is insufficient",
+          "run observation 30: software thermal slowdown is active",
+          "run observation 31: driver relative thermal headroom is insufficient",
+          "run observation 31: software thermal slowdown is active",
+          "run observation 32: driver relative thermal headroom is insufficient",
+          "run observation 32: software thermal slowdown is active",
+          "run observation 33: driver relative thermal headroom is insufficient",
+          "run observation 33: software thermal slowdown is active",
+          "run observation 34: driver relative thermal headroom is insufficient",
+          "run observation 34: software thermal slowdown is active"
+        ],
+        "zeroAllocator": true,
+        "validationClean": true,
+        "allMountedProjectBytesUnchanged": true,
+        "originalLimitsNumericallyMet": false,
+        "powerProfileStable": true,
+        "environmentPassed": false,
+        "diagnosticOnly": true,
+        "instrumented": true,
+        "privateFilesUnchanged": true,
+        "privateFiles": {
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\cpu-long-run-growth\\source\\AzureRenderApp.cpp": "edc82254bbd8ef5cac11c11d2eebf8300de53a8658c8ae8b7b19ed47bc35e411",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\cpu-long-run-growth\\source\\AzureRenderCapture.cpp": "b9e1bace331f20260cc8dc01da513782ecaa2f6f469c7b2891a11d52b7dc4146",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\cpu-long-run-growth\\source\\AzureRenderFrame.cpp": "1c7210388a2cfed4cbdd31c8b1f2c0990104e47cadd164aedc299a752759ef0f",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\cpu-long-run-growth\\private-link\\AzurePlayer.exe": "9972e6cc808df847657be3356d2d0083764eafaf56910a859eaa9d7685bd3cb0"
+        },
+        "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "productionShaderFilesUnchanged": true
+      },
+      "stageMeans": [
+        {
+          "kind": "host-frame",
+          "band": 1,
+          "samples": 20,
+          "means": {
+            "collectTimingMs": 0.48468,
+            "framePrepareMs": 8.194325,
+            "frameSnapshotMs": 0.002755,
+            "hostSyncMs": 0.5822849999999999,
+            "levelPollMs": 0.01542,
+            "lutMs": 0.022625,
+            "miscBeforeRecordMs": 0.02885,
+            "poolResetMs": 0.066845,
+            "recordMs": 3.528775,
+            "rendererUpdateMs": 8.25082
+          }
+        },
+        {
+          "kind": "host-frame",
+          "band": 3,
+          "samples": 20,
+          "means": {
+            "collectTimingMs": 0.48286999999999997,
+            "framePrepareMs": 8.42956,
+            "frameSnapshotMs": 0.0022099999999999997,
+            "hostSyncMs": 0.576095,
+            "levelPollMs": 0.0019249999999999998,
+            "lutMs": 0.024455,
+            "miscBeforeRecordMs": 0.02998,
+            "poolResetMs": 0.061225,
+            "recordMs": 3.785425,
+            "rendererUpdateMs": 8.402610000000001
+          }
+        },
+        {
+          "kind": "host-frame",
+          "band": 5,
+          "samples": 20,
+          "means": {
+            "collectTimingMs": 0.61048,
+            "framePrepareMs": 11.738305,
+            "frameSnapshotMs": 0.002745,
+            "hostSyncMs": 0.6772,
+            "levelPollMs": 0.018695,
+            "lutMs": 0.03186,
+            "miscBeforeRecordMs": 0.02828,
+            "poolResetMs": 0.034395,
+            "recordMs": 5.243245,
+            "rendererUpdateMs": 12.25978
+          }
+        },
+        {
+          "kind": "host-frame",
+          "band": 6,
+          "samples": 20,
+          "means": {
+            "collectTimingMs": 1.0184900000000001,
+            "framePrepareMs": 19.513415,
+            "frameSnapshotMs": 0.00533,
+            "hostSyncMs": 1.10104,
+            "levelPollMs": 0.004035,
+            "lutMs": 0.056795,
+            "miscBeforeRecordMs": 0.039349999999999996,
+            "poolResetMs": 0.049125,
+            "recordMs": 8.778075,
+            "rendererUpdateMs": 21.04703
+          }
+        },
+        {
+          "kind": "scene-preparation",
+          "band": 1,
+          "samples": 20,
+          "means": {
+            "cameraMs": 1.1402,
+            "materializeAndResourcesMs": 3.334335,
+            "nodes": 1679,
+            "remainingPrepareMs": 0.37391,
+            "resources": 374,
+            "sceneSnapshotMs": 1.9549,
+            "simulationAndInputMs": 1.061125
+          }
+        },
+        {
+          "kind": "scene-preparation",
+          "band": 3,
+          "samples": 20,
+          "means": {
+            "cameraMs": 1.180405,
+            "materializeAndResourcesMs": 3.55199,
+            "nodes": 1679,
+            "remainingPrepareMs": 0.332445,
+            "resources": 374,
+            "sceneSnapshotMs": 2.00043,
+            "simulationAndInputMs": 1.029675
+          }
+        },
+        {
+          "kind": "scene-preparation",
+          "band": 5,
+          "samples": 20,
+          "means": {
+            "cameraMs": 1.7169349999999999,
+            "materializeAndResourcesMs": 4.803945,
+            "nodes": 1679,
+            "remainingPrepareMs": 0.443885,
+            "resources": 374,
+            "sceneSnapshotMs": 2.83303,
+            "simulationAndInputMs": 1.51255
+          }
+        },
+        {
+          "kind": "scene-preparation",
+          "band": 6,
+          "samples": 20,
+          "means": {
+            "cameraMs": 2.93141,
+            "materializeAndResourcesMs": 8.112345,
+            "nodes": 1679,
+            "remainingPrepareMs": 0.66719,
+            "resources": 374,
+            "sceneSnapshotMs": 4.49853,
+            "simulationAndInputMs": 2.46484
+          }
+        },
+        {
+          "kind": "timing-csv",
+          "band": 1,
+          "samples": 20,
+          "means": {
+            "csvMs": 0.28736
+          }
+        },
+        {
+          "kind": "timing-csv",
+          "band": 3,
+          "samples": 20,
+          "means": {
+            "csvMs": 0.293415
+          }
+        },
+        {
+          "kind": "timing-csv",
+          "band": 5,
+          "samples": 20,
+          "means": {
+            "csvMs": 0.350685
+          }
+        },
+        {
+          "kind": "timing-csv",
+          "band": 6,
+          "samples": 20,
+          "means": {
+            "csvMs": 0.55496
+          }
+        }
+      ],
+      "system20SecondBands": [
+        {
+          "seconds": [
+            0,
+            20
+          ],
+          "samples": 19,
+          "means": {
+            "processorPerformance": 128.5194650047186,
+            "processorFrequencyMHz": 1807.9473684210527,
+            "processorUtilization": 12.883661103626656,
+            "processorQueue": 1.368421052631579
+          }
+        },
+        {
+          "seconds": [
+            20,
+            40
+          ],
+          "samples": 20,
+          "means": {
+            "processorPerformance": 124.0126879850558,
+            "processorFrequencyMHz": 1827.0,
+            "processorUtilization": 10.3562790151959,
+            "processorQueue": 0.75
+          }
+        },
+        {
+          "seconds": [
+            40,
+            60
+          ],
+          "samples": 20,
+          "means": {
+            "processorPerformance": 130.3048531572214,
+            "processorFrequencyMHz": 1791.3,
+            "processorUtilization": 8.3264136066895,
+            "processorQueue": 0.4
+          }
+        },
+        {
+          "seconds": [
+            60,
+            80
+          ],
+          "samples": 19,
+          "means": {
+            "processorPerformance": 130.33398351270833,
+            "processorFrequencyMHz": 1781.0,
+            "processorUtilization": 7.766143425696326,
+            "processorQueue": 1.0
+          }
+        },
+        {
+          "seconds": [
+            80,
+            100
+          ],
+          "samples": 20,
+          "means": {
+            "processorPerformance": 123.89718255806491,
+            "processorFrequencyMHz": 1814.3,
+            "processorUtilization": 9.70841511496846,
+            "processorQueue": 1.05
+          }
+        },
+        {
+          "seconds": [
+            100,
+            120
+          ],
+          "samples": 20,
+          "means": {
+            "processorPerformance": 132.7988673595095,
+            "processorFrequencyMHz": 1779.05,
+            "processorUtilization": 9.012325679740439,
+            "processorQueue": 0.6
+          }
+        },
+        {
+          "seconds": [
+            120,
+            140
+          ],
+          "samples": 19,
+          "means": {
+            "processorPerformance": 128.30414095051088,
+            "processorFrequencyMHz": 1771.842105263158,
+            "processorUtilization": 10.786142769038955,
+            "processorQueue": 0.47368421052631576
+          }
+        },
+        {
+          "seconds": [
+            140,
+            160
+          ],
+          "samples": 20,
+          "means": {
+            "processorPerformance": 104.59921043458394,
+            "processorFrequencyMHz": 1799.3,
+            "processorUtilization": 11.341240377783874,
+            "processorQueue": 0.85
+          }
+        },
+        {
+          "seconds": [
+            160,
+            180
+          ],
+          "samples": 18,
+          "means": {
+            "processorPerformance": 78.02759903164517,
+            "processorFrequencyMHz": 1806.2222222222222,
+            "processorUtilization": 12.880124410818073,
+            "processorQueue": 0.3333333333333333
+          }
+        }
+      ]
+    }
+  },
+  "processQos": {
+    "pid": 36680,
+    "scope": "Only the owned test child process; process lifetime execution-speed policy; no global power, priority, affinity or driver changes",
+    "status": "applied",
+    "before": {
+      "Version": 1,
+      "ControlMask": 0,
+      "StateMask": 0
+    },
+    "after": {
+      "Version": 1,
+      "ControlMask": 1,
+      "StateMask": 0
+    }
+  },
+  "inference": "Stage cost increases broadly while input node/resource counts stay constant; observed system processor performance declines; explicit HighQoS does not remove growth; CPU thermal/power/core scheduling cause is not distinguished by these counters",
+  "globalAcceptance": "open",
+  "archiveMembers": {
+    "build_cpu_long_run_diagnostic.py": "4c27192043459993518303d3db8bb73f6186aeb0a13972b94a6e228f096862c8",
+    "cpu-long-run-growth/analysis.json": "e4c3b3abb0cfc011d511156067ddaa47426c48dad7e728b219bd0832c89888dd",
+    "cpu-long-run-growth/AzureRenderApp-compile.log": "9f9662106720f4dce455595fc0372810d6c6f79a4b589718cfd161c385c16e2d",
+    "cpu-long-run-growth/AzureRenderCapture-compile.log": "9290a3b96db912711b09fcaae83547ae2801db22d13fead65527496346b17dd2",
+    "cpu-long-run-growth/AzureRenderFrame-compile.log": "f1fa9ada4d4e341d4d5cf191e40f07f7aae7f66c47fedc3f161f0334704814d8",
+    "cpu-long-run-growth/build-result.json": "280d2f5c5af3385c7072af112f59578dae291c1fdae4de9f1863a37a93586eeb",
+    "cpu-long-run-growth/compile-results.json": "7265208f3b20d5eca530c7dd8a5eaa23e0c70c14c795c388ff4d101d5e92360f",
+    "cpu-long-run-growth/high-qos-native/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "cpu-long-run-growth/high-qos-native/cpu-environment.json": "3df36832af1288b7a9fcb1cc287a64cc0067afd2588c1b191be7436680d26afd",
+    "cpu-long-run-growth/high-qos-native/environment.json": "b0a6da3bc0f3e5f224d09f737417543c62d6935b851a0d587e85c60b9d60e3b0",
+    "cpu-long-run-growth/high-qos-native/execution-qos.json": "07401c44e5316a90f54ed332f9e2ec5d7b6d6e5cb57f20f17137a7480b57af59",
+    "cpu-long-run-growth/high-qos-native/frozen-inputs.json": "f3ccabb1ffc942ae184deb763f5ddc5a8fe0173348bb4d8070b09a02d9185ade",
+    "cpu-long-run-growth/high-qos-native/memory.json": "e4dbc5aa2d620259188d6db25cf5a29b58d7f6859eea7414e0669cac6da3a7c6",
+    "cpu-long-run-growth/high-qos-native/results.json": "de2b2753ea72a23e143393278d33d3f2b723ff7d24bcaa4d1014ef8d17cc2a35",
+    "cpu-long-run-growth/high-qos-native/runtime.json": "7e21ce167845cc456422d5bb0be168f9e975f7a4b7366fb8e30213e5314d9004",
+    "cpu-long-run-growth/high-qos-native/stage-results.json": "29af4d01ca7f54232cf1f2f0f9dc848a08f5dea0c38383e37265875b981ce773",
+    "cpu-long-run-growth/high-qos-native/stderr.log": "b82074d3b01c5d84586ba6cf0e3d1f56acb2042c1d9bdf51e63ca82441e7da23",
+    "cpu-long-run-growth/high-qos-native/stdout.log": "11c30e4cfc1e189cc48e10dc1598f256be51868583217fce1ea1a7698ceea853",
+    "cpu-long-run-growth/high-qos-native/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cpu-long-run-growth/high-qos-native/task.json": "b52b0b9e4b59f894065b1b69f87939cb32ada207278bcfaf16348763642f0feb",
+    "cpu-long-run-growth/high-qos-native/timing.csv": "0b1d61242fc8aed328fc84c2d0ec81fa7266e2f97e24df164627bb7fa525b4cc",
+    "cpu-long-run-growth/high-qos-native/timing.json": "d7abfc2a43fe4f81167907f7746c01c2ef6a1f2a053c27f46fdf634884bb8ea3",
+    "cpu-long-run-growth/native/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "cpu-long-run-growth/native/cpu-environment.json": "b41a994808374d498c643db3e97f5ac0fee600491a98c155d413cc0acdfc5c38",
+    "cpu-long-run-growth/native/environment.json": "3cc7b660d047c2cf94af3fe942006573c3884c335526301b4a6537ee162cb2a6",
+    "cpu-long-run-growth/native/frozen-inputs.json": "f3ccabb1ffc942ae184deb763f5ddc5a8fe0173348bb4d8070b09a02d9185ade",
+    "cpu-long-run-growth/native/memory.json": "cc2addd492140371faf288e5d241d777aaac8ec37fdb637adce7f316692a45c2",
+    "cpu-long-run-growth/native/results.json": "2dbedc80c7bc4fda37f565ef444ec52e57bcbecd089f0ecd5b80b0882898fb36",
+    "cpu-long-run-growth/native/runtime.json": "8f437c420d4961be2667a50a8ffafd5131d33a8b94a1d0cbbd0ea14beabd9a8b",
+    "cpu-long-run-growth/native/stage-results.json": "b36389e0e29ff7c39e8723e1a8fc53ed9d598dff6d5507170314510f17851c13",
+    "cpu-long-run-growth/native/stderr.log": "017f7607e2452e9d662703f635797dbc816d1829e20b26c2de7ab88c5b70f4fd",
+    "cpu-long-run-growth/native/stdout.log": "1ebf7e06f3b924228edb2bf9a3348b19a6de34beddcbb30d5279a9a959f8709d",
+    "cpu-long-run-growth/native/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cpu-long-run-growth/native/task.json": "c15f53ee4a493e22b5881764b2df1aefe2aa60585df3bd415672449542fdbc6a",
+    "cpu-long-run-growth/native/timing.csv": "447d61bac52f43fc70f0c307bc80c6ffd0b517f0ec820bf0507162b459b46e7f",
+    "cpu-long-run-growth/native/timing.json": "f8fcd4fff858aeb3d5626ae974356ea7b81828cef0003640d59402a69ee48504",
+    "cpu-long-run-growth/original-compile-commands.json": "e385dfea6793a31a5e23e95e8a01dc42f3a0b895485b599d69485d577a7ec102",
+    "cpu-long-run-growth/private-link/link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpu-long-run-growth/production-before.json": "d97a3558771e0e1164daff8ef7cd8e26f943fdd1d58c8ec884689c7fcda116e2",
+    "cpu-long-run-growth/source/AzureRenderApp.cpp": "edc82254bbd8ef5cac11c11d2eebf8300de53a8658c8ae8b7b19ed47bc35e411",
+    "cpu-long-run-growth/source/AzureRenderCapture.cpp": "b9e1bace331f20260cc8dc01da513782ecaa2f6f469c7b2891a11d52b7dc4146",
+    "cpu-long-run-growth/source/AzureRenderFrame.cpp": "1c7210388a2cfed4cbdd31c8b1f2c0990104e47cadd164aedc299a752759ef0f",
+    "measure_cpu_high_qos_control.py": "20dcb67824370519d1d65552c6e4f4f5ebf265f9e5580fb5ce5644d702d10988",
+    "measure_cpu_long_run_diagnostic.py": "45bc2698b46f99d6ff0edb4dace13dab7b3f18203cb892e60be10135d7b8f4d1"
+  },
+  "archiveSha256": "9fbcf081aa8080635134353da0da859d7a2740a724de1bc163776272514a808b"
+}

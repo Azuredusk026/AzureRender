@@ -1,0 +1,514 @@
+{
+  "status": "qualified-public-material-uv-policy",
+  "overall": "failed-user-review",
+  "sourceCommit": "2e4262b",
+  "receiverSourceCommit": "62fc79cb097c1b77fed92e78ae7902b0bf68903d",
+  "qualifiedGroups": 36,
+  "requiredGroups": 36,
+  "capturedImages": 128,
+  "coveragePixelValues": 3145728,
+  "numericComponents": 840,
+  "groups": [
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "group": "shadow",
+      "executionSeconds": 204.46799999999348,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 262144
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "group": "shadow",
+      "executionSeconds": 129.90600000001723,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 262144
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "group": "generic-red-aa0",
+      "executionSeconds": 96.53200000000652,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "group": "hair-red-aa0",
+      "executionSeconds": 59.17200000002049,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "group": "hair-red-aa4",
+      "executionSeconds": 163.18800000002375,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "group": "object-shadow",
+      "executionSeconds": 85.51600000000326,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 262144
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "group": "hair-shell-red-aa0",
+      "executionSeconds": 139.96900000004098,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "group": "solid",
+      "executionSeconds": 42.79700000002049,
+      "captures": 4,
+      "maximumLinearError": 0.002124449666882855,
+      "linearBudget": 0.008
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "group": "footprint",
+      "executionSeconds": 30.280999999959022,
+      "changedPixels": 2028,
+      "maximumByteChange": 34,
+      "defaultDescriptorIdentity": true,
+      "referenceDescriptorIdentity": true
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "group": "missing",
+      "executionSeconds": 35.29599999997299,
+      "rejectionCases": 4,
+      "temporaryShaderLinksReleased": true
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "group": "generic-red-aa0",
+      "executionSeconds": 127.43699999997625,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "group": "hair-red-aa0",
+      "executionSeconds": 77.76600000000326,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "group": "hair-red-aa4",
+      "executionSeconds": 231.14000000001397,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "group": "object-shadow",
+      "executionSeconds": 123.96799999999348,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 262144
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "group": "hair-shell-red-aa0",
+      "executionSeconds": 221.56200000003446,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "group": "solid",
+      "executionSeconds": 65.0,
+      "captures": 4,
+      "maximumLinearError": 0.002124449666882855,
+      "linearBudget": 0.008
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "group": "footprint",
+      "executionSeconds": 29.75,
+      "changedPixels": 162,
+      "maximumByteChange": 15,
+      "defaultDescriptorIdentity": true,
+      "referenceDescriptorIdentity": true
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "group": "missing",
+      "executionSeconds": 37.57900000002701,
+      "rejectionCases": 4,
+      "temporaryShaderLinksReleased": true
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "group": "shadow",
+      "executionSeconds": 50.46799999999348,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 262144
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "group": "generic-red-aa0",
+      "executionSeconds": 47.10899999999674,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "group": "hair-red-aa0",
+      "executionSeconds": 47.35999999998603,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "group": "hair-red-aa4",
+      "executionSeconds": 41.28100000001723,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "group": "object-shadow",
+      "executionSeconds": 43.875,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 262144
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "group": "hair-shell-red-aa0",
+      "executionSeconds": 46.51600000000326,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "group": "solid",
+      "executionSeconds": 37.0,
+      "captures": 4,
+      "maximumLinearError": 0.002124449666882855,
+      "linearBudget": 0.008
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "group": "footprint",
+      "executionSeconds": 32.40600000001723,
+      "changedPixels": 2028,
+      "maximumByteChange": 34,
+      "defaultDescriptorIdentity": true,
+      "referenceDescriptorIdentity": true
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "group": "missing",
+      "executionSeconds": 38.65600000001723,
+      "rejectionCases": 4,
+      "temporaryShaderLinksReleased": true
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "group": "shadow",
+      "executionSeconds": 45.89100000000326,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 262144
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "group": "generic-red-aa0",
+      "executionSeconds": 48.09399999998277,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "group": "hair-red-aa0",
+      "executionSeconds": 48.85899999999674,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "group": "hair-red-aa4",
+      "executionSeconds": 41.32799999997951,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "group": "object-shadow",
+      "executionSeconds": 44.59399999998277,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 262144
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "group": "hair-shell-red-aa0",
+      "executionSeconds": 52.92199999996228,
+      "captures": 4,
+      "allFourRgbExact": true,
+      "comparedPixelValues": 65536
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "group": "solid",
+      "executionSeconds": 36.78200000000652,
+      "captures": 4,
+      "maximumLinearError": 0.002124449666882855,
+      "linearBudget": 0.008
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "group": "footprint",
+      "executionSeconds": 33.71799999999348,
+      "changedPixels": 162,
+      "maximumByteChange": 15,
+      "defaultDescriptorIdentity": true,
+      "referenceDescriptorIdentity": true
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "group": "missing",
+      "executionSeconds": 46.26499999995576,
+      "rejectionCases": 4,
+      "temporaryShaderLinksReleased": true
+    }
+  ],
+  "failedAttempts": [
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "group": "footprint",
+      "result": {
+        "status": "exited",
+        "exitCode": 1,
+        "reason": null,
+        "seconds": 1.5780000000377186,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\tools\\test_material_uv_footprint_gpu.py",
+          "--executable",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+          "--output",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-214332-material-uv-loop-qualification-cf1d1e\\matrix-release-nvidia-footprint",
+          "--expected-validation",
+          "disabled"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-214332-material-uv-loop-qualification-cf1d1e\\tmp"
+      }
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "group": "footprint",
+      "result": {
+        "status": "exited",
+        "exitCode": 1,
+        "reason": null,
+        "seconds": 35.31299999996554,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\tools\\test_material_uv_footprint_gpu.py",
+          "--executable",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+          "--output",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-214332-material-uv-loop-qualification-cf1d1e\\matrix-release-nvidia-footprint",
+          "--expected-validation",
+          "disabled"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-214332-material-uv-loop-qualification-cf1d1e\\tmp"
+      }
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "group": "footprint",
+      "result": {
+        "status": "exited",
+        "exitCode": 1,
+        "reason": null,
+        "seconds": 37.90599999995902,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\tools\\test_material_uv_footprint_gpu.py",
+          "--executable",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+          "--output",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-214332-material-uv-loop-qualification-cf1d1e\\matrix-release-intel-footprint",
+          "--expected-validation",
+          "disabled"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-214332-material-uv-loop-qualification-cf1d1e\\tmp"
+      }
+    }
+  ],
+  "defaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true
+  },
+  "cpuChecks": 8,
+  "programs": 855,
+  "referenceFamily": 168,
+  "testedSourceSha256": {
+    "CMakeLists.txt": "5d8728b9792136554646a8106228f7fe126364b10c91a9df26cbb17e0388e5ae",
+    "schemas/azure_render_material.schema.json": "f7b9bff7c9b17c7f392a83ccee931b02e40a52d1eed973132b7f993d06001034",
+    "shaders/character_depth.frag": "5875671099ce515cf1e4a8c46ba92daf32d0f69d4ca9aad0e67b71aee3981ee3",
+    "shaders/mesh.frag": "16571c204f7cd7e2ff83ff0e22ca141bf1c712f53a361dade7a91bda2a1c571f",
+    "shaders/outline.frag": "c0ace6869621fe85323b7065f3a9432fe6f4f69076d7a1020a9cfddf34b2b76e",
+    "shaders/outline_depth.frag": "5f828083357a415107d587ec7023dd924f1f99c9ac0348344fc33c6b5c72f6b4",
+    "shaders/outline_mask.frag": "10ae3452f1c9234530a3124f6abd7faacd7a9327a4a7aa957fda005c0c21a1f1",
+    "shaders/outline_surface_fragment.glsl": "d58c74d9dde6790e527ac204aea61d9eb555e8c32af204f68a08c8eae508c4b8",
+    "shaders/shadow.frag": "b554081eb7d7a98dd9874b2236a37114011422f6a12e83bee154041f9dac9f3d",
+    "src/assets/GltfLoader.cpp": "fe1ceac1985c7410778444276f31db574998a978e46c338b9008385444a62c8e",
+    "src/assets/GltfLoader.hpp": "7546fc8c99c721d2d9594ef0f3c590e3627e0f10e9535bdc28522848f9440f97",
+    "src/assets/MaterialSurfaceProfile.hpp": "be92d6a0654b25086eff963cbdd368d62608959e33e31a8174877d345fc56c0a",
+    "src/render/MaterialPipelinePolicy.hpp": "5534aae3bcb6b2ef218c273742a04d8b4576a5c46ea473c774353a22cc13f983",
+    "src/render/MaterialUvGradients.hpp": "447602da6d8c90a9fcc9fece9ba0e5ea0449f3c8f73d6b014690b99dfb805a72",
+    "src/scenes/CharacterMaterialSampling.inc": "f49f04a0c04dc5ce86530a6f34c2e1635f5e22bd7193ce2a0ffc7401820fc35c",
+    "src/scenes/CharacterOutlinePass.inc": "a8c3694a3711d48538247f9565f59c3de9a8fcbb59114ae21d10f2acde8a54ea",
+    "src/scenes/CharacterSceneRenderer.cpp": "b0e8ad489dedb641e43824d84add20e2bf561de4be88fe9bd5d4d81391cdd73a",
+    "src/scenes/CharacterSceneRenderer.hpp": "fde48c19edc64dc509a8cee8adbed305e06bfc34cbeef96bd51f0c7dce7f678d",
+    "tests/CharacterRepairTests.cpp": "17d7af30beb1f95c864629f23575865bf895d70066076b651042bd9022fcd54d",
+    "docs/runtime/material-primary-uv-policy.md": "407988f43a520b6159db4a8d8a41bebaefb9e7edf74a45d942c20708ed1cee5c",
+    "shaders/material_primary_uv.glsl": "b799c0f2a9dfa60b099402b6397270ba1e751f3952431dc781f86b26bcff983b",
+    "src/assets/MaterialUvPolicy.hpp": "3b5345de7baa75a4a15440c6b6eb2cbd7aa531d9014e69f240bfe39d35d942a1",
+    "src/scenes/CharacterMaterialUv.inc": "a39011f78203d4ca2d5736ec628a9728e18d6c2848cf1d599b48ad71729f3276",
+    "tests/MaterialUvPolicyTests.cpp": "eadf59c0d8a05edb315a7597976e5873292907ccf4bb8f262251dbc3fb4e38e0",
+    "tools/test_material_uv_footprint_gpu.py": "2d38718c62fa8940ceab6ef46b6888988b273338b80f47be686cdfe0d126e34f",
+    "tools/test_material_uv_policy_failure_gpu.py": "6060a8238f37a34bfdb05ee582e1c981337f5cc943d029b768044e2156af1ed1",
+    "tools/test_material_uv_policy_gpu.py": "b17f6c7f2cc1082fc748382030586ab4bb4bacdcc57e566e2df9389833a5d5bf",
+    "tests/MaterialUvImportTests.cpp": "04b245671142cbd56efc8a7d0a7cf11e1061107b801dfdfab587f62675a6a8b0"
+  },
+  "publishedSourceSha256": {
+    "CMakeLists.txt": "5d8728b9792136554646a8106228f7fe126364b10c91a9df26cbb17e0388e5ae",
+    "schemas/azure_render_material.schema.json": "f7b9bff7c9b17c7f392a83ccee931b02e40a52d1eed973132b7f993d06001034",
+    "shaders/character_depth.frag": "5875671099ce515cf1e4a8c46ba92daf32d0f69d4ca9aad0e67b71aee3981ee3",
+    "shaders/mesh.frag": "16571c204f7cd7e2ff83ff0e22ca141bf1c712f53a361dade7a91bda2a1c571f",
+    "shaders/outline.frag": "c0ace6869621fe85323b7065f3a9432fe6f4f69076d7a1020a9cfddf34b2b76e",
+    "shaders/outline_depth.frag": "5f828083357a415107d587ec7023dd924f1f99c9ac0348344fc33c6b5c72f6b4",
+    "shaders/outline_mask.frag": "10ae3452f1c9234530a3124f6abd7faacd7a9327a4a7aa957fda005c0c21a1f1",
+    "shaders/outline_surface_fragment.glsl": "d58c74d9dde6790e527ac204aea61d9eb555e8c32af204f68a08c8eae508c4b8",
+    "shaders/shadow.frag": "b554081eb7d7a98dd9874b2236a37114011422f6a12e83bee154041f9dac9f3d",
+    "src/assets/GltfLoader.cpp": "fe1ceac1985c7410778444276f31db574998a978e46c338b9008385444a62c8e",
+    "src/assets/GltfLoader.hpp": "7546fc8c99c721d2d9594ef0f3c590e3627e0f10e9535bdc28522848f9440f97",
+    "src/assets/MaterialSurfaceProfile.hpp": "be92d6a0654b25086eff963cbdd368d62608959e33e31a8174877d345fc56c0a",
+    "src/render/MaterialPipelinePolicy.hpp": "5534aae3bcb6b2ef218c273742a04d8b4576a5c46ea473c774353a22cc13f983",
+    "src/render/MaterialUvGradients.hpp": "447602da6d8c90a9fcc9fece9ba0e5ea0449f3c8f73d6b014690b99dfb805a72",
+    "src/scenes/CharacterMaterialSampling.inc": "f49f04a0c04dc5ce86530a6f34c2e1635f5e22bd7193ce2a0ffc7401820fc35c",
+    "src/scenes/CharacterOutlinePass.inc": "a8c3694a3711d48538247f9565f59c3de9a8fcbb59114ae21d10f2acde8a54ea",
+    "src/scenes/CharacterSceneRenderer.cpp": "b0e8ad489dedb641e43824d84add20e2bf561de4be88fe9bd5d4d81391cdd73a",
+    "src/scenes/CharacterSceneRenderer.hpp": "fde48c19edc64dc509a8cee8adbed305e06bfc34cbeef96bd51f0c7dce7f678d",
+    "tests/CharacterRepairTests.cpp": "17d7af30beb1f95c864629f23575865bf895d70066076b651042bd9022fcd54d",
+    "docs/runtime/material-primary-uv-policy.md": "f2b3ec3621bff1460c2af182bd9f9f4ede605046b00f5e4f1e6122a933cd15f9",
+    "shaders/material_primary_uv.glsl": "b799c0f2a9dfa60b099402b6397270ba1e751f3952431dc781f86b26bcff983b",
+    "src/assets/MaterialUvPolicy.hpp": "3b5345de7baa75a4a15440c6b6eb2cbd7aa531d9014e69f240bfe39d35d942a1",
+    "src/scenes/CharacterMaterialUv.inc": "a39011f78203d4ca2d5736ec628a9728e18d6c2848cf1d599b48ad71729f3276",
+    "tests/MaterialUvPolicyTests.cpp": "eadf59c0d8a05edb315a7597976e5873292907ccf4bb8f262251dbc3fb4e38e0",
+    "tools/test_material_uv_footprint_gpu.py": "2d38718c62fa8940ceab6ef46b6888988b273338b80f47be686cdfe0d126e34f",
+    "tools/test_material_uv_policy_failure_gpu.py": "6060a8238f37a34bfdb05ee582e1c981337f5cc943d029b768044e2156af1ed1",
+    "tools/test_material_uv_policy_gpu.py": "b17f6c7f2cc1082fc748382030586ab4bb4bacdcc57e566e2df9389833a5d5bf",
+    "tests/MaterialUvImportTests.cpp": "04b245671142cbd56efc8a7d0a7cf11e1061107b801dfdfab587f62675a6a8b0",
+    "docs/plans/2026-11-10-material-uv-loop-qualification.md": "b40ba8a8857d4182c89ab2b2564a9e289d3cc18862d8336334870348432e7d7a",
+    "docs/acceptance/nr/material-primary-uv-policy.md": "8231cd40c549365d9a28625b8ca9b3228e90bc7644e2a9349af942316fb0b619"
+  },
+  "programCatalogSha256": "eef4f292cccf0614e77c2d13206585f9a9597d515423f60b59bfea84c9412bdd",
+  "archive": {
+    "bytes": 5821997,
+    "sha256": "40e538a7fa637de26bc028cd5d0da34f609a46bc11a17ca403ad45347ab66b00",
+    "members": 4238
+  }
+}

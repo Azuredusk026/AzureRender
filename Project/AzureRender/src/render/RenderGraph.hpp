@@ -14,7 +14,7 @@ struct RenderGraphResource {
     rhi::BufferBarrierDesc initialBuffer{};
 };
 
-enum class RenderGraphUsage { Sampled, ComputeSampled, ColorAttachment, DepthAttachment, Storage, VertexStorage, FragmentStorage, TransferSrc, TransferDst, Present, VertexBuffer, IndexBuffer, IndirectBuffer };
+enum class RenderGraphUsage { Sampled, ComputeSampled, ColorAttachment, DepthAttachment, Storage, VertexStorage, FragmentStorage, TransferSrc, TransferDst, Present, VertexBuffer, IndexBuffer, IndirectBuffer, DepthReadAttachment, FragmentUniform };
 
 struct RenderGraphUse {
     std::uint32_t resource = 0;
@@ -70,7 +70,8 @@ public:
     void dependsOn(PassId pass, PassId prerequisite);
     void execute(rhi::ICommandRecorder* recorder = nullptr,
         const std::function<bool(PassId)>& executeRecorded = {},
-        bool useFullInlineCallback = false) const;
+        bool useFullInlineCallback = false,
+        const std::function<void(PassId, bool)>& passBoundary = {}) const;
     void read(PassId pass, ResourceId resource);
     void write(PassId pass, ResourceId resource);
     void attachment(PassId pass, ResourceId resource, RenderGraphUsage usage, VkImageLayout finalLayout);
@@ -102,7 +103,7 @@ private:
     std::vector<RenderGraphBarrier> barriers_;
     std::vector<RenderGraphBufferBarrier> bufferBarriers_;
     std::vector<std::vector<std::size_t>> imageBarrierIndices_;
-    std::vector<std::vector<std::size_t>> bufferBarrierIndices_;
+    std::vector<std::vector<rhi::BufferBarrierDesc>> passBufferBarriers_;
 };
 
 }  // namespace azurerender

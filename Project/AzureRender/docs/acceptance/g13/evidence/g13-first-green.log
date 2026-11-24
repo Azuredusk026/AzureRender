@@ -1,0 +1,22 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.PreviewSimulation
+1/2 Test #193: AzureEditor.PreviewSimulation ....***Failed    0.10 sec
+[1791580887294][info][editor][code=0] Opened scene: untitled
+[1791580887308][info][editor][code=0] Simulation started
+[1791580887312][info][editor][code=0] ERROR [viewport.orientation]: Unknown viewport orientation
+Editor navigation remains available during simulation
+
+    Start 194: AzureEngine.PhysicsAuthoring
+2/2 Test #194: AzureEngine.PhysicsAuthoring .....***Failed    0.10 sec
+Sphere lands on floor
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   0.21 sec
+
+The following tests FAILED:
+	193 - AzureEditor.PreviewSimulation (Failed)
+	194 - AzureEngine.PhysicsAuthoring (Failed)
+Errors while running CTest

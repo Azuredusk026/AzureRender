@@ -1,6 +1,23 @@
+#include "rhi/VulkanDepthBias.hpp"
+#include "rhi/VulkanPipelineCache.hpp"
+#include "runtime/InputPreferences.hpp"
+#include "runtime/ProjectReferenceViews.hpp"
+#include "foundation/FramePacing.hpp"
+#include "assets/AssetDeformation.hpp"
 #include "AzureRenderApp.hpp"
+#include "app/ProjectRuntimeAssembly.hpp"
+#if AZURE_WITH_EDITOR
+#include "app/EditorSceneReload.hpp"
+#endif
+#include "runtime/GameplayKeys.hpp"
+#include "runtime/physics/PhysicsShapeFactory.hpp"
+#if AZURE_WITH_EDITOR
 #include "editor/EditorSession.hpp"
+#include "editor/EditorAutomation.hpp"
+#endif
+#if AZURE_WITH_EDITOR
 #include "editor/ImGuiEditorLayer.hpp"
+#endif
 #include "diagnostics/GpuCapabilityReport.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "extensions/ExtensionRegistry.hpp"
@@ -8,6 +25,7 @@
 #include "platform/GlfwFrontend.hpp"
 #include "render/RendererCore.hpp"
 #include "render/RenderContext.hpp"
+#include "render/VisibilityPrototype.hpp"
 #include "scene/TransformMath.hpp"
 #include "scenes/BuiltinRendererCatalog.hpp"
 #include "AzureRenderInternal.hpp"
@@ -29,10 +47,18 @@
 #include <stdexcept>
 #include <utility>
 #include <unordered_map>
+#include <thread>
 
 using namespace azurerender::internal;
 
 namespace {
+nlohmann::json animationObservation(const azurerender::NodeAnimationFrame& frame){
+    nlohmann::json samples=nlohmann::json::array();
+    for(const auto& sample:frame.samples)samples.push_back({{"clip",sample.clip},{"time",sample.time},
+        {"weight",sample.weight},{"loop",sample.loop},{"duration",sample.duration}});
+    return {{"node",frame.node},{"clip",frame.clip},{"time",frame.time},{"previousClip",frame.previousClip},
+        {"blend",frame.blend},{"morph",frame.morph},{"samples",std::move(samples)}};
+}
 
 constexpr std::array<const char*, 1> kValidationLayers = {
     "VK_LAYER_KHRONOS_validation",
@@ -75,10 +101,60 @@ AzureRenderApp::~AzureRenderApp() {
 void AzureRenderApp::run(
     const AzureRenderOptions& options) {
     runOptions_ = options;
-    resourceLocator_ = azurerender::ResourceLocator(options.resourceRoot);
+    azurerender::ProjectReferenceViews referenceConfiguration;
+#if AZURE_WITH_EDITOR
+    if(options.editorSession)applyProjectReferenceViews(options.editorSession->referenceViews());
+    else
+#endif
+    {
+        if(!options.projectFile.empty()){
+            const auto project=options.projectStartup?options.projectStartup->project():azurerender::Project::load(std::filesystem::u8path(options.projectFile));
+            referenceConfiguration=azurerender::loadProjectReferenceViews(project);
+        }
+        applyProjectReferenceViews(referenceConfiguration);
+    }
+#if !AZURE_WITH_EDITOR
+    if(!options.shaderReloadConfig.empty() || !options.previewViews.empty())throw std::invalid_argument("Developer rendering tools require the AzureRender host");
+#endif
+    azurerender::runtimeComponentRegistry().seal();
+    runtimeModules_.add({"runtime.world",1,{},{}}, [this,&options](auto&) {
+    if (options.sceneDocument.has_value() && !options.editorMode) runtime_.loadScene(*options.sceneDocument);
+    runtime_.start();
+    }, [this] { runtime_.stop(); });
+    if(!options.projectFile.empty() && !options.editorMode)
+    runtimeModules_.add({"runtime.project",1,{}, {"runtime.world"}}, [this,&options,views=std::move(referenceConfiguration.views)](auto&) {
+    if (options.projectStartup) {
+        if (std::filesystem::weakly_canonical(std::filesystem::u8path(options.projectFile)) != options.projectStartup->project().file)
+            throw std::invalid_argument("Prepared startup does not match the project entry");
+        levelSession_ = std::make_unique<azurerender::LevelSession>(*options.projectStartup, runtime_);
+    } else {
+        levelSession_ = std::make_unique<azurerender::LevelSession>(azurerender::Project::load(std::filesystem::u8path(options.projectFile)), runtime_);
+    }
+    if (levelSession_) gameRuntime_ = std::make_unique<azurerender::GameRuntime>(runtime_,azurerender::application::systems(),azurerender::application::configuration(levelSession_->project()));
+    if (gameRuntime_) {
+        gameRuntime_->setReferenceViews(views);
+        gameRuntime_->physics().setMeshResolver(azurerender::collisionMeshAssets(levelSession_->assets()));
+        gameRuntime_->physics().validateScene(runtime_);
+        scriptRuntime_ = azurerender::application::scripts(levelSession_->project(),runtime_,*gameRuntime_,levelSession_->assets());
+        scriptRuntime_->setLevelHandler([this](std::string reference) { levelSession_->request(std::move(reference)); });
+        gameRuntime_->setBeforeStep([this](double delta) { scriptRuntime_->fixedStep(delta); });
+        gameRuntime_->setEventHandler([this](const auto& event) { scriptRuntime_->dispatch(event); });
+        gameRuntime_->setInteractionHandler([this](const auto& event){scriptRuntime_->dispatchInteraction(event);});
+    }
+    if(levelSession_){presentationRuntime_=std::make_unique<azurerender::PresentationRuntime>(runtime_,levelSession_->assets());scriptRuntime_->setAudioHandler([this](auto entity){presentationRuntime_->play(entity);});}
+    }, [this] {
+        scriptRuntime_.reset(); gameRuntime_.reset(); presentationRuntime_.reset(); levelSession_.reset();
+    });
+    runtimeModules_.start(runtime_);
+#if AZURE_WITH_EDITOR
+    if(!options.editorActionsPath.empty())editorAutomation_=std::make_unique<azurerender::EditorAutomation>(options.editorActionsPath);
+#endif
+    resourceLocator_ = azurerender::ResourceLocator(std::filesystem::u8path(options.resourceRoot));
+    sceneResourcePaths_.reset();
+    playerSceneSnapshots_.clear();playerRenderSceneCache_.clear();
     azurerender::loadShowcasePresetCatalog(resourceLocator_.showcaseLooks());
     azurerender::SceneView sceneView;
-    sceneView.assetPath = resourceLocator_.resolveAsset(options.assetPath).string();
+    sceneView.assetPath = resourceLocator_.resolveAsset(std::filesystem::u8path(options.assetPath)).u8string();
     sceneView.renderSettings = options.renderSettings;
     azurerender::RendererCoreBoundary::validateSceneView(sceneView);
     azurerender::validateRenderSettings(runOptions_.renderSettings);
@@ -95,20 +171,55 @@ void AzureRenderApp::run(
         prepareCaptureDirectory();
     }
     if (!runOptions_.gpuTimingOutput.empty()
-        && std::filesystem::exists(runOptions_.gpuTimingOutput)) {
+        && std::filesystem::exists(std::filesystem::u8path(runOptions_.gpuTimingOutput))) {
         throw std::runtime_error(
             "GPU timing output already exists; refusing to overwrite: "
             + runOptions_.gpuTimingOutput);
     }
+    initializeSettings();
+    if (runOptions_.qaShowcasePresentation) {
+        const auto settings = azurerender::resolveRenderSettings(*engineSettings_, renderSettings_);
+        if (runOptions_.editorMode || levelSession_
+            || settings.sceneType != azurerender::SceneType::Character || settings.antiAliasing > 2) {
+            throw std::invalid_argument("Showcase presentation requires standalone character capture with spatial anti-aliasing");
+        }
+    }
     initWindow();
     initVulkan(runOptions_.assetPath);
+#if !AZURE_WITH_EDITOR
+    glfwSetCharCallback(frontend_->nativeHandle(),[](GLFWwindow* window,unsigned int character){auto* app=static_cast<AzureRenderApp*>(glfwGetWindowUserPointer(window));if(app && app->gameUi_)app->gameUi_->character(character);});
+#endif
     renderSettings_ = runOptions_.renderSettings;
+    if(levelSession_){
+        rendererResourceKey_=levelSession_->current().resourceKey;
+        levelSession_->setPrepareHandler([this](const auto& level){prepareLevelRenderer(level);});
+        levelSession_->setPreloadHandler([this](const auto& level){return preloadLevelRenderer(level);});
+        levelSession_->setReadinessHandler([this](const auto& level){return (sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!level.scene.resources.empty()) && rendererResourceKey_==level.resourceKey) || (preparedRendererReady_ && preparedRenderSettings_.sceneType==level.scene.renderSettings.sceneType && preparedResourceKey_==level.resourceKey);});
+    }
+    if(!runOptions_.projectFile.empty())autoRotate_=false;
     if (runOptions_.portfolioMode) {
         activatePortfolioOrbit();
     }
+#if AZURE_WITH_EDITOR
     if (runOptions_.editorSession != nullptr) {
         runOptions_.editorSession->context().attachRenderSettings(renderSettings_);
+        runOptions_.editorSession->setPlacementRaycast([this](const auto& origin,const auto& direction)->std::optional<std::array<float,3>> {
+            const auto* state=sceneRenderer_?sceneRenderer_->sceneState():nullptr;
+            if(!state)return {};float nearest=std::numeric_limits<float>::max();
+            for(const auto& entry:state->pickables) {
+                const auto& mesh=*entry.asset;
+                for(std::size_t i=0;i+2<mesh.indices.size();i+=3){
+                    const auto a=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[i],entry.pose,entry.morph));
+                    const auto b=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[i+1],entry.pose,entry.morph));
+                    const auto c=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[i+2],entry.pose,entry.morph));
+                    const auto distance=rayTriangleDistance(origin,direction,a,b,c);if(distance>0&&distance<nearest)nearest=distance;
+                }
+            }
+            if(nearest==std::numeric_limits<float>::max())return {};
+            return addVectors(origin,scaleVector(direction,nearest));
+        });
     }
+#endif
     hudEnabled_ = runOptions_.hudEnabled;
 #if !defined(AZURERENDER_HAS_IMGUI)
     hudEnabled_ = hudEnabled_ || runOptions_.editorMode;
@@ -130,12 +241,20 @@ void AzureRenderApp::run(
             + ", internal outline: "
             + (renderSettings_.innerOutlineEnabled ? "on" : "off")
             + ", HUD: " + (hudEnabled_ ? "on" : "off"));
+    initializeValidation();
     mainLoop(runOptions_.smokeFrameLimit);
+    finishValidation();
+#if AZURE_WITH_EDITOR
     if (runOptions_.editorSession != nullptr) {
         runOptions_.editorSession->context().detachRenderSettings();
     }
+#endif
 }
 
+void AzureRenderApp::fileDropCallback(GLFWwindow* window,int count,const char** paths) {
+    auto* app=static_cast<AzureRenderApp*>(glfwGetWindowUserPointer(window));
+    if(app&&app->frontend_)app->frontend_->recordFileDrop(count,paths);
+}
 void AzureRenderApp::initWindow() {
     azurerender::GlfwFrontendConfig config;
     config.width = runOptions_.width;
@@ -151,6 +270,8 @@ void AzureRenderApp::initWindow() {
     config.userPointer = this;
     config.framebufferSizeCallback = framebufferResizeCallback;
     config.keyCallback = keyCallback;
+    config.scrollCallback = scrollCallback;
+    config.dropCallback = fileDropCallback;
     frontend_ = std::make_unique<azurerender::GlfwFrontend>(config);
     lastRotationTime_ = frontend_->timeSeconds();
     azurerender::RuntimeDiagnostics::instance().print(
@@ -171,6 +292,16 @@ void AzureRenderApp::initWindow() {
 }
 
 void AzureRenderApp::initVulkan(const std::string& assetPath) {
+    const auto phase = [](const char* name, auto&& initialize) {
+        auto& diagnostics = azurerender::RuntimeDiagnostics::instance();
+        diagnostics.info("startup", std::string("Starting ") + name);
+        const auto started = std::chrono::steady_clock::now();
+        initialize();
+        const auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now() - started).count();
+        diagnostics.info("startup", std::string("Completed ") + name
+            + " in " + std::to_string(elapsed) + " ms");
+    };
     azurerender::RuntimeDiagnostics::instance().print(
         "gpu", "Validation layer: "
             + std::string(kEnableValidation ? "enabled" : "disabled"));
@@ -178,7 +309,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     setupDebugMessenger();
     createSurface();
     pickPhysicalDevice();
-    createLogicalDevice();
+    phase("logical device", [this] { createLogicalDevice(); });
     // The allocator must outlive every GPU resource, so it is created directly
     // after the device and torn down just before it.
     gpuAllocator_.initialize(
@@ -191,12 +322,19 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
         kMaxFramesInFlight,
         uploadRingAlignment_);
     createCommandPool();
+    try{
+        const auto base=resourceLocator_.generatedCacheDirectory(std::filesystem::u8path(runOptions_.projectFile));
+        const auto profile=azurerender::rhi::shaderCacheProfile(resourceLocator_.shaderDirectory());
+        const auto directory=base.empty()||!profile?std::filesystem::path{}:base/"vulkan";
+        pipelineCache_=std::make_unique<azurerender::rhi::VulkanPipelineCache>(device_,physicalDevice_,directory,azurerender::rhi::PipelineCacheLimits{},profile.value_or(0));
+        azurerender::RuntimeDiagnostics::instance().info("startup","Pipeline cache loaded: bytes="+std::to_string(pipelineCache_->statistics().loadedBytes)+", state="+pipelineCache_->statistics().readState+", profile="+std::to_string(profile.value_or(0)));
+    }catch(const std::exception&){pipelineCache_.reset();azurerender::RuntimeDiagnostics::instance().info("startup","Pipeline cache unavailable; using normal pipeline creation");}
     rhi_ = std::make_unique<azurerender::rhi::VulkanRhi>(
         device_, physicalDevice_, graphicsQueue_, commandPool_,
-        gpuAllocator_);
+        gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_), pipelineInspection_.get(), [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.sampleRateShading==VK_TRUE;}(physicalDevice_),exactDepthBiasEnabled_,pipelineCache_?pipelineCache_->handle():VK_NULL_HANDLE, shaderFloatControls2Enabled_);
     createPostProcessDescriptorSetLayout();
-    resolvedAssetPath_ = resourceLocator_.resolveAsset(assetPath).string();
-    createShadowResources();
+    resolvedAssetPath_ = resourceLocator_.resolveAsset(std::filesystem::u8path(assetPath)).u8string();
+    phase("shadow resources", [this] { createShadowResources(); });
     createSwapchain();
     if (fixedSimulation_
         && (swapchainExtent_.width != runOptions_.width
@@ -216,7 +354,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createRenderPass();
     createPostProcessRenderPass();
     createEditorUiRenderPass();
-    createGraphicsPipeline();
+    phase("graphics pipelines", [this] { createGraphicsPipeline(); });
     createFramebuffers();
     createPostProcessFramebuffers();
     createEditorUiFramebuffers();
@@ -225,15 +363,28 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createCommandBuffers();
     createSyncObjects();
     createTimestampQueryPools();
-    createSceneRenderer();
-    initEditorUi();
+    phase("scene renderer", [this] { createSceneRenderer(); });
+    phase("editor interface", [this] { initEditorUi(); });
+#if AZURE_WITH_EDITOR
+    phase("developer views", [this] { initializeDevtools(); });
+#endif
 }
 
 void AzureRenderApp::initEditorUi() {
+#if AZURE_WITH_EDITOR
+
     if (!editorUiEnabled_) {
         return;
     }
     if (editorLayer_ == nullptr) {
+        auto& context=runOptions_.editorSession->context();
+        if(context.isProject())for(std::size_t i=0;i<context.scene().nodes.size();++i) {
+            const auto data=context.componentData(context.scene().nodes[i].id,"azure.character");
+            if(!data.is_null()&&data.value("controlled",true)) {
+                runOptions_.editorSession->edit("node.select",{{"index",i}});
+                runOptions_.editorSession->edit("viewport.frame-selection");break;
+            }
+        }
         editorLayer_ = std::make_unique<azurerender::ImGuiEditorLayer>(
             runOptions_.editorSession);
     }
@@ -245,21 +396,55 @@ void AzureRenderApp::initEditorUi() {
         graphicsQueueFamily_,
         graphicsQueue_,
         editorUiRenderPass_,
-        static_cast<std::uint32_t>(swapchainImages_.size()));
+        static_cast<std::uint32_t>(swapchainImages_.size()),swapchainFormat_);
     editorLayer_->setViewportImages(
         editorViewportSampler_,
         editorViewportImageViews_,
         renderExtent_.width,
         renderExtent_.height);
+
+#endif
 }
 
 void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
     std::uint64_t renderedFrames = 0;
-    while (!frontend_->shouldClose()) {
+    while (true) {
+        if(frontend_->shouldClose()) {
+#if AZURE_WITH_EDITOR
+            if(runOptions_.editorSession){
+                auto& session=*runOptions_.editorSession;
+                session.edit("document.close");
+                if(session.closeReady())break;
+                glfwSetWindowShouldClose(frontend_->nativeHandle(),GLFW_FALSE);
+            }else
+#endif
+            break;
+        }
+#if AZURE_WITH_EDITOR
+        if(runOptions_.editorSession && runOptions_.editorSession->closeReady())break;
+#endif
+        const auto hostFrameStart = std::chrono::steady_clock::now();
         frontend_->pollEvents();
+#if AZURE_WITH_EDITOR
+        for(auto& drop:frontend_->consumeFileDrops())if(editorLayer_)editorLayer_->queueFileDrop(std::move(drop));
+#endif
+        if(validation_)validation_->pump(gameplayFrame_);
         drawFrame();
+        const double elapsed = std::chrono::duration<double>(std::chrono::steady_clock::now() - hostFrameStart).count();
+        const auto maximumRate = engineSettings_->get("runtime.maxFrameRate").get<unsigned>();
+        const double waitSeconds = azurerender::framePacingWaitSeconds(elapsed, maximumRate);
+        if (waitSeconds > 0) {
+            const auto waitStart = std::chrono::steady_clock::now();
+            std::this_thread::sleep_for(std::chrono::duration<double>(waitSeconds));
+            framePacingWaitMilliseconds_ += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - waitStart).count();
+            ++framePacingWaitFrames_;
+        }
         ++renderedFrames;
         if (smokeFrameLimit > 0 && renderedFrames >= smokeFrameLimit) {
+            if(validation_&&!validation_->complete())continue;
+#if AZURE_WITH_EDITOR
+            if(editorAutomation_ && !editorAutomation_->complete())continue;
+#endif
             frontend_->requestClose();
         }
         if (fixedSimulation_
@@ -268,6 +453,9 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         }
     }
 
+#if AZURE_WITH_EDITOR
+    discardEditorSceneReload();
+#endif
     if (device_ != VK_NULL_HANDLE) {
         vkDeviceWaitIdle(device_);
     }
@@ -279,6 +467,42 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         }
         printGpuTimingSummary();
     }
+#if AZURE_WITH_EDITOR
+    finishDevtools();
+#endif
+    if (!runOptions_.runtimeReportPath.empty()) {
+        nlohmann::json nodes = nlohmann::json::array();
+        auto scene = runtime_.snapshotScene();
+#if AZURE_WITH_EDITOR
+        if(runOptions_.editorSession)scene=runOptions_.editorSession->viewScene();
+#endif
+        for (const auto& node : scene.nodes) nodes.push_back({{"id", node.id}, {"translation", node.translation}, {"visible", node.visible}});
+        std::ofstream report(std::filesystem::u8path(runOptions_.runtimeReportPath));
+        report << nlohmann::json{{"scene", scene.sceneId}, {"nodes", nodes}, {"levelRevision", levelSession_ ? levelSession_->revision() : 0}, {"fixedSteps", gameRuntime_ ? gameRuntime_->steps() : 0}, {"simulationMilliseconds", gameRuntime_ ? gameRuntime_->simulationMilliseconds() : 0.0}, {"activeScripts", scriptRuntime_ ? scriptRuntime_->activeCount() : 0}, {"scriptErrors", scriptRuntime_ ? scriptRuntime_->errors() : std::vector<std::string>{}}}.dump(2);
+        report.close();
+        std::ifstream saved(std::filesystem::u8path(runOptions_.runtimeReportPath));nlohmann::json data;saved>>data;saved.close();
+        if(sceneRenderer_){data["renderer"]=std::string(sceneRenderer_->name());if(const auto* state=sceneRenderer_->sceneState())data["renderProgress"]={{"samples",state->accumulatedSamples},{"target",state->targetSamples}};}
+        data["uiDrawCalls"]=uiDrawCalls_;data["animationFrames"]=animationFrames_;data["audioStarts"]=audioStarts_;data["presentationErrors"]=presentationErrors_;
+#if AZURE_WITH_EDITOR
+        data["developer"]=devtoolsReport_;
+#endif
+        data["routeFrames"]=gameRouteFrames_;
+        data["replayedActions"]=gameInputReplay_?gameInputReplay_->consumed():0;
+        data["replayDelayedFrames"]=gameInputReplay_?gameInputReplay_->delayedFrames():0;
+        data["animations"]=nlohmann::json::array();
+        if(auto* presentation=activePresentation())for(const auto& animation:presentation->animations())
+            data["animations"].push_back(animationObservation(animation));
+#if AZURE_WITH_EDITOR
+        data["editorPlaying"]=runOptions_.editorSession && runOptions_.editorSession->playing();if(editorAutomation_)data.update(editorAutomation_->report());
+        data["editorPreviewFrames"]=editorPreviewFrames_;
+        data["editorDebugLines"]=editorLayer_?editorLayer_->debugLineCount():0;
+        if(editorLayer_)data["editorWorkspace"]=editorLayer_->workspaceSnapshot();
+        if(runOptions_.editorSession) { data["gameBuildPassed"]=runOptions_.editorSession->buildResult().passed; data["gameBuildMilliseconds"]=runOptions_.editorSession->buildResult().milliseconds; }
+#endif
+        std::ofstream extended(std::filesystem::u8path(runOptions_.runtimeReportPath));extended<<data.dump(2);
+        if (!extended) throw std::runtime_error("Cannot write runtime report");
+    }
+    runtimeModules_.stop();
     azurerender::RuntimeDiagnostics::instance().print(
         "render", "Rendered frames: " + std::to_string(renderedFrames));
     if (fixedSimulation_) {
@@ -290,16 +514,71 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
     }
 }
 
+void AzureRenderApp::createTemporalResources(){
+    temporalReconstruction_.reset();sharedMotion_.reset();temporalFallback_.clear();temporalRequested_=effectiveRenderSettings_.antiAliasing==3;
+    if(temporalRequested_)try{
+        VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);
+        if(properties.limits.maxPerStageDescriptorStorageBuffers<6)throw std::runtime_error("Temporal geometry requires six vertex storage bindings");
+        if(std::uint64_t(sceneRenderExtent_.width)*sceneRenderExtent_.height>azurerender::TemporalReconstruction::kMaximumBytes/(azurerender::TemporalReconstruction::kBytesPerPixel+azurerender::TemporalReconstruction::kDisplayMaskBytesPerPixel))
+            throw std::invalid_argument("Temporal resources exceed the combined view budget");
+        std::vector<azurerender::TemporalSceneSource> sources;
+        for(std::size_t i=0;i<sceneColorImages_.size();++i)sources.push_back({sceneColorImages_[i].image,sceneColorImageViews_[i],depthImages_[i].image,depthImageViews_[i],displayMaskImages_[i].image,displayMaskImageViews_[i]});
+        std::string shaders=resourceLocator_.shaderDirectory().u8string();
+#if AZURE_WITH_EDITOR
+        if(!activeShaderDirectory_.empty())shaders=activeShaderDirectory_;
+#endif
+        std::vector<VkImageView> depths;for(const auto& source:sources)depths.push_back(source.depthView);
+        sharedMotion_=std::make_unique<azurerender::MotionVectorTarget>(*rhi_,gpuAllocator_,sceneRenderExtent_,depthFormat_,depths);
+        temporalReconstruction_=std::make_unique<azurerender::TemporalReconstruction>(*rhi_,gpuAllocator_,sceneRenderExtent_,depthFormat_,std::move(sources),shaders,sharedMotion_.get());
+    }catch(const std::exception& error){temporalReconstruction_.reset();sharedMotion_.reset();temporalFallback_=error.what();azurerender::RuntimeDiagnostics::instance().info("render","Temporal AA spatial fallback: "+temporalFallback_);}
+    updateTemporalDisplayDescriptors();
+}
+void AzureRenderApp::createMultisampleResources(){
+    sceneMultisampling_.reset();multisampleFallback_.clear();multisampleRequested_=effectiveRenderSettings_.antiAliasing==4;
+    azurerender::RenderContext context;buildRenderContext(context);
+    if(multisampleRequested_&&sceneRenderer_){
+        try{
+            if(!sceneRenderer_->capabilities().supportsMultisampleShading)throw std::runtime_error("Renderer does not provide multisample shading");
+            if(!rhi_->supportsSampleShading()||!context.descriptorLimits.standardSampleLocations)throw std::runtime_error("Device lacks enabled standard sample shading");
+            std::vector<azurerender::SceneMultisampleDestination> destinations;
+            for(std::size_t i=0;i<sceneColorImages_.size();++i)destinations.push_back({{sceneColorImages_[i].image,depthImages_[i].image,normalImages_[i].image,displayMaskImages_[i].image},
+                {sceneColorImageViews_[i],depthImageViews_[i],normalImageViews_[i],displayMaskImageViews_[i]}});
+            sceneMultisampling_=std::make_unique<azurerender::SceneMultisampling>(*rhi_,gpuAllocator_,sceneRenderExtent_,depthFormat_,normalFormat_,
+                azurerender::SceneSecondaryResolve::Average,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),context.shaderDirectory);
+        }catch(const std::exception& error){multisampleFallback_=error.what();azurerender::RuntimeDiagnostics::instance().info("render","Multisample AA spatial fallback: "+multisampleFallback_);}
+    }
+}
 void AzureRenderApp::createSceneRenderer() {
+    sceneResourcePaths_.reset();
+    playerSceneSnapshots_.clear();playerRenderSceneCache_.clear();
     azurerender::RenderContext context;
     buildRenderContext(context);
-    const std::string rendererId =
+    createTemporalResources();context.motionOutput=sharedMotion_.get();
+    std::string rendererId =
         azurerender::sceneTypeName(renderSettings_.sceneType);
+    if(context.sceneWorldCoordinates)
+        rendererId=azurerender::BuiltinRendererCatalog::documentRendererId(
+            renderSettings_.sceneType,!context.scene.resources.empty());
     azurerender::SceneRendererRegistry registry =
         azurerender::BuiltinRendererCatalog::createRegistry();
     sceneRenderer_ = registry.create(rendererId);
-    azurerender::validateSceneRendererCapabilities(
-        sceneRenderer_->capabilities());
+    const auto capabilities=sceneRenderer_->capabilities();
+    azurerender::validateSceneRendererCapabilities(capabilities);
+    createMultisampleResources();context.rasterizationSamples=sceneMultisampling_?azurerender::SceneMultisampling::kSamples:VK_SAMPLE_COUNT_1_BIT;
+    context.sceneRenderPass=sceneMultisampling_?sceneMultisampling_->renderPass():renderPass_;
+    if(sceneMultisampling_)context.scenePassDescription.reset();
+#if AZURE_WITH_EDITOR
+    if (runOptions_.editorSession) {
+        if(!runOptions_.editorSession->playing()){
+            runOptions_.editorSession->setViewportDiagnosticModes(capabilities.diagnosticViewNames);
+        }
+        const auto loadedScene = runOptions_.editorSession->viewScene();
+        rejectedEditorResources_={};
+        preservingEditorScene_=false;
+        editorDisplayedScene_.reset();
+        editorRenderResources_.load(loadedScene, [&] { sceneRenderer_->onLoad(context); });
+    } else
+#endif
     sceneRenderer_->onLoad(context);
     azurerender::RuntimeDiagnostics::instance().print(
         "render",
@@ -308,8 +587,36 @@ void AzureRenderApp::createSceneRenderer() {
                                    renderSettings_.sceneType) + ")");
 }
 
+azurerender::scene::SceneDescription AzureRenderApp::resolveRenderDescription(
+    const azurerender::SceneDocument& document) const {
+#if AZURE_WITH_EDITOR
+    const bool editing = runOptions_.editorSession && !runOptions_.editorSession->playing();
+    auto description = editing ? azurerender::EditorRenderResourceState::describe(document) : document.renderDescription();
+#else
+    auto description = document.renderDescription();
+#endif
+    if (!sceneResourcePaths_) sceneResourcePaths_.emplace(resourceLocator_);
+    std::vector<std::string> requested;
+    requested.reserve(description.resources.size());
+    for (const auto& resource : description.resources) requested.push_back(resource.path);
+    auto resolved = sceneResourcePaths_->resolve(requested);
+    for (std::size_t index = 0; index < description.resources.size(); ++index)
+        description.resources[index].path.swap(resolved[index]);
+    return description;
+}
+
+void AzureRenderApp::applyProjectReferenceViews(const azurerender::ProjectReferenceViews& configuration) {
+    const auto& views=configuration.views;
+    referenceCameraPrograms_=!views.empty();
+    referenceSceneDepthPrograms_=std::any_of(views.begin(),views.end(),[](const auto& entry){return entry.second.produceSceneDepth;});
+    referenceSceneVisibilityPrograms_=std::any_of(views.begin(),views.end(),[](const auto& entry){return entry.second.produceSceneVisibilityInputs;});
+    referenceSceneObjectVisibilityPrograms_=std::any_of(views.begin(),views.end(),[](const auto& entry){return entry.second.objectVisibility.has_value();});
+    referenceObjectVisibilityNumerics_=configuration.objectVisibilityProfile;
+}
+
 void AzureRenderApp::buildRenderContext(
-    azurerender::RenderContext& context) {
+    azurerender::RenderContext& context,const azurerender::RenderSettings* frameSettings,
+    const azurerender::scene::SceneDescription* frameScene,bool includeScene) {
     context.device = device_;
     context.physicalDevice = physicalDevice_;
     context.graphicsQueue = graphicsQueue_;
@@ -320,111 +627,72 @@ void AzureRenderApp::buildRenderContext(
     context.bindlessTextures =
         bindlessTexturesSupported_ && !runOptions_.bindlessDisabled;
     context.rgba16fStorageImage = rgba16fStorageImageSupported_;
+    context.computeShaders = computeShaderSupported_;
     context.computeSkinning =
         computeShaderSupported_ && !runOptions_.computeSkinningDisabled;
     context.cullingEnabled = !runOptions_.cullingDisabled;
+    context.faceCullingEnabled = !runOptions_.qaDisableFaceCulling;
+    context.depthTestEnabled = !runOptions_.qaDisableDepthTest;
     context.gpuCulling = computeShaderSupported_ && indirectFirstInstanceSupported_
         && !runOptions_.gpuCullingDisabled;
     context.multiDrawIndirect = multiDrawIndirectSupported_ && !runOptions_.multiDrawIndirectDisabled;
     VkPhysicalDeviceProperties indirectProperties{};
     vkGetPhysicalDeviceProperties(physicalDevice_, &indirectProperties);
     context.maxDrawIndirectCount = indirectProperties.limits.maxDrawIndirectCount;
+    context.descriptorLimits = indirectProperties.limits;
+    context.visibilityPrototype = context.gpuCulling && runOptions_.visibilityPrototype &&
+        azurerender::VisibilityPrototype::supported(indirectProperties.limits);
     context.qaInstanceCount = std::max(runOptions_.instanceCount, 1U);
     context.maxFramesInFlight = kMaxFramesInFlight;
-    context.renderExtent = renderExtent_;
+    context.preparationWorkers=runOptions_.parallelRecordingDisabled?nullptr:&recordingWorkers_;
+    context.fragmentPrimitiveIdentity=fragmentPrimitiveIdentity_;
+    context.fragmentStorageAtomics=fragmentStorageAtomics_;
+    context.fragmentQuadControl=fragmentQuadControl_;
+    context.renderExtent = sceneRenderExtent_;
     context.swapchainExtent = swapchainExtent_;
     context.sceneColorFormat = kHdrSceneColorFormat;
     context.depthFormat = depthFormat_;
     context.normalFormat = normalFormat_;
-    context.sceneRenderPass = renderPass_;
+    context.displayMaskEnabled=!displayMaskImages_.empty();
+    context.rasterizationSamples=sceneMultisampling_?azurerender::SceneMultisampling::kSamples:VK_SAMPLE_COUNT_1_BIT;
+    context.sceneRenderPass = sceneMultisampling_?sceneMultisampling_->renderPass():renderPass_;
+    context.scenePassDescription=sceneMultisampling_?nullptr:scenePassDescription_;
     context.postProcessRenderPass = postProcessRenderPass_;
     context.postProcessPipelineLayout = postProcessPipelineLayout_;
     context.postProcessDescriptorSetLayout = postProcessDescriptorSetLayout_;
     context.screenAttachmentSampler = screenAttachmentSampler_;
     context.shadowFormat = shadowFormat_;
     context.shadowRenderPass = shadowRenderPass_;
+    context.shadowImage = shadowImage_.image;
     context.shadowFramebuffer = shadowFramebuffer_;
     context.shadowImageView = shadowImageView_;
     context.shadowSampler = shadowSampler_;
     context.shadowMapSize = kShadowMapSize;
-    {
+    if(!includeScene){
+        // Recording consumes the renderer's prepared immutable frame. Loading
+        // and scene reuse retain their owned description through includeScene.
+        context.scene={};context.sceneWorldCoordinates=frameScene!=nullptr;
+    } else if (frameScene != nullptr) {
+        // Frame preparation resolves resource paths once. Recording consumes
+        // the same immutable scene that supplied the renderer update.
+        context.scene = *frameScene;
+        context.sceneWorldCoordinates = true;
+    } else {
         const azurerender::SceneDocument* document = nullptr;
+#if AZURE_WITH_EDITOR
+        azurerender::SceneDocument editorDocument;
+#endif
+#if AZURE_WITH_EDITOR
         if (runOptions_.editorSession != nullptr) {
-            document = &runOptions_.editorSession->context().scene();
-        } else if (runOptions_.sceneDocument.has_value()) {
+            editorDocument=runOptions_.editorSession->viewScene();document=&editorDocument;
+        } else
+#endif
+        if (runOptions_.sceneDocument.has_value()) {
             document = &*runOptions_.sceneDocument;
         }
         if (document != nullptr) {
-            context.scene.resources.reserve(document->resources.size());
-            for (const azurerender::SceneResource& resource :
-                 document->resources) {
-                context.scene.resources.push_back(
-                    {resource.id, resource.path.string()});
-            }
-            context.scene.nodes.reserve(document->nodes.size());
-            for (const azurerender::SceneNode& node : document->nodes) {
-                azurerender::scene::SceneNodeDesc desc{};
-                desc.id = node.id;
-                desc.resourceId = node.resourceId;
-                desc.parentId = node.parentId;
-                desc.translation = node.translation;
-                desc.rotation = node.rotation;
-                desc.scale = node.scale;
-                desc.visible = node.visible;
-                context.scene.nodes.push_back(std::move(desc));
-            }
-            std::unordered_map<std::string, std::size_t> nodeIndices;
-            nodeIndices.reserve(document->nodes.size());
-            for (std::size_t index = 0; index < document->nodes.size(); ++index) {
-                nodeIndices.emplace(document->nodes[index].id, index);
-            }
-            std::vector<azurerender::internal::Matrix4> nodeWorld(
-                document->nodes.size());
-            std::vector<std::uint8_t> nodeState(document->nodes.size(), 0);
-            const auto resolveNodeWorld = [&](const std::size_t index,
-                auto&& self) -> const azurerender::internal::Matrix4& {
-                if (nodeState[index] == 2) {
-                    return nodeWorld[index];
-                }
-                if (nodeState[index] == 1) {
-                    throw std::runtime_error(
-                        "Scene transform hierarchy contains a cycle");
-                }
-                nodeState[index] = 1;
-                const azurerender::SceneNode& node = document->nodes[index];
-                const azurerender::internal::Matrix4 local =
-                    azurerender::scene::composeTrs(
-                        node.translation, node.rotation, node.scale);
-                const auto parent = nodeIndices.find(node.parentId);
-                if (!node.parentId.empty() && parent != nodeIndices.end()) {
-                    nodeWorld[index] = azurerender::internal::multiply(
-                        self(parent->second, self), local);
-                } else {
-                    nodeWorld[index] = local;
-                }
-                nodeState[index] = 2;
-                return nodeWorld[index];
-            };
-            context.scene.lights.reserve(document->lights.size());
-            for (const azurerender::SceneLight& light : document->lights) {
-                const auto node = nodeIndices.find(light.nodeId);
-                if (node == nodeIndices.end()) {
-                    throw std::runtime_error(
-                        "Scene light references missing node: " + light.nodeId);
-                }
-                const auto& world = resolveNodeWorld(node->second, resolveNodeWorld);
-                const auto position = azurerender::internal::transformPosition(
-                    world, {0.0F, 0.0F, 0.0F});
-                context.scene.lights.push_back({
-                    light.id,
-                    light.nodeId,
-                    position,
-                    light.color,
-                    light.intensity,
-                    light.radius,
-                    light.enabled,
-                });
-            }
+            context.scene = resolveRenderDescription(*document);
+            context.sceneWorldCoordinates = true;
         } else {
             context.scene.resources.push_back({"asset-0", resolvedAssetPath_});
             azurerender::scene::SceneNodeDesc root{};
@@ -432,38 +700,145 @@ void AzureRenderApp::buildRenderContext(
             context.scene.nodes.push_back(std::move(root));
         }
     }
-    context.shaderDirectory = resourceLocator_.shaderDirectory().string();
+    context.shaderDirectory = resourceLocator_.shaderDirectory().u8string();
+    context.referenceCameraPrograms=referenceCameraPrograms_;
+    context.referenceSceneDepthPrograms=referenceSceneDepthPrograms_;
+    context.referenceSceneVisibilityPrograms=referenceSceneVisibilityPrograms_;
+    context.referenceSceneObjectVisibilityPrograms=referenceSceneObjectVisibilityPrograms_;
+    context.referenceObjectVisibilityNumerics=referenceObjectVisibilityNumerics_;
+#if AZURE_WITH_EDITOR
+    if(!activeShaderDirectory_.empty())context.shaderDirectory=activeShaderDirectory_;
+#endif
     context.environment.path = runOptions_.environmentPath;
-    if (context.environment.path.empty()) {
-        const std::filesystem::path privateRoot("D:/Assigment/temp");
-        if (renderSettings_.sceneType == azurerender::SceneType::Blackhole) {
-            const auto candidate = privateRoot / "Space_Skybox";
-            if (std::filesystem::is_directory(candidate)) {
-                context.environment.path = candidate.string();
-                context.environment.projection =
-                    azurerender::EnvironmentProjection::CubeFaces;
-            }
-        } else if (renderSettings_.sceneType == azurerender::SceneType::Character) {
-            const auto candidate = privateRoot / "EveningSkyHDRI007B_2K"
-                / "EveningSkyHDRI007B_2K_TONEMAPPED.jpg";
-            if (std::filesystem::is_regular_file(candidate)) {
-                context.environment.path = candidate.string();
-                context.environment.projection =
-                    azurerender::EnvironmentProjection::Equirectangular;
-            }
-        }
+    context.rampAtlasPath = resourceLocator_.rampAtlas().u8string();
+    if(frameSettings)context.renderSettings=frameSettings;
+    else {
+        effectiveRenderSettings_=engineSettings_?azurerender::resolveRenderSettings(*engineSettings_,renderSettings_):renderSettings_;
+        context.renderSettings=&effectiveRenderSettings_;
     }
-    context.rampAtlasPath = resourceLocator_.rampAtlas().string();
-    context.renderSettings = &renderSettings_;
+    context.motionOutput=sharedMotion_.get();
 }
 
 void AzureRenderApp::buildSceneFrameData(
     azurerender::SceneFrameData& frame) {
     const double currentTime = frontend_->timeSeconds();
-    const float deltaSeconds = (fixedSimulation_ || runOptions_.fixedFrameStep)
+    const float rawDeltaSeconds = (fixedSimulation_ || runOptions_.fixedFrameStep)
         ? (fixedSimulationStarted_ ? fixedDeltaSeconds_ : 0.0F)
         : static_cast<float>(
               std::max(currentTime - lastRotationTime_, 0.0));
+    auto* game=activeGame();
+    if(game&&(gameInputReplay_||!runOptions_.gameActionsPath.empty())) {
+        if(!gameInputReplay_){std::ifstream input(runOptions_.gameActionsPath);nlohmann::json document;input>>document;
+            gameInputReplay_=azurerender::GameInputReplay::parse(document);}
+        auto* levels=levelSession_.get();
+#if AZURE_WITH_EDITOR
+        if(runOptions_.editorSession)levels=runOptions_.editorSession->levels();
+#endif
+        gameInputReplay_->apply(gameplayFrame_,*game,levels);
+    }
+    bool runtimeOwnsInput=true;
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession)runtimeOwnsInput=!runOptions_.editorSession->simulating();
+#endif
+    if (game&&!gameInputReplay_&&runtimeOwnsInput) {
+        bool focused = glfwGetWindowAttrib(frontend_->nativeHandle(), GLFW_FOCUSED) != 0;
+        bool captureRequested=glfwGetMouseButton(frontend_->nativeHandle(),GLFW_MOUSE_BUTTON_LEFT)==GLFW_PRESS;
+#if AZURE_WITH_EDITOR
+        if (editorLayer_) {
+            focused=focused&&editorLayer_->acceptsGameInput()&&activeRuntime()->state()==azurerender::RuntimeLifecycle::State::Running;
+            captureRequested=editorLayer_->requestsGameCapture();
+            if(!focused)gameViewportFocus_=false;
+        }
+#endif
+        double x=0,y=0;glfwGetCursorPos(frontend_->nativeHandle(),&x,&y);
+        bool uiPointer=false;
+#if AZURE_WITH_EDITOR
+        if(!editorLayer_)
+#endif
+        if(gameUi_&&glfwGetInputMode(frontend_->nativeHandle(),GLFW_CURSOR)!=GLFW_CURSOR_DISABLED){
+            int width=1,height=1;glfwGetWindowSize(frontend_->nativeHandle(),&width,&height);
+            uiPointer=gameUi_->wantsPointer(static_cast<int>(x*renderExtent_.width/std::max(width,1)),static_cast<int>(y*renderExtent_.height/std::max(height,1)));
+        }
+        if(focused&&captureRequested&&!uiPointer) gameViewportFocus_=true;
+        focused=focused&&gameViewportFocus_&&!(gameUi_&&gameUi_->wantsKeyboard())&&!uiPointer;
+        game->input().setFocused(focused);
+        if(focused&&game->hasCamera()&&activeRuntime()->state()==azurerender::RuntimeLifecycle::State::Running){
+            if(gameCursorPrimed_)game->cameraInput(static_cast<float>(x-gameCursorX_)*azurerender::cameraSensitivity(*engineSettings_),static_cast<float>(y-gameCursorY_)*azurerender::cameraSensitivity(*engineSettings_),0);
+            gameCursorPrimed_=true;
+            glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_DISABLED);
+        }else{gameCursorPrimed_=false;glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_NORMAL);}
+        gameCursorX_=x;gameCursorY_=y;
+        for (int key : game->input().keys())
+            game->input().key(key, glfwGetKey(frontend_->nativeHandle(), key) == GLFW_PRESS);
+    }
+    double elapsed=0;
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession)elapsed=runOptions_.editorSession->advance(rawDeltaSeconds);else
+#endif
+    {elapsed=game?game->advance(rawDeltaSeconds):runtime_.beginFrame(rawDeltaSeconds);if(presentationRuntime_)presentationRuntime_->update(elapsed);}
+    const float deltaSeconds=static_cast<float>(elapsed);
+    std::optional<azurerender::SceneDocument> ownedGameScene;
+    azurerender::SceneDocument* gameScene = nullptr;
+    if(game) {
+        if(runOptions_.sceneDocument.has_value()&&!runOptions_.editorMode) {
+            game->renderScene(playerSceneScratch_,playerSceneSnapshots_);
+            gameScene=&playerSceneScratch_;
+        } else {
+            ownedGameScene=game->renderScene();
+            gameScene=&*ownedGameScene;
+        }
+    }
+    std::shared_ptr<const azurerender::scene::SceneDescription> gameDescription;
+    bool needsSceneSnapshot=runOptions_.sceneDocument.has_value()&&!runOptions_.editorMode;
+#if AZURE_WITH_EDITOR
+    needsSceneSnapshot=needsSceneSnapshot||static_cast<bool>(runOptions_.editorSession);
+#endif
+    if(gameScene&&needsSceneSnapshot){
+        if(runOptions_.sceneDocument.has_value()&&!runOptions_.editorMode)gameDescription=playerRenderSceneCache_.prepare(*gameScene,
+            playerSceneSnapshots_.sourceIdentity(*gameScene),[this](const auto& document){return resolveRenderDescription(document);});
+        else gameDescription=std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(*gameScene));
+    }
+    std::optional<azurerender::CameraViewDescriptor> gameView;
+    bool sceneViewActive=false;
+#if AZURE_WITH_EDITOR
+    sceneViewActive=runOptions_.editorSession&&runOptions_.editorSession->editCameraActive();
+#endif
+    if(game&&(!qaHarnessEnabled_||qaCameraName_=="scene")&&!sceneViewActive){
+        gameView=(gameDescription?game->renderCamera(*gameDescription):game->renderCamera(*gameScene)).view;
+        const auto view=gameView.value_or(azurerender::CameraViewDescriptor{});
+        cameraPosition_=view.position;cameraTarget_=view.target;autoRotate_=false;rotationAngle_=0;
+    }
+    if(auto* presentation=activePresentation())frame.animations=presentation->animations();
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession && runOptions_.editorSession->editCameraActive()){
+        const auto previews=runOptions_.editorSession->animationFrames();
+        frame.animations.insert(frame.animations.end(),previews.begin(),previews.end());editorPreviewFrames_+=previews.size();
+    }
+#endif
+    if(game&&gameInputReplay_&&!runOptions_.runtimeReportPath.empty()&&gameRouteFrames_.size()<8192)
+        gameRouteFrames_.push_back(observeGameState());
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession){
+        if(gameScene)frame.sceneSnapshot=gameDescription;
+        else if (preservingEditorScene_ && editorDisplayedScene_) frame.sceneSnapshot=editorDisplayedScene_;
+        else {
+            frame.sceneSnapshot=std::make_shared<const azurerender::scene::SceneDescription>(
+                resolveRenderDescription(runOptions_.editorSession->viewScene()));
+            editorDisplayedScene_=frame.sceneSnapshot;
+        }
+    }
+#endif
+    pausedTimeOffset_ += static_cast<double>(rawDeltaSeconds - deltaSeconds);
+    if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode) {
+        if(gameScene)playerSceneSnapshots_.exchange(*runOptions_.sceneDocument,*gameScene);
+        else {
+            runtime_.snapshotScene(playerSceneScratch_,playerSceneSnapshots_);
+            playerSceneSnapshots_.exchange(*runOptions_.sceneDocument,playerSceneScratch_);
+        }
+    }
+    if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
+        frame.sceneSnapshot = gameDescription?gameDescription:playerRenderSceneCache_.prepare(*runOptions_.sceneDocument,
+            playerSceneSnapshots_.sourceIdentity(*runOptions_.sceneDocument),[this](const auto& document){return resolveRenderDescription(document);});
     fixedSimulationStarted_ = true;
     lastRotationTime_ = currentTime;
     if (autoRotate_) {
@@ -474,9 +849,42 @@ void AzureRenderApp::buildSceneFrameData(
         fixedSimulationTime_ += deltaSeconds;
         frame.timeSeconds = fixedSimulationTime_;
     } else {
-        frame.timeSeconds = currentTime;
+        frame.timeSeconds = currentTime - pausedTimeOffset_;
     }
-    frame.renderSettings = &renderSettings_;
+    effectiveRenderSettings_=azurerender::resolveRenderSettings(*engineSettings_,renderSettings_);
+    effectiveRenderSettings_.characterPresentation.showcaseBackdrop = runOptions_.qaShowcasePresentation;
+    if(qaIsolationMode_>0 && !runOptions_.qaShowcasePresentation){
+        // Apply component transfer after final frame-setting resolution.
+        // Authored grades remain in the scene document and setting layers.
+        effectiveRenderSettings_.grade=azurerender::GradeSettings{};
+        effectiveRenderSettings_.grade.exposureEv=runOptions_.qaExposureEv.value_or(0.F);
+        effectiveRenderSettings_.grade.toneMappingEnabled=false;
+        effectiveRenderSettings_.bloom.enabled=false;
+    }
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession && runOptions_.editorSession->editCameraActive()){
+        auto& session=*runOptions_.editorSession;session.synchronizeViewportCamera(cameraPosition_,cameraTarget_);
+        effectiveRenderSettings_.cameraView=session.viewportView();effectiveRenderSettings_.cameraNear=session.viewportView().nearPlane;effectiveRenderSettings_.cameraFar=session.viewportView().farPlane;
+    }
+#endif
+    azurerender::CameraViewDescriptor fallback;
+    fallback.position=cameraPosition_;fallback.target=cameraTarget_;
+    fallback.nearPlane=effectiveRenderSettings_.cameraNear;fallback.farPlane=effectiveRenderSettings_.cameraFar;
+    const auto editingView=sceneViewActive?effectiveRenderSettings_.cameraView:std::optional<azurerender::CameraViewDescriptor>{};
+    frame.camera=azurerender::selectRenderCamera(editingView,gameView,fallback);
+    if(sceneRenderer_&&(frame.camera.view.projectionOffsetX!=0||frame.camera.view.projectionOffsetY!=0||frame.camera.view.referenceCalibration))
+        azurerender::validateSceneRendererCamera(sceneRenderer_->capabilities(),frame.camera.view);
+    effectiveRenderSettings_.cameraView=frame.camera.view;
+    if (runOptions_.qaShowcasePresentation
+        && frame.camera.source == azurerender::RenderCameraSource::Fallback) {
+        // The fixed showcase lens scales the two projection coefficients after construction.
+        effectiveRenderSettings_.cameraView.reset();
+    }
+    effectiveRenderSettings_.cameraNear=frame.camera.view.nearPlane;
+    effectiveRenderSettings_.cameraFar=frame.camera.view.farPlane;
+    effectiveRenderSettings_.shadowDistance=std::clamp(effectiveRenderSettings_.shadowDistance,
+        frame.camera.view.nearPlane+(frame.camera.view.farPlane-frame.camera.view.nearPlane)*.001F,frame.camera.view.farPlane);
+    frame.renderSettings = &effectiveRenderSettings_;
     frame.cameraPosition[0] = cameraPosition_[0];
     frame.cameraPosition[1] = cameraPosition_[1];
     frame.cameraPosition[2] = cameraPosition_[2];
@@ -488,6 +896,7 @@ void AzureRenderApp::buildSceneFrameData(
     frame.qaEffectMode = qaEffectMode_;
     frame.qaEffectEnabled = qaEffectEnabled_;
     frame.qaHarnessEnabled = qaHarnessEnabled_;
+    frame.qaLightScan = runOptions_.qaLightScan;
     frame.capturedFrames = capturedFrames_;
     frame.captureFps = runOptions_.captureFps;
     frame.captureActive = fixedSimulation_;
@@ -498,7 +907,9 @@ void AzureRenderApp::buildSceneFrameData(
     frame.gizmoActive =
         selectedPrimitiveIndex_ >= 0
         && runOptions_.editorSession != nullptr;
+#if AZURE_WITH_EDITOR
     if (runOptions_.editorSession != nullptr) {
+        if(runOptions_.editorSession->playing())frame.gizmoActive=false;
         const azurerender::EditorContext& editorContext =
             runOptions_.editorSession->context();
         const std::array<float, 3> translation =
@@ -516,8 +927,9 @@ void AzureRenderApp::buildSceneFrameData(
         frame.gizmoScale[1] = scale[1];
         frame.gizmoScale[2] = scale[2];
     }
-    frame.swapchainWidth = swapchainExtent_.width;
-    frame.swapchainHeight = swapchainExtent_.height;
+#endif
+    frame.swapchainWidth = sceneRenderExtent_.width;
+    frame.swapchainHeight = sceneRenderExtent_.height;
 }
 
 void AzureRenderApp::activatePortfolioOrbit() {
@@ -544,6 +956,8 @@ void AzureRenderApp::activatePortfolioOrbit() {
 
 void AzureRenderApp::configureQaHarness() {
     qaHarnessEnabled_ = !runOptions_.qaCamera.empty()
+        || runOptions_.qaLightScan
+        || runOptions_.qaAnimation
         || !runOptions_.qaLight.empty()
         || !runOptions_.qaEffect.empty()
         || !runOptions_.qaEffectState.empty()
@@ -573,12 +987,34 @@ void AzureRenderApp::configureQaHarness() {
     qaCameraName_ = runOptions_.qaCamera.empty()
         ? "full-body-front"
         : runOptions_.qaCamera;
-    if (qaCameraName_ == "full-body-front") {
+    if (qaCameraName_ == "scene") {
+        // The runtime camera and authored world transform remain authoritative.
+    } else if (qaCameraName_ == "full-body-front") {
         if (!runOptions_.portfolioMode) {
             rotationAngle_ = 0.0F;
         }
         cameraPosition_ = {0.0F, 1.18F, 3.55F};
         cameraTarget_ = {0.0F, 0.12F, 0.0F};
+        if (runOptions_.sceneDocument && sceneRenderer_ && sceneRenderer_->sceneState()
+            && sceneRenderer_->sceneState()->asset) {
+            const auto& asset = *sceneRenderer_->sceneState()->asset;
+            const auto scene = resolveRenderDescription(*runOptions_.sceneDocument);
+            const auto transforms = azurerender::scene::resolveNodeWorldTransforms(scene);
+            for (std::size_t index = 0; index < scene.nodes.size(); ++index) {
+                if (scene.resources.empty() || scene.nodes[index].resourceId != scene.resources.front().id
+                    || !scene.nodes[index].visible) continue;
+                const auto& matrix = transforms[index];
+                const std::array<float, 3> center{
+                    (asset.boundsMin[0] + asset.boundsMax[0]) * 0.5F,
+                    (asset.boundsMin[1] + asset.boundsMax[1]) * 0.5F,
+                    (asset.boundsMin[2] + asset.boundsMax[2]) * 0.5F};
+                for (unsigned axis = 0; axis < 3; ++axis)
+                    cameraTarget_[axis] = static_cast<float>(matrix[axis] * center[0]
+                        + matrix[4 + axis] * center[1] + matrix[8 + axis] * center[2] + matrix[12 + axis]);
+                cameraPosition_ = {cameraTarget_[0], cameraTarget_[1] + 1.06F, cameraTarget_[2] + 3.55F};
+                break;
+            }
+        }
         // An isolation pass implicitly selects this QA camera. Preserve the
         // portfolio turntable in that combined mode so diagnostic segments
         // follow the same orbit as Beauty instead of silently becoming still.
@@ -588,8 +1024,15 @@ void AzureRenderApp::configureQaHarness() {
         cameraPosition_ = {0.915F, 1.507F, 1.046F};
         cameraTarget_ = {0.0F, 0.82F, 0.0F};
         autoRotate_ = false;
-    } else if (qaCameraName_ == "face-three-quarter") {
+    } else if (qaCameraName_ == "face-three-quarter" || qaCameraName_ == "face-three-quarter-left") {
         rotationAngle_ = kPi * 0.40F;
+        cameraPosition_ = {0.915F, 1.507F, 1.046F};
+        cameraTarget_ = {0.0F, 0.82F, 0.0F};
+        autoRotate_ = false;
+    } else if (qaCameraName_ == "face-three-quarter-right"
+               || qaCameraName_ == "face-side-left" || qaCameraName_ == "face-side-right") {
+        rotationAngle_ = kPi * (qaCameraName_ == "face-three-quarter-right" ? 0.10F
+            : qaCameraName_ == "face-side-left" ? 0.75F : -0.25F);
         cameraPosition_ = {0.915F, 1.507F, 1.046F};
         cameraTarget_ = {0.0F, 0.82F, 0.0F};
         autoRotate_ = false;
@@ -612,7 +1055,9 @@ void AzureRenderApp::configureQaHarness() {
     qaLightName_ = runOptions_.qaLight.empty()
         ? "stylized-key"
         : runOptions_.qaLight;
-    if (qaLightName_ == "neutral-material") {
+    if (qaLightName_ == "scene") {
+        // Component diagnostics evaluate the scene's existing lighting settings.
+    } else if (qaLightName_ == "neutral-material") {
         azurerender::applyShowcasePresetLook(renderSettings_, 2);
     } else if (qaLightName_ == "stylized-key") {
         azurerender::applyShowcasePresetLook(renderSettings_, 1);
@@ -629,6 +1074,8 @@ void AzureRenderApp::configureQaHarness() {
     if (!runOptions_.renderSettings.stylizedLightingEnabled) {
         renderSettings_.stylizedLightingEnabled = false;
     }
+    if (qaLightName_ != "scene")
+        renderSettings_.antiAliasing=runOptions_.renderSettings.antiAliasing;
     if (!runOptions_.renderSettings.innerOutlineEnabled) {
         renderSettings_.innerOutlineEnabled = false;
     }
@@ -664,11 +1111,12 @@ void AzureRenderApp::configureQaHarness() {
         ? "beauty"
         : runOptions_.qaIsolation;
 
-    constexpr std::array<const char*, 20> kIsolationNames = {
+    constexpr std::array<const char*, 28> kIsolationNames = {
         "beauty", "albedo", "world-normal", "depth", "diffuse-band",
         "shadow-visibility", "hair-kk", "rim", "specular", "emissive",
         "outline", "shadow-map", "material-id", "style-mask", "ambient",
         "direct-diffuse", "shadow-tint", "face-sdf", "overlay", "bloom",
+        "brow-mask", "roughness", "metallic", "direct-specular", "reflection", "shaded-normal", "shadow-color", "object-shadow-visibility",
     };
     const auto isolation = std::find(
         kIsolationNames.begin(), kIsolationNames.end(), qaIsolationName_);
@@ -678,11 +1126,12 @@ void AzureRenderApp::configureQaHarness() {
     }
     const std::uint32_t isolationIndex = static_cast<std::uint32_t>(
         std::distance(kIsolationNames.begin(), isolation));
-    constexpr std::array<std::uint32_t, 20> kPostProcessViews = {
+    constexpr std::array<std::uint32_t, 28> kPostProcessViews = {
         0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0,
     };
-    constexpr std::array<std::uint32_t, 20> kShaderIsolationModes = {
-        0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8, 9, 10, 11, 12, 13, 14, 15,
+    constexpr std::array<std::uint32_t, 28> kShaderIsolationModes = {
+        0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19, 20, 21, 22, 23,
     };
     renderSettings_.diagnosticView = kPostProcessViews[isolationIndex];
     qaIsolationMode_ = kShaderIsolationModes[isolationIndex];
@@ -701,7 +1150,10 @@ void AzureRenderApp::configureQaHarness() {
         }
     }
     if (qaIsolationMode_ > 0) {
-        // Component isolation must not be contaminated by either outline path.
+        // Component isolation excludes both outline paths.
+        if (!runOptions_.qaShowcasePresentation) {
+            renderSettings_.characterPresentation.backgroundEnabled = false;
+        }
         renderSettings_.innerOutlineEnabled = false;
         renderSettings_.silhouetteOutlineEnabled = false;
     }
@@ -709,7 +1161,7 @@ void AzureRenderApp::configureQaHarness() {
         renderSettings_.innerOutlineEnabled = qaEffectEnabled_;
         renderSettings_.silhouetteOutlineEnabled = qaEffectEnabled_;
     }
-    if (sceneRenderer_ != nullptr && qaCameraName_ != "lighting-sweep") {
+    if (sceneRenderer_ != nullptr && qaCameraName_ != "lighting-sweep" && !runOptions_.qaAnimation) {
         sceneRenderer_->setPlaybackPlaying(false);
     }
     azurerender::RuntimeDiagnostics::instance().print(
@@ -772,12 +1224,30 @@ void AzureRenderApp::updateTechnicalSequenceState(
 }
 
 void AzureRenderApp::cleanup() {
+    if(validationTransport_)validationTransport_->stop();
+    if(validation_)validation_->stop();
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession)runOptions_.editorSession->setPlacementRaycast({});
+    if(runOptions_.editorSession && runOptions_.editorSession->playing())static_cast<void>(runOptions_.editorSession->execute(azurerender::EditorCommand::Stop));
+    if(shaderReloader_)shaderReloader_->cancel();
+    discardEditorSceneReload();
+#endif
+    runtimeModules_.stop();
     if (device_ != VK_NULL_HANDLE) {
         vkDeviceWaitIdle(device_);
+#if AZURE_WITH_EDITOR
+        shaderReloader_.reset();
+        if(runOptions_.editorSession)runOptions_.editorSession->setDeveloperServices({});
+        thumbnails_.reset();renderViews_.reset();
+#endif
+        gameUi_.reset();gameUiRenderer_.reset();
         workerCommandPools_.reset();
+#if AZURE_WITH_EDITOR
         if (editorLayer_ != nullptr) {
             editorLayer_->shutdownVulkan();
         }
+#endif
+        if(preparedRenderer_){azurerender::RenderContext context;buildRenderContext(context);preparedRenderer_->onUnload(context);preparedRenderer_.reset();}
         cleanupSwapchain();
         if (sceneRenderer_ != nullptr) {
             azurerender::RenderContext unloadContext;
@@ -824,7 +1294,17 @@ void AzureRenderApp::cleanup() {
         if (commandPool_ != VK_NULL_HANDLE) {
             vkDestroyCommandPool(device_, commandPool_, nullptr);
         }
+        const auto cacheUsage=rhi_?rhi_->pipelineCacheUsage():azurerender::rhi::VulkanRhi::CacheUsage{};
         rhi_.reset();
+        if(pipelineCache_){
+            const bool allCacheHits = cacheUsage.requests != 0 && cacheUsage.feedback == cacheUsage.requests
+                && cacheUsage.hits == cacheUsage.requests;
+            if (!allCacheHits || !pipelineCache_->retainLoadedCache())
+                pipelineCache_->flush();
+            const auto& cache=pipelineCache_->statistics();
+            azurerender::RuntimeDiagnostics::instance().info("startup","Pipeline cache saved: bytes="+std::to_string(cache.writtenBytes)+", state="+cache.writeState+", requests="+std::to_string(cacheUsage.requests)+", hits="+std::to_string(cacheUsage.hits)+", feedback="+std::to_string(cacheUsage.feedback));
+            pipelineCache_.reset();
+        }
         const auto& unloaded = gpuAllocator_.statistics();
         azurerender::RuntimeDiagnostics::instance().print(
             "render", "Allocator after unload: buffers=" + std::to_string(unloaded.liveBuffers)
@@ -847,7 +1327,9 @@ void AzureRenderApp::cleanup() {
         instance_ = VK_NULL_HANDLE;
     }
     frontend_.reset();
+#if AZURE_WITH_EDITOR
     editorLayer_.reset();
+#endif
 }
 
 void AzureRenderApp::createInstance() {
@@ -948,12 +1430,6 @@ void AzureRenderApp::pickPhysicalDevice() {
         vulkan12Features.runtimeDescriptorArray == VK_TRUE
         && vulkan12Features.shaderSampledImageArrayNonUniformIndexing
             == VK_TRUE;
-    const std::filesystem::path capabilityDirectory =
-        runOptions_.captureDirectory.empty()
-        ? std::filesystem::path("captures")
-        : std::filesystem::path(runOptions_.captureDirectory);
-    static_cast<void>(azurerender::writeGpuCapabilityReport(
-        physicalDevice_, capabilityDirectory / "gpu_capabilities.json"));
     timestampPeriodNanoseconds_ = properties.limits.timestampPeriod;
     const QueueFamilyIndices queueIndices =
         findQueueFamilies(physicalDevice_);
@@ -1035,6 +1511,13 @@ void AzureRenderApp::createLogicalDevice() {
     // Required so scene renderers (e.g. the blackhole tracer) can use a
     // zero-write World Normal attachment next to a written Scene Color.
     deviceFeatures.independentBlend = VK_TRUE;
+    VkPhysicalDeviceFeatures supportedSampler{};vkGetPhysicalDeviceFeatures(physicalDevice_,&supportedSampler);
+    deviceFeatures.samplerAnisotropy=supportedSampler.samplerAnisotropy;
+    deviceFeatures.sampleRateShading=supportedSampler.sampleRateShading;
+#if defined(AZURE_SURFACE_RADIANCE_PROGRAMS) || defined(AZURE_SHADOW_HISTORY_PROGRAMS)
+    fragmentPrimitiveIdentity_=supportedSampler.geometryShader==VK_TRUE;
+    deviceFeatures.geometryShader=fragmentPrimitiveIdentity_?VK_TRUE:VK_FALSE;
+#endif
     deviceFeatures.drawIndirectFirstInstance = indirectFirstInstanceSupported_ ? VK_TRUE : VK_FALSE;
     deviceFeatures.multiDrawIndirect = multiDrawIndirectSupported_ ? VK_TRUE : VK_FALSE;
     VkPhysicalDeviceVulkan12Features vulkan12Features{
@@ -1044,22 +1527,109 @@ void AzureRenderApp::createLogicalDevice() {
         vulkan12Features.shaderSampledImageArrayNonUniformIndexing = VK_TRUE;
     }
     VkDeviceCreateInfo createInfo{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
+    std::uint32_t extensionCount = 0;
+    vkCheck(vkEnumerateDeviceExtensionProperties(physicalDevice_, nullptr, &extensionCount, nullptr),
+            "vkEnumerateDeviceExtensionProperties(inspection count)");
+    std::vector<VkExtensionProperties> availableExtensions(extensionCount);
+    vkCheck(vkEnumerateDeviceExtensionProperties(physicalDevice_, nullptr, &extensionCount, availableExtensions.data()),
+            "vkEnumerateDeviceExtensionProperties(inspection)");
+    availableExtensions.resize(extensionCount);
+    const bool inspectionExtension = std::any_of(availableExtensions.begin(), availableExtensions.end(),
+        [](const auto& extension) { return std::strcmp(extension.extensionName,
+            VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME) == 0; });
+    VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR inspectionFeatures{
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR};
+    if (inspectionExtension) {
+        VkPhysicalDeviceFeatures2 available{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};
+        available.pNext = &inspectionFeatures;
+        vkGetPhysicalDeviceFeatures2(physicalDevice_, &available);
+    }
+    const bool inspectionSupported = inspectionExtension && inspectionFeatures.pipelineExecutableInfo == VK_TRUE;
+    const bool inspectionEnabled = inspectionSupported && !runOptions_.pipelineInspectionDisabled;
+    std::vector<const char*> enabledExtensions(kDeviceExtensions.begin(), kDeviceExtensions.end());
+    if (inspectionEnabled) {
+        enabledExtensions.push_back(VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME);
+        vulkan12Features.pNext = &inspectionFeatures;
+    }
+#if defined(AZURE_SURFACE_RADIANCE_PROGRAMS) || defined(AZURE_COMPUTED_MATERIAL_VIEW_PROGRAMS)
+    VkPhysicalDeviceShaderQuadControlFeaturesKHR quadControl{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR};
+    VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR reconvergence{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR};
+    VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures demote{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES};
+    const auto hasExtension=[&](const char* name){return std::any_of(availableExtensions.begin(),availableExtensions.end(),[&](const auto& value){return std::strcmp(value.extensionName,name)==0;});};
+    fragmentQuadControl_=false;
+    if(hasExtension(VK_KHR_SHADER_QUAD_CONTROL_EXTENSION_NAME)&&hasExtension(VK_KHR_SHADER_MAXIMAL_RECONVERGENCE_EXTENSION_NAME)){
+        quadControl.pNext=&reconvergence;reconvergence.pNext=&demote;VkPhysicalDeviceFeatures2 available{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};available.pNext=&quadControl;
+        vkGetPhysicalDeviceFeatures2(physicalDevice_,&available);
+        fragmentQuadControl_=!runOptions_.qaDisableSurfaceRadianceReuse&&quadControl.shaderQuadControl&&reconvergence.shaderMaximalReconvergence&&demote.shaderDemoteToHelperInvocation;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW_PROGRAMS)
+        fragmentQuadControl_=quadControl.shaderQuadControl&&reconvergence.shaderMaximalReconvergence&&demote.shaderDemoteToHelperInvocation;
+#endif
+#if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS) || defined(AZURE_SURFACE_RADIANCE_FRAME_SELECTION)
+        fragmentQuadControl_&=supportedSampler.fragmentStoresAndAtomics==VK_TRUE;
+        deviceFeatures.fragmentStoresAndAtomics=fragmentQuadControl_?VK_TRUE:VK_FALSE;
+#endif
+        if(fragmentQuadControl_){enabledExtensions.push_back(VK_KHR_SHADER_QUAD_CONTROL_EXTENSION_NAME);enabledExtensions.push_back(VK_KHR_SHADER_MAXIMAL_RECONVERGENCE_EXTENSION_NAME);
+            demote.pNext=vulkan12Features.pNext;vulkan12Features.pNext=&quadControl;}
+    }
+#endif
+#if defined(AZURE_SHADOW_HISTORY_PROGRAMS)
+    deviceFeatures.fragmentStoresAndAtomics=supportedSampler.fragmentStoresAndAtomics;
+#endif
+    fragmentStorageAtomics_=deviceFeatures.fragmentStoresAndAtomics==VK_TRUE;
+    auto exactDepthBias=azurerender::rhi::queryExactDepthBias(physicalDevice_);
+    exactDepthBiasEnabled_=exactDepthBias.depthBiasExact==VK_TRUE;
+    if(exactDepthBiasEnabled_){
+        enabledExtensions.push_back(VK_EXT_DEPTH_BIAS_CONTROL_EXTENSION_NAME);
+        exactDepthBias.pNext=vulkan12Features.pNext;vulkan12Features.pNext=&exactDepthBias;
+    }
+    VkPhysicalDeviceShaderFloatControls2FeaturesKHR floatControls{
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES_KHR};
+    const bool floatControlsExtension = std::any_of(availableExtensions.begin(), availableExtensions.end(),
+        [](const auto& extension) {
+            return std::strcmp(extension.extensionName, VK_KHR_SHADER_FLOAT_CONTROLS_2_EXTENSION_NAME) == 0;
+        });
+    if (floatControlsExtension) {
+        VkPhysicalDeviceFeatures2 available{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};
+        available.pNext = &floatControls;
+        vkGetPhysicalDeviceFeatures2(physicalDevice_, &available);
+    }
+    shaderFloatControls2Enabled_ = floatControls.shaderFloatControls2 == VK_TRUE;
+    if (shaderFloatControls2Enabled_) {
+        enabledExtensions.push_back(VK_KHR_SHADER_FLOAT_CONTROLS_2_EXTENSION_NAME);
+        floatControls.pNext = vulkan12Features.pNext;
+        vulkan12Features.pNext = &floatControls;
+    }
     createInfo.pNext = &vulkan12Features;
     createInfo.queueCreateInfoCount = static_cast<std::uint32_t>(queueCreateInfos.size());
     createInfo.pQueueCreateInfos = queueCreateInfos.data();
     createInfo.pEnabledFeatures = &deviceFeatures;
-    createInfo.enabledExtensionCount = static_cast<std::uint32_t>(kDeviceExtensions.size());
-    createInfo.ppEnabledExtensionNames = kDeviceExtensions.data();
+    createInfo.enabledExtensionCount = static_cast<std::uint32_t>(enabledExtensions.size());
+    createInfo.ppEnabledExtensionNames = enabledExtensions.data();
 
     vkCheck(vkCreateDevice(physicalDevice_, &createInfo, nullptr, &device_), "vkCreateDevice");
+    const auto inspectionQuery = inspectionEnabled
+        ? reinterpret_cast<PFN_vkGetPipelineExecutablePropertiesKHR>(
+            vkGetDeviceProcAddr(device_, "vkGetPipelineExecutablePropertiesKHR")) : nullptr;
+    const auto statisticsQuery=inspectionEnabled&&runOptions_.pipelineStatistics
+        ?reinterpret_cast<PFN_vkGetPipelineExecutableStatisticsKHR>(vkGetDeviceProcAddr(device_,"vkGetPipelineExecutableStatisticsKHR")):nullptr;
+    pipelineInspection_ = std::make_unique<azurerender::rhi::PipelineInspection>(
+        device_, inspectionSupported, !runOptions_.pipelineInspectionDisabled, inspectionQuery,
+        azurerender::rhi::PipelineStatisticsOptions{runOptions_.pipelineStatistics,statisticsQuery});
     vkGetDeviceQueue(device_, *indices.graphics, 0, &graphicsQueue_);
     vkGetDeviceQueue(device_, *indices.present, 0, &presentQueue_);
+    const std::filesystem::path capabilityDirectory = runOptions_.captureDirectory.empty()
+        ? std::filesystem::path("captures") : std::filesystem::u8path(runOptions_.captureDirectory);
+    static_cast<void>(azurerender::writeGpuCapabilityReport(physicalDevice_,
+        capabilityDirectory / "gpu_capabilities.json",
+        {bindlessTexturesSupported_ && !runOptions_.bindlessDisabled, false, false, false}));
 }
 
 void AzureRenderApp::createSwapchain() {
     const SwapchainSupport support = querySwapchainSupport(physicalDevice_);
     const VkSurfaceFormatKHR surfaceFormat = chooseSurfaceFormat(support.formats);
-    const VkPresentModeKHR presentMode = choosePresentMode(support.presentModes);
+    const VkPresentModeKHR presentMode = choosePresentMode(support.presentModes,
+        engineSettings_->get("runtime.vsync").get<bool>());
+    selectedPresentMode_ = presentMode;
     const VkExtent2D extent = chooseExtent(support.capabilities);
 
     std::uint32_t imageCount = support.capabilities.minImageCount + 1;
@@ -1122,6 +1692,7 @@ void AzureRenderApp::createSwapchain() {
     } else {
         renderExtent_ = extent;
     }
+    updateSceneRenderExtent();
     if (editorUiEnabled_) {
         azurerender::RuntimeDiagnostics::instance().print(
             "editor",
@@ -1189,12 +1760,20 @@ void AzureRenderApp::createTimestampQueryPools() {
     VkQueryPoolCreateInfo createInfo{
         VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO};
     createInfo.queryType = VK_QUERY_TYPE_TIMESTAMP;
-    createInfo.queryCount = kTimestampQueryCount;
+    createInfo.queryCount = kTimestampQueryCount+(runOptions_.gpuPassTimingEnabled?2*kMaximumTimedPasses:0);
     for (VkQueryPool& pool : timestampQueryPools_) {
         vkCheck(
             vkCreateQueryPool(device_, &createInfo, nullptr, &pool),
             "vkCreateQueryPool(timestamp)");
     }
+}
+
+void AzureRenderApp::scrollCallback(GLFWwindow* window, double x, double y) {
+    (void)x;auto* app=static_cast<AzureRenderApp*>(glfwGetWindowUserPointer(window));
+#if AZURE_WITH_EDITOR
+    if(app && app->editorLayer_ && (!app->editorLayer_->acceptsGameInput() || !app->gameViewportFocus_))return;
+#endif
+    if(app)if(auto* game=app->activeGame())game->cameraInput(0,0,static_cast<float>(y));
 }
 
 void AzureRenderApp::keyCallback(
@@ -1210,25 +1789,79 @@ void AzureRenderApp::keyCallback(
     if (application == nullptr) {
         return;
     }
+    auto* game=application->activeGame();auto* runtime=application->activeRuntime();
+    const bool escape=key==GLFW_KEY_ESCAPE&&action==GLFW_PRESS;
+#if AZURE_WITH_EDITOR
     if (application->editorLayer_ != nullptr) {
-        if (!application->editorLayer_->acceptsViewportShortcuts()) {
+        const bool gameOwnsInput=game&&application->gameViewportFocus_;
+        if (!application->editorLayer_->acceptsViewportShortcuts() &&
+            !(gameOwnsInput&&(escape||application->editorLayer_->acceptsGameInput()))) {
             return;
         }
     }
+#endif
 
+    if(application->gameUi_){application->gameUi_->key(key,action!=GLFW_RELEASE);if(application->gameUi_->wantsKeyboard())return;}
+    if(game&&escape){application->gameViewportFocus_=false;application->gameCursorPrimed_=false;game->input().setFocused(false);glfwSetInputMode(window,GLFW_CURSOR,GLFW_CURSOR_NORMAL);return;}
+    if(game && game->input().bound(key)){
+#if AZURE_WITH_EDITOR
+        if(application->editorLayer_&&!application->gameViewportFocus_)return;
+#endif
+        game->input().key(key,action!=GLFW_RELEASE);return;
+    }
+    if(runtime && game){
+#if AZURE_WITH_EDITOR
+        if(auto session=application->runOptions_.editorSession;session&&session->playing()) {
+            if(action==GLFW_PRESS&&key==GLFW_KEY_P)
+                static_cast<void>(session->execute(runtime->state()==azurerender::RuntimeLifecycle::State::Running?azurerender::EditorCommand::Pause:azurerender::EditorCommand::Resume));
+            if(action==GLFW_PRESS&&key==GLFW_KEY_O&&runtime->state()==azurerender::RuntimeLifecycle::State::Paused)
+                static_cast<void>(session->execute(azurerender::EditorCommand::Step));
+            return;
+        }
+#endif
+        if(action==GLFW_PRESS&&key==GLFW_KEY_P){if(runtime->state()==azurerender::RuntimeLifecycle::State::Running)runtime->pause();else if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->resume();return;}
+        if(action==GLFW_PRESS&&key==GLFW_KEY_O){if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->step();return;}
+#if AZURE_WITH_EDITOR
+        if(application->runOptions_.editorSession && application->runOptions_.editorSession->playing())return;
+#endif
+    }
     constexpr float kPi = 3.14159265358979323846F;
     constexpr float kFineStep = kPi / 36.0F;
+#if AZURE_WITH_EDITOR
+    if(auto session=application->runOptions_.editorSession) {
+        const auto& settings=session->context().renderSettings();
+        if(action==GLFW_PRESS&&key==GLFW_KEY_F12) {
+            static_cast<void>(session->execute(azurerender::EditorCommand::Capture));return;
+        }
+        if(action==GLFW_PRESS&&key==GLFW_KEY_TAB&&session->context().selectedNode()) {
+            session->edit("node.select",{{"index",(session->context().selectedNodeIndex()+1)%session->context().scene().nodes.size()}});return;
+        }
+        if(action==GLFW_PRESS&&key>=GLFW_KEY_F1&&key<=GLFW_KEY_F3) {
+            session->edit("render.preset",{{"value",key-GLFW_KEY_F1}});return;
+        }
+        auto values=nlohmann::json::object();
+        if(action==GLFW_PRESS) {
+            if(key==GLFW_KEY_F9)values["stylized"]=!settings.stylizedLightingEnabled;
+            if(key==GLFW_KEY_F10)values["innerOutline"]=!settings.innerOutlineEnabled;
+        }
+        if(action==GLFW_PRESS||action==GLFW_REPEAT) {
+            if(key==GLFW_KEY_F7)values["styleMaskStrength"]=std::max(settings.styleMaskStrength-.1F,0.F);
+            if(key==GLFW_KEY_F8)values["styleMaskStrength"]=std::min(settings.styleMaskStrength+.1F,2.F);
+            if(key==GLFW_KEY_F5)values["diffuseBandThreshold"]=std::max(settings.diffuseBandThreshold-.05F,.05F);
+            if(key==GLFW_KEY_F6)values["diffuseBandThreshold"]=std::min(settings.diffuseBandThreshold+.05F,.95F);
+            if(key==GLFW_KEY_LEFT_BRACKET)values["outline"]=std::max(settings.outline.strength-.05F,0.F);
+            if(key==GLFW_KEY_RIGHT_BRACKET)values["outline"]=std::min(settings.outline.strength+.05F,2.F);
+            if(key==GLFW_KEY_MINUS)values["exposure"]=std::max(settings.grade.exposureEv-.25F,-8.F);
+            if(key==GLFW_KEY_EQUAL)values["exposure"]=std::min(settings.grade.exposureEv+.25F,8.F);
+        }
+        if(!values.empty()) { session->edit("render.settings",{{"values",values}});return; }
+    }
+#endif
+#if AZURE_WITH_EDITOR
+    if(application->editorLayer_ && (key==GLFW_KEY_W||key==GLFW_KEY_E||key==GLFW_KEY_R||key==GLFW_KEY_Q||key==GLFW_KEY_F||key==GLFW_KEY_0))return;
+#endif
     if (action == GLFW_PRESS) {
-        if (application->runOptions_.editorSession != nullptr
-            && key == GLFW_KEY_TAB
-            && application->runOptions_.editorSession->context().selectedNode() != nullptr) {
-            application->runOptions_.editorSession->context().selectNextNode();
-            azurerender::RuntimeDiagnostics::instance().print(
-                "input",
-                "Editor selected node: "
-                    + application->runOptions_.editorSession->context()
-                          .selectedNode()->name);
-        } else if (key == GLFW_KEY_SPACE) {
+        if (key == GLFW_KEY_SPACE) {
             application->autoRotate_ = !application->autoRotate_;
             azurerender::RuntimeDiagnostics::instance().print(
                 "input",
@@ -1371,50 +2004,54 @@ void AzureRenderApp::keyCallback(
                 "Diffuse band threshold: "
                     + std::to_string(
                         application->renderSettings_.diffuseBandThreshold));
-        } else if (application->runOptions_.editorMode
-                   && key == GLFW_KEY_LEFT_BRACKET) {
-            application->runOptions_.editorSession->context().beginEdit();
-            application->renderSettings_.outline.strength = std::max(
-                application->renderSettings_.outline.strength - 0.05F,
-                0.0F);
-            azurerender::RuntimeDiagnostics::instance().print(
-                "input",
-                "Editor outline strength: "
-                    + std::to_string(
-                        application->renderSettings_.outline.strength));
-        } else if (application->runOptions_.editorMode
-                   && key == GLFW_KEY_RIGHT_BRACKET) {
-            application->runOptions_.editorSession->context().beginEdit();
-            application->renderSettings_.outline.strength = std::min(
-                application->renderSettings_.outline.strength + 0.05F,
-                2.0F);
-            azurerender::RuntimeDiagnostics::instance().print(
-                "input",
-                "Editor outline strength: "
-                    + std::to_string(
-                        application->renderSettings_.outline.strength));
-        } else if (application->runOptions_.editorMode
-                   && key == GLFW_KEY_MINUS) {
-            application->runOptions_.editorSession->context().beginEdit();
-            application->renderSettings_.grade.exposureEv = std::max(
-                application->renderSettings_.grade.exposureEv - 0.25F,
-                -8.0F);
-            azurerender::RuntimeDiagnostics::instance().print(
-                "input",
-                "Editor exposure EV: "
-                    + std::to_string(
-                        application->renderSettings_.grade.exposureEv));
-        } else if (application->runOptions_.editorMode
-                   && key == GLFW_KEY_EQUAL) {
-            application->runOptions_.editorSession->context().beginEdit();
-            application->renderSettings_.grade.exposureEv = std::min(
-                application->renderSettings_.grade.exposureEv + 0.25F,
-                8.0F);
-            azurerender::RuntimeDiagnostics::instance().print(
-                "input",
-                "Editor exposure EV: "
-                    + std::to_string(
-                        application->renderSettings_.grade.exposureEv));
         }
+
     }
+}
+
+nlohmann::json AzureRenderApp::observeGameState() {
+    auto* game=activeGame();
+    if(!game)throw std::logic_error("Game observation requires an active project");
+    nlohmann::json state;
+    state["frame"]=gameplayFrame_;state["camera"]=cameraPosition_;state["target"]=cameraTarget_;state["focused"]=game->input().focused();
+    state["animations"]=nlohmann::json::array();
+    if(auto* presentation=activePresentation())for(const auto& animation:presentation->animations())
+        state["animations"].push_back(animationObservation(animation));
+    state["characters"]=nlohmann::json::array();
+    activeRuntime()->world().each<azurerender::game::Character>([&](auto entity,const auto&){
+        const auto* transform=activeRuntime()->world().tryGet<azurerender::ecs::TransformComponent>(entity);
+        const auto* animator=activeRuntime()->world().tryGet<azurerender::game::Animator>(entity);
+        if(transform)state["characters"].push_back({{"node",activeRuntime()->nodeId(entity)},{"position",transform->translation},
+            {"rotation",transform->rotation},{"grounded",game->physics().grounded(entity)},
+            {"velocity",game->physics().velocity(entity)},
+            {"state",animator?animator->state:""},{"playbackRate",animator?animator->playbackRate:0}});
+    });
+    auto* runtime=activeRuntime();state["tasks"]=nlohmann::json::array();
+    runtime->world().each<azurerender::game::TaskState>([&](auto entity,const auto& task){
+        state["tasks"].push_back({{"node",runtime->nodeId(entity)},{"started",task.started},{"collected",task.collected},
+            {"doorOpened",task.doorOpened},{"completed",task.completed}});});
+    unsigned collectibles=0;bool doorOpen=false,checkpointActivated=false;
+    runtime->world().each<azurerender::game::Collectible>([&](auto,const auto& value){if(!value.collected)++collectibles;});
+    runtime->world().each<azurerender::game::Door>([&](auto,const auto& value){doorOpen|=value.open;});
+    runtime->world().each<azurerender::game::Checkpoint>([&](auto,const auto& value){checkpointActivated|=value.activated;});
+    state["collectibles"]=collectibles;state["doorOpen"]=doorOpen;state["checkpointActivated"]=checkpointActivated;
+    state["levelRevision"]=runtime->sceneRevision();
+    state["rigidBodies"]=nlohmann::json::array();
+    runtime->world().each<azurerender::ecs::TransformComponent,azurerender::game::RigidBody>([&](auto entity,const auto& transform,const auto& body){
+        if(body.kinematic)state["rigidBodies"].push_back({{"node",runtime->nodeId(entity)},{"position",transform.translation}});
+    });
+    state["audioStarts"]=activePresentation()?activePresentation()->audioStarts():0;
+    state["interactionTarget"]=game->interactionTarget()?game->interactionTarget()->node:std::string();
+    state["cameraObstructed"]=game->hasCamera()&&game->camera().actualDistance()<game->camera().distance()-.1F;
+
+    auto* levels=levelSession_.get();
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession)levels=runOptions_.editorSession->levels();
+#endif
+    state["levelReference"]=levels?levels->currentReference():std::string();
+    state["loading"]=levels&&levels->loading();
+    state["loadError"]=levels?levels->lastError():std::string();
+    state["scriptErrors"]=activeScripts()?activeScripts()->errors():std::vector<std::string>{};
+    state["presentationErrors"]=activePresentation()?activePresentation()->errors():std::vector<std::string>{};
+    return state;
 }

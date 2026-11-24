@@ -1,0 +1,111 @@
+{
+  "phase": "NR5-R8-F",
+  "status": "snapshot-component-verified",
+  "dynamicReflectionProducerIntegrated": false,
+  "main": {
+    "metadataActive": true,
+    "resourceCount": 364,
+    "changedPixels": 0,
+    "maximumByteChange": 0,
+    "meanByteChange": 0.0,
+    "officialMeanByteError": 13.058427915219907,
+    "resourcesReleased": true,
+    "imageSha256": "415964de2f051e2e8041c3e4a44395f1c676e83d1ad87b170c9dca94f470d728"
+  },
+  "gpuNormalDirections": 26,
+  "debugScene": {
+    "schemaVersion": 1,
+    "cases": [
+      {
+        "antiAliasing": 0,
+        "requested": false,
+        "surfaceMetadata": false,
+        "validationErrors": 0,
+        "resourcesReleased": true
+      },
+      {
+        "antiAliasing": 0,
+        "requested": true,
+        "surfaceMetadata": true,
+        "validationErrors": 0,
+        "resourcesReleased": true
+      },
+      {
+        "antiAliasing": 4,
+        "requested": false,
+        "surfaceMetadata": false,
+        "validationErrors": 0,
+        "resourcesReleased": true
+      },
+      {
+        "antiAliasing": 4,
+        "requested": true,
+        "surfaceMetadata": true,
+        "validationErrors": 0,
+        "resourcesReleased": true
+      }
+    ],
+    "status": "passed"
+  },
+  "releaseScene": {
+    "schemaVersion": 1,
+    "cases": [
+      {
+        "antiAliasing": 0,
+        "requested": false,
+        "surfaceMetadata": false,
+        "validationErrors": 0,
+        "resourcesReleased": true
+      },
+      {
+        "antiAliasing": 0,
+        "requested": true,
+        "surfaceMetadata": true,
+        "validationErrors": 0,
+        "resourcesReleased": true
+      },
+      {
+        "antiAliasing": 4,
+        "requested": false,
+        "surfaceMetadata": false,
+        "validationErrors": 0,
+        "resourcesReleased": true
+      },
+      {
+        "antiAliasing": 4,
+        "requested": true,
+        "surfaceMetadata": true,
+        "validationErrors": 0,
+        "resourcesReleased": true
+      }
+    ],
+    "status": "passed"
+  },
+  "fullSceneValidationLayer": false,
+  "sources": {
+    "src/scenes/CharacterSceneRenderer.cpp": "6a5345a38093060b408f1bf2e04cd4736bb7f569b9cf402e4543d311a8a06cdb",
+    "src/scenes/CharacterSceneRenderer.hpp": "75ea8c64fb047a9aab958a06e2326afa4d724d4cdd9b7d5ad791815fac5ea3fe",
+    "shaders/mesh.frag": "f052c82a51a8169a3921ccdf010526c961d2f287dd159d86ad062de443eac676",
+    "shaders/reflection_surface.glsl": "9ed1baeb924c8e775a090ea251ef0d89d050d15da0c54b906ef40c89b29a9086",
+    "tests/ReflectionSurfaceGpuTests.cpp": "471b9fa0b48aef21691d3d71be1c1817aa0be9239ade1932ba734505db9a8d99",
+    "tools/test_reflection_surface_snapshot_gpu.py": "445391b7cb2b67bfcafca91f0408a71e74aaeb2e8a0df9e641b878d5cede7cdb"
+  },
+  "runtime": {
+    "debug": {
+      "playerSha256": "90dd39f3056b5751397ae88920f4c86d555e9281c3b3018fd9c3cec1c626f68a",
+      "editorSha256": "c8df14370eb1935e2a5d90998e33e522ff6cfcaf020ef1a389b2b70d6ce60581"
+    },
+    "release": {
+      "playerSha256": "859e4b2f1cf7956ca8b7178c01d8387eb706821e804c819b3333c7f1e054a287",
+      "editorSha256": "e2c047863bbc92d34770c8a1e887a078b45b2353d304acfce8662fccee7bdbcd"
+    }
+  },
+  "cacheCleanup": {
+    "path": "build\\runs\\20261028-194826-reflection-surface-snapshot-173af6\\full-candidate\\.azure\\cache",
+    "bytes": 3814878264,
+    "purpose": "generated-candidate-asset-cache",
+    "originalInputsPreserved": true,
+    "apply": true
+  },
+  "cacheLocation": "D"
+}

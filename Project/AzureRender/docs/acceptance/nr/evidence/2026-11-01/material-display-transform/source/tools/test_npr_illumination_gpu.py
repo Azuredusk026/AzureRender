@@ -1,0 +1,243 @@
+"""Measure scene-owned NPR illumination independently of material color."""
+import argparse
+import base64
+import copy
+import hashlib
+import json
+from pathlib import Path
+import re
+import struct
+import subprocess
+import tempfile
+import uuid
+import numpy as np
+from PIL import Image
+from native_render.light_lab import generate
+from create_visibility_fixture import surface,component,pad_material_profile_index
+from test_npr_diffuse_gpu import reference,linear
+from convert_material_semantics import complete_material_document
+
+
+def illumination(settings,normal,indirect,main_color,intensity,ao,lit_mask,visibility):
+    ao*=settings.get('ambientWeight',1)
+    direction=settings['ambientDirection']
+    factor=np.clip(np.dot(normal,direction)+settings['directionBias'],0,1)*settings['directionGain']+settings['directionFloor']
+    mixed=factor*(np.asarray(indirect)*(1-lit_mask*settings['litAmbientMix'])+lit_mask*settings['litAmbientMix'])
+    shadow=mixed*((1-settings['indoorMix'])*min(.65+.35*ao,1.5)+settings['indoorMix']*np.clip(ao,1.25,1.75))*settings['shadowAmbientGain']
+    ambient=mixed*np.clip(ao,0,1.5)*(1-settings['mainColorMix']+np.asarray(main_color)*settings['mainColorMix'])*settings['outdoorGain']
+    direct=np.asarray(main_color)*intensity
+    direct=(np.dot(direct,[.21267290413379669,.7151522040367126,.07217500358819962])*(1-lit_mask)+direct*lit_mask)*settings['outdoorGain']
+    return shadow*(1-visibility)+ambient*visibility,direct*visibility
+
+
+def run(player,output,require_validation=False,selected=None,expected_validation=None):
+    output.mkdir(parents=True,exist_ok=False)
+    default=dict(schemaVersion=1,enabled=True,ambientColor=[.3,.2,.1],ambientDirection=[0,1,0],
+        directionBias=.15,directionGain=1.5,directionFloor=.5,outdoorGain=1.05,shadowAmbientGain=.8,
+        indoorMix=0,litAmbientMix=1,mainColorMix=1,shadowOverride=0,useSceneIrradiance=False)
+    names=('composed','fixed','direct','ambient','disabled','direction-positive','direction-negative','scene-volume','zero-radiance','point-only','surface-only','additional-directional','main-shadow','main-shadow-floor','indoor-shadow','ambient-weight-quarter','ambient-weight-zero','ambient-weight-direct','ambient-weight-shadow','offset-main-shadow','offset-main-lit')
+    names+=tuple('material-colors'+suffix for suffix in ('','-fixed','-no-main','-volume','-disabled','-direct','-ambient','-zero','-fabric','-document'))
+    names+=('material-colors-view-tint','material-colors-view-tint-document')
+    names+=tuple('material-colors-main-ramp-'+suffix for suffix in ('front','side','back','biased','low','high','document','fixed'))
+    names+=tuple('material-colors-character-'+suffix for suffix in ('main-shadow','scene-shadow','main-shadow-document','main-shadow-fixed','main-lit','mask-none'))
+    names+=('receiver-main','receiver-main-fixed','receiver-main-ramp-side','receiver-main-shadow','receiver-main-strong-shadow','receiver-main-strong-shadow-fixed','receiver-main-ramp-disabled')
+    if selected:
+        assert set(selected)<=set(names);names=tuple(name for name in names if name in selected)
+    summary={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),
+        'linearErrorBudget':.008,'captures':[]};frames={};state_hashes={}
+    try:
+        for name in names:
+            print(name,flush=True);folder=output/name;generate(folder,'point' if name=='point-only' else 'directional-near')
+            settings=copy.deepcopy(default)
+            material_colors=name.startswith('material-colors')
+            view_tint='view-tint' in name
+            main_ramp='main-ramp-' in name
+            independent_character='character-' in name
+            receiver_main=name.startswith('receiver-main')
+            receiver_guard=name.startswith('receiver-main-strong-shadow')
+            if receiver_main and name.endswith('-disabled'):settings['enabled']=False
+            character_shadow=independent_character and not name.endswith('main-lit')
+            normal=np.array([0,0,-1] if name.endswith('ramp-back') else [1,0,0] if main_ramp and not name.endswith('ramp-front') else [0,0,1])
+            ramp_bias=.25 if name.endswith('ramp-biased') else -1 if name.endswith('ramp-low') else 1 if name.endswith('ramp-high') else 0
+            if name in ('disabled','material-colors-disabled'):settings['enabled']=False
+            if name.startswith('ambient-weight-'):settings['ambientWeight']=0 if name.endswith('zero') else .25
+            if name in ('direct','zero-radiance','ambient-weight-direct'):settings.update(ambientColor=[0,0,0],litAmbientMix=0)
+            if name in ('direction-positive','direction-negative'):settings['ambientDirection']=[0,0,1 if name.endswith('positive') else -1]
+            if name in ('scene-volume','material-colors-volume'):settings.update(useSceneIrradiance=True,litAmbientMix=0)
+            model_path=folder/'plane.gltf';model=json.loads(model_path.read_text())
+            Image.new('RGBA',(1,1),(90,80,70,204)).save(folder/'base.png')
+            Image.new('RGBA',(4,2),(60,50,40,255)).save(folder/'lut.png')
+            Image.new('RGBA',(2,1),(180,150,170,153)).save(folder/'ramp.png')
+            ramp_texels=np.array([[40,80,120,51],[100,120,140,102],[180,160,140,204],[240,200,170,255]],dtype=np.uint8)
+            if main_ramp:Image.fromarray(ramp_texels[None,:,:],'RGBA').save(folder/'ramp.png')
+            model.update(images=[{'uri':p+'.png'} for p in ('base','lut','ramp')],textures=[{'source':i} for i in range(3)])
+            material=model['materials'][0];material['pbrMetallicRoughness'].update(baseColorTexture={'index':0},baseColorFactor=[1,1,1,1])
+            material.setdefault('extras',{})['azureRenderMaterial']={'schemaVersion':2,'class':'skin','features':['diffuse-ramp'],
+                'shadowColorLut':{'schemaVersion':1,'texture':1,'flipV':False},'diffuseRamp':{'schemaVersion':1,'texture':2},
+                'styleParameters':[1,1,0,0],'nprDiffuse':{'schemaVersion':1,'shadowScale':.55,'lightingInputs':'host-scene-radiance','shadowMask':'none','baseAo':'albedo-alpha'}}
+            colors={'schemaVersion':1,'ambientColor':[1.2,.8,.6],'mainColor':[.7,.9,1.1]}
+            if material_colors:
+                if name=='material-colors-zero':colors.update(ambientColor=[0,0,0],mainColor=[0,0,0])
+                material['extras']['azureRenderMaterial']['nprDiffuse']['lighting']=colors
+                if name=='material-colors-fabric':material['extras']['azureRenderMaterial']['class']='fabric'
+                if name.endswith('-document'):material['extras']['azureSlotId']='surface'
+            if main_ramp:material['extras']['azureRenderMaterial']['nprDiffuse']['mainRamp']={'schemaVersion':1,'bias':ramp_bias}
+            if independent_character:
+                profile=material['extras']['azureRenderMaterial']['nprDiffuse']
+                profile['shadowMask']='none' if name.endswith('mask-none') else 'one'
+                profile['characterVisibility']='scene-visibility' if name.endswith('scene-shadow') else 'main-light-shadow'
+                settings['shadowOverride']=1
+            if view_tint or main_ramp:
+                if view_tint:material['extras']['azureRenderMaterial']['nprDiffuse']['viewTint']={'schemaVersion':1,'scale':.595,'color':[.38,.12,.14]}
+                accessor=model['accessors'][model['meshes'][0]['primitives'][0]['attributes']['NORMAL']]
+                buffer_view=model['bufferViews'][accessor['bufferView']];buffer=model['buffers'][buffer_view['buffer']]
+                prefix,encoded=buffer['uri'].split(',',1);data=bytearray(base64.b64decode(encoded))
+                for vertex in range(accessor['count']):struct.pack_into('<3f',data,buffer_view.get('byteOffset',0)+accessor.get('byteOffset',0)+vertex*buffer_view.get('byteStride',12),*(np.array([1,0,0]) if view_tint else normal))
+                buffer['uri']=prefix+','+base64.b64encode(data).decode('ascii')
+            model_path.write_text(json.dumps(model))
+            level_path=folder/'level.azurelevel';level=json.loads(level_path.read_text());level['renderSettings'].update(sceneLighting=True,skyIntensity=0,nprLighting=settings)
+            if name.startswith('offset-'):
+                camera=level['nodes'][1]['components']['azure.camera'];camera['version']=2
+                camera['data'].update(projectionOffsetX=.5,projectionOffsetY=.5)
+            level['lights'][0].update(color=[.8,.6,.4],intensity=.7)
+            if name=='surface-only':level['lights'][0]['shape']['receivers']={'schemaVersion':1,'surfaces':True,'characters':False}
+            if name in ('ambient','zero-radiance','material-colors-no-main'):level['lights'][0]['enabled']=False
+            if name=='additional-directional':
+                extra=copy.deepcopy(level['lights'][0]);extra.update(id='additional',nodeId='additional',color=[1,1,1],intensity=.1)
+                level['lights'].append(extra);level['nodes'].append({'id':'additional','components':{'azure.transform':component('azure.transform',{'translation':[0,0,2]})}})
+            if receiver_main:
+                level['lights'][0]['shape']['receivers']={'schemaVersion':1,'surfaces':True,'characters':False}
+                extra=copy.deepcopy(level['lights'][0]);extra.update(id='character-key',nodeId='character-key',color=[1,.1,.05],intensity=3 if receiver_guard else .1)
+                extra['shape'].update(direction=[-1,0,0],receivers={'schemaVersion':1,'surfaces':False,'characters':True})
+                level['lights'].append(extra);level['nodes'].append({'id':'character-key','components':{'azure.transform':component('azure.transform',{'translation':[0,0,2]})}})
+            if character_shadow or name.startswith('main-shadow') or name in ('indoor-shadow','ambient-weight-shadow','offset-main-shadow','receiver-main-shadow') or receiver_guard:
+                surface(folder/'blocker.gltf');level['resources'].append({'id':'blocker','asset':'assets:/blocker.gltf'})
+                level['nodes'].append({'id':'blocker','resourceId':'blocker','components':{'azure.transform':component('azure.transform',{'translation':[1,0,1],'scale':[.6,.6,.6]})}})
+                level['lights'][0]['shape']['direction']=[-2**-.5,0,-2**-.5]
+                if name=='main-shadow-floor':settings['shadowOverride']=1
+                if name=='indoor-shadow':settings['indoorMix']=1
+                level['renderSettings']['nprLighting']=settings
+            if receiver_guard:
+                surface(folder/'surface-guard.gltf');surface(folder/'surface-blocker.gltf')
+                for resource in ['surface-guard','surface-blocker']:
+                    level['resources'].append({'id':resource,'asset':'assets:/'+resource+'.gltf'})
+                level['nodes'].append({'id':'surface-guard','resourceId':'surface-guard','components':{'azure.transform':component('azure.transform',{'translation':[0,-2,.1],'scale':[1.2,1.2,1.2]})}})
+                level['nodes'].append({'id':'surface-blocker','resourceId':'surface-blocker','components':{'azure.transform':component('azure.transform',{'translation':[1,-2,1.1],'scale':[.6,.6,.6]})}})
+            if name in ('scene-volume','material-colors-volume'):
+                cell=[0,0,0,.4,0,0,0,.3,0,0,0,.2,1,0,0,0]
+                (folder/'field.aziv').write_bytes(struct.pack('<8s4f3I',b'AZIV0001',-4,-4,-4,8,2,2,2)+struct.pack('<128f',*(cell*8)))
+                level['irradianceVolume']={'version':1,'asset':'assets:/field.aziv','enabled':True,'intensity':1}
+            if material_colors and name.endswith('-document'):
+                identities={str(i):str(uuid.uuid4()) for i in range(3)}
+                for i,p in enumerate(('base','lut','ramp')):
+                    (folder/(p+'.png.azmeta')).write_text(json.dumps({'schemaVersion':1,'id':identities[str(i)],'settings':{},'dependencies':[]}))
+                identity=str(uuid.uuid4());document=complete_material_document(material,model,identities)
+                (folder/'surface.azurematerial').write_text(json.dumps(document))
+                (folder/'surface.azurematerial.azmeta').write_text(json.dumps({'schemaVersion':1,'id':identity,'settings':{},'dependencies':list(identities.values())}))
+                next(node for node in level['nodes'] if node.get('resourceId'))['materialSlots']={'surface':identity}
+            level_path.write_text(json.dumps(level))
+            pad_material_profile_index(model);model_path.write_text(json.dumps(model))
+            command=[str(player.resolve()),'--project',str(folder/'lab.azureproject'),'--width','128','--height','128',
+                '--capture-dir',str(folder/'frames'),'--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene',
+                '--qa-effect','specular','--qa-effect-state','disabled','--runtime-report',str(folder/'runtime.json')]
+            if name in ('fixed','material-colors-fixed','material-colors-main-ramp-fixed','material-colors-character-main-shadow-fixed','receiver-main-fixed','receiver-main-strong-shadow-fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
+            if name in ('material-colors-direct','material-colors-ambient'):command+=['--qa-isolation','direct-diffuse' if name.endswith('direct') else 'ambient']
+            (folder/'command.json').write_text(json.dumps(command,indent=2))
+            with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120,cwd=folder)
+            log=(folder/'player.log').read_text(encoding='utf-8',errors='replace');assert not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
+            diagnostics=[json.loads(line) for line in (folder/'captures/azureplayer.log.jsonl').read_text(encoding='utf-8').splitlines()]
+            assert not any(item['level']=='error' for item in diagnostics),name
+            assert any(item['message']=='Allocator after unload: buffers=0 images=0' for item in diagnostics),name
+            validation='Validation layer: enabled' in log;assert validation or not require_validation
+            if expected_validation is not None:assert validation==(expected_validation=='enabled')
+            manifest=json.loads((folder/'frames/capture_manifest.json').read_text(encoding='utf-8'))
+            assert manifest['nprLighting']['enabled']==settings['enabled']
+            assert manifest['nprLighting']['schemaVersion']==1
+            assert manifest['nprLighting']['ambientWeight']==settings.get('ambientWeight',1)
+            if material_colors:assert manifest['materialSurfaceProfileLayoutVersion']==19
+            state_hashes[name]=manifest['qaStateHash']
+            frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
+            measured=linear(pixels[96 if name.startswith('offset-') else 64,96 if name.startswith('offset-') else 64]);color=reference(linear([90,80,70]),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)
+            if view_tint:color=reference(linear([90,80,70])*(1-.595+.595*np.array([.38,.12,.14])),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)
+            main=np.array([.8,.6,.4]);intensity=.7
+            if receiver_main:main=np.array([1,.1,.05]);intensity=3 if receiver_guard else .1
+            if name in ('ambient','zero-radiance','point-only','surface-only'):main=np.ones(3);intensity=0
+            if name=='material-colors-no-main':intensity=0
+            visibility=0 if name in ('main-shadow','indoor-shadow','ambient-weight-shadow','offset-main-shadow') else 1
+            # No character shadow mask: scene visibility selects indoor color
+            # independently of the base-AO/ramp lit mask.
+            lit_mask=min(204/255,153/255)
+            if independent_character:
+                actor_visibility=1 if name.endswith(('scene-shadow','main-lit','mask-none')) else 0
+                mask=0 if name.endswith('mask-none') else 1
+                color=reference(linear([90,80,70]),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55,actor_visibility,mask)
+                lit_mask=min(204/255,actor_visibility if mask else 1,153/255)
+            if main_ramp:
+                coordinate=np.clip(np.dot(normal,[1,0,0] if receiver_main else [0,0,1])+ramp_bias,-1,1)*.5+.5
+                texel=np.clip(coordinate*len(ramp_texels)-.5,0,len(ramp_texels)-1);left=int(np.floor(texel));right=min(left+1,len(ramp_texels)-1)
+                ramp=(ramp_texels[left]*(1-(texel-left))+ramp_texels[right]*(texel-left))/255
+                color=reference(linear([90,80,70]),linear([60,50,40]),ramp,204/255,.55);lit_mask=min(204/255,ramp[3])
+            if not visibility:
+                lit=linear([90,80,70])*.96;shadow=linear([60,50,40])*.96*.55
+                luminance=np.dot(lit,[.21267290413379669,.7151522040367126,.07217500358819962])
+                saturated=luminance+(lit-luminance)*1.2
+                color=shadow+(saturated-shadow)*(204/255)
+            incident=[.4,.3,.2] if name in ('scene-volume','material-colors-volume') else settings['ambientColor']
+            if material_colors and settings['enabled']:
+                main=np.array(colors['mainColor'])
+                if name!='material-colors-volume':incident=colors['ambientColor']
+            ambient,direct=illumination(settings,normal if main_ramp else [0,0,1],incident,main,intensity,1,lit_mask,visibility)
+            expected=color*(ambient+direct)
+            if name=='material-colors-direct':expected=color*direct
+            if name=='material-colors-ambient':expected=color*ambient
+            if name=='point-only':
+                position=np.array([.03125,-.03125,0]);delta=np.array([0,0,2])-position;distance=np.linalg.norm(delta)
+                attenuation=(1-distance/10)**2/(1+.12*distance*distance)
+                expected+=color*np.array([.8,.6,.4])*.7*attenuation*delta[2]/distance
+            if name=='additional-directional':expected+=color*.1
+            if name in ('disabled','material-colors-disabled') or (receiver_main and not settings['enabled']):expected=color*main*intensity
+            error=float(np.abs(measured-expected).max())
+            guard=None
+            if receiver_guard:
+                guard=linear(pixels[96,64]).tolist()
+                assert max(guard)<=.008,(name,'surface key shadow guard',guard)
+            summary['captures'].append({'name':name,'maximumLinearError':error,'validationEnabled':validation,
+                'surfaceShadowGuard':guard,
+                'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),'measured':measured.tolist(),'expected':expected.tolist(),
+                'allocatorAfterUnload':{'buffers':0,'images':0}})
+            if error is not None:assert error<=.008,(name,error,measured,expected)
+        if 'composed' in frames and 'fixed' in frames:assert np.array_equal(frames['composed'],frames['fixed'])
+        if 'receiver-main' in frames and 'receiver-main-fixed' in frames:assert np.array_equal(frames['receiver-main'],frames['receiver-main-fixed'])
+        if 'receiver-main-strong-shadow' in frames and 'receiver-main-strong-shadow-fixed' in frames:assert np.array_equal(frames['receiver-main-strong-shadow'],frames['receiver-main-strong-shadow-fixed'])
+        if 'material-colors' in frames:
+            for equivalent in ('material-colors-fixed','material-colors-fabric','material-colors-document'):
+                if equivalent in frames:assert np.array_equal(frames['material-colors'],frames[equivalent])
+        if 'material-colors-view-tint' in frames and 'material-colors-view-tint-document' in frames:
+            assert np.array_equal(frames['material-colors-view-tint'],frames['material-colors-view-tint-document'])
+        if 'material-colors-main-ramp-side' in frames:
+            for equivalent in ('material-colors-main-ramp-document','material-colors-main-ramp-fixed'):
+                if equivalent in frames:assert np.array_equal(frames['material-colors-main-ramp-side'],frames[equivalent])
+        if 'material-colors-character-main-shadow' in frames:
+            for equivalent in ('material-colors-character-main-shadow-document','material-colors-character-main-shadow-fixed'):
+                if equivalent in frames:assert np.array_equal(frames['material-colors-character-main-shadow'],frames[equivalent])
+            if 'material-colors-character-scene-shadow' in frames:assert np.max(np.abs(frames['material-colors-character-main-shadow'].astype(int)-frames['material-colors-character-scene-shadow'].astype(int)))>0
+        if 'composed' in frames and 'disabled' in frames:assert np.max(np.abs(linear(frames['composed'][64,64])-linear(frames['disabled'][64,64])))>.01
+        if 'direct' in frames and 'ambient-weight-direct' in frames:assert np.array_equal(frames['direct'],frames['ambient-weight-direct'])
+        if 'zero-radiance' in frames:assert np.max(linear(frames['zero-radiance'][64,64]))==0
+        if 'composed' in state_hashes and 'disabled' in state_hashes:assert state_hashes['composed']!=state_hashes['disabled']
+        if 'main-shadow' in frames and 'main-shadow-floor' in frames:assert np.max(np.abs(linear(frames['main-shadow'][64,64])-linear(frames['main-shadow-floor'][64,64])))>.01
+        summary['status']='passed'
+    except Exception as error:summary.update(status='failed',error=str(error));raise
+    finally:(output/'summary.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
+
+
+if __name__=='__main__':
+    parser=argparse.ArgumentParser(__doc__);parser.add_argument('--executable',type=Path,required=True);parser.add_argument('--output',type=Path);parser.add_argument('--require-validation',action='store_true')
+    parser.add_argument('--case',action='append')
+    parser.add_argument('--expected-validation',choices=('enabled','disabled'))
+    args=parser.parse_args()
+    if args.output:run(args.executable,args.output.resolve(),args.require_validation,args.case,args.expected_validation)
+    else:
+        runs=Path(__file__).resolve().parents[1]/'build/runs';runs.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='npr-illumination-',dir=runs) as temporary:
+            run(args.executable,Path(temporary)/'capture',args.require_validation,args.case,args.expected_validation)

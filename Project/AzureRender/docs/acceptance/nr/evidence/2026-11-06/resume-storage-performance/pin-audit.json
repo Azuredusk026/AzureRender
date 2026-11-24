@@ -1,0 +1,20 @@
+{
+  "pins": 118,
+  "registered": 105,
+  "unregistered": [
+    "runs/20261016-140642-ev0-baseline-891c98",
+    "runs/20261016-142829-ev6-scene-exchange-41ac3c",
+    "runs/20261017-000956-endfield-native-3caf73",
+    "runs/20261017-141949-dijiang-lighting-video-7d7da0",
+    "runs/20261022-051129-character-logistics-restoration-0f2e71",
+    "runs/20261022-201845-endfield-capture-954719",
+    "runs/20261022-210028-capture-plan-handoff-2e194d",
+    "runs/20261025-160544-main-material-frame-integration-1ad7a0",
+    "runs/20261029-005117-shared-motion-history-a9430e",
+    "runs/20261029-015351-reflection-motion-depth-30af9d",
+    "runs/20261029-021125-reflection-temporal-composition-f11a86",
+    "runs/20261029-023153-reflection-reprojection-32dd36",
+    "runs/20261029-071130-main-character-joint-budget-2cddc4"
+  ],
+  "missingMarkers": []
+}

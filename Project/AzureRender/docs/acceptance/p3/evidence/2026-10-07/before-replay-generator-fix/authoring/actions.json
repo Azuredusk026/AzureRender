@@ -1,0 +1,1480 @@
+[
+  {
+    "frame": 1,
+    "command": "import",
+    "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\exploration\\assets\\cube.gltf",
+    "key": "assets:/cube.gltf"
+  },
+  {
+    "frame": 2,
+    "command": "import",
+    "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\exploration\\assets\\guide.gltf",
+    "key": "assets:/guide.gltf"
+  },
+  {
+    "frame": 3,
+    "command": "import",
+    "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\exploration\\assets\\hero.gltf",
+    "key": "assets:/hero.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "ground",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "passage-left",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "passage-right",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "ramp",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "interior-left",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "interior-right",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "interior-roof",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "gate-left",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "gate-right",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "node",
+    "id": "camera"
+  },
+  {
+    "frame": 4,
+    "command": "node",
+    "id": "hud"
+  },
+  {
+    "frame": 4,
+    "command": "node",
+    "id": "goal"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "companion-0",
+    "resource": "assets:/guide.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "companion-1",
+    "resource": "assets:/guide.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "hero:body",
+    "resource": "assets:/hero.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "guide:body",
+    "resource": "assets:/guide.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "door:body",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "checkpoint:body",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "artifact-0:body",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "artifact-1:body",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 4,
+    "command": "place",
+    "id": "artifact-2:body",
+    "resource": "assets:/cube.gltf"
+  },
+  {
+    "frame": 5,
+    "command": "select",
+    "id": "ground"
+  },
+  {
+    "frame": 5,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      0,
+      -0.25,
+      -170
+    ]
+  },
+  {
+    "frame": 5,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      23,
+      0.25,
+      180
+    ]
+  },
+  {
+    "frame": 5,
+    "command": "component-add",
+    "type": "azure.rigid-body"
+  },
+  {
+    "frame": 5,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "halfExtent",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 6,
+    "command": "select",
+    "id": "passage-left"
+  },
+  {
+    "frame": 6,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      -3.2,
+      1.5,
+      -96
+    ]
+  },
+  {
+    "frame": 6,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      0.2,
+      1.5,
+      12
+    ]
+  },
+  {
+    "frame": 6,
+    "command": "component-add",
+    "type": "azure.rigid-body"
+  },
+  {
+    "frame": 6,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "halfExtent",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 7,
+    "command": "select",
+    "id": "passage-right"
+  },
+  {
+    "frame": 7,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      3.2,
+      1.5,
+      -96
+    ]
+  },
+  {
+    "frame": 7,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      0.2,
+      1.5,
+      12
+    ]
+  },
+  {
+    "frame": 7,
+    "command": "component-add",
+    "type": "azure.rigid-body"
+  },
+  {
+    "frame": 7,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "halfExtent",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 8,
+    "command": "select",
+    "id": "ramp"
+  },
+  {
+    "frame": 8,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      0,
+      0.17,
+      -170
+    ]
+  },
+  {
+    "frame": 8,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      2,
+      0.15,
+      2
+    ]
+  },
+  {
+    "frame": 8,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "rotation",
+    "value": [
+      6,
+      0,
+      0
+    ]
+  },
+  {
+    "frame": 8,
+    "command": "component-add",
+    "type": "azure.rigid-body"
+  },
+  {
+    "frame": 8,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "halfExtent",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 9,
+    "command": "select",
+    "id": "interior-left"
+  },
+  {
+    "frame": 9,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      -3.2,
+      2,
+      -305
+    ]
+  },
+  {
+    "frame": 9,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      0.2,
+      2,
+      18
+    ]
+  },
+  {
+    "frame": 9,
+    "command": "component-add",
+    "type": "azure.rigid-body"
+  },
+  {
+    "frame": 9,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "halfExtent",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 10,
+    "command": "select",
+    "id": "interior-right"
+  },
+  {
+    "frame": 10,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      3.2,
+      2,
+      -305
+    ]
+  },
+  {
+    "frame": 10,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      0.2,
+      2,
+      18
+    ]
+  },
+  {
+    "frame": 10,
+    "command": "component-add",
+    "type": "azure.rigid-body"
+  },
+  {
+    "frame": 10,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "halfExtent",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 11,
+    "command": "select",
+    "id": "interior-roof"
+  },
+  {
+    "frame": 11,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      0,
+      2.35,
+      -305
+    ]
+  },
+  {
+    "frame": 11,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      3.4,
+      0.15,
+      18
+    ]
+  },
+  {
+    "frame": 11,
+    "command": "component-add",
+    "type": "azure.rigid-body"
+  },
+  {
+    "frame": 11,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "halfExtent",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 12,
+    "command": "select",
+    "id": "gate-left"
+  },
+  {
+    "frame": 12,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      -13,
+      1.5,
+      -290
+    ]
+  },
+  {
+    "frame": 12,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      10.5,
+      1.5,
+      0.2
+    ]
+  },
+  {
+    "frame": 12,
+    "command": "component-add",
+    "type": "azure.rigid-body"
+  },
+  {
+    "frame": 12,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "halfExtent",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 13,
+    "command": "select",
+    "id": "gate-right"
+  },
+  {
+    "frame": 13,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      13,
+      1.5,
+      -290
+    ]
+  },
+  {
+    "frame": 13,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      10.5,
+      1.5,
+      0.2
+    ]
+  },
+  {
+    "frame": 13,
+    "command": "component-add",
+    "type": "azure.rigid-body"
+  },
+  {
+    "frame": 13,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "halfExtent",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 14,
+    "command": "select",
+    "id": "camera"
+  },
+  {
+    "frame": 14,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "frame": 14,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 14,
+    "command": "component-add",
+    "type": "azure.third-person-camera"
+  },
+  {
+    "frame": 14,
+    "command": "component-field",
+    "type": "azure.third-person-camera",
+    "field": "target",
+    "value": "hero:body"
+  },
+  {
+    "frame": 14,
+    "command": "component-field",
+    "type": "azure.third-person-camera",
+    "field": "distance",
+    "value": 5.5
+  },
+  {
+    "frame": 14,
+    "command": "component-field",
+    "type": "azure.third-person-camera",
+    "field": "targetHeight",
+    "value": 1
+  },
+  {
+    "frame": 14,
+    "command": "component-field",
+    "type": "azure.third-person-camera",
+    "field": "shoulder",
+    "value": 0.2
+  },
+  {
+    "frame": 15,
+    "command": "select",
+    "id": "hud"
+  },
+  {
+    "frame": 15,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "frame": 15,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 15,
+    "command": "component-add",
+    "type": "azure.game-ui"
+  },
+  {
+    "frame": 15,
+    "command": "component-field",
+    "type": "azure.game-ui",
+    "field": "asset",
+    "value": "assets:/hud.rml"
+  },
+  {
+    "frame": 16,
+    "command": "select",
+    "id": "goal"
+  },
+  {
+    "frame": 16,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      0,
+      1,
+      -330
+    ]
+  },
+  {
+    "frame": 16,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      3,
+      2,
+      3
+    ]
+  },
+  {
+    "frame": 16,
+    "command": "component-add",
+    "type": "azure.rigid-body"
+  },
+  {
+    "frame": 16,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "trigger",
+    "value": true
+  },
+  {
+    "frame": 16,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "halfExtent",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 16,
+    "command": "component-add",
+    "type": "azure.script"
+  },
+  {
+    "frame": 16,
+    "command": "component-field",
+    "type": "azure.script",
+    "field": "asset",
+    "value": "assets:/goal.lua"
+  },
+  {
+    "frame": 17,
+    "command": "select",
+    "id": "companion-0"
+  },
+  {
+    "frame": 17,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      -4,
+      0,
+      -32
+    ]
+  },
+  {
+    "frame": 17,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 17,
+    "command": "component-add",
+    "type": "azure.animator"
+  },
+  {
+    "frame": 17,
+    "command": "component-field",
+    "type": "azure.animator",
+    "field": "asset",
+    "value": "assets:/locomotion.json"
+  },
+  {
+    "frame": 17,
+    "command": "component-field",
+    "type": "azure.animator",
+    "field": "startTime",
+    "value": 0.7
+  },
+  {
+    "frame": 18,
+    "command": "select",
+    "id": "companion-1"
+  },
+  {
+    "frame": 18,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      4,
+      0,
+      -185
+    ]
+  },
+  {
+    "frame": 18,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 18,
+    "command": "component-add",
+    "type": "azure.animator"
+  },
+  {
+    "frame": 18,
+    "command": "component-field",
+    "type": "azure.animator",
+    "field": "asset",
+    "value": "assets:/locomotion.json"
+  },
+  {
+    "frame": 18,
+    "command": "component-field",
+    "type": "azure.animator",
+    "field": "startTime",
+    "value": 1.7
+  },
+  {
+    "frame": 19,
+    "command": "select",
+    "id": "hero:body"
+  },
+  {
+    "frame": 19,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "frame": 19,
+    "command": "component-add",
+    "type": "azure.character"
+  },
+  {
+    "frame": 19,
+    "command": "component-field",
+    "type": "azure.character",
+    "field": "speed",
+    "value": 2
+  },
+  {
+    "frame": 19,
+    "command": "component-field",
+    "type": "azure.character",
+    "field": "centerOffset",
+    "value": 0.9
+  },
+  {
+    "frame": 19,
+    "command": "component-field",
+    "type": "azure.character",
+    "field": "sprintMultiplier",
+    "value": 2.5
+  },
+  {
+    "frame": 19,
+    "command": "component-field",
+    "type": "azure.character",
+    "field": "forwardYaw",
+    "value": 180
+  },
+  {
+    "frame": 19,
+    "command": "component-add",
+    "type": "azure.animator"
+  },
+  {
+    "frame": 19,
+    "command": "component-field",
+    "type": "azure.animator",
+    "field": "asset",
+    "value": "assets:/locomotion.json"
+  },
+  {
+    "frame": 19,
+    "command": "component-field",
+    "type": "azure.animator",
+    "field": "locomotion",
+    "value": true
+  },
+  {
+    "frame": 19,
+    "command": "component-field",
+    "type": "azure.animator",
+    "field": "referenceSpeed",
+    "value": 2
+  },
+  {
+    "frame": 19,
+    "command": "component-add",
+    "type": "azure.task-state"
+  },
+  {
+    "frame": 19,
+    "command": "component-add",
+    "type": "azure.script"
+  },
+  {
+    "frame": 19,
+    "command": "component-field",
+    "type": "azure.script",
+    "field": "asset",
+    "value": "assets:/hero.lua"
+  },
+  {
+    "frame": 20,
+    "command": "select",
+    "id": "guide:body"
+  },
+  {
+    "frame": 20,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      -1,
+      0,
+      -1
+    ]
+  },
+  {
+    "frame": 20,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 20,
+    "command": "component-add",
+    "type": "azure.animator"
+  },
+  {
+    "frame": 20,
+    "command": "component-field",
+    "type": "azure.animator",
+    "field": "asset",
+    "value": "assets:/locomotion.json"
+  },
+  {
+    "frame": 20,
+    "command": "component-field",
+    "type": "azure.animator",
+    "field": "startTime",
+    "value": 0.4
+  },
+  {
+    "frame": 20,
+    "command": "component-add",
+    "type": "azure.interactable"
+  },
+  {
+    "frame": 20,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "prompt",
+    "value": "Talk to the guide [E]"
+  },
+  {
+    "frame": 20,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "range",
+    "value": 2.5
+  },
+  {
+    "frame": 20,
+    "command": "component-add",
+    "type": "azure.script"
+  },
+  {
+    "frame": 20,
+    "command": "component-field",
+    "type": "azure.script",
+    "field": "asset",
+    "value": "assets:/guide.lua"
+  },
+  {
+    "frame": 21,
+    "command": "select",
+    "id": "door:body"
+  },
+  {
+    "frame": 21,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      0,
+      1.5,
+      -290
+    ]
+  },
+  {
+    "frame": 21,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      2.5,
+      1.5,
+      0.2
+    ]
+  },
+  {
+    "frame": 21,
+    "command": "component-add",
+    "type": "azure.rigid-body"
+  },
+  {
+    "frame": 21,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "halfExtent",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 21,
+    "command": "component-add",
+    "type": "azure.door"
+  },
+  {
+    "frame": 21,
+    "command": "component-add",
+    "type": "azure.interactable"
+  },
+  {
+    "frame": 21,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "prompt",
+    "value": "Open gate [E]"
+  },
+  {
+    "frame": 21,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "range",
+    "value": 3.5
+  },
+  {
+    "frame": 21,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "offset",
+    "value": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "frame": 21,
+    "command": "component-add",
+    "type": "azure.script"
+  },
+  {
+    "frame": 21,
+    "command": "component-field",
+    "type": "azure.script",
+    "field": "asset",
+    "value": "assets:/door.lua"
+  },
+  {
+    "frame": 22,
+    "command": "select",
+    "id": "checkpoint:body"
+  },
+  {
+    "frame": 22,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      0,
+      1,
+      -165
+    ]
+  },
+  {
+    "frame": 22,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      3,
+      2,
+      2
+    ]
+  },
+  {
+    "frame": 22,
+    "command": "component-add",
+    "type": "azure.rigid-body"
+  },
+  {
+    "frame": 22,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "trigger",
+    "value": true
+  },
+  {
+    "frame": 22,
+    "command": "component-field",
+    "type": "azure.rigid-body",
+    "field": "halfExtent",
+    "value": [
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "frame": 22,
+    "command": "component-add",
+    "type": "azure.checkpoint"
+  },
+  {
+    "frame": 22,
+    "command": "component-field",
+    "type": "azure.checkpoint",
+    "field": "position",
+    "value": [
+      0,
+      0,
+      -165
+    ]
+  },
+  {
+    "frame": 22,
+    "command": "component-add",
+    "type": "azure.script"
+  },
+  {
+    "frame": 22,
+    "command": "component-field",
+    "type": "azure.script",
+    "field": "asset",
+    "value": "assets:/checkpoint.lua"
+  },
+  {
+    "frame": 22,
+    "command": "component-field",
+    "type": "azure.renderable",
+    "field": "visible",
+    "value": false
+  },
+  {
+    "frame": 23,
+    "command": "select",
+    "id": "artifact-0:body"
+  },
+  {
+    "frame": 23,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      -14,
+      0.45,
+      -50
+    ]
+  },
+  {
+    "frame": 23,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      0.3,
+      0.45,
+      0.3
+    ]
+  },
+  {
+    "frame": 23,
+    "command": "component-add",
+    "type": "azure.collectible"
+  },
+  {
+    "frame": 23,
+    "command": "component-add",
+    "type": "azure.interactable"
+  },
+  {
+    "frame": 23,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "prompt",
+    "value": "Collect artifact [E]"
+  },
+  {
+    "frame": 23,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "range",
+    "value": 3
+  },
+  {
+    "frame": 23,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "offset",
+    "value": [
+      0,
+      0.3,
+      0
+    ]
+  },
+  {
+    "frame": 23,
+    "command": "component-add",
+    "type": "azure.script"
+  },
+  {
+    "frame": 23,
+    "command": "component-field",
+    "type": "azure.script",
+    "field": "asset",
+    "value": "assets:/collectible.lua"
+  },
+  {
+    "frame": 24,
+    "command": "select",
+    "id": "artifact-1:body"
+  },
+  {
+    "frame": 24,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      14,
+      0.45,
+      -130
+    ]
+  },
+  {
+    "frame": 24,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      0.3,
+      0.45,
+      0.3
+    ]
+  },
+  {
+    "frame": 24,
+    "command": "component-add",
+    "type": "azure.collectible"
+  },
+  {
+    "frame": 24,
+    "command": "component-add",
+    "type": "azure.interactable"
+  },
+  {
+    "frame": 24,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "prompt",
+    "value": "Collect artifact [E]"
+  },
+  {
+    "frame": 24,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "range",
+    "value": 3
+  },
+  {
+    "frame": 24,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "offset",
+    "value": [
+      0,
+      0.3,
+      0
+    ]
+  },
+  {
+    "frame": 24,
+    "command": "component-add",
+    "type": "azure.script"
+  },
+  {
+    "frame": 24,
+    "command": "component-field",
+    "type": "azure.script",
+    "field": "asset",
+    "value": "assets:/collectible.lua"
+  },
+  {
+    "frame": 25,
+    "command": "select",
+    "id": "artifact-2:body"
+  },
+  {
+    "frame": 25,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "translation",
+    "value": [
+      -14,
+      0.45,
+      -210
+    ]
+  },
+  {
+    "frame": 25,
+    "command": "component-field",
+    "type": "azure.transform",
+    "field": "scale",
+    "value": [
+      0.3,
+      0.45,
+      0.3
+    ]
+  },
+  {
+    "frame": 25,
+    "command": "component-add",
+    "type": "azure.collectible"
+  },
+  {
+    "frame": 25,
+    "command": "component-add",
+    "type": "azure.interactable"
+  },
+  {
+    "frame": 25,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "prompt",
+    "value": "Collect artifact [E]"
+  },
+  {
+    "frame": 25,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "range",
+    "value": 3
+  },
+  {
+    "frame": 25,
+    "command": "component-field",
+    "type": "azure.interactable",
+    "field": "offset",
+    "value": [
+      0,
+      0.3,
+      0
+    ]
+  },
+  {
+    "frame": 25,
+    "command": "component-add",
+    "type": "azure.script"
+  },
+  {
+    "frame": 25,
+    "command": "component-field",
+    "type": "azure.script",
+    "field": "asset",
+    "value": "assets:/collectible.lua"
+  },
+  {
+    "frame": 26,
+    "command": "select",
+    "id": "hero:body"
+  },
+  {
+    "frame": 26,
+    "command": "debug-overlay",
+    "enabled": true
+  },
+  {
+    "frame": 26,
+    "command": "component-field",
+    "type": "azure.script",
+    "field": "asset",
+    "value": "assets:/absent.lua",
+    "expectError": true
+  },
+  {
+    "frame": 26,
+    "command": "preview",
+    "state": "walk",
+    "time": 0.1,
+    "previous": "idle",
+    "crossfade": 0.18
+  },
+  {
+    "frame": 27,
+    "command": "clear-preview"
+  },
+  {
+    "frame": 27,
+    "command": "prefab",
+    "asset": "assets:/prefabs/collectible.azureprefab",
+    "instance": "author-probe"
+  },
+  {
+    "frame": 27,
+    "command": "undo"
+  },
+  {
+    "frame": 27,
+    "command": "redo"
+  },
+  {
+    "frame": 27,
+    "command": "delete"
+  },
+  {
+    "frame": 27,
+    "command": "save"
+  },
+  {
+    "frame": 27,
+    "command": "reload"
+  },
+  {
+    "frame": 28,
+    "command": "select",
+    "id": "hero:body"
+  },
+  {
+    "frame": 28,
+    "command": "transform",
+    "translation": [
+      0,
+      0,
+      1
+    ]
+  },
+  {
+    "frame": 28,
+    "command": "undo"
+  },
+  {
+    "frame": 28,
+    "command": "play"
+  },
+  {
+    "frame": 32,
+    "command": "write-script",
+    "path": "assets:/hero.lua",
+    "value": "function update(dt) error('authoring fault') end"
+  },
+  {
+    "frame": 35,
+    "command": "write-script",
+    "path": "assets:/hero.lua",
+    "value": "function update(dt)\n    if self:pressed('restart') then self:load_level('assets:/exploration.azurelevel') end\n    if self:get('azure.task-state','completed') then\n        self:ui_text('objective','Expedition complete! Press R to play again.')\n    elseif self:get('azure.task-state','doorOpened') then\n        self:ui_text('objective','Enter the hall and reach the goal.')\n    elseif self:get('azure.task-state','started') then\n        self:ui_text('objective','Collect three artifacts along the trail, then open the gate.')\n    else\n        self:ui_text('objective','Talk to the guide near the starting point [E].')\n    end\n    self:ui_text('progress','Artifacts: '..self:get('azure.task-state','collected')..' / 3')\n    local id=self:interaction_target()\n    local target=id~='' and self:find(id) or nil\n    self:ui_text('prompt',target and target:get('azure.interactable','prompt') or '')\n    local checkpoint=self:find('checkpoint:body')\n    local position=self:get('azure.transform','translation')\n    if position[3] > -47 then self:ui_text('route','Follow the trail: first artifact at the left marker.')\n    elseif position[3] > -127 then self:ui_text('route','Second artifact: right marker beyond the narrow passage.')\n    elseif position[3] > -207 then self:ui_text('route','Third artifact: left marker beyond the checkpoint and ramp.')\n    else self:ui_text('route','Return to the trail center, open the gate and enter the hall.') end\n    if checkpoint and checkpoint:get('azure.checkpoint','activated') then self:ui_text('checkpoint','Checkpoint reached') end\n    if position[3] < -325 and self:get('azure.task-state','completed') then self:ui_text('route','Use the restart button or press R.') end\nend\n"
+  },
+  {
+    "frame": 38,
+    "command": "pause"
+  },
+  {
+    "frame": 38,
+    "command": "step"
+  },
+  {
+    "frame": 40,
+    "command": "resume"
+  },
+  {
+    "frame": 43,
+    "command": "stop"
+  },
+  {
+    "frame": 43,
+    "command": "save"
+  },
+  {
+    "frame": 43,
+    "command": "build",
+    "install": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\release-gate\\install-moved",
+    "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\p3\\authoring\\package"
+  },
+  {
+    "frame": 44,
+    "command": "wait-build"
+  }
+]

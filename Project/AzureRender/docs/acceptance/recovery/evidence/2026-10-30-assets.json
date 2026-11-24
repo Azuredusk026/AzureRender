@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "phase": "P0-assets",
+  "status": "verified",
+  "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+  "restoreScope": "build/runs",
+  "inputs": [
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/project.azureproject",
+      "sha256": "da6121f2f9af86c013d83b96785287c3f19ca51b845f61a1bf01bb3fbece3213",
+      "bytes": 621
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/scene.azurelevel",
+      "sha256": "251aa2be3af2da38c800877b4bf64e8ac5c1ed409681f776cb43a5bba6218b97",
+      "bytes": 4170104
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/content-character/hero-restored-inputs-v7.glb",
+      "sha256": "af8ebb6d417899a6b74c97056ebbf636dd910ec9b1367045f65fc5f0ea7c2dfb",
+      "bytes": 28283500
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-0.azurematerial",
+      "sha256": "b959f3c38e6be013641ad68221bdbeb1ea1b58ebf74892a290a991893022fad7",
+      "bytes": 28005
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-1.azurematerial",
+      "sha256": "7b05827ef427a5137ff194a0b271ca2796c857d0a81b187c7897f835e140986d",
+      "bytes": 31909
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-10.azurematerial",
+      "sha256": "1207dd33c57674142f54985a991a73475a2929c397a81f356ed8a7e448843348",
+      "bytes": 21533
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-11.azurematerial",
+      "sha256": "501827cef6d5b914db31794f61b8858015167ec6552c8c8a9015b05ff42c4665",
+      "bytes": 22418
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-12.azurematerial",
+      "sha256": "cefbf58df2ac625fbbbaf96be68a89d0beea7b11bec33cc6a93598f168979682",
+      "bytes": 20012
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-2.azurematerial",
+      "sha256": "63465376ec9a222028f8e0400ca015b9054523d37eff2ef360d1033685a2d539",
+      "bytes": 31413
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-3.azurematerial",
+      "sha256": "55e4b31fff80d95b5e14685efc08c512444a70015aa0433aacc7485e6050221b",
+      "bytes": 30741
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-4.azurematerial",
+      "sha256": "76ea758de67f868299b0dc6120c8ed7356a3076242da605345d82821b85a15e5",
+      "bytes": 32627
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-5.azurematerial",
+      "sha256": "6216895e3fbf40146d4c09250c9111ccb7b35db91989624cbe4f0d3ff103a133",
+      "bytes": 31413
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-6.azurematerial",
+      "sha256": "950d7bc898265fda9d0a50656ebb5302750779fd51d67dfaba326bec71d6b189",
+      "bytes": 25478
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-7.azurematerial",
+      "sha256": "988af44d222563ff63279726c5417d99ba241cdba3c6dde6d0e9fb1b74d07914",
+      "bytes": 21591
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-8.azurematerial",
+      "sha256": "02ecdceafa9a95cc9fcd4abb8971f68e628839aed8a3e877b07fee0c4eb81959",
+      "bytes": 28252
+    },
+    {
+      "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-9.azurematerial",
+      "sha256": "4325859f1a6f7414ffe5d2eac331fbc26375c211782b92dae8cefb5322e81663",
+      "bytes": 30804
+    },
+    {
+      "path": "build/runs/20261029-071130-main-character-joint-budget-2cddc4/continuation.json",
+      "sha256": "72589a6dee4786a0eb8d5d21787c20daf7d8bbe6e066702a939548e92956a4f5",
+      "bytes": 4086
+    },
+    {
+      "path": "build/runs/20261029-071130-main-character-joint-budget-2cddc4/original-crash-analysis.json",
+      "sha256": "d5f8798f45e24c75561443a8514f95f2de78d784ccff6acbdbdaac28454e69fe",
+      "bytes": 32746
+    },
+    {
+      "path": "build/runs/20261029-071130-main-character-joint-budget-2cddc4/original-crash.dmp",
+      "sha256": "4c75197ded58caa4457e8ec7031754560a084dc7fd092236d34cebca1c873191",
+      "bytes": 59823279
+    }
+  ],
+  "engineBuildStatus": "pending",
+  "sourceInitializationFault": "unresolved"
+}

@@ -1,0 +1,916 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "name": "opus",
+      "version": "1.6.1",
+      "license": "BSD-3-Clause",
+      "licenseSha256": "01e1167d54a096d123cf6dfbbeb19587278845c6481d2d66d545669846079551",
+      "spdx": {
+        "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.3/schemas/spdx-schema.json",
+        "spdxVersion": "SPDX-2.3",
+        "dataLicense": "CC0-1.0",
+        "SPDXID": "SPDXRef-DOCUMENT",
+        "documentNamespace": "https://spdx.org/spdxdocs/opus-x64-windows-1.6.1-268b2bf7-7539-4a8a-875c-3db11fe77a8c",
+        "name": "opus:x64-windows@1.6.1 5b513cb9c6f43132b35c2e777b378bccdf4769b678928c08a973801254b1c244",
+        "creationInfo": {
+          "creators": [
+            "Tool: vcpkg-2026-07-27-98d7cb0cf1f4686a3e43aa5672b6230c1d56bce8"
+          ],
+          "created": "2026-10-11T23:04:36Z"
+        },
+        "relationships": [
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "GENERATES",
+            "relatedSpdxElement": "SPDXRef-binary"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-0"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-1"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-2"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-3"
+          },
+          {
+            "spdxElementId": "SPDXRef-port-file-3",
+            "relationshipType": "DEPENDENCY_MANIFEST_OF",
+            "relatedSpdxElement": "SPDXRef-port"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-0"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-1"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-2"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-3"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-4"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-5"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-6"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-7"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-8"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-9"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-10"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-11"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-12"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-13"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-14"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-15"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-16"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-17"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-18"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-19"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-20"
+          }
+        ],
+        "packages": [
+          {
+            "name": "opus",
+            "SPDXID": "SPDXRef-port",
+            "versionInfo": "1.6.1",
+            "downloadLocation": "git+https://github.com/Microsoft/vcpkg@63d615e768adfa3b03dc58d1f1fe3712b90de5f6",
+            "homepage": "https://github.com/xiph/opus",
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "NOASSERTION",
+            "copyrightText": "NOASSERTION",
+            "description": "Totally open, royalty-free, highly versatile audio codec",
+            "comment": "This is the port (recipe) consumed by vcpkg.",
+            "externalRefs": [
+              {
+                "referenceCategory": "PACKAGE-MANAGER",
+                "referenceType": "purl",
+                "referenceLocator": "pkg:vcpkg/opus@1.6.1?triplet=x64-windows&vcs_url=git%2Bhttps%3A%2F%2Fgithub.com%2FMicrosoft%2Fvcpkg%4063d615e768adfa3b03dc58d1f1fe3712b90de5f6"
+              },
+              {
+                "referenceCategory": "PERSISTENT-ID",
+                "referenceType": "gitoid",
+                "referenceLocator": "gitoid:tree:sha1:63d615e768adfa3b03dc58d1f1fe3712b90de5f6"
+              }
+            ]
+          },
+          {
+            "name": "opus:x64-windows",
+            "SPDXID": "SPDXRef-binary",
+            "versionInfo": "5b513cb9c6f43132b35c2e777b378bccdf4769b678928c08a973801254b1c244",
+            "downloadLocation": "NONE",
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "NOASSERTION",
+            "copyrightText": "NOASSERTION",
+            "comment": "This is a binary package built by vcpkg."
+          },
+          {
+            "SPDXID": "SPDXRef-resource-0",
+            "checksums": [
+              {
+                "algorithm": "SHA512",
+                "checksumValue": "b9a504f8576c977df57caee808412ab95e7424e9a64e3dd4045f05616c3ed58706bc3549195b61e25721e299547509d15206d246d96f1a307b82562b703b412c"
+              }
+            ],
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "git+https://github.com/xiph/opus@v1.6.1",
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "xiph/opus"
+          }
+        ],
+        "files": [
+          {
+            "fileName": "./fix-arm64-windows-compile.diff",
+            "SPDXID": "SPDXRef-port-file-0",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "72368e7aabe3c7db58ee294ac6dabc37aa3072a43c31ab4c1f613bea3d9c4b61"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./fix-pkgconfig-version.patch",
+            "SPDXID": "SPDXRef-port-file-1",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "b1998186940daff04e5c332fbb7f27f756cf5c2227f6e8c3f37f2fb2e8222286"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./portfile.cmake",
+            "SPDXID": "SPDXRef-port-file-2",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "e786682a37edcb8388fe5d13c8c249fdfc9929b340f4164f1365ee361f3f3eac"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./vcpkg.json",
+            "SPDXID": "SPDXRef-port-file-3",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "2a8dd02660f3e5cb49d302fa94d6508c74dba71bcf10427e34ff32ed9f3e06f4"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/opus.dll",
+            "SPDXID": "SPDXRef-binary-file-0",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "3f28e9b767098bd05c5cf6cf84040e43ee4ca1395ddb1d5b77313f3c50c248bd"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./bin/opus.pdb",
+            "SPDXID": "SPDXRef-binary-file-1",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "8a38fb16e47063188a4f354ad80429eac6da908818f013c31d45b9460176685b"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./BUILD_INFO",
+            "SPDXID": "SPDXRef-binary-file-2",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5e7f821ab4eb804deb535baa7b41edca682d0303cf21a91908c98d5c9a7dcf4d"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/opus.dll",
+            "SPDXID": "SPDXRef-binary-file-3",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "54b09700833ea976707862ad398b164d52205df6b6dd50c499f9310f064f9972"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/bin/opus.pdb",
+            "SPDXID": "SPDXRef-binary-file-4",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "cf5ddb5833b0af8f80b5c5e61d2fefe7d0d141d424becbc5e9f76d6be0f2bac3"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/opus.lib",
+            "SPDXID": "SPDXRef-binary-file-5",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "853aed22334abfccdff2a61c58473b350c1d76244dc175d4e962ab50e22a30a0"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/pkgconfig/opus.pc",
+            "SPDXID": "SPDXRef-binary-file-6",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "b7bdb752693f0e0c9b76e451fd5ec3be5502a2ab725b60edcf00378f9c0b5530"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/opus/opus.h",
+            "SPDXID": "SPDXRef-binary-file-7",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "036f6a6e83a20e943505743e113e90d6278cbe8240f7d5bb90b3f86261e783e3"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/opus/opus_defines.h",
+            "SPDXID": "SPDXRef-binary-file-8",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "bbd4d4e3ba99f6982b1c8d8f5541814ad77d8e8babf3cc788cf23d517b2ca9d6"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/opus/opus_multistream.h",
+            "SPDXID": "SPDXRef-binary-file-9",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "fd99c4594b4b57e406e9cab45a777895dd1b4c8de067088aa54ed7ae100b13f0"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/opus/opus_projection.h",
+            "SPDXID": "SPDXRef-binary-file-10",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "11b3427e9ca342308a93adc9a081e2479685e5b7811a3a53540609f1bbc488ad"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/opus/opus_types.h",
+            "SPDXID": "SPDXRef-binary-file-11",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "19cb301ea1eedbcbdbb5049363de061893bf11c20e505a657b69ce6ffa5b11fa"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/opus.lib",
+            "SPDXID": "SPDXRef-binary-file-12",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "853aed22334abfccdff2a61c58473b350c1d76244dc175d4e962ab50e22a30a0"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/pkgconfig/opus.pc",
+            "SPDXID": "SPDXRef-binary-file-13",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "943477964412f2da5449d9ccc18bcca8aaa5ebc1f4957646a27d2b2627f83428"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opus/copyright",
+            "SPDXID": "SPDXRef-binary-file-14",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "01e1167d54a096d123cf6dfbbeb19587278845c6481d2d66d545669846079551"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opus/OpusConfig.cmake",
+            "SPDXID": "SPDXRef-binary-file-15",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "b24a920347af41ffe18489f7a85ccb2c8da3f0846cce6a48599df0644c1aeb1f"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opus/OpusConfigVersion.cmake",
+            "SPDXID": "SPDXRef-binary-file-16",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "4a630aec38d10eeba504cfee8c6aebee2e7b44500371fc39985262a6de1ff52c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opus/OpusTargets-debug.cmake",
+            "SPDXID": "SPDXRef-binary-file-17",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "09b805042e801018171adbf1103b30bdd6f058177dd87e3958e055ff128db9bf"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opus/OpusTargets-release.cmake",
+            "SPDXID": "SPDXRef-binary-file-18",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "536bd36fb9cdb7e5c485b727996117fa74ec2648cac3f098c49de7bd6eb888e0"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opus/OpusTargets.cmake",
+            "SPDXID": "SPDXRef-binary-file-19",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "116cb8276995925d6727785783fe463c229e213cb25cbce5e2b455cba9027969"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opus/vcpkg-spdx-resources.json",
+            "SPDXID": "SPDXRef-binary-file-20",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "dfdbc65606a51ec1b74abc5d2a651091b32266b6da14686992d4a7435cdf22a8"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          }
+        ]
+      }
+    },
+    {
+      "name": "opusfile",
+      "version": "0.12+20221121#1",
+      "license": "BSD-3-Clause",
+      "licenseSha256": "0267ae795ab744c4e0f9c45e249440fdf2e75dac8c804f36066b28649bf74aaf",
+      "spdx": {
+        "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.3/schemas/spdx-schema.json",
+        "spdxVersion": "SPDX-2.3",
+        "dataLicense": "CC0-1.0",
+        "SPDXID": "SPDXRef-DOCUMENT",
+        "documentNamespace": "https://spdx.org/spdxdocs/opusfile-x64-windows-0.12+20221121#1-a575a0d8-223b-4262-a5ea-660ea756f5c9",
+        "name": "opusfile:x64-windows@0.12+20221121#1 81859abde02f5dc73bd2a380c13466852434195b5cc5822ee2e0e7599b4e0814",
+        "creationInfo": {
+          "creators": [
+            "Tool: vcpkg-2026-07-27-98d7cb0cf1f4686a3e43aa5672b6230c1d56bce8"
+          ],
+          "created": "2026-10-11T23:04:41Z"
+        },
+        "relationships": [
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "GENERATES",
+            "relatedSpdxElement": "SPDXRef-binary"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-0"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-1"
+          },
+          {
+            "spdxElementId": "SPDXRef-port",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-port-file-2"
+          },
+          {
+            "spdxElementId": "SPDXRef-port-file-2",
+            "relationshipType": "DEPENDENCY_MANIFEST_OF",
+            "relatedSpdxElement": "SPDXRef-port"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-0"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-1"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-2"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-3"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-4"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-5"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-6"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-7"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-8"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-9"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-10"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-11"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-12"
+          },
+          {
+            "spdxElementId": "SPDXRef-binary",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-binary-file-13"
+          }
+        ],
+        "packages": [
+          {
+            "name": "opusfile",
+            "SPDXID": "SPDXRef-port",
+            "versionInfo": "0.12+20221121#1",
+            "downloadLocation": "git+https://github.com/Microsoft/vcpkg@6b39a2d4ff309c4e2bedf74adeb1cd18f7ab16c9",
+            "homepage": "https://github.com/xiph/opusfile",
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "NOASSERTION",
+            "copyrightText": "NOASSERTION",
+            "description": "Stand-alone decoder library for .opus streams",
+            "comment": "This is the port (recipe) consumed by vcpkg.",
+            "externalRefs": [
+              {
+                "referenceCategory": "PACKAGE-MANAGER",
+                "referenceType": "purl",
+                "referenceLocator": "pkg:vcpkg/opusfile@0.12%2B20221121?port_version=1&triplet=x64-windows&vcs_url=git%2Bhttps%3A%2F%2Fgithub.com%2FMicrosoft%2Fvcpkg%406b39a2d4ff309c4e2bedf74adeb1cd18f7ab16c9"
+              },
+              {
+                "referenceCategory": "PERSISTENT-ID",
+                "referenceType": "gitoid",
+                "referenceLocator": "gitoid:tree:sha1:6b39a2d4ff309c4e2bedf74adeb1cd18f7ab16c9"
+              }
+            ]
+          },
+          {
+            "name": "opusfile:x64-windows",
+            "SPDXID": "SPDXRef-binary",
+            "versionInfo": "81859abde02f5dc73bd2a380c13466852434195b5cc5822ee2e0e7599b4e0814",
+            "downloadLocation": "NONE",
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "NOASSERTION",
+            "copyrightText": "NOASSERTION",
+            "comment": "This is a binary package built by vcpkg."
+          },
+          {
+            "SPDXID": "SPDXRef-resource-0",
+            "checksums": [
+              {
+                "algorithm": "SHA512",
+                "checksumValue": "17e323d6c031330f10b045a1438cd7ba44e2ac313ec7b3d69a8041dfa927c3f501d04246d974109fbd68dfa1a8d7b63584d96caed69ad5e38b68358aa35af65a"
+              }
+            ],
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "git+https://github.com/xiph/opusfile@9d718345ce03b2fad5d7d28e0bcd1cc69ab2b166",
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "xiph/opusfile"
+          }
+        ],
+        "files": [
+          {
+            "fileName": "./portfile.cmake",
+            "SPDXID": "SPDXRef-port-file-0",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "956ca11dfaebea3a14798f5d7e5289882aab094a67f21435eb7dfe9c72f3b63b"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./usage",
+            "SPDXID": "SPDXRef-port-file-1",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "eb25650309dae57128ca8ce05558dc5058d2847348d18cc137c2ed5e47e2733c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./vcpkg.json",
+            "SPDXID": "SPDXRef-port-file-2",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "83ff8117eea2ac073bfd90fb6e85c4a1b69e40fcab470b92ec7becfb50215f8b"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./BUILD_INFO",
+            "SPDXID": "SPDXRef-binary-file-0",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "5bacb3bbb20da44b331b0cfd5c6c295c0c2b19de7fab181f77130c731bded41a"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/opusfile.lib",
+            "SPDXID": "SPDXRef-binary-file-1",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "69292156f177a1e22f1089c8c3939b58bcb9b61c5c2c53b75cc15f6d5f087d44"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./debug/lib/pkgconfig/opusfile.pc",
+            "SPDXID": "SPDXRef-binary-file-2",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "98857b345f1c7294f1e3709a07a3e501014556c56a82b0522d17e25256b8d927"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./include/opus/opusfile.h",
+            "SPDXID": "SPDXRef-binary-file-3",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "4bac205273775f26973828b031dc90018a6baf98bb64d5b4d4601ccbf6740e69"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/opusfile.lib",
+            "SPDXID": "SPDXRef-binary-file-4",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "79e728fb75e0efafbeb94c863277c416781825d2b31a065fded739dd1eceb30c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./lib/pkgconfig/opusfile.pc",
+            "SPDXID": "SPDXRef-binary-file-5",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "069282f2d6985d12cb5c6ad18aaef3260670c713851dae09c292f93795ee7d6f"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opusfile/copyright",
+            "SPDXID": "SPDXRef-binary-file-6",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "0267ae795ab744c4e0f9c45e249440fdf2e75dac8c804f36066b28649bf74aaf"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opusfile/OpusFileConfig.cmake",
+            "SPDXID": "SPDXRef-binary-file-7",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "15a19bca99f45d823a5657ce6b78097a74d820e61564adf9b2734dc56dfee031"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opusfile/OpusFileConfigVersion.cmake",
+            "SPDXID": "SPDXRef-binary-file-8",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "cf4a6d4172809f8863c55cbe5c2fa9987581b1429dda1bca3cb6a44ea7151c84"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opusfile/OpusFileTargets-debug.cmake",
+            "SPDXID": "SPDXRef-binary-file-9",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "11e3e17756a2c5935e0ddd00a5afde0e0a8dc1a8ee1167b040ab9339c70e1c17"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opusfile/OpusFileTargets-release.cmake",
+            "SPDXID": "SPDXRef-binary-file-10",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "47f6cc9a622a2a34113f1617198e9caeb3dac06fd120c110e7a7afd3ecd7b887"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opusfile/OpusFileTargets.cmake",
+            "SPDXID": "SPDXRef-binary-file-11",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "67b9f92f234003a3be4f3abe223261b557b2e72b71ad2cb5c1bf677384ca0125"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opusfile/usage",
+            "SPDXID": "SPDXRef-binary-file-12",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "eb25650309dae57128ca8ce05558dc5058d2847348d18cc137c2ed5e47e2733c"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          },
+          {
+            "fileName": "./share/opusfile/vcpkg-spdx-resources.json",
+            "SPDXID": "SPDXRef-binary-file-13",
+            "checksums": [
+              {
+                "algorithm": "SHA256",
+                "checksumValue": "d1456811bb65e26e2393167a7ff90809609e742dff3eea5a5663ac01774b09d9"
+              }
+            ],
+            "licenseConcluded": "NOASSERTION",
+            "copyrightText": "NOASSERTION"
+          }
+        ]
+      }
+    }
+  ],
+  "sourceDownloads": [
+    {
+      "repo": "xiph/opus",
+      "ref": "v1.6.1",
+      "url": "https://codeload.github.com/xiph/opus/tar.gz/v1.6.1",
+      "sha512": "b9a504f8576c977df57caee808412ab95e7424e9a64e3dd4045f05616c3ed58706bc3549195b61e25721e299547509d15206d246d96f1a307b82562b703b412c",
+      "bytes": 4888071
+    },
+    {
+      "repo": "xiph/opusfile",
+      "ref": "9d718345ce03b2fad5d7d28e0bcd1cc69ab2b166",
+      "url": "https://codeload.github.com/xiph/opusfile/tar.gz/9d718345ce03b2fad5d7d28e0bcd1cc69ab2b166",
+      "sha512": "17e323d6c031330f10b045a1438cd7ba44e2ac313ec7b3d69a8041dfa927c3f501d04246d974109fbd68dfa1a8d7b63584d96caed69ad5e38b68358aa35af65a",
+      "bytes": 149358
+    }
+  ],
+  "mp3": {
+    "package": "mp3lame",
+    "version": "3.100",
+    "linkage": "dynamic",
+    "sourceManifest": "audio-codecs-source.json"
+  },
+  "aac": {
+    "platform": "Windows Media Foundation",
+    "implementation": "system-decoder",
+    "fixtureLicense": "CC0-1.0",
+    "authoredFrames": 48000,
+    "decodedFrames": 48128
+  }
+}

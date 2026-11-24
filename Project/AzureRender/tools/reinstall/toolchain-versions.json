@@ -1,0 +1,16 @@
+{
+  "python": "3.11.9",
+  "cmake": "3.20.5",
+  "ninja": "1.13.2",
+  "git": "2.51.0.windows.2",
+  "msvc": "14.44.35207",
+  "vulkanSDK": "1.4.350.0",
+  "node": "22.20.0",
+  "uv": "0.11.2",
+  "dotnet": "9.0.319",
+  "gh": "2.96.0",
+  "renderdoc": "1.46",
+  "vcpkgCommit": "56bb2411609227288b70117ead2c47585ba07713",
+  "vcpkgBuiltinBaseline": "2bc124dac8436f5d8e108273aacf3f68d9824185",
+  "model": "gpt-6.1-sol"
+}

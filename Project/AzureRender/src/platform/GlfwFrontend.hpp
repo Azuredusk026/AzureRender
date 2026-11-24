@@ -6,6 +6,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include "platform/FileDropEvent.hpp"
 
 namespace azurerender {
 
@@ -19,6 +20,8 @@ struct GlfwFrontendConfig {
     void* userPointer = nullptr;
     GLFWframebuffersizefun framebufferSizeCallback = nullptr;
     GLFWkeyfun keyCallback = nullptr;
+    GLFWscrollfun scrollCallback = nullptr;
+    GLFWdropfun dropCallback = nullptr;
 };
 
 class GlfwFrontend final {
@@ -35,12 +38,16 @@ public:
     [[nodiscard]] std::vector<const char*> requiredVulkanExtensions() const;
 
     void pollEvents() const;
+    void recordFileDrop(int count,const char** paths);
+    std::vector<FileDropEvent> consumeFileDrops(){auto result=std::move(fileDrops_);fileDrops_.clear();return result;}
     void waitEvents() const;
+    void waitEventsTimeout(double timeoutSeconds) const;
     void requestClose() const;
     VkSurfaceKHR createSurface(VkInstance instance) const;
 
 private:
     GLFWwindow* window_ = nullptr;
+    std::vector<FileDropEvent> fileDrops_;
 };
 
 }  // namespace azurerender

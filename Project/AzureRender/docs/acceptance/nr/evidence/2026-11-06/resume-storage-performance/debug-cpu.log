@@ -1,0 +1,50 @@
+Start testing: Nov 06 21:54 中国标准时间
+----------------------------------------------------------
+206/530 Testing: AzureRender.StableDepthOrder
+206/530 Test: AzureRender.StableDepthOrder
+Command: "D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureStableDepthOrderTests.exe"
+Directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+"AzureRender.StableDepthOrder" start time: Nov 06 21:54 中国标准时间
+Output:
+----------------------------------------------------------
+Stable depth oracle passed 60 distributions and invalid input
+<end of output>
+Test time =   3.72 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.StableDepthOrder" end time: Nov 06 21:54 中国标准时间
+"AzureRender.StableDepthOrder" time elapsed: 00:00:03
+----------------------------------------------------------
+
+207/530 Testing: AzureRender.AnimationCurve
+207/530 Test: AzureRender.AnimationCurve
+Command: "D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureAnimationCurveTests.exe"
+Directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+"AzureRender.AnimationCurve" start time: Nov 06 21:54 中国标准时间
+Output:
+----------------------------------------------------------
+Curve interpolation, time scaling, quaternion and invalid inputs passed
+<end of output>
+Test time =   1.96 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.AnimationCurve" end time: Nov 06 21:54 中国标准时间
+"AzureRender.AnimationCurve" time elapsed: 00:00:01
+----------------------------------------------------------
+
+356/530 Testing: AzureRender.ResourceLocator
+356/530 Test: AzureRender.ResourceLocator
+Command: "D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderResourceLocatorTests.exe"
+Directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+"AzureRender.ResourceLocator" start time: Nov 06 21:54 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   3.15 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ResourceLocator" end time: Nov 06 21:54 中国标准时间
+"AzureRender.ResourceLocator" time elapsed: 00:00:03
+----------------------------------------------------------
+
+End testing: Nov 06 21:54 中国标准时间

@@ -1,0 +1,5 @@
+[1791391842054][info][editor][code=0] Opened scene: mesh
+[1791391842061][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-document-backup-19425166592700\scene.azscene
+[1791391842099][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-document-backup-19425166592700\scene.azscene
+[1791391842134][info][editor][code=0] Opened scene: startup
+[1791391842160][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-document-backup-19425166592700\project\assets\startup.azscene

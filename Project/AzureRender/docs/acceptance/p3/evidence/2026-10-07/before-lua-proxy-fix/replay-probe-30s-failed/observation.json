@@ -1,0 +1,320 @@
+[
+  {
+    "seconds": 0.0,
+    "gpuFrames": 0,
+    "working": 215924736,
+    "peak": 215924736
+  },
+  {
+    "seconds": 0.5,
+    "gpuFrames": 240,
+    "working": 245768192,
+    "peak": 249827328
+  },
+  {
+    "seconds": 1.0469999999986612,
+    "gpuFrames": 502,
+    "working": 249532416,
+    "peak": 249827328
+  },
+  {
+    "seconds": 1.5940000000045984,
+    "gpuFrames": 757,
+    "working": 252030976,
+    "peak": 252030976
+  },
+  {
+    "seconds": 2.125,
+    "gpuFrames": 1045,
+    "working": 253112320,
+    "peak": 253112320
+  },
+  {
+    "seconds": 2.7810000000026776,
+    "gpuFrames": 1324,
+    "working": 281456640,
+    "peak": 281456640
+  },
+  {
+    "seconds": 3.4530000000013388,
+    "gpuFrames": 1556,
+    "working": 281878528,
+    "peak": 284196864
+  },
+  {
+    "seconds": 3.9840000000040163,
+    "gpuFrames": 1556,
+    "working": 281878528,
+    "peak": 284196864
+  },
+  {
+    "seconds": 4.484000000004016,
+    "gpuFrames": 1556,
+    "working": 281878528,
+    "peak": 284196864
+  },
+  {
+    "seconds": 4.984000000004016,
+    "gpuFrames": 1556,
+    "working": 281890816,
+    "peak": 284196864
+  },
+  {
+    "seconds": 5.5,
+    "gpuFrames": 1557,
+    "working": 281436160,
+    "peak": 290746368
+  },
+  {
+    "seconds": 6.2810000000026776,
+    "gpuFrames": 1777,
+    "working": 285360128,
+    "peak": 293588992
+  },
+  {
+    "seconds": 6.921999999998661,
+    "gpuFrames": 2152,
+    "working": 289542144,
+    "peak": 293588992
+  },
+  {
+    "seconds": 7.546999999998661,
+    "gpuFrames": 2474,
+    "working": 268353536,
+    "peak": 293588992
+  },
+  {
+    "seconds": 8.171999999998661,
+    "gpuFrames": 2736,
+    "working": 276205568,
+    "peak": 293588992
+  },
+  {
+    "seconds": 8.703000000001339,
+    "gpuFrames": 3175,
+    "working": 280469504,
+    "peak": 293588992
+  },
+  {
+    "seconds": 9.344000000004598,
+    "gpuFrames": 3502,
+    "working": 296783872,
+    "peak": 296783872
+  },
+  {
+    "seconds": 9.969000000004598,
+    "gpuFrames": 3687,
+    "working": 304037888,
+    "peak": 309805056
+  },
+  {
+    "seconds": 10.5,
+    "gpuFrames": 3912,
+    "working": 304898048,
+    "peak": 309805056
+  },
+  {
+    "seconds": 11.01600000000326,
+    "gpuFrames": 4126,
+    "working": 306122752,
+    "peak": 309805056
+  },
+  {
+    "seconds": 11.531000000002678,
+    "gpuFrames": 4405,
+    "working": 306831360,
+    "peak": 309805056
+  },
+  {
+    "seconds": 12.18800000000192,
+    "gpuFrames": 4652,
+    "working": 307941376,
+    "peak": 309805056
+  },
+  {
+    "seconds": 12.719000000004598,
+    "gpuFrames": 4919,
+    "working": 304902144,
+    "peak": 309805056
+  },
+  {
+    "seconds": 13.234000000004016,
+    "gpuFrames": 5210,
+    "working": 308121600,
+    "peak": 309805056
+  },
+  {
+    "seconds": 13.76600000000326,
+    "gpuFrames": 5526,
+    "working": 309485568,
+    "peak": 309805056
+  },
+  {
+    "seconds": 14.281000000002678,
+    "gpuFrames": 5879,
+    "working": 311353344,
+    "peak": 311353344
+  },
+  {
+    "seconds": 14.906000000002678,
+    "gpuFrames": 6178,
+    "working": 314667008,
+    "peak": 314667008
+  },
+  {
+    "seconds": 15.56300000000192,
+    "gpuFrames": 6475,
+    "working": 315142144,
+    "peak": 315482112
+  },
+  {
+    "seconds": 16.234000000004016,
+    "gpuFrames": 6722,
+    "working": 317050880,
+    "peak": 317050880
+  },
+  {
+    "seconds": 16.82800000000134,
+    "gpuFrames": 6994,
+    "working": 317972480,
+    "peak": 317972480
+  },
+  {
+    "seconds": 17.484000000004016,
+    "gpuFrames": 7267,
+    "working": 318914560,
+    "peak": 318914560
+  },
+  {
+    "seconds": 18.14100000000326,
+    "gpuFrames": 7546,
+    "working": 319811584,
+    "peak": 319811584
+  },
+  {
+    "seconds": 18.76600000000326,
+    "gpuFrames": 7811,
+    "working": 320831488,
+    "peak": 320831488
+  },
+  {
+    "seconds": 19.29699999999866,
+    "gpuFrames": 8107,
+    "working": 322596864,
+    "peak": 322596864
+  },
+  {
+    "seconds": 19.859000000004016,
+    "gpuFrames": 8449,
+    "working": 323321856,
+    "peak": 323321856
+  },
+  {
+    "seconds": 20.42199999999866,
+    "gpuFrames": 8764,
+    "working": 323018752,
+    "peak": 323321856
+  },
+  {
+    "seconds": 21.0940000000046,
+    "gpuFrames": 9051,
+    "working": 323641344,
+    "peak": 323641344
+  },
+  {
+    "seconds": 21.734000000004016,
+    "gpuFrames": 9295,
+    "working": 323563520,
+    "peak": 323665920
+  },
+  {
+    "seconds": 22.281000000002678,
+    "gpuFrames": 9576,
+    "working": 323833856,
+    "peak": 323833856
+  },
+  {
+    "seconds": 22.92199999999866,
+    "gpuFrames": 9849,
+    "working": 323977216,
+    "peak": 323977216
+  },
+  {
+    "seconds": 23.56300000000192,
+    "gpuFrames": 10060,
+    "working": 324116480,
+    "peak": 324116480
+  },
+  {
+    "seconds": 24.07800000000134,
+    "gpuFrames": 10275,
+    "working": 324182016,
+    "peak": 324182016
+  },
+  {
+    "seconds": 24.5940000000046,
+    "gpuFrames": 10502,
+    "working": 324325376,
+    "peak": 324325376
+  },
+  {
+    "seconds": 25.125,
+    "gpuFrames": 10772,
+    "working": 324997120,
+    "peak": 324997120
+  },
+  {
+    "seconds": 25.70300000000134,
+    "gpuFrames": 11086,
+    "working": 325427200,
+    "peak": 325427200
+  },
+  {
+    "seconds": 26.29699999999866,
+    "gpuFrames": 11380,
+    "working": 325439488,
+    "peak": 325439488
+  },
+  {
+    "seconds": 26.81300000000192,
+    "gpuFrames": 11730,
+    "working": 325439488,
+    "peak": 325439488
+  },
+  {
+    "seconds": 27.39100000000326,
+    "gpuFrames": 12003,
+    "working": 325451776,
+    "peak": 325464064
+  },
+  {
+    "seconds": 27.92199999999866,
+    "gpuFrames": 12232,
+    "working": 325873664,
+    "peak": 325873664
+  },
+  {
+    "seconds": 28.43800000000192,
+    "gpuFrames": 12466,
+    "working": 326017024,
+    "peak": 326017024
+  },
+  {
+    "seconds": 28.9690000000046,
+    "gpuFrames": 12689,
+    "working": 326438912,
+    "peak": 326438912
+  },
+  {
+    "seconds": 29.5,
+    "gpuFrames": 12908,
+    "working": 326668288,
+    "peak": 326668288
+  },
+  {
+    "seconds": 30.031000000002678,
+    "gpuFrames": 13113,
+    "working": 326647808,
+    "peak": 326672384
+  }
+]

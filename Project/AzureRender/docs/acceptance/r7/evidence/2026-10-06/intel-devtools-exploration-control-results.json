@@ -1,0 +1,2756 @@
+[
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 15
+    },
+    "response": {
+      "elapsedMs": 340.9958,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 6.454,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 8.7033,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-3",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "character",
+        "extent": [
+          192,
+          128
+        ]
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 13.3391,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 4294967296
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 4.9448,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-5",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "sample",
+        "extent": [
+          192,
+          128
+        ]
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 14.8704,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 8589934593
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.1607,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-7",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "blackhole",
+        "extent": [
+          192,
+          128
+        ]
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 0.4073,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 12884901890
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 125.7286,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 8.9853,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-10",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 4294967296
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 8.0309,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            3.0,
+            2.9000000953674316,
+            5.0
+          ],
+          "cameraTarget": [
+            0.0,
+            0.8999999761581421,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2232711290568,
+          "completedSubmission": 42,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 22,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 1,
+          "renderer": "character",
+          "requested": false,
+          "resolvedImage": 2232703131752,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 5.6756,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-12",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 8589934593
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 10.2129,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            3.0,
+            2.9000000953674316,
+            5.0
+          ],
+          "cameraTarget": [
+            0.0,
+            0.8999999761581421,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2232710918984,
+          "completedSubmission": 46,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 28,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 1,
+          "renderer": "sample",
+          "requested": false,
+          "resolvedImage": 2232710933784,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 9.3568,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-14",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 12884901890
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 14.1128,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            3.0,
+            2.9000000953674316,
+            5.0
+          ],
+          "cameraTarget": [
+            0.0,
+            0.8999999761581421,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2232710936744,
+          "completedSubmission": 50,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 31,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 1,
+          "renderer": "blackhole",
+          "requested": false,
+          "resolvedImage": 2232710960424,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 8.5149,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-16",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "sample"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 18.377,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Render view budget awaits GPU retirement\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.3553,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-18",
+      "commandId": "preview.capture",
+      "parameters": {
+        "handle": 4294967296,
+        "label": "independent-camera"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 15.102,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\r7\\intel-devtools\\exploration\\captures\\independent-camera.png",
+          "view": {
+            "cameraPosition": [
+              3.0,
+              2.9000000953674316,
+              5.0
+            ],
+            "cameraTarget": [
+              0.0,
+              0.8999999761581421,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 2232711290568,
+            "completedSubmission": 55,
+            "extent": [
+              192,
+              128
+            ],
+            "lastUseSubmission": 22,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 1,
+            "renderer": "character",
+            "requested": false,
+            "resolvedImage": 2232703131752,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": true
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.5284,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-20",
+      "commandId": "preview.resize",
+      "parameters": {
+        "handle": 4294967296,
+        "extent": [
+          320,
+          180
+        ]
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 0.6196,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 170.9405,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 17.1813,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-23",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 4294967296
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 17.2728,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            3.0,
+            2.9000000953674316,
+            5.0
+          ],
+          "cameraTarget": [
+            0.0,
+            0.8999999761581421,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2232548969176,
+          "completedSubmission": 75,
+          "extent": [
+            320,
+            180
+          ],
+          "lastUseSubmission": 66,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 2,
+          "renderer": "character",
+          "requested": false,
+          "resolvedImage": 2232548992856,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 17.8154,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-25",
+      "commandId": "preview.request",
+      "parameters": {
+        "handle": 12884901890
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 10.492,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 136.2757,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 8.9893,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-28",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 12884901890
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 5.1627,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            3.0,
+            2.9000000953674316,
+            5.0
+          ],
+          "cameraTarget": [
+            0.0,
+            0.8999999761581421,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2232710936744,
+          "completedSubmission": 93,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 83,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 2,
+          "renderer": "blackhole",
+          "requested": false,
+          "resolvedImage": 2232710960424,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 20.0021,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-30",
+      "commandId": "preview.release",
+      "parameters": {
+        "handle": 4294967296
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 21.3198,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.4895,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-32",
+      "commandId": "preview.request",
+      "parameters": {
+        "handle": 4294967296
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 8.228,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 9.4234,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-34",
+      "commandId": "preview.release",
+      "parameters": {
+        "handle": 8589934593
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 0.665,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 23.5128,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-36",
+      "commandId": "preview.request",
+      "parameters": {
+        "handle": 8589934593
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 0.5237,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 5.6218,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-38",
+      "commandId": "preview.release",
+      "parameters": {
+        "handle": 12884901890
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 21.2763,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.1761,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-40",
+      "commandId": "preview.request",
+      "parameters": {
+        "handle": 12884901890
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 10.9541,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 117.9111,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "assets.grid"
+      }
+    },
+    "response": {
+      "elapsedMs": 18.1595,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 839.5915,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 20
+    },
+    "response": {
+      "elapsedMs": 306.2517,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 12.4927,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":156,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[{\"asset\":\"5847a118-3f21-4b88-a5df-28ebd3cda4a9\",\"fingerprint\":\"5309309381637495498\",\"handle\":17179869184,\"settings\":\"128x128-bounds-fit-camera\",\"view\":{\"cameraPosition\":[2.799999952316284,2.0999999046325684,3.200000047683716],\"cameraTarget\":[0.0,0.0,0.0],\"capacity\":3,\"colorImage\":2232711296488,\"completedSubmission\":156,\"extent\":[128,128],\"lastUseSubmission\":158,\"outputFormat\":\"rgba8-linear\",\"renderCount\":1,\"renderer\":\"character\",\"requested\":false,\"resolvedImage\":2232710918984,\"retired\":0,\"schemaVersion\":1,\"worldCoordinates\":false}},{\"asset\":\"b3898b1f-2b05-43fe-ab5d-f5f2c3923507\",\"fingerprint\":\"14850552707534680045\",\"handle\":21474836481,\"settings\":\"128x128-bounds-fit-camera\",\"view\":{\"cameraPosition\":[2.799999952316284,2.0999999046325684,3.200000047683716],\"cameraTarget\":[0.0,0.0,0.0],\"capacity\":3,\"colorImage\":2232707659768,\"completedSubmission\":156,\"extent\":[128,128],\"lastUseSubmission\":158,\"outputFormat\":\"rgba8-linear\",\"renderCount\":1,\"renderer\":\"character\",\"requested\":false,\"resolvedImage\":2232707674568,\"retired\":0,\"schemaVersion\":1,\"worldCoordinates\":false}}],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.1912,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-47",
+      "commandId": "preview.asset",
+      "parameters": {
+        "asset": "guide"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 6.4531,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 17179869184,
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\r7\\intel-devtools\\exploration\\Project with spaces\\assets\\guide.gltf",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 2232711296488,
+            "completedSubmission": 160,
+            "extent": [
+              128,
+              128
+            ],
+            "lastUseSubmission": 162,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 1,
+            "renderer": "character",
+            "requested": false,
+            "resolvedImage": 2232710918984,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": false
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 4.6626,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-49",
+      "commandId": "preview.release",
+      "parameters": {
+        "handle": 17179869184
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 2.6244,
+      "message": "[{\"code\":\"RejectedOperation\",\"message\":\"Release requires a view owned by preview.create; cached views use their owning service\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 20
+    },
+    "response": {
+      "elapsedMs": 299.7094,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 15.1588,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-52",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 17179869184
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 4.0944,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            2.799999952316284,
+            2.0999999046325684,
+            3.200000047683716
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2232711296488,
+          "completedSubmission": 188,
+          "extent": [
+            128,
+            128
+          ],
+          "lastUseSubmission": 190,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 1,
+          "renderer": "character",
+          "requested": false,
+          "resolvedImage": 2232710918984,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": false
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 13.0018,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-54",
+      "commandId": "preview.capture",
+      "parameters": {
+        "handle": 17179869184,
+        "label": "asset-thumbnail"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 5.0701,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\r7\\intel-devtools\\exploration\\captures\\asset-thumbnail.png",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 2232711296488,
+            "completedSubmission": 191,
+            "extent": [
+              128,
+              128
+            ],
+            "lastUseSubmission": 193,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 1,
+            "renderer": "character",
+            "requested": false,
+            "resolvedImage": 2232710918984,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": false
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 25
+    },
+    "response": {
+      "elapsedMs": 507.1616,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 12.8399,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":220,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[{\"asset\":\"5847a118-3f21-4b88-a5df-28ebd3cda4a9\",\"fingerprint\":\"14188810315478330770\",\"handle\":25769803776,\"settings\":\"128x128-bounds-fit-camera\",\"view\":{\"cameraPosition\":[2.799999952316284,2.0999999046325684,3.200000047683716],\"cameraTarget\":[0.0,0.0,0.0],\"capacity\":3,\"colorImage\":2232544163480,\"completedSubmission\":220,\"extent\":[128,128],\"lastUseSubmission\":222,\"outputFormat\":\"rgba8-linear\",\"renderCount\":1,\"renderer\":\"character\",\"requested\":false,\"resolvedImage\":2232548595304,\"retired\":0,\"schemaVersion\":1,\"worldCoordinates\":false}},{\"asset\":\"b3898b1f-2b05-43fe-ab5d-f5f2c3923507\",\"fingerprint\":\"14850552707534680045\",\"handle\":30064771073,\"settings\":\"128x128-bounds-fit-camera\",\"view\":{\"cameraPosition\":[2.799999952316284,2.0999999046325684,3.200000047683716],\"cameraTarget\":[0.0,0.0,0.0],\"capacity\":3,\"colorImage\":2232698702040,\"completedSubmission\":220,\"extent\":[128,128],\"lastUseSubmission\":222,\"outputFormat\":\"rgba8-linear\",\"renderCount\":1,\"renderer\":\"character\",\"requested\":false,\"resolvedImage\":2232701631688,\"retired\":0,\"schemaVersion\":1,\"worldCoordinates\":false}}],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 10.1354,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-58",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 17179869184
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 12.0603,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "assets.grid"
+      }
+    },
+    "response": {
+      "elapsedMs": 3.514,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 130.4828,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 4.6322,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-62",
+      "commandId": "preview.clear",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "elapsedMs": 3.5923,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 3
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 133.9004,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "tool.capture"
+      }
+    },
+    "response": {
+      "elapsedMs": 12.7752,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 155.2035,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "preview.camera"
+      }
+    },
+    "response": {
+      "elapsedMs": 3.9274,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 247.1724,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 15
+    },
+    "response": {
+      "elapsedMs": 288.0888,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 14.9579,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":{\"cameraPosition\":[3.0,2.9000000953674316,5.0],\"cameraTarget\":[0.0,0.8999999761581421,0.0],\"capacity\":3,\"colorImage\":2232719015080,\"completedSubmission\":287,\"extent\":[320,180],\"lastUseSubmission\":289,\"outputFormat\":\"rgba8-linear\",\"renderCount\":26,\"renderer\":\"character\",\"requested\":false,\"resolvedImage\":2232719023960,\"retired\":0,\"schemaVersion\":1,\"worldCoordinates\":true},\"completedSubmission\":287,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.4866,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-71",
+      "commandId": "preview.camera",
+      "parameters": {
+        "enabled": true
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "elapsedMs": 13.267,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 34359738368
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 3
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 4.7318,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-73",
+      "commandId": "preview.release",
+      "parameters": {
+        "handle": 34359738368
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 6.518,
+      "message": "[{\"code\":\"RejectedOperation\",\"message\":\"Release requires a view owned by preview.create; cached views use their owning service\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 14.0969,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-75",
+      "commandId": "preview.resize",
+      "parameters": {
+        "handle": 34359738368,
+        "extent": [
+          400,
+          200
+        ]
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "elapsedMs": 18.8808,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 3
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 15
+    },
+    "response": {
+      "elapsedMs": 274.3248,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 9.8172,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-78",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 34359738368
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "elapsedMs": 14.5746,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            3.0,
+            2.9000000953674316,
+            5.0
+          ],
+          "cameraTarget": [
+            0.0,
+            0.8999999761581421,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2232706072904,
+          "completedSubmission": 317,
+          "extent": [
+            400,
+            200
+          ],
+          "lastUseSubmission": 319,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 55,
+          "renderer": "character",
+          "requested": false,
+          "resolvedImage": 2232706069944,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 3
+        }
+      }
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "menu.View"
+      }
+    },
+    "response": {
+      "elapsedMs": 10.6036,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 147.3889,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "panel.capture"
+      }
+    },
+    "response": {
+      "elapsedMs": 10.5692,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 104.1203,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 117.3497,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 3.848,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":{\"cameraPosition\":[3.0,2.9000000953674316,5.0],\"cameraTarget\":[0.0,0.8999999761581421,0.0],\"capacity\":3,\"colorImage\":2232706072904,\"completedSubmission\":351,\"extent\":[400,200],\"lastUseSubmission\":334,\"outputFormat\":\"rgba8-linear\",\"renderCount\":70,\"renderer\":\"character\",\"requested\":false,\"resolvedImage\":2232706069944,\"retired\":0,\"schemaVersion\":1,\"worldCoordinates\":true},\"completedSubmission\":351,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 20
+    },
+    "response": {
+      "elapsedMs": 296.1743,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 23.1622,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":{\"cameraPosition\":[3.0,2.9000000953674316,5.0],\"cameraTarget\":[0.0,0.8999999761581421,0.0],\"capacity\":3,\"colorImage\":2232706072904,\"completedSubmission\":375,\"extent\":[400,200],\"lastUseSubmission\":334,\"outputFormat\":\"rgba8-linear\",\"renderCount\":70,\"renderer\":\"character\",\"requested\":false,\"resolvedImage\":2232706069944,\"retired\":0,\"schemaVersion\":1,\"worldCoordinates\":true},\"completedSubmission\":375,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 12.4161,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-88",
+      "commandId": "preview.clear",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "elapsedMs": 11.7332,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 3
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 134.6267,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 13.3161,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 4.3255,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-92",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "sample"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "elapsedMs": 1.1967,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 38654705664
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 3
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 120.8404,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 8.0456,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-95",
+      "commandId": "node.create",
+      "parameters": {
+        "id": "preview-invalidation-fixture"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "elapsedMs": 5.7221,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "add",
+            "path": "/components/preview-invalidation-fixture",
+            "value": {
+              "azure.renderable": {
+                "data": {
+                  "primitiveIndex": 0,
+                  "visible": false
+                },
+                "type": "azure.renderable",
+                "version": 1
+              },
+              "azure.transform": {
+                "data": {
+                  "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "type": "azure.transform",
+                "version": 1
+              }
+            }
+          },
+          {
+            "op": "add",
+            "path": "/nodes/-",
+            "value": {
+              "id": "preview-invalidation-fixture",
+              "instanceOf": "",
+              "name": "preview-invalidation-fixture",
+              "parentId": "",
+              "prefabSource": "",
+              "resourceId": "",
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "visible": false
+            }
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:d880e1eabd3b6462",
+          "documentId": "17913055868301044-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 131.1913,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 12.7857,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:d880e1eabd3b6462\",\"documentId\":\"17913055868301044-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-98",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 38654705664
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:d880e1eabd3b6462",
+        "documentId": "17913055868301044-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 11.8266,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 13.8539,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:d880e1eabd3b6462\",\"documentId\":\"17913055868301044-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-100",
+      "commandId": "history.undo",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:d880e1eabd3b6462",
+        "documentId": "17913055868301044-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 26.2222,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "remove",
+            "path": "/components/preview-invalidation-fixture"
+          },
+          {
+            "op": "remove",
+            "path": "/nodes/21"
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 135.4768,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 13.6523,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 1.299,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":437,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "developer.shaderState",
+      "equals": "Error",
+      "timeoutMs": 60000
+    },
+    "response": {
+      "elapsedMs": 952.9903,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Error"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 18.4394,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":500,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"Process failed\\nD:\\\\Assigment\\\\2609\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\evolution\\\\r7\\\\intel-devtools\\\\exploration\\\\shader candidates\\\\1\\\\source\\\\mesh.frag:842: error: '' :  syntax error, unexpected IDENTIFIER\\r\\n1 error generated.\\r\\n\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Error\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "developer.shaderState",
+      "equals": "Idle",
+      "timeoutMs": 60000
+    },
+    "response": {
+      "elapsedMs": 4818.668,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Idle"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 0.7353,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":796,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":2,\"shaderReplacements\":1,\"shaderState\":\"Idle\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 9.6976,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-109",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 4294967296
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 15.0889,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.1531,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-111",
+      "commandId": "developer.shader-rebuild",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 14.1578,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "camera": null,
+          "completedSubmission": 804,
+          "diagnostic": "",
+          "schemaVersion": 1,
+          "shaderAvailable": true,
+          "shaderDiagnostic": "",
+          "shaderGeneration": 2,
+          "shaderReplacements": 1,
+          "shaderState": "Compiling",
+          "thumbnails": [],
+          "views": []
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.5444,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-113",
+      "commandId": "developer.shader-cancel",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 14.9386,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "developer.shaderState",
+      "equals": "Cancelled",
+      "timeoutMs": 60000
+    },
+    "response": {
+      "elapsedMs": 61.1641,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Cancelled"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 23.3321,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":814,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"Shader compilation cancelled\",\"shaderGeneration\":2,\"shaderReplacements\":1,\"shaderState\":\"Cancelled\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 18.1164,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-117",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "sample"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 10.4733,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 42949672960
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 121.0524,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 22.8971,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-120",
+      "commandId": "preview.play",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 12.0542,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 20
+    },
+    "response": {
+      "elapsedMs": 363.0176,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 12.1024,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-123",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 42949672960
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 12.2173,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.7403,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-125",
+      "commandId": "preview.stop",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 17.0548,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 111.4593,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 9.81,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-128",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "sample"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 17.4878,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 47244640256
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 123.5885,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 15
+    },
+    "response": {
+      "elapsedMs": 351.8456,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.9468,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-132",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 47244640256
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 23.5689,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 15
+    },
+    "response": {
+      "elapsedMs": 413.8035,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "screenshot",
+    "fields": {
+      "label": "r7-editor-exploration"
+    },
+    "response": {
+      "elapsedMs": 21.6309,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "label": "r7-editor-exploration",
+        "scheduled": true
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "engine.screenshots",
+      "equals": 1,
+      "timeoutMs": 10000
+    },
+    "response": {
+      "elapsedMs": 212.0856,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 4.5111,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:a50313b6f2e95aa7\",\"documentId\":\"17913055868301044-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-137",
+      "commandId": "developer.shader-rebuild",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:a50313b6f2e95aa7",
+        "documentId": "17913055868301044-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 27.2105,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "camera": null,
+          "completedSubmission": 932,
+          "diagnostic": "",
+          "schemaVersion": 1,
+          "shaderAvailable": true,
+          "shaderDiagnostic": "",
+          "shaderGeneration": 2,
+          "shaderReplacements": 1,
+          "shaderState": "Compiling",
+          "thumbnails": [],
+          "views": []
+        },
+        "version": {
+          "contentHash": "fnv1a64:a50313b6f2e95aa7",
+          "documentId": "17913055868301044-1",
+          "revision": 5
+        }
+      }
+    }
+  }
+]

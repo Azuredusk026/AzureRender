@@ -1,0 +1,16 @@
+{
+  "debug": {
+    "passed": true,
+    "productsUnchanged": true,
+    "changedInputs": [
+      "CMakeLists.txt"
+    ]
+  },
+  "release": {
+    "passed": true,
+    "productsUnchanged": true,
+    "changedInputs": [
+      "CMakeLists.txt"
+    ]
+  }
+}

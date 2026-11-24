@@ -1,0 +1,324 @@
+{
+  "profile": {
+    "passTimings": [
+      {
+        "averageMs": 0.08084773333333337,
+        "maxMs": 2.947936,
+        "minMs": 0.070016,
+        "name": "character-transparent-prepare",
+        "samples": 1200
+      },
+      {
+        "averageMs": 0.22534463999999996,
+        "maxMs": 15.98368,
+        "minMs": 0.133984,
+        "name": "character-skinning",
+        "samples": 1200
+      },
+      {
+        "averageMs": 0.006683013333333319,
+        "maxMs": 0.23926399999999998,
+        "minMs": 0.0038079999999999998,
+        "name": "character-gpu-culling",
+        "samples": 1200
+      },
+      {
+        "averageMs": 1.6126002666666666,
+        "maxMs": 36.79232,
+        "minMs": 1.401856,
+        "name": "character-shadow",
+        "samples": 1200
+      },
+      {
+        "averageMs": 0.07535189333333413,
+        "maxMs": 0.9748479999999999,
+        "minMs": 0.068608,
+        "name": "object-shadow-atlas",
+        "samples": 1200
+      },
+      {
+        "averageMs": 0.04319061333333333,
+        "maxMs": 0.48947199999999996,
+        "minMs": 0.039936,
+        "name": "character-outline-mask",
+        "samples": 1200
+      },
+      {
+        "averageMs": 0.28332885333332974,
+        "maxMs": 7.358464,
+        "minMs": 0.269312,
+        "name": "character-main-depth",
+        "samples": 1200
+      },
+      {
+        "averageMs": 0.12449461333333296,
+        "maxMs": 1.517568,
+        "minMs": 0.11673599999999999,
+        "name": "shadow-tile-bounds",
+        "samples": 1200
+      },
+      {
+        "averageMs": 0.08347701333333339,
+        "maxMs": 0.929792,
+        "minMs": 0.07782399999999999,
+        "name": "character-depth-hierarchy",
+        "samples": 1200
+      },
+      {
+        "averageMs": 4.88220495999999,
+        "maxMs": 48.222207999999995,
+        "minMs": 4.5568,
+        "name": "character-opaque-depth",
+        "samples": 1200
+      },
+      {
+        "averageMs": 0.012713173333333315,
+        "maxMs": 0.048704,
+        "minMs": 0.007359999999999999,
+        "name": "character-occlusion",
+        "samples": 1200
+      },
+      {
+        "averageMs": 0.5488546133333326,
+        "maxMs": 9.958848,
+        "minMs": 0.526528,
+        "name": "character-reflection-motion",
+        "samples": 1200
+      },
+      {
+        "averageMs": 0.0005913600000000089,
+        "maxMs": 0.002048,
+        "minMs": 0.0,
+        "name": "character-main-depth-resume",
+        "samples": 1200
+      },
+      {
+        "averageMs": 1.7413717599999987,
+        "maxMs": 18.672352,
+        "minMs": 1.649216,
+        "name": "character-compute-reflection",
+        "samples": 1200
+      },
+      {
+        "averageMs": 6.735623466666669,
+        "maxMs": 61.683712,
+        "minMs": 5.569535999999999,
+        "name": "character-main",
+        "samples": 1200
+      },
+      {
+        "averageMs": 0.1636360533333334,
+        "maxMs": 1.635328,
+        "minMs": 0.14540799999999998,
+        "name": "post-process-grade",
+        "samples": 1200
+      },
+      {
+        "averageMs": 0.12159061333333353,
+        "maxMs": 0.8099839999999999,
+        "minMs": 0.113664,
+        "name": "post-process-hud",
+        "samples": 1200
+      },
+      {
+        "averageMs": 2.56e-06,
+        "maxMs": 0.001024,
+        "minMs": 0.0,
+        "name": "editor-ui",
+        "samples": 1200
+      },
+      {
+        "averageMs": 5.973333333333333e-06,
+        "maxMs": 0.001024,
+        "minMs": 0.0,
+        "name": "capture",
+        "samples": 1200
+      }
+    ],
+    "totalAverageMs": 16.742363,
+    "totalP95Ms": 18.080683,
+    "softwareThermalSamples": 7,
+    "scope": "1200-frame pass localization; graph timestamp instrumentation enabled"
+  },
+  "dominantPassShare": 0.6939180823320256,
+  "rankedPasses": [
+    {
+      "averageMs": 6.735623466666669,
+      "maxMs": 61.683712,
+      "minMs": 5.569535999999999,
+      "name": "character-main",
+      "samples": 1200
+    },
+    {
+      "averageMs": 4.88220495999999,
+      "maxMs": 48.222207999999995,
+      "minMs": 4.5568,
+      "name": "character-opaque-depth",
+      "samples": 1200
+    },
+    {
+      "averageMs": 1.7413717599999987,
+      "maxMs": 18.672352,
+      "minMs": 1.649216,
+      "name": "character-compute-reflection",
+      "samples": 1200
+    },
+    {
+      "averageMs": 1.6126002666666666,
+      "maxMs": 36.79232,
+      "minMs": 1.401856,
+      "name": "character-shadow",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.5488546133333326,
+      "maxMs": 9.958848,
+      "minMs": 0.526528,
+      "name": "character-reflection-motion",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.28332885333332974,
+      "maxMs": 7.358464,
+      "minMs": 0.269312,
+      "name": "character-main-depth",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.22534463999999996,
+      "maxMs": 15.98368,
+      "minMs": 0.133984,
+      "name": "character-skinning",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.1636360533333334,
+      "maxMs": 1.635328,
+      "minMs": 0.14540799999999998,
+      "name": "post-process-grade",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.12449461333333296,
+      "maxMs": 1.517568,
+      "minMs": 0.11673599999999999,
+      "name": "shadow-tile-bounds",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.12159061333333353,
+      "maxMs": 0.8099839999999999,
+      "minMs": 0.113664,
+      "name": "post-process-hud",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.08347701333333339,
+      "maxMs": 0.929792,
+      "minMs": 0.07782399999999999,
+      "name": "character-depth-hierarchy",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.08084773333333337,
+      "maxMs": 2.947936,
+      "minMs": 0.070016,
+      "name": "character-transparent-prepare",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.07535189333333413,
+      "maxMs": 0.9748479999999999,
+      "minMs": 0.068608,
+      "name": "object-shadow-atlas",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.04319061333333333,
+      "maxMs": 0.48947199999999996,
+      "minMs": 0.039936,
+      "name": "character-outline-mask",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.012713173333333315,
+      "maxMs": 0.048704,
+      "minMs": 0.007359999999999999,
+      "name": "character-occlusion",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.006683013333333319,
+      "maxMs": 0.23926399999999998,
+      "minMs": 0.0038079999999999998,
+      "name": "character-gpu-culling",
+      "samples": 1200
+    },
+    {
+      "averageMs": 0.0005913600000000089,
+      "maxMs": 0.002048,
+      "minMs": 0.0,
+      "name": "character-main-depth-resume",
+      "samples": 1200
+    },
+    {
+      "averageMs": 5.973333333333333e-06,
+      "maxMs": 0.001024,
+      "minMs": 0.0,
+      "name": "capture",
+      "samples": 1200
+    },
+    {
+      "averageMs": 2.56e-06,
+      "maxMs": 0.001024,
+      "minMs": 0.0,
+      "name": "editor-ui",
+      "samples": 1200
+    }
+  ],
+  "rangeFixture": {
+    "nvidia": {
+      "source": {
+        "bounds.bin": "c0d9ce7725710d0ca9b3e1b42ab3f0e53205dcc791768719d5973918f41d29d2",
+        "queries.bin": "a4481f88757b231cb8ae7b109b6658e9398de862e48c83bee7ed12fd42ee7dd2",
+        "range.comp": "16d7afc3c3ecdef6a7764913a762176159a9828aca531658b7cfe410284d9cb5",
+        "range.spv": "be6da9f782f2747f1f7c6717b9ab09930b95ec963957362438304e3819d642d4",
+        "range.exe": "9b0e68cf4375b6dc34119cc0339761e3127ab8c6a63b337bc3c08f7d2af51749"
+      },
+      "capturedQueries": 921445,
+      "boundaryQueries": 2304,
+      "allResultsBitExact": true,
+      "referenceBeforeMedianMs": 0.077824,
+      "candidateWithBuildMedianMs": 0.12953599999999998,
+      "referenceAfterMedianMs": 0.077824,
+      "buildMedianMs": 0.037888,
+      "baselineDrift": 0.0,
+      "reducedReads": 0.9029937317584432,
+      "relativeNetChange": 0.6644736842105261,
+      "requiredBytes": 12582912
+    },
+    "intel": {
+      "source": {
+        "bounds.bin": "c0d9ce7725710d0ca9b3e1b42ab3f0e53205dcc791768719d5973918f41d29d2",
+        "queries.bin": "a4481f88757b231cb8ae7b109b6658e9398de862e48c83bee7ed12fd42ee7dd2",
+        "range.comp": "16d7afc3c3ecdef6a7764913a762176159a9828aca531658b7cfe410284d9cb5",
+        "range.spv": "be6da9f782f2747f1f7c6717b9ab09930b95ec963957362438304e3819d642d4",
+        "range.exe": "9b0e68cf4375b6dc34119cc0339761e3127ab8c6a63b337bc3c08f7d2af51749"
+      },
+      "capturedQueries": 921445,
+      "boundaryQueries": 2304,
+      "allResultsBitExact": true,
+      "referenceBeforeMedianMs": 0.6841926916294099,
+      "candidateWithBuildMedianMs": 0.5110416541900635,
+      "referenceAfterMedianMs": 0.6861197749156952,
+      "buildMedianMs": 0.21624999472045897,
+      "baselineDrift": 0.0028126187761306387,
+      "reducedReads": 0.9029937317584432,
+      "relativeNetChange": -0.254123907259597,
+      "requiredBytes": 12582912
+    }
+  },
+  "rangePrototypePromoted": false,
+  "archiveMembers": 18,
+  "archiveSha256": "3c7c7192a6815824108395d47a4bc6cf2d3cc5f2974a0a6e6ae07b05c9400f40"
+}

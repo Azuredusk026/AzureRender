@@ -1,0 +1,28 @@
+Project loaded: project (37a2bcf7-e3f2-4abe-bc95-c950780811ae)
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+Scene renderer: character (sceneType=character)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Clustered lighting: 0 lights, 0 cluster references
+Rendered frames: 4
+Capture manifest: D:\Assigment\2609\FYP\Project\AzureRender\build\g0\bridge-final-acceptance\character-player\capture_manifest.json
+Captured frames: 4 at 60 fps
+Allocator after unload: buffers=0 images=0
+[1791039715056][info][gpu][code=0] GPU capability report: D:\Assigment\2609\FYP\Project\AzureRender\build\g0\bridge-final-acceptance\character-player\gpu_capabilities.json
+[1791039715366][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791039715367][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791039715473][info][capture][code=0] Capture progress: 1 / 4
+[1791039715788][info][capture][code=0] Capture progress: 4 / 4

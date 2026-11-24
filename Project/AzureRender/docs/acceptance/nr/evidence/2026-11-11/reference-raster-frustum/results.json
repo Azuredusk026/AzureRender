@@ -1,0 +1,194 @@
+{
+  "status": "qualified-reference-raster-frustum",
+  "overall": "failed-user-review",
+  "baseCommit": "e931a86",
+  "sourceSha256": {
+    "CMakeLists.txt": "ec3b5c32d9df179718210420b9fe2c02752b5c6009ab1221d8300190794fee8c",
+    "src/render/ReferenceCameraView.hpp": "be95b8d18fc78fd37cd011da676578d9bb8e91fda540a00b7bb1ba9162fd0189",
+    "src/render/ReferenceRasterFrustum.hpp": "7d2f19fe48e69e011d252105582ccdb36f74c2c233004ab7ec581d2b9d7a35ef",
+    "tests/ReferenceRasterFrustumGpuTests.cpp": "b6d8e06a3d6ab497bc7566981c337afecec467c5d6dcb1e7ec5e5ac8a32a1aa6"
+  },
+  "gpu": [
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceRasterFrustumGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-world-positions.bin"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "stdout": "NVIDIA GeForce RTX 4060 Laptop GPU: 32045 exact mixed-frustum draw records; visiblePointsKept=16481 outsideRejected=15564; source/device zero-W and domain contracts passed"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceRasterFrustumGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-world-positions.bin"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "stdout": "Intel(R) RaptorLake-S Mobile Graphics Controller: 32045 exact mixed-frustum draw records; visiblePointsKept=16481 outsideRejected=15564; source/device zero-W and domain contracts passed"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceRasterFrustumGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-world-positions.bin"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "stdout": "NVIDIA GeForce RTX 4060 Laptop GPU: 32045 exact mixed-frustum draw records; visiblePointsKept=16481 outsideRejected=15564; source/device zero-W and domain contracts passed"
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceRasterFrustumGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\cull_indirect.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-world-positions.bin"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "stdout": "Intel(R) RaptorLake-S Mobile Graphics Controller: 32045 exact mixed-frustum draw records; visiblePointsKept=16481 outsideRejected=15564; source/device zero-W and domain contracts passed"
+    }
+  ],
+  "drawRecordsPerEndpoint": 32045,
+  "exactDrawRecords": 128180,
+  "identities": [
+    {
+      "configuration": "release",
+      "programCount": 859,
+      "oldProgramsExact": 859,
+      "changedPrograms": [],
+      "playerSha256": "2bc6a4af7ef120260d7785d54524d37bb4aa92890b09d4609b840409fbd1d3b8",
+      "build": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 141.71899999998277,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-042231-reference-raster-frustum-3ea06a\\build.py",
+          "Release"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+      }
+    },
+    {
+      "configuration": "debug",
+      "programCount": 859,
+      "oldProgramsExact": 859,
+      "changedPrograms": [],
+      "playerSha256": "3d1daa7f8bc3b13dfbc53e0311007bb944fe889e7dc8fe6fc0b221cb4d6b7aa4",
+      "build": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 39.07800000003772,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-042231-reference-raster-frustum-3ea06a\\build.py",
+          "Debug"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+      }
+    }
+  ],
+  "shaderProgramsAdded": 0,
+  "defaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true
+  },
+  "fourExecution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 118.85899999999674,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-042231-reference-raster-frustum-3ea06a\\default-four.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-042231-reference-raster-frustum-3ea06a\\tmp"
+  },
+  "debugBudgetFailure": {
+    "status": "budget-stopped",
+    "exitCode": 1,
+    "reason": "Task byte/file-count budget exceeded",
+    "seconds": 18.67200000002049,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-042231-reference-raster-frustum-3ea06a\\build.py",
+      "Debug"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+  },
+  "reclaimedIntermediates": {
+    "status": "reclaimed-owned-rebuildable-debug-intermediates",
+    "items": 20,
+    "batches": 2,
+    "logicalBytes": 76924831,
+    "protectedProductsExact": 885,
+    "seconds": 1.422000000020489
+  },
+  "remaining": [
+    "Reference raster/picking consumers",
+    "Production hair 73 color failures",
+    "Intel reference depth/visibility 96 failures",
+    "Skin, eyes, GI, reflection and dynamic appearance gates"
+  ],
+  "archive": {
+    "bytes": 317673,
+    "sha256": "f2a71f7202e5d5621f47b5649cf6148f7db7afb58589cf618d99c237c52fc5ec",
+    "members": 66
+  }
+}

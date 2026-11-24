@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "status": "ambient-weight-and-main-line-validation-passed",
+  "source": {
+    "frame": 10401,
+    "event": 950,
+    "ambientWeight": 0.28772246837615967,
+    "ambientRows": [
+      27,
+      29,
+      122
+    ],
+    "lineInstructions": [
+      1271,
+      1276
+    ],
+    "ambientWeightFormula": "(cb1[29].x + cb1[122].w * (1 - 2 * cb1[29].x)) * cb1[27].x"
+  },
+  "layout": {
+    "cameraBytes": 640,
+    "ambientWeightOffsetBytes": 632,
+    "materialBytes": 192,
+    "lineDiffuseTargetOffsetBytes": 140,
+    "newTextureSlots": 0
+  },
+  "tests": {
+    "release": 7,
+    "debug": 7,
+    "nativeProfiles": 12,
+    "nativeLighting": 5,
+    "hairMath": 10
+  },
+  "gpuBatches": [
+    {
+      "name": "line-debug",
+      "cases": 23,
+      "maximumLinearError": 0.0033510379596688455
+    },
+    {
+      "name": "line-release",
+      "cases": 10,
+      "maximumLinearError": 0.0033510379596688455
+    },
+    {
+      "name": "ambient-release",
+      "cases": 19,
+      "maximumLinearError": 0.0012367431527445516
+    },
+    {
+      "name": "ambient-debug",
+      "cases": 9,
+      "maximumLinearError": 0.001010887882328615
+    }
+  ],
+  "actualCaptures": [
+    {
+      "name": "control-beauty-release",
+      "imageSha256": "00a4282f674982d8881bd591902edda79fe55eac62e6b8d6d5f8cb0ad384289f",
+      "playerSha256": "63439a251516c7d27fcadcfbe8cd9167cac5a7eb6636138e8bfd64dce18e6228",
+      "validationEnabled": false
+    },
+    {
+      "name": "line-beauty-release",
+      "imageSha256": "3997d9770648c4941ea8c5c0758e5bb56aad8770b844c02b11d0246226f4c0e7",
+      "playerSha256": "63439a251516c7d27fcadcfbe8cd9167cac5a7eb6636138e8bfd64dce18e6228",
+      "validationEnabled": false
+    },
+    {
+      "name": "ambient-beauty-release",
+      "imageSha256": "0e528e6bbd33752afe786970fc35496c83dc4ea1284e3c5614408f196dfa4747",
+      "playerSha256": "63439a251516c7d27fcadcfbe8cd9167cac5a7eb6636138e8bfd64dce18e6228",
+      "validationEnabled": false
+    },
+    {
+      "name": "combined-beauty-release",
+      "imageSha256": "542b743e6060ceca2cdb73ae4e1a5bbc9f60858dd855365d69ebd92ee122d434",
+      "playerSha256": "63439a251516c7d27fcadcfbe8cd9167cac5a7eb6636138e8bfd64dce18e6228",
+      "validationEnabled": false
+    },
+    {
+      "name": "combined-kk-release",
+      "imageSha256": "e0a12a282e6cae77b3f36c929565ec1960d4d7b0fdb100c3456f2824726a536c",
+      "playerSha256": "63439a251516c7d27fcadcfbe8cd9167cac5a7eb6636138e8bfd64dce18e6228",
+      "validationEnabled": false
+    },
+    {
+      "name": "documents-beauty-debug",
+      "imageSha256": "542b743e6060ceca2cdb73ae4e1a5bbc9f60858dd855365d69ebd92ee122d434",
+      "playerSha256": "d70c23430253cd2cbdf6bf93cca7fc5bc6e336ae50bf9adfd1bb3ae8d52982e2",
+      "validationEnabled": true
+    }
+  ],
+  "comparisons": [
+    {
+      "name": "compatible-default",
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "imageSha256": "00a4282f674982d8881bd591902edda79fe55eac62e6b8d6d5f8cb0ad384289f"
+    },
+    {
+      "name": "full-document-fixed-indexed",
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "imageSha256": "542b743e6060ceca2cdb73ae4e1a5bbc9f60858dd855365d69ebd92ee122d434"
+    },
+    {
+      "name": "kk-independent",
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "imageSha256": "e0a12a282e6cae77b3f36c929565ec1960d4d7b0fdb100c3456f2824726a536c"
+    },
+    {
+      "name": "line-positive-control",
+      "changedPixels": 8175
+    },
+    {
+      "name": "ambient-positive-control",
+      "changedPixels": 123971
+    },
+    {
+      "name": "combined-positive-control",
+      "changedPixels": 132146
+    }
+  ],
+  "patchMetrics": {
+    "control": {
+      "face": {
+        "referenceMedianRgb": [
+          0.8941176470588236,
+          0.7803921568627451,
+          0.7156862745098039
+        ],
+        "candidateMedianRgb": [
+          0.9254901960784314,
+          0.8705882352941177,
+          0.8392156862745098
+        ],
+        "meanAbsoluteRgbError": 0.11208238334093326
+      },
+      "hair": {
+        "referenceMedianRgb": [
+          0.7372549019607844,
+          0.3333333333333333,
+          0.34901960784313724
+        ],
+        "candidateMedianRgb": [
+          0.6588235294117647,
+          0.19607843137254902,
+          0.24705882352941178
+        ],
+        "meanAbsoluteRgbError": 0.17024274944419374
+      }
+    },
+    "line": {
+      "face": {
+        "referenceMedianRgb": [
+          0.8941176470588236,
+          0.7803921568627451,
+          0.7156862745098039
+        ],
+        "candidateMedianRgb": [
+          0.9254901960784314,
+          0.8705882352941177,
+          0.8392156862745098
+        ],
+        "meanAbsoluteRgbError": 0.11241184070527435
+      },
+      "hair": {
+        "referenceMedianRgb": [
+          0.7372549019607844,
+          0.3333333333333333,
+          0.34901960784313724
+        ],
+        "candidateMedianRgb": [
+          0.6549019607843137,
+          0.19215686274509805,
+          0.24705882352941178
+        ],
+        "meanAbsoluteRgbError": 0.17125112414957455
+      }
+    },
+    "ambient": {
+      "face": {
+        "referenceMedianRgb": [
+          0.8941176470588236,
+          0.7803921568627451,
+          0.7156862745098039
+        ],
+        "candidateMedianRgb": [
+          0.8745098039215686,
+          0.807843137254902,
+          0.7725490196078432
+        ],
+        "meanAbsoluteRgbError": 0.09680612555099559
+      },
+      "hair": {
+        "referenceMedianRgb": [
+          0.7372549019607844,
+          0.3333333333333333,
+          0.34901960784313724
+        ],
+        "candidateMedianRgb": [
+          0.6549019607843137,
+          0.19215686274509805,
+          0.24313725490196078
+        ],
+        "meanAbsoluteRgbError": 0.16895909599986628
+      }
+    },
+    "combined": {
+      "face": {
+        "referenceMedianRgb": [
+          0.8941176470588236,
+          0.7803921568627451,
+          0.7156862745098039
+        ],
+        "candidateMedianRgb": [
+          0.8745098039215686,
+          0.807843137254902,
+          0.7725490196078432
+        ],
+        "meanAbsoluteRgbError": 0.09713558291533668
+      },
+      "hair": {
+        "referenceMedianRgb": [
+          0.7372549019607844,
+          0.3333333333333333,
+          0.34901960784313724
+        ],
+        "candidateMedianRgb": [
+          0.6509803921568628,
+          0.18823529411764706,
+          0.24313725490196078
+        ],
+        "meanAbsoluteRgbError": 0.16996747070524715
+      }
+    }
+  },
+  "patchLimitations": [
+    "Rectangles were fixed before this batch",
+    "Display RGB errors are diagnostic, not native equivalence acceptance",
+    "Hair rectangle includes background and is not a hair-only mask"
+  ],
+  "failedEvidence": {
+    "missingLineInput": "3ea7af31fabceb217a45c7b83c91211a5629ee368b1815848ef668d538624f85",
+    "missingAmbientSetting": "1f63f3fe8c562f8bdf2839ddf000b63c7adbe8a6c8310babfd3f871c9d69558f",
+    "directLineGpuRed": {
+      "maximumLinearError": 0.04228225866656754,
+      "budget": 0.008,
+      "logSha256": "60735a59b08d1c4aa28e70314dc5e09b2405aba1dc5adf2e099e5010b50bb974"
+    }
+  },
+  "sourceFingerprints": {
+    "shaders/mesh.frag": "879bbe8215bb3ebc4d71ab3a03443640481e9194225e84bd6df1f3c2c426a258",
+    "src/assets/GltfLoader.cpp": "68199bfab00776f347cbb9e9613f29594fc7a4a23dcb9f770e14d975935ccb0f",
+    "src/assets/GltfLoader.hpp": "3ac528466d615efa295ba4ffef3febb4f1bc6f10db3482024c9654ebe905384e",
+    "src/assets/MaterialSurfaceProfile.hpp": "d45f2dfaab1a0a56205c1fa07c1fe4ee7e1a27f7a8ad2fc2da036d7f0bdcd4d6",
+    "src/render/NprLighting.hpp": "a24f681907a77c0dd14535278123270888265ef8eafe7cb9b7d84a714c644c42",
+    "src/runtime/LevelRenderSettings.hpp": "aaf25ea941bdd73341ec6c15401161691528960954c48a04247181114dfda367",
+    "src/scenes/CharacterSceneRenderer.cpp": "74f0b10bffb60914e993867ed2fa37d4132a93c0f24a196a1ccd605cd341cd3a",
+    "tools/endfield_native/character_profiles.py": "1e813b6270f9b883f86c500c40cb871e0171d3048e88d9071a8c110bfc651bad",
+    "tools/endfield_native/npr_lighting.py": "e9d2a78f48cf182e9e44db06e18e5938184dd974cd1845c39e8efa76691f4611"
+  },
+  "run": "build/runs/20261023-053014-native-line-diffuse-target-b1a938",
+  "mainProjectRegression": {
+    "schemaVersion": 1,
+    "status": "main-project-startup-and-clean-unload-passed",
+    "imageSha256": "b4112fc3f1d22c582f5a6e2ab07b87282ef717f51ca3a0706b46d3c3ca542763",
+    "previousImageSha256": "b4112fc3f1d22c582f5a6e2ab07b87282ef717f51ca3a0706b46d3c3ca542763",
+    "maximumByteDifference": 0,
+    "changedPixels": 0
+  },
+  "remaining": [
+    "Source mip bias -1 for base, parameter and packed normal inputs",
+    "Material-specific hair ambient/main colors and albedo shadow transform",
+    "Full illumination for both projected hair specular lobes",
+    "Native complete color, skin SDF and ramp closure",
+    "Clothing and distance outline",
+    "Head motion, side/back views, main project promotion"
+  ]
+}

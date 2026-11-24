@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "status": "implemented-compatible-unchanged-refresh-retirement-verified-full-budgets-failed",
+  "sourceBase": "48b04c7",
+  "productionAdoption": true,
+  "buildAndCpu": {
+    "release": {
+      "cpuChecks": 28,
+      "buildSeconds": 137.28099999995902,
+      "checksSeconds": 24.125,
+      "productCount": 630,
+      "productionShaders535ByteIdentical": true
+    },
+    "debug": {
+      "cpuChecks": 28,
+      "buildSeconds": 128.03100000001723,
+      "checksSeconds": 61.39100000000326,
+      "productCount": 630,
+      "productionShaders535ByteIdentical": true
+    }
+  },
+  "redCycles": [
+    {
+      "cycle": 0,
+      "mainPollLargeFreeBytes": 2560434,
+      "retainedLargeBytes": 2097390
+    },
+    {
+      "cycle": 1,
+      "mainPollLargeFreeBytes": 5120868,
+      "retainedLargeBytes": 2097390
+    },
+    {
+      "cycle": 2,
+      "mainPollLargeFreeBytes": 7681302,
+      "retainedLargeBytes": 2097390
+    }
+  ],
+  "greenCycles": {
+    "release": [
+      {
+        "cycle": 0,
+        "mainPollLargeFreeBytes": 0,
+        "retainedLargeBytes": 4657824
+      },
+      {
+        "cycle": 1,
+        "mainPollLargeFreeBytes": 0,
+        "retainedLargeBytes": 4657824
+      },
+      {
+        "cycle": 2,
+        "mainPollLargeFreeBytes": 0,
+        "retainedLargeBytes": 4657824
+      }
+    ],
+    "debug": [
+      {
+        "cycle": 0,
+        "mainPollLargeFreeBytes": 0,
+        "retainedLargeBytes": 4657856
+      },
+      {
+        "cycle": 1,
+        "mainPollLargeFreeBytes": 0,
+        "retainedLargeBytes": 4657856
+      },
+      {
+        "cycle": 2,
+        "mainPollLargeFreeBytes": 0,
+        "retainedLargeBytes": 4657856
+      }
+    ]
+  },
+  "shutdownObservedLargeAllocationsReleased": true,
+  "testScope": "Large>=512KiB allocations inside actual main-thread poll; 1MiB serialized level field, three unchanged refreshes; not every allocation or an original frame-time gate",
+  "testSourceHashes": {
+    "tests/LevelRefreshRetirementTests.cpp": "f152ab18234452b2a3acb2a530993231b385b170175694c6cf7f1305efb0785a"
+  },
+  "gpuMechanismEvidenceReused": {
+    "receipt": "docs/acceptance/nr/evidence/2026-11-06/loaded-resource-identities/results.json",
+    "checks": 12,
+    "executableBytesUnchanged": {
+      "release/AzureSkinningGpuTests": "d2a3373000be3c36449ca1db8e8e943e58f584079feb227ef0c34188f93bf73d",
+      "release/AzureMotionVectorGpuTests": "ae9cd39b0cb6f229122133546de8a382f55dfdb077e77c6fcf099490bb005c06",
+      "release/AzureSharedMotionGpuTests": "fb9094ce3de3f2d396ef2d0a5a57e99caff82a763574e213cf92a07223fb841d",
+      "debug/AzureSkinningGpuTests": "a72487aaa8d7df621ed3e57c33c2dbaa558aa7506ebdab646cf24e9bba04b0f7",
+      "debug/AzureMotionVectorGpuTests": "9c61443967163be4a9c91a94522a7cf86d082b07ada09a6b60414f5eaede9a3b",
+      "debug/AzureSharedMotionGpuTests": "f7d82c92852f75ff6b0c1067e587c146a9d2a467ee1949c855c38ae181f2fb3c"
+    },
+    "renderRhiSceneAndShaderSourceSubsetUnchanged": true,
+    "scope": "Same six GPU executables and requested shader bytes; no new device-mechanism run claimed"
+  },
+  "nativeImage": {
+    "status": "passed",
+    "sourceBase": "48b04c7",
+    "executableSha256": "84c28982d52a99f42cdd17165702de5ffbfafcb4d8c65bf97676401e502ca3ec",
+    "exitCode": 0,
+    "seconds": 114.56200000003446,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Unchanged level-refresh data retirement candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "nativeTiming": {
+    "status": "measured",
+    "sourceBase": "48b04c7",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 128.03200000000652,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.5983626666666666,
+        "p95": 2.7197359999999997,
+        "p99": 2.83159744
+      },
+      "sceneMs": {
+        "mean": 30.264337066666666,
+        "p95": 32.1344512,
+        "p99": 34.22092288
+      },
+      "postProcessMs": {
+        "mean": 0.3033941333333333,
+        "p95": 0.31953919999999997,
+        "p99": 0.32256
+      },
+      "frameMs": {
+        "mean": 33.166093866666664,
+        "p95": 35.1346384,
+        "p99": 37.1682544
+      }
+    },
+    "cpu": {
+      "mean": 17.762373333333322,
+      "p95": 19.798159999999218,
+      "p99": 22.141812999999704
+    },
+    "wait": {
+      "mean": 15.327275833333344,
+      "p95": 17.793684999999776,
+      "p99": 19.970560000000262
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7401746432,
+    "environmentFailures": [
+      "run observation 22: driver relative thermal headroom is insufficient",
+      "run observation 22: software thermal slowdown is active",
+      "run observation 23: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "originalLimitsNumericallyMet": false,
+    "powerProfileStable": true,
+    "environmentPassed": false,
+    "diagnosticOnly": true,
+    "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+    "productionShaderFilesUnchanged": true,
+    "timingBenefitQualified": false,
+    "timingScope": "Current candidate only; no paired timing benefit or original1800sample acceptance claim"
+  },
+  "timingBenefitQualified": false,
+  "fullVisualAcceptance": "failed-user-review",
+  "fullPerformance": "failed",
+  "canonicalPngArchive": "docs/acceptance/nr/evidence/2026-11-05/runtime-node-identity/measurements.zip",
+  "archiveMembers": {
+    "archive_level_refresh_retirement.py": "e097b378a4445763babd7b157ef13a1480f46680b87b51614fc2e4045e4bcb44",
+    "capture_level_refresh_retirement.py": "f9e624176e8b9e41054899f1352cae4c5fa6facf99c00f7381f234fc070abc23",
+    "level-refresh-retirement/build-driver.log": "3bcff76a9351425d2aa52249ba681f4a08b2fffc807d8ca6ca924b1932bb276c",
+    "level-refresh-retirement/engine-debug-build.json": "c58a42b7a3b33e25db52108492d308f34d1941e341d5d213836acdaf58fc2620",
+    "level-refresh-retirement/engine-debug-build.log": "16bfb02543e9103a11f310a5de1db7422330e8423ccf96f46ef6d15c00702989",
+    "level-refresh-retirement/engine-debug-checks-full.log": "94cb0cba129358d148095b1edd82808d1941ce5d0443a423bb928926fb424275",
+    "level-refresh-retirement/engine-debug-checks.json": "f5d2a435a66285a06ce9e9626827076b32929b20c76b56c028bea423eb3b32f0",
+    "level-refresh-retirement/engine-debug-checks.log": "0a45d123edbb76f9bfd85a2cef9cc529210c63c0c4e105ec9302ce0b847629b6",
+    "level-refresh-retirement/engine-debug-checks.xml": "d79f4dd62f568081a287ce2c98259a07a273fd3fb7a545c023a16219449b5eb2",
+    "level-refresh-retirement/engine-debug-provenance.json": "931c583d087235b779c85a65fdfe4573f573f5abc69d4071b8ed0b9862ecee94",
+    "level-refresh-retirement/engine-release-build.json": "5e67028c5a05466ba284fd7dc2b01ec09d5fce44f2359b5bd74303a5799d6b7e",
+    "level-refresh-retirement/engine-release-build.log": "9857860e0cdb8b9884274690a7f5c5840b55bbe5f2e39acf8d290191dd654e22",
+    "level-refresh-retirement/engine-release-checks-full.log": "6c14b8e78fb19a79f24c3e3521620e24fbd4120a51a40634a7b0f55d2a9e8511",
+    "level-refresh-retirement/engine-release-checks.json": "d0febb5d850120be0d7175fe4d8b767eb78cf3d7b25d0f01cce93603602a9a80",
+    "level-refresh-retirement/engine-release-checks.log": "88bfbf092280ecd5f8aca2e1f960fdcc3d47eef782898af4317fac6e32c0637c",
+    "level-refresh-retirement/engine-release-checks.xml": "90dc9edcf5e844b9b09b432c125277c10b98e9a3e5276ac05b849e200eb9b178",
+    "level-refresh-retirement/engine-release-provenance.json": "6ec8ab02ea74f04f8f245173601fc780fa8a10cdad28945b40bd9c60c91b14e2",
+    "level-refresh-retirement/green-build.log": "e393dce85c305fb9bb0bfa89367ac61b3e017345f44aa18aeb2216a277dcb6b7",
+    "level-refresh-retirement/image/bind-pose-workload.json": "4e8211c617939f54bac403c4d5f7daddb94feaf002400bd2fd29b7647ed871c3",
+    "level-refresh-retirement/image/command.json": "56eb5eb4be57d8488c650a8713a54d5130b650ae0241c3635a7acc7f14a9139c",
+    "level-refresh-retirement/image/frames/capture_manifest.json": "abc414f5ec3d649f1f7210504986de9c8364ed1ad7075d8703e4052bde1e6865",
+    "level-refresh-retirement/image/frames/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "level-refresh-retirement/image/frozen-inputs.json": "3e42aa04d2e0be5159714959dda85e1cde4f9b933f67d22358de5a33e555026d",
+    "level-refresh-retirement/image/identity-workload.json": "99835e64bab80baa2120034780f5bbd0e926efc0e5083f09b938e8cf348d2713",
+    "level-refresh-retirement/image/results.json": "577546817bd32d93948c275c3b5fd9358b3e9d2eee9fab6e1f0a59bba8988095",
+    "level-refresh-retirement/image/runtime.json": "85a5ab2a7eac9bd61a843554cfc326c23092f5d85c516c3634a4409385b4302d",
+    "level-refresh-retirement/image/stderr.log": "fd2a02f01321470143f9752610135548b35dba663112a093ec3185a66f2d84f8",
+    "level-refresh-retirement/image/stdout.log": "722ee5366d441c4b97e9e027294ebc8b78f84303f2b85b992344b36068a1a9e7",
+    "level-refresh-retirement/image/workload.json": "914510df2c090eb8efc35d59fa5bddb29a5956b573040a1d3e0a90b9b2cbe634",
+    "level-refresh-retirement/image-driver.log": "5155715586db6a0aed89430acd2e7f6e5fd43d9c7db44324fce68c01e5dbd3ca",
+    "level-refresh-retirement/initial-temp-path-setup-failure.log": "f72c19687019936a248b94f920f9e8f919fe9f0549d878923c998d7ad1d26071",
+    "level-refresh-retirement/main-release-green.log": "a951f4fe70fc8bed39aa39dd47ae11558511cd56ffdc7f9e1ecbd022e1406d14",
+    "level-refresh-retirement/main-release-red-exit.txt": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+    "level-refresh-retirement/main-release-red.log": "9e3501c7232625b1a9af08e8c1f857cffb05d93ca3743316690033b52b838782",
+    "level-refresh-retirement/performance/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "level-refresh-retirement/performance/environment.json": "c02b194f3936e72569202c5e05d623400d6e29fb09a2de7aad03c60225dbeead",
+    "level-refresh-retirement/performance/frozen-inputs.json": "f5179f1d68eeb43e4089239f36056872527cd8813b566725a77f2c75908ea031",
+    "level-refresh-retirement/performance/memory.json": "4864c11cd2bd5983488cada1654aac6282324207d32964cfd40b038e4c300c7a",
+    "level-refresh-retirement/performance/results.json": "c016dd723165b17d57600e4f2de74d56ffd7681581d3e3599243c7aff6150ea1",
+    "level-refresh-retirement/performance/runtime.json": "950ba0f0ab282d3c12abd868fbc292f5811dfc54e740a0a955ab6fd5fd5624ca",
+    "level-refresh-retirement/performance/stderr.log": "bcea9a2ef0ac9f5365d4c0e2259288182a47e7572c4a85372127dbde3198a619",
+    "level-refresh-retirement/performance/stdout.log": "1a76fa26157ae72162185dd33499f383407f244e60439a949185dc255ce88a1e",
+    "level-refresh-retirement/performance/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "level-refresh-retirement/performance/task.json": "ef0e22a538aa610ba789a93b222b9746f2e18c4e99280af4e622c520e789d012",
+    "level-refresh-retirement/performance/timing.csv": "756b05ae18eede42d4f1fbe1fd3796d249fbff5eb26161a3b90cb820f06d49e7",
+    "level-refresh-retirement/performance/timing.json": "30a774956a1072f46532e27d9b7e359295978a6eb135e98f028f77c707528976",
+    "level-refresh-retirement/performance/workload.json": "1a55b90c0790a84b0651d310dcc7f67e04c679ffcffba6ba6b823055348ca733",
+    "level-refresh-retirement/performance-driver.log": "9ae8f91aa165b17dd904326dbf56a01d99f818c3b6eac43e235d110d1056e7bf",
+    "level-refresh-retirement/red-build.log": "81f9c1c715875ea0bfb3db82bd73d9c76dcce10e9efa9828e23d61da33f3d0c0",
+    "level-refresh-retirement/selected.json": "5f690d0ce8d3f496a475c590164793847e85f320e282b9496951e14a0175ba50",
+    "level-refresh-retirement/source/CMakeLists.txt": "95df28795dfdd03e471d2f2d48393b9fd9b3ac5780b485d2e8db906f759f075b",
+    "level-refresh-retirement/source/production.diff": "44bf2f52526c5064a57c7337d939ebbb6184252ef2cac6d0d64607cfa0ef74a7",
+    "level-refresh-retirement/source/src/runtime/LevelSession.cpp": "33737f0914d089c7c755300e28990e340084c83bf2ca0c143eaf509950e52e79",
+    "level-refresh-retirement/source/src/runtime/LevelSession.hpp": "d8f35be477fea484cf7149b78de7b5ff38a01fe7654e93bd96343a9ae013ee35",
+    "level-refresh-retirement/source/tests/LevelRefreshRetirementTests.cpp": "f152ab18234452b2a3acb2a530993231b385b170175694c6cf7f1305efb0785a",
+    "level-refresh-retirement/test-source-hashes.json": "4bddff93365e878e8a73541b22926187773bc749070a3396c12c7656e7ae22e7",
+    "measure_level_refresh_retirement.py": "515dd451cb9406d23a08629900abae948d16afc673c3f1a87b1c3f2269da6a71",
+    "prepare_level_refresh_retirement_checks.py": "a0022d5c90d38b2173c05d07d8e9bdd079a8ef5b21a5bf9e876ea208542b3082",
+    "validate_level_refresh_retirement.py": "9b3e170339330b5dd9f0283cb5cd12636d7d49bd6dac531ec953b38acdfa2914"
+  },
+  "archiveSha256": "9a24860c34cfdaa3254ed83bf9fb967bddd987879bf1ec252097852432745efe"
+}

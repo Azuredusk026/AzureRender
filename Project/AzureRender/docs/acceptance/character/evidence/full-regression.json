@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "configuration": "MSVC Release",
+  "exitCode": 0,
+  "passedTests": 174,
+  "failedTests": 0,
+  "durationSeconds": 603.35,
+  "gpuTests": 48,
+  "strictVisualPaths": [
+    "indexed",
+    "fixed descriptors",
+    "CPU skinning"
+  ],
+  "visualMismatchThreshold": 0,
+  "resultSource": "Primary ctest process exit code and direct console completion output",
+  "consoleSummarySha256": "3f681b1d14e0c80e042f5972d4fde71c7c079c7724a6151126784d52b141d3e8",
+  "rawNestedTestLogSha256": "75e3c9485ce8dd910108281a1c715c8b7eae53b23e1cc2385dd93bf134eb064e",
+  "logNote": "The engine evolution audit invokes nested ctest processes that share LastTest.log. The primary result is recorded separately.",
+  "executableSha256": "e98be481c526f0d66500fcde1fc9e2543a6eb259da7f17d0479cb90342514ac8"
+}

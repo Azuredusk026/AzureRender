@@ -1,0 +1,426 @@
+#include "ui/localization/Localization.hpp"
+#include "CorePanels.hpp"
+#include "editor/PanelContext.hpp"
+#include "ui/Widgets.hpp"
+#include "editor/content/AssetCatalog.hpp"
+#include "runtime/AssetTypeRegistry.hpp"
+#include "ui/UiScopes.hpp"
+#include "reflection/Registry.hpp"
+#include "runtime/ComponentRegistry.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
+#ifdef AZURERENDER_HAS_IMGUI
+#include <imgui.h>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <fstream>
+#include <map>
+#include <set>
+namespace azurerender {
+#ifndef IMGUI_HAS_DOCK
+namespace {
+void setFallbackPanelRect(float x,float y,float width,float height) {
+    const auto display=ImGui::GetIO().DisplaySize;
+    ImGui::SetNextWindowPos({display.x*x,display.y*y},ImGuiCond_Always);
+    ImGui::SetNextWindowSize({display.x*width,display.y*height},ImGuiCond_Always);
+}
+}
+#endif
+void AssetBrowserPanel::draw(PanelContext& panelContext) {
+    const auto& view=panelContext.view();
+#ifndef IMGUI_HAS_DOCK
+    setFallbackPanelRect(0.0F, 0.72F, 0.50F, 0.28F);
+#endif
+    if(!ImGui::Begin(ui::tr("资源###assets"),services_.workspace.open("assets"))){ImGui::End();return;}
+    {const auto p=ImGui::GetWindowPos(),s=ImGui::GetWindowSize();services_.widgets["assets.drop-region"]={p.x,p.y,s.x,s.y};}
+    const auto metrics=ui::UiMetrics::fromScale(services_.dpi);
+    const auto project=view.isProject()?services_.session.context().project().file.u8string():std::string();
+    if(project!=presentation.browseProject_){
+        presentation.browseProject_=project;
+        presentation.beforeReveal_.reset();
+        presentation.restoreScroll_.reset();
+        presentation.pendingReveal_.clear();
+        presentation.assetMount_.clear();
+        presentation.assetDirectory_.clear();
+        presentation.assetTypeId_.clear();
+        presentation.assetFilter_.Clear();
+        presentation.selectedAssets_.clear();
+        presentation.assetNavigation_={{"",""}};
+        presentation.assetNavigationIndex_=0;
+    }
+    const auto reveal=services_.session.consumeAssetReveal();
+    if(!reveal.empty() && view.isProject()){
+        const auto& records=view.assets().records();
+        auto record=records.find(reveal);
+        if(record==records.end()){
+            record=std::find_if(records.begin(),records.end(),[&](const auto& entry){return entry.second.virtualPath==reveal;});
+        }
+        if(record!=records.end()){
+            if(!presentation.beforeReveal_){
+                presentation.beforeReveal_=AssetPanelState::BrowseLocation{
+                    presentation.assetMount_,presentation.assetDirectory_,presentation.assetTypeId_,
+                    presentation.assetFilter_.InputBuf,presentation.selectedAssets_,presentation.assetScroll_};
+            }
+            const auto& path=record->second.virtualPath;
+            const auto separator=path.find(":/");
+            const auto slash=path.rfind('/');
+            presentation.assetMount_=path.substr(0,separator);
+            presentation.assetDirectory_=slash>separator+1?path.substr(separator+2,slash-separator-2):std::string();
+            presentation.assetFilter_.Clear();
+            presentation.assetTypeId_.clear();
+            presentation.selectedAssets_={record->first};
+            presentation.pendingReveal_=record->first;
+        }
+    }
+    const bool compact=ImGui::GetContentRegionAvail().y<metrics.compactPanelHeight;
+    const bool renderGrid=presentation.assetGrid_&&!compact;
+    const bool wide=compact||ImGui::GetContentRegionAvail().x>metrics.widePanelWidth;
+    const auto tasks=view.isProject()?services_.session.tasks().report():nlohmann::json::array();
+    const auto task=std::find_if(tasks.rbegin(),tasks.rend(),[&](const auto& item){
+        const auto source=item.at("source").template get<std::string>();
+        return item.at("target")==project && (source.rfind("asset.import: ",0)==0||source=="asset.import-drop");
+    });
+    const auto taskState=task==tasks.rend()?std::string():task->at("state").get<std::string>();
+    const bool showLocator=taskState=="completed"&&(!compact||!presentation.beforeReveal_);
+    const bool cancelling=taskState=="running"&&task->at("cancelling")==true;
+    const auto gridWidth=ImGui::GetFrameHeight()+ImGui::CalcTextSize(ui::tr("网格")).x+metrics.spacing;
+    const auto reserved=[&](const char* label){return ui::buttonWidth(ui::tr(label))+metrics.spacing;};
+    char longestProgress[64];
+    std::snprintf(longestProgress,sizeof(longestProgress),ui::tr("Import %.0f%%"),100.0);
+    const auto progressWidth=ImGui::CalcTextSize(cancelling?ui::tr("正在取消导入"):longestProgress).x+metrics.spacing;
+    float controls=metrics.filterWidth+metrics.spacing;
+    if(compact){
+        controls+=reserved("+")+reserved("清除");
+        if(presentation.beforeReveal_)controls+=reserved("返回浏览位置");
+        if(showLocator)controls+=reserved("定位导入结果");
+        if(taskState=="failed")controls+=reserved("查看导入错误");
+        if(taskState=="cancelled")controls+=reserved("导入已取消");
+        if(taskState=="running")controls+=progressWidth+(cancelling?0.F:reserved("取消导入"));
+    }else controls+=gridWidth+2*metrics.spacing;
+    const auto searchWidth=wide?std::max(40*services_.dpi,ImGui::GetContentRegionAvail().x-controls):-1;
+    ui::searchField("##Search assets",ui::tr("搜索名称或路径"),presentation.assetFilter_,searchWidth);services_.observe("assets.search");
+    if(ImGui::IsItemHovered())ImGui::SetTooltip(ui::tr("按名称或路径筛选资源"));
+    ui::nextToolbarItem(metrics.filterWidth);ImGui::SetNextItemWidth(metrics.filterWidth);
+    const auto& types=assetTypeRegistry().types();
+    const auto current=types.find(presentation.assetTypeId_);
+    if(ImGui::BeginCombo("##Type",current==types.end()?ui::tr("所有类型"):current->second.label.c_str(),ImGuiComboFlags_HeightLarge)) {
+        if(ImGui::Selectable(ui::tr("所有类型"),presentation.assetTypeId_.empty()))presentation.assetTypeId_.clear();services_.observe("type.All");
+        for(const auto& [id,type]:types){if(ImGui::Selectable(type.label.c_str(),presentation.assetTypeId_==id))presentation.assetTypeId_=id;services_.observe("type."+type.label);}
+        ImGui::EndCombo();
+    }services_.observe("assets.type");
+    if(!compact){ui::nextToolbarItem(gridWidth);ImGui::Checkbox(ui::tr("网格"),&presentation.assetGrid_);services_.observe("assets.grid");}
+    if(compact){
+        ui::nextToolbarItem(ui::buttonWidth(ui::tr("清除")));
+        ImGui::BeginDisabled(!presentation.assetFilter_.IsActive()&&presentation.assetTypeId_.empty());
+        if(ui::button(ui::tr("清除"))){presentation.assetFilter_.Clear();presentation.assetTypeId_.clear();}
+        services_.observe("assets.clear-filters");ImGui::EndDisabled();
+        if(ImGui::IsItemHovered())ImGui::SetTooltip(ui::tr("清除搜索和类型筛选"));
+    }
+    if(presentation.beforeReveal_){
+        ui::nextToolbarItem(ui::buttonWidth(ui::tr("返回浏览位置")));
+        if(ui::button(ui::tr("返回浏览位置"))){
+            const auto& state=*presentation.beforeReveal_;
+            presentation.assetMount_=state.mount;
+            presentation.assetDirectory_=state.directory;
+            presentation.assetTypeId_=state.type;
+            std::snprintf(presentation.assetFilter_.InputBuf,sizeof(presentation.assetFilter_.InputBuf),"%s",state.search.c_str());
+            presentation.assetFilter_.Build();
+            presentation.selectedAssets_=state.selection;
+            presentation.restoreScroll_=state.scroll;
+            presentation.pendingReveal_.clear();
+            presentation.beforeReveal_.reset();
+        }
+        services_.observe("assets.return-to-browse");
+    }
+    if(task!=tasks.rend()){
+        const auto id=task->at("id").get<std::string>();
+        if(showLocator){
+            const auto& result=task->at("result");
+            const auto asset=result.is_string()?result.get<std::string>():result.is_object()?result.value("asset",std::string()):std::string();
+            const auto record=view.assets().records().find(asset);
+            if(record!=view.assets().records().end()){
+                if(compact)ui::nextToolbarItem(ui::buttonWidth(ui::tr("定位导入结果")));
+                ui::ButtonOptions options;
+                options.tooltip=record->second.virtualPath;
+                if(ui::button(ui::tr("定位导入结果"),options))services_.session.edit("reference.reveal",{{"kind","asset"},{"id",asset}});
+                services_.observe("task.asset-reveal."+id);
+            }
+        }else if(taskState=="running"){
+            if(compact)ui::nextToolbarItem(progressWidth);
+            if(cancelling)ui::statusText(ui::tr("正在取消导入"),ui::StatusKind::Info);
+            else ImGui::Text(ui::tr("Import %.0f%%"),task->at("progress").get<float>()*100);
+            services_.observe("task.import-progress."+id);
+            if(!cancelling){
+                ui::nextToolbarItem(ui::buttonWidth(ui::tr("取消导入")));
+                if(ui::button(ui::tr("取消导入")))services_.session.edit("tasks.cancel",{{"id",id}});
+                services_.observe("task.import-cancel."+id);
+            }
+        }else if(taskState=="failed"){
+            if(compact)ui::nextToolbarItem(ui::buttonWidth(ui::tr("查看导入错误")));
+            ImGui::PushID(id.c_str());
+            if(ui::button(ui::tr("查看导入错误")))ImGui::OpenPopup("import-error");
+            services_.observe("task.import-error."+id);
+            const auto work=ImGui::GetMainViewport()->WorkSize;
+            ImGui::SetNextWindowSize({std::min(520*services_.dpi,work.x*.85F),0});
+            if(ImGui::BeginPopup("import-error")){
+                ImGui::BeginChild("import-error-details",{0,std::min(140*services_.dpi,work.y*.45F)});
+                ImGui::TextWrapped("%s",task->at("diagnostic").get<std::string>().c_str());
+                ImGui::EndChild();
+                services_.observe("task.import-error-detail."+id);
+                ImGui::EndPopup();
+            }
+            ImGui::PopID();
+        }else if(taskState=="cancelled"){
+            if(compact)ui::nextToolbarItem(reserved("导入已取消"));
+            ui::statusText(ui::tr("导入已取消"),ui::StatusKind::Neutral);
+            services_.observe("task.import-cancelled."+id);
+        }
+    }
+    auto& directories=services_.session.contentDirectories();
+    const auto navigate=[&](const std::string& mount,const std::string& path){
+        if(presentation.assetMount_==mount&&presentation.assetDirectory_==path)return;
+        presentation.assetNavigationDiagnostic_.clear();
+        presentation.assetMount_=mount;presentation.assetDirectory_=path;
+        presentation.assetNavigation_.resize(presentation.assetNavigationIndex_+1);presentation.assetNavigation_.push_back({mount,path});++presentation.assetNavigationIndex_;
+    };
+    std::shared_ptr<const ContentDirectorySnapshot> snapshot;
+    try{snapshot=directories.snapshot(services_.session.context(),presentation.assetMount_,presentation.assetDirectory_,presentation.assetTypeId_,presentation.assetFilter_.InputBuf);}
+    catch(const std::exception& error){presentation.assetNavigationDiagnostic_=error.what();presentation.assetMount_.clear();presentation.assetDirectory_.clear();snapshot=directories.snapshot(services_.session.context(),{}, {},presentation.assetTypeId_,presentation.assetFilter_.InputBuf);}
+    const auto& resources=snapshot->assets;
+    presentation.contentView_={{"matchingAssets",resources.size()},{"search",presentation.assetFilter_.InputBuf},{"type",presentation.assetTypeId_},{"grid",renderGrid},{"compact",compact},{"selectedCount",presentation.selectedAssets_.size()},{"diagnostic",presentation.assetNavigationDiagnostic_}};
+    const auto directoryFilter=[&]{
+        if(ui::button(ui::tr("后退"),{ui::ButtonVariant::Default,false,presentation.assetNavigationIndex_==0})){const auto& entry=presentation.assetNavigation_[--presentation.assetNavigationIndex_];presentation.assetMount_=entry.first;presentation.assetDirectory_=entry.second;}services_.observe("assets.back");ui::nextToolbarItem(ui::buttonWidth(ui::tr("前进")));
+        if(ui::button(ui::tr("前进"),{ui::ButtonVariant::Default,false,presentation.assetNavigationIndex_+1>=presentation.assetNavigation_.size()})){const auto& entry=presentation.assetNavigation_[++presentation.assetNavigationIndex_];presentation.assetMount_=entry.first;presentation.assetDirectory_=entry.second;}services_.observe("assets.forward");ui::nextToolbarItem(ui::buttonWidth(ui::tr("全部")));
+        if(ui::button(ui::tr("全部")))navigate({},{});services_.observe("assets.all");
+        if(!presentation.assetMount_.empty()){
+            ui::nextToolbarItem(ui::buttonWidth(presentation.assetMount_.c_str()));if(ui::button(presentation.assetMount_.c_str()))navigate(presentation.assetMount_,{});services_.observe("assets.mount");
+            std::string accumulated;for(const auto& part:std::filesystem::u8path(presentation.assetDirectory_)){
+                if(!accumulated.empty())accumulated+='/';accumulated+=part.u8string();
+                ui::nextToolbarItem(ui::buttonWidth(part.u8string().c_str()));ImGui::PushID(accumulated.c_str());
+                if(ui::button(part.u8string().c_str()))navigate(presentation.assetMount_,accumulated);services_.observe("assets.breadcrumb."+accumulated);ImGui::PopID();
+            }
+        }
+    };
+    ui::nextToolbarItem(ui::buttonWidth(compact?"+":ui::tr("导入 / 创建")));
+    if(ui::button(compact?"+":ui::tr("导入 / 创建")))ImGui::OpenPopup(ui::tr("Content operations"));services_.observe("assets.import-create");
+    if(ImGui::IsItemHovered())ImGui::SetTooltip(ui::tr("Import, create and browse content"));
+    const auto display=ImGui::GetMainViewport()->WorkSize;
+    ImGui::SetNextWindowSize({std::min(640*services_.dpi,display.x-32*services_.dpi),0});
+    ImGui::SetNextWindowSizeConstraints({0,0},{display.x,display.y*.75F});
+    const bool closeImportPopup=presentation.closeImportPopup_;
+    presentation.closeImportPopup_=false;
+    if(ImGui::BeginPopup(ui::tr("Content operations"))) {
+        if(closeImportPopup)ImGui::CloseCurrentPopup();
+        const auto popupPosition=ImGui::GetWindowPos(),popupSize=ImGui::GetWindowSize();
+        services_.widgets["assets.import-popup-region"]={popupPosition.x,popupPosition.y,popupSize.x,popupSize.y};
+        if(compact){
+            directoryFilter();ImGui::SetNextItemWidth(-1);
+            if(ImGui::BeginCombo(ui::tr("Directory"),presentation.assetMount_.empty()?"All directories":(presentation.assetMount_+":/"+presentation.assetDirectory_).c_str())){
+                if(ImGui::Selectable(ui::tr("All directories"),presentation.assetMount_.empty()))navigate({},{});
+                for(const auto& directory:directories.tree())if(ImGui::Selectable(directory.at("reference").get<std::string>().c_str()))navigate(directory.at("mount").get<std::string>(),directory.at("path").get<std::string>());
+                ImGui::EndCombo();
+            }services_.observe("assets.directory");
+            if(ui::button(ui::tr("Reload Assets")))static_cast<void>(services_.session.execute(EditorCommand::ReloadAssets));ImGui::Separator();
+        }
+        std::vector<std::string> importExtensions;
+        importExtensions.push_back(".azuresceneexchange");
+        for(const auto& [id,format]:assetFormatRegistry().formats()){(void)id;if(format.canRead)importExtensions.insert(importExtensions.end(),format.extensions.begin(),format.extensions.end());}
+        services_.pathInput(ui::tr("Asset source"),presentation.importPath_,"import",false,importExtensions);
+        ui::ButtonOptions import;import.disabled=view.importing()||services_.session.dropImporting()||services_.session.playing()||services_.session.building()||presentation.importPath_.empty();
+        import.tooltip=ui::tr("Select a supported model, image or audio file. Import continues when this panel is closed.");
+        if(ui::button(ui::tr("Import"),import)){
+            const bool exchange=std::filesystem::u8path(presentation.importPath_).extension()==".azuresceneexchange";
+            const auto result=services_.session.edit(exchange?"scene.import-start":"asset.import-start",{{"path",presentation.importPath_}});
+            if(result)ImGui::CloseCurrentPopup();
+        }services_.observe("asset.import");
+        if(std::filesystem::u8path(presentation.importPath_).extension()==".azuresceneexchange")
+            ImGui::TextWrapped("%s",ui::tr("场景交换包及其模型需放入项目资产目录。刷新资产后导入，任务面板可取消。"));
+        if(view.importing()){ImGui::ProgressBar(view.importProgress());if(ui::button(ui::tr("Cancel Import")))services_.session.edit("asset.import-cancel");services_.observe("asset.import-cancel");}
+        ui::ButtonOptions exportOptions;exportOptions.disabled=presentation.selectedAssets_.size()!=1||services_.session.context().dirty()||view.importing()||services_.session.playing()||services_.session.building()||services_.session.reimporting();
+        if(ui::button(ui::tr("Export selected asset"),exportOptions)){presentation.exportRequest_={{"asset",*presentation.selectedAssets_.begin()}};presentation.exportDialogRequested_=true;ImGui::CloseCurrentPopup();}services_.observe("assets.export");
+        ImGui::BeginDisabled(!view.isProject()||services_.session.playing()||services_.session.building()||services_.session.reimporting());
+        if(ui::button(ui::tr("Create directory"))){presentation.contentOperation_="content.create-directory";presentation.contentRequest_={{"parent",(presentation.assetMount_.empty()?"assets":presentation.assetMount_)+":/"+presentation.assetDirectory_}};presentation.contentValue_="New Folder";presentation.contentDialogRequested_=true;ImGui::CloseCurrentPopup();}
+        services_.observe("content.create-directory");
+        if(ImGui::BeginMenu(ui::tr("Create material"))){
+            ui::inputText("Name",presentation.materialName_);services_.observe("material.create-name");
+            for(const auto& type:MaterialTypeRegistry::builtins().describe())for(const bool parameterOverride:{false,true}){
+                const auto id=type.at("id").get<std::string>();if(parameterOverride&&id=="azure.profile")continue;
+                const auto label=type.at("label").get<std::string>()+(parameterOverride?std::string(" - ")+ui::tr("参数覆盖"):std::string());
+                if(ImGui::MenuItem(label.c_str())){
+                    const auto destination=(presentation.assetMount_.empty()?"assets:/":presentation.assetMount_+":/")+(presentation.assetDirectory_.empty()?"":presentation.assetDirectory_+"/")+presentation.materialName_;
+                    const auto created=services_.session.edit("material.create",{{"type",id},{"mode",parameterOverride?"parameters":"replace"},{"destination",destination}});
+                    if(created)services_.openMaterial(created.value.at("asset").get<std::string>());
+                }services_.observe("material.create."+id+(parameterOverride?".parameters":""));
+            }ImGui::EndMenu();
+        }services_.observe("assets.create-material");
+        if(ImGui::BeginMenu(ui::tr("Generate primitive"))){
+            if(ImGui::BeginCombo(ui::tr("Shape"),presentation.primitiveKind_.c_str())){for(const auto* kind:{"cube","plane","sphere","cylinder"})if(ImGui::Selectable(kind,presentation.primitiveKind_==kind))presentation.primitiveKind_=kind;ImGui::EndCombo();}services_.observe("primitive.kind");
+            ImGui::InputFloat3(ui::tr("Dimensions"),presentation.primitiveSize_.data());services_.observe("primitive.size");
+            ImGui::InputInt(ui::tr("Segments"),&presentation.primitiveSegments_);services_.observe("primitive.segments");
+            ui::inputText(ui::tr("File name"),presentation.primitiveName_);services_.observe("primitive.name");
+            if(ui::button(ui::tr("Generate asset"))){
+                const auto parent=(presentation.assetMount_.empty()?"assets":presentation.assetMount_)+":/"+presentation.assetDirectory_;
+                const auto output=parent+(parent.back()=='/'?"":"/")+presentation.primitiveName_;
+                const auto result=services_.session.edit("asset.generate",{{"generator","azure.primitive"},{"output",output},{"parameters",{{"kind",presentation.primitiveKind_},{"size",presentation.primitiveSize_},{"segments",presentation.primitiveSegments_}}},{"license",ui::tr("Azure primitive generator v1")},{"replace",false}});
+                if(result)presentation.selectedAssets_={result.value.get<std::string>()};
+            }services_.observe("primitive.generate");ImGui::TextWrapped(ui::tr("Sphere and cylinder segments use a multiple of four."));ImGui::EndMenu();
+        }services_.observe("assets.generate-primitive");
+        if(ui::button(ui::tr("Undo content transaction")))services_.session.edit("content.undo");services_.observe("content.undo");ImGui::EndDisabled();
+        ImGui::BeginDisabled(!view.isProject()||services_.session.playing()||services_.session.building()||services_.session.reimporting());
+        if(ui::button(ui::tr("Redo content transaction")))services_.session.edit("content.redo");services_.observe("content.redo");ImGui::EndDisabled();
+        ImGui::BeginDisabled(services_.session.playing()||services_.session.building());
+        if(ImGui::BeginCombo(ui::tr("Place Prefab"),ui::tr("Choose asset"))){
+            for(const auto& row:services_.session.edit("assets.catalog",{{"type","prefab"}}).value)if(ImGui::Selectable(row.at("path").get<std::string>().c_str()))
+                services_.session.edit("asset.place",{{"asset",row.at("id")},{"origin",{0,5,0}},{"direction",{0,-1,0}}});
+            ImGui::EndCombo();
+        }ImGui::EndDisabled();
+        const auto& summary=view.importSummary();if(summary.contains("vertices"))ImGui::TextWrapped(ui::tr("Imported: %zu vertices, %zu joints, %zu materials"),summary.at("vertices").get<std::size_t>(),summary.at("joints").get<std::size_t>(),summary.at("materials").get<std::size_t>());
+        ImGui::EndPopup();
+    }
+    if(!compact){ui::nextToolbarItem(ui::buttonWidth(ui::tr("刷新资源")));if(ui::button(ui::tr("刷新资源")))static_cast<void>(services_.session.execute(EditorCommand::ReloadAssets));services_.observe("assets.reload");ui::nextToolbarItem(ui::buttonWidth(ui::tr("后退")));directoryFilter();}
+    if(!presentation.assetNavigationDiagnostic_.empty())ui::resultMessage(presentation.assetNavigationDiagnostic_,true);
+    if(!compact){ui::statusText((std::to_string(resources.size())+ui::tr(" 项资源 · ")+std::to_string(presentation.selectedAssets_.size())+ui::tr(" 项已选")).c_str(),ui::StatusKind::Neutral);}
+    if(renderGrid){int size=services_.session.settings().get("editor.thumbnailSize").get<int>();ImGui::SetNextItemWidth(120*services_.dpi);if(ImGui::SliderInt(ui::tr("Thumbnail size"),&size,64,192))services_.session.edit("settings.set",{{"name","editor.thumbnailSize"},{"value",size},{"source","user"}});services_.observe("assets.thumbnail-size");}
+    const auto requestedThumbnailSize=services_.session.settings().get("editor.thumbnailSize").get<float>()*services_.dpi;
+    if(wide&&!compact){
+        ImGui::BeginChild("content-tree",{metrics.directoryTreeWidth,0},true);
+        const auto drawDirectory=[&](const std::string& mount,const std::string& path,auto&& self)->void{
+            const auto reference=mount+":/"+path;
+            const auto label=path.empty()?mount:std::filesystem::u8path(path).filename().u8string();
+            bool children=false;for(const auto& entry:directories.tree())if(entry.at("mount")==mount){const auto candidate=entry.at("path").get<std::string>();if(!candidate.empty()&&std::filesystem::u8path(candidate).parent_path().generic_u8string()==path){children=true;break;}}
+            auto flags=ImGuiTreeNodeFlags_OpenOnArrow|ImGuiTreeNodeFlags_SpanAvailWidth;
+            if(!children)flags|=ImGuiTreeNodeFlags_Leaf;if(presentation.assetMount_==mount&&presentation.assetDirectory_==path)flags|=ImGuiTreeNodeFlags_Selected;
+            if(path.empty())flags|=ImGuiTreeNodeFlags_DefaultOpen;
+            const bool open=ImGui::TreeNodeEx(reference.c_str(),flags,"%s",label.c_str());services_.observe("directory."+reference);
+            if(ImGui::IsItemClicked()&&!ImGui::IsItemToggledOpen())navigate(mount,path);
+            if(open){for(const auto& entry:directories.tree())if(entry.at("mount")==mount){const auto candidate=entry.at("path").get<std::string>();if(!candidate.empty()&&std::filesystem::u8path(candidate).parent_path().generic_u8string()==path)self(mount,candidate,self);}ImGui::TreePop();}
+        };
+        for(const auto& entry:directories.tree())if(entry.at("path")=="")drawDirectory(entry.at("mount").get<std::string>(),{},drawDirectory);
+        ImGui::EndChild();ImGui::SameLine();
+    }
+    presentation.visibleAssets_=nlohmann::json::array();ImGui::BeginChild("asset-list",{0,0});std::size_t requestedPreviews=0;
+    if(!compact)for(const auto& directory:snapshot->directories){
+        const auto reference=directory.at("reference").get<std::string>();
+        if(ImGui::Selectable(("[Folder] "+reference).c_str(),false,ImGuiSelectableFlags_AllowDoubleClick)&&ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))navigate(directory.at("mount").get<std::string>(),directory.at("path").get<std::string>());
+        services_.observe("folder."+reference);
+    }
+    const auto& style=ImGui::GetStyle();
+    const auto gridLabelHeight=ImGui::GetFrameHeight();
+    const auto tilePadding=style.ItemSpacing.y+2*style.CellPadding.y;
+    const auto gridHeight=ImGui::GetContentRegionAvail().y;
+    const auto thumbnailSize=std::min(requestedThumbnailSize,
+        std::max(services_.dpi*8,gridHeight-gridLabelHeight-tilePadding-style.ScrollbarSize));
+    const int columns=renderGrid?std::max(1,static_cast<int>(ImGui::GetContentRegionAvail().x/(requestedThumbnailSize+28*services_.dpi))):4;
+    if(!resources.empty()&&ImGui::BeginTable("assets",columns,ImGuiTableFlags_RowBg|ImGuiTableFlags_Resizable|ImGuiTableFlags_ScrollY)){
+        if(!renderGrid){for(const auto* title:{ui::tr("资源"),ui::tr("类型"),ui::tr("状态"),ui::tr("引用")})ImGui::TableSetupColumn(title);if(!compact)ImGui::TableHeadersRow();}
+        ImGuiListClipper clipper;const int perRow=renderGrid?columns:1;
+        const float rowHeight=renderGrid?thumbnailSize+gridLabelHeight+tilePadding:ImGui::GetTextLineHeightWithSpacing()+style.CellPadding.y*2;
+        if(presentation.restoreScroll_){
+            ImGui::SetScrollY(*presentation.restoreScroll_);
+            presentation.restoreScroll_.reset();
+        }
+        presentation.assetScroll_=ImGui::GetScrollY();
+        clipper.Begin(static_cast<int>((resources.size()+perRow-1)/perRow),rowHeight);
+        if(!presentation.pendingReveal_.empty()){
+            const auto target=std::find_if(resources.begin(),resources.end(),[&](const auto& row){return row.at("id")==presentation.pendingReveal_;});
+            if(target!=resources.end())clipper.IncludeItemByIndex(static_cast<int>(std::distance(resources.begin(),target))/perRow);
+        }
+        while(clipper.Step())for(int clippedRow=clipper.DisplayStart;clippedRow<clipper.DisplayEnd;++clippedRow){
+        for(int column=0;column<perRow;++column){const auto assetIndex=static_cast<std::size_t>(clippedRow*perRow+column);if(assetIndex>=resources.size())break;
+            const auto& row=resources[assetIndex];
+            const auto id=row.at("id").get<std::string>(),label=row.at("path").get<std::string>(),type=row.at("type").get<std::string>();
+            const auto path=std::filesystem::u8path(row.at("source").get<std::string>());const bool ready=row.at("ready").get<bool>();
+            presentation.visibleAssets_.push_back(row);ImGui::PushID(id.c_str());
+            if(renderGrid)ImGui::TableNextColumn();else{ImGui::TableNextRow();ImGui::TableSetColumnIndex(0);}
+            bool thumbnailDrawn=false;
+            if(renderGrid&&(type=="model"||type=="material"||type=="image")&&requestedPreviews<2&&ImGui::IsRectVisible({thumbnailSize,thumbnailSize})&&services_.session.developerServices().image){
+                ++requestedPreviews;const auto result=services_.session.edit("preview.asset",{{"asset",id}});
+                if(result&&result.value.contains("handle"))if(const auto texture=services_.previewTexture(result.value.at("handle").get<std::uint64_t>())){ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{thumbnailSize,thumbnailSize});thumbnailDrawn=true;}
+            }
+            if(renderGrid&&!thumbnailDrawn)ui::previewPlaceholder(type.c_str(),{thumbnailSize,thumbnailSize});
+            const auto registered=types.find(type);const bool placeable=registered!=types.end()&&registered->second.placeable;
+            if(ImGui::Selectable(label.c_str(),presentation.selectedAssets_.count(id)!=0,ImGuiSelectableFlags_AllowDoubleClick,{ImGui::GetContentRegionAvail().x,renderGrid?gridLabelHeight:0})) {
+                if(ImGui::GetIO().KeyCtrl){if(presentation.selectedAssets_.count(id))presentation.selectedAssets_.erase(id);else presentation.selectedAssets_.insert(id);}else presentation.selectedAssets_={id};
+                if(services_.session.references().active())services_.session.edit("reference.deliver",{{"kind","asset"},{"id",id}});
+                else if(ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)){
+                    const auto opened=services_.session.edit("asset.open",{{"asset",id}});
+                    if(opened){const auto operation=opened.value.at("operation").get<std::string>();
+                        if(operation=="material.describe")services_.openMaterial(id);
+                        else if(const auto result=services_.session.edit(operation,operation=="document.open"?nlohmann::json{{"path",id}}:operation=="texture.describe"?nlohmann::json{{"assets",nlohmann::json::array({id})}}:nlohmann::json{{"asset",id}});result){
+                            if(operation=="texture.describe"){presentation.textureSnapshot_=result.value;presentation.textureFields_.clear();presentation.textureDialogRequested_=true;}
+                            else if(result.value.contains("handle")){presentation.assetPreviewHandle_=result.value.at("handle").get<std::uint64_t>();presentation.assetPreviewTitle_=label;presentation.assetPreviewRequested_=true;}
+                            else if(operation!="document.open"){presentation.dependencySnapshot_=result.value;presentation.dependencyDialogRequested_=true;}
+                        }
+                    }
+                }
+            }
+            if(id==presentation.pendingReveal_){
+                ImGui::SetScrollHereY(.5F);
+                presentation.pendingReveal_.clear();
+            }
+            services_.observe("asset."+id);
+            if(ImGui::BeginPopupContextItem(ui::tr("Asset actions"))) {
+                if(!presentation.selectedAssets_.count(id))presentation.selectedAssets_={id};
+                if(placeable){if(ImGui::MenuItem(ui::tr("Place in scene")))services_.session.edit("asset.place",{{"asset",id},{"origin",{0,5,0}},{"direction",{0,-1,0}}});services_.observe("asset.place");}
+                if(ImGui::MenuItem(ui::tr("Reveal in file manager")))services_.session.edit("path.reveal",{{"path",path.u8string()}});services_.observe("asset.reveal-file");
+                const bool writable=view.isProject()&&label.rfind("engine:/",0)!=0;
+                ImGui::BeginDisabled(!writable||services_.session.playing()||services_.session.building()||view.importing()||services_.session.reimporting());
+                for(const auto& option:std::vector<std::pair<const char*,const char*>>{{"Rename","asset.rename"},{"Move","asset.move"},{"Duplicate","asset.duplicate"}}) {
+                    if(ImGui::MenuItem(option.first)){presentation.contentOperation_=option.second;presentation.contentRequest_={{"asset",id}};presentation.contentValue_=option.second==std::string("asset.rename")?path.filename().u8string():label;presentation.contentDialogRequested_=true;}
+                    services_.observe(option.second);
+                }
+                if(ImGui::MenuItem(ui::tr("Duplicate with dependencies"))){presentation.contentOperation_="asset.duplicate";presentation.contentRequest_={{"asset",id},{"includeDependencies",true}};presentation.contentValue_=label;presentation.contentDialogRequested_=true;}services_.observe("asset.duplicate-tree");
+                if(ImGui::MenuItem(ui::tr("Delete selected"))) {
+                    const auto result=services_.session.edit("asset.delete",{{"assets",presentation.selectedAssets_},{"referencePolicy","reject"},{"dryRun",true}});
+                    if(result){presentation.contentOperation_="asset.delete";presentation.contentImpact_=result.value;}
+                }services_.observe("asset.delete");
+                if(ImGui::MenuItem(ui::tr("Reimport"))) {
+                    const auto& record=view.assets().records().at(id);
+                    services_.session.edit("asset.reimport",{{"asset",id},{"settings",nlohmann::json::object()},{"baseFingerprint",std::to_string(record.fingerprint)}});
+                }services_.observe("asset.reimport");
+                if(ImGui::MenuItem(ui::tr("Export asset"),nullptr,false,!services_.session.context().dirty())){presentation.exportRequest_={{"asset",id}};presentation.exportDialogRequested_=true;}services_.observe("asset.export");
+                if(type=="image") {
+                    if(ImGui::MenuItem(ui::tr("Texture settings"))) {
+                        const auto result=services_.session.edit("texture.describe",{{"assets",presentation.selectedAssets_}});
+                        if(result){presentation.textureSnapshot_=result.value;presentation.textureFields_.clear();presentation.textureDialogRequested_=true;}
+                    }services_.observe("asset.texture-settings");
+                }ImGui::EndDisabled();
+                if(ImGui::MenuItem(ui::tr("Asset diagnostics"))) {
+                    const auto result=services_.session.edit("asset.inspect",{{"asset",id}});
+                    if(result){presentation.dependencySnapshot_=result.value;presentation.dependencyDialogRequested_=true;}
+                }services_.observe("asset.inspect");
+                for(const auto* direction:{"forward","reverse"}) {
+                    if(ImGui::MenuItem(direction==std::string("forward")?"Dependencies":ui::tr("Referenced by"))) {
+                        const auto result=services_.session.edit("asset.dependencies",{{"asset",id},{"direction",direction}});
+                        if(result){presentation.dependencySnapshot_=result.value;presentation.dependencyDialogRequested_=true;}
+                    }services_.observe(std::string("asset.dependencies.")+direction);
+                }ImGui::EndPopup();
+            }
+            if(ImGui::IsItemHovered())ImGui::SetTooltip("%s\n%s\n%s",label.c_str(),path.u8string().c_str(),ready?"Ready":ui::tr("Missing source"));
+            if(ready&&ImGui::BeginDragDropSource()){ImGui::SetDragDropPayload("AZURE_RESOURCE",id.c_str(),id.size()+1);ImGui::TextUnformatted(label.c_str());ImGui::EndDragDropSource();}
+            if(!renderGrid){ImGui::TableSetColumnIndex(1);ImGui::TextUnformatted(type.c_str());ImGui::TableSetColumnIndex(2);ui::statusText(ready?ui::tr("就绪"):ui::tr("源文件缺失"),ready?ui::StatusKind::Success:ui::StatusKind::Error);ImGui::TableSetColumnIndex(3);ImGui::Text("%zu",row.at("users").get<std::size_t>());}
+            ImGui::PopID();
+        }}ImGui::EndTable();
+    }
+    if(resources.empty()){
+        presentation.assetScroll_=0;
+        presentation.restoreScroll_.reset();
+        if(!compact&&(presentation.assetFilter_.IsActive()||!presentation.assetTypeId_.empty())){
+            if(ui::button(compact?ui::tr("无匹配 · 清除筛选"):ui::tr("清除筛选"))){presentation.assetFilter_.Clear();presentation.assetTypeId_.clear();}services_.observe("assets.clear-filters");
+        }
+        if(!compact||(!presentation.assetFilter_.IsActive()&&presentation.assetTypeId_.empty()))
+            ui::emptyState(ui::tr("没有匹配的资源"),compact?"":ui::tr("调整搜索、类型或目录，也可导入和创建资源。"));
+    }
+    presentation.contentView_["scroll"]=presentation.assetScroll_;
+    ImGui::EndChild();services_.textureDialog();
+    if(presentation.assetPreviewRequested_){ImGui::OpenPopup(ui::tr("Asset preview"));presentation.assetPreviewRequested_=false;}
+    if(ImGui::BeginPopupModal(ui::tr("Asset preview"),nullptr,ImGuiWindowFlags_AlwaysAutoResize)){
+        ImGui::TextUnformatted(presentation.assetPreviewTitle_.c_str());
+        if(const auto texture=services_.previewTexture(presentation.assetPreviewHandle_))ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{320*services_.dpi,320*services_.dpi});
+        if(ui::button(ui::tr("Close preview"))){presentation.assetPreviewHandle_=0;ImGui::CloseCurrentPopup();}services_.observe("asset.close-preview");ImGui::EndPopup();
+    }ImGui::End();
+}
+
+
+}
+#endif

@@ -1,0 +1,388 @@
+{
+  "schemaVersion": 1,
+  "status": "current-capture-profiled-next-hypothesis-unverified",
+  "sourceBase": "0694263",
+  "capture": {
+    "status": "captured",
+    "command": [
+      "D:\\Tools\\RenderDoc\\1.46\\RenderDoc_1.46_64\\qrenderdoc.exe",
+      "--python",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\capture_current_gpu_events.py"
+    ],
+    "exitCode": 0,
+    "seconds": 235.0470000000205,
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "projectBytesUnchanged": true,
+    "capture": {
+      "status": "captured",
+      "sourceBase": "0694263",
+      "scope": "Actual current capture and replay event diagnosis; independent of native performance acceptance",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--fixed-frame-step",
+        "--smoke-frames",
+        "325",
+        "--gpu-timing",
+        "--gpu-timing-output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\current-gpu-events\\runtime-timing.json"
+      ],
+      "executableSha256": "1c61ee95913bd863df773e5089696fdaefd469de093bba0d4dc1033aa683e5d3",
+      "captureFrame": 320,
+      "renderdocVersion": "1.46",
+      "pid": 24932,
+      "capture": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\current-gpu-events\\current_frame320.rdc",
+      "bytes": 2204755187,
+      "captureSha256": "3f59645268af50b60d0700f147e9c65fde1aa3901ef4c679fe60658a0f639512"
+    }
+  },
+  "profileResult": {
+    "status": "profiled",
+    "command": [
+      "D:/Tools/RenderDoc/1.46/RenderDoc_1.46_64/qrenderdoc.exe",
+      "--python",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\profile_current_gpu_events.py"
+    ],
+    "exitCode": 0,
+    "seconds": 97.23399999999674,
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "projectBytesUnchanged": true,
+    "toolBytesUnchanged": true
+  },
+  "materialResult": {
+    "status": "inspected",
+    "command": [
+      "D:/Tools/RenderDoc/1.46/RenderDoc_1.46_64/qrenderdoc.exe",
+      "--python",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\inspect_current_gpu_materials.py"
+    ],
+    "exitCode": 0,
+    "seconds": 16.28200000000652,
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "projectBytesUnchanged": true,
+    "toolBytesUnchanged": true
+  },
+  "sumReplayEventMs": 35.030880000000025,
+  "eventCount": 3424,
+  "leafPS": 27853535,
+  "leafSamplesPassed": 64679603,
+  "shaderInspectionLimit": 128,
+  "pixelInspectionScope": "Top96 PS events plus top128 timed draws; uninspected target group mixes other draws and dispatches",
+  "shaderProducts": [
+    {
+      "shader": "ResourceId::10054",
+      "sha256": "a0f5f99f22082c9e6550cc5f6926bb3df82db4f70ef1130f7130b51b204b6fe4",
+      "files": [
+        "skin.comp.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10299",
+      "sha256": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+      "files": [
+        "shadow_bounds.comp.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10330",
+      "sha256": "8e407242e7bd65db0af16996e8993da70e7ed79165ce148ea16315f5979b8472",
+      "files": [
+        "character_snapshot_object_bindless_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10395",
+      "sha256": "7228f6ce6a15255d100fecab554cf098c4d809c9b8b087371afea62a4b545109",
+      "files": [
+        "character_snapshot_object_bindless_clipmap_field_lighting.frag.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10332",
+      "sha256": "9c3a86d1acb016356ddd90abfb19237134bf2202728cf88eb16a2866965d5158",
+      "files": [
+        "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10108",
+      "sha256": "8fed8e77c228e3c069ad95cb9624b9fd9fe03476a88b9d331304c5d7ffc60446",
+      "files": [
+        "reflection_reprojection.comp.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10138",
+      "sha256": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0",
+      "files": [
+        "depth_pyramid.comp.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10244",
+      "sha256": "7e23f88e362db04579bd8b8e57094009325d7a246d4809d487b03b0d9b5a0de0",
+      "files": [
+        "reflection_trace_packed.comp.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10289",
+      "sha256": "3cf689766f41dfa0d0422942943cdd48702e2405c13b8f6d2ba4fd37b8ded9d3",
+      "files": [
+        "reflection_temporal_packed.comp.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10255",
+      "sha256": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+      "files": [
+        "reflection_spatial_filter.comp.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10313",
+      "sha256": "59f0d8eef463bdd103cc163d9736698113ec6a4964198fd4eac05e8b65057ffe",
+      "files": [
+        "mesh_object_bindless_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10389",
+      "sha256": "60c24954cb4a3a2184a124eb37b082febf197ed4ab56d55802cdfa48eeaaa246",
+      "files": [
+        "mesh_object_bindless_clipmap_field_lighting.frag.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10322",
+      "sha256": "105d27f7579ace969cebe92e5192a863c8d0c8ebb01ee9c56944640ffc65a1c4",
+      "files": [
+        "mesh_object_bindless_clipmap_field_coverage.frag.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10392",
+      "sha256": "7f274e715c2219d4f070b554862b3ec49b40319c509c9754c5dc3d4a003994e4",
+      "files": [
+        "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::10728",
+      "sha256": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0",
+      "files": [
+        "view_fog_surface.frag.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::252",
+      "sha256": "20410105e596c990da8d11de6388b523a7b95c5c34d8a6c82c0a4a2a6acbde75",
+      "files": [
+        "inner_outline.frag.spv"
+      ]
+    },
+    {
+      "shader": "ResourceId::236",
+      "sha256": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+      "files": [
+        "spatial_antialiasing.frag.spv"
+      ]
+    }
+  ],
+  "selectedProgramTimingGroups": [
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10313",
+      "events": 71,
+      "milliseconds": 11.838432
+    },
+    {
+      "kind": "draw",
+      "shader": "uninspected",
+      "events": 3273,
+      "milliseconds": 8.378752000000025
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10330",
+      "events": 30,
+      "milliseconds": 6.0190719999999995
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10389",
+      "events": 8,
+      "milliseconds": 2.6511360000000006
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10395",
+      "events": 5,
+      "milliseconds": 1.8687999999999998
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10244",
+      "events": 1,
+      "milliseconds": 0.990304
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10054",
+      "events": 1,
+      "milliseconds": 0.546816
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10299",
+      "events": 1,
+      "milliseconds": 0.534528
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10728",
+      "events": 2,
+      "milliseconds": 0.39014400000000005
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10332",
+      "events": 1,
+      "milliseconds": 0.24064
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10322",
+      "events": 1,
+      "milliseconds": 0.24064
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10392",
+      "events": 1,
+      "milliseconds": 0.238592
+    },
+    {
+      "kind": "dispatch",
+      "shader": "uninspected",
+      "events": 23,
+      "milliseconds": 0.208768
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10108",
+      "events": 1,
+      "milliseconds": 0.208
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10255",
+      "events": 1,
+      "milliseconds": 0.196608
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::252",
+      "events": 1,
+      "milliseconds": 0.15462399999999998
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10138",
+      "events": 1,
+      "milliseconds": 0.154048
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::236",
+      "events": 1,
+      "milliseconds": 0.114688
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10289",
+      "events": 1,
+      "milliseconds": 0.056288
+    }
+  ],
+  "occludedOrdinaryOpaqueExample": {
+    "event": 23277,
+    "milliseconds": 0.53376,
+    "shader": "ResourceId::10313",
+    "pipeline": "ResourceId::10352",
+    "material": {
+      "alphaMode": 0,
+      "materialClass": 0,
+      "features": 40,
+      "profileVersion": 1,
+      "textureBase": 2045,
+      "nodeOpacity": 1.0
+    },
+    "specialization": {
+      "azureOrdinaryOpaque": 1,
+      "azureFixedMaterialFeatureMask": 0,
+      "azureFixedMaterialFeatureValue": 0,
+      "azureFixedMaterialClass": 4294967295
+    },
+    "ps": 185347,
+    "samplesPassed": 52
+  },
+  "nextHypothesis": "Compile-time fully-covered node qualification for ordinary opaque material, preserving fading fallback; no early-depth performance benefit established yet",
+  "sourceInputsUnchanged": true,
+  "productsUnchanged": true,
+  "projectBytesUnchanged": true,
+  "fullVisualAcceptance": "failed-user-review",
+  "fullPerformance": "failed",
+  "nativeTimingEvidence": "docs/acceptance/nr/evidence/2026-11-06/covered-depth-prefill/results.json",
+  "sources": [
+    {
+      "url": "https://github.com/baldurk/renderdoc/blob/v1.46/docs/python_api/renderdoc/counters.rst",
+      "scope": "Official counter API reference"
+    },
+    {
+      "url": "https://github.com/baldurk/renderdoc/blob/v1.46/renderdoc/api/replay/vk_pipestate.h",
+      "scope": "Official Vulkan pipeline and specialization field contracts; no third-party implementation copied"
+    }
+  ],
+  "archiveMembers": {
+    "archive_current_gpu_events.py": "feb41d75c18a122e73655078e548941f963c7d95b5abe4257bb91945139ee364",
+    "capture_current_gpu_events.py": "0b8fd9ed991cb4dc1949be943d2afdc68b09af1a884c87fcd40dec59582c0c11",
+    "current-gpu-events/capture-driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "current-gpu-events/capture-result.json": "ceff4c1f5986fdd75f212549265b85e41d98878d1668fe1cf1cdf32155f5cad2",
+    "current-gpu-events/captures/gpu_capabilities.json": "48ca0deb3d9ad1f925d18a7594607fdc43c9cbd2a37696fa46e107c9f9bd9656",
+    "current-gpu-events/environment.json": "bb2e330e14de83f7c5f5acf4ef696f865997541d89374fc1958af8eb6a234032",
+    "current-gpu-events/events/counter-events.json": "5a9d81be4f724a8680dff6da8c45e1799b4ee37eadf21cb604d09abd14fdcd25",
+    "current-gpu-events/events/profile.json": "7a2b5e78f5a4d7101f2f54c3017c891d2829ea3ed2985a4198a57f8d5e468dd3",
+    "current-gpu-events/frozen-inputs.json": "c70372f25bf4224fc6830e1a1a7b2988f2ae6ef588348d2bac18dc4a715130c9",
+    "current-gpu-events/material-driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "current-gpu-events/material-result.json": "9815154c436e1e2c3802a4f2e12065c821c5167fbbcc6fcbbf43dfafd16d3ace",
+    "current-gpu-events/material-state.json": "c183db329b72bc9f54c918f2cae0687c2c54506102b81bc4499c8076d442883b",
+    "current-gpu-events/material-summary.json": "0cc87c5102b30efbaddd7d91d5cff7789dffc9cfac24313567b90ff230d99ffb",
+    "current-gpu-events/profile-driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "current-gpu-events/profile-result.json": "3ab5ada62df705deacf5e868a0fd5bc3ed86832e3363665d50709e660a1f4ae5",
+    "current-gpu-events/profile-state.json": "ecc7e1f06d2c3a39c75f9aa751fc1340b610f0f8bc51313639f3335eead311b1",
+    "current-gpu-events/runtime-timing.csv": "0ba6b2003f5c533b0bc01a01df91c9bf356bb1513c5d4bda25623e5c137d190f",
+    "current-gpu-events/runtime-timing.json": "7ceffbe9004568d3d04ef9fef35ec8cfdae91cc0bf03e0a5193d0c6de9da819b",
+    "current-gpu-events/setup-attempts.json": "3ce5280227d44bce268d222c08e2147a87c941067e9988525c970d139fb197ee",
+    "current-gpu-events/shader-products.json": "de74041912678eb826ecc9df70bd1c0a6fe838e536ab7732ff3888548703290b",
+    "current-gpu-events/state.json": "51c5d1cffb448ee845a90657998712a6f37dbb397cbc2217e2bd3ce45618eb73",
+    "inspect_current_gpu_materials.py": "4c991c0c6f87c91438a924a0ca1fbe68b181c44a899ccd2564e67a183802da33",
+    "launch_current_gpu_events.py": "3f9d4366b961eb79d274ff0348cac025e6019579c6bb554bea7464b61ca790cd",
+    "launch_inspect_current_gpu_materials.py": "61f3bcaa414b2187045bdc952564d4b51774a20d56c51e9a0387f5611a55001f",
+    "launch_profile_current_gpu_events.py": "1a1123dc8693e524fc1228c3ffdc6ac85e34ded9a647a536e30620817f900bda",
+    "profile_current_gpu_events.py": "dd188bf5bb21777ea1edba493ac3b75f056914388c01f47b1f1d2500f1b9a1ed"
+  },
+  "archiveSha256": "40d5c5f078e3dd6f23cd578568989c9ff1b42ae0737304a1c940736c218e1f07"
+}

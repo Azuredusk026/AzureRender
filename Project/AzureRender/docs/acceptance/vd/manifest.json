@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "stage": "VD6",
+  "state": "Ready",
+  "automatedChecks": "passed",
+  "physicalInput": "pending",
+  "sourceBase": "bf48949a95372b5928a598bbd83335973855c8f2",
+  "sourceChanges": "VD6 commit containing this manifest",
+  "runDirectory": "build\\runs\\20261014-202124-ui-modernization-b337fa",
+  "nonGpu": {
+    "passed": 188,
+    "total": 188
+  },
+  "workspaceCases": 10,
+  "panelCases": 8,
+  "commands": [
+    "ctest --test-dir build/ninja-msvc-debug -LE gpu -j 4 --output-on-failure --timeout 180",
+    "python tools/test_editor_workspace.py --executable build/ux-2026-10-14/Engine/bin/AzureRender.exe --output <run>/workspace-installed-final",
+    "python tools/test_gui_delivery_flow.py --install build/ux-2026-10-14/Engine --output <run>/gui-delivery-final --replay",
+    "python tools/test_gui_project_recovery.py --install build/ux-2026-10-14/Engine --output <run>/gui-recovery"
+  ],
+  "panelCapture": "Disabled for behavior replay; layout screenshots retained separately",
+  "artifacts": [
+    {
+      "path": "build/ux-2026-10-14/Engine/bin/AzureRender.exe",
+      "sha256": "a6d73308a56033af79d2ebf56a99b6d8202e38d633186d0ac9d182c8c87424b1"
+    },
+    {
+      "path": "build/ux-2026-10-14/Engine/bin/AzurePlayer.exe",
+      "sha256": "7791c1421346da70e17cb98a1fc6bd0fd6bf20859773a99554691a17216ca840"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "fc25bbec364a12590f40e5804dabcbadface8aaacf10f979f4b01fd35251df54"
+    },
+    {
+      "path": "src/editor/EditorTheme.cpp",
+      "sha256": "247d4ac94be87effc91564802561afdfadf7dbcc5fde86527bbb929f0df30609"
+    },
+    {
+      "path": "src/editor/EditorWorkspace.cpp",
+      "sha256": "4b072d6ac8823d13175b9f9622c99ede6331b14365fa5cd012e53dda303d4e68"
+    },
+    {
+      "path": "src/editor/EditorWorkspaceUI.cpp",
+      "sha256": "211c41090a6e9f8ebfff895e7f9f872e31b2b169cc151bcb85ddaead2a58d6c3"
+    },
+    {
+      "path": "src/editor/ImGuiEditorLayer.cpp",
+      "sha256": "e43134c3dfcd18864c59e6135ce269e6939078bffd8c19562416e6992841967a"
+    },
+    {
+      "path": "src/editor/ImGuiEditorLayer.hpp",
+      "sha256": "79b824dd24d7e928e858ad7b45b234908191657285b0f4ad02502d7e774bbac6"
+    },
+    {
+      "path": "src/editor/panels/AssetBrowserPanel.cpp",
+      "sha256": "be5a4ffdd3d3e3973592e5dc0245484fbf5a7c03077135a192785184cbbd155b"
+    },
+    {
+      "path": "src/editor/panels/ViewportPanel.cpp",
+      "sha256": "adb14324838d84454ef4af9c920d4ed66e5424c1e893ffa7f368ecd8173925c2"
+    },
+    {
+      "path": "src/editor/shell/EditorChrome.cpp",
+      "sha256": "6f595afa1d4794b054613d936918ce86af076637209a1a830b74c60fb611cbf5"
+    },
+    {
+      "path": "src/runtime/AssetDatabase.cpp",
+      "sha256": "659200043d18f72cb479653e03cf6f485cb84fbf9a690c37cf04d623053fa6f6"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "status": "passed",
+  "phase": "storage",
+  "run": "build/runs/20261107-214536-legacy-q1-build-recovery-2b3ccc",
+  "prune": {
+    "status": "pruned",
+    "items": [
+      {
+        "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\q1-ramp-source\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "bytes": 5897894794,
+        "files": 1295
+      },
+      {
+        "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\q1-ramp-source\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "bytes": 1494824968,
+        "files": 1432
+      }
+    ],
+    "beforeFreeBytes": 102438772736,
+    "archivesVerified": true,
+    "afterFreeBytes": 109836390400,
+    "actualFreeIncreaseBytes": 7397617664,
+    "sourceWorktreePreserved": true,
+    "mainProductsUnchanged": true,
+    "protectedDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8"
+  },
+  "postcheck": {
+    "status": "passed",
+    "checks": [
+      {
+        "configuration": "Debug",
+        "check": "build",
+        "exitCode": 0,
+        "seconds": 21.062999999994645
+      },
+      {
+        "configuration": "Debug",
+        "check": "ctest",
+        "exitCode": 0,
+        "seconds": 12.062000000005355
+      },
+      {
+        "configuration": "Release",
+        "check": "build",
+        "exitCode": 0,
+        "seconds": 9.14100000000326
+      },
+      {
+        "configuration": "Release",
+        "check": "ctest",
+        "exitCode": 0,
+        "seconds": 1.9839999999967404
+      }
+    ],
+    "sourceInputsUnchanged": true,
+    "mainProductsUnchanged": true,
+    "cloneSourceFilesPreserved": 33,
+    "protectedDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+    "volumeFreeBytes": 109835595776
+  },
+  "archive": {
+    "path": "validation.zip",
+    "bytes": 133395,
+    "sha256": "c7e2823459b618747153a6eac8c28e3146910f5492236eace3a5011471ab6a23"
+  },
+  "members": {
+    "archive-command.json": "832c8162aa724c4e1bf9be9aca250370e5534c3c9ffac4e282dde6cdd72eda3e",
+    "archive_debug.py": "2ca920f2436239fb7b5a23ae3546a5f735b1ae090dcee4479b905da92aab55d5",
+    "archive_release.py": "4f57d0e873f1d0454be7c07b8b5478bd3b6504f8c768b4604a41eedeedbb4865",
+    "budget.json": "9a1b870265b5d90d7f5ba6d48d921c86b609c7208c29111aa9276fc51ae4209e",
+    "debug-archive-receipt.json": "404bef58937b60632e93a4fb4596725b0251ecaadeb58b54fb9a0b98f1b58ff4",
+    "debug-archive.log": "b4c276c76919c34eaffba768467f260e96352741a6af9919b2bc8fc10ac732e5",
+    "debug-build.log": "9519b4a84f69b0f6b9278a3e96688b5bd9e245134887311ed08e970213709e7d",
+    "debug-ctest.log": "d383eea7bc13ec8a2bb75b51d8926a0d354eaf5a4bb8e7f8f7737a3e62b606db",
+    "pack.py": "45c783a896fbd04a88cabb0ffa94f7a0cb8a1e47c0041535c4ce5584feffb21d",
+    "postcheck.json": "4b6a4ab88208efaa5a573630da13fee5bf4f6c2e62d15241ec67dfec44023fdf",
+    "postcheck.py": "ae8679f6fdc18b09b929cadca669f24949a454d9982ea04dc0f49821b3abed18",
+    "preflight.json": "f262836b379673cfffcb487c33aafdc1430d0b0c87d6404e57a11a84db747de0",
+    "prepare.py": "1eb12686b9ad40c6b91a305ea8cee5d99f8c4eaae8eb1c11b45cb441620f4845",
+    "prune-result.json": "2e864ff02134d5479222811c860ecc559999357ffee6c8b0c2bc594ac8b38240",
+    "prune.py": "c8c9f094fb098411a058b047feb9bd8b482ec2cddd240fee512d3b336f738163",
+    "release-archive-command.json": "388fe86c1e5ccb436ead28b002139b6575648ce0bda5fbf3c5dc2cb643da1266",
+    "release-archive-receipt.json": "eacfdfdb722206fbcb73d01240bf7c5fb12ffb0d64b2892beee1e188e3ef4196",
+    "release-archive.log": "e23f5ea80b128737daecb6bc6a3e31af4a91e7438b900dd63c68ecaedeba27a4",
+    "release-build.log": "aa1e59b53085112c278f8106278baf20e35bb8eef7256397e51c96004946e325",
+    "release-ctest.log": "70cde33301059f4404a330ae1161b59847d64e05e9b816b9f8f5c05b97475b86",
+    "verified-preview.json": "8368c3920ed76deb48ec349c3c4850d9e339440f0525040e5c9f576ef0f44015",
+    "verify.py": "f7ec7a1e6011ba358a23f9028b170003c9e93c14b47a5a59c994fdf1983ad200"
+  },
+  "overallAcceptance": "pending"
+}

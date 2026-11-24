@@ -1,0 +1,1276 @@
+{
+  "schemaVersion": 1,
+  "status": "source-input-visibility-and-attachment-verified",
+  "sourceBase": "18b66cf",
+  "cpuControlRows": [
+    {
+      "pixel": [
+        1322,
+        263
+      ],
+      "referenceVisibility": 239,
+      "currentReceiver": [
+        -0.0589258149266243,
+        1.564436912536621,
+        0.0853457823395729
+      ],
+      "roundedAbsoluteReceiver": [
+        -300.0589294433594,
+        301.5644226074219,
+        -299.9146423339844
+      ],
+      "sourceDepthReconstruction": [
+        -300.05889892578125,
+        301.564453125,
+        -299.9146728515625
+      ],
+      "worldDifferenceMicrometers": [
+        -30.517578125,
+        -30.517578125,
+        30.517578125
+      ],
+      "sourceModel": {
+        "unorm8": 239,
+        "count": 16,
+        "projected": [
+          0.42120361328125,
+          0.6982879638671875,
+          0.6986923217773438
+        ]
+      },
+      "relativeModel": {
+        "unorm8": 232,
+        "count": 18,
+        "projected": [
+          0.422080934047699,
+          0.6978452205657959,
+          0.6988798379898071
+        ]
+      },
+      "absoluteModel": {
+        "unorm8": 232,
+        "count": 18,
+        "projected": [
+          0.422088623046875,
+          0.6978302001953125,
+          0.6988792419433594
+        ]
+      },
+      "absoluteWithSourceNormal": {
+        "unorm8": 239,
+        "count": 16,
+        "projected": [
+          0.4211883544921875,
+          0.6982574462890625,
+          0.6986923217773438
+        ]
+      }
+    },
+    {
+      "pixel": [
+        1324,
+        289
+      ],
+      "referenceVisibility": 86,
+      "currentReceiver": [
+        -0.06210736557841301,
+        1.531492829322815,
+        0.06626425683498383
+      ],
+      "roundedAbsoluteReceiver": [
+        -300.0621032714844,
+        301.531494140625,
+        -299.9337463378906
+      ],
+      "sourceDepthReconstruction": [
+        -300.06207275390625,
+        301.531494140625,
+        -299.9337158203125
+      ],
+      "worldDifferenceMicrometers": [
+        -30.517578125,
+        0.0,
+        -30.517578125
+      ],
+      "sourceModel": {
+        "unorm8": 86,
+        "count": 36,
+        "projected": [
+          0.4215545654296875,
+          0.691436767578125,
+          0.6856918334960938
+        ]
+      },
+      "relativeModel": {
+        "unorm8": 69,
+        "count": 38,
+        "projected": [
+          0.42152923345565796,
+          0.6914297342300415,
+          0.6856783628463745
+        ]
+      },
+      "absoluteModel": {
+        "unorm8": 69,
+        "count": 38,
+        "projected": [
+          0.421539306640625,
+          0.6914215087890625,
+          0.6856727600097656
+        ]
+      },
+      "absoluteWithSourceNormal": {
+        "unorm8": 69,
+        "count": 38,
+        "projected": [
+          0.421539306640625,
+          0.691436767578125,
+          0.6856803894042969
+        ]
+      }
+    },
+    {
+      "pixel": [
+        1322,
+        320
+      ],
+      "referenceVisibility": 95,
+      "currentReceiver": [
+        -0.059364818036556244,
+        1.4885016679763794,
+        0.06032652407884598
+      ],
+      "roundedAbsoluteReceiver": [
+        -300.0593566894531,
+        301.4884948730469,
+        -299.9396667480469
+      ],
+      "sourceDepthReconstruction": [
+        -300.0593566894531,
+        301.4884948730469,
+        -299.9396667480469
+      ],
+      "worldDifferenceMicrometers": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sourceModel": {
+        "unorm8": 116,
+        "count": 33,
+        "projected": [
+          0.4290008544921875,
+          0.68096923828125,
+          0.6764755249023438
+        ]
+      },
+      "relativeModel": {
+        "unorm8": 116,
+        "count": 33,
+        "projected": [
+          0.428985595703125,
+          0.680961012840271,
+          0.6764777302742004
+        ]
+      },
+      "absoluteModel": {
+        "unorm8": 116,
+        "count": 33,
+        "projected": [
+          0.4290008544921875,
+          0.6809539794921875,
+          0.6764793395996094
+        ]
+      },
+      "absoluteWithSourceNormal": {
+        "unorm8": 116,
+        "count": 33,
+        "projected": [
+          0.4290008544921875,
+          0.68096923828125,
+          0.6764755249023438
+        ]
+      }
+    },
+    {
+      "pixel": [
+        1258,
+        215
+      ],
+      "referenceVisibility": 255,
+      "currentReceiver": [
+        0.031114129349589348,
+        1.6252375841140747,
+        0.1158602386713028
+      ],
+      "roundedAbsoluteReceiver": [
+        -299.9688720703125,
+        301.625244140625,
+        -299.8841247558594
+      ],
+      "sourceDepthReconstruction": [
+        -299.9688415527344,
+        301.625244140625,
+        -299.8841247558594
+      ],
+      "worldDifferenceMicrometers": [
+        -30.517578125,
+        0.0,
+        0.0
+      ],
+      "sourceModel": {
+        "unorm8": 255,
+        "count": 0,
+        "projected": [
+          0.4791717529296875,
+          0.7101287841796875,
+          0.7294845581054688
+        ]
+      },
+      "relativeModel": {
+        "unorm8": 255,
+        "count": 0,
+        "projected": [
+          0.4791510999202728,
+          0.710138201713562,
+          0.7294689416885376
+        ]
+      },
+      "absoluteModel": {
+        "unorm8": 255,
+        "count": 0,
+        "projected": [
+          0.479156494140625,
+          0.7101287841796875,
+          0.7294845581054688
+        ]
+      },
+      "absoluteWithSourceNormal": {
+        "unorm8": 255,
+        "count": 0,
+        "projected": [
+          0.479156494140625,
+          0.7101287841796875,
+          0.7294845581054688
+        ]
+      }
+    }
+  ],
+  "fourPointGpu": {
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "rows": [
+      {
+        "expectedVisibility": 239,
+        "normalAndCount": [
+          -0.5928072929382324,
+          -0.3836780786514282,
+          0.7080752849578857,
+          16.0
+        ],
+        "pixel": [
+          1322,
+          263
+        ],
+        "projectionAndDelta": [
+          0.42120361328125,
+          0.698272705078125,
+          0.6987037658691406,
+          0.033404767513275146
+        ],
+        "uvAndUnorm": [
+          0.6053009033203125,
+          0.8491363525390625,
+          239.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.05889892578125,
+          301.564453125,
+          -299.9146423339844,
+          0.9369397163391113
+        ]
+      },
+      {
+        "expectedVisibility": 86,
+        "normalAndCount": [
+          -0.5327497720718384,
+          -0.24004706740379333,
+          0.8115140795707703,
+          36.0
+        ],
+        "pixel": [
+          1324,
+          289
+        ],
+        "projectionAndDelta": [
+          0.4215545654296875,
+          0.691436767578125,
+          0.6856918334960938,
+          0.3236239552497864
+        ],
+        "uvAndUnorm": [
+          0.6053886413574219,
+          0.8457183837890625,
+          86.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.06207275390625,
+          301.531494140625,
+          -299.9337158203125,
+          0.3363052308559418
+        ]
+      },
+      {
+        "expectedVisibility": 95,
+        "normalAndCount": [
+          0.3230167031288147,
+          0.693105936050415,
+          0.6444100141525269,
+          35.0
+        ],
+        "pixel": [
+          1322,
+          320
+        ],
+        "projectionAndDelta": [
+          0.4290008544921875,
+          0.6809844970703125,
+          0.6764717102050781,
+          0.036803603172302246
+        ],
+        "uvAndUnorm": [
+          0.6072502136230469,
+          0.8404922485351562,
+          95.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0593566894531,
+          301.488525390625,
+          -299.939697265625,
+          0.3722724914550781
+        ]
+      },
+      {
+        "expectedVisibility": 255,
+        "normalAndCount": [
+          0.41856008768081665,
+          0.1347905993461609,
+          0.8981307744979858,
+          0.0
+        ],
+        "pixel": [
+          1258,
+          215
+        ],
+        "projectionAndDelta": [
+          0.4791717529296875,
+          0.7101287841796875,
+          0.7294769287109375,
+          -0.0
+        ],
+        "uvAndUnorm": [
+          0.6197929382324219,
+          0.8550643920898438,
+          255.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -299.9688415527344,
+          301.6252136230469,
+          -299.8841247558594,
+          1.0
+        ]
+      }
+    ],
+    "status": "evaluated",
+    "validationErrors": 0,
+    "zeroAllocator": true
+  },
+  "fullRegion": {
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "exactPixels": 16912,
+    "maximumVisibilityByteError": 1,
+    "pixels": 17017,
+    "rows": [
+      {
+        "expectedVisibility": 68,
+        "normalAndCount": [
+          -0.41573360562324524,
+          -0.8693990707397461,
+          0.2670406103134155,
+          38.0
+        ],
+        "pixel": [
+          1296,
+          165
+        ],
+        "projectionAndDelta": [
+          0.4453125,
+          0.7418212890625,
+          0.7302818298339844,
+          0.10919749736785889
+        ],
+        "uvAndUnorm": [
+          0.611328125,
+          0.87091064453125,
+          69.0,
+          0.70108962059021
+        ],
+        "worldAndVisibility": [
+          -300.02215576171875,
+          301.7011413574219,
+          -299.9066467285156,
+          0.2687317430973053
+        ]
+      },
+      {
+        "expectedVisibility": 213,
+        "normalAndCount": [
+          -0.06011947616934776,
+          0.9204955697059631,
+          -0.38610053062438965,
+          22.0
+        ],
+        "pixel": [
+          1278,
+          167
+        ],
+        "projectionAndDelta": [
+          0.46185302734375,
+          0.7430267333984375,
+          0.7358055114746094,
+          0.02032029628753662
+        ],
+        "uvAndUnorm": [
+          0.6154632568359375,
+          0.8715133666992188,
+          214.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -299.996826171875,
+          301.6959228515625,
+          -299.89715576171875,
+          0.8372968435287476
+        ]
+      },
+      {
+        "expectedVisibility": 1,
+        "normalAndCount": [
+          -0.010602788999676704,
+          -0.4545949101448059,
+          0.8906351923942566,
+          57.0
+        ],
+        "pixel": [
+          1302,
+          168
+        ],
+        "projectionAndDelta": [
+          0.44244384765625,
+          0.7439117431640625,
+          0.72808837890625,
+          0.3352484107017517
+        ],
+        "uvAndUnorm": [
+          0.6106109619140625,
+          0.8719558715820312,
+          2.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.03076171875,
+          301.7005310058594,
+          -299.92083740234375,
+          0.006075024604797363
+        ]
+      },
+      {
+        "expectedVisibility": 207,
+        "normalAndCount": [
+          -0.1639937162399292,
+          -0.871216356754303,
+          0.46269649267196655,
+          23.0
+        ],
+        "pixel": [
+          1291,
+          170
+        ],
+        "projectionAndDelta": [
+          0.4494476318359375,
+          0.735931396484375,
+          0.7320976257324219,
+          0.039743661880493164
+        ],
+        "uvAndUnorm": [
+          0.6123619079589844,
+          0.8679656982421875,
+          208.0,
+          0.900603175163269
+        ],
+        "worldAndVisibility": [
+          -300.0151062011719,
+          301.69219970703125,
+          -299.89923095703125,
+          0.8139362931251526
+        ]
+      },
+      {
+        "expectedVisibility": 19,
+        "normalAndCount": [
+          -0.07263745367527008,
+          -0.4847158193588257,
+          0.8716502785682678,
+          47.0
+        ],
+        "pixel": [
+          1297,
+          171
+        ],
+        "projectionAndDelta": [
+          0.4466400146484375,
+          0.7426605224609375,
+          0.7270050048828125,
+          0.2910075783729553
+        ],
+        "uvAndUnorm": [
+          0.6116600036621094,
+          0.8713302612304688,
+          20.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0237121582031,
+          301.69671630859375,
+          -299.9224548339844,
+          0.07659021019935608
+        ]
+      },
+      {
+        "expectedVisibility": 19,
+        "normalAndCount": [
+          -0.06532444059848785,
+          -0.42324844002723694,
+          0.9036555886268616,
+          47.0
+        ],
+        "pixel": [
+          1297,
+          172
+        ],
+        "projectionAndDelta": [
+          0.4467315673828125,
+          0.7425384521484375,
+          0.7266998291015625,
+          0.29318928718566895
+        ],
+        "uvAndUnorm": [
+          0.6116828918457031,
+          0.8712692260742188,
+          20.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0237121582031,
+          301.6954650878906,
+          -299.9232177734375,
+          0.07660305500030518
+        ]
+      },
+      {
+        "expectedVisibility": 36,
+        "normalAndCount": [
+          -0.053713154047727585,
+          -0.5781238675117493,
+          0.8141791224479675,
+          43.0
+        ],
+        "pixel": [
+          1298,
+          173
+        ],
+        "projectionAndDelta": [
+          0.446136474609375,
+          0.7420501708984375,
+          0.7254638671875,
+          0.3275379538536072
+        ],
+        "uvAndUnorm": [
+          0.6115341186523438,
+          0.8710250854492188,
+          37.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0251159667969,
+          301.69427490234375,
+          -299.9241638183594,
+          0.14327311515808105
+        ]
+      },
+      {
+        "expectedVisibility": 1,
+        "normalAndCount": [
+          -0.15604348480701447,
+          -0.577660858631134,
+          0.8012230396270752,
+          57.0
+        ],
+        "pixel": [
+          1292,
+          174
+        ],
+        "projectionAndDelta": [
+          0.450775146484375,
+          0.741302490234375,
+          0.7255668640136719,
+          0.2974380850791931
+        ],
+        "uvAndUnorm": [
+          0.6126937866210938,
+          0.8706512451171875,
+          2.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0166320800781,
+          301.6928405761719,
+          -299.92413330078125,
+          0.005982726812362671
+        ]
+      },
+      {
+        "expectedVisibility": 127,
+        "normalAndCount": [
+          -0.07607010006904602,
+          0.8080652356147766,
+          0.5841608047485352,
+          32.0
+        ],
+        "pixel": [
+          1283,
+          175
+        ],
+        "projectionAndDelta": [
+          0.4582672119140625,
+          0.7422637939453125,
+          0.7309036254882812,
+          0.08354902267456055
+        ],
+        "uvAndUnorm": [
+          0.6145668029785156,
+          0.8711318969726562,
+          128.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.00390625,
+          301.68896484375,
+          -299.9143981933594,
+          0.5
+        ]
+      },
+      {
+        "expectedVisibility": 0,
+        "normalAndCount": [
+          0.3754928410053253,
+          0.8967652916908264,
+          0.23413078486919403,
+          59.0
+        ],
+        "pixel": [
+          1263,
+          177
+        ],
+        "projectionAndDelta": [
+          0.4793548583984375,
+          0.7427978515625,
+          0.7296562194824219,
+          0.1597588062286377
+        ],
+        "uvAndUnorm": [
+          0.6198387145996094,
+          0.87139892578125,
+          1.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -299.9756164550781,
+          301.6876220703125,
+          -299.9202575683594,
+          0.002190202474594116
+        ]
+      },
+      {
+        "expectedVisibility": 127,
+        "normalAndCount": [
+          0.05001286417245865,
+          0.6844624280929565,
+          0.7273306250572205,
+          32.0
+        ],
+        "pixel": [
+          1272,
+          178
+        ],
+        "projectionAndDelta": [
+          0.4680633544921875,
+          0.738433837890625,
+          0.7322616577148438,
+          0.06742095947265625
+        ],
+        "uvAndUnorm": [
+          0.6170158386230469,
+          0.8692169189453125,
+          128.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -299.98834228515625,
+          301.68377685546875,
+          -299.9106140136719,
+          0.5
+        ]
+      },
+      {
+        "expectedVisibility": 127,
+        "normalAndCount": [
+          0.557428777217865,
+          0.8031273484230042,
+          0.2103794366121292,
+          32.0
+        ],
+        "pixel": [
+          1257,
+          180
+        ],
+        "projectionAndDelta": [
+          0.485595703125,
+          0.74041748046875,
+          0.7293701171875,
+          0.04198265075683594
+        ],
+        "uvAndUnorm": [
+          0.62139892578125,
+          0.870208740234375,
+          128.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -299.96710205078125,
+          301.6830749511719,
+          -299.9192199707031,
+          0.5
+        ]
+      },
+      {
+        "expectedVisibility": 47,
+        "normalAndCount": [
+          -0.5793601274490356,
+          0.7114080786705017,
+          0.39779430627822876,
+          41.0
+        ],
+        "pixel": [
+          1307,
+          182
+        ],
+        "projectionAndDelta": [
+          0.433929443359375,
+          0.7384185791015625,
+          0.7276458740234375,
+          0.10731405019760132
+        ],
+        "uvAndUnorm": [
+          0.6084823608398438,
+          0.8692092895507812,
+          48.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0376892089844,
+          301.6773986816406,
+          -299.90765380859375,
+          0.1862785816192627
+        ]
+      },
+      {
+        "expectedVisibility": 213,
+        "normalAndCount": [
+          0.4110528826713562,
+          0.5530230402946472,
+          0.7247076034545898,
+          22.0
+        ],
+        "pixel": [
+          1255,
+          183
+        ],
+        "projectionAndDelta": [
+          0.4857330322265625,
+          0.7365570068359375,
+          0.730224609375,
+          0.022309422492980957
+        ],
+        "uvAndUnorm": [
+          0.6214332580566406,
+          0.8682785034179688,
+          214.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -299.96429443359375,
+          301.6783447265625,
+          -299.9172668457031,
+          0.8372726440429688
+        ]
+      },
+      {
+        "expectedVisibility": 127,
+        "normalAndCount": [
+          -0.625386655330658,
+          0.6520698070526123,
+          0.4285983145236969,
+          32.0
+        ],
+        "pixel": [
+          1311,
+          186
+        ],
+        "projectionAndDelta": [
+          0.429962158203125,
+          0.735870361328125,
+          0.7266273498535156,
+          0.059056222438812256
+        ],
+        "uvAndUnorm": [
+          0.6074905395507812,
+          0.8679351806640625,
+          128.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0433044433594,
+          301.6712341308594,
+          -299.9056091308594,
+          0.5
+        ]
+      },
+      {
+        "expectedVisibility": 255,
+        "normalAndCount": [
+          0.41856008768081665,
+          0.1347905993461609,
+          0.8981307744979858,
+          0.0
+        ],
+        "pixel": [
+          1258,
+          215
+        ],
+        "projectionAndDelta": [
+          0.4791717529296875,
+          0.7101287841796875,
+          0.7294769287109375,
+          -0.0
+        ],
+        "uvAndUnorm": [
+          0.6197929382324219,
+          0.8550643920898438,
+          255.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -299.9688415527344,
+          301.6252136230469,
+          -299.8841247558594,
+          1.0
+        ]
+      },
+      {
+        "expectedVisibility": 254,
+        "normalAndCount": [
+          -0.1417391449213028,
+          0.06911240518093109,
+          0.9874883890151978,
+          5.0
+        ],
+        "pixel": [
+          1297,
+          223
+        ],
+        "projectionAndDelta": [
+          0.4412689208984375,
+          0.7058258056640625,
+          0.7260169982910156,
+          0.0022794008255004883
+        ],
+        "uvAndUnorm": [
+          0.6103172302246094,
+          0.8529129028320312,
+          255.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.02337646484375,
+          301.6121826171875,
+          -299.87603759765625,
+          0.9980447888374329
+        ]
+      },
+      {
+        "expectedVisibility": 239,
+        "normalAndCount": [
+          -0.5928072929382324,
+          -0.3836780786514282,
+          0.7080752849578857,
+          16.0
+        ],
+        "pixel": [
+          1322,
+          263
+        ],
+        "projectionAndDelta": [
+          0.42120361328125,
+          0.698272705078125,
+          0.6987037658691406,
+          0.033404767513275146
+        ],
+        "uvAndUnorm": [
+          0.6053009033203125,
+          0.8491363525390625,
+          239.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.05889892578125,
+          301.564453125,
+          -299.9146423339844,
+          0.9369397163391113
+        ]
+      },
+      {
+        "expectedVisibility": 86,
+        "normalAndCount": [
+          -0.5327497720718384,
+          -0.24004706740379333,
+          0.8115140795707703,
+          36.0
+        ],
+        "pixel": [
+          1324,
+          289
+        ],
+        "projectionAndDelta": [
+          0.4215545654296875,
+          0.691436767578125,
+          0.6856918334960938,
+          0.3236239552497864
+        ],
+        "uvAndUnorm": [
+          0.6053886413574219,
+          0.8457183837890625,
+          86.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.06207275390625,
+          301.531494140625,
+          -299.9337158203125,
+          0.3363052308559418
+        ]
+      },
+      {
+        "expectedVisibility": 95,
+        "normalAndCount": [
+          0.3230167031288147,
+          0.693105936050415,
+          0.6444100141525269,
+          35.0
+        ],
+        "pixel": [
+          1322,
+          320
+        ],
+        "projectionAndDelta": [
+          0.4290008544921875,
+          0.6809844970703125,
+          0.6764717102050781,
+          0.036803603172302246
+        ],
+        "uvAndUnorm": [
+          0.6072502136230469,
+          0.8404922485351562,
+          95.0,
+          1.0
+        ],
+        "worldAndVisibility": [
+          -300.0593566894531,
+          301.488525390625,
+          -299.939697265625,
+          0.3722724914550781
+        ]
+      }
+    ],
+    "status": "evaluated",
+    "validationErrors": 0,
+    "withinOnePixels": 17017,
+    "zeroAllocator": true
+  },
+  "actualAttachment": {
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "exactPixels": 17017,
+    "halfValueConvertedBytes": [
+      127
+    ],
+    "halfValuePixels": 28,
+    "maximumVisibilityByteError": 0,
+    "pixels": 17017,
+    "scope": "Actual fragment output into R8G8_UNORM with blending disabled. Inputs are the saved full-precision source-model visibility values; no visibility computation or original target was changed.",
+    "status": "evaluated",
+    "validationErrors": 0,
+    "withinOnePixels": 17017,
+    "zeroAllocator": true
+  },
+  "regionInputs": {
+    "maskPixels": 17017,
+    "box": [
+      1140,
+      130,
+      1430,
+      440
+    ],
+    "maskPath": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\native-hair-visible-mask.png",
+    "maskSha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7",
+    "queriesSha256": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+    "expectedSha256": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50",
+    "nativeVisibilitySha256": "ed6b1149357db8d07e9fd5fd247d372890e31f50303879f4e1f8607ac8e8b76e"
+  },
+  "readOnlyInputs": {
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\producer-cb0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\producer-cb1.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\producer-cb3.bin": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t0.bin": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t2.bin": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\native-t6.bin": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\native-screen-visibility.bin": "ed6b1149357db8d07e9fd5fd247d372890e31f50303879f4e1f8607ac8e8b76e",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-031252-hair-residual-fragment-diagnosis-13e962\\candidate-1322-263.json": "1cbb711f659363387fe66bacd54bede9a98cc16727846b1efa82169f9b35fd55",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-031252-hair-residual-fragment-diagnosis-13e962\\candidate-1324-289.json": "d06f0aa5f9836c321b26990774e0f6c1554dca5a08a1a9f70ab8ccd9b8e7935e",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-031252-hair-residual-fragment-diagnosis-13e962\\candidate-1322-320.json": "62f5267e77025fcc1466c181906076a45f72ac8c282281dc41e52310995d8e4b",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-031252-hair-residual-fragment-diagnosis-13e962\\candidate-1258-215.json": "7ed42a7847cb51ecbf9a99ee7ca6de3745a1ed5b2f377acb03604f05a16096a5"
+  },
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "status": "passed",
+      "sha256": "e6b5ae26b0356e567014bfb2d52d461f6d5c7bd3b16ef0417ce3b488f476a192"
+    },
+    {
+      "configuration": "debug",
+      "status": "passed",
+      "sha256": "02f4730b3984dd124301b809ca8ca4b8e508d690d7afc8a0b00d376df3ec2e7b"
+    }
+  ],
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "productionIntegrated": false,
+  "fullHairColorPassed": false,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 910726,
+  "evidenceSha256": "940c26baddbfd26908e42dea95b66d2bfca98849b7290bb302a0948389a184ff",
+  "members": [
+    {
+      "path": "budget.json",
+      "bytes": 434,
+      "sha256": "e3c0b5a95f9322003d57455e2dd60e7f2927daf9d9942c0bcadcf373dc6ea8c7"
+    },
+    {
+      "path": "compare_origin.py",
+      "bytes": 5215,
+      "sha256": "1a6cbd993d473dc3c12ed1c0c3aa730a134486f0318bc893ef798a5e7d2472ce"
+    },
+    {
+      "path": "compile.log",
+      "bytes": 14,
+      "sha256": "2d1371c7d3d6b24c243d46a0cd5668c070c92213a03058a9aba0054db02472c7"
+    },
+    {
+      "path": "gpu-execution.json",
+      "bytes": 399,
+      "sha256": "c03a6dbac03afda29bcb7d5947fca9cb6233bf22cf8303c3ca69f4892bdf2d8a"
+    },
+    {
+      "path": "gpu-inputs.json",
+      "bytes": 1054,
+      "sha256": "5f65a7bac137b468c969d971f4603295b46d10beb0b8762af7621d9b557e5509"
+    },
+    {
+      "path": "gpu-preparation.json",
+      "bytes": 189560,
+      "sha256": "f22c1deba738f7ead198d906c62e7b9d28aa88c22c4f4a43e65967f862e4bff3"
+    },
+    {
+      "path": "gpu-result.json",
+      "bytes": 2808,
+      "sha256": "03cdc5be75ff38800b1018c2528151c2ece270afda340e31c3d1bb612b91a2fa"
+    },
+    {
+      "path": "link.log",
+      "bytes": 118,
+      "sha256": "84292bacb31dc99f0a69c537aa6acc825f178fe47c65897baef1c81870c8504b"
+    },
+    {
+      "path": "origin-control.json",
+      "bytes": 194684,
+      "sha256": "78a063a97aeffb99ab74a4477dfd6d38d7914f33e256b231ee6f64ac1d682965"
+    },
+    {
+      "path": "package.py",
+      "bytes": 3484,
+      "sha256": "61a16913b4dd292caa2dcf7a90b37d78cd266ee92d4010a81a76a4301f85fb71"
+    },
+    {
+      "path": "prepare_gpu.py",
+      "bytes": 3728,
+      "sha256": "3caa502aea68b8894569e78a20cf329352cd50790f7913a7ccbd0de15804acc6"
+    },
+    {
+      "path": "prepare_region.py",
+      "bytes": 1746,
+      "sha256": "b007b99b39ff4ef81b7a6fda89dc507c5341e9c0a1a001c59649d42477f8dbd1"
+    },
+    {
+      "path": "process.log",
+      "bytes": 521,
+      "sha256": "b96ebe9e11f09eccaa6b5c9c404010d7d6938775651623fc8bbb3c7d39cb79c8"
+    },
+    {
+      "path": "quantization-result.json",
+      "bytes": 519,
+      "sha256": "42ead721896d441f98b5af8db2b333ef839a959f17b49c5c3ccf5e8dc6819196"
+    },
+    {
+      "path": "quantize-compile.log",
+      "bytes": 14,
+      "sha256": "f7cb697cca9b0e76b50401100bfe3b9e23f87b0f3197e5ca930aea4b908acb01"
+    },
+    {
+      "path": "quantize-execution.json",
+      "bytes": 3186,
+      "sha256": "323296e9b530c8521b3b3b935d9f55916099c3271b93358b22baf58f89163c81"
+    },
+    {
+      "path": "quantize-link.log",
+      "bytes": 118,
+      "sha256": "84292bacb31dc99f0a69c537aa6acc825f178fe47c65897baef1c81870c8504b"
+    },
+    {
+      "path": "quantize.cpp",
+      "bytes": 6548,
+      "sha256": "c1750d4d878fd2e0016b848b4a7fa36adc422bc33af8ab4b3000e1f337601e7d"
+    },
+    {
+      "path": "quantize.frag",
+      "bytes": 370,
+      "sha256": "7eb9665eba6c20fd1a7879e447274e23a4a0d6e70912ed05022622b8fc0caea8"
+    },
+    {
+      "path": "quantize.frag.spv",
+      "bytes": 1668,
+      "sha256": "c6cd07cbedc2d0a201d2c7a2cf5dfb7ac859659d58bb91ecf99702c149ea6b7b"
+    },
+    {
+      "path": "quantize.vert",
+      "bytes": 136,
+      "sha256": "6e0a608ded0f75ca3daa5d9ac93e0176671932db4ec367ad5da233c0d1a5d245"
+    },
+    {
+      "path": "quantize.vert.spv",
+      "bytes": 1164,
+      "sha256": "2b41fb7cb0181677b2abcf1af4680e7fac792d7a9000d84e7a56b1a921e54bed"
+    },
+    {
+      "path": "quantized-rg8.bin",
+      "bytes": 34304,
+      "sha256": "70cfacfe9239031acc698207929efecfdf340f5d3f07bb49a4ef677d54720df3"
+    },
+    {
+      "path": "receiver-compiled.comp",
+      "bytes": 3472,
+      "sha256": "c965bd88557ba938dade81e8b9081aeac5c44a99360ab0c5557c68f1cff11fa6"
+    },
+    {
+      "path": "receiver.comp",
+      "bytes": 2536,
+      "sha256": "0b1ebf9c59473c93e0cd83726a24ddc5932fc6396a6ea15944ef3b1fc14c7df6"
+    },
+    {
+      "path": "receiver.cpp",
+      "bytes": 8137,
+      "sha256": "f939fad7450964a0882b46f79a60dfd21a0d98112f63db1130647f59c0d9cd3e"
+    },
+    {
+      "path": "receiver.spv",
+      "bytes": 12480,
+      "sha256": "931f2995bd61da62aaef4a21e2baef3766d7d77f0828896b4d6ef85214ae2b4d"
+    },
+    {
+      "path": "region-driver.log",
+      "bytes": 13636,
+      "sha256": "f387665d6c8974e3fecb76242a5cb1b2d062ff86577369ab466fe2ee839f69bc"
+    },
+    {
+      "path": "region-expected.bin",
+      "bytes": 68068,
+      "sha256": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50"
+    },
+    {
+      "path": "region-inputs.json",
+      "bytes": 613,
+      "sha256": "305988deb5290b64f7868cd71f136d260558bb464645cbaddb4fbf050a7c12bd"
+    },
+    {
+      "path": "region-output.bin",
+      "bytes": 1089088,
+      "sha256": "8a6dc9f36f7bf82c048ecca7ade93f16bef389b06dd226b83030e5e5c81c5779"
+    },
+    {
+      "path": "region-queries.bin",
+      "bytes": 272272,
+      "sha256": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8"
+    },
+    {
+      "path": "region-result.json",
+      "bytes": 13634,
+      "sha256": "d3c3e0e37b68621b7616f009d76333e7d7e65a9858ef677e2f95c0b89a94e4fc"
+    },
+    {
+      "path": "run_gpu.py",
+      "bytes": 1324,
+      "sha256": "60ad856e1f3afcaa0f9ad217e4e108834ec8834f90526d78d564c0d20856d203"
+    },
+    {
+      "path": "run_quantize.py",
+      "bytes": 2571,
+      "sha256": "f0b48beb1e817bb9c3f377e9070f3661d2abbc4854690d1b3f66b4e91d31a696"
+    },
+    {
+      "path": "source-input/cb0.bin",
+      "bytes": 1536,
+      "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+    },
+    {
+      "path": "source-input/cb1.bin",
+      "bytes": 3328,
+      "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+    },
+    {
+      "path": "source-input/cb3.bin",
+      "bytes": 6400,
+      "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f"
+    }
+  ]
+}

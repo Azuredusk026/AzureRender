@@ -1,0 +1,15 @@
+[0/2] Re-checking globbed directories...
+[1/6] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/6] Building CXX object CMakeFiles\AzureLuaScripting.dir\src\scripting\lua\ScriptRuntime.cpp.obj
+FAILED: [code=2] CMakeFiles/AzureLuaScripting.dir/src/scripting/lua/ScriptRuntime.cpp.obj 
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_ENABLE_VALIDATION=1 -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DJPH_FLOATING_POINT_EXCEPTIONS_ENABLED -DJPH_OBJECT_STREAM -DJPH_USE_CPU_COMPUTE -DLUA_BUILD_AS_DLL -DOPENEXR_DLL -I..\..\src -Igenerated -Ivcpkg_installed\x64-windows\include -IC:\VulkanSDK\1.4.350.0\include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath -MDd /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzureLuaScripting.dir\src\scripting\lua\ScriptRuntime.cpp.obj /FdCMakeFiles\AzureLuaScripting.dir\AzureLuaScripting.pdb /FS -c ..\..\src\scripting\lua\ScriptRuntime.cpp
+..\..\src\scripting\lua\ScriptRuntime.cpp(102): error C2228: “.begin”的左边必须有类/结构/联合
+..\..\src\scripting\lua\ScriptRuntime.cpp(102): note: 类型为“const azurerender::BindingDescriptor [15]”
+..\..\src\scripting\lua\ScriptRuntime.cpp(102): error C2672: “std::any_of”: 未找到匹配的重载函数
+D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\include\algorithm(1364): note: 可能是“bool std::any_of(_ExPo &&,_FwdIt,_FwdIt,_Pr) noexcept”
+..\..\src\scripting\lua\ScriptRuntime.cpp(102): note: “bool std::any_of(_ExPo &&,_FwdIt,_FwdIt,_Pr) noexcept”: 应输入 4 个参数，却提供了 2 个
+D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\include\algorithm(1348): note: 或    “bool std::any_of(const _InIt,const _InIt,_Pr)”
+..\..\src\scripting\lua\ScriptRuntime.cpp(102): note: “bool std::any_of(const _InIt,const _InIt,_Pr)”: 应输入 3 个参数，却提供了 2 个
+..\..\src\scripting\lua\ScriptRuntime.cpp(102): error C2737: “method”: 必须初始化 const 对象
+ninja: build stopped: subcommand failed.

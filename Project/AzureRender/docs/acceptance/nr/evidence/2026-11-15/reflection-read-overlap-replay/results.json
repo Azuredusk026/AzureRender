@@ -1,0 +1,18 @@
+{
+  "job": 804,
+  "captureSha256": "35077c571bcb70bc99688bfb97eec1b291bd6567df7482746fd3f5db49f339b3",
+  "traceAttachmentsExact": 3,
+  "filterDifferentBytes": 91030,
+  "traceMediansMs": [
+    0.47163200000000005,
+    0.504304,
+    0.632496,
+    0.660416
+  ],
+  "referenceMeanMs": 0.5660240000000001,
+  "candidateMeanMs": 0.5684,
+  "referenceDriftFraction": 0.333526493576244,
+  "status": "no-acceptance-gain",
+  "archiveMembers": 11,
+  "archiveSha256": "7351cb26aa9aeec05726829b6f1118ea932b50431f395ac01a4247bdb006fc41"
+}

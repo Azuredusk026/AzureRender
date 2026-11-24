@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "vcpkgBaseline": "2bc124dac8436f5d8e108273aacf3f68d9824185",
+  "packages": [
+    {
+      "name": "directxtex",
+      "version": "2026-05-07",
+      "repository": "https://github.com/Microsoft/DirectXTex",
+      "licenseSha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+    },
+    {
+      "name": "directxmath",
+      "version": "2026-06-12",
+      "repository": "https://github.com/Microsoft/DirectXMath",
+      "licenseSha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+    },
+    {
+      "name": "ktx",
+      "version": "4.4.2",
+      "repository": "https://github.com/KhronosGroup/KTX-Software",
+      "licenseSha256": "0f92b4ce771585dfebc963ede074a30b4431b9e327911db44097d83ccf372128"
+    },
+    {
+      "name": "zstd",
+      "version": "1.5.7",
+      "repository": "https://github.com/facebook/zstd",
+      "licenseSha256": "434dca949c6da7c500413aef694539fe37f867dd1a94d83d4ed1d260194e2660"
+    }
+  ],
+  "ktxLicenseFiles": [
+    {
+      "path": "Apache-2.0.txt",
+      "sha256": "44b0a56e80b41a1b0a6bd1292515e806539fd97b30be54c2719e6c763190ab57"
+    },
+    {
+      "path": "BSD-1-Clause.txt",
+      "sha256": "9f213b0e6f1b624e6b16c379486a77368a911f8cec17d9ebe4b859487adc79a4"
+    },
+    {
+      "path": "BSD-2-Clause.txt",
+      "sha256": "b992a2e547b7ec8f02dc5d67fe3887d441f5749d31865ce2d6d835e52f0c4292"
+    },
+    {
+      "path": "BSD-3-Clause.txt",
+      "sha256": "f2acfc9738e37a0a49bc376ebac221a847867b367ee9a49fa198b4389dcd9cc9"
+    },
+    {
+      "path": "BSL-1.0.txt",
+      "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566"
+    },
+    {
+      "path": "CC-BY-3.0.txt",
+      "sha256": "2ce14c211adf07f0caa772c22c7e89d49bd4c117463bfba30c22ccfa2fc88491"
+    },
+    {
+      "path": "CC-BY-4.0.txt",
+      "sha256": "767b617e6eaed886c24153a5edb2e48367cf761aac6757ea46ca99d0b931722a"
+    },
+    {
+      "path": "CC0-1.0.txt",
+      "sha256": "40b7eb1e9ca7bd79c4cc334a3cac6258d936c5b4461484dfed40293b9d5b61c2"
+    },
+    {
+      "path": "LicenseRef-Cesium-Trademark-Terms.txt",
+      "sha256": "21d6bec6d5c9a4a52429f4c59489abbe9093703d4abfd5ea5ffd2e9cf5934448"
+    },
+    {
+      "path": "LicenseRef-ETCSLA.txt",
+      "sha256": "8981db93abcb592e59b519efca75a3573af98a6390e93aa45cc0c4c8edb1c819"
+    },
+    {
+      "path": "LicenseRef-fmt.txt",
+      "sha256": "07580f2a3b35709ce703d523f447b242f6dfec7582a8c0df102c7fa2849375f8"
+    },
+    {
+      "path": "LicenseRef-HI-Trademark.txt",
+      "sha256": "4f937797a70963a7d03dc55960770dccb04726816cd2e440e5135448f20be03a"
+    },
+    {
+      "path": "LicenseRef-Kodak.txt",
+      "sha256": "1dd8d9721d8f047dc1e4c6fe261a5bd70df7262289c44b1cdd962c1d9b54f984"
+    },
+    {
+      "path": "LicenseRef-PNGSuite.txt",
+      "sha256": "612c7319dd68c7b9f9522fcee166191745ee8244b0e1801b6fd658f788839f86"
+    },
+    {
+      "path": "MIT.txt",
+      "sha256": "8f25018489d6fe0dec34a352314c38dc146247b7de65735790f4398a92afa84b"
+    },
+    {
+      "path": "source-LICENSE.md.txt",
+      "sha256": "0f92b4ce771585dfebc963ede074a30b4431b9e327911db44097d83ccf372128"
+    },
+    {
+      "path": "Zlib.txt",
+      "sha256": "2259b985e96b3fec86eae5afc92e05691d9540073b3fb91cc06c120c507be9a0"
+    }
+  ],
+  "sourceArchives": [
+    {
+      "repo": "Microsoft/DirectXMath",
+      "ref": "jun2026",
+      "url": "https://codeload.github.com/Microsoft/DirectXMath/tar.gz/jun2026",
+      "sha512": "47003d3c223e0b99f99346f0f6f971df1cab319dc975479b12a8b353022de603293761e1da78e811b824e649ec935de07b54c0abff308d4b0fcea05b7732e494",
+      "bytes": 262470
+    },
+    {
+      "repo": "Microsoft/DirectXTex",
+      "ref": "may2026",
+      "url": "https://codeload.github.com/Microsoft/DirectXTex/tar.gz/may2026",
+      "sha512": "0ff5c18418662f89d9b6efa07df118731404ca538ef456542ccfc287fd1fe1866e7fddc912a74c7e04861c6ec71ef8a47db75f3f8377aff14d0f49894492dec1",
+      "bytes": 539131
+    },
+    {
+      "repo": "KhronosGroup/KTX-Software",
+      "ref": "v4.4.2",
+      "url": "https://codeload.github.com/KhronosGroup/KTX-Software/tar.gz/v4.4.2",
+      "sha512": "19514da2d5b021d7fd1e24251dfd27d0e032018bdb84c7f76328de0ad431aeff12a77e7b3c857a1933a0b258a83ffd4b77cd053672702cc6f7132afcd1fa253e",
+      "bytes": 212599126
+    },
+    {
+      "repo": "KhronosGroup/OpenGL-Registry",
+      "ref": "e8f7cd0e35ac8d6f5667a021ff83d04b1fec41ef",
+      "url": "https://codeload.github.com/KhronosGroup/OpenGL-Registry/tar.gz/e8f7cd0e35ac8d6f5667a021ff83d04b1fec41ef",
+      "sha512": "7b2eab04e54aa77294887f897f3091c07ecad38acc1dfb1e9d1efc3954d347a0b8c2666f3ceaf074dd17a3d97305f3d99494fe80c4b2f17d052183dfab1927c5",
+      "bytes": 113891119
+    },
+    {
+      "repo": "KhronosGroup/EGL-Registry",
+      "ref": "3ae2b7c48690d2ce13cc6db3db02dfc0572be65e",
+      "url": "https://codeload.github.com/KhronosGroup/EGL-Registry/tar.gz/3ae2b7c48690d2ce13cc6db3db02dfc0572be65e",
+      "sha512": "c7b09ded4964fa427546bd345a29325105b79079b59642214dc8f04de113f42de2bc4272dbbbd4a801d92afc20297442fdfa12043a0900cf1e2b1cd83f260883",
+      "bytes": 3371678
+    },
+    {
+      "repo": "facebook/zstd",
+      "ref": "v1.5.7",
+      "url": "https://codeload.github.com/facebook/zstd/tar.gz/v1.5.7",
+      "sha512": "26e441267305f6e58080460f96ab98645219a90d290a533410b1b0b1d2f870721c95f8384e342ee647c5e968385a5b7e30c2d04340c37f59b3e6d86762c3260c",
+      "bytes": 2451884
+    }
+  ],
+  "scope": "二维容器使用 DirectXTex 与 KTX-Software。Basis 输出采用 UASTC。组合许可随安装分发。"
+}

@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "scope": "MSVC compilation of five no-ImGui editor implementation branches; no separate platform runtime claim",
+  "files": [
+    "AssetBrowserPanel.cpp",
+    "CapturePanel.cpp",
+    "ConsolePanel.cpp",
+    "EditorToolbar.cpp",
+    "ImGuiEditorLayer.cpp"
+  ]
+}

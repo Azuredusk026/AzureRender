@@ -1,0 +1,12 @@
+{
+  "dependencies": [],
+  "id": "ba620cbb-836d-4253-bd2f-e64c6bbe3b44",
+  "schemaVersion": 1,
+  "settings": {
+    "texture": {
+      "filter": "linear",
+      "schemaVersion": 1,
+      "usage": "albedo"
+    }
+  }
+}

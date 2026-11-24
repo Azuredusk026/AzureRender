@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "NativeOptimizationEvidence",
+  "status": "isolated-native-zero-pixel-failure",
+  "sourceBase": "acf9826",
+  "candidatePlayerSha256": "823d9fd6457005f0a2d8656e3bb3659d7c73fdcf3f6794e8fad365680789197e",
+  "candidateSource": {
+    "CMakeLists.txt": "e2396f02eeeaca0c77e4c3996a7708a6706f6d9d2ebf6dea5d346e04be450f86",
+    "shaders\\mesh.frag": "9f52fec93891b75ff5035a01ddae173d0d69e1f864c32fc18ec124d3a1833c1d",
+    "shaders\\unlit_blend.glsl": "79322a8846a20ff9865330f2651b49e8f4ce17aeec63a38cfad5bcaf718f4b7a",
+    "shaders\\unlit_opaque.glsl": "03ffbbd514c8c1ba8370f6756d7d416b99af5acbc863e2622aff05d97e67117c",
+    "src\\render\\MaterialPipelinePolicy.hpp": "e21182b1d18d7da07a52c1da0b90a373a6d32fbb59e1378c74917067bb6c817b",
+    "src\\scenes\\CharacterMaterialSampling.inc": "483bab797319344491f773670ee951a289b58ad6c60db3c512a0c8f02444c391",
+    "src\\scenes\\CharacterSceneRenderer.cpp": "e35c863604e1529ce01d42f32037909001d3fcf2a04d62c6534b68917d782cf2",
+    "src\\scenes\\CharacterSceneRenderer.hpp": "8775fd799d24abb367fca515ca93efd762796f3329a9011ab2cb76c2b6605eaf",
+    "tests\\ComputedMaterialViewRecordingTests.cpp": "27edf25c410139193e64b0bffadd49a00f458dd68b7231844d1b4881fb95f704",
+    "tests\\DepthPrefillRecordingTests.cpp": "fc19167f23a7e9d4cdb5f82200373c502a6c0a9d74f8a59aecc81c8cf9b230b2",
+    "tests\\MaterialClassEarlyDepthTests.cpp": "c4a782030d3f6aa7610c60c10e26cc0fd35dedd02eec1548838363a9f5fec059"
+  },
+  "changedProgramCount": 516,
+  "programCount": 663,
+  "results": {
+    "file": "results.json",
+    "sha256": "0ed445a6b21d577d4a3ee1494f01b65c948c8e0ac4ae0d1e9833c464ca9b82f2"
+  },
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 1480002,
+    "sha256": "03b2e8779898b8d79017a861ec7032e12fc72f2c522c9ece8f2853e0e852e3f0"
+  },
+  "productionSourceRestored": true,
+  "productionProgramsRestored": true,
+  "releasePlayerCodeRestored": true,
+  "formalAcceptance": false
+}

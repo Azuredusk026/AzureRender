@@ -1,0 +1,36 @@
+{
+  "status": "compiled-isolated-depth-sampling-controls",
+  "variants": [
+    {
+      "mode": "original",
+      "shader": "unlit-depth-sample-experiment/original.spv",
+      "sha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-depth-sample-experiment\\original\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-depth-sample-experiment\\original.spv"
+      ]
+    },
+    {
+      "mode": "point-depth",
+      "shader": "unlit-depth-sample-experiment/point-depth.spv",
+      "sha256": "710f644d6d7252702dd00762b7972d991d3215fb9f92e739910dab1e0df2b340",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-depth-sample-experiment\\point-depth\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-depth-sample-experiment\\point-depth.spv"
+      ]
+    }
+  ],
+  "scope": "Capture-only same-pixel depth diagnosis; production source and installed shaders remain frozen."
+}

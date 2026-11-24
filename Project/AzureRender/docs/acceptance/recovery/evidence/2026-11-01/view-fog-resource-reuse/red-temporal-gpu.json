@@ -1,0 +1,7 @@
+{
+  "status": "red-confirmed",
+  "antiAliasing": 3,
+  "expectedEntries": 1,
+  "actualEntries": 2,
+  "testScriptSha256": "765cc24d394efd107d7babdb835f08475313306307c920db94b9ac79887bfbbb"
+}

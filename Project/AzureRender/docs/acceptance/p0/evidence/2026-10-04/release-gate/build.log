@@ -1,0 +1,5 @@
+[1/5] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[2/5] Linking CXX static library AzureEditor.lib
+[3/5] Linking CXX executable AzureRender.exe
+[4/5] Linking CXX executable AzureEditorWorkflowTests.exe
+[5/5] Linking CXX executable AzureRenderEditorSessionTests.exe

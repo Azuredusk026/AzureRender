@@ -1,0 +1,163 @@
+#include "render/SkinnedVertex.hpp"
+#include "render/StaticSkinningOutputCache.hpp"
+#include "render/SkinningBatch.hpp"
+#include "render/MorphGpuData.hpp"
+#include "resources/BinaryFile.hpp"
+#include "support/VulkanComputeFixture.hpp"
+#include <array>
+#include <cstring>
+#include <cmath>
+#include <iostream>
+#include <stdexcept>
+#include <vector>
+using namespace azurerender;
+int main(int argc,char** argv) try {
+    if(argc!=2) throw std::invalid_argument("Expected skinning shader");
+    test::VulkanComputeFixture host;
+    auto& backend=*host.backend;
+    rhi::GpuBuffer input{},matrices{},output{},morphData{},morphWeights{};
+    VkDescriptorSetLayout setLayout=VK_NULL_HANDLE;
+    VkDescriptorPool pool=VK_NULL_HANDLE;
+    VkPipelineLayout layout=VK_NULL_HANDLE;
+    VkShaderModule shader=VK_NULL_HANDLE;
+    VkPipeline pipeline=VK_NULL_HANDLE;
+    auto cleanup=std::unique_ptr<void,std::function<void(void*)>>(&host,[&](void*) {
+        if(shader)backend.destroyShaderModule(shader);
+        if(pipeline)backend.destroyPipeline(pipeline);
+        if(layout)backend.destroyPipelineLayout(layout);
+        if(pool)backend.destroyDescriptorPool(pool);
+        if(setLayout)backend.destroyDescriptorSetLayout(setLayout);
+        for(auto* buffer:{&input,&matrices,&output,&morphData,&morphWeights})host.allocator.destroyBuffer(*buffer);
+    });
+    std::array<std::uint32_t,27> source{};
+    const auto number=[&](unsigned word,float value){std::memcpy(&source[word],&value,sizeof(value));};
+    number(0,1);number(1,2);number(2,3);number(4,1);number(6,1);number(9,-1);
+    number(16,1);number(20,4);number(24,2);
+    std::array<std::array<float,16>,2> joints{};
+    for(unsigned i=0;i<2;++i) {joints[i][0]=joints[i][5]=joints[i][10]=joints[i][15]=1;
+        joints[i][12]=i==0?10.F:20.F;}
+    input=host.allocator.createBuffer(sizeof(source),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    matrices=host.allocator.createBuffer(sizeof(joints),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    output=host.allocator.createBuffer(32*sizeof(std::uint32_t),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    std::memcpy(input.mapped,source.data(),sizeof(source));std::memcpy(matrices.mapped,joints.data(),sizeof(joints));
+    LoadedAsset fixture;fixture.vertices.resize(1);fixture.nodes.resize(1);MorphTargetRange targetRange;targetRange.vertexCount=1;targetRange.targets.resize(3);
+    targetRange.targets[2].positions={{{2,4,6}}};targetRange.targets[2].normals={{{1,0,0}}};targetRange.targets[2].tangents={{{0,1,0}}};fixture.morphRanges={targetRange};
+    std::vector<std::uint32_t> packed{0,0,0};const auto morphMesh=appendMorphGpuMesh(packed,fixture);
+    const std::array<float,6> values{0,0,.5F,0,0,-.25F};
+    morphData=host.allocator.createBuffer(packed.size()*4,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    morphWeights=host.allocator.createBuffer(sizeof(values),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    std::memcpy(morphData.mapped,packed.data(),packed.size()*4);std::memcpy(morphWeights.mapped,values.data(),sizeof(values));
+    for(const auto* buffer:{&input,&matrices,&morphData,&morphWeights})host.allocator.flush(*buffer,0,buffer->size);
+    setLayout=backend.createDescriptorSetLayout({
+        {0,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT},
+        {1,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT},
+        {2,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT},
+        {3,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT},
+        {4,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT}});
+    rhi::DescriptorPoolDesc poolDesc;poolDesc.maxSets=1;poolDesc.sizes={{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,5}};
+    pool=backend.createDescriptorPool(poolDesc);
+    const auto set=backend.allocateDescriptorSets(pool,setLayout,1).front();
+    const rhi::GpuBuffer* buffers[]={&input,&matrices,&output,&morphData,&morphWeights};
+    for(unsigned i=0;i<5;++i)backend.writeDescriptorBuffer({set,i,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffers[i]->buffer,buffers[i]->size});
+    const rhi::PushConstantRangeDesc range{VK_SHADER_STAGE_COMPUTE_BIT,sizeof(SkinningBatch)};
+    layout=backend.createPipelineLayout(setLayout,&range);
+    shader=backend.createShaderModule(readBinaryFile(argv[1]));
+    pipeline=backend.createComputePipeline({shader,layout});backend.destroyShaderModule(shader);shader=VK_NULL_HANDLE;
+    std::vector<std::uint32_t> baseline;
+    std::vector<std::vector<std::uint32_t>> barrierBaselines;
+    for(bool bulkBarriers:{false,true}) {
+    std::size_t barrierCase=0;
+    for(bool full:{false,true})for(bool batched:{false,true}) {
+        std::memset(output.mapped,0xCD,static_cast<std::size_t>(output.size));
+        host.allocator.flush(output,0,output.size);
+        host.submit([&](rhi::ICommandRecorder& recorder,VkCommandBuffer) {
+            std::array<rhi::BufferBarrierDesc,5> barriers{};
+            for(std::size_t i=0;i<barriers.size();++i) {
+                const auto* buffer=buffers[i];
+                barriers[i]={buffer->buffer,0,buffer->size,VK_PIPELINE_STAGE_HOST_BIT,
+                    VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,
+                    static_cast<VkAccessFlags>(buffer==&output?VK_ACCESS_SHADER_WRITE_BIT:VK_ACCESS_SHADER_READ_BIT)};
+            }
+            if(bulkBarriers)recorder.bufferBarriers(barriers.data(),barriers.size());
+            else for(const auto& barrier:barriers)recorder.bufferBarrier(barrier);
+            recorder.bindComputePipeline(pipeline);recorder.bindComputeDescriptorSet(layout,set);
+            for(unsigned slice=0;slice<(batched?1U:2U);++slice) {
+                SkinningBatch parameters{1,slice,{.25F,.5F},1+slice,1,batched?2U:1U};
+                if(full){parameters.morphTableBase=morphMesh.tableBase;parameters.morphWeightBase=slice*3;parameters.morphWeightStride=3;}
+                recorder.pushConstants(layout,VK_SHADER_STAGE_COMPUTE_BIT,0,&parameters,sizeof(parameters));
+                recorder.dispatch(1,parameters.instanceCount,1);
+            }
+            recorder.bufferBarrier({output.buffer,0,output.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
+        });
+        host.allocator.invalidate(output,0,output.size);
+        const auto* words=static_cast<const std::uint32_t*>(output.mapped);
+        for(unsigned i=0;i<GpuSkinnedVertex::wordCount;++i)if(words[i]!=0xCDCDCDCDU)throw std::runtime_error("Skinning overwrote another output slice");
+        const auto value=[&](unsigned word){float result;std::memcpy(&result,words+word,sizeof(result));return result;};
+        if(!full&&(value(10)!=12.F || value(20)!=22.F || value(11)!=3.F || value(21)!=3.F))
+            throw std::runtime_error("Skinning did not preserve independent joints and morph output");
+        if(full){
+            if(std::abs(value(10)-12.F)>1e-5F||std::abs(value(20)-20.5F)>1e-5F||std::abs(value(11)-4.F)>1e-5F||std::abs(value(21)-1.F)>1e-5F)
+                throw std::runtime_error("Third target and independent instance weights differ from CPU reference");
+            for(unsigned instance=0;instance<2;++instance){const float weight=values[instance*3+2],length=std::sqrt(1+weight*weight);const auto base=(instance+1)*GpuSkinnedVertex::wordCount;
+                if(std::abs(value(base+3)-weight/length)>1e-5F||std::abs(value(base+4)-1/length)>1e-5F||std::abs(value(base+6)-1/length)>1e-5F||std::abs(value(base+7)-weight/length)>1e-5F)
+                    throw std::runtime_error("Morph normals and tangents differ from CPU reference");
+            }
+        }
+        for(unsigned i:{19U,29U})if(words[i]!=source[9])throw std::runtime_error("Tangent handedness bit pattern changed");
+        for(unsigned i:{30U,31U})if(words[i]!=0xCDCDCDCDU)throw std::runtime_error("Compact output overwrote its trailing guard");
+        if(!batched)baseline.assign(words,words+32);
+        else if(std::memcmp(baseline.data(),words,output.size))throw std::runtime_error("Batched deformation differs from individual slices");
+        if(!bulkBarriers)barrierBaselines.emplace_back(words,words+32);
+        else if(std::memcmp(barrierBaselines.at(barrierCase).data(),words,output.size))
+            throw std::runtime_error("Batched buffer barriers changed deformation output bytes");
+        ++barrierCase;
+    }
+    }
+    // Reuse the computed, normalized vertex words; source attributes are not
+    // interchangeable with the compute output even for a static producer.
+    number(3,.3F);number(4,.7F);number(5,.2F);number(6,.8F);number(7,.3F);number(8,.1F);
+    std::memcpy(input.mapped,source.data(),sizeof(source));host.allocator.flush(input,0,input.size);
+    std::memset(output.mapped,0xCD,static_cast<std::size_t>(output.size));host.allocator.flush(output,0,output.size);
+    StaticSkinningOutputCache cache;std::vector<std::uint32_t> staticReference;
+    const std::array<unsigned,7> expectedDispatches{2,0,0,2,2,2,0};
+    for(unsigned step=0;step<expectedDispatches.size();++step){
+        if(step==2)cache.invalidate();
+        joints[0][12]=step==4?30.F:10.F;
+        std::memcpy(matrices.mapped,joints.data(),sizeof(joints));host.allocator.flush(matrices,0,matrices.size);
+        cache.begin(2);const auto generation=cache.generation();std::vector<unsigned> writes;
+        for(unsigned slice=0;slice<2;++slice)
+            if(cache.prepareRange(slice,{0,1+slice,1},step!=4,true))writes.push_back(slice);
+        if(step==2){cache.cancel();continue;}
+        if(writes.size()!=expectedDispatches[step])throw std::runtime_error("Static output cache scheduled the wrong producers");
+        host.submit([&](rhi::ICommandRecorder& recorder,VkCommandBuffer){
+            for(const auto* buffer:buffers){
+                recorder.bufferBarrier({buffer->buffer,0,buffer->size,
+                    VK_PIPELINE_STAGE_HOST_BIT|VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                    VK_ACCESS_HOST_WRITE_BIT|VK_ACCESS_SHADER_WRITE_BIT,
+                    static_cast<VkAccessFlags>(buffer==&output?VK_ACCESS_SHADER_WRITE_BIT:VK_ACCESS_SHADER_READ_BIT)});
+            }
+            recorder.bindComputePipeline(pipeline);recorder.bindComputeDescriptorSet(layout,set);
+            for(unsigned slice:writes){
+                SkinningBatch parameters{1,slice,{0,0},1+slice,1,1};
+                recorder.pushConstants(layout,VK_SHADER_STAGE_COMPUTE_BIT,0,&parameters,sizeof(parameters));recorder.dispatch(1,1,1);
+            }
+            recorder.bufferBarrier({output.buffer,0,output.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
+        });
+        if(!cache.commit(generation,100+step))throw std::runtime_error("Actual GPU producer submission did not commit");
+        host.allocator.invalidate(output,0,output.size);const auto* words=static_cast<const std::uint32_t*>(output.mapped);
+        if(step==0)staticReference.assign(words,words+32);
+        const bool same=std::memcmp(staticReference.data(),words,output.size)==0;
+        if((step==4)==same)throw std::runtime_error("Cached/dynamic/rebuilt deformation output bytes differ from contract");
+        for(unsigned i=0;i<GpuSkinnedVertex::wordCount;++i)if(words[i]!=0xCDCDCDCDU)throw std::runtime_error("Static cache overwrote another output range");
+    }
+    std::cout<<"Static compute content: cold/warm, cancelled producer, dynamic overwrite and rebuild, normalized32words byte exact\n";
+    host.allocator.invalidate(input,0,input.size);
+    if(std::memcmp(input.mapped,source.data(),sizeof(source))!=0)throw std::runtime_error("Immutable mesh source changed");
+    cleanup.reset();
+    if(host.errors || host.allocator.statistics().liveBuffers || host.allocator.statistics().liveImages)
+        throw std::runtime_error("Skinning validation or release failed");
+    std::cout<<"GPU independent joints, exact deformation and buffer-barrier batching, output isolation passed\n";
+    return 0;
+} catch(const std::exception& error) {std::cerr<<error.what()<<'\n';return 1;}

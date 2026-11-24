@@ -1,0 +1,82 @@
+{
+  "visualAcceptance": "failed-user-review",
+  "failures": [
+    {
+      "name": "field-contract",
+      "evidence": "field-red.log",
+      "description": "Valid new profile rejected by baseline production loader"
+    },
+    {
+      "name": "extension-version-fixture",
+      "evidence": "cpu-release-first-failed.log",
+      "description": "Fixture used the legacy scene API during current-version registration"
+    },
+    {
+      "name": "pipeline-write-masks",
+      "evidence": "gpu-smoke-release/unlit-reference/player.log",
+      "description": "Inherited color masks did not match private pass attachment counts"
+    },
+    {
+      "name": "layer-common-fields",
+      "evidence": "layer-field-red.log",
+      "description": "Layer-specific ownership guard rejected common material fields"
+    },
+    {
+      "name": "temporal-coverage",
+      "evidence": "gpu-temporal-debug-first/summary.json",
+      "description": "Current coverage disagreed with reconstructed color history"
+    },
+    {
+      "name": "classic-resolve-interface",
+      "evidence": "gpu-msaa-debug-first/multisample-reference/player.log",
+      "description": "Display output was declared on a classic resolve without that attachment"
+    },
+    {
+      "name": "probe-clear-contract",
+      "evidence": "multisample-view-first.log",
+      "description": "Classic probe omitted the shared display attachment clear"
+    },
+    {
+      "name": "sample-budget-contract",
+      "evidence": "multisample-view-budget-red.log",
+      "description": "Fixture omitted four bytes per source pixel for display samples"
+    },
+    {
+      "name": "cold-view-setup-timeout",
+      "evidence": "view-gpu-debug-driver.log",
+      "description": "Eighteen view creations and rebuilds exceeded the new fixture setup timeout"
+    },
+    {
+      "name": "scene-fog-log-observer",
+      "evidence": "related-gpu/release/scene-fog.log",
+      "description": "Final stdout lines absent; exact structured diagnostics proved zero live allocations"
+    },
+    {
+      "name": "eye-log-observer",
+      "evidence": "related-gpu/debug/eye.log",
+      "description": "Final stdout lines absent; exact structured diagnostics proved zero live allocations"
+    },
+    {
+      "name": "view-fog-log-observer",
+      "evidence": "related-gpu/debug/view-fog-retry2.log",
+      "description": "Missing final stdout lines; per-case structured diagnostics retained the mandatory zero-allocation result"
+    },
+    {
+      "name": "fog-display-output",
+      "evidence": "related-gpu/debug/view-fog-retry3/indexed-alpha/player.log",
+      "description": "Dedicated fog entry point declared its display output but did not write it"
+    },
+    {
+      "name": "fog-radiance-order",
+      "evidence": "fog-radiance-red.log",
+      "description": "Dedicated fog entry point omitted radiance normalization before transport; measured error 0.08515437563911099"
+    }
+  ],
+  "unchangedLimits": {
+    "maximumLinearError": 0.008,
+    "maximumInteriorMedianLuminanceRelativeError": 0.1,
+    "minimumStaticSsim": 0.95,
+    "temporalMaximumBytes": 536870912,
+    "multisampleMaximumBytes": 536870912
+  }
+}

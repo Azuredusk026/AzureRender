@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "status": "uniform-conversion-and-real-consumer-passed",
+  "native": {
+    "status": "passed",
+    "changes": [
+      {
+        "material": "M_actor_laevat_hair_01",
+        "source": [
+          0.672,
+          0,
+          0.004363678
+        ],
+        "linear": [
+          0.4091444674721517,
+          0.0,
+          0.00033774597523219814
+        ]
+      }
+    ],
+    "nativeValue": [
+      0.40914449095726013,
+      0.0,
+      0.00033774596522562206
+    ],
+    "maximumError": 2.3485108413545674e-08,
+    "inputSha256": "0ce2b6a56273d38b9ac9442cd6e6fba917560d205947a789e7abe233aacb89ad",
+    "outputSha256": "a8a08d008eca0ec50078af5d98121cad5a4f293f5e785cb22fc3ee4a2e081619",
+    "geometryAnimationPreserved": true,
+    "sourceConstantSha256": "0678f363a8624c3da7375ce4e0827d5b6f915516a32a7a2fa2349fad5d15a7ee"
+  },
+  "frame": {
+    "scope": "One captured pose; renderer instanceFaceFrame uses the selected face head basis for hair",
+    "headNode": "Bip001_Head",
+    "configuredBasis": [
+      -1.2556207821560323e-06,
+      2.7855764703915194e-06,
+      -0.9999999999953323,
+      0.999999999999211,
+      -4.4843204444759344e-08,
+      -1.2556209066996796e-06,
+      4.484670207260324e-08,
+      0.9999999999961199,
+      2.7855764142771456e-06
+    ],
+    "candidate": [
+      [
+        -0.99708971083675,
+        0.03674865467129183,
+        -0.06679691363471743,
+        300.00434686932624
+      ],
+      [
+        0.0414423568981017,
+        0.9966649125669985,
+        -0.07029612393109554,
+        301.53755079647414
+      ],
+      [
+        -0.06399079648878678,
+        0.07285968213113457,
+        0.9952873491350883,
+        -299.9798803443782
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "nativeConverted": [
+      [
+        -0.9970895648002625,
+        0.036747194826602936,
+        -0.06679967045783997,
+        300.00433349609375
+      ],
+      [
+        0.04144105315208435,
+        0.9966651201248169,
+        -0.07029593735933304,
+        301.53741455078125
+      ],
+      [
+        -0.0639936700463295,
+        0.07285947352647781,
+        0.9952871203422546,
+        -299.9794921875
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "rotationMaximumError": 2.8735575427207838e-06,
+    "originDistance": 0.00041159141667899333
+  },
+  "actual": {
+    "status": "technical-captures-passed",
+    "playerSha256": "12fbcf265931012b5849241c664a5fe50c9d665b1ae55db3f128da187601ec26",
+    "modelSha256": "a8a08d008eca0ec50078af5d98121cad5a4f293f5e785cb22fc3ee4a2e081619",
+    "captures": [
+      {
+        "name": "hair-212213-hair-kk-source-color",
+        "imageSha256": "f764b4c918e4e35007b6393757376ddc323067b2dead40828aae180838b0e53d",
+        "projectSha256": "b8a28b75019dfdc22604e5ba05b6ed2fa948b2a48897ba501f340d68385a654d",
+        "levelSha256": "3ff738c6ce88069bc5f3dc6cf713adeae0220a3a0d674f82f0320fdb0f8ca08b"
+      },
+      {
+        "name": "hair-212213-hair-kk-linear-color",
+        "imageSha256": "a77079548331b5b5ea2a60c1393056d65110c79f1aeb9fd556dea72a3e5ed9f3",
+        "projectSha256": "b61cf7c4f6cf263c1b96793d22653ac1c834998d0f35d205648e043d0f04ad66",
+        "levelSha256": "553c4d1fd57dbfccd8dd065ca6616630a4c0d8caaa7a96ff07d13b90752f5ee8"
+      }
+    ],
+    "comparisons": {
+      "hair-kk": {
+        "changedPixels": 42664,
+        "maximumByteDifference": 60
+      }
+    }
+  },
+  "independentLayers": {
+    "direct-specular": {
+      "changedPixels": 0,
+      "maximumByteDifference": 0
+    },
+    "beauty": {
+      "changedPixels": 26035,
+      "maximumByteDifference": 30
+    }
+  },
+  "source": [
+    {
+      "path": "tools/endfield_native/character_profiles.py",
+      "sha256": "8c3fb765ad440068ae2ee16d732bb5e390a90bbbdd42bf462f31e1a731faa56b",
+      "bytes": 18334
+    },
+    {
+      "path": "tools/test_native_character_profiles.py",
+      "sha256": "230168e5d158cce2455ec791d63abcd4cef11b47901d203f58e37b51520a755d",
+      "bytes": 16380
+    }
+  ],
+  "validation": [
+    {
+      "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/hair-color-red.log",
+      "sha256": "c1e02d30fc90478ef44b127f0a364ee77d2ce9ad33282227c021a936297c8ed2",
+      "bytes": 2913
+    },
+    {
+      "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/hair-color-green.log",
+      "sha256": "a2b58352508b59280bf9db000e37cd03c75228eac12ed6adb4e0c3eb5e130555",
+      "bytes": 2162
+    },
+    {
+      "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/specular-final-cpu.log",
+      "sha256": "d0bbb1be81e327aa8378c906126572fcf75e493f45bcf9fe1a31deaf07d231fa",
+      "bytes": 803
+    }
+  ],
+  "sourceConstants": {
+    "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/frame10401/e950-ps-constants.json",
+    "sha256": "0678f363a8624c3da7375ce4e0827d5b6f915516a32a7a2fa2349fad5d15a7ee",
+    "bytes": 2716171
+  },
+  "originalDiagnosticFailure": {
+    "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/capture-hair-color.log",
+    "sha256": "47af8f9fece98895b698397af6127eed46e37e927e0b933b386eebd24f15c3ab",
+    "bytes": 434
+  },
+  "scope": "Native secondary color only; virtual half vector, stripe mask and full lighting remain open."
+}

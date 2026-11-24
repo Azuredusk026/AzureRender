@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "sourceBase": "6f1e323",
+  "run": "20261112-011326-handoff-final-regression-e2e260",
+  "originalRefresh": {
+    "passed": false,
+    "elapsedMs": 11808.1232
+  },
+  "unchangedThumbnailControl": {
+    "passed": true,
+    "elapsedMs": 720.5526,
+    "thumbnails": [
+      {
+        "fingerprintEqual": false,
+        "handleEqual": false
+      },
+      {
+        "fingerprintEqual": true,
+        "handleEqual": false
+      }
+    ],
+    "operations": 57
+  },
+  "configurations": {
+    "debug": {
+      "refresh": {
+        "passed": true,
+        "elapsedMs": 9127.1428,
+        "thumbnails": [
+          {
+            "fingerprintEqual": false,
+            "handleEqual": false
+          },
+          {
+            "fingerprintEqual": true,
+            "handleEqual": true
+          }
+        ],
+        "operations": 141
+      },
+      "tests": [
+        {
+          "name": "AzureRender.SamplingGpu",
+          "seconds": 24.2538
+        },
+        {
+          "name": "AzureRender.SpatialAntiAliasingAuxiliaryGpu",
+          "seconds": 179.477
+        },
+        {
+          "name": "AzureRender.SpatialAntiAliasingTransferGpu",
+          "seconds": 9.14656
+        },
+        {
+          "name": "AzureRender.ColorGradingLutEditor",
+          "seconds": 29.675
+        },
+        {
+          "name": "AzureRender.SamplingHostGpu",
+          "seconds": 52.0892
+        },
+        {
+          "name": "AzureEditor.Thumbnail",
+          "seconds": 1.25023
+        },
+        {
+          "name": "AzureRender.PreviewHost",
+          "seconds": 28.386
+        },
+        {
+          "name": "AzureEditor.SelectionGpu",
+          "seconds": 78.1521
+        },
+        {
+          "name": "AzureEditor.GizmoGpu",
+          "seconds": 176.49
+        },
+        {
+          "name": "AzureEditor.DevtoolsHost",
+          "seconds": 275.321
+        },
+        {
+          "name": "AzureEditor.ShaderReloadHost",
+          "seconds": 128.004
+        }
+      ],
+      "unchangedProducts": 1280,
+      "changedProducts": {
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRender.exe": [
+          "779a33ac50c8324515b2cce74f7f68bf332c64a8ba71e8f3ad47cf778c081661",
+          "3705aa6e243c5dc24989f2b5884085e3f84bff223c84f1758c5265529219ff8a"
+        ],
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRegisteredComponentHost.exe": [
+          "b7b27e3141f3845c6b8c75088a1b6c7914076971dc98d90d43f0dbeb8aff16f9",
+          "1afec32a4178efc6c49037a56f74a5ca1d06613e8a0c6b02207a912367b68935"
+        ],
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureThumbnailTests.exe": [
+          "2638405c827dd03601a3ac6c8fad3e35ac15a2a808404eb3d822f1f3bbe69e73",
+          "04727ff26a4c92db633be0b6064dd1b8e5134b16ad4e1e549ce163f677cd944f"
+        ]
+      }
+    },
+    "release": {
+      "refresh": {
+        "passed": true,
+        "elapsedMs": 914.4435,
+        "thumbnails": [
+          {
+            "fingerprintEqual": false,
+            "handleEqual": false
+          },
+          {
+            "fingerprintEqual": true,
+            "handleEqual": true
+          }
+        ],
+        "operations": 141
+      },
+      "tests": [
+        {
+          "name": "AzureRender.SamplingHostGpu",
+          "seconds": 9.35416
+        },
+        {
+          "name": "AzureEditor.DevtoolsHost",
+          "seconds": 126.56
+        }
+      ],
+      "unchangedProducts": 1635,
+      "changedProducts": {
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe": [
+          "8c37194a89965d92f055f3dcd8921f70185999f29ae27f58da6e817976218da9",
+          "815c9cf05779b396988a2240418bc92cf9b1706bd56dbf69a7a1761e4d117350"
+        ],
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRegisteredComponentHost.exe": [
+          "558095f718f8aba0f27f24795775c982ca8a592eb000d0000c4c5d74ff670230",
+          "42ce3de14e512e0c567e9c6311b6b05d6f8358962a2e62f08559bca17b154d15"
+        ],
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureThumbnailTests.exe": [
+          "f8dc15bd78b089ba64a647ad3b452ec2234dcacbc486131206101a7b3f12833a",
+          "dd34abe4b1b31f73ce6f2797ee595a1fa127a2cd89805f78de08426c16df1d2b"
+        ]
+      }
+    }
+  },
+  "protectedFiles": {
+    "docs/acceptance/p5/closure/source-evidence/interruption.json": "4bd07a5e3af10be9aceac2b0ddaa0e5e80c850bc704cc3eae4dfed332e04e979",
+    "docs/acceptance/p5/closure/source-evidence/manifest.json": "11f99d3171d7609a1200aa86920c7fb1251fae4e96e6ecebb76a391359488c43",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-green.log": "b0d7a3991dec0248b49e57e2d9cbdede8e7f286838add2f0723593d8598ee0e7",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-red.log": "f7c1533fc970cbb4665bfbf9267a17ee044e5e01bb22d3d0b74aafc2217c98c4",
+    "src/app/AzureRenderSupport.cpp": "a150ee53a294246d87d8cde42be2881e53e0dd1908481ef91b8786808e80b201",
+    "src/rhi/GpuAllocator.hpp": "2e81204107f3e5cfa765bde0e90c1e6a0131721b6ea6b521b3c73490793164dd",
+    "src/rhi/VulkanRhi.cpp": "4ca84f5a9c7ce471c5f9a75009fd26af8a3fd6b6291be8674e829178291d1840",
+    "tests/MaterialPipelinePolicyTests.cpp": "01f18ad44129c11d97bc2c1d8b0c2c1f3f85bffd0af5403f43d2db513acc7c31",
+    "tests/MotionRecordingTests.cpp": "f8e27feb08afaed0ec723fe7caa76d196909ecba97d06ca7c7ed5943bdc3311e",
+    "tests/ObjectShadowAtlasTests.cpp": "dfb7219c73f059415061b73bc4844a7f0a207b7cb75f0ef81c75b376f8f0ab15",
+    "tests/ShadowTileBoundsGpuTests.cpp": "62504a6a47633cc04f8f886a9013b64f55293b8294afe8e12b69e1c634303b6b",
+    "tools/endfield_native/character_surfaces.py": "6c7c476448f3860b7ec8b3dbddd37cbb7c95b1596ebc3355f2fd1f25cb46c8bb",
+    "tools/test_native_character_surfaces.py": "0c870dfb4a2fb9203fc8ef364a4e494d30d1c8ba133f5514d96db40c839cb1d4"
+  },
+  "archive": {
+    "status": "passed",
+    "archive": "docs/acceptance/nr/evidence/2026-11-12/editor-asset-refresh/validation.zip",
+    "files": 94,
+    "logicalBytes": 12966528,
+    "archiveBytes": 1180478,
+    "sha256": "86bf410a56db8dca9d1af7acbd806f0e30c7fad249f57ac4248b36d640666bc9",
+    "removedSource": false,
+    "sourceCommit": "6f1e32363ad7ccf5fa279d6776b9b6693b33a595"
+  }
+}

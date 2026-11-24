@@ -1,0 +1,30 @@
+(lldb) command source -s 0 'D:\Assigment\2609\FYP\Project\AzureRender\build\implementation-2026-10-10\p5-allocation-debug\commands.lldb'
+Executing commands in 'D:\Assigment\2609\FYP\Project\AzureRender\build\implementation-2026-10-10\p5-allocation-debug\commands.lldb'.
+(lldb) settings set auto-confirm true
+(lldb) target create "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe"
+Current executable set to 'D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\AzureRender.exe' (x86_64).
+(lldb) breakpoint set -n NtAllocateVirtualMemory -s ntdll.dll -c "*(unsigned long long*)$r9 >= 262144"
+Breakpoint 1: no locations (pending).
+WARNING:  Unable to resolve breakpoint to any actual locations.
+(lldb) breakpoint command add 1
+(lldb) process launch -w "D:/Assigment/2609/FYP/Project/AzureRender" -o "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug/player.stdout.log" -e "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug/player.stderr.log" -- --editor-close-policy save --editor-project "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-performance/editor/project.azureproject" --width 1920 --height 1080 --fixed-frame-step --smoke-frames 2100 --game-actions "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug/input.json" --editor-actions "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug/editor.json" --gpu-timing --gpu-timing-output "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug/timing.json"
+1 location added to breakpoint 1
+(lldb) Process 10304 launched: 'D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\AzureRender.exe' (x86_64)
+Process 10304 exited with status = -1073741801 (0xc0000017)
+(lldb) breakpoint list
+Current breakpoints:
+1: name = 'NtAllocateVirtualMemory', module = ntdll.dll, locations = 1, resolved = 1, hit count = 0
+    Breakpoint commands:
+      register read rcx rdx r8 r9 rsp
+      memory read -s 8 -f x -c 1 $r9
+      memory read -s 8 -f x -c 1 $rdx
+      thread backtrace -c 18
+      continue
+
+Condition: *(unsigned long long*)$r9 >= 262144
+
+  1.1: where = ntdll.dll`NtAllocateVirtualMemory, address = 0x00007ff8b1003520, resolved, hit count = 0 
+
+(lldb) process status
+Process 10304 exited with status = -1073741801 (0xc0000017) 
+(lldb) quit

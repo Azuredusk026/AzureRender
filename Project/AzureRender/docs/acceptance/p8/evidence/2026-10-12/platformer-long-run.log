@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_platformer_long_run.py", line 237, in <module>
+    run(a.package,a.output,a.seconds,a.probe,scenario=PlatformerScenario(),max_idle_utilization=a.max_idle_gpu_utilization)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 152, in run
+    actions=scenario.prepare(package,output)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_platformer_long_run.py", line 32, in prepare
+    assert (package/'game/assets/platformer/platformer.azurelevel').is_file(), 'Exploration successor package required'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Exploration successor package required

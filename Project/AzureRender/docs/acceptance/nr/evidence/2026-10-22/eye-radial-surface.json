@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "status": "public-host-contract-verified",
+  "nativeReadyForImport": false,
+  "nativeVisualEquivalenceVerified": false,
+  "linearErrorBudget": 0.008,
+  "gpu": {
+    "debug": {
+      "summary": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/eye-native/gpu-debug-final/summary.json",
+      "summarySha256": "2cca85756d269385c6e8aaffaacc2ebbca02de1054ade47d527ccb27bb2a1663",
+      "captures": 36,
+      "maximumLinearError": 0.0028123453038680357,
+      "inputFingerprintCount": 106,
+      "inputIndexSha256": "2d67dd526fc5a266c4a2e3aa8498388195a6ecb74c67eb656f4011f48f0695a7",
+      "player": {
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe": "a57b8620b791298b3d7b316753875360e4ba15b05431f54d239692567c5dda13"
+      },
+      "metrics": {
+        "direct-parallaxFixedMaximumDifference": 0,
+        "matcap-rgbaFixedMaximumDifference": 0,
+        "host-diffuse-lightFixedMaximumDifference": 0,
+        "direct-parallax vs direct-no-parallax": 0.03325693503299276,
+        "matcap-ramp-alpha-low vs matcap-ramp-alpha-high": 0.08293996416071506,
+        "matcap-rgba vs matcap-mirror": 0.09850625585789471,
+        "matcap-rgba vs matcap-rotated": 0.09850625585789471,
+        "genericLegacyLightingResponse": 0.18782077230067787,
+        "eyeLegacyLightingResponse": 0.19806931955994886,
+        "matcapRgbaAdditiveResidual": 0.001004472247582211,
+        "secondaryDirectionalMatcapShadowDelta": 0.0,
+        "primaryDirectionalShadowRedDrop": 1.0
+      }
+    },
+    "release": {
+      "summary": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/eye-native/gpu-release-final/summary.json",
+      "summarySha256": "3d326e2756ddb178cc4910b477ca2a2b548de1aca97533196c94d13c84bc88cb",
+      "captures": 36,
+      "maximumLinearError": 0.0028123453038680357,
+      "inputFingerprintCount": 106,
+      "inputIndexSha256": "6b70714ecd7737111426ecb8e255990d2a01788bac000757cfcdc9db0b92b28e",
+      "player": {
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe": "bf7499eb39a925a23c43c2141866bd05e8f3e24eec7261cec41ae12a4198c7b8"
+      },
+      "metrics": {
+        "direct-parallaxFixedMaximumDifference": 0,
+        "matcap-rgbaFixedMaximumDifference": 0,
+        "host-diffuse-lightFixedMaximumDifference": 0,
+        "direct-parallax vs direct-no-parallax": 0.03325693503299276,
+        "matcap-ramp-alpha-low vs matcap-ramp-alpha-high": 0.08293996416071506,
+        "matcap-rgba vs matcap-mirror": 0.09850625585789471,
+        "matcap-rgba vs matcap-rotated": 0.09850625585789471,
+        "genericLegacyLightingResponse": 0.18782077230067787,
+        "eyeLegacyLightingResponse": 0.19806931955994886,
+        "matcapRgbaAdditiveResidual": 0.001004472247582211,
+        "secondaryDirectionalMatcapShadowDelta": 0.0,
+        "primaryDirectionalShadowRedDrop": 1.0
+      }
+    }
+  },
+  "logs": {
+    "ctest-debug-affected.log": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/eye-native/ctest-debug-affected.log",
+      "sha256": "1c586a1ad18bf259bee42dee5a7332d8697f61890fd30f0230e6458babb763db"
+    },
+    "ctest-release-affected.log": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/eye-native/ctest-release-affected.log",
+      "sha256": "9247dad921cb4e00136512e2616bc2d6e4ca074bf49d642c24ca9a2b288c1416"
+    },
+    "cpu-debug-joint.log": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-cube/cpu-debug-joint.log",
+      "sha256": "5600b7a178ab1e301fd82116df48f6f6128968573c637910f49e88e89215f493"
+    },
+    "cpu-release-joint.log": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-cube/cpu-release-joint.log",
+      "sha256": "8cf531a9385b3aa01749534eac8c8bf161c904d908bcb07cf9fc90ec9ea1eeaf"
+    },
+    "build-debug-joint.log": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-cube/build-debug-joint.log",
+      "sha256": "284b21575d63abc5ec07507964d9e707720d24e9bfd60297b0061469dec2020b"
+    },
+    "build-release-joint.log": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-cube/build-release-joint.log",
+      "sha256": "4dbe32b76d8fae18f95e1eff1b118619bc13d55a2620595ffe96fcc66303672d"
+    }
+  },
+  "semanticRed": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/eye-secondary-shadow-red-single-thread/receipt.json",
+  "finalBatchEnvironment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1"
+  },
+  "sourceReceipt": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/eye-native/production-candidate/audit/production-verification.json",
+  "sourceReceiptSha256": "323d4b6cfb84b9932b6a7e43314396fa9e0999624e79250d79e9f6384aa345ed",
+  "limitations": [
+    "Native CP0, CP13, NPR globals and runtime SRV/color-upload conventions remain unobserved.",
+    "Native eye profile is not applied to the joint character without its upstream contract.",
+    "Original first-batch and rotation input failures remain preserved."
+  ]
+}

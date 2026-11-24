@@ -1,11 +1,14 @@
 #include "editor/EditorSession.hpp"
 #include "ecs/Components.hpp"
+#include "render/ColorGradingLut.hpp"
+#include "EditorRenderResourceStateChecks.hpp"
 
 #include <cassert>
 #include <chrono>
 #include <filesystem>
 #include <fstream>
 #include <memory>
+#include <iostream>
 #include <string>
 
 namespace {
@@ -20,6 +23,25 @@ std::filesystem::path uniquePath(const std::string& suffix) {
 }  // namespace
 
 int main() {
+    try {
+        checkEditorRenderResourceState();
+    } catch (const std::exception& error) {
+        std::cerr << error.what() << '\n';
+        return 1;
+    }
+    {
+        const auto root=uniquePath("-relative-grade");std::filesystem::create_directory(root);
+        const auto path=root/"scene.azscene",lut=root/"grade.azlut";
+        azurerender::saveColorGradingLut(lut,azurerender::makeIdentityColorGradingLut());
+        auto document=azurerender::SceneDocument::fromAsset("test.gltf");document.save(path);
+        auto relativeContext=std::make_shared<azurerender::EditorContext>(document,path);
+        azurerender::EditorSession relativeSession(relativeContext);
+        if(!relativeSession.edit("render.settings",{{"values",{{"gradeLut",{{"schemaVersion",1},{"asset","grade.azlut"},{"exposureMultiplier",1}}}}}}))return 96;
+        relativeContext->save();relativeContext->reload();
+        if(relativeContext->renderSettings().grade.lut.asset!="grade.azlut"
+            ||relativeContext->renderSettings().grade.lut.resolvedAsset!=lut)return 97;
+        std::filesystem::remove_all(root);
+    }
     // Several independently identified emitters may share one scene node.
     {
         const auto path = uniquePath("-multiple-lights.azscene");
@@ -27,6 +49,7 @@ int main() {
         const auto nodeId = document.nodes.front().id;
         document.lights.push_back({"first", nodeId, {1.0F, 0.0F, 0.0F}, 2.0F, 3.0F, true});
         document.lights.push_back({"second", nodeId, {0.0F, 1.0F, 0.0F}, 4.0F, 5.0F, false});
+        document.lights[0].shape.characterResponse={true,.25F,.8F};
         azurerender::EditorContext lightContext(std::move(document), path);
         const auto* component = lightContext.ecs().tryGet<azurerender::ecs::LightComponent>(
             lightContext.entityForNode(0));
@@ -35,8 +58,11 @@ int main() {
             || component->emitters[1].enabled) {
             return 1;
         }
+        const auto& response=component->emitters[0].shape.characterResponse;
+        if(!response.present||response.diffuseFloor!=.25F||response.compression!=.8F)return 98;
         lightContext.save();
         const auto loaded = azurerender::SceneDocument::load(path);
+        if(!loaded.lights[0].shape.characterResponse.present||loaded.lights[0].shape.characterResponse.compression!=.8F)return 99;
         if (loaded.lights.size() != 2
             || loaded.lights[0].id != "first"
             || loaded.lights[1].id != "second"
@@ -55,6 +81,76 @@ int main() {
     auto context = std::make_shared<azurerender::EditorContext>(
         azurerender::SceneDocument::fromAsset(assetPath), scenePath);
     azurerender::EditorSession session(context);
+    if(!session.settings().describe().contains("editor.language")){std::cerr<<"Language preference must be registered\n";return 86;}
+    if(session.settings().set("editor.language",2,azurerender::SettingSource::UserFile).passed)return 87;
+    if(!session.settings().set("editor.language",1,azurerender::SettingSource::UserFile).passed)return 88;
+    session.settings().applyPending();
+    const auto languageFile=uniquePath("-language.json");session.settings().saveUser(languageFile);
+    azurerender::EditorSession reopenedLanguage(context);
+    if(!reopenedLanguage.settings().load(languageFile,azurerender::SettingSource::UserFile).passed)return 89;
+    reopenedLanguage.settings().applyPending();std::filesystem::remove(languageFile);
+    if(reopenedLanguage.settings().get("editor.language")!=1)return 90;
+
+
+    {
+        const auto original=context->renderSettings().sky.mode;
+        if(!session.edit("render.settings",{{"values",{{"skyMode",2},{"skyColor",{.1F,.2F,.3F}}}}})
+            ||context->renderSettings().sky.mode!=azurerender::SkyMode::Solid)return 81;
+        if(!session.execute(azurerender::EditorCommand::Undo)||context->renderSettings().sky.mode!=original)return 82;
+        if(!session.execute(azurerender::EditorCommand::Redo)||context->renderSettings().sky.mode!=azurerender::SkyMode::Solid)return 83;
+        if(session.edit("render.settings",{{"values",{{"skyMode",99}}}})||context->renderSettings().sky.mode!=azurerender::SkyMode::Solid)return 84;
+        if(!session.execute(azurerender::EditorCommand::Undo))return 85;
+    }
+    {
+        const auto lutPath=uniquePath(".azlut");azurerender::saveColorGradingLut(lutPath,azurerender::makeIdentityColorGradingLut());
+        const auto fields=nlohmann::json{{"gradeLut",{{"schemaVersion",1},{"asset",lutPath.generic_u8string()},{"exposureMultiplier",1.5F}}}};
+        if(!session.edit("render.settings",{{"values",fields}})||context->renderSettings().grade.lut.resolvedAsset!=lutPath)return 91;
+        if(!session.execute(azurerender::EditorCommand::Undo)||!context->renderSettings().grade.lut.asset.empty())return 92;
+        if(!session.execute(azurerender::EditorCommand::Redo)||context->renderSettings().grade.lut.exposureMultiplier!=1.5F)return 93;
+        auto invalid=fields;invalid["gradeLut"]["asset"]="missing-color-grading.azlut";
+        if(session.edit("render.settings",{{"values",invalid}})||context->renderSettings().grade.lut.asset!=lutPath.generic_u8string())return 94;
+        if(!session.execute(azurerender::EditorCommand::Undo))return 95;
+        std::filesystem::remove(lutPath);
+    }
+    // Returning to the saved content clears the document marker.
+    context->save();
+    session.edit("node.rename",{{"value","edited"}});
+    static_cast<void>(session.execute(azurerender::EditorCommand::Undo));
+    if(context->dirty()){std::cerr<<"Undo to checkpoint must clear dirty\n";return 1;}
+    if(!session.edit("node.create")){std::cerr<<"Default create must allocate an identity\n";return 1;}
+    const auto allocated=context->selectedNode()->id;
+    session.edit("node.delete");
+    if(!session.edit("node.create") || context->selectedNode()->id==allocated){std::cerr<<"Creation after deletion needs unique identity\n";return 1;}
+    static_cast<void>(session.execute(azurerender::EditorCommand::Undo));
+    static_cast<void>(session.execute(azurerender::EditorCommand::Undo));
+    static_cast<void>(session.execute(azurerender::EditorCommand::Undo));
+    // Session-owned commands can be attached to successive host lifetimes.
+    if(!session.edits().registry().find("developer.describe")) {
+        std::cerr<<"Developer commands must belong to the session lifetime\n";return 1;
+    }
+    const auto developerVersion=session.edits().version();
+    if(session.edit("developer.describe")){std::cerr<<"Detached provider must be rejected\n";return 1;}
+    auto firstOwner=std::make_shared<int>(1);
+    std::weak_ptr<int> retiredOwner=firstOwner;
+    azurerender::DeveloperServices firstServices;
+    firstServices.operation=[firstOwner](const std::string& operation,const nlohmann::json&){
+        if(operation!="developer.describe")throw std::logic_error("Provider must receive the registered operation");
+        return nlohmann::json{{"generation",*firstOwner}};
+    };
+    session.setDeveloperServices(std::move(firstServices));firstOwner.reset();
+    if(session.edit("developer.describe").value.at("generation")!=1){std::cerr<<"First provider must be used\n";return 1;}
+    session.setDeveloperServices({});
+    if(!retiredOwner.expired()){std::cerr<<"Detaching must release provider ownership\n";return 1;}
+    if(session.edit("developer.describe")){std::cerr<<"Retired provider must be rejected\n";return 1;}
+    azurerender::DeveloperServices secondServices;
+    secondServices.operation=[](const std::string&,const nlohmann::json&){return nlohmann::json{{"generation",2}};};
+    session.setDeveloperServices(std::move(secondServices));
+    if(session.edit("developer.describe").value.at("generation")!=2){std::cerr<<"Second provider must replace the first\n";return 1;}
+    if(session.edit("preview.resize",{{"handle",1},{"extent",{0,128}}})){std::cerr<<"Provider parameters require schema validation\n";return 1;}
+    if(!session.edit("preview.resize",{{"handle",1},{"extent",{1,4096}}})){std::cerr<<"Declared range endpoints must be accepted\n";return 1;}
+    if(session.edit("preview.resize",{{"handle",1},{"extent",{4097,128}}})){std::cerr<<"Values above the declared maximum must be rejected\n";return 1;}
+    if(session.edits().version()!=developerVersion){std::cerr<<"Developer services must preserve document version\n";return 1;}
+    session.setDeveloperServices({});
     azurerender::RenderSettings liveSettings;
     context->attachRenderSettings(liveSettings);
     context->beginEdit();

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "mandatoryJumps": 7,
+  "coins": 8,
+  "optionalCoins": 2,
+  "audioStarts": 27,
+  "fallRecovery": true,
+  "checkpoint": true,
+  "movingPlatforms": true,
+  "restart": true,
+  "released": true,
+  "completionSeconds": 30.933333333333334,
+  "frames": 620
+}

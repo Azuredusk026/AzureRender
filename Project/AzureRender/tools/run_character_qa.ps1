@@ -8,7 +8,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$OutputRoot,
 
-    [ValidateSet('all', 'baseline', 'isolation', 'ab')]
+    [ValidateSet('all', 'baseline', 'isolation', 'ab', 'animation')]
     [string]$Mode = 'all',
 
     [ValidateRange(64, 7680)]
@@ -21,7 +21,7 @@ param(
     [int]$Fps = 60,
 
     [ValidateRange(2, 600)]
-    [int]$LightingSweepFrames = 60,
+    [int]$LightingSweepFrames = 120,
 
     [switch]$Resume
 )
@@ -70,7 +70,9 @@ function Add-QaCase {
         [string]$Isolation = 'beauty',
         [string]$Effect = '',
         [string]$EffectState = '',
-        [int]$Frames = 1
+        [int]$Frames = 1,
+        [bool]$LightScan = $false,
+        [bool]$Animation = $false
     )
     $cases.Add([ordered]@{
         name = $Name
@@ -80,6 +82,8 @@ function Add-QaCase {
         effect = $Effect
         effectState = $EffectState
         frames = $Frames
+        lightScan = $LightScan
+        animation = $Animation
     })
 }
 
@@ -88,6 +92,9 @@ if ($Mode -in @('all', 'baseline')) {
         'full-body-front',
         'face-front',
         'face-three-quarter',
+        'face-three-quarter-right',
+        'face-side-left',
+        'face-side-right',
         'back-detail',
         'lighting-sweep'
     )
@@ -110,6 +117,15 @@ if ($Mode -in @('all', 'baseline')) {
                 -Light $light `
                 -Frames $frames
         }
+    }
+    foreach ($camera in @('face-front', 'face-three-quarter-left')) {
+        Add-QaCase -Name "light_scan_$camera" -Camera $camera -Light 'stylized-key' -Frames 120 -LightScan $true
+    }
+}
+
+if ($Mode -in @('all', 'animation')) {
+    foreach ($camera in @('face-front', 'face-three-quarter-left', 'face-three-quarter-right')) {
+        Add-QaCase -Name "animation_$camera" -Camera $camera -Light 'neutral-material' -Frames 120 -Animation $true
     }
 }
 
@@ -134,10 +150,11 @@ if ($Mode -in @('all', 'isolation')) {
         'shadow-tint',
         'face-sdf',
         'overlay',
-        'bloom'
+        'bloom',
+        'brow-mask'
     )
     foreach ($view in $isolationViews) {
-        $camera = if ($view -eq 'face-sdf') {
+        $camera = if ($view -in @('face-sdf', 'brow-mask')) {
             'face-front'
         } elseif ($view -in @('hair-kk', 'rim', 'specular')) {
             'face-three-quarter'
@@ -243,11 +260,25 @@ foreach ($case in $cases) {
             '--qa-effect-state', $case.effectState
         )
     }
+    if ($case.lightScan) {
+        $arguments += '--qa-light-scan'
+    }
+    if ($case.animation) {
+        $arguments += '--qa-animation'
+    }
 
     Write-Host "[CQ-0] $($case.name)"
-    & $resolvedExecutable @arguments
-    if ($LASTEXITCODE -ne 0) {
-        throw "QA case failed with exit code ${LASTEXITCODE}: $($case.name)"
+    $stdout = Join-Path $resolvedOutputRoot "$($case.name).stdout.log"
+    $stderr = Join-Path $resolvedOutputRoot "$($case.name).stderr.log"
+    $quotedArguments = $arguments | ForEach-Object { '"' + $_ + '"' }
+    $process = Start-Process -FilePath $resolvedExecutable -ArgumentList $quotedArguments -WindowStyle Hidden -PassThru `
+        -RedirectStandardOutput $stdout -RedirectStandardError $stderr
+    if (-not $process.WaitForExit(240000)) {
+        $process.Kill()
+        throw "QA case timed out: $($case.name)"
+    }
+    if ($process.ExitCode -ne 0) {
+        throw "QA case failed with exit code $($process.ExitCode): $($case.name)"
     }
 
     if (-not (Test-Path -LiteralPath $frame -PathType Leaf)) {

@@ -1,0 +1,6 @@
+[0/2] Re-checking globbed directories...
+[1/4] C:\WINDOWS\system32\cmd.exe /C "cd /D D:\Projects\FYP\Project\AzureRender\build\ninja-msvc-release && D:\Projects\FYP\Project\AzureRender\build\reinstall-environment\venv\Scripts\python.exe D:/Projects/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+
+[2/4] Building CXX object CMakeFiles\AzurePlayer.dir\src\player\main.cpp.obj
+[3/4] Linking CXX executable AzurePlayer.exe

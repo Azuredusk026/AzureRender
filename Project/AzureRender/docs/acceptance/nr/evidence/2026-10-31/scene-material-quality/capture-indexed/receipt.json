@@ -1,0 +1,242 @@
+{
+  "format": "RenderDocEvidence/1",
+  "operation": "capture",
+  "source": {
+    "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "bytes": 6067200,
+    "sha256": "8bac912e35c06a4a06dec5649917cb9132f5caa0a6d7f461ed8d2bd2ee6f5ea7"
+  },
+  "status": "captured",
+  "artifacts": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\capture-indexed\\capture_frame1.rdc",
+      "bytes": 1557350253,
+      "sha256": "b9e7a50a2a6ac38d32c72979ba911235ff3dae832ca3e64ff03c5ad53a7537b1"
+    }
+  ],
+  "tool_version": "1.46",
+  "started_unix": 1793422755.5461137,
+  "request": {
+    "format": "RenderDocRequest/1",
+    "operation": "capture",
+    "source": {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+      "bytes": 6067200,
+      "sha256": "8bac912e35c06a4a06dec5649917cb9132f5caa0a6d7f461ed8d2bd2ee6f5ea7"
+    },
+    "output": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\capture-indexed",
+    "renderdoc_dir": "D:\\Tools\\RenderDoc\\1.46\\RenderDoc_1.46_64",
+    "arguments": [
+      "--project",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-105539-full-scene-character-composition-b37668\\project\\history-environment.azureproject",
+      "--width",
+      "2560",
+      "--height",
+      "1440",
+      "--capture-frames",
+      "4",
+      "--capture-fps",
+      "60",
+      "--capture-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\capture-indexed\\frames",
+      "--fixed-frame-step",
+      "--qa-camera",
+      "scene",
+      "--qa-light",
+      "scene",
+      "--qa-isolation",
+      "beauty",
+      "--runtime-report",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\capture-indexed\\runtime.json"
+    ],
+    "frame": 1,
+    "events": [],
+    "timeout": 600,
+    "pid": null,
+    "working_directory": "D:\\Projects\\FYP\\Project\\AzureRender",
+    "environment": {
+      "VK_LAYER_PATH": "D:\\Tools\\RenderDoc\\1.46\\RenderDoc_1.46_64;D:/Tools/VulkanSDK/1.4.350.0/Bin",
+      "VK_INSTANCE_LAYERS": "VK_LAYER_RENDERDOC_Capture",
+      "ENABLE_VULKAN_RENDERDOC_CAPTURE": "1",
+      "DOTNET_ROOT": "D:/Tools/dotnet9",
+      "TEMP": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\capture-indexed",
+      "TMP": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\capture-indexed"
+    },
+    "scope": "Capture this explicit AzurePlayer instance only; layer activation is confined to the target process environment. No system layer registry mutation."
+  },
+  "host": "qrenderdoc embedded Python; host owns global replay lifetime",
+  "capture_options": {
+    "apiValidation": true,
+    "debugOutputMute": false,
+    "hookIntoChildren": false,
+    "refAllResources": false
+  },
+  "messages": [
+    {
+      "type": "TargetControlMessageType.CapturableWindowCount",
+      "at_unix": 1793422782.9743876
+    },
+    {
+      "type": "TargetControlMessageType.RegisterAPI",
+      "at_unix": 1793422784.009521
+    },
+    {
+      "type": "TargetControlMessageType.RegisterAPI",
+      "at_unix": 1793422850.6327853
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422850.650986
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422850.7594976
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422850.8829477
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422851.2559378
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422852.1315281
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422852.2418158
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422852.5332367
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422852.7502403
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422852.8614442
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422853.078179
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422853.2013755
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422853.4208057
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422853.6571574
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422853.7797017
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422853.88846
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422854.0761676
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422854.3121777
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422854.4219706
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422854.545925
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422854.6536868
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422854.7783039
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422854.9014838
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422855.0132623
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422855.1220188
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422855.2486632
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422855.3584871
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422855.4830668
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422855.5928779
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422855.717908
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422855.8268812
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422855.9360235
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422856.060946
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422856.1707075
+    },
+    {
+      "type": "TargetControlMessageType.CaptureProgress",
+      "at_unix": 1793422856.294853
+    },
+    {
+      "type": "TargetControlMessageType.NewCapture",
+      "at_unix": 1793422856.9450593
+    }
+  ],
+  "source_identity_scope": "explicit launch executable",
+  "execute_result": "<Result: 'Success'>",
+  "ident": 38920,
+  "pid": 24776,
+  "target": "AzurePlayer",
+  "api_at_connection": "",
+  "capture": {
+    "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\capture-indexed\\capture_frame1.rdc",
+    "bytes": 1557350253,
+    "sha256": "b9e7a50a2a6ac38d32c72979ba911235ff3dae832ca3e64ff03c5ad53a7537b1"
+  },
+  "capture_frame": 1,
+  "api": "Vulkan",
+  "finished_unix": 1793422880.8476193
+}

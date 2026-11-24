@@ -1,0 +1,27 @@
+[
+  {
+    "path": "coordinate-inventory.json",
+    "bytes": 5042,
+    "sha256": "d309a215417ba2011c33cc8e977267fe95c3694364ca61ecc0ac9d763930543c"
+  },
+  {
+    "path": "inventory.py",
+    "bytes": 2160,
+    "sha256": "0ba5c6eedcaf50ddac1a192170f7d389f6aabfb176e8cb8701c86e26f8833f9b"
+  },
+  {
+    "path": "source-preconditions.json",
+    "bytes": 761,
+    "sha256": "7f812ab8f1cfd3aeaa6fcfe1cbde5bec3245b3b313f62419f2e74135d2363b5f"
+  },
+  {
+    "path": "summary.json",
+    "bytes": 445,
+    "sha256": "f812cbc475f8b38df31a9330a0286b67d9794478e1c1369612e06dcb7cb32f06"
+  },
+  {
+    "path": "verify-preconditions.py",
+    "bytes": 1507,
+    "sha256": "55c31ee6a39ac3e6c832a48d2b1032f48709d092bd3b451d310d3b85b143bf82"
+  }
+]

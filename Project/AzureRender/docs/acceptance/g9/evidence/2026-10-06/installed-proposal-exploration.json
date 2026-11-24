@@ -1,0 +1,2730 @@
+[
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 5
+    },
+    "response": {
+      "elapsedMs": 50.1514,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "ai.available"
+    },
+    "response": {
+      "elapsedMs": 2.2792,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": true
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.5534,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:c25e3919ed404159\",\"documentId\":\"17912892322374597-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "scene.nodeCount"
+    },
+    "response": {
+      "elapsedMs": 3.5693,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 21
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "tool.console"
+      }
+    },
+    "response": {
+      "elapsedMs": 7.3558,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 5
+    },
+    "response": {
+      "elapsedMs": 17.9668,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "ai.instruction"
+      }
+    },
+    "response": {
+      "elapsedMs": 2.8041,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "text",
+        "text": "Create a scene candidate"
+      }
+    },
+    "response": {
+      "elapsedMs": 0.9302,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 5
+    },
+    "response": {
+      "elapsedMs": 12.4273,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "ai.generate"
+      }
+    },
+    "response": {
+      "elapsedMs": 1.9385,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Ready"
+    },
+    "response": {
+      "elapsedMs": 459.2553,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Ready"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.0157,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:c25e3919ed404159\",\"documentId\":\"17912892322374597-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "ai.proposal"
+    },
+    "response": {
+      "elapsedMs": 2.3772,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"baseVersion\":{\"contentHash\":\"fnv1a64:c25e3919ed404159\",\"documentId\":\"17912892322374597-1\",\"revision\":2},\"diagnostics\":[],\"diff\":[{\"op\":\"add\",\"path\":\"/components/ai-candidate\",\"value\":{\"azure.renderable\":{\"data\":{\"primitiveIndex\":0,\"visible\":false},\"type\":\"azure.renderable\",\"version\":1},\"azure.transform\":{\"data\":{\"rotation\":[0.0,0.0,0.0],\"scale\":[1.0,1.0,1.0],\"translation\":[0.0,0.0,0.0]},\"type\":\"azure.transform\",\"version\":1}}},{\"op\":\"add\",\"path\":\"/nodes/-\",\"value\":{\"id\":\"ai-candidate\",\"instanceOf\":\"\",\"name\":\"ai-candidate\",\"parentId\":\"\",\"prefabSource\":\"\",\"resourceId\":\"\",\"rotation\":[0.0,0.0,0.0],\"scale\":[1.0,1.0,1.0],\"translation\":[0.0,0.0,0.0],\"visible\":false}}],\"domain\":\"scene\",\"historyBytes\":2,\"historyCount\":0,\"operations\":[{\"command\":\"node.create\",\"parameters\":{\"id\":\"ai-candidate\"}}],\"repairCount\":0,\"runId\":\"editor-ai-1\",\"schemaVersion\":1,\"sourceHash\":\"fnv1a64:1e9d46a707602a11\",\"state\":\"Ready\",\"structuredMode\":\"json\",\"target\":\"document\",\"transactional\":true}"
+    }
+  },
+  {
+    "op": "screenshot",
+    "fields": {
+      "label": "g9-scene-preview"
+    },
+    "response": {
+      "elapsedMs": 4.168,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "label": "g9-scene-preview",
+        "scheduled": true
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "engine.screenshots",
+      "equals": 1
+    },
+    "response": {
+      "elapsedMs": 160.9393,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 1
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "ai.reject"
+      }
+    },
+    "response": {
+      "elapsedMs": 4.2609,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Rejected"
+    },
+    "response": {
+      "elapsedMs": 0.5126,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Rejected"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 3.8697,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:c25e3919ed404159\",\"documentId\":\"17912892322374597-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.2102,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:c25e3919ed404159\",\"documentId\":\"17912892322374597-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-19",
+      "commandId": "ai.generate",
+      "parameters": {
+        "runId": "apply",
+        "domain": "scene",
+        "target": "document",
+        "instruction": "Produce the declared structured candidate"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:c25e3919ed404159",
+        "documentId": "17912892322374597-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 5.5623,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:c25e3919ed404159",
+            "documentId": "17912892322374597-1",
+            "revision": 2
+          },
+          "diagnostics": [],
+          "diff": [],
+          "domain": "scene",
+          "historyBytes": 194,
+          "historyCount": 1,
+          "operations": [],
+          "repairCount": 0,
+          "runId": "apply",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:cbf29ce484222325",
+          "state": "Generating",
+          "structuredMode": "",
+          "target": "document",
+          "transactional": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:c25e3919ed404159",
+          "documentId": "17912892322374597-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Ready"
+    },
+    "response": {
+      "elapsedMs": 378.0779,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Ready"
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "ai.apply"
+      }
+    },
+    "response": {
+      "elapsedMs": 0.5299,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Applied"
+    },
+    "response": {
+      "elapsedMs": 10.7225,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Applied"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "scene.nodeCount"
+    },
+    "response": {
+      "elapsedMs": 37.5995,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 22
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.8351,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:33f9139d6c2adad7\",\"documentId\":\"17912892322374597-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-25",
+      "commandId": "history.undo",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:33f9139d6c2adad7",
+        "documentId": "17912892322374597-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "elapsedMs": 2.1762,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "remove",
+            "path": "/components/ai-candidate"
+          },
+          {
+            "op": "remove",
+            "path": "/nodes/21"
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:c25e3919ed404159",
+          "documentId": "17912892322374597-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "scene.nodeCount"
+    },
+    "response": {
+      "elapsedMs": 37.3285,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 21
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 6.3911,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:c25e3919ed404159\",\"documentId\":\"17912892322374597-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.9795,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:c25e3919ed404159\",\"documentId\":\"17912892322374597-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-29",
+      "commandId": "ai.generate",
+      "parameters": {
+        "runId": "stale",
+        "domain": "scene",
+        "target": "document",
+        "instruction": "Produce the declared structured candidate"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:c25e3919ed404159",
+        "documentId": "17912892322374597-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 0.3609,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:c25e3919ed404159",
+            "documentId": "17912892322374597-1",
+            "revision": 4
+          },
+          "diagnostics": [],
+          "diff": [],
+          "domain": "scene",
+          "historyBytes": 397,
+          "historyCount": 2,
+          "operations": [],
+          "repairCount": 0,
+          "runId": "stale",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:cbf29ce484222325",
+          "state": "Generating",
+          "structuredMode": "",
+          "target": "document",
+          "transactional": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:c25e3919ed404159",
+          "documentId": "17912892322374597-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Ready"
+    },
+    "response": {
+      "elapsedMs": 393.1129,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Ready"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.8896,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:c25e3919ed404159\",\"documentId\":\"17912892322374597-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-32",
+      "commandId": "node.create",
+      "parameters": {
+        "id": "manual-stale"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:c25e3919ed404159",
+        "documentId": "17912892322374597-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 2.1859,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "add",
+            "path": "/components/manual-stale",
+            "value": {
+              "azure.renderable": {
+                "data": {
+                  "primitiveIndex": 0,
+                  "visible": false
+                },
+                "type": "azure.renderable",
+                "version": 1
+              },
+              "azure.transform": {
+                "data": {
+                  "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "type": "azure.transform",
+                "version": 1
+              }
+            }
+          },
+          {
+            "op": "add",
+            "path": "/nodes/-",
+            "value": {
+              "id": "manual-stale",
+              "instanceOf": "",
+              "name": "manual-stale",
+              "parentId": "",
+              "prefabSource": "",
+              "resourceId": "",
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "visible": false
+            }
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:2010cc170fdd6c2b",
+          "documentId": "17912892322374597-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Stale"
+    },
+    "response": {
+      "elapsedMs": 18.6765,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Stale"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.6611,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.006,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-36",
+      "commandId": "ai.apply",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:2010cc170fdd6c2b",
+        "documentId": "17912892322374597-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 2.6009,
+      "message": "[{\"code\":\"RejectedOperation\",\"message\":\"[{\\\"code\\\":\\\"StaleProposal\\\"}]\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.5528,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.1559,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-39",
+      "commandId": "ai.generate",
+      "parameters": {
+        "runId": "cancel",
+        "domain": "scene",
+        "target": "document",
+        "instruction": "Produce the declared structured candidate"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:2010cc170fdd6c2b",
+        "documentId": "17912892322374597-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 5.7626,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:2010cc170fdd6c2b",
+            "documentId": "17912892322374597-1",
+            "revision": 5
+          },
+          "diagnostics": [],
+          "diff": [],
+          "domain": "scene",
+          "historyBytes": 799,
+          "historyCount": 4,
+          "operations": [],
+          "repairCount": 0,
+          "runId": "cancel",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:cbf29ce484222325",
+          "state": "Generating",
+          "structuredMode": "",
+          "target": "document",
+          "transactional": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:2010cc170fdd6c2b",
+          "documentId": "17912892322374597-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Generating"
+    },
+    "response": {
+      "elapsedMs": 3.856,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Generating"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.5985,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-42",
+      "commandId": "ai.cancel",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:2010cc170fdd6c2b",
+        "documentId": "17912892322374597-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 2.5759,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:2010cc170fdd6c2b",
+            "documentId": "17912892322374597-1",
+            "revision": 5
+          },
+          "diagnostics": [],
+          "diff": [],
+          "domain": "scene",
+          "historyBytes": 1005,
+          "historyCount": 5,
+          "operations": [],
+          "repairCount": 0,
+          "runId": "cancel",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:cbf29ce484222325",
+          "state": "Cancelled",
+          "structuredMode": "",
+          "target": "document",
+          "transactional": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:2010cc170fdd6c2b",
+          "documentId": "17912892322374597-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Cancelled"
+    },
+    "response": {
+      "elapsedMs": 0.8058,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Cancelled"
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 30
+    },
+    "response": {
+      "elapsedMs": 81.0199,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.0964,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.5488,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-47",
+      "commandId": "ai.generate",
+      "parameters": {
+        "runId": "repair",
+        "domain": "scene",
+        "target": "document",
+        "instruction": "Produce the declared structured candidate"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:2010cc170fdd6c2b",
+        "documentId": "17912892322374597-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 4.4306,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:2010cc170fdd6c2b",
+            "documentId": "17912892322374597-1",
+            "revision": 5
+          },
+          "diagnostics": [],
+          "diff": [],
+          "domain": "scene",
+          "historyBytes": 1005,
+          "historyCount": 5,
+          "operations": [],
+          "repairCount": 0,
+          "runId": "repair",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:cbf29ce484222325",
+          "state": "Generating",
+          "structuredMode": "",
+          "target": "document",
+          "transactional": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:2010cc170fdd6c2b",
+          "documentId": "17912892322374597-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Ready"
+    },
+    "response": {
+      "elapsedMs": 776.9712,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Ready"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "ai.proposal"
+    },
+    "response": {
+      "elapsedMs": 1.6071,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"baseVersion\":{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5},\"diagnostics\":[{\"code\":\"InvalidProposal\",\"message\":\"[json.exception.parse_error.101] parse error at line 1, column 2: syntax error while parsing object key - invalid literal; last read: '{i'; expected string literal\"}],\"diff\":[{\"op\":\"add\",\"path\":\"/components/ai-candidate\",\"value\":{\"azure.renderable\":{\"data\":{\"primitiveIndex\":0,\"visible\":false},\"type\":\"azure.renderable\",\"version\":1},\"azure.transform\":{\"data\":{\"rotation\":[0.0,0.0,0.0],\"scale\":[1.0,1.0,1.0],\"translation\":[0.0,0.0,0.0]},\"type\":\"azure.transform\",\"version\":1}}},{\"op\":\"add\",\"path\":\"/nodes/-\",\"value\":{\"id\":\"ai-candidate\",\"instanceOf\":\"\",\"name\":\"ai-candidate\",\"parentId\":\"\",\"prefabSource\":\"\",\"resourceId\":\"\",\"rotation\":[0.0,0.0,0.0],\"scale\":[1.0,1.0,1.0],\"translation\":[0.0,0.0,0.0],\"visible\":false}}],\"domain\":\"scene\",\"historyBytes\":1005,\"historyCount\":5,\"operations\":[{\"command\":\"node.create\",\"parameters\":{\"id\":\"ai-candidate\"}}],\"repairCount\":1,\"runId\":\"repair\",\"schemaVersion\":1,\"sourceHash\":\"fnv1a64:1e9d46a707602a11\",\"state\":\"Ready\",\"structuredMode\":\"json\",\"target\":\"document\",\"transactional\":true}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.8653,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-51",
+      "commandId": "ai.reject",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:2010cc170fdd6c2b",
+        "documentId": "17912892322374597-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 2.8402,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:2010cc170fdd6c2b",
+            "documentId": "17912892322374597-1",
+            "revision": 5
+          },
+          "diagnostics": [
+            {
+              "code": "InvalidProposal",
+              "message": "[json.exception.parse_error.101] parse error at line 1, column 2: syntax error while parsing object key - invalid literal; last read: '{i'; expected string literal"
+            }
+          ],
+          "diff": [],
+          "domain": "scene",
+          "historyBytes": 1210,
+          "historyCount": 6,
+          "operations": [],
+          "repairCount": 1,
+          "runId": "repair",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:1e9d46a707602a11",
+          "state": "Rejected",
+          "structuredMode": "json",
+          "target": "document",
+          "transactional": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:2010cc170fdd6c2b",
+          "documentId": "17912892322374597-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.4792,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-53",
+      "commandId": "ai.generate",
+      "parameters": {
+        "runId": "exhaust",
+        "domain": "scene",
+        "target": "document",
+        "instruction": "Produce the declared structured candidate"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:2010cc170fdd6c2b",
+        "documentId": "17912892322374597-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 2.4843,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:2010cc170fdd6c2b",
+            "documentId": "17912892322374597-1",
+            "revision": 5
+          },
+          "diagnostics": [],
+          "diff": [],
+          "domain": "scene",
+          "historyBytes": 1210,
+          "historyCount": 6,
+          "operations": [],
+          "repairCount": 0,
+          "runId": "exhaust",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:cbf29ce484222325",
+          "state": "Generating",
+          "structuredMode": "",
+          "target": "document",
+          "transactional": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:2010cc170fdd6c2b",
+          "documentId": "17912892322374597-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Error"
+    },
+    "response": {
+      "elapsedMs": 782.7814,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Error"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "ai.proposal"
+    },
+    "response": {
+      "elapsedMs": 4.5465,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"baseVersion\":{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5},\"diagnostics\":[{\"code\":\"InvalidProposal\",\"message\":\"[json.exception.parse_error.101] parse error at line 1, column 2: syntax error while parsing object key - invalid literal; last read: '{i'; expected string literal\"},{\"code\":\"InvalidProposal\",\"message\":\"[json.exception.parse_error.101] parse error at line 1, column 2: syntax error while parsing object key - invalid literal; last read: '{i'; expected string literal\"},{\"code\":\"GenerationFailed\",\"message\":\"Proposal repair budget exhausted\"}],\"diff\":[],\"domain\":\"scene\",\"historyBytes\":1413,\"historyCount\":7,\"operations\":[],\"repairCount\":1,\"runId\":\"exhaust\",\"schemaVersion\":1,\"sourceHash\":\"fnv1a64:c6261785e5fba091\",\"state\":\"Error\",\"structuredMode\":\"json\",\"target\":\"document\",\"transactional\":true}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.0775,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.8678,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-58",
+      "commandId": "ai.generate",
+      "parameters": {
+        "runId": "asset-preview",
+        "domain": "asset-parameters",
+        "target": "document",
+        "instruction": "Produce the declared structured candidate"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:2010cc170fdd6c2b",
+        "documentId": "17912892322374597-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 7.9702,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:2010cc170fdd6c2b",
+            "documentId": "17912892322374597-1",
+            "revision": 5
+          },
+          "diagnostics": [],
+          "diff": [],
+          "domain": "asset-parameters",
+          "historyBytes": 1413,
+          "historyCount": 7,
+          "operations": [],
+          "repairCount": 0,
+          "runId": "asset-preview",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:cbf29ce484222325",
+          "state": "Generating",
+          "structuredMode": "",
+          "target": "document",
+          "transactional": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:2010cc170fdd6c2b",
+          "documentId": "17912892322374597-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Ready"
+    },
+    "response": {
+      "elapsedMs": 361.8129,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Ready"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.8656,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-61",
+      "commandId": "ai.reject",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:2010cc170fdd6c2b",
+        "documentId": "17912892322374597-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 0.5766,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:2010cc170fdd6c2b",
+            "documentId": "17912892322374597-1",
+            "revision": 5
+          },
+          "diagnostics": [],
+          "diff": [],
+          "domain": "asset-parameters",
+          "historyBytes": 1636,
+          "historyCount": 8,
+          "operations": [],
+          "repairCount": 0,
+          "runId": "asset-preview",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:b3db06c247311d41",
+          "state": "Rejected",
+          "structuredMode": "json",
+          "target": "document",
+          "transactional": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:2010cc170fdd6c2b",
+          "documentId": "17912892322374597-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 10.1907,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-63",
+      "commandId": "ai.generate",
+      "parameters": {
+        "runId": "asset-apply",
+        "domain": "asset-parameters",
+        "target": "document",
+        "instruction": "Produce the declared structured candidate"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:2010cc170fdd6c2b",
+        "documentId": "17912892322374597-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 3.7499,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:2010cc170fdd6c2b",
+            "documentId": "17912892322374597-1",
+            "revision": 5
+          },
+          "diagnostics": [],
+          "diff": [],
+          "domain": "asset-parameters",
+          "historyBytes": 1636,
+          "historyCount": 8,
+          "operations": [],
+          "repairCount": 0,
+          "runId": "asset-apply",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:cbf29ce484222325",
+          "state": "Generating",
+          "structuredMode": "",
+          "target": "document",
+          "transactional": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:2010cc170fdd6c2b",
+          "documentId": "17912892322374597-1",
+          "revision": 5
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Ready"
+    },
+    "response": {
+      "elapsedMs": 378.9745,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Ready"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.9621,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":5}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-66",
+      "commandId": "ai.apply",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:2010cc170fdd6c2b",
+        "documentId": "17912892322374597-1",
+        "revision": 5
+      }
+    },
+    "response": {
+      "elapsedMs": 1.0791,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "baseVersion": {
+            "contentHash": "fnv1a64:2010cc170fdd6c2b",
+            "documentId": "17912892322374597-1",
+            "revision": 5
+          },
+          "diagnostics": [],
+          "diff": [
+            {
+              "dependencies": {},
+              "generator": "azure.text",
+              "generatorVersion": 1,
+              "inputs": {},
+              "op": "generate",
+              "output": "assets:/ai-generated.json",
+              "outputHash": "fnv1a64:c8367f18395bf95a",
+              "previousHash": "fnv1a64:cbf29ce484222325"
+            }
+          ],
+          "domain": "asset-parameters",
+          "historyBytes": 1856,
+          "historyCount": 9,
+          "operations": [
+            {
+              "command": "asset.generate",
+              "parameters": {
+                "generator": "azure.text",
+                "license": "CC0 test fixture",
+                "output": "assets:/ai-generated.json",
+                "parameters": {
+                  "source": "{\"schemaVersion\":1,\"tool\":\"reusable\"}"
+                }
+              }
+            }
+          ],
+          "repairCount": 0,
+          "runId": "asset-apply",
+          "schemaVersion": 1,
+          "sourceHash": "fnv1a64:b3db06c247311d41",
+          "state": "Applied",
+          "structuredMode": "json",
+          "target": "document",
+          "transactional": false
+        },
+        "version": {
+          "contentHash": "fnv1a64:2010cc170fdd6c2b",
+          "documentId": "17912892322374597-1",
+          "revision": 6
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "ai.state",
+      "equals": "Applied"
+    },
+    "response": {
+      "elapsedMs": 6.8804,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Applied"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.6165,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:2010cc170fdd6c2b\",\"documentId\":\"17912892322374597-1\",\"revision\":6}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "proposal-69",
+      "commandId": "document.save",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:2010cc170fdd6c2b",
+        "documentId": "17912892322374597-1",
+        "revision": 6
+      }
+    },
+    "response": {
+      "elapsedMs": 4.2303,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/0/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/0/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/0/name",
+            "value": "ground"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/0/parentId",
+            "value": ""
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/1/components/azure.transform/data/scale/0",
+            "value": 0.20000000298023224
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/1/components/azure.transform/data/translation/0",
+            "value": -3.200000047683716
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/1/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/1/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/1/name",
+            "value": "passage-left"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/1/parentId",
+            "value": ""
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/2/components/azure.transform/data/scale/0",
+            "value": 0.20000000298023224
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/2/components/azure.transform/data/translation/0",
+            "value": 3.200000047683716
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/2/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/2/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/2/name",
+            "value": "passage-right"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/2/parentId",
+            "value": ""
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/3/components/azure.transform/data/scale/1",
+            "value": 0.15000000596046448
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/3/components/azure.transform/data/translation/1",
+            "value": 0.17000000178813934
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/3/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/3/name",
+            "value": "ramp"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/3/parentId",
+            "value": ""
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/4/components/azure.transform/data/scale/0",
+            "value": 0.20000000298023224
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/4/components/azure.transform/data/translation/0",
+            "value": -3.200000047683716
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/4/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/4/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/4/name",
+            "value": "interior-left"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/4/parentId",
+            "value": ""
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/5/components/azure.transform/data/scale/0",
+            "value": 0.20000000298023224
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/5/components/azure.transform/data/translation/0",
+            "value": 3.200000047683716
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/5/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/5/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/5/name",
+            "value": "interior-right"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/5/parentId",
+            "value": ""
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/6/components/azure.transform/data/scale/0",
+            "value": 3.4000000953674316
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/6/components/azure.transform/data/scale/1",
+            "value": 0.15000000596046448
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/6/components/azure.transform/data/translation/1",
+            "value": 2.3499999046325684
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/6/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/6/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/6/name",
+            "value": "interior-roof"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/6/parentId",
+            "value": ""
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/7/components/azure.transform/data/scale/2",
+            "value": 0.20000000298023224
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/7/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/7/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/7/name",
+            "value": "gate-left"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/7/parentId",
+            "value": ""
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/nodes/8/components/azure.transform/data/scale/2",
+            "value": 0.20000000298023224
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/8/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/8/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/8/name",
+            "value": "gate-right"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/8/parentId",
+            "value": ""
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/9/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/9/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": false
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/9/name",
+            "value": "camera"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/9/parentId",
+            "value": ""
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/10/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/10/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": false
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/10/name",
+            "value": "hud"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/10/parentId",
+            "value": ""
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/11/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/11/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": false
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/11/name",
+            "value": "goal"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/11/parentId",
+            "value": ""
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/12/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/12/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/12/name",
+            "value": "companion-0"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/12/parentId",
+            "value": ""
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/13/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/13/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/13/name",
+            "value": "companion-1"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/13/parentId",
+            "value": ""
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/nodes/-",
+            "value": {
+              "components": {
+                "azure.renderable": {
+                  "data": {
+                    "primitiveIndex": 0,
+                    "visible": false
+                  },
+                  "type": "azure.renderable",
+                  "version": 1
+                },
+                "azure.transform": {
+                  "data": {
+                    "rotation": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "translation": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ]
+                  },
+                  "type": "azure.transform",
+                  "version": 1
+                }
+              },
+              "id": "manual-stale",
+              "name": "manual-stale",
+              "parentId": "",
+              "resourceId": ""
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/0/overrides",
+            "value": {
+              "body": {
+                "components": {
+                  "azure.animator": {
+                    "data": {
+                      "asset": "assets:/locomotion.json",
+                      "locomotion": true,
+                      "referenceSpeed": 2
+                    },
+                    "type": "azure.animator",
+                    "version": 2
+                  },
+                  "azure.character": {
+                    "data": {
+                      "centerOffset": 0.9,
+                      "forwardYaw": 180,
+                      "speed": 2,
+                      "sprintMultiplier": 2.5
+                    },
+                    "type": "azure.character",
+                    "version": 3
+                  },
+                  "azure.renderable": {
+                    "data": {
+                      "primitiveIndex": 0,
+                      "visible": true
+                    },
+                    "type": "azure.renderable",
+                    "version": 1
+                  },
+                  "azure.script": {
+                    "data": {
+                      "asset": "assets:/hero.lua"
+                    },
+                    "type": "azure.script",
+                    "version": 1
+                  },
+                  "azure.task-state": {
+                    "data": {},
+                    "type": "azure.task-state",
+                    "version": 1
+                  },
+                  "azure.transform": {
+                    "data": {
+                      "rotation": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                      ],
+                      "translation": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ]
+                    },
+                    "type": "azure.transform",
+                    "version": 1
+                  }
+                },
+                "name": "hero:body",
+                "parentId": "",
+                "resourceId": "mesh"
+              }
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/1/overrides",
+            "value": {
+              "body": {
+                "components": {
+                  "azure.animator": {
+                    "data": {
+                      "asset": "assets:/locomotion.json",
+                      "startTime": 0.4
+                    },
+                    "type": "azure.animator",
+                    "version": 2
+                  },
+                  "azure.interactable": {
+                    "data": {
+                      "prompt": "Talk to the guide [E]",
+                      "range": 2.5
+                    },
+                    "type": "azure.interactable",
+                    "version": 1
+                  },
+                  "azure.renderable": {
+                    "data": {
+                      "primitiveIndex": 0,
+                      "visible": true
+                    },
+                    "type": "azure.renderable",
+                    "version": 1
+                  },
+                  "azure.script": {
+                    "data": {
+                      "asset": "assets:/guide.lua"
+                    },
+                    "type": "azure.script",
+                    "version": 1
+                  },
+                  "azure.transform": {
+                    "data": {
+                      "rotation": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                      ],
+                      "translation": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                      ]
+                    },
+                    "type": "azure.transform",
+                    "version": 1
+                  }
+                },
+                "name": "guide:body",
+                "parentId": "",
+                "resourceId": "mesh"
+              }
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/2/overrides",
+            "value": {
+              "body": {
+                "components": {
+                  "azure.door": {
+                    "data": {},
+                    "type": "azure.door",
+                    "version": 1
+                  },
+                  "azure.interactable": {
+                    "data": {
+                      "offset": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "prompt": "Open gate [E]",
+                      "range": 3.5
+                    },
+                    "type": "azure.interactable",
+                    "version": 1
+                  },
+                  "azure.renderable": {
+                    "data": {
+                      "primitiveIndex": 0,
+                      "visible": true
+                    },
+                    "type": "azure.renderable",
+                    "version": 1
+                  },
+                  "azure.rigid-body": {
+                    "data": {
+                      "halfExtent": [
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "type": "azure.rigid-body",
+                    "version": 1
+                  },
+                  "azure.script": {
+                    "data": {
+                      "asset": "assets:/door.lua"
+                    },
+                    "type": "azure.script",
+                    "version": 1
+                  },
+                  "azure.transform": {
+                    "data": {
+                      "rotation": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "scale": [
+                        2.5,
+                        1.5,
+                        0.20000000298023224
+                      ],
+                      "translation": [
+                        0.0,
+                        1.5,
+                        -290.0
+                      ]
+                    },
+                    "type": "azure.transform",
+                    "version": 1
+                  }
+                },
+                "name": "door:body",
+                "parentId": "",
+                "resourceId": "mesh"
+              }
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/3/overrides",
+            "value": {
+              "body": {
+                "components": {
+                  "azure.checkpoint": {
+                    "data": {
+                      "position": [
+                        0,
+                        0,
+                        -165
+                      ]
+                    },
+                    "type": "azure.checkpoint",
+                    "version": 1
+                  },
+                  "azure.renderable": {
+                    "data": {
+                      "primitiveIndex": 0,
+                      "visible": false
+                    },
+                    "type": "azure.renderable",
+                    "version": 1
+                  },
+                  "azure.rigid-body": {
+                    "data": {
+                      "halfExtent": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "trigger": true
+                    },
+                    "type": "azure.rigid-body",
+                    "version": 1
+                  },
+                  "azure.script": {
+                    "data": {
+                      "asset": "assets:/checkpoint.lua"
+                    },
+                    "type": "azure.script",
+                    "version": 1
+                  },
+                  "azure.transform": {
+                    "data": {
+                      "rotation": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "scale": [
+                        3.0,
+                        2.0,
+                        2.0
+                      ],
+                      "translation": [
+                        0.0,
+                        1.0,
+                        -165.0
+                      ]
+                    },
+                    "type": "azure.transform",
+                    "version": 1
+                  }
+                },
+                "name": "checkpoint:body",
+                "parentId": "",
+                "resourceId": "mesh"
+              }
+            }
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/prefabs/4/overrides/body/components/azure.transform/data/translation/1",
+            "value": 0.44999998807907104
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/4/overrides/body/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/4/overrides/body/components/azure.transform/data/scale",
+            "value": [
+              0.30000001192092896,
+              0.44999998807907104,
+              0.30000001192092896
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/4/overrides/body/components/azure.transform/type",
+            "value": "azure.transform"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/4/overrides/body/components/azure.transform/version",
+            "value": 1
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/4/overrides/body/components/azure.collectible",
+            "value": {
+              "data": {},
+              "type": "azure.collectible",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/4/overrides/body/components/azure.interactable",
+            "value": {
+              "data": {
+                "offset": [
+                  0,
+                  0.3,
+                  0
+                ],
+                "prompt": "Collect artifact [E]",
+                "range": 3
+              },
+              "type": "azure.interactable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/4/overrides/body/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/4/overrides/body/components/azure.script",
+            "value": {
+              "data": {
+                "asset": "assets:/collectible.lua"
+              },
+              "type": "azure.script",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/4/overrides/body/name",
+            "value": "artifact-0:body"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/4/overrides/body/parentId",
+            "value": ""
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/4/overrides/body/resourceId",
+            "value": "mesh"
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/prefabs/5/overrides/body/components/azure.transform/data/translation/1",
+            "value": 0.44999998807907104
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/5/overrides/body/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/5/overrides/body/components/azure.transform/data/scale",
+            "value": [
+              0.30000001192092896,
+              0.44999998807907104,
+              0.30000001192092896
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/5/overrides/body/components/azure.transform/type",
+            "value": "azure.transform"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/5/overrides/body/components/azure.transform/version",
+            "value": 1
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/5/overrides/body/components/azure.collectible",
+            "value": {
+              "data": {},
+              "type": "azure.collectible",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/5/overrides/body/components/azure.interactable",
+            "value": {
+              "data": {
+                "offset": [
+                  0,
+                  0.3,
+                  0
+                ],
+                "prompt": "Collect artifact [E]",
+                "range": 3
+              },
+              "type": "azure.interactable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/5/overrides/body/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/5/overrides/body/components/azure.script",
+            "value": {
+              "data": {
+                "asset": "assets:/collectible.lua"
+              },
+              "type": "azure.script",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/5/overrides/body/name",
+            "value": "artifact-1:body"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/5/overrides/body/parentId",
+            "value": ""
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/5/overrides/body/resourceId",
+            "value": "mesh"
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/prefabs/6/overrides/body/components/azure.transform/data/translation/1",
+            "value": 0.44999998807907104
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/6/overrides/body/components/azure.transform/data/rotation",
+            "value": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/6/overrides/body/components/azure.transform/data/scale",
+            "value": [
+              0.30000001192092896,
+              0.44999998807907104,
+              0.30000001192092896
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/6/overrides/body/components/azure.transform/type",
+            "value": "azure.transform"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/6/overrides/body/components/azure.transform/version",
+            "value": 1
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/6/overrides/body/components/azure.collectible",
+            "value": {
+              "data": {},
+              "type": "azure.collectible",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/6/overrides/body/components/azure.interactable",
+            "value": {
+              "data": {
+                "offset": [
+                  0,
+                  0.3,
+                  0
+                ],
+                "prompt": "Collect artifact [E]",
+                "range": 3
+              },
+              "type": "azure.interactable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/6/overrides/body/components/azure.renderable",
+            "value": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": true
+              },
+              "type": "azure.renderable",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/6/overrides/body/components/azure.script",
+            "value": {
+              "data": {
+                "asset": "assets:/collectible.lua"
+              },
+              "type": "azure.script",
+              "version": 1
+            }
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/6/overrides/body/name",
+            "value": "artifact-2:body"
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/6/overrides/body/parentId",
+            "value": ""
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/prefabs/6/overrides/body/resourceId",
+            "value": "mesh"
+          },
+          {
+            "op": "replace",
+            "path": "/sourceLevel/renderSettings/cameraNear",
+            "value": 0.10000000149011612
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/background",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/bloomEnabled",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/bloomStrength",
+            "value": 0.1599999964237213
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/bloomThreshold",
+            "value": 1.0499999523162842
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/contrast",
+            "value": 1.0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/diagnosticView",
+            "value": 0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/diffuseBandThreshold",
+            "value": 0.4000000059604645
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/exposure",
+            "value": 0.0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/faceSdf",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/faceSoftness",
+            "value": 0.07999999821186066
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/faceThreshold",
+            "value": 0.5
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/innerOutline",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/outline",
+            "value": 0.4000000059604645
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/outlineColor",
+            "value": [
+              0.00800000037997961,
+              0.013000000268220901,
+              0.02199999988079071
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/outlineDepth",
+            "value": 0.18000000715255737
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/outlineNormal",
+            "value": 0.20000000298023224
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/saturation",
+            "value": 1.0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/shadowRadius",
+            "value": 8.0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/showcasePreset",
+            "value": 0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/silhouetteOutline",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/styleMaskStrength",
+            "value": 1.0
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/stylized",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/tint",
+            "value": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/renderSettings/toneMapping",
+            "value": true
+          },
+          {
+            "op": "add",
+            "path": "/sourceLevel/lights",
+            "value": []
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:6ca0241b5660a10a",
+          "documentId": "17912892322374597-1",
+          "revision": 7
+        }
+      }
+    }
+  }
+]

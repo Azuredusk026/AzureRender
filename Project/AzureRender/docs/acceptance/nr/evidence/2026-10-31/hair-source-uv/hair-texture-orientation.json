@@ -1,0 +1,27 @@
+{
+  "status": "hair-uv-texture-pair-characterized",
+  "sources": [
+    {
+      "role": "reference",
+      "path": "build\\runs\\20261031-135416-character-portrait-recovery-0773ca\\original-reference\\project\\native-character\\native-textures\\t16.dds",
+      "bytes": 5592580,
+      "sha256": "4a382264f75c816ccf8fdf70c5e4bccfcf6dc5b31d74c1fcb92b29a9bd556643"
+    },
+    {
+      "role": "dynamic",
+      "path": "build\\runs\\20261031-164808-character-frontal-lighting-fa3879\\project\\content-character\\hair-base-coverage.dds",
+      "bytes": 22369768,
+      "sha256": "0bf35700e233f4b70351b604ac5e2a187fc5bddcc3a4805e68d105178d387cdf"
+    }
+  ],
+  "baseRgbPixels": 4194304,
+  "sameOrientationRgbMaximumDifference": 0,
+  "sameOrientationRgbMeanDifference": 0.0,
+  "flippedImageRgbMaximumDifference": 105,
+  "flippedImageRgbMeanDifference": 17.496163845062256,
+  "currentAlphaDiffers": true,
+  "tangentWMatchingVertices": 11564,
+  "reflectedTangentWMatchingVertices": 0,
+  "vertices": 11564,
+  "scope": "Decoded level-zero encoded RGB, not radiometric output. The original and covered textures keep the same RGB orientation; alpha retains its separate coverage contract."
+}

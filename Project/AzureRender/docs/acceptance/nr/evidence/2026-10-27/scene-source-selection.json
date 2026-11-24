@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "phase": "NR1-S1",
+  "status": "source_selection_contract_passed_full_restoration_pending",
+  "source": {
+    "tools/endfield_native/scene_sources.py": "20f6a13f072c2d8eb46ba5bfdd1915afaebad5cc08499d1dbbb50e2aaa1ed8bd",
+    "tools/endfield_native/scene.py": "b7a1c8ff86c01322072eabb0046e37a83078cf79ac18fe81badf37ce8633a82b",
+    "tools/endfield_native/build_scene_preview.py": "a01f799c524b8ea9ba8302da8d0cb9f7be96d59a465217d66414282780cbe2fa",
+    "tools/select_native_scene_sources.py": "d7b9420ee1730530b5f3b1874f7e7cbdc0010bf6aad7391982d2eec6aa9553c3",
+    "tools/test_endfield_native_scene_sources.py": "a715f71785c36f8998dccc22d32472b630a29208166f6dc97aab248f6d043c31"
+  },
+  "tests": {
+    "cpu": 30,
+    "blenderEntities": 1,
+    "blenderExchangeResources": 5,
+    "maximumSourceMatrixError": 0.0,
+    "maximumSourceBoundsOverflow": 1.9073486328125e-06,
+    "gpu": {
+      "status": "passed",
+      "cases": [
+        {
+          "config": "release",
+          "mode": "all",
+          "centerCoverage": 1.0,
+          "changedNodes": 0
+        },
+        {
+          "config": "release",
+          "mode": "selected",
+          "centerCoverage": 1.0,
+          "changedNodes": 1
+        },
+        {
+          "config": "debug",
+          "mode": "all",
+          "centerCoverage": 1.0,
+          "changedNodes": 0
+        },
+        {
+          "config": "debug",
+          "mode": "selected",
+          "centerCoverage": 1.0,
+          "changedNodes": 1
+        }
+      ],
+      "configurationsExact": true
+    }
+  },
+  "sourceCapture": {
+    "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534.rdc",
+    "gbufferDraws": 194,
+    "instances": 444,
+    "matchedInstances": 291,
+    "unmatchedInstances": 153,
+    "ambiguousGlobal2Models": 5,
+    "occludingEntities": [
+      92438966,
+      102750655,
+      48318557
+    ],
+    "occludingEntitiesMatched": false
+  },
+  "projection": {
+    "maximumDisplayPixelDelta": 0.0002529337985857083,
+    "completeAndMinimalMvpExact": true
+  },
+  "selection": {
+    "selectedChunks": 44,
+    "excludedChunks": 1,
+    "mappedDrawNodes": 1126,
+    "changedNodes": 297,
+    "unmappedEntities": [
+      43360087
+    ],
+    "onlyVisibilityChanged": true,
+    "candidate": "build/runs/20261027-172112-native-visible-scene-activation-7813d1/camera-candidate/project.azureproject"
+  },
+  "images": {
+    "changedPixels": 907431,
+    "maximumByteDelta": 255,
+    "meanByteDelta": 8.977725151909722,
+    "sourceMeanAbsoluteByteError": 28.865297761140045,
+    "previousSourceMeanAbsoluteByteError": 34.59332673249421
+  },
+  "gpu": {
+    "validationErrors": 0,
+    "unloadBuffers": 0,
+    "unloadImages": 0,
+    "coldStartupSamples": 1,
+    "coldStartupP95Ms": 315.430752,
+    "performanceAccepted": false
+  },
+  "shaderPrograms": {
+    "count": 193,
+    "configurations": [
+      "debug",
+      "release"
+    ],
+    "byteIdenticalToPrevious": true
+  },
+  "commandFailure": {
+    "argument": "--gpu-report",
+    "diagnostic": "Unknown option: --gpu-report",
+    "originalLogOverwritten": true,
+    "validCaptureLog": "active-release.log"
+  },
+  "run": "build/runs/20261027-172112-native-visible-scene-activation-7813d1",
+  "artifacts": {
+    "candidate-source-selection.json": "f6d15db9173c902aafe8a04e79f89522be2d09384a227cbd7b21001b05acef5e",
+    "source-chunk-matches.json": "710b6f8591100ee60f36666dd5ca354ee22acd081ce6bd5c64922bfe56852c9e",
+    "source-draw-models.json": "61c61a2985ecc1e259b1c8962cdd27b65d6618dbf84c45f75a81f1079c167825",
+    "scaffold-instance-matches.json": "dee4fe7a189d1f51f01fd653d1b0394950b5df51ed6aa61d8b39540f748cb41f",
+    "full-a3-mvp-comparison.json": "3f2a620d8b8ed9ffeb04d6f1a4dd72dd5fc6087b5b7a8595f23327690675d2b0",
+    "a3-geometry-comparison.json": "7cade868dfe0b29c5b3d7657737294b51e1a631f74a62219338f7bcebe83dac9",
+    "a3-triangles.json": "4cd4b8a3ed0f6d5c788d7515e3dc034c109ca5d61634930f9c19032b2a3fa411",
+    "selection-gpu-summary.json": "165da78b0d56f122ce3a321ade6e0fb92e09487d53985116b5fd7ac28e506d73",
+    "image-comparison.json": "c34a23738c911d2d97f4183e6bdcb7b211d55e69bfb9da350518cb94352cd8ee",
+    "source-selection-red.log": "48bbb01b1dad5394fd11874ec21b747a848b0d2324bf3426be171feb2ceb6be7",
+    "level-selection-red.log": "cee895a061fdf5338da19c75b58981dd7fa159e1a106731ebb99bfd531210ebd",
+    "source-selection-green.log": "cc946624bd3022429ef1807f57ee38bcd3fac336d2a834fad2d7a5ac0beef3f2",
+    "builder-selection-final/audit.json": "f711c6e2b1f7df535cb9a985f6b5022ae2a6c1da728c51854ed1a7d960fdf2f4",
+    "active-release.log": "cf7db4c3f3a44112e513b2b5c24eaa55c39a1cba4b582f26d6ba5ac30ab0674f",
+    "active-release/frames/frame_000000.png": "c993fbfbbb66ff05edce50b92d07393710fb74219a2c3ae74f9dece801e226f8",
+    "active-release/frames/capture_manifest.json": "5f205e9cd92254996b41cb486c41cd4adba4ff3fd4caa5400d25fb82f7d59796",
+    "active-release/runtime.json": "a1c1345784a8eec8cf42cca24f05a8c35a251278f49ae0e26dc55620b2737d1a",
+    "active-release/gpu.json": "f711e62578d628983f4bd25d7c130aab5b7e227346af066fc6f885b3381ab70a",
+    "engine-full_frame0.rdc": "e0168246087761a92bd9c2a152c6a9fb53812965f01e23f82b5e80ef73b52c65"
+  },
+  "remaining": [
+    "source activation semantics and ambiguous bindings",
+    "unmapped entity 43360087",
+    "A3 UV streams and two-base-map material sampling",
+    "native GI query coordinates and temporal noise",
+    "central logistics and dynamic effects",
+    "full visual gates, anti-aliasing and 60 FPS"
+  ]
+}

@@ -1,0 +1,419 @@
+{
+  "status": "passed",
+  "actualSeconds": 1800.328,
+  "realTime": true,
+  "framePacing": {
+    "maximumRate": 60,
+    "presentMode": "FIFO",
+    "vsync": true,
+    "waitFrames": 100655,
+    "waitMilliseconds": 1634858.2007999984
+  },
+  "exitCode": 0,
+  "frames": 100671,
+  "switches": 33,
+  "restarts": 34,
+  "commits": 67,
+  "validationErrors": 0,
+  "released": true,
+  "scriptErrors": [],
+  "presentationErrors": [],
+  "loadErrors": [],
+  "windowChecks": {
+    "minimized": true,
+    "restored": true,
+    "resized": true,
+    "finalExtent": [
+      1920,
+      1080
+    ]
+  },
+  "windowEvents": [
+    {
+      "seconds": 3.0,
+      "event": "minimize",
+      "passed": true
+    },
+    {
+      "seconds": 5.062000000000012,
+      "event": "restore",
+      "passed": true
+    },
+    {
+      "seconds": 7.328000000000031,
+      "event": "resize",
+      "extent": [
+        960,
+        540
+      ],
+      "passed": true
+    },
+    {
+      "seconds": 9.468000000000018,
+      "event": "resize",
+      "extent": [
+        1920,
+        1080
+      ],
+      "passed": true
+    }
+  ],
+  "gpu": {
+    "mean": 5.8040503951141265,
+    "p95": 6.190032,
+    "p99": 6.412636800000001
+  },
+  "cpu": {
+    "mean": 1.6033702636718856,
+    "p95": 2.516019999999655,
+    "p99": 3.905686000001837
+  },
+  "physics": {
+    "mean": 0.23528315465328467,
+    "p95": 0.3296949999999999,
+    "p99": 1.9404299999999999
+  },
+  "gpuWindows": [
+    {
+      "endSeconds": 60.139999999999986,
+      "frames": 3212,
+      "mean": 5.906148244084682,
+      "p95": 6.2610144,
+      "p99": 7.990992319999974
+    },
+    {
+      "endSeconds": 120.21800000000007,
+      "frames": 3355,
+      "mean": 5.874483734128167,
+      "p95": 6.2419328,
+      "p99": 6.457287679999999
+    },
+    {
+      "endSeconds": 180.28100000000006,
+      "frames": 3360,
+      "mean": 5.94590999047619,
+      "p95": 6.2267584000000005,
+      "p99": 6.39057472
+    },
+    {
+      "endSeconds": 240.35900000000004,
+      "frames": 3360,
+      "mean": 5.944326704761905,
+      "p95": 6.321398399999999,
+      "p99": 6.45911264
+    },
+    {
+      "endSeconds": 300.422,
+      "frames": 3361,
+      "mean": 5.940254695626302,
+      "p95": 6.23776,
+      "p99": 6.418432
+    },
+    {
+      "endSeconds": 360.0,
+      "frames": 3335,
+      "mean": 5.932703136431784,
+      "p95": 6.1592096,
+      "p99": 6.47559232
+    },
+    {
+      "endSeconds": 420.078,
+      "frames": 3364,
+      "mean": 5.939627234244947,
+      "p95": 6.2365264,
+      "p99": 6.3481558399999996
+    },
+    {
+      "endSeconds": 480.14,
+      "frames": 3366,
+      "mean": 5.928420468211527,
+      "p95": 6.24592,
+      "p99": 6.5626672
+    },
+    {
+      "endSeconds": 540.25,
+      "frames": 3366,
+      "mean": 5.798684938799762,
+      "p95": 6.202184,
+      "p99": 6.3631839999999995
+    },
+    {
+      "endSeconds": 600.4680000000001,
+      "frames": 3368,
+      "mean": 5.861003211401425,
+      "p95": 6.237480000000001,
+      "p99": 6.40813312
+    },
+    {
+      "endSeconds": 660.172,
+      "frames": 3350,
+      "mean": 5.837617155820896,
+      "p95": 6.1700479999999995,
+      "p99": 6.3555648
+    },
+    {
+      "endSeconds": 720.3900000000001,
+      "frames": 3371,
+      "mean": 5.941136678730347,
+      "p95": 6.171168,
+      "p99": 6.403110400000003
+    },
+    {
+      "endSeconds": 780.1089999999999,
+      "frames": 3339,
+      "mean": 5.936899823899371,
+      "p95": 6.206985599999999,
+      "p99": 6.35891904
+    },
+    {
+      "endSeconds": 840.328,
+      "frames": 3371,
+      "mean": 5.92033374547612,
+      "p95": 6.18472,
+      "p99": 6.330636800000001
+    },
+    {
+      "endSeconds": 900.047,
+      "frames": 3339,
+      "mean": 5.929933513027852,
+      "p95": 6.2397248,
+      "p99": 6.35572096
+    },
+    {
+      "endSeconds": 960.2650000000001,
+      "frames": 3370,
+      "mean": 5.933324866468843,
+      "p95": 6.2150992,
+      "p99": 6.46192544
+    },
+    {
+      "endSeconds": 1020.4370000000001,
+      "frames": 3366,
+      "mean": 5.941470678550208,
+      "p95": 6.2152959999999995,
+      "p99": 6.3827871999999966
+    },
+    {
+      "endSeconds": 1080.078,
+      "frames": 3347,
+      "mean": 5.921431882880191,
+      "p95": 6.1960256,
+      "p99": 6.39433856
+    },
+    {
+      "endSeconds": 1140.234,
+      "frames": 3372,
+      "mean": 5.855024237247924,
+      "p95": 6.1684032,
+      "p99": 6.42074272
+    },
+    {
+      "endSeconds": 1200.39,
+      "frames": 3370,
+      "mean": 5.931059256973294,
+      "p95": 6.2181504,
+      "p99": 6.39257664
+    },
+    {
+      "endSeconds": 1260.093,
+      "frames": 3340,
+      "mean": 5.9426341461077845,
+      "p95": 6.1759968,
+      "p99": 6.44199072
+    },
+    {
+      "endSeconds": 1320.3120000000001,
+      "frames": 3380,
+      "mean": 5.762704170414201,
+      "p95": 6.1525504,
+      "p99": 6.28723968
+    },
+    {
+      "endSeconds": 1380.015,
+      "frames": 3349,
+      "mean": 5.455887144819349,
+      "p95": 6.1615808,
+      "p99": 6.2495296
+    },
+    {
+      "endSeconds": 1440.218,
+      "frames": 3369,
+      "mean": 5.698072695755417,
+      "p95": 6.152064,
+      "p99": 6.341548800000001
+    },
+    {
+      "endSeconds": 1500.4370000000001,
+      "frames": 3369,
+      "mean": 5.589258381715642,
+      "p95": 6.0873919999999995,
+      "p99": 6.223064320000001
+    },
+    {
+      "endSeconds": 1560.062,
+      "frames": 3338,
+      "mean": 5.516182490113841,
+      "p95": 5.996704,
+      "p99": 6.2936896
+    },
+    {
+      "endSeconds": 1620.297,
+      "frames": 3392,
+      "mean": 5.415599103773585,
+      "p95": 5.990155199999999,
+      "p99": 6.23049824
+    },
+    {
+      "endSeconds": 1680.4679999999998,
+      "frames": 3384,
+      "mean": 5.44740675177305,
+      "p95": 6.073953599999999,
+      "p99": 6.245508160000001
+    },
+    {
+      "endSeconds": 1740.1399999999999,
+      "frames": 3342,
+      "mean": 5.527250920406942,
+      "p95": 6.0531375999999995,
+      "p99": 6.954175040000003
+    },
+    {
+      "endSeconds": 1800.328,
+      "frames": 3363,
+      "mean": 5.569026245614035,
+      "p95": 6.094924799999999,
+      "p99": 6.98227968
+    }
+  ],
+  "residencyGrowth": {
+    "buffers": 0.0,
+    "images": 0.0,
+    "bufferBytes": 0.0,
+    "imageBytes": 0.0
+  },
+  "firstResidency": {
+    "bufferBytes": 21635232,
+    "buffers": 39,
+    "cachedCandidates": 2,
+    "commitMs": 1.1782,
+    "committed": false,
+    "frame": 6960,
+    "imageBytes": 305396224,
+    "images": 46,
+    "loadError": "",
+    "loading": false,
+    "physicsMaxMs": 0.1464,
+    "requestGeneration": 7,
+    "revision": 7,
+    "uiActiveGeometry": 11,
+    "uiBuffers": 1,
+    "uiRetiredGeometry": 0,
+    "waitMs": 0.0765999999999849,
+    "workMs": 0.9811000000000152
+  },
+  "lastResidency": {
+    "bufferBytes": 21635232,
+    "buffers": 39,
+    "cachedCandidates": 2,
+    "commitMs": 0.9084,
+    "committed": false,
+    "frame": 100560,
+    "imageBytes": 305396224,
+    "images": 46,
+    "loadError": "",
+    "loading": false,
+    "physicsMaxMs": 0.1506,
+    "requestGeneration": 69,
+    "revision": 69,
+    "uiActiveGeometry": 11,
+    "uiBuffers": 1,
+    "uiRetiredGeometry": 0,
+    "waitMs": 0.12010000000009313,
+    "workMs": 1.2274999999999068
+  },
+  "workingSetGrowth": 0,
+  "workingSetBaselineBytes": 347129856.0,
+  "workingSetFinalBytes": 164282368.0,
+  "peakWorkingSetBytes": 352022528,
+  "deviceLocalPeakBytes": 370884608,
+  "isolatedPath": "C:\\WINDOWS\\System32",
+  "packageManifestHash": "61f78d65bb430c16ee64d4af5149331f0ce882fdc800d809bd383a7f4aabc265",
+  "sourceHash": "e7feb8677be49557e127f7d89f8679bbeb28152738a67872196a02ca204c24d3",
+  "quality": {
+    "schemaVersion": 1,
+    "platform": "Windows x64",
+    "vulkanApi": "1.3",
+    "width": 1920,
+    "height": 1080,
+    "targetHz": 60,
+    "shadowMapSize": 2048,
+    "shadowCascades": 4,
+    "entities": 100,
+    "animatedCharacters": 4,
+    "fullGameUi": true,
+    "materialQuality": "full",
+    "privateCharacter": false,
+    "pointLights": 8
+  },
+  "cpuRetainedFrames": 8192,
+  "cpuSampleOffset": 92479,
+  "warmupSeconds": 120,
+  "warmupFrame": 6539,
+  "runtimeHash": "f94abf7d3947681216c41c19530702f8050a9233bc73356e08f280e961ad99dd",
+  "periodicSampleCount": 391,
+  "periodicCpu": {
+    "mean": 1.4374281329923944,
+    "p95": 2.246600000000944,
+    "p99": 2.9391500000005286
+  },
+  "periodicPhysics": {
+    "mean": 0.2248373401534527,
+    "p95": 0.39525,
+    "p99": 1.4972000000000005
+  },
+  "commitExtra": {
+    "mean": 1.1923731343283581,
+    "p95": 1.52338,
+    "p99": 1.8789500000000028
+  },
+  "commitFrame": {
+    "mean": 7.3812044776119405,
+    "p95": 9.40614,
+    "p99": 10.247100000000003
+  },
+  "startupGpuUtilization": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "maximumMinuteGpuP95Milliseconds": 6.321398399999999,
+  "evidenceFiles": {
+    "measurement/summary.json": "80c7bfb96e925146ef92f0cc0a6af3c6e9a01a3b52f3759de4da6b1f2e825cf8",
+    "measurement/environment.json": "abbddca3dee4659d182a569cfc94489345b28ca9e2583f364919b1a6f9ffe9ce",
+    "measurement/timing.json": "a933ca1af8dbaa49468fbd2735353583acc2165d03a29e8973fd5a601ca8f08e",
+    "measurement/timing.csv": "d04fdd2a8d8c36561dd7d8569570fd3594701808f514b3e9b1a31dfbb6efd146",
+    "measurement/runtime.json": "59f58dfdbf205fcdaddde7da48c7e79147169c205687760529f4146471801014",
+    "measurement/stdout.log": "4e769bb7a87c59987b82ba8983191818e9ab3c3c4be4eee9083bfe03f894a444",
+    "measurement/stderr.log": "028b7bcfd60518ca13981cd04178825450b3e0b91ccc8e68e67a3b6bb21cc822",
+    "measurement/observation.json": "794c55bc6c239e60f7e3a48e41e4aec0fd40930e95ddd3b84dc2f98404b10cbc",
+    "measurement/input.json": "9574d6ab121b4d3cfd337ddec15d6c0b6f89409748896c20310692e74b3d4450",
+    "measurement/cleanup.json": "699721138db59285fb509fc4a025542c65be6d5e570203d9eb9f1bf1d5bc6f0d",
+    "initial-long-preflight-rejection.json": "fb14d45710088aef8b813d131da1c531308cb1527fa7bd1f6e06482546d58936",
+    "second-long-preflight-rejection.json": "0cad4151e3da883b43a81bcf05d177ef89f661657f8e555fba69078eddf14149",
+    "long-run-identity.json": "a62b0c87e77c5bdcb6db5533509a542beed66894171cd98bec3f2cc5d134dc7f",
+    "registered-release-build.json": "b1283ecdd5079fc8205032e76774fd5c8ee60f18fea9c55f5c3c4448a014f422",
+    "registered-release-package.json": "97ad6ca6ca0613650c40f55e99f7cfcd0c16bd42c5dc5f04729d832bff6ccf41",
+    "game_manifest.json": "61f78d65bb430c16ee64d4af5149331f0ce882fdc800d809bd383a7f4aabc265"
+  },
+  "sourceCommit": "9a1441126214c055ccb7a0d57482bd455ca578be",
+  "dispatchJob": 1221,
+  "verificationSha256": "54d74a9eb3c8c7534f8f462726802d49e29fd0193bf9bbd2dbcd5452ab900c66",
+  "cacheRetentionImplementationCommit": "c2971a4e499db140999f7a73bd94dd1b7118d761",
+  "cacheRetentionSourceFingerprints": {
+    "src/app/AzureRenderApp.cpp": "301a2d59a9ad71d4b61cce7f3e9b964ce25d236f8617f22165204712e2a7ce04",
+    "src/rhi/PipelineCacheStore.cpp": "cd127b98cfdaba3db58002946e8299d46684829ae5103e6680c044ead52d1e34",
+    "src/rhi/PipelineCacheStore.hpp": "90da80160267c259010de5b5c55c950af0680c65ddfaa786830e112ce49052f5",
+    "src/rhi/VulkanPipelineCache.cpp": "22cca362a4ac838cf37cb45a907235376feb6fb2de2cd3194ad290c84679ee98",
+    "src/rhi/VulkanPipelineCache.hpp": "777bd28f20bf213430da5f5f0723c0f9a5e873b357fec49db81ec8b2e33ea11e"
+  }
+}

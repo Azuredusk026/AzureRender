@@ -1,0 +1,4654 @@
+{
+  "backtraceGraph" : 
+  {
+    "commands" : 
+    [
+      "add_test"
+    ],
+    "files" : 
+    [
+      "D:/Assigment/2609/FYP/Project/AzureRender/CMakeLists.txt"
+    ],
+    "nodes" : 
+    [
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 84,
+        "parent" : 0
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 86,
+        "parent" : 2
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 88,
+        "parent" : 4
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 91,
+        "parent" : 6
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 482,
+        "parent" : 8
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 485,
+        "parent" : 10
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 486,
+        "parent" : 12
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 490,
+        "parent" : 14
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 496,
+        "parent" : 16
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 499,
+        "parent" : 18
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 502,
+        "parent" : 20
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 506,
+        "parent" : 22
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 512,
+        "parent" : 24
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 517,
+        "parent" : 26
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 521,
+        "parent" : 28
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 522,
+        "parent" : 30
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 523,
+        "parent" : 32
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 528,
+        "parent" : 34
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 531,
+        "parent" : 36
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 534,
+        "parent" : 38
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 537,
+        "parent" : 40
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 540,
+        "parent" : 42
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 543,
+        "parent" : 44
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 546,
+        "parent" : 46
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 550,
+        "parent" : 48
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 555,
+        "parent" : 50
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 559,
+        "parent" : 52
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 563,
+        "parent" : 54
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 564,
+        "parent" : 56
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 566,
+        "parent" : 58
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 572,
+        "parent" : 60
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 574,
+        "parent" : 62
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 576,
+        "parent" : 64
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 581,
+        "parent" : 66
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 584,
+        "parent" : 68
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 588,
+        "parent" : 70
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 589,
+        "parent" : 72
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 591,
+        "parent" : 74
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 593,
+        "parent" : 76
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 596,
+        "parent" : 78
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 600,
+        "parent" : 80
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 603,
+        "parent" : 82
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 606,
+        "parent" : 84
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 609,
+        "parent" : 86
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 612,
+        "parent" : 88
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 616,
+        "parent" : 90
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 618,
+        "parent" : 92
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 624,
+        "parent" : 94
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 627,
+        "parent" : 96
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 636,
+        "parent" : 98
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 639,
+        "parent" : 100
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 643,
+        "parent" : 102
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 648,
+        "parent" : 104
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 649,
+        "parent" : 106
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 654,
+        "parent" : 108
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 657,
+        "parent" : 110
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 660,
+        "parent" : 112
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 663,
+        "parent" : 114
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 666,
+        "parent" : 116
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 669,
+        "parent" : 118
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 673,
+        "parent" : 120
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 676,
+        "parent" : 122
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 681,
+        "parent" : 124
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 681,
+        "parent" : 126
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 686,
+        "parent" : 128
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 686,
+        "parent" : 130
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 688,
+        "parent" : 132
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 690,
+        "parent" : 134
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 690,
+        "parent" : 136
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 697,
+        "parent" : 138
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 701,
+        "parent" : 140
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 704,
+        "parent" : 142
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 707,
+        "parent" : 144
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 710,
+        "parent" : 146
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 714,
+        "parent" : 148
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 719,
+        "parent" : 150
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 722,
+        "parent" : 152
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 724,
+        "parent" : 154
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 727,
+        "parent" : 156
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 730,
+        "parent" : 158
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 733,
+        "parent" : 160
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 736,
+        "parent" : 162
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 737,
+        "parent" : 164
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 740,
+        "parent" : 166
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 741,
+        "parent" : 168
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 744,
+        "parent" : 170
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 745,
+        "parent" : 172
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 746,
+        "parent" : 174
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 747,
+        "parent" : 176
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 750,
+        "parent" : 178
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 751,
+        "parent" : 180
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 753,
+        "parent" : 182
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 755,
+        "parent" : 184
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 756,
+        "parent" : 186
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 758,
+        "parent" : 188
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 761,
+        "parent" : 190
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 762,
+        "parent" : 192
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 763,
+        "parent" : 194
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 765,
+        "parent" : 196
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 767,
+        "parent" : 198
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 769,
+        "parent" : 200
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 772,
+        "parent" : 202
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 774,
+        "parent" : 204
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 775,
+        "parent" : 206
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 778,
+        "parent" : 208
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 779,
+        "parent" : 210
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 781,
+        "parent" : 212
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 782,
+        "parent" : 214
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 787,
+        "parent" : 216
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 790,
+        "parent" : 218
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 794,
+        "parent" : 220
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 798,
+        "parent" : 222
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 802,
+        "parent" : 224
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 805,
+        "parent" : 226
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 808,
+        "parent" : 228
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 811,
+        "parent" : 230
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 821,
+        "parent" : 232
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 825,
+        "parent" : 234
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 828,
+        "parent" : 236
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 839,
+        "parent" : 238
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 850,
+        "parent" : 240
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 855,
+        "parent" : 242
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 863,
+        "parent" : 244
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 874,
+        "parent" : 246
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 896,
+        "parent" : 248
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 907,
+        "parent" : 250
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 925,
+        "parent" : 252
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 938,
+        "parent" : 254
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 950,
+        "parent" : 256
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 959,
+        "parent" : 258
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 971,
+        "parent" : 260
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1006,
+        "parent" : 262
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1017,
+        "parent" : 264
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1026,
+        "parent" : 266
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1045,
+        "parent" : 268
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1065,
+        "parent" : 270
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1078,
+        "parent" : 272
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1091,
+        "parent" : 274
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1106,
+        "parent" : 276
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1109,
+        "parent" : 278
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1112,
+        "parent" : 280
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1115,
+        "parent" : 282
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1123,
+        "parent" : 284
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1131,
+        "parent" : 286
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1137,
+        "parent" : 288
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1155,
+        "parent" : 290
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1170,
+        "parent" : 292
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1186,
+        "parent" : 294
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 1193,
+        "parent" : 296
+      }
+    ]
+  },
+  "kind" : "ctestInfo",
+  "tests" : 
+  [
+    {
+      "backtrace" : 1,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_evolution_coverage.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureTools.EvolutionCoverage",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 3,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_engine_contracts.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureTools.EngineContracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 5,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/write_engine_contracts.py",
+        "--verify",
+        "--output",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/contracts"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ContractsSnapshot",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 7,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/verify_evolution_coverage.py",
+        "--manifest",
+        "D:/Assigment/2609/FYP/Project/AzureRender/docs/plans/engine-evolution-manifest.json",
+        "--evidence",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/evolution-coverage",
+        "--build-dir",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug",
+        "--configuration",
+        "Debug",
+        "--historical-policy",
+        "committed-content"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.EvolutionCoverage",
+      "properties" : 
+      [
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 300.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 9,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_script_bindings.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureTools.ScriptBindings",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 11,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureVisibilityPrototypeTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.VisibilityPrototype",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 13,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_visibility_benchmark.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureTools.VisibilityBenchmark",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 15,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureVisibilityGpuTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shaders/cull_indirect.comp.spv",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shaders/visibility_prototype.comp.spv",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/visibility-gpu.json"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.VisibilityGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 120.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 17,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureResourceAccessProfileTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.ResourceAccessProfile",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 19,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureSkinningBatchTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.SkinningBatch",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 21,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureViewBatchingTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.ViewBatching",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 23,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureSkinningGpuTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shaders/skin.comp.spv"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.SkinningGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 120.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 25,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureShaderModuleTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shader-modules/bloom-direct.spv.json",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shader-modules/bloom-cached.spv.json"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.ShaderModule",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 27,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureShaderCompositionTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shaders/bloom_downsample.comp.spv",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shader-modules/bloom-direct.spv",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shader-modules/bloom-cached.spv",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shader-composition.json"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.ShaderComposition",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 120.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 29,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_shader_module.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureTools.ShaderModule",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "AZURE_SLANG_COMPILER=C:/VulkanSDK/1.4.350.0/Bin/slangc.exe"
+          ]
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 31,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_shader_types.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureTools.ShaderTypes",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 33,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_shader_composition.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureTools.ShaderComposition",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "AZURE_SLANG_COMPILER=C:/VulkanSDK/1.4.350.0/Bin/slangc.exe"
+          ]
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 35,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureProceduralGeometryTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/procedural-tests"
+      ],
+      "config" : "Debug",
+      "name" : "AzureAssets.ProceduralGeometry",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 37,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRigTextTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/rig-text-tests"
+      ],
+      "config" : "Debug",
+      "name" : "AzureAssets.RigText",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 39,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureProceduralProcessTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureGeometryCompiler.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/procedural-process-tests"
+      ],
+      "config" : "Debug",
+      "name" : "AzureAssets.ProceduralProcess",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 41,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureEngineSettingsTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.SettingsOverlay",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 43,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureSettingRegistryTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.SettingRegistry",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 45,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureUiFoundationTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.UiFoundation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 47,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePanelContextTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.PanelContext",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 49,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderViewTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shaders"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.RenderView",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 51,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureThumbnailTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shaders"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.Thumbnail",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 53,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureHotReloadTests.exe",
+        "C:/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/hot-reload-tests"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.HotReload",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 55,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureProcessRunnerTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzurePlatform.ProcessRunner",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 57,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_render_preview_host.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.PreviewHost",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 420.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 59,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_devtools_host.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "--shader-config",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shader-reload.json"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.DevtoolsHost",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 420.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 61,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureModelProtocolTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tests/fixtures/ai/protocol.json",
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/ai_bridge.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureAI.ModelProtocol",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 63,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_ai_bridge.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureAI.Bridge",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 65,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_proposal_host.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.ProposalHost",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 420.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 67,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureProposalControllerTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.ProposalController",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 69,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureProposalAdapterTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/scene_inspector"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.ProposalAdapter",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 71,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureEditorObservationTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.Observation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 73,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_azure_cli.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureTools.Cli",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 75,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_procedural_host.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "--output",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/procedural-host"
+      ],
+      "config" : "Debug",
+      "name" : "AzureAssets.ProceduralHost",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 600.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 77,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_settings_host.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.SettingsHost",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 300.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 79,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_observation_host.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.ObservationHost",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 240.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 81,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureGenerationManifestTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureAssets.GenerationManifest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 83,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_validation_protocol.py",
+        "--probe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureValidationProbe.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureTools.ValidationProtocol",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 85,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureObservationTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.Observation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 87,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureEditServiceTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.EditService",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 89,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureEditTransactionTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.EditTransaction",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 91,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureSystemCompositionTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.SystemComposition",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 93,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_scene_inspector_host.py",
+        "--editor",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "--player",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe",
+        "--project",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/scene_inspector/project.azureproject"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.SceneInspectorHost",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 180.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 95,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureModuleAssemblyTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ModuleAssembly",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 97,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureComponentRegistryTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ComponentRegistry",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 99,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureMetadataGenerationTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.MetadataGeneration",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 101,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRegisteredComponentWorkflowTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.RegisteredComponentWorkflow",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 103,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_registered_component_host.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRegisteredComponentHost.exe",
+        "--project",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay/project.azureproject"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.RegisteredComponentHost",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 120.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 105,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_module_boundaries.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ModuleBoundaryFixtures",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 107,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/check_module_boundaries.py",
+        "--source",
+        "D:/Assigment/2609/FYP/Project/AzureRender",
+        "--build-dir",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ModuleBoundaries",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 109,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureGameUiRendererTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/shaders"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.GameUiRenderer",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 111,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureGameUiTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay/assets/hud.rml",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/fonts/LatoLatin-Regular.ttf"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.GameUi",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 113,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureEditorWorkspaceTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.Workspace",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 115,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureEditorWorkflowTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.EditorWorkflow",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 117,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePresentationRuntimeTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay/project.azureproject"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.PresentationRuntime",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 119,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureGameplayPresentationTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay/assets/portal.wav"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.GameplayPresentation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 121,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureScriptBackendContractTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ScriptBackendContract",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 123,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureScriptInteropTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ScriptInterop",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 125,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureManagedModuleTests.exe",
+        "coreclr",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/managed/coreclr"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ManagedModule.coreclr",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 127,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureManagedModuleTests.exe",
+        "nativeaot",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/managed/nativeaot"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ManagedModule.nativeaot",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 129,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureManagedScriptRuntimeTests.exe",
+        "coreclr",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/managed/coreclr"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ManagedRuntime.coreclr",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 131,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureManagedScriptRuntimeTests.exe",
+        "nativeaot",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/managed/nativeaot"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ManagedRuntime.nativeaot",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 133,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureManagedScriptRuntimeTests.exe",
+        "lua",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/managed/coreclr"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ScriptBackendParity.lua",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 135,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_managed_workflows.py",
+        "--build-dir",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug",
+        "--backend",
+        "coreclr",
+        "--configuration",
+        "Debug",
+        "--evidence",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/managed-workflows/coreclr"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ManagedWorkflows.coreclr",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu",
+            "script"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 600.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 137,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_managed_workflows.py",
+        "--build-dir",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug",
+        "--backend",
+        "nativeaot",
+        "--configuration",
+        "Debug",
+        "--evidence",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/managed-workflows/nativeaot"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ManagedWorkflows.nativeaot",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu",
+            "script"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 600.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 139,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureScriptRuntimeTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ScriptRuntime",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 141,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureThirdPersonTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ThirdPerson",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 143,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureLocomotionTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.Locomotion",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 145,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureInteractionTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.Interaction",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 147,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureScriptEntityTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ScriptEntities",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 149,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayableQuestTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.PlayableQuest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 151,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureAnimationPoseTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.AnimationPose",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 153,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureBrowRegionTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.BrowRegions",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 155,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePhysicsInputTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.PhysicsInput",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 157,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureAssetLevelTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.AssetLevel",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 159,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureReflectionTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.Reflection",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 161,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureSceneVisibilityTests.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/exploration/assets/cube.gltf"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.SceneVisibility",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 163,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_repository_audit.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.RepositoryAudit",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 165,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_scene_visibility_gpu.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.SceneVisibilityGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 300.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 167,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_public_gait.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.PublicGait",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 169,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_locomotion_direction.py",
+        "--player",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.LocomotionPlayer",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 300.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 171,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_animation_retarget.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.AnimationRetarget",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 173,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_skin_restore.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.SourceSkinRestore",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 175,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_game_package_rules.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.GamePackageRules",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 177,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_playable_delivery_rules.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.PlayableDeliveryRules",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 179,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_build_configuration.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.BuildConfiguration",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 181,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_build_provenance.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.BuildProvenance",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 183,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_native_window.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureTools.NativeWindow",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 185,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_character_intake.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.CharacterIntake",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 187,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_character_preparation.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.CharacterPreparation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 189,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_editor_workspace.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEditor.WorkspaceGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 600.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 191,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_material_fixture.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "--asset",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/third_person/material_fixture.gltf"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.MaterialFixtureGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 240.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 193,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_independent_animation_gpu.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.IndependentAnimationGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 300.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 195,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_third_person_player.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ThirdPersonPlayer",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 300.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 197,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_playable_player.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.PlayablePlayer",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 600.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 199,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_optional_runtime_trace.py",
+        "--player",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.OptionalRuntimeTrace",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 180.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 201,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_runtime_spawn_gpu.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.RuntimeSpawnGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 300.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 203,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_game_presentation.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe",
+        "--project",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay/project.azureproject"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.PresentationGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 180.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 205,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_editor_workflow.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "--project",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay/project.azureproject"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.EditorHost",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 120.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 207,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_editor_playable.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.EditorPlayable",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 240.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 209,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_metagen.py",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureMetaGen.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.MetaGenerator",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 211,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_level_player.py",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.LevelPlayer",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 213,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_physics_player.py",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.PhysicsPlayer",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 215,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_script_player.py",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/gameplay"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.ScriptPlayer",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 217,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureProjectTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.Project",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 219,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRuntimeLifecycleTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.RuntimeLifecycle",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 221,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderEnvironmentAssetTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.EnvironmentAsset",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 223,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderRenderGraphTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.RenderGraph",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 225,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderTransientResourcePoolTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.TransientResourcePool",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 227,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderLightBufferTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.LightBuffer",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 229,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderCascadedShadowTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.CascadedShadow",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 231,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderClusteredLightGridTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.ClusteredLightGrid",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 233,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderComputePassTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.ComputePass",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 235,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderFrameTaskSchedulerTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.FrameTaskScheduler",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 237,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderSurfaceLifecycleTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.SurfaceLifecycle",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 239,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderCommandLineTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.CommandLine",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 241,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderEditorCameraTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.EditorCameraController",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 243,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderEditorSessionTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.EditorSession",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 245,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderEcsTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.Ecs",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 247,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderPickMathTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.PickMath",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 249,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderSceneModelTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.SceneModel",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 251,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderRuntimeDiagnosticsTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.RuntimeDiagnostics",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 253,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderGpuCapabilityReportTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.GpuCapabilityReport",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 255,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderResourceLocatorTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.ResourceLocator",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 257,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderExtensionRegistryTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.ExtensionRegistry",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 259,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderUploadRingTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.UploadRing",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 261,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderNullRhiTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.NullRhi",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 263,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderNullRhiPassTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.NullRhiPass",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 265,
+      "command" : 
+      [
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRenderSceneGraphTests.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.SceneGraph",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 267,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_visual_regression.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "--tolerance",
+        "strict",
+        "--output-dir",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/visual-regression",
+        "--summary",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/visual-regression-summary.json"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.VisualRegression",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "SKIP_RETURN_CODE",
+          "value" : 2
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 900.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 269,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_visual_regression.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "--tolerance",
+        "strict",
+        "--renderer-arg=--disable-bindless",
+        "--output-dir",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/visual-regression-legacy",
+        "--summary",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/visual-regression-legacy-summary.json"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.VisualRegressionLegacyDescriptors",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "SKIP_RETURN_CODE",
+          "value" : 2
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 900.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 271,
+      "command" : 
+      [
+        "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_blackhole_compute_smoke.ps1",
+        "-Executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "-OutputDirectory",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/blackhole-compute-smoke"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.BlackholeComputeGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "SKIP_RETURN_CODE",
+          "value" : 2
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 180.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 273,
+      "command" : 
+      [
+        "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_character_ibl_smoke.ps1",
+        "-Executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "-OutputDirectory",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/character-ibl-smoke"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.CharacterIblComputeGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "SKIP_RETURN_CODE",
+          "value" : 2
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 180.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 275,
+      "command" : 
+      [
+        "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_character_skinning_smoke.ps1",
+        "-Executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "-OutputDirectory",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/character-skinning-smoke"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.CharacterSkinningComputeGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "SKIP_RETURN_CODE",
+          "value" : 2
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 180.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 277,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_r4_acceptance.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.R4AcceptanceRules",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 279,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_player_cli.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzurePlayer.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureEngine.PlayerCli",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 281,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_blackhole_optimization.py"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.BlackholeOptimizationRules",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 283,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_r3_comparison.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "--output-dir",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/r3-comparison",
+        "--frames",
+        "10",
+        "--instances",
+        "64"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.R3Comparison",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 900.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 285,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_r3_comparison.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "--output-dir",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/r3-transparent-comparison",
+        "--frames",
+        "10",
+        "--instances",
+        "16",
+        "--transparent-fixture"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.R3TransparentComparison",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 900.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 287,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_audit_regressions.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.AuditRegressions",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 90.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 289,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_visual_regression.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "--tolerance",
+        "strict",
+        "--renderer-arg=--disable-compute-skinning",
+        "--output-dir",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/visual-regression-legacy-skinning",
+        "--summary",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/visual-regression-legacy-skinning-summary.json"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.VisualRegressionLegacySkinning",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "SKIP_RETURN_CODE",
+          "value" : 2
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 900.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 291,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_morph_compute_regression.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "--output-dir",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/morph-compute-regression"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.CharacterMorphComputeGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "SKIP_RETURN_CODE",
+          "value" : 2
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 180.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 293,
+      "command" : 
+      [
+        "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_clustered_lighting_smoke.py",
+        "--executable",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe",
+        "--output-dir",
+        "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/clustered-lighting-smoke"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.ClusteredLightingGpu",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "gpu"
+          ]
+        },
+        {
+          "name" : "RUN_SERIAL",
+          "value" : true
+        },
+        {
+          "name" : "SKIP_RETURN_CODE",
+          "value" : 2
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 180.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 295,
+      "command" : 
+      [
+        "C:/Program Files/CMake/bin/cmake.exe",
+        "-DBUILD_DIR=D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/missing-release-gate-build",
+        "-P",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/run_release_gate.cmake"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.ReleaseGateMissingBuild",
+      "properties" : 
+      [
+        {
+          "name" : "WILL_FAIL",
+          "value" : true
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    },
+    {
+      "backtrace" : 297,
+      "command" : 
+      [
+        "C:/Program Files/CMake/bin/cmake.exe",
+        "-DSOURCE_DIR=D:/Assigment/2609/FYP/Project/AzureRender",
+        "-P",
+        "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_install_manifest_roundtrip.cmake"
+      ],
+      "config" : "Debug",
+      "name" : "AzureRender.InstallManifestRoundTrip",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+        }
+      ]
+    }
+  ],
+  "version" : 
+  {
+    "major" : 1,
+    "minor" : 0
+  }
+}

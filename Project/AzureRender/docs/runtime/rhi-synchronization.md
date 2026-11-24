@@ -2,7 +2,7 @@
 
 > 文档类型：运行时说明
 > 状态：生效
-> 更新日期：2026-09-26
+> 更新日期：2026-11-07
 > 适用范围：R1 Windows Vulkan 渲染核心
 > 源码入口：`src/rhi/Rhi.hpp`、`src/rhi/VulkanRhi.cpp`、`src/rhi/NullRhi.cpp`
 > 关联测试：`tests/NullRhiTests.cpp`、`tests/NullRhiPassTests.cpp`
@@ -13,19 +13,49 @@ RHI 同步契约把图像和缓冲区的布局、访问类型与流水线阶段�
 
 ## 数据与所有权
 
-`ImageBarrierDesc` 和 `BufferBarrierDesc` 只借用调用方提供的 Vulkan 句柄，不负责创建或销毁资源。图像屏障包含子资源范围；缓冲区屏障包含字节偏移和大小。资源所有权仍由分配器和 RHI 生命周期管理。
+`ImageBarrierDesc` 和 `BufferBarrierDesc` 只借用调用方提供的 Vulkan 句柄，不负责创建或销毁资源。图像屏障包含子资源范围。缓冲区屏障包含字节偏移和大小。资源所有权仍由分配器和 RHI 生命周期管理。
 
 ## 生命周期与时序
 
-资源首次使用前提交布局转换，写入完成后提交到读取阶段。屏障在同一命令缓冲区中按录制顺序生效。暂停、交换链重建和帧结束由平台帧流程负责，窗口尺寸为零时等待事件，尺寸有效时立即重建；等待期间收到关闭请求则退出。重建先等待设备空闲并检查返回值。
+资源首次使用前提交布局转换，写入完成后提交到读取阶段。屏障在同一命令缓冲区中按录制顺序生效。
+
+暂停、交换链重建和帧结束由平台帧流程负责。窗口尺寸为零时等待事件，尺寸有效时立即重建。等待期间收到关闭请求则退出。重建先等待设备空闲并检查返回值。
 
 ## 接口契约
 
-`imageBarrier()` 支持显式 `srcStageMask`、`dstStageMask`、`srcAccessMask`、`dstAccessMask`、`aspectMask`、`baseMipLevel` 和 `mipLevels`。两侧阶段均为零时保留按布局推导的兼容路径；显式指定阶段时，访问掩码按调用方提供的值提交。`mipLevels` 至少为 1。仅指定一侧阶段、空子资源范围、无阶段的显式访问掩码会抛出 `std::invalid_argument`，两个后端使用相同检查。
+`imageBarrier()` 支持显式 `srcStageMask`、`dstStageMask`、`srcAccessMask`、`dstAccessMask`、`aspectMask`、`baseMipLevel` 和 `mipLevels`。两侧阶段均为零时保留按布局推导的兼容路径。显式指定阶段时，访问掩码按调用方提供的值提交。
 
-`bufferBarrier()` 使用显式阶段和访问掩码；阶段为零时分别回退到 `TOP_OF_PIPE` 与 `BOTTOM_OF_PIPE`。`size` 可使用 `VK_WHOLE_SIZE`。队列族在当前单图形队列契约中固定为 `VK_QUEUE_FAMILY_IGNORED`。
+`mipLevels` 至少为 1。仅指定一侧阶段、空子资源范围、无阶段的显式访问掩码会抛出 `std::invalid_argument`，两个后端使用相同检查。
+
+`bufferBarrier()` 使用显式阶段和访问掩码。阶段为零时分别回退到 `TOP_OF_PIPE` 与 `BOTTOM_OF_PIPE`。`size` 可使用 `VK_WHOLE_SIZE`。队列族在当前单图形队列契约中固定为 `VK_QUEUE_FAMILY_IGNORED`。
+
+## 缓冲屏障批量记录
+
+`bufferBarriers(data, count)` 接收同一命令位置的描述集合。
+调用方持有描述存储至调用返回。
+空集合产生零条命令，非空集合要求有效存储。
+集合数量至多为三十二位无符号整数的最大值。
+
+公共回退按输入顺序调用 `bufferBarrier`。
+Vulkan 路径按规范化后的源、目标阶段组合分组独立资源。
+同一阶段组合的条目可在输入集合内交错出现。
+同一缓冲句柄再次出现时，先提交全部已有组，再处理下一项访问。
+同一句柄的不同字节范围共同遵守该顺序边界。
+每条资源的访问、字节范围及队列族条件保持完整。
+
+编译后的渲染图在每个过程入口提交对应集合。
+该入口位于绘制和分发之前。
+CPU 后端转换检查见[批量提交验证](../acceptance/nr/buffer-barrier-batching.md)。
+当前设备同步、严格图像及短时成本见[命令准备验证](../acceptance/nr/read-scope-barriers.md)。
+正式性能与交付验证按当前延期清单执行。
 
 ## 线程与同步
+
+可映射缓冲根据 GPU 读取用途选择内存偏好。
+着色、几何及间接读取优先设备本地内存。
+纯传输映射优先主机内存。
+可见性、连贯性及同步规则保持有效。
+能力回退与资源检查见[内存分配](../acceptance/nr/focused-device-buffers.md)。
 
 命令录制器只在所属渲染线程使用。描述对象在调用期间保持有效，录制完成后可立即释放。跨队列所有权转移暂不开放，后续扩展必须补充队列族字段和验收。
 

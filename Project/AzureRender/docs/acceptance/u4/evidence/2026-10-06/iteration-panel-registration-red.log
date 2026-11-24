@@ -1,0 +1,56 @@
+[1/52] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\RendererCore.cpp.obj
+[2/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SceneDocument.cpp.obj
+[3/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SceneRenderSnapshot.cpp.obj
+[4/52] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\BlackholeSceneRenderer.cpp.obj
+[5/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\SelectionService.cpp.obj
+[6/52] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\BuiltinRendererCatalog.cpp.obj
+[7/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditService.cpp.obj
+[8/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\EngineSettings.cpp.obj
+[9/52] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\RenderSettings.cpp.obj
+[10/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\app\CommandLine.cpp.obj
+[11/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Prefab.cpp.obj
+[12/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorContext.cpp.obj
+[13/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SystemRegistry.cpp.obj
+[14/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AssetGeneration.cpp.obj
+[15/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditTransaction.cpp.obj
+[16/52] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\CharacterMovementSystem.cpp.obj
+[17/52] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\SharedSystems.cpp.obj
+[18/52] Building CXX object CMakeFiles\AzurePanelContextTests.dir\tests\PanelContextTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzurePanelContextTests.dir/tests/PanelContextTests.cpp.obj 
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_ENABLE_VALIDATION=1 -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DGLFW_DLL -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DJPH_FLOATING_POINT_EXCEPTIONS_ENABLED -DJPH_OBJECT_STREAM -DJPH_USE_CPU_COMPUTE -DOPENEXR_DLL -I..\..\src -Igenerated -I..\..\third_party\imgui -I..\..\third_party\imgui\backends -Ivcpkg_installed\x64-windows\include -IC:\VulkanSDK\1.4.350.0\include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath -MDd /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzurePanelContextTests.dir\tests\PanelContextTests.cpp.obj /FdCMakeFiles\AzurePanelContextTests.dir\ /FS -c ..\..\tests\PanelContextTests.cpp
+..\..\tests\PanelContextTests.cpp(21): error C2039: "panelRegistry": 不是 "azurerender::EditorSession" 的成员
+..\..\src\editor/EditorSession.hpp(33): note: 参见“azurerender::EditorSession”的声明
+..\..\tests\PanelContextTests.cpp(21): error C2530: “registry”: 必须初始化引用
+..\..\tests\PanelContextTests.cpp(21): error C3536: “registry”: 初始化之前无法使用
+..\..\tests\PanelContextTests.cpp(22): error C3536: “panel”: 初始化之前无法使用
+..\..\tests\PanelContextTests.cpp(30): error C2039: "registerPanel": 不是 "azurerender::EditorWorkspace" 的成员
+..\..\src\editor/EditorWorkspace.hpp(16): note: 参见“azurerender::EditorWorkspace”的声明
+[19/52] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\CameraFollowSystem.cpp.obj
+[20/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\GameRuntime.cpp.obj
+[21/52] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\LocomotionSystem.cpp.obj
+[22/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Project.cpp.obj
+[23/52] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[24/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PresentationRuntime.cpp.obj
+[25/52] Building CXX object CMakeFiles\AzureProjectRuntime.dir\src\app\ProjectRuntimeAssembly.cpp.obj
+[26/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\LevelSession.cpp.obj
+[27/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PhysicsWorld.cpp.obj
+[28/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditorOperations.cpp.obj
+[29/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorSession.cpp.obj
+[30/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorProjectEditing.cpp.obj
+[31/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\BuildPanel.cpp.obj
+[32/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorToolbar.cpp.obj
+[33/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Level.cpp.obj
+[34/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AssetDatabase.cpp.obj
+[35/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\GameplayDebugPanel.cpp.obj
+[36/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\SettingsPanel.cpp.obj
+[37/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ConsolePanel.cpp.obj
+[38/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\CapturePanel.cpp.obj
+[39/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AnimationPanel.cpp.obj
+[40/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorAutomation.cpp.obj
+[41/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AssetBrowserPanel.cpp.obj
+[42/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\OutlinerPanel.cpp.obj
+[43/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\InspectorPanel.cpp.obj
+[44/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspaceUI.cpp.obj
+[45/52] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[46/52] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ScriptRuntime.cpp.obj
+ninja: build stopped: subcommand failed.

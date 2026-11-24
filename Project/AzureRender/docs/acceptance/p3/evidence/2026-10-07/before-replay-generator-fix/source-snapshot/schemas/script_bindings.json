@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "apiVersion": 1,
+  "properties": [{"name": "id", "type": "string", "access": "read-only"}],
+  "methods": [
+    {"name":"find","managed":"Find","parameters":[{"name":"id","type":"string"}],"result":"object?","mutating":false},
+    {"name":"interaction_target","managed":"InteractionTarget","parameters":[],"result":"string","mutating":false},
+    {"name":"has","managed":"Has","parameters":[{"name":"type","type":"string"}],"result":"boolean","mutating":false},
+    {"name":"remove_component","managed":"RemoveComponent","parameters":[{"name":"type","type":"string"}],"result":"void","mutating":true},
+    {"name":"spawn","managed":"Spawn","parameters":[{"name":"id","type":"string"},{"name":"resource","type":"string"},{"name":"position","type":"array"}],"result":"void","mutating":true},
+    {"name":"alive","managed":"Alive","parameters":[],"result":"boolean","mutating":false},
+    {"name":"action","managed":"Action","parameters":[{"name":"action","type":"string"}],"result":"boolean","mutating":false},
+    {"name":"pressed","managed":"Pressed","parameters":[{"name":"action","type":"string"}],"result":"boolean","mutating":false},
+    {"name":"move","managed":"Move","parameters":[{"name":"x","type":"number"},{"name":"z","type":"number"},{"name":"jump","type":"boolean"}],"result":"void","mutating":true},
+    {"name":"destroy","managed":"Destroy","parameters":[],"result":"void","mutating":true},
+    {"name":"load_level","managed":"LoadLevel","parameters":[{"name":"reference","type":"string"}],"result":"void","mutating":true},
+    {"name":"audio_play","managed":"AudioPlay","parameters":[],"result":"void","mutating":true},
+    {"name":"ui_text","managed":"UiText","parameters":[{"name":"id","type":"string"},{"name":"text","type":"string"}],"result":"void","mutating":true},
+    {"name":"get","managed":"Get","parameters":[{"name":"type","type":"string"},{"name":"field","type":"string"}],"result":"value","mutating":false},
+    {"name":"set","managed":"Set","parameters":[{"name":"type","type":"string"},{"name":"field","type":"string"},{"name":"value","type":"value"}],"result":"void","mutating":true}
+  ]
+}

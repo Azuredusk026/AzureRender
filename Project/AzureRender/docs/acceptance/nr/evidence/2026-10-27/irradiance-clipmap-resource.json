@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "phase": "NR4-G6",
+  "run": "build/runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4",
+  "scope": "Self-contained clipmap asset, isolated GPU owner and hardware sampling/combination; scene integration remains pending",
+  "format": {
+    "magic": "AZIC0001",
+    "headerBytes": 224,
+    "maximumVoxels": 4194304,
+    "gpuMaximumTextureAxis": 256,
+    "parameterBytes": 208
+  },
+  "tests": {
+    "debug": {
+      "passed": 6,
+      "gpu": 3,
+      "log": "build\\runs\\20261027-074950-irradiance-clipmap-asset-contract-8fedc4\\final-test-debug.log"
+    },
+    "release": {
+      "passed": 6,
+      "gpu": 3,
+      "log": "build\\runs\\20261027-074950-irradiance-clipmap-asset-contract-8fedc4\\final-test-release.log"
+    }
+  },
+  "shaderBytes": {
+    "existingFrozenExact": 117,
+    "crossConfigurationExact": 118
+  },
+  "actualAsset": {
+    "asset": "captured-3534.azic",
+    "bytes": 50331872,
+    "sha256": "185530fcd40e8888d00ad404f5327048a4c5225ebbbc4fd825f17f4799cf7b75",
+    "maximumAbsoluteError": 5.727774479158398e-07
+  },
+  "nativePixelReference": {
+    "event": 8912,
+    "shaderSha256": "ec0f0876c321e491a5763672ad48baf1ccf00d56841cde617857568f0f9218fe",
+    "target": {
+      "resource": "ResourceId::15858",
+      "format": "R11G11B10_FLOAT",
+      "width": 2560,
+      "height": 1440
+    },
+    "blockOrigin": [
+      1323,
+      1078
+    ],
+    "sampleFloatComponents": 315,
+    "calibrationComponents": 28,
+    "inputChecks": [
+      {
+        "slot": 19,
+        "referenceSlot": 21,
+        "sha256": "6f995a2b8487f155d7a915e7ebf5c11f5493ac0b50be62c8f3ff2fc3b11224d5"
+      },
+      {
+        "slot": 20,
+        "referenceSlot": 22,
+        "sha256": "b052a74093cccd5d86bf8cd8cb810aa06b070fbfa5492c830f17ad3f8f8a0987"
+      },
+      {
+        "slot": 21,
+        "referenceSlot": 23,
+        "sha256": "883c4f590268161e53d35a22897cdd11afbf4c7bf903eed044473e02505b232c"
+      },
+      {
+        "slot": 22,
+        "referenceSlot": 24,
+        "sha256": "f66a7036145b60c6bd14b99ecd4a4b7c2b1fedef3d505aa09adef0b0ae524e0e"
+      },
+      {
+        "slot": 23,
+        "referenceSlot": 25,
+        "sha256": "6b57899d7919dde5f4126724b332d53b8b2bac6a4df6e23818e99381a6ad694b"
+      },
+      {
+        "slot": 24,
+        "referenceSlot": 26,
+        "sha256": "1c16c4d642287962f53fe8834d1d8234158bbf2e366b27de2625dd5824f312eb"
+      }
+    ],
+    "activeConstantsMatch": true,
+    "method": "D3D11 shader replacement; original textures and samplers; lossless float-bit nibble readback",
+    "scope": "Diagnostic pixel replacement at explicitly supplied post-offset world positions"
+  },
+  "hardware": {
+    "nativePixelAndComputeSamplesBitExact": true,
+    "maximumD3dStageError": 0.0,
+    "coefficientBudget": 1e-05,
+    "directionalAlphaBudget": 1e-06,
+    "configurations": {
+      "debug": {
+        "exitCode": 0,
+        "validationErrors": 0,
+        "resourcesReleased": true,
+        "points": [
+          {
+            "name": "fine",
+            "coefficientError": 6.288566903323023e-09,
+            "directionalAlphaError": 8.240075288767912e-13
+          },
+          {
+            "name": "fine-transition",
+            "coefficientError": 1.2201623433849562e-08,
+            "directionalAlphaError": 1.180114894694384e-10
+          },
+          {
+            "name": "medium",
+            "coefficientError": 5.147377080128024e-08,
+            "directionalAlphaError": 3.6801151015453115e-10
+          },
+          {
+            "name": "medium-transition",
+            "coefficientError": 9.756260868631905e-10,
+            "directionalAlphaError": 0
+          },
+          {
+            "name": "coarse",
+            "coefficientError": 9.756260868631905e-10,
+            "directionalAlphaError": 0
+          },
+          {
+            "name": "coarse-transition",
+            "coefficientError": 1.715759742615397e-09,
+            "directionalAlphaError": 0
+          },
+          {
+            "name": "default",
+            "coefficientError": 4.079799692524588e-11,
+            "directionalAlphaError": 0
+          }
+        ],
+        "maximumCoefficientError": 5.147377080128024e-08,
+        "maximumDirectionalAlphaError": 3.6801151015453115e-10
+      },
+      "release": {
+        "exitCode": 0,
+        "validationErrors": 0,
+        "resourcesReleased": true,
+        "points": [
+          {
+            "name": "fine",
+            "coefficientError": 6.288566903323023e-09,
+            "directionalAlphaError": 8.240075288767912e-13
+          },
+          {
+            "name": "fine-transition",
+            "coefficientError": 1.2201623433849562e-08,
+            "directionalAlphaError": 1.180114894694384e-10
+          },
+          {
+            "name": "medium",
+            "coefficientError": 5.147377080128024e-08,
+            "directionalAlphaError": 3.6801151015453115e-10
+          },
+          {
+            "name": "medium-transition",
+            "coefficientError": 9.756260868631905e-10,
+            "directionalAlphaError": 0
+          },
+          {
+            "name": "coarse",
+            "coefficientError": 9.756260868631905e-10,
+            "directionalAlphaError": 0
+          },
+          {
+            "name": "coarse-transition",
+            "coefficientError": 1.715759742615397e-09,
+            "directionalAlphaError": 0
+          },
+          {
+            "name": "default",
+            "coefficientError": 4.079799692524588e-11,
+            "directionalAlphaError": 0
+          }
+        ],
+        "maximumCoefficientError": 5.147377080128024e-08,
+        "maximumDirectionalAlphaError": 3.6801151015453115e-10
+      }
+    },
+    "crossConfigurationOutputsExact": true
+  },
+  "idealInterpolationDiagnostic": {
+    "debug": {
+      "expectedRejection": true,
+      "exitCode": 1,
+      "idealCoefficientBudget": 0.0001,
+      "observedMaximumError": 0.0007370755484734093
+    },
+    "release": {
+      "expectedRejection": true,
+      "exitCode": 1,
+      "idealCoefficientBudget": 0.0001,
+      "observedMaximumError": 0.0007370755484734093
+    }
+  },
+  "artifacts": [
+    {
+      "path": "build/runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4/implementation-plan.md",
+      "bytes": 807,
+      "sha256": "6e1b5d4d46b297299750f95d1556213f1fdf302edaf9fcb8461d8e2175707281"
+    },
+    {
+      "path": "build/runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4/native-hardware-samples.json",
+      "bytes": 21543,
+      "sha256": "2dc769faddc402ad3aaedc0426764ecbf9551c941b158b9d63d39793d7340931"
+    },
+    {
+      "path": "build/runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4/native-hardware-active.hlsl",
+      "bytes": 2237,
+      "sha256": "580ac2dd5fcb4fdad554ed2a16979d3853b940d3ec941060deb830f9c689ee5e"
+    },
+    {
+      "path": "build/runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4/active-deferred-lighting.dxbc.txt",
+      "bytes": 120546,
+      "sha256": "052cf218faf38ad6b5a9004a563936ec3e2826778c6fc2662852f941a323f80d"
+    },
+    {
+      "path": "build/runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4/native-hardware-packed.bin",
+      "bytes": 14745600,
+      "sha256": "8f39e86a4f2431b5c0280e0dc08ba5f2a77b2a65357b2ed03d287f4f208bfcbb"
+    },
+    {
+      "path": "build/runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4/d3d_volume_probe.cpp",
+      "bytes": 5481,
+      "sha256": "138f5fb937faf796453ed20c4b49562aac673ebb35818de979b4c0e74f2e189d"
+    },
+    {
+      "path": "build/runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4/d3d-volume-probe.hlsl",
+      "bytes": 2125,
+      "sha256": "7b87bebab655527915a347f753007d1da6b052885474d953ec6e4d9927b00e19"
+    },
+    {
+      "path": "build/runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4/d3d-hardware-samples.bin",
+      "bytes": 1344,
+      "sha256": "50e16fb649cb12d7fd228bdedf79b333d9d556706f12ffd47bcc2a33b45db9a1"
+    },
+    {
+      "path": "build/runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4/d3d-run.log",
+      "bytes": 38,
+      "sha256": "6f51c83ef5c843c0ddef68cd8b5012c511816a2847e0a5e9342a313b55780321"
+    },
+    {
+      "path": "build/runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4/native-draw-probe.json",
+      "bytes": 2366,
+      "sha256": "d47a530e02d1c48d0d680e88aae89e4cf470a065ca721e5cf127a8bfee50cedb"
+    },
+    {
+      "path": "build/runs/20261027-074950-irradiance-clipmap-asset-contract-8fedc4/native-gpu-ideal-negative.json",
+      "bytes": 1272,
+      "sha256": "22e38b60009fcaa88b91e53fbc67a547d38295879a8e6560b7f9fef11a9d8557"
+    }
+  ],
+  "limits": [
+    "Runtime scene binding and material consumers are pending",
+    "Source normal offset, temporal jitter and final directional gain are independent acceptance items",
+    "Sampler bit readback is a diagnostic replacement; it is not the unchanged source shader final image",
+    "Ideal interpolation diagnostics keep their original threshold and expected rejection",
+    "NR4, NR7 AA5/AA6 and 60-FPS budget remain pending"
+  ]
+}

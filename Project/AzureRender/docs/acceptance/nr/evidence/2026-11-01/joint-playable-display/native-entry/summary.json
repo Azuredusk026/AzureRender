@@ -1,0 +1,49 @@
+{
+  "status": "captured",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\project\\playable.azureproject",
+    "--width",
+    "960",
+    "--height",
+    "540",
+    "--capture-frames",
+    "3",
+    "--fixed-frame-step",
+    "--capture-fps",
+    "60",
+    "--capture-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-entry\\frames",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-entry\\runtime.json"
+  ],
+  "programSha256": "3c30e2fcbf0c3c29d86b6e177952c6f9aaa443726a9d8bd60f001e5f6fecaeac",
+  "qaFlagsProvided": false,
+  "exitCode": 0,
+  "seconds": 160.30534839999746,
+  "images": [
+    {
+      "frame": 0,
+      "sha256": "59fe3a4d41a9f7f27957a29adcb04589f2f53c0bb878b3d6a4453d8606e5a225",
+      "referenceSha256": "59fe3a4d41a9f7f27957a29adcb04589f2f53c0bb878b3d6a4453d8606e5a225",
+      "exact": true,
+      "fileExact": true
+    },
+    {
+      "frame": 1,
+      "sha256": "486299f181b5c613cc7aa74d26f19fd9a5a2513b357427b76c7bd9d87f13b2e7",
+      "referenceSha256": "486299f181b5c613cc7aa74d26f19fd9a5a2513b357427b76c7bd9d87f13b2e7",
+      "exact": true,
+      "fileExact": true
+    },
+    {
+      "frame": 2,
+      "sha256": "0ab4378b3cf24383536d780fee5b7e9d192ada02b8838c3be7767acd12c6c2ba",
+      "referenceSha256": "0ab4378b3cf24383536d780fee5b7e9d192ada02b8838c3be7767acd12c6c2ba",
+      "exact": true,
+      "fileExact": true
+    }
+  ],
+  "pixelExact": true
+}

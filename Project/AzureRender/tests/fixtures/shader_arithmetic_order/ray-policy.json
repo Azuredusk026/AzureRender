@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "sourceCodeSha256": "b5baea5513b358be08def5831f4bb4a34700ede213835883417535ea6a6301d1",
+  "matrixPairs": [
+    {
+      "multiplyOffsetWords": 269,
+      "multiplyAddOffsetWords": 277
+    },
+    {
+      "multiplyOffsetWords": 481,
+      "multiplyAddOffsetWords": 489
+    },
+    {
+      "multiplyOffsetWords": 533,
+      "multiplyAddOffsetWords": 541
+    },
+    {
+      "multiplyOffsetWords": 1468,
+      "multiplyAddOffsetWords": 1476
+    },
+    {
+      "multiplyOffsetWords": 1520,
+      "multiplyAddOffsetWords": 1528
+    },
+    {
+      "multiplyOffsetWords": 1792,
+      "multiplyAddOffsetWords": 1800
+    },
+    {
+      "multiplyOffsetWords": 1850,
+      "multiplyAddOffsetWords": 1858
+    },
+    {
+      "multiplyOffsetWords": 2094,
+      "multiplyAddOffsetWords": 2103
+    },
+    {
+      "multiplyOffsetWords": 2244,
+      "multiplyAddOffsetWords": 2252
+    },
+    {
+      "multiplyOffsetWords": 2361,
+      "multiplyAddOffsetWords": 2369
+    }
+  ],
+  "dotProducts": [
+    {
+      "offsetWords": 1965,
+      "componentOrder": [
+        1,
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "offsetWords": 2163,
+      "componentOrder": [
+        1,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "offsetWords": 2280,
+      "componentOrder": [
+        1,
+        0,
+        2,
+        0
+      ]
+    }
+  ]
+}

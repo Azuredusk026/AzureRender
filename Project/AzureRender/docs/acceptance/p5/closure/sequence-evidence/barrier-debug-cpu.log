@@ -1,0 +1,326 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+        Start 196: AzureEditor.ContentDirectoryScale
+        Start 201: AzureGame.PlatformerPhase9
+  1/160 Test #201: AzureGame.PlatformerPhase9 ................   Passed    7.92 sec
+        Start 200: AzureGame.PlatformerPhase4
+  2/160 Test #200: AzureGame.PlatformerPhase4 ................   Passed    5.86 sec
+        Start  23: AzureTools.ShaderModule
+  3/160 Test  #23: AzureTools.ShaderModule ...................   Passed   24.58 sec
+        Start   7: AzureTools.PerformanceProvenance
+  4/160 Test   #7: AzureTools.PerformanceProvenance ..........   Passed    1.52 sec
+        Start 199: AzureGame.PlatformerFlow
+  5/160 Test #199: AzureGame.PlatformerFlow ..................   Passed    5.40 sec
+        Start   8: AzureTools.PlatformerLongRunRules
+  6/160 Test   #8: AzureTools.PlatformerLongRunRules .........   Passed    1.03 sec
+        Start   1: AzureTools.EvolutionCoverage
+  7/160 Test   #1: AzureTools.EvolutionCoverage ..............   Passed   14.28 sec
+        Start 210: AzureEditor.ManagedAuthoring
+  8/160 Test #210: AzureEditor.ManagedAuthoring ..............   Passed    3.62 sec
+        Start 213: AzureEditor.AuthoringWorkflow
+  9/160 Test #213: AzureEditor.AuthoringWorkflow .............   Passed    3.41 sec
+        Start 211: AzureEditor.PrefabAuthoring
+ 10/160 Test #211: AzureEditor.PrefabAuthoring ...............   Passed    2.46 sec
+        Start  10: AzureTools.VirtualAllocationTrace
+ 11/160 Test  #10: AzureTools.VirtualAllocationTrace .........   Passed    0.57 sec
+        Start  25: AzureTools.ShaderComposition
+ 12/160 Test  #25: AzureTools.ShaderComposition ..............   Passed    4.09 sec
+        Start   9: AzureTools.MemoryResidency
+ 13/160 Test   #9: AzureTools.MemoryResidency ................   Passed    0.52 sec
+        Start 106: AzureEngine.BuildConfiguration
+ 14/160 Test #106: AzureEngine.BuildConfiguration ............   Passed    5.94 sec
+        Start  69: AzureEngine.ModuleBoundaries
+ 15/160 Test  #69: AzureEngine.ModuleBoundaries ..............   Passed    4.13 sec
+        Start  47: AzureAI.Bridge
+ 16/160 Test #196: AzureEditor.ContentDirectoryScale .........   Passed   87.40 sec
+        Start   6: AzureTools.PerformanceBudget
+ 17/160 Test   #6: AzureTools.PerformanceBudget ..............   Passed    0.43 sec
+        Start   5: AzureTools.ScriptBindings
+ 18/160 Test  #47: AzureAI.Bridge ............................   Passed    4.33 sec
+        Start  68: AzureEngine.ModuleBoundaryFixtures
+ 19/160 Test   #5: AzureTools.ScriptBindings .................   Passed    2.69 sec
+        Start  24: AzureTools.ShaderTypes
+ 20/160 Test  #24: AzureTools.ShaderTypes ....................   Passed    2.41 sec
+        Start 206: AzureGame.ExplorationDesign
+ 21/160 Test  #68: AzureEngine.ModuleBoundaryFixtures ........   Passed    3.63 sec
+        Start  98: AzureEngine.RepositoryAudit
+ 22/160 Test #206: AzureGame.ExplorationDesign ...............   Passed    0.78 sec
+        Start 188: AzureEditor.ContentOperations
+ 23/160 Test #188: AzureEditor.ContentOperations .............   Passed    1.75 sec
+        Start  86: AzureEngine.ScriptRuntime
+ 24/160 Test  #98: AzureEngine.RepositoryAudit ...............   Passed    3.91 sec
+        Start 208: AzureEditor.MaterialSlotEditing
+ 25/160 Test #208: AzureEditor.MaterialSlotEditing ...........   Passed    0.98 sec
+        Start 212: AzureEditor.DomainAuthoring
+ 26/160 Test #212: AzureEditor.DomainAuthoring ...............   Passed    0.68 sec
+        Start 142: AzureEditor.NodeAddition
+ 27/160 Test #142: AzureEditor.NodeAddition ..................   Passed    0.21 sec
+        Start  52: AzureTools.Cli
+ 28/160 Test  #86: AzureEngine.ScriptRuntime .................   Passed    5.01 sec
+        Start  49: AzureEditor.ProposalController
+ 29/160 Test  #52: AzureTools.Cli ............................   Passed    2.47 sec
+        Start 214: AzureEditor.AnimationAuthoring
+ 30/160 Test #214: AzureEditor.AnimationAuthoring ............   Passed    0.62 sec
+        Start 217: AzureEditor.PreviewSimulation
+ 31/160 Test #217: AzureEditor.PreviewSimulation .............   Passed    0.58 sec
+        Start  57: AzureTools.ValidationProtocol
+ 32/160 Test  #49: AzureEditor.ProposalController ............   Passed    2.43 sec
+        Start 144: AzureEditor.ContentWorkflow
+ 33/160 Test #144: AzureEditor.ContentWorkflow ...............   Passed    0.98 sec
+        Start  91: AzureEngine.PlayableQuest
+ 34/160 Test  #57: AzureTools.ValidationProtocol .............   Passed    1.95 sec
+        Start 104: AzureEngine.GamePackageRules
+ 35/160 Test  #91: AzureEngine.PlayableQuest .................   Passed    2.14 sec
+        Start  56: AzureAssets.GenerationManifest
+ 36/160 Test #104: AzureEngine.GamePackageRules ..............   Passed    1.84 sec
+        Start  76: AzureEngine.ResourceFrameTrace
+ 37/160 Test  #76: AzureEngine.ResourceFrameTrace ............   Passed    1.01 sec
+        Start 215: AzureEditor.DocumentManager
+ 38/160 Test  #56: AzureAssets.GenerationManifest ............   Passed    1.56 sec
+        Start 108: AzureTools.NativeWindow
+ 39/160 Test #215: AzureEditor.DocumentManager ...............   Passed    0.36 sec
+        Start  73: AzureEngine.EditorWorkflow
+ 40/160 Test #108: AzureTools.NativeWindow ...................   Passed    0.93 sec
+        Start  50: AzureEditor.ProposalAdapter
+ 41/160 Test  #50: AzureEditor.ProposalAdapter ...............   Passed    1.04 sec
+        Start 107: AzureEngine.BuildProvenance
+ 42/160 Test  #73: AzureEngine.EditorWorkflow ................   Passed    1.90 sec
+        Start 165: AzureRender.NullRhiPass
+ 43/160 Test #107: AzureEngine.BuildProvenance ...............   Passed    1.31 sec
+        Start   2: AzureTools.EngineContracts
+ 44/160 Test   #2: AzureTools.EngineContracts ................   Passed    0.62 sec
+        Start 193: AzureEditor.ContentNavigation
+ 45/160 Test #165: AzureRender.NullRhiPass ...................   Passed    1.90 sec
+        Start  46: AzureAI.ModelProtocol
+ 46/160 Test #193: AzureEditor.ContentNavigation .............   Passed    0.42 sec
+        Start 102: AzureEngine.AnimationRetarget
+ 47/160 Test  #46: AzureAI.ModelProtocol .....................   Passed    0.90 sec
+        Start  12: AzureTools.VisibilityBenchmark
+ 48/160 Test #102: AzureEngine.AnimationRetarget .............   Passed    1.00 sec
+        Start  60: AzureEditor.EditTransaction
+ 49/160 Test  #12: AzureTools.VisibilityBenchmark ............   Passed    0.60 sec
+        Start 105: AzureEngine.PlayableDeliveryRules
+ 50/160 Test  #60: AzureEditor.EditTransaction ...............   Passed    0.83 sec
+        Start 191: AzureEditor.ContentEditingWorkflow
+ 51/160 Test #191: AzureEditor.ContentEditingWorkflow ........   Passed    0.35 sec
+        Start  40: AzureRender.HotReload
+ 52/160 Test #105: AzureEngine.PlayableDeliveryRules .........   Passed    0.86 sec
+        Start 185: AzureEditor.PropertyEditing
+ 53/160 Test #185: AzureEditor.PropertyEditing ...............   Passed    0.32 sec
+        Start 141: AzureEditor.GizmoController
+ 54/160 Test  #40: AzureRender.HotReload .....................   Passed    0.69 sec
+        Start  66: AzureEngine.RegisteredComponentWorkflow
+ 55/160 Test #141: AzureEditor.GizmoController ...............   Passed    0.41 sec
+        Start  81: AzureEngine.ManagedRuntime.coreclr
+ 56/160 Test  #66: AzureEngine.RegisteredComponentWorkflow ...   Passed    0.58 sec
+        Start 198: AzureGame.PlatformerPhysics
+ 57/160 Test  #81: AzureEngine.ManagedRuntime.coreclr ........   Passed    0.55 sec
+        Start 186: AzureEditor.ReferencePicker
+ 58/160 Test #198: AzureGame.PlatformerPhysics ...............   Passed    0.10 sec
+        Start 103: AzureEngine.SourceSkinRestore
+ 59/160 Test #186: AzureEditor.ReferencePicker ...............   Passed    0.25 sec
+        Start 173: AzureEngine.PlayerCli
+ 60/160 Test #103: AzureEngine.SourceSkinRestore .............   Passed    0.74 sec
+        Start   3: AzureEngine.ContractsSnapshot
+ 61/160 Test #173: AzureEngine.PlayerCli .....................   Passed    0.72 sec
+        Start 146: AzureEditor.AssetWorkflow
+ 62/160 Test   #3: AzureEngine.ContractsSnapshot .............   Passed    0.32 sec
+        Start  82: AzureEngine.ManagedRuntime.nativeaot
+ 63/160 Test #146: AzureEditor.AssetWorkflow .................   Passed    0.31 sec
+        Start 183: AzureEditor.ProjectFlow
+ 64/160 Test  #82: AzureEngine.ManagedRuntime.nativeaot ......   Passed    0.38 sec
+        Start 220: AzureEditor.EditorProjection
+ 65/160 Test #220: AzureEditor.EditorProjection ..............   Passed    0.11 sec
+        Start 174: AzureRender.BlackholeOptimizationRules
+ 66/160 Test #174: AzureRender.BlackholeOptimizationRules ....   Passed    0.60 sec
+        Start 172: AzureRender.R4AcceptanceRules
+ 67/160 Test #183: AzureEditor.ProjectFlow ...................   Passed    1.28 sec
+        Start 145: AzureEditor.TaskService
+ 68/160 Test #172: AzureRender.R4AcceptanceRules .............   Passed    0.57 sec
+        Start  32: AzureRender.CharacterRepair
+ 69/160 Test #145: AzureEditor.TaskService ...................   Passed    0.29 sec
+        Start 110: AzureEngine.CharacterPreparation
+ 70/160 Test  #32: AzureRender.CharacterRepair ...............   Passed    0.18 sec
+        Start 109: AzureEngine.CharacterIntake
+ 71/160 Test #110: AzureEngine.CharacterPreparation ..........   Passed    0.51 sec
+        Start 143: AzureEditor.SelectionService
+ 72/160 Test #109: AzureEngine.CharacterIntake ...............   Passed    0.52 sec
+        Start  59: AzureEditor.EditService
+ 73/160 Test #143: AzureEditor.SelectionService ..............   Passed    0.20 sec
+        Start  28: AzureAssets.ProceduralProcess
+ 74/160 Test  #28: AzureAssets.ProceduralProcess .............   Passed    0.25 sec
+        Start  95: AzureEngine.AssetLevel
+ 75/160 Test  #59: AzureEditor.EditService ...................   Passed    0.36 sec
+        Start 218: AzureEngine.PhysicsAuthoring
+ 76/160 Test #218: AzureEngine.PhysicsAuthoring ..............   Passed    0.09 sec
+        Start  41: AzurePlatform.ProcessRunner
+ 77/160 Test  #41: AzurePlatform.ProcessRunner ...............   Passed    0.32 sec
+        Start 121: AzureEngine.MetaGenerator
+ 78/160 Test  #95: AzureEngine.AssetLevel ....................   Passed    0.51 sec
+        Start  83: AzureEngine.ScriptBackendParity.lua
+ 79/160 Test  #83: AzureEngine.ScriptBackendParity.lua .......   Passed    0.20 sec
+        Start  79: AzureEngine.ManagedModule.coreclr
+ 80/160 Test  #79: AzureEngine.ManagedModule.coreclr .........   Passed    0.15 sec
+        Start 221: AzureEditor.ViewportOverlays
+ 81/160 Test #221: AzureEditor.ViewportOverlays ..............   Passed    0.04 sec
+        Start 195: AzureAssets.PrimitiveGenerator
+ 82/160 Test #121: AzureEngine.MetaGenerator .................   Passed    0.46 sec
+        Start 100: AzureEngine.PublicGait
+ 83/160 Test #195: AzureAssets.PrimitiveGenerator ............   Passed    0.12 sec
+        Start 125: AzureEngine.Project
+ 84/160 Test #100: AzureEngine.PublicGait ....................   Passed    0.23 sec
+        Start 149: AzureRender.DocumentBackup
+ 85/160 Test #149: AzureRender.DocumentBackup ................   Passed    0.13 sec
+        Start  88: AzureEngine.Locomotion
+ 86/160 Test #125: AzureEngine.Project .......................   Passed    0.36 sec
+        Start  26: AzureAssets.ProceduralGeometry
+ 87/160 Test  #26: AzureAssets.ProceduralGeometry ............   Passed    0.11 sec
+        Start 182: AzureRender.InstallManifestRoundTrip
+ 88/160 Test  #88: AzureEngine.Locomotion ....................   Passed    0.27 sec
+        Start 155: AzureRender.EditorSession
+ 89/160 Test #182: AzureRender.InstallManifestRoundTrip ......   Passed    0.33 sec
+        Start  37: AzureEditor.PanelContext
+ 90/160 Test #155: AzureRender.EditorSession .................   Passed    0.29 sec
+        Start  61: AzureEngine.SystemComposition
+ 91/160 Test  #37: AzureEditor.PanelContext ..................   Passed    0.11 sec
+        Start  33: AzureRender.SurfaceConversion
+ 92/160 Test  #33: AzureRender.SurfaceConversion .............   Passed    0.07 sec
+        Start  51: AzureEditor.Observation
+ 93/160 Test  #51: AzureEditor.Observation ...................   Passed    0.11 sec
+        Start 190: AzureAssets.TextureMaterialImport
+ 94/160 Test #190: AzureAssets.TextureMaterialImport .........   Passed    0.05 sec
+        Start 194: AzureEditor.AssetOpen
+ 95/160 Test #194: AzureEditor.AssetOpen .....................   Passed    0.01 sec
+        Start  90: AzureEngine.ScriptEntities
+ 96/160 Test  #90: AzureEngine.ScriptEntities ................   Passed    0.09 sec
+        Start  27: AzureAssets.RigText
+ 97/160 Test  #27: AzureAssets.RigText .......................   Passed    0.06 sec
+        Start  72: AzureEditor.Workspace
+ 98/160 Test  #72: AzureEditor.Workspace .....................   Passed    0.07 sec
+        Start 150: AzureRender.DocumentActionGuard
+ 99/160 Test #150: AzureRender.DocumentActionGuard ...........   Passed    0.04 sec
+        Start 189: AzureAssets.TextureImportContract
+100/160 Test #189: AzureAssets.TextureImportContract .........   Passed    0.03 sec
+        Start  94: AzureEngine.PhysicsInput
+101/160 Test  #61: AzureEngine.SystemComposition .............   Passed    0.69 sec
+        Start 209: AzureAssets.MaterialDocument
+102/160 Test #209: AzureAssets.MaterialDocument ..............   Passed    0.03 sec
+        Start  74: AzureEngine.PresentationRuntime
+103/160 Test  #94: AzureEngine.PhysicsInput ..................   Passed    0.12 sec
+        Start  39: AzureEditor.Thumbnail
+104/160 Test  #39: AzureEditor.Thumbnail .....................   Passed    0.01 sec
+        Start 139: AzureEditor.TransformEditing
+105/160 Test #139: AzureEditor.TransformEditing ..............   Passed    0.03 sec
+        Start  35: AzureEngine.SettingRegistry
+106/160 Test  #74: AzureEngine.PresentationRuntime ...........   Passed    0.08 sec
+        Start  78: AzureEngine.ScriptInterop
+107/160 Test  #78: AzureEngine.ScriptInterop .................   Passed    0.03 sec
+        Start  21: AzureRender.ShaderModule
+108/160 Test  #35: AzureEngine.SettingRegistry ...............   Passed    0.06 sec
+        Start  11: AzureRender.VisibilityPrototype
+109/160 Test  #21: AzureRender.ShaderModule ..................   Passed    0.02 sec
+        Start  36: AzureEditor.UiFoundation
+110/160 Test  #11: AzureRender.VisibilityPrototype ...........   Passed    0.03 sec
+        Start 138: AzureEditor.SelectionBounds
+111/160 Test  #36: AzureEditor.UiFoundation ..................   Passed    0.03 sec
+        Start  77: AzureEngine.ScriptBackendContract
+112/160 Test #138: AzureEditor.SelectionBounds ...............   Passed    0.02 sec
+        Start  29: AzureRender.TextureFiltering
+113/160 Test  #29: AzureRender.TextureFiltering ..............   Passed    0.03 sec
+        Start 148: AzureRender.EditorCameraService
+114/160 Test  #77: AzureEngine.ScriptBackendContract .........   Passed    0.05 sec
+        Start  80: AzureEngine.ManagedModule.nativeaot
+115/160 Test #148: AzureRender.EditorCameraService ...........   Passed    0.03 sec
+        Start  14: AzureRender.ResourceAccessProfile
+116/160 Test  #80: AzureEngine.ManagedModule.nativeaot .......   Passed    0.04 sec
+        Start  16: AzureRender.ViewBatching
+117/160 Test  #14: AzureRender.ResourceAccessProfile .........   Passed    0.03 sec
+        Start 158: AzureRender.SceneModel
+118/160 Test  #16: AzureRender.ViewBatching ..................   Passed    0.02 sec
+        Start  89: AzureEngine.Interaction
+119/160 Test  #89: AzureEngine.Interaction ...................   Passed    0.05 sec
+        Start  97: AzureRender.SceneVisibility
+120/160 Test  #97: AzureRender.SceneVisibility ...............   Passed    0.07 sec
+        Start  71: AzureEngine.GameUi
+121/160 Test #158: AzureRender.SceneModel ....................   Passed    0.19 sec
+        Start 147: AzureRender.EditorInputRouter
+122/160 Test #147: AzureRender.EditorInputRouter .............   Passed    0.03 sec
+        Start  70: AzureEngine.GameUiRenderer
+123/160 Test  #71: AzureEngine.GameUi ........................   Passed    0.10 sec
+        Start  15: AzureRender.SkinningBatch
+124/160 Test  #70: AzureEngine.GameUiRenderer ................   Passed    0.02 sec
+        Start  64: AzureEngine.ComponentRegistry
+125/160 Test  #15: AzureRender.SkinningBatch .................   Passed    0.02 sec
+        Start  38: AzureRender.RenderView
+126/160 Test  #38: AzureRender.RenderView ....................   Passed    0.02 sec
+        Start 140: AzureRender.AssetDeformation
+127/160 Test  #64: AzureEngine.ComponentRegistry .............   Passed    0.03 sec
+        Start  58: AzureEngine.Observation
+128/160 Test  #58: AzureEngine.Observation ...................   Passed    0.02 sec
+        Start  65: AzureEngine.MetadataGeneration
+129/160 Test #140: AzureRender.AssetDeformation ..............   Passed    0.04 sec
+        Start  87: AzureEngine.ThirdPerson
+130/160 Test  #65: AzureEngine.MetadataGeneration ............   Passed    0.02 sec
+        Start  63: AzureEngine.ModuleAssembly
+131/160 Test  #63: AzureEngine.ModuleAssembly ................   Passed    0.01 sec
+        Start  34: AzureEngine.SettingsOverlay
+132/160 Test  #34: AzureEngine.SettingsOverlay ...............   Passed    0.02 sec
+        Start 127: AzureRender.EnvironmentAsset
+133/160 Test #127: AzureRender.EnvironmentAsset ..............   Passed    0.05 sec
+        Start 159: AzureRender.RuntimeDiagnostics
+134/160 Test #159: AzureRender.RuntimeDiagnostics ............   Passed    0.08 sec
+        Start 134: AzureRender.FrameTaskScheduler
+135/160 Test #134: AzureRender.FrameTaskScheduler ............   Passed    0.04 sec
+        Start  75: AzureEngine.GameplayPresentation
+136/160 Test  #75: AzureEngine.GameplayPresentation ..........   Passed    0.03 sec
+        Start  92: AzureRender.AnimationPose
+137/160 Test  #87: AzureEngine.ThirdPerson ...................   Passed    0.26 sec
+        Start  93: AzureRender.BrowRegions
+138/160 Test  #92: AzureRender.AnimationPose .................   Passed    0.01 sec
+        Start 166: AzureRender.SceneGraph
+139/160 Test  #93: AzureRender.BrowRegions ...................   Passed    0.02 sec
+        Start 181: AzureRender.ReleaseGateMissingBuild
+140/160 Test #181: AzureRender.ReleaseGateMissingBuild .......   Passed    0.03 sec
+        Start 131: AzureRender.CascadedShadow
+141/160 Test #166: AzureRender.SceneGraph ....................   Passed    0.04 sec
+        Start  96: AzureEngine.Reflection
+142/160 Test #131: AzureRender.CascadedShadow ................   Passed    0.02 sec
+        Start 126: AzureEngine.RuntimeLifecycle
+143/160 Test  #96: AzureEngine.Reflection ....................   Passed    0.02 sec
+        Start 161: AzureRender.ResourceLocator
+144/160 Test #126: AzureEngine.RuntimeLifecycle ..............   Passed    0.03 sec
+        Start 160: AzureRender.GpuCapabilityReport
+145/160 Test #161: AzureRender.ResourceLocator ...............   Passed    0.03 sec
+        Start 130: AzureRender.LightBuffer
+146/160 Test #160: AzureRender.GpuCapabilityReport ...........   Passed    0.03 sec
+        Start 132: AzureRender.ClusteredLightGrid
+147/160 Test #130: AzureRender.LightBuffer ...................   Passed    0.03 sec
+        Start 162: AzureRender.ExtensionRegistry
+148/160 Test #132: AzureRender.ClusteredLightGrid ............   Passed    0.02 sec
+        Start 133: AzureRender.ComputePass
+149/160 Test #133: AzureRender.ComputePass ...................   Passed    0.04 sec
+        Start 163: AzureRender.UploadRing
+150/160 Test #162: AzureRender.ExtensionRegistry .............   Passed    0.07 sec
+        Start 129: AzureRender.TransientResourcePool
+151/160 Test #129: AzureRender.TransientResourcePool .........   Passed    0.03 sec
+        Start 135: AzureRender.SurfaceLifecycle
+152/160 Test #163: AzureRender.UploadRing ....................   Passed    0.06 sec
+        Start 137: AzureRender.EditorCameraController
+153/160 Test #135: AzureRender.SurfaceLifecycle ..............   Passed    0.02 sec
+        Start 136: AzureRender.CommandLine
+154/160 Test #137: AzureRender.EditorCameraController ........   Passed    0.03 sec
+        Start 128: AzureRender.RenderGraph
+155/160 Test #136: AzureRender.CommandLine ...................   Passed    0.03 sec
+        Start 164: AzureRender.NullRhi
+156/160 Test #128: AzureRender.RenderGraph ...................   Passed    0.02 sec
+        Start 156: AzureRender.Ecs
+157/160 Test #164: AzureRender.NullRhi .......................   Passed    0.02 sec
+        Start 157: AzureRender.PickMath
+158/160 Test #156: AzureRender.Ecs ...........................   Passed    0.02 sec
+159/160 Test #157: AzureRender.PickMath ......................   Passed    0.02 sec
+        Start   4: AzureEngine.EvolutionCoverage
+160/160 Test   #4: AzureEngine.EvolutionCoverage .............   Passed   19.96 sec
+
+100% tests passed, 0 tests failed out of 160
+
+Total Test time (real) = 142.92 sec

@@ -1,0 +1,36 @@
+{
+  "status": "failed",
+  "visualAcceptance": "failed-user-review",
+  "programSha256": "c630f233cfda22d88a98884358773bf37da6399e3d90d0910a6654cdad20a192",
+  "cases": [
+    {
+      "name": "fullbody-no-fog",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-project\\fullbody-no-fog.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--qa-animation",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-captures\\fullbody-no-fog\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-captures\\fullbody-no-fog\\runtime.json"
+      ],
+      "status": "running",
+      "exitCode": 1,
+      "seconds": 0.038586200011195615
+    }
+  ]
+}

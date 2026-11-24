@@ -1,0 +1,18 @@
+[1/18] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\LevelSession.cpp.obj
+[2/18] Linking CXX static library AzureRuntime.lib
+[3/18] Linking CXX executable AzureAssetLevelTests.exe
+[4/18] Linking CXX executable AzureProjectTests.exe
+[5/18] Linking CXX executable AzureScriptRuntimeTests.exe
+[6/18] Linking CXX executable AzurePresentationRuntimeTests.exe
+[7/18] Linking CXX executable AzureGameplayPresentationTests.exe
+[8/18] Linking CXX executable AzureGameUiTests.exe
+[9/18] Linking CXX executable AzurePlayableQuestTests.exe
+[10/18] Linking CXX executable AzurePlayer.exe
+[11/18] Linking CXX executable AzureScriptEntityTests.exe
+[12/18] Linking CXX executable AzurePhysicsInputTests.exe
+[13/18] Linking CXX executable AzureEditorWorkflowTests.exe
+[14/18] Linking CXX executable AzureRender.exe
+[15/18] Linking CXX executable AzureThirdPersonTests.exe
+[16/18] Linking CXX executable AzureInteractionTests.exe
+[17/18] Linking CXX executable AzureRuntimeLifecycleTests.exe
+[18/18] Linking CXX executable AzureRenderEditorSessionTests.exe

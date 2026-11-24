@@ -1,0 +1,326 @@
+{
+  "sourceBase": "31f4908",
+  "status": "mechanism-validated-native-activation-pending",
+  "tests": [
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceFrameSelection",
+      "skipped": false,
+      "seconds": "1.3523"
+    },
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceStatistics",
+      "skipped": false,
+      "seconds": "0.94998"
+    },
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceCache",
+      "skipped": false,
+      "seconds": "0.783783"
+    },
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceCacheGpu",
+      "skipped": false,
+      "seconds": "1.09722"
+    },
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceRecording",
+      "skipped": false,
+      "seconds": "1.32194"
+    },
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.DepthPrefillRecording",
+      "skipped": false,
+      "seconds": "1.42735"
+    },
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.CommandLine",
+      "skipped": false,
+      "seconds": "0.771507"
+    },
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.GpuPredicateDrawSelection",
+      "skipped": false,
+      "seconds": "0.612628"
+    },
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.GpuPredicateDrawSelectionGpu",
+      "skipped": false,
+      "seconds": "1.14859"
+    },
+    {
+      "receipt": "intel.xml",
+      "name": "AzureRender.SurfaceRadianceCacheGpu",
+      "skipped": true,
+      "seconds": "0.277528"
+    },
+    {
+      "receipt": "intel.xml",
+      "name": "AzureRender.GpuPredicateDrawSelectionGpu",
+      "skipped": false,
+      "seconds": "0.209972"
+    },
+    {
+      "receipt": "precision-release-nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceFrameSelection",
+      "skipped": false,
+      "seconds": "0.0370168"
+    },
+    {
+      "receipt": "precision-release-nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceCacheGpu",
+      "skipped": false,
+      "seconds": "1.35774"
+    },
+    {
+      "receipt": "precision-release-intel.xml",
+      "name": "AzureRender.SurfaceRadianceCacheGpu",
+      "skipped": true,
+      "seconds": "0.351361"
+    },
+    {
+      "receipt": "precision-debug-nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceFrameSelection",
+      "skipped": false,
+      "seconds": "1.19867"
+    },
+    {
+      "receipt": "precision-debug-nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceCacheGpu",
+      "skipped": false,
+      "seconds": "1.23963"
+    },
+    {
+      "receipt": "precision-debug-nvidia.xml",
+      "name": "AzureRender.CommandLine",
+      "skipped": false,
+      "seconds": "0.688669"
+    },
+    {
+      "receipt": "precision-debug-intel.xml",
+      "name": "AzureRender.SurfaceRadianceCacheGpu",
+      "skipped": true,
+      "seconds": "0.361998"
+    },
+    {
+      "receipt": "release-default.xml",
+      "name": "AzureRender.SurfaceRadianceFrameSelection",
+      "skipped": false,
+      "seconds": "1.00279"
+    },
+    {
+      "receipt": "release-default.xml",
+      "name": "AzureRender.SurfaceRadianceStatistics",
+      "skipped": false,
+      "seconds": "0.724283"
+    },
+    {
+      "receipt": "release-default.xml",
+      "name": "AzureRender.SurfaceRadianceCache",
+      "skipped": false,
+      "seconds": "0.701733"
+    },
+    {
+      "receipt": "release-default.xml",
+      "name": "AzureRender.DepthPrefillRecording",
+      "skipped": false,
+      "seconds": "1.32459"
+    },
+    {
+      "receipt": "release-default.xml",
+      "name": "AzureRender.CommandLine",
+      "skipped": false,
+      "seconds": "0.0359366"
+    },
+    {
+      "receipt": "debug-default.xml",
+      "name": "AzureRender.SurfaceRadianceFrameSelection",
+      "skipped": false,
+      "seconds": "0.973088"
+    },
+    {
+      "receipt": "debug-default.xml",
+      "name": "AzureRender.SurfaceRadianceStatistics",
+      "skipped": false,
+      "seconds": "0.757334"
+    },
+    {
+      "receipt": "debug-default.xml",
+      "name": "AzureRender.SurfaceRadianceCache",
+      "skipped": false,
+      "seconds": "0.685442"
+    },
+    {
+      "receipt": "debug-default.xml",
+      "name": "AzureRender.DepthPrefillRecording",
+      "skipped": false,
+      "seconds": "3.15672"
+    },
+    {
+      "receipt": "debug-default.xml",
+      "name": "AzureRender.CommandLine",
+      "skipped": false,
+      "seconds": "0.0449641"
+    }
+  ],
+  "passed": 25,
+  "skipped": 3,
+  "views": [
+    {
+      "device": "nvidia",
+      "states": 30,
+      "pairedComparisons": 15,
+      "validationErrors": 0,
+      "zeroAllocator": true
+    },
+    {
+      "device": "intel",
+      "states": 30,
+      "pairedComparisons": 15,
+      "validationErrors": 0,
+      "zeroAllocator": true
+    }
+  ],
+  "native": {
+    "execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 364.5940000000119,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "4",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-231330-radiance-depth-replay-626cbb\\image-depth-replay\\frames-232849",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-231330-radiance-depth-replay-626cbb\\image-depth-replay\\runtime.json"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-231330-radiance-depth-replay-626cbb\\tmp"
+    },
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "firstChangedPoints": []
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "firstChangedPoints": []
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "firstChangedPoints": []
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "firstChangedPoints": []
+      }
+    ],
+    "metadata": {
+      "surfaceRadianceSelection": {
+        "enabled": true,
+        "prepared": true,
+        "frames": 2,
+        "fastFrames": 0,
+        "fullFrames": 2,
+        "lastFallback": true,
+        "fallback": ""
+      },
+      "surfaceRadianceStatistics": {
+        "enabled": false,
+        "bytes": 0,
+        "frames": 0,
+        "producerStores": 0,
+        "consumerVisits": 0,
+        "eligibleRequests": 0,
+        "pixelMatches": 0,
+        "quadMatches": 0,
+        "overflow": false
+      },
+      "surfaceRadiancePrepared": true,
+      "surfaceRadianceBytes": 471859200,
+      "surfaceRadianceIdentityVersion": 1,
+      "defaultIsolationPipelines": 0,
+      "defaultIsolationSelected": false,
+      "defaultIsolationFallback": "",
+      "conservativeOcclusionPrepared": true,
+      "mainDepthSplitRecorded": true,
+      "conservativeOcclusionCommands": 435,
+      "conservativeOcclusionLastZeroCommands": 212,
+      "conservativeOcclusionFallback": ""
+    },
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "projectInputsUnchanged": true,
+    "validationLogClean": true,
+    "zeroAllocator": true,
+    "formalPerformancePassed": false,
+    "overallVisualAcceptance": "failed-user-review"
+  },
+  "performanceTimingRuns": 0,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "sourceHashes": {
+    "CMakeLists.txt": "bbfad122553195f2241d20d96e52d55c444e2f2da62eecee2c784d156050cf87",
+    "src/app/AzureRenderApp.cpp": "334d67c45c0f2662e44163a0cd01de07be9e2802d8db8578872fa2a70509d17e",
+    "src/app/AzureRenderOptions.hpp": "04a7eff23ab33fdf675d0bd672cf8aac1c5734dab661961140fed44abfc4c1e3",
+    "src/app/CommandLine.cpp": "5cc2c9324a23cc2b528957ee5eadb84811c29f69dbd799d944dbfba14819090d",
+    "src/scenes/CharacterMaterialSampling.inc": "53d5169e3abe34601f9add6d5f99900f9d0676649cc4d0a9dac9c93edeb3b295",
+    "src/scenes/CharacterOcclusionPass.inc": "06b8d3d9ea5ae74d638bbaf3bfb4e8b477d4537a51c33985751b63c9f01635ba",
+    "src/scenes/CharacterRadianceSelection.inc": "730a15f81c0a9833e2a241cfb84ffa7aa2fc6a47bc4b1364eba8c25f708921f9",
+    "src/scenes/CharacterSceneRenderer.cpp": "c2c5190044a6f913c7543ace38e0edb0059b0a9745c94e054bb4b310134d9df8",
+    "src/scenes/CharacterSceneRenderer.hpp": "4b4b12a4bbda983d58d920f82fa511bd4ea95022d69ebe6e8b1fdce1d0fb2528",
+    "shaders/surface_radiance_depth_copy.vert": "565da0c24a130621b85cc8d031120639a8ff0933ba51695662c734722a74003f",
+    "shaders/surface_radiance_depth_copy.frag": "75880b53d9eccf0bac40ffae2ea7476503d72f9173a671cafc4731a40c3266e9",
+    "tests/CommandLineTests.cpp": "cd603ba14213aa9850c6fd31e20f66ad2f2694b46047be909ca8cfc7d7f4cf89",
+    "tests/SurfaceRadianceCacheGpuTests.cpp": "4d5bcae1f6e1d2f5adacd61679e206dbb68fbd8041226dc810acc1b9bc48e1e5"
+  },
+  "cleanup": {
+    "files": 170,
+    "logicalBytes": 235286399
+  },
+  "defaultProgramsExact": 674,
+  "experimentalOptionsDefaultOff": true,
+  "remaining": "Native global qualification still falls back; no frame performance claim",
+  "evidenceZipSha256": "c2ccd681155b354707479b25d9daa17ac319641706425f1535932e0fa79408c0",
+  "evidenceZipBytes": 676699
+}

@@ -1,0 +1,755 @@
+#include "AzureRenderApp.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
+#if AZURE_WITH_EDITOR
+#include "editor/ImGuiEditorLayer.hpp"
+#endif
+#include "extensions/ISceneRenderer.hpp"
+#include "platform/GlfwFrontend.hpp"
+#include "platform/SurfaceLifecycle.hpp"
+#include "render/RenderContext.hpp"
+#include "AzureRenderInternal.hpp"
+
+#include <algorithm>
+#include <array>
+#include <cstring>
+#include <fstream>
+#include <iostream>
+#include <limits>
+#include <set>
+#include <stdexcept>
+#include <string>
+#include <vector>
+
+using namespace azurerender::internal;
+
+namespace {
+
+constexpr std::array<const char*, 1> kValidationLayers = {
+    "VK_LAYER_KHRONOS_validation",
+};
+
+constexpr std::array<const char*, 1> kDeviceExtensions = {
+    VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+};
+
+}  // namespace
+
+AzureRenderApp::QueueFamilyIndices AzureRenderApp::findQueueFamilies(
+    const VkPhysicalDevice device) const {
+    QueueFamilyIndices indices;
+    std::uint32_t queueFamilyCount = 0;
+    vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+    std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
+    vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
+
+    for (std::uint32_t index = 0; index < queueFamilyCount; ++index) {
+        if ((queueFamilies[index].queueFlags & VK_QUEUE_GRAPHICS_BIT) != 0U) {
+            indices.graphics = index;
+        }
+        VkBool32 presentSupport = VK_FALSE;
+        vkGetPhysicalDeviceSurfaceSupportKHR(device, index, surface_, &presentSupport);
+        if (presentSupport == VK_TRUE) {
+            indices.present = index;
+        }
+        if (indices.complete()) {
+            break;
+        }
+    }
+    return indices;
+}
+
+AzureRenderApp::SwapchainSupport AzureRenderApp::querySwapchainSupport(
+    const VkPhysicalDevice device) const {
+    SwapchainSupport support;
+    vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface_, &support.capabilities);
+
+    std::uint32_t formatCount = 0;
+    vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface_, &formatCount, nullptr);
+    support.formats.resize(formatCount);
+    if (formatCount > 0) {
+        vkGetPhysicalDeviceSurfaceFormatsKHR(
+            device, surface_, &formatCount, support.formats.data());
+    }
+
+    std::uint32_t presentModeCount = 0;
+    vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface_, &presentModeCount, nullptr);
+    support.presentModes.resize(presentModeCount);
+    if (presentModeCount > 0) {
+        vkGetPhysicalDeviceSurfacePresentModesKHR(
+            device, surface_, &presentModeCount, support.presentModes.data());
+    }
+    return support;
+}
+
+bool AzureRenderApp::isDeviceSuitable(const VkPhysicalDevice device) const {
+    const QueueFamilyIndices indices = findQueueFamilies(device);
+    const bool extensionsSupported = checkDeviceExtensionSupport(device);
+    bool swapchainAdequate = false;
+    if (extensionsSupported) {
+        const SwapchainSupport support = querySwapchainSupport(device);
+        swapchainAdequate = !support.formats.empty() && !support.presentModes.empty();
+    }
+    return indices.complete() && extensionsSupported && swapchainAdequate;
+}
+
+bool AzureRenderApp::checkDeviceExtensionSupport(const VkPhysicalDevice device) const {
+    std::uint32_t extensionCount = 0;
+    vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
+    std::vector<VkExtensionProperties> available(extensionCount);
+    vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, available.data());
+    std::set<std::string> required(kDeviceExtensions.begin(), kDeviceExtensions.end());
+    for (const auto& extension : available) {
+        required.erase(extension.extensionName);
+    }
+    return required.empty();
+}
+
+bool AzureRenderApp::checkValidationLayerSupport() const {
+    std::uint32_t layerCount = 0;
+    vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+    std::vector<VkLayerProperties> available(layerCount);
+    vkEnumerateInstanceLayerProperties(&layerCount, available.data());
+
+    return std::all_of(
+        kValidationLayers.begin(),
+        kValidationLayers.end(),
+        [&available](const char* requiredLayer) {
+            return std::any_of(
+                available.begin(),
+                available.end(),
+                [requiredLayer](const VkLayerProperties& layer) {
+                    return std::strcmp(requiredLayer, layer.layerName) == 0;
+                });
+        });
+}
+
+void AzureRenderApp::recreateSwapchain() {
+    if (!azurerender::waitForDrawableSurface(*frontend_)) return;
+
+    vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(swapchain recreate)");
+#if AZURE_WITH_EDITOR
+    invalidatePreviews();graphicsCompleted_=graphicsSubmission_;
+    if(renderViews_)renderViews_->complete(graphicsCompleted_);
+    if (editorLayer_ != nullptr) {
+        editorLayer_->shutdownVulkan();
+    }
+#endif
+    gameUi_.reset();gameUiRenderer_.reset();gameUiPath_.clear();
+    cleanupSwapchain();
+    createSwapchain();
+    createImageViews();
+    createEditorViewportResources();
+    createSceneColorResources();
+    createDepthResources();
+    createNormalResources();
+    createRenderPass();
+    createPostProcessRenderPass();
+    createEditorUiRenderPass();
+    createGraphicsPipeline();
+    createFramebuffers();
+    createPostProcessFramebuffers();
+    createEditorUiFramebuffers();
+    createPostProcessDescriptorSets();
+    createSwapchainSemaphores();
+    if (sceneRenderer_ != nullptr) {
+        azurerender::RenderContext sceneContext;
+        buildRenderContext(sceneContext);
+        sceneRenderer_->onSwapchainRecreate(sceneContext);
+    }
+    initEditorUi();
+    azurerender::RuntimeDiagnostics::instance().print(
+        "surface", "Swapchain recreated: " + std::to_string(swapchainExtent_.width)
+            + "x" + std::to_string(swapchainExtent_.height));
+}
+
+void AzureRenderApp::recreateEditorViewportResources() {
+    if (!editorUiEnabled_
+        || requestedEditorViewportExtent_.width == 0
+        || requestedEditorViewportExtent_.height == 0) {
+        return;
+    }
+
+    const VkExtent2D newExtent{
+        std::clamp(
+            requestedEditorViewportExtent_.width,
+            std::min(64U, swapchainExtent_.width),
+            swapchainExtent_.width),
+        std::clamp(
+            requestedEditorViewportExtent_.height,
+            std::min(64U, swapchainExtent_.height),
+            swapchainExtent_.height),
+    };
+    if (newExtent.width == renderExtent_.width
+        && newExtent.height == renderExtent_.height) {
+        return;
+    }
+
+    vkCheck(
+        vkWaitForFences(
+            device_,
+            static_cast<std::uint32_t>(inFlightFences_.size()),
+            inFlightFences_.data(),
+            VK_TRUE,
+            UINT64_MAX),
+        "vkWaitForFences(editor viewport resize)");
+#if AZURE_WITH_EDITOR
+    if (editorLayer_ != nullptr) {
+        editorLayer_->clearViewportImages();
+    }
+#endif
+    cleanupEditorViewportResources(false);
+    renderExtent_ = newExtent;
+    createEditorViewportResources();
+    createSceneColorResources();
+    createDepthResources();
+    createNormalResources();
+    createFramebuffers();
+    createPostProcessFramebuffers();
+    createPostProcessDescriptorSets();
+#if AZURE_WITH_EDITOR
+    editorLayer_->setViewportImages(
+        editorViewportSampler_,
+        editorViewportImageViews_,
+        renderExtent_.width,
+        renderExtent_.height);
+#endif
+    azurerender::RuntimeDiagnostics::instance().print(
+        "editor", "Editor viewport resources rebuilt: "
+            + std::to_string(renderExtent_.width) + 'x'
+            + std::to_string(renderExtent_.height));
+}
+
+void AzureRenderApp::cleanupEditorViewportResources(
+    const bool destroySampler) {
+    if (postProcessDescriptorPool_ != VK_NULL_HANDLE) {
+        vkDestroyDescriptorPool(device_, postProcessDescriptorPool_, nullptr);
+        postProcessDescriptorPool_ = VK_NULL_HANDLE;
+    }
+    postProcessDescriptorSets_.clear();
+
+    for (const auto framebuffer : swapchainFramebuffers_) {
+        vkDestroyFramebuffer(device_, framebuffer, nullptr);
+    }
+    swapchainFramebuffers_.clear();
+    for (const auto framebuffer : postProcessFramebuffers_) {
+        vkDestroyFramebuffer(device_, framebuffer, nullptr);
+    }
+    postProcessFramebuffers_.clear();
+
+    const auto destroyImages = [this](
+                                   auto& views,
+                                   auto& images) {
+        for (const auto view : views) {
+            vkDestroyImageView(device_, view, nullptr);
+        }
+        for (auto& image : images) {
+            gpuAllocator_.destroyImage(image);
+        }
+        views.clear();
+        images.clear();
+    };
+    destroyImages(
+        editorViewportImageViews_,
+        editorViewportImages_);
+    destroyImages(
+        sceneColorImageViews_,
+        sceneColorImages_);
+    destroyImages(depthImageViews_, depthImages_);
+    destroyImages(normalImageViews_, normalImages_);
+
+    if (destroySampler && editorViewportSampler_ != VK_NULL_HANDLE) {
+        vkDestroySampler(device_, editorViewportSampler_, nullptr);
+        editorViewportSampler_ = VK_NULL_HANDLE;
+    }
+}
+
+void AzureRenderApp::cleanupSwapchain() {
+    for (const auto semaphore : renderFinishedSemaphores_) {
+        vkDestroySemaphore(device_, semaphore, nullptr);
+    }
+    renderFinishedSemaphores_.clear();
+
+    cleanupEditorViewportResources(true);
+    for (const auto framebuffer : editorUiFramebuffers_) {
+        vkDestroyFramebuffer(device_, framebuffer, nullptr);
+    }
+    editorUiFramebuffers_.clear();
+
+    if (innerOutlinePipeline_ != VK_NULL_HANDLE) {
+        vkDestroyPipeline(device_, innerOutlinePipeline_, nullptr);
+        innerOutlinePipeline_ = VK_NULL_HANDLE;
+    }
+    if (hudPipeline_ != VK_NULL_HANDLE) {
+        vkDestroyPipeline(device_, hudPipeline_, nullptr);
+        hudPipeline_ = VK_NULL_HANDLE;
+    }
+    if (postProcessPipelineLayout_ != VK_NULL_HANDLE) {
+        vkDestroyPipelineLayout(
+            device_,
+            postProcessPipelineLayout_,
+            nullptr);
+        postProcessPipelineLayout_ = VK_NULL_HANDLE;
+    }
+    if (hudPipelineLayout_ != VK_NULL_HANDLE) {
+        vkDestroyPipelineLayout(
+            device_,
+            hudPipelineLayout_,
+            nullptr);
+        hudPipelineLayout_ = VK_NULL_HANDLE;
+    }
+    if (renderPass_ != VK_NULL_HANDLE) {
+        vkDestroyRenderPass(device_, renderPass_, nullptr);
+        renderPass_ = VK_NULL_HANDLE;
+    }
+    if (postProcessRenderPass_ != VK_NULL_HANDLE) {
+        vkDestroyRenderPass(
+            device_,
+            postProcessRenderPass_,
+            nullptr);
+        postProcessRenderPass_ = VK_NULL_HANDLE;
+    }
+    if (editorUiRenderPass_ != VK_NULL_HANDLE) {
+        vkDestroyRenderPass(device_, editorUiRenderPass_, nullptr);
+        editorUiRenderPass_ = VK_NULL_HANDLE;
+    }
+    for (const auto imageView : swapchainImageViews_) {
+        vkDestroyImageView(device_, imageView, nullptr);
+    }
+    swapchainImageViews_.clear();
+    swapchainImages_.clear();
+
+    if (swapchain_ != VK_NULL_HANDLE) {
+        vkDestroySwapchainKHR(device_, swapchain_, nullptr);
+        swapchain_ = VK_NULL_HANDLE;
+    }
+}
+
+std::vector<const char*> AzureRenderApp::requiredInstanceExtensions() const {
+    std::vector<const char*> extensions =
+        frontend_->requiredVulkanExtensions();
+    if (kEnableValidation) {
+        extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+    }
+    return extensions;
+}
+
+VkSurfaceFormatKHR AzureRenderApp::chooseSurfaceFormat(
+    const std::vector<VkSurfaceFormatKHR>& formats) {
+    const auto preferred = std::find_if(
+        formats.begin(),
+        formats.end(),
+        [](const VkSurfaceFormatKHR& format) {
+            return format.format == VK_FORMAT_B8G8R8A8_SRGB
+                && format.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
+        });
+    return preferred != formats.end() ? *preferred : formats.front();
+}
+
+VkPresentModeKHR AzureRenderApp::choosePresentMode(
+    const std::vector<VkPresentModeKHR>& presentModes) {
+    return std::find(presentModes.begin(), presentModes.end(), VK_PRESENT_MODE_MAILBOX_KHR)
+            != presentModes.end()
+        ? VK_PRESENT_MODE_MAILBOX_KHR
+        : VK_PRESENT_MODE_FIFO_KHR;
+}
+
+VkExtent2D AzureRenderApp::chooseExtent(
+    const VkSurfaceCapabilitiesKHR& capabilities) const {
+    if (capabilities.currentExtent.width != std::numeric_limits<std::uint32_t>::max()) {
+        return capabilities.currentExtent;
+    }
+
+    const auto [width, height] = frontend_->framebufferSize();
+    VkExtent2D extent{
+        static_cast<std::uint32_t>(width),
+        static_cast<std::uint32_t>(height),
+    };
+    extent.width = std::clamp(
+        extent.width,
+        capabilities.minImageExtent.width,
+        capabilities.maxImageExtent.width);
+    extent.height = std::clamp(
+        extent.height,
+        capabilities.minImageExtent.height,
+        capabilities.maxImageExtent.height);
+    return extent;
+}
+
+VkFormat AzureRenderApp::findDepthFormat() const {
+    constexpr std::array candidates = {
+        VK_FORMAT_D32_SFLOAT,
+        VK_FORMAT_D32_SFLOAT_S8_UINT,
+        VK_FORMAT_D24_UNORM_S8_UINT,
+    };
+    for (const VkFormat format : candidates) {
+        VkFormatProperties properties{};
+        vkGetPhysicalDeviceFormatProperties(physicalDevice_, format, &properties);
+        constexpr VkFormatFeatureFlags requiredFeatures =
+            VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
+            | VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT;
+        if ((properties.optimalTilingFeatures & requiredFeatures)
+            == requiredFeatures) {
+            return format;
+        }
+    }
+    throw std::runtime_error("No supported depth buffer format was found");
+}
+
+void AzureRenderApp::copyBuffer(
+    const VkBuffer source,
+    const VkBuffer destination,
+    const VkDeviceSize size) const {
+    VkCommandBufferAllocateInfo allocateInfo{
+        VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO};
+    allocateInfo.commandPool = commandPool_;
+    allocateInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    allocateInfo.commandBufferCount = 1;
+
+    VkCommandBuffer commandBuffer = VK_NULL_HANDLE;
+    vkCheck(
+        vkAllocateCommandBuffers(device_, &allocateInfo, &commandBuffer),
+        "vkAllocateCommandBuffers(copy)");
+    VkCommandBufferBeginInfo beginInfo{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
+    beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+    vkCheck(vkBeginCommandBuffer(commandBuffer, &beginInfo), "vkBeginCommandBuffer(copy)");
+
+    const VkBufferCopy region{0, 0, size};
+    vkCmdCopyBuffer(commandBuffer, source, destination, 1, &region);
+    vkCheck(vkEndCommandBuffer(commandBuffer), "vkEndCommandBuffer(copy)");
+
+    VkSubmitInfo submitInfo{VK_STRUCTURE_TYPE_SUBMIT_INFO};
+    submitInfo.commandBufferCount = 1;
+    submitInfo.pCommandBuffers = &commandBuffer;
+    vkCheck(vkQueueSubmit(graphicsQueue_, 1, &submitInfo, VK_NULL_HANDLE), "vkQueueSubmit(copy)");
+    vkCheck(vkQueueWaitIdle(graphicsQueue_), "vkQueueWaitIdle(copy)");
+    vkFreeCommandBuffers(device_, commandPool_, 1, &commandBuffer);
+}
+
+void AzureRenderApp::transitionImageLayout(
+    const VkImage image,
+    const VkImageLayout oldLayout,
+    const VkImageLayout newLayout,
+    const std::uint32_t mipLevels) const {
+    VkCommandBufferAllocateInfo allocateInfo{
+        VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO};
+    allocateInfo.commandPool = commandPool_;
+    allocateInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    allocateInfo.commandBufferCount = 1;
+    VkCommandBuffer commandBuffer = VK_NULL_HANDLE;
+    vkCheck(
+        vkAllocateCommandBuffers(device_, &allocateInfo, &commandBuffer),
+        "vkAllocateCommandBuffers(image transition)");
+
+    VkCommandBufferBeginInfo beginInfo{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
+    beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+    vkCheck(
+        vkBeginCommandBuffer(commandBuffer, &beginInfo),
+        "vkBeginCommandBuffer(image transition)");
+
+    VkImageMemoryBarrier barrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
+    barrier.oldLayout = oldLayout;
+    barrier.newLayout = newLayout;
+    barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    barrier.image = image;
+    barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    barrier.subresourceRange.levelCount = mipLevels;
+    barrier.subresourceRange.layerCount = 1;
+
+    VkPipelineStageFlags sourceStage = 0;
+    VkPipelineStageFlags destinationStage = 0;
+    if (oldLayout == VK_IMAGE_LAYOUT_UNDEFINED
+        && newLayout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL) {
+        barrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+        sourceStage = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
+        destinationStage = VK_PIPELINE_STAGE_TRANSFER_BIT;
+    } else if (
+        oldLayout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL
+        && newLayout == VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL) {
+        barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+        barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+        sourceStage = VK_PIPELINE_STAGE_TRANSFER_BIT;
+        destinationStage = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+    } else {
+        throw std::runtime_error("Unsupported image layout transition");
+    }
+
+    vkCmdPipelineBarrier(
+        commandBuffer,
+        sourceStage,
+        destinationStage,
+        0,
+        0,
+        nullptr,
+        0,
+        nullptr,
+        1,
+        &barrier);
+    vkCheck(
+        vkEndCommandBuffer(commandBuffer),
+        "vkEndCommandBuffer(image transition)");
+    VkSubmitInfo submitInfo{VK_STRUCTURE_TYPE_SUBMIT_INFO};
+    submitInfo.commandBufferCount = 1;
+    submitInfo.pCommandBuffers = &commandBuffer;
+    vkCheck(
+        vkQueueSubmit(graphicsQueue_, 1, &submitInfo, VK_NULL_HANDLE),
+        "vkQueueSubmit(image transition)");
+    vkCheck(vkQueueWaitIdle(graphicsQueue_), "vkQueueWaitIdle(image transition)");
+    vkFreeCommandBuffers(device_, commandPool_, 1, &commandBuffer);
+}
+
+void AzureRenderApp::generateMipmaps(
+    const VkImage image,
+    const VkFormat format,
+    const std::uint32_t width,
+    const std::uint32_t height,
+    const std::uint32_t mipLevels) const {
+    VkFormatProperties formatProperties{};
+    vkGetPhysicalDeviceFormatProperties(physicalDevice_, format, &formatProperties);
+    if (!(formatProperties.optimalTilingFeatures
+          & VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT)) {
+        throw std::runtime_error(
+            "Texture image format does not support linear blitting");
+    }
+
+    VkCommandBufferAllocateInfo allocateInfo{
+        VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO};
+    allocateInfo.commandPool = commandPool_;
+    allocateInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    allocateInfo.commandBufferCount = 1;
+    VkCommandBuffer commandBuffer = VK_NULL_HANDLE;
+    vkCheck(
+        vkAllocateCommandBuffers(device_, &allocateInfo, &commandBuffer),
+        "vkAllocateCommandBuffers(mipmap)");
+    VkCommandBufferBeginInfo beginInfo{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
+    beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+    vkCheck(
+        vkBeginCommandBuffer(commandBuffer, &beginInfo),
+        "vkBeginCommandBuffer(mipmap)");
+
+    std::int32_t mipWidth = static_cast<std::int32_t>(width);
+    std::int32_t mipHeight = static_cast<std::int32_t>(height);
+    for (std::uint32_t level = 1; level < mipLevels; ++level) {
+        VkImageMemoryBarrier barrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
+        barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+        barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+        barrier.image = image;
+        barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        barrier.subresourceRange.baseMipLevel = level - 1;
+        barrier.subresourceRange.levelCount = 1;
+        barrier.subresourceRange.layerCount = 1;
+        barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+        barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
+        barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+        barrier.dstAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
+        vkCmdPipelineBarrier(
+            commandBuffer,
+            VK_PIPELINE_STAGE_TRANSFER_BIT,
+            VK_PIPELINE_STAGE_TRANSFER_BIT,
+            0,
+            0,
+            nullptr,
+            0,
+            nullptr,
+            1,
+            &barrier);
+
+        VkImageBlit blit{};
+        blit.srcOffsets[0] = {0, 0, 0};
+        blit.srcOffsets[1] = {mipWidth, mipHeight, 1};
+        blit.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        blit.srcSubresource.mipLevel = level - 1;
+        blit.srcSubresource.baseArrayLayer = 0;
+        blit.srcSubresource.layerCount = 1;
+        blit.dstOffsets[0] = {0, 0, 0};
+        blit.dstOffsets[1] = {
+            mipWidth > 1 ? mipWidth / 2 : 1,
+            mipHeight > 1 ? mipHeight / 2 : 1,
+            1};
+        blit.dstSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        blit.dstSubresource.mipLevel = level;
+        blit.dstSubresource.baseArrayLayer = 0;
+        blit.dstSubresource.layerCount = 1;
+        vkCmdBlitImage(
+            commandBuffer,
+            image,
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+            image,
+            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+            1,
+            &blit,
+            VK_FILTER_LINEAR);
+
+        barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
+        barrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+        barrier.srcAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
+        barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+        vkCmdPipelineBarrier(
+            commandBuffer,
+            VK_PIPELINE_STAGE_TRANSFER_BIT,
+            VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+            0,
+            0,
+            nullptr,
+            0,
+            nullptr,
+            1,
+            &barrier);
+        if (mipWidth > 1) {
+            mipWidth /= 2;
+        }
+        if (mipHeight > 1) {
+            mipHeight /= 2;
+        }
+    }
+
+    VkImageMemoryBarrier lastBarrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
+    lastBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    lastBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    lastBarrier.image = image;
+    lastBarrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    lastBarrier.subresourceRange.baseMipLevel = mipLevels - 1;
+    lastBarrier.subresourceRange.levelCount = 1;
+    lastBarrier.subresourceRange.layerCount = 1;
+    lastBarrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+    lastBarrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+    lastBarrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+    lastBarrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+    vkCmdPipelineBarrier(
+        commandBuffer,
+        VK_PIPELINE_STAGE_TRANSFER_BIT,
+        VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+        0,
+        0,
+        nullptr,
+        0,
+        nullptr,
+        1,
+        &lastBarrier);
+
+    vkCheck(vkEndCommandBuffer(commandBuffer), "vkEndCommandBuffer(mipmap)");
+    VkSubmitInfo submitInfo{VK_STRUCTURE_TYPE_SUBMIT_INFO};
+    submitInfo.commandBufferCount = 1;
+    submitInfo.pCommandBuffers = &commandBuffer;
+    vkCheck(
+        vkQueueSubmit(graphicsQueue_, 1, &submitInfo, VK_NULL_HANDLE),
+        "vkQueueSubmit(mipmap)");
+    vkCheck(vkQueueWaitIdle(graphicsQueue_), "vkQueueWaitIdle(mipmap)");
+    vkFreeCommandBuffers(device_, commandPool_, 1, &commandBuffer);
+}
+
+void AzureRenderApp::copyBufferToImage(
+    const VkBuffer source,
+    const VkImage destination,
+    const std::uint32_t width,
+    const std::uint32_t height) const {
+    VkCommandBufferAllocateInfo allocateInfo{
+        VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO};
+    allocateInfo.commandPool = commandPool_;
+    allocateInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    allocateInfo.commandBufferCount = 1;
+    VkCommandBuffer commandBuffer = VK_NULL_HANDLE;
+    vkCheck(
+        vkAllocateCommandBuffers(device_, &allocateInfo, &commandBuffer),
+        "vkAllocateCommandBuffers(image copy)");
+
+    VkCommandBufferBeginInfo beginInfo{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
+    beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+    vkCheck(vkBeginCommandBuffer(commandBuffer, &beginInfo), "vkBeginCommandBuffer(image copy)");
+    VkBufferImageCopy region{};
+    region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    region.imageSubresource.layerCount = 1;
+    region.imageExtent = {width, height, 1};
+    vkCmdCopyBufferToImage(
+        commandBuffer,
+        source,
+        destination,
+        VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+        1,
+        &region);
+    vkCheck(vkEndCommandBuffer(commandBuffer), "vkEndCommandBuffer(image copy)");
+    VkSubmitInfo submitInfo{VK_STRUCTURE_TYPE_SUBMIT_INFO};
+    submitInfo.commandBufferCount = 1;
+    submitInfo.pCommandBuffers = &commandBuffer;
+    vkCheck(
+        vkQueueSubmit(graphicsQueue_, 1, &submitInfo, VK_NULL_HANDLE),
+        "vkQueueSubmit(image copy)");
+    vkCheck(vkQueueWaitIdle(graphicsQueue_), "vkQueueWaitIdle(image copy)");
+    vkFreeCommandBuffers(device_, commandPool_, 1, &commandBuffer);
+}
+
+VkImageView AzureRenderApp::createImageView(
+    const VkImage image,
+    const VkFormat format,
+    const VkImageAspectFlags aspect,
+    const std::uint32_t mipLevels) const {
+    VkImageViewCreateInfo createInfo{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};
+    createInfo.image = image;
+    createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+    createInfo.format = format;
+    createInfo.subresourceRange.aspectMask = aspect;
+    createInfo.subresourceRange.levelCount = std::max(mipLevels, 1U);
+    createInfo.subresourceRange.layerCount = 1;
+
+    VkImageView imageView = VK_NULL_HANDLE;
+    vkCheck(vkCreateImageView(device_, &createInfo, nullptr, &imageView), "vkCreateImageView");
+    return imageView;
+}
+
+std::vector<char> AzureRenderApp::readBinaryFile(const std::string& path) {
+    std::ifstream file(path, std::ios::ate | std::ios::binary);
+    if (!file) {
+        throw std::runtime_error("Unable to open shader: " + path);
+    }
+    const auto fileSize = static_cast<std::size_t>(file.tellg());
+    std::vector<char> buffer(fileSize);
+    file.seekg(0);
+    file.read(buffer.data(), static_cast<std::streamsize>(buffer.size()));
+    return buffer;
+}
+
+VkShaderModule AzureRenderApp::createShaderModule(const std::vector<char>& code) const {
+    VkShaderModuleCreateInfo createInfo{VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO};
+    createInfo.codeSize = code.size();
+    createInfo.pCode = reinterpret_cast<const std::uint32_t*>(code.data());
+    VkShaderModule shaderModule = VK_NULL_HANDLE;
+    vkCheck(
+        vkCreateShaderModule(device_, &createInfo, nullptr, &shaderModule),
+        "vkCreateShaderModule");
+    return shaderModule;
+}
+
+void AzureRenderApp::framebufferResizeCallback(GLFWwindow* window, int, int) {
+    auto* application = static_cast<AzureRenderApp*>(glfwGetWindowUserPointer(window));
+    application->framebufferResized_ = true;
+}
+
+VKAPI_ATTR VkBool32 VKAPI_CALL AzureRenderApp::debugCallback(
+    const VkDebugUtilsMessageSeverityFlagBitsEXT severity,
+    VkDebugUtilsMessageTypeFlagsEXT,
+    const VkDebugUtilsMessengerCallbackDataEXT* callbackData,
+    void*) {
+    const char* prefix = severity >= VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT
+        ? "validation error"
+        : "validation warning";
+    azurerender::RuntimeDiagnostics::instance().log(
+        severity >= VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT
+            ? azurerender::DiagnosticLevel::Error
+            : azurerender::DiagnosticLevel::Warning,
+        "validation",
+        azurerender::DiagnosticCode::VulkanInitialization,
+        std::string("[") + prefix + "] " + callbackData->pMessage);
+    return VK_FALSE;
+}
+
+void AzureRenderApp::populateDebugMessengerCreateInfo(
+    VkDebugUtilsMessengerCreateInfoEXT& createInfo) {
+    createInfo = {VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT};
+    createInfo.messageSeverity =
+        VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
+        | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
+    createInfo.messageType =
+        VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
+        | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
+    createInfo.pfnUserCallback = debugCallback;
+}

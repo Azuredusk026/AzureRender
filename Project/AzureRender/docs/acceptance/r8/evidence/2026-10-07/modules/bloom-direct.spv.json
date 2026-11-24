@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "inputs": {
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\shaders\\modules\\SharedTypes.slang": "87deb7933f84b829dde50d011d7b06a98ddb81b98718cc2dbad24064526947cb",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\shaders\\modules\\interfaces\\BlockSamples.slang": "1ac32d0d14864b0f878ff5bace8235d32e755e04ad82c115b737702351e51985",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\shaders\\modules\\BloomAlgorithm.slang": "018d8664b675969afaa1d194933cf66c43f2c699fbb9883b1683786345739479",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\shaders\\modules\\strategies\\BlockStrategies.slang": "47b17e174727689cac652df148e76e0da50650928c73ee289aa208ce17d581ab",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\shaders\\modules\\Bloom.slang": "e504ad7793fba45fa0af788a7706d1967cd8d32c0dcb7b7b5a7da130f397346c",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\shaders\\modules\\shared-layout.json": "015779714fd26b7d382228146e520994619f7626b654a3f79782a025f67d7e81"
+  },
+  "compiler": "6ef3ff11fef3cc9df7c5b2daed6a64511648b2351b4a1efdcbd21fc17642141b",
+  "compilerArtifacts": {
+    "C:\\VulkanSDK\\1.4.350.0\\Bin\\slangc.exe": "6ef3ff11fef3cc9df7c5b2daed6a64511648b2351b4a1efdcbd21fc17642141b",
+    "C:\\VulkanSDK\\1.4.350.0\\Bin\\slang-compiler.dll": "cfdc9c0067942608757cbb343b53302bd7da1c6b945e9dd343c9474941f9830b",
+    "C:\\VulkanSDK\\1.4.350.0\\Bin\\slang-glsl-module.dll": "0b71a1f5a0795e5a94080eb452b378ddde6a75222dda448c5558fb5516acda99",
+    "C:\\VulkanSDK\\1.4.350.0\\Bin\\slang-glslang.dll": "b9dcd6cf4e1c6f55d88f3ddfd928d0fdb2c2afd22b13d9a08f9694f676b01f51",
+    "C:\\VulkanSDK\\1.4.350.0\\Bin\\slang-rt.dll": "1af4d49f19f39baa3e767624688020c7223af381b3dbd8fbce463e5fd96b9ebf",
+    "C:\\VulkanSDK\\1.4.350.0\\Bin\\slang.dll": "3b36ede98c2c58bab5efda3914caae0698c2e0f815c3e1a896ca1dba8439da00"
+  },
+  "adapterHash": "9dd14ced809d047237136116e1349ad94820726c1e364e7e239a13f770a2c3b2",
+  "floatingPointMode": "precise",
+  "compilerVersion": "2026.8",
+  "entry": "main",
+  "target": "spirv",
+  "profile": "spirv_1_3",
+  "defines": {
+    "AZURE_BLOOM_CACHE": "0"
+  },
+  "includeRoots": [
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\shaders\\modules"
+  ],
+  "inputHash": "29e9c76f8a9a9b602b1c8ab529f5aa85c9318cc0beae2c66ad7b5e46552fbde2",
+  "outputHash": "afcc627569044edf16dc0d263cac02405963cc8c8d30fe7e4196acc9cd08ed43",
+  "cacheHit": false,
+  "validatedTypes": [
+    "BloomParameters"
+  ],
+  "structuredStrides": {},
+  "reflection": {
+    "parameters": [
+      {
+        "name": "parameters",
+        "binding": {
+          "kind": "pushConstantBuffer",
+          "index": 0
+        },
+        "type": {
+          "kind": "constantBuffer",
+          "elementType": {
+            "kind": "struct",
+            "name": "BloomParameters",
+            "fields": [
+              {
+                "name": "threshold",
+                "type": {
+                  "kind": "scalar",
+                  "scalarType": "float32"
+                },
+                "binding": {
+                  "kind": "uniform",
+                  "offset": 0,
+                  "size": 4,
+                  "elementStride": 0
+                }
+              },
+              {
+                "name": "extractBright",
+                "type": {
+                  "kind": "scalar",
+                  "scalarType": "uint32"
+                },
+                "binding": {
+                  "kind": "uniform",
+                  "offset": 4,
+                  "size": 4,
+                  "elementStride": 0
+                }
+              }
+            ]
+          },
+          "containerVarLayout": {
+            "binding": {
+              "kind": "pushConstantBuffer",
+              "index": 0
+            }
+          },
+          "elementVarLayout": {
+            "type": {
+              "kind": "struct",
+              "name": "BloomParameters",
+              "fields": [
+                {
+                  "name": "threshold",
+                  "type": {
+                    "kind": "scalar",
+                    "scalarType": "float32"
+                  },
+                  "binding": {
+                    "kind": "uniform",
+                    "offset": 0,
+                    "size": 4,
+                    "elementStride": 0
+                  }
+                },
+                {
+                  "name": "extractBright",
+                  "type": {
+                    "kind": "scalar",
+                    "scalarType": "uint32"
+                  },
+                  "binding": {
+                    "kind": "uniform",
+                    "offset": 4,
+                    "size": 4,
+                    "elementStride": 0
+                  }
+                }
+              ]
+            },
+            "binding": {
+              "kind": "uniform",
+              "offset": 0,
+              "size": 8,
+              "elementStride": 0
+            }
+          }
+        }
+      },
+      {
+        "name": "sourceImage",
+        "binding": {
+          "kind": "descriptorTableSlot",
+          "index": 0
+        },
+        "type": {
+          "kind": "resource",
+          "baseShape": "texture2D",
+          "combined": true,
+          "resultType": {
+            "kind": "vector",
+            "elementCount": 4,
+            "elementType": {
+              "kind": "scalar",
+              "scalarType": "float32"
+            }
+          }
+        }
+      },
+      {
+        "name": "destinationImage",
+        "binding": {
+          "kind": "descriptorTableSlot",
+          "index": 1
+        },
+        "format": "rgba16f",
+        "type": {
+          "kind": "resource",
+          "baseShape": "texture2D",
+          "access": "readWrite",
+          "resultType": {
+            "kind": "vector",
+            "elementCount": 4,
+            "elementType": {
+              "kind": "scalar",
+              "scalarType": "float32"
+            }
+          }
+        }
+      }
+    ],
+    "entryPoints": [
+      {
+        "name": "main",
+        "stage": "compute",
+        "parameters": [
+          {
+            "name": "dispatchId",
+            "semanticName": "SV_DISPATCHTHREADID",
+            "type": {
+              "kind": "vector",
+              "elementCount": 3,
+              "elementType": {
+                "kind": "scalar",
+                "scalarType": "uint32"
+              }
+            }
+          }
+        ],
+        "threadGroupSize": [
+          8,
+          8,
+          1
+        ],
+        "bindings": [
+          {
+            "name": "parameters",
+            "binding": {
+              "kind": "pushConstantBuffer",
+              "index": 0
+            }
+          },
+          {
+            "name": "sourceImage",
+            "binding": {
+              "kind": "descriptorTableSlot",
+              "index": 0,
+              "used": 1
+            }
+          },
+          {
+            "name": "destinationImage",
+            "binding": {
+              "kind": "descriptorTableSlot",
+              "index": 1,
+              "used": 1
+            },
+            "format": "rgba16f"
+          }
+        ]
+      }
+    ],
+    "bindlessSpaceIndex": 1
+  },
+  "diagnostics": ""
+}

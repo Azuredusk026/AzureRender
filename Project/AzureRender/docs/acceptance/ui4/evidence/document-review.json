@@ -1,0 +1,18 @@
+{
+  "boundary_action": "KEEP",
+  "content_actions": [
+    "明确安装入口与生产工作流",
+    "分开自动证据和人工待项",
+    "同步原生游戏入口与附带构建环境"
+  ],
+  "title_review": "通过：按项目使用、职责和验证问题命名",
+  "scope": "通过",
+  "structure": "通过",
+  "depth": "通过：具体职责、目录定位和失败恢复",
+  "implementation": "通过：实际控件与服务证据",
+  "evidence": "通过：记录失败项和指纹",
+  "writing": "通过：中文定稿、短句与具体主语",
+  "titles": "通过",
+  "informationArchitecture": "通过：状态、教程、架构和验收分开维护",
+  "visual": "不适用：桌面捕获受环境限制，未作为 UI 外观证据"
+}

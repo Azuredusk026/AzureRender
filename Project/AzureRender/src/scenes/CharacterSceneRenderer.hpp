@@ -1,4 +1,30 @@
+#include "render/GpuPredicateDrawSelection.hpp"
+#include "render/StaticSkinningOutputCache.hpp"
+#include <mutex>
+#include "assets/TextureMipChain.hpp"
 #pragma once
+#include "render/IrradianceVolume.hpp"
+#include "render/EnvironmentCubeTexture.hpp"
+#include "render/OctahedralEnvironmentGpu.hpp"
+#include "render/SampledTextureCache.hpp"
+#include "foundation/ImmutableBytes.hpp"
+#include "render/MaterialPipelinePolicy.hpp"
+#include "render/ComputedMaterialView.hpp"
+#include <atomic>
+#include "render/StableDepthOrder.hpp"
+#include "render/TransparentTopology.hpp"
+#include "render/GpuTransparentIndexSort.hpp"
+#include "render/GpuConservativeOcclusion.hpp"
+#include "render/DepthPrepassSplit.hpp"
+#include "render/SurfaceRadianceCache.hpp"
+#include "render/ShadowHistoryCache.hpp"
+#include "render/ShadowHistoryPolicy.hpp"
+#include "render/OutlineProjectionResources.hpp"
+#include "render/SceneMultisampling.hpp"
+#include "render/SceneReferenceDepthTargets.hpp"
+#include "render/ScreenReflectionGpu.hpp"
+#include "render/ProjectedScreenReflectionGpu.hpp"
+#include "render/ReflectionReprojection.hpp"
 
 #include "extensions/ISceneRenderer.hpp"
 #include "assets/GltfLoader.hpp"
@@ -10,9 +36,19 @@
 #include "render/GpuCullingResources.hpp"
 #include "render/DeformedBounds.hpp"
 #include "render/SceneInstanceSnapshot.hpp"
+#include "render/ObjectShadowAtlas.hpp"
+#include "render/SceneInstanceGpuData.hpp"
+#include "render/SkinningBatch.hpp"
+#include "render/MorphGpuData.hpp"
+#include "render/TemporalViewState.hpp"
+#include "render/ReferenceRasterFrustum.hpp"
+#include "render/ReferenceRasterProjection.hpp"
+#include "render/MotionVectorPass.hpp"
+#include "render/ShadowTileBounds.hpp"
 #include "scene/Frustum.hpp"
 #include "scene/RenderBatching.hpp"
 #include "scene/SceneDescription.hpp"
+#include "scene/SceneTransformCache.hpp"
 
 #include <array>
 #include <cstdint>
@@ -20,9 +56,15 @@
 #include <optional>
 #include <string>
 #include <vector>
+#include <deque>
+#include <future>
+#include <functional>
+#include <unordered_map>
 
 namespace azurerender {
 
+class IrradianceClipmapGpu;
+class ScreenObjectVisibilityGpu;
 // The stylized character pipeline, migrated from the monolith application
 // class into the first concrete ISceneRenderer. It owns the loaded glTF
 // asset, its GPU resources (buffers/textures/descriptors/pipelines), the
@@ -30,18 +72,23 @@ namespace azurerender {
 // HDR Scene Color attachment.
 class CharacterSceneRenderer final : public ISceneRenderer {
 public:
-    CharacterSceneRenderer() = default;
+    CharacterSceneRenderer();
     CharacterSceneRenderer(const CharacterSceneRenderer&) = delete;
     CharacterSceneRenderer& operator=(const CharacterSceneRenderer&) = delete;
-    ~CharacterSceneRenderer() override = default;
+    ~CharacterSceneRenderer() override;
 
     [[nodiscard]] std::string_view name() const noexcept override {
         return "character";
     }
     [[nodiscard]] SceneRendererCapabilities capabilities() const override;
     void onLoad(const RenderContext& context) override;
+    bool prepareLoad(const RenderContext& context,double budgetMs) override;
+    bool reuseScene(const RenderContext& context) override;
     void onSwapchainRecreate(const RenderContext& context) override;
     void updateFrame(const SceneFrameData& frame) override;
+    void onFrameSubmitted(std::uint64_t submission) noexcept override;
+    void onFrameAbandoned() noexcept override;
+    std::optional<SceneReferenceDepthCapture> readReferenceSceneDepth() const override;
     void recordScene(const RenderContext& context) override;
     void registerPasses(RenderGraph& graph, const SceneGraphResources& resources,
                         const RenderContext& context) override;
@@ -54,7 +101,125 @@ public:
     void appendCaptureManifestFields(std::ostream& json) const override;
 
 private:
+    TemporalViewState temporalView_;
+    MotionPoseHistory motionPoses_;
+    std::vector<MotionPoseState> motionPoseScratch_;
+    std::unique_ptr<MotionVectorPass> motionPass_;
+    MotionVectorTarget* motionTarget_=nullptr;
+    std::vector<MotionVectorDraw> motionDraws_,reflectionMotionDraws_;
+    std::uint32_t motionPreviousValidObjects_=0;
+    void initializeMotion(const RenderContext&);
+    void prepareMotion();
+    void prepareTemporalFrame(const SceneFrameData&);
+    std::uint32_t materialFeaturesForFrame(const AssetMaterial&) const noexcept;
+    bool temporalMaterialSamplesActive() const noexcept;
+    void initializeHairIntegralPipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&);
+    void destroyHairIntegralPipelines() noexcept;
+    void initializeMaterialClassPipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&,const rhi::GraphicsPipelineDesc&,const std::string& vertexPath);
+    void destroyMaterialClassPipelines() noexcept;
+    void prepareMaterialLightingPipelines();
+    VkShaderModule createUvShaderModule(const std::string&);
+    std::vector<char> readReferenceVertexProgram(const std::string&) const;
+    bool referenceCameraPrepared_=false,referenceProjectedSurface_=false;
+    std::optional<PreparedReferenceCameraView> referenceCamera_;
+    std::unique_ptr<SceneReferenceDepthTargets> referenceSceneDepth_;
+    std::unique_ptr<ScreenObjectVisibilityGpu> referenceObjectVisibility_;
+    std::shared_ptr<const ScreenObjectVisibilityNumerics> referenceObjectVisibilityNumerics_;
+    rhi::GpuImage referenceObjectIdFallback_{};
+    VkImageView referenceObjectIdFallbackView_{};
+    std::array<std::array<VkPipeline, 3>, 3> referenceSceneDepthPipelines_{};
+    std::array<std::array<VkPipeline, 2>, 2> referenceSceneOutlineDepthPipelines_{};
+    std::array<std::array<VkPipeline, 3>, 3> referenceSceneVisibilityPipelines_{};
+    struct ReferenceDepthSubmission {unsigned slot;bool visibilityInputs;bool objectVisibility;std::uint64_t submission;};
+    std::optional<ReferenceDepthSubmission> pendingReferenceDepth_;
+    std::optional<ReferenceDepthSubmission> submittedReferenceDepth_;
+    bool referenceDepthActive() const noexcept;
+    bool referenceVisibilityActive() const noexcept;
+    bool referenceObjectVisibilityActive() const noexcept;
+    void writeReferenceMaterialVisibilityDescriptors(VkDescriptorSet,unsigned slot,bool active);
+    void recordReferenceObjectVisibility(rhi::ICommandRecorder&,unsigned slot,const SceneInstanceSnapshot&);
+    void createReferenceDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context,bool visibilityInputs);
+    void createReferenceOutlineDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context);
+    void destroyUvShaderModule(VkShaderModule);
+    VkPipeline createMaterialUvGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
+    VkPipeline materialUvPipeline(const AssetMaterial&,VkPipeline) const;
+    void destroyMaterialUvPipelines() noexcept;
+    std::vector<std::pair<VkShaderModule,std::string>> materialUvShaderPaths_;
+    std::vector<std::pair<VkPipeline,VkPipeline>> materialUvPipelines_;
+    bool materialUvNeeded_=false;
+    std::uint32_t materialUvClassesNeeded_=0;
+    void initializeComputedMaterialView(const RenderContext&);
+    void prepareComputedMaterialViewPipeline(VkPipeline,const rhi::GraphicsPipelineDesc&);
+    VkPipeline computedMaterialViewPipeline(VkPipeline) const;
+    void destroyComputedMaterialViewPipelines() noexcept;
+    ComputedMaterialViewCapabilities computedMaterialViewCapabilities_;
+    std::uint8_t computedMaterialOrdinaryPolicies_=0;
+    std::array<std::uint8_t,unsigned(AssetMaterialClass::Showcase)+1> computedMaterialClassPolicies_{};
+    std::vector<std::pair<VkPipeline,VkPipeline>> computedMaterialViewPipelines_;
+    mutable std::atomic<std::uint64_t> computedMaterialViewRequests_{0},computedMaterialViewSelections_{0};
+    std::string computedMaterialViewFallback_;
+    VkShaderModule createMaterialShaderModule(const std::string&);
+    void destroyMaterialShaderModule(VkShaderModule);
+    VkPipeline createMaterialGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
+    VkPipeline createMaterialDepthPipeline(const rhi::GraphicsPipelineDesc&);
+    void prepareDefaultIsolationPipeline(VkPipeline,const rhi::GraphicsPipelineDesc&);
+    VkPipeline createCoverageGraphicsPipeline(const rhi::GraphicsPipelineDesc&,const std::string&);
+    VkPipeline materialLightingPipeline(const AssetMaterial&,VkPipeline) const;
+    void destroyMaterialLightingPipelines() noexcept;
+    struct MaterialShaderVariant {
+        VkShaderModule scene=VK_NULL_HANDLE,lighting=VK_NULL_HANDLE;
+        std::string path;
+        VkShaderModule coverage=VK_NULL_HANDLE,lightingCoverage=VK_NULL_HANDLE;
+        std::array<VkShaderModule,4> defaultIsolation{};
+    };
+    std::vector<MaterialShaderVariant> materialShaderVariants_;
+    std::vector<std::pair<VkPipeline,std::array<VkPipeline,3>>> materialLightingPipelines_;
+    std::vector<std::pair<VkPipeline,VkPipeline>> defaultIsolationPipelines_;
+    VkRenderPass defaultIsolationRenderPass_=VK_NULL_HANDLE;
+    std::string defaultIsolationFallback_;
+    bool independentCoverageNeeded_=false;
+    bool ellipseCoverageNeeded_=false;
+    std::array<bool,4> materialDepthPoliciesNeeded_{};
+    std::vector<std::pair<VkPipeline,std::array<VkPipeline,3>>> materialDepthPipelines_;
+    std::array<VkPipeline,3> outlineMaskCoveragePipelines_{};
+    std::array<VkPipeline,2> outlineCoveragePipelines_{},outlineDepthCoveragePipelines_{};
+    bool lightingOrdinaryNeeded_=false,lightingBlendNeeded_=false;
+    bool lightingFallbackNeeded_=false,lightingIntegralNeeded_=false;
+    std::array<VkPipeline,4> ordinaryOpaquePipelines_{};
+    std::array<VkPipeline,4> ordinaryOpaqueSnapshotPipelines_{};
+    std::array<VkPipeline,4> ordinaryEarlyDepthPipelines_{},ordinaryEarlyDepthSnapshotPipelines_{};
+    std::array<VkPipeline,4> ordinaryRadiancePipelines_{},ordinaryRadianceValidationPipelines_{};
+    VkPipeline ordinaryOpaquePipeline(const AssetMaterial&,bool mirrored,bool snapshot,float nodeOpacity) const noexcept;
+    static constexpr unsigned kMaterialClassVariantCount=unsigned(AssetMaterialClass::Showcase)+1;
+    std::array<bool,kMaterialClassVariantCount> lightingClassesNeeded_{};
+    std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassPipelines_{};
+    std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassSnapshotPipelines_{};
+    std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassEarlyDepthPipelines_{},materialClassEarlyDepthSnapshotPipelines_{};
+    std::array<MaterialFeatureSpecialization,kMaterialClassVariantCount> materialClassFeatureSpecializations_{};
+    VkPipeline materialClassPipeline(const AssetMaterial&,bool mirrored,bool snapshot,float nodeOpacity=0) const noexcept;
+    VkPipeline hairIntegralPipeline(const AssetMaterial&,bool mirrored,bool snapshot) const;
+    std::array<VkPipeline,8> hairIntegralPipelines_{};
+    std::array<VkPipeline,4> hairIntegralSnapshotPipelines_{};
+    VkSampleCountFlagBits rasterizationSamples_=VK_SAMPLE_COUNT_1_BIT;
+    std::array<float,2> samplingJitter_{};
+    std::uint64_t temporalSceneGeneration_=1;
+    bool faceSdfPrepared_=false,platformPrepared_=false;
+    std::uint32_t faceSdfTextureCount_=0;
+    struct GpuMaterial;
+    void initializeLoad(const RenderContext& context);
+    std::deque<std::function<void()>> loadJobs_;
+    std::optional<RenderContext> graphicsPreparationContext_;
+    std::future<void> graphicsPreparation_;
+    bool finishPreparedGraphics();
+    bool loadInitialized_=false;
+    struct LoadTimings {
+        double cpuPrepareMs=0,meshUploadMs=0,materialUploadMs=0,sharedTexturesMs=0;
+        double buffersMs=0,skinningMs=0,descriptorsMs=0,pipelinesMs=0;
+    } loadTimings_;
+    std::uint64_t decodedMaterialPixelBytes_=0;
+    void uploadMaterialTexture(LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot);
     static constexpr std::size_t kMaxFramesInFlight = 2;
+    std::array<bool,kMaxFramesInFlight> computedMaterialViewFrame_{};
     static constexpr std::uint32_t kClusterGridX = 16;
     static constexpr std::uint32_t kClusterGridY = 9;
     static constexpr std::uint32_t kClusterGridZ = 24;
@@ -62,14 +227,16 @@ private:
     static constexpr std::uint32_t kShadowCascadeCount = 4;
     static constexpr VkDeviceSize kMaxClusterLightIndices =
         static_cast<VkDeviceSize>(kClusterGridX)
-        * kClusterGridY * kClusterGridZ * kMaxSceneLights;
+        * kClusterGridY * kClusterGridZ * kMaxSceneLights * ClusteredLightGrid::kReceiverRangeCount;
     static constexpr std::uint32_t kEnvironmentMipLevels = 7;
     static constexpr std::uint32_t kIblPrefilterSamples = 32;
-    // Bindless texture array layout: shared slots come first (environment,
-    // shadow map, toon ramp), then per-material blocks of eight textures.
-    static constexpr std::uint32_t kSharedTextureSlots = 3;
-    static constexpr std::uint32_t kMaterialTextureSlots = 8;
-    static constexpr std::uint32_t kAssetVertexWordCount = 26;
+    // Indexed textures start with environment and toon ramp. Depth images
+    // use an independent binding with a shared filtering sampler.
+    static constexpr std::uint32_t kTextureBindingLayoutVersion = 1;
+    static constexpr std::uint32_t kSharedTextureSlots = 2;
+    static constexpr std::uint32_t kMaterialTextureSlots = 9;
+    static constexpr std::uint32_t kMaterialColorAttachmentCount = 2;
+    static constexpr std::uint32_t kAssetVertexWordCount = 27;
 
     struct GpuTexture {
         rhi::GpuImage image;
@@ -84,16 +251,95 @@ private:
     static_assert(sizeof(IblPrefilterPushConstants) == 8);
 
     struct GpuMaterial {
-        GpuTexture baseColor;
-        GpuTexture normal;
-        GpuTexture metallicRoughness;
-        GpuTexture specularEmissive;
-        GpuTexture styleMask;
-        GpuTexture matcap;
-        GpuTexture hairData;
-        GpuTexture faceSdf;
+        SampledTextureBinding baseColor;
+        SampledTextureBinding normal;
+        SampledTextureBinding metallicRoughness;
+        SampledTextureBinding specularEmissive;
+        SampledTextureBinding styleMask;
+        SampledTextureBinding matcap;
+        SampledTextureBinding hairData;
+        SampledTextureBinding faceSdf;
+        SampledTextureBinding shadowColorLut;
     };
 
+    void createScreenReflectionResources(const RenderContext&);
+    void destroyScreenReflectionResources();
+    void destroyReflectionHistoryResources();
+    void createReflectionMotionResources(const RenderContext&);
+    bool screenReflectionTemporalPrepared() const noexcept{return reflectionReprojection_||projectedReflectionHistoryPrepared_;}
+    bool reflectionHistoryAvailable(unsigned slot) const noexcept;
+    void recordScreenReflection(rhi::ICommandRecorder&,unsigned,const ReflectionTraceInputs&,const ReflectionTraceView&,const ScreenSpaceReflectionSettings&);
+    VkFramebuffer reflectionMotionFramebuffer(unsigned slot) const;
+    void publishScreenReflectionOutput(unsigned frame);
+    bool screenReflectionPrepared() const noexcept{return screenReflections_||projectedReflections_;}
+    ReflectionFilterOutput screenReflectionOutput(unsigned slot) const;
+    const char* screenReflectionProducer(unsigned slot) const;
+    std::string screenReflectionFallback(unsigned slot) const;
+    std::unique_ptr<ScreenReflectionGpu> screenReflections_;
+    std::unique_ptr<ProjectedScreenReflectionGpu> projectedReflections_;
+    ScreenSpaceReflectionAlgorithm reflectionAlgorithmRequest_=ScreenSpaceReflectionAlgorithm::Linear;
+    std::string reflectionFallbackReason_;
+    std::unique_ptr<ReflectionReprojectionGpu> reflectionReprojection_;
+    bool projectedReflectionHistoryPrepared_=false;
+    std::unique_ptr<MotionVectorTarget> reflectionOwnedMotion_;
+    std::array<VkFramebuffer,kMaxFramesInFlight> reflectionMotionFramebuffers_{};
+    std::array<bool,kMaxFramesInFlight> reflectionHistoryValid_{};
+    std::optional<unsigned> reflectionPendingSlot_;
+    std::optional<ReflectionTraceView> reflectionPendingView_;
+    ReflectionTraceView reflectionHistoryView_{};
+    std::array<float,2> reflectionPendingJitterUv_{},reflectionHistoryJitterUv_{};
+    std::array<std::array<float,2>,kMaxFramesInFlight> reflectionMotionUvOffsets_{};
+    std::array<std::uint64_t,kMaxFramesInFlight> reflectionInputSubmissions_{};
+    std::uint64_t reflectionHistorySubmission_=0;
+    unsigned reflectionHistorySlot_=0;
+    std::string reflectionHistoryPreparation_;
+    rhi::GpuImage reflectionFallback_{};VkImageView reflectionFallbackView_{};
+    std::string reflectionPreparation_;
+    std::array<bool,kMaxFramesInFlight> reflectionDescriptorPublished_{},reflectionActive_{},reflectionShadingActive_{};
+    std::array<ReflectionTraceView,kMaxFramesInFlight> reflectionViews_{};
+    std::array<ScreenSpaceReflectionSettings,kMaxFramesInFlight> reflectionSettings_{};
+    VkFormat reflectionSurfaceFormat_=VK_FORMAT_R32_SFLOAT;
+    std::array<GpuTexture,kMaxFramesInFlight> overlaySceneDepth_;
+    std::unique_ptr<SceneMultisampling> snapshotMultisampling_;
+    VkRenderPass snapshotPass() const {return snapshotMultisampling_?snapshotMultisampling_->renderPass():overlayDepthPass_;}
+    VkFramebuffer snapshotFramebuffer(std::uint32_t slot) const {return snapshotMultisampling_?snapshotMultisampling_->framebuffer(slot):overlayDepthFramebuffers_.at(slot);}
+    std::array<GpuTexture,kMaxFramesInFlight> opaqueSceneColor_;
+    std::array<rhi::GpuImage,kMaxFramesInFlight> overlayDepthAttachments_;
+    std::array<VkImageView,kMaxFramesInFlight> overlayDepthViews_{};
+    std::array<VkFramebuffer,kMaxFramesInFlight> overlayDepthFramebuffers_{};
+    VkRenderPass overlayDepthPass_=VK_NULL_HANDLE;
+    std::array<VkPipeline,3> snapshotDepthOnlyPipelines_{};
+    std::array<VkPipeline,3> snapshotCoveragePipelines_{};
+    std::array<VkPipeline,3> snapshotPrefillPipelines_{};
+    std::array<VkPipeline,3> mainPrefillPipelines_{};
+    std::array<VkPipeline,3> snapshotCoveredPrefillPipelines_{};
+    std::array<VkPipeline,3> mainCoveredPrefillPipelines_{};
+    void destroyCoveredPrefillPipelines();
+    std::array<VkPipeline,4> overlayDepthPipelines_{};
+    std::array<GpuTexture,kMaxFramesInFlight> outlineMasks_;
+    std::array<VkFramebuffer,kMaxFramesInFlight> outlineMaskFramebuffers_{};
+    VkRenderPass outlineMaskPass_=VK_NULL_HANDLE;
+    VkPipeline outlineMaskPipeline_=VK_NULL_HANDLE;
+    VkPipeline outlineMaskMirroredPipeline_=VK_NULL_HANDLE;
+    VkPipeline outlineMaskDoubleSidedPipeline_=VK_NULL_HANDLE;
+    VkExtent2D outlineMaskViewExtent_{};
+    std::uint32_t outlineMaskMaxDimension_=0;
+    void prepareOutlineMaskResources(const std::vector<std::vector<float>>& opacities,RecordingBufferSet& buffers);
+    void recordOutlineMask(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands);
+    void createOverlayDepth(const RenderContext& context);
+    void destroyOverlayDepth();
+    void recordOverlayDepth(const RenderContext& context, const SceneInstanceSnapshot& snapshot, rhi::ICommandRecorder& commands);
+    void initializeSurfaceOverlayPipelines(const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot);
+    void recordSurfaceOverlays(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
+        rhi::ICommandRecorder& commands,bool snapshotColor,SceneSubmissionCounters* counters=nullptr);
+    enum class DepthCoverageMode {SnapshotDepth,SnapshotColor,SnapshotPrefill,MainPrefill,RadianceValidation,ReferenceDepth};
+    void recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
+        rhi::ICommandRecorder& commands,DepthCoverageMode mode,SceneSubmissionCounters* counters=nullptr);
+    enum class OutlineShellPass {Color,SnapshotDepth,ReferenceDepth};
+    void recordOutlineShells(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
+        rhi::ICommandRecorder& commands,const std::vector<std::array<std::uint32_t,3>>& spans,OutlineShellPass pass,
+        SceneSubmissionCounters* counters=nullptr,
+        std::optional<std::size_t> spanIndex=std::nullopt);
     struct MaterialPushConstants {
         float alphaCutoff = 0.5F;
         std::uint32_t alphaMode = 0;
@@ -111,13 +357,16 @@ private:
         std::uint32_t padding = 0;
     };
     static_assert(sizeof(MaterialPushConstants) == 128);
+    static_assert(offsetof(MaterialPushConstants,hairParameters)==64);
 
     struct MorphPushConstants {
+        // Projected mesh programs consume word one as output-pixel sampling
+        // scale. Their morph weights come from the instance records.
         std::array<float, 2> weights{{0.0F, 0.0F}};
         // Bindless mode: the draw's first material slot in the global texture
         // array. Ignored by the fixed-table shaders.
         std::uint32_t textureBaseIndex = 0;
-        std::uint32_t padding = 0;
+        float nodeOpacity = 1.0F;
         std::array<float, 16> gizmoTransform{
             1.0F, 0.0F, 0.0F, 0.0F,
             0.0F, 1.0F, 0.0F, 0.0F,
@@ -126,6 +375,8 @@ private:
         };
     };
     static_assert(sizeof(MorphPushConstants) == 80);
+    static_assert(offsetof(MorphPushConstants, nodeOpacity) == 12);
+    static_assert(offsetof(MorphPushConstants, gizmoTransform) == 16);
 
     struct UniformBufferObject {
         std::array<float, 4> cameraPosition{};
@@ -140,26 +391,41 @@ private:
         std::array<float, 4> faceLightDirection{};
         std::array<float, 4> faceSdfParameters{};
         std::array<float, 4> faceSdfShadowColor{};
+        std::array<float, 4> mainLightDirection{};
+        std::array<float, 4> cascadeDepthRanges{};
+        std::array<float, 4> skyRight{},skyUp{},skyForward{},skyColor{},skyParameters{};
+        std::array<float, 4> probeCenter{},probeHalfExtents{},probeCapture{},probeParameters{};
+        std::array<float,4> irradianceOriginSpacing{},irradianceDimensionsEnabled{},irradianceParameters{};
+        // xyz: view basis; w: current shading jitter in output pixels, X/Y.
+        std::array<float,4> cameraRight{},cameraUp{};
+        std::array<float,16> screenReflectionWorldToClip{};
+        std::array<float,4> screenReflectionTrace{},screenReflectionQuality{};
+        std::array<float,4> nprDirectionBias{},nprGainFloor{},nprAmbientColor{},nprComposition{},nprMainRadiance{},nprLightingParameters{};
+        std::array<float,4> cascadeWorldDiameters{};
+        std::array<float,4> unlitTimeExposure{},unlitColorGain{};
+        ReferenceRasterProjectionParameters referenceCamera;
     };
+    static_assert(sizeof(UniformBufferObject)==50*16);
+    static_assert(offsetof(UniformBufferObject,referenceCamera)==43*16);
+    static_assert(offsetof(UniformBufferObject,referenceCamera)+offsetof(ReferenceRasterProjectionParameters,control)==48*16);
+    static_assert(offsetof(UniformBufferObject,unlitTimeExposure)==41*16);
+    static_assert(offsetof(UniformBufferObject,unlitColorGain)==42*16);
+    static_assert(offsetof(UniformBufferObject,cascadeWorldDiameters)==40*16);
+    static_assert(offsetof(UniformBufferObject,nprDirectionBias)==34*16);
+    static_assert(offsetof(UniformBufferObject,nprLightingParameters)==39*16);
+    static_assert(offsetof(UniformBufferObject,screenReflectionWorldToClip)==28*16);
+    static_assert(offsetof(UniformBufferObject,screenReflectionTrace)==32*16);
+    static_assert(offsetof(UniformBufferObject,screenReflectionQuality)==33*16);
+    static_assert(offsetof(UniformBufferObject,cameraRight)==26*16);
+    static_assert(offsetof(UniformBufferObject,cameraUp)==27*16);
 
     // Per-instance transforms uploaded to the instance storage buffer. The
     // host computes them with the same matrix helpers as the single-model
     // path, so one instance reproduces the original values bit for bit.
-    struct InstanceGpuData {
-        std::array<float, 16> model{};
-        std::array<float, 16> modelViewProjection{};
-        std::array<std::array<float, 16>, kShadowCascadeCount>
-            cascadeLightModelViewProjection{};
-        std::array<std::uint32_t, 4> meta{};
-    };
-    static_assert(sizeof(InstanceGpuData) == 400);
+    using InstanceGpuData=SceneInstanceGpuData;
+    static_assert(sizeof(InstanceGpuData) == 496);
 
-    struct SkinningPushConstants {
-        std::uint32_t vertexCount = 0;
-        std::uint32_t jointBase = 0;
-        std::array<float, 2> morphWeights{};
-    };
-    static_assert(sizeof(SkinningPushConstants) == 16);
+    using SkinningPushConstants = SkinningBatch;
 
     // A scene-referenced asset beyond the hero. Renders at bind pose in the
     // current stage; its joints and material textures append after the hero
@@ -169,6 +435,7 @@ private:
         LoadedAsset asset;
         rhi::GpuBuffer vertexBuffer;
         rhi::GpuBuffer indexBuffer;
+        rhi::GpuBuffer vertexColorBuffer;
         std::vector<GpuMaterial> gpuMaterials;
         std::vector<rhi::GpuBuffer> skinnedVertexBuffers;
         std::uint32_t jointBase = 0;
@@ -197,9 +464,86 @@ private:
     std::vector<std::size_t> transparentIndexOffsets_;
     bool transparentDrawsPrepared_ = false;
     std::vector<std::vector<const AssetPrimitive*>> transparentPrimitivesByMesh_;
+    std::vector<TransparentTopology> transparentTopologies_;
+    std::unique_ptr<GpuTransparentIndexSort> gpuTransparentSort_;
+    std::array<std::optional<GpuTransparentIndexSort::Ticket>,kMaxFramesInFlight> gpuTransparentTickets_{};
+    std::vector<GpuTransparentSortInstance> gpuTransparentInstances_;
+    bool gpuTransparentAttempted_=false;
+    std::string gpuTransparentFallback_;
+    bool prepareGpuTransparentIndices(std::size_t,const internal::Vector3&);
+    struct ConservativeFrame {
+        std::unique_ptr<GpuConservativeOcclusion> commands;
+        std::unique_ptr<GpuPredicateDrawSelection> selection;
+        std::optional<GpuPredicateDrawSelection::Ticket> selectionTicket;
+        std::unique_ptr<DepthPyramidGpu> pyramid;
+        rhi::GpuBuffer source{};
+        std::optional<GpuConservativeOcclusion::Ticket> ticket;
+        std::uint32_t capacity=0,lastZeroCommands=0;
+        std::string failure;
+    };
+    std::array<ConservativeFrame,kMaxFramesInFlight> conservativeFrames_;
+    std::array<bool,kMaxFramesInFlight> mainDepthSplitRecorded_{};
+    std::vector<bool> conservativeMeshes_;
+    std::vector<std::size_t> conservativeOffsets_;
+    std::vector<std::uint32_t> conservativeSlots_;
+    std::vector<internal::Matrix4> conservativeClipMatrices_;
+    std::shared_ptr<const rhi::RenderPassDesc> mainPassDescription_;
+    std::unique_ptr<DepthPrepassSplit> mainDepthSplit_;
+    VkExtent2D conservativeExtent_{};
+    bool conservativeAllowed_=false;
+    std::string conservativeFallback_;
+    void prepareConservativeOcclusion();
+    void prepareRadianceSelection();
+    bool radianceSelectionActive(const RenderContext&) const;
+    static bool radianceSelectionMaterial(const AssetMaterial&) noexcept;
+    void recordRadianceSelection(rhi::ICommandRecorder&,const RenderContext&);
+    std::string radianceSelectionFallback_;
+    VkRenderPass radianceValidationPass_=VK_NULL_HANDLE;
+    VkPipeline radianceCommitPipeline_=VK_NULL_HANDLE;
+    VkPipeline radianceDepthCopyPipeline_=VK_NULL_HANDLE;
+    VkRenderPass radianceDepthCopyPass_=VK_NULL_HANDLE;
+    std::array<GpuTexture,kMaxFramesInFlight> radianceValidationDepth_{};
+    void recordRadianceDepthCopy(rhi::ICommandRecorder&,const RenderContext&);
+    std::array<VkFramebuffer,kMaxFramesInFlight> radianceValidationFrames_{};
+    std::array<VkImageView,kMaxFramesInFlight> radianceValidationViews_{};
+    rhi::RenderPassBeginDesc radianceValidationDescription(const RenderContext&);
+
+
+    void destroyConservativeOcclusion();
+    bool mainDepthSplitActive(const RenderContext&) const;
+    rhi::RenderPassBeginDesc conservativeDepthPass(const RenderContext&) const;
+    void recordConservativeHierarchy(rhi::ICommandRecorder&,const RenderContext&);
+    void recordConservativeOcclusion(const RenderContext&,const SceneInstanceSnapshot&);
+    RecordingWorkerPool* preparationWorkers_=nullptr;
+    bool surfaceRadianceCapable_=false;
+    std::unique_ptr<SurfaceRadianceCache> surfaceRadiance_;
+    bool shadowHistoryCapable_=false,shadowHistoryRecorded_=false;
+    std::unique_ptr<ShadowHistoryCache> shadowHistory_;
+    std::array<rhi::GpuBuffer,kMaxFramesInFlight> shadowHistoryInputs_{};
+    std::array<bool,kMaxFramesInFlight> shadowHistoryStatisticsValid_{};
+    std::optional<ShadowHistoryCache::Ticket> shadowHistoryClear_;
+    ShadowHistoryViewIdentity shadowHistoryView_;
+    std::optional<unsigned> shadowHistorySubmittedSlot_;
+    std::uint64_t shadowHistorySubmission_=0,shadowHistoryEligible_=0,shadowHistoryRequests_=0,shadowHistoryHits_=0;
+    struct ShadowHistoryCaster {scene::AxisAlignedBounds bounds{};bool dynamic=false;};
+    std::vector<ShadowHistoryCaster> shadowHistoryCasters_;
+    void initializeShadowHistory(const RenderContext&);
+    void destroyShadowHistory()noexcept;
+    void prepareShadowHistory();
+    void recordShadowHistoryReady(rhi::ICommandRecorder&,unsigned);
+    void recordShadowHistoryReadback(rhi::ICommandRecorder&,unsigned);
+    void writeShadowHistoryDescriptors(VkDescriptorSet,unsigned);
+    void commitShadowHistory(std::uint64_t)noexcept;
+    void cancelShadowHistory()noexcept;
+    TransparentTopologyWorkspace transparencyScratch_;
     std::shared_ptr<const SceneInstanceSnapshot> instanceSnapshot_;
+    std::shared_ptr<const MaterialOriginInstances> materialOriginInstances_;
+    std::vector<std::vector<std::uint32_t>> materialOriginNodes_;
+    std::uint32_t materialOriginFirstInstance(const AssetMaterial& material,
+        const SceneInstanceSnapshot* snapshot,std::uint32_t first,std::uint32_t count) const;
     void prepareTransparentIndices();
     bool gpuCullingEnabled_ = false;
+    bool visibilityPrototype_ = false;
     bool multiDrawIndirect_ = false;
     std::uint32_t maxDrawIndirectCount_ = 1;
     // Non-owning per-frame submission counters, refreshed from RenderContext at
@@ -207,11 +551,22 @@ private:
     // Engine-owned shadow map sampled by the material descriptor sets.
     VkImageView shadowImageView_ = VK_NULL_HANDLE;
     VkSampler shadowSampler_ = VK_NULL_HANDLE;
+    std::array<std::unique_ptr<ShadowTileBounds>,kMaxFramesInFlight> shadowBounds_;
+    std::unique_ptr<ObjectShadowAtlas> objectShadowAtlas_;
+    std::array<VkImageView,kMaxFramesInFlight> objectShadowBoundViews_{};
+    std::array<bool,kMaxFramesInFlight> referenceMaterialVisibilityBound_{};
+    bool objectShadowPrepared_=false;
+    unsigned objectShadowMaxDimension_=0;
+    std::vector<ObjectShadowPage> objectShadowPages_;
 
     LoadedAsset asset_;
+    std::vector<JointBounds> jointBounds_;
     std::optional<std::uint32_t> faceSdfHeadNode_;
     // Scene content snapshot from onLoad; nodes drive instance building.
     scene::SceneDescription scene_;
+    scene::SceneTransformCache sceneTransforms_;
+    std::unordered_map<std::string,std::size_t> loadedResourceMeshKeys_;
+    bool sceneWorldCoordinates_ = false;
     std::vector<std::unique_ptr<AdditionalResource>> additionalResources_;
     // Normalized bind-pose head basis. Imported joint axes are not guaranteed
     // to match the model's semantic left/up/forward axes, so runtime lighting
@@ -223,8 +578,25 @@ private:
     };
     rhi::GpuBuffer vertexBuffer_;
     rhi::GpuBuffer indexBuffer_;
+    rhi::GpuBuffer vertexColorBuffer_,whiteVertexColorBuffer_;
     std::vector<GpuMaterial> gpuMaterials_;
+    std::unique_ptr<SampledTextureCache> materialTextureCache_;
+    std::unique_ptr<ImmutableBytePool> materialPixelPool_;
+    std::unique_ptr<OutlineProjectionResources> outlineProjection_;
+    bool outlineProjectionEnabled_=false;
     GpuTexture environmentTexture_;
+    std::unique_ptr<EnvironmentCubeTexture> reflectionProbeTexture_;
+    std::unique_ptr<OctahedralEnvironmentGpu> probeFieldTexture_;
+    rhi::GpuBuffer probeFieldBuffer_;
+    bool probeFieldActive_=false;
+    IrradianceVolume irradianceVolume_;
+    struct ViewFogState;
+    std::unique_ptr<ViewFogState> viewFog_;
+    std::unique_ptr<IrradianceClipmapGpu> irradianceClipmap_;
+    bool irradianceClipmapActive_=false;
+    std::array<std::uint32_t,3> irradianceClipmapDimensions_{1,1,1};
+    rhi::GpuBuffer irradianceBuffer_;
+    VkDeviceSize irradianceBufferBudget_=0;
     GpuTexture toonRampTexture_;
     VkImageView environmentBaseMipView_ = VK_NULL_HANDLE;
     std::vector<VkImageView> environmentPrefilterViews_;
@@ -234,13 +606,19 @@ private:
     VkPipelineLayout iblPrefilterPipelineLayout_ = VK_NULL_HANDLE;
     VkPipeline iblPrefilterPipeline_ = VK_NULL_HANDLE;
     std::vector<rhi::GpuBuffer> uniformBuffers_;
+    // Immutable material table. Owned from load through retirement at unload.
+    rhi::GpuBuffer materialSurfaceProfiles_;
     std::vector<rhi::GpuBuffer> jointBuffers_;
+    rhi::GpuBuffer morphTargetBuffer_;
+    std::array<rhi::GpuBuffer,kMaxFramesInFlight> morphWeightBuffers_{};
+    std::vector<MorphGpuMesh> morphGpuMeshes_;
     std::vector<rhi::GpuBuffer> oitIndexBuffers_;
     std::vector<rhi::GpuBuffer> instanceBuffers_;
     std::vector<rhi::GpuBuffer> lightBuffers_;
     std::vector<rhi::GpuBuffer> clusterHeaderBuffers_;
     std::vector<rhi::GpuBuffer> clusterIndexBuffers_;
     LightBuffer frameLights_;
+    std::unique_ptr<ClusteredLightGrid> clusteredLightGrid_;
     std::vector<RenderLightGpu> packedLights_;
     std::vector<std::array<std::uint32_t, 2>> packedClusterHeaders_;
     std::vector<std::uint32_t> packedClusterIndices_;
@@ -248,24 +626,44 @@ private:
     std::uint32_t instanceCapacity_ = 0;
     std::uint32_t qaInstanceCount_ = 1;
     std::vector<rhi::GpuBuffer> skinnedVertexBuffers_;
+    struct SkinningOutputTicket {std::uint32_t slot=0;std::uint64_t generation=0;};
+    std::array<StaticSkinningOutputCache,kMaxFramesInFlight> staticSkinningOutputs_;
+    SkinningOutputTicket skinningOutputTicket_{};
+    std::mutex skinningRecordedMutex_;
+    std::vector<SkinningOutputTicket> recordedSkinningOutputs_;
+    void noteSkinningOutputRecorded(SkinningOutputTicket ticket);
+    void commitSkinningOutputs(std::uint64_t submission) noexcept;
+    void abandonSkinningOutputs() noexcept;
     VkDescriptorSetLayout skinningDescriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorPool skinningDescriptorPool_ = VK_NULL_HANDLE;
     VkPipelineLayout skinningPipelineLayout_ = VK_NULL_HANDLE;
     VkPipeline skinningPipeline_ = VK_NULL_HANDLE;
     std::vector<VkDescriptorSet> skinningDescriptorSets_;
     std::uint32_t meshResourceCount_ = 0;
+    std::uint32_t shadowCascadeResolution_ = 1024;
     std::size_t oitIndexBufferSize_ = 0;
     VkDescriptorSetLayout descriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;
     std::vector<VkDescriptorSet> descriptorSets_;
     VkPipelineLayout pipelineLayout_ = VK_NULL_HANDLE;
-    VkPipeline opaquePipeline_ = VK_NULL_HANDLE;
-    VkPipeline opaqueDoubleSidedPipeline_ = VK_NULL_HANDLE;
-    VkPipeline blendPipeline_ = VK_NULL_HANDLE;
-    VkPipeline blendDoubleSidedPipeline_ = VK_NULL_HANDLE;
+    std::array<VkPipeline,4> opaquePipelines_{};
+    std::array<VkPipeline,4> blendPipelines_{};
+    std::array<VkPipeline,4> vertexColorBlendPipelines_{};
+    std::array<VkPipeline,4> additiveBlendPipelines_{},vertexColorAdditiveBlendPipelines_{};
+    std::array<std::array<VkPipeline,4>,2> surfaceOverlayPipelines_{},surfaceOverlaySnapshotPipelines_{};
+    std::array<VkPipeline,4> multiplyPipelines_{};
+    std::array<VkPipeline,2> sceneTintPipelines_{};
     VkPipeline outlinePipeline_ = VK_NULL_HANDLE;
+    VkPipeline outlineDepthPipeline_=VK_NULL_HANDLE;
+    VkPipeline outlineDepthMirroredPipeline_=VK_NULL_HANDLE;
+    VkPipeline outlineMirroredPipeline_ = VK_NULL_HANDLE;
     VkPipeline backgroundPipeline_ = VK_NULL_HANDLE;
     VkPipeline shadowPipeline_ = VK_NULL_HANDLE;
+    VkPipeline shadowDepthOnlyPipeline_ = VK_NULL_HANDLE;
+    VkPipeline objectShadowDepthOnlyPipeline_ = VK_NULL_HANDLE;
+    VkPipeline shadowCoveragePipeline_ = VK_NULL_HANDLE;
+    VkPipeline objectShadowCoveragePipeline_ = VK_NULL_HANDLE;
+    VkPipeline objectShadowPipeline_ = VK_NULL_HANDLE;
 
     // Per-frame state.
     std::size_t currentFrame_ = 0;
@@ -289,6 +687,7 @@ private:
     // compose per-instance matrices with identical operation order.
     std::array<float, 16> viewMatrix_{};
     std::array<float, 16> projectionMatrix_{};
+    std::array<float, 16> samplingProjectionMatrix_{};
     std::array<std::array<float, 16>, kShadowCascadeCount>
         cascadeLightViewProjections_{};
     std::array<float, kShadowCascadeCount> cascadeSplits_{};
@@ -300,6 +699,27 @@ private:
     // the visible list.
     std::vector<scene::SceneInstance> sceneInstances_;
     std::vector<const scene::SceneInstance*> visibleInstances_;
+    struct InstancePose {
+        std::shared_ptr<const AssetPose> pose;
+        std::uint32_t meshKey = 0, jointBase = 0, vertexBase = 0;
+        std::array<float, 2> morph{};
+        std::uint32_t morphWeightBase=0;
+    };
+    std::vector<InstancePose> instancePoses_;
+    // Loaded bind poses are shared immutable inputs. Animated or edited poses
+    // own separate values, while every instance retains its model and GPU slice.
+    std::vector<std::shared_ptr<const AssetPose>> loadedBindPoses_;
+    std::vector<PreparedAssetAnimations> loadedAnimations_;
+    std::size_t bindPoseCachedCopies_ = 0, bindPoseSharedInstances_ = 0;
+    struct SkinningDispatch { std::uint32_t meshKey; SkinningPushConstants parameters; };
+    std::vector<SkinningDispatch> skinningDispatches_;
+    std::vector<NodeAnimationFrame> animationFrames_;
+    std::uint32_t jointCapacity_ = 0, vertexCapacity_ = 0;
+    void ensureInstanceCapacity();
+    internal::Vector3 frameCharacterLight_{0,1,0};
+    void prepareInstancePoses();
+    std::array<float,4> instanceFaceLight(const LoadedAsset& mesh, const AssetPose& pose, const internal::Matrix4& model) const;
+    internal::Matrix4 instanceFaceFrame(const LoadedAsset& mesh,const AssetPose& pose,const internal::Matrix4& model) const;
     // Per-resource visible span: (meshKey, firstSlot, count) in the
     // instance buffer's visible order.
     std::vector<std::array<std::uint32_t, 3>> visibleSpansByMeshKey_;
@@ -313,7 +733,7 @@ private:
     // Resource creation.
     void createVertexBuffer();
     void createIndexBuffer();
-    void createTexture();
+    void createTexture(bool uploadMaterials=true);
     void createEnvironmentPrefilter();
     void createAdditionalResources();
     void createComputeSkinningResources();
@@ -321,7 +741,7 @@ private:
     void recordComputeSkinningMesh(
         const RenderContext& context,
         std::uint32_t meshKey, rhi::ICommandRecorder* recorder = nullptr,
-        const std::array<float, 2>* morphWeights = nullptr);
+        const std::vector<SkinningDispatch>* dispatches = nullptr);
     [[nodiscard]] const rhi::GpuBuffer& renderVertexBuffer(
         std::uint32_t meshKey,
         std::uint32_t frameIndex) const;
@@ -330,7 +750,7 @@ private:
     void createMeshBuffers(
         LoadedAsset& asset,
         rhi::GpuBuffer& vertexBuffer,
-        rhi::GpuBuffer& indexBuffer);
+        rhi::GpuBuffer& indexBuffer,rhi::GpuBuffer& vertexColorBuffer);
     template <typename Pixels>
     void uploadTextureData(
         const Pixels& pixels,
@@ -339,11 +759,11 @@ private:
         VkFormat format,
         bool clampVertical,
         GpuTexture& texture,
-        std::uint32_t mipLevels = 1);
+        std::uint32_t mipLevels = 1,TextureFilterSemantic semantic=TextureFilterSemantic::Linear,float alphaCutoff=0,const TextureImportSettings* importSettings=nullptr);
     void uploadMaterialTextures(
-        const LoadedAsset& asset,
+        LoadedAsset& asset,
         std::vector<GpuMaterial>& gpuMaterials);
-    void createUniformBuffers();
+    void createUniformBuffers(bool referenceObjectRaster,float maximumSamplerLodBias);
     void createJointBuffers();
     void createOitIndexBuffers();
     void createDescriptorSetLayout();
@@ -368,10 +788,13 @@ private:
         std::uint32_t height);
     void rebuildSceneInstances();
     void recordShadowPass(const RenderContext& context);
+    void prepareObjectShadows();
+    void recordObjectShadows(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands);
     void recordShadowDraws(const RenderContext& context,
         std::uint32_t firstCascade = 0, std::uint32_t cascadeCount = kShadowCascadeCount,
         const SceneInstanceSnapshot* snapshot = nullptr,
-        rhi::ICommandRecorder* recordingCommands = nullptr);
+        rhi::ICommandRecorder* recordingCommands = nullptr,
+        const ObjectShadowPage* objectPage = nullptr);
     void recordMainPass(const RenderContext& context);
     void recordMainDraws(const RenderContext& context, std::uint32_t stage = 0,
         const SceneInstanceSnapshot* snapshot = nullptr,
@@ -388,7 +811,7 @@ private:
         std::uint32_t textureBase = 0,
         std::size_t globalMaterialBase = 0,
         SceneSubmissionCounters* counters = nullptr,
-        const SceneInstanceSnapshot* snapshot = nullptr);
+        const SceneInstanceSnapshot* snapshot = nullptr, bool snapshotSurfaceOverlay=false,bool allowConservative=false);
     void buildSceneState();
     void destroyGraphicsPipelinesForRecreate();
 };

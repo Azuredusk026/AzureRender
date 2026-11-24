@@ -1,0 +1,264 @@
+{
+  "status": "measured-repeat-isolations",
+  "hypothesis": "Projected reflection history or edge resolve amplifies a subpixel input difference.",
+  "programSha256": "936406a81fbf658dcd751c34b0fcf5249c93414024a2d1c0571af4edb5e6991a",
+  "sourceManifestSha256": "3336916dc7e159a270fce2f1f4abb48c5f626fd1821f18b9c92425a7d382bab9",
+  "projects": [
+    {
+      "mode": "default",
+      "levelSha256": "c87998cdd9598f9335b9db454c1a6a609a0d8dba4031eaaef95d0ca3cd2d1b4f",
+      "antiAliasing": 1,
+      "screenSpaceReflection": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "maxDistance": 32,
+        "thickness": 0.15,
+        "normalBias": 0.03,
+        "maxSteps": 128,
+        "maxRoughness": 0.7,
+        "edgeFade": 0.08,
+        "strength": 1
+      }
+    },
+    {
+      "mode": "no-ssr",
+      "levelSha256": "0df2e555d25606898aa2a931edb8f9256c272367fe70b25f6ab35a8b04a8e20b",
+      "antiAliasing": 1,
+      "screenSpaceReflection": {
+        "schemaVersion": 1,
+        "enabled": false,
+        "maxDistance": 32,
+        "thickness": 0.15,
+        "normalBias": 0.03,
+        "maxSteps": 128,
+        "maxRoughness": 0.7,
+        "edgeFade": 0.08,
+        "strength": 1
+      }
+    },
+    {
+      "mode": "aa-off",
+      "levelSha256": "f5d6be115ea6d3e57c3910d7d3203cb2110eef129ebd62d24742617f4aca6586",
+      "antiAliasing": 0,
+      "screenSpaceReflection": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "maxDistance": 32,
+        "thickness": 0.15,
+        "normalBias": 0.03,
+        "maxSteps": 128,
+        "maxRoughness": 0.7,
+        "edgeFade": 0.08,
+        "strength": 1
+      }
+    }
+  ],
+  "cases": [
+    {
+      "name": "default-a",
+      "status": "captured",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\projects\\default\\full-world-hidden.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "12",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\default-a\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\default-a\\runtime.json"
+      ],
+      "exitCode": 0,
+      "seconds": 242.94887969999763
+    },
+    {
+      "name": "default-b",
+      "status": "captured",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\projects\\default\\full-world-hidden.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "12",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\default-b\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\default-b\\runtime.json"
+      ],
+      "exitCode": 0,
+      "seconds": 205.31810860000041
+    },
+    {
+      "name": "no-ssr-a",
+      "status": "captured",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\projects\\no-ssr\\full-world-hidden.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "12",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\no-ssr-a\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\no-ssr-a\\runtime.json"
+      ],
+      "exitCode": 0,
+      "seconds": 252.7322071999988
+    },
+    {
+      "name": "no-ssr-b",
+      "status": "captured",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\projects\\no-ssr\\full-world-hidden.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "12",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\no-ssr-b\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\no-ssr-b\\runtime.json"
+      ],
+      "exitCode": 0,
+      "seconds": 199.56146929999886
+    },
+    {
+      "name": "aa-off-a",
+      "status": "captured",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\projects\\aa-off\\full-world-hidden.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "12",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\aa-off-a\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\aa-off-a\\runtime.json"
+      ],
+      "exitCode": 0,
+      "seconds": 237.89620309999736
+    },
+    {
+      "name": "aa-off-b",
+      "status": "captured",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\projects\\aa-off\\full-world-hidden.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "12",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\aa-off-b\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\repeat-isolations\\aa-off-b\\runtime.json"
+      ],
+      "exitCode": 0,
+      "seconds": 199.71331739999732
+    }
+  ],
+  "comparisons": [
+    {
+      "mode": "default",
+      "differentFrames": [],
+      "exact": true
+    },
+    {
+      "mode": "no-ssr",
+      "differentFrames": [
+        {
+          "frame": 3,
+          "pixels": 15,
+          "maximumByteError": 6
+        },
+        {
+          "frame": 4,
+          "pixels": 17,
+          "maximumByteError": 1
+        },
+        {
+          "frame": 9,
+          "pixels": 12,
+          "maximumByteError": 5
+        },
+        {
+          "frame": 10,
+          "pixels": 13,
+          "maximumByteError": 1
+        }
+      ],
+      "exact": false
+    },
+    {
+      "mode": "aa-off",
+      "differentFrames": [],
+      "exact": true
+    }
+  ]
+}

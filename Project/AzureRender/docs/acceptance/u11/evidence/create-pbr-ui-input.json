@@ -1,0 +1,1 @@
+[{"frame": 25, "action": "click", "target": "assets.import-create"}, {"frame": 32, "action": "click", "target": "assets.create-material"}, {"frame": 40, "action": "click", "target": "material.create.azure.pbr"}, {"frame": 50, "action": "click", "target": "material.field.metallic", "offset": [-90, 0]}]

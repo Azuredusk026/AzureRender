@@ -1,0 +1,7 @@
+Project created: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\release-gate\player-runtime\project
+Project loaded: project (b59729b3-4bb3-4284-bb10-135d52694d6f)
+Project validation passed
+Installed Player sample: 30 frames passed
+Installed Player character: 30 frames passed
+Installed Player blackhole: 30 frames passed
+Isolated Player project and runtime check passed

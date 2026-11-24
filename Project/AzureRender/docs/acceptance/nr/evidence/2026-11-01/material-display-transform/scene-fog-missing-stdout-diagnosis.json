@@ -1,0 +1,12 @@
+{
+  "status": "structured-unload-proven",
+  "stdoutMissing": true,
+  "structuredAllocator": {
+    "timestamp_ms": 1793487556922,
+    "level": "print",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Allocator after unload: buffers=0 images=0"
+  },
+  "source": "captures/azureplayer.log.jsonl"
+}

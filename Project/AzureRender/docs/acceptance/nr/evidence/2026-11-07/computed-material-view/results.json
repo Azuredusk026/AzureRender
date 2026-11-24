@@ -1,0 +1,483 @@
+{
+  "schemaVersion": 1,
+  "status": "isolated-native-zero-pixel-failure",
+  "sourceBase": "acf9826",
+  "qualification": {
+    "kind": "ComputedSceneViewAndSafeEarlyTests",
+    "sourceBase": "9979c70",
+    "captureSourceBase": "35cc28f GPU program bytes unchanged",
+    "matchedBaselineMs": 8.317216,
+    "matchedCandidateMs": 6.647663999999998,
+    "matchedReduction": 0.20073447653637977,
+    "affectedGpuFraction": 0.5049560541183233,
+    "expectedNativeSavedMs": 3.756492000000005,
+    "expectationScope": "720p matched pixel-work savings scaled by 2.25 for equal-view 1080p; bandwidth, scheduling and native whole-frame gain remain unverified.",
+    "qualified": true,
+    "dynamicFallbackAllTargetsIdentical": true,
+    "optimizedDisplayIdentical": true,
+    "optimizedAllIntermediateTargetsIdentical": false,
+    "scope": "The existing capture selected expensive events before these controls. Full API classification separately covers all 3394 leaf draws. Fixed-view constants and main-lighting early tests are paired; all four newly early-tested draws were checked for opaque opacity 1 or blend mode."
+  },
+  "candidateImage": {
+    "sceneTransformCache": {
+      "sceneTransformCachedNodes": 1679,
+      "sceneTransformReusedWorld": 1679,
+      "sceneTransformLocalEvaluations": 0,
+      "sceneTransformFallback": false
+    },
+    "status": "failed",
+    "sourceBase": "acf9826-with-computed-material-view",
+    "executableSha256": "823d9fd6457005f0a2d8656e3bb3659d7c73fdcf3f6794e8fad365680789197e",
+    "exitCode": 0,
+    "seconds": 365.9060000000027,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "890a5b54fea14d2c87c66eb9c6ca731b322235af139692bdab7a35ffad764e3c",
+        "frozen": {
+          "identical": false,
+          "changedPixels": 4,
+          "maxByteDifference": 1
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 4,
+          "maxByteDifference": 1
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "5fd1c979fde5581ae5b58ee39ba05ff6add04167b199c41bb83c0f98de431646",
+        "frozen": {
+          "identical": false,
+          "changedPixels": 7,
+          "maxByteDifference": 1
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 7,
+          "maxByteDifference": 1
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "e17c42115e43900b18334ea0d537aa8f07f571d174fcf02d1bffcba79ed9e1bf",
+        "frozen": {
+          "identical": false,
+          "changedPixels": 12,
+          "maxByteDifference": 1
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 12,
+          "maxByteDifference": 1
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "b2bb05fb6f5177fe265df095a16e289e7104bdc82c3bb2c70b4ecd64c8a14db6",
+        "frozen": {
+          "identical": false,
+          "changedPixels": 16,
+          "maxByteDifference": 6
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 30,
+          "maxByteDifference": 6
+        }
+      }
+    ],
+    "programSetAndExpectedChangesVerified": true,
+    "changedProgramCount": 516,
+    "computedMaterialViewActive": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Strict computed-view specialization and main-color early depth; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "dynamicSelectionOffControl": {
+    "sceneTransformCache": {
+      "sceneTransformCachedNodes": 1679,
+      "sceneTransformReusedWorld": 1679,
+      "sceneTransformLocalEvaluations": 0,
+      "sceneTransformFallback": false
+    },
+    "status": "passed",
+    "sourceBase": "acf9826-with-computed-material-view",
+    "executableSha256": "f1a5a2486caddaeea0e5bb7531c60f88b2e446f2664e8d84736ac733719f2428",
+    "exitCode": 0,
+    "seconds": 108.36000000000058,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "programSetAndExpectedChangesVerified": true,
+    "changedProgramCount": 516,
+    "computedMaterialViewActive": false,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Root-cause control: computed-view pipeline selection forced off, original uniform inputs and early-depth paths retained; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "diagnosis": "With unchanged original uniform inputs and retained early-depth changes, forcing specialized pipeline selection off restores all four frozen RGB images. Selection is a demonstrated cause of this compatibility failure; the exact floating-point transformation remains unconfirmed.",
+  "startup": {
+    "candidate": {
+      "totalSeconds": 365.9060000000027,
+      "pipelineCreationMilliseconds": 258236.1159
+    },
+    "dynamicControl": {
+      "totalSeconds": 108.36000000000058,
+      "pipelineCreationMilliseconds": 258.2034
+    }
+  },
+  "baseline": {
+    "status": "measured",
+    "sourceBase": "acf9826",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 130.54699999999866,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.4854536,
+        "p95": 2.5301248000000003,
+        "p99": 2.55812736
+      },
+      "sceneMs": {
+        "mean": 18.582161066666668,
+        "p95": 19.205887999999998,
+        "p99": 19.333754879999997
+      },
+      "postProcessMs": {
+        "mean": 0.27971413333333334,
+        "p95": 0.284672,
+        "p99": 0.28735488
+      },
+      "frameMs": {
+        "mean": 21.3473288,
+        "p95": 21.937648,
+        "p99": 22.01421568
+      }
+    },
+    "cpu": {
+      "mean": 6.899634999999979,
+      "p95": 7.974389999998703,
+      "p99": 10.80038899999966
+    },
+    "wait": {
+      "mean": 14.38519500000002,
+      "p95": 15.362284999999247,
+      "p99": 15.925078000000168
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 5,
+      "waitMilliseconds": 26.2708
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7403798528,
+    "environmentFailures": [
+      "run observation 23: driver relative thermal headroom is insufficient"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "diagnosticOnly": true,
+    "formalSampleCountSatisfied": false,
+    "allMountedProjectBytesUnchanged": true,
+    "powerAcceptanceUnchanged": true,
+    "powerDeviationIsFailure": true,
+    "timingBudgetPassed": false,
+    "powerProfileStable": false,
+    "environmentPassed": false,
+    "executableSha256": "99130ce546ed398cbb61b9bd20bc701d899556be9b6ef8b3bfba6262e8a3025f",
+    "pairRole": "baseline",
+    "instrumented": false
+  },
+  "candidatePerformanceRun": false,
+  "publicGpuFixtureBatchRun": false,
+  "formalPerformanceRun": false,
+  "restoration": {
+    "status": "restored",
+    "allSourceInputsIdentical": true,
+    "configurations": {
+      "Release": {
+        "programCount": 663,
+        "allProgramsByteIdentical": true,
+        "checksPassed": 13,
+        "playerCodeSha256": "715086431ab6bd2d9e2f21d278971f79ff779ee4261e575b03991d6f0f402500"
+      },
+      "Debug": {
+        "programCount": 663,
+        "allProgramsByteIdentical": true,
+        "checksPassed": 13,
+        "playerCodeSha256": "0f04d63bfd4f86aa3e6d65a54cbce65802841c2467beff58db111def3e3a2a79"
+      }
+    },
+    "releasePlayerCodeIdentical": true
+  },
+  "originalCandidateChecks": [
+    {
+      "kind": "build",
+      "exitCode": 0,
+      "seconds": 16.639999999999418,
+      "command": [
+        "cmd",
+        "/d",
+        "/c",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--test-target",
+        "AzureMaterialClassEarlyDepthTests",
+        "--test-target",
+        "AzureComputedMaterialViewRecordingTests",
+        "--test-target",
+        "AzureDepthPrefillRecordingTests",
+        "--test-target",
+        "AzureMaterialPipelinePolicyTests",
+        "--test-target",
+        "AzurePreviousTransformSnapshotTests",
+        "--test-target",
+        "AzureSceneTransformCacheTests",
+        "--test-target",
+        "AzureCameraSystemTests",
+        "--test-target",
+        "AzureRuntimeSceneSnapshotCacheTests",
+        "--test-target",
+        "AzureRuntimeRenderSnapshotCacheTests",
+        "--test-target",
+        "AzureRuntimeLifecycleTests",
+        "--test-target",
+        "AzureRenderSceneGraphTests",
+        "--test-target",
+        "AzureRenderNullRhiPassTests",
+        "--test-target",
+        "AzureObjectShadowRecordingTests",
+        "--test-target",
+        "AzurePhysicsInputTests"
+      ]
+    },
+    {
+      "kind": "checks",
+      "exitCode": 0,
+      "seconds": 6.203000000001339,
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^(AzureEngine\\.(PreviousTransformSnapshot|RuntimeSceneSnapshotCache|RuntimeRenderSnapshotCache|RuntimeLifecycle|PhysicsInput)|AzureRender\\.(MaterialClassEarlyDepth|ComputedMaterialViewRecording|DepthPrefillRecording|MaterialPipelinePolicy|SceneTransformCache|SceneGraph|NullRhiPass|ObjectShadowRecording)|AzureRuntime\\.CameraSystem)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-113035-computed-material-view-490b2c\\release-checks.xml"
+      ]
+    }
+  ],
+  "originalCandidateDebugChecks": [
+    {
+      "kind": "build",
+      "exitCode": 0,
+      "seconds": 274.125,
+      "command": [
+        "cmd",
+        "/d",
+        "/c",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "--config",
+        "Debug",
+        "--test-target",
+        "AzureMaterialClassEarlyDepthTests",
+        "--test-target",
+        "AzureComputedMaterialViewRecordingTests",
+        "--test-target",
+        "AzureDepthPrefillRecordingTests",
+        "--test-target",
+        "AzureMaterialPipelinePolicyTests",
+        "--test-target",
+        "AzurePreviousTransformSnapshotTests",
+        "--test-target",
+        "AzureSceneTransformCacheTests",
+        "--test-target",
+        "AzureCameraSystemTests",
+        "--test-target",
+        "AzureRuntimeSceneSnapshotCacheTests",
+        "--test-target",
+        "AzureRuntimeRenderSnapshotCacheTests",
+        "--test-target",
+        "AzureRuntimeLifecycleTests",
+        "--test-target",
+        "AzureRenderSceneGraphTests",
+        "--test-target",
+        "AzureRenderNullRhiPassTests",
+        "--test-target",
+        "AzureObjectShadowRecordingTests",
+        "--test-target",
+        "AzurePhysicsInputTests"
+      ]
+    },
+    {
+      "kind": "checks",
+      "exitCode": 0,
+      "seconds": 35.48399999999674,
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "-R",
+        "^(AzureEngine\\.(PreviousTransformSnapshot|RuntimeSceneSnapshotCache|RuntimeRenderSnapshotCache|RuntimeLifecycle|PhysicsInput)|AzureRender\\.(MaterialClassEarlyDepth|ComputedMaterialViewRecording|DepthPrefillRecording|MaterialPipelinePolicy|SceneTransformCache|SceneGraph|NullRhiPass|ObjectShadowRecording)|AzureRuntime\\.CameraSystem)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-113035-computed-material-view-490b2c\\debug-checks.xml"
+      ]
+    }
+  ],
+  "restoreChecks": [
+    {
+      "configuration": "Release",
+      "kind": "configure",
+      "exitCode": 0,
+      "seconds": 15.468999999997322
+    },
+    {
+      "configuration": "Release",
+      "kind": "build",
+      "exitCode": 0,
+      "seconds": 74.23400000000402
+    },
+    {
+      "configuration": "Release",
+      "kind": "checks",
+      "exitCode": 0,
+      "seconds": 14.843999999997322
+    },
+    {
+      "configuration": "Debug",
+      "kind": "configure",
+      "exitCode": 0,
+      "seconds": 15.921999999998661
+    },
+    {
+      "configuration": "Debug",
+      "kind": "build",
+      "exitCode": 0,
+      "seconds": 66.07800000000134
+    },
+    {
+      "configuration": "Debug",
+      "kind": "checks",
+      "exitCode": 0,
+      "seconds": 27.85899999999674
+    }
+  ],
+  "required": {
+    "nativeRgbChangedPixels": 0,
+    "cpuP95Ms": 8,
+    "gpuP95Ms": 16.6,
+    "formalSamples": 1800,
+    "overallVisualAccepted": false
+  },
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 1480002,
+    "sha256": "03b2e8779898b8d79017a861ec7032e12fc72f2c522c9ece8f2853e0e852e3f0"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "status": "no-current-input-work-reduction",
+  "sourceHead": "f786777",
+  "captureSourceHead": "274615b",
+  "capturedMaterialPrograms": 10,
+  "allProgramsSceneLightingEnabled": true,
+  "allProgramsDirectionalLightOwned": true,
+  "extendedLightingDraws": 14,
+  "objectMainShadowDraws": 0,
+  "extendedLightingMs": 2.1217279999999996,
+  "wholeCapturedMs": 14.672223999999952,
+  "expectedSkippedReceiverWork": 0,
+  "nativeRuns": 0,
+  "sourceAndProductsVerifiedConfigurations": [
+    "release",
+    "debug"
+  ],
+  "protectedFilesVerified": 13,
+  "entryFailure": "RenderDoc embedded execution does not populate __file__; fixed absolute task path entered and completed",
+  "childArchives": [
+    {
+      "name": "intel-depth-alpha-footprint",
+      "archive": {
+        "members": 115,
+        "bytes": 1513708,
+        "sha256": "e58296a85c0e1db71af9b0392273bde09fb67543008905ff381c0d3e58ef2267"
+      },
+      "files": [
+        "run/analyze.py",
+        "run/archive.py",
+        "run/attribute-build-commands.json",
+        "run/attribute-build.log",
+        "run/attribute-execution.json"
+      ],
+      "individuallyVerifiedMembers": 114
+    },
+    {
+      "name": "actual-vertex-clip-readback",
+      "archive": {
+        "members": 52,
+        "bytes": 1879833,
+        "sha256": "a889e17eb86e0792f48019f3593a92620318f12d7c201fb961b029dfe0049b27"
+      },
+      "files": [
+        "inputs/native-indices.bin",
+        "inputs/native-positions.bin",
+        "inputs/native-profile.bin",
+        "inputs/native-uv.bin",
+        "inputs/queries.bin"
+      ],
+      "individuallyVerifiedMembers": 51
+    }
+  ],
+  "archive": {
+    "members": 21,
+    "bytes": 22835,
+    "sha256": "bcdcabd1274cfe205eaf177179afe910d9fd88a201d08fba4cc47b50b2614e6a"
+  }
+}

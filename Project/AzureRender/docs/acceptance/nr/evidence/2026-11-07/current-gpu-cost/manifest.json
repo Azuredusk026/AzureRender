@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "sourceBase": "35cc28f",
+  "status": "diagnosed-candidate-deferred",
+  "capture": {
+    "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-061745-current-gpu-cost-2de6bc\\current_frame320.rdc",
+    "bytes": 2116148716,
+    "sha256": "9079f51daf9e3d39a3de717a64f226080a86e013d379ea2e5a7eedcbf47ee103"
+  },
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 3163134,
+    "sha256": "d355237fd764c9d76e8fe0780c892c0af4b0cf75686f1378a35ba04bc395b9c7"
+  },
+  "results": {
+    "file": "results.json",
+    "sha256": "2ff41c4e810043922b567d03b11958eb28372f7b041d7e90f0a2c45bf3500a7a"
+  },
+  "productionUnchanged": true,
+  "formalAcceptance": false
+}

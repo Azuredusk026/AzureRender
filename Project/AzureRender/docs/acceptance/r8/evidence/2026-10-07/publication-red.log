@@ -1,0 +1,29 @@
+...FF..F...
+======================================================================
+FAIL: test_metadata_install_failure_restores_binary_and_metadata (__main__.ShaderModuleTests.test_metadata_install_failure_restores_binary_and_metadata) (existing=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_shader_module.py", line 151, in test_metadata_install_failure_restores_binary_and_metadata
+    self.assertEqual(path.read_bytes() if path.exists() else None,previous,
+AssertionError: b'\x03\x02#\x07\x00\x03\x01\x00\x00\x00(\[3420 chars]\x00' != None : A failed publication must restore both prior artifacts
+
+======================================================================
+FAIL: test_metadata_install_failure_restores_binary_and_metadata (__main__.ShaderModuleTests.test_metadata_install_failure_restores_binary_and_metadata) (existing=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_shader_module.py", line 151, in test_metadata_install_failure_restores_binary_and_metadata
+    self.assertEqual(path.read_bytes() if path.exists() else None,previous,
+AssertionError: b'\x0[2268 chars]x00\x80@+\x00\x04\x00\x0b\x00\x00\x00\x1c\x00\[1142 chars]\x00' != b'\x0[2268 chars]x00\x00@+\x00\x04\x00\x0b\x00\x00\x00\x1c\x00\[1142 chars]\x00' : A failed publication must restore both prior artifacts
+
+======================================================================
+FAIL: test_output_must_preserve_all_input_files (__main__.ShaderModuleTests.test_output_must_preserve_all_input_files) (name='main.slang')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_shader_module.py", line 161, in test_output_must_preserve_all_input_files
+    self.assertNotEqual(result.returncode,0,'Input aliases must be rejected before publication')
+AssertionError: 0 == 0 : Input aliases must be rejected before publication
+
+----------------------------------------------------------------------
+Ran 10 tests in 19.379s
+
+FAILED (failures=3)

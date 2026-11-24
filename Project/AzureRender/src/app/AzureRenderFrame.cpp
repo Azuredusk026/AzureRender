@@ -1,10 +1,22 @@
+#include "assets/AssetDeformation.hpp"
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include "render/CameraProjection.hpp"
+#if AZURE_WITH_EDITOR
 #include "editor/EditorCameraController.hpp"
+#include "editor/viewport/EditorCameraService.hpp"
+#endif
+#if AZURE_WITH_EDITOR
 #include "editor/EditorContext.hpp"
+#endif
+#if AZURE_WITH_EDITOR
 #include "editor/EditorSession.hpp"
+#endif
+#if AZURE_WITH_EDITOR
 #include "editor/ImGuiEditorLayer.hpp"
+#include "editor/ui/ViewportDesignTokens.hpp"
+#endif
 #include "extensions/ISceneRenderer.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "render/RenderContext.hpp"
@@ -30,33 +42,76 @@
 using namespace azurerender::internal;
 
 void AzureRenderApp::drawFrame() {
+    const auto frameStart = std::chrono::steady_clock::now();
+    const double previousWait=submissionCounters_.frameSlotWaitMilliseconds+submissionCounters_.acquireMilliseconds
+        +submissionCounters_.submitMilliseconds+submissionCounters_.presentMilliseconds;
+    ++gameplayFrame_;
+    if (runOptions_.gpuTimingEnabled) ++submissionCounters_.frameAttempts;
     vkCheck(
         vkWaitForFences(device_, 1, &inFlightFences_[currentFrame_], VK_TRUE, UINT64_MAX),
         "vkWaitForFences");
+    graphicsCompleted_=std::max(graphicsCompleted_,graphicsFrameSubmissions_[currentFrame_]);
+#if AZURE_WITH_EDITOR
+    pollDevtools();
+    if(editorLayer_)editorLayer_->completePreviewTextures(graphicsCompleted_);
+#endif
+    const auto fenceEnd = std::chrono::steady_clock::now();
+    if (runOptions_.gpuTimingEnabled)
+        submissionCounters_.frameSlotWaitMilliseconds += std::chrono::duration<double, std::milli>(fenceEnd - frameStart).count();
+    synchronizeEditorRuntime();
+    synchronizeGameUi();
+    engineSettings_->applyPending();effectiveRenderSettings_=azurerender::resolveRenderSettings(*engineSettings_,renderSettings_);
+    if(settingsRevision_!=engineSettings_->revision()) {
+        settingsRevision_=engineSettings_->revision();
+        if(engineSettings_->get("diagnostics.verbose").get<bool>())
+            azurerender::RuntimeDiagnostics::instance().info("settings","Applied setting layers: "+engineSettings_->describe().dump());
+    }
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession && runOptions_.editorSession->editCameraActive()){
+        auto& session=*runOptions_.editorSession;session.synchronizeViewportCamera(cameraPosition_,cameraTarget_);
+        if(session.consumeViewportViewChange()){cameraPosition_=session.viewportView().position;cameraTarget_=session.viewportView().target;autoRotate_=false;}
+        if(editorCameraFar_>0){session.viewportView().nearPlane=editorCameraNear_;session.viewportView().farPlane=editorCameraFar_;}
+        effectiveRenderSettings_.cameraView=session.viewportView();effectiveRenderSettings_.cameraNear=session.viewportView().nearPlane;effectiveRenderSettings_.cameraFar=session.viewportView().farPlane;
+    }
+#endif
+    const unsigned samplingScale=effectiveRenderSettings_.antiAliasing==2?2:1;
+    if((sceneRenderExtent_.width!=renderExtent_.width*samplingScale || sceneRenderExtent_.height!=renderExtent_.height*samplingScale
+        ||(effectiveRenderSettings_.antiAliasing==3)!=temporalRequested_
+        ||(effectiveRenderSettings_.antiAliasing==4)!=multisampleRequested_)
+        &&!recreateSwapchain())return;
     collectGpuTiming(currentFrame_);
     workerCommandPools_->resetFrame(currentFrame_, inFlightFences_[currentFrame_]);
 
+#if AZURE_WITH_EDITOR
     if (runOptions_.editorSession != nullptr) {
-        if (runOptions_.editorSession->consumeAssetReloadRequest()) {
-            vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(asset reload)");
-            if (sceneRenderer_ != nullptr) {
-                azurerender::RenderContext unloadContext;
-                buildRenderContext(unloadContext);
-                sceneRenderer_->onUnload(unloadContext);
-                sceneRenderer_.reset();
-            }
-            createSceneRenderer();
-            azurerender::RuntimeDiagnostics::instance().info(
-                "editor", "Renderer resources reloaded");
+        auto& session=*runOptions_.editorSession;
+        const auto revisionBeforeAssetScan=session.context().revision();
+        const auto changedAssets=session.playing()?0:session.context().reloadChangedAssets();
+        const bool fullReload=session.consumeAssetReloadRequest();
+        if (!session.playing()) {
+            if (fullReload || changedAssets)
+                requestEditorSceneReload(!fullReload && previewDocumentRevision_==revisionBeforeAssetScan);
+            advanceEditorSceneReload();
+        } else if (fullReload || changedAssets) {
+            if(changedAssets)session.context().log("Asset reload requested; changed files: "+std::to_string(changedAssets));
+            invalidatePreviews(!fullReload && previewDocumentRevision_==revisionBeforeAssetScan);
+            rebuildEditorSceneRenderer();
         }
         std::string captureLabel;
-        if (runOptions_.editorSession->consumeCaptureRequest(captureLabel)) {
+        if (!editorSceneReload_ && !editorReloadQueued_ && session.consumeCaptureRequest(captureLabel)) {
             pendingScreenshotLabel_ = std::move(captureLabel);
             screenshotRequested_ = true;
         }
     }
+#endif
+
+    if (levelSession_ && levelSession_->poll()) {
+        runOptions_.sceneDocument = runtime_.snapshotScene();
+        azurerender::RuntimeDiagnostics::instance().info("runtime", "Level committed: " + runOptions_.sceneDocument->sceneId);
+    }
 
     std::uint32_t imageIndex = 0;
+    const auto acquireStart = std::chrono::steady_clock::now();
     const VkResult acquireResult = vkAcquireNextImageKHR(
         device_,
         swapchain_,
@@ -65,6 +120,8 @@ void AzureRenderApp::drawFrame() {
         VK_NULL_HANDLE,
         &imageIndex);
 
+    if (runOptions_.gpuTimingEnabled)
+        submissionCounters_.acquireMilliseconds += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - acquireStart).count();
     if (acquireResult == VK_ERROR_OUT_OF_DATE_KHR) {
         framebufferResized_ = false;
         recreateSwapchain();
@@ -98,19 +155,53 @@ void AzureRenderApp::drawFrame() {
     if (runOptions_.technicalSequence) {
         updateTechnicalSequenceState(capturedFrames_);
     }
+#if AZURE_WITH_EDITOR
     if (editorLayer_ != nullptr) {
         editorLayer_->setViewportImageIndex(imageIndex);
-        editorLayer_->newFrame();
+        editorLayer_->setPreviewSubmission(graphicsSubmission_+1);
+        editorLayer_->setCameraState(cameraPosition_,cameraTarget_);
+        const auto view=azurerender::characterView(effectiveRenderSettings_,cameraPosition_,cameraTarget_);
+        const auto projection=azurerender::characterProjection(effectiveRenderSettings_,static_cast<float>(renderExtent_.width)/renderExtent_.height);
+        runOptions_.editorSession->context().setViewportCameraMatrices(view,projection);
+        runOptions_.editorSession->context().setDebugProjection(multiply(projection,view));
+        editorLayer_->newFrame((fixedSimulation_||runOptions_.fixedFrameStep)?fixedDeltaSeconds_:0.F);
+        const auto* renderState=sceneRenderer_?sceneRenderer_->sceneState():nullptr;
+        editorLayer_->setRenderProgress(renderState?renderState->accumulatedSamples:0,renderState?renderState->targetSamples:0);
         editorLayer_->drawPanels();
-        const azurerender::EditorViewportInput viewportInput =
+        azurerender::EditorViewportInput viewportInput =
             editorLayer_->consumeViewportInput();
-        if (azurerender::EditorCameraController::apply(
-                viewportInput,
-                cameraPosition_,
-                cameraTarget_)) {
+        auto& session=*runOptions_.editorSession;
+        if(session.editCameraActive() && session.consumeViewportViewChange()){cameraPosition_=session.viewportView().position;cameraTarget_=session.viewportView().target;autoRotate_=false;}
+        if(session.consumeFrameSelection() && session.editCameraActive()) {
+            const auto description=session.context().scene().renderDescription();
+            const auto* rendererState=sceneRenderer_?sceneRenderer_->sceneState():nullptr;
+            const auto bounds=azurerender::SelectionBounds::resolve(description,session.selection().selected(),[&](const std::string& resource)->std::optional<azurerender::scene::AxisAlignedBounds>{
+                if(rendererState)for(const auto& entry:rendererState->pickables) {
+                    const auto node=std::find_if(description.nodes.begin(),description.nodes.end(),[&](const auto& n){return n.id==entry.node;});
+                    if(node!=description.nodes.end() && node->resourceId==resource && entry.asset)return azurerender::scene::AxisAlignedBounds{entry.asset->boundsMin,entry.asset->boundsMax};
+                }
+                return {};
+            });
+            if(bounds.valid){
+                const float radius=.5F*vectorLength(subtract(bounds.bounds.maximum,bounds.bounds.minimum));
+                editorCameraNear_=std::max(.00001F,std::min(effectiveRenderSettings_.cameraNear,radius*.001F));
+                editorCameraFar_=std::max(effectiveRenderSettings_.cameraFar,radius*100.F);
+                effectiveRenderSettings_.cameraNear=editorCameraNear_;effectiveRenderSettings_.cameraFar=editorCameraFar_;
+            }
+            auto& editorView=session.viewportView();editorView.nearPlane=effectiveRenderSettings_.cameraNear;editorView.farPlane=effectiveRenderSettings_.cameraFar;
+            const auto framed=azurerender::EditorCameraService::frameSelection(editorView,bounds,static_cast<float>(renderExtent_.width)/renderExtent_.height);
+            if(framed.passed){cameraPosition_=framed.position;cameraTarget_=framed.target;autoRotate_=false;}
+            else session.log("ERROR: "+framed.diagnostic);
+        }
+        if (session.editCameraActive() && azurerender::EditorCameraController::apply(viewportInput,session.viewportView())) {
+            cameraPosition_=session.viewportView().position;cameraTarget_=session.viewportView().target;
             autoRotate_ = false;
         }
+        if(session.editCameraActive()){session.synchronizeViewportCamera(cameraPosition_,cameraTarget_);effectiveRenderSettings_.cameraView=session.viewportView();}
+        editorLayer_->setCameraState(cameraPosition_,cameraTarget_);
         if (viewportInput.pickRequested) {
+            pendingPickRequested_ = true;
+            pendingPickAdditive_ = viewportInput.pickAdditive;
             pendingPickX_ = viewportInput.pickX;
             pendingPickY_ = viewportInput.pickY;
         }
@@ -125,8 +216,20 @@ void AzureRenderApp::drawFrame() {
             editorViewportResizeRequested_ = true;
         }
     }
+#endif
+    synchronizeEditorRuntime();synchronizeGameUi();
     azurerender::SceneFrameData frameData;
     buildSceneFrameData(frameData);
+    // UI commands and Play/Stop may replace settings while building this frame.
+    // Bind the LUT only after the final settings are available for recording.
+#if AZURE_WITH_EDITOR
+    if(auto* session=runOptions_.editorSession.get();session && !session->playing()){
+        if(const auto mode=session->viewportDiagnosticMode()){
+            effectiveRenderSettings_.diagnosticView=*mode;
+        }
+    }
+#endif
+    synchronizeColorGradingLut(effectiveRenderSettings_);
     const azurerender::RenderFrameSnapshot frameSnapshot(frameData);
     if (sceneRenderer_ != nullptr) {
         sceneRenderer_->updateFrame(frameSnapshot.frame());
@@ -140,14 +243,28 @@ void AzureRenderApp::drawFrame() {
     // cursor restarts at the window base before any upload allocates.
     uploadRing_.beginFrame(static_cast<std::uint32_t>(currentFrame_));
     updateHudBuffer(currentFrame_);
+    updateGameUi(frameData.deltaSeconds);
     vkCheck(vkResetFences(device_, 1, &inFlightFences_[currentFrame_]), "vkResetFences");
     vkCheck(vkResetCommandBuffer(commandBuffers_[currentFrame_], 0), "vkResetCommandBuffer");
-    recordCommandBuffer(
+    const auto abandonRecording=[this]{
+#if AZURE_WITH_EDITOR
+        if(renderViews_)renderViews_->cancel(graphicsSubmission_+1);
+#endif
+        if(sceneRenderer_)sceneRenderer_->onFrameAbandoned();
+        if(temporalReconstruction_)temporalReconstruction_->cancel();
+    };
+    try {
+        recordCommandBuffer(
         commandBuffers_[currentFrame_],
         imageIndex,
         captureThisFrame
             ? readback.buffer.buffer
-            : VK_NULL_HANDLE);
+            : VK_NULL_HANDLE,
+        frameSnapshot.frame());
+    } catch(...) {
+        abandonRecording();
+        throw;
+    }
 
     const VkSemaphore waitSemaphores[] = {imageAvailableSemaphores_[currentFrame_]};
     const VkPipelineStageFlags waitStages[] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
@@ -161,9 +278,18 @@ void AzureRenderApp::drawFrame() {
     submitInfo.pCommandBuffers = &commandBuffers_[currentFrame_];
     submitInfo.signalSemaphoreCount = 1;
     submitInfo.pSignalSemaphores = signalSemaphores;
-    vkCheck(
-        vkQueueSubmit(graphicsQueue_, 1, &submitInfo, inFlightFences_[currentFrame_]),
-        "vkQueueSubmit");
+    const auto submitStart = std::chrono::steady_clock::now();
+    const auto submitResult=vkQueueSubmit(graphicsQueue_,1,&submitInfo,inFlightFences_[currentFrame_]);
+    if(submitResult!=VK_SUCCESS)abandonRecording();
+    vkCheck(submitResult,"vkQueueSubmit");
+    graphicsFrameSubmissions_[currentFrame_]=++graphicsSubmission_;
+    if(sceneRenderer_)sceneRenderer_->onFrameSubmitted(graphicsSubmission_);
+    if(temporalReconstruction_)temporalReconstruction_->commit(graphicsSubmission_);
+#if AZURE_WITH_EDITOR
+    if(renderViews_)renderViews_->submitted(graphicsSubmission_);
+#endif
+    if (runOptions_.gpuTimingEnabled)
+        submissionCounters_.submitMilliseconds += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - submitStart).count();
     if (runOptions_.gpuTimingEnabled) {
         timestampQuerySubmitted_[currentFrame_] = true;
     }
@@ -185,20 +311,21 @@ void AzureRenderApp::drawFrame() {
                     << "frame_" << std::setfill('0') << std::setw(6)
                     << capturedFrames_ << ".png";
                 outputPath =
-                    (std::filesystem::path(runOptions_.captureDirectory)
-                     / filename.str()).string();
+                    (std::filesystem::u8path(runOptions_.captureDirectory)
+                     / filename.str()).u8string();
             } else if (!pendingScreenshotLabel_.empty()) {
                 const std::filesystem::path captureDirectory =
                     resourceLocator_.captureDirectory();
                 std::filesystem::create_directories(captureDirectory);
                 outputPath = (captureDirectory
-                    / (pendingScreenshotLabel_ + ".png")).string();
+                    / std::filesystem::u8path(pendingScreenshotLabel_ + ".png")).u8string();
             }
             saveScreenshot(
                 readback.buffer.mapped,
                 swapchainExtent_.width,
                 swapchainExtent_.height,
                 outputPath);
+            ++validationScreenshots_;
             if (captureSequenceFrame) {
                 ++capturedFrames_;
                 if (capturedFrames_ == 1
@@ -225,7 +352,10 @@ void AzureRenderApp::drawFrame() {
     presentInfo.pSwapchains = &swapchain_;
     presentInfo.pImageIndices = &imageIndex;
 
+    const auto presentStart = std::chrono::steady_clock::now();
     const VkResult presentResult = vkQueuePresentKHR(presentQueue_, &presentInfo);
+    if (runOptions_.gpuTimingEnabled)
+        submissionCounters_.presentMilliseconds += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - presentStart).count();
     if (presentResult == VK_ERROR_OUT_OF_DATE_KHR
         || presentResult == VK_SUBOPTIMAL_KHR
         || framebufferResized_) {
@@ -234,20 +364,70 @@ void AzureRenderApp::drawFrame() {
     } else if (presentResult != VK_SUCCESS) {
         vkCheck(presentResult, "vkQueuePresentKHR");
     }
-    if (editorViewportResizeRequested_) {
+    if (editorViewportResizeRequested_
+#if AZURE_WITH_EDITOR
+        && !editorSceneReload_
+#endif
+    ) {
         editorViewportResizeRequested_ = false;
         recreateEditorViewportResources();
     }
 
+    if (runOptions_.gpuTimingEnabled) {
+        ++submissionCounters_.completedCpuFrames;
+        submissionCounters_.cpuFrameMilliseconds += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - frameStart).count();
+        const double total=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-frameStart).count();
+        const double wait=submissionCounters_.frameSlotWaitMilliseconds+submissionCounters_.acquireMilliseconds
+            +submissionCounters_.submitMilliseconds+submissionCounters_.presentMilliseconds-previousWait;
+        if(submissionCounters_.workSamplesMs.size()>=8192){
+            submissionCounters_.workSamplesMs.pop_front();submissionCounters_.totalSamplesMs.pop_front();submissionCounters_.waitSamplesMs.pop_front();
+            for(std::size_t count=0;count<submissionCounters_.physicsStepCounts.front();++count)submissionCounters_.physicsSamplesMs.pop_front();
+            submissionCounters_.physicsStepCounts.pop_front();
+        }
+        submissionCounters_.totalSamplesMs.push_back(total);submissionCounters_.waitSamplesMs.push_back(wait);
+        submissionCounters_.workSamplesMs.push_back(std::max(0.0,total-wait));
+        auto* game=activeGame();
+        submissionCounters_.physicsStepCounts.push_back(game?game->lastStepSamples().size():0);
+        if(game)for(double sample:game->lastStepSamples())submissionCounters_.physicsSamplesMs.push_back(sample);
+        const auto revision=activeRuntime()?activeRuntime()->sceneRevision():0;
+        if(gameplayFrame_%240==0 || revision!=sampledLevelRevision_){
+            const auto& allocation=gpuAllocator_.statistics();
+            azurerender::ResourceFrameSample sample;
+            sample.frame=gameplayFrame_;sample.revision=revision;
+            sample.workMs=std::max(0.0,total-wait);sample.waitMs=wait;
+            sample.physicsMaxMs=game && !game->lastStepSamples().empty()?*std::max_element(game->lastStepSamples().begin(),game->lastStepSamples().end()):0;
+            sample.committed=revision!=sampledLevelRevision_;
+            sample.commitMs=levelSession_?levelSession_->lastCommitMilliseconds():0;
+            sample.loading=levelSession_ && levelSession_->loading();
+            sample.cachedCandidates=levelSession_?levelSession_->cachedCandidates():0;
+            sample.requestGeneration=levelSession_?levelSession_->requestGeneration():0;
+            sample.loadError=levelSession_?levelSession_->lastError():std::string();
+            sample.buffers=allocation.liveBuffers;sample.images=allocation.liveImages;
+            sample.bufferBytes=allocation.liveBufferBytes;sample.imageBytes=allocation.liveImageBytes;
+            if(gameUiRenderer_){
+                const auto ui=gameUiRenderer_->statistics();
+                sample.uiActiveGeometry=ui.activeGeometry;sample.uiRetiredGeometry=ui.retiredGeometry;
+                sample.uiBuffers=ui.buffers;
+            }
+            resourceFrameSamples_.record(sample);
+            sampledLevelRevision_=revision;
+        }
+    }
     currentFrame_ = (currentFrame_ + 1) % kMaxFramesInFlight;
 }
 
 
 void AzureRenderApp::updateGizmoScreenData() {
+#if AZURE_WITH_EDITOR
+
     if (runOptions_.editorSession == nullptr) {
         return;
     }
     auto& editorContext = runOptions_.editorSession->context();
+    editorContext.setDebugProjection(multiply(azurerender::characterProjection(effectiveRenderSettings_,
+        static_cast<float>(renderExtent_.width)/renderExtent_.height),azurerender::characterView(effectiveRenderSettings_,cameraPosition_,cameraTarget_)));
+    editorContext.setViewportCameraMatrices(azurerender::characterView(effectiveRenderSettings_,cameraPosition_,cameraTarget_),
+        azurerender::characterProjection(effectiveRenderSettings_,static_cast<float>(renderExtent_.width)/renderExtent_.height));
     editorContext.syncComponents();
     if (!ecsRenderableLogged_) {
         azurerender::RuntimeDiagnostics::instance().print(
@@ -257,6 +437,7 @@ void AzureRenderApp::updateGizmoScreenData() {
         ecsRenderableLogged_ = true;
     }
     editorContext.setGizmoScreen({});
+    editorContext.setPickTargets({});
     const azurerender::RendererSceneState* sceneState =
         sceneRenderer_ != nullptr ? sceneRenderer_->sceneState() : nullptr;
     if (sceneState == nullptr || sceneState->asset == nullptr
@@ -264,32 +445,43 @@ void AzureRenderApp::updateGizmoScreenData() {
         return;
     }
     const LoadedAsset& asset = *sceneState->asset;
-    if (selectedPrimitiveIndex_ < 0
+    std::map<std::string,azurerender::scene::AxisAlignedBounds> assetBounds;
+    std::map<std::string,std::array<float,3>> pickTargets;
+    for(const auto& entry:sceneState->pickables)if(entry.asset) {
+        const auto& mesh=*entry.asset;
+        const auto node=std::find_if(editorContext.scene().nodes.begin(),editorContext.scene().nodes.end(),[&](const auto& value){return value.id==entry.node;});
+        if(node!=editorContext.scene().nodes.end())assetBounds[node->resourceId]={mesh.boundsMin,mesh.boundsMax};
+        const Vector3 center={(mesh.boundsMin[0]+mesh.boundsMax[0])*.5F,(mesh.boundsMin[1]+mesh.boundsMax[1])*.5F,(mesh.boundsMin[2]+mesh.boundsMax[2])*.5F};
+        pickTargets[entry.node]=transformPosition(entry.model,center);
+    }
+    editorContext.setPickTargets(std::move(pickTargets));
+    editorContext.setSelectionAssetBounds(std::move(assetBounds));
+    if (!editorContext.isProject() && (selectedPrimitiveIndex_ < 0
         || static_cast<std::size_t>(selectedPrimitiveIndex_)
-            >= asset.primitives.size()) {
+            >= asset.primitives.size())) {
         return;
     }
     Matrix4 currentModel{};
     std::memcpy(currentModel.data(), sceneState->modelMatrix, sizeof(Matrix4));
-    constexpr float kPi = 3.14159265358979323846F;
     const float aspect =
         static_cast<float>(renderExtent_.width)
         / static_cast<float>(renderExtent_.height);
-    const Matrix4 view = lookAt(
-        cameraPosition_, cameraTarget_, {0.0F, 1.0F, 0.0F});
+    const Matrix4 view = azurerender::characterView(effectiveRenderSettings_,cameraPosition_,cameraTarget_);
     const Matrix4 projection =
-        perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
+        azurerender::characterProjection(effectiveRenderSettings_,aspect);
     const Matrix4 viewProj = multiply(projection, view);
     const std::array<float, 3>& translation =
         editorContext.gizmoTranslation();
-    const Vector3 primitiveCenter =
-        transformPosition(currentModel,
-            asset.primitives[selectedPrimitiveIndex_].center);
-    const Vector3 gizmoCenter = {
-        primitiveCenter[0] + translation[0],
-        primitiveCenter[1] + translation[1],
-        primitiveCenter[2] + translation[2],
-    };
+    Vector3 gizmoCenter=translation;
+    if(editorContext.isProject()) {
+        if(!editorContext.selectedNode())return;
+        const auto description=editorContext.scene().renderDescription();
+        const auto transforms=azurerender::scene::resolveNodeWorldTransforms(description);
+        gizmoCenter=transformPosition(transforms.at(editorContext.selectedNodeIndex()),{0,0,0});
+    } else {
+        const auto center=transformPosition(currentModel,asset.primitives[selectedPrimitiveIndex_].center);
+        for(unsigned axis=0;axis<3;++axis)gizmoCenter[axis]+=center[axis];
+    }
     const auto projectToScreen = [&viewProj](const Vector3& world) {
         const float clipX = viewProj[0] * world[0]
             + viewProj[4] * world[1]
@@ -322,24 +514,18 @@ void AzureRenderApp::updateGizmoScreenData() {
         projectToScreen({gizmoCenter[0], gizmoCenter[1], gizmoCenter[2] + kAxisLen});
     azurerender::EditorContext::GizmoScreenData data{};
     data.valid = true;
-    data.centerX = (centerNdc[0] + 1.0F) * 0.5F;
-    data.centerY = (1.0F - centerNdc[1]) * 0.5F;
-    const auto normalize2D = [](float inX, float inY) {
-        const float length = std::sqrt(inX * inX + inY * inY);
-        if (length < 1.0e-6F) {
-            return std::array<float, 2>{0.0F, 0.0F};
-        }
-        return std::array<float, 2>{inX / length, inY / length};
-    };
-    const std::array<float, 2> axisXScreen = normalize2D(
+    const auto screen=azurerender::EditorWorkspace::ndcToScreen(centerNdc[0],centerNdc[1]);
+    data.centerX=screen[0];data.centerY=screen[1];
+    const auto projectedAxis=[](float x,float y){return std::array<float,2>{x,y};};
+    const std::array<float, 2> axisXScreen = projectedAxis(
         (endX[0] - centerNdc[0]) * 0.5F,
-        -(endX[1] - centerNdc[1]) * 0.5F);
-    const std::array<float, 2> axisYScreen = normalize2D(
+        (endX[1] - centerNdc[1]) * 0.5F);
+    const std::array<float, 2> axisYScreen = projectedAxis(
         (endY[0] - centerNdc[0]) * 0.5F,
-        -(endY[1] - centerNdc[1]) * 0.5F);
-    const std::array<float, 2> axisZScreen = normalize2D(
+        (endY[1] - centerNdc[1]) * 0.5F);
+    const std::array<float, 2> axisZScreen = projectedAxis(
         (endZ[0] - centerNdc[0]) * 0.5F,
-        -(endZ[1] - centerNdc[1]) * 0.5F);
+        (endZ[1] - centerNdc[1]) * 0.5F);
     data.axisXScreenX = axisXScreen[0];
     data.axisXScreenY = axisXScreen[1];
     data.axisYScreenX = axisYScreen[0];
@@ -348,6 +534,8 @@ void AzureRenderApp::updateGizmoScreenData() {
     data.axisZScreenY = axisZScreen[1];
     data.pixelToWorld = 0.005F;
     editorContext.setGizmoScreen(data);
+
+#endif
 }
 
 void AzureRenderApp::pickPrimitive(
@@ -356,6 +544,45 @@ void AzureRenderApp::pickPrimitive(
     selectedPrimitiveIndex_ = -1;
     const azurerender::RendererSceneState* sceneState =
         sceneRenderer_ != nullptr ? sceneRenderer_->sceneState() : nullptr;
+    const auto makePickRay = [&] {
+        const float aspect = static_cast<float>(renderExtent_.width)
+            / static_cast<float>(renderExtent_.height);
+        if (effectiveRenderSettings_.cameraView) {
+            return azurerender::cameraPickRay(*effectiveRenderSettings_.cameraView, viewportX, viewportY, aspect);
+        }
+        return azurerender::CameraPickRay{
+            cameraPosition_, pickRayDirection(cameraPosition_, cameraTarget_, viewportX, viewportY, aspect)};
+    };
+#if AZURE_WITH_EDITOR
+    if (auto* session = runOptions_.editorSession.get(); session && session->context().isProject()) {
+        std::string selected;
+        if (sceneState && !sceneState->pickables.empty()) {
+            const auto ray = makePickRay();
+            float bestDistance = std::numeric_limits<float>::max();
+            for (const auto& entry : sceneState->pickables) {
+                const auto& mesh = *entry.asset;
+                for (std::size_t index = 0; index + 2 < mesh.indices.size(); index += 3) {
+                    const auto a = transformPosition(entry.model, azurerender::deformedVertexPosition(mesh, mesh.indices[index], entry.pose, entry.morph));
+                    const auto b = transformPosition(entry.model, azurerender::deformedVertexPosition(mesh, mesh.indices[index + 1], entry.pose, entry.morph));
+                    const auto c = transformPosition(entry.model, azurerender::deformedVertexPosition(mesh, mesh.indices[index + 2], entry.pose, entry.morph));
+                    const float distance = rayTriangleDistance(ray.origin, ray.direction, a, b, c);
+                    if (distance > 0 && distance < bestDistance) {
+                        bestDistance = distance;
+                        selected = entry.node;
+                    }
+                }
+            }
+        }
+        if (session->references().active()) {
+            if (!selected.empty()) {
+                session->edit("reference.deliver", {{"kind", "node"}, {"id", selected}});
+            }
+        } else {
+            session->edit("selection.click", {{"id", selected}, {"ctrl", pendingPickAdditive_}});
+        }
+        return;
+    }
+#endif
     if (sceneState == nullptr || sceneState->asset == nullptr
         || sceneState->modelMatrix == nullptr) {
         return;
@@ -366,16 +593,9 @@ void AzureRenderApp::pickPrimitive(
     }
     Matrix4 currentModel{};
     std::memcpy(currentModel.data(), sceneState->modelMatrix, sizeof(Matrix4));
-    // 从相机构建拾取射线(与 updateUniformBuffer 相同的 fov/aspect)。
-    const float aspect =
-        static_cast<float>(renderExtent_.width)
-        / static_cast<float>(renderExtent_.height);
-    const Vector3 direction = pickRayDirection(
-        cameraPosition_,
-        cameraTarget_,
-        viewportX,
-        viewportY,
-        aspect);
+    // The pick ray uses the same camera and aspect ratio as rendering.
+    const auto ray = makePickRay();
+    const auto& direction = ray.direction;
     float bestDistance = std::numeric_limits<float>::max();
     for (std::size_t primitiveIndex = 0;
          primitiveIndex < asset.primitives.size();
@@ -397,7 +617,7 @@ void AzureRenderApp::pickPrimitive(
                 currentModel, asset.vertices[i2].position);
             // Möller–Trumbore 求交(纯函数,可单测)。
             const float distance = rayTriangleDistance(
-                cameraPosition_, direction, v0, v1, v2);
+                ray.origin, direction, v0, v1, v2);
             if (distance > 0.0F && distance < bestDistance) {
                 bestDistance = distance;
                 selectedPrimitiveIndex_ =
@@ -661,16 +881,17 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
          << "GPU  : " << printable(selectedGpuName_, 46) << '\n'
          << "FRAME: " << swapchainExtent_.width << 'X'
          << swapchainExtent_.height
-         << "  VIEW: " << kDiagnosticNames[renderSettings_.diagnosticView]
-         << "  STYLE: " << (renderSettings_.stylizedLightingEnabled ? "ON" : "OFF")
-         << "  OUTLINE: " << (renderSettings_.innerOutlineEnabled ? "ON" : "OFF")
+         << "  VIEW: " << kDiagnosticNames[effectiveRenderSettings_.diagnosticView]
+         << "  STYLE: " << (effectiveRenderSettings_.stylizedLightingEnabled ? "ON" : "OFF")
+         << "  OUTLINE: " << (effectiveRenderSettings_.innerOutlineEnabled ? "ON" : "OFF")
          << '\n';
     if (sceneRenderer_ != nullptr) {
         sceneRenderer_->appendHudText(text);
     }
     text << "TOON : RAMP V1 / 10 CLASSES  MASK "
-         << std::fixed << std::setprecision(2) << renderSettings_.styleMaskStrength
-         << "  LEGACY THRESHOLD " << renderSettings_.diffuseBandThreshold << '\n';
+         << std::fixed << std::setprecision(2) << effectiveRenderSettings_.styleMaskStrength
+         << "  LEGACY THRESHOLD " << effectiveRenderSettings_.diffuseBandThreshold << '\n';
+#if AZURE_WITH_EDITOR
     if (runOptions_.editorMode) {
         const azurerender::EditorContext& editorContext =
             runOptions_.editorSession->context();
@@ -688,9 +909,9 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
                      << printable(editorScene.nodes[index].name, 20);
             }
         }
-        text << "\nINSPECTOR: OUTLINE " << renderSettings_.outline.strength
-             << "  EXPOSURE " << renderSettings_.grade.exposureEv
-             << "  PRESET " << renderSettings_.showcasePreset << '\n'
+        text << "\nINSPECTOR: OUTLINE " << effectiveRenderSettings_.outline.strength
+             << "  EXPOSURE " << effectiveRenderSettings_.grade.exposureEv
+             << "  PRESET " << effectiveRenderSettings_.showcasePreset << '\n'
              << "ASSET BROWSER: ";
         if (editorScene.resources.empty()) {
             text << "<EMPTY>";
@@ -699,11 +920,12 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
                  index < editorScene.resources.size(); ++index) {
                 if (index > 0) text << " | ";
                 text << printable(
-                    editorScene.resources[index].path.string(), 38);
+                    editorScene.resources[index].path.u8string(), 38);
             }
         }
         text << "\nCONSOLE: [/] OUTLINE  -/= EXPOSURE  F1-F3 LIGHT  CLOSE=SAVES\n";
     }
+#endif
     if (gpuTiming_.samples > 0) {
         const double count = static_cast<double>(gpuTiming_.samples);
         text << "GPU MS: SHADOW "
@@ -758,16 +980,38 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
 void AzureRenderApp::recordCommandBuffer(
     const VkCommandBuffer commandBuffer,
     const std::uint32_t imageIndex,
-    const VkBuffer screenshotBuffer) {
+    const VkBuffer screenshotBuffer,
+    [[maybe_unused]] const azurerender::SceneFrameData& frame) {
     const auto recordingStart = std::chrono::steady_clock::now();
+    GroundGridUniform grid{};
+#if AZURE_WITH_EDITOR
+    if(editorUiEnabled_ && runOptions_.editorSession && runOptions_.editorSession->editCameraActive()){
+        auto& session=*runOptions_.editorSession;
+        const auto policy=session.viewportOverlayPolicies().find("grid");
+        if(policy!=session.viewportOverlayPolicies().end() && policy->second=="all"){
+            const auto& view=session.viewportView();
+            grid.viewProjection=azurerender::internal::multiply(azurerender::cameraProjectionMatrix(view,
+                static_cast<float>(renderExtent_.width)/renderExtent_.height),azurerender::cameraViewMatrix(view));
+            grid.minor=azurerender::ui::ViewportDesignTokens::minorGrid;grid.major=azurerender::ui::ViewportDesignTokens::majorGrid;
+            grid.xAxis=azurerender::ui::ViewportDesignTokens::xAxis;grid.zAxis=azurerender::ui::ViewportDesignTokens::zAxis;
+            grid.options={1,1,20,0};
+        }
+    }
+#endif
+    auto& gridBuffer=groundGridUniforms_.at(imageIndex);
+    std::memcpy(gridBuffer.mapped,&grid,sizeof(grid));gpuAllocator_.flush(gridBuffer,0,sizeof(grid));
     azurerender::RenderContext sceneContext;
-    buildRenderContext(sceneContext);
+    buildRenderContext(sceneContext,frame.renderSettings,frame.sceneSnapshot.get(),false);
     sceneContext.currentFrame = static_cast<std::uint32_t>(currentFrame_);
     sceneContext.imageIndex = imageIndex;
     sceneContext.commandBuffer = commandBuffer;
     azurerender::rhi::VulkanCommandRecorder commandRecorder(commandBuffer);
     sceneContext.commands = &commandRecorder;
-    sceneContext.sceneFramebuffer = swapchainFramebuffers_[imageIndex];
+    sceneContext.sceneFramebuffer = sceneMultisampling_?sceneMultisampling_->framebuffer(sceneContext.currentFrame):swapchainFramebuffers_[imageIndex];
+    if(!sceneMultisampling_){
+        sceneContext.sceneDepthImage=depthImages_[imageIndex].image;sceneContext.sceneDepthView=depthImageViews_[imageIndex];
+        sceneContext.sceneColorImages={sceneColorImages_[imageIndex].image,normalImages_[imageIndex].image,displayMaskImages_[imageIndex].image};
+    }
     if (runOptions_.gpuTimingEnabled && !timestampQueryPools_.empty()) {
         sceneContext.timestampQueryPool =
             timestampQueryPools_[currentFrame_];
@@ -787,11 +1031,12 @@ void AzureRenderApp::recordCommandBuffer(
         state.aspectMask = aspect;
         return graph.importImage(name, state);
     };
-    const azurerender::SceneGraphResources resources{
+    azurerender::SceneGraphResources resources{
         importAttachment("scene-color", sceneColorImages_[imageIndex].image, VK_IMAGE_ASPECT_COLOR_BIT),
         importAttachment("scene-depth", depthImages_[imageIndex].image, VK_IMAGE_ASPECT_DEPTH_BIT),
         importAttachment("scene-normal", normalImages_[imageIndex].image, VK_IMAGE_ASPECT_COLOR_BIT),
         importAttachment("shadow-map", shadowImage_.image, VK_IMAGE_ASPECT_DEPTH_BIT)};
+    resources.displayMask=importAttachment("display-mask",displayMaskImages_[imageIndex].image,VK_IMAGE_ASPECT_COLOR_BIT);
     azurerender::rhi::ImageBarrierDesc outputState{};
     outputState.image = swapchainImages_[imageIndex];
     // The attachment passes finish in PRESENT before graph capture starts.
@@ -801,83 +1046,136 @@ void AzureRenderApp::recordCommandBuffer(
     const auto output = graph.importImage("output", outputState);
     azurerender::rhi::VulkanCommandRecorder serialSceneRecorder(commandBuffer, true);
     if (runOptions_.parallelRecordingDisabled) sceneContext.commands = &serialSceneRecorder;
-    if (sceneRenderer_ != nullptr) sceneRenderer_->registerPasses(graph, resources, sceneContext);
+    bool temporalReady=false;std::array<azurerender::RenderGraph::ResourceId,2> temporalMotion{};
+    if(temporalReconstruction_&&sceneRenderer_&&sceneRenderer_->capabilities().supportsMotionVectors){
+        temporalMotion=temporalReconstruction_->importMotion(graph,"main");resources.motion=temporalMotion[0];resources.motionSurfaceDepth=temporalMotion[1];
+        const auto* rendererState=sceneRenderer_->sceneState();
+        if(rendererState&&rendererState->temporalFrame){temporalReconstruction_->prepare(*rendererState->temporalFrame,sceneContext.currentFrame,imageIndex);temporalReady=true;}
+        else temporalReconstruction_->cancel();
+    }
+    auto sceneResources=resources;
+    std::array<azurerender::RenderGraph::ResourceId,3> multisampleSources{};
+    if(sceneMultisampling_){multisampleSources=sceneMultisampling_->importSources(graph,sceneContext.currentFrame,"main-samples");
+        sceneResources.color=multisampleSources[0];sceneResources.depth=multisampleSources[1];sceneResources.normal=multisampleSources[2];
+        sceneResources.displayMask=sceneMultisampling_->importDisplayMaskSource(graph,sceneContext.currentFrame,"main-samples");}
+    if (sceneRenderer_ != nullptr) sceneRenderer_->registerPasses(graph, sceneResources, sceneContext);
+    if(sceneMultisampling_)sceneMultisampling_->schedule(graph,sceneContext.currentFrame,imageIndex,multisampleSources,{resources.color,resources.depth,resources.normal},"main-multisample-resolve",
+        std::array<azurerender::RenderGraph::ResourceId,2>{sceneResources.displayMask,resources.displayMask});
+    auto displayMaskForGrade=resources.displayMask;
+    float displayMaskSelector=1;
+    if(temporalReady){
+        const auto resolvedMask=temporalReconstruction_->schedule(graph,resources.color,resources.depth,temporalMotion,"main",resources.displayMask);
+        if(resolvedMask){displayMaskForGrade=*resolvedMask;displayMaskSelector=2.F+temporalReconstruction_->preparedDisplayMaskIndex();}
+    }
+#if AZURE_WITH_EDITOR
+    // All views consume the same snapshot after the host advances simulation.
+    if(renderViews_)renderViews_->schedule(graph,frame,sceneContext,graphicsSubmission_+1);
+#endif
     const auto scenePassCount = graph.passes().size();
-    const auto composite = graph.addPass("post-process-hud", [&] {
-    VkRenderPassBeginInfo postProcessPassInfo{
-        VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
-    postProcessPassInfo.renderPass = postProcessRenderPass_;
-    postProcessPassInfo.framebuffer =
-        postProcessFramebuffers_[imageIndex];
-
-    postProcessPassInfo.renderArea.extent = renderExtent_;
-    vkCmdBeginRenderPass(
-        commandBuffer,
-        &postProcessPassInfo,
-        VK_SUBPASS_CONTENTS_INLINE);
-    VkViewport viewport{};
-    viewport.width = static_cast<float>(renderExtent_.width);
-    viewport.height = static_cast<float>(renderExtent_.height);
-    viewport.maxDepth = 1.0F;
-    VkRect2D scissor{};
-    scissor.extent = renderExtent_;
-    vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
-    vkCmdSetScissor(commandBuffer, 0, 1, &scissor);
-    vkCmdBindPipeline(
-        commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        innerOutlinePipeline_);
-    vkCmdBindDescriptorSets(
-        commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        postProcessPipelineLayout_,
-        0,
-        1,
-        &postProcessDescriptorSets_[imageIndex],
-        0,
-        nullptr);
-    const PostProcessPushConstants postProcessConstants{
-        renderSettings_.diagnosticView == 2
-            ? 1.0F
-            : (renderSettings_.innerOutlineEnabled
-                ? renderSettings_.outline.strength : 0.0F),
-        renderSettings_.outline.depthThreshold,
-        renderSettings_.outline.normalThreshold,
-        static_cast<float>(renderSettings_.diagnosticView),
-        renderSettings_.grade.exposureEv,
-        renderSettings_.grade.toneMappingEnabled ? 1.0F : 0.0F,
-        renderSettings_.bloom.enabled
-            && !(qaEffectName_ == "bloom" && !qaEffectEnabled_)
-            ? renderSettings_.bloom.strength : 0.0F,
-        qaEffectName_ == "bloom" && qaEffectStateName_ == "isolation"
-            ? 1.0F : 0.0F,
-        {
-            renderSettings_.outline.color[0],
-            renderSettings_.outline.color[1],
-            renderSettings_.outline.color[2],
-            1.0F,
-        },
-        {
-            renderSettings_.grade.saturation,
-            renderSettings_.grade.contrast,
-            renderSettings_.bloom.threshold,
-            0.0F,
-        },
-        {
-            renderSettings_.grade.tint[0],
-            renderSettings_.grade.tint[1],
-            renderSettings_.grade.tint[2],
-            0.0F,
-        },
+    const bool showcaseDisplay=runOptions_.qaShowcasePresentation;
+    const bool encodeSrgb=swapchainFormat_!=VK_FORMAT_B8G8R8A8_SRGB && swapchainFormat_!=VK_FORMAT_R8G8B8A8_SRGB;
+    const auto drawGrade=[&] {
+        vkCmdBindPipeline(
+            commandBuffer,
+            VK_PIPELINE_BIND_POINT_GRAPHICS,
+            innerOutlinePipeline_);
+        vkCmdBindDescriptorSets(
+            commandBuffer,
+            VK_PIPELINE_BIND_POINT_GRAPHICS,
+            postProcessPipelineLayout_,
+            0,
+            1,
+            &postProcessDescriptorSets_[imageIndex],
+            0,
+            nullptr);
+        const PostProcessPushConstants postProcessConstants{
+            effectiveRenderSettings_.diagnosticView == 2
+                ? 1.0F
+                : (effectiveRenderSettings_.innerOutlineEnabled
+                    ? effectiveRenderSettings_.outline.strength : 0.0F),
+            effectiveRenderSettings_.outline.depthThreshold,
+            effectiveRenderSettings_.outline.normalThreshold,
+            static_cast<float>(effectiveRenderSettings_.diagnosticView),
+            effectiveRenderSettings_.grade.exposureEv,
+            effectiveRenderSettings_.grade.toneMappingEnabled ? 1.0F : 0.0F,
+            effectiveRenderSettings_.bloom.enabled
+                && !(qaEffectName_ == "bloom" && !qaEffectEnabled_)
+                ? effectiveRenderSettings_.bloom.strength : 0.0F,
+            qaEffectName_ == "bloom" && qaEffectStateName_ == "isolation"
+                ? 1.0F : 0.0F,
+            {
+                effectiveRenderSettings_.outline.color[0],
+                effectiveRenderSettings_.outline.color[1],
+                effectiveRenderSettings_.outline.color[2],
+                1.0F,
+            },
+            {
+                effectiveRenderSettings_.grade.saturation,
+                effectiveRenderSettings_.grade.contrast,
+                effectiveRenderSettings_.bloom.threshold,
+                showcaseDisplay ? 0.0F : displayMaskSelector,
+            },
+            {
+                effectiveRenderSettings_.grade.tint[0],
+                effectiveRenderSettings_.grade.tint[1],
+                effectiveRenderSettings_.grade.tint[2],
+                0.0F,
+            },
+            {static_cast<float>(effectiveRenderSettings_.antiAliasing),effectiveRenderSettings_.cameraNear,
+             effectiveRenderSettings_.cameraFar,effectiveRenderSettings_.antiAliasing==2?2.0F:1.0F},
+            {effectiveRenderSettings_.grade.lut.asset.empty()?0.0F:static_cast<float>(colorGradingLut_->dimension()),
+             effectiveRenderSettings_.grade.lut.exposureMultiplier,static_cast<float>(colorGradingLut_->inputDomain()),
+             encodeSrgb ? 1.0F : 0.0F},
+        };
+        vkCmdPushConstants(
+            commandBuffer,
+            postProcessPipelineLayout_,
+            VK_SHADER_STAGE_FRAGMENT_BIT,
+            0,
+            sizeof(postProcessConstants),
+            &postProcessConstants);
+        vkCmdDraw(commandBuffer, 3, 1, 0, 0);
     };
-    vkCmdPushConstants(
-        commandBuffer,
-        postProcessPipelineLayout_,
-        VK_SHADER_STAGE_FRAGMENT_BIT,
-        0,
-        sizeof(postProcessConstants),
-        &postProcessConstants);
-    vkCmdDraw(commandBuffer, 3, 1, 0, 0);
+    const auto gradeInputs=[&](auto pass) {
+        graph.use(pass,resources.color,azurerender::RenderGraphUsage::Sampled,false);
+        graph.use(pass,resources.depth,azurerender::RenderGraphUsage::Sampled,false);
+        graph.use(pass,resources.normal,azurerender::RenderGraphUsage::Sampled,false);
+        graph.use(pass,displayMaskForGrade,azurerender::RenderGraphUsage::Sampled,false);
+        graph.use(pass,resources.shadow,azurerender::RenderGraphUsage::Sampled,false);
+    };
+    auto* spatial=showcaseDisplay ? nullptr : spatialAntiAliasing_.at(imageIndex).get();
+    std::optional<std::uint32_t> linearDisplay;
+    if (spatial) {
+        linearDisplay=importAttachment("linear-display",spatial->inputImage().image,VK_IMAGE_ASPECT_COLOR_BIT);
+        const auto gradePass=graph.addPass("post-process-grade", [&] {
+            VkRenderPassBeginInfo pass{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
+            pass.renderPass=spatial->inputPass();
+            pass.framebuffer=spatial->inputFramebuffer();
+            pass.renderArea.extent=sceneRenderExtent_;
+            vkCmdBeginRenderPass(commandBuffer,&pass,VK_SUBPASS_CONTENTS_INLINE);
+            VkViewport viewport{0,0,float(sceneRenderExtent_.width),float(sceneRenderExtent_.height),0,1};
+            VkRect2D scissor{{0,0},sceneRenderExtent_};
+            vkCmdSetViewport(commandBuffer,0,1,&viewport);
+            vkCmdSetScissor(commandBuffer,0,1,&scissor);
+            drawGrade();
+            vkCmdEndRenderPass(commandBuffer);
+        });
+        gradeInputs(gradePass);
+        graph.attachment(gradePass,*linearDisplay,azurerender::RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    }
+    const auto composite=graph.addPass("post-process-hud",[&]{
+    VkRenderPassBeginInfo finalPass{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
+    finalPass.renderPass=postProcessRenderPass_;finalPass.framebuffer=postProcessFramebuffers_[imageIndex];
+    finalPass.renderArea.extent=renderExtent_;vkCmdBeginRenderPass(commandBuffer,&finalPass,VK_SUBPASS_CONTENTS_INLINE);
+    VkViewport finalViewport{};finalViewport.width=float(renderExtent_.width);finalViewport.height=float(renderExtent_.height);finalViewport.maxDepth=1;
+    VkRect2D finalScissor{};finalScissor.extent=renderExtent_;vkCmdSetViewport(commandBuffer,0,1,&finalViewport);vkCmdSetScissor(commandBuffer,0,1,&finalScissor);
+    if (spatial) {
+        spatial->resolve(commandRecorder,azurerender::spatialAntiAliasingMode(
+            effectiveRenderSettings_.antiAliasing,temporalReady,sceneMultisampling_!=nullptr),
+            encodeSrgb,effectiveRenderSettings_.diagnosticView!=0);
+    } else {
+        drawGrade();
+    }
     if ((hudEnabled_ || runOptions_.technicalSequence) &&
         hudVertexCounts_[currentFrame_] > 0) {
         vkCmdBindPipeline(
@@ -898,14 +1196,14 @@ void AzureRenderApp::recordCommandBuffer(
             0,
             0);
     }
+    if(gameUiRenderer_ && gameUi_){const auto before=gameUiRenderer_->drawCalls();gameUiRenderer_->record(commandRecorder);uiDrawCalls_+=gameUiRenderer_->drawCalls()-before;}
     vkCmdEndRenderPass(commandBuffer);
     });
-    graph.use(composite, resources.color, azurerender::RenderGraphUsage::Sampled, false);
-    graph.use(composite, resources.depth, azurerender::RenderGraphUsage::Sampled, false);
-    graph.use(composite, resources.normal, azurerender::RenderGraphUsage::Sampled, false);
-    graph.use(composite, resources.shadow, azurerender::RenderGraphUsage::Sampled, false);
+    if (linearDisplay) graph.use(composite,*linearDisplay,azurerender::RenderGraphUsage::Sampled,false);
+    else gradeInputs(composite);
     graph.write(composite, output);
     const auto editor = graph.addPass("editor-ui", [&] {
+#if AZURE_WITH_EDITOR
     if (editorUiEnabled_ && editorLayer_ != nullptr) {
         VkClearValue editorClear{};
         editorClear.color.float32[0] = 0.035F;
@@ -932,6 +1230,7 @@ void AzureRenderApp::recordCommandBuffer(
         editorLayer_->render(commandBuffer);
         vkCmdEndRenderPass(commandBuffer);
     }
+#endif
     });
     graph.write(editor, output);
     const auto capture = graph.addPass("capture", [&] {
@@ -964,7 +1263,7 @@ void AzureRenderApp::recordCommandBuffer(
             commandBuffer,
             timestampQueryPools_[currentFrame_],
             0,
-            kTimestampQueryCount);
+            kTimestampQueryCount+(runOptions_.gpuPassTimingEnabled?2*kMaximumTimedPasses:0));
         vkCmdWriteTimestamp(
             commandBuffer,
             VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
@@ -1015,7 +1314,20 @@ void AzureRenderApp::recordCommandBuffer(
         }
     }
     const auto workerStart = std::chrono::steady_clock::now();
-    recordingWorkers_.runWithCaller(std::move(recordingTasks));
+    recordingWorkers_.runAdaptive(std::move(recordingTasks));
+    std::function<void(azurerender::RenderGraph::PassId,bool)> passTiming;
+    std::vector<int> passSlots;
+    if(runOptions_.gpuPassTimingEnabled){
+        auto& names=timestampPassNames_[currentFrame_];names.clear();passSlots.assign(graph.passes().size(),-1);
+        for(const auto pass:graph.executionOrder()){
+            if(names.size()==kMaximumTimedPasses)break;
+            passSlots[pass]=static_cast<int>(names.size());names.push_back(graph.passes()[pass].name);
+        }
+        passTiming=[&](azurerender::RenderGraph::PassId pass,bool begin){
+            const int slot=passSlots[pass];if(slot<0)return;
+            commandRecorder.writeTimestamp(timestampQueryPools_[currentFrame_],kTimestampQueryCount+2*static_cast<unsigned>(slot)+(begin?0:1),VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+        };
+    }
     const auto executionStart = std::chrono::steady_clock::now();
     graph.execute(&commandRecorder, [&](azurerender::RenderGraph::PassId pass) {
         if (recordedPasses[pass].empty()) {
@@ -1043,7 +1355,7 @@ void AzureRenderApp::recordCommandBuffer(
         serialSceneRecorder.invalidatePipelineBindings();
         if (graphics.renderPass != VK_NULL_HANDLE) vkCmdEndRenderPass(commandBuffer);
         return true;
-    }, runOptions_.parallelRecordingDisabled);
+    }, runOptions_.parallelRecordingDisabled,passTiming);
     if (runOptions_.gpuTimingEnabled) {
         const auto executionEnd = std::chrono::steady_clock::now();
         submissionCounters_.graphPreparationMilliseconds +=

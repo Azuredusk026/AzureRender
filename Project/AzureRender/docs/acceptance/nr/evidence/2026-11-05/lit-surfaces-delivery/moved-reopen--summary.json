@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\engine\\bin\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\移动后的完整场景\\playable.azureproject",
+    "--width",
+    "960",
+    "--height",
+    "540",
+    "--capture-fps",
+    "60",
+    "--fixed-frame-step",
+    "--capture-frames",
+    "3",
+    "--capture-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\moved-reopen\\frames",
+    "--qa-camera",
+    "scene",
+    "--qa-light",
+    "scene",
+    "--qa-isolation",
+    "beauty",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-delivery\\moved-reopen\\runtime.json"
+  ],
+  "programSha256": "642ad4d341fc9652aa41c796cca0b43debc9c3706ea68aa8e4ef5a0193e245fc",
+  "projectSha256": "f8409a3c705bb0e0896a7cf92b4a735bbb836fb90a8c3d71bddb78680363d77a",
+  "levelSha256": "1efbfee357aa0a4d49a1c4f73479cdbeeb96ac28765ca9e9a0d774a7a184c149",
+  "movedDirectory": true,
+  "originalPathUnavailable": true,
+  "exitCode": 0,
+  "elapsedSeconds": 186.29454730002908,
+  "frames": [
+    {
+      "frame": 0,
+      "changedPixels": 0,
+      "referenceSha256": "3a6e2595193e083ebdc74bc628a55a37d564ae6064f804ff7fde7e10ebcb44fe",
+      "actualSha256": "3a6e2595193e083ebdc74bc628a55a37d564ae6064f804ff7fde7e10ebcb44fe"
+    },
+    {
+      "frame": 1,
+      "changedPixels": 0,
+      "referenceSha256": "4df57d1cdf6d7bb9e77eb2806eaa0b4fa982fa01b777834e95f2449fd2dccde9",
+      "actualSha256": "4df57d1cdf6d7bb9e77eb2806eaa0b4fa982fa01b777834e95f2449fd2dccde9"
+    },
+    {
+      "frame": 2,
+      "changedPixels": 0,
+      "referenceSha256": "fd13bf4ff3fb093941f25564d28208aafe4e559688af5da9c2e2bde6a16ecea7",
+      "actualSha256": "fd13bf4ff3fb093941f25564d28208aafe4e559688af5da9c2e2bde6a16ecea7"
+    }
+  ]
+}

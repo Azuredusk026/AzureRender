@@ -1,0 +1,10 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  2: AzureEngine.RuntimeLifecycle
+1/2 Test  #2: AzureEngine.RuntimeLifecycle .....   Passed    0.07 sec
+    Start 24: AzureRender.NullRhiPass
+2/2 Test #24: AzureRender.NullRhiPass ..........   Passed    0.46 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.54 sec

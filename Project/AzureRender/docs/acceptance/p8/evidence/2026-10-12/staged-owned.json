@@ -1,0 +1,77 @@
+[
+  {
+    "path": "README.md",
+    "blob": "e80ce9c4f4ed6415e74216606dc891fb03271ea9",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "CHANGELOG.md",
+    "blob": "c8075c9e6ae7dd73ca49098975731f537643dcb0",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "docs/plans/azure-engine-plan.md",
+    "blob": "63c2480c12000bbd56b58e029c00f37907929460",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "docs/plans/asset-format-manifest.json",
+    "blob": "cc4dc2ae68a1d2b9df7be80038e7b01bc4cfccd3",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "docs/plans/p8-deferred-acceptance-manifest.json",
+    "blob": "63765423cc6baa8371b6e7b5e6b5d1f3b455a2a7",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "docs/plans/2026-10-11-asset-format-expansion.md",
+    "blob": "5cba69edf53deccf83cf51c3336cc1954cea3a20",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "docs/plans/2026-10-09-character-rendering-repair.md",
+    "blob": "ed24269e994496e86bdf6642df1422dd0b03dba2",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "docs/plans/2026-10-09-editor-productization.md",
+    "blob": "2d06e1eff699076b44bd4db0724732cfe8deb4ee",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "docs/runtime/asset-exchange.md",
+    "blob": "08f1bd066a146580cb1af01e5e19e9e4538d6c3a",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "docs/runtime/authoring-workflows.md",
+    "blob": "0c3f69b04ec481a0c1f62fbbe199187b815046b4",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "docs/runtime/content-navigation.md",
+    "blob": "a017591a0de0c78e6d57878f297abaa431326241",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "docs/runtime/physics-authoring.md",
+    "blob": "614689bd703b901f34016c771772275ce403045d",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "tests/EditorAssetWorkflowTests.cpp",
+    "blob": "8001e8a5839368c349503a8faca7c5f90d595d8c",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "docs/index.md",
+    "blob": "959601738b0cbd55578a384824f697793a490664",
+    "userChangesPreserved": true
+  },
+  {
+    "path": "mkdocs.yml",
+    "blob": "040b4fc924f9840a5dc8d32ba5575bbc863b66a7",
+    "userChangesPreserved": true
+  }
+]

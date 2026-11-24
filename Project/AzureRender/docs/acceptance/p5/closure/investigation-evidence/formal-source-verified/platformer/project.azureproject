@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "id": "9498d1a5-8f30-44e5-bd77-f6058ca2412b",
+  "name": "Azure Sky Steps",
+  "mounts": [
+    {
+      "name": "assets",
+      "path": "assets"
+    }
+  ],
+  "startupScene": "assets:/platformer.azurelevel",
+  "runtime": {
+    "schemaVersion": 1,
+    "input": {
+      "move-left": [
+        65
+      ],
+      "move-right": [
+        68
+      ],
+      "move-forward": [
+        87
+      ],
+      "move-back": [
+        83
+      ],
+      "jump": [
+        32
+      ],
+      "sprint": [
+        340,
+        344
+      ],
+      "interact": [
+        69
+      ],
+      "restart": [
+        82
+      ]
+    },
+    "systems": [
+      {
+        "id": "character-movement",
+        "config": {
+          "profiles": {
+            "default": {
+              "left": "move-left",
+              "right": "move-right",
+              "forward": "move-forward",
+              "back": "move-back",
+              "jump": "jump",
+              "sprint": "sprint"
+            }
+          }
+        }
+      },
+      {
+        "id": "physics",
+        "config": {}
+      },
+      {
+        "id": "locomotion",
+        "config": {
+          "profiles": {
+            "default": {
+              "idle": "idle",
+              "moving": "walk",
+              "threshold": 0.1
+            }
+          }
+        }
+      },
+      {
+        "id": "camera",
+        "config": {
+          "mode": "follow"
+        }
+      }
+    ]
+  }
+}

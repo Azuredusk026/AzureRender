@@ -1,0 +1,2036 @@
+{
+  "status": "qualified-reference-inverse-calibration-path",
+  "overall": "failed-user-review",
+  "baseCommit": "87ac510",
+  "sceneRendererApiVersion": 14,
+  "acceptedMaximumByteError": 1,
+  "builds": {
+    "release": {
+      "configuration": "Release",
+      "shaderCount": 891,
+      "allShadersExact": true,
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility)|AzureEngine[.]ProjectReferenceViews)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-020715-scene-visibility-reference-calibration-f77af1\\release-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "d008745844deac754b21d51db398fcfec722391a0937f2d4ed75b5d3c0f6a82f"
+    },
+    "debug": {
+      "configuration": "Debug",
+      "shaderCount": 891,
+      "allShadersExact": true,
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility)|AzureEngine[.]ProjectReferenceViews)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-020715-scene-visibility-reference-calibration-f77af1\\debug-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "cb9f0143f912cec738abd834df8a7d0454066205e5f403a290b1f494b147305d"
+    },
+    "release-nvidia-gpu": {
+      "configuration": "Release",
+      "shaderCount": 891,
+      "allShadersExact": true,
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-020715-scene-visibility-reference-calibration-f77af1\\release-nvidia-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "d008745844deac754b21d51db398fcfec722391a0937f2d4ed75b5d3c0f6a82f"
+    },
+    "release-intel-gpu": {
+      "configuration": "Release",
+      "shaderCount": 891,
+      "allShadersExact": true,
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-020715-scene-visibility-reference-calibration-f77af1\\release-intel-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "d008745844deac754b21d51db398fcfec722391a0937f2d4ed75b5d3c0f6a82f"
+    },
+    "debug-nvidia-gpu": {
+      "configuration": "Debug",
+      "shaderCount": 891,
+      "allShadersExact": true,
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-020715-scene-visibility-reference-calibration-f77af1\\debug-nvidia-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "cb9f0143f912cec738abd834df8a7d0454066205e5f403a290b1f494b147305d"
+    },
+    "debug-intel-gpu": {
+      "configuration": "Debug",
+      "shaderCount": 891,
+      "allShadersExact": true,
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-020715-scene-visibility-reference-calibration-f77af1\\debug-intel-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "cb9f0143f912cec738abd834df8a7d0454066205e5f403a290b1f494b147305d"
+    }
+  },
+  "captures": {
+    "release-nvidia": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "program": "actual Player with authored inverse and current live attachments",
+      "visibilitySha256": "187e5d73f07c9134c6d5a17d036d20f001acf4177715e4ea80fcd23ff97abadb",
+      "referenceDepthSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "referenceNormalsSha256": "cbe0d3780970ca90e61aecb34b4e890ddfa3d9d89aec0aafaabf29c6f4ed12e5",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "colors": [
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+      ],
+      "hair": {
+        "pixels": 17017,
+        "exact": 16686,
+        "overOne": 277,
+        "baselineOverOne": 391,
+        "closed": 172,
+        "introduced": 58,
+        "maximum": 42,
+        "median": 0.0,
+        "samples": [
+          [
+            1303,
+            155,
+            178,
+            170
+          ],
+          [
+            1264,
+            157,
+            178,
+            170
+          ],
+          [
+            1312,
+            162,
+            27,
+            31
+          ],
+          [
+            1300,
+            165,
+            11,
+            9
+          ],
+          [
+            1293,
+            168,
+            244,
+            246
+          ],
+          [
+            1290,
+            169,
+            228,
+            232
+          ],
+          [
+            1294,
+            169,
+            250,
+            246
+          ],
+          [
+            1300,
+            171,
+            23,
+            16
+          ],
+          [
+            1298,
+            172,
+            36,
+            27
+          ],
+          [
+            1300,
+            173,
+            54,
+            61
+          ],
+          [
+            1299,
+            174,
+            77,
+            61
+          ],
+          [
+            1300,
+            174,
+            77,
+            61
+          ],
+          [
+            1279,
+            175,
+            95,
+            85
+          ],
+          [
+            1304,
+            177,
+            14,
+            16
+          ],
+          [
+            1326,
+            177,
+            27,
+            23
+          ],
+          [
+            1269,
+            178,
+            42,
+            36
+          ],
+          [
+            1272,
+            178,
+            116,
+            127
+          ],
+          [
+            1296,
+            178,
+            232,
+            239
+          ],
+          [
+            1266,
+            179,
+            19,
+            13
+          ],
+          [
+            1285,
+            179,
+            242,
+            244
+          ],
+          [
+            1286,
+            179,
+            208,
+            201
+          ],
+          [
+            1265,
+            181,
+            178,
+            187
+          ],
+          [
+            1304,
+            182,
+            239,
+            244
+          ],
+          [
+            1260,
+            183,
+            213,
+            208
+          ],
+          [
+            1259,
+            184,
+            232,
+            228
+          ]
+        ]
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 45769,
+        "overOne": 3129,
+        "baselineOverOne": 3309,
+        "closed": 320,
+        "introduced": 140,
+        "maximum": 255,
+        "median": 0.0,
+        "samples": [
+          [
+            1271,
+            154,
+            242,
+            236
+          ],
+          [
+            1278,
+            155,
+            207,
+            194
+          ],
+          [
+            1299,
+            155,
+            232,
+            224
+          ],
+          [
+            1303,
+            155,
+            178,
+            170
+          ],
+          [
+            1264,
+            157,
+            178,
+            170
+          ],
+          [
+            1270,
+            161,
+            170,
+            253
+          ],
+          [
+            1312,
+            162,
+            27,
+            31
+          ],
+          [
+            1232,
+            163,
+            11,
+            187
+          ],
+          [
+            1271,
+            163,
+            19,
+            255
+          ],
+          [
+            1272,
+            163,
+            23,
+            255
+          ],
+          [
+            1273,
+            163,
+            13,
+            255
+          ],
+          [
+            1274,
+            163,
+            13,
+            255
+          ],
+          [
+            1297,
+            163,
+            77,
+            255
+          ],
+          [
+            1299,
+            163,
+            23,
+            255
+          ],
+          [
+            1300,
+            163,
+            31,
+            255
+          ],
+          [
+            1269,
+            164,
+            2,
+            250
+          ],
+          [
+            1270,
+            164,
+            7,
+            254
+          ],
+          [
+            1275,
+            164,
+            27,
+            254
+          ],
+          [
+            1296,
+            164,
+            77,
+            255
+          ],
+          [
+            1301,
+            164,
+            54,
+            255
+          ],
+          [
+            1233,
+            165,
+            16,
+            250
+          ],
+          [
+            1268,
+            165,
+            0,
+            255
+          ],
+          [
+            1269,
+            165,
+            0,
+            208
+          ],
+          [
+            1270,
+            165,
+            0,
+            232
+          ],
+          [
+            1271,
+            165,
+            0,
+            194
+          ]
+        ]
+      },
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    "release-intel": {
+      "configuration": "Release",
+      "device": "intel",
+      "program": "actual Player with authored inverse and current live attachments",
+      "visibilitySha256": "be9a187dbdc054e99a68cb0831b88a2506e5835c24c15b9a74944dc0e487f908",
+      "referenceDepthSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "referenceNormalsSha256": "c54e38d52bbcfc8618345e2f0d1dd38d155ee8da467a1d531fc1845c1b9ca798",
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "colors": [
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+      ],
+      "hair": {
+        "pixels": 17017,
+        "exact": 16428,
+        "overOne": 428,
+        "baselineOverOne": 502,
+        "closed": 155,
+        "introduced": 81,
+        "maximum": 55,
+        "median": 0.0,
+        "samples": [
+          [
+            1271,
+            153,
+            254,
+            251
+          ],
+          [
+            1278,
+            154,
+            244,
+            236
+          ],
+          [
+            1301,
+            155,
+            139,
+            160
+          ],
+          [
+            1303,
+            155,
+            178,
+            170
+          ],
+          [
+            1264,
+            157,
+            178,
+            170
+          ],
+          [
+            1312,
+            162,
+            27,
+            31
+          ],
+          [
+            1300,
+            165,
+            11,
+            9
+          ],
+          [
+            1276,
+            166,
+            116,
+            95
+          ],
+          [
+            1294,
+            166,
+            27,
+            54
+          ],
+          [
+            1295,
+            166,
+            36,
+            23
+          ],
+          [
+            1293,
+            168,
+            244,
+            246
+          ],
+          [
+            1290,
+            169,
+            228,
+            232
+          ],
+          [
+            1292,
+            169,
+            239,
+            232
+          ],
+          [
+            1294,
+            169,
+            250,
+            246
+          ],
+          [
+            1297,
+            171,
+            27,
+            19
+          ],
+          [
+            1300,
+            171,
+            23,
+            16
+          ],
+          [
+            1294,
+            172,
+            4,
+            7
+          ],
+          [
+            1298,
+            172,
+            36,
+            27
+          ],
+          [
+            1300,
+            173,
+            54,
+            61
+          ],
+          [
+            1292,
+            174,
+            3,
+            1
+          ],
+          [
+            1299,
+            174,
+            77,
+            61
+          ],
+          [
+            1300,
+            174,
+            77,
+            61
+          ],
+          [
+            1303,
+            174,
+            48,
+            37
+          ],
+          [
+            1279,
+            175,
+            95,
+            85
+          ],
+          [
+            1284,
+            175,
+            242,
+            236
+          ]
+        ]
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 45389,
+        "overOne": 3327,
+        "baselineOverOne": 3437,
+        "closed": 302,
+        "introduced": 192,
+        "maximum": 255,
+        "median": 0.0,
+        "samples": [
+          [
+            1271,
+            153,
+            254,
+            251
+          ],
+          [
+            1271,
+            154,
+            242,
+            236
+          ],
+          [
+            1278,
+            154,
+            244,
+            236
+          ],
+          [
+            1278,
+            155,
+            201,
+            194
+          ],
+          [
+            1299,
+            155,
+            232,
+            224
+          ],
+          [
+            1301,
+            155,
+            139,
+            160
+          ],
+          [
+            1303,
+            155,
+            178,
+            170
+          ],
+          [
+            1264,
+            157,
+            178,
+            170
+          ],
+          [
+            1260,
+            160,
+            105,
+            116
+          ],
+          [
+            1270,
+            161,
+            170,
+            253
+          ],
+          [
+            1312,
+            162,
+            27,
+            31
+          ],
+          [
+            1232,
+            163,
+            7,
+            187
+          ],
+          [
+            1271,
+            163,
+            19,
+            255
+          ],
+          [
+            1272,
+            163,
+            23,
+            255
+          ],
+          [
+            1273,
+            163,
+            13,
+            255
+          ],
+          [
+            1274,
+            163,
+            13,
+            255
+          ],
+          [
+            1297,
+            163,
+            77,
+            255
+          ],
+          [
+            1299,
+            163,
+            23,
+            255
+          ],
+          [
+            1300,
+            163,
+            31,
+            255
+          ],
+          [
+            1269,
+            164,
+            2,
+            250
+          ],
+          [
+            1270,
+            164,
+            7,
+            254
+          ],
+          [
+            1275,
+            164,
+            61,
+            254
+          ],
+          [
+            1296,
+            164,
+            77,
+            255
+          ],
+          [
+            1301,
+            164,
+            54,
+            255
+          ],
+          [
+            1233,
+            165,
+            19,
+            250
+          ]
+        ]
+      },
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    "debug-nvidia": {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "program": "actual Player with authored inverse and current live attachments",
+      "visibilitySha256": "187e5d73f07c9134c6d5a17d036d20f001acf4177715e4ea80fcd23ff97abadb",
+      "referenceDepthSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "referenceNormalsSha256": "cbe0d3780970ca90e61aecb34b4e890ddfa3d9d89aec0aafaabf29c6f4ed12e5",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "colors": [
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+      ],
+      "hair": {
+        "pixels": 17017,
+        "exact": 16686,
+        "overOne": 277,
+        "baselineOverOne": 391,
+        "closed": 172,
+        "introduced": 58,
+        "maximum": 42,
+        "median": 0.0,
+        "samples": [
+          [
+            1303,
+            155,
+            178,
+            170
+          ],
+          [
+            1264,
+            157,
+            178,
+            170
+          ],
+          [
+            1312,
+            162,
+            27,
+            31
+          ],
+          [
+            1300,
+            165,
+            11,
+            9
+          ],
+          [
+            1293,
+            168,
+            244,
+            246
+          ],
+          [
+            1290,
+            169,
+            228,
+            232
+          ],
+          [
+            1294,
+            169,
+            250,
+            246
+          ],
+          [
+            1300,
+            171,
+            23,
+            16
+          ],
+          [
+            1298,
+            172,
+            36,
+            27
+          ],
+          [
+            1300,
+            173,
+            54,
+            61
+          ],
+          [
+            1299,
+            174,
+            77,
+            61
+          ],
+          [
+            1300,
+            174,
+            77,
+            61
+          ],
+          [
+            1279,
+            175,
+            95,
+            85
+          ],
+          [
+            1304,
+            177,
+            14,
+            16
+          ],
+          [
+            1326,
+            177,
+            27,
+            23
+          ],
+          [
+            1269,
+            178,
+            42,
+            36
+          ],
+          [
+            1272,
+            178,
+            116,
+            127
+          ],
+          [
+            1296,
+            178,
+            232,
+            239
+          ],
+          [
+            1266,
+            179,
+            19,
+            13
+          ],
+          [
+            1285,
+            179,
+            242,
+            244
+          ],
+          [
+            1286,
+            179,
+            208,
+            201
+          ],
+          [
+            1265,
+            181,
+            178,
+            187
+          ],
+          [
+            1304,
+            182,
+            239,
+            244
+          ],
+          [
+            1260,
+            183,
+            213,
+            208
+          ],
+          [
+            1259,
+            184,
+            232,
+            228
+          ]
+        ]
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 45769,
+        "overOne": 3129,
+        "baselineOverOne": 3309,
+        "closed": 320,
+        "introduced": 140,
+        "maximum": 255,
+        "median": 0.0,
+        "samples": [
+          [
+            1271,
+            154,
+            242,
+            236
+          ],
+          [
+            1278,
+            155,
+            207,
+            194
+          ],
+          [
+            1299,
+            155,
+            232,
+            224
+          ],
+          [
+            1303,
+            155,
+            178,
+            170
+          ],
+          [
+            1264,
+            157,
+            178,
+            170
+          ],
+          [
+            1270,
+            161,
+            170,
+            253
+          ],
+          [
+            1312,
+            162,
+            27,
+            31
+          ],
+          [
+            1232,
+            163,
+            11,
+            187
+          ],
+          [
+            1271,
+            163,
+            19,
+            255
+          ],
+          [
+            1272,
+            163,
+            23,
+            255
+          ],
+          [
+            1273,
+            163,
+            13,
+            255
+          ],
+          [
+            1274,
+            163,
+            13,
+            255
+          ],
+          [
+            1297,
+            163,
+            77,
+            255
+          ],
+          [
+            1299,
+            163,
+            23,
+            255
+          ],
+          [
+            1300,
+            163,
+            31,
+            255
+          ],
+          [
+            1269,
+            164,
+            2,
+            250
+          ],
+          [
+            1270,
+            164,
+            7,
+            254
+          ],
+          [
+            1275,
+            164,
+            27,
+            254
+          ],
+          [
+            1296,
+            164,
+            77,
+            255
+          ],
+          [
+            1301,
+            164,
+            54,
+            255
+          ],
+          [
+            1233,
+            165,
+            16,
+            250
+          ],
+          [
+            1268,
+            165,
+            0,
+            255
+          ],
+          [
+            1269,
+            165,
+            0,
+            208
+          ],
+          [
+            1270,
+            165,
+            0,
+            232
+          ],
+          [
+            1271,
+            165,
+            0,
+            194
+          ]
+        ]
+      },
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    "debug-intel": {
+      "configuration": "Debug",
+      "device": "intel",
+      "program": "actual Player with authored inverse and current live attachments",
+      "visibilitySha256": "be9a187dbdc054e99a68cb0831b88a2506e5835c24c15b9a74944dc0e487f908",
+      "referenceDepthSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "referenceNormalsSha256": "c54e38d52bbcfc8618345e2f0d1dd38d155ee8da467a1d531fc1845c1b9ca798",
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "colors": [
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+      ],
+      "hair": {
+        "pixels": 17017,
+        "exact": 16428,
+        "overOne": 428,
+        "baselineOverOne": 502,
+        "closed": 155,
+        "introduced": 81,
+        "maximum": 55,
+        "median": 0.0,
+        "samples": [
+          [
+            1271,
+            153,
+            254,
+            251
+          ],
+          [
+            1278,
+            154,
+            244,
+            236
+          ],
+          [
+            1301,
+            155,
+            139,
+            160
+          ],
+          [
+            1303,
+            155,
+            178,
+            170
+          ],
+          [
+            1264,
+            157,
+            178,
+            170
+          ],
+          [
+            1312,
+            162,
+            27,
+            31
+          ],
+          [
+            1300,
+            165,
+            11,
+            9
+          ],
+          [
+            1276,
+            166,
+            116,
+            95
+          ],
+          [
+            1294,
+            166,
+            27,
+            54
+          ],
+          [
+            1295,
+            166,
+            36,
+            23
+          ],
+          [
+            1293,
+            168,
+            244,
+            246
+          ],
+          [
+            1290,
+            169,
+            228,
+            232
+          ],
+          [
+            1292,
+            169,
+            239,
+            232
+          ],
+          [
+            1294,
+            169,
+            250,
+            246
+          ],
+          [
+            1297,
+            171,
+            27,
+            19
+          ],
+          [
+            1300,
+            171,
+            23,
+            16
+          ],
+          [
+            1294,
+            172,
+            4,
+            7
+          ],
+          [
+            1298,
+            172,
+            36,
+            27
+          ],
+          [
+            1300,
+            173,
+            54,
+            61
+          ],
+          [
+            1292,
+            174,
+            3,
+            1
+          ],
+          [
+            1299,
+            174,
+            77,
+            61
+          ],
+          [
+            1300,
+            174,
+            77,
+            61
+          ],
+          [
+            1303,
+            174,
+            48,
+            37
+          ],
+          [
+            1279,
+            175,
+            95,
+            85
+          ],
+          [
+            1284,
+            175,
+            242,
+            236
+          ]
+        ]
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 45389,
+        "overOne": 3327,
+        "baselineOverOne": 3437,
+        "closed": 302,
+        "introduced": 192,
+        "maximum": 255,
+        "median": 0.0,
+        "samples": [
+          [
+            1271,
+            153,
+            254,
+            251
+          ],
+          [
+            1271,
+            154,
+            242,
+            236
+          ],
+          [
+            1278,
+            154,
+            244,
+            236
+          ],
+          [
+            1278,
+            155,
+            201,
+            194
+          ],
+          [
+            1299,
+            155,
+            232,
+            224
+          ],
+          [
+            1301,
+            155,
+            139,
+            160
+          ],
+          [
+            1303,
+            155,
+            178,
+            170
+          ],
+          [
+            1264,
+            157,
+            178,
+            170
+          ],
+          [
+            1260,
+            160,
+            105,
+            116
+          ],
+          [
+            1270,
+            161,
+            170,
+            253
+          ],
+          [
+            1312,
+            162,
+            27,
+            31
+          ],
+          [
+            1232,
+            163,
+            7,
+            187
+          ],
+          [
+            1271,
+            163,
+            19,
+            255
+          ],
+          [
+            1272,
+            163,
+            23,
+            255
+          ],
+          [
+            1273,
+            163,
+            13,
+            255
+          ],
+          [
+            1274,
+            163,
+            13,
+            255
+          ],
+          [
+            1297,
+            163,
+            77,
+            255
+          ],
+          [
+            1299,
+            163,
+            23,
+            255
+          ],
+          [
+            1300,
+            163,
+            31,
+            255
+          ],
+          [
+            1269,
+            164,
+            2,
+            250
+          ],
+          [
+            1270,
+            164,
+            7,
+            254
+          ],
+          [
+            1275,
+            164,
+            61,
+            254
+          ],
+          [
+            1296,
+            164,
+            77,
+            255
+          ],
+          [
+            1301,
+            164,
+            54,
+            255
+          ],
+          [
+            1233,
+            165,
+            19,
+            250
+          ]
+        ]
+      },
+      "validationClean": true,
+      "allocatorZero": true
+    }
+  },
+  "crossConfiguration": {
+    "nvidia": {
+      "visibilitySha256": true,
+      "referenceDepthSha256": true,
+      "referenceNormalsSha256": true,
+      "objectIdsSha256": true,
+      "colors": true,
+      "hair": true,
+      "receiver": true
+    },
+    "intel": {
+      "visibilitySha256": true,
+      "referenceDepthSha256": true,
+      "referenceNormalsSha256": true,
+      "objectIdsSha256": true,
+      "colors": true,
+      "hair": true,
+      "receiver": true
+    },
+    "sceneControlsExact": true
+  },
+  "originalFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "depthCaptureAbsent": true,
+    "allExact": true,
+    "playerSha256": "d008745844deac754b21d51db398fcfec722391a0937f2d4ed75b5d3c0f6a82f",
+    "projectSha256": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "taskBytes": 512123846,
+    "taskBudgetBytes": 536870912
+  },
+  "source": {
+    "origin": [
+      -300.0,
+      300.0,
+      -300.0
+    ],
+    "clipToWorld": [
+      -0.5605310797691345,
+      -9.724439712725728e-19,
+      3.013973237653289e-10,
+      0.0,
+      -2.138003966575819e-12,
+      -0.3152737319469452,
+      -0.003976207226514816,
+      0.0,
+      -2999.970458984375,
+      3008.7705078125,
+      -2966.970947265625,
+      9.99990177154541,
+      -0.029573334380984306,
+      0.04245378077030182,
+      -1.0292757749557495,
+      9.894273534882814e-05
+    ],
+    "matrixSha256": "05257908c5b5a87365f380c0cec995b87307b008116a8086e3b8e4643d15c161",
+    "nativeSource": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-003435-visibility-numeric-contract-4f95e7\\hair-calibration.json",
+    "originProof": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-232828-scene-reference-normal-60ddfa\\object-frame-source-control.json"
+  },
+  "relocationOracle": {
+    "scope": "CPU relocation oracle for signed axes, rigid poses and screen scales",
+    "cases": 1024,
+    "maximumPositionError": 3.039392417747422e-06
+  },
+  "remainingSourceIntersections": {
+    "nvidia": {
+      "hair": {
+        "pixels": 17017,
+        "overOne": 277,
+        "over64": 0,
+        "inputDepthExact": 17017,
+        "inputNormalExact": 16967,
+        "overOneWithExactInputs": 276,
+        "over64WithExactInputs": 0,
+        "previousIsolationOverlap": {
+          "atlas": 173,
+          "record": 118,
+          "inverse": 67
+        },
+        "bothAtlasAndRecord": 14,
+        "atlasOrRecord": 277
+      },
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 3129,
+        "over64": 910,
+        "inputDepthExact": 38088,
+        "inputNormalExact": 19008,
+        "overOneWithExactInputs": 276,
+        "over64WithExactInputs": 0,
+        "previousIsolationOverlap": {
+          "atlas": 401,
+          "record": 293,
+          "inverse": 313
+        },
+        "bothAtlasAndRecord": 33,
+        "atlasOrRecord": 661,
+        "nonhair": {
+          "pixels": 32367,
+          "overOne": 2852,
+          "over64": 910,
+          "overOneWithExactInputs": 0,
+          "overOneWithDepthOnlyExact": 930,
+          "overOneWithNormalOnlyExact": 876,
+          "overOneWithNeitherInputExact": 1046
+        }
+      }
+    },
+    "intel": {
+      "hair": {
+        "pixels": 17017,
+        "overOne": 428,
+        "over64": 0,
+        "inputDepthExact": 7965,
+        "inputNormalExact": 15274,
+        "overOneWithExactInputs": 145,
+        "over64WithExactInputs": 0
+      },
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 3327,
+        "over64": 914,
+        "inputDepthExact": 18804,
+        "inputNormalExact": 17070,
+        "overOneWithExactInputs": 145,
+        "over64WithExactInputs": 0,
+        "nonhair": {
+          "pixels": 32367,
+          "overOne": 2899,
+          "over64": 914,
+          "overOneWithExactInputs": 0,
+          "overOneWithDepthOnlyExact": 543,
+          "overOneWithNormalOnlyExact": 790,
+          "overOneWithNeitherInputExact": 1566
+        }
+      }
+    }
+  },
+  "atlasDepthNeighborhood": {
+    "tile": 6,
+    "commonCoverage": 182211,
+    "highDelta": {
+      "3": {
+        "pixels": 2380,
+        "nearNativeDiscontinuity": 2380,
+        "nearActualDiscontinuity": 2380,
+        "withinBothSmooth": 0,
+        "boundsTile": [
+          188,
+          191,
+          839,
+          795
+        ]
+      },
+      "8": {
+        "pixels": 672,
+        "nearNativeDiscontinuity": 672,
+        "nearActualDiscontinuity": 672,
+        "withinBothSmooth": 0,
+        "boundsTile": [
+          198,
+          192,
+          812,
+          794
+        ]
+      },
+      "32": {
+        "pixels": 276,
+        "nearNativeDiscontinuity": 276,
+        "nearActualDiscontinuity": 276,
+        "withinBothSmooth": 0,
+        "boundsTile": [
+          198,
+          273,
+          782,
+          763
+        ]
+      },
+      "128": {
+        "pixels": 125,
+        "nearNativeDiscontinuity": 125,
+        "nearActualDiscontinuity": 125,
+        "withinBothSmooth": 0,
+        "boundsTile": [
+          198,
+          273,
+          735,
+          763
+        ]
+      },
+      "512": {
+        "pixels": 56,
+        "nearNativeDiscontinuity": 55,
+        "nearActualDiscontinuity": 56,
+        "withinBothSmooth": 0,
+        "boundsTile": [
+          245,
+          273,
+          735,
+          756
+        ]
+      },
+      "2048": {
+        "pixels": 28,
+        "nearNativeDiscontinuity": 28,
+        "nearActualDiscontinuity": 28,
+        "withinBothSmooth": 0,
+        "boundsTile": [
+          245,
+          330,
+          735,
+          669
+        ]
+      },
+      "8192": {
+        "pixels": 4,
+        "nearNativeDiscontinuity": 4,
+        "nearActualDiscontinuity": 4,
+        "withinBothSmooth": 0,
+        "boundsTile": [
+          245,
+          382,
+          709,
+          605
+        ]
+      }
+    },
+    "mostFrequentDeltas": {
+      "0": 120603,
+      "1": 55533,
+      "2": 3695,
+      "3": 898,
+      "4": 353,
+      "5": 216,
+      "6": 151,
+      "7": 90,
+      "8": 73,
+      "9": 65,
+      "10": 41,
+      "11": 45,
+      "12": 24,
+      "13": 20,
+      "14": 21,
+      "15": 13,
+      "16": 16,
+      "17": 5,
+      "18": 7,
+      "19": 10,
+      "20": 7,
+      "21": 9,
+      "22": 3,
+      "23": 5,
+      "24": 5,
+      "25": 6,
+      "26": 2,
+      "27": 7,
+      "28": 2,
+      "29": 5,
+      "30": 1,
+      "31": 4,
+      "32": 5
+    }
+  },
+  "objectRecordSource": {
+    "source": "actual Player object constants and native event 699, common reversed depth and source coordinates",
+    "actualInNativeCoordinates": [
+      0.6180487275123596,
+      -0.036808714270591736,
+      0.05934308096766472,
+      0.0,
+      0.0,
+      0.33922746777534485,
+      0.2135448008775711,
+      0.0,
+      -0.10897869616746902,
+      -0.20875252783298492,
+      0.3365512490272522,
+      0.0,
+      153.19204711914062,
+      -175.25100708007812,
+      55.04122543334961,
+      1.0
+    ],
+    "native": [
+      0.6180487275123596,
+      -0.03680873662233353,
+      0.059343110769987106,
+      0.0,
+      -9.49598355504122e-09,
+      0.33922746777534485,
+      0.2135448008775711,
+      0.0,
+      -0.1089787557721138,
+      -0.20875252783298492,
+      0.3365512192249298,
+      0.0,
+      153.19203186035156,
+      -175.25100708007812,
+      55.04122543334961,
+      1.0
+    ],
+    "absoluteDelta": [
+      0.0,
+      2.2351741790771484e-08,
+      -2.9802322387695312e-08,
+      0.0,
+      9.49598355504122e-09,
+      0.0,
+      0.0,
+      0.0,
+      5.960464477539063e-08,
+      0.0,
+      2.9802322387695312e-08,
+      0.0,
+      1.52587890625e-05,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "maxLinearError": 5.960464477539063e-08,
+    "maxOriginTermError": 1.52587890625e-05,
+    "lightDirectionDelta": [
+      7.450580596923828e-08,
+      5.960464477539063e-08,
+      1.1920928955078125e-07
+    ],
+    "filterRadiusUvEqual": true,
+    "atlasRectEqual": true,
+    "biasEqual": true,
+    "impliedWorldCenters": {
+      "actual": [
+        -0.032921092754872996,
+        0.8817172549749716,
+        -0.0790562297409785
+      ],
+      "native": [
+        -0.032922994611390845,
+        0.8817030359784858,
+        -0.07904755292348345
+      ]
+    }
+  },
+  "debugSymbolRecovery": {
+    "beforeInferred": 2149066613,
+    "after": 2026878837,
+    "initialMeasureExceededQuota": true,
+    "source": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzurePlayer.pdb",
+    "archivedSymbols": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-020715-scene-visibility-reference-calibration-f77af1\\build-symbols\\AzurePlayer.pdb",
+    "bytes": 122187776,
+    "symbolSha256": "4cb8cc0c8b155fe3993487e110da8f1610bbeacf09f042104e1d7a31cbebaeb4",
+    "playerSha256": "cb9f0143f912cec738abd834df8a7d0454066205e5f403a290b1f494b147305d",
+    "dryRun": "ninja: Entering directory `D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug'\n[1/1] C:\\WINDOWS\\system32\\cmd.exe /C \"cd /D D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug && D:\\Tools\\Python311\\python.exe D:/Projects/FYP-worktrees/nr-quality/Project/AzureRender/tools/generate_script_bindings.py --check\"\n"
+  },
+  "archive": {
+    "bytes": 4942115,
+    "sha256": "235701110b1d5fd8c153e807ddfef429e7f5ee9adac1ae1a76994d4806d4cd90",
+    "files": 170,
+    "contents": {
+      "run/atlas-caster-inventory.json": "3fc77efdee95c3b67e9155ed8b22070a936b18557590785b1f92109089f818dd",
+      "run/atlas-depth-neighborhood.json": "bf7aaa2e2d3d3fd518440b02a253cc0f618ac4baccf47fb9b5dd5b642468154d",
+      "run/budget.json": "0589f7a4c906469b83ca1d5843405d95f9296e9a2628a88686e916908fb19acd",
+      "run/build.py": "8b0af8d71d731c2eecd47d344a4c4ddf7d51edec8f06278524ba2cd9059e3ca3",
+      "run/calibration-source.json": "326059746724eb588e989fd6bad360b269c93a9fdb41bb5138e16f20b2cec06c",
+      "run/capture-hair-visibility.py": "f67005226f99fc2dc9af5e4c797369d46a4eb83a8b07b4dbf829074b4279d59c",
+      "run/compact-capture.py": "647af78a949d1ce53ca808a3e1adf3c19d1cb70a9836ccf62536672e3d23fe8a",
+      "run/compare-atlas-caster-inventory.py": "8c7f3e0b909bd5fa05261dbb0e2e19477f2f1f860a9101e8c9468a96bbcdfa29",
+      "run/compare-atlas-depth-neighborhood.py": "1ad56f6f10a7ee43302174ed0cbb6c73f5b04bab2575b6c4b73b7511deb03ff2",
+      "run/compare-configurations.py": "9320c3c186b68dcab9d0aaa29ae79aa2a49d83d41c5eb56338495046a00a10b0",
+      "run/compare-object-record-source.py": "a6f8ededd02112e00e197d220dfb62a4cc3fb1b33586335b5317b7357d2cd21c",
+      "run/cross-configuration.json": "2caa8512af822fadf024a7ca10b09dc30982b59f813c1a7a583e758ae7ba5da3",
+      "run/debug-budget-dry-run.log": "9c523b635db3c0c623e4f476a34e42ff9b09c99e6337e9b9ab7b3de8b1eb1769",
+      "run/debug-build-commands.json": "10aef378f0b0c58373d861bdaa38a37e90fc892d21045558054251b048dc481b",
+      "run/debug-build-execution.json": "af84c4a17e82c8533389322440076d106fe4a1e86a24b4d132353e0cd9a9479c",
+      "run/debug-build.log": "6f561d3598d50eb49810c64dbe8e06430de884cc20a5168cbf47d8c67831617b",
+      "run/debug-cpu-tests-execution.json": "0a92f9e2c7b3c7d5fba5b0f3549e47307f29e3f53805ea9ab950229ce763d1bb",
+      "run/debug-ctest.log": "ca839c3e6ae83b4dccbca7473c0129fdcc3ebc91fa7b5aaf11a897c603c6a702",
+      "run/debug-ctest.xml": "b18b76f65c4e4adceb6a1f13755d8596f7c48afd8d3e10bc335f7c678ff021bc",
+      "run/debug-first-build-execution.json": "73ee9b69861e71056ace43c310c3e54a92c6036e06710cb054599064be897947",
+      "run/debug-first-build.log": "a326de7544a178dac0852d21713d5f0fb6542a5af58dcbdb5450db8e4c57c1c1",
+      "run/debug-intel-capture-execution.json": "e21083a6a8ee4cae9b0234363dc4c515495ca37d955cdbf734878b9b28968fb6",
+      "run/debug-intel-command.json": "ddf3072963e7a2a4034cdccd47d48ae12785f90e4b683fe42480275496170592",
+      "run/debug-intel-gpu-ctest.log": "b09a45c34450a879799ee898197ca69dfa01e31b60bfb4d05ad52e55eee97d0e",
+      "run/debug-intel-gpu-ctest.xml": "2e75b180aaad948e66a1288bc4692a7daae7c54da0d4a1083c060a24e289ec51",
+      "run/debug-intel-gpu-tests-execution.json": "1a399f7b166627e56719ba71a0b8478afa52925d1a337196d15b877a891af766",
+      "run/debug-intel-gpu-verification.json": "1bb4b5a71ec6eabf662b02273f2fecb186f26d47c49c47fabec7800e278c4095",
+      "run/debug-intel-results.json": "1bbf264d7825193082374e9756dccbe125ce92c69c5db0a6fcd72ef010a349ef",
+      "run/debug-intel.log": "e865e771ca40bdb4d55001ce4af42bd9cf488f9652906259894217077491fbdb",
+      "run/debug-internal-preflight.log": "a4607baeba07b989031f97151e23a9653c674a560bb03892f5313ea43d05dd21",
+      "run/debug-link-budget-recovery.json": "017ff0eed5e4cc96c41feebfea3e3497adbf4d76a569155d5e8e1a82b85290a0",
+      "run/debug-nvidia-capture-execution.json": "a7590a990e1b4514ef19b7ad884fdcfd8ab2550285d31322d2ec6e91e37545c7",
+      "run/debug-nvidia-command.json": "051bddf0246ee2b0bfae98daa8e44d7d5218ac38945c3fa6f0e9b48899f66202",
+      "run/debug-nvidia-gpu-ctest.log": "145e0457290eb6f0ac22ec8a5b78ba53bd00ee49e943c2a7aae2d3639dec5682",
+      "run/debug-nvidia-gpu-ctest.xml": "9f6b0549d7aa25d1ad2fb171eb9e4cdf24c478433139bffc52d8c675c6f94df3",
+      "run/debug-nvidia-gpu-tests-execution.json": "4e9f1915f3d539ca43d9025aafb7de3111ceaf12f3a0b14a363eaa744b343e72",
+      "run/debug-nvidia-gpu-verification.json": "4b7aceecb539d6cef656c406a16a6288b47fdec000b6be75116f95b69aa1d178",
+      "run/debug-nvidia-results.json": "6a2df9b4ba342a5319753e448a8a31742c07dae66461e0c94e47cbdfa1aad801",
+      "run/debug-nvidia-scene-control-execution.json": "9f0ad8994452b128a847a1fd1f4d9fb4a0b50fffb6756009461900cc333658fe",
+      "run/debug-nvidia.log": "d32dd64bf1b8c87460e5da2a89d02edaa7da73e3efda88102febef8406dee013",
+      "run/debug-symbol-budget-recovery.json": "06a8c4eaba731afa6f08010410c58f0ceb3214de4cf6e978e19cbad5eaacb874",
+      "run/debug-verification.json": "693d4d259dcbd0400fe719f15db6f70c5498c8defd803a9015713e78556ddba6",
+      "run/default-four-command.json": "b858ad4ebe92a2b98acce0a17c878d111bbcd47f5f90ed7afe4a4689f7e46fd0",
+      "run/default-four-execution.json": "deabf21451358e346d9ab57f60b798cc845c28e5f4144ce37966c1505de07eca",
+      "run/default-four-results.json": "df80d72fc464d4ab21aac49640190e145488111c2cadfae3122f08a6668fa80a",
+      "run/default-four.log": "c9d6945529ac3b1f74327474208202b98c4a74e23e6b16da40b59963ef0bdc9e",
+      "run/default-four.py": "f3d9d1fcf1d9a36b187f58e83f4f36b30140641c387701fa817ae39547636da9",
+      "run/default-runtime.json": "992d62cd80876ee1c8d7d0e6b116c5ef6321841381c43ef8ba0c0263dd062ea9",
+      "run/hair-fixture-inputs.json": "3a43138d11c439c9d29164d8ec62cfcc0573070b5a2b83051fe77aa781eacbea",
+      "run/intel-remaining-source-intersection.json": "9ec394cc605bb9969a276fe4272da31a90a819cf602544bc9515d3d2231cc43b",
+      "run/nvidia-remaining-source-intersection.json": "eea7b208413dc0c0d744136a6a892787d5eb52c42e0662af28dd45b25615ad24",
+      "run/object-record-source-comparison.json": "bf34ea4bddbb8bff10ade3b20b1287d9199561ff197033ba865c85b54857ccd5",
+      "run/package-evidence.py": "0437464a3cd3969fb9b8a907e606a54b32c12a484ff2338292d1442e60695c1e",
+      "run/prepare-debug-link-budget.py": "237682de7bd21dbdad430f08be7a2ad327adce276f9220ae0146108289079006",
+      "run/prepare-hair-fixture.py": "6ac88563a027c8aef72a8b33702242d4b7b8e24fd80e1badb0b3b76f8ad59f94",
+      "run/process.log": "df80d72fc464d4ab21aac49640190e145488111c2cadfae3122f08a6668fa80a",
+      "run/qualification-batch.py": "479e0baf24bac63fa518e594c478b36fc3f14ed14cbcf0c7d09f3274b1cc8c42",
+      "run/queued-build.py": "8345d2e6874a2717c96c0d90d23e818c2bbcf8793dad20f0437c53c069257d24",
+      "run/queued-gpu.py": "e41fabdbd7504da19ed11a1e1494778e199b1efb824978a348ec7087bd9a476c",
+      "run/recover-debug-symbol-budget.py": "c5baf44020dc81c0285d18ebace4c2467e664d10225d3831a7f5be91e8daf1cf",
+      "run/release-build-commands.json": "cd127fc149b395377bfeb5f11e951f6d0fcb4ad800981f14b3faf4bd1fdaea49",
+      "run/release-build-execution.json": "db6f0b5430778e565f6f925a5f514f92e9c24d8d846ac6f62cf6c5f4e89f98a1",
+      "run/release-build.log": "06f8e8932655acb98b9058a36e994465fe3bda0f4623543a25c7c0529bb31663",
+      "run/release-ctest.log": "76cef361372f966418d7229c49cefe72d150bd3b2c7c7cdd3f189418399590ef",
+      "run/release-ctest.xml": "1cc9cda1fa7c4b109e3623490a53ce4b4101d82c7d2e40a64b9d4d7f4f7e29d2",
+      "run/release-intel-capture-execution.json": "19534d08b28a4d9f17647fc2c8f2b446259bc2422f08cd1f075d42e0dc1044d0",
+      "run/release-intel-command.json": "f8d302129184aa4cbf4500c4e08f05fd5f2889255e1ccc4acc0347725ea9092d",
+      "run/release-intel-gpu-ctest.log": "7d6c9879bf896a49fbdef57960e66c31e734fbf55bcf653ec964dca84cfc93e8",
+      "run/release-intel-gpu-ctest.xml": "c7c44b8b2d68fcf6e93f0aeb5f6f10fb761fe567e699b239448202530acdb450",
+      "run/release-intel-gpu-tests-execution.json": "b5048cb47477af3bf16afc5a0bfb03870d92f4b4da23e9dcf3fc3c271bf5ec21",
+      "run/release-intel-gpu-verification.json": "5da18c1a59cac45a4dffb8e7b3a5266b159695d9b4b267d8caf01c0200bad607",
+      "run/release-intel-results.json": "a02607f9db6dea41bee499b6d439d69d0c46e528d2c9957e01e955d404ef0eb1",
+      "run/release-intel.log": "71913eedbcb8a01c044986da05276d081e698e6c65b1e88cdcb9be48c64752a6",
+      "run/release-internal-preflight.log": "6760062175667ff0c9d537389cc5a0474d621bafe22bc4595d01e4fbb31808d6",
+      "run/release-nvidia-capture-execution.json": "3a5e1b2c1c9668225c5f0d4ec88c343fa33b4bead7a025e3a3d9a0cc679577b7",
+      "run/release-nvidia-command.json": "a3ef7ffce3b723e4bd440bc7093405bb073752465480f32e2ea8722781264d85",
+      "run/release-nvidia-gpu-ctest.log": "546c1f2ff34140cf3323946dfa763c2dd1aebc7fd7c888df402b79a9bedfa1d3",
+      "run/release-nvidia-gpu-ctest.xml": "aa15106efd2b8a2ec8f3b580255a5f938befc7e816d37cabcb3fe647c617e390",
+      "run/release-nvidia-gpu-tests-execution.json": "471eed2094b4f00b03cc46cea27805c62714281de172d5fba5af5a56323b33c2",
+      "run/release-nvidia-gpu-verification.json": "ec43ae73d3001b550ff397ba37626faf360c77dc46c8d14ccda9c9cf7432880e",
+      "run/release-nvidia-results.json": "1cb07d0532398ea42b8221f6de49397f49b3da0e34789824fb1fe2afebf967ae",
+      "run/release-nvidia-scene-control-execution.json": "b950a123604b9834c528650b6e75391177df76d4649c78b7b0175bfa6d17e95d",
+      "run/release-nvidia.log": "a1d9e505a34d66a74b0adafd8983036293668fcbc2cab5733a0af4bd62d714d3",
+      "run/release-verification.json": "4c027e72d0dea7e35ef2bfae9b68cac405ba2d8baa6b2c636b18e21678fdd566",
+      "run/relocation-oracle.json": "24506365f7296064dbcdb0f50e51c2396d71f994b05c6453d376c8fed6162bc8",
+      "run/relocation-oracle.py": "781a2d381e72a34f8422e1e617b573c05e3b17980fd371eea19c7bd56ca0822a",
+      "run/remaining-source-intersection.py": "66c71c198b0a8edc2beec886c7c2f536f838cc7fd21690c165cf7a105d882ece",
+      "run/runtime-red-result.json": "778f5f6836c454bb70df18421c0071cb5aaaa3de544d52401e6511835066c147",
+      "run/runtime-red.py": "9a55461ce91b388e865d2764a18bd39dac953cbabc4b875b0400350e591ee76b",
+      "run/scene-control.py": "fce29284bd6f18dd056a816a4d1feffaf32df50d4cb619a283c738bf4b5d9300",
+      "run/task-card.json": "d82e71e76fa4128e7f07e9bd475197fa668fb2456a08f17922ab7b8f733f8faa",
+      "run/verify-build.py": "764d320746b306b08c68cfc85d5ca4eb911d9241bc5968107770093eb0f6320e",
+      "run/release-nvidia-frames/capture_manifest.json": "a4141aab3c963e2e2613398b88c87c34337eee5368470bf6608c249c4fa52966",
+      "run/release-nvidia-frames/gpu_capabilities.json": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54",
+      "run/release-nvidia-frames/reference-planes.json": "38c0e039ddf0c9b6ad80b875d1615ed6ab5cbcecfa3d408bee035fcbc852a802",
+      "run/release-nvidia-frames/reference-planes.zip": "825fd6521e61c2fa5c42b7bfec4e322ff13d4915f3f37d92a7ca143ac7c7528b",
+      "run/release-intel-frames/capture_manifest.json": "358be5bd95f99e44085d93f422c271b903e6674a386923cb1326cb2575ab11e1",
+      "run/release-intel-frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "run/release-intel-frames/reference-planes.json": "e2b27db8847b2db258c866e4212e234e34feec75a35f2d7b169466114e33cd11",
+      "run/release-intel-frames/reference-planes.zip": "28c6336a425358ecb8a9fbb810a378181b0f9a6f23b4ba70ee13eac965250c7e",
+      "run/debug-nvidia-frames/capture_manifest.json": "fcc01273fdbc17676a0e0a3bb18a6f7cf115d50fb2ea193a0280d1b955103188",
+      "run/debug-nvidia-frames/gpu_capabilities.json": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54",
+      "run/debug-nvidia-frames/reference-planes.json": "38c0e039ddf0c9b6ad80b875d1615ed6ab5cbcecfa3d408bee035fcbc852a802",
+      "run/debug-intel-frames/capture_manifest.json": "dc89c3138cd6e0626f5f8daf2d8f6925cdafd0bfc115511a1a142048cedea27a",
+      "run/debug-intel-frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "run/debug-intel-frames/reference-planes.json": "e2b27db8847b2db258c866e4212e234e34feec75a35f2d7b169466114e33cd11",
+      "run/scene-control-release/calibrated-command.json": "de27151024ab1dffc95f4a4cd0d150aefd7b3ff4b28579c3859d16f4f7ba2b87",
+      "run/scene-control-release/calibrated.azurelevel": "10ed8a5fefb1628f66431284568e270c60cadd7380c6babe8190cdc3c91e9cdc",
+      "run/scene-control-release/calibrated.log": "47e277757aea86b53ecdb88eb9e045b27e5921539d4e204af8a2a4528a8ac6af",
+      "run/scene-control-release/inputs-command.json": "98a40c602eed3be77d8098cbcfd26829e6b78ab0f5c8be75ac0feb44bec5151d",
+      "run/scene-control-release/inputs.azurelevel": "702e0a839175f53c86e1c0792aeaee8c6a84a4a6d806cba55246231ae6ecae80",
+      "run/scene-control-release/inputs.log": "1d33c8a04919d29baca2f63506383b6fc3ab933ce95ab3dbc536a30fc355d9b5",
+      "run/scene-control-release/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/scene-control-release/level.azurelevel": "a9f0260957955eff63f7710108343bdad8d09f705760b672b6e94648a21c8f62",
+      "run/scene-control-release/moved-command.json": "da95bc54fe8c5b41fd28f29d039a9d61b9705bab74fda17eb0560d48ea1c9d60",
+      "run/scene-control-release/moved.azurelevel": "88705a0f1b4a999c54f2b3f8db8604173b8776cd657c84c3ffe04e41e24615af",
+      "run/scene-control-release/moved.log": "c0c99c5527c3d5d9b61b6aa085f8fd1e93ff0069bb0bd57f1b0fdbb6b425623e",
+      "run/scene-control-release/neutral-command.json": "53d521d130aeb6bc21bbed8832e56a84a69fe9d5425f48fd3d74647971a8c4a8",
+      "run/scene-control-release/neutral.azurelevel": "a9f0260957955eff63f7710108343bdad8d09f705760b672b6e94648a21c8f62",
+      "run/scene-control-release/neutral.log": "a34a8f79b3c077cf12d5f8f09cce24effbc1b77a27494e64f5211e698d83ef4c",
+      "run/scene-control-release/objects-command.json": "40df84b0161f61ba0d46c5626216f3e624aba19d0152b679c462f7709d7e335e",
+      "run/scene-control-release/objects.azurelevel": "0cb7a3ab664c0f16db8da5bb42d3ac21fe71da4f969c216944f20eec827b94f0",
+      "run/scene-control-release/objects.log": "60ed70586db5dc9e495834eb5a1a8f28e5209dfe0f39926d34dc0d168f55d4e5",
+      "run/scene-control-release/plane.gltf": "646eb5bd1db2cc240316038f20908df445bbcfb5cf2954122ee9c289a1b334ad",
+      "run/scene-control-release/summary.json": "fd77b5f08c896b326c2cc0644e2724f284f15b4b8e29b11c27616cc6ee9045aa",
+      "run/scene-control-release/config/reference-views.json": "db2452b2d95b7165069e8ae030290b53b4e3d711b55b292d20d1d9bb3ab03151",
+      "run/scene-control-release/objects/capture_manifest.json": "a7b8ea9ec44d74f6e19dae57d42d19b065ddacb6ca07e74d00cbcdc450dde13b",
+      "run/scene-control-release/objects/reference-object-visibility-rg8.bin": "68a230c71a9e011a3ca10c16ead9a653c57875eb9a618eb095e4140dec5df153",
+      "run/scene-control-release/calibrated/capture_manifest.json": "7c98fb6886875247b6e3b85229c8e06bfa2f48f4fa280a4775812d36f2ac713f",
+      "run/scene-control-release/calibrated/reference-object-visibility-rg8.bin": "68a230c71a9e011a3ca10c16ead9a653c57875eb9a618eb095e4140dec5df153",
+      "run/scene-control-release/moved/capture_manifest.json": "b20065f813ea15a1c4db2e0d8861c39e2b95619914926897b46919c82427e278",
+      "run/scene-control-release/moved/reference-object-visibility-rg8.bin": "68a230c71a9e011a3ca10c16ead9a653c57875eb9a618eb095e4140dec5df153",
+      "run/scene-control-release/inputs/capture_manifest.json": "6a7b15bdd169ff9d9328879f8b50f89971969a74a5d9de06480b60674b1f28dc",
+      "run/scene-control-release/neutral/capture_manifest.json": "59be28353a233e280b5ec0177c400619575a751efb261e31ff24e0b8731690bc",
+      "run/scene-control-release/neutral/reference-object-visibility-rg8.bin": "2d864c0b789a43214eee8524d3182075125e5ca2cd527f3582ec87ffd94076bc",
+      "run/scene-control-debug/calibrated-command.json": "3fbce111f82e88a7714c80f0422f78b4e2a958760245f0ed04e5a63344738afc",
+      "run/scene-control-debug/calibrated.azurelevel": "10ed8a5fefb1628f66431284568e270c60cadd7380c6babe8190cdc3c91e9cdc",
+      "run/scene-control-debug/calibrated.log": "af3d49ee42f8a9ea380f40cea5f30e8d9212013a6511a57fbef3e3bc14ec8bdd",
+      "run/scene-control-debug/inputs-command.json": "00ba26b0cb6adacfd986169ae4e05c8fcef12db99960d19ff1fb841ee7ec2965",
+      "run/scene-control-debug/inputs.azurelevel": "702e0a839175f53c86e1c0792aeaee8c6a84a4a6d806cba55246231ae6ecae80",
+      "run/scene-control-debug/inputs.log": "1fa83fdebedcf3b021d8d0f2bc7f4bea190a3818719c413b70d11cca41c75a85",
+      "run/scene-control-debug/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/scene-control-debug/level.azurelevel": "a9f0260957955eff63f7710108343bdad8d09f705760b672b6e94648a21c8f62",
+      "run/scene-control-debug/moved-command.json": "63922c69215b1c414d89681f411495409144117986daf524830cb3ca9c320fa5",
+      "run/scene-control-debug/moved.azurelevel": "88705a0f1b4a999c54f2b3f8db8604173b8776cd657c84c3ffe04e41e24615af",
+      "run/scene-control-debug/moved.log": "e6a2a9da4ebde43c4b77681e8594f0d79664592bd0faafe83405aee72fde4ef0",
+      "run/scene-control-debug/neutral-command.json": "f3611939e1bd33ac8611d86131045504b286e7c10c5c07177deccf606ffd5cd1",
+      "run/scene-control-debug/neutral.azurelevel": "a9f0260957955eff63f7710108343bdad8d09f705760b672b6e94648a21c8f62",
+      "run/scene-control-debug/neutral.log": "eb87420e2eafab5aa0fe8d2dd4fc7639e63156855cf47a5163c9e25ac7e53707",
+      "run/scene-control-debug/objects-command.json": "23dfd761121314e2d44e9943332feb7efe71b3ed9bd5c4829cb01deba2936d9c",
+      "run/scene-control-debug/objects.azurelevel": "0cb7a3ab664c0f16db8da5bb42d3ac21fe71da4f969c216944f20eec827b94f0",
+      "run/scene-control-debug/objects.log": "4586de14d72507bec915ed82a8d52d8eab9d89f84bd234b0028f8d1fdf0e8391",
+      "run/scene-control-debug/plane.gltf": "646eb5bd1db2cc240316038f20908df445bbcfb5cf2954122ee9c289a1b334ad",
+      "run/scene-control-debug/summary.json": "fd77b5f08c896b326c2cc0644e2724f284f15b4b8e29b11c27616cc6ee9045aa",
+      "run/scene-control-debug/config/reference-views.json": "db2452b2d95b7165069e8ae030290b53b4e3d711b55b292d20d1d9bb3ab03151",
+      "run/scene-control-debug/objects/capture_manifest.json": "6b1e9ab015b77c985a4e00252b01c394867abeda15fec9c24e18346d57b4a3af",
+      "run/scene-control-debug/objects/reference-object-visibility-rg8.bin": "68a230c71a9e011a3ca10c16ead9a653c57875eb9a618eb095e4140dec5df153",
+      "run/scene-control-debug/calibrated/capture_manifest.json": "4d01c5ea17e4fb6bdc3b80e867093e6f60156a800f5e8c41cfebb858efa28ba7",
+      "run/scene-control-debug/calibrated/reference-object-visibility-rg8.bin": "68a230c71a9e011a3ca10c16ead9a653c57875eb9a618eb095e4140dec5df153",
+      "run/scene-control-debug/moved/capture_manifest.json": "6bc0e07aee6668c05ffdf74a16692254e7f383bff40f2aff4930f364ace0a3ac",
+      "run/scene-control-debug/moved/reference-object-visibility-rg8.bin": "68a230c71a9e011a3ca10c16ead9a653c57875eb9a618eb095e4140dec5df153",
+      "run/scene-control-debug/inputs/capture_manifest.json": "bd23d41e2db8cf0362b2b4ad3c0a62eb9665e8f7884daea99195ca08f8271796",
+      "run/scene-control-debug/neutral/capture_manifest.json": "3b5a18f468271c46bdf01e5c5d0dc247e1c330c89959993acb33f26eb7fc859d",
+      "run/scene-control-debug/neutral/reference-object-visibility-rg8.bin": "2d864c0b789a43214eee8524d3182075125e5ca2cd527f3582ec87ffd94076bc",
+      "run/default-four-frames/capture_manifest.json": "65a56ae7eb76c7c63e665749ca6c441b914970dc6b74e0bcfc48784740f6b9fd",
+      "run/hair-project/config/reference-views.json": "b64a17f510dca362e4fe19ab1b62f3be2f162cfded686cbec7c5b8f86cc375a5",
+      "run/runtime-red/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/runtime-red/level.azurelevel": "a9f0260957955eff63f7710108343bdad8d09f705760b672b6e94648a21c8f62",
+      "run/runtime-red/plane.gltf": "646eb5bd1db2cc240316038f20908df445bbcfb5cf2954122ee9c289a1b334ad",
+      "run/runtime-red/process.log": "86c02bf7d04e8c253d58931a96c94bec198b6fc88b6ab1e1936188b17570b14a"
+    }
+  }
+}

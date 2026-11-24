@@ -1,0 +1,26 @@
+{
+  "name": "full-world-hidden",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\full-world-hidden.azureproject",
+    "--width",
+    "2560",
+    "--height",
+    "1440",
+    "--capture-frames",
+    "12",
+    "--fixed-frame-step",
+    "--capture-fps",
+    "60",
+    "--capture-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\native-captures\\full-world-hidden\\frames",
+    "--qa-camera",
+    "scene",
+    "--qa-light",
+    "scene",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\native-captures\\full-world-hidden\\runtime.json"
+  ],
+  "status": "running"
+}

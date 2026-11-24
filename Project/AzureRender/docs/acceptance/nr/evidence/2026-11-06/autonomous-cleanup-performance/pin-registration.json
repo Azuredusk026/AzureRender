@@ -1,0 +1,319 @@
+{
+  "status": "passed",
+  "pins": 118,
+  "registered": 118,
+  "added": [
+    {
+      "registration": {
+        "path": "runs/20261016-140642-ev0-baseline-891c98",
+        "pathBase": "build",
+        "purpose": "私有来源导入基线及环境证据。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "EV0 local private source evidence\n",
+      "reviewedEntries": [
+        ".finished",
+        ".keep",
+        "blender-idle.log",
+        "blender-repaired.log",
+        "environment.json",
+        "finalize.py",
+        "gpu.csv",
+        "green.log",
+        "idle",
+        "intake-tests.log",
+        "intake.json",
+        "manifest.json"
+      ]
+    },
+    {
+      "registration": {
+        "path": "runs/20261016-142829-ev6-scene-exchange-41ac3c",
+        "pathBase": "build",
+        "purpose": "场景交换集成、导出夹具及构建证据。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "EV6 integration evidence and temporary CMake registration\n",
+      "reviewedEntries": [
+        ".finished",
+        ".keep",
+        "blender-export.log",
+        "build-matched-toolchain.log",
+        "build.log",
+        "configure.log",
+        "ctest.log",
+        "export_fixture.py",
+        "final-build.log",
+        "final-ctest.log",
+        "finalize.py",
+        "green-python.log"
+      ]
+    },
+    {
+      "registration": {
+        "path": "runs/20261017-000956-endfield-native-3caf73",
+        "pathBase": "build",
+        "purpose": "原生资产调查、动画候选及来源数据库。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "Active native asset investigation; contains source-bound candidates awaiting user selections.\n",
+      "reviewedEntries": [
+        ".keep",
+        "all-provider-scanner.log",
+        "all-providers.jsonl",
+        "animation-bundles",
+        "animation-candidates",
+        "base01_lv001-instances.sqlite",
+        "base01_lv002-instances.sqlite",
+        "build_dijiang_preview.py",
+        "bundles.tsv",
+        "cabs-first20.jsonl",
+        "cabs.jsonl",
+        "character-opaque-report.json"
+      ]
+    },
+    {
+      "registration": {
+        "path": "runs/20261017-141949-dijiang-lighting-video-7d7da0",
+        "pathBase": "build",
+        "purpose": "中庭展示工程、照明来源及原速视频。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "Native Dijiang showcase project, source provenance and user-requested video. Retain for subsequent engine work.\n",
+      "reviewedEntries": [
+        ".finished",
+        ".keep",
+        "bake-scene.log",
+        "bake-test-final.log",
+        "bake-test.log",
+        "baked-scene",
+        "camera-check",
+        "camera-check-report.json",
+        "camera-check.json",
+        "camera-check.log",
+        "camera-video.json",
+        "content-verification.json"
+      ]
+    },
+    {
+      "registration": {
+        "path": "runs/20261022-051129-character-logistics-restoration-0f2e71",
+        "pathBase": "build",
+        "purpose": "角色与物流还原的工具、候选及来源证据。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "原生还原接续所需的工具、候选与来源证据。\n",
+      "reviewedEntries": [
+        ".keep",
+        "aa-aux-diagnosis",
+        "aa-aux-diagnosis.log",
+        "aa-aux-editor-diagnosis",
+        "aa-aux-editor-diagnosis.log",
+        "aa-aux-rebuilt",
+        "aa-aux-rebuilt.log",
+        "build_joint_editor.cmd",
+        "capture-tool-research",
+        "character",
+        "character-article-notes",
+        "character-composite-project"
+      ]
+    },
+    {
+      "registration": {
+        "path": "runs/20261022-201845-endfield-capture-954719",
+        "pathBase": "build",
+        "purpose": "原生抓帧及官方重放来源证据。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "原生抓帧与官方重放证据，保留供后续分析。\n",
+      "reviewedEntries": [
+        ".keep",
+        "attach-current-game.ps1",
+        "attach-transcript.log",
+        "capture-files-verified.json",
+        "check-input-token.ps1",
+        "current.params.json",
+        "diagnose.ps1",
+        "elevated-diagnostic.json",
+        "Endfield-20261022-201902-cli.log",
+        "Endfield-20261022-203602-cli.log",
+        "Endfield-games-child_frame10401-backbuffer-receipt.json",
+        "Endfield-games-child_frame10401-inventory-receipt.json"
+      ]
+    },
+    {
+      "registration": {
+        "path": "runs/20261022-210028-capture-plan-handoff-2e194d",
+        "pathBase": "build",
+        "purpose": "原生帧核对、会话收据及工作区快照。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "原生帧核对与会话交接，保留收据和工作区快照。\n",
+      "reviewedEntries": [
+        ".finished",
+        ".keep",
+        "capture-handoff-verification.json",
+        "commit-paths.json",
+        "diff-check.log",
+        "doc-links.log",
+        "doc-style.log",
+        "documentation-verification.json",
+        "markdown-files.json",
+        "source-preservation.json",
+        "stage-status.log",
+        "staged-documentation.json"
+      ]
+    },
+    {
+      "registration": {
+        "path": "runs/20261025-160544-main-material-frame-integration-1ad7a0",
+        "pathBase": "build",
+        "purpose": "主材质帧集成、材质槽与描边绑定证据。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "",
+      "reviewedEntries": [
+        ".finished",
+        ".keep",
+        "audit_candidate_v2.py",
+        "benchmark-slots-full.log",
+        "benchmark-slots-metadata.log",
+        "benchmark_slots.py",
+        "bind-outline-directions.json",
+        "bind-outline-directions.npz",
+        "build-slot-debug.log",
+        "build-slot-final-debug.log",
+        "build-slot-final-release.log",
+        "build-slot-metadata-debug.log"
+      ]
+    },
+    {
+      "registration": {
+        "path": "runs/20261029-005117-shared-motion-history-a9430e",
+        "pathBase": "build",
+        "purpose": "运动向量与时间历史的共享所有权证据。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "NR5-R8-L shared motion and temporal ownership\n",
+      "reviewedEntries": [
+        ".finished",
+        ".keep",
+        "app-debug-build.log",
+        "app-release-build.log",
+        "baseline",
+        "baseline-comparison.json",
+        "baseline-mask",
+        "cleanup.json",
+        "cloth.log",
+        "kk.log",
+        "main-debug-cloth",
+        "main-debug-kk"
+      ]
+    },
+    {
+      "registration": {
+        "path": "runs/20261029-015351-reflection-motion-depth-30af9d",
+        "pathBase": "build",
+        "purpose": "反射、运动及深度边缘的成对控制证据。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "",
+      "reviewedEntries": [
+        ".finished",
+        ".keep",
+        "bounded-opaque",
+        "compare-3x3.log",
+        "compare-bounded.log",
+        "compare_edges.py",
+        "kk-debug-complete",
+        "kk-debug-complete.log",
+        "kk-release",
+        "kk-release-complete",
+        "kk-release-complete.log",
+        "kk-release.log"
+      ]
+    },
+    {
+      "registration": {
+        "path": "runs/20261029-021125-reflection-temporal-composition-f11a86",
+        "pathBase": "build",
+        "purpose": "反射时间合成的双配置构建及 GPU 证据。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "",
+      "reviewedEntries": [
+        ".finished",
+        ".keep",
+        "all-debug-build.log",
+        "all-release-build.log",
+        "composition-debug-verbose.log",
+        "composition-release-verbose.log",
+        "gpu-debug-build.log",
+        "gpu-debug-test.log",
+        "green-build.log",
+        "green-test.log",
+        "main-debug",
+        "main-debug.log"
+      ]
+    },
+    {
+      "registration": {
+        "path": "runs/20261029-023153-reflection-reprojection-32dd36",
+        "pathBase": "build",
+        "purpose": "反射重投影、失败控制及 GPU 核验证据。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "",
+      "reviewedEntries": [
+        ".finished",
+        ".keep",
+        "all-debug-build.log",
+        "all-release-build.log",
+        "gpu-green-build.log",
+        "gpu-green-test.log",
+        "gpu-red-build.log",
+        "gpu-red-test.log",
+        "green-build.log",
+        "green-test.log",
+        "live-debug-build.log",
+        "live-debug-test.log"
+      ]
+    },
+    {
+      "registration": {
+        "path": "runs/20261029-071130-main-character-joint-budget-2cddc4",
+        "pathBase": "build",
+        "purpose": "主角色联合预算、内存诊断与原生捕获。",
+        "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+        "pinMarker": ".keep"
+      },
+      "markerText": "",
+      "reviewedEntries": [
+        ".keep",
+        "asan-build-consistent.log",
+        "asan-build-unoptimized.log",
+        "asan-build.log",
+        "asan-loader",
+        "asan-parser-build.log",
+        "asan-parser-run.log",
+        "asan-run-consistent.log",
+        "asan-run-no-uar.log",
+        "asan-run-unoptimized.log",
+        "asan-run.log",
+        "AzurePlayer.map"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "status": "passed-irradiance-consumption-control",
+  "visualAcceptance": "failed-user-review",
+  "frames": {
+    "enabled": {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000000.png",
+      "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387"
+    },
+    "disabled": {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\current-joint-gi-off-capture\\frames\\frame_000000.png",
+      "sha256": "33560f3cbeec77d1d75c979fea4d51dfe0c072730bffe5c9f332d8bd258f0d2d"
+    }
+  },
+  "irradianceSha256": "f57b41da8b1d8baf65834b09de54896b00e7cbe4ce86b7d39a3ceefd90c7107f",
+  "onlyVariable": "irradianceVolume.enabled",
+  "matchingCaptureFields": {
+    "qaCameraPosition": [
+      -0.266043,
+      2.26206,
+      -24.9053
+    ],
+    "qaCameraTarget": [
+      -0.261116,
+      2.32175,
+      -23.9071
+    ],
+    "cameraLens": {
+      "farPlane": 10000.0,
+      "nearPlane": 0.10000000149011612,
+      "offsetNdc": [
+        -0.0002929684706032276,
+        7.717559492448345e-05
+      ],
+      "projection": "perspective",
+      "schemaVersion": 1,
+      "verticalFovRadians": 0.9986935257911682
+    },
+    "cameraUp": [
+      -0.0002945943851955235,
+      0.9982167482376099,
+      -0.05969396233558655
+    ],
+    "screenReflectionAlgorithm": "linear",
+    "screenReflectionProducer": "linear-temporal",
+    "screenReflectionLevels": 7
+  },
+  "regions": {
+    "centerFloor": {
+      "pixels": 97200,
+      "changedPixels": 83794,
+      "meanAbsoluteRgbByteDifference": 38.05212620027435,
+      "maximumByteDifference": 175
+    },
+    "leftFloor": {
+      "pixels": 67900,
+      "changedPixels": 67900,
+      "meanAbsoluteRgbByteDifference": 73.800088365243,
+      "maximumByteDifference": 136
+    },
+    "rightWall": {
+      "pixels": 128800,
+      "changedPixels": 128800,
+      "meanAbsoluteRgbByteDifference": 64.5031185300207,
+      "maximumByteDifference": 207
+    }
+  },
+  "scope": "Output display-byte differences show GI consumption; no source-energy or final quality equivalence claimed.",
+  "sourceBase": "cd8d95d",
+  "workflowCommit": "b968e12",
+  "records": [
+    {
+      "path": "task.json",
+      "sha256": "9f1d9449c9a57ab3e6344825c41129c6625cc3f7181b01b8a2ca6aa2e881e882",
+      "bytes": 970
+    },
+    {
+      "path": "command.json",
+      "sha256": "e5324979e8c9c1b666915dd198daa30abd055390532ef9327aee578655291f7a",
+      "bytes": 819
+    },
+    {
+      "path": "player.log",
+      "sha256": "511900000e0bc6bd67ba93d914add62f0ba4a60775f36ffa438fb3b5a9c333b4",
+      "bytes": 13491
+    },
+    {
+      "path": "comparison.json",
+      "sha256": "ee9929cefd7d0d2f0a36f71d9e4930b779658c8d6e3d9d4acd00d5b642ff0403",
+      "bytes": 2289
+    },
+    {
+      "path": "comparison.jpg",
+      "sha256": "c18b0f9f0b8327f78b60cd0e56afc2fc96be5e5f8e04d3666553ead4b7a9094b",
+      "bytes": 183772
+    },
+    {
+      "path": "frames--capture_manifest.json",
+      "sha256": "a4cd1342141055d50d27c5777ce08fccdcdfb2c5c5699793051b2135f5728a8c",
+      "bytes": 15387
+    },
+    {
+      "path": "enabled-level.json.gz",
+      "sha256": "03f730022b4c298e847e370789493718400698042c5ebe94c0e5d2b5f6136683",
+      "bytes": 197894,
+      "sourceSha256": "897ba2cb6b96e10f76b90d106ef5962842995611a31a50a8975ac398439f3b82"
+    },
+    {
+      "path": "disabled-level.json.gz",
+      "sha256": "813c820d48709fddefacdb43dc4de817eec70254597c32bf6afc3aec7c92befd",
+      "bytes": 219905,
+      "sourceSha256": "dcc212a5d6b458e829627060c48e397c43ae9510cc7dbf7ccc5f79fe5691dfd7"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "reflection_surface.glsl"
+layout(local_size_x=8,local_size_y=8) in;
+layout(binding=0) uniform sampler2D sourceSurface;
+layout(r32f,binding=1) uniform writeonly image2D preparedDepth;
+layout(rgba32f,binding=2) uniform writeonly image2D preparedNormal;
+layout(r8,binding=3) uniform writeonly image2D preparedMask;
+layout(r8,binding=4) uniform writeonly image2D initialEligibility;
+layout(std140,binding=5) uniform Settings {vec4 extent;vec4 decode;} frame;
+void main(){
+    ivec2 p=ivec2(gl_GlobalInvocationID.xy);if(any(greaterThanEqual(p,ivec2(frame.extent.xy))))return;
+    ivec2 source=(2*p+1)*ivec2(frame.extent.zw)/(2*ivec2(frame.extent.xy));
+    vec4 surface=texelFetch(sourceSurface,source,0);
+    bool valid=!any(isnan(surface))&&!any(isinf(surface))&&surface.r>0&&surface.r<100000
+        &&all(greaterThanEqual(surface.gba,vec3(0)))&&all(lessThanEqual(surface.gba,vec3(1)));
+    float depth=valid?(1/surface.r-frame.decode.y)/frame.decode.x:0;
+    valid=valid&&!isnan(depth)&&!isinf(depth)&&depth>=0&&depth<=1;
+    vec4 encoded=vec4(.5,.5,1,0);float weight=0;
+    if(valid){
+        vec3 normal=decodeReflectionSurfaceNormal(surface);normal/=abs(normal.x)+abs(normal.y)+abs(normal.z);
+        vec2 oct=normal.xz;
+        if(normal.y<0)oct=(1-abs(oct.yx))*reflectionSurfaceSign(oct);
+        encoded=vec4(oct*.5+.5,surface.a,0);
+        weight=(1-smoothstep(.75*frame.decode.z,frame.decode.z,surface.a))*frame.decode.w;
+    }
+    imageStore(preparedDepth,p,vec4(valid?depth:0));imageStore(preparedNormal,p,encoded);
+    imageStore(preparedMask,p,vec4(valid?1:0));imageStore(initialEligibility,p,vec4(weight));
+}

@@ -1,0 +1,202 @@
+{
+  "fixture": {
+    "nvidia": {
+      "source": {
+        "bounds.bin": "c0d9ce7725710d0ca9b3e1b42ab3f0e53205dcc791768719d5973918f41d29d2",
+        "queries.bin": "a4481f88757b231cb8ae7b109b6658e9398de862e48c83bee7ed12fd42ee7dd2",
+        "range.comp": "cfe39363b38b8553a2cc46547a354b5b895a53e309661f9ee545db01c3321f8d",
+        "range.spv": "c89a204aa4951e92a65a05b38cf53fcf58e84d69b7f3fe034443eecec072fd1f",
+        "range.exe": "567edc81d45126859287acea19d6942a572ce41c61518ff0498b178e04a75c69"
+      },
+      "capturedQueries": 921445,
+      "boundaryQueries": 2304,
+      "allResultsBitExact": true,
+      "referenceBeforeMedianMs": 0.078848,
+      "candidateWithBuildMedianMs": 0.031744,
+      "referenceAfterMedianMs": 0.077824,
+      "buildMedianMs": 0.008192,
+      "baselineDrift": 0.013071895424836564,
+      "reducedReads": 0.8256043323538818,
+      "relativeNetChange": -0.5947712418300654,
+      "requiredBytes": 2097152
+    },
+    "intel": {
+      "source": {
+        "bounds.bin": "c0d9ce7725710d0ca9b3e1b42ab3f0e53205dcc791768719d5973918f41d29d2",
+        "queries.bin": "a4481f88757b231cb8ae7b109b6658e9398de862e48c83bee7ed12fd42ee7dd2",
+        "range.comp": "cfe39363b38b8553a2cc46547a354b5b895a53e309661f9ee545db01c3321f8d",
+        "range.spv": "c89a204aa4951e92a65a05b38cf53fcf58e84d69b7f3fe034443eecec072fd1f",
+        "range.exe": "567edc81d45126859287acea19d6942a572ce41c61518ff0498b178e04a75c69"
+      },
+      "capturedQueries": 921445,
+      "boundaryQueries": 2304,
+      "allResultsBitExact": true,
+      "referenceBeforeMedianMs": 0.7492968567066193,
+      "candidateWithBuildMedianMs": 0.48096352992439273,
+      "referenceAfterMedianMs": 0.803359355386734,
+      "buildMedianMs": 0.150364579662323,
+      "baselineDrift": 0.06963872396095395,
+      "reducedReads": 0.8256043323538818,
+      "relativeNetChange": -0.38046358726644525,
+      "requiredBytes": 2097152
+    }
+  },
+  "compiledVariants": 774,
+  "sourceBase": "01cc6b26e52d8d602aae1b75d7259a5da4f10dbd",
+  "nativeFour59579": {
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "actualSha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "sameDriverSha256": "b57a67f263f0bc0d9cc53a279f74e90696b47c5802e60cd5b54196cc647fbdc3",
+        "sameDriverChangedPixels": 0,
+        "sameDriverMaximumError": 0,
+        "frozenPixels": 228,
+        "frozenMaximumError": 1
+      },
+      {
+        "name": "frame_000001.png",
+        "actualSha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "sameDriverSha256": "dcf466cd4ea345671eaad5efd4128584e02de9a05e6f218acf2ebf5409abe90f",
+        "sameDriverChangedPixels": 0,
+        "sameDriverMaximumError": 0,
+        "frozenPixels": 330,
+        "frozenMaximumError": 7
+      },
+      {
+        "name": "frame_000002.png",
+        "actualSha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "sameDriverSha256": "974756b6d8dba263a333c613eaf24a33d53be96b24e6c000b78646341f492050",
+        "sameDriverChangedPixels": 0,
+        "sameDriverMaximumError": 0,
+        "frozenPixels": 397,
+        "frozenMaximumError": 37
+      },
+      {
+        "name": "frame_000003.png",
+        "actualSha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "sameDriverSha256": "e27b4d25426d5d36725ccb159d7fe2324f4eb60b0993d369e91e45260bc6fbeb",
+        "sameDriverChangedPixels": 0,
+        "sameDriverMaximumError": 0,
+        "frozenPixels": 421,
+        "frozenMaximumError": 23
+      }
+    ],
+    "deviceLocalPeakBytes": 1705712448,
+    "validationClean": true
+  },
+  "short1080p": [
+    {
+      "role": "short-local-before",
+      "sampled": 60,
+      "gpuFrameMs": {
+        "mean": 16.085123733333333,
+        "p95": 16.6212416
+      },
+      "gpuSceneMs": {
+        "mean": 14.049297066666668,
+        "p95": 14.542335999999999
+      },
+      "cpuMs": {
+        "mean": 7.235395,
+        "p95": 8.891909999999974
+      },
+      "deviceLocalPeakBytes": 1442503488,
+      "workingSetPeakBytes": 2038177792,
+      "allocationCount": 224,
+      "allocationBytes": 1588625408,
+      "allocatorZero": true,
+      "temperatureRange": [
+        54.0,
+        82.0
+      ],
+      "powerLimits": [
+        80.0
+      ],
+      "drivers": [
+        "595.79"
+      ],
+      "softwareThermalObservations": 0
+    },
+    {
+      "role": "short-range",
+      "sampled": 60,
+      "gpuFrameMs": {
+        "mean": 15.769422399999998,
+        "p95": 16.0673952
+      },
+      "gpuSceneMs": {
+        "mean": 13.748292266666665,
+        "p95": 14.00192
+      },
+      "cpuMs": {
+        "mean": 7.792699999999998,
+        "p95": 10.36299999999998
+      },
+      "deviceLocalPeakBytes": 1442503488,
+      "workingSetPeakBytes": 2037641216,
+      "allocationCount": 224,
+      "allocationBytes": 1588625408,
+      "allocatorZero": true,
+      "temperatureRange": [
+        56.0,
+        82.0
+      ],
+      "powerLimits": [
+        80.0
+      ],
+      "drivers": [
+        "595.79"
+      ],
+      "softwareThermalObservations": 0
+    },
+    {
+      "role": "short-local-after",
+      "sampled": 60,
+      "gpuFrameMs": {
+        "mean": 15.933210666666668,
+        "p95": 16.2915504
+      },
+      "gpuSceneMs": {
+        "mean": 13.979067733333332,
+        "p95": 14.307328
+      },
+      "cpuMs": {
+        "mean": 4.837223333333333,
+        "p95": 5.852864999999989
+      },
+      "deviceLocalPeakBytes": 1442503488,
+      "workingSetPeakBytes": 2038796288,
+      "allocationCount": 224,
+      "allocationBytes": 1588625408,
+      "allocatorZero": true,
+      "temperatureRange": [
+        54.0,
+        80.0
+      ],
+      "powerLimits": [
+        80.0
+      ],
+      "drivers": [
+        "595.79"
+      ],
+      "softwareThermalObservations": 0
+    }
+  ],
+  "matched59282Run": false,
+  "decision": {
+    "candidateGpuMeanChangeMs": -0.2397448000000022,
+    "candidateGpuMeanChangePct": -1.4975469804575605,
+    "gpuReferenceDriftPct": 0.9489129869707744,
+    "cpuP95ControlSpanMs": 3.0390449999999856,
+    "cpuCandidateP95Ms": 10.36299999999998,
+    "advanceToFormal": false
+  },
+  "frozenProducerSearch": {
+    "frozenSha256": "2a079225f4b60cdec94d3030f92332c042d9f75b54f803b6a93bf12042f95da8",
+    "tested": 124,
+    "matches": []
+  },
+  "archiveMembers": 61,
+  "archiveSha256": "3443181b840c4d3dbed02e0443e1f5ce0306eb505c420b573fbe6feda8ea8005"
+}

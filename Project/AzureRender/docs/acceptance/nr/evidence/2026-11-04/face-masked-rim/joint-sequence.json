@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "run": "20261104-001359-face-masked-rim-ff43bf",
+  "build": "1c3c845dfa627b488c1d5c13027ca19fcba82f5258d669b64821ca19a799aa0f",
+  "sequence": {
+    "frames": 192,
+    "distinctFrames": 192,
+    "fps": 24,
+    "extent": [
+      2560,
+      1440
+    ],
+    "pngDigestListSha256": "9c7a0cb9169e9a45fb8ce42f4af3954371d7e51b5f193cd24d919a5f87d7bf71",
+    "exactFramesAgainstPriorFaceResponse": 192
+  },
+  "reopenExactFrames": 4,
+  "animationSamples": 2112,
+  "animatedNodes": [
+    "hero",
+    "moving-logistics-up_b_s04",
+    "moving-logistics-down_b_s04",
+    "moving-logistics-up_b_s03",
+    "moving-logistics-down_b_s03",
+    "moving-logistics-down_b_s01",
+    "moving-logistics-up_b_s01",
+    "moving-logistics-up_q_01",
+    "moving-logistics-up_q_02",
+    "moving-logistics-down_b_s02",
+    "moving-logistics-up_b_s02"
+  ],
+  "runtimeReportSha256": "41b5979227d478532e0df5ad2f899ffdaa4166d16fa084cbed7466194bd5cf30",
+  "media": {
+    "file": "media/qualified-joint-idle-conveyor.mp4",
+    "sha256": "a585f8d7e6e8bf30875923b259386796315c7fc98597241abc1cf71f1ad631d7",
+    "durationSeconds": 8
+  },
+  "visualAcceptance": "open"
+}

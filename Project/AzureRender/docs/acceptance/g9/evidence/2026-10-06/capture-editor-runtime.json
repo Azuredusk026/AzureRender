@@ -1,0 +1,3066 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 0,
+  "editorDebugLines": 0,
+  "editorPlaying": false,
+  "editorPreviewFrames": 0,
+  "editorWorkspace": {
+    "diagnostic": "",
+    "dpi": 1.0,
+    "gizmoRotation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gizmoScale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "gizmoTranslation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "history": [],
+    "image": {
+      "height": 706.0,
+      "width": 1362.0,
+      "x": 228.0,
+      "y": 120.0
+    },
+    "nodeCount": 100,
+    "panels": {
+      "animation": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          220.0,
+          836.0,
+          1378.0,
+          220.0
+        ]
+      },
+      "assets": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          220.0,
+          836.0,
+          1378.0,
+          220.0
+        ]
+      },
+      "build": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          220.0,
+          836.0,
+          1378.0,
+          220.0
+        ]
+      },
+      "capture": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          220.0,
+          836.0,
+          1378.0,
+          220.0
+        ]
+      },
+      "console": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          220.0,
+          836.0,
+          1378.0,
+          220.0
+        ]
+      },
+      "gameplay-debug": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          220.0,
+          836.0,
+          1378.0,
+          220.0
+        ]
+      },
+      "inspector": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          1600.0,
+          422.0,
+          320.0,
+          634.0
+        ]
+      },
+      "outliner": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          1600.0,
+          64.0,
+          320.0,
+          356.0
+        ]
+      },
+      "settings": {
+        "docked": false,
+        "open": false,
+        "rect": []
+      },
+      "viewport": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          220.0,
+          64.0,
+          1378.0,
+          770.0
+        ]
+      }
+    },
+    "selectedName": "hero:body",
+    "settings": {
+      "ai.enabled": {
+        "default": false,
+        "description": "Enable optional content assistance",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": false,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": true,
+        "type": "boolean",
+        "value": false
+      },
+      "ai.maxHistoryBytes": {
+        "default": 131072,
+        "description": "Maximum proposal history bytes",
+        "layers": {
+          "default": 131072
+        },
+        "maximum": 131072.0,
+        "minimum": 2.0,
+        "pending": 131072,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 131072
+      },
+      "ai.maxHistoryMessages": {
+        "default": 24,
+        "description": "Maximum proposal history messages",
+        "layers": {
+          "default": 24
+        },
+        "maximum": 24.0,
+        "minimum": 1.0,
+        "pending": 24,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 24
+      },
+      "ai.maxOperations": {
+        "default": 128,
+        "description": "Maximum proposal operations",
+        "layers": {
+          "default": 128
+        },
+        "maximum": 128.0,
+        "minimum": 1.0,
+        "pending": 128,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 128
+      },
+      "ai.maxRepairs": {
+        "default": 1,
+        "description": "Maximum proposal repairs",
+        "layers": {
+          "default": 1
+        },
+        "maximum": 1.0,
+        "minimum": 0.0,
+        "pending": 1,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 1
+      },
+      "ai.maxSourceBytes": {
+        "default": 2097152,
+        "description": "Maximum proposal source bytes",
+        "layers": {
+          "default": 2097152
+        },
+        "maximum": 2097152.0,
+        "minimum": 1.0,
+        "pending": 2097152,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 2097152
+      },
+      "ai.profile": {
+        "default": "content",
+        "description": "Model tool profile",
+        "layers": {
+          "default": "content"
+        },
+        "pending": "content",
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "string",
+        "value": "content"
+      },
+      "ai.timeoutMs": {
+        "default": 300000,
+        "description": "Total proposal deadline",
+        "layers": {
+          "default": 300000
+        },
+        "maximum": 300000.0,
+        "minimum": 1.0,
+        "pending": 300000,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 300000
+      },
+      "diagnostics.verbose": {
+        "default": false,
+        "description": "Verbose development diagnostics",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.compact": {
+        "default": false,
+        "description": "Compact workspace",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.scale": {
+        "default": 1.0,
+        "description": "Interface scale multiplier",
+        "layers": {
+          "default": 1.0
+        },
+        "maximum": 3.0,
+        "minimum": 0.75,
+        "pending": 1.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 1.0
+      },
+      "input.cameraSensitivity": {
+        "default": 1.0,
+        "description": "Mouse camera sensitivity multiplier",
+        "layers": {
+          "default": 1.0
+        },
+        "maximum": 4.0,
+        "minimum": 0.1,
+        "pending": 1.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 1.0
+      },
+      "render.blackholeQuality": {
+        "default": 2,
+        "description": "Blackhole quality: performance, balanced, cinematic",
+        "layers": {
+          "default": 2
+        },
+        "maximum": 2.0,
+        "minimum": 0.0,
+        "pending": 2,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 2
+      },
+      "render.diagnosticView": {
+        "default": 0,
+        "description": "Diagnostic view: beauty, normal, outline, shadow, depth",
+        "layers": {
+          "default": 0
+        },
+        "maximum": 4.0,
+        "minimum": 0.0,
+        "pending": 0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 0
+      },
+      "render.exposure": {
+        "default": 0.0,
+        "description": "Temporary exposure in EV",
+        "layers": {
+          "default": 0.0
+        },
+        "maximum": 8.0,
+        "minimum": -8.0,
+        "pending": 0.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 0.0
+      }
+    },
+    "uiErrors": [],
+    "version": 2,
+    "visibleAssets": [
+      {
+        "id": "guide",
+        "path": "assets:/guide.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "cube",
+        "path": "assets:/cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "hero:mesh",
+        "path": "assets:/hero.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "guide:mesh",
+        "path": "guide.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "door:mesh",
+        "path": "cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "checkpoint:mesh",
+        "path": "cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "artifact-0:mesh",
+        "path": "cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "artifact-1:mesh",
+        "path": "cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "artifact-2:mesh",
+        "path": "cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "1815b1e8-515f-47ca-807e-acf4a99e2978",
+        "path": "assets:/prefabs/hero.azureprefab",
+        "ready": true,
+        "type": ".azureprefab"
+      },
+      {
+        "id": "2f04160b-5ae1-4d6d-bcad-3cd904998197",
+        "path": "assets:/prefabs/checkpoint.azureprefab",
+        "ready": true,
+        "type": ".azureprefab"
+      },
+      {
+        "id": "36af4f1f-2136-48ef-9a37-ddac48db78ad",
+        "path": "assets:/hero.lua",
+        "ready": true,
+        "type": ".lua"
+      },
+      {
+        "id": "47dc414a-b047-4af0-a1d1-6454f62e60e2",
+        "path": "assets:/prefabs/collectible.azureprefab",
+        "ready": true,
+        "type": ".azureprefab"
+      },
+      {
+        "id": "7bb1a157-bd31-4033-ba1b-8096712760a7",
+        "path": "assets:/guide.lua",
+        "ready": true,
+        "type": ".lua"
+      },
+      {
+        "id": "866bb92c-91c5-4baf-9c55-77fcb25fd7f0",
+        "path": "assets:/checkpoint.lua",
+        "ready": true,
+        "type": ".lua"
+      },
+      {
+        "id": "8983ad26-3f57-498b-a53a-3e5a77e0238c",
+        "path": "assets:/prefabs/door.azureprefab",
+        "ready": true,
+        "type": ".azureprefab"
+      },
+      {
+        "id": "8a0d1690-616b-4251-b4a2-6d20842d606e",
+        "path": "assets:/locomotion.json",
+        "ready": true,
+        "type": ".json"
+      },
+      {
+        "id": "ae663942-baa2-41c7-a1d5-421bb961569d",
+        "path": "assets:/collectible.lua",
+        "ready": true,
+        "type": ".lua"
+      },
+      {
+        "id": "beebab48-30fd-4190-a617-4c213bb9161b",
+        "path": "assets:/door.lua",
+        "ready": true,
+        "type": ".lua"
+      },
+      {
+        "id": "ea6532fb-a1d0-4510-a4ac-460ac8fd2ed4",
+        "path": "assets:/goal.lua",
+        "ready": true,
+        "type": ".lua"
+      },
+      {
+        "id": "eb24db07-a63d-4b74-a3b3-c76b7e77e010",
+        "path": "assets:/hud.rml",
+        "ready": true,
+        "type": ".rml"
+      },
+      {
+        "id": "eba993ef-b5cb-448c-b5e4-7739eb83410a",
+        "path": "assets:/CHARACTER-LICENSE.txt",
+        "ready": true,
+        "type": ".txt"
+      },
+      {
+        "id": "f5ace78b-68bf-4ffb-96a9-8364bf2758db",
+        "path": "assets:/prefabs/guide.azureprefab",
+        "ready": true,
+        "type": ".azureprefab"
+      },
+      {
+        "id": "f6e82892-2d0d-4b2e-808b-d0a6712f8ec6",
+        "path": "assets:/exploration.azurelevel",
+        "ready": true,
+        "type": ".azurelevel"
+      }
+    ],
+    "widgets": {
+      "asset.1815b1e8-515f-47ca-807e-acf4a99e2978": [
+        224.0,
+        1124.0,
+        338.0,
+        18.0
+      ],
+      "asset.2f04160b-5ae1-4d6d-bcad-3cd904998197": [
+        224.0,
+        1142.0,
+        338.0,
+        18.0
+      ],
+      "asset.36af4f1f-2136-48ef-9a37-ddac48db78ad": [
+        224.0,
+        1160.0,
+        338.0,
+        18.0
+      ],
+      "asset.47dc414a-b047-4af0-a1d1-6454f62e60e2": [
+        224.0,
+        1178.0,
+        338.0,
+        18.0
+      ],
+      "asset.7bb1a157-bd31-4033-ba1b-8096712760a7": [
+        224.0,
+        1196.0,
+        338.0,
+        18.0
+      ],
+      "asset.866bb92c-91c5-4baf-9c55-77fcb25fd7f0": [
+        224.0,
+        1214.0,
+        338.0,
+        18.0
+      ],
+      "asset.8983ad26-3f57-498b-a53a-3e5a77e0238c": [
+        224.0,
+        1232.0,
+        338.0,
+        18.0
+      ],
+      "asset.8a0d1690-616b-4251-b4a2-6d20842d606e": [
+        224.0,
+        1250.0,
+        338.0,
+        18.0
+      ],
+      "asset.ae663942-baa2-41c7-a1d5-421bb961569d": [
+        224.0,
+        1268.0,
+        338.0,
+        18.0
+      ],
+      "asset.artifact-0:mesh": [
+        224.0,
+        1070.0,
+        338.0,
+        18.0
+      ],
+      "asset.artifact-1:mesh": [
+        224.0,
+        1088.0,
+        338.0,
+        18.0
+      ],
+      "asset.artifact-2:mesh": [
+        224.0,
+        1106.0,
+        338.0,
+        18.0
+      ],
+      "asset.beebab48-30fd-4190-a617-4c213bb9161b": [
+        224.0,
+        1286.0,
+        338.0,
+        18.0
+      ],
+      "asset.checkpoint:mesh": [
+        224.0,
+        1052.0,
+        338.0,
+        18.0
+      ],
+      "asset.cube": [
+        224.0,
+        980.0,
+        338.0,
+        18.0
+      ],
+      "asset.door:mesh": [
+        224.0,
+        1034.0,
+        338.0,
+        18.0
+      ],
+      "asset.ea6532fb-a1d0-4510-a4ac-460ac8fd2ed4": [
+        224.0,
+        1304.0,
+        338.0,
+        18.0
+      ],
+      "asset.eb24db07-a63d-4b74-a3b3-c76b7e77e010": [
+        224.0,
+        1322.0,
+        338.0,
+        18.0
+      ],
+      "asset.eba993ef-b5cb-448c-b5e4-7739eb83410a": [
+        224.0,
+        1340.0,
+        338.0,
+        18.0
+      ],
+      "asset.f5ace78b-68bf-4ffb-96a9-8364bf2758db": [
+        224.0,
+        1358.0,
+        338.0,
+        18.0
+      ],
+      "asset.f6e82892-2d0d-4b2e-808b-d0a6712f8ec6": [
+        224.0,
+        1376.0,
+        338.0,
+        18.0
+      ],
+      "asset.guide": [
+        224.0,
+        962.0,
+        338.0,
+        18.0
+      ],
+      "asset.guide:mesh": [
+        224.0,
+        1016.0,
+        338.0,
+        18.0
+      ],
+      "asset.hero:mesh": [
+        224.0,
+        998.0,
+        338.0,
+        18.0
+      ],
+      "assets.search": [
+        228.0,
+        866.0,
+        316.0,
+        22.0
+      ],
+      "assets.type": [
+        552.0,
+        866.0,
+        147.0,
+        22.0
+      ],
+      "build": [
+        430.0,
+        32.0,
+        40.0,
+        22.0
+      ],
+      "create.empty": [
+        8.0,
+        151.0,
+        203.0,
+        22.0
+      ],
+      "focus": [
+        228.0,
+        94.0,
+        84.0,
+        22.0
+      ],
+      "gizmo.0": [
+        942.6220092773438,
+        607.3981323242188,
+        10,
+        10
+      ],
+      "gizmo.1": [
+        904.0,
+        556.989501953125,
+        10,
+        10
+      ],
+      "gizmo.2": [
+        871.9786376953125,
+        620.9609985351563,
+        10,
+        10
+      ],
+      "gizmo.center": [
+        908.0,
+        600.989501953125,
+        2,
+        2
+      ],
+      "menu.Edit": [
+        37.0,
+        2.0,
+        34.0,
+        18.0
+      ],
+      "menu.File": [
+        4.0,
+        2.0,
+        33.0,
+        18.0
+      ],
+      "menu.Help": [
+        150.0,
+        2.0,
+        38.0,
+        18.0
+      ],
+      "menu.Tools": [
+        109.0,
+        2.0,
+        41.0,
+        18.0
+      ],
+      "menu.View": [
+        71.0,
+        2.0,
+        38.0,
+        18.0
+      ],
+      "mode.Move": [
+        50.0,
+        34.0,
+        63.0,
+        18.0
+      ],
+      "mode.Rotate": [
+        113.0,
+        34.0,
+        63.0,
+        18.0
+      ],
+      "mode.Scale": [
+        176.0,
+        34.0,
+        63.0,
+        18.0
+      ],
+      "name": [
+        1608.0,
+        532.0,
+        208.0,
+        22.0
+      ],
+      "node.artifact-0:body": [
+        1604.0,
+        1895.0,
+        298.0,
+        18.0
+      ],
+      "node.artifact-1:body": [
+        1604.0,
+        1913.0,
+        298.0,
+        18.0
+      ],
+      "node.artifact-2:body": [
+        1604.0,
+        1931.0,
+        298.0,
+        18.0
+      ],
+      "node.camera": [
+        1604.0,
+        311.0,
+        298.0,
+        18.0
+      ],
+      "node.checkpoint:body": [
+        1604.0,
+        1877.0,
+        298.0,
+        18.0
+      ],
+      "node.companion-0": [
+        1604.0,
+        365.0,
+        298.0,
+        18.0
+      ],
+      "node.companion-1": [
+        1604.0,
+        383.0,
+        298.0,
+        18.0
+      ],
+      "node.door:body": [
+        1604.0,
+        1859.0,
+        298.0,
+        18.0
+      ],
+      "node.gate-left": [
+        1604.0,
+        275.0,
+        298.0,
+        18.0
+      ],
+      "node.gate-right": [
+        1604.0,
+        293.0,
+        298.0,
+        18.0
+      ],
+      "node.goal": [
+        1604.0,
+        347.0,
+        298.0,
+        18.0
+      ],
+      "node.ground": [
+        1604.0,
+        149.0,
+        298.0,
+        18.0
+      ],
+      "node.guide:body": [
+        1604.0,
+        1841.0,
+        298.0,
+        18.0
+      ],
+      "node.hero:body": [
+        1604.0,
+        1823.0,
+        298.0,
+        18.0
+      ],
+      "node.hud": [
+        1604.0,
+        329.0,
+        298.0,
+        18.0
+      ],
+      "node.interior-left": [
+        1604.0,
+        221.0,
+        298.0,
+        18.0
+      ],
+      "node.interior-right": [
+        1604.0,
+        239.0,
+        298.0,
+        18.0
+      ],
+      "node.interior-roof": [
+        1604.0,
+        257.0,
+        298.0,
+        18.0
+      ],
+      "node.load-0": [
+        1604.0,
+        401.0,
+        298.0,
+        18.0
+      ],
+      "node.load-1": [
+        1604.0,
+        419.0,
+        298.0,
+        18.0
+      ],
+      "node.load-10": [
+        1604.0,
+        581.0,
+        298.0,
+        18.0
+      ],
+      "node.load-11": [
+        1604.0,
+        599.0,
+        298.0,
+        18.0
+      ],
+      "node.load-12": [
+        1604.0,
+        617.0,
+        298.0,
+        18.0
+      ],
+      "node.load-13": [
+        1604.0,
+        635.0,
+        298.0,
+        18.0
+      ],
+      "node.load-14": [
+        1604.0,
+        653.0,
+        298.0,
+        18.0
+      ],
+      "node.load-15": [
+        1604.0,
+        671.0,
+        298.0,
+        18.0
+      ],
+      "node.load-16": [
+        1604.0,
+        689.0,
+        298.0,
+        18.0
+      ],
+      "node.load-17": [
+        1604.0,
+        707.0,
+        298.0,
+        18.0
+      ],
+      "node.load-18": [
+        1604.0,
+        725.0,
+        298.0,
+        18.0
+      ],
+      "node.load-19": [
+        1604.0,
+        743.0,
+        298.0,
+        18.0
+      ],
+      "node.load-2": [
+        1604.0,
+        437.0,
+        298.0,
+        18.0
+      ],
+      "node.load-20": [
+        1604.0,
+        761.0,
+        298.0,
+        18.0
+      ],
+      "node.load-21": [
+        1604.0,
+        779.0,
+        298.0,
+        18.0
+      ],
+      "node.load-22": [
+        1604.0,
+        797.0,
+        298.0,
+        18.0
+      ],
+      "node.load-23": [
+        1604.0,
+        815.0,
+        298.0,
+        18.0
+      ],
+      "node.load-24": [
+        1604.0,
+        833.0,
+        298.0,
+        18.0
+      ],
+      "node.load-25": [
+        1604.0,
+        851.0,
+        298.0,
+        18.0
+      ],
+      "node.load-26": [
+        1604.0,
+        869.0,
+        298.0,
+        18.0
+      ],
+      "node.load-27": [
+        1604.0,
+        887.0,
+        298.0,
+        18.0
+      ],
+      "node.load-28": [
+        1604.0,
+        905.0,
+        298.0,
+        18.0
+      ],
+      "node.load-29": [
+        1604.0,
+        923.0,
+        298.0,
+        18.0
+      ],
+      "node.load-3": [
+        1604.0,
+        455.0,
+        298.0,
+        18.0
+      ],
+      "node.load-30": [
+        1604.0,
+        941.0,
+        298.0,
+        18.0
+      ],
+      "node.load-31": [
+        1604.0,
+        959.0,
+        298.0,
+        18.0
+      ],
+      "node.load-32": [
+        1604.0,
+        977.0,
+        298.0,
+        18.0
+      ],
+      "node.load-33": [
+        1604.0,
+        995.0,
+        298.0,
+        18.0
+      ],
+      "node.load-34": [
+        1604.0,
+        1013.0,
+        298.0,
+        18.0
+      ],
+      "node.load-35": [
+        1604.0,
+        1031.0,
+        298.0,
+        18.0
+      ],
+      "node.load-36": [
+        1604.0,
+        1049.0,
+        298.0,
+        18.0
+      ],
+      "node.load-37": [
+        1604.0,
+        1067.0,
+        298.0,
+        18.0
+      ],
+      "node.load-38": [
+        1604.0,
+        1085.0,
+        298.0,
+        18.0
+      ],
+      "node.load-39": [
+        1604.0,
+        1103.0,
+        298.0,
+        18.0
+      ],
+      "node.load-4": [
+        1604.0,
+        473.0,
+        298.0,
+        18.0
+      ],
+      "node.load-40": [
+        1604.0,
+        1121.0,
+        298.0,
+        18.0
+      ],
+      "node.load-41": [
+        1604.0,
+        1139.0,
+        298.0,
+        18.0
+      ],
+      "node.load-42": [
+        1604.0,
+        1157.0,
+        298.0,
+        18.0
+      ],
+      "node.load-43": [
+        1604.0,
+        1175.0,
+        298.0,
+        18.0
+      ],
+      "node.load-44": [
+        1604.0,
+        1193.0,
+        298.0,
+        18.0
+      ],
+      "node.load-45": [
+        1604.0,
+        1211.0,
+        298.0,
+        18.0
+      ],
+      "node.load-46": [
+        1604.0,
+        1229.0,
+        298.0,
+        18.0
+      ],
+      "node.load-47": [
+        1604.0,
+        1247.0,
+        298.0,
+        18.0
+      ],
+      "node.load-48": [
+        1604.0,
+        1265.0,
+        298.0,
+        18.0
+      ],
+      "node.load-49": [
+        1604.0,
+        1283.0,
+        298.0,
+        18.0
+      ],
+      "node.load-5": [
+        1604.0,
+        491.0,
+        298.0,
+        18.0
+      ],
+      "node.load-50": [
+        1604.0,
+        1301.0,
+        298.0,
+        18.0
+      ],
+      "node.load-51": [
+        1604.0,
+        1319.0,
+        298.0,
+        18.0
+      ],
+      "node.load-52": [
+        1604.0,
+        1337.0,
+        298.0,
+        18.0
+      ],
+      "node.load-53": [
+        1604.0,
+        1355.0,
+        298.0,
+        18.0
+      ],
+      "node.load-54": [
+        1604.0,
+        1373.0,
+        298.0,
+        18.0
+      ],
+      "node.load-55": [
+        1604.0,
+        1391.0,
+        298.0,
+        18.0
+      ],
+      "node.load-56": [
+        1604.0,
+        1409.0,
+        298.0,
+        18.0
+      ],
+      "node.load-57": [
+        1604.0,
+        1427.0,
+        298.0,
+        18.0
+      ],
+      "node.load-58": [
+        1604.0,
+        1445.0,
+        298.0,
+        18.0
+      ],
+      "node.load-59": [
+        1604.0,
+        1463.0,
+        298.0,
+        18.0
+      ],
+      "node.load-6": [
+        1604.0,
+        509.0,
+        298.0,
+        18.0
+      ],
+      "node.load-60": [
+        1604.0,
+        1481.0,
+        298.0,
+        18.0
+      ],
+      "node.load-61": [
+        1604.0,
+        1499.0,
+        298.0,
+        18.0
+      ],
+      "node.load-62": [
+        1604.0,
+        1517.0,
+        298.0,
+        18.0
+      ],
+      "node.load-63": [
+        1604.0,
+        1535.0,
+        298.0,
+        18.0
+      ],
+      "node.load-64": [
+        1604.0,
+        1553.0,
+        298.0,
+        18.0
+      ],
+      "node.load-65": [
+        1604.0,
+        1571.0,
+        298.0,
+        18.0
+      ],
+      "node.load-66": [
+        1604.0,
+        1589.0,
+        298.0,
+        18.0
+      ],
+      "node.load-67": [
+        1604.0,
+        1607.0,
+        298.0,
+        18.0
+      ],
+      "node.load-68": [
+        1604.0,
+        1625.0,
+        298.0,
+        18.0
+      ],
+      "node.load-69": [
+        1604.0,
+        1643.0,
+        298.0,
+        18.0
+      ],
+      "node.load-7": [
+        1604.0,
+        527.0,
+        298.0,
+        18.0
+      ],
+      "node.load-70": [
+        1604.0,
+        1661.0,
+        298.0,
+        18.0
+      ],
+      "node.load-71": [
+        1604.0,
+        1679.0,
+        298.0,
+        18.0
+      ],
+      "node.load-72": [
+        1604.0,
+        1697.0,
+        298.0,
+        18.0
+      ],
+      "node.load-73": [
+        1604.0,
+        1715.0,
+        298.0,
+        18.0
+      ],
+      "node.load-74": [
+        1604.0,
+        1733.0,
+        298.0,
+        18.0
+      ],
+      "node.load-75": [
+        1604.0,
+        1751.0,
+        298.0,
+        18.0
+      ],
+      "node.load-76": [
+        1604.0,
+        1769.0,
+        298.0,
+        18.0
+      ],
+      "node.load-77": [
+        1604.0,
+        1787.0,
+        298.0,
+        18.0
+      ],
+      "node.load-78": [
+        1604.0,
+        1805.0,
+        298.0,
+        18.0
+      ],
+      "node.load-8": [
+        1604.0,
+        545.0,
+        298.0,
+        18.0
+      ],
+      "node.load-9": [
+        1604.0,
+        563.0,
+        298.0,
+        18.0
+      ],
+      "node.passage-left": [
+        1604.0,
+        167.0,
+        298.0,
+        18.0
+      ],
+      "node.passage-right": [
+        1604.0,
+        185.0,
+        298.0,
+        18.0
+      ],
+      "node.ramp": [
+        1604.0,
+        203.0,
+        298.0,
+        18.0
+      ],
+      "outliner.search": [
+        1608.0,
+        94.0,
+        289.0,
+        22.0
+      ],
+      "panelrect.animation": [
+        220.0,
+        836.0,
+        1378.0,
+        220.0
+      ],
+      "panelrect.assets": [
+        220.0,
+        836.0,
+        1378.0,
+        220.0
+      ],
+      "panelrect.build": [
+        220.0,
+        836.0,
+        1378.0,
+        220.0
+      ],
+      "panelrect.capture": [
+        220.0,
+        836.0,
+        1378.0,
+        220.0
+      ],
+      "panelrect.console": [
+        220.0,
+        836.0,
+        1378.0,
+        220.0
+      ],
+      "panelrect.gameplay-debug": [
+        220.0,
+        836.0,
+        1378.0,
+        220.0
+      ],
+      "panelrect.inspector": [
+        1600.0,
+        422.0,
+        320.0,
+        634.0
+      ],
+      "panelrect.outliner": [
+        1600.0,
+        64.0,
+        320.0,
+        356.0
+      ],
+      "panelrect.viewport": [
+        220.0,
+        64.0,
+        1378.0,
+        770.0
+      ],
+      "pause": [
+        287.0,
+        32.0,
+        44.0,
+        22.0
+      ],
+      "pick.artifact-0:body": [
+        1158.0350341796875,
+        183.66172790527344,
+        2,
+        2
+      ],
+      "pick.artifact-1:body": [
+        1643.4080810546875,
+        160.60385131835938,
+        2,
+        2
+      ],
+      "pick.artifact-2:body": [
+        1420.1197509765625,
+        150.27029418945313,
+        2,
+        2
+      ],
+      "pick.companion-0": [
+        893.6651611328125,
+        344.4421691894531,
+        2,
+        2
+      ],
+      "pick.companion-1": [
+        1328.61279296875,
+        397.3641662597656,
+        2,
+        2
+      ],
+      "pick.door:body": [
+        1513.165771484375,
+        142.46188354492188,
+        2,
+        2
+      ],
+      "pick.gate-left": [
+        1453.6396484375,
+        142.3084259033203,
+        2,
+        2
+      ],
+      "pick.gate-right": [
+        1575.89892578125,
+        142.62359619140625,
+        2,
+        2
+      ],
+      "pick.ground": [
+        1500.43603515625,
+        159.01544189453125,
+        2,
+        2
+      ],
+      "pick.guide:body": [
+        867.2232055664063,
+        403.0163269042969,
+        2,
+        2
+      ],
+      "pick.hero:body": [
+        912.8592529296875,
+        470.116943359375,
+        2,
+        2
+      ],
+      "pick.interior-left": [
+        1500.0482177734375,
+        140.1125030517578,
+        2,
+        2
+      ],
+      "pick.interior-right": [
+        1528.711181640625,
+        140.15771484375,
+        2,
+        2
+      ],
+      "pick.interior-roof": [
+        1514.5635986328125,
+        138.7063446044922,
+        2,
+        2
+      ],
+      "pick.load-0": [
+        569.7730712890625,
+        360.0020751953125,
+        2,
+        2
+      ],
+      "pick.load-1": [
+        610.154052734375,
+        366.517578125,
+        2,
+        2
+      ],
+      "pick.load-10": [
+        1117.176513671875,
+        448.3258972167969,
+        2,
+        2
+      ],
+      "pick.load-11": [
+        1196.686767578125,
+        461.1549072265625,
+        2,
+        2
+      ],
+      "pick.load-12": [
+        1283.01904296875,
+        475.08465576171875,
+        2,
+        2
+      ],
+      "pick.load-13": [
+        1377.0909423828125,
+        490.26318359375,
+        2,
+        2
+      ],
+      "pick.load-14": [
+        1479.991943359375,
+        506.8663330078125,
+        2,
+        2
+      ],
+      "pick.load-15": [
+        1593.026123046875,
+        525.1044311523438,
+        2,
+        2
+      ],
+      "pick.load-16": [
+        1717.767822265625,
+        545.2315673828125,
+        2,
+        2
+      ],
+      "pick.load-17": [
+        1856.1356201171875,
+        567.5572509765625,
+        2,
+        2
+      ],
+      "pick.load-18": [
+        2010.49072265625,
+        592.4625854492188,
+        2,
+        2
+      ],
+      "pick.load-19": [
+        2183.774169921875,
+        620.4219970703125,
+        2,
+        2
+      ],
+      "pick.load-2": [
+        652.9595947265625,
+        373.42425537109375,
+        2,
+        2
+      ],
+      "pick.load-20": [
+        612.9879150390625,
+        349.9260559082031,
+        2,
+        2
+      ],
+      "pick.load-21": [
+        652.6992797851563,
+        355.859619140625,
+        2,
+        2
+      ],
+      "pick.load-22": [
+        694.6815185546875,
+        362.13250732421875,
+        2,
+        2
+      ],
+      "pick.load-23": [
+        739.135009765625,
+        368.774658203125,
+        2,
+        2
+      ],
+      "pick.load-24": [
+        786.2846069335938,
+        375.8196105957031,
+        2,
+        2
+      ],
+      "pick.load-25": [
+        836.38330078125,
+        383.3052062988281,
+        2,
+        2
+      ],
+      "pick.load-26": [
+        889.716552734375,
+        391.27410888671875,
+        2,
+        2
+      ],
+      "pick.load-27": [
+        946.6082153320313,
+        399.7746887207031,
+        2,
+        2
+      ],
+      "pick.load-28": [
+        1007.4267578125,
+        408.8620300292969,
+        2,
+        2
+      ],
+      "pick.load-29": [
+        1072.593017578125,
+        418.5989990234375,
+        2,
+        2
+      ],
+      "pick.load-3": [
+        698.4149169921875,
+        380.7585144042969,
+        2,
+        2
+      ],
+      "pick.load-30": [
+        1142.5908203125,
+        429.057861328125,
+        2,
+        2
+      ],
+      "pick.load-31": [
+        1217.977783203125,
+        440.3219909667969,
+        2,
+        2
+      ],
+      "pick.load-32": [
+        1299.4017333984375,
+        452.48809814453125,
+        2,
+        2
+      ],
+      "pick.load-33": [
+        1387.61767578125,
+        465.6690673828125,
+        2,
+        2
+      ],
+      "pick.load-34": [
+        1483.512451171875,
+        479.99737548828125,
+        2,
+        2
+      ],
+      "pick.load-35": [
+        1588.13427734375,
+        495.6296691894531,
+        2,
+        2
+      ],
+      "pick.load-36": [
+        1702.7315673828125,
+        512.75244140625,
+        2,
+        2
+      ],
+      "pick.load-37": [
+        1828.8021240234375,
+        531.589599609375,
+        2,
+        2
+      ],
+      "pick.load-38": [
+        1968.159912109375,
+        552.4120483398438,
+        2,
+        2
+      ],
+      "pick.load-39": [
+        2123.0224609375,
+        575.5511474609375,
+        2,
+        2
+      ],
+      "pick.load-4": [
+        746.7737426757813,
+        388.56121826171875,
+        2,
+        2
+      ],
+      "pick.load-40": [
+        652.4749755859375,
+        340.71923828125,
+        2,
+        2
+      ],
+      "pick.load-41": [
+        691.4771728515625,
+        346.1455078125,
+        2,
+        2
+      ],
+      "pick.load-42": [
+        732.608154296875,
+        351.8679504394531,
+        2,
+        2
+      ],
+      "pick.load-43": [
+        776.0469970703125,
+        357.9114990234375,
+        2,
+        2
+      ],
+      "pick.load-44": [
+        821.9937744140625,
+        364.303955078125,
+        2,
+        2
+      ],
+      "pick.load-45": [
+        870.6719360351563,
+        371.076416015625,
+        2,
+        2
+      ],
+      "pick.load-46": [
+        922.3325805664063,
+        378.2638244628906,
+        2,
+        2
+      ],
+      "pick.load-47": [
+        977.2584838867188,
+        385.905517578125,
+        2,
+        2
+      ],
+      "pick.load-48": [
+        1035.769287109375,
+        394.04595947265625,
+        2,
+        2
+      ],
+      "pick.load-49": [
+        1098.227783203125,
+        402.7356872558594,
+        2,
+        2
+      ],
+      "pick.load-5": [
+        798.3236694335938,
+        396.87884521484375,
+        2,
+        2
+      ],
+      "pick.load-50": [
+        1165.04736328125,
+        412.0321044921875,
+        2,
+        2
+      ],
+      "pick.load-51": [
+        1236.70166015625,
+        422.0011901855469,
+        2,
+        2
+      ],
+      "pick.load-52": [
+        1313.7347412109375,
+        432.7185974121094,
+        2,
+        2
+      ],
+      "pick.load-53": [
+        1396.7760009765625,
+        444.27191162109375,
+        2,
+        2
+      ],
+      "pick.load-54": [
+        1486.5567626953125,
+        456.76287841796875,
+        2,
+        2
+      ],
+      "pick.load-55": [
+        1583.93212890625,
+        470.31048583984375,
+        2,
+        2
+      ],
+      "pick.load-56": [
+        1689.9088134765625,
+        485.0547180175781,
+        2,
+        2
+      ],
+      "pick.load-57": [
+        1805.678466796875,
+        501.1614685058594,
+        2,
+        2
+      ],
+      "pick.load-58": [
+        1932.664794921875,
+        518.8287353515625,
+        2,
+        2
+      ],
+      "pick.load-59": [
+        2072.580322265625,
+        538.2948608398438,
+        2,
+        2
+      ],
+      "pick.load-6": [
+        853.3911743164063,
+        405.7640075683594,
+        2,
+        2
+      ],
+      "pick.load-60": [
+        688.69677734375,
+        332.27374267578125,
+        2,
+        2
+      ],
+      "pick.load-61": [
+        726.9667358398438,
+        337.2550964355469,
+        2,
+        2
+      ],
+      "pick.load-62": [
+        767.234619140625,
+        342.49652099609375,
+        2,
+        2
+      ],
+      "pick.load-63": [
+        809.6611938476563,
+        348.0189208984375,
+        2,
+        2
+      ],
+      "pick.load-64": [
+        854.4246826171875,
+        353.845458984375,
+        2,
+        2
+      ],
+      "pick.load-65": [
+        901.7236328125,
+        360.0020751953125,
+        2,
+        2
+      ],
+      "pick.load-66": [
+        951.7798461914063,
+        366.517578125,
+        2,
+        2
+      ],
+      "pick.load-67": [
+        1004.8414306640625,
+        373.42425537109375,
+        2,
+        2
+      ],
+      "pick.load-68": [
+        1061.187744140625,
+        380.7585144042969,
+        2,
+        2
+      ],
+      "pick.load-69": [
+        1121.13330078125,
+        388.5612487792969,
+        2,
+        2
+      ],
+      "pick.load-7": [
+        912.34912109375,
+        415.2768859863281,
+        2,
+        2
+      ],
+      "pick.load-70": [
+        1185.034423828125,
+        396.87884521484375,
+        2,
+        2
+      ],
+      "pick.load-71": [
+        1253.2960205078125,
+        405.7640380859375,
+        2,
+        2
+      ],
+      "pick.load-72": [
+        1326.3800048828125,
+        415.27691650390625,
+        2,
+        2
+      ],
+      "pick.load-73": [
+        1404.8162841796875,
+        425.4864501953125,
+        2,
+        2
+      ],
+      "pick.load-74": [
+        1489.2152099609375,
+        436.4721374511719,
+        2,
+        2
+      ],
+      "pick.load-75": [
+        1580.283447265625,
+        448.3258972167969,
+        2,
+        2
+      ],
+      "pick.load-76": [
+        1678.84423828125,
+        461.1549072265625,
+        2,
+        2
+      ],
+      "pick.load-77": [
+        1785.861572265625,
+        475.0846862792969,
+        2,
+        2
+      ],
+      "pick.load-78": [
+        1902.4727783203125,
+        490.2632141113281,
+        2,
+        2
+      ],
+      "pick.load-8": [
+        975.624755859375,
+        425.4864501953125,
+        2,
+        2
+      ],
+      "pick.load-9": [
+        1043.71044921875,
+        436.4721374511719,
+        2,
+        2
+      ],
+      "pick.passage-left": [
+        1442.3929443359375,
+        153.414306640625,
+        2,
+        2
+      ],
+      "pick.passage-right": [
+        1527.8720703125,
+        154.05616760253906,
+        2,
+        2
+      ],
+      "pick.ramp": [
+        1500.99560546875,
+        156.02630615234375,
+        2,
+        2
+      ],
+      "play": [
+        243.0,
+        32.0,
+        36.0,
+        22.0
+      ],
+      "save": [
+        8.0,
+        32.0,
+        38.0,
+        22.0
+      ],
+      "step": [
+        339.0,
+        32.0,
+        37.0,
+        22.0
+      ],
+      "stop": [
+        384.0,
+        32.0,
+        38.0,
+        22.0
+      ],
+      "tab.animation": [
+        601.0,
+        836.0,
+        120.0,
+        22.0
+      ],
+      "tab.assets": [
+        246.0,
+        836.0,
+        110.0,
+        22.0
+      ],
+      "tab.build": [
+        510.0,
+        836.0,
+        87.0,
+        22.0
+      ],
+      "tab.capture": [
+        360.0,
+        836.0,
+        71.0,
+        22.0
+      ],
+      "tab.console": [
+        435.0,
+        836.0,
+        71.0,
+        22.0
+      ],
+      "tab.gameplay-debug": [
+        725.0,
+        836.0,
+        112.0,
+        22.0
+      ],
+      "tab.inspector": [
+        1626.0,
+        422.0,
+        66.0,
+        22.0
+      ],
+      "tab.outliner": [
+        1626.0,
+        64.0,
+        101.0,
+        22.0
+      ],
+      "tab.viewport": [
+        246.0,
+        64.0,
+        75.0,
+        22.0
+      ],
+      "tool.animation": [
+        8.0,
+        252.0,
+        203.0,
+        22.0
+      ],
+      "tool.assets": [
+        8.0,
+        226.0,
+        203.0,
+        22.0
+      ],
+      "tool.build": [
+        8.0,
+        304.0,
+        203.0,
+        22.0
+      ],
+      "tool.capture": [
+        8.0,
+        330.0,
+        203.0,
+        22.0
+      ],
+      "tool.console": [
+        8.0,
+        356.0,
+        203.0,
+        22.0
+      ],
+      "tool.gameplay-debug": [
+        8.0,
+        278.0,
+        203.0,
+        22.0
+      ],
+      "tool.settings": [
+        8.0,
+        382.0,
+        203.0,
+        22.0
+      ],
+      "viewport.image": [
+        228.0,
+        120.0,
+        1362.0,
+        706.0
+      ]
+    }
+  },
+  "fixedSteps": 0,
+  "gameBuildMilliseconds": 0.0,
+  "gameBuildPassed": false,
+  "levelRevision": 0,
+  "nodes": [
+    {
+      "id": "ground",
+      "translation": [
+        0.0,
+        -0.25,
+        -170.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "passage-left",
+      "translation": [
+        -3.200000047683716,
+        1.5,
+        -96.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "passage-right",
+      "translation": [
+        3.200000047683716,
+        1.5,
+        -96.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "ramp",
+      "translation": [
+        0.0,
+        0.17000000178813934,
+        -170.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "interior-left",
+      "translation": [
+        -3.200000047683716,
+        2.0,
+        -305.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "interior-right",
+      "translation": [
+        3.200000047683716,
+        2.0,
+        -305.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "interior-roof",
+      "translation": [
+        0.0,
+        2.3499999046325684,
+        -305.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "gate-left",
+      "translation": [
+        -13.0,
+        1.5,
+        -290.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "gate-right",
+      "translation": [
+        13.0,
+        1.5,
+        -290.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "camera",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "hud",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "goal",
+      "translation": [
+        0.0,
+        1.0,
+        -330.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "companion-0",
+      "translation": [
+        -2.0,
+        0.0,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "companion-1",
+      "translation": [
+        2.0,
+        0.0,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-0",
+      "translation": [
+        -6.650000095367432,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-1",
+      "translation": [
+        -5.949999809265137,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-2",
+      "translation": [
+        -5.25,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-3",
+      "translation": [
+        -4.550000190734863,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-4",
+      "translation": [
+        -3.8499999046325684,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-5",
+      "translation": [
+        -3.1500000953674316,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-6",
+      "translation": [
+        -2.450000047683716,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-7",
+      "translation": [
+        -1.75,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-8",
+      "translation": [
+        -1.0499999523162842,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-9",
+      "translation": [
+        -0.3499999940395355,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-10",
+      "translation": [
+        0.3499999940395355,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-11",
+      "translation": [
+        1.0499999523162842,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-12",
+      "translation": [
+        1.75,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-13",
+      "translation": [
+        2.450000047683716,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-14",
+      "translation": [
+        3.1500000953674316,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-15",
+      "translation": [
+        3.8499999046325684,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-16",
+      "translation": [
+        4.550000190734863,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-17",
+      "translation": [
+        5.25,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-18",
+      "translation": [
+        5.949999809265137,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-19",
+      "translation": [
+        6.650000095367432,
+        0.30000001192092896,
+        -3.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-20",
+      "translation": [
+        -6.650000095367432,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-21",
+      "translation": [
+        -5.949999809265137,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-22",
+      "translation": [
+        -5.25,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-23",
+      "translation": [
+        -4.550000190734863,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-24",
+      "translation": [
+        -3.8499999046325684,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-25",
+      "translation": [
+        -3.1500000953674316,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-26",
+      "translation": [
+        -2.450000047683716,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-27",
+      "translation": [
+        -1.75,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-28",
+      "translation": [
+        -1.0499999523162842,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-29",
+      "translation": [
+        -0.3499999940395355,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-30",
+      "translation": [
+        0.3499999940395355,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-31",
+      "translation": [
+        1.0499999523162842,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-32",
+      "translation": [
+        1.75,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-33",
+      "translation": [
+        2.450000047683716,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-34",
+      "translation": [
+        3.1500000953674316,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-35",
+      "translation": [
+        3.8499999046325684,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-36",
+      "translation": [
+        4.550000190734863,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-37",
+      "translation": [
+        5.25,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-38",
+      "translation": [
+        5.949999809265137,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-39",
+      "translation": [
+        6.650000095367432,
+        0.30000001192092896,
+        -3.700000047683716
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-40",
+      "translation": [
+        -6.650000095367432,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-41",
+      "translation": [
+        -5.949999809265137,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-42",
+      "translation": [
+        -5.25,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-43",
+      "translation": [
+        -4.550000190734863,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-44",
+      "translation": [
+        -3.8499999046325684,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-45",
+      "translation": [
+        -3.1500000953674316,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-46",
+      "translation": [
+        -2.450000047683716,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-47",
+      "translation": [
+        -1.75,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-48",
+      "translation": [
+        -1.0499999523162842,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-49",
+      "translation": [
+        -0.3499999940395355,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-50",
+      "translation": [
+        0.3499999940395355,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-51",
+      "translation": [
+        1.0499999523162842,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-52",
+      "translation": [
+        1.75,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-53",
+      "translation": [
+        2.450000047683716,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-54",
+      "translation": [
+        3.1500000953674316,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-55",
+      "translation": [
+        3.8499999046325684,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-56",
+      "translation": [
+        4.550000190734863,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-57",
+      "translation": [
+        5.25,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-58",
+      "translation": [
+        5.949999809265137,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-59",
+      "translation": [
+        6.650000095367432,
+        0.30000001192092896,
+        -4.400000095367432
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-60",
+      "translation": [
+        -6.650000095367432,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-61",
+      "translation": [
+        -5.949999809265137,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-62",
+      "translation": [
+        -5.25,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-63",
+      "translation": [
+        -4.550000190734863,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-64",
+      "translation": [
+        -3.8499999046325684,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-65",
+      "translation": [
+        -3.1500000953674316,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-66",
+      "translation": [
+        -2.450000047683716,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-67",
+      "translation": [
+        -1.75,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-68",
+      "translation": [
+        -1.0499999523162842,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-69",
+      "translation": [
+        -0.3499999940395355,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-70",
+      "translation": [
+        0.3499999940395355,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-71",
+      "translation": [
+        1.0499999523162842,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-72",
+      "translation": [
+        1.75,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-73",
+      "translation": [
+        2.450000047683716,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-74",
+      "translation": [
+        3.1500000953674316,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-75",
+      "translation": [
+        3.8499999046325684,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-76",
+      "translation": [
+        4.550000190734863,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-77",
+      "translation": [
+        5.25,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "load-78",
+      "translation": [
+        5.949999809265137,
+        0.30000001192092896,
+        -5.099999904632568
+      ],
+      "visible": true
+    },
+    {
+      "id": "hero:body",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "guide:body",
+      "translation": [
+        -1.0,
+        0.0,
+        -1.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "door:body",
+      "translation": [
+        0.0,
+        1.5,
+        -290.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "checkpoint:body",
+      "translation": [
+        0.0,
+        1.0,
+        -165.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "artifact-0:body",
+      "translation": [
+        -14.0,
+        0.44999998807907104,
+        -50.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "artifact-1:body",
+      "translation": [
+        14.0,
+        0.44999998807907104,
+        -130.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "artifact-2:body",
+      "translation": [
+        -14.0,
+        0.44999998807907104,
+        -210.0
+      ],
+      "visible": true
+    }
+  ],
+  "presentationErrors": [],
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "exploration",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.0,
+  "uiDrawCalls": 0
+}

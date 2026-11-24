@@ -1,15 +1,43 @@
 #pragma once
+#include <deque>
 
+#ifndef AZURE_WITH_EDITOR
+#define AZURE_WITH_EDITOR 1
+#endif
 #include "AzureRenderOptions.hpp"
+#include "runtime/RuntimeLifecycle.hpp"
+#include "runtime/RuntimeRenderSnapshotCache.hpp"
+#include "runtime/ResourceFrameTrace.hpp"
+#include "runtime/ModuleAssembly.hpp"
+#include "validation/ValidationTransport.hpp"
+#include "runtime/LevelSession.hpp"
+#include "runtime/GameRuntime.hpp"
+#include "runtime/EngineSettings.hpp"
+#include "runtime/GameInputReplay.hpp"
+#include "runtime/IScriptRuntime.hpp"
+#include "runtime/PresentationRuntime.hpp"
+#include "runtime/GameUi.hpp"
+#include "render/GameUiRenderer.hpp"
 #include "assets/GltfLoader.hpp"
 #include "render/RenderSettings.hpp"
+#include "render/ColorGradingLutGpu.hpp"
+#include "render/SpatialAntiAliasing.hpp"
+#include "render/TemporalReconstruction.hpp"
+#include "render/SceneMultisampling.hpp"
 #include "render/TransientResourcePool.hpp"
 #include "resources/ResourceLocator.hpp"
+#include "resources/PreparedResourcePaths.hpp"
 #include "rhi/GpuAllocator.hpp"
 #include "rhi/UploadRingBuffer.hpp"
 #include "rhi/VulkanRhi.hpp"
 #include "rhi/WorkerCommandPools.hpp"
 #include "render/RecordingWorkerPool.hpp"
+#if AZURE_WITH_EDITOR
+#include "devtools/ShaderHotReloader.hpp"
+#include "render/RenderViewService.hpp"
+#include "editor/preview/AssetThumbnailService.hpp"
+#include "editor/EditorRenderResourceState.hpp"
+#endif
 
 #include <GLFW/glfw3.h>
 
@@ -23,12 +51,18 @@
 
 namespace azurerender {
 class EditorSession;
+class EditorContext;
+class EditorAutomation;
 class GlfwFrontend;
 class ImGuiEditorLayer;
 class ISceneRenderer;
 struct RenderContext;
 struct SceneFrameData;
+struct ScreenObjectVisibilityNumerics;
+struct ProjectReferenceViews;
 }
+
+namespace azurerender::rhi { class VulkanPipelineCache;struct RenderPassDesc; }
 
 class AzureRenderApp final {
 public:
@@ -38,13 +72,56 @@ public:
     ~AzureRenderApp();
 
     void run(const AzureRenderOptions& options = {});
+#if AZURE_WITH_EDITOR
+    std::shared_ptr<azurerender::EditorContext> showProjectCenter(const AzureRenderOptions& options, const std::string& initialProject = {});
+#endif
     [[nodiscard]] const azurerender::RenderSettings& currentRenderSettings()
-        const { return renderSettings_; }
+        const { return effectiveRenderSettings_; }
 
 private:
-    static constexpr std::uint32_t kShadowMapSize = 2048;
+    bool referenceCameraPrograms_=false;
+    bool referenceSceneDepthPrograms_=false;
+    bool referenceSceneVisibilityPrograms_=false;
+    bool referenceSceneObjectVisibilityPrograms_=false;
+    std::shared_ptr<const azurerender::ScreenObjectVisibilityNumerics> referenceObjectVisibilityNumerics_;
+    void applyProjectReferenceViews(const azurerender::ProjectReferenceViews&);
+#if AZURE_WITH_EDITOR
+    std::unique_ptr<azurerender::ShaderHotReloader> shaderReloader_;
+    std::unique_ptr<azurerender::RenderViewService> renderViews_;
+    std::unique_ptr<azurerender::AssetThumbnailService> thumbnails_;
+    std::vector<azurerender::RenderViewHandle> toolViews_;
+    std::uint64_t cameraPreview_=0;
+    std::string activeShaderDirectory_,previewDiagnostic_;
+    std::uint64_t shaderReplacements_=0;
+    std::uint64_t previewDocumentRevision_=0;
+    nlohmann::json toolViewDescriptors_,devtoolsReport_=nlohmann::json::object();
+    void initializeDevtools();
+    void pollDevtools();
+    void finishDevtools();
+    void invalidatePreviews(bool keepCurrentThumbnails=false);
+    nlohmann::json previewOperation(const std::string&,const nlohmann::json&);
+    azurerender::RenderViewDescriptor previewDescriptor(const nlohmann::json&);
+#endif
+    std::uint64_t graphicsSubmission_=0,graphicsCompleted_=0;
+    std::array<std::uint64_t,2> graphicsFrameSubmissions_{};
+    azurerender::SettingRegistry playerSettings_;
+    azurerender::SettingRegistry* engineSettings_=nullptr;
+    double framePacingWaitMilliseconds_=0;
+    std::uint64_t framePacingWaitFrames_=0;
+    VkPresentModeKHR selectedPresentMode_=VK_PRESENT_MODE_FIFO_KHR;
+    azurerender::RenderSettings effectiveRenderSettings_;
+    void initializeSettings();
+    std::uint64_t settingsRevision_=0;
+    std::unique_ptr<azurerender::ObservationRegistry> observations_;
+    std::unique_ptr<azurerender::ValidationService> validation_;
+    std::unique_ptr<azurerender::ValidationTransport> validationTransport_;
+    std::uint64_t validationScreenshots_=0;
+    void initializeValidation();
+    void finishValidation();
+    static constexpr std::uint32_t kShadowMapSize = 4096;
     static constexpr std::size_t kMaxFramesInFlight = 2;
     static constexpr std::uint32_t kTimestampQueryCount = 4;
+    static constexpr std::uint32_t kMaximumTimedPasses = 64;
     static constexpr std::size_t kMaxHudVertices = 24576;
     static constexpr VkFormat kHdrSceneColorFormat =
         VK_FORMAT_R16G16B16A16_SFLOAT;
@@ -82,8 +159,16 @@ private:
         std::array<float, 4> outlineColor{0.008F, 0.013F, 0.022F, 1.0F};
         std::array<float, 4> gradeParameters{1.0F, 1.0F, 1.05F, 0.0F};
         std::array<float, 4> gradeTint{1.0F, 1.0F, 1.0F, 0.0F};
+        std::array<float,4> sampling{1,.1F,100,1};
+        // dimension (0 disables lookup), exposure multiplier, input domain, output encoding.
+        std::array<float,4> colorGradingLut{0,1,0,0};
     };
-    static_assert(sizeof(PostProcessPushConstants) == 80);
+    static_assert(sizeof(PostProcessPushConstants) == 112);
+    struct GroundGridUniform {
+        std::array<float,16> viewProjection{};
+        std::array<float,4> minor{},major{},xAxis{},zAxis{},options{};
+    };
+    static_assert(sizeof(GroundGridUniform)==144);
 
     struct GpuTimingAccumulator {
         std::uint64_t samples = 0;
@@ -96,7 +181,7 @@ private:
         // Retained per-frame totals so the report can publish percentiles
         // instead of averages alone. Percentiles are the meaningful signal for
         // frame-time regressions because a single stall moves max but not mean.
-        std::vector<double> frameSamplesMs;
+        std::deque<double> frameSamplesMs;
     };
 
     // Per-frame draw submission counters. These are the primary evidence that
@@ -110,6 +195,15 @@ private:
         double graphPreparationMilliseconds = 0.0;
         double workerWaitMilliseconds = 0.0;
         double graphExecutionMilliseconds = 0.0;
+        std::uint64_t frameAttempts = 0;
+        std::uint64_t completedCpuFrames = 0;
+        double frameSlotWaitMilliseconds = 0.0;
+        double acquireMilliseconds = 0.0;
+        double submitMilliseconds = 0.0;
+        double presentMilliseconds = 0.0;
+        double cpuFrameMilliseconds = 0.0;
+        std::deque<double> workSamplesMs, totalSamplesMs, waitSamplesMs, physicsSamplesMs;
+        std::deque<std::size_t> physicsStepCounts;
         std::uint64_t workerRecordedPasses = 0;
         std::uint64_t workerRecordedChunks = 0;
         std::uint64_t frames = 0;
@@ -126,7 +220,46 @@ private:
     static_assert(sizeof(HudVertex) == 12);
 
     std::unique_ptr<azurerender::GlfwFrontend> frontend_;
+#if AZURE_WITH_EDITOR
     std::unique_ptr<azurerender::ImGuiEditorLayer> editorLayer_;
+    std::array<float,3> savedEditorCamera_{},savedEditorTarget_{};
+    bool editorWasPlaying_=false;
+    float editorCameraNear_=0,editorCameraFar_=0;
+#endif
+    azurerender::RuntimeLifecycle runtime_;
+    azurerender::SceneDocument playerSceneScratch_;
+    azurerender::ModuleAssembly runtimeModules_;
+    std::unique_ptr<azurerender::LevelSession> levelSession_;
+    std::unique_ptr<azurerender::GameRuntime> gameRuntime_;
+    std::optional<azurerender::GameInputReplay> gameInputReplay_;
+    azurerender::ResourceFrameTrace resourceFrameSamples_;
+    std::uint64_t sampledLevelRevision_=0;
+    nlohmann::json gameRouteFrames_=nlohmann::json::array();
+    std::unique_ptr<azurerender::IScriptRuntime> scriptRuntime_;
+    std::unique_ptr<azurerender::PresentationRuntime> presentationRuntime_;
+    std::unique_ptr<azurerender::GameUiRenderer> gameUiRenderer_;
+    std::unique_ptr<azurerender::GameUi> gameUi_;
+#if AZURE_WITH_EDITOR
+    std::unique_ptr<azurerender::EditorAutomation> editorAutomation_;
+#endif
+    std::string gameUiPath_;
+#if AZURE_WITH_EDITOR
+    azurerender::EditorRenderResourceState editorRenderResources_;
+    azurerender::EditorRenderResourceState rejectedEditorResources_;
+    struct EditorSceneReload;
+    std::unique_ptr<EditorSceneReload> editorSceneReload_;
+    std::shared_ptr<const azurerender::scene::SceneDescription> editorDisplayedScene_;
+    bool editorReloadQueued_=false;
+    bool preservingEditorScene_=false;
+    void requestEditorSceneReload(bool retainCompatiblePreviews);
+    void rebuildEditorSceneRenderer();
+    void advanceEditorSceneReload();
+    void discardEditorSceneReload(bool restart=false);
+#endif
+    std::uint64_t gameplayFrame_=0,uiSerial_=0,uiDrawCalls_=0,animationFrames_=0,audioStarts_=0;
+    std::uint64_t editorPreviewFrames_=0;
+    std::vector<std::string> presentationErrors_;
+    double pausedTimeOffset_ = 0.0;
     bool framebufferResized_ = false;
 
     VkInstance instance_ = VK_NULL_HANDLE;
@@ -151,7 +284,14 @@ private:
     // bindless texture array needs (runtimeDescriptorArray plus
     // shaderSampledImageArrayNonUniformIndexing).
     bool bindlessTexturesSupported_ = false;
+    bool fragmentPrimitiveIdentity_ = false;
+    bool fragmentStorageAtomics_ = false;
+    bool fragmentQuadControl_ = false;
     std::vector<VkQueryPool> timestampQueryPools_;
+    std::array<std::vector<std::string>, kMaxFramesInFlight> timestampPassNames_;
+    struct GpuPassTimingSummary {std::string name;std::uint64_t samples=0;double totalMs=0,minMs=0,maxMs=0;};
+    std::vector<GpuPassTimingSummary> gpuPassTiming_;
+    void collectGpuPassTiming(std::size_t frameIndex);
     std::array<bool, kMaxFramesInFlight> timestampQuerySubmitted_{};
     GpuTimingAccumulator gpuTiming_;
     SubmissionCounters submissionCounters_;
@@ -161,13 +301,19 @@ private:
     // All per-frame CPU-to-GPU uploads are slices of this ring.
     azurerender::rhi::UploadRingBuffer uploadRing_;
     // Resource creation backend handed to scene renderers.
+    std::unique_ptr<azurerender::rhi::VulkanPipelineCache> pipelineCache_;
     std::unique_ptr<azurerender::rhi::VulkanRhi> rhi_;
+    std::unique_ptr<azurerender::rhi::PipelineInspection> pipelineInspection_;
+    bool exactDepthBiasEnabled_=false;
+    bool shaderFloatControls2Enabled_ = false;
 
     VkSwapchainKHR swapchain_ = VK_NULL_HANDLE;
     VkFormat swapchainFormat_ = VK_FORMAT_UNDEFINED;
     VkFormat depthFormat_ = VK_FORMAT_UNDEFINED;
     VkExtent2D swapchainExtent_{};
     VkExtent2D renderExtent_{};
+    VkExtent2D sceneRenderExtent_{};
+    void updateSceneRenderExtent();
     VkExtent2D requestedEditorViewportExtent_{};
     bool editorViewportResizeRequested_ = false;
     std::vector<VkImage> swapchainImages_;
@@ -179,12 +325,22 @@ private:
     std::vector<VkImageView> sceneColorImageViews_;
     std::vector<VkFramebuffer> swapchainFramebuffers_;
     std::vector<VkFramebuffer> postProcessFramebuffers_;
+    std::vector<std::unique_ptr<azurerender::SpatialAntiAliasing>> spatialAntiAliasing_;
+    std::unique_ptr<azurerender::MotionVectorTarget> sharedMotion_;
+    std::unique_ptr<azurerender::TemporalReconstruction> temporalReconstruction_;
+    std::unique_ptr<azurerender::SceneMultisampling> sceneMultisampling_;
+    bool multisampleRequested_=false;
+    std::string multisampleFallback_;
+    bool temporalRequested_=false;
+    std::string temporalFallback_;
     std::vector<VkFramebuffer> editorUiFramebuffers_;
     std::vector<azurerender::rhi::GpuImage> depthImages_;
     std::vector<VkImageView> depthImageViews_;
     VkFormat normalFormat_ = VK_FORMAT_R8G8B8A8_UNORM;
     std::vector<azurerender::rhi::GpuImage> normalImages_;
     std::vector<VkImageView> normalImageViews_;
+    std::vector<azurerender::rhi::GpuImage> displayMaskImages_;
+    std::vector<VkImageView> displayMaskImageViews_;
     VkFormat shadowFormat_ = VK_FORMAT_UNDEFINED;
     azurerender::rhi::GpuImage shadowImage_;
     VkImageView shadowImageView_ = VK_NULL_HANDLE;
@@ -193,11 +349,16 @@ private:
     VkFramebuffer shadowFramebuffer_ = VK_NULL_HANDLE;
 
     VkRenderPass renderPass_ = VK_NULL_HANDLE;
+    std::shared_ptr<const azurerender::rhi::RenderPassDesc> scenePassDescription_;
     VkRenderPass postProcessRenderPass_ = VK_NULL_HANDLE;
     VkRenderPass editorUiRenderPass_ = VK_NULL_HANDLE;
     VkDescriptorSetLayout postProcessDescriptorSetLayout_ = VK_NULL_HANDLE;
+    std::vector<azurerender::rhi::GpuBuffer> groundGridUniforms_;
     VkDescriptorPool postProcessDescriptorPool_ = VK_NULL_HANDLE;
     std::vector<VkDescriptorSet> postProcessDescriptorSets_;
+    std::unique_ptr<azurerender::ColorGradingLutGpu> colorGradingLut_;
+    std::string colorGradingLutKey_;
+    void synchronizeColorGradingLut(const azurerender::RenderSettings& settings);
     VkPipelineLayout postProcessPipelineLayout_ = VK_NULL_HANDLE;
     VkPipeline innerOutlinePipeline_ = VK_NULL_HANDLE;
     VkPipeline hudPipeline_ = VK_NULL_HANDLE;
@@ -209,6 +370,9 @@ private:
     azurerender::RecordingWorkerPool recordingWorkers_{4};
     AzureRenderOptions runOptions_;
     azurerender::ResourceLocator resourceLocator_;
+    mutable std::optional<azurerender::PreparedResourcePaths> sceneResourcePaths_;
+    azurerender::RuntimeSceneSnapshotCache playerSceneSnapshots_;
+    azurerender::RuntimeRenderSnapshotCache playerRenderSceneCache_;
     std::string resolvedAssetPath_;
     std::string selectedGpuName_;
     // Byte offsets of this frame's HUD vertex slice inside uploadRing_.
@@ -223,7 +387,11 @@ private:
     float pendingPickX_ = 0.0F;
     float pendingPickY_ = 0.0F;
     bool pendingPickRequested_ = false;
+    bool pendingPickAdditive_ = false;
     std::array<float, 3> cameraPosition_{2.8F, 2.1F, 3.2F};
+    bool gameViewportFocus_ = true, gameCursorPrimed_ = false;
+    double gameCursorX_ = 0, gameCursorY_ = 0;
+    static void scrollCallback(GLFWwindow* window, double x, double y);
     std::array<float, 3> cameraTarget_{0.0F, 0.0F, 0.0F};
     float rotationAngle_ = 0.0F;
     float rotationSpeed_ = 0.65F;
@@ -231,6 +399,11 @@ private:
     bool autoRotate_ = true;
     azurerender::RenderSettings renderSettings_;
     std::unique_ptr<azurerender::ISceneRenderer> sceneRenderer_;
+    std::unique_ptr<azurerender::ISceneRenderer> preparedRenderer_;
+    std::string rendererResourceKey_, preparedResourceKey_;
+    azurerender::RenderSettings preparedRenderSettings_;
+    bool preparedRendererReady_=false;
+    std::uint64_t preparedRendererLastSubmission_=0;
     bool hudEnabled_ = false;
     bool editorUiEnabled_ = false;
     bool qaHarnessEnabled_ = false;
@@ -296,16 +469,37 @@ private:
     void createGraphicsPipeline();
     void createFramebuffers();
     void createPostProcessFramebuffers();
+    void createSpatialAntiAliasingResources();
     void createEditorUiFramebuffers();
     void createSwapchainSemaphores();
     void createCommandPool();
     void createPostProcessDescriptorSets();
+    void updateTemporalDisplayDescriptors();
     void createCommandBuffers();
     void createSyncObjects();
 
     void createSceneRenderer();
-    void buildRenderContext(azurerender::RenderContext& context);
+    void createTemporalResources();
+    void createMultisampleResources();
+    bool preloadLevelRenderer(const azurerender::Level& level, bool allowActiveReuse = true);
+    void prepareLevelRenderer(const azurerender::Level& level);
+    void releasePreparedRenderer();
+    void synchronizeEditorRuntime();
+    void synchronizeGameUi();
+    void updateGameUi(double delta);
+    azurerender::PresentationRuntime* activePresentation();
+    azurerender::RuntimeLifecycle* activeRuntime();
+    azurerender::GameRuntime* activeGame();
+    azurerender::IScriptRuntime* activeScripts();
+    azurerender::AssetDatabase* activeAssets();
+    void buildRenderContext(azurerender::RenderContext& context,
+        const azurerender::RenderSettings* frameSettings=nullptr,
+        const azurerender::scene::SceneDescription* frameScene=nullptr,
+        bool includeScene=true);
+    azurerender::scene::SceneDescription resolveRenderDescription(
+        const azurerender::SceneDocument& document) const;
     void buildSceneFrameData(azurerender::SceneFrameData& frame);
+    nlohmann::json observeGameState();
 
     void drawFrame();
     void pickPrimitive(float viewportX, float viewportY);
@@ -314,13 +508,14 @@ private:
     void recordCommandBuffer(
         VkCommandBuffer commandBuffer,
         std::uint32_t imageIndex,
-        VkBuffer screenshotBuffer);
+        VkBuffer screenshotBuffer,
+        const azurerender::SceneFrameData& frame);
     void saveScreenshot(
         const void* pixelData,
         std::uint32_t width,
         std::uint32_t height,
         const std::string& outputPath = {}) const;
-    void recreateSwapchain();
+    bool recreateSwapchain();
     void recreateEditorViewportResources();
     void cleanupEditorViewportResources(bool destroySampler);
     void cleanupSwapchain();
@@ -335,7 +530,7 @@ private:
     [[nodiscard]] static VkSurfaceFormatKHR chooseSurfaceFormat(
         const std::vector<VkSurfaceFormatKHR>& formats);
     [[nodiscard]] static VkPresentModeKHR choosePresentMode(
-        const std::vector<VkPresentModeKHR>& presentModes);
+        const std::vector<VkPresentModeKHR>& presentModes, bool synchronized);
     [[nodiscard]] VkExtent2D chooseExtent(const VkSurfaceCapabilitiesKHR& capabilities) const;
     [[nodiscard]] static std::vector<char> readBinaryFile(const std::string& path);
     [[nodiscard]] VkShaderModule createShaderModule(const std::vector<char>& code) const;
@@ -364,6 +559,7 @@ private:
         std::uint32_t mipLevels = 1) const;
 
     static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
+    static void fileDropCallback(GLFWwindow* window,int count,const char** paths);
     static void keyCallback(
         GLFWwindow* window,
         int key,

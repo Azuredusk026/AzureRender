@@ -1,0 +1,15 @@
+{
+  "status": "morph-default-mismatch-located",
+  "modelsScanned": 515,
+  "issues": [
+    {
+      "path": "build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\project\\content-character\\hero-capture-baked-10401-020919.glb",
+      "node": 319,
+      "nodeName": "S_actor_laevat_eyebrow_01_lod0",
+      "mesh": 6,
+      "targets": 0,
+      "weights": 2,
+      "sha256": "a434bd68e9eb836848938030239a6ab92792ff8ef43b0939fd6d7f4d158ce8b0"
+    }
+  ]
+}

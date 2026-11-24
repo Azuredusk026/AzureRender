@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-memory-trace\inject_owned.py", line 135, in <module>
+    raise SystemExit(run(command,args.output,args.dll,args.timeout,args.residency))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-memory-trace\inject_owned.py", line 102, in run
+    assert child.returncode==0,('Owned child failed',child.returncode)
+           ^^^^^^^^^^^^^^^^^^^
+AssertionError: ('Owned child failed', 3221225477)

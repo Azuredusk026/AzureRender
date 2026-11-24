@@ -1,0 +1,171 @@
+site_name: AzureRender
+site_description: 原生 Vulkan 可扩展实时渲染器技术文档
+site_url: https://azuredusk026.github.io/AzureRender/
+repo_url: https://github.com/Azuredusk026/AzureRender
+repo_name: Azuredusk026/AzureRender
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    - content.code.copy
+    - content.action.edit
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到浅色模式
+
+nav:
+  - 项目总览: index.md
+  - 构建与使用: getting-started.md
+  - 渲染器架构: architecture.md
+  - 角色渲染: character-rendering.md
+  - 角色材质验收: runtime/character-finish.md
+  - 黑洞模拟: blackhole-rendering.md
+  - 资产与编辑器: assets-and-editor.md
+  - 开发、测试与发布: development-and-release.md
+  - 参数与接口参考: reference.md
+  - 开发命令参考: reference/developer-cli.md
+  - 开发规范: documentation-standard.md
+  - 资源访问与可见性: runtime/resource-visibility.md
+  - 脚本服务与托管原型: runtime/script-services.md
+  - 托管脚本工作流: tutorials/managed-scripts.md
+  - 引擎交付范围: runtime/engine-delivery.md
+  - 引擎复用工作流: tutorials/engine-reuse.md
+  - 可见性对照教程: tutorials/resource-visibility.md
+  - 着色模块与共享类型: runtime/shader-modules.md
+  - 着色模块对照教程: tutorials/shader-modules.md
+  - 架构调研:
+      - gkNextEngine 借鉴评估: research/2026-10-06-gknextengine.md
+  - 计划:
+      - Azure Engine 总计划: plans/azure-engine-plan.md
+      - 引擎架构与 AI 原生实施计划: plans/2026-10-06-engine-evolution.md
+      - 引擎基础与操作契约: plans/2026-10-06-engine-foundation-steps.md
+      - AI 原生工具与编辑器: plans/2026-10-06-ai-native-editor-steps.md
+      - 引擎专项与交付: plans/2026-10-06-engine-specialized-steps.md
+      - G11 脚本服务实施: plans/g11-implementation.md
+      - P3 引擎复用实施: plans/p3-implementation.md
+      - 编辑器与可玩体验优化: plans/2026-10-05-quality-round.md
+      - F3 仓库与文档基础: plans/2026-10-05-repository-plan.md
+      - R6 与 G7 可玩表现: plans/2026-10-05-playable-quality-plan.md
+      - U2 编辑器工作区: plans/2026-10-05-editor-ui-plan.md
+      - 第三人称角色与可玩关卡计划: plans/third-person-playable-plan.md
+      - G0 引擎基础计划: plans/g0-implementation.md
+      - U0 编辑器与界面计划: plans/u0-implementation.md
+      - P0 Windows 游戏发布计划: plans/p0-implementation.md
+      - 渲染核心实施计划: plans/render-core-implementation.md
+      - 黑洞优化准入计划: plans/2026-10-03-blackhole-optimization.md
+  - 运行时:
+      - 开发期重载与独立预览: runtime/development-previews.md
+      - 程序化内容契约: runtime/procedural-content.md
+      - 生成几何与刚体动作: tutorials/procedural-content.md
+      - 有界内容提案: runtime/content-proposals.md
+      - UI 基础与设置: runtime/ui-settings.md
+      - 观察验证与内容来源: runtime/observations-generation.md
+      - 构建复现与素材准入: runtime/build-reproducibility.md
+      - Windows 游戏发布: runtime/game-publishing.md
+      - 项目编辑与游戏表现: runtime/editor-game-ui.md
+      - 从空关卡制作并发布游戏: tutorials/editor-first-game.md
+      - 脚本与玩法: runtime/scripts-gameplay.md
+      - 物理与输入: runtime/physics-input.md
+      - 独立动画与第三人称控制: runtime/third-person-animation.md
+      - 场景可见性与裁剪: runtime/scene-visibility.md
+      - 第三人称探索关卡: runtime/exploration-gameplay.md
+      - 资产、关卡与 Prefab: runtime/assets-levels.md
+      - 可玩关卡性能与加载: runtime/playable-performance.md
+      - 反射与序列化: runtime/reflection.md
+      - 引擎基础与 Player: runtime/engine-foundation.md
+      - 运行系统装配: runtime/system-composition.md
+      - 编辑操作与文档事务: runtime/edit-operations.md
+      - 渲染图: runtime/render-graph.md
+      - RHI 同步: runtime/rhi-synchronization.md
+      - 场景数据: runtime/scene-data.md
+      - Compute Pass: runtime/compute-passes.md
+      - 并行录制与 GPU 提交: runtime/parallel-submission.md
+      - Windows 渲染核心验收: runtime/windows-acceptance.md
+      - 黑洞性能预算: runtime/blackhole-performance.md
+      - 环境资源: runtime/environment-assets.md
+      - 聚簇光照: runtime/clustered-lighting.md
+  - 阶段验收:
+      - G10 程序化内容与文本动画: acceptance/g10/2026-10-07.md
+      - G9 有界内容提案: acceptance/g9/2026-10-06.md
+      - U4 UI 基础与设置: acceptance/u4/2026-10-06.md
+      - F5 观察、内容与工具: acceptance/f5/2026-10-06.md
+      - U3 编辑操作与文档事务: acceptance/u3/2026-10-06.md
+      - G8 共享机制与应用分层: acceptance/g8/2026-10-06.md
+      - F4 模块与类型契约: acceptance/f4/2026-10-06.md
+      - P2 展示与独立交付: acceptance/p2/2026-10-05.md
+      - U2 编辑器工作区与教程: acceptance/u2/2026-10-05.md
+      - G7 角色方向与冲刺: acceptance/g7/2026-10-05.md
+      - R6 场景可见性与裁剪: acceptance/r6/2026-10-05.md
+      - F3 仓库与文档基础: acceptance/f3/2026-10-05.md
+      - P1 可玩关卡交付: acceptance/p1/2026-10-05.md
+      - F2 性能与工程加固: acceptance/f2/2026-10-05.md
+      - U1 关卡制作与调试: acceptance/u1/2026-10-05.md
+      - G6 探索关卡与交互: acceptance/g6/2026-10-05.md
+      - G5 独立动画与基础 3C: acceptance/g5/2026-10-04.md
+      - R5 角色外观与混合场景: acceptance/r5/2026-10-04.md
+      - F1 构建与素材准入: acceptance/f1/2026-10-04.md
+      - P0 Windows 游戏发布验收: acceptance/p0/2026-10-04.md
+      - U0 编辑器与界面验收: acceptance/u0/2026-10-04.md
+      - G4 脚本与玩法验收: acceptance/g4/2026-10-04.md
+      - 桌面同步: acceptance/r1/2026-09-26.md
+      - R2 验收: acceptance/r2/2026-09-26.md
+      - R3 验收: acceptance/r3/2026-10-03.md
+      - R3 历史审查: acceptance/r3/2026-10-01.md
+      - R4 验收: acceptance/r4/2026-10-03.md
+      - 黑洞优化准入: acceptance/blackhole/2026-10-03.md
+      - 审计修复跟踪: audits/2026-10-01-follow-up.md
+      - G3 物理与输入验收: acceptance/g3/2026-10-04.md
+      - G2 资产与关卡验收: acceptance/g2/2026-10-04.md
+      - G1 反射验收: acceptance/g1/2026-10-03.md
+      - G0 引擎基础验收: acceptance/g0/2026-10-03.md
+      - R0 准入记录: acceptance/r0/2026-09-26.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+plugins:
+  - search
+
+exclude_docs: |
+  archive/
+  **/*_CN.md
+
+copyright: Copyright &copy; 2026 AzureRender contributors

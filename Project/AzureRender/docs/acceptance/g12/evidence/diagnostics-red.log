@@ -1,0 +1,17 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 184: AzureEditor.ContentEditingWorkflow
+1/1 Test #184: AzureEditor.ContentEditingWorkflow ...***Failed    0.21 sec
+[1791570838407][info][editor][code=0] Opened scene: startup
+[1791570838471][info][editor][code=0] Opened scene: startup
+[1791570838507][info][editor][code=0] Opened scene: startup
+[1791570838515][info][editor][code=0] ERROR [asset.inspect]: Unknown operation: asset.inspect
+Asset diagnostics must expose the registered source and identity
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.22 sec
+
+The following tests FAILED:
+	184 - AzureEditor.ContentEditingWorkflow (Failed)

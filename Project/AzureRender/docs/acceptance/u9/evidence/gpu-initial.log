@@ -1,0 +1,35 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 105: AzureEditor.WorkspaceGpu
+1/5 Test #105: AzureEditor.WorkspaceGpu .........   Passed  151.09 sec
+    Start 144: AzureEditor.ContentGpu
+2/5 Test #144: AzureEditor.ContentGpu ...........***Failed   18.84 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content.py", line 130, in <module>
+    summaries = [run(args.executable.resolve(), root / workflow, workflow) for workflow in ('exploration', 'inspector')]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content.py", line 130, in <listcomp>
+    summaries = [run(args.executable.resolve(), root / workflow, workflow) for workflow in ('exploration', 'inspector')]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content.py", line 82, in run
+    assert node['components']['azure.interactable']['data']['prompt']==prompt, 'Component strings must preserve full UTF-8 content'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Component strings must preserve full UTF-8 content
+
+    Start 146: AzureEditor.UsabilityGpu
+3/5 Test #146: AzureEditor.UsabilityGpu .........   Passed   39.31 sec
+    Start 147: AzureEditor.DocumentGuardGpu
+4/5 Test #147: AzureEditor.DocumentGuardGpu .....   Passed   39.24 sec
+    Start 177: AzureEditor.ProductizationGpu
+5/5 Test #177: AzureEditor.ProductizationGpu ....   Passed   53.69 sec
+
+80% tests passed, 1 tests failed out of 5
+
+Label Time Summary:
+gpu    = 302.18 sec*proc (5 tests)
+
+Total Test time (real) = 302.21 sec
+
+The following tests FAILED:
+	144 - AzureEditor.ContentGpu (Failed)
+Errors while running CTest

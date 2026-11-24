@@ -1,0 +1,57 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 3,
+  "animations": [
+    {
+      "blend": 1.0,
+      "clip": 0,
+      "morph": [
+        0.0,
+        0.0
+      ],
+      "node": "animated-rig",
+      "previousClip": 0,
+      "time": 0.75
+    }
+  ],
+  "audioStarts": 1,
+  "fixedSteps": 30,
+  "levelRevision": 1,
+  "nodes": [
+    {
+      "id": "authored-model",
+      "translation": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "authored-audio",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "animated-rig",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true
+    }
+  ],
+  "presentationErrors": [],
+  "replayDelayedFrames": 0,
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "assembly",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.41719999999999985,
+  "uiDrawCalls": 0
+}

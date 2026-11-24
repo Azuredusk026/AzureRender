@@ -1,0 +1,541 @@
+{
+  "schemaVersion": 1,
+  "status": "public-projection-and-real-input-alignment-verified",
+  "nativeAppearanceStatus": "pending-C16-R1-full-region-convergence",
+  "run": "build\\runs\\20261023-093843-character-multipixel-input-diagnosis-92843a",
+  "contracts": {
+    "cameraComponent": 2,
+    "cameraViewLayout": 2,
+    "rendererApi": 2,
+    "pathTracingCameraLayout": 2,
+    "pathTracingCameraBytes": 144,
+    "newRenderPasses": 0
+  },
+  "tests": {
+    "cpuPerConfiguration": 11,
+    "publicGpuPerConfiguration": 20,
+    "actualCharacterCaptures": 7,
+    "mainCaptures": 1
+  },
+  "batches": [
+    {
+      "name": "camera-gpu-release",
+      "captures": 14,
+      "summarySha256": "39c2a8135c45a708470d2ce7ff35368b19eeb3cf08002f62ac2458f1c5952e86"
+    },
+    {
+      "name": "offset-light-release",
+      "captures": 3,
+      "summarySha256": "56299d4db130e07ff805c610571e83045b2860345b7bbae224f97cd9a43669d8"
+    },
+    {
+      "name": "offset-shadow-release",
+      "captures": 3,
+      "summarySha256": "5901aa1184e2ef0a670c94f3c72e1cd23f305f95b0c5eba89d85639f19457c5c"
+    },
+    {
+      "name": "camera-gpu-debug",
+      "captures": 14,
+      "summarySha256": "39c2a8135c45a708470d2ce7ff35368b19eeb3cf08002f62ac2458f1c5952e86"
+    },
+    {
+      "name": "offset-light-debug",
+      "captures": 3,
+      "summarySha256": "91b117c71488f05bcf4d0c20a255c7a6cc1733711a3d29bd3b6390257cc08365"
+    },
+    {
+      "name": "offset-shadow-debug",
+      "captures": 3,
+      "summarySha256": "f457336f3a2826c5a21357bdb224afe5928045b8849fcf24f0697bed5f53912d"
+    }
+  ],
+  "nativeProjection": {
+    "schemaVersion": 1,
+    "source": "event950 VS cb0 rows8..11",
+    "projectionColumnMajor": [
+      1.7840219736099243,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -3.1715948581695557,
+      0.0,
+      0.0,
+      -0.00019532594888005406,
+      -0.00023145804880186915,
+      9.894371032714844e-06,
+      -1.0,
+      0.0,
+      0.0,
+      0.10000098496675491,
+      0.0
+    ],
+    "camera": {
+      "projectionOffsetX": 0.00019532594888005406,
+      "projectionOffsetY": 0.00023145804880186915
+    },
+    "pixelOffset": [
+      0.2500172145664692,
+      0.1666497951373458
+    ],
+    "sourceFile": "build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame10401\\e950-vs-constants.json",
+    "sourceSha256": "aaae2fd1ff95ba118e6132b5d4d1b70aed469609453906143d42d1368258e0bd"
+  },
+  "positionChecks": [
+    {
+      "pixel": [
+        1280,
+        195
+      ],
+      "projectedCentre": [
+        1280.249334560307,
+        195.3329411842892
+      ],
+      "deltaPixels": [
+        0.2506654396929662,
+        0.16705881571078862
+      ]
+    },
+    {
+      "pixel": [
+        1280,
+        170
+      ],
+      "projectedCentre": [
+        1280.2504910437149,
+        170.33256453756348
+      ],
+      "deltaPixels": [
+        0.24950895628512626,
+        0.16743546243651508
+      ]
+    },
+    {
+      "pixel": [
+        1373,
+        290
+      ],
+      "projectedCentre": [
+        1373.2495135392096,
+        290.3335784785418
+      ],
+      "deltaPixels": [
+        0.25048646079039827,
+        0.1664215214581759
+      ]
+    },
+    {
+      "pixel": [
+        1196,
+        290
+      ],
+      "projectedCentre": [
+        1196.2500695742228,
+        290.3333553219736
+      ],
+      "deltaPixels": [
+        0.2499304257771655,
+        0.16664467802638683
+      ]
+    }
+  ],
+  "inputComparisons": [
+    {
+      "mode": "albedo",
+      "pixel": [
+        1280,
+        195
+      ],
+      "expected": [
+        0.56787109375,
+        0.1014404296875,
+        0.10821533203125
+      ],
+      "before": [
+        0.5647115057049292,
+        0.10224173308810132,
+        0.10702310297826761
+      ],
+      "after": [
+        0.5647115057049292,
+        0.10224173308810132,
+        0.10702310297826761
+      ],
+      "errorBefore": 0.0031595880450707714,
+      "errorAfter": 0.0031595880450707714
+    },
+    {
+      "mode": "albedo",
+      "pixel": [
+        1280,
+        170
+      ],
+      "expected": [
+        0.5439453125,
+        0.09014892578125,
+        0.10845947265625
+      ],
+      "before": [
+        0.5394794890121072,
+        0.09084171118340768,
+        0.10946171077829933
+      ],
+      "after": [
+        0.5457244613701866,
+        0.09084171118340768,
+        0.10946171077829933
+      ],
+      "errorBefore": 0.004465823487892817,
+      "errorAfter": 0.0017791488701865976
+    },
+    {
+      "mode": "albedo",
+      "pixel": [
+        1373,
+        290
+      ],
+      "expected": [
+        0.318603515625,
+        0.04736328125,
+        0.0555419921875
+      ],
+      "before": [
+        0.30946892281750854,
+        0.04518620438567554,
+        0.05448027644244237
+      ],
+      "after": [
+        0.31854677812509186,
+        0.04817182422688942,
+        0.05612849004960009
+      ],
+      "errorBefore": 0.00913459280749146,
+      "errorAfter": 0.000808542976889419
+    },
+    {
+      "mode": "albedo",
+      "pixel": [
+        1196,
+        290
+      ],
+      "expected": [
+        0.29638671875,
+        0.04156494140625,
+        0.04736328125
+      ],
+      "before": [
+        0.31398871337571754,
+        0.04518620438567554,
+        0.052860647023180246
+      ],
+      "after": [
+        0.2961382707983211,
+        0.042311410620809675,
+        0.04817182422688942
+      ],
+      "errorBefore": 0.017601994625717543,
+      "errorAfter": 0.000808542976889419
+    },
+    {
+      "mode": "shaded-normal",
+      "pixel": [
+        1280,
+        195
+      ],
+      "expected": [
+        0.09024213999509811,
+        0.37075215578079224,
+        0.9243371486663818
+      ],
+      "before": [
+        0.10402280302400024,
+        0.373370624870627,
+        0.9293724957889302
+      ],
+      "after": [
+        0.0914489227403732,
+        0.373370624870627,
+        0.9293724957889302
+      ],
+      "errorBefore": 0.01378066302890213,
+      "errorAfter": 0.005035347122548384
+    },
+    {
+      "mode": "shaded-normal",
+      "pixel": [
+        1280,
+        170
+      ],
+      "expected": [
+        -0.4182131290435791,
+        -0.8147522211074829,
+        0.4015924334526062
+      ],
+      "before": [
+        -0.4422114730463792,
+        -0.8048253057162751,
+        0.40220378386594624
+      ],
+      "after": [
+        -0.41645870036492827,
+        -0.8138820743066251,
+        0.40220378386594624
+      ],
+      "errorBefore": 0.0239983440028001,
+      "errorAfter": 0.0017544286786508323
+    },
+    {
+      "mode": "shaded-normal",
+      "pixel": [
+        1373,
+        290
+      ],
+      "expected": [
+        0.5780398845672607,
+        0.03260141611099243,
+        0.8153570294380188
+      ],
+      "before": [
+        0.6296931444322025,
+        0.06655280802101049,
+        0.7592447937756635
+      ],
+      "after": [
+        0.5825958806652605,
+        0.029835330753042788,
+        0.8093223487822991
+      ],
+      "errorBefore": 0.05611223566235535,
+      "errorAfter": 0.00603468065571966
+    },
+    {
+      "mode": "shaded-normal",
+      "pixel": [
+        1196,
+        290
+      ],
+      "expected": [
+        -0.9086611270904541,
+        0.02806503139436245,
+        0.4165901839733124
+      ],
+      "before": [
+        -0.8877430199007998,
+        0.01776264170986752,
+        0.46092148018070733
+      ],
+      "after": [
+        -0.9096275912286489,
+        0.029835330753042788,
+        0.4167515597833735
+      ],
+      "errorBefore": 0.044331296207394955,
+      "errorAfter": 0.0017702993586803384
+    }
+  ],
+  "appearance": {
+    "schemaVersion": 1,
+    "regions": [
+      {
+        "name": "crown",
+        "bounds": [
+          1215,
+          160,
+          1340,
+          242
+        ],
+        "pixels": 8681,
+        "meanLinearErrorBefore": 0.04309258808612466,
+        "meanLinearErrorAfter": 0.04402935597558397,
+        "meanEncodedRgbErrorBefore": 0.050187736270255905,
+        "meanEncodedRgbErrorAfter": 0.05135578940711177
+      },
+      {
+        "name": "head",
+        "bounds": [
+          1140,
+          130,
+          1430,
+          440
+        ],
+        "pixels": 21138,
+        "meanLinearErrorBefore": 0.05187906006904695,
+        "meanLinearErrorAfter": 0.052969108075347715,
+        "meanEncodedRgbErrorBefore": 0.06460341224830046,
+        "meanEncodedRgbErrorAfter": 0.06611881955923632
+      }
+    ],
+    "pixels": [
+      {
+        "pixel": [
+          1280,
+          195
+        ],
+        "reference": [
+          231,
+          105,
+          104
+        ],
+        "before": [
+          231,
+          105,
+          103
+        ],
+        "after": [
+          231,
+          105,
+          104
+        ]
+      },
+      {
+        "pixel": [
+          1280,
+          170
+        ],
+        "reference": [
+          146,
+          29,
+          41
+        ],
+        "before": [
+          107,
+          9,
+          25
+        ],
+        "after": [
+          107,
+          9,
+          25
+        ]
+      },
+      {
+        "pixel": [
+          1373,
+          290
+        ],
+        "reference": [
+          229,
+          142,
+          131
+        ],
+        "before": [
+          246,
+          177,
+          166
+        ],
+        "after": [
+          245,
+          172,
+          160
+        ]
+      },
+      {
+        "pixel": [
+          1196,
+          290
+        ],
+        "reference": [
+          137,
+          36,
+          46
+        ],
+        "before": [
+          147,
+          41,
+          50
+        ],
+        "after": [
+          140,
+          40,
+          47
+        ]
+      }
+    ]
+  },
+  "actual": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "captures": [
+      {
+        "name": "beauty-jitter",
+        "imageSha256": "f5a51d7ca68e8818466378b62ed9cc37192c2ec8a186dcd1aeb7e4c9f653c138",
+        "playerSha256": "534702b414e3676a273c5554faa51667a5bd7160030ea1194244c8e5263c32c2",
+        "validationEnabled": false
+      },
+      {
+        "name": "kk-jitter",
+        "imageSha256": "76e22eb85c4c3328dd068812e8fb7bb20c2cd1111a94c289350992540ad05298",
+        "playerSha256": "534702b414e3676a273c5554faa51667a5bd7160030ea1194244c8e5263c32c2",
+        "validationEnabled": false
+      },
+      {
+        "name": "rim-jitter",
+        "imageSha256": "fdf0653d71118933e5f0330c1c692c9ff48080e2232806e60ab007931be5d2f2",
+        "playerSha256": "534702b414e3676a273c5554faa51667a5bd7160030ea1194244c8e5263c32c2",
+        "validationEnabled": false
+      },
+      {
+        "name": "beauty-jitter-fixed",
+        "imageSha256": "f5a51d7ca68e8818466378b62ed9cc37192c2ec8a186dcd1aeb7e4c9f653c138",
+        "playerSha256": "de2ea015c98d53cb6b4ddf984299c6e3beb3230d4337e89882365c6f5e09e857",
+        "validationEnabled": true
+      },
+      {
+        "name": "documents-jitter",
+        "imageSha256": "f5a51d7ca68e8818466378b62ed9cc37192c2ec8a186dcd1aeb7e4c9f653c138",
+        "playerSha256": "de2ea015c98d53cb6b4ddf984299c6e3beb3230d4337e89882365c6f5e09e857",
+        "validationEnabled": true
+      }
+    ]
+  },
+  "actualComparisons": [
+    {
+      "a": "beauty-jitter",
+      "b": "beauty-jitter-fixed",
+      "maximumByteError": 0
+    },
+    {
+      "a": "beauty-jitter",
+      "b": "documents-jitter",
+      "maximumByteError": 0
+    }
+  ],
+  "main": {
+    "maximumByteError": 0,
+    "previous": "build\\runs\\20261023-073632-clustered-signed-projection-3dd20e\\main-project",
+    "imageSha256": "c226beac7b389f90447785ea4c1d3ccf45fc052a5e3bc40210462d7d88841919"
+  },
+  "failureEvidence": {
+    "adapter-red.log": "5fa7014d67e9848dcfdeecd4dab75b08735abe28aed1d4db4395e0ff54191a77",
+    "camera-red-build.log": "7c6d877c39f6bed26b256ae607cbc8254803952b94d7f8c329903689a812b6c2",
+    "api-editor-red-build.log": "d10958e6888bf11a7de0e12c360e7c2ee142426d8eb854b887b58b3c566d269e",
+    "framing-red.log": "80514796490958468aee5d38256ac9136e4f5e0ece624e77f21d20a5dac9cb18",
+    "precision-red.log": "7d17b360e50af93defb9a57740b0774df1975c2447196c23cd5a5f66aba07e4f"
+  },
+  "remaining": [
+    "C16-R1 full appearance and contribution order",
+    "C17 multilayer shapes and dynamic views",
+    "Skin Ramp, clothing, distance outline",
+    "NR8-V2 main promotion and NR0-NR12 full gates"
+  ],
+  "sourceFingerprints": {
+    "src/ecs/CameraComponents.hpp": "7f841c3e40367d36e356f586b327cce5512bbaec0bb3f6d8eb738f5d4e5510c0",
+    "src/reflection/Registry.cpp": "0dfd6cfe871429d8cb865b48cc409e0137d4d836c620bfe1b2090a4f95ad4073",
+    "src/render/CameraViewDescriptor.hpp": "78d869211479b6d209b5d5d881dbda2d93301d64cc45e798e2edb62687a1b59c",
+    "src/render/CameraProjection.hpp": "fff5f4d708183f5944898518d741e9eccf9dc4b877e7d71f4b56512da56fff4d",
+    "src/render/ClusteredLightGrid.hpp": "4462f36e37c7d6d320c698c7dc8162478446b1b1f2e9730b9b9329ce96d3af28",
+    "src/render/RenderContext.hpp": "d8b945aa82c4e6f0d618c188831526995059f70b9fd0025eb25f91158c4cb2b7",
+    "src/runtime/camera/GameCameraService.cpp": "5b829b226ce552b0868162bcf79613e009a59259a41b81ae6501ec4ff01a02b7",
+    "src/editor/viewport/EditorCameraService.cpp": "788eb16c2cfbfc093e5fb6fb404f1ca790e7c4ec3232983559933a3092c99087",
+    "src/extensions/ExtensionRegistry.hpp": "72db6fffb76ef59327d9dc7799da53882785817d7fe4305058ffb30d45c78db0",
+    "src/scenes/BuiltinRendererCatalog.cpp": "0cb529246f3787ce4cea4a8d46a829316986f8934b4dc5a966db4272404725f0",
+    "src/scenes/CharacterSceneRenderer.cpp": "6819219c2ade346ee8a1b97476bf944b8b470f907c8e9152acf812d25aa7824c",
+    "src/render/sky/SkyPass.cpp": "bb7e69f38f17a07f59e055ffe98317a146d4eafa0d5f5a51d128aa35ebe731d5",
+    "src/scenes/pathtracing/PathTracingSceneRenderer.hpp": "c20f974cc1639153e052b40f8ae6b5f24262fb708dae60a1f11fedce60f745a2",
+    "src/scenes/pathtracing/PathTracingSceneRenderer.cpp": "d9373568a6d95d1a14c2178a4a6e27376cb76954f3839981f1206dfe23492dec",
+    "shaders/pathtracing.comp": "b3a2c8131c5fd55745347530f22b5e87a15d63a6510b127f9cf59f8baee5f8ed",
+    "tools/endfield_native/camera_projection.py": "4608a7e5ac49474db6cc6f8ce78569e87888f7d17faab04248064ee730c8f9d7",
+    "tools/test_native_camera_projection.py": "15b51340bb4625bd8379a0446166b0f7f03545be62ccc98a0dbe1992d9149e08",
+    "tools/test_camera_projection_gpu.py": "8e7fd12e2a3ee38ab23640051ff14f5df13efaa3bc2a164be1514eabadcb11fd"
+  }
+}

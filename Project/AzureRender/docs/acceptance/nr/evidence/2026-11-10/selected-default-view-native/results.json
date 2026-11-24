@@ -1,0 +1,808 @@
+{
+  "status": "strict-compatible-effective-private-candidate-production-integration-pending",
+  "sourceHead": "264dd76",
+  "privateProgramCount": 580,
+  "defaultViewProgramCount": 64,
+  "capture": {
+    "exitCode": 0,
+    "seconds": 265.655999999959,
+    "checks": [
+      {
+        "name": "AzureDepthPrefillRecordingTests",
+        "exitCode": 0,
+        "seconds": 2.422000000020489
+      },
+      {
+        "name": "AzureMaterialClassEarlyDepthTests",
+        "exitCode": 0,
+        "seconds": 1.2649999999557622
+      }
+    ],
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "firstDifferences": []
+      }
+    ],
+    "metadata": {
+      "shadowHistoryPrepared": false,
+      "shadowHistoryBytes": 0,
+      "shadowHistorySampledRequests": 0,
+      "shadowHistorySampledEligible": 0,
+      "shadowHistorySampledHits": 0,
+      "defaultIsolationPipelines": 8,
+      "defaultIsolationSelected": true,
+      "defaultIsolationFallback": "",
+      "screenReflectionComputePrepared": true,
+      "screenReflectionAlgorithmRequested": "linear",
+      "screenReflectionAlgorithm": "linear",
+      "screenReflectionProducer": "linear-temporal",
+      "screenReflectionFallback": "",
+      "screenReflectionComputeActive": true,
+      "screenReflectionTemporalPrepared": true,
+      "screenReflectionTemporalActive": true,
+      "screenReflectionTemporalPreparation": "temporal",
+      "screenReflectionHistoryValid": true,
+      "screenReflectionHistorySubmission": 4,
+      "screenReflectionHistoryInputSubmission": 3,
+      "screenReflectionMotionUvOffset": [
+        0.0,
+        0.0
+      ],
+      "screenReflectionOwnsMotion": true,
+      "screenReflectionMotionBytes": 73728000,
+      "screenReflectionReprojectionBytes": 36864000,
+      "screenReflectionPreparation": "compute",
+      "screenReflectionLevels": 7,
+      "screenReflectionWidth": 1280,
+      "screenReflectionHeight": 720,
+      "screenReflectionImageBudgetBytes": 125332800
+    },
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "privateProgramsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "cost": {
+    "rows": [
+      {
+        "label": "before",
+        "seconds": 214.89000000001397,
+        "summary": {
+          "gpu": {
+            "mean": 18.876071466666666,
+            "p95": 19.044135999999998
+          },
+          "main": {
+            "mean": 16.5655552,
+            "p95": 16.7325184
+          },
+          "shadow": {
+            "mean": 2.0334559999999997,
+            "p95": 2.1522528
+          },
+          "post": {
+            "mean": 0.27706026666666667,
+            "p95": 0.279552
+          },
+          "cpu": {
+            "mean": 5.215529999999992,
+            "p95": 6.119624999999956
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            75.53,
+            75.64,
+            75.86,
+            76.12,
+            76.79,
+            77.44,
+            77.73,
+            77.86,
+            77.96,
+            78.05,
+            78.11,
+            78.43,
+            78.77,
+            78.79,
+            78.83,
+            79.17,
+            79.27,
+            79.32,
+            79.53,
+            79.56,
+            79.59,
+            79.61,
+            79.65,
+            79.97,
+            80.05,
+            80.13,
+            80.18,
+            80.24,
+            80.29,
+            80.34,
+            80.36,
+            80.57,
+            80.58,
+            80.6,
+            80.69,
+            80.7,
+            80.73,
+            80.82,
+            80.87,
+            81.03,
+            81.12,
+            81.14,
+            81.32,
+            81.35,
+            81.36,
+            81.43,
+            81.49,
+            81.56,
+            81.58,
+            81.59,
+            81.61,
+            81.65,
+            81.68,
+            81.74,
+            81.75,
+            81.86,
+            81.93,
+            82.02,
+            82.06,
+            82.07,
+            82.23,
+            82.25,
+            82.29,
+            82.33,
+            82.38,
+            82.39,
+            82.48,
+            82.52,
+            82.66,
+            82.67,
+            82.75,
+            82.79,
+            82.89,
+            82.99,
+            83.08,
+            83.1,
+            83.26,
+            83.47,
+            83.54,
+            83.61,
+            91.13
+          ],
+          "thermalSlowdownObserved": false,
+          "temperatureRange": [
+            50.0,
+            82.0
+          ]
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "shadowHistoryPrepared": false,
+          "shadowHistoryBytes": 0,
+          "shadowHistorySampledRequests": 0,
+          "shadowHistorySampledEligible": 0,
+          "shadowHistorySampledHits": 0,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": ""
+        }
+      },
+      {
+        "label": "candidate",
+        "seconds": 99.375,
+        "summary": {
+          "gpu": {
+            "mean": 16.694966933333333,
+            "p95": 17.2866848
+          },
+          "main": {
+            "mean": 14.607940266666667,
+            "p95": 14.918297599999999
+          },
+          "shadow": {
+            "mean": 1.7994874666666665,
+            "p95": 2.1632464
+          },
+          "post": {
+            "mean": 0.2875392,
+            "p95": 0.2939904
+          },
+          "cpu": {
+            "mean": 4.498760000000001,
+            "p95": 5.095615000000019
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            76.21,
+            76.38,
+            76.58,
+            78.11,
+            78.12,
+            78.22,
+            78.4,
+            78.47,
+            78.74,
+            78.8,
+            79.0,
+            79.09,
+            79.12,
+            79.2,
+            79.34,
+            79.44,
+            79.53,
+            79.61,
+            79.82,
+            79.86,
+            79.91,
+            79.95,
+            80.08,
+            80.38,
+            80.65,
+            80.7,
+            80.94,
+            80.97,
+            81.04,
+            81.32,
+            81.52,
+            81.58,
+            81.8,
+            81.87,
+            81.97,
+            81.99,
+            82.15,
+            82.45,
+            82.64,
+            82.65,
+            82.98,
+            83.67,
+            83.88
+          ],
+          "thermalSlowdownObserved": false,
+          "temperatureRange": [
+            51.0,
+            79.0
+          ]
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "shadowHistoryPrepared": false,
+          "shadowHistoryBytes": 0,
+          "shadowHistorySampledRequests": 0,
+          "shadowHistorySampledEligible": 0,
+          "shadowHistorySampledHits": 0,
+          "defaultIsolationPipelines": 8,
+          "defaultIsolationSelected": true,
+          "defaultIsolationFallback": ""
+        }
+      },
+      {
+        "label": "after",
+        "seconds": 96.09399999998277,
+        "summary": {
+          "gpu": {
+            "mean": 19.34369333333333,
+            "p95": 19.7579408
+          },
+          "main": {
+            "mean": 16.980036266666666,
+            "p95": 17.4208
+          },
+          "shadow": {
+            "mean": 2.079718933333333,
+            "p95": 2.1799552
+          },
+          "post": {
+            "mean": 0.28393813333333334,
+            "p95": 0.2888192
+          },
+          "cpu": {
+            "mean": 5.103806666666661,
+            "p95": 5.95022500000015
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            76.45,
+            76.55,
+            77.27,
+            77.45,
+            77.61,
+            78.18,
+            78.19,
+            78.52,
+            78.66,
+            78.84,
+            79.25,
+            79.28,
+            79.37,
+            79.61,
+            79.65,
+            79.73,
+            79.75,
+            80.23,
+            80.27,
+            80.29,
+            80.35,
+            80.44,
+            80.52,
+            80.76,
+            80.8,
+            80.81,
+            80.82,
+            80.99,
+            81.34,
+            81.49,
+            81.5,
+            81.79,
+            81.89,
+            81.91,
+            82.0,
+            82.12,
+            82.41,
+            82.47,
+            82.77,
+            82.96,
+            83.02,
+            83.65
+          ],
+          "thermalSlowdownObserved": false,
+          "temperatureRange": [
+            51.0,
+            83.0
+          ]
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "shadowHistoryPrepared": false,
+          "shadowHistoryBytes": 0,
+          "shadowHistorySampledRequests": 0,
+          "shadowHistorySampledEligible": 0,
+          "shadowHistorySampledHits": 0,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": ""
+        }
+      }
+    ],
+    "referenceMeanMs": 19.109882399999996,
+    "candidateMeanMs": 16.694966933333333,
+    "reductionFraction": 0.12636998052204984,
+    "referenceDriftFraction": 0.024470159307032942,
+    "affectedRangeReductionFraction": 0.12906944680452714,
+    "formalPerformancePassed": false,
+    "sourceAndProgramsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "efficiencyCriteria": {
+    "minimumWholeFrameGain": true,
+    "twiceReferenceDrift": true,
+    "maximumReferenceDrift": true,
+    "minimumAffectedRangeGain": true
+  },
+  "privateEfficiencyPassed": true,
+  "shortGpuP95Milliseconds": 17.2866848,
+  "shortCpuWorkP95Milliseconds": 5.095615000000019,
+  "shortGpuBudgetPassed": false,
+  "shortCpuBudgetPassed": true,
+  "formalPerformancePassed": false,
+  "productionAdopted": false,
+  "defaultBuildRestored": true,
+  "protectedFilesUnchanged": true,
+  "archiveBytes": 1439374,
+  "archiveSha256": "0c59ceb85aa3ea388f7db60444ddb529928c065b5b6fe9cf6efba3609de2cbab",
+  "archiveMembers": [
+    {
+      "path": "archive_native.py",
+      "bytes": 3065,
+      "sha256": "271d70a02b3f9e154fbe787b67562913ef20f373591d12966fd9a1045c918150"
+    },
+    {
+      "path": "AzureDepthPrefillRecordingTests.log",
+      "bytes": 29643,
+      "sha256": "fbd657fe313792b12a05b2d4f357c6ccb41d944f039e3922f5fe53dca3ece236"
+    },
+    {
+      "path": "AzureMaterialClassEarlyDepthTests.log",
+      "bytes": 26307,
+      "sha256": "6f696603107b6b0bf6eaac44778f41f53a7531349c49dacbcfb942adad16cc5a"
+    },
+    {
+      "path": "baseline-products-all.json",
+      "bytes": 153262,
+      "sha256": "4857d8113d4fc84de0bc4e9fd3c6a231097b47958dd69777b4610b079f027785"
+    },
+    {
+      "path": "baseline-products.json",
+      "bytes": 134496,
+      "sha256": "f1fa3ec8e3d502ed7e8d65fa2e37cad4ef438a7660eb6f21a5985ba0912f7679"
+    },
+    {
+      "path": "baseline-source.json",
+      "bytes": 190903,
+      "sha256": "24384d02ca40243983f08ca0d4d1b8a6b46c3011686172d40f9d65620204d55c"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 437,
+      "sha256": "9a274ae0c1745c2602ead5a97e9ab189a6ec79a215a8a3e44100751016dbe17c"
+    },
+    {
+      "path": "candidate-build-provenance.json",
+      "bytes": 415686,
+      "sha256": "5e1749cc39c4094e61865ca05bc25a93dea83899f9dc85a9fbf2e91b9ebfc2da"
+    },
+    {
+      "path": "candidate-build.log",
+      "bytes": 15783,
+      "sha256": "53b0a73a068da9ae34d29050ab1e1cfdd5d1279482fa8cb115a4bc50b5b582c3"
+    },
+    {
+      "path": "candidate-configure.log",
+      "bytes": 8601,
+      "sha256": "f60eeeae12a4358f76dd7f5a78f63cf2d01766ee8d56fc57b16e290c48f287c7"
+    },
+    {
+      "path": "candidate-shader-reload.json",
+      "bytes": 222677,
+      "sha256": "64406682200b5daf6ff494290836b94eec8c13802714a0ddebb2c998ece49e87"
+    },
+    {
+      "path": "capture-before-loader-fix.py",
+      "bytes": 4148,
+      "sha256": "1825333de7b7a1685aa89a334584fd7f798211c3f05dc34783b0414af91541be"
+    },
+    {
+      "path": "capture-command.json",
+      "bytes": 192937,
+      "sha256": "9b2094d0131a6c6a48f57080f00b4bd13cd95ce2e0fd104aa67aa8440d437592"
+    },
+    {
+      "path": "capture-loader-diagnostic.json",
+      "bytes": 384,
+      "sha256": "55d6a8356d9426c1b545d612dba6782244079cf8d84ff0c03a3e522dd78a8309"
+    },
+    {
+      "path": "capture-loader-failure.log",
+      "bytes": 516,
+      "sha256": "be391140164efecba04df6eb0f1eb6aa417f863ebcbf8c813553fcc8c47e0578"
+    },
+    {
+      "path": "capture-process-summary.json",
+      "bytes": 127,
+      "sha256": "84dd73af88346525cf05be6619a6887fcfbdc1c1710dec20ef54b315d94e2cf2"
+    },
+    {
+      "path": "capture-results.json",
+      "bytes": 2684,
+      "sha256": "2520c47bde9b0bd032255ca6f882115d033d76d26dfbb5f5cc032a13bd1550aa"
+    },
+    {
+      "path": "capture.log",
+      "bytes": 26492,
+      "sha256": "24bf43a7abcd54a7723dd9ea4f3eba38e03a3c408993eef1b733537e1a9ddf15"
+    },
+    {
+      "path": "capture.py",
+      "bytes": 4202,
+      "sha256": "c40a14fd7fb74d0ae2ea029ba372ac54ea6148b60307ae9c4fda32c8f43f58f8"
+    },
+    {
+      "path": "combined.frag",
+      "bytes": 123098,
+      "sha256": "2b5061bbfe33a31f1a49751443eae375e71df95c20623d0d524e1b06bf98409d"
+    },
+    {
+      "path": "cost-after/command.json",
+      "bytes": 802,
+      "sha256": "196206134519fd3c4b923c237af842708945660e10def498d35092be0b2b6fd1"
+    },
+    {
+      "path": "cost-after/environment.json",
+      "bytes": 3203665,
+      "sha256": "52727962e3e15e2fabdab7f4677581b2e140635ec59c3131e5f215c7497627dc"
+    },
+    {
+      "path": "cost-after/process.log",
+      "bytes": 13789,
+      "sha256": "71efff5a12244a92a5720246f77bab1b7a222ee63da0e45cae76f228792b09a0"
+    },
+    {
+      "path": "cost-after/timing.json",
+      "bytes": 38128,
+      "sha256": "1b71cc6fbe1221933f5f0aa28a61010d6ed6bec39191be89eb63898a99859eff"
+    },
+    {
+      "path": "cost-before/command.json",
+      "bytes": 803,
+      "sha256": "d04e5c7421be707cc5b7f0c726c5bcde29dcb1a366ef0c819cbdadfef579e9a6"
+    },
+    {
+      "path": "cost-before/environment.json",
+      "bytes": 7124968,
+      "sha256": "7e40216f3f1141de1744ea655ee00d851b2837d7e9753654f0d907670639202b"
+    },
+    {
+      "path": "cost-before/process.log",
+      "bytes": 13788,
+      "sha256": "705cedc160a16985a03c21dbdf62dab3d1aec1cff269b07034d4f1001e82fa2d"
+    },
+    {
+      "path": "cost-before/timing.json",
+      "bytes": 38193,
+      "sha256": "2b5be1c9cd31627c3a580100a2afb76f5d1c40b479d89cba825f075be2ab63fe"
+    },
+    {
+      "path": "cost-candidate/command.json",
+      "bytes": 855,
+      "sha256": "739b741bb33d7d143aebc7ace47ff96da5a3887cddacb626ee693338a9df6b1e"
+    },
+    {
+      "path": "cost-candidate/environment.json",
+      "bytes": 3274549,
+      "sha256": "f3cd8c0d7dbeab2225b484aab9cfaf681aaf70ecf27b9a1e41ca7c7c31947f0c"
+    },
+    {
+      "path": "cost-candidate/process.log",
+      "bytes": 13794,
+      "sha256": "1906a3023d64d7f7506182e7bf01864b902c8eb318ae2d9cb7040f779e917e73"
+    },
+    {
+      "path": "cost-candidate/timing.json",
+      "bytes": 38155,
+      "sha256": "9193d7a8dcc86b03a156b07fef637bea9161bf32649e7be3c32c90267ca76703"
+    },
+    {
+      "path": "cost-progress.json",
+      "bytes": 9091,
+      "sha256": "2fee8c298e429d465ef3f8a12153ac4d9e62a6d8c95a6eaec657f179575f47cb"
+    },
+    {
+      "path": "cost-results.json",
+      "bytes": 10300,
+      "sha256": "138e5ab8199ab75acff59d759044f45a835cf3c1505001e5118823260ae78759"
+    },
+    {
+      "path": "cost.py",
+      "bytes": 5130,
+      "sha256": "b487752f889cdbf69e4a2d8718e22d6b19098cc52b7a31c44cb4e291e702885d"
+    },
+    {
+      "path": "duplicate-frame-proof.json",
+      "bytes": 2160,
+      "sha256": "3478baed006486b2f079ed1a9a8e3237659058322f5295eefa57701a1c510392"
+    },
+    {
+      "path": "frames/capture_manifest.json",
+      "bytes": 17668,
+      "sha256": "5515d74f8a1811db240d74d8c5c3ee0a2e972c004ce267a073aafbfa7b3eebb5"
+    },
+    {
+      "path": "frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "preparation-driver-summary.json",
+      "bytes": 362,
+      "sha256": "ae14e86c7f3242bd6cda5e95ed95144fb6924b88d8b7b504f22f1cafbf81ff09"
+    },
+    {
+      "path": "prepare.py",
+      "bytes": 4313,
+      "sha256": "10f10c9508f9c12cd580c43bbc35a3fbfe943ba6fa5f84dc463a8c218b116b82"
+    },
+    {
+      "path": "private-build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "private-programs.json",
+      "bytes": 301576,
+      "sha256": "9dd18263f72d7d49e53b72b97da72b3812c4b7f55dd7ea5ae74b4ea621a12e16"
+    },
+    {
+      "path": "process.log",
+      "bytes": 11415,
+      "sha256": "10dffd9e9d57ae7cf32da03511a9424112a1f9e25aa41f7c9ea6b75e64c83b23"
+    },
+    {
+      "path": "protected-files.json",
+      "bytes": 1532,
+      "sha256": "de34a223309e79d7448b2acf159db62865585cba4ff8154a22c40f9df65c3355"
+    },
+    {
+      "path": "restoration-diagnostic.json",
+      "bytes": 23190,
+      "sha256": "68a38bca6b648f90962f283e33c54bbdc309b7a1ea6563bdd8f0153683643349"
+    },
+    {
+      "path": "restoration-qualification.json",
+      "bytes": 4472,
+      "sha256": "adc492bce1e7dfa2a17ae07519c53546f37b3a7d8325e89fd942f07b6ea19184"
+    },
+    {
+      "path": "restore-build.log",
+      "bytes": 11175,
+      "sha256": "3cd4e499d16320dd2189727a7b9a7cfb5b49ccb59d4f95bedda4ce2138b62845"
+    },
+    {
+      "path": "restore-configure.log",
+      "bytes": 8600,
+      "sha256": "913167cb939396bea92c69e54b9c725d09f95073081729189dd71270ab64596e"
+    },
+    {
+      "path": "restored-build-provenance.json",
+      "bytes": 416175,
+      "sha256": "716d9c1be976cf683316952872c59166e7975af463dec5adf5876c148e105c9d"
+    },
+    {
+      "path": "runtime.json",
+      "bytes": 317972,
+      "sha256": "69775ffb429e49d31bfaec9cd5a3316b93a7c2f4f85ae6f9f8565a1295bc81f0"
+    },
+    {
+      "path": "selected.frag",
+      "bytes": 122518,
+      "sha256": "5bed6912062a9508417cafe5d83dcf4b3f595d3f32ed37981fe779ae14ed99b5"
+    },
+    {
+      "path": "selected_receiver.glsl",
+      "bytes": 234,
+      "sha256": "6f39b7609228d6d54af5578448d221c34f5c068234dfbced092003622a518d46"
+    },
+    {
+      "path": "startup-environment.json",
+      "bytes": 425614,
+      "sha256": "07add8ef73142af32bbc7958e44da61d48f2e9004d4bab06a43793537e9e70c8"
+    }
+  ]
+}

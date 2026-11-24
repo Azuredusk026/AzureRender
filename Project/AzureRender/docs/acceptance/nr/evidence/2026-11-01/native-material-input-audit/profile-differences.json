@@ -1,0 +1,251 @@
+{
+  "status": "profile-differences-measured",
+  "scope": "Original accepted portrait material profile versus current thirteen complete documents. Texture table indices are excluded; the original sparse body/face rim override is recorded separately.",
+  "originalSparseOverrides": {
+    "bodyAndFace": {
+      "rimAmount": 0
+    }
+  },
+  "cases": [
+    {
+      "material": "M_actor_laevat_body_01",
+      "differences": {
+        "nprDiffuse.rimOrigin.node": {
+          "reference": null,
+          "current": "Bip001_Pelvis"
+        },
+        "nprDiffuse.rimOrigin.schemaVersion": {
+          "reference": null,
+          "current": 1
+        },
+        "shadowColorLut.flipV": {
+          "reference": true,
+          "current": false
+        }
+      }
+    },
+    {
+      "material": "M_actor_laevat_cloth_01",
+      "differences": {}
+    },
+    {
+      "material": "M_hairshadow_common_04",
+      "differences": {}
+    },
+    {
+      "material": "M_actor_laevat_iris_01",
+      "differences": {}
+    },
+    {
+      "material": "M_fx_laevat_toppotential_01",
+      "differences": {}
+    },
+    {
+      "material": "M_actor_laevat_cloth_02",
+      "differences": {}
+    },
+    {
+      "material": "M_actor_laevat_cloth_03",
+      "differences": {}
+    },
+    {
+      "material": "M_actor_laevat_cloth_04",
+      "differences": {
+        "features": {
+          "reference": [
+            "diffuse-ramp",
+            "silhouette-outline",
+            "stylized-shadow",
+            "surface-ao",
+            "geometry-shadow"
+          ],
+          "current": [
+            "diffuse-ramp",
+            "silhouette-outline",
+            "stylized-shadow",
+            "geometry-shadow"
+          ]
+        },
+        "nprDiffuse.baseAo": {
+          "reference": null,
+          "current": "metallic-roughness-red"
+        },
+        "nprDiffuse.characterVisibility": {
+          "reference": null,
+          "current": "object-shadow"
+        },
+        "nprDiffuse.indirectNormal": {
+          "reference": null,
+          "current": "surface"
+        },
+        "nprDiffuse.lighting.ambientColor": {
+          "reference": null,
+          "current": [
+            0.8783068656921387,
+            0.9302293062210083,
+            1.1216931343078613
+          ]
+        },
+        "nprDiffuse.lighting.mainColor": {
+          "reference": null,
+          "current": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "nprDiffuse.lighting.schemaVersion": {
+          "reference": null,
+          "current": 1
+        },
+        "nprDiffuse.lightingInputs": {
+          "reference": null,
+          "current": "host-scene-radiance"
+        },
+        "nprDiffuse.mainRamp.bias": {
+          "reference": null,
+          "current": 0
+        },
+        "nprDiffuse.mainRamp.schemaVersion": {
+          "reference": null,
+          "current": 1
+        },
+        "nprDiffuse.rimOrigin.node": {
+          "reference": null,
+          "current": "quan_jnt"
+        },
+        "nprDiffuse.rimOrigin.schemaVersion": {
+          "reference": null,
+          "current": 1
+        },
+        "nprDiffuse.schemaVersion": {
+          "reference": null,
+          "current": 1
+        },
+        "nprDiffuse.shadowAlbedo": {
+          "reference": null,
+          "current": "base-color"
+        },
+        "nprDiffuse.shadowMask": {
+          "reference": null,
+          "current": "one"
+        },
+        "nprDiffuse.shadowScale": {
+          "reference": null,
+          "current": 0.5
+        },
+        "specularRamp.flipV": {
+          "reference": null,
+          "current": false
+        },
+        "specularRamp.iridescence": {
+          "reference": null,
+          "current": 0
+        },
+        "specularRamp.lightingInputs": {
+          "reference": null,
+          "current": "host-main-light"
+        },
+        "specularRamp.schemaVersion": {
+          "reference": null,
+          "current": 1
+        },
+        "styleParameters": {
+          "reference": null,
+          "current": [
+            1,
+            1,
+            1,
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "material": "M_actor_laevat_cloth_05",
+      "differences": {}
+    },
+    {
+      "material": "M_actor_laevat_brow_01",
+      "differences": {}
+    },
+    {
+      "material": "M_eyewhiteshadow_common_01",
+      "differences": {}
+    },
+    {
+      "material": "M_actor_laevat_face_01",
+      "differences": {
+        "faceSdf.headBasis": {
+          "reference": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "current": [
+            -1.2556207821560323e-06,
+            2.7855764703915194e-06,
+            -0.9999999999953323,
+            0.999999999999211,
+            -4.4843204444759344e-08,
+            -1.2556209066996796e-06,
+            4.484670207260324e-08,
+            0.9999999999961199,
+            2.7855764142771456e-06
+          ]
+        },
+        "faceSdf.headNode": {
+          "reference": "capture_material_frame_10401",
+          "current": "Bip001_Head"
+        }
+      }
+    },
+    {
+      "material": "M_actor_laevat_hair_01",
+      "differences": {
+        "hair.projectedRamp.frame.basis": {
+          "reference": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "current": [
+            -1.2556207821560323e-06,
+            2.7855764703915194e-06,
+            -0.9999999999953323,
+            0.999999999999211,
+            -4.4843204444759344e-08,
+            -1.2556209066996796e-06,
+            4.484670207260324e-08,
+            0.9999999999961199,
+            2.7855764142771456e-06
+          ]
+        },
+        "hair.projectedRamp.frame.node": {
+          "reference": "capture_material_frame_10401",
+          "current": "Bip001_Head"
+        },
+        "hair.projectedRamp.lighting.characterVisibility": {
+          "reference": null,
+          "current": "object-shadow"
+        },
+        "outlineSurface.minimumPixels": {
+          "reference": 2.0,
+          "current": 0.5
+        }
+      }
+    }
+  ]
+}

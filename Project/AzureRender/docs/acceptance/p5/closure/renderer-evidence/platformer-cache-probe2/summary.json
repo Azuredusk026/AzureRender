@@ -1,0 +1,207 @@
+{
+  "status": "probe",
+  "actualSeconds": 120.09300000000076,
+  "realTime": true,
+  "exitCode": 0,
+  "frames": 24296,
+  "switches": 9,
+  "restarts": 4,
+  "commits": 13,
+  "validationErrors": 0,
+  "released": true,
+  "scriptErrors": [],
+  "presentationErrors": [],
+  "loadErrors": [],
+  "windowChecks": {
+    "minimized": true,
+    "restored": true,
+    "resized": true,
+    "finalExtent": [
+      1920,
+      1080
+    ]
+  },
+  "windowEvents": [
+    {
+      "seconds": 3.014999999999418,
+      "event": "minimize",
+      "passed": true
+    },
+    {
+      "seconds": 5.0,
+      "event": "restore",
+      "passed": true
+    },
+    {
+      "seconds": 7.0,
+      "event": "resize",
+      "extent": [
+        960,
+        540
+      ],
+      "passed": true
+    },
+    {
+      "seconds": 9.03099999999904,
+      "event": "resize",
+      "extent": [
+        1920,
+        1080
+      ],
+      "passed": true
+    }
+  ],
+  "gpu": {
+    "mean": 4.70299021170195,
+    "p95": 6.063368,
+    "p99": 10.345539199999996
+  },
+  "cpu": {
+    "mean": 1.541051574707049,
+    "p95": 2.20219000000974,
+    "p99": 3.07649800000627
+  },
+  "physics": {
+    "mean": 0.40493096162138853,
+    "p95": 0.6178399999999995,
+    "p99": 1.8987720000000048
+  },
+  "gpuWindows": [
+    {
+      "endSeconds": 60.03099999999904,
+      "frames": 11534,
+      "mean": 4.873792058262528,
+      "p95": 9.9540512,
+      "p99": 10.8841792
+    },
+    {
+      "endSeconds": 120.06200000000172,
+      "frames": 12756,
+      "mean": 4.685841768579492,
+      "p95": 5.686128,
+      "p99": 6.8862368
+    }
+  ],
+  "residencyGrowth": {
+    "buffers": 0.0,
+    "images": 0.0,
+    "bufferBytes": 0.0001945445572952842,
+    "imageBytes": 0.0
+  },
+  "firstResidency": {
+    "bufferBytes": 22452440,
+    "buffers": 101,
+    "cachedCandidates": 2,
+    "commitMs": 0.9663,
+    "committed": false,
+    "frame": 7680,
+    "imageBytes": 330791424,
+    "images": 365,
+    "loadError": "",
+    "loading": false,
+    "physicsMaxMs": 0.0,
+    "requestGeneration": 6,
+    "revision": 6,
+    "waitMs": 0.1481999999996333,
+    "workMs": 2.265400000000367
+  },
+  "lastResidency": {
+    "bufferBytes": 22452440,
+    "buffers": 101,
+    "cachedCandidates": 2,
+    "commitMs": 0.8839,
+    "committed": false,
+    "frame": 24240,
+    "imageBytes": 330791424,
+    "images": 365,
+    "loadError": "",
+    "loading": false,
+    "physicsMaxMs": 0.275,
+    "requestGeneration": 15,
+    "revision": 15,
+    "waitMs": 4.203799999988405,
+    "workMs": 1.5120000000115947
+  },
+  "workingSetGrowth": 0.0111435777217328,
+  "workingSetBaselineBytes": 368668672.0,
+  "workingSetFinalBytes": 372776960.0,
+  "peakWorkingSetBytes": 382300160,
+  "deviceLocalPeakBytes": 348389376,
+  "isolatedPath": "C:\\WINDOWS\\System32",
+  "packageManifestHash": "a14a4a5bc0b4975db756731a592e5766fdefa8e4ee4b665c89a63e5c779539db",
+  "sourceHash": "84b5e3dc2eeee75f90f4d90ba36e6de8d3869fb6a79cd522702b004eb719e964",
+  "quality": {
+    "schemaVersion": 1,
+    "platform": "Windows x64",
+    "vulkanApi": "1.3",
+    "width": 1920,
+    "height": 1080,
+    "targetHz": 60,
+    "shadowMapSize": 2048,
+    "shadowCascades": 4,
+    "entities": 83,
+    "animatedCharacters": 4,
+    "fullGameUi": true,
+    "materialQuality": "full",
+    "privateCharacter": false
+  },
+  "cpuRetainedFrames": 8192,
+  "cpuSampleOffset": 16104,
+  "warmupSeconds": 40.0,
+  "warmupFrame": 7360,
+  "runtimeHash": "77e564074e0a5b38cd6c28157720ba2962f91683e8474142b2038cac19142b8f",
+  "periodicSampleCount": 70,
+  "periodicCpu": {
+    "mean": 1.6611471428573032,
+    "p95": 2.5853550000048315,
+    "p99": 3.103567000015985
+  },
+  "periodicPhysics": {
+    "mean": 0.10726285714285715,
+    "p95": 0.4261249999999999,
+    "p99": 1.1022690000000033
+  },
+  "commitExtra": {
+    "mean": 1.0158615384615384,
+    "p95": 1.57412,
+    "p99": 1.583864
+  },
+  "commitFrame": {
+    "mean": 17.194784615384616,
+    "p95": 30.627839999999992,
+    "p99": 32.576927999999995
+  },
+  "completedRoutes": 4,
+  "mandatoryLandings": 33,
+  "startFallRecoveries": 5,
+  "checkpointFallRecoveries": 5,
+  "horizontalRides": 5,
+  "verticalRides": 5,
+  "controllerErrors": [],
+  "liveObservation": true,
+  "courseCoins": 8,
+  "sameLevelResidencyGrowth": {
+    "assets:/platformer/platformer.azurelevel": {
+      "buffers": 0.0,
+      "images": 0.0,
+      "bufferBytes": 0.0001945445572952842,
+      "imageBytes": 0.0
+    }
+  },
+  "revisionReferences": {
+    "2": "assets:/exploration.azurelevel",
+    "3": "assets:/platformer/platformer.azurelevel",
+    "4": "assets:/platformer/platformer.azurelevel",
+    "5": "assets:/exploration.azurelevel",
+    "6": "assets:/platformer/platformer.azurelevel",
+    "7": "assets:/platformer/platformer.azurelevel",
+    "8": "assets:/exploration.azurelevel",
+    "9": "assets:/platformer/platformer.azurelevel",
+    "10": "assets:/platformer/platformer.azurelevel",
+    "11": "assets:/exploration.azurelevel",
+    "12": "assets:/platformer/platformer.azurelevel",
+    "13": "assets:/platformer/platformer.azurelevel",
+    "14": "assets:/exploration.azurelevel",
+    "15": "assets:/platformer/platformer.azurelevel"
+  }
+}

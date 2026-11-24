@@ -1,6 +1,7 @@
 #version 450
 
 layout(local_size_x = 64) in;
+layout(constant_id=0) const bool azureConservativeFrustum=false;
 struct Bounds { vec4 minimum; vec4 maximum; };
 struct DrawCommand {
     uint indexCount;
@@ -12,12 +13,38 @@ struct DrawCommand {
 layout(std430, binding = 0) readonly buffer BoundsInput { Bounds bounds[]; };
 layout(std430, binding = 1) readonly buffer DrawInput { DrawCommand source[]; };
 layout(std430, binding = 2) writeonly buffer DrawOutput { DrawCommand outputCommands[]; };
+#ifdef AZURE_SURFACE_IDENTITIES
+struct Surface { uint instance; uint primitive; uint material; uint visible; };
+layout(std430,binding=3) readonly buffer SurfaceInput { Surface sourceSurfaces[]; };
+layout(std430,binding=4) writeonly buffer SurfaceOutput { Surface surfaces[]; };
+#endif
 layout(push_constant) uniform Parameters {
     vec4 planes[6];
     uint drawCount;
     uint cullingEnabled;
     uint firstCommand;
+    float conservativeMargin;
+    vec4 referenceWPlane;
 } parameters;
+
+float roundingBound(vec4 plane,Bounds box){
+    precise float magnitude=dot(abs(plane.xyz),max(abs(box.minimum.xyz),abs(box.maximum.xyz)))+abs(plane.w);
+    return (64.0*1.1920928955078125e-7)*magnitude+64.0*uintBitsToFloat(0x00800000u);
+}
+bool guardedVisible(Bounds box){
+    vec4 w=parameters.referenceWPlane;
+    vec3 low=mix(box.maximum.xyz,box.minimum.xyz,greaterThanEqual(w.xyz,vec3(0)));
+    vec3 high=mix(box.minimum.xyz,box.maximum.xyz,greaterThanEqual(w.xyz,vec3(0)));
+    precise float lo=dot(w.xyz,low)+w.w,hi=dot(w.xyz,high)+w.w;
+    float error=parameters.conservativeMargin+roundingBound(w,box);
+    if(isnan(lo)||isinf(lo)||isnan(hi)||isinf(hi)||isnan(error)||isinf(error)||(lo<=error&&hi>=-error))return true;
+    for(uint i=0u;i<6u;++i){vec4 p=parameters.planes[i];vec3 positive=mix(box.minimum.xyz,box.maximum.xyz,greaterThanEqual(p.xyz,vec3(0)));
+        precise float distance=dot(p.xyz,positive)+p.w;float margin=parameters.conservativeMargin+roundingBound(p,box);
+        if(isnan(distance)||isinf(distance)||isnan(margin)||isinf(margin))return true;
+        if(distance < -margin)return false;
+    }
+    return true;
+}
 
 void main() {
     uint slot = parameters.firstCommand + gl_GlobalInvocationID.x;
@@ -26,6 +53,8 @@ void main() {
     bool visible = true;
     if (parameters.cullingEnabled != 0) {
         Bounds box = bounds[command.firstInstance];
+        if(azureConservativeFrustum&&parameters.conservativeMargin>=0)visible=guardedVisible(box);
+        else {
         for (uint i = 0; i < 6; ++i) {
             vec4 plane = parameters.planes[i];
             vec3 positive = mix(box.minimum.xyz, box.maximum.xyz,
@@ -35,7 +64,13 @@ void main() {
                 break;
             }
         }
+        }
     }
     command.instanceCount = visible ? command.instanceCount : 0;
     outputCommands[slot] = command;
+#ifdef AZURE_SURFACE_IDENTITIES
+    Surface surface=sourceSurfaces[slot];
+    surface.visible=command.instanceCount;
+    surfaces[slot]=surface;
+#endif
 }

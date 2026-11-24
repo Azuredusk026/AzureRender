@@ -1,0 +1,22 @@
+{
+  "status": "source-inheritance-passed",
+  "sourceAssetSha256": "a8a08d008eca0ec50078af5d98121cad5a4f293f5e785cb22fc3ee4a2e081619",
+  "playerSha256": "cb2917948d49eb4dac0c4cd9f05080eccdd80e37e86fa8ac324b2476d2ce687a",
+  "sourceMaterials": 13,
+  "captures": [
+    {
+      "mode": "source",
+      "imageSha256": "5292f14c13cdf3fc1c47cbff5f3c34a0731a12d9dcad3b7b2bf236454cc3f37c",
+      "projectSha256": "d7e01d1a144fefd44a8b54913018592578de23e7ff7e9a50b2d58debb0c0d4c1",
+      "levelSha256": "553c4d1fd57dbfccd8dd065ca6616630a4c0d8caaa7a96ff07d13b90752f5ee8"
+    },
+    {
+      "mode": "override",
+      "imageSha256": "5292f14c13cdf3fc1c47cbff5f3c34a0731a12d9dcad3b7b2bf236454cc3f37c",
+      "projectSha256": "bc7170bf9e134017a9e7bdb765956dac50a9102d24ad226575251503a06a64ff",
+      "levelSha256": "165ea662b073cc02c2ece1a7250d3a4ad8b7b956bddcade30da718e4f21e37d4"
+    }
+  ],
+  "changedPixels": 0,
+  "maxByteDifference": 0
+}

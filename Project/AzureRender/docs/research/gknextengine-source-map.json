@@ -1,0 +1,756 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-10-06",
+  "method": "static source review; reference engine not built or benchmarked",
+  "referenceRepository": "D:/Project/gkNextEngine",
+  "referenceCommit": "4ba5b7cd106c282e7ed166ff853aeea87b392680",
+  "referenceWorkingTree": "",
+  "projectBaselineCommit": "fe9afda68e30539fd61048ba23d19b90217d81ce",
+  "contextArticle": {
+    "path": "D:/Assigment/temp.txt",
+    "sha256": "8a5ab587f29eb3001e6225db4a591884840b68b7fd648966137662084da8a248",
+    "role": "research lead; claims checked against source"
+  },
+  "items": {
+    "A1": [
+      "src/cmake/TargetHelpers.cmake",
+      "src/Engine/Runtime/Interface/SceneContent.hpp",
+      "src/Modules/CMakeLists.txt"
+    ],
+    "A2": [
+      "src/Engine/Runtime/Reflection/PropertyMeta.hpp",
+      "src/Application/Editor/gkNextEditor/Panels/PropertyWidgets.cpp"
+    ],
+    "A3": [
+      "src/Engine/Runtime/Command/ICommand.hpp",
+      "src/Engine/Runtime/Command/CommandHistory.hpp",
+      "src/Application/Editor/gkNextEditor/EditorActionDispatcher.hpp",
+      "src/Application/Editor/gkNextEditor/Automation/EditorScriptExecutor.hpp"
+    ],
+    "A4": [
+      "src/Engine/Runtime/Interface/AgentQueries.hpp",
+      "src/Modules/NextValidation/AgentControlServer.cpp",
+      "src/Modules/NextValidation/NextValidationModule.cpp",
+      "src/Modules/NextValidation/SyntheticInput.cpp",
+      "tools/gnb/internal/validate/validate.go",
+      "assets/agentscripts/ui-foundation-editor-normal.agentscript.json"
+    ],
+    "A5": [
+      "src/Modules/ScadLoader/FScadEvaluator.h",
+      "src/Modules/ScadLoader/FScadRig.h",
+      "assets/scad/proc/terrain_demo.scad"
+    ],
+    "A6": [
+      "src/Application/Editor/ScadLibrary/AI/ScadAIContracts.hpp",
+      "src/Application/Editor/ScadLibrary/AI/ScadAIController.cpp",
+      "src/Application/Editor/ScadLibrary/AI/ScadAIValidationPolicy.hpp",
+      "src/Tests/Test_ScadAIController.cpp",
+      "src/Tests/Test_ScadAIAdapters.cpp"
+    ],
+    "B1": [
+      "src/Modules/NextUI/UI/UiTheme.hpp",
+      "src/Modules/NextUI/UI/UiTheme.cpp",
+      "src/Modules/NextUI/UI/UiContext.hpp",
+      "src/Modules/NextUI/UI/UiScopes.hpp",
+      "src/Modules/NextUI/UI/UiWidgets.hpp",
+      "src/Modules/NextUI/UI/AppChrome.hpp",
+      "src/Modules/NextUI/ImGuiScaling.cpp",
+      "src/Modules/NextUI/UI/DesktopUI.hpp"
+    ],
+    "B2": [
+      "src/Application/Editor/gkNextEditor/EditorContext.hpp",
+      "src/Application/Editor/gkNextEditor/EditorUi.hpp",
+      "src/Application/Editor/gkNextEditor/Core/EditorUiState.hpp",
+      "src/Application/Editor/gkNextEditor/Overlays/TitleBarOverlay.cpp"
+    ],
+    "B3": [
+      "src/Engine/Runtime/Config/CVarSystem.hpp",
+      "src/Modules/DevTools/CVarEditorPanel.cpp",
+      "src/Tests/Test_CVarSystem.cpp"
+    ],
+    "B4": [
+      "src/Modules/NextAI/AIService.hpp",
+      "src/Modules/NextAI/GnbClient/GnbAIClient.hpp",
+      "tools/gnb/internal/ai/bridge/bridge.go",
+      "tools/tests/fixtures/gnb-ai-protocol/v2/handshake.ndjson",
+      "src/Tests/Test_GnbAIClient.cpp",
+      "docs/designs/nextai-product-focused-architecture.md",
+      "docs/designs/gnb-ai-bridge-protocol-v2.md"
+    ],
+    "B5": [
+      "tools/gnb/README.md",
+      "tools/gnb/internal/validate/validate.go",
+      "src/Application/Render/gkNextMinimalRenderer/CMakeLists.txt"
+    ],
+    "B6": [
+      "src/Engine/Runtime/Interface/ShaderHotReload.hpp",
+      "src/Modules/LiveCoding/LiveCodingModule.cpp"
+    ],
+    "B7": [
+      "src/Modules/RenderViews/OffscreenRenderViewController.hpp",
+      "src/Application/Editor/Common/Preview/AssetThumbnailRenderer.hpp"
+    ],
+    "B8": [
+      "src/Gameplay/CMakeLists.txt",
+      "src/Gameplay/Character/CharacterActor.h",
+      "src/Gameplay/AI/NavGrid.h"
+    ],
+    "C1": [
+      "src/Modules/ScadLoader/FScadCsg.cpp",
+      "src/Modules/ScadLoader/FScadRig.h",
+      "src/Tests/Test_ScadRig.cpp"
+    ],
+    "C2": [
+      "assets/shaders/common/Interfaces.slang",
+      "assets/shaders/common/RayTracers.slang",
+      "assets/shaders/common/PathTracingRenderer.slang",
+      "assets/shaders/Core.PathTracing.comp.slang"
+    ],
+    "C3": [
+      "assets/shaders/common/BasicTypes.slang",
+      "assets/shaders/common/BindlessTexture.slang",
+      "src/Engine/Rendering/PipelineCommon/VisibilityBufferLayout.hpp",
+      "src/Engine/Rendering/VulkanBaseRenderer.cpp",
+      "src/Engine/Assets/GPU/Texture.hpp"
+    ],
+    "C4": [
+      "src/Engine/Runtime/Interface/ScriptRuntime.hpp",
+      "src/Modules/NextDotNet/NextDotNetModule.cpp",
+      "src/Modules/NextDotNet/EngineApi.def.h",
+      "src/Application/Editor/gkNextEditor/Core/EditorPlaySession.hpp"
+    ]
+  },
+  "sources": {
+    "src/cmake/TargetHelpers.cmake": {
+      "path": "src/cmake/TargetHelpers.cmake",
+      "absolutePath": "D:/Project/gkNextEngine/src/cmake/TargetHelpers.cmake",
+      "line": 178,
+      "excerpt": "function(gk_configure_module target)",
+      "sha256": "61bfc412dda29195bab81c0cdf076b97be6a22c5435fae3a1e33208d96dc55f4",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/cmake/TargetHelpers.cmake#L178"
+    },
+    "src/Engine/Runtime/Interface/SceneContent.hpp": {
+      "path": "src/Engine/Runtime/Interface/SceneContent.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Engine/Runtime/Interface/SceneContent.hpp",
+      "line": 10,
+      "excerpt": "class ISceneContentService",
+      "sha256": "00477af60a40a292c8bdc617218340f988e80597d5b1cdafe7b30b77b52861bc",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Engine/Runtime/Interface/SceneContent.hpp#L10"
+    },
+    "src/Modules/CMakeLists.txt": {
+      "path": "src/Modules/CMakeLists.txt",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/CMakeLists.txt",
+      "line": 4,
+      "excerpt": "add_library(${gkModule} STATIC ${moduleSources})",
+      "sha256": "720496d4a326c002f64e753d07b660e567eeb00238c3b94f5613877b9b1bc0cc",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/CMakeLists.txt#L4"
+    },
+    "src/Engine/Runtime/Reflection/PropertyMeta.hpp": {
+      "path": "src/Engine/Runtime/Reflection/PropertyMeta.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Engine/Runtime/Reflection/PropertyMeta.hpp",
+      "line": 39,
+      "excerpt": "struct PropertyMeta",
+      "sha256": "f4a92f26ec64695581a68401943ab6a49e1193772a2fd1cf8ded77efd1a84050",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Engine/Runtime/Reflection/PropertyMeta.hpp#L39"
+    },
+    "src/Application/Editor/gkNextEditor/Panels/PropertyWidgets.cpp": {
+      "path": "src/Application/Editor/gkNextEditor/Panels/PropertyWidgets.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Editor/gkNextEditor/Panels/PropertyWidgets.cpp",
+      "line": 237,
+      "excerpt": "bool isReadOnly = config.readOnly || propInfo.meta.IsReadOnly();",
+      "sha256": "3e8be73530bb3efc79b71c25c00edd8648676d83994ef03d567010c307dbc3ab",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Editor/gkNextEditor/Panels/PropertyWidgets.cpp#L237"
+    },
+    "src/Engine/Runtime/Command/ICommand.hpp": {
+      "path": "src/Engine/Runtime/Command/ICommand.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Engine/Runtime/Command/ICommand.hpp",
+      "line": 11,
+      "excerpt": "class ICommand",
+      "sha256": "762b4d18a30dd552b878d937684e4678141a66c8ef3cb359534cac707b8ce98f",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Engine/Runtime/Command/ICommand.hpp#L11"
+    },
+    "src/Engine/Runtime/Command/CommandHistory.hpp": {
+      "path": "src/Engine/Runtime/Command/CommandHistory.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Engine/Runtime/Command/CommandHistory.hpp",
+      "line": 100,
+      "excerpt": "void BeginGroup(const std::string& description);",
+      "sha256": "e842034e3e2d3e0c1ef0d1a66c75212b4d6c20e50ba1f6aaf2577add989d6a39",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Engine/Runtime/Command/CommandHistory.hpp#L100"
+    },
+    "src/Application/Editor/gkNextEditor/EditorActionDispatcher.hpp": {
+      "path": "src/Application/Editor/gkNextEditor/EditorActionDispatcher.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Editor/gkNextEditor/EditorActionDispatcher.hpp",
+      "line": 25,
+      "excerpt": "class EditorActionDispatcher final",
+      "sha256": "7d05884c50575b90a3f772aae367278ad154e79fd75dbf1c997262dd5758d9aa",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Editor/gkNextEditor/EditorActionDispatcher.hpp#L25"
+    },
+    "src/Application/Editor/gkNextEditor/Automation/EditorScriptExecutor.hpp": {
+      "path": "src/Application/Editor/gkNextEditor/Automation/EditorScriptExecutor.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Editor/gkNextEditor/Automation/EditorScriptExecutor.hpp",
+      "line": 12,
+      "excerpt": "class NextEngine;",
+      "sha256": "18339ad369ca96342ccf889ac0c745609706a3b650cbd371eadd1b1e2ffafe32",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Editor/gkNextEditor/Automation/EditorScriptExecutor.hpp#L12"
+    },
+    "src/Engine/Runtime/Interface/AgentQueries.hpp": {
+      "path": "src/Engine/Runtime/Interface/AgentQueries.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Engine/Runtime/Interface/AgentQueries.hpp",
+      "line": 11,
+      "excerpt": "class FAgentQueryRegistry final",
+      "sha256": "cd1957ba3cb0e8758a2ea4a58e74adac256eb5c21e0cfe4657b9c097ee97b76e",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Engine/Runtime/Interface/AgentQueries.hpp#L11"
+    },
+    "src/Modules/NextValidation/AgentControlServer.cpp": {
+      "path": "src/Modules/NextValidation/AgentControlServer.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextValidation/AgentControlServer.cpp",
+      "line": 99,
+      "excerpt": "bool FAgentControlServer::Start(const std::string& endpoint, std::string token, std::string& error)",
+      "sha256": "0219ad57cbfc0db835d3cdc81354ae24ad48f7d2a79784640ad3ac926b655ae5",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextValidation/AgentControlServer.cpp#L99"
+    },
+    "src/Modules/NextValidation/NextValidationModule.cpp": {
+      "path": "src/Modules/NextValidation/NextValidationModule.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextValidation/NextValidationModule.cpp",
+      "line": 17,
+      "excerpt": "class FAgentControlService final : public Runtime::Agent::IAgentControlService",
+      "sha256": "391aca0d0693d286b39c3d6450f8804128cfbf14be75616730da73f8e6071a8b",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextValidation/NextValidationModule.cpp#L17"
+    },
+    "src/Modules/NextValidation/SyntheticInput.cpp": {
+      "path": "src/Modules/NextValidation/SyntheticInput.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextValidation/SyntheticInput.cpp",
+      "line": 152,
+      "excerpt": "SDL_PushEvent(&event);",
+      "sha256": "315dd5c011062997958e244296430b0d85e5346b9e66c52757c2ca07ca18953a",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextValidation/SyntheticInput.cpp#L152"
+    },
+    "tools/gnb/internal/validate/validate.go": {
+      "path": "tools/gnb/internal/validate/validate.go",
+      "absolutePath": "D:/Project/gkNextEngine/tools/gnb/internal/validate/validate.go",
+      "line": 54,
+      "excerpt": "func Run(ctx context.Context, o Options) error {",
+      "sha256": "7a9aa2f442eab93c0a070c6d07497be5cb54b9536b287f3392658d210c550035",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/tools/gnb/internal/validate/validate.go#L54"
+    },
+    "assets/agentscripts/ui-foundation-editor-normal.agentscript.json": {
+      "path": "assets/agentscripts/ui-foundation-editor-normal.agentscript.json",
+      "absolutePath": "D:/Project/gkNextEngine/assets/agentscripts/ui-foundation-editor-normal.agentscript.json",
+      "line": 1,
+      "excerpt": "{",
+      "sha256": "dd743c0190865da053fcc8f5c826460780c193b14084cdcb89a0c1bd0886333c",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/assets/agentscripts/ui-foundation-editor-normal.agentscript.json#L1"
+    },
+    "src/Modules/ScadLoader/FScadEvaluator.h": {
+      "path": "src/Modules/ScadLoader/FScadEvaluator.h",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/ScadLoader/FScadEvaluator.h",
+      "line": 32,
+      "excerpt": "struct FTerrainData; // FScadTerrain.h",
+      "sha256": "7cdb3b92261ac8c5539f9288c244f2d4f00d5f5553d7c1e025b92eef25a564d6",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/ScadLoader/FScadEvaluator.h#L32"
+    },
+    "src/Modules/ScadLoader/FScadRig.h": {
+      "path": "src/Modules/ScadLoader/FScadRig.h",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/ScadLoader/FScadRig.h",
+      "line": 27,
+      "excerpt": "struct SceneEvalResult;",
+      "sha256": "6cfbddeec9d60ca5830b6d91bbfbc23526f6cb106a7721ed65cdb865ed599ae0",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/ScadLoader/FScadRig.h#L27"
+    },
+    "assets/scad/proc/terrain_demo.scad": {
+      "path": "assets/scad/proc/terrain_demo.scad",
+      "absolutePath": "D:/Project/gkNextEngine/assets/scad/proc/terrain_demo.scad",
+      "line": 1,
+      "excerpt": "// terrain_demo.scad —— gk_terrain() 原生低模地形 demo(M0 验收场景)",
+      "sha256": "e6c2d363c8e31cbad935e99f6be125b49a209a546fae64ce5b4eed66359ba640",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/assets/scad/proc/terrain_demo.scad#L1"
+    },
+    "src/Application/Editor/ScadLibrary/AI/ScadAIContracts.hpp": {
+      "path": "src/Application/Editor/ScadLibrary/AI/ScadAIContracts.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Editor/ScadLibrary/AI/ScadAIContracts.hpp",
+      "line": 41,
+      "excerpt": "struct FScadAIEditTarget",
+      "sha256": "d0072e28225a2485488e1ec5dd396601262e336b563bd071d49d50e835924199",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Editor/ScadLibrary/AI/ScadAIContracts.hpp#L41"
+    },
+    "src/Application/Editor/ScadLibrary/AI/ScadAIController.cpp": {
+      "path": "src/Application/Editor/ScadLibrary/AI/ScadAIController.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Editor/ScadLibrary/AI/ScadAIController.cpp",
+      "line": 118,
+      "excerpt": "for (int attempt = 0; attempt <= FScadAIValidationPolicy::repairBudget; ++attempt)",
+      "sha256": "e75977507735043e47689c1ef8e406c24dd1cd68e237a37666f8c81f33c8dce2",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Editor/ScadLibrary/AI/ScadAIController.cpp#L118"
+    },
+    "src/Application/Editor/ScadLibrary/AI/ScadAIValidationPolicy.hpp": {
+      "path": "src/Application/Editor/ScadLibrary/AI/ScadAIValidationPolicy.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Editor/ScadLibrary/AI/ScadAIValidationPolicy.hpp",
+      "line": 7,
+      "excerpt": "struct FScadAIValidationPolicy",
+      "sha256": "626275f8022eb961c19c122b7710c6df4a870522eb76b961bd254c204a3ca2a5",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Editor/ScadLibrary/AI/ScadAIValidationPolicy.hpp#L7"
+    },
+    "src/Tests/Test_ScadAIController.cpp": {
+      "path": "src/Tests/Test_ScadAIController.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Tests/Test_ScadAIController.cpp",
+      "line": 181,
+      "excerpt": "TEST_CASE(\"Scad AI canonical revision detects stale proposals\", \"[AI][ScadLibrary][Controller]\")",
+      "sha256": "7a90464b52c25ac20ef7644a2a0327434de9c38f0cb27a5b89f9ba4ba3e11603",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Tests/Test_ScadAIController.cpp#L181"
+    },
+    "src/Tests/Test_ScadAIAdapters.cpp": {
+      "path": "src/Tests/Test_ScadAIAdapters.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Tests/Test_ScadAIAdapters.cpp",
+      "line": 84,
+      "excerpt": "TEST_CASE(\"Scene object operations keep snapshot ids stable after removal\", \"[AI][ScadLibrary][Scene]\")",
+      "sha256": "4691176a196b5f1a354e4e6bb47f55308eb16a48ba509b2678e5c457a3159599",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Tests/Test_ScadAIAdapters.cpp#L84"
+    },
+    "src/Modules/NextUI/UI/UiTheme.hpp": {
+      "path": "src/Modules/NextUI/UI/UiTheme.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextUI/UI/UiTheme.hpp",
+      "line": 1,
+      "excerpt": "#pragma once",
+      "sha256": "a29f24cff38a2e2542e11a94b0c3d0a03e40cada80a996ad7408c5c75c0cde6c",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextUI/UI/UiTheme.hpp#L1"
+    },
+    "src/Modules/NextUI/UI/UiTheme.cpp": {
+      "path": "src/Modules/NextUI/UI/UiTheme.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextUI/UI/UiTheme.cpp",
+      "line": 1,
+      "excerpt": "#include \"Engine/Common/CoreMinimal.hpp\"",
+      "sha256": "ff295b5198d58331d94327f9bd2a654411edd97ba29d8413e907189f7e14f0c9",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextUI/UI/UiTheme.cpp#L1"
+    },
+    "src/Modules/NextUI/UI/UiContext.hpp": {
+      "path": "src/Modules/NextUI/UI/UiContext.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextUI/UI/UiContext.hpp",
+      "line": 15,
+      "excerpt": "struct FUiMetrics",
+      "sha256": "f6c1bdee6b5801d8eda843485806f2c3cd0c90b782c5a257db8c303d1c93d0ee",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextUI/UI/UiContext.hpp#L15"
+    },
+    "src/Modules/NextUI/UI/UiScopes.hpp": {
+      "path": "src/Modules/NextUI/UI/UiScopes.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextUI/UI/UiScopes.hpp",
+      "line": 9,
+      "excerpt": "class FScopedStyle final",
+      "sha256": "a58c944bc6a542907fb5c9523e1ea8e70e32a44b1aa3f5d74f2300b2c2de8092",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextUI/UI/UiScopes.hpp#L9"
+    },
+    "src/Modules/NextUI/UI/UiWidgets.hpp": {
+      "path": "src/Modules/NextUI/UI/UiWidgets.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextUI/UI/UiWidgets.hpp",
+      "line": 26,
+      "excerpt": "struct FButtonOptions",
+      "sha256": "879227016f63e8b3c548bb34b99b0932fec454a4799e6b3cf84faf9ca444aaff",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextUI/UI/UiWidgets.hpp#L26"
+    },
+    "src/Modules/NextUI/UI/AppChrome.hpp": {
+      "path": "src/Modules/NextUI/UI/AppChrome.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextUI/UI/AppChrome.hpp",
+      "line": 19,
+      "excerpt": "struct FAppTitleBarOptions",
+      "sha256": "28ba46a26ebd32ff1b1df5cd29c4ed7297d811c5eae2d076a018f3d1b6c9bded",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextUI/UI/AppChrome.hpp#L19"
+    },
+    "src/Modules/NextUI/ImGuiScaling.cpp": {
+      "path": "src/Modules/NextUI/ImGuiScaling.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextUI/ImGuiScaling.cpp",
+      "line": 1,
+      "excerpt": "#include \"Modules/NextUI/ImGuiScaling.hpp\"",
+      "sha256": "2c8ffdc7d40379483312536d10ff8b6ebd20df197a28a1eca76f7fc16ad01a14",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextUI/ImGuiScaling.cpp#L1"
+    },
+    "src/Modules/NextUI/UI/DesktopUI.hpp": {
+      "path": "src/Modules/NextUI/UI/DesktopUI.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextUI/UI/DesktopUI.hpp",
+      "line": 18,
+      "excerpt": "struct FAppTitleBarConfig",
+      "sha256": "346abd06f0c88284af93dd72da1ee1b9bf6ffec91f3887d6fd7bfd11504a1b1e",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextUI/UI/DesktopUI.hpp#L18"
+    },
+    "src/Application/Editor/gkNextEditor/EditorContext.hpp": {
+      "path": "src/Application/Editor/gkNextEditor/EditorContext.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Editor/gkNextEditor/EditorContext.hpp",
+      "line": 6,
+      "excerpt": "class NextEngine;",
+      "sha256": "1aff9e1cd634485cac1aa8442c41bbc4a0164d9322815f5761a7d71398cc9d25",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Editor/gkNextEditor/EditorContext.hpp#L6"
+    },
+    "src/Application/Editor/gkNextEditor/EditorUi.hpp": {
+      "path": "src/Application/Editor/gkNextEditor/EditorUi.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Editor/gkNextEditor/EditorUi.hpp",
+      "line": 1,
+      "excerpt": "#pragma once",
+      "sha256": "db3f3eb9cb8c70e04123b5ec4ea8a28103955fb9d3dfeada0a89b168b9126b24",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Editor/gkNextEditor/EditorUi.hpp#L1"
+    },
+    "src/Application/Editor/gkNextEditor/Core/EditorUiState.hpp": {
+      "path": "src/Application/Editor/gkNextEditor/Core/EditorUiState.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Editor/gkNextEditor/Core/EditorUiState.hpp",
+      "line": 32,
+      "excerpt": "struct EditorCameraViewState",
+      "sha256": "b4d75f9c2a5ed2857f45f16f610d93e3967eb1e03eacf5cdde9b3d1d6bfb38af",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Editor/gkNextEditor/Core/EditorUiState.hpp#L32"
+    },
+    "src/Application/Editor/gkNextEditor/Overlays/TitleBarOverlay.cpp": {
+      "path": "src/Application/Editor/gkNextEditor/Overlays/TitleBarOverlay.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Editor/gkNextEditor/Overlays/TitleBarOverlay.cpp",
+      "line": 391,
+      "excerpt": "NextUI::Theme::DrawAppTitleBar(ctx.engine, config);",
+      "sha256": "1076a0de27e262132896f639bbee3e65ebc906b29fe8309b89a2e9d5be821058",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Editor/gkNextEditor/Overlays/TitleBarOverlay.cpp#L391"
+    },
+    "src/Engine/Runtime/Config/CVarSystem.hpp": {
+      "path": "src/Engine/Runtime/Config/CVarSystem.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Engine/Runtime/Config/CVarSystem.hpp",
+      "line": 49,
+      "excerpt": "struct FConsoleResult",
+      "sha256": "1cd435244902215482ec4dff284679af05afb6737007a2c3f46cc3f66f0bdb4e",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Engine/Runtime/Config/CVarSystem.hpp#L49"
+    },
+    "src/Modules/DevTools/CVarEditorPanel.cpp": {
+      "path": "src/Modules/DevTools/CVarEditorPanel.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/DevTools/CVarEditorPanel.cpp",
+      "line": 31,
+      "excerpt": "struct FCVarNamespacePresentation",
+      "sha256": "51d43ed96a302961b6aabdfda25097892f227a9be7fb5d52e7ddcefa24258bd6",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/DevTools/CVarEditorPanel.cpp#L31"
+    },
+    "src/Tests/Test_CVarSystem.cpp": {
+      "path": "src/Tests/Test_CVarSystem.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Tests/Test_CVarSystem.cpp",
+      "line": 6,
+      "excerpt": "TEST_CASE(\"CVar complete supports case-insensitive prefix and substring lookup\", \"[Unit][CVar]\")",
+      "sha256": "237ccae4e10d066d3845267cb14dab593ad7eda86bb88d44dfef8e08515118db",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Tests/Test_CVarSystem.cpp#L6"
+    },
+    "src/Modules/NextAI/AIService.hpp": {
+      "path": "src/Modules/NextAI/AIService.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextAI/AIService.hpp",
+      "line": 12,
+      "excerpt": "struct FAIResponse",
+      "sha256": "a79b67bcfef3fc4b495342d6d49e6762470a3e09570b4efcd20e6d80d5ad727d",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextAI/AIService.hpp#L12"
+    },
+    "src/Modules/NextAI/GnbClient/GnbAIClient.hpp": {
+      "path": "src/Modules/NextAI/GnbClient/GnbAIClient.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextAI/GnbClient/GnbAIClient.hpp",
+      "line": 11,
+      "excerpt": "struct FGnbAIEvent",
+      "sha256": "127986c62c4d780c92ac5f00ffe08a7cf21db7b80e9bdb4957f42c3f54b5502d",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextAI/GnbClient/GnbAIClient.hpp#L11"
+    },
+    "tools/gnb/internal/ai/bridge/bridge.go": {
+      "path": "tools/gnb/internal/ai/bridge/bridge.go",
+      "absolutePath": "D:/Project/gkNextEngine/tools/gnb/internal/ai/bridge/bridge.go",
+      "line": 47,
+      "excerpt": "func New(runtime *ai.Runtime, reader io.Reader, writer io.Writer) *Server {",
+      "sha256": "e94f930c76d78ad696193f2043f826b9851532c04fb135ea01f60b2a8b7bf1f4",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/tools/gnb/internal/ai/bridge/bridge.go#L47"
+    },
+    "tools/tests/fixtures/gnb-ai-protocol/v2/handshake.ndjson": {
+      "path": "tools/tests/fixtures/gnb-ai-protocol/v2/handshake.ndjson",
+      "absolutePath": "D:/Project/gkNextEngine/tools/tests/fixtures/gnb-ai-protocol/v2/handshake.ndjson",
+      "line": 1,
+      "excerpt": "{\"jsonrpc\":\"2.0\",\"id\":\"1\",\"method\":\"initialize\",\"params\":{\"protocolVersion\":2,\"client\":{\"name\":\"fixture\",\"version\":\"2\"},\"capabilities\":{\"streaming\":true,\"structuredOutput\":true}}}",
+      "sha256": "ebba9d0c71bb995d3883a695b219ef8cc77caafd683c9c69a7aa346679ba0519",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/tools/tests/fixtures/gnb-ai-protocol/v2/handshake.ndjson#L1"
+    },
+    "src/Tests/Test_GnbAIClient.cpp": {
+      "path": "src/Tests/Test_GnbAIClient.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Tests/Test_GnbAIClient.cpp",
+      "line": 19,
+      "excerpt": "TEST_CASE(\"AI service remains unavailable when the gnb sidecar is absent\", \"[Unit][AI][Bridge]\")",
+      "sha256": "631a554056db52ca0f29da31ddf60a548324bc64194cf76fa845eeaeed629b00",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Tests/Test_GnbAIClient.cpp#L19"
+    },
+    "docs/designs/nextai-product-focused-architecture.md": {
+      "path": "docs/designs/nextai-product-focused-architecture.md",
+      "absolutePath": "D:/Project/gkNextEngine/docs/designs/nextai-product-focused-architecture.md",
+      "line": 1,
+      "excerpt": "---",
+      "sha256": "4769d871e06f186be75d8d9152273da0e605aff69ea22a5f24736fb98f5d6cd5",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/docs/designs/nextai-product-focused-architecture.md#L1"
+    },
+    "docs/designs/gnb-ai-bridge-protocol-v2.md": {
+      "path": "docs/designs/gnb-ai-bridge-protocol-v2.md",
+      "absolutePath": "D:/Project/gkNextEngine/docs/designs/gnb-ai-bridge-protocol-v2.md",
+      "line": 1,
+      "excerpt": "---",
+      "sha256": "921b75c8c69b3c6ec89c8d2be915f91b3f3901dec478e08b63d908dbd620cc63",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/docs/designs/gnb-ai-bridge-protocol-v2.md#L1"
+    },
+    "tools/gnb/README.md": {
+      "path": "tools/gnb/README.md",
+      "absolutePath": "D:/Project/gkNextEngine/tools/gnb/README.md",
+      "line": 1,
+      "excerpt": "# gnb",
+      "sha256": "bc29558bd5a8ab72928d6c9d71ba44c21536f38c49c57cf0ace547f738395239",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/tools/gnb/README.md#L1"
+    },
+    "src/Application/Render/gkNextMinimalRenderer/CMakeLists.txt": {
+      "path": "src/Application/Render/gkNextMinimalRenderer/CMakeLists.txt",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Render/gkNextMinimalRenderer/CMakeLists.txt",
+      "line": 1,
+      "excerpt": "file(GLOB_RECURSE gkNextMinimalRendererSources CONFIGURE_DEPENDS",
+      "sha256": "e15b1dc53ec14658f3b0ac025064ce61927e6d95d202bcedc3f3e507a94da457",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Render/gkNextMinimalRenderer/CMakeLists.txt#L1"
+    },
+    "src/Engine/Runtime/Interface/ShaderHotReload.hpp": {
+      "path": "src/Engine/Runtime/Interface/ShaderHotReload.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Engine/Runtime/Interface/ShaderHotReload.hpp",
+      "line": 5,
+      "excerpt": "class NextEngine;",
+      "sha256": "1360e1f09f274e11323e2e3d90c270305f35aab5eaa2fecf712f60d2c3778718",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Engine/Runtime/Interface/ShaderHotReload.hpp#L5"
+    },
+    "src/Modules/LiveCoding/LiveCodingModule.cpp": {
+      "path": "src/Modules/LiveCoding/LiveCodingModule.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/LiveCoding/LiveCodingModule.cpp",
+      "line": 1,
+      "excerpt": "#include \"Engine/Common/CoreMinimal.hpp\"",
+      "sha256": "e97776e4cc0ffd15a46ea543225157ea2dff2ce0bfeafe5420f9ffb75a940581",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/LiveCoding/LiveCodingModule.cpp#L1"
+    },
+    "src/Modules/RenderViews/OffscreenRenderViewController.hpp": {
+      "path": "src/Modules/RenderViews/OffscreenRenderViewController.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/RenderViews/OffscreenRenderViewController.hpp",
+      "line": 20,
+      "excerpt": "class FrameBuffer;",
+      "sha256": "8cd7265a61584f42f2e0a068924bb43d4cd791267ab625665c2eda0b9356e6c5",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/RenderViews/OffscreenRenderViewController.hpp#L20"
+    },
+    "src/Application/Editor/Common/Preview/AssetThumbnailRenderer.hpp": {
+      "path": "src/Application/Editor/Common/Preview/AssetThumbnailRenderer.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Editor/Common/Preview/AssetThumbnailRenderer.hpp",
+      "line": 19,
+      "excerpt": "class Model;",
+      "sha256": "3c5bf67fdd17d1db0d6f1dc28ba2f93a89f7804ecac2d2f8f88346900348b968",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Editor/Common/Preview/AssetThumbnailRenderer.hpp#L19"
+    },
+    "src/Gameplay/CMakeLists.txt": {
+      "path": "src/Gameplay/CMakeLists.txt",
+      "absolutePath": "D:/Project/gkNextEngine/src/Gameplay/CMakeLists.txt",
+      "line": 1,
+      "excerpt": "add_library(NextGameplay ${src_files_nextgameplay})",
+      "sha256": "0371564562083bf214d557749fae258f901d329827f97a569be35e3805218ab5",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Gameplay/CMakeLists.txt#L1"
+    },
+    "src/Gameplay/Character/CharacterActor.h": {
+      "path": "src/Gameplay/Character/CharacterActor.h",
+      "absolutePath": "D:/Project/gkNextEngine/src/Gameplay/Character/CharacterActor.h",
+      "line": 14,
+      "excerpt": "struct FCharacterActorSetup",
+      "sha256": "efe32d2070634c126cab496696fd8e1fce2b00e87c7b272ddb439cb93706d082",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Gameplay/Character/CharacterActor.h#L14"
+    },
+    "src/Gameplay/AI/NavGrid.h": {
+      "path": "src/Gameplay/AI/NavGrid.h",
+      "absolutePath": "D:/Project/gkNextEngine/src/Gameplay/AI/NavGrid.h",
+      "line": 11,
+      "excerpt": "class FCPUAccelerationStructure;",
+      "sha256": "87d3b46653570ca161dc9e55aa064217cf1b3932aba93dc93b51812f874da1c9",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Gameplay/AI/NavGrid.h#L11"
+    },
+    "src/Modules/ScadLoader/FScadCsg.cpp": {
+      "path": "src/Modules/ScadLoader/FScadCsg.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/ScadLoader/FScadCsg.cpp",
+      "line": 20,
+      "excerpt": "struct VKey",
+      "sha256": "efac13065698da13838b0060efb9078b2d83d9d4b80caf8a24c8841befb2a01d",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/ScadLoader/FScadCsg.cpp#L20"
+    },
+    "src/Tests/Test_ScadRig.cpp": {
+      "path": "src/Tests/Test_ScadRig.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Tests/Test_ScadRig.cpp",
+      "line": 81,
+      "excerpt": "TEST_CASE(\"ScadRig builds bone hierarchy with engine-space pivots\", \"[Unit][ScadRig]\")",
+      "sha256": "18701f80193b06c32956d833456ebbacd0e044cbd2e7448072b8f5950bb4067d",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Tests/Test_ScadRig.cpp#L81"
+    },
+    "assets/shaders/common/Interfaces.slang": {
+      "path": "assets/shaders/common/Interfaces.slang",
+      "absolutePath": "D:/Project/gkNextEngine/assets/shaders/common/Interfaces.slang",
+      "line": 53,
+      "excerpt": "public interface IRayTracer",
+      "sha256": "63bc2b6e6eb8878ce071efa03d3c6d4413170b69493eb61fac4701e1563cfb69",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/assets/shaders/common/Interfaces.slang#L53"
+    },
+    "assets/shaders/common/RayTracers.slang": {
+      "path": "assets/shaders/common/RayTracers.slang",
+      "absolutePath": "D:/Project/gkNextEngine/assets/shaders/common/RayTracers.slang",
+      "line": 488,
+      "excerpt": "public struct FHardwareRayTracer : IRayTracer",
+      "sha256": "564344e6f2a8caf7f7c6698ff4c1907853ba0d10ca08443391e501676c5cb6bc",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/assets/shaders/common/RayTracers.slang#L488"
+    },
+    "assets/shaders/common/PathTracingRenderer.slang": {
+      "path": "assets/shaders/common/PathTracingRenderer.slang",
+      "absolutePath": "D:/Project/gkNextEngine/assets/shaders/common/PathTracingRenderer.slang",
+      "line": 13,
+      "excerpt": "struct FBounceResult",
+      "sha256": "1068df32e4ad8d24320d85e700c9ce972a3a1b2c4b7bf684dd16f2852bb3c956",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/assets/shaders/common/PathTracingRenderer.slang#L13"
+    },
+    "assets/shaders/Core.PathTracing.comp.slang": {
+      "path": "assets/shaders/Core.PathTracing.comp.slang",
+      "absolutePath": "D:/Project/gkNextEngine/assets/shaders/Core.PathTracing.comp.slang",
+      "line": 1,
+      "excerpt": "import Shader.Bindless;",
+      "sha256": "8c300cf93daf9bd41cfa1b512084f83e6af052bc09e358e2d0af1db3ab071bd7",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/assets/shaders/Core.PathTracing.comp.slang#L1"
+    },
+    "assets/shaders/common/BasicTypes.slang": {
+      "path": "assets/shaders/common/BasicTypes.slang",
+      "absolutePath": "D:/Project/gkNextEngine/assets/shaders/common/BasicTypes.slang",
+      "line": 538,
+      "excerpt": "public struct ALIGN_16 GPUScene",
+      "sha256": "00b019735c6d1f8256d85a31297b92b632248a6da41e604f5bbe3dcf59204bcc",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/assets/shaders/common/BasicTypes.slang#L538"
+    },
+    "assets/shaders/common/BindlessTexture.slang": {
+      "path": "assets/shaders/common/BindlessTexture.slang",
+      "absolutePath": "D:/Project/gkNextEngine/assets/shaders/common/BindlessTexture.slang",
+      "line": 1,
+      "excerpt": "// General Bindless Texture",
+      "sha256": "9368fdbf2680fbf63e3c40c378f624fcb47a7999d1706869bd09e8ae905836e7",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/assets/shaders/common/BindlessTexture.slang#L1"
+    },
+    "src/Engine/Rendering/PipelineCommon/VisibilityBufferLayout.hpp": {
+      "path": "src/Engine/Rendering/PipelineCommon/VisibilityBufferLayout.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Engine/Rendering/PipelineCommon/VisibilityBufferLayout.hpp",
+      "line": 9,
+      "excerpt": "struct FVisibilityPlaneDesc",
+      "sha256": "436707c06d36dd6109ae1eb9ac550c218906e755a92a75b412559e953e242676",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Engine/Rendering/PipelineCommon/VisibilityBufferLayout.hpp#L9"
+    },
+    "src/Engine/Rendering/VulkanBaseRenderer.cpp": {
+      "path": "src/Engine/Rendering/VulkanBaseRenderer.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Engine/Rendering/VulkanBaseRenderer.cpp",
+      "line": 337,
+      "excerpt": "// Why the last ProbeBindlessProfile call chose the compatibility profile. Only SetPhysicalDevice",
+      "sha256": "05ccc1a17b56dfd58c24096c1738fdea0e3c2701dfd01672074de400479cd9a3",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Engine/Rendering/VulkanBaseRenderer.cpp#L337"
+    },
+    "src/Engine/Assets/GPU/Texture.hpp": {
+      "path": "src/Engine/Assets/GPU/Texture.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Engine/Assets/GPU/Texture.hpp",
+      "line": 48,
+      "excerpt": "struct FBindlessProfile",
+      "sha256": "3c4e9d4ee1480c933d26581209116354c9c482c117cf077a0446ab910898bf51",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Engine/Assets/GPU/Texture.hpp#L48"
+    },
+    "src/Engine/Runtime/Interface/ScriptRuntime.hpp": {
+      "path": "src/Engine/Runtime/Interface/ScriptRuntime.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Engine/Runtime/Interface/ScriptRuntime.hpp",
+      "line": 7,
+      "excerpt": "class NextEngine;",
+      "sha256": "c813c7cc2d0ea45f1542293e696130a791721b140c5d7017411bc9bd4c0ed667",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Engine/Runtime/Interface/ScriptRuntime.hpp#L7"
+    },
+    "src/Modules/NextDotNet/NextDotNetModule.cpp": {
+      "path": "src/Modules/NextDotNet/NextDotNetModule.cpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextDotNet/NextDotNetModule.cpp",
+      "line": 1,
+      "excerpt": "#include \"Modules/NextDotNet/NextDotNetModule.hpp\"",
+      "sha256": "0839f9d1a9160e805fbe9a727fab73e779e72f45fd4df0383fa7486acb66f703",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextDotNet/NextDotNetModule.cpp#L1"
+    },
+    "src/Modules/NextDotNet/EngineApi.def.h": {
+      "path": "src/Modules/NextDotNet/EngineApi.def.h",
+      "absolutePath": "D:/Project/gkNextEngine/src/Modules/NextDotNet/EngineApi.def.h",
+      "line": 1,
+      "excerpt": "// The binding surface. This file is the single source of truth for every function that managed",
+      "sha256": "5117bca32c1000d7d7201a4db2b5c8f4f89e6cec628f4bedd7c9818299fc8e90",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Modules/NextDotNet/EngineApi.def.h#L1"
+    },
+    "src/Application/Editor/gkNextEditor/Core/EditorPlaySession.hpp": {
+      "path": "src/Application/Editor/gkNextEditor/Core/EditorPlaySession.hpp",
+      "absolutePath": "D:/Project/gkNextEngine/src/Application/Editor/gkNextEditor/Core/EditorPlaySession.hpp",
+      "line": 7,
+      "excerpt": "class NextEngine;",
+      "sha256": "70893451c3345a13d8e3f8c3dd86602e6b58b9373a38b50700353c0911dbc52f",
+      "publicSource": "https://github.com/gameknife/gkNextEngine/blob/4ba5b7cd106c282e7ed166ff853aeea87b392680/src/Application/Editor/gkNextEditor/Core/EditorPlaySession.hpp#L7"
+    }
+  },
+  "projectSources": {
+    "CMakeLists.txt": {
+      "path": "CMakeLists.txt",
+      "absolutePath": "D:/Assigment/2609/FYP/Project/AzureRender/CMakeLists.txt",
+      "line": 226,
+      "excerpt": "add_library(AzureFoundation STATIC",
+      "sha256": "265f70aa0735a9c7a732587258c1c45a90b149a176ee1ff75f046fb17e93fb32"
+    },
+    "src/extensions/ExtensionRegistry.hpp": {
+      "path": "src/extensions/ExtensionRegistry.hpp",
+      "absolutePath": "D:/Assigment/2609/FYP/Project/AzureRender/src/extensions/ExtensionRegistry.hpp",
+      "line": 19,
+      "excerpt": "struct ExtensionDescriptor {",
+      "sha256": "1a39aa8a9b2339976a615c442b467885d615b3a5d95cf6fa3917029b846b5b55"
+    },
+    "src/reflection/Registry.hpp": {
+      "path": "src/reflection/Registry.hpp",
+      "absolutePath": "D:/Assigment/2609/FYP/Project/AzureRender/src/reflection/Registry.hpp",
+      "line": 16,
+      "excerpt": "struct Property {",
+      "sha256": "75efc15f3318008fc67cecfb716b84d1150852371b2a1f5790c08d12b95f4e9f"
+    },
+    "src/runtime/ComponentCodec.hpp": {
+      "path": "src/runtime/ComponentCodec.hpp",
+      "absolutePath": "D:/Assigment/2609/FYP/Project/AzureRender/src/runtime/ComponentCodec.hpp",
+      "line": 8,
+      "excerpt": "void visitComponentType(const std::string& type, Callback&& callback) {",
+      "sha256": "b3cc13b67ae237d8c3ff988cd03cd23e816136edcfbd8efe1d57d87bfa4efe94"
+    },
+    "src/runtime/InteractionRuntime.hpp": {
+      "path": "src/runtime/InteractionRuntime.hpp",
+      "absolutePath": "D:/Assigment/2609/FYP/Project/AzureRender/src/runtime/InteractionRuntime.hpp",
+      "line": 24,
+      "excerpt": "if(const auto* collectible=runtime.world().tryGet<game::Collectible>(target))if(collectible->collected)return;",
+      "sha256": "dc426fbb4ec8cc60e8a72c08e27a1e9b1700dd0818dbfb0177eff76698b3953d"
+    },
+    "src/runtime/GameRuntime.cpp": {
+      "path": "src/runtime/GameRuntime.cpp",
+      "absolutePath": "D:/Assigment/2609/FYP/Project/AzureRender/src/runtime/GameRuntime.cpp",
+      "line": 66,
+      "excerpt": "animator->state=speed>.1F?\"walk\":\"idle\";",
+      "sha256": "c2d42decbed53c1738aa0f1279e75dff2b6a7057e2d28cc60dd8189c67f8eea1"
+    },
+    "src/runtime/InputActions.hpp": {
+      "path": "src/runtime/InputActions.hpp",
+      "absolutePath": "D:/Assigment/2609/FYP/Project/AzureRender/src/runtime/InputActions.hpp",
+      "line": 6,
+      "excerpt": "class InputActions {",
+      "sha256": "49123278c372ccb2e68b84a5d743bf8d7f114ef31549c6abafa46aeabb35b5c5"
+    },
+    "src/editor/EditorAutomation.cpp": {
+      "path": "src/editor/EditorAutomation.cpp",
+      "absolutePath": "D:/Assigment/2609/FYP/Project/AzureRender/src/editor/EditorAutomation.cpp",
+      "line": 7,
+      "excerpt": "void EditorAutomation::advance(std::uint64_t frame,EditorSession& session){",
+      "sha256": "eb5df350de6aac2f470e812a1900dac827e84e7d116a45e27866f12942723c09"
+    },
+    "src/editor/EditorContext.cpp": {
+      "path": "src/editor/EditorContext.cpp",
+      "absolutePath": "D:/Assigment/2609/FYP/Project/AzureRender/src/editor/EditorContext.cpp",
+      "line": 313,
+      "excerpt": "void EditorContext::beginEdit() {",
+      "sha256": "a9a5c36868926db74e7098e2796c84964398c3c65bc437513ca23aebeefdca68"
+    },
+    "src/editor/EditorTheme.cpp": {
+      "path": "src/editor/EditorTheme.cpp",
+      "absolutePath": "D:/Assigment/2609/FYP/Project/AzureRender/src/editor/EditorTheme.cpp",
+      "line": 6,
+      "excerpt": "void EditorTheme::apply(float dpiScale) {",
+      "sha256": "f687ae87f5b68ae7a3ef581827f48035f06ba01a2d60e0c06d0615769f9cb166"
+    },
+    "src/runtime/AssetDatabase.hpp": {
+      "path": "src/runtime/AssetDatabase.hpp",
+      "absolutePath": "D:/Assigment/2609/FYP/Project/AzureRender/src/runtime/AssetDatabase.hpp",
+      "line": 10,
+      "excerpt": "struct AssetRecord {",
+      "sha256": "fb9e2e1556896d3a7486cd8eac22c27539281099aac55dc5a26096fc4ce2e742"
+    }
+  }
+}

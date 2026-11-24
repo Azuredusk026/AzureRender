@@ -1,0 +1,152 @@
+{
+  "status": "passed",
+  "sourceHead": "08f662a",
+  "checks": {
+    "checks": [
+      {
+        "config": "Release",
+        "tests": 6,
+        "skips": 0,
+        "seconds": 104.54700000002049
+      },
+      {
+        "config": "Debug",
+        "tests": 6,
+        "skips": 0,
+        "seconds": 93.96899999998277
+      }
+    ],
+    "sourceUnchanged": true,
+    "projectionPointsPerBatch": 19756,
+    "fullNativeGpuComponents": 316096
+  },
+  "identity": {
+    "existingProducts": 1462,
+    "changedProducts": [],
+    "allThreeHostsPerConfigExact": true,
+    "sourceScope": "08f662a unused public projection kernel",
+    "defaultNativeFourReuse": "Unchanged actual host and existing programs; original 1729 mounted inputs retained",
+    "protectedFilesUnchanged": true
+  },
+  "childEvidence": {
+    "members": 123,
+    "hashedMembers": 122,
+    "allExact": true,
+    "archiveSha256": "ecdbc9129403924f6ea8e03b88ec09af730ab7c3eaf839b50cb8d5aadd7faf5b"
+  },
+  "fullNativeGpuComponents": 316096,
+  "archiveBytes": 561310,
+  "archiveSha256": "443eabb0ebf10209d65f5a47e1ce3fbc676b397117a35090a34c5d4fb358e586",
+  "archiveMembers": [
+    {
+      "path": "baseline-products.json",
+      "bytes": 287029,
+      "sha256": "1eeee17883fde107386f27150339d95ba869fe088a513b1ba5da2795763af4ba"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 436,
+      "sha256": "42c3d90ab203b3738d06b9677776e75179eed605f36b36ddb5ccb594160a305f"
+    },
+    {
+      "path": "build-results.json",
+      "bytes": 360,
+      "sha256": "8f9dde99b3e73766ec82aa05ad2f8b19de06529f925c24090b9b77b4c5e8159d"
+    },
+    {
+      "path": "build.py",
+      "bytes": 3426,
+      "sha256": "c09a74df868aa98080ac33bcbe18cb3b232e0c468f8a44ecf5fc8d53732f783f"
+    },
+    {
+      "path": "child-evidence-validation.json",
+      "bytes": 156,
+      "sha256": "29603454de8e19e1704757eb7f3159392bedc89ea458b912975b8f7b553370fd"
+    },
+    {
+      "path": "debug-build-provenance.json",
+      "bytes": 392571,
+      "sha256": "b6b11b52c7e07d346b6b1d0918ebaf7231b473a422b6e93c22ceb0148314c5bb"
+    },
+    {
+      "path": "debug-build.log",
+      "bytes": 9859,
+      "sha256": "22cee4da10e5a4c3fa5e4b6efcc287f5803f7032e2acec3a0377abd7e17f7901"
+    },
+    {
+      "path": "debug-intel-projection.log",
+      "bytes": 172,
+      "sha256": "d108789a62b43468059fd0445b49497927caf6cfb22eaa11322a1ca2d3d505d6"
+    },
+    {
+      "path": "debug-nvidia-projection.log",
+      "bytes": 158,
+      "sha256": "a1750d17b86e5b211ec8a5590a08e9d3afd6d8c02f7531b407dede78eba78184"
+    },
+    {
+      "path": "debug-tests.log",
+      "bytes": 1068,
+      "sha256": "4703b6ab131952f5658093fa99e60976c5524583ef1021feb7d10ec824a8e5ce"
+    },
+    {
+      "path": "debug-tests.xml",
+      "bytes": 2777,
+      "sha256": "a2bcdae10f701e9a7849c05b461e0a528743ae592f7f53b313ddb91406524458"
+    },
+    {
+      "path": "identity-results.json",
+      "bytes": 310,
+      "sha256": "864594b851caeed4b690405d66e926bce9a5f617489b72d244dcf4ad699d17b5"
+    },
+    {
+      "path": "native-profile.bin",
+      "bytes": 80,
+      "sha256": "1f284101bc5e6e56cdc7d44e47032b666fb62d592ace457baa9b4a52e52ab181"
+    },
+    {
+      "path": "native-records.bin",
+      "bytes": 370048,
+      "sha256": "3678daa5940525fb37965358819371a15250ac7d3471ea9e1dcaaac2362953b2"
+    },
+    {
+      "path": "process.log",
+      "bytes": 207,
+      "sha256": "382ea79b1d08c4937aba3ad7e7ff2a7af1c5154a1eda0b4f16c75c47406e5c1a"
+    },
+    {
+      "path": "protected-files.json",
+      "bytes": 1532,
+      "sha256": "de34a223309e79d7448b2acf159db62865585cba4ff8154a22c40f9df65c3355"
+    },
+    {
+      "path": "release-build-provenance.json",
+      "bytes": 416793,
+      "sha256": "8b9b63d120aa9dd67c3509b74e556ac4166c36fabe34ade314cc2c5ad5bb90f6"
+    },
+    {
+      "path": "release-build.log",
+      "bytes": 9996,
+      "sha256": "f19f3d4e0b939ddcdf0a2d8136ed866d1df26f61c71c698472fa6bbc63398b48"
+    },
+    {
+      "path": "release-intel-projection.log",
+      "bytes": 172,
+      "sha256": "d108789a62b43468059fd0445b49497927caf6cfb22eaa11322a1ca2d3d505d6"
+    },
+    {
+      "path": "release-nvidia-projection.log",
+      "bytes": 158,
+      "sha256": "a1750d17b86e5b211ec8a5590a08e9d3afd6d8c02f7531b407dede78eba78184"
+    },
+    {
+      "path": "release-tests.log",
+      "bytes": 1072,
+      "sha256": "6996273aa254c4ef740072c6c0b7fafeb6e260533f2bc40c39b32d3cc821741c"
+    },
+    {
+      "path": "release-tests.xml",
+      "bytes": 2782,
+      "sha256": "9f6972a6bf3ea05259bdc1d9c740b8379ff9663a5295fa3b0975c09b0fbbf3ba"
+    }
+  ]
+}

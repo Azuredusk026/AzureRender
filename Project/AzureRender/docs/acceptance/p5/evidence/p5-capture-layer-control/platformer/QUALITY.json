@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "entities": 43,
+  "platforms": 8,
+  "coins": 10,
+  "animatedCharacters": 1,
+  "pointLights": 8,
+  "shadowCascades": 4,
+  "width": 1920,
+  "height": 1080,
+  "fullGameUi": true
+}

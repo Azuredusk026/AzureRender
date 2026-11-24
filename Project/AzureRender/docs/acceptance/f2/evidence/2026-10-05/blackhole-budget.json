@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "thermalStartMaximumC": 55,
+  "initialTemperatures": [
+    52,
+    51,
+    51
+  ],
+  "budget": {
+    "averagesMs": [
+      17.904853,
+      18.189336,
+      18.254511
+    ],
+    "medianMs": 18.189336,
+    "limitExclusiveMs": 20.0,
+    "passed": true
+  }
+}

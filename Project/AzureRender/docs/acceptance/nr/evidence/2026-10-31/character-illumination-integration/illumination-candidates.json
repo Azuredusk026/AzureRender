@@ -1,0 +1,81 @@
+{
+  "status": "candidate-not-promoted",
+  "scope": "Scene data only: use the complete captured NPR illumination preset, preserving the existing cloth specular floor, all environment lights, grade, reflection, geometry and material files.",
+  "sourcePreset": {
+    "schemaVersion": 1,
+    "enabled": true,
+    "ambientColor": [
+      1.1870100498199463,
+      0.9272286891937256,
+      0.8129898905754089
+    ],
+    "ambientDirection": [
+      -0.0,
+      0.9999999999999991,
+      4.371138828673789e-08
+    ],
+    "directionBias": 0.15000000596046448,
+    "directionGain": 1.5,
+    "directionFloor": 0.5,
+    "outdoorGain": 1.0499999523162842,
+    "shadowAmbientGain": 0.800000011920929,
+    "indoorMix": 0.0,
+    "litAmbientMix": 1.0,
+    "mainColorMix": 1.0,
+    "shadowOverride": 1.0,
+    "useSceneIrradiance": false,
+    "ambientWeight": 0.28772246837615967
+  },
+  "appliedPreset": {
+    "schemaVersion": 1,
+    "enabled": true,
+    "ambientColor": [
+      1.1870100498199463,
+      0.9272286891937256,
+      0.8129898905754089
+    ],
+    "ambientDirection": [
+      -0.0,
+      0.9999999999999991,
+      4.371138828673789e-08
+    ],
+    "directionBias": 0.15000000596046448,
+    "directionGain": 1.5,
+    "directionFloor": 0.5,
+    "outdoorGain": 1.0499999523162842,
+    "shadowAmbientGain": 0.800000011920929,
+    "indoorMix": 0.0,
+    "litAmbientMix": 1.0,
+    "mainColorMix": 1.0,
+    "shadowOverride": 1.0,
+    "useSceneIrradiance": false,
+    "ambientWeight": 0.28772246837615967,
+    "specularFloor": 0.55
+  },
+  "cases": [
+    {
+      "case": "near",
+      "project": "build\\runs\\20261031-133610-native-character-visibility-92ad44\\project\\reference-illumination-near.azureproject",
+      "projectSha256": "2b575c1b87e294baec5173cb9e0e8930e64bbf62008a3d171cca47c3d4e9dfc7",
+      "levelSha256": "aa5cb1f3a1feb257940ea8c2e34d765d803ca6060ab751ab36eb288b49a3a35a"
+    },
+    {
+      "case": "full",
+      "project": "build\\runs\\20261031-133610-native-character-visibility-92ad44\\project\\reference-illumination-full.azureproject",
+      "projectSha256": "f8ca28a54f446c624b526f5ae507109c7ab6184b94d839456b52d83f40549b25",
+      "levelSha256": "aece548b38ac31c3d59d212e39e42944f439d4c786598e3d9cc6dd84e1215139"
+    },
+    {
+      "case": "hidden",
+      "project": "build\\runs\\20261031-133610-native-character-visibility-92ad44\\project\\reference-illumination-hidden.azureproject",
+      "projectSha256": "044d085bfa2489c54f8b798b3583681ae9d43633e35d2a6ab79be7641524325d",
+      "levelSha256": "a558bafd077961404b057e654e5359a4c90ed016823d72f18e5fefb193293e7b"
+    },
+    {
+      "case": "control-hidden",
+      "project": "build\\runs\\20261031-133610-native-character-visibility-92ad44\\project\\reference-illumination-control-hidden.azureproject",
+      "projectSha256": "d15e020102ac630f45767d2699f0f819fc237d6a53fa3a27a3f12051742d3577",
+      "levelSha256": "7ff5e644a50afedec28cb432a493b685897cf025adc799afb74b965cfd41861e"
+    }
+  ]
+}

@@ -1,0 +1,3436 @@
+{
+  "schemaVersion": 1,
+  "kind": "exact-working-tree-source-snapshot",
+  "parentCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+  "files": {
+    "CMakeLists.txt": {
+      "sha256": "26ee6aa7ff0cbc5789aff39f64b197979de8a6bb88f6a8546b21f1f7d29bd7ce",
+      "bytes": 90901
+    },
+    "CMakePresets.json": {
+      "sha256": "cafb99bc351c0d1b8a675fa805e7c9b1ad10d91c954d1e3e6b78fb832f9bef39",
+      "bytes": 2118
+    },
+    "assets_public/README.md": {
+      "sha256": "fe2887ddfe835176b6b7927b931d31c3538e6f4e1b6f6ccc010f30974d2910bf",
+      "bytes": 2059
+    },
+    "assets_public/baselines/character/character_albedo_fullbody.png": {
+      "sha256": "c7c3322828f7464e229576d92178aa69d7dfa3a30909a8bd9ba87e5b9ae691e3",
+      "bytes": 351967
+    },
+    "assets_public/baselines/character/character_beauty_fullbody.png": {
+      "sha256": "86e1c437ec29aa1ece304daf8c17f978e9e0a37ddd6855585656800c3d3bd3f5",
+      "bytes": 410975
+    },
+    "assets_public/baselines/character/character_direct_diffuse_fullbody.png": {
+      "sha256": "feadd9f5ee66c08607fdc5a11f3ba35665d0230df61cb07c81f8f84c918a2acb",
+      "bytes": 419371
+    },
+    "assets_public/baselines/character/character_face_sdf_closeup.png": {
+      "sha256": "eb58ceac8bbeb29e28ff2984188f9e31a54c45aadae2f8227dd55ac3e030c01c",
+      "bytes": 84803
+    },
+    "assets_public/baselines/character/character_material_id_fullbody.png": {
+      "sha256": "96f95bf4511edbb8aea4b5ec9c8eea8f0853648dc314db5a5318bd7a71d590bf",
+      "bytes": 74723
+    },
+    "assets_public/baselines/character/character_outline_fullbody.png": {
+      "sha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+      "bytes": 36970
+    },
+    "assets_public/baselines/character/character_world_normal_fullbody.png": {
+      "sha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+      "bytes": 37094
+    },
+    "assets_public/exploration/assets/CHARACTER-LICENSE.txt": {
+      "sha256": "be53cb6c25774e09d7f8eff01d850a71de5ede9a916a7e9407ed9439e79327eb",
+      "bytes": 499
+    },
+    "assets_public/exploration/assets/checkpoint.lua": {
+      "sha256": "60fa48454c184884f356b9806c230adb0247ab778538bec5c154ebf06eea290e",
+      "bytes": 186
+    },
+    "assets_public/exploration/assets/collectible.lua": {
+      "sha256": "6c0246eab1fb714ae42f0aa09fbba3c5ced3605d370b56bd5f351f4c839e8b5e",
+      "bytes": 461
+    },
+    "assets_public/exploration/assets/cube.gltf": {
+      "sha256": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651",
+      "bytes": 6485
+    },
+    "assets_public/exploration/assets/door.lua": {
+      "sha256": "43aac45a599c866aa9871390c9e705b1cbe45075b5a7adb0e9933b64874d43a9",
+      "bytes": 511
+    },
+    "assets_public/exploration/assets/exploration.azurelevel": {
+      "sha256": "015c6c35bafb0c9bea07c792a75ff52498a5931620a618a74a19cc43ecfa7fad",
+      "bytes": 11786
+    },
+    "assets_public/exploration/assets/goal.lua": {
+      "sha256": "e35fdd4cfcbe0c74845fd32f9e11668b4cf8a09dcc5734f746522d5507caa09f",
+      "bytes": 298
+    },
+    "assets_public/exploration/assets/guide.gltf": {
+      "sha256": "728038e1e60d9f6b518372d76bcd7e0b3ab7522840ccb66b80edbcc575ca0696",
+      "bytes": 64692
+    },
+    "assets_public/exploration/assets/guide.lua": {
+      "sha256": "c17d9962634bfd9aca38e04e123d787bcdf116feefbac83f129cef93096d6e21",
+      "bytes": 236
+    },
+    "assets_public/exploration/assets/hero.gltf": {
+      "sha256": "4c35b283bb2e7565e37c73c0764c73fbf323337b0c94b209178489b745544e1f",
+      "bytes": 62414
+    },
+    "assets_public/exploration/assets/hero.lua": {
+      "sha256": "eb374d5523253aef7c7d09655d02d09af8756b29dca5f16b07bbf082f0b44bf1",
+      "bytes": 1736
+    },
+    "assets_public/exploration/assets/hud.rml": {
+      "sha256": "bfe8f2d4d6bee41f730dd7081e437076b080089d5ae09e56bd15de62c0e67f72",
+      "bytes": 1136
+    },
+    "assets_public/exploration/assets/locomotion.json": {
+      "sha256": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088",
+      "bytes": 202
+    },
+    "assets_public/exploration/assets/prefabs/checkpoint.azureprefab": {
+      "sha256": "e600119d12e1118bdc33dadf4552db0716b450f84a2ad938783544c79fb92543",
+      "bytes": 1452
+    },
+    "assets_public/exploration/assets/prefabs/collectible.azureprefab": {
+      "sha256": "eb0a10ba381da9a3c1d0126d3181a6a82194367d6a8550e7c027d4f28702dae2",
+      "bytes": 1226
+    },
+    "assets_public/exploration/assets/prefabs/door.azureprefab": {
+      "sha256": "bd5cfe2dc287c463e2f5b3305411bbceadec6df6ef1ec29e53d7dfa8421110aa",
+      "bytes": 1430
+    },
+    "assets_public/exploration/assets/prefabs/guide.azureprefab": {
+      "sha256": "fea8f99bffe882ddd83f8ea1ce9ef8e7c256bd5a5ebb613a9016ade603e73cd4",
+      "bytes": 1199
+    },
+    "assets_public/exploration/assets/prefabs/hero.azureprefab": {
+      "sha256": "29db1ed3f46ee247654f41ea4c5656bd568b380dfffa19bae8e156958e59fed1",
+      "bytes": 1254
+    },
+    "assets_public/exploration/project.azureproject": {
+      "sha256": "9a08677c134a508812554d85477364925a75a76048856c8de8afceffd796f259",
+      "bytes": 1701
+    },
+    "assets_public/face_sdf_v1.png": {
+      "sha256": "45a2bde466ad8ea335555cb697f8f1247893af471c4e40b0d5105d13dba19b51",
+      "bytes": 163950
+    },
+    "assets_public/fonts/.gitattributes": {
+      "sha256": "926c2b3b3ac6d1fc561e5f50a2de73f27d112512b2c491e260e70c0857a4857b",
+      "bytes": 46
+    },
+    "assets_public/fonts/LatoLatin-Regular.ttf": {
+      "sha256": "d785334ac4e7810f571def986bbad41161f68ac385db8813f798bf04d71478e1",
+      "bytes": 148540
+    },
+    "assets_public/fonts/NotoSansCJK-LICENSE.txt": {
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+      "bytes": 4301
+    },
+    "assets_public/fonts/NotoSansCJKsc-Regular.otf": {
+      "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+      "bytes": 16437364
+    },
+    "assets_public/fonts/RmlUi-Sample-Fonts-LICENSE.txt": {
+      "sha256": "c97278bb336ab0fb2d3bb7ba3f303d638224d6dd1edc6e6fcdd4ba28b8dbf2a6",
+      "bytes": 14920
+    },
+    "assets_public/gameplay/.azure/cache/0e765492-044c-47e6-8e71-1a4e75bb787a/10150042443788873959.azcache": {
+      "sha256": "92e3298e6216e16aae34d3266016741e8069d69ae948087640ebbfd9479d02fd",
+      "bytes": 854
+    },
+    "assets_public/gameplay/.azure/cache/0e765492-044c-47e6-8e71-1a4e75bb787a/6092591801132726443.azcache": {
+      "sha256": "ec3e436e4e8dc3ed8d4ef2e73a7873b97f24a15abf8dc4721615518e32b08077",
+      "bytes": 751
+    },
+    "assets_public/gameplay/.azure/cache/160a721f-b2a8-47ee-a6fa-f5bfb109e660/3857760285371520952.azcache": {
+      "sha256": "425221469a6f569ed2fc3372e1ac9b126377aded5838401edf05a34108f2a92e",
+      "bytes": 155
+    },
+    "assets_public/gameplay/.azure/cache/318e015c-8a9f-4e1c-8701-f032c7ca38e1/10312461599198234233.azcache": {
+      "sha256": "260869a6983eb19c02c6b28c6a554fe311f43fedcd243ed81d85f5fa1b5eed97",
+      "bytes": 431
+    },
+    "assets_public/gameplay/.azure/cache/318e015c-8a9f-4e1c-8701-f032c7ca38e1/12844472408144881418.azcache": {
+      "sha256": "4c1326e29ee35215dcd652afe0bcbf05e8fae0b091d30160c8d0c9642bbfeec4",
+      "bytes": 612
+    },
+    "assets_public/gameplay/.azure/cache/4e676653-29f3-4d3b-810e-46d7ecf00ec0/1142143019119223957.azcache": {
+      "sha256": "d8d38329e48ee47192733426cf0f653f1a493be9b66b5e9ff2d7ebc93a9df6a2",
+      "bytes": 1229
+    },
+    "assets_public/gameplay/.azure/cache/4e676653-29f3-4d3b-810e-46d7ecf00ec0/3068682455792998869.azcache": {
+      "sha256": "6551cac0480fed7d55dd72244e0cde5c98d221c6fdcd82ec5dd131b148864cbc",
+      "bytes": 2961
+    },
+    "assets_public/gameplay/.azure/cache/4e676653-29f3-4d3b-810e-46d7ecf00ec0/3605495318639408392.azcache": {
+      "sha256": "4230578c99052cfd0590b965d6f372d8891c3b43b25dd6481744d18be8867188",
+      "bytes": 2941
+    },
+    "assets_public/gameplay/.azure/cache/4e676653-29f3-4d3b-810e-46d7ecf00ec0/821844725708629729.azcache": {
+      "sha256": "d7cb8516273111442c464b3ccba041978b9e08b7f474a370cb25d2206f0812a8",
+      "bytes": 2941
+    },
+    "assets_public/gameplay/.azure/cache/56da2861-6667-49c3-bce6-6253f9494a11/16690263573219894339.azcache": {
+      "sha256": "f866327ba34fa97cf94368f78d4494439f705b194745067b97865c8cb305e227",
+      "bytes": 235
+    },
+    "assets_public/gameplay/.azure/cache/56da2861-6667-49c3-bce6-6253f9494a11/6320136629365765295.azcache": {
+      "sha256": "08e2322593aa07043325ffe9a7be9390216ebf35f2d7a918520cd8e703bf0c04",
+      "bytes": 270
+    },
+    "assets_public/gameplay/.azure/cache/6ba1652d-d180-4665-9b3b-e540dec3d8db/14442914494867768320.azcache": {
+      "sha256": "9e1fb4d2467c4d3c1e12e7c788fab7ff472171044b5fcc31aac150afd107d997",
+      "bytes": 2024
+    },
+    "assets_public/gameplay/.azure/cache/6ba1652d-d180-4665-9b3b-e540dec3d8db/18402611511257330614.azcache": {
+      "sha256": "ab24cf398f4ee25fa51962d5a53c9254291b813be836954139229ae74d666945",
+      "bytes": 2004
+    },
+    "assets_public/gameplay/.azure/cache/6ba1652d-d180-4665-9b3b-e540dec3d8db/6667251112050848488.azcache": {
+      "sha256": "ee6f4bd366687c6e19961fc15168c115610de33177f55638b3eae340200deba8",
+      "bytes": 806
+    },
+    "assets_public/gameplay/.azure/cache/6ba1652d-d180-4665-9b3b-e540dec3d8db/9989813776952749837.azcache": {
+      "sha256": "a26e3a178351d1aa4aca53c6c6f64cba0ce2d5ec7d3d85cc900c486346cfa987",
+      "bytes": 2004
+    },
+    "assets_public/gameplay/.azure/cache/b61dbceb-6e7f-4e39-867c-9e3f77410d4f/17254955653438078404.azcache": {
+      "sha256": "2a85b0f009f14fdc765bc0f5d1683d186a1f2b4b9a60f4f23f4f4747fdb46177",
+      "bytes": 5812
+    },
+    "assets_public/gameplay/.azure/cache/ba872466-120f-4f50-ab4f-425f803788c5/17412648304939610210.azcache": {
+      "sha256": "516966b7900bade90fa1e6713099351fb1a4eed46cb8054260a03ca17e1b2ef3",
+      "bytes": 24068
+    },
+    "assets_public/gameplay/.azure/cache/e3d8f79d-d248-4d9b-9f4e-adf070ff5d0b/2712448565105660092.azcache": {
+      "sha256": "515af4acc3494464dbfb5f14ab3542a0be6bd234b9cffcaef576eceecafd78d7",
+      "bytes": 6399
+    },
+    "assets_public/gameplay/assets/courtyard.azurelevel": {
+      "sha256": "f2425350f521d2744fbe1865819fb1bcf1bd6dcc9da1e329c3edbbc6941bac80",
+      "bytes": 2917
+    },
+    "assets_public/gameplay/assets/courtyard.azurelevel.azmeta": {
+      "sha256": "7bd12f945d1b6e779ec3822c7057723a1423c2d81d4b837d7f01a59b838222f4",
+      "bytes": 112
+    },
+    "assets_public/gameplay/assets/destination.azurelevel": {
+      "sha256": "2f73e52c9f227e7de3b98fe14772574394b4bb1640a7023cb9e089bd62b8cfd4",
+      "bytes": 1980
+    },
+    "assets_public/gameplay/assets/destination.azurelevel.azmeta": {
+      "sha256": "3adcd296a517ef284ede84307219adafae37476ab77b19724c06e7cfd0be278a",
+      "bytes": 112
+    },
+    "assets_public/gameplay/assets/hero.gltf": {
+      "sha256": "bd955f3c529f45cc7ac7533d35a4f1074fd41dbd87468d3aae95d358271bc421",
+      "bytes": 6375
+    },
+    "assets_public/gameplay/assets/hero.gltf.azmeta": {
+      "sha256": "232c95295294711e582a75f8ced53266abe71cccf17cf60cfee24cc2f4b136b9",
+      "bytes": 112
+    },
+    "assets_public/gameplay/assets/hud.rml": {
+      "sha256": "4f58c899fb038ebcd732264eadd5716cc9ac24e95ab0647f8dd1db78420df848",
+      "bytes": 830
+    },
+    "assets_public/gameplay/assets/hud.rml.azmeta": {
+      "sha256": "85a9f7877095fb2ff2f4f1a3e7c7fbe7ef3a562e343cc49e4ec0284e88be5656",
+      "bytes": 112
+    },
+    "assets_public/gameplay/assets/motion.json": {
+      "sha256": "657137af56cd8e2a654239ca79ae7b2c58ebdc1b18e77f551cdc2064421fd735",
+      "bytes": 131
+    },
+    "assets_public/gameplay/assets/motion.json.azmeta": {
+      "sha256": "4de33967e978ba82556ef0815cb6205ca661e74df6b3d3b1348b996c40ed1d05",
+      "bytes": 112
+    },
+    "assets_public/gameplay/assets/player.lua": {
+      "sha256": "d7cb64003c08a392be46976af3df8558c10e5bb6a598101a824796184cca68a7",
+      "bytes": 588
+    },
+    "assets_public/gameplay/assets/player.lua.azmeta": {
+      "sha256": "3d44b8707e39bee2cdf04aa87cabe71c8e3f209fdd905f7f2e8f83647a693038",
+      "bytes": 112
+    },
+    "assets_public/gameplay/assets/portal.gltf": {
+      "sha256": "e51feda90b93e3608911cf01fcdf6e460ccb9abfc34659d23c41531b304adfcb",
+      "bytes": 5788
+    },
+    "assets_public/gameplay/assets/portal.gltf.azmeta": {
+      "sha256": "dd848e369cbf1e2eaaaf50b2554bd73c1eef41de980cf76b920fea8e3b909ad5",
+      "bytes": 112
+    },
+    "assets_public/gameplay/assets/portal.lua": {
+      "sha256": "4f4470c2d9dbef46fac305b710168b65bfca8193b61893ab394f545b88669cbc",
+      "bytes": 246
+    },
+    "assets_public/gameplay/assets/portal.lua.azmeta": {
+      "sha256": "5c72df34816b9190c5989f91e3de3cf8ca36bd02faccdc9fe7feb9e8c4d917ad",
+      "bytes": 112
+    },
+    "assets_public/gameplay/assets/portal.wav": {
+      "sha256": "d3e6dcc52bd9f2fe7ff5ce228e70f55c4b43aac78d0042d07e8617a579fae462",
+      "bytes": 24044
+    },
+    "assets_public/gameplay/assets/portal.wav.azmeta": {
+      "sha256": "cf314f662956ae31355e0eb5740ba47aa7d81bd0f5abea1f86c24467a3ed62ee",
+      "bytes": 112
+    },
+    "assets_public/gameplay/project.azureproject": {
+      "sha256": "6556c21c17b516369f1f53d8170d207f5a150eb2a8abf2ef9ddcf95c1e4d706f",
+      "bytes": 1700
+    },
+    "assets_public/level.schema.json": {
+      "sha256": "98fceff6809fb145f75690e84a5522b6de6b8833e411fed9ab7c5728527d66dd",
+      "bytes": 1410
+    },
+    "assets_public/playable_rules/checkpoint.lua": {
+      "sha256": "60fa48454c184884f356b9806c230adb0247ab778538bec5c154ebf06eea290e",
+      "bytes": 186
+    },
+    "assets_public/playable_rules/collectible.lua": {
+      "sha256": "6c0246eab1fb714ae42f0aa09fbba3c5ced3605d370b56bd5f351f4c839e8b5e",
+      "bytes": 461
+    },
+    "assets_public/playable_rules/door.lua": {
+      "sha256": "43aac45a599c866aa9871390c9e705b1cbe45075b5a7adb0e9933b64874d43a9",
+      "bytes": 511
+    },
+    "assets_public/playable_rules/goal.lua": {
+      "sha256": "e35fdd4cfcbe0c74845fd32f9e11668b4cf8a09dcc5734f746522d5507caa09f",
+      "bytes": 298
+    },
+    "assets_public/playable_rules/guide.lua": {
+      "sha256": "c17d9962634bfd9aca38e04e123d787bcdf116feefbac83f129cef93096d6e21",
+      "bytes": 236
+    },
+    "assets_public/playable_rules/hero.lua": {
+      "sha256": "eb374d5523253aef7c7d09655d02d09af8756b29dca5f16b07bbf082f0b44bf1",
+      "bytes": 1736
+    },
+    "assets_public/playable_rules/hud.rml": {
+      "sha256": "bfe8f2d4d6bee41f730dd7081e437076b080089d5ae09e56bd15de62c0e67f72",
+      "bytes": 1136
+    },
+    "assets_public/procedural/building-parameters.json": {
+      "sha256": "c1dd6e9ca757282902fb85ba5126c41fe1a45ddc03f940a6960f125b02544f85",
+      "bytes": 65
+    },
+    "assets_public/procedural/modular-solid.json": {
+      "sha256": "cc4d6b18d345d5afe26a7076d76227e1f7e31e294e6a964b6199d5d79ba86878",
+      "bytes": 733
+    },
+    "assets_public/procedural/prop-parameters.json": {
+      "sha256": "54f9f30e35ee0ed4fe0d3bbe12dd16d70f37e72efc2b1d6847a3337371e8d053",
+      "bytes": 69
+    },
+    "assets_public/procedural/rig/articulated-tool.json": {
+      "sha256": "45f64e478eae0c907f13ae9650a26e78b4cd5d1c5e61c7efb1838244e1a777d2",
+      "bytes": 830
+    },
+    "assets_public/project.schema.json": {
+      "sha256": "89d2186527c35fc5b4ad121b97188d49dd8f2dbfd6d6b63a1b8b1147df3c3611",
+      "bytes": 1067
+    },
+    "assets_public/scene_inspector/README.md": {
+      "sha256": "7a1890faf8dbe1a96f7ef573690078fd8e64d1d39df2af63aaac5cba7c1d2c56",
+      "bytes": 871
+    },
+    "assets_public/scene_inspector/assets/ASSET-LICENSE.txt": {
+      "sha256": "f8ef53b792ffe57a10dff212f6fc131d5a2280a56cb275741d45de705967e5d3",
+      "bytes": 146
+    },
+    "assets_public/scene_inspector/assets/ASSET-LICENSE.txt.azmeta": {
+      "sha256": "fe433be7e50d5864a0475c6a2ef16367ebdc4ea5e986c03fc771bed36be17b09",
+      "bytes": 112
+    },
+    "assets_public/scene_inspector/assets/cube.gltf": {
+      "sha256": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651",
+      "bytes": 6485
+    },
+    "assets_public/scene_inspector/assets/cube.gltf.azmeta": {
+      "sha256": "d794aaa642f4154a7566c28a57cb5a7b8e931f21374c03f35f8f33db646fc5f5",
+      "bytes": 112
+    },
+    "assets_public/scene_inspector/assets/inspect.lua": {
+      "sha256": "65cd3f51247e1d70013f16b5a0514202c17e634f192625fdbf9c558ed2a01ce8",
+      "bytes": 150
+    },
+    "assets_public/scene_inspector/assets/inspect.lua.azmeta": {
+      "sha256": "0e239402411bcafee6c9dbdf0511a2f0eaac629dd5bda5048edadb8b3e946211",
+      "bytes": 112
+    },
+    "assets_public/scene_inspector/assets/inspection.azurelevel": {
+      "sha256": "b88a44ec391d072dde4ddb0c9b9e7b09439f1e57c6c6e00d47fe80bce9dfc842",
+      "bytes": 2234
+    },
+    "assets_public/scene_inspector/assets/inspection.azurelevel.azmeta": {
+      "sha256": "720c81fa6f905704af8b57d9a4157b7665ca5919a3437c74662962cf2db9bce2",
+      "bytes": 112
+    },
+    "assets_public/scene_inspector/project.azureproject": {
+      "sha256": "d04fe53ea867533b30bb1607dd0871a101bb1121efb72699bed7276a8bf13f51",
+      "bytes": 721
+    },
+    "assets_public/scenes/clustered_lights_16.azscene": {
+      "sha256": "d69f57d45c85b0030b214270af99ded51851deb243c0c03c72aa3a5e59304edf",
+      "bytes": 3404
+    },
+    "assets_public/scenes/clustered_lights_empty.azscene": {
+      "sha256": "c53ccc0a679ad2bf25f7c8317f75ae5b011a8937364b5ae9b73f10090149256a",
+      "bytes": 612
+    },
+    "assets_public/scenes/material_mixed.azscene": {
+      "sha256": "e651448e474f3ff5fe9823fb46d40b7699ca0a5f8753363d11aa4fad4bcb17e6",
+      "bytes": 907
+    },
+    "assets_public/scenes/r4_stress.azscene": {
+      "sha256": "27d9f5c4bd4c1352c5d958f5963d34e907212dcdf5bc2580c46a3bdd24a919c0",
+      "bytes": 8580
+    },
+    "assets_public/showcase_looks.json": {
+      "sha256": "d9ba40a092c73bced1275fc10a7f5163134e9202327f29eab925762695849769",
+      "bytes": 1120
+    },
+    "assets_public/test_env.hdr": {
+      "sha256": "9935b3676f7fb92e0fbf9001c91813da70094f348c964d5e35498e19a9162b5c",
+      "bytes": 8303
+    },
+    "assets_public/test_env_strong.hdr": {
+      "sha256": "ab81b28cc59175c5070d2155cd96d523173dacf42db0c601a232e26b6c92e5d7",
+      "bytes": 8303
+    },
+    "assets_public/test_model.gltf": {
+      "sha256": "a17af75cbbf98bcdc751c1dc23506ec860e72ebef4204ad15c0262cd28391a95",
+      "bytes": 8307
+    },
+    "assets_public/third_person/CHARACTER-LICENSE.txt": {
+      "sha256": "be53cb6c25774e09d7f8eff01d850a71de5ede9a916a7e9407ed9439e79327eb",
+      "bytes": 499
+    },
+    "assets_public/third_person/explorer.gltf": {
+      "sha256": "4c35b283bb2e7565e37c73c0764c73fbf323337b0c94b209178489b745544e1f",
+      "bytes": 62414
+    },
+    "assets_public/third_person/fixture_hair_data.png": {
+      "sha256": "177f6c121d90c56ddac6abdf5b3ee75cf1d533c7ccdc273e89317679ae76e770",
+      "bytes": 77
+    },
+    "assets_public/third_person/game/assets/courtyard.azurelevel": {
+      "sha256": "863c0b3f4fb03abc2f26c835ddcaad97da189cc20e5255c475a5741fcc033f61",
+      "bytes": 5725
+    },
+    "assets_public/third_person/game/assets/cube.gltf": {
+      "sha256": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651",
+      "bytes": 6485
+    },
+    "assets_public/third_person/game/assets/guide.gltf": {
+      "sha256": "0817b2c40bc7211be56c6f3fcd7f540c0093a6f517b255b1a9f03f9d8ba19fe8",
+      "bytes": 64692
+    },
+    "assets_public/third_person/game/assets/hero.gltf": {
+      "sha256": "dcf625ab773c35aa6d1b9d833606dfe3e4314ba63f1b60951f6d6911bc321301",
+      "bytes": 62414
+    },
+    "assets_public/third_person/game/assets/locomotion.json": {
+      "sha256": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088",
+      "bytes": 202
+    },
+    "assets_public/third_person/game/project.azureproject": {
+      "sha256": "84933dc25d411d9235679fcd8a8b33f9a9c5603b20b39855fe9fdbd747719134",
+      "bytes": 245
+    },
+    "assets_public/third_person/guide.gltf": {
+      "sha256": "728038e1e60d9f6b518372d76bcd7e0b3ab7522840ccb66b80edbcc575ca0696",
+      "bytes": 64692
+    },
+    "assets_public/third_person/material_fixture.gltf": {
+      "sha256": "af33d262e6b23f1212d226ad9857760ded7c1ca66d745035da10f3b3ba557bbc",
+      "bytes": 46086
+    },
+    "assets_public/toon_ramp_atlas.ppm": {
+      "sha256": "ea9150c3bd3463042851cfbc3df31be07837d0b4d4f68b5b4b119f6b94db9c6f",
+      "bytes": 7214
+    },
+    "assets_public/toon_ramp_profiles.json": {
+      "sha256": "6cff7f3924267eb03b4c5c0f4f4369e9cc4c8a8abfdfb4e90b909609febf06b6",
+      "bytes": 2413
+    },
+    "cmake/AzureShaderModules.cmake": {
+      "sha256": "487594fa440de0687df61f655002bf1c5918d812ad69f71649f7566c64137d67",
+      "bytes": 4136
+    },
+    "docs/plans/engine-evolution-manifest.json": {
+      "sha256": "80d1654bc15f93825d7d359e581d32db39027efd92b14f44861ccea183cf33f8",
+      "bytes": 121180
+    },
+    "managed/EngineBindings/AzureEngineBindings.csproj": {
+      "sha256": "56823d1f12c3cff3d13912313614040efbbdafbfcdd52865251144f2cf1b3ad9",
+      "bytes": 595
+    },
+    "managed/EngineBindings/AzureObject.cs": {
+      "sha256": "3db4f686e7242425974444e8201c057455a2548e293f7aaa33dfa624145b1c41",
+      "bytes": 1019
+    },
+    "managed/EngineBindings/AzureObject.g.cs": {
+      "sha256": "83e30d11dce8c9770a86d621ca0d20e214f26d5a3e12f7eea84a5a83534743e6",
+      "bytes": 2378
+    },
+    "managed/EngineBindings/BindingContract.g.cs": {
+      "sha256": "ba7a2f76b936f67d784115e427cfa7961048348ec367142ff76bf84e6413de6e",
+      "bytes": 212
+    },
+    "managed/EngineBindings/Entry.cs": {
+      "sha256": "054610b06abc5f20a3826661e497f319b526ab6d4f0ba06eca260adc070610ad",
+      "bytes": 5912
+    },
+    "managed/EngineBindings/LoadedScript.cs": {
+      "sha256": "e840e503cfdfcc5d7704f9ac2180f4c496b3ba334f952b31d17a696f043f0750",
+      "bytes": 2261
+    },
+    "managed/EngineBindings/NativeHost.cs": {
+      "sha256": "0c172ec43f0072162048a8f5661ada6eda29466e85ee7ed4f4938cd315ae1e06",
+      "bytes": 2015
+    },
+    "managed/SampleScripts/AzureSamples.csproj": {
+      "sha256": "be8017ebfd72ac91ec38278a3b9709b1bbfdc98d2b9364e80b78881d7129dddb",
+      "bytes": 417
+    },
+    "managed/SampleScripts/Scripts.cs": {
+      "sha256": "69ec07528fff8c8bf7282cacc8ff0297bc159dacded1de7193081b54c5fe33dc",
+      "bytes": 1656
+    },
+    "managed/SampleScripts/types.json": {
+      "sha256": "4507068e73b84178d37cc2232a6db2f7c7000b7bb3babc6efd5b083d26a8b68d",
+      "bytes": 179
+    },
+    "mkdocs.yml": {
+      "sha256": "45f11e780b257588bdf6f6f04e8acf898218f7d67108cd02df69a0cf74a673a7",
+      "bytes": 7790
+    },
+    "requirements-docs.txt": {
+      "sha256": "bf59189e32448c77121f8b231665339407ac3409ea9cc860ccfc4265d27b6dc9",
+      "bytes": 25
+    },
+    "schemas/azure_render_material.schema.json": {
+      "sha256": "751e00ae107a4530b277a622a11fffc3df901ded8f08af7dc9d32c3ffecd0522",
+      "bytes": 3062
+    },
+    "schemas/gpu_capability_report.schema.json": {
+      "sha256": "ec5f4857f09733dba8ebef3489adea02492a7ba7d88806b35f713e9fc57eb0e7",
+      "bytes": 6103
+    },
+    "schemas/script_bindings.json": {
+      "sha256": "aad17c5e0e078f3b5023573ce1cf2b440f826e9e14e8ada4901fee22664b49bf",
+      "bytes": 2148
+    },
+    "shaders/background.frag": {
+      "sha256": "46198cda59d99f38daabd905749cb5d9e290f825af4da2f680c148a259cc63eb",
+      "bytes": 4432
+    },
+    "shaders/background.vert": {
+      "sha256": "0d8f4b311397551c203c90cdb230819f5a0a873c98f130eb1c6fe6f08553ae4e",
+      "bytes": 255
+    },
+    "shaders/blackhole.frag": {
+      "sha256": "b4ddbc6671923cb4bf17ad092473fef96f79f69785aeca6e1b152fad2bc052bb",
+      "bytes": 20872
+    },
+    "shaders/blackhole.vert": {
+      "sha256": "b4af1d443545d3209274a8a8ba4c98563dc7d57a657267feda4fa1c50c03a717",
+      "bytes": 523
+    },
+    "shaders/blackhole_composite.frag": {
+      "sha256": "be05b81ec63a54de40715f8207151b0a4d656f060f5d9204e00ffece12bb7c81",
+      "bytes": 341
+    },
+    "shaders/blackhole_taa.frag": {
+      "sha256": "37f0d5c84aec50bf2b940b234a6a8c741797d3e556a80c4fc987816282f94716",
+      "bytes": 3838
+    },
+    "shaders/bloom_composite.comp": {
+      "sha256": "3d76101221a10af1262e91101f2f4801ba90cffec078d77053093509e7b4f08d",
+      "bytes": 897
+    },
+    "shaders/bloom_downsample.comp": {
+      "sha256": "1a0a092d90f1a35cffa433459a3e1782228f5832b1181ad7e0c79e5df3a2a05f",
+      "bytes": 1112
+    },
+    "shaders/clear.comp": {
+      "sha256": "99ae6d2eb168bcf6130fe0a85525556accfa503b22284cf2b30b0686ddb6549c",
+      "bytes": 237
+    },
+    "shaders/cull_indirect.comp": {
+      "sha256": "2a45eddc419b2e7e06d94c2460cbba1597e8484dd54d12aafcc783cc24c80a6d",
+      "bytes": 1858
+    },
+    "shaders/editor_ui.frag": {
+      "sha256": "bbb87ccb77777b6f17ed85562e915b4ac8ca7038b9348370cc88065319e4762c",
+      "bytes": 528
+    },
+    "shaders/game-ui.frag": {
+      "sha256": "3f6b5910aeac1680b1ca7601a186645b83fede953fc131a0f5f7c80fa8175917",
+      "bytes": 324
+    },
+    "shaders/game-ui.vert": {
+      "sha256": "f6d6e22dcdb03f84ebe6c07e91aee36d6fe357e77effe8ff3047c043e9b6273e",
+      "bytes": 439
+    },
+    "shaders/hud.frag": {
+      "sha256": "e38a30e7810e1143308f3e9bfd1743995739af9358d9645c0ff429900311945f",
+      "bytes": 155
+    },
+    "shaders/hud.vert": {
+      "sha256": "33cb9a11d0527419710b9b61a226bca97efe6797a76a4385eaad322063a15c08",
+      "bytes": 230
+    },
+    "shaders/ibl_prefilter.comp": {
+      "sha256": "b6653f6ed760c232a1d35080f186c5647861417f3c9ef14c676079451fa25342",
+      "bytes": 2469
+    },
+    "shaders/inner_outline.frag": {
+      "sha256": "c6ef9a4a1d5fcd29af601459aaab6aea2b949869af8af0788b92839578672d4f",
+      "bytes": 6114
+    },
+    "shaders/inner_outline.vert": {
+      "sha256": "dd42fd9ebb4f4708448d035c1fda298c1610ad96d9cfb71e9a0dd792019e42bf",
+      "bytes": 267
+    },
+    "shaders/mesh.frag": {
+      "sha256": "fd454e037fc4234f39ad694c15d868e28886c5a7fab3b54084290461a863eddd",
+      "bytes": 35696
+    },
+    "shaders/mesh.vert": {
+      "sha256": "e34f15eb91850d66dbff7161be29b6dec11ca2c3f23b7de01dbe9e0ac29b3718",
+      "bytes": 5571
+    },
+    "shaders/modules/Bloom.slang": {
+      "sha256": "e504ad7793fba45fa0af788a7706d1967cd8d32c0dcb7b7b5a7da130f397346c",
+      "bytes": 1035
+    },
+    "shaders/modules/BloomAlgorithm.slang": {
+      "sha256": "018d8664b675969afaa1d194933cf66c43f2c699fbb9883b1683786345739479",
+      "bytes": 388
+    },
+    "shaders/modules/SharedTypes.slang": {
+      "sha256": "87deb7933f84b829dde50d011d7b06a98ddb81b98718cc2dbad24064526947cb",
+      "bytes": 147
+    },
+    "shaders/modules/interfaces/BlockSamples.slang": {
+      "sha256": "1ac32d0d14864b0f878ff5bace8235d32e755e04ad82c115b737702351e51985",
+      "bytes": 143
+    },
+    "shaders/modules/shared-layout.json": {
+      "sha256": "015779714fd26b7d382228146e520994619f7626b654a3f79782a025f67d7e81",
+      "bytes": 311
+    },
+    "shaders/modules/strategies/BlockStrategies.slang": {
+      "sha256": "47b17e174727689cac652df148e76e0da50650928c73ee289aa208ce17d581ab",
+      "bytes": 558
+    },
+    "shaders/outline.frag": {
+      "sha256": "1ed6e57123a890f316d325dff063f314c032e005d15f551b90004a0832e97695",
+      "bytes": 222
+    },
+    "shaders/outline.vert": {
+      "sha256": "689f6426082f20814ca40217805372cd8c78dff5ff746d8ec74ffae772465ad6",
+      "bytes": 2703
+    },
+    "shaders/shadow.frag": {
+      "sha256": "081d997e9b69a2fda7139c4298e05fd8c82b2ef122f0b7298c5d22a45dc3a728",
+      "bytes": 1211
+    },
+    "shaders/shadow.vert": {
+      "sha256": "ba0e33dc1379a416da4c52e30c0e7f3d51283b89e045f3a87efde24685434512",
+      "bytes": 2644
+    },
+    "shaders/skin.comp": {
+      "sha256": "b1e356ab860de41a1169abb3193a27b53a681b18bb73e6f00cfeed532f8bbcfd",
+      "bytes": 3983
+    },
+    "shaders/view_resolve.frag": {
+      "sha256": "1986a5eb2f0c8415839bd74f32b75118761578d8d2cc852ab7efe4956023209c",
+      "bytes": 929
+    },
+    "src/ai/ModelClient.cpp": {
+      "sha256": "00517ad1b0c43c8bdda6167a2ebdfa44709663b16493a825cb52d011aad1fbfe",
+      "bytes": 5206
+    },
+    "src/ai/ModelClient.hpp": {
+      "sha256": "a63f92d99f51e55d7de702c164327f2d36c9a0b4b205394266ecbe6753f53f99",
+      "bytes": 2349
+    },
+    "src/ai/ModelProcess.cpp": {
+      "sha256": "6f8b2918eab6b151ee5dcc1a05dcf7b22f5f464c76d9274dd41026c636e1fdaf",
+      "bytes": 9128
+    },
+    "src/app/AzureRenderApp.cpp": {
+      "sha256": "bbc9f801ac000dcbbcdb08f576a27f022559c54ac474d253145db9b92568d2fb",
+      "bytes": 77552
+    },
+    "src/app/AzureRenderApp.hpp": {
+      "sha256": "1007701ab18240fcc7db90fd8784a7aae51d04fa312c5f8ec3503fa33bb9fb00",
+      "bytes": 20564
+    },
+    "src/app/AzureRenderCapture.cpp": {
+      "sha256": "82a1b6e0a10164519c4453642422a06e4c4d4f787fe5618642808e419314c98e",
+      "bytes": 35248
+    },
+    "src/app/AzureRenderDescriptors.cpp": {
+      "sha256": "13a589753dc7fb62c569f69d8680b5ece417eb6963d6bc045ef3deed2bc0e831",
+      "bytes": 6176
+    },
+    "src/app/AzureRenderDevtools.cpp": {
+      "sha256": "e7365c162a7504f2ea47bc834edb834340c208367c39891f71a626df4a394123",
+      "bytes": 15993
+    },
+    "src/app/AzureRenderFrame.cpp": {
+      "sha256": "25988779378e51984222c50e5393aa2c3f1f7996ae60a6a908ba824845930906",
+      "bytes": 54541
+    },
+    "src/app/AzureRenderGameplay.cpp": {
+      "sha256": "bd3dc65e1f8db9906e0dd958f5625c2be03f36582b0cc50cf9a62fb693dc5030",
+      "bytes": 9360
+    },
+    "src/app/AzureRenderInternal.hpp": {
+      "sha256": "8ee83d26fbe8ce78adb471026a92197ac668a8dbc695b651f1cd3c451745f069",
+      "bytes": 48
+    },
+    "src/app/AzureRenderOptions.hpp": {
+      "sha256": "e42999d130bd21765275434a853704d1904f9420184274f1169a27d19cddadc3",
+      "bytes": 2867
+    },
+    "src/app/AzureRenderPipeline.cpp": {
+      "sha256": "407ba9d02237585cc0f69cd73eace7f46c65cb04afdf283d042a503925480b96",
+      "bytes": 21983
+    },
+    "src/app/AzureRenderResources.cpp": {
+      "sha256": "24be9fcf218717892edd9043cb22ec1c67035fe97def4a485e5733f34fdbeef7",
+      "bytes": 9056
+    },
+    "src/app/AzureRenderSettings.cpp": {
+      "sha256": "3464eb6fea743bfe56beb2c17a4c5e85f1581cf622bc6e0b6d66657f08ee7178",
+      "bytes": 2623
+    },
+    "src/app/AzureRenderSupport.cpp": {
+      "sha256": "807c73624503dc42639e2edf7df4b222b196e2b120300e23433437117f98a3c0",
+      "bytes": 29222
+    },
+    "src/app/AzureRenderValidation.cpp": {
+      "sha256": "8a5399b1777b971c6df8bd1b9a7f56e414f6d819d4fd6fb9afd26f9ca0a032ba",
+      "bytes": 9029
+    },
+    "src/app/CommandLine.cpp": {
+      "sha256": "0f033189d59791afeaedd1eb0640a69004c123abfdfa98c634e4b346606ae48a",
+      "bytes": 29101
+    },
+    "src/app/CommandLine.hpp": {
+      "sha256": "492162d41efc8dbccd5286786f07e7dd06552ae2adf95b0a086d0cfb2ec1e480",
+      "bytes": 1323
+    },
+    "src/app/ProjectRuntimeAssembly.cpp": {
+      "sha256": "4f2b1c77155a137bc7f21e9f568ed08561d0051b47e7241537ef80341da46b88",
+      "bytes": 2854
+    },
+    "src/app/ProjectRuntimeAssembly.hpp": {
+      "sha256": "f1a6edec82a47be544e5554954232cc4a3c197af2a38a3d68a8cd4615267953f",
+      "bytes": 432
+    },
+    "src/assets/BrowRegions.hpp": {
+      "sha256": "8fc3b59906349417f0b5e420e8d472282d516f82617196493661e1052d6af0b5",
+      "bytes": 3259
+    },
+    "src/assets/GenerationManifest.hpp": {
+      "sha256": "f3be9e6e454c5badaff225cfe183f7b3f1266b9edd4ea6b8f3bfa6aa5564aeda",
+      "bytes": 515
+    },
+    "src/assets/GeneratorRegistry.cpp": {
+      "sha256": "5adb57f46ce896a6bd54ab50f19d1efabac5ed755eb600805ca0136c6f711073",
+      "bytes": 5785
+    },
+    "src/assets/GeneratorRegistry.hpp": {
+      "sha256": "0060e667c58bb7bff048a627ce2b308ae8226cfb8e0bc27beda8efa0e4816933",
+      "bytes": 986
+    },
+    "src/assets/GltfLoader.cpp": {
+      "sha256": "8002a72edc631e5201fb0e53018e33dfb92f81c7ba2a64d3d270ecebeeae69a8",
+      "bytes": 82438
+    },
+    "src/assets/GltfLoader.hpp": {
+      "sha256": "d541e3c1f0c05a50596491df602e2909079fbe5720b344f207dfb29dfa5ce240",
+      "bytes": 6804
+    },
+    "src/assets/generators/GeometryCompilerAdapter.cpp": {
+      "sha256": "43516969bfe4ee70a97d350b3a60cbd39f4d366d86d8b5a8deed4c95fb00c819",
+      "bytes": 14827
+    },
+    "src/assets/generators/ProceduralContracts.hpp": {
+      "sha256": "8fc32c7a1f48f2702de47cc164ecbd7da5fd43cc7f145f4c735ea280c6159857",
+      "bytes": 1032
+    },
+    "src/assets/generators/ProceduralGltfWriter.cpp": {
+      "sha256": "b11087ede6e245f8a283c46298ab578c07f4fd0e5825b551a47433853676fc7e",
+      "bytes": 5665
+    },
+    "src/assets/generators/ProceduralInternal.hpp": {
+      "sha256": "2b1c415d0e64066aaca8cc9e0e54b992a0f073ffae5628c04efa0d4691186a32",
+      "bytes": 2084
+    },
+    "src/assets/generators/RigTextContracts.hpp": {
+      "sha256": "44af7d21068c9fdb997cac84e51d18259851d9a987af5085920f6db6c4f71239",
+      "bytes": 316
+    },
+    "src/assets/generators/RigTextGenerator.cpp": {
+      "sha256": "b0a64008781f10a5cb7ae9f502345a2a3abb40cef4c596047056fde2d2f92130",
+      "bytes": 9116
+    },
+    "src/assets/generators/ScadGenerator.cpp": {
+      "sha256": "7d27858ccaaf05d4a6fed3507b0ce209943fbfe3a47fcddf756f99a45bcf520a",
+      "bytes": 3893
+    },
+    "src/devtools/GeometryProcessCompiler.cpp": {
+      "sha256": "5fec6356d730b78d54b8a5b00e80ef5f2ca6cc1150605211679563cc72ba1267",
+      "bytes": 4359
+    },
+    "src/devtools/GeometryProcessCompiler.hpp": {
+      "sha256": "3cc3b41a27486ac19351bdf53390a8c280ad4a018829ee293ae71a46aabe1a80",
+      "bytes": 421
+    },
+    "src/devtools/ShaderCompileJob.cpp": {
+      "sha256": "6b6ec0a70977981f7ee220b25536d9af512d3c52d3be63c31887ad7b370b469f",
+      "bytes": 5725
+    },
+    "src/devtools/ShaderCompileJob.hpp": {
+      "sha256": "8e5e1d54cc350d34fa6f468ce8d73237c2064629ebd3ece94d3977bc4d207b2f",
+      "bytes": 597
+    },
+    "src/devtools/ShaderHotReloader.cpp": {
+      "sha256": "6b0411fc68137a149f7584c9ff92f96f36b54cae00ede0138c1e0e1607c75752",
+      "bytes": 7082
+    },
+    "src/devtools/ShaderHotReloader.hpp": {
+      "sha256": "653b12b673bb50d52252ebac54f3856dc4039c038e0cf41f33491a58b334229b",
+      "bytes": 654
+    },
+    "src/diagnostics/GpuCapabilityReport.cpp": {
+      "sha256": "ff8556ddf2da0072e602e18e14b502936adb95a09342b24a1995f7beff8dc140",
+      "bytes": 6378
+    },
+    "src/diagnostics/GpuCapabilityReport.hpp": {
+      "sha256": "0f276e912183d8916174b62b28f4052f206f4038197e41531fdaa0fd9389349f",
+      "bytes": 1116
+    },
+    "src/diagnostics/RuntimeDiagnostics.cpp": {
+      "sha256": "5947a7dc9bae64e8717e68c4ac986cd3d884dbb4b37cabd1e85406770e6b1c0d",
+      "bytes": 4578
+    },
+    "src/diagnostics/RuntimeDiagnostics.hpp": {
+      "sha256": "1ca52966be0066f251c694dd3553e6f6a6f6f1178d62419b73fdc243e50e5d11",
+      "bytes": 2006
+    },
+    "src/ecs/ComponentArray.hpp": {
+      "sha256": "659eeb9c027c5bab076ac26f97dd0c1d0f0bd99f887a79c85d3eacd8b4050c31",
+      "bytes": 3640
+    },
+    "src/ecs/Components.hpp": {
+      "sha256": "40fa46fec4d90e7aa3c369627477933412f74bc993e6a9154866255f920e2931",
+      "bytes": 1761
+    },
+    "src/ecs/Entity.hpp": {
+      "sha256": "7ba5c033fbc5ff4a278502269cdb3310d9ec379337203785a17e6fdfac5d7c26",
+      "bytes": 314
+    },
+    "src/ecs/GameComponents.hpp": {
+      "sha256": "ac4609fd5622f7e627ac99baf247a2abdc63820eda94a2ce2d5d9285bc295472",
+      "bytes": 5249
+    },
+    "src/ecs/IComponentArray.hpp": {
+      "sha256": "a5897dc6bcbe989bb13df532e2b211b9ce7a1425f05cab1fcc7d4806e61da8c1",
+      "bytes": 596
+    },
+    "src/ecs/World.hpp": {
+      "sha256": "05f445b3ef3b707e0800909816670902981e10886f591d3823f7f92b46b7e2eb",
+      "bytes": 6754
+    },
+    "src/editor/AssetImportJob.cpp": {
+      "sha256": "37b187a0acd9ac6646224f9d0904948b9bca35a480b2553c7071617b03789c26",
+      "bytes": 4074
+    },
+    "src/editor/AssetImportJob.hpp": {
+      "sha256": "3f37bd5e59647a06a63856891028e5dcac7d541ff12d29e9a40ee358a766c8a5",
+      "bytes": 968
+    },
+    "src/editor/EditorAutomation.cpp": {
+      "sha256": "34c89c3f4e99c99e6b4ec9b4c90664614a1b9725654fe1f7048c8a7f1186f399",
+      "bytes": 7762
+    },
+    "src/editor/EditorAutomation.hpp": {
+      "sha256": "3752bf26d74017e1cf2de634c4e1e42b808c6a578b314ea1d9856d78fa887076",
+      "bytes": 942
+    },
+    "src/editor/EditorCameraController.cpp": {
+      "sha256": "036994310d3e261493708e8b807b591e7435f0f21a4ebe10c6b8a47dae887ff9",
+      "bytes": 2947
+    },
+    "src/editor/EditorCameraController.hpp": {
+      "sha256": "45f936004b3ec714daf9c4ad32238175ba39773e0d142db13861a2e7e0da630f",
+      "bytes": 658
+    },
+    "src/editor/EditorContext.cpp": {
+      "sha256": "5f324176923cf960598ffb391d8e5c5c8df5e40767df8ecdfa3d940c3757bb1d",
+      "bytes": 18254
+    },
+    "src/editor/EditorContext.hpp": {
+      "sha256": "8e3cffbb5930b8325525b28f73ae86a30aac1551ee538c9e0f92001292963edd",
+      "bytes": 9907
+    },
+    "src/editor/EditorProjectEditing.cpp": {
+      "sha256": "96abaf79f6052d6909a8fdeaf3deae86dce8b65b7b5a6764f93b24d3f8aa2a6f",
+      "bytes": 21235
+    },
+    "src/editor/EditorSession.cpp": {
+      "sha256": "cf9b87fe8e43bdb77eda9376a716ebb17879793e42bf80f6bc02b3d53189edd7",
+      "bytes": 11412
+    },
+    "src/editor/EditorSession.hpp": {
+      "sha256": "0c40fc53ff09f22edf9aa8f097583f4cd306366e371775b2f432b517415fef93",
+      "bytes": 4669
+    },
+    "src/editor/EditorTheme.cpp": {
+      "sha256": "3485d9d4738dcb93a94db7df6f28e90843e2a0467e8a73db6a6fe7adc88ec3c3",
+      "bytes": 1885
+    },
+    "src/editor/EditorTheme.hpp": {
+      "sha256": "19b7434b81e1bcc6834faa0ac6e8ef8461276df486e6fac7f919ec92d5819e26",
+      "bytes": 98
+    },
+    "src/editor/EditorToolbar.cpp": {
+      "sha256": "89e4f59b69319f88c737a4e0cd02a8a5e5329950b2d6a347e3888257c3c711c8",
+      "bytes": 6415
+    },
+    "src/editor/EditorToolbar.hpp": {
+      "sha256": "22f30a9bf6b6e472d8aefbdad2735316f01f0229f19e4163643ae9e635688b41",
+      "bytes": 392
+    },
+    "src/editor/EditorWorkspace.cpp": {
+      "sha256": "e404bae654b1f2f83aa6c9330a2b90aeaeb0251f4e8eab57a8d5d472d0be6241",
+      "bytes": 5540
+    },
+    "src/editor/EditorWorkspace.hpp": {
+      "sha256": "4933a4c9cc534fea8d54a87972cbcd864a7ee93c8d2050f105d97984408e34bf",
+      "bytes": 1486
+    },
+    "src/editor/EditorWorkspaceUI.cpp": {
+      "sha256": "3b916cedb7e3eb09426e7db11adf7bb258be5cf6b3a91286ba672e30a12ceda7",
+      "bytes": 10004
+    },
+    "src/editor/GameBuildJob.cpp": {
+      "sha256": "82a53890b5018718df9ff84e204ebf81e539ba2aa4456ebaa4af7cb8671551a6",
+      "bytes": 3980
+    },
+    "src/editor/GameBuildJob.hpp": {
+      "sha256": "635119ea011a96ba4a08e4d01d2ac21612eedbdbda1a8b35e3d93cc4451b44c2",
+      "bytes": 496
+    },
+    "src/editor/GameplayDebugGeometry.hpp": {
+      "sha256": "69b8afafb9aa7f8160f076f43618f88e93ee25174b46026b406e4162494d973b",
+      "bytes": 2588
+    },
+    "src/editor/IEditorPanel.hpp": {
+      "sha256": "e5d7468bafe89c0b62e316dab588100aa635ced43a1a4710bd2453ec75c22679",
+      "bytes": 54
+    },
+    "src/editor/ImGuiEditorLayer.cpp": {
+      "sha256": "3763002a6bebedd14a1aaff4e57b911d95f52a96af5306495f903de6b9fa5923",
+      "bytes": 32201
+    },
+    "src/editor/ImGuiEditorLayer.hpp": {
+      "sha256": "955606fc0e977082cf9263bf896ae9e4c010fad34debd859aaa32f4fbcfdf295",
+      "bytes": 5419
+    },
+    "src/editor/PanelContext.hpp": {
+      "sha256": "5a806b88cf9ececf19b1cc69fdbb58089f7f5ba14c935b92679c71bf6bfe2a01",
+      "bytes": 713
+    },
+    "src/editor/PanelDocumentView.hpp": {
+      "sha256": "0cbf799b4cafb290b8083b76276234aaff0014a08083ca7961bb7dd9b4b76af2",
+      "bytes": 1640
+    },
+    "src/editor/SceneModel.hpp": {
+      "sha256": "69ab05927e9faf7e6045e1c9bb4f97c943b7f3d35bf07d36861f0d04fb033dac",
+      "bytes": 52
+    },
+    "src/editor/SelectionService.cpp": {
+      "sha256": "35ccd3d2770b0b87bf58d4f64dcf7b174e56c34858141256fceb2fb3fd476a8f",
+      "bytes": 1105
+    },
+    "src/editor/SelectionService.hpp": {
+      "sha256": "83ec88cd902c59326e16dc7fdc32d010e75d93dfbc3b69a6ec2cdb432c51ec81",
+      "bytes": 418
+    },
+    "src/editor/ai/ProposalContracts.hpp": {
+      "sha256": "f71b58adcc845acdd631d73da5a213840bd17af6e74bc8b7775cd040adb61571",
+      "bytes": 1091
+    },
+    "src/editor/ai/ProposalController.cpp": {
+      "sha256": "14d60b902082c40b8ff849d29caae39c7d4f76ccbef0aad731b8fb86e15446c6",
+      "bytes": 11393
+    },
+    "src/editor/ai/ProposalController.hpp": {
+      "sha256": "d63ac2a66cf14cd5813c5e105f283c9d1db6b0fa5300a4c81968aea0321ec4ec",
+      "bytes": 1745
+    },
+    "src/editor/ai/ProposalOperations.cpp": {
+      "sha256": "1ca5a263b9438b9a34123bcd5ff117a99d0bb03261c652b45c59102deca1ec41",
+      "bytes": 2466
+    },
+    "src/editor/ai/ValidationPolicy.hpp": {
+      "sha256": "bd2dde9d7e8d24fb955569043ea78d41ad6a745d49842ca8190a327a80cd7b97",
+      "bytes": 612
+    },
+    "src/editor/ai/adapters/ProposalAdapters.cpp": {
+      "sha256": "c7211440a92f89694f4c8c362250e1912d048a8baa55b29872cd1d20f2a2dafd",
+      "bytes": 9961
+    },
+    "src/editor/commands/DocumentVersion.hpp": {
+      "sha256": "72ae71bf4bb4882042db98d31ae440ed613e8d641d66fa227c444dc09cf78f8b",
+      "bytes": 696
+    },
+    "src/editor/commands/EditContracts.hpp": {
+      "sha256": "45346eaa5f3822c3b45e282033420895f7e31a3f8aa9d6c6dab7c96fb92ae7e8",
+      "bytes": 969
+    },
+    "src/editor/commands/EditRegistry.cpp": {
+      "sha256": "a6d6e3dc6cb67993f9bb44f43227af22cbeaa38ef61aec2c283313ea3666f7ae",
+      "bytes": 3022
+    },
+    "src/editor/commands/EditRegistry.hpp": {
+      "sha256": "f8e9147cafa5989f6efafc75bab312d51bd7f85150a5893a2386025b0fe03ebe",
+      "bytes": 764
+    },
+    "src/editor/commands/EditService.cpp": {
+      "sha256": "d403f6049e7494889759442d257367dded3296dc456dd138bbbfd399f3791b76",
+      "bytes": 4736
+    },
+    "src/editor/commands/EditService.hpp": {
+      "sha256": "cbd9517fe9a83275afc6e058798dd50d3a4735c753f1fa46e23d38717c380c34",
+      "bytes": 973
+    },
+    "src/editor/commands/EditTransaction.cpp": {
+      "sha256": "2f85f27bd1261a33bb088ab21f46ec9bbb9269d0d4e24f8b612eb2e6937b9260",
+      "bytes": 7542
+    },
+    "src/editor/commands/EditTransaction.hpp": {
+      "sha256": "7095da26d4cffa10f362e2df2020a050e39e478fde494ffe63574b16eefad466",
+      "bytes": 352
+    },
+    "src/editor/commands/EditorOperations.cpp": {
+      "sha256": "45d309e515d79ed4a39c7bd38c66e1f00f647195b3890824fada1a510a4c6819",
+      "bytes": 14212
+    },
+    "src/editor/panels/AnimationPanel.cpp": {
+      "sha256": "8f459aad3668c94027e229bbd6469f5ca553adeccbc54879a0444010dceb0deb",
+      "bytes": 3416
+    },
+    "src/editor/panels/AssetBrowserPanel.cpp": {
+      "sha256": "a1a2286535638d63e0c8146d3d5455867cb228de743e49a7e5c6384f7ea906aa",
+      "bytes": 9316
+    },
+    "src/editor/panels/BuildPanel.cpp": {
+      "sha256": "e4bf758581dca69b4286c90b194aeb9b1b0347d74e504e68d552b85ea892cab6",
+      "bytes": 2269
+    },
+    "src/editor/panels/CapturePanel.cpp": {
+      "sha256": "274be3a302f25a2c7da57d0f87eff092c32910d06e8accf99a57ba6efb9cb456",
+      "bytes": 2368
+    },
+    "src/editor/panels/ConsolePanel.cpp": {
+      "sha256": "f7ae1cacba3f0f03b7b14c2fd417a38a9cd914c03928cee693b75b16a5549e6d",
+      "bytes": 5358
+    },
+    "src/editor/panels/GameplayDebugPanel.cpp": {
+      "sha256": "bbd49221fc9165e018cb91e2b064eac666be4d2baba8dea7d7c8edd92a2295a9",
+      "bytes": 3591
+    },
+    "src/editor/panels/InspectorPanel.cpp": {
+      "sha256": "8fcdc85bfa793ed37ad8fd90bdad968bd80ea0e4e8d0d9c0f3f262c145612b09",
+      "bytes": 10107
+    },
+    "src/editor/panels/OutlinerPanel.cpp": {
+      "sha256": "a9ec4b9e8a5fb7d000acac35cc6e6ec0bea6216f2d010a8553602607e15ebbea",
+      "bytes": 4757
+    },
+    "src/editor/panels/SettingsPanel.cpp": {
+      "sha256": "ac23d9f9e0c02a11506543aa2d1462f144e5c79580a66cfc11ba901a93ab09e3",
+      "bytes": 2823
+    },
+    "src/editor/preview/AssetThumbnailService.cpp": {
+      "sha256": "428f639a624ec1694af62807d1f809f9bee0552fed427346ab3ddcc1c542d8ae",
+      "bytes": 1961
+    },
+    "src/editor/preview/AssetThumbnailService.hpp": {
+      "sha256": "a3e03b2f24de782385678cea16c482aec36ae8b45933262b6a0bfae3d08c5af2",
+      "bytes": 881
+    },
+    "src/editor/preview/DeveloperServices.cpp": {
+      "sha256": "cd5a395450eedf660d757a88b3676f5e17e89c65596586d372d85491c3caf82c",
+      "bytes": 2137
+    },
+    "src/editor/preview/DeveloperServices.hpp": {
+      "sha256": "25d5f3b8461a82c3e410fd904cd17a6cb6489cbbb6dda9e0ce57b3a7d56d0cec",
+      "bytes": 620
+    },
+    "src/editor/ui/AppChrome.cpp": {
+      "sha256": "dcfd3ee59adcf3c6cb920467082027ec7e2582e982868489919baa9e6eff1a3e",
+      "bytes": 263
+    },
+    "src/editor/ui/ThemeTokens.hpp": {
+      "sha256": "09eb73e3490d63b29544429c8bf6327cf962703da3ce61a0e8d0384e9483cb9d",
+      "bytes": 533
+    },
+    "src/editor/ui/UiMetrics.hpp": {
+      "sha256": "2cc557afc67e7464bc42e300bdc90f99b885b7aa5c787cf52a4ceb9e08a643b6",
+      "bytes": 469
+    },
+    "src/editor/ui/UiScopes.hpp": {
+      "sha256": "77a98559dbe92f76412c2f820c002d157992221e0efa4774d1c65413971c4a6e",
+      "bytes": 1436
+    },
+    "src/editor/ui/Widgets.cpp": {
+      "sha256": "47690ef49b673bc273752d5fbfe234fed6bb5dae3917f60a9ccf525f33f93809",
+      "bytes": 972
+    },
+    "src/editor/ui/Widgets.hpp": {
+      "sha256": "66a9e4b0395df32923e5cd0924ea9d99fd8a79649fb7d0725b045afec7d292a1",
+      "bytes": 563
+    },
+    "src/extensions/ExtensionDescriptor.hpp": {
+      "sha256": "227a1e65bcc20bc5b628abbac29a4370ebe735d52ca9fe443a85303ce07a93d0",
+      "bytes": 266
+    },
+    "src/extensions/ExtensionRegistry.hpp": {
+      "sha256": "52f719364f072f7cb9161d2bc823190e1805196096fc8f4efbfec33dde551056",
+      "bytes": 3750
+    },
+    "src/extensions/IAssetImporter.hpp": {
+      "sha256": "c08eb69d4d33e5e6af683066a6be717018a8e09d8e4a1d0ddbb4ddd5e85d5a85",
+      "bytes": 284
+    },
+    "src/extensions/IEditorPanel.hpp": {
+      "sha256": "a5979b51fe16b4eb5ce021d914482c885fa8bec6611ed8ae89376b6903c67228",
+      "bytes": 392
+    },
+    "src/extensions/IRenderFeature.hpp": {
+      "sha256": "71ad0c3e745651d7eb70f71661625f9fbfa1379a21518c7b72293a2c624d47db",
+      "bytes": 250
+    },
+    "src/extensions/ISceneRenderer.hpp": {
+      "sha256": "a5a63aee4088ca650dff4093be264b8eee622bc606742a379e4ac8f7e820016b",
+      "bytes": 5803
+    },
+    "src/extensions/SceneType.hpp": {
+      "sha256": "dd1979e7c5d259c5efb8e16b512c62660908088d35b0aaa71dddb719ac5e2a99",
+      "bytes": 1497
+    },
+    "src/foundation/SettingRegistry.cpp": {
+      "sha256": "1fcfce56f6332db53e2bb3ef90e2663aaf193f116c7ea17f32b34e4a525e3a23",
+      "bytes": 7292
+    },
+    "src/foundation/SettingRegistry.hpp": {
+      "sha256": "71c1edb7f0d18b668c4faa655bbf494cd4a01a44ceb490f0a5396979de19a5b6",
+      "bytes": 1919
+    },
+    "src/gameplay/CameraFollowSystem.cpp": {
+      "sha256": "aa459fe3c0dbe774d8c72e7e1393d10d65ed0ed5904f6fbb5a3f7664a1460527",
+      "bytes": 2321
+    },
+    "src/gameplay/CharacterMovementSystem.cpp": {
+      "sha256": "2144e4ef3212cfdeb0c5f00d0a100be6a896b1b9f02fe6b50584fff12aa4e568",
+      "bytes": 3809
+    },
+    "src/gameplay/InteractionPolicy.hpp": {
+      "sha256": "9f10de75e950c43245a1b7d556ddbc2e31a3cc268c9b751f93718cc2761c076c",
+      "bytes": 228
+    },
+    "src/gameplay/LocomotionSystem.cpp": {
+      "sha256": "677b0345a4556283ec25d4dab7e41673bd390746ab76a1578f793fda967da9aa",
+      "bytes": 1979
+    },
+    "src/gameplay/SharedSystems.cpp": {
+      "sha256": "70fb05cb6d5bacf6f8eebae9e82327f3229564b6456abdc60d0f31c78ad4dbb7",
+      "bytes": 1800
+    },
+    "src/gameplay/SharedSystems.hpp": {
+      "sha256": "9c8d1ad01f882532d49aa8c4b2f7f7c68ba924a363cb1104624b4090d4ca3752",
+      "bytes": 390
+    },
+    "src/gameplay/SystemConfiguration.hpp": {
+      "sha256": "82582fd1fa3fe7f6380ecdf41fbd3ae96c9d7dbd6e7d3accdc9ea8d43b100247",
+      "bytes": 748
+    },
+    "src/main.cpp": {
+      "sha256": "09c574f0b40828672d9456e13fced60e58ccf0d9f92c7c6019b0bcb6ae551ab5",
+      "bytes": 6650
+    },
+    "src/platform/BinaryFile.hpp": {
+      "sha256": "79412ca55ba0319fcd62e3dfc935d5cac7a04ba6c70e7c2e1fa8184b3d0ff769",
+      "bytes": 51
+    },
+    "src/platform/GlfwFrontend.cpp": {
+      "sha256": "a9e52424fc1537b39d94b4b3221c833ee199c1d479afdfd45d0959a7a81cd7b0",
+      "bytes": 2584
+    },
+    "src/platform/GlfwFrontend.hpp": {
+      "sha256": "a6656b8670e89644f0fa918b29c69e6a71e02457f8227a5eedc0114a2da75163",
+      "bytes": 1313
+    },
+    "src/platform/ProcessRunner.cpp": {
+      "sha256": "4771ad416e36c92c56ac97acec69c7a9556cfabf08eb704d48af6b3b7b8d4e42",
+      "bytes": 6465
+    },
+    "src/platform/ProcessRunner.hpp": {
+      "sha256": "c6e8cd46fd5ca2869b78841f2a04387eda9cce7a8a08b4ac5923ba71a66f5840",
+      "bytes": 654
+    },
+    "src/platform/SurfaceLifecycle.hpp": {
+      "sha256": "1e129fdccfe69c63ab658db46dc934512b14330be9c0c78bb378321bc9bea46b",
+      "bytes": 371
+    },
+    "src/player/main.cpp": {
+      "sha256": "66c6a4b0e852b80359293ad8c0d852c8337cae3b84b416f5c94f39da04589c6a",
+      "bytes": 6482
+    },
+    "src/reflection/Annotations.hpp": {
+      "sha256": "8c618f2c2c80e85201e976a300fc0244e1e76f358edc5e3cd95b8ce4e68dba81",
+      "bytes": 159
+    },
+    "src/reflection/Registry.cpp": {
+      "sha256": "64154b51e94db4f727520dc32e9dc525c7ab7771e98eb73ed6d4c7249f51ac7e",
+      "bytes": 4792
+    },
+    "src/reflection/Registry.hpp": {
+      "sha256": "6eab56d1ac97f3c45590c6655924fd1afdac92a234de45b718f1c3c8d4543c68",
+      "bytes": 4502
+    },
+    "src/render/CameraProjection.hpp": {
+      "sha256": "e184bea82a58b04e525eac289d4a9c6ca452364277464a60256e457ef5fc18cb",
+      "bytes": 423
+    },
+    "src/render/CascadedShadow.hpp": {
+      "sha256": "6adb80a2a26b0aa333ecfd4e6dfa742489a66987351c5dfb77b484a85e074ec2",
+      "bytes": 1315
+    },
+    "src/render/ClusteredLightGrid.hpp": {
+      "sha256": "b651e33026ea341fc02ae028d344b5d13b10af48a902b71e5a3036522d182488",
+      "bytes": 5608
+    },
+    "src/render/ComputePass.cpp": {
+      "sha256": "87dbfae8056027b309f4e767e594b276e406317fcc6e087bda200036bbc48077",
+      "bytes": 1254
+    },
+    "src/render/ComputePass.hpp": {
+      "sha256": "e953d76b04435f7db531314a5cd1456aa761ffd207925054ed59f1a12a02280f",
+      "bytes": 1105
+    },
+    "src/render/DeformedBounds.hpp": {
+      "sha256": "2bce6fd5085b61b36514af51a7ace191dd80e98b129d8d8eae70a1bcf1d6b2b2",
+      "bytes": 5808
+    },
+    "src/render/EnvironmentAsset.cpp": {
+      "sha256": "9aa1de43c7a4cdf14a1a1435c0dc84e377402d4864a502e956af91091467152d",
+      "bytes": 11307
+    },
+    "src/render/EnvironmentAsset.hpp": {
+      "sha256": "4d70d3d77528d13db313a92e1ee5cde81dcf8e4b83f41f69e312f83ed60e9ae1",
+      "bytes": 884
+    },
+    "src/render/FrameTaskScheduler.hpp": {
+      "sha256": "9468d1f6f7d911805c7ce469b97efa4e422120a67f264c513b7b7890b6c25174",
+      "bytes": 2151
+    },
+    "src/render/GameUiRenderer.cpp": {
+      "sha256": "d46a0dc3e571a7af67d02fec6487d714b94361b0369ddff67c265b4fe6d8c4f1",
+      "bytes": 11531
+    },
+    "src/render/GameUiRenderer.hpp": {
+      "sha256": "cd4589d261e38a874fbc89b8dc621cf2912975f5c85423c8b91edc9146a65238",
+      "bytes": 1307
+    },
+    "src/render/GpuCulling.hpp": {
+      "sha256": "13f2c371e1b5e155476f91ff8cb7ec66bb84609d6b788c33c071d11f15638859",
+      "bytes": 1657
+    },
+    "src/render/GpuCullingResources.hpp": {
+      "sha256": "73647aa910b236eac45767acba5cab6116930f72c580d07f9bcbeab1522133fb",
+      "bytes": 8206
+    },
+    "src/render/IShaderHotReloader.hpp": {
+      "sha256": "b54f13cd63f33adb97063959076b1d7fa85dd60d5a7985e9d61ab55e805bc23b",
+      "bytes": 1303
+    },
+    "src/render/LightBuffer.hpp": {
+      "sha256": "11b79f35553f083684866da9cc8b0e603c51601d31d51a67e419717f6d1a8f4c",
+      "bytes": 1790
+    },
+    "src/render/RecordingWorkerPool.hpp": {
+      "sha256": "7f90e38daeaf0efcc361cff3f2d0e0d8abe2ef5be694585a03438ab6fa6fa5da",
+      "bytes": 5806
+    },
+    "src/render/RenderContext.hpp": {
+      "sha256": "7d86432353a3ec063fbf214b443214b8e31598ead51fdad4f1f42f7ab1133fe1",
+      "bytes": 9441
+    },
+    "src/render/RenderFrameSnapshot.hpp": {
+      "sha256": "482f0cbcd98b2f42e84140c5ac4b2f503bb1c29e78a63a22b9b4fe0459481708",
+      "bytes": 1014
+    },
+    "src/render/RenderGraph.cpp": {
+      "sha256": "70282930c56a7fdabfc959c8602ba01c7c04bc1d033fa1bccf56bbe7f2fbd0fa",
+      "bytes": 16656
+    },
+    "src/render/RenderGraph.hpp": {
+      "sha256": "0e6a229c16491cf55a4353c76d8e5921a88eeb81ae47a7852f6abd0048720053",
+      "bytes": 4172
+    },
+    "src/render/RenderMath.hpp": {
+      "sha256": "190437390f4917193ec002612a7dbc15e6e1bc4b12a3e11f8a3ddd556eb2721b",
+      "bytes": 8028
+    },
+    "src/render/RenderSettings.cpp": {
+      "sha256": "f3dc356258ba02b7311677ccd668b7cdee884116459e9ce028f1bf8f7dc60250",
+      "bytes": 9579
+    },
+    "src/render/RenderSettings.hpp": {
+      "sha256": "ddd33dede3cb96219184b22c8ee79513703d9a0a34cc03afc08addad3dd671d1",
+      "bytes": 4605
+    },
+    "src/render/RenderViewOutput.cpp": {
+      "sha256": "310226041125d05e9c56d4c9414adf618c071657359f75072c3211567db9f0a4",
+      "bytes": 4594
+    },
+    "src/render/RenderViewOutput.hpp": {
+      "sha256": "f0b475dc250cca26f490f55bda75713701a7077b11ed2330572a4a492a2b52d1",
+      "bytes": 978
+    },
+    "src/render/RenderViewService.cpp": {
+      "sha256": "e586ecb41d036cbef5c32e64443852a7f83ae4b5c4bf0d1fb9f5957c5ffc1708",
+      "bytes": 15931
+    },
+    "src/render/RenderViewService.hpp": {
+      "sha256": "59fa4bb9f1a1c9cfb5c50c9ac8af7dd329a141b1be5b48c403078de858b9edf0",
+      "bytes": 1716
+    },
+    "src/render/RendererCore.cpp": {
+      "sha256": "61ac338c384d003124d7617e32d27348398feb1dd0500ba3517cb63c4b9a5bfa",
+      "bytes": 1209
+    },
+    "src/render/RendererCore.hpp": {
+      "sha256": "d3abcf0cb490a3d009cae29bea5308767aaac7c465b307bab90f8c6f090fd5b9",
+      "bytes": 882
+    },
+    "src/render/ResourceAccessProfile.cpp": {
+      "sha256": "7f67bcc47120e27ca64198a4537bba8d1a6b9ab754fcf1d9909b9fa31ecd5fa5",
+      "bytes": 3606
+    },
+    "src/render/ResourceAccessProfile.hpp": {
+      "sha256": "296f6fc855ace6813344a0bf741df558d17dbfb35d640f1bc95f6e09f06d6c3d",
+      "bytes": 1207
+    },
+    "src/render/ResourceIndexTable.hpp": {
+      "sha256": "727c416d79701af3db04b36d45a930cfb1aae99351bf86eacbbd43ac9c4c6851",
+      "bytes": 4432
+    },
+    "src/render/SceneInstanceSnapshot.hpp": {
+      "sha256": "6a13ed15ee31d09c21dda604015cef73e0dcad89dd52ba7a57937944f28a9911",
+      "bytes": 4531
+    },
+    "src/render/ShaderSharedTypes.hpp": {
+      "sha256": "e7454fce6b4f159733b52758358618e5d04347d57a50cf93f0b5b4370ffbdb06",
+      "bytes": 452
+    },
+    "src/render/SkinningBatch.hpp": {
+      "sha256": "d74a00af5e52db4893e740ed852aceb8ae3a41781b37a8f969ea53158afd89f6",
+      "bytes": 1169
+    },
+    "src/render/TransientResourcePool.cpp": {
+      "sha256": "d66742fb285b2b4236aee63c812829e9248ebafa93a8ba0a0450aa3ad9ed6961",
+      "bytes": 2654
+    },
+    "src/render/TransientResourcePool.hpp": {
+      "sha256": "37ae7703df73997f5964d47adc83caac1f7dbf9b511088e10be6a944225ca159",
+      "bytes": 1914
+    },
+    "src/render/VisibilityPrototype.cpp": {
+      "sha256": "f339072b5aa1e12e68d72a5a5b0465a599fab80bb180d97f3cd47e26588c0c09",
+      "bytes": 2633
+    },
+    "src/render/VisibilityPrototype.hpp": {
+      "sha256": "9c3d3e9da49f5b96f3045e0183dfe7f555d0a90241d5df37ee64669a5fa232c1",
+      "bytes": 1808
+    },
+    "src/resources/BinaryFile.hpp": {
+      "sha256": "c63ee6cbd0cee7e09e0ad171af9e55ff78d2c21053374e0a2309fb26b0aa5489",
+      "bytes": 698
+    },
+    "src/resources/ResourceLocator.cpp": {
+      "sha256": "8f27e0020bbb8b794417d19798b37b16de1f902aba0adc5776152fba27970e3c",
+      "bytes": 3891
+    },
+    "src/resources/ResourceLocator.hpp": {
+      "sha256": "3fcaa558b67577449ddfc72eba2a12917d67146cc712ee37205a5b740e59714a",
+      "bytes": 1106
+    },
+    "src/rhi/GpuAllocator.cpp": {
+      "sha256": "27273d2476eee74b8241b9279aab7975c5ce259d3999835753e779c39017560b",
+      "bytes": 8108
+    },
+    "src/rhi/GpuAllocator.hpp": {
+      "sha256": "0feed091ba415fb55e2514ef02189945edd671e4e8d19554828d2552602de970",
+      "bytes": 2511
+    },
+    "src/rhi/IGpuAllocator.hpp": {
+      "sha256": "f04e81e19147ad02fcd84aabdcd0ca5a880943f4ad43893ac6e35d8252bb42cf",
+      "bytes": 2727
+    },
+    "src/rhi/NullRhi.cpp": {
+      "sha256": "532e1fdff1572d3f5d5384a1463e9340cccbc3fc07b36d3981ebb220e1a19069",
+      "bytes": 17368
+    },
+    "src/rhi/NullRhi.hpp": {
+      "sha256": "fc74a567a824c12d69f65832fb5ba457cb06efb9c1203cf8860de46de7d4446c",
+      "bytes": 7225
+    },
+    "src/rhi/Rhi.hpp": {
+      "sha256": "98961ca30bcef86d718b97736fb66764b90d740b59a9072478836f5a55ad3049",
+      "bytes": 11733
+    },
+    "src/rhi/RingFrameAllocator.hpp": {
+      "sha256": "26e85c27126b8370c29802d2612d0b45c8c5b3b861a95747102400490935f24e",
+      "bytes": 3355
+    },
+    "src/rhi/UploadRingBuffer.cpp": {
+      "sha256": "1804d4bcbb5c4473b8b67ee5f7e13ae228db61783db920b07a8e6b74a1ff9cda",
+      "bytes": 1756
+    },
+    "src/rhi/UploadRingBuffer.hpp": {
+      "sha256": "b2c5813da3db7a1fc1e5e00e56dbb8cf055e27d2217a6adae5b4a8811175e0eb",
+      "bytes": 2117
+    },
+    "src/rhi/VulkanMemoryAllocatorImpl.cpp": {
+      "sha256": "5b4d987b08141f01f2e0b5c7f4bf3045b0084a74aef36ef14eb9e9afc6d521e6",
+      "bytes": 432
+    },
+    "src/rhi/VulkanRhi.cpp": {
+      "sha256": "767b96520ed4b025d83acd5d12b7562fec6bfa18d5db03ca00d7931b39d20bb4",
+      "bytes": 39786
+    },
+    "src/rhi/VulkanRhi.hpp": {
+      "sha256": "c4a085c524d3b77792bb79eab199a2f555ceafafaae2a64fa51f6a4dba9d37d8",
+      "bytes": 7206
+    },
+    "src/rhi/WorkerCommandPools.hpp": {
+      "sha256": "186f001a15344a2029c6b3779f2eca1101074f9ee899f8f57e743c2a50ce82ed",
+      "bytes": 3354
+    },
+    "src/runtime/AnimationStateMachine.cpp": {
+      "sha256": "c2e253c472cfac963e360c0efd5ca88de0a00bfb1d5a272b83b8393ce77c6cc5",
+      "bytes": 2897
+    },
+    "src/runtime/AnimationStateMachine.hpp": {
+      "sha256": "8cb6906a13444b29366a0e1bf47a38a27088ad65f0df021d62cc3c183b2b18bd",
+      "bytes": 1542
+    },
+    "src/runtime/AssetDatabase.cpp": {
+      "sha256": "a47b531586f37dbb25d41008d31d93824cd863facbf284c7acb389e866ce027c",
+      "bytes": 17437
+    },
+    "src/runtime/AssetDatabase.hpp": {
+      "sha256": "6141c123ae9b8a96a3ed34a41b61e04ac7c74b6d861c953e3d62bf4bfd7f65b1",
+      "bytes": 2343
+    },
+    "src/runtime/AssetGeneration.cpp": {
+      "sha256": "898d1d89f0fa81280d9d992f450100c91a6263c6c4d4f1016c9253b27bda7b7d",
+      "bytes": 5526
+    },
+    "src/runtime/AudioRuntime.cpp": {
+      "sha256": "bd40cdd002d2ab7407d0b1f92689fba019be4ff59366129743e54e018c297a33",
+      "bytes": 3412
+    },
+    "src/runtime/AudioRuntime.hpp": {
+      "sha256": "2e9b420c64d39f7150235f2a2f679dbfe3336c4e6e5b909700d4c9ca454af022",
+      "bytes": 628
+    },
+    "src/runtime/ComponentCodec.hpp": {
+      "sha256": "b958dc4d1457d31e4ce1e278b11c421f74c089db78f8e9b120402ed78655336a",
+      "bytes": 731
+    },
+    "src/runtime/ComponentRegistry.cpp": {
+      "sha256": "beb469d006057505f7b68d2e106bd6d9a57ef6fa2cc4c1546fad9a4d4512cc6a",
+      "bytes": 3688
+    },
+    "src/runtime/ComponentRegistry.hpp": {
+      "sha256": "e1948d03b9bf58f267fe3eee16333da654065d00d6fc851e6235a58f899786bc",
+      "bytes": 3927
+    },
+    "src/runtime/EngineSettings.cpp": {
+      "sha256": "a15c06ddcee83eddd67234b8a1a3e3f18f129f3d3de42d9dfac5cf231deab86d",
+      "bytes": 1791
+    },
+    "src/runtime/EngineSettings.hpp": {
+      "sha256": "b1b07c88f59948615d7c69644bc39a164e80565a94a37d2322146af407c25d26",
+      "bytes": 509
+    },
+    "src/runtime/GameComponents.hpp": {
+      "sha256": "c5c3526afa63d46699d307b384cebccf91c0ae485b9f204c358102bc6d950953",
+      "bytes": 49
+    },
+    "src/runtime/GameInputReplay.hpp": {
+      "sha256": "fe1dabcca8922031443f9fad3c72701b8e04e1b0db46d0cb047e0d63dc627400",
+      "bytes": 4008
+    },
+    "src/runtime/GameRuntime.cpp": {
+      "sha256": "00b53fe5a83852993c429dcd6c94dac08f66147010cbaa8715eee5395059bf1f",
+      "bytes": 6899
+    },
+    "src/runtime/GameRuntime.hpp": {
+      "sha256": "d7682ee235fc5cc367cf0cf2f2ff85a597c7cbc4cfbdd59c2956e0fa3217ff8b",
+      "bytes": 3702
+    },
+    "src/runtime/GameUi.cpp": {
+      "sha256": "ee8b19c4a52420b538f74723647709ca78fd0cdefd4fd8d3080d9d4168fe65bb",
+      "bytes": 5301
+    },
+    "src/runtime/GameUi.hpp": {
+      "sha256": "75c3a072f3dcb9bc023b69f47e1a392d166beb31a0c26d6f990bd3bf3e5d6f40",
+      "bytes": 932
+    },
+    "src/runtime/GameplayKeys.hpp": {
+      "sha256": "3e6635976e0662f188cb82b677476b9aa224a704a8bccd0c3301c9b5a1cb68f5",
+      "bytes": 459
+    },
+    "src/runtime/IRuntimeSystem.hpp": {
+      "sha256": "802facec8a5ab8f0b92eb28f155704688798493ed74d9071746f60c83c4d0bae",
+      "bytes": 632
+    },
+    "src/runtime/IScriptRuntime.hpp": {
+      "sha256": "02a8f21f8babf23e5b37dea988b3870ec2192d5ba5d36d435568a87591076f2d",
+      "bytes": 1082
+    },
+    "src/runtime/InputActions.hpp": {
+      "sha256": "26f6711df0e3474ed31261a332af93891867dfd639fee3e2e6f1c6298d8d71ab",
+      "bytes": 2599
+    },
+    "src/runtime/InputPreferences.hpp": {
+      "sha256": "59080c7b8278f0c286af62687622f1ee88fbff59dc58320225a635c045222be8",
+      "bytes": 394
+    },
+    "src/runtime/InteractionRuntime.hpp": {
+      "sha256": "10db189374f7b45fb899bcae50a4876b8968819bc033f288e16b8d9abde48ddc",
+      "bytes": 2329
+    },
+    "src/runtime/Level.cpp": {
+      "sha256": "4876e9891e1a2477510d1c69523df74c12300271c0bec0a4c3114240c372e405",
+      "bytes": 6012
+    },
+    "src/runtime/Level.hpp": {
+      "sha256": "be3f12b8cacf0fb329ff3b4f348698130e25cd1a6869c025ee97e7b9de06c755",
+      "bytes": 884
+    },
+    "src/runtime/LevelRenderSettings.hpp": {
+      "sha256": "3e3685a130c53df38bd6a2345ac3126a5d5c53ab4c391c7cfae51dbd1842341d",
+      "bytes": 4249
+    },
+    "src/runtime/LevelSession.cpp": {
+      "sha256": "3430e8714621edf0f7a839b97c9c6006276fadd7923c148995d1d967acaa20a3",
+      "bytes": 7350
+    },
+    "src/runtime/LevelSession.hpp": {
+      "sha256": "7d471f33aa4e6067bdd6b6361027bb648cd64f99e7e0723631491b6c3d699db6",
+      "bytes": 3150
+    },
+    "src/runtime/MiniaudioImpl.cpp": {
+      "sha256": "c7d66862a98b183dd45786edf1714946c81fe7fcf99681db43dba0b0f55d1523",
+      "bytes": 148
+    },
+    "src/runtime/ModuleAssembly.cpp": {
+      "sha256": "f29be05f7b7218f668ccc3315ad9c2bc8f31c12f7d8fc6527120947cdb7dc8ba",
+      "bytes": 2843
+    },
+    "src/runtime/ModuleAssembly.hpp": {
+      "sha256": "dc8cb381d2e01a743e225af56ff809a25b487b5b568eeb62a3f42877f182f0a4",
+      "bytes": 1120
+    },
+    "src/runtime/ObservationRegistry.cpp": {
+      "sha256": "e001d4bc12cc5a8bafbec8b0a0c8139573fb7cdb089abf5404241c6c64d05c0c",
+      "bytes": 1471
+    },
+    "src/runtime/ObservationRegistry.hpp": {
+      "sha256": "473e8132ab5fd7a6138e17c8cd3ae32ed444374760e169cfa63b15de90ff8b7d",
+      "bytes": 695
+    },
+    "src/runtime/PhysicsWorld.cpp": {
+      "sha256": "120a1812bfd920aeff3e044d9805ee0b4cfe46cd6c3d1bf07f354c4ac7749241",
+      "bytes": 13709
+    },
+    "src/runtime/PhysicsWorld.hpp": {
+      "sha256": "93818e7ea6a417eac9bf0d96faf67620ee62f5fb72401d839ef531ae1d35fe57",
+      "bytes": 1248
+    },
+    "src/runtime/Prefab.cpp": {
+      "sha256": "0dcb0af6e74d8977b7d8f73ea69a288bb6d87475946c92ee4a4b2272e9def1fe",
+      "bytes": 3302
+    },
+    "src/runtime/Prefab.hpp": {
+      "sha256": "60346a75facb995c52dd7c4776b60b80637b6223ca2f7b24cfab39d6c6e99156",
+      "bytes": 322
+    },
+    "src/runtime/PresentationRuntime.cpp": {
+      "sha256": "e493d7df91b791af1180a932a69c375edf2b027d388358cc332a3a0a7724812e",
+      "bytes": 4386
+    },
+    "src/runtime/PresentationRuntime.hpp": {
+      "sha256": "dbfffeb493d029d701eb863e943554988895bd88abf86245f2efef11ffbff026",
+      "bytes": 1474
+    },
+    "src/runtime/Project.cpp": {
+      "sha256": "54d01308b259497671f96ecf56b93548b0d1fc754cdc807991c87006b34a4f6b",
+      "bytes": 10371
+    },
+    "src/runtime/Project.hpp": {
+      "sha256": "93ef6a3e9694a2a4e8866ca457ac0f2081667a53004aec864b715e6c88e036f8",
+      "bytes": 936
+    },
+    "src/runtime/ResourceFrameTrace.hpp": {
+      "sha256": "855c39bf04a0c2b00bf74736da00f8f2ed0eb8f3b6dfa842d8588722a71365fd",
+      "bytes": 1982
+    },
+    "src/runtime/RuntimeLifecycle.hpp": {
+      "sha256": "979b0009f1e215215791f98ee5204a6325039d7cbc0d649c2c06389a9cf4be5f",
+      "bytes": 9613
+    },
+    "src/runtime/SceneDocument.cpp": {
+      "sha256": "7b2fc9268ef224eb8182b03fc147afea162bed5747fe4f3c3481557c08c1e46c",
+      "bytes": 16941
+    },
+    "src/runtime/SceneDocument.hpp": {
+      "sha256": "fe8f667399f4b00fdeed5f1d03a9d7b20e3c93e966fc8176903c872450aa518b",
+      "bytes": 1723
+    },
+    "src/runtime/SceneRenderSnapshot.cpp": {
+      "sha256": "2f43b19bc6ebc8f53e44a0c009048f1171908b9ff63ce75b2d698b35d0a29dbe",
+      "bytes": 3200
+    },
+    "src/runtime/ScriptRuntime.hpp": {
+      "sha256": "d41a1f3d3e6837d1377285774bbfc43d4e37895578c936bbdeb87f7f6bb6c78f",
+      "bytes": 1139
+    },
+    "src/runtime/ScriptRuntimeRegistry.cpp": {
+      "sha256": "f6ee1cad72dbf35ef2aa13001bdb6d76fec79446dfc1cca9197a59079f9dfbfa",
+      "bytes": 1262
+    },
+    "src/runtime/ScriptRuntimeRegistry.hpp": {
+      "sha256": "26373a5bd8be89de3784348177be28c4876dfc2ec51316cba5a8dfe4b02dceb7",
+      "bytes": 636
+    },
+    "src/runtime/SystemRegistry.cpp": {
+      "sha256": "c42ce213e3e379c9d77fd7a925bd7b2f5adf686353123791f132bb471bf8ccd3",
+      "bytes": 1036
+    },
+    "src/runtime/SystemRegistry.hpp": {
+      "sha256": "30b45cc344947c58aa2c50ae4d782e971cce8d8373cc4a36d02189f6cf030e83",
+      "bytes": 539
+    },
+    "src/runtime/ThirdPersonCamera.hpp": {
+      "sha256": "867c65c3b74c494c93d3f58db97675d72d25fad481a4e716ff8d556da458e852",
+      "bytes": 3149
+    },
+    "src/scene/Frustum.hpp": {
+      "sha256": "0f0419ac5fa271af14aad33e1dc7ae0bba54d5b69bfd9ad580421ed4edef67e2",
+      "bytes": 2939
+    },
+    "src/scene/RenderBatching.hpp": {
+      "sha256": "ff83112b16f135cfc4efc21f5986b72a393ed44c95099e6b066c8872dc61d2cc",
+      "bytes": 2104
+    },
+    "src/scene/SceneComponents.hpp": {
+      "sha256": "5127fdf1421aab81ad81b8264c70601b90b059e012a8aa89cbe41934634484ca",
+      "bytes": 1168
+    },
+    "src/scene/SceneDescription.hpp": {
+      "sha256": "aadbd80533bdbf5719c19877271517f05f9c71614e19456e45e03e7055cb4293",
+      "bytes": 4585
+    },
+    "src/scene/TransformMath.hpp": {
+      "sha256": "5afcb1d17dc0b0796ce1f8d758e243d14fcd2055917a8b522190a3e385749538",
+      "bytes": 2928
+    },
+    "src/scene/TransformParity.hpp": {
+      "sha256": "e9ec8e5a96fccb1788db4792ee0243fb39b8ad552392dfe64d8c6fea9d4402b4",
+      "bytes": 410
+    },
+    "src/scene/TransformSystem.hpp": {
+      "sha256": "8232bd0055a8694161d513d82b8e76f11df0662f51442a8bdcea516d3fea7728",
+      "bytes": 3300
+    },
+    "src/scenes/BlackholeSceneRenderer.cpp": {
+      "sha256": "2d880d4204425ce677312a4fcd02092dfdce9016955e34b22e09c745521e1f72",
+      "bytes": 53837
+    },
+    "src/scenes/BlackholeSceneRenderer.hpp": {
+      "sha256": "6c243e93e2be969202d73a79ee37869637c59636ba34534902d3f4b4fc12e9cb",
+      "bytes": 8246
+    },
+    "src/scenes/BuiltinRendererCatalog.cpp": {
+      "sha256": "445fdedf087d2c190c10a76abde720e8921938bbf55f94909dc9efe5eadeb18e",
+      "bytes": 1415
+    },
+    "src/scenes/BuiltinRendererCatalog.hpp": {
+      "sha256": "5a7b162494c9d181b001c346d686f8ba2112e806ae9a53562f2641ec8569ca69",
+      "bytes": 505
+    },
+    "src/scenes/CharacterSceneRenderer.cpp": {
+      "sha256": "6e01d3f0c34f7a90becb679b928c4ac7ae1ff2160e7fe75ea244d60fccb87032",
+      "bytes": 169759
+    },
+    "src/scenes/CharacterSceneRenderer.hpp": {
+      "sha256": "1698bf0901434b5ab2e5273dedb78764808be4fb5a4e0f2b18d5fec2f705b7b3",
+      "bytes": 19392
+    },
+    "src/scenes/SampleSceneRenderer.cpp": {
+      "sha256": "ccf09de6dd3c3858f0451ca407d9a66623975f4a8ef0d55484d9a37f0a80b80d",
+      "bytes": 3188
+    },
+    "src/scenes/SampleSceneRenderer.hpp": {
+      "sha256": "e3f516491257e2302271c15a1165c2f9c0b0d3710d9c3532e927592f2410ee50",
+      "bytes": 874
+    },
+    "src/scripting/BindingDescriptor.cpp": {
+      "sha256": "79fc3e289ef72dd40bf1647421e4155a1c2c6c4be3b9891aed63691aee2f7d92",
+      "bytes": 1694
+    },
+    "src/scripting/BindingDescriptor.hpp": {
+      "sha256": "73910ef8ed5ccdf0660c71c37cd892bfd7907bfb181465ff91359a43b7e1a737",
+      "bytes": 429
+    },
+    "src/scripting/GeneratedBindings.hpp": {
+      "sha256": "3030fedf7dc2abbc8d2569f39f58f8047c152144530e74657955b33098f6e8b5",
+      "bytes": 1386
+    },
+    "src/scripting/ScriptBindingHost.cpp": {
+      "sha256": "77e962acffe0dd965066f13fbbf805ee7ae592a26f81e67f8912277f466204eb",
+      "bytes": 10529
+    },
+    "src/scripting/ScriptBindingHost.hpp": {
+      "sha256": "2f927489550a0128fbc58cb7871e66a2961b983aa4ca1c4bc8fb66660e2b2ee6",
+      "bytes": 2101
+    },
+    "src/scripting/ScriptHostSession.cpp": {
+      "sha256": "eb2058d5dbc234558b12a76f9ce62532591284d60806bb933b6a0ed860f0ce54",
+      "bytes": 3209
+    },
+    "src/scripting/ScriptHostSession.hpp": {
+      "sha256": "ada876a01a4ef078c8992ca255ce10d79909848eaa6d97d149d150c0ef018651",
+      "bytes": 599
+    },
+    "src/scripting/ScriptInterop.hpp": {
+      "sha256": "3a9034ef3887384ee91ecbd828cfdc0a170087b68713ec3d4ba593bdbd7d4c87",
+      "bytes": 430
+    },
+    "src/scripting/dotnet/ManagedModule.cpp": {
+      "sha256": "c5d91571189a0a026c089bfe380a373f6dbc6ab1024f7a06948c2aef5ed3af28",
+      "bytes": 5395
+    },
+    "src/scripting/dotnet/ManagedModule.hpp": {
+      "sha256": "267a7a116f7ce0e2f5e698b80236cb57c83621010f5b566b4b59bb0d69138c98",
+      "bytes": 646
+    },
+    "src/scripting/dotnet/ManagedScriptRuntime.cpp": {
+      "sha256": "f1ef704b7341fd2d38cdc62020bae143dfec804ae9187651cbba264d4d7e23ff",
+      "bytes": 10410
+    },
+    "src/scripting/dotnet/ManagedScriptRuntime.hpp": {
+      "sha256": "e6dcd9c705600ee2b496077f754c0b5e081b1886c395f7d6c5813b4a7bf3aaf3",
+      "bytes": 1068
+    },
+    "src/scripting/dotnet/ManagedScriptingModule.cpp": {
+      "sha256": "790f8b1c6b92ef4b8afc200f19879cc721331336e428830176bdf658228fc562",
+      "bytes": 430
+    },
+    "src/scripting/dotnet/ManagedScriptingModule.hpp": {
+      "sha256": "65883dd83e1285ac2e087d07f8e3df1f42f25f2e21b9e01d4692d0069ea45193",
+      "bytes": 139
+    },
+    "src/scripting/lua/LuaScriptingModule.cpp": {
+      "sha256": "b33c418828a88fa5badf978aed719630763a20af421816a497fc7c99e35942e0",
+      "bytes": 521
+    },
+    "src/scripting/lua/LuaScriptingModule.hpp": {
+      "sha256": "ff403a790960e20b048f8aa56846dde78769ccd9b142576e63570d4bad82c00a",
+      "bytes": 119
+    },
+    "src/scripting/lua/ScriptRuntime.cpp": {
+      "sha256": "9a2834a0a407aa9c9fcaf1e4667b02d054dcba56a1affe2e43e81d633d763337",
+      "bytes": 13877
+    },
+    "src/validation/ValidationService.cpp": {
+      "sha256": "0bcbdba873c6bbb15749f80359218d0f276424d7f3616f9c390ecce2a716f7b0",
+      "bytes": 5850
+    },
+    "src/validation/ValidationService.hpp": {
+      "sha256": "fbe6bd5e7249bff50468c98fa85fc441aa92814d5b1858baa04cadde2c21d258",
+      "bytes": 1487
+    },
+    "src/validation/ValidationTransport.cpp": {
+      "sha256": "7ddf1318617f6891808be61009aba18f4a24f3e1dde32ad6dab3f49c54025a6f",
+      "bytes": 6358
+    },
+    "src/validation/ValidationTransport.hpp": {
+      "sha256": "1ce4ec57cbcf5493010ab0ce55b4a18c94c5435d48d853b568f10ce6355e17bb",
+      "bytes": 784
+    },
+    "tests/AnimationPoseTests.cpp": {
+      "sha256": "fe9ce915d085d25c800f95863ae29b945000245d88067b15a85c703422a7cc2b",
+      "bytes": 4046
+    },
+    "tests/AssetLevelTests.cpp": {
+      "sha256": "27af02bce60aa408c67360eda2ec55aa3b66e3df5035b3f65a2127a2da615fcb",
+      "bytes": 8648
+    },
+    "tests/BrowRegionTests.cpp": {
+      "sha256": "1589e596147d29ee5c26a79fa651585dc03cd0b67e8125e6db79d33a79919f58",
+      "bytes": 2197
+    },
+    "tests/CascadedShadowTests.cpp": {
+      "sha256": "b9bb290df493cdf5031e5e1b3b0277af98195965b03a33761821b31fb724bf12",
+      "bytes": 361
+    },
+    "tests/ClusteredLightGridTests.cpp": {
+      "sha256": "c09494a83de6d151d74846259ccab881f1e21015d793f1cdcae3a09ab16fa8ff",
+      "bytes": 1320
+    },
+    "tests/CommandLineTests.cpp": {
+      "sha256": "068fffc034150544ca54b18a819f970ce2b7d6326be6b333d2efa463d46cf3d9",
+      "bytes": 12297
+    },
+    "tests/ComponentRegistryTests.cpp": {
+      "sha256": "84b584dce8aad8bb2c7c3fc3d29769bdcb2b193cb4079a259d30988f0fc9feb1",
+      "bytes": 5582
+    },
+    "tests/ComputePassTests.cpp": {
+      "sha256": "a2a959af1bc1b06842def207345a36433c0e4234cb15a8c4da36420a21239181",
+      "bytes": 1346
+    },
+    "tests/EcsTests.cpp": {
+      "sha256": "bb7fa85a37077f061f7636ebbf5c45d50fedb01bddac204ce99512e4c1eb43b5",
+      "bytes": 5708
+    },
+    "tests/EditServiceTests.cpp": {
+      "sha256": "51a8d1fcd42463c330f85f47482f89860506a7954cffec078aeefdea7784a988",
+      "bytes": 9598
+    },
+    "tests/EditTransactionTests.cpp": {
+      "sha256": "715c1ed8ff540e0004e9fdfe5f5fd0c3d816efc1120982b8c6364608813ebebe",
+      "bytes": 7195
+    },
+    "tests/EditorCameraControllerTests.cpp": {
+      "sha256": "7dd6f448fcce40f173b6aba1e879a4206ecbbe9bca5cea0057f3c9a70225fc00",
+      "bytes": 2893
+    },
+    "tests/EditorObservationTests.cpp": {
+      "sha256": "dfd850ce43d4dfd95bc6a46f7e5ef976ce8dd44ff8c710689fc281449d809603",
+      "bytes": 2899
+    },
+    "tests/EditorSessionTests.cpp": {
+      "sha256": "130a66a3aee352b93cc942c3c80bbe3be5a53d1449b88b1f040619545d1aede3",
+      "bytes": 8158
+    },
+    "tests/EditorWorkflowTests.cpp": {
+      "sha256": "c99e973656d8f995def47c479e860ae62b5ac2c896bdffc187c6142bdbfa7a47",
+      "bytes": 12189
+    },
+    "tests/EditorWorkspaceTests.cpp": {
+      "sha256": "304b6c13444cbfe2a5cd0402dad9e20ced8b8c9651b42b41e42015634b7f92e2",
+      "bytes": 2826
+    },
+    "tests/EngineSettingsTests.cpp": {
+      "sha256": "c2fb98959433a691bb8d0f733af88dcdb46adf82ecb707f98edb794efce1e2ca",
+      "bytes": 2099
+    },
+    "tests/EnvironmentAssetTests.cpp": {
+      "sha256": "b09bf71ff4c87cd1c97290a0bb5ca95da9996bce8b07b458722a3ee16d8997f2",
+      "bytes": 2640
+    },
+    "tests/ExtensionRegistryTests.cpp": {
+      "sha256": "ce09fc9f97a2e054499caf063963463f6c9566f9cb6e0f3c8ce23aa25b90e909",
+      "bytes": 5179
+    },
+    "tests/FrameTaskSchedulerTests.cpp": {
+      "sha256": "e29c0d4edbf42da39ea79a0f5269775f6d4f207c936d0b3ae74101d6acab32a5",
+      "bytes": 11754
+    },
+    "tests/GameUiRendererTests.cpp": {
+      "sha256": "847281089376a46da544f7ac65cf79228862f59f91b7c090b1fe4840fb212805",
+      "bytes": 1430
+    },
+    "tests/GameUiTests.cpp": {
+      "sha256": "0bf72a05dc025c6c34e48c83feee7b38357926d9c6d475f9ffc3d15b507d79a9",
+      "bytes": 2127
+    },
+    "tests/GameplayPresentationTests.cpp": {
+      "sha256": "7bf83ec449f776eb86ce5b546e4aa55a2916bf1ce36080496b9772b0dfda3103",
+      "bytes": 3261
+    },
+    "tests/GenerationManifestTests.cpp": {
+      "sha256": "a455dcbdd68918a27bcdc2997ca95b83e5fe7441571086c5f3159931f3520e17",
+      "bytes": 8480
+    },
+    "tests/GpuCapabilityReportTests.cpp": {
+      "sha256": "fed75235fcf44bda74e1d2ffe5a68fb191efc8bdeb9573ad02ae5d9ce9a5b95d",
+      "bytes": 4889
+    },
+    "tests/HotReloadTests.cpp": {
+      "sha256": "7c4072e0f8c3d5d954d8bc124704cc78a490716b3f3f0f64a44d11b0343648cd",
+      "bytes": 4571
+    },
+    "tests/InteractionTests.cpp": {
+      "sha256": "2b78e4db04614d8119b255f36cf1bf92d119e9a4c6cfecc921fc9463cffd500f",
+      "bytes": 6349
+    },
+    "tests/LightBufferTests.cpp": {
+      "sha256": "576028025ef7e7d4ddca6776715fcb53bf3d78961df2e7b08cbdc68b96756871",
+      "bytes": 641
+    },
+    "tests/LocomotionTests.cpp": {
+      "sha256": "c36d70783f034fb550a0296bb5df54b5e1c3348f5fd7f9d12efa039b8e4f299d",
+      "bytes": 7874
+    },
+    "tests/ManagedModuleTests.cpp": {
+      "sha256": "0a9c539ed2ff06c439464f81f4c94f100dbfeb41f871f2aa32fc18f6f28f038d",
+      "bytes": 5065
+    },
+    "tests/ManagedScriptRuntimeTests.cpp": {
+      "sha256": "a13ed84e4e4e8f309d484a2ee767136cdc301377dd58f1b72be4bbdc671dcdc4",
+      "bytes": 7630
+    },
+    "tests/MetadataFixture.hpp": {
+      "sha256": "f0f6e23972c8374549a05d7dd8926cbff5612cb8837cbd6cd39020bd9971e94c",
+      "bytes": 290
+    },
+    "tests/MetadataGenerationTests.cpp": {
+      "sha256": "8f4d150ed2269f08068a5b12ea587180ce4f1531be89d5b57e6fa09fff08ae69",
+      "bytes": 992
+    },
+    "tests/ModelProtocolTests.cpp": {
+      "sha256": "7e8f2e344828f0a3e6e277f4890a649281a7916e8ab464ce9a15954bee4757bc",
+      "bytes": 5575
+    },
+    "tests/ModuleAssemblyTests.cpp": {
+      "sha256": "bc26aab962efcdd8f0588476fa05555892b93894408d426e3e5a339676a593e6",
+      "bytes": 3162
+    },
+    "tests/NullRhiPassTests.cpp": {
+      "sha256": "0b841d0270eb38fa644d91ca55746af1de66706200d23f3eb15fd2badeb162da",
+      "bytes": 23623
+    },
+    "tests/NullRhiTests.cpp": {
+      "sha256": "d28ee72984cd949607b4af3350942db5f0091ec9836aae1498d8ab945d1c52d3",
+      "bytes": 5672
+    },
+    "tests/ObservationTests.cpp": {
+      "sha256": "e575ad9e3c85835e66061da2ba664ffa9baa32f5164f8fcfbb6d33eaa28b3e91",
+      "bytes": 4576
+    },
+    "tests/PanelContextTests.cpp": {
+      "sha256": "173c1124bd84fc7f69c6978d48f066f57ab872c1b8b6514e04ef8e3a1dfd419d",
+      "bytes": 3807
+    },
+    "tests/PhysicsInputTests.cpp": {
+      "sha256": "79d3ed016b3391d076594a4361930278937dbb75748fc23260c6b07e1ee83757",
+      "bytes": 3845
+    },
+    "tests/PickMathTests.cpp": {
+      "sha256": "32a4f6c3f8838f708392a233b9b12e90e233bc60863a301a9ef41a7df5c99dee",
+      "bytes": 3909
+    },
+    "tests/PlayableQuestTests.cpp": {
+      "sha256": "8e7ae1be435fc2a28c7cde7a56cedb890390d2e7b2f528e34608e2d961c811e7",
+      "bytes": 4351
+    },
+    "tests/PresentationRuntimeTests.cpp": {
+      "sha256": "d28efbf32195b4f0d58a699c9c97abc050516ce8fa56cee669a58717cb6ead88",
+      "bytes": 2341
+    },
+    "tests/ProceduralGeometryTests.cpp": {
+      "sha256": "fdaa251d9dc48c217382b7bc5e83b324b141b81701d2ceac16c3a5094e0a12df",
+      "bytes": 7821
+    },
+    "tests/ProceduralProcessTests.cpp": {
+      "sha256": "1d41bcd18dd64001489fb44025df2db860263531a1c7a5356f13bfa03c6a173f",
+      "bytes": 3453
+    },
+    "tests/ProcessRunnerTests.cpp": {
+      "sha256": "04debaa4ccf7e3fea942ca8e4fc0a4de8fb24dbced513f7427d70e1cc2c39a17",
+      "bytes": 3333
+    },
+    "tests/ProjectTests.cpp": {
+      "sha256": "4f562b0da23fcaac4d0138b0d1c68805878ba723ac96d68cbaeec59a1052876c",
+      "bytes": 3932
+    },
+    "tests/ProposalAdapterTests.cpp": {
+      "sha256": "ac52778742f34e251e218749efab4a01e1dfc3e146eeae8018905ad577e4e9fd",
+      "bytes": 9292
+    },
+    "tests/ProposalControllerTests.cpp": {
+      "sha256": "281082b161ae1facc63bda32ac5d4e73a80f400640592344936271dfea1bfe10",
+      "bytes": 8041
+    },
+    "tests/ReflectionTests.cpp": {
+      "sha256": "1b71c6fefec673ae8dbaaca1d9a1c695f946b5d5e913f85fe35c92388e07638b",
+      "bytes": 2244
+    },
+    "tests/RegisterHostExtension.cpp": {
+      "sha256": "984c6186fb49c56f7b141bfaedb8d19cfffd5de47afed65509895be95d1aa50d",
+      "bytes": 725
+    },
+    "tests/RegisteredComponentWorkflowTests.cpp": {
+      "sha256": "857a689dc483cb0ed7a572da7c6447f2e90be728b8dc6a5f0e1172017e5ac758",
+      "bytes": 3666
+    },
+    "tests/RenderGraphTests.cpp": {
+      "sha256": "fad649bf5c417c22a8b89154518e58250b363d92aa17ace0701db1fcb4ce5983",
+      "bytes": 11872
+    },
+    "tests/RenderViewTests.cpp": {
+      "sha256": "8fdaa22a688a5594318626f3827f7a39dbd8c995af85ca90b00db51869b1763e",
+      "bytes": 5518
+    },
+    "tests/ResourceAccessProfileTests.cpp": {
+      "sha256": "8cbaf06edf403dfaca3f29ee5baa780169afd0d9f7f8c7208731521f82dac066",
+      "bytes": 7965
+    },
+    "tests/ResourceFrameTraceTests.cpp": {
+      "sha256": "906fc6caa35965fcf0450354499f1228b9b1ee54493a221612aeb3cd61c2ab8d",
+      "bytes": 2921
+    },
+    "tests/ResourceLocatorTests.cpp": {
+      "sha256": "7bd4139d2b2f2a279b7eb739242447e0e5aac6bb3514c194c4ac4bbd9443901f",
+      "bytes": 1708
+    },
+    "tests/RigTextTests.cpp": {
+      "sha256": "4f6cdc5949b0c240acd6ff07776002ccc458b784e6624d0c243430c8fd250307",
+      "bytes": 4328
+    },
+    "tests/RuntimeDiagnosticsTests.cpp": {
+      "sha256": "f08685ceade20b87cc6d3c8430126551346e57b8dfda199cf068514cc47f6d4a",
+      "bytes": 1884
+    },
+    "tests/RuntimeLifecycleTests.cpp": {
+      "sha256": "2f5a732c478dfc744eddd583fee0e5910247990bf49038e8263b4c54beefba9e",
+      "bytes": 2797
+    },
+    "tests/SceneGraphTests.cpp": {
+      "sha256": "5f91a3a6b2d3609ef59267eed63a5a372b0ef22d2396dd212f7ca034cfe370ab",
+      "bytes": 6823
+    },
+    "tests/SceneModelTests.cpp": {
+      "sha256": "436db3a37b65c19d36c8174a00f7cd31c4e4a3f0e2692cb82f3714412a470f02",
+      "bytes": 17223
+    },
+    "tests/SceneVisibilityTests.cpp": {
+      "sha256": "98598a8df9929eba448f2f434c6391d2b03c5dbecb001c86a965ab5d328636a1",
+      "bytes": 3214
+    },
+    "tests/ScriptBackendContractTests.cpp": {
+      "sha256": "40639c53ca14ac38fc2cc2b0f10d30873e163b51fa845d64d88cf510e33220bb",
+      "bytes": 5264
+    },
+    "tests/ScriptEntityTests.cpp": {
+      "sha256": "e4bac11ccadb05b8ef3b3099387604d295c5d28ec7932718daf43a4f803cb825",
+      "bytes": 3767
+    },
+    "tests/ScriptInteropTests.cpp": {
+      "sha256": "7c0bd39a7075b4ca98a41057141f61cbba2d7e9f04e5c6604bd2710d2542e30c",
+      "bytes": 3278
+    },
+    "tests/ScriptRuntimeTests.cpp": {
+      "sha256": "e3cf8970356c969255e2ff2417d8791b5b06b990883c85d778f26a043f9f5f85",
+      "bytes": 9443
+    },
+    "tests/SettingRegistryTests.cpp": {
+      "sha256": "7a86049a4a306f3f71b80208d7ada05cb394d3d92f1835a56a1896a885fa854b",
+      "bytes": 5530
+    },
+    "tests/ShaderCompositionTests.cpp": {
+      "sha256": "069132d6a36a8684ca2b60228a97b002c1a9dd28a13b138daab6c354c3d03f89",
+      "bytes": 13582
+    },
+    "tests/ShaderModuleTests.cpp": {
+      "sha256": "cea37032e92f2b4bc4be405a064c0a3824c019a7b7684d31f8668113ad2fbd78",
+      "bytes": 2737
+    },
+    "tests/SkinningBatchTests.cpp": {
+      "sha256": "17fb79d613e393ca9919d7d8509531362ac6a03fb87fd4642f87fd4ee4e90a7a",
+      "bytes": 1854
+    },
+    "tests/SkinningGpuTests.cpp": {
+      "sha256": "bc626b7fa310265637d2c20bcbaf6900ec324c1b7978dcd4f47a2cac9d0f3732",
+      "bytes": 5595
+    },
+    "tests/SurfaceLifecycleTests.cpp": {
+      "sha256": "09a0aecafe1b95898b8bc41c404eb4dbae3e149f2cb0f1ced2dd551012dde905",
+      "bytes": 1088
+    },
+    "tests/SystemCompositionTests.cpp": {
+      "sha256": "83caa1c71583e28d35bf74e48baa69cbfd0886a72e7e8fb1a5220afd61a8ab64",
+      "bytes": 11738
+    },
+    "tests/ThirdPersonTests.cpp": {
+      "sha256": "d2930daf9ae98bfad368e0570eadb600e4ef0ecaa41aec08d9004f3cf037bea9",
+      "bytes": 11586
+    },
+    "tests/ThumbnailTests.cpp": {
+      "sha256": "846c6f46f4679da2f102e6743d9bd25f1cda27d5840894d4714d663200b7ccc6",
+      "bytes": 2062
+    },
+    "tests/TransientResourcePoolTests.cpp": {
+      "sha256": "165e6fa85d5695f5ff84176043d32d06fdcaa86483c48dc8d7a7d511cc46d2f4",
+      "bytes": 2168
+    },
+    "tests/UiFoundationTests.cpp": {
+      "sha256": "6415695afb0daf38ab66ad91cd93f01d5dcfd5f719a70e72c4bc4a3597f96b33",
+      "bytes": 2377
+    },
+    "tests/UploadRingTests.cpp": {
+      "sha256": "f05137280528db0a60fcbdb0d951eedc5424eb697ff7f24f9dd19e0729f73ccf",
+      "bytes": 2303
+    },
+    "tests/ValidationProbe.cpp": {
+      "sha256": "f37da988839a5a3c43ba9685aa7a67ed214832ebcc4088aab4d650f05ad2d86e",
+      "bytes": 1404
+    },
+    "tests/ViewBatchingTests.cpp": {
+      "sha256": "15dd6424186541592ddd99e7272b39491f5725233aad966033552485186d5a1a",
+      "bytes": 1705
+    },
+    "tests/VisibilityGpuTests.cpp": {
+      "sha256": "59cf53fd491586b39d60d048b624516c487cccc39145d000ef164e137c8a3903",
+      "bytes": 6938
+    },
+    "tests/VisibilityPrototypeTests.cpp": {
+      "sha256": "c2e86abdc9c90dd775d19fda8108b7249af8bcb0485273c2f14a340fd03f002d",
+      "bytes": 3070
+    },
+    "tests/fixtures/ai/protocol.json": {
+      "sha256": "64b9676e22a3fe7ab2e83e2b42af9bf81a3d042bf6ed31bc0e44359273f03c6a",
+      "bytes": 2190
+    },
+    "tests/fixtures/ai/response.json": {
+      "sha256": "714f783036d513b2c9e57c63ece6f1e3bc552dbede83b6cb012162c53f76e4a2",
+      "bytes": 109
+    },
+    "tests/fixtures/ai/stalled_bridge.py": {
+      "sha256": "85e31ae921e33b2c360a6196fd7e43a9cd23918158e9d3ce3da722d6ad9cc0a5",
+      "bytes": 253
+    },
+    "tests/registered-player/CMakeLists.txt": {
+      "sha256": "c86e9db9996c9afdb9007f95da46b19b7989ae836d2ad7e31772f566c72c2b22",
+      "bytes": 693
+    },
+    "tests/support/VulkanComputeFixture.hpp": {
+      "sha256": "605a0efe1c30d044333682362cb7e90d5728a839151be1e445097c794b64f527",
+      "bytes": 7930
+    },
+    "third_party/dotnet/LICENSE.txt": {
+      "sha256": "d7a68596ab69b06f51ca278a6545148e4269a9381c26d597c13df5d88e08cf5b",
+      "bytes": 1139
+    },
+    "third_party/dotnet/THIRD-PARTY-NOTICES.txt": {
+      "sha256": "40686c6447a7d5b5d3693068e4571b5f483d7ed335aeee773ef662440de4c5d5",
+      "bytes": 75640
+    },
+    "third_party/dotnet/source.json": {
+      "sha256": "d6c2d792f379ea7aaf69944c4f0d16147446b0fb660980f5fe55e65da4a4f0c3",
+      "bytes": 563
+    },
+    "third_party/gknextengine/.gitattributes": {
+      "sha256": "efe223db63fa0beb760e44055f4a79d5c326a7ec0c6e8c07b5dc3c12833f2245",
+      "bytes": 30
+    },
+    "third_party/gknextengine/LICENSE.txt": {
+      "sha256": "1665f132200c8e9902f8546860e75603516ce7be673244d8db08cda639789db4",
+      "bytes": 1094
+    },
+    "third_party/imgui/LICENSE.txt": {
+      "sha256": "f20418b409e53c8c9f4e90917ff395554a60320d4dfbf833da89b339cad8628a",
+      "bytes": 1104
+    },
+    "third_party/imgui/backends/imgui_impl_glfw.cpp": {
+      "sha256": "7b98c70e6592ec4385cb4ebf5a70289c4fa9723c19fc78f13ee0939b53969023",
+      "bytes": 95683
+    },
+    "third_party/imgui/backends/imgui_impl_glfw.h": {
+      "sha256": "38fe28e770610de5b7dcf36f796bca6321e7e6ef0653fade9a8d517bca1f7335",
+      "bytes": 5586
+    },
+    "third_party/imgui/backends/imgui_impl_vulkan.cpp": {
+      "sha256": "a2f1c12ab5bf990e2ca48f598dae78c8b48b6f5c9999d7044abf47d51d09d922",
+      "bytes": 132142
+    },
+    "third_party/imgui/backends/imgui_impl_vulkan.h": {
+      "sha256": "23abb036bb7ccf10d0468af7d6dd24260cab0557a331292922ce33353695d02e",
+      "bytes": 18515
+    },
+    "third_party/imgui/imconfig.h": {
+      "sha256": "6e46e4e949b57c82a581e88a5eaba2d70980039911af8322daa5cfe494e8d739",
+      "bytes": 12320
+    },
+    "third_party/imgui/imgui.cpp": {
+      "sha256": "8607dbb9445fcf018a9b0d4511103c256cd0152ba2168eb8ea894f47acf87bbc",
+      "bytes": 1305269
+    },
+    "third_party/imgui/imgui.h": {
+      "sha256": "f80759965f63f5b081775e4d59d14b9da7084fc81286541bdc682bcc244fcc27",
+      "bytes": 465679
+    },
+    "third_party/imgui/imgui_draw.cpp": {
+      "sha256": "f3564140bdb475f299f295cb2dba515995722ce1a77dcd24b4b75ed8fead46b5",
+      "bytes": 387686
+    },
+    "third_party/imgui/imgui_internal.h": {
+      "sha256": "1501c26d9721ea80b81b9c31a0d5afe32ba9c04890b6a3142a99ae18b8331a50",
+      "bytes": 334126
+    },
+    "third_party/imgui/imgui_tables.cpp": {
+      "sha256": "0e0eeba7526076584a0cd8047b020fbf6511d6152516bed9a31584c1a9206235",
+      "bytes": 261723
+    },
+    "third_party/imgui/imgui_widgets.cpp": {
+      "sha256": "93237e4b54424303ca95eccfcdec04e84cfa3da0f5911d4fea0887252fbc1b2a",
+      "bytes": 570325
+    },
+    "third_party/imgui/imstb_rectpack.h": {
+      "sha256": "7f9bffb8ac5e79d20787fdc20d29d29f7474dca673f64d4a9a8a9f9373e40972",
+      "bytes": 20973
+    },
+    "third_party/imgui/imstb_textedit.h": {
+      "sha256": "24a8db00354af8f4057417841635a1b6dfd8986f1608336fe6f10d6fd9769aaa",
+      "bytes": 61638
+    },
+    "third_party/imgui/imstb_truetype.h": {
+      "sha256": "a4131c7a2e324c0625250830af6976adb5732b453f0fc6e8bc5ad70065bc2b79",
+      "bytes": 204588
+    },
+    "tools/ai/__init__.py": {
+      "sha256": "2bfe70d669ffa4df56319c092ae75d19d719621e6a3e870b92257b23b36f3492",
+      "bytes": 57
+    },
+    "tools/ai/profile.py": {
+      "sha256": "bcaed7b44f3e95c84de4fdb88f8de3244551fcff4821727e8ea5aceefe6b33f2",
+      "bytes": 393
+    },
+    "tools/ai/protocol.py": {
+      "sha256": "bb2ea7fd64334386b6ddd2acaf4e49f91e6180731412de4de829b14d940ef853",
+      "bytes": 1173
+    },
+    "tools/ai/provider.py": {
+      "sha256": "8f09b36600f2dc1d41b8d2b8ba3f8f563348ff94a7c02b1adf07214cdc731cf4",
+      "bytes": 4302
+    },
+    "tools/ai/session.py": {
+      "sha256": "f0ec1e2f65611bc1cb95e79cffb95a3866baf2c49e4c36633bd98ef58b2de46b",
+      "bytes": 755
+    },
+    "tools/ai_bridge.py": {
+      "sha256": "700f5c4725b62831f69baedc35f4b15a9ff0f340568fc6e8785c39849a01ef12",
+      "bytes": 8677
+    },
+    "tools/audit_brow_mesh.js": {
+      "sha256": "f2230200caa111fbf7b0316c9a1d9d752e4b9de34602f9c8ce7faaacea4d8cca",
+      "bytes": 10191
+    },
+    "tools/audit_face_sdf_compatibility.py": {
+      "sha256": "cc130ef52acd74a08889df84a871253d669c1a57fc4b40de58e01ee78af7695b",
+      "bytes": 7306
+    },
+    "tools/audit_repository.py": {
+      "sha256": "abaf2505dfee6e780a671e7c5c1867a0acc85ea7d6382002b85770280ec58c0e",
+      "bytes": 3015
+    },
+    "tools/azure.py": {
+      "sha256": "8499a57b37fda596bd50f271ec608c09d04a49fb6cdfc3af6fbf72d94ecb01c4",
+      "bytes": 8085
+    },
+    "tools/bc5_normal_png.js": {
+      "sha256": "c09e930967e543e21b61ddf9bc9ee76c05dbe45758f2691318a532bdf832ff4c",
+      "bytes": 8279
+    },
+    "tools/build_face_sdf.py": {
+      "sha256": "92613c6353439f0f9317fd5059a72d82931a653acb1975d49e711ca7cf0df5a9",
+      "bytes": 6772
+    },
+    "tools/build_game.py": {
+      "sha256": "184e367119ba5639206b2cf5e7a99522f79d784cad1243efb2b0fa7c124328f6",
+      "bytes": 11415
+    },
+    "tools/build_image_comparison_sheet.py": {
+      "sha256": "301c0447d8ec13e71592e2c699edd9fb89512cf768024be04a28853e39fb8d69",
+      "bytes": 3164
+    },
+    "tools/build_managed_scripts.py": {
+      "sha256": "e53aa0e9d1d7c8164d797f39abde49f5e16976587232eef1c81a9706fa211fa7",
+      "bytes": 5380
+    },
+    "tools/build_provenance.py": {
+      "sha256": "d81a98980ec3692184a78dbad5139ee29ad9294d3be2c4ff217ba500129838c1",
+      "bytes": 4331
+    },
+    "tools/build_qa_contact_sheet.py": {
+      "sha256": "fbac2d97838fefbc4f4993a287636e9eff5e93eaab7fbea3155783f09bbab351",
+      "bytes": 2718
+    },
+    "tools/build_toon_ramp_atlas.py": {
+      "sha256": "cc0f6effce02c180e88ca88429702fe74f364771a3a6794d0483e7c05af4466c",
+      "bytes": 4781
+    },
+    "tools/character_intake.py": {
+      "sha256": "19b12ef6d071f916e68b835ebbf480962464b6adf0f58bcd47effa6cc5e4e196",
+      "bytes": 3858
+    },
+    "tools/check_doc_style.py": {
+      "sha256": "07b211be2aa3433ad776a06171c33f0450dc15d0254d738df04bf33ade768f39",
+      "bytes": 2341
+    },
+    "tools/check_docs.sh": {
+      "sha256": "b8031dde1ee3f795609312e7a8e3ac57c97b0dae304cb3502ec6051307f566d2",
+      "bytes": 2469
+    },
+    "tools/check_module_boundaries.py": {
+      "sha256": "16a2aece322bbbcc79297ea5f6d3a07ff68fad26b7dd1b3d6d837f8365cc43e6",
+      "bytes": 9990
+    },
+    "tools/check_r3_archived_budget.py": {
+      "sha256": "7e343ce57a4119b71d93f9bcee4896b7592417a401b704a97e99b6f265168d9c",
+      "bytes": 1287
+    },
+    "tools/check_windows_surface.py": {
+      "sha256": "7ab36025aa2f28264afd5654a627de73083f856ce008fb35659da8bb37142151",
+      "bytes": 2145
+    },
+    "tools/compare_images.py": {
+      "sha256": "b941466b403d0e04791f14aec6092ca3324880c8094270248749f9d39fa6acb9",
+      "bytes": 2102
+    },
+    "tools/compile_shader_module.py": {
+      "sha256": "9dd14ced809d047237136116e1349ad94820726c1e364e7e239a13f770a2c3b2",
+      "bytes": 14670
+    },
+    "tools/configure_windows.ps1": {
+      "sha256": "650a16911e2c4709830a5792e3b1442fedf94a57e7d2f45a940f36d6660bc009",
+      "bytes": 1644
+    },
+    "tools/create_editor_tutorial.py": {
+      "sha256": "e9fe20460ee6a871381bcceaaa091e601b334a0d89eb2e390cc68d7916a734d3",
+      "bytes": 1617
+    },
+    "tools/create_managed_project.py": {
+      "sha256": "139482843282c8c6f1dfb5242251d75d85292c941ebec945e9118c5247ba05b1",
+      "bytes": 3080
+    },
+    "tools/create_material_fixture.py": {
+      "sha256": "e699e68befc3373f4145deae0e5a642b1c452a42451de21a1c12cd4f144c6182",
+      "bytes": 6972
+    },
+    "tools/create_playable_project.py": {
+      "sha256": "6616c63acc8fa7c664fe4393d5a983bbb7b407e626a6f85f69544f9817689086",
+      "bytes": 7349
+    },
+    "tools/create_third_person_project.py": {
+      "sha256": "16f8e8d83b9f99130b3ee9d982e6c8b12446fe4231bbdec944789ac75005f2a2",
+      "bytes": 3983
+    },
+    "tools/create_visibility_fixture.py": {
+      "sha256": "037903b6216a66a62731a6b2dc3d8585b32d3c55e4751186220c32cbb6b64267",
+      "bytes": 5801
+    },
+    "tools/encode_capture.ps1": {
+      "sha256": "730e5253d6f2a154912d1f130cc6c020032ccc90fb21a2461a9e0d20de30cac9",
+      "bytes": 2215
+    },
+    "tools/fbx_sample.c": {
+      "sha256": "382f883bdd9bc2a15991ec5df7650264d094cb9338d90639efd345243db7f383",
+      "bytes": 2804
+    },
+    "tools/fbx_skin.c": {
+      "sha256": "d219eddc98de63133a77169e451f23ffd8717938601a24ac493eff8d87f6aee0",
+      "bytes": 2214
+    },
+    "tools/fix_msvc_deps_prefix.py": {
+      "sha256": "a49745f2f72fd6357be0319d70d9b3db5c4e60cbbf73dc69ec2576a280a753b3",
+      "bytes": 5523
+    },
+    "tools/freeze_qa_runtime.py": {
+      "sha256": "a5a72bc96400c1a7bfda6b264de3b1ecfd731011fff2f91a102078e28303ba4d",
+      "bytes": 1472
+    },
+    "tools/generate_script_bindings.py": {
+      "sha256": "7f3f19db14d40cccbf57528f1a1a5c590c2fb2b5b48a0198ee4b5783800e19e1",
+      "bytes": 6400
+    },
+    "tools/generate_shader_types.py": {
+      "sha256": "2efa78cedd8af5d88643ade4aeb29e31166bb28cf24aaa8fba61650d5920a1e2",
+      "bytes": 2427
+    },
+    "tools/generate_third_person_assets.py": {
+      "sha256": "8b952817b04d8774011d9cf2b010f20d3df49cc49adf1af1ad094606ccfd6a54",
+      "bytes": 5904
+    },
+    "tools/inject_gltf_idle_animation.js": {
+      "sha256": "8f074eda82ba5a3aa2bcd7840176c1fc9e66ec3af818746c6f6aadb63375bea6",
+      "bytes": 6075
+    },
+    "tools/inject_gltf_textures.js": {
+      "sha256": "e0a7aca454163867540440661d44edfddc545ded66072b255b624e448278a75f",
+      "bytes": 16802
+    },
+    "tools/inspect_capture_stats.py": {
+      "sha256": "ce2fd8387e61ae51aeb0c05897935f8b61550f4f843c9e93070ed60771794006",
+      "bytes": 1062
+    },
+    "tools/measure_runtime_performance.py": {
+      "sha256": "989a9e9b0a96001be6ad6cea0f9c9f98a33ec9a62185581df2a86d8037461de4",
+      "bytes": 2692
+    },
+    "tools/metagen/main.cpp": {
+      "sha256": "76241f7a55758bb132513ea377a4214379ad735facfb276e90a3e5794db6f795",
+      "bytes": 7009
+    },
+    "tools/msvc_env.bat": {
+      "sha256": "40bd53ef84668cea2add66dba32fe7ca407dd141221896880341ebb86a64ea45",
+      "bytes": 3595
+    },
+    "tools/prepare_character.py": {
+      "sha256": "567e055314a909b73ad003e85656e8783fe72756a28467f9dead37a3b0230137",
+      "bytes": 2836
+    },
+    "tools/prepare_fbx_tool.py": {
+      "sha256": "8aeebd0212eb235cabff985832bbd10aa7d6c36a8360f12c94bde5eadba8c1ef",
+      "bytes": 1399
+    },
+    "tools/procedural/main.cpp": {
+      "sha256": "c3421c6517084961a0c346ed6dbe20516844096d993f38ad5852695306c6d3c7",
+      "bytes": 1969
+    },
+    "tools/record_stage_evidence.py": {
+      "sha256": "82d3089a9dc629f7088a00747f456fd780be2f56b8027c03d047847d471c4f2e",
+      "bytes": 2334
+    },
+    "tools/register_game_package.cmake": {
+      "sha256": "1b08885ecccca794d59eead2e3712decbb7bbce00723cdd3f28a300b0c9751fa",
+      "bytes": 1276
+    },
+    "tools/requirements-character.txt": {
+      "sha256": "5c6bc22674e161346ea25e4b6d7ccb2d6a4d0d1b618a5ec56a6cea8a32902431",
+      "bytes": 90
+    },
+    "tools/restore_skin_weights.py": {
+      "sha256": "29923172028b16d7589e3b40c3bcf39f766983f6cb65533964fb92459ba7405a",
+      "bytes": 5875
+    },
+    "tools/retarget_animation.py": {
+      "sha256": "a6431da07d7dd56f61f485c313d76c119c28891691c54bd6d16c21d6337f1ede",
+      "bytes": 12594
+    },
+    "tools/run_audit_regressions.py": {
+      "sha256": "3d47298c4203e7cc37e480f9bae6dad05a70bac096ba00bb9ff2f235e8d2ce0a",
+      "bytes": 2236
+    },
+    "tools/run_blackhole_compute_smoke.ps1": {
+      "sha256": "b58822aacd42005988eca25a447b0776d8afc53d006ca3ee24cd19e908756728",
+      "bytes": 1643
+    },
+    "tools/run_blackhole_optimization.py": {
+      "sha256": "08df8cfd1cebb42061329d8fa897aa7f052bf9b9ed5ab4b84d21099c7d556e43",
+      "bytes": 6430
+    },
+    "tools/run_character_ibl_smoke.ps1": {
+      "sha256": "9ffac34d41dbd509ae243def48773638dff99cf9a515206b2143968d6c1168f2",
+      "bytes": 1597
+    },
+    "tools/run_character_qa.ps1": {
+      "sha256": "cd8a1f55d99eeeef2beffe46cae776c7c67ff292e0f99c5f2ebbc5cd42fd0a86",
+      "bytes": 12595
+    },
+    "tools/run_character_skinning_smoke.ps1": {
+      "sha256": "c81b5f4928a9c5dfd7ad35520edff2232fbbdface39723fac9cf489ccf16e9a7",
+      "bytes": 2076
+    },
+    "tools/run_clustered_light_performance.py": {
+      "sha256": "79914340a98ef66bd1055b73064cb23e606147e679bfd7006a77e87b2e26652a",
+      "bytes": 6019
+    },
+    "tools/run_clustered_lighting_smoke.py": {
+      "sha256": "7763f18bd2d7bee5e374b61230a7db23b6ae94e1e7fdb517e926d9f5fe5c362c",
+      "bytes": 3271
+    },
+    "tools/run_g0_acceptance.py": {
+      "sha256": "a4de66ae98079c0d3899fa51a0e7384652f108c30dc2d714f29b3de1cac9fbbb",
+      "bytes": 4866
+    },
+    "tools/run_morph_compute_regression.py": {
+      "sha256": "0662e67da5a29850eaff24af935a6dcc4295ad6ba1a061b5773990ec377410ae",
+      "bytes": 3646
+    },
+    "tools/run_performance_baseline.py": {
+      "sha256": "cb68eb8b8be65b9cf9fe2d6ca7498d7244ba4e83c6f2d53b5956544edcd5431e",
+      "bytes": 6867
+    },
+    "tools/run_playable_long_run.py": {
+      "sha256": "79d2fb73f421f96fd5f9aa0fce3287531029a546a9aee6b36991a0d7599d0bcc",
+      "bytes": 18943
+    },
+    "tools/run_playable_performance.py": {
+      "sha256": "41eb947f78b4e2b893472c5be02f8dbdc66d4adef6e432b9782a7df7f706adc4",
+      "bytes": 9553
+    },
+    "tools/run_preview_comparison.py": {
+      "sha256": "55ab194ca614db70febeb3e73f72bb8fb16be9393feac4517728b57372aa0838",
+      "bytes": 5550
+    },
+    "tools/run_r3_comparison.py": {
+      "sha256": "ee8ac8c8c674f1c54aa670467e1a8e8f5a67e9c03426f8e5eb5f31b3cfce3860",
+      "bytes": 4883
+    },
+    "tools/run_r3_performance.py": {
+      "sha256": "38fafdcb62ec40e723e97d77c5d3c08da13cb71feab5bef2fceb7c8a414723b2",
+      "bytes": 8736
+    },
+    "tools/run_r4_acceptance.py": {
+      "sha256": "15d6efc6e7d7f9242108db2ca24da3efaf71f8d6f779a473a65d167e62f5ef63",
+      "bytes": 11747
+    },
+    "tools/run_release_gate.cmake": {
+      "sha256": "f741c9bc5cad1b8b3c6718bae91cc8af425c1145eaf91fa5a89849d76cbcceb7",
+      "bytes": 6214
+    },
+    "tools/run_shader_module_benchmark.py": {
+      "sha256": "95168df89dca938cc9b5d689dd573af5190ea79c2540e93cbacb62cb21f30e9a",
+      "bytes": 3329
+    },
+    "tools/run_shader_scene_comparison.py": {
+      "sha256": "e582ff9a0f73330aad7469ac547d175942b7ee52d5f7ba781c63d9e41f2be854",
+      "bytes": 4172
+    },
+    "tools/run_visibility_scale_benchmark.py": {
+      "sha256": "6ab927b34b7406ef719a6fc334b2cffcb5d9d666e2cc79673c065885e268ae0d",
+      "bytes": 6355
+    },
+    "tools/run_visual_regression.py": {
+      "sha256": "a6304d2d207f72d6bb38a431336d1f3fb2191ed01efb0bf86b048e5008ee2344",
+      "bytes": 10434
+    },
+    "tools/test_ai_bridge.py": {
+      "sha256": "295b22cb45a4ea862737e2f60dff0afb238a2850d6aae60600cfef134e04321e",
+      "bytes": 9203
+    },
+    "tools/test_animation_retarget.py": {
+      "sha256": "40ee1b1d711ed377598f4156b0190378466db7c51c4d8d47d381bc7738acef1b",
+      "bytes": 2208
+    },
+    "tools/test_azure_cli.py": {
+      "sha256": "c2728dc4ca67178f3452d1082330585f89a5d802d0ca39f532f04b63f062f6c2",
+      "bytes": 3844
+    },
+    "tools/test_blackhole_optimization.py": {
+      "sha256": "62ecbe2e6a2dd9e69c4c7ab565a2be67651cb3a6d1c753a232f4e1d86fcbdbbc",
+      "bytes": 1578
+    },
+    "tools/test_build_configuration.py": {
+      "sha256": "62757c7bb98981399b87402671ea7bf57a7ff61d74672180ca736516259eb81e",
+      "bytes": 3443
+    },
+    "tools/test_build_provenance.py": {
+      "sha256": "96906cd70bb5c4730dbcce778037644b4c2c877bffcc9dadb8b649591979b44a",
+      "bytes": 5271
+    },
+    "tools/test_character_finish.py": {
+      "sha256": "ee572f1010d5e53b0037809061587b0ae2dc583b8e03875ae1be5b62ffb76064",
+      "bytes": 8369
+    },
+    "tools/test_character_intake.py": {
+      "sha256": "40ad687474892c9a72ab47c702780c70e6beb44ad70b1107e38d007ba065be96",
+      "bytes": 1100
+    },
+    "tools/test_character_preparation.py": {
+      "sha256": "eeb319d28f06c8745c7d56984be9425f2fe57cfacb271c119d23ef0086814059",
+      "bytes": 1860
+    },
+    "tools/test_devtools_host.py": {
+      "sha256": "9f7e30b262af40885066d429ff2247ae2859e5be70d9acad14487700083cd8a3",
+      "bytes": 12401
+    },
+    "tools/test_editor_playable.py": {
+      "sha256": "30c57389cfe632dc6d930b87ada009fe9b32c89d0cf3554eb8ab9b7d7b871c52",
+      "bytes": 6798
+    },
+    "tools/test_editor_workflow.py": {
+      "sha256": "e1671cad81719ffc178a25f571b464cd3e9ae2a594eb29ddc71cccc0e2022b99",
+      "bytes": 5469
+    },
+    "tools/test_editor_workspace.py": {
+      "sha256": "66ae18a7c7c1bac2373e1742764e35165992bb511ccc43231c3185e316ed5ac8",
+      "bytes": 10702
+    },
+    "tools/test_engine_contracts.py": {
+      "sha256": "74721c46a3a02936138c501dd0ee4314aeb5844a86e4716eecc11e2820c7c213",
+      "bytes": 3229
+    },
+    "tools/test_evolution_coverage.py": {
+      "sha256": "17ae287f13db15c51d153ce7102181a5ce4c89c53a1204c94f559bf556e575e9",
+      "bytes": 8253
+    },
+    "tools/test_fbx_samples.py": {
+      "sha256": "c05f14a5ad14db89d7900b9419c2e184808176486f92fbd1189a20b3496c6255",
+      "bytes": 979
+    },
+    "tools/test_game_package.py": {
+      "sha256": "efd8b90ede539b61c8de344ac42eddead5e3b85363c031cc1c8234cf3c79d55d",
+      "bytes": 6685
+    },
+    "tools/test_game_package_rules.py": {
+      "sha256": "58bba1d179da473c02643db5bb7c2150af26a9bfee7c70a0cb407e62536526bb",
+      "bytes": 6827
+    },
+    "tools/test_game_presentation.py": {
+      "sha256": "de06e19865ba2d26c69a0ba0c45a87f23261b456d75a7bf5a9b5f01794d64fd2",
+      "bytes": 3594
+    },
+    "tools/test_independent_animation_gpu.py": {
+      "sha256": "2c0a81bf39eb2f9ffef81385bcbc78a3210e2d5115db2fa19f5d64197fe5cfe3",
+      "bytes": 5722
+    },
+    "tools/test_install_manifest_roundtrip.cmake": {
+      "sha256": "fcbbf4db36e3184bdeac138722531fcb89c37f1b4a42034e7e88d50e4b6eb159",
+      "bytes": 3125
+    },
+    "tools/test_level_cycles.py": {
+      "sha256": "899bda8c29e7c0ab2c90e780e1e21971ecef9c3b4dd9908ccd0076edb52df37f",
+      "bytes": 4696
+    },
+    "tools/test_level_player.py": {
+      "sha256": "b8170c13ac44714779ededa39f9d0297311b4eefc3746175235e45681ec1cf54",
+      "bytes": 2636
+    },
+    "tools/test_locomotion_direction.py": {
+      "sha256": "96004bdbcbfc971906c9a60806af0d9f1992fd14dca42cfd62b9fe4633382293",
+      "bytes": 6852
+    },
+    "tools/test_managed_workflows.py": {
+      "sha256": "06a35f421876df7179342ba0c1ee506275ecc2f0261668eafd1324c1799ffa09",
+      "bytes": 5916
+    },
+    "tools/test_material_fixture.py": {
+      "sha256": "cfb90cd0aa383618c14d62451984e650f6f5897eba8a6283e5b3df20210ad319",
+      "bytes": 6431
+    },
+    "tools/test_metagen.py": {
+      "sha256": "e1c4e65c546e8ac6517bc50e8a813fd64b43d2eb727c1255bd6d84e7d6ffd6c6",
+      "bytes": 1467
+    },
+    "tools/test_module_boundaries.py": {
+      "sha256": "4121099d31de02a6c22d6cd217cc60fce05b9322de0c395e0ce8ee1e679a6c6c",
+      "bytes": 5137
+    },
+    "tools/test_native_window.py": {
+      "sha256": "aefc0a4978e22b5e93e1ed793aa40d9108c6ac3fcf941c425a81e6456acddeb5",
+      "bytes": 1853
+    },
+    "tools/test_observation_host.py": {
+      "sha256": "13e1c75fe50d063568a35da189166976f684c49bd85a194f657c416e2f31e274",
+      "bytes": 8174
+    },
+    "tools/test_optional_runtime_trace.py": {
+      "sha256": "304b486e3b0b63c3f05f0a6ec7c47301489a495d7af6999e9238e7bd5abf91cd",
+      "bytes": 2538
+    },
+    "tools/test_physics_player.py": {
+      "sha256": "765764e1ec38a81b65cb5349ac152cff0d7625ebb87422222eeef8f0f7547f2c",
+      "bytes": 1740
+    },
+    "tools/test_playable_delivery_rules.py": {
+      "sha256": "3bd4687448ab71f9da4336c0de2b2103d4699bddd3b57c45f709707dd00c885e",
+      "bytes": 4372
+    },
+    "tools/test_playable_package.py": {
+      "sha256": "8fcb3abf0bec35fb2fb78cbfa3734175408c2b9919dd1b2d3f8a7cc457528e5b",
+      "bytes": 6222
+    },
+    "tools/test_playable_player.py": {
+      "sha256": "4cfc9456cfb7e967603deb584fb72661308dbed5916fe8dbeb68867bd51f9d30",
+      "bytes": 4593
+    },
+    "tools/test_player_cli.py": {
+      "sha256": "123e5777da926119c56c5d0da06cbba96db6bd52a253416f271a064f32abad33",
+      "bytes": 2490
+    },
+    "tools/test_procedural_host.py": {
+      "sha256": "b6ca7cb5c0f863e960e89edafba8cc78090ab07c34689e85e9eee820bc7a93b3",
+      "bytes": 11479
+    },
+    "tools/test_proposal_host.py": {
+      "sha256": "0e92da9a4199a9c052d95eef87de2662cd67c216e1e471b186fddef2c5056d11",
+      "bytes": 10149
+    },
+    "tools/test_public_gait.py": {
+      "sha256": "a78e6208af4098136837f0fd62eb2b67e8127e1b74103540431cee831ec52b02",
+      "bytes": 1529
+    },
+    "tools/test_r3_performance.py": {
+      "sha256": "5009577f732f189ec7189b31b1c31c01e21ffcaf56a34d932b7197c481350d8f",
+      "bytes": 1326
+    },
+    "tools/test_r4_acceptance.py": {
+      "sha256": "d11ccfa1d587a4bcc49bcc4f1ced0538a3bdce2ffd1e4a4713936eae76b653e8",
+      "bytes": 2512
+    },
+    "tools/test_registered_component_host.py": {
+      "sha256": "26e5191363c9beaee22051d0939b2d102a0d973bde929f2075e098e8ed2132af",
+      "bytes": 2653
+    },
+    "tools/test_render_preview_host.py": {
+      "sha256": "9c9fd244d0fc74dd75acb7c80b81730b7c5b359b61c2c6163b614016183c0371",
+      "bytes": 4470
+    },
+    "tools/test_repository_audit.py": {
+      "sha256": "3952d36acebd9bea5362865f5bff098c121001c7366c7c325bd386293e93af47",
+      "bytes": 2884
+    },
+    "tools/test_runtime_spawn_gpu.py": {
+      "sha256": "7a9070db6e922315ebf7d2bc54a4c643cb6debabd4c66128c38b75de6c5c63ba",
+      "bytes": 2500
+    },
+    "tools/test_scene_inspector_host.py": {
+      "sha256": "eabf54b407fb5be0d96a023da4a49a80a691391a3eb8d9b6b44c36bed545d27d",
+      "bytes": 3936
+    },
+    "tools/test_scene_visibility_gpu.py": {
+      "sha256": "43342c160b4eb3bc856221826a6942a6830bc3f1ecce50d2ca3cfadd6cafe47f",
+      "bytes": 7730
+    },
+    "tools/test_script_bindings.py": {
+      "sha256": "cb7a6a7cc47728960fe101a1f37008caf80580e1a7fb4d8509df4b5061c4c5e3",
+      "bytes": 2659
+    },
+    "tools/test_script_player.py": {
+      "sha256": "e9b6b334317dc94483c0f118695bb01ba3204dbd6bbc5e3cefc62623930e47f2",
+      "bytes": 2027
+    },
+    "tools/test_settings_host.py": {
+      "sha256": "ddbd68d936049cd154d288c20ffe489f9a616204ac350abf85e17d800b13a538",
+      "bytes": 7949
+    },
+    "tools/test_shader_composition.py": {
+      "sha256": "9b9e85db1cd893792f9578541c02cae074fd98d8afbf4245ffce125b819baa9a",
+      "bytes": 1989
+    },
+    "tools/test_shader_module.py": {
+      "sha256": "30f7c318cff6d5dbf18392ef6b285fa08b59d263b898e82cc02c1f691a4dcfc7",
+      "bytes": 9534
+    },
+    "tools/test_shader_types.py": {
+      "sha256": "c0e34da83f3f1c77da4ed03de9611f2f7d91909d8869ac7bc3c87e01daac89af",
+      "bytes": 1609
+    },
+    "tools/test_skin_restore.py": {
+      "sha256": "643bede2c8b8780a6d22063af9952eef705c4278c8ff40f4e8c4390067079124",
+      "bytes": 1122
+    },
+    "tools/test_third_person_player.py": {
+      "sha256": "33f363fdf3e94ce4c947cbacc27ab3bc128568ce1a9817af51e7912dd96263d9",
+      "bytes": 3915
+    },
+    "tools/test_validation_protocol.py": {
+      "sha256": "9052b62da70b7eda14087b1150737b655cdf091b9d1f42c3f297a2d8b10dff61",
+      "bytes": 4017
+    },
+    "tools/test_visibility_benchmark.py": {
+      "sha256": "064f11a0044241316d5f5192803aecfa8355b0a8beec909e4df5b753238d7be9",
+      "bytes": 1078
+    },
+    "tools/unreal_export_laevat.py": {
+      "sha256": "5033fbe4188747cd77742cb83973481a24cd0b0aadf8b6d5a44f5eba3a360378",
+      "bytes": 2008
+    },
+    "tools/unreal_export_laevat_matcap.py": {
+      "sha256": "4158864bf06c2b86ab09f4c360a4aac800bea75ff4399fcd7f7666bc9b7e4d1b",
+      "bytes": 1589
+    },
+    "tools/unreal_export_laevat_skinned.py": {
+      "sha256": "f2c9b4768bb864bec5b5042a9560760914870a98300ea3ffd969f3dbd0cc4be9",
+      "bytes": 2039
+    },
+    "tools/unreal_export_source_skin.py": {
+      "sha256": "98dcc562aaae08aaabc77ebe9c02dc228e14640569547d35506e9677a42f33b6",
+      "bytes": 979
+    },
+    "tools/unreal_extract_laevat_textures.py": {
+      "sha256": "db0ca4d691c0849c88082fb72ca7fe6d7e5aa7a446ca675c2f284bb1da3007a3",
+      "bytes": 5968
+    },
+    "tools/unreal_list_laevat_animations.py": {
+      "sha256": "b56ecf57a1634ff16d4da62e171efe9688d20f51eee563abb7bd90a9f6130ef9",
+      "bytes": 2411
+    },
+    "tools/unreal_trace_cloth_material.py": {
+      "sha256": "5ebaca3915dbdaf64f421cb047befdb020c456a0c0a3919092cd280666040437",
+      "bytes": 5234
+    },
+    "tools/unreal_trace_hair_material.py": {
+      "sha256": "b3ee687fec8f97a819767066d584de1378b631a5480a73f5c57df780c79f1949",
+      "bytes": 5426
+    },
+    "tools/validate_material_profiles.py": {
+      "sha256": "a7fac24297081b339ce7cf31555dd989d4718540a0a0e6362cb20a4129a7d70c",
+      "bytes": 5951
+    },
+    "tools/verify_evolution_coverage.py": {
+      "sha256": "6f877eae24ec97b272301257387cc4528d446c4351a2c60ecf7569ea21420ea1",
+      "bytes": 11479
+    },
+    "tools/verify_install_manifest.cmake": {
+      "sha256": "ec64bbe7d107eb7f087ea36ccc55805dffada9c605b119de2b07f2eac5b559f0",
+      "bytes": 2820
+    },
+    "tools/verify_player_runtime.ps1": {
+      "sha256": "3f8dc0f0774dd706bb538481f1dfff8fe17da3d62404fd52ef2fb2db16b1b0b1",
+      "bytes": 2799
+    },
+    "tools/verify_portfolio.ps1": {
+      "sha256": "7d01d823ed33a35b39993768bb5b5cdb426567729d98df79a37b9b3f2d64b8d4",
+      "bytes": 1925
+    },
+    "tools/verify_windows_runtime.ps1": {
+      "sha256": "2071308350c5ee37d14e8a5887c29bcd6cdbdfb68e03b664222cecd23ff664f3",
+      "bytes": 690
+    },
+    "tools/visual_regression_cases.json": {
+      "sha256": "7cccc5c7157d4606e9a00fa766158a20ba39a83ddd2d411ae592516c636a94e0",
+      "bytes": 1758
+    },
+    "tools/write_engine_contracts.py": {
+      "sha256": "d2e2cc856b4a38ae65129d4464ff99d9e86fa4199fc5503b6fe8713a483ffb7b",
+      "bytes": 3673
+    },
+    "tools/write_install_manifest.cmake": {
+      "sha256": "f11a54c2938cf4c19813b0ddb3aeddf16b8ae3fac08179c6d2e0871d65059421",
+      "bytes": 3557
+    },
+    "tools/write_rc_manifest.cmake": {
+      "sha256": "b80b7a58db87d9517c8b3e634b9594414140872203c3614c06bc0744a28b50f0",
+      "bytes": 764
+    },
+    "vcpkg.json": {
+      "sha256": "166c01eea7ce8e875e75f934bb4edfd2129b56fea09b2ce77c78ea4d558f22fa",
+      "bytes": 668
+    }
+  },
+  "buildInputs": {
+    "assets_public/baselines/character/character_albedo_fullbody.png": "c7c3322828f7464e229576d92178aa69d7dfa3a30909a8bd9ba87e5b9ae691e3",
+    "assets_public/baselines/character/character_beauty_fullbody.png": "86e1c437ec29aa1ece304daf8c17f978e9e0a37ddd6855585656800c3d3bd3f5",
+    "assets_public/baselines/character/character_direct_diffuse_fullbody.png": "feadd9f5ee66c08607fdc5a11f3ba35665d0230df61cb07c81f8f84c918a2acb",
+    "assets_public/baselines/character/character_face_sdf_closeup.png": "eb58ceac8bbeb29e28ff2984188f9e31a54c45aadae2f8227dd55ac3e030c01c",
+    "assets_public/baselines/character/character_material_id_fullbody.png": "96f95bf4511edbb8aea4b5ec9c8eea8f0853648dc314db5a5318bd7a71d590bf",
+    "assets_public/baselines/character/character_outline_fullbody.png": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56",
+    "assets_public/baselines/character/character_world_normal_fullbody.png": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb",
+    "assets_public/exploration/assets/CHARACTER-LICENSE.txt": "be53cb6c25774e09d7f8eff01d850a71de5ede9a916a7e9407ed9439e79327eb",
+    "assets_public/exploration/assets/checkpoint.lua": "60fa48454c184884f356b9806c230adb0247ab778538bec5c154ebf06eea290e",
+    "assets_public/exploration/assets/collectible.lua": "6c0246eab1fb714ae42f0aa09fbba3c5ced3605d370b56bd5f351f4c839e8b5e",
+    "assets_public/exploration/assets/cube.gltf": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651",
+    "assets_public/exploration/assets/door.lua": "43aac45a599c866aa9871390c9e705b1cbe45075b5a7adb0e9933b64874d43a9",
+    "assets_public/exploration/assets/exploration.azurelevel": "015c6c35bafb0c9bea07c792a75ff52498a5931620a618a74a19cc43ecfa7fad",
+    "assets_public/exploration/assets/goal.lua": "e35fdd4cfcbe0c74845fd32f9e11668b4cf8a09dcc5734f746522d5507caa09f",
+    "assets_public/exploration/assets/guide.gltf": "728038e1e60d9f6b518372d76bcd7e0b3ab7522840ccb66b80edbcc575ca0696",
+    "assets_public/exploration/assets/guide.lua": "c17d9962634bfd9aca38e04e123d787bcdf116feefbac83f129cef93096d6e21",
+    "assets_public/exploration/assets/hero.gltf": "4c35b283bb2e7565e37c73c0764c73fbf323337b0c94b209178489b745544e1f",
+    "assets_public/exploration/assets/hero.lua": "eb374d5523253aef7c7d09655d02d09af8756b29dca5f16b07bbf082f0b44bf1",
+    "assets_public/exploration/assets/hud.rml": "bfe8f2d4d6bee41f730dd7081e437076b080089d5ae09e56bd15de62c0e67f72",
+    "assets_public/exploration/assets/locomotion.json": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088",
+    "assets_public/exploration/assets/prefabs/checkpoint.azureprefab": "e600119d12e1118bdc33dadf4552db0716b450f84a2ad938783544c79fb92543",
+    "assets_public/exploration/assets/prefabs/collectible.azureprefab": "eb0a10ba381da9a3c1d0126d3181a6a82194367d6a8550e7c027d4f28702dae2",
+    "assets_public/exploration/assets/prefabs/door.azureprefab": "bd5cfe2dc287c463e2f5b3305411bbceadec6df6ef1ec29e53d7dfa8421110aa",
+    "assets_public/exploration/assets/prefabs/guide.azureprefab": "fea8f99bffe882ddd83f8ea1ce9ef8e7c256bd5a5ebb613a9016ade603e73cd4",
+    "assets_public/exploration/assets/prefabs/hero.azureprefab": "29db1ed3f46ee247654f41ea4c5656bd568b380dfffa19bae8e156958e59fed1",
+    "assets_public/exploration/project.azureproject": "9a08677c134a508812554d85477364925a75a76048856c8de8afceffd796f259",
+    "assets_public/face_sdf_v1.png": "45a2bde466ad8ea335555cb697f8f1247893af471c4e40b0d5105d13dba19b51",
+    "assets_public/fonts/.gitattributes": "926c2b3b3ac6d1fc561e5f50a2de73f27d112512b2c491e260e70c0857a4857b",
+    "assets_public/fonts/LatoLatin-Regular.ttf": "d785334ac4e7810f571def986bbad41161f68ac385db8813f798bf04d71478e1",
+    "assets_public/fonts/NotoSansCJK-LICENSE.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+    "assets_public/fonts/NotoSansCJKsc-Regular.otf": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+    "assets_public/fonts/RmlUi-Sample-Fonts-LICENSE.txt": "c97278bb336ab0fb2d3bb7ba3f303d638224d6dd1edc6e6fcdd4ba28b8dbf2a6",
+    "assets_public/gameplay/assets/courtyard.azurelevel": "f2425350f521d2744fbe1865819fb1bcf1bd6dcc9da1e329c3edbbc6941bac80",
+    "assets_public/gameplay/assets/courtyard.azurelevel.azmeta": "7bd12f945d1b6e779ec3822c7057723a1423c2d81d4b837d7f01a59b838222f4",
+    "assets_public/gameplay/assets/destination.azurelevel": "2f73e52c9f227e7de3b98fe14772574394b4bb1640a7023cb9e089bd62b8cfd4",
+    "assets_public/gameplay/assets/destination.azurelevel.azmeta": "3adcd296a517ef284ede84307219adafae37476ab77b19724c06e7cfd0be278a",
+    "assets_public/gameplay/assets/hero.gltf": "bd955f3c529f45cc7ac7533d35a4f1074fd41dbd87468d3aae95d358271bc421",
+    "assets_public/gameplay/assets/hero.gltf.azmeta": "232c95295294711e582a75f8ced53266abe71cccf17cf60cfee24cc2f4b136b9",
+    "assets_public/gameplay/assets/hud.rml": "4f58c899fb038ebcd732264eadd5716cc9ac24e95ab0647f8dd1db78420df848",
+    "assets_public/gameplay/assets/hud.rml.azmeta": "85a9f7877095fb2ff2f4f1a3e7c7fbe7ef3a562e343cc49e4ec0284e88be5656",
+    "assets_public/gameplay/assets/motion.json": "657137af56cd8e2a654239ca79ae7b2c58ebdc1b18e77f551cdc2064421fd735",
+    "assets_public/gameplay/assets/motion.json.azmeta": "4de33967e978ba82556ef0815cb6205ca661e74df6b3d3b1348b996c40ed1d05",
+    "assets_public/gameplay/assets/player.lua": "d7cb64003c08a392be46976af3df8558c10e5bb6a598101a824796184cca68a7",
+    "assets_public/gameplay/assets/player.lua.azmeta": "3d44b8707e39bee2cdf04aa87cabe71c8e3f209fdd905f7f2e8f83647a693038",
+    "assets_public/gameplay/assets/portal.gltf": "e51feda90b93e3608911cf01fcdf6e460ccb9abfc34659d23c41531b304adfcb",
+    "assets_public/gameplay/assets/portal.gltf.azmeta": "dd848e369cbf1e2eaaaf50b2554bd73c1eef41de980cf76b920fea8e3b909ad5",
+    "assets_public/gameplay/assets/portal.lua": "4f4470c2d9dbef46fac305b710168b65bfca8193b61893ab394f545b88669cbc",
+    "assets_public/gameplay/assets/portal.lua.azmeta": "5c72df34816b9190c5989f91e3de3cf8ca36bd02faccdc9fe7feb9e8c4d917ad",
+    "assets_public/gameplay/assets/portal.wav": "d3e6dcc52bd9f2fe7ff5ce228e70f55c4b43aac78d0042d07e8617a579fae462",
+    "assets_public/gameplay/assets/portal.wav.azmeta": "cf314f662956ae31355e0eb5740ba47aa7d81bd0f5abea1f86c24467a3ed62ee",
+    "assets_public/gameplay/project.azureproject": "6556c21c17b516369f1f53d8170d207f5a150eb2a8abf2ef9ddcf95c1e4d706f",
+    "assets_public/level.schema.json": "98fceff6809fb145f75690e84a5522b6de6b8833e411fed9ab7c5728527d66dd",
+    "assets_public/playable_rules/checkpoint.lua": "60fa48454c184884f356b9806c230adb0247ab778538bec5c154ebf06eea290e",
+    "assets_public/playable_rules/collectible.lua": "6c0246eab1fb714ae42f0aa09fbba3c5ced3605d370b56bd5f351f4c839e8b5e",
+    "assets_public/playable_rules/door.lua": "43aac45a599c866aa9871390c9e705b1cbe45075b5a7adb0e9933b64874d43a9",
+    "assets_public/playable_rules/goal.lua": "e35fdd4cfcbe0c74845fd32f9e11668b4cf8a09dcc5734f746522d5507caa09f",
+    "assets_public/playable_rules/guide.lua": "c17d9962634bfd9aca38e04e123d787bcdf116feefbac83f129cef93096d6e21",
+    "assets_public/playable_rules/hero.lua": "eb374d5523253aef7c7d09655d02d09af8756b29dca5f16b07bbf082f0b44bf1",
+    "assets_public/playable_rules/hud.rml": "bfe8f2d4d6bee41f730dd7081e437076b080089d5ae09e56bd15de62c0e67f72",
+    "assets_public/procedural/building-parameters.json": "c1dd6e9ca757282902fb85ba5126c41fe1a45ddc03f940a6960f125b02544f85",
+    "assets_public/procedural/modular-solid.json": "cc4d6b18d345d5afe26a7076d76227e1f7e31e294e6a964b6199d5d79ba86878",
+    "assets_public/procedural/prop-parameters.json": "54f9f30e35ee0ed4fe0d3bbe12dd16d70f37e72efc2b1d6847a3337371e8d053",
+    "assets_public/procedural/rig/articulated-tool.json": "45f64e478eae0c907f13ae9650a26e78b4cd5d1c5e61c7efb1838244e1a777d2",
+    "assets_public/project.schema.json": "89d2186527c35fc5b4ad121b97188d49dd8f2dbfd6d6b63a1b8b1147df3c3611",
+    "assets_public/README.md": "fe2887ddfe835176b6b7927b931d31c3538e6f4e1b6f6ccc010f30974d2910bf",
+    "assets_public/scene_inspector/assets/ASSET-LICENSE.txt": "f8ef53b792ffe57a10dff212f6fc131d5a2280a56cb275741d45de705967e5d3",
+    "assets_public/scene_inspector/assets/ASSET-LICENSE.txt.azmeta": "fe433be7e50d5864a0475c6a2ef16367ebdc4ea5e986c03fc771bed36be17b09",
+    "assets_public/scene_inspector/assets/cube.gltf": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651",
+    "assets_public/scene_inspector/assets/cube.gltf.azmeta": "d794aaa642f4154a7566c28a57cb5a7b8e931f21374c03f35f8f33db646fc5f5",
+    "assets_public/scene_inspector/assets/inspect.lua": "65cd3f51247e1d70013f16b5a0514202c17e634f192625fdbf9c558ed2a01ce8",
+    "assets_public/scene_inspector/assets/inspect.lua.azmeta": "0e239402411bcafee6c9dbdf0511a2f0eaac629dd5bda5048edadb8b3e946211",
+    "assets_public/scene_inspector/assets/inspection.azurelevel": "b88a44ec391d072dde4ddb0c9b9e7b09439f1e57c6c6e00d47fe80bce9dfc842",
+    "assets_public/scene_inspector/assets/inspection.azurelevel.azmeta": "720c81fa6f905704af8b57d9a4157b7665ca5919a3437c74662962cf2db9bce2",
+    "assets_public/scene_inspector/project.azureproject": "d04fe53ea867533b30bb1607dd0871a101bb1121efb72699bed7276a8bf13f51",
+    "assets_public/scene_inspector/README.md": "7a1890faf8dbe1a96f7ef573690078fd8e64d1d39df2af63aaac5cba7c1d2c56",
+    "assets_public/scenes/clustered_lights_16.azscene": "d69f57d45c85b0030b214270af99ded51851deb243c0c03c72aa3a5e59304edf",
+    "assets_public/scenes/clustered_lights_empty.azscene": "c53ccc0a679ad2bf25f7c8317f75ae5b011a8937364b5ae9b73f10090149256a",
+    "assets_public/scenes/material_mixed.azscene": "e651448e474f3ff5fe9823fb46d40b7699ca0a5f8753363d11aa4fad4bcb17e6",
+    "assets_public/scenes/r4_stress.azscene": "27d9f5c4bd4c1352c5d958f5963d34e907212dcdf5bc2580c46a3bdd24a919c0",
+    "assets_public/showcase_looks.json": "d9ba40a092c73bced1275fc10a7f5163134e9202327f29eab925762695849769",
+    "assets_public/test_env.hdr": "9935b3676f7fb92e0fbf9001c91813da70094f348c964d5e35498e19a9162b5c",
+    "assets_public/test_env_strong.hdr": "ab81b28cc59175c5070d2155cd96d523173dacf42db0c601a232e26b6c92e5d7",
+    "assets_public/test_model.gltf": "a17af75cbbf98bcdc751c1dc23506ec860e72ebef4204ad15c0262cd28391a95",
+    "assets_public/third_person/CHARACTER-LICENSE.txt": "be53cb6c25774e09d7f8eff01d850a71de5ede9a916a7e9407ed9439e79327eb",
+    "assets_public/third_person/explorer.gltf": "4c35b283bb2e7565e37c73c0764c73fbf323337b0c94b209178489b745544e1f",
+    "assets_public/third_person/fixture_hair_data.png": "177f6c121d90c56ddac6abdf5b3ee75cf1d533c7ccdc273e89317679ae76e770",
+    "assets_public/third_person/game/assets/courtyard.azurelevel": "863c0b3f4fb03abc2f26c835ddcaad97da189cc20e5255c475a5741fcc033f61",
+    "assets_public/third_person/game/assets/cube.gltf": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651",
+    "assets_public/third_person/game/assets/guide.gltf": "0817b2c40bc7211be56c6f3fcd7f540c0093a6f517b255b1a9f03f9d8ba19fe8",
+    "assets_public/third_person/game/assets/hero.gltf": "dcf625ab773c35aa6d1b9d833606dfe3e4314ba63f1b60951f6d6911bc321301",
+    "assets_public/third_person/game/assets/locomotion.json": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088",
+    "assets_public/third_person/game/project.azureproject": "84933dc25d411d9235679fcd8a8b33f9a9c5603b20b39855fe9fdbd747719134",
+    "assets_public/third_person/guide.gltf": "728038e1e60d9f6b518372d76bcd7e0b3ab7522840ccb66b80edbcc575ca0696",
+    "assets_public/third_person/material_fixture.gltf": "af33d262e6b23f1212d226ad9857760ded7c1ca66d745035da10f3b3ba557bbc",
+    "assets_public/toon_ramp_atlas.ppm": "ea9150c3bd3463042851cfbc3df31be07837d0b4d4f68b5b4b119f6b94db9c6f",
+    "assets_public/toon_ramp_profiles.json": "6cff7f3924267eb03b4c5c0f4f4369e9cc4c8a8abfdfb4e90b909609febf06b6",
+    "cmake/AzureShaderModules.cmake": "487594fa440de0687df61f655002bf1c5918d812ad69f71649f7566c64137d67",
+    "CMakeLists.txt": "26ee6aa7ff0cbc5789aff39f64b197979de8a6bb88f6a8546b21f1f7d29bd7ce",
+    "CMakePresets.json": "cafb99bc351c0d1b8a675fa805e7c9b1ad10d91c954d1e3e6b78fb832f9bef39",
+    "docs/plans/engine-evolution-manifest.json": "80d1654bc15f93825d7d359e581d32db39027efd92b14f44861ccea183cf33f8",
+    "managed/EngineBindings/AzureEngineBindings.csproj": "56823d1f12c3cff3d13912313614040efbbdafbfcdd52865251144f2cf1b3ad9",
+    "managed/EngineBindings/AzureObject.cs": "3db4f686e7242425974444e8201c057455a2548e293f7aaa33dfa624145b1c41",
+    "managed/EngineBindings/AzureObject.g.cs": "83e30d11dce8c9770a86d621ca0d20e214f26d5a3e12f7eea84a5a83534743e6",
+    "managed/EngineBindings/BindingContract.g.cs": "ba7a2f76b936f67d784115e427cfa7961048348ec367142ff76bf84e6413de6e",
+    "managed/EngineBindings/Entry.cs": "054610b06abc5f20a3826661e497f319b526ab6d4f0ba06eca260adc070610ad",
+    "managed/EngineBindings/LoadedScript.cs": "e840e503cfdfcc5d7704f9ac2180f4c496b3ba334f952b31d17a696f043f0750",
+    "managed/EngineBindings/NativeHost.cs": "0c172ec43f0072162048a8f5661ada6eda29466e85ee7ed4f4938cd315ae1e06",
+    "managed/SampleScripts/AzureSamples.csproj": "be8017ebfd72ac91ec38278a3b9709b1bbfdc98d2b9364e80b78881d7129dddb",
+    "managed/SampleScripts/Scripts.cs": "69ec07528fff8c8bf7282cacc8ff0297bc159dacded1de7193081b54c5fe33dc",
+    "managed/SampleScripts/types.json": "4507068e73b84178d37cc2232a6db2f7c7000b7bb3babc6efd5b083d26a8b68d",
+    "schemas/azure_render_material.schema.json": "751e00ae107a4530b277a622a11fffc3df901ded8f08af7dc9d32c3ffecd0522",
+    "schemas/gpu_capability_report.schema.json": "ec5f4857f09733dba8ebef3489adea02492a7ba7d88806b35f713e9fc57eb0e7",
+    "schemas/script_bindings.json": "aad17c5e0e078f3b5023573ce1cf2b440f826e9e14e8ada4901fee22664b49bf",
+    "shaders/background.frag": "46198cda59d99f38daabd905749cb5d9e290f825af4da2f680c148a259cc63eb",
+    "shaders/background.vert": "0d8f4b311397551c203c90cdb230819f5a0a873c98f130eb1c6fe6f08553ae4e",
+    "shaders/blackhole.frag": "b4ddbc6671923cb4bf17ad092473fef96f79f69785aeca6e1b152fad2bc052bb",
+    "shaders/blackhole.vert": "b4af1d443545d3209274a8a8ba4c98563dc7d57a657267feda4fa1c50c03a717",
+    "shaders/blackhole_composite.frag": "be05b81ec63a54de40715f8207151b0a4d656f060f5d9204e00ffece12bb7c81",
+    "shaders/blackhole_taa.frag": "37f0d5c84aec50bf2b940b234a6a8c741797d3e556a80c4fc987816282f94716",
+    "shaders/bloom_composite.comp": "3d76101221a10af1262e91101f2f4801ba90cffec078d77053093509e7b4f08d",
+    "shaders/bloom_downsample.comp": "1a0a092d90f1a35cffa433459a3e1782228f5832b1181ad7e0c79e5df3a2a05f",
+    "shaders/clear.comp": "99ae6d2eb168bcf6130fe0a85525556accfa503b22284cf2b30b0686ddb6549c",
+    "shaders/cull_indirect.comp": "2a45eddc419b2e7e06d94c2460cbba1597e8484dd54d12aafcc783cc24c80a6d",
+    "shaders/editor_ui.frag": "bbb87ccb77777b6f17ed85562e915b4ac8ca7038b9348370cc88065319e4762c",
+    "shaders/game-ui.frag": "3f6b5910aeac1680b1ca7601a186645b83fede953fc131a0f5f7c80fa8175917",
+    "shaders/game-ui.vert": "f6d6e22dcdb03f84ebe6c07e91aee36d6fe357e77effe8ff3047c043e9b6273e",
+    "shaders/hud.frag": "e38a30e7810e1143308f3e9bfd1743995739af9358d9645c0ff429900311945f",
+    "shaders/hud.vert": "33cb9a11d0527419710b9b61a226bca97efe6797a76a4385eaad322063a15c08",
+    "shaders/ibl_prefilter.comp": "b6653f6ed760c232a1d35080f186c5647861417f3c9ef14c676079451fa25342",
+    "shaders/inner_outline.frag": "c6ef9a4a1d5fcd29af601459aaab6aea2b949869af8af0788b92839578672d4f",
+    "shaders/inner_outline.vert": "dd42fd9ebb4f4708448d035c1fda298c1610ad96d9cfb71e9a0dd792019e42bf",
+    "shaders/mesh.frag": "fd454e037fc4234f39ad694c15d868e28886c5a7fab3b54084290461a863eddd",
+    "shaders/mesh.vert": "e34f15eb91850d66dbff7161be29b6dec11ca2c3f23b7de01dbe9e0ac29b3718",
+    "shaders/modules/Bloom.slang": "e504ad7793fba45fa0af788a7706d1967cd8d32c0dcb7b7b5a7da130f397346c",
+    "shaders/modules/BloomAlgorithm.slang": "018d8664b675969afaa1d194933cf66c43f2c699fbb9883b1683786345739479",
+    "shaders/modules/interfaces/BlockSamples.slang": "1ac32d0d14864b0f878ff5bace8235d32e755e04ad82c115b737702351e51985",
+    "shaders/modules/shared-layout.json": "015779714fd26b7d382228146e520994619f7626b654a3f79782a025f67d7e81",
+    "shaders/modules/SharedTypes.slang": "87deb7933f84b829dde50d011d7b06a98ddb81b98718cc2dbad24064526947cb",
+    "shaders/modules/strategies/BlockStrategies.slang": "47b17e174727689cac652df148e76e0da50650928c73ee289aa208ce17d581ab",
+    "shaders/outline.frag": "1ed6e57123a890f316d325dff063f314c032e005d15f551b90004a0832e97695",
+    "shaders/outline.vert": "689f6426082f20814ca40217805372cd8c78dff5ff746d8ec74ffae772465ad6",
+    "shaders/shadow.frag": "081d997e9b69a2fda7139c4298e05fd8c82b2ef122f0b7298c5d22a45dc3a728",
+    "shaders/shadow.vert": "ba0e33dc1379a416da4c52e30c0e7f3d51283b89e045f3a87efde24685434512",
+    "shaders/skin.comp": "b1e356ab860de41a1169abb3193a27b53a681b18bb73e6f00cfeed532f8bbcfd",
+    "shaders/view_resolve.frag": "1986a5eb2f0c8415839bd74f32b75118761578d8d2cc852ab7efe4956023209c",
+    "src/ai/ModelClient.cpp": "00517ad1b0c43c8bdda6167a2ebdfa44709663b16493a825cb52d011aad1fbfe",
+    "src/ai/ModelClient.hpp": "a63f92d99f51e55d7de702c164327f2d36c9a0b4b205394266ecbe6753f53f99",
+    "src/ai/ModelProcess.cpp": "6f8b2918eab6b151ee5dcc1a05dcf7b22f5f464c76d9274dd41026c636e1fdaf",
+    "src/app/AzureRenderApp.cpp": "bbc9f801ac000dcbbcdb08f576a27f022559c54ac474d253145db9b92568d2fb",
+    "src/app/AzureRenderApp.hpp": "1007701ab18240fcc7db90fd8784a7aae51d04fa312c5f8ec3503fa33bb9fb00",
+    "src/app/AzureRenderCapture.cpp": "82a1b6e0a10164519c4453642422a06e4c4d4f787fe5618642808e419314c98e",
+    "src/app/AzureRenderDescriptors.cpp": "13a589753dc7fb62c569f69d8680b5ece417eb6963d6bc045ef3deed2bc0e831",
+    "src/app/AzureRenderDevtools.cpp": "e7365c162a7504f2ea47bc834edb834340c208367c39891f71a626df4a394123",
+    "src/app/AzureRenderFrame.cpp": "25988779378e51984222c50e5393aa2c3f1f7996ae60a6a908ba824845930906",
+    "src/app/AzureRenderGameplay.cpp": "bd3dc65e1f8db9906e0dd958f5625c2be03f36582b0cc50cf9a62fb693dc5030",
+    "src/app/AzureRenderInternal.hpp": "8ee83d26fbe8ce78adb471026a92197ac668a8dbc695b651f1cd3c451745f069",
+    "src/app/AzureRenderOptions.hpp": "e42999d130bd21765275434a853704d1904f9420184274f1169a27d19cddadc3",
+    "src/app/AzureRenderPipeline.cpp": "407ba9d02237585cc0f69cd73eace7f46c65cb04afdf283d042a503925480b96",
+    "src/app/AzureRenderResources.cpp": "24be9fcf218717892edd9043cb22ec1c67035fe97def4a485e5733f34fdbeef7",
+    "src/app/AzureRenderSettings.cpp": "3464eb6fea743bfe56beb2c17a4c5e85f1581cf622bc6e0b6d66657f08ee7178",
+    "src/app/AzureRenderSupport.cpp": "807c73624503dc42639e2edf7df4b222b196e2b120300e23433437117f98a3c0",
+    "src/app/AzureRenderValidation.cpp": "8a5399b1777b971c6df8bd1b9a7f56e414f6d819d4fd6fb9afd26f9ca0a032ba",
+    "src/app/CommandLine.cpp": "0f033189d59791afeaedd1eb0640a69004c123abfdfa98c634e4b346606ae48a",
+    "src/app/CommandLine.hpp": "492162d41efc8dbccd5286786f07e7dd06552ae2adf95b0a086d0cfb2ec1e480",
+    "src/app/ProjectRuntimeAssembly.cpp": "4f2b1c77155a137bc7f21e9f568ed08561d0051b47e7241537ef80341da46b88",
+    "src/app/ProjectRuntimeAssembly.hpp": "f1a6edec82a47be544e5554954232cc4a3c197af2a38a3d68a8cd4615267953f",
+    "src/assets/BrowRegions.hpp": "8fc3b59906349417f0b5e420e8d472282d516f82617196493661e1052d6af0b5",
+    "src/assets/GenerationManifest.hpp": "f3be9e6e454c5badaff225cfe183f7b3f1266b9edd4ea6b8f3bfa6aa5564aeda",
+    "src/assets/GeneratorRegistry.cpp": "5adb57f46ce896a6bd54ab50f19d1efabac5ed755eb600805ca0136c6f711073",
+    "src/assets/GeneratorRegistry.hpp": "0060e667c58bb7bff048a627ce2b308ae8226cfb8e0bc27beda8efa0e4816933",
+    "src/assets/generators/GeometryCompilerAdapter.cpp": "43516969bfe4ee70a97d350b3a60cbd39f4d366d86d8b5a8deed4c95fb00c819",
+    "src/assets/generators/ProceduralContracts.hpp": "8fc32c7a1f48f2702de47cc164ecbd7da5fd43cc7f145f4c735ea280c6159857",
+    "src/assets/generators/ProceduralGltfWriter.cpp": "b11087ede6e245f8a283c46298ab578c07f4fd0e5825b551a47433853676fc7e",
+    "src/assets/generators/ProceduralInternal.hpp": "2b1c415d0e64066aaca8cc9e0e54b992a0f073ffae5628c04efa0d4691186a32",
+    "src/assets/generators/RigTextContracts.hpp": "44af7d21068c9fdb997cac84e51d18259851d9a987af5085920f6db6c4f71239",
+    "src/assets/generators/RigTextGenerator.cpp": "b0a64008781f10a5cb7ae9f502345a2a3abb40cef4c596047056fde2d2f92130",
+    "src/assets/generators/ScadGenerator.cpp": "7d27858ccaaf05d4a6fed3507b0ce209943fbfe3a47fcddf756f99a45bcf520a",
+    "src/assets/GltfLoader.cpp": "8002a72edc631e5201fb0e53018e33dfb92f81c7ba2a64d3d270ecebeeae69a8",
+    "src/assets/GltfLoader.hpp": "d541e3c1f0c05a50596491df602e2909079fbe5720b344f207dfb29dfa5ce240",
+    "src/devtools/GeometryProcessCompiler.cpp": "5fec6356d730b78d54b8a5b00e80ef5f2ca6cc1150605211679563cc72ba1267",
+    "src/devtools/GeometryProcessCompiler.hpp": "3cc3b41a27486ac19351bdf53390a8c280ad4a018829ee293ae71a46aabe1a80",
+    "src/devtools/ShaderCompileJob.cpp": "6b6ec0a70977981f7ee220b25536d9af512d3c52d3be63c31887ad7b370b469f",
+    "src/devtools/ShaderCompileJob.hpp": "8e5e1d54cc350d34fa6f468ce8d73237c2064629ebd3ece94d3977bc4d207b2f",
+    "src/devtools/ShaderHotReloader.cpp": "6b0411fc68137a149f7584c9ff92f96f36b54cae00ede0138c1e0e1607c75752",
+    "src/devtools/ShaderHotReloader.hpp": "653b12b673bb50d52252ebac54f3856dc4039c038e0cf41f33491a58b334229b",
+    "src/diagnostics/GpuCapabilityReport.cpp": "ff8556ddf2da0072e602e18e14b502936adb95a09342b24a1995f7beff8dc140",
+    "src/diagnostics/GpuCapabilityReport.hpp": "0f276e912183d8916174b62b28f4052f206f4038197e41531fdaa0fd9389349f",
+    "src/diagnostics/RuntimeDiagnostics.cpp": "5947a7dc9bae64e8717e68c4ac986cd3d884dbb4b37cabd1e85406770e6b1c0d",
+    "src/diagnostics/RuntimeDiagnostics.hpp": "1ca52966be0066f251c694dd3553e6f6a6f6f1178d62419b73fdc243e50e5d11",
+    "src/ecs/ComponentArray.hpp": "659eeb9c027c5bab076ac26f97dd0c1d0f0bd99f887a79c85d3eacd8b4050c31",
+    "src/ecs/Components.hpp": "40fa46fec4d90e7aa3c369627477933412f74bc993e6a9154866255f920e2931",
+    "src/ecs/Entity.hpp": "7ba5c033fbc5ff4a278502269cdb3310d9ec379337203785a17e6fdfac5d7c26",
+    "src/ecs/GameComponents.hpp": "ac4609fd5622f7e627ac99baf247a2abdc63820eda94a2ce2d5d9285bc295472",
+    "src/ecs/IComponentArray.hpp": "a5897dc6bcbe989bb13df532e2b211b9ce7a1425f05cab1fcc7d4806e61da8c1",
+    "src/ecs/World.hpp": "05f445b3ef3b707e0800909816670902981e10886f591d3823f7f92b46b7e2eb",
+    "src/editor/ai/adapters/ProposalAdapters.cpp": "c7211440a92f89694f4c8c362250e1912d048a8baa55b29872cd1d20f2a2dafd",
+    "src/editor/ai/ProposalContracts.hpp": "f71b58adcc845acdd631d73da5a213840bd17af6e74bc8b7775cd040adb61571",
+    "src/editor/ai/ProposalController.cpp": "14d60b902082c40b8ff849d29caae39c7d4f76ccbef0aad731b8fb86e15446c6",
+    "src/editor/ai/ProposalController.hpp": "d63ac2a66cf14cd5813c5e105f283c9d1db6b0fa5300a4c81968aea0321ec4ec",
+    "src/editor/ai/ProposalOperations.cpp": "1ca5a263b9438b9a34123bcd5ff117a99d0bb03261c652b45c59102deca1ec41",
+    "src/editor/ai/ValidationPolicy.hpp": "bd2dde9d7e8d24fb955569043ea78d41ad6a745d49842ca8190a327a80cd7b97",
+    "src/editor/AssetImportJob.cpp": "37b187a0acd9ac6646224f9d0904948b9bca35a480b2553c7071617b03789c26",
+    "src/editor/AssetImportJob.hpp": "3f37bd5e59647a06a63856891028e5dcac7d541ff12d29e9a40ee358a766c8a5",
+    "src/editor/commands/DocumentVersion.hpp": "72ae71bf4bb4882042db98d31ae440ed613e8d641d66fa227c444dc09cf78f8b",
+    "src/editor/commands/EditContracts.hpp": "45346eaa5f3822c3b45e282033420895f7e31a3f8aa9d6c6dab7c96fb92ae7e8",
+    "src/editor/commands/EditorOperations.cpp": "45d309e515d79ed4a39c7bd38c66e1f00f647195b3890824fada1a510a4c6819",
+    "src/editor/commands/EditRegistry.cpp": "a6d6e3dc6cb67993f9bb44f43227af22cbeaa38ef61aec2c283313ea3666f7ae",
+    "src/editor/commands/EditRegistry.hpp": "f8e9147cafa5989f6efafc75bab312d51bd7f85150a5893a2386025b0fe03ebe",
+    "src/editor/commands/EditService.cpp": "d403f6049e7494889759442d257367dded3296dc456dd138bbbfd399f3791b76",
+    "src/editor/commands/EditService.hpp": "cbd9517fe9a83275afc6e058798dd50d3a4735c753f1fa46e23d38717c380c34",
+    "src/editor/commands/EditTransaction.cpp": "2f85f27bd1261a33bb088ab21f46ec9bbb9269d0d4e24f8b612eb2e6937b9260",
+    "src/editor/commands/EditTransaction.hpp": "7095da26d4cffa10f362e2df2020a050e39e478fde494ffe63574b16eefad466",
+    "src/editor/EditorAutomation.cpp": "34c89c3f4e99c99e6b4ec9b4c90664614a1b9725654fe1f7048c8a7f1186f399",
+    "src/editor/EditorAutomation.hpp": "3752bf26d74017e1cf2de634c4e1e42b808c6a578b314ea1d9856d78fa887076",
+    "src/editor/EditorCameraController.cpp": "036994310d3e261493708e8b807b591e7435f0f21a4ebe10c6b8a47dae887ff9",
+    "src/editor/EditorCameraController.hpp": "45f936004b3ec714daf9c4ad32238175ba39773e0d142db13861a2e7e0da630f",
+    "src/editor/EditorContext.cpp": "5f324176923cf960598ffb391d8e5c5c8df5e40767df8ecdfa3d940c3757bb1d",
+    "src/editor/EditorContext.hpp": "8e3cffbb5930b8325525b28f73ae86a30aac1551ee538c9e0f92001292963edd",
+    "src/editor/EditorProjectEditing.cpp": "96abaf79f6052d6909a8fdeaf3deae86dce8b65b7b5a6764f93b24d3f8aa2a6f",
+    "src/editor/EditorSession.cpp": "cf9b87fe8e43bdb77eda9376a716ebb17879793e42bf80f6bc02b3d53189edd7",
+    "src/editor/EditorSession.hpp": "0c40fc53ff09f22edf9aa8f097583f4cd306366e371775b2f432b517415fef93",
+    "src/editor/EditorTheme.cpp": "3485d9d4738dcb93a94db7df6f28e90843e2a0467e8a73db6a6fe7adc88ec3c3",
+    "src/editor/EditorTheme.hpp": "19b7434b81e1bcc6834faa0ac6e8ef8461276df486e6fac7f919ec92d5819e26",
+    "src/editor/EditorToolbar.cpp": "89e4f59b69319f88c737a4e0cd02a8a5e5329950b2d6a347e3888257c3c711c8",
+    "src/editor/EditorToolbar.hpp": "22f30a9bf6b6e472d8aefbdad2735316f01f0229f19e4163643ae9e635688b41",
+    "src/editor/EditorWorkspace.cpp": "e404bae654b1f2f83aa6c9330a2b90aeaeb0251f4e8eab57a8d5d472d0be6241",
+    "src/editor/EditorWorkspace.hpp": "4933a4c9cc534fea8d54a87972cbcd864a7ee93c8d2050f105d97984408e34bf",
+    "src/editor/EditorWorkspaceUI.cpp": "3b916cedb7e3eb09426e7db11adf7bb258be5cf6b3a91286ba672e30a12ceda7",
+    "src/editor/GameBuildJob.cpp": "82a53890b5018718df9ff84e204ebf81e539ba2aa4456ebaa4af7cb8671551a6",
+    "src/editor/GameBuildJob.hpp": "635119ea011a96ba4a08e4d01d2ac21612eedbdbda1a8b35e3d93cc4451b44c2",
+    "src/editor/GameplayDebugGeometry.hpp": "69b8afafb9aa7f8160f076f43618f88e93ee25174b46026b406e4162494d973b",
+    "src/editor/IEditorPanel.hpp": "e5d7468bafe89c0b62e316dab588100aa635ced43a1a4710bd2453ec75c22679",
+    "src/editor/ImGuiEditorLayer.cpp": "3763002a6bebedd14a1aaff4e57b911d95f52a96af5306495f903de6b9fa5923",
+    "src/editor/ImGuiEditorLayer.hpp": "955606fc0e977082cf9263bf896ae9e4c010fad34debd859aaa32f4fbcfdf295",
+    "src/editor/PanelContext.hpp": "5a806b88cf9ececf19b1cc69fdbb58089f7f5ba14c935b92679c71bf6bfe2a01",
+    "src/editor/PanelDocumentView.hpp": "0cbf799b4cafb290b8083b76276234aaff0014a08083ca7961bb7dd9b4b76af2",
+    "src/editor/panels/AnimationPanel.cpp": "8f459aad3668c94027e229bbd6469f5ca553adeccbc54879a0444010dceb0deb",
+    "src/editor/panels/AssetBrowserPanel.cpp": "a1a2286535638d63e0c8146d3d5455867cb228de743e49a7e5c6384f7ea906aa",
+    "src/editor/panels/BuildPanel.cpp": "e4bf758581dca69b4286c90b194aeb9b1b0347d74e504e68d552b85ea892cab6",
+    "src/editor/panels/CapturePanel.cpp": "274be3a302f25a2c7da57d0f87eff092c32910d06e8accf99a57ba6efb9cb456",
+    "src/editor/panels/ConsolePanel.cpp": "f7ae1cacba3f0f03b7b14c2fd417a38a9cd914c03928cee693b75b16a5549e6d",
+    "src/editor/panels/GameplayDebugPanel.cpp": "bbd49221fc9165e018cb91e2b064eac666be4d2baba8dea7d7c8edd92a2295a9",
+    "src/editor/panels/InspectorPanel.cpp": "8fcdc85bfa793ed37ad8fd90bdad968bd80ea0e4e8d0d9c0f3f262c145612b09",
+    "src/editor/panels/OutlinerPanel.cpp": "a9ec4b9e8a5fb7d000acac35cc6e6ec0bea6216f2d010a8553602607e15ebbea",
+    "src/editor/panels/SettingsPanel.cpp": "ac23d9f9e0c02a11506543aa2d1462f144e5c79580a66cfc11ba901a93ab09e3",
+    "src/editor/preview/AssetThumbnailService.cpp": "428f639a624ec1694af62807d1f809f9bee0552fed427346ab3ddcc1c542d8ae",
+    "src/editor/preview/AssetThumbnailService.hpp": "a3e03b2f24de782385678cea16c482aec36ae8b45933262b6a0bfae3d08c5af2",
+    "src/editor/preview/DeveloperServices.cpp": "cd5a395450eedf660d757a88b3676f5e17e89c65596586d372d85491c3caf82c",
+    "src/editor/preview/DeveloperServices.hpp": "25d5f3b8461a82c3e410fd904cd17a6cb6489cbbb6dda9e0ce57b3a7d56d0cec",
+    "src/editor/SceneModel.hpp": "69ab05927e9faf7e6045e1c9bb4f97c943b7f3d35bf07d36861f0d04fb033dac",
+    "src/editor/SelectionService.cpp": "35ccd3d2770b0b87bf58d4f64dcf7b174e56c34858141256fceb2fb3fd476a8f",
+    "src/editor/SelectionService.hpp": "83ec88cd902c59326e16dc7fdc32d010e75d93dfbc3b69a6ec2cdb432c51ec81",
+    "src/editor/ui/AppChrome.cpp": "dcfd3ee59adcf3c6cb920467082027ec7e2582e982868489919baa9e6eff1a3e",
+    "src/editor/ui/ThemeTokens.hpp": "09eb73e3490d63b29544429c8bf6327cf962703da3ce61a0e8d0384e9483cb9d",
+    "src/editor/ui/UiMetrics.hpp": "2cc557afc67e7464bc42e300bdc90f99b885b7aa5c787cf52a4ceb9e08a643b6",
+    "src/editor/ui/UiScopes.hpp": "77a98559dbe92f76412c2f820c002d157992221e0efa4774d1c65413971c4a6e",
+    "src/editor/ui/Widgets.cpp": "47690ef49b673bc273752d5fbfe234fed6bb5dae3917f60a9ccf525f33f93809",
+    "src/editor/ui/Widgets.hpp": "66a9e4b0395df32923e5cd0924ea9d99fd8a79649fb7d0725b045afec7d292a1",
+    "src/extensions/ExtensionDescriptor.hpp": "227a1e65bcc20bc5b628abbac29a4370ebe735d52ca9fe443a85303ce07a93d0",
+    "src/extensions/ExtensionRegistry.hpp": "52f719364f072f7cb9161d2bc823190e1805196096fc8f4efbfec33dde551056",
+    "src/extensions/IAssetImporter.hpp": "c08eb69d4d33e5e6af683066a6be717018a8e09d8e4a1d0ddbb4ddd5e85d5a85",
+    "src/extensions/IEditorPanel.hpp": "a5979b51fe16b4eb5ce021d914482c885fa8bec6611ed8ae89376b6903c67228",
+    "src/extensions/IRenderFeature.hpp": "71ad0c3e745651d7eb70f71661625f9fbfa1379a21518c7b72293a2c624d47db",
+    "src/extensions/ISceneRenderer.hpp": "a5a63aee4088ca650dff4093be264b8eee622bc606742a379e4ac8f7e820016b",
+    "src/extensions/SceneType.hpp": "dd1979e7c5d259c5efb8e16b512c62660908088d35b0aaa71dddb719ac5e2a99",
+    "src/foundation/SettingRegistry.cpp": "1fcfce56f6332db53e2bb3ef90e2663aaf193f116c7ea17f32b34e4a525e3a23",
+    "src/foundation/SettingRegistry.hpp": "71c1edb7f0d18b668c4faa655bbf494cd4a01a44ceb490f0a5396979de19a5b6",
+    "src/gameplay/CameraFollowSystem.cpp": "aa459fe3c0dbe774d8c72e7e1393d10d65ed0ed5904f6fbb5a3f7664a1460527",
+    "src/gameplay/CharacterMovementSystem.cpp": "2144e4ef3212cfdeb0c5f00d0a100be6a896b1b9f02fe6b50584fff12aa4e568",
+    "src/gameplay/InteractionPolicy.hpp": "9f10de75e950c43245a1b7d556ddbc2e31a3cc268c9b751f93718cc2761c076c",
+    "src/gameplay/LocomotionSystem.cpp": "677b0345a4556283ec25d4dab7e41673bd390746ab76a1578f793fda967da9aa",
+    "src/gameplay/SharedSystems.cpp": "70fb05cb6d5bacf6f8eebae9e82327f3229564b6456abdc60d0f31c78ad4dbb7",
+    "src/gameplay/SharedSystems.hpp": "9c8d1ad01f882532d49aa8c4b2f7f7c68ba924a363cb1104624b4090d4ca3752",
+    "src/gameplay/SystemConfiguration.hpp": "82582fd1fa3fe7f6380ecdf41fbd3ae96c9d7dbd6e7d3accdc9ea8d43b100247",
+    "src/main.cpp": "09c574f0b40828672d9456e13fced60e58ccf0d9f92c7c6019b0bcb6ae551ab5",
+    "src/platform/BinaryFile.hpp": "79412ca55ba0319fcd62e3dfc935d5cac7a04ba6c70e7c2e1fa8184b3d0ff769",
+    "src/platform/GlfwFrontend.cpp": "a9e52424fc1537b39d94b4b3221c833ee199c1d479afdfd45d0959a7a81cd7b0",
+    "src/platform/GlfwFrontend.hpp": "a6656b8670e89644f0fa918b29c69e6a71e02457f8227a5eedc0114a2da75163",
+    "src/platform/ProcessRunner.cpp": "4771ad416e36c92c56ac97acec69c7a9556cfabf08eb704d48af6b3b7b8d4e42",
+    "src/platform/ProcessRunner.hpp": "c6e8cd46fd5ca2869b78841f2a04387eda9cce7a8a08b4ac5923ba71a66f5840",
+    "src/platform/SurfaceLifecycle.hpp": "1e129fdccfe69c63ab658db46dc934512b14330be9c0c78bb378321bc9bea46b",
+    "src/player/main.cpp": "66c6a4b0e852b80359293ad8c0d852c8337cae3b84b416f5c94f39da04589c6a",
+    "src/reflection/Annotations.hpp": "8c618f2c2c80e85201e976a300fc0244e1e76f358edc5e3cd95b8ce4e68dba81",
+    "src/reflection/Registry.cpp": "64154b51e94db4f727520dc32e9dc525c7ab7771e98eb73ed6d4c7249f51ac7e",
+    "src/reflection/Registry.hpp": "6eab56d1ac97f3c45590c6655924fd1afdac92a234de45b718f1c3c8d4543c68",
+    "src/render/CameraProjection.hpp": "e184bea82a58b04e525eac289d4a9c6ca452364277464a60256e457ef5fc18cb",
+    "src/render/CascadedShadow.hpp": "6adb80a2a26b0aa333ecfd4e6dfa742489a66987351c5dfb77b484a85e074ec2",
+    "src/render/ClusteredLightGrid.hpp": "b651e33026ea341fc02ae028d344b5d13b10af48a902b71e5a3036522d182488",
+    "src/render/ComputePass.cpp": "87dbfae8056027b309f4e767e594b276e406317fcc6e087bda200036bbc48077",
+    "src/render/ComputePass.hpp": "e953d76b04435f7db531314a5cd1456aa761ffd207925054ed59f1a12a02280f",
+    "src/render/DeformedBounds.hpp": "2bce6fd5085b61b36514af51a7ace191dd80e98b129d8d8eae70a1bcf1d6b2b2",
+    "src/render/EnvironmentAsset.cpp": "9aa1de43c7a4cdf14a1a1435c0dc84e377402d4864a502e956af91091467152d",
+    "src/render/EnvironmentAsset.hpp": "4d70d3d77528d13db313a92e1ee5cde81dcf8e4b83f41f69e312f83ed60e9ae1",
+    "src/render/FrameTaskScheduler.hpp": "9468d1f6f7d911805c7ce469b97efa4e422120a67f264c513b7b7890b6c25174",
+    "src/render/GameUiRenderer.cpp": "d46a0dc3e571a7af67d02fec6487d714b94361b0369ddff67c265b4fe6d8c4f1",
+    "src/render/GameUiRenderer.hpp": "cd4589d261e38a874fbc89b8dc621cf2912975f5c85423c8b91edc9146a65238",
+    "src/render/GpuCulling.hpp": "13f2c371e1b5e155476f91ff8cb7ec66bb84609d6b788c33c071d11f15638859",
+    "src/render/GpuCullingResources.hpp": "73647aa910b236eac45767acba5cab6116930f72c580d07f9bcbeab1522133fb",
+    "src/render/IShaderHotReloader.hpp": "b54f13cd63f33adb97063959076b1d7fa85dd60d5a7985e9d61ab55e805bc23b",
+    "src/render/LightBuffer.hpp": "11b79f35553f083684866da9cc8b0e603c51601d31d51a67e419717f6d1a8f4c",
+    "src/render/RecordingWorkerPool.hpp": "7f90e38daeaf0efcc361cff3f2d0e0d8abe2ef5be694585a03438ab6fa6fa5da",
+    "src/render/RenderContext.hpp": "7d86432353a3ec063fbf214b443214b8e31598ead51fdad4f1f42f7ab1133fe1",
+    "src/render/RendererCore.cpp": "61ac338c384d003124d7617e32d27348398feb1dd0500ba3517cb63c4b9a5bfa",
+    "src/render/RendererCore.hpp": "d3abcf0cb490a3d009cae29bea5308767aaac7c465b307bab90f8c6f090fd5b9",
+    "src/render/RenderFrameSnapshot.hpp": "482f0cbcd98b2f42e84140c5ac4b2f503bb1c29e78a63a22b9b4fe0459481708",
+    "src/render/RenderGraph.cpp": "70282930c56a7fdabfc959c8602ba01c7c04bc1d033fa1bccf56bbe7f2fbd0fa",
+    "src/render/RenderGraph.hpp": "0e6a229c16491cf55a4353c76d8e5921a88eeb81ae47a7852f6abd0048720053",
+    "src/render/RenderMath.hpp": "190437390f4917193ec002612a7dbc15e6e1bc4b12a3e11f8a3ddd556eb2721b",
+    "src/render/RenderSettings.cpp": "f3dc356258ba02b7311677ccd668b7cdee884116459e9ce028f1bf8f7dc60250",
+    "src/render/RenderSettings.hpp": "ddd33dede3cb96219184b22c8ee79513703d9a0a34cc03afc08addad3dd671d1",
+    "src/render/RenderViewOutput.cpp": "310226041125d05e9c56d4c9414adf618c071657359f75072c3211567db9f0a4",
+    "src/render/RenderViewOutput.hpp": "f0b475dc250cca26f490f55bda75713701a7077b11ed2330572a4a492a2b52d1",
+    "src/render/RenderViewService.cpp": "e586ecb41d036cbef5c32e64443852a7f83ae4b5c4bf0d1fb9f5957c5ffc1708",
+    "src/render/RenderViewService.hpp": "59fa4bb9f1a1c9cfb5c50c9ac8af7dd329a141b1be5b48c403078de858b9edf0",
+    "src/render/ResourceAccessProfile.cpp": "7f67bcc47120e27ca64198a4537bba8d1a6b9ab754fcf1d9909b9fa31ecd5fa5",
+    "src/render/ResourceAccessProfile.hpp": "296f6fc855ace6813344a0bf741df558d17dbfb35d640f1bc95f6e09f06d6c3d",
+    "src/render/ResourceIndexTable.hpp": "727c416d79701af3db04b36d45a930cfb1aae99351bf86eacbbd43ac9c4c6851",
+    "src/render/SceneInstanceSnapshot.hpp": "6a13ed15ee31d09c21dda604015cef73e0dcad89dd52ba7a57937944f28a9911",
+    "src/render/ShaderSharedTypes.hpp": "e7454fce6b4f159733b52758358618e5d04347d57a50cf93f0b5b4370ffbdb06",
+    "src/render/SkinningBatch.hpp": "d74a00af5e52db4893e740ed852aceb8ae3a41781b37a8f969ea53158afd89f6",
+    "src/render/TransientResourcePool.cpp": "d66742fb285b2b4236aee63c812829e9248ebafa93a8ba0a0450aa3ad9ed6961",
+    "src/render/TransientResourcePool.hpp": "37ae7703df73997f5964d47adc83caac1f7dbf9b511088e10be6a944225ca159",
+    "src/render/VisibilityPrototype.cpp": "f339072b5aa1e12e68d72a5a5b0465a599fab80bb180d97f3cd47e26588c0c09",
+    "src/render/VisibilityPrototype.hpp": "9c3d3e9da49f5b96f3045e0183dfe7f555d0a90241d5df37ee64669a5fa232c1",
+    "src/resources/BinaryFile.hpp": "c63ee6cbd0cee7e09e0ad171af9e55ff78d2c21053374e0a2309fb26b0aa5489",
+    "src/resources/ResourceLocator.cpp": "8f27e0020bbb8b794417d19798b37b16de1f902aba0adc5776152fba27970e3c",
+    "src/resources/ResourceLocator.hpp": "3fcaa558b67577449ddfc72eba2a12917d67146cc712ee37205a5b740e59714a",
+    "src/rhi/GpuAllocator.cpp": "27273d2476eee74b8241b9279aab7975c5ce259d3999835753e779c39017560b",
+    "src/rhi/GpuAllocator.hpp": "0feed091ba415fb55e2514ef02189945edd671e4e8d19554828d2552602de970",
+    "src/rhi/IGpuAllocator.hpp": "f04e81e19147ad02fcd84aabdcd0ca5a880943f4ad43893ac6e35d8252bb42cf",
+    "src/rhi/NullRhi.cpp": "532e1fdff1572d3f5d5384a1463e9340cccbc3fc07b36d3981ebb220e1a19069",
+    "src/rhi/NullRhi.hpp": "fc74a567a824c12d69f65832fb5ba457cb06efb9c1203cf8860de46de7d4446c",
+    "src/rhi/Rhi.hpp": "98961ca30bcef86d718b97736fb66764b90d740b59a9072478836f5a55ad3049",
+    "src/rhi/RingFrameAllocator.hpp": "26e85c27126b8370c29802d2612d0b45c8c5b3b861a95747102400490935f24e",
+    "src/rhi/UploadRingBuffer.cpp": "1804d4bcbb5c4473b8b67ee5f7e13ae228db61783db920b07a8e6b74a1ff9cda",
+    "src/rhi/UploadRingBuffer.hpp": "b2c5813da3db7a1fc1e5e00e56dbb8cf055e27d2217a6adae5b4a8811175e0eb",
+    "src/rhi/VulkanMemoryAllocatorImpl.cpp": "5b4d987b08141f01f2e0b5c7f4bf3045b0084a74aef36ef14eb9e9afc6d521e6",
+    "src/rhi/VulkanRhi.cpp": "767b96520ed4b025d83acd5d12b7562fec6bfa18d5db03ca00d7931b39d20bb4",
+    "src/rhi/VulkanRhi.hpp": "c4a085c524d3b77792bb79eab199a2f555ceafafaae2a64fa51f6a4dba9d37d8",
+    "src/rhi/WorkerCommandPools.hpp": "186f001a15344a2029c6b3779f2eca1101074f9ee899f8f57e743c2a50ce82ed",
+    "src/runtime/AnimationStateMachine.cpp": "c2e253c472cfac963e360c0efd5ca88de0a00bfb1d5a272b83b8393ce77c6cc5",
+    "src/runtime/AnimationStateMachine.hpp": "8cb6906a13444b29366a0e1bf47a38a27088ad65f0df021d62cc3c183b2b18bd",
+    "src/runtime/AssetDatabase.cpp": "a47b531586f37dbb25d41008d31d93824cd863facbf284c7acb389e866ce027c",
+    "src/runtime/AssetDatabase.hpp": "6141c123ae9b8a96a3ed34a41b61e04ac7c74b6d861c953e3d62bf4bfd7f65b1",
+    "src/runtime/AssetGeneration.cpp": "898d1d89f0fa81280d9d992f450100c91a6263c6c4d4f1016c9253b27bda7b7d",
+    "src/runtime/AudioRuntime.cpp": "bd40cdd002d2ab7407d0b1f92689fba019be4ff59366129743e54e018c297a33",
+    "src/runtime/AudioRuntime.hpp": "2e9b420c64d39f7150235f2a2f679dbfe3336c4e6e5b909700d4c9ca454af022",
+    "src/runtime/ComponentCodec.hpp": "b958dc4d1457d31e4ce1e278b11c421f74c089db78f8e9b120402ed78655336a",
+    "src/runtime/ComponentRegistry.cpp": "beb469d006057505f7b68d2e106bd6d9a57ef6fa2cc4c1546fad9a4d4512cc6a",
+    "src/runtime/ComponentRegistry.hpp": "e1948d03b9bf58f267fe3eee16333da654065d00d6fc851e6235a58f899786bc",
+    "src/runtime/EngineSettings.cpp": "a15c06ddcee83eddd67234b8a1a3e3f18f129f3d3de42d9dfac5cf231deab86d",
+    "src/runtime/EngineSettings.hpp": "b1b07c88f59948615d7c69644bc39a164e80565a94a37d2322146af407c25d26",
+    "src/runtime/GameComponents.hpp": "c5c3526afa63d46699d307b384cebccf91c0ae485b9f204c358102bc6d950953",
+    "src/runtime/GameInputReplay.hpp": "fe1dabcca8922031443f9fad3c72701b8e04e1b0db46d0cb047e0d63dc627400",
+    "src/runtime/GameplayKeys.hpp": "3e6635976e0662f188cb82b677476b9aa224a704a8bccd0c3301c9b5a1cb68f5",
+    "src/runtime/GameRuntime.cpp": "00b53fe5a83852993c429dcd6c94dac08f66147010cbaa8715eee5395059bf1f",
+    "src/runtime/GameRuntime.hpp": "d7682ee235fc5cc367cf0cf2f2ff85a597c7cbc4cfbdd59c2956e0fa3217ff8b",
+    "src/runtime/GameUi.cpp": "ee8b19c4a52420b538f74723647709ca78fd0cdefd4fd8d3080d9d4168fe65bb",
+    "src/runtime/GameUi.hpp": "75c3a072f3dcb9bc023b69f47e1a392d166beb31a0c26d6f990bd3bf3e5d6f40",
+    "src/runtime/InputActions.hpp": "26f6711df0e3474ed31261a332af93891867dfd639fee3e2e6f1c6298d8d71ab",
+    "src/runtime/InputPreferences.hpp": "59080c7b8278f0c286af62687622f1ee88fbff59dc58320225a635c045222be8",
+    "src/runtime/InteractionRuntime.hpp": "10db189374f7b45fb899bcae50a4876b8968819bc033f288e16b8d9abde48ddc",
+    "src/runtime/IRuntimeSystem.hpp": "802facec8a5ab8f0b92eb28f155704688798493ed74d9071746f60c83c4d0bae",
+    "src/runtime/IScriptRuntime.hpp": "02a8f21f8babf23e5b37dea988b3870ec2192d5ba5d36d435568a87591076f2d",
+    "src/runtime/Level.cpp": "4876e9891e1a2477510d1c69523df74c12300271c0bec0a4c3114240c372e405",
+    "src/runtime/Level.hpp": "be3f12b8cacf0fb329ff3b4f348698130e25cd1a6869c025ee97e7b9de06c755",
+    "src/runtime/LevelRenderSettings.hpp": "3e3685a130c53df38bd6a2345ac3126a5d5c53ab4c391c7cfae51dbd1842341d",
+    "src/runtime/LevelSession.cpp": "3430e8714621edf0f7a839b97c9c6006276fadd7923c148995d1d967acaa20a3",
+    "src/runtime/LevelSession.hpp": "7d471f33aa4e6067bdd6b6361027bb648cd64f99e7e0723631491b6c3d699db6",
+    "src/runtime/MiniaudioImpl.cpp": "c7d66862a98b183dd45786edf1714946c81fe7fcf99681db43dba0b0f55d1523",
+    "src/runtime/ModuleAssembly.cpp": "f29be05f7b7218f668ccc3315ad9c2bc8f31c12f7d8fc6527120947cdb7dc8ba",
+    "src/runtime/ModuleAssembly.hpp": "dc8cb381d2e01a743e225af56ff809a25b487b5b568eeb62a3f42877f182f0a4",
+    "src/runtime/ObservationRegistry.cpp": "e001d4bc12cc5a8bafbec8b0a0c8139573fb7cdb089abf5404241c6c64d05c0c",
+    "src/runtime/ObservationRegistry.hpp": "473e8132ab5fd7a6138e17c8cd3ae32ed444374760e169cfa63b15de90ff8b7d",
+    "src/runtime/PhysicsWorld.cpp": "120a1812bfd920aeff3e044d9805ee0b4cfe46cd6c3d1bf07f354c4ac7749241",
+    "src/runtime/PhysicsWorld.hpp": "93818e7ea6a417eac9bf0d96faf67620ee62f5fb72401d839ef531ae1d35fe57",
+    "src/runtime/Prefab.cpp": "0dcb0af6e74d8977b7d8f73ea69a288bb6d87475946c92ee4a4b2272e9def1fe",
+    "src/runtime/Prefab.hpp": "60346a75facb995c52dd7c4776b60b80637b6223ca2f7b24cfab39d6c6e99156",
+    "src/runtime/PresentationRuntime.cpp": "e493d7df91b791af1180a932a69c375edf2b027d388358cc332a3a0a7724812e",
+    "src/runtime/PresentationRuntime.hpp": "dbfffeb493d029d701eb863e943554988895bd88abf86245f2efef11ffbff026",
+    "src/runtime/Project.cpp": "54d01308b259497671f96ecf56b93548b0d1fc754cdc807991c87006b34a4f6b",
+    "src/runtime/Project.hpp": "93ef6a3e9694a2a4e8866ca457ac0f2081667a53004aec864b715e6c88e036f8",
+    "src/runtime/ResourceFrameTrace.hpp": "855c39bf04a0c2b00bf74736da00f8f2ed0eb8f3b6dfa842d8588722a71365fd",
+    "src/runtime/RuntimeLifecycle.hpp": "979b0009f1e215215791f98ee5204a6325039d7cbc0d649c2c06389a9cf4be5f",
+    "src/runtime/SceneDocument.cpp": "7b2fc9268ef224eb8182b03fc147afea162bed5747fe4f3c3481557c08c1e46c",
+    "src/runtime/SceneDocument.hpp": "fe8f667399f4b00fdeed5f1d03a9d7b20e3c93e966fc8176903c872450aa518b",
+    "src/runtime/SceneRenderSnapshot.cpp": "2f43b19bc6ebc8f53e44a0c009048f1171908b9ff63ce75b2d698b35d0a29dbe",
+    "src/runtime/ScriptRuntime.hpp": "d41a1f3d3e6837d1377285774bbfc43d4e37895578c936bbdeb87f7f6bb6c78f",
+    "src/runtime/ScriptRuntimeRegistry.cpp": "f6ee1cad72dbf35ef2aa13001bdb6d76fec79446dfc1cca9197a59079f9dfbfa",
+    "src/runtime/ScriptRuntimeRegistry.hpp": "26373a5bd8be89de3784348177be28c4876dfc2ec51316cba5a8dfe4b02dceb7",
+    "src/runtime/SystemRegistry.cpp": "c42ce213e3e379c9d77fd7a925bd7b2f5adf686353123791f132bb471bf8ccd3",
+    "src/runtime/SystemRegistry.hpp": "30b45cc344947c58aa2c50ae4d782e971cce8d8373cc4a36d02189f6cf030e83",
+    "src/runtime/ThirdPersonCamera.hpp": "867c65c3b74c494c93d3f58db97675d72d25fad481a4e716ff8d556da458e852",
+    "src/scene/Frustum.hpp": "0f0419ac5fa271af14aad33e1dc7ae0bba54d5b69bfd9ad580421ed4edef67e2",
+    "src/scene/RenderBatching.hpp": "ff83112b16f135cfc4efc21f5986b72a393ed44c95099e6b066c8872dc61d2cc",
+    "src/scene/SceneComponents.hpp": "5127fdf1421aab81ad81b8264c70601b90b059e012a8aa89cbe41934634484ca",
+    "src/scene/SceneDescription.hpp": "aadbd80533bdbf5719c19877271517f05f9c71614e19456e45e03e7055cb4293",
+    "src/scene/TransformMath.hpp": "5afcb1d17dc0b0796ce1f8d758e243d14fcd2055917a8b522190a3e385749538",
+    "src/scene/TransformParity.hpp": "e9ec8e5a96fccb1788db4792ee0243fb39b8ad552392dfe64d8c6fea9d4402b4",
+    "src/scene/TransformSystem.hpp": "8232bd0055a8694161d513d82b8e76f11df0662f51442a8bdcea516d3fea7728",
+    "src/scenes/BlackholeSceneRenderer.cpp": "2d880d4204425ce677312a4fcd02092dfdce9016955e34b22e09c745521e1f72",
+    "src/scenes/BlackholeSceneRenderer.hpp": "6c243e93e2be969202d73a79ee37869637c59636ba34534902d3f4b4fc12e9cb",
+    "src/scenes/BuiltinRendererCatalog.cpp": "445fdedf087d2c190c10a76abde720e8921938bbf55f94909dc9efe5eadeb18e",
+    "src/scenes/BuiltinRendererCatalog.hpp": "5a7b162494c9d181b001c346d686f8ba2112e806ae9a53562f2641ec8569ca69",
+    "src/scenes/CharacterSceneRenderer.cpp": "6e01d3f0c34f7a90becb679b928c4ac7ae1ff2160e7fe75ea244d60fccb87032",
+    "src/scenes/CharacterSceneRenderer.hpp": "1698bf0901434b5ab2e5273dedb78764808be4fb5a4e0f2b18d5fec2f705b7b3",
+    "src/scenes/SampleSceneRenderer.cpp": "ccf09de6dd3c3858f0451ca407d9a66623975f4a8ef0d55484d9a37f0a80b80d",
+    "src/scenes/SampleSceneRenderer.hpp": "e3f516491257e2302271c15a1165c2f9c0b0d3710d9c3532e927592f2410ee50",
+    "src/scripting/BindingDescriptor.cpp": "79fc3e289ef72dd40bf1647421e4155a1c2c6c4be3b9891aed63691aee2f7d92",
+    "src/scripting/BindingDescriptor.hpp": "73910ef8ed5ccdf0660c71c37cd892bfd7907bfb181465ff91359a43b7e1a737",
+    "src/scripting/dotnet/ManagedModule.cpp": "c5d91571189a0a026c089bfe380a373f6dbc6ab1024f7a06948c2aef5ed3af28",
+    "src/scripting/dotnet/ManagedModule.hpp": "267a7a116f7ce0e2f5e698b80236cb57c83621010f5b566b4b59bb0d69138c98",
+    "src/scripting/dotnet/ManagedScriptingModule.cpp": "790f8b1c6b92ef4b8afc200f19879cc721331336e428830176bdf658228fc562",
+    "src/scripting/dotnet/ManagedScriptingModule.hpp": "65883dd83e1285ac2e087d07f8e3df1f42f25f2e21b9e01d4692d0069ea45193",
+    "src/scripting/dotnet/ManagedScriptRuntime.cpp": "f1ef704b7341fd2d38cdc62020bae143dfec804ae9187651cbba264d4d7e23ff",
+    "src/scripting/dotnet/ManagedScriptRuntime.hpp": "e6dcd9c705600ee2b496077f754c0b5e081b1886c395f7d6c5813b4a7bf3aaf3",
+    "src/scripting/GeneratedBindings.hpp": "3030fedf7dc2abbc8d2569f39f58f8047c152144530e74657955b33098f6e8b5",
+    "src/scripting/lua/LuaScriptingModule.cpp": "b33c418828a88fa5badf978aed719630763a20af421816a497fc7c99e35942e0",
+    "src/scripting/lua/LuaScriptingModule.hpp": "ff403a790960e20b048f8aa56846dde78769ccd9b142576e63570d4bad82c00a",
+    "src/scripting/lua/ScriptRuntime.cpp": "9a2834a0a407aa9c9fcaf1e4667b02d054dcba56a1affe2e43e81d633d763337",
+    "src/scripting/ScriptBindingHost.cpp": "77e962acffe0dd965066f13fbbf805ee7ae592a26f81e67f8912277f466204eb",
+    "src/scripting/ScriptBindingHost.hpp": "2f927489550a0128fbc58cb7871e66a2961b983aa4ca1c4bc8fb66660e2b2ee6",
+    "src/scripting/ScriptHostSession.cpp": "eb2058d5dbc234558b12a76f9ce62532591284d60806bb933b6a0ed860f0ce54",
+    "src/scripting/ScriptHostSession.hpp": "ada876a01a4ef078c8992ca255ce10d79909848eaa6d97d149d150c0ef018651",
+    "src/scripting/ScriptInterop.hpp": "3a9034ef3887384ee91ecbd828cfdc0a170087b68713ec3d4ba593bdbd7d4c87",
+    "src/validation/ValidationService.cpp": "0bcbdba873c6bbb15749f80359218d0f276424d7f3616f9c390ecce2a716f7b0",
+    "src/validation/ValidationService.hpp": "fbe6bd5e7249bff50468c98fa85fc441aa92814d5b1858baa04cadde2c21d258",
+    "src/validation/ValidationTransport.cpp": "7ddf1318617f6891808be61009aba18f4a24f3e1dde32ad6dab3f49c54025a6f",
+    "src/validation/ValidationTransport.hpp": "1ce4ec57cbcf5493010ab0ce55b4a18c94c5435d48d853b568f10ce6355e17bb",
+    "third_party/dotnet/LICENSE.txt": "d7a68596ab69b06f51ca278a6545148e4269a9381c26d597c13df5d88e08cf5b",
+    "third_party/dotnet/source.json": "d6c2d792f379ea7aaf69944c4f0d16147446b0fb660980f5fe55e65da4a4f0c3",
+    "third_party/dotnet/THIRD-PARTY-NOTICES.txt": "40686c6447a7d5b5d3693068e4571b5f483d7ed335aeee773ef662440de4c5d5",
+    "tools/ai/__init__.py": "2bfe70d669ffa4df56319c092ae75d19d719621e6a3e870b92257b23b36f3492",
+    "tools/ai/profile.py": "bcaed7b44f3e95c84de4fdb88f8de3244551fcff4821727e8ea5aceefe6b33f2",
+    "tools/ai/protocol.py": "bb2ea7fd64334386b6ddd2acaf4e49f91e6180731412de4de829b14d940ef853",
+    "tools/ai/provider.py": "8f09b36600f2dc1d41b8d2b8ba3f8f563348ff94a7c02b1adf07214cdc731cf4",
+    "tools/ai/session.py": "f0ec1e2f65611bc1cb95e79cffb95a3866baf2c49e4c36633bd98ef58b2de46b",
+    "tools/ai_bridge.py": "700f5c4725b62831f69baedc35f4b15a9ff0f340568fc6e8785c39849a01ef12",
+    "tools/audit_brow_mesh.js": "f2230200caa111fbf7b0316c9a1d9d752e4b9de34602f9c8ce7faaacea4d8cca",
+    "tools/audit_face_sdf_compatibility.py": "cc130ef52acd74a08889df84a871253d669c1a57fc4b40de58e01ee78af7695b",
+    "tools/audit_repository.py": "abaf2505dfee6e780a671e7c5c1867a0acc85ea7d6382002b85770280ec58c0e",
+    "tools/azure.py": "8499a57b37fda596bd50f271ec608c09d04a49fb6cdfc3af6fbf72d94ecb01c4",
+    "tools/bc5_normal_png.js": "c09e930967e543e21b61ddf9bc9ee76c05dbe45758f2691318a532bdf832ff4c",
+    "tools/build_face_sdf.py": "92613c6353439f0f9317fd5059a72d82931a653acb1975d49e711ca7cf0df5a9",
+    "tools/build_game.py": "184e367119ba5639206b2cf5e7a99522f79d784cad1243efb2b0fa7c124328f6",
+    "tools/build_image_comparison_sheet.py": "301c0447d8ec13e71592e2c699edd9fb89512cf768024be04a28853e39fb8d69",
+    "tools/build_managed_scripts.py": "e53aa0e9d1d7c8164d797f39abde49f5e16976587232eef1c81a9706fa211fa7",
+    "tools/build_provenance.py": "d81a98980ec3692184a78dbad5139ee29ad9294d3be2c4ff217ba500129838c1",
+    "tools/build_qa_contact_sheet.py": "fbac2d97838fefbc4f4993a287636e9eff5e93eaab7fbea3155783f09bbab351",
+    "tools/build_toon_ramp_atlas.py": "cc0f6effce02c180e88ca88429702fe74f364771a3a6794d0483e7c05af4466c",
+    "tools/character_intake.py": "19b12ef6d071f916e68b835ebbf480962464b6adf0f58bcd47effa6cc5e4e196",
+    "tools/check_doc_style.py": "07b211be2aa3433ad776a06171c33f0450dc15d0254d738df04bf33ade768f39",
+    "tools/check_docs.sh": "b8031dde1ee3f795609312e7a8e3ac57c97b0dae304cb3502ec6051307f566d2",
+    "tools/check_module_boundaries.py": "16a2aece322bbbcc79297ea5f6d3a07ff68fad26b7dd1b3d6d837f8365cc43e6",
+    "tools/check_r3_archived_budget.py": "7e343ce57a4119b71d93f9bcee4896b7592417a401b704a97e99b6f265168d9c",
+    "tools/check_windows_surface.py": "7ab36025aa2f28264afd5654a627de73083f856ce008fb35659da8bb37142151",
+    "tools/compare_images.py": "b941466b403d0e04791f14aec6092ca3324880c8094270248749f9d39fa6acb9",
+    "tools/compile_shader_module.py": "9dd14ced809d047237136116e1349ad94820726c1e364e7e239a13f770a2c3b2",
+    "tools/configure_windows.ps1": "650a16911e2c4709830a5792e3b1442fedf94a57e7d2f45a940f36d6660bc009",
+    "tools/create_editor_tutorial.py": "e9fe20460ee6a871381bcceaaa091e601b334a0d89eb2e390cc68d7916a734d3",
+    "tools/create_managed_project.py": "139482843282c8c6f1dfb5242251d75d85292c941ebec945e9118c5247ba05b1",
+    "tools/create_material_fixture.py": "e699e68befc3373f4145deae0e5a642b1c452a42451de21a1c12cd4f144c6182",
+    "tools/create_playable_project.py": "6616c63acc8fa7c664fe4393d5a983bbb7b407e626a6f85f69544f9817689086",
+    "tools/create_third_person_project.py": "16f8e8d83b9f99130b3ee9d982e6c8b12446fe4231bbdec944789ac75005f2a2",
+    "tools/create_visibility_fixture.py": "037903b6216a66a62731a6b2dc3d8585b32d3c55e4751186220c32cbb6b64267",
+    "tools/encode_capture.ps1": "730e5253d6f2a154912d1f130cc6c020032ccc90fb21a2461a9e0d20de30cac9",
+    "tools/fbx_sample.c": "382f883bdd9bc2a15991ec5df7650264d094cb9338d90639efd345243db7f383",
+    "tools/fbx_skin.c": "d219eddc98de63133a77169e451f23ffd8717938601a24ac493eff8d87f6aee0",
+    "tools/fix_msvc_deps_prefix.py": "a49745f2f72fd6357be0319d70d9b3db5c4e60cbbf73dc69ec2576a280a753b3",
+    "tools/freeze_qa_runtime.py": "a5a72bc96400c1a7bfda6b264de3b1ecfd731011fff2f91a102078e28303ba4d",
+    "tools/generate_script_bindings.py": "7f3f19db14d40cccbf57528f1a1a5c590c2fb2b5b48a0198ee4b5783800e19e1",
+    "tools/generate_shader_types.py": "2efa78cedd8af5d88643ade4aeb29e31166bb28cf24aaa8fba61650d5920a1e2",
+    "tools/generate_third_person_assets.py": "8b952817b04d8774011d9cf2b010f20d3df49cc49adf1af1ad094606ccfd6a54",
+    "tools/inject_gltf_idle_animation.js": "8f074eda82ba5a3aa2bcd7840176c1fc9e66ec3af818746c6f6aadb63375bea6",
+    "tools/inject_gltf_textures.js": "e0a7aca454163867540440661d44edfddc545ded66072b255b624e448278a75f",
+    "tools/inspect_capture_stats.py": "ce2fd8387e61ae51aeb0c05897935f8b61550f4f843c9e93070ed60771794006",
+    "tools/measure_runtime_performance.py": "989a9e9b0a96001be6ad6cea0f9c9f98a33ec9a62185581df2a86d8037461de4",
+    "tools/metagen/main.cpp": "76241f7a55758bb132513ea377a4214379ad735facfb276e90a3e5794db6f795",
+    "tools/msvc_env.bat": "40bd53ef84668cea2add66dba32fe7ca407dd141221896880341ebb86a64ea45",
+    "tools/prepare_character.py": "567e055314a909b73ad003e85656e8783fe72756a28467f9dead37a3b0230137",
+    "tools/prepare_fbx_tool.py": "8aeebd0212eb235cabff985832bbd10aa7d6c36a8360f12c94bde5eadba8c1ef",
+    "tools/procedural/main.cpp": "c3421c6517084961a0c346ed6dbe20516844096d993f38ad5852695306c6d3c7",
+    "tools/record_stage_evidence.py": "82d3089a9dc629f7088a00747f456fd780be2f56b8027c03d047847d471c4f2e",
+    "tools/register_game_package.cmake": "1b08885ecccca794d59eead2e3712decbb7bbce00723cdd3f28a300b0c9751fa",
+    "tools/requirements-character.txt": "5c6bc22674e161346ea25e4b6d7ccb2d6a4d0d1b618a5ec56a6cea8a32902431",
+    "tools/restore_skin_weights.py": "29923172028b16d7589e3b40c3bcf39f766983f6cb65533964fb92459ba7405a",
+    "tools/retarget_animation.py": "a6431da07d7dd56f61f485c313d76c119c28891691c54bd6d16c21d6337f1ede",
+    "tools/run_audit_regressions.py": "3d47298c4203e7cc37e480f9bae6dad05a70bac096ba00bb9ff2f235e8d2ce0a",
+    "tools/run_blackhole_compute_smoke.ps1": "b58822aacd42005988eca25a447b0776d8afc53d006ca3ee24cd19e908756728",
+    "tools/run_blackhole_optimization.py": "08df8cfd1cebb42061329d8fa897aa7f052bf9b9ed5ab4b84d21099c7d556e43",
+    "tools/run_character_ibl_smoke.ps1": "9ffac34d41dbd509ae243def48773638dff99cf9a515206b2143968d6c1168f2",
+    "tools/run_character_qa.ps1": "cd8a1f55d99eeeef2beffe46cae776c7c67ff292e0f99c5f2ebbc5cd42fd0a86",
+    "tools/run_character_skinning_smoke.ps1": "c81b5f4928a9c5dfd7ad35520edff2232fbbdface39723fac9cf489ccf16e9a7",
+    "tools/run_clustered_light_performance.py": "79914340a98ef66bd1055b73064cb23e606147e679bfd7006a77e87b2e26652a",
+    "tools/run_clustered_lighting_smoke.py": "7763f18bd2d7bee5e374b61230a7db23b6ae94e1e7fdb517e926d9f5fe5c362c",
+    "tools/run_g0_acceptance.py": "a4de66ae98079c0d3899fa51a0e7384652f108c30dc2d714f29b3de1cac9fbbb",
+    "tools/run_morph_compute_regression.py": "0662e67da5a29850eaff24af935a6dcc4295ad6ba1a061b5773990ec377410ae",
+    "tools/run_performance_baseline.py": "cb68eb8b8be65b9cf9fe2d6ca7498d7244ba4e83c6f2d53b5956544edcd5431e",
+    "tools/run_playable_long_run.py": "79d2fb73f421f96fd5f9aa0fce3287531029a546a9aee6b36991a0d7599d0bcc",
+    "tools/run_playable_performance.py": "41eb947f78b4e2b893472c5be02f8dbdc66d4adef6e432b9782a7df7f706adc4",
+    "tools/run_preview_comparison.py": "55ab194ca614db70febeb3e73f72bb8fb16be9393feac4517728b57372aa0838",
+    "tools/run_r3_comparison.py": "ee8ac8c8c674f1c54aa670467e1a8e8f5a67e9c03426f8e5eb5f31b3cfce3860",
+    "tools/run_r3_performance.py": "38fafdcb62ec40e723e97d77c5d3c08da13cb71feab5bef2fceb7c8a414723b2",
+    "tools/run_r4_acceptance.py": "15d6efc6e7d7f9242108db2ca24da3efaf71f8d6f779a473a65d167e62f5ef63",
+    "tools/run_release_gate.cmake": "f741c9bc5cad1b8b3c6718bae91cc8af425c1145eaf91fa5a89849d76cbcceb7",
+    "tools/run_shader_module_benchmark.py": "95168df89dca938cc9b5d689dd573af5190ea79c2540e93cbacb62cb21f30e9a",
+    "tools/run_shader_scene_comparison.py": "e582ff9a0f73330aad7469ac547d175942b7ee52d5f7ba781c63d9e41f2be854",
+    "tools/run_visibility_scale_benchmark.py": "6ab927b34b7406ef719a6fc334b2cffcb5d9d666e2cc79673c065885e268ae0d",
+    "tools/run_visual_regression.py": "a6304d2d207f72d6bb38a431336d1f3fb2191ed01efb0bf86b048e5008ee2344",
+    "tools/test_ai_bridge.py": "295b22cb45a4ea862737e2f60dff0afb238a2850d6aae60600cfef134e04321e",
+    "tools/test_animation_retarget.py": "40ee1b1d711ed377598f4156b0190378466db7c51c4d8d47d381bc7738acef1b",
+    "tools/test_azure_cli.py": "c2728dc4ca67178f3452d1082330585f89a5d802d0ca39f532f04b63f062f6c2",
+    "tools/test_blackhole_optimization.py": "62ecbe2e6a2dd9e69c4c7ab565a2be67651cb3a6d1c753a232f4e1d86fcbdbbc",
+    "tools/test_build_configuration.py": "62757c7bb98981399b87402671ea7bf57a7ff61d74672180ca736516259eb81e",
+    "tools/test_build_provenance.py": "96906cd70bb5c4730dbcce778037644b4c2c877bffcc9dadb8b649591979b44a",
+    "tools/test_character_finish.py": "ee572f1010d5e53b0037809061587b0ae2dc583b8e03875ae1be5b62ffb76064",
+    "tools/test_character_intake.py": "40ad687474892c9a72ab47c702780c70e6beb44ad70b1107e38d007ba065be96",
+    "tools/test_character_preparation.py": "eeb319d28f06c8745c7d56984be9425f2fe57cfacb271c119d23ef0086814059",
+    "tools/test_devtools_host.py": "9f7e30b262af40885066d429ff2247ae2859e5be70d9acad14487700083cd8a3",
+    "tools/test_editor_playable.py": "30c57389cfe632dc6d930b87ada009fe9b32c89d0cf3554eb8ab9b7d7b871c52",
+    "tools/test_editor_workflow.py": "e1671cad81719ffc178a25f571b464cd3e9ae2a594eb29ddc71cccc0e2022b99",
+    "tools/test_editor_workspace.py": "66ae18a7c7c1bac2373e1742764e35165992bb511ccc43231c3185e316ed5ac8",
+    "tools/test_engine_contracts.py": "74721c46a3a02936138c501dd0ee4314aeb5844a86e4716eecc11e2820c7c213",
+    "tools/test_evolution_coverage.py": "17ae287f13db15c51d153ce7102181a5ce4c89c53a1204c94f559bf556e575e9",
+    "tools/test_fbx_samples.py": "c05f14a5ad14db89d7900b9419c2e184808176486f92fbd1189a20b3496c6255",
+    "tools/test_game_package.py": "efd8b90ede539b61c8de344ac42eddead5e3b85363c031cc1c8234cf3c79d55d",
+    "tools/test_game_package_rules.py": "58bba1d179da473c02643db5bb7c2150af26a9bfee7c70a0cb407e62536526bb",
+    "tools/test_game_presentation.py": "de06e19865ba2d26c69a0ba0c45a87f23261b456d75a7bf5a9b5f01794d64fd2",
+    "tools/test_independent_animation_gpu.py": "2c0a81bf39eb2f9ffef81385bcbc78a3210e2d5115db2fa19f5d64197fe5cfe3",
+    "tools/test_install_manifest_roundtrip.cmake": "fcbbf4db36e3184bdeac138722531fcb89c37f1b4a42034e7e88d50e4b6eb159",
+    "tools/test_level_cycles.py": "899bda8c29e7c0ab2c90e780e1e21971ecef9c3b4dd9908ccd0076edb52df37f",
+    "tools/test_level_player.py": "b8170c13ac44714779ededa39f9d0297311b4eefc3746175235e45681ec1cf54",
+    "tools/test_locomotion_direction.py": "96004bdbcbfc971906c9a60806af0d9f1992fd14dca42cfd62b9fe4633382293",
+    "tools/test_managed_workflows.py": "06a35f421876df7179342ba0c1ee506275ecc2f0261668eafd1324c1799ffa09",
+    "tools/test_material_fixture.py": "cfb90cd0aa383618c14d62451984e650f6f5897eba8a6283e5b3df20210ad319",
+    "tools/test_metagen.py": "e1c4e65c546e8ac6517bc50e8a813fd64b43d2eb727c1255bd6d84e7d6ffd6c6",
+    "tools/test_module_boundaries.py": "4121099d31de02a6c22d6cd217cc60fce05b9322de0c395e0ce8ee1e679a6c6c",
+    "tools/test_native_window.py": "aefc0a4978e22b5e93e1ed793aa40d9108c6ac3fcf941c425a81e6456acddeb5",
+    "tools/test_observation_host.py": "13e1c75fe50d063568a35da189166976f684c49bd85a194f657c416e2f31e274",
+    "tools/test_optional_runtime_trace.py": "304b486e3b0b63c3f05f0a6ec7c47301489a495d7af6999e9238e7bd5abf91cd",
+    "tools/test_physics_player.py": "765764e1ec38a81b65cb5349ac152cff0d7625ebb87422222eeef8f0f7547f2c",
+    "tools/test_playable_delivery_rules.py": "3bd4687448ab71f9da4336c0de2b2103d4699bddd3b57c45f709707dd00c885e",
+    "tools/test_playable_package.py": "8fcb3abf0bec35fb2fb78cbfa3734175408c2b9919dd1b2d3f8a7cc457528e5b",
+    "tools/test_playable_player.py": "4cfc9456cfb7e967603deb584fb72661308dbed5916fe8dbeb68867bd51f9d30",
+    "tools/test_player_cli.py": "123e5777da926119c56c5d0da06cbba96db6bd52a253416f271a064f32abad33",
+    "tools/test_procedural_host.py": "b6ca7cb5c0f863e960e89edafba8cc78090ab07c34689e85e9eee820bc7a93b3",
+    "tools/test_proposal_host.py": "0e92da9a4199a9c052d95eef87de2662cd67c216e1e471b186fddef2c5056d11",
+    "tools/test_public_gait.py": "a78e6208af4098136837f0fd62eb2b67e8127e1b74103540431cee831ec52b02",
+    "tools/test_r3_performance.py": "5009577f732f189ec7189b31b1c31c01e21ffcaf56a34d932b7197c481350d8f",
+    "tools/test_r4_acceptance.py": "d11ccfa1d587a4bcc49bcc4f1ced0538a3bdce2ffd1e4a4713936eae76b653e8",
+    "tools/test_registered_component_host.py": "26e5191363c9beaee22051d0939b2d102a0d973bde929f2075e098e8ed2132af",
+    "tools/test_render_preview_host.py": "9c9fd244d0fc74dd75acb7c80b81730b7c5b359b61c2c6163b614016183c0371",
+    "tools/test_repository_audit.py": "3952d36acebd9bea5362865f5bff098c121001c7366c7c325bd386293e93af47",
+    "tools/test_runtime_spawn_gpu.py": "7a9070db6e922315ebf7d2bc54a4c643cb6debabd4c66128c38b75de6c5c63ba",
+    "tools/test_scene_inspector_host.py": "eabf54b407fb5be0d96a023da4a49a80a691391a3eb8d9b6b44c36bed545d27d",
+    "tools/test_scene_visibility_gpu.py": "43342c160b4eb3bc856221826a6942a6830bc3f1ecce50d2ca3cfadd6cafe47f",
+    "tools/test_script_bindings.py": "cb7a6a7cc47728960fe101a1f37008caf80580e1a7fb4d8509df4b5061c4c5e3",
+    "tools/test_script_player.py": "e9b6b334317dc94483c0f118695bb01ba3204dbd6bbc5e3cefc62623930e47f2",
+    "tools/test_settings_host.py": "ddbd68d936049cd154d288c20ffe489f9a616204ac350abf85e17d800b13a538",
+    "tools/test_shader_composition.py": "9b9e85db1cd893792f9578541c02cae074fd98d8afbf4245ffce125b819baa9a",
+    "tools/test_shader_module.py": "30f7c318cff6d5dbf18392ef6b285fa08b59d263b898e82cc02c1f691a4dcfc7",
+    "tools/test_shader_types.py": "c0e34da83f3f1c77da4ed03de9611f2f7d91909d8869ac7bc3c87e01daac89af",
+    "tools/test_skin_restore.py": "643bede2c8b8780a6d22063af9952eef705c4278c8ff40f4e8c4390067079124",
+    "tools/test_third_person_player.py": "33f363fdf3e94ce4c947cbacc27ab3bc128568ce1a9817af51e7912dd96263d9",
+    "tools/test_validation_protocol.py": "9052b62da70b7eda14087b1150737b655cdf091b9d1f42c3f297a2d8b10dff61",
+    "tools/test_visibility_benchmark.py": "064f11a0044241316d5f5192803aecfa8355b0a8beec909e4df5b753238d7be9",
+    "tools/unreal_export_laevat.py": "5033fbe4188747cd77742cb83973481a24cd0b0aadf8b6d5a44f5eba3a360378",
+    "tools/unreal_export_laevat_matcap.py": "4158864bf06c2b86ab09f4c360a4aac800bea75ff4399fcd7f7666bc9b7e4d1b",
+    "tools/unreal_export_laevat_skinned.py": "f2c9b4768bb864bec5b5042a9560760914870a98300ea3ffd969f3dbd0cc4be9",
+    "tools/unreal_export_source_skin.py": "98dcc562aaae08aaabc77ebe9c02dc228e14640569547d35506e9677a42f33b6",
+    "tools/unreal_extract_laevat_textures.py": "db0ca4d691c0849c88082fb72ca7fe6d7e5aa7a446ca675c2f284bb1da3007a3",
+    "tools/unreal_list_laevat_animations.py": "b56ecf57a1634ff16d4da62e171efe9688d20f51eee563abb7bd90a9f6130ef9",
+    "tools/unreal_trace_cloth_material.py": "5ebaca3915dbdaf64f421cb047befdb020c456a0c0a3919092cd280666040437",
+    "tools/unreal_trace_hair_material.py": "b3ee687fec8f97a819767066d584de1378b631a5480a73f5c57df780c79f1949",
+    "tools/validate_material_profiles.py": "a7fac24297081b339ce7cf31555dd989d4718540a0a0e6362cb20a4129a7d70c",
+    "tools/verify_evolution_coverage.py": "6f877eae24ec97b272301257387cc4528d446c4351a2c60ecf7569ea21420ea1",
+    "tools/verify_install_manifest.cmake": "ec64bbe7d107eb7f087ea36ccc55805dffada9c605b119de2b07f2eac5b559f0",
+    "tools/verify_player_runtime.ps1": "3f8dc0f0774dd706bb538481f1dfff8fe17da3d62404fd52ef2fb2db16b1b0b1",
+    "tools/verify_portfolio.ps1": "7d01d823ed33a35b39993768bb5b5cdb426567729d98df79a37b9b3f2d64b8d4",
+    "tools/verify_windows_runtime.ps1": "2071308350c5ee37d14e8a5887c29bcd6cdbdfb68e03b664222cecd23ff664f3",
+    "tools/visual_regression_cases.json": "7cccc5c7157d4606e9a00fa766158a20ba39a83ddd2d411ae592516c636a94e0",
+    "tools/write_engine_contracts.py": "d2e2cc856b4a38ae65129d4464ff99d9e86fa4199fc5503b6fe8713a483ffb7b",
+    "tools/write_install_manifest.cmake": "f11a54c2938cf4c19813b0ddb3aeddf16b8ae3fac08179c6d2e0871d65059421",
+    "tools/write_rc_manifest.cmake": "b80b7a58db87d9517c8b3e634b9594414140872203c3614c06bc0744a28b50f0",
+    "vcpkg.json": "166c01eea7ce8e875e75f934bb4edfd2129b56fea09b2ce77c78ea4d558f22fa"
+  },
+  "scope": "engine source, tests, tools, shaders, public assets, schemas, vendored sources and licenses; active documentation delivered in engine install",
+  "historicalScope": "This archive preserves current delivery bytes; historical original working-tree bytes have a separate audit."
+}

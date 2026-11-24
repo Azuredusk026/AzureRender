@@ -1,0 +1,20 @@
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+Editor viewport render extent: 1280x720
+Scene renderer: sample (sceneType=sample)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Scene renderer: sample (sceneType=sample)
+ECS visible renderables: 1
+Scene renderer: sample (sceneType=sample)
+Editor viewport resources rebuilt: 920x399
+Scene renderer: sample (sceneType=sample)
+Rendered frames: 13
+Allocator after unload: buffers=0 images=0
+[1791343165451][info][editor][code=0] Opened scene: managed-annotation
+[1791343165823][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791343166094][info][editor][code=0] Asset reload requested; changed files: 0
+[1791343166095][info][editor][code=0] Renderer resources reloaded
+[1791343166731][info][editor][code=0] Play started
+[1791343166893][info][editor][code=0] Play stopped; edit state restored

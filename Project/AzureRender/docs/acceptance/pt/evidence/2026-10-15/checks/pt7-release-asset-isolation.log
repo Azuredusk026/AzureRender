@@ -1,0 +1,8 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 102: AzureEngine.AssetLevel
+1/1 Test #102: AzureEngine.AssetLevel ...........   Passed    0.47 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.48 sec

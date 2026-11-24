@@ -1,0 +1,76 @@
+{
+  "status": "passed",
+  "quality": "existing",
+  "executableSha256": "d20f8927e118a698b437995aed8dd8a3af55f81ad3fa3e6a97ffc127e5abb719",
+  "captures": [
+    {
+      "name": "generic-0",
+      "maximumLinearError": 0.0012107628177074614,
+      "expected": [
+        0.274509113093794,
+        0.1156461366446812,
+        0.0350337258490987
+      ],
+      "actual": [
+        0.2746773120603847,
+        0.11443537382697389,
+        0.03433980680868219
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "37a2121d1e26be2c9baf7738b55172002c928e0d7d1ca0b66d975836f5f708b2"
+    },
+    {
+      "name": "fixed",
+      "maximumLinearError": 0.0004531757526100022,
+      "expected": [
+        0.2617974817770862,
+        0.10931882064162524,
+        0.03300253298558062
+      ],
+      "actual": [
+        0.26225065752969623,
+        0.10946171077829916,
+        0.03310476657088504
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "fixed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": true,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "65b12ec5cea8e6c22921e2d08a132038e7e9a215e7478e1aa90d89e5cee69b3d"
+    },
+    {
+      "name": "blend",
+      "maximumLinearError": 0.0011520253584243467,
+      "expected": [
+        0.15707848906625174,
+        0.06559129238497514,
+        0.01980151979134837
+      ],
+      "actual": [
+        0.1559264637078274,
+        0.06480326669290583,
+        0.019382360956935702
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "fixed",
+        "requestedSlots": 74,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": true
+      },
+      "imageSha256": "68e78b2662f636b320224ec24a59d71984df3bfd1258a8ca0acee59779fe48a6"
+    }
+  ]
+}

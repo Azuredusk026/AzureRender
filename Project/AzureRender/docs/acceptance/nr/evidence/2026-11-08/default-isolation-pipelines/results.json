@@ -1,0 +1,581 @@
+{
+  "schemaVersion": 1,
+  "status": "integrated-register-pressure-reduced-frame-cost-pending",
+  "sourceBase": "ab7121f",
+  "sourceHashes": {
+    "CMakeLists.txt": "0a4f5c0de38036a0ade79cd0ba8c1b91b00f36d0abbf79db6626a4018d790947",
+    "shaders/mesh.frag": "cbd8a3ffb7cf7b3505bb6a4c529cb05ee7def2dfc23d5370048a7cd545459928",
+    "shaders/unlit_opaque.glsl": "0a1d2b1575095861d53e9bbfd836883ea0858369dc4b1d2770402c57eee43520",
+    "shaders/unlit_blend.glsl": "aa1eb4b0ae91b17a6372874f3792efba1d2b3568de9d92ca10e60b4c17422d25",
+    "shaders/view_fog_material.glsl": "b9d5c849a70bf2b230c93767dd9bdedd62d3e7ae4b1d8eb5450828883069bb89",
+    "src/scenes/CharacterSceneRenderer.hpp": "cb30506acbced5d6dc61720e46f8346505a7f81b8106eb406b8ccc4087fe2587",
+    "src/scenes/CharacterSceneRenderer.cpp": "a4ac177864090038de4ddbfb029093ed4287523ef7c249655787b70a0e96f49a",
+    "src/scenes/CharacterMaterialSampling.inc": "7627b9bb1cca5e1b16d23eb9c4d689c6947a6c567f13222649594d4c105e2558",
+    "tests/DepthPrefillRecordingTests.cpp": "a49e3a59a0a26480f9f691b43136fa4abf026b643fc1a96129b54b9b7604a1e5",
+    "tests/DefaultIsolationViewGpuTests.cpp": "3acba1d3bfe3720744f93b7e680cf75579f2c6d1f75c03b89840d4d2c1fc6844"
+  },
+  "checks": [
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.MaterialPipelinePolicy",
+      "seconds": "1.65477",
+      "outputSha256": "bec3dd4cf51c113c3b4366f4c11ceef5465bb19eb774dbfee03b2001ec3e6f81",
+      "evidenceFile": "run/release-initial.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.MaterialClassEarlyDepth",
+      "seconds": "1.76967",
+      "outputSha256": "622084198758a0ec42fd7372d233306f6adc913988de2d1e45da75ad2d1db5b5",
+      "evidenceFile": "run/release-initial.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.ShaderSpecializationGpu",
+      "seconds": "1.86043",
+      "outputSha256": "09a447edd24de9200e75ee3f71d7e1b8386985f8e6104c8fd9e724c19ac2f913",
+      "evidenceFile": "run/release-initial.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.ViewFogShaderContract",
+      "seconds": "0.129152",
+      "outputSha256": "943f33315119913a346471c07e2fae27343e1b54adf1cffd71c026cd2f752280",
+      "evidenceFile": "run/release-initial.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.RenderViewSubmission",
+      "seconds": "1.1145",
+      "outputSha256": "ab300ef2db1f09e0889aa467924aa672e2254377d772608624ca9c101e52cdf2",
+      "evidenceFile": "run/release-initial.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.RenderView",
+      "seconds": "1.15643",
+      "outputSha256": "60aaace338a48e85f4a6b813e68d5631eb95d64f3d0d0e528b8aa62504a3691a",
+      "evidenceFile": "run/release-initial.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.DepthPrefillRecording",
+      "seconds": "2.90029",
+      "outputSha256": "95e65117e119ca2b08ff0b07c2aba4e68df37754c185d088e3c9d041b628f8b5",
+      "evidenceFile": "run/release-nvidia.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.DefaultIsolationViewGpu",
+      "seconds": "51.0169",
+      "outputSha256": "4e72b3b4dcbe9e5c4d22a4adc96f53cad4f3bdbbff74adda9f9ea448f4477fb3",
+      "evidenceFile": "run/release-final-nvidia.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "name": "AzureRender.ShaderSpecializationGpu",
+      "seconds": "1.64983",
+      "outputSha256": "09a447edd24de9200e75ee3f71d7e1b8386985f8e6104c8fd9e724c19ac2f913",
+      "evidenceFile": "run/release-intel.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "name": "AzureRender.DefaultIsolationViewGpu",
+      "seconds": "35.7291",
+      "outputSha256": "459d1af97e071a1412ae51c1f10b99f4c4a119f632c140acb860fcaf8d2bb7b5",
+      "evidenceFile": "run/release-final-intel.xml"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.MaterialPipelinePolicy",
+      "seconds": "1.26719",
+      "outputSha256": "bec3dd4cf51c113c3b4366f4c11ceef5465bb19eb774dbfee03b2001ec3e6f81",
+      "evidenceFile": "run/debug-nvidia.xml"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.MaterialClassEarlyDepth",
+      "seconds": "3.15681",
+      "outputSha256": "850fdbdd362aa5fb3935ffe037c12bcb73490aa570c398f07f0c357c301ffde8",
+      "evidenceFile": "run/debug-nvidia.xml"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.ShaderSpecializationGpu",
+      "seconds": "3.11153",
+      "outputSha256": "09a447edd24de9200e75ee3f71d7e1b8386985f8e6104c8fd9e724c19ac2f913",
+      "evidenceFile": "run/debug-nvidia.xml"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.DepthPrefillRecording",
+      "seconds": "3.79894",
+      "outputSha256": "9f30b03796e1790ffae9bf8590075bebe637d8af6fd6d3f51fa1ba55eabbe1be",
+      "evidenceFile": "run/debug-nvidia.xml"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.ViewFogShaderContract",
+      "seconds": "0.162258",
+      "outputSha256": "943f33315119913a346471c07e2fae27343e1b54adf1cffd71c026cd2f752280",
+      "evidenceFile": "run/debug-nvidia.xml"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.RenderViewSubmission",
+      "seconds": "2.41163",
+      "outputSha256": "ab300ef2db1f09e0889aa467924aa672e2254377d772608624ca9c101e52cdf2",
+      "evidenceFile": "run/debug-nvidia.xml"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.RenderView",
+      "seconds": "2.06748",
+      "outputSha256": "60aaace338a48e85f4a6b813e68d5631eb95d64f3d0d0e528b8aa62504a3691a",
+      "evidenceFile": "run/debug-nvidia.xml"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.DefaultIsolationViewGpu",
+      "seconds": "44.6228",
+      "outputSha256": "a5242f9484678ec19b2aa68861f6aa36bdf36ab997320c62625a59f2be887f51",
+      "evidenceFile": "run/debug-final-nvidia.xml"
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "name": "AzureRender.ShaderSpecializationGpu",
+      "seconds": "0.236488",
+      "outputSha256": "09a447edd24de9200e75ee3f71d7e1b8386985f8e6104c8fd9e724c19ac2f913",
+      "evidenceFile": "run/debug-intel.xml"
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "name": "AzureRender.DefaultIsolationViewGpu",
+      "seconds": "40.8053",
+      "outputSha256": "52b632dd36df8e0595fcee77193f745577683fef4323cbda0d92a2dd3c5e29fc",
+      "evidenceFile": "run/debug-final-intel.xml"
+    }
+  ],
+  "staticControl": {
+    "rows": [
+      {
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv",
+        "originalBytesUnchanged": true
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field.frag.spv",
+        "originalBytesUnchanged": true
+      },
+      {
+        "program": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+        "originalBytesUnchanged": true
+      }
+    ],
+    "registers": 96,
+    "binaryBytes": 102400,
+    "defaultSpecialization": 0,
+    "queueSubmissions": 0,
+    "validationErrors": []
+  },
+  "baselineRegisters": 128,
+  "candidateRegisters": 96,
+  "registerReductionFraction": 0.25,
+  "image": {
+    "execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 95.64100000000326,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-150504-beauty-shader-specialization-2d2daa\\precision\\runtime\\ProbePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "4",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-150504-beauty-shader-specialization-2d2daa\\image-precision\\frames-155321",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-150504-beauty-shader-specialization-2d2daa\\image-precision\\runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-150504-beauty-shader-specialization-2d2daa\\tmp"
+    },
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteDifference": 0
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteDifference": 0
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteDifference": 0
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteDifference": 0
+      }
+    ],
+    "metadata": {
+      "defaultIsolationPipelines": 8,
+      "defaultIsolationSelected": true,
+      "defaultIsolationFallback": "",
+      "conservativeOcclusionPrepared": true,
+      "mainDepthSplitRecorded": true,
+      "conservativeOcclusionCommands": 435,
+      "conservativeOcclusionLastZeroCommands": 212,
+      "conservativeOcclusionFallback": ""
+    },
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "projectInputsUnchanged": true,
+    "validationLogClean": true,
+    "zeroAllocator": true,
+    "formalPerformancePassed": false,
+    "overallVisualAcceptance": "failed-user-review"
+  },
+  "imageProductionBinding": {
+    "programs": [
+      {
+        "configuration": "release",
+        "program": "mesh_object_bindless_clipmap_field_early_coverage_isolation0.frag.spv",
+        "sha256": "120b668d98c6c85cbb65ffc7f58ffba082cf149a06015ad834c16f396f5e11b2"
+      },
+      {
+        "configuration": "debug",
+        "program": "mesh_object_bindless_clipmap_field_early_coverage_isolation0.frag.spv",
+        "sha256": "120b668d98c6c85cbb65ffc7f58ffba082cf149a06015ad834c16f396f5e11b2"
+      },
+      {
+        "configuration": "release",
+        "program": "mesh_object_bindless_clipmap_field_early_isolation0.frag.spv",
+        "sha256": "c632447c8ae9db8074a3ba74a5aa801d58beec1202492547d2034f4651962563"
+      },
+      {
+        "configuration": "debug",
+        "program": "mesh_object_bindless_clipmap_field_early_isolation0.frag.spv",
+        "sha256": "c632447c8ae9db8074a3ba74a5aa801d58beec1202492547d2034f4651962563"
+      },
+      {
+        "configuration": "release",
+        "program": "mesh_object_bindless_clipmap_field_early_lighting_coverage_isolation0.frag.spv",
+        "sha256": "35e200f353bdbb95bd8bef8aa97dd0dfe0d95d2a7dd38009e67389d3b5ec1a22"
+      },
+      {
+        "configuration": "debug",
+        "program": "mesh_object_bindless_clipmap_field_early_lighting_coverage_isolation0.frag.spv",
+        "sha256": "35e200f353bdbb95bd8bef8aa97dd0dfe0d95d2a7dd38009e67389d3b5ec1a22"
+      },
+      {
+        "configuration": "release",
+        "program": "mesh_object_bindless_clipmap_field_early_lighting_isolation0.frag.spv",
+        "sha256": "9690cfd9a41a7fdd5706ebe97ac6c8ce33006cf689580040daa460a6a6f9d0af"
+      },
+      {
+        "configuration": "debug",
+        "program": "mesh_object_bindless_clipmap_field_early_lighting_isolation0.frag.spv",
+        "sha256": "9690cfd9a41a7fdd5706ebe97ac6c8ce33006cf689580040daa460a6a6f9d0af"
+      }
+    ],
+    "privateDifference": "Only shader file resolution redirects to byte-identical captured programs",
+    "rendererSourceEquivalent": true,
+    "imageMetadata": {
+      "defaultIsolationPipelines": 8,
+      "defaultIsolationSelected": true,
+      "defaultIsolationFallback": "",
+      "conservativeOcclusionPrepared": true,
+      "mainDepthSplitRecorded": true,
+      "conservativeOcclusionCommands": 435,
+      "conservativeOcclusionLastZeroCommands": 212,
+      "conservativeOcclusionFallback": ""
+    },
+    "fourFramesExact": true
+  },
+  "wholeFrameCost": {
+    "schemaVersion": 1,
+    "status": "invalid-external-gpu-contention",
+    "wholeFrameBenefitMeasured": false,
+    "formalPerformancePassed": false,
+    "reason": "An external graphics process was active during the reference and candidate. The owned candidate was stopped; the after-reference did not run.",
+    "externalEngineObservation": {
+      "source": "Win32_PerfFormattedData_GPUPerformanceCounters_GPUEngine",
+      "graphicsUtilizationPercent": 20,
+      "copyUtilizationPercent": 12
+    },
+    "referenceDeviceMemoryMiB": {
+      "total": 8188,
+      "used": 7424,
+      "free": 533
+    },
+    "hostPowerStates": [
+      1
+    ],
+    "powerLimitsWatts": [
+      75.0,
+      75.11,
+      75.22,
+      75.61,
+      75.91,
+      76.01
+    ],
+    "candidateExecution": {
+      "status": "exited",
+      "exitCode": 4294967295,
+      "reason": null,
+      "seconds": 298.9530000000086,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--resource-root",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "24",
+        "--smoke-frames",
+        "120",
+        "--gpu-timing",
+        "--gpu-timing-output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-150504-beauty-shader-specialization-2d2daa\\cost-v1-candidate\\timing.json"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-150504-beauty-shader-specialization-2d2daa\\tmp"
+    },
+    "candidatePartialFrameRows": 69,
+    "afterReferenceExecuted": false,
+    "referenceEnvironmentSha256": "db970a5cd38d0579df7b64f062fbb6c8e33346c6f90e8f6d2cd9f56d40831836",
+    "unrelatedApplicationsModified": false,
+    "productionSourceChangedForMeasurement": false
+  },
+  "wholeFrameBenefitMeasured": false,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "unchangedPrograms": [
+    {
+      "configuration": "release",
+      "existingProgramsUnchanged": 672,
+      "newPrograms": 64,
+      "programs": [
+        "mesh_bindless_clipmap_early_coverage_isolation0.frag.spv",
+        "mesh_bindless_clipmap_early_isolation0.frag.spv",
+        "mesh_bindless_clipmap_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_bindless_clipmap_early_lighting_isolation0.frag.spv",
+        "mesh_bindless_clipmap_field_early_coverage_isolation0.frag.spv",
+        "mesh_bindless_clipmap_field_early_isolation0.frag.spv",
+        "mesh_bindless_clipmap_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_bindless_clipmap_field_early_lighting_isolation0.frag.spv",
+        "mesh_bindless_early_coverage_isolation0.frag.spv",
+        "mesh_bindless_early_isolation0.frag.spv",
+        "mesh_bindless_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_bindless_early_lighting_isolation0.frag.spv",
+        "mesh_bindless_field_early_coverage_isolation0.frag.spv",
+        "mesh_bindless_field_early_isolation0.frag.spv",
+        "mesh_bindless_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_bindless_field_early_lighting_isolation0.frag.spv",
+        "mesh_clipmap_early_coverage_isolation0.frag.spv",
+        "mesh_clipmap_early_isolation0.frag.spv",
+        "mesh_clipmap_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_clipmap_early_lighting_isolation0.frag.spv",
+        "mesh_clipmap_field_early_coverage_isolation0.frag.spv",
+        "mesh_clipmap_field_early_isolation0.frag.spv",
+        "mesh_clipmap_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_clipmap_field_early_lighting_isolation0.frag.spv",
+        "mesh_early_coverage_isolation0.frag.spv",
+        "mesh_early_isolation0.frag.spv",
+        "mesh_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_early_lighting_isolation0.frag.spv",
+        "mesh_field_early_coverage_isolation0.frag.spv",
+        "mesh_field_early_isolation0.frag.spv",
+        "mesh_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_field_early_lighting_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_early_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_early_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_early_lighting_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_field_early_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_field_early_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_field_early_lighting_isolation0.frag.spv",
+        "mesh_object_bindless_early_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_early_isolation0.frag.spv",
+        "mesh_object_bindless_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_early_lighting_isolation0.frag.spv",
+        "mesh_object_bindless_field_early_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_field_early_isolation0.frag.spv",
+        "mesh_object_bindless_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_field_early_lighting_isolation0.frag.spv",
+        "mesh_object_clipmap_early_coverage_isolation0.frag.spv",
+        "mesh_object_clipmap_early_isolation0.frag.spv",
+        "mesh_object_clipmap_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_clipmap_early_lighting_isolation0.frag.spv",
+        "mesh_object_clipmap_field_early_coverage_isolation0.frag.spv",
+        "mesh_object_clipmap_field_early_isolation0.frag.spv",
+        "mesh_object_clipmap_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_clipmap_field_early_lighting_isolation0.frag.spv",
+        "mesh_object_early_coverage_isolation0.frag.spv",
+        "mesh_object_early_isolation0.frag.spv",
+        "mesh_object_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_early_lighting_isolation0.frag.spv",
+        "mesh_object_field_early_coverage_isolation0.frag.spv",
+        "mesh_object_field_early_isolation0.frag.spv",
+        "mesh_object_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_field_early_lighting_isolation0.frag.spv"
+      ],
+      "manifestSha256": "74ff744301fa076a8837714fc1965276c407d153733400a8ded28a35f748aecf"
+    },
+    {
+      "configuration": "debug",
+      "existingProgramsUnchanged": 672,
+      "newPrograms": 64,
+      "programs": [
+        "mesh_bindless_clipmap_early_coverage_isolation0.frag.spv",
+        "mesh_bindless_clipmap_early_isolation0.frag.spv",
+        "mesh_bindless_clipmap_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_bindless_clipmap_early_lighting_isolation0.frag.spv",
+        "mesh_bindless_clipmap_field_early_coverage_isolation0.frag.spv",
+        "mesh_bindless_clipmap_field_early_isolation0.frag.spv",
+        "mesh_bindless_clipmap_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_bindless_clipmap_field_early_lighting_isolation0.frag.spv",
+        "mesh_bindless_early_coverage_isolation0.frag.spv",
+        "mesh_bindless_early_isolation0.frag.spv",
+        "mesh_bindless_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_bindless_early_lighting_isolation0.frag.spv",
+        "mesh_bindless_field_early_coverage_isolation0.frag.spv",
+        "mesh_bindless_field_early_isolation0.frag.spv",
+        "mesh_bindless_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_bindless_field_early_lighting_isolation0.frag.spv",
+        "mesh_clipmap_early_coverage_isolation0.frag.spv",
+        "mesh_clipmap_early_isolation0.frag.spv",
+        "mesh_clipmap_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_clipmap_early_lighting_isolation0.frag.spv",
+        "mesh_clipmap_field_early_coverage_isolation0.frag.spv",
+        "mesh_clipmap_field_early_isolation0.frag.spv",
+        "mesh_clipmap_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_clipmap_field_early_lighting_isolation0.frag.spv",
+        "mesh_early_coverage_isolation0.frag.spv",
+        "mesh_early_isolation0.frag.spv",
+        "mesh_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_early_lighting_isolation0.frag.spv",
+        "mesh_field_early_coverage_isolation0.frag.spv",
+        "mesh_field_early_isolation0.frag.spv",
+        "mesh_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_field_early_lighting_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_early_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_early_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_early_lighting_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_field_early_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_field_early_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_clipmap_field_early_lighting_isolation0.frag.spv",
+        "mesh_object_bindless_early_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_early_isolation0.frag.spv",
+        "mesh_object_bindless_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_early_lighting_isolation0.frag.spv",
+        "mesh_object_bindless_field_early_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_field_early_isolation0.frag.spv",
+        "mesh_object_bindless_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_bindless_field_early_lighting_isolation0.frag.spv",
+        "mesh_object_clipmap_early_coverage_isolation0.frag.spv",
+        "mesh_object_clipmap_early_isolation0.frag.spv",
+        "mesh_object_clipmap_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_clipmap_early_lighting_isolation0.frag.spv",
+        "mesh_object_clipmap_field_early_coverage_isolation0.frag.spv",
+        "mesh_object_clipmap_field_early_isolation0.frag.spv",
+        "mesh_object_clipmap_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_clipmap_field_early_lighting_isolation0.frag.spv",
+        "mesh_object_early_coverage_isolation0.frag.spv",
+        "mesh_object_early_isolation0.frag.spv",
+        "mesh_object_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_early_lighting_isolation0.frag.spv",
+        "mesh_object_field_early_coverage_isolation0.frag.spv",
+        "mesh_object_field_early_isolation0.frag.spv",
+        "mesh_object_field_early_lighting_coverage_isolation0.frag.spv",
+        "mesh_object_field_early_lighting_isolation0.frag.spv"
+      ],
+      "manifestSha256": "60c7036f59b02a4d466a83541e3000d7902eb18423cf7b93113b27f7ad65b165"
+    }
+  ],
+  "catalogs": [
+    {
+      "configuration": "release",
+      "programs": 736,
+      "maximumPrograms": 736,
+      "newPrograms": 64
+    },
+    {
+      "configuration": "debug",
+      "programs": 736,
+      "maximumPrograms": 736,
+      "newPrograms": 64
+    }
+  ],
+  "moduleBoundaries": {
+    "status": "passed",
+    "targets": 18,
+    "includes": 29556,
+    "violations": []
+  },
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "evidenceBytes": 1597444,
+  "evidenceSha256": "fe9f7759c96c1325fcefd5355f9890d7c6df7375cdfb493aa9357fb8d7cc8497",
+  "imagesStoredByReference": true,
+  "taskRetentionDays": 1
+}

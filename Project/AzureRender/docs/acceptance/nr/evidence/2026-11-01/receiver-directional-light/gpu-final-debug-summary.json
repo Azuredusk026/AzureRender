@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "playerSha256": "dd9df30d37afe3dfada19404415adb7f8c54efaaf0fcf66445cb5a2f4065083a",
+  "linearErrorBudget": 0.008,
+  "captures": [
+    {
+      "name": "receiver-main",
+      "maximumLinearError": 0.0006537857134987363,
+      "validationEnabled": true,
+      "surfaceShadowGuard": null,
+      "imageSha256": "33ec4ea69868c730c373f72159196a9f174d3c5ed63b91462cd1f44ca896a596",
+      "measured": [
+        0.043735029256973465,
+        0.003676507324047436,
+        0.0015176349177441874
+      ],
+      "expected": [
+        0.04308124354347473,
+        0.003698064553862868,
+        0.001582772228583815
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main-fixed",
+      "maximumLinearError": 0.0006537857134987363,
+      "validationEnabled": true,
+      "surfaceShadowGuard": null,
+      "imageSha256": "33ec4ea69868c730c373f72159196a9f174d3c5ed63b91462cd1f44ca896a596",
+      "measured": [
+        0.043735029256973465,
+        0.003676507324047436,
+        0.0015176349177441874
+      ],
+      "expected": [
+        0.04308124354347473,
+        0.003698064553862868,
+        0.001582772228583815
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main-ramp-side",
+      "maximumLinearError": 0.0005869167696745947,
+      "validationEnabled": true,
+      "surfaceShadowGuard": null,
+      "imageSha256": "cfbe9bbe51584b1a80ff038656394bbc7843cb4845363ea69d693fefb0c55b4a",
+      "measured": [
+        0.06480326669290577,
+        0.005181516702338386,
+        0.0021246888848418626
+      ],
+      "expected": [
+        0.06421634992323118,
+        0.005042204719813754,
+        0.0019528270855797402
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main-shadow",
+      "maximumLinearError": 0.0006537857134987363,
+      "validationEnabled": true,
+      "surfaceShadowGuard": null,
+      "imageSha256": "74e886a225c132e0430ba853edbb6719c9e1f9848da84955a97ad6d771e9e422",
+      "measured": [
+        0.043735029256973465,
+        0.003676507324047436,
+        0.0015176349177441874
+      ],
+      "expected": [
+        0.04308124354347473,
+        0.003698064553862868,
+        0.001582772228583815
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main-strong-shadow",
+      "maximumLinearError": 0.0010024554989675472,
+      "validationEnabled": true,
+      "surfaceShadowGuard": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "imageSha256": "151f80b99df3abec150f34ff69501c8caea46f23b76e37ef655b11232bca623e",
+      "measured": [
+        0.1946178304415758,
+        0.03189603307301153,
+        0.019382360956935723
+      ],
+      "expected": [
+        0.19361537494260825,
+        0.03180745799881488,
+        0.019245664593016142
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main-strong-shadow-fixed",
+      "maximumLinearError": 0.0010024554989675472,
+      "validationEnabled": true,
+      "surfaceShadowGuard": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "imageSha256": "151f80b99df3abec150f34ff69501c8caea46f23b76e37ef655b11232bca623e",
+      "measured": [
+        0.1946178304415758,
+        0.03189603307301153,
+        0.019382360956935723
+      ],
+      "expected": [
+        0.19361537494260825,
+        0.03180745799881488,
+        0.019245664593016142
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main-ramp-disabled",
+      "maximumLinearError": 6.799112274683726e-05,
+      "validationEnabled": true,
+      "surfaceShadowGuard": null,
+      "imageSha256": "5dbd468cad05c3cf1076bb272a8324f888ec29d3063557e99ad2cc64c41eabb5",
+      "measured": [
+        0.008568125618069307,
+        0.000607053967097675,
+        0.0003035269835488375
+      ],
+      "expected": [
+        0.008622899755252832,
+        0.0006432307856987507,
+        0.00023553586080200025
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    }
+  ]
+}

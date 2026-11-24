@@ -1,0 +1,220 @@
+{
+  "asset": {
+    "version": "2.0",
+    "generator": "Azure eye contract candidate",
+    "extras": {
+      "license": "CC0-1.0"
+    }
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "synthetic-eye",
+      "doubleSided": true,
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 1
+      },
+      "extras": {
+        "azureRenderMaterial": {
+          "schemaVersion": 2,
+          "class": "eye",
+          "features": [
+            "eye-radial-surface"
+          ],
+          "styleParameters": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "featureParameters": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "eyeSurface": {
+            "schemaVersion": 1,
+            "diffuseRampTexture": 1,
+            "matcapTexture": 2,
+            "parallaxScale": 0.15,
+            "matcapNormalScale": 1,
+            "alphaPremultiply": 0,
+            "uvScaleOffset": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "highlightColor": [
+              0,
+              0,
+              0
+            ],
+            "scatteringColor": [
+              0,
+              0,
+              0
+            ],
+            "matcapColor": [
+              0.2,
+              0.4,
+              0.8,
+              0.5
+            ],
+            "lightingInputs": {
+              "source": "host-authored",
+              "illuminationModel": "host-lambert",
+              "matcapShadowFloor": 1,
+              "directWeights": [
+                1,
+                0,
+                0
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "images": [
+    {
+      "uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAJUlEQVR4nGNscHjQwEABYKJE86gBEMDEQCFgGjWAYTQMGCgPAwDh6AJAysIS3AAAAABJRU5ErkJggg=="
+    },
+    {
+      "uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAD0lEQVR4nGNUcGhoYEACABNiAWIFkiHLAAAAAElFTkSuQmCC"
+    },
+    {
+      "uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAI0lEQVR4nGNgYPivEMqwSmEVQ6jCfwYGBRaGUAYHBiRAWAAARFsGSCVEYewAAAAASUVORK5CYII="
+    }
+  ],
+  "textures": [
+    {
+      "source": 0,
+      "sampler": 0
+    },
+    {
+      "source": 1,
+      "sampler": 0
+    },
+    {
+      "source": 2,
+      "sampler": 0
+    }
+  ],
+  "samplers": [
+    {
+      "wrapS": 33071,
+      "wrapT": 33071,
+      "magFilter": 9729,
+      "minFilter": 9729
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 48
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 48,
+      "byteLength": 48
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 96,
+      "byteLength": 64
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 160,
+      "byteLength": 32
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 192,
+      "byteLength": 12
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC3",
+      "min": [
+        -0.9,
+        -0.9,
+        0
+      ],
+      "max": [
+        0.9,
+        0.9,
+        0
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5123,
+      "count": 6,
+      "type": "SCALAR"
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 204,
+      "uri": "data:application/octet-stream;base64,ZmZmv2ZmZr8AAAAAZmZmP2ZmZr8AAAAAZmZmP2ZmZj8AAAAAZmZmv2ZmZj8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAgD8AAIA/AAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAACAP1K4Hj9SuB4/UrgeP1K4Hj9SuB4/UrgeP1K4Hj9SuB4/AAABAAIAAAACAAMA"
+    }
+  ]
+}

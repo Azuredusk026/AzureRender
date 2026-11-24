@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "width": 1280,
+  "height": 720,
+  "levels": 7,
+  "depthDecode": [
+    9.999899864196777,
+    9.999999747e-05
+  ],
+  "depthFiles": [
+    "texture-16447-mip-0.bin",
+    "texture-16447-mip-1.bin",
+    "texture-16447-mip-2.bin",
+    "texture-16447-mip-3.bin",
+    "texture-16447-mip-4.bin",
+    "texture-16447-mip-5.bin",
+    "texture-16447-mip-6.bin"
+  ],
+  "colorFile": "texture-16552-mip-0.bin",
+  "confidenceFile": "confidence-mip-0.bin"
+}

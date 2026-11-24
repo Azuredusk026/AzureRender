@@ -1,0 +1,20 @@
+{
+  "boundary_action": "KEEP",
+  "content_actions": [
+    "按制作流程说明当前结果",
+    "区分自动输入与人工复核",
+    "保留历史失败及当前通过状态"
+  ],
+  "title_review": "通过：以工作区交付检查为主问题",
+  "quality": {
+    "scope": "当前 UI 迁移与安装版制作流程",
+    "structure": "操作、职责与证据分别维护",
+    "depth": "职责、实际服务与失败恢复有来源",
+    "implementation": "两工程使用同一生产控件与编辑服务",
+    "evidence": "两配置完整 CPU 与真实 GUI 回放",
+    "writing": "中文定稿，短句与具体主语",
+    "titles": "按读者任务命名",
+    "informationArchitecture": "总计划、状态、指南和阶段记录各有入口",
+    "visual": "真实 Vulkan 捕获复核"
+  }
+}

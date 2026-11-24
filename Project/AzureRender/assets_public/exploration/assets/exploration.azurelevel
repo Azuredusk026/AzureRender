@@ -1,0 +1,2358 @@
+{
+  "schemaVersion": 1,
+  "id": "exploration",
+  "sceneType": "character",
+  "renderSettings": {
+    "platform": false,
+    "cameraNear": 0.1,
+    "cameraFar": 300,
+    "shadowDistance": 80
+  },
+  "resources": [
+    {
+      "id": "guide",
+      "asset": "assets:/guide.gltf"
+    },
+    {
+      "id": "cube",
+      "asset": "assets:/cube.gltf"
+    },
+    {
+      "id": "ground",
+      "asset": "assets:/environment/ground.glb"
+    },
+    {
+      "id": "trail",
+      "asset": "assets:/environment/trail.glb"
+    },
+    {
+      "id": "branch",
+      "asset": "assets:/environment/branch.glb"
+    },
+    {
+      "id": "rock",
+      "asset": "assets:/environment/rock.glb"
+    },
+    {
+      "id": "shrub",
+      "asset": "assets:/environment/shrub.glb"
+    },
+    {
+      "id": "ruin",
+      "asset": "assets:/environment/ruin.glb"
+    },
+    {
+      "id": "arch",
+      "asset": "assets:/environment/arch.glb"
+    },
+    {
+      "id": "relic",
+      "asset": "assets:/environment/relic.glb"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ground",
+      "resourceId": "ground",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -0.25,
+              -55
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              12,
+              0.25,
+              58
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "passage-left",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -2.5,
+              1.5,
+              -36
+            ],
+            "scale": [
+              0.2,
+              1.5,
+              5
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "passage-right",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              2.5,
+              1.5,
+              -36
+            ],
+            "scale": [
+              0.2,
+              1.5,
+              5
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "ramp",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.17,
+              -61
+            ],
+            "scale": [
+              2,
+              0.15,
+              2
+            ],
+            "rotation": [
+              6,
+              0,
+              0
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "interior-left",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -3.2,
+              2,
+              -103
+            ],
+            "scale": [
+              0.2,
+              2,
+              10
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "interior-right",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              3.2,
+              2,
+              -103
+            ],
+            "scale": [
+              0.2,
+              2,
+              10
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "interior-roof",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              2.35,
+              -103
+            ],
+            "scale": [
+              3.4,
+              0.15,
+              10
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gate-left",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -8,
+              1.5,
+              -94
+            ],
+            "scale": [
+              5.5,
+              1.5,
+              0.2
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gate-right",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              8,
+              1.5,
+              -94
+            ],
+            "scale": [
+              5.5,
+              1.5,
+              0.2
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "camera",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.third-person-camera": {
+          "type": "azure.third-person-camera",
+          "version": 1,
+          "data": {
+            "target": "hero:body",
+            "distance": 5.5,
+            "targetHeight": 1,
+            "shoulder": 0.2
+          }
+        }
+      }
+    },
+    {
+      "id": "hud",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.game-ui": {
+          "type": "azure.game-ui",
+          "version": 1,
+          "data": {
+            "asset": "assets:/hud.rml"
+          }
+        }
+      }
+    },
+    {
+      "id": "goal",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              1,
+              -108
+            ],
+            "scale": [
+              3,
+              2,
+              3
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/goal.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "companion-0",
+      "resourceId": "guide",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -4,
+              0,
+              -14
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.animator": {
+          "type": "azure.animator",
+          "version": 2,
+          "data": {
+            "asset": "assets:/locomotion.json",
+            "startTime": 0.7
+          }
+        }
+      }
+    },
+    {
+      "id": "companion-1",
+      "resourceId": "guide",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              4,
+              0,
+              -65
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.animator": {
+          "type": "azure.animator",
+          "version": 2,
+          "data": {
+            "asset": "assets:/locomotion.json",
+            "startTime": 1.7
+          }
+        }
+      }
+    },
+    {
+      "id": "main-trail",
+      "resourceId": "trail",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.012,
+              -55
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              2,
+              0.01,
+              55
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gate-arch",
+      "resourceId": "arch",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              -94
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "side-trail-0",
+      "resourceId": "branch",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -2.5,
+              0.014,
+              -18
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              3,
+              0.01,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "artifact-landmark-0",
+      "resourceId": "ruin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -6.8,
+              0,
+              -19
+            ],
+            "scale": [
+              0.7,
+              0.7,
+              0.7
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "side-trail-1",
+      "resourceId": "branch",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              2.5,
+              0.014,
+              -45
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              3,
+              0.01,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "artifact-landmark-1",
+      "resourceId": "ruin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              6.8,
+              0,
+              -46
+            ],
+            "scale": [
+              0.7,
+              0.7,
+              0.7
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "side-trail-2",
+      "resourceId": "branch",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -2.5,
+              0.014,
+              -74
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              3,
+              0.01,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "artifact-landmark-2",
+      "resourceId": "ruin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -6.8,
+              0,
+              -75
+            ],
+            "scale": [
+              0.7,
+              0.7,
+              0.7
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-0",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              8.82792466622392,
+              0,
+              -6.0
+            ],
+            "scale": [
+              1.1100748997465357,
+              1.1100748997465357,
+              1.1100748997465357
+            ],
+            "rotation": [
+              0,
+              273.0130672021659,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-0",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              9.82792466622392,
+              0,
+              -4.2
+            ],
+            "scale": [
+              1.1100748997465357,
+              1.1100748997465357,
+              1.1100748997465357
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-1",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -10.403428066298806,
+              0,
+              -11.7
+            ],
+            "scale": [
+              1.0661558587092639,
+              1.0661558587092639,
+              1.0661558587092639
+            ],
+            "rotation": [
+              0,
+              192.51290671181636,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-1",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -11.403428066298806,
+              0,
+              -9.899999999999999
+            ],
+            "scale": [
+              1.0661558587092639,
+              1.0661558587092639,
+              1.0661558587092639
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-2",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              9.507476072879498,
+              0,
+              -17.4
+            ],
+            "scale": [
+              0.8926110866764488,
+              0.8926110866764488,
+              0.8926110866764488
+            ],
+            "rotation": [
+              0,
+              304.0204733246088,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-2",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              10.507476072879498,
+              0,
+              -15.599999999999998
+            ],
+            "scale": [
+              0.8926110866764488,
+              0.8926110866764488,
+              0.8926110866764488
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-3",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -7.827453266277337,
+              0,
+              -23.1
+            ],
+            "scale": [
+              0.8099331680164004,
+              0.8099331680164004,
+              0.8099331680164004
+            ],
+            "rotation": [
+              0,
+              94.99034832446331,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-3",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -8.827453266277338,
+              0,
+              -21.3
+            ],
+            "scale": [
+              0.8099331680164004,
+              0.8099331680164004,
+              0.8099331680164004
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-4",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              10.115558168994752,
+              0,
+              -28.8
+            ],
+            "scale": [
+              1.0706910524866906,
+              1.0706910524866906,
+              1.0706910524866906
+            ],
+            "rotation": [
+              0,
+              187.42259876226163,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-4",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              11.115558168994752,
+              0,
+              -27.0
+            ],
+            "scale": [
+              1.0706910524866906,
+              1.0706910524866906,
+              1.0706910524866906
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-5",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -7.870086561786327,
+              0,
+              -34.5
+            ],
+            "scale": [
+              1.181575637757762,
+              1.181575637757762,
+              1.181575637757762
+            ],
+            "rotation": [
+              0,
+              70.75815135693998,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-5",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -8.870086561786326,
+              0,
+              -32.7
+            ],
+            "scale": [
+              1.181575637757762,
+              1.181575637757762,
+              1.181575637757762
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-6",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              8.962353165505046,
+              0,
+              -40.2
+            ],
+            "scale": [
+              1.2486084815263498,
+              1.2486084815263498,
+              1.2486084815263498
+            ],
+            "rotation": [
+              0,
+              149.52760561553876,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-6",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              9.962353165505046,
+              0,
+              -38.400000000000006
+            ],
+            "scale": [
+              1.2486084815263498,
+              1.2486084815263498,
+              1.2486084815263498
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-7",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -8.061824453011155,
+              0,
+              -45.9
+            ],
+            "scale": [
+              0.7675132864424375,
+              0.7675132864424375,
+              0.7675132864424375
+            ],
+            "rotation": [
+              0,
+              291.74088167243224,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-7",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -9.061824453011155,
+              0,
+              -44.1
+            ],
+            "scale": [
+              0.7675132864424375,
+              0.7675132864424375,
+              0.7675132864424375
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-8",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              9.776340136784714,
+              0,
+              -51.6
+            ],
+            "scale": [
+              0.9738960274509852,
+              0.9738960274509852,
+              0.9738960274509852
+            ],
+            "rotation": [
+              0,
+              324.8731002481858,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-8",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              10.776340136784714,
+              0,
+              -49.800000000000004
+            ],
+            "scale": [
+              0.9738960274509852,
+              0.9738960274509852,
+              0.9738960274509852
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-9",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -8.524664547851064,
+              0,
+              -57.300000000000004
+            ],
+            "scale": [
+              0.9429983977497376,
+              0.9429983977497376,
+              0.9429983977497376
+            ],
+            "rotation": [
+              0,
+              356.7398959559504,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-9",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -9.524664547851064,
+              0,
+              -55.50000000000001
+            ],
+            "scale": [
+              0.9429983977497376,
+              0.9429983977497376,
+              0.9429983977497376
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-10",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              9.61343845790648,
+              0,
+              -63.0
+            ],
+            "scale": [
+              1.1382403769167138,
+              1.1382403769167138,
+              1.1382403769167138
+            ],
+            "rotation": [
+              0,
+              79.69219028672656,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-10",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              10.61343845790648,
+              0,
+              -61.2
+            ],
+            "scale": [
+              1.1382403769167138,
+              1.1382403769167138,
+              1.1382403769167138
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-11",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -9.640130056059235,
+              0,
+              -68.7
+            ],
+            "scale": [
+              1.0955607952489714,
+              1.0955607952489714,
+              1.0955607952489714
+            ],
+            "rotation": [
+              0,
+              200.144058457897,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-11",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -10.640130056059235,
+              0,
+              -66.9
+            ],
+            "scale": [
+              1.0955607952489714,
+              1.0955607952489714,
+              1.0955607952489714
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-12",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              9.039466940406141,
+              0,
+              -74.4
+            ],
+            "scale": [
+              0.8075926753738605,
+              0.8075926753738605,
+              0.8075926753738605
+            ],
+            "rotation": [
+              0,
+              86.09991775210369,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-12",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              10.039466940406141,
+              0,
+              -72.60000000000001
+            ],
+            "scale": [
+              0.8075926753738605,
+              0.8075926753738605,
+              0.8075926753738605
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-13",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -9.319925895638692,
+              0,
+              -80.10000000000001
+            ],
+            "scale": [
+              0.7743231866090143,
+              0.7743231866090143,
+              0.7743231866090143
+            ],
+            "rotation": [
+              0,
+              270.2822638121283,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-13",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -10.319925895638692,
+              0,
+              -78.30000000000001
+            ],
+            "scale": [
+              0.7743231866090143,
+              0.7743231866090143,
+              0.7743231866090143
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-14",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              8.261849771383796,
+              0,
+              -85.8
+            ],
+            "scale": [
+              1.0024011931440864,
+              1.0024011931440864,
+              1.0024011931440864
+            ],
+            "rotation": [
+              0,
+              137.78816120803037,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-14",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              9.261849771383796,
+              0,
+              -84.0
+            ],
+            "scale": [
+              1.0024011931440864,
+              1.0024011931440864,
+              1.0024011931440864
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-15",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -7.729372069804923,
+              0,
+              -91.5
+            ],
+            "scale": [
+              1.0426031078130553,
+              1.0426031078130553,
+              1.0426031078130553
+            ],
+            "rotation": [
+              0,
+              351.7041653479793,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-15",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -8.729372069804924,
+              0,
+              -89.7
+            ],
+            "scale": [
+              1.0426031078130553,
+              1.0426031078130553,
+              1.0426031078130553
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-16",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              8.480099042535606,
+              0,
+              -97.2
+            ],
+            "scale": [
+              1.0779451726582516,
+              1.0779451726582516,
+              1.0779451726582516
+            ],
+            "rotation": [
+              0,
+              341.82191773168654,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-16",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              9.480099042535606,
+              0,
+              -95.4
+            ],
+            "scale": [
+              1.0779451726582516,
+              1.0779451726582516,
+              1.0779451726582516
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-rock-17",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -9.176782688312372,
+              0,
+              -102.9
+            ],
+            "scale": [
+              1.2898781904375345,
+              1.2898781904375345,
+              1.2898781904375345
+            ],
+            "rotation": [
+              0,
+              5.52239423501228,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "near-shrub-17",
+      "resourceId": "shrub",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -10.176782688312372,
+              0,
+              -101.10000000000001
+            ],
+            "scale": [
+              1.2898781904375345,
+              1.2898781904375345,
+              1.2898781904375345
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "distant-ridge-0",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              35.98825427853345,
+              -1,
+              -12
+            ],
+            "scale": [
+              10.770103437721914,
+              5.345281522557676,
+              7.556075475789426
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "distant-ridge-1",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -42.6785223018708,
+              -1,
+              -27
+            ],
+            "scale": [
+              9.574637052725741,
+              6.52512567410969,
+              7.221195882325372
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "distant-ridge-2",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              27.818307016994332,
+              -1,
+              -42
+            ],
+            "scale": [
+              9.131141156613305,
+              5.027456203163829,
+              7.336069007712693
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "distant-ridge-3",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -30.49595904364186,
+              -1,
+              -57
+            ],
+            "scale": [
+              10.779757043006175,
+              6.958743999448629,
+              10.343256978927528
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "distant-ridge-4",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              36.57107678478923,
+              -1,
+              -72
+            ],
+            "scale": [
+              9.255001122364975,
+              7.850570457025073,
+              8.191264909125977
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "distant-ridge-5",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -34.4852903752073,
+              -1,
+              -87
+            ],
+            "scale": [
+              9.801272376105176,
+              5.1089361022099515,
+              8.00347103554796
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "distant-ridge-6",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              31.579262404406165,
+              -1,
+              -102
+            ],
+            "scale": [
+              9.584360664176167,
+              6.245049080713745,
+              7.632162626954652
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "distant-ridge-7",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -29.523270029357185,
+              -1,
+              -117
+            ],
+            "scale": [
+              8.873948797456677,
+              7.527643791130935,
+              9.381312911559673
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "ruin-fragment-0",
+      "resourceId": "ruin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              9,
+              0,
+              -23
+            ],
+            "scale": [
+              0.7,
+              0.7,
+              0.7
+            ],
+            "rotation": [
+              0,
+              0,
+              8
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "ruin-fragment-1",
+      "resourceId": "ruin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -9,
+              0,
+              -34
+            ],
+            "scale": [
+              0.7,
+              0.7,
+              0.7
+            ],
+            "rotation": [
+              0,
+              41,
+              -12
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "ruin-fragment-2",
+      "resourceId": "ruin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              9,
+              0,
+              -45
+            ],
+            "scale": [
+              0.7,
+              0.7,
+              0.7
+            ],
+            "rotation": [
+              0,
+              82,
+              8
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "ruin-fragment-3",
+      "resourceId": "ruin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -9,
+              0,
+              -56
+            ],
+            "scale": [
+              0.7,
+              0.7,
+              0.7
+            ],
+            "rotation": [
+              0,
+              123,
+              -12
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "ruin-fragment-4",
+      "resourceId": "ruin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              9,
+              0,
+              -67
+            ],
+            "scale": [
+              0.7,
+              0.7,
+              0.7
+            ],
+            "rotation": [
+              0,
+              164,
+              8
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "ruin-fragment-5",
+      "resourceId": "ruin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -9,
+              0,
+              -78
+            ],
+            "scale": [
+              0.7,
+              0.7,
+              0.7
+            ],
+            "rotation": [
+              0,
+              205,
+              -12
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "route-light-0",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -5,
+              2.45,
+              -18
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "route-light-1",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              5,
+              2.45,
+              -45
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "route-light-2",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -5,
+              2.45,
+              -74
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "route-light-3",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              4,
+              -94
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "prefabs": [
+    {
+      "instance": "hero",
+      "asset": "assets:/prefabs/hero.azureprefab"
+    },
+    {
+      "instance": "guide",
+      "asset": "assets:/prefabs/guide.azureprefab"
+    },
+    {
+      "instance": "door",
+      "asset": "assets:/prefabs/door.azureprefab"
+    },
+    {
+      "instance": "checkpoint",
+      "asset": "assets:/prefabs/checkpoint.azureprefab"
+    },
+    {
+      "instance": "artifact-0",
+      "asset": "assets:/prefabs/collectible.azureprefab",
+      "overrides": {
+        "body": {
+          "components": {
+            "azure.transform": {
+              "data": {
+                "translation": [
+                  -5,
+                  0.45,
+                  -18
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "instance": "artifact-1",
+      "asset": "assets:/prefabs/collectible.azureprefab",
+      "overrides": {
+        "body": {
+          "components": {
+            "azure.transform": {
+              "data": {
+                "translation": [
+                  5,
+                  0.45,
+                  -45
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "instance": "artifact-2",
+      "asset": "assets:/prefabs/collectible.azureprefab",
+      "overrides": {
+        "body": {
+          "components": {
+            "azure.transform": {
+              "data": {
+                "translation": [
+                  -5,
+                  0.45,
+                  -74
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "lights": [
+    {
+      "id": "route-light-0",
+      "nodeId": "route-light-0",
+      "color": [
+        1,
+        0.76,
+        0.35
+      ],
+      "intensity": 3,
+      "radius": 6
+    },
+    {
+      "id": "route-light-1",
+      "nodeId": "route-light-1",
+      "color": [
+        1,
+        0.76,
+        0.35
+      ],
+      "intensity": 3,
+      "radius": 6
+    },
+    {
+      "id": "route-light-2",
+      "nodeId": "route-light-2",
+      "color": [
+        1,
+        0.76,
+        0.35
+      ],
+      "intensity": 3,
+      "radius": 6
+    },
+    {
+      "id": "route-light-3",
+      "nodeId": "route-light-3",
+      "color": [
+        0.3,
+        0.75,
+        1
+      ],
+      "intensity": 3,
+      "radius": 6
+    }
+  ]
+}

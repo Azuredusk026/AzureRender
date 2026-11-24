@@ -1,0 +1,275 @@
+[
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 5,
+      "timeoutMs": 10000
+    },
+    "response": {
+      "elapsedMs": 736.2834,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 136.9846,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":4,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "developer.shaderState",
+      "equals": "Error",
+      "timeoutMs": 60000
+    },
+    "response": {
+      "elapsedMs": 6959.2647,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Error"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 56.9354,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":7,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"Process failed\\nD:\\\\Projects\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\runs\\\\20261103-234012-character-reference-stages-5abe6c\\\\lit-surfaces-host-regression\\\\shader-host-final-debug\\\\inspector\\\\candidates\\\\1\\\\source\\\\mesh.frag:2091: error: '' :  syntax error, unexpected IDENTIFIER\\r\\n1 error generated.\\r\\n\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Error\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "developer.shaderState",
+      "equals": "Idle",
+      "timeoutMs": 60000
+    },
+    "response": {
+      "elapsedMs": 43847.6763,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Idle"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 84.0422,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":1349,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":2,\"shaderReplacements\":1,\"shaderState\":\"Idle\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 76.1803,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:3c9b5db1bbc9656a\",\"documentId\":\"17938335100367963-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "shader-7",
+      "commandId": "developer.shader-rebuild",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:3c9b5db1bbc9656a",
+        "documentId": "17938335100367963-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 84.2821,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "camera": null,
+          "completedSubmission": 1355,
+          "diagnostic": "",
+          "schemaVersion": 1,
+          "shaderAvailable": true,
+          "shaderDiagnostic": "",
+          "shaderGeneration": 2,
+          "shaderReplacements": 1,
+          "shaderState": "Compiling",
+          "thumbnails": [],
+          "views": []
+        },
+        "version": {
+          "contentHash": "fnv1a64:3c9b5db1bbc9656a",
+          "documentId": "17938335100367963-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 10.3871,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:3c9b5db1bbc9656a\",\"documentId\":\"17938335100367963-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "shader-9",
+      "commandId": "developer.shader-cancel",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:3c9b5db1bbc9656a",
+        "documentId": "17938335100367963-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 1.1529,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:3c9b5db1bbc9656a",
+          "documentId": "17938335100367963-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "developer.shaderState",
+      "equals": "Cancelled",
+      "timeoutMs": 60000
+    },
+    "response": {
+      "elapsedMs": 2038.8714,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Cancelled"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 84.2832,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":1446,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"Shader compilation cancelled\",\"shaderGeneration\":2,\"shaderReplacements\":1,\"shaderState\":\"Cancelled\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "screenshot",
+    "fields": {
+      "label": "shader-recovered"
+    },
+    "response": {
+      "elapsedMs": 91.0341,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "label": "shader-recovered",
+        "scheduled": true
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "engine.screenshots",
+      "equals": 1,
+      "timeoutMs": 10000
+    },
+    "response": {
+      "elapsedMs": 292.0624,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 86.4399,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:3c9b5db1bbc9656a\",\"documentId\":\"17938335100367963-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "shader-15",
+      "commandId": "developer.shader-rebuild",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:3c9b5db1bbc9656a",
+        "documentId": "17938335100367963-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 59.4137,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "camera": null,
+          "completedSubmission": 1450,
+          "diagnostic": "",
+          "schemaVersion": 1,
+          "shaderAvailable": true,
+          "shaderDiagnostic": "",
+          "shaderGeneration": 2,
+          "shaderReplacements": 1,
+          "shaderState": "Compiling",
+          "thumbnails": [],
+          "views": []
+        },
+        "version": {
+          "contentHash": "fnv1a64:3c9b5db1bbc9656a",
+          "documentId": "17938335100367963-1",
+          "revision": 1
+        }
+      }
+    }
+  }
+]

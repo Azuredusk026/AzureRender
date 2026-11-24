@@ -1,0 +1,26 @@
+[
+  {
+    "configuration": "release",
+    "device": "nvidia",
+    "exitCode": 0,
+    "seconds": 6.73399999999674
+  },
+  {
+    "configuration": "release",
+    "device": "intel",
+    "exitCode": 0,
+    "seconds": 1.1719999999622814
+  },
+  {
+    "configuration": "debug",
+    "device": "nvidia",
+    "exitCode": 0,
+    "seconds": 3.7660000000032596
+  },
+  {
+    "configuration": "debug",
+    "device": "intel",
+    "exitCode": 0,
+    "seconds": 1.25
+  }
+]

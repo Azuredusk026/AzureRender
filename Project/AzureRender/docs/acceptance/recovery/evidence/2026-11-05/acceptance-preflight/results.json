@@ -1,0 +1,543 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-capacity-and-stdout-contracts-intel-image-stability-pending",
+  "visualAcceptance": "failed-user-review",
+  "sourceBase": "004fcee6eb38bd0de84aaa3a62694001c01c5502",
+  "initialRegression": {
+    "configuration": "Release",
+    "tests": 287,
+    "passed": 286,
+    "failed": [
+      "AzureEngine.EvolutionCoverage"
+    ],
+    "reason": "Optional Slang module tests were not registered"
+  },
+  "repairedCpu": [
+    {
+      "configuration": "release",
+      "exitCode": 0,
+      "seconds": 68.23399999999674
+    },
+    {
+      "configuration": "debug",
+      "exitCode": 0,
+      "seconds": 40.98399999999674
+    }
+  ],
+  "gpuChecks": [
+    {
+      "name": "nvidia-all",
+      "exitCode": 0,
+      "seconds": 86.75
+    },
+    {
+      "name": "intel-binding",
+      "exitCode": 0,
+      "seconds": 7.170999999972992
+    }
+  ],
+  "coverage": {
+    "release": {
+      "status": "passed",
+      "coveredItems": 18,
+      "historicalByteAudit": "incomplete"
+    },
+    "debug": {
+      "status": "passed",
+      "coveredItems": 18,
+      "historicalByteAudit": "incomplete"
+    }
+  },
+  "productionShadersUnchanged": {
+    "Release": 535,
+    "Debug": 535
+  },
+  "linearColorErrorMaximum": 0.008,
+  "physicalCapacityExample": {
+    "requestedMaterialSlots": 74,
+    "perStageSamplerLimit": 64,
+    "requiredPath": "fixed"
+  },
+  "stdoutEvidence": {
+    "independentEvents": 44,
+    "resourcesRetired": true,
+    "stdoutTailMissing": true,
+    "explicitLineCommitRegressionPassed": true,
+    "historicalExitPathCauseConfirmed": false
+  },
+  "intelImageStability": {
+    "fullImageGate": "failed",
+    "fixedDifferentPixels": 6,
+    "documentDifferentPixels": 15,
+    "identicalInputDifferentPixels": [
+      12,
+      11,
+      8
+    ],
+    "maximumByteError": 2,
+    "thresholdUnchanged": true
+  },
+  "testedSources": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "1eb68bf9b8cee577861953f870f2c52f580a8ef1e8287bc84fdd2b7fa9cc8bb1",
+      "canonicalSha256": "1eb68bf9b8cee577861953f870f2c52f580a8ef1e8287bc84fdd2b7fa9cc8bb1",
+      "archive": "source--CMakeLists.txt.gz"
+    },
+    {
+      "path": "src/diagnostics/RuntimeDiagnostics.cpp",
+      "sha256": "b9f4eadf3e1b1f19a93c3af94e9ecfbc607d89480a4d8b36e27e4d11f858c667",
+      "canonicalSha256": "b9f4eadf3e1b1f19a93c3af94e9ecfbc607d89480a4d8b36e27e4d11f858c667",
+      "archive": "source--src--diagnostics--RuntimeDiagnostics.cpp.gz"
+    },
+    {
+      "path": "tests/RuntimeDiagnosticsTests.cpp",
+      "sha256": "b3762c46f9af56a979f4c90d79ee4a7ef5ea070195f8ae85848139ff2f913016",
+      "canonicalSha256": "b3762c46f9af56a979f4c90d79ee4a7ef5ea070195f8ae85848139ff2f913016",
+      "archive": "source--tests--RuntimeDiagnosticsTests.cpp.gz"
+    },
+    {
+      "path": "tools/gpu_texture_access.py",
+      "sha256": "8966ed21374d7c706af8fd032e21f1a160dab279dd04014706eda81df561af98",
+      "canonicalSha256": "8966ed21374d7c706af8fd032e21f1a160dab279dd04014706eda81df561af98",
+      "archive": "source--tools--gpu_texture_access.py.gz"
+    },
+    {
+      "path": "tools/test_gpu_texture_access.py",
+      "sha256": "2a9e7decdde503d81ebd34be8fe08ec1b0ce080f6328de2e2bc84777f130aa2a",
+      "canonicalSha256": "2a9e7decdde503d81ebd34be8fe08ec1b0ce080f6328de2e2bc84777f130aa2a",
+      "archive": "source--tools--test_gpu_texture_access.py.gz"
+    },
+    {
+      "path": "tools/test_npr_view_mask_gpu.py",
+      "sha256": "7377708e9c6cbbd3b2e8b7046a6d00e03f70a31e559f63632e7bd784431ef651",
+      "canonicalSha256": "7377708e9c6cbbd3b2e8b7046a6d00e03f70a31e559f63632e7bd784431ef651",
+      "archive": "source--tools--test_npr_view_mask_gpu.py.gz"
+    }
+  ],
+  "records": [
+    {
+      "path": "task.json",
+      "source": "task.json",
+      "sha256": "5b47beeb15796086d5ae772a1b2950f28986fe905acdbbd859ec708290018842",
+      "bytes": 737
+    },
+    {
+      "path": "build-command.json",
+      "source": "build-command.json",
+      "sha256": "a42f13c2c0da72070079104f2adabba62903da5f6cb5b95d3b07c539f2885508",
+      "bytes": 418
+    },
+    {
+      "path": "build-release.log",
+      "source": "build-release.log",
+      "sha256": "f424a75918b1051591e2fb651e703b9e2916d0f512c5068dc25a3a45e80b0f81",
+      "bytes": 53871
+    },
+    {
+      "path": "release-cpu.log",
+      "source": "release-cpu.log",
+      "sha256": "9ae83c014bf103e31395d9a02c80b5a562669346a6e6a8377aecc9436a70906f",
+      "bytes": 40250
+    },
+    {
+      "path": "release-cpu.xml",
+      "source": "release-cpu.xml",
+      "sha256": "9fd671262b350215d974e889d50730eb91ad451b02bfadec3f8d85a573c42263",
+      "bytes": 137557
+    },
+    {
+      "path": "intel-material-gpu.log",
+      "source": "intel-material-gpu.log",
+      "sha256": "831c2ce4af0aa8b2f1ce85e04a36c3ff5f26e0ebce6358a627c9f82e1eb81e76",
+      "bytes": 1500
+    },
+    {
+      "path": "intel-material-gpu.xml",
+      "source": "intel-material-gpu.xml",
+      "sha256": "e5afeaa8b33472e185a55a51d3e33c94f6419f2b9ea5b37e8b64ab645acbec02",
+      "bytes": 1831
+    },
+    {
+      "path": "intel-blend-diagnosis.log",
+      "source": "intel-blend-diagnosis.log",
+      "sha256": "337d94540491547034fd062a0ddee217dc05d932e54f107482765ff003adfafc",
+      "bytes": 559
+    },
+    {
+      "path": "texture-access-red.log",
+      "source": "texture-access-red.log",
+      "sha256": "f45edac2c9c83392324ce3c7879dfd365732f2b15fb861af66bb65a07b9e01dd",
+      "bytes": 5333
+    },
+    {
+      "path": "texture-access-green.log",
+      "source": "texture-access-green.log",
+      "sha256": "d4096016f94b3e2f854d42c86eca1d620c32a0e1545d3bdfb4b98c0627fef27a",
+      "bytes": 110
+    },
+    {
+      "path": "stdout-red.log",
+      "source": "stdout-red.log",
+      "sha256": "49ee2f0445b317c4ef6bc5ae4f866f9d62ee3bb6f66be40e6a1c8b58ad4b6e00",
+      "bytes": 59
+    },
+    {
+      "path": "stdout-red-build.log",
+      "source": "stdout-red-build.log",
+      "sha256": "595c79c4a18b63b9ff138db5aa6102b3e69b967612e677e72e5a19c72ab33445",
+      "bytes": 226
+    },
+    {
+      "path": "stdout-green.log",
+      "source": "stdout-green.log",
+      "sha256": "8d5ac96f5a8f5e039cce7c6bf5ed58e5ca087b35d369935cd3156c8dbb3884da",
+      "bytes": 166
+    },
+    {
+      "path": "stdout-green-build.log",
+      "source": "stdout-green-build.log",
+      "sha256": "8412a67e5e9dd6cc1b0b677fb7023193658d9f820e74246d14ce108066037c79",
+      "bytes": 231
+    },
+    {
+      "path": "stdout-final-build-commands.json",
+      "source": "stdout-final-build-commands.json",
+      "sha256": "82770c45d94e52b79bde9829f72251612fb18e23849b62f566d7b49a96b7e8f3",
+      "bytes": 1189
+    },
+    {
+      "path": "stdout-final-build-result.json",
+      "source": "stdout-final-build-result.json",
+      "sha256": "5515cf03335117513e5b482559459117fd90092f2c556396fb286d73fd7fbb52",
+      "bytes": 151
+    },
+    {
+      "path": "missing-stdout-independent-events.json",
+      "source": "missing-stdout-independent-events.json",
+      "sha256": "097cd7f8505d38858c943a527d0dbf84579c09c6f16eccfbd0985ba6fb13fb71",
+      "bytes": 8302
+    },
+    {
+      "path": "before-stdout-shaders.json",
+      "source": "before-stdout-shaders.json",
+      "sha256": "7e82a61a6e2c09f77644228229fae877344127d9a07962d9e323725bb84ddf89",
+      "bytes": 132369
+    },
+    {
+      "path": "after-stdout-products.json",
+      "source": "after-stdout-products.json",
+      "sha256": "c2f862e9d7292b2fca29589e89ecd6c5e2923f9ef14366ebf60377ab9bdb288a",
+      "bytes": 531
+    },
+    {
+      "path": "release-repaired-cpu.log",
+      "source": "release-repaired-cpu.log",
+      "sha256": "51dc06fe2969fba6bae14c5f42ac34a2493a613d3100f164bf9ef94434984098",
+      "bytes": 1162
+    },
+    {
+      "path": "release-repaired-cpu.xml",
+      "source": "release-repaired-cpu.xml",
+      "sha256": "18a5a2e9ceb6ff3870c79725984d4e545bbbe11f6331305213ff95057b0729f4",
+      "bytes": 2523
+    },
+    {
+      "path": "debug-repaired-cpu.log",
+      "source": "debug-repaired-cpu.log",
+      "sha256": "445f67739d3278696f18b31ff9936e41cb5100ea5354e8fed086c71a0f51d603",
+      "bytes": 1158
+    },
+    {
+      "path": "debug-repaired-cpu.xml",
+      "source": "debug-repaired-cpu.xml",
+      "sha256": "e129d990a73de198cc8f7bb1ec706aa9671d2b4b31e664502af2881d71314e70",
+      "bytes": 2522
+    },
+    {
+      "path": "repaired-cpu-results.json",
+      "source": "repaired-cpu-results.json",
+      "sha256": "64f191e42e5ff21794269bd28157e58b0e5fc9f2ede276f9e46e4f50254a5e81",
+      "bytes": 197
+    },
+    {
+      "path": "vulkan-default.log",
+      "source": "vulkan-default.log",
+      "sha256": "00edcfcbe48d2ccadc51759f2f6f0d1180c6374d04affff9412d8bd9415a8835",
+      "bytes": 5443
+    },
+    {
+      "path": "vulkan-intel.log",
+      "source": "vulkan-intel.log",
+      "sha256": "213fbbc82e338c1369e55a39f9ce8f66ac5a08ce4b2195b6dc03f0933f2fa781",
+      "bytes": 159
+    },
+    {
+      "path": "vulkan-intel-selected.log",
+      "source": "vulkan-intel-selected.log",
+      "sha256": "af0590a6b56f7631e57a64a51068874e6e30ed64fbdbdef047fcecbc80170529",
+      "bytes": 16706
+    },
+    {
+      "path": "intel-driver.json",
+      "source": "intel-driver.json",
+      "sha256": "cba4422067a42b9643e5eefc165baadd0da30d544b027db0898bf68e3f63203f",
+      "bytes": 193
+    },
+    {
+      "path": "intel-selection.json",
+      "source": "intel-selection.json",
+      "sha256": "864eceb37123ee00117a10cfe283a32d3163ae79e7b301d5292cf53198834b57",
+      "bytes": 304
+    },
+    {
+      "path": "intel-identical-input-results.json",
+      "source": "intel-identical-input-results.json",
+      "sha256": "19c1c67cf8fa108672801839d8b33c4bb8ca8b08f790b08ff4e292f432538170",
+      "bytes": 386
+    },
+    {
+      "path": "intel-guard-task.json",
+      "source": "intel-guard-task.json",
+      "sha256": "db16b8a3192b03417f7385777d8d21c7ddc928549ccaf317f108bf26c3605632",
+      "bytes": 712
+    },
+    {
+      "path": "view-mask-green-results.json",
+      "source": "view-mask-green-results.json",
+      "sha256": "7a9c53c2983977edfb9e361a48a608e170631de5aa2fc68ef6bc4a63148aa33f",
+      "bytes": 93
+    },
+    {
+      "path": "view-mask-flush-green-results.json",
+      "source": "view-mask-flush-green-results.json",
+      "sha256": "1a26cf616d475d2d52fdd8a605767b429b678284d47935eaab3870b04a390446",
+      "bytes": 92
+    },
+    {
+      "path": "view-mask-scoped-verification.json",
+      "source": "view-mask-scoped-verification.json",
+      "sha256": "6317a859d39585e0bd41c46219658fb85d36e4ffd163ddadb96f305057d300fd",
+      "bytes": 178
+    },
+    {
+      "path": "exit-trace-results.json",
+      "source": "exit-trace-results.json",
+      "sha256": "540f735f04875d69a398accfd354a67e93a7a620607356f33ef974e347bc7d2d",
+      "bytes": 570
+    },
+    {
+      "path": "exit-trace-stack-0.log",
+      "source": "exit-trace-stack-0.log",
+      "sha256": "1fe7cbe6a062e0b8ce78289c365cc8e6fa9ed87e65ccbba0d77f2eddf245f361",
+      "bytes": 371
+    },
+    {
+      "path": "trace_process_exit.cpp",
+      "source": "trace_process_exit.cpp",
+      "sha256": "e6c4cea1602429427fa076ac4a9af1f455eef337d35f02034d7f5c00bdf69aa0",
+      "bytes": 5514
+    },
+    {
+      "path": "view-mask-intel-green--fabric-0--player.log",
+      "source": "view-mask-intel-green/fabric-0/player.log",
+      "sha256": "93da772aadf82ea8c2b474e9a627a7cdadd692f71b23c71ca35bfc31ea61caab",
+      "bytes": 3613
+    },
+    {
+      "path": "view-mask-intel-green--fabric-0--command.json",
+      "source": "view-mask-intel-green/fabric-0/command.json",
+      "sha256": "21b870ad5afa1a359af81016f4d83c85899401180768e361fa0aaca4e4390544",
+      "bytes": 610
+    },
+    {
+      "path": "view-mask-intel-green--fabric-0--frames--capture_manifest.json",
+      "source": "view-mask-intel-green/fabric-0/frames/capture_manifest.json",
+      "sha256": "4b6c06daee68bfff7a37aee283c1f5f94477e0ca16a1095d62ac3c18b0b07741",
+      "bytes": 9250
+    },
+    {
+      "path": "intel-blend-diagnosis--blend--player.log",
+      "source": "intel-blend-diagnosis/blend/player.log",
+      "sha256": "4c4f83a870b89b3e8c2fda1095e50090faea6a2e0250521c790d527b08b0dfd2",
+      "bytes": 3867
+    },
+    {
+      "path": "intel-blend-diagnosis--blend--command.json",
+      "source": "intel-blend-diagnosis/blend/command.json",
+      "sha256": "0f383634be8cb37cd5a8caafeb1abd5627ca52fac168cb0a6e1b142d76c59dcb",
+      "bytes": 604
+    },
+    {
+      "path": "intel-blend-diagnosis--blend--frames--capture_manifest.json",
+      "source": "intel-blend-diagnosis/blend/frames/capture_manifest.json",
+      "sha256": "e4cce5062d921eea85fd98f195cfc53b0fdeeac59479b84fa1e4fc9a144ca385",
+      "bytes": 9194
+    },
+    {
+      "path": "view-mask-intel-flush-green--summary.json",
+      "source": "view-mask-intel-flush-green/summary.json",
+      "sha256": "cf737aadaeb1c20729dd3f3864200e2a49a80e713180877027675f9ca3b15d38",
+      "bytes": 9061
+    },
+    {
+      "path": "view-mask-nvidia-all-verified--summary.json",
+      "source": "view-mask-nvidia-all-verified/summary.json",
+      "sha256": "49f0db2103bd9ea103a8dbe47e82a40c1d2bc8ea6abe71a73d73b2372bf074a1",
+      "bytes": 9113
+    },
+    {
+      "path": "view-mask-intel-binding-verified--summary.json",
+      "source": "view-mask-intel-binding-verified/summary.json",
+      "sha256": "bf20681acaebca15ce4527ab4f37eca11afc76dac15e5be89f997d2a8f4ab208",
+      "bytes": 2051
+    },
+    {
+      "path": "view-mask-intel-flush-green--saturated--frames--frame_000000.png",
+      "source": "view-mask-intel-flush-green/saturated/frames/frame_000000.png",
+      "sha256": "f8c8c2bf8f814d9107fbe95e665fec0f7eb6005753ffb5eb6ab0f8d65c6d552f",
+      "bytes": 1104
+    },
+    {
+      "path": "view-mask-intel-flush-green--fixed--frames--frame_000000.png",
+      "source": "view-mask-intel-flush-green/fixed/frames/frame_000000.png",
+      "sha256": "f90039c1f808ce00fcd5705231834f6da7ac68d9763675c1bc84ccc2d417e8d9",
+      "bytes": 1104
+    },
+    {
+      "path": "view-mask-intel-flush-green--document--frames--frame_000000.png",
+      "source": "view-mask-intel-flush-green/document/frames/frame_000000.png",
+      "sha256": "fb8967997972c7553f9069c0f89a34163f476b2fbfbebfbc5fbee9b282e48fe2",
+      "bytes": 1134
+    },
+    {
+      "path": "intel-identical-input-0--frames--frame_000000.png",
+      "source": "intel-identical-input-0/frames/frame_000000.png",
+      "sha256": "b89f3ae6e60d7f99a8ca16659e44ad180a842630cc3cc8d906f0c4bc37c69762",
+      "bytes": 1128
+    },
+    {
+      "path": "intel-identical-input-1--frames--frame_000000.png",
+      "source": "intel-identical-input-1/frames/frame_000000.png",
+      "sha256": "1573eb484ecc84b56545a5edddba88fe957426a2a7c9417fd701e76d7b3520e6",
+      "bytes": 1130
+    },
+    {
+      "path": "intel-identical-input-2--frames--frame_000000.png",
+      "source": "intel-identical-input-2/frames/frame_000000.png",
+      "sha256": "addb4fe7cdefeb2a59638a79eb370bab05519d6526b71449abc7f34b83696713",
+      "bytes": 1106
+    },
+    {
+      "path": "source--CMakeLists.txt.gz",
+      "sha256": "fad7b4ff9e3cd958bdd8417ba07dcf251f5937e91cc4a52c6592523fdd855a52",
+      "bytes": 35325
+    },
+    {
+      "path": "source--src--diagnostics--RuntimeDiagnostics.cpp.gz",
+      "sha256": "c88b2193df89e64bd2f7bfec7daaed0b9ff1ce6f3dd63c3aab5f2cb403f07908",
+      "bytes": 1179
+    },
+    {
+      "path": "source--tests--RuntimeDiagnosticsTests.cpp.gz",
+      "sha256": "3d81e176b3326175f153509941fd67b4598a2cda04a885321daa17bda968d6b6",
+      "bytes": 940
+    },
+    {
+      "path": "source--tools--gpu_texture_access.py.gz",
+      "sha256": "e243c4455566ce2f46f8fd69bd1069e651e19e9356f7331668276fad64f76a21",
+      "bytes": 522
+    },
+    {
+      "path": "source--tools--test_gpu_texture_access.py.gz",
+      "sha256": "c87c7406ddd7a0c2da472138b56c0a5bc99792e70a949a6c654aff750ae7086e",
+      "bytes": 663
+    },
+    {
+      "path": "source--tools--test_npr_view_mask_gpu.py.gz",
+      "sha256": "1d399282f29622fa75f02542c5b1c1d8fa1034b2b0dfd702a647e4a6046ca2e5",
+      "bytes": 3094
+    },
+    {
+      "path": "release-coverage.json",
+      "sha256": "7937ee5dfbebe9343137b368042dd14b779a9f7847c9961c391d8764c28cc552",
+      "bytes": 41642
+    },
+    {
+      "path": "debug-coverage.json",
+      "sha256": "7937ee5dfbebe9343137b368042dd14b779a9f7847c9961c391d8764c28cc552",
+      "bytes": 41642
+    },
+    {
+      "path": "module-dual-device-results.json",
+      "sha256": "eb0b37459380767bd83ee4921dc7fb6deddb8adce1d72bf098253470b2eba013",
+      "bytes": 477
+    },
+    {
+      "path": "module-release-nvidia.log",
+      "sha256": "d57c0a6f8781da25d3da45d20cb1e736535d18969b4fe7dc81699c5f91e43564",
+      "bytes": 425
+    },
+    {
+      "path": "module-release-nvidia.xml",
+      "sha256": "5bc2f0c8a0e340b1985e84df94fbc8fe408cfe3ce4c8e42e6c029fbffbe0a476",
+      "bytes": 544
+    },
+    {
+      "path": "module-release-intel.log",
+      "sha256": "4ea9b7227318602f9786260604e6abd0b23fb9087f06e0b937e9cdb86dae5bea",
+      "bytes": 425
+    },
+    {
+      "path": "module-release-intel.xml",
+      "sha256": "6fe9e6b7eb7bb22d923d00bf2ad3ee64912b81cb5cad817c3fad135680035173",
+      "bytes": 544
+    },
+    {
+      "path": "module-debug-nvidia.log",
+      "sha256": "2d288944fda0743373a0db50261fb8dd21ee5760be3182eb0a2b69949c29823e",
+      "bytes": 421
+    },
+    {
+      "path": "module-debug-nvidia.xml",
+      "sha256": "d373c8e458e9de3388937a2d266325eec5b868f9ea114cc007dfa34f1d1c508e",
+      "bytes": 544
+    },
+    {
+      "path": "module-debug-intel.log",
+      "sha256": "bcb6eb86c171db70bfeb4626148db527939f086d2ee68319e0556258c717b280",
+      "bytes": 421
+    },
+    {
+      "path": "module-debug-intel.xml",
+      "sha256": "3248cab62cbb969872747c7b8718f2eb6931db36c891b723b88e137ddc42a373",
+      "bytes": 543
+    }
+  ],
+  "shaderModuleGpu": [
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "exitCode": 0,
+      "seconds": 6.73399999999674
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "exitCode": 0,
+      "seconds": 1.1719999999622814
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "exitCode": 0,
+      "seconds": 3.7660000000032596
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "exitCode": 0,
+      "seconds": 1.25
+    }
+  ]
+}

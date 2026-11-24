@@ -1,0 +1,181 @@
+{
+  "status": "isolated-below-benefit-threshold",
+  "productionIntegrated": false,
+  "replay": {
+    "status": "compared",
+    "seconds": 59.48500000000058,
+    "allTargetsEqual": true,
+    "summary": [
+      {
+        "mode": "baseline",
+        "allEventMs": 16.435999999999986,
+        "matchedEventMs": 11.791135999999952
+      },
+      {
+        "mode": "candidate",
+        "allEventMs": 16.452863999999995,
+        "matchedEventMs": 11.789407999999959
+      },
+      {
+        "mode": "candidate",
+        "allEventMs": 16.40108799999999,
+        "matchedEventMs": 11.732383999999936
+      },
+      {
+        "mode": "baseline",
+        "allEventMs": 16.498688000000012,
+        "matchedEventMs": 11.848479999999961
+      }
+    ],
+    "environmentErrors": [],
+    "sourceAndProductsUnchanged": true,
+    "replayProcessExitCode": 0
+  },
+  "matchedMeanReductionFraction": 0.004984175715883721,
+  "compiler": {
+    "creationFlags": 192,
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "driverVersion": 2484371456,
+    "executables": [
+      {
+        "description": "Vertex Shader",
+        "index": 0,
+        "name": "VS",
+        "representations": [],
+        "stage": 1,
+        "statistics": [
+          {
+            "description": "Number of temporary registers used by this shader stage",
+            "format": 2,
+            "name": "Register Count",
+            "value": 118
+          },
+          {
+            "description": "Size in bytes of the executable for this stage",
+            "format": 2,
+            "name": "Binary Size",
+            "value": 16000
+          },
+          {
+            "description": "Size in bytes required for the shader stack",
+            "format": 2,
+            "name": "Stack Size",
+            "value": 0
+          },
+          {
+            "description": "Size in bytes required per-thread for local memory",
+            "format": 2,
+            "name": "Local Memory Size",
+            "value": 68719476736
+          },
+          {
+            "description": "Number of scalar inputs used by this shader stage",
+            "format": 2,
+            "name": "Input Count",
+            "value": 13
+          },
+          {
+            "description": "Number of scalar outputs used by this shader stage",
+            "format": 2,
+            "name": "Output Count",
+            "value": 0
+          }
+        ],
+        "subgroupSize": 32
+      },
+      {
+        "description": "Fragment Shader",
+        "index": 1,
+        "name": "FS",
+        "representations": [],
+        "stage": 16,
+        "statistics": [
+          {
+            "description": "Number of temporary registers used by this shader stage",
+            "format": 2,
+            "name": "Register Count",
+            "value": 128
+          },
+          {
+            "description": "Size in bytes of the executable for this stage",
+            "format": 2,
+            "name": "Binary Size",
+            "value": 113280
+          },
+          {
+            "description": "Size in bytes required for the shader stack",
+            "format": 2,
+            "name": "Stack Size",
+            "value": 0
+          },
+          {
+            "description": "Size in bytes required per-thread for local memory",
+            "format": 2,
+            "name": "Local Memory Size",
+            "value": 68719476800
+          },
+          {
+            "description": "Number of scalar inputs used by this shader stage",
+            "format": 2,
+            "name": "Input Count",
+            "value": 68
+          },
+          {
+            "description": "Number of colors output by the fragment shader",
+            "format": 2,
+            "name": "Output Colors",
+            "value": 3
+          }
+        ],
+        "subgroupSize": 32
+      }
+    ],
+    "fragmentInput": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-222923-shadow-filter-prefetch-1ffc55\\mesh_object_bindless_clipmap_field_early.frag.spv",
+    "pipelineInput": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\mesh_object_compute.vert.spv",
+    "queueSubmissions": 0,
+    "scope": "Private compilation fixture with explicit ordinary-opaque specialization; no native pipeline identity or frame timing claim",
+    "validationErrors": []
+  },
+  "compilerCommand": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-181940-direct-pipeline-executables-144edf\\probe.exe",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\mesh_object_compute.vert.spv",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-222923-shadow-filter-prefetch-1ffc55\\mesh_object_bindless_clipmap_field_early.frag.spv",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-222923-shadow-filter-prefetch-1ffc55\\compiler.json"
+  ],
+  "productionSourceUnchanged": true,
+  "protectedDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "originalAcceptanceRetained": true,
+  "archive": {
+    "path": "validation.zip",
+    "bytes": 1657169,
+    "sha256": "74b14e009bb227c5e4094bbe04c8f7694b9c72dcfc5363f512327cdd3dc20e2d"
+  },
+  "members": {
+    "budget.json": "5f1e7b295bc1f21284321fb04b218fe32aede80c72d2d712f99702cd97210c02",
+    "candidate-build.json": "28b8ef8b3b6543baebe830496035c0405f10a546a67d65b510c9765d2c1f9afa",
+    "character_snapshot_object_bindless_clipmap_field.frag.spv": "a3619528c2459803225bc35ca860812590d14fea6332c9f8fad81789687245b4",
+    "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv": "6c97d0515b9d12af6f402ea6a04c381c9400c0b42e82cfe5d526427fd9972ff0",
+    "character_snapshot_object_bindless_clipmap_field_early.frag.spv": "0f3d7f81315bb25f38bbbb177ee409e86929407d01d80f26a4b64b34deead1b4",
+    "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv": "cbb3289cbe9dc1a45608167c7e2edfcbc8abb4f46574c903d3949b30ffbd62e9",
+    "compare-state.json": "8d55d1418ff56e0043d37ad63e8c1e5adf5d25fd2c0645b48a1cca02756bddb1",
+    "compare.py": "30193df6037335bc33b68406d630743241e871e9963ae262254caeb104ea4af4",
+    "compiler-command.json": "baafb70487a9d4db9bb207551cfeb01c21f714e2f2a03b45af3afa94e9370489",
+    "compiler.json": "f2339db72ca48fe09f4a5c04a2a4af9cb02f1448b77a847de9a90aa6700e70ae",
+    "compiler.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compiler.stdout": "92ab629f8955688ccdfc8405824980660960fdbd8cb15802148b4faf1333373c",
+    "driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "environment.json": "c57933c9759410c99cbc8dc96257b9c41b2521e9182e73fc52614229ae21a0ec",
+    "mesh.frag": "68c6886418f3f98e63919cbb14295775011b8172cea6a0841a09620152e9713e",
+    "mesh_fog_bindless.frag.spv": "f68789180f6bb6f32cd40301afdf1a7db08496e9d48f25189e1a372ce0e1b98c",
+    "mesh_object_bindless_clipmap_field.frag.spv": "14685b1b768479bda888e46ae17889fad09290ab581bb43dada250a45ffd37e9",
+    "mesh_object_bindless_clipmap_field_coverage.frag.spv": "0a72395ff073b2b7bd336f6abd594d2f9ddd4c94f521db65186b9f130f9b06aa",
+    "mesh_object_bindless_clipmap_field_early.frag.spv": "2ba3a1dcbb8d5c646946c30eb174df5471d1edb709d93f12cc9abc0cb9e056c5",
+    "mesh_object_bindless_clipmap_field_early_lighting.frag.spv": "f3740c0e4847f4a393cd9d56fecc650bfb01e0609f8cc3bc47f75bdcba6fb038",
+    "mesh_object_bindless_clipmap_field_lighting.frag.spv": "0babe0b05001859b1b9cefbd83ef26f8660e6a72380f9e6629d685da94dffb41",
+    "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv": "d7c336a5a528e85a042eaeeb296d019a8bb3600637d95b672b0c8d95f9192494",
+    "prepare.py": "4ba9b0a85e060609a14497e255f2aa6e6f2ad03d1321c9fbb8fc8180c3dca34f",
+    "result.json": "d4d18076847fe7bd8b29e39ae7772b99c5d006a1c9498b04dfec8534728b70c1",
+    "run_compare.py": "e0d4772dbaca6eb2ffb2ccb6aa3126725fd934281db076c94b1912e6001772dc",
+    "source-inputs.json": "0273ba7cebd18c9b4929503284b9b0b64c51adb99d46e19ac5bf88d1ebf0a664"
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "status": "reference-camera-binding-integrated",
+  "sourceHead": "6e88b74",
+  "imports": {
+    "conservative-frustum-transport": [
+      "e931a86",
+      "c60c636",
+      "09a8e82ea9ab35fe58c2c9f3516605869d014b67b69a4964cd6f2296c2ce2fef"
+    ],
+    "reference-raster-frustum": [
+      "80199cf",
+      "48c4959",
+      "f2a71f7202e5d5621f47b5649cf6148f7db7afb58589cf618d99c237c52fc5ec"
+    ],
+    "reference-camera-render-binding": [
+      "1a7da41",
+      "6e88b74",
+      "dd3e3388bb5752c16c993d011a03044f31cddc2146f785b41ab3f33fffab1dbe"
+    ]
+  },
+  "build": {
+    "status": "built-and-checked",
+    "checks": [
+      {
+        "config": "Release",
+        "ctest": 23,
+        "supplementalCpuChecks": 2,
+        "skips": 0,
+        "activePrograms": 886,
+        "existingExact": 858,
+        "childExact": 885,
+        "changed": [
+          "cull_indirect.comp.spv",
+          "visibility_prototype.comp.spv"
+        ],
+        "newReferencePrograms": 26,
+        "reusedVerifiedReleaseProductsAndCtest": true,
+        "seconds": 32.79699999996228
+      },
+      {
+        "config": "Debug",
+        "ctest": 23,
+        "supplementalCpuChecks": 2,
+        "skips": 0,
+        "activePrograms": 886,
+        "existingExact": 858,
+        "childExact": 885,
+        "changed": [
+          "cull_indirect.comp.spv",
+          "visibility_prototype.comp.spv"
+        ],
+        "newReferencePrograms": 26,
+        "reusedVerifiedReleaseProductsAndCtest": false,
+        "seconds": 395.90600000001723
+      }
+    ],
+    "gpuProcesses": 16,
+    "rasterProcesses": 16,
+    "exactMaskPixels": 3840000,
+    "crossDeviceRgbErrorAtMost": 1,
+    "sourceUnchanged": true
+  },
+  "guardDrawRecords": 196640,
+  "mixedFrustumDrawRecords": 128180,
+  "originalFour": {
+    "exitCode": 0,
+    "seconds": 139.57800000003772,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "programsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "originalFourCameraUniformBytes": 800,
+  "originalFourUsesOrdinaryCamera": true,
+  "memory": {
+    "peakWorkingSetBytes": 2044637184,
+    "observationIntervalMs": 50,
+    "observations": 2743,
+    "allocator": {
+      "bufferAllocations": 2042,
+      "imageAllocations": 442,
+      "liveBuffers": 881,
+      "liveImages": 442,
+      "bufferBytes": 2291425152,
+      "imageBytes": 2819632640,
+      "liveBufferBytes": 234193856,
+      "liveImageBytes": 2819632640,
+      "deviceLocalPeakBytes": 3316325184,
+      "bufferMemoryProperties": {
+        "samples": 2042,
+        "liveDeviceLocalBytes": 219448256,
+        "liveNonDeviceLocalBytes": 14745600,
+        "liveMappedDeviceBytes": 44368576,
+        "liveMappedNonLocalDeviceBytes": 0
+      }
+    },
+    "scope": "Strict four-frame joint capture; descriptive memory observation, separate from the formal P5 workload and steady-state sampling"
+  },
+  "staticOptInFallback": "reference-camera-programs-use-reference-materials",
+  "modePairCorrection": {
+    "status": "verification-script-corrected",
+    "cause": "Plain ordinary and orthographic were inserted in named mode order; positional check paired orthographic with ordinary.",
+    "comparison": [
+      "plain",
+      "ordinary"
+    ],
+    "allPerModeGeometryChecksAlreadyPassed": true,
+    "releaseBuildAndCtestReusedOnlyAfterVerifiedProductsAndSource": true,
+    "nvidiaFourCasesRecheckedFromActualCaptures": true,
+    "previousScriptSha256": "e784b19ba605a827bde03a0e7cc94599d42d7b09f2d25d7d731fdb09cac6f5a6"
+  },
+  "renderContextLineEndingReceipt": {
+    "worktreeSha256": "4c14fed2c2b92f41791bc456916b941a76c517b73858ec2822f1a8f18a32d176",
+    "trackedSha256": "5a0c3fe09b1414fa2473d8d180cfdb6763736e8a29c72d87aafef19a5a93dded",
+    "normalizedExact": true,
+    "backup": "pre-import-RenderContext.hpp"
+  },
+  "projectInputsExact": 1729,
+  "protectedFilesExact": 13,
+  "formalPerformancePassed": false,
+  "overall": "failed-user-review"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "verified",
+  "changedOriginalFiles": [
+    "assets\\linear-display-materials\\material-1.azurematerial",
+    "assets\\linear-display-materials\\material-2.azurematerial",
+    "assets\\linear-display-materials\\material-9.azurematerial",
+    "content-character\\hero-idle-opaque-overlays.glb"
+  ],
+  "nodes": 327,
+  "materials": 22,
+  "animations": 10,
+  "originalHierarchyPreserved": true,
+  "originalSkinningPreserved": true,
+  "originalAnimationPreserved": true,
+  "originalGeometryPayloadPrefixPreserved": true,
+  "allLevelAndProjectFilesPreserved": true
+}

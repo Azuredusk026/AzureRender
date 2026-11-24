@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "coordinates": "scad",
+  "parameters": {
+    "width": {"default": 3, "minimum": 1, "maximum": 12},
+    "depth": {"default": 2, "minimum": 1, "maximum": 8},
+    "height": {"default": 4, "minimum": 1, "maximum": 20},
+    "wall": {"default": 0.25, "minimum": 0.1, "maximum": 0.5}
+  },
+  "modules": {
+    "shell": {
+      "op": "difference",
+      "children": [
+        {"op": "cube", "size": [{"parameter": "width"}, {"parameter": "depth"}, {"parameter": "height"}]},
+        {"op": "cube", "size": [0.5, 0.5, 24], "translate": [{"parameter": "wall"}, {"parameter": "wall"}, 0.25]}
+      ]
+    }
+  },
+  "root": {"op": "module", "name": "shell"},
+  "material": {"color": [0.5, 0.7, 0.9, 1], "roughness": 0.6}
+}

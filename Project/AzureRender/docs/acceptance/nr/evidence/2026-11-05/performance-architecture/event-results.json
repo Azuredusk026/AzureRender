@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "status": "profiled-not-formal-performance",
+  "scope": "Replay event durations from one actual native joint frame; most expensive 64 events inspected; uninspected costs retained",
+  "capture": {
+    "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\native-joint-rdc-profile\\joint_frame320.rdc",
+    "bytes": 2204761503,
+    "sha256": "2a8b94094669aa7fe485c766945bbd86d0736164a6114871c31b64cac5923077",
+    "executableSha256": "0d5dabe7ff02b402ef5f9f312572b8cfe886dc56328dbcbade4517fe1e7d0744"
+  },
+  "events": 3786,
+  "sumEventMs": 39.22851199999999,
+  "groups": [
+    {
+      "kind": "draw",
+      "shader": "uninspected",
+      "events": 3337,
+      "milliseconds": 13.246464000000016,
+      "programs": []
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10315",
+      "events": 26,
+      "milliseconds": 9.094208,
+      "programs": [
+        "mesh_object_bindless_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10332",
+      "events": 16,
+      "milliseconds": 5.036032,
+      "programs": [
+        "character_snapshot_object_bindless_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "kind": "dispatch",
+      "shader": "uninspected",
+      "events": 385,
+      "milliseconds": 3.61747199999999,
+      "programs": []
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10391",
+      "events": 6,
+      "milliseconds": 2.479104,
+      "programs": [
+        "mesh_object_bindless_clipmap_field_lighting.frag.spv"
+      ]
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10397",
+      "events": 3,
+      "milliseconds": 1.67936,
+      "programs": [
+        "character_snapshot_object_bindless_clipmap_field_lighting.frag.spv"
+      ]
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10246",
+      "events": 1,
+      "milliseconds": 0.989216,
+      "programs": [
+        "reflection_trace_packed.comp.spv"
+      ]
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10056",
+      "events": 2,
+      "milliseconds": 0.707584,
+      "programs": [
+        "skin.comp.spv"
+      ]
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10301",
+      "events": 1,
+      "milliseconds": 0.546816,
+      "programs": [
+        "shadow_bounds.comp.spv"
+      ]
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10724",
+      "events": 2,
+      "milliseconds": 0.395264,
+      "programs": [
+        "view_fog_surface.frag.spv"
+      ]
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10334",
+      "events": 1,
+      "milliseconds": 0.24575999999999998,
+      "programs": [
+        "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv"
+      ]
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10394",
+      "events": 1,
+      "milliseconds": 0.24371199999999998,
+      "programs": [
+        "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv"
+      ]
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::10324",
+      "events": 1,
+      "milliseconds": 0.233472,
+      "programs": [
+        "mesh_object_bindless_clipmap_field_coverage.frag.spv"
+      ]
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10110",
+      "events": 1,
+      "milliseconds": 0.209472,
+      "programs": [
+        "reflection_reprojection.comp.spv"
+      ]
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10257",
+      "events": 1,
+      "milliseconds": 0.195584,
+      "programs": [
+        "reflection_spatial_filter.comp.spv"
+      ]
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::254",
+      "events": 1,
+      "milliseconds": 0.15462399999999998,
+      "programs": [
+        "inner_outline.frag.spv"
+      ]
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::10140",
+      "events": 1,
+      "milliseconds": 0.154368,
+      "programs": [
+        "depth_pyramid.comp.spv"
+      ]
+    }
+  ],
+  "archive": {
+    "path": "event-diagnosis.zip",
+    "sha256": "a19508b7fa3889866d2249ec0216bd725519c4ce55410cfd81748ec49c95734d",
+    "entries": [
+      {
+        "path": "native-joint-rdc-profile/state.json",
+        "sha256": "22b7fbc5c229c12445bd90600c34042768b99b1598b025da1e3b567bb0ae41fa",
+        "bytes": 1265
+      },
+      {
+        "path": "native-joint-rdc-profile/capture-state.json",
+        "sha256": "7c8531aefdd3fa2c2c841dc4c5ce1b2712afbaf6f27132724fb88fad2c95bc36",
+        "bytes": 2015
+      },
+      {
+        "path": "native-joint-rdc-profile/shader-costs.json",
+        "sha256": "cce3e7aa3e7111d20fe3fd6db450249a2c80ae44dc3172c4a3f6c3747591be6c",
+        "bytes": 12244
+      },
+      {
+        "path": "native-joint-rdc-profile/events/profile.json",
+        "sha256": "0e8a3f32daf660272e1eaa9c29bcb1a79ab1839b7264636576f0bd63c9a328a4",
+        "bytes": 611691
+      },
+      {
+        "path": "native-joint-rdc-profile/events/counter-events.json",
+        "sha256": "8c380abc5342c58171df06cebb7daa744c2102c0e0482ba40dc3d2262e4bf563",
+        "bytes": 551662
+      },
+      {
+        "path": "private-profile-map/AzurePlayer.map",
+        "sha256": "f369707e6d136c4bced1141bda0af65f9f4a8c414d32079c26933a6587263d85",
+        "bytes": 20142178
+      },
+      {
+        "path": "private-profile-map/sections.json",
+        "sha256": "e350c221c4b6ff4bfefdef04a9dffee21da673dd0c9b671c55f9da4415b98bfb",
+        "bytes": 1036
+      },
+      {
+        "path": "player-expanded-link.json",
+        "sha256": "a46185102a3e937570432341ccdceed5272fad7d8e37196b53e2d9c7273d663b",
+        "bytes": 4729
+      },
+      {
+        "path": "capture_profile_joint_rd.py",
+        "sha256": "042b1ff51d15ac6f4a7af50557215f34a7a485865eefa5275afcb877f8ce33b8",
+        "bytes": 3724
+      },
+      {
+        "path": "profile_joint_rd_existing.py",
+        "sha256": "8217d985530652405a31e63d05ba8a6c26c5e036f86001d26cd8a1cbe0512a94",
+        "bytes": 962
+      },
+      {
+        "path": "research-sources/google/filament/LICENSE",
+        "sha256": "02d70b593dd8e9355dd8e1ca8d13c303bee5bcaf3065b66ff6e4f534e1e6a2c1",
+        "bytes": 11362
+      },
+      {
+        "path": "research-sources/KhronosGroup/Vulkan-Samples/LICENSE",
+        "sha256": "9c18288ad9997b4b8d62a544e01d960d3effa28e45e8cfcea6e0cacb9db33f6b",
+        "bytes": 11355
+      },
+      {
+        "path": "research-sources/skypjack/entt/LICENSE",
+        "sha256": "73547f6370ee16ea560665329bb62d4e2d8250f41eaa204b47a6c694ca3286ea",
+        "bytes": 1097
+      }
+    ]
+  }
+}

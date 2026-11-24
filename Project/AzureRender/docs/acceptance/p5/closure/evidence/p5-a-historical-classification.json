@@ -1,0 +1,280 @@
+[
+  {
+    "source": "p5-performance",
+    "load": "standard",
+    "round": 1,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance",
+    "load": "standard",
+    "round": 2,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance",
+    "load": "standard",
+    "round": 3,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance",
+    "load": "editor",
+    "round": 1,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance",
+    "load": "editor",
+    "round": 2,
+    "oldPassed": false,
+    "newPassed": false,
+    "failures": [
+      "stableWorkingSetGrowth: 0.12539264287734664 exceeds 0.05"
+    ]
+  },
+  {
+    "source": "p5-performance",
+    "load": "editor",
+    "round": 3,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance",
+    "load": "stress",
+    "round": 1,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance",
+    "load": "stress",
+    "round": 2,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance",
+    "load": "stress",
+    "round": 3,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance",
+    "load": "exploration",
+    "round": 1,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance",
+    "load": "exploration",
+    "round": 2,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance",
+    "load": "exploration",
+    "round": 3,
+    "oldPassed": false,
+    "newPassed": false,
+    "failures": [
+      "stableWorkingSetGrowth: 0.06309802411351728 exceeds 0.05"
+    ]
+  },
+  {
+    "source": "p5-performance",
+    "load": "platformer",
+    "round": 1,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance",
+    "load": "platformer",
+    "round": 2,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance",
+    "load": "platformer",
+    "round": 3,
+    "oldPassed": false,
+    "newPassed": false,
+    "failures": [
+      "stableWorkingSetGrowth: 0.17506617967362526 exceeds 0.05"
+    ]
+  },
+  {
+    "source": "p5-performance-retest",
+    "load": "editor",
+    "round": 1,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance-retest",
+    "load": "editor",
+    "round": 2,
+    "oldPassed": false,
+    "newPassed": false,
+    "failures": [
+      "stableWorkingSetGrowth: 0.12323346523459588 exceeds 0.05"
+    ]
+  },
+  {
+    "source": "p5-performance-retest",
+    "load": "editor",
+    "round": 3,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance-retest",
+    "load": "exploration",
+    "round": 1,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance-retest",
+    "load": "exploration",
+    "round": 2,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance-retest",
+    "load": "exploration",
+    "round": 3,
+    "oldPassed": false,
+    "newPassed": false,
+    "failures": [
+      "stableWorkingSetGrowth: 0.10722312953770041 exceeds 0.05"
+    ]
+  },
+  {
+    "source": "p5-performance-retest",
+    "load": "platformer",
+    "round": 1,
+    "oldPassed": false,
+    "newPassed": false,
+    "failures": [
+      "stableWorkingSetGrowth: 0.15058361843429258 exceeds 0.05"
+    ]
+  },
+  {
+    "source": "p5-performance-retest",
+    "load": "platformer",
+    "round": 2,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-performance-retest",
+    "load": "platformer",
+    "round": 3,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-capture-layer-control",
+    "load": "editor",
+    "round": 1,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-capture-layer-control",
+    "load": "editor",
+    "round": 2,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-capture-layer-control",
+    "load": "editor",
+    "round": 3,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-capture-layer-control",
+    "load": "exploration",
+    "round": 1,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-capture-layer-control",
+    "load": "exploration",
+    "round": 2,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-capture-layer-control",
+    "load": "exploration",
+    "round": 3,
+    "oldPassed": false,
+    "newPassed": false,
+    "failures": [
+      "stableWorkingSetGrowth: 0.13410079386893892 exceeds 0.05"
+    ]
+  },
+  {
+    "source": "p5-capture-layer-control",
+    "load": "platformer",
+    "round": 1,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-capture-layer-control",
+    "load": "platformer",
+    "round": 2,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  },
+  {
+    "source": "p5-capture-layer-control",
+    "load": "platformer",
+    "round": 3,
+    "oldPassed": true,
+    "newPassed": true,
+    "failures": []
+  }
+]

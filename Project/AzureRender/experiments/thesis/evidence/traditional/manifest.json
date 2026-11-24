@@ -1,0 +1,16 @@
+{
+  "sourceBase": "0c73c9c",
+  "source": {
+    "src/benchmark.cpp": "6ff01cbcdb6fe81806452ca54b6ac23e538a085144ae462953065b3666affeaa",
+    "src/Benchmark.hpp": "e54eb07313f2888d69cae22c336177405b321725151a07dcb234ea007e103484",
+    "src/qualification.cpp": "4d084e79d6be85f436aeeb98fd8d15443a280440a1254ef5ca85997d51fd08fe",
+    "src/Workload.hpp": "42c7a49cfd0fb08ee1bfd31736b263f9d6eed1288004f94a21746d7e53a80562",
+    "shaders/contour.frag": "311e80913a7a308122f8123a8eb6f179514602d7b6319d087aa5204a8f881632",
+    "shaders/fullscreen.vert": "84ae5d7144050ac956e89ea477e1ff6cc7fa4bbfe75916f81cea310ee6e27a1e",
+    "shaders/geometry.frag": "9fae50de3d2186027e32657c32476c44bf8bd4ea87d70d44f5c94b3b3c7fe066",
+    "shaders/geometry.vert": "9930ff3fe9593cf8585f73f9d6581d13f0a7e0d45d3abd5d6a17ffd5a5296855",
+    "shaders/toon.frag": "4a387d022b5e2e9861a6c0da8b74253b285718954be6761d8ca3a597ad19043e"
+  },
+  "binarySha256": "fd67a8cca54f3812fb0040bb22ef9162c7207e7852434561ab7f7aafcf261b6b",
+  "scope": "128x128 low; warmup 2; measured 8; validation and synchronization validation enabled; pilot only"
+}

@@ -1,0 +1,87 @@
+{
+  "recordedAt": "2026-11-06T19:23:41.3658196+08:00",
+  "scope": "Read-only background process observations after reboot; not proof of engine long-run causality",
+  "logicalProcessors": 32,
+  "gitProcesses": [],
+  "cpuCounters": [
+    {
+      "Name": "GameViewerServer",
+      "IDProcess": 20940,
+      "PercentProcessorTime": 66
+    },
+    {
+      "Name": "OmenCommandCenterBackground",
+      "IDProcess": 8696,
+      "PercentProcessorTime": 62
+    },
+    {
+      "Name": "dwm",
+      "IDProcess": 5960,
+      "PercentProcessorTime": 58
+    },
+    {
+      "Name": "msedgewebview2#12",
+      "IDProcess": 22588,
+      "PercentProcessorTime": 46
+    },
+    {
+      "Name": "pwsh",
+      "IDProcess": 26028,
+      "PercentProcessorTime": 42
+    },
+    {
+      "Name": "WmiPrvSE#2",
+      "IDProcess": 10724,
+      "PercentProcessorTime": 27
+    },
+    {
+      "Name": "msedgewebview2#15",
+      "IDProcess": 11004,
+      "PercentProcessorTime": 19
+    },
+    {
+      "Name": "OpenWith",
+      "IDProcess": 6292,
+      "PercentProcessorTime": 11
+    },
+    {
+      "Name": "msedgewebview2#8",
+      "IDProcess": 21468,
+      "PercentProcessorTime": 11
+    },
+    {
+      "Name": "System",
+      "IDProcess": 4,
+      "PercentProcessorTime": 7
+    }
+  ],
+  "counterInterpretation": "PercentProcessorTime is aggregated across cores; around 100 represents about one logical core",
+  "intervention": "No process terminated or priority changed",
+  "earlierToolObservation": {
+    "source": "Read-only process and CPU tool output captured earlier in this turn",
+    "processes": [
+      {
+        "pid": 3596,
+        "cpuSeconds": 37.140625,
+        "startedAt": "2026-11-06T19:22:13.550529+08:00"
+      },
+      {
+        "pid": 28568,
+        "cpuSeconds": 34.484375,
+        "startedAt": "2026-11-06T19:22:16.187529+08:00"
+      },
+      {
+        "pid": 26736,
+        "cpuSeconds": 33.40625,
+        "startedAt": "2026-11-06T19:22:17.446564+08:00"
+      }
+    ],
+    "operation": "git diff df7d1b9ef7fba073158dc660d50a0c09bb7cb719 --find-renames --raw --no-abbrev --numstat -z",
+    "parentLink": {
+      "gitPid": 11792,
+      "parentPid": 22012,
+      "parentName": "ChatGPT.exe"
+    }
+  },
+  "interpretation": "Intermittent background diff workload observed. Later query contains no active Git processes; this does not establish continuous interference or engine slowdown causality."
+}

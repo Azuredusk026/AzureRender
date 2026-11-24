@@ -1,0 +1,38 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.PrefabAuthoring
+1/1 Test #193: AzureEditor.PrefabAuthoring ......***Failed    0.99 sec
+[1791585384046][info][editor][code=0] Opened scene: physics-arm
+[1791585384143][info][editor][code=0] ERROR [prefab.create]: Prefab source already exists
+[1791585384149][info][editor][code=0] ERROR [prefab.create]: Prefab component depends on an external object
+[1791585384150][info][editor][code=0] Opened scene: physics-arm
+[1791585384162][info][editor][code=0] Selected node: fixed
+[1791585384162][info][editor][code=0] Placed prefab: one
+[1791585384232][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-prefab-authoring-36190138247000\assets\mechanism.azurelevel
+[1791585384239][info][editor][code=0] Opened scene: physics-arm
+[1791585384246][info][editor][code=0] Selected node: moving
+[1791585384257][info][editor][code=0] Opened scene: physics-arm
+[1791585384293][info][editor][code=0] Opened scene: physics-arm
+[1791585384345][info][editor][code=0] Undo
+[1791585384395][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-prefab-authoring-36190138247000\assets\mechanism.azurelevel
+[1791585384441][info][editor][code=0] Opened scene: physics-arm
+[1791585384458][info][editor][code=0] Opened scene: physics-arm
+[1791585384464][info][editor][code=0] Selected node: Authored arm
+[1791585384477][info][editor][code=0] Opened scene: physics-arm
+[1791585384504][info][editor][code=0] Opened scene: physics-arm
+[1791585384585][info][editor][code=0] ERROR [prefab.apply]: Prefab source fingerprint is expired
+[1791585384612][info][editor][code=0] Opened scene: physics-arm
+[1791585384619][info][editor][code=0] Opened scene: physics-arm
+[1791585384793][info][editor][code=0] Opened scene: physics-arm
+[1791585384801][info][editor][code=0] Opened scene: physics-arm
+[1791585384917][info][editor][code=0] ERROR [prefab.undo-apply]: Read-only operation modified the document
+prefab.undo-apply: [{"code":"RejectedOperation","message":"Read-only operation modified the document"}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   1.00 sec
+
+The following tests FAILED:
+	193 - AzureEditor.PrefabAuthoring (Failed)
+Errors while running CTest

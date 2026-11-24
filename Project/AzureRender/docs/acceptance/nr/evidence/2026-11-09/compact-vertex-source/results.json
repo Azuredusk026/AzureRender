@@ -1,0 +1,517 @@
+{
+  "status": "rejected-and-restored",
+  "run": "20261109-111635-compact-vertex-source-706378",
+  "baselineCommit": "b921613",
+  "restoredBuilds": {
+    "release": {
+      "verified": true,
+      "sourceCount": 1675,
+      "productCount": 740
+    },
+    "debug": {
+      "verified": true,
+      "sourceCount": 1675,
+      "productCount": 740
+    }
+  },
+  "checksScope": "Final 28-byte candidate only, before restoration",
+  "componentChecks": 20,
+  "releaseMaterialGpuCases": 16,
+  "originalFrames": 4,
+  "originalChangedPixels": 0,
+  "all675OriginalProgramsUnchanged": true,
+  "cost28": {
+    "status": "diagnosed",
+    "rows": [
+      {
+        "label": "baseline-before",
+        "selectedFrames": 300,
+        "summary": {
+          "gpu": {
+            "mean": 22.683767893333332,
+            "p95": 23.0794496
+          },
+          "shadow": {
+            "mean": 2.260971946666667,
+            "p95": 2.3587632
+          },
+          "main": {
+            "mean": 20.08066048,
+            "p95": 20.518144
+          },
+          "post": {
+            "mean": 0.3421354666666666,
+            "p95": 0.349184
+          },
+          "cpu": {
+            "mean": 5.351594666666681,
+            "p95": 5.932449999998927
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            79.45,
+            80.25,
+            81.13,
+            81.23,
+            81.29,
+            81.6,
+            81.82,
+            81.9,
+            81.96,
+            82.01,
+            82.35,
+            82.42,
+            82.69,
+            82.7,
+            82.88,
+            83.36,
+            83.48,
+            83.66,
+            84.11,
+            84.13,
+            84.16,
+            85.1,
+            85.38,
+            85.44,
+            85.54,
+            85.66,
+            86.1,
+            86.39,
+            86.85,
+            87.07,
+            87.43,
+            87.8,
+            87.96,
+            88.27,
+            88.33,
+            88.43,
+            88.47,
+            88.98,
+            89.02,
+            89.22,
+            89.44,
+            89.53,
+            89.72,
+            89.97,
+            91.26
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            62.0,
+            89.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2520.0
+          ],
+          "thermalSlowdownObserved": true,
+          "samples": 45
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 181,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "motionDescriptorWrites": 20790,
+          "motionDescriptorReuses": 597,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      },
+      {
+        "label": "candidate",
+        "selectedFrames": 300,
+        "summary": {
+          "gpu": {
+            "mean": 22.50621013333333,
+            "p95": 22.678478400000003
+          },
+          "shadow": {
+            "mean": 1.9694122666666665,
+            "p95": 2.097344
+          },
+          "main": {
+            "mean": 20.189866666666667,
+            "p95": 20.4288
+          },
+          "post": {
+            "mean": 0.3469312,
+            "p95": 0.349184
+          },
+          "cpu": {
+            "mean": 5.643819333333293,
+            "p95": 6.394994999999583
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            79.1,
+            80.23,
+            80.33,
+            80.63,
+            81.99,
+            82.59,
+            82.86,
+            83.01,
+            83.25,
+            83.52,
+            83.8,
+            84.16,
+            84.66,
+            84.78,
+            85.14,
+            85.24,
+            85.34,
+            85.47,
+            85.78,
+            85.86,
+            85.95,
+            86.16,
+            86.54,
+            86.63,
+            86.75,
+            86.8,
+            87.03,
+            87.04,
+            87.38,
+            87.42,
+            87.63,
+            87.76,
+            87.98,
+            88.04,
+            88.16,
+            88.58,
+            88.81,
+            88.93,
+            89.35,
+            89.39,
+            89.67,
+            89.85,
+            90.93,
+            91.01,
+            91.08
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            64.0,
+            87.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2250.0
+          ],
+          "thermalSlowdownObserved": true,
+          "samples": 46
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 181,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "motionDescriptorWrites": 20790,
+          "motionDescriptorReuses": 597,
+          "graphicsVertexSourceStride": 28,
+          "graphicsVertexSourceBytes": 19952436,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      },
+      {
+        "label": "baseline-after",
+        "selectedFrames": 300,
+        "summary": {
+          "gpu": {
+            "mean": 22.988491306666667,
+            "p95": 23.143105600000002
+          },
+          "shadow": {
+            "mean": 2.2800642133333335,
+            "p95": 2.361552
+          },
+          "main": {
+            "mean": 20.360915626666667,
+            "p95": 20.625715200000002
+          },
+          "post": {
+            "mean": 0.3475114666666667,
+            "p95": 0.349184
+          },
+          "cpu": {
+            "mean": 5.532815999999995,
+            "p95": 6.2581650000006634
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            81.11,
+            82.27,
+            82.51,
+            82.94,
+            83.39,
+            83.53,
+            83.57,
+            84.42,
+            84.54,
+            84.55,
+            84.69,
+            84.71,
+            84.79,
+            85.09,
+            85.39,
+            85.6,
+            85.73,
+            85.77,
+            85.85,
+            85.99,
+            86.45,
+            86.55,
+            86.62,
+            86.98,
+            87.17,
+            87.24,
+            87.41,
+            87.56,
+            87.81,
+            88.04,
+            88.46,
+            88.82,
+            88.96,
+            89.28,
+            89.53,
+            89.54,
+            89.57,
+            90.04,
+            90.17,
+            90.42,
+            90.48,
+            90.52,
+            90.76,
+            91.12,
+            91.39
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            64.0,
+            88.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2520.0
+          ],
+          "thermalSlowdownObserved": true,
+          "samples": 46
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 181,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "motionDescriptorWrites": 20790,
+          "motionDescriptorReuses": 597,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      }
+    ],
+    "bracketDriftFraction": 0.013343916796361795,
+    "bracketStable": true,
+    "gpuBaselineMean": 22.8361296,
+    "gpuCandidateMean": 22.50621013333333,
+    "gpuSavedMs": 0.32991946666667005,
+    "gpuReductionFraction": 0.014447258464791224,
+    "sourceAndProductsUnchanged": true,
+    "projectInputsVerified": 1729,
+    "shadowBoundsTilesPerGroup": 8,
+    "baselineRuntimeVerified": true,
+    "scope": "Local diagnosis under recorded current power and thermal conditions, three hundred warmup and three hundred selected frames per process; before/candidate/after bracket; formal performance conditions remain pending",
+    "formalPerformancePassed": false,
+    "materialIntervalBaselineMean": 20.220788053333333,
+    "materialIntervalCandidateMean": 20.189866666666667,
+    "materialIntervalReductionFraction": 0.0015291880111254486,
+    "materialIntervalBracketDriftFraction": 0.013859753928851914,
+    "shadowBaselineMean": 2.2705180800000004,
+    "shadowCandidateMean": 1.9694122666666665,
+    "shadowReductionFraction": 0.13261546604083152,
+    "shadowBracketDriftFraction": 0.008408771035492759,
+    "phaseEfficiencyGatePassed": false
+  },
+  "slice": {
+    "positiveSamples": 185069,
+    "baselineReferences": 14291,
+    "candidateReferences": 14283,
+    "baselinePackedIndices": 28192,
+    "candidatePackedIndices": 28176,
+    "nativeCaptures": 0,
+    "nativeCostRuns": 0,
+    "adopted": false
+  },
+  "protectedDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "thermalQualificationPassed": false,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "newFullAssetCopies": 0,
+  "allProjectPayloadsOnD": true,
+  "package": {
+    "path": "docs/acceptance/nr/evidence/2026-11-09/compact-vertex-source/validation.zip",
+    "sha256": "4324adfa055755b9d29e8685f8aaf799759fcafcc16b0d473b03836dee83d463",
+    "bytes": 4741441,
+    "files": 469
+  }
+}

@@ -1,0 +1,2315 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "baseCommit": "b9e5484",
+  "run": "build/runs/20261024-081424-projected-hair-pixel-integral-2990a6",
+  "rendererApiVersion": 4,
+  "implementation": "native-hdr-temporal-v3",
+  "materialBytes": 192,
+  "materialTextureSlots": 9,
+  "textureBytesPerPixel": 52,
+  "scope": "NR7-AA4 opt-in projected-hair pixel integration and fixed-pose energy validation. Full native appearance, material motion, alpha coverage and clothing remain open.",
+  "configurations": {
+    "debug": {
+      "checks": 24,
+      "checksLogs": {
+        "final-checks-debug.log": "d6089275e6c51c43b21ac7cd13c5101a23507f5c6d3a012bffb98cdb00faea6d",
+        "source-checks-debug.log": "c1b52950046734119679822d158a74982c6c17c6ec4e756bc9fb4d09a81c8add"
+      },
+      "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+      "editorSha256": "16ab554877ecd14c28853d4b8b14a6e3c1e0d12b3c59901d962eccb719d3c572",
+      "outline": {
+        "schemaVersion": 1,
+        "status": "passed",
+        "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+        "captures": [
+          {
+            "name": "wide",
+            "outlinePixels": 154,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": 0.12647354385734388
+          },
+          {
+            "name": "zero",
+            "outlinePixels": 0,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "042e33184feabbf0ec7eaa7f07a1bd827ac3a36407c9b986e8bfc0d79b932b6a",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "mask-zero",
+            "outlinePixels": 0,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "042e33184feabbf0ec7eaa7f07a1bd827ac3a36407c9b986e8bfc0d79b932b6a",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "mask-half",
+            "outlinePixels": 80,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "97a5c667e42a26e2d3ffda26ab30b945c8a222cd620cc1e8f7f6397d7ce03a0a",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "fixed",
+            "outlinePixels": 154,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": 0.12647354385734388
+          },
+          {
+            "name": "document",
+            "outlinePixels": 154,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": 0.12647354385734388
+          },
+          {
+            "name": "uv1-zero",
+            "outlinePixels": 154,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": true,
+            "outlineBytes": 17304,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": 0.12647354385734388
+          },
+          {
+            "name": "uv1-tilt",
+            "outlinePixels": 117,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "abc33f581626f3712b66a2d93fc5701f0332bb8aac3620bf09a77b21753f317d",
+            "validationEnabled": true,
+            "outlineBytes": 17304,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "depth-only",
+            "outlinePixels": 0,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "042e33184feabbf0ec7eaa7f07a1bd827ac3a36407c9b986e8bfc0d79b932b6a",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "masked-clear",
+            "outlinePixels": 0,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "ec7c9b13b56a0cbd1a8e1194c5ce7221d300909ce5524ac12bd3d59b5d3cf79c",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "hidden",
+            "outlinePixels": 0,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "ec7c9b13b56a0cbd1a8e1194c5ce7221d300909ce5524ac12bd3d59b5d3cf79c",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "near",
+            "outlinePixels": 454,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "26faf5fd305d372cbb09eedac63f9771f60df337ad3885889601e42c862a6423",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 3,
+            "maximumHorizontalBoundaryErrorPixels": 0.1079119811348761
+          },
+          {
+            "name": "far",
+            "outlinePixels": 52,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "88cebba4d73f652f9dbef4ab2df0d15fa7907d1da2bd2c1e14862dab643e8cb7",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 10,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "narrow-fov",
+            "outlinePixels": 368,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "e7c299e65e0aadea8a7de7d02e2dbe5974ff58056e69deda052e850eb809b8b1",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": 0.05101410100091641
+          },
+          {
+            "name": "resize",
+            "outlinePixels": 580,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "1e39194b69cbbbb2a04b74ede7dbfa3658471f8d71262ce746393a65e5e2a1ae",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 512,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": 0.7529470877146878
+          },
+          {
+            "name": "depth-positive",
+            "outlinePixels": 154,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "depth-negative",
+            "outlinePixels": 154,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "two-assets",
+            "outlinePixels": 86,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "c89fcc7f094a1d98e6f81219463a37e13af9fa7f01fba67a844ec73b0daa0a19",
+            "validationEnabled": true,
+            "outlineBytes": 17432,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "two-assets-fixed",
+            "outlinePixels": 86,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "c89fcc7f094a1d98e6f81219463a37e13af9fa7f01fba67a844ec73b0daa0a19",
+            "validationEnabled": true,
+            "outlineBytes": 17432,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "uv1-mirror",
+            "outlinePixels": 117,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "d9f5147d81d2dccf8165c81342376dcbae73593a140ff3e513bde785df956d96",
+            "validationEnabled": true,
+            "outlineBytes": 17304,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "fading",
+            "outlinePixels": 84,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "cb68987e3bc31e28b11a43fc93dc1c4af87e68e950eaa03cacad052c9573471a",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "near-plane",
+            "outlinePixels": 65536,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "8be2315192017ebf69c6874bd271870793c7d699259477241e5298c55b0274d9",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 1.05,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "morph",
+            "outlinePixels": 162,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "8c616c9a33af599ce455881ab556c5b2fa2f9cbea928ca0b23a69ace495cfd06",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "translated",
+            "outlinePixels": 162,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "8c616c9a33af599ce455881ab556c5b2fa2f9cbea928ca0b23a69ace495cfd06",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "octahedral-forward",
+            "outlinePixels": 154,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": true,
+            "outlineBytes": 17304,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "octahedral-back",
+            "outlinePixels": 0,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "042e33184feabbf0ec7eaa7f07a1bd827ac3a36407c9b986e8bfc0d79b932b6a",
+            "validationEnabled": true,
+            "outlineBytes": 17304,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "color-only",
+            "outlinePixels": 154,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "minimum-supersample",
+            "outlinePixels": 0,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "ab9801c0a36cb3d0683644d28f59d908d9058fe1e10a43828d58949ffcc9c0dd",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 3,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "minimum-supersample-fixed",
+            "outlinePixels": 0,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "ab9801c0a36cb3d0683644d28f59d908d9058fe1e10a43828d58949ffcc9c0dd",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 3,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "minimum-reference",
+            "outlinePixels": 5564,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "f09c8119d6db9f42e0623daea14cab4fe8b2c5d26e313b0b22b270cae7865522",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 1024,
+            "distance": 3,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "minimum-temporal",
+            "outlinePixels": 9,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "2c6f91ad19e8d02e4fd36b073a195771077df77ddc25cd0c7f2bca4ff4e4817b",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 3,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "minimum-temporal-far",
+            "outlinePixels": 0,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "d13bf00a80177b4143ab43fd4eeb95a0811c46f773f14d853317c46435e0d359",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "minimum-reference-far",
+            "outlinePixels": 2174,
+            "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+            "imageSha256": "8af1d5d205496562a6c64e845f04817ce4350fd3e299d9ed247b948aa24480a3",
+            "validationEnabled": true,
+            "outlineBytes": 144,
+            "size": 1024,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          }
+        ],
+        "scope": "Public color, coverage and lifecycle controls; raw depth and native rim are separate acceptance evidence.",
+        "minimumSampling": [
+          {
+            "name": "minimum-supersample",
+            "minimumOutputPixels": 0.5,
+            "referenceMass": 342.41669335720326,
+            "mass": 344.95010035788084,
+            "massRatio": 1.0073986083325521
+          },
+          {
+            "name": "minimum-supersample-fixed",
+            "minimumOutputPixels": 0.5,
+            "referenceMass": 342.41669335720326,
+            "mass": 344.95010035788084,
+            "massRatio": 1.0073986083325521
+          }
+        ],
+        "minimumTemporal": [
+          {
+            "name": "minimum-temporal",
+            "referenceMass": 342.41669335720326,
+            "lastEightMassRatios": [
+              0.989062002944097,
+              0.9857880187375498,
+              0.9905070065773275,
+              0.9890197491129304,
+              0.9890004622556269,
+              0.9876278774562385,
+              0.9875345134004871,
+              0.9948681053380597
+            ],
+            "meanMassRatio": 0.9891759669777895
+          },
+          {
+            "name": "minimum-temporal-far",
+            "referenceMass": 132.9322418656781,
+            "lastEightMassRatios": [
+              0.9915660828107861,
+              0.9946498739190491,
+              0.9980931038688229,
+              0.9936808315827886,
+              0.9993079116671292,
+              0.9937655876673143,
+              0.9945240783043109,
+              0.9957377071199284
+            ],
+            "meanMassRatio": 0.9951656471175162
+          }
+        ],
+        "mirroredPixelsOverOneByte": 0,
+        "morphMaximumByteError": 0
+      },
+      "publicQuality": [
+        {
+          "name": "primary",
+          "side": "left",
+          "energyRatio": 1.002294428025073,
+          "sourceEnergyRatio": 0.9606473334320262,
+          "meanAbsoluteError": 5.6733783228529634e-05,
+          "sourceMeanAbsoluteError": 8.156110055276274e-05,
+          "errorRatio": 0.6955985493578271
+        },
+        {
+          "name": "primary",
+          "side": "right",
+          "energyRatio": 1.001660676998592,
+          "sourceEnergyRatio": 0.9621889365050048,
+          "meanAbsoluteError": 5.682232574362419e-05,
+          "sourceMeanAbsoluteError": 8.112167272019555e-05,
+          "errorRatio": 0.7004580137248336
+        },
+        {
+          "name": "coupled",
+          "side": "left",
+          "energyRatio": 1.0004433543364253,
+          "sourceEnergyRatio": 1.038721455853995,
+          "meanAbsoluteError": 0.00014047655216100868,
+          "sourceMeanAbsoluteError": 0.0009340166811400604,
+          "errorRatio": 0.15040047463557402
+        },
+        {
+          "name": "coupled",
+          "side": "right",
+          "energyRatio": 1.000660690649854,
+          "sourceEnergyRatio": 1.039120658597495,
+          "meanAbsoluteError": 0.0001402821076304657,
+          "sourceMeanAbsoluteError": 0.0009651607283958956,
+          "errorRatio": 0.14534585121756416
+        },
+        {
+          "name": "line",
+          "side": "left",
+          "energyRatio": 0.9999499062138631,
+          "sourceEnergyRatio": 0.9990494807047379,
+          "meanAbsoluteError": 0.00017404624758763957,
+          "sourceMeanAbsoluteError": 0.0004249316000689416,
+          "errorRatio": 0.409586501826181
+        },
+        {
+          "name": "line",
+          "side": "right",
+          "energyRatio": 0.9994840613260301,
+          "sourceEnergyRatio": 1.0000885476055106,
+          "meanAbsoluteError": 0.0001789119801920099,
+          "sourceMeanAbsoluteError": 0.0004219346441311197,
+          "errorRatio": 0.4240277082732546
+        },
+        {
+          "name": "incident",
+          "side": "left",
+          "energyRatio": 1.0047852274045395,
+          "sourceEnergyRatio": 1.0509403598053833,
+          "meanAbsoluteError": 5.532200451028398e-05,
+          "sourceMeanAbsoluteError": 0.00029356907245775706,
+          "errorRatio": 0.18844629663175608
+        },
+        {
+          "name": "incident",
+          "side": "right",
+          "energyRatio": 1.010709123072736,
+          "sourceEnergyRatio": 1.0463908060034335,
+          "meanAbsoluteError": 5.6448819299439604e-05,
+          "sourceMeanAbsoluteError": 0.00029993200237484196,
+          "errorRatio": 0.18820538939653506
+        },
+        {
+          "name": "composed",
+          "side": "left",
+          "energyRatio": 0.9998107446097948,
+          "sourceEnergyRatio": 1.0395297516854454,
+          "meanAbsoluteError": 0.0001278850033964499,
+          "sourceMeanAbsoluteError": 0.0007756699783481024,
+          "errorRatio": 0.1648703791125175
+        },
+        {
+          "name": "composed",
+          "side": "right",
+          "energyRatio": 0.9996995671084087,
+          "sourceEnergyRatio": 1.0400212009730012,
+          "meanAbsoluteError": 0.00012743692232362853,
+          "sourceMeanAbsoluteError": 0.0007990863158953492,
+          "errorRatio": 0.15947829388223195
+        }
+      ],
+      "native": {
+        "status": "passed",
+        "kind": "temporal",
+        "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+        "referenceScale": 1,
+        "output": [
+          1280,
+          720
+        ],
+        "minimumPixelsScaled": false,
+        "receiverPixelOffsetsScaled": false,
+        "images": {
+          "frame_000000.png": "9d2d9fc98189efda620716cf3cdbd5da455ab604a100375d11dddf4797f167f6",
+          "frame_000001.png": "6aa4f08f1a060503a080c969274416fe26fce9eaf3b55106aba9a568ba179996",
+          "frame_000002.png": "b2374a2c9fbc9feacd0ef2fa0d32944caae3d7dd9896a8b936fbe4214c3492b3",
+          "frame_000003.png": "ee9eb640dd07ec0ad85a07de35aafa2d77c9eeb6f0df1e5023af4dc821a2ec0f",
+          "frame_000004.png": "7190ab4e1d90212a76960db4319e5b2758ae2676d4ccbe269d5cf371f5ae0c1a",
+          "frame_000005.png": "fdc5eea6421caecd1df3c251a3a4db98eb5d17340159ef9cc8c672977351417c",
+          "frame_000006.png": "4f2753a4ce74cc748abda929025d079913ebc7a8b8c9a411e821a51db842bc56",
+          "frame_000007.png": "eaee380ed11de8324fa6385ca086ab9a70a96b044fa854962e8666f7ba806649",
+          "frame_000008.png": "4bce2c141f864c21c0c4e71c3b264270f26fb1438cafa21858d5c9fa59700a4d",
+          "frame_000009.png": "9f25f778e61f06ca151631f0eefc3942f27c08bdeaca022aa72c3dbf115b7995",
+          "frame_000010.png": "2f7d032e4e7e71d15ce651192921aa209d2a4b1af57850446cb69e18ea2d492b",
+          "frame_000011.png": "32f9eb8e60ecf6be1f90083056c0c3d4b39c73b006c6055fb62364244816e48c",
+          "frame_000012.png": "d8977f9c3f709b5866626b8ccfaccf76ad1096d9e0aa09851642dad1a1c66952",
+          "frame_000013.png": "ce29e595242e67dc366a4910fcc456980d767e491e6236b3b09c46ef31a038da",
+          "frame_000014.png": "01d830d05f6b6ba070ac5e8cded46df460f6c47f07b0946eeefe78382d929dc8",
+          "frame_000015.png": "0a345960d18273fd6586ee87952e8225175139eba8ea46872af224f7cc78b355",
+          "frame_000016.png": "3afbf9a9c006bef5ce312134a4bdbd58ac71ba5c0930672a692c7dc175902eac",
+          "frame_000017.png": "6b4d895d7723682d5c75500ab7c77ec774852e2a30e7bd75aaf30b500ddfa9d7",
+          "frame_000018.png": "394bc31f9907f744a84c0e2815b56bc0db4172cce279b92df9324f07870298e7",
+          "frame_000019.png": "fe76947f9f9ef3328b6a4fe22a2d3f06e9f8ddbf624272b6a0e86e3ddc1872b6",
+          "frame_000020.png": "b9fac42d3b3543d985456a6a9eb31641800244e98112ff0a26d3eec07089fd75",
+          "frame_000021.png": "af41729b0d121a5dfc2ce6649d74bc2d5e746a592dda47c639e5227ace0598bc",
+          "frame_000022.png": "e2d9205d6099f29ec7c917061ba6c6a092e0d983a2d5c47223956097d3db5470",
+          "frame_000023.png": "4e3b6af965531912efc26ce40f618c8c5085ae97364bc161a9b80fd5c409f157",
+          "frame_000024.png": "c62b091660b7f7715ebfd3839619760954ce6f4b68a115180169436794204bbd",
+          "frame_000025.png": "b117b6f809f1737692e6f3722c297bd0bef6d1724cb54acbf84095044344f76c",
+          "frame_000026.png": "3cea58a9bace2183b2c62240b19f5e72369bf738d02924cca319004f52401d5e",
+          "frame_000027.png": "161eb79a637c04d36da61a7aa4398417f53e492c18c83958cacf278248445d1b",
+          "frame_000028.png": "4fd3002b6feefecbf0b515ea522fa3554c28864938d4a0f6ab4050d12e84c48a",
+          "frame_000029.png": "6efd86c843b37874bffd43044578b50faf13fe8b2d2e494b763bd51e21246ece",
+          "frame_000030.png": "2fdbe5ef6d21eedb65fe9c92e9a33324d0da5d9fcfd577bcfd2d1e3847cb1354",
+          "frame_000031.png": "cc393504b96556a669cb3d6184af0839c2207957e22e7f945e09a0706de7d1df"
+        }
+      },
+      "sampling": {
+        "pixelIntegralPipelineCount": 6,
+        "temporalMaterialSamples": true,
+        "temporalSamplingPattern": "zero-mean-halton8-v1",
+        "temporalHistorySubmission": 32
+      }
+    },
+    "release": {
+      "checks": 24,
+      "checksLogs": {
+        "final-checks-release.log": "607fca68b1867edac87d5a10ddabd1362409abe549d8f054acb445ce77f722c4"
+      },
+      "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+      "editorSha256": "b866ecb3f0edbad773dad9bffc2d2d60040709284680694aceb9afffdfa650ec",
+      "outline": {
+        "schemaVersion": 1,
+        "status": "passed",
+        "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+        "captures": [
+          {
+            "name": "wide",
+            "outlinePixels": 154,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": 0.12647354385734388
+          },
+          {
+            "name": "zero",
+            "outlinePixels": 0,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "042e33184feabbf0ec7eaa7f07a1bd827ac3a36407c9b986e8bfc0d79b932b6a",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "mask-zero",
+            "outlinePixels": 0,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "042e33184feabbf0ec7eaa7f07a1bd827ac3a36407c9b986e8bfc0d79b932b6a",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "mask-half",
+            "outlinePixels": 80,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "97a5c667e42a26e2d3ffda26ab30b945c8a222cd620cc1e8f7f6397d7ce03a0a",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "fixed",
+            "outlinePixels": 154,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": 0.12647354385734388
+          },
+          {
+            "name": "document",
+            "outlinePixels": 154,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": 0.12647354385734388
+          },
+          {
+            "name": "uv1-zero",
+            "outlinePixels": 154,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": false,
+            "outlineBytes": 17304,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": 0.12647354385734388
+          },
+          {
+            "name": "uv1-tilt",
+            "outlinePixels": 117,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "abc33f581626f3712b66a2d93fc5701f0332bb8aac3620bf09a77b21753f317d",
+            "validationEnabled": false,
+            "outlineBytes": 17304,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "depth-only",
+            "outlinePixels": 0,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "042e33184feabbf0ec7eaa7f07a1bd827ac3a36407c9b986e8bfc0d79b932b6a",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "masked-clear",
+            "outlinePixels": 0,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "ec7c9b13b56a0cbd1a8e1194c5ce7221d300909ce5524ac12bd3d59b5d3cf79c",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "hidden",
+            "outlinePixels": 0,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "ec7c9b13b56a0cbd1a8e1194c5ce7221d300909ce5524ac12bd3d59b5d3cf79c",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "near",
+            "outlinePixels": 454,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "26faf5fd305d372cbb09eedac63f9771f60df337ad3885889601e42c862a6423",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 3,
+            "maximumHorizontalBoundaryErrorPixels": 0.1079119811348761
+          },
+          {
+            "name": "far",
+            "outlinePixels": 52,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "88cebba4d73f652f9dbef4ab2df0d15fa7907d1da2bd2c1e14862dab643e8cb7",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 10,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "narrow-fov",
+            "outlinePixels": 368,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "e7c299e65e0aadea8a7de7d02e2dbe5974ff58056e69deda052e850eb809b8b1",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": 0.05101410100091641
+          },
+          {
+            "name": "resize",
+            "outlinePixels": 580,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "1e39194b69cbbbb2a04b74ede7dbfa3658471f8d71262ce746393a65e5e2a1ae",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 512,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": 0.7529470877146878
+          },
+          {
+            "name": "depth-positive",
+            "outlinePixels": 154,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "depth-negative",
+            "outlinePixels": 154,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "two-assets",
+            "outlinePixels": 86,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "c89fcc7f094a1d98e6f81219463a37e13af9fa7f01fba67a844ec73b0daa0a19",
+            "validationEnabled": false,
+            "outlineBytes": 17432,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "two-assets-fixed",
+            "outlinePixels": 86,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "c89fcc7f094a1d98e6f81219463a37e13af9fa7f01fba67a844ec73b0daa0a19",
+            "validationEnabled": false,
+            "outlineBytes": 17432,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "uv1-mirror",
+            "outlinePixels": 117,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "d9f5147d81d2dccf8165c81342376dcbae73593a140ff3e513bde785df956d96",
+            "validationEnabled": false,
+            "outlineBytes": 17304,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "fading",
+            "outlinePixels": 84,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "cb68987e3bc31e28b11a43fc93dc1c4af87e68e950eaa03cacad052c9573471a",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "near-plane",
+            "outlinePixels": 65536,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "8be2315192017ebf69c6874bd271870793c7d699259477241e5298c55b0274d9",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 1.05,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "morph",
+            "outlinePixels": 162,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "8c616c9a33af599ce455881ab556c5b2fa2f9cbea928ca0b23a69ace495cfd06",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "translated",
+            "outlinePixels": 162,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "8c616c9a33af599ce455881ab556c5b2fa2f9cbea928ca0b23a69ace495cfd06",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "octahedral-forward",
+            "outlinePixels": 154,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": false,
+            "outlineBytes": 17304,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "octahedral-back",
+            "outlinePixels": 0,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "042e33184feabbf0ec7eaa7f07a1bd827ac3a36407c9b986e8bfc0d79b932b6a",
+            "validationEnabled": false,
+            "outlineBytes": 17304,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "color-only",
+            "outlinePixels": 154,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "6592b8cdc944d46ccdd9fcacefe9cd5db1f5dbfa23f4dbfafc3714e27a38155d",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "minimum-supersample",
+            "outlinePixels": 0,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "ab9801c0a36cb3d0683644d28f59d908d9058fe1e10a43828d58949ffcc9c0dd",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 3,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "minimum-supersample-fixed",
+            "outlinePixels": 0,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "ab9801c0a36cb3d0683644d28f59d908d9058fe1e10a43828d58949ffcc9c0dd",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 3,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "minimum-reference",
+            "outlinePixels": 5564,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "f09c8119d6db9f42e0623daea14cab4fe8b2c5d26e313b0b22b270cae7865522",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 1024,
+            "distance": 3,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "minimum-temporal",
+            "outlinePixels": 9,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "2c6f91ad19e8d02e4fd36b073a195771077df77ddc25cd0c7f2bca4ff4e4817b",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 3,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "minimum-temporal-far",
+            "outlinePixels": 0,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "d13bf00a80177b4143ab43fd4eeb95a0811c46f773f14d853317c46435e0d359",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 256,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          },
+          {
+            "name": "minimum-reference-far",
+            "outlinePixels": 2174,
+            "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+            "imageSha256": "8af1d5d205496562a6c64e845f04817ce4350fd3e299d9ed247b948aa24480a3",
+            "validationEnabled": false,
+            "outlineBytes": 144,
+            "size": 1024,
+            "distance": 5,
+            "maximumHorizontalBoundaryErrorPixels": null
+          }
+        ],
+        "scope": "Public color, coverage and lifecycle controls; raw depth and native rim are separate acceptance evidence.",
+        "minimumSampling": [
+          {
+            "name": "minimum-supersample",
+            "minimumOutputPixels": 0.5,
+            "referenceMass": 342.41669335720326,
+            "mass": 344.95010035788084,
+            "massRatio": 1.0073986083325521
+          },
+          {
+            "name": "minimum-supersample-fixed",
+            "minimumOutputPixels": 0.5,
+            "referenceMass": 342.41669335720326,
+            "mass": 344.95010035788084,
+            "massRatio": 1.0073986083325521
+          }
+        ],
+        "minimumTemporal": [
+          {
+            "name": "minimum-temporal",
+            "referenceMass": 342.41669335720326,
+            "lastEightMassRatios": [
+              0.989062002944097,
+              0.9857880187375498,
+              0.9905070065773275,
+              0.9890197491129304,
+              0.9890004622556269,
+              0.9876278774562385,
+              0.9875345134004871,
+              0.9948681053380597
+            ],
+            "meanMassRatio": 0.9891759669777895
+          },
+          {
+            "name": "minimum-temporal-far",
+            "referenceMass": 132.9322418656781,
+            "lastEightMassRatios": [
+              0.9915660828107861,
+              0.9946498739190491,
+              0.9980931038688229,
+              0.9936808315827886,
+              0.9993079116671292,
+              0.9937655876673143,
+              0.9945240783043109,
+              0.9957377071199284
+            ],
+            "meanMassRatio": 0.9951656471175162
+          }
+        ],
+        "mirroredPixelsOverOneByte": 0,
+        "morphMaximumByteError": 0
+      },
+      "publicQuality": [
+        {
+          "name": "primary",
+          "side": "left",
+          "energyRatio": 1.002294428025073,
+          "sourceEnergyRatio": 0.9606473334320262,
+          "meanAbsoluteError": 5.6733783228529634e-05,
+          "sourceMeanAbsoluteError": 8.156110055276274e-05,
+          "errorRatio": 0.6955985493578271
+        },
+        {
+          "name": "primary",
+          "side": "right",
+          "energyRatio": 1.001660676998592,
+          "sourceEnergyRatio": 0.9621889365050048,
+          "meanAbsoluteError": 5.682232574362419e-05,
+          "sourceMeanAbsoluteError": 8.112167272019555e-05,
+          "errorRatio": 0.7004580137248336
+        },
+        {
+          "name": "coupled",
+          "side": "left",
+          "energyRatio": 1.0004433543364253,
+          "sourceEnergyRatio": 1.038721455853995,
+          "meanAbsoluteError": 0.00014047655216100868,
+          "sourceMeanAbsoluteError": 0.0009340166811400604,
+          "errorRatio": 0.15040047463557402
+        },
+        {
+          "name": "coupled",
+          "side": "right",
+          "energyRatio": 1.000660690649854,
+          "sourceEnergyRatio": 1.039120658597495,
+          "meanAbsoluteError": 0.0001402821076304657,
+          "sourceMeanAbsoluteError": 0.0009651607283958956,
+          "errorRatio": 0.14534585121756416
+        },
+        {
+          "name": "line",
+          "side": "left",
+          "energyRatio": 0.9999499062138631,
+          "sourceEnergyRatio": 0.9990494807047379,
+          "meanAbsoluteError": 0.00017404624758763957,
+          "sourceMeanAbsoluteError": 0.0004249316000689416,
+          "errorRatio": 0.409586501826181
+        },
+        {
+          "name": "line",
+          "side": "right",
+          "energyRatio": 0.9994840613260301,
+          "sourceEnergyRatio": 1.0000885476055106,
+          "meanAbsoluteError": 0.0001789119801920099,
+          "sourceMeanAbsoluteError": 0.0004219346441311197,
+          "errorRatio": 0.4240277082732546
+        },
+        {
+          "name": "incident",
+          "side": "left",
+          "energyRatio": 1.0047852274045395,
+          "sourceEnergyRatio": 1.0509403598053833,
+          "meanAbsoluteError": 5.532200451028398e-05,
+          "sourceMeanAbsoluteError": 0.00029356907245775706,
+          "errorRatio": 0.18844629663175608
+        },
+        {
+          "name": "incident",
+          "side": "right",
+          "energyRatio": 1.010709123072736,
+          "sourceEnergyRatio": 1.0463908060034335,
+          "meanAbsoluteError": 5.6448819299439604e-05,
+          "sourceMeanAbsoluteError": 0.00029993200237484196,
+          "errorRatio": 0.18820538939653506
+        },
+        {
+          "name": "composed",
+          "side": "left",
+          "energyRatio": 0.9998107446097948,
+          "sourceEnergyRatio": 1.0395297516854454,
+          "meanAbsoluteError": 0.0001278850033964499,
+          "sourceMeanAbsoluteError": 0.0007756699783481024,
+          "errorRatio": 0.1648703791125175
+        },
+        {
+          "name": "composed",
+          "side": "right",
+          "energyRatio": 0.9996995671084087,
+          "sourceEnergyRatio": 1.0400212009730012,
+          "meanAbsoluteError": 0.00012743692232362853,
+          "sourceMeanAbsoluteError": 0.0007990863158953492,
+          "errorRatio": 0.15947829388223195
+        }
+      ],
+      "native": {
+        "status": "passed",
+        "kind": "temporal",
+        "playerSha256": "575213c126c96359fdc948e8410504bbe3bf3f4672fc97dedeaea0106eaf6fd9",
+        "referenceScale": 1,
+        "output": [
+          1280,
+          720
+        ],
+        "minimumPixelsScaled": false,
+        "receiverPixelOffsetsScaled": false,
+        "images": {
+          "frame_000000.png": "9d2d9fc98189efda620716cf3cdbd5da455ab604a100375d11dddf4797f167f6",
+          "frame_000001.png": "6aa4f08f1a060503a080c969274416fe26fce9eaf3b55106aba9a568ba179996",
+          "frame_000002.png": "b2374a2c9fbc9feacd0ef2fa0d32944caae3d7dd9896a8b936fbe4214c3492b3",
+          "frame_000003.png": "ee9eb640dd07ec0ad85a07de35aafa2d77c9eeb6f0df1e5023af4dc821a2ec0f",
+          "frame_000004.png": "7190ab4e1d90212a76960db4319e5b2758ae2676d4ccbe269d5cf371f5ae0c1a",
+          "frame_000005.png": "fdc5eea6421caecd1df3c251a3a4db98eb5d17340159ef9cc8c672977351417c",
+          "frame_000006.png": "4f2753a4ce74cc748abda929025d079913ebc7a8b8c9a411e821a51db842bc56",
+          "frame_000007.png": "eaee380ed11de8324fa6385ca086ab9a70a96b044fa854962e8666f7ba806649",
+          "frame_000008.png": "4bce2c141f864c21c0c4e71c3b264270f26fb1438cafa21858d5c9fa59700a4d",
+          "frame_000009.png": "9f25f778e61f06ca151631f0eefc3942f27c08bdeaca022aa72c3dbf115b7995",
+          "frame_000010.png": "2f7d032e4e7e71d15ce651192921aa209d2a4b1af57850446cb69e18ea2d492b",
+          "frame_000011.png": "32f9eb8e60ecf6be1f90083056c0c3d4b39c73b006c6055fb62364244816e48c",
+          "frame_000012.png": "d8977f9c3f709b5866626b8ccfaccf76ad1096d9e0aa09851642dad1a1c66952",
+          "frame_000013.png": "ce29e595242e67dc366a4910fcc456980d767e491e6236b3b09c46ef31a038da",
+          "frame_000014.png": "01d830d05f6b6ba070ac5e8cded46df460f6c47f07b0946eeefe78382d929dc8",
+          "frame_000015.png": "0a345960d18273fd6586ee87952e8225175139eba8ea46872af224f7cc78b355",
+          "frame_000016.png": "3afbf9a9c006bef5ce312134a4bdbd58ac71ba5c0930672a692c7dc175902eac",
+          "frame_000017.png": "6b4d895d7723682d5c75500ab7c77ec774852e2a30e7bd75aaf30b500ddfa9d7",
+          "frame_000018.png": "394bc31f9907f744a84c0e2815b56bc0db4172cce279b92df9324f07870298e7",
+          "frame_000019.png": "fe76947f9f9ef3328b6a4fe22a2d3f06e9f8ddbf624272b6a0e86e3ddc1872b6",
+          "frame_000020.png": "b9fac42d3b3543d985456a6a9eb31641800244e98112ff0a26d3eec07089fd75",
+          "frame_000021.png": "af41729b0d121a5dfc2ce6649d74bc2d5e746a592dda47c639e5227ace0598bc",
+          "frame_000022.png": "e2d9205d6099f29ec7c917061ba6c6a092e0d983a2d5c47223956097d3db5470",
+          "frame_000023.png": "4e3b6af965531912efc26ce40f618c8c5085ae97364bc161a9b80fd5c409f157",
+          "frame_000024.png": "c62b091660b7f7715ebfd3839619760954ce6f4b68a115180169436794204bbd",
+          "frame_000025.png": "b117b6f809f1737692e6f3722c297bd0bef6d1724cb54acbf84095044344f76c",
+          "frame_000026.png": "3cea58a9bace2183b2c62240b19f5e72369bf738d02924cca319004f52401d5e",
+          "frame_000027.png": "161eb79a637c04d36da61a7aa4398417f53e492c18c83958cacf278248445d1b",
+          "frame_000028.png": "4fd3002b6feefecbf0b515ea522fa3554c28864938d4a0f6ab4050d12e84c48a",
+          "frame_000029.png": "6efd86c843b37874bffd43044578b50faf13fe8b2d2e494b763bd51e21246ece",
+          "frame_000030.png": "2fdbe5ef6d21eedb65fe9c92e9a33324d0da5d9fcfd577bcfd2d1e3847cb1354",
+          "frame_000031.png": "cc393504b96556a669cb3d6184af0839c2207957e22e7f945e09a0706de7d1df"
+        }
+      },
+      "sampling": {
+        "pixelIntegralPipelineCount": 6,
+        "temporalMaterialSamples": true,
+        "temporalSamplingPattern": "zero-mean-halton8-v1",
+        "temporalHistorySubmission": 32
+      }
+    }
+  },
+  "shaders": {
+    "background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+    "background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+    "background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+    "blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+    "blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+    "blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+    "blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+    "blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+    "bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+    "bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+    "character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+    "character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+    "character_snapshot.frag.spv": "afeff894e4da62bc59a8a452c25ba03a00779b475ac95eb1eb311dd6d6ad268b",
+    "character_snapshot_bindless.frag.spv": "27bf58a44e57001e02461643dc94781bff6c9d5e07dad790c385d09362fb12cd",
+    "character_snapshot_integral.frag.spv": "e58c36d6d55fcc929f173d3ac4e06b3dfcdc519444b4697b285079321c77102b",
+    "character_snapshot_integral_bindless.frag.spv": "639cadba0f6c285704a9ddde4f62be0f1aa347a5dedff42f6e969222a738b7fd",
+    "character_snapshot_integral_object.frag.spv": "452f564e5e77e3970a1d30620d6fb19c039e21f80ce62c9757e541c0d53c8465",
+    "character_snapshot_integral_object_bindless.frag.spv": "41490bed2cfc838567b9ebd236dbd63f9cf6325b566b014b65bf91158f3036b9",
+    "character_snapshot_object.frag.spv": "7e4d48cd3a2d211e9829f00a6a5a9f5bd37bdf734e090ccdd7f2c6ee57c3d1a8",
+    "character_snapshot_object_bindless.frag.spv": "a8e91491afc0017f113512d7c3d4cdc113f9b7420931d54eac5a2aaf1ca1fa26",
+    "clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+    "color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+    "cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+    "editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+    "editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+    "game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+    "game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+    "hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+    "hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+    "ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+    "inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+    "inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+    "mesh.frag.spv": "737804e6199be38176eddc2fd3072077246e701466d3a1035bce4e4e89860049",
+    "mesh.vert.spv": "7b96ee9e2d69418e3d7203edcadd0ff32b0c85b67e5873aecf064fc59e42af79",
+    "mesh_bindless.frag.spv": "ecf4c8d2e5dd18eee346bebd0657b2157fc6919499354a272c0d43308905fdae",
+    "mesh_compute.vert.spv": "f6f9c0928bb0dfc44208f5037f08b3725aca238f3ac7b85312b57a0461c676a8",
+    "mesh_integral.frag.spv": "63e0f9e3bbb5ca781d46941040aabb8b007c01800f1cb14235142c31f28e4fa0",
+    "mesh_integral_bindless.frag.spv": "a0633d971cc16f6905ad438815d194fbbdd2d3f6835d9a3356526e22e8d3cc18",
+    "mesh_integral_object.frag.spv": "aee3260ee1f03e69a1af4b7a98fa878c224f8b0321ceaf0b7261679d2ec84f24",
+    "mesh_integral_object_bindless.frag.spv": "ca4c8bd8a9f437a3900a9708b25f8597302729a2e92de3902b5b852f9b6c7436",
+    "mesh_object.frag.spv": "d9fdd155a00e6b5efbf25f0737ac4594f3ed009e57382279d263caaa0dac7524",
+    "mesh_object.vert.spv": "cf4a88c4f044397466584727dc95f25ccef371a24a781157701cdbd04b66d1db",
+    "mesh_object_bindless.frag.spv": "5c134f866bacbfc190dd5ffab0d9c08291db98aa005b6a3eacb38e434ead071c",
+    "mesh_object_compute.vert.spv": "ab476e2667a137eb117ca06af02954ade47c78c815b61e5b77355e6d3952906a",
+    "motion_outline.vert.spv": "176339eb2a7c7b9dfc2ffc92f15acdfd25ac62fea97ccdb8100d6d080b075d1d",
+    "motion_pose_test.comp.spv": "919ea2f4d091d74b65be64155dbfbecffea8d142ff65ddb9c199b87c5c2a9886",
+    "motion_projection_test.comp.spv": "ba985c261cb80b1a0869152fc6b75b8c98f6813aa102b91c239171d7d99821ec",
+    "motion_vector.frag.spv": "6a9013820d682dc38d3b2cff9abc79b978bb1f1d46e5e573aa5f1e6b82ff7ea4",
+    "motion_vector.vert.spv": "5f1b0da9fafd3455581ac579a30f807876695941505874d86b96b833cc7deb1c",
+    "object_shadow_filter_test.comp.spv": "290a118205df0b2a1efe23685536bce54c7199b46c5fc3acb6d9d46be74c3708",
+    "outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+    "outline.vert.spv": "89b19925e95cf701782777777a3fcf40437208319b46188ad55896f010f4b626",
+    "outline_compute.vert.spv": "072ccaaaa6c3a8ee3c97a4cfbf1384c2463656ceecbb20def4772a2c0e802ece",
+    "outline_depth.frag.spv": "91f3981e718b0c12d5b54c8d83cb35a076e520b779a4cb4028dca9407b5f018e",
+    "outline_depth_bindless.frag.spv": "7103292f36b2357e10511fb322e28fb919d5beb87be5101061a7e6a8fc50586f",
+    "outline_mask.frag.spv": "c6c0875b058ce8b2fd8d1bc7504687ded47690cc4753fae9e2ff9b839a43a4c9",
+    "outline_mask.vert.spv": "cb3505b020250cb49558a0c055215581b4f8a69fe2dbbb7ce6b3e4a8b482b2a2",
+    "outline_mask_bindless.frag.spv": "4bc09476228361b8159d2ef404f692e13672f63cef9213dcc6372f3dcf0dcb5d",
+    "outline_mask_compute.vert.spv": "bcfaa8ffacbaf95a2c4bb329c78c8b39ce26a8800dd38cf4ee80159ec4d583ee",
+    "outline_view_scaled.frag.spv": "5d4fb190ce0b30c14d9bbcf5b16d9c72008c8c14c585b3609adff10458e44d93",
+    "outline_view_scaled.vert.spv": "93a80d478f7bb98587ae58ef8a969e0021c8ec5e171b4bac612c57de89f765a9",
+    "outline_view_scaled_bindless.frag.spv": "b16a26a16ede89881771bf1d90cc2838d20e960ac90863b55888d134b63699ef",
+    "outline_view_scaled_bindless.vert.spv": "f37ae718a4adde9589f3c957e0dbdd5f19038863c0f15f744a9b1e54af14d62b",
+    "outline_view_scaled_compute.vert.spv": "8af0169fb7d2cb5ebd92d589af6bcb117553d648dde9eaccbdcb0b34d95abe56",
+    "outline_view_scaled_compute_bindless.vert.spv": "825bfc8694d71362793dc7865701a16aa115aa1417e420aa370f1c91f65469a2",
+    "pathtracing.comp.spv": "6f90a3444d1a07b8ead9eba67d063f70e9c46310058146a496c5e4eea47dfcec",
+    "pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+    "readonly_depth_test.frag.spv": "b7afe007df9e050c21c89832a50e7cdb976e225c6ec6b5376589d1aa021352a9",
+    "readonly_depth_test.vert.spv": "11d36fc78f75992904f31c89130be22737be87dd4dd99b65508d6fcc40fe2ce3",
+    "sampled_upload_test.comp.spv": "a7b9be273214e05f06f7441f6e3a1187e929faa531beedf545eaf0291b3fd582",
+    "scene_instance_layout_test.comp.spv": "36d658cb7a429516ca78d6f99d9f72209dd98542374bb00dbb4fa8e428181984",
+    "shadow.frag.spv": "91ac2f1e32ea6ee107bbb9143c9e96cdffef43e22ae53b9626c3eb7d7a1af245",
+    "shadow.vert.spv": "2b4cb71f7ec302242f8341b33e481033c14a5edce3c853a44ca0a7ad039cf5b1",
+    "shadow_bindless.frag.spv": "6d38dc03e16eda0b761a21b00ebea4a223e9046bc73b7ac5d531ff028b34f36f",
+    "shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+    "shadow_compute.vert.spv": "ac557aaeb75d6cf3e75af60d345a25e1cc78ee9b8c90943d05a73e9bfe66bc2e",
+    "shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+    "skin.comp.spv": "c568f268629009a4421afe0c452f52c1d6fd7cb494a5587545528e6983c02d26",
+    "sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+    "spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+    "surface_response_test.comp.spv": "afe36fc87f9472aa759275224bfff0b5d0c94bf22a1044de69c774dd2252ee76",
+    "temporal_copy.frag.spv": "b406af1147ab75cf5fdca93cccece032d0dfe1d0cf7fa1bab24e16024db65ce7",
+    "temporal_resolve.frag.spv": "729c361f1c4af1896a72029d60d8568cfa785e9cd0346ca67df5bf8a51a921e2",
+    "view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+    "visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+  },
+  "sourceHashes": {
+    "shaders/mesh.frag": "08238e6c89f3d70b3a5fbc52bbafb638718d55cbf62054a015063ec89b7913f3",
+    "shaders/temporal_resolve.frag": "9fdc45cced04d8071f886f1dfea7e0b0e885d89e6bc58863b895ddc522cfca48",
+    "src/render/MaterialSampling.hpp": "c3b2e6110c09e434dc6e1f7712a39c69c7dce30fa6aab657a2008f395d27b632",
+    "src/render/TemporalViewState.hpp": "a279fddd268caea890bf5e5b39befd0a344fc348cb3a61f8b5280fb180fcedab",
+    "src/scenes/CharacterMaterialSampling.inc": "c88d7c368a3cec7484ce419b4b9c6ab90b4c69e95ca6b09da33e3f26f69d085e",
+    "src/scenes/CharacterMotionPass.inc": "78799c6db561233e4b79647bbce7082d9dded61e4d2e4884c3115756b0ff7a8d",
+    "src/scenes/CharacterSceneRenderer.cpp": "cc7753c84468d438470a125183dadb58aba8f80f9cc3f073783976e1a77cdcc6",
+    "src/scenes/CharacterSceneRenderer.hpp": "db9b7e2bc68ea1947e3bae0913f8546df50b1c5644d3036ba9d9601027eaa422"
+  },
+  "nativeEnergy": {
+    "schemaVersion": 1,
+    "referenceSha256": "0080c285e52775c8665e7421eb4a52335141015df6506d45dee0aae3be0a4a00",
+    "maskSha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7",
+    "exposureEv": -4,
+    "componentDisplayMultiplier": 3,
+    "rows": [
+      {
+        "kind": "off",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.906859278678894
+        ],
+        "meanAbsoluteError": 0.002497713081538677,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.0880883932113647
+      },
+      {
+        "kind": "off",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.9188998937606812
+        ],
+        "meanAbsoluteError": 0.001489435089752078,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.0880883932113647
+      },
+      {
+        "kind": "off",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.006973385810852
+        ],
+        "meanAbsoluteError": 0.0010311652440577745,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.1025619506835938
+      },
+      {
+        "kind": "integral",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.9683741331100464
+        ],
+        "meanAbsoluteError": 0.0016418396262452006,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.0416382551193237
+      },
+      {
+        "kind": "integral",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.9778706431388855
+        ],
+        "meanAbsoluteError": 0.0010468587279319763,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.0416382551193237
+      },
+      {
+        "kind": "integral",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.0819964408874512
+        ],
+        "meanAbsoluteError": 0.0010382873006165028,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 0.9748848676681519
+      },
+      {
+        "kind": "temporal",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.963520348072052,
+          0.96297287940979,
+          0.9653376340866089,
+          0.9638360738754272,
+          0.9644421339035034,
+          0.9639706015586853,
+          0.9655255675315857,
+          0.9629964828491211
+        ],
+        "meanAbsoluteError": 0.0012870407663285732,
+        "temporalMeanDeviation": 0.00022719950356986374,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "kind": "temporal",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.9694622159004211,
+          0.9687586426734924,
+          0.9708291888237,
+          0.9690753221511841,
+          0.9703498482704163,
+          0.9700145721435547,
+          0.9716322422027588,
+          0.9693586826324463
+        ],
+        "meanAbsoluteError": 0.0007602514233440161,
+        "temporalMeanDeviation": 0.00014603568706661463,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "kind": "temporal",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.0545777082443237,
+          1.0592639446258545,
+          1.0414142608642578,
+          1.0456537008285522,
+          1.0573830604553223,
+          1.0430424213409424,
+          1.0472145080566406,
+          1.060802698135376
+        ],
+        "meanAbsoluteError": 0.0004917821497656405,
+        "temporalMeanDeviation": 0.00014526312588714063,
+        "peakRatio": 0.8792818188667297
+      },
+      {
+        "kind": "integral-geometry",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.972182035446167
+        ],
+        "meanAbsoluteError": 0.0012034437386319041,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "kind": "integral-geometry",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.9824946522712708
+        ],
+        "meanAbsoluteError": 0.000797863642219454,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "kind": "integral-geometry",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.0541032552719116
+        ],
+        "meanAbsoluteError": 0.0009118716116063297,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.0248568058013916
+      },
+      {
+        "kind": "temporal-geometry",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.9669357538223267,
+          0.9672638773918152,
+          0.9692783355712891,
+          0.9685744643211365,
+          0.9682382941246033,
+          0.9683051109313965,
+          0.9697460532188416,
+          0.9669432044029236
+        ],
+        "meanAbsoluteError": 0.001016863971017301,
+        "temporalMeanDeviation": 0.00020995257364120334,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "kind": "temporal-geometry",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.9716948866844177,
+          0.9718874096870422,
+          0.9739900231361389,
+          0.972710907459259,
+          0.9726588726043701,
+          0.9726369976997375,
+          0.9742103815078735,
+          0.9717162847518921
+        ],
+        "meanAbsoluteError": 0.0006338609382510185,
+        "temporalMeanDeviation": 0.00013659262913279235,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "kind": "temporal-geometry",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.060880422592163,
+          1.0629266500473022,
+          1.048500895500183,
+          1.0512977838516235,
+          1.05952787399292,
+          1.0526973009109497,
+          1.0548427104949951,
+          1.0656603574752808
+        ],
+        "meanAbsoluteError": 0.00043905165512114763,
+        "temporalMeanDeviation": 0.0001330061786575243,
+        "peakRatio": 0.9263639450073242
+      },
+      {
+        "kind": "integral-incident",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.9719913005828857
+        ],
+        "meanAbsoluteError": 0.0012009914498776197,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "kind": "integral-incident",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.9822970032691956
+        ],
+        "meanAbsoluteError": 0.0007952277665026486,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "kind": "integral-incident",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.0560851097106934
+        ],
+        "meanAbsoluteError": 0.0009105228818953037,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.0248568058013916
+      },
+      {
+        "kind": "temporal-incident",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.9667654037475586,
+          0.9668635129928589,
+          0.9690290689468384,
+          0.9682860374450684,
+          0.9679540395736694,
+          0.9679887294769287,
+          0.9696735739707947,
+          0.9668025970458984
+        ],
+        "meanAbsoluteError": 0.0010160455713048577,
+        "temporalMeanDeviation": 0.0002106573519995436,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "kind": "temporal-incident",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.9716980457305908,
+          0.9716398119926453,
+          0.9738621711730957,
+          0.9726336598396301,
+          0.9726581573486328,
+          0.9725313186645508,
+          0.9743676781654358,
+          0.9718016386032104
+        ],
+        "meanAbsoluteError": 0.0006328394520096481,
+        "temporalMeanDeviation": 0.00013683164434041828,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "kind": "temporal-incident",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.0626022815704346,
+          1.064432144165039,
+          1.0490822792053223,
+          1.0527597665786743,
+          1.06096351146698,
+          1.0543895959854126,
+          1.0565674304962158,
+          1.0665385723114014
+        ],
+        "meanAbsoluteError": 0.00043837117846123874,
+        "temporalMeanDeviation": 0.0001327356294495985,
+        "peakRatio": 0.9263639450073242
+      },
+      {
+        "kind": "integral-composed",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.9696442484855652
+        ],
+        "meanAbsoluteError": 0.0010077571496367455,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.0416382551193237
+      },
+      {
+        "kind": "integral-composed",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.9828587174415588
+        ],
+        "meanAbsoluteError": 0.0007103924290277064,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 1.0416382551193237
+      },
+      {
+        "kind": "integral-composed",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.0522305965423584
+        ],
+        "meanAbsoluteError": 0.0008992127259261906,
+        "temporalMeanDeviation": 0.0,
+        "peakRatio": 0.9996886849403381
+      },
+      {
+        "kind": "temporal-composed",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.9632449150085449,
+          0.9631572365760803,
+          0.965050995349884,
+          0.9646198749542236,
+          0.9647054076194763,
+          0.9640820622444153,
+          0.9647371172904968,
+          0.9631938934326172
+        ],
+        "meanAbsoluteError": 0.0009283238905481994,
+        "temporalMeanDeviation": 0.0002024148852797225,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-composed",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.9701668620109558,
+          0.9700369238853455,
+          0.9721375107765198,
+          0.9709846377372742,
+          0.9713725447654724,
+          0.9706777334213257,
+          0.9716587662696838,
+          0.9703398942947388
+        ],
+        "meanAbsoluteError": 0.0006002987502142787,
+        "temporalMeanDeviation": 0.00013480805500876158,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-composed",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.0649586915969849,
+          1.0661081075668335,
+          1.0505952835083008,
+          1.05455482006073,
+          1.0637012720108032,
+          1.0564019680023193,
+          1.0578693151474,
+          1.0696240663528442
+        ],
+        "meanAbsoluteError": 0.00044408408575691283,
+        "temporalMeanDeviation": 0.00013423222117125988,
+        "peakRatio": 0.9026437997817993
+      },
+      {
+        "kind": "temporal-stochastic",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.9935488104820251,
+          0.9950620532035828,
+          0.9953603744506836,
+          0.995988667011261,
+          0.9944209456443787,
+          0.9948453903198242,
+          0.9966731071472168,
+          0.9946753978729248
+        ],
+        "meanAbsoluteError": 0.0006289592129178345,
+        "temporalMeanDeviation": 0.0002751818101387471,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-stochastic",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.9903848767280579,
+          0.9918541312217712,
+          0.9920949935913086,
+          0.9926193952560425,
+          0.9915290474891663,
+          0.9918972253799438,
+          0.9941665530204773,
+          0.9920628666877747
+        ],
+        "meanAbsoluteError": 0.00039638535236008465,
+        "temporalMeanDeviation": 0.00016847070946823806,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-stochastic",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          0.9956929087638855,
+          0.9982408285140991,
+          0.9769662022590637,
+          0.9870811104774475,
+          0.9960182905197144,
+          0.9878763556480408,
+          0.9880281090736389,
+          1.0002890825271606
+        ],
+        "meanAbsoluteError": 0.0003154189034830779,
+        "temporalMeanDeviation": 0.00013280122948344797,
+        "peakRatio": 0.9748848676681519
+      },
+      {
+        "kind": "temporal-centred",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.9947258234024048,
+          0.9955404996871948,
+          0.9950440526008606,
+          0.9968512654304504,
+          0.9947637915611267,
+          0.9948851466178894,
+          0.9955331683158875,
+          0.995290219783783
+        ],
+        "meanAbsoluteError": 0.0005593787645921111,
+        "temporalMeanDeviation": 0.00027680990751832724,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-centred",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.990980327129364,
+          0.9914478659629822,
+          0.9913565516471863,
+          0.9926419258117676,
+          0.990958571434021,
+          0.990915060043335,
+          0.9924041628837585,
+          0.9919431805610657
+        ],
+        "meanAbsoluteError": 0.00035744457272812724,
+        "temporalMeanDeviation": 0.00016980869986582547,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-centred",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.0014077425003052,
+          0.9986519813537598,
+          0.9822812080383301,
+          0.9909268021583557,
+          0.9904415011405945,
+          0.9827656745910645,
+          0.9926139712333679,
+          1.0076003074645996
+        ],
+        "meanAbsoluteError": 0.00028915429720655084,
+        "temporalMeanDeviation": 0.00013198639499023557,
+        "peakRatio": 0.9504438042640686
+      },
+      {
+        "kind": "temporal-variant",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.9947258234024048,
+          0.9955404996871948,
+          0.9950440526008606,
+          0.9968512654304504,
+          0.9947637915611267,
+          0.9948851466178894,
+          0.9955331683158875,
+          0.995290219783783
+        ],
+        "meanAbsoluteError": 0.0005593787645921111,
+        "temporalMeanDeviation": 0.00027680990751832724,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-variant",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.990980327129364,
+          0.9914478659629822,
+          0.9913565516471863,
+          0.9926419258117676,
+          0.990958571434021,
+          0.990915060043335,
+          0.9924041628837585,
+          0.9919431805610657
+        ],
+        "meanAbsoluteError": 0.00035744457272812724,
+        "temporalMeanDeviation": 0.00016980869986582547,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-variant",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.0014077425003052,
+          0.9986519813537598,
+          0.9822812080383301,
+          0.9909268021583557,
+          0.9904415011405945,
+          0.9827656745910645,
+          0.9926139712333679,
+          1.0076003074645996
+        ],
+        "meanAbsoluteError": 0.00028915429720655084,
+        "temporalMeanDeviation": 0.00013198639499023557,
+        "peakRatio": 0.9504438042640686
+      },
+      {
+        "kind": "temporal-isolated",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.9947258234024048,
+          0.9955404996871948,
+          0.9950440526008606,
+          0.9968512654304504,
+          0.9947637915611267,
+          0.9948851466178894,
+          0.9955331683158875,
+          0.995290219783783
+        ],
+        "meanAbsoluteError": 0.0005593787645921111,
+        "temporalMeanDeviation": 0.00027680990751832724,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-isolated",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.990980327129364,
+          0.9914478659629822,
+          0.9913565516471863,
+          0.9926419258117676,
+          0.990958571434021,
+          0.990915060043335,
+          0.9924041628837585,
+          0.9919431805610657
+        ],
+        "meanAbsoluteError": 0.00035744457272812724,
+        "temporalMeanDeviation": 0.00016980869986582547,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-isolated",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.0014077425003052,
+          0.9986519813537598,
+          0.9822812080383301,
+          0.9909268021583557,
+          0.9904415011405945,
+          0.9827656745910645,
+          0.9926139712333679,
+          1.0076003074645996
+        ],
+        "meanAbsoluteError": 0.00028915429720655084,
+        "temporalMeanDeviation": 0.00013198639499023557,
+        "peakRatio": 0.9504438042640686
+      }
+    ]
+  },
+  "nativeCrossConfigurationMaximumByteError": 0,
+  "sourceCompatibility": {
+    "beautySha256": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e",
+    "kkSha256": "c328082011e8cd05c62a4dd6d936f817e6c27fd587cb167a922b8de8ae9c5de5",
+    "maximumByteError": 0
+  },
+  "nativeBeauty": {
+    "sourceMaterialEvent": 950,
+    "sourceTemporalEvent": 1579,
+    "sourceTemporalSha256": "ac841a76cdb6a81a1005d07e81354639e46ea043351694f8b2e7949a4ea9aa85",
+    "frames": 32,
+    "regions": [
+      {
+        "name": "crown",
+        "pixels": 7344,
+        "records": [
+          {
+            "frame": 0,
+            "errors": {
+              "material": {
+                "maximumByteError": 125,
+                "p95ByteError": 9.0,
+                "meanAbsoluteByteError": 1.4137164124909223
+              },
+              "temporal": {
+                "maximumByteError": 128,
+                "p95ByteError": 21.0,
+                "meanAbsoluteByteError": 4.82248547567175
+              }
+            }
+          },
+          {
+            "frame": 7,
+            "errors": {
+              "material": {
+                "maximumByteError": 124,
+                "p95ByteError": 12.0,
+                "meanAbsoluteByteError": 2.1313543936092954
+              },
+              "temporal": {
+                "maximumByteError": 123,
+                "p95ByteError": 19.0,
+                "meanAbsoluteByteError": 4.187000726216413
+              }
+            }
+          },
+          {
+            "frame": 31,
+            "errors": {
+              "material": {
+                "maximumByteError": 169,
+                "p95ByteError": 14.0,
+                "meanAbsoluteByteError": 2.641839143064633
+              },
+              "temporal": {
+                "maximumByteError": 122,
+                "p95ByteError": 18.0,
+                "meanAbsoluteByteError": 4.095452069716775
+              }
+            }
+          }
+        ],
+        "lastEightMeanStandardDeviation": 0.34804559874239754,
+        "lastEightMaximumRange": 37
+      },
+      {
+        "name": "head",
+        "pixels": 17017,
+        "records": [
+          {
+            "frame": 0,
+            "errors": {
+              "material": {
+                "maximumByteError": 125,
+                "p95ByteError": 23.0,
+                "meanAbsoluteByteError": 2.3790719084836733
+              },
+              "temporal": {
+                "maximumByteError": 162,
+                "p95ByteError": 28.0,
+                "meanAbsoluteByteError": 6.395917807682514
+              }
+            }
+          },
+          {
+            "frame": 7,
+            "errors": {
+              "material": {
+                "maximumByteError": 124,
+                "p95ByteError": 24.0,
+                "meanAbsoluteByteError": 3.6528177704648295
+              },
+              "temporal": {
+                "maximumByteError": 132,
+                "p95ByteError": 25.0,
+                "meanAbsoluteByteError": 5.519852696323285
+              }
+            }
+          },
+          {
+            "frame": 31,
+            "errors": {
+              "material": {
+                "maximumByteError": 169,
+                "p95ByteError": 26.19999999999891,
+                "meanAbsoluteByteError": 4.427689957101721
+              },
+              "temporal": {
+                "maximumByteError": 132,
+                "p95ByteError": 25.0,
+                "meanAbsoluteByteError": 5.474956416132887
+              }
+            }
+          }
+        ],
+        "lastEightMeanStandardDeviation": 0.4579189431729928,
+        "lastEightMaximumRange": 92
+      },
+      {
+        "name": "full",
+        "pixels": 17017,
+        "records": [
+          {
+            "frame": 0,
+            "errors": {
+              "material": {
+                "maximumByteError": 125,
+                "p95ByteError": 23.0,
+                "meanAbsoluteByteError": 2.3790719084836733
+              },
+              "temporal": {
+                "maximumByteError": 162,
+                "p95ByteError": 28.0,
+                "meanAbsoluteByteError": 6.395917807682514
+              }
+            }
+          },
+          {
+            "frame": 7,
+            "errors": {
+              "material": {
+                "maximumByteError": 124,
+                "p95ByteError": 24.0,
+                "meanAbsoluteByteError": 3.6528177704648295
+              },
+              "temporal": {
+                "maximumByteError": 132,
+                "p95ByteError": 25.0,
+                "meanAbsoluteByteError": 5.519852696323285
+              }
+            }
+          },
+          {
+            "frame": 31,
+            "errors": {
+              "material": {
+                "maximumByteError": 169,
+                "p95ByteError": 26.19999999999891,
+                "meanAbsoluteByteError": 4.427689957101721
+              },
+              "temporal": {
+                "maximumByteError": 132,
+                "p95ByteError": 25.0,
+                "meanAbsoluteByteError": 5.474956416132887
+              }
+            }
+          }
+        ],
+        "lastEightMeanStandardDeviation": 0.4579189431729928,
+        "lastEightMaximumRange": 92
+      }
+    ],
+    "controls": [
+      {
+        "pixel": [
+          1308,
+          165
+        ],
+        "sourceMaterial": [
+          116,
+          40,
+          43
+        ],
+        "sourceTemporal": [
+          126,
+          45,
+          48
+        ],
+        "first": [
+          116,
+          40,
+          43
+        ],
+        "last": [
+          151,
+          65,
+          64
+        ],
+        "temporalRange": [
+          36,
+          26,
+          22
+        ]
+      },
+      {
+        "pixel": [
+          1309,
+          166
+        ],
+        "sourceMaterial": [
+          118,
+          40,
+          43
+        ],
+        "sourceTemporal": [
+          126,
+          46,
+          50
+        ],
+        "first": [
+          118,
+          40,
+          44
+        ],
+        "last": [
+          145,
+          60,
+          61
+        ],
+        "temporalRange": [
+          27,
+          20,
+          18
+        ]
+      },
+      {
+        "pixel": [
+          1313,
+          170
+        ],
+        "sourceMaterial": [
+          121,
+          44,
+          47
+        ],
+        "sourceTemporal": [
+          138,
+          56,
+          57
+        ],
+        "first": [
+          122,
+          44,
+          48
+        ],
+        "last": [
+          123,
+          45,
+          48
+        ],
+        "temporalRange": [
+          2,
+          1,
+          2
+        ]
+      },
+      {
+        "pixel": [
+          1327,
+          181
+        ],
+        "sourceMaterial": [
+          129,
+          51,
+          52
+        ],
+        "sourceTemporal": [
+          119,
+          45,
+          47
+        ],
+        "first": [
+          129,
+          51,
+          52
+        ],
+        "last": [
+          133,
+          54,
+          56
+        ],
+        "temporalRange": [
+          4,
+          3,
+          4
+        ]
+      },
+      {
+        "pixel": [
+          1313,
+          169
+        ],
+        "sourceMaterial": [
+          126,
+          45,
+          49
+        ],
+        "sourceTemporal": [
+          187,
+          92,
+          87
+        ],
+        "first": [
+          126,
+          45,
+          49
+        ],
+        "last": [
+          125,
+          45,
+          48
+        ],
+        "temporalRange": [
+          1,
+          0,
+          1
+        ]
+      },
+      {
+        "pixel": [
+          1314,
+          170
+        ],
+        "sourceMaterial": [
+          124,
+          46,
+          49
+        ],
+        "sourceTemporal": [
+          186,
+          91,
+          87
+        ],
+        "first": [
+          125,
+          46,
+          50
+        ],
+        "last": [
+          127,
+          47,
+          50
+        ],
+        "temporalRange": [
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "pixel": [
+          1314,
+          171
+        ],
+        "sourceMaterial": [
+          123,
+          46,
+          49
+        ],
+        "sourceTemporal": [
+          128,
+          51,
+          53
+        ],
+        "first": [
+          124,
+          46,
+          50
+        ],
+        "last": [
+          121,
+          45,
+          48
+        ],
+        "temporalRange": [
+          3,
+          1,
+          2
+        ]
+      },
+      {
+        "pixel": [
+          1315,
+          171
+        ],
+        "sourceMaterial": [
+          123,
+          45,
+          49
+        ],
+        "sourceTemporal": [
+          163,
+          77,
+          74
+        ],
+        "first": [
+          123,
+          45,
+          49
+        ],
+        "last": [
+          127,
+          47,
+          51
+        ],
+        "temporalRange": [
+          5,
+          3,
+          2
+        ]
+      }
+    ]
+  },
+  "diagnosticTiming": {
+    "off": {
+      "status": "passed",
+      "kind": "off",
+      "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+      "samples": 96,
+      "mainSceneAverageMs": 12.807573,
+      "totalAverageMs": 13.338993,
+      "totalP50Ms": 10.334976
+    },
+    "temporal": {
+      "status": "passed",
+      "kind": "temporal",
+      "playerSha256": "7939b7c85659795509e0a1de65e36381eef812ca275d32334739fd09ed87fa1c",
+      "samples": 96,
+      "mainSceneAverageMs": 12.349216,
+      "totalAverageMs": 13.204168,
+      "totalP50Ms": 11.182224
+    }
+  },
+  "diagnosticTimingScope": "96 frames at 1280x720; diagnostic output was inside an asset mount. This is not the NR12 1080p exclusive-device acceptance.",
+  "remaining": [
+    "C17 full-mask source equivalence, lobe peak and width, front/side/back poses",
+    "C18 full native rim appearance and moving cameras",
+    "Alpha coverage and clothing motion",
+    "NR7-AA5/AA6 production promotion and budget",
+    "NR0-NR12 joint acceptance"
+  ]
+}

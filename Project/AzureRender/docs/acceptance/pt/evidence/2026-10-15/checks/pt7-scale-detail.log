@@ -1,0 +1,32 @@
+Start testing: Oct 15 15:17 ?赤角∩?¯??～?米o㊣那℅?那㊣??
+----------------------------------------------------------
+206/266 Testing: AzureEditor.ContentDirectoryScale
+206/266 Test: AzureEditor.ContentDirectoryScale
+Command: "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureContentDirectoryScaleTests.exe"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+"AzureEditor.ContentDirectoryScale" start time: Oct 15 15:17 ?赤角∩?¯??～?米o㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+{"elapsedMs":6769.6239,"phase":"fixture-created"}
+[1792048749831][info][editor][code=0] Opened scene: startup
+{"elapsedMs":119913.8113,"phase":"project-opened"}
+{"elapsedMs":123622.1966,"phase":"first-snapshot"}
+{"elapsedMs":123653.7022,"phase":"cached-samples"}
+{"elapsedMs":131203.3911,"phase":"external-refresh"}
+{"directoryResetMs":12.8867,"scanCancellationMs":12.8212,"snapshotReleaseMs":0.0655}
+{"elapsedMs":131561.2542,"phase":"reset-cycle-start"}
+{"directoryResetCycle":0,"unretainedSnapshotResetMs":0.2083}
+{"elapsedMs":134728.6488,"phase":"reset-cycle-start"}
+{"directoryResetCycle":1,"unretainedSnapshotResetMs":0.1779}
+{"elapsedMs":138217.8597,"phase":"reset-cycle-start"}
+{"directoryResetCycle":2,"unretainedSnapshotResetMs":0.0848}
+{"assets":10000,"cachedP95Ms":0.0171,"firstSnapshotMs":3708.3351,"peakWorkingSetBytes":263200768,"samples":1800,"statistics":{"catalogBuilds":5,"directoryEnumerations":5,"refreshing":false,"snapshots":0},"warmup":300}
+<end of output>
+Test time = 152.00 sec
+----------------------------------------------------------
+Test Passed.
+"AzureEditor.ContentDirectoryScale" end time: Oct 15 15:19 ?赤角∩?¯??～?米o㊣那℅?那㊣??
+"AzureEditor.ContentDirectoryScale" time elapsed: 00:02:31
+----------------------------------------------------------
+
+End testing: Oct 15 15:19 ?赤角∩?¯??～?米o㊣那℅?那㊣??

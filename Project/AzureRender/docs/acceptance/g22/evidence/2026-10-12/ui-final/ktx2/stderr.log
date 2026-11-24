@@ -1,0 +1,15 @@
+[1791759185715][info][editor][code=0] Opened scene: exploration
+[1791759185984][info][gpu][code=0] GPU capability report: D:\Assigment\2609\FYP\Project\AzureRender\build\g22-texture-containers-2026-10-12\ui-final\ktx2\capture\gpu_capabilities.json
+[1791759186250][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791759186268][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791759186282][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791759186288][info][editor][code=0] Opened scene: exploration
+[1791759186289][info][editor][code=0] Selected node: hero:body
+[1791759186312][info][editor][code=0] Asset reload requested; changed files: 0
+[1791759186319][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791759186332][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791759186342][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791759186345][info][editor][code=0] Renderer resources reloaded
+[1791759186506][info][capture][code=0] Capture progress: 1 / 100
+[1791759197540][info][capture][code=0] Capture progress: 60 / 100
+[1791759205393][info][capture][code=0] Capture progress: 100 / 100

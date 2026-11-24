@@ -12,6 +12,7 @@ rem installations that have the English language pack.
 rem
 rem Usage: tools\msvc_env.bat <command> [args...]
 set VSLANG=1033
+set "_AZR_REQUESTED_VCPKG=%VCPKG_ROOT%"
 if defined VSINSTALLDIR (
     set "_AZR_VS_INSTALL=%VSINSTALLDIR%"
 ) else (
@@ -31,11 +32,15 @@ if not exist "!_AZR_VSDEVCMD!" (
     echo Visual Studio developer environment script was not found: "!_AZR_VSDEVCMD!" 1>&2
     endlocal & exit /b 1
 )
-call "!_AZR_VSDEVCMD!" -arch=amd64 -host_arch=amd64 >nul
+for /f "delims=" %%i in ('dir /b /ad /o-n "!_AZR_VS_INSTALL!\VC\Tools\MSVC"') do (
+    if not defined _AZR_TOOLSET set "_AZR_TOOLSET=%%i"
+)
+call "!_AZR_VSDEVCMD!" -arch=amd64 -host_arch=amd64 -vcvars_ver=!_AZR_TOOLSET! >nul
 if errorlevel 1 (
     echo Failed to initialize the Visual Studio developer environment. 1>&2
     endlocal & exit /b 1
 )
+if defined _AZR_REQUESTED_VCPKG set "VCPKG_ROOT=!_AZR_REQUESTED_VCPKG!"
 
 if not defined VULKAN_SDK (
     echo Set VULKAN_SDK to the installed Vulkan SDK directory. 1>&2

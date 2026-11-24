@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "config": "debug",
+      "group": "cpu",
+      "exitCode": 0,
+      "seconds": 238.21800000000076,
+      "log": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-final-cpu-debug.log",
+      "passed": true
+    },
+    {
+      "config": "release",
+      "group": "cpu",
+      "exitCode": 0,
+      "seconds": 195.03199999999924,
+      "log": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-final-cpu-release.log",
+      "passed": true
+    }
+  ]
+}

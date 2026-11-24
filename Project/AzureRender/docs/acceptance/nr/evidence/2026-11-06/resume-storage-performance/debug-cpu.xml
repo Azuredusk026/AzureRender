@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Win32-ninja"
+	tests="3"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="AZUREDUSK"
+	time="8"
+	timestamp="2026-11-06T21:54:45"
+	>
+	<testcase name="AzureRender.StableDepthOrder" classname="AzureRender.StableDepthOrder" time="3.7217" status="run">
+		<properties/>
+		<system-out>Stable depth oracle passed 60 distributions and invalid input
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.AnimationCurve" classname="AzureRender.AnimationCurve" time="1.96072" status="run">
+		<properties/>
+		<system-out>Curve interpolation, time scaling, quaternion and invalid inputs passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ResourceLocator" classname="AzureRender.ResourceLocator" time="3.14925" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+</testsuite>

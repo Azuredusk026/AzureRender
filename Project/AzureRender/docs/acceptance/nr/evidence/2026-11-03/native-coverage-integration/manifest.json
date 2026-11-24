@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "status": "scoped-native-coverage-integration-verified",
+  "visualAcceptance": "failed-user-review",
+  "sourceCommit": "742ec570c52f6028d000ab466c134d86190c88a7",
+  "programSha256": "d4b3c975b2fba3d6d89e5016097b57b5aebf1988e64a5241dcca755912a2d612",
+  "compiledSourceReceipt": {
+    "path": "docs/acceptance/nr/evidence/2026-11-02/material-coverage/manifest.json",
+    "sha256": "7266fbe454112fa95aac3ce57e36cecf0cfea821ca814969ea791b1fd59576c1"
+  },
+  "bundles": [
+    {
+      "path": "captures-and-analysis.json.gz",
+      "sha256": "83366fefd8bccb4e2eb4b80b63dec3a910da0c98ed1697185e47e0ad780b60af",
+      "sourceFiles": 72
+    },
+    {
+      "path": "project-documents.json.gz",
+      "sha256": "64202bbfa55d13d1a699ce07bef546c99bab5ada4b6f8ba8298e90babd6c2cbd",
+      "sourceFiles": 1220
+    }
+  ],
+  "directFiles": [
+    {
+      "path": "body-comparison-aa0.png",
+      "sha256": "fb122277ebd49f833a41749bb22a00af03bb9e3c41fc877a04e29310c947e37b",
+      "bytes": 823774
+    },
+    {
+      "path": "body-comparison-aa3.png",
+      "sha256": "876107f45b5a3a595a7c721b27f68a4f9f1f9fd29e1ac732965a94ae6e9c1354",
+      "bytes": 824051
+    },
+    {
+      "path": "native-final-captures/portrait-near-world-linear-aa3/frames/frame_000063.png",
+      "sha256": "342b21675ab07f759055720b86b18714895bc3676744166e485f2709c1e41895",
+      "bytes": 3212972
+    }
+  ],
+  "metrics": {
+    "status": "passed-scoped-integration",
+    "visualAcceptance": "failed-user-review",
+    "frames": 400,
+    "matchedBodyRegions": 36,
+    "matchedPortraitRegions": 20,
+    "originalBodyFailures": {
+      "0": [
+        1,
+        2,
+        5
+      ],
+      "3": [
+        1,
+        2,
+        5
+      ]
+    },
+    "defaultCompatibilityImages": 13,
+    "nativeStrongControls": 6,
+    "nativeFullRegionPassed": false
+  }
+}

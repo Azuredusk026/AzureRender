@@ -1,0 +1,34 @@
+{
+  "base": "888b804",
+  "binarySha256": "62c1ea40897dce1ea68f9700894118e1dfe465a153bf25ace0e3724596cf3c0b",
+  "sources": {
+    "experiments\\thesis\\src\\benchmark.cpp": "bd426ab73a152482a31a09d1b8d4c2bee884cfc176832a58a6569b20acf6eb96",
+    "experiments\\thesis\\src\\Benchmark.hpp": "f4b60e6b9bfa24b2d24f1e18891410cb26fd92a4d161754e515a9e555635d496",
+    "experiments\\thesis\\src\\Capture.cpp": "d5c46aa715c101b202e5d1cd6e9bc503e0ef6f812edf23bd3f1fba89b1653248",
+    "experiments\\thesis\\src\\Capture.hpp": "dc69f3bdcd777e9774d0efec21ac75029cb3e7c22cee605b2db7c0e67a8b55c1",
+    "experiments\\thesis\\src\\Dynamic.cpp": "8afd79dcc80a580e4b266c9adeaa6114709cfb807481fed03c93535b2468d4f9",
+    "experiments\\thesis\\src\\Subpasses.cpp": "0f636b0167ac1979abd5c1910ed282c4b36dc985fa03d3e0a2ebf8126d24d43e",
+    "experiments\\thesis\\src\\Workload.hpp": "42c7a49cfd0fb08ee1bfd31736b263f9d6eed1288004f94a21746d7e53a80562"
+  },
+  "renderdocHeaderSha256": "b7005e7dc34c3635046868bbd76d81b9b055aede0f56daa0bd39fedee0639ffb",
+  "cases": 24,
+  "captures": 3,
+  "formal": false,
+  "files": {
+    "build.log": "1aa758a29d728ce758e40006d0a0c68bbb4067d874f9bd14570cc1a78e123b74",
+    "captured-commands.json": "d4f25b6e8590fd8f80b6261e854e77773f7eab34da5cc314301c41d9d1e9fd50",
+    "configure.log": "5c219e5bbea81ed639b073eaa37cbfdce4ad331ba3c09c860b89c85337e2c2b7",
+    "ctest.log": "e3b84332cc0d683a39353442f2dd0c505fe0829e393e5f36b8cfb39f61375b46",
+    "pilot-summary.json": "10b672f1f6167270c0fccf35e7c4311ccd3db21ef4b0ede44bf9e2228191fb2c",
+    "pilot.py": "b74dc2026842f06cfae2389ffc08494df238fdc480a0e12e05614c0689de1ff4",
+    "capture-drlr\\capture.xml": "66213f1a53c58bc746d234813b80d0e3b15da90f2712b43a6fe645db59c20d6d",
+    "capture-drlr\\frame_capture.rdc": "5bb279d265f7253c0d7a22ff7c54dec38e4b14c06f5259d1c39ee0b09a907da3",
+    "capture-drlr\\run.json": "1a1baa04181a8a6ba0092243fd7cb26b784a7633d3da56aef0aa3faa701902f8",
+    "capture-subpasses\\capture.xml": "3646709b260483ff6c1120bd2562de396fea22b0a4028a4ac316ca1d6ee56dfe",
+    "capture-subpasses\\frame_capture.rdc": "8e047d9e2cba2dc2d424085ddaa53cca96143b478fd19b77e74f24e381c3bbf6",
+    "capture-subpasses\\run.json": "929bdcb931fd0e0a222a6426e0d5dc7b1b15f9dc5131ac3c62c8c45efc2bcf82",
+    "capture-traditional\\capture.xml": "332a684c8bb1a3d47629e413cd794013b0f9d477f0540089dfcc4d250e6ded2a",
+    "capture-traditional\\frame_capture.rdc": "e1b4afab26ae7741f70d290076c5021f73d28efdbac1043e2ccab3c7d4737ed3",
+    "capture-traditional\\run.json": "656b54c6ecd09c91e19370b425c0e5ffad4343d9a216ce2be242af53989934ce"
+  }
+}

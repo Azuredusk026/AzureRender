@@ -1,0 +1,108 @@
+
+ │  ⚠  Warning from the Material for MkDocs team
+ │
+ │  MkDocs 2.0, the underlying framework of Material for MkDocs,
+ │  will introduce backward-incompatible changes, including:
+ │
+ │  × All plugins will stop working – the plugin system has been removed
+ │  × All theme overrides will break – the theming system has been rewritten
+ │  × No migration path exists – existing projects cannot be upgraded
+ │  × Closed contribution model – community members can't report bugs
+ │  × Currently unlicensed – unsuitable for production use
+ │
+ │  Our full analysis:
+ │
+ │  https://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/
+
+INFO    -  Cleaning site directory
+INFO    -  Building documentation to directory: D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\closure-site
+INFO    -  The following pages exist in the docs directory, but are not included in the "nav" configuration:
+  - acceptance\character\2026-10-09-refinement.md
+  - acceptance\character\2026-10-09.md
+  - acceptance\g11\2026-10-07.md
+  - acceptance\g17\2026-10-12.md
+  - acceptance\g18\2026-10-12.md
+  - acceptance\g19\2026-10-12.md
+  - acceptance\g20\2026-10-12.md
+  - acceptance\g21\2026-10-12.md
+  - acceptance\g22\2026-10-12.md
+  - acceptance\g23\2026-10-12.md
+  - acceptance\p3\evidence\2026-10-07\before-lua-proxy-fix\performance\editor\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-lua-proxy-fix\performance\standard\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-lua-proxy-fix\performance\stress\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-replay-generator-fix\performance\editor\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-replay-generator-fix\performance\standard\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-replay-generator-fix\performance\stress\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-telemetry-storage-fix\performance\editor\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-telemetry-storage-fix\performance\standard\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-telemetry-storage-fix\performance\stress\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-telemetry-storage-fix\performance-first-final-failed\performance\editor\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-telemetry-storage-fix\performance-first-final-failed\performance\standard\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\before-telemetry-storage-fix\performance-first-final-failed\performance\stress\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\performance\editor\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\performance\standard\GAME-GUIDE.md
+  - acceptance\p3\evidence\2026-10-07\performance\stress\GAME-GUIDE.md
+  - acceptance\p5\closure\automatic-resume.md
+  - acceptance\p5\closure\frame-pacing.md
+  - acceptance\p5\closure\memory-investigation.md
+  - acceptance\p5\closure\pipeline-timing.md
+  - acceptance\p5\closure\platformer-long-run.md
+  - acceptance\p5\closure\renderer-reuse.md
+  - acceptance\p5\closure\run-environment-monitor.md
+  - acceptance\p5\closure\sequence-input.md
+  - acceptance\p5\closure\system-memory-trace.md
+  - acceptance\p5\closure\system-trace-results.md
+  - acceptance\p5\closure\investigation-evidence\formal-source-verified\editor\GAME-GUIDE.md
+  - acceptance\p5\closure\investigation-evidence\formal-source-verified\exploration\GAME-GUIDE.md
+  - acceptance\p5\closure\investigation-evidence\formal-source-verified\platformer\GAME-GUIDE.md
+  - acceptance\p5\closure\investigation-evidence\formal-source-verified\standard\GAME-GUIDE.md
+  - acceptance\p5\closure\investigation-evidence\formal-source-verified\stress\GAME-GUIDE.md
+  - acceptance\p5\evidence\p5-capture-layer-control\editor\GAME-GUIDE.md
+  - acceptance\p5\evidence\p5-capture-layer-control\exploration\GAME-GUIDE.md
+  - acceptance\p5\evidence\p5-capture-layer-control\platformer\GAME-GUIDE.md
+  - acceptance\p5\evidence\p5-workflows-retry2\seed\README.md
+  - acceptance\p6\2026-10-12.md
+  - acceptance\p7\2026-10-12.md
+  - acceptance\r7\2026-10-06.md
+  - acceptance\r8\2026-10-07.md
+  - acceptance\r9\2026-10-07.md
+  - acceptance\u15\2026-10-12.md
+  - acceptance\u16\2026-10-12.md
+  - acceptance\u16\deferred-close.md
+  - acceptance\u16\directory-reclamation.md
+  - acceptance\u16\native-input.md
+  - acceptance\u16\scene-geometry.md
+  - acceptance\u17\2026-10-12.md
+  - acceptance\u8\2026-10-10.md
+  - audits\2026-10-03-blackhole-performance.md
+  - plans\2026-10-03-r3-completion.md
+  - plans\2026-10-03-r4-execution.md
+  - plans\2026-10-04-playable-execution.md
+  - plans\2026-10-09-character-presentation-refinement.md
+  - plans\2026-10-09-character-rendering-repair.md
+  - plans\2026-10-11-automatic-through-p8.md
+  - plans\2026-10-11-frame-pacing.md
+  - plans\2026-10-12-asset-export-implementation.md
+  - plans\2026-10-12-asset-transfer-experience.md
+  - plans\2026-10-12-compressed-audio.md
+  - plans\2026-10-12-first-batch-delivery.md
+  - plans\2026-10-12-format-closure.md
+  - plans\2026-10-12-p5-deferred-to-p8.md
+  - plans\2026-10-12-texture-containers.md
+  - plans\g1-implementation.md
+  - plans\g2-implementation.md
+  - plans\g3-implementation.md
+  - plans\g4-implementation.md
+  - research\2026-10-09-character-presentation-refinement.md
+  - research\2026-10-09-character-rendering-diagnosis.md
+  - runtime\asset-exchange.md
+  - runtime\asset-formats.md
+  - runtime\audio-format-import.md
+  - runtime\compressed-audio.md
+  - runtime\frame-pacing.md
+  - runtime\image-format-import.md
+  - runtime\model-format-import.md
+  - runtime\render-residency.md
+  - runtime\texture-containers.md
+INFO    -  Doc file 'research/2026-10-09-character-presentation-refinement.md' contains a link '2026-10-09-character-rendering-diagnosis.md#本地实现与联网参考', but the doc 'research/2026-10-09-character-rendering-diagnosis.md' does not contain an anchor '#本地实现与联网参考'.
+INFO    -  Documentation built in 19.06 seconds

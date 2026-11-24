@@ -1,0 +1,371 @@
+{
+  "status": "failed",
+  "actualSeconds": 1800.359000000004,
+  "realTime": true,
+  "exitCode": 0,
+  "frames": 739831,
+  "switches": 246,
+  "restarts": 247,
+  "commits": 493,
+  "validationErrors": 0,
+  "released": true,
+  "scriptErrors": [],
+  "presentationErrors": [],
+  "loadErrors": [],
+  "windowChecks": {
+    "minimized": true,
+    "restored": true,
+    "resized": true,
+    "finalExtent": [
+      1920,
+      1080
+    ]
+  },
+  "windowEvents": [
+    {
+      "seconds": 3.2190000000045984,
+      "event": "minimize",
+      "passed": true
+    },
+    {
+      "seconds": 5.234000000004016,
+      "event": "restore",
+      "passed": true
+    },
+    {
+      "seconds": 7.375,
+      "event": "resize",
+      "extent": [
+        960,
+        540
+      ],
+      "passed": true
+    },
+    {
+      "seconds": 9.359000000004016,
+      "event": "resize",
+      "extent": [
+        1920,
+        1080
+      ],
+      "passed": true
+    }
+  ],
+  "gpu": {
+    "mean": 2.308609478948144,
+    "p95": 2.852832,
+    "p99": 2.99152
+  },
+  "cpu": {
+    "mean": 1.8109536621087627,
+    "p95": 2.3897500000148684,
+    "p99": 3.0696799999556292
+  },
+  "physics": {
+    "mean": 0.31452089552238804,
+    "p95": 0.442625,
+    "p99": 1.4870050000000001
+  },
+  "gpuWindows": [
+    {
+      "endSeconds": 60.312000000005355,
+      "frames": 25644,
+      "mean": 2.100815226329746,
+      "p95": 2.6094304,
+      "p99": 2.77355424
+    },
+    {
+      "endSeconds": 120.39100000000326,
+      "frames": 25811,
+      "mean": 2.2456846262446244,
+      "p95": 2.715968,
+      "p99": 2.8265056000000017
+    },
+    {
+      "endSeconds": 180.04700000000594,
+      "frames": 24971,
+      "mean": 2.3234500923471226,
+      "p95": 2.798976,
+      "p99": 2.928896
+    },
+    {
+      "endSeconds": 240.04700000000594,
+      "frames": 25221,
+      "mean": 2.3208283700091195,
+      "p95": 2.80784,
+      "p99": 2.9566783999999995
+    },
+    {
+      "endSeconds": 300.25,
+      "frames": 24870,
+      "mean": 2.338716268596703,
+      "p95": 2.8379056,
+      "p99": 2.97916352
+    },
+    {
+      "endSeconds": 360.42200000000594,
+      "frames": 24726,
+      "mean": 2.360389033082585,
+      "p95": 2.866696,
+      "p99": 2.99416
+    },
+    {
+      "endSeconds": 420.32800000000134,
+      "frames": 24789,
+      "mean": 2.34041188333535,
+      "p95": 2.84928,
+      "p99": 2.99063936
+    },
+    {
+      "endSeconds": 480.18700000000536,
+      "frames": 24676,
+      "mean": 2.322435095477387,
+      "p95": 2.839552,
+      "p99": 2.986832
+    },
+    {
+      "endSeconds": 540.0780000000013,
+      "frames": 24500,
+      "mean": 2.3297448019591838,
+      "p95": 2.859808,
+      "p99": 2.9897945599999995
+    },
+    {
+      "endSeconds": 600.4220000000059,
+      "frames": 24482,
+      "mean": 2.340591745118863,
+      "p95": 2.8827504,
+      "p99": 3.0203059199999993
+    },
+    {
+      "endSeconds": 660.0310000000027,
+      "frames": 24399,
+      "mean": 2.3533650605352676,
+      "p95": 2.8756991999999997,
+      "p99": 3.0230764800000003
+    },
+    {
+      "endSeconds": 720.4370000000054,
+      "frames": 24862,
+      "mean": 2.3090400617810314,
+      "p95": 2.8519664,
+      "p99": 2.98570848
+    },
+    {
+      "endSeconds": 780.5310000000027,
+      "frames": 24706,
+      "mean": 2.306568898243342,
+      "p95": 2.855472,
+      "p99": 2.9914096
+    },
+    {
+      "endSeconds": 840.25,
+      "frames": 24515,
+      "mean": 2.3337136923516213,
+      "p95": 2.8612767999999997,
+      "p99": 2.9792275200000002
+    },
+    {
+      "endSeconds": 900.0160000000033,
+      "frames": 24330,
+      "mean": 2.2725627238799837,
+      "p95": 2.8385632,
+      "p99": 2.9664518399999995
+    },
+    {
+      "endSeconds": 960.3440000000046,
+      "frames": 24583,
+      "mean": 2.3283373687507627,
+      "p95": 2.8725376,
+      "p99": 3.0150176000000006
+    },
+    {
+      "endSeconds": 1020.4220000000059,
+      "frames": 24405,
+      "mean": 2.3343983400122927,
+      "p95": 2.8846976,
+      "p99": 3.0187353599999995
+    },
+    {
+      "endSeconds": 1080.109000000004,
+      "frames": 24371,
+      "mean": 2.329100878256945,
+      "p95": 2.866016,
+      "p99": 2.9914335999999992
+    },
+    {
+      "endSeconds": 1140.4530000000013,
+      "frames": 24839,
+      "mean": 2.3118655275977296,
+      "p95": 2.8677536,
+      "p99": 2.98584704
+    },
+    {
+      "endSeconds": 1200.3120000000054,
+      "frames": 24268,
+      "mean": 2.274089136640844,
+      "p95": 2.8567456,
+      "p99": 2.979060159999999
+    },
+    {
+      "endSeconds": 1260.2660000000033,
+      "frames": 24390,
+      "mean": 2.3500910550225504,
+      "p95": 2.8707936,
+      "p99": 3.017696
+    },
+    {
+      "endSeconds": 1320.0780000000013,
+      "frames": 24390,
+      "mean": 2.3417058348503486,
+      "p95": 2.8691696,
+      "p99": 3.02085312
+    },
+    {
+      "endSeconds": 1380.3280000000013,
+      "frames": 24453,
+      "mean": 2.3089210210608107,
+      "p95": 2.87984,
+      "p99": 3.048030719999999
+    },
+    {
+      "endSeconds": 1440.5,
+      "frames": 24592,
+      "mean": 2.2949710318802863,
+      "p95": 2.8600111999999998,
+      "p99": 3.0044944
+    },
+    {
+      "endSeconds": 1500.047000000006,
+      "frames": 24561,
+      "mean": 2.300346791091568,
+      "p95": 2.848928,
+      "p99": 2.9944256000000005
+    },
+    {
+      "endSeconds": 1560.0940000000046,
+      "frames": 24470,
+      "mean": 2.27848051001226,
+      "p95": 2.8750847999999998,
+      "p99": 3.02383552
+    },
+    {
+      "endSeconds": 1620.4370000000054,
+      "frames": 24762,
+      "mean": 2.3680567540586384,
+      "p95": 2.85504,
+      "p99": 2.96398048
+    },
+    {
+      "endSeconds": 1680.25,
+      "frames": 24317,
+      "mean": 2.264801122506888,
+      "p95": 2.8675136,
+      "p99": 3.00757888
+    },
+    {
+      "endSeconds": 1740.3120000000054,
+      "frames": 24416,
+      "mean": 2.2911398401048495,
+      "p95": 2.844168,
+      "p99": 2.9762367999999997
+    },
+    {
+      "endSeconds": 1800.2810000000027,
+      "frames": 24503,
+      "mean": 2.2868712487450518,
+      "p95": 2.84864,
+      "p99": 3.00491712
+    }
+  ],
+  "residencyGrowth": {
+    "buffers": 0.04081632653061229,
+    "images": 0.0,
+    "bufferBytes": 0.00011137658243098869,
+    "imageBytes": 0.0
+  },
+  "firstResidency": {
+    "bufferBytes": 7470152,
+    "buffers": 49,
+    "cachedCandidates": 2,
+    "commitMs": 0.9286,
+    "committed": false,
+    "frame": 51600,
+    "imageBytes": 124575232,
+    "images": 71,
+    "loadError": "",
+    "loading": false,
+    "physicsMaxMs": 0.0,
+    "requestGeneration": 37,
+    "revision": 37,
+    "waitMs": 1.2824000000109663,
+    "workMs": 1.4975999999890335
+  },
+  "lastResidency": {
+    "bufferBytes": 7470152,
+    "buffers": 49,
+    "cachedCandidates": 2,
+    "commitMs": 1.3156,
+    "committed": false,
+    "frame": 739680,
+    "imageBytes": 124575232,
+    "images": 71,
+    "loadError": "",
+    "loading": false,
+    "physicsMaxMs": 0.0,
+    "requestGeneration": 495,
+    "revision": 495,
+    "waitMs": 0.0862000000779517,
+    "workMs": 2.032599999922048
+  },
+  "workingSetGrowth": 0.05245713733315838,
+  "workingSetBaselineBytes": 296597504.0,
+  "workingSetFinalBytes": 312156160.0,
+  "peakWorkingSetBytes": 312184832,
+  "deviceLocalPeakBytes": 156499968,
+  "isolatedPath": "C:\\WINDOWS\\System32",
+  "packageManifestHash": "9cf61ae153bace8771715398cab9397d6ae265aeb2b2c3816f6b76bc195c9464",
+  "sourceHash": "109c08f777ea032b3b935922abc536ba413377f27254483cf734dcbfd4cc743d",
+  "quality": {
+    "schemaVersion": 1,
+    "platform": "Windows x64",
+    "vulkanApi": "1.3",
+    "width": 1920,
+    "height": 1080,
+    "targetHz": 60,
+    "shadowMapSize": 2048,
+    "shadowCascades": 4,
+    "entities": 100,
+    "animatedCharacters": 4,
+    "fullGameUi": true,
+    "materialQuality": "full",
+    "privateCharacter": false,
+    "pointLights": 8
+  },
+  "cpuRetainedFrames": 8192,
+  "cpuSampleOffset": 731639,
+  "warmupSeconds": 120,
+  "warmupFrame": 51208,
+  "runtimeHash": "bb430d1adeaf7ea7850a8b7475aa8bed5b0f74c3eeb8a45bd91e32e6ab10bcc9",
+  "periodicSampleCount": 2868,
+  "periodicCpu": {
+    "mean": 1.7548017433744676,
+    "p95": 2.456024999943709,
+    "p99": 3.1854549999896045
+  },
+  "periodicPhysics": {
+    "mean": 0.04174707112970711,
+    "p95": 0.262565,
+    "p99": 0.3871719999999994
+  },
+  "commitExtra": {
+    "mean": 1.2873563894523326,
+    "p95": 1.6957599999999997,
+    "p99": 1.9531319999999988
+  },
+  "commitFrame": {
+    "mean": 5.848103651115618,
+    "p95": 7.256899999999999,
+    "p99": 7.985831999999999
+  }
+}

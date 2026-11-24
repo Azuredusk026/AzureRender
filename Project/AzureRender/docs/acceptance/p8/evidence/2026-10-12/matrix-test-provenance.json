@@ -1,0 +1,14 @@
+[
+  {
+    "configuration": "debug",
+    "testSourceSha256": "da9f416fec8a8b1ad46eeb8f5650121e5942179b9f8e6bb05258825003e504d0",
+    "executableSha256": "426baede49ec20a06b4c0bff67c08aefa5a671730768ac65ede5c3cbb989b61a",
+    "executable": "build\\ninja-msvc-debug\\AzureEditorAssetWorkflowTests.exe"
+  },
+  {
+    "configuration": "release",
+    "testSourceSha256": "da9f416fec8a8b1ad46eeb8f5650121e5942179b9f8e6bb05258825003e504d0",
+    "executableSha256": "5da687ac49b90880fa744cd7255b03b901ccfe457cddcae4c749f96c1010b775",
+    "executable": "build\\ninja-msvc-release\\AzureEditorAssetWorkflowTests.exe"
+  }
+]

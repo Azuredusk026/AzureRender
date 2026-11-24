@@ -1,0 +1,18 @@
+{
+  "base": "588688a",
+  "sources": {
+    "experiments\\thesis\\src\\benchmark.cpp": "072f55dc073086e593615ddbd508de2fb93f0c92e1935d25238998dad7631f63",
+    "experiments\\thesis\\src\\Benchmark.hpp": "a2414d8795f1ea26cf91e3f2c49abea48ce73649c08a07bf54a13eeb49b629b6",
+    "experiments\\thesis\\src\\Capture.cpp": "d5c46aa715c101b202e5d1cd6e9bc503e0ef6f812edf23bd3f1fba89b1653248",
+    "experiments\\thesis\\src\\Capture.hpp": "dc69f3bdcd777e9774d0efec21ac75029cb3e7c22cee605b2db7c0e67a8b55c1",
+    "experiments\\thesis\\src\\Dynamic.cpp": "8afd79dcc80a580e4b266c9adeaa6114709cfb807481fed03c93535b2468d4f9",
+    "experiments\\thesis\\src\\Subpasses.cpp": "0f636b0167ac1979abd5c1910ed282c4b36dc985fa03d3e0a2ebf8126d24d43e",
+    "experiments\\thesis\\src\\Window.cpp": "f1228dffe751a8a75fa197babf01fea513ac9bf71576eeee68d11c017755710c",
+    "experiments\\thesis\\src\\Window.hpp": "c28d977ad1ddc9a4ba3cb58111576a88effd9c9f057a71ff48736fae90fb1bf6",
+    "experiments\\thesis\\src\\Workload.hpp": "42c7a49cfd0fb08ee1bfd31736b263f9d6eed1288004f94a21746d7e53a80562"
+  },
+  "binarySha256": "c7f7e830aaa6840c89508f445e15dde0047c99a57d0c7833ef0151640f2b8a9d",
+  "presentationOutsideNprInterval": true,
+  "queueSynchronization": "per-image completion semaphores and acquire-to-transfer-stage dependency",
+  "threePathByteEquality": true
+}

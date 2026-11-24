@@ -5,7 +5,10 @@
 #include <vulkan/vulkan.h>
 
 #include <cstdint>
+#include <cstddef>
 #include <functional>
+#include <optional>
+#include <cmath>
 #include <stdexcept>
 #include <vector>
 
@@ -19,9 +22,22 @@
 
 namespace azurerender::rhi {
 
+// Raw 32-bit SPIR-V values; booleans use VkBool32, floats use their bit pattern.
+struct ShaderSpecializationConstant { std::uint32_t id=0,value=0; };
+using ShaderSpecialization = std::vector<ShaderSpecializationConstant>;
+inline constexpr std::size_t kMaxShaderSpecializationConstants=16;
+inline void validateShaderSpecialization(const ShaderSpecialization& values) {
+    if(values.size()>kMaxShaderSpecializationConstants)
+        throw std::invalid_argument("Shader specialization exceeds sixteen constants per stage");
+    for(std::size_t i=0;i<values.size();++i)for(std::size_t j=0;j<i;++j)
+        if(values[i].id==values[j].id)
+            throw std::invalid_argument("Shader specialization IDs must be unique within a stage");
+}
+
 struct ComputePipelineDesc {
     VkShaderModule shader = VK_NULL_HANDLE;
     VkPipelineLayout layout = VK_NULL_HANDLE;
+    ShaderSpecialization specialization;
 };
 
 struct SamplerDesc {
@@ -31,6 +47,10 @@ struct SamplerDesc {
     VkSamplerAddressMode addressW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
     float maxLod = 0.0F;
     bool mipmapLinear = true;
+    float maxAnisotropy = 1.0F;
+    float mipLodBias = 0.0F;
+    std::optional<VkFilter> magFilter;
+    VkFilter effectiveMagFilter() const noexcept { return magFilter.value_or(filter); }
 };
 
 struct DescriptorBindingDesc {
@@ -82,7 +102,16 @@ struct VertexAttributeDesc {
     std::uint32_t location = 0;
     VkFormat format = VK_FORMAT_UNDEFINED;
     std::uint32_t offset = 0;
+    std::uint32_t binding = 0;
 };
+
+struct VertexBindingDesc {
+    std::uint32_t binding = 0;
+    std::uint32_t stride = 0;
+    VkVertexInputRate inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
+};
+
+enum class PrimaryColorBlend { Alpha, Multiply, Additive };
 
 struct GraphicsPipelineDesc {
     VkShaderModule vertexShader = VK_NULL_HANDLE;
@@ -91,8 +120,11 @@ struct GraphicsPipelineDesc {
     // Empty vertexStride means a fullscreen pipeline with no vertex input.
     std::uint32_t vertexStride = 0;
     std::vector<VertexAttributeDesc> vertexAttributes;
+    // Explicit streams use vertexStride=0; an empty list uses the single-stream shorthand.
+    std::vector<VertexBindingDesc> vertexBindings;
 
     VkCullModeFlags cullMode = VK_CULL_MODE_BACK_BIT;
+    VkFrontFace frontFace = VK_FRONT_FACE_CLOCKWISE;
     bool depthBias = false;
     float depthBiasConstant = 0.0F;
     float depthBiasSlope = 0.0F;
@@ -101,12 +133,77 @@ struct GraphicsPipelineDesc {
     bool depthWrite = true;
 
     bool alphaBlend = false;
+    bool premultipliedAlpha = false;
+    // Multiply consumes a precomputed RGB factor, preserves destination alpha
+    // and leaves every secondary attachment intact. Enabled by alphaBlend.
+    PrimaryColorBlend primaryColorBlend = PrimaryColorBlend::Alpha;
     // 0 for depth-only passes.
     std::uint32_t colorAttachmentCount = 0;
 
     VkRenderPass renderPass = VK_NULL_HANDLE;
     VkPipelineLayout layout = VK_NULL_HANDLE;
+    VkCompareOp depthCompare = VK_COMPARE_OP_LESS;
+    // Empty uses RGBA on every color attachment. Otherwise one mask per
+    // attachment, including zero for read-preserved scene color.
+    std::vector<VkColorComponentFlags> colorWriteMasks;
+    VkSampleCountFlagBits rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+    float minSampleShading = 0;
+    // Use one depth-format unit without implementation-dependent scaling.
+    // Requires enabled depth bias and supportsExactDepthBias().
+    bool depthBiasExact = false;
+    ShaderSpecialization vertexSpecialization;
+    ShaderSpecialization fragmentSpecialization;
+    // A fixed state shared by front and back faces.
+    std::optional<VkStencilOpState> stencil;
 };
+
+inline constexpr std::uint32_t kMaximumVertexBindings=16;
+inline std::vector<VertexBindingDesc> resolveGraphicsVertexBindings(const GraphicsPipelineDesc& desc) {
+    auto bindings=desc.vertexBindings;
+    if(!bindings.empty()&&desc.vertexStride)throw std::invalid_argument("Explicit vertex bindings require zero shorthand stride");
+    if(bindings.empty()&&desc.vertexStride)bindings.push_back({0,desc.vertexStride,VK_VERTEX_INPUT_RATE_VERTEX});
+    if(bindings.size()>kMaximumVertexBindings||desc.vertexAttributes.size()>16)
+        throw std::invalid_argument("Vertex input exceeds the portable binding or attribute budget");
+    for(std::size_t i=0;i<bindings.size();++i) {
+        const auto& binding=bindings[i];
+        if(binding.binding>=kMaximumVertexBindings||binding.stride>2048
+            ||(binding.inputRate!=VK_VERTEX_INPUT_RATE_VERTEX&&binding.inputRate!=VK_VERTEX_INPUT_RATE_INSTANCE))
+            throw std::invalid_argument("Invalid vertex binding or stride");
+        for(std::size_t j=0;j<i;++j)if(bindings[j].binding==binding.binding)
+            throw std::invalid_argument("Duplicate vertex binding");
+    }
+    for(std::size_t i=0;i<desc.vertexAttributes.size();++i) {
+        const auto& attribute=desc.vertexAttributes[i];bool found=false;
+        for(const auto& binding:bindings)found|=binding.binding==attribute.binding;
+        if(!found||attribute.location>=16||attribute.offset>2047||attribute.format==VK_FORMAT_UNDEFINED)
+            throw std::invalid_argument("Invalid vertex attribute binding, location, offset or format");
+        for(std::size_t j=0;j<i;++j)if(desc.vertexAttributes[j].location==attribute.location)
+            throw std::invalid_argument("Duplicate vertex attribute location");
+    }
+    return bindings;
+}
+
+inline bool validSampleCount(VkSampleCountFlagBits samples) {
+    const auto value=static_cast<std::uint32_t>(samples);
+    return value>0&&value<=64&&(value&(value-1))==0;
+}
+inline void validateGraphicsMultisampling(const GraphicsPipelineDesc& desc) {
+    if(!validSampleCount(desc.rasterizationSamples)||!std::isfinite(desc.minSampleShading)
+        ||desc.minSampleShading<0||desc.minSampleShading>1)
+        throw std::invalid_argument("Multisampling requires a valid sample count and a finite shading fraction within 0..1");
+}
+
+inline void validateGraphicsColorWriteMasks(const GraphicsPipelineDesc& desc) {
+    if(!desc.colorWriteMasks.empty()&&desc.colorWriteMasks.size()!=desc.colorAttachmentCount)
+        throw std::invalid_argument("Color write masks must match the color attachment count");
+    for(const auto mask:desc.colorWriteMasks)if(mask&~VkColorComponentFlags{0xf})
+        throw std::invalid_argument("Color write mask contains unknown components");
+}
+inline VkColorComponentFlags graphicsColorWriteMask(const GraphicsPipelineDesc& desc,std::size_t index) {
+    validateGraphicsColorWriteMasks(desc);
+    if(index>=desc.colorAttachmentCount)throw std::out_of_range("Color write attachment index");
+    return desc.colorWriteMasks.empty()?VkColorComponentFlags{0xf}:desc.colorWriteMasks[index];
+}
 
 struct RenderPassAttachmentDesc {
     VkFormat format = VK_FORMAT_UNDEFINED;
@@ -115,6 +212,10 @@ struct RenderPassAttachmentDesc {
     bool clear = true;
     bool store = true;
     bool isDepth = false;
+    // Loading requires defined prior contents and is exclusive with clear.
+    bool load = false;
+    VkSampleCountFlagBits samples = VK_SAMPLE_COUNT_1_BIT;
+    bool clearStencil = false;
 };
 
 // A single-subpass render pass; every pass in the project fits this shape.
@@ -125,7 +226,42 @@ struct RenderPassDesc {
     // External fragment-read -> attachment-write dependency, used when the
     // pass output is sampled later in the frame.
     bool externalReadDependency = false;
+    bool depthReadOnly = false;
+    // Explicit dependencies preserve compatibility with an existing pass.
+    // An empty list selects the externalReadDependency policy.
+    std::vector<VkSubpassDependency> dependencies;
 };
+
+inline void validateRenderPassDesc(const RenderPassDesc& desc) {
+    if(desc.dependencies.size()>64)throw std::invalid_argument("Render pass dependency count exceeds its bound");
+    for(const auto& dependency:desc.dependencies)
+        if((dependency.srcSubpass!=0&&dependency.srcSubpass!=VK_SUBPASS_EXTERNAL)
+            ||(dependency.dstSubpass!=0&&dependency.dstSubpass!=VK_SUBPASS_EXTERNAL)
+            ||(dependency.srcSubpass==VK_SUBPASS_EXTERNAL&&dependency.dstSubpass==VK_SUBPASS_EXTERNAL))
+            throw std::invalid_argument("Single-subpass dependency references an invalid subpass");
+    if(desc.depthAttachment< -1||(desc.depthAttachment>=0
+        &&static_cast<std::size_t>(desc.depthAttachment)>=desc.attachments.size()))
+        throw std::invalid_argument("Render pass depth attachment index is invalid");
+    for(const auto& attachment:desc.attachments) {
+        if(!validSampleCount(attachment.samples)||attachment.samples!=desc.attachments.front().samples)
+            throw std::invalid_argument("A subpass requires matching valid attachment sample counts");
+        if(attachment.clear&&attachment.load)throw std::invalid_argument("Render pass attachment cannot load and clear");
+        if(attachment.load&&attachment.initialLayout==VK_IMAGE_LAYOUT_UNDEFINED)
+            throw std::invalid_argument("Loading an attachment requires defined prior contents");
+        if (attachment.clearStencil && (!attachment.isDepth || !attachment.clear
+            || (attachment.format != VK_FORMAT_D16_UNORM_S8_UINT
+                && attachment.format != VK_FORMAT_D24_UNORM_S8_UINT
+                && attachment.format != VK_FORMAT_D32_SFLOAT_S8_UINT)))
+            throw std::invalid_argument("Clearing stencil requires a cleared depth-stencil attachment");
+    }
+    if(desc.depthAttachment>=0&&!desc.attachments[static_cast<std::size_t>(desc.depthAttachment)].isDepth)
+        throw std::invalid_argument("Render pass depth index must identify a depth attachment");
+    if(desc.depthReadOnly) {
+        if(desc.depthAttachment<0)throw std::invalid_argument("Read-only depth requires a depth attachment");
+        const auto& depth=desc.attachments[static_cast<std::size_t>(desc.depthAttachment)];
+        if(!depth.load||depth.clear)throw std::invalid_argument("Read-only depth requires loaded depth contents");
+    }
+}
 
 struct FramebufferDesc {
     VkRenderPass renderPass = VK_NULL_HANDLE;
@@ -202,6 +338,11 @@ public:
         std::uint32_t size) = 0;
 
     virtual void bindVertexBuffer(VkBuffer buffer, VkDeviceSize offset) = 0;
+    virtual void bindVertexStream(std::uint32_t binding,VkBuffer buffer,VkDeviceSize offset) {
+        if(binding>=kMaximumVertexBindings||!buffer)throw std::invalid_argument("Invalid vertex stream binding or buffer");
+        if(binding!=0)throw std::runtime_error("This recorder does not support additional vertex streams");
+        bindVertexBuffer(buffer,offset);
+    }
     virtual void bindIndexBuffer(VkBuffer buffer, VkDeviceSize offset) = 0;
     virtual void draw(std::uint32_t vertexCount) = 0;
     virtual void drawIndexed(
@@ -221,6 +362,13 @@ public:
 
     virtual void imageBarrier(const ImageBarrierDesc& barrier) = 0;
     virtual void bufferBarrier(const BufferBarrierDesc& barrier) = 0;
+    // Caller-owned storage remains valid through this call. All entries are
+    // dependencies at the same command position; fallback preserves order.
+    virtual void bufferBarriers(const BufferBarrierDesc* barriers, std::size_t count) {
+        if (count && !barriers) throw std::invalid_argument("Missing buffer barrier storage");
+        if (count > UINT32_MAX) throw std::length_error("Too many buffer barriers");
+        for (std::size_t i = 0; i < count; ++i) bufferBarrier(barriers[i]);
+    }
     virtual void clearColorImage(
         VkImage image,
         VkImageLayout layout,
@@ -233,6 +381,9 @@ public:
         VkQueryPool pool,
         std::uint32_t query,
         VkPipelineStageFlagBits stage) = 0;
+    virtual void copyDepthImageToBuffer(VkImage,VkBuffer,VkExtent2D) {
+        throw std::logic_error("Depth attachment readback is unavailable");
+    }
 };
 
 // Device-level resource operations. Scene renderers create all GPU objects
@@ -242,6 +393,16 @@ public:
     virtual ~IRhi() = default;
 
     virtual IGpuAllocator& allocator() = 0;
+    virtual bool supportsSampledImage(VkFormat format,bool linearFilter) const = 0;
+    virtual bool supportsStorageImage(VkFormat) const {return false;}
+    virtual bool supportsSampledImageViewMapping() const noexcept {return false;}
+    virtual VkImageView createMappedSampledImageView(VkImage image,VkFormat format,
+            std::uint32_t mipLevels,const VkComponentMapping& mapping) {
+        if(mapping.r!=VK_COMPONENT_SWIZZLE_IDENTITY||mapping.g!=VK_COMPONENT_SWIZZLE_IDENTITY
+            ||mapping.b!=VK_COMPONENT_SWIZZLE_IDENTITY||mapping.a!=VK_COMPONENT_SWIZZLE_IDENTITY)
+            throw std::runtime_error("Sampled image component mapping is unavailable");
+        return createImageView(image,format,VK_IMAGE_ASPECT_COLOR_BIT,mipLevels);
+    }
 
     // One-shot upload helpers. Each submits and waits internally; call only
     // during load, never per frame.
@@ -249,16 +410,21 @@ public:
         const GpuBuffer& source,
         const GpuBuffer& destination,
         VkDeviceSize size) = 0;
+    // Upload transitions into shader-read layout make the written image
+    // visible to every supported shader consumer on the upload queue.
     virtual void transitionImageLayout(
         const GpuImage& image,
         VkImageLayout oldLayout,
         VkImageLayout newLayout,
         std::uint32_t mipLevels) = 0;
+    // Tightly packed mip-major texels, then array layers and Z slices.
+    // Volume depth comes from the destination allocation and shrinks per mip.
     virtual void copyBufferToImage(
         const GpuBuffer& source,
         const GpuImage& destination,
         std::uint32_t width,
-        std::uint32_t height) = 0;
+        std::uint32_t height,
+        std::uint32_t mipLevels = 1, std::uint32_t bytesPerTexel = 4) = 0;
     virtual void clearImage(const GpuImage& image) = 0;
     virtual void generateMipmaps(
         const GpuImage& image,
@@ -272,7 +438,9 @@ public:
         VkFormat format,
         VkImageAspectFlags aspect,
         std::uint32_t mipLevels,
-        std::uint32_t baseMipLevel = 0) = 0;
+        std::uint32_t baseMipLevel = 0,
+        VkImageViewType viewType = VK_IMAGE_VIEW_TYPE_2D,
+        std::uint32_t arrayLayers = 1) = 0;
     virtual void destroyImageView(VkImageView view) = 0;
     virtual VkSampler createSampler(const SamplerDesc& desc) = 0;
     virtual void destroySampler(VkSampler sampler) = 0;
@@ -311,6 +479,11 @@ public:
     virtual void destroyRenderPass(VkRenderPass renderPass) = 0;
     virtual VkFramebuffer createFramebuffer(const FramebufferDesc& desc) = 0;
     virtual void destroyFramebuffer(VkFramebuffer framebuffer) = 0;
+    virtual VkSampleCountFlags imageSampleCounts(VkFormat,VkImageUsageFlags) const {return VK_SAMPLE_COUNT_1_BIT;}
+    virtual bool supportsSampleShading() const noexcept {return false;}
+    virtual bool supportsExactDepthBias() const noexcept {return false;}
+    // Read-only storage buffers used by a fragment stage, including set capacity.
+    virtual bool supportsFragmentStorageBuffers(VkDeviceSize,std::uint32_t=1) const {return false;}
 };
 
 }  // namespace azurerender::rhi

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "character_beauty_fullbody",
+    "changedPixels": 476931,
+    "changedOnGeometry": 1090,
+    "changedOnBackground": 475841
+  },
+  {
+    "name": "character_albedo_fullbody",
+    "changedPixels": 476900,
+    "changedOnGeometry": 1080,
+    "changedOnBackground": 475820
+  },
+  {
+    "name": "character_material_id_fullbody",
+    "changedPixels": 474757,
+    "changedOnGeometry": 134,
+    "changedOnBackground": 474623
+  },
+  {
+    "name": "character_direct_diffuse_fullbody",
+    "changedPixels": 476702,
+    "changedOnGeometry": 1096,
+    "changedOnBackground": 475606
+  }
+]

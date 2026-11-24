@@ -1,0 +1,147 @@
+{
+  "status": "passed",
+  "sourceBase": "fdeec10572a9356d17a8aa2bd586fdea62f14990",
+  "registrySourceSha256": "2f6e228c437e0eeab13b20d80de117193d5beeceacf6cc558186ae0e54a0cdb5",
+  "runtimeAndChecks": {
+    "release": {
+      "productReceiptSha256": "5c9ca67408d58746c2432fcef45e7ed63268c937a77bd7ee710ea7a88cbb40f3",
+      "executableChanges": 109,
+      "cpuTests": [
+        "AzureEngine.ComponentRegistry",
+        "AzureRuntime.ReferenceCameraSelection",
+        "AzureEngine.RegisteredComponentWorkflow",
+        "AzureEngine.LevelRefreshRetirement",
+        "AzureEngine.RuntimeLifecycle"
+      ]
+    },
+    "debug": {
+      "productReceiptSha256": "6c0d97f6e9ba286b38b0ffcc4930598c39f034c9188b1a288f8e29a8e7decdf3",
+      "executableChanges": 109,
+      "cpuTests": [
+        "AzureEngine.ComponentRegistry",
+        "AzureRuntime.ReferenceCameraSelection",
+        "AzureEngine.RegisteredComponentWorkflow",
+        "AzureEngine.LevelRefreshRetirement",
+        "AzureEngine.RuntimeLifecycle"
+      ]
+    }
+  },
+  "package": {
+    "status": "passed",
+    "package": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\playable-package\\Azure Exploration",
+    "files": 1395,
+    "licenses": 54,
+    "movedDirectory": true,
+    "sourceUnavailable": true,
+    "engineUnavailable": true,
+    "isolatedPath": "C:\\WINDOWS\\System32",
+    "tamperRejected": true,
+    "completeQuest": true,
+    "quest": {
+      "frames": 940,
+      "actions": 38,
+      "completionSeconds": 221.0,
+      "fixedSteps": 14085,
+      "restarts": 2,
+      "validationErrors": 0,
+      "released": true
+    },
+    "cycles": {
+      "commits": 40,
+      "switches": 20,
+      "restarts": 20,
+      "commitMilliseconds": {
+        "mean": 1.4155575,
+        "p95": 1.63617,
+        "p99": 1.786689
+      },
+      "commitFrameMilliseconds": {
+        "mean": 9.4283475,
+        "p95": 10.095624999999998,
+        "p99": 31.134368999999985
+      },
+      "first": {
+        "bufferBytes": 41119456,
+        "buffers": 69,
+        "cachedCandidates": 2,
+        "commitMs": 1.4263,
+        "committed": false,
+        "frame": 1200,
+        "imageBytes": 377597952,
+        "images": 72,
+        "loadError": "",
+        "loading": false,
+        "physicsMaxMs": 0.1917,
+        "requestGeneration": 12,
+        "revision": 8,
+        "uiActiveGeometry": 12,
+        "uiBuffers": 1,
+        "uiRetiredGeometry": 0,
+        "waitMs": 0.0981999999999914,
+        "workMs": 1.5239000000000087
+      },
+      "last": {
+        "bufferBytes": 41119456,
+        "buffers": 69,
+        "cachedCandidates": 2,
+        "commitMs": 1.3695,
+        "committed": false,
+        "frame": 6480,
+        "imageBytes": 377597952,
+        "images": 72,
+        "loadError": "",
+        "loading": false,
+        "physicsMaxMs": 0.1912,
+        "requestGeneration": 46,
+        "revision": 42,
+        "uiActiveGeometry": 12,
+        "uiBuffers": 1,
+        "uiRetiredGeometry": 0,
+        "waitMs": 0.11370000000010805,
+        "workMs": 1.5239999999998919
+      },
+      "passed": true
+    },
+    "quality": {
+      "schemaVersion": 1,
+      "platform": "Windows x64",
+      "vulkanApi": "1.3",
+      "width": 1920,
+      "height": 1080,
+      "targetHz": 60,
+      "shadowMapSize": 2048,
+      "shadowCascades": 4,
+      "entities": 100,
+      "animatedCharacters": 4,
+      "fullGameUi": true,
+      "materialQuality": "full",
+      "privateCharacter": false,
+      "pointLights": 8
+    },
+    "packageManifestHash": "4cad10a8cde0b6f27c861cae538ca3e077dd632ad0aea4dc5e2a57dd9bfa0a4a"
+  },
+  "archive": {
+    "path": "validation.zip",
+    "bytes": 533635,
+    "sha256": "f4ff7f4d960058a745a51e7d65e61bc1d1d2a8253a0866521238389971596c04",
+    "members": {
+      "playable-package-first-gate/cycles.json": "3e09aac72b4f61942cc85dfb40473f959efa8b6ea356c2de8a10710d688d2fda",
+      "playable-package-first-gate/cycles.csv": "2857ce22c93e8675c747013db2161b85a7e88dcd827c878740ef9371a4a86198",
+      "playable-package-first-gate/cycles.log": "610d489b40d353bdfff5d488650bcedd2e82b33b0f30fb2445a2acbaf1a9f9f1",
+      "playable-package-cycles-replay/cycles.json": "c3ead443f96257835a2db16560a43b7d1b02597e70378ee9ed966d63d7f5c2b9",
+      "playable-package-cycles-replay/cycles.csv": "14c2b542e42d6e80eacac369a2376de8185280420e56ac68f469bb0ba6d786a7",
+      "playable-package-cycles-replay/cycles.log": "a1c4241e40b246c3505e53322d37c569d041e8f2d65ad1f9cb9f847957a46fb1",
+      "fixture/cycles.input.json": "a782cd4bb3a8c0fbba0308ccc47cc438bc32b182e07391f645eb3a2d646f03f4",
+      "replay/results.json": "d5286b1cc4ee6a5e24c8c59ac0e7647e389d90fc9316ab3a87846cc8ea3f9a37",
+      "accepted/cycles.json": "97e1fba16f29e33d9a35772156b883abfc0c75fa170c257282094d3447f64c53",
+      "accepted/cycles.csv": "0202d35a88d3d14363993734d0a8d420ca83384b53f21b02510f603d0f322c24",
+      "accepted/cycles.log": "14c555553caada2fc492a324527b937e5bb9e8460b3cc6cd7dc75238d685aeca",
+      "accepted/cycles.summary.json": "361337c49bc803206fefdd09905491a8952e3c86e878aa8f509ce78ba962ebe0",
+      "accepted/summary.json": "6a180dfd749196c3f6981796158777087b7c6930048edb5a17cf9ca8238385f6",
+      "checks/level-composition-release-cpu.xml": "2ffbae6f3fd2ce90f392b2b2a4047ad49788b27beac9166c779333851951570c",
+      "checks/level-composition-debug-cpu.xml": "f05ca2afa13f9400acb4611219f979610b144c90b672e285016d219741da507f",
+      "checks/level-composition-release-playable.xml": "da020a4a1d535472b9e805af52d7ec46468d61d33d09a49b4e6955de8b20fc81",
+      "checks/level-composition-build-receipt.json": "e021b993b23e3742eabbd4854709b9183d95790dc8f7a4a13bc064d29cecb912"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 2,
+  "audioStarts": 0,
+  "fixedSteps": 15,
+  "levelRevision": 1,
+  "nodes": [
+    {
+      "id": "floor",
+      "translation": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "hero",
+      "translation": [
+        -2.0,
+        1.0,
+        0.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "portal",
+      "translation": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "visible": true
+    }
+  ],
+  "presentationErrors": [],
+  "scene": "courtyard",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.21929999999999997,
+  "uiDrawCalls": 10
+}

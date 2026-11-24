@@ -1,0 +1,19 @@
+[1791649778116][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791649778474][info][render][code=0] Character texture access: indexed, requested slots=147, stage sampler limit=1048576
+[1791649778508][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791649778623][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791649778764][info][render][code=0] Character texture access: indexed, requested slots=147, stage sampler limit=1048576
+[1791649778838][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791649779121][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791649779136][info][runtime][code=0] Level committed: platformer
+[1791649779235][info][runtime][code=0] Level committed: empty
+[1791649779265][info][runtime][code=0] Level committed: empty
+[1791649779363][info][render][code=0] Character texture access: indexed, requested slots=147, stage sampler limit=1048576
+[1791649779389][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791649779514][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791649779526][info][runtime][code=0] Level committed: platformer
+[1791649779650][info][render][code=0] Character texture access: indexed, requested slots=147, stage sampler limit=1048576
+[1791649779702][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791649779966][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791649779976][info][runtime][code=0] Level committed: platformer
+[1791649780077][info][runtime][code=0] Level committed: platformer

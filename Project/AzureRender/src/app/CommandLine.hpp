@@ -35,6 +35,7 @@ struct ParsedCommandLine {
     AzureRenderOptions options;
     std::string scenePath;
     std::string createScenePath;
+    std::string createGamePath;
     std::string editorScenePath;
     bool showVersion = false;
     bool showHelp = false;
@@ -42,7 +43,8 @@ struct ParsedCommandLine {
 };
 
 [[nodiscard]] ParsedCommandLine parseCommandLine(
-    const std::vector<std::string>& arguments);
+    const std::vector<std::string>& arguments,
+    AzureRenderOptions initialOptions = {});
 [[nodiscard]] const char* commandLineUsage() noexcept;
 [[nodiscard]] const char* commandLineHelp() noexcept;
 

@@ -58,6 +58,7 @@ string(APPEND MANIFEST_LINES
 # Expected third-party license texts bundled with the install.
 set(LICENSE_DIR "${INSTALL_DIR}/share/AzureRender/licenses")
 set(EXPECTED_LICENSES
+    NotoSansCJK-LICENSE.txt
     imgui-LICENSE.txt
     glfw3-LICENSE.txt
     tinygltf-LICENSE.txt
@@ -66,7 +67,18 @@ set(EXPECTED_LICENSES
     libdeflate-LICENSE.txt
     openjph-LICENSE.txt
     stb-LICENSE.txt
-    nlohmann-json-LICENSE.txt)
+    nlohmann-json-LICENSE.txt
+    joltphysics-LICENSE.txt
+    lua-LICENSE.txt
+    sol2-LICENSE.txt
+    rmlui-LICENSE.txt
+    miniaudio-LICENSE.txt
+    freetype-LICENSE.txt
+    libpng-LICENSE.txt
+    zlib-LICENSE.txt
+    bzip2-LICENSE.txt
+    brotli-LICENSE.txt
+    LatoLatin-LICENSE.txt)
 set(LICENSE_COUNT 0)
 foreach(LICENSE IN LISTS EXPECTED_LICENSES)
     if(EXISTS "${LICENSE_DIR}/${LICENSE}")

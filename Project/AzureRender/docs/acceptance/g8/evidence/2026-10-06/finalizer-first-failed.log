@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g8\finalize_package.py", line 21, in <module>
+    run('final-package', ['cpack', '-G', 'TGZ', '-C', 'Release', '-B', str(build), '--config', str(build / 'CPackConfig.cmake')])
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g8\finalize_package.py", line 13, in run
+    (logs / (name + '.log')).write_text(result.stdout + result.stderr, encoding='utf-8')
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\pathlib.py", line 1078, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g8\\final-package.log'

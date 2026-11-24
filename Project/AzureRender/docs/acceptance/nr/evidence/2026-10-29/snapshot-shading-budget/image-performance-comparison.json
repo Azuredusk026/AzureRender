@@ -1,0 +1,115 @@
+{
+  "fixturePairs": 144,
+  "fixtureIdenticalPairs": 144,
+  "debugReleasePairs": 72,
+  "debugReleaseIdenticalPairs": 72,
+  "native": [
+    {
+      "frame": "frame_000000.png",
+      "identicalPng": true,
+      "meanByteChange": 0.0,
+      "maximumByteChange": 0.0,
+      "changedPixels": 0
+    },
+    {
+      "frame": "frame_000001.png",
+      "identicalPng": true,
+      "meanByteChange": 0.0,
+      "maximumByteChange": 0.0,
+      "changedPixels": 0
+    },
+    {
+      "frame": "frame_000002.png",
+      "identicalPng": true,
+      "meanByteChange": 0.0,
+      "maximumByteChange": 0.0,
+      "changedPixels": 0
+    },
+    {
+      "frame": "frame_000003.png",
+      "identicalPng": true,
+      "meanByteChange": 0.0,
+      "maximumByteChange": 0.0,
+      "changedPixels": 0
+    },
+    {
+      "frame": "frame_000004.png",
+      "identicalPng": true,
+      "meanByteChange": 0.0,
+      "maximumByteChange": 0.0,
+      "changedPixels": 0
+    },
+    {
+      "frame": "frame_000005.png",
+      "identicalPng": true,
+      "meanByteChange": 0.0,
+      "maximumByteChange": 0.0,
+      "changedPixels": 0
+    },
+    {
+      "frame": "frame_000006.png",
+      "identicalPng": true,
+      "meanByteChange": 0.0,
+      "maximumByteChange": 0.0,
+      "changedPixels": 0
+    },
+    {
+      "frame": "frame_000007.png",
+      "identicalPng": true,
+      "meanByteChange": 0.0,
+      "maximumByteChange": 0.0,
+      "changedPixels": 0
+    },
+    {
+      "frame": "frame_000008.png",
+      "identicalPng": true,
+      "meanByteChange": 0.0,
+      "maximumByteChange": 0.0,
+      "changedPixels": 0
+    },
+    {
+      "frame": "frame_000009.png",
+      "identicalPng": true,
+      "meanByteChange": 0.0,
+      "maximumByteChange": 0.0,
+      "changedPixels": 0
+    },
+    {
+      "frame": "frame_000010.png",
+      "identicalPng": true,
+      "meanByteChange": 0.0,
+      "maximumByteChange": 0.0,
+      "changedPixels": 0
+    },
+    {
+      "frame": "frame_000011.png",
+      "identicalPng": true,
+      "meanByteChange": 0.0,
+      "maximumByteChange": 0.0,
+      "changedPixels": 0
+    }
+  ],
+  "baselinePerformance": {
+    "kind": "baseline",
+    "playerSha256": "0d21397d0f39b1e6142f33fa36f07bbae4366722216715166d78e5e220014f42",
+    "warmup": 30,
+    "samples": 120,
+    "averageMs": 34.72656133333333,
+    "p95Ms": 35.208942400000005,
+    "budgetMs": 16.667,
+    "passed": false,
+    "formalSustainedAcceptance": false
+  },
+  "candidatePerformance": {
+    "kind": "candidate",
+    "playerSha256": "d29faf19f46dad225447112a32ef802e7a836288abef84fa2600d13d1fca257a",
+    "warmup": 30,
+    "samples": 120,
+    "averageMs": 25.00809333333333,
+    "p95Ms": 25.4630224,
+    "budgetMs": 16.667,
+    "passed": false,
+    "formalSustainedAcceptance": false
+  },
+  "averageMsReduction": 9.718467999999998
+}

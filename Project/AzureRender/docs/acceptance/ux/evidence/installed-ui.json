@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "physicalInput": false,
+  "sceneContainer": true,
+  "emptySpaceUnparent": true,
+  "undoRestoresParent": true,
+  "layout": true,
+  "viewportTools": true
+}

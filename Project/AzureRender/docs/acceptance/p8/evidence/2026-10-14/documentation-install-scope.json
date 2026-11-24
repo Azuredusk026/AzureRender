@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "implementationScope": "CMake documentation install statements only",
+  "configurations": {
+    "debug": {
+      "buildPassed": true,
+      "changedInputs": [
+        "CMakeLists.txt"
+      ],
+      "allProductsUnchanged": true,
+      "measuredSourceHash": "1179fe9b3e86d3bd48bab78990e33febfd84a7b55a1096287848c48e158fafe2",
+      "finalSourceHash": "4f4bacb2824de564d68f90de1f517f52f1807c67b332e2eaab293176e2b567d2"
+    },
+    "release": {
+      "buildPassed": true,
+      "changedInputs": [
+        "CMakeLists.txt"
+      ],
+      "allProductsUnchanged": true,
+      "measuredSourceHash": "1179fe9b3e86d3bd48bab78990e33febfd84a7b55a1096287848c48e158fafe2",
+      "finalSourceHash": "4f4bacb2824de564d68f90de1f517f52f1807c67b332e2eaab293176e2b567d2"
+    }
+  }
+}

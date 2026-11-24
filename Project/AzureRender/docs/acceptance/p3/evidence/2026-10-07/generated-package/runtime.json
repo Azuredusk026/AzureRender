@@ -1,0 +1,85 @@
+{
+  "activeScripts": 2,
+  "animationFrames": 120,
+  "animations": [
+    {
+      "blend": 1.0,
+      "clip": 0,
+      "morph": [
+        0.0,
+        0.0
+      ],
+      "node": "procedural-rig-0",
+      "previousClip": 0,
+      "time": 0.9833333333333347
+    },
+    {
+      "blend": 1.0,
+      "clip": 0,
+      "morph": [
+        0.0,
+        0.0
+      ],
+      "node": "procedural-rig-1",
+      "previousClip": 0,
+      "time": 1.2333333333333338
+    }
+  ],
+  "audioStarts": 0,
+  "fixedSteps": 59,
+  "levelRevision": 1,
+  "nodes": [
+    {
+      "id": "observer",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "asset-a",
+      "translation": [
+        -0.800000011920929,
+        0.0,
+        -1.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "asset-b",
+      "translation": [
+        0.800000011920929,
+        0.0,
+        -1.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "procedural-rig-0",
+      "translation": [
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "procedural-rig-1",
+      "translation": [
+        2.0,
+        0.0,
+        -2.0
+      ],
+      "visible": true
+    }
+  ],
+  "presentationErrors": [],
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "inspection",
+  "scriptErrors": [],
+  "simulationMilliseconds": 2.0020000000000002,
+  "uiDrawCalls": 0
+}

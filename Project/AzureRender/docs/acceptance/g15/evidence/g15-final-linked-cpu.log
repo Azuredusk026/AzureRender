@@ -1,0 +1,12 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 199: AzureEditor.AuthoringWorkflow
+    Start 192: AzureGame.ExplorationDesign
+    Start 159: AzureRender.NullRhiPass
+1/3 Test #192: AzureGame.ExplorationDesign ......   Passed    0.62 sec
+2/3 Test #159: AzureRender.NullRhiPass ..........   Passed    1.68 sec
+3/3 Test #199: AzureEditor.AuthoringWorkflow ....   Passed    3.75 sec
+
+100% tests passed, 0 tests failed out of 3
+
+Total Test time (real) =   3.75 sec

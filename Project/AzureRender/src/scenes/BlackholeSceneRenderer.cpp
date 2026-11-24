@@ -1,7 +1,7 @@
 #include "scenes/BlackholeSceneRenderer.hpp"
 
-#include "app/AzureRenderInternal.hpp"
-#include "platform/BinaryFile.hpp"
+#include "render/RenderMath.hpp"
+#include "resources/BinaryFile.hpp"
 #include "render/ComputePass.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/EnvironmentAsset.hpp"
@@ -231,6 +231,7 @@ void BlackholeSceneRenderer::onSwapchainRecreate(
 }
 
 void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {
+    const auto previousPosition=cameraPosition_,previousTarget=cameraTarget_;
     currentFrame_ = frame.currentFrame;
     if (frame.renderSettings != nullptr) {
         frameRenderSettings_ = *frame.renderSettings;
@@ -277,6 +278,12 @@ void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {
         cameraPosition_ = {-12.0F, 8.0F, 23.0F};
         cameraTarget_ = {-7.0F, 4.5F, 0.0F};
         break;
+    }
+    if(frame.cameraOverride){
+        const std::array<float,3> position{frame.cameraPosition[0],frame.cameraPosition[1],frame.cameraPosition[2]};
+        const std::array<float,3> target{frame.cameraTarget[0],frame.cameraTarget[1],frame.cameraTarget[2]};
+        if(previousPosition!=position || previousTarget!=target)invalidateHistory();
+        cameraPosition_=position;cameraTarget_=target;
     }
     // The black hole owns its own framing: the host camera/portfolio orbit
     // would place the eye too close or off-axis for the accretion disk to
@@ -488,6 +495,11 @@ void BlackholeSceneRenderer::recordTrace(const RenderContext& context) {
         descriptorSets_[context.currentFrame % kMaxFramesInFlight];
     commands.bindDescriptorSet(pipelineLayout_, traceSet);
     commands.draw(3);
+    if (context.submissionCounters != nullptr) {
+        ++context.submissionCounters->drawCalls;
+        ++context.submissionCounters->pipelineBinds;
+        ++context.submissionCounters->descriptorSetBinds;
+    }
     commands.endRenderPass();
 
 }
@@ -513,6 +525,11 @@ void BlackholeSceneRenderer::recordTemporal(const RenderContext& context) {
     const VkDescriptorSet taaSet = taaDescriptorSets_[taaSetIndex];
     commands.bindDescriptorSet(taaPipelineLayout_, taaSet);
     commands.draw(3);
+    if (context.submissionCounters != nullptr) {
+        ++context.submissionCounters->drawCalls;
+        ++context.submissionCounters->pipelineBinds;
+        ++context.submissionCounters->descriptorSetBinds;
+    }
     commands.endRenderPass();
 
 }
@@ -536,6 +553,7 @@ void BlackholeSceneRenderer::recordComposite(const RenderContext& context) {
     compositePass.extent = context.renderExtent;
     compositePass.clearValues.assign(
         clearValues.begin(), clearValues.end());
+    if(context.displayMaskEnabled)compositePass.clearValues.push_back(sceneDisplayMaskClearValue());
     commands.beginRenderPass(compositePass);
     commands.setViewport(
         static_cast<float>(context.renderExtent.width),
@@ -546,6 +564,11 @@ void BlackholeSceneRenderer::recordComposite(const RenderContext& context) {
         compositeDescriptorSets_[historyWriteIndex_];
     commands.bindDescriptorSet(compositePipelineLayout_, compositeSet);
     commands.draw(3);
+    if (context.submissionCounters != nullptr) {
+        ++context.submissionCounters->drawCalls;
+        ++context.submissionCounters->pipelineBinds;
+        ++context.submissionCounters->descriptorSetBinds;
+    }
     commands.endRenderPass();
     historyValid_ = true;
     historyWriteIndex_ ^= 1U;
@@ -698,6 +721,7 @@ VkPipeline BlackholeSceneRenderer::createFullscreenPipeline(
     desc.depthTest = false;
     desc.depthWrite = false;
     desc.colorAttachmentCount = colorAttachmentCount;
+    if(colorAttachmentCount>2){desc.colorWriteMasks.assign(colorAttachmentCount,0xf);desc.colorWriteMasks[2]=0;}
     desc.renderPass = renderPass;
     desc.layout = layout;
     VkPipeline pipeline = VK_NULL_HANDLE;
@@ -1050,7 +1074,7 @@ void BlackholeSceneRenderer::createCompositePipeline(
         "blackhole_composite.frag",
         compositePipelineLayout_,
         context.sceneRenderPass,
-        2);
+        sceneColorAttachmentCount(context));
 }
 
 void BlackholeSceneRenderer::destroySizeDependentResources() {

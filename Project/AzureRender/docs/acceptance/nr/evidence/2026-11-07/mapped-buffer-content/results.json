@@ -1,0 +1,105 @@
+{
+  "status": "frame320-active-ranges-identical",
+  "wholeBuffersIdentical": 35,
+  "wholeBuffersWithTailDifferences": 2,
+  "all37MemoryTypes": {
+    "baseline": 2,
+    "candidate": 4
+  },
+  "activeRanges": {
+    "status": "active-ranges-identical",
+    "physicalInstances": 871,
+    "indirectCommands": 974,
+    "materialAliases": [
+      {
+        "index": 871,
+        "physicalMatches": [
+          860
+        ]
+      },
+      {
+        "index": 872,
+        "physicalMatches": [
+          860
+        ]
+      },
+      {
+        "index": 873,
+        "physicalMatches": [
+          860
+        ]
+      }
+    ],
+    "regions": [
+      {
+        "index": 766,
+        "kind": "instance records",
+        "stride": 496,
+        "activeRecords": 874,
+        "activeBytes": 433504,
+        "activeBytesIdentical": true,
+        "capacityBytes": 834272,
+        "tailBytes": 400768
+      },
+      {
+        "index": 790,
+        "kind": "culling bounds",
+        "stride": 32,
+        "activeRecords": 871,
+        "activeBytes": 27872,
+        "activeBytesIdentical": true,
+        "capacityBytes": 31168,
+        "tailBytes": 3296
+      }
+    ],
+    "scope": "Captured frame 320 at corresponding draw ordinal 2829; this does not establish the inputs of the failing native frame 3"
+  },
+  "capture": {
+    "status": "captured",
+    "seconds": 303.18700000000536,
+    "capture": {
+      "status": "captured",
+      "sourceBase": "fbc0c99-private-mapped-device-buffers",
+      "scope": "One buffer-content diagnosis capture; GPU timing disabled; production remains restored",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-141433-mapped-device-buffers-67ee70\\candidate-products\\release-AzurePlayer.exe",
+        "--resource-root",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "1280",
+        "--height",
+        "720",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--fixed-frame-step",
+        "--smoke-frames",
+        "325"
+      ],
+      "executableSha256": "766fa003f562090e54b71baa21a1661082de2cb11ed7e231e075b9ca7c83c609",
+      "captureFrame": 320,
+      "renderdocVersion": "1.46",
+      "pid": 21532,
+      "capture": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-145514-mapped-buffer-capture-e067af\\current_frame320.rdc",
+      "bytes": 2104758057,
+      "captureSha256": "3002be622311afc79a6356158f501e402f2d74e4a0a81973ca17038c62c3dd60"
+    },
+    "sourceAndProductsUnchanged": true,
+    "allMountedBytesUnchanged": true,
+    "gpuTimingEnabled": false,
+    "usedBytes": 2105588478
+  },
+  "originalDynamicIndexFeatureDifference": true,
+  "originalGpuTimingEnabled": true,
+  "candidateGpuTimingEnabled": false,
+  "failedNativeFrame3Explained": false,
+  "productionChanged": false,
+  "archive": {
+    "file": "buffers.zip",
+    "bytes": 3147596,
+    "sha256": "9e6ceb2d2c038e84de49c04f402c9b7792b064a9e9425c27f77b721330f14ab8"
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "status": "diagnostic-input-verification-passed",
+  "visualAcceptance": "failed-user-review",
+  "scope": "Six native Player diagnostic captures and source-context decoder checks; complete visual quality is not accepted.",
+  "programSha256": "2b28e97fbdce571087760f373fa693cc2c6a3bf1fd7d54deb5347b9e719ac3ab",
+  "captures": [
+    {
+      "name": "control",
+      "exitCode": 0,
+      "seconds": 230.8629445000115,
+      "imageSha256": "259ffbb4c4da4b20bd2f1b24fe0d9e7fe84ee40bf75847731a951832cc6a1bf9"
+    },
+    {
+      "name": "full-npr-real-shadow",
+      "exitCode": 0,
+      "seconds": 189.07305759999144,
+      "imageSha256": "ebbe03f86cbe6d4c470267c7949c06286876523923d3486e24c893bbeb35b0e7"
+    },
+    {
+      "name": "full-npr-shadow-override",
+      "exitCode": 0,
+      "seconds": 192.93702979999944,
+      "imageSha256": "14d90a47394706cfe8c587a7706acff6e9d99ea3615db7ce81dbf924478d91b3"
+    },
+    {
+      "name": "full-npr-portrait-display",
+      "exitCode": 0,
+      "seconds": 173.48190389999945,
+      "imageSha256": "cbfc24de1a877ea9e4d9c9c5ed5fe253f82149acdd1be20475db5a968505a8e3"
+    },
+    {
+      "name": "native-scene-near",
+      "exitCode": 0,
+      "seconds": 195.5471172999969,
+      "imageSha256": "0afd5b5b3bcc0ce7925011227d6dc238dafc08921717adf0f5d5ff60ba4fbfd2"
+    },
+    {
+      "name": "same-input-character-only",
+      "exitCode": 0,
+      "seconds": 137.63430230000813,
+      "imageSha256": "c97f9b3fb67be38401baf146c35b1541c413a2dee2ef342bf88087e24c036544"
+    }
+  ],
+  "sourceContextGpuSettingsMatched": true,
+  "previousObjectDecoderComparisons": [
+    {
+      "context": "scene",
+      "ambientRow": 112,
+      "mainColorRow": 115,
+      "resultExact": true
+    },
+    {
+      "context": "scene",
+      "ambientRow": 113,
+      "mainColorRow": 114,
+      "resultExact": true
+    },
+    {
+      "context": "portrait",
+      "ambientRow": 112,
+      "mainColorRow": 115,
+      "resultExact": true
+    },
+    {
+      "context": "portrait",
+      "ambientRow": 113,
+      "mainColorRow": 114,
+      "resultExact": true
+    }
+  ],
+  "regionStatistics": [
+    {
+      "case": "control",
+      "region": "hair-crown",
+      "meanRgb": [
+        209.55763636363636,
+        70.13036363636364,
+        72.60521212121212
+      ],
+      "meanAbsoluteByteDifference": 0.0
+    },
+    {
+      "case": "control",
+      "region": "face",
+      "meanRgb": [
+        219.93872053872053,
+        195.70909090909092,
+        183.86228956228956
+      ],
+      "meanAbsoluteByteDifference": 0.0
+    },
+    {
+      "case": "control",
+      "region": "eye-left",
+      "meanRgb": [
+        156.83563218390805,
+        98.74252873563218,
+        146.15287356321838
+      ],
+      "meanAbsoluteByteDifference": 0.0
+    },
+    {
+      "case": "full-npr-real-shadow",
+      "region": "hair-crown",
+      "meanRgb": [
+        134.40842424242425,
+        31.536363636363635,
+        42.63321212121212
+      ],
+      "meanAbsoluteByteDifference": 47.907939393939394
+    },
+    {
+      "case": "full-npr-real-shadow",
+      "region": "face",
+      "meanRgb": [
+        144.53232323232322,
+        110.48215488215489,
+        90.35690235690235
+      ],
+      "meanAbsoluteByteDifference": 84.71290684624017
+    },
+    {
+      "case": "full-npr-real-shadow",
+      "region": "eye-left",
+      "meanRgb": [
+        72.01264367816091,
+        48.69252873563219,
+        98.46781609195402
+      ],
+      "meanAbsoluteByteDifference": 60.86532567049809
+    },
+    {
+      "case": "full-npr-shadow-override",
+      "region": "hair-crown",
+      "meanRgb": [
+        203.4979393939394,
+        74.84521212121211,
+        80.67593939393939
+      ],
+      "meanAbsoluteByteDifference": 22.17480808080808
+    },
+    {
+      "case": "full-npr-shadow-override",
+      "region": "face",
+      "meanRgb": [
+        200.9181818181818,
+        169.83232323232323,
+        158.56902356902356
+      ],
+      "meanAbsoluteByteDifference": 24.75263748597082
+    },
+    {
+      "case": "full-npr-shadow-override",
+      "region": "eye-left",
+      "meanRgb": [
+        160.52471264367816,
+        104.03275862068965,
+        146.52471264367816
+      ],
+      "meanAbsoluteByteDifference": 10.960344827586207
+    },
+    {
+      "case": "full-npr-portrait-display",
+      "region": "hair-crown",
+      "meanRgb": [
+        78.63587878787878,
+        25.98709090909091,
+        30.63418181818182
+      ],
+      "meanAbsoluteByteDifference": 72.35181818181819
+    },
+    {
+      "case": "full-npr-portrait-display",
+      "region": "face",
+      "meanRgb": [
+        80.45420875420875,
+        62.6020202020202,
+        53.387205387205384
+      ],
+      "meanAbsoluteByteDifference": 134.35555555555555
+    },
+    {
+      "case": "full-npr-portrait-display",
+      "region": "eye-left",
+      "meanRgb": [
+        45.438505747126435,
+        32.032758620689656,
+        65.35
+      ],
+      "meanAbsoluteByteDifference": 86.34348659003831
+    },
+    {
+      "case": "native-scene-near",
+      "region": "hair-crown",
+      "meanRgb": [
+        228.18890909090908,
+        93.58503030303031,
+        91.69975757575757
+      ],
+      "meanAbsoluteByteDifference": 20.404848484848486
+    },
+    {
+      "case": "native-scene-near",
+      "region": "face",
+      "meanRgb": [
+        223.72727272727272,
+        200.73602693602695,
+        189.3205387205387
+      ],
+      "meanAbsoluteByteDifference": 4.757912457912458
+    },
+    {
+      "case": "native-scene-near",
+      "region": "eye-left",
+      "meanRgb": [
+        163.35919540229884,
+        103.88333333333334,
+        150.69482758620688
+      ],
+      "meanAbsoluteByteDifference": 5.403639846743295
+    },
+    {
+      "case": "same-input-character-only",
+      "region": "hair-crown",
+      "meanRgb": [
+        203.4979393939394,
+        74.84521212121211,
+        80.67593939393939
+      ],
+      "meanAbsoluteByteDifference": 22.17480808080808
+    },
+    {
+      "case": "same-input-character-only",
+      "region": "face",
+      "meanRgb": [
+        200.9181818181818,
+        169.83232323232323,
+        158.56902356902356
+      ],
+      "meanAbsoluteByteDifference": 24.75263748597082
+    },
+    {
+      "case": "same-input-character-only",
+      "region": "eye-left",
+      "meanRgb": [
+        160.52471264367816,
+        104.03275862068965,
+        146.52471264367816
+      ],
+      "meanAbsoluteByteDifference": 10.960344827586207
+    }
+  ]
+}

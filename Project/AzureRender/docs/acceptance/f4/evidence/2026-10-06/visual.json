@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "tolerance": "strict",
+  "caseCount": 7,
+  "failureCount": 0,
+  "results": [
+    {
+      "status": "passed",
+      "meanAbsoluteRgbError": 0.0,
+      "changedPixelRatio": 0.0,
+      "perChannelMeanError": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0
+      },
+      "limits": {
+        "maxMeanError": 0.0,
+        "maxChangedRatio": 0.0,
+        "pixelThreshold": 0.0
+      },
+      "diffImage": null,
+      "name": "character_beauty_fullbody"
+    },
+    {
+      "status": "passed",
+      "meanAbsoluteRgbError": 0.0,
+      "changedPixelRatio": 0.0,
+      "perChannelMeanError": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0
+      },
+      "limits": {
+        "maxMeanError": 0.0,
+        "maxChangedRatio": 0.0,
+        "pixelThreshold": 0.0
+      },
+      "diffImage": null,
+      "name": "character_albedo_fullbody"
+    },
+    {
+      "status": "passed",
+      "meanAbsoluteRgbError": 0.0,
+      "changedPixelRatio": 0.0,
+      "perChannelMeanError": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0
+      },
+      "limits": {
+        "maxMeanError": 0.0,
+        "maxChangedRatio": 0.0,
+        "pixelThreshold": 0.0
+      },
+      "diffImage": null,
+      "name": "character_world_normal_fullbody"
+    },
+    {
+      "status": "passed",
+      "meanAbsoluteRgbError": 0.0,
+      "changedPixelRatio": 0.0,
+      "perChannelMeanError": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0
+      },
+      "limits": {
+        "maxMeanError": 0.0,
+        "maxChangedRatio": 0.0,
+        "pixelThreshold": 0.0
+      },
+      "diffImage": null,
+      "name": "character_material_id_fullbody"
+    },
+    {
+      "status": "passed",
+      "meanAbsoluteRgbError": 0.0,
+      "changedPixelRatio": 0.0,
+      "perChannelMeanError": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0
+      },
+      "limits": {
+        "maxMeanError": 0.0,
+        "maxChangedRatio": 0.0,
+        "pixelThreshold": 0.0
+      },
+      "diffImage": null,
+      "name": "character_outline_fullbody"
+    },
+    {
+      "status": "passed",
+      "meanAbsoluteRgbError": 0.0,
+      "changedPixelRatio": 0.0,
+      "perChannelMeanError": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0
+      },
+      "limits": {
+        "maxMeanError": 0.0,
+        "maxChangedRatio": 0.0,
+        "pixelThreshold": 0.0
+      },
+      "diffImage": null,
+      "name": "character_direct_diffuse_fullbody"
+    },
+    {
+      "status": "passed",
+      "meanAbsoluteRgbError": 0.0,
+      "changedPixelRatio": 0.0,
+      "perChannelMeanError": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0
+      },
+      "limits": {
+        "maxMeanError": 0.0,
+        "maxChangedRatio": 0.0,
+        "pixelThreshold": 0.0
+      },
+      "diffImage": null,
+      "name": "character_face_sdf_closeup"
+    }
+  ]
+}

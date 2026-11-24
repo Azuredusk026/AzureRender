@@ -1,0 +1,39 @@
+{
+  "status": "not-qualified",
+  "seconds": 48.57799999999406,
+  "allTargetsEqual": true,
+  "summary": [
+    {
+      "mode": "baseline",
+      "allEventMs": 21.04495999999999,
+      "matchedEventMs": 15.565407999999904
+    },
+    {
+      "mode": "candidate",
+      "allEventMs": 32.26751999999968,
+      "matchedEventMs": 24.447328000000077
+    },
+    {
+      "mode": "candidate",
+      "allEventMs": 32.13158399999965,
+      "matchedEventMs": 24.359168000000114
+    },
+    {
+      "mode": "baseline",
+      "allEventMs": 16.81433600000003,
+      "matchedEventMs": 11.98303999999996
+    }
+  ],
+  "environmentErrors": [],
+  "sourceAndProductsUnchanged": true,
+  "replayProcessExitCode": 0,
+  "baselineMatchedDriftFraction": 0.29895318717119834,
+  "benefitQualified": false,
+  "nativeBatchStarted": false,
+  "processExitCorrection": "Explicit sys.exit after resource shutdown; replay process exited successfully",
+  "archive": {
+    "file": "checks.zip",
+    "bytes": 137321,
+    "sha256": "12a8757c73617394ffec04301cc0b362b4b71d9dd6bed4820ee49370a12d2ff9"
+  }
+}

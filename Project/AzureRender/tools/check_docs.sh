@@ -17,6 +17,8 @@ done
 test -f mkdocs.yml
 test -f requirements-docs.txt
 test -f tools/check_doc_style.py
+python tools/check_stage_status.py
+python tools/test_stage_status.py
 
 rg -q 'SceneRendererRegistry' docs/architecture.md
 rg -q 'vkAcquireNextImageKHR' docs/architecture.md
@@ -45,7 +47,7 @@ if rg -n '\\\[|\\\]|\\\(|\\\)' docs/*.md; then
     exit 1
 fi
 
-style_documents=(README.md docs/*.md)
+style_documents=(README.md docs/*.md docs/plans/*.md docs/runtime/*.md docs/tutorials/*.md)
 if test -f ../../README.md; then
     style_documents+=(../../README.md)
 fi
@@ -71,3 +73,5 @@ if find portfolio/images -type f | \
 fi
 
 git diff --check
+
+python tools/audit_repository.py --source ../.. --output build/repository-audit.json

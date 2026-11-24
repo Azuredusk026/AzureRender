@@ -1,0 +1,12 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 1: AzureAssets.ProceduralGeometry
+1/3 Test #1: AzureAssets.ProceduralGeometry ...   Passed    0.08 sec
+    Start 2: AzureAssets.RigText
+2/3 Test #2: AzureAssets.RigText ..............   Passed    0.13 sec
+    Start 3: AzureAssets.ProceduralProcess
+3/3 Test #3: AzureAssets.ProceduralProcess ....   Passed    0.32 sec
+
+100% tests passed, 0 tests failed out of 3
+
+Total Test time (real) =   0.54 sec

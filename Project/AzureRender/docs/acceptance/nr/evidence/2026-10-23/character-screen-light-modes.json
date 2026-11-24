@@ -1,0 +1,474 @@
+{
+  "schemaVersion": 1,
+  "status": "special-character-light-contracts-and-source-formulas-verified",
+  "nativeAppearanceStatus": "not-accepted-image-error-increased-pending-input-and-composite-diagnosis",
+  "run": "build\\runs\\20261023-084651-character-screen-light-modes-0347ad",
+  "contracts": {
+    "responseVersions": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sceneVersion": 12,
+    "rasterLightBytes": 144,
+    "materialBytes": 192,
+    "textureSlots": 9,
+    "newRenderPasses": 0
+  },
+  "tests": {
+    "cpuPerConfiguration": 12,
+    "nativeLightCases": 15,
+    "surfaceProbesPerConfiguration": 212,
+    "pixelCaptures": 107,
+    "actualCaptures": 7,
+    "refractionConfiguration": "Debug with required validation enabled",
+    "screenReflectionConfigurations": [
+      "Release",
+      "Debug"
+    ]
+  },
+  "batches": [
+    {
+      "name": "rim-release-accepted",
+      "count": 19,
+      "playerSha256": "194edf753c279481a40e477a1ca03c5dfe950f3420fdaee9b70e6fe7aa65352c",
+      "summarySha256": "0094a7955155d791e9efe9299b159e3a34a0b3034b133672d606ecd0ae3dba6d",
+      "maximumLinearError": 0.00149089218448345
+    },
+    {
+      "name": "specular-release",
+      "count": 4,
+      "playerSha256": "194edf753c279481a40e477a1ca03c5dfe950f3420fdaee9b70e6fe7aa65352c",
+      "summarySha256": "7d3b6ba8fb293df7542b0d7631368d7081c4cc5eb227c425548308aa439464b6",
+      "maximumLinearError": 0.001415792242257713
+    },
+    {
+      "name": "blend-regression",
+      "count": 21,
+      "playerSha256": "194edf753c279481a40e477a1ca03c5dfe950f3420fdaee9b70e6fe7aa65352c",
+      "summarySha256": "75b4f9a69fad088e904a3abf6770cfa28c53d1c8ca76ea1b4cf770fb28c4570d",
+      "maximumLinearError": 0.002798211636236614
+    },
+    {
+      "name": "local-regression",
+      "count": 22,
+      "playerSha256": "194edf753c279481a40e477a1ca03c5dfe950f3420fdaee9b70e6fe7aa65352c",
+      "summarySha256": "1da5ca7b3f04ed91893aed5890be886b6ebf03c6a850cad9ef04c4a3b36d434b",
+      "maximumLinearError": 0.0009804369489416487
+    },
+    {
+      "name": "rim-debug",
+      "count": 19,
+      "playerSha256": "5eb767fc776e331945075a5259c34cec5305733e23c4e526e4c8888f19f5ae2b",
+      "summarySha256": "de6208eff0beafc5ade3c0907e93ee6233985df0c9ed9a9c87a39cc4d05e7391",
+      "maximumLinearError": 0.00149089218448345
+    },
+    {
+      "name": "hair-debug",
+      "count": 22,
+      "playerSha256": "5eb767fc776e331945075a5259c34cec5305733e23c4e526e4c8888f19f5ae2b",
+      "summarySha256": "d7b6df8df386c27d262a82ddf5dcba7b9fe2227432e08782c5559b141da7bf88",
+      "maximumLinearError": 0.0017020742576044634
+    }
+  ],
+  "native": {
+    "schemaVersion": 1,
+    "depthCoefficients": [
+      9.999899864196777,
+      9.999999747378752e-05
+    ],
+    "textureDimensions": [
+      2560,
+      1440
+    ],
+    "proof": [
+      {
+        "index": 1,
+        "base": [
+          0.318603515625,
+          0.04736328125,
+          0.0555419921875
+        ],
+        "cameraAxis": [
+          5.376566414305728e-10,
+          -0.012610917910933495,
+          0.9999203681945801
+        ],
+        "normal": [
+          -0.5780398845672607,
+          0.03260141611099243,
+          0.8153570294380188
+        ],
+        "radial": [
+          -0.9925290942192078,
+          0.0004639070248231292,
+          -0.12200754880905151
+        ],
+        "light": [
+          -0.8911288976669312,
+          -0.2478308230638504,
+          0.3800908923149109
+        ],
+        "attenuation": 0.047601062804460526,
+        "uv": [
+          0.5377620458602905,
+          0.7984272837638855
+        ],
+        "rawDepth": 0.00371544249355793,
+        "depth": 26.842717035578815,
+        "surfaceDepth": 3.303628444671631,
+        "depthWeight": 1.0,
+        "visibility": 1.0,
+        "facing": 0.5463927491938122,
+        "tint": [
+          0.46233671763911843,
+          0.41182093489915134,
+          0.4133441380690783
+        ],
+        "expected": [
+          0.06808538552433357,
+          0.07502684441998597,
+          0.0860049300379348
+        ],
+        "native": [
+          0.06808537244796753,
+          0.07502683997154236,
+          0.08600492030382156
+        ],
+        "maximumError": 1.3076366045527976e-08,
+        "adapterResult": [
+          0.06808538552433357,
+          0.07502684441998597,
+          0.0860049300379348
+        ],
+        "adapterMaximumError": 1.3076366045527976e-08
+      },
+      {
+        "index": 3,
+        "base": [
+          0.318603515625,
+          0.04736328125,
+          0.0555419921875
+        ],
+        "cameraAxis": [
+          5.376566414305728e-10,
+          -0.012610917910933495,
+          0.9999203681945801
+        ],
+        "normal": [
+          -0.5780398845672607,
+          0.03260141611099243,
+          0.8153570294380188
+        ],
+        "radial": [
+          -0.9925290942192078,
+          0.0004639070248231292,
+          -0.12200754880905151
+        ],
+        "light": [
+          -0.6814030408859253,
+          0.47637277841567993,
+          0.5556607246398926
+        ],
+        "attenuation": 0.4368298053741455,
+        "uv": [
+          0.5378697514533997,
+          0.798441469669342
+        ],
+        "rawDepth": 0.00371544249355793,
+        "depth": 26.842717035578815,
+        "surfaceDepth": 3.303628444671631,
+        "depthWeight": 1.0,
+        "visibility": 1.0,
+        "facing": 0.49628158934269934,
+        "tint": [
+          0.3446874976856634,
+          0.13637499458156527,
+          0.1426562446751632
+        ],
+        "expected": [
+          1.2053142843525848,
+          0.3600633725337701,
+          0.29462725700533776
+        ],
+        "native": [
+          1.2053139209747314,
+          0.36006325483322144,
+          0.2946271598339081
+        ],
+        "maximumError": 3.6337785336293393e-07,
+        "adapterResult": [
+          1.2053142843525848,
+          0.3600633725337701,
+          0.29462725700533776
+        ],
+        "adapterMaximumError": 3.6337785336293393e-07
+      }
+    ]
+  },
+  "actual": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "captures": [
+      {
+        "name": "control-beauty",
+        "imageSha256": "4fa83556ca533d50fe8e3ddcde810617dad09448d520963b1ef2dc449b798f60",
+        "playerSha256": "194edf753c279481a40e477a1ca03c5dfe950f3420fdaee9b70e6fe7aa65352c",
+        "validationEnabled": false
+      },
+      {
+        "name": "special-beauty",
+        "imageSha256": "104ef43f190af29655812195ef32133ee14131dcd46d0d99ed6657182530c62e",
+        "playerSha256": "194edf753c279481a40e477a1ca03c5dfe950f3420fdaee9b70e6fe7aa65352c",
+        "validationEnabled": false
+      },
+      {
+        "name": "special-rim",
+        "imageSha256": "68bacfd6e0329b5c1ed0c0ceae9264b46172b2c0e5ab2795f0c06c888279fd09",
+        "playerSha256": "194edf753c279481a40e477a1ca03c5dfe950f3420fdaee9b70e6fe7aa65352c",
+        "validationEnabled": false
+      },
+      {
+        "name": "special-kk",
+        "imageSha256": "e5b0acfd933fd0d102e18bf9c5de65c873362a1b657d6efe2828cfcbfd3e8ac8",
+        "playerSha256": "194edf753c279481a40e477a1ca03c5dfe950f3420fdaee9b70e6fe7aa65352c",
+        "validationEnabled": false
+      },
+      {
+        "name": "special-kk-fixed",
+        "imageSha256": "e5b0acfd933fd0d102e18bf9c5de65c873362a1b657d6efe2828cfcbfd3e8ac8",
+        "playerSha256": "5eb767fc776e331945075a5259c34cec5305733e23c4e526e4c8888f19f5ae2b",
+        "validationEnabled": true
+      },
+      {
+        "name": "special-documents",
+        "imageSha256": "104ef43f190af29655812195ef32133ee14131dcd46d0d99ed6657182530c62e",
+        "playerSha256": "5eb767fc776e331945075a5259c34cec5305733e23c4e526e4c8888f19f5ae2b",
+        "validationEnabled": true
+      },
+      {
+        "name": "special-beauty-fixed",
+        "imageSha256": "104ef43f190af29655812195ef32133ee14131dcd46d0d99ed6657182530c62e",
+        "playerSha256": "5eb767fc776e331945075a5259c34cec5305733e23c4e526e4c8888f19f5ae2b",
+        "validationEnabled": true
+      }
+    ]
+  },
+  "actualComparisons": [
+    {
+      "a": "special-beauty",
+      "b": "special-beauty-fixed",
+      "maximumByteError": 0
+    },
+    {
+      "a": "special-beauty",
+      "b": "special-documents",
+      "maximumByteError": 0
+    },
+    {
+      "a": "special-kk",
+      "b": "special-kk-fixed",
+      "maximumByteError": 0
+    },
+    {
+      "defaultActualMaximumByteError": 0
+    }
+  ],
+  "defaultFixtures": [
+    {
+      "batch": "blend-regression",
+      "count": 20,
+      "maximumByteError": 0
+    },
+    {
+      "batch": "local-regression",
+      "count": 22,
+      "maximumByteError": 0
+    }
+  ],
+  "mainReuseScope": {
+    "schemaVersion": 1,
+    "project": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\project.azureproject",
+    "level": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\assets\\scene.azurelevel",
+    "levelSha256": "680623ed1b7652c09de2db30743cfec11f1290aa93052fa67d70ff797c30f25d",
+    "lightCount": 46,
+    "lineResponseInputs": 0,
+    "reusedRun": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-073632-clustered-signed-projection-3dd20e",
+    "colorBlendInputs": 0,
+    "specialResponseInputs": 0
+  },
+  "diagnostic": {
+    "schemaVersion": 1,
+    "status": "diagnostic-only-pending-material-inputs-and-compositing",
+    "maskRule": "sourceR>80 && sourceR>1.4*sourceG && sourceR>1.4*sourceB",
+    "regions": [
+      {
+        "region": [
+          1215,
+          160,
+          1340,
+          242
+        ],
+        "selectedPixels": 8681,
+        "meanEncodedRgbError": {
+          "control-beauty": 0.04680946217906584,
+          "special-beauty": 0.050187736270255905
+        }
+      },
+      {
+        "region": [
+          1140,
+          130,
+          1430,
+          440
+        ],
+        "selectedPixels": 21138,
+        "meanEncodedRgbError": {
+          "control-beauty": 0.06429507432329226,
+          "special-beauty": 0.06460341224830046
+        }
+      }
+    ],
+    "pixels": [
+      {
+        "pixel": [
+          1280,
+          195
+        ],
+        "source": [
+          231.0,
+          105.0,
+          104.0
+        ],
+        "control": [
+          231,
+          105,
+          103
+        ],
+        "candidate": [
+          231,
+          105,
+          103
+        ]
+      },
+      {
+        "pixel": [
+          1373,
+          290
+        ],
+        "source": [
+          229.0,
+          142.0,
+          131.0
+        ],
+        "control": [
+          192,
+          49,
+          59
+        ],
+        "candidate": [
+          246,
+          177,
+          166
+        ]
+      },
+      {
+        "pixel": [
+          1196,
+          290
+        ],
+        "source": [
+          137.0,
+          36.0,
+          46.0
+        ],
+        "control": [
+          147,
+          41,
+          50
+        ],
+        "candidate": [
+          147,
+          41,
+          50
+        ]
+      },
+      {
+        "pixel": [
+          1280,
+          170
+        ],
+        "source": [
+          146.0,
+          29.0,
+          41.0
+        ],
+        "control": [
+          107,
+          9,
+          25
+        ],
+        "candidate": [
+          107,
+          9,
+          25
+        ]
+      }
+    ],
+    "observedLimits": [
+      "Some edge pixels exceed the final source image",
+      "Dark crown and face responses require independent binding and compositing analysis"
+    ]
+  },
+  "sourceEvidence": {
+    "captureSha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+    "frame": 10401,
+    "event": 950,
+    "depthResource": "ResourceId::141928",
+    "depthSha256": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+    "traceSha256": {
+      "hair-1196-290-trace.json": "ba3673e537ad9c5fe05eb7858466b966247ab5e2a180fe1e9cf14d4ef806be09",
+      "hair-1280-170-trace.json": "068f65aa5f702291d72dee2af47309b42bacd1a27b9ba4ea67fa81b83efe3c3b",
+      "hair-1373-290-trace.json": "7d05d9adf3d114148636b24a76282f59d293dab5595fdb01bf7adf50877f94c9"
+    }
+  },
+  "failureEvidence": {
+    "contract-red.log": "6f5ae6adb293cb770b37d4ecfc7c9f4b47bd686d28f4721338e64352cf369659",
+    "math-red.log": "922110ca6acebc29cccbb8ad09381871562c4843a53dcc6cea6d7fe3142d3662",
+    "rim-red.log": "c557bcbc0b420c0dcaa1f5f6c39a6c3375929d4e22fc2c88862407d2a73bcfdd",
+    "specular-red.log": "4c12301d13cfe144189057de7d3a38ef0cd8e230323709a4021bd3cbebbae5f5",
+    "tracing-red.log": "53251d89fc799ed35fbb728440fe91b07608cad1c3b3ec108a0667f9940ca097",
+    "probe-red.log": "367b266782091df596252b3cdac2209d6cebd4b28af29ffa67b67cbe1a6e99f8",
+    "shadow-scope-red.log": "129985df09a5475863b24450c473b09dc3778634698b7e9613a7fc5320762abc",
+    "projection-red.log": "d983d1dc0a65d337eb1e5b88a28d6c7a224c3ca13ff60d2f768e24b692d519fd",
+    "depth-diagnostic.log": "5d67dd7e46d4048cf7b3863cfc7e72f22e5e87230a3f56ad7414396da18f3d23"
+  },
+  "configurationDiagnostic": {
+    "attempt": "Release SceneRefractionGpu",
+    "cause": "This existing test requires validation enabled; Release deliberately disables validation",
+    "resolution": "The unmodified fixture passed under Debug with validation enabled",
+    "logSha256": "d2b90764b34fb4c169b225f5738dbd0e5ab547942d1c8d3179c0c6241e831676"
+  },
+  "remaining": [
+    "Full native image gate and measured error convergence",
+    "Material input and per-pixel illumination diagnosis",
+    "Screen-edge contribution inside reflection snapshots",
+    "Skin, clothing and distance outline",
+    "Dynamic views and promotion"
+  ],
+  "sourceFingerprints": {
+    "src/ecs/LightShape.hpp": "f11de8da45323447ac1f7702babe0c52e420a536b0422bef7d44978cb432aadd",
+    "src/render/LightShapeJson.hpp": "f4a74f6606205d38703529ce4f2a92ab8e272d7f50afeb7495922b95f6f62b5d",
+    "src/render/LightBuffer.hpp": "a7b3c3dd0392e6b153f7598d616690dd96eb9d37690202bbfd2c1cc712112f5c",
+    "src/render/pathtracing/TraceScene.cpp": "246e0105fbf451b1486e7f5dbb43ab59263d81bcaa30e254a1ddc2cb1f256901",
+    "src/scenes/CharacterSceneRenderer.cpp": "fb42ff1cfecd551cd09ce0bb9146dfa900de104779f1921b6ef66b313ec2b3fd",
+    "shaders/mesh.frag": "cdda12bf209cf53b1dd8059910e01ff6b7194d50937abbab7b215cd2359a701c",
+    "shaders/light_attenuation.glsl": "e528a4dcd4b499ea1c9584ec6e4c298cd1cac189c220ef89957633c0e8e45d89",
+    "shaders/surface_response_test.comp": "6929f1b9fcc950ad0d0accbdff1092f48886a4993334ba75ad15f575ca352677",
+    "tools/endfield_native/captured_lights.py": "75cbae4b6cfe3873f1f0e9b57a6d23cb251aebb43755ce3c1a459690884730e6",
+    "tools/test_character_screen_rim_gpu.py": "58df01268c365718a13254f86e773cdf6201a8111008e59a52e11b131d477c57",
+    "tools/test_character_color_blend_gpu.py": "eeb6a62e7523fe9e01cc256adecf51fb84015f1f9e14d8e0dfbd28a50a20b0be",
+    "tools/test_projected_hair_lighting_gpu.py": "1c297f17ba9e0f45422bc1181b24f97247473f15dc155d4161a548669cd4f638"
+  }
+}

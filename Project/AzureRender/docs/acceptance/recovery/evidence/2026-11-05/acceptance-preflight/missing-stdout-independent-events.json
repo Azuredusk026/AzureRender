@@ -1,0 +1,310 @@
+[
+  {
+    "timestamp_ms": 1793856187724,
+    "level": "print",
+    "subsystem": "gpu",
+    "code": 0,
+    "message": "Selected GPU: Intel(R) RaptorLake-S Mobile Graphics Controller"
+  },
+  {
+    "timestamp_ms": 1793856187725,
+    "level": "print",
+    "subsystem": "gpu",
+    "code": 0,
+    "message": "HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)"
+  },
+  {
+    "timestamp_ms": 1793856187725,
+    "level": "info",
+    "subsystem": "startup",
+    "code": 0,
+    "message": "Starting logical device"
+  },
+  {
+    "timestamp_ms": 1793856187745,
+    "level": "info",
+    "subsystem": "gpu",
+    "code": 0,
+    "message": "GPU capability report: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\view-mask-intel-green\\fabric-0\\frames\\gpu_capabilities.json"
+  },
+  {
+    "timestamp_ms": 1793856187754,
+    "level": "info",
+    "subsystem": "startup",
+    "code": 0,
+    "message": "Completed logical device in 28 ms"
+  },
+  {
+    "timestamp_ms": 1793856187759,
+    "level": "info",
+    "subsystem": "startup",
+    "code": 0,
+    "message": "Starting shadow resources"
+  },
+  {
+    "timestamp_ms": 1793856187797,
+    "level": "info",
+    "subsystem": "startup",
+    "code": 0,
+    "message": "Completed shadow resources in 37 ms"
+  },
+  {
+    "timestamp_ms": 1793856187835,
+    "level": "info",
+    "subsystem": "startup",
+    "code": 0,
+    "message": "Starting graphics pipelines"
+  },
+  {
+    "timestamp_ms": 1793856187840,
+    "level": "info",
+    "subsystem": "startup",
+    "code": 0,
+    "message": "Completed graphics pipelines in 4 ms"
+  },
+  {
+    "timestamp_ms": 1793856187842,
+    "level": "info",
+    "subsystem": "startup",
+    "code": 0,
+    "message": "Starting scene renderer"
+  },
+  {
+    "timestamp_ms": 1793856187869,
+    "level": "print",
+    "subsystem": "asset",
+    "code": 0,
+    "message": "Turntable foot pivot: [4.000000, -4.000000, 0.000000]"
+  },
+  {
+    "timestamp_ms": 1793856187870,
+    "level": "print",
+    "subsystem": "asset",
+    "code": 0,
+    "message": "Asset path: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\view-mask-intel-green\\fabric-0\\plane.gltf"
+  },
+  {
+    "timestamp_ms": 1793856187870,
+    "level": "print",
+    "subsystem": "asset",
+    "code": 0,
+    "message": "Loaded asset: 293 vertices, 870 indices, 2 primitives, 4 materials"
+  },
+  {
+    "timestamp_ms": 1793856187871,
+    "level": "print",
+    "subsystem": "asset",
+    "code": 0,
+    "message": "Material Class v1 inventory:"
+  },
+  {
+    "timestamp_ms": 1793856187871,
+    "level": "print",
+    "subsystem": "asset",
+    "code": 0,
+    "message": "  [0] profile-index-padding -> generic, flags=0x20, source=fallback/inferred"
+  },
+  {
+    "timestamp_ms": 1793856187871,
+    "level": "print",
+    "subsystem": "asset",
+    "code": 0,
+    "message": "  [1] UnnamedMaterial -> fabric, flags=0x82000, source=asset-extras"
+  },
+  {
+    "timestamp_ms": 1793856187872,
+    "level": "print",
+    "subsystem": "asset",
+    "code": 0,
+    "message": "  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred"
+  },
+  {
+    "timestamp_ms": 1793856187872,
+    "level": "print",
+    "subsystem": "asset",
+    "code": 0,
+    "message": "  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras"
+  },
+  {
+    "timestamp_ms": 1793856187872,
+    "level": "print",
+    "subsystem": "asset",
+    "code": 0,
+    "message": "Skinning: static fallback, 1 joint matrices, 0 Morph targets"
+  },
+  {
+    "timestamp_ms": 1793856187873,
+    "level": "print",
+    "subsystem": "asset",
+    "code": 0,
+    "message": "Morph weights: 0.000000, 0.000000"
+  },
+  {
+    "timestamp_ms": 1793856187873,
+    "level": "print",
+    "subsystem": "asset",
+    "code": 0,
+    "message": "Animations: 0"
+  },
+  {
+    "timestamp_ms": 1793856187874,
+    "level": "info",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Character texture access: indexed, requested slots=56, stage sampler limit=64"
+  },
+  {
+    "timestamp_ms": 1793856187875,
+    "level": "info",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Scene load CPU preparation: 31.228400 ms, materialPixelBytes=676"
+  },
+  {
+    "timestamp_ms": 1793856187893,
+    "level": "info",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Character IBL: GPU-prefiltered environment mip chain"
+  },
+  {
+    "timestamp_ms": 1793856187896,
+    "level": "info",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Scene load shared textures: 15.034200 ms"
+  },
+  {
+    "timestamp_ms": 1793856187898,
+    "level": "info",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Scene material progress: resource=1, elapsedMs=5.008100, hashMs=0.004100, mipMs=0.114800, uploadMs=4.781400, transferredBytes=208, discardedBytes=468"
+  },
+  {
+    "timestamp_ms": 1793856187898,
+    "level": "info",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Scene load buffers: 0.123500 ms"
+  },
+  {
+    "timestamp_ms": 1793856187899,
+    "level": "info",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Character skinning and morph: Vulkan compute path"
+  },
+  {
+    "timestamp_ms": 1793856187899,
+    "level": "info",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Scene load skinning: 0.788600 ms"
+  },
+  {
+    "timestamp_ms": 1793856187900,
+    "level": "info",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Scene load descriptors: 1.265800 ms"
+  },
+  {
+    "timestamp_ms": 1793856187916,
+    "level": "info",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Scene load pipelines: 15.165400 ms"
+  },
+  {
+    "timestamp_ms": 1793856187917,
+    "level": "info",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Optional resources: faceSdfTextures=0, showcasePlatform=true"
+  },
+  {
+    "timestamp_ms": 1793856187918,
+    "level": "print",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Scene renderer: character (sceneType=character)"
+  },
+  {
+    "timestamp_ms": 1793856187918,
+    "level": "info",
+    "subsystem": "startup",
+    "code": 0,
+    "message": "Completed scene renderer in 75 ms"
+  },
+  {
+    "timestamp_ms": 1793856187919,
+    "level": "info",
+    "subsystem": "startup",
+    "code": 0,
+    "message": "Starting editor interface"
+  },
+  {
+    "timestamp_ms": 1793856187919,
+    "level": "info",
+    "subsystem": "startup",
+    "code": 0,
+    "message": "Completed editor interface in 0 ms"
+  },
+  {
+    "timestamp_ms": 1793856187919,
+    "level": "print",
+    "subsystem": "qa",
+    "code": 0,
+    "message": "CQ-0 QA: camera=scene, light=scene, effect=none, state=enabled, isolation=ambient"
+  },
+  {
+    "timestamp_ms": 1793856187919,
+    "level": "print",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Diagnostic view: Beauty, stylized lighting: off, internal outline: off, HUD: off"
+  },
+  {
+    "timestamp_ms": 1793856187920,
+    "level": "print",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Clustered lighting: 1 lights, 3456 cluster references"
+  },
+  {
+    "timestamp_ms": 1793856187939,
+    "level": "info",
+    "subsystem": "capture",
+    "code": 0,
+    "message": "Capture progress: 1 / 1"
+  },
+  {
+    "timestamp_ms": 1793856188070,
+    "level": "print",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Rendered frames: 1"
+  },
+  {
+    "timestamp_ms": 1793856188072,
+    "level": "print",
+    "subsystem": "capture",
+    "code": 0,
+    "message": "Capture manifest: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\view-mask-intel-green\\fabric-0\\frames\\capture_manifest.json"
+  },
+  {
+    "timestamp_ms": 1793856188072,
+    "level": "print",
+    "subsystem": "capture",
+    "code": 0,
+    "message": "Captured frames: 1 at 60 fps"
+  },
+  {
+    "timestamp_ms": 1793856188088,
+    "level": "print",
+    "subsystem": "render",
+    "code": 0,
+    "message": "Allocator after unload: buffers=0 images=0"
+  }
+]

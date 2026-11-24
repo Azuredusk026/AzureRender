@@ -1,129 +1,1633 @@
-# Azure Engine 开发总计划
+# 开发总计划
 
-> 文档类型：开发计划
-> 状态：R4 Complete，G0 Ready
-> 更新日期：2026-10-03
-> 适用范围：Windows 编辑器与 Windows 运行时；Android 目标暂缓
-> 实现状态依据：源码、测试与阶段验收记录
+## 最终交付目标
 
-## 产品目标与决策
+交付可配置、可扩展、可组合的通用引擎。
+编辑器与 Player 共享运行时、资产及渲染契约。
+玩法规则通过项目组件、脚本及配置表达。
+架构范围见[引擎实施计划](2026-10-06-engine-evolution.md)。
 
-Azure Engine 面向小型第三人称游戏，提供渲染、关卡、物理、脚本、反射代码生成、资产管线和编辑器。AzureRender 作为渲染核心的现有实现基础。当前代码仍使用 AzureRender 名称，模块重组阶段落实引擎命名。
+AI、脚本及界面通过统一生产操作观察和修改项目。
+操作具有类型校验、事务及可追溯结果。
 
-用户已确认以下方向。基础设施采用自研轻量 ECS、Jolt、Lua 与 sol2，以及 C++ 元数据代码生成工具。资产采用 glTF、JSON 场景与 UUID 资源标识。
+当前验收应用为完整帝江号中庭与原生角色。
+场景包含围护、中央物流、照明、反射及动态遮挡。
+角色支持眼睛、头发、皮肤、服装及原生动作。
+可玩交付支持 WASD、碰撞及动作混合。
 
-编辑器使用 Dear ImGui，游戏界面使用 RmlUi。许可证优先选择宽松协议。第三方版本与 Windows 编译兼容性在模块准入时验证。
+完成条件由既有门禁共同决定。
+标定后的有效静态区域 SSIM 至少为 0.95。
+关键区域的中位亮度误差目标至多为 10%。
+局部外观、时间稳定性及资源释放按所属门禁验收。
 
-最高优先级是渲染核心（Render Core）。首先完成场景数据收口、渲染图和渲染能力，再建设游戏运行时。平台生命周期和能力降级在渲染阶段进入契约，Android 适配仅在用户重新安排后规划。
+交付须通过保存、重开、目录移动及独立 Player 运行。
+探索项目与资产检视工具共同验证引擎复用。
+标准负载的 GPU P95 至多为 16.6 毫秒。
+Player 的 CPU 工作 P95 至多为八毫秒。
 
-首期编辑器支持进程内运行、暂停与单步。发布目标包括独立 Player，编辑器依赖只能进入编辑器构建目标。
+性能负载、双设备和长跑按正式阶段验收。
+全部适用条件通过后，才能登记最终完成。
 
-## 文档入口与状态管理
+## 当前执行顺序
 
-本文是产品范围、阶段优先级、依赖和执行状态的唯一入口。历史技术路线位于 `docs/archive/plans/`，不参与当前阶段判断。[文档规范](../documentation-standard.md)约束全部新增计划和运行时说明。
+[联合场景热点纹理分配](../acceptance/nr/joint-texture-hot-placement.md)完成 1440p 同驱动逐像素比较与 1080p60 配对计时。候选 GPU P95 高于首轮参考，保留隔离结果。
 
-阶段使用 Planned、Ready、Active、Complete、Blocked、Deferred 六种状态。一次一个 Active 阶段。Complete 必须附带提交、测试命令、环境和证据路径。已有 E0–E2 完成记录保留，R0 专门验证其运行期集成缺口。
+[三纹理采样与视口选择集成](../acceptance/nr/projected-hair-viewport-integration.md)通过所属构建和双显卡复验。
+[投影头发主线注册用例](../acceptance/nr/projected-hair-viewport-integration.md#主线注册用例)通过双配置 GPU 复测和构建契约核对。
+[相机捕获清单](../acceptance/nr/capture-camera.md#主线清单版本)通过投影布局三、镜头输入及画面偏移检查。
+[公开角色冻结画面](../acceptance/nr/frozen-public-visual.md#冻结驱动复测)按 NVIDIA 595.79 和 RGB 零差异门槛核验。
 
-## 阶段编码规则
+[主线联合场景短测](../acceptance/nr/performance-bottlenecks.md#主线联合场景短测)记录标准构建的场景阶段成本。
+CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
+[联合场景 80 W 采样](../acceptance/nr/joint-59579-qualification.md)记录两轮 1800 帧及风扇对照。
+最高风扇档 CPU 工作 P95 为 6.98 毫秒，GPU 帧 P95 为 19.99 毫秒。
+正式 GPU 帧耗时、热状态和设备本地容量仍待验收。
+[独显空闲复验](../acceptance/nr/joint-nonlocal-texture-placement.md#独显空闲复验)的非本地纹理候选通过 CPU、设备本地内存和工作集门槛。GPU P95 为 19.02 毫秒，软件热降频观测为 15 次。
+[最高风扇档复验](../acceptance/nr/joint-nonlocal-texture-placement.md#最高风扇档复验)的 GPU P95 为 16.95 毫秒，软件热降频观测为 3 次。用原门槛继续验收 GPU P95 和热状态。
+[进程级 CPU 节能对照](../acceptance/nr/joint-nonlocal-texture-placement.md#进程级-cpu-节能对照)测得 GPU P95 为 16.35 毫秒，软件热降频观测为零，CPU 工作 P95 为 20.11 毫秒。完整条件继续验收。
+[平衡电源计划复验](../acceptance/nr/joint-nonlocal-texture-placement.md#平衡电源计划的处理器节能首选项)三轮均满足时间、容量及设备状态门槛，GPU P95 为 16.42 至 16.50 毫秒，CPU 工作 P95 为 6.99 至 7.52 毫秒。
+[聚光灯范围与辐照度系数](../acceptance/nr/joint-gpu-pass-budget.md#聚光灯范围与辐照度系数)登记光源访问估算及双设备精确对照。快照颜色绘制的零调用事件耗时上界为 0.121 毫秒。
 
-阶段代码用于可独立验收的宏观目标。首字母标识产品边界。`F` 为基础设施，`R` 为 Render Core，`G` 为引擎运行时。
+[可玩包关卡提交](../acceptance/p1/2026-11-13-level-commit.md)通过提交耗时和资源驻留门槛。
+[可玩包三十分钟长跑](../acceptance/p1/2026-11-13-playable-30min.md)完成 33 次切关和 34 次重启，全部分钟窗口满足 GPU 预算。
+[主线 CPU 注册回归](../acceptance/nr/current-registered-cpu.md#管线缓存保留构建)通过双配置各 333 项检查。GPU 用例使用同批受检产物。
+[主线 GPU 定向复验](../acceptance/nr/current-registered-gpu-recoveries.md)通过三项 Release 检查。完整 GPU 回归持续登记。
+[标准构建定向复验](../acceptance/nr/current-registered-gpu-recoveries.md#标准构建定向复验)通过采样宿主、流程宿主、CoreCLR 发布和动作混合检查。
+[正式工作集与管线缓存](../acceptance/nr/registered-working-set-cache.md)记录五类正式负载十五轮通过，工作集最大增长为 0.448%。
+[冻结画面标准构建复验](../acceptance/nr/frozen-public-visual.md#管线缓存保留的标准构建复验)通过三条路径的双配置严格比较和管线缓存注册检查。
+[标准发布包复验](../acceptance/nr/registered-gpu-infrastructure.md#管线缓存保留的发布包复验)通过五项 Windows 注册检查及两个移动交付目录验证。
+[GPU 注册回归的产物预约与管线缓存](../acceptance/nr/registered-gpu-infrastructure.md)记录双配置 34 项采集验证、缓存分流、管线计时及着色器读取对照。
+[编辑器与目录规模复验](../acceptance/nr/registered-gpu-infrastructure.md#编辑器加载与目录规模)核对资产刷新阶段、混合材质路径和一万资产的缓存发布。
+[编辑器与资产主线复验](../acceptance/nr/registered-gpu-infrastructure.md#编辑器与资产主线复验)记录标准构建的目录、着色器和材质检查。完整注册回归按两种配置执行。
+[Windows 发布安装](../acceptance/nr/registered-gpu-infrastructure.md#windows-发布安装)记录游戏包、可玩包和安装清单的正式复验。
+[材质视图管线缓存](../acceptance/nr/registered-gpu-infrastructure.md#材质视图管线缓存)记录独立渲染器的逐字节复验。
+[着色器注册回归](../acceptance/nr/frozen-public-visual.md#着色器注册回归)通过两种配置的编译契约和完整目录编译。
 
-`U` 表示编辑器与交互，`P` 表示发布。`E0–E7` 保留为历史渲染技术编号。编号表示交付顺序，不代表内部接口数量。
+[空白视口选择](../acceptance/nr/editor-empty-viewport-selection.md)通过探索项目和场景检视项目的所属回归。
 
-内部类、测试、着色器、资源池和工具任务不创建新的阶段代码。它们必须归属于当前 Active 阶段，并在该阶段的验收记录中列出。历史 E0–E7 和旧 R0–R6 保留为技术追踪编号，不再新增同级细分阶段。
+[参考头发半层采样集成](../acceptance/nr/reference-hair-boundary-integration.md)通过所属构建和双显卡复验。
 
-每个宏观阶段只允许一次 Complete 提交。阶段完成必须同时满足实现、端到端验收、性能记录、运行时文档、清理检查和 Git 提交六项条件。
+[画质与性能集成](../acceptance/nr/quality-performance-integration.md)通过两种配置的标准构建及双设备回归。
+参考附件和原始四帧逐字节一致。
 
-## 平台与模块边界
+[材质组合管线范围验收](../acceptance/nr/material-viewquad-pipeline-scope.md)通过原始四帧及短时净收益。
+[主线材质候选采样](../acceptance/nr/material-viewquad-integration.md)完成 1080p60 连续 1800 帧诊断。
+CPU 工作 P95 为 5.62 毫秒，GPU P95 为 18.56 毫秒，设备本地内存峰值为 2.593 GiB。
+标准构建采用参考族。
+[595.79 对照](../acceptance/nr/material-viewquad-integration.md#59579-像素对照)验证主线与两条材质路径逐像素一致。
+联合场景四帧冻结图来自 592.82，原图差异仍待核验。
+计算材质在固定 80 W 下的 GPU P95 为 19.29 毫秒。
+后段出现软件热降频，设备本地峰值为 2.593 GiB。
 
-| 模块 | 职责 | 依赖方向 |
-| --- | --- | --- |
-| Foundation | 日志、时间、文件、任务、标识、配置 | 标准库与平台设施 |
-| Platform | 窗口、表面、输入、应用生命周期 | Foundation |
-| Render Core | RHI、渲染图、GPU 场景、材质与光照 | Platform、Foundation |
-| Runtime | World、Level、组件、资源、物理、脚本、动画、音频 | Foundation、Render Core |
-| Editor | 项目、层级、属性、资产、操作历史、运行调试 | Runtime |
-| Player | 启动、资源挂载、游戏循环与发布 | Runtime、Platform |
-| Tools | 反射生成、资产转换、校验与打包 | 宿主机工具链 |
+[材质视图回归矩阵](../acceptance/nr/material-view-regression-matrix.md)通过双配置三十六项检查。
+[捕获布局回归](../acceptance/nr/capture-layout-regression.md)通过双配置八项多采样轮廓光检查。
+[编辑器采样回归](../acceptance/nr/editor-sampling-regression.md)通过双配置五模式切换、越界拒绝及保存重开检查。
+[编辑器资产刷新](../acceptance/nr/editor-asset-refresh.md)通过双配置十秒刷新门槛。
+[编辑器视口模型加载](../acceptance/nr/editor-placed-resource-loading.md)核对导入、放置、外部文件更新及可玩流程。
+[材质光照回归矩阵](../acceptance/nr/material-lighting-regression.md)通过双配置六项测试及 168 个采集用例。
+[NPR 渐变组合回归矩阵](../acceptance/nr/npr-ramp-regression.md)通过双配置四项测试及 104 个采集用例。
+[NullRhi 录制相机](../acceptance/nr/null-rhi-camera-regression.md)通过两种配置的裁剪平面与录制检查。
+[主深度颜色附件范围](../acceptance/nr/main-depth-attachment-range.md)通过三个颜色附件的实际场景和八项所属检查。
+完整项目回归按两种配置执行。
 
-Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期、最低系统和设备性能预算无限期 Deferred，只有用户明确安排后才进入计划。桌面 GLFW 保留在 Windows 平台实现内。
+[材质组合级联成本](../acceptance/nr/computed-cascade-demand-comparison.md)通过六附件核对，局部耗时降幅低于准入门槛。
+[阴影圆盘行范围成本](../acceptance/nr/shadow-disk-row-interval.md)通过六附件核对，实际材质耗时减少约 1.08%。
 
-资源访问通过统一虚拟路径支持桌面目录；Android 包内资产支持随平台阶段 Deferred。任务工具和反射生成器在宿主机运行，生成结果参与目标平台交叉编译。
+[椭圆覆盖选级主线验收](../acceptance/nr/material-ellipse-coverage-main-integration.md)通过二十二项自动检查、双设备头发采集及原始四帧。
 
-## 当前执行路线
+[场景参考法线与对象身份主线验收](../acceptance/nr/scene-reference-normal-main-integration.md)通过三十项检查及双设备四附件读回。
+完整可见量和联合画质继续按所属条件核对。
 
-| 阶段 | 依赖 | 统一目标 | 完成门禁 |
+[场景参考深度主线验收](../acceptance/nr/scene-reference-depth-main-integration.md)通过三十项检查和双设备深度全图读回。
+原始四帧精确一致，完整颜色按所属门槛验收。
+
+[参考相机渲染主线验收](../acceptance/nr/reference-camera-binding-main-integration.md)通过双配置及双设备检查。
+实际视图核对 384 万个几何掩码像素，重采原始四帧精确一致。
+原生颜色与参考时间效果按各自门槛继续验收。
+
+[材质组合深度策略验收](../acceptance/nr/material-viewquad-production.md)通过严格四帧及深度回退。
+同宿主候选 GPU 均值减少约 14.72%。
+候选受峰值工作集及 GPU P95 门槛约束，标准构建采用参考族。
+
+[场景参考相机主线验收](../acceptance/nr/scene-reference-camera-main-integration.md)通过双配置三十四项检查。
+实际移动误差约为 0.000105427 像素，重采原始四帧精确一致。
+生产绘制及拾取绑定继续推进，性能组合按独立单元接入。
+
+[光栅位置与项目视图主线验收](../acceptance/nr/reference-raster-project-main-integration.md)通过双配置二十六项检查。
+709824 个设备组合分量逐位一致，重采原始四帧精确一致。
+项目持久配置已接入，场景选择及实际绘制继续推进。
+
+[深度可见性组合原生验收](../acceptance/nr/quad-depth-combination-native.md)通过原始四帧及四项短时效率条件。
+GPU 均值约为 16.34768 毫秒，较两侧参考减少约 13.58%。
+GPU P95 约为 16.76836 毫秒，生产接入及正式预算继续执行。
+
+[四像素组深度可见性组合](../acceptance/nr/quad-depth-visibility.md)通过六附件及局部准入。
+完整材质降幅约 21.21%，固定类别约 31.58%。
+原生四帧及成对短时净收益按独立批次执行。
+
+[四像素组覆盖接收](../acceptance/nr/quad-coverage-receiver.md)通过六份附件核对。
+固定类别成本增加约 0.31%，效率未准入，候选保持隔离。
+
+[材质片元工作量](../acceptance/nr/material-fragment-work-scope.md)完成全部实际管线分组。
+固定类别占全事件耗时约 25.45%，透明裁剪与接收准备继续核验。
+
+[参考相机视图主线验收](../acceptance/nr/reference-camera-view-main-integration.md)通过双配置二十项检查。
+八次设备检查、真实空间查询及重采原四帧通过。
+场景宿主绑定、Intel 原生差异及正式帧预算继续处理。
+
+[驻留色彩图像通道范围](../acceptance/nr/resident-srgb-channel-scope.md)完成 180 份实际图像核对。
+单通道关系的乐观差额约为 113.70 MB，正式容量继续验收。
+
+[材质一致索引局部效率](../acceptance/nr/uniform-material-descriptor.md)完成完整捕获核验。
+六附件逐字节一致，成本增加约 0.48%，效率未准入。
+
+[DDS 块存储范围](../acceptance/nr/dds-block-storage-scope.md)完成源文件及物理格式能力调查。
+实际缓存、像素处理及逻辑设备特性按候选契约继续核验。
+
+[参考位置帧主线验收](../acceptance/nr/reference-position-frame-main-integration.md)通过双配置十八项检查。
+十二次设备检查及重新采集的原四帧通过，程序集为 859 份。
+
+[四像素组设备资格](../acceptance/nr/quad-device-capture-qualification.md)完成私有特性链、原四帧及完整捕获核对。
+[级联需求控制](../acceptance/nr/quad-cascade-demand-local-qualification.md)通过两版六附件核对。
+完整材质降幅至多约 14.41%，效率未准入，候选保持隔离。
+
+[材质纹理梯度主线验收](../acceptance/nr/material-uv-main-integration.md)通过双配置十八项检查。
+两设备六组主线复验及原四帧摘要核对通过，程序集为 856 份。
+
+[展开接收计算的局部效率](../acceptance/nr/unrolled-computed-view-local-qualification.md)完成两种候选的六附件核对。
+完整材质降幅至多约 19.49%，效率未准入，候选保持隔离。
+关闭风格化的独立控制约为 18.86%，六附件逐字节一致。
+[纹理格式与容量](../acceptance/nr/texture-storage-format-scope.md)完成设备能力和源图像范围核对。
+正式内存按实际工作负载及分配器高水位继续验收。
+
+[公共梯度主线集成](../acceptance/nr/public-uv-gradient-main-integration.md)通过两配置十二项检查。
+双设备实际光栅及三角形边缘分量逐位一致。
+默认三宿主和全部既有程序摘要保持一致。
+生产取样、投影及实际深度继续按专项验收。
+
+[参考算术主线集成](../acceptance/nr/visibility-reference-integration.md)通过两配置及原四帧。
+合计 32 项有效检查通过，双设备默认及参考路径均无跳过。
+完整头发颜色、当前深度来源和帧预算继续处理。
+
+[材质驻留范围](../acceptance/nr/material-storage-scope.md)完成实际归属核对。
+385 份纹理中，采样器造成的重复仅为 3136 字节。
+临时诊断源码已恢复，两配置来源与缓存检查通过。
+
+[快照颜色历史](../acceptance/nr/snapshot-color-history.md)完成实际启用核对。
+四帧零差，整数身份附件混合触发十四条验证错误。
+源码及默认宿主已恢复，短时计时条件未满足。
+
+[缓存写入生命周期](../acceptance/nr/material-cache-seal.md)通过双配置二十项检查。
+原四帧保持零差，加载后释放 1664821444 字节身份存储。
+385 份纹理的 GPU 驻留量保持受检结果。
+正式内存、帧预算及完整画质继续按原门槛验收。
+
+[浮点身份编码](../acceptance/nr/float-history-identity.md)通过两设备局部契约。
+每台设备完成 57 个场景及约 1.20 亿像素结果核对。
+场景历史的实际采样、容量及净收益继续独立验证。
+
+[浮点快照历史](../acceptance/nr/float-snapshot-history.md)完成实际启用及三进程评估。
+原四帧零差，GPU 名义改善约 0.02634%。
+区间效率门槛未通过，源码及实际宿主已恢复。
+
+[冻结纹理通道](../acceptance/nr/texture-channel-scope.md)完成 541 份源文件摘要及基础通道核查。
+[色度与缓存集成](../acceptance/nr/main-chroma-seal-integration.md)通过主线双配置 24 项及冻结四帧。
+
+[线性通道存储](../acceptance/nr/linear-texture-channel-storage.md)通过双配置、双设备及原四帧，纹素字节减少约 14.08%。
+[预备像素载荷](2026-11-10-prepared-pixel-payloads.md)按不可变载荷及加载接入两阶段执行，源基础层压缩还原核查通过。
+
+[不可变载荷入口](../acceptance/nr/immutable-byte-payloads.md)通过双配置所属回归及双设备 648 组采样条件。
+[预备像素加载](../acceptance/nr/prepared-material-loading.md)完成直接及后台加载接入，双配置 32 项和原四帧通过，单场景工作集峰值约 1.9227 GiB。
+
+[输出与加载集成](../acceptance/nr/output-pixel-loading-integration.md)通过两配置 34 项。
+双设备大纹理组合及原四帧通过，单次工作集峰值约为 1.9026 GiB。
+
+[当前场景成本](../acceptance/nr/compact-texture-gpu-cost.md)完成 3453 个事件分解。
+重点材质程序的受检耗时约占重放总量的 57.66%。
+下一局部控制核对固定过滤半径的循环成本。
+新原生整帧候选须先取得符合门槛的减少依据。
+
+[过滤半径控制](../acceptance/nr/shadow-filter-constant-control.md)保持六个附件逐字节一致。
+局部名义变化未达门槛，生产保持运行时过滤参数。
+
+[级联成本控制](../acceptance/nr/cascade-shadow-cost-control.md)保留名义差值及参考漂移。
+[滑动范围表](2026-11-10-sliding-shadow-range.md)执行隔离位值与查询成本核对。
+当前生产阴影、原四帧及正式门槛保持有效。
+
+[范围查询原型](../acceptance/nr/sliding-shadow-range-prototype.md)通过独立位值核对。
+双配置、双设备的构表及两类查询全部通过。
+局部查询成本已记录，原生整帧准入条件继续核定。
+
+[圆盘零权重控制](../acceptance/nr/shadow-disk-zero-rejection.md)保持权重及六附件零差。
+局部效率未通过，生产保持现行圆盘过滤。
+
+[内部采样控制](../acceptance/nr/shadow-interior-gather-control.md)完成兼容及替换路径校准。
+局部效率未通过，生产保持当前程序。
+后续比较中，参考与候选均采用相同替换路径。
+
+[所选级联状态](../acceptance/nr/selected-shadow-receiver-control.md)保持六附件一致。
+清除映射与连续预热的空控制变化约为 0.124%。
+局部减少约为 15.25%，组合准入继续核定。
+
+[并行资源调度](../development/shared-resources.md)提供重负载互斥入口。
+性能、画质与论文工作流已登记实际对话和独立工作区。
+跨工作树输入在主维护索引中持有活动引用。
+阴影历史接续按[恢复计划](2026-11-09-performance-resume.md)执行。
+
+[论文独立基准](../../experiments/thesis/README.md)提供三条实际 Vulkan 路径。
+两设备的二十四项桌面正确性条件及三份 API 捕获已核对。
+正式矩阵、跨平台数据及结果章节等待移动实机资格。
+
+[原生精度组合](../acceptance/nr/native-quality-combination.md)完成双设备区域核对。
+NVIDIA 通过，Intel 保留 120 处一字节以上超差。
+[倒数参考夹具](../acceptance/nr/native-reciprocal-domain.md)在 Intel 保留一处超差。
+剩余点对应齐次 X 的一个末位单位差异，生产接入待验。
+[精确视口归一化](../acceptance/nr/receiver-exact-viewport.md)使双设备参考夹具满足接收门槛。
+全部世界位置逐位一致，公共运行时接入及资源成本继续验收。
+[倒数压缩配置](../acceptance/nr/reciprocal-compact-profile.md)在两设备穷举全部尾数并逐位匹配。
+参考资源为 2 MiB，公共配置与运行时路径继续接入。
+[公共参考算术](../acceptance/nr/visibility-reference-arithmetic.md)完成主配置专项核对。
+双设备的 49384 个接收像素及 17017 个头发可见量像素均满足原门槛。
+构造拒绝、容量、失败释放及两种参考配置通过。
+双配置集成、当前场景深度及完整颜色继续验收。
+画质工作流按[专项计划](2026-11-09-native-quality.md)继续核对世界位置与完整头发。
+[头发归因](../acceptance/nr/hair-color-visibility-attribution.md)确认 42 处颜色误差受可见量影响。
+隔离来源控制仍有 31 处超差，生产颜色基线保留原 73 处待项。
+[头发基色层级](../acceptance/nr/hair-base-color-mip-content.md)的十二级 RGB 内容全部一致。
+后续分别核对实际取样及颜色算术。
+[实际取样位值](../acceptance/nr/hair-base-sample-region.md)通过十八个版本的输出资格核对。
+31 个剩余颜色位置中，27 个基色向量逐位一致。
+[参数与双法线](../acceptance/nr/hair-material-sample-region.md)已核对编码及重复取样一致性。
+六处较大输入差异与其余 25 处颜色算术分别定位。
+[实际插值坐标](../acceptance/nr/hair-uv-sample-region.md)完成十二个版本的资格核对。
+六处材质取样差异中，五处具有 UV 输入差异。
+[插值基底](../acceptance/nr/hair-interpolated-basis.md)已核对实际法线和切线位值。
+几何输入对剩余颜色误差的贡献继续单因素核验。
+[几何基底来源控制](../acceptance/nr/hair-basis-color-control.md)只闭合一处颜色失败。
+主要剩余误差继续核对片元着色与附件边界。
+[附件前输出位值](../acceptance/nr/hair-final-float-values.md)区分格式和着色差异。
+主要剩余差异按色度调制线索继续定位。
+[实际漫反射色带](../acceptance/nr/hair-diffuse-ramp-input.md)排定纹理及取样边界。
+头发实际漫反射响应及遮罩见[响应权重核对](../acceptance/nr/hair-diffuse-response-weights.md)。
+两端 36 个探针均通过调用及撤销资格。
+[条纹实际系数](../acceptance/nr/hair-stripe-modulation.md)完成两端资格核对。
+[主光色度运算](../acceptance/nr/hair-main-chroma-operation.md)完成原生单因素归因。
+[所选主灯组合](../acceptance/nr/hair-selected-main-composite.md)已限定主灯贡献。
+来源控制下的完整区域保留 14 处，没有新增超差。
+[公共主光色度](../acceptance/nr/hair-main-brightness-saturation.md)通过两配置、双设备所属检查及默认原四帧。
+[修正后的浮点输出](../acceptance/nr/hair-main-chroma-final-float.md)通过九项探针资格。
+31 处半精度存储重建合格，26 处 R11 存储预测一致。
+[R11 存储控制](../acceptance/nr/hair-r11-storage-control.md)的整区 HDR 符合转换模型。
+实际最终颜色保留六处超差，包含一处新增超差。
+候选保持隔离。
+[显示消费边界](../acceptance/nr/hair-display-consumption.md)的整区比较最大差为一字节。
+[参数与双法线层级](../acceptance/nr/hair-normal-param-mip-content.md)的二十四级内容全部一致。
+[顶点投影来源](../acceptance/nr/hair-postvs-clip-source.md)已核对实际缓冲及原生投影运算。
+11564 个原生裁剪向量逐位重建。
+[相对投影来源控制](../acceptance/nr/hair-relative-projection-control.md)使六处超差保留两处。
+四处进入原门槛，控制未新增超差。
+[细粒度梯度组合](../acceptance/nr/hair-relative-fine-gradient-control.md)保留一处新增超差。
+[四像素组梯度组合](../acceptance/nr/hair-relative-quad-gradient-control.md)通过私有来源完整区域。
+17017 个像素的峰差为一字节，原 73 处全部闭合且新增为零。
+[公共输出精度](../acceptance/nr/material-output-precision.md)完成两配置、双设备所属核对。
+3276800 次分量比较及十六张图像通过，原始四帧保持零差。
+[公共 UV 梯度助手](../acceptance/nr/material-uv-gradients.md)完成双配置、双设备光栅核对。
+斜边三角形的覆盖外辅助调用通过双配置、双设备补验。
+139456 个分量逐位一致，相对投影和实际深度继续接入。
+
+[材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
+完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
+[静态阴影范围](../acceptance/nr/shadow-static-reuse-scope.md)核定历史生成成本上界约为 1.32 毫秒。
+动态失效与静态比例仍待核对，机制保持提案。
+[实际接收坐标](../acceptance/nr/native-producer-gpu-intermediates.md)通过同事件输出资格核对。
+受精度约束的重建闭合 NVIDIA 区域的四十处超差。
+[固定采样足迹](../acceptance/nr/shadow-gather-footprint.md)闭合 Intel 实测坐标下的过滤超差。
+四项设备检查与原四帧通过，完整接收重建和头发颜色继续验收。
+[阴影历史原型](../acceptance/nr/temporal-shadow-history-prototype.md)通过独立机制及局部门槛。
+[有界历史资源](../acceptance/nr/shadow-history-resources.md)通过双配置与双设备检查。
+[实际静态范围与策略](../acceptance/nr/shadow-history-runtime-scope.md)完成元数据及失效契约核对。
+[主颜色历史](../acceptance/nr/shadow-history-runtime-integration.md)已完成实际消费与严格四帧核对。
+成对短测 GPU 均值增加约 0.175 毫秒，实验选项默认关闭。
+后续按真实片元成本与命中分布核定新的候选。
+
+阴影接收面的[入口计算](../acceptance/nr/shadow-receiver-entry.md)已接入生产。
+原 Intel 零历史用例及十六项双设备、双配置检查通过，四帧保持 RGB 零像素差。
+该单元解决稳定性待项，CPU 与 GPU 的正式预算继续优化。
+帧场景的[来源成本](../acceptance/nr/frame-scene-source-cost.md)局部差值约为 0.037 毫秒。
+候选保持隔离，按热点门槛继续定位命令录制及状态提交。
+[分段归因](../acceptance/nr/cpu-recording-substages.md)确认渲染器更新占本轮 CPU 工作约 56.5%。
+阴影录制仅约 0.34 毫秒，帧内优先处理实例、透明索引和运动准备。
+准备步骤的[消费范围](../acceptance/nr/cpu-consumed-preparation.md)完成八帧诊断。
+不可见透明顶点约占 4.99%，其局部约为 0.072 毫秒，相关单项候选未取得本批次准入依据。
+[准备批次评估](../acceptance/nr/cpu-preparation-batch.md)的更新均值降低约 7.46%，未达到本批门槛，候选保持隔离。
+[GPU 透明索引准备](../acceptance/nr/gpu-transparent-index-sort.md)通过十二项所属检查及严格四帧，局部 CPU 准备减少约 0.99 毫秒。
+[绘制阶段归因](../acceptance/nr/gpu-draw-stage-cost.md)定位保守遮挡候选，调用统计与实际片元结果保持一致。
+[保守剔除机制](../acceptance/nr/gpu-conservative-occlusion.md)通过双设备检查，独立深度候选的整帧收益未成立。
+[主通道深度复用](../acceptance/nr/main-depth-reuse.md)保持冻结四帧完全一致，短时 GPU 均值减少约 0.87 毫秒。
+[多阶段遮挡范围](../acceptance/nr/snapshot-shared-occlusion.md)的增量上界约为 0.32 毫秒，候选保持提案状态。
+[默认隔离材质管线](../acceptance/nr/default-isolation-pipelines.md)通过二十项所属检查及严格四帧，主通道片元寄存器减少 25%。
+该策略的[短时净差](../acceptance/nr/default-isolation-cost.md)约为 0.04 毫秒，小于参考漂移，实验构建选项默认关闭。
+原帧预算及正式条件保持有效。
+[固定类别范围](../acceptance/nr/fixed-class-isolation-scope.md)约占历史事件耗时的 22.67%，本单元保持范围结论。
+[共享照明组合](../acceptance/nr/radiance-precision-boundaries.md)通过双设备、双配置的小数据检查，原有 736 个程序保持一致。
+[照明缓存接入](../acceptance/nr/radiance-cache-precision-integration.md)通过严格四帧及两种配置的设备检查。
+短时 GPU 均值增加约 0.72 毫秒，实验选项默认关闭。
+[消费计数](../acceptance/nr/radiance-consumption-counters.md)完成帧槽、GPU 图案及设备回退检查。
+原生回收 30 个有效帧槽。
+合格访问为 104810197 次。
+逐片元命中率为 100.0000%。
+完整四像素组接受率为 85.0605%。
+后续性能批次按实际覆盖及附件成本选择。
+[GPU 绘制选择](../acceptance/nr/gpu-predicate-draw-selection.md)通过六项所属检查。
+[同帧资格核验](../acceptance/nr/radiance-validation-path.md)保持严格四帧零差异。
+原生槽均选择完整回退，实验入口默认关闭。
+[独立深度重放](../acceptance/nr/radiance-depth-replay.md)通过共面及精度检查。
+严格四帧一致，原生退役槽仍为完整回退。
+[逐绘制资格](../acceptance/nr/radiance-draw-selection.md)实际启用原生轻量绘制。
+原生图像仍有精度待项，实验入口默认关闭。
+布局及阶段掩码修正通过所属检查。
+[四像素组消费](../acceptance/nr/quad-safe-radiance-consumer.md)保持原生严格四帧一致。
+1080p 短时 GPU 均值未观察到显著收益。
+实验入口默认关闭，后续核对真实消费及主场景分段成本。
+[稀疏消费归因](../acceptance/nr/sparse-consumer-attribution.md)完成一次原生诊断。
+四像素组接受占消费采样约 30.23%。
+隐藏三角形样本与完整补充成本按主场景分段继续定位。
+[GPU 通道归因](../acceptance/nr/gpu-pass-attribution.md)取得十九个通道的实际结果。
+快照与最终绘制合计约 14.61 毫秒，蒙皮约为 0.60 毫秒。
+共享形变输出的数据宽度进入后续优化范围。
+[紧凑蒙皮输出](../acceptance/nr/compact-skinning-output.md)已接入普通配置。
+十四项检查及严格四帧通过，缓冲逻辑容量减少约 62.96%。
+本地 GPU 均值减少约 0.43 毫秒，正式帧预算继续待通过。
+[计算归约门槛](../acceptance/nr/bounded-compute-reductions.md)完成数值与独立效率检查。
+局部差值小于参考漂移，候选保持隔离。
+后续核对对象阴影材质中未被消费的级联接收面计算。
+既有报告中的对象主阴影接收项为零，相关特化保持范围核对。
+[阴影分块批处理](../acceptance/nr/shadow-tile-batching.md)已接入默认配置。
+二十八项检查及严格四帧通过，本地 GPU 均值减少约 0.11 毫秒。
+后续继续核对主场景阴影过滤及实际消费成本。
+[圆盘权重分类](../acceptance/nr/shadow-disk-classification.md)的百万组输入逐位一致。
+分类分支未通过局部效率门槛，候选保持隔离。
+本单元的原生采集及整帧计时进程数均为零。
+后续优先核对主通道遮挡与实际材质工作量。
+[范围索引](../acceptance/nr/shadow-range-index.md)通过双设备逐位检查。
+局部净成本减少约 42.64%，净差约为 0.044 毫秒。
+候选保持隔离，场景收益继续核定。
+后续优先处理快照与最终绘制的重复阴影计算。
+[标量阴影复用](../acceptance/nr/surface-shadow-reuse.md)完成两种诊断配置的严格四帧。
+最终三十六项检查通过，整帧收益未成立，候选隔离保存。
+通道结果分别记录最终绘制及不透明快照的变化。
+后续处理管线缓存上限与 D 盘工具缓存路径。
+[有界开发缓存](../acceptance/nr/bounded-development-cache.md)按程序内容划分代次。
+当前原生载荷约为 26.04 MiB，暖启动的 645 次创建全部命中。
+SDK 路径归属于 D 盘任务，两配置及设备检查通过。
+后续继续按实际 GPU 通道成本组织主场景优化。
+[图像缓冲所有权](../acceptance/nr/owned-image-conversion.md)已接入 glTF 与独立图像加载。
+两配置各四项检查通过，各 675 份程序摘要一致。
+本单元没有追加原生采集，完整加载成本与帧预算分别验收。
+[批提交范围](../acceptance/nr/draw-command-batch-scope.md)核对既有一百二十帧记录。
+录制窗口包含图准备及执行，线程区间约为 0.479 毫秒。
+批提交提案继续核对独立成本，后续接续交流供电下的材质分项。
+[交流电材质分项](../acceptance/nr/material-contribution-ac.md)取得四组稳定控制。
+历史匹配绘制中，直接灯循环的控制差值约为 3.03 毫秒。
+阴影接收差值约为 4.01 毫秒，编译依赖与兼容收益分别核定。
+后续优先核对直接灯循环的实际工作范围。
+[缓冲内存类型](../acceptance/nr/buffer-memory-properties.md)通过两配置十项所属检查。
+当前原生存活缓冲全部采用设备本地类型，可映射 GPU 用途约为 33.50 MB。
+该观测与实际驻留、带宽分别解释，后续继续处理着色工作量。
+[聚簇灯影响盒](../acceptance/nr/clustered-influence-bounds.md)及静态分配复用已接入。
+原生灯引用由 17861 降至 14221，原始四帧保持零差。
+三进程短测的 GPU 均值减少约 0.83 毫秒，CPU 工作均值减少约 0.55 毫秒。
+候选 GPU P95 约为 19.48 毫秒，正式预算继续待通过。
+后续继续减少材质灯循环中的无效引用与重复读取。
+[接收范围](../acceptance/nr/clustered-receiver-ranges.md)提供四类保序灯区间。
+头表与索引写入量减少约 88%，两设备各十七项检查通过。
+级联归属修复通过首帧、绑定路径及原始四帧的严格核对。
+此前冻结短测的 CPU 均值减少约 0.61 毫秒，GPU 差值接近参考漂移。
+最终交付的正式帧预算继续待通过。
+[网格分辨率](../acceptance/nr/clustered-grid-scope.md)已核对二倍及四倍加密。
+等权表面列表削减约为 3.89% 及 5.34%，容量随单元数增长。
+当前范围没有形成新的整场景评估依据。
+[运动矢量绑定复用](../acceptance/nr/motion-descriptor-reuse.md)消除稳定准备中的描述符重写。
+两配置、两设备的十项所属检查通过，原始四帧保持逐字节一致。
+着色器全部保持原摘要，本单元效率以实际调用消除量记录。
+[展示照明按需计算](../acceptance/nr/presentation-environment-demand.md)完成四组小画面和一次集中成本核对。
+受影响区间均值差约为 4.03%，候选未达到 5% 的本地门槛。
+后参考记录到热降频信号，生产已恢复受检内容，完整长采样未启动。
+[静态图形输入](../acceptance/nr/compact-vertex-source.md)的 28 字节布局通过二十项所属检查及严格四帧。
+整帧名义差约为 1.44%，未达到采用门槛，候选隔离保存。
+展示照明组合的严格画面失败，深度片收紧的八项引用削减不足以启动原生评估。
+本单元恢复生产基准，并按项目日常维护规则回收对照副本。
+[零贡献计算](../acceptance/nr/direct-light-zero-contribution.md)通过独立位模式核对。
+局部效率未达门槛，生产沿用受检基准，原生执行次数为零。
+后续继续核对原生头发整区及对象接收精度。
+[对象阴影页边界](../acceptance/nr/object-shadow-page-boundary.md)已补足采样器量化余量。
+两配置、两设备的四项检查通过，原始四帧保持零差。
+完整头发仍有采样及接收输入精度待项。
+[原生接收区域](../acceptance/nr/native-receiver-gpu-oracle.md)完成 49384 个像素核对。
+GPU 重建候选仍有四十处可见量超差，生产保持受检路径。
+软件调试值与实际附件的资格限制已记录。
+后续先处理冷启动管线编译成本，缩短开发验证等待。
+[资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
+[有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
+原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。
+原四帧及复用帧保持零像素差，正式帧预算继续验收。
+照明复用的[接收面核对](../acceptance/nr/radiance-receiver-entry.md)完成。
+该记录保存入口及图像来源，当前配置见[同帧照明复用](../development/surface-radiance-cache.md)。
+
+GPU 缓冲的[用途分配实现](../acceptance/nr/focused-device-buffers.md)通过二十二项检查。
+原冻结四帧均符合零像素条件，整帧收益待原 80W 条件确认。
+交流供电的[局部重放](../acceptance/nr/residency-ac-replay.md)完成九份代表附件核对。
+本地与主机捕获的绘制差约为 1.17 毫秒，因果及正式帧预算单独验收。
+原[驻留候选](../acceptance/nr/gpu-buffer-residency.md)保持隔离，其像素差异根因未验证。
+无上传读取的[发布控制](../acceptance/nr/host-write-publication.md)未复现该差异。
+场景准备的哈希成本按[纹理分桶计划](2026-11-07-texture-content-buckets.md)优化。
+
+完整材质的[二进制准备](../acceptance/nr/binary-material-images.md)通过十六项双配置检查。
+十四份角色材质的局部耗时降低约 81.05%，十六份材质摘要一致。
+当前三个生产批次通过[原冻结四帧核对](../acceptance/nr/consolidated-preparation-images.md)。
+模型加载的图像解码及项目初始化继续细分成本。
+
+有界解码缓存及 libpng 的[局部评估](../acceptance/nr/decoded-image-reuse.md)未达到收益门槛。
+候选保持隔离，生产来源与双配置恢复检查通过。
+图像的[有界并行评估](../acceptance/nr/bounded-image-decode.md)完成单次集中批次。
+十六份材质摘要一致，样本漂移使收益资格未成立。
+候选保持隔离，生产加载入口及主构建产物保持原状态。
+材质的[直接编译定位](../acceptance/nr/direct-pipeline-compilation.md)完成。
+九项私有控制的寄存器均为一百二十八，显著收益依据尚未成立。
+Q1 的[精确采样定位](../acceptance/nr/exact-hair-sampling-inputs.md)确认一处层级差异。
+相同梯度的取样结果逐位一致，完整头发门禁继续验收。
+梯度候选的[整区评估](../acceptance/nr/hair-gradient-region.md)仍有七十二处超差。
+候选保持隔离，生产的原七十三处待项保持有效。
+头发的[输出精度定位](../acceptance/nr/hair-attachment-precision.md)确认附件转换的误差贡献。
+向零转换及细粒度梯度仍有六十九处超差，候选继续隔离。
+对象接收的[同输入模型](../acceptance/nr/object-receiver-input-model.md)完成完整遮罩核对。
+真实八位附件的 17017 处可见量与原生逐字节一致，生产集成和完整颜色继续验收。
+[公共屏幕通道](../acceptance/nr/screen-object-visibility.md)通过两配置及双设备的六项功能检查。
+NVIDIA 原生区域逐字节一致；Intel 有 175 处超出一字节，设备精度与场景集成继续推进。
+[设备深度核对](../acceptance/nr/receiver-device-depth.md)确认主绘制与快照在该遮罩的 17017 处相同。
+深度换算的 GPU 模型仍有 221 处超差，源投影与深度生产精度为下一实施范围。
+[线性深度核对](../acceptance/nr/receiver-linear-depth.md)仍有 216 处超差，接收输入的生产精度继续待验收。
+[生产投影核对](../acceptance/nr/receiver-projection-producer.md)定位原生深度写入链，完整区域仍有 200 处超差。
+[顶点精度核对](../acceptance/nr/clip-depth-roundtrip.md)逐位复现原生 11564 个顶点，当前变换输入的精度继续待核定。
+[接收运算核对](../acceptance/nr/receiver-reciprocal-arithmetic.md)区分齐次计算及倒数误差，兼容实现继续待验收。
+[相位原点配置](../acceptance/nr/visibility-phase-origin.md)通过双设备、双配置功能检查。
+默认 NVIDIA 的 17017 处原生可见量保持逐字节一致，输入生产和 Intel 精度继续验收。
+
+交流供电的[材质归因](../acceptance/nr/ac-material-contribution.md)取得三项有效控制。
+阴影相关依赖占匹配材质成本约 34.3%，优先研究范围查询。
+精确范围的[分层机制](../acceptance/nr/shadow-range-work.md)通过双设备逐位核对。
+实际矩形的范围读取量减少约 68.41%，NVIDIA 局部合计降低约 56.66%。
+绝对收益及原生片元成本继续分项确认，生产候选保持隔离。
+圆盘权重的[空覆盖候选](../acceptance/nr/shadow-disk-work.md)减少约 35.51% 的可见调用工作。
+独立[权重成本](../acceptance/nr/shadow-disk-kernel.md)保持逐像素工作形状及逐位相同输出。
+[材质范围核对](../acceptance/nr/shadow-cost-scope.md)按三十五份实际管线常量分组，历史缓存支持范围对应约 1.47 毫秒控制差值。
+[零反射复用提案](../acceptance/nr/surface-lighting-reuse.md)保存反射贡献范围，实际材质覆盖依据尚未成立。
+候选局部均值约慢 11.27%，原生四帧及成对测量未启动，候选保持隔离。
+
+材质程序的[离线优化](../acceptance/nr/material-spirv-optimization.md)完成九份附件字节核对。
+候选指令规模减少约 25.04%，退出与有效性能资格继续待验。
+
+执行采用[任务预算与调度](../development-workflow.md)。
+当前优先执行性能归因及定向优化。
+CPU 与 GPU 成本下降为当前首要开发目标。
+优化按[收益门槛与集中验证](../development-workflow.md#检查安排)组织批次。
+接手核验及空间前置条件见[恢复记录](../acceptance/nr/resume-storage-performance.md)。
+产物门禁按[空间计划](2026-11-06-storage-budget.md)执行。
+[目录维护技能](../acceptance/recovery/artifact-maintenance-skill.md)已部署，按天回收普通生成产物。
+[任务临时目录](../acceptance/recovery/managed-temporary-storage.md)随任务计入配额及每日回收，子进程沿用项目所在卷。
+[前台空间监控](../acceptance/recovery/storage-monitor-cost.md)保持每秒配额检查，局部夹具的监控 CPU 耗时减少约 82%。
+冗余缓存首轮实际释放约 10.00 GiB，项目数据与必要证据保持在项目目录。
+本轮自动清理与性能复测见[执行记录](../acceptance/nr/autonomous-cleanup-performance.md)。
+三个过期任务的[归档维护](../acceptance/nr/archived-p0-maintenance.md)完成。
+实际卷余量增加约 2.32 GiB，两配置必要构建与回归通过。
+历史工作树的[生成构建维护](../acceptance/nr/legacy-worktree-build-maintenance.md)完成。
+另释放约 6.89 GiB，源文件完整保留，两配置必要检查通过。
+当前[批次优化](../acceptance/nr/batched-performance.md)通过冻结图像检查。
+后续以场景物化、复制及提交成本为 CPU 重点。
+当前[场景准备批次](../acceptance/nr/cpu-scene-preparation.md)已完成关联实现。
+快照及摄像机局部对照合计减少约 66%。
+原生成对短检的 CPU 均值为 17.33 与 14.70 毫秒。
+候选 CPU P95 为 16.62 毫秒，GPU P95 为 25.05 毫秒。
+功率稳定条件未通过，正式收益资格继续待验收。
+探针[空间候选](../acceptance/nr/probe-spatial-candidates.md)兼容通过，收益未成立。
+场景变换及透明缓存的[批次评估](../acceptance/nr/static-transparent-preparation.md)未取得整帧收益。
+生产已核对恢复，继续定位当前实例准备及宿主阶段。
+当前[子阶段定位](../acceptance/nr/cpu-substage-update.md)记录透明与运动准备。
+同帧阴影的[复用候选](../acceptance/nr/shadow-visibility-reuse.md)兼容通过，整帧收益未成立。
+无光照混合表面的[主输出优化](../acceptance/nr/unlit-blend-fast-path.md)通过四帧零像素对照。
+短时 GPU 均值为 24.11 与 21.21 毫秒，P95 为 24.79 与 21.82 毫秒。
+本项保留 GPU 实现，CPU 宿主准备及完整帧预算继续优化。
+宿主场景的[专用复用](../acceptance/nr/host-scene-preparation.md)通过八项所属检查及严格四帧。
+短时 CPU 均值为 17.91 与 13.81 毫秒，P95 为 21.85 与 15.28 毫秒。
+透明几何与运动历史的[准备优化](../acceptance/nr/dynamic-geometry-preparation.md)通过七项所属检查及严格四帧。
+短时 CPU 均值为 13.14 与 10.76 毫秒，P95 为 14.83 与 11.51 毫秒。
+继续处理 GPU 主导着色及剩余 CPU 准备，保持原验收条件。
+当前程序的[GPU 定位](../acceptance/nr/current-gpu-cost.md)完成单帧及视图模式局部控制。
+本候选保持隔离，命令准备与缓冲同步的[批次优化](../acceptance/nr/read-scope-barriers.md)完成原生集中评估。
+短时 CPU 均值为 12.17 与 9.02 毫秒，P95 为 14.39 与 10.31 毫秒。
+同帧照明的[复用评估](../acceptance/nr/surface-radiance-reuse.md)未通过原生零像素条件，候选处于隔离状态。
+照明的[重组表示](../acceptance/nr/radiance-recomposition.md)仍有每帧三至六处一字节变化。
+候选保持隔离，生产源码、主构建及原验收门槛保持有效。
+生产代码段、源码及原有着色程序恢复核对一致，性能配对未执行。
+稳定场景的[准备优化](../acceptance/nr/stable-frame-preparation.md)通过十项关联检查及四帧零像素对照。
+短时 CPU 均值为 9.616 与 7.156 毫秒，P95 为 10.459 与 7.974 毫秒。
+GPU P95 为 22.744 毫秒，继续优先处理 GPU 场景成本。
+阴影过滤的[范围判定候选](../acceptance/nr/shadow-filter-range-culling.md)附件一致。
+局部匹配耗时增加约 8.57%，候选保持隔离，原生批次未启动。
+相邻深度读取的[预取候选](../acceptance/nr/shadow-filter-prefetch.md)附件一致。
+匹配耗时下降约 0.50%，候选保持隔离。
+计算反射材质的[专用候选](../acceptance/nr/computed-material-view.md)未通过原生零像素门槛。
+[普通材质视图控制](../acceptance/nr/computed-view-controls.md)通过实际启用的严格四帧。
+短时 GPU 均值名义减少约 2.46%，场景区间约为 2.94%。
+场景区间未达到既定 5% 门槛，候选隔离，默认选项关闭。
+单因素控制定位到专用管线选择，候选计时未启动。
+生产源码、双配置程序和 Release Player 代码段恢复一致。
+两配置各十三项关联检查通过，继续定位 GPU 材质成本。
+逐绘制纹理索引的[合法设备控制](../acceptance/nr/uniform-material-index.md)附件一致，收益约为 0.22%。
+候选保持隔离，完整程序映射及活动捕获继续复用。
+灯光采样的[分支控制](../acceptance/nr/light-sample-branches.md)附件一致，收益约为 0.93%。
+继续分项核对阴影、间接照明和反射的着色成本。
+当前[分项环境](../acceptance/nr/material-contribution-cost.md)出现基线漂移及电池供电。
+附加预热复核已执行，计时待交流供电及稳定基线恢复。
+其余开发与验收准备按自主执行顺序推进。
+专用常量的[精度定位](../acceptance/nr/specialization-precision.md)完成前端及两项功能控制。
+细粒度梯度未恢复精确附件，生产保持受检基线。
+驱动的[可观察范围](../acceptance/nr/shader-machine-code-access.md)仅取得统计文本。
+替换统计存在身份限制，机器级浮点差异继续待证据支持。
+完整验收按[自主执行](2026-11-07-autonomous-acceptance.md)连续推进。
+正式环境、帧预算和整体画质继续待通过。
+每批保留各机制的归因边界，画质门槛保持有效。
+定位十分钟，候选修改与短检二十分钟。
+探索达到三十分钟后登记结论，并接续独立任务。
+
+| 顺序 | 任务单元 | 下一份交付物 | 核验及启动条件 |
 | --- | --- | --- | --- |
-| F0 基础设施与质量基线 | — | 构建、测试、文档、资源和发布门禁 | Debug/Release、CTest、文档检查、安装清单通过 |
-| R0 Render Core 基础 | F0 | RHI、场景数据、同步、实例化和平台生命周期 | 三场景视觉回归、窗口恢复、NullRHI 和性能基线通过 |
-| R1 Render Graph 与帧流程 | R0，Complete（2026-09-26） | Render Graph、资源状态、瞬态资源、真实公共帧 Pass | 三场景接入同一图编译流程，历史帧和捕获通过 |
-| R2 材质、Compute、光照与阴影 | R1，Complete（2026-09-30） | GPU IBL、多级 Bloom、Compute 蒙皮与 Morph、OpenEXR、多光源、聚簇光照、级联阴影和 PCSS | 固定表/Bindless、一致视觉、多光源和性能报告通过 |
-| R3 并行提交与 GPU 驱动 | R2，Complete | 帧快照、并行录制、间接绘制和能力降级 | 单线程/并行确定性一致，CPU/GPU 指标达标 |
-| R4 Windows Render Core 验收 | R3，Complete | 复杂场景、质量档位、安装、长跑和窗口恢复 | Debug/Release、Validation、安装包、长跑和恢复全部通过 |
-| G0 引擎基础 | R4，Ready | Foundation、Platform、Runtime、Player 的库边界和项目配置 | 新建项目、独立 Player、资源挂载和 Windows 发布通过 |
-| G1 反射与序列化 | G0 | 代码生成、稳定类型标识、Inspector 元数据和版本迁移 | 增量生成、错误定位、序列化往返通过 |
-| G2 资产、关卡与 Prefab | G1 | AssetDatabase、Level、Prefab、依赖和热重载 | 资产移动、关卡切换和实例覆盖往返通过 |
-| G3 物理与输入 | G2 | Jolt、固定步长、碰撞查询、触发器和输入动作 | 角色、碰撞、触发器和实体删除回归通过 |
-| G4 脚本与玩法 | G3 | Lua、事件、反射绑定、错误隔离和受控重载 | 脚本角色控制、触发器和关卡切换通过 |
-| U0 编辑器与游戏界面 | G4 | 层级、Inspector、资源浏览、操作历史、RmlUi、动画状态机与音频 | 导入—放置—编辑—运行—停止闭环通过 |
-| P0 Windows 游戏发布 | U0 | 模板、打包、许可证清单和 Player 交付 | 安装、启动、游玩、关卡切换和退出通过 |
+| 1 | CPU 与 GPU 主导成本优化 | 具备显著收益依据的优化批次 | 按[性能计划](2026-11-06-performance-bottlenecks.md)集中评估，保持原帧预算 |
+| 2 | 脸部肤色 | 当前暖色局部与同机位联合画面 | 使用实际因子，保留用户外观待验收 |
+| 3 | 头发及角色阴影 | 固定姿态的单变量图像对照 | 沿用完整区域及原始像素门槛 |
+| 4 | 地面反射及间接照明 | 同机位分项对照及明确差异范围 | 固定粗糙度、曝光、输入与时间 |
+| 5 | 联合动态 | 静态候选的角色与物流序列 | 当前静态候选具备局部通过证据 |
+| 已验收 | 编辑器资产网格刷新 | 匹配指纹的缩略图缓存 | 两种配置通过原十秒预算 |
 
-`R2` 已完成，端到端证据见 [R2 阶段验收记录](../acceptance/r2/2026-09-26.md)。`R3` 当前为 Complete，具备帧快照、并行录制和 GPU 驱动提交。阶段门禁与当前证据见 [R3 阶段验收](../acceptance/r3/2026-10-03.md)。
+[编辑器资产刷新](../acceptance/nr/editor-asset-refresh.md)保存根因采样、缓存控制及两种配置的结果。
+独立[管线复用候选](2026-11-05-pipeline-reuse.md)的资源所有权与异常证据按所属条件维护。
 
-`R4` 为 Complete，复杂场景、质量档位、长跑与发布验收通过。证据见 [R4 阶段验收](../acceptance/r4/2026-10-03.md)。`G0` 为 Ready，黑洞优化准入任务为 Complete。
+GPU 的[硬件采样](../acceptance/nr/gpu-hardware-counters.md)取得实际指令及存储计数。
+重点遮挡绘制的 DRAM 访问较低，仍执行大量片元指令。
+[提前深度](../acceptance/nr/early-depth-counter-control.md)通过原生四帧兼容及重放工作量检查。
+当前一千八百帧的 CPU P95 为 49.82 毫秒，GPU 为 33.31 毫秒。
+热状态未通过，CPU 后段成本持续增长。
+[长时阶段诊断](../acceptance/nr/cpu-long-run-growth.md)显示输入规模稳定，多个 CPU 阶段同步变慢。
+系统处理器性能计数下降，高性能进程状态未消除后段增长。
+该候选保持诊断用途，后续复测需具备新的执行状态证据。
+[稳定深度准备](../acceptance/nr/stable-depth-sort.md)通过双配置、双设备及原生四帧检查。
+组合局部均值为 4.243 与 2.834 毫秒。
+[厂商环境核验](../acceptance/nr/thermal-environment.md)取得温度及组件依赖证据。
+官方组件安装及系统重启已核验，风扇控制可用。
+正式性能继续等待稳定背景工作及功率、热状态条件。
 
-## G0 前置任务
+[活动路径表](../acceptance/nr/prepared-resource-paths.md)通过双配置及原生四帧检查。
+同输入路径解析均值为 3.425 与 0.554 毫秒。
+正式整帧及热状态仍由原门槛独立验收。
 
-[黑洞性能优化](2026-10-03-blackhole-optimization.md)为 Complete。电影档在本机 Release、1280×720、正面相机下，三轮整帧 GPU 平均值的中位数为 18.071215 ms，满足 20 ms 门禁。
+反射依赖等待、峰值吞吐及正式帧预算各自独立验收。
 
-任务保留四射线与现行视觉流程，图像、引擎开销和发布验收通过。下一工作项为 G0 基础库拆分。
+动画的[预备曲线](../acceptance/nr/animation-curve-validation.md)通过双配置及双设备检查。
+二百二十次同输入姿态的原字一致。
+采样局部合计均值为 2.685 与 0.431 毫秒。
+完整帧收益、热状态和原画质条件继续独立验收。
 
-## 验收环境与性能口径
+相机精度的[单变量分项](../acceptance/nr/outline-snapshot-order.md)完成。
+私有候选仍有 1,057 个头发像素超出一字节。
+生产接口保持受检基线，严格字节检查继续保留失败。
+当前 GI 的[启停分项](../acceptance/nr/scene-material-quality-diagnosis.md)已确认地面和墙面响应。
+场景反射与最终照明外观继续核验。
+当前开发和冻结交付入口见[完整场景显示](../tutorials/restored-native-scene.md)。
 
-Windows 验收使用当前本机环境，记录设备、驱动和工具链。设备信息属于证据元数据，阶段准入依据同机对照和现行预算。R3 使用 `r3-budget-v2`，具体指标见[渲染核心实施计划](render-core-implementation.md)。
+联合性能按[渲染架构调研](../research/2026-11-05-render-performance-architecture.md)推进。
+稳定身份、帧数据索引及 GPU 事件分解为当前执行范围。
+资源键候选的四帧及 535 份生产程序逐字节一致。
+实体身份直接查询通过两配置各十九项检查。
+四帧冻结对照一致，详见[身份验证](../acceptance/nr/runtime-node-identity.md)。
+交流供电下 CPU P95 为 38.30 毫秒，GPU 为 40.38 毫秒。
+运动向量绑定的[双设备验证](../acceptance/nr/motion-bindings.md)通过。
+实际管线绑定为 209 次，重复绑定为零。
+该候选 CPU P95 为 33.85 毫秒，GPU 为 38.94 毫秒。
+帧场景[快照复用](../acceptance/nr/frame-context-snapshot.md)通过两配置各九项检查。
+该候选四帧输出一致，性能采集待空闲 GPU。
+相机与场景共享输入通过两配置各十四项 CPU 检查。
+扩展回归及延期范围见[共享输入验证](../acceptance/nr/render-camera-snapshot.md)。
+外部游戏退出后恢复[设备及原生复测](../acceptance/nr/idle-gpu-validation.md)。
+两配置双设备各三项检查通过，原生四帧与冻结参考一致。
+构建目标选择通过[两配置增量核验](../acceptance/recovery/scoped-build-provenance.md)。
+Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosis.md)本轮 67.95 秒通过。
+历史超时和隔离候选保留原证据，耗时差异仍需归因。
+缓冲依赖的[批量入口](../acceptance/nr/buffer-barrier-batching.md)通过两配置各七项 CPU 检查。
+双设备的蒙皮与运动机制检查通过，原生收益按本轮范围记录。
+节点[快照复制](../acceptance/nr/runtime-snapshot-copy.md)通过两配置各十五项 CPU 检查。
+本轮 CPU 工作 P95 为 24.83 毫秒，GPU 为 39.81 毫秒。
+混合场景的[透明临时分配](../acceptance/nr/opaque-transparency-scratch.md)通过两配置各十二项检查。
+不透明顶点扩容时，候选的逐帧分配保持稳定。
+阴影[接收分项](../acceptance/nr/shadow-receiver-cost.md)保留热状态条件失败。
+[同帧照明原型](../acceptance/nr/opaque-lighting-reuse.md)通过像素与分支检查，收益未成立。
+完整覆盖阴影的[纯深度提交](../acceptance/nr/depth-only-shadow.md)通过两配置各十二项 CPU 检查。
+四组双设备深度检查与原生四帧冻结对照通过。
+短时 GPU 帧 P95 为 33.93 毫秒，阴影为 4.50 毫秒。
+短时环境检查通过，正式帧预算保持原标准。
+当前原生的[CPU 调用栈](../acceptance/nr/current-cpu-hotspots.md)已取得实际模块与符号来源。
+相机及呈现的[物化输入共享](../acceptance/nr/materialized-camera-input.md)通过两配置各十四项 CPU 检查。
+原生四帧冻结对照一致，短时成对 CPU 均值降低约百分之 6.06。
+三次环境检查通过，候选 CPU 工作 P95 为 21.79 毫秒。
+资源解析与关卡轮询继续独立定位。
+私有[阶段成本](../acceptance/nr/cpu-stage-cost.md)定位到实例准备及透明排序。
+透明[世界坐标候选](../acceptance/nr/transparent-world-position.md)通过四帧兼容，成本比较受热状态限制。
+生产源码及代码段恢复为候选前字节，两配置各十二项回归通过。
+[静态变形输出复用](../acceptance/nr/static-skinning-output.md)通过两配置各十四项 CPU 检查。
+十二项双设备 GPU 检查及原生四帧冻结对照通过。
+实际帧复用 742,213 个顶点请求，动态输入继续生成。
+短时 CPU 工作 P95 为 21.74 毫秒，GPU 帧为 35.09 毫秒。
+单候选计时的热状态未通过，整帧因果收益资格未成立。
+实例准备的[子阶段观察](../acceptance/nr/instance-preparation-cost.md)取得一百条同帧记录。
+节点分组均值为 2.20 毫秒，姿态采样为 2.42 毫秒。
+[稳定资源分组](../acceptance/nr/stable-instance-grouping.md)通过两配置各十五项 CPU 检查。
+实际联合场景四帧与原冻结参考逐字节一致。
+组内源节点顺序及连续实例身份保持一致。
+单候选短时 CPU 工作 P95 为 32.92 毫秒，GPU 为 34.70 毫秒。
+软件热降频触发环境失败，整帧收益资格未成立。
+[加载资源绑定姿态](../acceptance/nr/loaded-bind-pose.md)通过两配置各十九项 CPU 检查。
+十二项双设备 GPU 检查及原生四帧冻结对照通过。
+实际末帧有 860 个实例按值复制绑定姿态。
+短时 CPU 工作 P95 为 20.68 毫秒，GPU 为 33.77 毫秒。
+软件热降频及热余量不足触发环境失败，整帧收益资格未成立。
+阴影[深度范围分层](../acceptance/nr/shadow-depth-hierarchy.md)保留为隔离候选。
+候选通过两配置各二十项 CPU、二十四项双设备 GPU 及四帧冻结对照。
+单候选 GPU 帧均值为 32.21 毫秒，热状态未通过。
+正式运行输入按受检单层范围的来源核对。
+[加载资源身份映射](../acceptance/nr/loaded-resource-identities.md)通过两配置各二十项 CPU 检查。
+十二项双设备 GPU 检查及四帧冻结对照通过。
+一千零二十四个未使用别名在两种描述符路径均增加零字节逐帧分配。
+兼容场景复用按当前身份刷新映射，实例解析及可选对象检查通过。
+单候选 CPU 工作 P95 为 30.29 毫秒，GPU 为 33.96 毫秒。
+热余量条件失败，整帧收益资格未成立。
+[关卡刷新数据释放](../acceptance/nr/level-refresh-retirement.md)通过两配置各二十八项 CPU 检查。
+三轮未变化刷新中的主线程大块释放均为零，持有量稳定。
+原生四帧冻结对照一致，未变化的底层 GPU 产物引用既有检查。
+单候选 CPU 工作 P95 为 19.80 毫秒，GPU 为 35.13 毫秒。
+热状态未通过，整帧收益资格未成立。
+[完整覆盖深度预填充](../acceptance/nr/covered-depth-prefill.md)通过两配置各三十二项 CPU 检查。
+两配置双设备的深度及颜色读回检查通过。
+原生四帧冻结对照一致，淡出及四样本保持覆盖规则。
+单候选 CPU 工作 P95 为 20.47 毫秒，GPU 为 34.45 毫秒。
+热状态未通过，整帧收益资格未成立。
+[当前 GPU 事件分解](../acceptance/nr/current-gpu-events.md)取得实际运行产物的捕获。
+重放计时及材质查询均核对冻结输入。
+受检主颜色通用程序的七十一个事件合计 11.84 毫秒。
+普通不透明[完整覆盖专用常量](../acceptance/nr/opaque-coverage-specialization.md)保留为隔离原型。
+两配置各三十二项 CPU 及二十四项双设备 GPU 检查通过。
+原生后两帧分别有九个及七个像素相差一字节。
+短时 GPU 帧 P95 为 27.65 毫秒，热状态检查通过。
+原型未通过零像素差条件，整帧收益资格未成立。
+[提前深度测试](../acceptance/nr/ordinary-early-depth.md)保留为隔离候选。
+原生四帧逐像素一致，Intel 时间检查及热状态仍未通过。
+[性能归因](../acceptance/nr/performance-bottlenecks.md)取得当前 CPU 阶段记录。
+场景准备均值为 7.11 毫秒，渲染器更新为 10.44 毫秒。
+厂商硬件计数被[驱动分析权限](../acceptance/nr/evidence/2026-11-06/gpu-counter-permission/results.json)拒绝。
+管理员分析会话等待用户确认，带宽归因继续待验证。
+静态实例的[只读姿态共享](../acceptance/nr/shared-bind-pose.md)通过两配置各三十二项 CPU 检查。
+实际帧有八百六十个共享实例，原生四帧逐像素一致。
+二十四项 GPU 检查中二十二项通过，Intel 时间解析继续待修复。
+实际静态资源的值复制局部均值为 0.128 毫秒。
+动画[局部初始化](../acceptance/nr/animation-local-pose.md)通过两配置各三十六项 CPU 检查。
+双设备十二项姿态和运动检查通过，原生四帧逐像素一致。
+二百二十次同输入姿态原字一致，局部采样合计约 2.55 毫秒。
+曲线全量校验、场景准备及透明排序继续按实测成本推进。
+完整 CPU、GPU 和热状态预算继续保留失败。
 
-## 阶段执行规则
+正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。
+两种配置各八项定向检查通过，历史字节归因按原范围保留。
+Intel 的整图稳定性仍有少量像素差异。
+编辑预览与正式测量按各自依赖接续。
 
-阶段状态以当前执行路线表为准。文件级工作清单位于 [渲染核心实施计划](render-core-implementation.md)。每阶段完成实现、测试、性能采集、文档同步与提交。
+材质[照明接收](../acceptance/nr/material-lighting-reception.md)通过两配置公共回归。
+匹配输入的三十六个不透明区域均通过静态门槛。
+原冻结独立对照的服饰二、五仍有失败项。
+原生服饰变体、完整角色及场景反射继续执行 Q1。
 
-提交标题使用 `feat(<phase>): <中文摘要>`。验收覆盖 Windows Debug/Release、CTest、Validation、安装资源、三场景与固定描述符路径。
+状态由本页统一管理，专项文件提供任务和证据。
+当前优先级为画质恢复、联合验证和可玩交付。
+阶段标识用于执行与证据索引。
 
-## 渲染阶段的关键契约
+联合画质验收未通过，依据为用户的实际画面复核。
+当前缺陷包括角色阴影、头发着色及 KK 高光。
+皮肤色带、场景反射与间接照明同属优先修复项。
+独立角色与独立场景分别提供外观参照。
 
-R0 让 SceneDocument 承担序列化职责，运行期 World 持有实体组件，渲染快照提供不可变的逐帧实例数据。GPU 资源以资源标识共享，主角色与附加角色的动画能力分别列入测试。
+操控、保存及独立运行结果仅证明对应功能。
+联合画质须按相同输入核对材质、照明与显示条件。
+当前执行聚焦五项外观缺陷，随后接续受影响回归。
+同机位实验与场景来源参数见[输入核验](../acceptance/nr/joint-visual-input-isolation.md)。
 
-R1 明确外部导入、跨帧持久、帧内瞬态三种资源类别。历史帧、交换链、捕获回读各自声明所有权与起止状态。资源池复用以 GPU 完成信号为依据。先实现单图形队列，接口描述计算与传输访问，后续队列扩展由性能证据驱动。
+接收范围内的主光及阴影来源通过[机制验证](../acceptance/nr/receiver-directional-light.md)。
+默认近景、固定全景及隐藏环境保持严格兼容。
+角色参考灯及显示拟合保持诊断状态。
+联合外观继续执行用户确认的五项缺陷验收。
 
-黑洞结构迁移保持已冻结的着色与视觉输出，迁移前保存确定性基线；涉及着色算法调整时单独立项。七个角色视图均为本地验收项，CI 覆盖范围在报告中明确。
+脸部与头发的全部顶点已按原生骨骼姿态核对。
+同条件材质对照保留接近参考的头部效果及边缘差异。
+固定位置与可玩出生点均在最细辐照层内部。
+完整数值及范围见[材质与姿态核验](../acceptance/nr/native-material-input-audit.md)。
 
-性能记录区分 CPU 提交、GPU pass、整帧耗时、显存、对象数与可见比例。实例化收益以测量结果报告。Windows 性能采集记录设备、驱动、分辨率和质量档位；移动端采集随 Android 阶段 Deferred。
+同曝光的[照明分项](../acceptance/nr/joint-lighting-components.md)显示角色环境贡献偏强。
+受测区域的直接漫反射中位量为零，墙面控制保持一致。
+角色主光、阴影与源曝光换算继续组合验证。
+换算契约按[材质辐亮度计划](2026-11-01-material-radiance-normalization.md)实施。
 
-## 编辑器交互契约
+完整线性倍率已通过两配置各三十六次 GPU 采集。
+十类材质的独立曝光对照均逐像素一致。
+眼睛公开像素参考及乘法覆盖的单位边界通过检查。
+原生联合外观继续按[辐亮度验证](../acceptance/nr/material-radiance-normalization.md)核对。
 
-各模块加入时同时实现基础交互，U0 负责贯通与打磨。统一使用主菜单、工具栏、层级、视口、Inspector、资源浏览和日志布局。命令具有稳定标识、快捷键、启用条件与撤销语义。
+原生五个角色内部区域已通过线性曝光等价检查。
+材质声明场景或线性显示策略，场景保留原生调色。
+联合候选中对应区域的亮度误差为零至 1.74%。
+五个矩形的静态 SSIM 最低为 0.99867。
 
-编辑态和运行态场景隔离；停止运行恢复编辑态。选择、拖放、删除、重复、重命名、多选、脏状态与保存反馈采用统一规则。耗时导入展示进度与失败原因，允许安全取消。输入焦点决定快捷键归属，文本编辑和游戏操作分别验证。
+六组原生采集及受影响回归见[显示验证](../acceptance/nr/material-display-transform.md)。
+隐藏环境十二帧及缺省近景逐像素兼容。
+完整局部外观及正式门禁继续执行，画质状态保持未通过。
 
-验收使用任务脚本：新建项目、导入 glTF、放置物体、编辑属性、撤销、保存重开、运行角色、修复脚本错误、构建 Player。记录阻断问题、步骤数、完成时间和误操作恢复结果。
+联合可玩候选沿用上述材质与照明契约。
+两配置各完成 540 帧及十三项输入检查。
+普通 Player 的三帧与回放入口逐像素一致。
+实际组合及原生响应见[组合验证](../acceptance/nr/joint-playable-display.md)。
 
-## 外部参考与代码来源
+KK、脸部阴影和色带具有非零的原生区域响应。
+对象阴影在颈部、胸部及肩部通过启停对照。
+原独立照明与移除环境几何的控制分别核验。
+上述检查保持声明范围，整体验收继续执行。
 
-调研日期为 2026-09-26。候选仓库的 GitHub 元数据标注为 MIT。采纳前逐文件核验许可证、第三方子目录和平台条件，并固定版本。
+含雾关卡的[重开复用](../acceptance/recovery/view-fog-resource-reuse.md)通过两配置回归。
+各 540 帧完整路线及十二帧固定全景逐像素兼容。
+每条完整路线仅执行一次渲染器 CPU 准备。
+加载复用结果按其范围归档，联合画质继续未通过。
 
-| 来源 | 计划采纳方式 | 验证重点 |
+[全身动态对照](../acceptance/nr/full-body-native-comparison.md)确认衣料仍有明显照明差异。
+不透明服饰二、五的中位亮度误差超过 110%。
+单变量采集确认环境辐照及反射对差异有明显贡献。
+继续核对衣料原生输入及消费，联合画质保持未通过。
+
+[原生衣料输入](../acceptance/nr/native-cloth-inputs.md)核验五次绘制的公共高光色带。
+五份服饰的八个片元通过[视角色带合成核验](../acceptance/nr/npr-view-ramp-composition.md)。
+公共[颜色合成接入](../acceptance/nr/npr-ramp-runtime.md)通过两配置回归。
+四组全身运动采集的三十六个匹配区域通过静态门槛。
+
+原冻结服饰对照及联合画质继续保留失败状态。
+
+[角色参考核验](../acceptance/nr/portrait-input-recovery.md)完成原始双图及动态近景采集。
+当前程序可产生原始入口的角色外观。
+联合输入的完整头发、阴影和皮肤继续验收。
+头发边缘按[独立裁剪图计划](2026-11-02-independent-coverage.md)修复。
+
+[独立裁剪图接入](../acceptance/nr/material-coverage.md)通过两配置公共检查。
+来源层级、扩张深度、描边与错误退出按同一契约核验。
+六个原生强边缘光点均在一字节误差内。
+生成层级通过[覆盖保持验收](../acceptance/nr/material-coverage-mips.md)。
+完整头发及场景画质继续执行 Q1。
+
+原生裁剪图的[联合验证](../acceptance/nr/native-coverage-integration.md)完成四百帧采集。
+匹配输入的三十六个全身区域及二十个近景矩形通过检查。
+原冻结服饰一、二、五及完整头发继续保留失败项。
+角色阴影、皮肤、高光及场景反射继续按实际参考修复。
+
+角色展示按[动态验收](../acceptance/nr/joint-conveyor-motion.md)使用约 3.82 米站位。
+模型缩放为一，完整环境及相机声明保留。
+对象阴影的完整头发区域仍有 73 个像素超过一字节。
+场景可见性及时间采样对照保存独立的实际指标。
+
+展示站位、中央物流及角色待机按[动态计划](2026-11-03-joint-scene-dynamics.md)推进。
+执行顺序为静态构图、物流运动、角色循环及联合回归。
+画质、动态功能和性能分别保留验收状态。
+
+原生待机按[循环验收](../acceptance/nr/joint-idle-loop.md)保留来源并追加闭合片段。
+八秒联合录像包含三次完整待机循环及物流运动。
+本轮[动态回归](../acceptance/nr/joint-dynamics-regression.md)通过两配置受影响检查。
+项目重开的前四帧与原采集逐像素一致。
+
+原生材质按[组合计划](2026-11-03-native-material-composition.md)核对固定姿态。
+衣料 Y 分量按[法线核验](../acceptance/nr/native-normal-orientation.md)修正。
+三处受测衣料的相似性提高，服饰一、二继续验收。
+头发及脸部的对应控制保持逐像素一致。
+
+法线方向的[联合回归](../acceptance/nr/joint-normal-orientation.md)完成八秒采集。
+两张图像之外的模型、文本和动画状态保持一致。
+右墙的一像素一字节差异保留严格兼容失败状态。
+完整衣料、头发、皮肤及场景反射继续执行 Q1。
+
+材质覆盖层的[深度策略](../acceptance/nr/material-overlay-depth.md)通过两配置受影响回归。
+198 帧核验同平面覆盖、遮挡、混合及场景雾。
+原生服饰的来源层级及特效组合继续验收。
+联合画质保持未通过，随后接续 Q2 至 Q4。
+
+覆盖图元按[工具验收](../acceptance/nr/material-overlays.md)保留资产结构。
+三处匹配的不透明衣料区域通过既定门槛。
+完整输出的服饰二及透明材质继续验收。
+八秒联合候选保留十四像素的严格重开失败。
+
+透明衣料的深度行为按[专项计划](2026-11-03-blend-depth.md)执行。
+版本二画像声明深度写入及同深度比较方式。
+普通薄片与衣料分别核验实际遮挡和缺省兼容。
+固定姿态的完整角色区域继续按既定门槛验收。
+公共深度配置通过[专项回归](../acceptance/nr/blend-depth.md)。
+角色的透明深度候选保留完整区域失败记录。
+
+表面发光按[覆盖计划](2026-11-03-opaque-surface-overlays.md)进入反射快照。
+公共机制通过[覆盖验收](../acceptance/nr/opaque-surface-overlays.md)。
+本轮八秒候选的四帧项目重开逐字节一致。
+完整角色、反射及间接照明继续按原门槛验收。
+
+透明衣料按实际程序使用十五号纹理槽。
+服饰二、五的指定片元通过既有高光公式核验。
+完整材质接入、联合外观及运动稳定性继续验收。
+
+仅替换原生调色表的[单变量核验](../acceptance/nr/material-display-domain.md)已完成。
+五个受测区域仍出现约 16% 至 44% 的亮度变化。
+部分眼睛颜色具有调色表的不可达边界证据。
+显示覆盖及时间历史按[材质显示变换](2026-11-01-material-display-transform.md)验收。
+
+| 阶段 | 交付与通过条件 | 当前状态 |
 | --- | --- | --- |
-| [Piccolo](https://github.com/BoomingTech/Piccolo) | 参考 RenderScene/RenderResource、交换数据、关卡与反射生成链路；按文件评估移植 | 所有权、测试、宿主工具交叉编译 |
-| [Lumix Engine](https://github.com/nem0/LumixEngine) | 参考轻量引擎模块、编辑器、资产与 Lua 工作流 | 接口规模与编辑器操作闭环 |
-| [Godot](https://github.com/godotengine/godot) | 参考场景、资源、Inspector；Android 生命周期参考 Deferred | 概念适配、设备行为、交互一致性 |
-| [Jolt Physics](https://github.com/jrouwe/JoltPhysics) | 集成物理库 | Windows 构建、任务调度、回调与实体生命周期 |
-| [sol2](https://github.com/ThePhD/sol2) | 集成 Lua C++ 绑定 | 异常、生命周期、编译成本与 Windows 兼容性 |
-| [RmlUi](https://github.com/mikke89/RmlUi) | 集成游戏 UI，提供引擎渲染与输入适配 | 字体、触摸、DPI、安全区和资源访问 |
-| [Android 游戏开发文档](https://developer.android.com/games) | 平台规范与工具入口 | Deferred：生命周期、输入、性能分析与发布 |
+| Q0 参考输入锁定 | 项目、材质、程序及采集参数可校验 | 已完成 |
+| Q1 角色与反射画质 | 同条件核对眼睛、发丝、服装及地面倒影 | 执行中 |
+| Q2 联合场景 | 完整环境、角色、动作和动态照明通过回归 | 执行中 |
+| Q3 可玩交付 | 输入、碰撞、保存重开、目录移动及发布通过 | 功能候选通过 |
+| Q4 正式验收 | NR0 至 NR12 全部适用门禁及 P8 条件通过 | 待完成 |
 
-每个子系统计划必须列出来源 URL、版本或提交、参考文件、采纳方式、适配理由和验收方法。直接移植保留版权与许可证，记录本地修改和上游同步方式。具体算法与代码引用在实施时补充到文件级，仓库级调研只表示候选来源。
+脸部遮罩轮廓光按[实施计划](2026-11-04-face-masked-rim.md)验证。
+原生片元追踪确认头部朝向、透明度及宽度混合。
+联合镜头完成 192 帧回归，角色和物流共采样 2,112 次。
+普通入口通过全项目检查，起始四帧与[衣料描边联合序列](../acceptance/nr/evidence/2026-11-04/sampled-outline/motion.json)逐字节一致。
+两种构建分别完成[可玩路线](../acceptance/nr/evidence/2026-11-04/joint-playable-route/results.json)的 540 帧输入和碰撞核验。
+可玩候选完成编辑器保存、目录移动和独立发布。
+隔离源工程和引擎后，游戏程序以包内资源完成 540 帧路线，三帧默认画面逐字节匹配。
+发布包包含 14 个生效的角色材质槽及 33 层场景反射图集。
+皮肤材质按肤色核验采用暖色基础颜色因子，Debug 与 Release 的可玩候选均完成 540 帧路线。
+候选指纹见[可玩交付记录](../acceptance/nr/evidence/2026-11-04/skin-warm-delivery/results.json)。
+屏幕法线按[专项核验](../acceptance/nr/screen-surface-normal.md)完成公共机制验证。
+两种构建、三种采样配置共通过八十四项 GPU 检查。
+暖肤色联合镜头的八帧输出逐像素一致。
+程序化视角遮罩与影色饱和度见[颜色核验](../acceptance/nr/npr-view-mask.md)。
+两种构建及两种采样配置完成 56 次独立颜色检查。
+完整轮廓的阴影可见度按实际输入继续核验。
+屏幕法线的偏置通过[独立阴影核验](../acceptance/nr/screen-normal-shadow.md)。
+两种构建及三种采样配置完成 36 次图像检查。
+受光描边与匹配背景完成[固定姿态核验](../acceptance/nr/lit-surfaces.md)。
+服饰一、二的区域相似度为 0.96499、0.96409。
+完整头发及后续阶段的区域相似度为 0.98887。
+受光表面的[联合序列](../acceptance/nr/evidence/2026-11-05/lit-surfaces-motion/results.json)完成 192 帧采集。
+Debug 重开的四帧与 Release 逐字节一致。
+两种构建各完成 540 帧可玩输入回放。
+受光表面的[独立交付](../acceptance/nr/lit-surfaces-delivery.md)检查通过。
+移动目录重开的三帧逐字节一致。
+隔离源工程和安装目录后完成 540 帧路线。
+完整着色目录及独立编辑恢复见[工作流核验](../acceptance/recovery/shader-catalog-reload.md)。
+两种构建的 535 份输出与常规构建逐字节一致。
+Debug 综合交互保留资产刷新超时待项。
+严格字节及完整联合画质继续核验。
+快照的深度壳顺序及背景法线见[来源核验](../acceptance/nr/outline-snapshot-order.md)。
+图像准备保持原始字节，两配置联合四帧逐字节一致。
+Debug 联合回归在九百秒预算内完成，资源正常卸载。
+完整角色的皮肤、发丝、描边及透明阶段继续执行 Q1。
+服饰一、二的描边覆盖见[固定姿态核验](2026-11-03-character-reference-stages.md)。
+虹膜按[眼部输入](../acceptance/nr/eye-npr-inputs.md)核验独立基准和联合动作。
+地面倒影按[固定箱体对照](../acceptance/nr/scene-material-quality-diagnosis.md)核验备份机位的十二帧输出。
 
-## 当前待固定事项
+Q0 至 Q4 汇总当前执行顺序及完成证据。
+正式范围和阈值由 NR、引擎交付及 P8 计划持有。
+严格像素兼容和既有失败记录继续保留。
+阶段之间按自主实施规则连续推进。
 
-Android 目标无限期 Deferred，不配置 Android SDK、NDK、真机或移动端性能预算。G1 通过小型原型选择受限注解语法或 Clang 解析；生成器实现语言为 C++，语法覆盖、构建速度与诊断质量共同决定方案。
+Q0 的两组真实输入及错配拒绝见[校验记录](../acceptance/recovery/evidence/2026-10-31/reference-input-lock/summary.json)。
+参考清单的具体约束见[参考基准](../acceptance/nr/reference-baseline.md)。
 
-G2 固定内部缓存和资源包格式，U0 选择音频库。以上选择在对应准入阶段解决，渲染核心按既定顺序推进。
+每份校验结果对应记录的程序及输入摘要。
+构建候选使用其实际采集记录建立独立清单。
+
+## 结构与实现约束
+
+生产代码沿用现有目录、模块边界及 CMake 目标。
+渲染机制属于 RenderCore，配置和运行装配属于 Runtime。
+项目内容及离线转换持有角色、关卡和来源身份。
+编辑器、Player 和自动工具共用生产接口。
+
+公开夹具与私有实景分别验证通用性及实际外观。
+来源清单记录项目、资产、程序、参数及输出摘要。
+原始资产、场景配置和生成结果按各自规则保留。
+源码、说明、测试及产物职责见[源码导航](../development/source-navigation.md)。
+
+## 本机恢复与接续
+
+当前工作目录为 `D:/Projects/FYP`。
+环境清单与开发顺序见[恢复计划](2026-10-30-development-recovery.md)。
+工具链、运行资产及双配置公共验证已完成。
+初始化归因与环境像素兼容继续复核。
+
+完整物流场景按原机位重渲十二帧。
+内容、地面反射与少量像素差异见[画面恢复](../acceptance/recovery/full-scene-visual.md)。
+完整场景及角色联合候选分别维护画质基准。
+
+完整环境与原生角色的同屏画面见[联合验证](../acceptance/recovery/full-scene-character.md)。
+固定位置及待机已验证，严格环境像素兼容继续复核。
+
+当前材质功能位及主辅视图见[特化验证](../acceptance/nr/material-class-feature-specialization.md)。
+资产常驻索引、双配置回归及启动边界见[索引验证](../acceptance/recovery/asset-dependency-index.md)。
+
+共享启动快照及双配置完整入口见[启动验证](../acceptance/recovery/project-startup-context.md)。
+完整 Debug 四样点在六百秒内完成八帧和卸载。
+
+后续接续主场景预算、原版射线与动态画质。
+原生射线的冻结数值参考见[顺序验证](../acceptance/nr/native-ray-arithmetic-order.md)。
+
+Vulkan 三份完整输出及双配置回归见[参考验证](../acceptance/nr/native-ray-vulkan-reference.md)。
+
+具名投影射线、独立槽位及完整来源结果见[公共接口验证](../acceptance/nr/projected-ray-contract.md)。
+主场景接续深度、运动编码和前帧资源装配。
+
+引擎相机、线性运动及镜面控制见[相机适配验证](../acceptance/nr/projected-camera-adapter.md)。
+表面快照通过公共深度和法线准备接口转换。
+
+公共表面转换及镜面组合见[准备验证](../acceptance/nr/projected-surface-preparation.md)。
+公共生产与过滤组合见[组合验证](../acceptance/nr/projected-reflection-composition.md)。
+完整着色清单及混合编译见[契约验证](../acceptance/recovery/shader-compiler-contract.md)。
+
+主场景类型化选择及当前帧生产见[场景验证](../acceptance/nr/projected-main-scene.md)。
+接续投影历史的实际运动、采样抖动及成功提交身份。
+
+公共 UV 校正和运动响应见[运动验证](../acceptance/nr/projected-history-motion.md)。
+主场景成功提交、取消及实际采样见[历史装配](../acceptance/nr/projected-main-history.md)。
+完整环境和角色分别验证，投影足迹清晰度继续核对。
+
+当前优先处理地面反射及角色近景画质。
+证据及定位顺序见[画质核验计划](2026-10-31-projected-footprint-quality.md)。
+内容同屏、功能检查及外观验收分别记录。
+
+原始正面角色图已按独立项目重跑三十三帧。
+入口差异与剩余像素条件见[角色参考](../acceptance/recovery/character-reference.md)。
+联合画面继续按相同材质与颜色来源校正。
+
+完整照明候选的隐藏环境十二帧严格兼容。
+参数、近景及时间采样见[照明联合验证](../acceptance/nr/character-illumination-integration.md)。
+无光照雾图层的接口配对按既有渲染模块验证。
+Q1 的整体外观和时间稳定性继续验收。
+
+动态角色正面完成完整画面、照明候选及底色采集。
+同机位可辨认虹膜、竖瞳、纹理及高光。
+远景眼部的几何尺度及发冠图案继续按来源核对。
+
+动态头发的主坐标已按冻结参考恢复。
+恢复工具、正面图案及回归见[坐标验收](../acceptance/nr/hair-source-uv.md)。
+九段动画、327 个节点和原二进制前缀保持完整。
+
+十三份画像的主坐标及恢复前置条件完成盘点。
+身体、服饰及眉毛按各自来源边界继续验收。
+
+完整场景的独立操控检查见[联合验证计划](2026-10-31-full-scene-playable.md)。
+该检查复用已有角色、物理及相机系统。
+
+完整场景的两配置输入、动作及重开回放已通过。
+护栏持续阻挡、松键静置及固定画面通过独立检查。
+结果及范围见[操控验收](../acceptance/recovery/full-scene-playable.md)。
+整体画质、性能及发布仍按 Q1 至 Q4 的条件验收。
+
+发布工具支持有界的离线项目校验预算。
+Windows 安装路径及隔离 Python 通过实测。
+范围与证据见[发布校验](../acceptance/recovery/game-package-validation.md)。
+
+完整场景的保存、中文目录迁移及独立入口已通过机器检查。
+默认入口三帧与工程入口逐字节相同。
+原生入口完成默认 1080p 的完整输入回放。
+交付位置及边界见[独立运行](../acceptance/recovery/full-scene-delivery.md)。
+
+## 代码检索与证据管理
+
+有界检索、证据归档与按需符号地图已完成。
+操作与范围见[源码导航](../development/source-navigation.md)。
+四十项工具回归与隔离运行见[专项验收](../acceptance/retrieval/2026-10-27.md)。
+
+## 原生帧分析与还原
+
+已按用户指令恢复自主实施，持续推进 NR0 至 NR12。
+截帧资源的明确来源选择见[来源验收](../acceptance/nr/scene-source-selection.md)。
+查询像素原点及场方向见[坐标验收](../acceptance/nr/irradiance-query-frame.md)。
+当前继续核对完整照明、连续采样及中央物流。
+
+独立 UV1 与统一表面输入见[坐标验收](../acceptance/nr/surface-uv-domain.md)。
+来源法线解码及分项镜头见[法线验收](../acceptance/nr/lit-normal-decoding.md)。
+作者法线和两个生产入口见[角点验收](../acceptance/nr/mesh-corner-normals.md)。
+局部灯来源倍率与完整镜头见[绑定验收](../acceptance/nr/local-light-profile-binding.md)。
+
+活动主光辐照输入及方向核对见[主光验收](../acceptance/nr/main-light-runtime-binding.md)。
+级联上游遮挡和滤波尺度见[深度验收](../acceptance/nr/cascade-caster-depth.md)。
+局部灯颜色空间与温度分支边界见[颜色验收](../acceptance/nr/local-light-color-space.md)。
+活动颜色表和后处理来源见[调色验收](../acceptance/nr/captured-color-grading-lut.md)。
+
+活动索引和实际灯光快照见[灯光验收](../acceptance/nr/captured-active-lights.md)。
+静态作者法线与精确轴置换见[批量验收](../acceptance/nr/static-authored-normals.md)。
+上方与后方来源接入见[围护验收](../acceptance/nr/enclosure-authored-normals.md)。
+物流图层、完整材质与实际绘制见[图层接入](../runtime/unlit-texture-layers.md)。
+
+活动物流参数及实际资源见[截帧绑定](../acceptance/nr/captured-vfx-layers.md)。
+层级采样、覆盖率及实际实例见[绘制验收](../acceptance/nr/vfx-mip-and-coverage.md)。
+近远淡出及实际图层见[深度验收](../acceptance/nr/vfx-view-depth-fade.md)。
+公共顶点颜色、多流绑定及实际特效见[颜色验收](../acceptance/nr/vertex-color-streams.md)。
+
+柱面视角覆盖率与加色合成见[合成验收](../acceptance/nr/view-dependent-vfx-coverage.md)。
+实际箱体姿态、共享材质及完整镜头见[箱体验收](../acceptance/nr/captured-logistics-boxes.md)。
+独立覆盖率、作者层级及实际字形见[覆盖率验收](../acceptance/nr/unlit-coverage-texture.md)。
+三项原生材质组合与隔离绘制见[组合验收](../acceptance/nr/remaining-vfx-combinations.md)。
+
+基础坐标扰动、独立采样及实际墙面见[扰动验收](../acceptance/nr/base-uv-distortion.md)。
+中央字形柱与独立覆盖率组合见[字形柱验收](../acceptance/nr/central-glyph-composition.md)。
+雾效传输、体积格式及原版载荷见[雾效数据验收](../acceptance/nr/fog-transport-data.md)。
+三维雾场上传、原版采样及资源释放见[雾场 GPU 验收](../acceptance/nr/fog-volume-gpu.md)。
+
+像素原点、抖动及深度映射见[视图坐标验收](../acceptance/nr/view-fog-projection.md)。
+场景资源、捕获视图及保存重开见[绑定验收](../acceptance/nr/view-fog-scene-binding.md)。
+预积分雾场、实际表面与资源隔离见[表面验收](../acceptance/nr/view-fog-surfaces.md)。
+中央白色标识与浮点附件对照见[标识验收](../acceptance/nr/central-late-glyph.md)。
+
+逐采样深度、覆盖率与双配置回归见[轮廓验收](../acceptance/nr/view-fog-multisample.md)。
+普通无光照表面、附件一致性及 GPU 成本见[预算验收](../acceptance/nr/unlit-opaque-budget.md)。
+光谱大气、远端片元与公共数值见[解析雾验收](../acceptance/nr/analytic-fog.md)。
+场景支持[解析雾配置](../runtime/scene-fog.md)及独立解析介质。
+
+双配置、真实片元与完整候选见[合成验收](../acceptance/nr/scene-fog.md)。
+阶段截图、机位和待验差异见[画面记录](../acceptance/nr/visual-history.md)。
+物流彩色环带的源实例及采样见[还原验收](../acceptance/nr/opaque-logistics-rings.md)。
+公共 glTF 采样器及完整场景结果见[采样器验收](../acceptance/nr/gltf-sampler-contract.md)。
+
+原版动态反射过滤及公共接入边界见[来源验收](../acceptance/nr/reflection-filter-source.md)。
+独立过滤资源及双配置结果见[公共过滤验收](../acceptance/nr/reflection-spatial-filter.md)。
+启动预算包含隐藏资源引用及材质解码的驻留峰值。
+接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
+
+九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。
+中庭与莱万汀各一帧完成 2560×1440 实际图像导出。
+
+文件哈希和重放范围见[原生帧验证](../acceptance/nr/native-game-captures.md)。
+双锚帧的完整事件与管线索引已通过检查。
+范围见[绑定索引](../acceptance/nr/native-binding-index.md)。
+随后核对角色、场景照明、地面反射和物流的实际绑定。
+
+相机版本二与真实子像素输入见[投影验证](../acceptance/nr/camera-projection-offset.md)。
+NR0 的参考门禁及 NR1 至 NR12 的正式条件保持待验。
+
+NR7-AA0 已核对原生时序输入、运动与历史 RGB 合成。
+单帧来源及连续序列边界见[时序核验](../acceptance/nr/native-temporal-inputs.md)。
+AA1、AA2 的提交基础与运动数学已完成公共验证。
+运动、前帧变形及 HDR 历史已接入主辅视图。
+
+双配置与真实角色序列见[接入验证](../acceptance/nr/temporal-reconstruction-integration.md)。
+继续执行 AA4 至 AA6 的细节、运动与预算门禁。
+覆盖、显式镜头及公共四倍尺寸结果见[质量验证](../acceptance/nr/temporal-coverage-quality.md)。
+描边输出像素与细线能量见[采样验证](../acceptance/nr/outline-temporal-footprint.md)。
+
+高光采样输入及诊断曝光见[分量核验](../acceptance/nr/component-radiometry.md)。
+投影头发的积分契约与固定机位结果见[像素积分](../acceptance/nr/projected-hair-pixel-integral.md)。
+不透明主带运动与部分响应见[运动验证](../acceptance/nr/material-motion-response.md)。
+混合细线积分与细节门禁见[覆盖验证](../acceptance/nr/blend-temporal-coverage.md)。
+
+裁剪纹理的生成足迹见[缩小覆盖验证](../acceptance/nr/alpha-mip-footprint.md)。
+混合节点透明度与运动覆盖见[渐隐验证](../acceptance/nr/blend-fade-motion.md)。
+真实角色移动与共面显露见[历史验证](../acceptance/nr/native-motion-history.md)。
+裁剪足迹与运动外壳见[覆盖验证](../acceptance/nr/cutout-motion-coverage.md)。
+
+动态高频门禁及几何样点对照见[细节验证](../acceptance/nr/native-detail-sampling.md)。
+多样点 RHI 声明及设备验证见[采样契约](../acceptance/nr/multisample-rhi.md)。
+角色四样点动态质量见[材质验证](../acceptance/nr/multisample-character-material.md)。
+深度副本及外壳覆盖见[副本验证](../acceptance/nr/multisample-snapshot-outline.md)。
+
+副本着色需求及真实图像一致性见[成本验证](../acceptance/nr/snapshot-depth-demand.md)。
+四样点主通道成本与联合画质继续按 MS5 验收。
+主通道预填及双配置动态质量见[专项验证](../acceptance/nr/opaque-main-depth-prefill.md)。
+完整资产缓存复用与主入口图像见[缓存验证](../acceptance/nr/complete-asset-cache-reuse.md)。
+
+主场景的实际绘制成本与剩余预算见[专项计划](2026-10-25-main-scene-shading-budget.md)。
+普通材质的有界专用化及快照精度见[专项验证](../acceptance/nr/ordinary-material-specialization.md)。
+基础功能集合与共享头文件构建见[功能验证](../acceptance/nr/generic-material-feature-folding.md)。
+副本预填、实际入口及冻结图像见[专项验收](../acceptance/nr/opaque-snapshot-depth-prefill.md)。
+
+完整画像的轻量槽位查询见[专项验收](../acceptance/nr/material-slot-inspection.md)。
+主入口的完整画像、眼睛坐标及动态轴见[接入验证](../acceptance/nr/main-character-integration.md)。
+独立镜头平移及真实角色细节见[镜头验证](../acceptance/nr/camera-motion-quality.md)。
+公共源目标及最近深度解析见[目标验收](../acceptance/nr/multisample-scene-target.md)。
+
+主辅视图的实际样本、质量与回退见[视图验收](../acceptance/nr/multisample-view-quality.md)。
+完整运动、透明覆盖和服饰闪烁继续执行 AA4 至 AA6。
+
+鼻下与脸颊暗影按直接光、GI、遮罩和镜面分项核验。
+脸部径向法线候选通过双配置各 36 次 GPU 检查。
+单姿态头骨与原生预留帧已核对。
+真实角色近景通过，跨姿态与完整照明继续验收。
+
+范围见[脸部法线验收](../acceptance/nr/face-radial-indirect.md)。
+
+服饰镜面输入通过双配置数值与真实模型检查。
+范围见[服饰镜面验收](../acceptance/nr/cloth-specular-input.md)。
+逐项顺序见[角色技术清单](2026-10-22-character-technique-closure.md)。
+
+## 分项实现与证据
+
+角色环境漫反射法线通过双配置分项检查。
+身体皮肤候选及范围见[法线验收](../acceptance/nr/character-indirect-normal.md)。
+
+原生方向场工具已接入三层及默认环境组合。
+角色颜色组合与逐灯接收范围已通过公共机制检查。
+主光遮挡通过[专项验收](../acceptance/nr/character-main-shadow.md)。
+完整角色照明及分部位材质继续验收。
+
+来源与运行待项见[组合验收](../acceptance/nr/irradiance-composition.md)。
+三维上传及实际体积载荷见[资源验收](../acceptance/nr/volume-image-upload.md)。
+三层资源与活动片元采样见[精度验收](../acceptance/nr/irradiance-clipmap-resource.md)。
+公共材质按资源版本消费三层过渡和默认环境。
+
+实际候选与生命周期见[接入验收](../acceptance/nr/irradiance-clipmap-scene.md)。
+物理采样偏移与 NPR 位置边界通过双配置检查。
+数值范围与正式待项见[查询验收](../acceptance/nr/irradiance-query.md)。
+
+中央地面的索引、UV 别名流及完整材质参数已核对。
+颜色上传、公共转换与主场景见[绑定验收](../acceptance/nr/floor-runtime-binding.md)。
+继续核对独立纹理采样、反射生产通道及移动响应。
+十二探针身份、反射生产链与对照镜头见[运行核验](../acceptance/nr/native-reflection-bindings.md)。
+
+继续核对有序探针及真实时序比较。
+公共对数映射及双配置 GPU 检查见[层级验收](../acceptance/nr/reflection-lod.md)。
+原生数组、有序探针及连续时序继续实施。
+有序体积、辐照亮度适配及生产消费见[探针验收](../acceptance/nr/reflection-probe-fields.md)。
+
+双面镜像的法线、GI 及积分头发联合路径见[朝向验收](../acceptance/nr/surface-facing.md)。
+帧内镜头报告及完整精度指纹见[来源验收](../acceptance/nr/capture-camera.md)。
+原生数组、零符号约定及双配置硬件采样见[数组验收](../acceptance/nr/octahedral-environment.md)。
+
+反射射线预计算通过双配置与动态遮挡回归。
+短测及正式待项见[射线验收](../acceptance/nr/reflection-ray-math.md)。
+本帧计算反射的主场景装配见[组合契约](../runtime/screen-reflection.md)。
+半尺寸层级与源像素选择见[尺寸验收](../acceptance/nr/reflection-resolution.md)。
+
+历史计算的冻结输入及公共资源见[时间过滤验收](../acceptance/nr/reflection-temporal.md)。
+射线与时间核的公共组合见[时间组合验证](../acceptance/nr/reflection-temporal-composition.md)。
+公共运动的选样及深度接收见[重投影验证](../acceptance/nr/reflection-reprojection.md)。
+主场景历史、取消重试及 GPU 接收证据见[装配验收](../acceptance/nr/main-reflection-history.md)。
+
+快照重复着色的成本依据见[逐事件诊断](../acceptance/nr/reflection-pass-profile.md)。
+快照特化的双配置、图像及短测见[预算验证](../acceptance/nr/snapshot-shading-budget.md)。
+原版四点搜索、足迹系数及精度待项见[射线来源](../acceptance/nr/native-ray-source.md)。
+主宿主共享运动目标及双配置验证见[共享验收](../acceptance/nr/shared-motion.md)。
+
+KK 动态边缘的双配置门槛见[运动边缘验证](../acceptance/nr/temporal-motion-edges.md)。
+平台开关与运动附件的实际对应见[可见性验证](../acceptance/nr/motion-visible-surfaces.md)。
+服饰及 KK 动态门槛见[轮廓显示验证](../acceptance/nr/temporal-display-edges.md)。
+原版层级射线及动态时间历史继续验收。
+
+中庭原生方向场已覆盖后方的已知照明缺口。
+双配置检查及边界见[光照覆盖](../acceptance/nr/irradiance-coverage.md)。
+
+环境镜面积分响应通过双配置数学及 GPU 检查。
+原生运行待项见[镜面响应验收](../acceptance/nr/environment-specular.md)。
+
+六面反射及独立投影原点通过双配置专项检查。
+原生外观待项见[六面反射验收](../acceptance/nr/reflection-cube.md)。
+
+眼睛径向材质已通过双配置数值及生命周期检查。
+原生绑定待项见[眼睛验收](../acceptance/nr/eye-radial-surface.md)。
+NPR 适配及捕获姿态完整文档见[眼睛输入](../acceptance/nr/eye-npr-inputs.md)。
+原生采样器与硬件层级切换边界继续按 C9-E1 核对。
+
+完整区域、层级边界、眼白及动态视线继续验收。
+
+角色局部探针的镜面权重与诊断开关已通过检查。
+双配置数值及实际脸部见[反射控制](../acceptance/nr/character-probe-controls.md)。
+
+脸部高光正控制已完成解析及完整 GPU 套件核对。
+门槛与原始记录见[正控制验收](../acceptance/nr/face-specular-control.md)。
+
+无光照特效表面已通过双配置数值与生命周期检查。
+原生物流转换及范围见[特效验收](../acceptance/nr/unlit-surface.md)。
+
+二维发丝高光与表面响应已通过双配置数值检查。
+范围及保留门禁见[高光验收](../acceptance/nr/projected-hair.md)。
+实例外轮廓覆盖与真实脸部已完成分项验证。
+原生双帧的材质帧实例及跨阶段调色板见[来源验收](../acceptance/nr/material-frame-instance-producer.md)。
+
+身体骨盆原点及双配置验证见[径向原点验收](../acceptance/nr/body-rim-origin.md)。
+蒙皮齐次位置及剩余严格图像门禁见[位置验收](../acceptance/nr/skinning-position-consistency.md)。
+服饰二维高光的公共契约与实际画面边界见[服饰验收](../acceptance/nr/cloth-specular-ramp.md)。
+服饰原生输入、组合照明及主候选见[接入验收](../acceptance/nr/cloth-native-integration.md)。
+
+结果及兼容待项见[外轮廓验收](../acceptance/nr/outline-coverage.md)。
+
+## 资源验证计划
+
+原生可玩还原按 NR0 至 NR12 自主实施。
+NR0 至 NR8 覆盖场景与角色原生渲染。
+NR9 至 NR11 覆盖原生移动动作、WASD 与动画混合。
+NR12 负责画面、操控、发布与实录联合验收。
+
+执行任务见[可玩还原计划](2026-10-17-native-playable-restoration.md)。
+公开资料、实景与抓帧按[证据执行计划](2026-10-21-native-render-evidence-execution.md)推进。
+统一状态表登记全部 NR 阶段，局部证据随专项记录维护。
+阶段状态与验收见[完整还原计划](2026-10-17-native-render-restoration.md)。
+
+无遮挡参考与地标标定见[参考基准](../acceptance/nr/reference-baseline.md)。
+
+后方模型、室内细节和抗锯齿见[专项计划](2026-10-21-atrium-completeness-antialiasing.md)。
+605 个源实例组已进入正式与可玩工程。
+来源、相机及展示见[中庭完整性验收](../acceptance/nr/atrium-completeness.md)。
+固定遮罩来源覆盖与可见室内天空复核通过。
+
+100 米深度门禁保持失败，完整原生外观继续验收。
+主辅视口与 Player 的空间抗锯齿已有数值证据。
+完整抗锯齿按[NR7-AA0 至 AA6](2026-10-22-spatial-antialiasing.md)实施。
+运动历史、发丝、高光、描边和主场景画质保持待验。
+
+角色与物流按[专项计划](2026-10-22-character-logistics-restoration.md)推进。
+接入风险及公共契约见[架构审计](2026-10-22-render-capability-integration-audit.md)。
+NR0-A1 固定有效入口，NR8-V2 管理候选晋升及跨入口验证。
+NR6-C15 至 C18 覆盖材质、GPU 绑定、多层高光和距离描边。
+
+公共距离投影与深度壳已进入[生产验证](../acceptance/nr/outline-material-integration.md)。
+原生整区、动态晋升及完整抗锯齿分别保留门禁。
+对象图集及原生过滤范围见[GPU 验证](../acceptance/nr/object-shadow-gpu.md)。
+真实腿部保留七字节差异，完整角色外观继续待验。
+
+逐材质局部灯下限及实际候选见[响应验证](../acceptance/nr/material-local-wrap.md)。
+对象接收坐标已匹配原生可见量，见[分项验证](../acceptance/nr/object-shadow-receiver.md)。
+对象隔离测得腿部为 `5/255`，与原生一致。
+肩部与两个脸部点一致，完整皮肤颜色继续核对。
+
+主场景消费与原生外观分别验收，正式阶段状态保持待验。
+场景灯下的角色材质与高光已完成公共机制验证。
+十发射器物流候选包含 91 个槽位。
+四秒实际采样见[物流联合验收](../acceptance/nr/logistics-multiclip.md)。
+
+角色与物流的四机位采集及实际输入回放通过。
+1080p 工程视频与性能范围见[联合验证](../acceptance/nr/character-logistics-joint.md)。
+公共乘法合成、节点透明度及渐隐描边已有分项证据。
+辅助视口抗锯齿在匹配构建后通过八相位复验。
+
+原生二维头发高光、眼睛通道及屏幕发影继续核验。
+覆盖阴影的模板、预深度及原生遮挡具有独立任务。
+原游戏帧的专项导出按[抓帧接手说明](2026-10-22-endfield-capture-handoff.md)推进。
+正式 NR 阶段继续按完整门禁验收。
+
+单角色、单场景、单动画与表情进入自主实施。
+对象为现有莱万汀，EV0 完成。
+原生主线已取得角色、动画、表情源与帝江号切片。
+EV2 至 EV7 通用能力已实现，EV8 联合演示通过。
+
+原生来源、历史画面及性能验收保持待项。
+原生技术项目采用编队待机 01 与中性表情。
+原生共享移动动作已完成目标骨架投影及隔离解码。
+跑步的中庭短片段播放通过，循环与脚接触待验收。
+
+走跑循环的完整解码时域已恢复，游戏时钟映射待核验。
+证据见[原生移动动作](../acceptance/nr/native-locomotion.md)。
+速度混合支持实体独立权重、共享步态相位及统一姿态消费。
+公开双角色夹具覆盖三段动作与启停输入。
+
+契约及实景范围见[运动混合证据](../acceptance/nr/locomotion-blending.md)。
+帝江号联合采样、实例编辑与保存重开已验证。
+场景表面通道烘焙与原生灯光读取已验证。
+局部反射已接入独立纹理、盒投影与体积混合。
+
+公共夹具八项通过，中庭反射候选四帧运行通过。
+场景激活与视觉等价继续按 NR5 门禁验收。
+公共信号层级、可信度消费和完整表面快照已通过分项检查。
+接入顺序见[动态反射计划](2026-10-28-reflection-filter-integration.md)。
+
+证据见[局部反射接入](2026-10-18-local-reflection-probe.md)。
+逐灯镜面倍率已应用到局部灯与环境主光。
+
+双后端测量及实景收据见[镜面倍率证据](../acceptance/nr/light-specular-response.md)。
+方向网格的 GPU 求值与六组像素对照已验证。
+原生组合按 NR4 的分支及实景门禁验收。
+带光照展示见[帝江号展示计划](2026-10-17-dijiang-lighting-video.md)。
+
+完整材质、衣摆效果与装载性能仍待验收。
+范围见[资源验证实施计划](2026-10-16-endfield-resource-validation.md)。
+本机样本与 REA 证据见[调查记录](../research/2026-10-16-endfield-resource-validation.md)。
+
+## 当前交付记录
+
+本轮范围见[路径追踪补齐与公开演示计划](2026-10-15-pathtracing-completion.md)。
+PT0 至 PT7 已完成。
+金属、法线、玻璃和灯光采样已接入通用渲染模块。
+三个公开模型演示完成编辑保存、GUI 发布和移动运行。
+
+双设备、收敛与画面结果见[交付记录](../acceptance/pt/2026-10-15.md)。
+
+WC1 至 WC6 完成，范围见[世界参照与相机计划](2026-10-15-world-camera-rendering.md)。
+
+## 界面改进实施
+
+VD0 研究与设计完成，VD1 至 VD5 完成，VD6 为 Ready。
+自动交付已验证，可进入集中人工复核。
+启动入口与证据见[界面交付记录](../acceptance/vd/2026-10-14.md)。
+范围、文件边界与验证安排见[界面改进计划](2026-10-14-ui-modernization.md)。
+
+外观见[可交互视觉提案](../design/ui-modernization/preview.html)。
+实施依次覆盖公共控件、项目中心、工作台和业务面板。
+跨模块工作流与人工复核集中安排在 VD6。
+本轮按 VD1 至 VD6 连续实施。
+
+## 已有交付状态
+
+UX-A 至 UX-D 完成，UX-E 为 Ready。
+自动检查已完成，新版使用体验等待集中确认。
+交付入口与结果见[本轮交付](../acceptance/ux/2026-10-14.md)。
+范围与阶段记录见[交互优化计划](../editor-usability-audit.md)。
+
+用户已反馈人工复核基本可用，交互体验需要优化。
+
+ED0 至 ED7 的编辑器开发交付已完成。
+P8 状态为 Ready，机器批次已收尾。
+实体复核与历史现场条件按实际证据推进。
+任务、文件边界和收尾条件见[本轮实施计划](2026-10-14-editor-generalization.md)。
+
+当前阶段使用完成、Ready、开发中、待完成四种状态。
+代号和状态见[统一状态表](current-stage-status.md)。
+验收顺序与完成条件见[收尾流程](../acceptance/phase-closure.md)。
+本轮流程修复见[执行计划](2026-10-12-workflow-repair.md)。
+
+## 资源浏览器与日志面板
+
+资源查找、空状态与日志工具栏使用公共控件。
+日志模型负责级别、暂停快照与可见内容复制。
+实施范围见[面板计划](2026-10-12-browser-console-ui.md)。
+验证与剩余限制见[阶段记录](../acceptance/ui5/2026-10-12.md)。
+
+层级、属性和场景视口迁移完成。
+安装入口及集中自动检查已交付。
+结果与剩余复核见[本轮交付](../acceptance/ui8/2026-10-12.md)。
+实施和集中交付见[剩余计划](2026-10-12-remaining-ui.md)。
+
+人工输入和既有交付待项按集中复核条件推进。
+
+## 项目中心与独立游戏交付
+
+本轮授权范围是 ImGui 产品化与独立制作发布。
+四阶段实现及自动工作流检查已执行。
+范围见[产品化状态](../ui-productization-status.md)。
+证据与未通过项见[交付验证](../acceptance/ui4/2026-10-12.md)。
+
+工作区面板迁移完成，后续进行集中人工复核。
+场景视口的布局与交互已完成本批检查。
+实体输入和历史超时原因按集中复核记录。
+实施依据见[产品化计划](2026-10-12-imgui-productization.md)。
+
+本页回答：哪些工作已完成，下一批工作按什么顺序推进？能力与证据范围见[项目现状](../project-status.md)，执行规则见[协作与验收](../development-workflow.md)。
+
+## 当前阶段
+
+材质画布、音频修复、格式扩展和二维内容已完成可推进部分。
+项目中心与 GUI 发布按本页的产品化交付范围使用。
+正式性能和持续运行结果见本轮 P8 收尾记录。
+人工体验与历史归因按集中复核条件推进。
+
+## 已完成的工作
+
+| 工作组 | 实现结果 | 详细来源 |
+| --- | --- | --- |
+| 引擎基础与三维交付 | 公共运行契约、编辑操作、探索项目和独立发布 | [引擎实施计划](2026-10-06-engine-evolution.md) |
+| 编辑器制作体验 | 工作区、选择、变换、内容制作与双工作流自动制作 | [产品化计划](2026-10-09-editor-productization.md)、[P6 验收](../acceptance/p6/2026-10-12.md) |
+| 第一批格式交换 | 输入注册、导出、音频与纹理交换、移动发布 | [格式计划](2026-10-11-asset-format-expansion.md)、[P8 验收](../acceptance/p8/2026-10-12.md) |
+| 内容扩展与修复 | 材质图、二维文档、GIF/PSD/SVG/USD、音频及路径修复 | [内容扩展计划](2026-10-12-content-expansion.md)、[P9 验收](../acceptance/p9/2026-10-12.md) |
+| 通用编辑器制作 | 基础创建、层级、组件、外部拖放、设置与特性隔离 | [ED7 集成记录](../acceptance/ed7/2026-10-14.md) |
+
+“实现结果”描述交付物，完整验收状态按对应来源读取。最近一轮提交和测试范围集中列于[项目现状](../project-status.md)。
+
+## 接下来的顺序
+
+终末地专项按[可玩还原计划](2026-10-17-native-playable-restoration.md)执行。
+资产读取沿用[原生资产获取计划](2026-10-17-endfield-native-assets.md)。
+目标为原生角色、动作、表情与场景的引擎闭环。
+读取路径按实际证据选择，引擎扩展服务于资产兼容。
+
+分层资源读取及索引验证见[读取证据](../acceptance/nr/layered-content.md)。
+139 个实例的最高细节转换见[几何证据](../acceptance/nr/source-geometry-detail.md)。
+下表维护引擎集中验收待项。
+
+| 顺序 | 工作 | 当前状态 | 交付与继续条件 |
+| --- | --- | --- | --- |
+| 1 | P8.1 候选与回归 | 完成 | 双配置回归与双设备移动发布通过，实体输入另行复核 |
+| 2 | P8.2 历史调查 | Ready | 七份原件已核对，三项归因需复现时的现场记录 |
+| 3 | P8.3 持续运行 | 完成 | 两种三十分钟正式长跑通过，短探针失败单独保留 |
+| 4 | P8.4 性能 | Ready | 本轮十五轮有八轮通过，七轮热状态失败，按来源复核 |
+| 5 | P8.5 人工复核 | Ready | 操作单与候选已准备，实体操作和听感待执行 |
+| 6 | P8.6 汇总 | Ready | 机器证据与交付清单已整理，全部条件通过后完成 |
+
+开发期间执行编译、受影响短测试和必要修复。
+正式验收待项由 P8 持有，开发按交付物依赖推进。
+原条件、失败记录和未执行结果按实际证据保存。
+其他候选功能见[后续开发路线](2026-10-11-next-development.md)。
+
+## 候选功能
+
+完整二维可视编辑器、通用着色程序图、更完整的 USD 交换属于候选。进入实施时需要具体使用场景、支持边界和验收范围。Android 保持延期（`Deferred`），桌面制作和发布是当前平台范围。
+
+## 状态维护
+
+当前能力和限制维护于[项目现状](../project-status.md)。本页维护工作顺序。专项计划维护接口与任务。验收页维护证据。
+
+阶段完成时同步这些入口和相关清单，并按授权范围创建独立提交。
+
+历史计划与候选结果见[整理前快照](../history/2026-10-12-planning/azure-engine-plan.md)。历史测试数字与运行结果按原来源解释，当前判断使用对应版本的证据。
+
+P8.1 至 P8.6 的执行结果见[集中收尾记录](../acceptance/p8/2026-10-14.md)。
+
+WC1 至 WC6 完成，证据见世界参照与相机实施记录。
+本轮覆盖双设备路径追踪、语言切换和独立发布。
+
+[主 UV 取样候选](../acceptance/nr/material-mirrored-uv-candidate.md)保留 Intel 阴影差异。
+公开材质绑定通过所属检查，相机投影与真实深度来源继续推进。
+
+[参考裁剪投影](../acceptance/nr/reference-clip-projection.md)通过原生向量与双设备位精度核对。
+公共内核与原四帧回归通过，相机及深度生产继续接入。
+
+[参考几何深度](../acceptance/nr/reference-depth-source.md)通过双配置、双设备及原四帧回归。
+公共不透明生产通过，原生覆盖、壳层和可见量继续接入。
+
+[几何深度与可见量](../acceptance/nr/geometry-depth-visibility.md)完成双设备成对核对。
+原生深度控制通过，几何来源的七处及一百零三处超差继续修正。
+
+[深度透明覆盖](../acceptance/nr/reference-depth-coverage.md)通过公共表面及默认四帧检查。
+NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继续修正。
+
+[Intel 深度与透明取样来源](../acceptance/nr/intel-depth-alpha-footprint.md)完成位精度控制。
+九十七处超差分为七十六处单末位、二十处较大深度差及一处透明判定差。
+
+[实际顶点裁剪读回](../acceptance/nr/actual-vertex-clip-readback.md)通过双设备位精度核对。
+每设备四万三千零四十四个向量精确一致，后续核对视口及光栅插值。
+
+[阴影接收需求](../acceptance/nr/shadow-receiver-demand-scope.md)已核对光源及十四次实际材质绘制。
+当前输入没有可省接收工作，继续按实际热点选择优化。
+
+[正式功率核定](../acceptance/nr/gpu-power-limit-qualification.md)记录 592.82 的设置结果。
+正式采样须核定负载下的实际固定 80 W。
+[595.79 联合场景采样](../acceptance/nr/joint-59579-qualification.md)记录空闲门槛、80 W 读数及热状态对照。
+
+NPR 光照和角色局部光照夹具在 Debug 下分别用时 207.17 秒和 130.90 秒，均通过原 300 秒注册限时。
+[GPU 光照夹具运行时间](../acceptance/nr/gpu-lighting-fixture-runtime.md)记录两种构建配置与跨场景比较证据。
+
+[编辑器夹具运行时间](../acceptance/nr/editor-fixture-runtime.md)记录面板、诊断、选择与视口用例在两种配置的注册复测。
+
+[完整管线成本](../acceptance/nr/complete-capture-cost-map.md)完成全部 3453 个事件的实际绑定归因。
+材质绘制占 74.41%，当前评估普通不透明快照的视图常量。
+
+[快照视图组合](../acceptance/nr/snapshot-default-view-combination.md)完成两批局部核对。
+动态照明控制的六附件精确一致，新增收益未达准入条件。
+
+[光栅图元与深度模型](../acceptance/nr/raster-primitive-depth-model.md)完成双设备来源核对。
+九十六处超差来自相同图元，透明层级及插值数值继续修正。
+
+[显式欧氏层级候选](../acceptance/nr/alpha-euclidean-lod.md)保留为隔离诊断。
+两设备完整区域核对未关闭透明判定差，后续核对设备尺度函数。
+
+[纹理尺度来源](../acceptance/nr/texture-scale-profile.md)完成独立仿射组及原生导数观测。
+NVIDIA 层级更接近椭圆主轴模型，后续验证通用显式策略。
+
+[独立材质视图](../acceptance/nr/material-view-determinism.md)通过常量索引接收计算的双配置、双设备回归。
+原四帧摘要精确一致，计算视图及公共 UV 绑定按新基线继续接入。
+
+[参考透明层级](../acceptance/nr/reference-alpha-ellipse.md)通过公共策略及原四帧回归。
+NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处深度超差继续修正。
+
+[深度与属性插值](../acceptance/nr/depth-interpolant-source.md)完成完整区域来源核对。
+属性替代路径保持隔离，后续接续场景投影与材质绑定。
+
+[椭圆层级主线集成](../acceptance/nr/reference-alpha-ellipse-main-integration.md)通过双配置、两设备与原四帧检查。
+默认程序身份保持一致，剩余九十六处深度超差继续修正。
+[材质主纹理坐标策略](../acceptance/nr/material-primary-uv-policy.md)记录接收循环来源 `62fc79c`。
+主 UV 组合的公开材质、阴影及取样正控制通过所属验收。
+
+[材质主 UV 绑定](../acceptance/nr/material-primary-uv-policy.md)通过两配置、双设备的三十六组检查。
+公开材质、阴影、覆盖、足迹正控制及失败清理通过，原始四帧摘要精确一致。
+主线程序集的 859 项继续验收，实际相机与几何深度组合继续推进。
+
+[实际网格位置](../acceptance/nr/actual-world-depth-source.md)通过公开深度的完整区域来源核对。
+两设备的可见量与原生位置控制逐字节一致，场景级投影继续接入。
+
+[参考坐标帧与世界坐标深度](../acceptance/nr/reference-position-frame.md)通过双配置、双设备核对。
+公开世界坐标路径的完整深度平面与 CPU 预转换控制逐位一致，原始四帧摘要精确一致。
+实际索引、朝向及 UV 组合继续独立验收。
+
+[实际索引与正面方向](../acceptance/nr/actual-geometry-index-source.md)通过双设备来源核对。
+两份完整深度平面与来源控制逐位一致，实际 UV 组合继续验收。
+
+[实际网格主坐标来源](../acceptance/nr/actual-geometry-uv-source.md)完成双设备的实际位置、索引及 UV 组合核对。
+完整深度平面及可见量与来源控制一致，后续接入统一场景视图。
+
+[参考相机视图契约](../acceptance/nr/reference-camera-view.md)通过两配置空间查询及双设备深度适配。
+17017 条来源射线的往返误差满足八位子像素门槛，宿主视图选择与绘制绑定继续接入。
+
+[参考光栅位置](../acceptance/nr/reference-raster-projection.md)通过两配置、双设备数值核对。
+组合保留设备最终深度及屏幕偏移，场景宿主绑定继续接入。
+
+[项目参考视图配置](../acceptance/nr/project-reference-views.md)通过版本、参数位值、保存重开及目录移动核对。
+两配置项目契约及当前原四帧通过，场景选择继续接入。
+
+[场景参考相机选择](../acceptance/nr/scene-reference-camera-selection.md)通过持久锚点、刚性移动及优先级核对。
+两配置十二组检查及当前原四帧通过，光栅与拾取消费继续接入。
+
+[保守剔除参数](../acceptance/nr/conservative-frustum-transport.md)通过两配置、两设备及旧模块兼容检查。
+128 字节布局及原四帧通过，参考混合平面继续接入。
+
+[参考光栅混合视锥](../acceptance/nr/reference-raster-frustum.md)完成两配置、两设备检查。
+有界参数、退化回退及原四帧通过，光栅与拾取继续接入。
+
+[参考相机生产接入](../acceptance/nr/reference-camera-render-binding.md)完成共享标定、光栅、拾取及编辑入口检查。
+两配置、两设备的实际几何掩码和原四帧通过，完整外观按所属门槛继续验收。
+
+[椭圆选级](../acceptance/nr/material-ellipse-coverage-policy.md)记录独立覆盖的公开策略及实际头发证据。
+
+[场景参考深度](../acceptance/nr/scene-reference-depth.md)接入双附件生产与实际采集。
+可见量及完整颜色按各自门槛验收。
+
+[场景参考法线与对象身份](../acceptance/nr/scene-reference-normal.md)记录实际场景输入。
+可见量装配继续核对同帧对象图集及参考重建。
+
+[场景参考对象可见量](../acceptance/nr/scene-reference-object-visibility.md)记录同帧图集及输出。
+原生图集、参考标定及完整颜色按各自门槛验收。
+
+[对象可见量逆投影标定](../acceptance/nr/scene-visibility-reference-calibration.md)核对实际相机与当前对象记录。
+图集、材质输入及完整颜色按各自门槛验收。
+
+[原生图集与接收输入来源](../acceptance/nr/native-atlas-and-receiver-producers.md)核对逐事件深度和法线写入。
+图集投影的乘加次序与两份服饰几何继续核对。
+
+[对象可见量深度方向](../acceptance/nr/visibility-projection-depth.md)接入逐记录选择。
+原生对象记录和图集投影沿实际来源继续验收。
+
+[原生对象记录标定](../acceptance/nr/native-object-record-calibration.md)核对当前对象和灯光投影。
+图集写入与接收法线继续按各自来源验收。
+
+[参考对象图集光栅](../acceptance/nr/reference-object-shadow-raster.md)核对真实 D16 写入及读回。
+NVIDIA 头发可见量通过一字节门槛，Intel 仍有 236 处超差。
+完整接收继续核对深度和法线，颜色继续核对同帧材质输入。
+
+[材质参考对象可见量](../acceptance/nr/material-reference-object-visibility.md)接入快照及主通道。
+NVIDIA 的完整头发颜色达到一字节门槛。
+Intel 的 580 处颜色超差继续按设备输入核对。
+
+[Intel 参考可见量来源](../acceptance/nr/intel-reference-visibility-sources.md)核对实际附件与算术。
+同输入的 `ProfileV1` 在双设备满足一字节门槛。
+
+[项目参考可见量算术](../acceptance/nr/project-reference-visibility-profile.md)接入实际生产入口。
+完整接收按原生写入事件核对法线与深度。
+Intel 头发颜色继续按冻结区域核对纹理选级。
+
+[原生接收输入来源](../acceptance/nr/native-receiver-producer-replay.md)核对事件 377 的纹理与事件 440 的深度。
+
+[参考场景外扩深度](../acceptance/nr/reference-scene-outline-depth.md)接入材质外扩绘制。
+服饰法线、外扩投影系数与覆盖继续按原生来源核对。
+
+[原生服饰接收法线输入](../acceptance/nr/native-cloth-receiver-normal-input.md)核对十二级 BC5 与材质 UV 方向。
+服饰一按原生层级、采样参数及法线重建分别验收。
+
+[服饰接收法线层级](../acceptance/nr/cloth-receiver-authored-mips.md)核对现有采样器读取原生十二级的实际结果。
+
+[服饰接收法线采样](../acceptance/nr/cloth-receiver-native-sampler.md)核对重复寻址、最近邻层级及偏移。
+
+[服饰接收法线绿色方向](../acceptance/nr/cloth-receiver-normal-y.md)核对切线空间方向。
+
+[参考法线采样后重建](../acceptance/nr/reference-normal-sampled-rg.md)接入材质画像及两份参考片元程序。
+[眉部接收深度与法线来源](../acceptance/nr/eyebrow-receiver-producer.md)核对 496 个位置的实际绘制与附件。头发裁剪、纹理选级及图集输入继续按原门槛验收。
+
+[原生头发法线纹理层级偏移](../acceptance/nr/native-hair-normal-mip-bias.md)核对 49 档双设备原生选级，Intel 固定偏移的最小超差为 477 处。
+
+[原生眉部与头发模板](../acceptance/nr/native-eyebrow-hair-stencil.md)确认 135 个重叠位置的原生模板保护与参考附件要求。
+
+[参考深度模板覆盖](../acceptance/nr/reference-depth-stencil-coverage.md)接入保护位及场景扩展 API 17。完整接收超差为 NVIDIA 410 处和 Intel 742 处，眉部各 30 处。
+
+[参考几何法线](../acceptance/nr/reference-geometric-normal.md)核对眉部和脸部的原生几何法线。完整接收超差为 NVIDIA 284 处和 Intel 632 处，新增位置纳入同一验收范围。
+
+[参考接收输入对照](../acceptance/nr/reference-receiver-source-isolation.md)在双设备逐字节复现完整可见量附件。原生深度和法线联合替换时，接收超差为 NVIDIA 10 处和 Intel 6 处，Intel 冻结头发可见量进入门槛。实际场景画质状态为 `failed-user-review`。
+
+[参考外壳深度投影](../acceptance/nr/reference-outline-projection.md)核对事件 440 的独立深度系数。外壳区域的可见量超差为 NVIDIA 1 处和 Intel 43 处，完整接收分别为 237 处和 608 处。
+
+[原生纹理取样足迹](../acceptance/nr/native-texture-sampling-footprint.md)测量固定梯度下的最近层级。轴向与对角近似在冻结头发的 17,017 个位置中逐位复现 17,012 个 NVIDIA 压缩法线值。实际颜色与可见量继续按原门槛验收。
+
+[参考头发选层边界](../acceptance/nr/reference-hair-mip-footprint.md)记录实际场景未通过的候选。正式接收继续以已验收的参考外壳版本为基线，按实际层级及原生显式层级核对新增位置。
+
+[参考头发片元层级](../acceptance/nr/reference-hair-live-lod.md)核对半层边界。NVIDIA 的 8 处法线变化全部处于一个 8 位层级精度单位内。边界采样继续在双设备正式场景核对。
+
+[参考头发近邻层级](../acceptance/nr/reference-hair-mip-boundary.md)核对参考法线边界采样。NVIDIA 冻结头发可见量和 RGB 超差均为零，Intel 分别为 111 处和 568 处，整体画质仍按原门槛验收。
+
+[头发着色双法线采样](../acceptance/nr/reference-hair-color-source.md)核对原生纹理 t18 的单变量控制。Intel RGB 超差 449 处，参数纹理继续按同一冻结范围核对。
+
+[头发参数与双法线选层](../acceptance/nr/reference-hair-color-pair.md)核对冻结 RGB，Intel 联合控制有 393 处超差。基色选层按同一原生采样器继续核对。
+
+[头发基色与三纹理选层](../acceptance/nr/reference-hair-color-triple.md)核对原生同采样器的三份纹理。Intel 冻结 RGB 超差为 32 处，继续按一字节门槛验收。
+
+[体表接收法线纹理](../acceptance/nr/native-body-normal-source.md)核对十一层压缩块。NVIDIA 和 Intel 的体表可见量分别有 46 和 77 处超差，后续核对采样后法线重建。
+
+[投影头发主纹理层级](../acceptance/nr/projected-hair-point-mip.md)完成两配置、双设备和原始四帧专项回归。Intel 冻结 RGB 仍有 32 处超差，按原门槛继续验收。

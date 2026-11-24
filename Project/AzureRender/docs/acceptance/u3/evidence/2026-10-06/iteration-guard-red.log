@@ -1,0 +1,23 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 1: AzureEditor.EditService
+1/1 Test #1: AzureEditor.EditService ..........***Failed    0.14 sec
+[1791233005810][info][editor][code=0] Opened scene: test
+[1791233005811][info][editor][code=0] Opened scene: test
+[1791233005817][info][editor][code=0] Opened scene: test
+[1791233005827][info][editor][code=0] Opened scene: test
+[1791233005837][info][editor][code=0] Undo
+[1791233005842][info][editor][code=0] Undo
+[1791233005857][info][editor][code=0] Opened scene: test
+[1791233005867][info][editor][code=0] Play started
+[1791233005873][info][editor][code=0] Opened scene: test
+A document-writing descriptor must be guarded even without requiresIdle
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.14 sec
+
+The following tests FAILED:
+	  1 - AzureEditor.EditService (Failed)
+Errors while running CTest

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_playable_player.py", line 60, in <module>
+    run(a.executable,a.output.resolve() if a.output else Path(temporary),a.character,a.capture,a.timeout,a.frames)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_playable_player.py", line 36, in run
+    route=data['routeFrames'];assert all('tasks' in frame for frame in route),'Task state must be observable in route evidence'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Task state must be observable in route evidence

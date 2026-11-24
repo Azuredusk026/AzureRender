@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "initialUserEditsPreserved": true,
+  "byteIdenticalFiles": [
+    "src/app/AzureRenderApp.hpp",
+    "src/app/AzureRenderCapture.cpp",
+    "src/app/AzureRenderSupport.cpp",
+    "src/editor/commands/EditService.cpp",
+    "src/editor/commands/EditService.hpp",
+    "src/runtime/EngineSettings.cpp",
+    "tests/EngineSettingsTests.cpp",
+    "tests/PipelineInspectionTests.cpp",
+    "tools/run_playable_long_run.py",
+    "tools/run_playable_performance.py",
+    "tools/test_level_player.py",
+    "tools/test_validation_protocol.py"
+  ],
+  "authorizedAppReplacements": {
+    "resourceLocator_.resolveAsset(options.assetPath).string()": "resourceLocator_.resolveAsset(std::filesystem::u8path(options.assetPath)).u8string()",
+    "resourceLocator_.resolveAsset(assetPath).string()": "resourceLocator_.resolveAsset(std::filesystem::u8path(assetPath)).u8string()",
+    "ResourceLocator(options.resourceRoot)": "ResourceLocator(std::filesystem::u8path(options.resourceRoot))",
+    "resourceLocator_.resolveAsset(resource.path).string()": "resourceLocator_.resolveAsset(std::filesystem::u8path(resource.path)).u8string()"
+  }
+}

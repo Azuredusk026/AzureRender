@@ -1,0 +1,20 @@
+[
+  {
+    "activeResourceKey": "fogAnalytic:{\"analytic\":{\"aerial\":null,\"height\":{\"layers\":[{\"density\":0.0010000000474974513,\"heightFalloff\":0.0,\"referenceHeight\":0.0,\"scatteringColor\":[0.10000000149011612,0.10000000149011612,0.10000000149011612]}],\"minimumTransmittance\":0.0,\"schemaVersion\":1,\"startViewDepth\":0.0,\"transmittanceBias\":[0.0,0.0,0.0,0.0]},\"schemaVersion\":1},\"asset\":\"\",\"captureView\":null,\"enabled\":true,\"projection\":{\"depthEncoding\":[0.0,1.0,1.0],\"extent\":[960,540],\"framePhase\":0,\"jitterRadius\":0.0,\"minimumViewDepth\":0.0,\"nearFadeWidth\":9.999999974752427e-07,\"pixelCenterOffset\":0.5,\"pixelOrigin\":\"upper-left\",\"schemaVersion\":1},\"schemaVersion\":2}D:/Projects/FYP/Project/AzureRender/build/runs/20261101-101614-view-fog-reuse-814a54/red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/cube.gltf:14850552707534680045",
+    "bufferBytes": 18140672,
+    "buffers": 74,
+    "cachedLastSubmission": 7,
+    "cachedReady": true,
+    "cachedResourceKey": "fogAnalytic:{\"analytic\":{\"aerial\":null,\"height\":{\"layers\":[{\"density\":0.0010000000474974513,\"heightFalloff\":0.0,\"referenceHeight\":0.0,\"scatteringColor\":[0.10000000149011612,0.10000000149011612,0.10000000149011612]}],\"minimumTransmittance\":0.0,\"schemaVersion\":1,\"startViewDepth\":0.0,\"transmittanceBias\":[0.0,0.0,0.0,0.0]},\"schemaVersion\":1},\"asset\":\"\",\"captureView\":null,\"enabled\":true,\"projection\":{\"depthEncoding\":[0.0,1.0,1.0],\"extent\":[960,540],\"framePhase\":0,\"jitterRadius\":0.0,\"minimumViewDepth\":0.0,\"nearFadeWidth\":9.999999974752427e-07,\"pixelCenterOffset\":0.5,\"pixelOrigin\":\"upper-left\",\"schemaVersion\":1},\"schemaVersion\":2}D:/Projects/FYP/Project/AzureRender/build/runs/20261101-101614-view-fog-reuse-814a54/red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/cube.gltf:14850552707534680045",
+    "completedSubmission": 7,
+    "entries": 2,
+    "frame": 9,
+    "imageBytes": 192214528,
+    "images": 72,
+    "renderer": "character",
+    "uiActiveGeometry": 0,
+    "uiBufferBytes": 0,
+    "uiBuffers": 0,
+    "uiRetiredGeometry": 0
+  }
+]

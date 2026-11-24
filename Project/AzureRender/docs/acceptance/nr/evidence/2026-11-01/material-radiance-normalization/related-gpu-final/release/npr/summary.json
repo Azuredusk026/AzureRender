@@ -1,0 +1,1150 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "playerSha256": "23c84872ffb6ff556f0e1b5da69c7f0bd1a294a2ad35b6664e82a60a75bf819d",
+  "linearErrorBudget": 0.008,
+  "captures": [
+    {
+      "name": "composed",
+      "maximumLinearError": 0.001010887882328615,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "4cf3517f8263ba2c0168c563cfbdab09298eb410a806fcd02da0a67bd5f8fb06",
+      "measured": [
+        0.06847816984440017,
+        0.03954623527673284,
+        0.02217388479338738
+      ],
+      "expected": [
+        0.06746728196207155,
+        0.040055313739839324,
+        0.02222183570048165
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "fixed",
+      "maximumLinearError": 0.001010887882328615,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "4cf3517f8263ba2c0168c563cfbdab09298eb410a806fcd02da0a67bd5f8fb06",
+      "measured": [
+        0.06847816984440017,
+        0.03954623527673284,
+        0.02217388479338738
+      ],
+      "expected": [
+        0.06746728196207155,
+        0.040055313739839324,
+        0.02222183570048165
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "direct",
+      "maximumLinearError": 0.0005292968133693635,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "4d970014e61ced57f34e1cc0a2279c41920530cb7f1cebc7b1f3be102af4cc25",
+      "measured": [
+        0.03688945040110004,
+        0.02315336617811041,
+        0.014443843596092545
+      ],
+      "expected": [
+        0.037154952821060974,
+        0.023682662991479773,
+        0.01443217990337867
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "ambient",
+      "maximumLinearError": 0.00031396016908327024,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "bde028041017ff40b8e34bc91d2113c396bdb99814c009eb2d1b2d88329ec25c",
+      "measured": [
+        0.0382043715953465,
+        0.027320891639074894,
+        0.019382360956935723
+      ],
+      "expected": [
+        0.03789041142626323,
+        0.02728775124726591,
+        0.019474139492757447
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "disabled",
+      "maximumLinearError": 0.0005086924417040534,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "38ec1caa0e0fb6760d4e3159d5f8745d0af74e7873c6c1f8bdf61855e0c92828",
+      "measured": [
+        0.0382043715953465,
+        0.02217388479338738,
+        0.010960094006488246
+      ],
+      "expected": [
+        0.038713064037050555,
+        0.022140163283785732,
+        0.011192034191239915
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "direction-positive",
+      "maximumLinearError": 0.0012367431527445516,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "3462444500894df6003afe96923374320a234140c7dedf4c599763826b32e190",
+      "measured": [
+        0.11953842798834562,
+        0.06847816984440017,
+        0.03560131487502034
+      ],
+      "expected": [
+        0.12077517114109017,
+        0.06884859609040267,
+        0.035920885550559306
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "direction-negative",
+      "maximumLinearError": 0.0006271686088098472,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "548331dfa9e5526d49d2f0e12438c4dc5e1e6ab9ca123723af75e8270f28f149",
+      "measured": [
+        0.05780543019106723,
+        0.03560131487502034,
+        0.019382360956935723
+      ],
+      "expected": [
+        0.05806000740106827,
+        0.034974146266210496,
+        0.01980435631517383
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "scene-volume",
+      "maximumLinearError": 0.0004851407652644024,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "e1218655b29c21a13ec30b71ead5adf951bf068d298be7ee235f95a5cfe0a45a",
+      "measured": [
+        0.05448027644244237,
+        0.030713443732993635,
+        0.016807375752887384
+      ],
+      "expected": [
+        0.053995135677177966,
+        0.03090589126281487,
+        0.01686644733997335
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "zero-radiance",
+      "maximumLinearError": 0.0,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "18886ab6a52fd64a058e540909cf6cc5ce2a6e7297f20d3bc182679182db734a",
+      "measured": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "point-only",
+      "maximumLinearError": 0.00015376785727774442,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "78b2833555da1644e7d4bcbb89476c4ac8f9468ef476f33eb158277abbf5ab97",
+      "measured": [
+        0.05448027644244237,
+        0.03688945040110004,
+        0.024157632448504756
+      ],
+      "expected": [
+        0.054622417817481006,
+        0.036856855702866925,
+        0.0243114003057825
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "surface-only",
+      "maximumLinearError": 0.00031396016908327024,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "bde028041017ff40b8e34bc91d2113c396bdb99814c009eb2d1b2d88329ec25c",
+      "measured": [
+        0.0382043715953465,
+        0.027320891639074894,
+        0.019382360956935723
+      ],
+      "expected": [
+        0.03789041142626323,
+        0.02728775124726591,
+        0.019474139492757447
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "additional-directional",
+      "maximumLinearError": 0.00016676073139523795,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "3c9eb7dffb50a1c4f6ff35912d2903d5dfdb673967e22401cfca8b6465c8cc20",
+      "measured": [
+        0.07421356838014963,
+        0.04518620438567554,
+        0.026241221894849898
+      ],
+      "expected": [
+        0.07438032911154487,
+        0.045326781188359734,
+        0.02621899076878162
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "main-shadow",
+      "maximumLinearError": 0.0009061766697694221,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "4db57525e387775fa6765729655f0d332811241fc8f557542ad213df17e82e5e",
+      "measured": [
+        0.03688945040110004,
+        0.02518685962736163,
+        0.016807375752887384
+      ],
+      "expected": [
+        0.03598327373133062,
+        0.02542618169401558,
+        0.017021112412665348
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "main-shadow-floor",
+      "maximumLinearError": 0.001010887882328615,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "4455be832dba1e4f01b45511e7c573c1469c0ea62865a00e4132f22c158da886",
+      "measured": [
+        0.06847816984440017,
+        0.03954623527673284,
+        0.02217388479338738
+      ],
+      "expected": [
+        0.06746728196207155,
+        0.040055313739839324,
+        0.02222183570048165
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "indoor-shadow",
+      "maximumLinearError": 0.00020711222151226227,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "b6e23c340c28cddf84d317c258ef2bd027da37e068ac48fa209c09a7c7dd6a6f",
+      "measured": [
+        0.04518620438567554,
+        0.03189603307301153,
+        0.021219010376003555
+      ],
+      "expected": [
+        0.04497909216416328,
+        0.03178272711751948,
+        0.021276390515831682
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "ambient-weight-quarter",
+      "maximumLinearError": 0.00045493403949476915,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "f74b854128966632804d338d292f9462cd550ef08b91ecc31be96952df995147",
+      "measured": [
+        0.04518620438567554,
+        0.027320891639074894,
+        0.01599629336550963
+      ],
+      "expected": [
+        0.04473303510631362,
+        0.027775825678569663,
+        0.016379593852654417
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "ambient-weight-zero",
+      "maximumLinearError": 0.0005292968133693635,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "4d970014e61ced57f34e1cc0a2279c41920530cb7f1cebc7b1f3be102af4cc25",
+      "measured": [
+        0.03688945040110004,
+        0.02315336617811041,
+        0.014443843596092545
+      ],
+      "expected": [
+        0.037154952821060974,
+        0.023682662991479773,
+        0.01443217990337867
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "ambient-weight-direct",
+      "maximumLinearError": 0.0005292968133693635,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "4d970014e61ced57f34e1cc0a2279c41920530cb7f1cebc7b1f3be102af4cc25",
+      "measured": [
+        0.03688945040110004,
+        0.02315336617811041,
+        0.014443843596092545
+      ],
+      "expected": [
+        0.037154952821060974,
+        0.023682662991479773,
+        0.01443217990337867
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "ambient-weight-shadow",
+      "maximumLinearError": 0.0002964424820064357,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "17dce07423d72b72bdf7dd273984ccb9371ad6cb5e51afa6c05eb7adb96e6000",
+      "measured": [
+        0.026241221894849898,
+        0.018500220128379697,
+        0.012286488356915872
+      ],
+      "expected": [
+        0.026537664376856333,
+        0.018751808999336487,
+        0.012553070404340694
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "offset-main-shadow",
+      "maximumLinearError": 0.0009061766697694221,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "a7ff8288a44ef02e3511c59af065418a867d6cbe720b93b806840029842e0318",
+      "measured": [
+        0.03688945040110004,
+        0.02518685962736163,
+        0.016807375752887384
+      ],
+      "expected": [
+        0.03598327373133062,
+        0.02542618169401558,
+        0.017021112412665348
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "offset-main-lit",
+      "maximumLinearError": 0.001010887882328615,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "14774d17cca60e2d45042d02f0bb362c70d1aff70da49222cc9979fd16500d4e",
+      "measured": [
+        0.06847816984440017,
+        0.03954623527673284,
+        0.02217388479338738
+      ],
+      "expected": [
+        0.06746728196207155,
+        0.040055313739839324,
+        0.02222183570048165
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors",
+      "maximumLinearError": 0.0008160515697270831,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "c7ca4ff7de92b0889bffb05be2b014f6edaf592c6f2c68b96750b778ed6c05a5",
+      "measured": [
+        0.07818742180518633,
+        0.06847816984440017,
+        0.05780543019106723
+      ],
+      "expected": [
+        0.07884632740659481,
+        0.06766211827467308,
+        0.05775224558731854
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-fixed",
+      "maximumLinearError": 0.0008160515697270831,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "c7ca4ff7de92b0889bffb05be2b014f6edaf592c6f2c68b96750b778ed6c05a5",
+      "measured": [
+        0.07818742180518633,
+        0.06847816984440017,
+        0.05780543019106723
+      ],
+      "expected": [
+        0.07884632740659481,
+        0.06766211827467308,
+        0.05775224558731854
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-no-main",
+      "maximumLinearError": 0.0003102506117522198,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "9c55e6f07d3b5471156d030511637bd78dfa814b1d8fc3566d33a74713b504a9",
+      "measured": [
+        0.03954623527673284,
+        0.033104766570885055,
+        0.028426039504420793
+      ],
+      "expected": [
+        0.03978493199757639,
+        0.03322685004814144,
+        0.028115788892668574
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-volume",
+      "maximumLinearError": 0.0006837210343215785,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "894025d11f145b082f9c7b0e0cc4f6f23d63f57fb95ed6d99d98a4d30bd7bb61",
+      "measured": [
+        0.05448027644244237,
+        0.04518620438567554,
+        0.03688945040110004
+      ],
+      "expected": [
+        0.05379655540812079,
+        0.04527011063353428,
+        0.036330692145285344
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-disabled",
+      "maximumLinearError": 0.0005086924417040534,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "38ec1caa0e0fb6760d4e3159d5f8745d0af74e7873c6c1f8bdf61855e0c92828",
+      "measured": [
+        0.0382043715953465,
+        0.02217388479338738,
+        0.010960094006488246
+      ],
+      "expected": [
+        0.038713064037050555,
+        0.022140163283785732,
+        0.011192034191239915
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-direct",
+      "maximumLinearError": 0.00048483986771442195,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "df88b001cdecd0f726315f7aa67c0f1b017541c448d1ded0aa0ba327661d4dab",
+      "measured": [
+        0.03954623527673284,
+        0.03433980680868217,
+        0.0295568344378088
+      ],
+      "expected": [
+        0.039061395409018415,
+        0.03443526822653164,
+        0.02963645669464997
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-ambient",
+      "maximumLinearError": 0.0003102506117522198,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "9c55e6f07d3b5471156d030511637bd78dfa814b1d8fc3566d33a74713b504a9",
+      "measured": [
+        0.03954623527673284,
+        0.033104766570885055,
+        0.028426039504420793
+      ],
+      "expected": [
+        0.03978493199757639,
+        0.03322685004814144,
+        0.028115788892668574
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-zero",
+      "maximumLinearError": 0.0,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "18886ab6a52fd64a058e540909cf6cc5ce2a6e7297f20d3bc182679182db734a",
+      "measured": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-fabric",
+      "maximumLinearError": 0.0008160515697270831,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "c7ca4ff7de92b0889bffb05be2b014f6edaf592c6f2c68b96750b778ed6c05a5",
+      "measured": [
+        0.07818742180518633,
+        0.06847816984440017,
+        0.05780543019106723
+      ],
+      "expected": [
+        0.07884632740659481,
+        0.06766211827467308,
+        0.05775224558731854
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-document",
+      "maximumLinearError": 0.0008160515697270831,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "c7ca4ff7de92b0889bffb05be2b014f6edaf592c6f2c68b96750b778ed6c05a5",
+      "measured": [
+        0.07818742180518633,
+        0.06847816984440017,
+        0.05780543019106723
+      ],
+      "expected": [
+        0.07884632740659481,
+        0.06766211827467308,
+        0.05775224558731854
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-view-tint",
+      "maximumLinearError": 0.0006989203938886288,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "887a6d2d089c99907c5ab8546637920b11d637c4333bfc61ba310500f5143d31",
+      "measured": [
+        0.05448027644244237,
+        0.03688945040110004,
+        0.03189603307301153
+      ],
+      "expected": [
+        0.05378135604855374,
+        0.036718354483061065,
+        0.03151101473462132
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-view-tint-document",
+      "maximumLinearError": 0.0006989203938886288,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "887a6d2d089c99907c5ab8546637920b11d637c4333bfc61ba310500f5143d31",
+      "measured": [
+        0.05448027644244237,
+        0.03688945040110004,
+        0.03189603307301153
+      ],
+      "expected": [
+        0.05378135604855374,
+        0.036718354483061065,
+        0.03151101473462132
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-main-ramp-front",
+      "maximumLinearError": 0.000976446231349834,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "b0eb5be27b652c6aed654a04c696ca42d86631b03ea3a81796e4daa33a803c57",
+      "measured": [
+        0.0953074666309647,
+        0.08437621154414882,
+        0.07227185068231748
+      ],
+      "expected": [
+        0.09433102039961487,
+        0.08459059729163736,
+        0.07279727466306714
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-main-ramp-side",
+      "maximumLinearError": 0.0005229096903862918,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "c7ca4ff7de92b0889bffb05be2b014f6edaf592c6f2c68b96750b778ed6c05a5",
+      "measured": [
+        0.07818742180518633,
+        0.06847816984440017,
+        0.05780543019106723
+      ],
+      "expected": [
+        0.07805261342902677,
+        0.06795526015401387,
+        0.057445407192643586
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-main-ramp-back",
+      "maximumLinearError": 0.0006491892896079605,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "eeb34e0cc7a6b904d5ddf558b9e82814240514b354968d661687134b1e0047f5",
+      "measured": [
+        0.04518620438567554,
+        0.03560131487502034,
+        0.028426039504420793
+      ],
+      "expected": [
+        0.0454016896872641,
+        0.03573868378443548,
+        0.027776850214812833
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-main-ramp-biased",
+      "maximumLinearError": 0.0010002503921095196,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "397aa5a1205fb6abb87382c27b9fbcc56a48b434d7817b7770532442e1c034c2",
+      "measured": [
+        0.09305896284668745,
+        0.08437621154414882,
+        0.07421356838014963
+      ],
+      "expected": [
+        0.09205871245457793,
+        0.08521789318543839,
+        0.07495177726560538
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-main-ramp-low",
+      "maximumLinearError": 0.0006491892896079605,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "eeb34e0cc7a6b904d5ddf558b9e82814240514b354968d661687134b1e0047f5",
+      "measured": [
+        0.04518620438567554,
+        0.03560131487502034,
+        0.028426039504420793
+      ],
+      "expected": [
+        0.0454016896872641,
+        0.03573868378443548,
+        0.027776850214812833
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-main-ramp-high",
+      "maximumLinearError": 0.000976446231349834,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "b0eb5be27b652c6aed654a04c696ca42d86631b03ea3a81796e4daa33a803c57",
+      "measured": [
+        0.0953074666309647,
+        0.08437621154414882,
+        0.07227185068231748
+      ],
+      "expected": [
+        0.09433102039961487,
+        0.08459059729163736,
+        0.07279727466306714
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-main-ramp-document",
+      "maximumLinearError": 0.0005229096903862918,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "c7ca4ff7de92b0889bffb05be2b014f6edaf592c6f2c68b96750b778ed6c05a5",
+      "measured": [
+        0.07818742180518633,
+        0.06847816984440017,
+        0.05780543019106723
+      ],
+      "expected": [
+        0.07805261342902677,
+        0.06795526015401387,
+        0.057445407192643586
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-main-ramp-fixed",
+      "maximumLinearError": 0.0005229096903862918,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "c7ca4ff7de92b0889bffb05be2b014f6edaf592c6f2c68b96750b778ed6c05a5",
+      "measured": [
+        0.07818742180518633,
+        0.06847816984440017,
+        0.05780543019106723
+      ],
+      "expected": [
+        0.07805261342902677,
+        0.06795526015401387,
+        0.057445407192643586
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-character-main-shadow",
+      "maximumLinearError": 0.0003926977381563043,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "25fc720dc864bb868c306fe816ffb69e88c5dca0b16c70d304161557ed690f87",
+      "measured": [
+        0.027320891639074894,
+        0.016807375752887384,
+        0.010960094006488246
+      ],
+      "expected": [
+        0.02692819390091859,
+        0.017074274478129044,
+        0.010669746607845086
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-character-scene-shadow",
+      "maximumLinearError": 0.0008160515697270831,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "12727f42409d3f8f201142d6d03513bd35677c392ebc06d7f4c8ffafa5a513eb",
+      "measured": [
+        0.07818742180518633,
+        0.06847816984440017,
+        0.05780543019106723
+      ],
+      "expected": [
+        0.07884632740659481,
+        0.06766211827467308,
+        0.05775224558731854
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-character-main-shadow-document",
+      "maximumLinearError": 0.0003926977381563043,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "25fc720dc864bb868c306fe816ffb69e88c5dca0b16c70d304161557ed690f87",
+      "measured": [
+        0.027320891639074894,
+        0.016807375752887384,
+        0.010960094006488246
+      ],
+      "expected": [
+        0.02692819390091859,
+        0.017074274478129044,
+        0.010669746607845086
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-character-main-shadow-fixed",
+      "maximumLinearError": 0.0003926977381563043,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "25fc720dc864bb868c306fe816ffb69e88c5dca0b16c70d304161557ed690f87",
+      "measured": [
+        0.027320891639074894,
+        0.016807375752887384,
+        0.010960094006488246
+      ],
+      "expected": [
+        0.02692819390091859,
+        0.017074274478129044,
+        0.010669746607845086
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-character-main-lit",
+      "maximumLinearError": 0.0008160515697270831,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "c7ca4ff7de92b0889bffb05be2b014f6edaf592c6f2c68b96750b778ed6c05a5",
+      "measured": [
+        0.07818742180518633,
+        0.06847816984440017,
+        0.05780543019106723
+      ],
+      "expected": [
+        0.07884632740659481,
+        0.06766211827467308,
+        0.05775224558731854
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "material-colors-character-mask-none",
+      "maximumLinearError": 0.0008160515697270831,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "12727f42409d3f8f201142d6d03513bd35677c392ebc06d7f4c8ffafa5a513eb",
+      "measured": [
+        0.07818742180518633,
+        0.06847816984440017,
+        0.05780543019106723
+      ],
+      "expected": [
+        0.07884632740659481,
+        0.06766211827467308,
+        0.05775224558731854
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main",
+      "maximumLinearError": 0.0006537857134987363,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "33ec4ea69868c730c373f72159196a9f174d3c5ed63b91462cd1f44ca896a596",
+      "measured": [
+        0.043735029256973465,
+        0.003676507324047436,
+        0.0015176349177441874
+      ],
+      "expected": [
+        0.04308124354347473,
+        0.003698064553862868,
+        0.001582772228583815
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main-fixed",
+      "maximumLinearError": 0.0006537857134987363,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "33ec4ea69868c730c373f72159196a9f174d3c5ed63b91462cd1f44ca896a596",
+      "measured": [
+        0.043735029256973465,
+        0.003676507324047436,
+        0.0015176349177441874
+      ],
+      "expected": [
+        0.04308124354347473,
+        0.003698064553862868,
+        0.001582772228583815
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main-ramp-side",
+      "maximumLinearError": 0.0005869167696745947,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "cfbe9bbe51584b1a80ff038656394bbc7843cb4845363ea69d693fefb0c55b4a",
+      "measured": [
+        0.06480326669290577,
+        0.005181516702338386,
+        0.0021246888848418626
+      ],
+      "expected": [
+        0.06421634992323118,
+        0.005042204719813754,
+        0.0019528270855797402
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main-shadow",
+      "maximumLinearError": 0.0006537857134987363,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "74e886a225c132e0430ba853edbb6719c9e1f9848da84955a97ad6d771e9e422",
+      "measured": [
+        0.043735029256973465,
+        0.003676507324047436,
+        0.0015176349177441874
+      ],
+      "expected": [
+        0.04308124354347473,
+        0.003698064553862868,
+        0.001582772228583815
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main-strong-shadow",
+      "maximumLinearError": 0.0010024554989675472,
+      "validationEnabled": false,
+      "surfaceShadowGuard": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "imageSha256": "151f80b99df3abec150f34ff69501c8caea46f23b76e37ef655b11232bca623e",
+      "measured": [
+        0.1946178304415758,
+        0.03189603307301153,
+        0.019382360956935723
+      ],
+      "expected": [
+        0.19361537494260825,
+        0.03180745799881488,
+        0.019245664593016142
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main-strong-shadow-fixed",
+      "maximumLinearError": 0.0010024554989675472,
+      "validationEnabled": false,
+      "surfaceShadowGuard": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "imageSha256": "151f80b99df3abec150f34ff69501c8caea46f23b76e37ef655b11232bca623e",
+      "measured": [
+        0.1946178304415758,
+        0.03189603307301153,
+        0.019382360956935723
+      ],
+      "expected": [
+        0.19361537494260825,
+        0.03180745799881488,
+        0.019245664593016142
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "name": "receiver-main-ramp-disabled",
+      "maximumLinearError": 6.799112274683726e-05,
+      "validationEnabled": false,
+      "surfaceShadowGuard": null,
+      "imageSha256": "5dbd468cad05c3cf1076bb272a8324f888ec29d3063557e99ad2cc64c41eabb5",
+      "measured": [
+        0.008568125618069307,
+        0.000607053967097675,
+        0.0003035269835488375
+      ],
+      "expected": [
+        0.008622899755252832,
+        0.0006432307856987507,
+        0.00023553586080200025
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    }
+  ]
+}

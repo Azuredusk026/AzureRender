@@ -1,0 +1,111 @@
+{
+  "sourceBase": "ae4bf23",
+  "status": "pass-attribution-completed",
+  "tests": [
+    {
+      "receipt": "release.xml",
+      "name": "AzureRender.RenderGraph"
+    },
+    {
+      "receipt": "release.xml",
+      "name": "AzureRender.CommandLine"
+    },
+    {
+      "receipt": "debug.xml",
+      "name": "AzureRender.RenderGraph"
+    },
+    {
+      "receipt": "debug.xml",
+      "name": "AzureRender.CommandLine"
+    }
+  ],
+  "passed": 4,
+  "native": {
+    "status": "measured-pass-attribution",
+    "execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 122.4210000000021,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "24",
+        "--smoke-frames",
+        "32",
+        "--gpu-pass-timing",
+        "--gpu-timing-output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-022033-gpu-pass-attribution-89c3e2\\native-metadata\\gpu.json"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-022033-gpu-pass-attribution-89c3e2\\tmp"
+    },
+    "renderedFrames": 32,
+    "capturedFrames": 0,
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "selectedFrames": 24,
+    "discardedInitialFrames": 8,
+    "passMeanMilliseconds": {
+      "character-main": 8.982741333333331,
+      "character-opaque-depth": 5.630677333333334,
+      "character-compute-reflection": 1.6624093333333327,
+      "character-shadow": 1.4468693333333336,
+      "character-skinning": 0.5989360000000001,
+      "character-reflection-motion": 0.5591466666666666,
+      "shadow-tile-bounds": 0.4753640000000001,
+      "character-main-depth": 0.320128,
+      "post-process-grade": 0.15808000000000008,
+      "post-process-hud": 0.11554133333333332,
+      "object-shadow-atlas": 0.10504533333333334,
+      "character-depth-hierarchy": 0.09011733333333333,
+      "character-transparent-prepare": 0.08749333333333333,
+      "character-outline-mask": 0.07739733333333333,
+      "character-occlusion": 0.013610666666666665,
+      "character-gpu-culling": 0.005381333333333333,
+      "capture": 0.0012373333333333336,
+      "character-main-depth-resume": 0.001194666666666667,
+      "editor-ui": 0.0006400000000000002
+    },
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "projectInputsUnchanged": true,
+    "validationTextClean": true,
+    "zeroAllocator": true,
+    "scope": "Opt-in per-pass completion timestamps include barriers and drain effects; attribution only; no formal FPS or net-gain claim",
+    "formalPerformancePassed": false,
+    "overallVisualAcceptance": "failed-user-review"
+  },
+  "sourceHashes": {
+    "src/app/AzureRenderApp.cpp": "bc4ee8cc3f07927d592eb453d083755f7aa9f6f0aee61f20ae14177d38b8c0b6",
+    "src/app/AzureRenderApp.hpp": "bdfb74393b02bbd1b3aae74dabffa37b99ebaa8721e8972226652c86b9122eab",
+    "src/app/AzureRenderCapture.cpp": "532c60fce079b2698f1f178ffe0b2a6e9456ebabab32b9a924bcfcdb23e02123",
+    "src/app/AzureRenderFrame.cpp": "3fcd08e35ec2322c0f72857d8c1f59195bdc517bfc33c4889ef3f049976cb6c3",
+    "src/app/AzureRenderOptions.hpp": "44a49172f1b0d98b60c422ad0bc41c3d35cc5da267dbb2191fda47d6dac396cc",
+    "src/app/CommandLine.cpp": "4b9c7b25edc7bc48af537d93f5e544bc0e4ee92a3f0e3d377a124eb1282859bf",
+    "src/render/RenderGraph.cpp": "c4543df40e477be8440e4ab746e62dceae3c9dcfa5781f508e2c84758591310d",
+    "src/render/RenderGraph.hpp": "47d4f3c378c958818a3659cc8813141e18a2924c9384515fa69c4257166c3c12",
+    "tests/CommandLineTests.cpp": "d6f5f2d17b30163050f62c268fe8761bb633b862a0247b7782e7feb6a5c2326e",
+    "tests/RenderGraphTests.cpp": "436f428cbf277dfaf6d12126dcfaf134b1926ddd8a998b686010422f39e28c50"
+  },
+  "unchangedDefaultPrograms": 674,
+  "passTimingDefaultOff": true,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceZipBytes": 329591,
+  "evidenceZipSha256": "d13fcfdaab10a2125f97f5ce9ed7af8b2312a469b4ab10d97080c23b090477e7"
+}

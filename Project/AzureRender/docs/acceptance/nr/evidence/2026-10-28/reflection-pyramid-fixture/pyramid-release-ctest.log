@@ -1,0 +1,17 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 312: AzureRender.NullRhi
+1/4 Test #312: AzureRender.NullRhi ......................   Passed    0.47 sec
+    Start 340: AzureRender.ReflectionSignalPyramid
+2/4 Test #340: AzureRender.ReflectionSignalPyramid ......   Passed    0.48 sec
+    Start 341: AzureRender.ReflectionSignalPyramidGpu
+3/4 Test #341: AzureRender.ReflectionSignalPyramidGpu ...   Passed    1.40 sec
+    Start 342: AzureRender.ReflectionSpatialFilterGpu
+4/4 Test #342: AzureRender.ReflectionSpatialFilterGpu ...   Passed    1.38 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Label Time Summary:
+gpu    =   2.78 sec*proc (2 tests)
+
+Total Test time (real) =   3.77 sec

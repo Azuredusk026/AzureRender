@@ -1,0 +1,62 @@
+[
+  {
+    "path": "tools/test_character_screen_rim_gpu.py",
+    "assertions": 1,
+    "beforeSha256": "c33371153b397ebbf4ec0746f3c9f5693ae3215422f6c99def03c785ac82cfb0",
+    "afterSha256": "25d7c1b948bb57e30b6e4bf97dd49733c96e8a149924c0932739ba7dca571c65"
+  },
+  {
+    "path": "tools/test_eye_npr_gpu.py",
+    "assertions": 1,
+    "beforeSha256": "eeac054291985bf7d8cfd7769892cdaa184f16c5f8af9f4598d6112689cd3a92",
+    "afterSha256": "b2107ae9aaa0cf8b5c0085be19ebe949316543c28414f4dce2018995ea40cec6"
+  },
+  {
+    "path": "tools/test_material_display_gpu.py",
+    "assertions": 1,
+    "beforeSha256": "0adf433f9bf9e7a89e065b71a312860e164884b4f12770139e2a43d3ea69c2c7",
+    "afterSha256": "08547ed56f303ba7f9a9dbd229292f5b1e2ee35ae731e2f1bc133e6885c06d76"
+  },
+  {
+    "path": "tools/test_material_radiance_gpu.py",
+    "assertions": 1,
+    "beforeSha256": "2d1cfe4276acf840d310910667b60e06d180902245ce2c0e97f4d1087f19076c",
+    "afterSha256": "03f1251191ae03616bbeacd4b3e39754b3439c0071b808a4e7ff028a52586cfc"
+  },
+  {
+    "path": "tools/test_npr_illumination_gpu.py",
+    "assertions": 1,
+    "beforeSha256": "a22cf872169c268e636822163f252ef19a43a6192ebd877cdf2f3dd6a8ec58f9",
+    "afterSha256": "85e31177fb3cf5f6092cdda3cc8273e8129d3ca48d3c50251bed28699362d152"
+  },
+  {
+    "path": "tools/test_object_shadow_gpu.py",
+    "assertions": 1,
+    "beforeSha256": "8760b50a0220ef4c00e3d25adfdd7a6cce1d652cc1652abaa19ef9830f538637",
+    "afterSha256": "56f0df57e8b933c869bf0920e5b147fab034e3d53a8f6cb55ee2a0b5f3c2ab21"
+  },
+  {
+    "path": "tools/test_scene_fog_gpu.py",
+    "assertions": 1,
+    "beforeSha256": "c4522571d221d9ba18f2bc83037da17cf9487ffacef7043052a85ebadeb40561",
+    "afterSha256": "8550a4b53ee74e314924c945b2b52787844bd664b34580655290448a62af1e26"
+  },
+  {
+    "path": "tools/test_unlit_texture_layers_gpu.py",
+    "assertions": 1,
+    "beforeSha256": "931716ceb839e0abe366e9414d657cee76aaab217c16be00ad5f4c80bc46d2d0",
+    "afterSha256": "6f600fb98f0173e73ea150413a97fac29fe8264eac50bff6568b959b6fbc36cd"
+  },
+  {
+    "path": "tools/test_vertex_color_gpu.py",
+    "assertions": 1,
+    "beforeSha256": "f3674242e2b609f71b57de1aa95e1530da3a33bf7ffa7f6b9a20f31273a93a15",
+    "afterSha256": "b399b07ae15e66e11165b6e3f3d895bac57307f0574f94b02bbb89821ea55c8c"
+  },
+  {
+    "path": "tools/test_view_fog_gpu.py",
+    "assertions": 1,
+    "beforeSha256": "d46f69c406b52d1391ae077d030ea0a5b2046fee4e9fbef200ce04976393ecc7",
+    "afterSha256": "a7dee9136e6ad71714c6069fda3d8fbcab8156571fa127ff6085f6d84f7bdbab"
+  }
+]

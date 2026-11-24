@@ -1,0 +1,36 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 57: AzureEngine.ScriptRuntime
+1/1 Test #57: AzureEngine.ScriptRuntime ........***Failed    0.85 sec
+[1791324814930][warning][script][code=0] assets:/bad.lua: ...587/AppData/Local/Temp/azure_script_tests/assets/bad.lua:1: isolated error
+stack traceback:
+	[C]: in function 'base.error'
+	...587/AppData/Local/Temp/azure_script_tests/assets/bad.lua:1: in function <...587/AppData/Local/Temp/azure_script_tests/assets/bad.lua:1>
+[1791324814931][warning][script][code=0] assets:/loop.lua: Script instruction budget exceeded
+stack traceback:
+	...87/AppData/Local/Temp/azure_script_tests/assets/loop.lua:1: in function <...87/AppData/Local/Temp/azure_script_tests/assets/loop.lua:1>
+[1791324814941][warning][script][code=0] assets:/good.lua: ...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1: <name> or '...' expected near <eof>
+[1791324814964][warning][script][code=0] assets:/good.lua: ...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1: init failed
+stack traceback:
+	[C]: in function 'base.error'
+	...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1: in function <...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1>
+[sol2] An exception occurred: Gameplay mutation requires a runtime callback
+[1791324814984][warning][script][code=0] assets:/good.lua: Gameplay mutation requires a runtime callback
+stack traceback:
+	[C]: in method 'set'
+	...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1: in main chunk
+[sol2] An exception occurred: Script entity handle is stale
+[1791324815029][warning][script][code=0] assets:/good.lua: Script entity handle is stale
+stack traceback:
+	[C]: in method 'get'
+	...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1: in function <...87/AppData/Local/Temp/azure_script_tests/assets/good.lua:1>
+Script runtime contract failed
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.86 sec
+
+The following tests FAILED:
+	 57 - AzureEngine.ScriptRuntime (Failed)
+Errors while running CTest

@@ -1,0 +1,11 @@
+{
+  "status": "ProbeMemoryBudgetFailedFormalRunPending",
+  "measuredSeconds": 180.0619999999999,
+  "workingSetGrowth": 0.10253462761126242,
+  "probeWarmupSeconds": 60.0,
+  "formalWarmupSeconds": 120,
+  "runtimeReportFrameCapacity": 8192,
+  "focusRecovered": true,
+  "commitAccountingPassed": true,
+  "hypothesis": "Bounded report capture fills during the 60-second probe baseline; formal measurement keeps its original 120-second warmup."
+}

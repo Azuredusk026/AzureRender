@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "inputsHidden": true,
+  "isolatedEnvironment": true,
+  "movedPath": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g10\\generated-package\\Moved Procedural Inspector",
+  "animations": [
+    {
+      "blend": 1.0,
+      "clip": 0,
+      "morph": [
+        0.0,
+        0.0
+      ],
+      "node": "procedural-rig-0",
+      "previousClip": 0,
+      "time": 0.9833333333333347
+    },
+    {
+      "blend": 1.0,
+      "clip": 0,
+      "morph": [
+        0.0,
+        0.0
+      ],
+      "node": "procedural-rig-1",
+      "previousClip": 0,
+      "time": 1.2333333333333338
+    }
+  ],
+  "manifestSha256": "ce356ae8a361dc3f2f4cbd8bfd9f1ca0f9a52cca77a6f4128d7b0eba378fbcbe",
+  "released": true
+}

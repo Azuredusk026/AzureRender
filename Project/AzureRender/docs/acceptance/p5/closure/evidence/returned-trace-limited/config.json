@@ -1,0 +1,10 @@
+{
+  "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-implementation-2026-10-10\\returned-trace-limited",
+  "command": [
+    "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+    "-c",
+    "print(42)"
+  ],
+  "maxEvents": 20,
+  "diagnosticOnly": true
+}

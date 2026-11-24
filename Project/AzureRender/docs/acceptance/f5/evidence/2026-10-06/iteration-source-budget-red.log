@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 4: AzureAssets.GenerationManifest
+1/1 Test #4: AzureAssets.GenerationManifest ...***Failed   26.85 sec
+Source budget must be checked before reading
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =  26.87 sec
+
+The following tests FAILED:
+	  4 - AzureAssets.GenerationManifest (Failed)
+Errors while running CTest

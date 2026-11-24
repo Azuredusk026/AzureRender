@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "scope": "Public material lighting mechanism; complete regression and filename-boundary follow-up have separate frozen builds.",
+  "visualAcceptance": "failed-user-review",
+  "capturedFrames": 2061,
+  "successfulPlayerInstances": 496,
+  "compiledSourceFiles": 989,
+  "cpuChecksPerConfiguration": 17,
+  "defaultCompatiblePrograms": 213,
+  "isolatedLightingPrograms": 96,
+  "preservedUserFiles": 4
+}

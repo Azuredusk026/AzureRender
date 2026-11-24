@@ -1,0 +1,6 @@
+{
+  "elapsedMs": 12.8007,
+  "passed": true,
+  "schemaVersion": 1,
+  "value": "{\"camera\":null,\"completedSubmission\":3686,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"Process failed\\nglslc: error: cannot open output file: 'D:\\\\Projects\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\runs\\\\20261103-234012-character-reference-stages-5abe6c\\\\lit-surfaces-host-regression\\\\devtools-exclusive-release\\\\exploration\\\\shader candidates\\\\2\\\\binary\\\\character_snapshot_integral_object_bindless_clipmap_lighting.frag.spv': No such file or directory\\r\\n\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Error\",\"thumbnails\":[],\"views\":[]}"
+}

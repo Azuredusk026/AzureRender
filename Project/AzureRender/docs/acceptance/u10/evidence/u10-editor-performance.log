@@ -1,0 +1,1 @@
+{"stage": "U10", "assets": 10000, "warmupFrames": 300, "sampleFrames": 1800, "editorCpuP95Ms": 8.829099999999995, "editorCpuBudgetMs": 10, "passed": true, "renderedRows": 1, "catalog": {"catalogBuilds": 1, "directoryEnumerations": 1, "refreshing": false, "snapshots": 1}, "device": null, "processSeconds": 86.82900000000154}

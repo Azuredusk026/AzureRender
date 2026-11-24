@@ -1,0 +1,270 @@
+{
+  "diagnosticOnly": true,
+  "successfulAllocations": 293,
+  "successfulReleases": 26,
+  "failedCalls": 8,
+  "partialOrAmbiguousCalls": 257,
+  "trackedLiveBytes": 18874368,
+  "liveRegions": [
+    {
+      "base": 2328569970688,
+      "size": 1048576
+    },
+    {
+      "base": 2328572002304,
+      "size": 1048576
+    },
+    {
+      "base": 2328573050880,
+      "size": 1048576
+    },
+    {
+      "base": 2328574099456,
+      "size": 1048576
+    },
+    {
+      "base": 2328575148032,
+      "size": 1048576
+    },
+    {
+      "base": 2328576196608,
+      "size": 1048576
+    },
+    {
+      "base": 2328577245184,
+      "size": 1048576
+    },
+    {
+      "base": 2328578752512,
+      "size": 1048576
+    },
+    {
+      "base": 2328579801088,
+      "size": 2097152
+    },
+    {
+      "base": 2328581898240,
+      "size": 4194304
+    },
+    {
+      "base": 2328586092544,
+      "size": 1048576
+    },
+    {
+      "base": 2328587141120,
+      "size": 1048576
+    },
+    {
+      "base": 2328617025536,
+      "size": 1048576
+    },
+    {
+      "base": 2328615976960,
+      "size": 1048576
+    }
+  ],
+  "completeAllocationCoverage": false,
+  "commandExitCode": 0,
+  "returnedEvents": 327,
+  "entryCalls": 328,
+  "pendingReturns": [
+    {
+      "callId": 312,
+      "api": "NtFreeVirtualMemory",
+      "action": "release",
+      "threadId": 33328,
+      "basePointer": 2328587007512,
+      "sizePointer": 2328587009304,
+      "base": 2328617025536,
+      "size": 0,
+      "flags": 32768,
+      "entrySeconds": 1.75,
+      "stack": [
+        {
+          "address": 140706098197984,
+          "module": "C:\\Windows\\System32\\ntdll.dll",
+          "function": "NtFreeVirtualMemory",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140705227949937,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\libffi-8.dll",
+          "function": "ffi_prep_go_closure",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140705227949203,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\libffi-8.dll",
+          "function": "ffi_call_go",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140705227948738,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\libffi-8.dll",
+          "function": "ffi_call",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140704628227077,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\_ctypes.pyd",
+          "function": "",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140704628222666,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\_ctypes.pyd",
+          "function": "",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140704628221640,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\_ctypes.pyd",
+          "function": "",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734211785694,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "_PyObject_MakeTpCall",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734211800543,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "PyObject_Vectorcall",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734211806243,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "_PyEval_EvalFrameDefault",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734211796580,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "_PyFunction_Vectorcall",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734212492531,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "PyObject_CallObject",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734211825535,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "_PyEval_EvalFrameDefault",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734211796580,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "_PyFunction_Vectorcall",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734212492531,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "PyObject_CallObject",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734211825535,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "_PyEval_EvalFrameDefault",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734211796580,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "_PyFunction_Vectorcall",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734212103295,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "PyIter_Send",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734212493427,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "_PyObject_Call",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734212221600,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "PyInterpreterState_Delete",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140734212221446,
+          "module": "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "function": "PyInterpreterState_Delete",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140706053240752,
+          "module": "C:\\Windows\\System32\\ucrtbase.dll",
+          "function": "wcsrchr",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140706083891415,
+          "module": "C:\\Windows\\System32\\kernel32.dll",
+          "function": "BaseThreadInitThunk",
+          "file": "",
+          "line": 0
+        },
+        {
+          "address": 140706096778652,
+          "module": "C:\\Windows\\System32\\ntdll.dll",
+          "function": "RtlUserThreadStart",
+          "file": "",
+          "line": 0
+        }
+      ]
+    }
+  ],
+  "sharedReturnSites": 9,
+  "unmatchedReturns": 14,
+  "traceStartMonotonic": 14622.843,
+  "errors": [],
+  "droppedEntries": 0,
+  "excludedNonPseudoHandles": 0,
+  "resolvedApis": {
+    "NtAllocateVirtualMemory": 1,
+    "NtAllocateVirtualMemoryEx": 1,
+    "NtFreeVirtualMemory": 1
+  },
+  "coverage": "current-process pseudo handle; reserve/commit/decommit/release APIs",
+  "limits": [
+    "Kernel heaps, mappings, explicit process handles and calls before debugger attachment are outside coverage.",
+    "Debugger timing and returned size do not establish resident ownership or a leak."
+  ]
+}

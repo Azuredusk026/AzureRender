@@ -1,0 +1,29 @@
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+Editor viewport render extent: 960x640
+Scene renderer: pathtracing (sceneType=pathtracing)
+Diagnostic view: Beauty, stylized lighting: off, internal outline: on, HUD: off
+Scene renderer: pathtracing (sceneType=pathtracing)
+ECS visible renderables: 3
+Editor viewport resources rebuilt: 500x308
+Scene renderer: pathtracing (sceneType=pathtracing)
+Scene renderer: pathtracing (sceneType=pathtracing)
+Rendered frames: 209
+Allocator after unload: buffers=0 images=0
+[1792048959298][info][editor][code=0] Opened scene: room
+[1792048959739][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1792048961333][info][editor][code=0] Asset reload requested; changed files: 0
+[1792048962588][info][editor][code=0] Renderer resources reloaded
+[1792048964694][info][editor][code=0] Play started
+[1792048968001][info][editor][code=0] Play stopped; edit state restored
+[1792048969695][info][editor][code=0] Saved scene: D:\Project\AzureRenderDemos\ABeautifulGame\assets\room.azurelevel
+[1792048969997][info][editor][code=0] Saved scene: D:\Project\AzureRenderDemos\ABeautifulGame\assets\room.azurelevel
+[1792048969997][info][editor][code=0] Game build started
+[1792048981373][info][editor][code=0] Game build completed: [stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+{"status": "passed", "name": "ABeautifulGame Ray Tracing", "files": 576}
+

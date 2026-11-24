@@ -1,0 +1,5756 @@
+{
+  "diagnosticOnly": true,
+  "entryAndReturnGroups": {
+    "C:\\Windows\\System32\\ucrtbase.dll": {
+      "calls": 729,
+      "requestedBytes": 67874816,
+      "releaseCalls": 24,
+      "functions": {
+        "_malloc_base": 685,
+        "_calloc_base": 27,
+        "_free_base": 14,
+        "_realloc_base": 2,
+        "_o_wcsftime": 1
+      }
+    },
+    "C:\\Windows\\System32\\gdi32full.dll": {
+      "calls": 3,
+      "requestedBytes": 1777664,
+      "releaseCalls": 1,
+      "functions": {
+        "SelectBrushLocal": 3
+      }
+    },
+    "C:\\Windows\\System32\\msvcrt.dll": {
+      "calls": 13,
+      "requestedBytes": 2064384,
+      "releaseCalls": 1,
+      "functions": {
+        "malloc": 8,
+        "_get_heap_handle": 3,
+        "strerror_s": 1,
+        "realloc": 1
+      }
+    },
+    "C:\\Windows\\System32\\vulkan-1.dll": {
+      "calls": 130,
+      "requestedBytes": 1044480,
+      "releaseCalls": 0,
+      "functions": {
+        "vkResetEvent": 130
+      }
+    },
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\AzurePlayer.exe": {
+      "calls": 30,
+      "requestedBytes": 16723968,
+      "releaseCalls": 0,
+      "functions": {
+        "__std_fs_get_final_path_name_by_handle": 22,
+        "__std_fs_directory_iterator_advance": 5,
+        "__std_fs_get_stats": 2,
+        "__std_fs_open_handle": 1
+      }
+    },
+    "C:\\Windows\\System32\\AudioSes.dll": {
+      "calls": 6,
+      "requestedBytes": 61440,
+      "releaseCalls": 3,
+      "functions": {
+        "": 3,
+        "DllCanUnloadNow": 3
+      }
+    },
+    "C:\\Windows\\System32\\MMDevAPI.dll": {
+      "calls": 3,
+      "requestedBytes": 12288,
+      "releaseCalls": 0,
+      "functions": {
+        "DllGetClassObject": 3
+      }
+    },
+    "C:\\Windows\\System32\\CoreMessaging.dll": {
+      "calls": 6,
+      "requestedBytes": 8409088,
+      "releaseCalls": 1,
+      "functions": {
+        "CoreUICallSend": 4,
+        "CoreUICallCreateConversationHost": 2
+      }
+    },
+    "C:\\Windows\\System32\\uxtheme.dll": {
+      "calls": 6,
+      "requestedBytes": 1527808,
+      "releaseCalls": 1,
+      "functions": {
+        "GetThemeBitmap": 3,
+        "GetThemeTextExtent": 2,
+        "BeginPanningFeedback": 1
+      }
+    },
+    "C:\\Windows\\System32\\imm32.dll": {
+      "calls": 2,
+      "requestedBytes": 1052672,
+      "releaseCalls": 0,
+      "functions": {
+        "ImmGetCompositionFontW": 2
+      }
+    },
+    "C:\\Windows\\System32\\opengl32.dll": {
+      "calls": 17,
+      "requestedBytes": 839680,
+      "releaseCalls": 1,
+      "functions": {
+        "wglSwapLayerBuffers": 17
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igdgmm64.dll": {
+      "calls": 15,
+      "requestedBytes": 4485120,
+      "releaseCalls": 3,
+      "functions": {
+        "GmmAdapterDestroy": 15
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igc64.dll": {
+      "calls": 112,
+      "requestedBytes": 532480,
+      "releaseCalls": 0,
+      "functions": {
+        "getJITVersion": 112
+      }
+    },
+    "unknown": {
+      "calls": 31,
+      "requestedBytes": 1769472,
+      "releaseCalls": 0,
+      "functions": {}
+    },
+    "C:\\Windows\\System32\\setupapi.dll": {
+      "calls": 1,
+      "requestedBytes": 4096,
+      "releaseCalls": 0,
+      "functions": {
+        "SetupDiGetClassPropertyW": 1
+      }
+    },
+    "C:\\Windows\\System32\\crypt32.dll": {
+      "calls": 48,
+      "requestedBytes": 12476416,
+      "releaseCalls": 27,
+      "functions": {
+        "I_CryptReleaseLruEntry": 36,
+        "CryptMemFree": 9,
+        "I_CryptDetachTls": 1,
+        "CertGetNameStringW": 1,
+        "CertGetCRLFromStore": 1
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll": {
+      "calls": 265,
+      "requestedBytes": 1117052928,
+      "releaseCalls": 23,
+      "functions": {
+        "DrvPresentBuffers": 92,
+        "DrvValidateVersion": 70,
+        "vk_icdNegotiateLoaderICDInterfaceVersion": 51,
+        "vkGetInstanceProcAddr": 39,
+        "": 13
+      }
+    },
+    "C:\\Windows\\System32\\cfgmgr32.dll": {
+      "calls": 2,
+      "requestedBytes": 73728,
+      "releaseCalls": 0,
+      "functions": {
+        "CM_Get_Device_Interface_ListW": 2
+      }
+    },
+    "C:\\Windows\\System32\\devobj.dll": {
+      "calls": 3,
+      "requestedBytes": 81920,
+      "releaseCalls": 0,
+      "functions": {
+        "DevObjGetClassDevs": 2,
+        "DevObjCreateDeviceInfoList": 1
+      }
+    },
+    "C:\\Windows\\System32\\msasn1.dll": {
+      "calls": 14,
+      "requestedBytes": 13623296,
+      "releaseCalls": 2,
+      "functions": {
+        "ASN1BERDecCharString": 10,
+        "ASN1bitstring_free": 2,
+        "ASN1BERDecEoid": 1,
+        "ASN1DecRealloc": 1
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": {
+      "calls": 128,
+      "requestedBytes": 4395008,
+      "releaseCalls": 9,
+      "functions": {
+        "nvGetCompilerInterface": 122,
+        "destroyFinalizer": 6
+      }
+    },
+    "C:\\Windows\\System32\\advapi32.dll": {
+      "calls": 1,
+      "requestedBytes": 8192,
+      "releaseCalls": 0,
+      "functions": {
+        "RegEnumValueA": 1
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igvk64.dll": {
+      "calls": 26,
+      "requestedBytes": 2019328,
+      "releaseCalls": 0,
+      "functions": {
+        "ctlTemperatureGetState": 26
+      }
+    },
+    "C:\\Windows\\System32\\nvapi64.dll": {
+      "calls": 31,
+      "requestedBytes": 1687552,
+      "releaseCalls": 1,
+      "functions": {
+        "nvapi_QueryInterface": 31
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvrtum64.dll": {
+      "calls": 55,
+      "requestedBytes": 18911232,
+      "releaseCalls": 3,
+      "functions": {
+        "rtcGetVersion": 55
+      }
+    },
+    "C:\\Windows\\System32\\nvspcap64.dll": {
+      "calls": 7,
+      "requestedBytes": 28672,
+      "releaseCalls": 0,
+      "functions": {
+        "QueryShadowPlayDdiShimInterface": 7
+      }
+    },
+    "C:\\Windows\\System32\\D3D12.dll": {
+      "calls": 22,
+      "requestedBytes": 1531904,
+      "releaseCalls": 0,
+      "functions": {
+        "D3D12SerializeRootSignature": 22
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvldumdx.dll": {
+      "calls": 11,
+      "requestedBytes": 2666496,
+      "releaseCalls": 6,
+      "functions": {
+        "OpenAdapter12": 8,
+        "useCFGModules": 3
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvwgf2umx.dll": {
+      "calls": 521,
+      "requestedBytes": 1083138048,
+      "releaseCalls": 4,
+      "functions": {
+        "NVDEV_Thunk": 507,
+        "": 14
+      }
+    },
+    "C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll": {
+      "calls": 5,
+      "requestedBytes": 20480,
+      "releaseCalls": 0,
+      "functions": {
+        "OBS_Negotiate": 5
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\NvMemMapStoragex.dll": {
+      "calls": 19,
+      "requestedBytes": 102400,
+      "releaseCalls": 0,
+      "functions": {
+        "TotalDiskUsage": 18,
+        "": 1
+      }
+    },
+    "C:\\Windows\\System32\\D3D12Core.dll": {
+      "calls": 6,
+      "requestedBytes": 24576,
+      "releaseCalls": 1,
+      "functions": {
+        "": 6
+      }
+    },
+    "C:\\Windows\\System32\\D3DSCache.dll": {
+      "calls": 2,
+      "requestedBytes": 73728,
+      "releaseCalls": 0,
+      "functions": {
+        "ShaderCache_Create": 2
+      }
+    },
+    "C:\\Windows\\System32\\rpcrt4.dll": {
+      "calls": 1,
+      "requestedBytes": 4096,
+      "releaseCalls": 0,
+      "functions": {
+        "RpcBindingFromStringBindingW": 1
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvppex.dll": {
+      "calls": 3,
+      "requestedBytes": 12288,
+      "releaseCalls": 0,
+      "functions": {
+        "ppeGetVersion": 3
+      }
+    },
+    "C:\\Windows\\System32\\dcomp.dll": {
+      "calls": 1,
+      "requestedBytes": 69632,
+      "releaseCalls": 0,
+      "functions": {
+        "": 1
+      }
+    },
+    "C:\\Windows\\System32\\dxgi.dll": {
+      "calls": 1,
+      "requestedBytes": 16384,
+      "releaseCalls": 0,
+      "functions": {
+        "": 1
+      }
+    },
+    "C:\\Windows\\System32\\directxdatabasehelper.dll": {
+      "calls": 1,
+      "requestedBytes": 20480,
+      "releaseCalls": 0,
+      "functions": {
+        "": 1
+      }
+    },
+    "C:\\Windows\\System32\\apphelp.dll": {
+      "calls": 1,
+      "requestedBytes": 4096,
+      "releaseCalls": 0,
+      "functions": {
+        "SE_COM_Lookup": 1
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10iumd64.dll": {
+      "calls": 8,
+      "requestedBytes": 253952,
+      "releaseCalls": 0,
+      "functions": {
+        "OpenAdapter_D3D11On12": 8
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": {
+      "calls": 311,
+      "requestedBytes": 139091968,
+      "releaseCalls": 16,
+      "functions": {
+        "OpenAdapter10_2": 302,
+        "": 6,
+        "OpenAdapter_D3D11On12": 3
+      }
+    },
+    "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\IntelControlLib.dll": {
+      "calls": 6,
+      "requestedBytes": 53248,
+      "releaseCalls": 0,
+      "functions": {
+        "ctlpvtTestFunction": 6
+      }
+    },
+    "C:\\Windows\\System32\\d3d11.dll": {
+      "calls": 1,
+      "requestedBytes": 73728,
+      "releaseCalls": 0,
+      "functions": {
+        "": 1
+      }
+    },
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\freetype.dll": {
+      "calls": 12,
+      "requestedBytes": 49152,
+      "releaseCalls": 0,
+      "functions": {
+        "ft_mem_qrealloc": 9,
+        "ft_mem_qalloc": 1,
+        "ft_open_face_internal": 1,
+        "FT_GlyphLoader_CheckPoints": 1
+      }
+    }
+  },
+  "snapshotCount": 83,
+  "firstSeconds": 43.6869999999999,
+  "peakSeconds": 84.07799999999952,
+  "firstCounters": {
+    "peak": 257671168,
+    "working": 254926848,
+    "privateBytes": 577200128,
+    "seconds": 43.6869999999999
+  },
+  "peakCounters": {
+    "peak": 282214400,
+    "working": 282214400,
+    "privateBytes": 600166400,
+    "seconds": 84.07799999999952
+  },
+  "peakRegions": [
+    {
+      "allocation": 2636986843136,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 33554432,
+      "queriedRegionBytes": 33554432,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636953288704,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 30740480,
+      "queriedRegionBytes": 31064064,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636936708096,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16576512,
+      "queriedRegionBytes": 16576512,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvrtum64.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2638284193792,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16576512,
+      "queriedRegionBytes": 16576512,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2636901711872,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16363520,
+      "queriedRegionBytes": 32112640,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704489603072,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll",
+      "residentBytes": 13926400,
+      "queriedRegionBytes": 81055744,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638654144512,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12619776,
+      "queriedRegionBytes": 14725120,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 140704386842624,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvwgf2umx.dll",
+      "residentBytes": 9879552,
+      "queriedRegionBytes": 78483456,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638164197376,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 9441280,
+      "queriedRegionBytes": 9441280,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 140733994106880,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+      "residentBytes": 9043968,
+      "queriedRegionBytes": 46129152,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636893323264,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 8384512,
+      "queriedRegionBytes": 8384512,
+      "modules": {
+        "C:\\Windows\\System32\\crypt32.dll": 1,
+        "C:\\Windows\\System32\\msasn1.dll": 2
+      },
+      "calls": 3
+    },
+    {
+      "allocation": 2638300774400,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 8294400,
+      "queriedRegionBytes": 8294400,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638317944832,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 8294400,
+      "queriedRegionBytes": 8294400,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638335115264,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 8294400,
+      "queriedRegionBytes": 8294400,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638587166720,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 5373952,
+      "queriedRegionBytes": 5373952,
+      "modules": {
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\AzurePlayer.exe": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 140705749729280,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igc64.dll",
+      "residentBytes": 4898816,
+      "queriedRegionBytes": 67325952,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140734040965120,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igvk64.dll",
+      "residentBytes": 4628480,
+      "queriedRegionBytes": 16859136,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636844957696,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4190208,
+      "queriedRegionBytes": 4190208,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2638414479360,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 3588096,
+      "queriedRegionBytes": 3588096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140733931585536,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvrtum64.dll",
+      "residentBytes": 3366912,
+      "queriedRegionBytes": 49483776,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140702412046336,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\AzurePlayer.exe",
+      "residentBytes": 3166208,
+      "queriedRegionBytes": 4706304,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705836498944,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll",
+      "residentBytes": 2936832,
+      "queriedRegionBytes": 25550848,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638620590080,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 2097152,
+      "queriedRegionBytes": 2097152,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636842860544,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 2093056,
+      "queriedRegionBytes": 2093056,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 140706096742400,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+      "residentBytes": 1957888,
+      "queriedRegionBytes": 2531328,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638474641408,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 1654784,
+      "queriedRegionBytes": 3006464,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140733928964096,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\D3D12Core.dll",
+      "residentBytes": 1400832,
+      "queriedRegionBytes": 2531328,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2634962436096,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 1290240,
+      "queriedRegionBytes": 8192000,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 140706080030720,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\combase.dll",
+      "residentBytes": 1277952,
+      "queriedRegionBytes": 3473408,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705824047104,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igdgmm64.dll",
+      "residentBytes": 1261568,
+      "queriedRegionBytes": 4268032,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706054602752,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+      "residentBytes": 1241088,
+      "queriedRegionBytes": 4108288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140734058266624,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\rmlui.dll",
+      "residentBytes": 1134592,
+      "queriedRegionBytes": 1699840,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636814155776,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 1044480,
+      "queriedRegionBytes": 1044480,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841811968,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 1044480,
+      "queriedRegionBytes": 1044480,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 140706004598784,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\d3d11.dll",
+      "residentBytes": 880640,
+      "queriedRegionBytes": 2404352,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706010431488,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\windows.storage.dll",
+      "residentBytes": 876544,
+      "queriedRegionBytes": 8388608,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140734060101632,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\vulkan-1.dll",
+      "residentBytes": 843776,
+      "queriedRegionBytes": 1765376,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705515765760,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\TextInputFramework.dll",
+      "residentBytes": 806912,
+      "queriedRegionBytes": 1290240,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705904197632,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\nvspcap64.dll",
+      "residentBytes": 786432,
+      "queriedRegionBytes": 1384448,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706007285760,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dxgi.dll",
+      "residentBytes": 770048,
+      "queriedRegionBytes": 1277952,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705864155136,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10iumd64.dll",
+      "residentBytes": 753664,
+      "queriedRegionBytes": 4685824,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812582912,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\locale.nls",
+      "residentBytes": 749568,
+      "queriedRegionBytes": 864256,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706053226496,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+      "residentBytes": 745472,
+      "queriedRegionBytes": 1302528,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706070724608,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msctf.dll",
+      "residentBytes": 745472,
+      "queriedRegionBytes": 1347584,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705978646528,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\CoreMessaging.dll",
+      "residentBytes": 720896,
+      "queriedRegionBytes": 1142784,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705598341120,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\AudioSes.dll",
+      "residentBytes": 667648,
+      "queriedRegionBytes": 1736704,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705600176128,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\nvapi64.dll",
+      "residentBytes": 667648,
+      "queriedRegionBytes": 5324800,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705881391104,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\CoreUIComponents.dll",
+      "residentBytes": 655360,
+      "queriedRegionBytes": 2867200,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706086387712,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\rpcrt4.dll",
+      "residentBytes": 630784,
+      "queriedRegionBytes": 1105920,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706048770048,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\crypt32.dll",
+      "residentBytes": 618496,
+      "queriedRegionBytes": 1482752,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705379713024,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\InputHost.dll",
+      "residentBytes": 577536,
+      "queriedRegionBytes": 1830912,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706062860288,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\shell32.dll",
+      "residentBytes": 552960,
+      "queriedRegionBytes": 7299072,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704609927168,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\NvMemMapStoragex.dll",
+      "residentBytes": 503808,
+      "queriedRegionBytes": 1191936,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706087567360,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\user32.dll",
+      "residentBytes": 503808,
+      "queriedRegionBytes": 1794048,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705890959360,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\MMDevAPI.dll",
+      "residentBytes": 442368,
+      "queriedRegionBytes": 630784,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705971896320,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dcomp.dll",
+      "residentBytes": 421888,
+      "queriedRegionBytes": 2121728,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706083700736,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+      "residentBytes": 421888,
+      "queriedRegionBytes": 811008,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2637089865728,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 393216,
+      "queriedRegionBytes": 393216,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvwgf2umx.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 140704608419840,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvldumdx.dll",
+      "residentBytes": 380928,
+      "queriedRegionBytes": 770048,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705682096128,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DispBroker.dll",
+      "residentBytes": 352256,
+      "queriedRegionBytes": 552960,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705984872448,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\uxtheme.dll",
+      "residentBytes": 352256,
+      "queriedRegionBytes": 663552,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072116531200,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 348160,
+      "queriedRegionBytes": 348160,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706050998272,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\gdi32full.dll",
+      "residentBytes": 348160,
+      "queriedRegionBytes": 1175552,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704634765312,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvppex.dll",
+      "residentBytes": 339968,
+      "queriedRegionBytes": 6594560,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705944829952,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\directxdatabasehelper.dll",
+      "residentBytes": 339968,
+      "queriedRegionBytes": 385024,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706059386880,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\WinTypes.dll",
+      "residentBytes": 327680,
+      "queriedRegionBytes": 1449984,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705318240256,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msvcp140.dll",
+      "residentBytes": 323584,
+      "queriedRegionBytes": 618496,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706048049152,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msvcp_win.dll",
+      "residentBytes": 323584,
+      "queriedRegionBytes": 618496,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705828765696,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\IntelControlLib.dll",
+      "residentBytes": 319488,
+      "queriedRegionBytes": 487424,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706072166400,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\advapi32.dll",
+      "residentBytes": 311296,
+      "queriedRegionBytes": 638976,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140735304630272,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\opengl32.dll",
+      "residentBytes": 311296,
+      "queriedRegionBytes": 1056768,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737021739008,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\freetype.dll",
+      "residentBytes": 303104,
+      "queriedRegionBytes": 684032,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706075246592,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\setupapi.dll",
+      "residentBytes": 270336,
+      "queriedRegionBytes": 4706304,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706093989888,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\SHCore.dll",
+      "residentBytes": 249856,
+      "queriedRegionBytes": 921600,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705829289984,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\twinapi.appcore.dll",
+      "residentBytes": 245760,
+      "queriedRegionBytes": 2191360,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737103462400,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\glfw3.dll",
+      "residentBytes": 245760,
+      "queriedRegionBytes": 258048,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705991098368,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DXCore.dll",
+      "residentBytes": 237568,
+      "queriedRegionBytes": 270336,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706091892736,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\clbcatq.dll",
+      "residentBytes": 237568,
+      "queriedRegionBytes": 704512,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706095235072,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msvcrt.dll",
+      "residentBytes": 237568,
+      "queriedRegionBytes": 675840,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706058797056,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\wintrust.dll",
+      "residentBytes": 233472,
+      "queriedRegionBytes": 499712,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706093268992,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\sechost.dll",
+      "residentBytes": 208896,
+      "queriedRegionBytes": 663552,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140703128813568,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\lua.dll",
+      "residentBytes": 204800,
+      "queriedRegionBytes": 245760,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737013743616,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\ProgramData\\obs-studio-hook\\graphics-hook64.dll",
+      "residentBytes": 204800,
+      "queriedRegionBytes": 290816,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072115351552,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 192512,
+      "queriedRegionBytes": 192512,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706044379136,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\cfgmgr32.dll",
+      "residentBytes": 188416,
+      "queriedRegionBytes": 348160,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705498464256,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\oleacc.dll",
+      "residentBytes": 172032,
+      "queriedRegionBytes": 475136,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706072952832,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ole32.dll",
+      "residentBytes": 172032,
+      "queriedRegionBytes": 1605632,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705877524480,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\drvstore.dll",
+      "residentBytes": 167936,
+      "queriedRegionBytes": 1470464,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706084552704,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\oleaut32.dll",
+      "residentBytes": 167936,
+      "queriedRegionBytes": 802816,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706070528000,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\gdi32.dll",
+      "residentBytes": 163840,
+      "queriedRegionBytes": 176128,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140736205881344,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\OpenEXR-3_4.dll",
+      "residentBytes": 163840,
+      "queriedRegionBytes": 831488,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706050342912,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\bcryptprimitives.dll",
+      "residentBytes": 155648,
+      "queriedRegionBytes": 573440,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705512620032,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\rometadata.dll",
+      "residentBytes": 147456,
+      "queriedRegionBytes": 225280,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706091433984,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\shlwapi.dll",
+      "residentBytes": 147456,
+      "queriedRegionBytes": 393216,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737017413632,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\D3DSCache.dll",
+      "residentBytes": 135168,
+      "queriedRegionBytes": 184320,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636811599872,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 131072,
+      "queriedRegionBytes": 131072,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705982513152,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\apphelp.dll",
+      "residentBytes": 131072,
+      "queriedRegionBytes": 569344,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706053029888,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\win32u.dll",
+      "residentBytes": 126976,
+      "queriedRegionBytes": 139264,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706028191744,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\rsaenh.dll",
+      "residentBytes": 118784,
+      "queriedRegionBytes": 241664,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737017675776,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\openjph.0.31.dll",
+      "residentBytes": 118784,
+      "queriedRegionBytes": 397312,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705962131456,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\D3D12.dll",
+      "residentBytes": 114688,
+      "queriedRegionBytes": 143360,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072127016960,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 110592,
+      "queriedRegionBytes": 110592,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072130162688,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 110592,
+      "queriedRegionBytes": 110592,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072132259840,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 110592,
+      "queriedRegionBytes": 110592,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072133308416,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 110592,
+      "queriedRegionBytes": 110592,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072134356992,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 110592,
+      "queriedRegionBytes": 110592,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636880478208,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 106496,
+      "queriedRegionBytes": 1175552,
+      "modules": {
+        "C:\\Windows\\System32\\uxtheme.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 140706038480896,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\wldp.dll",
+      "residentBytes": 106496,
+      "queriedRegionBytes": 393216,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706030026752,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntmarta.dll",
+      "residentBytes": 102400,
+      "queriedRegionBytes": 212992,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706044772352,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\devobj.dll",
+      "residentBytes": 102400,
+      "queriedRegionBytes": 172032,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706046935040,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\bcrypt.dll",
+      "residentBytes": 98304,
+      "queriedRegionBytes": 155648,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704302497792,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dinput8.dll",
+      "residentBytes": 94208,
+      "queriedRegionBytes": 262144,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705892204544,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\winmm.dll",
+      "residentBytes": 94208,
+      "queriedRegionBytes": 212992,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706074984448,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\imm32.dll",
+      "residentBytes": 94208,
+      "queriedRegionBytes": 184320,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705881128960,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\cryptnet.dll",
+      "residentBytes": 90112,
+      "queriedRegionBytes": 237568,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705986052096,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dwmapi.dll",
+      "residentBytes": 90112,
+      "queriedRegionBytes": 147456,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706060894208,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ws2_32.dll",
+      "residentBytes": 90112,
+      "queriedRegionBytes": 331776,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737023246336,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\Iex-3_4.dll",
+      "residentBytes": 86016,
+      "queriedRegionBytes": 204800,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705869070336,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\Windows.StateRepositoryCore.dll",
+      "residentBytes": 77824,
+      "queriedRegionBytes": 102400,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706035138560,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\userenv.dll",
+      "residentBytes": 77824,
+      "queriedRegionBytes": 167936,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072155328512,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 73728,
+      "queriedRegionBytes": 73728,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706031599616,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\sspicli.dll",
+      "residentBytes": 73728,
+      "queriedRegionBytes": 245760,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706037432320,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\cryptsp.dll",
+      "residentBytes": 73728,
+      "queriedRegionBytes": 102400,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706037891072,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msasn1.dll",
+      "residentBytes": 73728,
+      "queriedRegionBytes": 77824,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706047131648,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\profapi.dll",
+      "residentBytes": 73728,
+      "queriedRegionBytes": 163840,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705321910272,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\vcruntime140.dll",
+      "residentBytes": 69632,
+      "queriedRegionBytes": 155648,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705989656576,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ResourcePolicyClient.dll",
+      "residentBytes": 69632,
+      "queriedRegionBytes": 81920,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706039857152,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\powrprof.dll",
+      "residentBytes": 69632,
+      "queriedRegionBytes": 356352,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706095038464,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\imagehlp.dll",
+      "residentBytes": 69632,
+      "queriedRegionBytes": 131072,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706028847104,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel.appcore.dll",
+      "residentBytes": 65536,
+      "queriedRegionBytes": 94208,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841746432,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 61440,
+      "queriedRegionBytes": 61440,
+      "modules": {
+        "C:\\Windows\\System32\\msvcrt.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 140686516551680,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\apppatch\\DirectXApps.sdb",
+      "residentBytes": 61440,
+      "queriedRegionBytes": 1576960,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705983299584,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\wtsapi32.dll",
+      "residentBytes": 61440,
+      "queriedRegionBytes": 167936,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140735123161088,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\OpenEXRCore-3_4.dll",
+      "residentBytes": 61440,
+      "queriedRegionBytes": 323584,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636819857408,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 57344,
+      "queriedRegionBytes": 1253376,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140735369510912,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\XInput1_4.dll",
+      "residentBytes": 57344,
+      "queriedRegionBytes": 73728,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636813500416,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\C_936.NLS",
+      "residentBytes": 49152,
+      "queriedRegionBytes": 200704,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636890701824,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\WinMetadata\\Windows.Devices.winmd",
+      "residentBytes": 49152,
+      "queriedRegionBytes": 892928,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll": 2,
+        "C:\\Windows\\System32\\crypt32.dll": 1
+      },
+      "calls": 3
+    },
+    {
+      "allocation": 140705964621824,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\Microsoft.Internal.WarpPal.dll",
+      "residentBytes": 49152,
+      "queriedRegionBytes": 94208,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706039529472,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\umpdc.dll",
+      "residentBytes": 49152,
+      "queriedRegionBytes": 69632,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815925248,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 45056,
+      "queriedRegionBytes": 114688,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705201061888,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\IlmThread-3_4.dll",
+      "residentBytes": 45056,
+      "queriedRegionBytes": 57344,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737101627392,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\libpng16.dll",
+      "residentBytes": 45056,
+      "queriedRegionBytes": 192512,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636867239936,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\Globalization\\Sorting\\SortDefault.nls",
+      "residentBytes": 40960,
+      "queriedRegionBytes": 3387392,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704596885504,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\bz2.dll",
+      "residentBytes": 40960,
+      "queriedRegionBytes": 94208,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706037563392,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\cryptbase.dll",
+      "residentBytes": 40960,
+      "queriedRegionBytes": 45056,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140735304433664,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\glu32.dll",
+      "residentBytes": 40960,
+      "queriedRegionBytes": 167936,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704613269504,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\z.dll",
+      "residentBytes": 36864,
+      "queriedRegionBytes": 90112,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704626507776,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\deflate.dll",
+      "residentBytes": 36864,
+      "queriedRegionBytes": 49152,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737034715136,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\Imath-3_2.dll",
+      "residentBytes": 36864,
+      "queriedRegionBytes": 299008,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072128065536,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 32768,
+      "queriedRegionBytes": 32768,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072139599872,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 32768,
+      "queriedRegionBytes": 32768,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704382648320,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\brotlicommon.dll",
+      "residentBytes": 32768,
+      "queriedRegionBytes": 155648,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704596492288,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\brotlidec.dll",
+      "residentBytes": 32768,
+      "queriedRegionBytes": 36864,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705359265792,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\vcruntime140_1.dll",
+      "residentBytes": 32768,
+      "queriedRegionBytes": 36864,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705915863040,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\version.dll",
+      "residentBytes": 32768,
+      "queriedRegionBytes": 45056,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812255232,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 28672,
+      "queriedRegionBytes": 32768,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812320768,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 28672,
+      "queriedRegionBytes": 32768,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636818087936,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 28672,
+      "queriedRegionBytes": 1576960,
+      "modules": {
+        "C:\\Windows\\System32\\gdi32full.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 140706008596480,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\avrt.dll",
+      "residentBytes": 28672,
+      "queriedRegionBytes": 40960,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072118628352,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 20480,
+      "queriedRegionBytes": 20480,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636881920000,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 20480,
+      "queriedRegionBytes": 20480,
+      "modules": {
+        "C:\\Windows\\System32\\uxtheme.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 1072119676928,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16384,
+      "queriedRegionBytes": 16384,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072120725504,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16384,
+      "queriedRegionBytes": 16384,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072131211264,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16384,
+      "queriedRegionBytes": 16384,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636883034112,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16384,
+      "queriedRegionBytes": 16384,
+      "modules": {
+        "C:\\Windows\\System32\\msvcrt.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2636893061120,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16384,
+      "queriedRegionBytes": 16384,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638603747328,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16384,
+      "queriedRegionBytes": 16781312,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 1072116400128,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072121774080,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072122822656,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072123871232,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072124919808,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072125968384,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072129114112,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072135405568,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072136454144,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072137502720,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072138551296,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072140648448,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072141697024,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072142745600,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072143794176,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072144842752,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072145891328,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072146939904,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072147988480,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072149037056,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072150085632,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072151134208,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072152182784,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072153231360,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072154279936,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072156377088,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072157425664,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072158474240,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072159522816,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636811730944,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 16384,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636818022400,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841091072,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841156608,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {
+        "C:\\Windows\\System32\\AudioSes.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636871761920,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 294912,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636872089600,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 16384,
+      "modules": {
+        "C:\\Windows\\System32\\CoreMessaging.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2636888342528,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 131072,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2636892602368,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\zh-CN\\kernel32.dll.mui",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 409600,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636893257728,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Program Files\\WindowsApps\\Microsoft.LanguageExperiencePackzh-CN_26100.163.263.0_neutral__8wekyb3d8bbwe\\Windows\\System32\\zh-CN\\7c9b310eb9c44bacc0217dcb0fc18542\\crypt32.dll.mui",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 40960,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636935593984,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Users\\23587\\AppData\\Local\\NVIDIA\\DXCache\\96eda938521e9cfb.nvph",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 65536,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvrtum64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636811534336,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 65536,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636811862016,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 8192,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636811927552,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\C_936.NLS",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 200704,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812386304,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 8192,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812517376,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\l_intl.nls",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636819791872,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 8192,
+      "modules": {
+        "C:\\Windows\\System32\\gdi32full.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636881657856,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Program Files\\WindowsApps\\Microsoft.LanguageExperiencePackzh-CN_26100.163.263.0_neutral__8wekyb3d8bbwe\\Windows\\System32\\zh-CN\\a284960c04c9bcd1d23289321f222b5f\\user32.dll.mui",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 24576,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140686518190080,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 20480,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2147352576,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2147405824,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636811468800,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636811796480,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812189696,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\l_intl.nls",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812451840,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 8192,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636813762560,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636813828096,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636813893632,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636813959168,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636814024704,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636814090240,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815204352,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815269888,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815335424,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815400960,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815466496,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815532032,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815597568,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815663104,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815728640,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815794176,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815859712,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636819726336,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636840894464,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\msvcrt.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636840960000,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 8192,
+      "modules": {
+        "C:\\Windows\\System32\\AudioSes.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636841025536,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 40960,
+      "modules": {
+        "C:\\Windows\\System32\\AudioSes.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636841222144,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Program Files\\WindowsApps\\Microsoft.LanguageExperiencePackzh-CN_26100.163.263.0_neutral__8wekyb3d8bbwe\\Windows\\System32\\zh-CN\\f99c3d98393226c5f5bdab070d889cc2\\MMDevAPI.dll.mui",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 16384,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841287680,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\MMDevAPI.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636841353216,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\MMDevAPI.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636841418752,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\MMDevAPI.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636841484288,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841549824,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 20480,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841615360,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841680896,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\oleaccrc.dll",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636849152000,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 1183744,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636850397184,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 45056,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636850462720,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636850528256,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 524288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636870647808,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 1052672,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636881723392,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 65536,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636881788928,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\C_1252.NLS",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 69632,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636881985536,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\imm32.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2636884082688,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4198400,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igdgmm64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636891619328,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636891750400,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636891881472,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636892471296,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 45056,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636892536832,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636893126656,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636893192192,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636935659520,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\D3D12Core.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636935790592,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 524288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636936314880,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636936380416,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 45056,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636936445952,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2637087506432,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 32768,
+      "modules": {
+        "C:\\Windows\\System32\\crypt32.dll": 2,
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvldumdx.dll": 2,
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvwgf2umx.dll": 2
+      },
+      "calls": 6
+    },
+    {
+      "allocation": 2638163607552,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 524288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638173700096,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 65536,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2638207320064,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 65536,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2638274560000,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 3149824,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638277771264,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 3149824,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638280982528,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 3149824,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638352482304,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638474575872,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638541750272,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 1,
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": 1
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2638541815808,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638541881344,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638541946880,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638542864384,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 140690847956992,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    }
+  ],
+  "firstRegions": [
+    {
+      "allocation": 2636986843136,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 33554432,
+      "queriedRegionBytes": 33554432,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636953288704,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 30216192,
+      "queriedRegionBytes": 30539776,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636936708096,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16576512,
+      "queriedRegionBytes": 16576512,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvrtum64.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2638284193792,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16576512,
+      "queriedRegionBytes": 16576512,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2636901711872,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 15970304,
+      "queriedRegionBytes": 31719424,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704386842624,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvwgf2umx.dll",
+      "residentBytes": 9875456,
+      "queriedRegionBytes": 78483456,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638164197376,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 9441280,
+      "queriedRegionBytes": 9441280,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636893323264,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 8384512,
+      "queriedRegionBytes": 8384512,
+      "modules": {
+        "C:\\Windows\\System32\\crypt32.dll": 1,
+        "C:\\Windows\\System32\\msasn1.dll": 2
+      },
+      "calls": 3
+    },
+    {
+      "allocation": 2638300774400,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 8294400,
+      "queriedRegionBytes": 8294400,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638317944832,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 8294400,
+      "queriedRegionBytes": 8294400,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638335115264,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 8294400,
+      "queriedRegionBytes": 8294400,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140733994106880,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+      "residentBytes": 6057984,
+      "queriedRegionBytes": 45531136,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704489603072,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll",
+      "residentBytes": 5644288,
+      "queriedRegionBytes": 80257024,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705749729280,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igc64.dll",
+      "residentBytes": 4898816,
+      "queriedRegionBytes": 67325952,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140734040965120,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igvk64.dll",
+      "residentBytes": 4628480,
+      "queriedRegionBytes": 16859136,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636844957696,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4190208,
+      "queriedRegionBytes": 4190208,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2638587166720,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4182016,
+      "queriedRegionBytes": 4182016,
+      "modules": {
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\AzurePlayer.exe": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2638414479360,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 3588096,
+      "queriedRegionBytes": 3588096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140733931585536,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvrtum64.dll",
+      "residentBytes": 3366912,
+      "queriedRegionBytes": 49483776,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140702412046336,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\AzurePlayer.exe",
+      "residentBytes": 3166208,
+      "queriedRegionBytes": 4706304,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705836498944,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll",
+      "residentBytes": 2916352,
+      "queriedRegionBytes": 25550848,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638620590080,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 2097152,
+      "queriedRegionBytes": 2097152,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636842860544,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 2093056,
+      "queriedRegionBytes": 2093056,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 140706096742400,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+      "residentBytes": 1957888,
+      "queriedRegionBytes": 2531328,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638474641408,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 1654784,
+      "queriedRegionBytes": 3006464,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140733928964096,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\D3D12Core.dll",
+      "residentBytes": 1400832,
+      "queriedRegionBytes": 2531328,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706080030720,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\combase.dll",
+      "residentBytes": 1277952,
+      "queriedRegionBytes": 3473408,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705824047104,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igdgmm64.dll",
+      "residentBytes": 1261568,
+      "queriedRegionBytes": 4268032,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706054602752,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+      "residentBytes": 1241088,
+      "queriedRegionBytes": 4108288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140734058266624,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\rmlui.dll",
+      "residentBytes": 1134592,
+      "queriedRegionBytes": 1699840,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636814155776,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 1044480,
+      "queriedRegionBytes": 1044480,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841811968,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 1044480,
+      "queriedRegionBytes": 1044480,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 140706004598784,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\d3d11.dll",
+      "residentBytes": 880640,
+      "queriedRegionBytes": 2404352,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706010431488,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\windows.storage.dll",
+      "residentBytes": 876544,
+      "queriedRegionBytes": 8388608,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140734060101632,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\vulkan-1.dll",
+      "residentBytes": 843776,
+      "queriedRegionBytes": 1765376,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705515765760,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\TextInputFramework.dll",
+      "residentBytes": 806912,
+      "queriedRegionBytes": 1290240,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705904197632,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\nvspcap64.dll",
+      "residentBytes": 786432,
+      "queriedRegionBytes": 1384448,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706007285760,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dxgi.dll",
+      "residentBytes": 765952,
+      "queriedRegionBytes": 1277952,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705864155136,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10iumd64.dll",
+      "residentBytes": 753664,
+      "queriedRegionBytes": 4685824,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812582912,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\locale.nls",
+      "residentBytes": 749568,
+      "queriedRegionBytes": 864256,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706070724608,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msctf.dll",
+      "residentBytes": 745472,
+      "queriedRegionBytes": 1347584,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706053226496,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+      "residentBytes": 741376,
+      "queriedRegionBytes": 1302528,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705978646528,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\CoreMessaging.dll",
+      "residentBytes": 720896,
+      "queriedRegionBytes": 1142784,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705598341120,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\AudioSes.dll",
+      "residentBytes": 667648,
+      "queriedRegionBytes": 1736704,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705600176128,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\nvapi64.dll",
+      "residentBytes": 667648,
+      "queriedRegionBytes": 5324800,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705881391104,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\CoreUIComponents.dll",
+      "residentBytes": 655360,
+      "queriedRegionBytes": 2867200,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706086387712,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\rpcrt4.dll",
+      "residentBytes": 630784,
+      "queriedRegionBytes": 1105920,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706048770048,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\crypt32.dll",
+      "residentBytes": 618496,
+      "queriedRegionBytes": 1482752,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705379713024,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\InputHost.dll",
+      "residentBytes": 577536,
+      "queriedRegionBytes": 1830912,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706062860288,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\shell32.dll",
+      "residentBytes": 552960,
+      "queriedRegionBytes": 7299072,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704609927168,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\NvMemMapStoragex.dll",
+      "residentBytes": 503808,
+      "queriedRegionBytes": 1191936,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706087567360,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\user32.dll",
+      "residentBytes": 503808,
+      "queriedRegionBytes": 1794048,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705890959360,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\MMDevAPI.dll",
+      "residentBytes": 442368,
+      "queriedRegionBytes": 630784,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705971896320,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dcomp.dll",
+      "residentBytes": 421888,
+      "queriedRegionBytes": 2121728,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706083700736,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+      "residentBytes": 421888,
+      "queriedRegionBytes": 811008,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2637089865728,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 393216,
+      "queriedRegionBytes": 393216,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvwgf2umx.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 140704608419840,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvldumdx.dll",
+      "residentBytes": 380928,
+      "queriedRegionBytes": 770048,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2634962436096,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 352256,
+      "queriedRegionBytes": 2424832,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 140705682096128,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DispBroker.dll",
+      "residentBytes": 352256,
+      "queriedRegionBytes": 552960,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705984872448,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\uxtheme.dll",
+      "residentBytes": 352256,
+      "queriedRegionBytes": 663552,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072116531200,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 348160,
+      "queriedRegionBytes": 348160,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706050998272,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\gdi32full.dll",
+      "residentBytes": 348160,
+      "queriedRegionBytes": 1175552,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704634765312,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvppex.dll",
+      "residentBytes": 339968,
+      "queriedRegionBytes": 6594560,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705944829952,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\directxdatabasehelper.dll",
+      "residentBytes": 339968,
+      "queriedRegionBytes": 385024,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706059386880,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\WinTypes.dll",
+      "residentBytes": 327680,
+      "queriedRegionBytes": 1449984,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705318240256,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msvcp140.dll",
+      "residentBytes": 323584,
+      "queriedRegionBytes": 618496,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706048049152,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msvcp_win.dll",
+      "residentBytes": 323584,
+      "queriedRegionBytes": 618496,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705828765696,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\IntelControlLib.dll",
+      "residentBytes": 319488,
+      "queriedRegionBytes": 487424,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706072166400,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\advapi32.dll",
+      "residentBytes": 311296,
+      "queriedRegionBytes": 638976,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140735304630272,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\opengl32.dll",
+      "residentBytes": 311296,
+      "queriedRegionBytes": 1056768,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737021739008,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\freetype.dll",
+      "residentBytes": 303104,
+      "queriedRegionBytes": 684032,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706075246592,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\setupapi.dll",
+      "residentBytes": 270336,
+      "queriedRegionBytes": 4706304,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706093989888,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\SHCore.dll",
+      "residentBytes": 249856,
+      "queriedRegionBytes": 921600,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705829289984,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\twinapi.appcore.dll",
+      "residentBytes": 245760,
+      "queriedRegionBytes": 2191360,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737103462400,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\glfw3.dll",
+      "residentBytes": 245760,
+      "queriedRegionBytes": 258048,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705991098368,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DXCore.dll",
+      "residentBytes": 237568,
+      "queriedRegionBytes": 270336,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706091892736,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\clbcatq.dll",
+      "residentBytes": 237568,
+      "queriedRegionBytes": 704512,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706095235072,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msvcrt.dll",
+      "residentBytes": 237568,
+      "queriedRegionBytes": 675840,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706058797056,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\wintrust.dll",
+      "residentBytes": 233472,
+      "queriedRegionBytes": 499712,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706093268992,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\sechost.dll",
+      "residentBytes": 208896,
+      "queriedRegionBytes": 663552,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140703128813568,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\lua.dll",
+      "residentBytes": 204800,
+      "queriedRegionBytes": 245760,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737013743616,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\ProgramData\\obs-studio-hook\\graphics-hook64.dll",
+      "residentBytes": 204800,
+      "queriedRegionBytes": 290816,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072115351552,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 192512,
+      "queriedRegionBytes": 192512,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706044379136,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\cfgmgr32.dll",
+      "residentBytes": 188416,
+      "queriedRegionBytes": 348160,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705498464256,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\oleacc.dll",
+      "residentBytes": 172032,
+      "queriedRegionBytes": 475136,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706072952832,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ole32.dll",
+      "residentBytes": 172032,
+      "queriedRegionBytes": 1605632,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705877524480,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\drvstore.dll",
+      "residentBytes": 167936,
+      "queriedRegionBytes": 1470464,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706084552704,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\oleaut32.dll",
+      "residentBytes": 167936,
+      "queriedRegionBytes": 802816,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706070528000,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\gdi32.dll",
+      "residentBytes": 163840,
+      "queriedRegionBytes": 176128,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140736205881344,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\OpenEXR-3_4.dll",
+      "residentBytes": 163840,
+      "queriedRegionBytes": 831488,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706050342912,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\bcryptprimitives.dll",
+      "residentBytes": 155648,
+      "queriedRegionBytes": 573440,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705512620032,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\rometadata.dll",
+      "residentBytes": 147456,
+      "queriedRegionBytes": 225280,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706091433984,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\shlwapi.dll",
+      "residentBytes": 147456,
+      "queriedRegionBytes": 393216,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737017413632,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\D3DSCache.dll",
+      "residentBytes": 135168,
+      "queriedRegionBytes": 184320,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636811599872,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 131072,
+      "queriedRegionBytes": 131072,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705982513152,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\apphelp.dll",
+      "residentBytes": 131072,
+      "queriedRegionBytes": 569344,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706053029888,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\win32u.dll",
+      "residentBytes": 126976,
+      "queriedRegionBytes": 139264,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706028191744,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\rsaenh.dll",
+      "residentBytes": 118784,
+      "queriedRegionBytes": 241664,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737017675776,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\openjph.0.31.dll",
+      "residentBytes": 118784,
+      "queriedRegionBytes": 397312,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705962131456,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\D3D12.dll",
+      "residentBytes": 114688,
+      "queriedRegionBytes": 143360,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072130162688,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 110592,
+      "queriedRegionBytes": 110592,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072134356992,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 110592,
+      "queriedRegionBytes": 110592,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636880478208,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 106496,
+      "queriedRegionBytes": 1175552,
+      "modules": {
+        "C:\\Windows\\System32\\uxtheme.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 140706038480896,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\wldp.dll",
+      "residentBytes": 106496,
+      "queriedRegionBytes": 393216,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706030026752,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntmarta.dll",
+      "residentBytes": 102400,
+      "queriedRegionBytes": 212992,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706044772352,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\devobj.dll",
+      "residentBytes": 102400,
+      "queriedRegionBytes": 172032,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706046935040,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\bcrypt.dll",
+      "residentBytes": 98304,
+      "queriedRegionBytes": 155648,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704302497792,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dinput8.dll",
+      "residentBytes": 94208,
+      "queriedRegionBytes": 262144,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705892204544,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\winmm.dll",
+      "residentBytes": 94208,
+      "queriedRegionBytes": 212992,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706074984448,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\imm32.dll",
+      "residentBytes": 94208,
+      "queriedRegionBytes": 184320,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705881128960,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\cryptnet.dll",
+      "residentBytes": 90112,
+      "queriedRegionBytes": 237568,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705986052096,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dwmapi.dll",
+      "residentBytes": 90112,
+      "queriedRegionBytes": 147456,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706060894208,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ws2_32.dll",
+      "residentBytes": 90112,
+      "queriedRegionBytes": 331776,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737023246336,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\Iex-3_4.dll",
+      "residentBytes": 86016,
+      "queriedRegionBytes": 204800,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705869070336,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\Windows.StateRepositoryCore.dll",
+      "residentBytes": 77824,
+      "queriedRegionBytes": 102400,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706035138560,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\userenv.dll",
+      "residentBytes": 77824,
+      "queriedRegionBytes": 167936,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072155328512,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 73728,
+      "queriedRegionBytes": 73728,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706031599616,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\sspicli.dll",
+      "residentBytes": 73728,
+      "queriedRegionBytes": 245760,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706037432320,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\cryptsp.dll",
+      "residentBytes": 73728,
+      "queriedRegionBytes": 102400,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706037891072,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msasn1.dll",
+      "residentBytes": 73728,
+      "queriedRegionBytes": 77824,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706047131648,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\profapi.dll",
+      "residentBytes": 73728,
+      "queriedRegionBytes": 163840,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705321910272,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\vcruntime140.dll",
+      "residentBytes": 69632,
+      "queriedRegionBytes": 155648,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705989656576,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ResourcePolicyClient.dll",
+      "residentBytes": 69632,
+      "queriedRegionBytes": 81920,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706039857152,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\powrprof.dll",
+      "residentBytes": 69632,
+      "queriedRegionBytes": 356352,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706095038464,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\imagehlp.dll",
+      "residentBytes": 69632,
+      "queriedRegionBytes": 131072,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706028847104,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel.appcore.dll",
+      "residentBytes": 65536,
+      "queriedRegionBytes": 94208,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841746432,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 61440,
+      "queriedRegionBytes": 61440,
+      "modules": {
+        "C:\\Windows\\System32\\msvcrt.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 140686516551680,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\apppatch\\DirectXApps.sdb",
+      "residentBytes": 61440,
+      "queriedRegionBytes": 1576960,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705983299584,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\wtsapi32.dll",
+      "residentBytes": 61440,
+      "queriedRegionBytes": 167936,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140735123161088,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\OpenEXRCore-3_4.dll",
+      "residentBytes": 61440,
+      "queriedRegionBytes": 323584,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636819857408,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 57344,
+      "queriedRegionBytes": 1253376,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140735369510912,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\XInput1_4.dll",
+      "residentBytes": 57344,
+      "queriedRegionBytes": 73728,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636813500416,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\C_936.NLS",
+      "residentBytes": 49152,
+      "queriedRegionBytes": 200704,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636890701824,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\WinMetadata\\Windows.Devices.winmd",
+      "residentBytes": 49152,
+      "queriedRegionBytes": 892928,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll": 2,
+        "C:\\Windows\\System32\\crypt32.dll": 1
+      },
+      "calls": 3
+    },
+    {
+      "allocation": 140705964621824,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\Microsoft.Internal.WarpPal.dll",
+      "residentBytes": 49152,
+      "queriedRegionBytes": 94208,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706039529472,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\umpdc.dll",
+      "residentBytes": 49152,
+      "queriedRegionBytes": 69632,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815925248,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 45056,
+      "queriedRegionBytes": 114688,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705201061888,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\IlmThread-3_4.dll",
+      "residentBytes": 45056,
+      "queriedRegionBytes": 57344,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737101627392,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\libpng16.dll",
+      "residentBytes": 45056,
+      "queriedRegionBytes": 192512,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636867239936,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\Globalization\\Sorting\\SortDefault.nls",
+      "residentBytes": 40960,
+      "queriedRegionBytes": 3387392,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704596885504,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\bz2.dll",
+      "residentBytes": 40960,
+      "queriedRegionBytes": 94208,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140706037563392,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\cryptbase.dll",
+      "residentBytes": 40960,
+      "queriedRegionBytes": 45056,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140735304433664,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\glu32.dll",
+      "residentBytes": 40960,
+      "queriedRegionBytes": 167936,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704613269504,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\z.dll",
+      "residentBytes": 36864,
+      "queriedRegionBytes": 90112,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704626507776,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\deflate.dll",
+      "residentBytes": 36864,
+      "queriedRegionBytes": 49152,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140737034715136,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\Imath-3_2.dll",
+      "residentBytes": 36864,
+      "queriedRegionBytes": 299008,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072128065536,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 32768,
+      "queriedRegionBytes": 32768,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704382648320,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\brotlicommon.dll",
+      "residentBytes": 32768,
+      "queriedRegionBytes": 155648,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140704596492288,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\brotlidec.dll",
+      "residentBytes": 32768,
+      "queriedRegionBytes": 36864,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705359265792,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\vcruntime140_1.dll",
+      "residentBytes": 32768,
+      "queriedRegionBytes": 36864,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 140705915863040,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\version.dll",
+      "residentBytes": 32768,
+      "queriedRegionBytes": 45056,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812255232,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 28672,
+      "queriedRegionBytes": 32768,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812320768,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 28672,
+      "queriedRegionBytes": 32768,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636818087936,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 28672,
+      "queriedRegionBytes": 1576960,
+      "modules": {
+        "C:\\Windows\\System32\\gdi32full.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 140706008596480,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\avrt.dll",
+      "residentBytes": 28672,
+      "queriedRegionBytes": 40960,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072118628352,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 20480,
+      "queriedRegionBytes": 20480,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636881920000,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 20480,
+      "queriedRegionBytes": 20480,
+      "modules": {
+        "C:\\Windows\\System32\\uxtheme.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 1072119676928,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16384,
+      "queriedRegionBytes": 16384,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072120725504,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16384,
+      "queriedRegionBytes": 16384,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072131211264,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16384,
+      "queriedRegionBytes": 16384,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636883034112,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16384,
+      "queriedRegionBytes": 16384,
+      "modules": {
+        "C:\\Windows\\System32\\msvcrt.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2636893061120,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16384,
+      "queriedRegionBytes": 16384,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638603747328,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 16384,
+      "queriedRegionBytes": 16781312,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 1072116400128,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072121774080,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072122822656,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072123871232,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072124919808,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072125968384,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072127016960,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072129114112,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072132259840,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072133308416,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072135405568,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072136454144,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072137502720,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072138551296,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072139599872,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072140648448,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072141697024,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072142745600,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072143794176,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072144842752,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072145891328,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072146939904,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072147988480,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072149037056,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072150085632,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072151134208,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072152182784,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072153231360,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072154279936,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072156377088,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072157425664,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072158474240,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 1072159522816,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636811730944,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 16384,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636818022400,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841091072,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841156608,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 12288,
+      "modules": {
+        "C:\\Windows\\System32\\AudioSes.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636871761920,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 294912,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636872089600,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 16384,
+      "modules": {
+        "C:\\Windows\\System32\\CoreMessaging.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2636892602368,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\zh-CN\\kernel32.dll.mui",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 409600,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636893257728,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Program Files\\WindowsApps\\Microsoft.LanguageExperiencePackzh-CN_26100.163.263.0_neutral__8wekyb3d8bbwe\\Windows\\System32\\zh-CN\\7c9b310eb9c44bacc0217dcb0fc18542\\crypt32.dll.mui",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 40960,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636935593984,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Users\\23587\\AppData\\Local\\NVIDIA\\DXCache\\96eda938521e9cfb.nvph",
+      "residentBytes": 12288,
+      "queriedRegionBytes": 65536,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvrtum64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636811534336,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 65536,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636811862016,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 8192,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636811927552,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\C_936.NLS",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 200704,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812386304,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 8192,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812517376,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\l_intl.nls",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636819791872,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 8192,
+      "modules": {
+        "C:\\Windows\\System32\\gdi32full.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636881657856,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Program Files\\WindowsApps\\Microsoft.LanguageExperiencePackzh-CN_26100.163.263.0_neutral__8wekyb3d8bbwe\\Windows\\System32\\zh-CN\\a284960c04c9bcd1d23289321f222b5f\\user32.dll.mui",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 24576,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636888342528,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 65536,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 140686518190080,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 8192,
+      "queriedRegionBytes": 20480,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2147352576,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2147405824,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636811468800,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636811796480,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812189696,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\l_intl.nls",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636812451840,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 8192,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636813762560,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636813828096,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636813893632,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636813959168,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636814024704,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636814090240,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815204352,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815269888,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815335424,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815400960,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815466496,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815532032,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815597568,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815663104,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815728640,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815794176,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636815859712,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636819726336,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636840894464,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\msvcrt.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636840960000,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 8192,
+      "modules": {
+        "C:\\Windows\\System32\\AudioSes.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636841025536,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 40960,
+      "modules": {
+        "C:\\Windows\\System32\\AudioSes.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636841222144,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Program Files\\WindowsApps\\Microsoft.LanguageExperiencePackzh-CN_26100.163.263.0_neutral__8wekyb3d8bbwe\\Windows\\System32\\zh-CN\\f99c3d98393226c5f5bdab070d889cc2\\MMDevAPI.dll.mui",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 16384,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841287680,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\MMDevAPI.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636841353216,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\MMDevAPI.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636841418752,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\MMDevAPI.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636841484288,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841549824,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 20480,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841615360,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636841680896,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\oleaccrc.dll",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 12288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636849152000,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 1183744,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636850397184,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 45056,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636850462720,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636850528256,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 524288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636870647808,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 1052672,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636881723392,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 65536,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636881788928,
+      "kind": 262144,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\C_1252.NLS",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 69632,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636881985536,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\imm32.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2636884082688,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4198400,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igdgmm64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636891619328,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636891750400,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636891881472,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636892471296,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 45056,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636892536832,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636893126656,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636893192192,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636935659520,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\D3D12Core.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2636935790592,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 524288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636936314880,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636936380416,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 45056,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2636936445952,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2637087506432,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 32768,
+      "modules": {
+        "C:\\Windows\\System32\\crypt32.dll": 2,
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvldumdx.dll": 2,
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvwgf2umx.dll": 2
+      },
+      "calls": 6
+    },
+    {
+      "allocation": 2638163607552,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 524288,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638173700096,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 65536,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2638207320064,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 65536,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 2
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2638274560000,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 3149824,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638277771264,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 3149824,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638280982528,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 3149824,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638352482304,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    },
+    {
+      "allocation": 2638474575872,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638541750272,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\ucrtbase.dll": 1,
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": 1
+      },
+      "calls": 2
+    },
+    {
+      "allocation": 2638541815808,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638541881344,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638541946880,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 2638542864384,
+      "kind": 131072,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {
+        "C:\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll": 1
+      },
+      "calls": 1
+    },
+    {
+      "allocation": 140690847956992,
+      "kind": 262144,
+      "path": "",
+      "residentBytes": 4096,
+      "queriedRegionBytes": 4096,
+      "modules": {},
+      "calls": 0
+    }
+  ],
+  "limits": [
+    "Observer attached after process launch; debugger timing cannot establish formal performance.",
+    "Private heap region ownership is partial; mapped and image regions have separate paths."
+  ]
+}

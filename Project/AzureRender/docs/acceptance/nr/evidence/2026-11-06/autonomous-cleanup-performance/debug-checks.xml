@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Win32-ninja"
+	tests="39"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="AZUREDUSK"
+	time="130"
+	timestamp="2026-11-06T22:28:31"
+	>
+	<testcase name="AzureRender.ProjectedReflectionScene" classname="AzureRender.ProjectedReflectionScene" time="7.27833" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -&gt; generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -&gt; generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793975315670][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793975315670][info][render][code=0] Scene load CPU preparation: 3.859000 ms, materialPixelBytes=232
+[1793975315708][info][render][code=0] Character IBL: hardware mip fallback path
+[1793975315714][info][render][code=0] Scene load shared textures: 42.990700 ms
+[1793975315716][info][render][code=0] Scene load buffers: 1.942700 ms
+[1793975315716][info][render][code=0] Character skinning and morph: vertex-shader fallback p...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.SceneNodeGrouping" classname="AzureRender.SceneNodeGrouping" time="3.96001" status="run">
+		<properties/>
+		<system-out>Stable grouping: deterministic ordering, invalid keys, reverse and randomized scenes passed
+Diagnostic 65536 nodes/1024 meshes,8 repetitions: referenceMs=2105.91 candidateMs=8.5621 checksum=525851
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.StaticSkinningRecording" classname="AzureRender.StaticSkinningRecording" time="0.982273" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -&gt; generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -&gt; generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793975322660][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793975322660][info][render][code=0] Scene load CPU preparation: 9.206300 ms, materialPixelBytes=232
+[1793975322693][info][render][code=0] Character IBL: hardware mip fallback path
+[1793975322698][info][render][code=0] Scene load shared textures: 37.112800 ms
+[1793975322700][info][render][code=0] Scene load buffers: 1.425100 ms
+[1793975322700][info][render][code=0] Character skinning and morph: Vulkan compute path
+[179...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.SkinningBatch" classname="AzureRender.SkinningBatch" time="0.880153" status="run">
+		<properties/>
+		<system-out>Static output content lifecycle: identity, commit, cancel, overwrite, stale preparation and reset passed
+Skinning slices, independent joints, morph boundaries and dispatch limits passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.PrimitiveOpacity" classname="AzureRender.PrimitiveOpacity" time="0.0930786" status="run">
+		<properties/>
+		<system-out>Primitive opacity preserves default batches and independent node coverage
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.NodeOpacityRecording" classname="AzureRender.NodeOpacityRecording" time="2.70732" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -&gt; hair, flags=0x14022, source=fallback/inferred
+  [1] FallbackMaterial -&gt; generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.400000, 0.600000
+Animations: 0
+[1793975324628][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793975324628][info][render][code=0] Scene load CPU preparation: 1.859300 ms, materialPixelBytes=248
+[1793975324680][info][render][code=0] Character IBL: hardware mip fallback path
+[1793975324689][info][render][code=0] Scene load shared textures: 59.215300 ms
+[1793975324692][info][render][code=0] Scene load buffers: 2.885500 ms
+[1793975324692][info][render][code=0] Character skinning and morph: vertex-shader fallback...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.OutlineCoverageRecording" classname="AzureRender.OutlineCoverageRecording" time="23.3328" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -&gt; generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793975327367][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793975327367][info][render][code=0] Scene load CPU preparation: 1.537100 ms, materialPixelBytes=116
+[1793975327418][info][render][code=0] Character IBL: hardware mip fallback path
+[1793975327426][info][render][code=0] Scene load shared textures: 57.542500 ms
+[1793975327428][info][render][code=0] Scene load buffers: 2.006400 ms
+[1793975327428][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793975327428][info][render][code=0] Scene load skinning: 0.057500 ms
+[1793975327431][info][render][code=0] Scene load...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MaterialPipelinePolicy" classname="AzureRender.MaterialPipelinePolicy" time="0.898083" status="run">
+		<properties/>
+		<system-out>Ordinary opaque policy: final class/alpha eligibility passed
+Material feature policy: common bits, varying bits, view ownership and changed-material fallback passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.OpaqueTransparencyScratch" classname="AzureRender.OpaqueTransparencyScratch" time="2.73207" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -&gt; generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -&gt; generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793975351512][info][render][code=0] Character texture access: fixed, requested slots=38, stage sampler limit=4096
+[1793975351512][info][render][code=0] Scene load CPU preparation: 2.065800 ms, materialPixelBytes=464
+[1793975351545][info][render][code=0] Character IBL: hardware mip fallback path
+[1793975351549][info][render][code=0] Scene load shared textures: 36.682500 ms
+[1793975351550][info][render][code=0] Scene material progress: resource=1, elapsedMs=0.683600, hashMs=0.004300, mipMs=0.139500, uploadMs=0.413600, transferredByte...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.DepthOnlyShadowRecording" classname="AzureRender.DepthOnlyShadowRecording" time="2.53663" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -&gt; generic, flags=0x0, source=fallback/inferred
+  [1] FallbackMaterial -&gt; generic, flags=0x0, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793975355750][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793975355750][info][render][code=0] Scene load CPU preparation: 1.241500 ms, materialPixelBytes=232
+[1793975355781][info][render][code=0] Character IBL: hardware mip fallback path
+[1793975355786][info][render][code=0] Scene load shared textures: 35.523700 ms
+[1793975355787][info][render][code=0] Scene load buffers: 1.253800 ms
+[1793975355787][info][render][code=0] Character skinning and morph: vertex-shader fallback pat...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.DepthPrefillRecording" classname="AzureRender.DepthPrefillRecording" time="3.42711" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -&gt; generic, flags=0x0, source=fallback/inferred
+  [1] FallbackMaterial -&gt; generic, flags=0x0, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793975358693][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793975358693][info][render][code=0] Scene load CPU preparation: 1.372400 ms, materialPixelBytes=232
+[1793975358726][info][render][code=0] Character IBL: hardware mip fallback path
+[1793975358731][info][render][code=0] Scene load shared textures: 36.741600 ms
+[1793975358732][info][render][code=0] Scene load buffers: 1.198700 ms
+[1793975358732][info][render][code=0] Character skinning and morph: vertex-shader fallback pat...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.DepthOnlyPipeline" classname="AzureRender.DepthOnlyPipeline" time="1.32584" status="run">
+		<properties/>
+		<system-out>Actual Vulkan pipeline descriptions: vertex-only and vertex/fragment passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.BufferBarrierBatch" classname="AzureRender.BufferBarrierBatch" time="1.08925" status="run">
+		<properties/>
+		<system-out>Buffer batching, stage boundaries, repeated handles, fallback, graph order and command fields passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MaterialTextureSharing" classname="AzureRender.MaterialTextureSharing" time="2.38795" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, 0.000000, 0.000000]
+Asset path: D:/Projects/FYP/Project/AzureRender\assets_public/texture_sharing\material-a.gltf
+Loaded asset: 3 vertices, 3 indices, 1 primitives, 2 materials
+Material Class v1 inventory:
+  [0] SyntheticSharedMaterial-a -&gt; generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -&gt; generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793975363834][info][render][code=0] Character texture access: fixed, requested slots=38, stage sampler limit=4096
+[1793975363834][info][render][code=0] Scene load CPU preparation: 9.717100 ms, materialPixelBytes=464
+[1793975363866][info][render][code=0] Character IBL: hardware mip fallback path
+[1793975363870][info][render][code=0] Scene load shared textures: 36.090100 ms
+[1793975363871][info][render][code=0] Scene material progress: resource=1, elapsedMs=0.619400, hashMs=0.003800, mipMs=0.141900, uploadMs=0.347300,...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MotionRecording" classname="AzureRender.MotionRecording" time="1.25133" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: motion-fixture/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -&gt; generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793975365024][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793975365024][info][render][code=0] Scene load CPU preparation: 1.388800 ms, materialPixelBytes=116
+[1793975365059][info][render][code=0] Character IBL: hardware mip fallback path
+[1793975365065][info][render][code=0] Scene load shared textures: 39.493700 ms
+[1793975365066][info][render][code=0] Scene load buffers: 1.273600 ms
+[1793975365066][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793975365066][info][render][code=0] Scene load skinning: 0.044700 ms
+[1793975365068][info][render][code=0] Scene load descri...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MotionPoseData" classname="AzureRender.MotionPoseData" time="1.20566" status="run">
+		<properties/>
+		<system-out>Motion pose identity, layout, bounds and transaction checks passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.SystemComposition" classname="AzureEngine.SystemComposition" time="6.40793" status="run">
+		<properties/>
+		<system-out>Generic target selection passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ObjectShadowAtlas" classname="AzureRender.ObjectShadowAtlas" time="0.945602" status="run">
+		<properties/>
+		<system-out>Object depth ownership, deferred allocation and bounded record suffix passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ObjectShadowRecording" classname="AzureRender.ObjectShadowRecording" time="2.29032" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Projects/FYP/Project/AzureRender\assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -&gt; generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -&gt; generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793975376261][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793975376261][info][render][code=0] Scene load CPU preparation: 8.571500 ms, materialPixelBytes=232
+[1793975376291][info][render][code=0] Character IBL: hardware mip fallback path
+[1793975376296][info][render][code=0] Scene load shared textures: 34.710900 ms
+[1793975376298][info][render][code=0] Scene load buffers: 1.238200 ms
+[1793975376298][info][render][code=0] Character skinning and morph: vertex-shader fallback p...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.PresentationRuntime" classname="AzureEngine.PresentationRuntime" time="2.44764" status="run">
+		<properties/>
+		<system-out>[1793975379260][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\gameplay\assets\portal.wav
+[1793975379261][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\gameplay\assets\portal.wav
+[1793975379304][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\gameplay\assets\portal.wav
+World animation, real audio, pause, entity destruction and level replacement passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ScriptRuntime" classname="AzureEngine.ScriptRuntime" time="10.7531" status="run">
+		<properties/>
+		<system-out>[1793975381748][warning][script][code=0] assets:/bad.lua: ...al/Temp/azure_script_tests_13167271161600/assets/bad.lua:1: isolated error
+stack traceback:
+	[C]: in function 'base.error'
+	...al/Temp/azure_script_tests_13167271161600/assets/bad.lua:1: in function &lt;...al/Temp/azure_script_tests_13167271161600/assets/bad.lua:1&gt;
+[1793975381750][warning][script][code=0] assets:/loop.lua: Script instruction budget exceeded
+stack traceback:
+	...l/Temp/azure_script_tests_13167271161600/assets/loop.lua:1: in function &lt;...l/Temp/azure_script_tests_13167271161600/assets/loop.lua:1&gt;
+[1793975381754][warning][script][code=0] assets:/good.lua: ...l/Temp/azure_script_tests_13167271161600/assets/good.lua:1: &lt;name&gt; or '...' expected near &lt;eof&gt;
+[1793975381762][warning][script][code=0] assets:/good.lua: ...l/Temp/azure_script_tests_13167271161600/assets/good.lua:1: init failed
+stack traceback:
+	[C]: in function 'base.error'
+	...l/Temp/azure_script_tests_13167271161600/assets/good.lua:1: in function &lt;...l/Temp/azure_script_tests_131...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.PlayableQuest" classname="AzureEngine.PlayableQuest" time="5.7092" status="run">
+		<properties/>
+		<system-out>Production quest, duplicate input, goal prerequisites, UI, destruction, stale events and restart passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.LocomotionBlend" classname="AzureEngine.LocomotionBlend" time="0.126018" status="run">
+		<properties/>
+		<system-out>Locomotion blend contracts passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.AnimationPose" classname="AzureRender.AnimationPose" time="2.45517" status="run">
+		<properties/>
+		<system-out>Immutable sampling, independent instances, local blend and nonloop endpoint passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.NodeOpacity" classname="AzureRender.NodeOpacity" time="0.457957" status="run">
+		<properties/>
+		<system-out>Node opacity defaults, hierarchy, sampling, blending, expressions and validation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.MorphTargets" classname="AzureAssets.MorphTargets" time="1.84172" status="run">
+		<properties/>
+		<system-out>Morph target budgets and weight animation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.StableDepthOrder" classname="AzureRender.StableDepthOrder" time="0.593118" status="run">
+		<properties/>
+		<system-out>Stable depth oracle passed 60 distributions and invalid input
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.AnimationCurve" classname="AzureRender.AnimationCurve" time="0.124345" status="run">
+		<properties/>
+		<system-out>Curve interpolation, time scaling, quaternion and invalid inputs passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ExpressionPose" classname="AzureRender.ExpressionPose" time="2.04529" status="run">
+		<properties/>
+		<system-out>Expression body coexistence, layers, mechanical target and rejection passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.AssetLevel" classname="AzureEngine.AssetLevel" time="2.47791" status="run">
+		<properties/>
+		<system-out>[1793975405761][warning][runtime][code=0] GPU preparation failed
+[1793975405778][warning][runtime][code=0] Asset reference missing: assets:/missing.azurelevel
+Asset relocation, cache repair, dependencies, prefab overrides, pack and transactional level switch passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ProjectStartup" classname="AzureEngine.ProjectStartup" time="2.74523" status="run">
+		<properties/>
+		<system-out>Startup context reuse passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.LevelRefreshRetirement" classname="AzureEngine.LevelRefreshRetirement" time="2.81166" status="run">
+		<properties/>
+		<system-out>cycle=0 mainPollLargeFreeBytes=0 retainedLargeBytes=4657856
+cycle=1 mainPollLargeFreeBytes=0 retainedLargeBytes=4657856
+cycle=2 mainPollLargeFreeBytes=0 retainedLargeBytes=4657856
+Automatic refresh retirement: main-thread release, bounded retention, unchanged revisions and shutdown passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.BuildProvenance" classname="AzureEngine.BuildProvenance" time="2.58161" status="run">
+		<properties/>
+		<system-out>..................
+----------------------------------------------------------------------
+Ran 18 tests in 2.307s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.AssetDeformation" classname="AzureRender.AssetDeformation" time="0.103548" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.ResourceLocator" classname="AzureRender.ResourceLocator" time="0.203937" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.NullRhiPass" classname="AzureRender.NullRhiPass" time="12.8056" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: composite-fixture/mesh.gltf
+Loaded asset: 3 vertices, 3 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -&gt; generic, flags=0x20, source=asset-extras
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793975416918][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=0
+[1793975416918][info][render][code=0] Scene load CPU preparation: 0.937400 ms, materialPixelBytes=116
+[1793975416951][info][render][code=0] Character IBL: hardware mip fallback path
+[1793975416956][info][render][code=0] Scene load shared textures: 37.562500 ms
+[1793975416957][info][render][code=0] Scene load buffers: 1.421000 ms
+[1793975416957][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793975416958][info][render][code=0] Scene load skinning: 0.062900 ms
+[1793975416959][info][render][code=0] Scene load ...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRuntime.SceneRenderSnapshot" classname="AzureRuntime.SceneRenderSnapshot" time="0.164746" status="run">
+		<properties/>
+		<system-out>Material variant ownership, aliasing and source-document isolation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureGame.PlatformerFlow" classname="AzureGame.PlatformerFlow" time="8.45464" status="run">
+		<properties/>
+		<system-out>[1793975428081][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\coin.wav
+[1793975428082][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\finish.wav
+[1793975428083][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\jump.wav
+[1793975428084][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\land.wav
+[1793975428085][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\respawn.wav
+Actual physics route completed with 8 coins and 7 mandatory landings
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.AnimationAuthoring" classname="AzureEditor.AnimationAuthoring" time="5.83453" status="run">
+		<properties/>
+		<system-out>[1793975439608][info][editor][code=0] Opened scene: third-person-courtyard
+[1793975439863][info][editor][code=0] Opened scene: third-person-courtyard
+[1793975439883][info][editor][code=0] Selected node: guide
+[1793975439997][info][editor][code=0] ERROR [animation.seek]: Unknown animation state: missing
+[1793975440028][info][editor][code=0] ERROR [animation.seek]: Timeline time must be between 0 and 600 seconds
+[1793975440042][info][editor][code=0] Opened scene: third-person-courtyard
+[1793975440063][info][editor][code=0] Selected node: hero
+[1793975440290][info][editor][code=0] ERROR [animation.configure]: Animation preview speed must be between 0.05 and 4
+[1793975440422][info][editor][code=0] Opened scene: third-person-courtyard
+[1793975440659][info][editor][code=0] Opened scene: third-person-courtyard
+[1793975440876][info][editor][code=0] Undo
+[1793975440900][info][editor][code=0] Redo
+[1793975441034][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-animation-authoring-132250782765...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+</testsuite>

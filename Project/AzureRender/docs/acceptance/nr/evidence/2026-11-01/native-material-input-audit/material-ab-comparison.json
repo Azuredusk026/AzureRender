@@ -1,0 +1,322 @@
+{
+  "scope": "Identical static geometry, native source camera/lights and temporal AA32; only face/hair documents differ after explicit static-frame and original sparse rim-policy application. Rectangles are diagnostics, not final visibility masks.",
+  "inputs": {
+    "reference": {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-005348-native-tbn-audit-6c8dea\\material-capture-2\\reference\\frames\\frame_000031.png",
+      "sha256": "e8d51ea5fb3579a5953daf3179e2debc0bac69d6e5848ec031620841b319cc83"
+    },
+    "current-head": {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-005348-native-tbn-audit-6c8dea\\material-capture-3\\current-head\\frames\\frame_000031.png",
+      "sha256": "55692069974781b95dd6d900de96a412aad037a1f4b085e61d00ddf0bd8429bb"
+    },
+    "visibility-one": {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-005348-native-tbn-audit-6c8dea\\material-capture-3\\current-head-visibility-one\\frames\\frame_000031.png",
+      "sha256": "7056af7e1a0f95c3251e955178366edc016108ada51dd215d6273bb4aab03d83"
+    },
+    "default-rim": {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-005348-native-tbn-audit-6c8dea\\material-capture-3\\current-head-default-rim\\frames\\frame_000031.png",
+      "sha256": "1633d4aafb638c33130e2829c0132cc600115f050273397d174ef0c2a8096373"
+    }
+  },
+  "comparisons": [
+    {
+      "case": "current-head",
+      "region": "whole",
+      "bounds": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "exactPixelFraction": 0.9981998697916666,
+      "meanAbsoluteChannelError": 0.013348524305555555,
+      "maxChannelError": 124,
+      "referenceMedianLuminance": 0.012957029195092132,
+      "candidateMedianLuminance": 0.012957029195092132,
+      "medianLuminanceRelativeError": 0.0
+    },
+    {
+      "case": "current-head",
+      "region": "head",
+      "bounds": [
+        591,
+        62,
+        693,
+        180
+      ],
+      "exactPixelFraction": 0.8628281821203058,
+      "meanAbsoluteChannelError": 1.0209371884346958,
+      "maxChannelError": 124,
+      "referenceMedianLuminance": 0.036979925300793415,
+      "candidateMedianLuminance": 0.03371832973454576,
+      "medianLuminanceRelativeError": 0.088199084766071
+    },
+    {
+      "case": "current-head",
+      "region": "face-interior",
+      "bounds": [
+        626,
+        135,
+        650,
+        152
+      ],
+      "exactPixelFraction": 0.9852941176470589,
+      "meanAbsoluteChannelError": 0.10457516339869281,
+      "maxChannelError": 29,
+      "referenceMedianLuminance": 0.26615657349839944,
+      "candidateMedianLuminance": 0.26615657349839944,
+      "medianLuminanceRelativeError": 0.0
+    },
+    {
+      "case": "current-head",
+      "region": "hair-crown",
+      "bounds": [
+        614,
+        90,
+        667,
+        113
+      ],
+      "exactPixelFraction": 0.8941755537325676,
+      "meanAbsoluteChannelError": 0.4336888159693738,
+      "maxChannelError": 56,
+      "referenceMedianLuminance": 0.09547292118678034,
+      "candidateMedianLuminance": 0.09536008035622841,
+      "medianLuminanceRelativeError": 0.0011819145067445598
+    },
+    {
+      "case": "current-head",
+      "region": "left-eye",
+      "bounds": [
+        618,
+        126,
+        633,
+        135
+      ],
+      "exactPixelFraction": 0.9851851851851852,
+      "meanAbsoluteChannelError": 0.024691358024691357,
+      "maxChannelError": 7,
+      "referenceMedianLuminance": 0.10730386728521628,
+      "candidateMedianLuminance": 0.10730386728521628,
+      "medianLuminanceRelativeError": 0.0
+    },
+    {
+      "case": "current-head",
+      "region": "right-eye",
+      "bounds": [
+        643,
+        126,
+        659,
+        135
+      ],
+      "exactPixelFraction": 0.9375,
+      "meanAbsoluteChannelError": 0.20601851851851852,
+      "maxChannelError": 38,
+      "referenceMedianLuminance": 0.12962499141428138,
+      "candidateMedianLuminance": 0.12962499141428138,
+      "medianLuminanceRelativeError": 0.0
+    },
+    {
+      "case": "visibility-one",
+      "region": "whole",
+      "bounds": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "exactPixelFraction": 0.9992719184027777,
+      "meanAbsoluteChannelError": 0.005879991319444444,
+      "maxChannelError": 124,
+      "referenceMedianLuminance": 0.012957029195092132,
+      "candidateMedianLuminance": 0.012957029195092132,
+      "medianLuminanceRelativeError": 0.0
+    },
+    {
+      "case": "visibility-one",
+      "region": "head",
+      "bounds": [
+        591,
+        62,
+        693,
+        180
+      ],
+      "exactPixelFraction": 0.9449152542372882,
+      "meanAbsoluteChannelError": 0.4490694582917913,
+      "maxChannelError": 124,
+      "referenceMedianLuminance": 0.036979925300793415,
+      "candidateMedianLuminance": 0.03669060932352283,
+      "medianLuminanceRelativeError": 0.007823595502621928
+    },
+    {
+      "case": "visibility-one",
+      "region": "face-interior",
+      "bounds": [
+        626,
+        135,
+        650,
+        152
+      ],
+      "exactPixelFraction": 0.9926470588235294,
+      "meanAbsoluteChannelError": 0.024509803921568627,
+      "maxChannelError": 9,
+      "referenceMedianLuminance": 0.26615657349839944,
+      "candidateMedianLuminance": 0.26615657349839944,
+      "medianLuminanceRelativeError": 0.0
+    },
+    {
+      "case": "visibility-one",
+      "region": "hair-crown",
+      "bounds": [
+        614,
+        90,
+        667,
+        113
+      ],
+      "exactPixelFraction": 0.9171452009844134,
+      "meanAbsoluteChannelError": 0.3896636587366694,
+      "maxChannelError": 56,
+      "referenceMedianLuminance": 0.09547292118678034,
+      "candidateMedianLuminance": 0.09536008035622841,
+      "medianLuminanceRelativeError": 0.0011819145067445598
+    },
+    {
+      "case": "visibility-one",
+      "region": "left-eye",
+      "bounds": [
+        618,
+        126,
+        633,
+        135
+      ],
+      "exactPixelFraction": 0.9851851851851852,
+      "meanAbsoluteChannelError": 0.024691358024691357,
+      "maxChannelError": 7,
+      "referenceMedianLuminance": 0.10730386728521628,
+      "candidateMedianLuminance": 0.10730386728521628,
+      "medianLuminanceRelativeError": 0.0
+    },
+    {
+      "case": "visibility-one",
+      "region": "right-eye",
+      "bounds": [
+        643,
+        126,
+        659,
+        135
+      ],
+      "exactPixelFraction": 0.9444444444444444,
+      "meanAbsoluteChannelError": 0.2037037037037037,
+      "maxChannelError": 38,
+      "referenceMedianLuminance": 0.12962499141428138,
+      "candidateMedianLuminance": 0.12962499141428138,
+      "medianLuminanceRelativeError": 0.0
+    },
+    {
+      "case": "default-rim",
+      "region": "whole",
+      "bounds": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "exactPixelFraction": 0.9981087239583334,
+      "meanAbsoluteChannelError": 0.013379267939814815,
+      "maxChannelError": 124,
+      "referenceMedianLuminance": 0.012957029195092132,
+      "candidateMedianLuminance": 0.012957029195092132,
+      "medianLuminanceRelativeError": 0.0
+    },
+    {
+      "case": "default-rim",
+      "region": "head",
+      "bounds": [
+        591,
+        62,
+        693,
+        180
+      ],
+      "exactPixelFraction": 0.8558491193087404,
+      "meanAbsoluteChannelError": 1.0232912373989145,
+      "maxChannelError": 124,
+      "referenceMedianLuminance": 0.036979925300793415,
+      "candidateMedianLuminance": 0.03371832973454576,
+      "medianLuminanceRelativeError": 0.088199084766071
+    },
+    {
+      "case": "default-rim",
+      "region": "face-interior",
+      "bounds": [
+        626,
+        135,
+        650,
+        152
+      ],
+      "exactPixelFraction": 0.9166666666666666,
+      "meanAbsoluteChannelError": 0.12990196078431374,
+      "maxChannelError": 29,
+      "referenceMedianLuminance": 0.26615657349839944,
+      "candidateMedianLuminance": 0.26615657349839944,
+      "medianLuminanceRelativeError": 0.0
+    },
+    {
+      "case": "default-rim",
+      "region": "hair-crown",
+      "bounds": [
+        614,
+        90,
+        667,
+        113
+      ],
+      "exactPixelFraction": 0.8941755537325676,
+      "meanAbsoluteChannelError": 0.4336888159693738,
+      "maxChannelError": 56,
+      "referenceMedianLuminance": 0.09547292118678034,
+      "candidateMedianLuminance": 0.09536008035622841,
+      "medianLuminanceRelativeError": 0.0011819145067445598
+    },
+    {
+      "case": "default-rim",
+      "region": "left-eye",
+      "bounds": [
+        618,
+        126,
+        633,
+        135
+      ],
+      "exactPixelFraction": 0.9333333333333333,
+      "meanAbsoluteChannelError": 0.044444444444444446,
+      "maxChannelError": 7,
+      "referenceMedianLuminance": 0.10730386728521628,
+      "candidateMedianLuminance": 0.10730386728521628,
+      "medianLuminanceRelativeError": 0.0
+    },
+    {
+      "case": "default-rim",
+      "region": "right-eye",
+      "bounds": [
+        643,
+        126,
+        659,
+        135
+      ],
+      "exactPixelFraction": 0.9375,
+      "meanAbsoluteChannelError": 0.20601851851851852,
+      "maxChannelError": 38,
+      "referenceMedianLuminance": 0.12962499141428138,
+      "candidateMedianLuminance": 0.12962499141428138,
+      "medianLuminanceRelativeError": 0.0
+    }
+  ],
+  "visibilityComparison": {
+    "current-head": "2bbe40ebe59d169785190fbad97664498558691a2021125f557b5c5ebb5ce287",
+    "visibility-one": "668021c235cb3a326a1298285a65b55e368e9b6c6edb7891d6414492d1f6e9f0",
+    "default-rim": "a7be0f87495bdcbe9a53f5314f321e5d370c2d995761cbef4117f1d9b91a4c44"
+  },
+  "currentVsOneExact": false,
+  "rimPolicyDifference": {
+    "changedPixels": 107,
+    "maxChannelError": 1,
+    "meanAbsoluteChannelError": 5.099826388888889e-05
+  }
+}

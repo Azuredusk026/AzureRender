@@ -1,0 +1,1743 @@
+{
+  "sourceBase": "64e7cc36e7689b6202662aaac62a42a777ce3178",
+  "status": "no-net-gain-entire-candidate-isolated",
+  "sourceHashes": {},
+  "candidateChecks": [
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.SurfaceShadowCache",
+      "reusedFrom": "initial-release-nvidia.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.ObjectShadowFilteringGpu",
+      "reusedFrom": "initial-release-nvidia.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.ShadowFilteringGpu",
+      "reusedFrom": "initial-release-nvidia.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.TemporalViewGpu",
+      "reusedFrom": "initial-release-nvidia.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.SurfaceRadianceCache",
+      "reusedFrom": "initial-release-nvidia.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.SurfaceShadowLookupGpu",
+      "reusedFrom": "finite-lookup-checks.json"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "name": "AzureRender.SurfaceShadowCache",
+      "reusedFrom": "initial-release-intel.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "name": "AzureRender.ObjectShadowFilteringGpu",
+      "reusedFrom": "initial-release-intel.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "name": "AzureRender.ShadowFilteringGpu",
+      "reusedFrom": "initial-release-intel.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "name": "AzureRender.TemporalViewGpu",
+      "reusedFrom": "initial-release-intel.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "name": "AzureRender.SurfaceRadianceCache",
+      "reusedFrom": "initial-release-intel.xml"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "name": "AzureRender.SurfaceShadowLookupGpu",
+      "reusedFrom": "finite-lookup-checks.json"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.SurfaceShadowViewGpu"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "name": "AzureRender.SurfaceShadowViewGpu"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.SurfaceShadowCache"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.SurfaceShadowLookupGpu"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.ObjectShadowFilteringGpu"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.ShadowFilteringGpu"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.TemporalViewGpu"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.SurfaceRadianceCache"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.SurfaceShadowViewGpu"
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "name": "AzureRender.SurfaceShadowCache"
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "name": "AzureRender.SurfaceShadowLookupGpu"
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "name": "AzureRender.ObjectShadowFilteringGpu"
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "name": "AzureRender.ShadowFilteringGpu"
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "name": "AzureRender.TemporalViewGpu"
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "name": "AzureRender.SurfaceRadianceCache"
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "name": "AzureRender.SurfaceShadowViewGpu"
+    }
+  ],
+  "counterOffChecks": [
+    {
+      "configuration": "release",
+      "name": "AzureRender.SurfaceShadowCache"
+    },
+    {
+      "configuration": "release",
+      "name": "AzureRender.SurfaceRadianceCache"
+    },
+    {
+      "configuration": "debug",
+      "name": "AzureRender.SurfaceShadowCache"
+    },
+    {
+      "configuration": "debug",
+      "name": "AzureRender.SurfaceRadianceCache"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "shadow-lookup"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "shadow-view"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "name": "shadow-lookup"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "name": "shadow-view"
+    }
+  ],
+  "restorationChecks": {
+    "sourceInputs": 1673,
+    "rows": [
+      {
+        "configuration": "release",
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^AzureRender\\.(SurfaceRadianceCache|ShadowTileBoundsBatch|RenderGraph)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\release-restored.xml"
+        ],
+        "exitCode": 0,
+        "programs": 675,
+        "tests": [
+          "AzureRender.ShadowTileBoundsBatch",
+          "AzureRender.SurfaceRadianceCache",
+          "AzureRender.RenderGraph"
+        ]
+      },
+      {
+        "configuration": "debug",
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^AzureRender\\.(SurfaceRadianceCache|ShadowTileBoundsBatch|RenderGraph)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\debug-restored.xml"
+        ],
+        "exitCode": 0,
+        "programs": 675,
+        "tests": [
+          "AzureRender.ShadowTileBoundsBatch",
+          "AzureRender.SurfaceRadianceCache",
+          "AzureRender.RenderGraph"
+        ]
+      }
+    ],
+    "passed": 6,
+    "skipped": 0
+  },
+  "passed": 42,
+  "skipped": 0,
+  "canonicalNativeProcesses": 2,
+  "frameCostProcesses": 5,
+  "diagnosticCost": {
+    "status": "diagnosed",
+    "rows": [
+      {
+        "label": "baseline-before",
+        "selectedFrames": 60,
+        "summary": {
+          "gpu": {
+            "mean": 19.957878399999995,
+            "p95": 20.217595199999998
+          },
+          "shadow": {
+            "mean": 2.0590922666666667,
+            "p95": 2.1608016
+          },
+          "main": {
+            "mean": 17.6219648,
+            "p95": 17.889792
+          },
+          "post": {
+            "mean": 0.2768213333333333,
+            "p95": 0.2816
+          },
+          "cpu": {
+            "mean": 5.895638333333349,
+            "p95": 6.844790000000158
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            75.0,
+            75.37,
+            75.4,
+            76.03,
+            76.06,
+            76.29,
+            76.82,
+            77.41,
+            77.44,
+            77.55,
+            77.79,
+            78.01,
+            78.02,
+            78.26,
+            78.27,
+            78.65,
+            78.99,
+            79.41,
+            79.95,
+            80.39,
+            80.42,
+            80.56,
+            80.58,
+            80.64,
+            81.23,
+            81.91,
+            82.02,
+            82.43,
+            82.61,
+            82.64,
+            82.73,
+            83.06,
+            83.07,
+            83.37,
+            83.67,
+            83.86
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            50.0,
+            81.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2505.0
+          ],
+          "thermalSlowdownObserved": false,
+          "samples": 38
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 184,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      },
+      {
+        "label": "candidate",
+        "selectedFrames": 60,
+        "summary": {
+          "gpu": {
+            "mean": 24.256734933333334,
+            "p95": 24.34728
+          },
+          "shadow": {
+            "mean": 2.059930666666667,
+            "p95": 2.1496288
+          },
+          "main": {
+            "mean": 21.92125333333333,
+            "p95": 22.0839424
+          },
+          "post": {
+            "mean": 0.2755509333333333,
+            "p95": 0.27648
+          },
+          "cpu": {
+            "mean": 5.589633333333313,
+            "p95": 6.313599999999866
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            75.0,
+            75.11,
+            75.29,
+            75.51,
+            76.45,
+            76.84,
+            77.01,
+            77.11,
+            77.26,
+            77.37,
+            77.52,
+            79.1,
+            79.25,
+            79.64,
+            79.71,
+            79.8,
+            80.0,
+            80.22,
+            80.39,
+            80.4,
+            80.42,
+            80.43,
+            80.48,
+            80.49,
+            80.51,
+            80.56,
+            80.68,
+            80.72,
+            80.77,
+            80.8,
+            80.89,
+            80.98,
+            81.07,
+            81.2,
+            81.22,
+            81.25,
+            81.33,
+            81.42,
+            81.43,
+            81.58,
+            81.93,
+            82.13,
+            82.5,
+            82.52,
+            82.54,
+            82.55,
+            82.68,
+            82.69,
+            82.72,
+            82.73,
+            82.8,
+            82.82,
+            82.98,
+            83.13,
+            83.25
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            47.0,
+            78.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2550.0
+          ],
+          "thermalSlowdownObserved": false,
+          "samples": 60
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": true,
+            "bytes": 48,
+            "frames": 118,
+            "producerStores": 255005,
+            "consumerVisits": 267809,
+            "eligibleRequests": 267809,
+            "pixelMatches": 240317,
+            "quadMatches": 0,
+            "sampleSpacing": 32,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": true,
+          "surfaceRadianceBytes": 82944000,
+          "surfaceShadowReusePrepared": true,
+          "surfaceShadowVariantModules": 16,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 184,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      },
+      {
+        "label": "baseline-after",
+        "selectedFrames": 60,
+        "summary": {
+          "gpu": {
+            "mean": 19.771192,
+            "p95": 19.8934816
+          },
+          "shadow": {
+            "mean": 2.146240533333333,
+            "p95": 2.1753296
+          },
+          "main": {
+            "mean": 17.350195199999998,
+            "p95": 17.4649344
+          },
+          "post": {
+            "mean": 0.27475626666666664,
+            "p95": 0.27550719999999995
+          },
+          "cpu": {
+            "mean": 5.6506066666666666,
+            "p95": 6.278459999999972
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            75.0,
+            75.46,
+            78.09,
+            78.24,
+            78.26,
+            78.39,
+            78.46,
+            78.63,
+            78.74,
+            78.77,
+            78.8,
+            78.85,
+            78.88,
+            78.93,
+            79.04,
+            79.14,
+            79.19,
+            79.34,
+            79.38,
+            79.4,
+            79.44,
+            79.46,
+            79.55,
+            79.56,
+            79.63,
+            79.71,
+            79.8,
+            80.28,
+            80.36,
+            80.46,
+            80.63,
+            80.76,
+            80.81,
+            80.97,
+            81.01,
+            81.59,
+            81.66,
+            83.4,
+            84.42
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            49.0,
+            81.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2535.0
+          ],
+          "thermalSlowdownObserved": false,
+          "samples": 41
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 184,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      }
+    ],
+    "bracketDriftFraction": 0.009397974738417022,
+    "bracketStable": true,
+    "gpuBaselineMean": 19.8645352,
+    "gpuCandidateMean": 24.256734933333334,
+    "gpuSavedMs": -4.392199733333335,
+    "gpuReductionFraction": -0.2211076015175697,
+    "sourceAndProductsUnchanged": true,
+    "projectInputsVerified": 1729,
+    "shadowBoundsTilesPerGroup": 8,
+    "baselineRuntimeVerified": true,
+    "scope": "Local diagnosis under recorded current power and thermal conditions, sixty warmup and sixty selected frames per process; before/candidate/after bracket; formal performance conditions remain pending",
+    "formalPerformancePassed": false
+  },
+  "counterOffCost": {
+    "status": "measured",
+    "rows": [
+      {
+        "label": "candidate",
+        "summary": {
+          "gpu": {
+            "mean": 20.456508266666663,
+            "p95": 20.564094400000002
+          },
+          "main": {
+            "mean": 18.112512000000002,
+            "p95": 18.287104
+          },
+          "shadow": {
+            "mean": 2.0638128,
+            "p95": 2.1574192
+          },
+          "cpu": {
+            "mean": 5.7328266666666625,
+            "p95": 6.46957500000005
+          }
+        },
+        "passes": {
+          "character-transparent-prepare": {
+            "samples": 60,
+            "meanMs": 0.12797386666666666,
+            "p95Ms": 0.1258064
+          },
+          "character-skinning": {
+            "samples": 60,
+            "meanMs": 0.20354773333333334,
+            "p95Ms": 0.387088
+          },
+          "character-gpu-culling": {
+            "samples": 60,
+            "meanMs": 0.005582399999999999,
+            "p95Ms": 0.006144
+          },
+          "character-shadow": {
+            "samples": 60,
+            "meanMs": 1.7249279999999998,
+            "p95Ms": 1.8464256
+          },
+          "object-shadow-atlas": {
+            "samples": 60,
+            "meanMs": 0.08773973333333333,
+            "p95Ms": 0.22968319999999998
+          },
+          "character-outline-mask": {
+            "samples": 60,
+            "meanMs": 0.047069866666666654,
+            "p95Ms": 0.05749759999999999
+          },
+          "character-main-depth": {
+            "samples": 60,
+            "meanMs": 0.33090559999999997,
+            "p95Ms": 0.4385792
+          },
+          "shadow-tile-bounds": {
+            "samples": 60,
+            "meanMs": 0.12479146666666667,
+            "p95Ms": 0.1251328
+          },
+          "character-depth-hierarchy": {
+            "samples": 60,
+            "meanMs": 0.11902293333333333,
+            "p95Ms": 0.1300992
+          },
+          "character-opaque-depth": {
+            "samples": 60,
+            "meanMs": 6.1171370666666665,
+            "p95Ms": 6.1533695999999996
+          },
+          "character-occlusion": {
+            "samples": 60,
+            "meanMs": 0.014918400000000002,
+            "p95Ms": 0.015359999999999999
+          },
+          "character-reflection-motion": {
+            "samples": 60,
+            "meanMs": 0.5622954666666667,
+            "p95Ms": 0.570368
+          },
+          "character-main-depth-resume": {
+            "samples": 60,
+            "meanMs": 0.0012117333333333332,
+            "p95Ms": 0.002048
+          },
+          "character-compute-reflection": {
+            "samples": 60,
+            "meanMs": 1.6730079999999998,
+            "p95Ms": 1.6814688
+          },
+          "character-main": {
+            "samples": 60,
+            "meanMs": 9.025280000000002,
+            "p95Ms": 9.1232256
+          },
+          "post-process-grade": {
+            "samples": 60,
+            "meanMs": 0.1593344,
+            "p95Ms": 0.159744
+          },
+          "post-process-hud": {
+            "samples": 60,
+            "meanMs": 0.11607040000000003,
+            "p95Ms": 0.11673599999999999
+          },
+          "editor-ui": {
+            "samples": 60,
+            "meanMs": 0.0005290666666666666,
+            "p95Ms": 0.001024
+          },
+          "capture": {
+            "samples": 60,
+            "meanMs": 0.0012117333333333332,
+            "p95Ms": 0.002048
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            75.08,
+            75.33,
+            76.58,
+            76.62,
+            77.46,
+            77.52,
+            77.71,
+            77.94,
+            78.15,
+            78.44,
+            78.57,
+            78.58,
+            78.77,
+            78.78,
+            78.89,
+            79.05,
+            79.07,
+            79.17,
+            79.22,
+            79.27,
+            79.41,
+            79.6,
+            79.64,
+            79.67,
+            79.86,
+            79.89,
+            79.9,
+            80.01,
+            80.05,
+            80.09,
+            80.11,
+            80.17,
+            80.25,
+            80.3,
+            80.4,
+            80.44,
+            80.52,
+            80.54,
+            80.72,
+            80.87,
+            80.98,
+            80.99,
+            81.1,
+            81.15,
+            81.24,
+            81.28,
+            81.32,
+            81.44,
+            81.46,
+            81.49,
+            81.57,
+            81.6,
+            81.62,
+            81.64,
+            81.67,
+            81.7,
+            81.74,
+            81.92,
+            81.93,
+            81.97,
+            81.98,
+            82.03,
+            82.04,
+            82.05,
+            82.08,
+            82.4,
+            82.44,
+            82.55,
+            82.56,
+            82.58,
+            82.62,
+            82.63,
+            83.17,
+            83.43,
+            83.44,
+            83.99,
+            84.09,
+            84.26,
+            84.42
+          ],
+          "thermalSlowdownObserved": false
+        },
+        "execution": {
+          "status": "exited",
+          "exitCode": 0,
+          "reason": null,
+          "seconds": 193.06200000000536,
+          "logTruncated": false,
+          "samplingSeconds": 1,
+          "command": [
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+            "--project",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+            "--resource-root",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+            "--width",
+            "1920",
+            "--height",
+            "1080",
+            "--qa-camera",
+            "scene",
+            "--qa-light",
+            "scene",
+            "--fixed-frame-step",
+            "--capture-fps",
+            "24",
+            "--smoke-frames",
+            "120",
+            "--gpu-timing",
+            "--gpu-pass-timing",
+            "--gpu-timing-output",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\cost-control-candidate\\timing.json"
+          ],
+          "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\tmp"
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 32,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": true,
+          "surfaceRadianceBytes": 82944000,
+          "surfaceShadowReusePrepared": true,
+          "surfaceShadowVariantModules": 16,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280
+        }
+      },
+      {
+        "label": "reference-after",
+        "summary": {
+          "gpu": {
+            "mean": 20.119647466666667,
+            "p95": 20.455384
+          },
+          "main": {
+            "mean": 17.758907733333334,
+            "p95": 18.022041599999998
+          },
+          "shadow": {
+            "mean": 2.0772112,
+            "p95": 2.175
+          },
+          "cpu": {
+            "mean": 5.953485000000009,
+            "p95": 6.592024999999895
+          }
+        },
+        "passes": {
+          "character-transparent-prepare": {
+            "samples": 60,
+            "meanMs": 0.12625653333333334,
+            "p95Ms": 0.1284624
+          },
+          "character-skinning": {
+            "samples": 60,
+            "meanMs": 0.2392352,
+            "p95Ms": 0.3973136
+          },
+          "character-gpu-culling": {
+            "samples": 60,
+            "meanMs": 0.005786133333333332,
+            "p95Ms": 0.0061535999999999995
+          },
+          "character-shadow": {
+            "samples": 60,
+            "meanMs": 1.7041237333333332,
+            "p95Ms": 1.854464
+          },
+          "object-shadow-atlas": {
+            "samples": 60,
+            "meanMs": 0.09422506666666666,
+            "p95Ms": 0.23449599999999998
+          },
+          "character-outline-mask": {
+            "samples": 60,
+            "meanMs": 0.04544853333333333,
+            "p95Ms": 0.05739519999999999
+          },
+          "character-main-depth": {
+            "samples": 60,
+            "meanMs": 0.3258709333333333,
+            "p95Ms": 0.46197759999999993
+          },
+          "shadow-tile-bounds": {
+            "samples": 60,
+            "meanMs": 0.12561493333333332,
+            "p95Ms": 0.12405759999999999
+          },
+          "character-depth-hierarchy": {
+            "samples": 60,
+            "meanMs": 0.1184256,
+            "p95Ms": 0.130048
+          },
+          "character-opaque-depth": {
+            "samples": 60,
+            "meanMs": 5.662395733333332,
+            "p95Ms": 5.7779712
+          },
+          "character-occlusion": {
+            "samples": 60,
+            "meanMs": 0.015285866666666668,
+            "p95Ms": 0.015359999999999999
+          },
+          "character-reflection-motion": {
+            "samples": 60,
+            "meanMs": 0.5641386666666667,
+            "p95Ms": 0.5714432
+          },
+          "character-main-depth-resume": {
+            "samples": 60,
+            "meanMs": 0.0011946666666666664,
+            "p95Ms": 0.002048
+          },
+          "character-compute-reflection": {
+            "samples": 60,
+            "meanMs": 1.6933264,
+            "p95Ms": 1.7295871999999999
+          },
+          "character-main": {
+            "samples": 60,
+            "meanMs": 9.103684266666667,
+            "p95Ms": 9.2731392
+          },
+          "post-process-grade": {
+            "samples": 60,
+            "meanMs": 0.16098986666666662,
+            "p95Ms": 0.16383999999999999
+          },
+          "post-process-hud": {
+            "samples": 60,
+            "meanMs": 0.11801599999999997,
+            "p95Ms": 0.1208832
+          },
+          "editor-ui": {
+            "samples": 60,
+            "meanMs": 0.0007338666666666664,
+            "p95Ms": 0.001024
+          },
+          "capture": {
+            "samples": 60,
+            "meanMs": 0.0013311999999999996,
+            "p95Ms": 0.002048
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            75.11,
+            75.23,
+            75.71,
+            76.93,
+            77.17,
+            77.27,
+            77.51,
+            77.59,
+            77.7,
+            78.04,
+            78.26,
+            78.4,
+            78.51,
+            78.54,
+            78.75,
+            78.85,
+            79.33,
+            79.42,
+            79.65,
+            79.89,
+            80.03,
+            80.08,
+            80.31,
+            80.5,
+            81.02,
+            81.1,
+            81.15,
+            81.27,
+            81.71,
+            81.73,
+            82.43,
+            82.46,
+            82.7,
+            82.83,
+            83.18,
+            83.46,
+            84.1,
+            84.37,
+            84.83
+          ],
+          "thermalSlowdownObserved": false
+        },
+        "execution": {
+          "status": "exited",
+          "exitCode": 0,
+          "reason": null,
+          "seconds": 89.32800000000861,
+          "logTruncated": false,
+          "samplingSeconds": 1,
+          "command": [
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\baseline-runtime\\AzurePlayer.exe",
+            "--project",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+            "--resource-root",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\baseline-runtime",
+            "--width",
+            "1920",
+            "--height",
+            "1080",
+            "--qa-camera",
+            "scene",
+            "--qa-light",
+            "scene",
+            "--fixed-frame-step",
+            "--capture-fps",
+            "24",
+            "--smoke-frames",
+            "120",
+            "--gpu-timing",
+            "--gpu-pass-timing",
+            "--gpu-timing-output",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\cost-control-reference-after\\timing.json"
+          ],
+          "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\tmp"
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280
+        }
+      }
+    ],
+    "gpuReferenceMean": 20.119647466666667,
+    "gpuCandidateMean": 20.456508266666663,
+    "gpuSavedMs": -0.33686079999999663,
+    "gpuReductionFraction": -0.016742877854002858,
+    "priorReferenceAnchorMean": 19.771192,
+    "priorAnchorDriftFraction": 0.017470450425483862,
+    "priorAnchorComparableInstrumentation": false,
+    "pairedInstrumentation": "GPU core and per-pass timestamps enabled for both fresh roles",
+    "sourceAndProductsUnchanged": true,
+    "projectInputsVerified": 1729,
+    "formalPerformancePassed": false,
+    "scope": "One new counter-off candidate and one fresh matched reference, with 60 warmup/60 selected frames each; prior same-input reference is a separate drift anchor with core timestamps only; no repeated three-process bracket"
+  },
+  "nativeImages": {
+    "image-shadow-reuse": {
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 252.26500000001397,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+          "--width",
+          "2560",
+          "--height",
+          "1440",
+          "--qa-camera",
+          "scene",
+          "--qa-light",
+          "scene",
+          "--capture-frames",
+          "4",
+          "--capture-fps",
+          "24",
+          "--fixed-frame-step",
+          "--capture-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\image-shadow-reuse\\frames-053822",
+          "--runtime-report",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\image-shadow-reuse\\runtime.json"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\tmp"
+      },
+      "frames": [
+        {
+          "frame": "frame_000000.png",
+          "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+          "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+          "changedPixels": 0,
+          "maximumByteDifference": 0,
+          "firstChangedPoints": []
+        },
+        {
+          "frame": "frame_000001.png",
+          "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+          "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+          "changedPixels": 0,
+          "maximumByteDifference": 0,
+          "firstChangedPoints": []
+        },
+        {
+          "frame": "frame_000002.png",
+          "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+          "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+          "changedPixels": 0,
+          "maximumByteDifference": 0,
+          "firstChangedPoints": []
+        },
+        {
+          "frame": "frame_000003.png",
+          "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+          "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+          "changedPixels": 0,
+          "maximumByteDifference": 0,
+          "firstChangedPoints": []
+        }
+      ],
+      "metadata": {
+        "surfaceRadianceSelection": {
+          "enabled": false,
+          "prepared": false,
+          "frames": 0,
+          "fastFrames": 0,
+          "fullFrames": 0,
+          "fastDraws": 0,
+          "fullDraws": 0,
+          "lastFastDraws": 0,
+          "lastFullDraws": 0,
+          "fastWitnesses": 0,
+          "fullWitnesses": 0,
+          "lastFastWitnesses": 0,
+          "lastFullWitnesses": 0,
+          "lastGlobalReasons": 0,
+          "lastFallback": true,
+          "fallback": ""
+        },
+        "surfaceRadianceStatistics": {
+          "enabled": true,
+          "bytes": 48,
+          "frames": 2,
+          "producerStores": 7572,
+          "consumerVisits": 7958,
+          "eligibleRequests": 7958,
+          "pixelMatches": 7184,
+          "quadMatches": 0,
+          "sampleSpacing": 32,
+          "failureAttempts": 0,
+          "failureCapacity": 0,
+          "failureSamples": [],
+          "overflow": false
+        },
+        "surfaceRadiancePrepared": true,
+        "surfaceRadianceBytes": 147456000,
+        "surfaceShadowReusePrepared": true,
+        "surfaceShadowVariantModules": 16,
+        "surfaceRadianceIdentityVersion": 1,
+        "computeSkinningPreparedDispatches": 11,
+        "computeSkinningPreparedVertices": 226194,
+        "computeSkinningVertexWords": 10,
+        "shadowBoundsTilesPerGroup": 8,
+        "computeSkinningOutputBytes": 77503280,
+        "defaultIsolationPipelines": 0,
+        "defaultIsolationSelected": false,
+        "defaultIsolationFallback": "",
+        "conservativeOcclusionPrepared": true,
+        "mainDepthSplitRecorded": true,
+        "conservativeOcclusionCommands": 435,
+        "conservativeOcclusionLastZeroCommands": 212,
+        "conservativeOcclusionFallback": "",
+        "vertexCapacity": 968791
+      },
+      "sourceInputsUnchanged": true,
+      "productsUnchanged": true,
+      "projectInputsUnchanged": true,
+      "validationLogClean": true,
+      "zeroAllocator": true,
+      "formalPerformancePassed": false,
+      "overallVisualAcceptance": "failed-user-review"
+    },
+    "image-shadow-reuse-control": {
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 238.65599999998813,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+          "--width",
+          "2560",
+          "--height",
+          "1440",
+          "--qa-camera",
+          "scene",
+          "--qa-light",
+          "scene",
+          "--capture-frames",
+          "4",
+          "--capture-fps",
+          "24",
+          "--fixed-frame-step",
+          "--capture-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\image-shadow-reuse-control\\frames-060346",
+          "--runtime-report",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\image-shadow-reuse-control\\runtime.json"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\tmp"
+      },
+      "frames": [
+        {
+          "frame": "frame_000000.png",
+          "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+          "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+          "changedPixels": 0,
+          "maximumByteDifference": 0,
+          "firstChangedPoints": []
+        },
+        {
+          "frame": "frame_000001.png",
+          "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+          "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+          "changedPixels": 0,
+          "maximumByteDifference": 0,
+          "firstChangedPoints": []
+        },
+        {
+          "frame": "frame_000002.png",
+          "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+          "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+          "changedPixels": 0,
+          "maximumByteDifference": 0,
+          "firstChangedPoints": []
+        },
+        {
+          "frame": "frame_000003.png",
+          "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+          "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+          "changedPixels": 0,
+          "maximumByteDifference": 0,
+          "firstChangedPoints": []
+        }
+      ],
+      "metadata": {
+        "surfaceRadianceSelection": {
+          "enabled": false,
+          "prepared": false,
+          "frames": 0,
+          "fastFrames": 0,
+          "fullFrames": 0,
+          "fastDraws": 0,
+          "fullDraws": 0,
+          "lastFastDraws": 0,
+          "lastFullDraws": 0,
+          "fastWitnesses": 0,
+          "fullWitnesses": 0,
+          "lastFastWitnesses": 0,
+          "lastFullWitnesses": 0,
+          "lastGlobalReasons": 0,
+          "lastFallback": true,
+          "fallback": ""
+        },
+        "surfaceRadianceStatistics": {
+          "enabled": false,
+          "bytes": 0,
+          "frames": 0,
+          "producerStores": 0,
+          "consumerVisits": 0,
+          "eligibleRequests": 0,
+          "pixelMatches": 0,
+          "quadMatches": 0,
+          "sampleSpacing": 32,
+          "failureAttempts": 0,
+          "failureCapacity": 0,
+          "failureSamples": [],
+          "overflow": false
+        },
+        "surfaceRadiancePrepared": true,
+        "surfaceRadianceBytes": 147456000,
+        "surfaceShadowReusePrepared": true,
+        "surfaceShadowVariantModules": 16,
+        "surfaceRadianceIdentityVersion": 1,
+        "computeSkinningPreparedDispatches": 11,
+        "computeSkinningPreparedVertices": 226194,
+        "computeSkinningVertexWords": 10,
+        "shadowBoundsTilesPerGroup": 8,
+        "computeSkinningOutputBytes": 77503280,
+        "defaultIsolationPipelines": 0,
+        "defaultIsolationSelected": false,
+        "defaultIsolationFallback": "",
+        "conservativeOcclusionPrepared": true,
+        "mainDepthSplitRecorded": true,
+        "conservativeOcclusionCommands": 435,
+        "conservativeOcclusionLastZeroCommands": 212,
+        "conservativeOcclusionFallback": "",
+        "vertexCapacity": 968791
+      },
+      "sourceInputsUnchanged": true,
+      "productsUnchanged": true,
+      "projectInputsUnchanged": true,
+      "validationLogClean": true,
+      "zeroAllocator": true,
+      "formalPerformancePassed": false,
+      "overallVisualAcceptance": "failed-user-review"
+    }
+  },
+  "nativeCoverage": {
+    "sampleSpacing": 32,
+    "retiredFrames": 2,
+    "producerStores": 7572,
+    "eligibleRequests": 7958,
+    "pixelMatches": 7184,
+    "acceptanceFraction": 0.9027393817542096,
+    "threshold": 0.8,
+    "gatePassed": true,
+    "scope": "Original strict four frames, sparse 32-pixel grid, eligible non-integral scalar-shadow consumers; timing coverage separately recorded"
+  },
+  "restoration": {
+    "status": "restored",
+    "sourceInputs": 1673,
+    "sourceHashes": {
+      "CMakeLists.txt": "dad6dec6e37c0081791f704320ed26367e61864421688f1def17235819bf059a",
+      "src/app/AzureRenderApp.cpp": "bc4ee8cc3f07927d592eb453d083755f7aa9f6f0aee61f20ae14177d38b8c0b6",
+      "src/scenes/CharacterSceneRenderer.cpp": "6d14df3fa5606fc34fd5379d26ac0f29be7fd3de5fb8d189ef7dd8e233c8d271",
+      "src/scenes/CharacterSceneRenderer.hpp": "4b4b12a4bbda983d58d920f82fa511bd4ea95022d69ebe6e8b1fdce1d0fb2528",
+      "src/scenes/CharacterMaterialSampling.inc": "e635bf8bbfd0013507eb71ef057e77ae4c4c3defebae3d1f132039b8d0fc9a13",
+      "src/render/SurfaceRadianceCache.cpp": "b3998aa07abc6009611584ae0df4641cf531578b859a7af4d7bd6c25026eb55f",
+      "src/render/SurfaceRadianceCache.hpp": "db4f2b72ff32be4a55e9e494961feee72a7f6f3fe75603266f5c38cdf8097179",
+      "shaders/mesh.frag": "3af34593540c5541cf58503246d3608754ec70363feba0bc7ba8e1240d450a1f",
+      "shaders/mesh.vert": "55d43fe89e8ceccaa1c5a6e513935d8df8e73f7eb96a8f220985b96434aac004",
+      "tests/SurfaceRadianceViewGpuTests.cpp": "0dea45ec828e3b4fa05e96a3a90db74c65bd95ec13ef6b3dc8652765c8d9b4d8"
+    },
+    "removedCandidateSources": [
+      "shaders/surface_shadow_cache.glsl",
+      "shaders/surface_shadow_lookup_test.comp",
+      "tests/SurfaceShadowCacheTests.cpp",
+      "tests/SurfaceShadowLookupGpuTests.cpp"
+    ],
+    "productionEntry": "64e7cc36e7689b6202662aaac62a42a777ce3178"
+  },
+  "candidateSource": {
+    "CMakeLists.txt": "0e842128171fe7a7a1a4d3cf17172aa63d9789eb9073881666418c039b0929fb",
+    "src/app/AzureRenderApp.cpp": "5157333f1abf9654dfa202b28b12cb09a374f206b09cbba61251593d1cf3d30c",
+    "src/scenes/CharacterSceneRenderer.cpp": "8dce99d1f78413d89eb45a6b67d87a57b16e20d02820fd91f0e94a2d1817280d",
+    "src/scenes/CharacterSceneRenderer.hpp": "96366c6669605ebf8c536c89e78f281a7051de22a11c55110719f88097d9ea4b",
+    "src/scenes/CharacterMaterialSampling.inc": "10c058d3bdb36fee3ee4168026bb162fbe5a4c9821ca01bddcadddf8d710699c",
+    "src/render/SurfaceRadianceCache.cpp": "55c47fb802f896545b8814f966c8b9c39e46a649fb3e500238f595515bd37ea4",
+    "src/render/SurfaceRadianceCache.hpp": "a2bcf3994469047195e022c923e95edfb1c030f95f5cb79acf5aa6e713138a8d",
+    "shaders/mesh.frag": "07c695dce8598be6463fa893f6987df3791f618f37e83c76a4c3e5bfe309aaaa",
+    "shaders/mesh.vert": "33c853a2c896467f31a5b195813010358460f3bbf82ada0e09bc65ed4f74b2dd",
+    "shaders/surface_shadow_cache.glsl": "364253df32e122846968251e4b65683fe1f1ea7e31df348fdb5c9ec1420d94d9",
+    "shaders/surface_shadow_lookup_test.comp": "e419b6e75db10c0d81214e6b8ca53fc6a555e45eef9f601406f9de945d9eddeb",
+    "tests/SurfaceShadowCacheTests.cpp": "25a87842f275e0a27b66914d72a09d5a3329e250b66c98399a20c1de23ff3d2c",
+    "tests/SurfaceShadowLookupGpuTests.cpp": "ed97e11144a6d02e4402493da84b14ce78f5959272f289ab8dd4327b26c57e6b",
+    "tests/SurfaceRadianceViewGpuTests.cpp": "7fb3ee49def6cc992ab430fc64213c4c6ccadb9f4624842cc8107c399b2e33bf"
+  },
+  "diagnosticSource": {
+    "status": "recovered-by-exact-inverse-and-verified-against-measured-source-manifest",
+    "sourceHashes": {
+      "CMakeLists.txt": "14736c429885bc12521857415377863dbe320cc18f0b755fbe28e41d250859a6",
+      "src/app/AzureRenderApp.cpp": "08cbf946ecc64966ea479cb18a8cdf9b5d5d4ddddb2232ce64f2e4853d10df08",
+      "src/scenes/CharacterSceneRenderer.cpp": "5cff9985eaa0b56fdf03e84f758f68e3138f45e62f4b4dd9505e496cf374b8ad",
+      "src/scenes/CharacterSceneRenderer.hpp": "96366c6669605ebf8c536c89e78f281a7051de22a11c55110719f88097d9ea4b",
+      "src/scenes/CharacterMaterialSampling.inc": "10c058d3bdb36fee3ee4168026bb162fbe5a4c9821ca01bddcadddf8d710699c",
+      "src/render/SurfaceRadianceCache.cpp": "55c47fb802f896545b8814f966c8b9c39e46a649fb3e500238f595515bd37ea4",
+      "src/render/SurfaceRadianceCache.hpp": "a2bcf3994469047195e022c923e95edfb1c030f95f5cb79acf5aa6e713138a8d",
+      "shaders/mesh.frag": "07c695dce8598be6463fa893f6987df3791f618f37e83c76a4c3e5bfe309aaaa",
+      "shaders/mesh.vert": "33c853a2c896467f31a5b195813010358460f3bbf82ada0e09bc65ed4f74b2dd",
+      "shaders/surface_shadow_cache.glsl": "364253df32e122846968251e4b65683fe1f1ea7e31df348fdb5c9ec1420d94d9",
+      "shaders/surface_shadow_lookup_test.comp": "e419b6e75db10c0d81214e6b8ca53fc6a555e45eef9f601406f9de945d9eddeb"
+    },
+    "testSources": {
+      "tests/SurfaceShadowCacheTests.cpp": "255c3ad1e084a9b93db8ac5da839288f9d4e4e72bb79df82dd9a209069ac47a3",
+      "tests/SurfaceShadowLookupGpuTests.cpp": "225e3923c8a24790605e728e238b76097cc8d4266c2ecc7edd17f533fb586644",
+      "tests/SurfaceRadianceViewGpuTests.cpp": "c2ed8586029e9e9100bf97bb8a1cfb2c01cc269fed433929d6f48dc3a31ebda7"
+    },
+    "testSourceRecovery": "Inverse of the later diagnostics-option edit; original provenance input inventory excludes tests"
+  },
+  "isolatedPrograms": [
+    {
+      "role": "counter-off",
+      "path": "control-programs\\mesh_object_bindless_clipmap_field_early_shadow_cache.frag.spv",
+      "sha256": "9ca6fd6aeb4e329ae3e9f05f28d0db976e2751f200baa438764d390f49cfeddf"
+    },
+    {
+      "role": "diagnostic-reproduced-byte-exact",
+      "path": "diagnostic-programs\\mesh_object_bindless_clipmap_field_early_shadow_cache.frag.spv",
+      "sha256": "9c9dd8b33072d6aa1f9d6878c9620e525852ed77da00b84eeeb461abc081c702",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_ORDINARY_EARLY_DEPTH=1",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_SURFACE_SHADOW_CACHE=1",
+        "-DAZURE_SURFACE_RADIANCE_DIAGNOSTICS=1",
+        "-DAZURE_SURFACE_RADIANCE_SPARSE_DIAGNOSTICS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\shaders\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\diagnostic-programs\\mesh_object_bindless_clipmap_field_early_shadow_cache.frag.spv"
+      ]
+    },
+    {
+      "role": "counter-off",
+      "path": "control-programs\\character_snapshot_object_bindless_clipmap_field_early_shadow_cache.frag.spv",
+      "sha256": "ab528e3856241f8e5df54b01f3cbf690b2888d6272f5bd7dd7a58b539480e794"
+    },
+    {
+      "role": "diagnostic-reproduced-byte-exact",
+      "path": "diagnostic-programs\\character_snapshot_object_bindless_clipmap_field_early_shadow_cache.frag.spv",
+      "sha256": "035df625fad0ad2170e908c9feeea6059771f5d8010ebcb7c0adbb68d241a054",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_ORDINARY_EARLY_DEPTH=1",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_SURFACE_SHADOW_CACHE=1",
+        "-DAZURE_SURFACE_RADIANCE_DIAGNOSTICS=1",
+        "-DAZURE_SURFACE_RADIANCE_SPARSE_DIAGNOSTICS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\shaders\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\diagnostic-programs\\character_snapshot_object_bindless_clipmap_field_early_shadow_cache.frag.spv"
+      ]
+    },
+    {
+      "role": "counter-off",
+      "path": "control-programs\\mesh_object_bindless_clipmap_field_shadow_cache.frag.spv",
+      "sha256": "6671f2dfe7c235dd86ed514fc1a29147b1e09982c2785fb8a791e5276c39ba1d"
+    },
+    {
+      "role": "diagnostic-reproduced-byte-exact",
+      "path": "diagnostic-programs\\mesh_object_bindless_clipmap_field_shadow_cache.frag.spv",
+      "sha256": "855a7726eb624f9cc2fc2e941d841a41d0f9a888647f23eba2a2660795db5be0",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_SURFACE_SHADOW_CACHE=1",
+        "-DAZURE_SURFACE_RADIANCE_DIAGNOSTICS=1",
+        "-DAZURE_SURFACE_RADIANCE_SPARSE_DIAGNOSTICS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\shaders\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\diagnostic-programs\\mesh_object_bindless_clipmap_field_shadow_cache.frag.spv"
+      ]
+    },
+    {
+      "role": "counter-off",
+      "path": "control-programs\\character_snapshot_object_bindless_clipmap_field_shadow_cache.frag.spv",
+      "sha256": "7abfe21e0bc0c9bdcb0f873ef687cc46f31f510f30c1ea410f613c53396c9ea4"
+    },
+    {
+      "role": "diagnostic-reproduced-byte-exact",
+      "path": "diagnostic-programs\\character_snapshot_object_bindless_clipmap_field_shadow_cache.frag.spv",
+      "sha256": "ccd009ac8177a8a801268bb80e107971f20f2a567f2d9a009e640cb66c409627",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_SURFACE_SHADOW_CACHE=1",
+        "-DAZURE_SURFACE_RADIANCE_DIAGNOSTICS=1",
+        "-DAZURE_SURFACE_RADIANCE_SPARSE_DIAGNOSTICS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\shaders\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-045502-surface-shadow-reuse-535624\\diagnostic-programs\\character_snapshot_object_bindless_clipmap_field_shadow_cache.frag.spv"
+      ]
+    },
+    {
+      "role": "identity-vertex",
+      "path": "control-programs\\mesh.vert.spv",
+      "sha256": "4682cc42e44eadd34b698f27c2d0d6498787682ae1b710a87a6a00a86d4df40c"
+    },
+    {
+      "role": "identity-vertex",
+      "path": "control-programs\\mesh_compute.vert.spv",
+      "sha256": "eb689defc799581db2438faf3ab37cb56814b9e96609011f770eb86c6868aa14"
+    },
+    {
+      "role": "identity-vertex",
+      "path": "control-programs\\mesh_object.vert.spv",
+      "sha256": "c673e13461c84706b946fe1210ad73e4474e75b11336e24c5023e3b48ea7953a"
+    },
+    {
+      "role": "identity-vertex",
+      "path": "control-programs\\mesh_object_compute.vert.spv",
+      "sha256": "00b0c64bf032964aabcaa1380e6f0f2f83832fa0b7016bbc90a20e6cb67e6830"
+    },
+    {
+      "role": "identity-vertex",
+      "path": "control-programs\\mesh_object_projected.vert.spv",
+      "sha256": "4b1505b69b89729e9fa240d23c7fb633ef623392a46be4065bf65054a3ad51fa"
+    },
+    {
+      "role": "identity-vertex",
+      "path": "control-programs\\mesh_object_projected_bindless.vert.spv",
+      "sha256": "2c8fee49bf955eaf0b57aedf3bea0ca8a4000e7f4155c69cfc0d640c896f6814"
+    },
+    {
+      "role": "identity-vertex",
+      "path": "control-programs\\mesh_object_projected_bindless_compute.vert.spv",
+      "sha256": "93b36da0ed895dd3beb41cc6e6c5dc06dbdb6bafad053bfe8a379b4419f67c30"
+    },
+    {
+      "role": "identity-vertex",
+      "path": "control-programs\\mesh_object_projected_compute.vert.spv",
+      "sha256": "a9ea2bae174cdf9b260cb44699dd06a9ca1cbafdfefc93f3b900bfe3763f144b"
+    },
+    {
+      "role": "identity-vertex",
+      "path": "control-programs\\mesh_projected.vert.spv",
+      "sha256": "87c1a7b95c2b802a7925e49bf4722143aaef86427a5fa40cf9864dc2ade74fdf"
+    },
+    {
+      "role": "identity-vertex",
+      "path": "control-programs\\mesh_projected_bindless.vert.spv",
+      "sha256": "53c0b6a6fb7893c4149b3cc735a8eadb2f924bd7e5ff0543ef02319dea2a9740"
+    },
+    {
+      "role": "identity-vertex",
+      "path": "control-programs\\mesh_projected_bindless_compute.vert.spv",
+      "sha256": "6796258654e79afe675dbbec163c5f3587a7f881b40375a35c47df9cd488fb55"
+    },
+    {
+      "role": "identity-vertex",
+      "path": "control-programs\\mesh_projected_compute.vert.spv",
+      "sha256": "1dd011c93adfc5a4fe2e7ea73843f7415a29f3e1fd2d8ffe9e85814a249ca8d2"
+    }
+  ],
+  "unchangedDefaultProgramsPerConfiguration": 675,
+  "cleanup": {
+    "files": 1233,
+    "logicalBytes": 650794034
+  },
+  "fixtureMetadataNote": "The legacy quadCapable field in the reused view harness is its feature-selection boolean; shadow-mode constructors explicitly do not request quad control",
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceZipBytes": 4793022,
+  "evidenceZipSha256": "42bee88c0e29553f9386cbf2ba25a2cb39d56b7fe27a8a9f493ad5eb4abad28b"
+}

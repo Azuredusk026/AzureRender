@@ -1,0 +1,194 @@
+[
+  {
+    "name": "unlit-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "unlit-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "unlit-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "pbr-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "pbr-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "pbr-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "npr-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "npr-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "npr-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "npr-document-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "npr-document-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "npr-document-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "eye-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "eye-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "eye-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "hair-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "hair-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "hair-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "transparent-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "transparent-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "transparent-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "multiply-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "multiply-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "multiply-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "outline-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "outline-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "outline-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "mixed-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "mixed-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "mixed-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "cutout-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "cutout-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "cutout-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "opacity-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "opacity-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "opacity-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "layers-reference",
+    "exitCode": 1
+  },
+  {
+    "name": "layers-scene",
+    "exitCode": 1
+  },
+  {
+    "name": "layers-linear",
+    "exitCode": 1
+  },
+  {
+    "name": "additive-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "additive-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "additive-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "multisample-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "multisample-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "multisample-linear",
+    "exitCode": 0
+  },
+  {
+    "name": "temporal-reference",
+    "exitCode": 0
+  },
+  {
+    "name": "temporal-scene",
+    "exitCode": 0
+  },
+  {
+    "name": "temporal-linear",
+    "exitCode": 0
+  }
+]

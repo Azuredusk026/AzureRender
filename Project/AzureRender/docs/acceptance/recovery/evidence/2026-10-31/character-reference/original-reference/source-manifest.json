@@ -1,0 +1,256 @@
+{
+  "source": "build\\runs\\20261024-074605-native-material-aa-reference-9eb92d",
+  "files": [
+    {
+      "file": "native-assets/captured-rim-policy.azurematerial",
+      "bytes": 146,
+      "sha256": "ce7baa8b50676f0a625656be9658a885864aa008bdc8cf0916fdd368ef322610"
+    },
+    {
+      "file": "native-assets/captured-rim-policy.azurematerial.azmeta",
+      "bytes": 102,
+      "sha256": "9713de607cbd28be933ca04d4538b4482da8aa060b27e728748008134fba4963"
+    },
+    {
+      "file": "native-assets/outline-converted-document.azurelevel",
+      "bytes": 14958,
+      "sha256": "a7e72bccd49dfd8fd62b03e74e3fc216cf7dda95109d010c717998c3516a6594"
+    },
+    {
+      "file": "native-assets/outline-converted-document.azurelevel.azmeta",
+      "bytes": 102,
+      "sha256": "6feddf84616d576a35790c18c1e6b5be57f0d65f6b704955ea8feac1e57d9243"
+    },
+    {
+      "file": "native-assets/outline-converted-embedded.azurelevel",
+      "bytes": 14958,
+      "sha256": "b55cc700ab0b1031e282bc84d7fc5815735b78fb77980c70b5152c15b8167204"
+    },
+    {
+      "file": "native-assets/outline-converted-embedded.azurelevel.azmeta",
+      "bytes": 102,
+      "sha256": "f8847ac54efa94264c3fb805e986b22890c35be46a5e195c0626fe8fe9cc542d"
+    },
+    {
+      "file": "native-assets/outline-document.azurelevel",
+      "bytes": 14955,
+      "sha256": "5a33e6e393502bbbfca63b8b4a2ebd39ff22567d36ab3ec8479714f07ee4d855"
+    },
+    {
+      "file": "native-assets/outline-document.azurelevel.azmeta",
+      "bytes": 102,
+      "sha256": "c4dd03e4a5931713c833ceff658e42896dc155c5272fd5adbf1f9a8105740f8b"
+    },
+    {
+      "file": "native-assets/outline-embedded.azurelevel",
+      "bytes": 14955,
+      "sha256": "234c1d227b0f7fb42f12c4e9ca3ce537ddb2337499dd6cfac9e49224604c3291"
+    },
+    {
+      "file": "native-assets/outline-embedded.azurelevel.azmeta",
+      "bytes": 102,
+      "sha256": "202389bea3cc4ad4895e9e0623e011dfb6466c85de9e6014bd69cf0995222c1c"
+    },
+    {
+      "file": "native-character/outline-converted.azurematerial",
+      "bytes": 30622,
+      "sha256": "9d90c9b740cdc9f0e65d75df12d127ebc0242dd64a63d527e37cddb44a399306"
+    },
+    {
+      "file": "native-character/outline-converted.azurematerial.azmeta",
+      "bytes": 380,
+      "sha256": "26fd5ac234c793a3ce2fa23180709940cd715ae83413271541415235069ac997"
+    },
+    {
+      "file": "native-character/outline-converted.glb",
+      "bytes": 118813340,
+      "sha256": "9246691bb5671d854029d9481e739e319d2fb756903c1d329a59b543271c1ed4"
+    },
+    {
+      "file": "native-character/outline-converted.glb.azmeta",
+      "bytes": 102,
+      "sha256": "097d1f280b5a2ae3984c0114d0a4108ce82411c106e796e2157ce0615b0ee96d"
+    },
+    {
+      "file": "native-character/outline-native.azurematerial",
+      "bytes": 30611,
+      "sha256": "8d6fbb8dfb7faec6995187b6db9a06f6280f297b3127e87d77862da5f5a3e7fb"
+    },
+    {
+      "file": "native-character/outline-native.azurematerial.azmeta",
+      "bytes": 380,
+      "sha256": "22c3f6bc25136db1cc1084553acd18b746f5520bc247b607405dd9d38791dfe5"
+    },
+    {
+      "file": "native-character/outline-native.glb",
+      "bytes": 118720676,
+      "sha256": "06cfdad665dba735899695b462c421fcf162d54add98dfb1d9cbb57c8cad6b9d"
+    },
+    {
+      "file": "native-character/outline-native.glb.azmeta",
+      "bytes": 102,
+      "sha256": "c3d442460110c5d71e88d92a7e4e407eb484d8dc08ddcd140a4828b85aeb7efd"
+    },
+    {
+      "file": "native-character/eye-textures/t11.dds",
+      "bytes": 1152,
+      "sha256": "c80280375910575b30a16c59325ecdeaa885d27a139759d6ef840691cf1deb27"
+    },
+    {
+      "file": "native-character/eye-textures/t11.dds.azmeta",
+      "bytes": 307,
+      "sha256": "4ecd91f080407d70dd12c2d791b169dcaca799c629d9f58650454fef488df53d"
+    },
+    {
+      "file": "native-character/eye-textures/t13.dds",
+      "bytes": 349700,
+      "sha256": "1b4f9b86067924b0a915e99395962aeb7fa865bdad1fb3d16987c4c0ca9e66a5"
+    },
+    {
+      "file": "native-character/eye-textures/t13.dds.azmeta",
+      "bytes": 315,
+      "sha256": "ddd58d859b8508021de621d63ba7cdff41ac5c029f51c39bcd48d41b3b8d0071"
+    },
+    {
+      "file": "native-character/eye-textures/t14.dds",
+      "bytes": 87556,
+      "sha256": "e66580ef2b098421bd47f9ec127500b12f7a288d4c624f257a36afd513e0769d"
+    },
+    {
+      "file": "native-character/eye-textures/t14.dds.azmeta",
+      "bytes": 313,
+      "sha256": "a95d023ee3e39a59dd678fe8e6b764e04da504393cd8e6e9c1df6ac514c3b212"
+    },
+    {
+      "file": "native-character/native-textures/t12.dds",
+      "bytes": 349700,
+      "sha256": "388813b5465244f3f07a2a383021ca470f60bbd08aa3d4d7daa801a8c09aeaa4"
+    },
+    {
+      "file": "native-character/native-textures/t12.dds.azmeta",
+      "bytes": 275,
+      "sha256": "26b33755b6147c0ccd111c34135d2e672f8bcc382a4543b0c7ad7d306aab0feb"
+    },
+    {
+      "file": "native-character/native-textures/t13.dds",
+      "bytes": 1152,
+      "sha256": "6f0bdcb7d4da88f997622f690688683380a208bf7bd929ef55522e5edadace05"
+    },
+    {
+      "file": "native-character/native-textures/t13.dds.azmeta",
+      "bytes": 275,
+      "sha256": "6685acf498b42fac7a5c835a7d05d825357dae277f9208703f6dd81cc0595878"
+    },
+    {
+      "file": "native-character/native-textures/t14.dds",
+      "bytes": 262272,
+      "sha256": "cb0c4a5bf2eb2dcf6b4abc7bec66fe1b7dc6400a79efc49811484b35d17993d4"
+    },
+    {
+      "file": "native-character/native-textures/t14.dds.azmeta",
+      "bytes": 275,
+      "sha256": "199e566d2b499f5f0e6e14d62d4bfbde1c0eb38ab117d0ec2bc07d475984bad5"
+    },
+    {
+      "file": "native-character/native-textures/t16.dds",
+      "bytes": 5592580,
+      "sha256": "4a382264f75c816ccf8fdf70c5e4bccfcf6dc5b31d74c1fcb92b29a9bd556643"
+    },
+    {
+      "file": "native-character/native-textures/t16.dds.azmeta",
+      "bytes": 276,
+      "sha256": "dacb8a62aa4be5365c908e59ad3b2c1986bb989f47a77cbd96334aca8cb5c85a"
+    },
+    {
+      "file": "native-character/native-textures/t17.dds",
+      "bytes": 5592580,
+      "sha256": "12df068935abc56ac44d86c08a5b342e748f85f5ef3b6d2048485064d8292995"
+    },
+    {
+      "file": "native-character/native-textures/t17.dds.azmeta",
+      "bytes": 276,
+      "sha256": "bac274600e7eb80e83ec42184de60626ca36ed5d8aa2e27d7ca16c14952f55fd"
+    },
+    {
+      "file": "native-character/native-textures/t18.dds",
+      "bytes": 5592580,
+      "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54"
+    },
+    {
+      "file": "native-character/native-textures/t18.dds.azmeta",
+      "bytes": 276,
+      "sha256": "424080184b3c22c286c90596bc4e843a0beedb5d5801be069539208b84a6a33d"
+    },
+    {
+      "file": "native-character/outline-textures/hair-mask.dds",
+      "bytes": 349700,
+      "sha256": "afcc37dc11b59e370e722f99c800702288d6cd0db4f1ee62c4bf9ab6ca0e453e"
+    },
+    {
+      "file": "native-character/outline-textures/hair-mask.dds.azmeta",
+      "bytes": 284,
+      "sha256": "df23ede96805aad8eca0abaa43e744bb2b3598c18819d3c5f7bc0351b4406966"
+    },
+    {
+      "file": "high/command.json.azmeta",
+      "bytes": 112,
+      "sha256": "dc74eb2701607309f206506c681e48ca6200fc50ade70c183702f4195a36e834"
+    },
+    {
+      "file": "high/player.log.azmeta",
+      "bytes": 112,
+      "sha256": "b6a2cb059e9340d6cd78551b0fc71fe6e9a8be990e14c74acdfcbf84d2f34cb4"
+    },
+    {
+      "file": "high/reference.azurelevel",
+      "bytes": 14984,
+      "sha256": "382ac9bedb99db6ae96e3edb3e5a8c42346f9d1efb5ae4c9e9513b3ffc09e39f"
+    },
+    {
+      "file": "high/reference.azurelevel.azmeta",
+      "bytes": 112,
+      "sha256": "7b37b045aef4b6d0961690a14ca216f6b58736f52aafd829caabd33791aea470"
+    },
+    {
+      "file": "high/reference.azurematerial",
+      "bytes": 30622,
+      "sha256": "a4a6531e533800570a84afb1b4d3318232beb471bd3e015be1ed1c874aeed48d"
+    },
+    {
+      "file": "high/reference.azurematerial.azmeta",
+      "bytes": 380,
+      "sha256": "5cdd276b99de23d4fe68fdcc2f37adc31eaa277156a0a02f2fd46d5a01c84470"
+    },
+    {
+      "file": "high/reference.azureproject",
+      "bytes": 743,
+      "sha256": "f15dbec40f7f277f2794647b90fcfad5e08b6bc8f9534699c4c9d71fd44795f5"
+    },
+    {
+      "file": "high/reference.azureproject.azmeta",
+      "bytes": 112,
+      "sha256": "1a234ac4ddd1d9f292893d2d552df832eed934036bda9be84565e5415e8b1bbf"
+    },
+    {
+      "file": "temporal/command.json.azmeta",
+      "bytes": 112,
+      "sha256": "8063c9447df449bdf8308d11ec1a62b5dd2a329398b402c51cc428354b5df232"
+    },
+    {
+      "file": "temporal/player.log.azmeta",
+      "bytes": 112,
+      "sha256": "1676379f22cfe45d8fd31faa2eb991cb7e2f807283c25789be26c18a176209f6"
+    },
+    {
+      "file": "temporal/reference.azurelevel",
+      "bytes": 14984,
+      "sha256": "a05dafd4245a262fd281eee978a87a82d5028d2014e2f2f3d072139f06cf1542"
+    },
+    {
+      "file": "temporal/reference.azurelevel.azmeta",
+      "bytes": 112,
+      "sha256": "791c516b2a55d707f9aedb7229d571acd5f642c7f76bb02d6802a257f8f706f7"
+    }
+  ],
+  "scope": "Exact project/asset input for user reference PNG; copied byte-for-byte."
+}

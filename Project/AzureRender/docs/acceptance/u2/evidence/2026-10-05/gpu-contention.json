@@ -1,0 +1,10 @@
+[
+  {
+    "Path": "\\\\azuredusk\\gpu engine(pid_11420_luid_0x00000000_0x000167d3_phys_0_eng_0_engtype_3d)\\utilization percentage",
+    "CookedValue": 8.963663409761955
+  },
+  {
+    "Path": "\\\\azuredusk\\gpu engine(pid_11420_luid_0x00000000_0x000167d3_phys_0_eng_4_engtype_copy)\\utilization percentage",
+    "CookedValue": 23.07649451544009
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "matcap-rgb-only",
+  "name": "眼睛材质契约候选",
+  "mounts": [
+    {
+      "name": "assets",
+      "path": "assets"
+    }
+  ],
+  "startupScene": "assets:/scene.azurelevel"
+}

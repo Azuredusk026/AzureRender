@@ -1,0 +1,40 @@
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime
+[stage] Copying runtime and project resources
+[stage] Validating packaged project
+[stage] Checking hashes and committing package
+............
+----------------------------------------------------------------------
+Ran 12 tests in 2.269s
+
+OK

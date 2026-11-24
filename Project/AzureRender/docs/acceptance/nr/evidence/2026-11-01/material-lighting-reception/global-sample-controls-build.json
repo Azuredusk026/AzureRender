@@ -1,0 +1,96 @@
+{
+  "status": "compiled-isolated-global-controls",
+  "variants": [
+    {
+      "mode": "original",
+      "shader": "unlit-depth-sample-experiment/original.spv",
+      "sha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-depth-sample-experiment\\original\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-depth-sample-experiment\\original.spv"
+      ]
+    },
+    {
+      "mode": "positive-color",
+      "shader": "global-sample-controls/positive-color.spv",
+      "sha256": "8e124e15c8cc9189d1d419968c204f43957a8fa88d308a3a86e676e07ea9225e",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\global-sample-controls\\positive-color\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\global-sample-controls\\positive-color.spv"
+      ]
+    },
+    {
+      "mode": "fine-all",
+      "shader": "global-sample-controls/fine-all.spv",
+      "sha256": "b5ec56c16aee5331727112cf7eb59c7ea582ec717a70ce3c314cba88916ccb12",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\global-sample-controls\\fine-all\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\global-sample-controls\\fine-all.spv"
+      ]
+    },
+    {
+      "mode": "coarse-all",
+      "shader": "global-sample-controls/coarse-all.spv",
+      "sha256": "36edd6dd850fb7b3ecd5a616d9e3e6eb8f7eaef8aba2e452daa2ae8d10ef5472",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\global-sample-controls\\coarse-all\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\global-sample-controls\\coarse-all.spv"
+      ]
+    },
+    {
+      "mode": "point-depth",
+      "shader": "unlit-depth-sample-experiment/point-depth.spv",
+      "sha256": "710f644d6d7252702dd00762b7972d991d3215fb9f92e739910dab1e0df2b340",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-depth-sample-experiment\\point-depth\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-depth-sample-experiment\\point-depth.spv"
+      ]
+    },
+    {
+      "mode": "precise-uv",
+      "shader": "unlit-clock-experiment/precise-uv.spv",
+      "sha256": "29e6ad915d94aea8509ad0f6315e0af66084bf6eac3636ab0a1234267a26da18",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-clock-experiment\\precise-uv\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-clock-experiment\\precise-uv.spv"
+      ]
+    }
+  ],
+  "scope": "Capture-only shader replacement, including a visible positive control; production files remain frozen."
+}

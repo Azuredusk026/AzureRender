@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "phase": "NR0-A1",
+  "baseCommit": "2e06375",
+  "status": "complete-cache-reuse-and-main-image-passed",
+  "contract": {
+    "format": "AZCACHE1",
+    "reuse": "Complete byte equality before staging allocation",
+    "missingOrCorrupt": "Existing owned staging and atomic winner publication",
+    "sourceValidation": "Current snapshot content hash"
+  },
+  "checks": {
+    "debug": {
+      "tests": 8,
+      "log": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-031533-complete-asset-cache-reuse-b836e7\\cpu-final-debug.log",
+        "bytes": 1197,
+        "sha256": "312301fee40c5ba5ccd23ddeffc3ec850b574c61678d49bada25716be167cf37"
+      }
+    },
+    "release": {
+      "tests": 8,
+      "log": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-031533-complete-asset-cache-reuse-b836e7\\cpu-final-release.log",
+        "bytes": 1201,
+        "sha256": "740607b67e96ad7337e8627d8e1fb52ca1f6331831da22352193cc3ee7eaddf0"
+      }
+    }
+  },
+  "concurrentRefreshesPerConfiguration": {
+    "warm": 3,
+    "cold": 3
+  },
+  "coverage": [
+    "Unchanged cache directory timestamp",
+    "Valid header with damaged payload",
+    "Shared delete handle",
+    "Owned staging cleanup",
+    "Foreign temporary preservation",
+    "Changed source rejection",
+    "Editor workflows",
+    "Model and audio assets"
+  ],
+  "actualMain": {
+    "status": "passed",
+    "playerSha256": "af5104500fe0f279e7547dcf372f162fa6f57f7dea8b497d49da592f9f398104",
+    "cacheFiles": 734,
+    "cacheBytes": 3267001743,
+    "processSeconds": 195.74167990000205,
+    "cacheRootTimestampUnchanged": true,
+    "imageSha256": "b2108cfa08cdd69c5f930422196f3f37b6766c7d78104bdedfe500d38853301a"
+  },
+  "shaderFreeze": {
+    "configurations": 2,
+    "programsPerConfiguration": 112,
+    "same": true
+  },
+  "source": {
+    "src/runtime/AssetDatabase.cpp": {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\src\\runtime\\AssetDatabase.cpp",
+      "bytes": 25610,
+      "sha256": "f43f2a1e0ebe22a632b4e73ba745575d1e3bf2ebec541937859e74cabc6c6a59"
+    },
+    "tests/AssetLevelTests.cpp": {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tests\\AssetLevelTests.cpp",
+      "bytes": 19945,
+      "sha256": "588fc7fab32165d149aff0ed80bc29aa2aabe4e32697ddca139fd4bb9884aa65"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-031533-complete-asset-cache-reuse-b836e7\\cache-red-release.log",
+      "bytes": 260,
+      "sha256": "a1020ad8f969498cb5d02b2c5a8e72bbae766336bf63d23dcef07128d81d317c"
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-031533-complete-asset-cache-reuse-b836e7\\cache-green-release.log",
+      "bytes": 833,
+      "sha256": "4c0e15a55f61b75713d1f315aacee880c6fc568b7cd9a6fd0708a52077f54c41"
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-031533-complete-asset-cache-reuse-b836e7\\verify_warm_main.py",
+      "bytes": 2328,
+      "sha256": "da0bda16b0609dabeb14bbb6b37f12b0cd6922acd3f66b06912ef54b8f698b18"
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-031533-complete-asset-cache-reuse-b836e7\\warm-main-result.json",
+      "bytes": 331,
+      "sha256": "2b1010b11a362359df38209c61d8d68ca7b1cb9e1df5fd518a8b02100f594281"
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-031533-complete-asset-cache-reuse-b836e7\\warm-main\\player.log",
+      "bytes": 14106,
+      "sha256": "618f1010881d7f2afd6d88ebb1d0eb62c49abee16d6a72eb5ba7fdc4c04f55a7"
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261026-031533-complete-asset-cache-reuse-b836e7\\warm-main\\command.json",
+      "bytes": 964,
+      "sha256": "603dc30dbe6ec548d94a03ddc12047a66dabac527d9cf2bf3b85d149c2b8b8ef"
+    }
+  ],
+  "limitations": [
+    "Complete-cache reuse is independent of cold-cache storage capacity",
+    "Full original appearance and formal frame budget remain gated"
+  ]
+}

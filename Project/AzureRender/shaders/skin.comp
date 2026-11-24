@@ -1,4 +1,10 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#define AZURE_MORPH_DATA_BINDING 3
+#define AZURE_MORPH_WEIGHT_BINDING 4
+#include "morph_data.glsl"
+#include "skin_position.glsl"
+#include "skinned_vertex_layout.glsl"
 
 layout(local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
 
@@ -18,9 +24,15 @@ layout(push_constant) uniform SkinningParameters {
     uint vertexCount;
     uint jointBase;
     vec2 morphWeights;
+    uint outputBase;
+    uint jointStride;
+    uint instanceCount;
+    uint morphTableBase;
+    uint morphWeightBase;
+    uint morphWeightStride;
 } parameters;
 
-const uint vertexWordCount = 26u;
+const uint vertexWordCount = 27u;
 
 float readFloat(uint wordIndex) {
     return uintBitsToFloat(sourceVertices.words[wordIndex]);
@@ -28,13 +40,12 @@ float readFloat(uint wordIndex) {
 
 void main() {
     uint vertexIndex = gl_GlobalInvocationID.x;
-    if (vertexIndex >= parameters.vertexCount) {
+    uint instanceIndex = gl_GlobalInvocationID.y;
+    if (vertexIndex >= parameters.vertexCount || instanceIndex >= parameters.instanceCount) {
         return;
     }
     uint base = vertexIndex * vertexWordCount;
-    for (uint word = 0u; word < vertexWordCount; ++word) {
-        skinnedVertices.words[base + word] = sourceVertices.words[base + word];
-    }
+    uint destination = (parameters.outputBase + instanceIndex * parameters.vertexCount + vertexIndex)*azureSkinnedVertexWordCount;
 
     vec3 position = vec3(
         readFloat(base + 0u),
@@ -67,30 +78,31 @@ void main() {
         readFloat(base + 23u),
         readFloat(base + 24u),
         readFloat(base + 25u));
-    vec3 morphedPosition = position
-        + morph0 * parameters.morphWeights.x
-        + morph1 * parameters.morphWeights.y;
+    vec3 morphedPosition = position;
+    vec3 morphedTangent = tangent.xyz;
+    if(!applyAssetMorph(parameters.morphTableBase,vertexIndex,
+        parameters.morphWeightBase+instanceIndex*parameters.morphWeightStride,morphedPosition,normal,morphedTangent))
+        morphedPosition+=morph0*parameters.morphWeights.x+morph1*parameters.morphWeights.y;
 
+    uint jointBase = parameters.jointBase + instanceIndex * parameters.jointStride;
     mat4 skinMatrix =
-        weights.x * jointData.matrices[parameters.jointBase + joints.x]
-        + weights.y * jointData.matrices[parameters.jointBase + joints.y]
-        + weights.z * jointData.matrices[parameters.jointBase + joints.z]
-        + weights.w * jointData.matrices[parameters.jointBase + joints.w];
+        weights.x * jointData.matrices[jointBase + joints.x]
+        + weights.y * jointData.matrices[jointBase + joints.y]
+        + weights.z * jointData.matrices[jointBase + joints.z]
+        + weights.w * jointData.matrices[jointBase + joints.w];
     vec3 skinnedPosition =
-        (skinMatrix * vec4(morphedPosition, 1.0)).xyz;
+        azureSkinPosition(skinMatrix,morphedPosition).xyz;
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
-    vec3 skinnedTangent = normalize(mat3(skinMatrix) * tangent.xyz);
+    vec3 skinnedTangent = normalize(mat3(skinMatrix) * morphedTangent);
 
-    skinnedVertices.words[base + 0u] = floatBitsToUint(skinnedPosition.x);
-    skinnedVertices.words[base + 1u] = floatBitsToUint(skinnedPosition.y);
-    skinnedVertices.words[base + 2u] = floatBitsToUint(skinnedPosition.z);
-    skinnedVertices.words[base + 3u] = floatBitsToUint(skinnedNormal.x);
-    skinnedVertices.words[base + 4u] = floatBitsToUint(skinnedNormal.y);
-    skinnedVertices.words[base + 5u] = floatBitsToUint(skinnedNormal.z);
-    skinnedVertices.words[base + 6u] = floatBitsToUint(skinnedTangent.x);
-    skinnedVertices.words[base + 7u] = floatBitsToUint(skinnedTangent.y);
-    skinnedVertices.words[base + 8u] = floatBitsToUint(skinnedTangent.z);
-    skinnedVertices.words[base + 20u] = floatBitsToUint(position.x);
-    skinnedVertices.words[base + 21u] = floatBitsToUint(position.y);
-    skinnedVertices.words[base + 22u] = floatBitsToUint(position.z);
+    skinnedVertices.words[destination + 0u] = floatBitsToUint(skinnedPosition.x);
+    skinnedVertices.words[destination + 1u] = floatBitsToUint(skinnedPosition.y);
+    skinnedVertices.words[destination + 2u] = floatBitsToUint(skinnedPosition.z);
+    skinnedVertices.words[destination + 3u] = floatBitsToUint(skinnedNormal.x);
+    skinnedVertices.words[destination + 4u] = floatBitsToUint(skinnedNormal.y);
+    skinnedVertices.words[destination + 5u] = floatBitsToUint(skinnedNormal.z);
+    skinnedVertices.words[destination + 6u] = floatBitsToUint(skinnedTangent.x);
+    skinnedVertices.words[destination + 7u] = floatBitsToUint(skinnedTangent.y);
+    skinnedVertices.words[destination + 8u] = floatBitsToUint(skinnedTangent.z);
+    skinnedVertices.words[destination + 9u] = sourceVertices.words[base + 9u];
 }

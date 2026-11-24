@@ -1,0 +1,64 @@
+{
+  "status": "projected-geometry-measured",
+  "scope": "CPU pose at 1/60 second. Projected geometry bounds include hidden surfaces and do not establish visible coverage or a pixel acceptance mask.",
+  "cases": [
+    {
+      "camera": "complete-scene",
+      "resolution": [
+        2560,
+        1440
+      ],
+      "irisGeometryBoundsXYXY": [
+        1444.2888119594131,
+        746.838319370727,
+        1454.6179597206778,
+        752.5152474339543
+      ],
+      "irisGeometryWidthPixels": 10.329147761264721,
+      "irisGeometryHeightPixels": 5.676928063227251,
+      "halfGroups": [
+        {
+          "group": "image-left-half",
+          "vertices": 105,
+          "widthPixels": 2.0607178116511022,
+          "heightPixels": 3.0510576674013237
+        },
+        {
+          "group": "image-right-half",
+          "vertices": 105,
+          "widthPixels": 2.822122089761251,
+          "heightPixels": 3.125342637119502
+        }
+      ]
+    },
+    {
+      "camera": "frontal",
+      "resolution": [
+        1536,
+        1536
+      ],
+      "irisGeometryBoundsXYXY": [
+        628.0813850555339,
+        709.6822264894125,
+        905.9239189014604,
+        824.4269089736674
+      ],
+      "irisGeometryWidthPixels": 277.8425338459265,
+      "irisGeometryHeightPixels": 114.7446824842549,
+      "halfGroups": [
+        {
+          "group": "image-left-half",
+          "vertices": 105,
+          "widthPixels": 63.17290852175188,
+          "heightPixels": 65.6562290845377
+        },
+        {
+          "group": "image-right-half",
+          "vertices": 105,
+          "widthPixels": 62.064009842630185,
+          "heightPixels": 65.80060825338387
+        }
+      ]
+    }
+  ]
+}

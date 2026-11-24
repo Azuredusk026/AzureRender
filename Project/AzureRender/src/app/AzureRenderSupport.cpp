@@ -1,6 +1,11 @@
+#include "runtime/EngineSettings.hpp"
+#include "rhi/PresentationPolicy.hpp"
 #include "AzureRenderApp.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#if AZURE_WITH_EDITOR
 #include "editor/ImGuiEditorLayer.hpp"
+#include "editor/EditorSession.hpp"
+#endif
 #include "extensions/ISceneRenderer.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "platform/SurfaceLifecycle.hpp"
@@ -121,13 +126,41 @@ bool AzureRenderApp::checkValidationLayerSupport() const {
         });
 }
 
-void AzureRenderApp::recreateSwapchain() {
-    if (!azurerender::waitForDrawableSurface(*frontend_)) return;
+bool AzureRenderApp::recreateSwapchain() {
+    const auto waitStart=frontend_->timeSeconds();
+    bool suspended=false;
+    const auto drawable=azurerender::waitForDrawableSurface(*frontend_,[this,&suspended] {
+        suspended=true;
+        if(validation_)validation_->pump(gameplayFrame_);
+#if AZURE_WITH_EDITOR
+        if(runOptions_.editorSession) {
+            runOptions_.editorSession->pollTasks();
+            if(runOptions_.editorSession->closeReady())return false;
+        }
+#endif
+        return true;
+    });
+    if(suspended) {
+        const auto pausedSeconds=std::max(0.0,frontend_->timeSeconds()-waitStart);
+        lastRotationTime_+=pausedSeconds;
+        pausedTimeOffset_+=pausedSeconds;
+    }
+    if(!drawable)return false;
 
+#if AZURE_WITH_EDITOR
+    discardEditorSceneReload(true);
+#endif
     vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(swapchain recreate)");
+    graphicsCompleted_=graphicsSubmission_;
+    releasePreparedRenderer();
+#if AZURE_WITH_EDITOR
+    invalidatePreviews();graphicsCompleted_=graphicsSubmission_;
+    if(renderViews_)renderViews_->complete(graphicsCompleted_);
     if (editorLayer_ != nullptr) {
         editorLayer_->shutdownVulkan();
     }
+#endif
+    gameUi_.reset();gameUiRenderer_.reset();gameUiPath_.clear();
     cleanupSwapchain();
     createSwapchain();
     createImageViews();
@@ -144,6 +177,8 @@ void AzureRenderApp::recreateSwapchain() {
     createEditorUiFramebuffers();
     createPostProcessDescriptorSets();
     createSwapchainSemaphores();
+    createTemporalResources();
+    createMultisampleResources();
     if (sceneRenderer_ != nullptr) {
         azurerender::RenderContext sceneContext;
         buildRenderContext(sceneContext);
@@ -153,6 +188,7 @@ void AzureRenderApp::recreateSwapchain() {
     azurerender::RuntimeDiagnostics::instance().print(
         "surface", "Swapchain recreated: " + std::to_string(swapchainExtent_.width)
             + "x" + std::to_string(swapchainExtent_.height));
+    return true;
 }
 
 void AzureRenderApp::recreateEditorViewportResources() {
@@ -185,11 +221,16 @@ void AzureRenderApp::recreateEditorViewportResources() {
             VK_TRUE,
             UINT64_MAX),
         "vkWaitForFences(editor viewport resize)");
+    graphicsCompleted_=graphicsSubmission_;
+    releasePreparedRenderer();
+#if AZURE_WITH_EDITOR
     if (editorLayer_ != nullptr) {
         editorLayer_->clearViewportImages();
     }
+#endif
     cleanupEditorViewportResources(false);
     renderExtent_ = newExtent;
+    updateSceneRenderExtent();
     createEditorViewportResources();
     createSceneColorResources();
     createDepthResources();
@@ -197,11 +238,16 @@ void AzureRenderApp::recreateEditorViewportResources() {
     createFramebuffers();
     createPostProcessFramebuffers();
     createPostProcessDescriptorSets();
+    createTemporalResources();
+    createMultisampleResources();
+    if(sceneRenderer_){azurerender::RenderContext context;buildRenderContext(context);sceneRenderer_->onSwapchainRecreate(context);}
+#if AZURE_WITH_EDITOR
     editorLayer_->setViewportImages(
         editorViewportSampler_,
         editorViewportImageViews_,
         renderExtent_.width,
         renderExtent_.height);
+#endif
     azurerender::RuntimeDiagnostics::instance().print(
         "editor", "Editor viewport resources rebuilt: "
             + std::to_string(renderExtent_.width) + 'x'
@@ -215,6 +261,9 @@ void AzureRenderApp::cleanupEditorViewportResources(
         postProcessDescriptorPool_ = VK_NULL_HANDLE;
     }
     postProcessDescriptorSets_.clear();
+    colorGradingLut_.reset();colorGradingLutKey_.clear();
+    for(auto& buffer:groundGridUniforms_)gpuAllocator_.destroyBuffer(buffer);
+    groundGridUniforms_.clear();
 
     for (const auto framebuffer : swapchainFramebuffers_) {
         vkDestroyFramebuffer(device_, framebuffer, nullptr);
@@ -224,6 +273,10 @@ void AzureRenderApp::cleanupEditorViewportResources(
         vkDestroyFramebuffer(device_, framebuffer, nullptr);
     }
     postProcessFramebuffers_.clear();
+    spatialAntiAliasing_.clear();
+    temporalReconstruction_.reset();
+    sharedMotion_.reset();
+    sceneMultisampling_.reset();
 
     const auto destroyImages = [this](
                                    auto& views,
@@ -245,6 +298,7 @@ void AzureRenderApp::cleanupEditorViewportResources(
         sceneColorImages_);
     destroyImages(depthImageViews_, depthImages_);
     destroyImages(normalImageViews_, normalImages_);
+    destroyImages(displayMaskImageViews_,displayMaskImages_);
 
     if (destroySampler && editorViewportSampler_ != VK_NULL_HANDLE) {
         vkDestroySampler(device_, editorViewportSampler_, nullptr);
@@ -335,11 +389,8 @@ VkSurfaceFormatKHR AzureRenderApp::chooseSurfaceFormat(
 }
 
 VkPresentModeKHR AzureRenderApp::choosePresentMode(
-    const std::vector<VkPresentModeKHR>& presentModes) {
-    return std::find(presentModes.begin(), presentModes.end(), VK_PRESENT_MODE_MAILBOX_KHR)
-            != presentModes.end()
-        ? VK_PRESENT_MODE_MAILBOX_KHR
-        : VK_PRESENT_MODE_FIFO_KHR;
+    const std::vector<VkPresentModeKHR>& presentModes, bool synchronized) {
+    return azurerender::rhi::selectPresentMode(presentModes, synchronized);
 }
 
 VkExtent2D AzureRenderApp::chooseExtent(
@@ -686,7 +737,7 @@ VkImageView AzureRenderApp::createImageView(
 }
 
 std::vector<char> AzureRenderApp::readBinaryFile(const std::string& path) {
-    std::ifstream file(path, std::ios::ate | std::ios::binary);
+    std::ifstream file(std::filesystem::u8path(path), std::ios::ate | std::ios::binary);
     if (!file) {
         throw std::runtime_error("Unable to open shader: " + path);
     }
@@ -741,4 +792,13 @@ void AzureRenderApp::populateDebugMessengerCreateInfo(
         VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
         | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
     createInfo.pfnUserCallback = debugCallback;
+}
+
+void AzureRenderApp::updateSceneRenderExtent() {
+    const auto settings=engineSettings_?azurerender::resolveRenderSettings(*engineSettings_,renderSettings_):renderSettings_;
+    const unsigned scale=settings.antiAliasing==2?2:1;
+    VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);
+    if(renderExtent_.width>properties.limits.maxImageDimension2D/scale || renderExtent_.height>properties.limits.maxImageDimension2D/scale)
+        throw std::runtime_error("Supersampling extent exceeds device image limit");
+    sceneRenderExtent_={renderExtent_.width*scale,renderExtent_.height*scale};
 }

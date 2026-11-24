@@ -1,0 +1,4414 @@
+{
+  "status": "inspected-tail",
+  "draws": [
+    {
+      "event": 26335,
+      "indices": 96,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7710",
+          "width": 4,
+          "height": 4,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7723",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26342,
+      "indices": 96,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7766",
+          "width": 64,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7723",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26349,
+      "indices": 96,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7710",
+          "width": 4,
+          "height": 4,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7723",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26359,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7827",
+          "width": 32,
+          "height": 1024,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7840",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26366,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7863",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7876",
+          "width": 128,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26373,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7863",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7876",
+          "width": 128,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26380,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7909",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::368",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26387,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7863",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7932",
+          "width": 128,
+          "height": 128,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26394,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7863",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7876",
+          "width": 128,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26401,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7863",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7876",
+          "width": 128,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26408,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7863",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7876",
+          "width": 128,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26415,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7985",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::368",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26422,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7827",
+          "width": 32,
+          "height": 1024,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7840",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26429,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7863",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7876",
+          "width": 128,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26436,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7863",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7876",
+          "width": 128,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26443,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7985",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::368",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26450,
+      "indices": 6,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8048",
+          "width": 32,
+          "height": 1024,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7840",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26458,
+      "indices": 144,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8048",
+          "width": 32,
+          "height": 1024,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::368",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26466,
+      "indices": 2160,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        }
+      ]
+    },
+    {
+      "event": 26473,
+      "indices": 2160,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8106",
+          "width": 4,
+          "height": 4,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::368",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26483,
+      "indices": 2160,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8159",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8172",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8185",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26490,
+      "indices": 51,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::7710",
+          "width": 4,
+          "height": 4,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::368",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8213",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26497,
+      "indices": 90,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8241",
+          "width": 1024,
+          "height": 512,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::368",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26505,
+      "indices": 900,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8269",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8282",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26513,
+      "indices": 1137,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8310",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8323",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8336",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26520,
+      "indices": 1137,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8364",
+          "width": 128,
+          "height": 128,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8323",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8336",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26528,
+      "indices": 36,
+      "instances": 1,
+      "pixelShaderSha256": "f68789180f6bb6f32cd40301afdf1a7db08496e9d48f25189e1a372ce0e1b98c",
+      "program": "mesh_fog_bindless.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 35,
+          "name": "viewFogVolume",
+          "resource": "ResourceId::9076",
+          "width": 117,
+          "height": 90,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8336",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        }
+      ]
+    },
+    {
+      "event": 26536,
+      "indices": 18,
+      "instances": 1,
+      "pixelShaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "program": "mesh_object_bindless_clipmap_field.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 9,
+          "name": "mainShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 19,
+          "name": "opaqueSceneColor",
+          "resource": "ResourceId::9834",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 23,
+          "name": "reflectionProbeTexture",
+          "resource": "ResourceId::533",
+          "width": 576,
+          "height": 576,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 29,
+          "name": "objectShadowDepth",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::498",
+          "width": 512,
+          "height": 256,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::625",
+          "width": 64,
+          "height": 10,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8402",
+          "width": 512,
+          "height": 512,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::433",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::446",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::381",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8415",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::394",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8336",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::550",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::562",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::576",
+          "width": 128,
+          "height": 64,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 32,
+          "name": "irradianceClipmapTextures",
+          "resource": "ResourceId::588",
+          "width": 128,
+          "height": 192,
+          "format": "R8G8B8A8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26544,
+      "indices": 36,
+      "instances": 1,
+      "pixelShaderSha256": "f68789180f6bb6f32cd40301afdf1a7db08496e9d48f25189e1a372ce0e1b98c",
+      "program": "mesh_fog_bindless.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 35,
+          "name": "viewFogVolume",
+          "resource": "ResourceId::9076",
+          "width": 117,
+          "height": 90,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8438",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB"
+        }
+      ]
+    },
+    {
+      "event": 26551,
+      "indices": 72,
+      "instances": 1,
+      "pixelShaderSha256": "f68789180f6bb6f32cd40301afdf1a7db08496e9d48f25189e1a372ce0e1b98c",
+      "program": "mesh_fog_bindless.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 18,
+          "name": "overlaySceneDepth",
+          "resource": "ResourceId::9837",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 35,
+          "name": "viewFogVolume",
+          "resource": "ResourceId::9076",
+          "width": 117,
+          "height": 90,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 1,
+          "name": "textureArray",
+          "resource": "ResourceId::8461",
+          "width": 64,
+          "height": 64,
+          "format": "R8G8B8A8_SRGB"
+        }
+      ]
+    },
+    {
+      "event": 26570,
+      "indices": 3,
+      "instances": 1,
+      "pixelShaderSha256": "20410105e596c990da8d11de6388b523a7b95c5c34d8a6c82c0a4a2a6acbde75",
+      "program": "inner_outline.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::214",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 0,
+          "name": "normalTexture",
+          "resource": "ResourceId::194",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 1,
+          "name": "depthTexture",
+          "resource": "ResourceId::185",
+          "width": 2560,
+          "height": 1440,
+          "format": "D32"
+        },
+        {
+          "slot": 2,
+          "name": "shadowTexture",
+          "resource": "ResourceId::147",
+          "width": 4096,
+          "height": 4096,
+          "format": "D32"
+        },
+        {
+          "slot": 3,
+          "name": "sceneColorTexture",
+          "resource": "ResourceId::176",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        },
+        {
+          "slot": 5,
+          "name": "colorGradingLutTexture",
+          "resource": "ResourceId::268",
+          "width": 1024,
+          "height": 32,
+          "format": "R32G32B32A32_FLOAT"
+        },
+        {
+          "slot": 6,
+          "name": "displayMaskTexture",
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        },
+        {
+          "slot": 7,
+          "name": "historyDisplayMask0",
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        },
+        {
+          "slot": 8,
+          "name": "historyDisplayMask1",
+          "resource": "ResourceId::197",
+          "width": 2560,
+          "height": 1440,
+          "format": "R8_UNORM"
+        }
+      ]
+    },
+    {
+      "event": 26579,
+      "indices": 3,
+      "instances": 1,
+      "pixelShaderSha256": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+      "program": "spatial_antialiasing.frag.spv",
+      "targets": [
+        {
+          "resource": "ResourceId::155",
+          "width": 2560,
+          "height": 1440,
+          "format": "B8G8R8A8_SRGB"
+        }
+      ],
+      "inputs": [
+        {
+          "slot": 0,
+          "name": "linearSource",
+          "resource": "ResourceId::214",
+          "width": 2560,
+          "height": 1440,
+          "format": "R16G16B16A16_FLOAT"
+        }
+      ]
+    }
+  ],
+  "drawCount": 2741
+}

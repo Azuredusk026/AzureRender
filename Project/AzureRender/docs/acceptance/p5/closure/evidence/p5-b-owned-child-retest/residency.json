@@ -1,0 +1,1150 @@
+{
+  "diagnosticOnly": true,
+  "command": [
+    "python",
+    "-c",
+    "import time; x=bytearray(8388608); time.sleep(1.2)"
+  ],
+  "exitCode": 0,
+  "errors": [],
+  "observations": [
+    {
+      "peak": 2138112,
+      "working": 2138112,
+      "privateBytes": 409600,
+      "seconds": 0.014999999999417923
+    },
+    {
+      "peak": 15626240,
+      "working": 15626240,
+      "privateBytes": 10543104,
+      "seconds": 0.06199999999989814
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.10899999999946886
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.17199999999957072
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.2179999999998472
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.2649999999994179
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.31199999999989814
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.375
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.4219999999995707
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.4679999999998472
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.5149999999994179
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.5779999999995198
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.625
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.6719999999995707
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.7179999999998472
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.7809999999999491
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.8279999999995198
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.875
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.9219999999995707
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 0.9839999999994689
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 1.030999999999949
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 1.0779999999995198
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 1.139999999999418
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 1.1869999999998981
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 1.2339999999994689
+    },
+    {
+      "peak": 25133056,
+      "working": 25133056,
+      "privateBytes": 20615168,
+      "seconds": 1.280999999999949
+    }
+  ],
+  "snapshots": [
+    {
+      "monotonicSeconds": 8088.968,
+      "pid": 3088,
+      "pageSize": 4096,
+      "residentPages": 512,
+      "racedPages": 4,
+      "regions": [
+        {
+          "allocation": 2147352576,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 4096
+        },
+        {
+          "allocation": 831342510080,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 12288,
+          "queriedRegionBytes": 12288
+        },
+        {
+          "allocation": 831344607232,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 2423564206080,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 4096
+        },
+        {
+          "allocation": 2423564533760,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 12288
+        },
+        {
+          "allocation": 2423564599296,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 2423564664832,
+          "kind": 262144,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\C_936.NLS",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 200704
+        },
+        {
+          "allocation": 2423564926976,
+          "kind": 262144,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\l_intl.nls",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 12288
+        },
+        {
+          "allocation": 2423564992512,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 24576,
+          "queriedRegionBytes": 32768
+        },
+        {
+          "allocation": 2423565058048,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 24576,
+          "queriedRegionBytes": 32768
+        },
+        {
+          "allocation": 2423565123584,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 2423565189120,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 2423566303232,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 16384,
+          "queriedRegionBytes": 57344
+        },
+        {
+          "allocation": 140699495366656,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+          "residentBytes": 20480,
+          "queriedRegionBytes": 98304
+        },
+        {
+          "allocation": 140706096742400,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "residentBytes": 1949696,
+          "queriedRegionBytes": 2531328
+        }
+      ],
+      "diagnosticOnly": true
+    },
+    {
+      "monotonicSeconds": 8089.984,
+      "pid": 3088,
+      "pageSize": 4096,
+      "residentPages": 6128,
+      "racedPages": 0,
+      "regions": [
+        {
+          "allocation": 2147352576,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 4096
+        },
+        {
+          "allocation": 2147405824,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 4096
+        },
+        {
+          "allocation": 831342510080,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 36864,
+          "queriedRegionBytes": 36864
+        },
+        {
+          "allocation": 831344607232,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 20480,
+          "queriedRegionBytes": 20480
+        },
+        {
+          "allocation": 831346638848,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 12288,
+          "queriedRegionBytes": 12288
+        },
+        {
+          "allocation": 831348670464,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 831350702080,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 2423564206080,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 4096
+        },
+        {
+          "allocation": 2423564271616,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 65536
+        },
+        {
+          "allocation": 2423564337152,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 122880,
+          "queriedRegionBytes": 131072
+        },
+        {
+          "allocation": 2423564468224,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 16384
+        },
+        {
+          "allocation": 2423564533760,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 12288,
+          "queriedRegionBytes": 12288
+        },
+        {
+          "allocation": 2423564599296,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 2423564664832,
+          "kind": 262144,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\C_936.NLS",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 200704
+        },
+        {
+          "allocation": 2423564926976,
+          "kind": 262144,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\l_intl.nls",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 12288
+        },
+        {
+          "allocation": 2423564992512,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 28672,
+          "queriedRegionBytes": 32768
+        },
+        {
+          "allocation": 2423565058048,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 28672,
+          "queriedRegionBytes": 32768
+        },
+        {
+          "allocation": 2423565123584,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 2423565189120,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 2423565254656,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 12288,
+          "queriedRegionBytes": 12288
+        },
+        {
+          "allocation": 2423566106624,
+          "kind": 262144,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\l_intl.nls",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 12288
+        },
+        {
+          "allocation": 2423566172160,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 12288
+        },
+        {
+          "allocation": 2423566237696,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 4096,
+          "queriedRegionBytes": 16384
+        },
+        {
+          "allocation": 2423566303232,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 1036288,
+          "queriedRegionBytes": 1044480
+        },
+        {
+          "allocation": 2423567351808,
+          "kind": 262144,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\locale.nls",
+          "residentBytes": 90112,
+          "queriedRegionBytes": 864256
+        },
+        {
+          "allocation": 2423568269312,
+          "kind": 262144,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\C_936.NLS",
+          "residentBytes": 49152,
+          "queriedRegionBytes": 200704
+        },
+        {
+          "allocation": 2423568531456,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 8192
+        },
+        {
+          "allocation": 2423569645568,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 40960,
+          "queriedRegionBytes": 40960
+        },
+        {
+          "allocation": 2423569711104,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 897024,
+          "queriedRegionBytes": 1048576
+        },
+        {
+          "allocation": 2423570759680,
+          "kind": 262144,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\zh-CN\\KernelBase.dll.mui",
+          "residentBytes": 16384,
+          "queriedRegionBytes": 708608
+        },
+        {
+          "allocation": 2423571480576,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 1048576,
+          "queriedRegionBytes": 1048576
+        },
+        {
+          "allocation": 2423572529152,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 1048576,
+          "queriedRegionBytes": 1048576
+        },
+        {
+          "allocation": 2423573577728,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 987136,
+          "queriedRegionBytes": 1015808
+        },
+        {
+          "allocation": 2423574626304,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 1048576,
+          "queriedRegionBytes": 1048576
+        },
+        {
+          "allocation": 2423575674880,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 1048576,
+          "queriedRegionBytes": 1048576
+        },
+        {
+          "allocation": 2423576723456,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 966656,
+          "queriedRegionBytes": 1048576
+        },
+        {
+          "allocation": 2423577772032,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 376832,
+          "queriedRegionBytes": 380928
+        },
+        {
+          "allocation": 2423579869184,
+          "kind": 262144,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\zh-CN\\kernel32.dll.mui",
+          "residentBytes": 12288,
+          "queriedRegionBytes": 409600
+        },
+        {
+          "allocation": 2423580327936,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 61440,
+          "queriedRegionBytes": 1048576
+        },
+        {
+          "allocation": 2423581376512,
+          "kind": 131072,
+          "path": "",
+          "residentBytes": 8392704,
+          "queriedRegionBytes": 8392704
+        },
+        {
+          "allocation": 140688040198144,
+          "kind": 262144,
+          "path": "",
+          "residentBytes": 8192,
+          "queriedRegionBytes": 20480
+        },
+        {
+          "allocation": 140699495366656,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+          "residentBytes": 24576,
+          "queriedRegionBytes": 102400
+        },
+        {
+          "allocation": 140704596885504,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\vcruntime140.dll",
+          "residentBytes": 61440,
+          "queriedRegionBytes": 114688
+        },
+        {
+          "allocation": 140705915863040,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\version.dll",
+          "residentBytes": 32768,
+          "queriedRegionBytes": 45056
+        },
+        {
+          "allocation": 140706046935040,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\bcrypt.dll",
+          "residentBytes": 94208,
+          "queriedRegionBytes": 155648
+        },
+        {
+          "allocation": 140706050342912,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\bcryptprimitives.dll",
+          "residentBytes": 110592,
+          "queriedRegionBytes": 475136
+        },
+        {
+          "allocation": 140706053226496,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+          "residentBytes": 499712,
+          "queriedRegionBytes": 1294336
+        },
+        {
+          "allocation": 140706054602752,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+          "residentBytes": 868352,
+          "queriedRegionBytes": 4034560
+        },
+        {
+          "allocation": 140706060894208,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ws2_32.dll",
+          "residentBytes": 90112,
+          "queriedRegionBytes": 331776
+        },
+        {
+          "allocation": 140706072166400,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\advapi32.dll",
+          "residentBytes": 167936,
+          "queriedRegionBytes": 630784
+        },
+        {
+          "allocation": 140706083700736,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+          "residentBytes": 290816,
+          "queriedRegionBytes": 765952
+        },
+        {
+          "allocation": 140706086387712,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\rpcrt4.dll",
+          "residentBytes": 98304,
+          "queriedRegionBytes": 471040
+        },
+        {
+          "allocation": 140706093268992,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\sechost.dll",
+          "residentBytes": 126976,
+          "queriedRegionBytes": 606208
+        },
+        {
+          "allocation": 140706095235072,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msvcrt.dll",
+          "residentBytes": 180224,
+          "queriedRegionBytes": 675840
+        },
+        {
+          "allocation": 140706096742400,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ntdll.dll",
+          "residentBytes": 1949696,
+          "queriedRegionBytes": 2531328
+        },
+        {
+          "allocation": 140734261886976,
+          "kind": 16777216,
+          "path": "\\Device\\HarddiskVolume3\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+          "residentBytes": 2998272,
+          "queriedRegionBytes": 5652480
+        }
+      ],
+      "diagnosticOnly": true
+    }
+  ],
+  "coverage": "resident regions, process counters; allocation call stacks require separate tracing",
+  "residentChange": {
+    "byClass": {
+      "privateUnattributed": 17031168,
+      "mapped": 348160,
+      "image": 5623808
+    },
+    "regions": [
+      {
+        "allocation": 2423581376512,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 8392704,
+        "changeBytes": 8392704,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 140734261886976,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 2998272,
+        "changeBytes": 2998272,
+        "category": "image"
+      },
+      {
+        "allocation": 2423571480576,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 1048576,
+        "changeBytes": 1048576,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 2423572529152,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 1048576,
+        "changeBytes": 1048576,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 2423574626304,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 1048576,
+        "changeBytes": 1048576,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 2423575674880,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 1048576,
+        "changeBytes": 1048576,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 2423566303232,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 16384,
+        "afterResidentBytes": 1036288,
+        "changeBytes": 1019904,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 2423573577728,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 987136,
+        "changeBytes": 987136,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 2423576723456,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 966656,
+        "changeBytes": 966656,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 2423569711104,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 897024,
+        "changeBytes": 897024,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 140706054602752,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 868352,
+        "changeBytes": 868352,
+        "category": "image"
+      },
+      {
+        "allocation": 140706053226496,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 499712,
+        "changeBytes": 499712,
+        "category": "image"
+      },
+      {
+        "allocation": 2423577772032,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 376832,
+        "changeBytes": 376832,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 140706083700736,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\kernel32.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 290816,
+        "changeBytes": 290816,
+        "category": "image"
+      },
+      {
+        "allocation": 140706095235072,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msvcrt.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 180224,
+        "changeBytes": 180224,
+        "category": "image"
+      },
+      {
+        "allocation": 140706072166400,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\advapi32.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 167936,
+        "changeBytes": 167936,
+        "category": "image"
+      },
+      {
+        "allocation": 140706093268992,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\sechost.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 126976,
+        "changeBytes": 126976,
+        "category": "image"
+      },
+      {
+        "allocation": 2423564337152,
+        "kind": 262144,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 122880,
+        "changeBytes": 122880,
+        "category": "mapped"
+      },
+      {
+        "allocation": 140706050342912,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\bcryptprimitives.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 110592,
+        "changeBytes": 110592,
+        "category": "image"
+      },
+      {
+        "allocation": 140706086387712,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\rpcrt4.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 98304,
+        "changeBytes": 98304,
+        "category": "image"
+      },
+      {
+        "allocation": 140706046935040,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\bcrypt.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 94208,
+        "changeBytes": 94208,
+        "category": "image"
+      },
+      {
+        "allocation": 2423567351808,
+        "kind": 262144,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\locale.nls",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 90112,
+        "changeBytes": 90112,
+        "category": "mapped"
+      },
+      {
+        "allocation": 140706060894208,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ws2_32.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 90112,
+        "changeBytes": 90112,
+        "category": "image"
+      },
+      {
+        "allocation": 2423580327936,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 61440,
+        "changeBytes": 61440,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 140704596885504,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\vcruntime140.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 61440,
+        "changeBytes": 61440,
+        "category": "image"
+      },
+      {
+        "allocation": 2423568269312,
+        "kind": 262144,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\C_936.NLS",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 49152,
+        "changeBytes": 49152,
+        "category": "mapped"
+      },
+      {
+        "allocation": 2423569645568,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 40960,
+        "changeBytes": 40960,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 140705915863040,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\version.dll",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 32768,
+        "changeBytes": 32768,
+        "category": "image"
+      },
+      {
+        "allocation": 831342510080,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 12288,
+        "afterResidentBytes": 36864,
+        "changeBytes": 24576,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 2423570759680,
+        "kind": 262144,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\zh-CN\\KernelBase.dll.mui",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 16384,
+        "changeBytes": 16384,
+        "category": "mapped"
+      },
+      {
+        "allocation": 831344607232,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 8192,
+        "afterResidentBytes": 20480,
+        "changeBytes": 12288,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 831346638848,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 12288,
+        "changeBytes": 12288,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 2423565254656,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 12288,
+        "changeBytes": 12288,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 2423579869184,
+        "kind": 262144,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\zh-CN\\kernel32.dll.mui",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 12288,
+        "changeBytes": 12288,
+        "category": "mapped"
+      },
+      {
+        "allocation": 831348670464,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 8192,
+        "changeBytes": 8192,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 831350702080,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 8192,
+        "changeBytes": 8192,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 2423564468224,
+        "kind": 262144,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 8192,
+        "changeBytes": 8192,
+        "category": "mapped"
+      },
+      {
+        "allocation": 2423566106624,
+        "kind": 262144,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\l_intl.nls",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 8192,
+        "changeBytes": 8192,
+        "category": "mapped"
+      },
+      {
+        "allocation": 2423566172160,
+        "kind": 262144,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 8192,
+        "changeBytes": 8192,
+        "category": "mapped"
+      },
+      {
+        "allocation": 2423568531456,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 8192,
+        "changeBytes": 8192,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 140688040198144,
+        "kind": 262144,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 8192,
+        "changeBytes": 8192,
+        "category": "mapped"
+      },
+      {
+        "allocation": 2147405824,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 4096,
+        "changeBytes": 4096,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 2423564271616,
+        "kind": 262144,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 4096,
+        "changeBytes": 4096,
+        "category": "mapped"
+      },
+      {
+        "allocation": 2423564533760,
+        "kind": 262144,
+        "path": "",
+        "beforeResidentBytes": 8192,
+        "afterResidentBytes": 12288,
+        "changeBytes": 4096,
+        "category": "mapped"
+      },
+      {
+        "allocation": 2423564664832,
+        "kind": 262144,
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\C_936.NLS",
+        "beforeResidentBytes": 4096,
+        "afterResidentBytes": 8192,
+        "changeBytes": 4096,
+        "category": "mapped"
+      },
+      {
+        "allocation": 2423564992512,
+        "kind": 262144,
+        "path": "",
+        "beforeResidentBytes": 24576,
+        "afterResidentBytes": 28672,
+        "changeBytes": 4096,
+        "category": "mapped"
+      },
+      {
+        "allocation": 2423565058048,
+        "kind": 262144,
+        "path": "",
+        "beforeResidentBytes": 24576,
+        "afterResidentBytes": 28672,
+        "changeBytes": 4096,
+        "category": "mapped"
+      },
+      {
+        "allocation": 2423565123584,
+        "kind": 262144,
+        "path": "",
+        "beforeResidentBytes": 4096,
+        "afterResidentBytes": 8192,
+        "changeBytes": 4096,
+        "category": "mapped"
+      },
+      {
+        "allocation": 2423566237696,
+        "kind": 131072,
+        "path": "",
+        "beforeResidentBytes": 0,
+        "afterResidentBytes": 4096,
+        "changeBytes": 4096,
+        "category": "privateUnattributed"
+      },
+      {
+        "allocation": 140699495366656,
+        "kind": 16777216,
+        "path": "\\Device\\HarddiskVolume3\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "beforeResidentBytes": 20480,
+        "afterResidentBytes": 24576,
+        "changeBytes": 4096,
+        "category": "image"
+      }
+    ],
+    "netResidentChangeBytes": 23003136,
+    "allocationOwnershipProven": false,
+    "allocationReleaseProof": []
+  }
+}

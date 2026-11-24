@@ -1,0 +1,20 @@
+diff --git a/code/CMakeLists.txt b/code/CMakeLists.txt
+--- a/code/CMakeLists.txt
++++ b/code/CMakeLists.txt
+@@ -1133,8 +1133,8 @@
+ ENDIF()
+ 
+ # polyclipping
+ if(1)
+-  find_package(polyclipping CONFIG REQUIRED)
++  # IFC importer is disabled in the supported format build.
+ ELSE()
+   SET( Clipper_SRCS
+     ../contrib/clipper/clipper.hpp
+@@ -1322,6 +1322,5 @@
+   TARGET_LINK_LIBRARIES(assimp
+       PRIVATE
+-      polyclipping::polyclipping
+       ${OPENDDL_PARSER_LIBRARIES}
+       poly2tri::poly2tri
+       $<IF:$<TARGET_EXISTS:MINIZIP::minizip>,MINIZIP::minizip,MINIZIP::minizipstatic>

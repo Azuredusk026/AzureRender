@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "status": "running",
+  "playerSha256": "74f7ada736a38e84a6a51f4600dbd3efe78ea01d1ea9168e12b5a484afb5111a",
+  "linearErrorBudget": 0.008,
+  "captures": [
+    {
+      "name": "ambient",
+      "maximumLinearError": 0.0014759710150109018,
+      "expected": [
+        0.0401957646565035,
+        0.019093952638690743,
+        0.4164090998331266
+      ],
+      "imageSha256": "dc4103d7eea69e935b8aaf023b8efb71003ef8f16b5a48729b2d07164ae8cc1f"
+    },
+    {
+      "name": "main",
+      "maximumLinearError": 0.0011431040724743102,
+      "expected": [
+        0.0643132234504056,
+        0.015275162110952593,
+        0.2220848532443342
+      ],
+      "imageSha256": "189017eb117ab9352451722d467971175812f2823aa62371dde21b6af8a5967e"
+    },
+    {
+      "name": "combined",
+      "maximumLinearError": 0.0008970790834280651,
+      "expected": [
+        0.1045089881069091,
+        0.03436911474964333,
+        0.6384939530774607
+      ],
+      "imageSha256": "c27e591f260e7eed4f50f809de12ccf51d4e83507531d71bf36eed57f1731493"
+    },
+    {
+      "name": "dark",
+      "maximumLinearError": 0.0,
+      "expected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "imageSha256": "b5d896366b1d64d9dfb748aa427c38324994d723ba825b13e46b17ecdb0effcd"
+    },
+    {
+      "name": "shadow-zero",
+      "maximumLinearError": 0.0010999402238810463,
+      "expected": [
+        0.026004841425486216,
+        0.012352923617651827,
+        0.26939785078918477
+      ],
+      "imageSha256": "8c582ba92c1e2621671fd0881cb99526e346d5a77779dd185348bb087e0ad28a"
+    },
+    {
+      "name": "shadow-one",
+      "maximumLinearError": 0.002788458143028194,
+      "expected": [
+        0.05180652002733582,
+        0.02460934001954075,
+        0.536691030869079
+      ],
+      "imageSha256": "1d89b05271f47cfccb6fe3c32c903e74c800e7c266b9350fe96893a428b043f6"
+    },
+    {
+      "name": "matcap-rgba",
+      "maximumLinearError": 0.001363154669482447,
+      "expected": [
+        0.01835809810091206,
+        0.0753157975053034,
+        0.2029194084638795
+      ],
+      "imageSha256": "ebd6c00b47d0e0f8e7d636c5b0ea063dfad6f1cfc5ef323017d386912ee900e2"
+    },
+    {
+      "name": "matcap-rgb",
+      "maximumLinearError": 0.0007404210946030526,
+      "expected": [
+        0.0037341625105282647,
+        0.03144399073415204,
+        0.11517579492157679
+      ],
+      "imageSha256": "3692df3e2d785679a50335b0143b7d45e695d7ecfeefbb6f40a847584569fbe9"
+    }
+  ]
+}

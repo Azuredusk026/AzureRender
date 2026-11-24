@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "status": "measured-local-rejected",
+  "sourceCommit": "bfe700edfedea11d1e78bc2db966be6e797874bc",
+  "replaySourceBase": "88d84fb",
+  "captureSha256": "35077c571bcb70bc99688bfb97eec1b291bd6567df7482746fd3f5db49f339b3",
+  "events": 3453,
+  "materialEvents": 1006,
+  "attachments": 6,
+  "exactAttachments": 6,
+  "matchedDefaultPrograms": 10,
+  "verifiedComputedProgramPairs": 10,
+  "referenceMaterialMs": 7.834480000000022,
+  "candidateMaterialMs": 7.807616000000021,
+  "referenceTotalEventMs": 11.377711999999963,
+  "candidateTotalEventMs": 11.347503999999981,
+  "materialShare": 0.688581324610787,
+  "materialSavings": 0.0034289448693469726,
+  "baselineDrift": 0.005289438482195802,
+  "minimumMaterialShare": 0.25,
+  "minimumMaterialSavings": 0.2,
+  "productionChanged": false,
+  "replaySeconds": 94.29599999997299,
+  "timings": [
+    {
+      "role": "qualified",
+      "totalMs": 11.34678399999998,
+      "scopeMs": {
+        "classSpecialized": 2.3985279999999998,
+        "materials": 7.813760000000025,
+        "main": 5.629568000000003,
+        "ordinaryMain": 2.9135999999999993,
+        "snapshot": 2.1841920000000017
+      }
+    },
+    {
+      "role": "candidate",
+      "totalMs": 11.356991999999972,
+      "scopeMs": {
+        "classSpecialized": 2.3579519999999996,
+        "materials": 7.819424000000022,
+        "main": 5.641376000000001,
+        "ordinaryMain": 2.9270719999999986,
+        "snapshot": 2.178048
+      }
+    },
+    {
+      "role": "candidate",
+      "totalMs": 11.33801599999999,
+      "scopeMs": {
+        "classSpecialized": 2.3469440000000006,
+        "materials": 7.7958080000000205,
+        "main": 5.641312,
+        "ordinaryMain": 2.9369919999999974,
+        "snapshot": 2.154496
+      }
+    },
+    {
+      "role": "qualified",
+      "totalMs": 11.408639999999949,
+      "scopeMs": {
+        "classSpecialized": 2.3641279999999996,
+        "materials": 7.855200000000019,
+        "main": 5.665888000000001,
+        "ordinaryMain": 2.9320959999999987,
+        "snapshot": 2.189312
+      }
+    }
+  ],
+  "firstAttempt": "RenderDoc Python host did not define __file__",
+  "environmentSha256": {
+    "startup-environment.json": "9d3eebcf2ddb755a0487c4c8fcff59891c0f2c224cf326737e640a2e0054cd93",
+    "run-environment.json": "370c5cf859203f84a8f1eedbe050e13d480d5bf993fb653d04b614894baa514a"
+  },
+  "archive": {
+    "status": "passed",
+    "archive": "docs/acceptance/nr/evidence/2026-11-12/computed-cascade-demand-comparison/validation.zip",
+    "files": 20,
+    "logicalBytes": 1658632,
+    "archiveBytes": 230924,
+    "sha256": "727c6445ae4c8d410c4b92f536c01ee995aaaabd48b7633d423d7c84dda779c5",
+    "removedSource": false,
+    "sourceCommit": "bfe700edfedea11d1e78bc2db966be6e797874bc"
+  }
+}

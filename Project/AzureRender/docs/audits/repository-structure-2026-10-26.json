@@ -1,0 +1,305 @@
+{
+  "total": {
+    "files": 935189,
+    "bytes": 233844083227
+  },
+  "topLevel": [
+    {
+      "path": "Project",
+      "files": 905321,
+      "bytes": 232934400629
+    },
+    {
+      "path": ".git",
+      "files": 29391,
+      "bytes": 894899465
+    },
+    {
+      "path": "captures",
+      "files": 2,
+      "bytes": 12633021
+    },
+    {
+      "path": "AfterglowRender",
+      "files": 469,
+      "bytes": 2119621
+    },
+    {
+      "path": ".github",
+      "files": 2,
+      "bytes": 8323
+    }
+  ],
+  "engine": [
+    {
+      "path": "Project/AzureRender/build",
+      "files": 865415,
+      "bytes": 221077432528
+    },
+    {
+      "path": "Project/AzureRender/showcase",
+      "files": 11448,
+      "bytes": 7398914584
+    },
+    {
+      "path": "Project/AzureRender/assets_private",
+      "files": 129,
+      "bytes": 1751295159
+    },
+    {
+      "path": "Project/AzureRender/captures",
+      "files": 4807,
+      "bytes": 1390587854
+    },
+    {
+      "path": "Project/AzureRender/docs",
+      "files": 19610,
+      "bytes": 806747672
+    },
+    {
+      "path": "Project/AzureRender/vcpkg_installed",
+      "files": 1651,
+      "bytes": 456409742
+    },
+    {
+      "path": "Project/AzureRender/assets_public",
+      "files": 444,
+      "bytes": 32609015
+    },
+    {
+      "path": "Project/AzureRender/tools",
+      "files": 835,
+      "bytes": 7404361
+    },
+    {
+      "path": "Project/AzureRender/third_party",
+      "files": 31,
+      "bytes": 4224759
+    },
+    {
+      "path": "Project/AzureRender/src",
+      "files": 545,
+      "bytes": 3137831
+    },
+    {
+      "path": "Project/AzureRender/portfolio",
+      "files": 10,
+      "bytes": 2732834
+    },
+    {
+      "path": "Project/AzureRender/tests",
+      "files": 272,
+      "bytes": 2123867
+    },
+    {
+      "path": "Project/AzureRender/shaders",
+      "files": 89,
+      "bytes": 312938
+    },
+    {
+      "path": "Project/AzureRender/schemas",
+      "files": 6,
+      "bytes": 42452
+    },
+    {
+      "path": "Project/AzureRender/cmake",
+      "files": 7,
+      "bytes": 26807
+    },
+    {
+      "path": "Project/AzureRender/managed",
+      "files": 10,
+      "bytes": 16858
+    },
+    {
+      "path": "Project/AzureRender/assets_placeholder",
+      "files": 1,
+      "bytes": 216
+    }
+  ],
+  "trackedDocs": [
+    {
+      "path": "Project/AzureRender/docs/acceptance",
+      "files": 19202,
+      "bytes": 797193156
+    },
+    {
+      "path": "Project/AzureRender/docs/media",
+      "files": 6,
+      "bytes": 3396915
+    },
+    {
+      "path": "Project/AzureRender/docs/tutorials",
+      "files": 19,
+      "bytes": 1479879
+    },
+    {
+      "path": "Project/AzureRender/docs/research",
+      "files": 49,
+      "bytes": 1152585
+    },
+    {
+      "path": "Project/AzureRender/docs/plans",
+      "files": 88,
+      "bytes": 1035155
+    },
+    {
+      "path": "Project/AzureRender/docs/archive",
+      "files": 21,
+      "bytes": 874091
+    },
+    {
+      "path": "Project/AzureRender/docs/runtime",
+      "files": 91,
+      "bytes": 409816
+    },
+    {
+      "path": "Project/AzureRender/docs/audits",
+      "files": 30,
+      "bytes": 306333
+    },
+    {
+      "path": "Project/AzureRender/docs/licenses",
+      "files": 27,
+      "bytes": 219009
+    },
+    {
+      "path": "Project/AzureRender/docs/history",
+      "files": 4,
+      "bytes": 86114
+    },
+    {
+      "path": "Project/AzureRender/docs/design",
+      "files": 2,
+      "bytes": 26573
+    },
+    {
+      "path": "Project/AzureRender/docs/development",
+      "files": 4,
+      "bytes": 21530
+    },
+    {
+      "path": "Project/AzureRender/docs/assets",
+      "files": 4,
+      "bytes": 10582
+    },
+    {
+      "path": "Project/AzureRender/docs/architecture",
+      "files": 1,
+      "bytes": 8174
+    },
+    {
+      "path": "Project/AzureRender/docs/reference",
+      "files": 1,
+      "bytes": 3941
+    }
+  ],
+  "largestRuns": [
+    {
+      "path": "20261021-172156-native-render-evidence-623c52",
+      "files": 23413,
+      "bytes": 32755932006,
+      "newestMtime": 1792827331.7790656,
+      "keep": true,
+      "finished": false,
+      "eligibleByAgeAndMarkers": false
+    },
+    {
+      "path": "20261025-160544-main-material-frame-integration-1ad7a0",
+      "files": 4657,
+      "bytes": 13023518718,
+      "newestMtime": 1792939842.3598285,
+      "keep": true,
+      "finished": true,
+      "eligibleByAgeAndMarkers": false
+    },
+    {
+      "path": "20261022-051129-character-logistics-restoration-0f2e71",
+      "files": 66655,
+      "bytes": 11521541688,
+      "newestMtime": 1792968103.230333,
+      "keep": true,
+      "finished": false,
+      "eligibleByAgeAndMarkers": false
+    },
+    {
+      "path": "20261026-090813-cloth-material-native-integration-b73ec2",
+      "files": 4710,
+      "bytes": 9557781405,
+      "newestMtime": 1793022472.3594291,
+      "keep": true,
+      "finished": true,
+      "eligibleByAgeAndMarkers": false
+    },
+    {
+      "path": "20261026-040118-authored-normal-frame-diagnosis-2a3bee",
+      "files": 5079,
+      "bytes": 9163675088,
+      "newestMtime": 1792967589.1433291,
+      "keep": true,
+      "finished": true,
+      "eligibleByAgeAndMarkers": false
+    },
+    {
+      "path": "20261026-215130-native-hair-depth-validation-1645d9",
+      "files": 492,
+      "bytes": 7684727922,
+      "newestMtime": 1793027480.4974618,
+      "keep": false,
+      "finished": false,
+      "eligibleByAgeAndMarkers": false
+    }
+  ],
+  "eligibleRuns": 0,
+  "duplicateCode": {
+    "groups": 587,
+    "redundantBytes": 24952674
+  },
+  "errors": 0,
+  "skippedLinks": 3,
+  "elapsedSeconds": 82.03,
+  "method": "Working tree logical bytes; symlinks and reparse points skipped. Hardlinks counted per path. Allocated disk space, unique data and reclaimable bytes not measured.",
+  "schemaVersion": 1,
+  "measuredAt": "2026-10-26T15:33:41.364356+00:00",
+  "sourceCommit": "c7204c51f69c8d49d002f003d961731f37c3a6ff",
+  "trackedFiles": 21309,
+  "trackedDocsFiles": 19566,
+  "trackedDocsMarkdown": 563,
+  "snapshotPathMatches": 2913,
+  "runsSummary": {
+    "count": 120,
+    "keepCount": 13,
+    "finishedCount": 83,
+    "keptLogicalBytes": 95529680131
+  },
+  "measurementLimitations": [
+    "活动工作树的扫描快照，文件可在扫描期间改变。",
+    "硬链接按路径累计，未测实际分配空间与可回收量。",
+    "三个目录联接已跳过。",
+    "重复统计限于跟踪的代码类文件，按 SHA-256 比较。"
+  ],
+  "skippedLinkPaths": [
+    "Project/AzureRender/build/runs/20261026-090813-cloth-material-native-integration-b73ec2/main-candidate-v4/.azure/cache",
+    "Project/AzureRender/build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/main-candidate-v3/.azure/cache",
+    "Project/AzureRender/build/runs/20261025-211745-main-npr-joint-quality-budget-e0cdf1/engine-renderdoc"
+  ],
+  "runReceipt": "build/runs/20261026-233116-repository-structure-audit-18fda4/inventory.json",
+  "measurementCommand": "python Project/AzureRender/build/runs/20261026-233116-repository-structure-audit-18fda4/inspect_repository.py",
+  "freeDiskBytesObserved": 10830352384,
+  "eligibilityWindowDaysAtMeasurement": 14,
+  "verification": {
+    "proseStyle": "passed: four edited Markdown files",
+    "localLinks": "passed: four edited Markdown files",
+    "repositoryHygiene": "passed",
+    "navigationExamples": "passed",
+    "strictSiteBuild": {
+      "status": "failed",
+      "warnings": 82,
+      "warningsVerifiedInHead": 81,
+      "warningsInNewPages": 0,
+      "log": "build/runs/20261026-233116-repository-structure-audit-18fda4/mkdocs.log",
+      "warningsFromPreviouslyUntrackedDocument": 1
+    },
+    "renderedPages": "passed: titles, headings and both navigation entries checked in generated HTML"
+  }
+}

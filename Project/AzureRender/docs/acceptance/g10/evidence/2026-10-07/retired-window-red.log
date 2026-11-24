@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_driver_window_cannot_receive_engine_close (__main__.NativeWindowTests.test_driver_window_cannot_receive_engine_close)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_native_window.py", line 31, in test_driver_window_cannot_receive_engine_close
+    self.assertIsNone(engine.find(), 'A destroyed engine window must retire its cached identity')
+AssertionError: 47450376 is not None : A destroyed engine window must retire its cached identity
+
+----------------------------------------------------------------------
+Ran 1 test in 0.012s
+
+FAILED (failures=1)

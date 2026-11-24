@@ -1,0 +1,91 @@
+{
+  "status": "mapped-raw-resource-order",
+  "materialCount": 743,
+  "matches": [
+    {
+      "globalIndex": 693,
+      "localIndex": 0,
+      "resourceId": "captured-vfx-10842-0",
+      "asset": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\candidate-project\\captured-vfx-vertex-color\\event-10842-0.gltf",
+      "material": {
+        "name": "Captured-10842-0",
+        "alphaMode": "BLEND",
+        "doubleSided": true,
+        "extras": {
+          "azureRenderMaterial": {
+            "schemaVersion": 2,
+            "class": "emissive",
+            "features": [
+              "unlit-surface",
+              "unlit-texture-layers"
+            ],
+            "surface": {
+              "schemaVersion": 2,
+              "lighting": "unlit",
+              "layers": [
+                {
+                  "role": "base",
+                  "texture": 0,
+                  "sampleMode": "rgba",
+                  "uv": {
+                    "set": 0,
+                    "scaleOffset": [
+                      1.0,
+                      0.13500000536441803,
+                      0.0,
+                      0.7570000290870667
+                    ],
+                    "rotation": [
+                      1.0,
+                      -0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "speed": [
+                      0.0,
+                      0.0
+                    ]
+                  }
+                }
+              ],
+              "tint": [
+                1.0,
+                1.0,
+                1.0,
+                2.0
+              ],
+              "blendTint": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "clock": {
+                "rate": 1.0,
+                "offsetSeconds": 73.48992156982422
+              },
+              "softIntersection": {
+                "distance": 1.5,
+                "bias": 0.0
+              },
+              "highlightExpansion": {
+                "threshold": 1.0,
+                "gain": 0.0
+              },
+              "postExposureWeight": 1.0,
+              "globalColorWeight": 1.0,
+              "vertexColor": true
+            }
+          }
+        }
+      },
+      "primitives": [
+        {
+          "mesh": null,
+          "indices": 144,
+          "vertices": 96
+        }
+      ]
+    }
+  ]
+}

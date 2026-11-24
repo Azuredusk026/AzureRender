@@ -1,0 +1,16 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 148: AzureEditor.AssetWorkflow
+1/1 Test #148: AzureEditor.AssetWorkflow ........***Failed    0.21 sec
+[1791736052803][info][editor][code=0] Opened scene: startup
+[1791736052833][info][editor][code=0] ERROR [asset.import]: Asset source is unavailable: C:\Users\23587\AppData\Local\Temp\azure-assets-43584551272900\瀵煎叆 妯″瀷.GLTF
+asset.import: [{"code":"OperationFailed","message":"Asset source is unavailable: C:\\Users\\23587\\AppData\\Local\\Temp\\azure-assets-43584551272900\\瀵煎叆 妯″瀷.GLTF"}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.22 sec
+
+The following tests FAILED:
+	148 - AzureEditor.AssetWorkflow (Failed)
+Errors while running CTest

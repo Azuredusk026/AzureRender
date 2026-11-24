@@ -1,0 +1,13 @@
+..E..
+======================================================================
+ERROR: test_session_registry_limits_and_profile_ownership (__main__.BridgeTests.test_session_registry_limits_and_profile_ownership)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_ai_bridge.py", line 62, in test_session_registry_limits_and_profile_ownership
+    from ai.session import SessionRegistry
+ModuleNotFoundError: No module named 'ai.session'
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.347s
+
+FAILED (errors=1)

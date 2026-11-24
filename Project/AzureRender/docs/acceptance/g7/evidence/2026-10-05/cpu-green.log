@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  7: AzureEngine.ThirdPerson
+1/4 Test  #7: AzureEngine.ThirdPerson ..........   Passed    0.34 sec
+    Start  8: AzureEngine.Locomotion
+2/4 Test  #8: AzureEngine.Locomotion ...........   Passed    0.25 sec
+    Start 14: AzureEngine.PhysicsInput
+3/4 Test #14: AzureEngine.PhysicsInput .........   Passed    0.18 sec
+    Start 16: AzureEngine.Reflection
+4/4 Test #16: AzureEngine.Reflection ...........   Passed    0.06 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   0.85 sec

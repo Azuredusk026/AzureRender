@@ -1,0 +1,605 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "sourceBase": "9dcae82",
+  "run": "20261112-011326-handoff-final-regression-e2e260",
+  "captureLayout": {
+    "materialSurfaceProfileLayoutVersion": 22,
+    "cameraUniformBytes": 800,
+    "lightBufferLayoutVersion": 3
+  },
+  "firstDebugFailures": [
+    "AzureRender.MultisampleScreenRimGpu",
+    "AzureRender.MultisampleScreenRimGpu.Physical",
+    "AzureRender.MultisampleScreenRimGpu.Facing"
+  ],
+  "configurations": {
+    "debug": {
+      "tests": [
+        {
+          "name": "AzureRender.MultisampleScreenRimGpu",
+          "seconds": 43.5219
+        },
+        {
+          "name": "AzureRender.MultisampleScreenRimGpu.Modulation",
+          "seconds": 63.3949
+        },
+        {
+          "name": "AzureRender.MultisampleScreenRimGpu.Physical",
+          "seconds": 31.9687
+        },
+        {
+          "name": "AzureRender.MultisampleScreenRimGpu.Facing",
+          "seconds": 61.5612
+        }
+      ],
+      "seconds": 200.51600000000326,
+      "unchangedProducts": 1283,
+      "hostSha256": "a671ec584836d8c7563d8655becfb03f15803903cac373f039450161a6d3d0dc",
+      "pendingImpactedTests": [
+        "AzureEngine.MaterialRadianceGpu",
+        "AzureEngine.MaterialLightingGpu",
+        "AzureEngine.NprRampCompositionGpu",
+        "AzureEngine.MaterialDisplayGpu",
+        "AzureEngine.UnlitTextureLayersGpu",
+        "AzureEngine.MaterialOverlaysGpu",
+        "AzureEngine.BlendDepthGpu",
+        "AzureEngine.OpaqueSurfaceOverlaysGpu",
+        "AzureEngine.OpaqueSurfaceOverlaysMsaaGpu",
+        "AzureEngine.ViewFogGpu",
+        "AzureEngine.SceneFogGpu",
+        "AzureEngine.ViewFogMultisampleGpu",
+        "AzureEngine.VertexColorGpu",
+        "AzureEngine.UnlitViewCoverageGpu",
+        "AzureEngine.UnlitCoverageLayerGpu",
+        "AzureEngine.UnlitUvDistortionGpu",
+        "AzureEngine.EyeNprGpu",
+        "AzureRender.NprViewMaskGpu",
+        "AzureEngine.ObjectShadowGpu",
+        "AzureEngine.NprIlluminationGpu",
+        "AzureRender.ProjectedHairLightingGpu",
+        "AzureRender.ProjectedHairLightingGpu.local",
+        "AzureRender.ProjectedHairLightingGpu.specular",
+        "AzureRender.ProjectedHairMainChromaGpu",
+        "AzureRender.CharacterScreenRimGpu",
+        "AzureRender.CharacterScreenRimGpu.Modulation",
+        "AzureRender.CharacterScreenRimGpu.Physical",
+        "AzureRender.CharacterScreenRimGpu.Facing",
+        "AzureAssets.TextureMipBiasGpu"
+      ]
+    },
+    "release": {
+      "tests": [
+        {
+          "name": "AzureRender.MultisampleScreenRimGpu",
+          "seconds": 15.7603
+        },
+        {
+          "name": "AzureRender.MultisampleScreenRimGpu.Modulation",
+          "seconds": 23.2964
+        },
+        {
+          "name": "AzureRender.MultisampleScreenRimGpu.Physical",
+          "seconds": 13.2705
+        },
+        {
+          "name": "AzureRender.MultisampleScreenRimGpu.Facing",
+          "seconds": 22.5407
+        }
+      ],
+      "seconds": 74.98399999999674,
+      "unchangedProducts": 1638,
+      "hostSha256": "f69924a05d1106ea9d4a9db97c5b37e2d8da8964180c3108c62ef471818505a5",
+      "pendingImpactedTests": [
+        "AzureRender.MaterialCoverageGpu",
+        "AzureRender.MaterialCoverageFailureGpu",
+        "AzureRender.MaterialCoverageMipsGpu",
+        "AzureEngine.MaterialRadianceGpu",
+        "AzureEngine.MaterialLightingGpu",
+        "AzureEngine.NprRampCompositionGpu",
+        "AzureEngine.MaterialDisplayGpu",
+        "AzureEngine.UnlitTextureLayersGpu",
+        "AzureEngine.MaterialOverlaysGpu",
+        "AzureEngine.BlendDepthGpu",
+        "AzureEngine.OpaqueSurfaceOverlaysGpu",
+        "AzureEngine.OpaqueSurfaceOverlaysMsaaGpu",
+        "AzureEngine.ViewFogGpu",
+        "AzureEngine.SceneFogGpu",
+        "AzureEngine.ViewFogMultisampleGpu",
+        "AzureEngine.VertexColorGpu",
+        "AzureEngine.UnlitViewCoverageGpu",
+        "AzureEngine.UnlitCoverageLayerGpu",
+        "AzureEngine.UnlitUvDistortionGpu",
+        "AzureEngine.EyeNprGpu",
+        "AzureRender.NprViewMaskGpu",
+        "AzureEngine.ObjectShadowGpu",
+        "AzureEngine.NprIlluminationGpu",
+        "AzureRender.ProjectedHairLightingGpu",
+        "AzureRender.ProjectedHairLightingGpu.local",
+        "AzureRender.ProjectedHairLightingGpu.specular",
+        "AzureRender.ProjectedHairMainChromaGpu",
+        "AzureRender.CharacterScreenRimGpu",
+        "AzureRender.CharacterScreenRimGpu.Modulation",
+        "AzureRender.CharacterScreenRimGpu.Physical",
+        "AzureRender.CharacterScreenRimGpu.Facing",
+        "AzureAssets.TextureMipBiasGpu"
+      ]
+    }
+  },
+  "source": {
+    "debug": {
+      "priorProductsReceiptSha256": "81d318cca71f16f558b20d70ebc767b44ab15d843a60fa228cfd949c22316bdf",
+      "currentProductsReceiptSha256": "af25404895a05a0feae34f4f4f42a32dfb4bb6d1c9dd38b9451e1586db0f500a",
+      "unchangedProducts": 1283,
+      "changedSource": {
+        "tools/test_npr_illumination_gpu.py": [
+          "16570e6764ed1e399a48f3646febd74c88258a59f401441849a1f66c2aeb00ba",
+          "cbcea6dc97cf2407a3c4417d1039fd5afe749ea0e6afaeb8fab46c240b00b83a"
+        ],
+        "tools/test_eye_npr_gpu.py": [
+          "a542e1ad013fe805bab27b40625554216cb6ff90dbcace7cf8dac69f9c12cfcb",
+          "36d3e8b2539e94d1784505dd3a37952b2e5a99cc78162618e35b13bf0dff2481"
+        ],
+        "tools/test_material_display_gpu.py": [
+          "3942f02059c6f29456bee989d7f9e52eeac8f83a68b12c53c241e7a22cda1ab8",
+          "e3bc84f95ff700eafcfc239a4222acaaaea2be0b090cf6328e98a37ef89ae3e8"
+        ],
+        "tools/test_character_screen_rim_gpu.py": [
+          "23d5a685462413141a9bd08fef62ac72aea3c338baef987371a69931fd6309bb",
+          "3fc6078b47c845443977858c7c902c2917b03f25b122cb8bac416b0e21c2584f"
+        ],
+        "tools/test_unlit_texture_layers_gpu.py": [
+          "2ab8ef46432e23304ae0da4632daa68e13fdf29a8d67c75b86f120a0ce9b89e2",
+          "5bef3542ef75b4c92865cdf5531fd05264201425ada376d8a17ccbe098e018f7"
+        ],
+        "tools/test_vertex_color_gpu.py": [
+          "0e8b1c009b51c7a4243bc3634be374212aafa0ac0338579d558933dba712a921",
+          "db07e04f2890ce36bad610f49ae523fa50ecfe635d91f56d06495d2793dfcf53"
+        ],
+        "tools/test_material_lighting_gpu.py": [
+          "797df1ffe89a940ef303c0356effd7d1dc1e831c56399f9390e1cb120fc743a8",
+          "417b18fdd36e2d23b684faedcdf6ee89b6e1820c89c61542c8a0b86e334da98e"
+        ],
+        "tools/test_material_output_precision_gpu.py": [
+          "f5b34c73c0f1fe6884443b22977891cb43328abd895a50404cc860e5e3ef9143",
+          "b74af518d317566b149ab62c5168d41cd20428211e5365574a2d53f59ff3484f"
+        ],
+        "tools/test_view_fog_gpu.py": [
+          "dce09532aab11c1e6a6274519223f2f5277732f3d1ef7a6750b29481bf1ab222",
+          "f49cb80afdc93c8941c1dfcc0f7d43977ee918c9462966b13cbf58071cc51e13"
+        ],
+        "tools/test_object_shadow_gpu.py": [
+          "433c2bd47bab2b49f06efc74231490fd4489862b76fa90f19b74aec73a904852",
+          "99be36117d73e2855aa9d184f2169f7af8bc89a8403332e91281328e1eab2c74"
+        ],
+        "tools/test_npr_ramp_composition_gpu.py": [
+          "80afebedfc2ad73012ff287bc35e10822292f6ddf3b55560c52d3bba570e6a49",
+          "54f08d361c0a5c4f6d0a69260da5124f123dfcc910507ae0070488faeed06c63"
+        ],
+        "tools/test_material_radiance_gpu.py": [
+          "d00c384baf9ed9bdb16dcfa79c6cb5e67fd9cdbcfc5abbeda17f67bccd93676f",
+          "021e5df883fd4a579a0a88b943118e156f9aa82e07a2a074a9f6794499c7693e"
+        ],
+        "tools/test_scene_fog_gpu.py": [
+          "42f81c090fd34d39772c986f462180d7fbef7e7ae1145b2f39c13501c0203ff2",
+          "858d44339631a00c4e84d731a181b78a52d2fc82e9981c6654622d16c0972778"
+        ],
+        "tools/render_capture_layout.py": [
+          null,
+          "076e89a8bb68f299dfa4853b3105508d6b023d3a9f20d3effba0ec3b9768c995"
+        ]
+      },
+      "impactedTests": [
+        {
+          "index": 77,
+          "name": "AzureRender.MaterialCoverageGpu"
+        },
+        {
+          "index": 78,
+          "name": "AzureRender.MaterialCoverageFailureGpu"
+        },
+        {
+          "index": 79,
+          "name": "AzureRender.MaterialCoverageMipsGpu"
+        },
+        {
+          "index": 155,
+          "name": "AzureRender.MultisampleScreenRimGpu"
+        },
+        {
+          "index": 156,
+          "name": "AzureRender.MultisampleScreenRimGpu.Modulation"
+        },
+        {
+          "index": 157,
+          "name": "AzureRender.MultisampleScreenRimGpu.Physical"
+        },
+        {
+          "index": 158,
+          "name": "AzureRender.MultisampleScreenRimGpu.Facing"
+        },
+        {
+          "index": 290,
+          "name": "AzureEngine.MaterialRadianceGpu"
+        },
+        {
+          "index": 291,
+          "name": "AzureEngine.MaterialLightingGpu"
+        },
+        {
+          "index": 292,
+          "name": "AzureEngine.NprRampCompositionGpu"
+        },
+        {
+          "index": 293,
+          "name": "AzureEngine.MaterialDisplayGpu"
+        },
+        {
+          "index": 294,
+          "name": "AzureEngine.UnlitTextureLayersGpu"
+        },
+        {
+          "index": 295,
+          "name": "AzureEngine.MaterialOverlaysGpu"
+        },
+        {
+          "index": 296,
+          "name": "AzureEngine.BlendDepthGpu"
+        },
+        {
+          "index": 297,
+          "name": "AzureEngine.OpaqueSurfaceOverlaysGpu"
+        },
+        {
+          "index": 298,
+          "name": "AzureEngine.OpaqueSurfaceOverlaysMsaaGpu"
+        },
+        {
+          "index": 301,
+          "name": "AzureEngine.ViewFogGpu"
+        },
+        {
+          "index": 302,
+          "name": "AzureEngine.SceneFogGpu"
+        },
+        {
+          "index": 303,
+          "name": "AzureEngine.ViewFogMultisampleGpu"
+        },
+        {
+          "index": 304,
+          "name": "AzureEngine.VertexColorGpu"
+        },
+        {
+          "index": 305,
+          "name": "AzureEngine.UnlitViewCoverageGpu"
+        },
+        {
+          "index": 306,
+          "name": "AzureEngine.UnlitCoverageLayerGpu"
+        },
+        {
+          "index": 307,
+          "name": "AzureEngine.UnlitUvDistortionGpu"
+        },
+        {
+          "index": 313,
+          "name": "AzureEngine.EyeNprGpu"
+        },
+        {
+          "index": 491,
+          "name": "AzureRender.NprViewMaskGpu"
+        },
+        {
+          "index": 496,
+          "name": "AzureEngine.ObjectShadowGpu"
+        },
+        {
+          "index": 509,
+          "name": "AzureEngine.NprIlluminationGpu"
+        },
+        {
+          "index": 510,
+          "name": "AzureRender.ProjectedHairLightingGpu"
+        },
+        {
+          "index": 511,
+          "name": "AzureRender.ProjectedHairLightingGpu.local"
+        },
+        {
+          "index": 512,
+          "name": "AzureRender.ProjectedHairLightingGpu.specular"
+        },
+        {
+          "index": 513,
+          "name": "AzureRender.ProjectedHairMainChromaGpu"
+        },
+        {
+          "index": 516,
+          "name": "AzureRender.CharacterScreenRimGpu"
+        },
+        {
+          "index": 517,
+          "name": "AzureRender.CharacterScreenRimGpu.Modulation"
+        },
+        {
+          "index": 518,
+          "name": "AzureRender.CharacterScreenRimGpu.Physical"
+        },
+        {
+          "index": 519,
+          "name": "AzureRender.CharacterScreenRimGpu.Facing"
+        },
+        {
+          "index": 521,
+          "name": "AzureAssets.TextureMipBiasGpu"
+        }
+      ],
+      "executedImpactedTests": [
+        {
+          "index": 77,
+          "name": "AzureRender.MaterialCoverageGpu"
+        },
+        {
+          "index": 78,
+          "name": "AzureRender.MaterialCoverageFailureGpu"
+        },
+        {
+          "index": 79,
+          "name": "AzureRender.MaterialCoverageMipsGpu"
+        },
+        {
+          "index": 155,
+          "name": "AzureRender.MultisampleScreenRimGpu"
+        },
+        {
+          "index": 156,
+          "name": "AzureRender.MultisampleScreenRimGpu.Modulation"
+        },
+        {
+          "index": 157,
+          "name": "AzureRender.MultisampleScreenRimGpu.Physical"
+        },
+        {
+          "index": 158,
+          "name": "AzureRender.MultisampleScreenRimGpu.Facing"
+        }
+      ]
+    },
+    "release": {
+      "priorProductsReceiptSha256": "d035513ab87350298185bd06c02d0d212664658b9a67e9f600a29e6d84cfe8ea",
+      "currentProductsReceiptSha256": "d8e66d8bf2e6e50a4bb272400cee806138de582985f231d60456319d74153b08",
+      "unchangedProducts": 1638,
+      "changedSource": {
+        "tools/test_npr_illumination_gpu.py": [
+          "16570e6764ed1e399a48f3646febd74c88258a59f401441849a1f66c2aeb00ba",
+          "cbcea6dc97cf2407a3c4417d1039fd5afe749ea0e6afaeb8fab46c240b00b83a"
+        ],
+        "tools/test_eye_npr_gpu.py": [
+          "a542e1ad013fe805bab27b40625554216cb6ff90dbcace7cf8dac69f9c12cfcb",
+          "36d3e8b2539e94d1784505dd3a37952b2e5a99cc78162618e35b13bf0dff2481"
+        ],
+        "tools/test_material_display_gpu.py": [
+          "3942f02059c6f29456bee989d7f9e52eeac8f83a68b12c53c241e7a22cda1ab8",
+          "e3bc84f95ff700eafcfc239a4222acaaaea2be0b090cf6328e98a37ef89ae3e8"
+        ],
+        "tools/test_character_screen_rim_gpu.py": [
+          "23d5a685462413141a9bd08fef62ac72aea3c338baef987371a69931fd6309bb",
+          "3fc6078b47c845443977858c7c902c2917b03f25b122cb8bac416b0e21c2584f"
+        ],
+        "tools/test_unlit_texture_layers_gpu.py": [
+          "2ab8ef46432e23304ae0da4632daa68e13fdf29a8d67c75b86f120a0ce9b89e2",
+          "5bef3542ef75b4c92865cdf5531fd05264201425ada376d8a17ccbe098e018f7"
+        ],
+        "tools/test_vertex_color_gpu.py": [
+          "0e8b1c009b51c7a4243bc3634be374212aafa0ac0338579d558933dba712a921",
+          "db07e04f2890ce36bad610f49ae523fa50ecfe635d91f56d06495d2793dfcf53"
+        ],
+        "tools/test_material_lighting_gpu.py": [
+          "797df1ffe89a940ef303c0356effd7d1dc1e831c56399f9390e1cb120fc743a8",
+          "417b18fdd36e2d23b684faedcdf6ee89b6e1820c89c61542c8a0b86e334da98e"
+        ],
+        "tools/test_material_output_precision_gpu.py": [
+          "f5b34c73c0f1fe6884443b22977891cb43328abd895a50404cc860e5e3ef9143",
+          "b74af518d317566b149ab62c5168d41cd20428211e5365574a2d53f59ff3484f"
+        ],
+        "tools/test_view_fog_gpu.py": [
+          "dce09532aab11c1e6a6274519223f2f5277732f3d1ef7a6750b29481bf1ab222",
+          "f49cb80afdc93c8941c1dfcc0f7d43977ee918c9462966b13cbf58071cc51e13"
+        ],
+        "tools/test_object_shadow_gpu.py": [
+          "433c2bd47bab2b49f06efc74231490fd4489862b76fa90f19b74aec73a904852",
+          "99be36117d73e2855aa9d184f2169f7af8bc89a8403332e91281328e1eab2c74"
+        ],
+        "tools/test_npr_ramp_composition_gpu.py": [
+          "80afebedfc2ad73012ff287bc35e10822292f6ddf3b55560c52d3bba570e6a49",
+          "54f08d361c0a5c4f6d0a69260da5124f123dfcc910507ae0070488faeed06c63"
+        ],
+        "tools/test_material_radiance_gpu.py": [
+          "d00c384baf9ed9bdb16dcfa79c6cb5e67fd9cdbcfc5abbeda17f67bccd93676f",
+          "021e5df883fd4a579a0a88b943118e156f9aa82e07a2a074a9f6794499c7693e"
+        ],
+        "tools/test_scene_fog_gpu.py": [
+          "42f81c090fd34d39772c986f462180d7fbef7e7ae1145b2f39c13501c0203ff2",
+          "858d44339631a00c4e84d731a181b78a52d2fc82e9981c6654622d16c0972778"
+        ],
+        "tools/render_capture_layout.py": [
+          null,
+          "076e89a8bb68f299dfa4853b3105508d6b023d3a9f20d3effba0ec3b9768c995"
+        ]
+      },
+      "impactedTests": [
+        {
+          "index": 77,
+          "name": "AzureRender.MaterialCoverageGpu"
+        },
+        {
+          "index": 78,
+          "name": "AzureRender.MaterialCoverageFailureGpu"
+        },
+        {
+          "index": 79,
+          "name": "AzureRender.MaterialCoverageMipsGpu"
+        },
+        {
+          "index": 155,
+          "name": "AzureRender.MultisampleScreenRimGpu"
+        },
+        {
+          "index": 156,
+          "name": "AzureRender.MultisampleScreenRimGpu.Modulation"
+        },
+        {
+          "index": 157,
+          "name": "AzureRender.MultisampleScreenRimGpu.Physical"
+        },
+        {
+          "index": 158,
+          "name": "AzureRender.MultisampleScreenRimGpu.Facing"
+        },
+        {
+          "index": 292,
+          "name": "AzureEngine.MaterialRadianceGpu"
+        },
+        {
+          "index": 293,
+          "name": "AzureEngine.MaterialLightingGpu"
+        },
+        {
+          "index": 294,
+          "name": "AzureEngine.NprRampCompositionGpu"
+        },
+        {
+          "index": 295,
+          "name": "AzureEngine.MaterialDisplayGpu"
+        },
+        {
+          "index": 296,
+          "name": "AzureEngine.UnlitTextureLayersGpu"
+        },
+        {
+          "index": 297,
+          "name": "AzureEngine.MaterialOverlaysGpu"
+        },
+        {
+          "index": 298,
+          "name": "AzureEngine.BlendDepthGpu"
+        },
+        {
+          "index": 299,
+          "name": "AzureEngine.OpaqueSurfaceOverlaysGpu"
+        },
+        {
+          "index": 300,
+          "name": "AzureEngine.OpaqueSurfaceOverlaysMsaaGpu"
+        },
+        {
+          "index": 303,
+          "name": "AzureEngine.ViewFogGpu"
+        },
+        {
+          "index": 304,
+          "name": "AzureEngine.SceneFogGpu"
+        },
+        {
+          "index": 305,
+          "name": "AzureEngine.ViewFogMultisampleGpu"
+        },
+        {
+          "index": 306,
+          "name": "AzureEngine.VertexColorGpu"
+        },
+        {
+          "index": 307,
+          "name": "AzureEngine.UnlitViewCoverageGpu"
+        },
+        {
+          "index": 308,
+          "name": "AzureEngine.UnlitCoverageLayerGpu"
+        },
+        {
+          "index": 309,
+          "name": "AzureEngine.UnlitUvDistortionGpu"
+        },
+        {
+          "index": 315,
+          "name": "AzureEngine.EyeNprGpu"
+        },
+        {
+          "index": 493,
+          "name": "AzureRender.NprViewMaskGpu"
+        },
+        {
+          "index": 498,
+          "name": "AzureEngine.ObjectShadowGpu"
+        },
+        {
+          "index": 511,
+          "name": "AzureEngine.NprIlluminationGpu"
+        },
+        {
+          "index": 512,
+          "name": "AzureRender.ProjectedHairLightingGpu"
+        },
+        {
+          "index": 513,
+          "name": "AzureRender.ProjectedHairLightingGpu.local"
+        },
+        {
+          "index": 514,
+          "name": "AzureRender.ProjectedHairLightingGpu.specular"
+        },
+        {
+          "index": 515,
+          "name": "AzureRender.ProjectedHairMainChromaGpu"
+        },
+        {
+          "index": 518,
+          "name": "AzureRender.CharacterScreenRimGpu"
+        },
+        {
+          "index": 519,
+          "name": "AzureRender.CharacterScreenRimGpu.Modulation"
+        },
+        {
+          "index": 520,
+          "name": "AzureRender.CharacterScreenRimGpu.Physical"
+        },
+        {
+          "index": 521,
+          "name": "AzureRender.CharacterScreenRimGpu.Facing"
+        },
+        {
+          "index": 523,
+          "name": "AzureAssets.TextureMipBiasGpu"
+        }
+      ],
+      "executedImpactedTests": []
+    }
+  },
+  "protectedFiles": {
+    "docs/acceptance/p5/closure/source-evidence/interruption.json": "4bd07a5e3af10be9aceac2b0ddaa0e5e80c850bc704cc3eae4dfed332e04e979",
+    "docs/acceptance/p5/closure/source-evidence/manifest.json": "11f99d3171d7609a1200aa86920c7fb1251fae4e96e6ecebb76a391359488c43",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-green.log": "b0d7a3991dec0248b49e57e2d9cbdede8e7f286838add2f0723593d8598ee0e7",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-red.log": "f7c1533fc970cbb4665bfbf9267a17ee044e5e01bb22d3d0b74aafc2217c98c4",
+    "src/app/AzureRenderSupport.cpp": "a150ee53a294246d87d8cde42be2881e53e0dd1908481ef91b8786808e80b201",
+    "src/rhi/GpuAllocator.hpp": "2e81204107f3e5cfa765bde0e90c1e6a0131721b6ea6b521b3c73490793164dd",
+    "src/rhi/VulkanRhi.cpp": "4ca84f5a9c7ce471c5f9a75009fd26af8a3fd6b6291be8674e829178291d1840",
+    "tests/MaterialPipelinePolicyTests.cpp": "01f18ad44129c11d97bc2c1d8b0c2c1f3f85bffd0af5403f43d2db513acc7c31",
+    "tests/MotionRecordingTests.cpp": "f8e27feb08afaed0ec723fe7caa76d196909ecba97d06ca7c7ed5943bdc3311e",
+    "tests/ObjectShadowAtlasTests.cpp": "dfb7219c73f059415061b73bc4844a7f0a207b7cb75f0ef81c75b376f8f0ab15",
+    "tests/ShadowTileBoundsGpuTests.cpp": "62504a6a47633cc04f8f886a9013b64f55293b8294afe8e12b69e1c634303b6b",
+    "tools/endfield_native/character_surfaces.py": "6c7c476448f3860b7ec8b3dbddd37cbb7c95b1596ebc3355f2fd1f25cb46c8bb",
+    "tools/test_native_character_surfaces.py": "0c870dfb4a2fb9203fc8ef364a4e494d30d1c8ba133f5514d96db40c839cb1d4"
+  },
+  "archive": {
+    "status": "passed",
+    "archive": "docs/acceptance/nr/evidence/2026-11-12/capture-layout-regression/validation.zip",
+    "files": 45,
+    "logicalBytes": 2057977,
+    "archiveBytes": 735324,
+    "sha256": "318414289823a490e0c79ab15a7c176ffc422e80d05ff6427310e820a99ebae1",
+    "removedSource": false,
+    "sourceCommit": "9dcae82af87f06b3a1def31858798252647dc1fa"
+  }
+}

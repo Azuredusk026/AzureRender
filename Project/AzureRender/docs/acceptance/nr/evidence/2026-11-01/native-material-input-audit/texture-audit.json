@@ -1,0 +1,1021 @@
+{
+  "scope": "Decoded level-zero semantic bindings; compressed mip streams retain separate provenance. Hair reference override texture bindings equal embedded source indices.",
+  "cases": [
+    {
+      "material": "M_actor_laevat_body_01",
+      "slot": "extras.azureRenderMaterial.diffuseRamp.texture",
+      "source": "content-character\\restored-images\\image-34.png",
+      "referenceSize": [
+        1,
+        256,
+        4
+      ],
+      "currentSize": [
+        1,
+        256,
+        4
+      ],
+      "referenceSha256": "f92de330ab065af58d4e805b1571aa7b3702c5babd4009abe56bca22b675a4d4",
+      "currentSha256": "f92de330ab065af58d4e805b1571aa7b3702c5babd4009abe56bca22b675a4d4",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_body_01",
+      "slot": "extras.azureRenderMaterial.shadowColorLut.texture",
+      "source": "content-character\\native-body\\t12.dds",
+      "referenceSize": [
+        32,
+        1024,
+        4
+      ],
+      "currentSize": [
+        32,
+        1024,
+        4
+      ],
+      "referenceSha256": "e0b0efb7d2d665e1e20eb14e785e0ca422f0cddfa150bf5463d417a10ee9f882",
+      "currentSha256": "6cf915c33198d3afd064ab182e0378e96a1daea49e6ab2dd52ffc9f376d68b86",
+      "maximumChannelError": 149,
+      "meanChannelError": 24.45880126953125,
+      "flippedMaximumChannelError": 13,
+      "flippedMeanChannelError": 0.610504150390625,
+      "effectiveMaximumChannelError": 13,
+      "effectiveMeanChannelError": 0.610504150390625
+    },
+    {
+      "material": "M_actor_laevat_body_01",
+      "slot": "normalTexture",
+      "source": "content-character\\native-body\\t15.dds",
+      "referenceSize": [
+        1024,
+        1024,
+        4
+      ],
+      "currentSize": [
+        1024,
+        1024,
+        4
+      ],
+      "referenceSha256": "f77769c84199ae0e2057e9a3f27e93dd6caf92afcded0897b0ccb4ddc006e318",
+      "currentSha256": "3d16ddcced1a4f482f969250b835c5ea569ce620d8ef16cc465fc19cbb266a9e",
+      "maximumChannelError": 255,
+      "meanChannelError": 67.38988709449768,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 64.60246205329895
+    },
+    {
+      "material": "M_actor_laevat_body_01",
+      "slot": "pbrMetallicRoughness.baseColorTexture",
+      "source": "content-character\\native-body\\t14.dds",
+      "referenceSize": [
+        1024,
+        1024,
+        4
+      ],
+      "currentSize": [
+        1024,
+        1024,
+        4
+      ],
+      "referenceSha256": "fbfee83918d084bd93e429ec17a33cf8fcd0611e2afeba572ef1100cfc8f57b8",
+      "currentSha256": "2ac9344b3693fefd3b74ecfc2b4f6212920b1754173b8212a8f35fcea634a068",
+      "maximumChannelError": 255,
+      "meanChannelError": 77.12049460411072,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 47.205618143081665
+    },
+    {
+      "material": "M_actor_laevat_cloth_01",
+      "slot": "emissiveTexture",
+      "source": "content-character\\restored-images\\image-12.png",
+      "referenceSize": [
+        1024,
+        1024,
+        4
+      ],
+      "currentSize": [
+        1024,
+        1024,
+        4
+      ],
+      "referenceSha256": "7e74054e1b4f76ff76ba1356c7fa4c8b1d7f87ce82f9507203d66a1133f861ca",
+      "currentSha256": "7e74054e1b4f76ff76ba1356c7fa4c8b1d7f87ce82f9507203d66a1133f861ca",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 1.7296838760375977
+    },
+    {
+      "material": "M_actor_laevat_cloth_01",
+      "slot": "extras.azureRenderMaterial.diffuseRamp.texture",
+      "source": "content-character\\restored-images\\image-35.png",
+      "referenceSize": [
+        1,
+        256,
+        4
+      ],
+      "currentSize": [
+        1,
+        256,
+        4
+      ],
+      "referenceSha256": "ff12009a3f80f1542591d90ec301b09eaadb752aed10d4206e26936dfe6f9685",
+      "currentSha256": "ff12009a3f80f1542591d90ec301b09eaadb752aed10d4206e26936dfe6f9685",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_cloth_01",
+      "slot": "extras.azureRenderMaterial.shadowColorLut.texture",
+      "source": "content-character\\restored-images\\image-24.png",
+      "referenceSize": [
+        32,
+        1024,
+        4
+      ],
+      "currentSize": [
+        32,
+        1024,
+        4
+      ],
+      "referenceSha256": "051c14bb6766f3fd39c2c1dcaa5cb218670fcb187304c6300759c94b3877e8c2",
+      "currentSha256": "051c14bb6766f3fd39c2c1dcaa5cb218670fcb187304c6300759c94b3877e8c2",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 221,
+      "flippedMeanChannelError": 31.54791259765625,
+      "effectiveMaximumChannelError": 0,
+      "effectiveMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_cloth_01",
+      "slot": "normalTexture",
+      "source": "content-character\\restored-images\\image-10.png",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "c65df30156c698f809c824ef7e28fcfabc1c7a0b03ed616a13a34b5ef2ac3a90",
+      "currentSha256": "c65df30156c698f809c824ef7e28fcfabc1c7a0b03ed616a13a34b5ef2ac3a90",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 254,
+      "flippedMeanChannelError": 20.36676824092865
+    },
+    {
+      "material": "M_actor_laevat_cloth_01",
+      "slot": "pbrMetallicRoughness.baseColorTexture",
+      "source": "content-character\\restored-images\\image-1.png",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "f1df8a774ebffc91a4c945958753547691f6a26deb045cbcc3e3f32135c883e5",
+      "currentSha256": "f1df8a774ebffc91a4c945958753547691f6a26deb045cbcc3e3f32135c883e5",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 223,
+      "flippedMeanChannelError": 43.33391523361206
+    },
+    {
+      "material": "M_actor_laevat_cloth_01",
+      "slot": "pbrMetallicRoughness.metallicRoughnessTexture",
+      "source": "content-character\\restored-images\\image-43.png",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "dc10d936a5f4e5ce2c329dd8229f4241f8d525ae89a6530b4ebdb974e81acc37",
+      "currentSha256": "dc10d936a5f4e5ce2c329dd8229f4241f8d525ae89a6530b4ebdb974e81acc37",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 52.496050238609314
+    },
+    {
+      "material": "M_hairshadow_common_04",
+      "slot": "pbrMetallicRoughness.baseColorTexture",
+      "source": "content-character\\restored-images\\image-42.png",
+      "referenceSize": [
+        32,
+        32,
+        4
+      ],
+      "currentSize": [
+        32,
+        32,
+        4
+      ],
+      "referenceSha256": "4a459dc1c302bba02c675baff7b786f27e65691d22bc069f2b503e1027411805",
+      "currentSha256": "4a459dc1c302bba02c675baff7b786f27e65691d22bc069f2b503e1027411805",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 190,
+      "flippedMeanChannelError": 26.59130859375
+    },
+    {
+      "material": "M_actor_laevat_iris_01",
+      "slot": "extras.azureRenderMaterial.eyeSurface.diffuseRampTexture",
+      "source": "content-character\\restored-images\\image-55.dds",
+      "referenceSize": [
+        1,
+        256,
+        4
+      ],
+      "currentSize": [
+        1,
+        256,
+        4
+      ],
+      "referenceSha256": "c80280375910575b30a16c59325ecdeaa885d27a139759d6ef840691cf1deb27",
+      "currentSha256": "c80280375910575b30a16c59325ecdeaa885d27a139759d6ef840691cf1deb27",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_iris_01",
+      "slot": "extras.azureRenderMaterial.eyeSurface.matcapTexture",
+      "source": "content-character\\restored-images\\image-56.dds",
+      "referenceSize": [
+        256,
+        256,
+        4
+      ],
+      "currentSize": [
+        256,
+        256,
+        4
+      ],
+      "referenceSha256": "e66580ef2b098421bd47f9ec127500b12f7a288d4c624f257a36afd513e0769d",
+      "currentSha256": "e66580ef2b098421bd47f9ec127500b12f7a288d4c624f257a36afd513e0769d",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 160,
+      "flippedMeanChannelError": 18.333274841308594
+    },
+    {
+      "material": "M_actor_laevat_iris_01",
+      "slot": "pbrMetallicRoughness.baseColorTexture",
+      "source": "content-character\\restored-images\\image-54.dds",
+      "referenceSize": [
+        512,
+        512,
+        4
+      ],
+      "currentSize": [
+        512,
+        512,
+        4
+      ],
+      "referenceSha256": "1b4f9b86067924b0a915e99395962aeb7fa865bdad1fb3d16987c4c0ca9e66a5",
+      "currentSha256": "1b4f9b86067924b0a915e99395962aeb7fa865bdad1fb3d16987c4c0ca9e66a5",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 250,
+      "flippedMeanChannelError": 30.39227867126465
+    },
+    {
+      "material": "M_actor_laevat_cloth_02",
+      "slot": "emissiveTexture",
+      "source": "content-character\\restored-images\\image-15.png",
+      "referenceSize": [
+        1024,
+        1024,
+        4
+      ],
+      "currentSize": [
+        1024,
+        1024,
+        4
+      ],
+      "referenceSha256": "92842809e1921eb8681f5e95b334ce17509ea22da2b488f0bbde983ab1c57f66",
+      "currentSha256": "92842809e1921eb8681f5e95b334ce17509ea22da2b488f0bbde983ab1c57f66",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 0.7922863960266113
+    },
+    {
+      "material": "M_actor_laevat_cloth_02",
+      "slot": "extras.azureRenderMaterial.diffuseRamp.texture",
+      "source": "content-character\\restored-images\\image-35.png",
+      "referenceSize": [
+        1,
+        256,
+        4
+      ],
+      "currentSize": [
+        1,
+        256,
+        4
+      ],
+      "referenceSha256": "ff12009a3f80f1542591d90ec301b09eaadb752aed10d4206e26936dfe6f9685",
+      "currentSha256": "ff12009a3f80f1542591d90ec301b09eaadb752aed10d4206e26936dfe6f9685",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_cloth_02",
+      "slot": "normalTexture",
+      "source": "content-character\\restored-images\\image-13.png",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "af6d4a18489b452387e3696920a41fb3994bd912933233c21e5b73c8304feca2",
+      "currentSha256": "af6d4a18489b452387e3696920a41fb3994bd912933233c21e5b73c8304feca2",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 17.124842882156372
+    },
+    {
+      "material": "M_actor_laevat_cloth_02",
+      "slot": "pbrMetallicRoughness.baseColorTexture",
+      "source": "content-character\\restored-images\\image-2.png",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "868fc8ba103737fbebd7950e5c36bb581a39ccd317189da244fa1b709c3dc59e",
+      "currentSha256": "868fc8ba103737fbebd7950e5c36bb581a39ccd317189da244fa1b709c3dc59e",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 37.692479968070984
+    },
+    {
+      "material": "M_actor_laevat_cloth_02",
+      "slot": "pbrMetallicRoughness.metallicRoughnessTexture",
+      "source": "content-character\\restored-images\\image-44.png",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "47cf91b2ad160a139838ff985d12bbdb7fd1f8e86de96d1b995ebf3cd0d0a54c",
+      "currentSha256": "47cf91b2ad160a139838ff985d12bbdb7fd1f8e86de96d1b995ebf3cd0d0a54c",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 43.32479381561279
+    },
+    {
+      "material": "M_actor_laevat_cloth_03",
+      "slot": "extras.azureRenderMaterial.diffuseRamp.texture",
+      "source": "content-character\\restored-images\\image-36.png",
+      "referenceSize": [
+        1,
+        256,
+        4
+      ],
+      "currentSize": [
+        1,
+        256,
+        4
+      ],
+      "referenceSha256": "13175ff9a8ecd9beefc65ea04198ce89760354cce138b202ba4311d3a488b325",
+      "currentSha256": "13175ff9a8ecd9beefc65ea04198ce89760354cce138b202ba4311d3a488b325",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_cloth_03",
+      "slot": "normalTexture",
+      "source": "content-character\\restored-images\\image-13.png",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "af6d4a18489b452387e3696920a41fb3994bd912933233c21e5b73c8304feca2",
+      "currentSha256": "af6d4a18489b452387e3696920a41fb3994bd912933233c21e5b73c8304feca2",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 17.124842882156372
+    },
+    {
+      "material": "M_actor_laevat_cloth_03",
+      "slot": "pbrMetallicRoughness.baseColorTexture",
+      "source": "content-character\\restored-images\\image-2.png",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "868fc8ba103737fbebd7950e5c36bb581a39ccd317189da244fa1b709c3dc59e",
+      "currentSha256": "868fc8ba103737fbebd7950e5c36bb581a39ccd317189da244fa1b709c3dc59e",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 37.692479968070984
+    },
+    {
+      "material": "M_actor_laevat_cloth_03",
+      "slot": "pbrMetallicRoughness.metallicRoughnessTexture",
+      "source": "content-character\\restored-images\\image-44.png",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "47cf91b2ad160a139838ff985d12bbdb7fd1f8e86de96d1b995ebf3cd0d0a54c",
+      "currentSha256": "47cf91b2ad160a139838ff985d12bbdb7fd1f8e86de96d1b995ebf3cd0d0a54c",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 43.32479381561279
+    },
+    {
+      "material": "M_actor_laevat_cloth_04",
+      "slot": "extras.azureRenderMaterial.diffuseRamp.texture",
+      "source": "content-character\\native-cloth-04\\t11.dds",
+      "referenceSize": [
+        1,
+        256,
+        4
+      ],
+      "currentSize": [
+        1,
+        256,
+        4
+      ],
+      "referenceSha256": "ff12009a3f80f1542591d90ec301b09eaadb752aed10d4206e26936dfe6f9685",
+      "currentSha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_cloth_04",
+      "slot": "normalTexture",
+      "source": "content-character\\native-cloth-04\\t18.dds",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "0b3ce064df65ce3c33a8118de43108d625301cb43eed56e7fc0e055d0dff1934",
+      "currentSha256": "434c6c5aad9ba8fe14a594e86f331d1d0a0bad72f6fc5b1e7579c12dc1595b2a",
+      "maximumChannelError": 255,
+      "meanChannelError": 74.64938688278198,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 61.06423759460449
+    },
+    {
+      "material": "M_actor_laevat_cloth_04",
+      "slot": "pbrMetallicRoughness.baseColorTexture",
+      "source": "content-character\\native-cloth-04\\t16.dds",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "1841d7e94998c06f1c2357c72c775a79ae2a92d20bb61d0939eabb6c545f7d17",
+      "currentSha256": "c7ea4150acd1461cfe37bf7bfacdb197dd05ab7193e1ca245ab445c4e2fb2324",
+      "maximumChannelError": 255,
+      "meanChannelError": 21.542826652526855,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_cloth_04",
+      "slot": "pbrMetallicRoughness.metallicRoughnessTexture",
+      "source": "content-character\\native-cloth-04\\t17.dds",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "7b750d43600a1be5a342cf81c4c203408ebe20a39281040d17af7951db0d9f2b",
+      "currentSha256": "38a520d6eca0f00bb8cb852679ddcd2fe1bf9c6cac7fa725c5918a5d8139dedd",
+      "maximumChannelError": 255,
+      "meanChannelError": 38.7696727514267,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_cloth_05",
+      "slot": "emissiveTexture",
+      "source": "content-character\\restored-images\\image-15.png",
+      "referenceSize": [
+        1024,
+        1024,
+        4
+      ],
+      "currentSize": [
+        1024,
+        1024,
+        4
+      ],
+      "referenceSha256": "92842809e1921eb8681f5e95b334ce17509ea22da2b488f0bbde983ab1c57f66",
+      "currentSha256": "92842809e1921eb8681f5e95b334ce17509ea22da2b488f0bbde983ab1c57f66",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 0.7922863960266113
+    },
+    {
+      "material": "M_actor_laevat_cloth_05",
+      "slot": "extras.azureRenderMaterial.diffuseRamp.texture",
+      "source": "content-character\\restored-images\\image-35.png",
+      "referenceSize": [
+        1,
+        256,
+        4
+      ],
+      "currentSize": [
+        1,
+        256,
+        4
+      ],
+      "referenceSha256": "ff12009a3f80f1542591d90ec301b09eaadb752aed10d4206e26936dfe6f9685",
+      "currentSha256": "ff12009a3f80f1542591d90ec301b09eaadb752aed10d4206e26936dfe6f9685",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_cloth_05",
+      "slot": "normalTexture",
+      "source": "content-character\\restored-images\\image-13.png",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "af6d4a18489b452387e3696920a41fb3994bd912933233c21e5b73c8304feca2",
+      "currentSha256": "af6d4a18489b452387e3696920a41fb3994bd912933233c21e5b73c8304feca2",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 17.124842882156372
+    },
+    {
+      "material": "M_actor_laevat_cloth_05",
+      "slot": "pbrMetallicRoughness.baseColorTexture",
+      "source": "content-character\\restored-images\\image-2.png",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "868fc8ba103737fbebd7950e5c36bb581a39ccd317189da244fa1b709c3dc59e",
+      "currentSha256": "868fc8ba103737fbebd7950e5c36bb581a39ccd317189da244fa1b709c3dc59e",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 37.692479968070984
+    },
+    {
+      "material": "M_actor_laevat_cloth_05",
+      "slot": "pbrMetallicRoughness.metallicRoughnessTexture",
+      "source": "content-character\\restored-images\\image-44.png",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "47cf91b2ad160a139838ff985d12bbdb7fd1f8e86de96d1b995ebf3cd0d0a54c",
+      "currentSha256": "47cf91b2ad160a139838ff985d12bbdb7fd1f8e86de96d1b995ebf3cd0d0a54c",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 43.32479381561279
+    },
+    {
+      "material": "M_actor_laevat_brow_01",
+      "slot": "extras.azureRenderMaterial.diffuseRamp.texture",
+      "source": "content-character\\restored-images\\image-34.png",
+      "referenceSize": [
+        1,
+        256,
+        4
+      ],
+      "currentSize": [
+        1,
+        256,
+        4
+      ],
+      "referenceSha256": "f92de330ab065af58d4e805b1571aa7b3702c5babd4009abe56bca22b675a4d4",
+      "currentSha256": "f92de330ab065af58d4e805b1571aa7b3702c5babd4009abe56bca22b675a4d4",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_brow_01",
+      "slot": "extras.azureRenderMaterial.shadowColorLut.texture",
+      "source": "content-character\\restored-images\\image-25.png",
+      "referenceSize": [
+        32,
+        1024,
+        4
+      ],
+      "currentSize": [
+        32,
+        1024,
+        4
+      ],
+      "referenceSha256": "e0b0efb7d2d665e1e20eb14e785e0ca422f0cddfa150bf5463d417a10ee9f882",
+      "currentSha256": "e0b0efb7d2d665e1e20eb14e785e0ca422f0cddfa150bf5463d417a10ee9f882",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 149,
+      "flippedMeanChannelError": 24.451980590820312,
+      "effectiveMaximumChannelError": 0,
+      "effectiveMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_brow_01",
+      "slot": "pbrMetallicRoughness.baseColorTexture",
+      "source": "content-character\\restored-images\\image-4.png",
+      "referenceSize": [
+        1024,
+        1024,
+        4
+      ],
+      "currentSize": [
+        1024,
+        1024,
+        4
+      ],
+      "referenceSha256": "a46f08ee9c989ca589eb545c1d538142e86399f54fce2c773d8fecccca47541b",
+      "currentSha256": "a46f08ee9c989ca589eb545c1d538142e86399f54fce2c773d8fecccca47541b",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 57.69114828109741
+    },
+    {
+      "material": "M_eyewhiteshadow_common_01",
+      "slot": "pbrMetallicRoughness.baseColorTexture",
+      "source": "content-character\\restored-images\\image-37.png",
+      "referenceSize": [
+        32,
+        32,
+        4
+      ],
+      "currentSize": [
+        32,
+        32,
+        4
+      ],
+      "referenceSha256": "132b7f2dde122e1c18005b7dfb51900fcca8a14d26dc13e078ab510352a95c02",
+      "currentSha256": "132b7f2dde122e1c18005b7dfb51900fcca8a14d26dc13e078ab510352a95c02",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 173,
+      "flippedMeanChannelError": 17.0146484375
+    },
+    {
+      "material": "M_actor_laevat_face_01",
+      "slot": "extras.azureRenderMaterial.faceSdf.maskTexture",
+      "source": "content-character\\restored-images\\image-21.png",
+      "referenceSize": [
+        256,
+        256,
+        4
+      ],
+      "currentSize": [
+        256,
+        256,
+        4
+      ],
+      "referenceSha256": "db38cc2209f2069080dbf0f8f324f5b12ee370337a64225b84a2e31b01a97689",
+      "currentSha256": "db38cc2209f2069080dbf0f8f324f5b12ee370337a64225b84a2e31b01a97689",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 92.54042053222656
+    },
+    {
+      "material": "M_actor_laevat_face_01",
+      "slot": "extras.azureRenderMaterial.faceSdf.rampTexture",
+      "source": "content-character\\restored-images\\image-22.png",
+      "referenceSize": [
+        1,
+        256,
+        4
+      ],
+      "currentSize": [
+        1,
+        256,
+        4
+      ],
+      "referenceSha256": "f92de330ab065af58d4e805b1571aa7b3702c5babd4009abe56bca22b675a4d4",
+      "currentSha256": "f92de330ab065af58d4e805b1571aa7b3702c5babd4009abe56bca22b675a4d4",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_face_01",
+      "slot": "extras.azureRenderMaterial.faceSdf.texture",
+      "source": "content-character\\restored-images\\image-20.png",
+      "referenceSize": [
+        1024,
+        1024,
+        4
+      ],
+      "currentSize": [
+        1024,
+        1024,
+        4
+      ],
+      "referenceSha256": "5bf5dfaa403bfa027112ff07dd81561455ffb3dcca39cfe0a062031dd3382c09",
+      "currentSha256": "5bf5dfaa403bfa027112ff07dd81561455ffb3dcca39cfe0a062031dd3382c09",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 24.75821876525879
+    },
+    {
+      "material": "M_actor_laevat_face_01",
+      "slot": "extras.azureRenderMaterial.shadowColorLut.texture",
+      "source": "content-character\\restored-images\\image-26.png",
+      "referenceSize": [
+        32,
+        1024,
+        4
+      ],
+      "currentSize": [
+        32,
+        1024,
+        4
+      ],
+      "referenceSha256": "e0b0efb7d2d665e1e20eb14e785e0ca422f0cddfa150bf5463d417a10ee9f882",
+      "currentSha256": "e0b0efb7d2d665e1e20eb14e785e0ca422f0cddfa150bf5463d417a10ee9f882",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 149,
+      "flippedMeanChannelError": 24.451980590820312,
+      "effectiveMaximumChannelError": 0,
+      "effectiveMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_face_01",
+      "slot": "pbrMetallicRoughness.baseColorTexture",
+      "source": "content-character\\restored-images\\image-4.png",
+      "referenceSize": [
+        1024,
+        1024,
+        4
+      ],
+      "currentSize": [
+        1024,
+        1024,
+        4
+      ],
+      "referenceSha256": "a46f08ee9c989ca589eb545c1d538142e86399f54fce2c773d8fecccca47541b",
+      "currentSha256": "a46f08ee9c989ca589eb545c1d538142e86399f54fce2c773d8fecccca47541b",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 57.69114828109741
+    },
+    {
+      "material": "M_actor_laevat_hair_01",
+      "slot": "extras.azureRenderMaterial.diffuseRamp.texture",
+      "source": "content-character\\restored-images\\image-53.dds",
+      "referenceSize": [
+        1,
+        256,
+        4
+      ],
+      "currentSize": [
+        1,
+        256,
+        4
+      ],
+      "referenceSha256": "6f0bdcb7d4da88f997622f690688683380a208bf7bd929ef55522e5edadace05",
+      "currentSha256": "6f0bdcb7d4da88f997622f690688683380a208bf7bd929ef55522e5edadace05",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_hair_01",
+      "slot": "extras.azureRenderMaterial.hair.dataTexture",
+      "source": "content-character\\restored-images\\image-49.dds",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54",
+      "currentSha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 26.207131505012512
+    },
+    {
+      "material": "M_actor_laevat_hair_01",
+      "slot": "extras.azureRenderMaterial.hair.projectedRamp.line.texture",
+      "source": "content-character\\restored-images\\image-52.dds",
+      "referenceSize": [
+        512,
+        512,
+        4
+      ],
+      "currentSize": [
+        512,
+        512,
+        4
+      ],
+      "referenceSha256": "388813b5465244f3f07a2a383021ca470f60bbd08aa3d4d7daa801a8c09aeaa4",
+      "currentSha256": "388813b5465244f3f07a2a383021ca470f60bbd08aa3d4d7daa801a8c09aeaa4",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 0,
+      "flippedMeanChannelError": 0.0
+    },
+    {
+      "material": "M_actor_laevat_hair_01",
+      "slot": "extras.azureRenderMaterial.hair.projectedRamp.parameterTexture",
+      "source": "content-character\\restored-images\\image-50.dds",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "12df068935abc56ac44d86c08a5b342e748f85f5ef3b6d2048485064d8292995",
+      "currentSha256": "12df068935abc56ac44d86c08a5b342e748f85f5ef3b6d2048485064d8292995",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 85.0647143125534
+    },
+    {
+      "material": "M_actor_laevat_hair_01",
+      "slot": "extras.azureRenderMaterial.hair.projectedRamp.rampTexture",
+      "source": "content-character\\restored-images\\image-51.dds",
+      "referenceSize": [
+        256,
+        256,
+        4
+      ],
+      "currentSize": [
+        256,
+        256,
+        4
+      ],
+      "referenceSha256": "cb0c4a5bf2eb2dcf6b4abc7bec66fe1b7dc6400a79efc49811484b35d17993d4",
+      "currentSha256": "cb0c4a5bf2eb2dcf6b4abc7bec66fe1b7dc6400a79efc49811484b35d17993d4",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 224,
+      "flippedMeanChannelError": 19.274513244628906
+    },
+    {
+      "material": "M_actor_laevat_hair_01",
+      "slot": "extras.azureRenderMaterial.outlineSurface.maskTexture",
+      "source": "content-character\\restored-images\\image-57.dds",
+      "referenceSize": [
+        512,
+        512,
+        4
+      ],
+      "currentSize": [
+        512,
+        512,
+        4
+      ],
+      "referenceSha256": "afcc37dc11b59e370e722f99c800702288d6cd0db4f1ee62c4bf9ab6ca0e453e",
+      "currentSha256": "afcc37dc11b59e370e722f99c800702288d6cd0db4f1ee62c4bf9ab6ca0e453e",
+      "maximumChannelError": 0,
+      "meanChannelError": 0.0,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 70.79213333129883
+    },
+    {
+      "material": "M_actor_laevat_hair_01",
+      "slot": "pbrMetallicRoughness.baseColorTexture",
+      "source": "content-character\\hair-base-coverage.dds",
+      "referenceSize": [
+        2048,
+        2048,
+        4
+      ],
+      "currentSize": [
+        2048,
+        2048,
+        4
+      ],
+      "referenceSha256": "4a382264f75c816ccf8fdf70c5e4bccfcf6dc5b31d74c1fcb92b29a9bd556643",
+      "currentSha256": "0bf35700e233f4b70351b604ac5e2a187fc5bddcc3a4805e68d105178d387cdf",
+      "maximumChannelError": 255,
+      "meanChannelError": 1.7957707047462463,
+      "flippedMaximumChannelError": 255,
+      "flippedMeanChannelError": 16.00873988866806
+    }
+  ]
+}

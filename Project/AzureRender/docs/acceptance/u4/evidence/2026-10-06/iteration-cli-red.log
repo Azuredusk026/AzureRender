@@ -1,0 +1,15 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 76: AzureRender.CommandLine
+1/1 Test #76: AzureRender.CommandLine ..........***Failed    0.08 sec
+Unknown option: --set
+Usage: AzureRender.exe [--help] [--asset <gltf/glb path>] [--version] [--check-resources] [--resource-root <directory>] [--environment <hdr/png/jpg path or cubemap directory>] [--scene <azscene path>] [--create-scene <azscene path>] [--editor <azscene path>] [--smoke-frames <positive integer>] [--portfolio] [--width <pixels>] [--height <pixels>] [--gpu-timing] [--gpu-timing-output <json path>] [--diagnostic-view <beauty|normal|outline|shadow>] [--no-stylized] [--no-inner-outline] [--hud] [--technical-sequence] [--qa-camera <preset>] [--qa-light <preset>] [--qa-morph-weights <w0> <w1>] [--qa-effect <effect> --qa-effect-state <state>] [--qa-isolation <view>] [--render-path <traditional|subpasses|dynamic>] [--scene-type <character|blackhole>] [--blackhole-quality <performance|balanced|cinematic>] [--blackhole-camera <front|orbit-left|high|close|over-shoulder>] [--capture-dir <empty directory> --capture-frames <positive integer> --capture-fps <1-240>]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.09 sec
+
+The following tests FAILED:
+	 76 - AzureRender.CommandLine (Failed)
+Errors while running CTest

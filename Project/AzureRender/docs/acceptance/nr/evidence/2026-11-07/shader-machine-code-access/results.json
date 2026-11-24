@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "statistics-only-no-machine-instructions",
+  "sourceBase": "b189e4a",
+  "captureSha256": "9079f51daf9e3d39a3de717a64f226080a86e013d379ea2e5a7eedcbf47ee103",
+  "baselineFragment": {
+    "registerCount": 128,
+    "binaryBytes": 108928,
+    "subgroupSize": 32
+  },
+  "machineInstructionsAvailable": false,
+  "replacementStatisticsQualified": false,
+  "reason": "The executable-properties view yields statistics only. Replacement reflection has a distinct resource identity; fixing the requested stage identity yields original-looking statistics, so these are excluded as proof about the replacement executable.",
+  "reportedLocalMemoryUsedForBudget": false,
+  "reportedLocalMemoryReason": "Raw value is implausible as physical bytes per thread and is retained without a physical-memory interpretation.",
+  "performanceCountersRun": false,
+  "productionChanged": false,
+  "archive": {
+    "file": "inspection.zip",
+    "bytes": 16431,
+    "sha256": "e4b3e4d839cda65057212c1713b81ab93f1b07c4b5777563839682a810ceb6ab"
+  }
+}

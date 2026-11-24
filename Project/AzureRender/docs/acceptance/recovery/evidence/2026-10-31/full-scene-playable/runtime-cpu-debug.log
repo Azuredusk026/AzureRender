@@ -1,0 +1,22 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  55: AzureRuntime.CameraSystem
+1/8 Test  #55: AzureRuntime.CameraSystem ........   Passed    2.09 sec
+    Start 174: AzureEngine.ThirdPerson
+2/8 Test #174: AzureEngine.ThirdPerson ..........   Passed    2.82 sec
+    Start 175: AzureEngine.Locomotion
+3/8 Test #175: AzureEngine.Locomotion ...........   Passed    3.07 sec
+    Start 179: AzureEngine.LocomotionBlend
+4/8 Test #179: AzureEngine.LocomotionBlend ......   Passed    1.12 sec
+    Start 180: AzureRender.AnimationPose
+5/8 Test #180: AzureRender.AnimationPose ........   Passed    1.46 sec
+    Start 183: AzureRender.AnimationCurve
+6/8 Test #183: AzureRender.AnimationCurve .......   Passed    0.77 sec
+    Start 188: AzureEngine.PhysicsInput
+7/8 Test #188: AzureEngine.PhysicsInput .........   Passed    2.99 sec
+    Start 190: AzureEngine.ProjectStartup
+8/8 Test #190: AzureEngine.ProjectStartup .......   Passed    0.64 sec
+
+100% tests passed, 0 tests failed out of 8
+
+Total Test time (real) =  15.06 sec

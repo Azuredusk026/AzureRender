@@ -1,0 +1,10 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 15: AzureEngine.Reflection
+1/2 Test #15: AzureEngine.Reflection ...........   Passed    0.06 sec
+    Start 16: AzureRender.SceneVisibility
+2/2 Test #16: AzureRender.SceneVisibility ......   Passed    0.14 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.21 sec

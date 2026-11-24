@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "status": "public-mechanism-and-real-content-checks-passed",
+  "source": [
+    {
+      "path": "CMakeLists.txt",
+      "bytes": 165493,
+      "sha256": "5bed285f122454e9e94e26425d085d4581e06a3653423c2396fc7821bd484c3f"
+    },
+    {
+      "path": "shaders/mesh.frag",
+      "bytes": 70135,
+      "sha256": "e0dd92dc57bddf75ffc26a4f84ef4b3ee153d56f7f1b5221844de2bb4088450c"
+    },
+    {
+      "path": "src/assets/GltfLoader.cpp",
+      "bytes": 142515,
+      "sha256": "d8802548b8b7ce22b6cff1de7fce7f61a16a4ec680714914a6c72697b94c2f4c"
+    },
+    {
+      "path": "src/assets/GltfLoader.hpp",
+      "bytes": 11557,
+      "sha256": "5737f8944942def96debfefd1fda1e60acf5a5851db2ece3d00dbf0481f62024"
+    },
+    {
+      "path": "src/assets/MaterialSurfaceProfile.hpp",
+      "bytes": 2982,
+      "sha256": "7de064cdc93088b8237dd71b3981a949997ece49d76b2780fff45f2c1196fbc9"
+    },
+    {
+      "path": "tests/SpecularInputTests.cpp",
+      "bytes": 4387,
+      "sha256": "a63786023a887879777f2ae33bcc3a1507195477e1a9d45076fa3550c9dec77a"
+    },
+    {
+      "path": "tools/endfield_native/character_surfaces.py",
+      "bytes": 12667,
+      "sha256": "f0c733b8e0891ae342281c47a36f14aed663221f6e03b3e5510ae67f69522c95"
+    },
+    {
+      "path": "tools/test_native_character_surfaces.py",
+      "bytes": 7480,
+      "sha256": "6959ed9b5b8f2ad9a1d0ab7e927f269130b15c7071e774ba5bf7f6299d6c37c6"
+    },
+    {
+      "path": "tools/test_specular_input_gpu.py",
+      "bytes": 6301,
+      "sha256": "c62a39959b005a0510aff1d033a818a12ef0ddb89a0e8c08de356d3689a93f84"
+    }
+  ],
+  "gpu": [
+    {
+      "name": "specular-gpu-debug",
+      "receipt": {
+        "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/specular-gpu-debug/summary.json",
+        "bytes": 4976,
+        "sha256": "e29e14ba2c6cc689802f49b6d9dc7d7a4e14971f77160b0f2e45b447eb31e450"
+      },
+      "captures": 28,
+      "maximumLinearError": 0.0016666159195117547,
+      "budget": 0.004,
+      "playerSha256": "21b3451e54637c79a82e5a85bc5faa8c89d3b4b2aaf65c16fff91448ca729dc0"
+    },
+    {
+      "name": "specular-gpu-release",
+      "receipt": {
+        "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/specular-gpu-release/summary.json",
+        "bytes": 4976,
+        "sha256": "2819b41da43715c12dc30342ff6c879d92a597b3bf31c79f33dd6caa2b86c39a"
+      },
+      "captures": 28,
+      "maximumLinearError": 0.0016666159195117547,
+      "budget": 0.004,
+      "playerSha256": "12fbcf265931012b5849241c664a5fe50c9d665b1ae55db3f128da187601ec26"
+    }
+  ],
+  "realCaptures": {
+    "status": "technical-captures-passed",
+    "playerSha256": "12fbcf265931012b5849241c664a5fe50c9d665b1ae55db3f128da187601ec26",
+    "modelSha256": "0ce2b6a56273d38b9ac9442cd6e6fba917560d205947a789e7abe233aacb89ad",
+    "captures": [
+      {
+        "name": "cloth-212213-fullbody-default",
+        "imageSha256": "fafe03db8ea25ae58d67655ad60347eae0c1811fcb5f62451f545c01f8820807",
+        "projectSha256": "1a4cc4e96cd6f7f2bfac5d084d95f506027111e6095c2e1e869e4fff056bea66",
+        "levelSha256": "b22302848329a28e1cfb652dab95cc99c52dead2a26ab059dfb9ef3c52fcecb2"
+      },
+      {
+        "name": "cloth-212213-fullbody-specular",
+        "imageSha256": "4c386ebcbc38c05f53f74313311e147269c54740406e3d901b4a04e3bc3bebe9",
+        "projectSha256": "bf8f0d2223a5be2b5f3d5b05a33673d52345ae0b7c1ae358dd1f6ba093ccf34d",
+        "levelSha256": "9fc4823c518917f189830844a8c49d6c40f3a93509c6ff17da7722e38b8031c1"
+      },
+      {
+        "name": "cloth-212213-face-specular",
+        "imageSha256": "2d6400eb17e5476eb57f1e0398695f01f53186cb4ff4ab9bb315cb8aaeb518d0",
+        "projectSha256": "ffdde8b3c295924ebd3b35bfd8f59162d383f7b8cf4c5b3bfe79e7bf93536f99",
+        "levelSha256": "cb2271684e583531ceaddcbab17e22018a93a0e0c4e4ec1ca4598b69a7ac8caa"
+      }
+    ]
+  },
+  "channels": {
+    "status": "passed",
+    "materials": [
+      {
+        "material": "M_actor_laevat_cloth_01",
+        "size": [
+          2048,
+          2048
+        ],
+        "allChannelByteError": 0,
+        "sourcePngSha256": "a3ae6a383465c5482ea8395dd8662fb50b846c6e80a0cbe0c94bc2323159d8ed"
+      },
+      {
+        "material": "M_actor_laevat_cloth_02",
+        "size": [
+          2048,
+          2048
+        ],
+        "allChannelByteError": 0,
+        "sourcePngSha256": "7427f9ff68c4cab77dca5bf373d683bc5731b28d21ffb024779a47b35ac00651"
+      },
+      {
+        "material": "M_actor_laevat_cloth_03",
+        "size": [
+          2048,
+          2048
+        ],
+        "allChannelByteError": 0,
+        "sourcePngSha256": "7427f9ff68c4cab77dca5bf373d683bc5731b28d21ffb024779a47b35ac00651"
+      },
+      {
+        "material": "M_actor_laevat_cloth_04",
+        "size": [
+          2048,
+          2048
+        ],
+        "allChannelByteError": 0,
+        "sourcePngSha256": "a99b8a10bc8c0310eba20a52f572ca8373d8f32b97bd24f3ef988d787848c45e"
+      },
+      {
+        "material": "M_actor_laevat_cloth_05",
+        "size": [
+          2048,
+          2048
+        ],
+        "allChannelByteError": 0,
+        "sourcePngSha256": "7427f9ff68c4cab77dca5bf373d683bc5731b28d21ffb024779a47b35ac00651"
+      }
+    ],
+    "animationGeometryPreserved": true,
+    "unselectedMaterialsPreserved": true
+  },
+  "realDifference": {
+    "changedPixels": 117138,
+    "maximumByteDifference": 101,
+    "bounds": [
+      726,
+      157,
+      1768,
+      1079
+    ],
+    "scope": "Same engine camera/pose/lights; source equivalence evaluated per material input"
+  },
+  "conversion": {
+    "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/cloth-specular-conversion.json",
+    "bytes": 133185,
+    "sha256": "bbe05a1a2260001994d4c41b7f7940b74954888adb07e305a5b83f00ce649fff"
+  },
+  "cpu": [
+    {
+      "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/specular-cpu-red.log",
+      "bytes": 512,
+      "sha256": "14c1e0b186708856cc3e7c0436ea5d1581b41f816588e4806d7db045a9c55dae"
+    },
+    {
+      "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/specular-cpu-green.log",
+      "bytes": 503,
+      "sha256": "0e885b3076267c806800b572f6ad04ad7d824b8fc8a2cb8660b757f7eb44edf7"
+    },
+    {
+      "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/specular-debug-cpu.log",
+      "bytes": 499,
+      "sha256": "c6f0897db32306e917acf3d9bbca55219db3fd24cf60a804e04b8408f4b33f48"
+    },
+    {
+      "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/specular-converter-final.log",
+      "bytes": 1336,
+      "sha256": "7b88c3a32137ac0bb89e09390eddf9367350622aa8b70a4a5c42598c01494ba6"
+    },
+    {
+      "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/specular-final-cpu.log",
+      "bytes": 803,
+      "sha256": "d0bbb1be81e327aa8378c906126572fcf75e493f45bcf9fe1a31deaf07d231fa"
+    }
+  ],
+  "nativeShader": {
+    "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/frame10401/e868-ps-disasm.json",
+    "bytes": 320060,
+    "sha256": "c3e05b3ad02db11e260702a6381a5a587f68eb1f8d96bb1983178f2f1b6ca6bd"
+  },
+  "limitations": [
+    "Native 2D cloth highlights, anisotropy and complete lighting remain separate tasks.",
+    "Native image metrics require matched poses and cameras.",
+    "Raster input; path tracing retains its own specular policy."
+  ],
+  "gpuRegression": {
+    "path": "build/runs/20261022-212213-native-binding-restoration-d39ea8/specular-gpu-regression.log",
+    "sha256": "96f9c7ece9f140dcc97c155307701a2440e4ec96b87d264698754076117b5f7a"
+  }
+}

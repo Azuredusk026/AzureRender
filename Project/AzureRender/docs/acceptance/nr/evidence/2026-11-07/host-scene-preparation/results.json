@@ -1,0 +1,828 @@
+{
+  "schemaVersion": 1,
+  "status": "adopted-diagnostic-cpu-improvement",
+  "sourceBase": "723286a",
+  "hostAttribution": {
+    "status": "measured",
+    "sourceBase": "9004b9c-unlit-candidate-private-host-prepare",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 115.51499999999942,
+    "warmup": 300,
+    "samples": 40,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.3949984,
+        "p95": 2.5428064000000004,
+        "p99": 2.5464528
+      },
+      "sceneMs": {
+        "mean": 18.7392768,
+        "p95": 19.186380800000002,
+        "p99": 19.27754752
+      },
+      "postProcessMs": {
+        "mean": 0.280576,
+        "p95": 0.28472319999999995,
+        "p99": 0.28632063999999996
+      },
+      "frameMs": {
+        "mean": 21.4148512,
+        "p95": 21.9698768,
+        "p99": 22.0732048
+      }
+    },
+    "cpu": {
+      "mean": 20.127467499999995,
+      "p95": 22.043145000000067,
+      "p99": 22.268253999999942
+    },
+    "wait": {
+      "mean": 1.1751325000000066,
+      "p95": 2.6733750000001058,
+      "p99": 3.24692800000005
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 1,
+      "waitMilliseconds": 1.5997
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7404609536,
+    "environmentFailures": [],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "diagnosticOnly": true,
+    "formalSampleCountSatisfied": false,
+    "allMountedProjectBytesUnchanged": true,
+    "powerAcceptanceUnchanged": true,
+    "powerDeviationIsFailure": true,
+    "timingBudgetPassed": false,
+    "powerProfileStable": false,
+    "environmentPassed": false,
+    "executableSha256": "4705063faf0d27a30cf7ca7ef2903a272bdacc2523668674bb3f4cb78d3ccb8c",
+    "pairRole": "baseline",
+    "instrumented": true,
+    "privateFiles": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-042805-host-scene-preparation-34e27e\\AzurePlayer.exe": "4705063faf0d27a30cf7ca7ef2903a272bdacc2523668674bb3f4cb78d3ccb8c",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-042805-host-scene-preparation-34e27e\\AzureRenderApp.cpp": "94f5a42e85e613912666eb16e2c9abe00f48888dd2689e581931d298db7aef96"
+    },
+    "hostRows": [
+      {
+        "frame": 310,
+        "stagesMs": {
+          "advance": 1.3698,
+          "animationAndObservation": 0.0026,
+          "camera": 0.4748,
+          "commitSnapshot": 0.0024,
+          "descriptionAndResources": 1.9668,
+          "frameFields": 0.0003,
+          "gameSnapshot": 1.4566,
+          "input": 0.0148,
+          "presentation": 0.0416,
+          "settings": 0.0147
+        }
+      },
+      {
+        "frame": 311,
+        "stagesMs": {
+          "advance": 1.3067,
+          "animationAndObservation": 0.0029,
+          "camera": 0.5367,
+          "commitSnapshot": 0.003,
+          "descriptionAndResources": 2.1089,
+          "frameFields": 0.0002,
+          "gameSnapshot": 1.3865,
+          "input": 0.0176,
+          "presentation": 0.0281,
+          "settings": 0.0169
+        }
+      },
+      {
+        "frame": 312,
+        "stagesMs": {
+          "advance": 1.3893,
+          "animationAndObservation": 0.0022,
+          "camera": 0.5189,
+          "commitSnapshot": 0.0023,
+          "descriptionAndResources": 1.9752,
+          "frameFields": 0.0002,
+          "gameSnapshot": 1.3979,
+          "input": 0.0168,
+          "presentation": 0.0294,
+          "settings": 0.0135
+        }
+      },
+      {
+        "frame": 313,
+        "stagesMs": {
+          "advance": 1.4034,
+          "animationAndObservation": 0.002,
+          "camera": 0.4418,
+          "commitSnapshot": 0.0022,
+          "descriptionAndResources": 1.831,
+          "frameFields": 0.0003,
+          "gameSnapshot": 1.5986,
+          "input": 0.0134,
+          "presentation": 0.0357,
+          "settings": 0.0139
+        }
+      },
+      {
+        "frame": 314,
+        "stagesMs": {
+          "advance": 1.5237,
+          "animationAndObservation": 0.0021,
+          "camera": 0.4415,
+          "commitSnapshot": 0.0023,
+          "descriptionAndResources": 2.0468,
+          "frameFields": 0.0002,
+          "gameSnapshot": 1.8922,
+          "input": 0.0155,
+          "presentation": 0.0479,
+          "settings": 0.015
+        }
+      },
+      {
+        "frame": 315,
+        "stagesMs": {
+          "advance": 1.3643,
+          "animationAndObservation": 0.002,
+          "camera": 0.4401,
+          "commitSnapshot": 0.0029,
+          "descriptionAndResources": 1.8956,
+          "frameFields": 0.0002,
+          "gameSnapshot": 1.4129,
+          "input": 0.0145,
+          "presentation": 0.029,
+          "settings": 0.0154
+        }
+      },
+      {
+        "frame": 316,
+        "stagesMs": {
+          "advance": 1.3912,
+          "animationAndObservation": 0.002,
+          "camera": 0.4355,
+          "commitSnapshot": 0.0031,
+          "descriptionAndResources": 1.8587,
+          "frameFields": 0.0001,
+          "gameSnapshot": 1.3317,
+          "input": 0.0167,
+          "presentation": 0.0287,
+          "settings": 0.0136
+        }
+      },
+      {
+        "frame": 317,
+        "stagesMs": {
+          "advance": 1.4686,
+          "animationAndObservation": 0.0026,
+          "camera": 0.5331,
+          "commitSnapshot": 0.0024,
+          "descriptionAndResources": 2.2777,
+          "frameFields": 0.0003,
+          "gameSnapshot": 1.6524,
+          "input": 0.0152,
+          "presentation": 0.0292,
+          "settings": 0.0143
+        }
+      },
+      {
+        "frame": 318,
+        "stagesMs": {
+          "advance": 1.3359,
+          "animationAndObservation": 0.0021,
+          "camera": 0.4376,
+          "commitSnapshot": 0.0023,
+          "descriptionAndResources": 1.9061,
+          "frameFields": 0.0001,
+          "gameSnapshot": 1.3447,
+          "input": 0.0134,
+          "presentation": 0.0295,
+          "settings": 0.0151
+        }
+      },
+      {
+        "frame": 319,
+        "stagesMs": {
+          "advance": 1.4728,
+          "animationAndObservation": 0.0025,
+          "camera": 0.433,
+          "commitSnapshot": 0.0026,
+          "descriptionAndResources": 1.9367,
+          "frameFields": 0.0002,
+          "gameSnapshot": 1.282,
+          "input": 0.0161,
+          "presentation": 0.0306,
+          "settings": 0.0269
+        }
+      },
+      {
+        "frame": 320,
+        "stagesMs": {
+          "advance": 1.4286,
+          "animationAndObservation": 0.0023,
+          "camera": 0.4364,
+          "commitSnapshot": 0.0028,
+          "descriptionAndResources": 1.9086,
+          "frameFields": 0.0001,
+          "gameSnapshot": 1.7354,
+          "input": 0.0166,
+          "presentation": 0.0299,
+          "settings": 0.013
+        }
+      },
+      {
+        "frame": 321,
+        "stagesMs": {
+          "advance": 1.3194,
+          "animationAndObservation": 0.0034,
+          "camera": 0.4632,
+          "commitSnapshot": 0.0034,
+          "descriptionAndResources": 2.02,
+          "frameFields": 0.0002,
+          "gameSnapshot": 1.7233,
+          "input": 0.014,
+          "presentation": 0.0278,
+          "settings": 0.0173
+        }
+      },
+      {
+        "frame": 322,
+        "stagesMs": {
+          "advance": 1.6057,
+          "animationAndObservation": 0.0025,
+          "camera": 0.4536,
+          "commitSnapshot": 0.0031,
+          "descriptionAndResources": 1.9129,
+          "frameFields": 0.0001,
+          "gameSnapshot": 1.5733,
+          "input": 0.0137,
+          "presentation": 0.045,
+          "settings": 0.0146
+        }
+      },
+      {
+        "frame": 323,
+        "stagesMs": {
+          "advance": 1.601,
+          "animationAndObservation": 0.0022,
+          "camera": 0.4768,
+          "commitSnapshot": 0.0024,
+          "descriptionAndResources": 2.2952,
+          "frameFields": 0.0002,
+          "gameSnapshot": 1.2952,
+          "input": 0.0153,
+          "presentation": 0.0299,
+          "settings": 0.0142
+        }
+      },
+      {
+        "frame": 324,
+        "stagesMs": {
+          "advance": 1.4561,
+          "animationAndObservation": 0.0027,
+          "camera": 0.4544,
+          "commitSnapshot": 0.0028,
+          "descriptionAndResources": 1.9475,
+          "frameFields": 0.0002,
+          "gameSnapshot": 1.703,
+          "input": 0.0189,
+          "presentation": 0.0299,
+          "settings": 0.015
+        }
+      },
+      {
+        "frame": 325,
+        "stagesMs": {
+          "advance": 1.4286,
+          "animationAndObservation": 0.0025,
+          "camera": 0.4637,
+          "commitSnapshot": 0.0026,
+          "descriptionAndResources": 2.0588,
+          "frameFields": 0.0003,
+          "gameSnapshot": 2.1594,
+          "input": 0.0138,
+          "presentation": 0.0323,
+          "settings": 0.0156
+        }
+      },
+      {
+        "frame": 326,
+        "stagesMs": {
+          "advance": 1.4895,
+          "animationAndObservation": 0.0031,
+          "camera": 0.5237,
+          "commitSnapshot": 0.0034,
+          "descriptionAndResources": 2.1432,
+          "frameFields": 0.0002,
+          "gameSnapshot": 1.4342,
+          "input": 0.0156,
+          "presentation": 0.0331,
+          "settings": 0.0184
+        }
+      },
+      {
+        "frame": 327,
+        "stagesMs": {
+          "advance": 1.4224,
+          "animationAndObservation": 0.0022,
+          "camera": 0.4936,
+          "commitSnapshot": 0.0025,
+          "descriptionAndResources": 2.0569,
+          "frameFields": 0.0003,
+          "gameSnapshot": 1.4088,
+          "input": 0.0141,
+          "presentation": 0.0301,
+          "settings": 0.0145
+        }
+      },
+      {
+        "frame": 328,
+        "stagesMs": {
+          "advance": 1.5045,
+          "animationAndObservation": 0.0021,
+          "camera": 0.4526,
+          "commitSnapshot": 0.0028,
+          "descriptionAndResources": 2.1302,
+          "frameFields": 0.0002,
+          "gameSnapshot": 1.395,
+          "input": 0.0171,
+          "presentation": 0.0353,
+          "settings": 0.0142
+        }
+      },
+      {
+        "frame": 329,
+        "stagesMs": {
+          "advance": 1.5265,
+          "animationAndObservation": 0.0027,
+          "camera": 0.5101,
+          "commitSnapshot": 0.0028,
+          "descriptionAndResources": 2.1319,
+          "frameFields": 0.0002,
+          "gameSnapshot": 1.6361,
+          "input": 0.0149,
+          "presentation": 0.0326,
+          "settings": 0.0157
+        }
+      }
+    ],
+    "hostStages": {
+      "advance": {
+        "mean": 1.4404,
+        "p95": 1.601235,
+        "p99": 1.6048069999999999
+      },
+      "animationAndObservation": {
+        "mean": 0.002435,
+        "p95": 0.003115,
+        "p99": 0.0033429999999999996
+      },
+      "camera": {
+        "mean": 0.471055,
+        "p95": 0.53328,
+        "p99": 0.5360159999999999
+      },
+      "commitSnapshot": {
+        "mean": 0.002705,
+        "p95": 0.0034,
+        "p99": 0.0034
+      },
+      "descriptionAndResources": {
+        "mean": 2.020435,
+        "p95": 2.278575,
+        "p99": 2.2918749999999997
+      },
+      "frameFields": {
+        "mean": 0.000205,
+        "p95": 0.0003,
+        "p99": 0.0003
+      },
+      "gameSnapshot": {
+        "mean": 1.54096,
+        "p95": 1.9055600000000004,
+        "p99": 2.108632
+      },
+      "input": {
+        "mean": 0.0154,
+        "p95": 0.017665000000000004,
+        "p99": 0.018653
+      },
+      "presentation": {
+        "mean": 0.03278,
+        "p95": 0.045145,
+        "p99": 0.047348999999999995
+      },
+      "settings": {
+        "mean": 0.01559,
+        "p95": 0.018825000000000005,
+        "p99": 0.025284999999999988
+      }
+    },
+    "scope": "One current host preparation attribution;340 total frames,20 instrumented observations; original formal acceptance unchanged"
+  },
+  "localControl": {
+    "baselineMs": 1.5170710000000003,
+    "baselinePreparations": 115,
+    "cachedPreparations": 1,
+    "candidateMs": 0.24605799999999994,
+    "checksum": 410600,
+    "nodes": 1679,
+    "outputsEqual": true,
+    "pooledFrames": 2,
+    "reduction": 0.8378071955762124,
+    "resources": 374,
+    "retainedFrameUnchanged": true,
+    "rounds": 100,
+    "scope": "Actual native document and same ECS state; game scene snapshot, render description and resource resolution only; simulation/camera/GPU excluded",
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-042805-host-scene-preparation-34e27e\\NativeCacheBenchmark.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+      "D:\\Projects\\FYP\\Project\\AzureRender"
+    ],
+    "seconds": 25.781999999999243,
+    "sourceBase": "723286a-with-host-scene-caches",
+    "productionUnchanged": true,
+    "affectedHostStagesMeanMs": 3.561395,
+    "estimatedCpuSavedMs": 2.983762357289145,
+    "estimateScope": "Applying the same-operation reduction to the measured host stages; actual whole-frame gain remains pending"
+  },
+  "native": {
+    "baseline": {
+      "status": "measured",
+      "sourceBase": "723286a",
+      "visualAcceptance": "failed-user-review",
+      "seconds": 111.60899999999674,
+      "warmup": 300,
+      "samples": 120,
+      "gpu": {
+        "shadowMs": {
+          "mean": 2.4639669333333334,
+          "p95": 2.5410768,
+          "p99": 2.5578384
+        },
+        "sceneMs": {
+          "mean": 18.7300608,
+          "p95": 19.18976,
+          "p99": 19.28539136
+        },
+        "postProcessMs": {
+          "mean": 0.27959466666666666,
+          "p95": 0.284672,
+          "p99": 0.28672
+        },
+        "frameMs": {
+          "mean": 21.4736224,
+          "p95": 21.967288,
+          "p99": 22.0562592
+        }
+      },
+      "cpu": {
+        "mean": 17.911368333333332,
+        "p95": 21.84721499999993,
+        "p99": 26.736730000000122
+      },
+      "wait": {
+        "mean": 3.44159,
+        "p95": 5.097935000000154,
+        "p99": 5.497342000000074
+      },
+      "sceneExtent": [
+        1920,
+        1080
+      ],
+      "framePacing": {
+        "maximumRate": 60,
+        "presentMode": "FIFO",
+        "vsync": true,
+        "waitFrames": 3,
+        "waitMilliseconds": 5.3412
+      },
+      "allocator": {
+        "bufferAllocations": 1997,
+        "imageAllocations": 440,
+        "liveBuffers": 834,
+        "liveImages": 440,
+        "bufferBytes": 2985576984,
+        "imageBytes": 2779192832,
+        "liveBufferBytes": 415610856,
+        "liveImageBytes": 2779192832,
+        "deviceLocalPeakBytes": 3291255520
+      },
+      "peakWorkingSetBytes": 7403679744,
+      "environmentFailures": [],
+      "zeroAllocator": true,
+      "validationClean": true,
+      "diagnosticOnly": true,
+      "formalSampleCountSatisfied": false,
+      "allMountedProjectBytesUnchanged": true,
+      "powerAcceptanceUnchanged": true,
+      "powerDeviationIsFailure": true,
+      "timingBudgetPassed": false,
+      "powerProfileStable": false,
+      "environmentPassed": false,
+      "executableSha256": "9a3ef9ed8a20199f93fc28c2bac5125f04f4cc917ad5e3eed0ba81f4ab8159aa",
+      "pairRole": "baseline",
+      "instrumented": false
+    },
+    "candidate": {
+      "status": "measured",
+      "sourceBase": "723286a-with-host-scene-caches",
+      "visualAcceptance": "failed-user-review",
+      "seconds": 120.375,
+      "warmup": 300,
+      "samples": 120,
+      "gpu": {
+        "shadowMs": {
+          "mean": 2.5165114666666666,
+          "p95": 2.5506048,
+          "p99": 2.56165184
+        },
+        "sceneMs": {
+          "mean": 18.7216384,
+          "p95": 19.0244352,
+          "p99": 19.1731712
+        },
+        "postProcessMs": {
+          "mean": 0.28265813333333334,
+          "p95": 0.2877952,
+          "p99": 0.288768
+        },
+        "frameMs": {
+          "mean": 21.520808,
+          "p95": 21.8555328,
+          "p99": 21.96441888
+        }
+      },
+      "cpu": {
+        "mean": 13.80743,
+        "p95": 15.277839999999907,
+        "p99": 18.888285000000167
+      },
+      "wait": {
+        "mean": 7.656398333333334,
+        "p95": 8.834925000000066,
+        "p99": 9.253755000000124
+      },
+      "sceneExtent": [
+        1920,
+        1080
+      ],
+      "framePacing": {
+        "maximumRate": 60,
+        "presentMode": "FIFO",
+        "vsync": true,
+        "waitFrames": 4,
+        "waitMilliseconds": 7.5779000000000005
+      },
+      "allocator": {
+        "bufferAllocations": 1997,
+        "imageAllocations": 440,
+        "liveBuffers": 834,
+        "liveImages": 440,
+        "bufferBytes": 2985576984,
+        "imageBytes": 2779192832,
+        "liveBufferBytes": 415610856,
+        "liveImageBytes": 2779192832,
+        "deviceLocalPeakBytes": 3291255520
+      },
+      "peakWorkingSetBytes": 7403122688,
+      "environmentFailures": [
+        "run observation 21: software thermal slowdown is active"
+      ],
+      "zeroAllocator": true,
+      "validationClean": true,
+      "diagnosticOnly": true,
+      "formalSampleCountSatisfied": false,
+      "allMountedProjectBytesUnchanged": true,
+      "powerAcceptanceUnchanged": true,
+      "powerDeviationIsFailure": true,
+      "timingBudgetPassed": false,
+      "powerProfileStable": false,
+      "environmentPassed": false,
+      "executableSha256": "968077eec3cdab75f8185ec111fe1cb086fc61598c5f718336d0dc04e66079d1",
+      "pairRole": "candidate",
+      "instrumented": false
+    },
+    "savedCpuMeanMs": 4.103938333333332,
+    "savedCpuP95Ms": 6.569375000000024,
+    "cpuMeanReduction": 0.22912478024896843,
+    "all663ProgramsByteIdentical": true,
+    "gpuBenefitClaimed": false,
+    "formalAcceptance": false
+  },
+  "image": {
+    "status": "passed",
+    "sourceBase": "723286a-with-host-scene-caches",
+    "executableSha256": "968077eec3cdab75f8185ec111fe1cb086fc61598c5f718336d0dc04e66079d1",
+    "exitCode": 0,
+    "seconds": 114.20300000000134,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "all663ProgramsByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Owned runtime scene snapshot and render description caches; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "checks": [
+    {
+      "kind": "build",
+      "exitCode": 0,
+      "seconds": 222.46899999999732,
+      "command": [
+        "cmd",
+        "/d",
+        "/c",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--test-target",
+        "AzureRuntimeLifecycleTests",
+        "--test-target",
+        "AzureRuntimeSceneSnapshotCacheTests",
+        "--test-target",
+        "AzureRuntimeRenderSnapshotCacheTests",
+        "--test-target",
+        "AzureCameraSystemTests",
+        "--test-target",
+        "AzureRenderEcsTests",
+        "--test-target",
+        "AzureSceneRenderSnapshotTests",
+        "--test-target",
+        "AzureRenderSceneGraphTests",
+        "--test-target",
+        "AzurePresentationRuntimeTests"
+      ]
+    },
+    {
+      "kind": "checks",
+      "exitCode": 0,
+      "seconds": 5.953000000001339,
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^(AzureEngine.RuntimeLifecycle|AzureEngine.RuntimeSceneSnapshotCache|AzureEngine.RuntimeRenderSnapshotCache|AzureRuntime.CameraSystem|AzureRender.Ecs|AzureRuntime.SceneRenderSnapshot|AzureRender.SceneGraph|AzureEngine.PresentationRuntime)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-042805-host-scene-preparation-34e27e\\cpu-batch-checks.xml"
+      ]
+    }
+  ],
+  "batch": [
+    {
+      "name": "module-boundaries",
+      "exitCode": 0,
+      "seconds": 11.952999999994063,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\check_module_boundaries.py",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release"
+      ]
+    },
+    {
+      "name": "capture",
+      "exitCode": 0,
+      "seconds": 123.0940000000046,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-042805-host-scene-preparation-34e27e\\capture.py"
+      ]
+    },
+    {
+      "name": "measure_baseline",
+      "exitCode": 0,
+      "seconds": 140.7809999999954,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-042805-host-scene-preparation-34e27e\\measure_baseline.py"
+      ]
+    },
+    {
+      "name": "measure_candidate",
+      "exitCode": 0,
+      "seconds": 142.01600000000326,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-042805-host-scene-preparation-34e27e\\measure_candidate.py"
+      ]
+    }
+  ],
+  "required": {
+    "cpuP95Ms": 8,
+    "gpuP95Ms": 16.6,
+    "samples": 1800,
+    "stablePowerWatts": 80,
+    "overallVisual": "failed-user-review"
+  },
+  "limitations": [
+    "Candidate telemetry includes one software thermal slowdown observation.",
+    "The required all-observation 80 W condition remains failed.",
+    "Short native samples do not satisfy formal performance acceptance."
+  ],
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 1860128,
+    "sha256": "b8ef8371997cc0545e61bd25e873052ea1de997ab1f6ac7a8a140cd772563a78"
+  }
+}

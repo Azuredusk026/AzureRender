@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "physicalInput": false,
+  "cases": [
+    {
+      "workflow": "fogged_scene_inspector",
+      "sameSceneRestart": true,
+      "unchangedBindingReused": true,
+      "changedBindingPrepared": false,
+      "thirdSceneEviction": true,
+      "emptySceneRestart": true,
+      "released": true
+    },
+    {
+      "workflow": "captured_fog_scene_inspector",
+      "sameSceneRestart": true,
+      "unchangedBindingReused": true,
+      "changedBindingPrepared": true,
+      "thirdSceneEviction": true,
+      "emptySceneRestart": true,
+      "released": true
+    },
+    {
+      "workflow": "platformer",
+      "sameSceneRestart": true,
+      "unchangedBindingReused": true,
+      "changedBindingPrepared": false,
+      "thirdSceneEviction": true,
+      "emptySceneRestart": true,
+      "released": true
+    },
+    {
+      "workflow": "scene_inspector",
+      "sameSceneRestart": true,
+      "unchangedBindingReused": true,
+      "changedBindingPrepared": false,
+      "thirdSceneEviction": true,
+      "emptySceneRestart": true,
+      "released": true
+    }
+  ]
+}

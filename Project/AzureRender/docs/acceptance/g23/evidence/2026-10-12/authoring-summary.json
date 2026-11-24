@@ -1,0 +1,42 @@
+{
+  "codecCases": [
+    {
+      "format": "opus",
+      "frames": 48000,
+      "snrDb": 43.6022008095148
+    },
+    {
+      "format": "mp3",
+      "frames": 48000,
+      "snrDb": 25.996802732237757
+    },
+    {
+      "format": "aac",
+      "frames": 48128
+    },
+    {
+      "format": "m4a",
+      "frames": 48128
+    }
+  ],
+  "passed": true,
+  "runtimeMixing": true,
+  "workflows": [
+    {
+      "audio": "9bb85d5a-e6de-403e-b606-f403a5787ab1",
+      "audioStarts": 1,
+      "name": "opus",
+      "outputFormat": "mp3",
+      "project": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\g23-compressed-audio-2026-10-12\\authoring\\opus\\project.azureproject",
+      "reimportStable": true
+    },
+    {
+      "audio": "f0f5781b-6209-40a2-af32-d806ac0ceaee",
+      "audioStarts": 1,
+      "name": "m4a",
+      "outputFormat": "opus",
+      "project": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\g23-compressed-audio-2026-10-12\\authoring\\m4a\\project.azureproject",
+      "reimportStable": true
+    }
+  ]
+}

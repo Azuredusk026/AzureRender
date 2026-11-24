@@ -1,0 +1,16 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.AnimationAuthoring
+1/1 Test #193: AzureEditor.AnimationAuthoring ...***Failed    0.20 sec
+[1791582867450][info][editor][code=0] Opened scene: third-person-courtyard
+[1791582867467][info][editor][code=0] ERROR [animation.seek]: Unknown operation: animation.seek
+Seek a configured skeleton without altering its component
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.23 sec
+
+The following tests FAILED:
+	193 - AzureEditor.AnimationAuthoring (Failed)
+Errors while running CTest

@@ -1,0 +1,735 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "run": "20261111-070645-handoff-full-regression-60c706",
+  "sourceBase": "eaf39fd",
+  "sourceFiles": {
+    "CMakeLists.txt": "fe073585448c391832dd9f040bb3af3ad8de49f0bbc92dd70e66cf7086cd3d48",
+    "tests/MaterialViewDeterminismGpuTests.cpp": "2eae36c077ff6662df03529cbdbbdece49d8b153f99798ae72586da31917fe96",
+    "tools/test_material_coverage_failure_gpu.py": "56d9c12c61a9b02b8b51b61ac2e495f113b742840199f42818ea1bf970f1d539"
+  },
+  "preservedProtectedFiles": {
+    "docs/acceptance/p5/closure/source-evidence/interruption.json": "4bd07a5e3af10be9aceac2b0ddaa0e5e80c850bc704cc3eae4dfed332e04e979",
+    "docs/acceptance/p5/closure/source-evidence/manifest.json": "11f99d3171d7609a1200aa86920c7fb1251fae4e96e6ecebb76a391359488c43",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-green.log": "b0d7a3991dec0248b49e57e2d9cbdede8e7f286838add2f0723593d8598ee0e7",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-red.log": "f7c1533fc970cbb4665bfbf9267a17ee044e5e01bb22d3d0b74aafc2217c98c4",
+    "src/app/AzureRenderSupport.cpp": "a150ee53a294246d87d8cde42be2881e53e0dd1908481ef91b8786808e80b201",
+    "src/rhi/GpuAllocator.hpp": "2e81204107f3e5cfa765bde0e90c1e6a0131721b6ea6b521b3c73490793164dd",
+    "src/rhi/VulkanRhi.cpp": "4ca84f5a9c7ce471c5f9a75009fd26af8a3fd6b6291be8674e829178291d1840",
+    "tests/MaterialPipelinePolicyTests.cpp": "01f18ad44129c11d97bc2c1d8b0c2c1f3f85bffd0af5403f43d2db513acc7c31",
+    "tests/MotionRecordingTests.cpp": "f8e27feb08afaed0ec723fe7caa76d196909ecba97d06ca7c7ed5943bdc3311e",
+    "tests/ObjectShadowAtlasTests.cpp": "dfb7219c73f059415061b73bc4844a7f0a207b7cb75f0ef81c75b376f8f0ab15",
+    "tests/ShadowTileBoundsGpuTests.cpp": "62504a6a47633cc04f8f886a9013b64f55293b8294afe8e12b69e1c634303b6b",
+    "tools/endfield_native/character_surfaces.py": "6c7c476448f3860b7ec8b3dbddd37cbb7c95b1596ebc3355f2fd1f25cb46c8bb",
+    "tools/test_native_character_surfaces.py": "0c870dfb4a2fb9203fc8ef364a4e494d30d1c8ba133f5514d96db40c839cb1d4"
+  },
+  "configurations": {
+    "debug": {
+      "testCount": 18,
+      "pixelsCompared": 532480,
+      "tests": [
+        {
+          "name": "AzureRender.MaterialViewDeterminismGpu",
+          "passed": true,
+          "seconds": 80.438,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "matrixCase": {
+              "lighting": 0,
+              "setting": 0
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialViewDeterminismGpu.scene.unlit",
+          "passed": true,
+          "seconds": 76.1965,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "matrixCase": {
+              "lighting": 0,
+              "setting": 1
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialViewDeterminismGpu.scene.no-ssr",
+          "passed": true,
+          "seconds": 85.9142,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "matrixCase": {
+              "lighting": 0,
+              "setting": 2
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialViewDeterminismGpu.environment.default",
+          "passed": true,
+          "seconds": 122.966,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "matrixCase": {
+              "lighting": 1,
+              "setting": 0
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialViewDeterminismGpu.environment.unlit",
+          "passed": true,
+          "seconds": 125.809,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "matrixCase": {
+              "lighting": 1,
+              "setting": 1
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialViewDeterminismGpu.environment.no-ssr",
+          "passed": true,
+          "seconds": 143.027,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "matrixCase": {
+              "lighting": 1,
+              "setting": 2
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu",
+          "passed": true,
+          "seconds": 74.8567,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 0,
+              "setting": 0
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.scene.unlit",
+          "passed": true,
+          "seconds": 75.439,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 0,
+              "setting": 1
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.scene.no-ssr",
+          "passed": true,
+          "seconds": 90.2233,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 0,
+              "setting": 2
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.environment.default",
+          "passed": true,
+          "seconds": 123.11,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 1,
+              "setting": 0
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.environment.unlit",
+          "passed": true,
+          "seconds": 119.99,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 1,
+              "setting": 1
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.environment.no-ssr",
+          "passed": true,
+          "seconds": 142.807,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 1,
+              "setting": 2
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.mirrored-uv.default",
+          "passed": true,
+          "seconds": 152.742,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 2,
+              "setting": 0
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.mirrored-uv.unlit",
+          "passed": true,
+          "seconds": 153.116,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 2,
+              "setting": 1
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.mirrored-uv.no-ssr",
+          "passed": true,
+          "seconds": 177.464,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 2,
+              "setting": 2
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialViewDeterminismLegacyGpu",
+          "passed": true,
+          "seconds": 77.7425,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialCoverageFailureGpu",
+          "passed": true,
+          "seconds": 162.733,
+          "render": null
+        },
+        {
+          "name": "AzureRender.MaterialCoverageMipsGpu",
+          "passed": true,
+          "seconds": 124.218,
+          "render": null
+        }
+      ],
+      "coverageArtifacts": {
+        "material-coverage-failure": {
+          "run": "20261111-213524-material-coverage-failure-f395f4",
+          "summarySha256": "090ee64106395bed97177a8ec27e86c7b586dd74165df2ab12a9b48e9c441c85",
+          "cases": 12
+        },
+        "material-coverage-mips": {
+          "run": "20261111-213806-material-coverage-mips-4073aa",
+          "summarySha256": "16bd93197f9a15add92f7b032453521a5ce1f486a05a47089165c441530930f5",
+          "cases": 16
+        }
+      },
+      "productReceiptSha256": "c971cf7451a0076c0527cfc6828f5da9a430acb05dc4dc64c10df68bb709711b"
+    },
+    "release": {
+      "testCount": 18,
+      "pixelsCompared": 532480,
+      "tests": [
+        {
+          "name": "AzureRender.MaterialViewDeterminismGpu",
+          "passed": true,
+          "seconds": 78.381,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "matrixCase": {
+              "lighting": 0,
+              "setting": 0
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialViewDeterminismGpu.scene.unlit",
+          "passed": true,
+          "seconds": 75.0707,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "matrixCase": {
+              "lighting": 0,
+              "setting": 1
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialViewDeterminismGpu.scene.no-ssr",
+          "passed": true,
+          "seconds": 90.6261,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "matrixCase": {
+              "lighting": 0,
+              "setting": 2
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialViewDeterminismGpu.environment.default",
+          "passed": true,
+          "seconds": 122.773,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "matrixCase": {
+              "lighting": 1,
+              "setting": 0
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialViewDeterminismGpu.environment.unlit",
+          "passed": true,
+          "seconds": 120.331,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "matrixCase": {
+              "lighting": 1,
+              "setting": 1
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialViewDeterminismGpu.environment.no-ssr",
+          "passed": true,
+          "seconds": 145.09,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "matrixCase": {
+              "lighting": 1,
+              "setting": 2
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu",
+          "passed": true,
+          "seconds": 74.4028,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 0,
+              "setting": 0
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.scene.unlit",
+          "passed": true,
+          "seconds": 73.2193,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 0,
+              "setting": 1
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.scene.no-ssr",
+          "passed": true,
+          "seconds": 87.3102,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 0,
+              "setting": 2
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.environment.default",
+          "passed": true,
+          "seconds": 116.83,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 1,
+              "setting": 0
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.environment.unlit",
+          "passed": true,
+          "seconds": 117.522,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 1,
+              "setting": 1
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.environment.no-ssr",
+          "passed": true,
+          "seconds": 133.418,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 1,
+              "setting": 2
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.mirrored-uv.default",
+          "passed": true,
+          "seconds": 151.461,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 2,
+              "setting": 0
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.mirrored-uv.unlit",
+          "passed": true,
+          "seconds": 154.211,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 2,
+              "setting": 1
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.ComputedMaterialViewGpu.mirrored-uv.no-ssr",
+          "passed": true,
+          "seconds": 172.086,
+          "render": {
+            "computedCapable": true,
+            "computedViewMode": true,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 30,
+            "matrixCase": {
+              "lighting": 2,
+              "setting": 2
+            },
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialViewDeterminismLegacyGpu",
+          "passed": true,
+          "seconds": 74.4819,
+          "render": {
+            "computedCapable": false,
+            "computedViewMode": false,
+            "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "eligibleChecks": 0,
+            "fallbackChecks": 0,
+            "pixelsCompared": 33280,
+            "status": "passed",
+            "validationErrors": 0,
+            "zeroAllocator": true
+          }
+        },
+        {
+          "name": "AzureRender.MaterialCoverageFailureGpu",
+          "passed": true,
+          "seconds": 132.303,
+          "render": null
+        },
+        {
+          "name": "AzureRender.MaterialCoverageMipsGpu",
+          "passed": true,
+          "seconds": 105.047,
+          "render": null
+        }
+      ],
+      "coverageArtifacts": {
+        "material-coverage-failure": {
+          "run": "20261111-214241-material-coverage-failure-104ae5",
+          "summarySha256": "15aab615bb40deac78c7b2f7c882d85088d2b60b3238276a10b105ad144fd93f",
+          "cases": 12
+        },
+        "material-coverage-mips": {
+          "run": "20261111-214454-material-coverage-mips-6c01c8",
+          "summarySha256": "c270c7557c3e52649ab350c2701fc55ed885392d622ab1baec7fb5548f2d8a23",
+          "cases": 16
+        }
+      },
+      "productReceiptSha256": "35c274d5af76ce33cd97431f30bf014f019ba2b0418cc8502b86aff9e28e6f70"
+    }
+  },
+  "tests": 36,
+  "pixelsCompared": 1064960,
+  "archive": {
+    "bytes": 327452,
+    "members": 64,
+    "sha256": "4f978e32b18a9d04ac98448a2ae7c0a1721bf9d82ede0126e1e6cba9f0c82bed"
+  },
+  "interruptedAttempt": {
+    "wallLimitSeconds": 1000,
+    "generatedFrames": 14,
+    "status": "interrupted",
+    "receiptSha256": "41c0ba659a41cb888ed2693acdf110ba8483736366247b01a10e0901873f6e17"
+  }
+}

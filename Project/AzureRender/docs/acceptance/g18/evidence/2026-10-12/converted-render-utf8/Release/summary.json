@@ -1,0 +1,161 @@
+{
+  "passed": true,
+  "configuration": "Release",
+  "runtimeSha256": "a0490f53e9a2ea3794e26875d59e2a18b63e1c4cf6f49054a06a545ab316a0f0",
+  "cases": [
+    {
+      "device": "nvidia",
+      "gpuName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "format": "obj",
+      "assetSha256": "f59a3979c2692acb5341e482ebfe5a9abd1d569ff83335b84cab1d13b8173037",
+      "imageSha256": "855c68c3e9a28b5e5beb049dd874de61d18fd6c676551ed560a56f904fdf0c6e",
+      "imageStd": 40.13168538305259,
+      "primitiveCount": 2,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "nvidia",
+      "gpuName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "format": "stl",
+      "assetSha256": "1d33ae8370efec084335653c9981267c5bd42a658dba6e6dba46afbefbcf10e0",
+      "imageSha256": "58cb19cf8f82958a9deb2132ea613d8be98bd530ed544fa9f207e39f588e9bca",
+      "imageStd": 44.40875403791354,
+      "primitiveCount": 2,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "nvidia",
+      "gpuName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "format": "ply",
+      "assetSha256": "572fc4f8a75ae9a9dd7f5346edc95479e9071f9e187578bdd2ee2279b516635a",
+      "imageSha256": "58cb19cf8f82958a9deb2132ea613d8be98bd530ed544fa9f207e39f588e9bca",
+      "imageStd": 44.40875403791354,
+      "primitiveCount": 2,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "nvidia",
+      "gpuName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "format": "dae",
+      "assetSha256": "06d272f5d833c546b1bf972fe9c85a66541a0b1214d538bd7da77313fdd76be8",
+      "imageSha256": "9f6f62398d20f5950670c22b09f6f8a655411585c1d48c8d9b97d4fba5003835",
+      "imageStd": 40.13161948971038,
+      "primitiveCount": 3,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "nvidia",
+      "gpuName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "format": "fbx",
+      "assetSha256": "e3fe05ceb5da836935bf7a15dec41d3e47e79841d2ee00153cc260b851d52439",
+      "imageSha256": "ffbf3fc876023b3133dd1d3d81571222d47602b3afb1e343e4b518fe7ef3ab75",
+      "imageStd": 42.65625806298839,
+      "primitiveCount": 3,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "nvidia",
+      "gpuName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "format": "mirror",
+      "assetSha256": "1ee91d5af8712e0d1ebd4bc2dd64a53f06f529e171229dc6b0eaa392d4efe093",
+      "imageSha256": "2a8b63387f4720ec02b190bbd990216a5edb0a9de7e56b639bc939c6299f93ce",
+      "imageStd": 37.80966320677569,
+      "primitiveCount": 3,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "nvidia",
+      "gpuName": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "format": "texture",
+      "assetSha256": "c10909918d89e56beb720055f9d6f6016beb098204190303ea8b6912434239da",
+      "imageSha256": "095b09a44a7c29f4c1d814e57f25306147054a109a1937aaf545deadde745592",
+      "imageStd": 50.264829756743275,
+      "primitiveCount": 3,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "intel",
+      "gpuName": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "format": "obj",
+      "assetSha256": "f59a3979c2692acb5341e482ebfe5a9abd1d569ff83335b84cab1d13b8173037",
+      "imageSha256": "1a47684d2cabb98a48c6c0b1d8409834ba1929470df082ad73d98129eb61c89a",
+      "imageStd": 40.154383490105204,
+      "primitiveCount": 2,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "intel",
+      "gpuName": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "format": "stl",
+      "assetSha256": "1d33ae8370efec084335653c9981267c5bd42a658dba6e6dba46afbefbcf10e0",
+      "imageSha256": "ad7b73adebf339c2cc4511f8f7c00d8f30593df8638a657b614df4d527a28f94",
+      "imageStd": 44.43325558528433,
+      "primitiveCount": 2,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "intel",
+      "gpuName": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "format": "ply",
+      "assetSha256": "572fc4f8a75ae9a9dd7f5346edc95479e9071f9e187578bdd2ee2279b516635a",
+      "imageSha256": "da2182167a61c044e6b4c60ff3fb3963ad6f8fbc2a4b218f47bc251f782a4b0f",
+      "imageStd": 44.43327172921213,
+      "primitiveCount": 2,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "intel",
+      "gpuName": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "format": "dae",
+      "assetSha256": "06d272f5d833c546b1bf972fe9c85a66541a0b1214d538bd7da77313fdd76be8",
+      "imageSha256": "e1dc3e223f129d29cdc41374a156cde56e99d5319ffcdd7f9d878fcc674b3e84",
+      "imageStd": 40.1543233288073,
+      "primitiveCount": 3,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "intel",
+      "gpuName": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "format": "fbx",
+      "assetSha256": "e3fe05ceb5da836935bf7a15dec41d3e47e79841d2ee00153cc260b851d52439",
+      "imageSha256": "cf3aa0f05afdfaec72c0409c57bf59eb7be18f5764efc7f418bfcadcfdc339c7",
+      "imageStd": 42.619085294075525,
+      "primitiveCount": 3,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "intel",
+      "gpuName": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "format": "mirror",
+      "assetSha256": "1ee91d5af8712e0d1ebd4bc2dd64a53f06f529e171229dc6b0eaa392d4efe093",
+      "imageSha256": "5e1abe11e606f6530b78e832f411cba959e69f42a4a635ef183de95cbbe27683",
+      "imageStd": 37.813323929376544,
+      "primitiveCount": 3,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    },
+    {
+      "device": "intel",
+      "gpuName": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "format": "texture",
+      "assetSha256": "c10909918d89e56beb720055f9d6f6016beb098204190303ea8b6912434239da",
+      "imageSha256": "4314d7fe03fb7d100d9222efb55901eb58622e58e2998cc8293456eb0ce94943",
+      "imageStd": 50.25363513360772,
+      "primitiveCount": 3,
+      "validationErrors": 0,
+      "allocatorEmpty": true
+    }
+  ]
+}

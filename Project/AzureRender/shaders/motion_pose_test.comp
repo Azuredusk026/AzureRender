@@ -1,0 +1,21 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#define AZURE_MOTION_POSE_BINDING 0
+#define AZURE_MOTION_TARGET_BINDING 1
+#include "motion_pose_data.glsl"
+layout(local_size_x=1) in;
+struct Probe {uvec4 selectors;vec4 position;vec4 morph0;vec4 morph1;uvec4 joints;vec4 weights;vec4 brow;vec4 current;vec4 normal;vec4 tangent;};
+layout(std430,binding=2) readonly buffer Probes {Probe values[];} source;
+layout(std430,binding=3) buffer Results {vec4 values[];} result;
+void main(){uint i=gl_GlobalInvocationID.x;Probe p=source.values[i];vec4 previous;
+    bool valid=azurePreviousMotionClip(p.selectors.x,p.selectors.y,p.selectors.z,p.selectors.w,
+        p.position.xyz,p.morph0.xyz,p.morph1.xyz,p.joints,p.weights,
+        (floatBitsToUint(p.brow.z)&64u)!=0u&&p.brow.x>.5,p.brow.y,previous);
+    result.values[i*5u]=previous;result.values[i*5u+1u]=azureMotionProjection(p.current,previous,valid);
+    vec3 normal;vec4 tangent;
+    bool directions=azurePreviousMotionDirections(p.selectors.x,p.selectors.y,p.selectors.z,p.selectors.w,p.normal.xyz,p.tangent,p.joints,p.weights,normal,tangent);
+    result.values[i*5u+2u]=vec4(normal,directions?1:0);result.values[i*5u+3u]=tangent;
+    vec4 outlined;bool shell=azurePreviousMotionOutline(p.selectors.x,p.selectors.y,p.selectors.z,p.selectors.w,
+        p.position.xyz,p.morph0.xyz,p.morph1.xyz,p.normal.xyz,p.tangent,p.joints,p.weights,
+        vec3(0,0,1),floatBitsToUint(p.brow.w)!=0u,vec4(.75,.35,.02,1),vec2(.5,.25),vec2(100,100),outlined);
+    result.values[i*5u+4u]=shell?outlined:vec4(0);}

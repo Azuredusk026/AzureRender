@@ -1,0 +1,6 @@
+{
+  "status": "red-confirmed",
+  "programSha256": "c630f233cfda22d88a98884358773bf37da6399e3d90d0910a6654cdad20a192",
+  "scriptSha256": "3f5108a26be5340264ee8b55f5e94bcf4456723aa4ec505d851693651f4e9dd5",
+  "reason": "Production Vulkan Player rejects the missing material environment source contract."
+}

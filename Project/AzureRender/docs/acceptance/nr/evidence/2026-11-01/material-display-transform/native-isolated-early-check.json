@@ -1,0 +1,22 @@
+[
+  {
+    "region": "hair-crown",
+    "exact": true
+  },
+  {
+    "region": "hair-fringe",
+    "exact": true
+  },
+  {
+    "region": "face-cheek",
+    "exact": true
+  },
+  {
+    "region": "face-chin",
+    "exact": true
+  },
+  {
+    "region": "eye-left",
+    "exact": true
+  }
+]

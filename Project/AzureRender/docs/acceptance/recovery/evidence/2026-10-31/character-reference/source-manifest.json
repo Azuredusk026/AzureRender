@@ -1,0 +1,21 @@
+{
+  "source": "build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured",
+  "files": [
+    {
+      "file": "hair-receiver.azureproject",
+      "bytes": 235,
+      "sha256": "ac5b3b8b5d393d36a020b552c9ecb43873d787fa4319fa6ff8e2112f04f8578d"
+    },
+    {
+      "file": "assets/hair-receiver.azurelevel",
+      "bytes": 9141,
+      "sha256": "8ebec2b26b79b988d29a1c3442d7f04e94b697d3c9b05a895a2dd2ac0fce4f2f"
+    },
+    {
+      "file": "character/hair-receiver.glb",
+      "bytes": 118802636,
+      "sha256": "7ecbecc4cec04e0792cc0dbc5ec732cbbcd6d09082a69ff2f918a0c657ef2008"
+    }
+  ],
+  "scope": "Exact historical project, authored level and embedded GLB; no lighting edits."
+}

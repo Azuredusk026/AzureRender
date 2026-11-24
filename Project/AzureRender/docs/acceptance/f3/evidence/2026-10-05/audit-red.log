@@ -1,0 +1,53 @@
+FFFF
+======================================================================
+FAIL: test_clean_repository_and_valid_relative_links_pass (__main__.RepositoryAuditTests.test_clean_repository_and_valid_relative_links_pass)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_repository_audit.py", line 33, in test_clean_repository_and_valid_relative_links_pass
+    code, report = self.audit()
+                   ^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_repository_audit.py", line 29, in audit
+    self.assertTrue(output.exists(), 'Audit must produce a machine-readable report: ' + result.stderr)
+AssertionError: False is not true : Audit must produce a machine-readable report: C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\audit_repository.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_ignored_source_file_fails_hygiene (__main__.RepositoryAuditTests.test_ignored_source_file_fails_hygiene)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_repository_audit.py", line 56, in test_ignored_source_file_fails_hygiene
+    code, report = self.audit()
+                   ^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_repository_audit.py", line 29, in audit
+    self.assertTrue(output.exists(), 'Audit must produce a machine-readable report: ' + result.stderr)
+AssertionError: False is not true : Audit must produce a machine-readable report: C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\audit_repository.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_missing_active_document_link_fails (__main__.RepositoryAuditTests.test_missing_active_document_link_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_repository_audit.py", line 49, in test_missing_active_document_link_fails
+    code, report = self.audit()
+                   ^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_repository_audit.py", line 29, in audit
+    self.assertTrue(output.exists(), 'Audit must produce a machine-readable report: ' + result.stderr)
+AssertionError: False is not true : Audit must produce a machine-readable report: C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\audit_repository.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_tracked_cache_fails_even_when_gitignore_matches (__main__.RepositoryAuditTests.test_tracked_cache_fails_even_when_gitignore_matches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_repository_audit.py", line 43, in test_tracked_cache_fails_even_when_gitignore_matches
+    code, report = self.audit()
+                   ^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_repository_audit.py", line 29, in audit
+    self.assertTrue(output.exists(), 'Audit must produce a machine-readable report: ' + result.stderr)
+AssertionError: False is not true : Audit must produce a machine-readable report: C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\audit_repository.py': [Errno 2] No such file or directory
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.089s
+
+FAILED (failures=4)

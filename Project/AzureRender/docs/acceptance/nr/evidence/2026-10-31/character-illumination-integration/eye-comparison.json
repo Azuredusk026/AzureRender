@@ -1,0 +1,92 @@
+{
+  "status": "measured",
+  "scope": "Fixed image-space rectangles selected from the original 1280x720 portrait. Rectangles include eyelids and skin; they are not native visibility masks or final acceptance gates.",
+  "cases": [
+    {
+      "case": "high",
+      "reference": {
+        "path": "build\\runs\\20261024-074605-native-material-aa-reference-9eb92d\\high\\frames\\frame_000000.png",
+        "sha256": "f6224e0aa6ab0bb68a32f2a327c6d14c1f95d0c32d2e210d11515f18853f74c7"
+      },
+      "current": {
+        "path": "build\\runs\\20261031-135416-character-portrait-recovery-0773ca\\original-reference\\high\\frames\\frame_000000.png",
+        "sha256": "1dca1ab2122e8d7abe6d187172df558f1dbe234bc30172cac41d85a8fe8a87ad"
+      },
+      "regions": [
+        {
+          "name": "image-left-eye",
+          "boxAt1280x720": [
+            620,
+            124,
+            638,
+            139
+          ],
+          "scale": 4,
+          "pixels": 4320,
+          "changedPixels": 0,
+          "pixelsBeyondOneByte": 0,
+          "meanByteError": 0.0,
+          "maximumByteDifference": 0
+        },
+        {
+          "name": "image-right-eye",
+          "boxAt1280x720": [
+            646,
+            124,
+            664,
+            139
+          ],
+          "scale": 4,
+          "pixels": 4320,
+          "changedPixels": 0,
+          "pixelsBeyondOneByte": 0,
+          "meanByteError": 0.0,
+          "maximumByteDifference": 0
+        }
+      ]
+    },
+    {
+      "case": "temporal",
+      "reference": {
+        "path": "build\\runs\\20261024-074605-native-material-aa-reference-9eb92d\\temporal\\frames\\frame_000031.png",
+        "sha256": "34946eb81b1c5ae7b2c5bde3fa664a9e54e10d4bf55f36d0d079c1a7691b856c"
+      },
+      "current": {
+        "path": "build\\runs\\20261031-135416-character-portrait-recovery-0773ca\\original-reference\\temporal\\frames\\frame_000031.png",
+        "sha256": "6bd97b6754bd954d91f664e4e37652baa731c9e73216dc9484728139f78130d4"
+      },
+      "regions": [
+        {
+          "name": "image-left-eye",
+          "boxAt1280x720": [
+            620,
+            124,
+            638,
+            139
+          ],
+          "scale": 1,
+          "pixels": 270,
+          "changedPixels": 139,
+          "pixelsBeyondOneByte": 63,
+          "meanByteError": 1.028395061728395,
+          "maximumByteDifference": 23
+        },
+        {
+          "name": "image-right-eye",
+          "boxAt1280x720": [
+            646,
+            124,
+            664,
+            139
+          ],
+          "scale": 1,
+          "pixels": 270,
+          "changedPixels": 171,
+          "pixelsBeyondOneByte": 83,
+          "meanByteError": 1.6296296296296295,
+          "maximumByteDifference": 40
+        }
+      ]
+    }
+  ]
+}

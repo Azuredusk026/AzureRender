@@ -1,0 +1,1400 @@
+{
+  "schemaVersion": 3,
+  "typeId": "azure.profile",
+  "parameters": {},
+  "textures": {
+    "0": {
+      "asset": "d72fd433-9a10-4c78-a00e-8c4b832d2850",
+      "usage": "albedo"
+    },
+    "1": {
+      "asset": "351b1c1e-a9d3-558e-a94e-905cc2f43919",
+      "usage": "linear"
+    },
+    "2": {
+      "asset": "a391bc8e-7107-56fa-b010-2f1ed821c9b0",
+      "usage": "linear"
+    },
+    "3": {
+      "asset": "23a24085-70e1-56e3-957b-23706437d05a",
+      "usage": "linear"
+    },
+    "4": {
+      "asset": "a79c265f-ac50-5d38-85cf-7b977348af65",
+      "usage": "linear"
+    },
+    "5": {
+      "asset": "c8fb1e53-0a6b-5399-bbc6-e38b56164a8e",
+      "usage": "linear"
+    },
+    "6": {
+      "asset": "b5d81fae-702d-558c-beb8-0769cb379661",
+      "usage": "linear"
+    }
+  },
+  "surface": {
+    "asset": {
+      "version": "2.0"
+    },
+    "materials": [
+      {
+        "alphaMode": "MASK",
+        "doubleSided": false,
+        "name": "M_actor_laevat_hair_01",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 1
+        },
+        "extras": {
+          "nativeOpaqueSource": {
+            "source": "CAB-1f0cb5d826c2b25c334837654bcc7d7f",
+            "path_id": 3025535707740129307,
+            "type": "Material",
+            "name": "M_actor_laevat_hair_01"
+          },
+          "azureRenderMaterial": {
+            "schemaVersion": 2,
+            "class": "hair",
+            "hair": {
+              "power": 200,
+              "strength": 1.3,
+              "rampRow": 3,
+              "strandShift": 0.1,
+              "cameraOffset": [
+                0,
+                0,
+                0
+              ],
+              "upperLimit": 4,
+              "dataTexture": 1,
+              "dataNormalY": "positive",
+              "projectedRamp": {
+                "schemaVersion": 1,
+                "primaryShift": -0.020000000000000018,
+                "secondaryShift": 0.020000000000000018,
+                "intensity": 1.3,
+                "secondaryRange": 0.5,
+                "edgeFade": 5,
+                "specularNormalScale": 1,
+                "surfaceNormalScale": 1,
+                "directionX": 0,
+                "parameterTexture": 2,
+                "rampTexture": 3,
+                "secondaryColor": [
+                  0.4091444674721517,
+                  0.0,
+                  0.00033774597523219814
+                ],
+                "objectBasis": [
+                  1,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "surfaceResponse": "strand-diffuse",
+                "diffuseScale": 0.96,
+                "virtualLight": {
+                  "schemaVersion": 1,
+                  "blend": 1,
+                  "objectGain": 1
+                },
+                "line": {
+                  "schemaVersion": 1,
+                  "texture": 4,
+                  "frequency": 300,
+                  "strandShift": 0.4,
+                  "range": 0.95,
+                  "depth": 0.22,
+                  "alternation": 1,
+                  "saturation": 1.5,
+                  "uvTransform": [
+                    9.3,
+                    1,
+                    -0.32,
+                    0
+                  ],
+                  "diffuseTarget": "main-and-ambient"
+                },
+                "frame": {
+                  "schemaVersion": 1,
+                  "node": "Bip001_Head",
+                  "basis": [
+                    -1.2556207821560323e-06,
+                    2.7855764703915194e-06,
+                    -0.9999999999953323,
+                    0.999999999999211,
+                    -4.4843204444759344e-08,
+                    -1.2556209066996796e-06,
+                    4.484670207260324e-08,
+                    0.9999999999961199,
+                    2.7855764142771456e-06
+                  ]
+                },
+                "tangentSign": -1,
+                "lighting": {
+                  "schemaVersion": 1,
+                  "shadowBrightness": 0.550000011920929,
+                  "shadowSaturation": 1.100000023841858,
+                  "shadowScale": 0.550000011920929,
+                  "ambientColor": [
+                    0.8783068656921387,
+                    0.9302293062210083,
+                    1.1216931343078613
+                  ],
+                  "mainColor": [
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "characterVisibility": "object-shadow"
+                }
+              }
+            },
+            "diffuseRamp": {
+              "schemaVersion": 1,
+              "texture": 5
+            },
+            "features": [
+              "diffuse-ramp",
+              "hair-anisotropy",
+              "hair-projected-ramp",
+              "stylized-shadow",
+              "geometry-shadow"
+            ],
+            "styleParameters": [
+              1,
+              1,
+              0.4,
+              0
+            ],
+            "outlineSurface": {
+              "schemaVersion": 1,
+              "mode": "view-scaled",
+              "width": 0.5,
+              "minimumPixels": 0.5,
+              "depthOffset": 0,
+              "normalSource": "tangent-octahedral-uv1",
+              "depthPrepass": true,
+              "maskTexture": 6
+            },
+            "radianceScale": 0.25
+          },
+          "nativeCharacterProfileSource": {
+            "material": {
+              "source": "CAB-1f0cb5d826c2b25c334837654bcc7d7f",
+              "path_id": 3025535707740129307,
+              "type": "Material",
+              "name": "M_actor_laevat_hair_01"
+            },
+            "floats": {
+              "_AdvancedOption": 1,
+              "_Albedo": 0,
+              "_AlphaClip": 0,
+              "_AlphaClipThreshold": 0.5,
+              "_AlphaDstBlend": 0,
+              "_AlphaPremultiply": 0,
+              "_AlphaSrcBlend": 1,
+              "_Anisotropy": 1,
+              "_AnisotropyDirX": 0,
+              "_AnisotropyEdgeFade": 5,
+              "_AnisotropyIntensity": 1.3,
+              "_AnisotropyRange2": 0.5,
+              "_AnisotropyValue": 0.49,
+              "_AnisotropyValue2": 0.51,
+              "_AvatarCustomizeEnable": 0,
+              "_BackFaceNormalFlip": 0,
+              "_BlendMode": 0,
+              "_BumpScale": 1,
+              "_ColorAdjustmentBrightness": 1,
+              "_ColorAdjustmentContrast": 1,
+              "_ColorAdjustmentRimIntensity": 4,
+              "_ColorAdjustmentRimWidth": 0.35,
+              "_ColorAdjustmentSaturation": 1,
+              "_Cull": 2,
+              "_CutOffPosY": 0,
+              "_DissolveEdgeSharp": 0,
+              "_DissolveEmissiveEdge": 0,
+              "_DissolveScheduleOffset": 0,
+              "_DissolveUVSet": 0,
+              "_DissolveUseViewUV": 0,
+              "_DrawUnderBrow": 1,
+              "_DstBlend": 0,
+              "_EmissionBrightness": 1,
+              "_EnableAlphaTest": 0,
+              "_EnableDither": 0,
+              "_EnableOutline": 1,
+              "_EnableOutlineMask": 1,
+              "_EnableVFXColorAdjustment": 0,
+              "_HairBrowMaskThreshold": 0.5,
+              "_HairStencilRef": 36,
+              "_IsChildMaterial": 0,
+              "_LineAmount": 300,
+              "_LineIntensity": 0.22,
+              "_LineRange": 0.95,
+              "_LineSaturation": 1.5,
+              "_LineValue": 0.7,
+              "_MVDstBlend": 0,
+              "_MVSrcBlend": 1,
+              "_Metallic": 0,
+              "_Outline": 0,
+              "_OutlineAverageNormal": 1,
+              "_OutlineColorBrightness": 0.5,
+              "_OutlineColorSaturation": 1.2,
+              "_OutlineOffsetZ": 0,
+              "_OutlineTransparent": 0,
+              "_OutlineWidth": 0.5,
+              "_OutlineZTest": 3,
+              "_PBRInput": 0,
+              "_QueueOffset": 15,
+              "_ResponsiveTransparency": 0,
+              "_ShadowColorBrightness": 0.55,
+              "_ShadowColorInput": 1,
+              "_ShadowColorSaturation": 1.1,
+              "_Smoothness": 1,
+              "_SpecBumpScale": 1,
+              "_Specular": 1,
+              "_SpecularLine": 1,
+              "_SrcBlend": 1,
+              "_StrokeOn": 0,
+              "_StrokeScale": 0.2,
+              "_SurfaceType": 0,
+              "_TransparentDepthWrite": 1,
+              "_TransparentSortPriority": 15,
+              "_UseBumpMap": 1,
+              "_UseCutOff": 0,
+              "_UseDiffRampMap": 1,
+              "_UseDissolve": 0,
+              "_UseEmission": 0,
+              "_UseLineMap": 1,
+              "_UseMetallicGlossMap": 1,
+              "_UseShadowLutTex": 0,
+              "_UseSpecBumpMap": 1,
+              "_UseSpecRampMap": 1,
+              "_ZTest": 3,
+              "_ZWrite": 1,
+              "_characterRenderQueue": 2000
+            },
+            "colors": {
+              "_AnisotropyColor2": [
+                0.672,
+                0,
+                0.004363678,
+                1
+              ],
+              "_BaseColor": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "_ColorAdjustmentColorBlend": [
+                1,
+                1,
+                1,
+                0
+              ],
+              "_ColorAdjustmentRimColor": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "_CutOffDirection": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "_DissolveEmissiveColor": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "_DissolveUVSpeed": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "_EmissionColor": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "_HairAddTintColor": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "_HairBaseTintColor": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "keywords": [
+              "_DIFF_RAMP_ON",
+              "_DRAW_UNDER_BROW",
+              "_METALLICSPECGLOSSMAP",
+              "_NORMALMAP",
+              "_OUTLINE_MASK",
+              "_SPECULAR_LINE",
+              "_SPECULAR_NORMALMAP",
+              "_SPEC_RAMP_ON"
+            ]
+          }
+        },
+        "alphaCutoff": 0.5
+      }
+    ],
+    "textures": [
+      {
+        "source": 0
+      },
+      {
+        "source": 1
+      },
+      {
+        "source": 2
+      },
+      {
+        "source": 3
+      },
+      {
+        "source": 4
+      },
+      {
+        "source": 5
+      },
+      {
+        "source": 6,
+        "sampler": 4
+      }
+    ],
+    "samplers": [
+      {
+        "magFilter": 9729,
+        "minFilter": 9987
+      },
+      {
+        "wrapS": 10497,
+        "wrapT": 10497,
+        "magFilter": 9729,
+        "minFilter": 9985
+      },
+      {
+        "wrapS": 33071,
+        "wrapT": 33071,
+        "magFilter": 9729,
+        "minFilter": 9729
+      },
+      {
+        "wrapS": 33071,
+        "wrapT": 33071,
+        "magFilter": 9729,
+        "minFilter": 9985
+      },
+      {
+        "wrapS": 33071,
+        "wrapT": 33071,
+        "magFilter": 9729,
+        "minFilter": 9729
+      }
+    ],
+    "nodes": [
+      {
+        "name": "Hair_base_L_a_003_jnt"
+      },
+      {
+        "name": "Hair_base_L_a_002_jnt"
+      },
+      {
+        "name": "Hair_base_L_a_001_jnt"
+      },
+      {
+        "name": "Hair_base_F_003_jnt"
+      },
+      {
+        "name": "Hair_base_F_002_jnt"
+      },
+      {
+        "name": "Hair_base_F_001_jnt"
+      },
+      {
+        "name": "Hair_base_L_c_004_jnt"
+      },
+      {
+        "name": "Hair_base_L_c_003_jnt"
+      },
+      {
+        "name": "Hair_base_L_c_002_jnt"
+      },
+      {
+        "name": "Hair_base_L_c_001_jnt"
+      },
+      {
+        "name": "Hair_base_R_c_004_jnt"
+      },
+      {
+        "name": "Hair_base_R_c_003_jnt"
+      },
+      {
+        "name": "Hair_base_R_c_002_jnt"
+      },
+      {
+        "name": "Hair_base_R_c_001_jnt"
+      },
+      {
+        "name": "Hair_base_R_a_003_jnt"
+      },
+      {
+        "name": "Hair_base_R_a_002_jnt"
+      },
+      {
+        "name": "Hair_base_R_a_001_jnt"
+      },
+      {
+        "name": "Hair_base_L_d_003_jnt"
+      },
+      {
+        "name": "Hair_base_L_d_002_jnt"
+      },
+      {
+        "name": "Hair_base_L_d_001_jnt"
+      },
+      {
+        "name": "Hair_base_R_d_003_jnt"
+      },
+      {
+        "name": "Hair_base_R_d_002_jnt"
+      },
+      {
+        "name": "Hair_base_R_d_001_jnt"
+      },
+      {
+        "name": "Hair_base_B_a_002_jnt"
+      },
+      {
+        "name": "Hair_base_B_a_001_jnt"
+      },
+      {
+        "name": "Hair_base_R_b_003_jnt"
+      },
+      {
+        "name": "Hair_base_R_b_002_jnt"
+      },
+      {
+        "name": "Hair_base_R_b_001_jnt"
+      },
+      {
+        "name": "Hair_base_L_b_003_jnt"
+      },
+      {
+        "name": "Hair_base_L_b_002_jnt"
+      },
+      {
+        "name": "Hair_base_L_b_001_jnt"
+      },
+      {
+        "name": "Hair_base_B_b_004_jnt"
+      },
+      {
+        "name": "Hair_base_B_b_003_jnt"
+      },
+      {
+        "name": "Hair_base_B_b_002_jnt"
+      },
+      {
+        "name": "Hair_base_B_b_001_jnt"
+      },
+      {
+        "name": "head_dn_jnt"
+      },
+      {
+        "name": "head_up_jnt"
+      },
+      {
+        "name": "head_mid_jnt"
+      },
+      {
+        "name": "faceRtPupilJoint"
+      },
+      {
+        "name": "faceRtHighlightJoint"
+      },
+      {
+        "name": "faceRtHighlightJoint_b"
+      },
+      {
+        "name": "faceRtIrisJoint"
+      },
+      {
+        "name": "eyeRtJoint"
+      },
+      {
+        "name": "eyeRt01EyelashJoint"
+      },
+      {
+        "name": "eyeRt01Joint"
+      },
+      {
+        "name": "eyeRt02EyelashJoint"
+      },
+      {
+        "name": "eyeRt02Joint"
+      },
+      {
+        "name": "eyeRt03EyelashJoint"
+      },
+      {
+        "name": "eyeRt03IrissdJoint"
+      },
+      {
+        "name": "eyeRt03Joint"
+      },
+      {
+        "name": "eyeRt04EyelashJoint"
+      },
+      {
+        "name": "eyeRt04Joint"
+      },
+      {
+        "name": "eyeRt05EyelashJoint"
+      },
+      {
+        "name": "eyeRt05Joint"
+      },
+      {
+        "name": "eyeRt06Joint"
+      },
+      {
+        "name": "eyeRt07Joint"
+      },
+      {
+        "name": "eyeRt08Joint"
+      },
+      {
+        "name": "faceLfPupilJoint"
+      },
+      {
+        "name": "faceLfHighlightJoint"
+      },
+      {
+        "name": "faceLfHighlightJoint_b"
+      },
+      {
+        "name": "faceLfIrisJoint"
+      },
+      {
+        "name": "eyeLfJoint"
+      },
+      {
+        "name": "eyeLf01EyelashJoint"
+      },
+      {
+        "name": "eyeLf01Joint"
+      },
+      {
+        "name": "eyeLf02EyelashJoint"
+      },
+      {
+        "name": "eyeLf02Joint"
+      },
+      {
+        "name": "eyeLf03EyelashJoint"
+      },
+      {
+        "name": "eyeLf03IrissdJoint"
+      },
+      {
+        "name": "eyeLf03Joint"
+      },
+      {
+        "name": "eyeLf04EyelashJoint"
+      },
+      {
+        "name": "eyeLf04Joint"
+      },
+      {
+        "name": "eyeLf05EyelashJoint"
+      },
+      {
+        "name": "eyeLf05Joint"
+      },
+      {
+        "name": "eyeLf06Joint"
+      },
+      {
+        "name": "eyeLf07Joint"
+      },
+      {
+        "name": "eyeLf08Joint"
+      },
+      {
+        "name": "browRt01Joint"
+      },
+      {
+        "name": "browRt02Joint"
+      },
+      {
+        "name": "browRt03Joint"
+      },
+      {
+        "name": "browRt04Joint"
+      },
+      {
+        "name": "browRt05Joint"
+      },
+      {
+        "name": "browLf01Joint"
+      },
+      {
+        "name": "browLf02Joint"
+      },
+      {
+        "name": "browLf03Joint"
+      },
+      {
+        "name": "browLf04Joint"
+      },
+      {
+        "name": "browLf05Joint"
+      },
+      {
+        "name": "faceLfCheekOtJoint"
+      },
+      {
+        "name": "faceLfCheekOtDnJoint"
+      },
+      {
+        "name": "faceMdJawDnJoint"
+      },
+      {
+        "name": "faceMdToothDnJoint"
+      },
+      {
+        "name": "faceMdToothUpJoint"
+      },
+      {
+        "name": "faceRtCheekOtJoint"
+      },
+      {
+        "name": "faceRtCheekOtDnJoint"
+      },
+      {
+        "name": "browLineRt01Joint"
+      },
+      {
+        "name": "browLineRt02Joint"
+      },
+      {
+        "name": "browLineRt03Joint"
+      },
+      {
+        "name": "browLineLf01Joint"
+      },
+      {
+        "name": "browLineLf02Joint"
+      },
+      {
+        "name": "browLineLf03Joint"
+      },
+      {
+        "name": "NoseMd01Joint"
+      },
+      {
+        "name": "lipRup1Joint"
+      },
+      {
+        "name": "lipRup2Joint"
+      },
+      {
+        "name": "lipRup3Joint"
+      },
+      {
+        "name": "lipRup4Joint"
+      },
+      {
+        "name": "lipMupJoint"
+      },
+      {
+        "name": "lipLup4Joint"
+      },
+      {
+        "name": "lipLup3Joint"
+      },
+      {
+        "name": "lipLup2Joint"
+      },
+      {
+        "name": "lipLup1Joint"
+      },
+      {
+        "name": "lipRdn1Joint"
+      },
+      {
+        "name": "lipRdn2Joint"
+      },
+      {
+        "name": "lipRdn3Joint"
+      },
+      {
+        "name": "lipRdn4Joint"
+      },
+      {
+        "name": "lipMdnJoint"
+      },
+      {
+        "name": "lipLdn4Joint"
+      },
+      {
+        "name": "lipLdn3Joint"
+      },
+      {
+        "name": "lipLdn2Joint"
+      },
+      {
+        "name": "lipLdn1Joint"
+      },
+      {
+        "name": "jawJoint"
+      },
+      {
+        "name": "TongueMd01Joint"
+      },
+      {
+        "name": "TongueMd02Joint"
+      },
+      {
+        "name": "browLineLf01Joint_a"
+      },
+      {
+        "name": "browLineLf02Joint_a"
+      },
+      {
+        "name": "browLineLf03Joint_a"
+      },
+      {
+        "name": "browLineRf01Joint_a"
+      },
+      {
+        "name": "browLineRf02Joint_a"
+      },
+      {
+        "name": "browLineRf03Joint_a"
+      },
+      {
+        "name": "lineJoint"
+      },
+      {
+        "name": "TongueMd03Joint"
+      },
+      {
+        "name": "TongueMd04Joint"
+      },
+      {
+        "name": "Face_Head"
+      },
+      {
+        "name": "Bip001_Head"
+      },
+      {
+        "name": "Bip001_Neck"
+      },
+      {
+        "name": "Bip001_L_Finger02"
+      },
+      {
+        "name": "Bip001_L_Finger01"
+      },
+      {
+        "name": "Bip001_L_Finger0"
+      },
+      {
+        "name": "Bip001_L_Finger12"
+      },
+      {
+        "name": "Bip001_L_Finger11"
+      },
+      {
+        "name": "Bip001_L_Finger1"
+      },
+      {
+        "name": "Bip001_L_Finger22"
+      },
+      {
+        "name": "Bip001_L_Finger21"
+      },
+      {
+        "name": "Bip001_L_Finger2"
+      },
+      {
+        "name": "Bip001_L_Finger32"
+      },
+      {
+        "name": "Bip001_L_Finger31"
+      },
+      {
+        "name": "Bip001_L_Finger3"
+      },
+      {
+        "name": "Bip001_L_Finger42"
+      },
+      {
+        "name": "Bip001_L_Finger41"
+      },
+      {
+        "name": "Bip001_L_Finger4"
+      },
+      {
+        "name": "Bip001_L_Hand"
+      },
+      {
+        "name": "spring_base_L_f_001_jnt"
+      },
+      {
+        "name": "spring_base_L_j_001_jnt"
+      },
+      {
+        "name": "spring_base_L_g_001_jnt"
+      },
+      {
+        "name": "spring_base_L_h_002_jnt"
+      },
+      {
+        "name": "spring_base_L_h_001_jnt"
+      },
+      {
+        "name": "spring_base_L_i_001_jnt"
+      },
+      {
+        "name": "Bip001_L_ForeTwist1"
+      },
+      {
+        "name": "Bip001_L_ForeTwist"
+      },
+      {
+        "name": "spring_base_L_a_02_jnt"
+      },
+      {
+        "name": "spring_base_L_a_01_jnt"
+      },
+      {
+        "name": "spring_base_L_c_02_jnt"
+      },
+      {
+        "name": "spring_base_L_c_01_jnt"
+      },
+      {
+        "name": "spring_base_L_d_02_jnt"
+      },
+      {
+        "name": "spring_base_L_d_01_jnt"
+      },
+      {
+        "name": "spring_L_jnt"
+      },
+      {
+        "name": "Bip001_L_Forearm"
+      },
+      {
+        "name": "Bip001_LUpArmTwist1"
+      },
+      {
+        "name": "Bip001_LUpArmTwist"
+      },
+      {
+        "name": "spring_base_L_d_002_jnt"
+      },
+      {
+        "name": "spring_base_L_d_004_jnt"
+      },
+      {
+        "name": "spring_base_L_d_001_jnt"
+      },
+      {
+        "name": "spring_base_L_e_002_jnt"
+      },
+      {
+        "name": "spring_base_L_e_004_jnt"
+      },
+      {
+        "name": "spring_base_L_e_001_jnt"
+      },
+      {
+        "name": "spring_base_L_z_002_jnt"
+      },
+      {
+        "name": "spring_base_L_z_001_jnt"
+      },
+      {
+        "name": "Bip001_L_UpperArm"
+      },
+      {
+        "name": "Bip001_L_Clavicle"
+      },
+      {
+        "name": "Bip001_R_Finger02"
+      },
+      {
+        "name": "Bip001_R_Finger01"
+      },
+      {
+        "name": "Bip001_R_Finger0"
+      },
+      {
+        "name": "Bip001_R_Finger12"
+      },
+      {
+        "name": "Bip001_R_Finger11"
+      },
+      {
+        "name": "Bip001_R_Finger1"
+      },
+      {
+        "name": "Bip001_R_Finger22"
+      },
+      {
+        "name": "Bip001_R_Finger21"
+      },
+      {
+        "name": "Bip001_R_Finger2"
+      },
+      {
+        "name": "Bip001_R_Finger32"
+      },
+      {
+        "name": "Bip001_R_Finger31"
+      },
+      {
+        "name": "Bip001_R_Finger3"
+      },
+      {
+        "name": "Bip001_R_Finger42"
+      },
+      {
+        "name": "Bip001_R_Finger41"
+      },
+      {
+        "name": "Bip001_R_Finger4"
+      },
+      {
+        "name": "Bip001_R_Hand"
+      },
+      {
+        "name": "spring_base_R_h_001_jnt"
+      },
+      {
+        "name": "spring_base_R_i_002_jnt"
+      },
+      {
+        "name": "spring_base_R_i_001_jnt"
+      },
+      {
+        "name": "spring_base_R_j_001_jnt"
+      },
+      {
+        "name": "spring_base_R_g_001_jnt"
+      },
+      {
+        "name": "spring_base_R_f_001_jnt"
+      },
+      {
+        "name": "Bip001_R_ForeTwist1"
+      },
+      {
+        "name": "Bip001_R_ForeTwist"
+      },
+      {
+        "name": "spring_base_R_a_02_jnt"
+      },
+      {
+        "name": "spring_base_R_a_01_jnt"
+      },
+      {
+        "name": "spring_base_R_c_02_jnt"
+      },
+      {
+        "name": "spring_base_R_c_01_jnt"
+      },
+      {
+        "name": "spring_base_R_d_02_jnt"
+      },
+      {
+        "name": "spring_base_R_d_01_jnt"
+      },
+      {
+        "name": "spring_R_jnt"
+      },
+      {
+        "name": "Bip001_R_Forearm"
+      },
+      {
+        "name": "Bip001_RUpArmTwist1"
+      },
+      {
+        "name": "Bip001_RUpArmTwist"
+      },
+      {
+        "name": "spring_base_R_e_004_jnt"
+      },
+      {
+        "name": "spring_base_R_e_002_jnt"
+      },
+      {
+        "name": "spring_base_R_e_001_jnt"
+      },
+      {
+        "name": "spring_base_R_d_004_jnt"
+      },
+      {
+        "name": "spring_base_R_d_002_jnt"
+      },
+      {
+        "name": "spring_base_R_d_001_jnt"
+      },
+      {
+        "name": "spring_base_R_z_002_jnt"
+      },
+      {
+        "name": "spring_base_R_z_001_jnt"
+      },
+      {
+        "name": "Bip001_R_UpperArm"
+      },
+      {
+        "name": "Bip001_R_Clavicle"
+      },
+      {
+        "name": "xiong_L_0_skin_jnt"
+      },
+      {
+        "name": "xiong_R_0_skin_jnt"
+      },
+      {
+        "name": "Bip001_Spine2"
+      },
+      {
+        "name": "Bip001_Spine1"
+      },
+      {
+        "name": "dress_base_Back_a_04_jnt"
+      },
+      {
+        "name": "dress_base_Back_a_03_jnt"
+      },
+      {
+        "name": "dress_base_Back_a_02_jnt"
+      },
+      {
+        "name": "dress_base_Back_a_01_jnt"
+      },
+      {
+        "name": "dress_base_Front_a_03_jnt"
+      },
+      {
+        "name": "dress_base_Front_a_02_jnt"
+      },
+      {
+        "name": "dress_base_Front_a_01_jnt"
+      },
+      {
+        "name": "dress_base_L_a_04_jnt"
+      },
+      {
+        "name": "dress_base_L_a_03_jnt"
+      },
+      {
+        "name": "dress_base_L_a_02_jnt"
+      },
+      {
+        "name": "dress_base_L_a_008_jnt"
+      },
+      {
+        "name": "dress_base_L_a_007_jnt"
+      },
+      {
+        "name": "dress_base_L_a_006_jnt"
+      },
+      {
+        "name": "dress_base_L_a_01_jnt"
+      },
+      {
+        "name": "dress_base_L_b_03_jnt"
+      },
+      {
+        "name": "dress_base_L_b_007_jnt"
+      },
+      {
+        "name": "dress_base_L_b_006_jnt"
+      },
+      {
+        "name": "dress_base_L_b_005_jnt"
+      },
+      {
+        "name": "dress_base_L_b_02_jnt"
+      },
+      {
+        "name": "dress_base_L_b_01_jnt"
+      },
+      {
+        "name": "dress_base_L_c_04_jnt"
+      },
+      {
+        "name": "dress_base_L_c_03_jnt"
+      },
+      {
+        "name": "dress_base_L_c_02_jnt"
+      },
+      {
+        "name": "dress_base_L_c_01_jnt"
+      },
+      {
+        "name": "dress_base_R_a_04_jnt"
+      },
+      {
+        "name": "dress_base_R_a_03_jnt"
+      },
+      {
+        "name": "dress_base_R_a_02_jnt"
+      },
+      {
+        "name": "dress_base_R_a_01_jnt"
+      },
+      {
+        "name": "dress_base_R_b_03_jnt"
+      },
+      {
+        "name": "dress_base_R_b_02_jnt"
+      },
+      {
+        "name": "dress_base_R_b_007_jnt"
+      },
+      {
+        "name": "dress_base_R_b_006_jnt"
+      },
+      {
+        "name": "dress_base_R_b_005_jnt"
+      },
+      {
+        "name": "dress_base_R_b_01_jnt"
+      },
+      {
+        "name": "dress_base_R_c_04_jnt"
+      },
+      {
+        "name": "dress_base_R_c_03_jnt"
+      },
+      {
+        "name": "dress_base_R_c_02_jnt"
+      },
+      {
+        "name": "dress_base_R_c_01_jnt"
+      },
+      {
+        "name": "dress_base_R_h_003_jnt"
+      },
+      {
+        "name": "dress_base_R_h_002_jnt"
+      },
+      {
+        "name": "dress_base_R_h_001_jnt"
+      },
+      {
+        "name": "dress_base_L_h_003_jnt"
+      },
+      {
+        "name": "dress_base_L_h_002_jnt"
+      },
+      {
+        "name": "dress_base_L_h_001_jnt"
+      },
+      {
+        "name": "Bip001_Spine"
+      },
+      {
+        "name": "Bip001_R_Toe0"
+      },
+      {
+        "name": "Bip001_R_Foot"
+      },
+      {
+        "name": "Bip001_RCalfTwist1"
+      },
+      {
+        "name": "Bip001_RCalfTwist"
+      },
+      {
+        "name": "Bip001_R_Calf"
+      },
+      {
+        "name": "Bip001_RThighTwist1"
+      },
+      {
+        "name": "Bip001_RThighTwist"
+      },
+      {
+        "name": "Bip001_R_Thigh"
+      },
+      {
+        "name": "Bip001_L_Toe0"
+      },
+      {
+        "name": "Bip001_L_Foot"
+      },
+      {
+        "name": "Bip001_LCalfTwist1"
+      },
+      {
+        "name": "Bip001_LCalfTwist"
+      },
+      {
+        "name": "Bip001_L_Calf"
+      },
+      {
+        "name": "Bip001_LThighTwist1"
+      },
+      {
+        "name": "Bip001_LThighTwist"
+      },
+      {
+        "name": "Bip001_L_Thigh"
+      },
+      {
+        "name": "R_Bone_Chain_4"
+      },
+      {
+        "name": "R_Bone_Chain_3"
+      },
+      {
+        "name": "R_Bone_Chain_2"
+      },
+      {
+        "name": "R_Bone_Chain_1"
+      },
+      {
+        "name": "L_Bone_Chain_4"
+      },
+      {
+        "name": "L_Bone_Chain_3"
+      },
+      {
+        "name": "L_Bone_Chain_2"
+      },
+      {
+        "name": "L_Bone_Chain_1"
+      },
+      {
+        "name": "beijia_jnt"
+      },
+      {
+        "name": "Bip001_Pelvis"
+      },
+      {
+        "name": "Bip001"
+      },
+      {
+        "name": "clothes_base_L_a_10_jnt"
+      },
+      {
+        "name": "clothes_base_L_a_09_jnt"
+      },
+      {
+        "name": "clothes_base_L_a_08_jnt"
+      },
+      {
+        "name": "clothes_base_L_a_07_jnt"
+      },
+      {
+        "name": "clothes_base_L_a_06_jnt"
+      },
+      {
+        "name": "clothes_base_L_a_05_jnt"
+      },
+      {
+        "name": "clothes_base_L_a_04_jnt"
+      },
+      {
+        "name": "clothes_base_R_a_09_jnt"
+      },
+      {
+        "name": "clothes_base_R_a_08_jnt"
+      },
+      {
+        "name": "clothes_base_R_a_07_jnt"
+      },
+      {
+        "name": "clothes_base_R_a_06_jnt"
+      },
+      {
+        "name": "clothes_base_R_a_05_jnt"
+      },
+      {
+        "name": "clothes_base_R_a_04_jnt"
+      },
+      {
+        "name": "quan_jnt"
+      },
+      {
+        "name": "Root"
+      },
+      {
+        "name": "chr_0016_laevat_postmodel"
+      },
+      {
+        "name": "S_actor_laevat_body_01_lod0"
+      },
+      {
+        "name": "S_actor_laevat_cloth_01_lod0"
+      },
+      {
+        "name": "S_actor_laevat_cloth_02_lod0"
+      },
+      {
+        "name": "S_actor_laevat_cloth_03_lod0"
+      },
+      {
+        "name": "S_actor_laevat_cloth_04_lod0"
+      },
+      {
+        "name": "S_actor_laevat_cloth_05_lod0"
+      },
+      {
+        "name": "S_actor_laevat_eyebrow_01_lod0"
+      },
+      {
+        "name": "S_actor_laevat_eyeshadow_01_lod0"
+      },
+      {
+        "name": "S_actor_laevat_face_01_lod0"
+      },
+      {
+        "name": "S_actor_laevat_hair_01_lod0"
+      },
+      {
+        "name": "S_actor_laevat_hairshadow_01_lod0"
+      },
+      {
+        "name": "S_actor_laevat_iris_01_lod0"
+      },
+      {
+        "name": "S_actor_laevat_vfxpart_01_lod0"
+      },
+      {
+        "name": "chr_0016_laevat_postmodel"
+      }
+    ]
+  }
+}
