@@ -13,7 +13,7 @@ namespace azurerender {
 struct GlfwFrontendConfig {
     std::uint32_t width = 1280;
     std::uint32_t height = 720;
-    std::string title;
+    std::string title = "AzureRender";
     bool resizable = true;
     bool visible = true;
     bool decorated = true;

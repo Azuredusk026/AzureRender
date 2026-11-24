@@ -259,9 +259,6 @@ void AzureRenderApp::initWindow() {
     azurerender::GlfwFrontendConfig config;
     config.width = runOptions_.width;
     config.height = runOptions_.height;
-    config.title = runOptions_.editorMode
-        ? "AzureRender Editor Preview"
-        : "AzureRender - Stylized Vulkan Renderer";
     config.resizable = !fixedSimulation_;
     // Deterministic capture uses a hidden surface so framebuffer dimensions
     // are not clamped by the Windows work area (required for native 2K/4K).

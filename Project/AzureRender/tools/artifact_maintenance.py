@@ -15,8 +15,7 @@ import zipfile
 from artifact_cleanup import is_link, remove_artifact, TrackedPaths
 
 GIB = 2**30
-POLICY = dict(poolBytes=16*GIB, coldBytes=8*GIB, runBytes=2*GIB,
-              maximumFiles=10000, retentionDays=1, maximumBatch=10,
+POLICY = dict(coldBytes=8*GIB, retentionDays=1, maximumBatch=10,
               maintenanceSeconds=120, maximumDailyBatches=10,
               recoveryDays=7,evidenceDays=30,evidenceBytes=8*2**20,evidencePoolBytes=2*GIB,
               coldRoot=str(Path(__file__).resolve().parents[1]/'build/archives/managed'))
@@ -99,10 +98,8 @@ def pool_budget(build, *, run=None, used=0, planned=0):
     reasons = []
     if current and current['status'] != 'active':
         reasons.append('managed-run-closed-use-resume')
-    if total+increment > POLICY['poolBytes']:
-        reasons.append('managed-pool-limit')
     return dict(allowed=not reasons, reasons=reasons, reservedBytes=total,
-                projectedBytes=total+increment, limitBytes=POLICY['poolBytes'])
+                projectedBytes=total+increment, limitBytes=None)
 
 
 def reserve_write(build, run, used, planned):
@@ -117,12 +114,12 @@ def reserve_write(build, run, used, planned):
         records = rows(db);record = records[Path(run).name]
         total = reservation(records)
         projected = total+max(0, used+planned-record['reservedBytes'])
-        if record['status'] != 'active' or projected > POLICY['poolBytes']:
-            return dict(allowed=False, reasons=['managed-pool-or-state-changed'], reservedBytes=total,
-                        projectedBytes=projected, limitBytes=POLICY['poolBytes'])
+        if record['status'] != 'active':
+            return dict(allowed=False, reasons=['managed-run-closed-use-resume'], reservedBytes=total,
+                        projectedBytes=projected, limitBytes=None)
         record['reservedBytes'] = max(record['reservedBytes'], used+planned)
         save(db, Path(run).name, record)
-    return dict(allowed=True, reasons=[], reservedBytes=projected, projectedBytes=projected, limitBytes=POLICY['poolBytes'])
+    return dict(allowed=True, reasons=[], reservedBytes=projected, projectedBytes=projected, limitBytes=None)
 
 
 def create_run(build, path, budget, inputs=(), *, retention_days=1, retain_recovery=False):
@@ -133,15 +130,13 @@ def create_run(build, path, budget, inputs=(), *, retention_days=1, retain_recov
     dependencies = [run_path(build, name).name for name in inputs]
     if any(not run_path(build, name).is_dir() for name in dependencies):
         raise ValueError('Input task is absent; restore it first')
-    if type(budget['plannedBytes']) is not int or not 0 <= budget['plannedBytes'] <= POLICY['runBytes']:
+    planned = budget['plannedBytes']
+    if type(planned) is not int or planned < 0:
         raise ValueError('Invalid task reservation')
-    planned = max(budget['plannedBytes'], 64*2**20)
     with database(build, True) as db:
         db.execute('BEGIN IMMEDIATE')
         if any(not run_path(build, name).is_dir() for name in dependencies):
             raise ValueError('Input task disappeared before reservation')
-        if reservation(rows(db))+planned > POLICY['poolBytes']:
-            raise ValueError('Managed task pool exceeds 16 GiB; close and clean completed work')
         path.mkdir()
         write_json(path/'budget.json', dict(budget, managedIndexVersion=1))
         save(db, path.name, dict(status='active', created=time.time(), reservedBytes=planned,
@@ -166,8 +161,6 @@ def inventory(path):
                 raise ValueError('Nested Git worktree is protected')
             stat = child.stat()
             total += stat.st_size
-            if total > POLICY['runBytes'] or len(files) >= POLICY['maximumFiles']:
-                raise ValueError('Task exceeds byte/file-count budget; preserve for separate maintenance')
             sha = digest(child)
             after = child.stat()
             if (stat.st_size, stat.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
@@ -202,8 +195,6 @@ def seal(build, path):
             raise ValueError('Task lifecycle changed while sealing')
         if not evidence.is_file() or digest(evidence)!=record['evidenceSha256']:
             raise ValueError('Evidence changed before its lifecycle commit')
-        if reservation(other)-other[path.name]['reservedBytes']+value['bytes'] > POLICY['poolBytes']:
-            raise ValueError('Managed pool exceeded during task output')
         save(db, path.name, record)
     return True
 
@@ -404,21 +395,50 @@ def orphan_evidence(build,records,now):
     return found
 
 
+def volume_status(build):
+    from artifact_budget import VOLUME_TARGET_FREE, volume_reserve
+
+    usage = shutil.disk_usage(build)
+    minimum = volume_reserve(usage.total)
+    target = max(minimum, VOLUME_TARGET_FREE)
+    return dict(volumeFreeBytes=usage.free, volumeReserveBytes=minimum,
+                volumeTargetBytes=target,
+                volumeBytesToReserve=max(0, minimum-usage.free),
+                volumeBytesToTarget=max(0, target-usage.free))
+
+
 def status(build):
     start = time.monotonic()
     with database(build) as db:
         records = rows(db)
     root = real_path(real_path(build)/'runs')
     children = list(root.iterdir()) if root.exists() else []
-    usage = shutil.disk_usage(build)
-    return dict(managedTasks=len(records), residentReservationBytes=reservation(records), poolLimitBytes=POLICY['poolBytes'],
-                historicalTasks=sum(p.is_dir() and p.name not in records for p in children),
-                rootKeepMarkers=sum((p/'.keep').is_file() for p in children if not is_link(p)),
+    keep_markers = 0
+    historical = 0
+    for path in children:
+        try:
+            linked = is_link(path)
+        except FileNotFoundError:
+            # A concurrent maintenance batch may remove this enumerated child.
+            try:
+                path.lstat()
+            except FileNotFoundError:
+                continue
+            raise
+        if linked:
+            continue
+        if path.is_dir():
+            if path.name not in records:
+                historical += 1
+            if (path/'.keep').is_file():
+                keep_markers += 1
+    return dict(managedTasks=len(records), residentReservationBytes=reservation(records), poolLimitBytes=None,
+                historicalTasks=historical,
+                rootKeepMarkers=keep_markers,
                 activeInputTasks=sorted(protected_names(records)),
                 coldStoreBytes=cold_usage(),coldStoreLimitBytes=POLICY['coldBytes'],
                 blocked={n:r['blocked'] for n,r in records.items() if r.get('blocked')},
-                volumeFreeBytes=usage.free, volumeReserveBytes=max(50*GIB, (usage.total+9)//10),
-                recursiveScan=False, seconds=time.monotonic()-start)
+                recursiveScan=False, seconds=time.monotonic()-start, **volume_status(build))
 
 
 def active_processes(engine):
@@ -632,12 +652,10 @@ def restore(build, name):
             raise ValueError('Rebuild generated outputs using retained evidence; no full recovery package is registered')
         value = expected_inventory(record)
         verify_archive(record['archive'], value, record['archiveSha256'])
-        if reservation(records)+value['bytes'] > POLICY['poolBytes']:
-            raise ValueError('Restore exceeds the managed pool')
         from artifact_budget import evaluate
         usage = shutil.disk_usage(build)
         if not evaluate(total=usage.total, free=usage.free, used=0, planned=value['bytes'])['allowed']:
-            raise ValueError('Restore exceeds task/volume budget')
+            raise ValueError('Restore exceeds the filesystem reserve')
         path.mkdir()
         record.update(status='restoring', reservedBytes=value['bytes'], generation=record.get('generation',0)+1)
         save(db,name,record)
@@ -665,7 +683,7 @@ def restore(build, name):
 
 
 def measure(path):
-    total = count = 0
+    total = 0
     root=real_path(path)
     if not root.is_dir():raise FileNotFoundError('Task directory is missing: '+str(root))
     identity=root.stat()
@@ -689,9 +707,7 @@ def measure(path):
                         if entry.name=='.git':raise ValueError('Nested Git worktree is protected')
                         pending.append(entry.path)
                     else:
-                        total+=info.st_size;count+=1
-                        if total>POLICY['runBytes'] or count>POLICY['maximumFiles']:
-                            raise ValueError('Task byte/file-count budget exceeded')
+                        total += info.st_size
         except FileNotFoundError:continue
     # Recheck visited directory names before accepting the count. A parent
     # replaced by a junction during enumeration must invalidate the sample.
@@ -720,7 +736,7 @@ def managed_environment(temporary, base=None):
 
 
 def guarded_run(build, name, command, timeout=600):
-    """Monitor a foreground child; sampled quotas are not filesystem quotas."""
+    """Monitor the owned process, disk space and execution deadline."""
     import threading
     from collections import deque
     path = run_path(build,name)
@@ -776,7 +792,6 @@ def guarded_run(build, name, command, timeout=600):
         if errors:reason=reason or errors[0]
         if not reason:
             try:
-                measure(path)
                 final=check(build,run=path,planned=0,diagnostic=json.loads((path/'budget.json').read_text()).get('diagnostic',False))
                 if not final['allowed']:reason=','.join(final['reasons'])
             except (OSError,ValueError) as error:reason=str(error)
@@ -808,14 +823,15 @@ def daily_managed(build,apply,deadline,busy):
             if key not in {'items','status'}:result.setdefault(key,value)
         result['items'].extend(batch['items'])
         if batch['items']:result['batches'].append(batch)
-        if batch['status']=='blocked':
-            result.update(status='blocked',stopReason='blocked');break
         if batch['status']=='deferred-active-work':
             result.update(status=batch['status'],activeProcesses=batch.get('activeProcesses',[]),stopReason='active-work');break
         if time.monotonic()>=deadline:
             result.update(status='bounded',stopReason='time-budget');break
         if not batch['items']:
-            result.update(status='completed' if result['items'] else 'idle',stopReason='drained');break
+            status = 'completed' if result['items'] else 'idle'
+            if any('blocked' in item for item in result['items']):
+                status = 'completed-with-blocked-items'
+            result.update(status=status,stopReason='drained');break
     else:result.update(status='bounded',stopReason='batch-limit')
     return result
 
@@ -850,6 +866,7 @@ def daily(build,apply=False):
             cache=clean(Path(build).parent,Path(policy['catalog']),Path(policy['lock']),apply=True,
                         limit_bytes=min(int(policy.get('maximumBytes',10*GIB)),10*GIB),seconds=remaining)
             report['caches']={k:v for k,v in cache.items() if k!='items'}|dict(files=len(cache['items']))
+    report.update(volume_status(build))
     report['seconds']=time.monotonic()-start
     write_json(metadata(build)/'daily-maintenance-latest.json',report)
     return report
